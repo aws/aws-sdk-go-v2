@@ -37,23 +37,23 @@ func (c *Client) PublishType(ctx context.Context, params *PublishTypeInput, optF
 type PublishTypeInput struct {
 
 	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
-	// Arn , or TypeName  and Type .
+	// Arn , or TypeName and Type .
 	Arn *string
 
 	// The version number to assign to this version of the extension. Use the
 	// following format, and adhere to semantic versioning when assigning a version
-	// number to your extension: MAJOR.MINOR.PATCH  For more information, see
-	// Semantic Versioning 2.0.0 (https://semver.org/). If you don't specify a
-	// version number, CloudFormation increments the version number by one minor
-	// version release. You cannot specify a version number the first time you publish
-	// a type. CloudFormation automatically sets the first version number to be 1.0.0 .
+	// number to your extension: MAJOR.MINOR.PATCH For more information, see Semantic
+	// Versioning 2.0.0 (https://semver.org/) . If you don't specify a version number,
+	// CloudFormation increments the version number by one minor version release. You
+	// cannot specify a version number the first time you publish a type.
+	// CloudFormation automatically sets the first version number to be 1.0.0 .
 	PublicVersionNumber *string
 
-	// The type of the extension. Conditional: You must specify Arn , or TypeName  and
+	// The type of the extension. Conditional: You must specify Arn , or TypeName and
 	// Type .
 	Type types.ThirdPartyType
 
-	// The name of the extension. Conditional: You must specify Arn , or TypeName  and
+	// The name of the extension. Conditional: You must specify Arn , or TypeName and
 	// Type .
 	TypeName *string
 

@@ -10,9 +10,9 @@ const (
 	AgentStatusOffline AgentStatus = "OFFLINE"
 )
 
-// Values returns all known values for AgentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AgentStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AgentStatus) Values() []AgentStatus {
 	return []AgentStatus{
 		"ONLINE",
@@ -205,9 +205,9 @@ const (
 	LogLevelTransfer LogLevel = "TRANSFER"
 )
 
-// Values returns all known values for LogLevel. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LogLevel. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (LogLevel) Values() []LogLevel {
 	return []LogLevel{
 		"OFF",
@@ -264,10 +264,9 @@ const (
 	ObjectStorageServerProtocolHttp  ObjectStorageServerProtocol = "HTTP"
 )
 
-// Values returns all known values for ObjectStorageServerProtocol. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ObjectStorageServerProtocol. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ObjectStorageServerProtocol) Values() []ObjectStorageServerProtocol {
 	return []ObjectStorageServerProtocol{
 		"HTTPS",
@@ -309,9 +308,9 @@ const (
 	OperatorBeginsWith  Operator = "BeginsWith"
 )
 
-// Values returns all known values for Operator. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"Equals",
@@ -354,9 +353,9 @@ const (
 	PhaseStatusError   PhaseStatus = "ERROR"
 )
 
-// Values returns all known values for PhaseStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PhaseStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PhaseStatus) Values() []PhaseStatus {
 	return []PhaseStatus{
 		"PENDING",
@@ -391,8 +390,8 @@ const (
 	PreserveDeletedFilesRemove   PreserveDeletedFiles = "REMOVE"
 )
 
-// Values returns all known values for PreserveDeletedFiles. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PreserveDeletedFiles. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PreserveDeletedFiles) Values() []PreserveDeletedFiles {
 	return []PreserveDeletedFiles{

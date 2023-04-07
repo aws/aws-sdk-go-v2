@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation creates a backend for an Amplify app. Backends are
-// automatically created at the time of app creation.
+// This operation creates a backend for an Amplify app. Backends are automatically
+// created at the time of app creation.
 func (c *Client) CreateBackend(ctx context.Context, params *CreateBackendInput, optFns ...func(*Options)) (*CreateBackendOutput, error) {
 	if params == nil {
 		params = &CreateBackendInput{}

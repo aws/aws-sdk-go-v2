@@ -13,9 +13,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action uses the encryption subresource to configure default encryption
-// and Amazon S3 Bucket Key for an existing bucket. Default encryption for a bucket
-// can use server-side encryption with Amazon S3-managed keys (SSE-S3) or customer
+// This action uses the encryption subresource to configure default encryption and
+// Amazon S3 Bucket Key for an existing bucket. Default encryption for a bucket can
+// use server-side encryption with Amazon S3-managed keys (SSE-S3) or customer
 // managed keys (SSE-KMS). If you specify default encryption using SSE-KMS, you can
 // also configure Amazon S3 Bucket Key. When the default encryption is SSE-KMS, if
 // you upload an object to the bucket and do not specify the KMS key to use for
@@ -28,7 +28,7 @@ import (
 // Version 4. For more information, see Authenticating Requests (Amazon Web
 // Services Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 // . To use this operation, you must have permissions to perform the
-// s3:PutEncryptionConfigurationaction. The bucket owner has this permission by
+// s3:PutEncryptionConfiguration action. The bucket owner has this permission by
 // default. The bucket owner can grant this permission to others. For more
 // information about permissions, see Permissions Related to Bucket Subresource
 // Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
@@ -74,7 +74,7 @@ type PutBucketEncryptionInput struct {
 	// HTTP status code 400 Bad Request . For more information, see Checking object
 	// integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide. If you provide an individual checksum, Amazon S3
-	// ignores any provided ChecksumAlgorithm  parameter.
+	// ignores any provided ChecksumAlgorithm parameter.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	// The base64-encoded 128-bit MD5 digest of the server-side encryption

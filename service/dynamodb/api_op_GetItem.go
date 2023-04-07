@@ -14,12 +14,12 @@ import (
 )
 
 // The GetItem operation returns a set of attributes for the item with the given
-// primary key. If there is no matching item, GetItem does not return any data
-// and there will be no Item  element in the response. GetItem provides an
-// eventually consistent read by default. If your application requires a strongly
-// consistent read, set ConsistentRead  to true. Although a strongly consistent
-// read might take more time than an eventually consistent read, it always returns
-// the last updated value.
+// primary key. If there is no matching item, GetItem does not return any data and
+// there will be no Item element in the response. GetItem provides an eventually
+// consistent read by default. If your application requires a strongly consistent
+// read, set ConsistentRead to true . Although a strongly consistent read might
+// take more time than an eventually consistent read, it always returns the last
+// updated value.
 func (c *Client) GetItem(ctx context.Context, params *GetItemInput, optFns ...func(*Options)) (*GetItemOutput, error) {
 	if params == nil {
 		params = &GetItemInput{}
@@ -35,7 +35,7 @@ func (c *Client) GetItem(ctx context.Context, params *GetItemInput, optFns ...fu
 	return out, nil
 }
 
-// Represents the input of a GetItem  operation.
+// Represents the input of a GetItem operation.
 type GetItemInput struct {
 
 	// A map of attribute names to AttributeValue objects, representing the primary
@@ -57,32 +57,32 @@ type GetItemInput struct {
 	// in the Amazon DynamoDB Developer Guide.
 	AttributesToGet []string
 
-	// Determines the read consistency model: If set to true, then the operation uses
+	// Determines the read consistency model: If set to true , then the operation uses
 	// strongly consistent reads; otherwise, the operation uses eventually consistent
 	// reads.
 	ConsistentRead *bool
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames :
-	//     - To access an attribute whose name conflicts with a DynamoDB reserved word.
-	//     - To create a placeholder for repeating occurrences of an attribute name in an expression.
-	//     - To prevent special characters in an attribute name from being misinterpreted in an expression.
-	//
+	//   - To access an attribute whose name conflicts with a DynamoDB reserved word.
+	//   - To create a placeholder for repeating occurrences of an attribute name in
+	//   an expression.
+	//   - To prevent special characters in an attribute name from being
+	//   misinterpreted in an expression.
 	// Use the # character in an expression to dereference an attribute name. For
 	// example, consider the following attribute name:
-	//     - Percentile
-	// The name of this attribute conflicts with a reserved word, so
-	// it cannot be used directly in an expression. (For the complete list of reserved
-	// words, see Reserved Words (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
+	//   - Percentile
+	// The name of this attribute conflicts with a reserved word, so it cannot be used
+	// directly in an expression. (For the complete list of reserved words, see
+	// Reserved Words (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 	// in the Amazon DynamoDB Developer Guide). To work around this, you could specify
 	// the following for ExpressionAttributeNames :
-	//     - {"#P":"Percentile"}
-	// You could then use this substitution in an
-	// expression, as in this example:
-	//     - #P = :val
-	// Tokens that begin with the : character are expression attribute
-	// values, which are placeholders for the actual value at runtime. For more
-	// information on expression attribute names, see Specifying Item Attributes (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
+	//   - {"#P":"Percentile"}
+	// You could then use this substitution in an expression, as in this example:
+	//   - #P = :val
+	// Tokens that begin with the : character are expression attribute values, which
+	// are placeholders for the actual value at runtime. For more information on
+	// expression attribute names, see Specifying Item Attributes (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]string
 
@@ -95,17 +95,22 @@ type GetItemInput struct {
 	// in the Amazon DynamoDB Developer Guide.
 	ProjectionExpression *string
 
-	// Determines the level of detail about either provisioned or on-demand
-	// throughput consumption that is returned in the response:
-	//     - INDEXES - The response includes the aggregate ConsumedCapacity for the operation, together with ConsumedCapacity for each table and secondary index that was accessed. Note that some operations, such as GetItem and BatchGetItem , do not access any indexes at all. In these cases, specifying INDEXES will only return ConsumedCapacity information for table(s).
-	//     - TOTAL - The response includes only the aggregate ConsumedCapacity for the operation.
-	//     - NONE - No ConsumedCapacity details are included in the response.
+	// Determines the level of detail about either provisioned or on-demand throughput
+	// consumption that is returned in the response:
+	//   - INDEXES - The response includes the aggregate ConsumedCapacity for the
+	//   operation, together with ConsumedCapacity for each table and secondary index
+	//   that was accessed. Note that some operations, such as GetItem and BatchGetItem
+	//   , do not access any indexes at all. In these cases, specifying INDEXES will
+	//   only return ConsumedCapacity information for table(s).
+	//   - TOTAL - The response includes only the aggregate ConsumedCapacity for the
+	//   operation.
+	//   - NONE - No ConsumedCapacity details are included in the response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetItem  operation.
+// Represents the output of a GetItem operation.
 type GetItemOutput struct {
 
 	// The capacity units consumed by the GetItem operation. The data returned
@@ -116,7 +121,7 @@ type GetItemOutput struct {
 	// in the Amazon DynamoDB Developer Guide.
 	ConsumedCapacity *types.ConsumedCapacity
 
-	// A map of attribute names to AttributeValue  objects, as specified by
+	// A map of attribute names to AttributeValue objects, as specified by
 	// ProjectionExpression .
 	Item map[string]types.AttributeValue
 

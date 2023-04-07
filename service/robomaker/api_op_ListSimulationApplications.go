@@ -36,9 +36,9 @@ type ListSimulationApplicationsInput struct {
 	// use up to three filters.
 	Filters []types.Filter
 
-	// When this parameter is used, ListSimulationApplications  only returns
-	// maxResults results in a single page along with a nextToken response element.
-	// The remaining results of the initial request can be seen by sending another
+	// When this parameter is used, ListSimulationApplications only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another
 	// ListSimulationApplications request with the returned nextToken value. This
 	// value can be between 1 and 100. If this parameter is not used, then
 	// ListSimulationApplications returns up to 100 results and a nextToken value if
@@ -148,17 +148,17 @@ var _ ListSimulationApplicationsAPIClient = (*Client)(nil)
 // ListSimulationApplicationsPaginatorOptions is the paginator options for
 // ListSimulationApplications
 type ListSimulationApplicationsPaginatorOptions struct {
-	// When this parameter is used, ListSimulationApplications  only returns
-	// maxResults results in a single page along with a nextToken response element.
-	// The remaining results of the initial request can be seen by sending another
+	// When this parameter is used, ListSimulationApplications only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another
 	// ListSimulationApplications request with the returned nextToken value. This
 	// value can be between 1 and 100. If this parameter is not used, then
 	// ListSimulationApplications returns up to 100 results and a nextToken value if
 	// applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

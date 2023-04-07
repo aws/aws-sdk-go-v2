@@ -52,13 +52,13 @@ type UpdateContentInput struct {
 	// true.
 	OverrideLinkOutUri *string
 
-	// Unset the existing overrideLinkOutUri  if it exists.
+	// Unset the existing overrideLinkOutUri if it exists.
 	RemoveOverrideLinkOutUri *bool
 
-	// The revisionId of the content resource to update, taken from an earlier call
-	// to GetContent , GetContentSummary , SearchContent , or ListContents. If
-	// included, this argument acts as an optimistic lock to ensure content was not
-	// modified since it was last read. If it has been modified, this API throws a
+	// The revisionId of the content resource to update, taken from an earlier call to
+	// GetContent , GetContentSummary , SearchContent , or ListContents . If included,
+	// this argument acts as an optimistic lock to ensure content was not modified
+	// since it was last read. If it has been modified, this API throws a
 	// PreconditionFailedException .
 	RevisionId *string
 

@@ -67,7 +67,8 @@ import (
 //
 // Special Errors
 //   - Code: NoSuchUpload
-//   - Cause: The specified multipart upload does not exist. The upload ID might be invalid, or the multipart upload might have been aborted or completed.
+//   - Cause: The specified multipart upload does not exist. The upload ID might
+//     be invalid, or the multipart upload might have been aborted or completed.
 //   - HTTP Status Code: 404 Not Found
 //   - SOAP Fault Code Prefix: Client
 //
@@ -104,7 +105,7 @@ type UploadPartInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -201,7 +202,7 @@ type UploadPartInput struct {
 	// encrypting data. This value is used to store the object and then it is
 	// discarded; Amazon S3 does not store the encryption key. The key must be
 	// appropriate for use with the algorithm specified in the
-	// x-amz-server-side-encryption-customer-algorithm header. This must be the same
+	// x-amz-server-side-encryption-customer-algorithm header . This must be the same
 	// encryption key specified in the initiate multipart upload request.
 	SSECustomerKey *string
 
@@ -269,8 +270,8 @@ type UploadPartOutput struct {
 	// object.
 	SSEKMSKeyId *string
 
-	// The server-side encryption algorithm used when storing this object in Amazon
-	// S3 (for example, AES256, aws:kms).
+	// The server-side encryption algorithm used when storing this object in Amazon S3
+	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Metadata pertaining to the operation's result.

@@ -17,9 +17,9 @@ import (
 // a custom tape pool ARN, the operation lists all custom tape pools. This
 // operation supports pagination. You can optionally specify the Limit parameter
 // in the body to limit the number of tape pools in the response. If the number of
-// tape pools returned in the response is truncated, the response includes a
-// Markerelement that you can use in your subsequent request to retrieve the next
-// set of tape pools.
+// tape pools returned in the response is truncated, the response includes a Marker
+// element that you can use in your subsequent request to retrieve the next set of
+// tape pools.
 func (c *Client) ListTapePools(ctx context.Context, params *ListTapePoolsInput, optFns ...func(*Options)) (*ListTapePoolsOutput, error) {
 	if params == nil {
 		params = &ListTapePoolsInput{}
@@ -61,7 +61,7 @@ type ListTapePoolsOutput struct {
 	Marker *string
 
 	// An array of PoolInfo objects, where each object describes a single custom tape
-	// pool. If there are no custom tape pools, the PoolInfos  is an empty array.
+	// pool. If there are no custom tape pools, the PoolInfos is an empty array.
 	PoolInfos []types.PoolInfo
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +142,8 @@ type ListTapePoolsPaginatorOptions struct {
 	// An optional number limit for the tape pools in the list returned by this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

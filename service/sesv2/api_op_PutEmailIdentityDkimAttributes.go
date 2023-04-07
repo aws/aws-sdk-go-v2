@@ -36,7 +36,7 @@ type PutEmailIdentityDkimAttributesInput struct {
 	EmailIdentity *string
 
 	// Sets the DKIM signing configuration for the identity. When you set this value
-	// true, then the messages that are sent from the identity are signed using DKIM.
+	// true , then the messages that are sent from the identity are signed using DKIM.
 	// If you set this value to false , your messages are sent without DKIM signing.
 	SigningEnabled bool
 

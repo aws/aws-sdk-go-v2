@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of aliases for a specified Amazon Lex bot. This operation
-// requires permissions for the lex:GetBotAliases  action.
+// requires permissions for the lex:GetBotAliases action.
 func (c *Client) GetBotAliases(ctx context.Context, params *GetBotAliasesInput, optFns ...func(*Options)) (*GetBotAliasesOutput, error) {
 	if params == nil {
 		params = &GetBotAliasesInput{}
@@ -39,8 +39,8 @@ type GetBotAliasesInput struct {
 	// The maximum number of aliases to return in the response. The default is 50. .
 	MaxResults *int32
 
-	// Substring to match in bot alias names. An alias will be returned if any part
-	// of its name matches the substring. For example, "xyz" matches both "xyzabc" and
+	// Substring to match in bot alias names. An alias will be returned if any part of
+	// its name matches the substring. For example, "xyz" matches both "xyzabc" and
 	// "abcxyz."
 	NameContains *string
 
@@ -55,7 +55,7 @@ type GetBotAliasesInput struct {
 
 type GetBotAliasesOutput struct {
 
-	// An array of BotAliasMetadata  objects, each describing a bot alias.
+	// An array of BotAliasMetadata objects, each describing a bot alias.
 	BotAliases []types.BotAliasMetadata
 
 	// A pagination token for fetching next page of aliases. If the response to this
@@ -145,8 +145,8 @@ type GetBotAliasesPaginatorOptions struct {
 	// The maximum number of aliases to return in the response. The default is 50. .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

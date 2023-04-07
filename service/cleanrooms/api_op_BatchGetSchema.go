@@ -29,8 +29,8 @@ func (c *Client) BatchGetSchema(ctx context.Context, params *BatchGetSchemaInput
 
 type BatchGetSchemaInput struct {
 
-	// A unique identifier for the collaboration that the schemas belong to.
-	// Currently accepts collaboration ID.
+	// A unique identifier for the collaboration that the schemas belong to. Currently
+	// accepts collaboration ID.
 	//
 	// This member is required.
 	CollaborationIdentifier *string

@@ -33,8 +33,8 @@ func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, 
 
 type ListDatabasesInput struct {
 
-	// The total number of items to return in the output. If the total number of
-	// items available is more than the value specified, a NextToken is provided in the
+	// The total number of items to return in the output. If the total number of items
+	// available is more than the value specified, a NextToken is provided in the
 	// output. To resume pagination, provide the NextToken value as argument of a
 	// subsequent API invocation.
 	MaxResults *int32
@@ -51,8 +51,7 @@ type ListDatabasesOutput struct {
 	// A list of database names.
 	Databases []types.Database
 
-	// The pagination token. This parameter is returned when the response is
-	// truncated.
+	// The pagination token. This parameter is returned when the response is truncated.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -182,14 +181,14 @@ var _ ListDatabasesAPIClient = (*Client)(nil)
 
 // ListDatabasesPaginatorOptions is the paginator options for ListDatabases
 type ListDatabasesPaginatorOptions struct {
-	// The total number of items to return in the output. If the total number of
-	// items available is more than the value specified, a NextToken is provided in the
+	// The total number of items to return in the output. If the total number of items
+	// available is more than the value specified, a NextToken is provided in the
 	// output. To resume pagination, provide the NextToken value as argument of a
 	// subsequent API invocation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

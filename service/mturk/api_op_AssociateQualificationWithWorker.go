@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The AssociateQualificationWithWorker  operation gives a Worker a Qualification.
-// AssociateQualificationWithWorkerdoes not require that the Worker submit a
+// The AssociateQualificationWithWorker operation gives a Worker a Qualification.
+// AssociateQualificationWithWorker does not require that the Worker submit a
 // Qualification request. It gives the Qualification directly to the Worker. You
 // can only assign a Qualification of a Qualification type that you created (using
-// the CreateQualificationType  operation). Note: AssociateQualificationWithWorker
+// the CreateQualificationType operation). Note: AssociateQualificationWithWorker
 // does not affect any pending Qualification requests for the Qualification by the
 // Worker. If you assign a Qualification to a Worker, then later grant a
 // Qualification request made by the Worker, the granting of the request may modify

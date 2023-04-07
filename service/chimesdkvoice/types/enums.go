@@ -168,9 +168,9 @@ const (
 	NumberSelectionBehaviorAvoidSticky  NumberSelectionBehavior = "AvoidSticky"
 )
 
-// Values returns all known values for NumberSelectionBehavior. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NumberSelectionBehavior. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (NumberSelectionBehavior) Values() []NumberSelectionBehavior {
 	return []NumberSelectionBehavior{
 		"PreferSticky",
@@ -280,8 +280,8 @@ const (
 	PhoneNumberOrderTypePorting PhoneNumberOrderType = "Porting"
 )
 
-// Values returns all known values for PhoneNumberOrderType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PhoneNumberOrderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PhoneNumberOrderType) Values() []PhoneNumberOrderType {
 	return []PhoneNumberOrderType{
@@ -416,9 +416,9 @@ const (
 	VoiceConnectorAwsRegionApSoutheast2 VoiceConnectorAwsRegion = "ap-southeast-2"
 )
 
-// Values returns all known values for VoiceConnectorAwsRegion. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VoiceConnectorAwsRegion. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceConnectorAwsRegion) Values() []VoiceConnectorAwsRegion {
 	return []VoiceConnectorAwsRegion{
 		"us-east-1",

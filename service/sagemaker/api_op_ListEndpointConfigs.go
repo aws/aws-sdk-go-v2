@@ -31,12 +31,12 @@ func (c *Client) ListEndpointConfigs(ctx context.Context, params *ListEndpointCo
 
 type ListEndpointConfigsInput struct {
 
-	// A filter that returns only endpoint configurations with a creation time
-	// greater than or equal to the specified time (timestamp).
+	// A filter that returns only endpoint configurations with a creation time greater
+	// than or equal to the specified time (timestamp).
 	CreationTimeAfter *time.Time
 
-	// A filter that returns only endpoint configurations created before the
-	// specified time (timestamp).
+	// A filter that returns only endpoint configurations created before the specified
+	// time (timestamp).
 	CreationTimeBefore *time.Time
 
 	// The maximum number of training jobs to return in the response.
@@ -47,7 +47,7 @@ type ListEndpointConfigsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListEndpointConfig request was truncated, the
-	// response includes a NextToken. To retrieve the next set of endpoint
+	// response includes a NextToken . To retrieve the next set of endpoint
 	// configurations, use the token in the next request.
 	NextToken *string
 
@@ -151,8 +151,8 @@ type ListEndpointConfigsPaginatorOptions struct {
 	// The maximum number of training jobs to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

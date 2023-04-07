@@ -17,12 +17,12 @@ import (
 // version or alias. If you use a qualifier, the invoker must use the full Amazon
 // Resource Name (ARN) of that version or alias to invoke the function. Note:
 // Lambda does not support adding policies to version $LATEST. To grant permission
-// to another account, specify the account ID as the Principal. To grant
+// to another account, specify the account ID as the Principal . To grant
 // permission to an organization defined in Organizations, specify the organization
-// ID as the PrincipalOrgID. For Amazon Web Services, the principal is a
-// domain-style identifier that the service defines, such as s3.amazonaws.com  or
-// sns.amazonaws.com. For Amazon Web Services, you can also specify the ARN of
-// the associated resource as the SourceArn. If you grant permission to a service
+// ID as the PrincipalOrgID . For Amazon Web Services, the principal is a
+// domain-style identifier that the service defines, such as s3.amazonaws.com or
+// sns.amazonaws.com . For Amazon Web Services, you can also specify the ARN of the
+// associated resource as the SourceArn . If you grant permission to a service
 // principal without specifying the source, other accounts could potentially
 // configure resources in their account to invoke your Lambda function. This
 // operation adds a statement to a resource-based permissions policy for the
@@ -53,20 +53,19 @@ type AddPermissionInput struct {
 	Action *string
 
 	// The name of the Lambda function, version, or alias. Name formats
-	//     - Function name – my-function (name-only), my-function:v1 (with alias).
-	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
-	//     - Partial ARN – 123456789012:function:my-function .
-	// You can append a
-	// version number or alias to any of the formats. The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//   - Function name – my-function (name-only), my-function:v1 (with alias).
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// You can append a version number or alias to any of the formats. The length
+	// constraint applies only to the full ARN. If you specify only the function name,
+	// it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
 
 	// The Amazon Web Service or Amazon Web Services account that invokes the
-	// function. If you specify a service, use SourceArn  or SourceAccount to limit
-	// who can invoke the function through that service.
+	// function. If you specify a service, use SourceArn or SourceAccount to limit who
+	// can invoke the function through that service.
 	//
 	// This member is required.
 	Principal *string
@@ -81,9 +80,9 @@ type AddPermissionInput struct {
 	EventSourceToken *string
 
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you
-	// want to restrict access to authenticated users only. Set to NONE if you want
-	// to bypass IAM authentication to create a public endpoint. For more information,
-	// see Security and auth model for Lambda function URLs (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html)
+	// want to restrict access to authenticated users only. Set to NONE if you want to
+	// bypass IAM authentication to create a public endpoint. For more information, see
+	// Security and auth model for Lambda function URLs (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html)
 	// .
 	FunctionUrlAuthType types.FunctionUrlAuthType
 
@@ -99,15 +98,15 @@ type AddPermissionInput struct {
 	// this option to avoid modifying a policy that has changed since you last read it.
 	RevisionId *string
 
-	// For Amazon Web Service, the ID of the Amazon Web Services account that owns
-	// the resource. Use this together with SourceArn to ensure that the specified
-	// account owns the resource. It is possible for an Amazon S3 bucket to be deleted
-	// by its owner and recreated by another account.
+	// For Amazon Web Service, the ID of the Amazon Web Services account that owns the
+	// resource. Use this together with SourceArn to ensure that the specified account
+	// owns the resource. It is possible for an Amazon S3 bucket to be deleted by its
+	// owner and recreated by another account.
 	SourceAccount *string
 
 	// For Amazon Web Services, the ARN of the Amazon Web Services resource that
 	// invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic. Note
-	// that Lambda configures the comparison using the StringLike  operator.
+	// that Lambda configures the comparison using the StringLike operator.
 	SourceArn *string
 
 	noSmithyDocumentSerde

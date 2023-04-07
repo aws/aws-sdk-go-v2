@@ -59,7 +59,7 @@ type GetDataQualityRuleRecommendationRunOutput struct {
 	// run was modified.
 	LastModifiedOn *time.Time
 
-	// The number of G.1X  workers to be used in the run. The default is 5.
+	// The number of G.1X workers to be used in the run. The default is 5.
 	NumberOfWorkers *int32
 
 	// When a start rule recommendation run completes, it creates a recommended

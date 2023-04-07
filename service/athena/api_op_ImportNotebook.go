@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Imports a single ipynb file to a Spark enabled workgroup. The maximum file
-// size that can be imported is 10 megabytes. If an ipynb file with the same name
+// Imports a single ipynb file to a Spark enabled workgroup. The maximum file size
+// that can be imported is 10 megabytes. If an ipynb file with the same name
 // already exists in the workgroup, throws an error.
 func (c *Client) ImportNotebook(ctx context.Context, params *ImportNotebookInput, optFns ...func(*Options)) (*ImportNotebookOutput, error) {
 	if params == nil {

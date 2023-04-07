@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the WebACL  for the specified resource.
+// Retrieves the WebACL for the specified resource.
 func (c *Client) GetWebACLForResource(ctx context.Context, params *GetWebACLForResourceInput, optFns ...func(*Options)) (*GetWebACLForResourceOutput, error) {
 	if params == nil {
 		params = &GetWebACLForResourceInput{}
@@ -31,11 +31,17 @@ type GetWebACLForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource whose web ACL you want to
 	// retrieve. The ARN must be in one of the following formats:
-	//     - For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
-	//     - For an Amazon API Gateway REST API: arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
-	//     - For an AppSync GraphQL API: arn:aws:appsync:region:account-id:apis/GraphQLApiId
-	//     - For an Amazon Cognito user pool: arn:aws:cognito-idp:region:account-id:userpool/user-pool-id
-	//     - For an App Runner service: arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+	//   - For an Application Load Balancer:
+	//   arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+	//
+	//   - For an Amazon API Gateway REST API:
+	//   arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
+	//   - For an AppSync GraphQL API:
+	//   arn:aws:appsync:region:account-id:apis/GraphQLApiId
+	//   - For an Amazon Cognito user pool:
+	//   arn:aws:cognito-idp:region:account-id:userpool/user-pool-id
+	//   - For an App Runner service:
+	//   arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
 	//
 	// This member is required.
 	ResourceArn *string

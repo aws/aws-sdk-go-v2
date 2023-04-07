@@ -67,9 +67,9 @@ const (
 	AuthTypePersonalAccessToken AuthType = "PERSONAL_ACCESS_TOKEN"
 )
 
-// Values returns all known values for AuthType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AuthType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (AuthType) Values() []AuthType {
 	return []AuthType{
 		"OAUTH",
@@ -230,9 +230,9 @@ const (
 	ComputeTypeBuildGeneral12xlarge ComputeType = "BUILD_GENERAL1_2XLARGE"
 )
 
-// Values returns all known values for ComputeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ComputeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ComputeType) Values() []ComputeType {
 	return []ComputeType{
 		"BUILD_GENERAL1_SMALL",
@@ -291,9 +291,9 @@ const (
 	EnvironmentVariableTypeSecretsManager EnvironmentVariableType = "SECRETS_MANAGER"
 )
 
-// Values returns all known values for EnvironmentVariableType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EnvironmentVariableType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentVariableType) Values() []EnvironmentVariableType {
 	return []EnvironmentVariableType{
 		"PLAINTEXT",
@@ -378,8 +378,8 @@ const (
 	LogsConfigStatusTypeDisabled LogsConfigStatusType = "DISABLED"
 )
 
-// Values returns all known values for LogsConfigStatusType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LogsConfigStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LogsConfigStatusType) Values() []LogsConfigStatusType {
 	return []LogsConfigStatusType{

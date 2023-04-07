@@ -13,14 +13,13 @@ import (
 )
 
 // Modifies the status of a custom engine version (CEV). You can find CEVs to
-// modify by calling DescribeDBEngineVersions. The MediaImport service that
+// modify by calling DescribeDBEngineVersions . The MediaImport service that
 // imports files from Amazon S3 to create CEVs isn't integrated with Amazon Web
 // Services CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail,
 // calls to the ModifyCustomDbEngineVersion event aren't logged. However, you
 // might see calls from the API gateway that accesses your Amazon S3 bucket. These
-// calls originate from the MediaImport service for the
-// ModifyCustomDbEngineVersion event. For more information, see Modifying CEV
-// status (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify)
+// calls originate from the MediaImport service for the ModifyCustomDbEngineVersion
+// event. For more information, see Modifying CEV status (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify)
 // in the Amazon RDS User Guide.
 func (c *Client) ModifyCustomDBEngineVersion(ctx context.Context, params *ModifyCustomDBEngineVersionInput, optFns ...func(*Options)) (*ModifyCustomDBEngineVersionOutput, error) {
 	if params == nil {
@@ -46,7 +45,7 @@ type ModifyCustomDBEngineVersionInput struct {
 
 	// The custom engine version (CEV) that you want to modify. This option is
 	// required for RDS Custom for Oracle, but optional for Amazon RDS. The combination
-	// of Engine  and EngineVersion is unique per customer per Amazon Web Services
+	// of Engine and EngineVersion is unique per customer per Amazon Web Services
 	// Region.
 	//
 	// This member is required.
@@ -55,16 +54,16 @@ type ModifyCustomDBEngineVersionInput struct {
 	// An optional description of your CEV.
 	Description *string
 
-	// The availability status to be assigned to the CEV. Valid values are as
-	// follows: available You can use this CEV to create a new RDS Custom DB instance.
-	// inactive You can create a new RDS Custom instance by restoring a DB snapshot
-	// with this CEV. You can't patch or create new instances with this CEV. You can
-	// change any status to any status. A typical reason to change status is to prevent
-	// the accidental use of a CEV, or to make a deprecated CEV eligible for use again.
-	// For example, you might change the status of your CEV from available  to
-	// inactive , and from inactive  back to available. To change the availability
-	// status of the CEV, it must not currently be in use by an RDS Custom instance,
-	// snapshot, or automated backup.
+	// The availability status to be assigned to the CEV. Valid values are as follows:
+	// available You can use this CEV to create a new RDS Custom DB instance. inactive
+	// You can create a new RDS Custom instance by restoring a DB snapshot with this
+	// CEV. You can't patch or create new instances with this CEV. You can change any
+	// status to any status. A typical reason to change status is to prevent the
+	// accidental use of a CEV, or to make a deprecated CEV eligible for use again. For
+	// example, you might change the status of your CEV from available to inactive ,
+	// and from inactive back to available . To change the availability status of the
+	// CEV, it must not currently be in use by an RDS Custom instance, snapshot, or
+	// automated backup.
 	Status types.CustomEngineVersionStatus
 
 	noSmithyDocumentSerde
@@ -101,8 +100,7 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string
 
-	// The name of the Amazon S3 bucket that contains your database installation
-	// files.
+	// The name of the Amazon S3 bucket that contains your database installation files.
 	DatabaseInstallationFilesS3BucketName *string
 
 	// The Amazon S3 directory that contains the database installation files. If not
@@ -126,14 +124,14 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// The EC2 image
 	Image *types.CustomDBEngineVersionAMI
 
-	// The Amazon Web Services KMS key identifier for an encrypted CEV. This
-	// parameter is required for RDS Custom, but optional for Amazon RDS.
+	// The Amazon Web Services KMS key identifier for an encrypted CEV. This parameter
+	// is required for RDS Custom, but optional for Amazon RDS.
 	KMSKeyId *string
 
 	// The major engine version of the CEV.
 	MajorEngineVersion *string
 
-	// The status of the DB engine version, either available  or deprecated .
+	// The status of the DB engine version, either available or deprecated .
 	Status *string
 
 	// A list of the supported CA certificate identifiers. For more information, see
@@ -144,7 +142,7 @@ type ModifyCustomDBEngineVersionOutput struct {
 	SupportedCACertificateIdentifiers []string
 
 	// A list of the character sets supported by this engine for the CharacterSetName
-	// parameter of the CreateDBInstance  operation.
+	// parameter of the CreateDBInstance operation.
 	SupportedCharacterSets []types.CharacterSet
 
 	// A list of the supported DB engine modes.
@@ -161,15 +159,15 @@ type ModifyCustomDBEngineVersionOutput struct {
 	SupportedFeatureNames []string
 
 	// A list of the character sets supported by the Oracle DB engine for the
-	// NcharCharacterSetName parameter of the CreateDBInstance  operation.
+	// NcharCharacterSetName parameter of the CreateDBInstance operation.
 	SupportedNcharCharacterSets []types.CharacterSet
 
-	// A list of the time zones supported by this engine for the Timezone parameter
-	// of the CreateDBInstance  action.
+	// A list of the time zones supported by this engine for the Timezone parameter of
+	// the CreateDBInstance action.
 	SupportedTimezones []types.Timezone
 
-	// A value that indicates whether the engine version supports Babelfish for
-	// Aurora PostgreSQL.
+	// A value that indicates whether the engine version supports Babelfish for Aurora
+	// PostgreSQL.
 	SupportsBabelfish bool
 
 	// A value that indicates whether the engine version supports rotating the server

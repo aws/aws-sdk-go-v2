@@ -12,7 +12,7 @@ import (
 
 // Deletes an Amazon Kendra data source connector. An exception is not thrown if
 // the data source is already being deleted. While the data source is being
-// deleted, the Status  field returned by a call to the DescribeDataSource API is
+// deleted, the Status field returned by a call to the DescribeDataSource API is
 // set to DELETING . For more information, see Deleting Data Sources (https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html)
 // .
 func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceInput, optFns ...func(*Options)) (*DeleteDataSourceOutput, error) {

@@ -46,7 +46,7 @@ type CreateResourceServerInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// A list of scopes. Each scope is a key-value map with the keys name  and
+	// A list of scopes. Each scope is a key-value map with the keys name and
 	// description .
 	Scopes []types.ResourceServerScopeType
 

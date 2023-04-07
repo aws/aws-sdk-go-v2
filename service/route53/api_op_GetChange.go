@@ -18,8 +18,11 @@ import (
 
 // Returns the current status of a change batch request. The status is one of the
 // following values:
-//   - PENDING indicates that the changes in this request have not propagated to all Amazon Route 53 DNS servers. This is the initial status of all change batch requests.
-//   - INSYNC indicates that the changes have propagated to all Route 53 DNS servers.
+//   - PENDING indicates that the changes in this request have not propagated to
+//     all Amazon Route 53 DNS servers. This is the initial status of all change batch
+//     requests.
+//   - INSYNC indicates that the changes have propagated to all Route 53 DNS
+//     servers.
 func (c *Client) GetChange(ctx context.Context, params *GetChangeInput, optFns ...func(*Options)) (*GetChangeOutput, error) {
 	if params == nil {
 		params = &GetChangeInput{}
@@ -39,7 +42,7 @@ func (c *Client) GetChange(ctx context.Context, params *GetChangeInput, optFns .
 type GetChangeInput struct {
 
 	// The ID of the change batch request. The value that you specify here is the
-	// value that ChangeResourceRecordSets  returned in the Id element when you
+	// value that ChangeResourceRecordSets returned in the Id element when you
 	// submitted the request.
 	//
 	// This member is required.
@@ -48,7 +51,7 @@ type GetChangeInput struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains the ChangeInfo  element.
+// A complex type that contains the ChangeInfo element.
 type GetChangeOutput struct {
 
 	// A complex type that contains information about the specified change batch.
@@ -177,8 +180,7 @@ type ResourceRecordSetsChangedWaiter struct {
 	options ResourceRecordSetsChangedWaiterOptions
 }
 
-// NewResourceRecordSetsChangedWaiter constructs a
-// ResourceRecordSetsChangedWaiter.
+// NewResourceRecordSetsChangedWaiter constructs a ResourceRecordSetsChangedWaiter.
 func NewResourceRecordSetsChangedWaiter(client GetChangeAPIClient, optFns ...func(*ResourceRecordSetsChangedWaiterOptions)) *ResourceRecordSetsChangedWaiter {
 	options := ResourceRecordSetsChangedWaiterOptions{}
 	options.MinDelay = 30 * time.Second

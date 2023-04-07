@@ -13,9 +13,9 @@ import (
 
 // Associate your own domain name with the App Runner subdomain URL of your App
 // Runner service. After you call AssociateCustomDomain and receive a successful
-// response, use the information in the CustomDomain record that's returned to
-// add CNAME records to your Domain Name System (DNS). For each mapped domain name,
-// add a mapping to the target App Runner subdomain and one or more certificate
+// response, use the information in the CustomDomain record that's returned to add
+// CNAME records to your Domain Name System (DNS). For each mapped domain name, add
+// a mapping to the target App Runner subdomain and one or more certificate
 // validation records. App Runner then performs DNS validation to verify that you
 // own or control the domain name that you associated. App Runner tracks domain
 // validity in a certificate stored in AWS Certificate Manager (ACM) (https://docs.aws.amazon.com/acm/latest/userguide)
@@ -38,7 +38,7 @@ func (c *Client) AssociateCustomDomain(ctx context.Context, params *AssociateCus
 type AssociateCustomDomainInput struct {
 
 	// A custom domain endpoint to associate. Specify a root domain (for example,
-	// example.com ), a subdomain (for example, login.example.com  or
+	// example.com ), a subdomain (for example, login.example.com or
 	// admin.login.example.com ), or a wildcard (for example, *.example.com ).
 	//
 	// This member is required.
@@ -50,7 +50,7 @@ type AssociateCustomDomainInput struct {
 	// This member is required.
 	ServiceArn *string
 
-	// Set to true  to associate the subdomain www.DomainName  with the App Runner
+	// Set to true to associate the subdomain www.DomainName  with the App Runner
 	// service in addition to the base domain. Default: true
 	EnableWWWSubdomain *bool
 

@@ -67,7 +67,7 @@ type UpdateLayerInput struct {
 	// .
 	CustomJson *string
 
-	// A LayerCustomRecipes  object that specifies the layer's custom recipes.
+	// A LayerCustomRecipes object that specifies the layer's custom recipes.
 	CustomRecipes *types.Recipes
 
 	// An array containing the layer's custom security group IDs.
@@ -77,11 +77,11 @@ type UpdateLayerInput struct {
 	EnableAutoHealing *bool
 
 	// Whether to install operating system and package updates when the instance
-	// boots. The default value is true. To control when updates are installed, set
+	// boots. The default value is true . To control when updates are installed, set
 	// this value to false . You must then update your instances manually by using
 	// CreateDeployment to run the update_dependencies stack command or manually
-	// running yum  (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly
-	// recommend using the default value of true, to ensure that your instances have
+	// running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly
+	// recommend using the default value of true , to ensure that your instances have
 	// the latest security updates.
 	InstallUpdatesOnBoot *bool
 
@@ -91,7 +91,7 @@ type UpdateLayerInput struct {
 	// The layer name, which is used by the console.
 	Name *string
 
-	// An array of Package  objects that describe the layer's packages.
+	// An array of Package objects that describe the layer's packages.
 	Packages []string
 
 	// For custom layers only, use this parameter to specify the layer's short name,
@@ -105,7 +105,7 @@ type UpdateLayerInput struct {
 	// Whether to use Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool
 
-	// A VolumeConfigurations  object that describes the layer's Amazon EBS volumes.
+	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
 	VolumeConfigurations []types.VolumeConfiguration
 
 	noSmithyDocumentSerde

@@ -42,14 +42,14 @@ type SetIdentityHeadersInNotificationsEnabledInput struct {
 	// notifications of the specified notification type. A value of true specifies
 	// that Amazon SES will include headers in notifications, and a value of false
 	// specifies that Amazon SES will not include headers in notifications. This value
-	// can only be set when NotificationType is already set to use a particular
-	// Amazon SNS topic.
+	// can only be set when NotificationType is already set to use a particular Amazon
+	// SNS topic.
 	//
 	// This member is required.
 	Enabled bool
 
-	// The identity for which to enable or disable headers in notifications.
-	// Examples: user@example.com , example.com .
+	// The identity for which to enable or disable headers in notifications. Examples:
+	// user@example.com , example.com .
 	//
 	// This member is required.
 	Identity *string

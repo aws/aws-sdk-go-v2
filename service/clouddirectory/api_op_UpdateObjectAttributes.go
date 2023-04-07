@@ -50,7 +50,7 @@ type UpdateObjectAttributesInput struct {
 
 type UpdateObjectAttributesOutput struct {
 
-	// The ObjectIdentifier  of the updated object.
+	// The ObjectIdentifier of the updated object.
 	ObjectIdentifier *string
 
 	// Metadata pertaining to the operation's result.

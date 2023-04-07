@@ -19,9 +19,16 @@ import (
 // specified, the messages are returned as follows. For more information, see
 // PostFulfillmentStatusSpecification (https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html)
 // .
-//   - Success message - Returned if the Lambda function completes successfully and the intent state is fulfilled or ready fulfillment if the message is present.
-//   - Failed message - The failed message is returned if the Lambda function throws an exception or if the Lambda function returns a failed intent state without a message.
-//   - Timeout message - If you don't configure a timeout message and a timeout, and the Lambda function doesn't return within 30 seconds, the timeout message is returned. If you configure a timeout, the timeout message is returned when the period times out.
+//   - Success message - Returned if the Lambda function completes successfully
+//     and the intent state is fulfilled or ready fulfillment if the message is
+//     present.
+//   - Failed message - The failed message is returned if the Lambda function
+//     throws an exception or if the Lambda function returns a failed intent state
+//     without a message.
+//   - Timeout message - If you don't configure a timeout message and a timeout,
+//     and the Lambda function doesn't return within 30 seconds, the timeout message is
+//     returned. If you configure a timeout, the timeout message is returned when the
+//     period times out.
 //
 // For more information, see Completion message (https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html)
 // .
@@ -87,9 +94,9 @@ type RecognizeTextOutput struct {
 	// utterance.
 	Interpretations []types.Interpretation
 
-	// A list of messages last sent to the user. The messages are ordered based on
-	// the order that you returned the messages from your Lambda function or the order
-	// that the messages are defined in the bot.
+	// A list of messages last sent to the user. The messages are ordered based on the
+	// order that you returned the messages from your Lambda function or the order that
+	// the messages are defined in the bot.
 	Messages []types.Message
 
 	// The bot member that recognized the text.

@@ -46,8 +46,7 @@ type AttachVolumeInput struct {
 	// This member is required.
 	NetworkInterfaceId *string
 
-	// The Amazon Resource Name (ARN) of the volume to attach to the specified
-	// gateway.
+	// The Amazon Resource Name (ARN) of the volume to attach to the specified gateway.
 	//
 	// This member is required.
 	VolumeARN *string

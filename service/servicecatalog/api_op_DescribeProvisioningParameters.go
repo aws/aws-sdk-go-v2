@@ -15,7 +15,7 @@ import (
 // product using the specified provisioning artifact. If the output contains a
 // TagOption key with an empty list of values, there is a TagOption conflict for
 // that key. The end user cannot take action to fix the conflict, and launch is not
-// blocked. In subsequent calls to ProvisionProduct, do not include conflicted
+// blocked. In subsequent calls to ProvisionProduct , do not include conflicted
 // TagOption keys as tags, or this causes the error "Parameter validation failed:
 // Missing required parameter in Tags[N]:Value". Tag the provisioned product with
 // the value sc-tagoption-conflict-portfolioId-productId .
@@ -37,14 +37,14 @@ func (c *Client) DescribeProvisioningParameters(ctx context.Context, params *Des
 type DescribeProvisioningParametersInput struct {
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// The path identifier of the product. This value is optional if the product has
-	// a default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths. You must provide the name or ID, but
+	// The path identifier of the product. This value is optional if the product has a
+	// default path, and required if the product has more than one path. To list the
+	// paths for a product, use ListLaunchPaths . You must provide the name or ID, but
 	// not both.
 	PathId *string
 
@@ -61,8 +61,8 @@ type DescribeProvisioningParametersInput struct {
 	// but not both.
 	ProvisioningArtifactId *string
 
-	// The name of the provisioning artifact. You must provide the name or ID, but
-	// not both.
+	// The name of the provisioning artifact. You must provide the name or ID, but not
+	// both.
 	ProvisioningArtifactName *string
 
 	noSmithyDocumentSerde
@@ -95,7 +95,7 @@ type DescribeProvisioningParametersOutput struct {
 	TagOptions []types.TagOptionSummary
 
 	// Any additional metadata specifically related to the provisioning of the
-	// product. For example, see the Version  field of the CloudFormation template.
+	// product. For example, see the Version field of the CloudFormation template.
 	UsageInstructions []types.UsageInstruction
 
 	// Metadata pertaining to the operation's result.

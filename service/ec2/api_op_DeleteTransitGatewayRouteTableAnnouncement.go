@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Advertises to the transit gateway that a transit gateway route table is
-// deleted.
+// Advertises to the transit gateway that a transit gateway route table is deleted.
 func (c *Client) DeleteTransitGatewayRouteTableAnnouncement(ctx context.Context, params *DeleteTransitGatewayRouteTableAnnouncementInput, optFns ...func(*Options)) (*DeleteTransitGatewayRouteTableAnnouncementOutput, error) {
 	if params == nil {
 		params = &DeleteTransitGatewayRouteTableAnnouncementInput{}

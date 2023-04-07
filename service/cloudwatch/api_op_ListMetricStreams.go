@@ -123,14 +123,13 @@ type ListMetricStreamsAPIClient interface {
 
 var _ ListMetricStreamsAPIClient = (*Client)(nil)
 
-// ListMetricStreamsPaginatorOptions is the paginator options for
-// ListMetricStreams
+// ListMetricStreamsPaginatorOptions is the paginator options for ListMetricStreams
 type ListMetricStreamsPaginatorOptions struct {
 	// The maximum number of results to return in one operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -42,9 +42,9 @@ type CreateAcceleratorInput struct {
 	// This member is required.
 	IdempotencyToken *string
 
-	// The name of the accelerator. The name can have a maximum of 64 characters,
-	// must contain only alphanumeric characters, periods (.), or hyphens (-), and must
-	// not begin or end with a hyphen or period.
+	// The name of the accelerator. The name can have a maximum of 64 characters, must
+	// contain only alphanumeric characters, periods (.), or hyphens (-), and must not
+	// begin or end with a hyphen or period.
 	//
 	// This member is required.
 	Name *string

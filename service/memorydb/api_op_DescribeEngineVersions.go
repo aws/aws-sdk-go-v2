@@ -37,9 +37,9 @@ type DescribeEngineVersionsInput struct {
 	// The Redis engine version
 	EngineVersion *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional argument to pass in case the total number of records exceeds the
@@ -145,13 +145,13 @@ var _ DescribeEngineVersionsAPIClient = (*Client)(nil)
 // DescribeEngineVersionsPaginatorOptions is the paginator options for
 // DescribeEngineVersions
 type DescribeEngineVersionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -164,8 +164,7 @@ type DescribeEngineVersionsPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeEngineVersionsPaginator returns a new
-// DescribeEngineVersionsPaginator
+// NewDescribeEngineVersionsPaginator returns a new DescribeEngineVersionsPaginator
 func NewDescribeEngineVersionsPaginator(client DescribeEngineVersionsAPIClient, params *DescribeEngineVersionsInput, optFns ...func(*DescribeEngineVersionsPaginatorOptions)) *DescribeEngineVersionsPaginator {
 	if params == nil {
 		params = &DescribeEngineVersionsInput{}

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Redistribute slots to ensure uniform distribution across existing shards in
-// the cluster.
+// Redistribute slots to ensure uniform distribution across existing shards in the
+// cluster.
 func (c *Client) RebalanceSlotsInGlobalReplicationGroup(ctx context.Context, params *RebalanceSlotsInGlobalReplicationGroupInput, optFns ...func(*Options)) (*RebalanceSlotsInGlobalReplicationGroupOutput, error) {
 	if params == nil {
 		params = &RebalanceSlotsInGlobalReplicationGroupInput{}
@@ -49,7 +49,8 @@ type RebalanceSlotsInGlobalReplicationGroupOutput struct {
 	// cluster that resides in a different Amazon region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
 	// secondary cluster.
-	//     - The GlobalReplicationGroupIdSuffix represents the name of the Global datastore, which is what you use to associate a secondary cluster.
+	//   - The GlobalReplicationGroupIdSuffix represents the name of the Global
+	//   datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

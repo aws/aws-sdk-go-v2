@@ -49,8 +49,8 @@ type GetDeliverabilityDashboardOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// An object that shows the status of the Deliverability dashboard for your
-// Amazon Pinpoint account.
+// An object that shows the status of the Deliverability dashboard for your Amazon
+// Pinpoint account.
 type GetDeliverabilityDashboardOptionsOutput struct {
 
 	// Specifies whether the Deliverability dashboard is enabled for your Amazon
@@ -59,9 +59,9 @@ type GetDeliverabilityDashboardOptionsOutput struct {
 	// This member is required.
 	DashboardEnabled bool
 
-	// The current status of your Deliverability dashboard subscription. If this
-	// value is PENDING_EXPIRATION, your subscription is scheduled to expire at the
-	// end of the current calendar month.
+	// The current status of your Deliverability dashboard subscription. If this value
+	// is PENDING_EXPIRATION , your subscription is scheduled to expire at the end of
+	// the current calendar month.
 	AccountStatus types.DeliverabilityDashboardAccountStatus
 
 	// An array of objects, one for each verified domain that you use to send email

@@ -41,9 +41,9 @@ type ListDeliverabilityTestReportsInput struct {
 
 	// The number of results to show in a single call to ListDeliverabilityTestReports
 	// . If the number of results is larger than the number you specified in this
-	// parameter, then the response includes a NextToken element, which you can use
-	// to obtain additional results. The value you specify has to be at least 0, and
-	// can be no more than 1000.
+	// parameter, then the response includes a NextToken element, which you can use to
+	// obtain additional results. The value you specify has to be at least 0, and can
+	// be no more than 1000.
 	PageSize *int32
 
 	noSmithyDocumentSerde
@@ -53,8 +53,8 @@ type ListDeliverabilityTestReportsInput struct {
 // your account, regardless of whether or not those tests are complete.
 type ListDeliverabilityTestReportsOutput struct {
 
-	// An object that contains a lists of predictive inbox placement tests that
-	// you've performed.
+	// An object that contains a lists of predictive inbox placement tests that you've
+	// performed.
 	//
 	// This member is required.
 	DeliverabilityTestReports []types.DeliverabilityTestReport
@@ -144,13 +144,13 @@ var _ ListDeliverabilityTestReportsAPIClient = (*Client)(nil)
 type ListDeliverabilityTestReportsPaginatorOptions struct {
 	// The number of results to show in a single call to ListDeliverabilityTestReports
 	// . If the number of results is larger than the number you specified in this
-	// parameter, then the response includes a NextToken element, which you can use
-	// to obtain additional results. The value you specify has to be at least 0, and
-	// can be no more than 1000.
+	// parameter, then the response includes a NextToken element, which you can use to
+	// obtain additional results. The value you specify has to be at least 0, and can
+	// be no more than 1000.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

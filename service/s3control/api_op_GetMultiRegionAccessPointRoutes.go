@@ -24,7 +24,8 @@ import (
 //   - ap-southeast-2
 //   - ap-northeast-1
 //   - eu-west-1
-//     Your Amazon S3 bucket does not need to be in these five Regions.
+//
+// Your Amazon S3 bucket does not need to be in these five Regions.
 func (c *Client) GetMultiRegionAccessPointRoutes(ctx context.Context, params *GetMultiRegionAccessPointRoutesInput, optFns ...func(*Options)) (*GetMultiRegionAccessPointRoutesOutput, error) {
 	if params == nil {
 		params = &GetMultiRegionAccessPointRoutesInput{}
@@ -61,8 +62,8 @@ type GetMultiRegionAccessPointRoutesOutput struct {
 	// The Multi-Region Access Point ARN.
 	Mrap *string
 
-	// The different routes that make up the route configuration. Active routes
-	// return a value of 100 , and passive routes return a value of 0 .
+	// The different routes that make up the route configuration. Active routes return
+	// a value of 100 , and passive routes return a value of 0 .
 	Routes []types.MultiRegionAccessPointRoute
 
 	// Metadata pertaining to the operation's result.

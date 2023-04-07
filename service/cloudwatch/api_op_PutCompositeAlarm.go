@@ -31,21 +31,20 @@ import (
 // to delete. To get out of such a situation, you must break the cycle by changing
 // the rule of one of the composite alarms in the cycle to remove a dependency that
 // creates the cycle. The simplest change to make to break a cycle is to change the
-//
-// AlarmRule of one of the alarms to false. Additionally, the evaluation of
+// AlarmRule of one of the alarms to false . Additionally, the evaluation of
 // composite alarms stops if CloudWatch detects a cycle in the evaluation path.
 // When this operation creates an alarm, the alarm state is immediately set to
-// INSUFFICIENT_DATA. The alarm is then evaluated and its state is set
+// INSUFFICIENT_DATA . The alarm is then evaluated and its state is set
 // appropriately. Any actions associated with the new state are then executed. For
 // a composite alarm, this initial time after creation is the only time that the
-// alarm can be in INSUFFICIENT_DATA state. When you update an existing alarm,
-// its state is left unchanged, but the update completely overwrites the previous
+// alarm can be in INSUFFICIENT_DATA state. When you update an existing alarm, its
+// state is left unchanged, but the update completely overwrites the previous
 // configuration of the alarm. To use this operation, you must be signed on with
-// the cloudwatch:PutCompositeAlarm  permission that is scoped to *. You can't
-// create a composite alarms if your cloudwatch:PutCompositeAlarm permission has
-// a narrower scope. If you are an IAM user, you must have
-// iam:CreateServiceLinkedRoleto create a composite alarm that has Systems
-// Manager OpsItem actions.
+// the cloudwatch:PutCompositeAlarm permission that is scoped to * . You can't
+// create a composite alarms if your cloudwatch:PutCompositeAlarm permission has a
+// narrower scope. If you are an IAM user, you must have
+// iam:CreateServiceLinkedRole to create a composite alarm that has Systems Manager
+// OpsItem actions.
 func (c *Client) PutCompositeAlarm(ctx context.Context, params *PutCompositeAlarmInput, optFns ...func(*Options)) (*PutCompositeAlarmOutput, error) {
 	if params == nil {
 		params = &PutCompositeAlarmInput{}
@@ -76,20 +75,31 @@ type PutCompositeAlarmInput struct {
 	// parenthesis to logically group the functions in your expression. You can use
 	// either alarm names or ARNs to reference the other alarms that are to be
 	// evaluated. Functions can include the following:
-	//     - ALARM("alarm-name or alarm-ARN") is TRUE if the named alarm is in ALARM state.
-	//     - OK("alarm-name or alarm-ARN") is TRUE if the named alarm is in OK state.
-	//     - INSUFFICIENT_DATA("alarm-name or alarm-ARN") is TRUE if the named alarm is in INSUFFICIENT_DATA state.
-	//     - TRUE always evaluates to TRUE.
-	//     - FALSE always evaluates to FALSE.
-	// TRUE and FALSE are useful for testing a
-	// complex AlarmRule structure, and for testing your alarm actions. Alarm names
-	// specified in AlarmRule can be surrounded with double-quotes ("), but do not
-	// have to be. The following are some examples of AlarmRule :
-	//     - ALARM(CPUUtilizationTooHigh) AND ALARM(DiskReadOpsTooHigh) specifies that the composite alarm goes into ALARM state only if both CPUUtilizationTooHigh and DiskReadOpsTooHigh alarms are in ALARM state.
-	//     - ALARM(CPUUtilizationTooHigh) AND NOT ALARM(DeploymentInProgress) specifies that the alarm goes to ALARM state if CPUUtilizationTooHigh is in ALARM state and DeploymentInProgress is not in ALARM state. This example reduces alarm noise during a known deployment window.
-	//     - (ALARM(CPUUtilizationTooHigh) OR ALARM(DiskReadOpsTooHigh)) AND OK(NetworkOutTooHigh) goes into ALARM state if CPUUtilizationTooHigh OR DiskReadOpsTooHigh is in ALARM state, and if NetworkOutTooHigh is in OK state. This provides another example of using a composite alarm to prevent noise. This rule ensures that you are not notified with an alarm action on high CPU or disk usage if a known network problem is also occurring.
-	//
-	// The AlarmRule  can specify as many as 100 "children" alarms. The AlarmRule
+	//   - ALARM("alarm-name or alarm-ARN") is TRUE if the named alarm is in ALARM
+	//   state.
+	//   - OK("alarm-name or alarm-ARN") is TRUE if the named alarm is in OK state.
+	//   - INSUFFICIENT_DATA("alarm-name or alarm-ARN") is TRUE if the named alarm is
+	//   in INSUFFICIENT_DATA state.
+	//   - TRUE always evaluates to TRUE.
+	//   - FALSE always evaluates to FALSE.
+	// TRUE and FALSE are useful for testing a complex AlarmRule structure, and for
+	// testing your alarm actions. Alarm names specified in AlarmRule can be
+	// surrounded with double-quotes ("), but do not have to be. The following are some
+	// examples of AlarmRule :
+	//   - ALARM(CPUUtilizationTooHigh) AND ALARM(DiskReadOpsTooHigh) specifies that
+	//   the composite alarm goes into ALARM state only if both CPUUtilizationTooHigh and
+	//   DiskReadOpsTooHigh alarms are in ALARM state.
+	//   - ALARM(CPUUtilizationTooHigh) AND NOT ALARM(DeploymentInProgress) specifies
+	//   that the alarm goes to ALARM state if CPUUtilizationTooHigh is in ALARM state
+	//   and DeploymentInProgress is not in ALARM state. This example reduces alarm noise
+	//   during a known deployment window.
+	//   - (ALARM(CPUUtilizationTooHigh) OR ALARM(DiskReadOpsTooHigh)) AND
+	//   OK(NetworkOutTooHigh) goes into ALARM state if CPUUtilizationTooHigh OR
+	//   DiskReadOpsTooHigh is in ALARM state, and if NetworkOutTooHigh is in OK state.
+	//   This provides another example of using a composite alarm to prevent noise. This
+	//   rule ensures that you are not notified with an alarm action on high CPU or disk
+	//   usage if a known network problem is also occurring.
+	// The AlarmRule can specify as many as 100 "children" alarms. The AlarmRule
 	// expression can have as many as 500 elements. Elements are child alarms, TRUE or
 	// FALSE statements, and parentheses.
 	//
@@ -100,21 +110,20 @@ type PutCompositeAlarmInput struct {
 	// state of the composite alarm. The default is TRUE .
 	ActionsEnabled *bool
 
-	// Actions will be suppressed if the suppressor alarm is in the ALARM  state.
-	// ActionsSuppressorcan be an AlarmName or an Amazon Resource Name (ARN) from an
+	// Actions will be suppressed if the suppressor alarm is in the ALARM state.
+	// ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an
 	// existing alarm.
 	ActionsSuppressor *string
 
 	// The maximum time in seconds that the composite alarm waits after suppressor
 	// alarm goes out of the ALARM state. After this time, the composite alarm
-	// performs its actions. ExtensionPeriod  is required only when ActionsSuppressor
+	// performs its actions. ExtensionPeriod is required only when ActionsSuppressor
 	// is specified.
 	ActionsSuppressorExtensionPeriod *int32
 
 	// The maximum time in seconds that the composite alarm waits for the suppressor
-	// alarm to go into the ALARM state. After this time, the composite alarm
-	// performs its actions. WaitPeriod  is required only when ActionsSuppressor is
-	// specified.
+	// alarm to go into the ALARM state. After this time, the composite alarm performs
+	// its actions. WaitPeriod is required only when ActionsSuppressor is specified.
 	ActionsSuppressorWaitPeriod *int32
 
 	// The actions to execute when this alarm transitions to the ALARM state from any

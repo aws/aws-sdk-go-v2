@@ -36,7 +36,7 @@ type UpdateBotLocaleInput struct {
 	BotId *string
 
 	// The version of the bot that contains the locale to be updated. The version can
-	// only be the DRAFT  version.
+	// only be the DRAFT version.
 	//
 	// This member is required.
 	BotVersion *string
@@ -58,8 +58,8 @@ type UpdateBotLocaleInput struct {
 	// The new description of the locale.
 	Description *string
 
-	// The new Amazon Polly voice Amazon Lex should use for voice interaction with
-	// the user.
+	// The new Amazon Polly voice Amazon Lex should use for voice interaction with the
+	// user.
 	VoiceSettings *types.VoiceSettings
 
 	noSmithyDocumentSerde
@@ -83,7 +83,7 @@ type UpdateBotLocaleOutput struct {
 	// The updated description of the locale.
 	Description *string
 
-	// If the botLocaleStatus  is Failed , the failureReasons field lists the errors
+	// If the botLocaleStatus is Failed , the failureReasons field lists the errors
 	// that occurred while building the bot.
 	FailureReasons []string
 
@@ -96,12 +96,12 @@ type UpdateBotLocaleOutput struct {
 	// The updated locale name for the locale.
 	LocaleName *string
 
-	// The updated confidence threshold for inserting the AMAZON.FallbackIntent  and
-	// AMAZON.KendraSearchIntentintents in the list of possible intents for an
+	// The updated confidence threshold for inserting the AMAZON.FallbackIntent and
+	// AMAZON.KendraSearchIntent intents in the list of possible intents for an
 	// utterance.
 	NluIntentConfidenceThreshold *float64
 
-	// Recommended actions to take to resolve an error in the failureReasons  field.
+	// Recommended actions to take to resolve an error in the failureReasons field.
 	RecommendedActions []string
 
 	// The updated Amazon Polly voice to use for voice interaction with the user.

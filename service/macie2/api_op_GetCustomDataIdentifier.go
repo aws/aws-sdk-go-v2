@@ -30,8 +30,7 @@ func (c *Client) GetCustomDataIdentifier(ctx context.Context, params *GetCustomD
 
 type GetCustomDataIdentifierInput struct {
 
-	// The unique identifier for the Amazon Macie resource that the request applies
-	// to.
+	// The unique identifier for the Amazon Macie resource that the request applies to.
 	//
 	// This member is required.
 	Id *string
@@ -59,9 +58,9 @@ type GetCustomDataIdentifierOutput struct {
 	// The unique identifier for the custom data identifier.
 	Id *string
 
-	// An array that lists specific character sequences (ignore words) to exclude
-	// from the results. If the text matched by the regular expression contains any
-	// string in this array, Amazon Macie ignores it. Ignore words are case sensitive.
+	// An array that lists specific character sequences (ignore words) to exclude from
+	// the results. If the text matched by the regular expression contains any string
+	// in this array, Amazon Macie ignores it. Ignore words are case sensitive.
 	IgnoreWords []string
 
 	// An array that lists specific character sequences (keywords), one of which must
@@ -69,10 +68,10 @@ type GetCustomDataIdentifierOutput struct {
 	// to match. Keywords aren't case sensitive.
 	Keywords []string
 
-	// The maximum number of characters that can exist between the end of at least
-	// one complete character sequence specified by the keywords array and the end of
-	// the text that matches the regex pattern. If a complete keyword precedes all the
-	// text that matches the pattern and the keyword is within the specified distance,
+	// The maximum number of characters that can exist between the end of at least one
+	// complete character sequence specified by the keywords array and the end of the
+	// text that matches the regex pattern. If a complete keyword precedes all the text
+	// that matches the pattern and the keyword is within the specified distance,
 	// Amazon Macie includes the result. Otherwise, Macie excludes the result.
 	MaximumMatchDistance int32
 

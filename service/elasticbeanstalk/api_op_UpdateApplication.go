@@ -12,7 +12,7 @@ import (
 )
 
 // Updates the specified application to have the specified properties. If a
-// property (for example, description) is not provided, the value remains
+// property (for example, description ) is not provided, the value remains
 // unchanged. To clear these properties, specify an empty string.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
@@ -33,7 +33,7 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 type UpdateApplicationInput struct {
 
 	// The name of the application to update. If no such application is found,
-	// UpdateApplication returns an InvalidParameterValue  error.
+	// UpdateApplication returns an InvalidParameterValue error.
 	//
 	// This member is required.
 	ApplicationName *string
@@ -48,7 +48,7 @@ type UpdateApplicationInput struct {
 // Result message containing a single description of an application.
 type UpdateApplicationOutput struct {
 
-	// The ApplicationDescription  of the application.
+	// The ApplicationDescription of the application.
 	Application *types.ApplicationDescription
 
 	// Metadata pertaining to the operation's result.

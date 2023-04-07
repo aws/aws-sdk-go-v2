@@ -19,8 +19,8 @@ import (
 	"io"
 )
 
-// Returns the Region the bucket resides in. You set the bucket's Region using
-// the LocationConstraint  request parameter in a CreateBucket request. For more
+// Returns the Region the bucket resides in. You set the bucket's Region using the
+// LocationConstraint request parameter in a CreateBucket request. For more
 // information, see CreateBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 // . To use this implementation of the operation, you must be the bucket owner. To
 // use this API against an access point, provide the alias of the access point in
@@ -62,7 +62,7 @@ type GetBucketLocationOutput struct {
 
 	// Specifies the Region where the bucket resides. For a list of all the Amazon S3
 	// supported location constraints by Region, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
-	// . Buckets in Region us-east-1  have a LocationConstraint of null .
+	// . Buckets in Region us-east-1 have a LocationConstraint of null .
 	LocationConstraint types.BucketLocationConstraint
 
 	// Metadata pertaining to the operation's result.

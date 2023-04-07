@@ -33,20 +33,20 @@ type ListResolverRuleAssociationsInput struct {
 
 	// An optional specification to return a subset of Resolver rules, such as
 	// Resolver rules that are associated with the same VPC ID. If you submit a second
-	// or subsequent ListResolverRuleAssociations  request and specify the NextToken
-	// parameter, you must use the same values for Filters, if any, as in the
-	// previous request.
+	// or subsequent ListResolverRuleAssociations request and specify the NextToken
+	// parameter, you must use the same values for Filters , if any, as in the previous
+	// request.
 	Filters []types.Filter
 
-	// The maximum number of rule associations that you want to return in the
-	// response to a ListResolverRuleAssociations request. If you don't specify a
-	// value for MaxResults , Resolver returns up to 100 rule associations.
+	// The maximum number of rule associations that you want to return in the response
+	// to a ListResolverRuleAssociations request. If you don't specify a value for
+	// MaxResults , Resolver returns up to 100 rule associations.
 	MaxResults *int32
 
-	// For the first ListResolverRuleAssociation request, omit this value. If you
-	// have more than MaxResults  rule associations, you can submit another
-	// ListResolverRuleAssociationrequest to get the next group of rule associations.
-	// In the next request, specify the value of NextToken  from the previous response.
+	// For the first ListResolverRuleAssociation request, omit this value. If you have
+	// more than MaxResults rule associations, you can submit another
+	// ListResolverRuleAssociation request to get the next group of rule associations.
+	// In the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,13 +54,13 @@ type ListResolverRuleAssociationsInput struct {
 
 type ListResolverRuleAssociationsOutput struct {
 
-	// The value that you specified for MaxResults  in the request.
+	// The value that you specified for MaxResults in the request.
 	MaxResults *int32
 
-	// If more than MaxResults rule associations match the specified criteria, you
-	// can submit another ListResolverRuleAssociation request to get the next group
-	// of results. In the next request, specify the value of NextToken from the
-	// previous response.
+	// If more than MaxResults rule associations match the specified criteria, you can
+	// submit another ListResolverRuleAssociation request to get the next group of
+	// results. In the next request, specify the value of NextToken from the previous
+	// response.
 	NextToken *string
 
 	// The associations that were created between Resolver rules and VPCs using the
@@ -145,13 +145,13 @@ var _ ListResolverRuleAssociationsAPIClient = (*Client)(nil)
 // ListResolverRuleAssociationsPaginatorOptions is the paginator options for
 // ListResolverRuleAssociations
 type ListResolverRuleAssociationsPaginatorOptions struct {
-	// The maximum number of rule associations that you want to return in the
-	// response to a ListResolverRuleAssociations request. If you don't specify a
-	// value for MaxResults , Resolver returns up to 100 rule associations.
+	// The maximum number of rule associations that you want to return in the response
+	// to a ListResolverRuleAssociations request. If you don't specify a value for
+	// MaxResults , Resolver returns up to 100 rule associations.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

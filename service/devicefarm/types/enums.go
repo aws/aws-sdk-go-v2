@@ -427,9 +427,9 @@ const (
 	OfferingTransactionTypeSystem   OfferingTransactionType = "SYSTEM"
 )
 
-// Values returns all known values for OfferingTransactionType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OfferingTransactionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OfferingTransactionType) Values() []OfferingTransactionType {
 	return []OfferingTransactionType{
 		"PURCHASE",
@@ -576,10 +576,9 @@ const (
 	TestGridSessionArtifactTypeSeleniumLog TestGridSessionArtifactType = "SELENIUM_LOG"
 )
 
-// Values returns all known values for TestGridSessionArtifactType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for TestGridSessionArtifactType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TestGridSessionArtifactType) Values() []TestGridSessionArtifactType {
 	return []TestGridSessionArtifactType{
 		"UNKNOWN",
@@ -635,9 +634,9 @@ const (
 	TestTypeRemoteAccessReplay    TestType = "REMOTE_ACCESS_REPLAY"
 )
 
-// Values returns all known values for TestType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TestType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (TestType) Values() []TestType {
 	return []TestType{
 		"BUILTIN_FUZZ",

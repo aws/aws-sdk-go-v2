@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the details about one launch. You must already know the launch name.
-// To retrieve a list of launches in your account, use ListLaunches (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListLaunches.html)
+// Returns the details about one launch. You must already know the launch name. To
+// retrieve a list of launches in your account, use ListLaunches (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListLaunches.html)
 // .
 func (c *Client) GetLaunch(ctx context.Context, params *GetLaunchInput, optFns ...func(*Options)) (*GetLaunchOutput, error) {
 	if params == nil {

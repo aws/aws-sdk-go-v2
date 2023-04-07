@@ -29,7 +29,7 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 	return out, nil
 }
 
-// Container for the parameters to the ListTags  operation.
+// Container for the parameters to the ListTags operation.
 type ListTagsInput struct {
 
 	// Amazon Resource Name (ARN) for the domain to view tags for.
@@ -40,7 +40,7 @@ type ListTagsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The results of a ListTags  operation.
+// The results of a ListTags operation.
 type ListTagsOutput struct {
 
 	// List of resource tags associated with the specified domain.

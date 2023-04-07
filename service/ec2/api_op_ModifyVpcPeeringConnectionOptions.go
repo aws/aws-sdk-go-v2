@@ -16,9 +16,13 @@ import (
 // in the Amazon Elastic Compute Cloud User Guide. Modifies the VPC peering
 // connection options on one side of a VPC peering connection. You can do the
 // following:
-//   - Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.
-//   - Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.
-//   - Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+//   - Enable/disable communication over the peering connection between an
+//     EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances
+//     in the peer VPC.
+//   - Enable/disable communication over the peering connection between instances
+//     in your VPC and an EC2-Classic instance that's linked to the peer VPC.
+//   - Enable/disable the ability to resolve public DNS hostnames to private IP
+//     addresses when queried from instances in the peer VPC.
 //
 // If the peered VPCs are in the same Amazon Web Services account, you can enable
 // DNS resolution for queries from the local VPC. This ensures that queries from
@@ -30,7 +34,7 @@ import (
 // must use the Region for the requester VPC to modify the requester VPC peering
 // options and the Region for the accepter VPC to modify the accepter VPC peering
 // options. To verify which VPCs are the accepter and the requester for a VPC
-// peering connection, use the DescribeVpcPeeringConnections  command.
+// peering connection, use the DescribeVpcPeeringConnections command.
 func (c *Client) ModifyVpcPeeringConnectionOptions(ctx context.Context, params *ModifyVpcPeeringConnectionOptionsInput, optFns ...func(*Options)) (*ModifyVpcPeeringConnectionOptionsOutput, error) {
 	if params == nil {
 		params = &ModifyVpcPeeringConnectionOptionsInput{}

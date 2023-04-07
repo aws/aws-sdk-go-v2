@@ -12,7 +12,7 @@ import (
 )
 
 // Disassociates a Firewall Manager policy administrator from a third-party
-// firewall tenant. When you call DisassociateThirdPartyFirewall, the third-party
+// firewall tenant. When you call DisassociateThirdPartyFirewall , the third-party
 // firewall vendor deletes all of the firewalls that are associated with the
 // account.
 func (c *Client) DisassociateThirdPartyFirewall(ctx context.Context, params *DisassociateThirdPartyFirewallInput, optFns ...func(*Options)) (*DisassociateThirdPartyFirewallOutput, error) {

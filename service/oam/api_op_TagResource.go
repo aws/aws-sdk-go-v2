@@ -41,8 +41,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The ARN of the resource that you're adding tags to. The ARN format of a sink
-	// is arn:aws:oam:Region:account-id:sink/sink-id  The ARN format of a link is
+	// The ARN of the resource that you're adding tags to. The ARN format of a sink is
+	// arn:aws:oam:Region:account-id:sink/sink-id The ARN format of a link is
 	// arn:aws:oam:Region:account-id:link/link-id For more information about ARN
 	// format, see CloudWatch Logs resources and operations (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html)
 	// .

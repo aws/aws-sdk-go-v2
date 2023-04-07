@@ -40,10 +40,9 @@ type ListSlotTypesInput struct {
 	// This member is required.
 	BotVersion *string
 
-	// The identifier of the language and locale of the slot types to list. The
-	// string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// The identifier of the language and locale of the slot types to list. The string
+	// must match one of the supported locales. For more information, see Supported
+	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
 	//
 	// This member is required.
 	LocaleId *string
@@ -59,8 +58,8 @@ type ListSlotTypesInput struct {
 	MaxResults *int32
 
 	// If the response from the ListSlotTypes operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response.
-	// Use that token in the nextToken  parameter to return the next page of results.
+	// specified in the maxResults parameter, a token is returned in the response. Use
+	// that token in the nextToken parameter to return the next page of results.
 	NextToken *string
 
 	// Determines the sort order for the response from the ListSlotTypes operation.
@@ -83,15 +82,15 @@ type ListSlotTypesOutput struct {
 	LocaleId *string
 
 	// A token that indicates whether there are more results to return in a response
-	// to the ListSlotTypes  operation. If the nextToken field is present, you send
-	// the contents as the nextToken  parameter of a ListSlotTypes operation request
-	// to get the next page of results.
+	// to the ListSlotTypes operation. If the nextToken field is present, you send the
+	// contents as the nextToken parameter of a ListSlotTypes operation request to get
+	// the next page of results.
 	NextToken *string
 
 	// Summary information for the slot types that meet the filter criteria specified
-	// in the request. The length of the list is specified in the maxResults
-	// parameter of the request. If there are more slot types available, the nextToken
-	// field contains a token to get the next page of results.
+	// in the request. The length of the list is specified in the maxResults parameter
+	// of the request. If there are more slot types available, the nextToken field
+	// contains a token to get the next page of results.
 	SlotTypeSummaries []types.SlotTypeSummary
 
 	// Metadata pertaining to the operation's result.
@@ -177,8 +176,8 @@ type ListSlotTypesPaginatorOptions struct {
 	// returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -19,8 +19,8 @@ import (
 // CloudTrail log entry when you call this action. Do not include sensitive
 // information in request parameters because it might be logged. For more
 // information, see Logging Secrets Manager events with CloudTrail (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html)
-// . Required permissions: secretsmanager:UntagResource. For more information,
-// see IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
+// . Required permissions: secretsmanager:UntagResource . For more information, see
+// IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
 // .
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
@@ -47,10 +47,10 @@ type UntagResourceInput struct {
 	// This member is required.
 	SecretId *string
 
-	// A list of tag key names to remove from the secret. You don't specify the
-	// value. Both the key and its associated value are removed. This parameter
-	// requires a JSON text string argument. For storing multiple values, we recommend
-	// that you use a JSON text string argument and specify key/value pairs. For more
+	// A list of tag key names to remove from the secret. You don't specify the value.
+	// Both the key and its associated value are removed. This parameter requires a
+	// JSON text string argument. For storing multiple values, we recommend that you
+	// use a JSON text string argument and specify key/value pairs. For more
 	// information, see Specifying parameter values for the Amazon Web Services CLI (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html)
 	// in the Amazon Web Services CLI User Guide.
 	//

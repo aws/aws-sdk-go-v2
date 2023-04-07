@@ -10,14 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns a set of tags to an Amazon Cognito user pool. A tag is a label that
-// you can use to categorize and manage user pools in different ways, such as by
+// Assigns a set of tags to an Amazon Cognito user pool. A tag is a label that you
+// can use to categorize and manage user pools in different ways, such as by
 // purpose, owner, environment, or other criteria. Each tag consists of a key and
 // value, both of which you define. A key is a general category for more specific
 // values. For example, if you have two versions of a user pool, one for testing
 // and another for production, you might assign an Environment tag key to both
-// user pools. The value of this key might be Test  for one user pool, and
-// Productionfor the other. Tags are useful for cost tracking and access control.
+// user pools. The value of this key might be Test for one user pool, and
+// Production for the other. Tags are useful for cost tracking and access control.
 // You can activate your tags so that they appear on the Billing and Cost
 // Management console, where you can track the costs associated with your user
 // pools. In an Identity and Access Management policy, you can constrain

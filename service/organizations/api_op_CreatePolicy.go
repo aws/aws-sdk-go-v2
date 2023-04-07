@@ -15,8 +15,8 @@ import (
 // organizational unit (OU), or an individual Amazon Web Services account. For more
 // information about policies and their use, see Managing Organization Policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html)
 // . If the request includes tags, then the requester must have the
-// organizations:TagResourcepermission. This operation can be called only from
-// the organization's management account.
+// organizations:TagResource permission. This operation can be called only from the
+// organization's management account.
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {
 		params = &CreatePolicyInput{}
@@ -34,8 +34,8 @@ func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, op
 
 type CreatePolicyInput struct {
 
-	// The policy text content to add to the new policy. The text that you supply
-	// must adhere to the rules of the policy type you specify in the Type  parameter.
+	// The policy text content to add to the new policy. The text that you supply must
+	// adhere to the rules of the policy type you specify in the Type parameter.
 	//
 	// This member is required.
 	Content *string
@@ -53,17 +53,17 @@ type CreatePolicyInput struct {
 	Name *string
 
 	// The type of policy to create. You can specify one of the following values:
-	//     - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-	//     - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
-	//     - SERVICE_CONTROL_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
-	//     - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	//   - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	//   - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	//   - SERVICE_CONTROL_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	//   - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// This member is required.
 	Type types.PolicyType
 
 	// A list of tags that you want to attach to the newly created policy. For each
 	// tag in the list, you must specify both a tag key and a value. You can set the
-	// value to an empty string, but you can't set it to null. For more information
+	// value to an empty string, but you can't set it to null . For more information
 	// about tagging, see Tagging Organizations resources (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
 	// in the Organizations User Guide. If any one of the tags is not valid or if you
 	// exceed the allowed number of tags for a policy, then the entire request fails

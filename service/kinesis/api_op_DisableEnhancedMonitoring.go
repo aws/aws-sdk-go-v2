@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables enhanced monitoring. When invoking this API, it is recommended you
-// use the StreamARN  input parameter rather than the StreamName  input parameter.
+// Disables enhanced monitoring. When invoking this API, it is recommended you use
+// the StreamARN input parameter rather than the StreamName input parameter.
 func (c *Client) DisableEnhancedMonitoring(ctx context.Context, params *DisableEnhancedMonitoringInput, optFns ...func(*Options)) (*DisableEnhancedMonitoringOutput, error) {
 	if params == nil {
 		params = &DisableEnhancedMonitoringInput{}
@@ -31,17 +31,17 @@ func (c *Client) DisableEnhancedMonitoring(ctx context.Context, params *DisableE
 // Represents the input for DisableEnhancedMonitoring .
 type DisableEnhancedMonitoringInput struct {
 
-	// List of shard-level metrics to disable. The following are the valid
-	// shard-level metrics. The value " ALL " disables every metric.
-	//     - IncomingBytes
-	//     - IncomingRecords
-	//     - OutgoingBytes
-	//     - OutgoingRecords
-	//     - WriteProvisionedThroughputExceeded
-	//     - ReadProvisionedThroughputExceeded
-	//     - IteratorAgeMilliseconds
-	//     - ALL
-	//  For more information, see Monitoring the Amazon Kinesis Data Streams Service
+	// List of shard-level metrics to disable. The following are the valid shard-level
+	// metrics. The value " ALL " disables every metric.
+	//   - IncomingBytes
+	//   - IncomingRecords
+	//   - OutgoingBytes
+	//   - OutgoingRecords
+	//   - WriteProvisionedThroughputExceeded
+	//   - ReadProvisionedThroughputExceeded
+	//   - IteratorAgeMilliseconds
+	//   - ALL
+	// For more information, see Monitoring the Amazon Kinesis Data Streams Service
 	// with Amazon CloudWatch (https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html)
 	// in the Amazon Kinesis Data Streams Developer Guide.
 	//
@@ -57,8 +57,8 @@ type DisableEnhancedMonitoringInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output for EnableEnhancedMonitoring  and
-// DisableEnhancedMonitoring .
+// Represents the output for EnableEnhancedMonitoring and DisableEnhancedMonitoring
+// .
 type DisableEnhancedMonitoringOutput struct {
 
 	// Represents the current state of the metrics that are in the enhanced state

@@ -66,12 +66,12 @@ type AvailabilityConfiguration struct {
 	// Displays the domain to which the provider applies.
 	DomainName *string
 
-	// If ProviderType  is EWS , then this field contains
+	// If ProviderType is EWS , then this field contains
 	// RedactedEwsAvailabilityProvider . Otherwise, it is not required.
 	EwsProvider *RedactedEwsAvailabilityProvider
 
-	// If ProviderType is LAMBDA  then this field contains LambdaAvailabilityProvider
-	// . Otherwise, it is not required.
+	// If ProviderType is LAMBDA then this field contains LambdaAvailabilityProvider .
+	// Otherwise, it is not required.
 	LambdaProvider *LambdaAvailabilityProvider
 
 	// Displays the provider type that applies to this domain.
@@ -139,15 +139,15 @@ type Domain struct {
 	// The fully qualified domain name.
 	DomainName *string
 
-	// The hosted zone ID for a domain hosted in Route 53. Required when configuring
-	// a domain hosted in Route 53.
+	// The hosted zone ID for a domain hosted in Route 53. Required when configuring a
+	// domain hosted in Route 53.
 	HostedZoneId *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes an EWS based availability provider. This is only used as input to
-// the service.
+// Describes an EWS based availability provider. This is only used as input to the
+// service.
 type EwsAvailabilityProvider struct {
 
 	// The endpoint of the remote EWS server.
@@ -384,7 +384,7 @@ type MobileDeviceAccessOverride struct {
 	// The device to which the override applies.
 	DeviceId *string
 
-	// The effect of the override, ALLOW  or DENY .
+	// The effect of the override, ALLOW or DENY .
 	Effect MobileDeviceAccessRuleEffect
 
 	// The WorkMail user to which the access override applies.
@@ -417,7 +417,7 @@ type MobileDeviceAccessRule struct {
 	// Device user agents that a rule will match.
 	DeviceUserAgents []string
 
-	// The effect of the rule when it matches. Allowed values are ALLOW  or DENY .
+	// The effect of the rule when it matches. Allowed values are ALLOW or DENY .
 	Effect MobileDeviceAccessRuleEffect
 
 	// The ID assigned to a mobile access rule.
@@ -494,8 +494,8 @@ type Permission struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an EWS based availability provider when returned from the service.
-// It does not contain the password of the endpoint.
+// Describes an EWS based availability provider when returned from the service. It
+// does not contain the password of the endpoint.
 type RedactedEwsAvailabilityProvider struct {
 
 	// The endpoint of the remote EWS server.

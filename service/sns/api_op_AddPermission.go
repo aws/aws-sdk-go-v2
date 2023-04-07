@@ -32,8 +32,8 @@ func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, 
 
 type AddPermissionInput struct {
 
-	// The Amazon Web Services account IDs of the users (principals) who will be
-	// given access to the specified actions. The users must have Amazon Web Services
+	// The Amazon Web Services account IDs of the users (principals) who will be given
+	// access to the specified actions. The users must have Amazon Web Services
 	// account, but do not need to be signed up for this service.
 	//
 	// This member is required.

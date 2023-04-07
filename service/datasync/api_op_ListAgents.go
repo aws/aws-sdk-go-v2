@@ -12,15 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DataSync agents that belong to an Amazon Web Services
-// account in the Amazon Web Services Region specified in the request. With
-// pagination, you can reduce the number of agents returned in a response. If you
-// get a truncated list of agents in a response, the response contains a marker
-// that you can specify in your next request to fetch the next page of agents.
-// ListAgentsis eventually consistent. This means the result of running the
-// operation might not reflect that you just created or deleted an agent. For
-// example, if you create an agent with CreateAgent (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateAgent.html)
-// and then immediately run ListAgents, that agent might not show up in the list
+// Returns a list of DataSync agents that belong to an Amazon Web Services account
+// in the Amazon Web Services Region specified in the request. With pagination, you
+// can reduce the number of agents returned in a response. If you get a truncated
+// list of agents in a response, the response contains a marker that you can
+// specify in your next request to fetch the next page of agents. ListAgents is
+// eventually consistent. This means the result of running the operation might not
+// reflect that you just created or deleted an agent. For example, if you create an
+// agent with CreateAgent (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateAgent.html)
+// and then immediately run ListAgents , that agent might not show up in the list
 // right away. In situations like this, you can always confirm whether an agent has
 // been created (or deleted) by using DescribeAgent (https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeAgent.html)
 // .
@@ -56,13 +56,13 @@ type ListAgentsInput struct {
 // ListAgentsResponse
 type ListAgentsOutput struct {
 
-	// A list of DataSync agents in your Amazon Web Services account in the Amazon
-	// Web Services Region specified in the request. The list is ordered by the agents'
+	// A list of DataSync agents in your Amazon Web Services account in the Amazon Web
+	// Services Region specified in the request. The list is ordered by the agents'
 	// Amazon Resource Names (ARNs).
 	Agents []types.AgentListEntry
 
-	// The opaque string that indicates the position to begin the next list of
-	// results in the response.
+	// The opaque string that indicates the position to begin the next list of results
+	// in the response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -144,8 +144,8 @@ type ListAgentsPaginatorOptions struct {
 	// default, a response shows a maximum of 100 agents.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

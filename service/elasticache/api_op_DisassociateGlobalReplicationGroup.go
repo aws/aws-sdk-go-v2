@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove a secondary cluster from the Global datastore using the Global
-// datastore name. The secondary cluster will no longer receive updates from the
-// primary cluster, but will remain as a standalone cluster in that Amazon region.
+// Remove a secondary cluster from the Global datastore using the Global datastore
+// name. The secondary cluster will no longer receive updates from the primary
+// cluster, but will remain as a standalone cluster in that Amazon region.
 func (c *Client) DisassociateGlobalReplicationGroup(ctx context.Context, params *DisassociateGlobalReplicationGroupInput, optFns ...func(*Options)) (*DisassociateGlobalReplicationGroupOutput, error) {
 	if params == nil {
 		params = &DisassociateGlobalReplicationGroupInput{}
@@ -56,7 +56,8 @@ type DisassociateGlobalReplicationGroupOutput struct {
 	// cluster that resides in a different Amazon region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
 	// secondary cluster.
-	//     - The GlobalReplicationGroupIdSuffix represents the name of the Global datastore, which is what you use to associate a secondary cluster.
+	//   - The GlobalReplicationGroupIdSuffix represents the name of the Global
+	//   datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

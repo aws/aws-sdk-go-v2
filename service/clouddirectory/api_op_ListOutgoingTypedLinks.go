@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of all the outgoing TypedLinkSpecifier information
-// for an object. It also supports filtering by typed link facet and identity
+// Returns a paginated list of all the outgoing TypedLinkSpecifier information for
+// an object. It also supports filtering by typed link facet and identity
 // attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
 // .
 func (c *Client) ListOutgoingTypedLinks(ctx context.Context, params *ListOutgoingTypedLinksInput, optFns ...func(*Options)) (*ListOutgoingTypedLinksOutput, error) {

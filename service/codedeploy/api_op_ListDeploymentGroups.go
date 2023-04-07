@@ -28,7 +28,7 @@ func (c *Client) ListDeploymentGroups(ctx context.Context, params *ListDeploymen
 	return out, nil
 }
 
-// Represents the input of a ListDeploymentGroups  operation.
+// Represents the input of a ListDeploymentGroups operation.
 type ListDeploymentGroupsInput struct {
 
 	// The name of an CodeDeploy application associated with the IAM user or Amazon
@@ -37,14 +37,14 @@ type ListDeploymentGroupsInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// An identifier returned from the previous list deployment groups call. It can
-	// be used to return the next set of deployment groups in the list.
+	// An identifier returned from the previous list deployment groups call. It can be
+	// used to return the next set of deployment groups in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListDeploymentGroups  operation.
+// Represents the output of a ListDeploymentGroups operation.
 type ListDeploymentGroupsOutput struct {
 
 	// The application name.
@@ -138,8 +138,8 @@ var _ ListDeploymentGroupsAPIClient = (*Client)(nil)
 // ListDeploymentGroupsPaginatorOptions is the paginator options for
 // ListDeploymentGroups
 type ListDeploymentGroupsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

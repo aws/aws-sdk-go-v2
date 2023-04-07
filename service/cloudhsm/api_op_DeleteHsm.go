@@ -34,7 +34,7 @@ func (c *Client) DeleteHsm(ctx context.Context, params *DeleteHsmInput, optFns .
 	return out, nil
 }
 
-// Contains the inputs for the DeleteHsm  operation.
+// Contains the inputs for the DeleteHsm operation.
 type DeleteHsmInput struct {
 
 	// The ARN of the HSM to delete.
@@ -45,7 +45,7 @@ type DeleteHsmInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the output of the DeleteHsm  operation.
+// Contains the output of the DeleteHsm operation.
 type DeleteHsmOutput struct {
 
 	// The status of the operation.

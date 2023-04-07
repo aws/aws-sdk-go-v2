@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a route from a Client VPN endpoint. You can only delete routes that
-// you manually added using the CreateClientVpnRoute action. You cannot delete
-// routes that were automatically added when associating a subnet. To remove routes
-// that have been automatically added, disassociate the target subnet from the
-// Client VPN endpoint.
+// Deletes a route from a Client VPN endpoint. You can only delete routes that you
+// manually added using the CreateClientVpnRoute action. You cannot delete routes
+// that were automatically added when associating a subnet. To remove routes that
+// have been automatically added, disassociate the target subnet from the Client
+// VPN endpoint.
 func (c *Client) DeleteClientVpnRoute(ctx context.Context, params *DeleteClientVpnRouteInput, optFns ...func(*Options)) (*DeleteClientVpnRouteOutput, error) {
 	if params == nil {
 		params = &DeleteClientVpnRouteInput{}

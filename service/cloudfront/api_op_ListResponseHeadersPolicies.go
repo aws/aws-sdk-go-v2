@@ -17,7 +17,7 @@ import (
 // the maximum number of items to receive in the response. If the total number of
 // items in the list exceeds the maximum that you specify, or the default maximum,
 // the response is paginated. To get the next page of items, send a subsequent
-// request that specifies the NextMarker  value from the current response as the
+// request that specifies the NextMarker value from the current response as the
 // Marker value in the subsequent request.
 func (c *Client) ListResponseHeadersPolicies(ctx context.Context, params *ListResponseHeadersPoliciesInput, optFns ...func(*Options)) (*ListResponseHeadersPoliciesOutput, error) {
 	if params == nil {
@@ -39,7 +39,7 @@ type ListResponseHeadersPoliciesInput struct {
 	// Use this field when paginating results to indicate where to begin in your list
 	// of response headers policies. The response includes response headers policies in
 	// the list that occur after the marker. To get the next page of the list, set this
-	// field's value to the value of NextMarker  from the current page's response.
+	// field's value to the value of NextMarker from the current page's response.
 	Marker *string
 
 	// The maximum number of response headers policies that you want to get in the
@@ -48,8 +48,9 @@ type ListResponseHeadersPoliciesInput struct {
 
 	// A filter to get only the specified kind of response headers policies. Valid
 	// values are:
-	//     - managed – Gets only the managed policies created by Amazon Web Services.
-	//     - custom – Gets only the custom policies created in your Amazon Web Services account.
+	//   - managed – Gets only the managed policies created by Amazon Web Services.
+	//   - custom – Gets only the custom policies created in your Amazon Web Services
+	//   account.
 	Type types.ResponseHeadersPolicyType
 
 	noSmithyDocumentSerde

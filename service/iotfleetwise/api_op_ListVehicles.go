@@ -35,9 +35,9 @@ type ListVehiclesInput struct {
 	// The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
-	// The Amazon Resource Name (ARN) of a vehicle model (model manifest). You can
-	// use this optional parameter to list only the vehicles created from a certain
-	// vehicle model.
+	// The Amazon Resource Name (ARN) of a vehicle model (model manifest). You can use
+	// this optional parameter to list only the vehicles created from a certain vehicle
+	// model.
 	ModelManifestArn *string
 
 	// A pagination token for the next set of results. If the results of a search are
@@ -137,8 +137,8 @@ type ListVehiclesPaginatorOptions struct {
 	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

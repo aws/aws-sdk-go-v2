@@ -242,8 +242,8 @@ func (e *OperationTimeoutException) ErrorCode() string {
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The engine does not support filtering data based on the enforced permissions.
-// For example, if you call the GetTemporaryGlueTableCredentials  operation with
-// SupportedPermissionType equal to ColumnPermission, but cell-level permissions
+// For example, if you call the GetTemporaryGlueTableCredentials operation with
+// SupportedPermissionType equal to ColumnPermission , but cell-level permissions
 // exist on the table, this exception is thrown.
 type PermissionTypeMismatchException struct {
 	Message *string

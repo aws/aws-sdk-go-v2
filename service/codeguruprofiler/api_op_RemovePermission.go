@@ -13,7 +13,7 @@ import (
 
 // Removes permissions from a profiling group's resource-based policy that are
 // provided using an action group. The one supported action group that can be
-// removed is agentPermission  which grants ConfigureAgent  and PostAgent
+// removed is agentPermission which grants ConfigureAgent and PostAgent
 // permissions. For more information, see Resource-based policies in CodeGuru
 // Profiler (https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html)
 // in the Amazon CodeGuru Profiler User Guide, ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
@@ -39,8 +39,7 @@ type RemovePermissionInput struct {
 
 	// Specifies an action group that contains the permissions to remove from a
 	// profiling group's resource-based policy. One action group is supported,
-	// agentPermissions , which grants ConfigureAgent  and PostAgentProfile
-	// permissions.
+	// agentPermissions , which grants ConfigureAgent and PostAgentProfile permissions.
 	//
 	// This member is required.
 	ActionGroup types.ActionGroup
@@ -70,7 +69,7 @@ type RemovePermissionOutput struct {
 
 	// A universally unique identifier (UUID) for the revision of the resource-based
 	// policy after the specified permissions were removed. The updated JSON-formatted
-	// policy is in the policy  element of the response.
+	// policy is in the policy element of the response.
 	//
 	// This member is required.
 	RevisionId *string

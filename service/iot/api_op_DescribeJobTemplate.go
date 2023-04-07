@@ -55,8 +55,8 @@ type DescribeJobTemplateOutput struct {
 	// An S3 link to the job document.
 	DocumentSource *string
 
-	// The configuration that determines how many retries are allowed for each
-	// failure type for a job.
+	// The configuration that determines how many retries are allowed for each failure
+	// type for a job.
 	JobExecutionsRetryConfig *types.JobExecutionsRetryConfig
 
 	// Allows you to create a staged rollout of a job.
@@ -68,17 +68,17 @@ type DescribeJobTemplateOutput struct {
 	// The unique identifier of the job template.
 	JobTemplateId *string
 
-	// Allows you to configure an optional maintenance window for the rollout of a
-	// job document to all devices in the target group for a job.
+	// Allows you to configure an optional maintenance window for the rollout of a job
+	// document to all devices in the target group for a job.
 	MaintenanceWindows []types.MaintenanceWindow
 
 	// Configuration for pre-signed S3 URLs.
 	PresignedUrlConfig *types.PresignedUrlConfig
 
 	// Specifies the amount of time each device has to finish its execution of the
-	// job. A timer is started when the job execution status is set to IN_PROGRESS.
-	// If the job execution status is not set to another terminal state before the
-	// timer expires, it will be automatically set to TIMED_OUT .
+	// job. A timer is started when the job execution status is set to IN_PROGRESS . If
+	// the job execution status is not set to another terminal state before the timer
+	// expires, it will be automatically set to TIMED_OUT .
 	TimeoutConfig *types.TimeoutConfig
 
 	// Metadata pertaining to the operation's result.

@@ -26,14 +26,14 @@ import (
 //   - Key=Stack,Value=Pre-Production
 //   - Key=Stack,Value=Test
 //
-// Most resources can have a maximum of 50 tags.
-// Automations can have a maximum of 5 tags. We recommend that you devise a set of
-// tag keys that meets your needs for each resource type. Using a consistent set of
-// tag keys makes it easier for you to manage your resources. You can search and
-// filter the resources based on the tags you add. Tags don't have any semantic
-// meaning to and are interpreted strictly as a string of characters. For more
-// information about using tags with Amazon Elastic Compute Cloud (Amazon EC2)
-// instances, see Tagging your Amazon EC2 resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
+// Most resources can have a maximum of 50 tags. Automations can have a maximum of
+// 5 tags. We recommend that you devise a set of tag keys that meets your needs for
+// each resource type. Using a consistent set of tag keys makes it easier for you
+// to manage your resources. You can search and filter the resources based on the
+// tags you add. Tags don't have any semantic meaning to and are interpreted
+// strictly as a string of characters. For more information about using tags with
+// Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tagging your Amazon
+// EC2 resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
 // in the Amazon EC2 User Guide.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
@@ -54,14 +54,14 @@ type AddTagsToResourceInput struct {
 
 	// The resource ID you want to tag. Use the ID of the resource. Here are some
 	// examples: MaintenanceWindow : mw-012345abcde PatchBaseline : pb-012345abcde
-	// Automation : example-c160-4567-8519-012345abcde OpsMetadata  object: ResourceID
+	// Automation : example-c160-4567-8519-012345abcde OpsMetadata object: ResourceID
 	// for tagging is created from the Amazon Resource Name (ARN) for the object.
-	// Specifically, ResourceID  is created from the strings that come after the word
+	// Specifically, ResourceID is created from the strings that come after the word
 	// opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of
 	// arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a
-	// ResourceID of either aws/ssm/MyGroup/appmanager  or /aws/ssm/MyGroup/appmanager
-	// . For the Document  and Parameter  values, use the name of the resource.
-	// ManagedInstance : mi-012345abcde  The ManagedInstance type for this API
+	// ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager .
+	// For the Document and Parameter values, use the name of the resource.
+	// ManagedInstance : mi-012345abcde The ManagedInstance type for this API
 	// operation is only for on-premises managed nodes. You must specify the name of
 	// the managed node in the following format: mi-ID_number . For example,
 	// mi-1a2b3c4d5e6f .

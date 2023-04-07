@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the default mail domain for an organization. The default mail domain
-// is used by the WorkMail AWS Console to suggest an email address when enabling a
+// Updates the default mail domain for an organization. The default mail domain is
+// used by the WorkMail AWS Console to suggest an email address when enabling a
 // mail user. You can only have one default domain.
 func (c *Client) UpdateDefaultMailDomain(ctx context.Context, params *UpdateDefaultMailDomainInput, optFns ...func(*Options)) (*UpdateDefaultMailDomainOutput, error) {
 	if params == nil {

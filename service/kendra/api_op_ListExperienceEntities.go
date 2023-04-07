@@ -141,8 +141,8 @@ var _ ListExperienceEntitiesAPIClient = (*Client)(nil)
 // ListExperienceEntitiesPaginatorOptions is the paginator options for
 // ListExperienceEntities
 type ListExperienceEntitiesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -155,8 +155,7 @@ type ListExperienceEntitiesPaginator struct {
 	firstPage bool
 }
 
-// NewListExperienceEntitiesPaginator returns a new
-// ListExperienceEntitiesPaginator
+// NewListExperienceEntitiesPaginator returns a new ListExperienceEntitiesPaginator
 func NewListExperienceEntitiesPaginator(client ListExperienceEntitiesAPIClient, params *ListExperienceEntitiesInput, optFns ...func(*ListExperienceEntitiesPaginatorOptions)) *ListExperienceEntitiesPaginator {
 	if params == nil {
 		params = &ListExperienceEntitiesInput{}

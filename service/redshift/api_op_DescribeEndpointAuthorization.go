@@ -31,8 +31,7 @@ func (c *Client) DescribeEndpointAuthorization(ctx context.Context, params *Desc
 type DescribeEndpointAuthorizationInput struct {
 
 	// The Amazon Web Services account ID of either the cluster owner (grantor) or
-	// grantee. If Grantee  parameter is true, then the Account value is of the
-	// grantor.
+	// grantee. If Grantee parameter is true, then the Account value is of the grantor.
 	Account *string
 
 	// The cluster identifier of the cluster to access.
@@ -44,14 +43,14 @@ type DescribeEndpointAuthorizationInput struct {
 	Grantee *bool
 
 	// An optional pagination token provided by a previous
-	// DescribeEndpointAuthorizationrequest. If this parameter is specified, the
+	// DescribeEndpointAuthorization request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
-	// the MaxRecords  parameter.
+	// the MaxRecords parameter.
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords  value, a pagination token called a Marker
-	// is included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a Marker is
+	// included in the response so that the remaining results can be retrieved.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -63,9 +62,9 @@ type DescribeEndpointAuthorizationOutput struct {
 	EndpointAuthorizationList []types.EndpointAuthorization
 
 	// An optional pagination token provided by a previous
-	// DescribeEndpointAuthorizationrequest. If this parameter is specified, the
+	// DescribeEndpointAuthorization request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
-	// the MaxRecords  parameter.
+	// the MaxRecords parameter.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,13 +144,13 @@ var _ DescribeEndpointAuthorizationAPIClient = (*Client)(nil)
 // DescribeEndpointAuthorizationPaginatorOptions is the paginator options for
 // DescribeEndpointAuthorization
 type DescribeEndpointAuthorizationPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords  value, a pagination token called a Marker
-	// is included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a Marker is
+	// included in the response so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

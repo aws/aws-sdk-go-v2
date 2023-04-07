@@ -19,8 +19,8 @@ import (
 //   - Log groups - Specify with AWS::Logs::LogGroup
 //   - Traces - Specify with AWS::XRay::Trace
 //
-// See the examples in this section
-// to see how to specify permitted source accounts and data types.
+// See the examples in this section to see how to specify permitted source
+// accounts and data types.
 func (c *Client) PutSinkPolicy(ctx context.Context, params *PutSinkPolicyInput, optFns ...func(*Options)) (*PutSinkPolicyOutput, error) {
 	if params == nil {
 		params = &PutSinkPolicyInput{}
@@ -62,8 +62,7 @@ type PutSinkPolicyOutput struct {
 	// The ARN of the sink.
 	SinkArn *string
 
-	// The random ID string that Amazon Web Services generated as part of the sink
-	// ARN.
+	// The random ID string that Amazon Web Services generated as part of the sink ARN.
 	SinkId *string
 
 	// Metadata pertaining to the operation's result.

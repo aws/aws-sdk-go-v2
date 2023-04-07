@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes the stream processor identified by Name . You assign the value for Name
-// when you create the stream processor with CreateStreamProcessor. You might not
+// when you create the stream processor with CreateStreamProcessor . You might not
 // be able to use the same name for a stream processor for a few seconds after
 // calling DeleteStreamProcessor .
 func (c *Client) DeleteStreamProcessor(ctx context.Context, params *DeleteStreamProcessorInput, optFns ...func(*Options)) (*DeleteStreamProcessorOutput, error) {

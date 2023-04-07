@@ -15,7 +15,7 @@ type BatchResultErrorEntry struct {
 	// This member is required.
 	Code *string
 
-	// The Id  of an entry in a batch request
+	// The Id of an entry in a batch request
 	//
 	// This member is required.
 	Id *string
@@ -37,7 +37,7 @@ type Endpoint struct {
 	// Attributes for endpoint.
 	Attributes map[string]string
 
-	// The EndpointArn  for mobile app and device.
+	// The EndpointArn for mobile app and device.
 	EndpointArn *string
 
 	noSmithyDocumentSerde
@@ -62,8 +62,8 @@ type MessageAttributeValue struct {
 	// This member is required.
 	DataType *string
 
-	// Binary type attributes can store any binary data, for example, compressed
-	// data, encrypted data, or images.
+	// Binary type attributes can store any binary data, for example, compressed data,
+	// encrypted data, or images.
 	BinaryValue []byte
 
 	// Strings are Unicode with UTF8 binary encoding. For a list of code values, see
@@ -114,8 +114,8 @@ type PlatformApplication struct {
 // identifies a message within the batch.
 type PublishBatchRequestEntry struct {
 
-	// An identifier for the message in this batch. The Ids of a batch request must
-	// be unique within a request. This identifier can have up to 80 characters. The
+	// An identifier for the message in this batch. The Ids of a batch request must be
+	// unique within a request. This identifier can have up to 80 characters. The
 	// following characters are accepted: alphanumeric characters, hyphens(-), and
 	// underscores (_).
 	//
@@ -127,24 +127,33 @@ type PublishBatchRequestEntry struct {
 	// This member is required.
 	Message *string
 
-	// Each message attribute consists of a Name , Type , and Value. For more
+	// Each message attribute consists of a Name , Type , and Value . For more
 	// information, see Amazon SNS message attributes (https://docs.aws.amazon.com/sns/latest/dg/sns-message-attributes.html)
 	// in the Amazon SNS Developer Guide.
 	MessageAttributes map[string]MessageAttributeValue
 
-	// This parameter applies only to FIFO (first-in-first-out) topics. The token
-	// used for deduplication of messages within a 5-minute minimum deduplication
-	// interval. If a message with a particular MessageDeduplicationId is sent
-	// successfully, subsequent messages with the same MessageDeduplicationId are
-	// accepted successfully but aren't delivered.
-	//     - Every message must have a unique MessageDeduplicationId .
-	//         - You may provide a MessageDeduplicationId explicitly.
-	//         - If you aren't able to provide a MessageDeduplicationId and you enable ContentBasedDeduplication for your topic, Amazon SNS uses a SHA-256 hash to generate the MessageDeduplicationId using the body of the message (but not the attributes of the message).
-	//         - If you don't provide a MessageDeduplicationId and the topic doesn't have ContentBasedDeduplication set, the action fails with an error.
-	//         - If the topic has a ContentBasedDeduplication set, your MessageDeduplicationId overrides the generated one.
-	//     - When ContentBasedDeduplication is in effect, messages with identical content sent within the deduplication interval are treated as duplicates and only one copy of the message is delivered.
-	//     - If you send one message with ContentBasedDeduplication enabled, and then another message with a MessageDeduplicationId that is the same as the one generated for the first MessageDeduplicationId , the two messages are treated as duplicates and only one copy of the message is delivered.
-	//
+	// This parameter applies only to FIFO (first-in-first-out) topics. The token used
+	// for deduplication of messages within a 5-minute minimum deduplication interval.
+	// If a message with a particular MessageDeduplicationId is sent successfully,
+	// subsequent messages with the same MessageDeduplicationId are accepted
+	// successfully but aren't delivered.
+	//   - Every message must have a unique MessageDeduplicationId .
+	//   - You may provide a MessageDeduplicationId explicitly.
+	//   - If you aren't able to provide a MessageDeduplicationId and you enable
+	//   ContentBasedDeduplication for your topic, Amazon SNS uses a SHA-256 hash to
+	//   generate the MessageDeduplicationId using the body of the message (but not the
+	//   attributes of the message).
+	//   - If you don't provide a MessageDeduplicationId and the topic doesn't have
+	//   ContentBasedDeduplication set, the action fails with an error.
+	//   - If the topic has a ContentBasedDeduplication set, your
+	//   MessageDeduplicationId overrides the generated one.
+	//   - When ContentBasedDeduplication is in effect, messages with identical content
+	//   sent within the deduplication interval are treated as duplicates and only one
+	//   copy of the message is delivered.
+	//   - If you send one message with ContentBasedDeduplication enabled, and then
+	//   another message with a MessageDeduplicationId that is the same as the one
+	//   generated for the first MessageDeduplicationId , the two messages are treated
+	//   as duplicates and only one copy of the message is delivered.
 	// The MessageDeduplicationId is available to the consumer of the message (this
 	// can be useful for troubleshooting delivery issues). If a message is sent
 	// successfully but the acknowledgement is lost and the message is resent with the
@@ -152,7 +161,7 @@ type PublishBatchRequestEntry struct {
 	// detect duplicate messages. Amazon SNS continues to keep track of the message
 	// deduplication ID even after the message is received and deleted. The length of
 	// MessageDeduplicationId is 128 characters. MessageDeduplicationId can contain
-	// alphanumeric characters (a-z, A-Z, 0-9)  and punctuation
+	// alphanumeric characters (a-z, A-Z, 0-9) and punctuation
 	// (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) .
 	MessageDeduplicationId *string
 
@@ -163,21 +172,20 @@ type PublishBatchRequestEntry struct {
 	// interleave multiple ordered streams within a single topic, use MessageGroupId
 	// values (for example, session data for multiple users). In this scenario,
 	// multiple consumers can process the topic, but the session data of each user is
-	// processed in a FIFO fashion. You must associate a non-empty MessageGroupId
-	// with a message. If you don't provide a MessageGroupId, the action fails. The
-	// length of MessageGroupId  is 128 characters. MessageGroupId can contain
-	// alphanumeric characters (a-z, A-Z, 0-9)  and punctuation
-	// (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) . MessageGroupId is required for FIFO
-	// topics. You can't use it for standard topics.
+	// processed in a FIFO fashion. You must associate a non-empty MessageGroupId with
+	// a message. If you don't provide a MessageGroupId , the action fails. The length
+	// of MessageGroupId is 128 characters. MessageGroupId can contain alphanumeric
+	// characters (a-z, A-Z, 0-9) and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) .
+	// MessageGroupId is required for FIFO topics. You can't use it for standard topics.
 	MessageGroupId *string
 
-	// Set MessageStructure  to json if you want to send a different message for each
+	// Set MessageStructure to json if you want to send a different message for each
 	// protocol. For example, using one publish action, you can send a short message to
 	// your SMS subscribers and a longer message to your email subscribers. If you set
-	// MessageStructure to json , the value of the Message  parameter must:
-	//     - be a syntactically valid JSON object; and
-	//     - contain at least a top-level JSON key of "default" with a value that is a string.
-	//
+	// MessageStructure to json , the value of the Message parameter must:
+	//   - be a syntactically valid JSON object; and
+	//   - contain at least a top-level JSON key of "default" with a value that is a
+	//   string.
 	// You can define other top-level keys that define the message you want to send to
 	// a specific transport protocol (e.g. http).
 	MessageStructure *string
@@ -191,7 +199,7 @@ type PublishBatchRequestEntry struct {
 // Encloses data related to a successful message in a batch request for topic.
 type PublishBatchResultEntry struct {
 
-	// The Id  of an entry in a batch request.
+	// The Id of an entry in a batch request.
 	Id *string
 
 	// An identifier for the message.

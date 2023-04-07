@@ -12,15 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a continuous deployment for a target, which is a Greengrass core
-// device or group of core devices. When you add a new core device to a group of
-// core devices that has a deployment, IoT Greengrass deploys that group's
-// deployment to the new device. You can define one deployment for each target.
-// When you create a new deployment for a target that has an existing deployment,
-// you replace the previous deployment. IoT Greengrass applies the new deployment
-// to the target devices. Every deployment has a revision number that indicates how
-// many deployment revisions you define for a target. Use this operation to create
-// a new revision of an existing deployment. For more information, see the Create
+// Creates a continuous deployment for a target, which is a Greengrass core device
+// or group of core devices. When you add a new core device to a group of core
+// devices that has a deployment, IoT Greengrass deploys that group's deployment to
+// the new device. You can define one deployment for each target. When you create a
+// new deployment for a target that has an existing deployment, you replace the
+// previous deployment. IoT Greengrass applies the new deployment to the target
+// devices. Every deployment has a revision number that indicates how many
+// deployment revisions you define for a target. Use this operation to create a new
+// revision of an existing deployment. For more information, see the Create
 // deployments (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
 // in the IoT Greengrass V2 Developer Guide.
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
@@ -56,8 +56,8 @@ type CreateDeploymentInput struct {
 	// for idempotent requests for up to 8 hours.
 	ClientToken *string
 
-	// The components to deploy. This is a dictionary, where each key is the name of
-	// a component, and each key's value is the version and configuration to deploy for
+	// The components to deploy. This is a dictionary, where each key is the name of a
+	// component, and each key's value is the version and configuration to deploy for
 	// that component.
 	Components map[string]types.ComponentDeploymentSpecification
 

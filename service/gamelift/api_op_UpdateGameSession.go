@@ -13,7 +13,7 @@ import (
 
 // Updates the mutable properties of a game session. To update a game session,
 // specify the game session ID and the values you want to change. If successful,
-// the updated GameSession  object is returned. All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// the updated GameSession object is returned. All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateGameSession(ctx context.Context, params *UpdateGameSessionInput, optFns ...func(*Options)) (*UpdateGameSessionOutput, error) {
 	if params == nil {
 		params = &UpdateGameSessionInput{}
@@ -48,8 +48,10 @@ type UpdateGameSessionInput struct {
 	PlayerSessionCreationPolicy types.PlayerSessionCreationPolicy
 
 	// Game session protection policy to apply to this game session only.
-	//     - NoProtection -- The game session can be terminated during a scale-down event.
-	//     - FullProtection -- If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.
+	//   - NoProtection -- The game session can be terminated during a scale-down
+	//   event.
+	//   - FullProtection -- If the game session is in an ACTIVE status, it cannot be
+	//   terminated during a scale-down event.
 	ProtectionPolicy types.ProtectionPolicy
 
 	noSmithyDocumentSerde

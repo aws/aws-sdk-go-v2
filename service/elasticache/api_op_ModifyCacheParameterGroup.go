@@ -29,7 +29,7 @@ func (c *Client) ModifyCacheParameterGroup(ctx context.Context, params *ModifyCa
 	return out, nil
 }
 
-// Represents the input of a ModifyCacheParameterGroup  operation.
+// Represents the input of a ModifyCacheParameterGroup operation.
 type ModifyCacheParameterGroupInput struct {
 
 	// The name of the cache parameter group to modify.

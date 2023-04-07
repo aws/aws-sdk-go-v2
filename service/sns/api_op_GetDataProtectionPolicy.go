@@ -41,7 +41,7 @@ type GetDataProtectionPolicyInput struct {
 
 type GetDataProtectionPolicyOutput struct {
 
-	// Retrieves the DataProtectionPolicy  in JSON string format.
+	// Retrieves the DataProtectionPolicy in JSON string format.
 	DataProtectionPolicy *string
 
 	// Metadata pertaining to the operation's result.

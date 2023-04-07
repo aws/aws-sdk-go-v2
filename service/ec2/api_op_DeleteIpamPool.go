@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an IPAM pool. You cannot delete an IPAM pool if there are allocations
-// in it or CIDRs provisioned to it. To release allocations, see
+// Delete an IPAM pool. You cannot delete an IPAM pool if there are allocations in
+// it or CIDRs provisioned to it. To release allocations, see
 // ReleaseIpamPoolAllocation (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html)
 // . To deprovision pool CIDRs, see DeprovisionIpamPoolCidr (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeprovisionIpamPoolCidr.html)
 // . For more information, see Delete a pool (https://docs.aws.amazon.com/vpc/latest/ipam/delete-pool-ipam.html)

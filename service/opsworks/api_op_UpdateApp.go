@@ -38,7 +38,7 @@ type UpdateAppInput struct {
 	// This member is required.
 	AppId *string
 
-	// A Source  object that specifies the app repository.
+	// A Source object that specifies the app repository.
 	AppSource *types.Source
 
 	// One or more user-defined key/value pairs to be added to the stack attributes.
@@ -50,8 +50,8 @@ type UpdateAppInput struct {
 	// A description of the app.
 	Description *string
 
-	// The app's virtual host settings, with multiple domains separated by commas.
-	// For example: 'www.example.com, example.com'
+	// The app's virtual host settings, with multiple domains separated by commas. For
+	// example: 'www.example.com, example.com'
 	Domains []string
 
 	// Whether SSL is enabled for the app.
@@ -73,7 +73,7 @@ type UpdateAppInput struct {
 	// The app name.
 	Name *string
 
-	// An SslConfiguration  object with the SSL configuration.
+	// An SslConfiguration object with the SSL configuration.
 	SslConfiguration *types.SslConfiguration
 
 	// The app type.

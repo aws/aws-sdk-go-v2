@@ -51,7 +51,7 @@ type CreatePatchBaselineInput struct {
 	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
 
 	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the managed nodes. The default value is false.
+	// that should be applied to the managed nodes. The default value is false .
 	// Applies to Linux managed nodes only.
 	ApprovedPatchesEnableNonSecurity *bool
 
@@ -74,10 +74,17 @@ type CreatePatchBaselineInput struct {
 	// in the Amazon Web Services Systems Manager User Guide.
 	RejectedPatches []string
 
-	// The action for Patch Manager to take on patches included in the
-	// RejectedPackages list.
-	//     - ALLOW_AS_DEPENDENCY : A package in the Rejected patches list is installed only if it is a dependency of another package. It is considered compliant with the patch baseline, and its status is reported as InstalledOther . This is the default action if no option is specified.
-	//     - BLOCK : Packages in the RejectedPatches list, and packages that include them as dependencies, aren't installed under any circumstances. If a package was installed before it was added to the Rejected patches list, it is considered non-compliant with the patch baseline, and its status is reported as InstalledRejected .
+	// The action for Patch Manager to take on patches included in the RejectedPackages
+	// list.
+	//   - ALLOW_AS_DEPENDENCY : A package in the Rejected patches list is installed
+	//   only if it is a dependency of another package. It is considered compliant with
+	//   the patch baseline, and its status is reported as InstalledOther . This is the
+	//   default action if no option is specified.
+	//   - BLOCK : Packages in the RejectedPatches list, and packages that include them
+	//   as dependencies, aren't installed under any circumstances. If a package was
+	//   installed before it was added to the Rejected patches list, it is considered
+	//   non-compliant with the patch baseline, and its status is reported as
+	//   InstalledRejected .
 	RejectedPatchesAction types.PatchAction
 
 	// Information about the patches to use to update the managed nodes, including
@@ -90,10 +97,9 @@ type CreatePatchBaselineInput struct {
 	// example, you might want to tag a patch baseline to identify the severity level
 	// of patches it specifies and the operating system family it applies to. In this
 	// case, you could specify the following key-value pairs:
-	//     - Key=PatchSeverity,Value=Critical
-	//     - Key=OS,Value=Windows
-	//  To add tags to an existing patch baseline, use the AddTagsToResource
-	// operation.
+	//   - Key=PatchSeverity,Value=Critical
+	//   - Key=OS,Value=Windows
+	// To add tags to an existing patch baseline, use the AddTagsToResource operation.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

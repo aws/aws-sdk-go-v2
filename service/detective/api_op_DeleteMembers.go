@@ -19,10 +19,10 @@ import (
 // another invitation. For organization accounts in the organization behavior
 // graph, the Detective administrator account can always enable the organization
 // account again. Organization accounts that are not enabled as member accounts are
-// not included in the ListMembers results for the organization behavior graph.
-// An administrator account cannot use DeleteMembers to remove their own account
-// from the behavior graph. To disable a behavior graph, the administrator account
-// uses the DeleteGraph  API method.
+// not included in the ListMembers results for the organization behavior graph. An
+// administrator account cannot use DeleteMembers to remove their own account from
+// the behavior graph. To disable a behavior graph, the administrator account uses
+// the DeleteGraph API method.
 func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, optFns ...func(*Options)) (*DeleteMembersOutput, error) {
 	if params == nil {
 		params = &DeleteMembersInput{}

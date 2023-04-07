@@ -28,10 +28,9 @@ import (
 //   - VerificationState
 //   - Workflow
 //
-// You can configure IAM policies to restrict access to fields and
-// field values. For example, you might not want member accounts to be able to
-// suppress findings or change the finding severity. See Configuring access to
-// BatchUpdateFindings (https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access)
+// You can configure IAM policies to restrict access to fields and field values.
+// For example, you might not want member accounts to be able to suppress findings
+// or change the finding severity. See Configuring access to BatchUpdateFindings (https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access)
 // in the Security Hub User Guide.
 func (c *Client) BatchUpdateFindings(ctx context.Context, params *BatchUpdateFindingsInput, optFns ...func(*Options)) (*BatchUpdateFindingsOutput, error) {
 	if params == nil {
@@ -50,8 +49,8 @@ func (c *Client) BatchUpdateFindings(ctx context.Context, params *BatchUpdateFin
 
 type BatchUpdateFindingsInput struct {
 
-	// The list of findings to update. BatchUpdateFindings can be used to update up
-	// to 100 findings at a time. For each finding, the list provides the finding
+	// The list of findings to update. BatchUpdateFindings can be used to update up to
+	// 100 findings at a time. For each finding, the list provides the finding
 	// identifier and the ARN of the finding provider.
 	//
 	// This member is required.
@@ -81,11 +80,11 @@ type BatchUpdateFindingsInput struct {
 
 	// One or more finding types in the format of namespace/category/classifier that
 	// classify a finding. Valid namespace values are as follows.
-	//     - Software and Configuration Checks
-	//     - TTPs
-	//     - Effects
-	//     - Unusual Behaviors
-	//     - Sensitive Data Identifications
+	//   - Software and Configuration Checks
+	//   - TTPs
+	//   - Effects
+	//   - Unusual Behaviors
+	//   - Sensitive Data Identifications
 	Types []string
 
 	// A list of name/value string pairs associated with the finding. These are
@@ -94,10 +93,11 @@ type BatchUpdateFindingsInput struct {
 
 	// Indicates the veracity of a finding. The available values for VerificationState
 	// are as follows.
-	//     - UNKNOWN – The default disposition of a security finding
-	//     - TRUE_POSITIVE – The security finding is confirmed
-	//     - FALSE_POSITIVE – The security finding was determined to be a false alarm
-	//     - BENIGN_POSITIVE – A special case of TRUE_POSITIVE where the finding doesn't pose any threat, is expected, or both
+	//   - UNKNOWN – The default disposition of a security finding
+	//   - TRUE_POSITIVE – The security finding is confirmed
+	//   - FALSE_POSITIVE – The security finding was determined to be a false alarm
+	//   - BENIGN_POSITIVE – A special case of TRUE_POSITIVE where the finding doesn't
+	//   pose any threat, is expected, or both
 	VerificationState types.VerificationState
 
 	// Used to update the workflow status of a finding. The workflow status indicates

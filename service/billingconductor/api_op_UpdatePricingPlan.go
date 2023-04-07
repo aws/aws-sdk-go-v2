@@ -56,8 +56,7 @@ type UpdatePricingPlanOutput struct {
 	// The name of the pricing plan. The name must be unique to each pricing plan.
 	Name *string
 
-	// The pricing rules count that's currently associated with this pricing plan
-	// list.
+	// The pricing rules count that's currently associated with this pricing plan list.
 	Size int64
 
 	// Metadata pertaining to the operation's result.

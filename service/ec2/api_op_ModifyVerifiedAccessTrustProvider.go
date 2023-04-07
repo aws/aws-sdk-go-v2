@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the configuration of the specified Amazon Web Services Verified
-// Access trust provider.
+// Modifies the configuration of the specified Amazon Web Services Verified Access
+// trust provider.
 func (c *Client) ModifyVerifiedAccessTrustProvider(ctx context.Context, params *ModifyVerifiedAccessTrustProviderInput, optFns ...func(*Options)) (*ModifyVerifiedAccessTrustProviderOutput, error) {
 	if params == nil {
 		params = &ModifyVerifiedAccessTrustProviderInput{}
@@ -50,8 +50,7 @@ type ModifyVerifiedAccessTrustProviderInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The OpenID Connect details for an oidc-type, user-identity based trust
-	// provider.
+	// The OpenID Connect details for an oidc -type, user-identity based trust provider.
 	OidcOptions *types.ModifyVerifiedAccessTrustProviderOidcOptions
 
 	noSmithyDocumentSerde

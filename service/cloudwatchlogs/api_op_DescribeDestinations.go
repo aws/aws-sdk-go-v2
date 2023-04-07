@@ -33,8 +33,8 @@ type DescribeDestinationsInput struct {
 	// The prefix to match. If you don't specify a value, no prefix filter is applied.
 	DestinationNamePrefix *string
 
-	// The maximum number of items returned. If you don't specify a value, the
-	// default maximum value of 50 items is used.
+	// The maximum number of items returned. If you don't specify a value, the default
+	// maximum value of 50 items is used.
 	Limit *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -49,8 +49,7 @@ type DescribeDestinationsOutput struct {
 	// The destinations.
 	Destinations []types.Destination
 
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
+	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -130,12 +129,12 @@ var _ DescribeDestinationsAPIClient = (*Client)(nil)
 // DescribeDestinationsPaginatorOptions is the paginator options for
 // DescribeDestinations
 type DescribeDestinationsPaginatorOptions struct {
-	// The maximum number of items returned. If you don't specify a value, the
-	// default maximum value of 50 items is used.
+	// The maximum number of items returned. If you don't specify a value, the default
+	// maximum value of 50 items is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

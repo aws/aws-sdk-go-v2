@@ -141,8 +141,8 @@ type ListContactFlowModulesPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -155,8 +155,7 @@ type ListContactFlowModulesPaginator struct {
 	firstPage bool
 }
 
-// NewListContactFlowModulesPaginator returns a new
-// ListContactFlowModulesPaginator
+// NewListContactFlowModulesPaginator returns a new ListContactFlowModulesPaginator
 func NewListContactFlowModulesPaginator(client ListContactFlowModulesAPIClient, params *ListContactFlowModulesInput, optFns ...func(*ListContactFlowModulesPaginatorOptions)) *ListContactFlowModulesPaginator {
 	if params == nil {
 		params = &ListContactFlowModulesInput{}

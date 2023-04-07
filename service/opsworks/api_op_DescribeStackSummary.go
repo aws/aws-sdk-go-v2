@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the number of layers and apps in a specified stack, and the number
-// of instances in each state, such as running_setup  or online. Required
-// Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information about user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// Describes the number of layers and apps in a specified stack, and the number of
+// instances in each state, such as running_setup or online . Required Permissions:
+// To use this action, an IAM user must have a Show, Deploy, or Manage permissions
+// level for the stack, or an attached policy that explicitly grants permissions.
+// For more information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
 // .
 func (c *Client) DescribeStackSummary(ctx context.Context, params *DescribeStackSummaryInput, optFns ...func(*Options)) (*DescribeStackSummaryOutput, error) {
 	if params == nil {
@@ -43,10 +42,10 @@ type DescribeStackSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeStackSummary  request.
+// Contains the response to a DescribeStackSummary request.
 type DescribeStackSummaryOutput struct {
 
-	// A StackSummary  object that contains the results.
+	// A StackSummary object that contains the results.
 	StackSummary *types.StackSummary
 
 	// Metadata pertaining to the operation's result.

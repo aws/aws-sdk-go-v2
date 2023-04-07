@@ -35,7 +35,7 @@ func (c *Client) GetManagedRuleSet(ctx context.Context, params *GetManagedRuleSe
 type GetManagedRuleSetInput struct {
 
 	// A unique identifier for the managed rule set. The ID is returned in the
-	// responses to commands like list . You provide it to operations like get  and
+	// responses to commands like list . You provide it to operations like get and
 	// update .
 	//
 	// This member is required.
@@ -53,8 +53,9 @@ type GetManagedRuleSetInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//     - CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1 .
-	//     - API and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -64,13 +65,13 @@ type GetManagedRuleSetInput struct {
 
 type GetManagedRuleSetOutput struct {
 
-	// A token used for optimistic locking. WAF returns a token to your get  and list
+	// A token used for optimistic locking. WAF returns a token to your get and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update  and delete. WAF uses the token to ensure that no
-	// changes have been made to the entity since you last retrieved it. If a change
-	// has been made, the update fails with a WAFOptimisticLockException. If this
-	// happens, perform another get , and use the new token returned by that operation.
+	// operations like update and delete . WAF uses the token to ensure that no changes
+	// have been made to the entity since you last retrieved it. If a change has been
+	// made, the update fails with a WAFOptimisticLockException . If this happens,
+	// perform another get , and use the new token returned by that operation.
 	LockToken *string
 
 	// The managed rule set that you requested.

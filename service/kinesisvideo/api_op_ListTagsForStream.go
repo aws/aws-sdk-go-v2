@@ -11,7 +11,7 @@ import (
 )
 
 // Returns a list of tags associated with the specified stream. In the request,
-// you must specify either the StreamName  or the StreamARN .
+// you must specify either the StreamName or the StreamARN .
 func (c *Client) ListTagsForStream(ctx context.Context, params *ListTagsForStreamInput, optFns ...func(*Options)) (*ListTagsForStreamOutput, error) {
 	if params == nil {
 		params = &ListTagsForStreamInput{}

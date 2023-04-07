@@ -27,67 +27,89 @@ type AnalyzeIDDetections struct {
 // A Block represents items that are recognized in a document within a group of
 // pixels close to each other. The information returned in a Block object depends
 // on the type of operation. In text detection for documents (for example
-// DetectDocumentText), you get information about the detected words and lines of
-// text. In text analysis (for example AnalyzeDocument), you can also get
+// DetectDocumentText ), you get information about the detected words and lines of
+// text. In text analysis (for example AnalyzeDocument ), you can also get
 // information about the fields, tables, and selection elements that are detected
 // in the document. An array of Block objects is returned by both synchronous and
-// asynchronous operations. In synchronous operations, such as DetectDocumentText
-// , the array of Block objects is the entire set of results. In asynchronous
-// operations, such as GetDocumentAnalysis, the array is returned over one or
-// more responses. For more information, see How Amazon Textract Works (https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html)
+// asynchronous operations. In synchronous operations, such as DetectDocumentText ,
+// the array of Block objects is the entire set of results. In asynchronous
+// operations, such as GetDocumentAnalysis , the array is returned over one or more
+// responses. For more information, see How Amazon Textract Works (https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html)
 // .
 type Block struct {
 
 	// The type of text item that's recognized. In operations for text detection, the
 	// following types are returned:
-	//     - PAGE - Contains a list of the LINE Block objects that are detected on a document page.
-	//     - WORD - A word detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.
-	//     - LINE - A string of tab-delimited, contiguous words that are detected on a document page.
-	//
+	//   - PAGE - Contains a list of the LINE Block objects that are detected on a
+	//   document page.
+	//   - WORD - A word detected on a document page. A word is one or more ISO basic
+	//   Latin script characters that aren't separated by spaces.
+	//   - LINE - A string of tab-delimited, contiguous words that are detected on a
+	//   document page.
 	// In text analysis operations, the following types are returned:
-	//     - PAGE - Contains a list of child Block objects that are detected on a document page.
-	//     - KEY_VALUE_SET - Stores the KEY and VALUE Block objects for linked text that's detected on a document page. Use the EntityType field to determine if a KEY_VALUE_SET object is a KEY Block object or a VALUE Block object.
-	//     - WORD - A word that's detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.
-	//     - LINE - A string of tab-delimited, contiguous words that are detected on a document page.
-	//     - TABLE - A table that's detected on a document page. A table is grid-based information with two or more rows or columns, with a cell span of one row and one column each.
-	//     - TABLE_TITLE - The title of a table. A title is typically a line of text above or below a table, or embedded as the first row of a table.
-	//     - TABLE_FOOTER - The footer associated with a table. A footer is typically a line or lines of text below a table or embedded as the last row of a table.
-	//     - CELL - A cell within a detected table. The cell is the parent of the block that contains the text in the cell.
-	//     - MERGED_CELL - A cell in a table whose content spans more than one row or column. The Relationships array for this cell contain data from individual cells.
-	//     - SELECTION_ELEMENT - A selection element such as an option button (radio button) or a check box that's detected on a document page. Use the value of SelectionStatus to determine the status of the selection element.
-	//     - SIGNATURE - The location and confidene score of a signature detected on a document page. Can be returned as part of a Key-Value pair or a detected cell.
-	//     - QUERY - A question asked during the call of AnalyzeDocument. Contains an alias and an ID that attaches it to its answer.
-	//     - QUERY_RESULT - A response to a question asked during the call of analyze document. Comes with an alias and ID for ease of locating in a response. Also contains location and confidence score.
+	//   - PAGE - Contains a list of child Block objects that are detected on a
+	//   document page.
+	//   - KEY_VALUE_SET - Stores the KEY and VALUE Block objects for linked text
+	//   that's detected on a document page. Use the EntityType field to determine if a
+	//   KEY_VALUE_SET object is a KEY Block object or a VALUE Block object.
+	//   - WORD - A word that's detected on a document page. A word is one or more ISO
+	//   basic Latin script characters that aren't separated by spaces.
+	//   - LINE - A string of tab-delimited, contiguous words that are detected on a
+	//   document page.
+	//   - TABLE - A table that's detected on a document page. A table is grid-based
+	//   information with two or more rows or columns, with a cell span of one row and
+	//   one column each.
+	//   - TABLE_TITLE - The title of a table. A title is typically a line of text
+	//   above or below a table, or embedded as the first row of a table.
+	//   - TABLE_FOOTER - The footer associated with a table. A footer is typically a
+	//   line or lines of text below a table or embedded as the last row of a table.
+	//   - CELL - A cell within a detected table. The cell is the parent of the block
+	//   that contains the text in the cell.
+	//   - MERGED_CELL - A cell in a table whose content spans more than one row or
+	//   column. The Relationships array for this cell contain data from individual
+	//   cells.
+	//   - SELECTION_ELEMENT - A selection element such as an option button (radio
+	//   button) or a check box that's detected on a document page. Use the value of
+	//   SelectionStatus to determine the status of the selection element.
+	//   - SIGNATURE - The location and confidene score of a signature detected on a
+	//   document page. Can be returned as part of a Key-Value pair or a detected cell.
+	//   - QUERY - A question asked during the call of AnalyzeDocument. Contains an
+	//   alias and an ID that attaches it to its answer.
+	//   - QUERY_RESULT - A response to a question asked during the call of analyze
+	//   document. Comes with an alias and ID for ease of locating in a response. Also
+	//   contains location and confidence score.
 	BlockType BlockType
 
 	// The column in which a table cell appears. The first column position is 1.
-	// ColumnIndex isn't returned by DetectDocumentText  and GetDocumentTextDetection .
+	// ColumnIndex isn't returned by DetectDocumentText and GetDocumentTextDetection .
 	ColumnIndex *int32
 
-	// The number of columns that a table cell spans. ColumnSpan  isn't returned by
+	// The number of columns that a table cell spans. ColumnSpan isn't returned by
 	// DetectDocumentText and GetDocumentTextDetection .
 	ColumnSpan *int32
 
-	// The confidence score that Amazon Textract has in the accuracy of the
-	// recognized text and the accuracy of the geometry points around the recognized
-	// text.
+	// The confidence score that Amazon Textract has in the accuracy of the recognized
+	// text and the accuracy of the geometry points around the recognized text.
 	Confidence *float32
 
 	// The type of entity. The following entity types can be returned by FORMS
 	// analysis:
-	//     - KEY - An identifier for a field on the document.
-	//     - VALUE - The field text.
-	// The following entity types can be returned by
-	// TABLES analysis:
-	//     - COLUMN_HEADER - Identifies a cell that is a header of a column.
-	//     - TABLE_TITLE - Identifies a cell that is a title within the table.
-	//     - TABLE_SECTION_TITLE - Identifies a cell that is a title of a section within a table. A section title is a cell that typically spans an entire row above a section.
-	//     - TABLE_FOOTER - Identifies a cell that is a footer of a table.
-	//     - TABLE_SUMMARY - Identifies a summary cell of a table. A summary cell can be a row of a table or an additional, smaller table that contains summary information for another table.
-	//     - STRUCTURED_TABLE - Identifies a table with column headers where the content of each row corresponds to the headers.
-	//     - SEMI_STRUCTURED_TABLE - Identifies a non-structured table.
-	// EntityTypes  isn't returned by DetectDocumentText  and GetDocumentTextDetection
-	// .
+	//   - KEY - An identifier for a field on the document.
+	//   - VALUE - The field text.
+	// The following entity types can be returned by TABLES analysis:
+	//   - COLUMN_HEADER - Identifies a cell that is a header of a column.
+	//   - TABLE_TITLE - Identifies a cell that is a title within the table.
+	//   - TABLE_SECTION_TITLE - Identifies a cell that is a title of a section within
+	//   a table. A section title is a cell that typically spans an entire row above a
+	//   section.
+	//   - TABLE_FOOTER - Identifies a cell that is a footer of a table.
+	//   - TABLE_SUMMARY - Identifies a summary cell of a table. A summary cell can be
+	//   a row of a table or an additional, smaller table that contains summary
+	//   information for another table.
+	//   - STRUCTURED_TABLE - Identifies a table with column headers where the content
+	//   of each row corresponds to the headers.
+	//   - SEMI_STRUCTURED_TABLE - Identifies a non-structured table.
+	// EntityTypes isn't returned by DetectDocumentText and GetDocumentTextDetection .
 	EntityTypes []EntityType
 
 	// The location of the recognized text on the image. It includes an axis-aligned,
@@ -104,7 +126,7 @@ type Block struct {
 	// multipage documents that are in PDF or TIFF format. A scanned image (JPEG/PNG)
 	// provided to an asynchronous operation, even if it contains multiple document
 	// pages, is considered a single-page document. This means that for scanned images
-	// the value of Page  is always 1. Synchronous operations will also return a Page
+	// the value of Page is always 1. Synchronous operations will also return a Page
 	// value of 1 because every input document is considered to be a single-page
 	// document.
 	Page *int32
@@ -120,10 +142,10 @@ type Block struct {
 	Relationships []Relationship
 
 	// The row in which a table cell is located. The first row position is 1. RowIndex
-	// isn't returned by DetectDocumentText  and GetDocumentTextDetection .
+	// isn't returned by DetectDocumentText and GetDocumentTextDetection .
 	RowIndex *int32
 
-	// The number of rows that a table cell spans. RowSpan  isn't returned by
+	// The number of rows that a table cell spans. RowSpan isn't returned by
 	// DetectDocumentText and GetDocumentTextDetection .
 	RowSpan *int32
 
@@ -142,16 +164,16 @@ type Block struct {
 }
 
 // The bounding box around the detected page, text, key-value pair, table, table
-// cell, or selection element on a document page. The left  (x-coordinate) and top
+// cell, or selection element on a document page. The left (x-coordinate) and top
 // (y-coordinate) are coordinates that represent the top and left sides of the
 // bounding box. Note that the upper-left corner of the image is the origin (0,0).
-// The top  and left values returned are ratios of the overall document page
-// size. For example, if the input image is 700 x 200 pixels, and the top-left
-// coordinate of the bounding box is 350 x 50 pixels, the API returns a left
-// value of 0.5 (350/700) and a top  value of 0.25 (50/200). The width  and height
-// values represent the dimensions of the bounding box as a ratio of the overall
-// document page dimension. For example, if the document page size is 700 x 200
-// pixels, and the bounding box width is 70 pixels, the width returned is 0.1.
+// The top and left values returned are ratios of the overall document page size.
+// For example, if the input image is 700 x 200 pixels, and the top-left coordinate
+// of the bounding box is 350 x 50 pixels, the API returns a left value of 0.5
+// (350/700) and a top value of 0.25 (50/200). The width and height values
+// represent the dimensions of the bounding box as a ratio of the overall document
+// page dimension. For example, if the document page size is 700 x 200 pixels, and
+// the bounding box width is 70 pixels, the width returned is 0.1.
 type BoundingBox struct {
 
 	// The height of the bounding box as a ratio of the overall document page height.
@@ -180,9 +202,9 @@ type DetectedSignature struct {
 	noSmithyDocumentSerde
 }
 
-// The input document, either as bytes or as an S3 object. You pass image bytes
-// to an Amazon Textract API operation by using the Bytes property. For example,
-// you would use the Bytes property to pass a document loaded from a local file
+// The input document, either as bytes or as an S3 object. You pass image bytes to
+// an Amazon Textract API operation by using the Bytes property. For example, you
+// would use the Bytes property to pass a document loaded from a local file
 // system. Image bytes passed by using the Bytes property must be base64 encoded.
 // Your code might not need to encode document file bytes if you're using an AWS
 // SDK to call Amazon Textract API operations. You pass images stored in an S3
@@ -199,7 +221,7 @@ type Document struct {
 	// A blob of base64-encoded document bytes. The maximum size of a document that's
 	// provided in a blob of bytes is 5 MB. The document bytes must be in PNG or JPEG
 	// format. If you're using an AWS SDK to call Amazon Textract, you might not need
-	// to base64-encode image bytes passed using the Bytes  field.
+	// to base64-encode image bytes passed using the Bytes field.
 	Bytes []byte
 
 	// Identifies an S3 object as the document source. The maximum size of a document
@@ -254,18 +276,18 @@ type DocumentMetadata struct {
 type ExpenseCurrency struct {
 
 	// Currency code for detected currency. the current supported codes are:
-	//     - USD
-	//     - EUR
-	//     - GBP
-	//     - CAD
-	//     - INR
-	//     - JPY
-	//     - CHF
-	//     - AUD
-	//     - CNY
-	//     - BZR
-	//     - SEK
-	//     - HKD
+	//   - USD
+	//   - EUR
+	//   - GBP
+	//   - CAD
+	//   - INR
+	//   - JPY
+	//   - CHF
+	//   - AUD
+	//   - CNY
+	//   - BZR
+	//   - SEK
+	//   - HKD
 	Code *string
 
 	// Percentage confideence in the detected currency.
@@ -274,8 +296,8 @@ type ExpenseCurrency struct {
 	noSmithyDocumentSerde
 }
 
-// An object used to store information about the Value or Label detected by
-// Amazon Textract.
+// An object used to store information about the Value or Label detected by Amazon
+// Textract.
 type ExpenseDetection struct {
 
 	// The confidence in detection, as a percentage
@@ -320,8 +342,8 @@ type ExpenseField struct {
 	// monatary value detected.
 	Currency *ExpenseCurrency
 
-	// Shows which group a response object belongs to, such as whether an address
-	// line belongs to the vendor's address or the recipent's address.
+	// Shows which group a response object belongs to, such as whether an address line
+	// belongs to the vendor's address or the recipent's address.
 	GroupProperties []ExpenseGroupProperty
 
 	// The explicitly stated label of a detected element.
@@ -340,9 +362,9 @@ type ExpenseField struct {
 	noSmithyDocumentSerde
 }
 
-// Shows the group that a certain key belongs to. This helps differentiate
-// between names and addresses for different organizations, that can be hard to
-// determine via JSON response.
+// Shows the group that a certain key belongs to. This helps differentiate between
+// names and addresses for different organizations, that can be hard to determine
+// via JSON response.
 type ExpenseGroupProperty struct {
 
 	// Provides a group Id number, which will be the same for each in the group.
@@ -387,8 +409,8 @@ type Extraction struct {
 // elements.
 type Geometry struct {
 
-	// An axis-aligned coarse representation of the location of the recognized item
-	// on the document page.
+	// An axis-aligned coarse representation of the location of the recognized item on
+	// the document page.
 	BoundingBox *BoundingBox
 
 	// Within the bounding box, a fine-grained polygon around the recognized item.
@@ -512,8 +534,8 @@ type LendingDocument struct {
 	noSmithyDocumentSerde
 }
 
-// Holds the normalized key-value pairs returned by AnalyzeDocument, including
-// the document type, detected text, and geometry.
+// Holds the normalized key-value pairs returned by AnalyzeDocument, including the
+// document type, detected text, and geometry.
 type LendingField struct {
 
 	// The results extracted for a lending document.
@@ -531,8 +553,8 @@ type LendingField struct {
 // Contains the detections for each page analyzed through the Analyze Lending API.
 type LendingResult struct {
 
-	// An array of Extraction to hold structured data. e.g. normalized key value
-	// pairs instead of raw OCR detections .
+	// An array of Extraction to hold structured data. e.g. normalized key value pairs
+	// instead of raw OCR detections .
 	Extractions []Extraction
 
 	// The page number for a page, with regard to whole submission.
@@ -566,8 +588,8 @@ type LineItemFields struct {
 	noSmithyDocumentSerde
 }
 
-// A grouping of tables which contain LineItems, with each table identified by
-// the table's LineItemGroupIndex .
+// A grouping of tables which contain LineItems, with each table identified by the
+// table's LineItemGroupIndex .
 type LineItemGroup struct {
 
 	// The number used to identify a specific table in a document. The first table
@@ -666,9 +688,9 @@ type PageClassification struct {
 // are returned are ratios of the overall document page size. For example, if the
 // input document is 700 x 200 and the operation returns X=0.5 and Y=0.25, then the
 // point is at the (350,50) pixel coordinate on the document page. An array of
-// Point objects, Polygon , is returned by DetectDocumentText . Polygon
-// represents a fine-grained polygon around detected text. For more information,
-// see Geometry in the Amazon Textract Developer Guide.
+// Point objects, Polygon , is returned by DetectDocumentText . Polygon represents
+// a fine-grained polygon around detected text. For more information, see Geometry
+// in the Amazon Textract Developer Guide.
 type Point struct {
 
 	// The value of the X coordinate for a point on a Polygon .
@@ -719,36 +741,47 @@ type Query struct {
 
 	// Pages is a parameter that the user inputs to specify which pages to apply a
 	// query to. The following is a list of rules for using this parameter.
-	//     - If a page is not specified, it is set to ["1"] by default.
-	//     - The following characters are allowed in the parameter's string: 0 1 2 3 4 5 6 7 8 9 - * . No whitespace is allowed.
-	//     - When using * to indicate all pages, it must be the only element in the list.
-	//     - You can use page intervals, such as [“1-3”, “1-1”, “4-*”] . Where * indicates last page of document.
-	//     - Specified pages must be greater than 0 and less than or equal to the number of pages in the document.
+	//   - If a page is not specified, it is set to ["1"] by default.
+	//   - The following characters are allowed in the parameter's string: 0 1 2 3 4 5
+	//   6 7 8 9 - * . No whitespace is allowed.
+	//   - When using * to indicate all pages, it must be the only element in the
+	//   list.
+	//   - You can use page intervals, such as [“1-3”, “1-1”, “4-*”] . Where *
+	//   indicates last page of document.
+	//   - Specified pages must be greater than 0 and less than or equal to the number
+	//   of pages in the document.
 	Pages []string
 
 	noSmithyDocumentSerde
 }
 
-// Information about how blocks are related to each other. A Block object
-// contains 0 or more Relation  objects in a list, Relationships. For more
-// information, see Block . The Type element provides the type of the
-// relationship for all blocks in the IDs  array.
+// Information about how blocks are related to each other. A Block object contains
+// 0 or more Relation objects in a list, Relationships . For more information, see
+// Block . The Type element provides the type of the relationship for all blocks
+// in the IDs array.
 type Relationship struct {
 
 	// An array of IDs for related blocks. You can get the type of the relationship
-	// from the Type  element.
+	// from the Type element.
 	Ids []string
 
 	// The type of relationship between the blocks in the IDs array and the current
 	// block. The following list describes the relationship types that can be returned.
 	//
-	//     - VALUE - A list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair.
-	//     - CHILD - A list of IDs that identify blocks found within the current block object. For example, WORD blocks have a CHILD relationship to the LINE block type.
-	//     - MERGED_CELL - A list of IDs that identify each of the MERGED_CELL block types in a table.
-	//     - ANSWER - A list that contains the ID of the QUERY_RESULT block that’s associated with the corresponding QUERY block.
-	//     - TABLE - A list of IDs that identify associated TABLE block types.
-	//     - TABLE_TITLE - A list that contains the ID for the TABLE_TITLE block type in a table.
-	//     - TABLE_FOOTER - A list of IDs that identify the TABLE_FOOTER block types in a table.
+	//   - VALUE - A list that contains the ID of the VALUE block that's associated
+	//   with the KEY of a key-value pair.
+	//   - CHILD - A list of IDs that identify blocks found within the current block
+	//   object. For example, WORD blocks have a CHILD relationship to the LINE block
+	//   type.
+	//   - MERGED_CELL - A list of IDs that identify each of the MERGED_CELL block
+	//   types in a table.
+	//   - ANSWER - A list that contains the ID of the QUERY_RESULT block that’s
+	//   associated with the corresponding QUERY block.
+	//   - TABLE - A list of IDs that identify associated TABLE block types.
+	//   - TABLE_TITLE - A list that contains the ID for the TABLE_TITLE block type in
+	//   a table.
+	//   - TABLE_FOOTER - A list of IDs that identify the TABLE_FOOTER block types in
+	//   a table.
 	Type RelationshipType
 
 	noSmithyDocumentSerde
@@ -764,9 +797,9 @@ type S3Object struct {
 	// name.
 	Bucket *string
 
-	// The file name of the input document. Synchronous operations can use image
-	// files that are in JPEG or PNG format. Asynchronous operations also support PDF
-	// and TIFF format files.
+	// The file name of the input document. Synchronous operations can use image files
+	// that are in JPEG or PNG format. Asynchronous operations also support PDF and
+	// TIFF format files.
 	Name *string
 
 	// If the bucket has versioning enabled, you can specify the object version.
@@ -778,8 +811,7 @@ type S3Object struct {
 // Information regarding a detected signature on a page.
 type SignatureDetection struct {
 
-	// The confidence, from 0 to 100, in the predicted values for a detected
-	// signature.
+	// The confidence, from 0 to 100, in the predicted values for a detected signature.
 	Confidence *float32
 
 	// Information about where the following items are located on a document page:
@@ -790,8 +822,7 @@ type SignatureDetection struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the pages of a document, defined by logical
-// boundary.
+// Contains information about the pages of a document, defined by logical boundary.
 type SplitDocument struct {
 
 	// The index for a given document in a DocumentGroup of a specific Type.

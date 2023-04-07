@@ -62,8 +62,8 @@ type GetWirelessDeviceImportTaskOutput struct {
 	// to start processing.
 	InitializedImportedDeviceCount *int64
 
-	// The number of devices in the import task that have been onboarded to the
-	// import task.
+	// The number of devices in the import task that have been onboarded to the import
+	// task.
 	OnboardedImportedDeviceCount *int64
 
 	// The number of devices in the import task that are waiting in the import task
@@ -76,8 +76,8 @@ type GetWirelessDeviceImportTaskOutput struct {
 	// The import task status.
 	Status types.ImportTaskStatus
 
-	// The reason for the provided status information, such as a validation error
-	// that causes the import task to fail.
+	// The reason for the provided status information, such as a validation error that
+	// causes the import task to fail.
 	StatusReason *string
 
 	// Metadata pertaining to the operation's result.

@@ -90,8 +90,7 @@ type GetEventPredictionMetadataOutput struct {
 	// The event ID.
 	EventId *string
 
-	// The timestamp for when the prediction was generated for the associated event
-	// ID.
+	// The timestamp for when the prediction was generated for the associated event ID.
 	EventTimestamp *string
 
 	// The event type associated with the detector specified for this prediction.

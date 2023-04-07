@@ -14,7 +14,7 @@ import (
 
 // Returns the metadata for one service or a list of the metadata for all
 // services. Use this without a service code to get the service codes for all
-// services. Use it with a service code, such as AmazonEC2, to get information
+// services. Use it with a service code, such as AmazonEC2 , to get information
 // specific to that service, such as the attribute names available for that
 // service. For example, some of the attribute names available for EC2 are
 // volumeType , maxIopsVolume , operation , locationType , and
@@ -36,8 +36,7 @@ func (c *Client) DescribeServices(ctx context.Context, params *DescribeServicesI
 
 type DescribeServicesInput struct {
 
-	// The format version that you want the response to be in. Valid values are:
-	// aws_v1
+	// The format version that you want the response to be in. Valid values are: aws_v1
 	FormatVersion *string
 
 	// The maximum number of results that you want returned in the response.
@@ -48,7 +47,7 @@ type DescribeServicesInput struct {
 	NextToken *string
 
 	// The code for the service whose information you want to retrieve, such as
-	// AmazonEC2 . You can use the ServiceCode  to filter the results in a GetProducts
+	// AmazonEC2 . You can use the ServiceCode to filter the results in a GetProducts
 	// call. To retrieve a list of all services, leave this blank.
 	ServiceCode *string
 
@@ -145,8 +144,8 @@ type DescribeServicesPaginatorOptions struct {
 	// The maximum number of results that you want returned in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -20,12 +20,18 @@ import (
 // . To make a StartMedicalTranscriptionJob request, you must first upload your
 // media file into an Amazon S3 bucket; you can then specify the S3 location of the
 // file using the Media parameter. You must include the following parameters in
-// your StartMedicalTranscriptionJob  request:
-//   - region : The Amazon Web Services Region where you are making your request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html) .
-//   - MedicalTranscriptionJobName : A custom name you create for your transcription job that is unique within your Amazon Web Services account.
+// your StartMedicalTranscriptionJob request:
+//   - region : The Amazon Web Services Region where you are making your request.
+//     For a list of Amazon Web Services Regions supported with Amazon Transcribe,
+//     refer to Amazon Transcribe endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html)
+//     .
+//   - MedicalTranscriptionJobName : A custom name you create for your
+//     transcription job that is unique within your Amazon Web Services account.
 //   - Media ( MediaFileUri ): The Amazon S3 location of your media file.
 //   - LanguageCode : This must be en-US .
-//   - OutputBucketName : The Amazon S3 bucket where you want your transcript stored. If you want your output stored in a sub-folder of this bucket, you must also include OutputKey .
+//   - OutputBucketName : The Amazon S3 bucket where you want your transcript
+//     stored. If you want your output stored in a sub-folder of this bucket, you must
+//     also include OutputKey .
 //   - Specialty : This must be PRIMARYCARE .
 //   - Type : Choose whether your audio is a conversation or a dictation.
 func (c *Client) StartMedicalTranscriptionJob(ctx context.Context, params *StartMedicalTranscriptionJobInput, optFns ...func(*Options)) (*StartMedicalTranscriptionJobOutput, error) {
@@ -46,9 +52,8 @@ func (c *Client) StartMedicalTranscriptionJob(ctx context.Context, params *Start
 type StartMedicalTranscriptionJobInput struct {
 
 	// The language code that represents the language spoken in the input media file.
-	// US English ( en-US) is the only valid value for medical transcription jobs.
-	// Any other value you enter for language code results in a BadRequestException
-	// error.
+	// US English ( en-US ) is the only valid value for medical transcription jobs. Any
+	// other value you enter for language code results in a BadRequestException error.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
@@ -61,13 +66,12 @@ type StartMedicalTranscriptionJobInput struct {
 	// This member is required.
 	Media *types.Media
 
-	// A unique name, chosen by you, for your medical transcription job. The name
-	// that you specify is also used as the default name of your transcription output
-	// file. If you want to specify a different name for your transcription output, use
-	// the OutputKey parameter. This name is case sensitive, cannot contain spaces,
-	// and must be unique within an Amazon Web Services account. If you try to create a
-	// new job with the same name as an existing job, you get a ConflictException
-	// error.
+	// A unique name, chosen by you, for your medical transcription job. The name that
+	// you specify is also used as the default name of your transcription output file.
+	// If you want to specify a different name for your transcription output, use the
+	// OutputKey parameter. This name is case sensitive, cannot contain spaces, and
+	// must be unique within an Amazon Web Services account. If you try to create a new
+	// job with the same name as an existing job, you get a ConflictException error.
 	//
 	// This member is required.
 	MedicalTranscriptionJobName *string
@@ -77,9 +81,9 @@ type StartMedicalTranscriptionJobInput struct {
 	// want your output to go to a sub-folder of this bucket, specify it using the
 	// OutputKey parameter; OutputBucketName only accepts the name of a bucket. For
 	// example, if you want your output stored in S3://DOC-EXAMPLE-BUCKET , set
-	// OutputBucketName to DOC-EXAMPLE-BUCKET. However, if you want your output
-	// stored in S3://DOC-EXAMPLE-BUCKET/test-files/ , set OutputBucketName  to
-	// DOC-EXAMPLE-BUCKET and OutputKey  to test-files/. Note that Amazon Transcribe
+	// OutputBucketName to DOC-EXAMPLE-BUCKET . However, if you want your output stored
+	// in S3://DOC-EXAMPLE-BUCKET/test-files/ , set OutputBucketName to
+	// DOC-EXAMPLE-BUCKET and OutputKey to test-files/ . Note that Amazon Transcribe
 	// must have permission to use the specified location. You can change Amazon S3
 	// permissions using the Amazon Web Services Management Console (https://console.aws.amazon.com/s3)
 	// . See also Permissions Required for IAM User Roles (https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user)
@@ -95,17 +99,17 @@ type StartMedicalTranscriptionJobInput struct {
 	// This member is required.
 	Specialty types.Specialty
 
-	// Specify whether your input media contains only one person ( DICTATION) or
+	// Specify whether your input media contains only one person ( DICTATION ) or
 	// contains a conversation between two people ( CONVERSATION ). For example,
-	// DICTATIONcould be used for a medical professional wanting to transcribe voice
+	// DICTATION could be used for a medical professional wanting to transcribe voice
 	// memos; CONVERSATION could be used for transcribing the doctor-patient dialogue
 	// during the patient's office visit.
 	//
 	// This member is required.
 	Type types.Type
 
-	// Labels all personal health information (PHI) identified in your transcript.
-	// For more information, see Identifying personal health information (PHI) in a
+	// Labels all personal health information (PHI) identified in your transcript. For
+	// more information, see Identifying personal health information (PHI) in a
 	// transcription (https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html) .
 	ContentIdentificationType types.MedicalContentIdentificationType
 
@@ -131,17 +135,20 @@ type StartMedicalTranscriptionJobInput struct {
 	// The KMS key you want to use to encrypt your medical transcription output. If
 	// using a key located in the current Amazon Web Services account, you can specify
 	// your KMS key in one of four ways:
-	//     - Use the KMS key ID itself. For example, 1234abcd-12ab-34cd-56ef-1234567890ab .
-	//     - Use an alias for the KMS key ID. For example, alias/ExampleAlias .
-	//     - Use the Amazon Resource Name (ARN) for the KMS key ID. For example, arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
-	//     - Use the ARN for the KMS key alias. For example, arn:aws:kms:region:account-ID:alias/ExampleAlias .
-	//
+	//   - Use the KMS key ID itself. For example, 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   .
+	//   - Use an alias for the KMS key ID. For example, alias/ExampleAlias .
+	//   - Use the Amazon Resource Name (ARN) for the KMS key ID. For example,
+	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//   - Use the ARN for the KMS key alias. For example,
+	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
 	// If using a key located in a different Amazon Web Services account than the
 	// current Amazon Web Services account, you can specify your KMS key in one of two
 	// ways:
-	//     - Use the ARN for the KMS key ID. For example, arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
-	//     - Use the ARN for the KMS key alias. For example, arn:aws:kms:region:account-ID:alias/ExampleAlias .
-	//
+	//   - Use the ARN for the KMS key ID. For example,
+	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//   - Use the ARN for the KMS key alias. For example,
+	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
 	// If you don't specify an encryption key, your output is encrypted with the
 	// default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output,
 	// you must also specify an output location using the OutputLocation parameter.
@@ -149,16 +156,25 @@ type StartMedicalTranscriptionJobInput struct {
 	// KMS key.
 	OutputEncryptionKMSKeyId *string
 
-	// Use in combination with OutputBucketName to specify the output location of
-	// your transcript and, optionally, a unique name for your output file. The default
-	// name for your transcription output is the same as the name you specified for
-	// your medical transcription job ( MedicalTranscriptionJobName). Here are some
+	// Use in combination with OutputBucketName to specify the output location of your
+	// transcript and, optionally, a unique name for your output file. The default name
+	// for your transcription output is the same as the name you specified for your
+	// medical transcription job ( MedicalTranscriptionJobName ). Here are some
 	// examples of how you can use OutputKey :
-	//     - If you specify 'DOC-EXAMPLE-BUCKET' as the OutputBucketName and 'my-transcript.json' as the OutputKey , your transcription output path is s3://DOC-EXAMPLE-BUCKET/my-transcript.json .
-	//     - If you specify 'my-first-transcription' as the MedicalTranscriptionJobName , 'DOC-EXAMPLE-BUCKET' as the OutputBucketName , and 'my-transcript' as the OutputKey , your transcription output path is s3://DOC-EXAMPLE-BUCKET/my-transcript/my-first-transcription.json .
-	//     - If you specify 'DOC-EXAMPLE-BUCKET' as the OutputBucketName and 'test-files/my-transcript.json' as the OutputKey , your transcription output path is s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript.json .
-	//     - If you specify 'my-first-transcription' as the MedicalTranscriptionJobName , 'DOC-EXAMPLE-BUCKET' as the OutputBucketName , and 'test-files/my-transcript' as the OutputKey , your transcription output path is s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript/my-first-transcription.json .
-	//
+	//   - If you specify 'DOC-EXAMPLE-BUCKET' as the OutputBucketName and
+	//   'my-transcript.json' as the OutputKey , your transcription output path is
+	//   s3://DOC-EXAMPLE-BUCKET/my-transcript.json .
+	//   - If you specify 'my-first-transcription' as the MedicalTranscriptionJobName ,
+	//   'DOC-EXAMPLE-BUCKET' as the OutputBucketName , and 'my-transcript' as the
+	//   OutputKey , your transcription output path is
+	//   s3://DOC-EXAMPLE-BUCKET/my-transcript/my-first-transcription.json .
+	//   - If you specify 'DOC-EXAMPLE-BUCKET' as the OutputBucketName and
+	//   'test-files/my-transcript.json' as the OutputKey , your transcription output
+	//   path is s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript.json .
+	//   - If you specify 'my-first-transcription' as the MedicalTranscriptionJobName ,
+	//   'DOC-EXAMPLE-BUCKET' as the OutputBucketName , and 'test-files/my-transcript'
+	//   as the OutputKey , your transcription output path is
+	//   s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript/my-first-transcription.json .
 	// If you specify the name of an Amazon S3 bucket sub-folder that doesn't exist,
 	// one is created for you.
 	OutputKey *string

@@ -35,7 +35,7 @@ type GetAccountPasswordPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetAccountPasswordPolicy  request.
+// Contains the response to a successful GetAccountPasswordPolicy request.
 type GetAccountPasswordPolicyOutput struct {
 
 	// A structure that contains details about the account's password policy.

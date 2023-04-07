@@ -51,8 +51,8 @@ type AssociateDelegationSignerToDomainInput struct {
 
 type AssociateDelegationSignerToDomainOutput struct {
 
-	// The identifier for tracking the progress of the request. To query the
-	// operation status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+	// The identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
 	// .
 	OperationId *string
 

@@ -39,12 +39,18 @@ type GetSnapshotsInput struct {
 	// The time interval or time window to get search metrics data. The time interval
 	// uses the time zone of your index. You can view data in the following time
 	// windows:
-	//     - THIS_WEEK : The current week, starting on the Sunday and ending on the day before the current date.
-	//     - ONE_WEEK_AGO : The previous week, starting on the Sunday and ending on the following Saturday.
-	//     - TWO_WEEKS_AGO : The week before the previous week, starting on the Sunday and ending on the following Saturday.
-	//     - THIS_MONTH : The current month, starting on the first day of the month and ending on the day before the current date.
-	//     - ONE_MONTH_AGO : The previous month, starting on the first day of the month and ending on the last day of the month.
-	//     - TWO_MONTHS_AGO : The month before the previous month, starting on the first day of the month and ending on last day of the month.
+	//   - THIS_WEEK : The current week, starting on the Sunday and ending on the day
+	//   before the current date.
+	//   - ONE_WEEK_AGO : The previous week, starting on the Sunday and ending on the
+	//   following Saturday.
+	//   - TWO_WEEKS_AGO : The week before the previous week, starting on the Sunday
+	//   and ending on the following Saturday.
+	//   - THIS_MONTH : The current month, starting on the first day of the month and
+	//   ending on the day before the current date.
+	//   - ONE_MONTH_AGO : The previous month, starting on the first day of the month
+	//   and ending on the last day of the month.
+	//   - TWO_MONTHS_AGO : The month before the previous month, starting on the first
+	//   day of the month and ending on last day of the month.
 	//
 	// This member is required.
 	Interval types.Interval
@@ -166,8 +172,8 @@ type GetSnapshotsPaginatorOptions struct {
 	// The maximum number of returned data for the metric.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

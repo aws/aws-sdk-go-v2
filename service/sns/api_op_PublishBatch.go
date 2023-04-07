@@ -11,18 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Publishes up to ten messages to the specified topic. This is a batch version
-// of Publish. For FIFO topics, multiple messages within a single batch are
-// published in the order they are sent, and messages are deduplicated within the
-// batch and across batches for 5 minutes. The result of publishing each message is
-// reported individually in the response. Because the batch request can result in a
+// Publishes up to ten messages to the specified topic. This is a batch version of
+// Publish . For FIFO topics, multiple messages within a single batch are published
+// in the order they are sent, and messages are deduplicated within the batch and
+// across batches for 5 minutes. The result of publishing each message is reported
+// individually in the response. Because the batch request can result in a
 // combination of successful and unsuccessful actions, you should check for batch
-// errors even when the call returns an HTTP status code of 200. The maximum
+// errors even when the call returns an HTTP status code of 200 . The maximum
 // allowed individual message size and the maximum total payload size (the sum of
 // the individual lengths of all of the batched messages) are both 256 KB (262,144
 // bytes). Some actions take lists of parameters. These lists are specified using
-// the param.n  notation. Values of n are integers starting from 1. For example,
-// a parameter list with two elements looks like this: &AttributeName.1=first
+// the param.n notation. Values of n are integers starting from 1. For example, a
+// parameter list with two elements looks like this: &AttributeName.1=first
 // &AttributeName.2=second If you send a batch message to a topic, Amazon SNS
 // publishes the batch message to each endpoint that is subscribed to the topic.
 // The format of the batch message depends on the notification protocol for each
@@ -45,7 +45,7 @@ func (c *Client) PublishBatch(ctx context.Context, params *PublishBatchInput, op
 
 type PublishBatchInput struct {
 
-	// A list of PublishBatch  request entries to be sent to the SNS topic.
+	// A list of PublishBatch request entries to be sent to the SNS topic.
 	//
 	// This member is required.
 	PublishBatchRequestEntries []types.PublishBatchRequestEntry
@@ -60,10 +60,10 @@ type PublishBatchInput struct {
 
 type PublishBatchOutput struct {
 
-	// A list of failed PublishBatch  responses.
+	// A list of failed PublishBatch responses.
 	Failed []types.BatchResultErrorEntry
 
-	// A list of successful PublishBatch  responses.
+	// A list of successful PublishBatch responses.
 	Successful []types.PublishBatchResultEntry
 
 	// Metadata pertaining to the operation's result.

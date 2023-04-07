@@ -31,8 +31,8 @@ func (c *Client) GetInsight(ctx context.Context, params *GetInsightInput, optFns
 
 type GetInsightInput struct {
 
-	// The insight's unique identifier. Use the GetInsightSummaries action to
-	// retrieve an InsightId.
+	// The insight's unique identifier. Use the GetInsightSummaries action to retrieve
+	// an InsightId.
 	//
 	// This member is required.
 	InsightId *string

@@ -46,7 +46,7 @@ type DescribeTrialComponentOutput struct {
 	// When the component was created.
 	CreationTime *time.Time
 
-	// The name of the component as displayed. If DisplayName  isn't specified,
+	// The name of the component as displayed. If DisplayName isn't specified,
 	// TrialComponentName is displayed.
 	DisplayName *string
 
@@ -88,9 +88,9 @@ type DescribeTrialComponentOutput struct {
 	StartTime *time.Time
 
 	// The status of the component. States include:
-	//     - InProgress
-	//     - Completed
-	//     - Failed
+	//   - InProgress
+	//   - Completed
+	//   - Failed
 	Status *types.TrialComponentStatus
 
 	// The Amazon Resource Name (ARN) of the trial component.

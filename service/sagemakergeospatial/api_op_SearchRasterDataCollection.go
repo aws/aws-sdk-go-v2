@@ -36,14 +36,11 @@ type SearchRasterDataCollectionInput struct {
 	// This member is required.
 	Arn *string
 
-	// RasterDataCollectionQuery consisting of AreaOfInterest(AOI)
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html),
-	// PropertyFilters
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html)
-	// and TimeRangeFilterInput
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html)
-	// used in SearchRasterDataCollection
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html).
+	// RasterDataCollectionQuery consisting of AreaOfInterest(AOI) (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html)
+	// , PropertyFilters (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html)
+	// and TimeRangeFilterInput (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html)
+	// used in SearchRasterDataCollection (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html)
+	// .
 	//
 	// This member is required.
 	RasterDataCollectionQuery *types.RasterDataCollectionQueryWithBandFilterInput
@@ -149,8 +146,8 @@ var _ SearchRasterDataCollectionAPIClient = (*Client)(nil)
 // SearchRasterDataCollectionPaginatorOptions is the paginator options for
 // SearchRasterDataCollection
 type SearchRasterDataCollectionPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

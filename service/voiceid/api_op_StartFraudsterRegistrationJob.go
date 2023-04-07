@@ -50,8 +50,8 @@ type StartFraudsterRegistrationJobInput struct {
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The output data config containing the S3 location where Voice ID writes the
-	// job output file; you must also include a KMS key ID to encrypt the file.
+	// The output data config containing the S3 location where Voice ID writes the job
+	// output file; you must also include a KMS key ID to encrypt the file.
 	//
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig

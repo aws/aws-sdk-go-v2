@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You don’t have sufficient access to perform this action. Please ensure you
-// have the required permission policies and user accounts and try again.
+// You don’t have sufficient access to perform this action. Please ensure you have
+// the required permission policies and user accounts and try again.
 type AccessDeniedException struct {
 	Message *string
 
@@ -63,7 +63,6 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 
 // An issue occurred with the internal server used for your Amazon Kendra
 // Intelligent Ranking service. Please wait a few minutes and try again, or contact
-//
 // Support (http://aws.amazon.com/contact-us/) for help.
 type InternalServerException struct {
 	Message *string
@@ -117,8 +116,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource you want to use is unavailable. Please check you have provided
-// the correct resource information and try again.
+// The resource you want to use is unavailable. Please check you have provided the
+// correct resource information and try again.
 type ResourceUnavailableException struct {
 	Message *string
 
@@ -146,8 +145,8 @@ func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return s
 
 // You have exceeded the set limits for your Amazon Kendra Intelligent Ranking
 // service. Please see Quotas (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
-// for more information, or contact Support (http://aws.amazon.com/contact-us/)
-// to inquire about an increase of limits.
+// for more information, or contact Support (http://aws.amazon.com/contact-us/) to
+// inquire about an increase of limits.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -200,8 +199,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The input fails to satisfy the constraints set by the Amazon Kendra
-// Intelligent Ranking service. Please provide the correct input and try again.
+// The input fails to satisfy the constraints set by the Amazon Kendra Intelligent
+// Ranking service. Please provide the correct input and try again.
 type ValidationException struct {
 	Message *string
 

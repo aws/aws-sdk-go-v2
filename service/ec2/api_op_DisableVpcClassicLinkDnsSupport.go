@@ -12,12 +12,11 @@ import (
 
 // Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve
 // to public IP addresses when addressed between a linked EC2-Classic instance and
-// instances in the VPC to which it's linked. For more information, see
-// ClassicLink (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
+// instances in the VPC to which it's linked. For more information, see ClassicLink (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
 // in the Amazon Elastic Compute Cloud User Guide. You must specify a VPC ID in the
 // request. We are retiring EC2-Classic. We recommend that you migrate from
 // EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
-// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)in
+// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
 // the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DisableVpcClassicLinkDnsSupport(ctx context.Context, params *DisableVpcClassicLinkDnsSupportInput, optFns ...func(*Options)) (*DisableVpcClassicLinkDnsSupportOutput, error) {
 	if params == nil {
@@ -44,7 +43,7 @@ type DisableVpcClassicLinkDnsSupportInput struct {
 
 type DisableVpcClassicLinkDnsSupportOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

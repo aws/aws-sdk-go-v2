@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes all Amazon QuickSight customizations in this Amazon Web Services
-// Region for the specified Amazon Web Services account and Amazon QuickSight
-// namespace.
+// Deletes all Amazon QuickSight customizations in this Amazon Web Services Region
+// for the specified Amazon Web Services account and Amazon QuickSight namespace.
 func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteAccountCustomizationInput, optFns ...func(*Options)) (*DeleteAccountCustomizationOutput, error) {
 	if params == nil {
 		params = &DeleteAccountCustomizationInput{}

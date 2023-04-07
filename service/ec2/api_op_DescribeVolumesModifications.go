@@ -44,17 +44,22 @@ type DescribeVolumesModificationsInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - modification-state - The current modification state (modifying | optimizing | completed | failed).
-	//     - original-iops - The original IOPS rate of the volume.
-	//     - original-size - The original size of the volume, in GiB.
-	//     - original-volume-type - The original volume type of the volume (standard | io1 | io2 | gp2 | sc1 | st1).
-	//     - originalMultiAttachEnabled - Indicates whether Multi-Attach support was enabled (true | false).
-	//     - start-time - The modification start time.
-	//     - target-iops - The target IOPS rate of the volume.
-	//     - target-size - The target size of the volume, in GiB.
-	//     - target-volume-type - The target volume type of the volume (standard | io1 | io2 | gp2 | sc1 | st1).
-	//     - targetMultiAttachEnabled - Indicates whether Multi-Attach support is to be enabled (true | false).
-	//     - volume-id - The ID of the volume.
+	//   - modification-state - The current modification state (modifying | optimizing
+	//   | completed | failed).
+	//   - original-iops - The original IOPS rate of the volume.
+	//   - original-size - The original size of the volume, in GiB.
+	//   - original-volume-type - The original volume type of the volume (standard |
+	//   io1 | io2 | gp2 | sc1 | st1).
+	//   - originalMultiAttachEnabled - Indicates whether Multi-Attach support was
+	//   enabled (true | false).
+	//   - start-time - The modification start time.
+	//   - target-iops - The target IOPS rate of the volume.
+	//   - target-size - The target size of the volume, in GiB.
+	//   - target-volume-type - The target volume type of the volume (standard | io1 |
+	//   io2 | gp2 | sc1 | st1).
+	//   - targetMultiAttachEnabled - Indicates whether Multi-Attach support is to be
+	//   enabled (true | false).
+	//   - volume-id - The ID of the volume.
 	Filters []types.Filter
 
 	// The maximum number of results (up to a limit of 500) to be returned in a
@@ -75,7 +80,7 @@ type DescribeVolumesModificationsInput struct {
 type DescribeVolumesModificationsOutput struct {
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  if there are no more items to return.
+	// value is null if there are no more items to return.
 	NextToken *string
 
 	// Information about the volume modifications.
@@ -163,8 +168,8 @@ type DescribeVolumesModificationsPaginatorOptions struct {
 	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

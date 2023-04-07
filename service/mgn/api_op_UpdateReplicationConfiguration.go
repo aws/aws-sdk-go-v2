@@ -65,8 +65,7 @@ type UpdateReplicationConfigurationInput struct {
 	// Update replication configuration Replication Server instance type request.
 	ReplicationServerInstanceType *string
 
-	// Update replication configuration Replication Server Security Groups IDs
-	// request.
+	// Update replication configuration Replication Server Security Groups IDs request.
 	ReplicationServersSecurityGroupsIDs []string
 
 	// Update replication configuration Staging Area subnet request.

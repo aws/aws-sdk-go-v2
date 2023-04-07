@@ -60,8 +60,8 @@ func (e *ImageAlreadyExistsException) ErrorCode() string {
 }
 func (e *ImageAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified image digest does not match the digest that Amazon ECR
-// calculated for the image.
+// The specified image digest does not match the digest that Amazon ECR calculated
+// for the image.
 type ImageDigestDoesNotMatchException struct {
 	Message *string
 
@@ -113,8 +113,8 @@ func (e *ImageNotFoundException) ErrorCode() string {
 }
 func (e *ImageNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified image is tagged with a tag that already exists. The repository
-// is configured for tag immutability.
+// The specified image is tagged with a tag that already exists. The repository is
+// configured for tag immutability.
 type ImageTagAlreadyExistsException struct {
 	Message *string
 
@@ -199,8 +199,8 @@ func (e *InvalidLayerPartException) ErrorCode() string {
 }
 func (e *InvalidLayerPartException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified parameter is invalid. Review the available parameters for the
-// API request.
+// The specified parameter is invalid. Review the available parameters for the API
+// request.
 type InvalidParameterException struct {
 	Message *string
 
@@ -388,8 +388,7 @@ func (e *LayersNotFoundException) ErrorCode() string {
 }
 func (e *LayersNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The lifecycle policy could not be found, and no policy is set to the
-// repository.
+// The lifecycle policy could not be found, and no policy is set to the repository.
 type LifecyclePolicyNotFoundException struct {
 	Message *string
 
@@ -637,7 +636,7 @@ func (e *RepositoryAlreadyExistsException) ErrorCode() string {
 func (e *RepositoryAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified repository contains images. To delete a repository that contains
-// images, you must force the deletion with the force  parameter.
+// images, you must force the deletion with the force parameter.
 type RepositoryNotEmptyException struct {
 	Message *string
 
@@ -852,8 +851,8 @@ func (e *UnsupportedUpstreamRegistryException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The upload could not be found, or the specified upload ID is not valid for
-// this repository.
+// The upload could not be found, or the specified upload ID is not valid for this
+// repository.
 type UploadNotFoundException struct {
 	Message *string
 

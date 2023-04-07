@@ -43,8 +43,7 @@ type ListAppMonitorsInput struct {
 
 type ListAppMonitorsOutput struct {
 
-	// An array of structures that contain information about the returned app
-	// monitors.
+	// An array of structures that contain information about the returned app monitors.
 	AppMonitorSummaries []types.AppMonitorSummary
 
 	// A token that you can use in a subsequent operation to retrieve the next set of
@@ -131,8 +130,8 @@ type ListAppMonitorsPaginatorOptions struct {
 	// The maximum that you can specify is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

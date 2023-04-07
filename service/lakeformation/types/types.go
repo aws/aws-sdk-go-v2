@@ -155,7 +155,7 @@ type DataCellsFilter struct {
 	// A list of column names.
 	ColumnNames []string
 
-	// A wildcard with exclusions. You must specify either a ColumnNames  list or the
+	// A wildcard with exclusions. You must specify either a ColumnNames list or the
 	// ColumnWildCard .
 	ColumnWildcard *ColumnWildcard
 
@@ -195,9 +195,9 @@ type DataLakePrincipal struct {
 	noSmithyDocumentSerde
 }
 
-// A structure representing a list of Lake Formation principals designated as
-// data lake administrators and lists of principal permission entries for default
-// create database and default create table permissions.
+// A structure representing a list of Lake Formation principals designated as data
+// lake administrators and lists of principal permission entries for default create
+// database and default create table permissions.
 type DataLakeSettings struct {
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
@@ -263,8 +263,7 @@ type DataLakeSettings struct {
 	noSmithyDocumentSerde
 }
 
-// A structure for a data location object where permissions are granted or
-// revoked.
+// A structure for a data location object where permissions are granted or revoked.
 type DataLocationResource struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the data location
@@ -300,7 +299,7 @@ type DeleteObjectInput struct {
 }
 
 // A structure containing the additional details to be returned in the
-// AdditionalDetails attribute of PrincipalResourcePermissions. If a catalog
+// AdditionalDetails attribute of PrincipalResourcePermissions . If a catalog
 // resource is shared through Resource Access Manager (RAM), then there will exist
 // a corresponding RAM resource share ARN.
 type DetailsMap struct {
@@ -372,7 +371,7 @@ type LFTag struct {
 	noSmithyDocumentSerde
 }
 
-// A structure containing an error related to a TagResource  or UnTagResource
+// A structure containing an error related to a TagResource or UnTagResource
 // operation.
 type LFTagError struct {
 
@@ -509,7 +508,7 @@ type PrincipalPermissions struct {
 type PrincipalResourcePermissions struct {
 
 	// This attribute can be used to return any additional details of
-	// PrincipalResourcePermissions. Currently returns only as a RAM resource share
+	// PrincipalResourcePermissions . Currently returns only as a RAM resource share
 	// ARN.
 	AdditionalDetails *DetailsMap
 
@@ -631,7 +630,7 @@ type RowFilter struct {
 type StorageOptimizer struct {
 
 	// A map of the storage optimizer configuration. Currently contains only one
-	// key-value pair: is_enabled  indicates true or false for acceleration.
+	// key-value pair: is_enabled indicates true or false for acceleration.
 	Config map[string]string
 
 	// A message that contains information about any error (if present). When an
@@ -673,8 +672,8 @@ type TableObject struct {
 // represents your data. You can Grant and Revoke table privileges to a principal.
 type TableResource struct {
 
-	// The name of the database for the table. Unique to a Data Catalog. A database
-	// is a set of associated table definitions organized into a logical group. You can
+	// The name of the database for the table. Unique to a Data Catalog. A database is
+	// a set of associated table definitions organized into a logical group. You can
 	// Grant and Revoke database privileges to a principal.
 	//
 	// This member is required.
@@ -688,7 +687,7 @@ type TableResource struct {
 	Name *string
 
 	// A wildcard object representing every table under a database. At least one of
-	// TableResource$Name or TableResource$TableWildcard  is required.
+	// TableResource$Name or TableResource$TableWildcard is required.
 	TableWildcard *TableWildcard
 
 	noSmithyDocumentSerde
@@ -721,12 +720,12 @@ type TableWithColumnsResource struct {
 	// caller.
 	CatalogId *string
 
-	// The list of column names for the table. At least one of ColumnNames  or
+	// The list of column names for the table. At least one of ColumnNames or
 	// ColumnWildcard is required.
 	ColumnNames []string
 
-	// A wildcard specified by a ColumnWildcard  object. At least one of ColumnNames
-	// or ColumnWildcard  is required.
+	// A wildcard specified by a ColumnWildcard object. At least one of ColumnNames or
+	// ColumnWildcard is required.
 	ColumnWildcard *ColumnWildcard
 
 	noSmithyDocumentSerde
@@ -782,7 +781,7 @@ type TransactionDescription struct {
 }
 
 // An object that defines an Amazon S3 object to be deleted if a transaction
-// cancels, provided that VirtualPut  was called before writing the object.
+// cancels, provided that VirtualPut was called before writing the object.
 type VirtualObject struct {
 
 	// The path to the Amazon S3 object. Must start with s3://

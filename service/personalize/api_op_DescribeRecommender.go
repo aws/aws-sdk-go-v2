@@ -14,13 +14,13 @@ import (
 // Describes the given recommender, including its status. A recommender can be in
 // one of the following states:
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-//   - STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE
+//   - STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START
+//     IN_PROGRESS > ACTIVE
 //   - DELETE PENDING > DELETE IN_PROGRESS
 //
-// When the status  is CREATE FAILED , the response includes the failureReason
-// key, which describes why. The modelMetrics key is null when the recommender is
-// being created or deleted. For more information on recommenders, see
-// CreateRecommender (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateRecommender.html)
+// When the status is CREATE FAILED , the response includes the failureReason key,
+// which describes why. The modelMetrics key is null when the recommender is being
+// created or deleted. For more information on recommenders, see CreateRecommender (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateRecommender.html)
 // .
 func (c *Client) DescribeRecommender(ctx context.Context, params *DescribeRecommenderInput, optFns ...func(*Options)) (*DescribeRecommenderOutput, error) {
 	if params == nil {

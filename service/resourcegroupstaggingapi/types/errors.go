@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The target of the operation is currently being modified by a different
-// request. Try again later.
+// The target of the operation is currently being modified by a different request.
+// Try again later.
 type ConcurrentModificationException struct {
 	Message *string
 
@@ -34,12 +34,18 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was denied because performing this operation violates a
-// constraint. Some of the reasons in the following list might not apply to this
-// specific operation.
-//   - You must meet the prerequisites for using tag policies. For information, see Prerequisites and Permissions for Using Tag Policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html) in the Organizations User Guide.
-//   - You must enable the tag policies service principal ( tagpolicies.tag.amazonaws.com ) to integrate with Organizations For information, see EnableAWSServiceAccess (https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAWSServiceAccess.html) .
-//   - You must have a tag policy attached to the organization root, an OU, or an account.
+// The request was denied because performing this operation violates a constraint.
+// Some of the reasons in the following list might not apply to this specific
+// operation.
+//   - You must meet the prerequisites for using tag policies. For information,
+//     see Prerequisites and Permissions for Using Tag Policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html)
+//     in the Organizations User Guide.
+//   - You must enable the tag policies service principal (
+//     tagpolicies.tag.amazonaws.com ) to integrate with Organizations For
+//     information, see EnableAWSServiceAccess (https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAWSServiceAccess.html)
+//     .
+//   - You must have a tag policy attached to the organization root, an OU, or an
+//     account.
 type ConstraintViolationException struct {
 	Message *string
 
@@ -97,7 +103,10 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 //   - A malformed string was supplied for the request parameter.
 //   - An out-of-range value was supplied for the request parameter.
 //   - The target ID is invalid, unsupported, or doesn't exist.
-//   - You can't access the Amazon S3 bucket for report storage. For more information, see Additional Requirements for Organization-wide Tag Compliance Reports (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report) in the Organizations User Guide.
+//   - You can't access the Amazon S3 bucket for report storage. For more
+//     information, see Additional Requirements for Organization-wide Tag Compliance
+//     Reports (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report)
+//     in the Organizations User Guide.
 type InvalidParameterException struct {
 	Message *string
 
@@ -123,8 +132,8 @@ func (e *InvalidParameterException) ErrorCode() string {
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A PaginationToken is valid for a maximum of 15 minutes. Your request was
-// denied because the specified PaginationToken  has expired.
+// A PaginationToken is valid for a maximum of 15 minutes. Your request was denied
+// because the specified PaginationToken has expired.
 type PaginationTokenExpiredException struct {
 	Message *string
 

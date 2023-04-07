@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides descriptions of large-scale assessment (LSA) analyses produced by
-// your Fleet Advisor collectors.
+// Provides descriptions of large-scale assessment (LSA) analyses produced by your
+// Fleet Advisor collectors.
 func (c *Client) DescribeFleetAdvisorLsaAnalysis(ctx context.Context, params *DescribeFleetAdvisorLsaAnalysisInput, optFns ...func(*Options)) (*DescribeFleetAdvisorLsaAnalysisOutput, error) {
 	if params == nil {
 		params = &DescribeFleetAdvisorLsaAnalysisInput{}
@@ -45,11 +45,11 @@ type DescribeFleetAdvisorLsaAnalysisInput struct {
 
 type DescribeFleetAdvisorLsaAnalysisOutput struct {
 
-	// A list of FleetAdvisorLsaAnalysisResponse  objects.
+	// A list of FleetAdvisorLsaAnalysisResponse objects.
 	Analysis []types.FleetAdvisorLsaAnalysisResponse
 
-	// If NextToken  is returned, there are more results available. The value of
-	// NextTokenis a unique pagination token for each page. Make the call again using
+	// If NextToken is returned, there are more results available. The value of
+	// NextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged.
 	NextToken *string
@@ -134,8 +134,8 @@ type DescribeFleetAdvisorLsaAnalysisPaginatorOptions struct {
 	// Sets the maximum number of records returned in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

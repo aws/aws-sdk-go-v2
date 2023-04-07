@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// ModifyInstanceGroups modifies the number of nodes and configuration settings
-// of an instance group. The input parameters include the new target instance count
+// ModifyInstanceGroups modifies the number of nodes and configuration settings of
+// an instance group. The input parameters include the new target instance count
 // for the group and the instance group ID. The call will either succeed or fail
 // atomically.
 func (c *Client) ModifyInstanceGroups(ctx context.Context, params *ModifyInstanceGroupsInput, optFns ...func(*Options)) (*ModifyInstanceGroupsOutput, error) {

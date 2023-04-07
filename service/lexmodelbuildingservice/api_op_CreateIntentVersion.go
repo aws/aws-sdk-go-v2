@@ -13,8 +13,8 @@ import (
 )
 
 // Creates a new version of an intent based on the $LATEST version of the intent.
-// If the $LATEST version of this intent hasn't changed since you last updated
-// it, Amazon Lex doesn't create a new version. It returns the last version you
+// If the $LATEST version of this intent hasn't changed since you last updated it,
+// Amazon Lex doesn't create a new version. It returns the last version you
 // created. You can update only the $LATEST version of the intent. You can't
 // update the numbered versions that you create with the CreateIntentVersion
 // operation. When you create a version of an intent, Amazon Lex sets the version
@@ -44,11 +44,11 @@ type CreateIntentVersionInput struct {
 	// This member is required.
 	Name *string
 
-	// Checksum of the $LATEST version of the intent that should be used to create
-	// the new version. If you specify a checksum and the $LATEST version of the
-	// intent has a different checksum, Amazon Lex returns a
-	// PreconditionFailedExceptionexception and doesn't publish a new version. If you
-	// don't specify a checksum, Amazon Lex publishes the $LATEST  version.
+	// Checksum of the $LATEST version of the intent that should be used to create the
+	// new version. If you specify a checksum and the $LATEST version of the intent
+	// has a different checksum, Amazon Lex returns a PreconditionFailedException
+	// exception and doesn't publish a new version. If you don't specify a checksum,
+	// Amazon Lex publishes the $LATEST version.
 	Checksum *string
 
 	noSmithyDocumentSerde
@@ -63,8 +63,8 @@ type CreateIntentVersionOutput struct {
 	// the intent, Amazon Lex conveys this statement to the user.
 	ConclusionStatement *types.Statement
 
-	// If defined, the prompt that Amazon Lex uses to confirm the user's intent
-	// before fulfilling it.
+	// If defined, the prompt that Amazon Lex uses to confirm the user's intent before
+	// fulfilling it.
 	ConfirmationPrompt *types.Prompt
 
 	// The date that the intent was created.
@@ -88,7 +88,7 @@ type CreateIntentVersionOutput struct {
 	InputContexts []types.InputContext
 
 	// Configuration information, if any, for connecting an Amazon Kendra index with
-	// the AMAZON.KendraSearchIntent  intent.
+	// the AMAZON.KendraSearchIntent intent.
 	KendraConfiguration *types.KendraConfiguration
 
 	// The date that the intent was updated.
@@ -104,7 +104,7 @@ type CreateIntentVersionOutput struct {
 	// A unique identifier for a built-in intent.
 	ParentIntentSignature *string
 
-	// If the user answers "no" to the question defined in confirmationPrompt, Amazon
+	// If the user answers "no" to the question defined in confirmationPrompt , Amazon
 	// Lex responds with this statement to acknowledge that the intent was canceled.
 	RejectionStatement *types.Statement
 

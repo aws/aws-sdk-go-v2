@@ -30,9 +30,9 @@ import (
 // latency cap policies. You can also include the ARN for an Amazon Simple
 // Notification Service (SNS) topic to receive notifications of game session
 // placement activity. Notifications using SNS or CloudWatch events is the
-// preferred way to track placement activity. If successful, a new
-// GameSessionQueueobject is returned with an assigned queue ARN. New game
-// session requests, which are submitted to queue with StartGameSessionPlacement (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
+// preferred way to track placement activity. If successful, a new GameSessionQueue
+// object is returned with an assigned queue ARN. New game session requests, which
+// are submitted to queue with StartGameSessionPlacement (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
 // or StartMatchmaking (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchmaking.html)
 // , reference a queue's name or ARN. Learn more Design a game session queue (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html)
 // Create a game session queue (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html)
@@ -75,8 +75,7 @@ type CreateGameSessionQueueInput struct {
 
 	// A list of locations where a queue is allowed to place new game sessions.
 	// Locations are specified in the form of Amazon Web Services Region codes, such as
-	//
-	// us-west-2. If this parameter is not set, game sessions can be placed in any
+	// us-west-2 . If this parameter is not set, game sessions can be placed in any
 	// queue location.
 	FilterConfiguration *types.FilterConfiguration
 
@@ -85,8 +84,8 @@ type CreateGameSessionQueueInput struct {
 	// .
 	NotificationTarget *string
 
-	// A set of policies that act as a sliding cap on player latency. FleetIQ works
-	// to deliver low latency for most players in a game session. These policies ensure
+	// A set of policies that act as a sliding cap on player latency. FleetIQ works to
+	// deliver low latency for most players in a game session. These policies ensure
 	// that no individual player can be placed into a game with unreasonably high
 	// latency. Use multiple policies to gradually relax latency requirements a step at
 	// a time. Multiple policies are applied based on their maximum allowed latency,
@@ -106,9 +105,9 @@ type CreateGameSessionQueueInput struct {
 	// in the Amazon Web Services General Reference.
 	Tags []types.Tag
 
-	// The maximum time, in seconds, that a new game session placement request
-	// remains in the queue. When a request exceeds this time, the game session
-	// placement changes to a TIMED_OUT  status.
+	// The maximum time, in seconds, that a new game session placement request remains
+	// in the queue. When a request exceeds this time, the game session placement
+	// changes to a TIMED_OUT status.
 	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde

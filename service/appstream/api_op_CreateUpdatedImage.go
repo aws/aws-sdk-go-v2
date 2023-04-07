@@ -46,8 +46,8 @@ type CreateUpdatedImageInput struct {
 
 	// Indicates whether to display the status of image update availability before
 	// AppStream 2.0 initiates the process of creating a new updated image. If this
-	// value is set to true, AppStream 2.0 displays whether image updates are
-	// available. If this value is set to false, AppStream 2.0 initiates the process
+	// value is set to true , AppStream 2.0 displays whether image updates are
+	// available. If this value is set to false , AppStream 2.0 initiates the process
 	// of creating a new updated image without displaying whether image updates are
 	// available.
 	DryRun bool

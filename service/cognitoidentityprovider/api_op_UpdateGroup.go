@@ -48,8 +48,8 @@ type UpdateGroupInput struct {
 	// .
 	Precedence *int32
 
-	// The new role Amazon Resource Name (ARN) for the group. This is used for
-	// setting the cognito:roles  and cognito:preferred_role  claims in the token.
+	// The new role Amazon Resource Name (ARN) for the group. This is used for setting
+	// the cognito:roles and cognito:preferred_role claims in the token.
 	RoleArn *string
 
 	noSmithyDocumentSerde

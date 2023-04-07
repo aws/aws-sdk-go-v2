@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Kinesis Data Analytics applications in your account. For
-// each application, the response includes the application name, Amazon Resource
-// Name (ARN), and status. If you want detailed information about a specific
+// Returns a list of Kinesis Data Analytics applications in your account. For each
+// application, the response includes the application name, Amazon Resource Name
+// (ARN), and status. If you want detailed information about a specific
 // application, use DescribeApplication .
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
@@ -46,7 +46,7 @@ type ListApplicationsInput struct {
 
 type ListApplicationsOutput struct {
 
-	// A list of ApplicationSummary  objects.
+	// A list of ApplicationSummary objects.
 	//
 	// This member is required.
 	ApplicationSummaries []types.ApplicationSummary

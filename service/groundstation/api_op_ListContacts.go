@@ -56,8 +56,8 @@ type ListContactsInput struct {
 	// ARN of a mission profile.
 	MissionProfileArn *string
 
-	// Next token returned in the request of a previous ListContacts call. Used to
-	// get the next page of results.
+	// Next token returned in the request of a previous ListContacts call. Used to get
+	// the next page of results.
 	NextToken *string
 
 	// ARN of a satellite.
@@ -156,8 +156,8 @@ type ListContactsPaginatorOptions struct {
 	// Maximum number of contacts returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

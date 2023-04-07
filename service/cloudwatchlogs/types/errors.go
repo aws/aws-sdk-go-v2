@@ -90,7 +90,7 @@ func (e *InvalidParameterException) ErrorCode() string {
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The sequence token is not valid. You can get the correct sequence token in the
-// expectedSequenceToken field in the InvalidSequenceTokenException  message.
+// expectedSequenceToken field in the InvalidSequenceTokenException message.
 // PutLogEvents actions are now always accepted and never return
 // InvalidSequenceTokenException regardless of receiving an invalid sequence token.
 type InvalidSequenceTokenException struct {

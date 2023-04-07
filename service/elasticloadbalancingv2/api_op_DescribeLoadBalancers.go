@@ -36,8 +36,8 @@ func (c *Client) DescribeLoadBalancers(ctx context.Context, params *DescribeLoad
 
 type DescribeLoadBalancersInput struct {
 
-	// The Amazon Resource Names (ARN) of the load balancers. You can specify up to
-	// 20 load balancers in a single call.
+	// The Amazon Resource Names (ARN) of the load balancers. You can specify up to 20
+	// load balancers in a single call.
 	LoadBalancerArns []string
 
 	// The marker for the next set of results. (You received this marker from a
@@ -139,8 +139,8 @@ var _ DescribeLoadBalancersAPIClient = (*Client)(nil)
 // DescribeLoadBalancersPaginatorOptions is the paginator options for
 // DescribeLoadBalancers
 type DescribeLoadBalancersPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -264,9 +264,9 @@ func NewLoadBalancerAvailableWaiter(client DescribeLoadBalancersAPIClient, optFn
 	}
 }
 
-// Wait calls the waiter function for LoadBalancerAvailable waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for LoadBalancerAvailable waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *LoadBalancerAvailableWaiter) Wait(ctx context.Context, params *DescribeLoadBalancersInput, maxWaitDur time.Duration, optFns ...func(*LoadBalancerAvailableWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -475,9 +475,9 @@ func NewLoadBalancerExistsWaiter(client DescribeLoadBalancersAPIClient, optFns .
 	}
 }
 
-// Wait calls the waiter function for LoadBalancerExists waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for LoadBalancerExists waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *LoadBalancerExistsWaiter) Wait(ctx context.Context, params *DescribeLoadBalancersInput, maxWaitDur time.Duration, optFns ...func(*LoadBalancerExistsWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

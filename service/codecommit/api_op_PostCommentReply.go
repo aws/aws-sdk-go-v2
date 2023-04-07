@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Posts a comment in reply to an existing comment on a comparison between
-// commits or a pull request.
+// Posts a comment in reply to an existing comment on a comparison between commits
+// or a pull request.
 func (c *Client) PostCommentReply(ctx context.Context, params *PostCommentReplyInput, optFns ...func(*Options)) (*PostCommentReplyOutput, error) {
 	if params == nil {
 		params = &PostCommentReplyInput{}
@@ -37,7 +37,7 @@ type PostCommentReplyInput struct {
 	Content *string
 
 	// The system-generated ID of the comment to which you want to reply. To get this
-	// ID, use GetCommentsForComparedCommit  or GetCommentsForPullRequest .
+	// ID, use GetCommentsForComparedCommit or GetCommentsForPullRequest .
 	//
 	// This member is required.
 	InReplyTo *string

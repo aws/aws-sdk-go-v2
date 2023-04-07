@@ -18,14 +18,14 @@ import (
 // cannot delete a file system that is part of an EFS Replication configuration.
 // You need to delete the replication configuration first. You can't delete a file
 // system that is in use. That is, if the file system has any mount targets, you
-// must first delete them. For more information, see DescribeMountTargets  and
+// must first delete them. For more information, see DescribeMountTargets and
 // DeleteMountTarget . The DeleteFileSystem call returns while the file system
-// state is still deleting. You can check the file system deletion status by
-// calling the DescribeFileSystems operation, which returns a list of file
-// systems in your account. If you pass file system ID or creation token for the
-// deleted file system, the DescribeFileSystems  returns a 404 FileSystemNotFound
-// error. This operation requires permissions for the
-// elasticfilesystem:DeleteFileSystem action.
+// state is still deleting . You can check the file system deletion status by
+// calling the DescribeFileSystems operation, which returns a list of file systems
+// in your account. If you pass file system ID or creation token for the deleted
+// file system, the DescribeFileSystems returns a 404 FileSystemNotFound error.
+// This operation requires permissions for the elasticfilesystem:DeleteFileSystem
+// action.
 func (c *Client) DeleteFileSystem(ctx context.Context, params *DeleteFileSystemInput, optFns ...func(*Options)) (*DeleteFileSystemOutput, error) {
 	if params == nil {
 		params = &DeleteFileSystemInput{}

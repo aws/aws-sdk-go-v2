@@ -232,8 +232,7 @@ type ReadSetExportJobCompletedWaiter struct {
 	options ReadSetExportJobCompletedWaiterOptions
 }
 
-// NewReadSetExportJobCompletedWaiter constructs a
-// ReadSetExportJobCompletedWaiter.
+// NewReadSetExportJobCompletedWaiter constructs a ReadSetExportJobCompletedWaiter.
 func NewReadSetExportJobCompletedWaiter(client GetReadSetExportJobAPIClient, optFns ...func(*ReadSetExportJobCompletedWaiterOptions)) *ReadSetExportJobCompletedWaiter {
 	options := ReadSetExportJobCompletedWaiterOptions{}
 	options.MinDelay = 30 * time.Second

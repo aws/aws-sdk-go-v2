@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes a custom vocabulary filter. To use this operation, specify the name of
-// the custom vocabulary filter you want to delete using VocabularyFilterName.
+// the custom vocabulary filter you want to delete using VocabularyFilterName .
 // Custom vocabulary filter names are case sensitive.
 func (c *Client) DeleteVocabularyFilter(ctx context.Context, params *DeleteVocabularyFilterInput, optFns ...func(*Options)) (*DeleteVocabularyFilterOutput, error) {
 	if params == nil {

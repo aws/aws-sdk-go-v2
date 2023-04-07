@@ -9,7 +9,7 @@ import (
 
 // The StartWorkflowExecution API action was called without the required
 // parameters set. Some workflow execution parameters, such as the decision
-// taskList, must be set to start the execution. However, these parameters might
+// taskList , must be set to start the execution. However, these parameters might
 // have been set as defaults when the workflow type was registered. In this case,
 // you can omit these parameters from the StartWorkflowExecution call and Amazon
 // SWF uses the values defined in the workflow type. If these parameters aren't set

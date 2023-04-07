@@ -28,7 +28,7 @@ func (c *Client) DeleteCacheParameterGroup(ctx context.Context, params *DeleteCa
 	return out, nil
 }
 
-// Represents the input of a DeleteCacheParameterGroup  operation.
+// Represents the input of a DeleteCacheParameterGroup operation.
 type DeleteCacheParameterGroupInput struct {
 
 	// The name of the cache parameter group to delete. The specified cache security

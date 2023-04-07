@@ -68,8 +68,7 @@ type CreateLayerInput struct {
 	Type types.LayerType
 
 	// One or more user-defined key-value pairs to be added to the stack attributes.
-	// To create a cluster layer, set the EcsClusterArn attribute to the cluster's
-	// ARN.
+	// To create a cluster layer, set the EcsClusterArn attribute to the cluster's ARN.
 	Attributes map[string]string
 
 	// Whether to automatically assign an Elastic IP address (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
@@ -98,7 +97,7 @@ type CreateLayerInput struct {
 	// . This feature is supported as of version 1.7.42 of the AWS CLI.
 	CustomJson *string
 
-	// A LayerCustomRecipes  object that specifies the layer custom recipes.
+	// A LayerCustomRecipes object that specifies the layer custom recipes.
 	CustomRecipes *types.Recipes
 
 	// An array containing the layer custom security group IDs.
@@ -108,32 +107,32 @@ type CreateLayerInput struct {
 	EnableAutoHealing *bool
 
 	// Whether to install operating system and package updates when the instance
-	// boots. The default value is true. To control when updates are installed, set
+	// boots. The default value is true . To control when updates are installed, set
 	// this value to false . You must then update your instances manually by using
 	// CreateDeployment to run the update_dependencies stack command or by manually
-	// running yum  (Amazon Linux) or apt-get (Ubuntu) on the instances. To ensure
-	// that your instances have the latest security updates, we strongly recommend
-	// using the default value of true .
+	// running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. To ensure that
+	// your instances have the latest security updates, we strongly recommend using the
+	// default value of true .
 	InstallUpdatesOnBoot *bool
 
-	// A LifeCycleEventConfiguration object that you can use to configure the
-	// Shutdown event to specify an execution timeout and enable or disable Elastic
-	// Load Balancer connection draining.
+	// A LifeCycleEventConfiguration object that you can use to configure the Shutdown
+	// event to specify an execution timeout and enable or disable Elastic Load
+	// Balancer connection draining.
 	LifecycleEventConfiguration *types.LifecycleEventConfiguration
 
-	// An array of Package  objects that describes the layer packages.
+	// An array of Package objects that describes the layer packages.
 	Packages []string
 
 	// Whether to use Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool
 
-	// A VolumeConfigurations  object that describes the layer's Amazon EBS volumes.
+	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
 	VolumeConfigurations []types.VolumeConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a CreateLayer  request.
+// Contains the response to a CreateLayer request.
 type CreateLayerOutput struct {
 
 	// The layer ID.

@@ -29,8 +29,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Keyspaces resource that the tags will be removed from. This value
-	// is an Amazon Resource Name (ARN).
+	// The Amazon Keyspaces resource that the tags will be removed from. This value is
+	// an Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceArn *string

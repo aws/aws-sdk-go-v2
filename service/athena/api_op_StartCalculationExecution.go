@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Submits calculations for execution within a session. You can supply the code
-// to run as an inline code block within the request.
+// Submits calculations for execution within a session. You can supply the code to
+// run as an inline code block within the request.
 func (c *Client) StartCalculationExecution(ctx context.Context, params *StartCalculationExecutionInput, optFns ...func(*Options)) (*StartCalculationExecutionOutput, error) {
 	if params == nil {
 		params = &StartCalculationExecutionInput{}
@@ -42,7 +42,7 @@ type StartCalculationExecutionInput struct {
 
 	// A unique case-sensitive string used to ensure the request to create the
 	// calculation is idempotent (executes only once). If another
-	// StartCalculationExecutionRequestis received, the same response is returned and
+	// StartCalculationExecutionRequest is received, the same response is returned and
 	// another calculation is not created. If a parameter has changed, an error is
 	// returned. This token is listed as not required because Amazon Web Services SDKs
 	// (for example the Amazon Web Services SDK for Java) auto-generate the token for
@@ -64,13 +64,13 @@ type StartCalculationExecutionOutput struct {
 	// The calculation execution UUID.
 	CalculationExecutionId *string
 
-	// CREATING  - The calculation is in the process of being created. CREATED - The
+	// CREATING - The calculation is in the process of being created. CREATED - The
 	// calculation has been created and is ready to run. QUEUED - The calculation has
-	// been queued for processing. RUNNING  - The calculation is running. CANCELING -
-	// A request to cancel the calculation has been received and the system is working
-	// to stop it. CANCELED - The calculation is no longer running as the result of a
-	// cancel request. COMPLETED  - The calculation has completed without error.
-	// FAILED - The calculation failed and is no longer running.
+	// been queued for processing. RUNNING - The calculation is running. CANCELING - A
+	// request to cancel the calculation has been received and the system is working to
+	// stop it. CANCELED - The calculation is no longer running as the result of a
+	// cancel request. COMPLETED - The calculation has completed without error. FAILED
+	// - The calculation failed and is no longer running.
 	State types.CalculationExecutionState
 
 	// Metadata pertaining to the operation's result.

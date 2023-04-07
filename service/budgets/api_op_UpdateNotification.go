@@ -30,8 +30,8 @@ func (c *Client) UpdateNotification(ctx context.Context, params *UpdateNotificat
 // Request of UpdateNotification
 type UpdateNotificationInput struct {
 
-	// The accountId that is associated with the budget whose notification you want
-	// to update.
+	// The accountId that is associated with the budget whose notification you want to
+	// update.
 	//
 	// This member is required.
 	AccountId *string

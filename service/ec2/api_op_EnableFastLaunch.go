@@ -12,13 +12,13 @@ import (
 	"time"
 )
 
-// When you enable faster launching for a Windows AMI, images are
-// pre-provisioned, using snapshots to launch instances up to 65% faster. To create
-// the optimized Windows image, Amazon EC2 launches an instance and runs through
-// Sysprep steps, rebooting as required. Then it creates a set of reserved
-// snapshots that are used for subsequent launches. The reserved snapshots are
-// automatically replenished as they are used, depending on your settings for
-// launch frequency. To change these settings, you must own the AMI.
+// When you enable faster launching for a Windows AMI, images are pre-provisioned,
+// using snapshots to launch instances up to 65% faster. To create the optimized
+// Windows image, Amazon EC2 launches an instance and runs through Sysprep steps,
+// rebooting as required. Then it creates a set of reserved snapshots that are used
+// for subsequent launches. The reserved snapshots are automatically replenished as
+// they are used, depending on your settings for launch frequency. To change these
+// settings, you must own the AMI.
 func (c *Client) EnableFastLaunch(ctx context.Context, params *EnableFastLaunchInput, optFns ...func(*Options)) (*EnableFastLaunchOutput, error) {
 	if params == nil {
 		params = &EnableFastLaunchInput{}
@@ -92,7 +92,7 @@ type EnableFastLaunchOutput struct {
 
 	// Settings to create and manage the pre-provisioned snapshots that Amazon EC2
 	// uses for faster launches from the Windows AMI. This property is returned when
-	// the associated resourceType  is snapshot .
+	// the associated resourceType is snapshot .
 	SnapshotConfiguration *types.FastLaunchSnapshotConfigurationResponse
 
 	// The current state of faster launching for the specified Windows AMI.

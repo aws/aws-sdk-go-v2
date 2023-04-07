@@ -15,10 +15,11 @@ import (
 // This operation is only valid for legacy predictors created with
 // CreatePredictor. If you are not using a legacy predictor, use
 // DescribeAutoPredictor . Describes a predictor created using the CreatePredictor
-// operation. In addition to listing the properties provided in the
-// CreatePredictor request, this operation lists the following properties:
+// operation. In addition to listing the properties provided in the CreatePredictor
+// request, this operation lists the following properties:
 //   - DatasetImportJobArns - The dataset import jobs used to import training data.
-//   - AutoMLAlgorithmArns - If AutoML is performed, the algorithms that were evaluated.
+//   - AutoMLAlgorithmArns - If AutoML is performed, the algorithms that were
+//     evaluated.
 //   - CreationTime
 //   - LastModificationTime
 //   - Status
@@ -40,8 +41,7 @@ func (c *Client) DescribePredictor(ctx context.Context, params *DescribePredicto
 
 type DescribePredictorInput struct {
 
-	// The Amazon Resource Name (ARN) of the predictor that you want information
-	// about.
+	// The Amazon Resource Name (ARN) of the predictor that you want information about.
 	//
 	// This member is required.
 	PredictorArn *string
@@ -54,14 +54,13 @@ type DescribePredictorOutput struct {
 	// The Amazon Resource Name (ARN) of the algorithm used for model training.
 	AlgorithmArn *string
 
-	// When PerformAutoML  is specified, the ARN of the chosen algorithm.
+	// When PerformAutoML is specified, the ARN of the chosen algorithm.
 	AutoMLAlgorithmArns []string
 
 	// The LatencyOptimized AutoML override strategy is only available in private
 	// beta. Contact Amazon Web Services Support or your account manager to learn more
 	// about access privileges. The AutoML strategy used to train the predictor. Unless
-	//
-	// LatencyOptimizedis specified, the AutoML strategy optimizes predictor
+	// LatencyOptimized is specified, the AutoML strategy optimizes predictor
 	// accuracy. This parameter is only valid for predictors trained using AutoML.
 	AutoMLOverrideStrategy types.AutoMLOverrideStrategy
 
@@ -107,13 +106,13 @@ type DescribePredictorOutput struct {
 	// Whether the predictor was created with CreateAutoPredictor .
 	IsAutoPredictor *bool
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -140,12 +139,12 @@ type DescribePredictorOutput struct {
 	PredictorName *string
 
 	// The status of the predictor. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//  The Status  of the predictor must be ACTIVE before you can use the predictor
-	// to create a forecast.
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	// The Status of the predictor must be ACTIVE before you can use the predictor to
+	// create a forecast.
 	Status *string
 
 	// The default training parameters or overrides selected during model training.

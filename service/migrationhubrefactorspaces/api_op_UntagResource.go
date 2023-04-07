@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds to or modifies the tags of the given resource. Tags are metadata which
-// can be used to manage a resource. To untag a resource, the caller account must
-// be the same as the resource’s OwnerAccountId. Untagging resources across
-// accounts is not supported.
+// Adds to or modifies the tags of the given resource. Tags are metadata which can
+// be used to manage a resource. To untag a resource, the caller account must be
+// the same as the resource’s OwnerAccountId . Untagging resources across accounts
+// is not supported.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

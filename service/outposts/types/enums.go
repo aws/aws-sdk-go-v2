@@ -10,9 +10,9 @@ const (
 	AddressTypeOperatingAddress AddressType = "OPERATING_ADDRESS"
 )
 
-// Values returns all known values for AddressType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AddressType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AddressType) Values() []AddressType {
 	return []AddressType{
 		"SHIPPING_ADDRESS",
@@ -240,9 +240,9 @@ const (
 	OrderStatusError      OrderStatus = "ERROR"
 )
 
-// Values returns all known values for OrderStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrderStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OrderStatus) Values() []OrderStatus {
 	return []OrderStatus{
 		"RECEIVED",
@@ -304,9 +304,9 @@ const (
 	PaymentTermOneYear    PaymentTerm = "ONE_YEAR"
 )
 
-// Values returns all known values for PaymentTerm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PaymentTerm. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PaymentTerm) Values() []PaymentTerm {
 	return []PaymentTerm{
 		"THREE_YEARS",
@@ -460,8 +460,8 @@ const (
 	SupportedStorageEnumS3  SupportedStorageEnum = "S3"
 )
 
-// Values returns all known values for SupportedStorageEnum. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SupportedStorageEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SupportedStorageEnum) Values() []SupportedStorageEnum {
 	return []SupportedStorageEnum{
@@ -486,9 +486,9 @@ const (
 	UplinkCountUplinkCount16 UplinkCount = "UPLINK_COUNT_16"
 )
 
-// Values returns all known values for UplinkCount. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UplinkCount. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (UplinkCount) Values() []UplinkCount {
 	return []UplinkCount{
 		"UPLINK_COUNT_1",

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the backup vault identified by its name. A vault can be deleted only
-// if it is empty.
+// Deletes the backup vault identified by its name. A vault can be deleted only if
+// it is empty.
 func (c *Client) DeleteBackupVault(ctx context.Context, params *DeleteBackupVaultInput, optFns ...func(*Options)) (*DeleteBackupVaultOutput, error) {
 	if params == nil {
 		params = &DeleteBackupVaultInput{}

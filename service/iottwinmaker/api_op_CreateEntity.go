@@ -41,8 +41,8 @@ type CreateEntityInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// An object that maps strings to the components in the entity. Each string in
-	// the mapping must be unique to this object.
+	// An object that maps strings to the components in the entity. Each string in the
+	// mapping must be unique to this object.
 	Components map[string]types.ComponentRequest
 
 	// The description of the entity.

@@ -28,8 +28,7 @@ func (c *Client) DeleteTarget(ctx context.Context, params *DeleteTargetInput, op
 
 type DeleteTargetInput struct {
 
-	// The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client to
-	// delete.
+	// The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client to delete.
 	//
 	// This member is required.
 	TargetAddress *string

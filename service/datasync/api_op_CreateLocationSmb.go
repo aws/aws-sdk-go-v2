@@ -53,10 +53,10 @@ type CreateLocationSmbInput struct {
 	// This member is required.
 	ServerHostname *string
 
-	// Specifies the name of the share exported by your SMB file server where
-	// DataSync will read or write data. You can include a subdirectory in the share
-	// path (for example, /path/to/subdirectory). Make sure that other SMB clients in
-	// your network can also mount this path. To copy all data in the specified
+	// Specifies the name of the share exported by your SMB file server where DataSync
+	// will read or write data. You can include a subdirectory in the share path (for
+	// example, /path/to/subdirectory ). Make sure that other SMB clients in your
+	// network can also mount this path. To copy all data in the specified
 	// subdirectory, DataSync must be able to mount the SMB share and access all of its
 	// data. For more information, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
 	// for SMB locations.
@@ -78,8 +78,8 @@ type CreateLocationSmbInput struct {
 	// for SMB locations.
 	Domain *string
 
-	// Specifies the version of the SMB protocol that DataSync uses to access your
-	// SMB file server.
+	// Specifies the version of the SMB protocol that DataSync uses to access your SMB
+	// file server.
 	MountOptions *types.SmbMountOptions
 
 	// Specifies labels that help you categorize, filter, and search for your Amazon

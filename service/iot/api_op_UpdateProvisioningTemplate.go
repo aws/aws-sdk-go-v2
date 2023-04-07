@@ -46,8 +46,8 @@ type UpdateProvisioningTemplateInput struct {
 	Enabled bool
 
 	// Updates the pre-provisioning hook template. Only supports template of type
-	// FLEET_PROVISIONING. For more information about provisioning template types,
-	// see type (https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type)
+	// FLEET_PROVISIONING . For more information about provisioning template types, see
+	// type (https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type)
 	// .
 	PreProvisioningHook *types.ProvisioningHook
 

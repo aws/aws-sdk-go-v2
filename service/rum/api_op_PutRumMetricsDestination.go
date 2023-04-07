@@ -38,20 +38,20 @@ type PutRumMetricsDestinationInput struct {
 	// This member is required.
 	AppMonitorName *string
 
-	// Defines the destination to send the metrics to. Valid values are CloudWatch
-	// and Evidently . If you specify Evidently, you must also specify the ARN of the
+	// Defines the destination to send the metrics to. Valid values are CloudWatch and
+	// Evidently . If you specify Evidently , you must also specify the ARN of the
 	// CloudWatchEvidently experiment that is to be the destination and an IAM role
 	// that has permission to write to the experiment.
 	//
 	// This member is required.
 	Destination types.MetricDestination
 
-	// Use this parameter only if Destination  is Evidently. This parameter specifies
+	// Use this parameter only if Destination is Evidently . This parameter specifies
 	// the ARN of the Evidently experiment that will receive the extended metrics.
 	DestinationArn *string
 
-	// This parameter is required if Destination  is Evidently . If Destination  is
-	// CloudWatch, do not use this parameter. This parameter specifies the ARN of an
+	// This parameter is required if Destination is Evidently . If Destination is
+	// CloudWatch , do not use this parameter. This parameter specifies the ARN of an
 	// IAM role that RUM will assume to write to the Evidently experiment that you are
 	// sending metrics to. This role must have permission to write to that experiment.
 	IamRoleArn *string

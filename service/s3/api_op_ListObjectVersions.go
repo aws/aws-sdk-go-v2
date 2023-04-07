@@ -70,11 +70,11 @@ type ListObjectVersionsInput struct {
 	// Specifies the key to start with when listing objects in a bucket.
 	KeyMarker *string
 
-	// Sets the maximum number of keys returned in the response. By default the
-	// action returns up to 1,000 key names. The response might contain fewer keys but
-	// will never contain more. If additional keys satisfy the search criteria, but
-	// were not returned because max-keys was exceeded, the response contains true. To
-	// return the additional keys, see key-marker and version-id-marker.
+	// Sets the maximum number of keys returned in the response. By default the action
+	// returns up to 1,000 key names. The response might contain fewer keys but will
+	// never contain more. If additional keys satisfy the search criteria, but were not
+	// returned because max-keys was exceeded, the response contains true. To return
+	// the additional keys, see key-marker and version-id-marker.
 	MaxKeys int32
 
 	// Use this parameter to select only those keys that begin with the specified
@@ -102,15 +102,14 @@ type ListObjectVersionsOutput struct {
 	// The delimiter grouping the included keys. A delimiter is a character that you
 	// specify to group keys. All keys that contain the same string between the prefix
 	// and the first occurrence of the delimiter are grouped under a single result
-	// element in CommonPrefixes. These groups are counted as one result against the
+	// element in CommonPrefixes . These groups are counted as one result against the
 	// max-keys limitation. These keys are not returned elsewhere in the response.
 	Delimiter *string
 
-	// Encoding type used by Amazon S3 to encode object key names in the XML
-	// response. If you specify encoding-type request parameter, Amazon S3 includes
-	// this element in the response, and returns encoded key name values in the
-	// following response elements: KeyMarker, NextKeyMarker, Prefix, Key , and
-	// Delimiter .
+	// Encoding type used by Amazon S3 to encode object key names in the XML response.
+	// If you specify encoding-type request parameter, Amazon S3 includes this element
+	// in the response, and returns encoded key name values in the following response
+	// elements: KeyMarker, NextKeyMarker, Prefix, Key , and Delimiter .
 	EncodingType types.EncodingType
 
 	// A flag that indicates whether Amazon S3 returned all of the results that

@@ -12,14 +12,14 @@ import (
 	"time"
 )
 
-// Creates a new version of the bot based on the $LATEST  version. If the $LATEST
+// Creates a new version of the bot based on the $LATEST version. If the $LATEST
 // version of this resource hasn't changed since you created the last version,
 // Amazon Lex doesn't create a new version. It returns the last created version.
 // You can update only the $LATEST version of the bot. You can't update the
-// numbered versions that you create with the CreateBotVersion operation. When
-// you create the first version of a bot, Amazon Lex sets the version to 1.
-// Subsequent versions increment by 1. For more information, see versioning-intro
-// . This operation requires permission for the lex:CreateBotVersion  action.
+// numbered versions that you create with the CreateBotVersion operation. When you
+// create the first version of a bot, Amazon Lex sets the version to 1. Subsequent
+// versions increment by 1. For more information, see versioning-intro . This
+// operation requires permission for the lex:CreateBotVersion action.
 func (c *Client) CreateBotVersion(ctx context.Context, params *CreateBotVersionInput, optFns ...func(*Options)) (*CreateBotVersionOutput, error) {
 	if params == nil {
 		params = &CreateBotVersionInput{}
@@ -44,10 +44,10 @@ type CreateBotVersionInput struct {
 	Name *string
 
 	// Identifies a specific revision of the $LATEST version of the bot. If you
-	// specify a checksum and the $LATEST version of the bot has a different
-	// checksum, a PreconditionFailedException exception is returned and Amazon Lex
-	// doesn't publish a new version. If you don't specify a checksum, Amazon Lex
-	// publishes the $LATEST  version.
+	// specify a checksum and the $LATEST version of the bot has a different checksum,
+	// a PreconditionFailedException exception is returned and Amazon Lex doesn't
+	// publish a new version. If you don't specify a checksum, Amazon Lex publishes the
+	// $LATEST version.
 	Checksum *string
 
 	noSmithyDocumentSerde
@@ -62,31 +62,30 @@ type CreateBotVersionOutput struct {
 	// Checksum identifying the version of the bot that was created.
 	Checksum *string
 
-	// For each Amazon Lex bot created with the Amazon Lex Model Building Service,
-	// you must specify whether your use of Amazon Lex is related to a website,
+	// For each Amazon Lex bot created with the Amazon Lex Model Building Service, you
+	// must specify whether your use of Amazon Lex is related to a website, program, or
+	// other application that is directed or targeted, in whole or in part, to children
+	// under age 13 and subject to the Children's Online Privacy Protection Act (COPPA)
+	// by specifying true or false in the childDirected field. By specifying true in
+	// the childDirected field, you confirm that your use of Amazon Lex is related to
+	// a website, program, or other application that is directed or targeted, in whole
+	// or in part, to children under age 13 and subject to COPPA. By specifying false
+	// in the childDirected field, you confirm that your use of Amazon Lex is not
+	// related to a website, program, or other application that is directed or
+	// targeted, in whole or in part, to children under age 13 and subject to COPPA.
+	// You may not specify a default value for the childDirected field that does not
+	// accurately reflect whether your use of Amazon Lex is related to a website,
 	// program, or other application that is directed or targeted, in whole or in part,
-	// to children under age 13 and subject to the Children's Online Privacy Protection
-	// Act (COPPA) by specifying true  or false  in the childDirected field. By
-	// specifying true  in the childDirected field, you confirm that your use of
-	// Amazon Lex is related to a website, program, or other application that is
-	// directed or targeted, in whole or in part, to children under age 13 and subject
-	// to COPPA. By specifying false  in the childDirected field, you confirm that
-	// your use of Amazon Lex is not related to a website, program, or other
-	// application that is directed or targeted, in whole or in part, to children under
-	// age 13 and subject to COPPA. You may not specify a default value for the
-	// childDirectedfield that does not accurately reflect whether your use of Amazon
-	// Lex is related to a website, program, or other application that is directed or
-	// targeted, in whole or in part, to children under age 13 and subject to COPPA. If
-	// your use of Amazon Lex relates to a website, program, or other application that
-	// is directed in whole or in part, to children under age 13, you must obtain any
-	// required verifiable parental consent under COPPA. For information regarding the
-	// use of Amazon Lex in connection with websites, programs, or other applications
-	// that are directed or targeted, in whole or in part, to children under age 13,
-	// see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
+	// to children under age 13 and subject to COPPA. If your use of Amazon Lex relates
+	// to a website, program, or other application that is directed in whole or in
+	// part, to children under age 13, you must obtain any required verifiable parental
+	// consent under COPPA. For information regarding the use of Amazon Lex in
+	// connection with websites, programs, or other applications that are directed or
+	// targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
 	ChildDirected *bool
 
-	// The message that Amazon Lex uses when it doesn't understand the user's
-	// request. For more information, see PutBot .
+	// The message that Amazon Lex uses when it doesn't understand the user's request.
+	// For more information, see PutBot .
 	ClarificationPrompt *types.Prompt
 
 	// The date when the bot version was created.
@@ -103,18 +102,18 @@ type CreateBotVersionOutput struct {
 	// bot is using the improvements, otherwise, false .
 	EnableModelImprovements *bool
 
-	// If status  is FAILED, Amazon Lex provides the reason that it failed to build
-	// the bot.
+	// If status is FAILED , Amazon Lex provides the reason that it failed to build the
+	// bot.
 	FailureReason *string
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
 	// conversation. For more information, see PutBot .
 	IdleSessionTTLInSeconds *int32
 
-	// An array of Intent  objects. For more information, see PutBot .
+	// An array of Intent objects. For more information, see PutBot .
 	Intents []types.Intent
 
-	// The date when the $LATEST  version of this bot was updated.
+	// The date when the $LATEST version of this bot was updated.
 	LastUpdatedDate *time.Time
 
 	// Specifies the target locale for the bot.
@@ -125,9 +124,8 @@ type CreateBotVersionOutput struct {
 
 	// When you send a request to create or update a bot, Amazon Lex sets the status
 	// response element to BUILDING . After Amazon Lex builds the bot, it sets status
-	// to READY . If Amazon Lex can't build the bot, it sets status  to FAILED.
-	// Amazon Lex returns the reason for the failure in the failureReason response
-	// element.
+	// to READY . If Amazon Lex can't build the bot, it sets status to FAILED . Amazon
+	// Lex returns the reason for the failure in the failureReason response element.
 	Status types.Status
 
 	// The version of the bot.

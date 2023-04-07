@@ -35,7 +35,7 @@ type CreateVolumeInput struct {
 	// This member is required.
 	Name *string
 
-	// Specifies the type of volume to create; ONTAP  and OPENZFS are the only valid
+	// Specifies the type of volume to create; ONTAP and OPENZFS are the only valid
 	// volume types.
 	//
 	// This member is required.
@@ -52,7 +52,7 @@ type CreateVolumeInput struct {
 	// Specifies the configuration to use when creating the OpenZFS volume.
 	OpenZFSConfiguration *types.CreateOpenZFSVolumeConfiguration
 
-	// A list of Tag  values, with a maximum of 50 elements.
+	// A list of Tag values, with a maximum of 50 elements.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

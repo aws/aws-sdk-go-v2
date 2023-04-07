@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates AppInstance  metadata.
+// Updates AppInstance metadata.
 func (c *Client) UpdateAppInstance(ctx context.Context, params *UpdateAppInstanceInput, optFns ...func(*Options)) (*UpdateAppInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateAppInstanceInput{}

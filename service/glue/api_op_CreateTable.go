@@ -35,16 +35,16 @@ type CreateTableInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The TableInput  object that defines the metadata table to create in the catalog.
+	// The TableInput object that defines the metadata table to create in the catalog.
 	//
 	// This member is required.
 	TableInput *types.TableInput
 
-	// The ID of the Data Catalog in which to create the Table. If none is supplied,
+	// The ID of the Data Catalog in which to create the Table . If none is supplied,
 	// the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
-	// A list of partition indexes, PartitionIndex  structures, to create in the table.
+	// A list of partition indexes, PartitionIndex structures, to create in the table.
 	PartitionIndexes []types.PartitionIndex
 
 	// The ID of the transaction.

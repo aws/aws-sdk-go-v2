@@ -15,7 +15,7 @@ import (
 // document) associated with the specified managed node. UpdateAssociationStatus
 // is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent)
 // to report status updates about your associations and is only used for
-// associations created with the InstanceId  legacy parameter.
+// associations created with the InstanceId legacy parameter.
 func (c *Client) UpdateAssociationStatus(ctx context.Context, params *UpdateAssociationStatusInput, optFns ...func(*Options)) (*UpdateAssociationStatusOutput, error) {
 	if params == nil {
 		params = &UpdateAssociationStatusInput{}

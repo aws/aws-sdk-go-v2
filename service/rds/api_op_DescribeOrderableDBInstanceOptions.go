@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of orderable DB instance options for the specified DB engine,
-// DB engine version, and DB instance class.
+// Returns a list of orderable DB instance options for the specified DB engine, DB
+// engine version, and DB instance class.
 func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params *DescribeOrderableDBInstanceOptionsInput, optFns ...func(*Options)) (*DescribeOrderableDBInstanceOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeOrderableDBInstanceOptionsInput{}
@@ -32,19 +32,19 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 type DescribeOrderableDBInstanceOptionsInput struct {
 
 	// The name of the engine to retrieve DB instance options for. Valid Values:
-	//     - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
-	//     - aurora-postgresql
-	//     - mariadb
-	//     - mysql
-	//     - oracle-ee
-	//     - oracle-ee-cdb
-	//     - oracle-se2
-	//     - oracle-se2-cdb
-	//     - postgres
-	//     - sqlserver-ee
-	//     - sqlserver-se
-	//     - sqlserver-ex
-	//     - sqlserver-web
+	//   - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
+	//   - aurora-postgresql
+	//   - mariadb
+	//   - mysql
+	//   - oracle-ee
+	//   - oracle-ee-cdb
+	//   - oracle-se2
+	//   - oracle-se2-cdb
+	//   - postgres
+	//   - sqlserver-ee
+	//   - sqlserver-se
+	//   - sqlserver-ex
+	//   - sqlserver-web
 	//
 	// This member is required.
 	Engine *string
@@ -77,9 +77,9 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 10000.
 	MaxRecords *int32
 
@@ -181,17 +181,17 @@ type DescribeOrderableDBInstanceOptionsAPIClient interface {
 
 var _ DescribeOrderableDBInstanceOptionsAPIClient = (*Client)(nil)
 
-// DescribeOrderableDBInstanceOptionsPaginatorOptions is the paginator options
-// for DescribeOrderableDBInstanceOptions
+// DescribeOrderableDBInstanceOptionsPaginatorOptions is the paginator options for
+// DescribeOrderableDBInstanceOptions
 type DescribeOrderableDBInstanceOptionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 10000.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

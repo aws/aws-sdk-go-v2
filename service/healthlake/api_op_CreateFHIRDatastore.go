@@ -45,8 +45,8 @@ type CreateFHIRDatastoreInput struct {
 	// the only supported preloaded data is synthetic data generated from Synthea.
 	PreloadDataConfig *types.PreloadDataConfig
 
-	// The server-side encryption key configuration for a customer provided
-	// encryption key specified for creating a Data Store.
+	// The server-side encryption key configuration for a customer provided encryption
+	// key specified for creating a Data Store.
 	SseConfiguration *types.SseConfiguration
 
 	// Resource tags that are applied to a Data Store when it is created.
@@ -57,8 +57,8 @@ type CreateFHIRDatastoreInput struct {
 
 type CreateFHIRDatastoreOutput struct {
 
-	// The datastore ARN is generated during the creation of the Data Store and can
-	// be found in the output from the initial Data Store creation call.
+	// The datastore ARN is generated during the creation of the Data Store and can be
+	// found in the output from the initial Data Store creation call.
 	//
 	// This member is required.
 	DatastoreArn *string
@@ -69,8 +69,8 @@ type CreateFHIRDatastoreOutput struct {
 	// This member is required.
 	DatastoreEndpoint *string
 
-	// The AWS-generated Data Store id. This id is in the output from the initial
-	// Data Store creation call.
+	// The AWS-generated Data Store id. This id is in the output from the initial Data
+	// Store creation call.
 	//
 	// This member is required.
 	DatastoreId *string

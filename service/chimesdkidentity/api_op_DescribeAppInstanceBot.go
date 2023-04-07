@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The AppInstanceBot's  information.
+// The AppInstanceBot's information.
 func (c *Client) DescribeAppInstanceBot(ctx context.Context, params *DescribeAppInstanceBotInput, optFns ...func(*Options)) (*DescribeAppInstanceBotOutput, error) {
 	if params == nil {
 		params = &DescribeAppInstanceBotInput{}

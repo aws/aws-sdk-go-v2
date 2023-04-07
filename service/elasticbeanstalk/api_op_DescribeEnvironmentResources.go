@@ -32,12 +32,12 @@ type DescribeEnvironmentResourcesInput struct {
 
 	// The ID of the environment to retrieve AWS resource usage data. Condition: You
 	// must specify either this or an EnvironmentName, or both. If you do not specify
-	// either, AWS Elastic Beanstalk returns MissingRequiredParameter  error.
+	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentId *string
 
-	// The name of the environment to retrieve AWS resource usage data. Condition:
-	// You must specify either this or an EnvironmentId, or both. If you do not specify
-	// either, AWS Elastic Beanstalk returns MissingRequiredParameter  error.
+	// The name of the environment to retrieve AWS resource usage data. Condition: You
+	// must specify either this or an EnvironmentId, or both. If you do not specify
+	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
 
 	noSmithyDocumentSerde

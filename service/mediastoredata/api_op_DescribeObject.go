@@ -29,8 +29,8 @@ func (c *Client) DescribeObject(ctx context.Context, params *DescribeObjectInput
 
 type DescribeObjectInput struct {
 
-	// The path (including the file name) where the object is stored in the
-	// container. Format: //
+	// The path (including the file name) where the object is stored in the container.
+	// Format: //
 	//
 	// This member is required.
 	Path *string

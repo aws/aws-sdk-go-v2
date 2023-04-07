@@ -43,8 +43,8 @@ func (c *Client) CreateStorediSCSIVolume(ctx context.Context, params *CreateStor
 //   - CreateStorediSCSIVolumeInput$TargetName
 type CreateStorediSCSIVolumeInput struct {
 
-	// The unique identifier for the gateway local disk that is configured as a
-	// stored volume. Use ListLocalDisks (https://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html)
+	// The unique identifier for the gateway local disk that is configured as a stored
+	// volume. Use ListLocalDisks (https://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html)
 	// to list disk IDs for a gateway.
 	//
 	// This member is required.
@@ -64,7 +64,7 @@ type CreateStorediSCSIVolumeInput struct {
 	NetworkInterfaceId *string
 
 	// Set to true if you want to preserve the data on the local disk. Otherwise, set
-	// to false  to create an empty volume. Valid Values: true  | false
+	// to false to create an empty volume. Valid Values: true | false
 	//
 	// This member is required.
 	PreserveExistingData bool
@@ -80,14 +80,13 @@ type CreateStorediSCSIVolumeInput struct {
 	// This member is required.
 	TargetName *string
 
-	// Set to true  to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true  | false
+	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
 	// for Amazon S3 server-side encryption. Storage Gateway does not support
-	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
-	// Optional.
+	// asymmetric CMKs. This value can only be set when KMSEncrypted is true . Optional.
 	KMSKey *string
 
 	// The snapshot ID (e.g., "snap-1122aabb") of the snapshot to restore as the new

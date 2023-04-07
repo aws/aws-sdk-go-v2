@@ -13,7 +13,7 @@ import (
 
 // Disassociates GuardDuty member accounts (to the current administrator account)
 // specified by the account IDs. With autoEnableOrganizationMembers configuration
-// for your organization set to ALL, you'll receive an error if you attempt to
+// for your organization set to ALL , you'll receive an error if you attempt to
 // disassociate a member account before removing them from your Amazon Web Services
 // organization.
 func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMembersInput, optFns ...func(*Options)) (*DisassociateMembersOutput, error) {
@@ -50,8 +50,8 @@ type DisassociateMembersInput struct {
 
 type DisassociateMembersOutput struct {
 
-	// A list of objects that contain the unprocessed account and a result string
-	// that explains why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string that
+	// explains why it was unprocessed.
 	//
 	// This member is required.
 	UnprocessedAccounts []types.UnprocessedAccount

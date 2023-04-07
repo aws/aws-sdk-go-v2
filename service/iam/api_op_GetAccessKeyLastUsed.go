@@ -33,7 +33,7 @@ func (c *Client) GetAccessKeyLastUsed(ctx context.Context, params *GetAccessKeyL
 type GetAccessKeyLastUsedInput struct {
 
 	// The identifier of an access key. This parameter allows (through its regex
-	// pattern (http://wikipedia.org/wiki/regex)) a string of characters that can
+	// pattern (http://wikipedia.org/wiki/regex) ) a string of characters that can
 	// consist of any upper or lowercased letter or digit.
 	//
 	// This member is required.
@@ -43,7 +43,7 @@ type GetAccessKeyLastUsedInput struct {
 }
 
 // Contains the response to a successful GetAccessKeyLastUsed request. It is also
-// returned as a member of the AccessKeyMetaData  structure returned by the
+// returned as a member of the AccessKeyMetaData structure returned by the
 // ListAccessKeys action.
 type GetAccessKeyLastUsedOutput struct {
 

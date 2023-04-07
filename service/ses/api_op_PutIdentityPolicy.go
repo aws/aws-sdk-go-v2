@@ -34,15 +34,15 @@ func (c *Client) PutIdentityPolicy(ctx context.Context, params *PutIdentityPolic
 
 // Represents a request to add or update a sending authorization policy for an
 // identity. Sending authorization is an Amazon SES feature that enables you to
-// authorize other senders to use your identities. For information, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+// authorize other senders to use your identities. For information, see the Amazon
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
 // .
 type PutIdentityPolicyInput struct {
 
 	// The identity that the policy will apply to. You can specify an identity by
 	// using its name or by using its Amazon Resource Name (ARN). Examples:
 	// user@example.com , example.com ,
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com. To successfully call
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com . To successfully call
 	// this API, you must own the identity.
 	//
 	// This member is required.

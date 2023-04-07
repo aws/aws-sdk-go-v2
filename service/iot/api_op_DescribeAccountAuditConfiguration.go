@@ -46,8 +46,8 @@ type DescribeAccountAuditConfigurationOutput struct {
 
 	// The ARN of the role that grants permission to IoT to access information about
 	// your devices, policies, certificates, and other items as required when
-	// performing an audit. On the first call to UpdateAccountAuditConfiguration,
-	// this parameter is required.
+	// performing an audit. On the first call to UpdateAccountAuditConfiguration , this
+	// parameter is required.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.

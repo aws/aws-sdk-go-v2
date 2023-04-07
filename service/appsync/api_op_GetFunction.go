@@ -34,7 +34,7 @@ type GetFunctionInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The Function  ID.
+	// The Function ID.
 	//
 	// This member is required.
 	FunctionId *string
@@ -44,7 +44,7 @@ type GetFunctionInput struct {
 
 type GetFunctionOutput struct {
 
-	// The Function  object.
+	// The Function object.
 	FunctionConfiguration *types.FunctionConfiguration
 
 	// Metadata pertaining to the operation's result.

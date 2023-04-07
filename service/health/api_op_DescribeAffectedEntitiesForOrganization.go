@@ -21,8 +21,12 @@ import (
 // work with Organizations. To do this, call the
 // EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
 // operation from your organization's management account.
-//   - This API operation uses pagination. Specify the nextToken parameter in the next request to return more results.
-//   - This operation doesn't support resource-level permissions. You can't use this operation to allow or deny access to specific Health events. For more information, see Resource- and action-based conditions (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions) in the Health User Guide.
+//   - This API operation uses pagination. Specify the nextToken parameter in the
+//     next request to return more results.
+//   - This operation doesn't support resource-level permissions. You can't use
+//     this operation to allow or deny access to specific Health events. For more
+//     information, see Resource- and action-based conditions (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions)
+//     in the Health User Guide.
 func (c *Client) DescribeAffectedEntitiesForOrganization(ctx context.Context, params *DescribeAffectedEntitiesForOrganizationInput, optFns ...func(*Options)) (*DescribeAffectedEntitiesForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeAffectedEntitiesForOrganizationInput{}
@@ -40,13 +44,13 @@ func (c *Client) DescribeAffectedEntitiesForOrganization(ctx context.Context, pa
 
 type DescribeAffectedEntitiesForOrganizationInput struct {
 
-	// A JSON set of elements including the awsAccountId  and the eventArn .
+	// A JSON set of elements including the awsAccountId and the eventArn .
 	//
 	// This member is required.
 	OrganizationEntityFilters []types.EventAccountFilter
 
-	// The locale (language) to return information in. English (en) is the default
-	// and the only supported value at this time.
+	// The locale (language) to return information in. English (en) is the default and
+	// the only supported value at this time.
 	Locale *string
 
 	// The maximum number of items to return in one batch, between 10 and 100,
@@ -65,7 +69,7 @@ type DescribeAffectedEntitiesForOrganizationInput struct {
 
 type DescribeAffectedEntitiesForOrganizationOutput struct {
 
-	// A JSON set of elements including the awsAccountId  and its entityArn ,
+	// A JSON set of elements including the awsAccountId and its entityArn ,
 	// entityValue and its entityArn , lastUpdatedTime , and statusCode .
 	Entities []types.AffectedEntity
 
@@ -164,8 +168,8 @@ type DescribeAffectedEntitiesForOrganizationPaginatorOptions struct {
 	// inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

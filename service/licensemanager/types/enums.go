@@ -233,9 +233,9 @@ const (
 	GrantStatusWorkflowCompleted GrantStatus = "WORKFLOW_COMPLETED"
 )
 
-// Values returns all known values for GrantStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for GrantStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (GrantStatus) Values() []GrantStatus {
 	return []GrantStatus{
 		"PENDING_WORKFLOW",
@@ -299,10 +299,9 @@ const (
 	LicenseConversionTaskStatusFailed     LicenseConversionTaskStatus = "FAILED"
 )
 
-// Values returns all known values for LicenseConversionTaskStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for LicenseConversionTaskStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseConversionTaskStatus) Values() []LicenseConversionTaskStatus {
 	return []LicenseConversionTaskStatus{
 		"IN_PROGRESS",

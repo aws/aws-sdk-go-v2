@@ -44,7 +44,7 @@ type DescribeAppInstanceUserEndpointInput struct {
 
 type DescribeAppInstanceUserEndpointOutput struct {
 
-	// The full details of an AppInstanceUserEndpoint : the AppInstanceUserArn, ID,
+	// The full details of an AppInstanceUserEndpoint : the AppInstanceUserArn , ID,
 	// name, type, resource ARN, attributes, allow messages, state, and created and
 	// last updated timestamps. All timestamps use epoch milliseconds.
 	AppInstanceUserEndpoint *types.AppInstanceUserEndpoint

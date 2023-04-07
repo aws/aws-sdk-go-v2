@@ -37,37 +37,36 @@ func (c *Client) CreateMicrosoftAD(ctx context.Context, params *CreateMicrosoftA
 // Creates an Managed Microsoft AD directory.
 type CreateMicrosoftADInput struct {
 
-	// The fully qualified domain name for the Managed Microsoft AD directory, such
-	// as corp.example.com. This name will resolve inside your VPC only. It does not
-	// need to be publicly resolvable.
+	// The fully qualified domain name for the Managed Microsoft AD directory, such as
+	// corp.example.com . This name will resolve inside your VPC only. It does not need
+	// to be publicly resolvable.
 	//
 	// This member is required.
 	Name *string
 
-	// The password for the default administrative user named Admin. If you need to
+	// The password for the default administrative user named Admin . If you need to
 	// change the password for the administrator account, you can use the
 	// ResetUserPassword API call.
 	//
 	// This member is required.
 	Password *string
 
-	// Contains VPC information for the CreateDirectory  or CreateMicrosoftAD
-	// operation.
+	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
 	//
 	// This member is required.
 	VpcSettings *types.DirectoryVpcSettings
 
 	// A description for the directory. This label will appear on the Amazon Web
-	// Services console Directory Details  page after the directory is created.
+	// Services console Directory Details page after the directory is created.
 	Description *string
 
-	// Managed Microsoft AD is available in two editions: Standard  and Enterprise .
+	// Managed Microsoft AD is available in two editions: Standard and Enterprise .
 	// Enterprise is the default.
 	Edition types.DirectoryEdition
 
-	// The NetBIOS name for your domain, such as CORP. If you don't specify a NetBIOS
-	// name, it will default to the first part of your directory DNS. For example,
-	// CORP for the directory DNS corp.example.com .
+	// The NetBIOS name for your domain, such as CORP . If you don't specify a NetBIOS
+	// name, it will default to the first part of your directory DNS. For example, CORP
+	// for the directory DNS corp.example.com .
 	ShortName *string
 
 	// The tags to be assigned to the Managed Microsoft AD directory.

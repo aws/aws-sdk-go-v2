@@ -13,7 +13,7 @@ import (
 )
 
 // Places an outbound call to a contact, and then initiates the flow. It performs
-// the actions in the flow that's specified (in ContactFlowId). Agents do not
+// the actions in the flow that's specified (in ContactFlowId ). Agents do not
 // initiate the outbound API, which means that they do not dial the contact. If the
 // flow places an outbound call to a contact, and then puts the contact in queue,
 // the call is then routed to the agent, like any other inbound case. There is a
@@ -22,7 +22,7 @@ import (
 // Before you can dial these UK mobile numbers, you must submit a service quota
 // increase request. For more information, see Amazon Connect Service Quotas (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
 // in the Amazon Connect Administrator Guide. Campaign calls are not allowed by
-// default. Before you can make a call with TrafficType  = CAMPAIGN, you must
+// default. Before you can make a call with TrafficType = CAMPAIGN , you must
 // submit a service quota increase request to the quota Amazon Connect campaigns (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas)
 // .
 func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOutboundVoiceContactInput, optFns ...func(*Options)) (*StartOutboundVoiceContactOutput, error) {
@@ -95,7 +95,7 @@ type StartOutboundVoiceContactInput struct {
 	SourcePhoneNumber *string
 
 	// Denotes the class of traffic. Calls with different traffic types are handled
-	// differently by Amazon Connect. The default value is GENERAL . Use CAMPAIGN  if
+	// differently by Amazon Connect. The default value is GENERAL . Use CAMPAIGN if
 	// EnableAnswerMachineDetection is set to true . For all other cases, use GENERAL .
 	TrafficType types.TrafficType
 

@@ -73,7 +73,7 @@ type CreateCustomActionTypeInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreateCustomActionType  operation.
+// Represents the output of a CreateCustomActionType operation.
 type CreateCustomActionTypeOutput struct {
 
 	// Returns information about the details of an action type.

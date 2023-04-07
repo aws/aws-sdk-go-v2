@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a given tag to a resource in your account. A tag is a key-value
-// pair which can be added to an Amazon Lookout for Equipment resource as metadata.
-// Tags can be used for organizing your resources as well as helping you to search
-// and filter by tag. Multiple tags can be added to a resource, either when you
-// create it, or later. Up to 50 tags can be associated with each resource.
+// Associates a given tag to a resource in your account. A tag is a key-value pair
+// which can be added to an Amazon Lookout for Equipment resource as metadata. Tags
+// can be used for organizing your resources as well as helping you to search and
+// filter by tag. Multiple tags can be added to a resource, either when you create
+// it, or later. Up to 50 tags can be associated with each resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -33,14 +33,14 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the specific resource to which the tag
-	// should be associated.
+	// The Amazon Resource Name (ARN) of the specific resource to which the tag should
+	// be associated.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The tag or tags to be associated with a specific resource. Both the tag key
-	// and value are specified.
+	// The tag or tags to be associated with a specific resource. Both the tag key and
+	// value are specified.
 	//
 	// This member is required.
 	Tags []types.Tag

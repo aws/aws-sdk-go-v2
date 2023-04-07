@@ -11,7 +11,7 @@ import (
 )
 
 // Returns the FileSystemPolicy for the specified EFS file system. This operation
-// requires permissions for the elasticfilesystem:DescribeFileSystemPolicy  action.
+// requires permissions for the elasticfilesystem:DescribeFileSystemPolicy action.
 func (c *Client) DescribeFileSystemPolicy(ctx context.Context, params *DescribeFileSystemPolicyInput, optFns ...func(*Options)) (*DescribeFileSystemPolicyOutput, error) {
 	if params == nil {
 		params = &DescribeFileSystemPolicyInput{}
@@ -29,7 +29,7 @@ func (c *Client) DescribeFileSystemPolicy(ctx context.Context, params *DescribeF
 
 type DescribeFileSystemPolicyInput struct {
 
-	// Specifies which EFS file system to retrieve the FileSystemPolicy  for.
+	// Specifies which EFS file system to retrieve the FileSystemPolicy for.
 	//
 	// This member is required.
 	FileSystemId *string
@@ -39,10 +39,10 @@ type DescribeFileSystemPolicyInput struct {
 
 type DescribeFileSystemPolicyOutput struct {
 
-	// Specifies the EFS file system to which the FileSystemPolicy  applies.
+	// Specifies the EFS file system to which the FileSystemPolicy applies.
 	FileSystemId *string
 
-	// The JSON formatted FileSystemPolicy  for the EFS file system.
+	// The JSON formatted FileSystemPolicy for the EFS file system.
 	Policy *string
 
 	// Metadata pertaining to the operation's result.

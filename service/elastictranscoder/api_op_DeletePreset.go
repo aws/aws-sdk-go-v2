@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The DeletePreset operation removes a preset that you've added in an AWS
-// region. You can't delete the default presets that are included with Elastic
-// Transcoder.
+// The DeletePreset operation removes a preset that you've added in an AWS region.
+// You can't delete the default presets that are included with Elastic Transcoder.
 func (c *Client) DeletePreset(ctx context.Context, params *DeletePresetInput, optFns ...func(*Options)) (*DeletePresetOutput, error) {
 	if params == nil {
 		params = &DeletePresetInput{}
@@ -28,7 +27,7 @@ func (c *Client) DeletePreset(ctx context.Context, params *DeletePresetInput, op
 	return out, nil
 }
 
-// The DeletePresetRequest  structure.
+// The DeletePresetRequest structure.
 type DeletePresetInput struct {
 
 	// The identifier of the preset for which you want to get detailed information.
@@ -39,7 +38,7 @@ type DeletePresetInput struct {
 	noSmithyDocumentSerde
 }
 
-// The DeletePresetResponse  structure.
+// The DeletePresetResponse structure.
 type DeletePresetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

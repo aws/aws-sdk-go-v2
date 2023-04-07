@@ -15,7 +15,7 @@ import (
 // Lists the Device Defender security profiles you've created. You can filter
 // security profiles by dimension or custom metric. Requires permission to access
 // the ListSecurityProfiles (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. dimensionName  and metricName  cannot be used in the same request.
+// action. dimensionName and metricName cannot be used in the same request.
 func (c *Client) ListSecurityProfiles(ctx context.Context, params *ListSecurityProfilesInput, optFns ...func(*Options)) (*ListSecurityProfilesOutput, error) {
 	if params == nil {
 		params = &ListSecurityProfilesInput{}
@@ -138,8 +138,8 @@ type ListSecurityProfilesPaginatorOptions struct {
 	// The maximum number of results to return at one time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -40,7 +40,7 @@ type CreateAutoMLJobInput struct {
 	AutoMLJobName *string
 
 	// An array of channel objects that describes the input data and its location.
-	// Each channel is a named input source. Similar to InputDataConfig  supported by
+	// Each channel is a named input source. Similar to InputDataConfig supported by
 	// HyperParameterTrainingJobDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html)
 	// . Format(s) supported: CSV, Parquet. A minimum of 500 rows is required for the
 	// training dataset. There is not a minimum number of rows required for the
@@ -66,7 +66,7 @@ type CreateAutoMLJobInput struct {
 	// Defines the objective metric used to measure the predictive quality of an
 	// AutoML job. You provide an AutoMLJobObjective$MetricName (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html)
 	// and Autopilot infers whether to minimize or maximize it. For CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
-	// , only Accuracy  is supported.
+	// , only Accuracy is supported.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// Generates possible candidates without training the models. A candidate is a

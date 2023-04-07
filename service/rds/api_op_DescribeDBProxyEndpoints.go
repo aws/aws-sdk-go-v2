@@ -35,8 +35,8 @@ type DescribeDBProxyEndpointsInput struct {
 	// specified proxy.
 	DBProxyEndpointName *string
 
-	// The name of the DB proxy whose endpoints you want to describe. If you omit
-	// this parameter, the output includes information about all DB proxy endpoints
+	// The name of the DB proxy whose endpoints you want to describe. If you omit this
+	// parameter, the output includes information about all DB proxy endpoints
 	// associated with all your DB proxies.
 	DBProxyName *string
 
@@ -48,9 +48,9 @@ type DescribeDBProxyEndpointsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -59,7 +59,7 @@ type DescribeDBProxyEndpointsInput struct {
 
 type DescribeDBProxyEndpointsOutput struct {
 
-	// The list of ProxyEndpoint  objects returned by the API operation.
+	// The list of ProxyEndpoint objects returned by the API operation.
 	DBProxyEndpoints []types.DBProxyEndpoint
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -147,14 +147,14 @@ var _ DescribeDBProxyEndpointsAPIClient = (*Client)(nil)
 // DescribeDBProxyEndpointsPaginatorOptions is the paginator options for
 // DescribeDBProxyEndpoints
 type DescribeDBProxyEndpointsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

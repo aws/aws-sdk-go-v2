@@ -40,11 +40,11 @@ type TestCustomDataIdentifierInput struct {
 	// This member is required.
 	SampleText *string
 
-	// An array that lists specific character sequences (ignore words) to exclude
-	// from the results. If the text matched by the regular expression contains any
-	// string in this array, Amazon Macie ignores it. The array can contain as many as
-	// 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore
-	// words are case sensitive.
+	// An array that lists specific character sequences (ignore words) to exclude from
+	// the results. If the text matched by the regular expression contains any string
+	// in this array, Amazon Macie ignores it. The array can contain as many as 10
+	// ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words
+	// are case sensitive.
 	IgnoreWords []string
 
 	// An array that lists specific character sequences (keywords), one of which must
@@ -53,10 +53,10 @@ type TestCustomDataIdentifierInput struct {
 	// 3-90 UTF-8 characters. Keywords aren't case sensitive.
 	Keywords []string
 
-	// The maximum number of characters that can exist between the end of at least
-	// one complete character sequence specified by the keywords array and the end of
-	// the text that matches the regex pattern. If a complete keyword precedes all the
-	// text that matches the pattern and the keyword is within the specified distance,
+	// The maximum number of characters that can exist between the end of at least one
+	// complete character sequence specified by the keywords array and the end of the
+	// text that matches the regex pattern. If a complete keyword precedes all the text
+	// that matches the pattern and the keyword is within the specified distance,
 	// Amazon Macie includes the result. The distance can be 1-300 characters. The
 	// default value is 50.
 	MaximumMatchDistance int32
@@ -66,8 +66,8 @@ type TestCustomDataIdentifierInput struct {
 
 type TestCustomDataIdentifierOutput struct {
 
-	// The number of occurrences of sample text that matched the criteria specified
-	// by the custom data identifier.
+	// The number of occurrences of sample text that matched the criteria specified by
+	// the custom data identifier.
 	MatchCount int32
 
 	// Metadata pertaining to the operation's result.

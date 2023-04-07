@@ -42,7 +42,7 @@ type BatchGetReportGroupsOutput struct {
 	// The array of report groups returned by BatchGetReportGroups .
 	ReportGroups []types.ReportGroup
 
-	// An array of ARNs passed to BatchGetReportGroups  that are not associated with a
+	// An array of ARNs passed to BatchGetReportGroups that are not associated with a
 	// ReportGroup .
 	ReportGroupsNotFound []string
 

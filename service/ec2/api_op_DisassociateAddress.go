@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates an Elastic IP address from the instance or network interface
-// it's associated with. An Elastic IP address is for use in either the EC2-Classic
+// Disassociates an Elastic IP address from the instance or network interface it's
+// associated with. An Elastic IP address is for use in either the EC2-Classic
 // platform or in a VPC. For more information, see Elastic IP Addresses (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 // in the Amazon Elastic Compute Cloud User Guide. We are retiring EC2-Classic. We
 // recommend that you migrate from EC2-Classic to a VPC. For more information, see

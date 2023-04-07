@@ -80,9 +80,9 @@ type DescribeAutoMLJobOutput struct {
 	// This member is required.
 	OutputDataConfig *types.AutoMLOutputDataConfig
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
-	// role that has read permission to the input data location and write permission to
-	// the output data location in Amazon S3.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// that has read permission to the input data location and write permission to the
+	// output data location in Amazon S3.
 	//
 	// This member is required.
 	RoleArn *string
@@ -124,7 +124,7 @@ type DescribeAutoMLJobOutput struct {
 	// Returns the job's problem type.
 	ProblemType types.ProblemType
 
-	// Contains ProblemType , AutoMLJobObjective , and CompletionCriteria. If you do
+	// Contains ProblemType , AutoMLJobObjective , and CompletionCriteria . If you do
 	// not provide these values, they are auto-inferred. If you do provide them, the
 	// values used are the ones you provide.
 	ResolvedAttributes *types.ResolvedAttributes

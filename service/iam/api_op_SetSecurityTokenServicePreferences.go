@@ -14,7 +14,7 @@ import (
 // Sets the specified version of the global endpoint token as the token version
 // used for the Amazon Web Services account. By default, Security Token Service
 // (STS) is available as a global service, and all STS requests go to a single
-// endpoint at https://sts.amazonaws.com. Amazon Web Services recommends using
+// endpoint at https://sts.amazonaws.com . Amazon Web Services recommends using
 // Regional STS endpoints to reduce latency, build in redundancy, and increase
 // session token availability. For information about Regional endpoints for STS,
 // see Security Token Service endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/sts.html)

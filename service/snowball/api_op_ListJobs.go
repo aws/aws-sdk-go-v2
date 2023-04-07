@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of JobListEntry  objects of the specified length. Each
-// JobListEntryobject contains a job's state, a job's ID, and a value that
+// Returns an array of JobListEntry objects of the specified length. Each
+// JobListEntry object contains a job's state, a job's ID, and a value that
 // indicates whether the job is a job part, in the case of export jobs. Calling
 // this API action in one of the US regions will return jobs from the list of all
 // jobs associated with this account in all US regions.
@@ -34,11 +34,11 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 
 type ListJobsInput struct {
 
-	// The number of JobListEntry  objects to return.
+	// The number of JobListEntry objects to return.
 	MaxResults *int32
 
 	// HTTP requests are stateless. To identify what object comes "next" in the list
-	// of JobListEntry  objects, you have the option of specifying NextToken as the
+	// of JobListEntry objects, you have the option of specifying NextToken as the
 	// starting point for your returned list.
 	NextToken *string
 
@@ -52,8 +52,8 @@ type ListJobsOutput struct {
 	JobListEntries []types.JobListEntry
 
 	// HTTP requests are stateless. If you use this automatically generated NextToken
-	// value in your next ListJobs  call, your returned JobListEntry objects will
-	// start from this point in the array.
+	// value in your next ListJobs call, your returned JobListEntry objects will start
+	// from this point in the array.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -131,11 +131,11 @@ var _ ListJobsAPIClient = (*Client)(nil)
 
 // ListJobsPaginatorOptions is the paginator options for ListJobs
 type ListJobsPaginatorOptions struct {
-	// The number of JobListEntry  objects to return.
+	// The number of JobListEntry objects to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

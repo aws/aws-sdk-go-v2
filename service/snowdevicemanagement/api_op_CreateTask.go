@@ -40,16 +40,14 @@ type CreateTaskInput struct {
 	// This member is required.
 	Targets []string
 
-	// A token ensuring that the action is called only once with the specified
-	// details.
+	// A token ensuring that the action is called only once with the specified details.
 	ClientToken *string
 
 	// A description of the task and its targets.
 	Description *string
 
-	// Optional metadata that you assign to a resource. You can use tags to
-	// categorize a resource in different ways, such as by purpose, owner, or
-	// environment.
+	// Optional metadata that you assign to a resource. You can use tags to categorize
+	// a resource in different ways, such as by purpose, owner, or environment.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

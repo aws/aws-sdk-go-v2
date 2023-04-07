@@ -51,8 +51,8 @@ type UpdateNetworkProfileInput struct {
 	// network changes to NextPassword.
 	NextPassword *string
 
-	// The root certificate(s) of your authentication server that will be installed
-	// on your devices and used to trust your authentication server during EAP
+	// The root certificate(s) of your authentication server that will be installed on
+	// your devices and used to trust your authentication server during EAP
 	// negotiation.
 	TrustAnchors []string
 

@@ -18,8 +18,10 @@ import (
 // multiple instances across multiple Availability Zones, and one or more of the
 // specified instances are enabled for termination protection, the request fails
 // with the following results:
-//   - The specified instances that are in the same Availability Zone as the protected instance are not terminated.
-//   - The specified instances that are in different Availability Zones, where no other specified instances are protected, are successfully terminated.
+//   - The specified instances that are in the same Availability Zone as the
+//     protected instance are not terminated.
+//   - The specified instances that are in different Availability Zones, where no
+//     other specified instances are protected, are successfully terminated.
 //
 // For example, say you have the following instances:
 //   - Instance A: us-east-1a ; Not protected
@@ -27,11 +29,13 @@ import (
 //   - Instance C: us-east-1b ; Protected
 //   - Instance D: us-east-1b ; not protected
 //
-// If you attempt to terminate all
-// of these instances in the same request, the request reports failure with the
-// following results:
-//   - Instance A and Instance B are successfully terminated because none of the specified instances in us-east-1a are enabled for termination protection.
-//   - Instance C and Instance D fail to terminate because at least one of the specified instances in us-east-1b (Instance C) is enabled for termination protection.
+// If you attempt to terminate all of these instances in the same request, the
+// request reports failure with the following results:
+//   - Instance A and Instance B are successfully terminated because none of the
+//     specified instances in us-east-1a are enabled for termination protection.
+//   - Instance C and Instance D fail to terminate because at least one of the
+//     specified instances in us-east-1b (Instance C) is enabled for termination
+//     protection.
 //
 // Terminated instances remain visible after termination (for approximately one
 // hour). By default, Amazon EC2 deletes all EBS volumes that were attached when

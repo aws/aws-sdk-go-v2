@@ -40,8 +40,8 @@ type CreateApplicationInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The name of the application. The name must be unique in the region in which
-	// you are creating the application.
+	// The name of the application. The name must be unique in the region in which you
+	// are creating the application.
 	//
 	// This member is required.
 	Name *string

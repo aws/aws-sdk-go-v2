@@ -34,8 +34,8 @@ type SubmitTaskStateChangeInput struct {
 	// Any attachments associated with the state change request.
 	Attachments []types.AttachmentStateChange
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the task.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// task.
 	Cluster *string
 
 	// Any containers that's associated with the state change request.

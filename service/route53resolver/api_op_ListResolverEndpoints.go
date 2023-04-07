@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the Resolver endpoints that were created using the current Amazon
-// Web Services account.
+// Lists all the Resolver endpoints that were created using the current Amazon Web
+// Services account.
 func (c *Client) ListResolverEndpoints(ctx context.Context, params *ListResolverEndpointsInput, optFns ...func(*Options)) (*ListResolverEndpointsOutput, error) {
 	if params == nil {
 		params = &ListResolverEndpointsInput{}
@@ -31,21 +31,21 @@ func (c *Client) ListResolverEndpoints(ctx context.Context, params *ListResolver
 
 type ListResolverEndpointsInput struct {
 
-	// An optional specification to return a subset of Resolver endpoints, such as
-	// all inbound Resolver endpoints. If you submit a second or subsequent
-	// ListResolverEndpoints request and specify the NextToken parameter, you must
-	// use the same values for Filters , if any, as in the previous request.
+	// An optional specification to return a subset of Resolver endpoints, such as all
+	// inbound Resolver endpoints. If you submit a second or subsequent
+	// ListResolverEndpoints request and specify the NextToken parameter, you must use
+	// the same values for Filters , if any, as in the previous request.
 	Filters []types.Filter
 
 	// The maximum number of Resolver endpoints that you want to return in the
-	// response to a ListResolverEndpoints  request. If you don't specify a value for
+	// response to a ListResolverEndpoints request. If you don't specify a value for
 	// MaxResults , Resolver returns up to 100 Resolver endpoints.
 	MaxResults *int32
 
 	// For the first ListResolverEndpoints request, omit this value. If you have more
-	// than MaxResults  Resolver endpoints, you can submit another
-	// ListResolverEndpointsrequest to get the next group of Resolver endpoints. In
-	// the next request, specify the value of NextToken  from the previous response.
+	// than MaxResults Resolver endpoints, you can submit another ListResolverEndpoints
+	// request to get the next group of Resolver endpoints. In the next request,
+	// specify the value of NextToken from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,12 +53,12 @@ type ListResolverEndpointsInput struct {
 
 type ListResolverEndpointsOutput struct {
 
-	// The value that you specified for MaxResults  in the request.
+	// The value that you specified for MaxResults in the request.
 	MaxResults *int32
 
 	// If more than MaxResults IP addresses match the specified criteria, you can
 	// submit another ListResolverEndpoint request to get the next group of results.
-	// In the next request, specify the value of NextToken  from the previous response.
+	// In the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
 	// The Resolver endpoints that were created by using the current Amazon Web
@@ -143,12 +143,12 @@ var _ ListResolverEndpointsAPIClient = (*Client)(nil)
 // ListResolverEndpoints
 type ListResolverEndpointsPaginatorOptions struct {
 	// The maximum number of Resolver endpoints that you want to return in the
-	// response to a ListResolverEndpoints  request. If you don't specify a value for
+	// response to a ListResolverEndpoints request. If you don't specify a value for
 	// MaxResults , Resolver returns up to 100 Resolver endpoints.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

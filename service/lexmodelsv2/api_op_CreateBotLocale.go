@@ -57,14 +57,14 @@ type CreateBotLocaleInput struct {
 	// , AMAZON.KendraSearchIntent , or both when returning alternative intents.
 	// AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they
 	// are configured for the bot. For example, suppose a bot is configured with the
-	// confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns
+	// confidence threshold of 0.80 and the AMAZON.FallbackIntent . Amazon Lex returns
 	// three alternative intents with the following confidence scores: IntentA (0.70),
 	// IntentB (0.60), IntentC (0.50). The response from the RecognizeText operation
 	// would be:
-	//     - AMAZON.FallbackIntent
-	//     - IntentA
-	//     - IntentB
-	//     - IntentC
+	//   - AMAZON.FallbackIntent
+	//   - IntentA
+	//   - IntentB
+	//   - IntentC
 	//
 	// This member is required.
 	NluIntentConfidenceThreshold *float64
@@ -87,10 +87,10 @@ type CreateBotLocaleOutput struct {
 
 	// The status of the bot. When the status is Creating the bot locale is being
 	// configured. When the status is Building Amazon Lex is building the bot for
-	// testing and use. If the status of the bot is ReadyExpressTesting, you can test
+	// testing and use. If the status of the bot is ReadyExpressTesting , you can test
 	// the bot using the exact utterances specified in the bots' intents. When the bot
-	// is ready for full testing or to run, the status is Built. If there was a
-	// problem with building the bot, the status is Failed. If the bot was saved but
+	// is ready for full testing or to run, the status is Built . If there was a
+	// problem with building the bot, the status is Failed . If the bot was saved but
 	// not built, the status is NotBuilt .
 	BotLocaleStatus types.BotLocaleStatus
 
@@ -109,7 +109,7 @@ type CreateBotLocaleOutput struct {
 	// The specified locale name.
 	LocaleName *string
 
-	// The specified confidence threshold for inserting the AMAZON.FallbackIntent  and
+	// The specified confidence threshold for inserting the AMAZON.FallbackIntent and
 	// AMAZON.KendraSearchIntent intents.
 	NluIntentConfidenceThreshold *float64
 

@@ -19,7 +19,7 @@ import (
 // endpoint in a virtual private cloud (VPC), or a Lambda function endpoint. If an
 // Amazon Web Services resource is launched in a service VPC, and you want it to be
 // accessible to all of an environment’s services with VPCs and routes, apply the
-// RefactorSpacesSecurityGroupto the resource. Alternatively, to add more
+// RefactorSpacesSecurityGroup to the resource. Alternatively, to add more
 // cross-account constraints, apply your own security group.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
@@ -75,8 +75,8 @@ type CreateServiceInput struct {
 
 	// The configuration for the URL endpoint type. When creating a route to a
 	// service, Refactor Spaces automatically resolves the address in the
-	// UrlEndpointInputobject URL when the Domain Name System (DNS) time-to-live
-	// (TTL) expires, or every 60 seconds for TTLs less than 60 seconds.
+	// UrlEndpointInput object URL when the Domain Name System (DNS) time-to-live (TTL)
+	// expires, or every 60 seconds for TTLs less than 60 seconds.
 	UrlEndpoint *types.UrlEndpointInput
 
 	// The ID of the VPC.

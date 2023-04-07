@@ -13,7 +13,7 @@ import (
 )
 
 // Lists information about created campaigns. This API operation uses pagination.
-// Specify the nextToken  parameter in the request to return more results.
+// Specify the nextToken parameter in the request to return more results.
 func (c *Client) ListCampaigns(ctx context.Context, params *ListCampaignsInput, optFns ...func(*Options)) (*ListCampaignsOutput, error) {
 	if params == nil {
 		params = &ListCampaignsInput{}
@@ -41,9 +41,9 @@ type ListCampaignsInput struct {
 	// returned, the response does not contain a pagination token value.
 	NextToken *string
 
-	// Optional parameter to filter the results by the status of each created
-	// campaign in your account. The status can be one of: CREATING ,
-	// WAITING_FOR_APPROVAL , RUNNING , or SUSPENDED .
+	// Optional parameter to filter the results by the status of each created campaign
+	// in your account. The status can be one of: CREATING , WAITING_FOR_APPROVAL ,
+	// RUNNING , or SUSPENDED .
 	Status *string
 
 	noSmithyDocumentSerde
@@ -136,8 +136,8 @@ type ListCampaignsPaginatorOptions struct {
 	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

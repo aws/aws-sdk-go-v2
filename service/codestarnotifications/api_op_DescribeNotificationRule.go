@@ -51,25 +51,25 @@ type DescribeNotificationRuleOutput struct {
 	// The date and time the notification rule was created, in timestamp format.
 	CreatedTimestamp *time.Time
 
-	// The level of detail included in the notifications for this resource. BASIC
-	// will include only the contents of the event as it would appear in Amazon
-	// CloudWatch. FULL will include any supplemental information provided by AWS
-	// CodeStar Notifications and/or the service for the resource for which the
-	// notification is created.
+	// The level of detail included in the notifications for this resource. BASIC will
+	// include only the contents of the event as it would appear in Amazon CloudWatch.
+	// FULL will include any supplemental information provided by AWS CodeStar
+	// Notifications and/or the service for the resource for which the notification is
+	// created.
 	DetailType types.DetailType
 
 	// A list of the event types associated with the notification rule.
 	EventTypes []types.EventTypeSummary
 
-	// The date and time the notification rule was most recently updated, in
-	// timestamp format.
+	// The date and time the notification rule was most recently updated, in timestamp
+	// format.
 	LastModifiedTimestamp *time.Time
 
 	// The name of the notification rule.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the resource associated with the
-	// notification rule.
+	// The Amazon Resource Name (ARN) of the resource associated with the notification
+	// rule.
 	Resource *string
 
 	// The status of the notification rule. Valid statuses are on (sending

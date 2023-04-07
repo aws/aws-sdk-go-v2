@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// An internal server error has occurred during the request. For more
-// information, see the error and message fields.
+// An internal server error has occurred during the request. For more information,
+// see the error and message fields.
 type InternalServerError struct {
 	Message *string
 

@@ -366,10 +366,10 @@ func (w *ComponentDeletedWaiter) Wait(ctx context.Context, params *GetComponentI
 	return err
 }
 
-// WaitForOutput calls the waiter function for ComponentDeleted waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for ComponentDeleted waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *ComponentDeletedWaiter) WaitForOutput(ctx context.Context, params *GetComponentInput, maxWaitDur time.Duration, optFns ...func(*ComponentDeletedWaiterOptions)) (*GetComponentOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

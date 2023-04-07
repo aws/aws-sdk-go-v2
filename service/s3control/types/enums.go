@@ -179,9 +179,9 @@ const (
 	GeneratedManifestFormatS3InventoryReportCsv20211130 GeneratedManifestFormat = "S3InventoryReport_CSV_20211130"
 )
 
-// Values returns all known values for GeneratedManifestFormat. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for GeneratedManifestFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (GeneratedManifestFormat) Values() []GeneratedManifestFormat {
 	return []GeneratedManifestFormat{
 		"S3InventoryReport_CSV_20211130",
@@ -198,8 +198,8 @@ const (
 	JobManifestFieldNameVersionId JobManifestFieldName = "VersionId"
 )
 
-// Values returns all known values for JobManifestFieldName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for JobManifestFieldName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (JobManifestFieldName) Values() []JobManifestFieldName {
 	return []JobManifestFieldName{
@@ -602,9 +602,9 @@ const (
 	ReplicationStorageClassGlacierIr          ReplicationStorageClass = "GLACIER_IR"
 )
 
-// Values returns all known values for ReplicationStorageClass. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReplicationStorageClass. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationStorageClass) Values() []ReplicationStorageClass {
 	return []ReplicationStorageClass{
 		"STANDARD",
@@ -732,9 +732,9 @@ const (
 	S3GranteeTypeIdentifierGroup        S3GranteeTypeIdentifier = "uri"
 )
 
-// Values returns all known values for S3GranteeTypeIdentifier. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for S3GranteeTypeIdentifier. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (S3GranteeTypeIdentifier) Values() []S3GranteeTypeIdentifier {
 	return []S3GranteeTypeIdentifier{
 		"id",
@@ -769,10 +769,9 @@ const (
 	S3ObjectLockLegalHoldStatusOn  S3ObjectLockLegalHoldStatus = "ON"
 )
 
-// Values returns all known values for S3ObjectLockLegalHoldStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for S3ObjectLockLegalHoldStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3ObjectLockLegalHoldStatus) Values() []S3ObjectLockLegalHoldStatus {
 	return []S3ObjectLockLegalHoldStatus{
 		"OFF",

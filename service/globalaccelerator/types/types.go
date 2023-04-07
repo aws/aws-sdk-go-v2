@@ -23,11 +23,10 @@ type Accelerator struct {
 	// name for an accelerator is the following: A lowercase letter a, followed by a
 	// 16-bit random hex string, followed by .awsglobalaccelerator.com. For example:
 	// a1234567890abcdef.awsglobalaccelerator.com. If you have a dual-stack
-	// accelerator, you also have a second DNS name, DualStackDnsName, that points to
+	// accelerator, you also have a second DNS name, DualStackDnsName , that points to
 	// both the A record and the AAAA record for all four static addresses for the
 	// accelerator: two IPv4 addresses and two IPv6 addresses. For more information
-	// about the default DNS name, see Support for DNS addressing in Global
-	// Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html)
+	// about the default DNS name, see Support for DNS addressing in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html)
 	// in the Global Accelerator Developer Guide.
 	DnsName *string
 
@@ -37,7 +36,7 @@ type Accelerator struct {
 	// following: A lowercase letter a, followed by a 16-bit random hex string,
 	// followed by .dualstack.awsglobalaccelerator.com. For example:
 	// a1234567890abcdef.dualstack.awsglobalaccelerator.com. Note: Global Accelerator
-	// also assigns a default DNS name, DnsName, to your accelerator that points just
+	// also assigns a default DNS name, DnsName , to your accelerator that points just
 	// to the static IPv4 addresses. For more information, see Support for DNS
 	// addressing in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing)
 	// in the Global Accelerator Developer Guide.
@@ -55,15 +54,14 @@ type Accelerator struct {
 	// the value can be IPV4 or DUAL_STACK.
 	IpAddressType IpAddressType
 
-	// The static IP addresses that Global Accelerator associates with the
-	// accelerator.
+	// The static IP addresses that Global Accelerator associates with the accelerator.
 	IpSets []IpSet
 
 	// The date and time that the accelerator was last modified.
 	LastModifiedTime *time.Time
 
-	// The name of the accelerator. The name must contain only alphanumeric
-	// characters or hyphens (-), and must not begin or end with a hyphen.
+	// The name of the accelerator. The name must contain only alphanumeric characters
+	// or hyphens (-), and must not begin or end with a hyphen.
 	Name *string
 
 	// Describes the deployment status of the accelerator.
@@ -76,27 +74,27 @@ type Accelerator struct {
 type AcceleratorAttributes struct {
 
 	// Indicates whether flow logs are enabled. The default value is false. If the
-	// value is true, FlowLogsS3Bucket  and FlowLogsS3Prefix must be specified. For
+	// value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For
 	// more information, see Flow logs (https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html)
 	// in the Global Accelerator Developer Guide.
 	FlowLogsEnabled *bool
 
 	// The name of the Amazon S3 bucket for the flow logs. Attribute is required if
-	// FlowLogsEnabled is true. The bucket must exist and have a bucket policy that
+	// FlowLogsEnabled is true . The bucket must exist and have a bucket policy that
 	// grants Global Accelerator permission to write to the bucket.
 	FlowLogsS3Bucket *string
 
 	// The prefix for the location in the Amazon S3 bucket for the flow logs.
-	// Attribute is required if FlowLogsEnabled  is true. If you specify slash (/)
-	// for the S3 bucket prefix, the log file bucket folder structure will include a
-	// double slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
+	// Attribute is required if FlowLogsEnabled is true . If you specify slash (/) for
+	// the S3 bucket prefix, the log file bucket folder structure will include a double
+	// slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
 	FlowLogsS3Prefix *string
 
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains a Timestamp  value and Message for changes that
-// you make to an accelerator in Global Accelerator. Messages stored here provide
+// A complex type that contains a Timestamp value and Message for changes that you
+// make to an accelerator in Global Accelerator. Messages stored here provide
 // progress or error information when you update an accelerator from IPv4 to
 // dual-stack, or from dual-stack to IPv4. Global Accelerator stores a maximum of
 // ten event messages.
@@ -116,18 +114,36 @@ type AcceleratorEvent struct {
 
 // Information about an IP address range that is provisioned for use with your
 // Amazon Web Services resources through bring your own IP address (BYOIP). The
-// following describes each BYOIP State  that your IP address range can be in.
-//   - PENDING_PROVISIONING — You’ve submitted a request to provision an IP address range but it is not yet provisioned with Global Accelerator.
-//   - READY — The address range is provisioned with Global Accelerator and can be advertised.
-//   - PENDING_ADVERTISING — You’ve submitted a request for Global Accelerator to advertise an address range but it is not yet being advertised.
+// following describes each BYOIP State that your IP address range can be in.
+//   - PENDING_PROVISIONING — You’ve submitted a request to provision an IP
+//     address range but it is not yet provisioned with Global Accelerator.
+//   - READY — The address range is provisioned with Global Accelerator and can be
+//     advertised.
+//   - PENDING_ADVERTISING — You’ve submitted a request for Global Accelerator to
+//     advertise an address range but it is not yet being advertised.
 //   - ADVERTISING — The address range is being advertised by Global Accelerator.
-//   - PENDING_WITHDRAWING — You’ve submitted a request to withdraw an address range from being advertised but it is still being advertised by Global Accelerator.
-//   - PENDING_DEPROVISIONING — You’ve submitted a request to deprovision an address range from Global Accelerator but it is still provisioned.
+//   - PENDING_WITHDRAWING — You’ve submitted a request to withdraw an address
+//     range from being advertised but it is still being advertised by Global
+//     Accelerator.
+//   - PENDING_DEPROVISIONING — You’ve submitted a request to deprovision an
+//     address range from Global Accelerator but it is still provisioned.
 //   - DEPROVISIONED — The address range is deprovisioned from Global Accelerator.
-//   - FAILED_PROVISION — The request to provision the address range from Global Accelerator was not successful. Please make sure that you provide all of the correct information, and try again. If the request fails a second time, contact Amazon Web Services support.
-//   - FAILED_ADVERTISING — The request for Global Accelerator to advertise the address range was not successful. Please make sure that you provide all of the correct information, and try again. If the request fails a second time, contact Amazon Web Services support.
-//   - FAILED_WITHDRAW — The request to withdraw the address range from advertising by Global Accelerator was not successful. Please make sure that you provide all of the correct information, and try again. If the request fails a second time, contact Amazon Web Services support.
-//   - FAILED_DEPROVISION — The request to deprovision the address range from Global Accelerator was not successful. Please make sure that you provide all of the correct information, and try again. If the request fails a second time, contact Amazon Web Services support.
+//   - FAILED_PROVISION — The request to provision the address range from Global
+//     Accelerator was not successful. Please make sure that you provide all of the
+//     correct information, and try again. If the request fails a second time, contact
+//     Amazon Web Services support.
+//   - FAILED_ADVERTISING — The request for Global Accelerator to advertise the
+//     address range was not successful. Please make sure that you provide all of the
+//     correct information, and try again. If the request fails a second time, contact
+//     Amazon Web Services support.
+//   - FAILED_WITHDRAW — The request to withdraw the address range from
+//     advertising by Global Accelerator was not successful. Please make sure that you
+//     provide all of the correct information, and try again. If the request fails a
+//     second time, contact Amazon Web Services support.
+//   - FAILED_DEPROVISION — The request to deprovision the address range from
+//     Global Accelerator was not successful. Please make sure that you provide all of
+//     the correct information, and try again. If the request fails a second time,
+//     contact Amazon Web Services support.
 type ByoipCidr struct {
 
 	// The address range, in CIDR notation.
@@ -143,14 +159,14 @@ type ByoipCidr struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains a Message  and a Timestamp value for changes that
+// A complex type that contains a Message and a Timestamp value for changes that
 // you make in the status of an IP address range that you bring to Global
 // Accelerator through bring your own IP address (BYOIP).
 type ByoipCidrEvent struct {
 
-	// A string that contains an Event message describing changes that you make in
-	// the status of an IP address range that you bring to Global Accelerator through
-	// bring your own IP address (BYOIP).
+	// A string that contains an Event message describing changes that you make in the
+	// status of an IP address range that you bring to Global Accelerator through bring
+	// your own IP address (BYOIP).
 	Message *string
 
 	// A timestamp for when you make a status change for an IP address range that you
@@ -193,11 +209,10 @@ type CustomRoutingAccelerator struct {
 	// name is the following: A lowercase letter a, followed by a 16-bit random hex
 	// string, followed by .awsglobalaccelerator.com. For example:
 	// a1234567890abcdef.awsglobalaccelerator.com. If you have a dual-stack
-	// accelerator, you also have a second DNS name, DualStackDnsName, that points to
+	// accelerator, you also have a second DNS name, DualStackDnsName , that points to
 	// both the A record and the AAAA record for all four static addresses for the
 	// accelerator: two IPv4 addresses and two IPv6 addresses. For more information
-	// about the default DNS name, see Support for DNS addressing in Global
-	// Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html)
+	// about the default DNS name, see Support for DNS addressing in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html)
 	// in the Global Accelerator Developer Guide.
 	DnsName *string
 
@@ -210,15 +225,14 @@ type CustomRoutingAccelerator struct {
 	// accelerator, the value must be IPV4.
 	IpAddressType IpAddressType
 
-	// The static IP addresses that Global Accelerator associates with the
-	// accelerator.
+	// The static IP addresses that Global Accelerator associates with the accelerator.
 	IpSets []IpSet
 
 	// The date and time that the accelerator was last modified.
 	LastModifiedTime *time.Time
 
-	// The name of the accelerator. The name must contain only alphanumeric
-	// characters or hyphens (-), and must not begin or end with a hyphen.
+	// The name of the accelerator. The name must contain only alphanumeric characters
+	// or hyphens (-), and must not begin or end with a hyphen.
 	Name *string
 
 	// Describes the deployment status of the accelerator.
@@ -231,18 +245,18 @@ type CustomRoutingAccelerator struct {
 type CustomRoutingAcceleratorAttributes struct {
 
 	// Indicates whether flow logs are enabled. The default value is false. If the
-	// value is true, FlowLogsS3Bucket  and FlowLogsS3Prefix must be specified. For
+	// value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For
 	// more information, see Flow logs (https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html)
 	// in the Global Accelerator Developer Guide.
 	FlowLogsEnabled *bool
 
 	// The name of the Amazon S3 bucket for the flow logs. Attribute is required if
-	// FlowLogsEnabled is true. The bucket must exist and have a bucket policy that
+	// FlowLogsEnabled is true . The bucket must exist and have a bucket policy that
 	// grants Global Accelerator permission to write to the bucket.
 	FlowLogsS3Bucket *string
 
 	// The prefix for the location in the Amazon S3 bucket for the flow logs.
-	// Attribute is required if FlowLogsEnabled  is true. If you don’t specify a
+	// Attribute is required if FlowLogsEnabled is true . If you don’t specify a
 	// prefix, the flow logs are stored in the root of the bucket. If you specify slash
 	// (/) for the S3 bucket prefix, the log file bucket folder structure will include
 	// a double slash (//), like the following:
@@ -257,8 +271,8 @@ type CustomRoutingAcceleratorAttributes struct {
 // traffic on.
 type CustomRoutingDestinationConfiguration struct {
 
-	// The first port, inclusive, in the range of ports for the endpoint group that
-	// is associated with a custom routing accelerator.
+	// The first port, inclusive, in the range of ports for the endpoint group that is
+	// associated with a custom routing accelerator.
 	//
 	// This member is required.
 	FromPort *int32
@@ -278,13 +292,13 @@ type CustomRoutingDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// For a custom routing accelerator, describes the port range and protocol for
-// all endpoints (virtual private cloud subnets) in an endpoint group to accept
-// client traffic on.
+// For a custom routing accelerator, describes the port range and protocol for all
+// endpoints (virtual private cloud subnets) in an endpoint group to accept client
+// traffic on.
 type CustomRoutingDestinationDescription struct {
 
-	// The first port, inclusive, in the range of ports for the endpoint group that
-	// is associated with a custom routing accelerator.
+	// The first port, inclusive, in the range of ports for the endpoint group that is
+	// associated with a custom routing accelerator.
 	FromPort *int32
 
 	// The protocol for the endpoint group that is associated with a custom routing
@@ -326,9 +340,9 @@ type CustomRoutingEndpointDescription struct {
 // listener.
 type CustomRoutingEndpointGroup struct {
 
-	// For a custom routing accelerator, describes the port range and protocol for
-	// all endpoints (virtual private cloud subnets) in an endpoint group to accept
-	// client traffic on.
+	// For a custom routing accelerator, describes the port range and protocol for all
+	// endpoints (virtual private cloud subnets) in an endpoint group to accept client
+	// traffic on.
 	DestinationDescriptions []CustomRoutingDestinationDescription
 
 	// For a custom routing accelerator, describes the endpoints (virtual private
@@ -402,7 +416,7 @@ type EndpointConfiguration struct {
 	// Indicates whether client IP address preservation is enabled for an endpoint.
 	// The value is true or false. The default value is true for new accelerators. If
 	// the value is set to true, the client's IP address is preserved in the
-	// X-Forwarded-Forrequest header as traffic travels to applications on the
+	// X-Forwarded-For request header as traffic travels to applications on the
 	// endpoint fronted by the accelerator. Client IP address preservation is
 	// supported, in specific Amazon Web Services Regions, for endpoints that are
 	// Application Load Balancers and Amazon EC2 instances. For more information, see
@@ -418,8 +432,8 @@ type EndpointConfiguration struct {
 	// Load Balancer can be either internal or internet-facing.
 	EndpointId *string
 
-	// The weight associated with the endpoint. When you add weights to endpoints,
-	// you configure Global Accelerator to route traffic based on proportions that you
+	// The weight associated with the endpoint. When you add weights to endpoints, you
+	// configure Global Accelerator to route traffic based on proportions that you
 	// specify. For example, you might specify endpoint weights of 4, 5, 5, and 6
 	// (sum=20). The result is that 4/20 of your traffic, on average, is routed to the
 	// first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20
@@ -437,7 +451,7 @@ type EndpointDescription struct {
 	// Indicates whether client IP address preservation is enabled for an endpoint.
 	// The value is true or false. The default value is true for new accelerators. If
 	// the value is set to true, the client's IP address is preserved in the
-	// X-Forwarded-Forrequest header as traffic travels to applications on the
+	// X-Forwarded-For request header as traffic travels to applications on the
 	// endpoint fronted by the accelerator. Client IP address preservation is
 	// supported, in specific Amazon Web Services Regions, for endpoints that are
 	// Application Load Balancers and Amazon EC2 instances. For more information, see
@@ -458,8 +472,8 @@ type EndpointDescription struct {
 	// The health status of the endpoint.
 	HealthState HealthState
 
-	// The weight associated with the endpoint. When you add weights to endpoints,
-	// you configure Global Accelerator to route traffic based on proportions that you
+	// The weight associated with the endpoint. When you add weights to endpoints, you
+	// configure Global Accelerator to route traffic based on proportions that you
 	// specify. For example, you might specify endpoint weights of 4, 5, 5, and 6
 	// (sum=20). The result is that 4/20 of your traffic, on average, is routed to the
 	// first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20
@@ -498,8 +512,8 @@ type EndpointGroup struct {
 	// list, Global Accelerator uses the first specified port in the list of ports.
 	HealthCheckPort *int32
 
-	// The protocol that Global Accelerator uses to perform health checks on
-	// endpoints that are part of this endpoint group. The default value is TCP.
+	// The protocol that Global Accelerator uses to perform health checks on endpoints
+	// that are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol HealthCheckProtocol
 
 	// Allows you to override the destination ports used to route traffic to an
@@ -571,7 +585,7 @@ type Listener struct {
 	// client request. Client affinity gives you control over whether to always route
 	// each client to the same specific endpoint. Global Accelerator uses a
 	// consistent-flow hashing algorithm to choose the optimal endpoint for a
-	// connection. If client affinity is NONE, Global Accelerator uses the
+	// connection. If client affinity is NONE , Global Accelerator uses the
 	// "five-tuple" (5-tuple) properties—source IP address, source port, destination IP
 	// address, destination port, and protocol—to select the hash value, and then
 	// chooses the best endpoint. However, with this setting, if someone uses different
@@ -595,11 +609,11 @@ type Listener struct {
 	noSmithyDocumentSerde
 }
 
-// Returns the ports and associated IP addresses and ports of Amazon EC2
-// instances in your virtual private cloud (VPC) subnets. Custom routing is a port
-// mapping protocol in Global Accelerator that statically associates port ranges
-// with VPC subnets, which allows Global Accelerator to route to specific instances
-// and ports within one or more subnets.
+// Returns the ports and associated IP addresses and ports of Amazon EC2 instances
+// in your virtual private cloud (VPC) subnets. Custom routing is a port mapping
+// protocol in Global Accelerator that statically associates port ranges with VPC
+// subnets, which allows Global Accelerator to route to specific instances and
+// ports within one or more subnets.
 type PortMapping struct {
 
 	// The accelerator port.
@@ -639,8 +653,8 @@ type PortOverride struct {
 	// instance.
 	EndpointPort *int32
 
-	// The listener port that you want to map to a specific endpoint port. This is
-	// the port that user traffic arrives to the Global Accelerator on.
+	// The listener port that you want to map to a specific endpoint port. This is the
+	// port that user traffic arrives to the Global Accelerator on.
 	ListenerPort *int32
 
 	noSmithyDocumentSerde
@@ -670,15 +684,15 @@ type SocketAddress struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains a Tag  key and Tag  value.
+// A complex type that contains a Tag key and Tag value.
 type Tag struct {
 
-	// A string that contains a Tag  key.
+	// A string that contains a Tag key.
 	//
 	// This member is required.
 	Key *string
 
-	// A string that contains a Tag  value.
+	// A string that contains a Tag value.
 	//
 	// This member is required.
 	Value *string

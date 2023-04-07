@@ -33,21 +33,20 @@ func (c *Client) ListProfilingGroups(ctx context.Context, params *ListProfilingG
 // The structure representing the listProfilingGroupsRequest.
 type ListProfilingGroupsInput struct {
 
-	// A Boolean  value indicating whether to include a description. If true, then a
+	// A Boolean value indicating whether to include a description. If true , then a
 	// list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
 	// objects that contain detailed information about profiling groups is returned. If
-	//
 	// false , then a list of profiling group names is returned.
 	IncludeDescription *bool
 
 	// The maximum number of profiling groups results returned by ListProfilingGroups
 	// in paginated output. When this parameter is used, ListProfilingGroups only
-	// returns maxResults  results in a single page along with a nextToken response
+	// returns maxResults results in a single page along with a nextToken response
 	// element. The remaining results of the initial request can be seen by sending
-	// another ListProfilingGroups  request with the returned nextToken  value.
+	// another ListProfilingGroups request with the returned nextToken value.
 	MaxResults *int32
 
-	// The nextToken  value returned from a previous paginated ListProfilingGroups
+	// The nextToken value returned from a previous paginated ListProfilingGroups
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value. This token should be treated as an opaque
@@ -62,21 +61,21 @@ type ListProfilingGroupsInput struct {
 type ListProfilingGroupsOutput struct {
 
 	// A returned list of profiling group names. A list of the names is returned only
-	// if includeDescription  is false , otherwise a list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// if includeDescription is false , otherwise a list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
 	// objects is returned.
 	//
 	// This member is required.
 	ProfilingGroupNames []string
 
-	// The nextToken  value to include in a future ListProfilingGroups request. When
-	// the results of a ListProfilingGroups  request exceed maxResults, this value
-	// can be used to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// The nextToken value to include in a future ListProfilingGroups request. When
+	// the results of a ListProfilingGroups request exceed maxResults , this value can
+	// be used to retrieve the next page of results. This value is null when there are
+	// no more results to return.
 	NextToken *string
 
 	// A returned list ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
 	// objects. A list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-	// objects is returned only if includeDescription  is true, otherwise a list of
+	// objects is returned only if includeDescription is true , otherwise a list of
 	// profiling group names is returned.
 	ProfilingGroups []types.ProfilingGroupDescription
 
@@ -159,13 +158,13 @@ var _ ListProfilingGroupsAPIClient = (*Client)(nil)
 type ListProfilingGroupsPaginatorOptions struct {
 	// The maximum number of profiling groups results returned by ListProfilingGroups
 	// in paginated output. When this parameter is used, ListProfilingGroups only
-	// returns maxResults  results in a single page along with a nextToken response
+	// returns maxResults results in a single page along with a nextToken response
 	// element. The remaining results of the initial request can be seen by sending
-	// another ListProfilingGroups  request with the returned nextToken  value.
+	// another ListProfilingGroups request with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

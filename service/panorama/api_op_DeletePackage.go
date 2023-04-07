@@ -34,8 +34,8 @@ type DeletePackageInput struct {
 	// This member is required.
 	PackageId *string
 
-	// Delete the package even if it has artifacts stored in its access point.
-	// Deletes the package's artifacts from Amazon S3.
+	// Delete the package even if it has artifacts stored in its access point. Deletes
+	// the package's artifacts from Amazon S3.
 	ForceDelete bool
 
 	noSmithyDocumentSerde

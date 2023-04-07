@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Shares a Amazon Web Services Systems Manager document (SSM document)publicly
-// or privately. If you share a document privately, you must specify the Amazon Web
+// Shares a Amazon Web Services Systems Manager document (SSM document)publicly or
+// privately. If you share a document privately, you must specify the Amazon Web
 // Services user IDs for those people who can use the document. If you share a
 // document publicly, you must specify All as the account ID.
 func (c *Client) ModifyDocumentPermission(ctx context.Context, params *ModifyDocumentPermissionInput, optFns ...func(*Options)) (*ModifyDocumentPermissionOutput, error) {
@@ -53,7 +53,7 @@ type ModifyDocumentPermissionInput struct {
 	AccountIdsToRemove []string
 
 	// (Optional) The version of the document to share. If it isn't specified, the
-	// system choose the Default  version to share.
+	// system choose the Default version to share.
 	SharedDocumentVersion *string
 
 	noSmithyDocumentSerde

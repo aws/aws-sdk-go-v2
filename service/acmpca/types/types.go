@@ -7,17 +7,17 @@ import (
 	"time"
 )
 
-// Provides access information used by the authorityInfoAccess  and
+// Provides access information used by the authorityInfoAccess and
 // subjectInfoAccess extensions described in RFC 5280 (https://datatracker.ietf.org/doc/html/rfc5280)
 // .
 type AccessDescription struct {
 
-	// The location of AccessDescription  information.
+	// The location of AccessDescription information.
 	//
 	// This member is required.
 	AccessLocation *GeneralName
 
-	// The type and format of AccessDescription  information.
+	// The type and format of AccessDescription information.
 	//
 	// This member is required.
 	AccessMethod *AccessMethod
@@ -33,7 +33,7 @@ type AccessMethod struct {
 	// Specifies the AccessMethod .
 	AccessMethodType AccessMethodType
 
-	// An object identifier (OID) specifying the AccessMethod. The OID must satisfy
+	// An object identifier (OID) specifying the AccessMethod . The OID must satisfy
 	// the regular expression shown below. For more information, see NIST's definition
 	// of Object Identifier (OID) (https://csrc.nist.gov/glossary/term/Object_Identifier)
 	// .
@@ -43,7 +43,7 @@ type AccessMethod struct {
 }
 
 // Contains X.509 certificate information to be placed in an issued certificate.
-// An APIPassthrough  or APICSRPassthrough template variant must be selected, or
+// An APIPassthrough or APICSRPassthrough template variant must be selected, or
 // else this parameter is ignored. If conflicting or duplicate certificate
 // information is supplied from other sources, Amazon Web Services Private CA
 // applies order of operation rules (https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations)
@@ -107,12 +107,11 @@ type ASN1Subject struct {
 	// located.
 	Locality *string
 
-	// Legal name of the organization with which the certificate subject is
-	// affiliated.
+	// Legal name of the organization with which the certificate subject is affiliated.
 	Organization *string
 
-	// A subdivision or unit of the organization (such as sales or finance) with
-	// which the certificate subject is affiliated.
+	// A subdivision or unit of the organization (such as sales or finance) with which
+	// the certificate subject is affiliated.
 	OrganizationalUnit *string
 
 	// Typically a shortened version of a longer GivenName. For example, Jonathan is
@@ -125,8 +124,8 @@ type ASN1Subject struct {
 	// State in which the subject of the certificate is located.
 	State *string
 
-	// Family name. In the US and the UK, for example, the surname of an individual
-	// is ordered last. In Asian cultures the surname is typically ordered first.
+	// Family name. In the US and the UK, for example, the surname of an individual is
+	// ordered last. In Asian cultures the surname is typically ordered first.
 	Surname *string
 
 	// A title such as Mr. or Ms., which is pre-pended to the name to refer formally
@@ -162,8 +161,8 @@ type CertificateAuthority struct {
 	// Reason the request to create your private CA failed.
 	FailureReason FailureReason
 
-	// Defines a cryptographic key management compliance standard used for handling
-	// CA keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note: Amazon Web Services Region
+	// Defines a cryptographic key management compliance standard used for handling CA
+	// keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note: Amazon Web Services Region
 	// ap-northeast-3 supports only FIPS_140_2_LEVEL_2_OR_HIGHER. You must explicitly
 	// specify this parameter and value when creating a CA in that Region. Specifying a
 	// different value (or no value) results in an InvalidArgsException with the
@@ -183,8 +182,8 @@ type CertificateAuthority struct {
 	// The Amazon Web Services account ID that owns the certificate authority.
 	OwnerAccount *string
 
-	// The period during which a deleted CA can be restored. For more information,
-	// see the PermanentDeletionTimeInDays  parameter of the
+	// The period during which a deleted CA can be restored. For more information, see
+	// the PermanentDeletionTimeInDays parameter of the
 	// DeleteCertificateAuthorityRequest (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html)
 	// action.
 	RestorableUntil *time.Time
@@ -211,11 +210,11 @@ type CertificateAuthority struct {
 	noSmithyDocumentSerde
 }
 
-// Contains configuration information for your private certificate authority
-// (CA). This includes information about the class of public key algorithm and the
-// key pair that your private CA creates when it issues a certificate. It also
-// includes the signature algorithm that it uses when issuing certificates, and its
-// X.500 distinguished name. You must specify this information when you call the
+// Contains configuration information for your private certificate authority (CA).
+// This includes information about the class of public key algorithm and the key
+// pair that your private CA creates when it issues a certificate. It also includes
+// the signature algorithm that it uses when issuing certificates, and its X.500
+// distinguished name. You must specify this information when you call the
 // CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 // action.
 type CertificateAuthorityConfiguration struct {
@@ -250,14 +249,14 @@ type CertificateAuthorityConfiguration struct {
 // Contains configuration information for a certificate revocation list (CRL).
 // Your private certificate authority (CA) creates base CRLs. Delta CRLs are not
 // supported. You can enable CRLs for your new or an existing private CA by setting
-// the Enabled parameter to true. Your private CA writes CRLs to an S3 bucket
-// that you specify in the S3BucketName parameter. You can hide the name of your
-// bucket by specifying a value for the CustomCname parameter. Your private CA
-// copies the CNAME or the S3 bucket name to the CRL Distribution Points extension
-// of each certificate it issues. Your S3 bucket policy must give write permission
-// to Amazon Web Services Private CA. Amazon Web Services Private CA assets that
-// are stored in Amazon S3 can be protected with encryption. For more information,
-// see Encrypting Your CRLs (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption)
+// the Enabled parameter to true . Your private CA writes CRLs to an S3 bucket that
+// you specify in the S3BucketName parameter. You can hide the name of your bucket
+// by specifying a value for the CustomCname parameter. Your private CA copies the
+// CNAME or the S3 bucket name to the CRL Distribution Points extension of each
+// certificate it issues. Your S3 bucket policy must give write permission to
+// Amazon Web Services Private CA. Amazon Web Services Private CA assets that are
+// stored in Amazon S3 can be protected with encryption. For more information, see
+// Encrypting Your CRLs (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption)
 // . Your private CA uses the value in the ExpirationInDays parameter to calculate
 // the nextUpdate field in the CRL. The CRL is refreshed prior to a certificate's
 // expiration date or when a certificate is revoked. When a certificate is revoked,
@@ -266,27 +265,31 @@ type CertificateAuthorityConfiguration struct {
 // typically updated approximately 30 minutes after a certificate is revoked. If
 // for any reason a CRL update fails, Amazon Web Services Private CA makes further
 // attempts every 15 minutes. CRLs contain the following fields:
-//   - Version: The current version number defined in RFC 5280 is V2. The integer value is 0x1.
+//   - Version: The current version number defined in RFC 5280 is V2. The integer
+//     value is 0x1.
 //   - Signature Algorithm: The name of the algorithm used to sign the CRL.
-//   - Issuer: The X.500 distinguished name of your private CA that issued the CRL.
+//   - Issuer: The X.500 distinguished name of your private CA that issued the
+//     CRL.
 //   - Last Update: The issue date and time of this CRL.
 //   - Next Update: The day and time by which the next CRL will be issued.
-//   - Revoked Certificates: List of revoked certificates. Each list item contains the following information.
-//   - Serial Number: The serial number, in hexadecimal format, of the revoked certificate.
+//   - Revoked Certificates: List of revoked certificates. Each list item contains
+//     the following information.
+//   - Serial Number: The serial number, in hexadecimal format, of the revoked
+//     certificate.
 //   - Revocation Date: Date and time the certificate was revoked.
 //   - CRL Entry Extensions: Optional extensions for the CRL entry.
 //   - X509v3 CRL Reason Code: Reason the certificate was revoked.
 //   - CRL Extensions: Optional extensions for the CRL.
-//   - X509v3 Authority Key Identifier: Identifies the public key associated with the private key used to sign the certificate.
+//   - X509v3 Authority Key Identifier: Identifies the public key associated with
+//     the private key used to sign the certificate.
 //   - X509v3 CRL Number:: Decimal sequence number for the CRL.
 //   - Signature Algorithm: Algorithm used by your private CA to sign the CRL.
 //   - Signature Value: Signature computed over the CRL.
 //
-// Certificate revocation
-// lists created by Amazon Web Services Private CA are DER-encoded. You can use the
-// following OpenSSL command to list a CRL. openssl crl -inform DER -text -in
-// crl_path -noout For more information, see Planning a certificate revocation
-// list (CRL) (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html)
+// Certificate revocation lists created by Amazon Web Services Private CA are
+// DER-encoded. You can use the following OpenSSL command to list a CRL. openssl
+// crl -inform DER -text -in crl_path -noout For more information, see Planning a
+// certificate revocation list (CRL) (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html)
 // in the Amazon Web Services Private Certificate Authority User Guide
 type CrlConfiguration struct {
 
@@ -325,11 +328,11 @@ type CrlConfiguration struct {
 	// the public internet. If you choose BUCKET_OWNER_FULL_CONTROL, only the owner of
 	// the CRL S3 bucket can access the CRL, and your PKI clients may need an
 	// alternative method of access. If no value is specified, the default is
-	// PUBLIC_READ. Note: This default can cause CA creation to fail in some
+	// PUBLIC_READ . Note: This default can cause CA creation to fail in some
 	// circumstances. If you have have enabled the Block Public Access (BPA) feature in
 	// your S3 account, then you must specify the value of this parameter as
-	// BUCKET_OWNER_FULL_CONTROL, and not doing so results in an error. If you have
-	// disabled BPA in S3, then you can specify either BUCKET_OWNER_FULL_CONTROL  or
+	// BUCKET_OWNER_FULL_CONTROL , and not doing so results in an error. If you have
+	// disabled BPA in S3, then you can specify either BUCKET_OWNER_FULL_CONTROL or
 	// PUBLIC_READ as the value. For more information, see Blocking public access to
 	// the S3 bucket (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-bpa)
 	// .
@@ -372,8 +375,8 @@ type CustomAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the X.509 extension information for a certificate. Extensions
-// present in CustomExtensions  follow the ApiPassthrough template rules (https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations)
+// Specifies the X.509 extension information for a certificate. Extensions present
+// in CustomExtensions follow the ApiPassthrough template rules (https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations)
 // .
 type CustomExtension struct {
 
@@ -411,13 +414,13 @@ type EdiPartyName struct {
 }
 
 // Specifies additional purposes for which the certified public key may be used
-// other than basic purposes indicated in the KeyUsage  extension.
+// other than basic purposes indicated in the KeyUsage extension.
 type ExtendedKeyUsage struct {
 
-	// Specifies a custom ExtendedKeyUsage  with an object identifier (OID).
+	// Specifies a custom ExtendedKeyUsage with an object identifier (OID).
 	ExtendedKeyUsageObjectIdentifier *string
 
-	// Specifies a standard ExtendedKeyUsage  as defined as in RFC 5280 (https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12)
+	// Specifies a standard ExtendedKeyUsage as defined as in RFC 5280 (https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12)
 	// .
 	ExtendedKeyUsageType ExtendedKeyUsageType
 
@@ -442,11 +445,11 @@ type Extensions struct {
 	CustomExtensions []CustomExtension
 
 	// Specifies additional purposes for which the certified public key may be used
-	// other than basic purposes indicated in the KeyUsage  extension.
+	// other than basic purposes indicated in the KeyUsage extension.
 	ExtendedKeyUsage []ExtendedKeyUsage
 
-	// Defines one or more purposes for which the key contained in the certificate
-	// can be used. Default value for each option is false.
+	// Defines one or more purposes for which the key contained in the certificate can
+	// be used. Default value for each option is false.
 	KeyUsage *KeyUsage
 
 	// The subject alternative name extension allows identities to be bound to the
@@ -457,9 +460,9 @@ type Extensions struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an ASN.1 X.400 GeneralName  as defined in RFC 5280 (https://datatracker.ietf.org/doc/html/rfc5280)
+// Describes an ASN.1 X.400 GeneralName as defined in RFC 5280 (https://datatracker.ietf.org/doc/html/rfc5280)
 // . Only one of the following naming options should be provided. Providing more
-// than one option results in an InvalidArgsException  error.
+// than one option results in an InvalidArgsException error.
 type GeneralName struct {
 
 	// Contains information about the certificate subject. The Subject field in the
@@ -470,33 +473,33 @@ type GeneralName struct {
 	// certificate.
 	DirectoryName *ASN1Subject
 
-	// Represents GeneralName  as a DNS name.
+	// Represents GeneralName as a DNS name.
 	DnsName *string
 
-	// Represents GeneralName  as an EdiPartyName  object.
+	// Represents GeneralName as an EdiPartyName object.
 	EdiPartyName *EdiPartyName
 
-	// Represents GeneralName  as an IPv4 or IPv6 address.
+	// Represents GeneralName as an IPv4 or IPv6 address.
 	IpAddress *string
 
-	// Represents GeneralName  using an OtherName  object.
+	// Represents GeneralName using an OtherName object.
 	OtherName *OtherName
 
-	// Represents GeneralName  as an object identifier (OID).
+	// Represents GeneralName as an object identifier (OID).
 	RegisteredId *string
 
-	// Represents GeneralName  as an RFC 822 (https://datatracker.ietf.org/doc/html/rfc822)
+	// Represents GeneralName as an RFC 822 (https://datatracker.ietf.org/doc/html/rfc822)
 	// email address.
 	Rfc822Name *string
 
-	// Represents GeneralName  as a URI.
+	// Represents GeneralName as a URI.
 	UniformResourceIdentifier *string
 
 	noSmithyDocumentSerde
 }
 
-// Defines one or more purposes for which the key contained in the certificate
-// can be used. Default value for each option is false.
+// Defines one or more purposes for which the key contained in the certificate can
+// be used. Default value for each option is false.
 type KeyUsage struct {
 
 	// Key can be used to sign CRLs.
@@ -529,8 +532,8 @@ type KeyUsage struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information to enable and configure Online Certificate Status
-// Protocol (OCSP) for validating certificate revocation status. When you revoke a
+// Contains information to enable and configure Online Certificate Status Protocol
+// (OCSP) for validating certificate revocation status. When you revoke a
 // certificate, OCSP responses may take up to 60 minutes to reflect the new status.
 type OcspConfiguration struct {
 
@@ -547,8 +550,7 @@ type OcspConfiguration struct {
 	// record must conform to RFC2396 (https://www.ietf.org/rfc/rfc2396.txt)
 	// restrictions on the use of special characters in URIs. Additionally, the value
 	// of the CNAME must not include a protocol prefix such as "http://" or "https://".
-	// For more information, see Customizing Online Certificate Status Protocol
-	// (OCSP)  (https://docs.aws.amazon.com/privateca/latest/userguide/ocsp-customize.html)
+	// For more information, see Customizing Online Certificate Status Protocol (OCSP)  (https://docs.aws.amazon.com/privateca/latest/userguide/ocsp-customize.html)
 	// in the Amazon Web Services Private Certificate Authority User Guide.
 	OcspCustomCname *string
 
@@ -577,7 +579,7 @@ type OtherName struct {
 // Permissions designate which private CA actions can be performed by an Amazon
 // Web Services service or entity. In order for ACM to automatically renew private
 // certificates, you must give the ACM service principal all available permissions
-// ( IssueCertificate , GetCertificate , and ListPermissions). Permissions can be
+// ( IssueCertificate , GetCertificate , and ListPermissions ). Permissions can be
 // assigned with the CreatePermission (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html)
 // action, removed with the DeletePermission (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePermission.html)
 // action, and listed with the ListPermissions (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListPermissions.html)
@@ -608,13 +610,12 @@ type Permission struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the X.509 CertificatePolicies  extension.
+// Defines the X.509 CertificatePolicies extension.
 type PolicyInformation struct {
 
-	// Specifies the object identifier (OID) of the certificate policy under which
-	// the certificate was issued. For more information, see NIST's definition of
-	// Object Identifier (OID) (https://csrc.nist.gov/glossary/term/Object_Identifier)
-	// .
+	// Specifies the object identifier (OID) of the certificate policy under which the
+	// certificate was issued. For more information, see NIST's definition of Object
+	// Identifier (OID) (https://csrc.nist.gov/glossary/term/Object_Identifier) .
 	//
 	// This member is required.
 	CertPolicyId *string
@@ -626,7 +627,7 @@ type PolicyInformation struct {
 	noSmithyDocumentSerde
 }
 
-// Modifies the CertPolicyId  of a PolicyInformation object with a qualifier.
+// Modifies the CertPolicyId of a PolicyInformation object with a qualifier.
 // Amazon Web Services Private CA supports the certification practice statement
 // (CPS) qualifier.
 type PolicyQualifierInfo struct {
@@ -650,8 +651,8 @@ type PolicyQualifierInfo struct {
 // defined in RFC 5280.
 type Qualifier struct {
 
-	// Contains a pointer to a certification practice statement (CPS) published by
-	// the CA.
+	// Contains a pointer to a certification practice statement (CPS) published by the
+	// CA.
 	//
 	// This member is required.
 	CpsUri *string
@@ -707,9 +708,9 @@ type Tag struct {
 // Validity can be expressed as an explicit date and time when the validity of a
 // certificate starts or expires, or as a span of time after issuance, stated in
 // days, months, or years. For more information, see Validity (https://tools.ietf.org/html/rfc5280#section-4.1.2.5)
-// in RFC 5280. Amazon Web Services Private CA API consumes the Validity data
-// type differently in two distinct parameters of the IssueCertificate action.
-// The required parameter IssueCertificate : Validity specifies the end of a
+// in RFC 5280. Amazon Web Services Private CA API consumes the Validity data type
+// differently in two distinct parameters of the IssueCertificate action. The
+// required parameter IssueCertificate : Validity specifies the end of a
 // certificate's validity period. The optional parameter IssueCertificate :
 // ValidityNotBefore specifies a customized starting time for the validity period.
 type Validity struct {
@@ -717,26 +718,25 @@ type Validity struct {
 	// Determines how Amazon Web Services Private CA interprets the Value parameter,
 	// an integer. Supported validity types include those listed below. Type
 	// definitions with values include a sample input value and the resulting output.
-	// END_DATE: The specific date and time when the certificate will expire,
+	// END_DATE : The specific date and time when the certificate will expire,
 	// expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS)
 	// format. When UTCTime is used, if the year field (YY) is greater than or equal to
 	// 50, the year is interpreted as 19YY. If the year field is less than 50, the year
 	// is interpreted as 20YY.
-	//     - Sample input value: 491231235959 (UTCTime format)
-	//     - Output expiration date/time: 12/31/2049 23:59:59
-	// ABSOLUTE: The specific date and time when the validity of a certificate will
+	//   - Sample input value: 491231235959 (UTCTime format)
+	//   - Output expiration date/time: 12/31/2049 23:59:59
+	// ABSOLUTE : The specific date and time when the validity of a certificate will
 	// start or expire, expressed in seconds since the Unix Epoch.
-	//     - Sample input value: 2524608000
-	//     - Output expiration date/time: 01/01/2050 00:00:00
-	// DAYS , MONTHS , YEARS: The relative time from the moment of issuance until the
-	// certificate will expire, expressed in days, months, or years. Example if DAYS,
+	//   - Sample input value: 2524608000
+	//   - Output expiration date/time: 01/01/2050 00:00:00
+	// DAYS , MONTHS , YEARS : The relative time from the moment of issuance until the
+	// certificate will expire, expressed in days, months, or years. Example if DAYS ,
 	// issued on 10/12/2020 at 12:34:54 UTC:
-	//     - Sample input value: 90
-	//     - Output expiration date: 01/10/2020 12:34:54 UTC
-	// The minimum validity
-	// duration for a certificate using relative time ( DAYS) is one day. The minimum
-	// validity for a certificate using absolute time ( ABSOLUTE  or END_DATE) is one
-	// second.
+	//   - Sample input value: 90
+	//   - Output expiration date: 01/10/2020 12:34:54 UTC
+	// The minimum validity duration for a certificate using relative time ( DAYS ) is
+	// one day. The minimum validity for a certificate using absolute time ( ABSOLUTE
+	// or END_DATE ) is one second.
 	//
 	// This member is required.
 	Type ValidityPeriodType

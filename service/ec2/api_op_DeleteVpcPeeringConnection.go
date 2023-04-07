@@ -12,9 +12,9 @@ import (
 
 // Deletes a VPC peering connection. Either the owner of the requester VPC or the
 // owner of the accepter VPC can delete the VPC peering connection if it's in the
-// activestate. The owner of the requester VPC can delete a VPC peering
-// connection in the pending-acceptance state. You cannot delete a VPC peering
-// connection that's in the failed  state.
+// active state. The owner of the requester VPC can delete a VPC peering connection
+// in the pending-acceptance state. You cannot delete a VPC peering connection
+// that's in the failed state.
 func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteVpcPeeringConnectionInput, optFns ...func(*Options)) (*DeleteVpcPeeringConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteVpcPeeringConnectionInput{}
@@ -48,7 +48,7 @@ type DeleteVpcPeeringConnectionInput struct {
 
 type DeleteVpcPeeringConnectionOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

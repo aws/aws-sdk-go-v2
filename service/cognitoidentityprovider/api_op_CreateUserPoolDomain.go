@@ -29,9 +29,9 @@ func (c *Client) CreateUserPoolDomain(ctx context.Context, params *CreateUserPoo
 
 type CreateUserPoolDomainInput struct {
 
-	// The domain string. For custom domains, this is the fully-qualified domain
-	// name, such as auth.example.com. For Amazon Cognito prefix domains, this is the
-	// prefix alone, such as auth .
+	// The domain string. For custom domains, this is the fully-qualified domain name,
+	// such as auth.example.com . For Amazon Cognito prefix domains, this is the prefix
+	// alone, such as auth .
 	//
 	// This member is required.
 	Domain *string
@@ -54,8 +54,8 @@ type CreateUserPoolDomainInput struct {
 
 type CreateUserPoolDomainOutput struct {
 
-	// The Amazon CloudFront endpoint that you use as the target of the alias that
-	// you set up with your Domain Name Service (DNS) provider.
+	// The Amazon CloudFront endpoint that you use as the target of the alias that you
+	// set up with your Domain Name Service (DNS) provider.
 	CloudFrontDomain *string
 
 	// Metadata pertaining to the operation's result.

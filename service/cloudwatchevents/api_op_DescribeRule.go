@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified rule. DescribeRule does not list the targets of a
-// rule. To see the targets associated with a rule, use ListTargetsByRule (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html)
+// Describes the specified rule. DescribeRule does not list the targets of a rule.
+// To see the targets associated with a rule, use ListTargetsByRule (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html)
 // .
 func (c *Client) DescribeRule(ctx context.Context, params *DescribeRuleInput, optFns ...func(*Options)) (*DescribeRuleOutput, error) {
 	if params == nil {
@@ -76,8 +76,7 @@ type DescribeRuleOutput struct {
 	// The Amazon Resource Name (ARN) of the IAM role associated with the rule.
 	RoleArn *string
 
-	// The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5
-	// minutes)".
+	// The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".
 	ScheduleExpression *string
 
 	// Specifies whether the rule is enabled or disabled.

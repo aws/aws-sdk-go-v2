@@ -14,8 +14,7 @@ import (
 // Deletes one or more versions of a launch template. You cannot delete the
 // default version of a launch template; you must first assign a different version
 // as the default. If the default version is the only version for the launch
-// template, you must delete the entire launch template using DeleteLaunchTemplate
-// .
+// template, you must delete the entire launch template using DeleteLaunchTemplate .
 func (c *Client) DeleteLaunchTemplateVersions(ctx context.Context, params *DeleteLaunchTemplateVersionsInput, optFns ...func(*Options)) (*DeleteLaunchTemplateVersionsOutput, error) {
 	if params == nil {
 		params = &DeleteLaunchTemplateVersionsInput{}

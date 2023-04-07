@@ -118,9 +118,13 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This request cannot be completed for one of the following reasons.
-//   - The request would cause the number of member accounts in the behavior graph to exceed the maximum allowed. A behavior graph cannot have more than 1200 member accounts.
-//   - The request would cause the data rate for the behavior graph to exceed the maximum allowed.
-//   - Detective is unable to verify the data rate for the member account. This is usually because the member account is not enrolled in Amazon GuardDuty.
+//   - The request would cause the number of member accounts in the behavior graph
+//     to exceed the maximum allowed. A behavior graph cannot have more than 1200
+//     member accounts.
+//   - The request would cause the data rate for the behavior graph to exceed the
+//     maximum allowed.
+//   - Detective is unable to verify the data rate for the member account. This is
+//     usually because the member account is not enrolled in Amazon GuardDuty.
 type ServiceQuotaExceededException struct {
 	Message *string
 

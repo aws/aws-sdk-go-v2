@@ -36,12 +36,12 @@ type ListVirtualRoutersInput struct {
 	MeshName *string
 
 	// The maximum number of results returned by ListVirtualRouters in paginated
-	// output. When you use this parameter, ListVirtualRouters  returns only limit
+	// output. When you use this parameter, ListVirtualRouters returns only limit
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another
-	// ListVirtualRouters request with the returned nextToken value. This value can
-	// be between 1 and 100. If you don't use this parameter, ListVirtualRouters
-	// returns up to 100 results and a nextToken  value if applicable.
+	// ListVirtualRouters request with the returned nextToken value. This value can be
+	// between 1 and 100. If you don't use this parameter, ListVirtualRouters returns
+	// up to 100 results and a nextToken value if applicable.
 	Limit *int32
 
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the
@@ -51,10 +51,10 @@ type ListVirtualRoutersInput struct {
 	// .
 	MeshOwner *string
 
-	// The nextToken  value returned from a previous paginated ListVirtualRouters
+	// The nextToken value returned from a previous paginated ListVirtualRouters
 	// request where limit was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken  value.
+	// returned the nextToken value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -67,10 +67,10 @@ type ListVirtualRoutersOutput struct {
 	// This member is required.
 	VirtualRouters []types.VirtualRouterRef
 
-	// The nextToken  value to include in a future ListVirtualRouters request. When
-	// the results of a ListVirtualRouters  request exceed limit, you can use this
-	// value to retrieve the next page of results. This value is null when there are
-	// no more results to return.
+	// The nextToken value to include in a future ListVirtualRouters request. When the
+	// results of a ListVirtualRouters request exceed limit , you can use this value to
+	// retrieve the next page of results. This value is null when there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -154,16 +154,16 @@ var _ ListVirtualRoutersAPIClient = (*Client)(nil)
 // ListVirtualRouters
 type ListVirtualRoutersPaginatorOptions struct {
 	// The maximum number of results returned by ListVirtualRouters in paginated
-	// output. When you use this parameter, ListVirtualRouters  returns only limit
+	// output. When you use this parameter, ListVirtualRouters returns only limit
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another
-	// ListVirtualRouters request with the returned nextToken value. This value can
-	// be between 1 and 100. If you don't use this parameter, ListVirtualRouters
-	// returns up to 100 results and a nextToken  value if applicable.
+	// ListVirtualRouters request with the returned nextToken value. This value can be
+	// between 1 and 100. If you don't use this parameter, ListVirtualRouters returns
+	// up to 100 results and a nextToken value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

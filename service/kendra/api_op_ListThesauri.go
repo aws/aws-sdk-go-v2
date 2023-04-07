@@ -49,8 +49,8 @@ type ListThesauriInput struct {
 
 type ListThesauriOutput struct {
 
-	// If the response is truncated, Amazon Kendra returns this token that you can
-	// use in the subsequent request to retrieve the next set of thesauri.
+	// If the response is truncated, Amazon Kendra returns this token that you can use
+	// in the subsequent request to retrieve the next set of thesauri.
 	NextToken *string
 
 	// An array of summary information for a thesaurus or multiple thesauri.
@@ -137,8 +137,8 @@ type ListThesauriPaginatorOptions struct {
 	// The maximum number of thesauri to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

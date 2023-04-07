@@ -30,8 +30,8 @@ func (c *Client) UpdateEmailTemplate(ctx context.Context, params *UpdateEmailTem
 	return out, nil
 }
 
-// Represents a request to update an email template. For more information, see
-// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// Represents a request to update an email template. For more information, see the
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
 // .
 type UpdateEmailTemplateInput struct {
 

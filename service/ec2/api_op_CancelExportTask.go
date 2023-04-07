@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels an active export task. The request removes all artifacts of the
-// export, including any partially-created Amazon S3 objects. If the export task is
+// Cancels an active export task. The request removes all artifacts of the export,
+// including any partially-created Amazon S3 objects. If the export task is
 // complete or is in the process of transferring the final disk image, the command
 // fails and returns an error.
 func (c *Client) CancelExportTask(ctx context.Context, params *CancelExportTaskInput, optFns ...func(*Options)) (*CancelExportTaskOutput, error) {

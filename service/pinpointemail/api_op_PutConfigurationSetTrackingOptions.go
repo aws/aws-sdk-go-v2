@@ -31,8 +31,8 @@ func (c *Client) PutConfigurationSetTrackingOptions(ctx context.Context, params 
 // configuration set.
 type PutConfigurationSetTrackingOptionsInput struct {
 
-	// The name of the configuration set that you want to add a custom tracking
-	// domain to.
+	// The name of the configuration set that you want to add a custom tracking domain
+	// to.
 	//
 	// This member is required.
 	ConfigurationSetName *string

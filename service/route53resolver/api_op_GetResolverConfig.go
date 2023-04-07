@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the behavior configuration of Route 53 Resolver behavior for a
-// single VPC from Amazon Virtual Private Cloud.
+// Retrieves the behavior configuration of Route 53 Resolver behavior for a single
+// VPC from Amazon Virtual Private Cloud.
 func (c *Client) GetResolverConfig(ctx context.Context, params *GetResolverConfigInput, optFns ...func(*Options)) (*GetResolverConfigOutput, error) {
 	if params == nil {
 		params = &GetResolverConfigInput{}
@@ -41,7 +41,7 @@ type GetResolverConfigInput struct {
 type GetResolverConfigOutput struct {
 
 	// Information about the behavior configuration of Route 53 Resolver behavior for
-	// the VPC you specified in the GetResolverConfig  request.
+	// the VPC you specified in the GetResolverConfig request.
 	ResolverConfig *types.ResolverConfig
 
 	// Metadata pertaining to the operation's result.

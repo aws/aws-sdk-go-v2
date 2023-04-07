@@ -39,8 +39,8 @@ type ListTagsForResourceInput struct {
 	ResourceId *string
 
 	// The type of the resource.
-	//     - The resource type for health checks is healthcheck .
-	//     - The resource type for hosted zones is hostedzone .
+	//   - The resource type for health checks is healthcheck .
+	//   - The resource type for hosted zones is hostedzone .
 	//
 	// This member is required.
 	ResourceType types.TagResourceType
@@ -52,7 +52,7 @@ type ListTagsForResourceInput struct {
 // zones for which you want to list tags.
 type ListTagsForResourceOutput struct {
 
-	// A ResourceTagSet  containing tags associated with the specified resource.
+	// A ResourceTagSet containing tags associated with the specified resource.
 	//
 	// This member is required.
 	ResourceTagSet *types.ResourceTagSet

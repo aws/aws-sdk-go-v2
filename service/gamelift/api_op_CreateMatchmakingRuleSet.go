@@ -11,14 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new rule set for FlexMatch matchmaking. A rule set describes the
-// type of match to create, such as the number and size of teams. It also sets the
+// Creates a new rule set for FlexMatch matchmaking. A rule set describes the type
+// of match to create, such as the number and size of teams. It also sets the
 // parameters for acceptable player matches, such as minimum skill level or
 // character type. To create a matchmaking rule set, provide unique rule set name
 // and the rule set body in JSON format. Rule sets must be defined in the same
 // Region as the matchmaking configuration they are used with. Since matchmaking
 // rule sets cannot be edited, it is a good idea to check the rule set syntax using
-//
 // ValidateMatchmakingRuleSet (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ValidateMatchmakingRuleSet.html)
 // before creating a new rule set. Learn more
 //   - Build a rule set (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
@@ -43,13 +42,13 @@ type CreateMatchmakingRuleSetInput struct {
 
 	// A unique identifier for the matchmaking rule set. A matchmaking configuration
 	// identifies the rule set it uses by this name value. Note that the rule set name
-	// is different from the optional name  field in the rule set body.
+	// is different from the optional name field in the rule set body.
 	//
 	// This member is required.
 	Name *string
 
-	// A collection of matchmaking rules, formatted as a JSON string. Comments are
-	// not allowed in JSON, but most elements support a description field.
+	// A collection of matchmaking rules, formatted as a JSON string. Comments are not
+	// allowed in JSON, but most elements support a description field.
 	//
 	// This member is required.
 	RuleSetBody *string

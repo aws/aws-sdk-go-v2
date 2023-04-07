@@ -283,8 +283,8 @@ type EngineVersionInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a single occurrence of something interesting within the system.
-// Some examples of events are creating a cluster or adding or removing a node.
+// Represents a single occurrence of something interesting within the system. Some
+// examples of events are creating a cluster or adding or removing a node.
 type Event struct {
 
 	// The date and time when the event occurred.
@@ -293,8 +293,8 @@ type Event struct {
 	// The text of the event.
 	Message *string
 
-	// The name for the source of the event. For example, if the event occurred at
-	// the cluster level, the identifier would be the name of the cluster.
+	// The name for the source of the event. For example, if the event occurred at the
+	// cluster level, the identifier would be the name of the cluster.
 	SourceName *string
 
 	// Specifies the origin of this event - a cluster, a parameter group, a security
@@ -320,8 +320,8 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an individual node within a cluster. Each node runs its own
-// instance of the cluster's protocol-compliant caching software.
+// Represents an individual node within a cluster. Each node runs its own instance
+// of the cluster's protocol-compliant caching software.
 type Node struct {
 
 	// The Availability Zone in which the node resides
@@ -435,7 +435,7 @@ type ReplicaConfigurationRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a PurchaseReservedNodesOffering  operation.
+// Represents the output of a PurchaseReservedNodesOffering operation.
 type ReservedNode struct {
 
 	// The Amazon Resource Name (ARN) of the reserved node.
@@ -686,9 +686,9 @@ type Subnet struct {
 //   - CreateSubnetGroup
 //   - UpdateSubnetGroup
 //
-// A subnet group is a collection of subnets (typically
-// private) that you can designate for your clusters running in an Amazon Virtual
-// Private Cloud (VPC) environment.
+// A subnet group is a collection of subnets (typically private) that you can
+// designate for your clusters running in an Amazon Virtual Private Cloud (VPC)
+// environment.
 type SubnetGroup struct {
 
 	// The ARN (Amazon Resource Name) of the subnet group.

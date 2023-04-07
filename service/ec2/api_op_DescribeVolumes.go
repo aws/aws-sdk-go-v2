@@ -47,23 +47,34 @@ type DescribeVolumesInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - attachment.attach-time - The time stamp when the attachment initiated.
-	//     - attachment.delete-on-termination - Whether the volume is deleted on instance termination.
-	//     - attachment.device - The device name specified in the block device mapping (for example, /dev/sda1 ).
-	//     - attachment.instance-id - The ID of the instance the volume is attached to.
-	//     - attachment.status - The attachment state ( attaching | attached | detaching ).
-	//     - availability-zone - The Availability Zone in which the volume was created.
-	//     - create-time - The time stamp when the volume was created.
-	//     - encrypted - Indicates whether the volume is encrypted ( true | false )
-	//     - multi-attach-enabled - Indicates whether the volume is enabled for Multi-Attach ( true | false )
-	//     - fast-restored - Indicates whether the volume was created from a snapshot that is enabled for fast snapshot restore ( true | false ).
-	//     - size - The size of the volume, in GiB.
-	//     - snapshot-id - The snapshot from which the volume was created.
-	//     - status - The state of the volume ( creating | available | in-use | deleting | deleted | error ).
-	//     - tag : - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
-	//     - tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
-	//     - volume-id - The volume ID.
-	//     - volume-type - The Amazon EBS volume type ( gp2 | gp3 | io1 | io2 | st1 | sc1 | standard )
+	//   - attachment.attach-time - The time stamp when the attachment initiated.
+	//   - attachment.delete-on-termination - Whether the volume is deleted on instance
+	//   termination.
+	//   - attachment.device - The device name specified in the block device mapping
+	//   (for example, /dev/sda1 ).
+	//   - attachment.instance-id - The ID of the instance the volume is attached to.
+	//   - attachment.status - The attachment state ( attaching | attached | detaching
+	//   ).
+	//   - availability-zone - The Availability Zone in which the volume was created.
+	//   - create-time - The time stamp when the volume was created.
+	//   - encrypted - Indicates whether the volume is encrypted ( true | false )
+	//   - multi-attach-enabled - Indicates whether the volume is enabled for
+	//   Multi-Attach ( true | false )
+	//   - fast-restored - Indicates whether the volume was created from a snapshot
+	//   that is enabled for fast snapshot restore ( true | false ).
+	//   - size - The size of the volume, in GiB.
+	//   - snapshot-id - The snapshot from which the volume was created.
+	//   - status - The state of the volume ( creating | available | in-use | deleting
+	//   | deleted | error ).
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - volume-id - The volume ID.
+	//   - volume-type - The Amazon EBS volume type ( gp2 | gp3 | io1 | io2 | st1 | sc1
+	//   | standard )
 	Filters []types.Filter
 
 	// The maximum number of volumes to return for this request. This value can be
@@ -74,8 +85,8 @@ type DescribeVolumesInput struct {
 	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues
-	// from the end of the items returned from the previous request.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned from the previous request.
 	NextToken *string
 
 	// The volume IDs.
@@ -87,7 +98,7 @@ type DescribeVolumesInput struct {
 type DescribeVolumesOutput struct {
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Information about the volumes.
@@ -177,8 +188,8 @@ type DescribeVolumesPaginatorOptions struct {
 	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

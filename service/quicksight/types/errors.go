@@ -182,7 +182,7 @@ func (e *InternalFailureException) ErrorCode() string {
 }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The NextToken  value isn't valid.
+// The NextToken value isn't valid.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -506,7 +506,7 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // administrator needs to add capacity pricing to Amazon QuickSight. You can do
 // this on the Manage Amazon QuickSight page. After capacity pricing is added, you
 // can use the GetDashboardEmbedUrl (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetDashboardEmbedUrl.html)
-// API operation with the --identity-type ANONYMOUS  option.
+// API operation with the --identity-type ANONYMOUS option.
 type UnsupportedPricingPlanException struct {
 	Message *string
 

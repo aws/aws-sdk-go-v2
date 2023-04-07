@@ -27,7 +27,7 @@ func (c *Client) DeleteDeploymentGroup(ctx context.Context, params *DeleteDeploy
 	return out, nil
 }
 
-// Represents the input of a DeleteDeploymentGroup  operation.
+// Represents the input of a DeleteDeploymentGroup operation.
 type DeleteDeploymentGroupInput struct {
 
 	// The name of an CodeDeploy application associated with the IAM user or Amazon
@@ -44,7 +44,7 @@ type DeleteDeploymentGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DeleteDeploymentGroup  operation.
+// Represents the output of a DeleteDeploymentGroup operation.
 type DeleteDeploymentGroupOutput struct {
 
 	// If the output contains no data, and the corresponding deployment group

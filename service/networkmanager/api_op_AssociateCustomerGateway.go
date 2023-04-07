@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a customer gateway with a device and optionally, with a link. If
-// you specify a link, it must be associated with the specified device. You can
-// only associate customer gateways that are connected to a VPN attachment on a
-// transit gateway or core network registered in your global network. When you
-// register a transit gateway or core network, customer gateways that are connected
-// to the transit gateway are automatically included in the global network. To list
+// Associates a customer gateway with a device and optionally, with a link. If you
+// specify a link, it must be associated with the specified device. You can only
+// associate customer gateways that are connected to a VPN attachment on a transit
+// gateway or core network registered in your global network. When you register a
+// transit gateway or core network, customer gateways that are connected to the
+// transit gateway are automatically included in the global network. To list
 // customer gateways that are connected to a transit gateway, use the
 // DescribeVpnConnections (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html)
-// EC2 API and filter by transit-gateway-id. You cannot associate a customer
+// EC2 API and filter by transit-gateway-id . You cannot associate a customer
 // gateway with more than one device and link.
 func (c *Client) AssociateCustomerGateway(ctx context.Context, params *AssociateCustomerGatewayInput, optFns ...func(*Options)) (*AssociateCustomerGatewayOutput, error) {
 	if params == nil {

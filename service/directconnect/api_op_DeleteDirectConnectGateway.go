@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified Direct Connect gateway. You must first delete all
-// virtual interfaces that are attached to the Direct Connect gateway and
-// disassociate all virtual private gateways associated with the Direct Connect
-// gateway.
+// Deletes the specified Direct Connect gateway. You must first delete all virtual
+// interfaces that are attached to the Direct Connect gateway and disassociate all
+// virtual private gateways associated with the Direct Connect gateway.
 func (c *Client) DeleteDirectConnectGateway(ctx context.Context, params *DeleteDirectConnectGatewayInput, optFns ...func(*Options)) (*DeleteDirectConnectGatewayOutput, error) {
 	if params == nil {
 		params = &DeleteDirectConnectGatewayInput{}

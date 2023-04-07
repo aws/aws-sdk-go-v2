@@ -13,23 +13,24 @@ import (
 type Filter struct {
 
 	// The following are keys you can use:
-	//     - description: Prefix match, not case-sensitive.
-	//     - name: Prefix match, case-sensitive.
-	//     - tag-key: Prefix match, case-sensitive.
-	//     - tag-value: Prefix match, case-sensitive.
-	//     - primary-region: Prefix match, case-sensitive.
-	//     - owning-service: Prefix match, case-sensitive.
-	//     - all: Breaks the filter value string into words and then searches all attributes for matches. Not case-sensitive.
+	//   - description: Prefix match, not case-sensitive.
+	//   - name: Prefix match, case-sensitive.
+	//   - tag-key: Prefix match, case-sensitive.
+	//   - tag-value: Prefix match, case-sensitive.
+	//   - primary-region: Prefix match, case-sensitive.
+	//   - owning-service: Prefix match, case-sensitive.
+	//   - all: Breaks the filter value string into words and then searches all
+	//   attributes for matches. Not case-sensitive.
 	Key FilterNameStringType
 
-	// The keyword to filter for. You can prefix your search value with an
-	// exclamation mark ( ! ) in order to perform negation filters.
+	// The keyword to filter for. You can prefix your search value with an exclamation
+	// mark ( ! ) in order to perform negation filters.
 	Values []string
 
 	noSmithyDocumentSerde
 }
 
-// A custom type that specifies a Region  and the KmsKeyId  for a replica secret.
+// A custom type that specifies a Region and the KmsKeyId for a replica secret.
 type ReplicaRegionType struct {
 
 	// The ARN, key ID, or alias of the KMS key to encrypt the secret. If you don't
@@ -50,8 +51,8 @@ type ReplicationStatusType struct {
 	// Can be an ARN , Key ID , or Alias .
 	KmsKeyId *string
 
-	// The date that the secret was last accessed in the Region. This field is
-	// omitted if the secret has never been retrieved in the Region.
+	// The date that the secret was last accessed in the Region. This field is omitted
+	// if the secret has never been retrieved in the Region.
 	LastAccessedDate *time.Time
 
 	// The Region where replication occurs.
@@ -73,11 +74,11 @@ type RotationRulesType struct {
 	// check that your secret meets your compliance guidelines for how often secrets
 	// must be rotated. If you use this field to set the rotation schedule, Secrets
 	// Manager calculates the next rotation date based on the previous rotation.
-	// Manually updating the secret value by calling PutSecretValue  or UpdateSecret
-	// is considered a valid rotation. In DescribeSecret  and ListSecrets, this value
-	// is calculated from the rotation schedule after every successful rotation. In
-	// RotateSecret , you can set the rotation schedule in RotationRules  with
-	// AutomaticallyAfterDays or ScheduleExpression, but not both. To set a rotation
+	// Manually updating the secret value by calling PutSecretValue or UpdateSecret is
+	// considered a valid rotation. In DescribeSecret and ListSecrets , this value is
+	// calculated from the rotation schedule after every successful rotation. In
+	// RotateSecret , you can set the rotation schedule in RotationRules with
+	// AutomaticallyAfterDays or ScheduleExpression , but not both. To set a rotation
 	// schedule in hours, use ScheduleExpression .
 	AutomaticallyAfterDays *int64
 
@@ -92,18 +93,18 @@ type RotationRulesType struct {
 	// in the Secrets Manager Users Guide.
 	Duration *string
 
-	// A cron()  or rate() expression that defines the schedule for rotating your
+	// A cron() or rate() expression that defines the schedule for rotating your
 	// secret. Secrets Manager rotation schedules use UTC time zone. Secrets Manager
 	// rotates your secret any time during a rotation window. Secrets Manager rate()
 	// expressions represent the interval in hours or days that you want to rotate your
-	// secret, for example rate(12 hours)  or rate(10 days). You can rotate a secret
-	// as often as every four hours. If you use a rate() expression, the rotation
-	// window starts at midnight. For a rate in hours, the default rotation window
-	// closes after one hour. For a rate in days, the default rotation window closes at
-	// the end of the day. You can set the Duration to change the rotation window.
-	// The rotation window must not extend into the next UTC day or into the next
-	// rotation window. You can use a cron() expression to create a rotation schedule
-	// that is more detailed than a rotation interval. For more information, including
+	// secret, for example rate(12 hours) or rate(10 days) . You can rotate a secret as
+	// often as every four hours. If you use a rate() expression, the rotation window
+	// starts at midnight. For a rate in hours, the default rotation window closes
+	// after one hour. For a rate in days, the default rotation window closes at the
+	// end of the day. You can set the Duration to change the rotation window. The
+	// rotation window must not extend into the next UTC day or into the next rotation
+	// window. You can use a cron() expression to create a rotation schedule that is
+	// more detailed than a rotation interval. For more information, including
 	// examples, see Schedule expressions in Secrets Manager rotation (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_schedule.html)
 	// in the Secrets Manager Users Guide. For a cron expression that represents a
 	// schedule in hours, the default rotation window closes after one hour. For a cron
@@ -117,7 +118,7 @@ type RotationRulesType struct {
 }
 
 // A structure that contains the details about a secret. It does not include the
-// encrypted SecretString  and SecretBinary  values. To get those values, use
+// encrypted SecretString and SecretBinary values. To get those values, use
 // GetSecretValue (https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html)
 // .
 type SecretListEntry struct {
@@ -130,7 +131,7 @@ type SecretListEntry struct {
 
 	// The date and time the deletion of the secret occurred. Not present on active
 	// secrets. The secret can be recovered until the number of days in the recovery
-	// window has passed, as specified in the RecoveryWindowInDays  parameter of the
+	// window has passed, as specified in the RecoveryWindowInDays parameter of the
 	// DeleteSecret (https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_DeleteSecret.html)
 	// operation.
 	DeletedDate *time.Time
@@ -143,8 +144,8 @@ type SecretListEntry struct {
 	// aws/secretsmanager , this field is omitted.
 	KmsKeyId *string
 
-	// The date that the secret was last accessed in the Region. This field is
-	// omitted if the secret has never been retrieved in the Region.
+	// The date that the secret was last accessed in the Region. This field is omitted
+	// if the secret has never been retrieved in the Region.
 	LastAccessedDate *time.Time
 
 	// The last date and time that this secret was modified in any way.
@@ -156,7 +157,7 @@ type SecretListEntry struct {
 
 	// The friendly name of the secret. You can use forward slashes in the name to
 	// represent a path hierarchy. For example, /prod/databases/dbserver1 could
-	// represent the secret for a server named dbserver1  in the folder databases in
+	// represent the secret for a server named dbserver1 in the folder databases in
 	// the folder prod .
 	Name *string
 
@@ -174,9 +175,9 @@ type SecretListEntry struct {
 	// Indicates whether automatic, scheduled rotation is enabled for this secret.
 	RotationEnabled *bool
 
-	// The ARN of an Amazon Web Services Lambda function invoked by Secrets Manager
-	// to rotate and expire the secret either automatically per the schedule or
-	// manually by a call to RotateSecret (https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_RotateSecret.html)
+	// The ARN of an Amazon Web Services Lambda function invoked by Secrets Manager to
+	// rotate and expire the secret either automatically per the schedule or manually
+	// by a call to RotateSecret (https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_RotateSecret.html)
 	// .
 	RotationLambdaARN *string
 
@@ -184,10 +185,10 @@ type SecretListEntry struct {
 	RotationRules *RotationRulesType
 
 	// A list of all of the currently assigned SecretVersionStage staging labels and
-	// the SecretVersionId attached to each one. Staging labels are used to keep
-	// track of the different versions during the rotation process. A version that does
-	// not have any SecretVersionStage is considered deprecated and subject to
-	// deletion. Such versions are not included in this list.
+	// the SecretVersionId attached to each one. Staging labels are used to keep track
+	// of the different versions during the rotation process. A version that does not
+	// have any SecretVersionStage is considered deprecated and subject to deletion.
+	// Such versions are not included in this list.
 	SecretVersionsToStages map[string][]string
 
 	// The list of user-defined tags associated with the secret. To add tags to a

@@ -14,12 +14,11 @@ import (
 // Returns a unique symmetric data key for use outside of KMS. This operation
 // returns a data key that is encrypted under a symmetric encryption KMS key that
 // you specify. The bytes in the key are random; they are not related to the caller
-// or to the KMS key. GenerateDataKeyWithoutPlaintext  is identical to the
-// GenerateDataKeyoperation except that it does not return a plaintext copy of
-// the data key. This operation is useful for systems that need to encrypt data at
-// some point, but not immediately. When you need to encrypt the data, you call the
-//
-// Decryptoperation on the encrypted copy of the key. It's also useful in
+// or to the KMS key. GenerateDataKeyWithoutPlaintext is identical to the
+// GenerateDataKey operation except that it does not return a plaintext copy of the
+// data key. This operation is useful for systems that need to encrypt data at some
+// point, but not immediately. When you need to encrypt the data, you call the
+// Decrypt operation on the encrypted copy of the key. It's also useful in
 // distributed systems with different levels of trust. For example, you might store
 // encrypted data in containers. One component of your system creates new
 // containers and stores an encrypted data key with each container. Then, a
@@ -35,22 +34,22 @@ import (
 // operation. You must also specify the length of the data key. Use either the
 // KeySpec or NumberOfBytes parameters (but not both). For 128-bit and 256-bit
 // data keys, use the KeySpec parameter. To generate an SM4 data key (China
-// Regions only), specify a KeySpec  value of AES_128  or NumberOfBytes  value of
-// 128. The symmetric encryption key used in China Regions to encrypt your data
-// key is an SM4 encryption key. If the operation succeeds, you will find the
-// encrypted copy of the data key in the CiphertextBlob field. You can use an
-// optional encryption context to add additional security to the encryption
-// operation. If you specify an EncryptionContext, you must specify the same
-// encryption context (a case-sensitive exact match) when decrypting the encrypted
-// data key. Otherwise, the request to decrypt fails with an
-// InvalidCiphertextException . For more information, see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+// Regions only), specify a KeySpec value of AES_128 or NumberOfBytes value of 128
+// . The symmetric encryption key used in China Regions to encrypt your data key is
+// an SM4 encryption key. If the operation succeeds, you will find the encrypted
+// copy of the data key in the CiphertextBlob field. You can use an optional
+// encryption context to add additional security to the encryption operation. If
+// you specify an EncryptionContext , you must specify the same encryption context
+// (a case-sensitive exact match) when decrypting the encrypted data key.
+// Otherwise, the request to decrypt fails with an InvalidCiphertextException . For
+// more information, see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 // in the Key Management Service Developer Guide. The KMS key that you use for this
-// operation must be in a compatible key state. For details, see Key states of
-// KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-// in the Key Management Service Developer Guide. Cross-account use: Yes. To
-// perform this operation with a KMS key in a different Amazon Web Services
-// account, specify the key ARN or alias ARN in the value of the KeyId parameter.
-// Required permissions: kms:GenerateDataKeyWithoutPlaintext (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. Cross-account use: Yes. To perform
+// this operation with a KMS key in a different Amazon Web Services account,
+// specify the key ARN or alias ARN in the value of the KeyId parameter. Required
+// permissions: kms:GenerateDataKeyWithoutPlaintext (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //   - Decrypt
 //   - Encrypt
@@ -78,16 +77,15 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	// cannot specify an asymmetric KMS key or a KMS key in a custom key store. To get
 	// the type and origin of your KMS key, use the DescribeKey operation. To specify
 	// a KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an
-	// alias name, prefix it with "alias/". To specify a KMS key in a different
-	// Amazon Web Services account, you must use the key ARN or alias ARN. For example:
-	//
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Alias name: alias/ExampleAlias
-	//     - Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
-	// To get
-	// the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey. To get the
-	// alias name and alias ARN, use ListAliases .
+	// alias name, prefix it with "alias/" . To specify a KMS key in a different Amazon
+	// Web Services account, you must use the key ARN or alias ARN. For example:
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Alias name: alias/ExampleAlias
+	//   - Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey . To
+	// get the alias name and alias ARN, use ListAliases .
 	//
 	// This member is required.
 	KeyId *string
@@ -110,14 +108,14 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	// in the Key Management Service Developer Guide.
 	GrantTokens []string
 
-	// The length of the data key. Use AES_128 to generate a 128-bit symmetric key,
-	// or AES_256  to generate a 256-bit symmetric key.
+	// The length of the data key. Use AES_128 to generate a 128-bit symmetric key, or
+	// AES_256 to generate a 256-bit symmetric key.
 	KeySpec types.DataKeySpec
 
 	// The length of the data key in bytes. For example, use the value 64 to generate
 	// a 512-bit data key (64 bytes is 512 bits). For common key lengths (128-bit and
-	// 256-bit symmetric keys), we recommend that you use the KeySpec field instead
-	// of this one.
+	// 256-bit symmetric keys), we recommend that you use the KeySpec field instead of
+	// this one.
 	NumberOfBytes *int32
 
 	noSmithyDocumentSerde

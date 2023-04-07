@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Evaluates an event against a detector version. If a version ID is not
-// provided, the detector’s ( ACTIVE ) version is used.
+// Evaluates an event against a detector version. If a version ID is not provided,
+// the detector’s ( ACTIVE ) version is used.
 func (c *Client) GetEventPrediction(ctx context.Context, params *GetEventPredictionInput, optFns ...func(*Options)) (*GetEventPredictionOutput, error) {
 	if params == nil {
 		params = &GetEventPredictionInput{}
@@ -35,9 +35,9 @@ type GetEventPredictionInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// The entity type (associated with the detector's event type) and specific
-	// entity ID representing who performed the event. If an entity id is not
-	// available, use "UNKNOWN."
+	// The entity type (associated with the detector's event type) and specific entity
+	// ID representing who performed the event. If an entity id is not available, use
+	// "UNKNOWN."
 	//
 	// This member is required.
 	Entities []types.Entity

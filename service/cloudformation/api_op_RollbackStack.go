@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// When specifying RollbackStack, you preserve the state of previously
-// provisioned resources when an operation fails. You can check the status of the
-// stack through the DescribeStacks operation. Rolls back the specified stack to
-// the last known stable state from CREATE_FAILED  or UPDATE_FAILED stack
-// statuses. This operation will delete a stack if it doesn't contain a last known
-// stable state. A last known stable state includes any status in a *_COMPLETE.
-// This includes the following stack statuses.
+// When specifying RollbackStack , you preserve the state of previously provisioned
+// resources when an operation fails. You can check the status of the stack through
+// the DescribeStacks operation. Rolls back the specified stack to the last known
+// stable state from CREATE_FAILED or UPDATE_FAILED stack statuses. This operation
+// will delete a stack if it doesn't contain a last known stable state. A last
+// known stable state includes any status in a *_COMPLETE . This includes the
+// following stack statuses.
 //   - CREATE_COMPLETE
 //   - UPDATE_COMPLETE
 //   - UPDATE_ROLLBACK_COMPLETE
@@ -44,7 +44,7 @@ type RollbackStackInput struct {
 	// This member is required.
 	StackName *string
 
-	// A unique identifier for this RollbackStack  request.
+	// A unique identifier for this RollbackStack request.
 	ClientRequestToken *string
 
 	// The Amazon Resource Name (ARN) of an Identity and Access Management role that

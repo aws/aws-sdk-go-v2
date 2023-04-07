@@ -12,9 +12,9 @@ import (
 )
 
 // Returns a list of offering promotions. Each offering promotion record contains
-// the ID and description of the promotion. The API returns a NotEligible error
-// if the caller is not permitted to invoke the operation. Contact
-// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)if
+// the ID and description of the promotion. The API returns a NotEligible error if
+// the caller is not permitted to invoke the operation. Contact
+// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com) if
 // you must be able to invoke this operation.
 func (c *Client) ListOfferingPromotions(ctx context.Context, params *ListOfferingPromotionsInput, optFns ...func(*Options)) (*ListOfferingPromotionsOutput, error) {
 	if params == nil {
@@ -33,8 +33,8 @@ func (c *Client) ListOfferingPromotions(ctx context.Context, params *ListOfferin
 
 type ListOfferingPromotionsInput struct {
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -42,8 +42,8 @@ type ListOfferingPromotionsInput struct {
 
 type ListOfferingPromotionsOutput struct {
 
-	// An identifier to be used in the next call to this operation, to return the
-	// next set of items in the list.
+	// An identifier to be used in the next call to this operation, to return the next
+	// set of items in the list.
 	NextToken *string
 
 	// Information about the offering promotions.

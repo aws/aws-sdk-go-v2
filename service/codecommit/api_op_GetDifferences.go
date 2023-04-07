@@ -50,16 +50,14 @@ type GetDifferencesInput struct {
 
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, the full commit ID). Optional. If not specified, all
-	// changes before the afterCommitSpecifier  value are shown. If you do not use
+	// changes before the afterCommitSpecifier value are shown. If you do not use
 	// beforeCommitSpecifier in your request, consider limiting the results with
 	// maxResults .
 	BeforeCommitSpecifier *string
 
 	// The file path in which to check for differences. Limits the results to this
 	// path. Can also be used to specify the previous name of a directory or folder. If
-	//
-	// beforePath and afterPath are not specified, differences are shown for all
-	// paths.
+	// beforePath and afterPath are not specified, differences are shown for all paths.
 	BeforePath *string
 
 	// A non-zero, non-negative integer used to limit the number of returned results.
@@ -164,8 +162,8 @@ type GetDifferencesPaginatorOptions struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

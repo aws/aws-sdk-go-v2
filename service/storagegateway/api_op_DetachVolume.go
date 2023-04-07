@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disconnects a volume from an iSCSI connection and then detaches the volume
-// from the specified gateway. Detaching and attaching a volume enables you to
-// recover your data from one gateway to a different gateway without creating a
-// snapshot. It also makes it easier to move your volumes from an on-premises
-// gateway to a gateway hosted on an Amazon EC2 instance. This operation is only
-// supported in the volume gateway type.
+// Disconnects a volume from an iSCSI connection and then detaches the volume from
+// the specified gateway. Detaching and attaching a volume enables you to recover
+// your data from one gateway to a different gateway without creating a snapshot.
+// It also makes it easier to move your volumes from an on-premises gateway to a
+// gateway hosted on an Amazon EC2 instance. This operation is only supported in
+// the volume gateway type.
 func (c *Client) DetachVolume(ctx context.Context, params *DetachVolumeInput, optFns ...func(*Options)) (*DetachVolumeOutput, error) {
 	if params == nil {
 		params = &DetachVolumeInput{}
@@ -40,9 +40,9 @@ type DetachVolumeInput struct {
 	VolumeARN *string
 
 	// Set to true to forcibly remove the iSCSI connection of the target volume and
-	// detach the volume. The default is false . If this value is set to false, you
+	// detach the volume. The default is false . If this value is set to false , you
 	// must manually disconnect the iSCSI connection from the target volume. Valid
-	// Values: true  | false
+	// Values: true | false
 	ForceDetach *bool
 
 	noSmithyDocumentSerde

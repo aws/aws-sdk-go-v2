@@ -51,7 +51,7 @@ type DescribePublishingDestinationOutput struct {
 	// This member is required.
 	DestinationId *string
 
-	// A DestinationProperties  object that includes the DestinationArn  and KmsKeyArn
+	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn
 	// of the publishing destination.
 	//
 	// This member is required.

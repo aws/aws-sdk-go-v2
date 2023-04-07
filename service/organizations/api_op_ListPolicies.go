@@ -13,8 +13,8 @@ import (
 )
 
 // Retrieves the list of all policies in an organization of a specified type.
-// Always check the NextToken  response parameter for a null  value when calling a
-// List*operation. These operations can occasionally return an empty set of
+// Always check the NextToken response parameter for a null value when calling a
+// List* operation. These operations can occasionally return an empty set of
 // results even when there are more results available. The NextToken response
 // parameter value is null only when there are no more results to display. This
 // operation can be called only from the organization's management account or by a
@@ -37,12 +37,12 @@ func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, op
 
 type ListPoliciesInput struct {
 
-	// Specifies the type of policy that you want to include in the response. You
-	// must specify one of the following values:
-	//     - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-	//     - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
-	//     - SERVICE_CONTROL_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
-	//     - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	// Specifies the type of policy that you want to include in the response. You must
+	// specify one of the following values:
+	//   - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	//   - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	//   - SERVICE_CONTROL_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	//   - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// This member is required.
 	Filter types.PolicyType
@@ -59,9 +59,9 @@ type ListPoliciesInput struct {
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more
-	// output is available. Set this parameter to the value of the previous call's
-	// NextToken response to indicate where the output should continue from.
+	// response in a previous request. A NextToken response indicates that more output
+	// is available. Set this parameter to the value of the previous call's NextToken
+	// response to indicate where the output should continue from.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -72,7 +72,7 @@ type ListPoliciesOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken  response element comes back as null .
+	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
 	// A list of policies that match the filter criteria in the request. The output
@@ -169,8 +169,8 @@ type ListPoliciesPaginatorOptions struct {
 	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

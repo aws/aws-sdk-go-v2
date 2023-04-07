@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches a virtual private gateway to a VPC. You can attach one virtual
-// private gateway to one VPC at a time. For more information, see Amazon Web
-// Services Site-to-Site VPN (https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html)
-// in the Amazon Web Services Site-to-Site VPN User Guide.
+// Attaches a virtual private gateway to a VPC. You can attach one virtual private
+// gateway to one VPC at a time. For more information, see Amazon Web Services
+// Site-to-Site VPN (https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in
+// the Amazon Web Services Site-to-Site VPN User Guide.
 func (c *Client) AttachVpnGateway(ctx context.Context, params *AttachVpnGatewayInput, optFns ...func(*Options)) (*AttachVpnGatewayOutput, error) {
 	if params == nil {
 		params = &AttachVpnGatewayInput{}

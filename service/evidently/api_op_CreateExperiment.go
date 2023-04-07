@@ -20,7 +20,6 @@ import (
 // experiment consider only certain audience types in the experiment, such as using
 // only user sessions from a certain location or who use a certain internet
 // browser. Don't use this operation to update an existing experiment. Instead, use
-//
 // UpdateExperiment (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html)
 // .
 func (c *Client) CreateExperiment(ctx context.Context, params *CreateExperimentInput, optFns ...func(*Options)) (*CreateExperimentOutput, error) {
@@ -73,7 +72,7 @@ type CreateExperimentInput struct {
 
 	// When Evidently assigns a particular user session to an experiment, it must use
 	// a randomization ID to determine which variation the user session is served. This
-	// randomization ID is a combination of the entity ID and randomizationSalt. If
+	// randomization ID is a combination of the entity ID and randomizationSalt . If
 	// you omit randomizationSalt , Evidently uses the experiment name as the
 	// randomizationSalt .
 	RandomizationSalt *string
@@ -90,8 +89,8 @@ type CreateExperimentInput struct {
 	// the experiment.
 	Segment *string
 
-	// Assigns one or more tags (key-value pairs) to the experiment. Tags can help
-	// you organize and categorize your resources. You can also use them to scope user
+	// Assigns one or more tags (key-value pairs) to the experiment. Tags can help you
+	// organize and categorize your resources. You can also use them to scope user
 	// permissions by granting a user permission to access or change only resources
 	// with certain tag values. Tags don't have any semantic meaning to Amazon Web
 	// Services and are interpreted strictly as strings of characters. You can

@@ -32,8 +32,8 @@ func (c *Client) CreateBrowserSettings(ctx context.Context, params *CreateBrowse
 
 type CreateBrowserSettingsInput struct {
 
-	// A JSON string containing Chrome Enterprise policies that will be applied to
-	// all streaming sessions.
+	// A JSON string containing Chrome Enterprise policies that will be applied to all
+	// streaming sessions.
 	//
 	// This member is required.
 	BrowserPolicy *string

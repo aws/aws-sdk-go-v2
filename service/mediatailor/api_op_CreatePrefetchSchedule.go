@@ -51,9 +51,9 @@ type CreatePrefetchScheduleInput struct {
 	// This member is required.
 	PlaybackConfigurationName *string
 
-	// The configuration settings for retrieval of prefetched ads from the ad
-	// decision server. Only one set of prefetched ads will be retrieved and
-	// subsequently consumed for each ad break.
+	// The configuration settings for retrieval of prefetched ads from the ad decision
+	// server. Only one set of prefetched ads will be retrieved and subsequently
+	// consumed for each ad break.
 	//
 	// This member is required.
 	Retrieval *types.PrefetchRetrieval
@@ -61,7 +61,7 @@ type CreatePrefetchScheduleInput struct {
 	// An optional stream identifier that MediaTailor uses to prefetch ads for
 	// multiple streams that use the same playback configuration. If StreamId is
 	// specified, MediaTailor returns all of the prefetch schedules with an exact match
-	// on StreamId. If not specified, MediaTailor returns all of the prefetch
+	// on StreamId . If not specified, MediaTailor returns all of the prefetch
 	// schedules for the playback configuration, regardless of StreamId .
 	StreamId *string
 
@@ -85,15 +85,15 @@ type CreatePrefetchScheduleOutput struct {
 	// The name to assign to the playback configuration.
 	PlaybackConfigurationName *string
 
-	// The configuration settings for retrieval of prefetched ads from the ad
-	// decision server. Only one set of prefetched ads will be retrieved and
-	// subsequently consumed for each ad break.
+	// The configuration settings for retrieval of prefetched ads from the ad decision
+	// server. Only one set of prefetched ads will be retrieved and subsequently
+	// consumed for each ad break.
 	Retrieval *types.PrefetchRetrieval
 
 	// An optional stream identifier that MediaTailor uses to prefetch ads for
 	// multiple streams that use the same playback configuration. If StreamId is
 	// specified, MediaTailor returns all of the prefetch schedules with an exact match
-	// on StreamId. If not specified, MediaTailor returns all of the prefetch
+	// on StreamId . If not specified, MediaTailor returns all of the prefetch
 	// schedules for the playback configuration, regardless of StreamId .
 	StreamId *string
 

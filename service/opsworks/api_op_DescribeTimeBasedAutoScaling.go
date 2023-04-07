@@ -42,7 +42,7 @@ type DescribeTimeBasedAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeTimeBasedAutoScaling  request.
+// Contains the response to a DescribeTimeBasedAutoScaling request.
 type DescribeTimeBasedAutoScalingOutput struct {
 
 	// An array of TimeBasedAutoScalingConfiguration objects that describe the

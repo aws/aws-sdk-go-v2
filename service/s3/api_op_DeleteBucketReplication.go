@@ -12,10 +12,10 @@ import (
 )
 
 // Deletes the replication configuration from the bucket. To use this operation,
-// you must have permissions to perform the s3:PutReplicationConfiguration
-// action. The bucket owner has these permissions by default and can grant it to
-// others. For more information about permissions, see Permissions Related to
-// Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// you must have permissions to perform the s3:PutReplicationConfiguration action.
+// The bucket owner has these permissions by default and can grant it to others.
+// For more information about permissions, see Permissions Related to Bucket
+// Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
 // . It can take a while for the deletion of a replication configuration to fully
 // propagate. For information about replication configuration, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html)

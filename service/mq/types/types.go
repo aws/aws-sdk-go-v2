@@ -147,14 +147,14 @@ type Configuration struct {
 	// This member is required.
 	Description *string
 
-	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ
-	// and RABBITMQ.
+	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and
+	// RABBITMQ.
 	//
 	// This member is required.
 	EngineType EngineType
 
-	// Required. The broker engine's version. For a list of supported engine
-	// versions, see, Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
+	// Required. The broker engine's version. For a list of supported engine versions,
+	// see, Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
 	// .
 	//
 	// This member is required.
@@ -235,9 +235,8 @@ type Configurations struct {
 // Does not apply to RabbitMQ brokers. Encryption options for the broker.
 type EncryptionOptions struct {
 
-	// Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
-	// Set to true by default, if no value is provided, for example, for RabbitMQ
-	// brokers.
+	// Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set
+	// to true by default, if no value is provided, for example, for RabbitMQ brokers.
 	//
 	// This member is required.
 	UseAwsOwnedKey bool
@@ -325,15 +324,15 @@ type LdapServerMetadataInput struct {
 	// object returned from the group membership query.
 	RoleName *string
 
-	// The directory search scope for the role. If set to true, scope is to search
-	// the entire subtree.
+	// The directory search scope for the role. If set to true, scope is to search the
+	// entire subtree.
 	RoleSearchSubtree bool
 
 	// Specifies the name of the LDAP attribute for the user group membership.
 	UserRoleName *string
 
-	// The directory search scope for the user. If set to true, scope is to search
-	// the entire subtree.
+	// The directory search scope for the user. If set to true, scope is to search the
+	// entire subtree.
 	UserSearchSubtree bool
 
 	noSmithyDocumentSerde
@@ -398,15 +397,15 @@ type LdapServerMetadataOutput struct {
 	// object returned from the group membership query.
 	RoleName *string
 
-	// The directory search scope for the role. If set to true, scope is to search
-	// the entire subtree.
+	// The directory search scope for the role. If set to true, scope is to search the
+	// entire subtree.
 	RoleSearchSubtree bool
 
 	// Specifies the name of the LDAP attribute for the user group membership.
 	UserRoleName *string
 
-	// The directory search scope for the user. If set to true, scope is to search
-	// the entire subtree.
+	// The directory search scope for the user. If set to true, scope is to search the
+	// entire subtree.
 	UserSearchSubtree bool
 
 	noSmithyDocumentSerde
@@ -425,8 +424,8 @@ type Logs struct {
 	noSmithyDocumentSerde
 }
 
-// The list of information about logs currently enabled and pending to be
-// deployed for the specified broker.
+// The list of information about logs currently enabled and pending to be deployed
+// for the specified broker.
 type LogsSummary struct {
 
 	// Enables general logging.

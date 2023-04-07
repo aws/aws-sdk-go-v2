@@ -54,27 +54,27 @@ type UpdateDomainContactPrivacyInput struct {
 	DomainName *string
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
+	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
 	// return the information that you entered for the admin contact. You must specify
 	// the same privacy setting for the administrative, registrant, and technical
 	// contacts.
 	AdminPrivacy *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
+	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
 	// return the information that you entered for the registrant contact (domain
 	// owner). You must specify the same privacy setting for the administrative,
 	// registrant, and technical contacts.
 	RegistrantPrivacy *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
+	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
 	// return the information that you entered for the technical contact. You must
 	// specify the same privacy setting for the administrative, registrant, and
 	// technical contacts.

@@ -33,7 +33,7 @@ func (c *Client) UpdateSecurityConfig(ctx context.Context, params *UpdateSecurit
 type UpdateSecurityConfigInput struct {
 
 	// The version of the security configuration to be updated. You can find the most
-	// recent version of a security configuration using the GetSecurityPolicy  command.
+	// recent version of a security configuration using the GetSecurityPolicy command.
 	//
 	// This member is required.
 	ConfigVersion *string

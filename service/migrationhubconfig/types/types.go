@@ -42,8 +42,8 @@ type Target struct {
 	// This member is required.
 	Type TargetType
 
-	// The TargetID  is a 12-character identifier of the ACCOUNT for which the
-	// control was created. (This must be the current account.)
+	// The TargetID is a 12-character identifier of the ACCOUNT for which the control
+	// was created. (This must be the current account.)
 	Id *string
 
 	noSmithyDocumentSerde

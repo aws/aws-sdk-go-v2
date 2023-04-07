@@ -13,7 +13,7 @@ import (
 // Sets the specified version of the specified policy as the policy's default
 // (operative) version. This operation affects all users, groups, and roles that
 // the policy is attached to. To list the users, groups, and roles that the policy
-// is attached to, use ListEntitiesForPolicy. For information about managed
+// is attached to, use ListEntitiesForPolicy . For information about managed
 // policies, see Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) SetDefaultPolicyVersion(ctx context.Context, params *SetDefaultPolicyVersionInput, optFns ...func(*Options)) (*SetDefaultPolicyVersionOutput, error) {
@@ -33,8 +33,8 @@ func (c *Client) SetDefaultPolicyVersion(ctx context.Context, params *SetDefault
 
 type SetDefaultPolicyVersionInput struct {
 
-	// The Amazon Resource Name (ARN) of the IAM policy whose default version you
-	// want to set. For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// The Amazon Resource Name (ARN) of the IAM policy whose default version you want
+	// to set. For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.

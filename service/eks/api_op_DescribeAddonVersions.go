@@ -43,23 +43,23 @@ type DescribeAddonVersionsInput struct {
 	// The maximum number of results to return.
 	MaxResults *int32
 
-	// The nextToken  value returned from a previous paginated
-	// DescribeAddonVersionsRequest where maxResults was used and the results
-	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value. This token should be
-	// treated as an opaque identifier that is used only to retrieve the next items in
-	// a list and not for other programmatic purposes.
+	// The nextToken value returned from a previous paginated
+	// DescribeAddonVersionsRequest where maxResults was used and the results exceeded
+	// the value of that parameter. Pagination continues from the end of the previous
+	// results that returned the nextToken value. This token should be treated as an
+	// opaque identifier that is used only to retrieve the next items in a list and not
+	// for other programmatic purposes.
 	NextToken *string
 
-	// The owner of the add-on. For valid owners, don't specify a value for this
+	// The owner of the add-on. For valid owners , don't specify a value for this
 	// property.
 	Owners []string
 
-	// The publisher of the add-on. For valid publishers, don't specify a value for
+	// The publisher of the add-on. For valid publishers , don't specify a value for
 	// this property.
 	Publishers []string
 
-	// The type of the add-on. For valid types, don't specify a value for this
+	// The type of the add-on. For valid types , don't specify a value for this
 	// property.
 	Types []string
 
@@ -72,7 +72,7 @@ type DescribeAddonVersionsOutput struct {
 	// properties.
 	Addons []types.AddonInfo
 
-	// The nextToken  value returned from a previous paginated
+	// The nextToken value returned from a previous paginated
 	// DescribeAddonVersionsResponse where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
 	// previous results that returned the nextToken value. This token should be
@@ -160,8 +160,8 @@ type DescribeAddonVersionsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

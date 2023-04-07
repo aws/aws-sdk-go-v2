@@ -31,8 +31,8 @@ type StartAutomationExecutionInput struct {
 
 	// The name of the SSM document to run. This can be a public document or a custom
 	// document. To run a shared document belonging to another account, specify the
-	// document ARN. For more information about how to use shared documents, see
-	// Using shared SSM documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
+	// document ARN. For more information about how to use shared documents, see Using
+	// shared SSM documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	//
 	// This member is required.
@@ -41,8 +41,8 @@ type StartAutomationExecutionInput struct {
 	// The CloudWatch alarm you want to apply to your automation.
 	AlarmConfiguration *types.AlarmConfiguration
 
-	// User-provided idempotency token. The token must be unique, is case
-	// insensitive, enforces the UUID format, and can't be reused.
+	// User-provided idempotency token. The token must be unique, is case insensitive,
+	// enforces the UUID format, and can't be reused.
 	ClientToken *string
 
 	// The version of the Automation runbook to use for this execution.
@@ -50,7 +50,6 @@ type StartAutomationExecutionInput struct {
 
 	// The maximum number of targets allowed to run this task in parallel. You can
 	// specify a number, such as 10, or a percentage, such as 10%. The default value is
-	//
 	// 10 .
 	MaxConcurrency *string
 
@@ -72,8 +71,8 @@ type StartAutomationExecutionInput struct {
 	// and Interactive. The default mode is Auto.
 	Mode types.ExecutionMode
 
-	// A key-value map of execution parameters, which match the declared parameters
-	// in the Automation runbook.
+	// A key-value map of execution parameters, which match the declared parameters in
+	// the Automation runbook.
 	Parameters map[string][]string
 
 	// Optional metadata that you assign to a resource. You can specify a maximum of
@@ -81,9 +80,9 @@ type StartAutomationExecutionInput struct {
 	// different ways, such as by purpose, owner, or environment. For example, you
 	// might want to tag an automation to identify an environment or operating system.
 	// In this case, you could specify the following key-value pairs:
-	//     - Key=environment,Value=test
-	//     - Key=OS,Value=Windows
-	//  To add tags to an existing automation, use the AddTagsToResource  operation.
+	//   - Key=environment,Value=test
+	//   - Key=OS,Value=Windows
+	// To add tags to an existing automation, use the AddTagsToResource operation.
 	Tags []types.Tag
 
 	// A location is a combination of Amazon Web Services Regions and/or Amazon Web

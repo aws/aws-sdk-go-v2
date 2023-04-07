@@ -20,17 +20,30 @@ import (
 // in the Amazon Web Services X-Ray Developer Guide. Required segment document
 // fields
 //   - name - The name of the service that handled the request.
-//   - id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.
-//   - trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.
-//   - start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9 .
-//   - end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9 . Specify either an end_time or in_progress .
-//   - in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in-progress segment when your application receives a request that will take a long time to serve, to trace that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.
+//   - id - A 64-bit identifier for the segment, unique among segments in the same
+//     trace, in 16 hexadecimal digits.
+//   - trace_id - A unique identifier that connects all segments and subsegments
+//     originating from a single client request.
+//   - start_time - Time the segment or subsegment was created, in floating point
+//     seconds in epoch time, accurate to milliseconds. For example, 1480615200.010
+//     or 1.480615200010E9 .
+//   - end_time - Time the segment or subsegment was closed. For example,
+//     1480615200.090 or 1.480615200090E9 . Specify either an end_time or in_progress
+//     .
+//   - in_progress - Set to true instead of specifying an end_time to record that a
+//     segment has been started, but is not complete. Send an in-progress segment when
+//     your application receives a request that will take a long time to serve, to
+//     trace that the request was received. When the response is sent, send the
+//     complete segment to overwrite the in-progress segment.
 //
 // A trace_id consists of three numbers separated by hyphens. For example,
 // 1-58406520-a006649127e371903a2de979. This includes: Trace ID Format
 //   - The version number, for instance, 1 .
-//   - The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.
-//   - A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.
+//   - The time of the original request, in Unix epoch time, in 8 hexadecimal
+//     digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is
+//     1480615200 seconds, or 58406520 in hexadecimal.
+//   - A 96-bit identifier for the trace, globally unique, in 24 hexadecimal
+//     digits.
 func (c *Client) PutTraceSegments(ctx context.Context, params *PutTraceSegmentsInput, optFns ...func(*Options)) (*PutTraceSegmentsOutput, error) {
 	if params == nil {
 		params = &PutTraceSegmentsInput{}

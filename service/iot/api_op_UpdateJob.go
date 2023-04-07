@@ -59,7 +59,7 @@ type UpdateJobInput struct {
 	PresignedUrlConfig *types.PresignedUrlConfig
 
 	// Specifies the amount of time each device has to finish its execution of the
-	// job. The timer is started when the job execution status is set to IN_PROGRESS.
+	// job. The timer is started when the job execution status is set to IN_PROGRESS .
 	// If the job execution status is not set to another terminal state before the time
 	// expires, it will be automatically set to TIMED_OUT .
 	TimeoutConfig *types.TimeoutConfig

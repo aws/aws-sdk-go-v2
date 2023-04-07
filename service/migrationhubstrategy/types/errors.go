@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The user does not have permission to perform the action. Check the AWS
-// Identity and Access Management (IAM) policy associated with this user.
+// The user does not have permission to perform the action. Check the AWS Identity
+// and Access Management (IAM) policy associated with this user.
 type AccessDeniedException struct {
 	Message *string
 
@@ -34,8 +34,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception to indicate that there is an ongoing task when a new task is
-// created. Return when once the existing tasks are complete.
+// Exception to indicate that there is an ongoing task when a new task is created.
+// Return when once the existing tasks are complete.
 type ConflictException struct {
 	Message *string
 

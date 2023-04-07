@@ -44,7 +44,7 @@ type DeleteEgressOnlyInternetGatewayInput struct {
 
 type DeleteEgressOnlyInternetGatewayOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	ReturnCode *bool
 
 	// Metadata pertaining to the operation's result.

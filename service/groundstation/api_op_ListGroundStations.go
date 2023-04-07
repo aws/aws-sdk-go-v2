@@ -33,8 +33,8 @@ type ListGroundStationsInput struct {
 	// Maximum number of ground stations returned.
 	MaxResults *int32
 
-	// Next token that can be supplied in the next call to get the next page of
-	// ground stations.
+	// Next token that can be supplied in the next call to get the next page of ground
+	// stations.
 	NextToken *string
 
 	// Satellite ID to retrieve on-boarded ground stations.
@@ -48,8 +48,8 @@ type ListGroundStationsOutput struct {
 	// List of ground stations.
 	GroundStationList []types.GroundStationData
 
-	// Next token that can be supplied in the next call to get the next page of
-	// ground stations.
+	// Next token that can be supplied in the next call to get the next page of ground
+	// stations.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -132,8 +132,8 @@ type ListGroundStationsPaginatorOptions struct {
 	// Maximum number of ground stations returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

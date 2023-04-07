@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the configuration of all storage optimizers associated with a
-// specified table.
+// Returns the configuration of all storage optimizers associated with a specified
+// table.
 func (c *Client) ListTableStorageOptimizers(ctx context.Context, params *ListTableStorageOptimizersInput, optFns ...func(*Options)) (*ListTableStorageOptimizersOutput, error) {
 	if params == nil {
 		params = &ListTableStorageOptimizersInput{}
@@ -149,8 +149,8 @@ type ListTableStorageOptimizersPaginatorOptions struct {
 	// The number of storage optimizers to return on each call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

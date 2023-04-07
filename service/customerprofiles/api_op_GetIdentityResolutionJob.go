@@ -80,13 +80,19 @@ type GetIdentityResolutionJobOutput struct {
 	Message *string
 
 	// The status of the Identity Resolution Job.
-	//     - PENDING : The Identity Resolution Job is scheduled but has not started yet. If you turn off the Identity Resolution feature in your domain, jobs in the PENDING state are deleted.
-	//     - PREPROCESSING : The Identity Resolution Job is loading your data.
-	//     - FIND_MATCHING : The Identity Resolution Job is using the machine learning model to identify profiles that belong to the same matching group.
-	//     - MERGING : The Identity Resolution Job is merging duplicate profiles.
-	//     - COMPLETED : The Identity Resolution Job completed successfully.
-	//     - PARTIAL_SUCCESS : There's a system error and not all of the data is merged. The Identity Resolution Job writes a message indicating the source of the problem.
-	//     - FAILED : The Identity Resolution Job did not merge any data. It writes a message indicating the source of the problem.
+	//   - PENDING : The Identity Resolution Job is scheduled but has not started yet.
+	//   If you turn off the Identity Resolution feature in your domain, jobs in the
+	//   PENDING state are deleted.
+	//   - PREPROCESSING : The Identity Resolution Job is loading your data.
+	//   - FIND_MATCHING : The Identity Resolution Job is using the machine learning
+	//   model to identify profiles that belong to the same matching group.
+	//   - MERGING : The Identity Resolution Job is merging duplicate profiles.
+	//   - COMPLETED : The Identity Resolution Job completed successfully.
+	//   - PARTIAL_SUCCESS : There's a system error and not all of the data is merged.
+	//   The Identity Resolution Job writes a message indicating the source of the
+	//   problem.
+	//   - FAILED : The Identity Resolution Job did not merge any data. It writes a
+	//   message indicating the source of the problem.
 	Status types.IdentityResolutionJobStatus
 
 	// Metadata pertaining to the operation's result.

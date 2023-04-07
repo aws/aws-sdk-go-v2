@@ -36,9 +36,9 @@ type UpdatePortfolioInput struct {
 	Id *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The tags to add.

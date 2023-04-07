@@ -50,15 +50,18 @@ type GetSensitiveDataOccurrencesOutput struct {
 	// or SUCCESS.
 	Error *string
 
-	// A map that specifies 1-100 types of sensitive data reported by the finding
-	// and, for each type, 1-10 occurrences of sensitive data.
+	// A map that specifies 1-100 types of sensitive data reported by the finding and,
+	// for each type, 1-10 occurrences of sensitive data.
 	SensitiveDataOccurrences map[string][]types.DetectedDataDetails
 
-	// The status of the request to retrieve occurrences of sensitive data reported
-	// by the finding. Possible values are:
-	//     - ERROR - An error occurred when Amazon Macie attempted to locate, retrieve, or encrypt the sensitive data. The error value indicates the nature of the error that occurred.
-	//     - PROCESSING - Macie is processing the request.
-	//     - SUCCESS - Macie successfully located, retrieved, and encrypted the sensitive data.
+	// The status of the request to retrieve occurrences of sensitive data reported by
+	// the finding. Possible values are:
+	//   - ERROR - An error occurred when Amazon Macie attempted to locate, retrieve,
+	//   or encrypt the sensitive data. The error value indicates the nature of the error
+	//   that occurred.
+	//   - PROCESSING - Macie is processing the request.
+	//   - SUCCESS - Macie successfully located, retrieved, and encrypted the
+	//   sensitive data.
 	Status types.RevealRequestStatus
 
 	// Metadata pertaining to the operation's result.

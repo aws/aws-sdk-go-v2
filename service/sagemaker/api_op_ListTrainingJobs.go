@@ -13,13 +13,13 @@ import (
 	"time"
 )
 
-// Lists training jobs. When StatusEquals  and MaxResults are set at the same
-// time, the MaxResults  number of training jobs are first retrieved ignoring the
+// Lists training jobs. When StatusEquals and MaxResults are set at the same time,
+// the MaxResults number of training jobs are first retrieved ignoring the
 // StatusEquals parameter and then they are filtered by the StatusEquals
-// parameter, which is returned as a response. For example, if ListTrainingJobs
-// is invoked with the following parameters: { ... MaxResults: 100, StatusEquals:
-// InProgress ... }First, 100 trainings jobs with any status, including those
-// other than InProgress, are selected (sorted according to the creation time,
+// parameter, which is returned as a response. For example, if ListTrainingJobs is
+// invoked with the following parameters: { ... MaxResults: 100, StatusEquals:
+// InProgress ... } First, 100 trainings jobs with any status, including those
+// other than InProgress , are selected (sorted according to the creation time,
 // from the most current to the oldest). Next, those with a status of InProgress
 // are returned. You can quickly test the API using the following Amazon Web
 // Services CLI code. aws sagemaker list-training-jobs --max-results 100
@@ -60,12 +60,12 @@ type ListTrainingJobsInput struct {
 	// The maximum number of training jobs to return in the response.
 	MaxResults *int32
 
-	// A string in the training job name. This filter returns only training jobs
-	// whose name contains the specified string.
+	// A string in the training job name. This filter returns only training jobs whose
+	// name contains the specified string.
 	NameContains *string
 
 	// If the result of the previous ListTrainingJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of training jobs, use
+	// response includes a NextToken . To retrieve the next set of training jobs, use
 	// the token in the next request.
 	NextToken *string
 
@@ -86,7 +86,7 @@ type ListTrainingJobsInput struct {
 
 type ListTrainingJobsOutput struct {
 
-	// An array of TrainingJobSummary  objects, each listing a training job.
+	// An array of TrainingJobSummary objects, each listing a training job.
 	//
 	// This member is required.
 	TrainingJobSummaries []types.TrainingJobSummary
@@ -174,8 +174,8 @@ type ListTrainingJobsPaginatorOptions struct {
 	// The maximum number of training jobs to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

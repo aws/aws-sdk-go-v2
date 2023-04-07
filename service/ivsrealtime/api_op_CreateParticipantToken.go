@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an additional token for a specified stage. This can be done after
-// stage creation or when tokens expire. Tokens always are scoped to the stage for
-// which they are created. Encryption keys are owned by Amazon IVS and never used
+// Creates an additional token for a specified stage. This can be done after stage
+// creation or when tokens expire. Tokens always are scoped to the stage for which
+// they are created. Encryption keys are owned by Amazon IVS and never used
 // directly by your application.
 func (c *Client) CreateParticipantToken(ctx context.Context, params *CreateParticipantTokenInput, optFns ...func(*Options)) (*CreateParticipantTokenOutput, error) {
 	if params == nil {
@@ -37,11 +37,10 @@ type CreateParticipantTokenInput struct {
 	// This member is required.
 	StageArn *string
 
-	// Application-provided attributes to encode into the token and attach to a
-	// stage. Map keys and values can contain UTF-8 encoded text. The maximum length of
-	// this field is 1 KB total. This field is exposed to all stage participants and
-	// should not be used for personally identifying, confidential, or sensitive
-	// information.
+	// Application-provided attributes to encode into the token and attach to a stage.
+	// Map keys and values can contain UTF-8 encoded text. The maximum length of this
+	// field is 1 KB total. This field is exposed to all stage participants and should
+	// not be used for personally identifying, confidential, or sensitive information.
 	Attributes map[string]string
 
 	// Set of capabilities that the user is allowed to perform in the stage. Default:

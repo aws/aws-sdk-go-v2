@@ -29,10 +29,10 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 // Contains the parameters for UntagResource .
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource from which to delete tags.
-	// Batch resources that support tags are compute environments, jobs, job
-	// definitions, job queues, and scheduling policies. ARNs for child jobs of array
-	// and multi-node parallel (MNP) jobs aren't supported.
+	// The Amazon Resource Name (ARN) of the resource from which to delete tags. Batch
+	// resources that support tags are compute environments, jobs, job definitions, job
+	// queues, and scheduling policies. ARNs for child jobs of array and multi-node
+	// parallel (MNP) jobs aren't supported.
 	//
 	// This member is required.
 	ResourceArn *string

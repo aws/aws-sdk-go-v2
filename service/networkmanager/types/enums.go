@@ -224,10 +224,9 @@ const (
 	ConnectPeerAssociationStateDeleted   ConnectPeerAssociationState = "DELETED"
 )
 
-// Values returns all known values for ConnectPeerAssociationState. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ConnectPeerAssociationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectPeerAssociationState) Values() []ConnectPeerAssociationState {
 	return []ConnectPeerAssociationState{
 		"PENDING",
@@ -332,9 +331,9 @@ const (
 	DeviceStateUpdating  DeviceState = "UPDATING"
 )
 
-// Values returns all known values for DeviceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeviceState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DeviceState) Values() []DeviceState {
 	return []DeviceState{
 		"PENDING",
@@ -376,8 +375,8 @@ const (
 	LinkAssociationStateDeleted   LinkAssociationState = "DELETED"
 )
 
-// Values returns all known values for LinkAssociationState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LinkAssociationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LinkAssociationState) Values() []LinkAssociationState {
 	return []LinkAssociationState{
@@ -439,9 +438,9 @@ const (
 	PeeringTypeTransitGateway PeeringType = "TRANSIT_GATEWAY"
 )
 
-// Values returns all known values for PeeringType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PeeringType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PeeringType) Values() []PeeringType {
 	return []PeeringType{
 		"TRANSIT_GATEWAY",

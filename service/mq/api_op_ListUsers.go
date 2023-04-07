@@ -58,8 +58,8 @@ type ListUsersOutput struct {
 	// request the first page, leave nextToken empty.
 	NextToken *string
 
-	// Required. The list of all ActiveMQ usernames for the specified broker. Does
-	// not apply to RabbitMQ brokers.
+	// Required. The list of all ActiveMQ usernames for the specified broker. Does not
+	// apply to RabbitMQ brokers.
 	Users []types.UserSummary
 
 	// Metadata pertaining to the operation's result.

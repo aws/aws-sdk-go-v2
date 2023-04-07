@@ -19,18 +19,23 @@ import (
 //   - TrustedAdvisorResourceDetail
 //   - TrustedAdvisorResourcesSummary
 //
-// In addition, the response contains these
-// fields:
+// In addition, the response contains these fields:
 //
-//   - status - The alert status of the check can be ok (green), warning (yellow), error (red), or not_available .
+//   - status - The alert status of the check can be ok (green), warning (yellow),
+//     error (red), or not_available .
 //
 //   - timestamp - The time of the last refresh of the check.
 //
 //   - checkId - The unique identifier for the check.
 //
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support API.
+//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
+//     use the Amazon Web Services Support API.
 //
-//   - If you call the Amazon Web Services Support API from an account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the SubscriptionRequiredException error message appears. For information about changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/) .
+//   - If you call the Amazon Web Services Support API from an account that
+//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     SubscriptionRequiredException error message appears. For information about
+//     changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/)
+//     .
 //
 // To call the Trusted Advisor operations in the Amazon Web Services Support API,
 // you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon)
@@ -62,17 +67,17 @@ type DescribeTrustedAdvisorCheckResultInput struct {
 	// The ISO 639-1 code for the language that you want your check results to appear
 	// in. The Amazon Web Services Support API currently supports the following
 	// languages for Trusted Advisor:
-	//     - Chinese, Simplified - zh
-	//     - Chinese, Traditional - zh_TW
-	//     - English - en
-	//     - French - fr
-	//     - German - de
-	//     - Indonesian - id
-	//     - Italian - it
-	//     - Japanese - ja
-	//     - Korean - ko
-	//     - Portuguese, Brazilian - pt_BR
-	//     - Spanish - es
+	//   - Chinese, Simplified - zh
+	//   - Chinese, Traditional - zh_TW
+	//   - English - en
+	//   - French - fr
+	//   - German - de
+	//   - Indonesian - id
+	//   - Italian - it
+	//   - Japanese - ja
+	//   - Korean - ko
+	//   - Portuguese, Brazilian - pt_BR
+	//   - Spanish - es
 	Language *string
 
 	noSmithyDocumentSerde

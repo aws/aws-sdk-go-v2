@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specified approval rule template. Deleting a template does not
-// remove approval rules on pull requests already created with the template.
+// Deletes a specified approval rule template. Deleting a template does not remove
+// approval rules on pull requests already created with the template.
 func (c *Client) DeleteApprovalRuleTemplate(ctx context.Context, params *DeleteApprovalRuleTemplateInput, optFns ...func(*Options)) (*DeleteApprovalRuleTemplateOutput, error) {
 	if params == nil {
 		params = &DeleteApprovalRuleTemplateInput{}

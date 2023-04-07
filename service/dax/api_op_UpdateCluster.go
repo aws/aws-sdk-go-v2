@@ -50,9 +50,9 @@ type UpdateClusterInput struct {
 	// The name of a parameter group for this cluster.
 	ParameterGroupName *string
 
-	// A range of time when maintenance of DAX cluster software will be performed.
-	// For example: sun:01:00-sun:09:00. Cluster maintenance normally takes less than
-	// 30 minutes, and is performed automatically within the maintenance window.
+	// A range of time when maintenance of DAX cluster software will be performed. For
+	// example: sun:01:00-sun:09:00 . Cluster maintenance normally takes less than 30
+	// minutes, and is performed automatically within the maintenance window.
 	PreferredMaintenanceWindow *string
 
 	// A list of user-specified security group IDs to be assigned to each node in the

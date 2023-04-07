@@ -41,8 +41,9 @@ type DescribeManagedRuleGroupInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//     - CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1 .
-	//     - API and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -53,9 +54,9 @@ type DescribeManagedRuleGroupInput struct {
 	// This member is required.
 	VendorName *string
 
-	// The version of the rule group. You can only use a version that is not
-	// scheduled for expiration. If you don't provide this, WAF uses the vendor's
-	// default version.
+	// The version of the rule group. You can only use a version that is not scheduled
+	// for expiration. If you don't provide this, WAF uses the vendor's default
+	// version.
 	VersionName *string
 
 	noSmithyDocumentSerde
@@ -64,7 +65,7 @@ type DescribeManagedRuleGroupInput struct {
 type DescribeManagedRuleGroupOutput struct {
 
 	// The labels that one or more rules in this rule group add to matching web
-	// requests. These labels are defined in the RuleLabels  for a Rule .
+	// requests. These labels are defined in the RuleLabels for a Rule .
 	AvailableLabels []types.LabelSummary
 
 	// The web ACL capacity units (WCUs) required for this rule group. WAF uses web
@@ -77,13 +78,17 @@ type DescribeManagedRuleGroupOutput struct {
 
 	// The labels that one or more rules in this rule group match against in label
 	// match statements. These labels are defined in a LabelMatchStatement
-	// specification, in the Statement  definition of a rule.
+	// specification, in the Statement definition of a rule.
 	ConsumedLabels []types.LabelSummary
 
 	// The label namespace prefix for this rule group. All labels added by rules in
 	// this rule group have this prefix.
-	//     - The syntax for the label namespace prefix for a managed rule group is the following: awswaf:managed:: :
-	//     - When a rule with a label matches a web request, WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon: :
+	//   - The syntax for the label namespace prefix for a managed rule group is the
+	//   following: awswaf:managed:: :
+	//   - When a rule with a label matches a web request, WAF adds the fully
+	//   qualified label to the request. A fully qualified label is made up of the label
+	//   namespace from the rule group or web ACL where the rule is defined and the label
+	//   from the rule, separated by a colon: :
 	LabelNamespace *string
 
 	//

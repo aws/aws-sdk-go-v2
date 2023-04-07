@@ -499,8 +499,7 @@ func (e *FunctionAlreadyExists) ErrorCode() string {
 }
 func (e *FunctionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Cannot delete the function because it's attached to one or more cache
-// behaviors.
+// Cannot delete the function because it's attached to one or more cache behaviors.
 type FunctionInUse struct {
 	Message *string
 
@@ -579,8 +578,8 @@ func (e *IllegalDelete) ErrorCode() string {
 }
 func (e *IllegalDelete) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified configuration for field-level encryption can't be associated
-// with the specified cache behavior.
+// The specified configuration for field-level encryption can't be associated with
+// the specified cache behavior.
 type IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior struct {
 	Message *string
 
@@ -661,7 +660,7 @@ func (e *IllegalUpdate) ErrorCode() string {
 }
 func (e *IllegalUpdate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The value of Quantity  and the size of Items  don't match.
+// The value of Quantity and the size of Items don't match.
 type InconsistentQuantities struct {
 	Message *string
 
@@ -901,7 +900,7 @@ func (e *InvalidHeadersForS3Origin) ErrorCode() string {
 }
 func (e *InvalidHeadersForS3Origin) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The If-Match  version is missing or not valid.
+// The If-Match version is missing or not valid.
 type InvalidIfMatchVersion struct {
 	Message *string
 
@@ -2116,8 +2115,8 @@ func (e *QueryArgProfileEmpty) ErrorCode() string {
 }
 func (e *QueryArgProfileEmpty) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A real-time log configuration with this name already exists. You must provide
-// a unique name. To modify an existing real-time log configuration, use
+// A real-time log configuration with this name already exists. You must provide a
+// unique name. To modify an existing real-time log configuration, use
 // UpdateRealtimeLogConfig .
 type RealtimeLogConfigAlreadyExists struct {
 	Message *string
@@ -2254,8 +2253,8 @@ func (e *ResponseHeadersPolicyAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Cannot delete the response headers policy because it is attached to one or
-// more cache behaviors in a CloudFront distribution.
+// Cannot delete the response headers policy because it is attached to one or more
+// cache behaviors in a CloudFront distribution.
 type ResponseHeadersPolicyInUse struct {
 	Message *string
 
@@ -2307,8 +2306,8 @@ func (e *StagingDistributionInUse) ErrorCode() string {
 }
 func (e *StagingDistributionInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The caller reference you attempted to create the streaming distribution with
-// is associated with another distribution
+// The caller reference you attempted to create the streaming distribution with is
+// associated with another distribution
 type StreamingDistributionAlreadyExists struct {
 	Message *string
 
@@ -2902,8 +2901,8 @@ func (e *TooManyDistributionsAssociatedToResponseHeadersPolicy) ErrorFault() smi
 	return smithy.FaultClient
 }
 
-// You have reached the maximum number of distributions that are associated with
-// a CloudFront function. For more information, see Quotas (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// You have reached the maximum number of distributions that are associated with a
+// CloudFront function. For more information, see Quotas (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyDistributionsWithFunctionAssociations struct {
 	Message *string
@@ -3191,8 +3190,8 @@ func (e *TooManyFunctionAssociations) ErrorCode() string {
 }
 func (e *TooManyFunctionAssociations) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum number of CloudFront functions for this Amazon
-// Web Services account. For more information, see Quotas (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// You have reached the maximum number of CloudFront functions for this Amazon Web
+// Services account. For more information, see Quotas (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyFunctions struct {
 	Message *string
@@ -3303,8 +3302,8 @@ func (e *TooManyHeadersInOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// You have exceeded the maximum number of allowable InProgress invalidation
-// batch requests, or invalidation objects.
+// You have exceeded the maximum number of allowable InProgress invalidation batch
+// requests, or invalidation objects.
 type TooManyInvalidationsInProgress struct {
 	Message *string
 
@@ -3552,8 +3551,8 @@ func (e *TooManyOrigins) ErrorCode() string {
 }
 func (e *TooManyOrigins) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The maximum number of public keys for field-level encryption have been
-// created. To create a new public key, delete one of the existing keys.
+// The maximum number of public keys for field-level encryption have been created.
+// To create a new public key, delete one of the existing keys.
 type TooManyPublicKeys struct {
 	Message *string
 

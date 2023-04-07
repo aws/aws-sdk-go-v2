@@ -18,11 +18,11 @@ import (
 // password as strings for use with a Windows Remote Desktop client. For a Linux
 // instance, GameLift returns a user name and RSA private key, also as strings, for
 // use with an SSH client. The private key must be saved in the proper format to a
-// .pemfile before using. If you're making this request using the CLI, saving the
-// secret can be handled as part of the GetInstanceAccess request, as shown in
-// one of the examples for this operation. To request access to a specific
-// instance, specify the IDs of both the instance and the fleet it belongs to. You
-// can retrieve a fleet's instance IDs by calling DescribeInstances (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeInstances.html)
+// .pem file before using. If you're making this request using the CLI, saving the
+// secret can be handled as part of the GetInstanceAccess request, as shown in one
+// of the examples for this operation. To request access to a specific instance,
+// specify the IDs of both the instance and the fleet it belongs to. You can
+// retrieve a fleet's instance IDs by calling DescribeInstances (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeInstances.html)
 // . Learn more Remotely Access Fleet Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)
 // Debug Fleet Issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
 // Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)

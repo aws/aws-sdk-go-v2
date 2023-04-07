@@ -41,7 +41,7 @@ type CreateInstancesInput struct {
 	// This member is required.
 	AvailabilityZone *string
 
-	// The ID for a virtual private server image (e.g., app_wordpress_4_4  or
+	// The ID for a virtual private server image (e.g., app_wordpress_4_4 or
 	// app_lamp_7_0 ). Use the get blueprints operation to return a list of available
 	// images (or blueprints). Use active blueprints when creating new instances.
 	// Inactive blueprints are listed to support customers with existing instances and
@@ -75,7 +75,7 @@ type CreateInstancesInput struct {
 	CustomImageName *string
 
 	// The IP address type for the instance. The possible values are ipv4 for IPv4
-	// only, and dualstack  for IPv4 and IPv6. The default value is dualstack .
+	// only, and dualstack for IPv4 and IPv6. The default value is dualstack .
 	IpAddressType types.IpAddressType
 
 	// The name of your key pair.
@@ -86,9 +86,9 @@ type CreateInstancesInput struct {
 	Tags []types.Tag
 
 	// A launch script you can create that configures a server with additional user
-	// data. For example, you might want to run apt-get -y update. Depending on the
+	// data. For example, you might want to run apt-get -y update . Depending on the
 	// machine image you choose, the command to get software on your instance varies.
-	// Amazon Linux and CentOS use yum , Debian and Ubuntu use apt-get, and FreeBSD
+	// Amazon Linux and CentOS use yum , Debian and Ubuntu use apt-get , and FreeBSD
 	// uses pkg . For a complete list, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image)
 	// .
 	UserData *string

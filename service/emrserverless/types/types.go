@@ -227,9 +227,9 @@ type ImageConfiguration struct {
 // The image configuration.
 type ImageConfigurationInput struct {
 
-	// The URI of an image in the Amazon ECR registry. This field is required when
-	// you create a new application. If you leave this field blank in an update, Amazon
-	// EMR will remove the image configuration.
+	// The URI of an image in the Amazon ECR registry. This field is required when you
+	// create a new application. If you leave this field blank in an update, Amazon EMR
+	// will remove the image configuration.
 	ImageUri *string
 
 	noSmithyDocumentSerde
@@ -349,7 +349,7 @@ type JobRun struct {
 	Tags map[string]string
 
 	// The job run total execution duration in seconds. This field is only available
-	// for job runs in a COMPLETED , FAILED , or CANCELLED  state.
+	// for job runs in a COMPLETED , FAILED , or CANCELLED state.
 	TotalExecutionDurationSeconds *int32
 
 	// The aggregate vCPU, memory, and storage resources used from the time job start
@@ -517,8 +517,8 @@ type TotalResourceUtilization struct {
 	// time job is terminated.
 	MemoryGBHour *float64
 
-	// The aggregated storage used per hour from the time job start executing till
-	// the time job is terminated.
+	// The aggregated storage used per hour from the time job start executing till the
+	// time job is terminated.
 	StorageGBHour *float64
 
 	// The aggregated vCPU used per hour from the time job start executing till the

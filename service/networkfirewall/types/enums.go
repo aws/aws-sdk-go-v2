@@ -349,8 +349,8 @@ const (
 	StatefulRuleProtocolDhcp   StatefulRuleProtocol = "DHCP"
 )
 
-// Values returns all known values for StatefulRuleProtocol. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StatefulRuleProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StatefulRuleProtocol) Values() []StatefulRuleProtocol {
 	return []StatefulRuleProtocol{

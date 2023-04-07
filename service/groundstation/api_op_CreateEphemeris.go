@@ -42,14 +42,14 @@ type CreateEphemerisInput struct {
 	SatelliteId *string
 
 	// Whether to set the ephemeris status to ENABLED after validation. Setting this
-	// to false will set the ephemeris status to DISABLED  after validation.
+	// to false will set the ephemeris status to DISABLED after validation.
 	Enabled *bool
 
 	// Ephemeris data.
 	Ephemeris types.EphemerisData
 
-	// An overall expiration time for the ephemeris in UTC, after which it will
-	// become EXPIRED .
+	// An overall expiration time for the ephemeris in UTC, after which it will become
+	// EXPIRED .
 	ExpirationTime *time.Time
 
 	// The ARN of a KMS key used to encrypt the ephemeris in Ground Station.

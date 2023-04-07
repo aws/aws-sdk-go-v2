@@ -15,11 +15,11 @@ import (
 // action and cannot be undone. The user's data is destroyed. If you need to
 // archive any user data, contact Amazon Web Services Support before terminating
 // the WorkSpace. You can terminate a WorkSpace that is in any state except
-// SUSPENDED. This operation is asynchronous and returns before the WorkSpaces
-// have been completely terminated. After a WorkSpace is terminated, the
-// TERMINATEDstate is returned only briefly before the WorkSpace directory
-// metadata is cleaned up, so this state is rarely returned. To confirm that a
-// WorkSpace is terminated, check for the WorkSpace ID by using DescribeWorkSpaces (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html)
+// SUSPENDED . This operation is asynchronous and returns before the WorkSpaces
+// have been completely terminated. After a WorkSpace is terminated, the TERMINATED
+// state is returned only briefly before the WorkSpace directory metadata is
+// cleaned up, so this state is rarely returned. To confirm that a WorkSpace is
+// terminated, check for the WorkSpace ID by using DescribeWorkSpaces (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html)
 // . If the WorkSpace ID isn't returned, then the WorkSpace has been successfully
 // terminated. Simple AD and AD Connector are made available to you free of charge
 // to use with WorkSpaces. If there are no WorkSpaces being used with your Simple

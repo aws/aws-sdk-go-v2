@@ -49,16 +49,16 @@ type GetProtectionStatusInput struct {
 	// another batch of objects.
 	MaxResults *int32
 
-	// The Amazon Web Services account that is in scope of the policy that you want
-	// to get the details for.
+	// The Amazon Web Services account that is in scope of the policy that you want to
+	// get the details for.
 	MemberAccountId *string
 
-	// If you specify a value for MaxResults and you have more objects than the
-	// number that you specify for MaxResults , Firewall Manager returns a NextToken
-	// value in the response, which you can use to retrieve another group of objects.
-	// For the second and subsequent GetProtectionStatus requests, specify the value
-	// of NextToken from the previous response to get information about another batch
-	// of objects.
+	// If you specify a value for MaxResults and you have more objects than the number
+	// that you specify for MaxResults , Firewall Manager returns a NextToken value in
+	// the response, which you can use to retrieve another group of objects. For the
+	// second and subsequent GetProtectionStatus requests, specify the value of
+	// NextToken from the previous response to get information about another batch of
+	// objects.
 	NextToken *string
 
 	// The start of the time period to query for the attacks. This is a timestamp
@@ -76,23 +76,22 @@ type GetProtectionStatusOutput struct {
 	AdminAccountId *string
 
 	// Details about the attack, including the following:
-	//     - Attack type
-	//     - Account ID
-	//     - ARN of the resource attacked
-	//     - Start time of the attack
-	//     - End time of the attack (ongoing attacks will not have an end time)
-	// The
-	// details are in JSON format.
+	//   - Attack type
+	//   - Account ID
+	//   - ARN of the resource attacked
+	//   - Start time of the attack
+	//   - End time of the attack (ongoing attacks will not have an end time)
+	// The details are in JSON format.
 	Data *string
 
 	// If you have more objects than the number that you specified for MaxResults in
 	// the request, the response includes a NextToken value. To list more objects,
-	// submit another GetProtectionStatus  request, and specify the NextToken value
+	// submit another GetProtectionStatus request, and specify the NextToken value
 	// from the response in the NextToken value in the next request. Amazon Web
-	// Services SDKs provide auto-pagination that identify NextToken in a response
-	// and make subsequent request calls automatically on your behalf. However, this
-	// feature is not supported by GetProtectionStatus. You must submit subsequent
-	// requests with NextToken  using your own processes.
+	// Services SDKs provide auto-pagination that identify NextToken in a response and
+	// make subsequent request calls automatically on your behalf. However, this
+	// feature is not supported by GetProtectionStatus . You must submit subsequent
+	// requests with NextToken using your own processes.
 	NextToken *string
 
 	// The service type that is protected by the policy. Currently, this is always

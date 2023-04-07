@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the queue specified by the QueueUrl, regardless of the queue's
+// Deletes the queue specified by the QueueUrl , regardless of the queue's
 // contents. Be careful with the DeleteQueue action: When you delete a queue, any
 // messages in the queue are no longer available. When you delete a queue, the
 // deletion process takes up to 60 seconds. Requests you send involving that queue

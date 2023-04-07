@@ -50,8 +50,8 @@ type DescribeDataQualityJobDefinitionOutput struct {
 	// This member is required.
 	DataQualityAppSpecification *types.DataQualityAppSpecification
 
-	// The list of inputs for the data quality monitoring job. Currently endpoints
-	// are supported.
+	// The list of inputs for the data quality monitoring job. Currently endpoints are
+	// supported.
 	//
 	// This member is required.
 	DataQualityJobInput *types.DataQualityJobInput

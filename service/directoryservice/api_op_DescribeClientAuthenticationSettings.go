@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the type of client authentication for the
-// specified directory, if the type is specified. If no type is specified,
-// information about all client authentication types that are supported for the
-// specified directory is retrieved. Currently, only SmartCard  is supported.
+// Retrieves information about the type of client authentication for the specified
+// directory, if the type is specified. If no type is specified, information about
+// all client authentication types that are supported for the specified directory
+// is retrieved. Currently, only SmartCard is supported.
 func (c *Client) DescribeClientAuthenticationSettings(ctx context.Context, params *DescribeClientAuthenticationSettingsInput, optFns ...func(*Options)) (*DescribeClientAuthenticationSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeClientAuthenticationSettingsInput{}
@@ -43,13 +43,13 @@ type DescribeClientAuthenticationSettingsInput struct {
 	Limit *int32
 
 	// The DescribeClientAuthenticationSettingsResult.NextToken value from a previous
-	// call to DescribeClientAuthenticationSettings. Pass null if this is the first
+	// call to DescribeClientAuthenticationSettings . Pass null if this is the first
 	// call.
 	NextToken *string
 
-	// The type of client authentication for which to retrieve information. If no
-	// type is specified, a list of all client authentication types that are supported
-	// for the specified directory is retrieved.
+	// The type of client authentication for which to retrieve information. If no type
+	// is specified, a list of all client authentication types that are supported for
+	// the specified directory is retrieved.
 	Type types.ClientAuthenticationType
 
 	noSmithyDocumentSerde
@@ -152,8 +152,8 @@ type DescribeClientAuthenticationSettingsPaginatorOptions struct {
 	// number of items is specified by the limitations of the operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

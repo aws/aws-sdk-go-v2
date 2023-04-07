@@ -46,9 +46,9 @@ type GetPositionEstimateInput struct {
 	// from the device. The position is resolved using MaxMind's IP-based solver.
 	Ip *types.Ip
 
-	// Optional information that specifies the time when the position information
-	// will be resolved. It uses the Unix timestamp format. If not specified, the time
-	// at which the request was received will be used.
+	// Optional information that specifies the time when the position information will
+	// be resolved. It uses the Unix timestamp format. If not specified, the time at
+	// which the request was received will be used.
 	Timestamp *time.Time
 
 	// Retrieves an estimated device position by resolving WLAN measurement data. The

@@ -32,7 +32,7 @@ func (c *Client) ListLanguages(ctx context.Context, params *ListLanguagesInput, 
 type ListLanguagesInput struct {
 
 	// The language code for the language to use to display the language names in the
-	// response. The language code is en  by default.
+	// response. The language code is en by default.
 	DisplayLanguageCode types.DisplayLanguageCode
 
 	// The maximum number of results to return in each response.
@@ -134,8 +134,8 @@ type ListLanguagesPaginatorOptions struct {
 	// The maximum number of results to return in each response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -37,9 +37,8 @@ func (c *Client) BatchGetDocumentStatus(ctx context.Context, params *BatchGetDoc
 
 type BatchGetDocumentStatusInput struct {
 
-	// A list of DocumentInfo objects that identify the documents for which to get
-	// the status. You identify the documents by their document ID and optional
-	// attributes.
+	// A list of DocumentInfo objects that identify the documents for which to get the
+	// status. You identify the documents by their document ID and optional attributes.
 	//
 	// This member is required.
 	DocumentInfoList []types.DocumentInfo

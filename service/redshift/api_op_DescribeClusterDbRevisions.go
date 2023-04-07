@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of ClusterDbRevision  objects.
+// Returns an array of ClusterDbRevision objects.
 func (c *Client) DescribeClusterDbRevisions(ctx context.Context, params *DescribeClusterDbRevisionsInput, optFns ...func(*Options)) (*DescribeClusterDbRevisionsOutput, error) {
 	if params == nil {
 		params = &DescribeClusterDbRevisionsInput{}
@@ -37,19 +37,18 @@ type DescribeClusterDbRevisionsInput struct {
 
 	// An optional parameter that specifies the starting point for returning a set of
 	// response records. When the results of a DescribeClusterDbRevisions request
-	// exceed the value specified in MaxRecords, Amazon Redshift returns a value in
+	// exceed the value specified in MaxRecords , Amazon Redshift returns a value in
 	// the marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker  value in the marker parameter and
+	// records by providing the returned marker value in the marker parameter and
 	// retrying the request. Constraints: You can specify either the ClusterIdentifier
-	// parameter, or the marker  parameter, but not both.
+	// parameter, or the marker parameter, but not both.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value is
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in the marker field of the response. You can retrieve the next set of
-	// response records by providing the returned marker  value in the marker
-	// parameter and retrying the request. Default: 100 Constraints: minimum 20,
-	// maximum 100.
+	// response records by providing the returned marker value in the marker parameter
+	// and retrying the request. Default: 100 Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -62,7 +61,7 @@ type DescribeClusterDbRevisionsOutput struct {
 
 	// A string representing the starting point for the next set of revisions. If a
 	// value is returned in a response, you can retrieve the next set of revisions by
-	// providing the value in the marker  parameter and retrying the command. If the
+	// providing the value in the marker parameter and retrying the command. If the
 	// marker field is empty, all revisions have already been returned.
 	Marker *string
 
@@ -143,16 +142,15 @@ var _ DescribeClusterDbRevisionsAPIClient = (*Client)(nil)
 // DescribeClusterDbRevisionsPaginatorOptions is the paginator options for
 // DescribeClusterDbRevisions
 type DescribeClusterDbRevisionsPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value is
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in the marker field of the response. You can retrieve the next set of
-	// response records by providing the returned marker  value in the marker
-	// parameter and retrying the request. Default: 100 Constraints: minimum 20,
-	// maximum 100.
+	// response records by providing the returned marker value in the marker parameter
+	// and retrying the request. Default: 100 Constraints: minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -14,7 +14,7 @@ import (
 // Lets you enable Insights event logging by specifying the Insights selectors
 // that you want to enable on an existing trail. You also use PutInsightSelectors
 // to turn off Insights event logging, by passing an empty list of insight types.
-// The valid Insights event types in this release are ApiErrorRateInsight  and
+// The valid Insights event types in this release are ApiErrorRateInsight and
 // ApiCallRateInsight .
 func (c *Client) PutInsightSelectors(ctx context.Context, params *PutInsightSelectorsInput, optFns ...func(*Options)) (*PutInsightSelectorsOutput, error) {
 	if params == nil {
@@ -34,7 +34,7 @@ func (c *Client) PutInsightSelectors(ctx context.Context, params *PutInsightSele
 type PutInsightSelectorsInput struct {
 
 	// A JSON string that contains the insight types you want to log on a trail.
-	// ApiCallRateInsight and ApiErrorRateInsight  are valid insight types.
+	// ApiCallRateInsight and ApiErrorRateInsight are valid insight types.
 	//
 	// This member is required.
 	InsightSelectors []types.InsightSelector
@@ -51,7 +51,7 @@ type PutInsightSelectorsInput struct {
 type PutInsightSelectorsOutput struct {
 
 	// A JSON string that contains the Insights event types that you want to log on a
-	// trail. The valid Insights types in this release are ApiErrorRateInsight  and
+	// trail. The valid Insights types in this release are ApiErrorRateInsight and
 	// ApiCallRateInsight .
 	InsightSelectors []types.InsightSelector
 

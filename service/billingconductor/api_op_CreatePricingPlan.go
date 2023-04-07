@@ -45,8 +45,7 @@ type CreatePricingPlanInput struct {
 	// A list of Amazon Resource Names (ARNs) that define the pricing plan parameters.
 	PricingRuleArns []string
 
-	// A map that contains tag keys and tag values that are attached to a pricing
-	// plan.
+	// A map that contains tag keys and tag values that are attached to a pricing plan.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

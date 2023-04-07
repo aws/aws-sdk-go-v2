@@ -15,10 +15,10 @@ import (
 // Returns information about the access key IDs associated with the specified IAM
 // user. If there is none, the operation returns an empty list. Although each user
 // is limited to a small number of keys, you can still paginate the results using
-// the MaxItems  and Marker  parameters. If the UserName is not specified, the
-// user name is determined implicitly based on the Amazon Web Services access key
-// ID used to sign the request. If a temporary access key is used, then UserName
-// is required. If a long-term key is assigned to the user, then UserName is not
+// the MaxItems and Marker parameters. If the UserName is not specified, the user
+// name is determined implicitly based on the Amazon Web Services access key ID
+// used to sign the request. If a temporary access key is used, then UserName is
+// required. If a long-term key is assigned to the user, then UserName is not
 // required. This operation works for access keys under the Amazon Web Services
 // account. Consequently, you can use this operation to manage Amazon Web Services
 // account root user credentials even if the Amazon Web Services account has no
@@ -43,13 +43,13 @@ type ListAccessKeysInput struct {
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
-	// Markerelement in the response that you received to indicate where the next
-	// call should start.
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
 	Marker *string
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
@@ -65,7 +65,7 @@ type ListAccessKeysInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListAccessKeys  request.
+// Contains the response to a successful ListAccessKeys request.
 type ListAccessKeysOutput struct {
 
 	// A list of objects containing metadata about the access keys.
@@ -81,8 +81,8 @@ type ListAccessKeysOutput struct {
 	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated  is true, this element is present and contains the value to
-	// use for the Marker  parameter in a subsequent pagination request.
+	// When IsTruncated is true , this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -163,15 +163,15 @@ var _ ListAccessKeysAPIClient = (*Client)(nil)
 type ListAccessKeysPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

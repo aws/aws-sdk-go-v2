@@ -14,8 +14,7 @@ type Application struct {
 	// The Amazon resource name (ARN) that specifies the application across services.
 	Arn *string
 
-	// The ISO-8601 formatted timestamp of the moment when the application was
-	// created.
+	// The ISO-8601 formatted timestamp of the moment when the application was created.
 	CreationTime *time.Time
 
 	// The description of the application.
@@ -28,8 +27,8 @@ type Application struct {
 	// updated.
 	LastUpdateTime *time.Time
 
-	// The name of the application. The name must be unique in the region in which
-	// you are creating the application.
+	// The name of the application. The name must be unique in the region in which you
+	// are creating the application.
 	Name *string
 
 	// Key-value pairs you can use to associate with the application.
@@ -44,8 +43,7 @@ type ApplicationSummary struct {
 	// The Amazon resource name (ARN) that specifies the application across services.
 	Arn *string
 
-	// The ISO-8601 formatted timestamp of the moment when the application was
-	// created.
+	// The ISO-8601 formatted timestamp of the moment when the application was created.
 	CreationTime *time.Time
 
 	// The description of the application.
@@ -58,8 +56,8 @@ type ApplicationSummary struct {
 	// updated.
 	LastUpdateTime *time.Time
 
-	// The name of the application. The name must be unique in the region in which
-	// you are creating the application.
+	// The name of the application. The name must be unique in the region in which you
+	// are creating the application.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -208,8 +206,7 @@ type ResourceGroup struct {
 	// CREATE_COMPLETE if the resource group was created successfully. CREATE_FAILED
 	// if the resource group failed to be created. UPDATING if the resource group is
 	// in the process of being updated. UPDATE_COMPLETE if the resource group updated
-	// successfully. UPDATE_FAILED if the resource group could not update
-	// successfully.
+	// successfully. UPDATE_FAILED if the resource group could not update successfully.
 	State ResourceGroupState
 
 	noSmithyDocumentSerde
@@ -242,7 +239,7 @@ type ResourceIntegrations struct {
 	noSmithyDocumentSerde
 }
 
-// The definition of tagQuery. Specifies which resources are associated with an
+// The definition of tagQuery . Specifies which resources are associated with an
 // application.
 type TagQueryConfiguration struct {
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the group metadata and attributes from GroupId  in an identity store.
+// Retrieves the group metadata and attributes from GroupId in an identity store.
 func (c *Client) DescribeGroup(ctx context.Context, params *DescribeGroupInput, optFns ...func(*Options)) (*DescribeGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGroupInput{}
@@ -34,8 +34,8 @@ type DescribeGroupInput struct {
 	// This member is required.
 	GroupId *string
 
-	// The globally unique identifier for the identity store, such as d-1234567890.
-	// In this example, d-  is a fixed prefix, and 1234567890 is a randomly generated
+	// The globally unique identifier for the identity store, such as d-1234567890 . In
+	// this example, d- is a fixed prefix, and 1234567890 is a randomly generated
 	// string that contains numbers and lower case letters. This value is generated at
 	// the time that a new identity store is created.
 	//

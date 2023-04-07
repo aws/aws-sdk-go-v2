@@ -34,8 +34,7 @@ type ListAccountIntegrationsInput struct {
 	// This member is required.
 	Uri *string
 
-	// Boolean to indicate if hidden integration should be returned. Defaults to False
-	// .
+	// Boolean to indicate if hidden integration should be returned. Defaults to False .
 	IncludeHidden *bool
 
 	// The maximum number of objects returned per page.

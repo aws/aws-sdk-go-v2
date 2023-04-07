@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a workgroup with the specified name. A workgroup can be an Apache
-// Spark enabled workgroup or an Athena SQL workgroup.
+// Creates a workgroup with the specified name. A workgroup can be an Apache Spark
+// enabled workgroup or an Athena SQL workgroup.
 func (c *Client) CreateWorkGroup(ctx context.Context, params *CreateWorkGroupInput, optFns ...func(*Options)) (*CreateWorkGroupOutput, error) {
 	if params == nil {
 		params = &CreateWorkGroupInput{}

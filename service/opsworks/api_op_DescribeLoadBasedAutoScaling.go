@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes load-based auto scaling configurations for specified layers. You
-// must specify at least one of the parameters. Required Permissions: To use this
+// Describes load-based auto scaling configurations for specified layers. You must
+// specify at least one of the parameters. Required Permissions: To use this
 // action, an IAM user must have a Show, Deploy, or Manage permissions level for
 // the stack, or an attached policy that explicitly grants permissions. For more
 // information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
@@ -42,7 +42,7 @@ type DescribeLoadBasedAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeLoadBasedAutoScaling  request.
+// Contains the response to a DescribeLoadBasedAutoScaling request.
 type DescribeLoadBasedAutoScalingOutput struct {
 
 	// An array of LoadBasedAutoScalingConfiguration objects that describe each

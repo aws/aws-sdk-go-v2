@@ -31,8 +31,7 @@ func (c *Client) EnableIpamOrganizationAdminAccount(ctx context.Context, params 
 
 type EnableIpamOrganizationAdminAccountInput struct {
 
-	// The Organizations member account ID that you want to enable as the IPAM
-	// account.
+	// The Organizations member account ID that you want to enable as the IPAM account.
 	//
 	// This member is required.
 	DelegatedAdminAccountId *string

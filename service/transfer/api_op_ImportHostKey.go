@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a host key to the server that's specified by the ServerId  parameter.
+// Adds a host key to the server that's specified by the ServerId parameter.
 func (c *Client) ImportHostKey(ctx context.Context, params *ImportHostKeyInput, optFns ...func(*Options)) (*ImportHostKeyOutput, error) {
 	if params == nil {
 		params = &ImportHostKeyInput{}
@@ -29,8 +29,8 @@ func (c *Client) ImportHostKey(ctx context.Context, params *ImportHostKeyInput, 
 
 type ImportHostKeyInput struct {
 
-	// The private key portion of an SSH key pair. Transfer Family accepts RSA,
-	// ECDSA, and ED25519 keys.
+	// The private key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA,
+	// and ED25519 keys.
 	//
 	// This member is required.
 	HostKeyBody *string

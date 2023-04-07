@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns the DELETED status to a BatchPrediction, rendering it unusable. After
-// using the DeleteBatchPrediction  operation, you can use the GetBatchPrediction
+// Assigns the DELETED status to a BatchPrediction , rendering it unusable. After
+// using the DeleteBatchPrediction operation, you can use the GetBatchPrediction
 // operation to verify that the status of the BatchPrediction changed to DELETED.
-// Caution: The result of the DeleteBatchPrediction  operation is irreversible.
+// Caution: The result of the DeleteBatchPrediction operation is irreversible.
 func (c *Client) DeleteBatchPrediction(ctx context.Context, params *DeleteBatchPredictionInput, optFns ...func(*Options)) (*DeleteBatchPredictionOutput, error) {
 	if params == nil {
 		params = &DeleteBatchPredictionInput{}
@@ -39,13 +39,13 @@ type DeleteBatchPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DeleteBatchPrediction  operation. You can use the
-// GetBatchPrediction operation and check the value of the Status parameter to
-// see whether a BatchPrediction  is marked as DELETED .
+// Represents the output of a DeleteBatchPrediction operation. You can use the
+// GetBatchPrediction operation and check the value of the Status parameter to see
+// whether a BatchPrediction is marked as DELETED .
 type DeleteBatchPredictionOutput struct {
 
-	// A user-supplied ID that uniquely identifies the BatchPrediction. This value
-	// should be identical to the value of the BatchPredictionID  in the request.
+	// A user-supplied ID that uniquely identifies the BatchPrediction . This value
+	// should be identical to the value of the BatchPredictionID in the request.
 	BatchPredictionId *string
 
 	// Metadata pertaining to the operation's result.

@@ -10,9 +10,9 @@ const (
 	AdminStatusDisablingInProgress AdminStatus = "DISABLING_IN_PROGRESS"
 )
 
-// Values returns all known values for AdminStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AdminStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AdminStatus) Values() []AdminStatus {
 	return []AdminStatus{
 		"ENABLED",
@@ -114,9 +114,9 @@ const (
 	BucketMetadataErrorCodeAccessDenied BucketMetadataErrorCode = "ACCESS_DENIED"
 )
 
-// Values returns all known values for BucketMetadataErrorCode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BucketMetadataErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (BucketMetadataErrorCode) Values() []BucketMetadataErrorCode {
 	return []BucketMetadataErrorCode{
 		"ACCESS_DENIED",
@@ -151,9 +151,9 @@ const (
 	CurrencyUsd Currency = "USD"
 )
 
-// Values returns all known values for Currency. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Currency. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Currency) Values() []Currency {
 	return []Currency{
 		"USD",
@@ -348,8 +348,8 @@ const (
 	FindingsFilterActionNoop    FindingsFilterAction = "NOOP"
 )
 
-// Values returns all known values for FindingsFilterAction. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FindingsFilterAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FindingsFilterAction) Values() []FindingsFilterAction {
 	return []FindingsFilterAction{
@@ -394,9 +394,9 @@ const (
 	FindingTypePolicyIAMUserS3BucketSharedWithCloudFront FindingType = "Policy:IAMUser/S3BucketSharedWithCloudFront"
 )
 
-// Values returns all known values for FindingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FindingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FindingType) Values() []FindingType {
 	return []FindingType{
 		"SensitiveData:S3Object/Multiple",
@@ -619,9 +619,9 @@ const (
 	MacieStatusEnabled MacieStatus = "ENABLED"
 )
 
-// Values returns all known values for MacieStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MacieStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MacieStatus) Values() []MacieStatus {
 	return []MacieStatus{
 		"PAUSED",
@@ -833,8 +833,8 @@ const (
 	SearchResourcesSortAttributeNameS3ClassifiableSizeInBytes SearchResourcesSortAttributeName = "S3_CLASSIFIABLE_SIZE_IN_BYTES"
 )
 
-// Values returns all known values for SearchResourcesSortAttributeName. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for SearchResourcesSortAttributeName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (SearchResourcesSortAttributeName) Values() []SearchResourcesSortAttributeName {
@@ -1007,8 +1007,8 @@ const (
 	TypeAwsKms Type = "aws:kms"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{
@@ -1049,8 +1049,8 @@ const (
 	UnitTerabytes Unit = "TERABYTES"
 )
 
-// Values returns all known values for Unit. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Unit. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Unit) Values() []Unit {
 	return []Unit{

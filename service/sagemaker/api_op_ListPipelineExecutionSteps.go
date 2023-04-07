@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of PipeLineExecutionStep  objects.
+// Gets a list of PipeLineExecutionStep objects.
 func (c *Client) ListPipelineExecutionSteps(ctx context.Context, params *ListPipelineExecutionStepsInput, optFns ...func(*Options)) (*ListPipelineExecutionStepsOutput, error) {
 	if params == nil {
 		params = &ListPipelineExecutionStepsInput{}
@@ -33,9 +33,9 @@ type ListPipelineExecutionStepsInput struct {
 	// The maximum number of pipeline execution steps to return in the response.
 	MaxResults *int32
 
-	// If the result of the previous ListPipelineExecutionSteps request was
-	// truncated, the response includes a NextToken. To retrieve the next set of
-	// pipeline execution steps, use the token in the next request.
+	// If the result of the previous ListPipelineExecutionSteps request was truncated,
+	// the response includes a NextToken . To retrieve the next set of pipeline
+	// execution steps, use the token in the next request.
 	NextToken *string
 
 	// The Amazon Resource Name (ARN) of the pipeline execution.
@@ -49,13 +49,13 @@ type ListPipelineExecutionStepsInput struct {
 
 type ListPipelineExecutionStepsOutput struct {
 
-	// If the result of the previous ListPipelineExecutionSteps request was
-	// truncated, the response includes a NextToken. To retrieve the next set of
-	// pipeline execution steps, use the token in the next request.
+	// If the result of the previous ListPipelineExecutionSteps request was truncated,
+	// the response includes a NextToken . To retrieve the next set of pipeline
+	// execution steps, use the token in the next request.
 	NextToken *string
 
-	// A list of PipeLineExecutionStep  objects. Each PipeLineExecutionStep consists
-	// of StepName, StartTime, EndTime, StepStatus, and Metadata. Metadata is an object
+	// A list of PipeLineExecutionStep objects. Each PipeLineExecutionStep consists of
+	// StepName, StartTime, EndTime, StepStatus, and Metadata. Metadata is an object
 	// with properties for each job that contains relevant information about the job
 	// created by the step.
 	PipelineExecutionSteps []types.PipelineExecutionStep
@@ -140,8 +140,8 @@ type ListPipelineExecutionStepsPaginatorOptions struct {
 	// The maximum number of pipeline execution steps to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

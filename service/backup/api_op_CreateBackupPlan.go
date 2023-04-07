@@ -15,7 +15,7 @@ import (
 // Creates a backup plan using a backup plan name and backup rules. A backup plan
 // is a document that contains information that Backup uses to schedule tasks that
 // create recovery points for resources. If you call CreateBackupPlan with a plan
-// that already exists, you receive an AlreadyExistsException  exception.
+// that already exists, you receive an AlreadyExistsException exception.
 func (c *Client) CreateBackupPlan(ctx context.Context, params *CreateBackupPlanInput, optFns ...func(*Options)) (*CreateBackupPlanOutput, error) {
 	if params == nil {
 		params = &CreateBackupPlanInput{}
@@ -62,17 +62,16 @@ type CreateBackupPlanOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
 	// example,
-	// arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50
-	// .
+	// arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50 .
 	BackupPlanArn *string
 
 	// Uniquely identifies a backup plan.
 	BackupPlanId *string
 
-	// The date and time that a backup plan is created, in Unix format and
-	// Coordinated Universal Time (UTC). The value of CreationDate is accurate to
-	// milliseconds. For example, the value 1516925490.087 represents Friday, January
-	// 26, 2018 12:11:30.087 AM.
+	// The date and time that a backup plan is created, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
 	CreationDate *time.Time
 
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most

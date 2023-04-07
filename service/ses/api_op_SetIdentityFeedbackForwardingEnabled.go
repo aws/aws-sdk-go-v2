@@ -44,9 +44,8 @@ type SetIdentityFeedbackForwardingEnabledInput struct {
 	// email. true specifies that Amazon SES will forward bounce and complaint
 	// notifications as email, in addition to any Amazon SNS topic publishing otherwise
 	// specified. false specifies that Amazon SES will publish bounce and complaint
-	// notifications only through Amazon SNS. This value can only be set to false
-	// when Amazon SNS topics are set for both Bounce  and Complaint notification
-	// types.
+	// notifications only through Amazon SNS. This value can only be set to false when
+	// Amazon SNS topics are set for both Bounce and Complaint notification types.
 	//
 	// This member is required.
 	ForwardingEnabled bool

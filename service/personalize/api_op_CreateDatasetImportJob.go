@@ -23,8 +23,7 @@ import (
 // Status A dataset import job can be in one of the following states:
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
-// To get
-// the status of the import job, call DescribeDatasetImportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html)
+// To get the status of the import job, call DescribeDatasetImportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html)
 // , providing the Amazon Resource Name (ARN) of the dataset import job. The
 // dataset import is complete when the status shows as ACTIVE. If the status shows
 // as CREATE FAILED, the response includes a failureReason key, which describes
@@ -71,10 +70,13 @@ type CreateDatasetImportJobInput struct {
 	RoleArn *string
 
 	// Specify how to add the new records to an existing dataset. The default import
-	// mode is FULL. If you haven't imported bulk records into the dataset
-	// previously, you can only specify FULL .
-	//     - Specify FULL to overwrite all existing bulk data in your dataset. Data you imported individually is not replaced.
-	//     - Specify INCREMENTAL to append the new records to the existing data in your dataset. Amazon Personalize replaces any record with the same ID with the new one.
+	// mode is FULL . If you haven't imported bulk records into the dataset previously,
+	// you can only specify FULL .
+	//   - Specify FULL to overwrite all existing bulk data in your dataset. Data you
+	//   imported individually is not replaced.
+	//   - Specify INCREMENTAL to append the new records to the existing data in your
+	//   dataset. Amazon Personalize replaces any record with the same ID with the new
+	//   one.
 	ImportMode types.ImportMode
 
 	// If you created a metric attribution, specify whether to publish metrics for

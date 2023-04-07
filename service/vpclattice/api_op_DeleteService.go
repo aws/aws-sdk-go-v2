@@ -14,8 +14,7 @@ import (
 // Deletes a service. A service can't be deleted if it's associated with a service
 // network. If you delete a service, all resources related to the service, such as
 // the resource policy, auth policy, listeners, listener rules, and access log
-// subscriptions, are also deleted. For more information, see Delete a service
-// (https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html#delete-service)
+// subscriptions, are also deleted. For more information, see Delete a service (https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html#delete-service)
 // in the Amazon VPC Lattice User Guide.
 func (c *Client) DeleteService(ctx context.Context, params *DeleteServiceInput, optFns ...func(*Options)) (*DeleteServiceOutput, error) {
 	if params == nil {
@@ -53,9 +52,9 @@ type DeleteServiceOutput struct {
 	// The name of the service.
 	Name *string
 
-	// The status. You can retry the operation if the status is DELETE_FAILED. However,
-	// if you retry it while the status is DELETE_IN_PROGRESS, the status doesn't
-	// change.
+	// The status. You can retry the operation if the status is DELETE_FAILED .
+	// However, if you retry it while the status is DELETE_IN_PROGRESS , the status
+	// doesn't change.
 	Status types.ServiceStatus
 
 	// Metadata pertaining to the operation's result.

@@ -43,17 +43,17 @@ type DescribeFleetInstancesInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - instance-type - The instance type.
+	//   - instance-type - The instance type.
 	Filters []types.Filter
 
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues
-	// from the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -69,7 +69,7 @@ type DescribeFleetInstancesOutput struct {
 	FleetId *string
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -15,8 +15,8 @@ import (
 // there are no archives in the vault as of the last inventory and there have been
 // no writes to the vault since the last inventory. If either of these conditions
 // is not satisfied, the vault deletion fails (that is, the vault is not removed)
-// and Amazon S3 Glacier returns an error. You can use DescribeVault to return
-// the number of archives in a vault, and you can use Initiate a Job (POST jobs) (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html)
+// and Amazon S3 Glacier returns an error. You can use DescribeVault to return the
+// number of archives in a vault, and you can use Initiate a Job (POST jobs) (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html)
 // to initiate a new inventory retrieval for a vault. The inventory contains the
 // archive IDs you use to delete archives using Delete Archive (DELETE archive) (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html)
 // . This operation is idempotent. An AWS account has full permission to perform
@@ -47,7 +47,7 @@ func (c *Client) DeleteVault(ctx context.Context, params *DeleteVaultInput, optF
 type DeleteVaultInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
 	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.

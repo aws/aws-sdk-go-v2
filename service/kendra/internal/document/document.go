@@ -9,8 +9,8 @@ import (
 	smithydocumentjson "github.com/aws/smithy-go/document/json"
 )
 
-// github.com/aws/aws-sdk-go-v2/service/kendra/internal/document.smithyDocument
-// is an interface which is used to bind a document type to its service client.
+// github.com/aws/aws-sdk-go-v2/service/kendra/internal/document.smithyDocument is
+// an interface which is used to bind a document type to its service client.
 type smithyDocument interface {
 	isSmithyDocument()
 }
@@ -77,8 +77,8 @@ func NewDocumentMarshaler(v interface{}) Interface {
 	}
 }
 
-// NewDocumentUnmarshaler creates a new document unmarshaler for the given
-// service response
+// NewDocumentUnmarshaler creates a new document unmarshaler for the given service
+// response
 func NewDocumentUnmarshaler(v interface{}) Interface {
 	return &documentUnmarshaler{
 		value: v,

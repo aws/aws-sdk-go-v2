@@ -60,8 +60,8 @@ type DescribeDatasetOutput struct {
 	// The file format of a dataset that is created from an Amazon S3 file or folder.
 	Format types.InputFormat
 
-	// Represents a set of options that define the structure of either
-	// comma-separated value (CSV), Excel, or JSON input.
+	// Represents a set of options that define the structure of either comma-separated
+	// value (CSV), Excel, or JSON input.
 	FormatOptions *types.FormatOptions
 
 	// The identifier (user name) of the user who last modified the dataset.

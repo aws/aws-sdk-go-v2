@@ -16,8 +16,8 @@ import (
 // Web Services account. VPC peering enables the game servers on your fleet to
 // communicate directly with other Amazon Web Services resources. After you've
 // received authorization, use CreateVpcPeeringConnection (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringConnection.html)
-// to establish the peering connection. For more information, see VPC Peering
-// with Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html)
+// to establish the peering connection. For more information, see VPC Peering with
+// Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html)
 // . You can peer with VPCs that are owned by any Amazon Web Services account you
 // have access to, including the account that you use to manage your Amazon
 // GameLift fleets. You cannot peer with VPCs that are in different Regions. To

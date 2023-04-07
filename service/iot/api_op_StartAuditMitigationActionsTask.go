@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a task that applies a set of mitigation actions to the specified
-// target. Requires permission to access the StartAuditMitigationActionsTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Starts a task that applies a set of mitigation actions to the specified target.
+// Requires permission to access the StartAuditMitigationActionsTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) StartAuditMitigationActionsTask(ctx context.Context, params *StartAuditMitigationActionsTaskInput, optFns ...func(*Options)) (*StartAuditMitigationActionsTaskOutput, error) {
 	if params == nil {

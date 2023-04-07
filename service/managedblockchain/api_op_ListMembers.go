@@ -37,9 +37,8 @@ type ListMembersInput struct {
 	NetworkId *string
 
 	// An optional Boolean value. If provided, the request is limited either to
-	// members that the current Amazon Web Services account owns ( true) or that
-	// other Amazon Web Services accountsn own ( false). If omitted, all members are
-	// listed.
+	// members that the current Amazon Web Services account owns ( true ) or that other
+	// Amazon Web Services accountsn own ( false ). If omitted, all members are listed.
 	IsOwned *bool
 
 	// The maximum number of members to return in the request.
@@ -60,8 +59,8 @@ type ListMembersInput struct {
 
 type ListMembersOutput struct {
 
-	// An array of MemberSummary objects. Each object contains details about a
-	// network member.
+	// An array of MemberSummary objects. Each object contains details about a network
+	// member.
 	Members []types.MemberSummary
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -148,8 +147,8 @@ type ListMembersPaginatorOptions struct {
 	// The maximum number of members to return in the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

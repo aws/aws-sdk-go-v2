@@ -35,7 +35,7 @@ type DescribeStandardsInput struct {
 	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the
-	// DescribeStandards operation, set the value of this parameter to NULL. For
+	// DescribeStandards operation, set the value of this parameter to NULL . For
 	// subsequent calls to the operation, to continue listing data, set the value of
 	// this parameter to the value returned from the previous response.
 	NextToken *string
@@ -125,14 +125,13 @@ type DescribeStandardsAPIClient interface {
 
 var _ DescribeStandardsAPIClient = (*Client)(nil)
 
-// DescribeStandardsPaginatorOptions is the paginator options for
-// DescribeStandards
+// DescribeStandardsPaginatorOptions is the paginator options for DescribeStandards
 type DescribeStandardsPaginatorOptions struct {
 	// The maximum number of standards to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Designates the IAM role and Amazon Simple Notification Service (SNS) topic
-// that Firewall Manager uses to record SNS logs. To perform this action outside of
-// the console, you must configure the SNS topic to allow the Firewall Manager role
-//
+// Designates the IAM role and Amazon Simple Notification Service (SNS) topic that
+// Firewall Manager uses to record SNS logs. To perform this action outside of the
+// console, you must configure the SNS topic to allow the Firewall Manager role
 // AWSServiceRoleForFMS to publish SNS logs. For more information, see Firewall
 // Manager required permissions for API actions (https://docs.aws.amazon.com/waf/latest/developerguide/fms-api-permissions-ref.html)
 // in the Firewall Manager Developer Guide.
@@ -34,8 +33,8 @@ func (c *Client) PutNotificationChannel(ctx context.Context, params *PutNotifica
 
 type PutNotificationChannelInput struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role that allows Amazon SNS to
-	// record Firewall Manager activity.
+	// The Amazon Resource Name (ARN) of the IAM role that allows Amazon SNS to record
+	// Firewall Manager activity.
 	//
 	// This member is required.
 	SnsRoleName *string

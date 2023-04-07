@@ -46,17 +46,16 @@ type DescribeBackupJobOutput struct {
 	// Uniquely identifies a request to Backup to back up a resource.
 	BackupJobId *string
 
-	// Represents the options specified as part of backup plan or on-demand backup
-	// job.
+	// Represents the options specified as part of backup plan or on-demand backup job.
 	BackupOptions map[string]string
 
 	// The size, in bytes, of a backup.
 	BackupSizeInBytes *int64
 
 	// Represents the actual backup type selected for a backup job. For example, if a
-	// successful Windows Volume Shadow Copy Service (VSS) backup was taken,
-	// BackupType returns "WindowsVSS" . If BackupType is empty, then the backup type
-	// was a regular backup.
+	// successful Windows Volume Shadow Copy Service (VSS) backup was taken, BackupType
+	// returns "WindowsVSS" . If BackupType is empty, then the backup type was a
+	// regular backup.
 	BackupType *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
@@ -69,8 +68,8 @@ type DescribeBackupJobOutput struct {
 	// letters, numbers, and hyphens.
 	BackupVaultName *string
 
-	// The size in bytes transferred to a backup vault at the time that the job
-	// status was queried.
+	// The size in bytes transferred to a backup vault at the time that the job status
+	// was queried.
 	BytesTransferred *int64
 
 	// This returns the statistics of the included child (nested) backup jobs.
@@ -95,7 +94,7 @@ type DescribeBackupJobOutput struct {
 
 	// The date and time that a job to back up resources is expected to be completed,
 	// in Unix format and Coordinated Universal Time (UTC). The value of
-	// ExpectedCompletionDateis accurate to milliseconds. For example, the value
+	// ExpectedCompletionDate is accurate to milliseconds. For example, the value
 	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
 	ExpectedCompletionDate *time.Time
 
@@ -121,8 +120,8 @@ type DescribeBackupJobOutput struct {
 	// .
 	RecoveryPointArn *string
 
-	// An ARN that uniquely identifies a saved resource. The format of the ARN
-	// depends on the resource type.
+	// An ARN that uniquely identifies a saved resource. The format of the ARN depends
+	// on the resource type.
 	ResourceArn *string
 
 	// This is the non-unique name of the resource that belongs to the specified

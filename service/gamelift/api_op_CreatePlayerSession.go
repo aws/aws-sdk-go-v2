@@ -13,7 +13,7 @@ import (
 
 // Reserves an open player slot in a game session for a player. New player
 // sessions can be created in any game session with an open slot that is in ACTIVE
-// status and has a player creation policy of ACCEPT_ALL. You can add a group of
+// status and has a player creation policy of ACCEPT_ALL . You can add a group of
 // players to a game session with CreatePlayerSessions (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreatePlayerSessions.html)
 // . To create a player session, specify a game session ID, player ID, and
 // optionally a set of player data. If successful, a slot is reserved in the game

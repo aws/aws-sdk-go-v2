@@ -43,8 +43,8 @@ type GetSerialConsoleAccessStatusInput struct {
 
 type GetSerialConsoleAccessStatusOutput struct {
 
-	// If true, access to the EC2 serial console of all instances is enabled for your
-	// account. If false, access to the EC2 serial console of all instances is
+	// If true , access to the EC2 serial console of all instances is enabled for your
+	// account. If false , access to the EC2 serial console of all instances is
 	// disabled for your account.
 	SerialConsoleAccessEnabled *bool
 

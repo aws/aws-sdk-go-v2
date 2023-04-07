@@ -12,14 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new workload. The owner of a workload can share the workload with other
-// Amazon Web Services accounts, users, an organization, and organizational units
-// (OUs) in the same Amazon Web Services Region. Only the owner of a workload can
-// delete it. For more information, see Defining a Workload
-// (https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html)
-// in the Well-Architected Tool User Guide. Either AwsRegions, NonAwsRegions, or
+// Create a new workload. The owner of a workload can share the workload with
+// other Amazon Web Services accounts, users, an organization, and organizational
+// units (OUs) in the same Amazon Web Services Region. Only the owner of a workload
+// can delete it. For more information, see Defining a Workload (https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html)
+// in the Well-Architected Tool User Guide. Either AwsRegions , NonAwsRegions , or
 // both must be specified when creating a workload. You also must specify
-// ReviewOwner, even though the parameter is listed as not being required in the
+// ReviewOwner , even though the parameter is listed as not being required in the
 // following section.
 func (c *Client) CreateWorkload(ctx context.Context, params *CreateWorkloadInput, optFns ...func(*Options)) (*CreateWorkloadOutput, error) {
 	if params == nil {
@@ -62,7 +61,7 @@ type CreateWorkloadInput struct {
 	Environment types.WorkloadEnvironment
 
 	// The list of lenses associated with the workload. Each lens is identified by its
-	// LensSummary$LensAlias.
+	// LensSummary$LensAlias .
 	//
 	// This member is required.
 	Lenses []string
@@ -84,7 +83,7 @@ type CreateWorkloadInput struct {
 	ArchitecturalDesign *string
 
 	// The list of Amazon Web Services Regions associated with the workload, for
-	// example, us-east-2, or ca-central-1.
+	// example, us-east-2 , or ca-central-1 .
 	AwsRegions []string
 
 	// Well-Architected discovery configuration settings associated to the workload.
@@ -93,69 +92,34 @@ type CreateWorkloadInput struct {
 	// The industry for the workload.
 	Industry *string
 
-	// The industry type for the workload. If specified, must be one of the
-	// following:
-	//
-	// * Agriculture
-	//
-	// * Automobile
-	//
-	// * Defense
-	//
-	// * Design and Engineering
-	//
-	// *
-	// Digital Advertising
-	//
-	// * Education
-	//
-	// * Environmental Protection
-	//
-	// * Financial
-	// Services
-	//
-	// * Gaming
-	//
-	// * General Public Services
-	//
-	// * Healthcare
-	//
-	// * Hospitality
-	//
-	// *
-	// InfoTech
-	//
-	// * Justice and Public Safety
-	//
-	// * Life Sciences
-	//
-	// * Manufacturing
-	//
-	// * Media
-	// & Entertainment
-	//
-	// * Mining & Resources
-	//
-	// * Oil & Gas
-	//
-	// * Power & Utilities
-	//
-	// *
-	// Professional Services
-	//
-	// * Real Estate & Construction
-	//
-	// * Retail & Wholesale
-	//
-	// *
-	// Social Protection
-	//
-	// * Telecommunications
-	//
-	// * Travel, Transportation & Logistics
-	//
-	// *
-	// Other
+	// The industry type for the workload. If specified, must be one of the following:
+	//   - Agriculture
+	//   - Automobile
+	//   - Defense
+	//   - Design and Engineering
+	//   - Digital Advertising
+	//   - Education
+	//   - Environmental Protection
+	//   - Financial Services
+	//   - Gaming
+	//   - General Public Services
+	//   - Healthcare
+	//   - Hospitality
+	//   - InfoTech
+	//   - Justice and Public Safety
+	//   - Life Sciences
+	//   - Manufacturing
+	//   - Media & Entertainment
+	//   - Mining & Resources
+	//   - Oil & Gas
+	//   - Power & Utilities
+	//   - Professional Services
+	//   - Real Estate & Construction
+	//   - Retail & Wholesale
+	//   - Social Protection
+	//   - Telecommunications
+	//   - Travel, Transportation & Logistics
+	//   - Other
 	IndustryType *string
 
 	// The list of non-Amazon Web Services Regions associated with the workload.
@@ -165,11 +129,11 @@ type CreateWorkloadInput struct {
 	Notes *string
 
 	// The priorities of the pillars, which are used to order items in the improvement
-	// plan. Each pillar is represented by its PillarReviewSummary$PillarId.
+	// plan. Each pillar is represented by its PillarReviewSummary$PillarId .
 	PillarPriorities []string
 
-	// The review owner of the workload. The name, email address, or identifier for the
-	// primary group or individual that owns the workload review process.
+	// The review owner of the workload. The name, email address, or identifier for
+	// the primary group or individual that owns the workload review process.
 	ReviewOwner *string
 
 	// The tags to be associated with the workload.
@@ -184,8 +148,8 @@ type CreateWorkloadOutput struct {
 	// The ARN for the workload.
 	WorkloadArn *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

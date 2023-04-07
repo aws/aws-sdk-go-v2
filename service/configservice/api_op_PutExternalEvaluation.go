@@ -35,7 +35,7 @@ type PutExternalEvaluationInput struct {
 	// This member is required.
 	ConfigRuleName *string
 
-	// An ExternalEvaluation  object that provides details about compliance.
+	// An ExternalEvaluation object that provides details about compliance.
 	//
 	// This member is required.
 	ExternalEvaluation *types.ExternalEvaluation

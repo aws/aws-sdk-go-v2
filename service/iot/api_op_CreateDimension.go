@@ -43,8 +43,8 @@ type CreateDimensionInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// A unique identifier for the dimension. Choose something that describes the
-	// type and value to make it easy to remember what it does.
+	// A unique identifier for the dimension. Choose something that describes the type
+	// and value to make it easy to remember what it does.
 	//
 	// This member is required.
 	Name *string

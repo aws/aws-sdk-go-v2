@@ -212,8 +212,8 @@ func (e *CustomVerificationEmailInvalidContentException) ErrorFault() smithy.Err
 	return smithy.FaultClient
 }
 
-// Indicates that a custom verification email template with the name you
-// specified already exists.
+// Indicates that a custom verification email template with the name you specified
+// already exists.
 type CustomVerificationEmailTemplateAlreadyExistsException struct {
 	Message *string
 
@@ -243,8 +243,8 @@ func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorFault() smi
 	return smithy.FaultClient
 }
 
-// Indicates that a custom verification email template with the name you
-// specified does not exist.
+// Indicates that a custom verification email template with the name you specified
+// does not exist.
 type CustomVerificationEmailTemplateDoesNotExistException struct {
 	Message *string
 
@@ -727,8 +727,8 @@ func (e *InvalidTrackingOptionsException) ErrorCode() string {
 }
 func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that a resource could not be created because of service limits. For
-// a list of Amazon SES limits, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html)
+// Indicates that a resource could not be created because of service limits. For a
+// list of Amazon SES limits, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html)
 // .
 type LimitExceededException struct {
 	Message *string
@@ -814,9 +814,9 @@ func (e *MessageRejected) ErrorCode() string {
 }
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that one or more of the replacement values for the specified
-// template was not specified. Ensure that the TemplateData object contains
-// references to all of the replacement tags in the specified template.
+// Indicates that one or more of the replacement values for the specified template
+// was not specified. Ensure that the TemplateData object contains references to
+// all of the replacement tags in the specified template.
 type MissingRenderingAttributeException struct {
 	Message *string
 

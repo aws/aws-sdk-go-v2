@@ -18,7 +18,6 @@ import (
 // resource. For more information about tags, see Tag your Amazon EC2 resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
 // in the Amazon Elastic Compute Cloud User Guide. For more information about
 // creating IAM policies that control users' access to resources based on tags, see
-//
 // Supported resource-level permissions for Amazon EC2 API actions (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns ...func(*Options)) (*CreateTagsOutput, error) {
@@ -38,8 +37,8 @@ func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns
 
 type CreateTagsInput struct {
 
-	// The IDs of the resources, separated by spaces. Constraints: Up to 1000
-	// resource IDs. We recommend breaking up this request into smaller batches.
+	// The IDs of the resources, separated by spaces. Constraints: Up to 1000 resource
+	// IDs. We recommend breaking up this request into smaller batches.
 	//
 	// This member is required.
 	Resources []string

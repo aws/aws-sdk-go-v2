@@ -32,7 +32,7 @@ func (c *Client) CreateCacheSecurityGroup(ctx context.Context, params *CreateCac
 	return out, nil
 }
 
-// Represents the input of a CreateCacheSecurityGroup  operation.
+// Represents the input of a CreateCacheSecurityGroup operation.
 type CreateCacheSecurityGroupInput struct {
 
 	// A name for the cache security group. This value is stored as a lowercase
@@ -57,9 +57,9 @@ type CreateCacheSecurityGroupInput struct {
 type CreateCacheSecurityGroupOutput struct {
 
 	// Represents the output of one of the following operations:
-	//     - AuthorizeCacheSecurityGroupIngress
-	//     - CreateCacheSecurityGroup
-	//     - RevokeCacheSecurityGroupIngress
+	//   - AuthorizeCacheSecurityGroupIngress
+	//   - CreateCacheSecurityGroup
+	//   - RevokeCacheSecurityGroupIngress
 	CacheSecurityGroup *types.CacheSecurityGroup
 
 	// Metadata pertaining to the operation's result.

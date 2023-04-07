@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the controls enabled by AWS Control Tower on the specified
-// organizational unit and the accounts it contains.
+// Lists the controls enabled by AWS Control Tower on the specified organizational
+// unit and the accounts it contains.
 func (c *Client) ListEnabledControls(ctx context.Context, params *ListEnabledControlsInput, optFns ...func(*Options)) (*ListEnabledControlsOutput, error) {
 	if params == nil {
 		params = &ListEnabledControlsInput{}
@@ -48,8 +48,8 @@ type ListEnabledControlsInput struct {
 
 type ListEnabledControlsOutput struct {
 
-	// Lists the controls enabled by AWS Control Tower on the specified
-	// organizational unit and the accounts it contains.
+	// Lists the controls enabled by AWS Control Tower on the specified organizational
+	// unit and the accounts it contains.
 	//
 	// This member is required.
 	EnabledControls []types.EnabledControlSummary
@@ -141,8 +141,8 @@ type ListEnabledControlsPaginatorOptions struct {
 	// How many results to return per API call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

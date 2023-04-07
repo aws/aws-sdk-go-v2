@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies a setting for an Amazon DocumentDB cluster. You can change one or
-// more database configuration parameters by specifying these parameters and the
-// new values in the request.
+// Modifies a setting for an Amazon DocumentDB cluster. You can change one or more
+// database configuration parameters by specifying these parameters and the new
+// values in the request.
 func (c *Client) ModifyDBCluster(ctx context.Context, params *ModifyDBClusterInput, optFns ...func(*Options)) (*ModifyDBClusterOutput, error) {
 	if params == nil {
 		params = &ModifyDBClusterInput{}
@@ -34,7 +34,7 @@ type ModifyDBClusterInput struct {
 
 	// The cluster identifier for the cluster that is being modified. This parameter
 	// is not case sensitive. Constraints:
-	//     - Must match the identifier of an existing DBCluster .
+	//   - Must match the identifier of an existing DBCluster .
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -42,23 +42,22 @@ type ModifyDBClusterInput struct {
 	// A value that specifies whether the changes in this request and any pending
 	// changes are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the cluster. If this parameter is set to
-	// false, changes to the cluster are applied during the next maintenance window.
-	// The ApplyImmediately  parameter affects only the NewDBClusterIdentifier  and
-	// MasterUserPassword values. If you set this parameter value to false, the
-	// changes to the NewDBClusterIdentifier  and MasterUserPassword values are
-	// applied during the next maintenance window. All other changes are applied
-	// immediately, regardless of the value of the ApplyImmediately parameter.
-	// Default: false
+	// false , changes to the cluster are applied during the next maintenance window.
+	// The ApplyImmediately parameter affects only the NewDBClusterIdentifier and
+	// MasterUserPassword values. If you set this parameter value to false , the
+	// changes to the NewDBClusterIdentifier and MasterUserPassword values are applied
+	// during the next maintenance window. All other changes are applied immediately,
+	// regardless of the value of the ApplyImmediately parameter. Default: false
 	ApplyImmediately bool
 
-	// The number of days for which automated backups are retained. You must specify
-	// a minimum value of 1. Default: 1 Constraints:
-	//     - Must be a value from 1 to 35.
+	// The number of days for which automated backups are retained. You must specify a
+	// minimum value of 1. Default: 1 Constraints:
+	//   - Must be a value from 1 to 35.
 	BackupRetentionPeriod *int32
 
 	// The configuration setting for the log types to be enabled for export to Amazon
-	// CloudWatch Logs for a specific instance or cluster. The EnableLogTypes  and
-	// DisableLogTypesarrays determine which logs are exported (or not exported) to
+	// CloudWatch Logs for a specific instance or cluster. The EnableLogTypes and
+	// DisableLogTypes arrays determine which logs are exported (or not exported) to
 	// CloudWatch Logs.
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
@@ -67,8 +66,8 @@ type ModifyDBClusterInput struct {
 
 	// Specifies whether this cluster can be deleted. If DeletionProtection is
 	// enabled, the cluster cannot be deleted unless it is modified and
-	// DeletionProtection is disabled. DeletionProtection protects clusters from
-	// being accidentally deleted.
+	// DeletionProtection is disabled. DeletionProtection protects clusters from being
+	// accidentally deleted.
 	DeletionProtection *bool
 
 	// The version number of the database engine to which you want to upgrade.
@@ -82,24 +81,24 @@ type ModifyDBClusterInput struct {
 
 	// The new cluster identifier for the cluster when renaming a cluster. This value
 	// is stored as a lowercase string. Constraints:
-	//     - Must contain from 1 to 63 letters, numbers, or hyphens.
-	//     - The first character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: my-cluster2
 	NewDBClusterIdentifier *string
 
 	// The port number on which the cluster accepts connections. Constraints: Must be
-	// a value from 1150  to 65535 . Default: The same port as the original cluster.
+	// a value from 1150 to 65535 . Default: The same port as the original cluster.
 	Port *int32
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is
 	// a 30-minute window selected at random from an 8-hour block of time for each
 	// Amazon Web Services Region. Constraints:
-	//     - Must be in the format hh24:mi-hh24:mi .
-	//     - Must be in Universal Coordinated Time (UTC).
-	//     - Must not conflict with the preferred maintenance window.
-	//     - Must be at least 30 minutes.
+	//   - Must be in the format hh24:mi-hh24:mi .
+	//   - Must be in Universal Coordinated Time (UTC).
+	//   - Must not conflict with the preferred maintenance window.
+	//   - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal

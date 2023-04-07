@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Describes a model that you created using the CreateModel  API.
+// Describes a model that you created using the CreateModel API.
 func (c *Client) DescribeModel(ctx context.Context, params *DescribeModelInput, optFns ...func(*Options)) (*DescribeModelOutput, error) {
 	if params == nil {
 		params = &DescribeModelInput{}
@@ -45,8 +45,7 @@ type DescribeModelOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the IAM role that you specified for the
-	// model.
+	// The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
 	//
 	// This member is required.
 	ExecutionRoleArn *string
@@ -64,7 +63,7 @@ type DescribeModelOutput struct {
 	// The containers in the inference pipeline.
 	Containers []types.ContainerDefinition
 
-	// If True, no inbound or outbound network calls can be made to or from the model
+	// If True , no inbound or outbound network calls can be made to or from the model
 	// container.
 	EnableNetworkIsolation bool
 
@@ -76,8 +75,7 @@ type DescribeModelOutput struct {
 	PrimaryContainer *types.ContainerDefinition
 
 	// A VpcConfig object that specifies the VPC that this model has access to. For
-	// more information, see Protect Endpoints by Using an Amazon Virtual Private
-	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
+	// more information, see Protect Endpoints by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
 	VpcConfig *types.VpcConfig
 
 	// Metadata pertaining to the operation's result.

@@ -19,8 +19,11 @@ import (
 // cannot update some fields independent of others. To update a continuous
 // deployment policy configuration:
 //   - Use GetContinuousDeploymentPolicyConfig to get the current configuration.
-//   - Locally modify the fields in the continuous deployment policy configuration that you want to update.
-//   - Use UpdateContinuousDeploymentPolicy , providing the entire continuous deployment policy configuration, including the fields that you modified and those that you didn't.
+//   - Locally modify the fields in the continuous deployment policy configuration
+//     that you want to update.
+//   - Use UpdateContinuousDeploymentPolicy , providing the entire continuous
+//     deployment policy configuration, including the fields that you modified and
+//     those that you didn't.
 func (c *Client) UpdateContinuousDeploymentPolicy(ctx context.Context, params *UpdateContinuousDeploymentPolicyInput, optFns ...func(*Options)) (*UpdateContinuousDeploymentPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateContinuousDeploymentPolicyInput{}

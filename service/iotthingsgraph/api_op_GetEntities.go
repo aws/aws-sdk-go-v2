@@ -23,8 +23,7 @@ import (
 //   - Device Models
 //   - Services
 //
-// This action doesn't return definitions for systems, flows, and
-// deployments.
+// This action doesn't return definitions for systems, flows, and deployments.
 //
 // Deprecated: since: 2022-08-30
 func (c *Client) GetEntities(ctx context.Context, params *GetEntitiesInput, optFns ...func(*Options)) (*GetEntitiesOutput, error) {

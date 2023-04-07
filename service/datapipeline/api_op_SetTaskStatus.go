@@ -15,7 +15,7 @@ import (
 // completed and provide information about the final status. A task runner makes
 // this call regardless of whether the task was sucessful. A task runner does not
 // need to call SetTaskStatus for tasks that are canceled by the web service
-// during a call to ReportTaskProgress. POST / HTTP/1.1 Content-Type:
+// during a call to ReportTaskProgress . POST / HTTP/1.1 Content-Type:
 // application/x-amz-json-1.1 X-Amz-Target: DataPipeline.SetTaskStatus
 // Content-Length: 847 Host: datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon,
 // 12 Nov 2012 17:49:52 GMT Authorization: AuthParams {"taskId":
@@ -47,14 +47,14 @@ type SetTaskStatusInput struct {
 	// This member is required.
 	TaskId *string
 
-	// If FINISHED , the task successfully completed. If FAILED, the task ended
+	// If FINISHED , the task successfully completed. If FAILED , the task ended
 	// unsuccessfully. Preconditions use false.
 	//
 	// This member is required.
 	TaskStatus types.TaskStatus
 
-	// If an error occurred during the task, this value specifies the error code.
-	// This value is set on the physical attempt object. It is used to display error
+	// If an error occurred during the task, this value specifies the error code. This
+	// value is set on the physical attempt object. It is used to display error
 	// information to the user. It should not start with string "Service_" which is
 	// reserved by the system.
 	ErrorId *string

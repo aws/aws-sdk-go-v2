@@ -66,16 +66,16 @@ type ListNotebookInstancesInput struct {
 
 	// If the previous call to the ListNotebookInstances is truncated, the response
 	// includes a NextToken . You can use this token in your subsequent
-	// ListNotebookInstancesrequest to fetch the next set of notebook instances. You
+	// ListNotebookInstances request to fetch the next set of notebook instances. You
 	// might specify a filter or a sort order in your request. When response is
 	// truncated, you must use the same values for the filer and sort order in the next
 	// request.
 	NextToken *string
 
-	// A string in the name of a notebook instances lifecycle configuration
-	// associated with this notebook instance. This filter returns only notebook
-	// instances associated with a lifecycle configuration with a name that contains
-	// the specified string.
+	// A string in the name of a notebook instances lifecycle configuration associated
+	// with this notebook instance. This filter returns only notebook instances
+	// associated with a lifecycle configuration with a name that contains the
+	// specified string.
 	NotebookInstanceLifecycleConfigNameContains *string
 
 	// The field to sort results by. The default is Name .
@@ -97,7 +97,7 @@ type ListNotebookInstancesOutput struct {
 	// use the token in the next request.
 	NextToken *string
 
-	// An array of NotebookInstanceSummary  objects, one for each notebook instance.
+	// An array of NotebookInstanceSummary objects, one for each notebook instance.
 	NotebookInstances []types.NotebookInstanceSummary
 
 	// Metadata pertaining to the operation's result.
@@ -180,8 +180,8 @@ type ListNotebookInstancesPaginatorOptions struct {
 	// The maximum number of notebook instances to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

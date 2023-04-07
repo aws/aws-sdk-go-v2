@@ -31,7 +31,7 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 	return out, nil
 }
 
-// The request object for the DeleteBackup  operation.
+// The request object for the DeleteBackup operation.
 type DeleteBackupInput struct {
 
 	// The ID of the backup that you want to delete.
@@ -39,15 +39,15 @@ type DeleteBackupInput struct {
 	// This member is required.
 	BackupId *string
 
-	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure
-	// idempotent deletion. This parameter is automatically filled on your behalf when
-	// using the CLI or SDK.
+	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// deletion. This parameter is automatically filled on your behalf when using the
+	// CLI or SDK.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde
 }
 
-// The response object for the DeleteBackup  operation.
+// The response object for the DeleteBackup operation.
 type DeleteBackupOutput struct {
 
 	// The ID of the backup that was deleted.

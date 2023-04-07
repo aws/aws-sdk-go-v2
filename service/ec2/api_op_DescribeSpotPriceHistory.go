@@ -51,24 +51,31 @@ type DescribeSpotPriceHistoryInput struct {
 	EndTime *time.Time
 
 	// One or more filters.
-	//     - availability-zone - The Availability Zone for which prices should be returned.
-	//     - instance-type - The type of instance (for example, m3.medium ).
-	//     - product-description - The product description for the Spot price ( Linux/UNIX | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) | Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows (Amazon VPC) ).
-	//     - spot-price - The Spot price. The value must match exactly (or use wildcards; greater than or less than comparison is not supported).
-	//     - timestamp - The time stamp of the Spot price history, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?). Greater than or less than comparison is not supported.
+	//   - availability-zone - The Availability Zone for which prices should be
+	//   returned.
+	//   - instance-type - The type of instance (for example, m3.medium ).
+	//   - product-description - The product description for the Spot price ( Linux/UNIX
+	//   | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) |
+	//   Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows
+	//   (Amazon VPC) ).
+	//   - spot-price - The Spot price. The value must match exactly (or use wildcards;
+	//   greater than or less than comparison is not supported).
+	//   - timestamp - The time stamp of the Spot price history, in UTC format (for
+	//   example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?). Greater than or
+	//   less than comparison is not supported.
 	Filters []types.Filter
 
 	// Filters the results by the specified instance types.
 	InstanceTypes []types.InstanceType
 
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues
-	// from the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	// Filters the results by the specified basic product descriptions.
@@ -85,7 +92,7 @@ type DescribeSpotPriceHistoryInput struct {
 type DescribeSpotPriceHistoryOutput struct {
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// The historical Spot prices.
@@ -168,14 +175,14 @@ var _ DescribeSpotPriceHistoryAPIClient = (*Client)(nil)
 // DescribeSpotPriceHistoryPaginatorOptions is the paginator options for
 // DescribeSpotPriceHistory
 type DescribeSpotPriceHistoryPaginatorOptions struct {
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

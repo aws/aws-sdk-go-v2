@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a gateway that you previously shut down (see ShutdownGateway). After
-// the gateway starts, you can then make other API calls, your applications can
-// read from or write to the gateway's storage volumes and you will be able to take
+// Starts a gateway that you previously shut down (see ShutdownGateway ). After the
+// gateway starts, you can then make other API calls, your applications can read
+// from or write to the gateway's storage volumes and you will be able to take
 // snapshot backups. When you make a request, you will get a 200 OK success
 // response immediately. However, it might take some time for the gateway to be
 // ready. You should call DescribeGatewayInformation and check the status before
-// making any additional API calls. For more information, see ActivateGateway. To
+// making any additional API calls. For more information, see ActivateGateway . To
 // specify which gateway to start, use the Amazon Resource Name (ARN) of the
 // gateway in your request.
 func (c *Client) StartGateway(ctx context.Context, params *StartGatewayInput, optFns ...func(*Options)) (*StartGatewayOutput, error) {
@@ -34,8 +34,7 @@ func (c *Client) StartGateway(ctx context.Context, params *StartGatewayInput, op
 	return out, nil
 }
 
-// A JSON object containing the Amazon Resource Name (ARN) of the gateway to
-// start.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway to start.
 type StartGatewayInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
@@ -47,8 +46,8 @@ type StartGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
-// A JSON object containing the Amazon Resource Name (ARN) of the gateway that
-// was restarted.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
+// restarted.
 type StartGatewayOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

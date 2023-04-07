@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Evidently feature that you want to launch or test. You can define
-// up to five variations of a feature, and use these variations in your launches
-// and experiments. A feature must be created in a project. For information about
+// Creates an Evidently feature that you want to launch or test. You can define up
+// to five variations of a feature, and use these variations in your launches and
+// experiments. A feature must be created in a project. For information about
 // creating a project, see CreateProject (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html)
 // . Don't use this operation to update an existing feature. Instead, use
 // UpdateFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateFeature.html)
@@ -54,8 +54,8 @@ type CreateFeatureInput struct {
 	// The name of the variation to use as the default variation. The default
 	// variation is served to users who are not allocated to any ongoing launches or
 	// experiments of this feature. This variation must also be listed in the
-	// variations structure. If you omit defaultVariation, the first variation listed
-	// in the variations  structure is used as the default variation.
+	// variations structure. If you omit defaultVariation , the first variation listed
+	// in the variations structure is used as the default variation.
 	DefaultVariation *string
 
 	// An optional description of the feature.

@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Simple AD directory. For more information, see Simple Active
-// Directory (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html)
-// in the Directory Service Admin Guide. Before you call CreateDirectory, ensure
+// Creates a Simple AD directory. For more information, see Simple Active Directory (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html)
+// in the Directory Service Admin Guide. Before you call CreateDirectory , ensure
 // that all of the required permissions have been explicitly granted through a
 // policy. For details about what permissions are required to run the
 // CreateDirectory operation, see Directory Service API Permissions: Actions,
@@ -34,7 +33,7 @@ func (c *Client) CreateDirectory(ctx context.Context, params *CreateDirectoryInp
 	return out, nil
 }
 
-// Contains the inputs for the CreateDirectory  operation.
+// Contains the inputs for the CreateDirectory operation.
 type CreateDirectoryInput struct {
 
 	// The fully qualified name for the directory, such as corp.example.com .
@@ -47,14 +46,16 @@ type CreateDirectoryInput struct {
 	// this password. If you need to change the password for the administrator account,
 	// you can use the ResetUserPassword API call. The regex pattern for this string
 	// is made up of the following conditions:
-	//     - Length (?=^.{8,64}$) – Must be between 8 and 64 characters
-	// AND any 3 of
-	// the following password complexity rules required by Active Directory:
-	//     - Numbers and upper case and lowercase (?=.*\d)(?=.*[A-Z])(?=.*[a-z])
-	//     - Numbers and special characters and lower case (?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])
-	//     - Special characters and upper case and lower case (?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])
-	//     - Numbers and upper case and special characters (?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s])
-	//
+	//   - Length (?=^.{8,64}$) – Must be between 8 and 64 characters
+	// AND any 3 of the following password complexity rules required by Active
+	// Directory:
+	//   - Numbers and upper case and lowercase (?=.*\d)(?=.*[A-Z])(?=.*[a-z])
+	//   - Numbers and special characters and lower case
+	//   (?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])
+	//   - Special characters and upper case and lower case
+	//   (?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])
+	//   - Numbers and upper case and special characters
+	//   (?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s])
 	// For additional information about how Active Directory passwords are enforced,
 	// see Password must meet complexity requirements (https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements)
 	// on the Microsoft website.
@@ -83,7 +84,7 @@ type CreateDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the CreateDirectory  operation.
+// Contains the results of the CreateDirectory operation.
 type CreateDirectoryOutput struct {
 
 	// The identifier of the directory that was created.

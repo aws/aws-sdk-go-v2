@@ -13,25 +13,25 @@ import (
 
 // Returns an array of celebrities recognized in the input image. For more
 // information, see Recognizing celebrities in the Amazon Rekognition Developer
-// Guide. RecognizeCelebrities returns the 64 largest faces in the image. It
-// lists the recognized celebrities in the CelebrityFaces array and any
-// unrecognized faces in the UnrecognizedFaces  array. RecognizeCelebrities
-// doesn't return celebrities whose faces aren't among the largest 64 faces in the
-// image. For each celebrity recognized, RecognizeCelebrities  returns a Celebrity
-// object. The Celebrity object contains the celebrity name, ID, URL links to
-// additional information, match confidence, and a ComparedFace object that you
-// can use to locate the celebrity's face on the image. Amazon Rekognition doesn't
-// retain information about which images a celebrity has been recognized in. Your
+// Guide. RecognizeCelebrities returns the 64 largest faces in the image. It lists
+// the recognized celebrities in the CelebrityFaces array and any unrecognized
+// faces in the UnrecognizedFaces array. RecognizeCelebrities doesn't return
+// celebrities whose faces aren't among the largest 64 faces in the image. For each
+// celebrity recognized, RecognizeCelebrities returns a Celebrity object. The
+// Celebrity object contains the celebrity name, ID, URL links to additional
+// information, match confidence, and a ComparedFace object that you can use to
+// locate the celebrity's face on the image. Amazon Rekognition doesn't retain
+// information about which images a celebrity has been recognized in. Your
 // application must store this information and use the Celebrity ID property as a
 // unique identifier for the celebrity. If you don't store the celebrity name or
-// additional information URLs returned by RecognizeCelebrities, you will need
-// the ID to identify the celebrity in a call to the GetCelebrityInfo operation.
-// You pass the input image either as base64-encoded image bytes or as a reference
-// to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon
+// additional information URLs returned by RecognizeCelebrities , you will need the
+// ID to identify the celebrity in a call to the GetCelebrityInfo operation. You
+// pass the input image either as base64-encoded image bytes or as a reference to
+// an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon
 // Rekognition operations, passing image bytes is not supported. The image must be
 // either a PNG or JPEG formatted file. For an example, see Recognizing celebrities
 // in an image in the Amazon Rekognition Developer Guide. This operation requires
-// permissions to perform the rekognition:RecognizeCelebrities  operation.
+// permissions to perform the rekognition:RecognizeCelebrities operation.
 func (c *Client) RecognizeCelebrities(ctx context.Context, params *RecognizeCelebritiesInput, optFns ...func(*Options)) (*RecognizeCelebritiesOutput, error) {
 	if params == nil {
 		params = &RecognizeCelebritiesInput{}
@@ -49,10 +49,10 @@ func (c *Client) RecognizeCelebrities(ctx context.Context, params *RecognizeCele
 
 type RecognizeCelebritiesInput struct {
 
-	// The input image as base64-encoded bytes or an S3 object. If you use the AWS
-	// CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is
-	// not supported. If you are using an AWS SDK to call Amazon Rekognition, you might
-	// not need to base64-encode image bytes passed using the Bytes field. For more
+	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
+	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
+	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
+	// need to base64-encode image bytes passed using the Bytes field. For more
 	// information, see Images in the Amazon Rekognition developer guide.
 	//
 	// This member is required.
@@ -74,11 +74,11 @@ type RecognizeCelebritiesOutput struct {
 	// in an API response will always be NULL. The orientation of the input image
 	// (counterclockwise direction). If your application displays the image, you can
 	// use this value to correct the orientation. The bounding box coordinates returned
-	// in CelebrityFaces  and UnrecognizedFaces represent face locations before the
+	// in CelebrityFaces and UnrecognizedFaces represent face locations before the
 	// image orientation is corrected. If the input image is in .jpeg format, it might
 	// contain exchangeable image (Exif) metadata that includes the image's
 	// orientation. If so, and the Exif metadata for the input image populates the
-	// orientation field, the value of OrientationCorrection  is null. The
+	// orientation field, the value of OrientationCorrection is null. The
 	// CelebrityFaces and UnrecognizedFaces bounding box coordinates represent face
 	// locations after Exif metadata is used to correct the image orientation. Images
 	// in .png format don't contain Exif metadata.

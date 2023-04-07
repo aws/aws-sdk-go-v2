@@ -43,9 +43,9 @@ type AddTagsToResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource to which the tags are to be
 	// added, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster
-	// or arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot. ElastiCache
-	// resources are cluster and snapshot. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and Amazon Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// or arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot . ElastiCache
+	// resources are cluster and snapshot. For more information about ARNs, see Amazon
+	// Resource Names (ARNs) and Amazon Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// .
 	//
 	// This member is required.

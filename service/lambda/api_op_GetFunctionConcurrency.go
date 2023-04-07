@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns details about the reserved concurrency configuration for a function.
-// To set a concurrency limit for a function, use PutFunctionConcurrency .
+// Returns details about the reserved concurrency configuration for a function. To
+// set a concurrency limit for a function, use PutFunctionConcurrency .
 func (c *Client) GetFunctionConcurrency(ctx context.Context, params *GetFunctionConcurrencyInput, optFns ...func(*Options)) (*GetFunctionConcurrencyOutput, error) {
 	if params == nil {
 		params = &GetFunctionConcurrencyInput{}
@@ -30,12 +30,11 @@ func (c *Client) GetFunctionConcurrency(ctx context.Context, params *GetFunction
 type GetFunctionConcurrencyInput struct {
 
 	// The name of the Lambda function. Name formats
-	//     - Function name – my-function .
-	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
-	//     - Partial ARN – 123456789012:function:my-function .
-	// The length constraint
-	// applies only to the full ARN. If you specify only the function name, it is
-	// limited to 64 characters in length.
+	//   - Function name – my-function .
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string

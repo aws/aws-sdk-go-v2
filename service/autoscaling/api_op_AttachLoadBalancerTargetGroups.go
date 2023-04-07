@@ -10,21 +10,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API call has been replaced with a new "traffic sources" API call
-// (AttachTrafficSources) that can attach multiple traffic sources types. While we
-// continue to support AttachLoadBalancerTargetGroups, and you can use both the
+// This API call has been replaced with a new "traffic sources" API call (
+// AttachTrafficSources ) that can attach multiple traffic sources types. While we
+// continue to support AttachLoadBalancerTargetGroups , and you can use both the
 // original AttachLoadBalancerTargetGroups API call and the new
 // AttachTrafficSources API call on the same Auto Scaling group, we recommend using
 // the new "traffic sources" API call to simplify how you manage traffic sources.
 // Attaches one or more target groups to the specified Auto Scaling group. This
 // operation is used with the following load balancer types:
-//   - Application Load Balancer - Operates at the application layer (layer 7) and supports HTTP and HTTPS.
-//   - Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP, TLS, and UDP.
+//   - Application Load Balancer - Operates at the application layer (layer 7) and
+//     supports HTTP and HTTPS.
+//   - Network Load Balancer - Operates at the transport layer (layer 4) and
+//     supports TCP, TLS, and UDP.
 //   - Gateway Load Balancer - Operates at the network layer (layer 3).
 //
-// To
-// describe the target groups for an Auto Scaling group, call the
-// DescribeLoadBalancerTargetGroupsAPI. To detach the target group from the Auto
+// To describe the target groups for an Auto Scaling group, call the
+// DescribeLoadBalancerTargetGroups API. To detach the target group from the Auto
 // Scaling group, call the DetachLoadBalancerTargetGroups API. This operation is
 // additive and does not detach existing target groups or Classic Load Balancers
 // from the Auto Scaling group. For more information, see Use Elastic Load
@@ -52,9 +53,9 @@ type AttachLoadBalancerTargetGroupsInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The Amazon Resource Names (ARNs) of the target groups. You can specify up to
-	// 10 target groups. To get the ARN of a target group, use the Elastic Load
-	// Balancing DescribeTargetGroups (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// The Amazon Resource Names (ARNs) of the target groups. You can specify up to 10
+	// target groups. To get the ARN of a target group, use the Elastic Load Balancing
+	// DescribeTargetGroups (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
 	// API operation.
 	//
 	// This member is required.

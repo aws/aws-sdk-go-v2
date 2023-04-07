@@ -12,10 +12,10 @@ import (
 
 // Deletes a security group. If you attempt to delete a security group that is
 // associated with an instance, or is referenced by another security group, the
-// operation fails with InvalidGroup.InUse  in EC2-Classic or DependencyViolation
+// operation fails with InvalidGroup.InUse in EC2-Classic or DependencyViolation
 // in EC2-VPC. We are retiring EC2-Classic. We recommend that you migrate from
 // EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
-// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)in
+// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
 // the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DeleteSecurityGroup(ctx context.Context, params *DeleteSecurityGroupInput, optFns ...func(*Options)) (*DeleteSecurityGroupOutput, error) {
 	if params == nil {

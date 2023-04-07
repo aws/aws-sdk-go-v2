@@ -9,11 +9,11 @@ import (
 
 // An action defines the tasks that the extension performs during the AppConfig
 // workflow. Each action includes an action point such as
-// ON_CREATE_HOSTED_CONFIGURATION , PRE_DEPLOYMENT , or ON_DEPLOYMENT. Each
-// action also includes a name, a URI to an Lambda function, and an Amazon Resource
-// Name (ARN) for an Identity and Access Management assume role. You specify the
-// name, URI, and ARN for each action point defined in the extension. You can
-// specify the following actions for an extension:
+// ON_CREATE_HOSTED_CONFIGURATION , PRE_DEPLOYMENT , or ON_DEPLOYMENT . Each action
+// also includes a name, a URI to an Lambda function, and an Amazon Resource Name
+// (ARN) for an Identity and Access Management assume role. You specify the name,
+// URI, and ARN for each action point defined in the extension. You can specify the
+// following actions for an extension:
 //   - PRE_CREATE_HOSTED_CONFIGURATION_VERSION
 //   - PRE_START_DEPLOYMENT
 //   - ON_DEPLOYMENT_START
@@ -29,8 +29,7 @@ type Action struct {
 	// The action name.
 	Name *string
 
-	// An Amazon Resource Name (ARN) for an Identity and Access Management assume
-	// role.
+	// An Amazon Resource Name (ARN) for an Identity and Access Management assume role.
 	RoleArn *string
 
 	// The extension URI associated to the action point in the extension definition.
@@ -60,8 +59,7 @@ type ActionInvocation struct {
 	// A system-generated ID for this invocation.
 	InvocationId *string
 
-	// An Amazon Resource Name (ARN) for an Identity and Access Management assume
-	// role.
+	// An Amazon Resource Name (ARN) for an Identity and Access Management assume role.
 	RoleArn *string
 
 	// The extension URI associated to the action point in the extension definition.
@@ -140,12 +138,11 @@ type ConfigurationProfileSummary struct {
 	// The name of the configuration profile.
 	Name *string
 
-	// The type of configurations contained in the profile. AppConfig supports
-	// feature flags and freeform configurations. We recommend you create feature
-	// flag configurations to enable or disable new features and freeform
-	// configurations to distribute configurations to an application. When calling this
-	// API, enter one of the following values for Type : AWS.AppConfig.FeatureFlags
-	//
+	// The type of configurations contained in the profile. AppConfig supports feature
+	// flags and freeform configurations. We recommend you create feature flag
+	// configurations to enable or disable new features and freeform configurations to
+	// distribute configurations to an application. When calling this API, enter one of
+	// the following values for Type : AWS.AppConfig.FeatureFlags
 	//     AWS.Freeform
 	Type *string
 
@@ -278,17 +275,16 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an association between an extension and an AppConfig
-// resource such as an application, environment, or configuration profile. Call
+// Information about an association between an extension and an AppConfig resource
+// such as an application, environment, or configuration profile. Call
 // GetExtensionAssociation to get more information about an association.
 type ExtensionAssociationSummary struct {
 
 	// The system-generated Amazon Resource Name (ARN) for the extension.
 	ExtensionArn *string
 
-	// The extension association ID. This ID is used to call other
-	// ExtensionAssociation API actions such as GetExtensionAssociation  or
-	// DeleteExtensionAssociation .
+	// The extension association ID. This ID is used to call other ExtensionAssociation
+	// API actions such as GetExtensionAssociation or DeleteExtensionAssociation .
 	Id *string
 
 	// The ARNs of applications, configuration profiles, or environments defined in
@@ -298,8 +294,8 @@ type ExtensionAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an extension. Call GetExtension to get more information
-// about an extension.
+// Information about an extension. Call GetExtension to get more information about
+// an extension.
 type ExtensionSummary struct {
 
 	// The system-generated Amazon Resource Name (ARN) for the extension.
@@ -415,7 +411,7 @@ type Validator struct {
 	// This member is required.
 	Content *string
 
-	// AppConfig supports validators of type JSON_SCHEMA  and LAMBDA
+	// AppConfig supports validators of type JSON_SCHEMA and LAMBDA
 	//
 	// This member is required.
 	Type ValidatorType

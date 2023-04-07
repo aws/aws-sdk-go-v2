@@ -29,8 +29,8 @@ func (c *Client) DeleteFirewallPolicy(ctx context.Context, params *DeleteFirewal
 
 type DeleteFirewallPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the firewall policy. You must specify the
-	// ARN or the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall policy. You must specify the ARN
+	// or the name, and you can specify both.
 	FirewallPolicyArn *string
 
 	// The descriptive name of the firewall policy. You can't change the name of a

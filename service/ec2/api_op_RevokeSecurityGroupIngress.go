@@ -75,7 +75,7 @@ type RevokeSecurityGroupIngressInput struct {
 	IpPermissions []types.IpPermission
 
 	// The IP protocol name ( tcp , udp , icmp ) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
-	// ). Use -1  to specify all.
+	// ). Use -1 to specify all.
 	IpProtocol *string
 
 	// The IDs of the security group rules.
@@ -106,12 +106,11 @@ type RevokeSecurityGroupIngressInput struct {
 
 type RevokeSecurityGroupIngressOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, returns an error.
+	// Returns true if the request succeeds; otherwise, returns an error.
 	Return *bool
 
 	// The inbound rules that were unknown to the service. In some cases,
-	// unknownIpPermissionSetmight be in a different format from the request
-	// parameter.
+	// unknownIpPermissionSet might be in a different format from the request parameter.
 	UnknownIpPermissions []types.IpPermission
 
 	// Metadata pertaining to the operation's result.

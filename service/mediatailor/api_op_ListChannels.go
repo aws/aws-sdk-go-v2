@@ -33,7 +33,7 @@ type ListChannelsInput struct {
 
 	// The maximum number of channels that you want MediaTailor to return in response
 	// to the current request. If there are more than MaxResults channels, use the
-	// value of NextToken  in the response to get the next page of results.
+	// value of NextToken in the response to get the next page of results.
 	MaxResults int32
 
 	// Pagination token returned by the list request when results exceed the maximum
@@ -129,11 +129,11 @@ var _ ListChannelsAPIClient = (*Client)(nil)
 type ListChannelsPaginatorOptions struct {
 	// The maximum number of channels that you want MediaTailor to return in response
 	// to the current request. If there are more than MaxResults channels, use the
-	// value of NextToken  in the response to get the next page of results.
+	// value of NextToken in the response to get the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

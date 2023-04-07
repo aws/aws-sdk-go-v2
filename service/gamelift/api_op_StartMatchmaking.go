@@ -22,9 +22,9 @@ import (
 // specify a matchmaking configuration, and include the players to be matched. You
 // must also include any player attributes that are required by the matchmaking
 // configuration's rule set. If successful, a matchmaking ticket is returned with
-// status set to QUEUED. Track matchmaking events to respond as needed and
-// acquire game session connection information for successfully completed matches.
-// Ticket status updates are tracked using event notification through Amazon Simple
+// status set to QUEUED . Track matchmaking events to respond as needed and acquire
+// game session connection information for successfully completed matches. Ticket
+// status updates are tracked using event notification through Amazon Simple
 // Notification Service, which is defined in the matchmaking configuration. Learn
 // more Add FlexMatch to a game client (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
 // Set Up FlexMatch event notification (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
@@ -56,7 +56,7 @@ type StartMatchmakingInput struct {
 	// Information on each player to be matched. This information must include a
 	// player ID, and may contain player attributes and latency data to be used in the
 	// matchmaking process. After a successful match, Player objects contain the name
-	// of the team the player is assigned to. You can include up to 10 Players  in a
+	// of the team the player is assigned to. You can include up to 10 Players in a
 	// StartMatchmaking request.
 	//
 	// This member is required.

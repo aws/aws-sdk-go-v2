@@ -33,8 +33,8 @@ func (e *AccessPointNotFoundException) ErrorCode() string {
 }
 func (e *AccessPointNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified ARN does not refer to a valid SSL certificate in AWS Identity
-// and Access Management (IAM) or AWS Certificate Manager (ACM). Note that if you
+// The specified ARN does not refer to a valid SSL certificate in AWS Identity and
+// Access Management (IAM) or AWS Certificate Manager (ACM). Note that if you
 // recently uploaded the certificate to IAM, this error might indicate that the
 // certificate is not fully available yet.
 type CertificateNotFoundException struct {
@@ -62,8 +62,8 @@ func (e *CertificateNotFoundException) ErrorCode() string {
 }
 func (e *CertificateNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A request made by Elastic Load Balancing to another service exceeds the
-// maximum request rate permitted for your account.
+// A request made by Elastic Load Balancing to another service exceeds the maximum
+// request rate permitted for your account.
 type DependencyThrottleException struct {
 	Message *string
 

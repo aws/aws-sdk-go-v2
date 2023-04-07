@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests a description of one or more stacks. Required Permissions: To use
-// this action, an IAM user must have a Show, Deploy, or Manage permissions level
-// for the stack, or an attached policy that explicitly grants permissions. For
-// more information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// Requests a description of one or more stacks. Required Permissions: To use this
+// action, an IAM user must have a Show, Deploy, or Manage permissions level for
+// the stack, or an attached policy that explicitly grants permissions. For more
+// information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
 // .
 func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput, optFns ...func(*Options)) (*DescribeStacksOutput, error) {
 	if params == nil {
@@ -33,17 +33,17 @@ func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput
 
 type DescribeStacksInput struct {
 
-	// An array of stack IDs that specify the stacks to be described. If you omit
-	// this parameter, DescribeStacks  returns a description of every stack.
+	// An array of stack IDs that specify the stacks to be described. If you omit this
+	// parameter, DescribeStacks returns a description of every stack.
 	StackIds []string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeStacks  request.
+// Contains the response to a DescribeStacks request.
 type DescribeStacksOutput struct {
 
-	// An array of Stack  objects that describe the stacks.
+	// An array of Stack objects that describe the stacks.
 	Stacks []types.Stack
 
 	// Metadata pertaining to the operation's result.

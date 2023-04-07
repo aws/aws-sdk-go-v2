@@ -12,8 +12,8 @@ import (
 )
 
 // Returns a list of upgrade compatible Elastisearch versions. You can optionally
-// pass a DomainName to get all upgrade compatible Elasticsearch versions for
-// that specific domain.
+// pass a DomainName to get all upgrade compatible Elasticsearch versions for that
+// specific domain.
 func (c *Client) GetCompatibleElasticsearchVersions(ctx context.Context, params *GetCompatibleElasticsearchVersionsInput, optFns ...func(*Options)) (*GetCompatibleElasticsearchVersionsOutput, error) {
 	if params == nil {
 		params = &GetCompatibleElasticsearchVersionsInput{}
@@ -33,17 +33,16 @@ func (c *Client) GetCompatibleElasticsearchVersions(ctx context.Context, params 
 // operation.
 type GetCompatibleElasticsearchVersionsInput struct {
 
-	// The name of an Elasticsearch domain. Domain names are unique across the
-	// domains owned by an account within an AWS region. Domain names start with a
-	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
-	// and - (hyphen).
+	// The name of an Elasticsearch domain. Domain names are unique across the domains
+	// owned by an account within an AWS region. Domain names start with a letter or
+	// number and can contain the following characters: a-z (lowercase), 0-9, and -
+	// (hyphen).
 	DomainName *string
 
 	noSmithyDocumentSerde
 }
 
-// Container for response returned by GetCompatibleElasticsearchVersions
-// operation.
+// Container for response returned by GetCompatibleElasticsearchVersions operation.
 type GetCompatibleElasticsearchVersionsOutput struct {
 
 	// A map of compatible Elasticsearch versions returned as part of the

@@ -39,7 +39,7 @@ type ListPipelineParametersForExecutionInput struct {
 	MaxResults *int32
 
 	// If the result of the previous ListPipelineParametersForExecution request was
-	// truncated, the response includes a NextToken. To retrieve the next set of
+	// truncated, the response includes a NextToken . To retrieve the next set of
 	// parameters, use the token in the next request.
 	NextToken *string
 
@@ -49,7 +49,7 @@ type ListPipelineParametersForExecutionInput struct {
 type ListPipelineParametersForExecutionOutput struct {
 
 	// If the result of the previous ListPipelineParametersForExecution request was
-	// truncated, the response includes a NextToken. To retrieve the next set of
+	// truncated, the response includes a NextToken . To retrieve the next set of
 	// parameters, use the token in the next request.
 	NextToken *string
 
@@ -133,14 +133,14 @@ type ListPipelineParametersForExecutionAPIClient interface {
 
 var _ ListPipelineParametersForExecutionAPIClient = (*Client)(nil)
 
-// ListPipelineParametersForExecutionPaginatorOptions is the paginator options
-// for ListPipelineParametersForExecution
+// ListPipelineParametersForExecutionPaginatorOptions is the paginator options for
+// ListPipelineParametersForExecution
 type ListPipelineParametersForExecutionPaginatorOptions struct {
 	// The maximum number of parameters to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

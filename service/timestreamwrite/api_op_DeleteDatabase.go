@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a given Timestream database. This is an irreversible operation. After
-// a database is deleted, the time-series data from its tables cannot be recovered.
+// Deletes a given Timestream database. This is an irreversible operation. After a
+// database is deleted, the time-series data from its tables cannot be recovered.
 // All tables in the database must be deleted first, or a ValidationException error
 // will be thrown. Due to the nature of distributed retries, the operation can
 // return either success or a ResourceNotFoundException. Clients should consider

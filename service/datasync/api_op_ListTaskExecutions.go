@@ -34,8 +34,8 @@ type ListTaskExecutionsInput struct {
 	// The maximum number of executed tasks to list.
 	MaxResults *int32
 
-	// An opaque string that indicates the position at which to begin the next list
-	// of the executed tasks.
+	// An opaque string that indicates the position at which to begin the next list of
+	// the executed tasks.
 	NextToken *string
 
 	// The Amazon Resource Name (ARN) of the task whose tasks you want to list.
@@ -134,8 +134,8 @@ type ListTaskExecutionsPaginatorOptions struct {
 	// The maximum number of executed tasks to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

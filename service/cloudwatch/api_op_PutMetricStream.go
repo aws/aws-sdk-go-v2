@@ -15,16 +15,18 @@ import (
 // CloudWatch metrics to Amazon Web Services destinations, including Amazon S3, and
 // to many third-party solutions. For more information, see Using Metric Streams (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html)
 // . To create a metric stream, you must be signed in to an account that has the
-// iam:PassRole permission and either the CloudWatchFullAccess  policy or the
-// cloudwatch:PutMetricStreampermission. When you create or update a metric
+// iam:PassRole permission and either the CloudWatchFullAccess policy or the
+// cloudwatch:PutMetricStream permission. When you create or update a metric
 // stream, you choose one of the following:
 //   - Stream metrics from all metric namespaces in the account.
-//   - Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters .
-//   - Stream metrics from only the metric namespaces that you list in IncludeFilters .
+//   - Stream metrics from all metric namespaces in the account, except for the
+//     namespaces that you list in ExcludeFilters .
+//   - Stream metrics from only the metric namespaces that you list in
+//     IncludeFilters .
 //
 // By default, a metric stream always sends the MAX , MIN , SUM , and SAMPLECOUNT
 // statistics for each metric that is streamed. You can use the
-// StatisticsConfigurationsparameter to have the metric stream send additional
+// StatisticsConfigurations parameter to have the metric stream send additional
 // statistics in the stream. Streaming additional statistics incurs additional
 // costs. For more information, see Amazon CloudWatch Pricing (https://aws.amazon.com/cloudwatch/pricing/)
 // . When you use PutMetricStream to create a new metric stream, the stream is
@@ -66,7 +68,7 @@ type PutMetricStreamInput struct {
 	// This member is required.
 	Name *string
 
-	// The output format for the stream. Valid values are json  and opentelemetry0.7.
+	// The output format for the stream. Valid values are json and opentelemetry0.7 .
 	// For more information about metric stream output formats, see Metric streams
 	// output formats (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html)
 	// .
@@ -78,19 +80,19 @@ type PutMetricStreamInput struct {
 	// Kinesis Data Firehose resources. This IAM role must already exist and must be in
 	// the same account as the metric stream. This IAM role must include the following
 	// permissions:
-	//     - firehose:PutRecord
-	//     - firehose:PutRecordBatch
+	//   - firehose:PutRecord
+	//   - firehose:PutRecordBatch
 	//
 	// This member is required.
 	RoleArn *string
 
 	// If you specify this parameter, the stream sends metrics from all metric
 	// namespaces except for the namespaces that you specify here. You cannot include
-	// ExcludeFilters and IncludeFilters  in the same operation.
+	// ExcludeFilters and IncludeFilters in the same operation.
 	ExcludeFilters []types.MetricStreamFilter
 
 	// If you specify this parameter, the stream sends only the metrics from the
-	// metric namespaces that you specify here. You cannot include IncludeFilters  and
+	// metric namespaces that you specify here. You cannot include IncludeFilters and
 	// ExcludeFilters in the same operation.
 	IncludeFilters []types.MetricStreamFilter
 
@@ -103,11 +105,11 @@ type PutMetricStreamInput struct {
 	// the metric stream also send additional statistics in the stream. This array can
 	// have up to 100 members. For each entry in this array, you specify one or more
 	// metrics and the list of additional statistics to stream for those metrics. The
-	// additional statistics that you can stream depend on the stream's OutputFormat.
-	// If the OutputFormat  is json, you can stream any additional statistic that is
+	// additional statistics that you can stream depend on the stream's OutputFormat .
+	// If the OutputFormat is json , you can stream any additional statistic that is
 	// supported by CloudWatch, listed in CloudWatch statistics definitions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html)
-	// . If the OutputFormat  is opentelemetry0.7, you can stream percentile
-	// statistics such as p95, p99.9, and so on.
+	// . If the OutputFormat is opentelemetry0.7 , you can stream percentile statistics
+	// such as p95, p99.9, and so on.
 	StatisticsConfigurations []types.MetricStreamStatisticsConfiguration
 
 	// A list of key-value pairs to associate with the metric stream. You can

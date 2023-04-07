@@ -14,9 +14,8 @@ import (
 
 // Searches for cases within their associated Cases domain. Search results are
 // returned as a paginated list of abridged case documents. For customer_id you
-// must provide the full customer profile ARN in this format:
-// arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain
-// name/profiles/profile ID .
+// must provide the full customer profile ARN in this format: arn:aws:profile:your
+// AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID .
 func (c *Client) SearchCases(ctx context.Context, params *SearchCasesInput, optFns ...func(*Options)) (*SearchCasesOutput, error) {
 	if params == nil {
 		params = &SearchCasesInput{}
@@ -65,7 +64,7 @@ type SearchCasesInput struct {
 
 type SearchCasesOutput struct {
 
-	// A list of case documents where each case contains the properties CaseId  and
+	// A list of case documents where each case contains the properties CaseId and
 	// Fields where each field is a complex union structure.
 	//
 	// This member is required.
@@ -157,8 +156,8 @@ type SearchCasesPaginatorOptions struct {
 	// 25. This is also the default value when no other value is provided.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

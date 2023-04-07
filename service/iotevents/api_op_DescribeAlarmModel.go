@@ -13,7 +13,7 @@ import (
 )
 
 // Retrieves information about an alarm model. If you don't specify a value for
-// the alarmModelVersion  parameter, the latest version is returned.
+// the alarmModelVersion parameter, the latest version is returned.
 func (c *Client) DescribeAlarmModel(ctx context.Context, params *DescribeAlarmModelInput, optFns ...func(*Options)) (*DescribeAlarmModelOutput, error) {
 	if params == nil {
 		params = &DescribeAlarmModelInput{}
@@ -81,8 +81,8 @@ type DescribeAlarmModelOutput struct {
 	// The time the alarm model was last updated, in the Unix epoch format.
 	LastUpdateTime *time.Time
 
-	// The ARN of the IAM role that allows the alarm to perform actions and access
-	// AWS resources. For more information, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// The ARN of the IAM role that allows the alarm to perform actions and access AWS
+	// resources. For more information, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference.
 	RoleArn *string
 
@@ -90,10 +90,13 @@ type DescribeAlarmModelOutput struct {
 	Severity *int32
 
 	// The status of the alarm model. The status can be one of the following values:
-	//     - ACTIVE - The alarm model is active and it's ready to evaluate data.
-	//     - ACTIVATING - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.
-	//     - INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.
-	//     - FAILED - You couldn't create or update the alarm model. Check your alarm model information and try again.
+	//   - ACTIVE - The alarm model is active and it's ready to evaluate data.
+	//   - ACTIVATING - AWS IoT Events is activating your alarm model. Activating an
+	//   alarm model can take up to a few minutes.
+	//   - INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data.
+	//   Check your alarm model information and update the alarm model.
+	//   - FAILED - You couldn't create or update the alarm model. Check your alarm
+	//   model information and try again.
 	Status types.AlarmModelVersionStatus
 
 	// Contains information about the status of the alarm model.

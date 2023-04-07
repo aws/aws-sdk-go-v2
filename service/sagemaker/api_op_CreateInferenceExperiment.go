@@ -45,8 +45,8 @@ type CreateInferenceExperimentInput struct {
 	EndpointName *string
 
 	// An array of ModelVariantConfig objects. There is one for each variant in the
-	// inference experiment. Each ModelVariantConfig object in the array describes
-	// the infrastructure configuration for the corresponding variant.
+	// inference experiment. Each ModelVariantConfig object in the array describes the
+	// infrastructure configuration for the corresponding variant.
 	//
 	// This member is required.
 	ModelVariants []types.ModelVariantConfig
@@ -74,7 +74,9 @@ type CreateInferenceExperimentInput struct {
 
 	// The type of the inference experiment that you want to run. The following types
 	// of experiments are possible:
-	//     - ShadowMode : You can use this type to validate a shadow variant. For more information, see Shadow tests (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html) .
+	//   - ShadowMode : You can use this type to validate a shadow variant. For more
+	//   information, see Shadow tests (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html)
+	//   .
 	//
 	// This member is required.
 	Type types.InferenceExperimentType
@@ -92,23 +94,24 @@ type CreateInferenceExperimentInput struct {
 	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
 	// ML compute instance that hosts the endpoint. The KmsKey can be any of the
 	// following formats:
-	//     - KMS key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//     - Amazon Resource Name (ARN) of a KMS key "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
-	//     - KMS key Alias "alias/ExampleAlias"
-	//     - Amazon Resource Name (ARN) of a KMS key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
-	//
+	//   - KMS key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - Amazon Resource Name (ARN) of a KMS key
+	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - KMS key Alias "alias/ExampleAlias"
+	//   - Amazon Resource Name (ARN) of a KMS key Alias
+	//   "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	// If you use a KMS key ID or an alias of your KMS key, the Amazon SageMaker
-	// execution role must include permissions to call kms:Encrypt. If you don't
+	// execution role must include permissions to call kms:Encrypt . If you don't
 	// provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3
 	// for your role's account. Amazon SageMaker uses server-side encryption with KMS
 	// managed keys for OutputDataConfig . If you use a bucket policy with an
-	// s3:PutObjectpermission that only allows objects with server-side encryption,
-	// set the condition key of s3:x-amz-server-side-encryption  to "aws:kms". For
-	// more information, see KMS managed Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
+	// s3:PutObject permission that only allows objects with server-side encryption,
+	// set the condition key of s3:x-amz-server-side-encryption to "aws:kms" . For more
+	// information, see KMS managed Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
 	// in the Amazon Simple Storage Service Developer Guide. The KMS key policy must
-	// grant permission to the IAM role that you specify in your CreateEndpoint  and
-	// UpdateEndpoint requests. For more information, see Using Key Policies in
-	// Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+	// grant permission to the IAM role that you specify in your CreateEndpoint and
+	// UpdateEndpoint requests. For more information, see Using Key Policies in Amazon
+	// Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	KmsKey *string
 

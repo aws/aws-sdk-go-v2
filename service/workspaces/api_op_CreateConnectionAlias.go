@@ -32,7 +32,7 @@ func (c *Client) CreateConnectionAlias(ctx context.Context, params *CreateConnec
 type CreateConnectionAliasInput struct {
 
 	// A connection string in the form of a fully qualified domain name (FQDN), such
-	// as www.example.com. After you create a connection string, it is always
+	// as www.example.com . After you create a connection string, it is always
 	// associated to your Amazon Web Services account. You cannot recreate the same
 	// connection string with a different account, even if you delete all instances of
 	// it from the original account. The connection string is globally reserved for

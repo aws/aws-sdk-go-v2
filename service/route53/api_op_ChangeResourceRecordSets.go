@@ -29,7 +29,7 @@ import (
 // www.example.com and creates an alias resource record set for www.example.com. If
 // validation for both records succeeds, Route 53 deletes the first resource record
 // set and creates the second resource record set in a single operation. If
-// validation for either the DELETE  or the CREATE action fails, then the request
+// validation for either the DELETE or the CREATE action fails, then the request
 // is canceled, and the original CNAME record continues to exist. If you try to
 // delete the same resource record set more than once in a single change batch,
 // Route 53 returns an InvalidChangeBatch error. Traffic Flow To create resource
@@ -44,8 +44,10 @@ import (
 // in the Amazon Route 53 Developer Guide. Create, Delete, and Upsert Use
 // ChangeResourceRecordsSetsRequest to perform the following actions:
 //   - CREATE : Creates a resource record set that has the specified values.
-//   - DELETE : Deletes an existing resource record set that has the specified values.
-//   - UPSERT : If a resource set exists Route 53 updates it with the values in the request.
+//   - DELETE : Deletes an existing resource record set that has the specified
+//     values.
+//   - UPSERT : If a resource set exists Route 53 updates it with the values in the
+//     request.
 //
 // Syntaxes for Creating, Updating, and Deleting Resource Record Sets The syntax
 // for a request depends on the type of resource record set that you want to
@@ -54,15 +56,14 @@ import (
 // example for each type of resource record set, see "Examples." Don't refer to the
 // syntax in the "Parameter Syntax" section, which includes all of the elements for
 // every kind of resource record set that you can create, delete, or update by
-// using ChangeResourceRecordSets. Change Propagation to Route 53 DNS Servers
-// When you submit a ChangeResourceRecordSets request, Route 53 propagates your
-// changes to all of the Route 53 authoritative DNS servers. While your changes are
-// propagating, GetChange  returns a status of PENDING. When propagation is
-// complete, GetChange  returns a status of INSYNC. Changes generally propagate
-// to all Route 53 name servers within 60 seconds. For more information, see
-// GetChange (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html)
+// using ChangeResourceRecordSets . Change Propagation to Route 53 DNS Servers When
+// you submit a ChangeResourceRecordSets request, Route 53 propagates your changes
+// to all of the Route 53 authoritative DNS servers. While your changes are
+// propagating, GetChange returns a status of PENDING . When propagation is
+// complete, GetChange returns a status of INSYNC . Changes generally propagate to
+// all Route 53 name servers within 60 seconds. For more information, see GetChange (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html)
 // . Limits on ChangeResourceRecordSets Requests For information about the limits
-// on a ChangeResourceRecordSets  request, see Limits (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
+// on a ChangeResourceRecordSets request, see Limits (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
 // in the Amazon Route 53 Developer Guide.
 func (c *Client) ChangeResourceRecordSets(ctx context.Context, params *ChangeResourceRecordSetsInput, optFns ...func(*Options)) (*ChangeResourceRecordSetsOutput, error) {
 	if params == nil {
@@ -82,7 +83,7 @@ func (c *Client) ChangeResourceRecordSets(ctx context.Context, params *ChangeRes
 // A complex type that contains change information for the resource record set.
 type ChangeResourceRecordSetsInput struct {
 
-	// A complex type that contains an optional comment and the Changes  element.
+	// A complex type that contains an optional comment and the Changes element.
 	//
 	// This member is required.
 	ChangeBatch *types.ChangeBatch

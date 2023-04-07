@@ -17,8 +17,8 @@ import (
 // communication over private IP addresses. You cannot enable your VPC for
 // ClassicLink if any of your VPC route tables have existing routes for address
 // ranges within the 10.0.0.0/8 IP address range, excluding local routes for VPCs
-// in the 10.0.0.0/16  and 10.1.0.0/16 IP address ranges. For more information,
-// see ClassicLink (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
+// in the 10.0.0.0/16 and 10.1.0.0/16 IP address ranges. For more information, see
+// ClassicLink (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) EnableVpcClassicLink(ctx context.Context, params *EnableVpcClassicLinkInput, optFns ...func(*Options)) (*EnableVpcClassicLinkOutput, error) {
 	if params == nil {
@@ -53,7 +53,7 @@ type EnableVpcClassicLinkInput struct {
 
 type EnableVpcClassicLinkOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

@@ -13,7 +13,7 @@ import (
 )
 
 // Removes the association of tags from an Amazon DynamoDB resource. You can call
-// UntagResourceup to five times per second, per account. For an overview on
+// UntagResource up to five times per second, per account. For an overview on
 // tagging DynamoDB resources, see Tagging for DynamoDB (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
 // in the Amazon DynamoDB Developer Guide.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {

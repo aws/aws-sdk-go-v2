@@ -54,7 +54,7 @@ type ListStagesOutput struct {
 	// last one finished.
 	NextToken *string
 
-	// A list of stage summaries. You can use the stage names in the UpdateStage  and
+	// A list of stage summaries. You can use the stage names in the UpdateStage and
 	// GetStage actions.
 	Stages []types.StageSummary
 
@@ -140,8 +140,8 @@ type ListStagesPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

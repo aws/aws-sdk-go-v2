@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an Amazon VPC with a specified query logging configuration. Route
-// 53 Resolver logs DNS queries that originate in all of the Amazon VPCs that are
+// Associates an Amazon VPC with a specified query logging configuration. Route 53
+// Resolver logs DNS queries that originate in all of the Amazon VPCs that are
 // associated with a specified query logging configuration. To associate more than
 // one VPC with a configuration, submit one AssociateResolverQueryLogConfig
 // request for each VPC. The VPCs that you associate with a query logging
@@ -36,8 +36,7 @@ func (c *Client) AssociateResolverQueryLogConfig(ctx context.Context, params *As
 
 type AssociateResolverQueryLogConfigInput struct {
 
-	// The ID of the query logging configuration that you want to associate a VPC
-	// with.
+	// The ID of the query logging configuration that you want to associate a VPC with.
 	//
 	// This member is required.
 	ResolverQueryLogConfigId *string

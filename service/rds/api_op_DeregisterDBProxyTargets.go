@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove the association between one or more DBProxyTarget  data structures and a
+// Remove the association between one or more DBProxyTarget data structures and a
 // DBProxyTargetGroup .
 func (c *Client) DeregisterDBProxyTargets(ctx context.Context, params *DeregisterDBProxyTargetsInput, optFns ...func(*Options)) (*DeregisterDBProxyTargetsOutput, error) {
 	if params == nil {
@@ -29,7 +29,7 @@ func (c *Client) DeregisterDBProxyTargets(ctx context.Context, params *Deregiste
 
 type DeregisterDBProxyTargetsInput struct {
 
-	// The identifier of the DBProxy  that is associated with the DBProxyTargetGroup .
+	// The identifier of the DBProxy that is associated with the DBProxyTargetGroup .
 	//
 	// This member is required.
 	DBProxyName *string

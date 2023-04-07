@@ -30,7 +30,7 @@ func (c *Client) DeleteOutboundConnection(ctx context.Context, params *DeleteOut
 	return out, nil
 }
 
-// Container for the parameters to the DeleteOutboundConnection  operation.
+// Container for the parameters to the DeleteOutboundConnection operation.
 type DeleteOutboundConnectionInput struct {
 
 	// The ID of the outbound connection you want to permanently delete.

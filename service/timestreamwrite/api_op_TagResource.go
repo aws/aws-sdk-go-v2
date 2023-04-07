@@ -33,8 +33,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// Identifies the Timestream resource to which tags should be added. This value
-	// is an Amazon Resource Name (ARN).
+	// Identifies the Timestream resource to which tags should be added. This value is
+	// an Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceARN *string

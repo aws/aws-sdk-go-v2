@@ -41,9 +41,9 @@ type AddressBookData struct {
 // supported format is MP3. To convert your MP3 audio files to an Alexa-friendly,
 // required codec version (MPEG version 2) and bit rate (48 kbps), you might use
 // converter software. One option for this is a command-line tool, FFmpeg. For more
-// information, see FFmpeg (https://www.ffmpeg.org/). The following command
-// converts the provided to an MP3 file that is played in the announcement:
-// ffmpeg -i -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000
+// information, see FFmpeg (https://www.ffmpeg.org/) . The following command
+// converts the provided to an MP3 file that is played in the announcement: ffmpeg
+// -i -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000
 type Audio struct {
 
 	// The locale of the audio message. Currently, en-US is supported.
@@ -159,8 +159,8 @@ type Category struct {
 	noSmithyDocumentSerde
 }
 
-// The default conference provider that is used if no other scheduled meetings
-// are detected.
+// The default conference provider that is used if no other scheduled meetings are
+// detected.
 type ConferencePreference struct {
 
 	// The ARN of the default conference provider.
@@ -169,10 +169,10 @@ type ConferencePreference struct {
 	noSmithyDocumentSerde
 }
 
-// An entity that provides a conferencing solution. Alexa for Business acts as
-// the voice interface and mediator that connects users to their preferred
-// conference provider. Examples of conference providers include Amazon Chime,
-// Zoom, Cisco, and Polycom.
+// An entity that provides a conferencing solution. Alexa for Business acts as the
+// voice interface and mediator that connects users to their preferred conference
+// provider. Examples of conference providers include Amazon Chime, Zoom, Cisco,
+// and Polycom.
 type ConferenceProvider struct {
 
 	// The ARN of the newly created conference provider.
@@ -346,8 +346,8 @@ type CreateRequireCheckIn struct {
 	// This member is required.
 	Enabled *bool
 
-	// Duration between 5 and 20 minutes to determine when to release the room if
-	// it's not checked into.
+	// Duration between 5 and 20 minutes to determine when to release the room if it's
+	// not checked into.
 	//
 	// This member is required.
 	ReleaseAfterMinutes *int32
@@ -675,11 +675,12 @@ type MeetingRoomConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The values that indicate whether a pin is always required (YES), never
-// required (NO), or OPTIONAL.
+// The values that indicate whether a pin is always required (YES), never required
+// (NO), or OPTIONAL.
 //   - If YES, Alexa will always ask for a meeting pin.
 //   - If NO, Alexa will never ask for a meeting pin.
-//   - If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer responds with yes, it will ask for the meeting pin.
+//   - If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer
+//     responds with yes, it will ask for the meeting pin.
 type MeetingSetting struct {
 
 	// The values that indicate whether the pin is always required.
@@ -725,9 +726,8 @@ type NetworkProfile struct {
 	// The SSID of the Wi-Fi network.
 	Ssid *string
 
-	// The root certificates of your authentication server, which is installed on
-	// your devices and used to trust your authentication server during EAP
-	// negotiation.
+	// The root certificates of your authentication server, which is installed on your
+	// devices and used to trust your authentication server during EAP negotiation.
 	TrustAnchors []string
 
 	noSmithyDocumentSerde
@@ -904,8 +904,8 @@ type RequireCheckIn struct {
 	// Whether require check in is enabled or not.
 	Enabled *bool
 
-	// Duration between 5 and 20 minutes to determine when to release the room if
-	// it's not checked into.
+	// Duration between 5 and 20 minutes to determine when to release the room if it's
+	// not checked into.
 	ReleaseAfterMinutes *int32
 
 	noSmithyDocumentSerde
@@ -959,8 +959,8 @@ type RoomData struct {
 // A skill parameter associated with a room.
 type RoomSkillParameter struct {
 
-	// The parameter key of a room skill parameter. ParameterKey is an enumerated
-	// type that only takes “DEFAULT” or “SCOPE” as valid values.
+	// The parameter key of a room skill parameter. ParameterKey is an enumerated type
+	// that only takes “DEFAULT” or “SCOPE” as valid values.
 	//
 	// This member is required.
 	ParameterKey *string
@@ -1001,8 +1001,7 @@ type SkillDetails struct {
 	// The URL of the end user license agreement.
 	EndUserLicenseAgreement *string
 
-	// The generic keywords associated with the skill that can be used to find a
-	// skill.
+	// The generic keywords associated with the skill that can be used to find a skill.
 	GenericKeywords []string
 
 	// The phrase used to trigger the skill.
@@ -1254,8 +1253,8 @@ type UpdateRequireCheckIn struct {
 	// Whether require check in is enabled or not.
 	Enabled *bool
 
-	// Duration between 5 and 20 minutes to determine when to release the room if
-	// it's not checked into.
+	// Duration between 5 and 20 minutes to determine when to release the room if it's
+	// not checked into.
 	ReleaseAfterMinutes *int32
 
 	noSmithyDocumentSerde

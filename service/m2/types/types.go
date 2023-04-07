@@ -81,8 +81,8 @@ type ApplicationSummary struct {
 	// The unique identifier of the runtime environment that hosts this application.
 	EnvironmentId *string
 
-	// The timestamp when you last started the application. Null until the
-	// application runs for the first time.
+	// The timestamp when you last started the application. Null until the application
+	// runs for the first time.
 	LastStartTime *time.Time
 
 	// Indicates the status of the latest version of the application.
@@ -657,9 +657,9 @@ type FsxStorageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The required attributes for a generation data group data set. A generation
-// data set is one of a collection of successive, historically related, catalogued
-// data sets that together are known as a generation data group (GDG). Use this
+// The required attributes for a generation data group data set. A generation data
+// set is one of a collection of successive, historically related, catalogued data
+// sets that together are known as a generation data group (GDG). Use this
 // structure when you want to import a GDG. For more information on GDG, see
 // Generation data sets (https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets)
 // .
@@ -674,9 +674,9 @@ type GdgAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// The required attributes for a generation data group data set. A generation
-// data set is one of a collection of successive, historically related, catalogued
-// data sets that together are known as a generation data group (GDG). Use this
+// The required attributes for a generation data group data set. A generation data
+// set is one of a collection of successive, historically related, catalogued data
+// sets that together are known as a generation data group (GDG). Use this
 // structure when you want to import a GDG. For more information on GDG, see
 // Generation data sets (https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets)
 // .
@@ -702,9 +702,9 @@ type HighAvailabilityConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A subset of the attributes that describe a log group. In CloudWatch a log
-// group is a group of log streams that share the same retention, monitoring, and
-// access control settings.
+// A subset of the attributes that describe a log group. In CloudWatch a log group
+// is a group of log streams that share the same retention, monitoring, and access
+// control settings.
 type LogGroupSummary struct {
 
 	// The name of the log group.

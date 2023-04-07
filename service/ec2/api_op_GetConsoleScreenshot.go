@@ -40,7 +40,7 @@ type GetConsoleScreenshotInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// When set to true, acts as keystroke input and wakes up an instance that's in
+	// When set to true , acts as keystroke input and wakes up an instance that's in
 	// standby or "sleep" mode.
 	WakeUp *bool
 

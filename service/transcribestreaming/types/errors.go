@@ -9,7 +9,7 @@ import (
 
 // One or more arguments to the StartStreamTranscription ,
 // StartMedicalStreamTranscription , or StartCallAnalyticsStreamTranscription
-// operation was not valid. For example, MediaEncoding  or LanguageCode used not
+// operation was not valid. For example, MediaEncoding or LanguageCode used not
 // valid values. Check the specified parameters and try your request again.
 type BadRequestException struct {
 	Message *string
@@ -90,9 +90,9 @@ func (e *InternalFailureException) ErrorCode() string {
 }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Your client has exceeded one of the Amazon Transcribe limits. This is
-// typically the audio length limit. Break your audio stream into smaller chunks
-// and try your request again.
+// Your client has exceeded one of the Amazon Transcribe limits. This is typically
+// the audio length limit. Break your audio stream into smaller chunks and try your
+// request again.
 type LimitExceededException struct {
 	Message *string
 

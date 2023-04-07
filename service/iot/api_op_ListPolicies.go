@@ -32,8 +32,8 @@ func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, op
 // The input for the ListPolicies operation.
 type ListPoliciesInput struct {
 
-	// Specifies the order for results. If true, the results are returned in
-	// ascending creation order.
+	// Specifies the order for results. If true, the results are returned in ascending
+	// creation order.
 	AscendingOrder bool
 
 	// The marker for the next set of results.
@@ -133,8 +133,8 @@ type ListPoliciesPaginatorOptions struct {
 	// The result page size.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

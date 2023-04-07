@@ -14,15 +14,15 @@ import (
 // The DeleteDBInstance action deletes a previously provisioned DB instance. When
 // you delete a DB instance, all automated backups for that instance are deleted
 // and can't be recovered. Manual DB snapshots of the DB instance to be deleted by
-// DeleteDBInstanceare not deleted. If you request a final DB snapshot the status
-// of the Amazon Neptune DB instance is deleting until the DB snapshot is
-// created. The API action DescribeDBInstance is used to monitor the status of
-// this operation. The action can't be canceled or reverted once submitted. Note
-// that when a DB instance is in a failure state and has a status of failed ,
-// incompatible-restore , or incompatible-network, you can only delete it when
-// the SkipFinalSnapshot  parameter is set to true. You can't delete a DB
-// instance if it is the only instance in the DB cluster, or if it has deletion
-// protection enabled.
+// DeleteDBInstance are not deleted. If you request a final DB snapshot the status
+// of the Amazon Neptune DB instance is deleting until the DB snapshot is created.
+// The API action DescribeDBInstance is used to monitor the status of this
+// operation. The action can't be canceled or reverted once submitted. Note that
+// when a DB instance is in a failure state and has a status of failed ,
+// incompatible-restore , or incompatible-network , you can only delete it when the
+// SkipFinalSnapshot parameter is set to true . You can't delete a DB instance if
+// it is the only instance in the DB cluster, or if it has deletion protection
+// enabled.
 func (c *Client) DeleteDBInstance(ctx context.Context, params *DeleteDBInstanceInput, optFns ...func(*Options)) (*DeleteDBInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteDBInstanceInput{}
@@ -42,24 +42,24 @@ type DeleteDBInstanceInput struct {
 
 	// The DB instance identifier for the DB instance to be deleted. This parameter
 	// isn't case-sensitive. Constraints:
-	//     - Must match the name of an existing DB instance.
+	//   - Must match the name of an existing DB instance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
 	// The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot
-	// is set to false. Specifying this parameter and also setting the
+	// is set to false . Specifying this parameter and also setting the
 	// SkipFinalShapshot parameter to true results in an error. Constraints:
-	//     - Must be 1 to 255 letters or numbers.
-	//     - First character must be a letter
-	//     - Cannot end with a hyphen or contain two consecutive hyphens
-	//     - Cannot be specified when deleting a Read Replica.
+	//   - Must be 1 to 255 letters or numbers.
+	//   - First character must be a letter
+	//   - Cannot end with a hyphen or contain two consecutive hyphens
+	//   - Cannot be specified when deleting a Read Replica.
 	FinalDBSnapshotIdentifier *string
 
 	// Determines whether a final DB snapshot is created before the DB instance is
-	// deleted. If true  is specified, no DBSnapshot is created. If false is
-	// specified, a DB snapshot is created before the DB instance is deleted. Note that
-	// when a DB instance is in a failure state and has a status of 'failed',
+	// deleted. If true is specified, no DBSnapshot is created. If false is specified,
+	// a DB snapshot is created before the DB instance is deleted. Note that when a DB
+	// instance is in a failure state and has a status of 'failed',
 	// 'incompatible-restore', or 'incompatible-network', it can only be deleted when
 	// the SkipFinalSnapshot parameter is set to "true". Specify true when deleting a
 	// Read Replica. The FinalDBSnapshotIdentifier parameter must be specified if
@@ -72,7 +72,7 @@ type DeleteDBInstanceInput struct {
 type DeleteDBInstanceOutput struct {
 
 	// Contains the details of an Amazon Neptune DB instance. This data type is used
-	// as a response element in the DescribeDBInstances  action.
+	// as a response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

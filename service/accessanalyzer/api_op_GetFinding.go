@@ -47,7 +47,7 @@ type GetFindingInput struct {
 // The response to the request.
 type GetFindingOutput struct {
 
-	// A finding  object that contains finding details.
+	// A finding object that contains finding details.
 	Finding *types.Finding
 
 	// Metadata pertaining to the operation's result.

@@ -193,9 +193,9 @@ const (
 	CompromisedCredentialsEventActionTypeNoAction CompromisedCredentialsEventActionType = "NO_ACTION"
 )
 
-// Values returns all known values for CompromisedCredentialsEventActionType.
-// Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for CompromisedCredentialsEventActionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (CompromisedCredentialsEventActionType) Values() []CompromisedCredentialsEventActionType {
 	return []CompromisedCredentialsEventActionType{
@@ -228,8 +228,8 @@ const (
 	CustomSMSSenderLambdaVersionTypeV10 CustomSMSSenderLambdaVersionType = "V1_0"
 )
 
-// Values returns all known values for CustomSMSSenderLambdaVersionType. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for CustomSMSSenderLambdaVersionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (CustomSMSSenderLambdaVersionType) Values() []CustomSMSSenderLambdaVersionType {
@@ -342,9 +342,9 @@ const (
 	EmailSendingAccountTypeDeveloper      EmailSendingAccountType = "DEVELOPER"
 )
 
-// Values returns all known values for EmailSendingAccountType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EmailSendingAccountType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EmailSendingAccountType) Values() []EmailSendingAccountType {
 	return []EmailSendingAccountType{
 		"COGNITO_DEFAULT",
@@ -661,9 +661,9 @@ const (
 	UserImportJobStatusTypeSucceeded  UserImportJobStatusType = "Succeeded"
 )
 
-// Values returns all known values for UserImportJobStatusType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserImportJobStatusType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UserImportJobStatusType) Values() []UserImportJobStatusType {
 	return []UserImportJobStatusType{
 		"Created",

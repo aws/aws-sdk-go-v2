@@ -37,8 +37,8 @@ type UpdateQueueInput struct {
 	// The new description for the queue, if you are changing it.
 	Description *string
 
-	// The new details of your pricing plan for your reserved queue. When you set up
-	// a new pricing plan to replace an expired one, you enter into another 12-month
+	// The new details of your pricing plan for your reserved queue. When you set up a
+	// new pricing plan to replace an expired one, you enter into another 12-month
 	// commitment. When you add capacity to your queue by increasing the number of RTS,
 	// you extend the term of your commitment to 12 months from when you add capacity.
 	// After you make these commitments, you can't cancel them.

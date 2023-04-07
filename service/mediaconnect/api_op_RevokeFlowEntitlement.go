@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Revokes an entitlement from a flow. Once an entitlement is revoked, the
-// content becomes unavailable to the subscriber and the associated output is
-// removed.
+// Revokes an entitlement from a flow. Once an entitlement is revoked, the content
+// becomes unavailable to the subscriber and the associated output is removed.
 func (c *Client) RevokeFlowEntitlement(ctx context.Context, params *RevokeFlowEntitlementInput, optFns ...func(*Options)) (*RevokeFlowEntitlementOutput, error) {
 	if params == nil {
 		params = &RevokeFlowEntitlementInput{}

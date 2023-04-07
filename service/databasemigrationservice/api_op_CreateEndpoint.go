@@ -13,7 +13,7 @@ import (
 
 // Creates an endpoint using the provided settings. For a MySQL source or target
 // endpoint, don't explicitly specify the database using the DatabaseName request
-// parameter on the CreateEndpoint  API call. Specifying DatabaseName when you
+// parameter on the CreateEndpoint API call. Specifying DatabaseName when you
 // create a MySQL endpoint replicates all the task tables to this single database.
 // For MySQL endpoints, you specify the database only when you specify the schema
 // in the table-mapping rules of the DMS task.
@@ -34,23 +34,23 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 
 type CreateEndpointInput struct {
 
-	// The database endpoint identifier. Identifiers must begin with a letter and
-	// must contain only ASCII letters, digits, and hyphens. They can't end with a
-	// hyphen, or contain two consecutive hyphens.
+	// The database endpoint identifier. Identifiers must begin with a letter and must
+	// contain only ASCII letters, digits, and hyphens. They can't end with a hyphen,
+	// or contain two consecutive hyphens.
 	//
 	// This member is required.
 	EndpointIdentifier *string
 
-	// The type of endpoint. Valid values are source  and target .
+	// The type of endpoint. Valid values are source and target .
 	//
 	// This member is required.
 	EndpointType types.ReplicationEndpointTypeValue
 
-	// The type of engine for the endpoint. Valid values, depending on the
-	// EndpointType value, include "mysql" , "oracle" , "postgres" , "mariadb" ,
-	// "aurora" , "aurora-postgresql" , "opensearch" , "redshift" , "s3" , "db2" ,
-	// "db2-zos" , "azuredb" , "sybase" , "dynamodb" , "mongodb" , "kinesis" , "kafka"
-	// , "elasticsearch" , "docdb" , "sqlserver" , "neptune" , and "babelfish" .
+	// The type of engine for the endpoint. Valid values, depending on the EndpointType
+	// value, include "mysql" , "oracle" , "postgres" , "mariadb" , "aurora" ,
+	// "aurora-postgresql" , "opensearch" , "redshift" , "s3" , "db2" , "db2-zos" ,
+	// "azuredb" , "sybase" , "dynamodb" , "mongodb" , "kinesis" , "kafka" ,
+	// "elasticsearch" , "docdb" , "sqlserver" , "neptune" , and "babelfish" .
 	//
 	// This member is required.
 	EngineName *string
@@ -65,20 +65,20 @@ type CreateEndpointInput struct {
 
 	// The settings in JSON format for the DMS transfer type of source endpoint.
 	// Possible settings include the following:
-	//     - ServiceAccessRoleArn - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the iam:PassRole action.
-	//     - BucketName - The name of the S3 bucket to use.
-	// Shorthand syntax for
-	// these settings is as follows: ServiceAccessRoleArn=string,BucketName=string
-	// JSON syntax for these settings is as follows: { "ServiceAccessRoleArn":
-	// "string", "BucketName": "string", }
+	//   - ServiceAccessRoleArn - The Amazon Resource Name (ARN) used by the service
+	//   access IAM role. The role must allow the iam:PassRole action.
+	//   - BucketName - The name of the S3 bucket to use.
+	// Shorthand syntax for these settings is as follows:
+	// ServiceAccessRoleArn=string,BucketName=string JSON syntax for these settings is
+	// as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", }
 	DmsTransferSettings *types.DmsTransferSettings
 
 	// Provides information that defines a DocumentDB endpoint.
 	DocDbSettings *types.DocDbSettings
 
 	// Settings in JSON format for the target Amazon DynamoDB endpoint. For
-	// information about other available settings, see Using Object Mapping to
-	// Migrate Data to DynamoDB (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html#CHAP_Target.DynamoDB.ObjectMapping)
+	// information about other available settings, see Using Object Mapping to Migrate
+	// Data to DynamoDB (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html#CHAP_Target.DynamoDB.ObjectMapping)
 	// in the Database Migration Service User Guide.
 	DynamoDbSettings *types.DynamoDbSettings
 
@@ -120,9 +120,9 @@ type CreateEndpointInput struct {
 	// in the Database Migration Service User Guide.
 	KinesisSettings *types.KinesisSettings
 
-	// An KMS key identifier that is used to encrypt the connection parameters for
-	// the endpoint. If you don't specify a value for the KmsKeyId parameter, then
-	// DMS uses your default encryption key. KMS creates the default encryption key for
+	// An KMS key identifier that is used to encrypt the connection parameters for the
+	// endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS
+	// uses your default encryption key. KMS creates the default encryption key for
 	// your Amazon Web Services account. Your Amazon Web Services account has a
 	// different default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
@@ -186,22 +186,22 @@ type CreateEndpointInput struct {
 	// letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain
 	// two consecutive hyphens, and can only begin with a letter, such as
 	// Example-App-ARN1 . For example, this value might result in the EndpointArn
-	// value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't
+	// value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1 . If you don't
 	// specify a ResourceIdentifier value, DMS generates a default identifier value
 	// for the end of EndpointArn .
 	ResourceIdentifier *string
 
-	// Settings in JSON format for the target Amazon S3 endpoint. For more
-	// information about the available settings, see Extra Connection Attributes When
-	// Using Amazon S3 as a Target for DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring)
+	// Settings in JSON format for the target Amazon S3 endpoint. For more information
+	// about the available settings, see Extra Connection Attributes When Using Amazon
+	// S3 as a Target for DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring)
 	// in the Database Migration Service User Guide.
 	S3Settings *types.S3Settings
 
 	// The name of the server where the endpoint database resides.
 	ServerName *string
 
-	// The Amazon Resource Name (ARN) for the service access role that you want to
-	// use to create the endpoint. The role must allow the iam:PassRole  action.
+	// The Amazon Resource Name (ARN) for the service access role that you want to use
+	// to create the endpoint. The role must allow the iam:PassRole action.
 	ServiceAccessRoleArn *string
 
 	// The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default

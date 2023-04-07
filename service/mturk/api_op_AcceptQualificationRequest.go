@@ -31,8 +31,8 @@ func (c *Client) AcceptQualificationRequest(ctx context.Context, params *AcceptQ
 
 type AcceptQualificationRequestInput struct {
 
-	// The ID of the Qualification request, as returned by the
-	// GetQualificationRequests operation.
+	// The ID of the Qualification request, as returned by the GetQualificationRequests
+	// operation.
 	//
 	// This member is required.
 	QualificationRequestId *string

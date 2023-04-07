@@ -39,14 +39,14 @@ type GetEntitlementsInput struct {
 	// This member is required.
 	ProductCode *string
 
-	// Filter is used to return entitlements for a specific customer or for a
-	// specific dimension. Filters are described as keys mapped to a lists of values.
-	// Filtered requests are unioned for each value in the value list, and then
-	// intersected for each filter key.
+	// Filter is used to return entitlements for a specific customer or for a specific
+	// dimension. Filters are described as keys mapped to a lists of values. Filtered
+	// requests are unioned for each value in the value list, and then intersected for
+	// each filter key.
 	Filter map[string][]string
 
-	// The maximum number of items to retrieve from the GetEntitlements operation.
-	// For pagination, use the NextToken field in subsequent calls to GetEntitlements.
+	// The maximum number of items to retrieve from the GetEntitlements operation. For
+	// pagination, use the NextToken field in subsequent calls to GetEntitlements.
 	MaxResults *int32
 
 	// For paginated calls to GetEntitlements, pass the NextToken from the previous
@@ -64,8 +64,8 @@ type GetEntitlementsOutput struct {
 	// and should be used.
 	Entitlements []types.Entitlement
 
-	// For paginated results, use NextToken in subsequent calls to GetEntitlements.
-	// If the result contains an empty set of entitlements, NextToken might still be
+	// For paginated results, use NextToken in subsequent calls to GetEntitlements. If
+	// the result contains an empty set of entitlements, NextToken might still be
 	// present and should be used.
 	NextToken *string
 

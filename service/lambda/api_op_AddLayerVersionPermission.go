@@ -14,7 +14,7 @@ import (
 // . Use this action to grant layer usage permission to other accounts. You can
 // grant permission to a single account, all accounts in an organization, or all
 // Amazon Web Services accounts. To revoke permission, call
-// RemoveLayerVersionPermissionwith the statement ID that you specified when you
+// RemoveLayerVersionPermission with the statement ID that you specified when you
 // added it.
 func (c *Client) AddLayerVersionPermission(ctx context.Context, params *AddLayerVersionPermissionInput, optFns ...func(*Options)) (*AddLayerVersionPermissionOutput, error) {
 	if params == nil {
@@ -63,7 +63,7 @@ type AddLayerVersionPermissionInput struct {
 	// This member is required.
 	VersionNumber int64
 
-	// With the principal set to *, grant permission to all accounts in the specified
+	// With the principal set to * , grant permission to all accounts in the specified
 	// organization.
 	OrganizationId *string
 

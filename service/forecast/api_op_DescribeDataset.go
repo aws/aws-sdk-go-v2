@@ -70,27 +70,27 @@ type DescribeDatasetOutput struct {
 	// (IAM) role that Amazon Forecast can assume to access the key.
 	EncryptionConfig *types.EncryptionConfig
 
-	// When you create a dataset, LastModificationTime  is the same as CreationTime.
+	// When you create a dataset, LastModificationTime is the same as CreationTime .
 	// While data is being imported to the dataset, LastModificationTime is the
-	// current time of the DescribeDataset  call. After a CreateDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
+	// current time of the DescribeDataset call. After a CreateDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
 	// operation has finished, LastModificationTime is when the import job completed
 	// or failed.
 	LastModificationTime *time.Time
 
-	// An array of SchemaAttribute  objects that specify the dataset fields. Each
+	// An array of SchemaAttribute objects that specify the dataset fields. Each
 	// SchemaAttribute specifies the name and data type of a field.
 	Schema *types.Schema
 
 	// The status of the dataset. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
-	//     - UPDATE_PENDING , UPDATE_IN_PROGRESS , UPDATE_FAILED
-	//  The UPDATE states apply while data is imported to the dataset from a call to
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - UPDATE_PENDING , UPDATE_IN_PROGRESS , UPDATE_FAILED
+	// The UPDATE states apply while data is imported to the dataset from a call to
 	// the CreateDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
 	// operation and reflect the status of the dataset import job. For example, when
 	// the import job status is CREATE_IN_PROGRESS , the status of the dataset is
-	// UPDATE_IN_PROGRESS . The Status  of the dataset must be ACTIVE before you can
+	// UPDATE_IN_PROGRESS . The Status of the dataset must be ACTIVE before you can
 	// import training data.
 	Status *string
 

@@ -13,7 +13,7 @@ import (
 )
 
 // Update a component. There are a few modes for updating a component. The
-// deploymentTypefield defines the mode. You can't update a component while its
+// deploymentType field defines the mode. You can't update a component while its
 // deployment status, or the deployment status of a service instance attached to
 // it, is IN_PROGRESS . For more information about components, see Proton
 // components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
@@ -36,11 +36,11 @@ func (c *Client) UpdateComponent(ctx context.Context, params *UpdateComponentInp
 type UpdateComponentInput struct {
 
 	// The deployment type. It defines the mode for updating a component, as follows:
-	// NONEIn this mode, a deployment doesn't occur. Only the requested metadata
-	// parameters are updated. You can only specify description  in this mode.
-	// CURRENT_VERSIONIn this mode, the component is deployed and updated with the
-	// new serviceSpec , templateSource , and/or type that you provide. Only
-	// requested parameters are updated.
+	// NONE In this mode, a deployment doesn't occur. Only the requested metadata
+	// parameters are updated. You can only specify description in this mode.
+	// CURRENT_VERSION In this mode, the component is deployed and updated with the new
+	// serviceSpec , templateSource , and/or type that you provide. Only requested
+	// parameters are updated.
 	//
 	// This member is required.
 	DeploymentType types.ComponentDeploymentUpdateType
@@ -59,14 +59,14 @@ type UpdateComponentInput struct {
 	// The name of the service instance that you want to attach this component to.
 	// Don't specify to keep the component's current service instance attachment.
 	// Specify an empty string to detach the component from the service instance it's
-	// attached to. Specify non-empty values for both serviceInstanceName  and
+	// attached to. Specify non-empty values for both serviceInstanceName and
 	// serviceName or for neither of them.
 	ServiceInstanceName *string
 
 	// The name of the service that serviceInstanceName is associated with. Don't
 	// specify to keep the component's current service instance attachment. Specify an
 	// empty string to detach the component from the service instance it's attached to.
-	// Specify non-empty values for both serviceInstanceName  and serviceName or for
+	// Specify non-empty values for both serviceInstanceName and serviceName or for
 	// neither of them.
 	ServiceName *string
 

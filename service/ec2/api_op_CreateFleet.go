@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Launches an EC2 Fleet. You can create a single EC2 Fleet that includes
-// multiple launch specifications that vary by instance type, AMI, Availability
-// Zone, or subnet. For more information, see EC2 Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html)
+// Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple
+// launch specifications that vary by instance type, AMI, Availability Zone, or
+// subnet. For more information, see EC2 Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html)
 // in the Amazon EC2 User Guide.
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
@@ -43,8 +43,8 @@ type CreateFleetInput struct {
 	// This member is required.
 	TargetCapacitySpecification *types.TargetCapacitySpecificationRequest
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 
@@ -77,10 +77,10 @@ type CreateFleetInput struct {
 	// The key-value pair for tagging the EC2 Fleet request on creation. For more
 	// information, see Tagging your resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources)
 	// . If the fleet type is instant , specify a resource type of fleet to tag the
-	// fleet or instance  to tag the instances at launch. If the fleet type is
-	// maintain or request , specify a resource type of fleet to tag the fleet. You
-	// cannot specify a resource type of instance. To tag instances at launch,
-	// specify the tags in a launch template (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template)
+	// fleet or instance to tag the instances at launch. If the fleet type is maintain
+	// or request , specify a resource type of fleet to tag the fleet. You cannot
+	// specify a resource type of instance . To tag instances at launch, specify the
+	// tags in a launch template (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template)
 	// .
 	TagSpecifications []types.TagSpecification
 
@@ -89,10 +89,16 @@ type CreateFleetInput struct {
 	TerminateInstancesWithExpiration *bool
 
 	// The fleet type. The default value is maintain .
-	//     - maintain - The EC2 Fleet places an asynchronous request for your desired capacity, and continues to maintain your desired Spot capacity by replenishing interrupted Spot Instances.
-	//     - request - The EC2 Fleet places an asynchronous one-time request for your desired capacity, but does submit Spot requests in alternative capacity pools if Spot capacity is unavailable, and does not maintain Spot capacity if Spot Instances are interrupted.
-	//     - instant - The EC2 Fleet places a synchronous one-time request for your desired capacity, and returns errors for any instances that could not be launched.
-	//
+	//   - maintain - The EC2 Fleet places an asynchronous request for your desired
+	//   capacity, and continues to maintain your desired Spot capacity by replenishing
+	//   interrupted Spot Instances.
+	//   - request - The EC2 Fleet places an asynchronous one-time request for your
+	//   desired capacity, but does submit Spot requests in alternative capacity pools if
+	//   Spot capacity is unavailable, and does not maintain Spot capacity if Spot
+	//   Instances are interrupted.
+	//   - instant - The EC2 Fleet places a synchronous one-time request for your
+	//   desired capacity, and returns errors for any instances that could not be
+	//   launched.
 	// For more information, see EC2 Fleet request types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-request-type.html)
 	// in the Amazon EC2 User Guide.
 	Type types.FleetType
@@ -120,8 +126,8 @@ type CreateFleetOutput struct {
 	// The ID of the EC2 Fleet.
 	FleetId *string
 
-	// Information about the instances that were launched by the fleet. Supported
-	// only for fleets of type instant .
+	// Information about the instances that were launched by the fleet. Supported only
+	// for fleets of type instant .
 	Instances []types.CreateFleetInstance
 
 	// Metadata pertaining to the operation's result.

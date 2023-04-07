@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Revokes access to an Amazon OpenSearch Service domain that was provided
-// through an interface VPC endpoint.
+// Revokes access to an Amazon OpenSearch Service domain that was provided through
+// an interface VPC endpoint.
 func (c *Client) RevokeVpcEndpointAccess(ctx context.Context, params *RevokeVpcEndpointAccessInput, optFns ...func(*Options)) (*RevokeVpcEndpointAccessOutput, error) {
 	if params == nil {
 		params = &RevokeVpcEndpointAccessInput{}
@@ -27,8 +27,8 @@ func (c *Client) RevokeVpcEndpointAccess(ctx context.Context, params *RevokeVpcE
 	return out, nil
 }
 
-// Revokes access to an Amazon OpenSearch Service domain that was provided
-// through an interface VPC endpoint.
+// Revokes access to an Amazon OpenSearch Service domain that was provided through
+// an interface VPC endpoint.
 type RevokeVpcEndpointAccessInput struct {
 
 	// The account ID to revoke access from.
@@ -44,8 +44,8 @@ type RevokeVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the RevokeVpcEndpointAccess operation.
-// The response body for this operation is empty.
+// Container for response parameters to the RevokeVpcEndpointAccess operation. The
+// response body for this operation is empty.
 type RevokeVpcEndpointAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

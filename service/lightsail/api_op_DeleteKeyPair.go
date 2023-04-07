@@ -18,7 +18,7 @@ import (
 // not be created unless you launch an instance without specifying a custom key
 // pair, or you call the DownloadDefaultKeyPair (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html)
 // API. The delete key pair operation supports tag-based access control via
-// resource tags applied to the resource identified by key pair name. For more
+// resource tags applied to the resource identified by key pair name . For more
 // information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
 // .
 func (c *Client) DeleteKeyPair(ctx context.Context, params *DeleteKeyPairInput, optFns ...func(*Options)) (*DeleteKeyPairOutput, error) {
@@ -44,7 +44,7 @@ type DeleteKeyPairInput struct {
 	KeyPairName *string
 
 	// The RSA fingerprint of the Lightsail default key pair to delete. The
-	// expectedFingerprintparameter is required only when specifying to delete a
+	// expectedFingerprint parameter is required only when specifying to delete a
 	// Lightsail default key pair.
 	ExpectedFingerprint *string
 

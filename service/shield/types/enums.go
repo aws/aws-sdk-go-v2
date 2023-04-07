@@ -29,9 +29,9 @@ const (
 	AttackLayerApplication AttackLayer = "APPLICATION"
 )
 
-// Values returns all known values for AttackLayer. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AttackLayer. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AttackLayer) Values() []AttackLayer {
 	return []AttackLayer{
 		"NETWORK",
@@ -219,8 +219,8 @@ const (
 	UnitRequests Unit = "REQUESTS"
 )
 
-// Values returns all known values for Unit. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Unit. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Unit) Values() []Unit {
 	return []Unit{

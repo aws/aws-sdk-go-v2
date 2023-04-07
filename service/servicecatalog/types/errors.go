@@ -141,8 +141,8 @@ func (e *OperationNotSupportedException) ErrorCode() string {
 }
 func (e *OperationNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A resource that is currently in use. Ensure that the resource is not in use
-// and retry the operation.
+// A resource that is currently in use. Ensure that the resource is not in use and
+// retry the operation.
 type ResourceInUseException struct {
 	Message *string
 

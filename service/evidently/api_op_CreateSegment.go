@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this operation to define a segment of your audience. A segment is a
-// portion of your audience that share one or more characteristics. Examples could
-// be Chrome browser users, users in Europe, or Firefox browser users in Europe who
+// Use this operation to define a segment of your audience. A segment is a portion
+// of your audience that share one or more characteristics. Examples could be
+// Chrome browser users, users in Europe, or Firefox browser users in Europe who
 // also fit other criteria that your application collects, such as age. Using a
 // segment in an experiment limits that experiment to evaluate only the users who
 // match the segment criteria. Using one or more segments in a launch allows you to

@@ -37,9 +37,9 @@ type CreateCustomDBEngineVersionInput struct {
 	Engine *string
 
 	// The name of your CEV. The name format is 19.customized_string. For example, a
-	// valid CEV name is 19.my_cev1. This setting is required for RDS Custom for
-	// Oracle, but optional for Amazon RDS. The combination of Engine  and
-	// EngineVersion is unique per customer per Region.
+	// valid CEV name is 19.my_cev1 . This setting is required for RDS Custom for
+	// Oracle, but optional for Amazon RDS. The combination of Engine and EngineVersion
+	// is unique per customer per Region.
 	//
 	// This member is required.
 	EngineVersion *string
@@ -49,15 +49,15 @@ type CreateCustomDBEngineVersionInput struct {
 	DatabaseInstallationFilesS3BucketName *string
 
 	// The Amazon S3 directory that contains the database installation files for your
-	// CEV. For example, a valid bucket name is 123456789012/cev1. If this setting
+	// CEV. For example, a valid bucket name is 123456789012/cev1 . If this setting
 	// isn't specified, no prefix is assumed.
 	DatabaseInstallationFilesS3Prefix *string
 
 	// An optional description of your CEV.
 	Description *string
 
-	// The ID of the AMI. An AMI ID is required to create a CEV for RDS Custom for
-	// SQL Server.
+	// The ID of the AMI. An AMI ID is required to create a CEV for RDS Custom for SQL
+	// Server.
 	ImageId *string
 
 	// The Amazon Web Services KMS key identifier for an encrypted CEV. A symmetric
@@ -71,11 +71,11 @@ type CreateCustomDBEngineVersionInput struct {
 	// instance, or choose different keys.
 	KMSKeyId *string
 
-	// The CEV manifest, which is a JSON document that describes the installation
-	// .zip files stored in Amazon S3. Specify the name/value pairs in a file or a
-	// quoted string. RDS Custom applies the patches in the order in which they are
-	// listed. The following JSON fields are valid: MediaImportTemplateVersion Version
-	// of the CEV manifest. The date is in the format YYYY-MM-DD.
+	// The CEV manifest, which is a JSON document that describes the installation .zip
+	// files stored in Amazon S3. Specify the name/value pairs in a file or a quoted
+	// string. RDS Custom applies the patches in the order in which they are listed.
+	// The following JSON fields are valid: MediaImportTemplateVersion Version of the
+	// CEV manifest. The date is in the format YYYY-MM-DD .
 	// databaseInstallationFileNames Ordered list of installation files for the CEV.
 	// opatchFileNames Ordered list of OPatch installers used for the Oracle DB engine.
 	// psuRuPatchFileNames The PSU and RU patches for this CEV. OtherPatchFileNames The
@@ -123,8 +123,7 @@ type CreateCustomDBEngineVersionOutput struct {
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string
 
-	// The name of the Amazon S3 bucket that contains your database installation
-	// files.
+	// The name of the Amazon S3 bucket that contains your database installation files.
 	DatabaseInstallationFilesS3BucketName *string
 
 	// The Amazon S3 directory that contains the database installation files. If not
@@ -148,14 +147,14 @@ type CreateCustomDBEngineVersionOutput struct {
 	// The EC2 image
 	Image *types.CustomDBEngineVersionAMI
 
-	// The Amazon Web Services KMS key identifier for an encrypted CEV. This
-	// parameter is required for RDS Custom, but optional for Amazon RDS.
+	// The Amazon Web Services KMS key identifier for an encrypted CEV. This parameter
+	// is required for RDS Custom, but optional for Amazon RDS.
 	KMSKeyId *string
 
 	// The major engine version of the CEV.
 	MajorEngineVersion *string
 
-	// The status of the DB engine version, either available  or deprecated .
+	// The status of the DB engine version, either available or deprecated .
 	Status *string
 
 	// A list of the supported CA certificate identifiers. For more information, see
@@ -166,7 +165,7 @@ type CreateCustomDBEngineVersionOutput struct {
 	SupportedCACertificateIdentifiers []string
 
 	// A list of the character sets supported by this engine for the CharacterSetName
-	// parameter of the CreateDBInstance  operation.
+	// parameter of the CreateDBInstance operation.
 	SupportedCharacterSets []types.CharacterSet
 
 	// A list of the supported DB engine modes.
@@ -183,15 +182,15 @@ type CreateCustomDBEngineVersionOutput struct {
 	SupportedFeatureNames []string
 
 	// A list of the character sets supported by the Oracle DB engine for the
-	// NcharCharacterSetName parameter of the CreateDBInstance  operation.
+	// NcharCharacterSetName parameter of the CreateDBInstance operation.
 	SupportedNcharCharacterSets []types.CharacterSet
 
-	// A list of the time zones supported by this engine for the Timezone parameter
-	// of the CreateDBInstance  action.
+	// A list of the time zones supported by this engine for the Timezone parameter of
+	// the CreateDBInstance action.
 	SupportedTimezones []types.Timezone
 
-	// A value that indicates whether the engine version supports Babelfish for
-	// Aurora PostgreSQL.
+	// A value that indicates whether the engine version supports Babelfish for Aurora
+	// PostgreSQL.
 	SupportsBabelfish bool
 
 	// A value that indicates whether the engine version supports rotating the server

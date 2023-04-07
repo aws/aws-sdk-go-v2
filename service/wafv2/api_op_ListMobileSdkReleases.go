@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of the available releases for the mobile SDK and the
-// specified device platform. The mobile SDK is not generally available. Customers
-// who have access to the mobile SDK can use it to establish and manage WAF tokens
-// for use in HTTP(S) requests from a mobile device to WAF. For more information,
-// see WAF client application integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
+// Retrieves a list of the available releases for the mobile SDK and the specified
+// device platform. The mobile SDK is not generally available. Customers who have
+// access to the mobile SDK can use it to establish and manage WAF tokens for use
+// in HTTP(S) requests from a mobile device to WAF. For more information, see WAF
+// client application integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
 // in the WAF Developer Guide.
 func (c *Client) ListMobileSdkReleases(ctx context.Context, params *ListMobileSdkReleasesInput, optFns ...func(*Options)) (*ListMobileSdkReleasesOutput, error) {
 	if params == nil {
@@ -46,8 +46,8 @@ type ListMobileSdkReleasesInput struct {
 
 	// When you request a list of objects with a Limit setting, if the number of
 	// objects that are still available for retrieval exceeds the limit, WAF returns a
-	// NextMarkervalue in the response. To retrieve the next batch of objects,
-	// provide the marker from the prior call in your next request.
+	// NextMarker value in the response. To retrieve the next batch of objects, provide
+	// the marker from the prior call in your next request.
 	NextMarker *string
 
 	noSmithyDocumentSerde
@@ -57,8 +57,8 @@ type ListMobileSdkReleasesOutput struct {
 
 	// When you request a list of objects with a Limit setting, if the number of
 	// objects that are still available for retrieval exceeds the limit, WAF returns a
-	// NextMarkervalue in the response. To retrieve the next batch of objects,
-	// provide the marker from the prior call in your next request.
+	// NextMarker value in the response. To retrieve the next batch of objects, provide
+	// the marker from the prior call in your next request.
 	NextMarker *string
 
 	// High level information for the available SDK releases.

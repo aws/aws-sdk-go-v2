@@ -29,8 +29,8 @@ func (c *Client) BatchGetGraphMemberDatasources(ctx context.Context, params *Bat
 
 type BatchGetGraphMemberDatasourcesInput struct {
 
-	// The list of Amazon Web Services accounts to get data source package
-	// information on.
+	// The list of Amazon Web Services accounts to get data source package information
+	// on.
 	//
 	// This member is required.
 	AccountIds []string
@@ -45,8 +45,7 @@ type BatchGetGraphMemberDatasourcesInput struct {
 
 type BatchGetGraphMemberDatasourcesOutput struct {
 
-	// Details on the status of data source packages for members of the behavior
-	// graph.
+	// Details on the status of data source packages for members of the behavior graph.
 	MemberDatasources []types.MembershipDatasources
 
 	// Accounts that data source package information could not be retrieved for.

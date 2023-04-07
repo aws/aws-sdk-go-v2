@@ -24,14 +24,14 @@ import (
 // in Amazon Web Services SDK for Android Developer Guide and Amazon Cognito
 // Overview (https://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-auth.html#d0e664)
 // in the Amazon Web Services SDK for iOS Developer Guide. Calling
-// AssumeRoleWithWebIdentitydoes not require the use of Amazon Web Services
+// AssumeRoleWithWebIdentity does not require the use of Amazon Web Services
 // security credentials. Therefore, you can distribute an application (for example,
 // on mobile devices) that requests temporary security credentials without
 // including long-term Amazon Web Services credentials in the application. You also
 // don't need to deploy server-based proxy services that use long-term Amazon Web
 // Services credentials. Instead, the identity of the caller is validated by using
 // a token from the web identity provider. For a comparison of
-// AssumeRoleWithWebIdentitywith the other API operations that produce temporary
+// AssumeRoleWithWebIdentity with the other API operations that produce temporary
 // credentials, see Requesting Temporary Security Credentials (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html)
 // and Comparing the Amazon Web Services STS API operations (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison)
 // in the IAM User Guide. The temporary security credentials returned by this API
@@ -46,12 +46,11 @@ import (
 // maximum value for your role, see View the Maximum Session Duration Setting for
 // a Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session)
 // in the IAM User Guide. The maximum session duration limit applies when you use
-// the AssumeRole*  API operations or the assume-role* CLI commands. However the
+// the AssumeRole* API operations or the assume-role* CLI commands. However the
 // limit does not apply when you use those operations to create a console URL. For
 // more information, see Using IAM Roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html)
 // in the IAM User Guide. Permissions The temporary security credentials created by
-//
-// AssumeRoleWithWebIdentitycan be used to make API calls to any Amazon Web
+// AssumeRoleWithWebIdentity can be used to make API calls to any Amazon Web
 // Services service with the following exception: you cannot call the STS
 // GetFederationToken or GetSessionToken API operations. (Optional) You can pass
 // inline or managed session policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
@@ -88,7 +87,7 @@ import (
 // tags persist during role chaining. For more information, see Chaining Roles
 // with Session Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining)
 // in the IAM User Guide. Identities Before your application can call
-// AssumeRoleWithWebIdentity, you must have an identity token from a supported
+// AssumeRoleWithWebIdentity , you must have an identity token from a supported
 // identity provider and create a role that the application can assume. The role
 // that your application assumes must trust the identity provider that is
 // associated with the identity token. In other words, the identity provider must
@@ -100,10 +99,21 @@ import (
 // specification (http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes)
 // . For more information about how to use web identity federation and the
 // AssumeRoleWithWebIdentity API, see the following resources:
-//   - Using Web Identity Federation API Operations for Mobile Apps (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html) and Federation Through a Web-based Identity Provider (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity) .
-//   - Web Identity Federation Playground (https://aws.amazon.com/blogs/aws/the-aws-web-identity-federation-playground/) . Walk through the process of authenticating through Login with Amazon, Facebook, or Google, getting temporary security credentials, and then using those credentials to make a request to Amazon Web Services.
-//   - Amazon Web Services SDK for iOS Developer Guide (http://aws.amazon.com/sdkforios/) and Amazon Web Services SDK for Android Developer Guide (http://aws.amazon.com/sdkforandroid/) . These toolkits contain sample apps that show how to invoke the identity providers. The toolkits then show how to use the information from these providers to get and use temporary security credentials.
-//   - Web Identity Federation with Mobile Applications (http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications) . This article discusses web identity federation and shows an example of how to use web identity federation to get access to content in Amazon S3.
+//   - Using Web Identity Federation API Operations for Mobile Apps (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html)
+//     and Federation Through a Web-based Identity Provider (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity)
+//     .
+//   - Web Identity Federation Playground (https://aws.amazon.com/blogs/aws/the-aws-web-identity-federation-playground/)
+//     . Walk through the process of authenticating through Login with Amazon,
+//     Facebook, or Google, getting temporary security credentials, and then using
+//     those credentials to make a request to Amazon Web Services.
+//   - Amazon Web Services SDK for iOS Developer Guide (http://aws.amazon.com/sdkforios/)
+//     and Amazon Web Services SDK for Android Developer Guide (http://aws.amazon.com/sdkforandroid/)
+//     . These toolkits contain sample apps that show how to invoke the identity
+//     providers. The toolkits then show how to use the information from these
+//     providers to get and use temporary security credentials.
+//   - Web Identity Federation with Mobile Applications (http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications)
+//     . This article discusses web identity federation and shows an example of how to
+//     use web identity federation to get access to content in Amazon S3.
 func (c *Client) AssumeRoleWithWebIdentity(ctx context.Context, params *AssumeRoleWithWebIdentityInput, optFns ...func(*Options)) (*AssumeRoleWithWebIdentityOutput, error) {
 	if params == nil {
 		params = &AssumeRoleWithWebIdentityInput{}
@@ -141,7 +151,7 @@ type AssumeRoleWithWebIdentityInput struct {
 	// The OAuth 2.0 access token or OpenID Connect ID token that is provided by the
 	// identity provider. Your application must get this token by authenticating the
 	// user who is using your application with a web identity provider before the
-	// application makes an AssumeRoleWithWebIdentity  call.
+	// application makes an AssumeRoleWithWebIdentity call.
 	//
 	// This member is required.
 	WebIdentityToken *string
@@ -153,8 +163,8 @@ type AssumeRoleWithWebIdentityInput struct {
 	// session duration of 12 hours, but your administrator set the maximum session
 	// duration to 6 hours, your operation fails. To learn how to view the maximum
 	// value for your role, see View the Maximum Session Duration Setting for a Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session)
-	// in the IAM User Guide. By default, the value is set to 3600  seconds. The
-	// DurationSecondsparameter is separate from the duration of a console session
+	// in the IAM User Guide. By default, the value is set to 3600 seconds. The
+	// DurationSeconds parameter is separate from the duration of a console session
 	// that you might request using the returned credentials. The request to the
 	// federation endpoint for a console sign-in token takes a SessionDuration
 	// parameter that specifies the maximum length of the console session. For more
@@ -180,8 +190,8 @@ type AssumeRoleWithWebIdentityInput struct {
 	// Services conversion compresses the passed inline session policy, managed policy
 	// ARNs, and session tags into a packed binary format that has a separate limit.
 	// Your request can fail for this limit even if your plaintext meets the other
-	// requirements. The PackedPolicySize response element indicates by percentage
-	// how close the policies and tags for your request are to the upper size limit.
+	// requirements. The PackedPolicySize response element indicates by percentage how
+	// close the policies and tags for your request are to the upper size limit.
 	Policy *string
 
 	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want to
@@ -194,24 +204,23 @@ type AssumeRoleWithWebIdentityInput struct {
 	// compresses the passed inline session policy, managed policy ARNs, and session
 	// tags into a packed binary format that has a separate limit. Your request can
 	// fail for this limit even if your plaintext meets the other requirements. The
-	// PackedPolicySizeresponse element indicates by percentage how close the
-	// policies and tags for your request are to the upper size limit. Passing policies
-	// to this operation returns new temporary credentials. The resulting session's
-	// permissions are the intersection of the role's identity-based policy and the
-	// session policies. You can use the role's temporary credentials in subsequent
-	// Amazon Web Services API calls to access resources in the account that owns the
-	// role. You cannot use session policies to grant more permissions than those
-	// allowed by the identity-based policy of the role that is being assumed. For more
-	// information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// PackedPolicySize response element indicates by percentage how close the policies
+	// and tags for your request are to the upper size limit. Passing policies to this
+	// operation returns new temporary credentials. The resulting session's permissions
+	// are the intersection of the role's identity-based policy and the session
+	// policies. You can use the role's temporary credentials in subsequent Amazon Web
+	// Services API calls to access resources in the account that owns the role. You
+	// cannot use session policies to grant more permissions than those allowed by the
+	// identity-based policy of the role that is being assumed. For more information,
+	// see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
 	PolicyArns []types.PolicyDescriptorType
 
-	// The fully qualified host component of the domain name of the OAuth 2.0
-	// identity provider. Do not specify this value for an OpenID Connect identity
-	// provider. Currently www.amazon.com  and graph.facebook.com are the only
-	// supported identity providers for OAuth 2.0 access tokens. Do not include URL
-	// schemes and port numbers. Do not specify this value for OpenID Connect ID
-	// tokens.
+	// The fully qualified host component of the domain name of the OAuth 2.0 identity
+	// provider. Do not specify this value for an OpenID Connect identity provider.
+	// Currently www.amazon.com and graph.facebook.com are the only supported identity
+	// providers for OAuth 2.0 access tokens. Do not include URL schemes and port
+	// numbers. Do not specify this value for OpenID Connect ID tokens.
 	ProviderId *string
 
 	noSmithyDocumentSerde
@@ -229,9 +238,9 @@ type AssumeRoleWithWebIdentityOutput struct {
 	// RoleSessionName that you specified when you called AssumeRole .
 	AssumedRoleUser *types.AssumedRoleUser
 
-	// The intended audience (also known as client ID) of the web identity token.
-	// This is traditionally the client identifier issued to the application that
-	// requested the web identity token.
+	// The intended audience (also known as client ID) of the web identity token. This
+	// is traditionally the client identifier issued to the application that requested
+	// the web identity token.
 	Audience *string
 
 	// The temporary security credentials, which include an access key ID, a secret
@@ -249,7 +258,7 @@ type AssumeRoleWithWebIdentityOutput struct {
 	// The issuing authority of the web identity token presented. For OpenID Connect
 	// ID tokens, this contains the value of the iss field. For OAuth 2.0 access
 	// tokens, this contains the value of the ProviderId parameter that was passed in
-	// the AssumeRoleWithWebIdentity  request.
+	// the AssumeRoleWithWebIdentity request.
 	Provider *string
 
 	// The value of the source identity that is returned in the JSON web token (JWT)
@@ -261,7 +270,7 @@ type AssumeRoleWithWebIdentityOutput struct {
 	// and persists across chained role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts#iam-term-role-chaining)
 	// sessions. You can configure your identity provider to use an attribute
 	// associated with your users, like user name or email, as the source identity when
-	// calling AssumeRoleWithWebIdentity. You do this by adding a claim to the JSON
+	// calling AssumeRoleWithWebIdentity . You do this by adding a claim to the JSON
 	// web token. To learn more about OIDC tokens and claims, see Using Tokens with
 	// User Pools (https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html)
 	// in the Amazon Cognito Developer Guide. For more information about using source
@@ -273,11 +282,11 @@ type AssumeRoleWithWebIdentityOutput struct {
 	SourceIdentity *string
 
 	// The unique user identifier that is returned by the identity provider. This
-	// identifier is associated with the WebIdentityToken  that was submitted with the
-	// AssumeRoleWithWebIdentitycall. The identifier is typically unique to the user
+	// identifier is associated with the WebIdentityToken that was submitted with the
+	// AssumeRoleWithWebIdentity call. The identifier is typically unique to the user
 	// and the application that acquired the WebIdentityToken (pairwise identifier).
 	// For OpenID Connect ID tokens, this field contains the value returned by the
-	// identity provider as the token's sub  (Subject) claim.
+	// identity provider as the token's sub (Subject) claim.
 	SubjectFromWebIdentityToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,15 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Lightsail load balancer. To learn more about deciding whether to
-// load balance your application, see Configure your Lightsail instances for load
+// Creates a Lightsail load balancer. To learn more about deciding whether to load
+// balance your application, see Configure your Lightsail instances for load
 // balancing (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/configure-lightsail-instances-for-load-balancing)
 // . You can create up to 5 load balancers per AWS Region in your account. When you
 // create a load balancer, you can specify a unique name and port settings. To
 // change additional load balancer settings, use the UpdateLoadBalancerAttribute
-// operation. The create load balancer operation supports tag-based access
-// control via request tags. For more information, see the Amazon Lightsail
-// Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// operation. The create load balancer operation supports tag-based access control
+// via request tags. For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
 // .
 func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalancerInput, optFns ...func(*Options)) (*CreateLoadBalancerOutput, error) {
 	if params == nil {
@@ -53,7 +52,7 @@ type CreateLoadBalancerInput struct {
 	// blog.example.com ).
 	CertificateAlternativeNames []string
 
-	// The domain name with which your certificate is associated (e.g., example.com).
+	// The domain name with which your certificate is associated (e.g., example.com ).
 	// If you specify certificateDomainName , then certificateName is required (and
 	// vice-versa).
 	CertificateDomainName *string
@@ -64,14 +63,13 @@ type CreateLoadBalancerInput struct {
 
 	// The path you provided to perform the load balancer health check. If you didn't
 	// specify a health check path, Lightsail uses the root path of your website (e.g.,
-	//
-	// "/"). You may want to specify a custom health check path other than the root
-	// of your application if your home page loads slowly or has a lot of media or
+	// "/" ). You may want to specify a custom health check path other than the root of
+	// your application if your home page loads slowly or has a lot of media or
 	// scripting on it.
 	HealthCheckPath *string
 
 	// The IP address type for the load balancer. The possible values are ipv4 for
-	// IPv4 only, and dualstack  for IPv4 and IPv6. The default value is dualstack .
+	// IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack .
 	IpAddressType types.IpAddressType
 
 	// The tag keys and optional values to add to the resource during create. Use the

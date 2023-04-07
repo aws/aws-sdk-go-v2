@@ -43,18 +43,18 @@ type UpdateEndpointGroupInput struct {
 	// The default value is 30.
 	HealthCheckIntervalSeconds *int32
 
-	// If the protocol is HTTP/S, then this specifies the path that is the
-	// destination for health check targets. The default value is slash (/).
+	// If the protocol is HTTP/S, then this specifies the path that is the destination
+	// for health check targets. The default value is slash (/).
 	HealthCheckPath *string
 
-	// The port that Global Accelerator uses to check the health of endpoints that
-	// are part of this endpoint group. The default port is the listener port that this
+	// The port that Global Accelerator uses to check the health of endpoints that are
+	// part of this endpoint group. The default port is the listener port that this
 	// endpoint group is associated with. If the listener port is a list of ports,
 	// Global Accelerator uses the first port in the list.
 	HealthCheckPort *int32
 
-	// The protocol that Global Accelerator uses to check the health of endpoints
-	// that are part of this endpoint group. The default value is TCP.
+	// The protocol that Global Accelerator uses to check the health of endpoints that
+	// are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol types.HealthCheckProtocol
 
 	// Override specific listener ports used to route traffic to endpoints that are

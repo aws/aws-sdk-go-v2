@@ -39,8 +39,8 @@ type DescribeExportImageTasksInput struct {
 	// The IDs of the export image tasks.
 	ExportImageTaskIds []string
 
-	// Filter tasks using the task-state  filter and one of the following values:
-	// active , completed , deleting , or deleted .
+	// Filter tasks using the task-state filter and one of the following values: active
+	// , completed , deleting , or deleted .
 	Filters []types.Filter
 
 	// The maximum number of results to return in a single call.
@@ -57,8 +57,8 @@ type DescribeExportImageTasksOutput struct {
 	// Information about the export image tasks.
 	ExportImageTasks []types.ExportImageTask
 
-	// The token to use to get the next page of results. This value is null when
-	// there are no more results to return.
+	// The token to use to get the next page of results. This value is null when there
+	// are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,8 +141,8 @@ type DescribeExportImageTasksPaginatorOptions struct {
 	// The maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

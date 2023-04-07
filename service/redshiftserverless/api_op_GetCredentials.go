@@ -17,7 +17,7 @@ import (
 // 900 seconds (15 minutes) and 3600 seconds (60 minutes). The Identity and Access
 // Management (IAM) user or role that runs GetCredentials must have an IAM policy
 // attached that allows access to all necessary actions and resources. If the
-// DbNameparameter is specified, the IAM policy must allow access to the resource
+// DbName parameter is specified, the IAM policy must allow access to the resource
 // dbname for the specified database name.
 func (c *Client) GetCredentials(ctx context.Context, params *GetCredentialsInput, optFns ...func(*Options)) (*GetCredentialsOutput, error) {
 	if params == nil {
@@ -43,11 +43,14 @@ type GetCredentialsInput struct {
 
 	// The name of the database to get temporary authorization to log on to.
 	// Constraints:
-	//     - Must be 1 to 64 alphanumeric characters or hyphens.
-	//     - Must contain only uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.
-	//     - The first character must be a letter.
-	//     - Must not contain a colon ( : ) or slash ( / ).
-	//     - Cannot be a reserved word. A list of reserved words can be found in Reserved Words  (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon Redshift Database Developer Guide
+	//   - Must be 1 to 64 alphanumeric characters or hyphens.
+	//   - Must contain only uppercase or lowercase letters, numbers, underscore, plus
+	//   sign, period (dot), at symbol (@), or hyphen.
+	//   - The first character must be a letter.
+	//   - Must not contain a colon ( : ) or slash ( / ).
+	//   - Cannot be a reserved word. A list of reserved words can be found in
+	//   Reserved Words  (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+	//   in the Amazon Redshift Database Developer Guide
 	DbName *string
 
 	// The number of seconds until the returned temporary password expires. The
@@ -59,20 +62,20 @@ type GetCredentialsInput struct {
 
 type GetCredentialsOutput struct {
 
-	// A temporary password that authorizes the user name returned by DbUser to log
-	// on to the database DbName .
+	// A temporary password that authorizes the user name returned by DbUser to log on
+	// to the database DbName .
 	DbPassword *string
 
 	// A database user name that is authorized to log on to the database DbName using
 	// the password DbPassword . If the specified DbUser exists in the database, the
-	// new user name has the same database privileges as the the user named in DbUser
-	// . By default, the user is added to PUBLIC.
+	// new user name has the same database privileges as the the user named in DbUser .
+	// By default, the user is added to PUBLIC.
 	DbUser *string
 
-	// The date and time the password in DbPassword  expires.
+	// The date and time the password in DbPassword expires.
 	Expiration *time.Time
 
-	// The date and time of when the DbUser  and DbPassword  authorization refreshes.
+	// The date and time of when the DbUser and DbPassword authorization refreshes.
 	NextRefreshTime *time.Time
 
 	// Metadata pertaining to the operation's result.

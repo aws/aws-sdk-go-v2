@@ -52,14 +52,14 @@ type CreateDeploymentInput struct {
 // The result structure for the create a new deployment request.
 type CreateDeploymentOutput struct {
 
-	// When the fileMap  argument is provided in the request, fileUploadUrls will
+	// When the fileMap argument is provided in the request, fileUploadUrls will
 	// contain a map of file names to upload URLs.
 	//
 	// This member is required.
 	FileUploadUrls map[string]string
 
-	// When the fileMap  argument is not provided in the request, this zipUploadUrl
-	// is returned.
+	// When the fileMap argument is not provided in the request, this zipUploadUrl is
+	// returned.
 	//
 	// This member is required.
 	ZipUploadUrl *string

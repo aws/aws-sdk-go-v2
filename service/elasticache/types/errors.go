@@ -35,8 +35,8 @@ func (e *APICallRateForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified Amazon EC2 security group is already authorized for the
-// specified cache security group.
+// The specified Amazon EC2 security group is already authorized for the specified
+// cache security group.
 type AuthorizationAlreadyExistsFault struct {
 	Message *string
 
@@ -642,8 +642,7 @@ func (e *InsufficientCacheClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The requested Amazon Resource Name (ARN) does not refer to an existing
-// resource.
+// The requested Amazon Resource Name (ARN) does not refer to an existing resource.
 type InvalidARNFault struct {
 	Message *string
 
@@ -669,7 +668,7 @@ func (e *InvalidARNFault) ErrorCode() string {
 }
 func (e *InvalidARNFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested cluster is not in the available  state.
+// The requested cluster is not in the available state.
 type InvalidCacheClusterStateFault struct {
 	Message *string
 
@@ -860,7 +859,7 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested replication group is not in the available  state.
+// The requested replication group is not in the available state.
 type InvalidReplicationGroupStateFault struct {
 	Message *string
 
@@ -1455,8 +1454,10 @@ func (e *SnapshotAlreadyExistsFault) ErrorCode() string {
 func (e *SnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You attempted one of the following operations:
-//   - Creating a snapshot of a Redis cluster running on a cache.t1.micro cache node.
-//   - Creating a snapshot of a cluster that is running Memcached rather than Redis.
+//   - Creating a snapshot of a Redis cluster running on a cache.t1.micro cache
+//     node.
+//   - Creating a snapshot of a cluster that is running Memcached rather than
+//     Redis.
 //
 // Neither of these are supported by ElastiCache.
 type SnapshotFeatureNotSupportedFault struct {
@@ -1646,7 +1647,7 @@ func (e *TagQuotaPerResourceExceeded) ErrorCode() string {
 }
 func (e *TagQuotaPerResourceExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The TestFailover  action is not available.
+// The TestFailover action is not available.
 type TestFailoverNotAvailableFault struct {
 	Message *string
 

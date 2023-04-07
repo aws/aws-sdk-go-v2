@@ -39,8 +39,8 @@ type GetRepositoryEndpointInput struct {
 	// This member is required.
 	Domain *string
 
-	// Returns which endpoint of a repository to return. A repository has one
-	// endpoint for each package format.
+	// Returns which endpoint of a repository to return. A repository has one endpoint
+	// for each package format.
 	//
 	// This member is required.
 	Format types.PackageFormat

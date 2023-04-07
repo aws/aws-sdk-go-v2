@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a pre-signed Amazon S3 URL in response for uploading the file
-// directly to S3. ConnectionToken  is used for invoking this API instead of
-// ParticipantToken . The Amazon Connect Participant Service APIs do not use
-// Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+// Provides a pre-signed Amazon S3 URL in response for uploading the file directly
+// to S3. ConnectionToken is used for invoking this API instead of ParticipantToken
+// . The Amazon Connect Participant Service APIs do not use Signature Version 4
+// authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
 // .
 func (c *Client) StartAttachmentUpload(ctx context.Context, params *StartAttachmentUploadInput, optFns ...func(*Options)) (*StartAttachmentUploadOutput, error) {
 	if params == nil {

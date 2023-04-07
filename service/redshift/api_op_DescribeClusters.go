@@ -25,8 +25,7 @@ import (
 // in the Amazon Redshift Cluster Management Guide. If you specify both tag keys
 // and tag values in the same request, Amazon Redshift returns all clusters that
 // match any combination of the specified keys and values. For example, if you have
-//
-// owner and environment  for tag keys, and admin  and test for tag values, all
+// owner and environment for tag keys, and admin and test for tag values, all
 // clusters that have any combination of those values are returned. If both tag
 // keys and values are omitted from the request, clusters are returned regardless
 // of whether they have tag keys or values associated with them.
@@ -55,30 +54,29 @@ type DescribeClustersInput struct {
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusters request exceed the
 	// value specified in MaxRecords , Amazon Web Services returns a value in the
-	// Markerfield of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request. Constraints: You can specify either the ClusterIdentifier parameter
-	// or the Marker parameter, but not both.
+	// Marker field of the response. You can retrieve the next set of response records
+	// by providing the returned marker value in the Marker parameter and retrying the
+	// request. Constraints: You can specify either the ClusterIdentifier parameter or
+	// the Marker parameter, but not both.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next set
-	// of records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// A tag key or keys for which you want to return all matching clusters that are
 	// associated with the specified key or keys. For example, suppose that you have
-	// clusters that are tagged with keys called owner  and environment. If you
-	// specify both of these tag keys in the request, Amazon Redshift returns a
-	// response with the clusters that have either or both of these tag keys associated
-	// with them.
+	// clusters that are tagged with keys called owner and environment . If you specify
+	// both of these tag keys in the request, Amazon Redshift returns a response with
+	// the clusters that have either or both of these tag keys associated with them.
 	TagKeys []string
 
 	// A tag value or values for which you want to return all matching clusters that
 	// are associated with the specified tag value or values. For example, suppose that
-	// you have clusters that are tagged with values called admin  and test. If you
+	// you have clusters that are tagged with values called admin and test . If you
 	// specify both of these tag values in the request, Amazon Redshift returns a
 	// response with the clusters that have either or both of these tag values
 	// associated with them.
@@ -87,10 +85,10 @@ type DescribeClustersInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the output from the DescribeClusters  action.
+// Contains the output from the DescribeClusters action.
 type DescribeClustersOutput struct {
 
-	// A list of Cluster  objects, where each object describes one cluster.
+	// A list of Cluster objects, where each object describes one cluster.
 	Clusters []types.Cluster
 
 	// A value that indicates the starting point for the next set of response records
@@ -176,15 +174,15 @@ var _ DescribeClustersAPIClient = (*Client)(nil)
 
 // DescribeClustersPaginatorOptions is the paginator options for DescribeClusters
 type DescribeClustersPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next set
-	// of records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -323,10 +321,10 @@ func (w *ClusterAvailableWaiter) Wait(ctx context.Context, params *DescribeClust
 	return err
 }
 
-// WaitForOutput calls the waiter function for ClusterAvailable waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for ClusterAvailable waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *ClusterAvailableWaiter) WaitForOutput(ctx context.Context, params *DescribeClustersInput, maxWaitDur time.Duration, optFns ...func(*ClusterAvailableWaiterOptions)) (*DescribeClustersOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -526,9 +524,9 @@ func NewClusterDeletedWaiter(client DescribeClustersAPIClient, optFns ...func(*C
 	}
 }
 
-// Wait calls the waiter function for ClusterDeleted waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ClusterDeleted waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ClusterDeletedWaiter) Wait(ctx context.Context, params *DescribeClustersInput, maxWaitDur time.Duration, optFns ...func(*ClusterDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

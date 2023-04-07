@@ -40,8 +40,7 @@ type GetInstanceInput struct {
 
 type GetInstanceOutput struct {
 
-	// An array of key-value pairs containing information about the specified
-	// instance.
+	// An array of key-value pairs containing information about the specified instance.
 	Instance *types.Instance
 
 	// Metadata pertaining to the operation's result.

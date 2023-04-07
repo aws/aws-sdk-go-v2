@@ -37,43 +37,43 @@ type ListUploadsInput struct {
 	// This member is required.
 	Arn *string
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	// The type of upload. Must be one of the following values:
-	//     - ANDROID_APP
-	//     - IOS_APP
-	//     - WEB_APP
-	//     - EXTERNAL_DATA
-	//     - APPIUM_JAVA_JUNIT_TEST_PACKAGE
-	//     - APPIUM_JAVA_TESTNG_TEST_PACKAGE
-	//     - APPIUM_PYTHON_TEST_PACKAGE
-	//     - APPIUM_NODE_TEST_PACKAGE
-	//     - APPIUM_RUBY_TEST_PACKAGE
-	//     - APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE
-	//     - APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE
-	//     - APPIUM_WEB_PYTHON_TEST_PACKAGE
-	//     - APPIUM_WEB_NODE_TEST_PACKAGE
-	//     - APPIUM_WEB_RUBY_TEST_PACKAGE
-	//     - CALABASH_TEST_PACKAGE
-	//     - INSTRUMENTATION_TEST_PACKAGE
-	//     - UIAUTOMATION_TEST_PACKAGE
-	//     - UIAUTOMATOR_TEST_PACKAGE
-	//     - XCTEST_TEST_PACKAGE
-	//     - XCTEST_UI_TEST_PACKAGE
-	//     - APPIUM_JAVA_JUNIT_TEST_SPEC
-	//     - APPIUM_JAVA_TESTNG_TEST_SPEC
-	//     - APPIUM_PYTHON_TEST_SPEC
-	//     - APPIUM_NODE_TEST_SPEC
-	//     - APPIUM_RUBY_TEST_SPEC
-	//     - APPIUM_WEB_JAVA_JUNIT_TEST_SPEC
-	//     - APPIUM_WEB_JAVA_TESTNG_TEST_SPEC
-	//     - APPIUM_WEB_PYTHON_TEST_SPEC
-	//     - APPIUM_WEB_NODE_TEST_SPEC
-	//     - APPIUM_WEB_RUBY_TEST_SPEC
-	//     - INSTRUMENTATION_TEST_SPEC
-	//     - XCTEST_UI_TEST_SPEC
+	//   - ANDROID_APP
+	//   - IOS_APP
+	//   - WEB_APP
+	//   - EXTERNAL_DATA
+	//   - APPIUM_JAVA_JUNIT_TEST_PACKAGE
+	//   - APPIUM_JAVA_TESTNG_TEST_PACKAGE
+	//   - APPIUM_PYTHON_TEST_PACKAGE
+	//   - APPIUM_NODE_TEST_PACKAGE
+	//   - APPIUM_RUBY_TEST_PACKAGE
+	//   - APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE
+	//   - APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE
+	//   - APPIUM_WEB_PYTHON_TEST_PACKAGE
+	//   - APPIUM_WEB_NODE_TEST_PACKAGE
+	//   - APPIUM_WEB_RUBY_TEST_PACKAGE
+	//   - CALABASH_TEST_PACKAGE
+	//   - INSTRUMENTATION_TEST_PACKAGE
+	//   - UIAUTOMATION_TEST_PACKAGE
+	//   - UIAUTOMATOR_TEST_PACKAGE
+	//   - XCTEST_TEST_PACKAGE
+	//   - XCTEST_UI_TEST_PACKAGE
+	//   - APPIUM_JAVA_JUNIT_TEST_SPEC
+	//   - APPIUM_JAVA_TESTNG_TEST_SPEC
+	//   - APPIUM_PYTHON_TEST_SPEC
+	//   - APPIUM_NODE_TEST_SPEC
+	//   - APPIUM_RUBY_TEST_SPEC
+	//   - APPIUM_WEB_JAVA_JUNIT_TEST_SPEC
+	//   - APPIUM_WEB_JAVA_TESTNG_TEST_SPEC
+	//   - APPIUM_WEB_PYTHON_TEST_SPEC
+	//   - APPIUM_WEB_NODE_TEST_SPEC
+	//   - APPIUM_WEB_RUBY_TEST_SPEC
+	//   - INSTRUMENTATION_TEST_SPEC
+	//   - XCTEST_UI_TEST_SPEC
 	Type types.UploadType
 
 	noSmithyDocumentSerde
@@ -168,8 +168,8 @@ var _ ListUploadsAPIClient = (*Client)(nil)
 
 // ListUploadsPaginatorOptions is the paginator options for ListUploads
 type ListUploadsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

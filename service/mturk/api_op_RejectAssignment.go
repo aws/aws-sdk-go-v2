@@ -40,8 +40,8 @@ type RejectAssignmentInput struct {
 	// This member is required.
 	AssignmentId *string
 
-	// A message for the Worker, which the Worker can see in the Status section of
-	// the web site.
+	// A message for the Worker, which the Worker can see in the Status section of the
+	// web site.
 	//
 	// This member is required.
 	RequesterFeedback *string

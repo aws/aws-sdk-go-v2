@@ -44,7 +44,7 @@ type GetSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetSAMLProvider  request.
+// Contains the response to a successful GetSAMLProvider request.
 type GetSAMLProviderOutput struct {
 
 	// The date and time when the SAML provider was created.

@@ -139,9 +139,9 @@ const (
 	DeviceBrandLenovo      DeviceBrand = "LENOVO"
 )
 
-// Values returns all known values for DeviceBrand. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeviceBrand. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DeviceBrand) Values() []DeviceBrand {
 	return []DeviceBrand{
 		"AWS_PANORAMA",
@@ -190,8 +190,8 @@ const (
 	DeviceReportedStatusInstallInProgress DeviceReportedStatus = "INSTALL_IN_PROGRESS"
 )
 
-// Values returns all known values for DeviceReportedStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DeviceReportedStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceReportedStatus) Values() []DeviceReportedStatus {
 	return []DeviceReportedStatus{
@@ -318,9 +318,9 @@ const (
 	NetworkConnectionStatusConnecting   NetworkConnectionStatus = "CONNECTING"
 )
 
-// Values returns all known values for NetworkConnectionStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NetworkConnectionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkConnectionStatus) Values() []NetworkConnectionStatus {
 	return []NetworkConnectionStatus{
 		"CONNECTED",
@@ -439,8 +439,8 @@ const (
 	PackageImportJobTypeMarketplaceNodePackageVersion PackageImportJobType = "MARKETPLACE_NODE_PACKAGE_VERSION"
 )
 
-// Values returns all known values for PackageImportJobType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PackageImportJobType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PackageImportJobType) Values() []PackageImportJobType {
 	return []PackageImportJobType{
@@ -459,8 +459,8 @@ const (
 	PackageVersionStatusDeleting          PackageVersionStatus = "DELETING"
 )
 
-// Values returns all known values for PackageVersionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PackageVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PackageVersionStatus) Values() []PackageVersionStatus {
 	return []PackageVersionStatus{
@@ -482,9 +482,9 @@ const (
 	PortTypeMedia   PortType = "MEDIA"
 )
 
-// Values returns all known values for PortType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PortType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (PortType) Values() []PortType {
 	return []PortType{
 		"BOOLEAN",

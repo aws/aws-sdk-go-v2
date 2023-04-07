@@ -50,7 +50,7 @@ type CreateAccountCustomizationInput struct {
 	// Services Region. You can add these to an Amazon Web Services account and a
 	// QuickSight namespace. For example, you can add a default theme by setting
 	// AccountCustomization to the midnight theme: "AccountCustomization": {
-	// "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }. Or, you can add a
+	// "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" } . Or, you can add a
 	// custom theme by specifying "AccountCustomization": { "DefaultTheme":
 	// "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
 	// } .

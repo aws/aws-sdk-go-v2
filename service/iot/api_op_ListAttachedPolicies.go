@@ -54,8 +54,8 @@ type ListAttachedPoliciesInput struct {
 
 type ListAttachedPoliciesOutput struct {
 
-	// The token to retrieve the next set of results, or ``null`` if there are no
-	// more results.
+	// The token to retrieve the next set of results, or ``null`` if there are no more
+	// results.
 	NextMarker *string
 
 	// The policies.
@@ -144,8 +144,8 @@ type ListAttachedPoliciesPaginatorOptions struct {
 	// The maximum number of results to be returned per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

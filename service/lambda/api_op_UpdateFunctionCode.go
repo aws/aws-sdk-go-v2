@@ -14,19 +14,18 @@ import (
 // Updates a Lambda function's code. If code signing is enabled for the function,
 // the code package must be signed by a trusted publisher. For more information,
 // see Configuring code signing for Lambda (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html)
-// . If the function's package type is Image, then you must specify the code
-// package in ImageUri  as the URI of a container image (https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html)
-// in the Amazon ECR registry. If the function's package type is Zip, then you
+// . If the function's package type is Image , then you must specify the code
+// package in ImageUri as the URI of a container image (https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html)
+// in the Amazon ECR registry. If the function's package type is Zip , then you
 // must specify the deployment package as a .zip file archive (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)
 // . Enter the Amazon S3 bucket and key of the code .zip file location. You can
 // also provide the function code inline using the ZipFile field. The code in the
 // deployment package must be compatible with the target instruction set
-// architecture of the function ( x86-64  or arm64). The function's code is
-// locked when you publish a version. You can't modify the code of a published
-// version, only the unpublished version. For a function defined as a container
-// image, Lambda resolves the image tag to an image digest. In Amazon ECR, if you
-// update the image tag to a new image, Lambda does not automatically update the
-// function.
+// architecture of the function ( x86-64 or arm64 ). The function's code is locked
+// when you publish a version. You can't modify the code of a published version,
+// only the unpublished version. For a function defined as a container image,
+// Lambda resolves the image tag to an image digest. In Amazon ECR, if you update
+// the image tag to a new image, Lambda does not automatically update the function.
 func (c *Client) UpdateFunctionCode(ctx context.Context, params *UpdateFunctionCodeInput, optFns ...func(*Options)) (*UpdateFunctionCodeOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionCodeInput{}
@@ -45,12 +44,11 @@ func (c *Client) UpdateFunctionCode(ctx context.Context, params *UpdateFunctionC
 type UpdateFunctionCodeInput struct {
 
 	// The name of the Lambda function. Name formats
-	//     - Function name – my-function .
-	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
-	//     - Partial ARN – 123456789012:function:my-function .
-	// The length constraint
-	// applies only to the full ARN. If you specify only the function name, it is
-	// limited to 64 characters in length.
+	//   - Function name – my-function .
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -69,7 +67,7 @@ type UpdateFunctionCodeInput struct {
 	ImageUri *string
 
 	// Set to true to publish a new version of the function after updating the code.
-	// This has the same effect as calling PublishVersion  separately.
+	// This has the same effect as calling PublishVersion separately.
 	Publish bool
 
 	// Update the function only if the revision ID matches the ID that's specified.
@@ -151,8 +149,8 @@ type UpdateFunctionCodeOutput struct {
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModified *string
 
-	// The status of the last update that was performed on the function. This is
-	// first set to Successful  after function creation completes.
+	// The status of the last update that was performed on the function. This is first
+	// set to Successful after function creation completes.
 	LastUpdateStatus types.LastUpdateStatus
 
 	// The reason for the last update that was performed on the function.
@@ -171,7 +169,7 @@ type UpdateFunctionCodeOutput struct {
 	// The amount of memory available to the function at runtime.
 	MemorySize *int32
 
-	// The type of deployment package. Set to Image  for container image and set Zip
+	// The type of deployment package. Set to Image for container image and set Zip
 	// for .zip file archive.
 	PackageType types.PackageType
 
@@ -193,20 +191,20 @@ type UpdateFunctionCodeOutput struct {
 	// The ARN of the signing profile version.
 	SigningProfileVersionArn *string
 
-	// Set ApplyOn  to PublishedVersions to create a snapshot of the initialized
+	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
 	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
 	// .
 	SnapStart *types.SnapStartResponse
 
-	// The current state of the function. When the state is Inactive, you can
+	// The current state of the function. When the state is Inactive , you can
 	// reactivate the function by invoking it.
 	State types.State
 
 	// The reason for the function's current state.
 	StateReason *string
 
-	// The reason code for the function's current state. When the code is Creating,
+	// The reason code for the function's current state. When the code is Creating ,
 	// you can't invoke or modify the function.
 	StateReasonCode types.StateReasonCode
 

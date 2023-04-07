@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays a list of categories for all event source types, or, if specified,
-// for a specified source type. You can also see this list in the "Amazon RDS event
+// Displays a list of categories for all event source types, or, if specified, for
+// a specified source type. You can also see this list in the "Amazon RDS event
 // categories and event messages" section of the Amazon RDS User Guide  (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Messages.html)
 // or the Amazon Aurora User Guide  (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Events.Messages.html)
 // .
@@ -36,19 +36,18 @@ type DescribeEventCategoriesInput struct {
 	// This parameter isn't currently supported.
 	Filters []types.Filter
 
-	// The type of source that is generating the events. For RDS Proxy events,
-	// specify db-proxy . Valid values: db-instance  | db-cluster  |
-	// db-parameter-group | db-security-group  | db-snapshot  | db-cluster-snapshot  |
-	// db-proxy
+	// The type of source that is generating the events. For RDS Proxy events, specify
+	// db-proxy . Valid values: db-instance | db-cluster | db-parameter-group |
+	// db-security-group | db-snapshot | db-cluster-snapshot | db-proxy
 	SourceType *string
 
 	noSmithyDocumentSerde
 }
 
-// Data returned from the DescribeEventCategories  operation.
+// Data returned from the DescribeEventCategories operation.
 type DescribeEventCategoriesOutput struct {
 
-	// A list of EventCategoriesMap  data types.
+	// A list of EventCategoriesMap data types.
 	EventCategoriesMapList []types.EventCategoriesMap
 
 	// Metadata pertaining to the operation's result.

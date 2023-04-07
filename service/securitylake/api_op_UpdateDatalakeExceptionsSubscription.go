@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified notification subscription in Amazon Security Lake for
-// the organization you specify.
+// Updates the specified notification subscription in Amazon Security Lake for the
+// organization you specify.
 func (c *Client) UpdateDatalakeExceptionsSubscription(ctx context.Context, params *UpdateDatalakeExceptionsSubscriptionInput, optFns ...func(*Options)) (*UpdateDatalakeExceptionsSubscriptionOutput, error) {
 	if params == nil {
 		params = &UpdateDatalakeExceptionsSubscriptionInput{}

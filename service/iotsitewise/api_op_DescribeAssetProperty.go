@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about an asset property. When you call this operation
-// for an attribute property, this response includes the default attribute value
-// that you define in the asset model. If you update the default value in the
-// model, this operation's response includes the new default value. This operation
-// doesn't return the value of the asset property. To get the value of an asset
-// property, use GetAssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html)
+// Retrieves information about an asset property. When you call this operation for
+// an attribute property, this response includes the default attribute value that
+// you define in the asset model. If you update the default value in the model,
+// this operation's response includes the new default value. This operation doesn't
+// return the value of the asset property. To get the value of an asset property,
+// use GetAssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html)
 // .
 func (c *Client) DescribeAssetProperty(ctx context.Context, params *DescribeAssetPropertyInput, optFns ...func(*Options)) (*DescribeAssetPropertyOutput, error) {
 	if params == nil {

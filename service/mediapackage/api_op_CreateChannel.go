@@ -30,8 +30,8 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 // A new Channel configuration.
 type CreateChannelInput struct {
 
-	// The ID of the Channel. The ID must be unique within the region and it cannot
-	// be changed after a Channel is created.
+	// The ID of the Channel. The ID must be unique within the region and it cannot be
+	// changed after a Channel is created.
 	//
 	// This member is required.
 	Id *string

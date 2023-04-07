@@ -37,7 +37,7 @@ type PutConfigurationSetSendingOptionsInput struct {
 	// This member is required.
 	ConfigurationSetName *string
 
-	// If true , email sending is enabled for the configuration set. If false, email
+	// If true , email sending is enabled for the configuration set. If false , email
 	// sending is disabled for the configuration set.
 	SendingEnabled bool
 

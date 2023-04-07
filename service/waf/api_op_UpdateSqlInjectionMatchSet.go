@@ -11,17 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF
-// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
 // and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 // . With the latest version, AWS WAF has a single set of endpoints for regional
 // and global use. Inserts or deletes SqlInjectionMatchTuple objects (filters) in
 // a SqlInjectionMatchSet . For each SqlInjectionMatchTuple object, you specify
 // the following values:
-//   - Action : Whether to insert the object into or delete the object from the array. To change a SqlInjectionMatchTuple , you delete the existing object and add a new one.
-//   - FieldToMatch : The part of web requests that you want AWS WAF to inspect and, if you want AWS WAF to inspect a header or custom query parameter, the name of the header or parameter.
-//   - TextTransformation : Which text transformation, if any, to perform on the web request before inspecting the request for snippets of malicious SQL code. You can only specify a single type of TextTransformation.
+//   - Action : Whether to insert the object into or delete the object from the
+//     array. To change a SqlInjectionMatchTuple , you delete the existing object and
+//     add a new one.
+//   - FieldToMatch : The part of web requests that you want AWS WAF to inspect
+//     and, if you want AWS WAF to inspect a header or custom query parameter, the name
+//     of the header or parameter.
+//   - TextTransformation : Which text transformation, if any, to perform on the
+//     web request before inspecting the request for snippets of malicious SQL code.
+//     You can only specify a single type of TextTransformation.
 //
 // You use SqlInjectionMatchSet objects to specify which CloudFront requests that
 // you want to allow, block, or count. For example, if you're receiving requests
@@ -30,8 +35,10 @@ import (
 // and then configure AWS WAF to block the requests. To create and configure a
 // SqlInjectionMatchSet , perform the following steps:
 //   - Submit a CreateSqlInjectionMatchSet request.
-//   - Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateIPSet request.
-//   - Submit an UpdateSqlInjectionMatchSet request to specify the parts of web requests that you want AWS WAF to inspect for snippets of SQL code.
+//   - Use GetChangeToken to get the change token that you provide in the
+//     ChangeToken parameter of an UpdateIPSet request.
+//   - Submit an UpdateSqlInjectionMatchSet request to specify the parts of web
+//     requests that you want AWS WAF to inspect for snippets of SQL code.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
 // requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/)
@@ -59,19 +66,19 @@ type UpdateSqlInjectionMatchSetInput struct {
 	// This member is required.
 	ChangeToken *string
 
-	// The SqlInjectionMatchSetId  of the SqlInjectionMatchSet that you want to
-	// update. SqlInjectionMatchSetId  is returned by CreateSqlInjectionMatchSet and
-	// by ListSqlInjectionMatchSets .
+	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to update.
+	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by
+	// ListSqlInjectionMatchSets .
 	//
 	// This member is required.
 	SqlInjectionMatchSetId *string
 
 	// An array of SqlInjectionMatchSetUpdate objects that you want to insert into or
-	// delete from a SqlInjectionMatchSet. For more information, see the applicable
+	// delete from a SqlInjectionMatchSet . For more information, see the applicable
 	// data types:
-	//     - SqlInjectionMatchSetUpdate : Contains Action and SqlInjectionMatchTuple
-	//     - SqlInjectionMatchTuple : Contains FieldToMatch and TextTransformation
-	//     - FieldToMatch : Contains Data and Type
+	//   - SqlInjectionMatchSetUpdate : Contains Action and SqlInjectionMatchTuple
+	//   - SqlInjectionMatchTuple : Contains FieldToMatch and TextTransformation
+	//   - FieldToMatch : Contains Data and Type
 	//
 	// This member is required.
 	Updates []types.SqlInjectionMatchSetUpdate
@@ -79,12 +86,12 @@ type UpdateSqlInjectionMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response to an UpdateSqlInjectionMatchSets  request.
+// The response to an UpdateSqlInjectionMatchSets request.
 type UpdateSqlInjectionMatchSetOutput struct {
 
-	// The ChangeToken  that you used to submit the UpdateSqlInjectionMatchSet
-	// request. You can also use this value to query the status of the request. For
-	// more information, see GetChangeTokenStatus .
+	// The ChangeToken that you used to submit the UpdateSqlInjectionMatchSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus .
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

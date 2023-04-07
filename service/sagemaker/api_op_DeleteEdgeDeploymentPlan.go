@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an edge deployment plan if (and only if) all the stages in the plan
-// are inactive or there are no stages in the plan.
+// Deletes an edge deployment plan if (and only if) all the stages in the plan are
+// inactive or there are no stages in the plan.
 func (c *Client) DeleteEdgeDeploymentPlan(ctx context.Context, params *DeleteEdgeDeploymentPlanInput, optFns ...func(*Options)) (*DeleteEdgeDeploymentPlanOutput, error) {
 	if params == nil {
 		params = &DeleteEdgeDeploymentPlanInput{}

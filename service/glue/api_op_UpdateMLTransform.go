@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing machine learning transform. Call this operation to tune
-// the algorithm parameters to achieve better results. After calling this
-// operation, you can call the StartMLEvaluationTaskRun operation to assess how
-// well your new parameters achieved your goals (such as improving the quality of
-// your machine learning transform, or making it more cost-effective).
+// Updates an existing machine learning transform. Call this operation to tune the
+// algorithm parameters to achieve better results. After calling this operation,
+// you can call the StartMLEvaluationTaskRun operation to assess how well your new
+// parameters achieved your goals (such as improving the quality of your machine
+// learning transform, or making it more cost-effective).
 func (c *Client) UpdateMLTransform(ctx context.Context, params *UpdateMLTransformInput, optFns ...func(*Options)) (*UpdateMLTransformOutput, error) {
 	if params == nil {
 		params = &UpdateMLTransformInput{}
@@ -48,24 +48,24 @@ type UpdateMLTransformInput struct {
 	// in the developer guide.
 	GlueVersion *string
 
-	// The number of Glue data processing units (DPUs) that are allocated to task
-	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
-	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
+	// The number of Glue data processing units (DPUs) that are allocated to task runs
+	// for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A
+	// DPU is a relative measure of processing power that consists of 4 vCPUs of
 	// compute capacity and 16 GB of memory. For more information, see the Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/) . When the WorkerType
-	// field is set to a value other than Standard , the MaxCapacity field is set
+	// pricing page (https://aws.amazon.com/glue/pricing/) . When the WorkerType field
+	// is set to a value other than Standard , the MaxCapacity field is set
 	// automatically and becomes read-only.
 	MaxCapacity *float64
 
-	// The maximum number of times to retry a task for this transform after a task
-	// run fails.
+	// The maximum number of times to retry a task for this transform after a task run
+	// fails.
 	MaxRetries *int32
 
 	// The unique name that you gave the transform when you created it.
 	Name *string
 
-	// The number of workers of a defined workerType that are allocated when this
-	// task runs.
+	// The number of workers of a defined workerType that are allocated when this task
+	// runs.
 	NumberOfWorkers *int32
 
 	// The configuration parameters that are specific to the transform type
@@ -78,14 +78,17 @@ type UpdateMLTransformInput struct {
 
 	// The timeout for a task run for this transform in minutes. This is the maximum
 	// time that a task run for this transform can consume resources before it is
-	// terminated and enters TIMEOUT  status. The default is 2,880 minutes (48 hours).
+	// terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when this task runs. Accepts a
 	// value of Standard, G.1X, or G.2X.
-	//     - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//     - For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.
-	//     - For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.
+	//   - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory
+	//   and a 50GB disk, and 2 executors per worker.
+	//   - For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a
+	//   64GB disk, and 1 executor per worker.
+	//   - For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a
+	//   128GB disk, and 1 executor per worker.
 	WorkerType types.WorkerType
 
 	noSmithyDocumentSerde

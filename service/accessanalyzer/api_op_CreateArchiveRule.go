@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an archive rule for the specified analyzer. Archive rules
-// automatically archive new findings that meet the criteria you define when you
-// create the rule. To learn about filter keys that you can use to create an
-// archive rule, see IAM Access Analyzer filter keys (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html)
+// Creates an archive rule for the specified analyzer. Archive rules automatically
+// archive new findings that meet the criteria you define when you create the rule.
+// To learn about filter keys that you can use to create an archive rule, see IAM
+// Access Analyzer filter keys (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html)
 // in the IAM User Guide.
 func (c *Client) CreateArchiveRule(ctx context.Context, params *CreateArchiveRuleInput, optFns ...func(*Options)) (*CreateArchiveRuleOutput, error) {
 	if params == nil {

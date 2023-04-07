@@ -41,9 +41,9 @@ type TerminateProvisionedProductInput struct {
 	TerminateToken *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// If set to true, Service Catalog stops managing the specified provisioned
@@ -58,9 +58,9 @@ type TerminateProvisionedProductInput struct {
 	// ProvisionedProductName and ProvisionedProductId .
 	ProvisionedProductName *string
 
-	// When this boolean parameter is set to true, the TerminateProvisionedProduct
-	// API deletes the Service Catalog provisioned product. However, it does not remove
-	// the CloudFormation stack, stack set, or the underlying resources of the deleted
+	// When this boolean parameter is set to true, the TerminateProvisionedProduct API
+	// deletes the Service Catalog provisioned product. However, it does not remove the
+	// CloudFormation stack, stack set, or the underlying resources of the deleted
 	// provisioned product. The default value is false.
 	RetainPhysicalResources bool
 

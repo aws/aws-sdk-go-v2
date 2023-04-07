@@ -12,16 +12,16 @@ import (
 
 // Used by activity workers and task states using the callback (https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token)
 // pattern to report to Step Functions that the task represented by the specified
-// taskToken is still making progress. This action resets the Heartbeat clock.
-// The Heartbeat threshold is specified in the state machine's Amazon States
-// Language definition ( HeartbeatSeconds). This action does not in itself create
-// an event in the execution history. However, if the task times out, the execution
-// history contains an ActivityTimedOut  entry for activities, or a TaskTimedOut
-// entry for for tasks using the job run (https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync)
+// taskToken is still making progress. This action resets the Heartbeat clock. The
+// Heartbeat threshold is specified in the state machine's Amazon States Language
+// definition ( HeartbeatSeconds ). This action does not in itself create an event
+// in the execution history. However, if the task times out, the execution history
+// contains an ActivityTimedOut entry for activities, or a TaskTimedOut entry for
+// for tasks using the job run (https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync)
 // or callback (https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token)
 // pattern. The Timeout of a task, defined in the state machine's Amazon States
 // Language definition, is its maximum allowed duration, regardless of the number
-// of SendTaskHeartbeat  requests received. Use HeartbeatSeconds to configure the
+// of SendTaskHeartbeat requests received. Use HeartbeatSeconds to configure the
 // timeout interval for heartbeats.
 func (c *Client) SendTaskHeartbeat(ctx context.Context, params *SendTaskHeartbeatInput, optFns ...func(*Options)) (*SendTaskHeartbeatOutput, error) {
 	if params == nil {

@@ -12,16 +12,16 @@ import (
 //   - On-demand (default)
 //   - Provisioned
 //
-// The read/write capacity mode that you choose controls how
-// you are charged for read and write throughput and how table throughput capacity
-// is managed. For more information, see Read/write capacity modes (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
+// The read/write capacity mode that you choose controls how you are charged for
+// read and write throughput and how table throughput capacity is managed. For more
+// information, see Read/write capacity modes (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
 // in the Amazon Keyspaces Developer Guide.
 type CapacitySpecification struct {
 
 	// The read/write throughput capacity mode for a table. The options are:
-	//     - throughputMode:PAY_PER_REQUEST and
-	//     - throughputMode:PROVISIONED - Provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as input.
-	//
+	//   - throughputMode:PAY_PER_REQUEST and
+	//   - throughputMode:PROVISIONED - Provisioned capacity mode requires
+	//   readCapacityUnits and writeCapacityUnits as input.
 	// The default is throughput_mode:PAY_PER_REQUEST . For more information, see
 	// Read/write capacity modes (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
 	// in the Amazon Keyspaces Developer Guide.
@@ -29,11 +29,11 @@ type CapacitySpecification struct {
 	// This member is required.
 	ThroughputMode ThroughputMode
 
-	// The throughput capacity specified for read  operations defined in read
-	// capacity units (RCUs) .
+	// The throughput capacity specified for read operations defined in read capacity
+	// units (RCUs) .
 	ReadCapacityUnits *int64
 
-	// The throughput capacity specified for write  operations defined in write
+	// The throughput capacity specified for write operations defined in write
 	// capacity units (WCUs) .
 	WriteCapacityUnits *int64
 
@@ -49,9 +49,9 @@ type CapacitySpecification struct {
 type CapacitySpecificationSummary struct {
 
 	// The read/write throughput capacity mode for a table. The options are:
-	//     - throughputMode:PAY_PER_REQUEST and
-	//     - throughputMode:PROVISIONED - Provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as input.
-	//
+	//   - throughputMode:PAY_PER_REQUEST and
+	//   - throughputMode:PROVISIONED - Provisioned capacity mode requires
+	//   readCapacityUnits and writeCapacityUnits as input.
 	// The default is throughput_mode:PAY_PER_REQUEST . For more information, see
 	// Read/write capacity modes (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
 	// in the Amazon Keyspaces Developer Guide.
@@ -63,11 +63,11 @@ type CapacitySpecificationSummary struct {
 	// capacity of a table.
 	LastUpdateToPayPerRequestTimestamp *time.Time
 
-	// The throughput capacity specified for read  operations defined in read
-	// capacity units (RCUs) .
+	// The throughput capacity specified for read operations defined in read capacity
+	// units (RCUs) .
 	ReadCapacityUnits *int64
 
-	// The throughput capacity specified for write  operations defined in write
+	// The throughput capacity specified for write operations defined in write
 	// capacity units (WCUs) .
 	WriteCapacityUnits *int64
 
@@ -132,11 +132,14 @@ type Comment struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Keyspaces encrypts and decrypts the table data at rest transparently
-// and integrates with Key Management Service for storing and managing the
-// encryption key. You can choose one of the following KMS keys (KMS keys):
-//   - Amazon Web Services owned key - This is the default encryption type. The key is owned by Amazon Keyspaces (no additional charge).
-//   - Customer managed key - This key is stored in your account and is created, owned, and managed by you. You have full control over the customer managed key (KMS charges apply).
+// Amazon Keyspaces encrypts and decrypts the table data at rest transparently and
+// integrates with Key Management Service for storing and managing the encryption
+// key. You can choose one of the following KMS keys (KMS keys):
+//   - Amazon Web Services owned key - This is the default encryption type. The
+//     key is owned by Amazon Keyspaces (no additional charge).
+//   - Customer managed key - This key is stored in your account and is created,
+//     owned, and managed by you. You have full control over the customer managed key
+//     (KMS charges apply).
 //
 // For more information about encryption at rest in Amazon Keyspaces, see
 // Encryption at rest (https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html)
@@ -147,11 +150,13 @@ type EncryptionSpecification struct {
 
 	// The encryption option specified for the table. You can choose one of the
 	// following KMS keys (KMS keys):
-	//     - type:AWS_OWNED_KMS_KEY - This key is owned by Amazon Keyspaces.
-	//     - type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your account and is created, owned, and managed by you. This option requires the kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as input.
-	//
-	// The default is type:AWS_OWNED_KMS_KEY . For more information, see Encryption
-	// at rest (https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html)
+	//   - type:AWS_OWNED_KMS_KEY - This key is owned by Amazon Keyspaces.
+	//   - type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your account and is
+	//   created, owned, and managed by you. This option requires the
+	//   kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as
+	//   input.
+	// The default is type:AWS_OWNED_KMS_KEY . For more information, see Encryption at
+	// rest (https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html)
 	// in the Amazon Keyspaces Developer Guide.
 	//
 	// This member is required.
@@ -201,8 +206,8 @@ type PartitionKey struct {
 type PointInTimeRecovery struct {
 
 	// The options are:
-	//     - status=ENABLED
-	//     - status=DISABLED
+	//   - status=ENABLED
+	//   - status=DISABLED
 	//
 	// This member is required.
 	Status PointInTimeRecoveryStatus
@@ -240,15 +245,15 @@ type SchemaDefinition struct {
 	// The columns that are part of the clustering key of the table.
 	ClusteringKeys []ClusteringKey
 
-	// The columns that have been defined as STATIC. Static columns store values that
+	// The columns that have been defined as STATIC . Static columns store values that
 	// are shared by all rows in the same partition.
 	StaticColumns []StaticColumn
 
 	noSmithyDocumentSerde
 }
 
-// The static columns of the table. Static columns store values that are shared
-// by all rows in the same partition.
+// The static columns of the table. Static columns store values that are shared by
+// all rows in the same partition.
 type StaticColumn struct {
 
 	// The name of the static column.
@@ -292,10 +297,9 @@ type TableSummary struct {
 // in the Amazon Keyspaces Developer Guide.
 type Tag struct {
 
-	// The key of the tag. Tag keys are case sensitive. Each Amazon Keyspaces
-	// resource can only have up to one tag with the same key. If you try to add an
-	// existing tag (same key), the existing tag value will be updated to the new
-	// value.
+	// The key of the tag. Tag keys are case sensitive. Each Amazon Keyspaces resource
+	// can only have up to one tag with the same key. If you try to add an existing tag
+	// (same key), the existing tag value will be updated to the new value.
 	//
 	// This member is required.
 	Key *string

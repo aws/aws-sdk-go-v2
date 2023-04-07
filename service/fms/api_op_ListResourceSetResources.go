@@ -35,8 +35,8 @@ type ListResourceSetResourcesInput struct {
 	// This member is required.
 	Identifier *string
 
-	// The maximum number of objects that you want Firewall Manager to return for
-	// this request. If more objects are available, in the response, Firewall Manager
+	// The maximum number of objects that you want Firewall Manager to return for this
+	// request. If more objects are available, in the response, Firewall Manager
 	// provides a NextToken value that you can use in a subsequent call to get the
 	// next batch of objects.
 	MaxResults *int32

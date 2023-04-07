@@ -42,13 +42,13 @@ type ModifyClusterInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
-	// If true, major version upgrades will be applied automatically to the cluster
+	// If true , major version upgrades will be applied automatically to the cluster
 	// during the maintenance window. Default: false
 	AllowVersionUpgrade *bool
 
 	// The number of days that automated snapshots are retained. If the value is 0,
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
-	// can still create manual snapshots when you want with CreateClusterSnapshot. If
+	// can still create manual snapshots when you want with CreateClusterSnapshot . If
 	// you decrease the automated snapshot retention period from its current value,
 	// existing automated snapshots that fall outside of the new retention period will
 	// be immediately deleted. You can't disable automated snapshots for RA3 node
@@ -66,18 +66,18 @@ type ModifyClusterInput struct {
 
 	// The name of the cluster parameter group to apply to this cluster. This change
 	// is applied only after the cluster is rebooted. To reboot a cluster use
-	// RebootCluster. Default: Uses existing setting. Constraints: The cluster
+	// RebootCluster . Default: Uses existing setting. Constraints: The cluster
 	// parameter group must be in the same parameter group family that matches the
 	// cluster version.
 	ClusterParameterGroupName *string
 
-	// A list of cluster security groups to be authorized on this cluster. This
-	// change is asynchronously applied as soon as possible. Security groups currently
+	// A list of cluster security groups to be authorized on this cluster. This change
+	// is asynchronously applied as soon as possible. Security groups currently
 	// associated with the cluster, and not in the list of groups to apply, will be
 	// revoked from the cluster. Constraints:
-	//     - Must be 1 to 255 alphanumeric characters or hyphens
-	//     - First character must be a letter
-	//     - Cannot end with a hyphen or contain two consecutive hyphens
+	//   - Must be 1 to 255 alphanumeric characters or hyphens
+	//   - First character must be a letter
+	//   - Cannot end with a hyphen or contain two consecutive hyphens
 	ClusterSecurityGroups []string
 
 	// The new cluster type. When you submit your cluster resize request, your
@@ -105,16 +105,16 @@ type ModifyClusterInput struct {
 	ElasticIp *string
 
 	// Indicates whether the cluster is encrypted. If the value is encrypted (true)
-	// and you provide a value for the KmsKeyId parameter, we encrypt the cluster
-	// with the provided KmsKeyId . If you don't provide a KmsKeyId, we encrypt with
-	// the default key. If the value is not encrypted (false), then the cluster is
+	// and you provide a value for the KmsKeyId parameter, we encrypt the cluster with
+	// the provided KmsKeyId . If you don't provide a KmsKeyId , we encrypt with the
+	// default key. If the value is not encrypted (false), then the cluster is
 	// decrypted.
 	Encrypted *bool
 
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the cluster
 	// must be in a VPC. For more information, see Enhanced VPC Routing (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
-	// in the Amazon Redshift Cluster Management Guide. If this option is true,
+	// in the Amazon Redshift Cluster Management Guide. If this option is true ,
 	// enhanced VPC routing is enabled. Default: false
 	EnhancedVpcRouting *bool
 
@@ -132,7 +132,7 @@ type ModifyClusterInput struct {
 
 	// The name for the maintenance track that you want to assign for the cluster.
 	// This name change is asynchronous. The new track name stays in the
-	// PendingModifiedValuesfor the cluster until the next maintenance window. When
+	// PendingModifiedValues for the cluster until the next maintenance window. When
 	// the maintenance track changes, the cluster is switched to the latest cluster
 	// release available for the maintenance track. At this point, the maintenance
 	// track name is applied.
@@ -147,34 +147,34 @@ type ModifyClusterInput struct {
 
 	// The new password for the cluster admin user. This change is asynchronously
 	// applied as soon as possible. Between the time of the request and the completion
-	// of the request, the MasterUserPassword  element exists in the
-	// PendingModifiedValueselement of the operation response. Operations never
-	// return the password, so this operation provides a way to regain access to the
-	// admin user for a cluster if the password is lost. Default: Uses existing
-	// setting. Constraints:
-	//     - Must be between 8 and 64 characters in length.
-	//     - Must contain at least one uppercase letter.
-	//     - Must contain at least one lowercase letter.
-	//     - Must contain one number.
-	//     - Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \ , / , or @ .
+	// of the request, the MasterUserPassword element exists in the
+	// PendingModifiedValues element of the operation response. Operations never return
+	// the password, so this operation provides a way to regain access to the admin
+	// user for a cluster if the password is lost. Default: Uses existing setting.
+	// Constraints:
+	//   - Must be between 8 and 64 characters in length.
+	//   - Must contain at least one uppercase letter.
+	//   - Must contain at least one lowercase letter.
+	//   - Must contain one number.
+	//   - Can be any printable ASCII character (ASCII code 33-126) except ' (single
+	//   quote), " (double quote), \ , / , or @ .
 	MasterUserPassword *string
 
 	// The new identifier for the cluster. Constraints:
-	//     - Must contain from 1 to 63 alphanumeric characters or hyphens.
-	//     - Alphabetic characters must be lowercase.
-	//     - First character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
-	//     - Must be unique for all clusters within an Amazon Web Services account.
-	//
+	//   - Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//   - Alphabetic characters must be lowercase.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must be unique for all clusters within an Amazon Web Services account.
 	// Example: examplecluster
 	NewClusterIdentifier *string
 
-	// The new node type of the cluster. If you specify a new node type, you must
-	// also specify the number of nodes parameter. For more information about resizing
+	// The new node type of the cluster. If you specify a new node type, you must also
+	// specify the number of nodes parameter. For more information about resizing
 	// clusters, go to Resizing Clusters in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html)
-	// in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge  |
-	// ds2.8xlarge | dc1.large  | dc1.8xlarge  | dc2.large  | dc2.8xlarge  |
-	// ra3.xlplus | ra3.4xlarge  | ra3.16xlarge
+	// in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge |
+	// ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.xlplus |
+	// ra3.4xlarge | ra3.16xlarge
 	NodeType *string
 
 	// The new number of nodes of the cluster. If you specify a new number of nodes,
@@ -193,16 +193,16 @@ type ModifyClusterInput struct {
 	// maintenance window indicates the current time, there must be at least 120
 	// minutes between the current time and end of the window in order to ensure that
 	// pending changes are applied. Default: Uses existing setting. Format:
-	// ddd:hh24:mi-ddd:hh24:mi, for example wed:07:30-wed:08:00. Valid Days: Mon |
-	// Tue | Wed | Thu | Fri | Sat | Sun Constraints: Must be at least 30 minutes.
+	// ddd:hh24:mi-ddd:hh24:mi, for example wed:07:30-wed:08:00 . Valid Days: Mon | Tue
+	// | Wed | Thu | Fri | Sat | Sun Constraints: Must be at least 30 minutes.
 	PreferredMaintenanceWindow *string
 
-	// If true, the cluster can be accessed from a public network. Only clusters in
+	// If true , the cluster can be accessed from a public network. Only clusters in
 	// VPCs can be set to be publicly available.
 	PubliclyAccessible *bool
 
-	// A list of virtual private cloud (VPC) security groups to be associated with
-	// the cluster. This change is asynchronously applied as soon as possible.
+	// A list of virtual private cloud (VPC) security groups to be associated with the
+	// cluster. This change is asynchronously applied as soon as possible.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde

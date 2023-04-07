@@ -35,7 +35,7 @@ type ListDedicatedIpPoolsInput struct {
 	// position in the list of dedicated IP pools.
 	NextToken *string
 
-	// The number of results to show in a single call to ListDedicatedIpPools. If the
+	// The number of results to show in a single call to ListDedicatedIpPools . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
@@ -52,8 +52,8 @@ type ListDedicatedIpPoolsOutput struct {
 	DedicatedIpPools []string
 
 	// A token that indicates that there are additional IP pools to list. To view
-	// additional IP pools, issue another request to ListDedicatedIpPools, passing
-	// this token in the NextToken  parameter.
+	// additional IP pools, issue another request to ListDedicatedIpPools , passing
+	// this token in the NextToken parameter.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -133,14 +133,14 @@ var _ ListDedicatedIpPoolsAPIClient = (*Client)(nil)
 // ListDedicatedIpPoolsPaginatorOptions is the paginator options for
 // ListDedicatedIpPools
 type ListDedicatedIpPoolsPaginatorOptions struct {
-	// The number of results to show in a single call to ListDedicatedIpPools. If the
+	// The number of results to show in a single call to ListDedicatedIpPools . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

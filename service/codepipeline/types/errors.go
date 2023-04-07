@@ -592,8 +592,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The stage has failed in a later run of the pipeline and the
-// pipelineExecutionId associated with the request is out of date.
+// The stage has failed in a later run of the pipeline and the pipelineExecutionId
+// associated with the request is out of date.
 type NotLatestPipelineExecutionException struct {
 	Message *string
 
@@ -863,8 +863,8 @@ func (e *StageNotFoundException) ErrorCode() string {
 }
 func (e *StageNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Unable to retry. The pipeline structure or stage state might have changed
-// while actions awaited retry, or the stage contains no failed actions.
+// Unable to retry. The pipeline structure or stage state might have changed while
+// actions awaited retry, or the stage contains no failed actions.
 type StageNotRetryableException struct {
 	Message *string
 

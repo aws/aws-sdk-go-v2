@@ -78,9 +78,9 @@ const (
 	FleetStatusFailedToDelete FleetStatus = "FAILED_TO_DELETE"
 )
 
-// Values returns all known values for FleetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FleetStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FleetStatus) Values() []FleetStatus {
 	return []FleetStatus{
 		"CREATING",
@@ -99,8 +99,8 @@ const (
 	IdentityProviderTypeSaml IdentityProviderType = "SAML"
 )
 
-// Values returns all known values for IdentityProviderType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for IdentityProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityProviderType) Values() []IdentityProviderType {
 	return []IdentityProviderType{

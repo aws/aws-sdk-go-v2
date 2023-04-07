@@ -44,7 +44,7 @@ func (c *Client) RespondToAuthChallenge(ctx context.Context, params *RespondToAu
 type RespondToAuthChallengeInput struct {
 
 	// The challenge name. For more information, see InitiateAuth (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html)
-	// . ADMIN_NO_SRP_AUTH  isn't a valid value.
+	// . ADMIN_NO_SRP_AUTH isn't a valid value.
 	//
 	// This member is required.
 	ChallengeName types.ChallengeNameType
@@ -62,13 +62,27 @@ type RespondToAuthChallengeInput struct {
 	// ChallengeName , for example: SECRET_HASH (if app client is configured with
 	// client secret) applies to all of the inputs that follow (including
 	// SOFTWARE_TOKEN_MFA ).
-	//     - SMS_MFA : SMS_MFA_CODE , USERNAME .
-	//     - PASSWORD_VERIFIER : PASSWORD_CLAIM_SIGNATURE , PASSWORD_CLAIM_SECRET_BLOCK , TIMESTAMP , USERNAME . PASSWORD_VERIFIER requires DEVICE_KEY when you sign in with a remembered device.
-	//     - NEW_PASSWORD_REQUIRED : NEW_PASSWORD , USERNAME , SECRET_HASH (if app client is configured with client secret). To set any required attributes that Amazon Cognito returned as requiredAttributes in the InitiateAuth response, add a userAttributes.attributename parameter. This parameter can also set values for writable attributes that aren't required by your user pool. In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required attribute that already has a value. In RespondToAuthChallenge , set a value for any keys that Amazon Cognito returned in the requiredAttributes parameter, then use the UpdateUserAttributes API operation to modify the value of any additional attributes.
-	//     - SOFTWARE_TOKEN_MFA : USERNAME and SOFTWARE_TOKEN_MFA_CODE are required attributes.
-	//     - DEVICE_SRP_AUTH requires USERNAME , DEVICE_KEY , SRP_A (and SECRET_HASH ).
-	//     - DEVICE_PASSWORD_VERIFIER requires everything that PASSWORD_VERIFIER requires, plus DEVICE_KEY .
-	//     - MFA_SETUP requires USERNAME , plus you must use the session value returned by VerifySoftwareToken in the Session parameter.
+	//   - SMS_MFA : SMS_MFA_CODE , USERNAME .
+	//   - PASSWORD_VERIFIER : PASSWORD_CLAIM_SIGNATURE , PASSWORD_CLAIM_SECRET_BLOCK ,
+	//   TIMESTAMP , USERNAME . PASSWORD_VERIFIER requires DEVICE_KEY when you sign in
+	//   with a remembered device.
+	//   - NEW_PASSWORD_REQUIRED : NEW_PASSWORD , USERNAME , SECRET_HASH (if app client
+	//   is configured with client secret). To set any required attributes that Amazon
+	//   Cognito returned as requiredAttributes in the InitiateAuth response, add a
+	//   userAttributes.attributename parameter. This parameter can also set values
+	//   for writable attributes that aren't required by your user pool. In a
+	//   NEW_PASSWORD_REQUIRED challenge response, you can't modify a required
+	//   attribute that already has a value. In RespondToAuthChallenge , set a value
+	//   for any keys that Amazon Cognito returned in the requiredAttributes parameter,
+	//   then use the UpdateUserAttributes API operation to modify the value of any
+	//   additional attributes.
+	//   - SOFTWARE_TOKEN_MFA : USERNAME and SOFTWARE_TOKEN_MFA_CODE are required
+	//   attributes.
+	//   - DEVICE_SRP_AUTH requires USERNAME , DEVICE_KEY , SRP_A (and SECRET_HASH ).
+	//   - DEVICE_PASSWORD_VERIFIER requires everything that PASSWORD_VERIFIER
+	//   requires, plus DEVICE_KEY .
+	//   - MFA_SETUP requires USERNAME , plus you must use the session value returned
+	//   by VerifySoftwareToken in the Session parameter.
 	ChallengeResponses map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for any custom
@@ -85,15 +99,19 @@ type RespondToAuthChallengeInput struct {
 	// more information, see Customizing user pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	//     - Store the ClientMetadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration doesn't include triggers, the ClientMetadata parameter serves no purpose.
-	//     - Validate the ClientMetadata value.
-	//     - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide sensitive information.
+	//   - Store the ClientMetadata value. This data is available only to Lambda
+	//   triggers that are assigned to a user pool to support custom workflows. If your
+	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
+	//   serves no purpose.
+	//   - Validate the ClientMetadata value.
+	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
+	//   sensitive information.
 	ClientMetadata map[string]string
 
 	// The session that should be passed both ways in challenge-response calls to the
-	// service. If InitiateAuth  or RespondToAuthChallenge API call determines that
-	// the caller must pass another challenge, they return a session with other
-	// challenge parameters. This session should be passed as it is to the next
+	// service. If InitiateAuth or RespondToAuthChallenge API call determines that the
+	// caller must pass another challenge, they return a session with other challenge
+	// parameters. This session should be passed as it is to the next
 	// RespondToAuthChallenge API call.
 	Session *string
 

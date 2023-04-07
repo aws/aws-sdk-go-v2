@@ -63,7 +63,7 @@ type DescribeIndexOutput struct {
 	// create the index.
 	Edition types.IndexEdition
 
-	// When the Status  field value is FAILED , the ErrorMessage field contains a
+	// When the Status field value is FAILED , the ErrorMessage field contains a
 	// message that explains why.
 	ErrorMessage *string
 
@@ -81,13 +81,13 @@ type DescribeIndexOutput struct {
 	// permission to write to your Amazon Cloudwatch logs.
 	RoleArn *string
 
-	// The identifier of the KMScustomer master key (CMK) that is used to encrypt
-	// your data. Amazon Kendra doesn't support asymmetric CMKs.
+	// The identifier of the KMScustomer master key (CMK) that is used to encrypt your
+	// data. Amazon Kendra doesn't support asymmetric CMKs.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
-	// The current status of the index. When the value is ACTIVE, the index is ready
-	// for use. If the Status  field value is FAILED , the ErrorMessage field
-	// contains a message that explains why.
+	// The current status of the index. When the value is ACTIVE , the index is ready
+	// for use. If the Status field value is FAILED , the ErrorMessage field contains
+	// a message that explains why.
 	Status types.IndexStatus
 
 	// The Unix when the index was last updated.
@@ -96,9 +96,9 @@ type DescribeIndexOutput struct {
 	// The user context policy for the Amazon Kendra index.
 	UserContextPolicy types.UserContextPolicy
 
-	// Whether you have enabled the configuration for fetching access levels of
-	// groups and users from an IAM Identity Center (successor to Single Sign-On)
-	// identity source.
+	// Whether you have enabled the configuration for fetching access levels of groups
+	// and users from an IAM Identity Center (successor to Single Sign-On) identity
+	// source.
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration for the Amazon Kendra index.

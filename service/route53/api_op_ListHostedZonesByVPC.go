@@ -15,8 +15,13 @@ import (
 // regardless of which Amazon Web Services account or Amazon Web Services service
 // owns the hosted zones. The HostedZoneOwner structure in the response contains
 // one of the following values:
-//   - An OwningAccount element, which contains the account number of either the current Amazon Web Services account or another Amazon Web Services account. Some services, such as Cloud Map, create hosted zones using the current account.
-//   - An OwningService element, which identifies the Amazon Web Services service that created and owns the hosted zone. For example, if a hosted zone was created by Amazon Elastic File System (Amazon EFS), the value of Owner is efs.amazonaws.com .
+//   - An OwningAccount element, which contains the account number of either the
+//     current Amazon Web Services account or another Amazon Web Services account. Some
+//     services, such as Cloud Map, create hosted zones using the current account.
+//   - An OwningService element, which identifies the Amazon Web Services service
+//     that created and owns the hosted zone. For example, if a hosted zone was created
+//     by Amazon Elastic File System (Amazon EFS), the value of Owner is
+//     efs.amazonaws.com .
 //
 // When listing private hosted zones, the hosted zone and the Amazon VPC must
 // belong to the same partition where the hosted zones were created. A partition is
@@ -26,8 +31,7 @@ import (
 //   - aws-cn - China Regions
 //   - aws-us-gov - Amazon Web Services GovCloud (US) Region
 //
-// For more
-// information, see Access Management (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+// For more information, see Access Management (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 // in the Amazon Web Services General Reference.
 func (c *Client) ListHostedZonesByVPC(ctx context.Context, params *ListHostedZonesByVPCInput, optFns ...func(*Options)) (*ListHostedZonesByVPCOutput, error) {
 	if params == nil {
@@ -53,15 +57,15 @@ type ListHostedZonesByVPCInput struct {
 	// This member is required.
 	VPCId *string
 
-	// For the Amazon VPC that you specified for VPCId, the Amazon Web Services
-	// Region that you created the VPC in.
+	// For the Amazon VPC that you specified for VPCId , the Amazon Web Services Region
+	// that you created the VPC in.
 	//
 	// This member is required.
 	VPCRegion types.VPCRegion
 
 	// (Optional) The maximum number of hosted zones that you want Amazon Route 53 to
 	// return. If the specified VPC is associated with more than MaxItems hosted
-	// zones, the response includes a NextToken  element. NextToken contains an
+	// zones, the response includes a NextToken element. NextToken contains an
 	// encrypted token that identifies the first hosted zone that Route 53 will return
 	// if you submit another request.
 	MaxItems *int32
@@ -86,13 +90,13 @@ type ListHostedZonesByVPCOutput struct {
 	// This member is required.
 	HostedZoneSummaries []types.HostedZoneSummary
 
-	// The value that you specified for MaxItems  in the most recent
+	// The value that you specified for MaxItems in the most recent
 	// ListHostedZonesByVPC request.
 	//
 	// This member is required.
 	MaxItems *int32
 
-	// The value that you will use for NextToken  in the next ListHostedZonesByVPC
+	// The value that you will use for NextToken in the next ListHostedZonesByVPC
 	// request.
 	NextToken *string
 

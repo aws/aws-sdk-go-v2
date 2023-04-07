@@ -39,21 +39,21 @@ func (c *Client) DescribeApps(ctx context.Context, params *DescribeAppsInput, op
 type DescribeAppsInput struct {
 
 	// An array of app IDs for the apps to be described. If you use this parameter,
-	// DescribeAppsreturns a description of the specified apps. Otherwise, it returns
+	// DescribeApps returns a description of the specified apps. Otherwise, it returns
 	// a description of every app.
 	AppIds []string
 
-	// The app stack ID. If you use this parameter, DescribeApps returns a
-	// description of the apps in the specified stack.
+	// The app stack ID. If you use this parameter, DescribeApps returns a description
+	// of the apps in the specified stack.
 	StackId *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeApps  request.
+// Contains the response to a DescribeApps request.
 type DescribeAppsOutput struct {
 
-	// An array of App  objects that describe the specified apps.
+	// An array of App objects that describe the specified apps.
 	Apps []types.App
 
 	// Metadata pertaining to the operation's result.

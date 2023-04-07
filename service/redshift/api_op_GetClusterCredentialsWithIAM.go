@@ -15,7 +15,7 @@ import (
 // authorization to log in to an Amazon Redshift database. The database user is
 // mapped 1:1 to the source Identity and Access Management (IAM) identity. For more
 // information about IAM identities, see IAM Identities (users, user groups, and
-// roles) (https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html)in the Amazon
+// roles) (https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the Amazon
 // Web Services Identity and Access Management User Guide. The Identity and Access
 // Management (IAM) identity that runs this operation must have an IAM policy
 // attached that allows access to all necessary actions and resources. For more
@@ -46,7 +46,7 @@ type GetClusterCredentialsWithIAMInput struct {
 
 	// The name of the database for which you are requesting credentials. If the
 	// database name is specified, the IAM policy must allow access to the resource
-	// dbnamefor the specified database name. If the database name is not specified,
+	// dbname for the specified database name. If the database name is not specified,
 	// access to all databases is allowed.
 	DbName *string
 
@@ -66,8 +66,8 @@ type GetClusterCredentialsWithIAMOutput struct {
 	// database user is mapped 1:1 to the source IAM identity.
 	DbUser *string
 
-	// The time (UTC) when the temporary password expires. After this timestamp, a
-	// log in with the temporary password fails.
+	// The time (UTC) when the temporary password expires. After this timestamp, a log
+	// in with the temporary password fails.
 	Expiration *time.Time
 
 	// Reserved for future use.

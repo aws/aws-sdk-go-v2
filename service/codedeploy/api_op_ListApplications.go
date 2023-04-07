@@ -28,11 +28,11 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 	return out, nil
 }
 
-// Represents the input of a ListApplications  operation.
+// Represents the input of a ListApplications operation.
 type ListApplicationsInput struct {
 
-	// An identifier returned from the previous list applications call. It can be
-	// used to return the next set of applications in the list.
+	// An identifier returned from the previous list applications call. It can be used
+	// to return the next set of applications in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -125,8 +125,8 @@ var _ ListApplicationsAPIClient = (*Client)(nil)
 
 // ListApplicationsPaginatorOptions is the paginator options for ListApplications
 type ListApplicationsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

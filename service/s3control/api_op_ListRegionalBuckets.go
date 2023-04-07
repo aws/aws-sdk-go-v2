@@ -59,9 +59,9 @@ type ListRegionalBucketsInput struct {
 
 type ListRegionalBucketsOutput struct {
 
-	// NextToken  is sent when isTruncated is true, which means there are more
-	// buckets that can be listed. The next list requests to Amazon S3 can be continued
-	// with this NextToken . NextToken  is obfuscated and is not a real key.
+	// NextToken is sent when isTruncated is true, which means there are more buckets
+	// that can be listed. The next list requests to Amazon S3 can be continued with
+	// this NextToken . NextToken is obfuscated and is not a real key.
 	NextToken *string
 
 	//
@@ -200,8 +200,8 @@ type ListRegionalBucketsPaginatorOptions struct {
 	//
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

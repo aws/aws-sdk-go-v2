@@ -14,7 +14,7 @@ import (
 // Uploads an X.509 signing certificate and associates it with the specified IAM
 // user. Some Amazon Web Services services require you to use certificates to
 // validate requests that are signed with a corresponding private key. When you
-// upload the certificate, its default status is Active. For information about
+// upload the certificate, its default status is Active . For information about
 // when you would use an X.509 signing certificate, see Managing server
 // certificates in IAM (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
 // in the IAM User Guide. If the UserName is not specified, the IAM user name is
@@ -23,7 +23,7 @@ import (
 // Services account. Consequently, you can use this operation to manage Amazon Web
 // Services account root user credentials even if the Amazon Web Services account
 // has no associated users. Because the body of an X.509 certificate can be large,
-// you should use POST rather than GET when calling UploadSigningCertificate. For
+// you should use POST rather than GET when calling UploadSigningCertificate . For
 // information about setting up signatures and authorization through the API, see
 // Signing Amazon Web Services API requests (https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html)
 // in the Amazon Web Services General Reference. For general information about
@@ -49,15 +49,18 @@ type UploadSigningCertificateInput struct {
 	// The contents of the signing certificate. The regex pattern (http://wikipedia.org/wiki/regex)
 	// used to validate this parameter is a string of characters consisting of the
 	// following:
-	//     - Any printable ASCII character ranging from the space character ( \u0020 ) through the end of the ASCII character range
-	//     - The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF )
-	//     - The special characters tab ( \u0009 ), line feed ( \u000A ), and carriage return ( \u000D )
+	//   - Any printable ASCII character ranging from the space character ( \u0020 )
+	//   through the end of the ASCII character range
+	//   - The printable characters in the Basic Latin and Latin-1 Supplement
+	//   character set (through \u00FF )
+	//   - The special characters tab ( \u0009 ), line feed ( \u000A ), and carriage
+	//   return ( \u000D )
 	//
 	// This member is required.
 	CertificateBody *string
 
 	// The name of the user the signing certificate is for. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string
@@ -65,7 +68,7 @@ type UploadSigningCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful UploadSigningCertificate  request.
+// Contains the response to a successful UploadSigningCertificate request.
 type UploadSigningCertificateOutput struct {
 
 	// Information about the certificate.

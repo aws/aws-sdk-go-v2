@@ -75,9 +75,9 @@ const (
 	DatasetTypeItemMetadata      DatasetType = "ITEM_METADATA"
 )
 
-// Values returns all known values for DatasetType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DatasetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DatasetType) Values() []DatasetType {
 	return []DatasetType{
 		"TARGET_TIME_SERIES",
@@ -167,9 +167,9 @@ const (
 	FeaturizationMethodNameFilling FeaturizationMethodName = "filling"
 )
 
-// Values returns all known values for FeaturizationMethodName. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FeaturizationMethodName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FeaturizationMethodName) Values() []FeaturizationMethodName {
 	return []FeaturizationMethodName{
 		"filling",
@@ -306,9 +306,9 @@ const (
 	ScalingTypeReverseLogarithmic ScalingType = "ReverseLogarithmic"
 )
 
-// Values returns all known values for ScalingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScalingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ScalingType) Values() []ScalingType {
 	return []ScalingType{
 		"Auto",
@@ -344,8 +344,8 @@ const (
 	TimePointGranularitySpecific TimePointGranularity = "SPECIFIC"
 )
 
-// Values returns all known values for TimePointGranularity. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TimePointGranularity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TimePointGranularity) Values() []TimePointGranularity {
 	return []TimePointGranularity{

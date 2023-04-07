@@ -17,7 +17,7 @@ import (
 // , details about the function response, including errors, are included in the
 // response body and headers. For either invocation type, you can find more
 // information in the execution log (https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html)
-// and trace (https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html).
+// and trace (https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html) .
 // When an error occurs, your function may be invoked multiple times. Retry
 // behavior varies by error type, client, event source, and invocation type. For
 // example, if you invoke a function asynchronously and it returns an error, Lambda
@@ -33,10 +33,10 @@ import (
 // codes are reserved for errors that prevent your function from executing, such as
 // permissions errors, quota (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
 // errors, or issues with your function's code and configuration. For example,
-// Lambda returns TooManyRequestsException if running the function would cause
-// you to exceed a concurrency limit at either the account level (
+// Lambda returns TooManyRequestsException if running the function would cause you
+// to exceed a concurrency limit at either the account level (
 // ConcurrentInvocationLimitExceeded ) or function level (
-// ReservedFunctionConcurrentInvocationLimitExceeded). For functions with a long
+// ReservedFunctionConcurrentInvocationLimitExceeded ). For functions with a long
 // timeout, your client might disconnect during synchronous invocation while it
 // waits for a response. Configure your HTTP client, SDK, firewall, proxy, or
 // operating system to allow for long connections with timeout or keep-alive
@@ -62,13 +62,12 @@ func (c *Client) Invoke(ctx context.Context, params *InvokeInput, optFns ...func
 type InvokeInput struct {
 
 	// The name of the Lambda function, version, or alias. Name formats
-	//     - Function name – my-function (name-only), my-function:v1 (with alias).
-	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
-	//     - Partial ARN – 123456789012:function:my-function .
-	// You can append a
-	// version number or alias to any of the formats. The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//   - Function name – my-function (name-only), my-function:v1 (with alias).
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// You can append a version number or alias to any of the formats. The length
+	// constraint applies only to the full ARN. If you specify only the function name,
+	// it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -78,9 +77,14 @@ type InvokeInput struct {
 	ClientContext *string
 
 	// Choose from the following options.
-	//     - RequestResponse (default) – Invoke the function synchronously. Keep the connection open until the function returns a response or times out. The API response includes the function response and additional data.
-	//     - Event – Invoke the function asynchronously. Send events that fail multiple times to the function's dead-letter queue (if one is configured). The API response only includes a status code.
-	//     - DryRun – Validate parameter values and verify that the user or role has permission to invoke the function.
+	//   - RequestResponse (default) – Invoke the function synchronously. Keep the
+	//   connection open until the function returns a response or times out. The API
+	//   response includes the function response and additional data.
+	//   - Event – Invoke the function asynchronously. Send events that fail multiple
+	//   times to the function's dead-letter queue (if one is configured). The API
+	//   response only includes a status code.
+	//   - DryRun – Validate parameter values and verify that the user or role has
+	//   permission to invoke the function.
 	InvocationType types.InvocationType
 
 	// Set to Tail to include the execution log in the response. Applies to
@@ -88,7 +92,7 @@ type InvokeInput struct {
 	LogType types.LogType
 
 	// The JSON that you want to provide to your Lambda function as input. You can
-	// enter the JSON directly. For example, --payload '{ "key": "value" }'. You can
+	// enter the JSON directly. For example, --payload '{ "key": "value" }' . You can
 	// also specify a file path. For example, --payload file://payload.json .
 	Payload []byte
 
@@ -104,8 +108,8 @@ type InvokeOutput struct {
 	// alias, this indicates which version the alias resolved to.
 	ExecutedVersion *string
 
-	// If present, indicates that an error occurred during function execution.
-	// Details about the error are included in the response payload.
+	// If present, indicates that an error occurred during function execution. Details
+	// about the error are included in the response payload.
 	FunctionError *string
 
 	// The last 4 KB of the execution log, which is base64-encoded.

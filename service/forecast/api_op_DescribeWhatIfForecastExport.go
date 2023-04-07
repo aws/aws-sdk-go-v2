@@ -13,7 +13,7 @@ import (
 )
 
 // Describes the what-if forecast export created using the
-// CreateWhatIfForecastExportoperation. In addition to listing the properties
+// CreateWhatIfForecastExport operation. In addition to listing the properties
 // provided in the CreateWhatIfForecastExport request, this operation lists the
 // following properties:
 //   - CreationTime
@@ -63,25 +63,25 @@ type DescribeWhatIfForecastExportOutput struct {
 	// The format of the exported data, CSV or PARQUET.
 	Format *string
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the what-if forecast. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
-	//  The Status  of the what-if forecast export must be ACTIVE before you can
-	// access the forecast export.
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	// The Status of the what-if forecast export must be ACTIVE before you can access
+	// the forecast export.
 	Status *string
 
 	// An array of Amazon Resource Names (ARNs) that represent all of the what-if

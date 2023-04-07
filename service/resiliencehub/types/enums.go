@@ -54,9 +54,9 @@ const (
 	AppComplianceStatusTypeChangesDetected AppComplianceStatusType = "ChangesDetected"
 )
 
-// Values returns all known values for AppComplianceStatusType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AppComplianceStatusType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AppComplianceStatusType) Values() []AppComplianceStatusType {
 	return []AppComplianceStatusType{
 		"PolicyBreached",
@@ -372,8 +372,8 @@ const (
 	ResiliencyPolicyTierNonCritical     ResiliencyPolicyTier = "NonCritical"
 )
 
-// Values returns all known values for ResiliencyPolicyTier. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ResiliencyPolicyTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ResiliencyPolicyTier) Values() []ResiliencyPolicyTier {
 	return []ResiliencyPolicyTier{
@@ -517,9 +517,9 @@ const (
 	TestRiskHigh   TestRisk = "High"
 )
 
-// Values returns all known values for TestRisk. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TestRisk. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (TestRisk) Values() []TestRisk {
 	return []TestRisk{
 		"Small",
@@ -538,9 +538,9 @@ const (
 	TestTypeRegion   TestType = "Region"
 )
 
-// Values returns all known values for TestType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TestType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (TestType) Values() []TestType {
 	return []TestType{
 		"Software",

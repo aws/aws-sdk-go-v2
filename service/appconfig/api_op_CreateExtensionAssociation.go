@@ -13,14 +13,14 @@ import (
 // When you create an extension or configure an Amazon Web Services authored
 // extension, you associate the extension with an AppConfig application,
 // environment, or configuration profile. For example, you can choose to run the
-// AppConfig deployment events to Amazon SNSAmazon Web Services authored
-// extension and receive notifications on an Amazon SNS topic anytime a
-// configuration deployment is started for a specific application. Defining which
-// extension to associate with an AppConfig resource is called an extension
-// association. An extension association is a specified relationship between an
-// extension and an AppConfig resource, such as an application or a configuration
-// profile. For more information about extensions and associations, see Working
-// with AppConfig extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// AppConfig deployment events to Amazon SNS Amazon Web Services authored extension
+// and receive notifications on an Amazon SNS topic anytime a configuration
+// deployment is started for a specific application. Defining which extension to
+// associate with an AppConfig resource is called an extension association. An
+// extension association is a specified relationship between an extension and an
+// AppConfig resource, such as an application or a configuration profile. For more
+// information about extensions and associations, see Working with AppConfig
+// extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) CreateExtensionAssociation(ctx context.Context, params *CreateExtensionAssociationInput, optFns ...func(*Options)) (*CreateExtensionAssociationOutput, error) {
 	if params == nil {
@@ -54,7 +54,7 @@ type CreateExtensionAssociationInput struct {
 	ExtensionVersionNumber *int32
 
 	// The parameter names and values defined in the extensions. Extension parameters
-	// marked Required  must be entered for this field.
+	// marked Required must be entered for this field.
 	Parameters map[string]string
 
 	// Adds one or more tags for the specified extension association. Tags are

@@ -55,9 +55,9 @@ type GetAggregateComplianceDetailsByConfigRuleInput struct {
 	ConfigurationAggregatorName *string
 
 	// The resource compliance status. For the
-	// GetAggregateComplianceDetailsByConfigRuleRequestdata type, Config supports
-	// only the COMPLIANT  and NON_COMPLIANT . Config does not support the
-	// NOT_APPLICABLE and INSUFFICIENT_DATA  values.
+	// GetAggregateComplianceDetailsByConfigRuleRequest data type, Config supports only
+	// the COMPLIANT and NON_COMPLIANT . Config does not support the NOT_APPLICABLE
+	// and INSUFFICIENT_DATA values.
 	ComplianceType types.ComplianceType
 
 	// The maximum number of evaluation results returned on each page. The default is
@@ -166,8 +166,8 @@ type GetAggregateComplianceDetailsByConfigRulePaginatorOptions struct {
 	// the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

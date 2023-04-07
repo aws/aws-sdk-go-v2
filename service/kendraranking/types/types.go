@@ -9,8 +9,8 @@ import (
 
 // Sets additional capacity units configured for your rescore execution plan. A
 // rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for
-// provisioning the Rescore API. You can add and remove capacity units to fit
-// your usage requirements.
+// provisioning the Rescore API. You can add and remove capacity units to fit your
+// usage requirements.
 type CapacityUnitsConfiguration struct {
 
 	// The amount of extra capacity for your rescore execution plan. A single extra
@@ -52,12 +52,12 @@ type Document struct {
 	Title *string
 
 	// The body text of the search service's document represented as a list of tokens
-	// or words. You must choose to provide Body  or TokenizedBody. You cannot
-	// provide both.
+	// or words. You must choose to provide Body or TokenizedBody . You cannot provide
+	// both.
 	TokenizedBody []string
 
 	// The title of the search service's document represented as a list of tokens or
-	// words. You must choose to provide Title  or TokenizedTitle. You cannot provide
+	// words. You must choose to provide Title or TokenizedTitle . You cannot provide
 	// both.
 	TokenizedTitle []string
 
@@ -78,8 +78,8 @@ type RescoreExecutionPlanSummary struct {
 	// The name of the rescore execution plan.
 	Name *string
 
-	// The current status of the rescore execution plan. When the value is ACTIVE,
-	// the rescore execution plan is ready for use.
+	// The current status of the rescore execution plan. When the value is ACTIVE , the
+	// rescore execution plan is ready for use.
 	Status RescoreExecutionPlanStatus
 
 	// The Unix timestamp when the rescore execution plan was last updated.
@@ -94,8 +94,8 @@ type RescoreResultItem struct {
 	// The identifier of the document from the search service.
 	DocumentId *string
 
-	// The relevancy score or rank that Amazon Kendra Intelligent Ranking gives to
-	// the result.
+	// The relevancy score or rank that Amazon Kendra Intelligent Ranking gives to the
+	// result.
 	Score *float32
 
 	noSmithyDocumentSerde

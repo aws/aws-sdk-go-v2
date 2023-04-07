@@ -32,9 +32,9 @@ func (c *Client) CreateSimulationJob(ctx context.Context, params *CreateSimulati
 
 type CreateSimulationJobInput struct {
 
-	// The IAM role name that allows the simulation instance to call the AWS APIs
-	// that are specified in its associated policies on your behalf. This is how
-	// credentials are passed in to your simulation job.
+	// The IAM role name that allows the simulation instance to call the AWS APIs that
+	// are specified in its associated policies on your behalf. This is how credentials
+	// are passed in to your simulation job.
 	//
 	// This member is required.
 	IamRole *string
@@ -46,15 +46,15 @@ type CreateSimulationJobInput struct {
 	// This member is required.
 	MaxJobDurationInSeconds int64
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
 	// Compute information for the simulation job.
 	Compute *types.Compute
 
 	// Specify data sources to mount read-only files from S3 into your simulation.
-	// These files are available under /opt/robomaker/datasources/data_source_name.
+	// These files are available under /opt/robomaker/datasources/data_source_name .
 	// There is a limit of 100 files and a combined size of 25GB for all
 	// DataSourceConfig objects.
 	DataSources []types.DataSourceConfig
@@ -76,8 +76,8 @@ type CreateSimulationJobInput struct {
 	// The simulation application to use in the simulation job.
 	SimulationApplications []types.SimulationApplicationConfig
 
-	// A map that contains tag keys and tag values that are attached to the
-	// simulation job.
+	// A map that contains tag keys and tag values that are attached to the simulation
+	// job.
 	Tags map[string]string
 
 	// If your simulation job accesses resources in a VPC, you provide this parameter
@@ -93,8 +93,8 @@ type CreateSimulationJobOutput struct {
 	// The Amazon Resource Name (ARN) of the simulation job.
 	Arn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
 	// Compute information for the simulation job.

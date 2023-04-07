@@ -105,8 +105,8 @@ const (
 	GrpcRetryPolicyEventUnavailable       GrpcRetryPolicyEvent = "unavailable"
 )
 
-// Values returns all known values for GrpcRetryPolicyEvent. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for GrpcRetryPolicyEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (GrpcRetryPolicyEvent) Values() []GrpcRetryPolicyEvent {
 	return []GrpcRetryPolicyEvent{
@@ -378,9 +378,9 @@ const (
 	VirtualRouterStatusCodeDeleted  VirtualRouterStatusCode = "DELETED"
 )
 
-// Values returns all known values for VirtualRouterStatusCode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VirtualRouterStatusCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualRouterStatusCode) Values() []VirtualRouterStatusCode {
 	return []VirtualRouterStatusCode{
 		"ACTIVE",

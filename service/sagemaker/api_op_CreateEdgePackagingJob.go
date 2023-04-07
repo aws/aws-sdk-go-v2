@@ -32,8 +32,8 @@ func (c *Client) CreateEdgePackagingJob(ctx context.Context, params *CreateEdgeP
 
 type CreateEdgePackagingJobInput struct {
 
-	// The name of the SageMaker Neo compilation job that will be used to locate
-	// model artifacts for packaging.
+	// The name of the SageMaker Neo compilation job that will be used to locate model
+	// artifacts for packaging.
 	//
 	// This member is required.
 	CompilationJobName *string

@@ -7,11 +7,11 @@ import (
 	"time"
 )
 
-// Describes a bandwidth rate limit interval for a gateway. A bandwidth rate
-// limit schedule consists of one or more bandwidth rate limit intervals. A
-// bandwidth rate limit interval defines a period of time on one or more days of
-// the week, during which bandwidth rate limits are specified for uploading,
-// downloading, or both.
+// Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit
+// schedule consists of one or more bandwidth rate limit intervals. A bandwidth
+// rate limit interval defines a period of time on one or more days of the week,
+// during which bandwidth rate limits are specified for uploading, downloading, or
+// both.
 type BandwidthRateLimitInterval struct {
 
 	// The days of the week component of the bandwidth rate limit interval,
@@ -38,9 +38,9 @@ type BandwidthRateLimitInterval struct {
 	// This member is required.
 	StartHourOfDay *int32
 
-	// The minute of the hour to start the bandwidth rate limit interval. The
-	// interval begins at the start of that minute. To begin an interval exactly at the
-	// start of the hour, use the value 0 .
+	// The minute of the hour to start the bandwidth rate limit interval. The interval
+	// begins at the start of that minute. To begin an interval exactly at the start of
+	// the hour, use the value 0 .
 	//
 	// This member is required.
 	StartMinuteOfHour *int32
@@ -53,8 +53,8 @@ type BandwidthRateLimitInterval struct {
 	noSmithyDocumentSerde
 }
 
-// A gateway is an Backup Gateway appliance that runs on the customer's network
-// to provide seamless connectivity to backup storage in the Amazon Web Services
+// A gateway is an Backup Gateway appliance that runs on the customer's network to
+// provide seamless connectivity to backup storage in the Amazon Web Services
 // Cloud.
 type Gateway struct {
 
@@ -98,9 +98,9 @@ type GatewayDetails struct {
 	// Unix format and UTC time.
 	LastSeenTime *time.Time
 
-	// Returns your gateway's weekly maintenance start time including the day and
-	// time of the week. Note that values are in terms of the gateway's time zone. Can
-	// be weekly or monthly.
+	// Returns your gateway's weekly maintenance start time including the day and time
+	// of the week. Note that values are in terms of the gateway's time zone. Can be
+	// weekly or monthly.
 	MaintenanceStartTime *MaintenanceStartTime
 
 	// Details showing the next update availability time of the gateway.
@@ -176,13 +176,13 @@ type HypervisorDetails struct {
 	noSmithyDocumentSerde
 }
 
-// This is your gateway's weekly maintenance start time including the day and
-// time of the week. Note that values are in terms of the gateway's time zone. Can
-// be weekly or monthly.
+// This is your gateway's weekly maintenance start time including the day and time
+// of the week. Note that values are in terms of the gateway's time zone. Can be
+// weekly or monthly.
 type MaintenanceStartTime struct {
 
-	// The hour component of the maintenance start time represented as hh, where hh
-	// is the hour (0 to 23). The hour of the day is in the time zone of the gateway.
+	// The hour component of the maintenance start time represented as hh, where hh is
+	// the hour (0 to 23). The hour of the day is in the time zone of the gateway.
 	//
 	// This member is required.
 	HourOfDay *int32
@@ -251,7 +251,7 @@ type VirtualMachine struct {
 	noSmithyDocumentSerde
 }
 
-// Your VirtualMachine  objects, ordered by their Amazon Resource Names (ARNs).
+// Your VirtualMachine objects, ordered by their Amazon Resource Names (ARNs).
 type VirtualMachineDetails struct {
 
 	// The host name of the virtual machine.

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists runs of the specified Device Advisor test suite. You can list all runs
-// of the test suite, or the runs of a specific version of the test suite. Requires
+// Lists runs of the specified Device Advisor test suite. You can list all runs of
+// the test suite, or the runs of a specific version of the test suite. Requires
 // permission to access the ListSuiteRuns (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListSuiteRuns(ctx context.Context, params *ListSuiteRunsInput, optFns ...func(*Options)) (*ListSuiteRunsOutput, error) {
@@ -39,11 +39,11 @@ type ListSuiteRunsInput struct {
 	// A token to retrieve the next set of results.
 	NextToken *string
 
-	// Lists the test suite runs of the specified test suite based on suite
-	// definition ID.
+	// Lists the test suite runs of the specified test suite based on suite definition
+	// ID.
 	SuiteDefinitionId *string
 
-	// Must be passed along with suiteDefinitionId. Lists the test suite runs of the
+	// Must be passed along with suiteDefinitionId . Lists the test suite runs of the
 	// specified test suite based on suite definition version.
 	SuiteDefinitionVersion *string
 
@@ -137,8 +137,8 @@ type ListSuiteRunsPaginatorOptions struct {
 	// The maximum number of results to return at once.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

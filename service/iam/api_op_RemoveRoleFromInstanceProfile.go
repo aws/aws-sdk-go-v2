@@ -14,9 +14,9 @@ import (
 // sure that you do not have any Amazon EC2 instances running with the role you are
 // about to remove from the instance profile. Removing a role from an instance
 // profile that is associated with a running instance might break any applications
-// running on the instance. For more information about IAM roles, see Working
-// with roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html)
-// . For more information about instance profiles, see About instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html)
+// running on the instance. For more information about IAM roles, see Working with
+// roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html) .
+// For more information about instance profiles, see About instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html)
 // .
 func (c *Client) RemoveRoleFromInstanceProfile(ctx context.Context, params *RemoveRoleFromInstanceProfileInput, optFns ...func(*Options)) (*RemoveRoleFromInstanceProfileOutput, error) {
 	if params == nil {
@@ -36,17 +36,17 @@ func (c *Client) RemoveRoleFromInstanceProfile(ctx context.Context, params *Remo
 type RemoveRoleFromInstanceProfileInput struct {
 
 	// The name of the instance profile to update. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	InstanceProfileName *string
 
-	// The name of the role to remove. This parameter allows (through its regex
-	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting
-	// of upper and lowercase alphanumeric characters with no spaces. You can also
-	// include any of the following characters: _+=,.@-
+	// The name of the role to remove. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
+	// ) a string of characters consisting of upper and lowercase alphanumeric
+	// characters with no spaces. You can also include any of the following characters:
+	// _+=,.@-
 	//
 	// This member is required.
 	RoleName *string

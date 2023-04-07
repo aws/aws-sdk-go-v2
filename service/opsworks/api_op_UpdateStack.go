@@ -39,12 +39,16 @@ type UpdateStackInput struct {
 	StackId *string
 
 	// The default AWS OpsWorks Stacks agent version. You have the following options:
-	//     - Auto-update - Set this parameter to LATEST . AWS OpsWorks Stacks automatically installs new agent versions on the stack's instances as soon as they are available.
-	//     - Fixed version - Set this parameter to your preferred agent version. To update the agent version, you must edit the stack configuration and specify a new version. AWS OpsWorks Stacks then automatically installs that version on the stack's instances.
-	//
-	// The default setting is LATEST. To specify an agent version, you must use the
+	//   - Auto-update - Set this parameter to LATEST . AWS OpsWorks Stacks
+	//   automatically installs new agent versions on the stack's instances as soon as
+	//   they are available.
+	//   - Fixed version - Set this parameter to your preferred agent version. To
+	//   update the agent version, you must edit the stack configuration and specify a
+	//   new version. AWS OpsWorks Stacks then automatically installs that version on the
+	//   stack's instances.
+	// The default setting is LATEST . To specify an agent version, you must use the
 	// complete version number, not the abbreviated number shown on the console. For a
-	// list of available agent version numbers, call DescribeAgentVersions.
+	// list of available agent version numbers, call DescribeAgentVersions .
 	// AgentVersion cannot be set to Chef 12.2. You can also specify an agent version
 	// when you create or update an instance, which overrides the stack's default
 	// setting.
@@ -79,9 +83,9 @@ type UpdateStackInput struct {
 	// .
 	CustomJson *string
 
-	// The stack's default Availability Zone, which must be in the stack's region.
-	// For more information, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
-	// . If you also specify a value for DefaultSubnetId, the subnet must be in the
+	// The stack's default Availability Zone, which must be in the stack's region. For
+	// more information, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
+	// . If you also specify a value for DefaultSubnetId , the subnet must be in the
 	// same zone. For more information, see CreateStack .
 	DefaultAvailabilityZone *string
 
@@ -91,15 +95,25 @@ type UpdateStackInput struct {
 	DefaultInstanceProfileArn *string
 
 	// The stack's operating system, which must be set to one of the following:
-	//     - A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2018.03 , Amazon Linux 2017.09 , Amazon Linux 2017.03 , Amazon Linux 2016.09 , Amazon Linux 2016.03 , Amazon Linux 2015.09 , or Amazon Linux 2015.03 .
-	//     - A supported Ubuntu operating system, such as Ubuntu 16.04 LTS , Ubuntu 14.04 LTS , or Ubuntu 12.04 LTS .
-	//     - CentOS Linux 7
-	//     - Red Hat Enterprise Linux 7
-	//     - A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base , Microsoft Windows Server 2012 R2 with SQL Server Express , Microsoft Windows Server 2012 R2 with SQL Server Standard , or Microsoft Windows Server 2012 R2 with SQL Server Web .
-	//     - A custom AMI: Custom . You specify the custom AMI you want to use when you create instances. For more information about how to use custom AMIs with OpsWorks, see Using Custom AMIs (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html) .
-	//
-	// The default option is the stack's current operating system. For more information
-	// about supported operating systems, see AWS OpsWorks Stacks Operating Systems (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html)
+	//   - A supported Linux operating system: An Amazon Linux version, such as Amazon
+	//   Linux 2018.03 , Amazon Linux 2017.09 , Amazon Linux 2017.03 , Amazon Linux
+	//   2016.09 , Amazon Linux 2016.03 , Amazon Linux 2015.09 , or Amazon Linux
+	//   2015.03 .
+	//   - A supported Ubuntu operating system, such as Ubuntu 16.04 LTS , Ubuntu
+	//   14.04 LTS , or Ubuntu 12.04 LTS .
+	//   - CentOS Linux 7
+	//   - Red Hat Enterprise Linux 7
+	//   - A supported Windows operating system, such as Microsoft Windows Server 2012
+	//   R2 Base , Microsoft Windows Server 2012 R2 with SQL Server Express ,
+	//   Microsoft Windows Server 2012 R2 with SQL Server Standard , or Microsoft
+	//   Windows Server 2012 R2 with SQL Server Web .
+	//   - A custom AMI: Custom . You specify the custom AMI you want to use when you
+	//   create instances. For more information about how to use custom AMIs with
+	//   OpsWorks, see Using Custom AMIs (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html)
+	//   .
+	// The default option is the stack's current operating system. For more
+	// information about supported operating systems, see AWS OpsWorks Stacks
+	// Operating Systems (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html)
 	// .
 	DefaultOs *string
 
@@ -109,8 +123,8 @@ type UpdateStackInput struct {
 	// .
 	DefaultRootDeviceType types.RootDeviceType
 
-	// A default Amazon EC2 key-pair name. The default value is none. If you specify
-	// a key-pair name, AWS OpsWorks Stacks installs the public key on the instance and
+	// A default Amazon EC2 key-pair name. The default value is none . If you specify a
+	// key-pair name, AWS OpsWorks Stacks installs the public key on the instance and
 	// you can use the private key with an SSH client to log in to the instance. For
 	// more information, see Using SSH to Communicate with an Instance (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html)
 	// and Managing SSH Access (https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html)
@@ -122,27 +136,27 @@ type UpdateStackInput struct {
 	// The stack's default VPC subnet ID. This parameter is required if you specify a
 	// value for the VpcId parameter. All instances are launched into this subnet
 	// unless you specify otherwise when you create the instance. If you also specify a
-	// value for DefaultAvailabilityZone, the subnet must be in that zone. For
-	// information on default values and when this parameter is required, see the
-	// VpcId parameter description.
+	// value for DefaultAvailabilityZone , the subnet must be in that zone. For
+	// information on default values and when this parameter is required, see the VpcId
+	// parameter description.
 	DefaultSubnetId *string
 
-	// The stack's new host name theme, with spaces replaced by underscores. The
-	// theme is used to generate host names for the stack's instances. By default,
-	// HostnameTheme is set to Layer_Dependent, which creates host names by appending
+	// The stack's new host name theme, with spaces replaced by underscores. The theme
+	// is used to generate host names for the stack's instances. By default,
+	// HostnameTheme is set to Layer_Dependent , which creates host names by appending
 	// integers to the layer's short name. The other themes are:
-	//     - Baked_Goods
-	//     - Clouds
-	//     - Europe_Cities
-	//     - Fruits
-	//     - Greek_Deities_and_Titans
-	//     - Legendary_creatures_from_Japan
-	//     - Planets_and_Moons
-	//     - Roman_Deities
-	//     - Scottish_Islands
-	//     - US_Cities
-	//     - Wild_Cats
-	//  To obtain a generated host name, call GetHostNameSuggestion, which returns a
+	//   - Baked_Goods
+	//   - Clouds
+	//   - Europe_Cities
+	//   - Fruits
+	//   - Greek_Deities_and_Titans
+	//   - Legendary_creatures_from_Japan
+	//   - Planets_and_Moons
+	//   - Roman_Deities
+	//   - Scottish_Islands
+	//   - US_Cities
+	//   - Wild_Cats
+	// To obtain a generated host name, call GetHostNameSuggestion , which returns a
 	// host name based on the current theme.
 	HostnameTheme *string
 
@@ -158,12 +172,18 @@ type UpdateStackInput struct {
 	// Whether to associate the AWS OpsWorks Stacks built-in security groups with the
 	// stack's layers. AWS OpsWorks Stacks provides a standard set of built-in security
 	// groups, one for each layer, which are associated with layers by default.
-	// UseOpsworksSecurityGroupsallows you to provide your own custom security groups
+	// UseOpsworksSecurityGroups allows you to provide your own custom security groups
 	// instead of using the built-in groups. UseOpsworksSecurityGroups has the
 	// following settings:
-	//     - True - AWS OpsWorks Stacks automatically associates the appropriate built-in security group with each layer (default setting). You can associate additional security groups with a layer after you create it, but you cannot delete the built-in security group.
-	//     - False - AWS OpsWorks Stacks does not associate built-in security groups with layers. You must create appropriate EC2 security groups and associate a security group with each layer that you create. However, you can still manually associate a built-in security group with a layer on. Custom security groups are required only for those layers that need custom settings.
-	//
+	//   - True - AWS OpsWorks Stacks automatically associates the appropriate
+	//   built-in security group with each layer (default setting). You can associate
+	//   additional security groups with a layer after you create it, but you cannot
+	//   delete the built-in security group.
+	//   - False - AWS OpsWorks Stacks does not associate built-in security groups
+	//   with layers. You must create appropriate EC2 security groups and associate a
+	//   security group with each layer that you create. However, you can still manually
+	//   associate a built-in security group with a layer on. Custom security groups are
+	//   required only for those layers that need custom settings.
 	// For more information, see Create a New Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html)
 	// .
 	UseOpsworksSecurityGroups *bool

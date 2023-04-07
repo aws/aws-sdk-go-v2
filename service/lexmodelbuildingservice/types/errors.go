@@ -141,8 +141,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource specified in the request was not found. Check the resource and
-// try again.
+// The resource specified in the request was not found. Check the resource and try
+// again.
 type NotFoundException struct {
 	Message *string
 

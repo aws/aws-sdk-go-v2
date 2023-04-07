@@ -14,10 +14,10 @@ import (
 
 // Lists all the image IDs for the specified repository. You can filter images
 // based on whether or not they are tagged by using the tagStatus filter and
-// specifying either TAGGED , UNTAGGED  or ANY. For example, you can filter your
-// results to return only UNTAGGED  images and then pipe that result to a
-// BatchDeleteImageoperation to delete them. Or, you can filter your results to
-// return only TAGGED  images to list all of the tags in your repository.
+// specifying either TAGGED , UNTAGGED or ANY . For example, you can filter your
+// results to return only UNTAGGED images and then pipe that result to a
+// BatchDeleteImage operation to delete them. Or, you can filter your results to
+// return only TAGGED images to list all of the tags in your repository.
 func (c *Client) ListImages(ctx context.Context, params *ListImagesInput, optFns ...func(*Options)) (*ListImagesOutput, error) {
 	if params == nil {
 		params = &ListImagesInput{}
@@ -40,25 +40,24 @@ type ListImagesInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The filter key and value with which to filter your ListImages  results.
+	// The filter key and value with which to filter your ListImages results.
 	Filter *types.ListImagesFilter
 
-	// The maximum number of image results returned by ListImages in paginated
-	// output. When this parameter is used, ListImages  only returns maxResults
-	// results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListImages request with the returned nextToken value. This value can be
-	// between 1 and 1000. If this parameter is not used, then ListImages returns up
-	// to 100 results and a nextToken  value, if applicable.
+	// The maximum number of image results returned by ListImages in paginated output.
+	// When this parameter is used, ListImages only returns maxResults results in a
+	// single page along with a nextToken response element. The remaining results of
+	// the initial request can be seen by sending another ListImages request with the
+	// returned nextToken value. This value can be between 1 and 1000. If this
+	// parameter is not used, then ListImages returns up to 100 results and a nextToken
+	// value, if applicable.
 	MaxResults *int32
 
-	// The nextToken  value returned from a previous paginated ListImages request
-	// where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken  value. This value is null when there are no more
-	// results to return. This token should be treated as an opaque identifier that is
-	// only used to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// The nextToken value returned from a previous paginated ListImages request where
+	// maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value. This value is null when there are no more results to return.
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The Amazon Web Services account ID associated with the registry that contains
@@ -74,10 +73,10 @@ type ListImagesOutput struct {
 	// The list of image IDs for the requested repository.
 	ImageIds []types.ImageIdentifier
 
-	// The nextToken  value to include in a future ListImages request. When the
-	// results of a ListImages  request exceed maxResults, this value can be used to
-	// retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// The nextToken value to include in a future ListImages request. When the results
+	// of a ListImages request exceed maxResults , this value can be used to retrieve
+	// the next page of results. This value is null when there are no more results to
+	// return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -158,17 +157,17 @@ var _ ListImagesAPIClient = (*Client)(nil)
 
 // ListImagesPaginatorOptions is the paginator options for ListImages
 type ListImagesPaginatorOptions struct {
-	// The maximum number of image results returned by ListImages in paginated
-	// output. When this parameter is used, ListImages  only returns maxResults
-	// results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListImages request with the returned nextToken value. This value can be
-	// between 1 and 1000. If this parameter is not used, then ListImages returns up
-	// to 100 results and a nextToken  value, if applicable.
+	// The maximum number of image results returned by ListImages in paginated output.
+	// When this parameter is used, ListImages only returns maxResults results in a
+	// single page along with a nextToken response element. The remaining results of
+	// the initial request can be seen by sending another ListImages request with the
+	// returned nextToken value. This value can be between 1 and 1000. If this
+	// parameter is not used, then ListImages returns up to 100 results and a nextToken
+	// value, if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

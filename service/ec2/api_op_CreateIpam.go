@@ -53,14 +53,14 @@ type CreateIpamInput struct {
 	// Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only
 	// discovers and monitors resources in the Amazon Web Services Regions you select
 	// as operating Regions. For more information about operating Regions, see Create
-	// an IPAM (https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html)in the
+	// an IPAM (https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html) in the
 	// Amazon VPC IPAM User Guide.
 	OperatingRegions []types.AddIpamOperatingRegion
 
-	// The key/value combination of a tag assigned to the resource. Use the tag key
-	// in the filter name and the tag value as the filter value. For example, to find
-	// all resources that have a tag with the key Owner  and the value TeamA , specify
-	// tag:Owner for the filter name and TeamA  for the filter value.
+	// The key/value combination of a tag assigned to the resource. Use the tag key in
+	// the filter name and the tag value as the filter value. For example, to find all
+	// resources that have a tag with the key Owner and the value TeamA , specify
+	// tag:Owner for the filter name and TeamA for the filter value.
 	TagSpecifications []types.TagSpecification
 
 	noSmithyDocumentSerde

@@ -75,8 +75,8 @@ type DescribeEnvironmentHealthOutput struct {
 	// The date and time that the health information was retrieved.
 	RefreshedAt *time.Time
 
-	// The environment's operational status. Ready , Launching , Updating ,
-	// Terminating , or Terminated .
+	// The environment's operational status. Ready , Launching , Updating , Terminating
+	// , or Terminated .
 	Status types.EnvironmentHealth
 
 	// Metadata pertaining to the operation's result.

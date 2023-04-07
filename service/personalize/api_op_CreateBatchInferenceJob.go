@@ -63,8 +63,8 @@ type CreateBatchInferenceJobInput struct {
 	// The configuration details of a batch inference job.
 	BatchInferenceJobConfig *types.BatchInferenceJobConfig
 
-	// The ARN of the filter to apply to the batch inference job. For more
-	// information on using filters, see Filtering batch recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html)
+	// The ARN of the filter to apply to the batch inference job. For more information
+	// on using filters, see Filtering batch recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html)
 	// .
 	FilterArn *string
 

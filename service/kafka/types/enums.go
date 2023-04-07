@@ -9,8 +9,8 @@ const (
 	BrokerAZDistributionDefault BrokerAZDistribution = "DEFAULT"
 )
 
-// Values returns all known values for BrokerAZDistribution. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for BrokerAZDistribution. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (BrokerAZDistribution) Values() []BrokerAZDistribution {
 	return []BrokerAZDistribution{
@@ -76,9 +76,9 @@ const (
 	ClusterTypeServerless  ClusterType = "SERVERLESS"
 )
 
-// Values returns all known values for ClusterType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ClusterType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ClusterType) Values() []ClusterType {
 	return []ClusterType{
 		"PROVISIONED",
@@ -153,9 +153,9 @@ const (
 	NodeTypeBroker NodeType = "BROKER"
 )
 
-// Values returns all known values for NodeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NodeType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (NodeType) Values() []NodeType {
 	return []NodeType{
 		"BROKER",
@@ -170,9 +170,9 @@ const (
 	StorageModeTiered StorageMode = "TIERED"
 )
 
-// Values returns all known values for StorageMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StorageMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StorageMode) Values() []StorageMode {
 	return []StorageMode{
 		"LOCAL",

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a block storage disk from a manual or automatic snapshot of a disk.
-// The resulting disk can be attached to an Amazon Lightsail instance in the same
+// Creates a block storage disk from a manual or automatic snapshot of a disk. The
+// resulting disk can be attached to an Amazon Lightsail instance in the same
 // Availability Zone (e.g., us-east-2a ). The create disk from snapshot operation
 // supports tag-based access control via request tags and resource tags applied to
 // the resource identified by disk snapshot name . For more information, see the
@@ -35,7 +35,7 @@ func (c *Client) CreateDiskFromSnapshot(ctx context.Context, params *CreateDiskF
 
 type CreateDiskFromSnapshotInput struct {
 
-	// The Availability Zone where you want to create the disk (e.g., us-east-2a).
+	// The Availability Zone where you want to create the disk (e.g., us-east-2a ).
 	// Choose the same Availability Zone as the Lightsail instance where you want to
 	// create the disk. Use the GetRegions operation to list the Availability Zones
 	// where Lightsail is currently available.
@@ -56,23 +56,33 @@ type CreateDiskFromSnapshotInput struct {
 	// An array of objects that represent the add-ons to enable for the new disk.
 	AddOns []types.AddOnRequest
 
-	// The name of the disk snapshot (e.g., my-snapshot) from which to create the new
+	// The name of the disk snapshot (e.g., my-snapshot ) from which to create the new
 	// storage disk. Constraint:
-	//     - This parameter cannot be defined together with the source disk name parameter. The disk snapshot name and source disk name parameters are mutually exclusive.
+	//   - This parameter cannot be defined together with the source disk name
+	//   parameter. The disk snapshot name and source disk name parameters are mutually
+	//   exclusive.
 	DiskSnapshotName *string
 
 	// The date of the automatic snapshot to use for the new disk. Use the get auto
-	// snapshotsoperation to identify the dates of the available automatic snapshots.
+	// snapshots operation to identify the dates of the available automatic snapshots.
 	// Constraints:
-	//     - Must be specified in YYYY-MM-DD format.
-	//     - This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.
-	//     - Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots) .
+	//   - Must be specified in YYYY-MM-DD format.
+	//   - This parameter cannot be defined together with the use latest restorable
+	//   auto snapshot parameter. The restore date and use latest restorable auto
+	//   snapshot parameters are mutually exclusive.
+	//   - Define this parameter only when creating a new disk from an automatic
+	//   snapshot. For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots)
+	//   .
 	RestoreDate *string
 
 	// The name of the source disk from which the source automatic snapshot was
 	// created. Constraints:
-	//     - This parameter cannot be defined together with the disk snapshot name parameter. The source disk name and disk snapshot name parameters are mutually exclusive.
-	//     - Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots) .
+	//   - This parameter cannot be defined together with the disk snapshot name
+	//   parameter. The source disk name and disk snapshot name parameters are mutually
+	//   exclusive.
+	//   - Define this parameter only when creating a new disk from an automatic
+	//   snapshot. For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots)
+	//   .
 	SourceDiskName *string
 
 	// The tag keys and optional values to add to the resource during create. Use the
@@ -81,8 +91,12 @@ type CreateDiskFromSnapshotInput struct {
 
 	// A Boolean value to indicate whether to use the latest available automatic
 	// snapshot. Constraints:
-	//     - This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.
-	//     - Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots) .
+	//   - This parameter cannot be defined together with the restore date parameter.
+	//   The use latest restorable auto snapshot and restore date parameters are
+	//   mutually exclusive.
+	//   - Define this parameter only when creating a new disk from an automatic
+	//   snapshot. For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots)
+	//   .
 	UseLatestRestorableAutoSnapshot *bool
 
 	noSmithyDocumentSerde

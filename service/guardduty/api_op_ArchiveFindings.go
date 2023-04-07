@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Archives GuardDuty findings that are specified by the list of finding IDs.
-// Only the administrator account can archive findings. Member accounts don't have
+// Archives GuardDuty findings that are specified by the list of finding IDs. Only
+// the administrator account can archive findings. Member accounts don't have
 // permission to archive findings from their accounts.
 func (c *Client) ArchiveFindings(ctx context.Context, params *ArchiveFindingsInput, optFns ...func(*Options)) (*ArchiveFindingsOutput, error) {
 	if params == nil {

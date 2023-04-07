@@ -122,24 +122,24 @@ func (c *Client) addOperationListRequestedServiceQuotaChangeHistoryMiddlewares(s
 	return nil
 }
 
-// ListRequestedServiceQuotaChangeHistoryAPIClient is a client that implements
-// the ListRequestedServiceQuotaChangeHistory operation.
+// ListRequestedServiceQuotaChangeHistoryAPIClient is a client that implements the
+// ListRequestedServiceQuotaChangeHistory operation.
 type ListRequestedServiceQuotaChangeHistoryAPIClient interface {
 	ListRequestedServiceQuotaChangeHistory(context.Context, *ListRequestedServiceQuotaChangeHistoryInput, ...func(*Options)) (*ListRequestedServiceQuotaChangeHistoryOutput, error)
 }
 
 var _ ListRequestedServiceQuotaChangeHistoryAPIClient = (*Client)(nil)
 
-// ListRequestedServiceQuotaChangeHistoryPaginatorOptions is the paginator
-// options for ListRequestedServiceQuotaChangeHistory
+// ListRequestedServiceQuotaChangeHistoryPaginatorOptions is the paginator options
+// for ListRequestedServiceQuotaChangeHistory
 type ListRequestedServiceQuotaChangeHistoryPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, if any, make another call with the token returned from this
 	// call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -22,13 +22,13 @@ import (
 // IP address outside the specified range are denied and get a Not Found error
 // message on the worker portal. To restrict access to all the workers in public
 // internet, add the SourceIpConfig CIDR value as "10.0.0.0/16". Amazon SageMaker
-// does not support Source Ip restriction for worker portals in VPC. Use
-// OidcConfigto update the configuration of a workforce created using your own
-// OIDC IdP. You can only update your OIDC IdP configuration when there are no work
-// teams associated with your workforce. You can delete work teams using the
-// operation. After restricting access to a range of IP addresses or updating your
-// OIDC IdP configuration with this operation, you can view details about your
-// update workforce using the operation. This operation only applies to private
+// does not support Source Ip restriction for worker portals in VPC. Use OidcConfig
+// to update the configuration of a workforce created using your own OIDC IdP. You
+// can only update your OIDC IdP configuration when there are no work teams
+// associated with your workforce. You can delete work teams using the operation.
+// After restricting access to a range of IP addresses or updating your OIDC IdP
+// configuration with this operation, you can view details about your update
+// workforce using the operation. This operation only applies to private
 // workforces.
 func (c *Client) UpdateWorkforce(ctx context.Context, params *UpdateWorkforceInput, optFns ...func(*Options)) (*UpdateWorkforceOutput, error) {
 	if params == nil {

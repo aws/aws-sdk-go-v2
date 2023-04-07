@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a new premigration assessment run for one or more individual
-// assessments of a migration task. The assessments that you can specify depend on
-// the source and target database engine and the migration type defined for the
-// given task. To run this operation, your migration task must already be created.
-// After you run this operation, you can review the status of each individual
-// assessment. You can also run the migration task manually after the assessment
-// run and its individual assessments complete.
+// Starts a new premigration assessment run for one or more individual assessments
+// of a migration task. The assessments that you can specify depend on the source
+// and target database engine and the migration type defined for the given task. To
+// run this operation, your migration task must already be created. After you run
+// this operation, you can review the status of each individual assessment. You can
+// also run the migration task manually after the assessment run and its individual
+// assessments complete.
 func (c *Client) StartReplicationTaskAssessmentRun(ctx context.Context, params *StartReplicationTaskAssessmentRunInput, optFns ...func(*Options)) (*StartReplicationTaskAssessmentRunOutput, error) {
 	if params == nil {
 		params = &StartReplicationTaskAssessmentRunInput{}
@@ -46,43 +46,44 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// This member is required.
 	ReplicationTaskArn *string
 
-	// Amazon S3 bucket where you want DMS to store the results of this assessment
-	// run.
+	// Amazon S3 bucket where you want DMS to store the results of this assessment run.
 	//
 	// This member is required.
 	ResultLocationBucket *string
 
-	// ARN of the service role needed to start the assessment run. The role must
-	// allow the iam:PassRole  action.
+	// ARN of the service role needed to start the assessment run. The role must allow
+	// the iam:PassRole action.
 	//
 	// This member is required.
 	ServiceAccessRoleArn *string
 
-	// Space-separated list of names for specific individual assessments that you
-	// want to exclude. These names come from the default list of individual
-	// assessments that DMS supports for the associated migration task. This task is
-	// specified by ReplicationTaskArn . You can't set a value for Exclude if you
-	// also set a value for IncludeOnly in the API operation. To identify the names
-	// of the default individual assessments that DMS supports for the associated
-	// migration task, run the DescribeApplicableIndividualAssessments operation
-	// using its own ReplicationTaskArn  request parameter.
+	// Space-separated list of names for specific individual assessments that you want
+	// to exclude. These names come from the default list of individual assessments
+	// that DMS supports for the associated migration task. This task is specified by
+	// ReplicationTaskArn . You can't set a value for Exclude if you also set a value
+	// for IncludeOnly in the API operation. To identify the names of the default
+	// individual assessments that DMS supports for the associated migration task, run
+	// the DescribeApplicableIndividualAssessments operation using its own
+	// ReplicationTaskArn request parameter.
 	Exclude []string
 
-	// Space-separated list of names for specific individual assessments that you
-	// want to include. These names come from the default list of individual
-	// assessments that DMS supports for the associated migration task. This task is
-	// specified by ReplicationTaskArn . You can't set a value for IncludeOnly if you
-	// also set a value for Exclude in the API operation. To identify the names of
-	// the default individual assessments that DMS supports for the associated
-	// migration task, run the DescribeApplicableIndividualAssessments operation
-	// using its own ReplicationTaskArn  request parameter.
+	// Space-separated list of names for specific individual assessments that you want
+	// to include. These names come from the default list of individual assessments
+	// that DMS supports for the associated migration task. This task is specified by
+	// ReplicationTaskArn . You can't set a value for IncludeOnly if you also set a
+	// value for Exclude in the API operation. To identify the names of the default
+	// individual assessments that DMS supports for the associated migration task, run
+	// the DescribeApplicableIndividualAssessments operation using its own
+	// ReplicationTaskArn request parameter.
 	IncludeOnly []string
 
 	// Encryption mode that you can specify to encrypt the results of this assessment
 	// run. If you don't specify this request parameter, DMS stores the assessment run
 	// results without encryption. You can specify one of the options following:
-	//     - "SSE_S3" – The server-side encryption provided as a default by Amazon S3.
-	//     - "SSE_KMS" – Key Management Service (KMS) encryption. This encryption can use either a custom KMS encryption key that you specify or the default KMS encryption key that DMS provides.
+	//   - "SSE_S3" – The server-side encryption provided as a default by Amazon S3.
+	//   - "SSE_KMS" – Key Management Service (KMS) encryption. This encryption can use
+	//   either a custom KMS encryption key that you specify or the default KMS
+	//   encryption key that DMS provides.
 	ResultEncryptionMode *string
 
 	// ARN of a custom KMS encryption key that you specify when you set

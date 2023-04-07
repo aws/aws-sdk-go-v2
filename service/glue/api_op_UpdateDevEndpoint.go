@@ -29,21 +29,20 @@ func (c *Client) UpdateDevEndpoint(ctx context.Context, params *UpdateDevEndpoin
 
 type UpdateDevEndpointInput struct {
 
-	// The name of the DevEndpoint  to be updated.
+	// The name of the DevEndpoint to be updated.
 	//
 	// This member is required.
 	EndpointName *string
 
 	// The map of arguments to add the map of arguments used to configure the
 	// DevEndpoint . Valid arguments are:
-	//     - "--enable-glue-datacatalog": ""
-	// You can specify a version of Python
-	// support for development endpoints by using the Arguments  parameter in the
-	// CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the
-	// version defaults to Python 2.
+	//   - "--enable-glue-datacatalog": ""
+	// You can specify a version of Python support for development endpoints by using
+	// the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If
+	// no arguments are provided, the version defaults to Python 2.
 	AddArguments map[string]string
 
-	// The list of public keys for the DevEndpoint  to use.
+	// The list of public keys for the DevEndpoint to use.
 	AddPublicKeys []string
 
 	// Custom Python or Java libraries to be loaded in the DevEndpoint .
@@ -56,11 +55,11 @@ type UpdateDevEndpointInput struct {
 	// The list of public keys to be deleted from the DevEndpoint .
 	DeletePublicKeys []string
 
-	// The public key for the DevEndpoint  to use.
+	// The public key for the DevEndpoint to use.
 	PublicKey *string
 
 	// True if the list of custom libraries to be loaded in the development endpoint
-	// needs to be updated, or False  if otherwise.
+	// needs to be updated, or False if otherwise.
 	UpdateEtlLibraries bool
 
 	noSmithyDocumentSerde

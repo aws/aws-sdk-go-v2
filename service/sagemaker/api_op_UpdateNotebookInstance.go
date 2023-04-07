@@ -101,11 +101,11 @@ type UpdateNotebookInstanceInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role that SageMaker can assume to
 	// access the notebook instance. For more information, see SageMaker Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
 	// . To be able to pass this role to SageMaker, the caller of this API must have
-	// the iam:PassRole  permission.
+	// the iam:PassRole permission.
 	RoleArn *string
 
 	// Whether root access is enabled or disabled for users of the notebook instance.
-	// The default value is Enabled . If you set this to Disabled, users don't have
+	// The default value is Enabled . If you set this to Disabled , users don't have
 	// root access on the notebook instance, but lifecycle configuration scripts still
 	// run with root permissions.
 	RootAccess types.RootAccess

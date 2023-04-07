@@ -50,13 +50,12 @@ type GetCostEstimationOutput struct {
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
-	// The collection of the Amazon Web Services resources used to create your
-	// monthly DevOps Guru cost estimate.
+	// The collection of the Amazon Web Services resources used to create your monthly
+	// DevOps Guru cost estimate.
 	ResourceCollection *types.CostEstimationResourceCollectionFilter
 
 	// The status of creating this cost estimate. If it's still in progress, the
-	// status ONGOING  is returned. If it is finished, the status COMPLETED is
-	// returned.
+	// status ONGOING is returned. If it is finished, the status COMPLETED is returned.
 	Status types.CostEstimationStatus
 
 	// The start and end time of the cost estimation.
@@ -141,11 +140,10 @@ type GetCostEstimationAPIClient interface {
 
 var _ GetCostEstimationAPIClient = (*Client)(nil)
 
-// GetCostEstimationPaginatorOptions is the paginator options for
-// GetCostEstimation
+// GetCostEstimationPaginatorOptions is the paginator options for GetCostEstimation
 type GetCostEstimationPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -38,9 +38,9 @@ type ListPortfolioAccessInput struct {
 	PortfolioId *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The ID of an organization node the portfolio is shared with. All children of
@@ -59,8 +59,7 @@ type ListPortfolioAccessInput struct {
 
 type ListPortfolioAccessOutput struct {
 
-	// Information about the Amazon Web Services accounts with access to the
-	// portfolio.
+	// Information about the Amazon Web Services accounts with access to the portfolio.
 	AccountIds []string
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -150,8 +149,8 @@ type ListPortfolioAccessPaginatorOptions struct {
 	// The maximum number of items to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

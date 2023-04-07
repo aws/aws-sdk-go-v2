@@ -27,12 +27,12 @@ func (c *Client) GetDirectoryLimits(ctx context.Context, params *GetDirectoryLim
 	return out, nil
 }
 
-// Contains the inputs for the GetDirectoryLimits  operation.
+// Contains the inputs for the GetDirectoryLimits operation.
 type GetDirectoryLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the GetDirectoryLimits  operation.
+// Contains the results of the GetDirectoryLimits operation.
 type GetDirectoryLimitsOutput struct {
 
 	// A DirectoryLimits object that contains the directory limits for the current

@@ -31,9 +31,9 @@ func (c *Client) DescribeProvisioningArtifact(ctx context.Context, params *Descr
 type DescribeProvisioningArtifactInput struct {
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The product identifier.

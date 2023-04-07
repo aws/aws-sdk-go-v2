@@ -65,7 +65,7 @@ type SearchEntitiesOutput struct {
 	// An array of descriptions for each entity returned in the search result.
 	Descriptions []types.EntityDescription
 
-	// The string to specify as nextToken  when you request the next page of results.
+	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,8 +150,8 @@ type SearchEntitiesPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

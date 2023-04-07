@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// Information about the AccessLog  attribute.
+// Information about the AccessLog attribute.
 type AccessLog struct {
 
 	// Specifies whether access logs are enabled for the load balancer.
@@ -23,7 +23,7 @@ type AccessLog struct {
 	S3BucketName *string
 
 	// The logical hierarchy you created for your Amazon S3 bucket, for example
-	// my-bucket-prefix/prod. If the prefix is not provided, the log is placed at the
+	// my-bucket-prefix/prod . If the prefix is not provided, the log is placed at the
 	// root level of the bucket.
 	S3BucketPrefix *string
 
@@ -34,7 +34,9 @@ type AccessLog struct {
 type AdditionalAttribute struct {
 
 	// The name of the attribute. The following attribute is supported.
-	//     - elb.http.desyncmitigationmode - Determines how the load balancer handles requests that might pose a security risk to your application. The possible values are monitor , defensive , and strictest . The default is defensive .
+	//   - elb.http.desyncmitigationmode - Determines how the load balancer handles
+	//   requests that might pose a security risk to your application. The possible
+	//   values are monitor , defensive , and strictest . The default is defensive .
 	Key *string
 
 	// This value of the attribute.
@@ -68,7 +70,7 @@ type BackendServerDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the ConnectionDraining  attribute.
+// Information about the ConnectionDraining attribute.
 type ConnectionDraining struct {
 
 	// Specifies whether connection draining is enabled for the load balancer.
@@ -83,7 +85,7 @@ type ConnectionDraining struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the ConnectionSettings  attribute.
+// Information about the ConnectionSettings attribute.
 type ConnectionSettings struct {
 
 	// The time, in seconds, that the connection is allowed to be idle (no data has
@@ -95,7 +97,7 @@ type ConnectionSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the CrossZoneLoadBalancing  attribute.
+// Information about the CrossZoneLoadBalancing attribute.
 type CrossZoneLoadBalancing struct {
 
 	// Specifies whether cross-zone load balancing is enabled for the load balancer.
@@ -110,7 +112,7 @@ type CrossZoneLoadBalancing struct {
 type HealthCheck struct {
 
 	// The number of consecutive health checks successes required before moving the
-	// instance to the Healthy  state.
+	// instance to the Healthy state.
 	//
 	// This member is required.
 	HealthyThreshold int32
@@ -138,13 +140,13 @@ type HealthCheck struct {
 	Target *string
 
 	// The amount of time, in seconds, during which no response means a failed health
-	// check. This value must be less than the Interval  value.
+	// check. This value must be less than the Interval value.
 	//
 	// This member is required.
 	Timeout int32
 
 	// The number of consecutive health check failures required before moving the
-	// instance to the Unhealthy  state.
+	// instance to the Unhealthy state.
 	//
 	// This member is required.
 	UnhealthyThreshold int32
@@ -164,31 +166,34 @@ type Instance struct {
 // Information about the state of an EC2 instance.
 type InstanceState struct {
 
-	// A description of the instance state. This string can contain one or more of
-	// the following messages.
-	//     - N/A
-	//     - A transient error occurred. Please try again later.
-	//     - Instance has failed at least the UnhealthyThreshold number of health checks consecutively.
-	//     - Instance has not passed the configured HealthyThreshold number of health checks consecutively.
-	//     - Instance registration is still in progress.
-	//     - Instance is in the EC2 Availability Zone for which LoadBalancer is not configured to route traffic to.
-	//     - Instance is not currently registered with the LoadBalancer.
-	//     - Instance deregistration currently in progress.
-	//     - Disable Availability Zone is currently in progress.
-	//     - Instance is in pending state.
-	//     - Instance is in stopped state.
-	//     - Instance is in terminated state.
+	// A description of the instance state. This string can contain one or more of the
+	// following messages.
+	//   - N/A
+	//   - A transient error occurred. Please try again later.
+	//   - Instance has failed at least the UnhealthyThreshold number of health checks
+	//   consecutively.
+	//   - Instance has not passed the configured HealthyThreshold number of health
+	//   checks consecutively.
+	//   - Instance registration is still in progress.
+	//   - Instance is in the EC2 Availability Zone for which LoadBalancer is not
+	//   configured to route traffic to.
+	//   - Instance is not currently registered with the LoadBalancer.
+	//   - Instance deregistration currently in progress.
+	//   - Disable Availability Zone is currently in progress.
+	//   - Instance is in pending state.
+	//   - Instance is in stopped state.
+	//   - Instance is in terminated state.
 	Description *string
 
 	// The ID of the instance.
 	InstanceId *string
 
 	// Information about the cause of OutOfService instances. Specifically, whether
-	// the cause is Elastic Load Balancing or the instance. Valid values: ELB  |
+	// the cause is Elastic Load Balancing or the instance. Valid values: ELB |
 	// Instance | N/A
 	ReasonCode *string
 
-	// The current state of the instance. Valid values: InService  | OutOfService  |
+	// The current state of the instance. Valid values: InService | OutOfService |
 	// Unknown
 	State *string
 
@@ -198,36 +203,35 @@ type InstanceState struct {
 // Information about a policy for duration-based session stickiness.
 type LBCookieStickinessPolicy struct {
 
-	// The time period, in seconds, after which the cookie should be considered
-	// stale. If this parameter is not specified, the stickiness session lasts for the
+	// The time period, in seconds, after which the cookie should be considered stale.
+	// If this parameter is not specified, the stickiness session lasts for the
 	// duration of the browser session.
 	CookieExpirationPeriod *int64
 
-	// The name of the policy. This name must be unique within the set of policies
-	// for this load balancer.
+	// The name of the policy. This name must be unique within the set of policies for
+	// this load balancer.
 	PolicyName *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about an Elastic Load Balancing resource limit for your AWS
-// account.
+// Information about an Elastic Load Balancing resource limit for your AWS account.
 type Limit struct {
 
 	// The maximum value of the limit.
 	Max *string
 
 	// The name of the limit. The possible values are:
-	//     - classic-listeners
-	//     - classic-load-balancers
-	//     - classic-registered-instances
+	//   - classic-listeners
+	//   - classic-load-balancers
+	//   - classic-registered-instances
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about a listener. For information about the protocols and the
-// ports supported by Elastic Load Balancing, see Listeners for Your Classic Load
+// Information about a listener. For information about the protocols and the ports
+// supported by Elastic Load Balancing, see Listeners for Your Classic Load
 // Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
 // in the Classic Load Balancers Guide.
 type Listener struct {
@@ -250,14 +254,14 @@ type Listener struct {
 	// This member is required.
 	Protocol *string
 
-	// The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or
-	// SSL. If the front-end protocol is TCP or SSL, the back-end protocol must be TCP
-	// or SSL. If the front-end protocol is HTTP or HTTPS, the back-end protocol must
-	// be HTTP or HTTPS. If there is another listener with the same InstancePort
-	// whose InstanceProtocol  is secure, (HTTPS or SSL), the listener's
-	// InstanceProtocolmust also be secure. If there is another listener with the
-	// same InstancePort  whose InstanceProtocol  is HTTP or TCP, the listener's
-	// InstanceProtocol must be HTTP or TCP.
+	// The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or SSL.
+	// If the front-end protocol is TCP or SSL, the back-end protocol must be TCP or
+	// SSL. If the front-end protocol is HTTP or HTTPS, the back-end protocol must be
+	// HTTP or HTTPS. If there is another listener with the same InstancePort whose
+	// InstanceProtocol is secure, (HTTPS or SSL), the listener's InstanceProtocol
+	// must also be secure. If there is another listener with the same InstancePort
+	// whose InstanceProtocol is HTTP or TCP, the listener's InstanceProtocol must be
+	// HTTP or TCP.
 	InstanceProtocol *string
 
 	// The Amazon Resource Name (ARN) of the server certificate.
@@ -281,8 +285,8 @@ type ListenerDescription struct {
 // The attributes for a load balancer.
 type LoadBalancerAttributes struct {
 
-	// If enabled, the load balancer captures detailed information of all requests
-	// and delivers the information to the Amazon S3 bucket that you specify. For more
+	// If enabled, the load balancer captures detailed information of all requests and
+	// delivers the information to the Amazon S3 bucket that you specify. For more
 	// information, see Enable Access Logs (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html)
 	// in the Classic Load Balancers Guide.
 	AccessLog *AccessLog
@@ -296,11 +300,11 @@ type LoadBalancerAttributes struct {
 	// in the Classic Load Balancers Guide.
 	ConnectionDraining *ConnectionDraining
 
-	// If enabled, the load balancer allows the connections to remain idle (no data
-	// is sent over the connection) for the specified duration. By default, Elastic
-	// Load Balancing maintains a 60-second idle connection timeout for both front-end
-	// and back-end connections of your load balancer. For more information, see
-	// Configure Idle Connection Timeout (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html)
+	// If enabled, the load balancer allows the connections to remain idle (no data is
+	// sent over the connection) for the specified duration. By default, Elastic Load
+	// Balancing maintains a 60-second idle connection timeout for both front-end and
+	// back-end connections of your load balancer. For more information, see Configure
+	// Idle Connection Timeout (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html)
 	// in the Classic Load Balancers Guide.
 	ConnectionSettings *ConnectionSettings
 
@@ -322,8 +326,8 @@ type LoadBalancerDescription struct {
 	// Information about your EC2 instances.
 	BackendServerDescriptions []BackendServerDescription
 
-	// The DNS name of the load balancer. For more information, see Configure a
-	// Custom Domain Name (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html)
+	// The DNS name of the load balancer. For more information, see Configure a Custom
+	// Domain Name (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html)
 	// in the Classic Load Balancers Guide.
 	CanonicalHostedZoneName *string
 
@@ -351,9 +355,9 @@ type LoadBalancerDescription struct {
 	// The policies defined for the load balancer.
 	Policies *Policies
 
-	// The type of load balancer. Valid only for load balancers in a VPC. If Scheme
-	// is internet-facing, the load balancer has a public DNS name that resolves to a
-	// public IP address. If Scheme  is internal, the load balancer has a public DNS
+	// The type of load balancer. Valid only for load balancers in a VPC. If Scheme is
+	// internet-facing , the load balancer has a public DNS name that resolves to a
+	// public IP address. If Scheme is internal , the load balancer has a public DNS
 	// name that resolves to a private IP address.
 	Scheme *string
 
@@ -421,14 +425,14 @@ type PolicyAttributeTypeDescription struct {
 	// The name of the attribute.
 	AttributeName *string
 
-	// The type of the attribute. For example, Boolean  or Integer .
+	// The type of the attribute. For example, Boolean or Integer .
 	AttributeType *string
 
 	// The cardinality of the attribute. Valid values:
-	//     - ONE(1) : Single value required
-	//     - ZERO_OR_ONE(0..1) : Up to one value is allowed
-	//     - ZERO_OR_MORE(0..*) : Optional. Multiple values are allowed
-	//     - ONE_OR_MORE(1..*0) : Required. Multiple values are allowed
+	//   - ONE(1) : Single value required
+	//   - ZERO_OR_ONE(0..1) : Up to one value is allowed
+	//   - ZERO_OR_MORE(0..*) : Optional. Multiple values are allowed
+	//   - ONE_OR_MORE(1..*0) : Required. Multiple values are allowed
 	Cardinality *string
 
 	// The default value of the attribute, if applicable.

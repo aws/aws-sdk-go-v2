@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Cost Category. Changes made to the Cost Category rules
-// will be used to categorize the current month’s expenses and future expenses.
-// This won’t change categorization for the previous months.
+// Updates an existing Cost Category. Changes made to the Cost Category rules will
+// be used to categorize the current month’s expenses and future expenses. This
+// won’t change categorization for the previous months.
 func (c *Client) UpdateCostCategoryDefinition(ctx context.Context, params *UpdateCostCategoryDefinitionInput, optFns ...func(*Options)) (*UpdateCostCategoryDefinitionOutput, error) {
 	if params == nil {
 		params = &UpdateCostCategoryDefinitionInput{}
@@ -41,7 +41,7 @@ type UpdateCostCategoryDefinitionInput struct {
 	// This member is required.
 	RuleVersion types.CostCategoryRuleVersion
 
-	// The Expression  object used to categorize costs. For more information, see
+	// The Expression object used to categorize costs. For more information, see
 	// CostCategoryRule  (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html)
 	// .
 	//
@@ -57,8 +57,8 @@ type UpdateCostCategoryDefinitionInput struct {
 	// future.
 	EffectiveStart *string
 
-	// The split charge rules used to allocate your charges between your Cost
-	// Category values.
+	// The split charge rules used to allocate your charges between your Cost Category
+	// values.
 	SplitChargeRules []types.CostCategorySplitChargeRule
 
 	noSmithyDocumentSerde

@@ -33,7 +33,7 @@ type DeleteGroupMembershipInput struct {
 	// This member is required.
 	IdentityStoreId *string
 
-	// The identifier for a GroupMembership  in an identity store.
+	// The identifier for a GroupMembership in an identity store.
 	//
 	// This member is required.
 	MembershipId *string

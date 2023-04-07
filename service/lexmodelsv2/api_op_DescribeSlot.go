@@ -84,10 +84,10 @@ type DescribeSlotOutput struct {
 	LocaleId *string
 
 	// Indicates whether the slot accepts multiple values in a single utterance. If
-	// the multipleValuesSetting  is not set, the default value is false .
+	// the multipleValuesSetting is not set, the default value is false .
 	MultipleValuesSetting *types.MultipleValuesSetting
 
-	// Whether slot values are shown in Amazon CloudWatch logs. If the value is None,
+	// Whether slot values are shown in Amazon CloudWatch logs. If the value is None ,
 	// the actual value of the slot is shown in logs.
 	ObfuscationSetting *types.ObfuscationSetting
 

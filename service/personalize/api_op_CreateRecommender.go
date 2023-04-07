@@ -17,29 +17,30 @@ import (
 // request. Minimum recommendation requests per second When you create a
 // recommender, you can configure the recommender's minimum recommendation requests
 // per second. The minimum recommendation requests per second (
-// minRecommendationRequestsPerSecond) specifies the baseline recommendation
+// minRecommendationRequestsPerSecond ) specifies the baseline recommendation
 // request throughput provisioned by Amazon Personalize. The default
 // minRecommendationRequestsPerSecond is 1 . A recommendation request is a single
-// GetRecommendationsoperation. Request throughput is measured in requests per
+// GetRecommendations operation. Request throughput is measured in requests per
 // second and Amazon Personalize uses your requests per second to derive your
 // requests per hour and the price of your recommender usage. If your requests per
-// second increases beyond minRecommendationRequestsPerSecond, Amazon Personalize
+// second increases beyond minRecommendationRequestsPerSecond , Amazon Personalize
 // auto-scales the provisioned capacity up and down, but never below
-// minRecommendationRequestsPerSecond. There's a short time delay while the
+// minRecommendationRequestsPerSecond . There's a short time delay while the
 // capacity is increased that might cause loss of requests. Your bill is the
 // greater of either the minimum requests per hour (based on
 // minRecommendationRequestsPerSecond) or the actual number of requests. The actual
 // request throughput used is calculated as the average requests/second within a
 // one-hour window. We recommend starting with the default
-// minRecommendationRequestsPerSecond, track your usage using Amazon CloudWatch
-// metrics, and then increase the minRecommendationRequestsPerSecond as
-// necessary. Status A recommender can be in one of the following states:
+// minRecommendationRequestsPerSecond , track your usage using Amazon CloudWatch
+// metrics, and then increase the minRecommendationRequestsPerSecond as necessary.
+// Status A recommender can be in one of the following states:
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-//   - STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE
+//   - STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START
+//     IN_PROGRESS > ACTIVE
 //   - DELETE PENDING > DELETE IN_PROGRESS
 //
 // To get the recommender status, call DescribeRecommender (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html)
-// . Wait until the status  of the recommender is ACTIVE before asking the
+// . Wait until the status of the recommender is ACTIVE before asking the
 // recommender for recommendations. Related APIs
 //   - ListRecommenders (https://docs.aws.amazon.com/personalize/latest/dg/API_ListRecommenders.html)
 //   - DescribeRecommender (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html)
@@ -73,10 +74,10 @@ type CreateRecommenderInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the recipe that the recommender will use.
-	// For a recommender, a recipe is a Domain dataset group use case. Only Domain
-	// dataset group use cases can be used to create a recommender. For information
-	// about use cases see Choosing recommender use cases (https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html)
+	// The Amazon Resource Name (ARN) of the recipe that the recommender will use. For
+	// a recommender, a recipe is a Domain dataset group use case. Only Domain dataset
+	// group use cases can be used to create a recommender. For information about use
+	// cases see Choosing recommender use cases (https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html)
 	// .
 	//
 	// This member is required.

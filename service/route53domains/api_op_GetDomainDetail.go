@@ -56,18 +56,17 @@ type GetDomainDetailOutput struct {
 	AdminContact *types.ContactDetail
 
 	// Specifies whether contact information is concealed from WHOIS queries. If the
-	// value is true, WHOIS ("who is") queries return contact information either for
+	// value is true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If the value is false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If the value is false , WHOIS queries
 	// return the information that you entered for the admin contact.
 	AdminPrivacy *bool
 
 	// Specifies whether the domain registration is set to renew automatically.
 	AutoRenew *bool
 
-	// The date when the domain was created as found in the response to a WHOIS
-	// query. The date and time is in Unix time format and Coordinated Universal time
-	// (UTC).
+	// The date when the domain was created as found in the response to a WHOIS query.
+	// The date and time is in Unix time format and Coordinated Universal time (UTC).
 	CreationDate *time.Time
 
 	// Deprecated.
@@ -90,17 +89,17 @@ type GetDomainDetailOutput struct {
 	RegistrantContact *types.ContactDetail
 
 	// Specifies whether contact information is concealed from WHOIS queries. If the
-	// value is true, WHOIS ("who is") queries return contact information either for
+	// value is true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If the value is false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If the value is false , WHOIS queries
 	// return the information that you entered for the registrant contact (domain
 	// owner).
 	RegistrantPrivacy *bool
 
-	// Name of the registrar of the domain as identified in the registry. Domains
-	// with a .com, .net, or .org TLD are registered by Amazon Registrar. All other
-	// domains are registered by our registrar associate, Gandi. The value for domains
-	// that are registered by Gandi is "GANDI SAS" .
+	// Name of the registrar of the domain as identified in the registry. Domains with
+	// a .com, .net, or .org TLD are registered by Amazon Registrar. All other domains
+	// are registered by our registrar associate, Gandi. The value for domains that are
+	// registered by Gandi is "GANDI SAS" .
 	RegistrarName *string
 
 	// Web address of the registrar.
@@ -110,7 +109,7 @@ type GetDomainDetailOutput struct {
 	RegistryDomainId *string
 
 	// Reseller of the domain. Domains registered or transferred using Route 53
-	// domains will have "Amazon"  as the reseller.
+	// domains will have "Amazon" as the reseller.
 	Reseller *string
 
 	// An array of domain name status codes, also known as Extensible Provisioning
@@ -121,7 +120,7 @@ type GetDomainDetailOutput struct {
 	// renewing the registration for a domain name, and so on. All registrars use this
 	// same set of status codes. For a current list of domain name status codes and an
 	// explanation of what each code means, go to the ICANN website (https://www.icann.org/)
-	// and search for epp status codes. (Search on the ICANN website; web searches
+	// and search for epp status codes . (Search on the ICANN website; web searches
 	// sometimes return an old version of the document.)
 	StatusList []string
 
@@ -129,9 +128,9 @@ type GetDomainDetailOutput struct {
 	TechContact *types.ContactDetail
 
 	// Specifies whether contact information is concealed from WHOIS queries. If the
-	// value is true, WHOIS ("who is") queries return contact information either for
+	// value is true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If the value is false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If the value is false , WHOIS queries
 	// return the information that you entered for the technical contact.
 	TechPrivacy *bool
 

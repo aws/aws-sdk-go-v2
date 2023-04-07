@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a subset of information about the classification scope for an
-// account.
+// Retrieves a subset of information about the classification scope for an account.
 func (c *Client) ListClassificationScopes(ctx context.Context, params *ListClassificationScopesInput, optFns ...func(*Options)) (*ListClassificationScopesOutput, error) {
 	if params == nil {
 		params = &ListClassificationScopesInput{}
@@ -128,8 +127,8 @@ var _ ListClassificationScopesAPIClient = (*Client)(nil)
 // ListClassificationScopesPaginatorOptions is the paginator options for
 // ListClassificationScopes
 type ListClassificationScopesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

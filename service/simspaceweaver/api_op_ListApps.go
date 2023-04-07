@@ -41,10 +41,10 @@ type ListAppsInput struct {
 	// The maximum number of apps to list.
 	MaxResults *int32
 
-	// If SimSpace Weaver returns nextToken, there are more results available. The
+	// If SimSpace Weaver returns nextToken , there are more results available. The
 	// value of nextToken is a unique pagination token for each page. To retrieve the
 	// next page, call the operation again using the returned token. Keep all other
-	// arguments unchanged. If no results remain, nextToken  is set to null. Each
+	// arguments unchanged. If no results remain, nextToken is set to null . Each
 	// pagination token expires after 24 hours. If you provide a token that isn't
 	// valid, you receive an HTTP 400 ValidationException error.
 	NextToken *string
@@ -57,10 +57,10 @@ type ListAppsOutput struct {
 	// The list of apps for the given simulation and domain.
 	Apps []types.SimulationAppMetadata
 
-	// If SimSpace Weaver returns nextToken, there are more results available. The
+	// If SimSpace Weaver returns nextToken , there are more results available. The
 	// value of nextToken is a unique pagination token for each page. To retrieve the
 	// next page, call the operation again using the returned token. Keep all other
-	// arguments unchanged. If no results remain, nextToken  is set to null. Each
+	// arguments unchanged. If no results remain, nextToken is set to null . Each
 	// pagination token expires after 24 hours. If you provide a token that isn't
 	// valid, you receive an HTTP 400 ValidationException error.
 	NextToken *string
@@ -146,8 +146,8 @@ type ListAppsPaginatorOptions struct {
 	// The maximum number of apps to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

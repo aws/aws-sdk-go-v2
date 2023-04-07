@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the permissions boundary for the specified IAM role. You cannot set
-// the boundary for a service-linked role. Deleting the permissions boundary for a
-// role might increase its permissions. For example, it might allow anyone who
-// assumes the role to perform all the actions granted in its permissions policies.
+// Deletes the permissions boundary for the specified IAM role. You cannot set the
+// boundary for a service-linked role. Deleting the permissions boundary for a role
+// might increase its permissions. For example, it might allow anyone who assumes
+// the role to perform all the actions granted in its permissions policies.
 func (c *Client) DeleteRolePermissionsBoundary(ctx context.Context, params *DeleteRolePermissionsBoundaryInput, optFns ...func(*Options)) (*DeleteRolePermissionsBoundaryOutput, error) {
 	if params == nil {
 		params = &DeleteRolePermissionsBoundaryInput{}
@@ -31,8 +31,8 @@ func (c *Client) DeleteRolePermissionsBoundary(ctx context.Context, params *Dele
 
 type DeleteRolePermissionsBoundaryInput struct {
 
-	// The name (friendly name, not ARN) of the IAM role from which you want to
-	// remove the permissions boundary.
+	// The name (friendly name, not ARN) of the IAM role from which you want to remove
+	// the permissions boundary.
 	//
 	// This member is required.
 	RoleName *string

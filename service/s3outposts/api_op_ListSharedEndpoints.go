@@ -55,8 +55,8 @@ type ListSharedEndpointsOutput struct {
 	Endpoints []types.Endpoint
 
 	// If the number of endpoints associated with the specified Outpost exceeds
-	// MaxResults, you can include this value in subsequent calls to this operation
-	// to retrieve more results.
+	// MaxResults , you can include this value in subsequent calls to this operation to
+	// retrieve more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +142,8 @@ type ListSharedEndpointsPaginatorOptions struct {
 	// The maximum number of endpoints that will be returned in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

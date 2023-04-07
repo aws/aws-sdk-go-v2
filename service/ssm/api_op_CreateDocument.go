@@ -14,8 +14,7 @@ import (
 // Creates a Amazon Web Services Systems Manager (SSM document). An SSM document
 // defines the actions that Systems Manager performs on your managed nodes. For
 // more information about SSM documents, including information about supported
-// schemas, features, and syntax, see Amazon Web Services Systems Manager
-// Documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html)
+// schemas, features, and syntax, see Amazon Web Services Systems Manager Documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html)
 // in the Amazon Web Services Systems Manager User Guide.
 func (c *Client) CreateDocument(ctx context.Context, params *CreateDocumentInput, optFns ...func(*Options)) (*CreateDocumentOutput, error) {
 	if params == nil {
@@ -34,15 +33,15 @@ func (c *Client) CreateDocument(ctx context.Context, params *CreateDocumentInput
 
 type CreateDocumentInput struct {
 
-	// The content for the new SSM document in JSON or YAML format. The content of
-	// the document must not exceed 64KB. This quota also includes the content
-	// specified for input parameters at runtime. We recommend storing the contents for
-	// your new document in an external JSON or YAML file and referencing the file in a
-	// command. For examples, see the following topics in the Amazon Web Services
-	// Systems Manager User Guide.
-	//     - Create an SSM document (Amazon Web Services API) (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html)
-	//     - Create an SSM document (Amazon Web Services CLI) (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html)
-	//     - Create an SSM document (API) (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html)
+	// The content for the new SSM document in JSON or YAML format. The content of the
+	// document must not exceed 64KB. This quota also includes the content specified
+	// for input parameters at runtime. We recommend storing the contents for your new
+	// document in an external JSON or YAML file and referencing the file in a command.
+	// For examples, see the following topics in the Amazon Web Services Systems
+	// Manager User Guide.
+	//   - Create an SSM document (Amazon Web Services API) (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html)
+	//   - Create an SSM document (Amazon Web Services CLI) (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html)
+	//   - Create an SSM document (API) (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html)
 	//
 	// This member is required.
 	Content *string
@@ -50,9 +49,9 @@ type CreateDocumentInput struct {
 	// A name for the SSM document. You can't use the following strings as document
 	// name prefixes. These are reserved by Amazon Web Services for use as document
 	// name prefixes:
-	//     - aws
-	//     - amazon
-	//     - amzn
+	//   - aws
+	//   - amazon
+	//   - amzn
 	//
 	// This member is required.
 	Name *string
@@ -62,7 +61,7 @@ type CreateDocumentInput struct {
 
 	// An optional field where you can specify a friendly name for the SSM document.
 	// This value can differ for each version of the document. You can update this
-	// value at a later time using the UpdateDocument  operation.
+	// value at a later time using the UpdateDocument operation.
 	DisplayName *string
 
 	// Specify the document format for the request. The document format can be JSON,
@@ -76,8 +75,8 @@ type CreateDocumentInput struct {
 	// A list of SSM documents required by a document. This parameter is used
 	// exclusively by AppConfig. When a user creates an AppConfig configuration in an
 	// SSM document, the user must also specify a required document for validation
-	// purposes. In this case, an ApplicationConfiguration  document requires an
-	// ApplicationConfigurationSchemadocument for validation purposes. For more
+	// purposes. In this case, an ApplicationConfiguration document requires an
+	// ApplicationConfigurationSchema document for validation purposes. For more
 	// information, see What is AppConfig? (https://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html)
 	// in the AppConfig User Guide.
 	Requires []types.DocumentRequires
@@ -87,23 +86,22 @@ type CreateDocumentInput struct {
 	// example, you might want to tag an SSM document to identify the types of targets
 	// or the environment where it will run. In this case, you could specify the
 	// following key-value pairs:
-	//     - Key=OS,Value=Windows
-	//     - Key=Environment,Value=Production
-	// To add tags to an existing SSM document,
-	// use the AddTagsToResource  operation.
+	//   - Key=OS,Value=Windows
+	//   - Key=Environment,Value=Production
+	// To add tags to an existing SSM document, use the AddTagsToResource operation.
 	Tags []types.Tag
 
-	// Specify a target type to define the kinds of resources the document can run
-	// on. For example, to run a document on EC2 instances, specify the following
-	// value: /AWS::EC2::Instance. If you specify a value of '/' the document can run
-	// on all types of resources. If you don't specify a value, the document can't run
-	// on any resources. For a list of valid resource types, see Amazon Web Services
-	// resource and property types reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// Specify a target type to define the kinds of resources the document can run on.
+	// For example, to run a document on EC2 instances, specify the following value:
+	// /AWS::EC2::Instance . If you specify a value of '/' the document can run on all
+	// types of resources. If you don't specify a value, the document can't run on any
+	// resources. For a list of valid resource types, see Amazon Web Services resource
+	// and property types reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the CloudFormation User Guide.
 	TargetType *string
 
 	// An optional field specifying the version of the artifact you are creating with
-	// the document. For example, Release12.1. This value is unique across all
+	// the document. For example, Release12.1 . This value is unique across all
 	// versions of a document, and can't be changed.
 	VersionName *string
 

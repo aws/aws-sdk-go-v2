@@ -14,8 +14,8 @@ import (
 // Gets the analysis schemes configured for a domain. An analysis scheme defines
 // language-specific text processing options for a text field. Can be limited to
 // specific analysis schemes by name. By default, shows all analysis schemes and
-// includes any pending changes to the configuration. Set the Deployed  option to
-// trueto show the active configuration and exclude pending changes. For more
+// includes any pending changes to the configuration. Set the Deployed option to
+// true to show the active configuration and exclude pending changes. For more
 // information, see Configuring Analysis Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DescribeAnalysisSchemes(ctx context.Context, params *DescribeAnalysisSchemesInput, optFns ...func(*Options)) (*DescribeAnalysisSchemesOutput, error) {
@@ -37,7 +37,7 @@ func (c *Client) DescribeAnalysisSchemes(ctx context.Context, params *DescribeAn
 // Specifies the name of the domain you want to describe. To limit the response to
 // particular analysis schemes, specify the names of the analysis schemes you want
 // to describe. To show the active configuration and exclude any pending changes,
-// set the Deployed  option to true .
+// set the Deployed option to true .
 type DescribeAnalysisSchemesInput struct {
 
 	// The name of the domain you want to describe.
@@ -48,7 +48,7 @@ type DescribeAnalysisSchemesInput struct {
 	// The analysis schemes you want to describe.
 	AnalysisSchemeNames []string
 
-	// Whether to display the deployed configuration ( true) or include any pending
+	// Whether to display the deployed configuration ( true ) or include any pending
 	// changes ( false ). Defaults to false .
 	Deployed *bool
 

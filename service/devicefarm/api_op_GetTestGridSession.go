@@ -12,10 +12,11 @@ import (
 )
 
 // A session is an instance of a browser created through a RemoteWebDriver with
-// the URL from CreateTestGridUrlResult$url. You can use the following to look up
+// the URL from CreateTestGridUrlResult$url . You can use the following to look up
 // sessions:
 //   - The session ARN ( GetTestGridSessionRequest$sessionArn ).
-//   - The project ARN and a session ID ( GetTestGridSessionRequest$projectArn and GetTestGridSessionRequest$sessionId ).
+//   - The project ARN and a session ID ( GetTestGridSessionRequest$projectArn and
+//     GetTestGridSessionRequest$sessionId ).
 func (c *Client) GetTestGridSession(ctx context.Context, params *GetTestGridSessionInput, optFns ...func(*Options)) (*GetTestGridSessionOutput, error) {
 	if params == nil {
 		params = &GetTestGridSessionInput{}
@@ -48,7 +49,7 @@ type GetTestGridSessionInput struct {
 
 type GetTestGridSessionOutput struct {
 
-	// The TestGridSession  that was requested.
+	// The TestGridSession that was requested.
 	TestGridSession *types.TestGridSession
 
 	// Metadata pertaining to the operation's result.

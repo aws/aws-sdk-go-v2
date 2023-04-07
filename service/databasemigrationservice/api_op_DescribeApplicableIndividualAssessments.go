@@ -68,12 +68,12 @@ type DescribeApplicableIndividualAssessmentsInput struct {
 	// default list of individual assessments.
 	ReplicationTaskArn *string
 
-	// Name of a database engine that the specified replication instance supports as
-	// a source.
+	// Name of a database engine that the specified replication instance supports as a
+	// source.
 	SourceEngineName *string
 
-	// Name of a database engine that the specified replication instance supports as
-	// a target.
+	// Name of a database engine that the specified replication instance supports as a
+	// target.
 	TargetEngineName *string
 
 	noSmithyDocumentSerde
@@ -177,8 +177,8 @@ type DescribeApplicableIndividualAssessmentsPaginatorOptions struct {
 	// included in the response so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -24,7 +24,7 @@ import (
 // in the Amazon S3 User Guide. This request is asynchronous, meaning that you
 // might receive a response before the command has completed. When this request
 // provides a response, it provides a token that you can use to monitor the status
-// of the request with DescribeMultiRegionAccessPointOperation. The following
+// of the request with DescribeMultiRegionAccessPointOperation . The following
 // actions are related to CreateMultiRegionAccessPoint :
 //   - DeleteMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
 //   - DescribeMultiRegionAccessPointOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)

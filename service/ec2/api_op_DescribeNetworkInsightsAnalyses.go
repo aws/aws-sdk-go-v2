@@ -44,12 +44,13 @@ type DescribeNetworkInsightsAnalysesInput struct {
 	DryRun *bool
 
 	// The filters. The following are the possible values:
-	//     - path-found - A Boolean value that indicates whether a feasible path is found.
-	//     - status - The status of the analysis (running | succeeded | failed).
+	//   - path-found - A Boolean value that indicates whether a feasible path is
+	//   found.
+	//   - status - The status of the analysis (running | succeeded | failed).
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The ID of the network insights analyses. You must specify either analysis IDs
@@ -152,11 +153,11 @@ var _ DescribeNetworkInsightsAnalysesAPIClient = (*Client)(nil)
 // DescribeNetworkInsightsAnalyses
 type DescribeNetworkInsightsAnalysesPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

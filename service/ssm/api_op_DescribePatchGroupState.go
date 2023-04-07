@@ -49,8 +49,8 @@ type DescribePatchGroupStateOutput struct {
 	// NON_COMPLIANT .
 	InstancesWithCriticalNonCompliantPatches *int32
 
-	// The number of managed nodes with patches from the patch baseline that failed
-	// to install.
+	// The number of managed nodes with patches from the patch baseline that failed to
+	// install.
 	InstancesWithFailedPatches int32
 
 	// The number of managed nodes with patches installed that aren't defined in the
@@ -67,9 +67,9 @@ type DescribePatchGroupStateOutput struct {
 
 	// The number of managed nodes with patches installed that are specified in a
 	// RejectedPatches list. Patches with a status of INSTALLED_REJECTED were
-	// typically installed before they were added to a RejectedPatches  list. If
-	// ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the
-	// value of InstancesWithInstalledRejectedPatches  will always be 0  (zero).
+	// typically installed before they were added to a RejectedPatches list. If
+	// ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction , the
+	// value of InstancesWithInstalledRejectedPatches will always be 0 (zero).
 	InstancesWithInstalledRejectedPatches *int32
 
 	// The number of managed nodes with missing patches from the patch baseline.
@@ -79,7 +79,7 @@ type DescribePatchGroupStateOutput struct {
 	InstancesWithNotApplicablePatches int32
 
 	// The number of managed nodes with patches installed that are specified as other
-	// than Critical  or Security but aren't compliant with the patch baseline. The
+	// than Critical or Security but aren't compliant with the patch baseline. The
 	// status of these managed nodes is NON_COMPLIANT .
 	InstancesWithOtherNonCompliantPatches *int32
 

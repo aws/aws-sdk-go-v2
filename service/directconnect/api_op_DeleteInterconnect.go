@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified interconnect. Intended for use by Direct Connect
-// Partners only.
+// Deletes the specified interconnect. Intended for use by Direct Connect Partners
+// only.
 func (c *Client) DeleteInterconnect(ctx context.Context, params *DeleteInterconnectInput, optFns ...func(*Options)) (*DeleteInterconnectOutput, error) {
 	if params == nil {
 		params = &DeleteInterconnectInput{}
@@ -41,13 +41,15 @@ type DeleteInterconnectInput struct {
 type DeleteInterconnectOutput struct {
 
 	// The state of the interconnect. The following are the possible values:
-	//     - requested : The initial state of an interconnect. The interconnect stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.
-	//     - pending : The interconnect is approved, and is being initialized.
-	//     - available : The network link is up, and the interconnect is ready for use.
-	//     - down : The network link is down.
-	//     - deleting : The interconnect is being deleted.
-	//     - deleted : The interconnect is deleted.
-	//     - unknown : The state of the interconnect is not available.
+	//   - requested : The initial state of an interconnect. The interconnect stays in
+	//   the requested state until the Letter of Authorization (LOA) is sent to the
+	//   customer.
+	//   - pending : The interconnect is approved, and is being initialized.
+	//   - available : The network link is up, and the interconnect is ready for use.
+	//   - down : The network link is down.
+	//   - deleting : The interconnect is being deleted.
+	//   - deleted : The interconnect is deleted.
+	//   - unknown : The state of the interconnect is not available.
 	InterconnectState types.InterconnectState
 
 	// Metadata pertaining to the operation's result.

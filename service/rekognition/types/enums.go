@@ -30,9 +30,9 @@ const (
 	BodyPartRightHand BodyPart = "RIGHT_HAND"
 )
 
-// Values returns all known values for BodyPart. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BodyPart. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (BodyPart) Values() []BodyPart {
 	return []BodyPart{
 		"FACE",
@@ -86,9 +86,9 @@ const (
 	ContentModerationSortByTimestamp ContentModerationSortBy = "TIMESTAMP"
 )
 
-// Values returns all known values for ContentModerationSortBy. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContentModerationSortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ContentModerationSortBy) Values() []ContentModerationSortBy {
 	return []ContentModerationSortBy{
 		"NAME",
@@ -152,9 +152,9 @@ const (
 	DatasetTypeTest  DatasetType = "TEST"
 )
 
-// Values returns all known values for DatasetType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DatasetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DatasetType) Values() []DatasetType {
 	return []DatasetType{
 		"TRAIN",
@@ -170,9 +170,9 @@ const (
 	DetectLabelsFeatureNameImageProperties DetectLabelsFeatureName = "IMAGE_PROPERTIES"
 )
 
-// Values returns all known values for DetectLabelsFeatureName. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DetectLabelsFeatureName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DetectLabelsFeatureName) Values() []DetectLabelsFeatureName {
 	return []DetectLabelsFeatureName{
 		"GENERAL_LABELS",
@@ -195,9 +195,9 @@ const (
 	EmotionNameFear      EmotionName = "FEAR"
 )
 
-// Values returns all known values for EmotionName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EmotionName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EmotionName) Values() []EmotionName {
 	return []EmotionName{
 		"HAPPY",
@@ -330,8 +330,8 @@ const (
 	LabelDetectionSortByTimestamp LabelDetectionSortBy = "TIMESTAMP"
 )
 
-// Values returns all known values for LabelDetectionSortBy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LabelDetectionSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LabelDetectionSortBy) Values() []LabelDetectionSortBy {
 	return []LabelDetectionSortBy{
@@ -444,8 +444,8 @@ const (
 	PersonTrackingSortByTimestamp PersonTrackingSortBy = "TIMESTAMP"
 )
 
-// Values returns all known values for PersonTrackingSortBy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PersonTrackingSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PersonTrackingSortBy) Values() []PersonTrackingSortBy {
 	return []PersonTrackingSortBy{
@@ -492,8 +492,8 @@ const (
 	ProjectVersionStatusCopyingFailed      ProjectVersionStatus = "COPYING_FAILED"
 )
 
-// Values returns all known values for ProjectVersionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ProjectVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ProjectVersionStatus) Values() []ProjectVersionStatus {
 	return []ProjectVersionStatus{
@@ -521,9 +521,9 @@ const (
 	ProtectiveEquipmentTypeHeadCover ProtectiveEquipmentType = "HEAD_COVER"
 )
 
-// Values returns all known values for ProtectiveEquipmentType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProtectiveEquipmentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ProtectiveEquipmentType) Values() []ProtectiveEquipmentType {
 	return []ProtectiveEquipmentType{
 		"FACE_COVER",
@@ -592,9 +592,9 @@ const (
 	SegmentTypeShot         SegmentType = "SHOT"
 )
 
-// Values returns all known values for SegmentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SegmentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SegmentType) Values() []SegmentType {
 	return []SegmentType{
 		"TECHNICAL_CUE",
@@ -610,8 +610,8 @@ const (
 	StreamProcessorParameterToDeleteRegionsOfInterest          StreamProcessorParameterToDelete = "RegionsOfInterest"
 )
 
-// Values returns all known values for StreamProcessorParameterToDelete. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for StreamProcessorParameterToDelete. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (StreamProcessorParameterToDelete) Values() []StreamProcessorParameterToDelete {

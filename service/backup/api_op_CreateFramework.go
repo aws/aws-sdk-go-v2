@@ -34,8 +34,8 @@ func (c *Client) CreateFramework(ctx context.Context, params *CreateFrameworkInp
 
 type CreateFrameworkInput struct {
 
-	// A list of the controls that make up the framework. Each control in the list
-	// has a name, input parameters, and scope.
+	// A list of the controls that make up the framework. Each control in the list has
+	// a name, input parameters, and scope.
 	//
 	// This member is required.
 	FrameworkControls []types.FrameworkControl
@@ -55,8 +55,8 @@ type CreateFrameworkInput struct {
 	FrameworkTags map[string]string
 
 	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to CreateFrameworkInput. Retrying a successful request with
-	// the same idempotency token results in a success message with no action taken.
+	// identical calls to CreateFrameworkInput . Retrying a successful request with the
+	// same idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
 	noSmithyDocumentSerde

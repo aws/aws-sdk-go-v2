@@ -51,8 +51,8 @@ type ListBotLocalesInput struct {
 	MaxResults *int32
 
 	// If the response from the ListBotLocales operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response.
-	// Use that token as the nextToken  parameter to return the next page of results.
+	// specified in the maxResults parameter, a token is returned in the response. Use
+	// that token as the nextToken parameter to return the next page of results.
 	NextToken *string
 
 	// Specifies sorting parameters for the list of locales. You can sort by locale
@@ -68,17 +68,17 @@ type ListBotLocalesOutput struct {
 	BotId *string
 
 	// Summary information for the locales that meet the filter criteria specified in
-	// the request. The length of the list is specified in the maxResults parameter
-	// of the request. If there are more locales available, the nextToken field
-	// contains a token to get the next page of results.
+	// the request. The length of the list is specified in the maxResults parameter of
+	// the request. If there are more locales available, the nextToken field contains
+	// a token to get the next page of results.
 	BotLocaleSummaries []types.BotLocaleSummary
 
 	// The version of the bot.
 	BotVersion *string
 
 	// A token that indicates whether there are more results to return in a response
-	// to the ListBotLocales  operation. If the nextToken field is present, you send
-	// the contents as the nextToken  parameter of a ListBotLocales operation request
+	// to the ListBotLocales operation. If the nextToken field is present, you send
+	// the contents as the nextToken parameter of a ListBotLocales operation request
 	// to get the next page of results.
 	NextToken *string
 
@@ -166,8 +166,8 @@ type ListBotLocalesPaginatorOptions struct {
 	// returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

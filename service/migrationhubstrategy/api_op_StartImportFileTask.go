@@ -51,11 +51,11 @@ type StartImportFileTaskInput struct {
 	DataSourceType types.DataSourceType
 
 	// Groups the resources in the import file together with a unique name. This ID
-	// can be as filter in ListApplicationComponents  and ListServers .
+	// can be as filter in ListApplicationComponents and ListServers .
 	GroupId []types.Group
 
-	// The S3 bucket where Strategy Recommendations uploads import results. The
-	// bucket name is required to begin with migrationhub-strategy-.
+	// The S3 bucket where Strategy Recommendations uploads import results. The bucket
+	// name is required to begin with migrationhub-strategy-.
 	S3bucketForReportData *string
 
 	noSmithyDocumentSerde

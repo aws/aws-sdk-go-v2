@@ -33,8 +33,8 @@ func (c *Client) StartDBInstanceAutomatedBackupsReplication(ctx context.Context,
 type StartDBInstanceAutomatedBackupsReplicationInput struct {
 
 	// The Amazon Resource Name (ARN) of the source DB instance for the replicated
-	// automated backups, for example,
-	// arn:aws:rds:us-west-2:123456789012:db:mydatabase .
+	// automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase
+	// .
 	//
 	// This member is required.
 	SourceDBInstanceArn *string
@@ -50,7 +50,7 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 
 	// In an Amazon Web Services GovCloud (US) Region, an URL that contains a
 	// Signature Version 4 signed request for the
-	// StartDBInstanceAutomatedBackupsReplicationoperation to call in the Amazon Web
+	// StartDBInstanceAutomatedBackupsReplication operation to call in the Amazon Web
 	// Services Region of the source DB instance. The presigned URL must be a valid
 	// request for the StartDBInstanceAutomatedBackupsReplication API operation that
 	// can run in the Amazon Web Services Region that contains the source DB instance.
@@ -60,10 +60,9 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 	// Parameters (Amazon Web Services Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 	// and Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
 	// . If you are using an Amazon Web Services SDK tool or the CLI, you can specify
-	// SourceRegion (or --source-region  for the CLI) instead of specifying
-	// PreSignedUrl manually. Specifying SourceRegion autogenerates a presigned URL
-	// that is a valid request for the operation that can run in the source Amazon Web
-	// Services Region.
+	// SourceRegion (or --source-region for the CLI) instead of specifying PreSignedUrl
+	// manually. Specifying SourceRegion autogenerates a presigned URL that is a valid
+	// request for the operation that can run in the source Amazon Web Services Region.
 	PreSignedUrl *string
 
 	noSmithyDocumentSerde

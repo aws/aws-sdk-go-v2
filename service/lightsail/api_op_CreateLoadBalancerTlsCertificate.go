@@ -13,9 +13,9 @@ import (
 
 // Creates an SSL/TLS certificate for an Amazon Lightsail load balancer. TLS is
 // just an updated, more secure version of Secure Socket Layer (SSL). The
-// CreateLoadBalancerTlsCertificateoperation supports tag-based access control
-// via resource tags applied to the resource identified by load balancer name.
-// For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// CreateLoadBalancerTlsCertificate operation supports tag-based access control via
+// resource tags applied to the resource identified by load balancer name . For
+// more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
 // .
 func (c *Client) CreateLoadBalancerTlsCertificate(ctx context.Context, params *CreateLoadBalancerTlsCertificateInput, optFns ...func(*Options)) (*CreateLoadBalancerTlsCertificateOutput, error) {
 	if params == nil {
@@ -53,10 +53,10 @@ type CreateLoadBalancerTlsCertificateInput struct {
 	// This member is required.
 	LoadBalancerName *string
 
-	// An array of strings listing alternative domains and subdomains for your
-	// SSL/TLS certificate. Lightsail will de-dupe the names for you. You can have a
-	// maximum of 9 alternative names (in addition to the 1 primary domain). We do not
-	// support wildcards (e.g., *.example.com ).
+	// An array of strings listing alternative domains and subdomains for your SSL/TLS
+	// certificate. Lightsail will de-dupe the names for you. You can have a maximum of
+	// 9 alternative names (in addition to the 1 primary domain). We do not support
+	// wildcards (e.g., *.example.com ).
 	CertificateAlternativeNames []string
 
 	// The tag keys and optional values to add to the resource during create. Use the

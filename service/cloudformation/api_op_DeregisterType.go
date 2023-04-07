@@ -41,14 +41,14 @@ func (c *Client) DeregisterType(ctx context.Context, params *DeregisterTypeInput
 type DeregisterTypeInput struct {
 
 	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
-	// either TypeName  and Type , or Arn .
+	// either TypeName and Type , or Arn .
 	Arn *string
 
-	// The kind of extension. Conditional: You must specify either TypeName  and Type
-	// , or Arn .
+	// The kind of extension. Conditional: You must specify either TypeName and Type ,
+	// or Arn .
 	Type types.RegistryType
 
-	// The name of the extension. Conditional: You must specify either TypeName  and
+	// The name of the extension. Conditional: You must specify either TypeName and
 	// Type , or Arn .
 	TypeName *string
 

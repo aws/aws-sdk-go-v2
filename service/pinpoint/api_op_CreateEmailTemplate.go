@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a message template for messages that are sent through the email
-// channel.
+// Creates a message template for messages that are sent through the email channel.
 func (c *Client) CreateEmailTemplate(ctx context.Context, params *CreateEmailTemplateInput, optFns ...func(*Options)) (*CreateEmailTemplateOutput, error) {
 	if params == nil {
 		params = &CreateEmailTemplateInput{}

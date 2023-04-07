@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove tags from a Global Accelerator resource. When you specify a tag key,
-// the action removes both that key and its associated value. The operation
-// succeeds even if you attempt to remove tags from an accelerator that was already
-// removed. For more information, see Tagging in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
+// Remove tags from a Global Accelerator resource. When you specify a tag key, the
+// action removes both that key and its associated value. The operation succeeds
+// even if you attempt to remove tags from an accelerator that was already removed.
+// For more information, see Tagging in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
 // in the Global Accelerator Developer Guide.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {

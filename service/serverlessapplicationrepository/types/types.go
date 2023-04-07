@@ -79,13 +79,11 @@ type ApplicationSummary struct {
 	// your GitHub repository for the application.
 	HomePageUrl *string
 
-	// Labels to improve discovery of apps in search results.Minimum length=1.
-	// Maximum length=127. Maximum number of labels: 10Pattern:
-	// "^[a-zA-Z0-9+\\-_:\\/@]+$";
+	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
+	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []string
 
-	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/)
-	// .
+	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/) .
 	SpdxLicenseId *string
 
 	noSmithyDocumentSerde
@@ -128,8 +126,8 @@ type ParameterDefinition struct {
 	// A string of up to 4,000 characters that describes the parameter.
 	Description *string
 
-	// An integer value that determines the largest number of characters that you
-	// want to allow for String types.
+	// An integer value that determines the largest number of characters that you want
+	// to allow for String types.
 	MaxLength int32
 
 	// A numeric value that determines the largest numeric value that you want to
@@ -144,9 +142,9 @@ type ParameterDefinition struct {
 	// allow for Number types.
 	MinValue int32
 
-	// Whether to mask the parameter value whenever anyone makes a call that
-	// describes the stack. If you set the value to true, the parameter value is masked
-	// with asterisks (*****).
+	// Whether to mask the parameter value whenever anyone makes a call that describes
+	// the stack. If you set the value to true, the parameter value is masked with
+	// asterisks (*****).
 	NoEcho bool
 
 	// The type of the parameter.Valid values: String | Number | List<Number> |
@@ -172,8 +170,8 @@ type ParameterDefinition struct {
 // Parameter value of the application.
 type ParameterValue struct {
 
-	// The key associated with the parameter. If you don't specify a key and value
-	// for a particular parameter, AWS CloudFormation uses the default value that is
+	// The key associated with the parameter. If you don't specify a key and value for
+	// a particular parameter, AWS CloudFormation uses the default value that is
 	// specified in your template.
 	//
 	// This member is required.
@@ -294,8 +292,8 @@ type Version struct {
 	// This member is required.
 	RequiredCapabilities []Capability
 
-	// Whether all of the AWS resources contained in this application are supported
-	// in the region in which it is being retrieved.
+	// Whether all of the AWS resources contained in this application are supported in
+	// the region in which it is being retrieved.
 	//
 	// This member is required.
 	ResourcesSupported bool

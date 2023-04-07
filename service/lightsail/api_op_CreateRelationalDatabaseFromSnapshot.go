@@ -38,8 +38,8 @@ func (c *Client) CreateRelationalDatabaseFromSnapshot(ctx context.Context, param
 type CreateRelationalDatabaseFromSnapshotInput struct {
 
 	// The name to use for your new Lightsail database resource. Constraints:
-	//     - Must contain from 2 to 255 alphanumeric characters, or hyphens.
-	//     - The first and last character must be a letter or number.
+	//   - Must contain from 2 to 255 alphanumeric characters, or hyphens.
+	//   - The first and last character must be a letter or number.
 	//
 	// This member is required.
 	RelationalDatabaseName *string
@@ -67,10 +67,12 @@ type CreateRelationalDatabaseFromSnapshotInput struct {
 	RelationalDatabaseSnapshotName *string
 
 	// The date and time to restore your database from. Constraints:
-	//     - Must be before the latest restorable time for the database.
-	//     - Cannot be specified if the use latest restorable time parameter is true .
-	//     - Specified in Coordinated Universal Time (UTC).
-	//     - Specified in the Unix time format. For example, if you wish to use a restore time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the restore time.
+	//   - Must be before the latest restorable time for the database.
+	//   - Cannot be specified if the use latest restorable time parameter is true .
+	//   - Specified in Coordinated Universal Time (UTC).
+	//   - Specified in the Unix time format. For example, if you wish to use a
+	//   restore time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the
+	//   restore time.
 	RestoreTime *time.Time
 
 	// The name of the source database.
@@ -81,8 +83,8 @@ type CreateRelationalDatabaseFromSnapshotInput struct {
 	Tags []types.Tag
 
 	// Specifies whether your database is restored from the latest backup time. A
-	// value of true  restores from the latest backup time. Default: false
-	// Constraints: Cannot be specified if the restore time  parameter is provided.
+	// value of true restores from the latest backup time. Default: false Constraints:
+	// Cannot be specified if the restore time parameter is provided.
 	UseLatestRestorableTime *bool
 
 	noSmithyDocumentSerde

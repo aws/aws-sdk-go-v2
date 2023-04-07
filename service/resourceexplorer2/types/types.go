@@ -33,7 +33,7 @@ type IncludedProperty struct {
 
 	// The name of the property that is included in this view. You can specify the
 	// following property names for this field:
-	//     - Tags
+	//   - Tags
 	//
 	// This member is required.
 	Name *string
@@ -61,8 +61,13 @@ type Index struct {
 	Region *string
 
 	// The type of index. It can be one of the following values:
-	//     - LOCAL – The index contains information about resources from only the same Amazon Web Services Region.
-	//     - AGGREGATOR – Resource Explorer replicates copies of the indexed information about resources in all other Amazon Web Services Regions to the aggregator index. This lets search results in the Region with the aggregator index to include resources from all Regions in the account where Resource Explorer is turned on.
+	//   - LOCAL – The index contains information about resources from only the same
+	//   Amazon Web Services Region.
+	//   - AGGREGATOR – Resource Explorer replicates copies of the indexed information
+	//   about resources in all other Amazon Web Services Regions to the aggregator
+	//   index. This lets search results in the Region with the aggregator index to
+	//   include resources from all Regions in the account where Resource Explorer is
+	//   turned on.
 	Type IndexType
 
 	noSmithyDocumentSerde
@@ -77,8 +82,8 @@ type Resource struct {
 	// of the resource.
 	Arn *string
 
-	// The date and time that Resource Explorer last queried this resource and
-	// updated the index with the latest information about the resource.
+	// The date and time that Resource Explorer last queried this resource and updated
+	// the index with the latest information about the resource.
 	LastReportedAt *time.Time
 
 	// The Amazon Web Services account that owns the resource.
@@ -110,14 +115,16 @@ type ResourceCount struct {
 
 	// Indicates whether the TotalResources value represents an exhaustive count of
 	// search results.
-	//     - If True , it indicates that the search was exhaustive. Every resource that matches the query was counted.
-	//     - If False , then the search reached the limit of 1,000 matching results, and stopped counting.
+	//   - If True , it indicates that the search was exhaustive. Every resource that
+	//   matches the query was counted.
+	//   - If False , then the search reached the limit of 1,000 matching results, and
+	//   stopped counting.
 	Complete *bool
 
 	// The number of resources that match the search query. This value can't exceed
 	// 1,000. If there are more than 1,000 resources that match the query, then only
-	// 1,000 are counted and the Complete field is set to false. We recommend that
-	// you refine your query to return a smaller number of results.
+	// 1,000 are counted and the Complete field is set to false. We recommend that you
+	// refine your query to return a smaller number of results.
 	TotalResources *int64
 
 	noSmithyDocumentSerde

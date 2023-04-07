@@ -14,8 +14,8 @@ import (
 
 // Returns a list of container instances in a specified cluster. You can filter
 // the results of a ListContainerInstances operation with cluster query language
-// statements inside the filter  parameter. For more information, see Cluster
-// Query Language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
+// statements inside the filter parameter. For more information, see Cluster Query
+// Language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) ListContainerInstances(ctx context.Context, params *ListContainerInstancesInput, optFns ...func(*Options)) (*ListContainerInstancesOutput, error) {
 	if params == nil {
@@ -34,8 +34,8 @@ func (c *Client) ListContainerInstances(ctx context.Context, params *ListContain
 
 type ListContainerInstancesInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the container instances to list. If you do not specify a cluster, the default
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// container instances to list. If you do not specify a cluster, the default
 	// cluster is assumed.
 	Cluster *string
 
@@ -47,26 +47,26 @@ type ListContainerInstancesInput struct {
 	// The maximum number of container instance results that ListContainerInstances
 	// returned in paginated output. When this parameter is used,
 	// ListContainerInstances only returns maxResults results in a single page along
-	// with a nextToken response element. The remaining results of the initial
-	// request can be seen by sending another ListContainerInstances request with the
-	// returned nextToken value. This value can be between 1 and 100. If this
-	// parameter isn't used, then ListContainerInstances returns up to 100 results
-	// and a nextToken  value if applicable.
+	// with a nextToken response element. The remaining results of the initial request
+	// can be seen by sending another ListContainerInstances request with the returned
+	// nextToken value. This value can be between 1 and 100. If this parameter isn't
+	// used, then ListContainerInstances returns up to 100 results and a nextToken
+	// value if applicable.
 	MaxResults *int32
 
-	// The nextToken  value returned from a ListContainerInstances request indicating
+	// The nextToken value returned from a ListContainerInstances request indicating
 	// that more results are available to fulfill the request and further calls are
 	// needed. If maxResults was provided, it's possible the number of results to be
-	// fewer than maxResults. This token should be treated as an opaque identifier
+	// fewer than maxResults . This token should be treated as an opaque identifier
 	// that is only used to retrieve the next items in a list and not for other
 	// programmatic purposes.
 	NextToken *string
 
 	// Filters the container instances by status. For example, if you specify the
-	// DRAININGstatus, the results include only container instances that have been
-	// set to DRAINING  using UpdateContainerInstancesState. If you don't specify
-	// this parameter, the default is to include container instances set to all states
-	// other than INACTIVE .
+	// DRAINING status, the results include only container instances that have been set
+	// to DRAINING using UpdateContainerInstancesState . If you don't specify this
+	// parameter, the default is to include container instances set to all states other
+	// than INACTIVE .
 	Status types.ContainerInstanceStatus
 
 	noSmithyDocumentSerde
@@ -78,10 +78,10 @@ type ListContainerInstancesOutput struct {
 	// instance associated with the specified cluster.
 	ContainerInstanceArns []string
 
-	// The nextToken  value to include in a future ListContainerInstances request.
-	// When the results of a ListContainerInstances  request exceed maxResults, this
-	// value can be used to retrieve the next page of results. This value is null
-	// when there are no more results to return.
+	// The nextToken value to include in a future ListContainerInstances request. When
+	// the results of a ListContainerInstances request exceed maxResults , this value
+	// can be used to retrieve the next page of results. This value is null when there
+	// are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -164,15 +164,15 @@ type ListContainerInstancesPaginatorOptions struct {
 	// The maximum number of container instance results that ListContainerInstances
 	// returned in paginated output. When this parameter is used,
 	// ListContainerInstances only returns maxResults results in a single page along
-	// with a nextToken response element. The remaining results of the initial
-	// request can be seen by sending another ListContainerInstances request with the
-	// returned nextToken value. This value can be between 1 and 100. If this
-	// parameter isn't used, then ListContainerInstances returns up to 100 results
-	// and a nextToken  value if applicable.
+	// with a nextToken response element. The remaining results of the initial request
+	// can be seen by sending another ListContainerInstances request with the returned
+	// nextToken value. This value can be between 1 and 100. If this parameter isn't
+	// used, then ListContainerInstances returns up to 100 results and a nextToken
+	// value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -185,8 +185,7 @@ type ListContainerInstancesPaginator struct {
 	firstPage bool
 }
 
-// NewListContainerInstancesPaginator returns a new
-// ListContainerInstancesPaginator
+// NewListContainerInstancesPaginator returns a new ListContainerInstancesPaginator
 func NewListContainerInstancesPaginator(client ListContainerInstancesAPIClient, params *ListContainerInstancesInput, optFns ...func(*ListContainerInstancesPaginatorOptions)) *ListContainerInstancesPaginator {
 	if params == nil {
 		params = &ListContainerInstancesInput{}

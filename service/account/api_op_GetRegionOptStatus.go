@@ -29,7 +29,7 @@ func (c *Client) GetRegionOptStatus(ctx context.Context, params *GetRegionOptSta
 
 type GetRegionOptStatusInput struct {
 
-	// Specifies the Region-code for a given Region name (for example, af-south-1).
+	// Specifies the Region-code for a given Region name (for example, af-south-1 ).
 	// This function will return the status of whatever Region you pass into this
 	// parameter.
 	//
@@ -46,7 +46,7 @@ type GetRegionOptStatusInput struct {
 	// features enabled (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
 	// , and the organization must have trusted access (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html)
 	// enabled for the Account Management service, and optionally a delegated admin (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html)
-	// account assigned. The management account can't specify its own AccountId. It
+	// account assigned. The management account can't specify its own AccountId . It
 	// must call the operation in standalone context by not including the AccountId
 	// parameter. To call this operation on an account that is not a member of an
 	// organization, don't specify this parameter. Instead, call the operation using an

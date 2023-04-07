@@ -52,7 +52,7 @@ type ListObjectsInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -81,9 +81,9 @@ type ListObjectsInput struct {
 	// listing after this specified key. Marker can be any key in the bucket.
 	Marker *string
 
-	// Sets the maximum number of keys returned in the response. By default the
-	// action returns up to 1,000 key names. The response might contain fewer keys but
-	// will never contain more.
+	// Sets the maximum number of keys returned in the response. By default the action
+	// returns up to 1,000 key names. The response might contain fewer keys but will
+	// never contain more.
 	MaxKeys int32
 
 	// Limits the response to keys that begin with the specified prefix.
@@ -115,7 +115,7 @@ type ListObjectsOutput struct {
 
 	// Causes keys that contain the same string between the prefix and the first
 	// occurrence of the delimiter to be rolled up into a single result element in the
-	// CommonPrefixescollection. These rolled-up keys are not returned elsewhere in
+	// CommonPrefixes collection. These rolled-up keys are not returned elsewhere in
 	// the response. Each rolled-up result counts as only one return against the
 	// MaxKeys value.
 	Delimiter *string

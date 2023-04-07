@@ -36,12 +36,12 @@ type ListJobsInput struct {
 	// Optional. Number of jobs, up to twenty, that will be returned at one time.
 	MaxResults int32
 
-	// Optional. Use this string, provided with the response to a previous request,
-	// to request the next batch of jobs.
+	// Optional. Use this string, provided with the response to a previous request, to
+	// request the next batch of jobs.
 	NextToken *string
 
-	// Optional. When you request lists of resources, you can specify whether they
-	// are sorted in ASCENDING or DESCENDING order. Default varies by resource.
+	// Optional. When you request lists of resources, you can specify whether they are
+	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order types.Order
 
 	// Optional. Provide a queue name to get back only jobs from that queue.
@@ -140,8 +140,8 @@ type ListJobsPaginatorOptions struct {
 	// Optional. Number of jobs, up to twenty, that will be returned at one time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

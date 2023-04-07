@@ -21,8 +21,8 @@ const (
 	EndpointTypesElementInApp           EndpointTypesElement = "IN_APP"
 )
 
-// Values returns all known values for EndpointTypesElement. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for EndpointTypesElement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointTypesElement) Values() []EndpointTypesElement {
 	return []EndpointTypesElement{
@@ -177,9 +177,9 @@ const (
 	ChannelTypeInApp           ChannelType = "IN_APP"
 )
 
-// Values returns all known values for ChannelType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ChannelType) Values() []ChannelType {
 	return []ChannelType{
 		"PUSH",
@@ -282,9 +282,9 @@ const (
 	DurationDay30 Duration = "DAY_30"
 )
 
-// Values returns all known values for Duration. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Duration. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Duration) Values() []Duration {
 	return []Duration{
 		"HR_24",
@@ -444,9 +444,9 @@ const (
 	MessageTypePromotional   MessageType = "PROMOTIONAL"
 )
 
-// Values returns all known values for MessageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MessageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"TRANSACTIONAL",
@@ -462,8 +462,8 @@ const (
 	ModeFilter   Mode = "FILTER"
 )
 
-// Values returns all known values for Mode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Mode. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Mode) Values() []Mode {
 	return []Mode{
@@ -480,9 +480,9 @@ const (
 	OperatorAny Operator = "ANY"
 )
 
-// Values returns all known values for Operator. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"ALL",
@@ -498,9 +498,9 @@ const (
 	RecencyTypeInactive RecencyType = "INACTIVE"
 )
 
-// Values returns all known values for RecencyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RecencyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RecencyType) Values() []RecencyType {
 	return []RecencyType{
 		"ACTIVE",
@@ -516,9 +516,9 @@ const (
 	SegmentTypeImport      SegmentType = "IMPORT"
 )
 
-// Values returns all known values for SegmentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SegmentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SegmentType) Values() []SegmentType {
 	return []SegmentType{
 		"DIMENSIONAL",
@@ -605,8 +605,8 @@ const (
 	TypeNone Type = "NONE"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

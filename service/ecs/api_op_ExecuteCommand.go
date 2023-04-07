@@ -14,7 +14,7 @@ import (
 // Runs a command remotely on a container within a task. If you use a condition
 // key in your IAM policy to refine the conditions for the policy statement, for
 // example limit the actions to a specific cluster, you receive an
-// AccessDeniedExceptionwhen there is a mismatch between the condition key value
+// AccessDeniedException when there is a mismatch between the condition key value
 // and the corresponding parameter value. For information about required
 // permissions and considerations, see Using Amazon ECS Exec for debugging (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.htm)
 // in the Amazon ECS Developer Guide.
@@ -50,8 +50,8 @@ type ExecuteCommandInput struct {
 	// This member is required.
 	Task *string
 
-	// The Amazon Resource Name (ARN) or short name of the cluster the task is
-	// running in. If you do not specify a cluster, the default cluster is assumed.
+	// The Amazon Resource Name (ARN) or short name of the cluster the task is running
+	// in. If you do not specify a cluster, the default cluster is assumed.
 	Cluster *string
 
 	// The name of the container to execute the command on. A container name only

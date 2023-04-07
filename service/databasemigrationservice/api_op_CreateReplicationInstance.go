@@ -37,8 +37,8 @@ type CreateReplicationInstanceInput struct {
 
 	// The compute and memory capacity of the replication instance as defined for the
 	// specified replication instance class. For example to specify the instance class
-	// dms.c4.large, set this parameter to "dms.c4.large". For more information on
-	// the settings and capacities for the available replication instance classes, see
+	// dms.c4.large, set this parameter to "dms.c4.large" . For more information on the
+	// settings and capacities for the available replication instance classes, see
 	// Selecting the right DMS replication instance for your migration (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth)
 	// .
 	//
@@ -47,9 +47,9 @@ type CreateReplicationInstanceInput struct {
 
 	// The replication instance identifier. This parameter is stored as a lowercase
 	// string. Constraints:
-	//     - Must contain 1-63 alphanumeric characters or hyphens.
-	//     - First character must be a letter.
-	//     - Can't end with a hyphen or contain two consecutive hyphens.
+	//   - Must contain 1-63 alphanumeric characters or hyphens.
+	//   - First character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	// Example: myrepinstance
 	//
 	// This member is required.
@@ -61,12 +61,12 @@ type CreateReplicationInstanceInput struct {
 
 	// A value that indicates whether minor engine upgrades are applied automatically
 	// to the replication instance during the maintenance window. This parameter
-	// defaults to true . Default: true  When AutoMinorVersionUpgrade is enabled, DMS
+	// defaults to true . Default: true When AutoMinorVersionUpgrade is enabled, DMS
 	// uses the current default engine version when you create a replication instance.
 	// For example, if you set EngineVersion to a lower version number than the
 	// current default version, DMS uses the default version. If
-	// AutoMinorVersionUpgradeisn’t enabled when you create a replication instance,
-	// DMS uses the engine version specified by the EngineVersion  parameter.
+	// AutoMinorVersionUpgrade isn’t enabled when you create a replication instance,
+	// DMS uses the engine version specified by the EngineVersion parameter.
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone where the replication instance will be created. The
@@ -94,7 +94,7 @@ type CreateReplicationInstanceInput struct {
 	KmsKeyId *string
 
 	// Specifies whether the replication instance is a Multi-AZ deployment. You can't
-	// set the AvailabilityZone  parameter if the Multi-AZ parameter is set to true .
+	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true .
 	MultiAZ *bool
 
 	// The type of IP address protocol used by a replication instance, such as IPv4
@@ -123,7 +123,7 @@ type CreateReplicationInstanceInput struct {
 	// letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain
 	// two consecutive hyphens, and can only begin with a letter, such as
 	// Example-App-ARN1 . For example, this value might result in the EndpointArn
-	// value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't
+	// value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1 . If you don't
 	// specify a ResourceIdentifier value, DMS generates a default identifier value
 	// for the end of EndpointArn .
 	ResourceIdentifier *string

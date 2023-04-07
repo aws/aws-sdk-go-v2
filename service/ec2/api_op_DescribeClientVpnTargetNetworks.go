@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the target networks associated with the specified Client VPN
-// endpoint.
+// Describes the target networks associated with the specified Client VPN endpoint.
 func (c *Client) DescribeClientVpnTargetNetworks(ctx context.Context, params *DescribeClientVpnTargetNetworksInput, optFns ...func(*Options)) (*DescribeClientVpnTargetNetworksOutput, error) {
 	if params == nil {
 		params = &DescribeClientVpnTargetNetworksInput{}
@@ -46,9 +45,9 @@ type DescribeClientVpnTargetNetworksInput struct {
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.
-	//     - association-id - The ID of the association.
-	//     - target-network-id - The ID of the subnet specified as the target network.
-	//     - vpc-id - The ID of the VPC in which the target network is located.
+	//   - association-id - The ID of the association.
+	//   - target-network-id - The ID of the subnet specified as the target network.
+	//   - vpc-id - The ID of the VPC in which the target network is located.
 	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
@@ -156,8 +155,8 @@ type DescribeClientVpnTargetNetworksPaginatorOptions struct {
 	// value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

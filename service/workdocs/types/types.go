@@ -77,10 +77,9 @@ type Comment struct {
 	// The ID of the root comment in the thread.
 	ThreadId *string
 
-	// The visibility of the comment. Options are either PRIVATE, where the comment
-	// is visible only to the comment author and document owner and co-owners, or
-	// PUBLIC, where the comment is visible to document owners, co-owners, and
-	// contributors.
+	// The visibility of the comment. Options are either PRIVATE, where the comment is
+	// visible only to the comment author and document owner and co-owners, or PUBLIC,
+	// where the comment is visible to document owners, co-owners, and contributors.
 	Visibility CommentVisibilityType
 
 	noSmithyDocumentSerde

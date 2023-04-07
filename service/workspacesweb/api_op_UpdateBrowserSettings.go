@@ -35,8 +35,8 @@ type UpdateBrowserSettingsInput struct {
 	// This member is required.
 	BrowserSettingsArn *string
 
-	// A JSON string containing Chrome Enterprise policies that will be applied to
-	// all streaming sessions.
+	// A JSON string containing Chrome Enterprise policies that will be applied to all
+	// streaming sessions.
 	BrowserPolicy *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency

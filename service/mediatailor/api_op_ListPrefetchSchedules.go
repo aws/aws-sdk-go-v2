@@ -35,19 +35,18 @@ type ListPrefetchSchedulesInput struct {
 	// This member is required.
 	PlaybackConfigurationName *string
 
-	// The maximum number of prefetch schedules that you want MediaTailor to return
-	// in response to the current request. If there are more than MaxResults prefetch
+	// The maximum number of prefetch schedules that you want MediaTailor to return in
+	// response to the current request. If there are more than MaxResults prefetch
 	// schedules, use the value of NextToken in the response to get the next page of
 	// results.
 	MaxResults int32
 
 	// (Optional) If the playback configuration has more than MaxResults prefetch
-	// schedules, use NextToken to get the second and subsequent pages of results.
-	// For the first ListPrefetchSchedulesRequest request, omit this value. For the
-	// second and subsequent requests, get the value of NextToken from the previous
-	// response and specify that value for NextToken in the request. If the previous
-	// response didn't include a NextToken element, there are no more prefetch
-	// schedules to get.
+	// schedules, use NextToken to get the second and subsequent pages of results. For
+	// the first ListPrefetchSchedulesRequest request, omit this value. For the second
+	// and subsequent requests, get the value of NextToken from the previous response
+	// and specify that value for NextToken in the request. If the previous response
+	// didn't include a NextToken element, there are no more prefetch schedules to get.
 	NextToken *string
 
 	// An optional filtering parameter whereby MediaTailor filters the prefetch
@@ -147,14 +146,14 @@ var _ ListPrefetchSchedulesAPIClient = (*Client)(nil)
 // ListPrefetchSchedulesPaginatorOptions is the paginator options for
 // ListPrefetchSchedules
 type ListPrefetchSchedulesPaginatorOptions struct {
-	// The maximum number of prefetch schedules that you want MediaTailor to return
-	// in response to the current request. If there are more than MaxResults prefetch
+	// The maximum number of prefetch schedules that you want MediaTailor to return in
+	// response to the current request. If there are more than MaxResults prefetch
 	// schedules, use the value of NextToken in the response to get the next page of
 	// results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

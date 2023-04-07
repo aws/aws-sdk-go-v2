@@ -50,8 +50,8 @@ type GetIntentOutput struct {
 	// Checksum of the intent.
 	Checksum *string
 
-	// After the Lambda function specified in the fulfillmentActivity element
-	// fulfills the intent, Amazon Lex conveys this statement to the user.
+	// After the Lambda function specified in the fulfillmentActivity element fulfills
+	// the intent, Amazon Lex conveys this statement to the user.
 	ConclusionStatement *types.Statement
 
 	// If defined in the bot, Amazon Lex uses prompt to confirm the intent before
@@ -80,7 +80,7 @@ type GetIntentOutput struct {
 	InputContexts []types.InputContext
 
 	// Configuration information, if any, to connect to an Amazon Kendra index with
-	// the AMAZON.KendraSearchIntent  intent.
+	// the AMAZON.KendraSearchIntent intent.
 	KendraConfiguration *types.KendraConfiguration
 
 	// The date that the intent was updated. When you create a resource, the creation
@@ -97,7 +97,7 @@ type GetIntentOutput struct {
 	// A unique identifier for a built-in intent.
 	ParentIntentSignature *string
 
-	// If the user answers "no" to the question defined in confirmationPrompt, Amazon
+	// If the user answers "no" to the question defined in confirmationPrompt , Amazon
 	// Lex responds with this statement to acknowledge that the intent was canceled.
 	RejectionStatement *types.Statement
 

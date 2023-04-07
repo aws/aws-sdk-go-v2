@@ -20,7 +20,7 @@ import (
 // . Lists the high-availability partition groups for the account. This operation
 // supports pagination with the use of the NextToken member. If more results are
 // available, the NextToken member of the response contains a token that you pass
-// in the next call to ListHapgs  to retrieve the next set of items.
+// in the next call to ListHapgs to retrieve the next set of items.
 func (c *Client) ListHapgs(ctx context.Context, params *ListHapgsInput, optFns ...func(*Options)) (*ListHapgsOutput, error) {
 	if params == nil {
 		params = &ListHapgsInput{}
@@ -38,8 +38,8 @@ func (c *Client) ListHapgs(ctx context.Context, params *ListHapgsInput, optFns .
 
 type ListHapgsInput struct {
 
-	// The NextToken  value from a previous call to ListHapgs. Pass null if this is
-	// the first call.
+	// The NextToken value from a previous call to ListHapgs . Pass null if this is the
+	// first call.
 	NextToken *string
 
 	noSmithyDocumentSerde

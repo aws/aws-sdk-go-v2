@@ -68,9 +68,9 @@ type GetRouteOutput struct {
 	// Any error associated with the route resource.
 	Error *types.ErrorResponse
 
-	// Indicates whether to match all subpaths of the given source path. If this
-	// value is false, requests must match the source path exactly before they are
-	// forwarded to this route's service.
+	// Indicates whether to match all subpaths of the given source path. If this value
+	// is false , requests must match the source path exactly before they are forwarded
+	// to this route's service.
 	IncludeChildPaths *bool
 
 	// A timestamp that indicates when the route was last updated.

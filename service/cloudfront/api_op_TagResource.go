@@ -35,7 +35,7 @@ type TagResourceInput struct {
 	// This member is required.
 	Resource *string
 
-	// A complex type that contains zero or more Tag  elements.
+	// A complex type that contains zero or more Tag elements.
 	//
 	// This member is required.
 	Tags *types.Tags

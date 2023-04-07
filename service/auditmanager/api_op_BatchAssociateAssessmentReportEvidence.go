@@ -50,7 +50,7 @@ type BatchAssociateAssessmentReportEvidenceInput struct {
 
 type BatchAssociateAssessmentReportEvidenceOutput struct {
 
-	// A list of errors that the BatchAssociateAssessmentReportEvidence  API returned.
+	// A list of errors that the BatchAssociateAssessmentReportEvidence API returned.
 	Errors []types.AssessmentReportEvidenceError
 
 	// The list of evidence identifiers.

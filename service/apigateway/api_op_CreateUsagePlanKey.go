@@ -26,8 +26,8 @@ func (c *Client) CreateUsagePlanKey(ctx context.Context, params *CreateUsagePlan
 	return out, nil
 }
 
-// The POST request to create a usage plan key for adding an existing API key to
-// a usage plan.
+// The POST request to create a usage plan key for adding an existing API key to a
+// usage plan.
 type CreateUsagePlanKeyInput struct {
 
 	// The identifier of a UsagePlanKey resource for a plan customer.

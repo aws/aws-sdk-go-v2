@@ -28,7 +28,7 @@ func (c *Client) RevokeCacheSecurityGroupIngress(ctx context.Context, params *Re
 	return out, nil
 }
 
-// Represents the input of a RevokeCacheSecurityGroupIngress  operation.
+// Represents the input of a RevokeCacheSecurityGroupIngress operation.
 type RevokeCacheSecurityGroupIngressInput struct {
 
 	// The name of the cache security group to revoke ingress from.
@@ -54,9 +54,9 @@ type RevokeCacheSecurityGroupIngressInput struct {
 type RevokeCacheSecurityGroupIngressOutput struct {
 
 	// Represents the output of one of the following operations:
-	//     - AuthorizeCacheSecurityGroupIngress
-	//     - CreateCacheSecurityGroup
-	//     - RevokeCacheSecurityGroupIngress
+	//   - AuthorizeCacheSecurityGroupIngress
+	//   - CreateCacheSecurityGroup
+	//   - RevokeCacheSecurityGroupIngress
 	CacheSecurityGroup *types.CacheSecurityGroup
 
 	// Metadata pertaining to the operation's result.

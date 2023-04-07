@@ -43,8 +43,8 @@ type ListAppVersionAppComponentsInput struct {
 	// This member is required.
 	AppVersion *string
 
-	// Maximum number of Application Components to be displayed per AWS Resilience
-	// Hub application version.
+	// Maximum number of Application Components to be displayed per AWS Resilience Hub
+	// application version.
 	MaxResults *int32
 
 	// Null, or the token from a previous call to get the next set of results.
@@ -154,12 +154,12 @@ var _ ListAppVersionAppComponentsAPIClient = (*Client)(nil)
 // ListAppVersionAppComponentsPaginatorOptions is the paginator options for
 // ListAppVersionAppComponents
 type ListAppVersionAppComponentsPaginatorOptions struct {
-	// Maximum number of Application Components to be displayed per AWS Resilience
-	// Hub application version.
+	// Maximum number of Application Components to be displayed per AWS Resilience Hub
+	// application version.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

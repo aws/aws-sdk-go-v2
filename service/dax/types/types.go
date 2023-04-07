@@ -17,13 +17,13 @@ type Cluster struct {
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
 	ClusterArn *string
 
-	// The endpoint for this DAX cluster, consisting of a DNS name, a port number,
-	// and a URL. Applications should use the URL to configure the DAX client to find
-	// their cluster.
+	// The endpoint for this DAX cluster, consisting of a DNS name, a port number, and
+	// a URL. Applications should use the URL to configure the DAX client to find their
+	// cluster.
 	ClusterDiscoveryEndpoint *Endpoint
 
 	// The type of encryption supported by the cluster's endpoint. Values are:
-	//     - NONE for no encryption TLS for Transport Layer Security
+	//   - NONE for no encryption TLS for Transport Layer Security
 	ClusterEndpointEncryptionType ClusterEndpointEncryptionType
 
 	// The name of the DAX cluster.
@@ -32,9 +32,9 @@ type Cluster struct {
 	// The description of the cluster.
 	Description *string
 
-	// A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime,
-	// DAX will assume this role and use the role's permissions to access DynamoDB on
-	// your behalf.
+	// A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX
+	// will assume this role and use the role's permissions to access DynamoDB on your
+	// behalf.
 	IamRoleArn *string
 
 	// A list of nodes to be removed from the cluster.
@@ -47,25 +47,24 @@ type Cluster struct {
 	// A list of nodes that are currently in the cluster.
 	Nodes []Node
 
-	// Describes a notification topic and its status. Notification topics are used
-	// for publishing DAX events to subscribers using Amazon Simple Notification
-	// Service (SNS).
+	// Describes a notification topic and its status. Notification topics are used for
+	// publishing DAX events to subscribers using Amazon Simple Notification Service
+	// (SNS).
 	NotificationConfiguration *NotificationConfiguration
 
 	// The parameter group being used by nodes in the cluster.
 	ParameterGroup *ParameterGroupStatus
 
-	// A range of time when maintenance of DAX cluster software will be performed.
-	// For example: sun:01:00-sun:09:00. Cluster maintenance normally takes less than
-	// 30 minutes, and is performed automatically within the maintenance window.
+	// A range of time when maintenance of DAX cluster software will be performed. For
+	// example: sun:01:00-sun:09:00 . Cluster maintenance normally takes less than 30
+	// minutes, and is performed automatically within the maintenance window.
 	PreferredMaintenanceWindow *string
 
 	// The description of the server-side encryption status on the specified DAX
 	// cluster.
 	SSEDescription *SSEDescription
 
-	// A list of security groups, and the status of each, for the nodes in the
-	// cluster.
+	// A list of security groups, and the status of each, for the nodes in the cluster.
 	SecurityGroups []SecurityGroupMembership
 
 	// The current status of the cluster.
@@ -97,9 +96,9 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a single occurrence of something interesting within the system.
-// Some examples of events are creating a DAX cluster, adding or removing a node,
-// or rebooting a node.
+// Represents a single occurrence of something interesting within the system. Some
+// examples of events are creating a DAX cluster, adding or removing a node, or
+// rebooting a node.
 type Event struct {
 
 	// The date and time when the event occurred.
@@ -159,9 +158,9 @@ type NodeTypeSpecificValue struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a notification topic and its status. Notification topics are used
-// for publishing DAX events to subscribers using Amazon Simple Notification
-// Service (SNS).
+// Describes a notification topic and its status. Notification topics are used for
+// publishing DAX events to subscribers using Amazon Simple Notification Service
+// (SNS).
 type NotificationConfiguration struct {
 
 	// The Amazon Resource Name (ARN) that identifies the topic.
@@ -215,8 +214,7 @@ type Parameter struct {
 	noSmithyDocumentSerde
 }
 
-// A named set of parameters that are applied to all of the nodes in a DAX
-// cluster.
+// A named set of parameters that are applied to all of the nodes in a DAX cluster.
 type ParameterGroup struct {
 
 	// A description of the parameter group.
@@ -272,10 +270,10 @@ type SecurityGroupMembership struct {
 type SSEDescription struct {
 
 	// The current state of server-side encryption:
-	//     - ENABLING - Server-side encryption is being enabled.
-	//     - ENABLED - Server-side encryption is enabled.
-	//     - DISABLING - Server-side encryption is being disabled.
-	//     - DISABLED - Server-side encryption is disabled.
+	//   - ENABLING - Server-side encryption is being enabled.
+	//   - ENABLED - Server-side encryption is enabled.
+	//   - DISABLING - Server-side encryption is being disabled.
+	//   - DISABLED - Server-side encryption is disabled.
 	Status SSEStatus
 
 	noSmithyDocumentSerde

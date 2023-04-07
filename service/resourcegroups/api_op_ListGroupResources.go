@@ -36,30 +36,31 @@ func (c *Client) ListGroupResources(ctx context.Context, params *ListGroupResour
 
 type ListGroupResourcesInput struct {
 
-	// Filters, formatted as ResourceFilter  objects, that you want to apply to a
-	// ListGroupResourcesoperation. Filters the results to include only those of the
+	// Filters, formatted as ResourceFilter objects, that you want to apply to a
+	// ListGroupResources operation. Filters the results to include only those of the
 	// specified resource types.
-	//     - resource-type - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType . For example, AWS::EC2::Instance , or AWS::S3::Bucket .
-	//
-	// When you specify a resource-type  filter for ListGroupResources, Resource
-	// Groups validates your filter resource types against the types that are defined
-	// in the query associated with the group. For example, if a group contains only S3
+	//   - resource-type - Filter resources by their type. Specify up to five resource
+	//   types in the format AWS::ServiceCode::ResourceType . For example,
+	//   AWS::EC2::Instance , or AWS::S3::Bucket .
+	// When you specify a resource-type filter for ListGroupResources , Resource Groups
+	// validates your filter resource types against the types that are defined in the
+	// query associated with the group. For example, if a group contains only S3
 	// buckets because its query specifies only that resource type, but your
-	// resource-typefilter includes EC2 instances, AWS Resource Groups does not
-	// filter for EC2 instances. In this case, a ListGroupResources  request returns a
-	// BadRequestException error with a message similar to the following: The
-	// resource types specified as filters in the request are not valid.The error
-	// includes a list of resource types that failed the validation because they are
-	// not part of the query associated with the group. This validation doesn't occur
-	// when the group query specifies AWS::AllSupported, because a group based on
-	// such a query can contain any of the allowed resource types for the query type
-	// (tag-based or Amazon CloudFront stack-based queries).
+	// resource-type filter includes EC2 instances, AWS Resource Groups does not filter
+	// for EC2 instances. In this case, a ListGroupResources request returns a
+	// BadRequestException error with a message similar to the following: The resource
+	// types specified as filters in the request are not valid. The error includes a
+	// list of resource types that failed the validation because they are not part of
+	// the query associated with the group. This validation doesn't occur when the
+	// group query specifies AWS::AllSupported , because a group based on such a query
+	// can contain any of the allowed resource types for the query type (tag-based or
+	// Amazon CloudFront stack-based queries).
 	Filters []types.ResourceFilter
 
 	// The name or the ARN of the resource group
 	Group *string
 
-	// Deprecated - don't use this parameter. Use the Group  request field instead.
+	// Deprecated - don't use this parameter. Use the Group request field instead.
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string
@@ -76,9 +77,9 @@ type ListGroupResourcesInput struct {
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more
-	// output is available. Set this parameter to the value provided by a previous
-	// call's NextToken  response to indicate where the output should continue from.
+	// response in a previous request. A NextToken response indicates that more output
+	// is available. Set this parameter to the value provided by a previous call's
+	// NextToken response to indicate where the output should continue from.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -89,16 +90,15 @@ type ListGroupResourcesOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken  response element comes back as null .
+	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
-	// A list of QueryError  objects. Each error is an object that contains ErrorCode
-	// and Message  structures. Possible values for ErrorCode  are
+	// A list of QueryError objects. Each error is an object that contains ErrorCode
+	// and Message structures. Possible values for ErrorCode are
 	// CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING .
 	QueryErrors []types.QueryError
 
-	// Deprecated - don't use this parameter. Use the Resources response field
-	// instead.
+	// Deprecated - don't use this parameter. Use the Resources response field instead.
 	//
 	// Deprecated: This field is deprecated, use Resources instead.
 	ResourceIdentifiers []types.ResourceIdentifier
@@ -198,8 +198,8 @@ type ListGroupResourcesPaginatorOptions struct {
 	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -105,9 +105,9 @@ const (
 	AppCategoryLfR AppCategory = "LfR"
 )
 
-// Values returns all known values for AppCategory. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AppCategory. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AppCategory) Values() []AppCategory {
 	return []AppCategory{
 		"LfR",
@@ -534,9 +534,9 @@ const (
 	CurrencyUsd Currency = "USD"
 )
 
-// Values returns all known values for Currency. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Currency. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Currency) Values() []Currency {
 	return []Currency{
 		"USD",
@@ -807,8 +807,8 @@ const (
 	InstanceHealthReasonInstanceIpUnusable               InstanceHealthReason = "Instance.IpUnusable"
 )
 
-// Values returns all known values for InstanceHealthReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InstanceHealthReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceHealthReason) Values() []InstanceHealthReason {
 	return []InstanceHealthReason{
@@ -1028,8 +1028,8 @@ const (
 	LoadBalancerProtocolHttp      LoadBalancerProtocol = "HTTP"
 )
 
-// Values returns all known values for LoadBalancerProtocol. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LoadBalancerProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LoadBalancerProtocol) Values() []LoadBalancerProtocol {
 	return []LoadBalancerProtocol{
@@ -1168,10 +1168,10 @@ const (
 	LoadBalancerTlsCertificateRevocationReasonAACompromise         LoadBalancerTlsCertificateRevocationReason = "A_A_COMPROMISE"
 )
 
-// Values returns all known values for
-// LoadBalancerTlsCertificateRevocationReason. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LoadBalancerTlsCertificateRevocationReason.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (LoadBalancerTlsCertificateRevocationReason) Values() []LoadBalancerTlsCertificateRevocationReason {
 	return []LoadBalancerTlsCertificateRevocationReason{
 		"UNSPECIFIED",
@@ -1201,8 +1201,8 @@ const (
 	LoadBalancerTlsCertificateStatusUnknown            LoadBalancerTlsCertificateStatus = "UNKNOWN"
 )
 
-// Values returns all known values for LoadBalancerTlsCertificateStatus. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for LoadBalancerTlsCertificateStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (LoadBalancerTlsCertificateStatus) Values() []LoadBalancerTlsCertificateStatus {
@@ -1707,9 +1707,9 @@ const (
 	PricingUnitQueries PricingUnit = "Queries"
 )
 
-// Values returns all known values for PricingUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PricingUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PricingUnit) Values() []PricingUnit {
 	return []PricingUnit{
 		"GB",
@@ -1752,9 +1752,9 @@ const (
 	RecordStateFailed    RecordState = "Failed"
 )
 
-// Values returns all known values for RecordState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RecordState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RecordState) Values() []RecordState {
 	return []RecordState{
 		"Started",
@@ -1901,8 +1901,8 @@ const (
 	ResourceBucketAccessDeny  ResourceBucketAccess = "deny"
 )
 
-// Values returns all known values for ResourceBucketAccess. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ResourceBucketAccess. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceBucketAccess) Values() []ResourceBucketAccess {
 	return []ResourceBucketAccess{

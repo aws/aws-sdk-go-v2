@@ -57,7 +57,7 @@ type UpdateExperimentInput struct {
 
 	// When Evidently assigns a particular user session to an experiment, it must use
 	// a randomization ID to determine which variation the user session is served. This
-	// randomization ID is a combination of the entity ID and randomizationSalt. If
+	// randomization ID is a combination of the entity ID and randomizationSalt . If
 	// you omit randomizationSalt , Evidently uses the experiment name as the
 	// randomizationSalt .
 	RandomizationSalt *string

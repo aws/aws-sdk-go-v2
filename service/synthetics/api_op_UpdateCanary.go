@@ -39,9 +39,8 @@ type UpdateCanaryInput struct {
 	// This member is required.
 	Name *string
 
-	// A structure that contains the configuration for canary artifacts, including
-	// the encryption-at-rest settings for artifacts that the canary uploads to Amazon
-	// S3.
+	// A structure that contains the configuration for canary artifacts, including the
+	// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
 	ArtifactConfig *types.ArtifactConfigInput
 
 	// The location in Amazon S3 where Synthetics stores artifacts from the test runs
@@ -57,13 +56,13 @@ type UpdateCanaryInput struct {
 	// The ARN of the IAM role to be used to run the canary. This role must already
 	// exist, and must include lambda.amazonaws.com as a principal in the trust
 	// policy. The role must also have the following permissions:
-	//     - s3:PutObject
-	//     - s3:GetBucketLocation
-	//     - s3:ListAllMyBuckets
-	//     - cloudwatch:PutMetricData
-	//     - logs:CreateLogGroup
-	//     - logs:CreateLogStream
-	//     - logs:CreateLogStream
+	//   - s3:PutObject
+	//   - s3:GetBucketLocation
+	//   - s3:ListAllMyBuckets
+	//   - cloudwatch:PutMetricData
+	//   - logs:CreateLogGroup
+	//   - logs:CreateLogStream
+	//   - logs:CreateLogStream
 	ExecutionRoleArn *string
 
 	// The number of days to retain data about failed runs of this canary.
@@ -80,8 +79,8 @@ type UpdateCanaryInput struct {
 	// .
 	RuntimeVersion *string
 
-	// A structure that contains information about how often the canary is to run,
-	// and when these runs are to stop.
+	// A structure that contains information about how often the canary is to run, and
+	// when these runs are to stop.
 	Schedule *types.CanaryScheduleInput
 
 	// The number of days to retain data about successful runs of this canary.

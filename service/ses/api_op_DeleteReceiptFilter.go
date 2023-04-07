@@ -28,9 +28,9 @@ func (c *Client) DeleteReceiptFilter(ctx context.Context, params *DeleteReceiptF
 	return out, nil
 }
 
-// Represents a request to delete an IP address filter. You use IP address
-// filters when you receive email with Amazon SES. For more information, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// Represents a request to delete an IP address filter. You use IP address filters
+// when you receive email with Amazon SES. For more information, see the Amazon
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
 // .
 type DeleteReceiptFilterInput struct {
 

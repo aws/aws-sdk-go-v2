@@ -29,10 +29,10 @@ func (c *Client) DescribePackages(ctx context.Context, params *DescribePackagesI
 	return out, nil
 }
 
-// Container for request parameters to DescribePackage  operation.
+// Container for request parameters to DescribePackage operation.
 type DescribePackagesInput struct {
 
-	// Only returns packages that match the DescribePackagesFilterList  values.
+	// Only returns packages that match the DescribePackagesFilterList values.
 	Filters []types.DescribePackagesFilter
 
 	// Limits results to a maximum number of packages.
@@ -45,11 +45,11 @@ type DescribePackagesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response returned by DescribePackages  operation.
+// Container for response returned by DescribePackages operation.
 type DescribePackagesOutput struct {
 	NextToken *string
 
-	// List of PackageDetails  objects.
+	// List of PackageDetails objects.
 	PackageDetailsList []types.PackageDetails
 
 	// Metadata pertaining to the operation's result.
@@ -131,8 +131,8 @@ type DescribePackagesPaginatorOptions struct {
 	// Limits results to a maximum number of packages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

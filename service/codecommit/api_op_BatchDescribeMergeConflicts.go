@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about one or more merge conflicts in the attempted merge
-// of two commit specifiers using the squash or three-way merge strategy.
+// Returns information about one or more merge conflicts in the attempted merge of
+// two commit specifiers using the squash or three-way merge strategy.
 func (c *Client) BatchDescribeMergeConflicts(ctx context.Context, params *BatchDescribeMergeConflictsInput, optFns ...func(*Options)) (*BatchDescribeMergeConflictsOutput, error) {
 	if params == nil {
 		params = &BatchDescribeMergeConflictsInput{}
@@ -41,8 +41,7 @@ type BatchDescribeMergeConflictsInput struct {
 	// This member is required.
 	MergeOption types.MergeOptionTypeEnum
 
-	// The name of the repository that contains the merge conflicts you want to
-	// review.
+	// The name of the repository that contains the merge conflicts you want to review.
 	//
 	// This member is required.
 	RepositoryName *string

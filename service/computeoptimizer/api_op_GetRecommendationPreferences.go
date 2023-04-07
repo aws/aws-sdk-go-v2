@@ -39,14 +39,14 @@ type GetRecommendationPreferencesInput struct {
 	// preferences. The Ec2Instance option encompasses standalone instances and
 	// instances that are part of Auto Scaling groups. The AutoScalingGroup option
 	// encompasses only instances that are part of an Auto Scaling group. The valid
-	// values for this parameter are Ec2Instance  and AutoScalingGroup .
+	// values for this parameter are Ec2Instance and AutoScalingGroup .
 	//
 	// This member is required.
 	ResourceType types.ResourceType
 
 	// The maximum number of recommendation preferences to return with a single
 	// request. To retrieve the remaining results, make another request with the
-	// returned nextToken  value.
+	// returned nextToken value.
 	MaxResults *int32
 
 	// The token to advance to the next page of recommendation preferences.
@@ -155,11 +155,11 @@ var _ GetRecommendationPreferencesAPIClient = (*Client)(nil)
 type GetRecommendationPreferencesPaginatorOptions struct {
 	// The maximum number of recommendation preferences to return with a single
 	// request. To retrieve the remaining results, make another request with the
-	// returned nextToken  value.
+	// returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

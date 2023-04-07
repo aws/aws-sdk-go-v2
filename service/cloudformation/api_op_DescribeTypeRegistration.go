@@ -58,12 +58,12 @@ type DescribeTypeRegistrationOutput struct {
 	ProgressStatus types.RegistrationStatus
 
 	// The Amazon Resource Name (ARN) of the extension being registered. For
-	// registration requests with a ProgressStatus  of other than COMPLETE, this will
+	// registration requests with a ProgressStatus of other than COMPLETE , this will
 	// be null .
 	TypeArn *string
 
 	// The Amazon Resource Name (ARN) of this specific version of the extension being
-	// registered. For registration requests with a ProgressStatus  of other than
+	// registered. For registration requests with a ProgressStatus of other than
 	// COMPLETE , this will be null .
 	TypeVersionArn *string
 
@@ -209,10 +209,10 @@ func (w *TypeRegistrationCompleteWaiter) Wait(ctx context.Context, params *Descr
 	return err
 }
 
-// WaitForOutput calls the waiter function for TypeRegistrationComplete waiter
-// and returns the output of the successful operation. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// WaitForOutput calls the waiter function for TypeRegistrationComplete waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *TypeRegistrationCompleteWaiter) WaitForOutput(ctx context.Context, params *DescribeTypeRegistrationInput, maxWaitDur time.Duration, optFns ...func(*TypeRegistrationCompleteWaiterOptions)) (*DescribeTypeRegistrationOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

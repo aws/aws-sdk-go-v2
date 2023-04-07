@@ -15,7 +15,7 @@ import (
 // distribution. A staging distribution is a copy of an existing distribution
 // (called the primary distribution) that you can use in a continuous deployment
 // workflow. After you create a staging distribution, you can use
-// UpdateDistributionto modify the staging distribution's configuration. Then you
+// UpdateDistribution to modify the staging distribution's configuration. Then you
 // can use CreateContinuousDeploymentPolicy to incrementally move traffic to the
 // staging distribution.
 func (c *Client) CopyDistribution(ctx context.Context, params *CopyDistributionInput, optFns ...func(*Options)) (*CopyDistributionOutput, error) {
@@ -42,19 +42,19 @@ type CopyDistributionInput struct {
 	// This member is required.
 	CallerReference *string
 
-	// The identifier of the primary distribution whose configuration you are
-	// copying. To get a distribution ID, use ListDistributions .
+	// The identifier of the primary distribution whose configuration you are copying.
+	// To get a distribution ID, use ListDistributions .
 	//
 	// This member is required.
 	PrimaryDistributionId *string
 
 	// The version identifier of the primary distribution whose configuration you are
-	// copying. This is the ETag  value returned in the response to GetDistribution
-	// and GetDistributionConfig .
+	// copying. This is the ETag value returned in the response to GetDistribution and
+	// GetDistributionConfig .
 	IfMatch *string
 
 	// The type of distribution that your primary distribution will be copied to. The
-	// only valid value is True, indicating that you are copying to a staging
+	// only valid value is True , indicating that you are copying to a staging
 	// distribution.
 	Staging *bool
 

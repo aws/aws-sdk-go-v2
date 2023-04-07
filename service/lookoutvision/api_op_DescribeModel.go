@@ -12,7 +12,7 @@ import (
 )
 
 // Describes a version of an Amazon Lookout for Vision model. This operation
-// requires permissions to perform the lookoutvision:DescribeModel  operation.
+// requires permissions to perform the lookoutvision:DescribeModel operation.
 func (c *Client) DescribeModel(ctx context.Context, params *DescribeModelInput, optFns ...func(*Options)) (*DescribeModelOutput, error) {
 	if params == nil {
 		params = &DescribeModelInput{}

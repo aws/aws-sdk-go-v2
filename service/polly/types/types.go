@@ -27,7 +27,7 @@ type Lexicon struct {
 // .
 type LexiconAttributes struct {
 
-	// Phonetic alphabet used in the lexicon. Valid values are ipa  and x-sampa .
+	// Phonetic alphabet used in the lexicon. Valid values are ipa and x-sampa .
 	Alphabet *string
 
 	// Language code that the lexicon applies to. A lexicon with a language code such
@@ -68,7 +68,7 @@ type SynthesisTask struct {
 	// Timestamp for the time the synthesis task was started.
 	CreationTime *time.Time
 
-	// Specifies the engine ( standard  or neural) for Amazon Polly to use when
+	// Specifies the engine ( standard or neural ) for Amazon Polly to use when
 	// processing input text for speech synthesis. Using a voice that is not supported
 	// for the engine selected will result in an error.
 	Engine Engine
@@ -87,8 +87,8 @@ type SynthesisTask struct {
 	// the same as the language of the voice.
 	LexiconNames []string
 
-	// The format in which the returned output will be encoded. For audio stream,
-	// this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
+	// The format in which the returned output will be encoded. For audio stream, this
+	// will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
 	OutputFormat OutputFormat
 
 	// Pathway for the output speech file.
@@ -133,8 +133,8 @@ type SynthesisTask struct {
 // Description of the voice.
 type Voice struct {
 
-	// Additional codes for languages available for the specified voice in addition
-	// to its default language. For example, the default language for Aditi is Indian
+	// Additional codes for languages available for the specified voice in addition to
+	// its default language. For example, the default language for Aditi is Indian
 	// English (en-IN) because it was first used for that language. Since Aditi is
 	// bilingual and fluent in both Indian English and Hindi, this parameter would show
 	// the code hi-IN .
@@ -144,7 +144,7 @@ type Voice struct {
 	Gender Gender
 
 	// Amazon Polly assigned voice ID. This is the ID that you specify when calling
-	// the SynthesizeSpeech  operation.
+	// the SynthesizeSpeech operation.
 	Id VoiceId
 
 	// Language code of the voice.
@@ -157,7 +157,7 @@ type Voice struct {
 	// readable voice name that you might display in your application.
 	Name *string
 
-	// Specifies which engines ( standard  or neural) that are supported by a given
+	// Specifies which engines ( standard or neural ) that are supported by a given
 	// voice.
 	SupportedEngines []Engine
 

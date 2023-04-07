@@ -30,8 +30,7 @@ func (c *Client) GetCustomVerificationEmailTemplate(ctx context.Context, params 
 	return out, nil
 }
 
-// Represents a request to retrieve an existing custom verification email
-// template.
+// Represents a request to retrieve an existing custom verification email template.
 type GetCustomVerificationEmailTemplateInput struct {
 
 	// The name of the custom verification email template that you want to retrieve.

@@ -14,9 +14,9 @@ import (
 // Deletes an Amazon Lookout for Vision project. To delete a project, you must
 // first delete each version of the model associated with the project. To delete a
 // model use the DeleteModel operation. You also have to delete the dataset(s)
-// associated with the model. For more information, see DeleteDataset. The images
+// associated with the model. For more information, see DeleteDataset . The images
 // referenced by the training and test datasets aren't deleted. This operation
-// requires permissions to perform the lookoutvision:DeleteProject  operation.
+// requires permissions to perform the lookoutvision:DeleteProject operation.
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {
 		params = &DeleteProjectInput{}
@@ -41,10 +41,10 @@ type DeleteProjectInput struct {
 
 	// ClientToken is an idempotency token that ensures a call to DeleteProject
 	// completes only once. You choose the value to pass. For example, An issue might
-	// prevent you from getting a response from DeleteProject. In this case, safely
-	// retry your call to DeleteProject  by using the same ClientToken parameter
-	// value. If you don't supply a value for ClientToken, the AWS SDK you are using
-	// inserts a value for you. This prevents retries after a network error from making
+	// prevent you from getting a response from DeleteProject . In this case, safely
+	// retry your call to DeleteProject by using the same ClientToken parameter value.
+	// If you don't supply a value for ClientToken , the AWS SDK you are using inserts
+	// a value for you. This prevents retries after a network error from making
 	// multiple project deletion requests. You'll need to provide your own value for
 	// other use cases. An error occurs if the other input parameters are not the same
 	// as in the first request. Using a different value for ClientToken is considered

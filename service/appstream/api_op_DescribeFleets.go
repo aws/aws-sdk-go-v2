@@ -191,10 +191,9 @@ func (w *FleetStartedWaiter) Wait(ctx context.Context, params *DescribeFleetsInp
 	return err
 }
 
-// WaitForOutput calls the waiter function for FleetStarted waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for FleetStarted waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
 func (w *FleetStartedWaiter) WaitForOutput(ctx context.Context, params *DescribeFleetsInput, maxWaitDur time.Duration, optFns ...func(*FleetStartedWaiterOptions)) (*DescribeFleetsOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -414,10 +413,9 @@ func (w *FleetStoppedWaiter) Wait(ctx context.Context, params *DescribeFleetsInp
 	return err
 }
 
-// WaitForOutput calls the waiter function for FleetStopped waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for FleetStopped waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
 func (w *FleetStoppedWaiter) WaitForOutput(ctx context.Context, params *DescribeFleetsInput, maxWaitDur time.Duration, optFns ...func(*FleetStoppedWaiterOptions)) (*DescribeFleetsOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

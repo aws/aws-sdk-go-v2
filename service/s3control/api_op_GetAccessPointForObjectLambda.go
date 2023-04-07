@@ -63,8 +63,8 @@ type GetAccessPointForObjectLambdaOutput struct {
 	// The name of the Object Lambda Access Point.
 	Name *string
 
-	// Configuration to block all public access. This setting is turned on and can
-	// not be edited.
+	// Configuration to block all public access. This setting is turned on and can not
+	// be edited.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 
 	// Metadata pertaining to the operation's result.

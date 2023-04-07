@@ -35,8 +35,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// We couldn't process your request because of an issue with the server. Try
-// again later.
+// We couldn't process your request because of an issue with the server. Try again
+// later.
 type InternalServerException struct {
 	Message *string
 

@@ -95,10 +95,9 @@ const (
 	IdentityResolutionJobStatusFailed         IdentityResolutionJobStatus = "FAILED"
 )
 
-// Values returns all known values for IdentityResolutionJobStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for IdentityResolutionJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityResolutionJobStatus) Values() []IdentityResolutionJobStatus {
 	return []IdentityResolutionJobStatus{
 		"PENDING",
@@ -124,9 +123,9 @@ const (
 	JobScheduleDayOfTheWeekSaturday  JobScheduleDayOfTheWeek = "SATURDAY"
 )
 
-// Values returns all known values for JobScheduleDayOfTheWeek. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobScheduleDayOfTheWeek. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (JobScheduleDayOfTheWeek) Values() []JobScheduleDayOfTheWeek {
 	return []JobScheduleDayOfTheWeek{
 		"SUNDAY",
@@ -346,10 +345,9 @@ const (
 	SalesforceConnectorOperatorNoOp                 SalesforceConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for SalesforceConnectorOperator. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for SalesforceConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SalesforceConnectorOperator) Values() []SalesforceConnectorOperator {
 	return []SalesforceConnectorOperator{
 		"PROJECTION",
@@ -403,10 +401,9 @@ const (
 	ServiceNowConnectorOperatorNoOp                 ServiceNowConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for ServiceNowConnectorOperator. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ServiceNowConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceNowConnectorOperator) Values() []ServiceNowConnectorOperator {
 	return []ServiceNowConnectorOperator{
 		"PROJECTION",
@@ -528,9 +525,9 @@ const (
 	TaskTypeValidate   TaskType = "Validate"
 )
 
-// Values returns all known values for TaskType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaskType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (TaskType) Values() []TaskType {
 	return []TaskType{
 		"Arithmetic",
@@ -552,9 +549,9 @@ const (
 	TriggerTypeOndemand  TriggerType = "OnDemand"
 )
 
-// Values returns all known values for TriggerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TriggerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TriggerType) Values() []TriggerType {
 	return []TriggerType{
 		"Scheduled",

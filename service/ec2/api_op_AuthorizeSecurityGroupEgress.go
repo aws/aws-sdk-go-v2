@@ -85,7 +85,7 @@ type AuthorizeSecurityGroupEgressInput struct {
 
 type AuthorizeSecurityGroupEgressOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, returns an error.
+	// Returns true if the request succeeds; otherwise, returns an error.
 	Return *bool
 
 	// Information about the outbound (egress) security group rules that were added.

@@ -14,7 +14,7 @@ import (
 )
 
 // Lists model compilation jobs that satisfy various filters. To create a model
-// compilation job, use CreateCompilationJob. To get information about a
+// compilation job, use CreateCompilationJob . To get information about a
 // particular model compilation job you have created, use DescribeCompilationJob .
 func (c *Client) ListCompilationJobs(ctx context.Context, params *ListCompilationJobsInput, optFns ...func(*Options)) (*ListCompilationJobsOutput, error) {
 	if params == nil {
@@ -57,7 +57,7 @@ type ListCompilationJobsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListCompilationJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of model compilation
+	// response includes a NextToken . To retrieve the next set of model compilation
 	// jobs, use the token in the next request.
 	NextToken *string
 
@@ -82,7 +82,7 @@ type ListCompilationJobsOutput struct {
 	// This member is required.
 	CompilationJobSummaries []types.CompilationJobSummary
 
-	// If the response is truncated, Amazon SageMaker returns this NextToken. To
+	// If the response is truncated, Amazon SageMaker returns this NextToken . To
 	// retrieve the next set of model compilation jobs, use this token in the next
 	// request.
 	NextToken *string
@@ -167,8 +167,8 @@ type ListCompilationJobsPaginatorOptions struct {
 	// The maximum number of model compilation jobs to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

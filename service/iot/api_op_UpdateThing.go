@@ -43,9 +43,9 @@ type UpdateThingInput struct {
 	// attributes or update existing attributes.
 	AttributePayload *types.AttributePayload
 
-	// The expected version of the thing record in the registry. If the version of
-	// the record in the registry does not match the expected version specified in the
-	// request, the UpdateThing  request is rejected with a VersionConflictException .
+	// The expected version of the thing record in the registry. If the version of the
+	// record in the registry does not match the expected version specified in the
+	// request, the UpdateThing request is rejected with a VersionConflictException .
 	ExpectedVersion *int64
 
 	// Remove a thing type association. If true, the association is removed.

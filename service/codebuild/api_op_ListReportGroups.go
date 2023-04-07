@@ -36,22 +36,22 @@ type ListReportGroupsInput struct {
 	// default value is 100.
 	MaxResults *int32
 
-	// During a previous call, the maximum number of items that can be returned is
-	// the value specified in maxResults. If there more items in the list, then a
-	// unique string called a nextToken is returned. To get the next batch of items in
-	// the list, call this operation again, adding the next token to the call. To get
-	// all of the items in the list, keep calling this operation with each subsequent
-	// next token that is returned, until no more next tokens are returned.
+	// During a previous call, the maximum number of items that can be returned is the
+	// value specified in maxResults . If there more items in the list, then a unique
+	// string called a nextToken is returned. To get the next batch of items in the
+	// list, call this operation again, adding the next token to the call. To get all
+	// of the items in the list, keep calling this operation with each subsequent next
+	// token that is returned, until no more next tokens are returned.
 	NextToken *string
 
 	// The criterion to be used to list build report groups. Valid values include:
-	//     - CREATED_TIME : List based on when each report group was created.
-	//     - LAST_MODIFIED_TIME : List based on when each report group was last changed.
-	//     - NAME : List based on each report group's name.
+	//   - CREATED_TIME : List based on when each report group was created.
+	//   - LAST_MODIFIED_TIME : List based on when each report group was last changed.
+	//   - NAME : List based on each report group's name.
 	SortBy types.ReportGroupSortByType
 
 	// Used to specify the order to sort the list of returned report groups. Valid
-	// values are ASCENDING  and DESCENDING .
+	// values are ASCENDING and DESCENDING .
 	SortOrder types.SortOrderType
 
 	noSmithyDocumentSerde
@@ -59,12 +59,12 @@ type ListReportGroupsInput struct {
 
 type ListReportGroupsOutput struct {
 
-	// During a previous call, the maximum number of items that can be returned is
-	// the value specified in maxResults. If there more items in the list, then a
-	// unique string called a nextToken is returned. To get the next batch of items in
-	// the list, call this operation again, adding the next token to the call. To get
-	// all of the items in the list, keep calling this operation with each subsequent
-	// next token that is returned, until no more next tokens are returned.
+	// During a previous call, the maximum number of items that can be returned is the
+	// value specified in maxResults . If there more items in the list, then a unique
+	// string called a nextToken is returned. To get the next batch of items in the
+	// list, call this operation again, adding the next token to the call. To get all
+	// of the items in the list, keep calling this operation with each subsequent next
+	// token that is returned, until no more next tokens are returned.
 	NextToken *string
 
 	// The list of ARNs for the report groups in the current Amazon Web Services
@@ -152,8 +152,8 @@ type ListReportGroupsPaginatorOptions struct {
 	// default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

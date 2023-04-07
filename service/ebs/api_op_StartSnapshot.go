@@ -33,7 +33,7 @@ func (c *Client) StartSnapshot(ctx context.Context, params *StartSnapshotInput, 
 
 type StartSnapshotInput struct {
 
-	// The size of the volume, in GiB. The maximum size is 65536  GiB (64 TiB).
+	// The size of the volume, in GiB. The maximum size is 65536 GiB (64 TiB).
 	//
 	// This member is required.
 	VolumeSize *int64
@@ -53,7 +53,7 @@ type StartSnapshotInput struct {
 
 	// Indicates whether to encrypt the snapshot. You can't specify Encrypted and
 	// ParentSnapshotId in the same request. If you specify both parameters, the
-	// request fails with ValidationException. The encryption status of the snapshot
+	// request fails with ValidationException . The encryption status of the snapshot
 	// depends on the values that you specify for Encrypted, KmsKeyArn, and
 	// ParentSnapshotId, and whether your Amazon Web Services account is enabled for
 	// encryption by default (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default)
@@ -78,7 +78,7 @@ type StartSnapshotInput struct {
 	// The ID of the parent snapshot. If there is no parent snapshot, or if you are
 	// creating the first snapshot for an on-premises volume, omit this parameter. You
 	// can't specify ParentSnapshotId and Encrypted in the same request. If you specify
-	// both parameters, the request fails with ValidationException. The encryption
+	// both parameters, the request fails with ValidationException . The encryption
 	// status of the snapshot depends on the values that you specify for Encrypted,
 	// KmsKeyArn, and ParentSnapshotId, and whether your Amazon Web Services account is
 	// enabled for encryption by default (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default)
@@ -95,10 +95,9 @@ type StartSnapshotInput struct {
 
 	// The amount of time (in minutes) after which the snapshot is automatically
 	// cancelled if:
-	//     - No blocks are written to the snapshot.
-	//     - The snapshot is not completed after writing the last block of data.
-	// If
-	// no value is specified, the timeout defaults to 60  minutes.
+	//   - No blocks are written to the snapshot.
+	//   - The snapshot is not completed after writing the last block of data.
+	// If no value is specified, the timeout defaults to 60 minutes.
 	Timeout *int32
 
 	noSmithyDocumentSerde

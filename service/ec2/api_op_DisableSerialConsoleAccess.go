@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables access to the EC2 serial console of all instances for your account.
-// By default, access to the EC2 serial console is disabled for your account. For
-// more information, see Manage account access to the EC2 serial console (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access)
+// Disables access to the EC2 serial console of all instances for your account. By
+// default, access to the EC2 serial console is disabled for your account. For more
+// information, see Manage account access to the EC2 serial console (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access)
 // in the Amazon EC2 User Guide.
 func (c *Client) DisableSerialConsoleAccess(ctx context.Context, params *DisableSerialConsoleAccessInput, optFns ...func(*Options)) (*DisableSerialConsoleAccessOutput, error) {
 	if params == nil {
@@ -42,8 +42,8 @@ type DisableSerialConsoleAccessInput struct {
 
 type DisableSerialConsoleAccessOutput struct {
 
-	// If true, access to the EC2 serial console of all instances is enabled for your
-	// account. If false, access to the EC2 serial console of all instances is
+	// If true , access to the EC2 serial console of all instances is enabled for your
+	// account. If false , access to the EC2 serial console of all instances is
 	// disabled for your account.
 	SerialConsoleAccessEnabled *bool
 

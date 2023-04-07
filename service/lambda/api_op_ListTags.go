@@ -29,8 +29,8 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 
 type ListTagsInput struct {
 
-	// The function's Amazon Resource Name (ARN). Note: Lambda does not support
-	// adding tags to aliases or versions.
+	// The function's Amazon Resource Name (ARN). Note: Lambda does not support adding
+	// tags to aliases or versions.
 	//
 	// This member is required.
 	Resource *string

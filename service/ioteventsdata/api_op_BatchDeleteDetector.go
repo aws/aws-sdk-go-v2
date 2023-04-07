@@ -43,7 +43,7 @@ type BatchDeleteDetectorInput struct {
 
 type BatchDeleteDetectorOutput struct {
 
-	// A list of errors associated with the request, or an empty array ( []) if there
+	// A list of errors associated with the request, or an empty array ( [] ) if there
 	// are no errors. Each error entry contains a messageId that helps you identify
 	// the entry that failed.
 	BatchDeleteDetectorErrorEntries []types.BatchDeleteDetectorErrorEntry

@@ -32,9 +32,9 @@ func (c *Client) DescribePolicy(ctx context.Context, params *DescribePolicyInput
 type DescribePolicyInput struct {
 
 	// The unique identifier (ID) of the policy that you want details about. You can
-	// get the ID from the ListPolicies  or ListPoliciesForTarget  operations. The
-	// regex pattern (http://wikipedia.org/wiki/regex)for a policy ID string requires
-	// "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the
+	// get the ID from the ListPolicies or ListPoliciesForTarget operations. The regex
+	// pattern (http://wikipedia.org/wiki/regex) for a policy ID string requires "p-"
+	// followed by from 8 to 128 lowercase or uppercase letters, digits, or the
 	// underscore character (_).
 	//
 	// This member is required.

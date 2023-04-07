@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends you notification through CloudWatch Events when all files written to
-// your file share have been uploaded to S3. Amazon S3. Storage Gateway can send a
+// Sends you notification through CloudWatch Events when all files written to your
+// file share have been uploaded to S3. Amazon S3. Storage Gateway can send a
 // notification through Amazon CloudWatch Events when all files written to your
 // file share up to that point in time have been uploaded to Amazon S3. These files
 // include files written to the file share up to the time that you make a request
@@ -51,8 +51,8 @@ type NotifyWhenUploadedOutput struct {
 	// The Amazon Resource Name (ARN) of the file share.
 	FileShareARN *string
 
-	// The randomly generated ID of the notification that was sent. This ID is in
-	// UUID format.
+	// The randomly generated ID of the notification that was sent. This ID is in UUID
+	// format.
 	NotificationId *string
 
 	// Metadata pertaining to the operation's result.

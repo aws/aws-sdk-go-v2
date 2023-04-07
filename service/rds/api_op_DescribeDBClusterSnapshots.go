@@ -41,26 +41,27 @@ func (c *Client) DescribeDBClusterSnapshots(ctx context.Context, params *Describ
 
 type DescribeDBClusterSnapshotsInput struct {
 
-	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for.
-	// This parameter can't be used in conjunction with the
-	// DBClusterSnapshotIdentifierparameter. This parameter isn't case-sensitive.
-	// Constraints:
-	//     - If supplied, must match the identifier of an existing DBCluster.
+	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for. This
+	// parameter can't be used in conjunction with the DBClusterSnapshotIdentifier
+	// parameter. This parameter isn't case-sensitive. Constraints:
+	//   - If supplied, must match the identifier of an existing DBCluster.
 	DBClusterIdentifier *string
 
 	// A specific DB cluster snapshot identifier to describe. This parameter can't be
 	// used in conjunction with the DBClusterIdentifier parameter. This value is
 	// stored as a lowercase string. Constraints:
-	//     - If supplied, must match the identifier of an existing DBClusterSnapshot.
-	//     - If this identifier is for an automated snapshot, the SnapshotType parameter must also be specified.
+	//   - If supplied, must match the identifier of an existing DBClusterSnapshot.
+	//   - If this identifier is for an automated snapshot, the SnapshotType parameter
+	//   must also be specified.
 	DBClusterSnapshotIdentifier *string
 
-	// A filter that specifies one or more DB cluster snapshots to describe.
-	// Supported filters:
-	//     - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs).
-	//     - db-cluster-snapshot-id - Accepts DB cluster snapshot identifiers.
-	//     - snapshot-type - Accepts types of DB cluster snapshots.
-	//     - engine - Accepts names of database engines.
+	// A filter that specifies one or more DB cluster snapshots to describe. Supported
+	// filters:
+	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	//   Resource Names (ARNs).
+	//   - db-cluster-snapshot-id - Accepts DB cluster snapshot identifiers.
+	//   - snapshot-type - Accepts types of DB cluster snapshots.
+	//   - engine - Accepts names of database engines.
 	Filters []types.Filter
 
 	// A value that indicates whether to include manual DB cluster snapshots that are
@@ -83,34 +84,36 @@ type DescribeDBClusterSnapshotsInput struct {
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so you can retrieve the remaining results. Default:
-	// 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The type of DB cluster snapshots to be returned. You can specify one of the
 	// following values:
-	//     - automated - Return all DB cluster snapshots that have been automatically taken by Amazon RDS for my Amazon Web Services account.
-	//     - manual - Return all DB cluster snapshots that have been taken by my Amazon Web Services account.
-	//     - shared - Return all manual DB cluster snapshots that have been shared to my Amazon Web Services account.
-	//     - public - Return all DB cluster snapshots that have been marked as public.
-	//
+	//   - automated - Return all DB cluster snapshots that have been automatically
+	//   taken by Amazon RDS for my Amazon Web Services account.
+	//   - manual - Return all DB cluster snapshots that have been taken by my Amazon
+	//   Web Services account.
+	//   - shared - Return all manual DB cluster snapshots that have been shared to my
+	//   Amazon Web Services account.
+	//   - public - Return all DB cluster snapshots that have been marked as public.
 	// If you don't specify a SnapshotType value, then both automated and manual DB
 	// cluster snapshots are returned. You can include shared DB cluster snapshots with
 	// these results by enabling the IncludeShared parameter. You can include public
 	// DB cluster snapshots with these results by enabling the IncludePublic
-	// parameter. The IncludeShared  and IncludePublic  parameters don't apply for
-	// SnapshotType values of manual  or automated . The IncludePublic parameter
-	// doesn't apply when SnapshotType  is set to shared . The IncludeShared
-	// parameter doesn't apply when SnapshotType  is set to public .
+	// parameter. The IncludeShared and IncludePublic parameters don't apply for
+	// SnapshotType values of manual or automated . The IncludePublic parameter
+	// doesn't apply when SnapshotType is set to shared . The IncludeShared parameter
+	// doesn't apply when SnapshotType is set to public .
 	SnapshotType *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides a list of DB cluster snapshots for the user as the result of a call
-// to the DescribeDBClusterSnapshots  action.
+// Provides a list of DB cluster snapshots for the user as the result of a call to
+// the DescribeDBClusterSnapshots action.
 type DescribeDBClusterSnapshotsOutput struct {
 
 	// Provides a list of DB cluster snapshots for the user.
@@ -201,14 +204,14 @@ var _ DescribeDBClusterSnapshotsAPIClient = (*Client)(nil)
 // DescribeDBClusterSnapshotsPaginatorOptions is the paginator options for
 // DescribeDBClusterSnapshots
 type DescribeDBClusterSnapshotsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so you can retrieve the remaining results. Default:
-	// 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -650,10 +653,10 @@ func (w *DBClusterSnapshotDeletedWaiter) Wait(ctx context.Context, params *Descr
 	return err
 }
 
-// WaitForOutput calls the waiter function for DBClusterSnapshotDeleted waiter
-// and returns the output of the successful operation. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// WaitForOutput calls the waiter function for DBClusterSnapshotDeleted waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *DBClusterSnapshotDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeDBClusterSnapshotsInput, maxWaitDur time.Duration, optFns ...func(*DBClusterSnapshotDeletedWaiterOptions)) (*DescribeDBClusterSnapshotsOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

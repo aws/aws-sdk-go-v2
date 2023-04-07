@@ -21,7 +21,7 @@ import (
 // . Creates an uninitialized HSM instance. There is an upfront fee charged for
 // each HSM instance that you create with the CreateHsm operation. If you
 // accidentally provision an HSM and want to request a refund, delete the instance
-// using the DeleteHsm  operation, go to the AWS Support Center (https://console.aws.amazon.com/support/home)
+// using the DeleteHsm operation, go to the AWS Support Center (https://console.aws.amazon.com/support/home)
 // , create a new case, and select Account and Billing Support. It can take up to
 // 20 minutes to create and provision an HSM. You can monitor the status of the HSM
 // with the DescribeHsm operation. The HSM is ready to be initialized when the
@@ -41,11 +41,11 @@ func (c *Client) CreateHsm(ctx context.Context, params *CreateHsmInput, optFns .
 	return out, nil
 }
 
-// Contains the inputs for the CreateHsm  operation.
+// Contains the inputs for the CreateHsm operation.
 type CreateHsmInput struct {
 
-	// The ARN of an IAM role to enable the AWS CloudHSM service to allocate an ENI
-	// on your behalf.
+	// The ARN of an IAM role to enable the AWS CloudHSM service to allocate an ENI on
+	// your behalf.
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -61,8 +61,8 @@ type CreateHsmInput struct {
 	SubnetId *string
 
 	// Specifies the type of subscription for the HSM.
-	//     - PRODUCTION - The HSM is being used in a production environment.
-	//     - TRIAL - The HSM is being used in a product trial.
+	//   - PRODUCTION - The HSM is being used in a production environment.
+	//   - TRIAL - The HSM is being used in a product trial.
 	//
 	// This member is required.
 	SubscriptionType types.SubscriptionType
@@ -85,7 +85,7 @@ type CreateHsmInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the output of the CreateHsm  operation.
+// Contains the output of the CreateHsm operation.
 type CreateHsmOutput struct {
 
 	// The ARN of the HSM.

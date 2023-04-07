@@ -31,7 +31,7 @@ func (c *Client) PurchaseReservedCacheNodesOffering(ctx context.Context, params 
 	return out, nil
 }
 
-// Represents the input of a PurchaseReservedCacheNodesOffering  operation.
+// Represents the input of a PurchaseReservedCacheNodesOffering operation.
 type PurchaseReservedCacheNodesOfferingInput struct {
 
 	// The ID of the reserved cache node offering to purchase. Example:
@@ -58,7 +58,7 @@ type PurchaseReservedCacheNodesOfferingInput struct {
 
 type PurchaseReservedCacheNodesOfferingOutput struct {
 
-	// Represents the output of a PurchaseReservedCacheNodesOffering  operation.
+	// Represents the output of a PurchaseReservedCacheNodesOffering operation.
 	ReservedCacheNode *types.ReservedCacheNode
 
 	// Metadata pertaining to the operation's result.

@@ -332,9 +332,9 @@ const (
 	RuntimeNameAppsyncJs RuntimeName = "APPSYNC_JS"
 )
 
-// Values returns all known values for RuntimeName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RuntimeName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RuntimeName) Values() []RuntimeName {
 	return []RuntimeName{
 		"APPSYNC_JS",
@@ -375,8 +375,8 @@ const (
 	TypeDefinitionFormatJson TypeDefinitionFormat = "JSON"
 )
 
-// Values returns all known values for TypeDefinitionFormat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TypeDefinitionFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TypeDefinitionFormat) Values() []TypeDefinitionFormat {
 	return []TypeDefinitionFormat{

@@ -37,8 +37,8 @@ type ListUserPoolsInput struct {
 	// This member is required.
 	MaxResults int32
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,8 +47,8 @@ type ListUserPoolsInput struct {
 // Represents the response to list user pools.
 type ListUserPoolsOutput struct {
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	// The user pools from the response to list users.
@@ -136,8 +136,8 @@ type ListUserPoolsPaginatorOptions struct {
 	// user pools.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

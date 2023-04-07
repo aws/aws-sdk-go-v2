@@ -21,16 +21,16 @@ import (
 // specify in the request. You can access this policy in the IAM console at
 // AWSShieldDRTAccessPolicy (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy)
 // . For more information see Adding and removing IAM identity permissions (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html)
-// . The role must also trust the service principal drt.shield.amazonaws.com. For
+// . The role must also trust the service principal drt.shield.amazonaws.com . For
 // more information, see IAM JSON policy elements: Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)
 // . The SRT will have access only to your WAF and Shield resources. By submitting
 // this request, you authorize the SRT to inspect your WAF and Shield configuration
 // and create and update WAF rules and web ACLs on your behalf. The SRT takes these
 // actions only if explicitly authorized by you. You must have the iam:PassRole
-// permission to make an AssociateDRTRole  request. For more information, see
+// permission to make an AssociateDRTRole request. For more information, see
 // Granting a user permissions to pass a role to an Amazon Web Services service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
-// . To use the services of the SRT and make an AssociateDRTRole request, you
-// must be subscribed to the Business Support plan (http://aws.amazon.com/premiumsupport/business-support/)
+// . To use the services of the SRT and make an AssociateDRTRole request, you must
+// be subscribed to the Business Support plan (http://aws.amazon.com/premiumsupport/business-support/)
 // or the Enterprise Support plan (http://aws.amazon.com/premiumsupport/enterprise-support/)
 // .
 func (c *Client) AssociateDRTRole(ctx context.Context, params *AssociateDRTRoleInput, optFns ...func(*Options)) (*AssociateDRTRoleOutput, error) {

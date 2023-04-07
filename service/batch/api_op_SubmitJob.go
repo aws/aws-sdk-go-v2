@@ -15,13 +15,12 @@ import (
 // during SubmitJob override parameters defined in the job definition. vCPU and
 // memory requirements that are specified in the resourceRequirements objects in
 // the job definition are the exception. They can't be overridden this way using
-// the memory  and vcpus parameters. Rather, you must specify updates to job
-// definition parameters in a resourceRequirements  object that's included in the
-// containerOverridesparameter. Job queues with a scheduling policy are limited
-// to 500 active fair share identifiers at a time. Jobs that run on Fargate
-// resources can't be guaranteed to run for more than 14 days. This is because,
-// after 14 days, Fargate resources might become unavailable and job might be
-// terminated.
+// the memory and vcpus parameters. Rather, you must specify updates to job
+// definition parameters in a resourceRequirements object that's included in the
+// containerOverrides parameter. Job queues with a scheduling policy are limited to
+// 500 active fair share identifiers at a time. Jobs that run on Fargate resources
+// can't be guaranteed to run for more than 14 days. This is because, after 14
+// days, Fargate resources might become unavailable and job might be terminated.
 func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns ...func(*Options)) (*SubmitJobOutput, error) {
 	if params == nil {
 		params = &SubmitJobInput{}
@@ -41,7 +40,7 @@ func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns .
 type SubmitJobInput struct {
 
 	// The job definition used by this job. This value can be one of definition-name ,
-	// definition-name:revision, or the Amazon Resource Name (ARN) for the job
+	// definition-name:revision , or the Amazon Resource Name (ARN) for the job
 	// definition, with or without the revision (
 	// arn:aws:batch:region:account:job-definition/definition-name:revision , or
 	// arn:aws:batch:region:account:job-definition/definition-name ). If the revision
@@ -50,9 +49,9 @@ type SubmitJobInput struct {
 	// This member is required.
 	JobDefinition *string
 
-	// The name of the job. It can be up to 128 letters long. The first character
-	// must be alphanumeric, can contain uppercase and lowercase letters, numbers,
-	// hyphens (-), and underscores (_).
+	// The name of the job. It can be up to 128 letters long. The first character must
+	// be alphanumeric, can contain uppercase and lowercase letters, numbers, hyphens
+	// (-), and underscores (_).
 	//
 	// This member is required.
 	JobName *string
@@ -73,16 +72,16 @@ type SubmitJobInput struct {
 	// definition that specify the name of a container in the specified job definition
 	// and the overrides it should receive. You can override the default command for a
 	// container, which is specified in the job definition or the Docker image, with a
-	// commandoverride. You can also override existing environment variables on a
-	// container or add new environment variables to it with an environment  override.
+	// command override. You can also override existing environment variables on a
+	// container or add new environment variables to it with an environment override.
 	ContainerOverrides *types.ContainerOverrides
 
-	// A list of dependencies for the job. A job can depend upon a maximum of 20
-	// jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID
-	// for array jobs so that each child array job completes sequentially, starting at
-	// index 0. You can also specify an N_TO_N type dependency with a job ID for
-	// array jobs. In that case, each index child of this job must wait for the
-	// corresponding index child of each dependency to complete before it can begin.
+	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs.
+	// You can specify a SEQUENTIAL type dependency without specifying a job ID for
+	// array jobs so that each child array job completes sequentially, starting at
+	// index 0. You can also specify an N_TO_N type dependency with a job ID for array
+	// jobs. In that case, each index child of this job must wait for the corresponding
+	// index child of each dependency to complete before it can begin.
 	DependsOn []types.JobDependency
 
 	// An object that can only be specified for jobs that are run on Amazon EKS
@@ -91,7 +90,7 @@ type SubmitJobInput struct {
 
 	// A list of node overrides in JSON format that specify the node range to target
 	// and the container overrides for that node range. This parameter isn't applicable
-	// to jobs that are running on Fargate resources; use containerOverrides  instead.
+	// to jobs that are running on Fargate resources; use containerOverrides instead.
 	NodeOverrides *types.NodeOverrides
 
 	// Additional parameters passed to the job that replace parameter substitution
@@ -109,9 +108,9 @@ type SubmitJobInput struct {
 	// propagation setting in the job definition.
 	PropagateTags *bool
 
-	// The retry strategy to use for failed jobs from this SubmitJob operation. When
-	// a retry strategy is specified here, it overrides the retry strategy defined in
-	// the job definition.
+	// The retry strategy to use for failed jobs from this SubmitJob operation. When a
+	// retry strategy is specified here, it overrides the retry strategy defined in the
+	// job definition.
 	RetryStrategy *types.RetryStrategy
 
 	// The scheduling priority for the job. This only affects jobs in job queues with
@@ -137,8 +136,8 @@ type SubmitJobInput struct {
 	// finished. If a job is terminated due to a timeout, it isn't retried. The minimum
 	// value for the timeout is 60 seconds. This configuration overrides any timeout
 	// configuration specified in the job definition. For array jobs, child jobs have
-	// the same timeout configuration as the parent job. For more information, see
-	// Job Timeouts (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html)
+	// the same timeout configuration as the parent job. For more information, see Job
+	// Timeouts (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Timeout *types.JobTimeout
 

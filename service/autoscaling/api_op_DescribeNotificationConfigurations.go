@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the Amazon SNS notifications that are configured for
-// one or more Auto Scaling groups.
+// Gets information about the Amazon SNS notifications that are configured for one
+// or more Auto Scaling groups.
 func (c *Client) DescribeNotificationConfigurations(ctx context.Context, params *DescribeNotificationConfigurationsInput, optFns ...func(*Options)) (*DescribeNotificationConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeNotificationConfigurationsInput{}
@@ -132,15 +132,15 @@ type DescribeNotificationConfigurationsAPIClient interface {
 
 var _ DescribeNotificationConfigurationsAPIClient = (*Client)(nil)
 
-// DescribeNotificationConfigurationsPaginatorOptions is the paginator options
-// for DescribeNotificationConfigurations
+// DescribeNotificationConfigurationsPaginatorOptions is the paginator options for
+// DescribeNotificationConfigurations
 type DescribeNotificationConfigurationsPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

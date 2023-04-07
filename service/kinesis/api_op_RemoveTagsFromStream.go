@@ -14,8 +14,8 @@ import (
 // and cannot be recovered after this operation successfully completes. When
 // invoking this API, it is recommended you use the StreamARN input parameter
 // rather than the StreamName input parameter. If you specify a tag that does not
-// exist, it is ignored. RemoveTagsFromStream has a limit of five transactions
-// per second per account.
+// exist, it is ignored. RemoveTagsFromStream has a limit of five transactions per
+// second per account.
 func (c *Client) RemoveTagsFromStream(ctx context.Context, params *RemoveTagsFromStreamInput, optFns ...func(*Options)) (*RemoveTagsFromStreamOutput, error) {
 	if params == nil {
 		params = &RemoveTagsFromStreamInput{}

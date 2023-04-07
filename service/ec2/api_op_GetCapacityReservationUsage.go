@@ -76,13 +76,20 @@ type GetCapacityReservationUsageOutput struct {
 	// there are no more results to return.
 	NextToken *string
 
-	// The current state of the Capacity Reservation. A Capacity Reservation can be
-	// in one of the following states:
-	//     - active - The Capacity Reservation is active and the capacity is available for your use.
-	//     - expired - The Capacity Reservation expired automatically at the date and time specified in your request. The reserved capacity is no longer available for your use.
-	//     - cancelled - The Capacity Reservation was cancelled. The reserved capacity is no longer available for your use.
-	//     - pending - The Capacity Reservation request was successful but the capacity provisioning is still pending.
-	//     - failed - The Capacity Reservation request has failed. A request might fail due to invalid request parameters, capacity constraints, or instance limit constraints. Failed requests are retained for 60 minutes.
+	// The current state of the Capacity Reservation. A Capacity Reservation can be in
+	// one of the following states:
+	//   - active - The Capacity Reservation is active and the capacity is available
+	//   for your use.
+	//   - expired - The Capacity Reservation expired automatically at the date and
+	//   time specified in your request. The reserved capacity is no longer available for
+	//   your use.
+	//   - cancelled - The Capacity Reservation was cancelled. The reserved capacity is
+	//   no longer available for your use.
+	//   - pending - The Capacity Reservation request was successful but the capacity
+	//   provisioning is still pending.
+	//   - failed - The Capacity Reservation request has failed. A request might fail
+	//   due to invalid request parameters, capacity constraints, or instance limit
+	//   constraints. Failed requests are retained for 60 minutes.
 	State types.CapacityReservationState
 
 	// The number of instances for which the Capacity Reservation reserves capacity.

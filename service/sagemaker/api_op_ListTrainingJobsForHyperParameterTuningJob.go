@@ -40,12 +40,12 @@ type ListTrainingJobsForHyperParameterTuningJobInput struct {
 	MaxResults *int32
 
 	// If the result of the previous ListTrainingJobsForHyperParameterTuningJob
-	// request was truncated, the response includes a NextToken. To retrieve the next
+	// request was truncated, the response includes a NextToken . To retrieve the next
 	// set of training jobs, use the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is Name. If the value of this field
-	// is FinalObjectiveMetricValue, any training jobs that did not return an
+	// The field to sort results by. The default is Name . If the value of this field
+	// is FinalObjectiveMetricValue , any training jobs that did not return an
 	// objective metric are not listed.
 	SortBy types.TrainingJobSortByOptions
 
@@ -60,14 +60,14 @@ type ListTrainingJobsForHyperParameterTuningJobInput struct {
 
 type ListTrainingJobsForHyperParameterTuningJobOutput struct {
 
-	// A list of TrainingJobSummary  objects that describe the training jobs that the
+	// A list of TrainingJobSummary objects that describe the training jobs that the
 	// ListTrainingJobsForHyperParameterTuningJob request returned.
 	//
 	// This member is required.
 	TrainingJobSummaries []types.HyperParameterTrainingJobSummary
 
 	// If the result of this ListTrainingJobsForHyperParameterTuningJob request was
-	// truncated, the response includes a NextToken. To retrieve the next set of
+	// truncated, the response includes a NextToken . To retrieve the next set of
 	// training jobs, use the token in the next request.
 	NextToken *string
 
@@ -140,8 +140,8 @@ func (c *Client) addOperationListTrainingJobsForHyperParameterTuningJobMiddlewar
 	return nil
 }
 
-// ListTrainingJobsForHyperParameterTuningJobAPIClient is a client that
-// implements the ListTrainingJobsForHyperParameterTuningJob operation.
+// ListTrainingJobsForHyperParameterTuningJobAPIClient is a client that implements
+// the ListTrainingJobsForHyperParameterTuningJob operation.
 type ListTrainingJobsForHyperParameterTuningJobAPIClient interface {
 	ListTrainingJobsForHyperParameterTuningJob(context.Context, *ListTrainingJobsForHyperParameterTuningJobInput, ...func(*Options)) (*ListTrainingJobsForHyperParameterTuningJobOutput, error)
 }
@@ -154,8 +154,8 @@ type ListTrainingJobsForHyperParameterTuningJobPaginatorOptions struct {
 	// The maximum number of training jobs to return. The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

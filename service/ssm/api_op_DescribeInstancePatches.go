@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the patches on the specified managed node and
-// their state relative to the patch baseline being used for the node.
+// Retrieves information about the patches on the specified managed node and their
+// state relative to the patch baseline being used for the node.
 func (c *Client) DescribeInstancePatches(ctx context.Context, params *DescribeInstancePatchesInput, optFns ...func(*Options)) (*DescribeInstancePatchesOutput, error) {
 	if params == nil {
 		params = &DescribeInstancePatchesInput{}
@@ -36,12 +36,12 @@ type DescribeInstancePatchesInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// Each element in the array is a structure containing a key-value pair.
-	// Supported keys for DescribeInstancePatches include the following:
-	//     - Classification Sample values: Security | SecurityUpdates
-	//     - KBId Sample values: KB4480056 | java-1.7.0-openjdk.x86_64
-	//     - Severity Sample values: Important | Medium | Low
-	//     - State Sample values: Installed | InstalledOther | InstalledPendingReboot
+	// Each element in the array is a structure containing a key-value pair. Supported
+	// keys for DescribeInstancePatches include the following:
+	//   - Classification Sample values: Security | SecurityUpdates
+	//   - KBId Sample values: KB4480056 | java-1.7.0-openjdk.x86_64
+	//   - Severity Sample values: Important | Medium | Low
+	//   - State Sample values: Installed | InstalledOther | InstalledPendingReboot
 	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patches to return (per page).
@@ -61,13 +61,13 @@ type DescribeInstancePatchesOutput struct {
 	NextToken *string
 
 	// Each entry in the array is a structure containing:
-	//     - Title (string)
-	//     - KBId (string)
-	//     - Classification (string)
-	//     - Severity (string)
-	//     - State (string, such as "INSTALLED" or "FAILED")
-	//     - InstalledTime (DateTime)
-	//     - InstalledBy (string)
+	//   - Title (string)
+	//   - KBId (string)
+	//   - Classification (string)
+	//   - Severity (string)
+	//   - State (string, such as "INSTALLED" or "FAILED")
+	//   - InstalledTime (DateTime)
+	//   - InstalledBy (string)
 	Patches []types.PatchComplianceData
 
 	// Metadata pertaining to the operation's result.
@@ -153,8 +153,8 @@ type DescribeInstancePatchesPaginatorOptions struct {
 	// The maximum number of patches to return (per page).
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -19,8 +19,10 @@ import (
 // . If an error is thrown after invoking a Kinesis Video Streams archived media
 // API, in addition to the HTTP status code and the response body, it includes the
 // following pieces of information:
-//   - x-amz-ErrorType HTTP header – contains a more specific error type in addition to what the HTTP status code provides.
-//   - x-amz-RequestId HTTP header – if you want to report an issue to AWS, the support team can better diagnose the problem if given the Request Id.
+//   - x-amz-ErrorType HTTP header – contains a more specific error type in
+//     addition to what the HTTP status code provides.
+//   - x-amz-RequestId HTTP header – if you want to report an issue to AWS, the
+//     support team can better diagnose the problem if given the Request Id.
 //
 // Both the HTTP status code and the ErrorType header can be utilized to make
 // programmatic decisions about whether errors are retry-able and under what
@@ -52,11 +54,11 @@ type GetMediaForFragmentListInput struct {
 	Fragments []string
 
 	// The Amazon Resource Name (ARN) of the stream from which to retrieve fragment
-	// media. Specify either this parameter or the StreamName  parameter.
+	// media. Specify either this parameter or the StreamName parameter.
 	StreamARN *string
 
 	// The name of the stream from which to retrieve fragment media. Specify either
-	// this parameter or the StreamARN  parameter.
+	// this parameter or the StreamARN parameter.
 	StreamName *string
 
 	noSmithyDocumentSerde
@@ -67,18 +69,20 @@ type GetMediaForFragmentListOutput struct {
 	// The content type of the requested media.
 	ContentType *string
 
-	// The payload that Kinesis Video Streams returns is a sequence of chunks from
-	// the specified stream. For information about the chunks, see PutMedia (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html)
+	// The payload that Kinesis Video Streams returns is a sequence of chunks from the
+	// specified stream. For information about the chunks, see PutMedia (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html)
 	// . The chunks that Kinesis Video Streams returns in the GetMediaForFragmentList
 	// call also include the following additional Matroska (MKV) tags:
-	//     - AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the chunk.
-	//     - AWS_KINESISVIDEO_SERVER_SIDE_TIMESTAMP - Server-side timestamp of the fragment.
-	//     - AWS_KINESISVIDEO_PRODUCER_SIDE_TIMESTAMP - Producer-side timestamp of the fragment.
-	//
+	//   - AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the chunk.
+	//   - AWS_KINESISVIDEO_SERVER_SIDE_TIMESTAMP - Server-side timestamp of the
+	//   fragment.
+	//   - AWS_KINESISVIDEO_PRODUCER_SIDE_TIMESTAMP - Producer-side timestamp of the
+	//   fragment.
 	// The following tags will be included if an exception occurs:
-	//     - AWS_KINESISVIDEO_FRAGMENT_NUMBER - The number of the fragment that threw the exception
-	//     - AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The integer code of the exception
-	//     - AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text description of the exception
+	//   - AWS_KINESISVIDEO_FRAGMENT_NUMBER - The number of the fragment that threw
+	//   the exception
+	//   - AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The integer code of the exception
+	//   - AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text description of the exception
 	Payload io.ReadCloser
 
 	// Metadata pertaining to the operation's result.

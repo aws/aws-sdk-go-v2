@@ -44,7 +44,7 @@ type BatchDeleteDelegationByAssessmentInput struct {
 
 type BatchDeleteDelegationByAssessmentOutput struct {
 
-	// A list of errors that the BatchDeleteDelegationByAssessment  API returned.
+	// A list of errors that the BatchDeleteDelegationByAssessment API returned.
 	Errors []types.BatchDeleteDelegationByAssessmentError
 
 	// Metadata pertaining to the operation's result.

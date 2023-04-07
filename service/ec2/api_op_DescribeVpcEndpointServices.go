@@ -15,8 +15,8 @@ import (
 // service provider and the consumer have different accounts in multiple
 // Availability Zones, and the consumer views the VPC endpoint service information,
 // the response only includes the common Availability Zones. For example, when the
-// service provider account uses us-east-1a  and us-east-1c  and the consumer uses
-// us-east-1a and us-east-1b, the response includes the VPC endpoint services in
+// service provider account uses us-east-1a and us-east-1c and the consumer uses
+// us-east-1a and us-east-1b , the response includes the VPC endpoint services in
 // the common Availability Zone, us-east-1a .
 func (c *Client) DescribeVpcEndpointServices(ctx context.Context, params *DescribeVpcEndpointServicesInput, optFns ...func(*Options)) (*DescribeVpcEndpointServicesOutput, error) {
 	if params == nil {
@@ -42,12 +42,18 @@ type DescribeVpcEndpointServicesInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - owner - The ID or alias of the Amazon Web Services account that owns the service.
-	//     - service-name - The name of the service.
-	//     - service-type - The type of service ( Interface | Gateway | GatewayLoadBalancer ).
-	//     - supported-ip-address-types - The IP address type ( ipv4 | ipv6 ).
-	//     - tag : - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
-	//     - tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - owner - The ID or alias of the Amazon Web Services account that owns the
+	//   service.
+	//   - service-name - The name of the service.
+	//   - service-type - The type of service ( Interface | Gateway |
+	//   GatewayLoadBalancer ).
+	//   - supported-ip-address-types - The IP address type ( ipv4 | ipv6 ).
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. The request returns a

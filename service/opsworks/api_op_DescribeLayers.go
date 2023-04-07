@@ -34,9 +34,9 @@ func (c *Client) DescribeLayers(ctx context.Context, params *DescribeLayersInput
 
 type DescribeLayersInput struct {
 
-	// An array of layer IDs that specify the layers to be described. If you omit
-	// this parameter, DescribeLayers returns a description of every layer in the
-	// specified stack.
+	// An array of layer IDs that specify the layers to be described. If you omit this
+	// parameter, DescribeLayers returns a description of every layer in the specified
+	// stack.
 	LayerIds []string
 
 	// The stack ID.
@@ -45,10 +45,10 @@ type DescribeLayersInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeLayers  request.
+// Contains the response to a DescribeLayers request.
 type DescribeLayersOutput struct {
 
-	// An array of Layer  objects that describe the layers.
+	// An array of Layer objects that describe the layers.
 	Layers []types.Layer
 
 	// Metadata pertaining to the operation's result.

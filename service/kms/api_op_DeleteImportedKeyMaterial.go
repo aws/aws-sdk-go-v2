@@ -15,7 +15,7 @@ import (
 // into KMS, see Importing Key Material (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
 // in the Key Management Service Developer Guide. When the specified KMS key is in
 // the PendingDeletion state, this operation does not change the KMS key's state.
-// Otherwise, it changes the KMS key's state to PendingImport. After you delete
+// Otherwise, it changes the KMS key's state to PendingImport . After you delete
 // key material, you can use ImportKeyMaterial to reimport the same key material
 // into the KMS key. The KMS key that you use for this operation must be in a
 // compatible key state. For details, see Key states of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
@@ -43,12 +43,12 @@ func (c *Client) DeleteImportedKeyMaterial(ctx context.Context, params *DeleteIm
 type DeleteImportedKeyMaterialInput struct {
 
 	// Identifies the KMS key from which you are deleting imported key material. The
-	// Origin of the KMS key must be EXTERNAL. Specify the key ID or key ARN of the
+	// Origin of the KMS key must be EXTERNAL . Specify the key ID or key ARN of the
 	// KMS key. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey .
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey .
 	//
 	// This member is required.
 	KeyId *string

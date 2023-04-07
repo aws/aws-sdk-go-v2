@@ -37,7 +37,7 @@ type UpdateLinkAttributesInput struct {
 	AttributeUpdates []types.LinkAttributeUpdate
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// updated typed link resides. For more information, see arns  or Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
+	// updated typed link resides. For more information, see arns or Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
 	// .
 	//
 	// This member is required.

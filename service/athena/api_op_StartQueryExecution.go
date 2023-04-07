@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Runs the SQL query statements contained in the Query. Requires you to have
+// Runs the SQL query statements contained in the Query . Requires you to have
 // access to the workgroup in which the query ran. Running queries against an
 // external catalog requires GetDataCatalog permission to the catalog. For code
 // samples using the Amazon Web Services SDK for Java, see Examples and Code
-// Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html)in the
+// Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the
 // Amazon Athena User Guide.
 func (c *Client) StartQueryExecution(ctx context.Context, params *StartQueryExecutionInput, optFns ...func(*Options)) (*StartQueryExecutionOutput, error) {
 	if params == nil {
@@ -43,11 +43,11 @@ type StartQueryExecutionInput struct {
 	// A unique case-sensitive string used to ensure the request to create the query
 	// is idempotent (executes only once). If another StartQueryExecution request is
 	// received, the same response is returned and another query is not created. If a
-	// parameter has changed, for example, the QueryString, an error is returned.
-	// This token is listed as not required because Amazon Web Services SDKs (for
-	// example the Amazon Web Services SDK for Java) auto-generate the token for users.
-	// If you are not using the Amazon Web Services SDK or the Amazon Web Services CLI,
-	// you must provide this token or the action will fail.
+	// parameter has changed, for example, the QueryString , an error is returned. This
+	// token is listed as not required because Amazon Web Services SDKs (for example
+	// the Amazon Web Services SDK for Java) auto-generate the token for users. If you
+	// are not using the Amazon Web Services SDK or the Amazon Web Services CLI, you
+	// must provide this token or the action will fail.
 	ClientRequestToken *string
 
 	// A list of values for the parameters in a query. The values are applied

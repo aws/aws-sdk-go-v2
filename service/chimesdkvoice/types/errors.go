@@ -119,8 +119,8 @@ func (e *ForbiddenException) ErrorCode() string {
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Access to the target resource is no longer available at the origin server.
-// This condition is likely to be permanent.
+// Access to the target resource is no longer available at the origin server. This
+// condition is likely to be permanent.
 type GoneException struct {
 	Message *string
 

@@ -41,7 +41,7 @@ type UpdateHttpNamespaceInput struct {
 	Namespace *types.HttpNamespaceChange
 
 	// A unique string that identifies the request and that allows failed
-	// UpdateHttpNamespacerequests to be retried without the risk of running the
+	// UpdateHttpNamespace requests to be retried without the risk of running the
 	// operation twice. UpdaterRequestId can be any unique string (for example, a
 	// date/timestamp).
 	UpdaterRequestId *string

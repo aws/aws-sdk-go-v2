@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a user under an Amazon Chime AppInstance. The request consists of a
-// unique appInstanceUserId  and Name  for that user.
+// Creates a user under an Amazon Chime AppInstance . The request consists of a
+// unique appInstanceUserId and Name for that user.
 func (c *Client) CreateAppInstanceUser(ctx context.Context, params *CreateAppInstanceUserInput, optFns ...func(*Options)) (*CreateAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &CreateAppInstanceUserInput{}
@@ -31,7 +31,7 @@ func (c *Client) CreateAppInstanceUser(ctx context.Context, params *CreateAppIns
 
 type CreateAppInstanceUserInput struct {
 
-	// The ARN of the AppInstance  request.
+	// The ARN of the AppInstance request.
 	//
 	// This member is required.
 	AppInstanceArn *string

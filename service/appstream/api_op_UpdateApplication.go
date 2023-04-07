@@ -29,8 +29,8 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 type UpdateApplicationInput struct {
 
-	// The name of the application. This name is visible to users when display name
-	// is not specified.
+	// The name of the application. This name is visible to users when display name is
+	// not specified.
 	//
 	// This member is required.
 	Name *string

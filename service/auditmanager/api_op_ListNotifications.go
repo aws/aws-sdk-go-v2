@@ -121,14 +121,13 @@ type ListNotificationsAPIClient interface {
 
 var _ ListNotificationsAPIClient = (*Client)(nil)
 
-// ListNotificationsPaginatorOptions is the paginator options for
-// ListNotifications
+// ListNotificationsPaginatorOptions is the paginator options for ListNotifications
 type ListNotificationsPaginatorOptions struct {
 	// Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

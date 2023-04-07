@@ -27,7 +27,7 @@ func (c *Client) UpdatePackage(ctx context.Context, params *UpdatePackageInput, 
 	return out, nil
 }
 
-// Container for request parameters to UpdatePackage  operation.
+// Container for request parameters to UpdatePackage operation.
 type UpdatePackageInput struct {
 
 	// Unique identifier for the package.
@@ -35,7 +35,7 @@ type UpdatePackageInput struct {
 	// This member is required.
 	PackageID *string
 
-	// The S3 location for importing the package specified as S3BucketName  and S3Key
+	// The S3 location for importing the package specified as S3BucketName and S3Key
 	//
 	// This member is required.
 	PackageSource *types.PackageSource
@@ -50,7 +50,7 @@ type UpdatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response returned by UpdatePackage  operation.
+// Container for response returned by UpdatePackage operation.
 type UpdatePackageOutput struct {
 
 	// Information about the package PackageDetails .

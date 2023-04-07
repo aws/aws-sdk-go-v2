@@ -37,10 +37,9 @@ type ListCertificatesInput struct {
 	// The maximum number of certificates to return.
 	MaxResults *int32
 
-	// When you can get additional results from the ListCertificates  call, a
-	// NextTokenparameter is returned in the output. You can then pass in a
-	// subsequent command to the NextToken parameter to continue listing additional
-	// certificates.
+	// When you can get additional results from the ListCertificates call, a NextToken
+	// parameter is returned in the output. You can then pass in a subsequent command
+	// to the NextToken parameter to continue listing additional certificates.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -136,8 +135,8 @@ type ListCertificatesPaginatorOptions struct {
 	// The maximum number of certificates to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

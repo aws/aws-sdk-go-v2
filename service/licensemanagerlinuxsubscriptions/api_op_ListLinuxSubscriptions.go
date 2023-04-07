@@ -39,11 +39,11 @@ type ListLinuxSubscriptionsInput struct {
 	// filter by the name of Subscription with an optional operator to see
 	// subscriptions that match, partially match, or don't match a certain
 	// subscription's name. The valid names for this filter are:
-	//     - Subscription
-	//  The valid Operators for this filter are:
-	//     - contains
-	//     - equals
-	//     - Notequal
+	//   - Subscription
+	// The valid Operators for this filter are:
+	//   - contains
+	//   - equals
+	//   - Notequal
 	Filters []types.Filter
 
 	// Maximum number of results to return in a single call.
@@ -143,8 +143,8 @@ type ListLinuxSubscriptionsPaginatorOptions struct {
 	// Maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -157,8 +157,7 @@ type ListLinuxSubscriptionsPaginator struct {
 	firstPage bool
 }
 
-// NewListLinuxSubscriptionsPaginator returns a new
-// ListLinuxSubscriptionsPaginator
+// NewListLinuxSubscriptionsPaginator returns a new ListLinuxSubscriptionsPaginator
 func NewListLinuxSubscriptionsPaginator(client ListLinuxSubscriptionsAPIClient, params *ListLinuxSubscriptionsInput, optFns ...func(*ListLinuxSubscriptionsPaginatorOptions)) *ListLinuxSubscriptionsPaginator {
 	if params == nil {
 		params = &ListLinuxSubscriptionsInput{}

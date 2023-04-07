@@ -28,7 +28,7 @@ func (c *Client) DescribeInstanceTypeLimits(ctx context.Context, params *Describ
 	return out, nil
 }
 
-// Container for the parameters to the DescribeInstanceTypeLimits  operation.
+// Container for the parameters to the DescribeInstanceTypeLimits operation.
 type DescribeInstanceTypeLimitsInput struct {
 
 	// Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or
@@ -54,7 +54,7 @@ type DescribeInstanceTypeLimitsInput struct {
 type DescribeInstanceTypeLimitsOutput struct {
 
 	// Map that contains all applicable instance type limits. data refers to data
-	// nodes. master  refers to dedicated master nodes.
+	// nodes. master refers to dedicated master nodes.
 	LimitsByRole map[string]types.Limits
 
 	// Metadata pertaining to the operation's result.

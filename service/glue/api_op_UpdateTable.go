@@ -35,7 +35,7 @@ type UpdateTableInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// An updated TableInput  object to define the metadata table in the catalog.
+	// An updated TableInput object to define the metadata table in the catalog.
 	//
 	// This member is required.
 	TableInput *types.TableInput
@@ -45,7 +45,7 @@ type UpdateTableInput struct {
 	CatalogId *string
 
 	// By default, UpdateTable always creates an archived version of the table before
-	// updating it. However, if skipArchive  is set to true, UpdateTable does not
+	// updating it. However, if skipArchive is set to true, UpdateTable does not
 	// create the archived version.
 	SkipArchive *bool
 

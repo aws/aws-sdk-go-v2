@@ -129,15 +129,14 @@ type ListRulesPackagesAPIClient interface {
 
 var _ ListRulesPackagesAPIClient = (*Client)(nil)
 
-// ListRulesPackagesPaginatorOptions is the paginator options for
-// ListRulesPackages
+// ListRulesPackagesPaginatorOptions is the paginator options for ListRulesPackages
 type ListRulesPackagesPaginatorOptions struct {
 	// You can use this parameter to indicate the maximum number of items you want in
 	// the response. The default value is 10. The maximum value is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the custom component name and/or the list of resources that make up
-// the component.
+// Updates the custom component name and/or the list of resources that make up the
+// component.
 func (c *Client) UpdateComponent(ctx context.Context, params *UpdateComponentInput, optFns ...func(*Options)) (*UpdateComponentOutput, error) {
 	if params == nil {
 		params = &UpdateComponentInput{}

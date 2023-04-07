@@ -33,10 +33,10 @@ type AssociateResourceSharePermissionInput struct {
 
 	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the RAM permission to associate with the resource share. To find the ARN for
-	// a permission, use either the ListPermissions  operation or go to the
-	// Permissions library (https://console.aws.amazon.com/ram/home#Permissions:)page
-	// in the RAM console and then choose the name of the permission. The ARN is
-	// displayed on the detail page.
+	// a permission, use either the ListPermissions operation or go to the Permissions
+	// library (https://console.aws.amazon.com/ram/home#Permissions:) page in the RAM
+	// console and then choose the name of the permission. The ARN is displayed on the
+	// detail page.
 	//
 	// This member is required.
 	PermissionArn *string
@@ -63,13 +63,12 @@ type AssociateResourceSharePermissionInput struct {
 	PermissionVersion *int32
 
 	// Specifies whether the specified permission should replace or add to the
-	// existing permission associated with the resource share. Use true to replace
-	// the current permissions. Use false to add the permission to the current
-	// permission. The default value is false. A resource share can have only one
-	// permission per resource type. If a resource share already has a permission for
-	// the specified resource type and you don't set replace  to true then the
-	// operation returns an error. This helps prevent accidental overwriting of a
-	// permission.
+	// existing permission associated with the resource share. Use true to replace the
+	// current permissions. Use false to add the permission to the current permission.
+	// The default value is false . A resource share can have only one permission per
+	// resource type. If a resource share already has a permission for the specified
+	// resource type and you don't set replace to true then the operation returns an
+	// error. This helps prevent accidental overwriting of a permission.
 	Replace *bool
 
 	noSmithyDocumentSerde
@@ -79,11 +78,11 @@ type AssociateResourceSharePermissionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
 	// the same operation in an idempotent manner then you must include this value in
-	// the clientToken request parameter of that later call. All other parameters
-	// must also have the same values that you used in the first call.
+	// the clientToken request parameter of that later call. All other parameters must
+	// also have the same values that you used in the first call.
 	ClientToken *string
 
-	// A return value of true  indicates that the request succeeded. A value of false
+	// A return value of true indicates that the request succeeded. A value of false
 	// indicates that the request failed.
 	ReturnValue *bool
 

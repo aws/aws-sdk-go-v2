@@ -30,13 +30,13 @@ func (c *Client) ModifyBackupAttributes(ctx context.Context, params *ModifyBacku
 type ModifyBackupAttributesInput struct {
 
 	// The identifier (ID) of the backup to modify. To find the ID of a backup, use
-	// the DescribeBackups  operation.
+	// the DescribeBackups operation.
 	//
 	// This member is required.
 	BackupId *string
 
 	// Specifies whether the service should exempt a backup from the retention policy
-	// for the cluster. True  exempts a backup from the retention policy. False means
+	// for the cluster. True exempts a backup from the retention policy. False means
 	// the service applies the backup retention policy defined at the cluster.
 	//
 	// This member is required.

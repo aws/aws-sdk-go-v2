@@ -35,13 +35,13 @@ func (c *Client) UpdateFlowTemplate(ctx context.Context, params *UpdateFlowTempl
 
 type UpdateFlowTemplateInput struct {
 
-	// The DefinitionDocument  that contains the updated workflow definition.
+	// The DefinitionDocument that contains the updated workflow definition.
 	//
 	// This member is required.
 	Definition *types.DefinitionDocument
 
-	// The ID of the workflow to be updated. The ID should be in the following
-	// format. urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
+	// The ID of the workflow to be updated. The ID should be in the following format.
+	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
 	//
 	// This member is required.
 	Id *string

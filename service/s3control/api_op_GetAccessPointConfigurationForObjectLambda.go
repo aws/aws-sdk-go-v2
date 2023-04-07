@@ -41,8 +41,8 @@ type GetAccessPointConfigurationForObjectLambdaInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The name of the Object Lambda Access Point you want to return the
-	// configuration for.
+	// The name of the Object Lambda Access Point you want to return the configuration
+	// for.
 	//
 	// This member is required.
 	Name *string

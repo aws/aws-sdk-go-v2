@@ -189,8 +189,8 @@ type RecoveryGroupOutput struct {
 // The resource element of a resource set.
 type Resource struct {
 
-	// The component identifier of the resource, generated when DNS target resource
-	// is used.
+	// The component identifier of the resource, generated when DNS target resource is
+	// used.
 	ComponentId *string
 
 	// The DNS target resource.

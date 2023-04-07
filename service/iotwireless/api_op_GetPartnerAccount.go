@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a partner account. If PartnerAccountId  and PartnerType
+// Gets information about a partner account. If PartnerAccountId and PartnerType
 // are null , returns all partner accounts.
 func (c *Client) GetPartnerAccount(ctx context.Context, params *GetPartnerAccountInput, optFns ...func(*Options)) (*GetPartnerAccountOutput, error) {
 	if params == nil {

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of connector-profile  details matching the provided
-// connector-profile names and connector-types. Both input lists are optional,
-// and you can use them to filter the result. If no names or connector-types are
+// Returns a list of connector-profile details matching the provided
+// connector-profile names and connector-types . Both input lists are optional, and
+// you can use them to filter the result. If no names or connector-types are
 // provided, returns all connector profiles in a paginated form. If there is no
 // match, this operation returns an empty list.
 func (c *Client) DescribeConnectorProfiles(ctx context.Context, params *DescribeConnectorProfilesInput, optFns ...func(*Options)) (*DescribeConnectorProfilesOutput, error) {
@@ -34,8 +34,8 @@ func (c *Client) DescribeConnectorProfiles(ctx context.Context, params *Describe
 
 type DescribeConnectorProfilesInput struct {
 
-	// The name of the connector. The name is unique for each ConnectorRegistration
-	// in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR
+	// The name of the connector. The name is unique for each ConnectorRegistration in
+	// your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR
 	// connector type/.
 	ConnectorLabel *string
 
@@ -47,7 +47,7 @@ type DescribeConnectorProfilesInput struct {
 	ConnectorType types.ConnectorType
 
 	// Specifies the maximum number of items that should be returned in the result
-	// set. The default for maxResults  is 20 (for all paginated API operations).
+	// set. The default for maxResults is 20 (for all paginated API operations).
 	MaxResults *int32
 
 	// The pagination token for the next page of data.
@@ -61,7 +61,7 @@ type DescribeConnectorProfilesOutput struct {
 	// Returns information about the connector profiles associated with the flow.
 	ConnectorProfileDetails []types.ConnectorProfile
 
-	// The pagination token for the next page of data. If nextToken=null, this means
+	// The pagination token for the next page of data. If nextToken=null , this means
 	// that all records have been fetched.
 	NextToken *string
 
@@ -143,11 +143,11 @@ var _ DescribeConnectorProfilesAPIClient = (*Client)(nil)
 // DescribeConnectorProfiles
 type DescribeConnectorProfilesPaginatorOptions struct {
 	// Specifies the maximum number of items that should be returned in the result
-	// set. The default for maxResults  is 20 (for all paginated API operations).
+	// set. The default for maxResults is 20 (for all paginated API operations).
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

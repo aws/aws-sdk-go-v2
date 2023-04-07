@@ -30,8 +30,8 @@ const (
 	BusinessReportFormatCsvZip BusinessReportFormat = "CSV_ZIP"
 )
 
-// Values returns all known values for BusinessReportFormat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for BusinessReportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (BusinessReportFormat) Values() []BusinessReportFormat {
 	return []BusinessReportFormat{
@@ -69,8 +69,8 @@ const (
 	BusinessReportStatusFailed    BusinessReportStatus = "FAILED"
 )
 
-// Values returns all known values for BusinessReportStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for BusinessReportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (BusinessReportStatus) Values() []BusinessReportStatus {
 	return []BusinessReportStatus{
@@ -302,8 +302,8 @@ const (
 	EnablementTypeFilterPending EnablementTypeFilter = "PENDING"
 )
 
-// Values returns all known values for EnablementTypeFilter. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for EnablementTypeFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EnablementTypeFilter) Values() []EnablementTypeFilter {
 	return []EnablementTypeFilter{
@@ -584,9 +584,9 @@ const (
 	WakeWordComputer WakeWord = "COMPUTER"
 )
 
-// Values returns all known values for WakeWord. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WakeWord. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (WakeWord) Values() []WakeWord {
 	return []WakeWord{
 		"ALEXA",

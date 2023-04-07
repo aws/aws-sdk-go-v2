@@ -27,7 +27,7 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 	return out, nil
 }
 
-// Represents the input of a CreateDeployment  operation.
+// Represents the input of a CreateDeployment operation.
 type CreateDeploymentInput struct {
 
 	// The name of an CodeDeploy application associated with the IAM user or Amazon
@@ -55,23 +55,25 @@ type CreateDeploymentInput struct {
 
 	// Information about how CodeDeploy handles files that already exist in a
 	// deployment target location but weren't part of the previous successful
-	// deployment. The fileExistsBehavior parameter takes any of the following
-	// values:
-	//     - DISALLOW: The deployment fails. This is also the default behavior if no option is specified.
-	//     - OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.
-	//     - RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.
+	// deployment. The fileExistsBehavior parameter takes any of the following values:
+	//   - DISALLOW: The deployment fails. This is also the default behavior if no
+	//   option is specified.
+	//   - OVERWRITE: The version of the file from the application revision currently
+	//   being deployed replaces the version already on the instance.
+	//   - RETAIN: The version of the file already on the instance is kept and used as
+	//   part of the new deployment.
 	FileExistsBehavior types.FileExistsBehavior
 
 	// If true, then if an ApplicationStop , BeforeBlockTraffic , or AfterBlockTraffic
 	// deployment lifecycle event to an instance fails, then the deployment continues
 	// to the next deployment lifecycle event. For example, if ApplicationStop fails,
-	// the deployment continues with DownloadBundle . If BeforeBlockTraffic fails,
-	// the deployment continues with BlockTraffic . If AfterBlockTraffic fails, the
-	// deployment continues with ApplicationStop. If false or not specified, then if
-	// a lifecycle event fails during a deployment to an instance, that deployment
-	// fails. If deployment to that instance is part of an overall deployment and the
-	// number of healthy hosts is not less than the minimum number of healthy hosts,
-	// then a deployment to the next instance is attempted. During a deployment, the
+	// the deployment continues with DownloadBundle . If BeforeBlockTraffic fails, the
+	// deployment continues with BlockTraffic . If AfterBlockTraffic fails, the
+	// deployment continues with ApplicationStop . If false or not specified, then if a
+	// lifecycle event fails during a deployment to an instance, that deployment fails.
+	// If deployment to that instance is part of an overall deployment and the number
+	// of healthy hosts is not less than the minimum number of healthy hosts, then a
+	// deployment to the next instance is attempted. During a deployment, the
 	// CodeDeploy agent runs the scripts specified for ApplicationStop ,
 	// BeforeBlockTraffic , and AfterBlockTraffic in the AppSpec file from the
 	// previous successful deployment. (All other scripts are run from the AppSpec file
@@ -99,8 +101,8 @@ type CreateDeploymentInput struct {
 	// The type and location of the revision to deploy.
 	Revision *types.RevisionLocation
 
-	// Information about the instances that belong to the replacement environment in
-	// a blue/green deployment.
+	// Information about the instances that belong to the replacement environment in a
+	// blue/green deployment.
 	TargetInstances *types.TargetInstances
 
 	// Indicates whether to deploy to all instances or only to instances that are not
@@ -110,7 +112,7 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreateDeployment  operation.
+// Represents the output of a CreateDeployment operation.
 type CreateDeploymentOutput struct {
 
 	// The unique ID of a deployment.

@@ -128,8 +128,8 @@ type ListApplicationsPaginatorOptions struct {
 	// parameter is omitted, it defaults to 25. This value is optional.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

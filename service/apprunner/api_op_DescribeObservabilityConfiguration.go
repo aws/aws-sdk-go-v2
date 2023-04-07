@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a full description of an App Runner observability configuration
-// resource.
+// Return a full description of an App Runner observability configuration resource.
 func (c *Client) DescribeObservabilityConfiguration(ctx context.Context, params *DescribeObservabilityConfigurationInput, optFns ...func(*Options)) (*DescribeObservabilityConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeObservabilityConfigurationInput{}

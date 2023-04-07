@@ -12,17 +12,17 @@ import (
 	"time"
 )
 
-// Updates an event data store. The required EventDataStore value is an ARN or
-// the ID portion of the ARN. Other parameters are optional, but at least one
-// optional parameter must be specified, or CloudTrail throws an error.
-// RetentionPeriodis in days, and valid values are integers between 90 and 2557.
-// By default, TerminationProtection is enabled. For event data stores for
-// CloudTrail events, AdvancedEventSelectors includes or excludes management and
-// data events in your event data store. For more information about
-// AdvancedEventSelectors , see PutEventSelectorsRequest$AdvancedEventSelectors.
-// For event data stores for Config configuration items, Audit Manager evidence, or
-// non-Amazon Web Services events, AdvancedEventSelectors includes events of that
-// type in your event data store.
+// Updates an event data store. The required EventDataStore value is an ARN or the
+// ID portion of the ARN. Other parameters are optional, but at least one optional
+// parameter must be specified, or CloudTrail throws an error. RetentionPeriod is
+// in days, and valid values are integers between 90 and 2557. By default,
+// TerminationProtection is enabled. For event data stores for CloudTrail events,
+// AdvancedEventSelectors includes or excludes management and data events in your
+// event data store. For more information about AdvancedEventSelectors , see
+// PutEventSelectorsRequest$AdvancedEventSelectors . For event data stores for
+// Config configuration items, Audit Manager evidence, or non-Amazon Web Services
+// events, AdvancedEventSelectors includes events of that type in your event data
+// store.
 func (c *Client) UpdateEventDataStore(ctx context.Context, params *UpdateEventDataStoreInput, optFns ...func(*Options)) (*UpdateEventDataStoreOutput, error) {
 	if params == nil {
 		params = &UpdateEventDataStoreInput{}
@@ -51,7 +51,7 @@ type UpdateEventDataStoreInput struct {
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
 	// Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail.
-	// The value can be an alias name prefixed by alias/, a fully specified ARN to an
+	// The value can be an alias name prefixed by alias/ , a fully specified ARN to an
 	// alias, a fully specified ARN to a key, or a globally unique identifier.
 	// Disabling or deleting the KMS key, or removing CloudTrail permissions on the
 	// key, prevents CloudTrail from logging events to the event data store, and
@@ -62,14 +62,14 @@ type UpdateEventDataStoreInput struct {
 	// CloudTrail also supports KMS multi-Region keys. For more information about
 	// multi-Region keys, see Using multi-Region keys (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 	// in the Key Management Service Developer Guide. Examples:
-	//     - alias/MyAliasName
-	//     - arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
-	//     - arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
-	//     - 12345678-1234-1234-1234-123456789012
+	//   - alias/MyAliasName
+	//   - arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
+	//   - arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	//   - 12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
-	// Specifies whether an event data store collects events from all regions, or
-	// only from the region in which it was created.
+	// Specifies whether an event data store collects events from all regions, or only
+	// from the region in which it was created.
 	MultiRegionEnabled *bool
 
 	// The event data store name.
@@ -119,7 +119,7 @@ type UpdateEventDataStoreOutput struct {
 	// The retention period, in days.
 	RetentionPeriod *int32
 
-	// The status of an event data store. Values can be ENABLED  and PENDING_DELETION .
+	// The status of an event data store. Values can be ENABLED and PENDING_DELETION .
 	Status types.EventDataStoreStatus
 
 	// Indicates whether termination protection is enabled for the event data store.

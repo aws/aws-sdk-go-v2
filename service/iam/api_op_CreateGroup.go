@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new group. For information about the number of groups you can
-// create, see IAM and STS quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
+// Creates a new group. For information about the number of groups you can create,
+// see IAM and STS quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
 // in the IAM User Guide.
 func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optFns ...func(*Options)) (*CreateGroupOutput, error) {
 	if params == nil {
@@ -44,14 +44,14 @@ type CreateGroupInput struct {
 	// defaults to a slash (/). This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
 	// ) a string of characters consisting of either a forward slash (/) by itself or a
 	// string that must begin and end with forward slashes. In addition, it can contain
-	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F),
+	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F ),
 	// including most punctuation characters, digits, and upper and lowercased letters.
 	Path *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful CreateGroup  request.
+// Contains the response to a successful CreateGroup request.
 type CreateGroupOutput struct {
 
 	// A structure containing details about the new group.

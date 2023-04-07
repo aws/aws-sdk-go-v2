@@ -14,7 +14,7 @@ import (
 
 // Lists the platform versions available for your account in an AWS Region.
 // Provides summary information about each platform version. Compare to
-// DescribePlatformVersion, which provides full details about a single platform
+// DescribePlatformVersion , which provides full details about a single platform
 // version. For definitions of platform version and other platform-related terms,
 // see AWS Elastic Beanstalk Platforms Glossary (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html)
 // .
@@ -35,9 +35,8 @@ func (c *Client) ListPlatformVersions(ctx context.Context, params *ListPlatformV
 
 type ListPlatformVersionsInput struct {
 
-	// Criteria for restricting the resulting list of platform versions. The filter
-	// is interpreted as a logical conjunction (AND) of the separate PlatformFilter
-	// terms.
+	// Criteria for restricting the resulting list of platform versions. The filter is
+	// interpreted as a logical conjunction (AND) of the separate PlatformFilter terms.
 	Filters []types.PlatformFilter
 
 	// The maximum number of platform version values returned in one call.
@@ -54,7 +53,7 @@ type ListPlatformVersionsInput struct {
 
 type ListPlatformVersionsOutput struct {
 
-	// In a paginated request, if this value isn't null, it's the token that you can
+	// In a paginated request, if this value isn't null , it's the token that you can
 	// pass in a subsequent request to get the next response page.
 	NextToken *string
 
@@ -141,8 +140,8 @@ type ListPlatformVersionsPaginatorOptions struct {
 	// The maximum number of platform version values returned in one call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

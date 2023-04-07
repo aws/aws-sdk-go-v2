@@ -12,7 +12,7 @@ import (
 
 // Creates a Directory by copying the published schema into the directory. A
 // directory cannot be created without a schema. You can also quickly create a
-// directory using a managed schema, called the QuickStartSchema. For more
+// directory using a managed schema, called the QuickStartSchema . For more
 // information, see Managed Schema (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_managed.html)
 // in the Amazon Cloud Directory Developer Guide.
 func (c *Client) CreateDirectory(ctx context.Context, params *CreateDirectoryInput, optFns ...func(*Options)) (*CreateDirectoryOutput, error) {
@@ -37,8 +37,8 @@ type CreateDirectoryInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the published schema that will be copied
-	// into the data Directory . For more information, see arns .
+	// The Amazon Resource Name (ARN) of the published schema that will be copied into
+	// the data Directory . For more information, see arns .
 	//
 	// This member is required.
 	SchemaArn *string
@@ -48,7 +48,7 @@ type CreateDirectoryInput struct {
 
 type CreateDirectoryOutput struct {
 
-	// The ARN of the published schema in the Directory. Once a published schema is
+	// The ARN of the published schema in the Directory . Once a published schema is
 	// copied into the directory, it has its own ARN, which is referred to applied
 	// schema ARN. For more information, see arns .
 	//

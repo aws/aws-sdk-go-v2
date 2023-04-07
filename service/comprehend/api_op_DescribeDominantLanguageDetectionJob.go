@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the properties associated with a dominant language detection job. Use
-// this operation to get the status of a detection job.
+// Gets the properties associated with a dominant language detection job. Use this
+// operation to get the status of a detection job.
 func (c *Client) DescribeDominantLanguageDetectionJob(ctx context.Context, params *DescribeDominantLanguageDetectionJobInput, optFns ...func(*Options)) (*DescribeDominantLanguageDetectionJobOutput, error) {
 	if params == nil {
 		params = &DescribeDominantLanguageDetectionJobInput{}
@@ -31,7 +31,7 @@ func (c *Client) DescribeDominantLanguageDetectionJob(ctx context.Context, param
 type DescribeDominantLanguageDetectionJobInput struct {
 
 	// The identifier that Amazon Comprehend generated for the job. The
-	// StartDominantLanguageDetectionJoboperation returns this identifier in its
+	// StartDominantLanguageDetectionJob operation returns this identifier in its
 	// response.
 	//
 	// This member is required.

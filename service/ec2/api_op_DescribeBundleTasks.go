@@ -19,7 +19,7 @@ import (
 // Describes the specified bundle tasks or all of your bundle tasks. Completed
 // bundle tasks are listed for only a limited time. If your bundle task is no
 // longer in the list, you can still register an AMI from it. Just use
-// RegisterImagewith the Amazon S3 bucket name and image manifest name you
+// RegisterImage with the Amazon S3 bucket name and image manifest name you
 // provided to the bundle task.
 func (c *Client) DescribeBundleTasks(ctx context.Context, params *DescribeBundleTasksInput, optFns ...func(*Options)) (*DescribeBundleTasksOutput, error) {
 	if params == nil {
@@ -48,16 +48,18 @@ type DescribeBundleTasksInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - bundle-id - The ID of the bundle task.
-	//     - error-code - If the task failed, the error code returned.
-	//     - error-message - If the task failed, the error message returned.
-	//     - instance-id - The ID of the instance.
-	//     - progress - The level of task completion, as a percentage (for example, 20%).
-	//     - s3-bucket - The Amazon S3 bucket to store the AMI.
-	//     - s3-prefix - The beginning of the AMI name.
-	//     - start-time - The time the task started (for example, 2013-09-15T17:15:20.000Z).
-	//     - state - The state of the task ( pending | waiting-for-shutdown | bundling | storing | cancelling | complete | failed ).
-	//     - update-time - The time of the most recent update for the task.
+	//   - bundle-id - The ID of the bundle task.
+	//   - error-code - If the task failed, the error code returned.
+	//   - error-message - If the task failed, the error message returned.
+	//   - instance-id - The ID of the instance.
+	//   - progress - The level of task completion, as a percentage (for example, 20%).
+	//   - s3-bucket - The Amazon S3 bucket to store the AMI.
+	//   - s3-prefix - The beginning of the AMI name.
+	//   - start-time - The time the task started (for example,
+	//   2013-09-15T17:15:20.000Z).
+	//   - state - The state of the task ( pending | waiting-for-shutdown | bundling |
+	//   storing | cancelling | complete | failed ).
+	//   - update-time - The time of the most recent update for the task.
 	Filters []types.Filter
 
 	noSmithyDocumentSerde
@@ -197,9 +199,9 @@ func NewBundleTaskCompleteWaiter(client DescribeBundleTasksAPIClient, optFns ...
 	}
 }
 
-// Wait calls the waiter function for BundleTaskComplete waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for BundleTaskComplete waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *BundleTaskCompleteWaiter) Wait(ctx context.Context, params *DescribeBundleTasksInput, maxWaitDur time.Duration, optFns ...func(*BundleTaskCompleteWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

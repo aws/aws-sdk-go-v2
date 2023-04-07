@@ -27,7 +27,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	return out, nil
 }
 
-// The request object for the TagResource  operation.
+// The request object for the TagResource operation.
 type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon FSx resource that you want to tag.
@@ -44,7 +44,7 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response object for the TagResource  operation.
+// The response object for the TagResource operation.
 type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

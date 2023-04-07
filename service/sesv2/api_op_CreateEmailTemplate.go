@@ -30,8 +30,8 @@ func (c *Client) CreateEmailTemplate(ctx context.Context, params *CreateEmailTem
 	return out, nil
 }
 
-// Represents a request to create an email template. For more information, see
-// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// Represents a request to create an email template. For more information, see the
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
 // .
 type CreateEmailTemplateInput struct {
 

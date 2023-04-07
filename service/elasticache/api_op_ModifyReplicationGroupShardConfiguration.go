@@ -28,7 +28,7 @@ func (c *Client) ModifyReplicationGroupShardConfiguration(ctx context.Context, p
 	return out, nil
 }
 
-// Represents the input for a ModifyReplicationGroupShardConfiguration  operation.
+// Represents the input for a ModifyReplicationGroupShardConfiguration operation.
 type ModifyReplicationGroupShardConfigurationInput struct {
 
 	// Indicates that the shard reconfiguration process begins immediately. At
@@ -50,17 +50,17 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 	ReplicationGroupId *string
 
 	// If the value of NodeGroupCount is less than the current number of node groups
-	// (shards), then either NodeGroupsToRemove  or NodeGroupsToRetain  is required.
-	// NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster.
+	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
+	// NodeGroupsToRemove is a list of NodeGroupId s to remove from the cluster.
 	// ElastiCache for Redis will attempt to remove all node groups listed by
 	// NodeGroupsToRemove from the cluster.
 	NodeGroupsToRemove []string
 
 	// If the value of NodeGroupCount is less than the current number of node groups
-	// (shards), then either NodeGroupsToRemove  or NodeGroupsToRetain  is required.
-	// NodeGroupsToRetain is a list of NodeGroupIds to retain in the cluster.
+	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
+	// NodeGroupsToRetain is a list of NodeGroupId s to retain in the cluster.
 	// ElastiCache for Redis will attempt to remove all node groups except those listed
-	// by NodeGroupsToRetain  from the cluster.
+	// by NodeGroupsToRetain from the cluster.
 	NodeGroupsToRetain []string
 
 	// Specifies the preferred availability zones for each node group in the cluster.

@@ -41,8 +41,8 @@ type ListResourcesForWebACLInput struct {
 	// This member is required.
 	WebACLId *string
 
-	// The type of resource to list, either an application load balancer or Amazon
-	// API Gateway.
+	// The type of resource to list, either an application load balancer or Amazon API
+	// Gateway.
 	ResourceType types.ResourceType
 
 	noSmithyDocumentSerde

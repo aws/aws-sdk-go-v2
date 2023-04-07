@@ -14,9 +14,9 @@ import (
 
 // Lists the account creation requests that match the specified status that is
 // currently being tracked for the organization. Always check the NextToken
-// response parameter for a null  value when calling a List* operation. These
+// response parameter for a null value when calling a List* operation. These
 // operations can occasionally return an empty set of results even when there are
-// more results available. The NextToken  response parameter value is null only
+// more results available. The NextToken response parameter value is null only
 // when there are no more results to display. This operation can be called only
 // from the organization's management account or by a member account that is a
 // delegated administrator for an Amazon Web Services service.
@@ -49,9 +49,9 @@ type ListCreateAccountStatusInput struct {
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more
-	// output is available. Set this parameter to the value of the previous call's
-	// NextToken response to indicate where the output should continue from.
+	// response in a previous request. A NextToken response indicates that more output
+	// is available. Set this parameter to the value of the previous call's NextToken
+	// response to indicate where the output should continue from.
 	NextToken *string
 
 	// A list of one or more states that you want included in the response. If this
@@ -71,7 +71,7 @@ type ListCreateAccountStatusOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken  response element comes back as null .
+	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -162,8 +162,8 @@ type ListCreateAccountStatusPaginatorOptions struct {
 	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

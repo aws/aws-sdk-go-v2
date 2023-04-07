@@ -50,8 +50,8 @@ type EvaluationRequest struct {
 	noSmithyDocumentSerde
 }
 
-// This structure displays the results of one feature evaluation assignment to
-// one user session.
+// This structure displays the results of one feature evaluation assignment to one
+// user session.
 type EvaluationResult struct {
 
 	// An internal ID that represents a unique user session of the application.
@@ -74,7 +74,7 @@ type EvaluationResult struct {
 	Project *string
 
 	// Specifies the reason that the user session was assigned this variation.
-	// Possible values include DEFAULT, meaning the user was served the default
+	// Possible values include DEFAULT , meaning the user was served the default
 	// variation; LAUNCH_RULE_MATCH , if the user session was enrolled in a launch; or
 	// EXPERIMENT_RULE_MATCH , if the user session was enrolled in an experiment.
 	Reason *string
@@ -221,8 +221,7 @@ type Experiment struct {
 	noSmithyDocumentSerde
 }
 
-// This structure contains the date and time that the experiment started and
-// ended.
+// This structure contains the date and time that the experiment started and ended.
 type ExperimentExecution struct {
 
 	// The date and time that the experiment ended.
@@ -264,17 +263,17 @@ type ExperimentResultsData struct {
 	// The experiment statistic that these results pertain to.
 	ResultStat ExperimentResultResponseType
 
-	// The treatment, or variation, that returned the values  in this structure.
+	// The treatment, or variation, that returned the values in this structure.
 	TreatmentName *string
 
-	// The values for the metricName  that were recorded in the experiment.
+	// The values for the metricName that were recorded in the experiment.
 	Values []float64
 
 	noSmithyDocumentSerde
 }
 
-// This structure contains the time and date that Evidently completed the
-// analysis of the experiment.
+// This structure contains the time and date that Evidently completed the analysis
+// of the experiment.
 type ExperimentSchedule struct {
 
 	// The time and date that Evidently completed the analysis of the experiment.
@@ -283,8 +282,7 @@ type ExperimentSchedule struct {
 	noSmithyDocumentSerde
 }
 
-// This structure contains information about one Evidently feature in your
-// account.
+// This structure contains information about one Evidently feature in your account.
 type Feature struct {
 
 	// The ARN of the feature.
@@ -297,8 +295,8 @@ type Feature struct {
 	// This member is required.
 	CreatedTime *time.Time
 
-	// If this value is ALL_RULES, the traffic allocation specified by any ongoing
-	// launches or experiments is being used. If this is DEFAULT_VARIATION, the
+	// If this value is ALL_RULES , the traffic allocation specified by any ongoing
+	// launches or experiments is being used. If this is DEFAULT_VARIATION , the
 	// default variation is being served to all users.
 	//
 	// This member is required.
@@ -334,8 +332,8 @@ type Feature struct {
 	// The name of the variation that is used as the default variation. The default
 	// variation is served to users who are not allocated to any ongoing launches or
 	// experiments of this feature. This variation must also be listed in the
-	// variations structure. If you omit defaultVariation, the first variation listed
-	// in the variations  structure is used as the default variation.
+	// variations structure. If you omit defaultVariation , the first variation listed
+	// in the variations structure is used as the default variation.
 	DefaultVariation *string
 
 	// The description of the feature.
@@ -345,7 +343,7 @@ type Feature struct {
 	// specific variation of a feature. Each key specifies a user using their user ID,
 	// account ID, or some other identifier. The value specifies the name of the
 	// variation that the user is to be served. For the override to be successful, the
-	// value of the key must match the entityId  used in the EvaluateFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
+	// value of the key must match the entityId used in the EvaluateFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
 	// operation.
 	EntityOverrides map[string]string
 
@@ -361,8 +359,7 @@ type Feature struct {
 	noSmithyDocumentSerde
 }
 
-// This structure contains information about one Evidently feature in your
-// account.
+// This structure contains information about one Evidently feature in your account.
 type FeatureSummary struct {
 
 	// The ARN of the feature.
@@ -375,8 +372,8 @@ type FeatureSummary struct {
 	// This member is required.
 	CreatedTime *time.Time
 
-	// If this value is ALL_RULES, the traffic allocation specified by any ongoing
-	// launches or experiments is being used. If this is DEFAULT_VARIATION, the
+	// If this value is ALL_RULES , the traffic allocation specified by any ongoing
+	// launches or experiments is being used. If this is DEFAULT_VARIATION , the
 	// default variation is being served to all users.
 	//
 	// This member is required.
@@ -471,8 +468,8 @@ type Launch struct {
 	// randomizationSalt .
 	RandomizationSalt *string
 
-	// An array of structures that define the traffic allocation percentages among
-	// the feature variations during each step of the launch.
+	// An array of structures that define the traffic allocation percentages among the
+	// feature variations during each step of the launch.
 	ScheduledSplitsDefinition *ScheduledSplitsLaunchDefinition
 
 	// If the launch was stopped, this is the string that was entered by the person
@@ -485,8 +482,7 @@ type Launch struct {
 	noSmithyDocumentSerde
 }
 
-// This structure contains information about the start and end times of the
-// launch.
+// This structure contains information about the start and end times of the launch.
 type LaunchExecution struct {
 
 	// The date and time that the launch ended.
@@ -547,13 +543,13 @@ type LaunchGroupConfig struct {
 // during a launch or experiment.
 type MetricDefinition struct {
 
-	// The entity, such as a user or session, that does an action that causes a
-	// metric value to be recorded.
+	// The entity, such as a user or session, that does an action that causes a metric
+	// value to be recorded.
 	EntityIdKey *string
 
-	// The EventBridge event pattern that defines how the metric is recorded. For
-	// more information about EventBridge event patterns, see Amazon EventBridge
-	// event patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html)
+	// The EventBridge event pattern that defines how the metric is recorded. For more
+	// information about EventBridge event patterns, see Amazon EventBridge event
+	// patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html)
 	// .
 	//
 	// This value conforms to the media type: application/json
@@ -571,12 +567,12 @@ type MetricDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// This structure defines a metric that you want to use to evaluate the
-// variations during a launch or experiment.
+// This structure defines a metric that you want to use to evaluate the variations
+// during a launch or experiment.
 type MetricDefinitionConfig struct {
 
-	// The entity, such as a user or session, that does an action that causes a
-	// metric value to be recorded. An example is userDetails.userID .
+	// The entity, such as a user or session, that does an action that causes a metric
+	// value to be recorded. An example is userDetails.userID .
 	//
 	// This member is required.
 	EntityIdKey *string
@@ -591,9 +587,9 @@ type MetricDefinitionConfig struct {
 	// This member is required.
 	ValueKey *string
 
-	// The EventBridge event pattern that defines how the metric is recorded. For
-	// more information about EventBridge event patterns, see Amazon EventBridge
-	// event patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html)
+	// The EventBridge event pattern that defines how the metric is recorded. For more
+	// information about EventBridge event patterns, see Amazon EventBridge event
+	// patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html)
 	// .
 	//
 	// This value conforms to the media type: application/json
@@ -605,8 +601,8 @@ type MetricDefinitionConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that tells Evidently whether higher or lower values are desired
-// for a metric that is used in an experiment.
+// A structure that tells Evidently whether higher or lower values are desired for
+// a metric that is used in an experiment.
 type MetricGoal struct {
 
 	// A structure that contains details about the metric.
@@ -615,15 +611,15 @@ type MetricGoal struct {
 	MetricDefinition *MetricDefinition
 
 	// INCREASE means that a variation with a higher number for this metric is
-	// performing better. DECREASE means that a variation with a lower number for
-	// this metric is performing better.
+	// performing better. DECREASE means that a variation with a lower number for this
+	// metric is performing better.
 	DesiredChange ChangeDirectionEnum
 
 	noSmithyDocumentSerde
 }
 
-// Use this structure to tell Evidently whether higher or lower values are
-// desired for a metric that is used in an experiment.
+// Use this structure to tell Evidently whether higher or lower values are desired
+// for a metric that is used in an experiment.
 type MetricGoalConfig struct {
 
 	// A structure that contains details about the metric.
@@ -632,8 +628,8 @@ type MetricGoalConfig struct {
 	MetricDefinition *MetricDefinitionConfig
 
 	// INCREASE means that a variation with a higher number for this metric is
-	// performing better. DECREASE means that a variation with a lower number for
-	// this metric is performing better.
+	// performing better. DECREASE means that a variation with a lower number for this
+	// metric is performing better.
 	DesiredChange ChangeDirectionEnum
 
 	noSmithyDocumentSerde
@@ -701,9 +697,9 @@ type OnlineAbDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// This structure defines a project, which is the logical object in Evidently
-// that can contain features, launches, and experiments. Use projects to group
-// similar features together.
+// This structure defines a project, which is the logical object in Evidently that
+// can contain features, launches, and experiments. Use projects to group similar
+// features together.
 type Project struct {
 
 	// The name or ARN of the project.
@@ -893,19 +889,18 @@ type ProjectSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains Evidently's response to the sent events, including
-// an event ID and error codes, if any.
+// A structure that contains Evidently's response to the sent events, including an
+// event ID and error codes, if any.
 type PutProjectEventsResultEntry struct {
 
-	// If the PutProjectEvents operation has an error, the error code is returned
-	// here.
+	// If the PutProjectEvents operation has an error, the error code is returned here.
 	ErrorCode *string
 
 	// If the PutProjectEvents operation has an error, the error message is returned
 	// here.
 	ErrorMessage *string
 
-	// A unique ID assigned to this PutProjectEvents  operation.
+	// A unique ID assigned to this PutProjectEvents operation.
 	EventId *string
 
 	noSmithyDocumentSerde
@@ -979,21 +974,21 @@ type ScheduledSplit struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The traffic allocation percentages among the feature variations during one
-	// step of a launch. This is a set of key-value pairs. The keys are variation
-	// names. The values represent the percentage of traffic to allocate to that
-	// variation during this step. The values is expressed in thousandths of a percent,
-	// so assigning a weight of 50000 assigns 50% of traffic to that variation. If the
-	// sum of the weights for all the variations in a segment override does not add up
-	// to 100,000, then the remaining traffic that matches this segment is not assigned
-	// by this segment override, and instead moves on to the next segment override or
-	// the default traffic split.
+	// The traffic allocation percentages among the feature variations during one step
+	// of a launch. This is a set of key-value pairs. The keys are variation names. The
+	// values represent the percentage of traffic to allocate to that variation during
+	// this step. The values is expressed in thousandths of a percent, so assigning a
+	// weight of 50000 assigns 50% of traffic to that variation. If the sum of the
+	// weights for all the variations in a segment override does not add up to 100,000,
+	// then the remaining traffic that matches this segment is not assigned by this
+	// segment override, and instead moves on to the next segment override or the
+	// default traffic split.
 	GroupWeights map[string]int64
 
-	// Use this parameter to specify different traffic splits for one or more
-	// audience segments. A segment is a portion of your audience that share one or
-	// more characteristics. Examples could be Chrome browser users, users in Europe,
-	// or Firefox browser users in Europe who also fit other criteria that your
+	// Use this parameter to specify different traffic splits for one or more audience
+	// segments. A segment is a portion of your audience that share one or more
+	// characteristics. Examples could be Chrome browser users, users in Europe, or
+	// Firefox browser users in Europe who also fit other criteria that your
 	// application collects, such as age. This parameter is an array of up to six
 	// segment override objects. Each of these objects specifies a segment that you
 	// have already created, and defines the traffic split for that segment.
@@ -1006,15 +1001,15 @@ type ScheduledSplit struct {
 // variations during one step of a launch, and the start time of that step.
 type ScheduledSplitConfig struct {
 
-	// The traffic allocation percentages among the feature variations during one
-	// step of a launch. This is a set of key-value pairs. The keys are variation
-	// names. The values represent the percentage of traffic to allocate to that
-	// variation during this step. The values is expressed in thousandths of a percent,
-	// so assigning a weight of 50000 assigns 50% of traffic to that variation. If the
-	// sum of the weights for all the variations in a segment override does not add up
-	// to 100,000, then the remaining traffic that matches this segment is not assigned
-	// by this segment override, and instead moves on to the next segment override or
-	// the default traffic split.
+	// The traffic allocation percentages among the feature variations during one step
+	// of a launch. This is a set of key-value pairs. The keys are variation names. The
+	// values represent the percentage of traffic to allocate to that variation during
+	// this step. The values is expressed in thousandths of a percent, so assigning a
+	// weight of 50000 assigns 50% of traffic to that variation. If the sum of the
+	// weights for all the variations in a segment override does not add up to 100,000,
+	// then the remaining traffic that matches this segment is not assigned by this
+	// segment override, and instead moves on to the next segment override or the
+	// default traffic split.
 	//
 	// This member is required.
 	GroupWeights map[string]int64
@@ -1024,10 +1019,10 @@ type ScheduledSplitConfig struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// Use this parameter to specify different traffic splits for one or more
-	// audience segments. A segment is a portion of your audience that share one or
-	// more characteristics. Examples could be Chrome browser users, users in Europe,
-	// or Firefox browser users in Europe who also fit other criteria that your
+	// Use this parameter to specify different traffic splits for one or more audience
+	// segments. A segment is a portion of your audience that share one or more
+	// characteristics. Examples could be Chrome browser users, users in Europe, or
+	// Firefox browser users in Europe who also fit other criteria that your
 	// application collects, such as age. This parameter is an array of up to six
 	// segment override objects. Each of these objects specifies a segment that you
 	// have already created, and defines the traffic split for that segment.
@@ -1036,14 +1031,14 @@ type ScheduledSplitConfig struct {
 	noSmithyDocumentSerde
 }
 
-// An array of structures that define the traffic allocation percentages among
-// the feature variations during each step of a launch. This also defines the start
+// An array of structures that define the traffic allocation percentages among the
+// feature variations during each step of a launch. This also defines the start
 // time of each step.
 type ScheduledSplitsLaunchConfig struct {
 
-	// An array of structures that define the traffic allocation percentages among
-	// the feature variations during each step of the launch. This also defines the
-	// start time of each step.
+	// An array of structures that define the traffic allocation percentages among the
+	// feature variations during each step of the launch. This also defines the start
+	// time of each step.
 	//
 	// This member is required.
 	Steps []ScheduledSplitConfig
@@ -1051,14 +1046,14 @@ type ScheduledSplitsLaunchConfig struct {
 	noSmithyDocumentSerde
 }
 
-// An array of structures that define the traffic allocation percentages among
-// the feature variations during each step of a launch. This also defines the start
+// An array of structures that define the traffic allocation percentages among the
+// feature variations during each step of a launch. This also defines the start
 // time of each step.
 type ScheduledSplitsLaunchDefinition struct {
 
-	// An array of structures that define the traffic allocation percentages among
-	// the feature variations during each step of the launch. This also defines the
-	// start time of each step.
+	// An array of structures that define the traffic allocation percentages among the
+	// feature variations during each step of the launch. This also defines the start
+	// time of each step.
 	Steps []ScheduledSplit
 
 	noSmithyDocumentSerde
@@ -1102,8 +1097,8 @@ type Segment struct {
 	// The customer-created description for this segment.
 	Description *string
 
-	// The number of experiments that this segment is used in. This count includes
-	// all current experiments, not just those that are currently running.
+	// The number of experiments that this segment is used in. This count includes all
+	// current experiments, not just those that are currently running.
 	ExperimentCount *int64
 
 	// The number of launches that this segment is used in. This count includes all
@@ -1226,8 +1221,8 @@ type VariableValueMemberBoolValue struct {
 
 func (*VariableValueMemberBoolValue) isVariableValue() {}
 
-// If this feature uses the double integer variation type, this field contains
-// the double integer value of this variation.
+// If this feature uses the double integer variation type, this field contains the
+// double integer value of this variation.
 type VariableValueMemberDoubleValue struct {
 	Value float64
 

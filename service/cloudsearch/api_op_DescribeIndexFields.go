@@ -13,7 +13,7 @@ import (
 
 // Gets information about the index fields configured for the search domain. Can
 // be limited to specific fields by name. By default, shows all fields and includes
-// any pending changes to the configuration. Set the Deployed  option to true to
+// any pending changes to the configuration. Set the Deployed option to true to
 // show the active configuration and exclude pending changes. For more information,
 // see Getting Domain Information (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html)
 // in the Amazon CloudSearch Developer Guide.
@@ -36,7 +36,7 @@ func (c *Client) DescribeIndexFields(ctx context.Context, params *DescribeIndexF
 // the name of the domain you want to describe. To restrict the response to
 // particular index fields, specify the names of the index fields you want to
 // describe. To show the active configuration and exclude any pending changes, set
-// the Deployed  option to true .
+// the Deployed option to true .
 type DescribeIndexFieldsInput struct {
 
 	// The name of the domain you want to describe.
@@ -44,7 +44,7 @@ type DescribeIndexFieldsInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Whether to display the deployed configuration ( true) or include any pending
+	// Whether to display the deployed configuration ( true ) or include any pending
 	// changes ( false ). Defaults to false .
 	Deployed *bool
 

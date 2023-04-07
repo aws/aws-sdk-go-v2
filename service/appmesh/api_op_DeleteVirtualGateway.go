@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing virtual gateway. You cannot delete a virtual gateway if
-// any gateway routes are associated to it.
+// Deletes an existing virtual gateway. You cannot delete a virtual gateway if any
+// gateway routes are associated to it.
 func (c *Client) DeleteVirtualGateway(ctx context.Context, params *DeleteVirtualGatewayInput, optFns ...func(*Options)) (*DeleteVirtualGatewayOutput, error) {
 	if params == nil {
 		params = &DeleteVirtualGatewayInput{}

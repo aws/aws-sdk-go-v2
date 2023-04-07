@@ -44,10 +44,10 @@ type CreateIpamResourceDiscoveryInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// Operating Regions for the IPAM resource discovery. Operating Regions are
-	// Amazon Web Services Regions where the IPAM is allowed to manage IP address
-	// CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services
-	// Regions you select as operating Regions.
+	// Operating Regions for the IPAM resource discovery. Operating Regions are Amazon
+	// Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM
+	// only discovers and monitors resources in the Amazon Web Services Regions you
+	// select as operating Regions.
 	OperatingRegions []types.AddIpamOperatingRegion
 
 	// Tag specifications for the IPAM resource discovery.

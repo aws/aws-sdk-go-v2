@@ -57,7 +57,7 @@ type DetectPHIOutput struct {
 	// This member is required.
 	ModelVersion *string
 
-	// If the result of the previous request to DetectPHI  was truncated, include the
+	// If the result of the previous request to DetectPHI was truncated, include the
 	// PaginationToken to fetch the next page of PHI entities.
 	PaginationToken *string
 

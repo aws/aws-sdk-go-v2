@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Downloads the object at the specified path. If the object’s upload
-// availability is set to streaming, AWS Elemental MediaStore downloads the
-// object even if it’s still uploading the object.
+// Downloads the object at the specified path. If the object’s upload availability
+// is set to streaming , AWS Elemental MediaStore downloads the object even if it’s
+// still uploading the object.
 func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns ...func(*Options)) (*GetObjectOutput, error) {
 	if params == nil {
 		params = &GetObjectInput{}
@@ -32,17 +32,17 @@ func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns .
 
 type GetObjectInput struct {
 
-	// The path (including the file name) where the object is stored in the
-	// container. Format: // For example, to upload the file mlaw.avi to the folder
-	// path premium\canada  in the container movies , enter the path
-	// premium/canada/mlaw.avi. Do not include the container name in this path. If
-	// the path includes any folders that don't exist yet, the service creates them.
-	// For example, suppose you have an existing premium/usa subfolder. If you
-	// specify premium/canada , the service creates a canada  subfolder in the premium
-	// folder. You then have two subfolders, usa  and canada , in the premium folder.
-	// There is no correlation between the path to the source and the path (folders) in
-	// the container in AWS Elemental MediaStore. For more information about folders
-	// and how they exist in a container, see the AWS Elemental MediaStore User Guide (http://docs.aws.amazon.com/mediastore/latest/ug/)
+	// The path (including the file name) where the object is stored in the container.
+	// Format: // For example, to upload the file mlaw.avi to the folder path
+	// premium\canada in the container movies , enter the path premium/canada/mlaw.avi
+	// . Do not include the container name in this path. If the path includes any
+	// folders that don't exist yet, the service creates them. For example, suppose you
+	// have an existing premium/usa subfolder. If you specify premium/canada , the
+	// service creates a canada subfolder in the premium folder. You then have two
+	// subfolders, usa and canada , in the premium folder. There is no correlation
+	// between the path to the source and the path (folders) in the container in AWS
+	// Elemental MediaStore. For more information about folders and how they exist in a
+	// container, see the AWS Elemental MediaStore User Guide (http://docs.aws.amazon.com/mediastore/latest/ug/)
 	// . The file name is the name that is assigned to the file that you upload. The
 	// file can have the same name inside and outside of AWS Elemental MediaStore, or
 	// it can have the same name. The file name can include or omit an extension.

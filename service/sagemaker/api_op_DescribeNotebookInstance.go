@@ -52,10 +52,9 @@ type DescribeNotebookInstanceOutput struct {
 	// SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html) .
 	AcceleratorTypes []types.NotebookInstanceAcceleratorType
 
-	// An array of up to three Git repositories associated with the notebook
-	// instance. These can be either the names of Git repositories stored as resources
-	// in your account, or the URL of Git repositories in Amazon Web Services
-	// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// An array of up to three Git repositories associated with the notebook instance.
+	// These can be either the names of Git repositories stored as resources in your
+	// account, or the URL of Git repositories in Amazon Web Services CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
 	// or in any other Git repository. These repositories are cloned at the same level
 	// as the default repository of your notebook instance. For more information, see
 	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
@@ -96,8 +95,8 @@ type DescribeNotebookInstanceOutput struct {
 	// it on the ML storage volume attached to the instance.
 	KmsKeyId *string
 
-	// A timestamp. Use this parameter to retrieve the time when the notebook
-	// instance was last modified.
+	// A timestamp. Use this parameter to retrieve the time when the notebook instance
+	// was last modified.
 	LastModifiedTime *time.Time
 
 	// The network interface IDs that SageMaker created at the time of creating the
@@ -136,8 +135,8 @@ type DescribeNotebookInstanceOutput struct {
 	// The ID of the VPC subnet.
 	SubnetId *string
 
-	// The URL that you use to connect to the Jupyter notebook that is running in
-	// your notebook instance.
+	// The URL that you use to connect to the Jupyter notebook that is running in your
+	// notebook instance.
 	Url *string
 
 	// The size, in GB, of the ML storage volume attached to the notebook instance.
@@ -436,8 +435,7 @@ type NotebookInstanceInServiceWaiter struct {
 	options NotebookInstanceInServiceWaiterOptions
 }
 
-// NewNotebookInstanceInServiceWaiter constructs a
-// NotebookInstanceInServiceWaiter.
+// NewNotebookInstanceInServiceWaiter constructs a NotebookInstanceInServiceWaiter.
 func NewNotebookInstanceInServiceWaiter(client DescribeNotebookInstanceAPIClient, optFns ...func(*NotebookInstanceInServiceWaiterOptions)) *NotebookInstanceInServiceWaiter {
 	options := NotebookInstanceInServiceWaiterOptions{}
 	options.MinDelay = 30 * time.Second

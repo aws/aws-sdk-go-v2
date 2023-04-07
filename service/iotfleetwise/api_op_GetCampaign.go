@@ -46,9 +46,9 @@ type GetCampaignOutput struct {
 	// Information about the data collection scheme associated with the campaign.
 	CollectionScheme types.CollectionScheme
 
-	// Whether to compress signals before transmitting data to Amazon Web Services
-	// IoT FleetWise. If OFF is specified, the signals aren't compressed. If it's not
-	// specified, SNAPPY  is used.
+	// Whether to compress signals before transmitting data to Amazon Web Services IoT
+	// FleetWise. If OFF is specified, the signals aren't compressed. If it's not
+	// specified, SNAPPY is used.
 	Compression types.Compression
 
 	// The time the campaign was created in seconds since epoch (January 1, 1970 at

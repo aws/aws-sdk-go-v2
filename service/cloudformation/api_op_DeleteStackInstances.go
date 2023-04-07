@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes stack instances for the specified accounts, in the specified Amazon
-// Web Services Regions.
+// Deletes stack instances for the specified accounts, in the specified Amazon Web
+// Services Regions.
 func (c *Client) DeleteStackInstances(ctx context.Context, params *DeleteStackInstancesInput, optFns ...func(*Options)) (*DeleteStackInstancesOutput, error) {
 	if params == nil {
 		params = &DeleteStackInstancesInput{}
@@ -51,20 +51,24 @@ type DeleteStackInstancesInput struct {
 	StackSetName *string
 
 	// [Self-managed permissions] The names of the Amazon Web Services accounts that
-	// you want to delete stack instances for. You can specify Accounts  or
+	// you want to delete stack instances for. You can specify Accounts or
 	// DeploymentTargets , but not both.
 	Accounts []string
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
 	// administrator in the organization's management account or as a delegated
-	// administrator in a member account. By default, SELF  is specified. Use SELF
-	// for stack sets with self-managed permissions.
-	//     - If you are signed in to the management account, specify SELF .
-	//     - If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html) in the CloudFormation User Guide.
+	// administrator in a member account. By default, SELF is specified. Use SELF for
+	// stack sets with self-managed permissions.
+	//   - If you are signed in to the management account, specify SELF .
+	//   - If you are signed in to a delegated administrator account, specify
+	//   DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a
+	//   delegated administrator in the management account. For more information, see
+	//   Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
+	//   in the CloudFormation User Guide.
 	CallAs types.CallAs
 
 	// [Service-managed permissions] The Organizations accounts from which to delete
-	// stack instances. You can specify Accounts  or DeploymentTargets , but not both.
+	// stack instances. You can specify Accounts or DeploymentTargets , but not both.
 	DeploymentTargets *types.DeploymentTargets
 
 	// The unique identifier for this stack set operation. If you don't specify an

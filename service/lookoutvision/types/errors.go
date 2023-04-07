@@ -183,8 +183,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An input validation error occured. For example, invalid characters in a
-// project name, or if a pagination token is invalid.
+// An input validation error occured. For example, invalid characters in a project
+// name, or if a pagination token is invalid.
 type ValidationException struct {
 	Message *string
 

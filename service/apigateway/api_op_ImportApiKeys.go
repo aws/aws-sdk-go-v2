@@ -31,20 +31,20 @@ func (c *Client) ImportApiKeys(ctx context.Context, params *ImportApiKeysInput, 
 // CSV-formatted file.
 type ImportApiKeysInput struct {
 
-	// The payload of the POST request to import API keys. For the payload format,
-	// see API Key File Format.
+	// The payload of the POST request to import API keys. For the payload format, see
+	// API Key File Format.
 	//
 	// This member is required.
 	Body []byte
 
 	// A query parameter to specify the input format to imported API keys. Currently,
-	// only the csv  format is supported.
+	// only the csv format is supported.
 	//
 	// This member is required.
 	Format types.ApiKeysFormat
 
-	// A query parameter to indicate whether to rollback ApiKey importation ( true)
-	// or not ( false ) when error is encountered.
+	// A query parameter to indicate whether to rollback ApiKey importation ( true ) or
+	// not ( false ) when error is encountered.
 	FailOnWarnings bool
 
 	noSmithyDocumentSerde

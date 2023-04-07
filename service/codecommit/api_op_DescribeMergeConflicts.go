@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about one or more merge conflicts in the attempted merge
-// of two commit specifiers using the squash or three-way merge strategy. If the
-// merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an
-// exception is thrown.
+// Returns information about one or more merge conflicts in the attempted merge of
+// two commit specifiers using the squash or three-way merge strategy. If the merge
+// option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception
+// is thrown.
 func (c *Client) DescribeMergeConflicts(ctx context.Context, params *DescribeMergeConflictsInput, optFns ...func(*Options)) (*DescribeMergeConflictsOutput, error) {
 	if params == nil {
 		params = &DescribeMergeConflictsInput{}
@@ -197,8 +197,8 @@ type DescribeMergeConflictsPaginatorOptions struct {
 	// The maximum number of merge hunks to include in the output.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -211,8 +211,7 @@ type DescribeMergeConflictsPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeMergeConflictsPaginator returns a new
-// DescribeMergeConflictsPaginator
+// NewDescribeMergeConflictsPaginator returns a new DescribeMergeConflictsPaginator
 func NewDescribeMergeConflictsPaginator(client DescribeMergeConflictsAPIClient, params *DescribeMergeConflictsInput, optFns ...func(*DescribeMergeConflictsPaginatorOptions)) *DescribeMergeConflictsPaginator {
 	if params == nil {
 		params = &DescribeMergeConflictsInput{}

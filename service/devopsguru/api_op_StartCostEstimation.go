@@ -31,8 +31,8 @@ func (c *Client) StartCostEstimation(ctx context.Context, params *StartCostEstim
 
 type StartCostEstimationInput struct {
 
-	// The collection of Amazon Web Services resources used to create a monthly
-	// DevOps Guru cost estimate.
+	// The collection of Amazon Web Services resources used to create a monthly DevOps
+	// Guru cost estimate.
 	//
 	// This member is required.
 	ResourceCollection *types.CostEstimationResourceCollectionFilter

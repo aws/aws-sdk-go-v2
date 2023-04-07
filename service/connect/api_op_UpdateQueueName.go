@@ -11,8 +11,8 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
-// Updates the name and description of a queue. At least Name  or Description
-// must be provided.
+// Updates the name and description of a queue. At least Name or Description must
+// be provided.
 func (c *Client) UpdateQueueName(ctx context.Context, params *UpdateQueueNameInput, optFns ...func(*Options)) (*UpdateQueueNameOutput, error) {
 	if params == nil {
 		params = &UpdateQueueNameInput{}

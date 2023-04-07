@@ -16,12 +16,12 @@ import (
 // account. To copy a model version you use the CopyProjectVersion operation. For
 // more information about the format of a project policy document, see Attaching a
 // project policy (SDK) in the Amazon Rekognition Custom Labels Developer Guide.
-// The response from PutProjectPolicy is a revision ID for the project policy.
-// You can attach multiple project policies to a project. You can also update an
+// The response from PutProjectPolicy is a revision ID for the project policy. You
+// can attach multiple project policies to a project. You can also update an
 // existing project policy by specifying the policy revision ID of the existing
-// policy. To remove a project policy from a project, call DeleteProjectPolicy.
-// To get a list of project policies attached to a project, call
-// ListProjectPolicies . You copy a model version by calling CopyProjectVersion .
+// policy. To remove a project policy from a project, call DeleteProjectPolicy . To
+// get a list of project policies attached to a project, call ListProjectPolicies .
+// You copy a model version by calling CopyProjectVersion .
 func (c *Client) PutProjectPolicy(ctx context.Context, params *PutProjectPolicyInput, optFns ...func(*Options)) (*PutProjectPolicyOutput, error) {
 	if params == nil {
 		params = &PutProjectPolicyInput{}
@@ -60,8 +60,8 @@ type PutProjectPolicyInput struct {
 	ProjectArn *string
 
 	// The revision ID for the Project Policy. Each time you modify a policy, Amazon
-	// Rekognition Custom Labels generates and assigns a new PolicyRevisionId and
-	// then deletes the previous version of the policy.
+	// Rekognition Custom Labels generates and assigns a new PolicyRevisionId and then
+	// deletes the previous version of the policy.
 	PolicyRevisionId *string
 
 	noSmithyDocumentSerde

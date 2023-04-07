@@ -13,7 +13,7 @@ import (
 )
 
 // Use to create a code review with a CodeReviewType (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html)
-// of RepositoryAnalysis. This type of code review analyzes all code under a
+// of RepositoryAnalysis . This type of code review analyzes all code under a
 // specified branch in an associated repository. PullRequest code reviews are
 // automatically triggered by a pull request.
 func (c *Client) CreateCodeReview(ctx context.Context, params *CreateCodeReviewInput, optFns ...func(*Options)) (*CreateCodeReviewOutput, error) {

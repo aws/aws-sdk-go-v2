@@ -44,19 +44,19 @@ type CreateWebhookInput struct {
 	// This member is required.
 	ProjectName *string
 
-	// A regular expression used to determine which repository branches are built
-	// when a webhook is triggered. If the name of a branch matches the regular
-	// expression, then it is built. If branchFilter is empty, then all branches are
-	// built. It is recommended that you use filterGroups  instead of branchFilter .
+	// A regular expression used to determine which repository branches are built when
+	// a webhook is triggered. If the name of a branch matches the regular expression,
+	// then it is built. If branchFilter is empty, then all branches are built. It is
+	// recommended that you use filterGroups instead of branchFilter .
 	BranchFilter *string
 
 	// Specifies the type of build this webhook will trigger.
 	BuildType types.WebhookBuildType
 
 	// An array of arrays of WebhookFilter objects used to determine which webhooks
-	// are triggered. At least one WebhookFilter  in the array must specify EVENT as
+	// are triggered. At least one WebhookFilter in the array must specify EVENT as
 	// its type . For a build to be triggered, at least one filter group in the
-	// filterGroupsarray must pass. For a filter group to pass, each of its filters
+	// filterGroups array must pass. For a filter group to pass, each of its filters
 	// must pass.
 	FilterGroups [][]types.WebhookFilter
 

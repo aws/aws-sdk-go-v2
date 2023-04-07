@@ -35,8 +35,8 @@ type SubmitAttachmentStateChangesInput struct {
 	// This member is required.
 	Attachments []types.AttachmentStateChange
 
-	// The short name or full ARN of the cluster that hosts the container instance
-	// the attachment belongs to.
+	// The short name or full ARN of the cluster that hosts the container instance the
+	// attachment belongs to.
 	Cluster *string
 
 	noSmithyDocumentSerde

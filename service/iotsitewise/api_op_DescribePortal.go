@@ -52,9 +52,9 @@ type DescribePortalOutput struct {
 	// This member is required.
 	PortalArn *string
 
-	// The IAM Identity Center application generated client ID (used with IAM
-	// Identity Center APIs). IoT SiteWise includes portalClientId for only portals
-	// that use IAM Identity Center to authenticate users.
+	// The IAM Identity Center application generated client ID (used with IAM Identity
+	// Center APIs). IoT SiteWise includes portalClientId for only portals that use
+	// IAM Identity Center to authenticate users.
 	//
 	// This member is required.
 	PortalClientId *string
@@ -115,8 +115,8 @@ type DescribePortalOutput struct {
 
 	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the service role that allows the portal's users to access your IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for
-	// IoT SiteWise Monitor (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
+	// resources on your behalf. For more information, see Using service roles for IoT
+	// SiteWise Monitor (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
 	// in the IoT SiteWise User Guide.
 	RoleArn *string
 
@@ -290,10 +290,9 @@ func (w *PortalActiveWaiter) Wait(ctx context.Context, params *DescribePortalInp
 	return err
 }
 
-// WaitForOutput calls the waiter function for PortalActive waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for PortalActive waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
 func (w *PortalActiveWaiter) WaitForOutput(ctx context.Context, params *DescribePortalInput, maxWaitDur time.Duration, optFns ...func(*PortalActiveWaiterOptions)) (*DescribePortalOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

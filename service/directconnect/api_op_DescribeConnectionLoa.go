@@ -45,9 +45,9 @@ type DescribeConnectionLoaInput struct {
 	// application/pdf.
 	LoaContentType types.LoaContentType
 
-	// The name of the APN partner or service provider who establishes connectivity
-	// on your behalf. If you specify this parameter, the LOA-CFA lists the provider
-	// name alongside your company name as the requester of the cross connect.
+	// The name of the APN partner or service provider who establishes connectivity on
+	// your behalf. If you specify this parameter, the LOA-CFA lists the provider name
+	// alongside your company name as the requester of the cross connect.
 	ProviderName *string
 
 	noSmithyDocumentSerde

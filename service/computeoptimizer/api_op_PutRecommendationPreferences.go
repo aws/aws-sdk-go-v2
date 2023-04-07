@@ -33,7 +33,7 @@ func (c *Client) PutRecommendationPreferences(ctx context.Context, params *PutRe
 type PutRecommendationPreferencesInput struct {
 
 	// The target resource type of the recommendation preference to create. The
-	// Ec2Instanceoption encompasses standalone instances and instances that are part
+	// Ec2Instance option encompasses standalone instances and instances that are part
 	// of Auto Scaling groups. The AutoScalingGroup option encompasses only instances
 	// that are part of an Auto Scaling group. The valid values for this parameter are
 	// Ec2Instance and AutoScalingGroup .
@@ -43,7 +43,7 @@ type PutRecommendationPreferencesInput struct {
 
 	// The status of the enhanced infrastructure metrics recommendation preference to
 	// create or update. Specify the Active status to activate the preference, or
-	// specify Inactive  to deactivate the preference. For more information, see
+	// specify Inactive to deactivate the preference. For more information, see
 	// Enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics types.EnhancedInfrastructureMetrics

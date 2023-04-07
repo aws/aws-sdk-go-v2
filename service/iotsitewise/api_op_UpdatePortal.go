@@ -47,8 +47,8 @@ type UpdatePortalInput struct {
 
 	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of a service role that allows the portal's users to access your IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for
-	// IoT SiteWise Monitor (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
+	// resources on your behalf. For more information, see Using service roles for IoT
+	// SiteWise Monitor (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
 	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
@@ -73,8 +73,8 @@ type UpdatePortalInput struct {
 	PortalDescription *string
 
 	// Contains an image that is one of the following:
-	//     - An image file. Choose this option to upload a new image.
-	//     - The ID of an existing image. Choose this option to keep an existing image.
+	//   - An image file. Choose this option to upload a new image.
+	//   - The ID of an existing image. Choose this option to keep an existing image.
 	PortalLogoImage *types.Image
 
 	noSmithyDocumentSerde

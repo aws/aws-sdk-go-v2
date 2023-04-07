@@ -37,9 +37,9 @@ type UpdateParameterGroupInput struct {
 	ParameterGroupName *string
 
 	// An array of name-value pairs for the parameters in the group. Each element in
-	// the array represents a single parameter. record-ttl-millis  and
-	// query-ttl-millis are the only supported parameter names. For more details, see
-	// Configuring TTL Settings (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl)
+	// the array represents a single parameter. record-ttl-millis and query-ttl-millis
+	// are the only supported parameter names. For more details, see Configuring TTL
+	// Settings (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl)
 	// .
 	//
 	// This member is required.

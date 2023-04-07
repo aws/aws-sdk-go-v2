@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes an IndexField  from the search domain. For more information, see
+// Removes an IndexField from the search domain. For more information, see
 // Configuring Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DeleteIndexField(ctx context.Context, params *DeleteIndexFieldInput, optFns ...func(*Options)) (*DeleteIndexFieldOutput, error) {
@@ -51,7 +51,7 @@ type DeleteIndexFieldInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DeleteIndexField  request.
+// The result of a DeleteIndexField request.
 type DeleteIndexFieldOutput struct {
 
 	// The status of the index field being deleted.

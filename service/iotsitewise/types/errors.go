@@ -63,8 +63,8 @@ func (e *InternalFailureException) ErrorCode() string {
 }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request isn't valid. This can occur if your request contains malformed
-// JSON or unsupported characters. Check your request and try again.
+// The request isn't valid. This can occur if your request contains malformed JSON
+// or unsupported characters. Check your request and try again.
 type InvalidRequestException struct {
 	Message *string
 

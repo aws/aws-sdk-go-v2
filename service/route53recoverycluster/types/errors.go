@@ -147,8 +147,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request can't update that many routing control states at the same time.
-// Try again with fewer routing control states.
+// The request can't update that many routing control states at the same time. Try
+// again with fewer routing control states.
 type ServiceLimitExceededException struct {
 	Message *string
 

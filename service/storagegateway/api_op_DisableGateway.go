@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables a tape gateway when the gateway is no longer functioning. For
-// example, if your gateway VM is damaged, you can disable the gateway so you can
-// recover virtual tapes. Use this operation for a tape gateway that is not
-// reachable or not functioning. This operation is only supported in the tape
-// gateway type. After a gateway is disabled, it cannot be enabled.
+// Disables a tape gateway when the gateway is no longer functioning. For example,
+// if your gateway VM is damaged, you can disable the gateway so you can recover
+// virtual tapes. Use this operation for a tape gateway that is not reachable or
+// not functioning. This operation is only supported in the tape gateway type.
+// After a gateway is disabled, it cannot be enabled.
 func (c *Client) DisableGateway(ctx context.Context, params *DisableGatewayInput, optFns ...func(*Options)) (*DisableGatewayOutput, error) {
 	if params == nil {
 		params = &DisableGatewayInput{}

@@ -36,7 +36,7 @@ func (c *Client) CreateMap(ctx context.Context, params *CreateMapInput, optFns .
 
 type CreateMapInput struct {
 
-	// Specifies the MapConfiguration, including the map style, for the map resource
+	// Specifies the MapConfiguration , including the map style, for the map resource
 	// that you create. The map style defines the look of maps and the data provider
 	// for your map resource.
 	//
@@ -44,9 +44,10 @@ type CreateMapInput struct {
 	Configuration *types.MapConfiguration
 
 	// The name for the map resource. Requirements:
-	//     - Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).
-	//     - Must be a unique map resource name.
-	//     - No spaces allowed. For example, ExampleMap .
+	//   - Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
+	//   periods (.), and underscores (_).
+	//   - Must be a unique map resource name.
+	//   - No spaces allowed. For example, ExampleMap .
 	//
 	// This member is required.
 	MapName *string
@@ -63,12 +64,13 @@ type CreateMapInput struct {
 	// Applies one or more tags to the map resource. A tag is a key-value pair helps
 	// manage, identify, search, and filter your resources by labelling them. Format:
 	// "key" : "value" Restrictions:
-	//     - Maximum 50 tags per resource
-	//     - Each resource tag must be unique with a maximum of one value.
-	//     - Maximum key length: 128 Unicode characters in UTF-8
-	//     - Maximum value length: 256 Unicode characters in UTF-8
-	//     - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.
-	//     - Cannot use "aws:" as a prefix for a key.
+	//   - Maximum 50 tags per resource
+	//   - Each resource tag must be unique with a maximum of one value.
+	//   - Maximum key length: 128 Unicode characters in UTF-8
+	//   - Maximum value length: 256 Unicode characters in UTF-8
+	//   - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+	//   characters: + - = . _ : / @.
+	//   - Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -82,9 +84,9 @@ type CreateMapOutput struct {
 	// This member is required.
 	CreateTime *time.Time
 
-	// The Amazon Resource Name (ARN) for the map resource. Used to specify a
-	// resource across all Amazon Web Services.
-	//     - Format example: arn:aws:geo:region:account-id:map/ExampleMap
+	// The Amazon Resource Name (ARN) for the map resource. Used to specify a resource
+	// across all Amazon Web Services.
+	//   - Format example: arn:aws:geo:region:account-id:map/ExampleMap
 	//
 	// This member is required.
 	MapArn *string

@@ -36,7 +36,7 @@ type UpdatePullRequestStatusInput struct {
 	PullRequestId *string
 
 	// The status of the pull request. The only valid operations are to update the
-	// status from OPEN  to OPEN , OPEN  to CLOSED  or from CLOSED  to CLOSED .
+	// status from OPEN to OPEN , OPEN to CLOSED or from CLOSED to CLOSED .
 	//
 	// This member is required.
 	PullRequestStatus types.PullRequestStatusEnum

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DataflowEndpoint  groups.
+// Returns a list of DataflowEndpoint groups.
 func (c *Client) ListDataflowEndpointGroups(ctx context.Context, params *ListDataflowEndpointGroupsInput, optFns ...func(*Options)) (*ListDataflowEndpointGroupsOutput, error) {
 	if params == nil {
 		params = &ListDataflowEndpointGroupsInput{}
@@ -129,8 +129,8 @@ type ListDataflowEndpointGroupsPaginatorOptions struct {
 	// Maximum number of dataflow endpoint groups returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

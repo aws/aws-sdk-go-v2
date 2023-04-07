@@ -59,7 +59,7 @@ type UpdateRoomInput struct {
 
 type UpdateRoomOutput struct {
 
-	// Room ARN, from the request (if identifier  was an ARN).
+	// Room ARN, from the request (if identifier was an ARN).
 	Arn *string
 
 	// Time when the room was created. This is an ISO 8601 timestamp; note that this

@@ -17,10 +17,10 @@ import (
 // . For more information, see the Migration Hub Orchestrator User Guide  (https://docs.aws.amazon.com/migrationhub-orchestrator/latest/userguide/import-vm-images.html)
 // . Import single or multi-volume disk images or EBS snapshots into an Amazon
 // Machine Image (AMI). Amazon Web Services VM Import/Export strongly recommends
-// specifying a value for either the --license-type  or --usage-operation
-// parameter when you create a new VM Import task. This ensures your operating
-// system is licensed appropriately and your billing is optimized. For more
-// information, see Importing a VM as an image using VM Import/Export (https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html)
+// specifying a value for either the --license-type or --usage-operation parameter
+// when you create a new VM Import task. This ensures your operating system is
+// licensed appropriately and your billing is optimized. For more information, see
+// Importing a VM as an image using VM Import/Export (https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html)
 // in the VM Import/Export User Guide.
 func (c *Client) ImportImage(ctx context.Context, params *ImportImageInput, optFns ...func(*Options)) (*ImportImageOutput, error) {
 	if params == nil {
@@ -39,7 +39,7 @@ func (c *Client) ImportImage(ctx context.Context, params *ImportImageInput, optF
 
 type ImportImageInput struct {
 
-	// The architecture of the virtual machine. Valid values: i386  | x86_64
+	// The architecture of the virtual machine. Valid values: i386 | x86_64
 	Architecture *string
 
 	// The boot mode of the virtual machine.
@@ -72,39 +72,46 @@ type ImportImageInput struct {
 	// The target hypervisor platform. Valid values: xen
 	Hypervisor *string
 
-	// An identifier for the symmetric KMS key to use when creating the encrypted
-	// AMI. This parameter is only required if you want to use a non-default KMS key;
-	// if this parameter is not specified, the default KMS key for EBS is used. If a
+	// An identifier for the symmetric KMS key to use when creating the encrypted AMI.
+	// This parameter is only required if you want to use a non-default KMS key; if
+	// this parameter is not specified, the default KMS key for EBS is used. If a
 	// KmsKeyId is specified, the Encrypted flag must also be set. The KMS key
 	// identifier may be provided in any of the following formats:
-	//     - Key ID
-	//     - Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the alias namespace, and then the key alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
-	//     - ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the key namespace, and then the key ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
-	//     - ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the alias namespace, and then the key alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
-	//
-	// Amazon Web Services parses KmsKeyId asynchronously, meaning that the action
-	// you call may appear to complete even though you provided an invalid identifier.
-	// This action will eventually report failure. The specified KMS key must exist in
-	// the Region that the AMI is being copied to. Amazon EBS does not support
-	// asymmetric KMS keys.
+	//   - Key ID
+	//   - Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the
+	//   Region of the key, the Amazon Web Services account ID of the key owner, the
+	//   alias namespace, and then the key alias. For example,
+	//   arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
+	//   - ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by
+	//   the Region of the key, the Amazon Web Services account ID of the key owner, the
+	//   key namespace, and then the key ID. For example,
+	//   arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
+	//   - ARN using key alias. The alias ARN contains the arn:aws:kms namespace,
+	//   followed by the Region of the key, the Amazon Web Services account ID of the key
+	//   owner, the alias namespace, and then the key alias. For example,
+	//   arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
+	// Amazon Web Services parses KmsKeyId asynchronously, meaning that the action you
+	// call may appear to complete even though you provided an invalid identifier. This
+	// action will eventually report failure. The specified KMS key must exist in the
+	// Region that the AMI is being copied to. Amazon EBS does not support asymmetric
+	// KMS keys.
 	KmsKeyId *string
 
 	// The ARNs of the license configurations.
 	LicenseSpecifications []types.ImportImageLicenseConfigurationRequest
 
-	// The license type to be used for the Amazon Machine Image (AMI) after
-	// importing. Specify AWS to replace the source-system license with an Amazon Web
-	// Services license or BYOL to retain the source-system license. Leaving this
-	// parameter undefined is the same as choosing AWS when importing a Windows
-	// Server operating system, and the same as choosing BYOL when importing a
-	// Windows client operating system (such as Windows 10) or a Linux operating
-	// system. To use BYOL, you must have existing licenses with rights to use these
-	// licenses in a third party cloud, such as Amazon Web Services. For more
-	// information, see Prerequisites (https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image)
+	// The license type to be used for the Amazon Machine Image (AMI) after importing.
+	// Specify AWS to replace the source-system license with an Amazon Web Services
+	// license or BYOL to retain the source-system license. Leaving this parameter
+	// undefined is the same as choosing AWS when importing a Windows Server operating
+	// system, and the same as choosing BYOL when importing a Windows client operating
+	// system (such as Windows 10) or a Linux operating system. To use BYOL , you must
+	// have existing licenses with rights to use these licenses in a third party cloud,
+	// such as Amazon Web Services. For more information, see Prerequisites (https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image)
 	// in the VM Import/Export User Guide.
 	LicenseType *string
 
-	// The operating system of the virtual machine. Valid values: Windows  | Linux
+	// The operating system of the virtual machine. Valid values: Windows | Linux
 	Platform *string
 
 	// The name of the role to use when not using the default role, 'vmimport'.

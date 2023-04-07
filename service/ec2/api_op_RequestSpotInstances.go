@@ -40,8 +40,8 @@ func (c *Client) RequestSpotInstances(ctx context.Context, params *RequestSpotIn
 // Contains the parameters for RequestSpotInstances.
 type RequestSpotInstancesInput struct {
 
-	// The user-specified name for a logical grouping of requests. When you specify
-	// an Availability Zone group in a Spot Instance request, all Spot Instances in the
+	// The user-specified name for a logical grouping of requests. When you specify an
+	// Availability Zone group in a Spot Instance request, all Spot Instances in the
 	// request are launched in the same Availability Zone. Instance proximity is
 	// maintained with this parameter, but the choice of Availability Zone is not. The
 	// group applies only to requests for Spot Instances of the same instance type. Any
@@ -61,8 +61,8 @@ type RequestSpotInstancesInput struct {
 	// Deprecated.
 	BlockDurationMinutes *int32
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	ClientToken *string
 
@@ -93,10 +93,10 @@ type RequestSpotInstancesInput struct {
 	// interrupted more frequently than if you do not specify this parameter.
 	SpotPrice *string
 
-	// The key-value pair for tagging the Spot Instance request on creation. The
-	// value for ResourceType  must be spot-instances-request, otherwise the Spot
-	// Instance request fails. To tag the Spot Instance request after it has been
-	// created, see CreateTags (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html)
+	// The key-value pair for tagging the Spot Instance request on creation. The value
+	// for ResourceType must be spot-instances-request , otherwise the Spot Instance
+	// request fails. To tag the Spot Instance request after it has been created, see
+	// CreateTags (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html)
 	// .
 	TagSpecifications []types.TagSpecification
 
@@ -113,8 +113,13 @@ type RequestSpotInstancesInput struct {
 	ValidFrom *time.Time
 
 	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
-	//     - For a persistent request, the request remains active until the ValidUntil date and time is reached. Otherwise, the request remains active until you cancel it.
-	//     - For a one-time request, the request remains active until all instances launch, the request is canceled, or the ValidUntil date and time is reached. By default, the request is valid for 7 days from the date the request was created.
+	//   - For a persistent request, the request remains active until the ValidUntil
+	//   date and time is reached. Otherwise, the request remains active until you cancel
+	//   it.
+	//   - For a one-time request, the request remains active until all instances
+	//   launch, the request is canceled, or the ValidUntil date and time is reached.
+	//   By default, the request is valid for 7 days from the date the request was
+	//   created.
 	ValidUntil *time.Time
 
 	noSmithyDocumentSerde

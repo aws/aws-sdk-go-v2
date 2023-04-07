@@ -24,9 +24,9 @@ import (
 // in the same AWS account, you don't need to create a project policy. To copy a
 // model, the destination project, source project, and source model version must
 // already exist. Copying a model version takes a while to complete. To get the
-// current status, call DescribeProjectVersions  and check the value of Status in
+// current status, call DescribeProjectVersions and check the value of Status in
 // the ProjectVersionDescription object. The copy operation has finished when the
-// value of Status  is COPYING_COMPLETED .
+// value of Status is COPYING_COMPLETED .
 func (c *Client) CopyProjectVersion(ctx context.Context, params *CopyProjectVersionInput, optFns ...func(*Options)) (*CopyProjectVersionOutput, error) {
 	if params == nil {
 		params = &CopyProjectVersionInput{}
@@ -78,11 +78,11 @@ type CopyProjectVersionInput struct {
 	// results and manifest files written to the output Amazon S3 bucket ( OutputConfig
 	// ). If you choose to use your own KMS key, you need the following permissions on
 	// the KMS key.
-	//     - kms:CreateGrant
-	//     - kms:DescribeKey
-	//     - kms:GenerateDataKey
-	//     - kms:Decrypt
-	// If you don't specify a value for KmsKeyId, images copied into the service are
+	//   - kms:CreateGrant
+	//   - kms:DescribeKey
+	//   - kms:GenerateDataKey
+	//   - kms:Decrypt
+	// If you don't specify a value for KmsKeyId , images copied into the service are
 	// encrypted using a key that AWS owns and manages.
 	KmsKeyId *string
 

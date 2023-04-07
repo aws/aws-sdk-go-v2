@@ -101,10 +101,9 @@ const (
 	ConnectionAuthorizationTypeApiKey                 ConnectionAuthorizationType = "API_KEY"
 )
 
-// Values returns all known values for ConnectionAuthorizationType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ConnectionAuthorizationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionAuthorizationType) Values() []ConnectionAuthorizationType {
 	return []ConnectionAuthorizationType{
 		"BASIC",
@@ -237,9 +236,9 @@ const (
 	PlacementConstraintTypeMemberOf         PlacementConstraintType = "memberOf"
 )
 
-// Values returns all known values for PlacementConstraintType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PlacementConstraintType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementConstraintType) Values() []PlacementConstraintType {
 	return []PlacementConstraintType{
 		"distinctInstance",
@@ -295,9 +294,9 @@ const (
 	ReplayStateFailed     ReplayState = "FAILED"
 )
 
-// Values returns all known values for ReplayState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReplayState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ReplayState) Values() []ReplayState {
 	return []ReplayState{
 		"STARTING",

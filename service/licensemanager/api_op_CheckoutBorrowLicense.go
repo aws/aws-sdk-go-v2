@@ -29,8 +29,8 @@ func (c *Client) CheckoutBorrowLicense(ctx context.Context, params *CheckoutBorr
 
 type CheckoutBorrowLicenseInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	//
 	// This member is required.
 	ClientToken *string

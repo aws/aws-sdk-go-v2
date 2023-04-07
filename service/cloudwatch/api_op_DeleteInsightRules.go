@@ -31,8 +31,8 @@ func (c *Client) DeleteInsightRules(ctx context.Context, params *DeleteInsightRu
 
 type DeleteInsightRulesInput struct {
 
-	// An array of the rule names to delete. If you need to find out the names of
-	// your rules, use DescribeInsightRules (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html)
+	// An array of the rule names to delete. If you need to find out the names of your
+	// rules, use DescribeInsightRules (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html)
 	// .
 	//
 	// This member is required.

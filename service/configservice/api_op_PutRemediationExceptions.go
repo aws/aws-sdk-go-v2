@@ -21,12 +21,12 @@ import (
 // Services resource, it is recommended that remediation is set as manual
 // remediation until the given Config rule for the specified resource evaluates the
 // resource as NON_COMPLIANT . Once the resource has been evaluated as
-// NON_COMPLIANT, you can add remediation exceptions and change the remediation
+// NON_COMPLIANT , you can add remediation exceptions and change the remediation
 // type back from Manual to Auto if you want to use auto-remediation. Otherwise,
 // using auto-remediation before a NON_COMPLIANT evaluation result can delete
 // resources before the exception is applied. Placing an exception can only be
 // performed on resources that are NON_COMPLIANT . If you use this API for
-// COMPLIANT resources or resources that are NOT_APPLICABLE, a remediation
+// COMPLIANT resources or resources that are NOT_APPLICABLE , a remediation
 // exception will not be generated. For more information on the conditions that
 // initiate the possible Config evaluation results, see Concepts | Config Rules (https://docs.aws.amazon.com/config/latest/developerguide/config-concepts.html#aws-config-rules)
 // in the Config Developer Guide.

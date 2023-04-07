@@ -86,8 +86,7 @@ func (e *InvalidArgsException) ErrorCode() string {
 }
 func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested Amazon Resource Name (ARN) does not refer to an existing
-// resource.
+// The requested Amazon Resource Name (ARN) does not refer to an existing resource.
 type InvalidArnException struct {
 	Message *string
 
@@ -113,7 +112,7 @@ func (e *InvalidArnException) ErrorCode() string {
 }
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One or more values in the DomainValidationOption  structure is incorrect.
+// One or more values in the DomainValidationOption structure is incorrect.
 type InvalidDomainValidationOptionsException struct {
 	Message *string
 

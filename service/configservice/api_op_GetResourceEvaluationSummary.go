@@ -52,7 +52,7 @@ type GetResourceEvaluationSummaryOutput struct {
 	// The compliance status of the resource evaluation summary.
 	Compliance types.ComplianceType
 
-	// Returns an EvaluationContext  object.
+	// Returns an EvaluationContext object.
 	EvaluationContext *types.EvaluationContext
 
 	// Lists results of the mode that you requested to retrieve the resource
@@ -63,10 +63,10 @@ type GetResourceEvaluationSummaryOutput struct {
 	// provided resource details.
 	EvaluationStartTimestamp *time.Time
 
-	// Returns an EvaluationStatus  object.
+	// Returns an EvaluationStatus object.
 	EvaluationStatus *types.EvaluationStatus
 
-	// Returns a ResourceDetails  object.
+	// Returns a ResourceDetails object.
 	ResourceDetails *types.ResourceDetails
 
 	// The unique ResourceEvaluationId of Amazon Web Services resource execution for

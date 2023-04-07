@@ -37,7 +37,7 @@ type ModifyClusterDbRevisionInput struct {
 	ClusterIdentifier *string
 
 	// The identifier of the database revision. You can retrieve this value from the
-	// response to the DescribeClusterDbRevisions  request.
+	// response to the DescribeClusterDbRevisions request.
 	//
 	// This member is required.
 	RevisionTarget *string

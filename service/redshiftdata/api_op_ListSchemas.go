@@ -11,11 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the schemas in a database. A token is returned to page through the
-// schema list. Depending on the authorization method, use one of the following
+// Lists the schemas in a database. A token is returned to page through the schema
+// list. Depending on the authorization method, use one of the following
 // combinations of request parameters:
-//   - Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name.
-//   - Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the redshift-serverless:GetCredentials operation is required.
+//   - Secrets Manager - when connecting to a cluster, specify the Amazon Resource
+//     Name (ARN) of the secret, the database name, and the cluster identifier that
+//     matches the cluster in the secret. When connecting to a serverless workgroup,
+//     specify the Amazon Resource Name (ARN) of the secret and the database name.
+//   - Temporary credentials - when connecting to a cluster, specify the cluster
+//     identifier, the database name, and the database user name. Also, permission to
+//     call the redshift:GetClusterCredentials operation is required. When connecting
+//     to a serverless workgroup, specify the workgroup name and database name. Also,
+//     permission to call the redshift-serverless:GetCredentials operation is
+//     required.
 //
 // For more information about the Amazon Redshift Data API and CLI usage examples,
 // see Using the Amazon Redshift Data API (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html)
@@ -37,24 +45,23 @@ func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optF
 
 type ListSchemasInput struct {
 
-	// The name of the database that contains the schemas to list. If
-	// ConnectedDatabaseis not specified, this is also the database to connect to
-	// with your authentication credentials.
+	// The name of the database that contains the schemas to list. If ConnectedDatabase
+	// is not specified, this is also the database to connect to with your
+	// authentication credentials.
 	//
 	// This member is required.
 	Database *string
 
-	// The cluster identifier. This parameter is required when connecting to a
-	// cluster and authenticating using either Secrets Manager or temporary
-	// credentials.
+	// The cluster identifier. This parameter is required when connecting to a cluster
+	// and authenticating using either Secrets Manager or temporary credentials.
 	ClusterIdentifier *string
 
-	// A database name. The connected database is specified when you connect with
-	// your authentication credentials.
+	// A database name. The connected database is specified when you connect with your
+	// authentication credentials.
 	ConnectedDatabase *string
 
-	// The database user name. This parameter is required when connecting to a
-	// cluster and authenticating using temporary credentials.
+	// The database user name. This parameter is required when connecting to a cluster
+	// and authenticating using temporary credentials.
 	DbUser *string
 
 	// The maximum number of schemas to return in the response. If more schemas exist
@@ -181,8 +188,8 @@ type ListSchemasPaginatorOptions struct {
 	// results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

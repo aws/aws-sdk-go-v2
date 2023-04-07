@@ -97,9 +97,9 @@ const (
 	ComputeTypeBuildGeneral1Large  ComputeType = "BUILD_GENERAL1_LARGE"
 )
 
-// Values returns all known values for ComputeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ComputeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ComputeType) Values() []ComputeType {
 	return []ComputeType{
 		"BUILD_GENERAL1_SMALL",
@@ -215,9 +215,9 @@ const (
 	EnvironmentHealthStatusSuspended EnvironmentHealthStatus = "Suspended"
 )
 
-// Values returns all known values for EnvironmentHealthStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EnvironmentHealthStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentHealthStatus) Values() []EnvironmentHealthStatus {
 	return []EnvironmentHealthStatus{
 		"NoData",
@@ -319,9 +319,9 @@ const (
 	FailureTypePermissionsError        FailureType = "PermissionsError"
 )
 
-// Values returns all known values for FailureType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FailureType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FailureType) Values() []FailureType {
 	return []FailureType{
 		"UpdateCancelled",

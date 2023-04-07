@@ -39,7 +39,7 @@ type RemoveFacetFromObjectInput struct {
 	// This member is required.
 	ObjectReference *types.ObjectReference
 
-	// The facet to remove. See SchemaFacet  for details.
+	// The facet to remove. See SchemaFacet for details.
 	//
 	// This member is required.
 	SchemaFacet *types.SchemaFacet

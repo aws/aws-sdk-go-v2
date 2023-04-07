@@ -55,7 +55,7 @@ type GetTagValuesOutput struct {
 
 	// A string that indicates that there is more data available than this response
 	// contains. To receive the next part of the response, specify this response value
-	// as the PaginationToken  value in the request for the next page.
+	// as the PaginationToken value in the request for the next page.
 	PaginationToken *string
 
 	// A list of all tag values for the specified key currently used in the specified
@@ -140,8 +140,8 @@ var _ GetTagValuesAPIClient = (*Client)(nil)
 
 // GetTagValuesPaginatorOptions is the paginator options for GetTagValues
 type GetTagValuesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

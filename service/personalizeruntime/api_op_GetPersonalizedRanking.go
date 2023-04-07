@@ -38,7 +38,7 @@ type GetPersonalizedRankingInput struct {
 	// This member is required.
 	CampaignArn *string
 
-	// A list of items (by itemId) to rank. If an item was not included in the
+	// A list of items (by itemId ) to rank. If an item was not included in the
 	// training dataset, the item is appended to the end of the reranked list. The
 	// maximum is 500.
 	//
@@ -66,11 +66,11 @@ type GetPersonalizedRankingInput struct {
 	// parameter in your filter expression, provide the parameter name (in matching
 	// case) as a key and the filter value(s) as the corresponding value. Separate
 	// multiple values for one parameter with a comma. For filter expressions that use
-	// an INCLUDE element to include items, you must provide values for all
-	// parameters that are defined in the expression. For filters with expressions that
-	// use an EXCLUDE  element to exclude items, you can omit the filter-values.In
-	// this case, Amazon Personalize doesn't use that portion of the expression to
-	// filter recommendations. For more information, see Filtering Recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter.html)
+	// an INCLUDE element to include items, you must provide values for all parameters
+	// that are defined in the expression. For filters with expressions that use an
+	// EXCLUDE element to exclude items, you can omit the filter-values .In this case,
+	// Amazon Personalize doesn't use that portion of the expression to filter
+	// recommendations. For more information, see Filtering Recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter.html)
 	// .
 	FilterValues map[string]string
 

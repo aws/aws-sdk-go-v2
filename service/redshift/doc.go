@@ -3,9 +3,9 @@
 // Package redshift provides the API client, operations, and parameter types for
 // Amazon Redshift.
 //
-// Amazon Redshift Overview This is an interface reference for Amazon Redshift.
-// It contains documentation for one of the programming or command line interfaces
-// you can use to manage Amazon Redshift clusters. Note that Amazon Redshift is
+// Amazon Redshift Overview This is an interface reference for Amazon Redshift. It
+// contains documentation for one of the programming or command line interfaces you
+// can use to manage Amazon Redshift clusters. Note that Amazon Redshift is
 // asynchronous, which means that some interfaces may require techniques, such as
 // polling or asynchronous callback handlers, to determine when a command has been
 // applied. In this reference, the parameter descriptions indicate whether a change

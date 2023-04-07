@@ -10,8 +10,8 @@ import (
 	"time"
 )
 
-// This tests how timestamps are serialized, including using the default format
-// of date-time and various @timestampFormat trait values.
+// This tests how timestamps are serialized, including using the default format of
+// date-time and various @timestampFormat trait values.
 func (c *Client) XmlTimestamps(ctx context.Context, params *XmlTimestampsInput, optFns ...func(*Options)) (*XmlTimestampsOutput, error) {
 	if params == nil {
 		params = &XmlTimestampsInput{}

@@ -45,18 +45,18 @@ type Environment struct {
 	// The day and time the environment was created.
 	CreatedAt *time.Time
 
-	// The relative path to the DAGs folder on your Amazon S3 bucket. For example,
-	// dags . To learn more, see Adding or updating DAGs (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html)
+	// The relative path to the DAGs folder on your Amazon S3 bucket. For example, dags
+	// . To learn more, see Adding or updating DAGs (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html)
 	// .
 	DagS3Path *string
 
-	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large.
+	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large .
 	// To learn more, see Amazon MWAA environment class (https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html)
 	// .
 	EnvironmentClass *string
 
-	// The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA
-	// to access Amazon Web Services resources in your environment. For example,
+	// The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to
+	// access Amazon Web Services resources in your environment. For example,
 	// arn:aws:iam::123456789:role/my-execution-role . To learn more, see Amazon MWAA
 	// Execution role (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html)
 	// .
@@ -124,17 +124,21 @@ type Environment struct {
 	SourceBucketArn *string
 
 	// The status of the Amazon MWAA environment. Valid values:
-	//     - CREATING - Indicates the request to create the environment is in progress.
-	//     - CREATE_FAILED - Indicates the request to create the environment failed, and the environment could not be created.
-	//     - AVAILABLE - Indicates the request was successful and the environment is ready to use.
-	//     - UPDATING - Indicates the request to update the environment is in progress.
-	//     - DELETING - Indicates the request to delete the environment is in progress.
-	//     - DELETED - Indicates the request to delete the environment is complete, and the environment has been deleted.
-	//     - UNAVAILABLE - Indicates the request failed, but the environment was unable to rollback and is not in a stable state.
-	//     - UPDATE_FAILED - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use.
-	//
-	// We recommend reviewing our troubleshooting guide for a list of common errors and
-	// their solutions. To learn more, see Amazon MWAA troubleshooting (https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html)
+	//   - CREATING - Indicates the request to create the environment is in progress.
+	//   - CREATE_FAILED - Indicates the request to create the environment failed, and
+	//   the environment could not be created.
+	//   - AVAILABLE - Indicates the request was successful and the environment is
+	//   ready to use.
+	//   - UPDATING - Indicates the request to update the environment is in progress.
+	//   - DELETING - Indicates the request to delete the environment is in progress.
+	//   - DELETED - Indicates the request to delete the environment is complete, and
+	//   the environment has been deleted.
+	//   - UNAVAILABLE - Indicates the request failed, but the environment was unable
+	//   to rollback and is not in a stable state.
+	//   - UPDATE_FAILED - Indicates the request to update the environment failed, and
+	//   the environment has rolled back successfully and is ready to use.
+	// We recommend reviewing our troubleshooting guide for a list of common errors
+	// and their solutions. To learn more, see Amazon MWAA troubleshooting (https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html)
 	// .
 	Status EnvironmentStatus
 
@@ -161,8 +165,8 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the status of the last update on the environment, and any errors
-// that were encountered.
+// Describes the status of the last update on the environment, and any errors that
+// were encountered.
 type LastUpdate struct {
 
 	// The day and time of the last update on the environment.
@@ -223,10 +227,9 @@ type LoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Internal only. Collects Apache Airflow metrics. To learn more about the
-// metrics published to Amazon CloudWatch, see Amazon MWAA performance metrics in
-// Amazon CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html)
-// .
+// Internal only. Collects Apache Airflow metrics. To learn more about the metrics
+// published to Amazon CloudWatch, see Amazon MWAA performance metrics in Amazon
+// CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html) .
 type MetricDatum struct {
 
 	// Internal only. The name of the metric.
@@ -264,7 +267,7 @@ type ModuleLoggingConfiguration struct {
 	// .
 	CloudWatchLogGroupArn *string
 
-	// Indicates whether the Apache Airflow log type (e.g. DagProcessingLogs) is
+	// Indicates whether the Apache Airflow log type (e.g. DagProcessingLogs ) is
 	// enabled.
 	Enabled *bool
 
@@ -274,7 +277,7 @@ type ModuleLoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Enables the Apache Airflow log type (e.g. DagProcessingLogs) and defines the
+// Enables the Apache Airflow log type (e.g. DagProcessingLogs ) and defines the
 // log level to send to CloudWatch Logs (e.g. INFO ).
 type ModuleLoggingConfigurationInput struct {
 
@@ -298,9 +301,8 @@ type ModuleLoggingConfigurationInput struct {
 // .
 type NetworkConfiguration struct {
 
-	// A list of security group IDs. To learn more, see Security in your VPC on
-	// Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html)
-	// .
+	// A list of security group IDs. To learn more, see Security in your VPC on Amazon
+	// MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html) .
 	SecurityGroupIds []string
 
 	// A list of subnet IDs. To learn more, see About networking on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html)
@@ -311,8 +313,8 @@ type NetworkConfiguration struct {
 }
 
 // Internal only. Represents a set of statistics that describe a specific metric.
-// To learn more about the metrics published to Amazon CloudWatch, see Amazon
-// MWAA performance metrics in Amazon CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html)
+// To learn more about the metrics published to Amazon CloudWatch, see Amazon MWAA
+// performance metrics in Amazon CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html)
 // .
 type StatisticSet struct {
 
@@ -343,14 +345,14 @@ type UpdateError struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the VPC networking components used to secure and enable network
-// traffic between the Amazon Web Services resources for your environment. To learn
-// more, see About networking on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html)
+// Defines the VPC networking components used to secure and enable network traffic
+// between the Amazon Web Services resources for your environment. To learn more,
+// see About networking on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html)
 // .
 type UpdateNetworkConfigurationInput struct {
 
-	// A list of security group IDs. A security group must be attached to the same
-	// VPC as the subnets. To learn more, see Security in your VPC on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html)
+	// A list of security group IDs. A security group must be attached to the same VPC
+	// as the subnets. To learn more, see Security in your VPC on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html)
 	// .
 	//
 	// This member is required.

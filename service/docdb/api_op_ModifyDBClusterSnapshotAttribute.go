@@ -13,16 +13,16 @@ import (
 
 // Adds an attribute and values to, or removes an attribute and values from, a
 // manual cluster snapshot. To share a manual cluster snapshot with other Amazon
-// Web Services accounts, specify restore  as the AttributeName , and use the
-// ValuesToAddparameter to add a list of IDs of the Amazon Web Services accounts
+// Web Services accounts, specify restore as the AttributeName , and use the
+// ValuesToAdd parameter to add a list of IDs of the Amazon Web Services accounts
 // that are authorized to restore the manual cluster snapshot. Use the value all
 // to make the manual cluster snapshot public, which means that it can be copied or
 // restored by all Amazon Web Services accounts. Do not add the all value for any
 // manual cluster snapshots that contain private information that you don't want
 // available to all Amazon Web Services accounts. If a manual cluster snapshot is
 // encrypted, it can be shared, but only by specifying a list of authorized Amazon
-// Web Services account IDs for the ValuesToAdd  parameter. You can't use all as
-// a value for that parameter in this case.
+// Web Services account IDs for the ValuesToAdd parameter. You can't use all as a
+// value for that parameter in this case.
 func (c *Client) ModifyDBClusterSnapshotAttribute(ctx context.Context, params *ModifyDBClusterSnapshotAttributeInput, optFns ...func(*Options)) (*ModifyDBClusterSnapshotAttributeOutput, error) {
 	if params == nil {
 		params = &ModifyDBClusterSnapshotAttributeInput{}
@@ -54,7 +54,7 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	DBClusterSnapshotIdentifier *string
 
 	// A list of cluster snapshot attributes to add to the attribute specified by
-	// AttributeName. To authorize other Amazon Web Services accounts to copy or
+	// AttributeName . To authorize other Amazon Web Services accounts to copy or
 	// restore a manual cluster snapshot, set this list to include one or more Amazon
 	// Web Services account IDs. To make the manual cluster snapshot restorable by any
 	// Amazon Web Services account, set it to all . Do not add the all value for any
@@ -62,14 +62,14 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	// be available to all Amazon Web Services accounts.
 	ValuesToAdd []string
 
-	// A list of cluster snapshot attributes to remove from the attribute specified
-	// by AttributeName. To remove authorization for other Amazon Web Services
-	// accounts to copy or restore a manual cluster snapshot, set this list to include
-	// one or more Amazon Web Services account identifiers. To remove authorization for
-	// any Amazon Web Services account to copy or restore the cluster snapshot, set it
-	// to all  . If you specify all, an Amazon Web Services account whose account ID
-	// is explicitly added to the restore attribute can still copy or restore a
-	// manual cluster snapshot.
+	// A list of cluster snapshot attributes to remove from the attribute specified by
+	// AttributeName . To remove authorization for other Amazon Web Services accounts
+	// to copy or restore a manual cluster snapshot, set this list to include one or
+	// more Amazon Web Services account identifiers. To remove authorization for any
+	// Amazon Web Services account to copy or restore the cluster snapshot, set it to
+	// all . If you specify all , an Amazon Web Services account whose account ID is
+	// explicitly added to the restore attribute can still copy or restore a manual
+	// cluster snapshot.
 	ValuesToRemove []string
 
 	noSmithyDocumentSerde

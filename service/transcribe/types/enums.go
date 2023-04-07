@@ -193,9 +193,9 @@ const (
 	MediaFormatWebm MediaFormat = "webm"
 )
 
-// Values returns all known values for MediaFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MediaFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MediaFormat) Values() []MediaFormat {
 	return []MediaFormat{
 		"mp3",
@@ -215,8 +215,8 @@ const (
 	MedicalContentIdentificationTypePhi MedicalContentIdentificationType = "PHI"
 )
 
-// Values returns all known values for MedicalContentIdentificationType. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for MedicalContentIdentificationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (MedicalContentIdentificationType) Values() []MedicalContentIdentificationType {
@@ -234,9 +234,9 @@ const (
 	ModelStatusCompleted  ModelStatus = "COMPLETED"
 )
 
-// Values returns all known values for ModelStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModelStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ModelStatus) Values() []ModelStatus {
 	return []ModelStatus{
 		"IN_PROGRESS",
@@ -416,8 +416,8 @@ const (
 	TranscriptFilterTypeExact TranscriptFilterType = "EXACT"
 )
 
-// Values returns all known values for TranscriptFilterType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TranscriptFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TranscriptFilterType) Values() []TranscriptFilterType {
 	return []TranscriptFilterType{
@@ -455,8 +455,8 @@ const (
 	TypeDictation    Type = "DICTATION"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

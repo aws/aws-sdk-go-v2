@@ -15,7 +15,7 @@ import (
 // returned includes the current capacity (number of EC2 instances) and some
 // scaling settings for the requested fleet location. Use this operation to
 // retrieve capacity information for a fleet's remote location or home Region (you
-// can also retrieve home Region capacity by calling DescribeFleetCapacity). To
+// can also retrieve home Region capacity by calling DescribeFleetCapacity ). To
 // retrieve capacity data, identify a fleet and location. If successful, a
 // FleetCapacity object is returned for the requested fleet location. Learn more
 // Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
@@ -37,8 +37,8 @@ func (c *Client) DescribeFleetLocationCapacity(ctx context.Context, params *Desc
 
 type DescribeFleetLocationCapacityInput struct {
 
-	// A unique identifier for the fleet to request location capacity for. You can
-	// use either the fleet ID or ARN value.
+	// A unique identifier for the fleet to request location capacity for. You can use
+	// either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string

@@ -43,8 +43,8 @@ type CreateLocationEfsInput struct {
 	// This member is required.
 	EfsFilesystemArn *string
 
-	// Specifies the Amazon Resource Name (ARN) of the access point that DataSync
-	// uses to access the Amazon EFS file system.
+	// Specifies the Amazon Resource Name (ARN) of the access point that DataSync uses
+	// to access the Amazon EFS file system.
 	AccessPointArn *string
 
 	// Specifies an Identity and Access Management (IAM) role that DataSync assumes
@@ -53,7 +53,7 @@ type CreateLocationEfsInput struct {
 
 	// Specifies whether you want DataSync to use Transport Layer Security (TLS) 1.2
 	// encryption when it copies data to or from the Amazon EFS file system. If you
-	// specify an access point using AccessPointArn  or an IAM role using
+	// specify an access point using AccessPointArn or an IAM role using
 	// FileSystemAccessRoleArn , you must set this parameter to TLS1_2 .
 	InTransitEncryption types.EfsInTransitEncryption
 

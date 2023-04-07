@@ -50,12 +50,12 @@ type ListLabelingJobsInput struct {
 	// The maximum number of labeling jobs to return in each page of the response.
 	MaxResults *int32
 
-	// A string in the labeling job name. This filter returns only labeling jobs
-	// whose name contains the specified string.
+	// A string in the labeling job name. This filter returns only labeling jobs whose
+	// name contains the specified string.
 	NameContains *string
 
 	// If the result of the previous ListLabelingJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of labeling jobs, use
+	// response includes a NextToken . To retrieve the next set of labeling jobs, use
 	// the token in the next request.
 	NextToken *string
 
@@ -73,7 +73,7 @@ type ListLabelingJobsInput struct {
 
 type ListLabelingJobsOutput struct {
 
-	// An array of LabelingJobSummary  objects, each describing a labeling job.
+	// An array of LabelingJobSummary objects, each describing a labeling job.
 	LabelingJobSummaryList []types.LabelingJobSummary
 
 	// If the response is truncated, SageMaker returns this token. To retrieve the
@@ -159,8 +159,8 @@ type ListLabelingJobsPaginatorOptions struct {
 	// The maximum number of labeling jobs to return in each page of the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

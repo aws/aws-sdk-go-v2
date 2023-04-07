@@ -33,7 +33,7 @@ func (c *Client) UpdateSystemTemplate(ctx context.Context, params *UpdateSystemT
 
 type UpdateSystemTemplateInput struct {
 
-	// The DefinitionDocument  that contains the updated system definition.
+	// The DefinitionDocument that contains the updated system definition.
 	//
 	// This member is required.
 	Definition *types.DefinitionDocument

@@ -41,8 +41,8 @@ type UpdateMaintenanceStartTimeInput struct {
 	// This member is required.
 	GatewayARN *string
 
-	// The hour component of the maintenance start time represented as hh, where hh
-	// is the hour (00 to 23). The hour of the day is in the time zone of the gateway.
+	// The hour component of the maintenance start time represented as hh, where hh is
+	// the hour (00 to 23). The hour of the day is in the time zone of the gateway.
 	//
 	// This member is required.
 	HourOfDay *int32
@@ -59,8 +59,8 @@ type UpdateMaintenanceStartTimeInput struct {
 	// 28 represents the last day of the month.
 	DayOfMonth *int32
 
-	// The day of the week component of the maintenance start time week represented
-	// as an ordinal number from 0 to 6, where 0 represents Sunday and 6 Saturday.
+	// The day of the week component of the maintenance start time week represented as
+	// an ordinal number from 0 to 6, where 0 represents Sunday and 6 Saturday.
 	DayOfWeek *int32
 
 	noSmithyDocumentSerde

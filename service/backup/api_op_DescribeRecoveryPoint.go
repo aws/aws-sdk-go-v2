@@ -65,7 +65,7 @@ type DescribeRecoveryPointOutput struct {
 	// hyphens.
 	BackupVaultName *string
 
-	// A CalculatedLifecycle  object containing DeleteAt  and MoveToColdStorageAt
+	// A CalculatedLifecycle object containing DeleteAt and MoveToColdStorageAt
 	// timestamps.
 	CalculatedLifecycle *types.CalculatedLifecycle
 
@@ -101,7 +101,7 @@ type DescribeRecoveryPointOutput struct {
 	IamRoleArn *string
 
 	// A Boolean value that is returned as TRUE if the specified recovery point is
-	// encrypted, or FALSE  if the recovery point is not encrypted.
+	// encrypted, or FALSE if the recovery point is not encrypted.
 	IsEncrypted bool
 
 	// This returns the boolean value that a recovery point is a parent (composite)
@@ -114,15 +114,15 @@ type DescribeRecoveryPointOutput struct {
 	// 26, 2018 12:11:30.087 AM.
 	LastRestoreTime *time.Time
 
-	// The lifecycle defines when a protected resource is transitioned to cold
-	// storage and when it expires. Backup transitions and expires backups
-	// automatically according to the lifecycle that you define. Backups that are
-	// transitioned to cold storage must be stored in cold storage for a minimum of 90
-	// days. Therefore, the “retention” setting must be 90 days greater than the
-	// “transition to cold after days” setting. The “transition to cold after days”
-	// setting cannot be changed after a backup has been transitioned to cold. Resource
-	// types that are able to be transitioned to cold storage are listed in the
-	// "Lifecycle to cold storage" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
+	// The lifecycle defines when a protected resource is transitioned to cold storage
+	// and when it expires. Backup transitions and expires backups automatically
+	// according to the lifecycle that you define. Backups that are transitioned to
+	// cold storage must be stored in cold storage for a minimum of 90 days. Therefore,
+	// the “retention” setting must be 90 days greater than the “transition to cold
+	// after days” setting. The “transition to cold after days” setting cannot be
+	// changed after a backup has been transitioned to cold. Resource types that are
+	// able to be transitioned to cold storage are listed in the "Lifecycle to cold
+	// storage" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *types.Lifecycle
 
@@ -137,8 +137,8 @@ type DescribeRecoveryPointOutput struct {
 	// .
 	RecoveryPointArn *string
 
-	// An ARN that uniquely identifies a saved resource. The format of the ARN
-	// depends on the resource type.
+	// An ARN that uniquely identifies a saved resource. The format of the ARN depends
+	// on the resource type.
 	ResourceArn *string
 
 	// This is the non-unique name of the resource that belongs to the specified
@@ -152,7 +152,7 @@ type DescribeRecoveryPointOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies the source vault where
 	// the resource was originally backed up in; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:BackupVault. If the recovery is
+	// arn:aws:backup:us-east-1:123456789012:vault:BackupVault . If the recovery is
 	// restored to the same Amazon Web Services account or Region, this value will be
 	// null .
 	SourceBackupVaultArn *string
@@ -180,8 +180,8 @@ type DescribeRecoveryPointOutput struct {
 	// A status message explaining the reason for the recovery point deletion failure.
 	StatusMessage *string
 
-	// Specifies the storage class of the recovery point. Valid values are WARM  or
-	// COLD .
+	// Specifies the storage class of the recovery point. Valid values are WARM or COLD
+	// .
 	StorageClass types.StorageClass
 
 	// Metadata pertaining to the operation's result.

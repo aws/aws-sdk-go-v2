@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// Output parameter of the GetRecords API. The existing child shard of the
-// current shard.
+// Output parameter of the GetRecords API. The existing child shard of the current
+// shard.
 type ChildShard struct {
 
 	// The range of possible hash key values for the shard, which is a set of ordered
@@ -30,15 +30,15 @@ type ChildShard struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents the details of the consumer you registered. This
-// type of object is returned by RegisterStreamConsumer .
+// An object that represents the details of the consumer you registered. This type
+// of object is returned by RegisterStreamConsumer .
 type Consumer struct {
 
-	// When you register a consumer, Kinesis Data Streams generates an ARN for it.
-	// You need this ARN to be able to call SubscribeToShard. If you delete a
-	// consumer and then create a new one with the same name, it won't have the same
-	// ARN. That's because consumer ARNs contain the creation timestamp. This is
-	// important to keep in mind if you have IAM policies that reference consumer ARNs.
+	// When you register a consumer, Kinesis Data Streams generates an ARN for it. You
+	// need this ARN to be able to call SubscribeToShard . If you delete a consumer and
+	// then create a new one with the same name, it won't have the same ARN. That's
+	// because consumer ARNs contain the creation timestamp. This is important to keep
+	// in mind if you have IAM policies that reference consumer ARNs.
 	//
 	// This member is required.
 	ConsumerARN *string
@@ -48,13 +48,12 @@ type Consumer struct {
 	// This member is required.
 	ConsumerCreationTimestamp *time.Time
 
-	// The name of the consumer is something you choose when you register the
-	// consumer.
+	// The name of the consumer is something you choose when you register the consumer.
 	//
 	// This member is required.
 	ConsumerName *string
 
-	// A consumer can't read data while in the CREATING  or DELETING  states.
+	// A consumer can't read data while in the CREATING or DELETING states.
 	//
 	// This member is required.
 	ConsumerStatus ConsumerStatus
@@ -66,11 +65,11 @@ type Consumer struct {
 // object is returned by DescribeStreamConsumer .
 type ConsumerDescription struct {
 
-	// When you register a consumer, Kinesis Data Streams generates an ARN for it.
-	// You need this ARN to be able to call SubscribeToShard. If you delete a
-	// consumer and then create a new one with the same name, it won't have the same
-	// ARN. That's because consumer ARNs contain the creation timestamp. This is
-	// important to keep in mind if you have IAM policies that reference consumer ARNs.
+	// When you register a consumer, Kinesis Data Streams generates an ARN for it. You
+	// need this ARN to be able to call SubscribeToShard . If you delete a consumer and
+	// then create a new one with the same name, it won't have the same ARN. That's
+	// because consumer ARNs contain the creation timestamp. This is important to keep
+	// in mind if you have IAM policies that reference consumer ARNs.
 	//
 	// This member is required.
 	ConsumerARN *string
@@ -80,13 +79,12 @@ type ConsumerDescription struct {
 	// This member is required.
 	ConsumerCreationTimestamp *time.Time
 
-	// The name of the consumer is something you choose when you register the
-	// consumer.
+	// The name of the consumer is something you choose when you register the consumer.
 	//
 	// This member is required.
 	ConsumerName *string
 
-	// A consumer can't read data while in the CREATING  or DELETING  states.
+	// A consumer can't read data while in the CREATING or DELETING states.
 	//
 	// This member is required.
 	ConsumerStatus ConsumerStatus
@@ -104,15 +102,15 @@ type EnhancedMetrics struct {
 
 	// List of shard-level metrics. The following are the valid shard-level metrics.
 	// The value " ALL " enhances every metric.
-	//     - IncomingBytes
-	//     - IncomingRecords
-	//     - OutgoingBytes
-	//     - OutgoingRecords
-	//     - WriteProvisionedThroughputExceeded
-	//     - ReadProvisionedThroughputExceeded
-	//     - IteratorAgeMilliseconds
-	//     - ALL
-	//  For more information, see Monitoring the Amazon Kinesis Data Streams Service
+	//   - IncomingBytes
+	//   - IncomingRecords
+	//   - OutgoingBytes
+	//   - OutgoingRecords
+	//   - WriteProvisionedThroughputExceeded
+	//   - ReadProvisionedThroughputExceeded
+	//   - IteratorAgeMilliseconds
+	//   - ALL
+	// For more information, see Monitoring the Amazon Kinesis Data Streams Service
 	// with Amazon CloudWatch (https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html)
 	// in the Amazon Kinesis Data Streams Developer Guide.
 	ShardLevelMetrics []MetricsName
@@ -168,18 +166,18 @@ type PutRecordsRequestEntry struct {
 }
 
 // Represents the result of an individual record from a PutRecords request. A
-// record that is successfully added to a stream includes SequenceNumber  and
+// record that is successfully added to a stream includes SequenceNumber and
 // ShardId in the result. A record that fails to be added to the stream includes
-// ErrorCode and ErrorMessage  in the result.
+// ErrorCode and ErrorMessage in the result.
 type PutRecordsResultEntry struct {
 
-	// The error code for an individual record result. ErrorCodes  can be either
+	// The error code for an individual record result. ErrorCodes can be either
 	// ProvisionedThroughputExceededException or InternalFailure .
 	ErrorCode *string
 
-	// The error message for an individual record result. An ErrorCode  value of
-	// ProvisionedThroughputExceededExceptionhas an error message that includes the
-	// account ID, stream name, and shard ID. An ErrorCode  value of InternalFailure
+	// The error message for an individual record result. An ErrorCode value of
+	// ProvisionedThroughputExceededException has an error message that includes the
+	// account ID, stream name, and shard ID. An ErrorCode value of InternalFailure
 	// has the error message "Internal Service Failure" .
 	ErrorMessage *string
 
@@ -220,8 +218,9 @@ type Record struct {
 
 	// The encryption type used on the record. This parameter can be one of the
 	// following values:
-	//     - NONE : Do not encrypt the records in the stream.
-	//     - KMS : Use server-side encryption on the records in the stream using a customer-managed Amazon Web Services KMS key.
+	//   - NONE : Do not encrypt the records in the stream.
+	//   - KMS : Use server-side encryption on the records in the stream using a
+	//   customer-managed Amazon Web Services KMS key.
 	EncryptionType EncryptionType
 
 	noSmithyDocumentSerde
@@ -270,30 +269,39 @@ type Shard struct {
 	noSmithyDocumentSerde
 }
 
-// The request parameter used to filter out the response of the ListShards  API.
+// The request parameter used to filter out the response of the ListShards API.
 type ShardFilter struct {
 
 	// The shard type specified in the ShardFilter parameter. This is a required
 	// property of the ShardFilter parameter. You can specify the following valid
 	// values:
-	//     - AFTER_SHARD_ID - the response includes all the shards, starting with the shard whose ID immediately follows the ShardId that you provided.
-	//     - AT_TRIM_HORIZON - the response includes all the shards that were open at TRIM_HORIZON .
-	//     - FROM_TRIM_HORIZON - (default), the response includes all the shards within the retention period of the data stream (trim to tip).
-	//     - AT_LATEST - the response includes only the currently open shards of the data stream.
-	//     - AT_TIMESTAMP - the response includes all shards whose start timestamp is less than or equal to the given timestamp and end timestamp is greater than or equal to the given timestamp or still open.
-	//     - FROM_TIMESTAMP - the response incldues all closed shards whose end timestamp is greater than or equal to the given timestamp and also all open shards. Corrected to TRIM_HORIZON of the data stream if FROM_TIMESTAMP is less than the TRIM_HORIZON value.
+	//   - AFTER_SHARD_ID - the response includes all the shards, starting with the
+	//   shard whose ID immediately follows the ShardId that you provided.
+	//   - AT_TRIM_HORIZON - the response includes all the shards that were open at
+	//   TRIM_HORIZON .
+	//   - FROM_TRIM_HORIZON - (default), the response includes all the shards within
+	//   the retention period of the data stream (trim to tip).
+	//   - AT_LATEST - the response includes only the currently open shards of the data
+	//   stream.
+	//   - AT_TIMESTAMP - the response includes all shards whose start timestamp is
+	//   less than or equal to the given timestamp and end timestamp is greater than or
+	//   equal to the given timestamp or still open.
+	//   - FROM_TIMESTAMP - the response incldues all closed shards whose end timestamp
+	//   is greater than or equal to the given timestamp and also all open shards.
+	//   Corrected to TRIM_HORIZON of the data stream if FROM_TIMESTAMP is less than
+	//   the TRIM_HORIZON value.
 	//
 	// This member is required.
 	Type ShardFilterType
 
-	// The exclusive start shardID  speified in the ShardFilter parameter. This
-	// property can only be used if the AFTER_SHARD_ID  shard type is specified.
+	// The exclusive start shardID speified in the ShardFilter parameter. This
+	// property can only be used if the AFTER_SHARD_ID shard type is specified.
 	ShardId *string
 
 	// The timestamps specified in the ShardFilter parameter. A timestamp is a Unix
 	// epoch date with precision in milliseconds. For example,
 	// 2016-04-04T19:58:46.480-00:00 or 1459799926.480. This property can only be used
-	// if FROM_TIMESTAMP  or AT_TIMESTAMP  shard types are specified.
+	// if FROM_TIMESTAMP or AT_TIMESTAMP shard types are specified.
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -303,27 +311,27 @@ type ShardFilter struct {
 type StartingPosition struct {
 
 	// You can set the starting position to one of the following values:
-	// AT_SEQUENCE_NUMBER: Start streaming from the position denoted by the sequence
-	// number specified in the SequenceNumber  field. AFTER_SEQUENCE_NUMBER: Start
+	// AT_SEQUENCE_NUMBER : Start streaming from the position denoted by the sequence
+	// number specified in the SequenceNumber field. AFTER_SEQUENCE_NUMBER : Start
 	// streaming right after the position denoted by the sequence number specified in
-	// the SequenceNumber  field. AT_TIMESTAMP: Start streaming from the position
-	// denoted by the time stamp specified in the Timestamp  field. TRIM_HORIZON:
-	// Start streaming at the last untrimmed record in the shard, which is the oldest
-	// data record in the shard. LATEST: Start streaming just after the most recent
-	// record in the shard, so that you always read the most recent data in the shard.
+	// the SequenceNumber field. AT_TIMESTAMP : Start streaming from the position
+	// denoted by the time stamp specified in the Timestamp field. TRIM_HORIZON : Start
+	// streaming at the last untrimmed record in the shard, which is the oldest data
+	// record in the shard. LATEST : Start streaming just after the most recent record
+	// in the shard, so that you always read the most recent data in the shard.
 	//
 	// This member is required.
 	Type ShardIteratorType
 
 	// The sequence number of the data record in the shard from which to start
-	// streaming. To specify a sequence number, set StartingPosition  to
+	// streaming. To specify a sequence number, set StartingPosition to
 	// AT_SEQUENCE_NUMBER or AFTER_SEQUENCE_NUMBER .
 	SequenceNumber *string
 
 	// The time stamp of the data record from which to start reading. To specify a
-	// time stamp, set StartingPosition  to Type AT_TIMESTAMP. A time stamp is the
-	// Unix epoch date with precision in milliseconds. For example,
-	// 2016-04-04T19:58:46.480-00:00 or 1459799926.480. If a record with this exact
+	// time stamp, set StartingPosition to Type AT_TIMESTAMP . A time stamp is the Unix
+	// epoch date with precision in milliseconds. For example,
+	// 2016-04-04T19:58:46.480-00:00 or 1459799926.480 . If a record with this exact
 	// time stamp does not exist, records will be streamed from the next (later)
 	// record. If the time stamp is older than the current trim horizon, records will
 	// be streamed from the oldest untrimmed data record ( TRIM_HORIZON ).
@@ -373,18 +381,24 @@ type StreamDescription struct {
 
 	// The current status of the stream being described. The stream status is one of
 	// the following states:
-	//     - CREATING - The stream is being created. Kinesis Data Streams immediately returns and sets StreamStatus to CREATING .
-	//     - DELETING - The stream is being deleted. The specified stream is in the DELETING state until Kinesis Data Streams completes the deletion.
-	//     - ACTIVE - The stream exists and is ready for read and write operations or deletion. You should perform read and write operations only on an ACTIVE stream.
-	//     - UPDATING - Shards in the stream are being merged or split. Read and write operations continue to work while the stream is in the UPDATING state.
+	//   - CREATING - The stream is being created. Kinesis Data Streams immediately
+	//   returns and sets StreamStatus to CREATING .
+	//   - DELETING - The stream is being deleted. The specified stream is in the
+	//   DELETING state until Kinesis Data Streams completes the deletion.
+	//   - ACTIVE - The stream exists and is ready for read and write operations or
+	//   deletion. You should perform read and write operations only on an ACTIVE
+	//   stream.
+	//   - UPDATING - Shards in the stream are being merged or split. Read and write
+	//   operations continue to work while the stream is in the UPDATING state.
 	//
 	// This member is required.
 	StreamStatus StreamStatus
 
 	// The server-side encryption type used on the stream. This parameter can be one
 	// of the following values:
-	//     - NONE : Do not encrypt the records in the stream.
-	//     - KMS : Use server-side encryption on the records in the stream using a customer-managed Amazon Web Services KMS key.
+	//   - NONE : Do not encrypt the records in the stream.
+	//   - KMS : Use server-side encryption on the records in the stream using a
+	//   customer-managed Amazon Web Services KMS key.
 	EncryptionType EncryptionType
 
 	// The GUID for the customer-managed Amazon Web Services KMS key to use for
@@ -392,11 +406,12 @@ type StreamDescription struct {
 	// ARN to either an alias or a key, or an alias name prefixed by "alias/".You can
 	// also use a master key owned by Kinesis Data Streams by specifying the alias
 	// aws/kinesis .
-	//     - Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-	//     - Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-	//     - Globally unique key ID example: 12345678-1234-1234-1234-123456789012
-	//     - Alias name example: alias/MyAliasName
-	//     - Master key owned by Kinesis Data Streams: alias/aws/kinesis
+	//   - Key ARN example:
+	//   arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	//   - Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	//   - Globally unique key ID example: 12345678-1234-1234-1234-123456789012
+	//   - Alias name example: alias/MyAliasName
+	//   - Master key owned by Kinesis Data Streams: alias/aws/kinesis
 	KeyId *string
 
 	// Specifies the capacity mode to which you want to set your data stream.
@@ -442,10 +457,15 @@ type StreamDescriptionSummary struct {
 
 	// The current status of the stream being described. The stream status is one of
 	// the following states:
-	//     - CREATING - The stream is being created. Kinesis Data Streams immediately returns and sets StreamStatus to CREATING .
-	//     - DELETING - The stream is being deleted. The specified stream is in the DELETING state until Kinesis Data Streams completes the deletion.
-	//     - ACTIVE - The stream exists and is ready for read and write operations or deletion. You should perform read and write operations only on an ACTIVE stream.
-	//     - UPDATING - Shards in the stream are being merged or split. Read and write operations continue to work while the stream is in the UPDATING state.
+	//   - CREATING - The stream is being created. Kinesis Data Streams immediately
+	//   returns and sets StreamStatus to CREATING .
+	//   - DELETING - The stream is being deleted. The specified stream is in the
+	//   DELETING state until Kinesis Data Streams completes the deletion.
+	//   - ACTIVE - The stream exists and is ready for read and write operations or
+	//   deletion. You should perform read and write operations only on an ACTIVE
+	//   stream.
+	//   - UPDATING - Shards in the stream are being merged or split. Read and write
+	//   operations continue to work while the stream is in the UPDATING state.
 	//
 	// This member is required.
 	StreamStatus StreamStatus
@@ -454,8 +474,8 @@ type StreamDescriptionSummary struct {
 	ConsumerCount *int32
 
 	// The encryption type used. This value is one of the following:
-	//     - KMS
-	//     - NONE
+	//   - KMS
+	//   - NONE
 	EncryptionType EncryptionType
 
 	// The GUID for the customer-managed Amazon Web Services KMS key to use for
@@ -463,11 +483,12 @@ type StreamDescriptionSummary struct {
 	// ARN to either an alias or a key, or an alias name prefixed by "alias/".You can
 	// also use a master key owned by Kinesis Data Streams by specifying the alias
 	// aws/kinesis .
-	//     - Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-	//     - Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-	//     - Globally unique key ID example: 12345678-1234-1234-1234-123456789012
-	//     - Alias name example: alias/MyAliasName
-	//     - Master key owned by Kinesis Data Streams: alias/aws/kinesis
+	//   - Key ARN example:
+	//   arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	//   - Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	//   - Globally unique key ID example: 12345678-1234-1234-1234-123456789012
+	//   - Alias name example: alias/MyAliasName
+	//   - Master key owned by Kinesis Data Streams: alias/aws/kinesis
 	KeyId *string
 
 	// Specifies the capacity mode to which you want to set your data stream.
@@ -522,13 +543,13 @@ type StreamSummary struct {
 	noSmithyDocumentSerde
 }
 
-// After you call SubscribeToShard, Kinesis Data Streams sends events of this
-// type over an HTTP/2 connection to your consumer.
+// After you call SubscribeToShard , Kinesis Data Streams sends events of this type
+// over an HTTP/2 connection to your consumer.
 type SubscribeToShardEvent struct {
 
-	// Use this as SequenceNumber  in the next call to SubscribeToShard , with
-	// StartingPosition set to AT_SEQUENCE_NUMBER  or AFTER_SEQUENCE_NUMBER . Use
-	// ContinuationSequenceNumberfor checkpointing because it captures your shard
+	// Use this as SequenceNumber in the next call to SubscribeToShard , with
+	// StartingPosition set to AT_SEQUENCE_NUMBER or AFTER_SEQUENCE_NUMBER . Use
+	// ContinuationSequenceNumber for checkpointing because it captures your shard
 	// progress even when no data is written to the shard.
 	//
 	// This member is required.
@@ -564,9 +585,9 @@ type SubscribeToShardEventStream interface {
 	isSubscribeToShardEventStream()
 }
 
-// After you call SubscribeToShard, Kinesis Data Streams sends events of this
-// type to your consumer. For an example of how to handle these events, see
-// Enhanced Fan-Out Using the Kinesis Data Streams API .
+// After you call SubscribeToShard , Kinesis Data Streams sends events of this type
+// to your consumer. For an example of how to handle these events, see Enhanced
+// Fan-Out Using the Kinesis Data Streams API .
 type SubscribeToShardEventStreamMemberSubscribeToShardEvent struct {
 	Value SubscribeToShardEvent
 

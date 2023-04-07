@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified inline policy that is embedded in the specified IAM
-// role. A role can also have managed policies attached to it. To detach a managed
-// policy from a role, use DetachRolePolicy. For more information about policies,
-// refer to Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// Deletes the specified inline policy that is embedded in the specified IAM role.
+// A role can also have managed policies attached to it. To detach a managed policy
+// from a role, use DetachRolePolicy . For more information about policies, refer
+// to Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) DeleteRolePolicy(ctx context.Context, params *DeleteRolePolicyInput, optFns ...func(*Options)) (*DeleteRolePolicyOutput, error) {
 	if params == nil {
@@ -33,7 +33,7 @@ func (c *Client) DeleteRolePolicy(ctx context.Context, params *DeleteRolePolicyI
 type DeleteRolePolicyInput struct {
 
 	// The name of the inline policy to delete from the specified IAM role. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex) )
 	// a string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//

@@ -29,8 +29,8 @@ func (c *Client) GetEmailTemplate(ctx context.Context, params *GetEmailTemplateI
 	return out, nil
 }
 
-// Represents a request to display the template object (which includes the
-// subject line, HTML part and text part) for the template you specify.
+// Represents a request to display the template object (which includes the subject
+// line, HTML part and text part) for the template you specify.
 type GetEmailTemplateInput struct {
 
 	// The name of the template.

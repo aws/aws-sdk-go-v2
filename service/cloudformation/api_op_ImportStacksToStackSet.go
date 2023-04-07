@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Import existing stacks into a new stack sets. Use the stack import operation
-// to import up to 10 stacks into a new stack set in the same account as the source
+// Import existing stacks into a new stack sets. Use the stack import operation to
+// import up to 10 stacks into a new stack set in the same account as the source
 // stack or in a different administrator account and Region, by specifying the
 // stack ID of the stack you intend to import. ImportStacksToStackSet is only
 // supported by self-managed permissions.
@@ -40,10 +40,10 @@ type ImportStacksToStackSetInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// By default, SELF  is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for stack sets with self-managed
 	// permissions.
-	//     - If you are signed in to the management account, specify SELF .
-	//     - For service managed stack sets, specify DELEGATED_ADMIN .
+	//   - If you are signed in to the management account, specify SELF .
+	//   - For service managed stack sets, specify DELEGATED_ADMIN .
 	CallAs types.CallAs
 
 	// A unique, user defined, identifier for the stack set operation.
@@ -60,11 +60,11 @@ type ImportStacksToStackSetInput struct {
 	OrganizationalUnitIds []string
 
 	// The IDs of the stacks you are importing into a stack set. You import up to 10
-	// stacks per stack set at a time. Specify either StackIds  or StackIdsUrl .
+	// stacks per stack set at a time. Specify either StackIds or StackIdsUrl .
 	StackIds []string
 
 	// The Amazon S3 URL which contains list of stack ids to be inputted. Specify
-	// either StackIds  or StackIdsUrl .
+	// either StackIds or StackIdsUrl .
 	StackIdsUrl *string
 
 	noSmithyDocumentSerde

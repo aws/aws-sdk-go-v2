@@ -33,8 +33,10 @@ type GetResourceShareAssociationsInput struct {
 
 	// Specifies whether you want to retrieve the associations that involve a
 	// specified resource or principal.
-	//     - PRINCIPAL – list the principals that are associated with the specified resource share.
-	//     - RESOURCE – list the resources that are associated with the specified resource share.
+	//   - PRINCIPAL – list the principals that are associated with the specified
+	//   resource share.
+	//   - RESOURCE – list the resources that are associated with the specified
+	//   resource share.
 	//
 	// This member is required.
 	AssociationType types.ResourceShareAssociationType
@@ -46,18 +48,17 @@ type GetResourceShareAssociationsInput struct {
 	// the response. If you do not include this parameter, it defaults to a value that
 	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
-	// Include the specified value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that the service
+	// Include the specified value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that the service
 	// might return fewer results than the maximum even when there are more results
 	// available. You should check NextToken after every operation to ensure that you
 	// receive all of the results.
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it
-	// indicates that more output is available. Set this parameter to the value
-	// provided by the previous call's NextToken response to request the next page of
-	// results.
+	// received a NextToken response in the previous request. If you did, it indicates
+	// that more output is available. Set this parameter to the value provided by the
+	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
 	// Specifies the ID of the principal whose resource shares you want to retrieve.
@@ -81,11 +82,11 @@ type GetResourceShareAssociationsInput struct {
 
 type GetResourceShareAssociationsOutput struct {
 
-	// If present, this value indicates that more output is available than is
-	// included in the current response. Use this value in the NextToken request
-	// parameter in a subsequent call to the operation to get the next part of the
-	// output. You should repeat this until the NextToken response element comes back
-	// as null . This indicates that this is the last page of results.
+	// If present, this value indicates that more output is available than is included
+	// in the current response. Use this value in the NextToken request parameter in a
+	// subsequent call to the operation to get the next part of the output. You should
+	// repeat this until the NextToken response element comes back as null . This
+	// indicates that this is the last page of results.
 	NextToken *string
 
 	// An array of objects that contain the details about the associations.
@@ -175,15 +176,15 @@ type GetResourceShareAssociationsPaginatorOptions struct {
 	// the response. If you do not include this parameter, it defaults to a value that
 	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
-	// Include the specified value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that the service
+	// Include the specified value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that the service
 	// might return fewer results than the maximum even when there are more results
 	// available. You should check NextToken after every operation to ensure that you
 	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

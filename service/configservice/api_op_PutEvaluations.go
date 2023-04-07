@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used by an Lambda function to deliver evaluation results to Config. This
-// action is required in every Lambda function that is invoked by an Config rule.
+// Used by an Lambda function to deliver evaluation results to Config. This action
+// is required in every Lambda function that is invoked by an Config rule.
 func (c *Client) PutEvaluations(ctx context.Context, params *PutEvaluationsInput, optFns ...func(*Options)) (*PutEvaluationsOutput, error) {
 	if params == nil {
 		params = &PutEvaluationsInput{}
@@ -41,11 +41,11 @@ type PutEvaluationsInput struct {
 	// Config rule that invokes the Lambda function.
 	Evaluations []types.Evaluation
 
-	// Use this parameter to specify a test run for PutEvaluations. You can verify
+	// Use this parameter to specify a test run for PutEvaluations . You can verify
 	// whether your Lambda function will deliver evaluation results to Config. No
 	// updates occur to your existing evaluations, and evaluation results are not sent
-	// to Config. When TestMode  is true , PutEvaluations doesn't require a valid
-	// value for the ResultToken  parameter, but the value cannot be null.
+	// to Config. When TestMode is true , PutEvaluations doesn't require a valid value
+	// for the ResultToken parameter, but the value cannot be null.
 	TestMode bool
 
 	noSmithyDocumentSerde

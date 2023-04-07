@@ -33,8 +33,7 @@ func (c *Client) PutManagedScalingPolicy(ctx context.Context, params *PutManaged
 
 type PutManagedScalingPolicyInput struct {
 
-	// Specifies the ID of an EMR cluster where the managed scaling policy is
-	// attached.
+	// Specifies the ID of an EMR cluster where the managed scaling policy is attached.
 	//
 	// This member is required.
 	ClusterId *string

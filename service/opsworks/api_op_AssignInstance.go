@@ -13,7 +13,8 @@ import (
 // Assign a registered instance to a layer.
 //   - You can assign registered on-premises instances to any layer type.
 //   - You can assign registered Amazon EC2 instances only to custom layers.
-//   - You cannot use this action with instances that were created with AWS OpsWorks Stacks.
+//   - You cannot use this action with instances that were created with AWS
+//     OpsWorks Stacks.
 //
 // Required Permissions: To use this action, an AWS Identity and Access Management
 // (IAM) user must have a Manage permissions level for the stack or an attached

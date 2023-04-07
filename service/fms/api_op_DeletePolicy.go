@@ -34,16 +34,16 @@ type DeletePolicyInput struct {
 	// This member is required.
 	PolicyId *string
 
-	// If True, the request performs cleanup according to the policy type. For WAF
-	// and Shield Advanced policies, the cleanup does the following:
-	//     - Deletes rule groups created by Firewall Manager
-	//     - Removes web ACLs from in-scope resources
-	//     - Deletes web ACLs that contain no rules or rule groups
-	// For security group
-	// policies, the cleanup does the following for each security group in the policy:
-	//     - Disassociates the security group from in-scope resources
-	//     - Deletes the security group if it was created through Firewall Manager and if it's no longer associated with any resources through another policy
-	//
+	// If True , the request performs cleanup according to the policy type. For WAF and
+	// Shield Advanced policies, the cleanup does the following:
+	//   - Deletes rule groups created by Firewall Manager
+	//   - Removes web ACLs from in-scope resources
+	//   - Deletes web ACLs that contain no rules or rule groups
+	// For security group policies, the cleanup does the following for each security
+	// group in the policy:
+	//   - Disassociates the security group from in-scope resources
+	//   - Deletes the security group if it was created through Firewall Manager and
+	//   if it's no longer associated with any resources through another policy
 	// After the cleanup, in-scope resources are no longer protected by web ACLs in
 	// this policy. Protection of out-of-scope resources remains unchanged. Scope is
 	// determined by tags that you create and accounts that you associate with the

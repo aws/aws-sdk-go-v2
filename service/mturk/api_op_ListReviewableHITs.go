@@ -32,8 +32,8 @@ func (c *Client) ListReviewableHITs(ctx context.Context, params *ListReviewableH
 
 type ListReviewableHITsInput struct {
 
-	// The ID of the HIT type of the HITs to consider for the query. If not
-	// specified, all HITs for the Reviewer are considered
+	// The ID of the HIT type of the HITs to consider for the query. If not specified,
+	// all HITs for the Reviewer are considered
 	HITTypeId *string
 
 	// Limit the number of results returned.
@@ -42,7 +42,7 @@ type ListReviewableHITsInput struct {
 	// Pagination Token
 	NextToken *string
 
-	// Can be either Reviewable  or Reviewing . Reviewable is the default value.
+	// Can be either Reviewable or Reviewing . Reviewable is the default value.
 	Status types.ReviewableHITStatus
 
 	noSmithyDocumentSerde
@@ -58,8 +58,8 @@ type ListReviewableHITsOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of HITs on this page in the filtered results list, equivalent to
-	// the number of HITs being returned by this call.
+	// The number of HITs on this page in the filtered results list, equivalent to the
+	// number of HITs being returned by this call.
 	NumResults *int32
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +142,8 @@ type ListReviewableHITsPaginatorOptions struct {
 	// Limit the number of results returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes the specified Amazon Chime Voice Connector group. Any
-// VoiceConnectorItemsand phone numbers associated with the group must be removed
+// VoiceConnectorItems and phone numbers associated with the group must be removed
 // before it can be deleted.
 func (c *Client) DeleteVoiceConnectorGroup(ctx context.Context, params *DeleteVoiceConnectorGroupInput, optFns ...func(*Options)) (*DeleteVoiceConnectorGroupOutput, error) {
 	if params == nil {

@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF
-// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
 // and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 // . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns an array of ByteMatchSetSummary  objects.
+// and global use. Returns an array of ByteMatchSetSummary objects.
 func (c *Client) ListByteMatchSets(ctx context.Context, params *ListByteMatchSetsInput, optFns ...func(*Options)) (*ListByteMatchSetsOutput, error) {
 	if params == nil {
 		params = &ListByteMatchSetsInput{}
@@ -37,14 +36,14 @@ type ListByteMatchSetsInput struct {
 	// Specifies the number of ByteMatchSet objects that you want AWS WAF to return
 	// for this request. If you have more ByteMatchSets objects than the number you
 	// specify for Limit , the response includes a NextMarker value that you can use
-	// to get another batch of ByteMatchSet  objects.
+	// to get another batch of ByteMatchSet objects.
 	Limit int32
 
-	// If you specify a value for Limit  and you have more ByteMatchSets than the
-	// value of Limit , AWS WAF returns a NextMarker value in the response that
-	// allows you to list another group of ByteMatchSets. For the second and
-	// subsequent ListByteMatchSets  requests, specify the value of NextMarker from
-	// the previous response to get information about another batch of ByteMatchSets .
+	// If you specify a value for Limit and you have more ByteMatchSets than the value
+	// of Limit , AWS WAF returns a NextMarker value in the response that allows you
+	// to list another group of ByteMatchSets . For the second and subsequent
+	// ListByteMatchSets requests, specify the value of NextMarker from the previous
+	// response to get information about another batch of ByteMatchSets .
 	NextMarker *string
 
 	noSmithyDocumentSerde
@@ -52,14 +51,13 @@ type ListByteMatchSetsInput struct {
 
 type ListByteMatchSetsOutput struct {
 
-	// An array of ByteMatchSetSummary  objects.
+	// An array of ByteMatchSetSummary objects.
 	ByteMatchSets []types.ByteMatchSetSummary
 
-	// If you have more ByteMatchSet  objects than the number that you specified for
-	// Limit in the request, the response includes a NextMarker  value. To list more
-	// ByteMatchSet objects, submit another ListByteMatchSets request, and specify
-	// the NextMarker  value from the response in the NextMarker value in the next
-	// request.
+	// If you have more ByteMatchSet objects than the number that you specified for
+	// Limit in the request, the response includes a NextMarker value. To list more
+	// ByteMatchSet objects, submit another ListByteMatchSets request, and specify the
+	// NextMarker value from the response in the NextMarker value in the next request.
 	NextMarker *string
 
 	// Metadata pertaining to the operation's result.

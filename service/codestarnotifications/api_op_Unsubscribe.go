@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes an association between a notification rule and an Chatbot topic so
-// that subscribers to that topic stop receiving notifications when the events
-// described in the rule are triggered.
+// Removes an association between a notification rule and an Chatbot topic so that
+// subscribers to that topic stop receiving notifications when the events described
+// in the rule are triggered.
 func (c *Client) Unsubscribe(ctx context.Context, params *UnsubscribeInput, optFns ...func(*Options)) (*UnsubscribeOutput, error) {
 	if params == nil {
 		params = &UnsubscribeInput{}
@@ -45,8 +45,8 @@ type UnsubscribeInput struct {
 
 type UnsubscribeOutput struct {
 
-	// The Amazon Resource Name (ARN) of the the notification rule from which you
-	// have removed a subscription.
+	// The Amazon Resource Name (ARN) of the the notification rule from which you have
+	// removed a subscription.
 	//
 	// This member is required.
 	Arn *string

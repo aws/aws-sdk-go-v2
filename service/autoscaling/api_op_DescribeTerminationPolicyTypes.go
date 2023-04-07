@@ -35,8 +35,8 @@ type DescribeTerminationPolicyTypesInput struct {
 type DescribeTerminationPolicyTypesOutput struct {
 
 	// The termination policies supported by Amazon EC2 Auto Scaling: OldestInstance ,
-	// OldestLaunchConfiguration , NewestInstance , ClosestToNextInstanceHour ,
-	// Default , OldestLaunchTemplate , and AllocationStrategy .
+	// OldestLaunchConfiguration , NewestInstance , ClosestToNextInstanceHour , Default
+	// , OldestLaunchTemplate , and AllocationStrategy .
 	TerminationPolicyTypes []string
 
 	// Metadata pertaining to the operation's result.

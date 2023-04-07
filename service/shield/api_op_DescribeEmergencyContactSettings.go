@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A list of email addresses and phone numbers that the Shield Response Team
-// (SRT) can use to contact you if you have proactive engagement enabled, for
-// escalations to the SRT and to initiate proactive customer support.
+// A list of email addresses and phone numbers that the Shield Response Team (SRT)
+// can use to contact you if you have proactive engagement enabled, for escalations
+// to the SRT and to initiate proactive customer support.
 func (c *Client) DescribeEmergencyContactSettings(ctx context.Context, params *DescribeEmergencyContactSettingsInput, optFns ...func(*Options)) (*DescribeEmergencyContactSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeEmergencyContactSettingsInput{}
@@ -35,9 +35,9 @@ type DescribeEmergencyContactSettingsInput struct {
 
 type DescribeEmergencyContactSettingsOutput struct {
 
-	// A list of email addresses and phone numbers that the Shield Response Team
-	// (SRT) can use to contact you if you have proactive engagement enabled, for
-	// escalations to the SRT and to initiate proactive customer support.
+	// A list of email addresses and phone numbers that the Shield Response Team (SRT)
+	// can use to contact you if you have proactive engagement enabled, for escalations
+	// to the SRT and to initiate proactive customer support.
 	EmergencyContactList []types.EmergencyContact
 
 	// Metadata pertaining to the operation's result.

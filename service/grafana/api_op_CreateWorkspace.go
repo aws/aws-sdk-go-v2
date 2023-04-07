@@ -37,8 +37,8 @@ type CreateWorkspaceInput struct {
 	// Specifies whether the workspace can access Amazon Web Services resources in
 	// this Amazon Web Services account only, or whether it can also access Amazon Web
 	// Services resources in other accounts in the same organization. If you specify
-	// ORGANIZATION, you must specify which organizational units the workspace can
-	// access in the workspaceOrganizationalUnits  parameter.
+	// ORGANIZATION , you must specify which organizational units the workspace can
+	// access in the workspaceOrganizationalUnits parameter.
 	//
 	// This member is required.
 	AccountAccessType types.AccountAccessType
@@ -55,12 +55,12 @@ type CreateWorkspaceInput struct {
 	// When creating a workspace through the Amazon Web Services API, CLI or Amazon
 	// Web Services CloudFormation, you must manage IAM roles and provision the
 	// permissions that the workspace needs to use Amazon Web Services data sources and
-	// notification channels. You must also specify a workspaceRoleArn for a role
-	// that you will manage for the workspace to use when accessing those datasources
-	// and notification channels. The ability for Amazon Managed Grafana to create and
+	// notification channels. You must also specify a workspaceRoleArn for a role that
+	// you will manage for the workspace to use when accessing those datasources and
+	// notification channels. The ability for Amazon Managed Grafana to create and
 	// update IAM roles on behalf of the user is supported only in the Amazon Managed
 	// Grafana console, where this value may be set to SERVICE_MANAGED . Use only the
-	// CUSTOMER_MANAGEDpermission type when creating a workspace with the API, CLI or
+	// CUSTOMER_MANAGED permission type when creating a workspace with the API, CLI or
 	// Amazon Web Services CloudFormation. For more information, see Amazon Managed
 	// Grafana permissions and policies for Amazon Web Services data sources and
 	// notification channels (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
@@ -69,8 +69,8 @@ type CreateWorkspaceInput struct {
 	// This member is required.
 	PermissionType types.PermissionType
 
-	// A unique, case-sensitive, user-provided identifier to ensure the idempotency
-	// of the request.
+	// A unique, case-sensitive, user-provided identifier to ensure the idempotency of
+	// the request.
 	ClientToken *string
 
 	// The configuration string for the workspace that you create. For more
@@ -89,9 +89,9 @@ type CreateWorkspaceInput struct {
 	// will still be required.
 	NetworkAccessControl *types.NetworkAccessConfiguration
 
-	// The name of an IAM role that already exists to use with Organizations to
-	// access Amazon Web Services data sources and notification channels in other
-	// accounts in an organization.
+	// The name of an IAM role that already exists to use with Organizations to access
+	// Amazon Web Services data sources and notification channels in other accounts in
+	// an organization.
 	OrganizationRoleName *string
 
 	// The name of the CloudFormation stack set to use to generate IAM roles to be

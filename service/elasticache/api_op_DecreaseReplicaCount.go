@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Dynamically decreases the number of replicas in a Redis (cluster mode
-// disabled) replication group or the number of replica nodes in one or more node
-// groups (shards) of a Redis (cluster mode enabled) replication group. This
-// operation is performed with no cluster down time.
+// Dynamically decreases the number of replicas in a Redis (cluster mode disabled)
+// replication group or the number of replica nodes in one or more node groups
+// (shards) of a Redis (cluster mode enabled) replication group. This operation is
+// performed with no cluster down time.
 func (c *Client) DecreaseReplicaCount(ctx context.Context, params *DecreaseReplicaCountInput, optFns ...func(*Options)) (*DecreaseReplicaCountOutput, error) {
 	if params == nil {
 		params = &DecreaseReplicaCountInput{}
@@ -49,10 +49,11 @@ type DecreaseReplicaCountInput struct {
 	// replication groups, this is the number of replica nodes in each of the
 	// replication group's node groups. The minimum number of replicas in a shard or
 	// replication group is:
-	//     - Redis (cluster mode disabled)
-	//         - If Multi-AZ is enabled: 1
-	//         - If Multi-AZ is not enabled: 0
-	//     - Redis (cluster mode enabled): 0 (though you will not be able to failover to a replica if your primary node fails)
+	//   - Redis (cluster mode disabled)
+	//   - If Multi-AZ is enabled: 1
+	//   - If Multi-AZ is not enabled: 0
+	//   - Redis (cluster mode enabled): 0 (though you will not be able to failover to
+	//   a replica if your primary node fails)
 	NewReplicaCount *int32
 
 	// A list of ConfigureShard objects that can be used to configure each shard in a

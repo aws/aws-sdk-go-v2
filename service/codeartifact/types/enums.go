@@ -130,9 +130,9 @@ const (
 	PackageVersionErrorCodeSkipped            PackageVersionErrorCode = "SKIPPED"
 )
 
-// Values returns all known values for PackageVersionErrorCode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PackageVersionErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PackageVersionErrorCode) Values() []PackageVersionErrorCode {
 	return []PackageVersionErrorCode{
 		"ALREADY_EXISTS",
@@ -192,8 +192,8 @@ const (
 	PackageVersionStatusDeleted    PackageVersionStatus = "Deleted"
 )
 
-// Values returns all known values for PackageVersionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PackageVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PackageVersionStatus) Values() []PackageVersionStatus {
 	return []PackageVersionStatus{

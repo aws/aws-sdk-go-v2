@@ -55,7 +55,7 @@ type CreateConfigurationTemplateInput struct {
 	Description *string
 
 	// The ID of an environment whose settings you want to use to create the
-	// configuration template. You must specify EnvironmentId  if you don't specify
+	// configuration template. You must specify EnvironmentId if you don't specify
 	// PlatformArn , SolutionStackName , or SourceConfiguration .
 	EnvironmentId *string
 
@@ -68,19 +68,19 @@ type CreateConfigurationTemplateInput struct {
 
 	// The Amazon Resource Name (ARN) of the custom platform. For more information,
 	// see Custom Platforms (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html)
-	// in the AWS Elastic Beanstalk Developer Guide. If you specify PlatformArn, then
+	// in the AWS Elastic Beanstalk Developer Guide. If you specify PlatformArn , then
 	// don't specify SolutionStackName .
 	PlatformArn *string
 
 	// The name of an Elastic Beanstalk solution stack (platform version) that this
 	// configuration uses. For example, 64bit Amazon Linux 2013.09 running Tomcat 7
-	// Java 7. A solution stack specifies the operating system, runtime, and
+	// Java 7 . A solution stack specifies the operating system, runtime, and
 	// application server for a configuration template. It also determines the set of
 	// configuration options as well as the possible and default values. For more
 	// information, see Supported Platforms (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html)
-	// in the AWS Elastic Beanstalk Developer Guide. You must specify
-	// SolutionStackName if you don't specify PlatformArn , EnvironmentId , or
-	// SourceConfiguration . Use the ListAvailableSolutionStacks (https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListAvailableSolutionStacks.html)
+	// in the AWS Elastic Beanstalk Developer Guide. You must specify SolutionStackName
+	// if you don't specify PlatformArn , EnvironmentId , or SourceConfiguration . Use
+	// the ListAvailableSolutionStacks (https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListAvailableSolutionStacks.html)
 	// API to obtain a list of available solution stacks.
 	SolutionStackName *string
 
@@ -89,7 +89,7 @@ type CreateConfigurationTemplateInput struct {
 	// template to create a new configuration. Values specified in OptionSettings
 	// override any values obtained from the SourceConfiguration . You must specify
 	// SourceConfiguration if you don't specify PlatformArn , EnvironmentId , or
-	// SolutionStackName. Constraint: If both solution stack name and source
+	// SolutionStackName . Constraint: If both solution stack name and source
 	// configuration are specified, the solution stack of the source configuration
 	// template must match the specified solution stack name.
 	SourceConfiguration *types.SourceConfiguration
@@ -113,12 +113,14 @@ type CreateConfigurationTemplateOutput struct {
 	DateUpdated *time.Time
 
 	// If this configuration set is associated with an environment, the
-	// DeploymentStatusparameter indicates the deployment status of this
-	// configuration set:
-	//     - null : This configuration is not associated with a running environment.
-	//     - pending : This is a draft configuration that is not deployed to the associated environment but is in the process of deploying.
-	//     - deployed : This is the configuration that is currently deployed to the associated running environment.
-	//     - failed : This is a draft configuration that failed to successfully deploy.
+	// DeploymentStatus parameter indicates the deployment status of this configuration
+	// set:
+	//   - null : This configuration is not associated with a running environment.
+	//   - pending : This is a draft configuration that is not deployed to the
+	//   associated environment but is in the process of deploying.
+	//   - deployed : This is the configuration that is currently deployed to the
+	//   associated running environment.
+	//   - failed : This is a draft configuration that failed to successfully deploy.
 	DeploymentStatus types.ConfigurationDeploymentStatus
 
 	// Describes this configuration set.

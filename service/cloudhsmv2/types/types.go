@@ -36,7 +36,7 @@ type Backup struct {
 	DeleteTimestamp *time.Time
 
 	// Specifies whether the service should exempt a backup from the retention policy
-	// for the cluster. True  exempts a backup from the retention policy. False means
+	// for the cluster. True exempts a backup from the retention policy. False means
 	// the service applies the backup retention policy defined at the cluster.
 	NeverExpires *bool
 
@@ -60,8 +60,8 @@ type Backup struct {
 // A policy that defines the number of days to retain backups.
 type BackupRetentionPolicy struct {
 
-	// The type of backup retention policy. For the DAYS type, the value is the
-	// number of days to retain backups.
+	// The type of backup retention policy. For the DAYS type, the value is the number
+	// of days to retain backups.
 	Type BackupRetentionType
 
 	// Use a value between 7 - 379.
@@ -123,8 +123,8 @@ type Cluster struct {
 	// The identifier (ID) of the cluster's security group.
 	SecurityGroup *string
 
-	// The identifier (ID) of the backup used to create the cluster. This value
-	// exists only when the cluster was created from a backup.
+	// The identifier (ID) of the backup used to create the cluster. This value exists
+	// only when the cluster was created from a backup.
 	SourceBackupId *string
 
 	// The cluster's state.

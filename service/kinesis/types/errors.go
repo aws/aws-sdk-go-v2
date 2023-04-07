@@ -86,8 +86,8 @@ func (e *ExpiredNextTokenException) ErrorCode() string {
 }
 func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The processing of the request failed because of an unknown error, exception,
-// or failure.
+// The processing of the request failed because of an unknown error, exception, or
+// failure.
 type InternalFailureException struct {
 	Message *string
 
@@ -331,9 +331,9 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request rate for the stream is too high, or the requested data is too
-// large for the available throughput. Reduce the frequency or size of your
-// requests. For more information, see Streams Limits (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
+// The request rate for the stream is too high, or the requested data is too large
+// for the available throughput. Reduce the frequency or size of your requests. For
+// more information, see Streams Limits (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide, and Error Retries and
 // Exponential Backoff in Amazon Web Services (https://docs.aws.amazon.com/general/latest/gr/api-retries.html)
 // in the Amazon Web Services General Reference.
@@ -364,8 +364,8 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
-// The resource is not available for this operation. For successful operation,
-// the resource must be in the ACTIVE  state.
+// The resource is not available for this operation. For successful operation, the
+// resource must be in the ACTIVE state.
 type ResourceInUseException struct {
 	Message *string
 

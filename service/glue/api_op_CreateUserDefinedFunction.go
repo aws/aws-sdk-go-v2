@@ -34,7 +34,7 @@ type CreateUserDefinedFunctionInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// A FunctionInput  object that defines the function to create in the Data Catalog.
+	// A FunctionInput object that defines the function to create in the Data Catalog.
 	//
 	// This member is required.
 	FunctionInput *types.UserDefinedFunctionInput

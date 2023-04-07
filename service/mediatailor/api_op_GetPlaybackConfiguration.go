@@ -48,14 +48,14 @@ type GetPlaybackConfigurationOutput struct {
 	// VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string
 
-	// The configuration for avail suppression, also known as ad suppression. For
-	// more information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
+	// The configuration for avail suppression, also known as ad suppression. For more
+	// information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
 	// .
 	AvailSuppression *types.AvailSuppression
 
-	// The configuration for bumpers. Bumpers are short audio or video clips that
-	// play at the start or before the end of an ad break. To learn more about bumpers,
-	// see Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
+	// The configuration for bumpers. Bumpers are short audio or video clips that play
+	// at the start or before the end of an ad break. To learn more about bumpers, see
+	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
 	Bumper *types.Bumper
 
 	// The configuration for using a content delivery network (CDN), like Amazon

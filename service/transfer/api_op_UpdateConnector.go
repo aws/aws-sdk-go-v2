@@ -12,8 +12,8 @@ import (
 )
 
 // Updates some of the parameters for an existing connector. Provide the
-// ConnectorIdfor the connector that you want to update, along with the new
-// values for the parameters to update.
+// ConnectorId for the connector that you want to update, along with the new values
+// for the parameters to update.
 func (c *Client) UpdateConnector(ctx context.Context, params *UpdateConnectorInput, optFns ...func(*Options)) (*UpdateConnectorOutput, error) {
 	if params == nil {
 		params = &UpdateConnectorInput{}
@@ -37,9 +37,9 @@ type UpdateConnectorInput struct {
 	ConnectorId *string
 
 	// With AS2, you can send files by calling StartFileTransfer and specifying the
-	// file paths in the request parameter, SendFilePaths. We use the file’s parent
-	// directory (for example, for --send-file-paths /bucket/dir/file.txt, parent
-	// directory is /bucket/dir/) to temporarily store a processed AS2 message file,
+	// file paths in the request parameter, SendFilePaths . We use the file’s parent
+	// directory (for example, for --send-file-paths /bucket/dir/file.txt , parent
+	// directory is /bucket/dir/ ) to temporarily store a processed AS2 message file,
 	// store the MDN when we receive them from the partner, and write a final JSON file
 	// containing relevant metadata of the transmission. So, the AccessRole needs to
 	// provide read and write access to the parent directory of the file location used
@@ -51,9 +51,9 @@ type UpdateConnectorInput struct {
 	// A structure that contains the parameters for a connector object.
 	As2Config *types.As2ConnectorConfig
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
-	// role that allows a connector to turn on CloudWatch logging for Amazon S3 events.
-	// When set, you can view connector activity in your CloudWatch logs.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// that allows a connector to turn on CloudWatch logging for Amazon S3 events. When
+	// set, you can view connector activity in your CloudWatch logs.
 	LoggingRole *string
 
 	// The URL of the partner's AS2 endpoint.

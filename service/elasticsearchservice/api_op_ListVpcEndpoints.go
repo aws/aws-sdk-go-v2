@@ -28,7 +28,7 @@ func (c *Client) ListVpcEndpoints(ctx context.Context, params *ListVpcEndpointsI
 	return out, nil
 }
 
-// Container for request parameters to the ListVpcEndpoints  operation.
+// Container for request parameters to the ListVpcEndpoints operation.
 type ListVpcEndpointsInput struct {
 
 	// Identifier to allow retrieval of paginated results.

@@ -41,7 +41,7 @@ type GetAggregateDiscoveredResourceCountsInput struct {
 	// This member is required.
 	ConfigurationAggregatorName *string
 
-	// Filters the results based on the ResourceCountFilters  object.
+	// Filters the results based on the ResourceCountFilters object.
 	Filters *types.ResourceCountFilters
 
 	// The key to group the resource counts.
@@ -163,8 +163,8 @@ type GetAggregateDiscoveredResourceCountsPaginatorOptions struct {
 	// 0, Config uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

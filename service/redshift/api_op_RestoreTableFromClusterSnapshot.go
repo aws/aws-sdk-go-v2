@@ -18,11 +18,11 @@ import (
 // That is, you cannot overwrite an existing table in a cluster with a restored
 // table. If you want to replace your original table with a new, restored table,
 // then rename or drop your original table before you call
-// RestoreTableFromClusterSnapshot. When you have renamed your original table,
+// RestoreTableFromClusterSnapshot . When you have renamed your original table,
 // then you can pass the original name of the table as the NewTableName parameter
-// value in the call to RestoreTableFromClusterSnapshot. This way, you can
-// replace the original table with the table created from the snapshot. You can't
-// use this operation to restore tables with interleaved sort keys (https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved)
+// value in the call to RestoreTableFromClusterSnapshot . This way, you can replace
+// the original table with the table created from the snapshot. You can't use this
+// operation to restore tables with interleaved sort keys (https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved)
 // .
 func (c *Client) RestoreTableFromClusterSnapshot(ctx context.Context, params *RestoreTableFromClusterSnapshotInput, optFns ...func(*Options)) (*RestoreTableFromClusterSnapshotOutput, error) {
 	if params == nil {
@@ -74,7 +74,7 @@ type RestoreTableFromClusterSnapshotInput struct {
 	EnableCaseSensitiveIdentifier *bool
 
 	// The name of the source schema that contains the table to restore from. If you
-	// do not specify a SourceSchemaName  value, the default is public .
+	// do not specify a SourceSchemaName value, the default is public .
 	SourceSchemaName *string
 
 	// The name of the database to restore the table to.
@@ -88,7 +88,7 @@ type RestoreTableFromClusterSnapshotInput struct {
 
 type RestoreTableFromClusterSnapshotOutput struct {
 
-	// Describes the status of a RestoreTableFromClusterSnapshot  operation.
+	// Describes the status of a RestoreTableFromClusterSnapshot operation.
 	TableRestoreStatus *types.TableRestoreStatus
 
 	// Metadata pertaining to the operation's result.

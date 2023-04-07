@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a parallel data resource in Amazon Translate by importing an input
-// file from Amazon S3. Parallel data files contain examples that show how you want
+// Creates a parallel data resource in Amazon Translate by importing an input file
+// from Amazon S3. Parallel data files contain examples that show how you want
 // segments of text to be translated. By adding parallel data, you can influence
 // the style, tone, and word choice in your translation output.
 func (c *Client) CreateParallelData(ctx context.Context, params *CreateParallelDataInput, optFns ...func(*Options)) (*CreateParallelDataOutput, error) {
@@ -33,8 +33,8 @@ func (c *Client) CreateParallelData(ctx context.Context, params *CreateParallelD
 
 type CreateParallelDataInput struct {
 
-	// A unique identifier for the request. This token is automatically generated
-	// when you use Amazon Translate through an AWS SDK.
+	// A unique identifier for the request. This token is automatically generated when
+	// you use Amazon Translate through an AWS SDK.
 	//
 	// This member is required.
 	ClientToken *string
@@ -70,8 +70,8 @@ type CreateParallelDataOutput struct {
 	// The custom name that you assigned to the parallel data resource.
 	Name *string
 
-	// The status of the parallel data resource. When the resource is ready for you
-	// to use, the status is ACTIVE .
+	// The status of the parallel data resource. When the resource is ready for you to
+	// use, the status is ACTIVE .
 	Status types.ParallelDataStatus
 
 	// Metadata pertaining to the operation's result.

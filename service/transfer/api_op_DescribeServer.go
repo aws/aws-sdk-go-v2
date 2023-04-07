@@ -18,7 +18,7 @@ import (
 
 // Describes a file transfer protocol-enabled server that you specify by passing
 // the ServerId parameter. The response contains a description of a server's
-// properties. When you set EndpointType  to VPC, the response will contain the
+// properties. When you set EndpointType to VPC, the response will contain the
 // EndpointDetails .
 func (c *Client) DescribeServer(ctx context.Context, params *DescribeServerInput, optFns ...func(*Options)) (*DescribeServerOutput, error) {
 	if params == nil {
@@ -47,7 +47,7 @@ type DescribeServerInput struct {
 
 type DescribeServerOutput struct {
 
-	// An array containing the properties of a server with the ServerID  you specified.
+	// An array containing the properties of a server with the ServerID you specified.
 	//
 	// This member is required.
 	Server *types.DescribedServer
@@ -369,10 +369,9 @@ func (w *ServerOnlineWaiter) Wait(ctx context.Context, params *DescribeServerInp
 	return err
 }
 
-// WaitForOutput calls the waiter function for ServerOnline waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for ServerOnline waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
 func (w *ServerOnlineWaiter) WaitForOutput(ctx context.Context, params *DescribeServerInput, maxWaitDur time.Duration, optFns ...func(*ServerOnlineWaiterOptions)) (*DescribeServerOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

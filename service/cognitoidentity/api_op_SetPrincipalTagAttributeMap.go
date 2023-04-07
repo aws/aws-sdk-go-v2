@@ -57,7 +57,7 @@ type SetPrincipalTagAttributeMapOutput struct {
 	// The provider name you want to use for attribute mappings.
 	IdentityProviderName *string
 
-	// You can use this operation to add principal tags. The PrincipalTagsoperation
+	// You can use this operation to add principal tags. The PrincipalTags operation
 	// enables you to reference user attributes in your IAM permissions policy.
 	PrincipalTags map[string]string
 

@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF
-// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
 // and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 // . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns the SqlInjectionMatchSet  that is specified by
+// and global use. Returns the SqlInjectionMatchSet that is specified by
 // SqlInjectionMatchSetId .
 func (c *Client) GetSqlInjectionMatchSet(ctx context.Context, params *GetSqlInjectionMatchSetInput, optFns ...func(*Options)) (*GetSqlInjectionMatchSetOutput, error) {
 	if params == nil {
@@ -36,8 +35,8 @@ func (c *Client) GetSqlInjectionMatchSet(ctx context.Context, params *GetSqlInje
 // A request to get a SqlInjectionMatchSet .
 type GetSqlInjectionMatchSetInput struct {
 
-	// The SqlInjectionMatchSetId  of the SqlInjectionMatchSet  that you want to get.
-	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet  and by
+	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to get.
+	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by
 	// ListSqlInjectionMatchSets .
 	//
 	// This member is required.
@@ -46,15 +45,16 @@ type GetSqlInjectionMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response to a GetSqlInjectionMatchSet  request.
+// The response to a GetSqlInjectionMatchSet request.
 type GetSqlInjectionMatchSetOutput struct {
 
-	// Information about the SqlInjectionMatchSet  that you specified in the
-	// GetSqlInjectionMatchSetrequest. For more information, see the following
-	// topics:
-	//     - SqlInjectionMatchSet : Contains Name , SqlInjectionMatchSetId , and an array of SqlInjectionMatchTuple objects
-	//     - SqlInjectionMatchTuple : Each SqlInjectionMatchTuple object contains FieldToMatch and TextTransformation
-	//     - FieldToMatch : Contains Data and Type
+	// Information about the SqlInjectionMatchSet that you specified in the
+	// GetSqlInjectionMatchSet request. For more information, see the following topics:
+	//   - SqlInjectionMatchSet : Contains Name , SqlInjectionMatchSetId , and an array
+	//   of SqlInjectionMatchTuple objects
+	//   - SqlInjectionMatchTuple : Each SqlInjectionMatchTuple object contains
+	//   FieldToMatch and TextTransformation
+	//   - FieldToMatch : Contains Data and Type
 	SqlInjectionMatchSet *types.SqlInjectionMatchSet
 
 	// Metadata pertaining to the operation's result.

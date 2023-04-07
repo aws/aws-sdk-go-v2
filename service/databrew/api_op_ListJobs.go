@@ -30,8 +30,8 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 
 type ListJobsInput struct {
 
-	// The name of a dataset. Using this parameter indicates to return only those
-	// jobs that act on the specified dataset.
+	// The name of a dataset. Using this parameter indicates to return only those jobs
+	// that act on the specified dataset.
 	DatasetName *string
 
 	// The maximum number of results to return in this request.
@@ -42,8 +42,8 @@ type ListJobsInput struct {
 	// NextToken value from the response object of the previous page call.
 	NextToken *string
 
-	// The name of a project. Using this parameter indicates to return only those
-	// jobs that are associated with the specified project.
+	// The name of a project. Using this parameter indicates to return only those jobs
+	// that are associated with the specified project.
 	ProjectName *string
 
 	noSmithyDocumentSerde
@@ -138,8 +138,8 @@ type ListJobsPaginatorOptions struct {
 	// The maximum number of results to return in this request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

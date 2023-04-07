@@ -38,8 +38,8 @@ type ModifyLocalGatewayRouteInput struct {
 	// match the CIDR of an existing route in the table.
 	DestinationCidrBlock *string
 
-	// The ID of the prefix list. Use a prefix list in place of DestinationCidrBlock.
-	// You cannot use DestinationPrefixListId  and DestinationCidrBlock in the same
+	// The ID of the prefix list. Use a prefix list in place of DestinationCidrBlock .
+	// You cannot use DestinationPrefixListId and DestinationCidrBlock in the same
 	// request.
 	DestinationPrefixListId *string
 

@@ -87,8 +87,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occured because the client wanted to access a not supported
-// operation. Gives http status code of 409.
+// An error occured because the client wanted to access a not supported operation.
+// Gives http status code of 409.
 type DisabledOperationException struct {
 	Message *string
 
@@ -169,8 +169,8 @@ func (e *InvalidPaginationTokenException) ErrorCode() string {
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for trying to create or access sub-resource that is either
-// invalid or not supported. Gives http status code of 409.
+// An exception for trying to create or access sub-resource that is either invalid
+// or not supported. Gives http status code of 409.
 type InvalidTypeException struct {
 	Message *string
 
@@ -196,8 +196,8 @@ func (e *InvalidTypeException) ErrorCode() string {
 }
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for trying to create more than allowed resources or
-// sub-resources. Gives http status code of 409.
+// An exception for trying to create more than allowed resources or sub-resources.
+// Gives http status code of 409.
 type LimitExceededException struct {
 	Message *string
 

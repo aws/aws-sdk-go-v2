@@ -30,16 +30,15 @@ func (c *Client) ListBuiltInSlotTypes(ctx context.Context, params *ListBuiltInSl
 
 type ListBuiltInSlotTypesInput struct {
 
-	// The identifier of the language and locale of the slot types to list. The
-	// string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// The identifier of the language and locale of the slot types to list. The string
+	// must match one of the supported locales. For more information, see Supported
+	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
 	//
 	// This member is required.
 	LocaleId *string
 
-	// The maximum number of built-in slot types to return in each page of results.
-	// If there are fewer results than the max page size, only the actual number of
+	// The maximum number of built-in slot types to return in each page of results. If
+	// there are fewer results than the max page size, only the actual number of
 	// results are returned.
 	MaxResults *int32
 
@@ -69,8 +68,8 @@ type ListBuiltInSlotTypesOutput struct {
 	LocaleId *string
 
 	// A token that indicates whether there are more results to return in a response
-	// to the ListBuiltInSlotTypes  operation. If the nextToken field is present, you
-	// send the contents as the nextToken  parameter of a LIstBuiltInSlotTypes
+	// to the ListBuiltInSlotTypes operation. If the nextToken field is present, you
+	// send the contents as the nextToken parameter of a LIstBuiltInSlotTypes
 	// operation request to get the next page of results.
 	NextToken *string
 
@@ -154,13 +153,13 @@ var _ ListBuiltInSlotTypesAPIClient = (*Client)(nil)
 // ListBuiltInSlotTypesPaginatorOptions is the paginator options for
 // ListBuiltInSlotTypes
 type ListBuiltInSlotTypesPaginatorOptions struct {
-	// The maximum number of built-in slot types to return in each page of results.
-	// If there are fewer results than the max page size, only the actual number of
+	// The maximum number of built-in slot types to return in each page of results. If
+	// there are fewer results than the max page size, only the actual number of
 	// results are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

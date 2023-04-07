@@ -58,7 +58,7 @@ type DefineSuggesterInput struct {
 // newly-configured suggester.
 type DefineSuggesterOutput struct {
 
-	// The value of a Suggester  and its current status.
+	// The value of a Suggester and its current status.
 	//
 	// This member is required.
 	Suggester *types.SuggesterStatus

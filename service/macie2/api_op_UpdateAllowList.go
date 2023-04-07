@@ -39,8 +39,7 @@ type UpdateAllowListInput struct {
 	// This member is required.
 	Criteria *types.AllowListCriteria
 
-	// The unique identifier for the Amazon Macie resource that the request applies
-	// to.
+	// The unique identifier for the Amazon Macie resource that the request applies to.
 	//
 	// This member is required.
 	Id *string

@@ -28,7 +28,7 @@ func (c *Client) ListPipelines(ctx context.Context, params *ListPipelinesInput, 
 	return out, nil
 }
 
-// Represents the input of a ListPipelines  action.
+// Represents the input of a ListPipelines action.
 type ListPipelinesInput struct {
 
 	// The maximum number of pipelines to return in a single call. To retrieve the
@@ -43,7 +43,7 @@ type ListPipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListPipelines  action.
+// Represents the output of a ListPipelines action.
 type ListPipelinesOutput struct {
 
 	// If the amount of returned information is significantly large, an identifier is
@@ -134,8 +134,8 @@ type ListPipelinesPaginatorOptions struct {
 	// minimum value you can specify is 1. The maximum accepted value is 1000.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

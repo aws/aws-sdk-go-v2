@@ -12,7 +12,7 @@ import (
 )
 
 // Updates the workgroup with the specified name. The workgroup's name cannot be
-// changed. Only ConfigurationUpdates  can be specified.
+// changed. Only ConfigurationUpdates can be specified.
 func (c *Client) UpdateWorkGroup(ctx context.Context, params *UpdateWorkGroupInput, optFns ...func(*Options)) (*UpdateWorkGroupOutput, error) {
 	if params == nil {
 		params = &UpdateWorkGroupInput{}

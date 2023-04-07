@@ -41,32 +41,32 @@ func (c *Client) StartResourceEvaluation(ctx context.Context, params *StartResou
 
 type StartResourceEvaluationInput struct {
 
-	// The mode of an evaluation. The valid values for this API are DETECTIVE  and
+	// The mode of an evaluation. The valid values for this API are DETECTIVE and
 	// PROACTIVE .
 	//
 	// This member is required.
 	EvaluationMode types.EvaluationMode
 
-	// Returns a ResourceDetails  object.
+	// Returns a ResourceDetails object.
 	//
 	// This member is required.
 	ResourceDetails *types.ResourceDetails
 
-	// A client token is a unique, case-sensitive string of up to 64 ASCII
-	// characters. To make an idempotent API request using one of these actions,
-	// specify a client token in the request. Avoid reusing the same client token for
-	// other API requests. If you retry a request that completed successfully using the
-	// same client token and the same parameters, the retry succeeds without performing
-	// any further actions. If you retry a successful request using the same client
-	// token, but one or more of the parameters are different, other than the Region or
+	// A client token is a unique, case-sensitive string of up to 64 ASCII characters.
+	// To make an idempotent API request using one of these actions, specify a client
+	// token in the request. Avoid reusing the same client token for other API
+	// requests. If you retry a request that completed successfully using the same
+	// client token and the same parameters, the retry succeeds without performing any
+	// further actions. If you retry a successful request using the same client token,
+	// but one or more of the parameters are different, other than the Region or
 	// Availability Zone, the retry fails with an IdempotentParameterMismatch error.
 	ClientToken *string
 
-	// Returns an EvaluationContext  object.
+	// Returns an EvaluationContext object.
 	EvaluationContext *types.EvaluationContext
 
-	// The timeout for an evaluation. The default is 900 seconds. You cannot specify
-	// a number greater than 3600. If you specify 0, Config uses the default.
+	// The timeout for an evaluation. The default is 900 seconds. You cannot specify a
+	// number greater than 3600. If you specify 0, Config uses the default.
 	EvaluationTimeout int32
 
 	noSmithyDocumentSerde

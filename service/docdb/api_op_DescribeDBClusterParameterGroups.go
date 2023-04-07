@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DBClusterParameterGroup  descriptions. If a
-// DBClusterParameterGroupNameparameter is specified, the list contains only the
+// Returns a list of DBClusterParameterGroup descriptions. If a
+// DBClusterParameterGroupName parameter is specified, the list contains only the
 // description of the specified cluster parameter group.
 func (c *Client) DescribeDBClusterParameterGroups(ctx context.Context, params *DescribeDBClusterParameterGroupsInput, optFns ...func(*Options)) (*DescribeDBClusterParameterGroupsOutput, error) {
 	if params == nil {
@@ -35,7 +35,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 
 	// The name of a specific cluster parameter group to return details for.
 	// Constraints:
-	//     - If provided, must match the name of an existing DBClusterParameterGroup .
+	//   - If provided, must match the name of an existing DBClusterParameterGroup .
 	DBClusterParameterGroupName *string
 
 	// This parameter is not currently supported.
@@ -46,10 +46,10 @@ type DescribeDBClusterParameterGroupsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -146,14 +146,14 @@ var _ DescribeDBClusterParameterGroupsAPIClient = (*Client)(nil)
 // DescribeDBClusterParameterGroupsPaginatorOptions is the paginator options for
 // DescribeDBClusterParameterGroups
 type DescribeDBClusterParameterGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

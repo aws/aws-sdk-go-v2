@@ -44,7 +44,7 @@ type DescribeAppInstanceAdminInput struct {
 
 type DescribeAppInstanceAdminOutput struct {
 
-	// The ARN and name of the AppInstanceUser , the ARN of the AppInstance, and the
+	// The ARN and name of the AppInstanceUser , the ARN of the AppInstance , and the
 	// created and last-updated timestamps. All timestamps use epoch milliseconds.
 	AppInstanceAdmin *types.AppInstanceAdmin
 

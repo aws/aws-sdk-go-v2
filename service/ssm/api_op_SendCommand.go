@@ -32,8 +32,8 @@ type SendCommandInput struct {
 	// The name of the Amazon Web Services Systems Manager document (SSM document) to
 	// run. This can be a public document or a custom document. To run a shared
 	// document belonging to another account, specify the document Amazon Resource Name
-	// (ARN). For more information about how to use shared documents, see Using
-	// shared SSM documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
+	// (ARN). For more information about how to use shared documents, see Using shared
+	// SSM documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
 	// in the Amazon Web Services Systems Manager User Guide. If you specify a document
 	// name or ARN that hasn't been shared with your account, you receive an
 	// InvalidDocument error.
@@ -72,7 +72,7 @@ type SendCommandInput struct {
 	// node IDs is most useful when you are targeting a limited number of managed
 	// nodes, though you can specify up to 50 IDs. To target a larger number of managed
 	// nodes, or if you prefer not to list individual node IDs, we recommend using the
-	// Targets option instead. Using Targets, which accepts tag key-value pairs to
+	// Targets option instead. Using Targets , which accepts tag key-value pairs to
 	// identify the managed nodes to send commands to, you can a send command to tens,
 	// hundreds, or thousands of nodes at once. For more information about how to use
 	// targets, see Using targets and rate controls to send commands to a fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
@@ -87,9 +87,9 @@ type SendCommandInput struct {
 	MaxConcurrency *string
 
 	// The maximum number of errors allowed without the command failing. When the
-	// command fails one more time beyond the value of MaxErrors, the systems stops
+	// command fails one more time beyond the value of MaxErrors , the systems stops
 	// sending the command to additional targets. You can specify a number like 10 or a
-	// percentage like 10%. The default value is 0. For more information about how to
+	// percentage like 10%. The default value is 0 . For more information about how to
 	// use MaxErrors , see Using error controls (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors)
 	// in the Amazon Web Services Systems Manager User Guide.
 	MaxErrors *string
@@ -122,11 +122,11 @@ type SendCommandInput struct {
 
 	// An array of search criteria that targets managed nodes using a Key,Value
 	// combination that you specify. Specifying targets is most useful when you want to
-	// send a command to a large number of managed nodes at once. Using Targets,
-	// which accepts tag key-value pairs to identify managed nodes, you can send a
-	// command to tens, hundreds, or thousands of nodes at once. To send a command to a
-	// smaller number of managed nodes, you can use the InstanceIds option instead.
-	// For more information about how to use targets, see Sending commands to a fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
+	// send a command to a large number of managed nodes at once. Using Targets , which
+	// accepts tag key-value pairs to identify managed nodes, you can send a command to
+	// tens, hundreds, or thousands of nodes at once. To send a command to a smaller
+	// number of managed nodes, you can use the InstanceIds option instead. For more
+	// information about how to use targets, see Sending commands to a fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target
 
@@ -139,8 +139,8 @@ type SendCommandInput struct {
 
 type SendCommandOutput struct {
 
-	// The request as it was received by Systems Manager. Also provides the command
-	// ID which can be used future references to this request.
+	// The request as it was received by Systems Manager. Also provides the command ID
+	// which can be used future references to this request.
 	Command *types.Command
 
 	// Metadata pertaining to the operation's result.

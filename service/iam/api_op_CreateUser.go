@@ -31,9 +31,9 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 
 type CreateUserInput struct {
 
-	// The name of the user to create. IAM user, group, role, and policy names must
-	// be unique within the account. Names are not distinguished by case. For example,
-	// you cannot create resources named both "MyResource" and "myresource".
+	// The name of the user to create. IAM user, group, role, and policy names must be
+	// unique within the account. Names are not distinguished by case. For example, you
+	// cannot create resources named both "MyResource" and "myresource".
 	//
 	// This member is required.
 	UserName *string
@@ -44,7 +44,7 @@ type CreateUserInput struct {
 	// defaults to a slash (/). This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
 	// ) a string of characters consisting of either a forward slash (/) by itself or a
 	// string that must begin and end with forward slashes. In addition, it can contain
-	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F),
+	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F ),
 	// including most punctuation characters, digits, and upper and lowercased letters.
 	Path *string
 
@@ -70,7 +70,7 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful CreateUser  request.
+// Contains the response to a successful CreateUser request.
 type CreateUserOutput struct {
 
 	// A structure with details about the new IAM user.

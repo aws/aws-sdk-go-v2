@@ -62,18 +62,18 @@ type CreateComponentInput struct {
 	Description *string
 
 	// The name of the Proton environment that you want to associate this component
-	// with. You must specify this when you don't specify serviceInstanceName  and
+	// with. You must specify this when you don't specify serviceInstanceName and
 	// serviceName .
 	EnvironmentName *string
 
 	// The name of the service instance that you want to attach this component to. If
 	// you don't specify this, the component isn't attached to any service instance.
-	// Specify both serviceInstanceName  and serviceName  or neither of them.
+	// Specify both serviceInstanceName and serviceName or neither of them.
 	ServiceInstanceName *string
 
 	// The name of the service that serviceInstanceName is associated with. If you
 	// don't specify this, the component isn't attached to any service instance.
-	// Specify both serviceInstanceName  and serviceName  or neither of them.
+	// Specify both serviceInstanceName and serviceName or neither of them.
 	ServiceName *string
 
 	// The service spec that you want the component to use to access service inputs.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a message. ConnectionToken  is used for invoking this API instead of
+// Sends a message. ConnectionToken is used for invoking this API instead of
 // ParticipantToken . The Amazon Connect Participant Service APIs do not use
 // Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
 // .
@@ -38,9 +38,12 @@ type SendMessageInput struct {
 	ConnectionToken *string
 
 	// The content of the message.
-	//     - For text/plain and text/markdown , the Length Constraints are Minimum of 1, Maximum of 1024.
-	//     - For application/json , the Length Constraints are Minimum of 1, Maximum of 12000.
-	//     - For application/vnd.amazonaws.connect.message.interactive.response , the Length Constraints are Minimum of 1, Maximum of 12288.
+	//   - For text/plain and text/markdown , the Length Constraints are Minimum of 1,
+	//   Maximum of 1024.
+	//   - For application/json , the Length Constraints are Minimum of 1, Maximum of
+	//   12000.
+	//   - For application/vnd.amazonaws.connect.message.interactive.response , the
+	//   Length Constraints are Minimum of 1, Maximum of 12288.
 	//
 	// This member is required.
 	Content *string

@@ -60,9 +60,9 @@ const (
 	ChannelRoleViewer ChannelRole = "VIEWER"
 )
 
-// Values returns all known values for ChannelRole. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelRole. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ChannelRole) Values() []ChannelRole {
 	return []ChannelRole{
 		"MASTER",
@@ -78,9 +78,9 @@ const (
 	ChannelTypeFullMesh     ChannelType = "FULL_MESH"
 )
 
-// Values returns all known values for ChannelType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ChannelType) Values() []ChannelType {
 	return []ChannelType{
 		"SINGLE_MASTER",

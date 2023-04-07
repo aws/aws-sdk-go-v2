@@ -154,8 +154,8 @@ type GetIpamPoolAllocationsPaginatorOptions struct {
 	// The maximum number of results you would like returned per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -168,8 +168,7 @@ type GetIpamPoolAllocationsPaginator struct {
 	firstPage bool
 }
 
-// NewGetIpamPoolAllocationsPaginator returns a new
-// GetIpamPoolAllocationsPaginator
+// NewGetIpamPoolAllocationsPaginator returns a new GetIpamPoolAllocationsPaginator
 func NewGetIpamPoolAllocationsPaginator(client GetIpamPoolAllocationsAPIClient, params *GetIpamPoolAllocationsInput, optFns ...func(*GetIpamPoolAllocationsPaginatorOptions)) *GetIpamPoolAllocationsPaginator {
 	if params == nil {
 		params = &GetIpamPoolAllocationsInput{}

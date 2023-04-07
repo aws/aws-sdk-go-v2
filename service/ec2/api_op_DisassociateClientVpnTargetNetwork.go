@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a target network from the specified Client VPN endpoint. When
-// you disassociate the last target network from a Client VPN, the following
-// happens:
+// Disassociates a target network from the specified Client VPN endpoint. When you
+// disassociate the last target network from a Client VPN, the following happens:
 //   - The route that was automatically added for the VPC is deleted
 //   - All active client connections are terminated
 //   - New client connections are disallowed
@@ -40,8 +39,7 @@ type DisassociateClientVpnTargetNetworkInput struct {
 	// This member is required.
 	AssociationId *string
 
-	// The ID of the Client VPN endpoint from which to disassociate the target
-	// network.
+	// The ID of the Client VPN endpoint from which to disassociate the target network.
 	//
 	// This member is required.
 	ClientVpnEndpointId *string

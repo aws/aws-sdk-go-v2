@@ -18,22 +18,25 @@ import (
 // request against the tagging subresource that is associated with the object. You
 // can retrieve tags by sending a GET request. For more information, see
 // GetObjectTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html)
-// . For tagging-related restrictions related to characters and encodings, see
-// Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
+// . For tagging-related restrictions related to characters and encodings, see Tag
+// Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
 // . Note that Amazon S3 limits the maximum number of tags to 10 tags per object.
 // To use this operation, you must have permission to perform the
-// s3:PutObjectTaggingaction. By default, the bucket owner has this permission
-// and can grant this permission to others. To put tags of any other version, use
-// the versionId  query parameter. You also need permission for the
-// s3:PutObjectVersionTaggingaction. For information about the Amazon S3 object
+// s3:PutObjectTagging action. By default, the bucket owner has this permission and
+// can grant this permission to others. To put tags of any other version, use the
+// versionId query parameter. You also need permission for the
+// s3:PutObjectVersionTagging action. For information about the Amazon S3 object
 // tagging feature, see Object Tagging (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html)
 // . Special Errors
 //   - Code: InvalidTagError
-//   - Cause: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For more information, see Object Tagging (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html) .
+//   - Cause: The tag provided was not a valid tag. This error can occur if the
+//     tag did not pass input validation. For more information, see Object Tagging (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html)
+//     .
 //   - Code: MalformedXMLError
 //   - Cause: The XML provided does not match the schema.
 //   - Code: OperationAbortedError
-//   - Cause: A conflicting conditional action is currently in progress against this resource. Please try again.
+//   - Cause: A conflicting conditional action is currently in progress against
+//     this resource. Please try again.
 //   - Code: InternalError
 //   - Cause: The service was unable to apply the provided tag to the object.
 //
@@ -67,7 +70,7 @@ type PutObjectTaggingInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -81,7 +84,7 @@ type PutObjectTaggingInput struct {
 	// This member is required.
 	Key *string
 
-	// Container for the TagSet  and Tag  elements
+	// Container for the TagSet and Tag elements
 	//
 	// This member is required.
 	Tagging *types.Tagging
@@ -93,7 +96,7 @@ type PutObjectTaggingInput struct {
 	// HTTP status code 400 Bad Request . For more information, see Checking object
 	// integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide. If you provide an individual checksum, Amazon S3
-	// ignores any provided ChecksumAlgorithm  parameter.
+	// ignores any provided ChecksumAlgorithm parameter.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	// The MD5 hash for the request body. For requests made using the Amazon Web
@@ -237,9 +240,9 @@ func addPutObjectTaggingInputChecksumMiddlewares(stack *middleware.Stack, option
 	})
 }
 
-// getPutObjectTaggingBucketMember returns a pointer to string denoting a
-// provided bucket member valueand a boolean indicating if the input has a modeled
-// bucket name,
+// getPutObjectTaggingBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
 func getPutObjectTaggingBucketMember(input interface{}) (*string, bool) {
 	in := input.(*PutObjectTaggingInput)
 	if in.Bucket == nil {

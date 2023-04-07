@@ -50,8 +50,8 @@ type ListConfigurationRevisionsOutput struct {
 	// The unique ID that Amazon MQ generates for the configuration.
 	ConfigurationId *string
 
-	// The maximum number of configuration revisions that can be returned per page
-	// (20 by default). This value must be an integer from 5 to 100.
+	// The maximum number of configuration revisions that can be returned per page (20
+	// by default). This value must be an integer from 5 to 100.
 	MaxResults int32
 
 	// The token that specifies the next page of results Amazon MQ should return. To

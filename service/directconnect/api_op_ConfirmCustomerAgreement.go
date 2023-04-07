@@ -37,8 +37,8 @@ type ConfirmCustomerAgreementInput struct {
 
 type ConfirmCustomerAgreementOutput struct {
 
-	// The status of the customer agreement when the connection was created. This
-	// will be either signed  or unsigned .
+	// The status of the customer agreement when the connection was created. This will
+	// be either signed or unsigned .
 	Status *string
 
 	// Metadata pertaining to the operation's result.

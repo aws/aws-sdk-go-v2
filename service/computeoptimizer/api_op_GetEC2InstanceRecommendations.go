@@ -47,9 +47,9 @@ type GetEC2InstanceRecommendationsInput struct {
 	// recommendations.
 	InstanceArns []string
 
-	// The maximum number of instance recommendations to return with a single
-	// request. To retrieve the remaining results, make another request with the
-	// returned nextToken  value.
+	// The maximum number of instance recommendations to return with a single request.
+	// To retrieve the remaining results, make another request with the returned
+	// nextToken value.
 	MaxResults *int32
 
 	// The token to advance to the next page of instance recommendations.

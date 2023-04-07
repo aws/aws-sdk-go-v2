@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a signing certificate associated with the specified IAM user. If you
-// do not specify a user name, IAM determines the user name implicitly based on the
+// Deletes a signing certificate associated with the specified IAM user. If you do
+// not specify a user name, IAM determines the user name implicitly based on the
 // Amazon Web Services access key ID signing the request. This operation works for
 // access keys under the Amazon Web Services account. Consequently, you can use
 // this operation to manage Amazon Web Services account root user credentials even
@@ -41,7 +41,7 @@ type DeleteSigningCertificateInput struct {
 	CertificateId *string
 
 	// The name of the user the signing certificate belongs to. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string

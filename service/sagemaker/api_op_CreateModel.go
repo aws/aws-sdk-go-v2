@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a model in SageMaker. In the request, you name the model and describe
-// a primary container. For the primary container, you specify the Docker image
-// that contains inference code, artifacts (from prior training), and a custom
+// Creates a model in SageMaker. In the request, you name the model and describe a
+// primary container. For the primary container, you specify the Docker image that
+// contains inference code, artifacts (from prior training), and a custom
 // environment map that the inference code uses when you deploy the model for
 // predictions. Use this API to create a model if you want to use SageMaker hosting
 // services or run a batch transform job. To host your model, you create an
@@ -23,7 +23,7 @@ import (
 // example that calls this method when deploying a model to SageMaker hosting
 // services, see Create a Model (Amazon Web Services SDK for Python (Boto 3)). (https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model)
 // To run a batch transform using your model, you start a job with the
-// CreateTransformJobAPI. SageMaker uses your model and your dataset to get
+// CreateTransformJob API. SageMaker uses your model and your dataset to get
 // inferences which are then saved to a specified S3 location. In the request, you
 // also provide an IAM role that SageMaker can assume to access model artifacts and
 // docker image for deployment on ML compute hosting instances or for batch
@@ -52,7 +52,7 @@ type CreateModelInput struct {
 	// or for batch transform jobs. Deploying on ML compute instances is part of model
 	// hosting. For more information, see SageMaker Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
 	// . To be able to pass this role to SageMaker, the caller of this API must have
-	// the iam:PassRole  permission.
+	// the iam:PassRole permission.
 	//
 	// This member is required.
 	ExecutionRoleArn *string
@@ -85,7 +85,7 @@ type CreateModelInput struct {
 
 	// A VpcConfig object that specifies the VPC that you want your model to connect
 	// to. Control access to and from your model container by configuring the VPC.
-	// VpcConfigis used in hosting services and in batch transform. For more
+	// VpcConfig is used in hosting services and in batch transform. For more
 	// information, see Protect Endpoints by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
 	// and Protect Data in Batch Transform Jobs by Using an Amazon Virtual Private
 	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html) .

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the imports for a bot, bot locale, or custom vocabulary. Imports are
-// kept in the list for 7 days.
+// Lists the imports for a bot, bot locale, or custom vocabulary. Imports are kept
+// in the list for 7 days.
 func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optFns ...func(*Options)) (*ListImportsOutput, error) {
 	if params == nil {
 		params = &ListImportsInput{}
@@ -42,9 +42,9 @@ type ListImportsInput struct {
 	// filter and one string to filter on.
 	Filters []types.ImportFilter
 
-	// Specifies the locale that should be present in the list. If you don't specify
-	// a resource type in the filters parameter, the list contains both bot locales
-	// and custom vocabularies.
+	// Specifies the locale that should be present in the list. If you don't specify a
+	// resource type in the filters parameter, the list contains both bot locales and
+	// custom vocabularies.
 	LocaleId *string
 
 	// The maximum number of imports to return in each page of results. If there are
@@ -53,14 +53,14 @@ type ListImportsInput struct {
 	MaxResults *int32
 
 	// If the response from the ListImports operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response.
-	// Use the returned token in the nextToken  parameter of a ListImports request to
+	// specified in the maxResults parameter, a token is returned in the response. Use
+	// the returned token in the nextToken parameter of a ListImports request to
 	// return the next page of results. For a complete set of results, call the
-	// ListImports operation until the nextToken  returned in the response is null.
+	// ListImports operation until the nextToken returned in the response is null.
 	NextToken *string
 
-	// Determines the field that the list of imports is sorted by. You can sort by
-	// the LastUpdatedDateTime  field in ascending or descending order.
+	// Determines the field that the list of imports is sorted by. You can sort by the
+	// LastUpdatedDateTime field in ascending or descending order.
 	SortBy *types.ImportSortBy
 
 	noSmithyDocumentSerde
@@ -84,8 +84,8 @@ type ListImportsOutput struct {
 	LocaleId *string
 
 	// A token that indicates whether there are more results to return in a response
-	// to the ListImports  operation. If the nextToken field is present, you send the
-	// contents as the nextToken  parameter of a ListImports operation request to get
+	// to the ListImports operation. If the nextToken field is present, you send the
+	// contents as the nextToken parameter of a ListImports operation request to get
 	// the next page of results.
 	NextToken *string
 
@@ -172,8 +172,8 @@ type ListImportsPaginatorOptions struct {
 	// returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

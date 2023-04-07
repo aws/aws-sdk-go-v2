@@ -40,14 +40,13 @@ type ModifyDBSnapshotInput struct {
 	// The engine version to upgrade the DB snapshot to. The following are the
 	// database engines and engine versions that are available when you upgrade a DB
 	// snapshot. MySQL
-	//     - 5.5.46 (supported for 5.1 DB snapshots)
+	//   - 5.5.46 (supported for 5.1 DB snapshots)
 	// Oracle
-	//     - 12.1.0.2.v8 (supported for 12.1.0.1 DB snapshots)
-	//     - 11.2.0.4.v12 (supported for 11.2.0.2 DB snapshots)
-	//     - 11.2.0.4.v11 (supported for 11.2.0.3 DB snapshots)
-	// PostgreSQL For the
-	// list of engine versions that are available for upgrading a DB snapshot, see
-	// Upgrading the PostgreSQL DB Engine for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
+	//   - 12.1.0.2.v8 (supported for 12.1.0.1 DB snapshots)
+	//   - 11.2.0.4.v12 (supported for 11.2.0.2 DB snapshots)
+	//   - 11.2.0.4.v11 (supported for 11.2.0.3 DB snapshots)
+	// PostgreSQL For the list of engine versions that are available for upgrading a
+	// DB snapshot, see Upgrading the PostgreSQL DB Engine for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
 	// .
 	EngineVersion *string
 
@@ -64,7 +63,7 @@ type ModifyDBSnapshotInput struct {
 type ModifyDBSnapshotOutput struct {
 
 	// Contains the details of an Amazon RDS DB snapshot. This data type is used as a
-	// response element in the DescribeDBSnapshots  action.
+	// response element in the DescribeDBSnapshots action.
 	DBSnapshot *types.DBSnapshot
 
 	// Metadata pertaining to the operation's result.

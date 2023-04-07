@@ -45,8 +45,8 @@ type AssociateTeamMemberInput struct {
 	// This member is required.
 	UserArn *string
 
-	// A user- or system-generated token that identifies the entity that requested
-	// the team member association to the project. This token can be used to repeat the
+	// A user- or system-generated token that identifies the entity that requested the
+	// team member association to the project. This token can be used to repeat the
 	// request.
 	ClientRequestToken *string
 

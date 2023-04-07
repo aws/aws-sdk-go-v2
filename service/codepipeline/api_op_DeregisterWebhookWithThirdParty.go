@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the connection between the webhook that was created by CodePipeline
-// and the external tool with events to be detected. Currently supported only for
+// Removes the connection between the webhook that was created by CodePipeline and
+// the external tool with events to be detected. Currently supported only for
 // webhooks that target an action type of GitHub.
 func (c *Client) DeregisterWebhookWithThirdParty(ctx context.Context, params *DeregisterWebhookWithThirdPartyInput, optFns ...func(*Options)) (*DeregisterWebhookWithThirdPartyOutput, error) {
 	if params == nil {

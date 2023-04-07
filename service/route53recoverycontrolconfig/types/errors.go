@@ -59,8 +59,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// 500 response - InternalServiceError. Temporary service error. Retry the
-// request.
+// 500 response - InternalServiceError. Temporary service error. Retry the request.
 type InternalServerException struct {
 	Message *string
 

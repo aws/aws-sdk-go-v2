@@ -13,30 +13,34 @@ import (
 	"time"
 )
 
-// Creates an Amazon Web Services Migration Hub Refactor Spaces route. The
-// account owner of the service resource is always the environment owner,
-// regardless of which account creates the route. Routes target a service in the
-// application. If an application does not have any routes, then the first route
-// must be created as a DEFAULT RouteType. When created, the default route
-// defaults to an active state so state is not a required input. However, like all
-// other state values the state of the default route can be updated after creation,
-// but only when all other routes are also inactive. Conversely, no route can be
-// active without the default route also being active. When you create a route,
-// Refactor Spaces configures the Amazon API Gateway to send traffic to the target
-// service as follows:
-//   - If the service has a URL endpoint, and the endpoint resolves to a private IP address, Refactor Spaces routes traffic using the API Gateway VPC link.
-//   - If the service has a URL endpoint, and the endpoint resolves to a public IP address, Refactor Spaces routes traffic over the public internet.
-//   - If the service has an Lambda function endpoint, then Refactor Spaces configures the Lambda function's resource policy to allow the application's API Gateway to invoke the function.
+// Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account
+// owner of the service resource is always the environment owner, regardless of
+// which account creates the route. Routes target a service in the application. If
+// an application does not have any routes, then the first route must be created as
+// a DEFAULT RouteType . When created, the default route defaults to an active
+// state so state is not a required input. However, like all other state values the
+// state of the default route can be updated after creation, but only when all
+// other routes are also inactive. Conversely, no route can be active without the
+// default route also being active. When you create a route, Refactor Spaces
+// configures the Amazon API Gateway to send traffic to the target service as
+// follows:
+//   - If the service has a URL endpoint, and the endpoint resolves to a private
+//     IP address, Refactor Spaces routes traffic using the API Gateway VPC link.
+//   - If the service has a URL endpoint, and the endpoint resolves to a public IP
+//     address, Refactor Spaces routes traffic over the public internet.
+//   - If the service has an Lambda function endpoint, then Refactor Spaces
+//     configures the Lambda function's resource policy to allow the application's API
+//     Gateway to invoke the function.
 //
 // A one-time health check is performed on the service when either the route is
 // updated from inactive to active, or when it is created with an active state. If
-// the health check fails, the route transitions the route state to FAILED, an
-// error code of SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE is provided, and no
-// traffic is sent to the service. For Lambda functions, the Lambda function state
-// is checked. If the function is not active, the function configuration is updated
-// so that Lambda resources are provisioned. If the Lambda state is Failed, then
-// the route creation fails. For more information, see the
-// GetFunctionConfiguration's State response parameter (https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html#SSS-GetFunctionConfiguration-response-State)
+// the health check fails, the route transitions the route state to FAILED , an
+// error code of SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE is provided, and no traffic
+// is sent to the service. For Lambda functions, the Lambda function state is
+// checked. If the function is not active, the function configuration is updated so
+// that Lambda resources are provisioned. If the Lambda state is Failed , then the
+// route creation fails. For more information, see the GetFunctionConfiguration's
+// State response parameter (https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html#SSS-GetFunctionConfiguration-response-State)
 // in the Lambda Developer Guide. For Lambda endpoints, a check is performed to
 // determine that a Lambda function with the specified ARN exists. If it does not
 // exist, the health check fails. For public URLs, a connection is opened to the
@@ -147,8 +151,8 @@ type CreateRouteOutput struct {
 	// route is forwarded to this service.
 	ServiceId *string
 
-	// The current state of the route. Activation state only allows ACTIVE  or
-	// INACTIVE as user inputs. FAILED  is a route state that is system generated.
+	// The current state of the route. Activation state only allows ACTIVE or INACTIVE
+	// as user inputs. FAILED is a route state that is system generated.
 	State types.RouteState
 
 	// The tags assigned to the created route. A tag is a label that you assign to an

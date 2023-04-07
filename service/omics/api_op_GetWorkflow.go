@@ -256,9 +256,9 @@ func NewWorkflowActiveWaiter(client GetWorkflowAPIClient, optFns ...func(*Workfl
 	}
 }
 
-// Wait calls the waiter function for WorkflowActive waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for WorkflowActive waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *WorkflowActiveWaiter) Wait(ctx context.Context, params *GetWorkflowInput, maxWaitDur time.Duration, optFns ...func(*WorkflowActiveWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

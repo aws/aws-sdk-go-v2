@@ -13,7 +13,7 @@ import (
 
 // Reserves open slots in a game session for a group of players. New player
 // sessions can be created in any game session with an open slot that is in ACTIVE
-// status and has a player creation policy of ACCEPT_ALL. To add a single player
+// status and has a player creation policy of ACCEPT_ALL . To add a single player
 // to a game session, use CreatePlayerSession (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreatePlayerSession.html)
 // To create player sessions, specify a game session ID and a list of player IDs.
 // Optionally, provide a set of player data for each player ID. If successful, a
@@ -50,11 +50,10 @@ type CreatePlayerSessionsInput struct {
 	// This member is required.
 	PlayerIds []string
 
-	// Map of string pairs, each specifying a player ID and a set of
-	// developer-defined information related to the player. Amazon GameLift does not
-	// use this data, so it can be formatted as needed for use in the game. Any player
-	// data strings for player IDs that are not included in the PlayerIds parameter
-	// are ignored.
+	// Map of string pairs, each specifying a player ID and a set of developer-defined
+	// information related to the player. Amazon GameLift does not use this data, so it
+	// can be formatted as needed for use in the game. Any player data strings for
+	// player IDs that are not included in the PlayerIds parameter are ignored.
 	PlayerDataMap map[string]string
 
 	noSmithyDocumentSerde

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a dataset to upload training or test data for a model associated with
-// a flywheel. For more information about datasets, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
+// Creates a dataset to upload training or test data for a model associated with a
+// flywheel. For more information about datasets, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
 // in the Amazon Comprehend Developer Guide.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
@@ -37,8 +37,8 @@ type CreateDatasetInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// The Amazon Resource Number (ARN) of the flywheel of the flywheel to receive
-	// the data.
+	// The Amazon Resource Number (ARN) of the flywheel of the flywheel to receive the
+	// data.
 	//
 	// This member is required.
 	FlywheelArn *string
@@ -50,8 +50,8 @@ type CreateDatasetInput struct {
 	// This member is required.
 	InputDataConfig *types.DatasetInputDataConfig
 
-	// A unique identifier for the request. If you don't set the client request
-	// token, Amazon Comprehend generates one.
+	// A unique identifier for the request. If you don't set the client request token,
+	// Amazon Comprehend generates one.
 	ClientRequestToken *string
 
 	// The dataset type. You can specify that the data in a dataset is for training

@@ -42,14 +42,14 @@ type BatchGetRumMetricDefinitionsInput struct {
 	// This member is required.
 	Destination types.MetricDestination
 
-	// This parameter is required if Destination  is Evidently . If Destination  is
-	// CloudWatch, do not use this parameter. This parameter specifies the ARN of the
+	// This parameter is required if Destination is Evidently . If Destination is
+	// CloudWatch , do not use this parameter. This parameter specifies the ARN of the
 	// Evidently experiment that corresponds to the destination.
 	DestinationArn *string
 
 	// The maximum number of results to return in one operation. The default is 50.
 	// The maximum that you can specify is 100. To retrieve the remaining results, make
-	// another call with the returned NextToken  value.
+	// another call with the returned NextToken value.
 	MaxResults *int32
 
 	// Use the token returned by the previous operation to request the next page of
@@ -61,8 +61,8 @@ type BatchGetRumMetricDefinitionsInput struct {
 
 type BatchGetRumMetricDefinitionsOutput struct {
 
-	// An array of structures that display information about the metrics that are
-	// sent by the specified app monitor to the specified destination.
+	// An array of structures that display information about the metrics that are sent
+	// by the specified app monitor to the specified destination.
 	MetricDefinitions []types.MetricDefinition
 
 	// A token that you can use in a subsequent operation to retrieve the next set of
@@ -151,11 +151,11 @@ var _ BatchGetRumMetricDefinitionsAPIClient = (*Client)(nil)
 type BatchGetRumMetricDefinitionsPaginatorOptions struct {
 	// The maximum number of results to return in one operation. The default is 50.
 	// The maximum that you can specify is 100. To retrieve the remaining results, make
-	// another call with the returned NextToken  value.
+	// another call with the returned NextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

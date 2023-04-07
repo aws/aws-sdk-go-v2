@@ -41,41 +41,45 @@ type UpdateFirewallRuleInput struct {
 
 	// The action that DNS Firewall should take on a DNS query when it matches one of
 	// the domains in the rule's domain list:
-	//     - ALLOW - Permit the request to go through.
-	//     - ALERT - Permit the request to go through but send an alert to the logs.
-	//     - BLOCK - Disallow the request. This option requires additional details in the rule's BlockResponse .
+	//   - ALLOW - Permit the request to go through.
+	//   - ALERT - Permit the request to go through but send an alert to the logs.
+	//   - BLOCK - Disallow the request. This option requires additional details in the
+	//   rule's BlockResponse .
 	Action types.Action
 
 	// The DNS record's type. This determines the format of the record value that you
-	// provided in BlockOverrideDomain . Used for the rule action BLOCK  with a
+	// provided in BlockOverrideDomain . Used for the rule action BLOCK with a
 	// BlockResponse setting of OVERRIDE .
 	BlockOverrideDnsType types.BlockOverrideDnsType
 
 	// The custom DNS record to send back in response to the query. Used for the rule
-	// action BLOCK  with a BlockResponse  setting of OVERRIDE .
+	// action BLOCK with a BlockResponse setting of OVERRIDE .
 	BlockOverrideDomain *string
 
-	// The recommended amount of time, in seconds, for the DNS resolver or web
-	// browser to cache the provided override record. Used for the rule action BLOCK
-	// with a BlockResponse  setting of OVERRIDE .
+	// The recommended amount of time, in seconds, for the DNS resolver or web browser
+	// to cache the provided override record. Used for the rule action BLOCK with a
+	// BlockResponse setting of OVERRIDE .
 	BlockOverrideTtl *int32
 
 	// The way that you want DNS Firewall to block the request. Used for the rule
 	// action setting BLOCK .
-	//     - NODATA - Respond indicating that the query was successful, but no response is available for it.
-	//     - NXDOMAIN - Respond indicating that the domain name that's in the query doesn't exist.
-	//     - OVERRIDE - Provide a custom override in the response. This option requires custom handling details in the rule's BlockOverride* settings.
+	//   - NODATA - Respond indicating that the query was successful, but no response
+	//   is available for it.
+	//   - NXDOMAIN - Respond indicating that the domain name that's in the query
+	//   doesn't exist.
+	//   - OVERRIDE - Provide a custom override in the response. This option requires
+	//   custom handling details in the rule's BlockOverride* settings.
 	BlockResponse types.BlockResponse
 
 	// The name of the rule.
 	Name *string
 
-	// The setting that determines the processing order of the rule in the rule
-	// group. DNS Firewall processes the rules in a rule group by order of priority,
-	// starting from the lowest setting. You must specify a unique priority for each
-	// rule in a rule group. To make it easier to insert rules later, leave space
-	// between the numbers, for example, use 100, 200, and so on. You can change the
-	// priority setting for the rules in a rule group at any time.
+	// The setting that determines the processing order of the rule in the rule group.
+	// DNS Firewall processes the rules in a rule group by order of priority, starting
+	// from the lowest setting. You must specify a unique priority for each rule in a
+	// rule group. To make it easier to insert rules later, leave space between the
+	// numbers, for example, use 100, 200, and so on. You can change the priority
+	// setting for the rules in a rule group at any time.
 	Priority *int32
 
 	noSmithyDocumentSerde

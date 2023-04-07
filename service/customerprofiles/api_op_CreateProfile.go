@@ -75,7 +75,7 @@ type CreateProfileInput struct {
 	// Deprecated: This member has been deprecated.
 	Gender types.Gender
 
-	// An alternative to Gender  which accepts any string as input.
+	// An alternative to Gender which accepts any string as input.
 	GenderString *string
 
 	// The customer’s home phone number.
@@ -98,14 +98,14 @@ type CreateProfileInput struct {
 	// Deprecated: This member has been deprecated.
 	PartyType types.PartyType
 
-	// An alternative to PartyType  which accepts any string as input.
+	// An alternative to PartyType which accepts any string as input.
 	PartyTypeString *string
 
 	// The customer’s personal email address.
 	PersonalEmailAddress *string
 
-	// The customer’s phone number, which has not been specified as a mobile, home,
-	// or business number.
+	// The customer’s phone number, which has not been specified as a mobile, home, or
+	// business number.
 	PhoneNumber *string
 
 	// The customer’s shipping address.

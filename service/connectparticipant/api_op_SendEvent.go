@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends an event. ConnectionToken  is used for invoking this API instead of
+// Sends an event. ConnectionToken is used for invoking this API instead of
 // ParticipantToken . The Amazon Connect Participant Service APIs do not use
 // Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
 // .
@@ -38,10 +38,10 @@ type SendEventInput struct {
 	ConnectionToken *string
 
 	// The content type of the request. Supported types are:
-	//     - application/vnd.amazonaws.connect.event.typing
-	//     - application/vnd.amazonaws.connect.event.connection.acknowledged
-	//     - application/vnd.amazonaws.connect.event.message.delivered
-	//     - application/vnd.amazonaws.connect.event.message.read
+	//   - application/vnd.amazonaws.connect.event.typing
+	//   - application/vnd.amazonaws.connect.event.connection.acknowledged
+	//   - application/vnd.amazonaws.connect.event.message.delivered
+	//   - application/vnd.amazonaws.connect.event.message.read
 	//
 	// This member is required.
 	ContentType *string

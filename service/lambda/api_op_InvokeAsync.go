@@ -11,7 +11,7 @@ import (
 	"io"
 )
 
-// For asynchronous function invocation, use Invoke. Invokes a function
+// For asynchronous function invocation, use Invoke . Invokes a function
 // asynchronously.
 //
 // Deprecated: This operation has been deprecated.
@@ -33,12 +33,11 @@ func (c *Client) InvokeAsync(ctx context.Context, params *InvokeAsyncInput, optF
 type InvokeAsyncInput struct {
 
 	// The name of the Lambda function. Name formats
-	//     - Function name – my-function .
-	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
-	//     - Partial ARN – 123456789012:function:my-function .
-	// The length constraint
-	// applies only to the full ARN. If you specify only the function name, it is
-	// limited to 64 characters in length.
+	//   - Function name – my-function .
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -51,7 +50,7 @@ type InvokeAsyncInput struct {
 	noSmithyDocumentSerde
 }
 
-// A success response ( 202 Accepted) indicates that the request is queued for
+// A success response ( 202 Accepted ) indicates that the request is queued for
 // invocation.
 type InvokeAsyncOutput struct {
 

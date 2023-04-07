@@ -45,9 +45,8 @@ type UpdateApplicationInput struct {
 	// your GitHub repository for the application.
 	HomePageUrl *string
 
-	// Labels to improve discovery of apps in search results.Minimum length=1.
-	// Maximum length=127. Maximum number of labels: 10Pattern:
-	// "^[a-zA-Z0-9+\\-_:\\/@]+$";
+	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
+	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []string
 
 	// A text readme file in Markdown language that contains a more detailed
@@ -80,15 +79,14 @@ type UpdateApplicationOutput struct {
 	// your GitHub repository for the application.
 	HomePageUrl *string
 
-	// Whether the author of this application has been verified. This means means
-	// that AWS has made a good faith review, as a reasonable and prudent service
-	// provider, of the information provided by the requester and has confirmed that
-	// the requester's identity is as claimed.
+	// Whether the author of this application has been verified. This means means that
+	// AWS has made a good faith review, as a reasonable and prudent service provider,
+	// of the information provided by the requester and has confirmed that the
+	// requester's identity is as claimed.
 	IsVerifiedAuthor bool
 
-	// Labels to improve discovery of apps in search results.Minimum length=1.
-	// Maximum length=127. Maximum number of labels: 10Pattern:
-	// "^[a-zA-Z0-9+\\-_:\\/@]+$";
+	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
+	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []string
 
 	// A link to a license file of the app that matches the spdxLicenseID value of

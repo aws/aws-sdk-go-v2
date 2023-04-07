@@ -12,7 +12,7 @@ import (
 )
 
 // Resets the personal meeting PIN for the specified user on an Amazon Chime
-// account. Returns the User  object with the updated personal meeting PIN.
+// account. Returns the User object with the updated personal meeting PIN.
 func (c *Client) ResetPersonalPIN(ctx context.Context, params *ResetPersonalPINInput, optFns ...func(*Options)) (*ResetPersonalPINOutput, error) {
 	if params == nil {
 		params = &ResetPersonalPINInput{}

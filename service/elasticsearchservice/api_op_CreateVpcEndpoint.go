@@ -27,7 +27,7 @@ func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpoin
 	return out, nil
 }
 
-// Container for the parameters to the CreateVpcEndpointRequest  operation.
+// Container for the parameters to the CreateVpcEndpointRequest operation.
 type CreateVpcEndpointInput struct {
 
 	// The Amazon Resource Name (ARN) of the domain to grant access to.

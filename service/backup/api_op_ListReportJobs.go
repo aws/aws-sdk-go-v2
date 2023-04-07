@@ -31,8 +31,8 @@ func (c *Client) ListReportJobs(ctx context.Context, params *ListReportJobsInput
 
 type ListReportJobsInput struct {
 
-	// Returns only report jobs that were created after the date and time specified
-	// in Unix format and Coordinated Universal Time (UTC). For example, the value
+	// Returns only report jobs that were created after the date and time specified in
+	// Unix format and Coordinated Universal Time (UTC). For example, the value
 	// 1516925490 represents Friday, January 26, 2018 12:11:30 AM.
 	ByCreationAfter *time.Time
 
@@ -52,8 +52,8 @@ type ListReportJobsInput struct {
 	// query will return 1 MB of data.
 	MaxResults *int32
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -61,8 +61,8 @@ type ListReportJobsInput struct {
 
 type ListReportJobsOutput struct {
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	// Details about your report jobs in JSON format.
@@ -148,8 +148,8 @@ type ListReportJobsPaginatorOptions struct {
 	// query will return 1 MB of data.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -19,7 +19,10 @@ import (
 // script file(s). The script files and all dependencies must be zipped into a
 // single file. You can pull the zip file from either of these locations:
 //   - A locally available directory. Use the ZipFile parameter for this option.
-//   - An Amazon Simple Storage Service (Amazon S3) bucket under your Amazon Web Services account. Use the StorageLocation parameter for this option. You'll need to have an Identity Access Management (IAM) role that allows the Amazon GameLift service to access your S3 bucket.
+//   - An Amazon Simple Storage Service (Amazon S3) bucket under your Amazon Web
+//     Services account. Use the StorageLocation parameter for this option. You'll need
+//     to have an Identity Access Management (IAM) role that allows the Amazon GameLift
+//     service to access your S3 bucket.
 //
 // If the call is successful, a new script record is created with a unique script
 // ID. If the script file is provided as a local file, the file is uploaded to an

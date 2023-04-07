@@ -45,7 +45,7 @@ type DescribeTapesInput struct {
 	// not set.
 	Limit *int32
 
-	// A marker value, obtained in a previous call to DescribeTapes. This marker
+	// A marker value, obtained in a previous call to DescribeTapes . This marker
 	// indicates which page of results to retrieve. If not specified, the first page of
 	// results is retrieved.
 	Marker *string
@@ -62,9 +62,9 @@ type DescribeTapesInput struct {
 // DescribeTapesOutput
 type DescribeTapesOutput struct {
 
-	// An opaque string that can be used as part of a subsequent DescribeTapes call
-	// to retrieve the next page of results. If a response does not contain a marker,
-	// then there are no more results to be retrieved.
+	// An opaque string that can be used as part of a subsequent DescribeTapes call to
+	// retrieve the next page of results. If a response does not contain a marker, then
+	// there are no more results to be retrieved.
 	Marker *string
 
 	// An array of virtual tape descriptions.
@@ -153,8 +153,8 @@ type DescribeTapesPaginatorOptions struct {
 	// not set.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

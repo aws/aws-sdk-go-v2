@@ -15,9 +15,8 @@ import (
 //   - A BadRequest error.
 //   - A FooError.
 //
-// Implementations must be able to successfully take a response
-// and properly (de)serialize successful and error responses based on the the
-// presence of the
+// Implementations must be able to successfully take a response and properly
+// (de)serialize successful and error responses based on the the presence of the
 func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErrorsInput, optFns ...func(*Options)) (*GreetingWithErrorsOutput, error) {
 	if params == nil {
 		params = &GreetingWithErrorsInput{}

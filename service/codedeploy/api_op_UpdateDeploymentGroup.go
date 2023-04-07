@@ -27,7 +27,7 @@ func (c *Client) UpdateDeploymentGroup(ctx context.Context, params *UpdateDeploy
 	return out, nil
 }
 
-// Represents the input of an UpdateDeploymentGroup  operation.
+// Represents the input of an UpdateDeploymentGroup operation.
 type UpdateDeploymentGroupInput struct {
 
 	// The application name that corresponds to the deployment group to update.
@@ -40,8 +40,8 @@ type UpdateDeploymentGroupInput struct {
 	// This member is required.
 	CurrentDeploymentGroupName *string
 
-	// Information to add or change about Amazon CloudWatch alarms when the
-	// deployment group is updated.
+	// Information to add or change about Amazon CloudWatch alarms when the deployment
+	// group is updated.
 	AlarmConfiguration *types.AlarmConfiguration
 
 	// Information for an automatic rollback configuration that is added or changed
@@ -50,8 +50,13 @@ type UpdateDeploymentGroupInput struct {
 
 	// The replacement list of Auto Scaling groups to be included in the deployment
 	// group, if you want to change them.
-	//     - To keep the Auto Scaling groups, enter their names or do not specify this parameter.
-	//     - To remove Auto Scaling groups, specify a non-null empty list of Auto Scaling group names to detach all CodeDeploy-managed Auto Scaling lifecycle hooks. For examples, see Amazon EC2 instances in an Amazon EC2 Auto Scaling group fail to launch and receive the error "Heartbeat Timeout" (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat) in the CodeDeploy User Guide.
+	//   - To keep the Auto Scaling groups, enter their names or do not specify this
+	//   parameter.
+	//   - To remove Auto Scaling groups, specify a non-null empty list of Auto
+	//   Scaling group names to detach all CodeDeploy-managed Auto Scaling lifecycle
+	//   hooks. For examples, see Amazon EC2 instances in an Amazon EC2 Auto Scaling
+	//   group fail to launch and receive the error "Heartbeat Timeout" (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat)
+	//   in the CodeDeploy User Guide.
 	AutoScalingGroups []string
 
 	// Information about blue/green deployment options for a deployment group.
@@ -99,7 +104,7 @@ type UpdateDeploymentGroupInput struct {
 	// mid-deployment and do not receive the deployed application revision. If this
 	// option is set to UPDATE or is unspecified, CodeDeploy initiates one or more
 	// 'auto-update outdated instances' deployments to apply the deployed application
-	// revision to the new Amazon EC2 instances. If this option is set to IGNORE,
+	// revision to the new Amazon EC2 instances. If this option is set to IGNORE ,
 	// CodeDeploy does not initiate a deployment to update the new Amazon EC2
 	// instances. This may result in instances having different revisions.
 	OutdatedInstancesStrategy types.OutdatedInstancesStrategy
@@ -115,7 +120,7 @@ type UpdateDeploymentGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of an UpdateDeploymentGroup  operation.
+// Represents the output of an UpdateDeploymentGroup operation.
 type UpdateDeploymentGroupOutput struct {
 
 	// If the output contains no data, and the corresponding deployment group

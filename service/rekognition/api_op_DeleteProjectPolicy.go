@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes an existing project policy. To get a list of project policies attached
-// to a project, call ListProjectPolicies. To attach a project policy to a
+// to a project, call ListProjectPolicies . To attach a project policy to a
 // project, call PutProjectPolicy .
 func (c *Client) DeleteProjectPolicy(ctx context.Context, params *DeleteProjectPolicyInput, optFns ...func(*Options)) (*DeleteProjectPolicyOutput, error) {
 	if params == nil {

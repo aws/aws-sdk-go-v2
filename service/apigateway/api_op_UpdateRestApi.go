@@ -47,8 +47,8 @@ type UpdateRestApiInput struct {
 type UpdateRestApiOutput struct {
 
 	// The source of the API key for metering requests according to a usage plan.
-	// Valid values are: > HEADER  to read the API key from the X-API-Key header of a
-	// request. AUTHORIZER  to read the API key from the UsageIdentifierKey from a
+	// Valid values are: > HEADER to read the API key from the X-API-Key header of a
+	// request. AUTHORIZER to read the API key from the UsageIdentifierKey from a
 	// custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
@@ -64,7 +64,7 @@ type UpdateRestApiOutput struct {
 
 	// Specifies whether clients can invoke your API by using the default execute-api
 	// endpoint. By default, clients can invoke your API with the default
-	// https://{api_id}.execute-api.{region}.amazonaws.comendpoint. To require that
+	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
 	DisableExecuteApiEndpoint bool

@@ -13,7 +13,7 @@ import (
 
 // Deletes one or more versions of a package. A deleted package version cannot be
 // restored in your repository. If you want to remove a package version from your
-// repository and be able to restore it later, set its status to Archived.
+// repository and be able to restore it later, set its status to Archived .
 // Archived packages cannot be downloaded from a repository and don't show up with
 // list package APIs (for example, ListPackageVersions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)
 // ), but you can restore them using UpdatePackageVersionsStatus (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html)
@@ -69,10 +69,12 @@ type DeletePackageVersionsInput struct {
 
 	// The namespace of the package versions to be deleted. The package version
 	// component that specifies its namespace depends on its type. For example:
-	//     - The namespace of a Maven package version is its groupId . The namespace is required when deleting Maven package versions.
-	//     - The namespace of an npm package version is its scope .
-	//     - Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.
-	//     - The namespace of a generic package is its namespace .
+	//   - The namespace of a Maven package version is its groupId . The namespace is
+	//   required when deleting Maven package versions.
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -82,12 +84,12 @@ type DeletePackageVersionsOutput struct {
 
 	// A PackageVersionError object that contains a map of errors codes for the
 	// deleted package that failed. The possible error codes are:
-	//     - ALREADY_EXISTS
-	//     - MISMATCHED_REVISION
-	//     - MISMATCHED_STATUS
-	//     - NOT_ALLOWED
-	//     - NOT_FOUND
-	//     - SKIPPED
+	//   - ALREADY_EXISTS
+	//   - MISMATCHED_REVISION
+	//   - MISMATCHED_STATUS
+	//   - NOT_ALLOWED
+	//   - NOT_FOUND
+	//   - SKIPPED
 	FailedVersions map[string]types.PackageVersionError
 
 	// A list of the package versions that were successfully deleted. The status of

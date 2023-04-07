@@ -23,8 +23,8 @@ import (
 // rule or conformance pack in the organization administrator account from the
 // delegated administrator account or see the organizational rule or conformance
 // pack in the delegated administrator account from organization administrator
-// account. The DescribeOrganizationConfigRules  and
-// DescribeOrganizationConformancePacksAPIs can only see and interact with the
+// account. The DescribeOrganizationConfigRules and
+// DescribeOrganizationConformancePacks APIs can only see and interact with the
 // organization-related resource that were deployed from within the account calling
 // those APIs.
 func (c *Client) DescribeOrganizationConformancePacks(ctx context.Context, params *DescribeOrganizationConformancePacksInput, optFns ...func(*Options)) (*DescribeOrganizationConformancePacksOutput, error) {
@@ -148,8 +148,8 @@ type DescribeOrganizationConformancePacksPaginatorOptions struct {
 	// do no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

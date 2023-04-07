@@ -61,7 +61,7 @@ type CreateKeyPairOutput struct {
 	// A base64-encoded RSA private key.
 	PrivateKeyBase64 *string
 
-	// A base64-encoded public key of the ssh-rsa  type.
+	// A base64-encoded public key of the ssh-rsa type.
 	PublicKeyBase64 *string
 
 	// Metadata pertaining to the operation's result.

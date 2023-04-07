@@ -32,8 +32,8 @@ func (c *Client) AttachManagedPolicyToPermissionSet(ctx context.Context, params 
 type AttachManagedPolicyToPermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -43,7 +43,7 @@ type AttachManagedPolicyToPermissionSetInput struct {
 	// This member is required.
 	ManagedPolicyArn *string
 
-	// The ARN of the PermissionSet  that the managed policy should be attached to.
+	// The ARN of the PermissionSet that the managed policy should be attached to.
 	//
 	// This member is required.
 	PermissionSetArn *string

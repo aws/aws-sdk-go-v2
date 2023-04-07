@@ -32,14 +32,14 @@ func (c *Client) GetParameter(ctx context.Context, params *GetParameterInput, op
 type GetParameterInput struct {
 
 	// The name of the parameter you want to query. To query by parameter label, use
-	// "Name": "name:label" . To query by parameter version, use "Name":
-	// "name:version" .
+	// "Name": "name:label" . To query by parameter version, use "Name": "name:version"
+	// .
 	//
 	// This member is required.
 	Name *string
 
 	// Return decrypted values for secure string parameters. This flag is ignored for
-	// String and StringList  parameter types.
+	// String and StringList parameter types.
 	WithDecryption *bool
 
 	noSmithyDocumentSerde

@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF
-// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
 // and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 // . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns the IPSet  that is specified by IPSetId .
+// and global use. Returns the IPSet that is specified by IPSetId .
 func (c *Client) GetIPSet(ctx context.Context, params *GetIPSetInput, optFns ...func(*Options)) (*GetIPSetOutput, error) {
 	if params == nil {
 		params = &GetIPSetInput{}
@@ -34,7 +33,7 @@ func (c *Client) GetIPSet(ctx context.Context, params *GetIPSetInput, optFns ...
 
 type GetIPSetInput struct {
 
-	// The IPSetId  of the IPSet  that you want to get. IPSetId  is returned by
+	// The IPSetId of the IPSet that you want to get. IPSetId is returned by
 	// CreateIPSet and by ListIPSets .
 	//
 	// This member is required.
@@ -45,10 +44,11 @@ type GetIPSetInput struct {
 
 type GetIPSetOutput struct {
 
-	// Information about the IPSet  that you specified in the GetIPSet request. For
+	// Information about the IPSet that you specified in the GetIPSet request. For
 	// more information, see the following topics:
-	//     - IPSet : Contains IPSetDescriptors , IPSetId , and Name
-	//     - IPSetDescriptors : Contains an array of IPSetDescriptor objects. Each IPSetDescriptor object contains Type and Value
+	//   - IPSet : Contains IPSetDescriptors , IPSetId , and Name
+	//   - IPSetDescriptors : Contains an array of IPSetDescriptor objects. Each
+	//   IPSetDescriptor object contains Type and Value
 	IPSet *types.IPSet
 
 	// Metadata pertaining to the operation's result.

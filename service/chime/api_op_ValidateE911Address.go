@@ -62,7 +62,7 @@ type ValidateE911AddressInput struct {
 	// This member is required.
 	StreetInfo *string
 
-	// The address street number, such as 200  or 2121 .
+	// The address street number, such as 200 or 2121 .
 	//
 	// This member is required.
 	StreetNumber *string
@@ -82,7 +82,7 @@ type ValidateE911AddressOutput struct {
 	CandidateAddressList []types.CandidateAddress
 
 	// Number indicating the result of address validation. 0 means the address was
-	// perfect as is and successfully validated. 1  means the address was corrected. 2
+	// perfect as is and successfully validated. 1 means the address was corrected. 2
 	// means the address sent was not close enough and was not validated.
 	ValidationResult int32
 

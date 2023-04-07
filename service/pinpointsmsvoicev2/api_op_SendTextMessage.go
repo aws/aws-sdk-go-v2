@@ -62,8 +62,8 @@ type SendTextMessageInput struct {
 	// you don’t have a US short code, omit this attribute.
 	Keyword *string
 
-	// The maximum amount that you want to spend, in US dollars, per each text
-	// message part. A text message can contain multiple parts.
+	// The maximum amount that you want to spend, in US dollars, per each text message
+	// part. A text message can contain multiple parts.
 	MaxPrice *string
 
 	// The body of the text message.

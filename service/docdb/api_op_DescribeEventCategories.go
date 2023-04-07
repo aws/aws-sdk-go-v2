@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays a list of categories for all event source types, or, if specified,
-// for a specified source type.
+// Displays a list of categories for all event source types, or, if specified, for
+// a specified source type.
 func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEventCategoriesInput, optFns ...func(*Options)) (*DescribeEventCategoriesOutput, error) {
 	if params == nil {
 		params = &DescribeEventCategoriesInput{}

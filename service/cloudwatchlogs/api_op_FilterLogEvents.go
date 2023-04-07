@@ -16,7 +16,7 @@ import (
 // or filter the results using a filter pattern, a time range, and the name of the
 // log stream. You must have the logs;FilterLogEvents permission to perform this
 // operation. You can specify the log group to search by using either
-// logGroupIdentifier or logGroupName. You must include one of these two
+// logGroupIdentifier or logGroupName . You must include one of these two
 // parameters, but you can't include both. By default, this operation returns as
 // many log events as can fit in 1 MB (up to 10,000 log events) or all the events
 // found within the specified time range. If the results include a token, that
@@ -24,9 +24,9 @@ import (
 // specifying the token in a subsequent call. This operation can return empty
 // results while there are more log events available through the token. The
 // returned log events are sorted by event timestamp, the timestamp when the event
-// was ingested by CloudWatch Logs, and the ID of the PutLogEvents request. If
-// you are using CloudWatch cross-account observability, you can use this operation
-// in a monitoring account and view data from the linked source accounts. For more
+// was ingested by CloudWatch Logs, and the ID of the PutLogEvents request. If you
+// are using CloudWatch cross-account observability, you can use this operation in
+// a monitoring account and view data from the linked source accounts. For more
 // information, see CloudWatch cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html)
 // .
 func (c *Client) FilterLogEvents(ctx context.Context, params *FilterLogEventsInput, optFns ...func(*Options)) (*FilterLogEventsOutput, error) {
@@ -46,8 +46,8 @@ func (c *Client) FilterLogEvents(ctx context.Context, params *FilterLogEventsInp
 
 type FilterLogEventsInput struct {
 
-	// The end of the time range, expressed as the number of milliseconds after Jan
-	// 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not
+	// The end of the time range, expressed as the number of milliseconds after Jan 1,
+	// 1970 00:00:00 UTC . Events with a timestamp later than this time are not
 	// returned.
 	EndTime *int64
 
@@ -71,9 +71,9 @@ type FilterLogEventsInput struct {
 	// The maximum number of events to return. The default is 10,000 events.
 	Limit *int32
 
-	// Specify either the name or ARN of the log group to view log events from. If
-	// the log group is in a source account and you are using a monitoring account, you
-	// must use the log group ARN. You must include either logGroupIdentifier  or
+	// Specify either the name or ARN of the log group to view log events from. If the
+	// log group is in a source account and you are using a monitoring account, you
+	// must use the log group ARN. You must include either logGroupIdentifier or
 	// logGroupName , but not both.
 	LogGroupIdentifier *string
 
@@ -89,22 +89,21 @@ type FilterLogEventsInput struct {
 	LogStreamNamePrefix *string
 
 	// Filters the results to only logs from the log streams in this list. If you
-	// specify a value for both logStreamNamePrefix  and logStreamNames, the action
-	// returns an InvalidParameterException  error.
+	// specify a value for both logStreamNamePrefix and logStreamNames , the action
+	// returns an InvalidParameterException error.
 	LogStreamNames []string
 
-	// The token for the next set of events to return. (You received this token from
-	// a previous call.)
+	// The token for the next set of events to return. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	// The start of the time range, expressed as the number of milliseconds after Jan
-	// 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not
-	// returned.
+	// 1, 1970 00:00:00 UTC . Events with a timestamp before this time are not returned.
 	StartTime *int64
 
 	// Specify true to display the log event fields with all sensitive data unmasked
-	// and visible. The default is false. To use this operation with this parameter,
-	// you must be signed into an account with the logs:Unmask  permission.
+	// and visible. The default is false . To use this operation with this parameter,
+	// you must be signed into an account with the logs:Unmask permission.
 	Unmask bool
 
 	noSmithyDocumentSerde
@@ -115,8 +114,8 @@ type FilterLogEventsOutput struct {
 	// The matched events.
 	Events []types.FilteredLogEvent
 
-	// The token to use when requesting the next set of items. The token expires
-	// after 24 hours.
+	// The token to use when requesting the next set of items. The token expires after
+	// 24 hours.
 	NextToken *string
 
 	// Important As of May 15, 2020, this parameter is no longer supported. This
@@ -203,8 +202,8 @@ type FilterLogEventsPaginatorOptions struct {
 	// The maximum number of events to return. The default is 10,000 events.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

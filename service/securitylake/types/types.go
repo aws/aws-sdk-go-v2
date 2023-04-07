@@ -43,8 +43,7 @@ type AutoEnableNewRegionConfiguration struct {
 	// This member is required.
 	Region Region
 
-	// The Amazon Web Services sources that are automatically enabled in Security
-	// Lake.
+	// The Amazon Web Services sources that are automatically enabled in Security Lake.
 	//
 	// This member is required.
 	Sources []AwsLogSourceType
@@ -90,12 +89,12 @@ type FailuresResponse struct {
 // Provides details of Amazon Security Lake configuration object.
 type LakeConfigurationRequest struct {
 
-	// The type of encryption key used by Amazon Security Lake to encrypt the
-	// Security Lake configuration object.
+	// The type of encryption key used by Amazon Security Lake to encrypt the Security
+	// Lake configuration object.
 	EncryptionKey *string
 
-	// Replication enables automatic, asynchronous copying of objects across Amazon
-	// S3 buckets. Amazon S3 buckets that are configured for object replication can be
+	// Replication enables automatic, asynchronous copying of objects across Amazon S3
+	// buckets. Amazon S3 buckets that are configured for object replication can be
 	// owned by the same Amazon Web Services account or by different accounts. You can
 	// replicate objects to a single destination bucket or to multiple destination
 	// buckets. The destination buckets can be in different Amazon Web Services Regions
@@ -126,8 +125,8 @@ type LakeConfigurationResponse struct {
 	// object.
 	EncryptionKey *string
 
-	// Replication enables automatic, asynchronous copying of objects across Amazon
-	// S3 buckets. Amazon S3 buckets that are configured for object replication can be
+	// Replication enables automatic, asynchronous copying of objects across Amazon S3
+	// buckets. Amazon S3 buckets that are configured for object replication can be
 	// owned by the same Amazon Web Services account or by different accounts. You can
 	// replicate objects to a single destination bucket or to multiple destination
 	// buckets. The destination buckets can be in different Amazon Web Services Regions
@@ -158,17 +157,17 @@ type LakeConfigurationResponse struct {
 	// consists of a key and an optional value, both of which you define.
 	TagsMap map[string]string
 
-	// The status of the last UpdateDatalake or DeleteDatalake  API request.
+	// The status of the last UpdateDatalake or DeleteDatalake API request.
 	UpdateStatus *UpdateStatus
 
 	noSmithyDocumentSerde
 }
 
-// The details of the last UpdateDatalake  or DeleteDatalake API request which
+// The details of the last UpdateDatalake or DeleteDatalake API request which
 // failed.
 type LastUpdateFailure struct {
 
-	// The reason code for the failure of the last UpdateDatalake  or DeleteDatalake
+	// The reason code for the failure of the last UpdateDatalake or DeleteDatalake
 	// API request.
 	Code *string
 
@@ -213,13 +212,13 @@ type ProtocolAndNotificationEndpoint struct {
 // Lake.
 type RetentionSetting struct {
 
-	// The retention period specifies a fixed period of time during which the
-	// Security Lake object remains locked. You can specify the retention period in
-	// days for one or more sources.
+	// The retention period specifies a fixed period of time during which the Security
+	// Lake object remains locked. You can specify the retention period in days for one
+	// or more sources.
 	RetentionPeriod *int32
 
-	// The range of storage classes that you can choose from based on the data
-	// access, resiliency, and cost requirements of your workloads.
+	// The range of storage classes that you can choose from based on the data access,
+	// resiliency, and cost requirements of your workloads.
 	StorageClass StorageClass
 
 	noSmithyDocumentSerde
@@ -248,8 +247,8 @@ type SourceTypeMemberAwsSourceType struct {
 
 func (*SourceTypeMemberAwsSourceType) isSourceType() {}
 
-// Amazon Security Lake supports custom source types. For a detailed list, see
-// the Amazon Security Lake User Guide.
+// Amazon Security Lake supports custom source types. For a detailed list, see the
+// Amazon Security Lake User Guide.
 type SourceTypeMemberCustomSourceType struct {
 	Value string
 
@@ -263,8 +262,8 @@ func (*SourceTypeMemberCustomSourceType) isSourceType() {}
 // your Amazon S3 bucket for Security Lake.
 type SubscriberResource struct {
 
-	// The Amazon Web Services account ID you are using to create your Amazon
-	// Security Lake account.
+	// The Amazon Web Services account ID you are using to create your Amazon Security
+	// Lake account.
 	//
 	// This member is required.
 	AccountId *string
@@ -281,11 +280,11 @@ type SubscriberResource struct {
 	// This member is required.
 	SubscriptionId *string
 
-	// You can choose to notify subscribers of new objects with an Amazon Simple
-	// Queue Service (Amazon SQS) queue or through messaging to an HTTPS endpoint
-	// provided by the subscriber. Subscribers can consume data by directly querying
-	// Lake Formation tables in your Amazon S3 bucket through services like Amazon
-	// Athena. This subscription type is defined as LAKEFORMATION .
+	// You can choose to notify subscribers of new objects with an Amazon Simple Queue
+	// Service (Amazon SQS) queue or through messaging to an HTTPS endpoint provided by
+	// the subscriber. Subscribers can consume data by directly querying Lake Formation
+	// tables in your Amazon S3 bucket through services like Amazon Athena. This
+	// subscription type is defined as LAKEFORMATION .
 	AccessTypes []AccessType
 
 	// The date and time when the subscription was created.
@@ -316,8 +315,8 @@ type SubscriberResource struct {
 	SnsArn *string
 
 	// The subscriber descriptions for a subscriber account. The description for a
-	// subscriber includes subscriberName , accountID , externalID , and
-	// subscriptionId .
+	// subscriber includes subscriberName , accountID , externalID , and subscriptionId
+	// .
 	SubscriberDescription *string
 
 	// The name of your Amazon Security Lake subscriber account.
@@ -338,7 +337,7 @@ type SubscriberResource struct {
 	noSmithyDocumentSerde
 }
 
-// The status of the last UpdateDatalake  or DeleteDatalake API request. This is
+// The status of the last UpdateDatalake or DeleteDatalake API request. This is
 // set to Completed after the configuration is updated, or removed if deletion of
 // the data lake is successful.
 type UpdateStatus struct {
@@ -347,10 +346,10 @@ type UpdateStatus struct {
 	// failed.
 	LastUpdateFailure *LastUpdateFailure
 
-	// The unique ID for the UpdateDatalake  or DeleteDatalake  API request.
+	// The unique ID for the UpdateDatalake or DeleteDatalake API request.
 	LastUpdateRequestId *string
 
-	// The status of the last UpdateDatalake  or DeleteDatalake API request that was
+	// The status of the last UpdateDatalake or DeleteDatalake API request that was
 	// requested.
 	LastUpdateStatus SettingsStatus
 

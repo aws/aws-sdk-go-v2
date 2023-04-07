@@ -51,7 +51,7 @@ type UpdateResolverEndpointInput struct {
 
 type UpdateResolverEndpointOutput struct {
 
-	// The response to an UpdateResolverEndpoint  request.
+	// The response to an UpdateResolverEndpoint request.
 	ResolverEndpoint *types.ResolverEndpoint
 
 	// Metadata pertaining to the operation's result.

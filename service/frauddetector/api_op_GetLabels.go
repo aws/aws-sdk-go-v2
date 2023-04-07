@@ -13,10 +13,10 @@ import (
 )
 
 // Gets all labels or a specific label if name is provided. This is a paginated
-// API. If you provide a null maxResults, this action retrieves a maximum of 50
-// records per page. If you provide a maxResults, the value must be between 10
-// and 50. To get the next page results, provide the pagination token from the
-// GetGetLabelsResponseas part of your request. A null pagination token fetches
+// API. If you provide a null maxResults , this action retrieves a maximum of 50
+// records per page. If you provide a maxResults , the value must be between 10 and
+// 50. To get the next page results, provide the pagination token from the
+// GetGetLabelsResponse as part of your request. A null pagination token fetches
 // the records from the beginning.
 func (c *Client) GetLabels(ctx context.Context, params *GetLabelsInput, optFns ...func(*Options)) (*GetLabelsOutput, error) {
 	if params == nil {
@@ -133,8 +133,8 @@ type GetLabelsPaginatorOptions struct {
 	// The maximum number of objects to return for the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

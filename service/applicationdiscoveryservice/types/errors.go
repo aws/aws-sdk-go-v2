@@ -164,8 +164,8 @@ func (e *OperationNotPermittedException) ErrorCode() string {
 }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This issue occurs when the same clientRequestToken  is used with the
-// StartImportTaskaction, but with different parameters. For example, you use the
+// This issue occurs when the same clientRequestToken is used with the
+// StartImportTask action, but with different parameters. For example, you use the
 // same request token but have two different import URLs, you can encounter this
 // issue. If the import tasks are meant to be different, use a different
 // clientRequestToken , and try again.
@@ -194,8 +194,8 @@ func (e *ResourceInUseException) ErrorCode() string {
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified configuration ID was not located. Verify the configuration ID
-// and try again.
+// The specified configuration ID was not located. Verify the configuration ID and
+// try again.
 type ResourceNotFoundException struct {
 	Message *string
 

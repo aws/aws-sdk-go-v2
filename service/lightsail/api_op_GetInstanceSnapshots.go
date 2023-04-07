@@ -44,10 +44,10 @@ type GetInstanceSnapshotsOutput struct {
 	// get instance snapshots request.
 	InstanceSnapshots []types.InstanceSnapshot
 
-	// The token to advance to the next page of results from your request. A next
-	// page token is not returned if there are no more results to display. To get the
-	// next page of results, perform another GetInstanceSnapshots request and specify
-	// the next page token using the pageToken  parameter.
+	// The token to advance to the next page of results from your request. A next page
+	// token is not returned if there are no more results to display. To get the next
+	// page of results, perform another GetInstanceSnapshots request and specify the
+	// next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

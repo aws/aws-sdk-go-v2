@@ -56,10 +56,10 @@ type PutResourcePolicyInput struct {
 	// default the resource policy is created if it does not exist, or updated with an
 	// incremented revision id. The revision id is unique to each policy in the
 	// account. If the policy revision id does not match the latest revision id, the
-	// operation will fail with an InvalidPolicyRevisionIdException exception. You
-	// can also provide a PolicyRevisionId of 0. In this case, the operation will
-	// fail with an InvalidPolicyRevisionIdException exception if a resource policy
-	// with the same name already exists.
+	// operation will fail with an InvalidPolicyRevisionIdException exception. You can
+	// also provide a PolicyRevisionId of 0. In this case, the operation will fail
+	// with an InvalidPolicyRevisionIdException exception if a resource policy with
+	// the same name already exists.
 	PolicyRevisionId *string
 
 	noSmithyDocumentSerde

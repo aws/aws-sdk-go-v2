@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Gets information about a monitor in Amazon CloudWatch Internet Monitor based
-// on a monitor name. The information returned includes the Amazon Resource Name
+// Gets information about a monitor in Amazon CloudWatch Internet Monitor based on
+// a monitor name. The information returned includes the Amazon Resource Name
 // (ARN), create time, modified time, resources included in the monitor, and status
 // information.
 func (c *Client) GetMonitor(ctx context.Context, params *GetMonitorInput, optFns ...func(*Options)) (*GetMonitorOutput, error) {

@@ -20,7 +20,7 @@ import (
 // game session. To register a game server, identify the game server group and
 // instance where the game server is running, and provide a unique identifier for
 // the game server. You can also include connection and game server data. Once a
-// game server is successfully registered, it is put in status AVAILABLE. A
+// game server is successfully registered, it is put in status AVAILABLE . A
 // request to register a game server may fail if the instance it is running on is
 // in the process of shutting down as part of instance balancing or scale-down
 // activity. Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)

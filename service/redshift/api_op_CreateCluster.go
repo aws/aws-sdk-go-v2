@@ -37,12 +37,11 @@ type CreateClusterInput struct {
 	// A unique identifier for the cluster. You use this identifier to refer to the
 	// cluster for any subsequent cluster operations such as deleting or modifying. The
 	// identifier also appears in the Amazon Redshift console. Constraints:
-	//     - Must contain from 1 to 63 alphanumeric characters or hyphens.
-	//     - Alphabetic characters must be lowercase.
-	//     - First character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
-	//     - Must be unique for all clusters within an Amazon Web Services account.
-	//
+	//   - Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//   - Alphabetic characters must be lowercase.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must be unique for all clusters within an Amazon Web Services account.
 	// Example: myexamplecluster
 	//
 	// This member is required.
@@ -50,31 +49,36 @@ type CreateClusterInput struct {
 
 	// The password associated with the admin user for the cluster that is being
 	// created. Constraints:
-	//     - Must be between 8 and 64 characters in length.
-	//     - Must contain at least one uppercase letter.
-	//     - Must contain at least one lowercase letter.
-	//     - Must contain one number.
-	//     - Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \ , / , or @ .
+	//   - Must be between 8 and 64 characters in length.
+	//   - Must contain at least one uppercase letter.
+	//   - Must contain at least one lowercase letter.
+	//   - Must contain one number.
+	//   - Can be any printable ASCII character (ASCII code 33-126) except ' (single
+	//   quote), " (double quote), \ , / , or @ .
 	//
 	// This member is required.
 	MasterUserPassword *string
 
 	// The user name associated with the admin user for the cluster that is being
 	// created. Constraints:
-	//     - Must be 1 - 128 alphanumeric characters or hyphens. The user name can't be PUBLIC .
-	//     - Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.
-	//     - The first character must be a letter.
-	//     - Must not contain a colon (:) or a slash (/).
-	//     - Cannot be a reserved word. A list of reserved words can be found in Reserved Words (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon Redshift Database Developer Guide.
+	//   - Must be 1 - 128 alphanumeric characters or hyphens. The user name can't be
+	//   PUBLIC .
+	//   - Must contain only lowercase letters, numbers, underscore, plus sign, period
+	//   (dot), at symbol (@), or hyphen.
+	//   - The first character must be a letter.
+	//   - Must not contain a colon (:) or a slash (/).
+	//   - Cannot be a reserved word. A list of reserved words can be found in
+	//   Reserved Words (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+	//   in the Amazon Redshift Database Developer Guide.
 	//
 	// This member is required.
 	MasterUsername *string
 
 	// The node type to be provisioned for the cluster. For information about node
 	// types, go to Working with Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
-	// in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge  |
-	// ds2.8xlarge | dc1.large  | dc1.8xlarge  | dc2.large  | dc2.8xlarge  |
-	// ra3.xlplus | ra3.4xlarge  | ra3.16xlarge
+	// in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge |
+	// ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.xlplus |
+	// ra3.4xlarge | ra3.16xlarge
 	//
 	// This member is required.
 	NodeType *string
@@ -82,8 +86,8 @@ type CreateClusterInput struct {
 	// Reserved.
 	AdditionalInfo *string
 
-	// If true, major version upgrades can be applied during the maintenance window
-	// to the Amazon Redshift engine that is running on the cluster. When a new major
+	// If true , major version upgrades can be applied during the maintenance window to
+	// the Amazon Redshift engine that is running on the cluster. When a new major
 	// version of the Amazon Redshift engine is released, you can request that the
 	// service automatically apply upgrades during the maintenance window to the Amazon
 	// Redshift engine that is running on your cluster. Default: true
@@ -96,10 +100,10 @@ type CreateClusterInput struct {
 
 	// The number of days that automated snapshots are retained. If the value is 0,
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
-	// can still create manual snapshots when you want with CreateClusterSnapshot.
-	// You can't disable automated snapshots for RA3 node types. Set the automated
-	// retention period from 1-35 days. Default: 1 Constraints: Must be a value from
-	// 0 to 35.
+	// can still create manual snapshots when you want with CreateClusterSnapshot . You
+	// can't disable automated snapshots for RA3 node types. Set the automated
+	// retention period from 1-35 days. Default: 1 Constraints: Must be a value from 0
+	// to 35.
 	AutomatedSnapshotRetentionPeriod *int32
 
 	// The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision
@@ -119,9 +123,9 @@ type CreateClusterInput struct {
 	// The default Amazon Redshift cluster parameter group. For information about the
 	// default parameter group, go to Working with Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	// Constraints:
-	//     - Must be 1 to 255 alphanumeric characters or hyphens.
-	//     - First character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must be 1 to 255 alphanumeric characters or hyphens.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	ClusterParameterGroupName *string
 
 	// A list of security groups to be associated with this cluster. Default: The
@@ -134,9 +138,9 @@ type CreateClusterInput struct {
 	ClusterSubnetGroupName *string
 
 	// The type of the cluster. When cluster type is specified as
-	//     - single-node , the NumberOfNodes parameter is not required.
-	//     - multi-node , the NumberOfNodes parameter is required.
-	// Valid Values: multi-node  | single-node  Default: multi-node
+	//   - single-node , the NumberOfNodes parameter is not required.
+	//   - multi-node , the NumberOfNodes parameter is required.
+	// Valid Values: multi-node | single-node Default: multi-node
 	ClusterType *string
 
 	// The version of the Amazon Redshift engine software that you want to deploy on
@@ -148,14 +152,16 @@ type CreateClusterInput struct {
 	// create additional databases after the cluster is created, connect to the cluster
 	// with a SQL client and use SQL commands to create a database. For more
 	// information, go to Create a Database (https://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html)
-	// in the Amazon Redshift Database Developer Guide. Default: dev  Constraints:
-	//     - Must contain 1 to 64 alphanumeric characters.
-	//     - Must contain only lowercase letters.
-	//     - Cannot be a word that is reserved by the service. A list of reserved words can be found in Reserved Words (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon Redshift Database Developer Guide.
+	// in the Amazon Redshift Database Developer Guide. Default: dev Constraints:
+	//   - Must contain 1 to 64 alphanumeric characters.
+	//   - Must contain only lowercase letters.
+	//   - Cannot be a word that is reserved by the service. A list of reserved words
+	//   can be found in Reserved Words (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+	//   in the Amazon Redshift Database Developer Guide.
 	DBName *string
 
-	// The Amazon Resource Name (ARN) for the IAM role that was set as default for
-	// the cluster when the cluster was created.
+	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the
+	// cluster when the cluster was created.
 	DefaultIamRoleArn *string
 
 	// The Elastic IP (EIP) address for the cluster. Constraints: The cluster must be
@@ -172,7 +178,7 @@ type CreateClusterInput struct {
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the cluster
 	// must be in a VPC. For more information, see Enhanced VPC Routing (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
-	// in the Amazon Redshift Cluster Management Guide. If this option is true,
+	// in the Amazon Redshift Cluster Management Guide. If this option is true ,
 	// enhanced VPC routing is enabled. Default: false
 	EnhancedVpcRouting *bool
 
@@ -199,19 +205,19 @@ type CreateClusterInput struct {
 	// A flag that specifies whether to load sample data once the cluster is created.
 	LoadSampleData *string
 
-	// An optional parameter for the name of the maintenance track for the cluster.
-	// If you don't provide a maintenance track name, the cluster is assigned to the
+	// An optional parameter for the name of the maintenance track for the cluster. If
+	// you don't provide a maintenance track name, the cluster is assigned to the
 	// current track.
 	MaintenanceTrackName *string
 
-	// The default number of days to retain a manual snapshot. If the value is -1,
-	// the snapshot is retained indefinitely. This setting doesn't change the retention
+	// The default number of days to retain a manual snapshot. If the value is -1, the
+	// snapshot is retained indefinitely. This setting doesn't change the retention
 	// period of existing snapshots. The value must be either -1 or an integer between
 	// 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int32
 
-	// The number of compute nodes in the cluster. This parameter is required when
-	// the ClusterType parameter is specified as multi-node. For information about
+	// The number of compute nodes in the cluster. This parameter is required when the
+	// ClusterType parameter is specified as multi-node . For information about
 	// determining how many nodes you need, go to Working with Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
 	// in the Amazon Redshift Cluster Management Guide. If you don't specify this
 	// parameter, you get a single-node cluster. When requesting a multi-node cluster,
@@ -222,7 +228,7 @@ type CreateClusterInput struct {
 	// The port number on which the cluster accepts incoming connections. The cluster
 	// is accessible only via the JDBC and ODBC connection strings. Part of the
 	// connection string requires the port on which the cluster will listen for
-	// incoming connections. Default: 5439  Valid Values: 1150-65535
+	// incoming connections. Default: 5439 Valid Values: 1150-65535
 	Port *int32
 
 	// The weekly time range (in UTC) during which automated cluster maintenance can
@@ -243,9 +249,8 @@ type CreateClusterInput struct {
 	// A list of tag instances.
 	Tags []types.Tag
 
-	// A list of Virtual Private Cloud (VPC) security groups to be associated with
-	// the cluster. Default: The default VPC security group is associated with the
-	// cluster.
+	// A list of Virtual Private Cloud (VPC) security groups to be associated with the
+	// cluster. Default: The default VPC security group is associated with the cluster.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde

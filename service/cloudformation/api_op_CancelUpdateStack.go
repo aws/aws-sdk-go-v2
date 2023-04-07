@@ -12,7 +12,7 @@ import (
 
 // Cancels an update on the specified stack. If the call completes successfully,
 // the stack rolls back the update and reverts to the previous stack configuration.
-// You can cancel only stacks that are in the UPDATE_IN_PROGRESS  state.
+// You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.
 func (c *Client) CancelUpdateStack(ctx context.Context, params *CancelUpdateStackInput, optFns ...func(*Options)) (*CancelUpdateStackOutput, error) {
 	if params == nil {
 		params = &CancelUpdateStackInput{}
@@ -28,7 +28,7 @@ func (c *Client) CancelUpdateStack(ctx context.Context, params *CancelUpdateStac
 	return out, nil
 }
 
-// The input for the CancelUpdateStack  action.
+// The input for the CancelUpdateStack action.
 type CancelUpdateStackInput struct {
 
 	// The name or the unique stack ID that's associated with the stack.
@@ -39,7 +39,7 @@ type CancelUpdateStackInput struct {
 	// A unique identifier for this CancelUpdateStack request. Specify this token if
 	// you plan to retry requests so that CloudFormation knows that you're not
 	// attempting to cancel an update on a stack with the same name. You might retry
-	// CancelUpdateStackrequests to ensure that CloudFormation successfully received
+	// CancelUpdateStack requests to ensure that CloudFormation successfully received
 	// them.
 	ClientRequestToken *string
 

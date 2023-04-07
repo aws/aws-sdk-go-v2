@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an endpoint. SageMaker frees up all of the resources that were
-// deployed when the endpoint was created. SageMaker retires any custom KMS key
-// grants associated with the endpoint, meaning you don't need to use the
-// RevokeGrant (http://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html)
+// Deletes an endpoint. SageMaker frees up all of the resources that were deployed
+// when the endpoint was created. SageMaker retires any custom KMS key grants
+// associated with the endpoint, meaning you don't need to use the RevokeGrant (http://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html)
 // API call. When you delete your endpoint, SageMaker asynchronously deletes
 // associated endpoint resources such as KMS key grants. You might still see these
 // resources in your account for a few minutes after deleting your endpoint. Do not

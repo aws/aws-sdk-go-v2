@@ -35,8 +35,8 @@ type ResumeWorkflowRunInput struct {
 	// This member is required.
 	Name *string
 
-	// A list of the node IDs for the nodes you want to restart. The nodes that are
-	// to be restarted must have a run attempt in the original run.
+	// A list of the node IDs for the nodes you want to restart. The nodes that are to
+	// be restarted must have a run attempt in the original run.
 	//
 	// This member is required.
 	NodeIds []string

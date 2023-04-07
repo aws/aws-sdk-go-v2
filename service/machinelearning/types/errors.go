@@ -67,8 +67,7 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// An error on the client occurred. Typically, the cause is an invalid input
-// value.
+// An error on the client occurred. Typically, the cause is an invalid input value.
 type InvalidInputException struct {
 	Message *string
 

@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// To remove a contact from Incident Manager, you can delete the contact.
-// Deleting a contact removes them from all escalation plans and related response
-// plans. Deleting an escalation plan removes it from all related response plans.
-// You will have to recreate the contact and its contact channels before you can
-// use it again.
+// To remove a contact from Incident Manager, you can delete the contact. Deleting
+// a contact removes them from all escalation plans and related response plans.
+// Deleting an escalation plan removes it from all related response plans. You will
+// have to recreate the contact and its contact channels before you can use it
+// again.
 func (c *Client) DeleteContact(ctx context.Context, params *DeleteContactInput, optFns ...func(*Options)) (*DeleteContactOutput, error) {
 	if params == nil {
 		params = &DeleteContactInput{}

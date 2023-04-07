@@ -60,8 +60,7 @@ type FailedReason struct {
 	// The failure code, if any, for a create or delete endpoint operation.
 	ErrorCode *string
 
-	// Additional error details describing the endpoint failure and recommended
-	// action.
+	// Additional error details describing the endpoint failure and recommended action.
 	Message *string
 
 	noSmithyDocumentSerde

@@ -35,8 +35,8 @@ type CreateGrantInput struct {
 	// This member is required.
 	AllowedOperations []types.AllowedOperation
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	//
 	// This member is required.
 	ClientToken *string
@@ -56,8 +56,8 @@ type CreateGrantInput struct {
 	// This member is required.
 	LicenseArn *string
 
-	// The grant principals. This value should be specified as an Amazon Resource
-	// Name (ARN).
+	// The grant principals. This value should be specified as an Amazon Resource Name
+	// (ARN).
 	//
 	// This member is required.
 	Principals []string

@@ -32,9 +32,9 @@ func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *Get
 
 type GetComplianceDetailsByResourceInput struct {
 
-	// Filters the results by compliance. INSUFFICIENT_DATA  is a valid ComplianceType
+	// Filters the results by compliance. INSUFFICIENT_DATA is a valid ComplianceType
 	// that is returned when an Config rule cannot be evaluated. However,
-	// INSUFFICIENT_DATA cannot be used as a ComplianceType  for filtering results.
+	// INSUFFICIENT_DATA cannot be used as a ComplianceType for filtering results.
 	ComplianceTypes []types.ComplianceType
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -63,8 +63,8 @@ type GetComplianceDetailsByResourceOutput struct {
 	// Config rule.
 	EvaluationResults []types.EvaluationResult
 
-	// The string that you use in a subsequent request to get the next page of
-	// results in a paginated response.
+	// The string that you use in a subsequent request to get the next page of results
+	// in a paginated response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -144,8 +144,8 @@ var _ GetComplianceDetailsByResourceAPIClient = (*Client)(nil)
 // GetComplianceDetailsByResourcePaginatorOptions is the paginator options for
 // GetComplianceDetailsByResource
 type GetComplianceDetailsByResourcePaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -40,9 +40,10 @@ type CreateLinkInput struct {
 	// Specify a friendly human-readable name to use to identify this source account
 	// when you are viewing data from it in the monitoring account. You can use a
 	// custom label or use the following variables:
-	//     - $AccountName is the name of the account
-	//     - $AccountEmail is the globally unique email address of the account
-	//     - $AccountEmailNoDomain is the email address of the account without the domain name
+	//   - $AccountName is the name of the account
+	//   - $AccountEmail is the globally unique email address of the account
+	//   - $AccountEmailNoDomain is the email address of the account without the domain
+	//   name
 	//
 	// This member is required.
 	LabelTemplate *string
@@ -76,8 +77,7 @@ type CreateLinkOutput struct {
 	// The ARN of the link that is newly created.
 	Arn *string
 
-	// The random ID string that Amazon Web Services generated as part of the link
-	// ARN.
+	// The random ID string that Amazon Web Services generated as part of the link ARN.
 	Id *string
 
 	// The label that you assigned to this link. If the labelTemplate includes

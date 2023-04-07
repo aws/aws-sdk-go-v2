@@ -14,7 +14,7 @@ import (
 // Returns the details of a single query execution or a list of up to 50 query
 // executions, which you provide as an array of query execution ID strings.
 // Requires you to have access to the workgroup in which the queries ran. To get a
-// list of query execution IDs, use ListQueryExecutionsInput$WorkGroup. Query
+// list of query execution IDs, use ListQueryExecutionsInput$WorkGroup . Query
 // executions differ from named (saved) queries. Use BatchGetNamedQueryInput to
 // get details about named queries.
 func (c *Client) BatchGetQueryExecution(ctx context.Context, params *BatchGetQueryExecutionInput, optFns ...func(*Options)) (*BatchGetQueryExecutionOutput, error) {

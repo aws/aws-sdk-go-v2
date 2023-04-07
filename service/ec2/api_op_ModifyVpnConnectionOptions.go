@@ -44,12 +44,12 @@ type ModifyVpnConnectionOptionsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The IPv4 CIDR on the customer gateway (on-premises) side of the VPN
-	// connection. Default: 0.0.0.0/0
+	// The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// Default: 0.0.0.0/0
 	LocalIpv4NetworkCidr *string
 
-	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN
-	// connection. Default: ::/0
+	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// Default: ::/0
 	LocalIpv6NetworkCidr *string
 
 	// The IPv4 CIDR on the Amazon Web Services side of the VPN connection. Default:

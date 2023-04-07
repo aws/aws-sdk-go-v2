@@ -3,9 +3,9 @@
 // Package internetmonitor provides the API client, operations, and parameter
 // types for Amazon CloudWatch Internet Monitor.
 //
-// Amazon CloudWatch Internet Monitor provides visibility into how internet
-// issues impact the performance and availability between your applications hosted
-// on Amazon Web Services and your end users, reducing the time it takes for you to
+// Amazon CloudWatch Internet Monitor provides visibility into how internet issues
+// impact the performance and availability between your applications hosted on
+// Amazon Web Services and your end users, reducing the time it takes for you to
 // diagnose these issues, from days to minutes. You can explore internet
 // measurements for different time frames and at different geographic
 // granularities, and quickly visualize the impact of issues, and then take action

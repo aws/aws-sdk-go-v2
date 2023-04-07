@@ -46,11 +46,11 @@ type ModifyCapacityReservationFleetInput struct {
 	DryRun *bool
 
 	// The date and time at which the Capacity Reservation Fleet expires. When the
-	// Capacity Reservation Fleet expires, its state changes to expired and all of
-	// the Capacity Reservations in the Fleet expire. The Capacity Reservation Fleet
+	// Capacity Reservation Fleet expires, its state changes to expired and all of the
+	// Capacity Reservations in the Fleet expire. The Capacity Reservation Fleet
 	// expires within an hour after the specified time. For example, if you specify
-	// 5/31/2019 , 13:30:55, the Capacity Reservation Fleet is guaranteed to expire
-	// between 13:30:55  and 14:30:55  on 5/31/2019. You can't specify EndDate and
+	// 5/31/2019 , 13:30:55 , the Capacity Reservation Fleet is guaranteed to expire
+	// between 13:30:55 and 14:30:55 on 5/31/2019 . You can't specify EndDate and
 	// RemoveEndDate in the same request.
 	EndDate *time.Time
 
@@ -74,7 +74,7 @@ type ModifyCapacityReservationFleetInput struct {
 
 type ModifyCapacityReservationFleetOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

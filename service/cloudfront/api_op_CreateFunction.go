@@ -15,9 +15,9 @@ import (
 // code and some configuration information about the function. The response
 // contains an Amazon Resource Name (ARN) that uniquely identifies the function.
 // When you create a function, it's in the DEVELOPMENT stage. In this stage, you
-// can test the function with TestFunction , and update it with UpdateFunction.
+// can test the function with TestFunction , and update it with UpdateFunction .
 // When you're ready to use your function with a CloudFront distribution, use
-// PublishFunction to copy the function from the DEVELOPMENT  stage to LIVE. When
+// PublishFunction to copy the function from the DEVELOPMENT stage to LIVE . When
 // it's live, you can attach the function to a distribution's cache behavior, using
 // the function's ARN.
 func (c *Client) CreateFunction(ctx context.Context, params *CreateFunctionInput, optFns ...func(*Options)) (*CreateFunctionOutput, error) {
@@ -44,8 +44,8 @@ type CreateFunctionInput struct {
 	// This member is required.
 	FunctionCode []byte
 
-	// Configuration information about the function, including an optional comment
-	// and the function's runtime.
+	// Configuration information about the function, including an optional comment and
+	// the function's runtime.
 	//
 	// This member is required.
 	FunctionConfig *types.FunctionConfig
@@ -66,8 +66,8 @@ type CreateFunctionOutput struct {
 	// Contains configuration information and metadata about a CloudFront function.
 	FunctionSummary *types.FunctionSummary
 
-	// The URL of the CloudFront function. Use the URL to manage the function with
-	// the CloudFront API.
+	// The URL of the CloudFront function. Use the URL to manage the function with the
+	// CloudFront API.
 	Location *string
 
 	// Metadata pertaining to the operation's result.

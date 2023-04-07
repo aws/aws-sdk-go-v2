@@ -46,7 +46,7 @@ type UpdateGatewayCapabilityConfigurationInput struct {
 	// The namespace of the gateway capability configuration to be updated. For
 	// example, if you configure OPC-UA sources from the IoT SiteWise console, your
 	// OPC-UA capability configuration has the namespace
-	// iotsitewise:opcuacollector:version , where version  is a number such as 1 .
+	// iotsitewise:opcuacollector:version , where version is a number such as 1 .
 	//
 	// This member is required.
 	CapabilityNamespace *string
@@ -66,14 +66,13 @@ type UpdateGatewayCapabilityConfigurationOutput struct {
 	// This member is required.
 	CapabilityNamespace *string
 
-	// The synchronization status of the capability configuration. The sync status
-	// can be one of the following:
-	//     - IN_SYNC – The gateway is running the capability configuration.
-	//     - OUT_OF_SYNC – The gateway hasn't received the capability configuration.
-	//     - SYNC_FAILED – The gateway rejected the capability configuration.
-	// After
-	// you update a capability configuration, its sync status is OUT_OF_SYNC until
-	// the gateway receives and applies or rejects the updated configuration.
+	// The synchronization status of the capability configuration. The sync status can
+	// be one of the following:
+	//   - IN_SYNC – The gateway is running the capability configuration.
+	//   - OUT_OF_SYNC – The gateway hasn't received the capability configuration.
+	//   - SYNC_FAILED – The gateway rejected the capability configuration.
+	// After you update a capability configuration, its sync status is OUT_OF_SYNC
+	// until the gateway receives and applies or rejects the updated configuration.
 	//
 	// This member is required.
 	CapabilitySyncStatus types.CapabilitySyncStatus

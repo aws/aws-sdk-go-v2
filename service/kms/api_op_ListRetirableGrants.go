@@ -80,13 +80,13 @@ type ListRetirableGrantsOutput struct {
 	Grants []types.GrantListEntry
 
 	// When Truncated is true, this element is present and contains the value to use
-	// for the Marker  parameter in a subsequent request.
+	// for the Marker parameter in a subsequent request.
 	NextMarker *string
 
-	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To get more items, pass
-	// the value of the NextMarker  element in thisresponse to the Marker parameter
-	// in a subsequent request.
+	// A flag that indicates whether there are more items in the list. When this value
+	// is true, the list in this response is truncated. To get more items, pass the
+	// value of the NextMarker element in thisresponse to the Marker parameter in a
+	// subsequent request.
 	Truncated bool
 
 	// Metadata pertaining to the operation's result.
@@ -176,8 +176,8 @@ type ListRetirableGrantsPaginatorOptions struct {
 	// to 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

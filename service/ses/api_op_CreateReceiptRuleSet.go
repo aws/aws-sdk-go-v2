@@ -29,15 +29,16 @@ func (c *Client) CreateReceiptRuleSet(ctx context.Context, params *CreateReceipt
 }
 
 // Represents a request to create an empty receipt rule set. You use receipt rule
-// sets to receive email with Amazon SES. For more information, see the Amazon
-// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// sets to receive email with Amazon SES. For more information, see the Amazon SES
+// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
 // .
 type CreateReceiptRuleSetInput struct {
 
 	// The name of the rule set to create. The name must:
-	//     - This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
-	//     - Start and end with a letter or number.
-	//     - Contain less than 64 characters.
+	//   - This value can only contain ASCII letters (a-z, A-Z), numbers (0-9),
+	//   underscores (_), or dashes (-).
+	//   - Start and end with a letter or number.
+	//   - Contain less than 64 characters.
 	//
 	// This member is required.
 	RuleSetName *string

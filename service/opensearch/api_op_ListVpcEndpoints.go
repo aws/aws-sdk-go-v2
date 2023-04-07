@@ -30,9 +30,9 @@ func (c *Client) ListVpcEndpoints(ctx context.Context, params *ListVpcEndpointsI
 
 type ListVpcEndpointsInput struct {
 
-	// If your initial ListVpcEndpoints  operation returns a nextToken, you can
-	// include the returned nextToken  in subsequent ListVpcEndpoints operations,
-	// which returns results in the next page.
+	// If your initial ListVpcEndpoints operation returns a nextToken , you can include
+	// the returned nextToken in subsequent ListVpcEndpoints operations, which returns
+	// results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,8 +40,8 @@ type ListVpcEndpointsInput struct {
 
 type ListVpcEndpointsOutput struct {
 
-	// When nextToken  is returned, there are more results available. The value of
-	// nextTokenis a unique pagination token for each page. Make the call again using
+	// When nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	//
 	// This member is required.

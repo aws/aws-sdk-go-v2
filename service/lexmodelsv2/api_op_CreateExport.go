@@ -40,8 +40,8 @@ type CreateExportInput struct {
 	// This member is required.
 	FileFormat types.ImportExportFileFormat
 
-	// Specifies the type of resource to export, either a bot or a bot locale. You
-	// can only specify one type of resource to export.
+	// Specifies the type of resource to export, either a bot or a bot locale. You can
+	// only specify one type of resource to export.
 	//
 	// This member is required.
 	ResourceSpecification *types.ExportResourceSpecification

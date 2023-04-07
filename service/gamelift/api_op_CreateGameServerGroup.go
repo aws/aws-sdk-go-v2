@@ -19,8 +19,14 @@ import (
 // can view the status of your game server groups in the GameLift console. Game
 // server group metrics and events are emitted to Amazon CloudWatch. Before
 // creating a new game server group, you must have the following:
-//   - An Amazon Elastic Compute Cloud launch template that specifies how to launch Amazon Elastic Compute Cloud instances with your game server build. For more information, see Launching an Instance from a Launch Template (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) in the Amazon Elastic Compute Cloud User Guide.
-//   - An IAM role that extends limited access to your Amazon Web Services account to allow GameLift FleetIQ to create and interact with the Auto Scaling group. For more information, see Create IAM roles for cross-service interaction (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-iam-permissions-roles.html) in the GameLift FleetIQ Developer Guide.
+//   - An Amazon Elastic Compute Cloud launch template that specifies how to
+//     launch Amazon Elastic Compute Cloud instances with your game server build. For
+//     more information, see Launching an Instance from a Launch Template (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
+//     in the Amazon Elastic Compute Cloud User Guide.
+//   - An IAM role that extends limited access to your Amazon Web Services account
+//     to allow GameLift FleetIQ to create and interact with the Auto Scaling group.
+//     For more information, see Create IAM roles for cross-service interaction (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-iam-permissions-roles.html)
+//     in the GameLift FleetIQ Developer Guide.
 //
 // To create a new game server group, specify a unique group name, IAM role and
 // Amazon Elastic Compute Cloud launch template, and provide a list of instance
@@ -81,7 +87,7 @@ type CreateGameServerGroupInput struct {
 	// Scaling group is created, update this value directly in the Auto Scaling group
 	// using the Amazon Web Services console or APIs. If you specify network interfaces
 	// in your launch template, you must explicitly set the property
-	// AssociatePublicIpAddressto "true". If no network interface is specified in the
+	// AssociatePublicIpAddress to "true". If no network interface is specified in the
 	// launch template, GameLift FleetIQ uses your account's default VPC.
 	//
 	// This member is required.
@@ -114,18 +120,27 @@ type CreateGameServerGroupInput struct {
 
 	// Configuration settings to define a scaling policy for the Auto Scaling group
 	// that is optimized for game hosting. The scaling policy uses the metric
-	// "PercentUtilizedGameServers"to maintain a buffer of idle game servers that can
+	// "PercentUtilizedGameServers" to maintain a buffer of idle game servers that can
 	// immediately accommodate new games and players. After the Auto Scaling group is
 	// created, update this value directly in the Auto Scaling group using the Amazon
 	// Web Services console or APIs.
 	AutoScalingPolicy *types.GameServerGroupAutoScalingPolicy
 
-	// Indicates how GameLift FleetIQ balances the use of Spot Instances and
-	// On-Demand Instances in the game server group. Method options include the
-	// following:
-	//     - SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot Instances are unavailable or not viable for game hosting, the game server group provides no hosting capacity until Spot Instances can again be used. Until then, no new instances are started, and the existing nonviable Spot Instances are terminated (after current gameplay ends) and are not replaced.
-	//     - SPOT_PREFERRED - (default value) Spot Instances are used whenever available in the game server group. If Spot Instances are unavailable, the game server group continues to provide hosting capacity by falling back to On-Demand Instances. Existing nonviable Spot Instances are terminated (after current gameplay ends) and are replaced with new On-Demand Instances.
-	//     - ON_DEMAND_ONLY - Only On-Demand Instances are used in the game server group. No Spot Instances are used, even when available, while this balancing strategy is in force.
+	// Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand
+	// Instances in the game server group. Method options include the following:
+	//   - SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot
+	//   Instances are unavailable or not viable for game hosting, the game server group
+	//   provides no hosting capacity until Spot Instances can again be used. Until then,
+	//   no new instances are started, and the existing nonviable Spot Instances are
+	//   terminated (after current gameplay ends) and are not replaced.
+	//   - SPOT_PREFERRED - (default value) Spot Instances are used whenever available
+	//   in the game server group. If Spot Instances are unavailable, the game server
+	//   group continues to provide hosting capacity by falling back to On-Demand
+	//   Instances. Existing nonviable Spot Instances are terminated (after current
+	//   gameplay ends) and are replaced with new On-Demand Instances.
+	//   - ON_DEMAND_ONLY - Only On-Demand Instances are used in the game server group.
+	//   No Spot Instances are used, even when available, while this balancing strategy
+	//   is in force.
 	BalancingStrategy types.BalancingStrategy
 
 	// A flag that indicates whether instances in the game server group are protected
@@ -135,7 +150,7 @@ type CreateGameServerGroupInput struct {
 	// active game servers running except in the event of a forced game server group
 	// deletion (see ). An exception to this is with Spot Instances, which can be
 	// terminated by Amazon Web Services regardless of protection status. This property
-	// is set to NO_PROTECTION  by default.
+	// is set to NO_PROTECTION by default.
 	GameServerProtectionPolicy types.GameServerProtectionPolicy
 
 	// A list of labels to assign to the new game server group resource. Tags are
@@ -145,9 +160,9 @@ type CreateGameServerGroupInput struct {
 	// in the Amazon Web Services General Reference.
 	Tags []types.Tag
 
-	// A list of virtual private cloud (VPC) subnets to use with instances in the
-	// game server group. By default, all GameLift FleetIQ-supported Availability Zones
-	// are used. You can use this parameter to specify VPCs that you've set up. This
+	// A list of virtual private cloud (VPC) subnets to use with instances in the game
+	// server group. By default, all GameLift FleetIQ-supported Availability Zones are
+	// used. You can use this parameter to specify VPCs that you've set up. This
 	// property cannot be updated after the game server group is created, and the
 	// corresponding Auto Scaling group will always use the property value that is set
 	// with this request, even if the Auto Scaling group is updated directly.
@@ -158,10 +173,10 @@ type CreateGameServerGroupInput struct {
 
 type CreateGameServerGroupOutput struct {
 
-	// The newly created game server group object, including the new ARN value for
-	// the GameLift FleetIQ game server group and the object's status. The Amazon EC2
-	// Auto Scaling group ARN is initially null, since the group has not yet been
-	// created. This value is added once the game server group status reaches ACTIVE .
+	// The newly created game server group object, including the new ARN value for the
+	// GameLift FleetIQ game server group and the object's status. The Amazon EC2 Auto
+	// Scaling group ARN is initially null, since the group has not yet been created.
+	// This value is added once the game server group status reaches ACTIVE .
 	GameServerGroup *types.GameServerGroup
 
 	// Metadata pertaining to the operation's result.

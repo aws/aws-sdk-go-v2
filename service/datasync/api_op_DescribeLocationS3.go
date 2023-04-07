@@ -58,9 +58,9 @@ type DescribeLocationS3Output struct {
 	// The URL of the Amazon S3 location that was described.
 	LocationUri *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
-	// role used to access an Amazon S3 bucket. For detailed information about using
-	// such a role, see Creating a Location for Amazon S3 in the DataSync User Guide.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// used to access an Amazon S3 bucket. For detailed information about using such a
+	// role, see Creating a Location for Amazon S3 in the DataSync User Guide.
 	S3Config *types.S3Config
 
 	// The Amazon S3 storage class that you chose to store your files in when this

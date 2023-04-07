@@ -39,16 +39,16 @@ type UpdateFrameworkInput struct {
 	// This member is required.
 	FrameworkName *string
 
-	// A list of the controls that make up the framework. Each control in the list
-	// has a name, input parameters, and scope.
+	// A list of the controls that make up the framework. Each control in the list has
+	// a name, input parameters, and scope.
 	FrameworkControls []types.FrameworkControl
 
 	// An optional description of the framework with a maximum 1,024 characters.
 	FrameworkDescription *string
 
 	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to UpdateFrameworkInput. Retrying a successful request with
-	// the same idempotency token results in a success message with no action taken.
+	// identical calls to UpdateFrameworkInput . Retrying a successful request with the
+	// same idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
 	noSmithyDocumentSerde

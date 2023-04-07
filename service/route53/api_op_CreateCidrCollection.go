@@ -29,9 +29,9 @@ func (c *Client) CreateCidrCollection(ctx context.Context, params *CreateCidrCol
 
 type CreateCidrCollectionInput struct {
 
-	// A client-specific token that allows requests to be securely retried so that
-	// the intended outcome will only occur once, retries receive a similar response,
-	// and there are no additional edge cases to handle.
+	// A client-specific token that allows requests to be securely retried so that the
+	// intended outcome will only occur once, retries receive a similar response, and
+	// there are no additional edge cases to handle.
 	//
 	// This member is required.
 	CallerReference *string

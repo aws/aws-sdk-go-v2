@@ -33,12 +33,12 @@ func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsF
 	return out, nil
 }
 
-// Represents the input of a RemoveTagsFromResource  operation.
+// Represents the input of a RemoveTagsFromResource operation.
 type RemoveTagsFromResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource from which you want the tags
 	// removed, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster
-	// or arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot. For more
+	// or arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot . For more
 	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Service
 	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// .
@@ -46,8 +46,7 @@ type RemoveTagsFromResourceInput struct {
 	// This member is required.
 	ResourceName *string
 
-	// A list of TagKeys identifying the tags you want removed from the named
-	// resource.
+	// A list of TagKeys identifying the tags you want removed from the named resource.
 	//
 	// This member is required.
 	TagKeys []string

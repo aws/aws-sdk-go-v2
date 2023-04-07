@@ -20,7 +20,7 @@ import (
 // the policy subresource to delete the policy of a specified Amazon S3 on Outposts
 // bucket. If you are using an identity other than the root user of the Amazon Web
 // Services account that owns the bucket, the calling identity must have the
-// s3-outposts:DeleteBucketPolicypermissions on the specified Outposts bucket and
+// s3-outposts:DeleteBucketPolicy permissions on the specified Outposts bucket and
 // belong to the bucket owner's account to use this action. For more information,
 // see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
 // in Amazon S3 User Guide. If you don't have DeleteBucketPolicy permissions,
@@ -34,8 +34,8 @@ import (
 // . All Amazon S3 on Outposts REST API requests for this action require an
 // additional parameter of x-amz-outpost-id to be passed with the request. In
 // addition, you must use an S3 on Outposts endpoint hostname prefix instead of
-// s3-control. For an example of the request syntax for Amazon S3 on Outposts
-// that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id
+// s3-control . For an example of the request syntax for Amazon S3 on Outposts that
+// uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id
 // derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples)
 // section. The following actions are related to DeleteBucketPolicy :
 //   - GetBucketPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html)
@@ -67,9 +67,9 @@ type DeleteBucketPolicyInput struct {
 	// using this parameter with S3 on Outposts with the Amazon Web Services SDK and
 	// CLI, you must specify the ARN of the bucket accessed in the format
 	// arn:aws:s3-outposts:::outpost//bucket/ . For example, to access the bucket
-	// reports through Outpost my-outpost  owned by account 123456789012  in Region
+	// reports through Outpost my-outpost owned by account 123456789012 in Region
 	// us-west-2 , use the URL encoding of
-	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports .
 	// The value must be URL encoded.
 	//
 	// This member is required.

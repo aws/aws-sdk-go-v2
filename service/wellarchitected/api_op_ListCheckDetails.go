@@ -40,8 +40,8 @@ type ListCheckDetailsInput struct {
 	// This member is required.
 	LensArn *string
 
-	// The ID used to identify a pillar, for example, security. A pillar is
-	// identified by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security . A pillar is identified
+	// by its PillarReviewSummary$PillarId .
 	//
 	// This member is required.
 	PillarId *string
@@ -157,8 +157,8 @@ type ListCheckDetailsPaginatorOptions struct {
 	// The maximum number of results to return for this request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

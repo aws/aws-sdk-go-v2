@@ -47,9 +47,8 @@ type CreateEndpointAccessInput struct {
 	// This member is required.
 	WorkgroupName *string
 
-	// The unique identifiers of the security group that defines the ports,
-	// protocols, and sources for inbound traffic that you are authorizing into your
-	// endpoint.
+	// The unique identifiers of the security group that defines the ports, protocols,
+	// and sources for inbound traffic that you are authorizing into your endpoint.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde

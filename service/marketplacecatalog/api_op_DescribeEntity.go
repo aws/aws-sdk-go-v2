@@ -56,8 +56,7 @@ type DescribeEntityOutput struct {
 	// The named type of the entity, in the format of EntityType@Version .
 	EntityType *string
 
-	// The last modified date of the entity, in ISO 8601 format
-	// (2018-02-27T13:45:22Z).
+	// The last modified date of the entity, in ISO 8601 format (2018-02-27T13:45:22Z).
 	LastModifiedDate *string
 
 	// Metadata pertaining to the operation's result.

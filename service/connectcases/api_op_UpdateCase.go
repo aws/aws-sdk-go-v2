@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the values of fields on a case. Fields to be updated are received as
-// an array of id/value pairs identical to the CreateCase input . If the action
-// is successful, the service sends back an HTTP 200 response with an empty HTTP
-// body.
+// Updates the values of fields on a case. Fields to be updated are received as an
+// array of id/value pairs identical to the CreateCase input . If the action is
+// successful, the service sends back an HTTP 200 response with an empty HTTP body.
 func (c *Client) UpdateCase(ctx context.Context, params *UpdateCaseInput, optFns ...func(*Options)) (*UpdateCaseOutput, error) {
 	if params == nil {
 		params = &UpdateCaseInput{}

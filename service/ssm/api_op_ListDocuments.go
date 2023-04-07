@@ -37,10 +37,10 @@ type ListDocumentsInput struct {
 
 	// One or more DocumentKeyValuesFilter objects. Use a filter to return a more
 	// specific list of results. For keys, you can specify one or more key-value pair
-	// tags that have been applied to a document. Other valid keys include Owner ,
-	// Name , PlatformTypes , DocumentType , and TargetType. For example, to return
-	// documents you own use Key=Owner,Values=Self. To specify a custom key-value
-	// pair, use the format Key=tag:tagName,Values=valueName. This API operation only
+	// tags that have been applied to a document. Other valid keys include Owner , Name
+	// , PlatformTypes , DocumentType , and TargetType . For example, to return
+	// documents you own use Key=Owner,Values=Self . To specify a custom key-value
+	// pair, use the format Key=tag:tagName,Values=valueName . This API operation only
 	// supports filtering documents by using a single tag key and one or more tag
 	// values. For example: Key=tag:tagName,Values=valueName1,valueName2
 	Filters []types.DocumentKeyValuesFilter
@@ -147,8 +147,8 @@ type ListDocumentsPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-// An error returned by the BatchPutProperty  action.
+// An error returned by the BatchPutProperty action.
 type BatchPutPropertyError struct {
 
 	// An object that contains information about errors returned by the
@@ -106,8 +106,7 @@ type ComponentPropertyGroupResponse struct {
 	noSmithyDocumentSerde
 }
 
-// An object that sets information about a component type create or update
-// request.
+// An object that sets information about a component type create or update request.
 type ComponentRequest struct {
 
 	// The ID of the component type.
@@ -272,7 +271,7 @@ type DataValue struct {
 	// A long value.
 	LongValue *int64
 
-	// An object that maps strings to multiple DataValue  objects.
+	// An object that maps strings to multiple DataValue objects.
 	MapValue map[string]DataValue
 
 	// A value that relates a component to another component.
@@ -497,8 +496,8 @@ type ListEntitiesFilterMemberParentEntityId struct {
 
 func (*ListEntitiesFilterMemberParentEntityId) isListEntitiesFilter() {}
 
-// Filter criteria that orders the return output. It can be sorted in ascending
-// or descending order.
+// Filter criteria that orders the return output. It can be sorted in ascending or
+// descending order.
 type OrderBy struct {
 
 	// The property name.
@@ -561,9 +560,8 @@ type PricingPlan struct {
 // An object that sets information about a property.
 type PropertyDefinitionRequest struct {
 
-	// A mapping that specifies configuration information about the property. Use
-	// this field to specify information that you read from and write to an external
-	// source.
+	// A mapping that specifies configuration information about the property. Use this
+	// field to specify information that you read from and write to an external source.
 	Configuration map[string]string
 
 	// An object that contains information about the data type.
@@ -611,8 +609,8 @@ type PropertyDefinitionResponse struct {
 	// This member is required.
 	IsFinal *bool
 
-	// A Boolean value that specifies whether the property definition is imported
-	// from an external data store.
+	// A Boolean value that specifies whether the property definition is imported from
+	// an external data store.
 	//
 	// This member is required.
 	IsImported *bool
@@ -751,23 +749,23 @@ type PropertyValue struct {
 	// ISO8601 DateTime of a value for a time series property. The time for when the
 	// property value was recorded in ISO 8601 format:
 	// YYYY-MM-DDThh:mm:ss[.SSSSSSSSS][Z/±HH:mm].
-	//     - [YYYY]: year
-	//     - [MM]: month
-	//     - [DD]: day
-	//     - [hh]: hour
-	//     - [mm]: minute
-	//     - [ss]: seconds
-	//     - [.SSSSSSSSS]: additional precision, where precedence is maintained. For example: [.573123] is equal to 573123000 nanoseconds.
-	//     - Z: default timezone UTC
-	//     - ± HH:mm: time zone offset in Hours and Minutes.
-	// Required sub-fields:
-	// YYYY-MM-DDThh:mm:ss and [Z/±HH:mm]
+	//   - [YYYY]: year
+	//   - [MM]: month
+	//   - [DD]: day
+	//   - [hh]: hour
+	//   - [mm]: minute
+	//   - [ss]: seconds
+	//   - [.SSSSSSSSS]: additional precision, where precedence is maintained. For
+	//   example: [.573123] is equal to 573123000 nanoseconds.
+	//   - Z: default timezone UTC
+	//   - ± HH:mm: time zone offset in Hours and Minutes.
+	// Required sub-fields: YYYY-MM-DDThh:mm:ss and [Z/±HH:mm]
 	Time *string
 
 	// The timestamp of a value for a time series property.
 	//
-	// Deprecated: This field is deprecated and will throw an error in the future.
-	// Use time instead.
+	// Deprecated: This field is deprecated and will throw an error in the future. Use
+	// time instead.
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -797,8 +795,8 @@ type PropertyValueHistory struct {
 	// This member is required.
 	EntityPropertyReference *EntityPropertyReference
 
-	// A list of objects that contain information about the values in the history of
-	// a time series property.
+	// A list of objects that contain information about the values in the history of a
+	// time series property.
 	Values []PropertyValue
 
 	noSmithyDocumentSerde

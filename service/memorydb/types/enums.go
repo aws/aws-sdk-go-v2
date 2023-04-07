@@ -28,9 +28,9 @@ const (
 	AZStatusMultiAZ  AZStatus = "multiaz"
 )
 
-// Values returns all known values for AZStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AZStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (AZStatus) Values() []AZStatus {
 	return []AZStatus{
 		"singleaz",
@@ -63,9 +63,9 @@ const (
 	InputAuthenticationTypePassword InputAuthenticationType = "password"
 )
 
-// Values returns all known values for InputAuthenticationType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InputAuthenticationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InputAuthenticationType) Values() []InputAuthenticationType {
 	return []InputAuthenticationType{
 		"password",

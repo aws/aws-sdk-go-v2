@@ -14,9 +14,9 @@ import (
 // Returns session information for a specified bot, alias, and user. For example,
 // you can use this operation to retrieve session information for a user that has
 // left a long-running session in use. If the bot, alias, or session identifier
-// doesn't exist, Amazon Lex V2 returns a BadRequestException. If the locale
-// doesn't exist or is not enabled for the alias, you receive a
-// BadRequestException .
+// doesn't exist, Amazon Lex V2 returns a BadRequestException . If the locale
+// doesn't exist or is not enabled for the alias, you receive a BadRequestException
+// .
 func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns ...func(*Options)) (*GetSessionOutput, error) {
 	if params == nil {
 		params = &GetSessionInput{}

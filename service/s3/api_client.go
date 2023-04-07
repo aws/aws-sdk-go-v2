@@ -134,8 +134,8 @@ type Options struct {
 	// option.
 	Retryer aws.Retryer
 
-	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is
-	// set to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
+	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is set
+	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig . You
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
@@ -159,9 +159,8 @@ type Options struct {
 	UseDualstack bool
 
 	// Allows you to enable the client to use path-style addressing, i.e.,
-	// https://s3.amazonaws.com/BUCKET/KEY. By default, the S3 client will use
-	// virtual hosted bucket addressing when possible(
-	// https://BUCKET.s3.amazonaws.com/KEY ).
+	// https://s3.amazonaws.com/BUCKET/KEY . By default, the S3 client will use virtual
+	// hosted bucket addressing when possible( https://BUCKET.s3.amazonaws.com/KEY ).
 	UsePathStyle bool
 
 	// Signature Version 4a (SigV4a) Signer
@@ -548,8 +547,8 @@ type ComputedInputChecksumsMetadata struct {
 	ComputedChecksums map[string]string
 }
 
-// GetComputedInputChecksumsMetadata retrieves from the result metadata the map
-// of algorithms and input payload checksums values.
+// GetComputedInputChecksumsMetadata retrieves from the result metadata the map of
+// algorithms and input payload checksums values.
 func GetComputedInputChecksumsMetadata(m middleware.Metadata) (ComputedInputChecksumsMetadata, bool) {
 	values, ok := internalChecksum.GetComputedInputChecksums(m)
 	if !ok {
@@ -648,10 +647,9 @@ type PresignOptions struct {
 	// Presigner is the presigner used by the presign url client
 	Presigner HTTPPresignerV4
 
-	// Expires sets the expiration duration for the generated presign url. This
-	// should be the duration in seconds the presigned URL should be considered valid
-	// for. If not set or set to zero, presign url would default to expire after 900
-	// seconds.
+	// Expires sets the expiration duration for the generated presign url. This should
+	// be the duration in seconds the presigned URL should be considered valid for. If
+	// not set or set to zero, presign url would default to expire after 900 seconds.
 	Expires time.Duration
 
 	// presignerV4a is the presigner used by the presign url client

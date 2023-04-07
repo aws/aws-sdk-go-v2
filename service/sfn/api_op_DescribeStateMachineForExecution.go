@@ -17,7 +17,7 @@ import (
 // is returned in the response. Additionally, the state machine returned will be
 // the state machine associated with the Map Run. This operation is eventually
 // consistent. The results are best effort and may not reflect very recent updates
-// and changes. This API action is not supported by EXPRESS  state machines.
+// and changes. This API action is not supported by EXPRESS state machines.
 func (c *Client) DescribeStateMachineForExecution(ctx context.Context, params *DescribeStateMachineForExecutionInput, optFns ...func(*Options)) (*DescribeStateMachineForExecutionOutput, error) {
 	if params == nil {
 		params = &DescribeStateMachineForExecutionInput{}
@@ -81,7 +81,7 @@ type DescribeStateMachineForExecutionOutput struct {
 	// was started by a Distributed Map state.
 	Label *string
 
-	// The LoggingConfiguration  data type is used to set CloudWatch Logs options.
+	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// The Amazon Resource Name (ARN) of the Map Run that started the child workflow

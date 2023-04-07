@@ -21,11 +21,11 @@ import (
 // The HEAD action retrieves metadata from an object without returning the object
 // itself. This action is useful if you're only interested in an object's metadata.
 // To use HEAD, you must have READ access to the object. A HEAD request has the
-// same options as a GET  action on an object. The response is identical to the
-// GET response except that there is no response body. Because of this, if the
-// HEAD request generates an error, it returns a generic 404 Not Found  or 403
-// Forbiddencode. It is not possible to retrieve the exact exception beyond these
-// error codes. If you encrypt an object by using server-side encryption with
+// same options as a GET action on an object. The response is identical to the GET
+// response except that there is no response body. Because of this, if the HEAD
+// request generates an error, it returns a generic 404 Not Found or 403 Forbidden
+// code. It is not possible to retrieve the exact exception beyond these error
+// codes. If you encrypt an object by using server-side encryption with
 // customer-provided encryption keys (SSE-C) when you store the object in Amazon
 // S3, then when you retrieve the metadata from the object, you must use the
 // following headers:
@@ -33,29 +33,39 @@ import (
 //   - x-amz-server-side-encryption-customer-key
 //   - x-amz-server-side-encryption-customer-key-MD5
 //
-// For more information about
-// SSE-C, see Server-Side Encryption (Using Customer-Provided Encryption Keys) (https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)
+// For more information about SSE-C, see Server-Side Encryption (Using
+// Customer-Provided Encryption Keys) (https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)
 // .
-//   - Encryption request headers, like x-amz-server-side-encryption , should not be sent for GET requests if your object uses server-side encryption with KMS keys (SSE-KMS) or server-side encryption with Amazon S3–managed encryption keys (SSE-S3). If your object does use these types of keys, you’ll get an HTTP 400 BadRequest error.
+//   - Encryption request headers, like x-amz-server-side-encryption , should not
+//     be sent for GET requests if your object uses server-side encryption with KMS
+//     keys (SSE-KMS) or server-side encryption with Amazon S3–managed encryption keys
+//     (SSE-S3). If your object does use these types of keys, you’ll get an HTTP 400
+//     BadRequest error.
 //   - The last modified property in this case is the creation date of the object.
 //
 // Request headers are limited to 8 KB in size. For more information, see Common
 // Request Headers (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html)
 // . Consider the following when using request headers:
-//   - Consideration 1 – If both of the If-Match and If-Unmodified-Since headers are present in the request as follows:
+//   - Consideration 1 – If both of the If-Match and If-Unmodified-Since headers
+//     are present in the request as follows:
 //   - If-Match condition evaluates to true , and;
-//   - If-Unmodified-Since condition evaluates to false ; Then Amazon S3 returns 200 OK and the data requested.
-//   - Consideration 2 – If both of the If-None-Match and If-Modified-Since headers are present in the request as follows:
+//   - If-Unmodified-Since condition evaluates to false ; Then Amazon S3 returns
+//     200 OK and the data requested.
+//   - Consideration 2 – If both of the If-None-Match and If-Modified-Since headers
+//     are present in the request as follows:
 //   - If-None-Match condition evaluates to false , and;
-//   - If-Modified-Since condition evaluates to true ; Then Amazon S3 returns the 304 Not Modified response code.
+//   - If-Modified-Since condition evaluates to true ; Then Amazon S3 returns the
+//     304 Not Modified response code.
 //
 // For more information about conditional requests, see RFC 7232 (https://tools.ietf.org/html/rfc7232)
 // . Permissions You need the relevant read object (or version) permission for this
 // operation. For more information, see Specifying Permissions in a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
 // . If the object you request does not exist, the error Amazon S3 returns depends
 // on whether you also have the s3:ListBucket permission.
-//   - If you have the s3:ListBucket permission on the bucket, Amazon S3 returns an HTTP status code 404 ("no such key") error.
-//   - If you don’t have the s3:ListBucket permission, Amazon S3 returns an HTTP status code 403 ("access denied") error.
+//   - If you have the s3:ListBucket permission on the bucket, Amazon S3 returns an
+//     HTTP status code 404 ("no such key") error.
+//   - If you don’t have the s3:ListBucket permission, Amazon S3 returns an HTTP
+//     status code 403 ("access denied") error.
 //
 // The following actions are related to HeadObject :
 //   - GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
@@ -87,7 +97,7 @@ type HeadObjectInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -104,7 +114,7 @@ type HeadObjectInput struct {
 	// To retrieve the checksum, this parameter must be enabled. In addition, if you
 	// enable ChecksumMode and the object is encrypted with Amazon Web Services Key
 	// Management Service (Amazon Web Services KMS), you must have permission to use
-	// the kms:Decrypt  action for the request to succeed.
+	// the kms:Decrypt action for the request to succeed.
 	ChecksumMode types.ChecksumMode
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a
@@ -235,10 +245,10 @@ type HeadObjectOutput struct {
 	// specific version of a resource found at a URL.
 	ETag *string
 
-	// If the object expiration is configured (see PUT Bucket lifecycle), the
-	// response includes this header. It includes the expiry-date  and rule-id
-	// key-value pairs providing object expiration information. The value of the
-	// rule-id is URL-encoded.
+	// If the object expiration is configured (see PUT Bucket lifecycle), the response
+	// includes this header. It includes the expiry-date and rule-id key-value pairs
+	// providing object expiration information. The value of the rule-id is
+	// URL-encoded.
 	Expiration *string
 
 	// The date and time at which the object is no longer cacheable.
@@ -271,8 +281,8 @@ type HeadObjectOutput struct {
 	// .
 	ObjectLockMode types.ObjectLockMode
 
-	// The date and time when the Object Lock retention period expires. This header
-	// is only returned if the requester has the s3:GetObjectRetention  permission.
+	// The date and time when the Object Lock retention period expires. This header is
+	// only returned if the requester has the s3:GetObjectRetention permission.
 	ObjectLockRetainUntilDate *time.Time
 
 	// The count of parts this object has. This value is only returned if you specify
@@ -283,12 +293,27 @@ type HeadObjectOutput struct {
 	// either a source or a destination in a replication rule. In replication, you have
 	// a source bucket on which you configure replication and destination bucket or
 	// buckets where Amazon S3 stores object replicas. When you request an object (
-	// GetObject ) or object metadata ( HeadObject) from these buckets, Amazon S3
-	// will return the x-amz-replication-status  header in the response as follows:
-	//     - If requesting an object from the source bucket, Amazon S3 will return the x-amz-replication-status header if the object in your request is eligible for replication. For example, suppose that in your replication configuration, you specify object prefix TaxDocs requesting Amazon S3 to replicate objects with key prefix TaxDocs . Any objects you upload with this key name prefix, for example TaxDocs/document1.pdf , are eligible for replication. For any object request with this key name prefix, Amazon S3 will return the x-amz-replication-status header with value PENDING, COMPLETED or FAILED indicating object replication status.
-	//     - If requesting an object from a destination bucket, Amazon S3 will return the x-amz-replication-status header with value REPLICA if the object in your request is a replica that Amazon S3 created and there is no replica modification replication in progress.
-	//     - When replicating objects to multiple destination buckets, the x-amz-replication-status header acts differently. The header of the source object will only return a value of COMPLETED when replication is successful to all destinations. The header will remain at value PENDING until replication has completed for all destinations. If one or more destinations fails replication the header will return FAILED.
-	//
+	// GetObject ) or object metadata ( HeadObject ) from these buckets, Amazon S3 will
+	// return the x-amz-replication-status header in the response as follows:
+	//   - If requesting an object from the source bucket, Amazon S3 will return the
+	//   x-amz-replication-status header if the object in your request is eligible for
+	//   replication. For example, suppose that in your replication configuration, you
+	//   specify object prefix TaxDocs requesting Amazon S3 to replicate objects with
+	//   key prefix TaxDocs . Any objects you upload with this key name prefix, for
+	//   example TaxDocs/document1.pdf , are eligible for replication. For any object
+	//   request with this key name prefix, Amazon S3 will return the
+	//   x-amz-replication-status header with value PENDING, COMPLETED or FAILED
+	//   indicating object replication status.
+	//   - If requesting an object from a destination bucket, Amazon S3 will return
+	//   the x-amz-replication-status header with value REPLICA if the object in your
+	//   request is a replica that Amazon S3 created and there is no replica modification
+	//   replication in progress.
+	//   - When replicating objects to multiple destination buckets, the
+	//   x-amz-replication-status header acts differently. The header of the source
+	//   object will only return a value of COMPLETED when replication is successful to
+	//   all destinations. The header will remain at value PENDING until replication has
+	//   completed for all destinations. If one or more destinations fails replication
+	//   the header will return FAILED.
 	// For more information, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 	// .
 	ReplicationStatus types.ReplicationStatus
@@ -297,14 +322,14 @@ type HeadObjectOutput struct {
 	// request.
 	RequestCharged types.RequestCharged
 
-	// If the object is an archived object (an object whose storage class is
-	// GLACIER), the response includes this header if either the archive restoration is
-	// in progress (see RestoreObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html)
+	// If the object is an archived object (an object whose storage class is GLACIER),
+	// the response includes this header if either the archive restoration is in
+	// progress (see RestoreObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html)
 	// or an archive copy is already restored. If an archive copy is already restored,
 	// the header value indicates when Amazon S3 is scheduled to delete the object
-	// copy. For example: x-amz-restore: ongoing-request="false", expiry-date="Fri,
-	// 21 Dec 2012 00:00:00 GMT"If the object restoration is in progress, the header
-	// returns the value ongoing-request="true". For more information about archiving
+	// copy. For example: x-amz-restore: ongoing-request="false", expiry-date="Fri, 21
+	// Dec 2012 00:00:00 GMT" If the object restoration is in progress, the header
+	// returns the value ongoing-request="true" . For more information about archiving
 	// objects, see Transitioning Objects: General Considerations (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations)
 	// .
 	Restore *string
@@ -330,8 +355,8 @@ type HeadObjectOutput struct {
 	// storing this object in Amazon S3 (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
-	// Provides storage class information of the object. Amazon S3 returns this
-	// header for all objects except for S3 Standard storage class objects. For more
+	// Provides storage class information of the object. Amazon S3 returns this header
+	// for all objects except for S3 Standard storage class objects. For more
 	// information, see Storage Classes (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)
 	// .
 	StorageClass types.StorageClass
@@ -339,8 +364,8 @@ type HeadObjectOutput struct {
 	// Version of the object.
 	VersionId *string
 
-	// If the bucket is configured as a website, redirects requests for this object
-	// to another object in the same bucket or to an external URL. Amazon S3 stores the
+	// If the bucket is configured as a website, redirects requests for this object to
+	// another object in the same bucket or to an external URL. Amazon S3 stores the
 	// value of this header in the object metadata.
 	WebsiteRedirectLocation *string
 
@@ -495,10 +520,9 @@ func (w *ObjectExistsWaiter) Wait(ctx context.Context, params *HeadObjectInput, 
 	return err
 }
 
-// WaitForOutput calls the waiter function for ObjectExists waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for ObjectExists waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
 func (w *ObjectExistsWaiter) WaitForOutput(ctx context.Context, params *HeadObjectInput, maxWaitDur time.Duration, optFns ...func(*ObjectExistsWaiterOptions)) (*HeadObjectOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

@@ -32,12 +32,11 @@ func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optF
 type ListAliasesInput struct {
 
 	// The name of the Lambda function. Name formats
-	//     - Function name - MyFunction .
-	//     - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
-	//     - Partial ARN - 123456789012:function:MyFunction .
-	// The length constraint
-	// applies only to the full ARN. If you specify only the function name, it is
-	// limited to 64 characters in length.
+	//   - Function name - MyFunction .
+	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//   - Partial ARN - 123456789012:function:MyFunction .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -144,8 +143,8 @@ type ListAliasesPaginatorOptions struct {
 	// Limit the number of aliases returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -19,22 +19,25 @@ import (
 // , which uses FleetIQ algorithms and queues to optimize the placement process.
 // When creating a game session, you specify exactly where you want to place it and
 // provide a set of game session configuration settings. The fleet must be in
-// ACTIVEstatus before a game session can be created in it. This operation can be
+// ACTIVE status before a game session can be created in it. This operation can be
 // used in the following ways:
-//   - To create a game session on an instance in a fleet's home Region, provide a fleet or alias ID along with your game session configuration.
-//   - To create a game session on an instance in a fleet's remote location, provide a fleet or alias ID and a location name, along with your game session configuration.
+//   - To create a game session on an instance in a fleet's home Region, provide a
+//     fleet or alias ID along with your game session configuration.
+//   - To create a game session on an instance in a fleet's remote location,
+//     provide a fleet or alias ID and a location name, along with your game session
+//     configuration.
 //
 // If successful, a workflow is initiated to start a new game session. A
-// GameSessionobject is returned containing the game session configuration and
-// status. When the status is ACTIVE, game session connection information is
+// GameSession object is returned containing the game session configuration and
+// status. When the status is ACTIVE , game session connection information is
 // provided and player sessions can be created for the game session. By default,
 // newly created game sessions are open to new players. You can restrict new player
 // access by using UpdateGameSession (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)
 // to change the game session's player session creation policy. Game session logs
 // are retained for all active game sessions for 14 days. To access the logs, call
 // GetGameSessionLogUrl (https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetGameSessionLogUrl.html)
-// to download the log files. Available in Amazon GameLift Local. Learn more
-// Start a game session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
+// to download the log files. Available in Amazon GameLift Local. Learn more Start
+// a game session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
 // All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateGameSession(ctx context.Context, params *CreateGameSessionInput, optFns ...func(*Options)) (*CreateGameSessionOutput, error) {
 	if params == nil {
@@ -97,12 +100,11 @@ type CreateGameSessionInput struct {
 	// Custom string that uniquely identifies the new game session request. This is
 	// useful for ensuring that game session requests with the same idempotency token
 	// are processed only once. Subsequent requests with the same string return the
-	// original GameSession object, with an updated status. Maximum token length is
-	// 48 characters. If provided, this string is included in the new game session's
-	// ID. A game session ARN has the following format:
-	// arn:aws:gamelift:::gamesession//. Idempotency tokens remain in use for 30 days
-	// after a game session has ended; game session objects are retained for this time
-	// period and then deleted.
+	// original GameSession object, with an updated status. Maximum token length is 48
+	// characters. If provided, this string is included in the new game session's ID. A
+	// game session ARN has the following format: arn:aws:gamelift:::gamesession// .
+	// Idempotency tokens remain in use for 30 days after a game session has ended;
+	// game session objects are retained for this time period and then deleted.
 	IdempotencyToken *string
 
 	// A fleet's remote location to place the new game session in. If this parameter

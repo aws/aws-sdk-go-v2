@@ -56,9 +56,9 @@ type App struct {
 	// This member is required.
 	Name *string
 
-	// The platform for the Amplify app. For a static app, set the platform type to
-	// WEB . For a dynamic server-side rendered (SSR) app, set the platform type to
-	// WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only,
+	// The platform for the Amplify app. For a static app, set the platform type to WEB
+	// . For a dynamic server-side rendered (SSR) app, set the platform type to
+	// WEB_COMPUTE . For an app requiring Amplify Hosting's original SSR support only,
 	// set the platform type to WEB_DYNAMIC .
 	//
 	// This member is required.
@@ -111,8 +111,8 @@ type App struct {
 
 	// This is for internal use. The Amplify service uses this parameter to specify
 	// the authentication protocol to use to access the Git repository for an Amplify
-	// app. Amplify specifies TOKEN  for a GitHub repository, SIGV4 for an Amazon Web
-	// Services CodeCommit repository, and SSH  for GitLab and Bitbucket repositories.
+	// app. Amplify specifies TOKEN for a GitHub repository, SIGV4 for an Amazon Web
+	// Services CodeCommit repository, and SSH for GitLab and Bitbucket repositories.
 	RepositoryCloneMethod RepositoryCloneMethod
 
 	// The tag for the Amplify app.
@@ -187,8 +187,8 @@ type BackendEnvironment struct {
 	// This member is required.
 	BackendEnvironmentArn *string
 
-	// The creation date and time for a backend environment that is part of an
-	// Amplify app.
+	// The creation date and time for a backend environment that is part of an Amplify
+	// app.
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -457,10 +457,10 @@ type JobSummary struct {
 	// This member is required.
 	JobId *string
 
-	// The type for the job. If the value is RELEASE, the job was manually released
-	// from its source by using the StartJob  API. If the value is RETRY, the job was
-	// manually retried using the StartJob  API. If the value is WEB_HOOK, the job
-	// was automatically triggered by webhooks.
+	// The type for the job. If the value is RELEASE , the job was manually released
+	// from its source by using the StartJob API. If the value is RETRY , the job was
+	// manually retried using the StartJob API. If the value is WEB_HOOK , the job was
+	// automatically triggered by webhooks.
 	//
 	// This member is required.
 	JobType JobType

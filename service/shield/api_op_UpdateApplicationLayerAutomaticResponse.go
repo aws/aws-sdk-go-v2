@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Shield Advanced automatic application layer DDoS
-// mitigation configuration for the specified resource.
+// Updates an existing Shield Advanced automatic application layer DDoS mitigation
+// configuration for the specified resource.
 func (c *Client) UpdateApplicationLayerAutomaticResponse(ctx context.Context, params *UpdateApplicationLayerAutomaticResponseInput, optFns ...func(*Options)) (*UpdateApplicationLayerAutomaticResponseOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationLayerAutomaticResponseInput{}

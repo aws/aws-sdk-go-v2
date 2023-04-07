@@ -13,7 +13,7 @@ import (
 )
 
 // Describes Amazon ECS clusters that are registered with a stack. If you specify
-// only a stack ID, you can use the MaxResults  and NextToken parameters to
+// only a stack ID, you can use the MaxResults and NextToken parameters to
 // paginate the response. However, AWS OpsWorks Stacks currently supports only one
 // cluster per layer, so the result set has a maximum of one element. Required
 // Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage
@@ -44,14 +44,14 @@ type DescribeEcsClustersInput struct {
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
 	// results exceeds this maximum, the response includes a NextToken value that you
-	// can assign to the NextToken  request parameter to get the next set of results.
+	// can assign to the NextToken request parameter to get the next set of results.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
 	// the response object's NextToken parameter value is set to a token. To retrieve
 	// the next set of results, call DescribeEcsClusters again and assign that token
-	// to the request object's NextToken parameter. If there are no remaining
-	// results, the previous response object's NextToken  parameter is set to null .
+	// to the request object's NextToken parameter. If there are no remaining results,
+	// the previous response object's NextToken parameter is set to null .
 	NextToken *string
 
 	// A stack ID. DescribeEcsClusters returns a description of the cluster that is
@@ -61,15 +61,15 @@ type DescribeEcsClustersInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeEcsClusters  request.
+// Contains the response to a DescribeEcsClusters request.
 type DescribeEcsClustersOutput struct {
 
-	// A list of EcsCluster  objects containing the cluster descriptions.
+	// A list of EcsCluster objects containing the cluster descriptions.
 	EcsClusters []types.EcsCluster
 
 	// If a paginated request does not return all of the remaining results, this
 	// parameter is set to a token that you can assign to the request object's
-	// NextTokenparameter to retrieve the next set of results. If the previous
+	// NextToken parameter to retrieve the next set of results. If the previous
 	// paginated request returned all of the remaining results, this parameter is set
 	// to null .
 	NextToken *string
@@ -154,11 +154,11 @@ type DescribeEcsClustersPaginatorOptions struct {
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
 	// results exceeds this maximum, the response includes a NextToken value that you
-	// can assign to the NextToken  request parameter to get the next set of results.
+	// can assign to the NextToken request parameter to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

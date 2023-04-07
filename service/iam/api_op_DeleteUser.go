@@ -20,7 +20,8 @@ import (
 //   - Signing certificate ( DeleteSigningCertificate )
 //   - SSH public key ( DeleteSSHPublicKey )
 //   - Git credentials ( DeleteServiceSpecificCredential )
-//   - Multi-factor authentication (MFA) device ( DeactivateMFADevice , DeleteVirtualMFADevice )
+//   - Multi-factor authentication (MFA) device ( DeactivateMFADevice ,
+//     DeleteVirtualMFADevice )
 //   - Inline policies ( DeleteUserPolicy )
 //   - Attached managed policies ( DetachUserPolicy )
 //   - Group memberships ( RemoveUserFromGroup )
@@ -41,10 +42,10 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 
 type DeleteUserInput struct {
 
-	// The name of the user to delete. This parameter allows (through its regex
-	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting
-	// of upper and lowercase alphanumeric characters with no spaces. You can also
-	// include any of the following characters: _+=,.@-
+	// The name of the user to delete. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
+	// ) a string of characters consisting of upper and lowercase alphanumeric
+	// characters with no spaces. You can also include any of the following characters:
+	// _+=,.@-
 	//
 	// This member is required.
 	UserName *string

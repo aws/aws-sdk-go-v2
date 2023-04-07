@@ -28,18 +28,16 @@ type AuthenticationProviderTypes string
 
 // Enum values for AuthenticationProviderTypes
 const (
-	// Indicates that AMG workspace has AWS SSO enabled as its authentication
-	// provider.
+	// Indicates that AMG workspace has AWS SSO enabled as its authentication provider.
 	AuthenticationProviderTypesAwsSso AuthenticationProviderTypes = "AWS_SSO"
 	// Indicates that the AMG workspace has SAML enabled as its authentication
 	// provider.
 	AuthenticationProviderTypesSaml AuthenticationProviderTypes = "SAML"
 )
 
-// Values returns all known values for AuthenticationProviderTypes. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for AuthenticationProviderTypes. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationProviderTypes) Values() []AuthenticationProviderTypes {
 	return []AuthenticationProviderTypes{
 		"AWS_SSO",
@@ -98,9 +96,9 @@ const (
 	LicenseTypeEnterpriseFreeTrial LicenseType = "ENTERPRISE_FREE_TRIAL"
 )
 
-// Values returns all known values for LicenseType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LicenseType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LicenseType) Values() []LicenseType {
 	return []LicenseType{
 		"ENTERPRISE",
@@ -116,10 +114,9 @@ const (
 	NotificationDestinationTypeSns NotificationDestinationType = "SNS"
 )
 
-// Values returns all known values for NotificationDestinationType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for NotificationDestinationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationDestinationType) Values() []NotificationDestinationType {
 	return []NotificationDestinationType{
 		"SNS",
@@ -158,8 +155,8 @@ const (
 	RoleViewer Role = "VIEWER"
 )
 
-// Values returns all known values for Role. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Role. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Role) Values() []Role {
 	return []Role{
@@ -179,9 +176,9 @@ const (
 	SamlConfigurationStatusNotConfigured SamlConfigurationStatus = "NOT_CONFIGURED"
 )
 
-// Values returns all known values for SamlConfigurationStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SamlConfigurationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SamlConfigurationStatus) Values() []SamlConfigurationStatus {
 	return []SamlConfigurationStatus{
 		"CONFIGURED",
@@ -219,9 +216,9 @@ const (
 	UserTypeSsoGroup UserType = "SSO_GROUP"
 )
 
-// Values returns all known values for UserType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (UserType) Values() []UserType {
 	return []UserType{
 		"SSO_USER",

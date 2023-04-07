@@ -24,7 +24,7 @@ import (
 // generate a data key pair, you must specify a symmetric encryption KMS key to
 // encrypt the private key in a data key pair. You cannot use an asymmetric KMS key
 // or a KMS key in a custom key store. To get the type and origin of your KMS key,
-// use the DescribeKey  operation. Use the KeyPairSpec parameter to choose an RSA
+// use the DescribeKey operation. Use the KeyPairSpec parameter to choose an RSA
 // or Elliptic Curve (ECC) data key pair. In China Regions, you can also choose an
 // SM2 data key pair. KMS recommends that you use ECC key pairs for signing, and
 // use RSA and SM2 key pairs for either encryption or signing, but not both.
@@ -32,7 +32,7 @@ import (
 // outside of KMS. If you are using the data key pair to encrypt data, or for any
 // operation where you don't immediately need a private key, consider using the
 // GenerateDataKeyPairWithoutPlaintext operation.
-// GenerateDataKeyPairWithoutPlaintextreturns a plaintext public key and an
+// GenerateDataKeyPairWithoutPlaintext returns a plaintext public key and an
 // encrypted private key, but omits the plaintext private key that you need only to
 // decrypt ciphertext or sign a message. Later, when you need to decrypt the data
 // or sign a message, use the Decrypt operation to decrypt the encrypted private
@@ -41,19 +41,19 @@ import (
 // caller or the KMS key that is used to encrypt the private key. The public key is
 // a DER-encoded X.509 SubjectPublicKeyInfo, as specified in RFC 5280 (https://tools.ietf.org/html/rfc5280)
 // . The private key is a DER-encoded PKCS8 PrivateKeyInfo, as specified in RFC
-// 5958 (https://tools.ietf.org/html/rfc5958). You can use an optional encryption
+// 5958 (https://tools.ietf.org/html/rfc5958) . You can use an optional encryption
 // context to add additional security to the encryption operation. If you specify
-// an EncryptionContext, you must specify the same encryption context (a
+// an EncryptionContext , you must specify the same encryption context (a
 // case-sensitive exact match) when decrypting the encrypted data key. Otherwise,
-// the request to decrypt fails with an InvalidCiphertextException. For more
+// the request to decrypt fails with an InvalidCiphertextException . For more
 // information, see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 // in the Key Management Service Developer Guide. The KMS key that you use for this
-// operation must be in a compatible key state. For details, see Key states of
-// KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-// in the Key Management Service Developer Guide. Cross-account use: Yes. To
-// perform this operation with a KMS key in a different Amazon Web Services
-// account, specify the key ARN or alias ARN in the value of the KeyId parameter.
-// Required permissions: kms:GenerateDataKeyPair (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. Cross-account use: Yes. To perform
+// this operation with a KMS key in a different Amazon Web Services account,
+// specify the key ARN or alias ARN in the value of the KeyId parameter. Required
+// permissions: kms:GenerateDataKeyPair (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //   - Decrypt
 //   - Encrypt
@@ -77,20 +77,20 @@ func (c *Client) GenerateDataKeyPair(ctx context.Context, params *GenerateDataKe
 
 type GenerateDataKeyPairInput struct {
 
-	// Specifies the symmetric encryption KMS key that encrypts the private key in
-	// the data key pair. You cannot specify an asymmetric KMS key or a KMS key in a
-	// custom key store. To get the type and origin of your KMS key, use the
-	// DescribeKeyoperation. To specify a KMS key, use its key ID, key ARN, alias
-	// name, or alias ARN. When using an alias name, prefix it with "alias/". To
-	// specify a KMS key in a different Amazon Web Services account, you must use the
-	// key ARN or alias ARN. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Alias name: alias/ExampleAlias
-	//     - Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
-	// To get
-	// the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey. To get the
-	// alias name and alias ARN, use ListAliases .
+	// Specifies the symmetric encryption KMS key that encrypts the private key in the
+	// data key pair. You cannot specify an asymmetric KMS key or a KMS key in a custom
+	// key store. To get the type and origin of your KMS key, use the DescribeKey
+	// operation. To specify a KMS key, use its key ID, key ARN, alias name, or alias
+	// ARN. When using an alias name, prefix it with "alias/" . To specify a KMS key in
+	// a different Amazon Web Services account, you must use the key ARN or alias ARN.
+	// For example:
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Alias name: alias/ExampleAlias
+	//   - Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey . To
+	// get the alias name and alias ARN, use ListAliases .
 	//
 	// This member is required.
 	KeyId *string

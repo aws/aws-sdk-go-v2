@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the retention of the specified log group. With a retention policy, you
-// can configure the number of days for which to retain log events in the specified
-// log group. CloudWatch Logs doesn’t immediately delete log events when they reach
+// Sets the retention of the specified log group. With a retention policy, you can
+// configure the number of days for which to retain log events in the specified log
+// group. CloudWatch Logs doesn’t immediately delete log events when they reach
 // their retention setting. It typically takes up to 72 hours after that before log
 // events are deleted, but in rare situations might take longer. To illustrate,
 // imagine that you change a log group to have a longer retention setting when it

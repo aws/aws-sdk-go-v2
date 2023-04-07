@@ -34,14 +34,14 @@ type CreateUserInput struct {
 	// This member is required.
 	IdentityStoreId *string
 
-	// A list of Address  objects containing addresses associated with the user.
+	// A list of Address objects containing addresses associated with the user.
 	Addresses []types.Address
 
 	// A string containing the user's name. This value is typically formatted for
 	// display when the user is referenced. For example, "John Doe."
 	DisplayName *string
 
-	// A list of Email  objects containing email addresses associated with the user.
+	// A list of Email objects containing email addresses associated with the user.
 	Emails []types.Email
 
 	// A string containing the user's geographical region or location.
@@ -53,8 +53,7 @@ type CreateUserInput struct {
 	// A string containing an alternate name for the user.
 	NickName *string
 
-	// A list of PhoneNumber objects containing phone numbers associated with the
-	// user.
+	// A list of PhoneNumber objects containing phone numbers associated with the user.
 	PhoneNumbers []types.PhoneNumber
 
 	// A string containing the preferred language of the user. For example, "American

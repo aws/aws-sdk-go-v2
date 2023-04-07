@@ -33,8 +33,8 @@ type UpdateFirewallDescriptionInput struct {
 	// Firewall removes the description for the firewall.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or
-	// the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
+	// name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall
@@ -51,7 +51,7 @@ type UpdateFirewallDescriptionInput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
@@ -80,7 +80,7 @@ type UpdateFirewallDescriptionOutput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

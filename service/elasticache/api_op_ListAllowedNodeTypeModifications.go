@@ -11,10 +11,10 @@ import (
 )
 
 // Lists all available node types that you can scale your Redis cluster's or
-// replication group's current node type. When you use the ModifyCacheCluster  or
-// ModifyReplicationGroupoperations to scale your cluster or replication group,
-// the value of the CacheNodeType parameter must be one of the node types
-// returned by this operation.
+// replication group's current node type. When you use the ModifyCacheCluster or
+// ModifyReplicationGroup operations to scale your cluster or replication group,
+// the value of the CacheNodeType parameter must be one of the node types returned
+// by this operation.
 func (c *Client) ListAllowedNodeTypeModifications(ctx context.Context, params *ListAllowedNodeTypeModificationsInput, optFns ...func(*Options)) (*ListAllowedNodeTypeModificationsOutput, error) {
 	if params == nil {
 		params = &ListAllowedNodeTypeModificationsInput{}
@@ -30,13 +30,13 @@ func (c *Client) ListAllowedNodeTypeModifications(ctx context.Context, params *L
 	return out, nil
 }
 
-// The input parameters for the ListAllowedNodeTypeModifications  operation.
+// The input parameters for the ListAllowedNodeTypeModifications operation.
 type ListAllowedNodeTypeModificationsInput struct {
 
 	// The name of the cluster you want to scale up to a larger node instanced type.
 	// ElastiCache uses the cluster id to identify the current node type of this
 	// cluster and from that to create a list of node types you can scale up to. You
-	// must provide a value for either the CacheClusterId  or the ReplicationGroupId .
+	// must provide a value for either the CacheClusterId or the ReplicationGroupId .
 	CacheClusterId *string
 
 	// The name of the replication group want to scale up to a larger node type.
@@ -61,8 +61,8 @@ type ListAllowedNodeTypeModificationsOutput struct {
 
 	// A string list, each element of which specifies a cache node type which you can
 	// use to scale your cluster or replication group. When scaling up a Redis cluster
-	// or replication group using ModifyCacheCluster  or ModifyReplicationGroup, use
-	// a value from this list for the CacheNodeType  parameter.
+	// or replication group using ModifyCacheCluster or ModifyReplicationGroup , use a
+	// value from this list for the CacheNodeType parameter.
 	ScaleUpModifications []string
 
 	// Metadata pertaining to the operation's result.

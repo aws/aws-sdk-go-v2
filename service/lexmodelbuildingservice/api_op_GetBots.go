@@ -13,10 +13,12 @@ import (
 )
 
 // Returns bot information as follows:
-//   - If you provide the nameContains field, the response includes information for the $LATEST version of all bots whose name contains the specified string.
-//   - If you don't specify the nameContains field, the operation returns information about the $LATEST version of all of your bots.
+//   - If you provide the nameContains field, the response includes information for
+//     the $LATEST version of all bots whose name contains the specified string.
+//   - If you don't specify the nameContains field, the operation returns
+//     information about the $LATEST version of all of your bots.
 //
-// This operation requires permission for the lex:GetBots  action.
+// This operation requires permission for the lex:GetBots action.
 func (c *Client) GetBots(ctx context.Context, params *GetBotsInput, optFns ...func(*Options)) (*GetBotsOutput, error) {
 	if params == nil {
 		params = &GetBotsInput{}
@@ -38,9 +40,8 @@ type GetBotsInput struct {
 	// return. The default is 10.
 	MaxResults *int32
 
-	// Substring to match in bot names. A bot will be returned if any part of its
-	// name matches the substring. For example, "xyz" matches both "xyzabc" and
-	// "abcxyz."
+	// Substring to match in bot names. A bot will be returned if any part of its name
+	// matches the substring. For example, "xyz" matches both "xyzabc" and "abcxyz."
 	NameContains *string
 
 	// A pagination token that fetches the next page of bots. If the response to this
@@ -53,7 +54,7 @@ type GetBotsInput struct {
 
 type GetBotsOutput struct {
 
-	// An array of botMetadata  objects, with one entry for each bot.
+	// An array of botMetadata objects, with one entry for each bot.
 	Bots []types.BotMetadata
 
 	// If the response is truncated, it includes a pagination token that you can
@@ -139,8 +140,8 @@ type GetBotsPaginatorOptions struct {
 	// return. The default is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

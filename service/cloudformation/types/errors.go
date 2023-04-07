@@ -59,8 +59,8 @@ func (e *CFNRegistryException) ErrorCode() string {
 }
 func (e *CFNRegistryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified change set name or ID doesn't exit. To view valid change sets
-// for a stack, use the ListChangeSets  operation.
+// The specified change set name or ID doesn't exit. To view valid change sets for
+// a stack, use the ListChangeSets operation.
 type ChangeSetNotFoundException struct {
 	Message *string
 
@@ -112,8 +112,8 @@ func (e *CreatedButModifiedException) ErrorCode() string {
 }
 func (e *CreatedButModifiedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The template contains resources with capabilities that weren't specified in
-// the Capabilities parameter.
+// The template contains resources with capabilities that weren't specified in the
+// Capabilities parameter.
 type InsufficientCapabilitiesException struct {
 	Message *string
 

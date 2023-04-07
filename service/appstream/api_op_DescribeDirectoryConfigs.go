@@ -50,9 +50,9 @@ type DescribeDirectoryConfigsInput struct {
 
 type DescribeDirectoryConfigsOutput struct {
 
-	// Information about the directory configurations. Note that although the
-	// response syntax in this topic includes the account password, this password is
-	// not returned in the actual response.
+	// Information about the directory configurations. Note that although the response
+	// syntax in this topic includes the account password, this password is not
+	// returned in the actual response.
 	DirectoryConfigs []types.DirectoryConfig
 
 	// The pagination token to use to retrieve the next page of results for this

@@ -12,21 +12,21 @@ import (
 )
 
 // Update an environment. If the environment is associated with an environment
-// account connection, don't update or include the protonServiceRoleArn  and
-// provisioningRepositoryparameter to update or connect to an environment account
+// account connection, don't update or include the protonServiceRoleArn and
+// provisioningRepository parameter to update or connect to an environment account
 // connection. You can only update to a new environment account connection if that
 // connection was created in the same environment account that the current
 // environment account connection was created in. The account connection must also
 // be associated with the current environment. If the environment isn't associated
 // with an environment account connection, don't update or include the
-// environmentAccountConnectionIdparameter. You can't update or connect the
+// environmentAccountConnectionId parameter. You can't update or connect the
 // environment to an environment account connection if it isn't already associated
 // with an environment connection. You can update either the
-// environmentAccountConnectionId or protonServiceRoleArn parameter and value.
-// You can’t update both. If the environment was configured for Amazon Web
+// environmentAccountConnectionId or protonServiceRoleArn parameter and value. You
+// can’t update both. If the environment was configured for Amazon Web
 // Services-managed provisioning, omit the provisioningRepository parameter. If
 // the environment was configured for self-managed provisioning, specify the
-// provisioningRepository parameter and omit the protonServiceRoleArn  and
+// provisioningRepository parameter and omit the protonServiceRoleArn and
 // environmentAccountConnectionId parameters. For more information, see
 // Environments (https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html)
 // and Provisioning methods (https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html)
@@ -39,7 +39,7 @@ import (
 // mode, the environment is deployed and updated with the published, recommended
 // (latest) minor version of the current major version in use, by default. You can
 // also specify a different minor version of the current major version in use.
-// MAJOR_VERSIONIn this mode, the environment is deployed and updated with the
+// MAJOR_VERSION In this mode, the environment is deployed and updated with the
 // published, recommended (latest) major and minor version of the current template,
 // by default. You can also specify a different major version that's higher than
 // the major version in use and a minor version.
@@ -69,7 +69,7 @@ type UpdateEnvironmentInput struct {
 	// environment is deployed and updated with the published, recommended (latest)
 	// minor version of the current major version in use, by default. You can also
 	// specify a different minor version of the current major version in use.
-	// MAJOR_VERSIONIn this mode, the environment is deployed and updated with the
+	// MAJOR_VERSION In this mode, the environment is deployed and updated with the
 	// published, recommended (latest) major and minor version of the current template,
 	// by default. You can also specify a different major version that is higher than
 	// the major version in use and a minor version (optional).
@@ -104,14 +104,14 @@ type UpdateEnvironmentInput struct {
 	// with the current environment.
 	EnvironmentAccountConnectionId *string
 
-	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton
-	// to make API calls to other services your behalf.
+	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
+	// make API calls to other services your behalf.
 	ProtonServiceRoleArn *string
 
 	// The linked repository that you use to host your rendered infrastructure
 	// templates for self-managed provisioning. A linked repository is a repository
-	// that has been registered with Proton. For more information, see
-	// CreateRepository .
+	// that has been registered with Proton. For more information, see CreateRepository
+	// .
 	ProvisioningRepository *types.RepositoryBranchInput
 
 	// The formatted specification that defines the update.

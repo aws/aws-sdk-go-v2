@@ -71,8 +71,8 @@ type DescribeProgramOutput struct {
 	// The name of the program.
 	ProgramName *string
 
-	// The date and time that the program is scheduled to start in ISO 8601 format
-	// and Coordinated Universal Time (UTC). For example, the value
+	// The date and time that the program is scheduled to start in ISO 8601 format and
+	// Coordinated Universal Time (UTC). For example, the value
 	// 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.
 	ScheduledStartTime *time.Time
 

@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a stream, including the current status of the
-// stream, its Amazon Resource Name (ARN), the composition of its shards, and its
+// Returns information about a stream, including the current status of the stream,
+// its Amazon Resource Name (ARN), the composition of its shards, and its
 // corresponding DynamoDB table. You can call DescribeStream at a maximum rate of
 // 10 times per second. Each shard in the stream has a SequenceNumberRange
-// associated with it. If the SequenceNumberRange  has a StartingSequenceNumber
-// but no EndingSequenceNumber, then the shard is still open (able to receive
-// more stream records). If both StartingSequenceNumber  and EndingSequenceNumber
-// are present, then that shard is closed and can no longer receive more data.
+// associated with it. If the SequenceNumberRange has a StartingSequenceNumber but
+// no EndingSequenceNumber , then the shard is still open (able to receive more
+// stream records). If both StartingSequenceNumber and EndingSequenceNumber are
+// present, then that shard is closed and can no longer receive more data.
 func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput, optFns ...func(*Options)) (*DescribeStreamOutput, error) {
 	if params == nil {
 		params = &DescribeStreamInput{}
@@ -34,7 +34,7 @@ func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput
 	return out, nil
 }
 
-// Represents the input of a DescribeStream  operation.
+// Represents the input of a DescribeStream operation.
 type DescribeStreamInput struct {
 
 	// The Amazon Resource Name (ARN) for the stream.
@@ -42,8 +42,8 @@ type DescribeStreamInput struct {
 	// This member is required.
 	StreamArn *string
 
-	// The shard ID of the first item that this operation will evaluate. Use the
-	// value that was returned for LastEvaluatedShardId  in the previous operation.
+	// The shard ID of the first item that this operation will evaluate. Use the value
+	// that was returned for LastEvaluatedShardId in the previous operation.
 	ExclusiveStartShardId *string
 
 	// The maximum number of shard objects to return. The upper limit is 100.
@@ -52,13 +52,12 @@ type DescribeStreamInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DescribeStream  operation.
+// Represents the output of a DescribeStream operation.
 type DescribeStreamOutput struct {
 
-	// A complete description of the stream, including its creation date and time,
-	// the DynamoDB table associated with the stream, the shard IDs within the stream,
-	// and the beginning and ending sequence numbers of stream records within the
-	// shards.
+	// A complete description of the stream, including its creation date and time, the
+	// DynamoDB table associated with the stream, the shard IDs within the stream, and
+	// the beginning and ending sequence numbers of stream records within the shards.
 	StreamDescription *types.StreamDescription
 
 	// Metadata pertaining to the operation's result.

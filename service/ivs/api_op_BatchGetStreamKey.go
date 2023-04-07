@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Performs GetStreamKey  on multiple ARNs simultaneously.
+// Performs GetStreamKey on multiple ARNs simultaneously.
 func (c *Client) BatchGetStreamKey(ctx context.Context, params *BatchGetStreamKeyInput, optFns ...func(*Options)) (*BatchGetStreamKeyOutput, error) {
 	if params == nil {
 		params = &BatchGetStreamKeyInput{}

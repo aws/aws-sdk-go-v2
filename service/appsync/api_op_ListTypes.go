@@ -42,8 +42,8 @@ type ListTypesInput struct {
 	// The maximum number of results that you want the request to return.
 	MaxResults int32
 
-	// An identifier that was returned from the previous call to this operation,
-	// which you can use to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// you can use to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -55,7 +55,7 @@ type ListTypesOutput struct {
 	// set of items in the list.
 	NextToken *string
 
-	// The Type  objects.
+	// The Type objects.
 	Types []types.Type
 
 	// Metadata pertaining to the operation's result.

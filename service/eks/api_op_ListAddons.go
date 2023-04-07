@@ -34,21 +34,21 @@ type ListAddonsInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// The maximum number of add-on results returned by ListAddonsRequest in
-	// paginated output. When you use this parameter, ListAddonsRequest  returns only
-	// maxResults results in a single page along with a nextToken response element.
-	// You can see the remaining results of the initial request by sending another
+	// The maximum number of add-on results returned by ListAddonsRequest in paginated
+	// output. When you use this parameter, ListAddonsRequest returns only maxResults
+	// results in a single page along with a nextToken response element. You can see
+	// the remaining results of the initial request by sending another
 	// ListAddonsRequest request with the returned nextToken value. This value can be
 	// between 1 and 100. If you don't use this parameter, ListAddonsRequest returns
-	// up to 100 results and a nextToken  value, if applicable.
+	// up to 100 results and a nextToken value, if applicable.
 	MaxResults *int32
 
-	// The nextToken  value returned from a previous paginated ListAddonsRequest
-	// where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value. This token should be treated as an opaque
-	// identifier that is used only to retrieve the next items in a list and not for
-	// other programmatic purposes.
+	// The nextToken value returned from a previous paginated ListAddonsRequest where
+	// maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value. This token should be treated as an opaque identifier that is
+	// used only to retrieve the next items in a list and not for other programmatic
+	// purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,12 +59,12 @@ type ListAddonsOutput struct {
 	// A list of available add-ons.
 	Addons []string
 
-	// The nextToken  value returned from a previous paginated ListAddonsResponse
-	// where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value. This token should be treated as an opaque
-	// identifier that is used only to retrieve the next items in a list and not for
-	// other programmatic purposes.
+	// The nextToken value returned from a previous paginated ListAddonsResponse where
+	// maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value. This token should be treated as an opaque identifier that is
+	// used only to retrieve the next items in a list and not for other programmatic
+	// purposes.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,17 +145,17 @@ var _ ListAddonsAPIClient = (*Client)(nil)
 
 // ListAddonsPaginatorOptions is the paginator options for ListAddons
 type ListAddonsPaginatorOptions struct {
-	// The maximum number of add-on results returned by ListAddonsRequest in
-	// paginated output. When you use this parameter, ListAddonsRequest  returns only
-	// maxResults results in a single page along with a nextToken response element.
-	// You can see the remaining results of the initial request by sending another
+	// The maximum number of add-on results returned by ListAddonsRequest in paginated
+	// output. When you use this parameter, ListAddonsRequest returns only maxResults
+	// results in a single page along with a nextToken response element. You can see
+	// the remaining results of the initial request by sending another
 	// ListAddonsRequest request with the returned nextToken value. This value can be
 	// between 1 and 100. If you don't use this parameter, ListAddonsRequest returns
-	// up to 100 results and a nextToken  value, if applicable.
+	// up to 100 results and a nextToken value, if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

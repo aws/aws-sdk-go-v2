@@ -35,8 +35,8 @@ func (c *Client) PutAutoTerminationPolicy(ctx context.Context, params *PutAutoTe
 
 type PutAutoTerminationPolicyInput struct {
 
-	// Specifies the ID of the Amazon EMR cluster to which the auto-termination
-	// policy will be attached.
+	// Specifies the ID of the Amazon EMR cluster to which the auto-termination policy
+	// will be attached.
 	//
 	// This member is required.
 	ClusterId *string

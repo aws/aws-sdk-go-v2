@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation returns all the domain names registered with Amazon Route 53
-// for the current Amazon Web Services account if no filtering conditions are used.
+// This operation returns all the domain names registered with Amazon Route 53 for
+// the current Amazon Web Services account if no filtering conditions are used.
 func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optFns ...func(*Options)) (*ListDomainsOutput, error) {
 	if params == nil {
 		params = &ListDomainsInput{}
@@ -33,7 +33,7 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 type ListDomainsInput struct {
 
 	// A complex type that contains information about the filters applied during the
-	// ListDomainsrequest. The filter conditions can include domain name and domain
+	// ListDomains request. The filter conditions can include domain name and domain
 	// expiration.
 	FilterConditions []types.FilterCondition
 
@@ -63,7 +63,7 @@ type ListDomainsOutput struct {
 	Domains []types.DomainSummary
 
 	// If there are more domains than you specified for MaxItems in the request,
-	// submit another request and include the value of NextPageMarker  in the value of
+	// submit another request and include the value of NextPageMarker in the value of
 	// Marker .
 	NextPageMarker *string
 
@@ -148,8 +148,8 @@ type ListDomainsPaginatorOptions struct {
 	// Number of domains to be returned. Default: 20
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

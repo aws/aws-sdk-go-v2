@@ -15,9 +15,9 @@ import (
 // Lists the policies that are directly attached to the specified target root,
 // organizational unit (OU), or account. You must specify the policy type that you
 // want included in the returned list. Always check the NextToken response
-// parameter for a null  value when calling a List* operation. These operations
-// can occasionally return an empty set of results even when there are more results
-// available. The NextToken  response parameter value is null only when there are
+// parameter for a null value when calling a List* operation. These operations can
+// occasionally return an empty set of results even when there are more results
+// available. The NextToken response parameter value is null only when there are
 // no more results to display. This operation can be called only from the
 // organization's management account or by a member account that is a delegated
 // administrator for an Amazon Web Services service.
@@ -40,10 +40,10 @@ type ListPoliciesForTargetInput struct {
 
 	// The type of policy that you want to include in the returned list. You must
 	// specify one of the following values:
-	//     - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-	//     - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
-	//     - SERVICE_CONTROL_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
-	//     - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	//   - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	//   - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	//   - SERVICE_CONTROL_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	//   - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// This member is required.
 	Filter types.PolicyType
@@ -51,9 +51,13 @@ type ListPoliciesForTargetInput struct {
 	// The unique identifier (ID) of the root, organizational unit, or account whose
 	// policies you want to list. The regex pattern (http://wikipedia.org/wiki/regex)
 	// for a target ID string requires one of the following:
-	//     - Root - A string that begins with "r-" followed by from 4 to 32 lowercase letters or digits.
-	//     - Account - A string that consists of exactly 12 digits.
-	//     - Organizational unit (OU) - A string that begins with "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters or digits.
+	//   - Root - A string that begins with "r-" followed by from 4 to 32 lowercase
+	//   letters or digits.
+	//   - Account - A string that consists of exactly 12 digits.
+	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
+	//   4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This
+	//   string is followed by a second "-" dash and from 8 to 32 additional lowercase
+	//   letters or digits.
 	//
 	// This member is required.
 	TargetId *string
@@ -70,9 +74,9 @@ type ListPoliciesForTargetInput struct {
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more
-	// output is available. Set this parameter to the value of the previous call's
-	// NextToken response to indicate where the output should continue from.
+	// response in a previous request. A NextToken response indicates that more output
+	// is available. Set this parameter to the value of the previous call's NextToken
+	// response to indicate where the output should continue from.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -83,7 +87,7 @@ type ListPoliciesForTargetOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken  response element comes back as null .
+	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
 	// The list of policies that match the criteria in the request.
@@ -180,8 +184,8 @@ type ListPoliciesForTargetPaginatorOptions struct {
 	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

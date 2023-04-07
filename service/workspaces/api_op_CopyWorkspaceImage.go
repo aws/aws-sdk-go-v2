@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Copies the specified image from the specified Region to the current Region.
-// For more information about copying images, see Copy a Custom WorkSpaces Image (https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html)
+// Copies the specified image from the specified Region to the current Region. For
+// more information about copying images, see Copy a Custom WorkSpaces Image (https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html)
 // . In the China (Ningxia) Region, you can copy images only within the same
 // Region. In Amazon Web Services GovCloud (US), to copy images to and from other
 // Regions, contact Amazon Web Services Support. Before copying a shared image, be

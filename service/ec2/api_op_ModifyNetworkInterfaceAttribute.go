@@ -50,8 +50,8 @@ type ModifyNetworkInterfaceAttributeInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// Updates the ENA Express configuration for the network interface that’s
-	// attached to the instance.
+	// Updates the ENA Express configuration for the network interface that’s attached
+	// to the instance.
 	EnaSrdSpecification *types.EnaSrdSpecification
 
 	// Changes the security groups for the network interface. The new set of groups
@@ -62,10 +62,10 @@ type ModifyNetworkInterfaceAttributeInput struct {
 
 	// Enable or disable source/destination checks, which ensure that the instance is
 	// either the source or the destination of any traffic that it receives. If the
-	// value is true, source/destination checks are enabled; otherwise, they are
-	// disabled. The default value is true. You must disable source/destination
-	// checks if the instance runs services such as network address translation,
-	// routing, or firewalls.
+	// value is true , source/destination checks are enabled; otherwise, they are
+	// disabled. The default value is true . You must disable source/destination checks
+	// if the instance runs services such as network address translation, routing, or
+	// firewalls.
 	SourceDestCheck *types.AttributeBooleanValue
 
 	noSmithyDocumentSerde

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Performs GetChannel  on multiple ARNs simultaneously.
+// Performs GetChannel on multiple ARNs simultaneously.
 func (c *Client) BatchGetChannel(ctx context.Context, params *BatchGetChannelInput, optFns ...func(*Options)) (*BatchGetChannelOutput, error) {
 	if params == nil {
 		params = &BatchGetChannelInput{}

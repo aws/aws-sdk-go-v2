@@ -17,13 +17,13 @@ import (
 // to fifteen minutes for the metric to appear in calls to ListMetrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html)
 // . You can publish either individual data points in the Value field, or arrays
 // of values and the number of times each value occurred during the period by using
-// the Values  and Counts  fields in the MetricDatum  structure. Using the Values
-// and Counts  method enables you to publish up to 150 values per metric with one
-// PutMetricDatarequest, and supports retrieving percentile statistics on this
+// the Values and Counts fields in the MetricDatum structure. Using the Values and
+// Counts method enables you to publish up to 150 values per metric with one
+// PutMetricData request, and supports retrieving percentile statistics on this
 // data. Each PutMetricData request is limited to 1 MB in size for HTTP POST
 // requests. You can send a payload compressed by gzip. Each request is also
 // limited to no more than 1000 different metrics. Although the Value parameter
-// accepts numbers of type Double, CloudWatch rejects values that are either too
+// accepts numbers of type Double , CloudWatch rejects values that are either too
 // small or too large. Values must be in the range of -2^360 to 2^360. In addition,
 // special values (for example, NaN, +Infinity, -Infinity) are not supported. You
 // can use up to 30 dimensions per metric to further clarify what data the metric
@@ -41,8 +41,10 @@ import (
 // . CloudWatch needs raw data points to calculate percentile statistics. If you
 // publish data using a statistic set instead, you can only retrieve percentile
 // statistics for this data if one of the following conditions is true:
-//   - The SampleCount value of the statistic set is 1 and Min , Max , and Sum are all equal.
-//   - The Min and Max are equal, and Sum is equal to Min multiplied by SampleCount .
+//   - The SampleCount value of the statistic set is 1 and Min , Max , and Sum are
+//     all equal.
+//   - The Min and Max are equal, and Sum is equal to Min multiplied by SampleCount
+//     .
 func (c *Client) PutMetricData(ctx context.Context, params *PutMetricDataInput, optFns ...func(*Options)) (*PutMetricDataOutput, error) {
 	if params == nil {
 		params = &PutMetricDataInput{}

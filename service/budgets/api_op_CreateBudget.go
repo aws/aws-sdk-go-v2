@@ -34,7 +34,7 @@ func (c *Client) CreateBudget(ctx context.Context, params *CreateBudgetInput, op
 // Request of CreateBudget
 type CreateBudgetInput struct {
 
-	// The accountId  that is associated with the budget.
+	// The accountId that is associated with the budget.
 	//
 	// This member is required.
 	AccountId *string
@@ -47,8 +47,8 @@ type CreateBudgetInput struct {
 	// A notification that you want to associate with a budget. A budget can have up
 	// to five notifications, and each notification can have one SNS subscriber and up
 	// to 10 email subscribers. If you include notifications and subscribers in your
-	// CreateBudgetcall, Amazon Web Services creates the notifications and
-	// subscribers for you.
+	// CreateBudget call, Amazon Web Services creates the notifications and subscribers
+	// for you.
 	NotificationsWithSubscribers []types.NotificationWithSubscribers
 
 	noSmithyDocumentSerde

@@ -20,9 +20,8 @@ import (
 //   - Persistent and non-persistent messages
 //   - The Standard message type
 //
-// Channel flows don't process Control or System
-// messages. For more information about the message types provided by Chime SDK
-// Messaging, refer to Message types (https://docs.aws.amazon.com/chime/latest/dg/using-the-messaging-sdk.html#msg-types)
+// Channel flows don't process Control or System messages. For more information
+// about the message types provided by Chime SDK Messaging, refer to Message types (https://docs.aws.amazon.com/chime/latest/dg/using-the-messaging-sdk.html#msg-types)
 // in the Amazon Chime developer guide.
 func (c *Client) CreateChannelFlow(ctx context.Context, params *CreateChannelFlowInput, optFns ...func(*Options)) (*CreateChannelFlowOutput, error) {
 	if params == nil {

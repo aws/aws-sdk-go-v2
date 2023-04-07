@@ -12,8 +12,8 @@ import (
 )
 
 // Deletes the entire schema set, including the schema set and all of its
-// versions. To get the status of the delete operation, you can call GetSchema
-// API after the asynchronous call. Deleting a registry will deactivate all online
+// versions. To get the status of the delete operation, you can call GetSchema API
+// after the asynchronous call. Deleting a registry will deactivate all online
 // operations for the schema, such as the GetSchemaByDefinition , and
 // RegisterSchemaVersion APIs.
 func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, optFns ...func(*Options)) (*DeleteSchemaOutput, error) {

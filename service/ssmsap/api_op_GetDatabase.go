@@ -47,8 +47,8 @@ type GetDatabaseInput struct {
 
 type GetDatabaseOutput struct {
 
-	// The SAP HANA database of an application registered with AWS Systems Manager
-	// for SAP.
+	// The SAP HANA database of an application registered with AWS Systems Manager for
+	// SAP.
 	Database *types.Database
 
 	// The tags of a database.

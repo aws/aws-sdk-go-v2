@@ -43,8 +43,8 @@ type ModifyClusterIamRolesInput struct {
 	// their Amazon Resource Name (ARN) format.
 	AddIamRoles []string
 
-	// The Amazon Resource Name (ARN) for the IAM role that was set as default for
-	// the cluster when the cluster was last modified.
+	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the
+	// cluster when the cluster was last modified.
 	DefaultIamRoleArn *string
 
 	// Zero or more IAM roles in ARN format to disassociate from the cluster.

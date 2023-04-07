@@ -11,7 +11,7 @@ import (
 )
 
 // Updates the name and description of a quick connect. The request accepts the
-// following data in JSON format. At least Name  or Description  must be provided.
+// following data in JSON format. At least Name or Description must be provided.
 func (c *Client) UpdateQuickConnectName(ctx context.Context, params *UpdateQuickConnectNameInput, optFns ...func(*Options)) (*UpdateQuickConnectNameOutput, error) {
 	if params == nil {
 		params = &UpdateQuickConnectNameInput{}

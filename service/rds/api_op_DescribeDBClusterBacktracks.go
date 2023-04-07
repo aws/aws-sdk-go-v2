@@ -35,9 +35,9 @@ type DescribeDBClusterBacktracksInput struct {
 
 	// The DB cluster identifier of the DB cluster to be described. This parameter is
 	// stored as a lowercase string. Constraints:
-	//     - Must contain from 1 to 63 alphanumeric characters or hyphens.
-	//     - First character must be a letter.
-	//     - Can't end with a hyphen or contain two consecutive hyphens.
+	//   - Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//   - First character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	// Example: my-cluster1
 	//
 	// This member is required.
@@ -45,19 +45,23 @@ type DescribeDBClusterBacktracksInput struct {
 
 	// If specified, this value is the backtrack identifier of the backtrack to be
 	// described. Constraints:
-	//     - Must contain a valid universally unique identifier (UUID). For more information about UUIDs, see A Universally Unique Identifier (UUID) URN Namespace (http://www.ietf.org/rfc/rfc4122.txt) .
-	//
+	//   - Must contain a valid universally unique identifier (UUID). For more
+	//   information about UUIDs, see A Universally Unique Identifier (UUID) URN
+	//   Namespace (http://www.ietf.org/rfc/rfc4122.txt) .
 	// Example: 123e4567-e89b-12d3-a456-426655440000
 	BacktrackIdentifier *string
 
 	// A filter that specifies one or more DB clusters to describe. Supported filters
 	// include the following:
-	//     - db-cluster-backtrack-id - Accepts backtrack identifiers. The results list includes information about only the backtracks identified by these identifiers.
-	//     - db-cluster-backtrack-status - Accepts any of the following backtrack status values:
-	//         - applying
-	//         - completed
-	//         - failed
-	//         - pending The results list includes information about only the backtracks identified by these values.
+	//   - db-cluster-backtrack-id - Accepts backtrack identifiers. The results list
+	//   includes information about only the backtracks identified by these identifiers.
+	//   - db-cluster-backtrack-status - Accepts any of the following backtrack status
+	//   values:
+	//   - applying
+	//   - completed
+	//   - failed
+	//   - pending The results list includes information about only the backtracks
+	//   identified by these values.
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusterBacktracks
@@ -65,10 +69,10 @@ type DescribeDBClusterBacktracksInput struct {
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so you can retrieve the remaining results. Default:
-	// 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -165,14 +169,14 @@ var _ DescribeDBClusterBacktracksAPIClient = (*Client)(nil)
 // DescribeDBClusterBacktracksPaginatorOptions is the paginator options for
 // DescribeDBClusterBacktracks
 type DescribeDBClusterBacktracksPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so you can retrieve the remaining results. Default:
-	// 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

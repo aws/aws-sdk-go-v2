@@ -37,7 +37,7 @@ func (c *Client) DeleteVolume(ctx context.Context, params *DeleteVolumeInput, op
 	return out, nil
 }
 
-// A JSON object containing the DeleteVolumeInput$VolumeARN  to delete.
+// A JSON object containing the DeleteVolumeInput$VolumeARN to delete.
 type DeleteVolumeInput struct {
 
 	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to

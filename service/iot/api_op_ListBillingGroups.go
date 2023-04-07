@@ -128,14 +128,13 @@ type ListBillingGroupsAPIClient interface {
 
 var _ ListBillingGroupsAPIClient = (*Client)(nil)
 
-// ListBillingGroupsPaginatorOptions is the paginator options for
-// ListBillingGroups
+// ListBillingGroupsPaginatorOptions is the paginator options for ListBillingGroups
 type ListBillingGroupsPaginatorOptions struct {
 	// The maximum number of results to return per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

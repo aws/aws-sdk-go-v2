@@ -53,10 +53,10 @@ type GetBackupSelectionOutput struct {
 	// Specifies the body of a request to assign a set of resources to a backup plan.
 	BackupSelection *types.BackupSelection
 
-	// The date and time a backup selection is created, in Unix format and
-	// Coordinated Universal Time (UTC). The value of CreationDate is accurate to
-	// milliseconds. For example, the value 1516925490.087 represents Friday, January
-	// 26, 2018 12:11:30.087 AM.
+	// The date and time a backup selection is created, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
 	CreationDate *time.Time
 
 	// A unique string that identifies the request and allows failed requests to be

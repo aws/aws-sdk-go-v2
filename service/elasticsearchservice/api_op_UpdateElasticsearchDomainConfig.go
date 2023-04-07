@@ -77,7 +77,7 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// Specifies the Encryption At Rest Options.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
-	// Map of LogType  and LogPublishingOption, each containing options to publish a
+	// Map of LogType and LogPublishingOption , each containing options to publish a
 	// given type of Elasticsearch log.
 	LogPublishingOptions map[string]types.LogPublishingOption
 
@@ -85,7 +85,7 @@ type UpdateElasticsearchDomainConfigInput struct {
 	NodeToNodeEncryptionOptions *types.NodeToNodeEncryptionOptions
 
 	// Option to set the time, in UTC format, for the daily automated snapshot.
-	// Default value is 0  hours.
+	// Default value is 0 hours.
 	SnapshotOptions *types.SnapshotOptions
 
 	// Options to specify the subnets and security groups for VPC endpoint. For more

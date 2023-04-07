@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a Device Defender ML Detect mitigation actions task. Requires
-// permission to access the StartDetectMitigationActionsTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Starts a Device Defender ML Detect mitigation actions task. Requires permission
+// to access the StartDetectMitigationActionsTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) StartDetectMitigationActionsTask(ctx context.Context, params *StartDetectMitigationActionsTaskInput, optFns ...func(*Options)) (*StartDetectMitigationActionsTaskOutput, error) {
 	if params == nil {
@@ -37,8 +37,8 @@ type StartDetectMitigationActionsTaskInput struct {
 	// This member is required.
 	Actions []string
 
-	// Each mitigation action task must have a unique client request token. If you
-	// try to create a new task with the same token as a task that already exists, an
+	// Each mitigation action task must have a unique client request token. If you try
+	// to create a new task with the same token as a task that already exists, an
 	// exception occurs. If you omit this value, Amazon Web Services SDKs will
 	// automatically generate a unique client request.
 	//

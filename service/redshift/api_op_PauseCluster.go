@@ -27,8 +27,8 @@ func (c *Client) PauseCluster(ctx context.Context, params *PauseClusterInput, op
 	return out, nil
 }
 
-// Describes a pause cluster operation. For example, a scheduled action to run
-// the PauseCluster  API operation.
+// Describes a pause cluster operation. For example, a scheduled action to run the
+// PauseCluster API operation.
 type PauseClusterInput struct {
 
 	// The identifier of the cluster to be paused.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the data streaming configuration for an AppInstance. For more
-// information, see Streaming messaging data (https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html)
+// Sets the data streaming configuration for an AppInstance . For more information,
+// see Streaming messaging data (https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html)
 // in the Amazon Chime SDK Developer Guide.
 func (c *Client) PutMessagingStreamingConfigurations(ctx context.Context, params *PutMessagingStreamingConfigurationsInput, optFns ...func(*Options)) (*PutMessagingStreamingConfigurationsOutput, error) {
 	if params == nil {

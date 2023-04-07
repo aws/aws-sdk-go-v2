@@ -41,7 +41,7 @@ type CreateMetricAttributionInput struct {
 
 	// A list of metric attributes for the metric attribution. Each metric attribute
 	// specifies an event type to track and a function. Available functions are SUM()
-	// or SAMPLECOUNT(). For SUM() functions, provide the dataset type (either
+	// or SAMPLECOUNT() . For SUM() functions, provide the dataset type (either
 	// Interactions or Items) and column to sum as a parameter. For example
 	// SUM(Items.PRICE).
 	//

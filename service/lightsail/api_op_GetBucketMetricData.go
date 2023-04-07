@@ -47,8 +47,16 @@ type GetBucketMetricDataInput struct {
 	// are listed below, along with the most useful statistics to include in your
 	// request, and the published unit value. These bucket metrics are reported once
 	// per day.
-	//     - BucketSizeBytes - The amount of data in bytes stored in a bucket. This value is calculated by summing the size of all objects in the bucket (including object versions), including the size of all parts for all incomplete multipart uploads to the bucket. Statistics: The most useful statistic is Maximum . Unit: The published unit is Bytes .
-	//     - NumberOfObjects - The total number of objects stored in a bucket. This value is calculated by counting all objects in the bucket (including object versions) and the total number of parts for all incomplete multipart uploads to the bucket. Statistics: The most useful statistic is Average . Unit: The published unit is Count .
+	//   - BucketSizeBytes - The amount of data in bytes stored in a bucket. This value
+	//   is calculated by summing the size of all objects in the bucket (including object
+	//   versions), including the size of all parts for all incomplete multipart uploads
+	//   to the bucket. Statistics: The most useful statistic is Maximum . Unit: The
+	//   published unit is Bytes .
+	//   - NumberOfObjects - The total number of objects stored in a bucket. This value
+	//   is calculated by counting all objects in the bucket (including object versions)
+	//   and the total number of parts for all incomplete multipart uploads to the
+	//   bucket. Statistics: The most useful statistic is Average . Unit: The published
+	//   unit is Count .
 	//
 	// This member is required.
 	MetricName types.BucketMetricName
@@ -66,11 +74,19 @@ type GetBucketMetricDataInput struct {
 	StartTime *time.Time
 
 	// The statistic for the metric. The following statistics are available:
-	//     - Minimum - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.
-	//     - Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.
-	//     - Sum - The sum of all values submitted for the matching metric. You can use this statistic to determine the total volume of a metric.
-	//     - Average - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.
-	//     - SampleCount - The count, or number, of data points used for the statistical calculation.
+	//   - Minimum - The lowest value observed during the specified period. Use this
+	//   value to determine low volumes of activity for your application.
+	//   - Maximum - The highest value observed during the specified period. Use this
+	//   value to determine high volumes of activity for your application.
+	//   - Sum - The sum of all values submitted for the matching metric. You can use
+	//   this statistic to determine the total volume of a metric.
+	//   - Average - The value of Sum / SampleCount during the specified period. By
+	//   comparing this statistic with the Minimum and Maximum values, you can
+	//   determine the full scope of a metric and how close the average use is to the
+	//   Minimum and Maximum values. This comparison helps you to know when to increase
+	//   or decrease your resources.
+	//   - SampleCount - The count, or number, of data points used for the statistical
+	//   calculation.
 	//
 	// This member is required.
 	Statistics []types.MetricStatistic

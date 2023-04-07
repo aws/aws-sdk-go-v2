@@ -16,12 +16,13 @@
 // load balancers: Application Load Balancers, Network Load Balancers, Gateway Load
 // Balancers, and Classic Load Balancers. This reference covers the following load
 // balancer types:
-//   - Application Load Balancer - Operates at the application layer (layer 7) and supports HTTP and HTTPS.
-//   - Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP, TLS, and UDP.
+//   - Application Load Balancer - Operates at the application layer (layer 7) and
+//     supports HTTP and HTTPS.
+//   - Network Load Balancer - Operates at the transport layer (layer 4) and
+//     supports TCP, TLS, and UDP.
 //   - Gateway Load Balancer - Operates at the network layer (layer 3).
 //
-// For
-// more information, see the Elastic Load Balancing User Guide (https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/)
+// For more information, see the Elastic Load Balancing User Guide (https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/)
 // . All Elastic Load Balancing operations are idempotent, which means that they
 // complete at most one time. If you repeat an operation, it succeeds.
 package elasticloadbalancingv2

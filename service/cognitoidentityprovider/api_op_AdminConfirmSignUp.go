@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Confirms user registration as an admin without using a confirmation code.
-// Works on any user. Calling this action requires developer credentials.
+// Confirms user registration as an admin without using a confirmation code. Works
+// on any user. Calling this action requires developer credentials.
 func (c *Client) AdminConfirmSignUp(ctx context.Context, params *AdminConfirmSignUpInput, optFns ...func(*Options)) (*AdminConfirmSignUpOutput, error) {
 	if params == nil {
 		params = &AdminConfirmSignUpInput{}
@@ -52,16 +52,19 @@ type AdminConfirmSignUpInput struct {
 	// user pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	//     - Store the ClientMetadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration doesn't include triggers, the ClientMetadata parameter serves no purpose.
-	//     - Validate the ClientMetadata value.
-	//     - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide sensitive information.
+	//   - Store the ClientMetadata value. This data is available only to Lambda
+	//   triggers that are assigned to a user pool to support custom workflows. If your
+	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
+	//   serves no purpose.
+	//   - Validate the ClientMetadata value.
+	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
+	//   sensitive information.
 	ClientMetadata map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the response from the server for the request to confirm
-// registration.
+// Represents the response from the server for the request to confirm registration.
 type AdminConfirmSignUpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

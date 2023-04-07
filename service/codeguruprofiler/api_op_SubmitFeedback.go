@@ -42,7 +42,7 @@ type SubmitFeedbackInput struct {
 	// This member is required.
 	ProfilingGroupName *string
 
-	// The feedback tpye. Thee are two valid values, Positive  and Negative .
+	// The feedback tpye. Thee are two valid values, Positive and Negative .
 	//
 	// This member is required.
 	Type types.FeedbackType

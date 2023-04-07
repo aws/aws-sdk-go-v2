@@ -95,9 +95,9 @@ const (
 	FilterFieldName FilterField = "NAME"
 )
 
-// Values returns all known values for FilterField. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FilterField. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FilterField) Values() []FilterField {
 	return []FilterField{
 		"NAME",

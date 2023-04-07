@@ -6,8 +6,8 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// (Discontinued) The classification type that Amazon Macie Classic applies to
-// the associated S3 resources.
+// (Discontinued) The classification type that Amazon Macie Classic applies to the
+// associated S3 resources.
 type ClassificationType struct {
 
 	// (Discontinued) A continuous classification of the objects that are added to a
@@ -26,9 +26,9 @@ type ClassificationType struct {
 	noSmithyDocumentSerde
 }
 
-// (Discontinued) The classification type that Amazon Macie Classic applies to
-// the associated S3 resources. At least one of the classification types ( oneTime
-// or continuous ) must be specified.
+// (Discontinued) The classification type that Amazon Macie Classic applies to the
+// associated S3 resources. At least one of the classification types ( oneTime or
+// continuous ) must be specified.
 type ClassificationTypeUpdate struct {
 
 	// (Discontinued) A continuous classification of the objects that are added to a
@@ -71,7 +71,7 @@ type MemberAccount struct {
 
 // (Discontinued) Contains information about the S3 resource. This data type is
 // used as a request parameter in the DisassociateS3Resources action and can be
-// used as a response parameter in the AssociateS3Resources  and UpdateS3Resources
+// used as a response parameter in the AssociateS3Resources and UpdateS3Resources
 // actions.
 type S3Resource struct {
 
@@ -89,11 +89,11 @@ type S3Resource struct {
 // (Discontinued) The S3 resources that you want to associate with Amazon Macie
 // Classic for monitoring and data classification. This data type is used as a
 // request parameter in the AssociateS3Resources action and a response parameter
-// in the ListS3Resources  action.
+// in the ListS3Resources action.
 type S3ResourceClassification struct {
 
-	// (Discontinued) The name of the S3 bucket that you want to associate with
-	// Amazon Macie Classic.
+	// (Discontinued) The name of the S3 bucket that you want to associate with Amazon
+	// Macie Classic.
 	//
 	// This member is required.
 	BucketName *string
@@ -112,17 +112,17 @@ type S3ResourceClassification struct {
 }
 
 // (Discontinued) The S3 resources whose classification types you want to update.
-// This data type is used as a request parameter in the UpdateS3Resources  action.
+// This data type is used as a request parameter in the UpdateS3Resources action.
 type S3ResourceClassificationUpdate struct {
 
-	// (Discontinued) The name of the S3 bucket whose classification types you want
-	// to update.
+	// (Discontinued) The name of the S3 bucket whose classification types you want to
+	// update.
 	//
 	// This member is required.
 	BucketName *string
 
-	// (Discontinued) The classification type that you want to update for the
-	// resource associated with Amazon Macie Classic.
+	// (Discontinued) The classification type that you want to update for the resource
+	// associated with Amazon Macie Classic.
 	//
 	// This member is required.
 	ClassificationTypeUpdate *ClassificationTypeUpdate

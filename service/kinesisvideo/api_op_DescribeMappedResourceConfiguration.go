@@ -14,7 +14,7 @@ import (
 
 // Returns the most current information about the stream. Either streamName or
 // streamARN should be provided in the input. Returns the most current information
-// about the stream. The streamName  or streamARN  should be provided in the input.
+// about the stream. The streamName or streamARN should be provided in the input.
 func (c *Client) DescribeMappedResourceConfiguration(ctx context.Context, params *DescribeMappedResourceConfigurationInput, optFns ...func(*Options)) (*DescribeMappedResourceConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeMappedResourceConfigurationInput{}
@@ -53,7 +53,7 @@ type DescribeMappedResourceConfigurationOutput struct {
 	// properties.
 	MappedResourceConfigurationList []types.MappedResourceConfigurationListItem
 
-	// The token that was used in the NextTokenrequest to fetch the next set of
+	// The token that was used in the NextToken request to fetch the next set of
 	// results.
 	NextToken *string
 
@@ -137,8 +137,8 @@ type DescribeMappedResourceConfigurationPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

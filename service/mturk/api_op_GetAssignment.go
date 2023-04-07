@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The GetAssignment  operation retrieves the details of the specified Assignment.
+// The GetAssignment operation retrieves the details of the specified Assignment.
 func (c *Client) GetAssignment(ctx context.Context, params *GetAssignmentInput, optFns ...func(*Options)) (*GetAssignmentOutput, error) {
 	if params == nil {
 		params = &GetAssignmentInput{}

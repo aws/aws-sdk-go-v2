@@ -18,13 +18,13 @@ import (
 // Amazon Web Services Region where a workforce already exists, use the API
 // operation to delete the existing workforce and then use CreateWorkforce to
 // create a new workforce. To create a private workforce using Amazon Cognito, you
-// must specify a Cognito user pool in CognitoConfig. You can also create an
+// must specify a Cognito user pool in CognitoConfig . You can also create an
 // Amazon Cognito workforce using the Amazon SageMaker console. For more
 // information, see Create a Private Workforce (Amazon Cognito) (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html)
 // . To create a private workforce using your own OIDC Identity Provider (IdP),
-// specify your IdP configuration in OidcConfig. Your OIDC IdP must support
-// groups because groups are used by Ground Truth and Amazon A2I to create work
-// teams. For more information, see Create a Private Workforce (OIDC IdP) (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private-oidc.html)
+// specify your IdP configuration in OidcConfig . Your OIDC IdP must support groups
+// because groups are used by Ground Truth and Amazon A2I to create work teams. For
+// more information, see Create a Private Workforce (OIDC IdP) (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private-oidc.html)
 // .
 func (c *Client) CreateWorkforce(ctx context.Context, params *CreateWorkforceInput, optFns ...func(*Options)) (*CreateWorkforceOutput, error) {
 	if params == nil {
@@ -51,12 +51,12 @@ type CreateWorkforceInput struct {
 	// Use this parameter to configure an Amazon Cognito private workforce. A single
 	// Cognito workforce is created using and corresponds to a single Amazon Cognito
 	// user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
-	// . Do not use OidcConfig  if you specify values for CognitoConfig .
+	// . Do not use OidcConfig if you specify values for CognitoConfig .
 	CognitoConfig *types.CognitoConfig
 
 	// Use this parameter to configure a private workforce using your own OIDC
-	// Identity Provider. Do not use CognitoConfig  if you specify values for
-	// OidcConfig .
+	// Identity Provider. Do not use CognitoConfig if you specify values for OidcConfig
+	// .
 	OidcConfig *types.OidcConfig
 
 	// A list of IP address ranges ( CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)

@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a specified tag to a specified rescore execution plan. A rescore
-// execution plan is an Amazon Kendra Intelligent Ranking resource used for
-// provisioning the Rescore API. If the tag already exists, the existing value is
-// replaced with the new value.
+// Adds a specified tag to a specified rescore execution plan. A rescore execution
+// plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the
+// Rescore API. If the tag already exists, the existing value is replaced with the
+// new value.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -32,7 +32,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 // The request information for tagging a rescore execution plan. A rescore
 // execution plan is an Amazon Kendra Intelligent Ranking resource used for
-// provisioning the Rescore  API.
+// provisioning the Rescore API.
 type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the rescore execution plan to tag.
@@ -40,8 +40,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceARN *string
 
-	// A list of tag keys to add to a rescore execution plan. If a tag already
-	// exists, the existing value is replaced with the new value.
+	// A list of tag keys to add to a rescore execution plan. If a tag already exists,
+	// the existing value is replaced with the new value.
 	//
 	// This member is required.
 	Tags []types.Tag

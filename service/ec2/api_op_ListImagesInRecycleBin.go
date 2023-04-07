@@ -42,14 +42,14 @@ type ListImagesInRecycleBinInput struct {
 	// are in the Recycle Bin. You can specify up to 20 IDs in a single request.
 	ImageIds []string
 
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues
-	// from the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -61,7 +61,7 @@ type ListImagesInRecycleBinOutput struct {
 	Images []types.ImageRecycleBinInfo
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,14 +141,14 @@ var _ ListImagesInRecycleBinAPIClient = (*Client)(nil)
 // ListImagesInRecycleBinPaginatorOptions is the paginator options for
 // ListImagesInRecycleBin
 type ListImagesInRecycleBinPaginatorOptions struct {
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -161,8 +161,7 @@ type ListImagesInRecycleBinPaginator struct {
 	firstPage bool
 }
 
-// NewListImagesInRecycleBinPaginator returns a new
-// ListImagesInRecycleBinPaginator
+// NewListImagesInRecycleBinPaginator returns a new ListImagesInRecycleBinPaginator
 func NewListImagesInRecycleBinPaginator(client ListImagesInRecycleBinAPIClient, params *ListImagesInRecycleBinInput, optFns ...func(*ListImagesInRecycleBinPaginatorOptions)) *ListImagesInRecycleBinPaginator {
 	if params == nil {
 		params = &ListImagesInRecycleBinInput{}

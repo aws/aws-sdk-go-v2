@@ -13,7 +13,7 @@ import (
 
 // Creates a new version of a model and begins training. Models are managed as
 // part of an Amazon Rekognition Custom Labels project. The response from
-// CreateProjectVersionis an Amazon Resource Name (ARN) for the version of the
+// CreateProjectVersion is an Amazon Resource Name (ARN) for the version of the
 // model. Training uses the training and test datasets associated with the project.
 // For more information, see Creating training and test dataset in the Amazon
 // Rekognition Custom Labels Developer Guide. You can train a model in a project
@@ -26,14 +26,14 @@ import (
 // files to create training and test datasets for the project. Training takes a
 // while to complete. You can get the current status by calling
 // DescribeProjectVersions . Training completed successfully if the value of the
-// Status field is TRAINING_COMPLETED. If training fails, see Debugging a failed
+// Status field is TRAINING_COMPLETED . If training fails, see Debugging a failed
 // model training in the Amazon Rekognition Custom Labels developer guide. Once
 // training has successfully completed, call DescribeProjectVersions to get the
 // training results and evaluate the model. For more information, see Improving a
 // trained Amazon Rekognition Custom Labels model in the Amazon Rekognition Custom
 // Labels developers guide. After evaluating the model, you start the model by
-// calling StartProjectVersion. This operation requires permissions to perform
-// the rekognition:CreateProjectVersion  action.
+// calling StartProjectVersion . This operation requires permissions to perform the
+// rekognition:CreateProjectVersion action.
 func (c *Client) CreateProjectVersion(ctx context.Context, params *CreateProjectVersionInput, optFns ...func(*Options)) (*CreateProjectVersionOutput, error) {
 	if params == nil {
 		params = &CreateProjectVersionInput{}
@@ -52,8 +52,8 @@ func (c *Client) CreateProjectVersion(ctx context.Context, params *CreateProject
 type CreateProjectVersionInput struct {
 
 	// The Amazon S3 bucket location to store the results of training. The S3 bucket
-	// can be in any AWS account as long as the caller has s3:PutObject permissions
-	// on the S3 bucket.
+	// can be in any AWS account as long as the caller has s3:PutObject permissions on
+	// the S3 bucket.
 	//
 	// This member is required.
 	OutputConfig *types.OutputConfig
@@ -74,13 +74,13 @@ type CreateProjectVersionInput struct {
 	// an alias for your KMS key, or an alias ARN. The key is used to encrypt training
 	// and test images copied into the service for model training. Your source images
 	// are unaffected. The key is also used to encrypt training results and manifest
-	// files written to the output Amazon S3 bucket ( OutputConfig). If you choose to
+	// files written to the output Amazon S3 bucket ( OutputConfig ). If you choose to
 	// use your own KMS key, you need the following permissions on the KMS key.
-	//     - kms:CreateGrant
-	//     - kms:DescribeKey
-	//     - kms:GenerateDataKey
-	//     - kms:Decrypt
-	// If you don't specify a value for KmsKeyId, images copied into the service are
+	//   - kms:CreateGrant
+	//   - kms:DescribeKey
+	//   - kms:GenerateDataKey
+	//   - kms:Decrypt
+	// If you don't specify a value for KmsKeyId , images copied into the service are
 	// encrypted using a key that AWS owns and manages.
 	KmsKeyId *string
 
@@ -88,12 +88,12 @@ type CreateProjectVersionInput struct {
 	Tags map[string]string
 
 	// Specifies an external manifest that the service uses to test the model. If you
-	// specify TestingData  you must also specify TrainingData. The project must not
+	// specify TestingData you must also specify TrainingData . The project must not
 	// have any associated datasets.
 	TestingData *types.TestingData
 
 	// Specifies an external manifest that the services uses to train the model. If
-	// you specify TrainingData  you must also specify TestingData. The project must
+	// you specify TrainingData you must also specify TestingData . The project must
 	// not have any associated datasets.
 	TrainingData *types.TrainingData
 

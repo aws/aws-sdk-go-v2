@@ -123,8 +123,8 @@ type Options struct {
 	// option.
 	Retryer aws.Retryer
 
-	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is
-	// set to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
+	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is set
+	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig . You
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
@@ -486,8 +486,8 @@ func nopSetARNAccessor(input interface{}, v string) error {
 	return nil
 }
 
-// nopBackfillAccountIDAccessor provides a nop accessor function to be used when
-// a certain operation does not need to validate and backfill account id
+// nopBackfillAccountIDAccessor provides a nop accessor function to be used when a
+// certain operation does not need to validate and backfill account id
 func nopBackfillAccountIDAccessor(input interface{}, v string) error {
 	return nil
 }

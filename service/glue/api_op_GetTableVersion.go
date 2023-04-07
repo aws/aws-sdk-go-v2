@@ -29,8 +29,8 @@ func (c *Client) GetTableVersion(ctx context.Context, params *GetTableVersionInp
 
 type GetTableVersionInput struct {
 
-	// The database in the catalog in which the table resides. For Hive
-	// compatibility, this name is entirely lowercase.
+	// The database in the catalog in which the table resides. For Hive compatibility,
+	// this name is entirely lowercase.
 	//
 	// This member is required.
 	DatabaseName *string

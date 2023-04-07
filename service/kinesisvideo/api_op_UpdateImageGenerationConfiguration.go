@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the StreamInfo  and ImageProcessingConfiguration  fields.
+// Updates the StreamInfo and ImageProcessingConfiguration fields.
 func (c *Client) UpdateImageGenerationConfiguration(ctx context.Context, params *UpdateImageGenerationConfigurationInput, optFns ...func(*Options)) (*UpdateImageGenerationConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateImageGenerationConfigurationInput{}
@@ -39,8 +39,8 @@ type UpdateImageGenerationConfigurationInput struct {
 	// StreamName or the StreamARN .
 	StreamARN *string
 
-	// The name of the stream from which to update the image generation
-	// configuration. You must specify either the StreamName  or the StreamARN .
+	// The name of the stream from which to update the image generation configuration.
+	// You must specify either the StreamName or the StreamARN .
 	StreamName *string
 
 	noSmithyDocumentSerde

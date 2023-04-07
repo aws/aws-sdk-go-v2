@@ -66,8 +66,8 @@ type ListFHIRExportJobsInput struct {
 
 type ListFHIRExportJobsOutput struct {
 
-	// The properties of listed FHIR export jobs, including the ID, ARN, name, and
-	// the status of the job.
+	// The properties of listed FHIR export jobs, including the ID, ARN, name, and the
+	// status of the job.
 	//
 	// This member is required.
 	ExportJobPropertiesList []types.ExportJobProperties
@@ -160,8 +160,8 @@ type ListFHIRExportJobsPaginatorOptions struct {
 	// to a maximum quantity specified by the user.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -53,16 +53,15 @@ type UpdateLinkOutput struct {
 	// The ARN of the link that you have updated.
 	Arn *string
 
-	// The random ID string that Amazon Web Services generated as part of the sink
-	// ARN.
+	// The random ID string that Amazon Web Services generated as part of the sink ARN.
 	Id *string
 
 	// The label assigned to this link, with the variables resolved to their actual
 	// values.
 	Label *string
 
-	// The exact label template that was specified when the link was created, with
-	// the template variables not resolved.
+	// The exact label template that was specified when the link was created, with the
+	// template variables not resolved.
 	LabelTemplate *string
 
 	// The resource types now supported by this link.

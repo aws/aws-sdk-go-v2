@@ -37,7 +37,7 @@ type ListWorkspacesInput struct {
 	MaxResults *int32
 
 	// The token for the next set of workspaces to return. (You receive this token
-	// from a previous ListWorkspaces  operation.)
+	// from a previous ListWorkspaces operation.)
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -133,8 +133,8 @@ type ListWorkspacesPaginatorOptions struct {
 	// The maximum number of workspaces to include in the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

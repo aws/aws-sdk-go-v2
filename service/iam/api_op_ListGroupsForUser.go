@@ -13,7 +13,7 @@ import (
 )
 
 // Lists the IAM groups that the specified IAM user belongs to. You can paginate
-// the results using the MaxItems  and Marker  parameters.
+// the results using the MaxItems and Marker parameters.
 func (c *Client) ListGroupsForUser(ctx context.Context, params *ListGroupsForUserInput, optFns ...func(*Options)) (*ListGroupsForUserOutput, error) {
 	if params == nil {
 		params = &ListGroupsForUserInput{}
@@ -32,7 +32,7 @@ func (c *Client) ListGroupsForUser(ctx context.Context, params *ListGroupsForUse
 type ListGroupsForUserInput struct {
 
 	// The name of the user to list groups for. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
 	//
@@ -41,13 +41,13 @@ type ListGroupsForUserInput struct {
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
-	// Markerelement in the response that you received to indicate where the next
-	// call should start.
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
 	Marker *string
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
@@ -57,7 +57,7 @@ type ListGroupsForUserInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListGroupsForUser  request.
+// Contains the response to a successful ListGroupsForUser request.
 type ListGroupsForUserOutput struct {
 
 	// A list of groups.
@@ -73,8 +73,8 @@ type ListGroupsForUserOutput struct {
 	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated  is true, this element is present and contains the value to
-	// use for the Marker  parameter in a subsequent pagination request.
+	// When IsTruncated is true , this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -154,20 +154,19 @@ type ListGroupsForUserAPIClient interface {
 
 var _ ListGroupsForUserAPIClient = (*Client)(nil)
 
-// ListGroupsForUserPaginatorOptions is the paginator options for
-// ListGroupsForUser
+// ListGroupsForUserPaginatorOptions is the paginator options for ListGroupsForUser
 type ListGroupsForUserPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -18,7 +18,8 @@ import (
 //   - Retrive all the crawls of a specified crawler.
 //   - Retrieve all the crawls of a specified crawler within a limited count.
 //   - Retrieve all the crawls of a specified crawler in a specific time range.
-//   - Retrieve all the crawls of a specified crawler with a particular state, crawl ID, or DPU hour value.
+//   - Retrieve all the crawls of a specified crawler with a particular state,
+//     crawl ID, or DPU hour value.
 func (c *Client) ListCrawls(ctx context.Context, params *ListCrawlsInput, optFns ...func(*Options)) (*ListCrawlsOutput, error) {
 	if params == nil {
 		params = &ListCrawlsInput{}

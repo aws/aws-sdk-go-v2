@@ -13,11 +13,11 @@ import (
 // Creates a friendly name for a KMS key. Adding, deleting, or updating an alias
 // can allow or deny permission to the KMS key. For details, see ABAC for KMS (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html)
 // in the Key Management Service Developer Guide. You can use an alias to identify
-// a KMS key in the KMS console, in the DescribeKey  operation and in
-// cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
-// , such as Encrypt  and GenerateDataKey. You can also change the KMS key that's
-// associated with the alias ( UpdateAlias ) or delete the alias ( DeleteAlias)
-// at any time. These operations don't affect the underlying KMS key. You can
+// a KMS key in the KMS console, in the DescribeKey operation and in cryptographic
+// operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+// , such as Encrypt and GenerateDataKey . You can also change the KMS key that's
+// associated with the alias ( UpdateAlias ) or delete the alias ( DeleteAlias ) at
+// any time. These operations don't affect the underlying KMS key. You can
 // associate the alias with any customer managed key in the same Amazon Web
 // Services Region. Each alias is associated with only one KMS key at a time, but a
 // KMS key can have multiple aliases. A valid KMS key is required. You can't create
@@ -25,14 +25,16 @@ import (
 // but you can have aliases with the same name in different Regions. For detailed
 // information about aliases, see Using aliases (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html)
 // in the Key Management Service Developer Guide. This operation does not return a
-// response. To get the alias that you created, use the ListAliases operation.
-// The KMS key that you use for this operation must be in a compatible key state.
-// For details, see Key states of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// response. To get the alias that you created, use the ListAliases operation. The
+// KMS key that you use for this operation must be in a compatible key state. For
+// details, see Key states of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on an alias in a different Amazon Web Services account.
 // Required permissions
-//   - kms:CreateAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) on the alias (IAM policy).
-//   - kms:CreateAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) on the KMS key (key policy).
+//   - kms:CreateAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+//     on the alias (IAM policy).
+//   - kms:CreateAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+//     on the KMS key (key policy).
 //
 // For details, see Controlling access to aliases (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access)
 // in the Key Management Service Developer Guide. Related operations:
@@ -56,11 +58,11 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 
 type CreateAliasInput struct {
 
-	// Specifies the alias name. This value must begin with alias/ followed by a
-	// name, such as alias/ExampleAlias . The AliasName value must be string of 1-256
+	// Specifies the alias name. This value must begin with alias/ followed by a name,
+	// such as alias/ExampleAlias . The AliasName value must be string of 1-256
 	// characters. It can contain only alphanumeric characters, forward slashes (/),
-	// underscores (_), and dashes (-). The alias name cannot begin with alias/aws/.
-	// The alias/aws/  prefix is reserved for Amazon Web Services managed keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
+	// underscores (_), and dashes (-). The alias name cannot begin with alias/aws/ .
+	// The alias/aws/ prefix is reserved for Amazon Web Services managed keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
 	// .
 	//
 	// This member is required.
@@ -72,10 +74,10 @@ type CreateAliasInput struct {
 	// error. For help finding the key ID and ARN, see Finding the Key ID and ARN (https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn)
 	// in the Key Management Service Developer Guide . Specify the key ID or key ARN of
 	// the KMS key. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey .
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey .
 	//
 	// This member is required.
 	TargetKeyId *string

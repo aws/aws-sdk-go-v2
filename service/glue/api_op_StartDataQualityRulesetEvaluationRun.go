@@ -13,8 +13,8 @@ import (
 
 // Once you have a ruleset definition (either recommended or your own), you call
 // this operation to evaluate the ruleset against a data source (Glue table). The
-// evaluation computes results which you can retrieve with the
-// GetDataQualityResult API.
+// evaluation computes results which you can retrieve with the GetDataQualityResult
+// API.
 func (c *Client) StartDataQualityRulesetEvaluationRun(ctx context.Context, params *StartDataQualityRulesetEvaluationRunInput, optFns ...func(*Options)) (*StartDataQualityRulesetEvaluationRunOutput, error) {
 	if params == nil {
 		params = &StartDataQualityRulesetEvaluationRunInput{}
@@ -54,7 +54,7 @@ type StartDataQualityRulesetEvaluationRunInput struct {
 	// UUID) to avoid creating or starting multiple instances of the same resource.
 	ClientToken *string
 
-	// The number of G.1X  workers to be used in the run. The default is 5.
+	// The number of G.1X workers to be used in the run. The default is 5.
 	NumberOfWorkers *int32
 
 	// The timeout for a run in minutes. This is the maximum time that a run can

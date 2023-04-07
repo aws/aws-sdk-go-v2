@@ -63,12 +63,12 @@ type PutPackageOriginConfigurationInput struct {
 	Repository *string
 
 	// A PackageOriginRestrictions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
-	// object that contains information about the upstream  and publish package
-	// origin restrictions. The upstream restriction determines if new package
-	// versions can be ingested or retained from external connections or upstream
-	// repositories. The publish restriction determines if new package versions can
-	// be published directly to the repository. You must include both the desired
-	// upstream and publish  restrictions.
+	// object that contains information about the upstream and publish package origin
+	// restrictions. The upstream restriction determines if new package versions can
+	// be ingested or retained from external connections or upstream repositories. The
+	// publish restriction determines if new package versions can be published directly
+	// to the repository. You must include both the desired upstream and publish
+	// restrictions.
 	//
 	// This member is required.
 	Restrictions *types.PackageOriginRestrictions
@@ -79,10 +79,11 @@ type PutPackageOriginConfigurationInput struct {
 
 	// The namespace of the package to be updated. The package component that
 	// specifies its namespace depends on its type. For example:
-	//     - The namespace of a Maven package is its groupId .
-	//     - The namespace of an npm package is its scope .
-	//     - Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.
-	//     - The namespace of a generic package is its namespace .
+	//   - The namespace of a Maven package is its groupId .
+	//   - The namespace of an npm package is its scope .
+	//   - Python and NuGet packages do not contain a corresponding component,
+	//   packages of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	noSmithyDocumentSerde

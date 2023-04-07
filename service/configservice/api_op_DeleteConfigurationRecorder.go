@@ -32,11 +32,11 @@ func (c *Client) DeleteConfigurationRecorder(ctx context.Context, params *Delete
 	return out, nil
 }
 
-// The request object for the DeleteConfigurationRecorder  action.
+// The request object for the DeleteConfigurationRecorder action.
 type DeleteConfigurationRecorderInput struct {
 
-	// The name of the configuration recorder to be deleted. You can retrieve the
-	// name of your configuration recorder by using the DescribeConfigurationRecorders
+	// The name of the configuration recorder to be deleted. You can retrieve the name
+	// of your configuration recorder by using the DescribeConfigurationRecorders
 	// action.
 	//
 	// This member is required.

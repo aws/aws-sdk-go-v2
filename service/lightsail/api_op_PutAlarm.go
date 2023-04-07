@@ -17,7 +17,7 @@ import (
 // and a banner displayed on the Amazon Lightsail console. For more information,
 // see Alarms in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms)
 // . When this action creates an alarm, the alarm state is immediately set to
-// INSUFFICIENT_DATA. The alarm is then evaluated and its state is set
+// INSUFFICIENT_DATA . The alarm is then evaluated and its state is set
 // appropriately. Any actions associated with the new state are then executed. When
 // you update an existing alarm, its state is left unchanged, but the update
 // completely overwrites the previous configuration of the alarm. The alarm is then
@@ -53,7 +53,7 @@ type PutAlarmInput struct {
 
 	// The number of most recent periods over which data is compared to the specified
 	// threshold. If you are setting an "M out of N" alarm, this value (
-	// evaluationPeriods) is the N. If you are setting an alarm that requires that a
+	// evaluationPeriods ) is the N. If you are setting an alarm that requires that a
 	// number of consecutive data points be breaching to trigger the alarm, this value
 	// specifies the rolling period of time in which data points are evaluated. Each
 	// evaluation period is five minutes long. For example, specify an evaluation
@@ -64,13 +64,19 @@ type PutAlarmInput struct {
 	// This member is required.
 	EvaluationPeriods *int32
 
-	// The name of the metric to associate with the alarm. You can configure up to
-	// two alarms per metric. The following metrics are available for each resource
-	// type:
-	//     - Instances: BurstCapacityPercentage , BurstCapacityTime , CPUUtilization , NetworkIn , NetworkOut , StatusCheckFailed , StatusCheckFailed_Instance , and StatusCheckFailed_System .
-	//     - Load balancers: ClientTLSNegotiationErrorCount , HealthyHostCount , UnhealthyHostCount , HTTPCode_LB_4XX_Count , HTTPCode_LB_5XX_Count , HTTPCode_Instance_2XX_Count , HTTPCode_Instance_3XX_Count , HTTPCode_Instance_4XX_Count , HTTPCode_Instance_5XX_Count , InstanceResponseTime , RejectedConnectionCount , and RequestCount .
-	//     - Relational databases: CPUUtilization , DatabaseConnections , DiskQueueDepth , FreeStorageSpace , NetworkReceiveThroughput , and NetworkTransmitThroughput .
-	//
+	// The name of the metric to associate with the alarm. You can configure up to two
+	// alarms per metric. The following metrics are available for each resource type:
+	//   - Instances: BurstCapacityPercentage , BurstCapacityTime , CPUUtilization ,
+	//   NetworkIn , NetworkOut , StatusCheckFailed , StatusCheckFailed_Instance , and
+	//   StatusCheckFailed_System .
+	//   - Load balancers: ClientTLSNegotiationErrorCount , HealthyHostCount ,
+	//   UnhealthyHostCount , HTTPCode_LB_4XX_Count , HTTPCode_LB_5XX_Count ,
+	//   HTTPCode_Instance_2XX_Count , HTTPCode_Instance_3XX_Count ,
+	//   HTTPCode_Instance_4XX_Count , HTTPCode_Instance_5XX_Count ,
+	//   InstanceResponseTime , RejectedConnectionCount , and RequestCount .
+	//   - Relational databases: CPUUtilization , DatabaseConnections , DiskQueueDepth
+	//   , FreeStorageSpace , NetworkReceiveThroughput , and NetworkTransmitThroughput
+	//   .
 	// For more information about these metrics, see Metrics available in Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-resource-health-metrics#available-metrics)
 	// .
 	//
@@ -104,31 +110,38 @@ type PutAlarmInput struct {
 	// datapointsToAlarm ) is the M.
 	DatapointsToAlarm *int32
 
-	// Indicates whether the alarm is enabled. Notifications are enabled by default
-	// if you don't specify this parameter.
+	// Indicates whether the alarm is enabled. Notifications are enabled by default if
+	// you don't specify this parameter.
 	NotificationEnabled *bool
 
 	// The alarm states that trigger a notification. An alarm has the following
 	// possible states:
-	//     - ALARM - The metric is outside of the defined threshold.
-	//     - INSUFFICIENT_DATA - The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.
-	//     - OK - The metric is within the defined threshold.
-	// When you specify a
-	// notification trigger, the ALARM  state must be specified. The INSUFFICIENT_DATA
-	// and OK  states can be specified in addition to the ALARM  state.
-	//     - If you specify OK as an alarm trigger, a notification is sent when the alarm switches from an ALARM or INSUFFICIENT_DATA alarm state to an OK state. This can be thought of as an all clear alarm notification.
-	//     - If you specify INSUFFICIENT_DATA as the alarm trigger, a notification is sent when the alarm switches from an OK or ALARM alarm state to an INSUFFICIENT_DATA state.
-	//
-	// The notification trigger defaults to ALARM  if you don't specify this parameter.
+	//   - ALARM - The metric is outside of the defined threshold.
+	//   - INSUFFICIENT_DATA - The alarm has just started, the metric is not available,
+	//   or not enough data is available for the metric to determine the alarm state.
+	//   - OK - The metric is within the defined threshold.
+	// When you specify a notification trigger, the ALARM state must be specified. The
+	// INSUFFICIENT_DATA and OK states can be specified in addition to the ALARM
+	// state.
+	//   - If you specify OK as an alarm trigger, a notification is sent when the alarm
+	//   switches from an ALARM or INSUFFICIENT_DATA alarm state to an OK state. This
+	//   can be thought of as an all clear alarm notification.
+	//   - If you specify INSUFFICIENT_DATA as the alarm trigger, a notification is
+	//   sent when the alarm switches from an OK or ALARM alarm state to an
+	//   INSUFFICIENT_DATA state.
+	// The notification trigger defaults to ALARM if you don't specify this parameter.
 	NotificationTriggers []types.AlarmState
 
-	// Sets how this alarm will handle missing data points. An alarm can treat
-	// missing data in the following ways:
-	//     - breaching - Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.
-	//     - notBreaching - Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.
-	//     - ignore - Ignore the missing data. Maintains the current alarm state.
-	//     - missing - Missing data is treated as missing.
-	// If treatMissingData  is not specified, the default behavior of missing  is used.
+	// Sets how this alarm will handle missing data points. An alarm can treat missing
+	// data in the following ways:
+	//   - breaching - Assume the missing data is not within the threshold. Missing
+	//   data counts towards the number of times the metric is not within the threshold.
+	//   - notBreaching - Assume the missing data is within the threshold. Missing data
+	//   does not count towards the number of times the metric is not within the
+	//   threshold.
+	//   - ignore - Ignore the missing data. Maintains the current alarm state.
+	//   - missing - Missing data is treated as missing.
+	// If treatMissingData is not specified, the default behavior of missing is used.
 	TreatMissingData types.TreatMissingData
 
 	noSmithyDocumentSerde

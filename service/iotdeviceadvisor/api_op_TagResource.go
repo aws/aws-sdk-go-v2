@@ -30,8 +30,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The resource ARN of an IoT Device Advisor resource. This can be
-	// SuiteDefinition ARN or SuiteRun ARN.
+	// The resource ARN of an IoT Device Advisor resource. This can be SuiteDefinition
+	// ARN or SuiteRun ARN.
 	//
 	// This member is required.
 	ResourceArn *string

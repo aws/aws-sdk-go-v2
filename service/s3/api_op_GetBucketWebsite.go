@@ -15,8 +15,8 @@ import (
 // Returns the website configuration for a bucket. To host website on Amazon S3,
 // you can configure a bucket as website by adding a website configuration. For
 // more information about hosting websites, see Hosting Websites on Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
-// . This GET action requires the S3:GetBucketWebsite permission. By default,
-// only the bucket owner can read the bucket website configuration. However, bucket
+// . This GET action requires the S3:GetBucketWebsite permission. By default, only
+// the bucket owner can read the bucket website configuration. However, bucket
 // owners can allow other users to read the website configuration by writing a
 // bucket policy granting them the S3:GetBucketWebsite permission. The following
 // operations are related to DeleteBucketWebsite :
@@ -157,9 +157,9 @@ func newServiceMetadataMiddleware_opGetBucketWebsite(region string) *awsmiddlewa
 	}
 }
 
-// getGetBucketWebsiteBucketMember returns a pointer to string denoting a
-// provided bucket member valueand a boolean indicating if the input has a modeled
-// bucket name,
+// getGetBucketWebsiteBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
 func getGetBucketWebsiteBucketMember(input interface{}) (*string, bool) {
 	in := input.(*GetBucketWebsiteInput)
 	if in.Bucket == nil {

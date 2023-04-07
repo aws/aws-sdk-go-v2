@@ -32,8 +32,8 @@ func (c *Client) InferICD10CM(ctx context.Context, params *InferICD10CMInput, op
 
 type InferICD10CMInput struct {
 
-	// The input text used for analysis. The input for InferICD10CM is a string from
-	// 1 to 10000 characters.
+	// The input text used for analysis. The input for InferICD10CM is a string from 1
+	// to 10000 characters.
 	//
 	// This member is required.
 	Text *string
@@ -50,13 +50,13 @@ type InferICD10CMOutput struct {
 	// This member is required.
 	Entities []types.ICD10CMEntity
 
-	// The version of the model used to analyze the documents, in the format n.n.n
-	// You can use this information to track the model used for a particular batch of
+	// The version of the model used to analyze the documents, in the format n.n.n You
+	// can use this information to track the model used for a particular batch of
 	// documents.
 	ModelVersion *string
 
 	// If the result of the previous request to InferICD10CM was truncated, include
-	// the PaginationToken  to fetch the next page of medical condition entities.
+	// the PaginationToken to fetch the next page of medical condition entities.
 	PaginationToken *string
 
 	// Metadata pertaining to the operation's result.

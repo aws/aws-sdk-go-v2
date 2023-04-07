@@ -14,7 +14,7 @@ import (
 // bucket containing log data such as Application Load Balancer access logs,
 // CloudFront logs, or logs from third party sources. You can associate up to 10
 // Amazon S3 buckets with your subscription. To use the services of the SRT and
-// make an AssociateDRTLogBucket  request, you must be subscribed to the Business
+// make an AssociateDRTLogBucket request, you must be subscribed to the Business
 // Support plan (http://aws.amazon.com/premiumsupport/business-support/) or the
 // Enterprise Support plan (http://aws.amazon.com/premiumsupport/enterprise-support/)
 // .

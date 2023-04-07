@@ -11,14 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF
-// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
 // and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 // . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns the RuleGroup  that is specified by the RuleGroupId
-// that you included in the GetRuleGroup request. To view the rules in a rule
-// group, use ListActivatedRulesInRuleGroup .
+// and global use. Returns the RuleGroup that is specified by the RuleGroupId that
+// you included in the GetRuleGroup request. To view the rules in a rule group,
+// use ListActivatedRulesInRuleGroup .
 func (c *Client) GetRuleGroup(ctx context.Context, params *GetRuleGroupInput, optFns ...func(*Options)) (*GetRuleGroupOutput, error) {
 	if params == nil {
 		params = &GetRuleGroupInput{}
@@ -36,8 +35,8 @@ func (c *Client) GetRuleGroup(ctx context.Context, params *GetRuleGroupInput, op
 
 type GetRuleGroupInput struct {
 
-	// The RuleGroupId  of the RuleGroup  that you want to get. RuleGroupId is
-	// returned by CreateRuleGroup  and by ListRuleGroups .
+	// The RuleGroupId of the RuleGroup that you want to get. RuleGroupId is returned
+	// by CreateRuleGroup and by ListRuleGroups .
 	//
 	// This member is required.
 	RuleGroupId *string
@@ -47,8 +46,7 @@ type GetRuleGroupInput struct {
 
 type GetRuleGroupOutput struct {
 
-	// Information about the RuleGroup  that you specified in the GetRuleGroup
-	// request.
+	// Information about the RuleGroup that you specified in the GetRuleGroup request.
 	RuleGroup *types.RuleGroup
 
 	// Metadata pertaining to the operation's result.

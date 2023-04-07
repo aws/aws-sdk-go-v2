@@ -35,8 +35,7 @@ type PutDedicatedIpWarmupAttributesInput struct {
 	// This member is required.
 	Ip *string
 
-	// The warm-up percentage that you want to associate with the dedicated IP
-	// address.
+	// The warm-up percentage that you want to associate with the dedicated IP address.
 	//
 	// This member is required.
 	WarmupPercentage *int32

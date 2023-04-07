@@ -56,8 +56,8 @@ type CreateApplicationInput struct {
 	// This member is required.
 	LaunchPath *string
 
-	// The name of the application. This name is visible to users when display name
-	// is not specified.
+	// The name of the application. This name is visible to users when display name is
+	// not specified.
 	//
 	// This member is required.
 	Name *string

@@ -36,8 +36,8 @@ type CheckoutLicenseInput struct {
 	// This member is required.
 	CheckoutType types.CheckoutType
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	//
 	// This member is required.
 	ClientToken *string

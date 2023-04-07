@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all cases domains in the Amazon Web Services account. Each list item is
-// a condensed summary object of the domain.
+// Lists all cases domains in the Amazon Web Services account. Each list item is a
+// condensed summary object of the domain.
 func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optFns ...func(*Options)) (*ListDomainsOutput, error) {
 	if params == nil {
 		params = &ListDomainsInput{}
@@ -130,8 +130,8 @@ type ListDomainsPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

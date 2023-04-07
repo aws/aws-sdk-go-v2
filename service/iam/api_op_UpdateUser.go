@@ -50,7 +50,7 @@ type UpdateUserInput struct {
 	// user's path. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
 	// ) a string of characters consisting of either a forward slash (/) by itself or a
 	// string that must begin and end with forward slashes. In addition, it can contain
-	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F),
+	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F ),
 	// including most punctuation characters, digits, and upper and lowercased letters.
 	NewPath *string
 

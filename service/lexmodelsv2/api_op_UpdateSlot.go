@@ -62,8 +62,8 @@ type UpdateSlotInput struct {
 	// This member is required.
 	SlotName *string
 
-	// A new set of prompts that Amazon Lex sends to the user to elicit a response
-	// the provides a value for the slot.
+	// A new set of prompts that Amazon Lex sends to the user to elicit a response the
+	// provides a value for the slot.
 	//
 	// This member is required.
 	ValueElicitationSetting *types.SlotValueElicitationSetting
@@ -96,8 +96,7 @@ type UpdateSlotOutput struct {
 	// The identifier of the bot that contains the slot.
 	BotId *string
 
-	// The identifier of the slot version that contains the slot. Will always be DRAFT
-	// .
+	// The identifier of the slot version that contains the slot. Will always be DRAFT .
 	BotVersion *string
 
 	// The timestamp of the date and time that the slot was created.
@@ -118,8 +117,8 @@ type UpdateSlotOutput struct {
 	// Indicates whether the slot accepts multiple values in one response.
 	MultipleValuesSetting *types.MultipleValuesSetting
 
-	// The updated setting that determines whether the slot value is obfuscated in
-	// the Amazon CloudWatch logs.
+	// The updated setting that determines whether the slot value is obfuscated in the
+	// Amazon CloudWatch logs.
 	ObfuscationSetting *types.ObfuscationSetting
 
 	// The unique identifier of the slot that was updated.
@@ -135,8 +134,8 @@ type UpdateSlotOutput struct {
 	// composite slot.
 	SubSlotSetting *types.SubSlotSetting
 
-	// The updated prompts that Amazon Lex sends to the user to elicit a response
-	// that provides a value for the slot.
+	// The updated prompts that Amazon Lex sends to the user to elicit a response that
+	// provides a value for the slot.
 	ValueElicitationSetting *types.SlotValueElicitationSetting
 
 	// Metadata pertaining to the operation's result.

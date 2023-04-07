@@ -34,8 +34,8 @@ type CreatePartitionIndexInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// Specifies a PartitionIndex structure to create a partition index in an
-	// existing table.
+	// Specifies a PartitionIndex structure to create a partition index in an existing
+	// table.
 	//
 	// This member is required.
 	PartitionIndex *types.PartitionIndex

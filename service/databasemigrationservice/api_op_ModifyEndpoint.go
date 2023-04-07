@@ -12,8 +12,8 @@ import (
 )
 
 // Modifies the specified endpoint. For a MySQL source or target endpoint, don't
-// explicitly specify the database using the DatabaseName request parameter on
-// the ModifyEndpoint  API call. Specifying DatabaseName when you modify a MySQL
+// explicitly specify the database using the DatabaseName request parameter on the
+// ModifyEndpoint API call. Specifying DatabaseName when you modify a MySQL
 // endpoint replicates all the task tables to this single database. For MySQL
 // endpoints, you specify the database only when you specify the schema in the
 // table-mapping rules of the DMS task.
@@ -48,12 +48,12 @@ type ModifyEndpointInput struct {
 
 	// The settings in JSON format for the DMS transfer type of source endpoint.
 	// Attributes include the following:
-	//     - serviceAccessRoleArn - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the iam:PassRole action.
-	//     - BucketName - The name of the S3 bucket to use.
-	// Shorthand syntax for
-	// these settings is as follows: ServiceAccessRoleArn=string ,BucketName=string
-	// JSON syntax for these settings is as follows: { "ServiceAccessRoleArn":
-	// "string", "BucketName": "string"}
+	//   - serviceAccessRoleArn - The Amazon Resource Name (ARN) used by the service
+	//   access IAM role. The role must allow the iam:PassRole action.
+	//   - BucketName - The name of the S3 bucket to use.
+	// Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string
+	// ,BucketName=string JSON syntax for these settings is as follows: {
+	// "ServiceAccessRoleArn": "string", "BucketName": "string"}
 	DmsTransferSettings *types.DmsTransferSettings
 
 	// Settings in JSON format for the source DocumentDB endpoint. For more
@@ -63,8 +63,8 @@ type ModifyEndpointInput struct {
 	DocDbSettings *types.DocDbSettings
 
 	// Settings in JSON format for the target Amazon DynamoDB endpoint. For
-	// information about other available settings, see Using Object Mapping to
-	// Migrate Data to DynamoDB (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html#CHAP_Target.DynamoDB.ObjectMapping)
+	// information about other available settings, see Using Object Mapping to Migrate
+	// Data to DynamoDB (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html#CHAP_Target.DynamoDB.ObjectMapping)
 	// in the Database Migration Service User Guide.
 	DynamoDbSettings *types.DynamoDbSettings
 
@@ -74,36 +74,37 @@ type ModifyEndpointInput struct {
 	// in the Database Migration Service User Guide.
 	ElasticsearchSettings *types.ElasticsearchSettings
 
-	// The database endpoint identifier. Identifiers must begin with a letter and
-	// must contain only ASCII letters, digits, and hyphens. They can't end with a
-	// hyphen or contain two consecutive hyphens.
+	// The database endpoint identifier. Identifiers must begin with a letter and must
+	// contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or
+	// contain two consecutive hyphens.
 	EndpointIdentifier *string
 
-	// The type of endpoint. Valid values are source  and target .
+	// The type of endpoint. Valid values are source and target .
 	EndpointType types.ReplicationEndpointTypeValue
 
 	// The database engine name. Valid values, depending on the EndpointType, include
 	// "mysql" , "oracle" , "postgres" , "mariadb" , "aurora" , "aurora-postgresql" ,
 	// "redshift" , "s3" , "db2" , "db2-zos" , "azuredb" , "sybase" , "dynamodb" ,
-	// "mongodb" , "kinesis" , "kafka" , "elasticsearch" , "documentdb" , "sqlserver"
-	// , "neptune" , and "babelfish" .
+	// "mongodb" , "kinesis" , "kafka" , "elasticsearch" , "documentdb" , "sqlserver" ,
+	// "neptune" , and "babelfish" .
 	EngineName *string
 
 	// If this attribute is Y, the current call to ModifyEndpoint replaces all
 	// existing endpoint settings with the exact settings that you specify in this
 	// call. If this attribute is N, the current call to ModifyEndpoint does two
 	// things:
-	//     - It replaces any endpoint settings that already exist with new values, for settings with the same names.
-	//     - It creates new endpoint settings that you specify in the call, for settings with different names.
-	//
-	// For example, if you call create-endpoint ... --endpoint-settings '{"a":1}' ...
-	// , the endpoint has the following endpoint settings: '{"a":1}'. If you then
-	// call modify-endpoint ... --endpoint-settings '{"b":2}' ... for the same
-	// endpoint, the endpoint has the following settings: '{"a":1,"b":2}'. However,
-	// suppose that you follow this with a call to modify-endpoint ...
-	// --endpoint-settings '{"b":2}' --exact-settings ...for that same endpoint
-	// again. Then the endpoint has the following settings: '{"b":2}'. All existing
-	// settings are replaced with the exact settings that you specify.
+	//   - It replaces any endpoint settings that already exist with new values, for
+	//   settings with the same names.
+	//   - It creates new endpoint settings that you specify in the call, for settings
+	//   with different names.
+	// For example, if you call create-endpoint ... --endpoint-settings '{"a":1}' ... ,
+	// the endpoint has the following endpoint settings: '{"a":1}' . If you then call
+	// modify-endpoint ... --endpoint-settings '{"b":2}' ... for the same endpoint, the
+	// endpoint has the following settings: '{"a":1,"b":2}' . However, suppose that you
+	// follow this with a call to modify-endpoint ... --endpoint-settings '{"b":2}'
+	// --exact-settings ... for that same endpoint again. Then the endpoint has the
+	// following settings: '{"b":2}' . All existing settings are replaced with the
+	// exact settings that you specify.
 	ExactSettings *bool
 
 	// The external table definition.
@@ -188,9 +189,9 @@ type ModifyEndpointInput struct {
 	// Provides information that defines an Amazon Redshift endpoint.
 	RedshiftSettings *types.RedshiftSettings
 
-	// Settings in JSON format for the target Amazon S3 endpoint. For more
-	// information about the available settings, see Extra Connection Attributes When
-	// Using Amazon S3 as a Target for DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring)
+	// Settings in JSON format for the target Amazon S3 endpoint. For more information
+	// about the available settings, see Extra Connection Attributes When Using Amazon
+	// S3 as a Target for DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring)
 	// in the Database Migration Service User Guide.
 	S3Settings *types.S3Settings
 
@@ -198,7 +199,7 @@ type ModifyEndpointInput struct {
 	ServerName *string
 
 	// The Amazon Resource Name (ARN) for the IAM role you want to use to modify the
-	// endpoint. The role must allow the iam:PassRole  action.
+	// endpoint. The role must allow the iam:PassRole action.
 	ServiceAccessRoleArn *string
 
 	// The SSL mode used to connect to the endpoint. The default value is none .

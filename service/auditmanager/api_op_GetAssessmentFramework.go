@@ -39,7 +39,7 @@ type GetAssessmentFrameworkInput struct {
 
 type GetAssessmentFrameworkOutput struct {
 
-	// The framework that the GetAssessmentFramework  API returned.
+	// The framework that the GetAssessmentFramework API returned.
 	Framework *types.Framework
 
 	// Metadata pertaining to the operation's result.

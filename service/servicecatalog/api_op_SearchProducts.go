@@ -31,13 +31,13 @@ func (c *Client) SearchProducts(ctx context.Context, params *SearchProductsInput
 type SearchProductsInput struct {
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// The search filters. If no search filters are specified, the output includes
-	// all products to which the caller has access.
+	// The search filters. If no search filters are specified, the output includes all
+	// products to which the caller has access.
 	Filters map[string][]string
 
 	// The maximum number of items to return with this call.
@@ -147,8 +147,8 @@ type SearchProductsPaginatorOptions struct {
 	// The maximum number of items to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

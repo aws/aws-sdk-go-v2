@@ -48,12 +48,12 @@ type ListCustomRoutingPortMappingsInput struct {
 	// This member is required.
 	AcceleratorArn *string
 
-	// The Amazon Resource Name (ARN) of the endpoint group to list the custom
-	// routing port mappings for.
+	// The Amazon Resource Name (ARN) of the endpoint group to list the custom routing
+	// port mappings for.
 	EndpointGroupArn *string
 
-	// The number of destination port mappings that you want to return with this
-	// call. The default value is 10.
+	// The number of destination port mappings that you want to return with this call.
+	// The default value is 10.
 	MaxResults *int32
 
 	// The token for the next set of results. You receive this token from a previous
@@ -152,12 +152,12 @@ var _ ListCustomRoutingPortMappingsAPIClient = (*Client)(nil)
 // ListCustomRoutingPortMappingsPaginatorOptions is the paginator options for
 // ListCustomRoutingPortMappings
 type ListCustomRoutingPortMappingsPaginatorOptions struct {
-	// The number of destination port mappings that you want to return with this
-	// call. The default value is 10.
+	// The number of destination port mappings that you want to return with this call.
+	// The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

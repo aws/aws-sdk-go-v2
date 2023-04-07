@@ -32,16 +32,16 @@ func (c *Client) ListTasks(ctx context.Context, params *ListTasksInput, optFns .
 type ListTasksInput struct {
 
 	// You can use API filters to narrow down the list of resources returned by
-	// ListTasks. For example, to retrieve all tasks on a specific source location,
-	// you can use ListTasks  with filter name LocationId  and Operator Equals with
-	// the ARN for the location.
+	// ListTasks . For example, to retrieve all tasks on a specific source location,
+	// you can use ListTasks with filter name LocationId and Operator Equals with the
+	// ARN for the location.
 	Filters []types.TaskFilter
 
 	// The maximum number of tasks to return.
 	MaxResults *int32
 
-	// An opaque string that indicates the position at which to begin the next list
-	// of tasks.
+	// An opaque string that indicates the position at which to begin the next list of
+	// tasks.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -138,8 +138,8 @@ type ListTasksPaginatorOptions struct {
 	// The maximum number of tasks to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

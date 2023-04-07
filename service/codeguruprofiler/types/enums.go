@@ -10,9 +10,9 @@ const (
 	ActionGroupAgentPermissions ActionGroup = "agentPermissions"
 )
 
-// Values returns all known values for ActionGroup. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ActionGroup. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ActionGroup) Values() []ActionGroup {
 	return []ActionGroup{
 		"agentPermissions",
@@ -175,8 +175,8 @@ type MetricType string
 
 // Enum values for MetricType
 const (
-	// Metric value aggregated for all instances of a frame name in a profile
-	// relative to the root frame.
+	// Metric value aggregated for all instances of a frame name in a profile relative
+	// to the root frame.
 	MetricTypeAggregatedRelativeTotalTime MetricType = "AggregatedRelativeTotalTime"
 )
 

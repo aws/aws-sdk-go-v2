@@ -37,8 +37,7 @@ type StartTaskContactInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The name of a task that is shown to an agent in the Contact Control Panel
-	// (CCP).
+	// The name of a task that is shown to an agent in the Contact Control Panel (CCP).
 	//
 	// This member is required.
 	Name *string

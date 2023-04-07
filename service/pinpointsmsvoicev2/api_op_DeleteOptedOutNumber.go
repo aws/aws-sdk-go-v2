@@ -47,8 +47,7 @@ type DeleteOptedOutNumberInput struct {
 
 type DeleteOptedOutNumberOutput struct {
 
-	// This is true if it was the end user who requested their phone number be
-	// removed.
+	// This is true if it was the end user who requested their phone number be removed.
 	EndUserOptedOut bool
 
 	// The OptOutListArn that the phone number was removed from.

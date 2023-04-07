@@ -11,7 +11,7 @@ import (
 )
 
 // Sets the password for the guest user smbguest . The smbguest user is the user
-// when the authentication method for the file share is set to GuestAccess. This
+// when the authentication method for the file share is set to GuestAccess . This
 // operation only supported for S3 File Gateways
 func (c *Client) SetSMBGuestPassword(ctx context.Context, params *SetSMBGuestPasswordInput, optFns ...func(*Options)) (*SetSMBGuestPasswordOutput, error) {
 	if params == nil {

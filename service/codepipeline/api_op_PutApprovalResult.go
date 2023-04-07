@@ -29,7 +29,7 @@ func (c *Client) PutApprovalResult(ctx context.Context, params *PutApprovalResul
 	return out, nil
 }
 
-// Represents the input of a PutApprovalResult  action.
+// Represents the input of a PutApprovalResult action.
 type PutApprovalResultInput struct {
 
 	// The name of the action for which approval is requested.
@@ -63,7 +63,7 @@ type PutApprovalResultInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a PutApprovalResult  action.
+// Represents the output of a PutApprovalResult action.
 type PutApprovalResultOutput struct {
 
 	// The timestamp showing when the approval or rejection was submitted.

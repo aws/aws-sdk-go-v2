@@ -13,10 +13,10 @@ import (
 // Deletes the server and the underlying AWS CloudFormation stacks (including the
 // server's EC2 instance). When you run this command, the server state is updated
 // to DELETING . After the server is deleted, it is no longer returned by
-// DescribeServerrequests. If the AWS CloudFormation stack cannot be deleted, the
+// DescribeServer requests. If the AWS CloudFormation stack cannot be deleted, the
 // server cannot be deleted. This operation is asynchronous. An
-// InvalidStateExceptionis thrown when a server deletion is already in progress.
-// A ResourceNotFoundException  is thrown when the server does not exist. A
+// InvalidStateException is thrown when a server deletion is already in progress. A
+// ResourceNotFoundException is thrown when the server does not exist. A
 // ValidationException is raised when parameters of the request are not valid.
 func (c *Client) DeleteServer(ctx context.Context, params *DeleteServerInput, optFns ...func(*Options)) (*DeleteServerOutput, error) {
 	if params == nil {

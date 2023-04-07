@@ -33,8 +33,8 @@ type ListMissionProfilesInput struct {
 	// Maximum number of mission profiles returned.
 	MaxResults *int32
 
-	// Next token returned in the request of a previous ListMissionProfiles call.
-	// Used to get the next page of results.
+	// Next token returned in the request of a previous ListMissionProfiles call. Used
+	// to get the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -129,8 +129,8 @@ type ListMissionProfilesPaginatorOptions struct {
 	// Maximum number of mission profiles returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

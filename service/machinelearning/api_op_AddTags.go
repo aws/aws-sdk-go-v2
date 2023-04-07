@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to an object, up to a limit of 10. Each tag consists of
-// a key and an optional value. If you add a tag using a key that is already
-// associated with the ML object, AddTags  updates the tag's value.
+// Adds one or more tags to an object, up to a limit of 10. Each tag consists of a
+// key and an optional value. If you add a tag using a key that is already
+// associated with the ML object, AddTags updates the tag's value.
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}

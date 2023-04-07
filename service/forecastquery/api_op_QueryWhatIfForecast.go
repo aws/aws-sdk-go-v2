@@ -31,7 +31,7 @@ type QueryWhatIfForecastInput struct {
 
 	// The filtering criteria to apply when retrieving the forecast. For example, to
 	// get the forecast for client_21 in the electricity usage dataset, specify the
-	// following: {"item_id" : "client_21"}  To get the full what-if forecast, use the
+	// following: {"item_id" : "client_21"} To get the full what-if forecast, use the
 	// CreateForecastExportJob (https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateWhatIfForecastExport.html)
 	// operation.
 	//
@@ -48,7 +48,7 @@ type QueryWhatIfForecastInput struct {
 	EndDate *string
 
 	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
+	// NextToken . To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
 

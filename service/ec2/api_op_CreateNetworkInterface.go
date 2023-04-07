@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a network interface in the specified subnet. The number of IP
-// addresses you can assign to a network interface varies by instance type. For
-// more information, see IP Addresses Per ENI Per Instance Type (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI)
+// Creates a network interface in the specified subnet. The number of IP addresses
+// you can assign to a network interface varies by instance type. For more
+// information, see IP Addresses Per ENI Per Instance Type (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI)
 // in the Amazon Virtual Private Cloud User Guide. For more information about
 // network interfaces, see Elastic network interfaces (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html)
 // in the Amazon Elastic Compute Cloud User Guide.
@@ -40,8 +40,8 @@ type CreateNetworkInterfaceInput struct {
 	// This member is required.
 	SubnetId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 
@@ -57,8 +57,8 @@ type CreateNetworkInterfaceInput struct {
 	// The IDs of one or more security groups.
 	Groups []string
 
-	// The type of network interface. The default is interface. The only supported
-	// values are efa  and trunk .
+	// The type of network interface. The default is interface . The only supported
+	// values are efa and trunk .
 	InterfaceType types.NetworkInterfaceCreationType
 
 	// The number of IPv4 prefixes that Amazon Web Services automatically assigns to
@@ -97,9 +97,9 @@ type CreateNetworkInterfaceInput struct {
 	// specific IPv6 addresses, or a count of IPv6 addresses.
 	Ipv6Prefixes []types.Ipv6PrefixSpecificationRequest
 
-	// The primary private IPv4 address of the network interface. If you don't
-	// specify an IPv4 address, Amazon EC2 selects one for you from the subnet's IPv4
-	// CIDR range. If you specify an IP address, you cannot indicate any IP addresses
+	// The primary private IPv4 address of the network interface. If you don't specify
+	// an IPv4 address, Amazon EC2 selects one for you from the subnet's IPv4 CIDR
+	// range. If you specify an IP address, you cannot indicate any IP addresses
 	// specified in privateIpAddresses as primary (only one IP address can be
 	// designated as primary).
 	PrivateIpAddress *string
@@ -113,7 +113,7 @@ type CreateNetworkInterfaceInput struct {
 	// interface. When you specify a number of secondary IPv4 addresses, Amazon EC2
 	// selects these IP addresses within the subnet's IPv4 CIDR range. You can't
 	// specify this option and specify more than one private IP address using
-	// privateIpAddresses. You can't specify a count of private IPv4 addresses if
+	// privateIpAddresses . You can't specify a count of private IPv4 addresses if
 	// you've specified one of the following: specific private IPv4 addresses, specific
 	// IPv4 prefixes, or a count of IPv4 prefixes.
 	SecondaryPrivateIpAddressCount *int32

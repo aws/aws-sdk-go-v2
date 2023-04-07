@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Detaches a static IP from the Amazon Lightsail instance to which it is
-// attached.
+// Detaches a static IP from the Amazon Lightsail instance to which it is attached.
 func (c *Client) DetachStaticIp(ctx context.Context, params *DetachStaticIpInput, optFns ...func(*Options)) (*DetachStaticIpOutput, error) {
 	if params == nil {
 		params = &DetachStaticIpInput{}

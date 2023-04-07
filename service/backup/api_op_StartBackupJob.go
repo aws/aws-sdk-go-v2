@@ -52,31 +52,31 @@ type StartBackupJobInput struct {
 
 	// Specifies the backup option for a selected resource. This option is only
 	// available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid
-	// values: Set to "WindowsVSS":"enabled"  to enable the WindowsVSS backup option
+	// values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option
 	// and create a Windows VSS backup. Set to "WindowsVSS""disabled" to create a
-	// regular backup. The WindowsVSS  option is not enabled by default.
+	// regular backup. The WindowsVSS option is not enabled by default.
 	BackupOptions map[string]string
 
-	// A value in minutes during which a successfully started backup must complete,
-	// or else Backup will cancel the job. This value is optional. This value begins
+	// A value in minutes during which a successfully started backup must complete, or
+	// else Backup will cancel the job. This value is optional. This value begins
 	// counting down from when the backup was scheduled. It does not add additional
 	// time for StartWindowMinutes , or if the backup started later than scheduled.
 	CompleteWindowMinutes *int64
 
 	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to StartBackupJob. Retrying a successful request with the same
+	// identical calls to StartBackupJob . Retrying a successful request with the same
 	// idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
-	// The lifecycle defines when a protected resource is transitioned to cold
-	// storage and when it expires. Backup will transition and expire backups
-	// automatically according to the lifecycle that you define. Backups transitioned
-	// to cold storage must be stored in cold storage for a minimum of 90 days.
-	// Therefore, the “retention” setting must be 90 days greater than the “transition
-	// to cold after days” setting. The “transition to cold after days” setting cannot
-	// be changed after a backup has been transitioned to cold. Resource types that are
-	// able to be transitioned to cold storage are listed in the "Lifecycle to cold
-	// storage" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
+	// The lifecycle defines when a protected resource is transitioned to cold storage
+	// and when it expires. Backup will transition and expire backups automatically
+	// according to the lifecycle that you define. Backups transitioned to cold storage
+	// must be stored in cold storage for a minimum of 90 days. Therefore, the
+	// “retention” setting must be 90 days greater than the “transition to cold after
+	// days” setting. The “transition to cold after days” setting cannot be changed
+	// after a backup has been transitioned to cold. Resource types that are able to be
+	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
+	// section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *types.Lifecycle
 
@@ -84,8 +84,8 @@ type StartBackupJobInput struct {
 	// resources that you create. Each tag is a key-value pair.
 	RecoveryPointTags map[string]string
 
-	// A value in minutes after a backup is scheduled before a job will be canceled
-	// if it doesn't start successfully. This value is optional, and the default is 8
+	// A value in minutes after a backup is scheduled before a job will be canceled if
+	// it doesn't start successfully. This value is optional, and the default is 8
 	// hours. If this value is included, it must be at least 60 minutes to avoid
 	// errors.
 	StartWindowMinutes *int64
@@ -104,8 +104,8 @@ type StartBackupJobOutput struct {
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
 
-	// This is a returned boolean value indicating this is a parent (composite)
-	// backup job.
+	// This is a returned boolean value indicating this is a parent (composite) backup
+	// job.
 	IsParent bool
 
 	// Note: This field is only returned for Amazon EFS and Advanced DynamoDB

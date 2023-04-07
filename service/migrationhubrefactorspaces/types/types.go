@@ -30,7 +30,7 @@ type ApiGatewayProxyConfig struct {
 	// The name of the API Gateway stage. The name defaults to prod .
 	StageName *string
 
-	// The VpcLink  ID of the API Gateway proxy.
+	// The VpcLink ID of the API Gateway proxy.
 	VpcLinkId *string
 
 	noSmithyDocumentSerde
@@ -39,12 +39,12 @@ type ApiGatewayProxyConfig struct {
 // A wrapper object holding the Amazon API Gateway endpoint input.
 type ApiGatewayProxyInput struct {
 
-	// The type of endpoint to use for the API Gateway proxy. If no value is
-	// specified in the request, the value is set to REGIONAL by default. If the
-	// value is set to PRIVATE in the request, this creates a private API endpoint
-	// that is isolated from the public internet. The private endpoint can only be
-	// accessed by using Amazon Virtual Private Cloud (Amazon VPC) endpoints for Amazon
-	// API Gateway that have been granted access.
+	// The type of endpoint to use for the API Gateway proxy. If no value is specified
+	// in the request, the value is set to REGIONAL by default. If the value is set to
+	// PRIVATE in the request, this creates a private API endpoint that is isolated
+	// from the public internet. The private endpoint can only be accessed by using
+	// Amazon Virtual Private Cloud (Amazon VPC) endpoints for Amazon API Gateway that
+	// have been granted access.
 	EndpointType ApiGatewayEndpointType
 
 	// The name of the API Gateway stage. The name defaults to prod .
@@ -76,13 +76,13 @@ type ApiGatewayProxySummary struct {
 	// The name of the API Gateway stage. The name defaults to prod .
 	StageName *string
 
-	// The VpcLink  ID of the API Gateway proxy.
+	// The VpcLink ID of the API Gateway proxy.
 	VpcLinkId *string
 
 	noSmithyDocumentSerde
 }
 
-// The list of ApplicationSummary  objects.
+// The list of ApplicationSummary objects.
 type ApplicationSummary struct {
 
 	// The endpoint URL of the Amazon API Gateway proxy.
@@ -134,7 +134,7 @@ type ApplicationSummary struct {
 // The configuration for the default route type.
 type DefaultRouteInput struct {
 
-	// If set to ACTIVE, traffic is forwarded to this route’s service after the route
+	// If set to ACTIVE , traffic is forwarded to this route’s service after the route
 	// is created.
 	ActivationState RouteActivationState
 
@@ -183,7 +183,7 @@ type EnvironmentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information for the EnvironmentVpc  resource as a response to
+// Provides summary information for the EnvironmentVpc resource as a response to
 // ListEnvironmentVpc .
 type EnvironmentVpc struct {
 
@@ -285,9 +285,9 @@ type RouteSummary struct {
 	// Any error associated with the route resource.
 	Error *ErrorResponse
 
-	// Indicates whether to match all subpaths of the given source path. If this
-	// value is false, requests must match the source path exactly before they are
-	// forwarded to this route's service.
+	// Indicates whether to match all subpaths of the given source path. If this value
+	// is false , requests must match the source path exactly before they are forwarded
+	// to this route's service.
 	IncludeChildPaths *bool
 
 	// A timestamp that indicates when the route was last updated.
@@ -386,7 +386,7 @@ type ServiceSummary struct {
 // The configuration for the URI path route type.
 type UriPathRouteInput struct {
 
-	// If set to ACTIVE, traffic is forwarded to this route’s service after the route
+	// If set to ACTIVE , traffic is forwarded to this route’s service after the route
 	// is created.
 	//
 	// This member is required.
@@ -398,9 +398,9 @@ type UriPathRouteInput struct {
 	// This member is required.
 	SourcePath *string
 
-	// Indicates whether to match all subpaths of the given source path. If this
-	// value is false, requests must match the source path exactly before they are
-	// forwarded to this route's service.
+	// Indicates whether to match all subpaths of the given source path. If this value
+	// is false , requests must match the source path exactly before they are forwarded
+	// to this route's service.
 	IncludeChildPaths *bool
 
 	// A list of HTTP methods to match. An empty list matches all values. If a method
@@ -428,16 +428,16 @@ type UrlEndpointInput struct {
 
 	// The URL to route traffic to. The URL must be an rfc3986-formatted URL (https://datatracker.ietf.org/doc/html/rfc3986)
 	// . If the host is a domain name, the name must be resolvable over the public
-	// internet. If the scheme is https, the top level domain of the host must be
+	// internet. If the scheme is https , the top level domain of the host must be
 	// listed in the IANA root zone database (https://www.iana.org/domains/root/db) .
 	//
 	// This member is required.
 	Url *string
 
-	// The health check URL of the URL endpoint type. If the URL is a public
-	// endpoint, the HealthUrl must also be a public endpoint. If the URL is a
-	// private endpoint inside a virtual private cloud (VPC), the health URL must also
-	// be a private endpoint, and the host must be the same as the URL.
+	// The health check URL of the URL endpoint type. If the URL is a public endpoint,
+	// the HealthUrl must also be a public endpoint. If the URL is a private endpoint
+	// inside a virtual private cloud (VPC), the health URL must also be a private
+	// endpoint, and the host must be the same as the URL.
 	HealthUrl *string
 
 	noSmithyDocumentSerde
@@ -446,15 +446,15 @@ type UrlEndpointInput struct {
 // The summary of the configuration for the URL endpoint type.
 type UrlEndpointSummary struct {
 
-	// The health check URL of the URL endpoint type. If the URL is a public
-	// endpoint, the HealthUrl must also be a public endpoint. If the URL is a
-	// private endpoint inside a virtual private cloud (VPC), the health URL must also
-	// be a private endpoint, and the host must be the same as the URL.
+	// The health check URL of the URL endpoint type. If the URL is a public endpoint,
+	// the HealthUrl must also be a public endpoint. If the URL is a private endpoint
+	// inside a virtual private cloud (VPC), the health URL must also be a private
+	// endpoint, and the host must be the same as the URL.
 	HealthUrl *string
 
 	// The URL to route traffic to. The URL must be an rfc3986-formatted URL (https://datatracker.ietf.org/doc/html/rfc3986)
 	// . If the host is a domain name, the name must be resolvable over the public
-	// internet. If the scheme is https, the top level domain of the host must be
+	// internet. If the scheme is https , the top level domain of the host must be
 	// listed in the IANA root zone database (https://www.iana.org/domains/root/db) .
 	Url *string
 

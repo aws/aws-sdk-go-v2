@@ -43,15 +43,16 @@ type GetTransitGatewayMulticastDomainAssociationsInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	//     - resource-id - The ID of the resource.
-	//     - resource-type - The type of resource. The valid value is: vpc .
-	//     - state - The state of the subnet association. Valid values are associated | associating | disassociated | disassociating .
-	//     - subnet-id - The ID of the subnet.
-	//     - transit-gateway-attachment-id - The id of the transit gateway attachment.
+	//   - resource-id - The ID of the resource.
+	//   - resource-type - The type of resource. The valid value is: vpc .
+	//   - state - The state of the subnet association. Valid values are associated |
+	//   associating | disassociated | disassociating .
+	//   - subnet-id - The ID of the subnet.
+	//   - transit-gateway-attachment-id - The id of the transit gateway attachment.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -150,11 +151,11 @@ var _ GetTransitGatewayMulticastDomainAssociationsAPIClient = (*Client)(nil)
 // options for GetTransitGatewayMulticastDomainAssociations
 type GetTransitGatewayMulticastDomainAssociationsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

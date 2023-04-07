@@ -44,8 +44,8 @@ type UpdateInferenceSchedulerInput struct {
 	// when uploading new data.
 	DataDelayOffsetInMinutes *int64
 
-	// Specifies information for the input data for the inference scheduler,
-	// including delimiter, format, and dataset location.
+	// Specifies information for the input data for the inference scheduler, including
+	// delimiter, format, and dataset location.
 	DataInputConfiguration *types.InferenceInputConfiguration
 
 	// Specifies information for the output results from the inference scheduler,

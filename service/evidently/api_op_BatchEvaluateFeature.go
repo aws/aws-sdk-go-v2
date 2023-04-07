@@ -50,8 +50,8 @@ type BatchEvaluateFeatureInput struct {
 	// This member is required.
 	Project *string
 
-	// An array of structures, where each structure assigns a feature variation to
-	// one user session.
+	// An array of structures, where each structure assigns a feature variation to one
+	// user session.
 	//
 	// This member is required.
 	Requests []types.EvaluationRequest

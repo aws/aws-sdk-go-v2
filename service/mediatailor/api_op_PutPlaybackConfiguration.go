@@ -43,14 +43,14 @@ type PutPlaybackConfigurationInput struct {
 	// VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string
 
-	// The configuration for avail suppression, also known as ad suppression. For
-	// more information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
+	// The configuration for avail suppression, also known as ad suppression. For more
+	// information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
 	// .
 	AvailSuppression *types.AvailSuppression
 
-	// The configuration for bumpers. Bumpers are short audio or video clips that
-	// play at the start or before the end of an ad break. To learn more about bumpers,
-	// see Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
+	// The configuration for bumpers. Bumpers are short audio or video clips that play
+	// at the start or before the end of an ad break. To learn more about bumpers, see
+	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
 	Bumper *types.Bumper
 
 	// The configuration for using a content delivery network (CDN), like Amazon
@@ -90,8 +90,8 @@ type PutPlaybackConfigurationInput struct {
 	// high-quality asset that contains both audio and video.
 	SlateAdUrl *string
 
-	// The tags to assign to the playback configuration. Tags are key-value pairs
-	// that you can associate with Amazon resources to help with organization, access
+	// The tags to assign to the playback configuration. Tags are key-value pairs that
+	// you can associate with Amazon resources to help with organization, access
 	// control, and cost tracking. For more information, see Tagging AWS Elemental
 	// MediaTailor Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html)
 	// .
@@ -119,14 +119,14 @@ type PutPlaybackConfigurationOutput struct {
 	// VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string
 
-	// The configuration for avail suppression, also known as ad suppression. For
-	// more information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
+	// The configuration for avail suppression, also known as ad suppression. For more
+	// information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
 	// .
 	AvailSuppression *types.AvailSuppression
 
-	// The configuration for bumpers. Bumpers are short audio or video clips that
-	// play at the start or before the end of an ad break. To learn more about bumpers,
-	// see Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
+	// The configuration for bumpers. Bumpers are short audio or video clips that play
+	// at the start or before the end of an ad break. To learn more about bumpers, see
+	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
 	Bumper *types.Bumper
 
 	// The configuration for using a content delivery network (CDN), like Amazon
@@ -185,8 +185,8 @@ type PutPlaybackConfigurationOutput struct {
 	// high-quality asset that contains both audio and video.
 	SlateAdUrl *string
 
-	// The tags to assign to the playback configuration. Tags are key-value pairs
-	// that you can associate with Amazon resources to help with organization, access
+	// The tags to assign to the playback configuration. Tags are key-value pairs that
+	// you can associate with Amazon resources to help with organization, access
 	// control, and cost tracking. For more information, see Tagging AWS Elemental
 	// MediaTailor Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html)
 	// .

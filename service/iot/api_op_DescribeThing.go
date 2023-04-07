@@ -69,10 +69,9 @@ type DescribeThingOutput struct {
 	// The thing type name.
 	ThingTypeName *string
 
-	// The current version of the thing record in the registry. To avoid
-	// unintentional changes to the information in the registry, you can pass the
-	// version information in the expectedVersion  parameter of the UpdateThing  and
-	// DeleteThing calls.
+	// The current version of the thing record in the registry. To avoid unintentional
+	// changes to the information in the registry, you can pass the version information
+	// in the expectedVersion parameter of the UpdateThing and DeleteThing calls.
 	Version int64
 
 	// Metadata pertaining to the operation's result.

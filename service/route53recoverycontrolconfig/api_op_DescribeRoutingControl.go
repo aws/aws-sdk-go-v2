@@ -186,9 +186,9 @@ func NewRoutingControlCreatedWaiter(client DescribeRoutingControlAPIClient, optF
 	}
 }
 
-// Wait calls the waiter function for RoutingControlCreated waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for RoutingControlCreated waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *RoutingControlCreatedWaiter) Wait(ctx context.Context, params *DescribeRoutingControlInput, maxWaitDur time.Duration, optFns ...func(*RoutingControlCreatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -372,9 +372,9 @@ func NewRoutingControlDeletedWaiter(client DescribeRoutingControlAPIClient, optF
 	}
 }
 
-// Wait calls the waiter function for RoutingControlDeleted waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for RoutingControlDeleted waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *RoutingControlDeletedWaiter) Wait(ctx context.Context, params *DescribeRoutingControlInput, maxWaitDur time.Duration, optFns ...func(*RoutingControlDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

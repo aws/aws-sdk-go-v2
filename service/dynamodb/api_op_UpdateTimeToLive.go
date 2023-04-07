@@ -14,10 +14,10 @@ import (
 )
 
 // The UpdateTimeToLive method enables or disables Time to Live (TTL) for the
-// specified table. A successful UpdateTimeToLive  call returns the current
-// TimeToLiveSpecification. It can take up to one hour for the change to fully
+// specified table. A successful UpdateTimeToLive call returns the current
+// TimeToLiveSpecification . It can take up to one hour for the change to fully
 // process. Any additional UpdateTimeToLive calls for the same table during this
-// one hour duration result in a ValidationException. TTL compares the current
+// one hour duration result in a ValidationException . TTL compares the current
 // time in epoch time format to the time stored in the TTL attribute of an item. If
 // the epoch time value stored in the attribute is less than the current time, the
 // item is marked as expired and subsequently deleted. The epoch time format is the
@@ -46,7 +46,7 @@ func (c *Client) UpdateTimeToLive(ctx context.Context, params *UpdateTimeToLiveI
 	return out, nil
 }
 
-// Represents the input of an UpdateTimeToLive  operation.
+// Represents the input of an UpdateTimeToLive operation.
 type UpdateTimeToLiveInput struct {
 
 	// The name of the table to be configured.
@@ -65,7 +65,7 @@ type UpdateTimeToLiveInput struct {
 
 type UpdateTimeToLiveOutput struct {
 
-	// Represents the output of an UpdateTimeToLive  operation.
+	// Represents the output of an UpdateTimeToLive operation.
 	TimeToLiveSpecification *types.TimeToLiveSpecification
 
 	// Metadata pertaining to the operation's result.

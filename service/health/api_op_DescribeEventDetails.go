@@ -46,8 +46,8 @@ type DescribeEventDetailsInput struct {
 	// This member is required.
 	EventArns []string
 
-	// The locale (language) to return information in. English (en) is the default
-	// and the only supported value at this time.
+	// The locale (language) to return information in. English (en) is the default and
+	// the only supported value at this time.
 	Locale *string
 
 	noSmithyDocumentSerde

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a cache subnet group. You cannot delete a default cache subnet group
-// or one that is associated with any clusters.
+// Deletes a cache subnet group. You cannot delete a default cache subnet group or
+// one that is associated with any clusters.
 func (c *Client) DeleteCacheSubnetGroup(ctx context.Context, params *DeleteCacheSubnetGroupInput, optFns ...func(*Options)) (*DeleteCacheSubnetGroupOutput, error) {
 	if params == nil {
 		params = &DeleteCacheSubnetGroupInput{}
@@ -27,11 +27,11 @@ func (c *Client) DeleteCacheSubnetGroup(ctx context.Context, params *DeleteCache
 	return out, nil
 }
 
-// Represents the input of a DeleteCacheSubnetGroup  operation.
+// Represents the input of a DeleteCacheSubnetGroup operation.
 type DeleteCacheSubnetGroupInput struct {
 
-	// The name of the cache subnet group to delete. Constraints: Must contain no
-	// more than 255 alphanumeric characters or hyphens.
+	// The name of the cache subnet group to delete. Constraints: Must contain no more
+	// than 255 alphanumeric characters or hyphens.
 	//
 	// This member is required.
 	CacheSubnetGroupName *string

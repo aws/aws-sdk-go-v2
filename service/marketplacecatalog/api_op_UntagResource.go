@@ -36,8 +36,8 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Required. A list of key names of tags to be removed. Number of strings
-	// allowed: 0-256.
+	// Required. A list of key names of tags to be removed. Number of strings allowed:
+	// 0-256.
 	//
 	// This member is required.
 	TagKeys []string

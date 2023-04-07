@@ -89,10 +89,9 @@ const (
 	AdditionalResponseFieldTypeWeburl AdditionalResponseFieldType = "WEBURL"
 )
 
-// Values returns all known values for AdditionalResponseFieldType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for AdditionalResponseFieldType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdditionalResponseFieldType) Values() []AdditionalResponseFieldType {
 	return []AdditionalResponseFieldType{
 		"WEBURL",
@@ -603,9 +602,9 @@ const (
 	RoleTypeCoowner     RoleType = "COOWNER"
 )
 
-// Values returns all known values for RoleType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RoleType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (RoleType) Values() []RoleType {
 	return []RoleType{
 		"VIEWER",
@@ -623,8 +622,8 @@ const (
 	SearchCollectionTypeSharedWithMe SearchCollectionType = "SHARED_WITH_ME"
 )
 
-// Values returns all known values for SearchCollectionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SearchCollectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SearchCollectionType) Values() []SearchCollectionType {
 	return []SearchCollectionType{
@@ -641,8 +640,8 @@ const (
 	SearchQueryScopeTypeContent SearchQueryScopeType = "CONTENT"
 )
 
-// Values returns all known values for SearchQueryScopeType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SearchQueryScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SearchQueryScopeType) Values() []SearchQueryScopeType {
 	return []SearchQueryScopeType{
@@ -717,9 +716,9 @@ const (
 	StorageTypeQuota     StorageType = "QUOTA"
 )
 
-// Values returns all known values for StorageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StorageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StorageType) Values() []StorageType {
 	return []StorageType{
 		"UNLIMITED",
@@ -834,9 +833,9 @@ const (
 	UserTypeWorkspacesuser UserType = "WORKSPACESUSER"
 )
 
-// Values returns all known values for UserType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (UserType) Values() []UserType {
 	return []UserType{
 		"USER",

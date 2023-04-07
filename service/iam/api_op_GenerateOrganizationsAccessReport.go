@@ -38,26 +38,62 @@ import (
 // CloudTrail logs as the authoritative source for information about all API calls
 // and whether they were successful or denied access. For more information, see
 // Logging IAM events with CloudTrail (https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html)
-// in the IAM User Guide. This operation returns a JobId. Use this parameter in
+// in the IAM User Guide. This operation returns a JobId . Use this parameter in
 // the GetOrganizationsAccessReport operation to check the status of the report
-// generation. To check the status of this request, use the JobId parameter in
-// the GetOrganizationsAccessReport  operation and test the JobStatus response
+// generation. To check the status of this request, use the JobId parameter in the
+// GetOrganizationsAccessReport operation and test the JobStatus response
 // parameter. When the job is complete, you can retrieve the report. To generate a
 // service last accessed data report for entities, specify an entity path without
 // specifying the optional Organizations policy ID. The type of entity that you
 // specify determines the data returned in the report.
-//   - Root – When you specify the organizations root as the entity, the resulting report lists all of the services allowed by SCPs that are attached to your root. For each service, the report includes data for all accounts in your organization except the management account, because the management account is not limited by SCPs.
-//   - OU – When you specify an organizational unit (OU) as the entity, the resulting report lists all of the services allowed by SCPs that are attached to the OU and its parents. For each service, the report includes data for all accounts in the OU or its children. This data excludes the management account, because the management account is not limited by SCPs.
-//   - management account – When you specify the management account, the resulting report lists all Amazon Web Services services, because the management account is not limited by SCPs. For each service, the report includes data for only the management account.
-//   - Account – When you specify another account as the entity, the resulting report lists all of the services allowed by SCPs that are attached to the account and its parents. For each service, the report includes data for only the specified account.
+//   - Root – When you specify the organizations root as the entity, the resulting
+//     report lists all of the services allowed by SCPs that are attached to your root.
+//     For each service, the report includes data for all accounts in your organization
+//     except the management account, because the management account is not limited by
+//     SCPs.
+//   - OU – When you specify an organizational unit (OU) as the entity, the
+//     resulting report lists all of the services allowed by SCPs that are attached to
+//     the OU and its parents. For each service, the report includes data for all
+//     accounts in the OU or its children. This data excludes the management account,
+//     because the management account is not limited by SCPs.
+//   - management account – When you specify the management account, the resulting
+//     report lists all Amazon Web Services services, because the management account is
+//     not limited by SCPs. For each service, the report includes data for only the
+//     management account.
+//   - Account – When you specify another account as the entity, the resulting
+//     report lists all of the services allowed by SCPs that are attached to the
+//     account and its parents. For each service, the report includes data for only the
+//     specified account.
 //
 // To generate a service last accessed data report for policies, specify an entity
 // path and the optional Organizations policy ID. The type of entity that you
 // specify determines the data returned for each service.
-//   - Root – When you specify the root entity and a policy ID, the resulting report lists all of the services that are allowed by the specified SCP. For each service, the report includes data for all accounts in your organization to which the SCP applies. This data excludes the management account, because the management account is not limited by SCPs. If the SCP is not attached to any entities in the organization, then the report will return a list of services with no data.
-//   - OU – When you specify an OU entity and a policy ID, the resulting report lists all of the services that are allowed by the specified SCP. For each service, the report includes data for all accounts in the OU or its children to which the SCP applies. This means that other accounts outside the OU that are affected by the SCP might not be included in the data. This data excludes the management account, because the management account is not limited by SCPs. If the SCP is not attached to the OU or one of its children, the report will return a list of services with no data.
-//   - management account – When you specify the management account, the resulting report lists all Amazon Web Services services, because the management account is not limited by SCPs. If you specify a policy ID in the CLI or API, the policy is ignored. For each service, the report includes data for only the management account.
-//   - Account – When you specify another account entity and a policy ID, the resulting report lists all of the services that are allowed by the specified SCP. For each service, the report includes data for only the specified account. This means that other accounts in the organization that are affected by the SCP might not be included in the data. If the SCP is not attached to the account, the report will return a list of services with no data.
+//   - Root – When you specify the root entity and a policy ID, the resulting
+//     report lists all of the services that are allowed by the specified SCP. For each
+//     service, the report includes data for all accounts in your organization to which
+//     the SCP applies. This data excludes the management account, because the
+//     management account is not limited by SCPs. If the SCP is not attached to any
+//     entities in the organization, then the report will return a list of services
+//     with no data.
+//   - OU – When you specify an OU entity and a policy ID, the resulting report
+//     lists all of the services that are allowed by the specified SCP. For each
+//     service, the report includes data for all accounts in the OU or its children to
+//     which the SCP applies. This means that other accounts outside the OU that are
+//     affected by the SCP might not be included in the data. This data excludes the
+//     management account, because the management account is not limited by SCPs. If
+//     the SCP is not attached to the OU or one of its children, the report will return
+//     a list of services with no data.
+//   - management account – When you specify the management account, the resulting
+//     report lists all Amazon Web Services services, because the management account is
+//     not limited by SCPs. If you specify a policy ID in the CLI or API, the policy is
+//     ignored. For each service, the report includes data for only the management
+//     account.
+//   - Account – When you specify another account entity and a policy ID, the
+//     resulting report lists all of the services that are allowed by the specified
+//     SCP. For each service, the report includes data for only the specified account.
+//     This means that other accounts in the organization that are affected by the SCP
+//     might not be included in the data. If the SCP is not attached to the account,
+//     the report will return a list of services with no data.
 //
 // Service last accessed data does not use other policy types when determining
 // whether a principal could access a service. These other policy types include
@@ -86,8 +122,8 @@ type GenerateOrganizationsAccessReportInput struct {
 
 	// The path of the Organizations entity (root, OU, or account). You can build an
 	// entity path using the known structure of your organization. For example, assume
-	// that your account ID is 123456789012  and its parent OU ID is ou-rge0-awsabcde
-	// . The organization root ID is r-f6g7h8i9j0example  and your organization ID is
+	// that your account ID is 123456789012 and its parent OU ID is ou-rge0-awsabcde .
+	// The organization root ID is r-f6g7h8i9j0example and your organization ID is
 	// o-a1b2c3d4e5 . Your entity path is
 	// o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-rge0-awsabcde/123456789012 .
 	//

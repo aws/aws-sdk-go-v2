@@ -27,7 +27,7 @@ func (c *Client) RemoveTagsFromOnPremisesInstances(ctx context.Context, params *
 	return out, nil
 }
 
-// Represents the input of a RemoveTagsFromOnPremisesInstances  operation.
+// Represents the input of a RemoveTagsFromOnPremisesInstances operation.
 type RemoveTagsFromOnPremisesInstancesInput struct {
 
 	// The names of the on-premises instances from which to remove tags.

@@ -26,8 +26,7 @@ func (c *Client) DeleteSuppressedDestination(ctx context.Context, params *Delete
 	return out, nil
 }
 
-// A request to remove an email address from the suppression list for your
-// account.
+// A request to remove an email address from the suppression list for your account.
 type DeleteSuppressedDestinationInput struct {
 
 	// The suppressed email destination to remove from the account suppression list.

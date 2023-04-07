@@ -51,8 +51,7 @@ type AuthorizeVpcEndpointAccessInput struct {
 // the VPC endpoint.
 type AuthorizeVpcEndpointAccessOutput struct {
 
-	// Information about the account or service that was provided access to the
-	// domain.
+	// Information about the account or service that was provided access to the domain.
 	//
 	// This member is required.
 	AuthorizedPrincipal *types.AuthorizedPrincipal

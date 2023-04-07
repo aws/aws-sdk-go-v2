@@ -16,7 +16,7 @@ import (
 // point. A volume recovery point is a point in time at which all data of the
 // volume is consistent and from which you can create a snapshot or clone a new
 // cached volume from a source volume. To create a snapshot from a volume recovery
-// point use the CreateSnapshotFromVolumeRecoveryPoint  operation.
+// point use the CreateSnapshotFromVolumeRecoveryPoint operation.
 func (c *Client) ListVolumeRecoveryPoints(ctx context.Context, params *ListVolumeRecoveryPointsInput, optFns ...func(*Options)) (*ListVolumeRecoveryPointsOutput, error) {
 	if params == nil {
 		params = &ListVolumeRecoveryPointsInput{}
@@ -49,7 +49,7 @@ type ListVolumeRecoveryPointsOutput struct {
 	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
-	// An array of VolumeRecoveryPointInfo  objects.
+	// An array of VolumeRecoveryPointInfo objects.
 	VolumeRecoveryPointInfos []types.VolumeRecoveryPointInfo
 
 	// Metadata pertaining to the operation's result.

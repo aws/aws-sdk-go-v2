@@ -38,7 +38,7 @@ type GetDocumentInput struct {
 	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
-	// Set this to TRUE  to include custom metadata in the response.
+	// Set this to TRUE to include custom metadata in the response.
 	IncludeCustomMetadata bool
 
 	noSmithyDocumentSerde

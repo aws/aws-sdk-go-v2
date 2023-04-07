@@ -14,9 +14,9 @@ import (
 // Service Catalog to receive updates on your organization in order to sync your
 // shares with the current structure. This API can only be called by the management
 // account in the organization. When you call this API, Service Catalog calls
-// organizations:EnableAWSServiceAccesson your behalf so that your shares stay in
+// organizations:EnableAWSServiceAccess on your behalf so that your shares stay in
 // sync with any changes in your Organizations structure. Note that a delegated
-// administrator is not authorized to invoke EnableAWSOrganizationsAccess. If you
+// administrator is not authorized to invoke EnableAWSOrganizationsAccess . If you
 // have previously disabled Organizations access for Service Catalog, and then
 // enable access again, the portfolio access permissions might not sync with the
 // latest changes to the organization structure. Specifically, accounts that you

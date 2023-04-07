@@ -16,8 +16,10 @@ import (
 // . For multi-location fleets, fleet actions are managed separately for each
 // location. Currently, this operation is used to restart a fleet's auto-scaling
 // activity. This operation can be used in the following ways:
-//   - To restart actions on instances in the fleet's home Region, provide a fleet ID and the type of actions to resume.
-//   - To restart actions on instances in one of the fleet's remote locations, provide a fleet ID, a location name, and the type of actions to resume.
+//   - To restart actions on instances in the fleet's home Region, provide a fleet
+//     ID and the type of actions to resume.
+//   - To restart actions on instances in one of the fleet's remote locations,
+//     provide a fleet ID, a location name, and the type of actions to resume.
 //
 // If successful, GameLift once again initiates scaling events as triggered by the
 // fleet's scaling policies. If actions on the fleet location were never stopped,
@@ -44,14 +46,14 @@ type StartFleetActionsInput struct {
 	// This member is required.
 	Actions []types.FleetAction
 
-	// A unique identifier for the fleet to restart actions on. You can use either
-	// the fleet ID or ARN value.
+	// A unique identifier for the fleet to restart actions on. You can use either the
+	// fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
 
-	// The fleet location to restart fleet actions for. Specify a location in the
-	// form of an Amazon Web Services Region code, such as us-west-2 .
+	// The fleet location to restart fleet actions for. Specify a location in the form
+	// of an Amazon Web Services Region code, such as us-west-2 .
 	Location *string
 
 	noSmithyDocumentSerde

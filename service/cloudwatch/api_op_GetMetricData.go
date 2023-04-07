@@ -24,19 +24,24 @@ import (
 // rate time series. For more information about metric math expressions, see
 // Metric Math Syntax and Functions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
 // in the Amazon CloudWatch User Guide. If you include a Metrics Insights query,
-// each GetMetricData  operation can include only one query. But the same
-// GetMetricDataoperation can also retrieve other metrics. Metrics Insights
+// each GetMetricData operation can include only one query. But the same
+// GetMetricData operation can also retrieve other metrics. Metrics Insights
 // queries can query only the most recent three hours of metric data. For more
 // information about Metrics Insights, see Query your metrics with CloudWatch
 // Metrics Insights (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html)
 // . Calls to the GetMetricData API have a different pricing structure than calls
 // to GetMetricStatistics . For more information about pricing, see Amazon
-// CloudWatch Pricing (https://aws.amazon.com/cloudwatch/pricing/). Amazon
+// CloudWatch Pricing (https://aws.amazon.com/cloudwatch/pricing/) . Amazon
 // CloudWatch retains metric data as follows:
-//   - Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a StorageResolution of 1.
-//   - Data points with a period of 60 seconds (1-minute) are available for 15 days.
-//   - Data points with a period of 300 seconds (5-minute) are available for 63 days.
-//   - Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).
+//   - Data points with a period of less than 60 seconds are available for 3
+//     hours. These data points are high-resolution metrics and are available only for
+//     custom metrics that have been defined with a StorageResolution of 1.
+//   - Data points with a period of 60 seconds (1-minute) are available for 15
+//     days.
+//   - Data points with a period of 300 seconds (5-minute) are available for 63
+//     days.
+//   - Data points with a period of 3600 seconds (1 hour) are available for 455
+//     days (15 months).
 //
 // Data points that are initially published with a shorter period are aggregated
 // together for long-term storage. For example, if you collect data using a period
@@ -76,11 +81,11 @@ type GetMetricDataInput struct {
 
 	// The time stamp indicating the latest data to be returned. The value specified
 	// is exclusive; results include data points up to the specified time stamp. For
-	// better performance, specify StartTime  and EndTime values that align with the
-	// value of the metric's Period and sync up with the beginning and end of an
-	// hour. For example, if the Period of a metric is 5 minutes, specifying 12:05 or
-	// 12:30 as EndTime can get a faster response from CloudWatch than setting 12:07
-	// or 12:29 as the EndTime .
+	// better performance, specify StartTime and EndTime values that align with the
+	// value of the metric's Period and sync up with the beginning and end of an hour.
+	// For example, if the Period of a metric is 5 minutes, specifying 12:05 or 12:30
+	// as EndTime can get a faster response from CloudWatch than setting 12:07 or
+	// 12:29 as the EndTime .
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -93,13 +98,15 @@ type GetMetricDataInput struct {
 	// This member is required.
 	MetricDataQueries []types.MetricDataQuery
 
-	// The time stamp indicating the earliest data to be returned. The value
-	// specified is inclusive; results include data points with the specified time
-	// stamp. CloudWatch rounds the specified time stamp as follows:
-	//     - Start time less than 15 days ago - Round down to the nearest whole minute. For example, 12:32:34 is rounded down to 12:32:00.
-	//     - Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval. For example, 12:32:34 is rounded down to 12:30:00.
-	//     - Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval. For example, 12:32:34 is rounded down to 12:00:00.
-	//
+	// The time stamp indicating the earliest data to be returned. The value specified
+	// is inclusive; results include data points with the specified time stamp.
+	// CloudWatch rounds the specified time stamp as follows:
+	//   - Start time less than 15 days ago - Round down to the nearest whole minute.
+	//   For example, 12:32:34 is rounded down to 12:32:00.
+	//   - Start time between 15 and 63 days ago - Round down to the nearest 5-minute
+	//   clock interval. For example, 12:32:34 is rounded down to 12:30:00.
+	//   - Start time greater than 63 days ago - Round down to the nearest 1-hour
+	//   clock interval. For example, 12:32:34 is rounded down to 12:00:00.
 	// If you set Period to 5, 10, or 30, the start time of your request is rounded
 	// down to the nearest time that corresponds to even 5-, 10-, or 30-second
 	// divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23
@@ -107,11 +114,10 @@ type GetMetricDataInput struct {
 	// down and you receive data from 01:05:10 to 01:05:20. If you make a query at
 	// 15:07:17 for the previous 5 minutes of data, using a period of 5 seconds, you
 	// receive data timestamped between 15:02:15 and 15:07:15. For better performance,
-	// specify StartTime  and EndTime values that align with the value of the
-	// metric's Period and sync up with the beginning and end of an hour. For
-	// example, if the Period  of a metric is 5 minutes, specifying 12:05 or 12:30 as
-	// StartTimecan get a faster response from CloudWatch than setting 12:07 or 12:29
-	// as the StartTime .
+	// specify StartTime and EndTime values that align with the value of the metric's
+	// Period and sync up with the beginning and end of an hour. For example, if the
+	// Period of a metric is 5 minutes, specifying 12:05 or 12:30 as StartTime can get
+	// a faster response from CloudWatch than setting 12:07 or 12:29 as the StartTime .
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -125,12 +131,12 @@ type GetMetricDataInput struct {
 	// If you omit this, the default of 100,800 is used.
 	MaxDatapoints *int32
 
-	// Include this value, if it was returned by the previous GetMetricData
-	// operation, to get the next set of data points.
+	// Include this value, if it was returned by the previous GetMetricData operation,
+	// to get the next set of data points.
 	NextToken *string
 
 	// The order in which data points should be returned. TimestampDescending returns
-	// the newest data first and paginates when the MaxDatapoints  limit is reached.
+	// the newest data first and paginates when the MaxDatapoints limit is reached.
 	// TimestampAscending returns the oldest data first and paginates when the
 	// MaxDatapoints limit is reached.
 	ScanBy types.ScanBy
@@ -140,11 +146,11 @@ type GetMetricDataInput struct {
 
 type GetMetricDataOutput struct {
 
-	// Contains a message about this GetMetricData operation, if the operation
-	// results in such a message. An example of a message that might be returned is
-	// Maximum number of allowed metrics exceeded. If there is a message, as much of
-	// the operation as possible is still executed. A message appears here only if it
-	// is related to the global GetMetricData operation. Any message about a specific
+	// Contains a message about this GetMetricData operation, if the operation results
+	// in such a message. An example of a message that might be returned is Maximum
+	// number of allowed metrics exceeded . If there is a message, as much of the
+	// operation as possible is still executed. A message appears here only if it is
+	// related to the global GetMetricData operation. Any message about a specific
 	// metric returned by the operation appears in the MetricDataResult object
 	// returned for that metric.
 	Messages []types.MessageData
@@ -238,8 +244,8 @@ type GetMetricDataPaginatorOptions struct {
 	// If you omit this, the default of 100,800 is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -34,8 +34,8 @@ type CreateHomeRegionControlInput struct {
 	// This member is required.
 	HomeRegion *string
 
-	// The account for which this command sets up a home region control. The Target
-	// is always of type ACCOUNT .
+	// The account for which this command sets up a home region control. The Target is
+	// always of type ACCOUNT .
 	//
 	// This member is required.
 	Target *types.Target

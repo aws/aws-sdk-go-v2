@@ -22,7 +22,8 @@ import (
 // occurs:
 //   - The sender revokes the share request.
 //   - The recipient declines the share request.
-//   - The recipient encounters an error and doesn't successfully accept the share request.
+//   - The recipient encounters an error and doesn't successfully accept the share
+//     request.
 //   - The share request expires before the recipient responds to the request.
 //
 // When a sender resends a share request (https://docs.aws.amazon.com/audit-manager/latest/userguide/framework-sharing.html#framework-sharing-resend)
@@ -78,7 +79,7 @@ type StartAssessmentFrameworkShareInput struct {
 
 type StartAssessmentFrameworkShareOutput struct {
 
-	// The share request that's created by the StartAssessmentFrameworkShare  API.
+	// The share request that's created by the StartAssessmentFrameworkShare API.
 	AssessmentFrameworkShareRequest *types.AssessmentFrameworkShareRequest
 
 	// Metadata pertaining to the operation's result.

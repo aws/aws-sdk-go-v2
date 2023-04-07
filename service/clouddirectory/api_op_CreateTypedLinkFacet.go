@@ -30,7 +30,7 @@ func (c *Client) CreateTypedLinkFacet(ctx context.Context, params *CreateTypedLi
 
 type CreateTypedLinkFacetInput struct {
 
-	// Facet  structure that is associated with the typed link facet.
+	// Facet structure that is associated with the typed link facet.
 	//
 	// This member is required.
 	Facet *types.TypedLinkFacet

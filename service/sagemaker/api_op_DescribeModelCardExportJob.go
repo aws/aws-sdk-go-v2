@@ -76,9 +76,11 @@ type DescribeModelCardExportJobOutput struct {
 	OutputConfig *types.ModelCardExportOutputConfig
 
 	// The completion status of the model card export job.
-	//     - InProgress : The model card export job is in progress.
-	//     - Completed : The model card export job is complete.
-	//     - Failed : The model card export job failed. To see the reason for the failure, see the FailureReason field in the response to a DescribeModelCardExportJob call.
+	//   - InProgress : The model card export job is in progress.
+	//   - Completed : The model card export job is complete.
+	//   - Failed : The model card export job failed. To see the reason for the
+	//   failure, see the FailureReason field in the response to a
+	//   DescribeModelCardExportJob call.
 	//
 	// This member is required.
 	Status types.ModelCardExportJobStatus

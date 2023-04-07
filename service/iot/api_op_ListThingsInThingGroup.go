@@ -141,8 +141,8 @@ type ListThingsInThingGroupPaginatorOptions struct {
 	// The maximum number of results to return at one time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -155,8 +155,7 @@ type ListThingsInThingGroupPaginator struct {
 	firstPage bool
 }
 
-// NewListThingsInThingGroupPaginator returns a new
-// ListThingsInThingGroupPaginator
+// NewListThingsInThingGroupPaginator returns a new ListThingsInThingGroupPaginator
 func NewListThingsInThingGroupPaginator(client ListThingsInThingGroupAPIClient, params *ListThingsInThingGroupInput, optFns ...func(*ListThingsInThingGroupPaginatorOptions)) *ListThingsInThingGroupPaginator {
 	if params == nil {
 		params = &ListThingsInThingGroupInput{}

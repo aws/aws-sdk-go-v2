@@ -13,8 +13,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of all scheduled queries in the caller's Amazon account and
-// Region. ListScheduledQueries  is eventually consistent.
+// Gets a list of all scheduled queries in the caller's Amazon account and Region.
+// ListScheduledQueries is eventually consistent.
 func (c *Client) ListScheduledQueries(ctx context.Context, params *ListScheduledQueriesInput, optFns ...func(*Options)) (*ListScheduledQueriesOutput, error) {
 	if params == nil {
 		params = &ListScheduledQueriesInput{}
@@ -190,8 +190,8 @@ type ListScheduledQueriesPaginatorOptions struct {
 	// to the subsequent call to ListScheduledQueriesRequest .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -15,8 +15,8 @@ import (
 // Amazon Kendra learns new suggestions based on new queries added to the query log
 // from the time you cleared suggestions. If you do not see any new suggestions,
 // then please allow Amazon Kendra to collect enough queries to learn new
-// suggestions. ClearQuerySuggestions is currently not supported in the Amazon
-// Web Services GovCloud (US-West) region.
+// suggestions. ClearQuerySuggestions is currently not supported in the Amazon Web
+// Services GovCloud (US-West) region.
 func (c *Client) ClearQuerySuggestions(ctx context.Context, params *ClearQuerySuggestionsInput, optFns ...func(*Options)) (*ClearQuerySuggestionsOutput, error) {
 	if params == nil {
 		params = &ClearQuerySuggestionsInput{}

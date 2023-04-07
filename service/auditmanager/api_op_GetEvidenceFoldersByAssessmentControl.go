@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of evidence folders that are associated with a specified
-// control in an Audit Manager assessment.
+// Returns a list of evidence folders that are associated with a specified control
+// in an Audit Manager assessment.
 func (c *Client) GetEvidenceFoldersByAssessmentControl(ctx context.Context, params *GetEvidenceFoldersByAssessmentControlInput, optFns ...func(*Options)) (*GetEvidenceFoldersByAssessmentControlOutput, error) {
 	if params == nil {
 		params = &GetEvidenceFoldersByAssessmentControlInput{}
@@ -57,8 +57,8 @@ type GetEvidenceFoldersByAssessmentControlInput struct {
 
 type GetEvidenceFoldersByAssessmentControlOutput struct {
 
-	// The list of evidence folders that the GetEvidenceFoldersByAssessmentControl
-	// API returned.
+	// The list of evidence folders that the GetEvidenceFoldersByAssessmentControl API
+	// returned.
 	EvidenceFolders []types.AssessmentEvidenceFolder
 
 	// The pagination token that's used to fetch the next set of results.
@@ -147,8 +147,8 @@ type GetEvidenceFoldersByAssessmentControlPaginatorOptions struct {
 	// Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

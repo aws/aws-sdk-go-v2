@@ -59,9 +59,9 @@ type DescribeNodeAssociationStatusOutput struct {
 	EngineAttributes []types.EngineAttribute
 
 	// The status of the association or disassociation request. Possible values:
-	//     - SUCCESS : The association or disassociation succeeded.
-	//     - FAILED : The association or disassociation failed.
-	//     - IN_PROGRESS : The association or disassociation is still in progress.
+	//   - SUCCESS : The association or disassociation succeeded.
+	//   - FAILED : The association or disassociation failed.
+	//   - IN_PROGRESS : The association or disassociation is still in progress.
 	NodeAssociationStatus types.NodeAssociationStatus
 
 	// Metadata pertaining to the operation's result.
@@ -196,9 +196,9 @@ func NewNodeAssociatedWaiter(client DescribeNodeAssociationStatusAPIClient, optF
 	}
 }
 
-// Wait calls the waiter function for NodeAssociated waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for NodeAssociated waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *NodeAssociatedWaiter) Wait(ctx context.Context, params *DescribeNodeAssociationStatusInput, maxWaitDur time.Duration, optFns ...func(*NodeAssociatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

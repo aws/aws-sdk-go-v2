@@ -46,8 +46,8 @@ type BatchDeleteImportDataInput struct {
 
 type BatchDeleteImportDataOutput struct {
 
-	// Error messages returned for each import task that you deleted as a response
-	// for this command.
+	// Error messages returned for each import task that you deleted as a response for
+	// this command.
 	Errors []types.BatchDeleteImportDataError
 
 	// Metadata pertaining to the operation's result.

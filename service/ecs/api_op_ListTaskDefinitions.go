@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of task definitions that are registered to your account. You
-// can filter the results by family name with the familyPrefix parameter or by
-// status with the status  parameter.
+// Returns a list of task definitions that are registered to your account. You can
+// filter the results by family name with the familyPrefix parameter or by status
+// with the status parameter.
 func (c *Client) ListTaskDefinitions(ctx context.Context, params *ListTaskDefinitionsInput, optFns ...func(*Options)) (*ListTaskDefinitionsOutput, error) {
 	if params == nil {
 		params = &ListTaskDefinitionsInput{}
@@ -32,31 +32,31 @@ func (c *Client) ListTaskDefinitions(ctx context.Context, params *ListTaskDefini
 
 type ListTaskDefinitionsInput struct {
 
-	// The full family name to filter the ListTaskDefinitions results with.
-	// Specifying a familyPrefix limits the listed task definitions to task
-	// definition revisions that belong to that family.
+	// The full family name to filter the ListTaskDefinitions results with. Specifying
+	// a familyPrefix limits the listed task definitions to task definition revisions
+	// that belong to that family.
 	FamilyPrefix *string
 
-	// The maximum number of task definition results that ListTaskDefinitions
-	// returned in paginated output. When this parameter is used, ListTaskDefinitions
-	// only returns maxResults  results in a single page along with a nextToken
-	// response element. The remaining results of the initial request can be seen by
-	// sending another ListTaskDefinitions  request with the returned nextToken
-	// value. This value can be between 1 and 100. If this parameter isn't used, then
+	// The maximum number of task definition results that ListTaskDefinitions returned
+	// in paginated output. When this parameter is used, ListTaskDefinitions only
+	// returns maxResults results in a single page along with a nextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another ListTaskDefinitions request with the returned nextToken value. This
+	// value can be between 1 and 100. If this parameter isn't used, then
 	// ListTaskDefinitions returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults *int32
 
-	// The nextToken  value returned from a ListTaskDefinitions request indicating
-	// that more results are available to fulfill the request and further calls will be
+	// The nextToken value returned from a ListTaskDefinitions request indicating that
+	// more results are available to fulfill the request and further calls will be
 	// needed. If maxResults was provided, it is possible the number of results to be
-	// fewer than maxResults. This token should be treated as an opaque identifier
+	// fewer than maxResults . This token should be treated as an opaque identifier
 	// that is only used to retrieve the next items in a list and not for other
 	// programmatic purposes.
 	NextToken *string
 
-	// The order to sort the results in. Valid values are ASC  and DESC . By default, (
-	// ASC) task definitions are listed lexicographically by family name and in
+	// The order to sort the results in. Valid values are ASC and DESC . By default, (
+	// ASC ) task definitions are listed lexicographically by family name and in
 	// ascending numerical order by revision so that the newest task definitions in a
 	// family are listed last. Setting this parameter to DESC reverses the sort order
 	// on family name and revision. This is so that the newest task definitions in a
@@ -64,10 +64,10 @@ type ListTaskDefinitionsInput struct {
 	Sort types.SortOrder
 
 	// The task definition status to filter the ListTaskDefinitions results with. By
-	// default, only ACTIVE  task definitions are listed. By setting this parameter to
-	// INACTIVE , you can view task definitions that are INACTIVE as long as an
-	// active task or service still references them. If you paginate the resulting
-	// output, be sure to keep the status  value constant in each subsequent request.
+	// default, only ACTIVE task definitions are listed. By setting this parameter to
+	// INACTIVE , you can view task definitions that are INACTIVE as long as an active
+	// task or service still references them. If you paginate the resulting output, be
+	// sure to keep the status value constant in each subsequent request.
 	Status types.TaskDefinitionStatus
 
 	noSmithyDocumentSerde
@@ -75,10 +75,10 @@ type ListTaskDefinitionsInput struct {
 
 type ListTaskDefinitionsOutput struct {
 
-	// The nextToken  value to include in a future ListTaskDefinitions request. When
-	// the results of a ListTaskDefinitions  request exceed maxResults, this value
-	// can be used to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// The nextToken value to include in a future ListTaskDefinitions request. When
+	// the results of a ListTaskDefinitions request exceed maxResults , this value can
+	// be used to retrieve the next page of results. This value is null when there are
+	// no more results to return.
 	NextToken *string
 
 	// The list of task definition Amazon Resource Name (ARN) entries for the
@@ -162,18 +162,18 @@ var _ ListTaskDefinitionsAPIClient = (*Client)(nil)
 // ListTaskDefinitionsPaginatorOptions is the paginator options for
 // ListTaskDefinitions
 type ListTaskDefinitionsPaginatorOptions struct {
-	// The maximum number of task definition results that ListTaskDefinitions
-	// returned in paginated output. When this parameter is used, ListTaskDefinitions
-	// only returns maxResults  results in a single page along with a nextToken
-	// response element. The remaining results of the initial request can be seen by
-	// sending another ListTaskDefinitions  request with the returned nextToken
-	// value. This value can be between 1 and 100. If this parameter isn't used, then
+	// The maximum number of task definition results that ListTaskDefinitions returned
+	// in paginated output. When this parameter is used, ListTaskDefinitions only
+	// returns maxResults results in a single page along with a nextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another ListTaskDefinitions request with the returned nextToken value. This
+	// value can be between 1 and 100. If this parameter isn't used, then
 	// ListTaskDefinitions returns up to 100 results and a nextToken value if
 	// applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

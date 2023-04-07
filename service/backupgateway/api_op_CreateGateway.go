@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a backup gateway. After you create a gateway, you can associate it
-// with a server using the AssociateGatewayToServer  operation.
+// Creates a backup gateway. After you create a gateway, you can associate it with
+// a server using the AssociateGatewayToServer operation.
 func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, optFns ...func(*Options)) (*CreateGatewayOutput, error) {
 	if params == nil {
 		params = &CreateGatewayInput{}

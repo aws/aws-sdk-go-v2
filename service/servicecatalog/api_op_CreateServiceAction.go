@@ -32,14 +32,13 @@ type CreateServiceActionInput struct {
 
 	// The self-service action definition. Can be one of the following: Name The name
 	// of the Amazon Web Services Systems Manager document (SSM document). For example,
-	//
-	// AWS-RestartEC2Instance. If you are using a shared SSM document, you must
+	// AWS-RestartEC2Instance . If you are using a shared SSM document, you must
 	// provide the ARN instead of the name. Version The Amazon Web Services Systems
-	// Manager automation document version. For example, "Version": "1" AssumeRole
-	// The Amazon Resource Name (ARN) of the role that performs the self-service
-	// actions on your behalf. For example, "AssumeRole":
-	// "arn:aws:iam::12345678910:role/ActionRole". To reuse the provisioned product
-	// launch role, set to "AssumeRole": "LAUNCH_ROLE". Parameters The list of
+	// Manager automation document version. For example, "Version": "1" AssumeRole The
+	// Amazon Resource Name (ARN) of the role that performs the self-service actions on
+	// your behalf. For example, "AssumeRole":
+	// "arn:aws:iam::12345678910:role/ActionRole" . To reuse the provisioned product
+	// launch role, set to "AssumeRole": "LAUNCH_ROLE" . Parameters The list of
 	// parameters in JSON format. For example:
 	// [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or
 	// [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}] .
@@ -65,9 +64,9 @@ type CreateServiceActionInput struct {
 	Name *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The self-service action description.

@@ -16,18 +16,20 @@ import (
 // is provided for that backup. Otherwise, it returns all backups owned by your
 // Amazon Web Services account in the Amazon Web Services Region of the endpoint
 // that you're calling. When retrieving all backups, you can optionally specify the
-//
-// MaxResultsparameter to limit the number of backups in a response. If more
+// MaxResults parameter to limit the number of backups in a response. If more
 // backups remain, Amazon FSx returns a NextToken value in the response. In this
 // case, send a later request with the NextToken request parameter set to the
 // value of the NextToken value from the last response. This operation is used in
 // an iterative process to retrieve a list of your backups. DescribeBackups is
 // called first without a NextToken value. Then the operation continues to be
-// called with the NextToken  parameter set to the value of the last NextToken
+// called with the NextToken parameter set to the value of the last NextToken
 // value until a response has no NextToken value. When using this operation, keep
 // the following in mind:
-//   - The operation might return fewer than the MaxResults value of backup descriptions while still including a NextToken value.
-//   - The order of the backups returned in the response of one DescribeBackups call and the order of the backups returned across the responses of a multi-call iteration is unspecified.
+//   - The operation might return fewer than the MaxResults value of backup
+//     descriptions while still including a NextToken value.
+//   - The order of the backups returned in the response of one DescribeBackups
+//     call and the order of the backups returned across the responses of a multi-call
+//     iteration is unspecified.
 func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInput, optFns ...func(*Options)) (*DescribeBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeBackupsInput{}
@@ -43,11 +45,11 @@ func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInp
 	return out, nil
 }
 
-// The request object for the DescribeBackups  operation.
+// The request object for the DescribeBackups operation.
 type DescribeBackupsInput struct {
 
 	// The IDs of the backups that you want to retrieve. This parameter value
-	// overrides any filters. If any IDs aren't found, a BackupNotFound  error occurs.
+	// overrides any filters. If any IDs aren't found, a BackupNotFound error occurs.
 	BackupIds []string
 
 	// The filters structure. The supported names are file-system-id , backup-type ,
@@ -68,7 +70,7 @@ type DescribeBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response object for the DescribeBackups  operation.
+// Response object for the DescribeBackups operation.
 type DescribeBackupsOutput struct {
 
 	// An array of backups.
@@ -161,8 +163,8 @@ type DescribeBackupsPaginatorOptions struct {
 	// maximum number of items per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

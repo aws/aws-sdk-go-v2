@@ -45,10 +45,10 @@ type SearchRoutingProfilesInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The search criteria to be used to return routing profiles. The name  and
-	// descriptionfields support "contains" queries with a minimum of 2 characters
-	// and a maximum of 25 characters. Any queries with character lengths outside of
-	// this range will throw invalid results.
+	// The search criteria to be used to return routing profiles. The name and
+	// description fields support "contains" queries with a minimum of 2 characters and
+	// a maximum of 25 characters. Any queries with character lengths outside of this
+	// range will throw invalid results.
 	SearchCriteria *types.RoutingProfileSearchCriteria
 
 	// Filters to be applied to search results.
@@ -151,8 +151,8 @@ type SearchRoutingProfilesPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

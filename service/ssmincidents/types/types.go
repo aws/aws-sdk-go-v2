@@ -121,7 +121,7 @@ func (*ChatChannelMemberEmpty) isChatChannel() {}
 
 // A conditional statement with which to compare a value, after a timestamp,
 // before a timestamp, or equal to a string or integer. If multiple conditions are
-// specified, the conditionals become an ANDed statement. If multiple values are
+// specified, the conditionals become an AND ed statement. If multiple values are
 // specified for a conditional, the values are OR d.
 //
 // The following types satisfy this interface:
@@ -164,8 +164,8 @@ func (*ConditionMemberEquals) isCondition() {}
 // from your replication set.
 type DeleteRegionAction struct {
 
-	// The name of the Amazon Web Services Region you're deleting from the
-	// replication set.
+	// The name of the Amazon Web Services Region you're deleting from the replication
+	// set.
 	//
 	// This member is required.
 	RegionName *string
@@ -197,9 +197,9 @@ type EmptyChatChannel struct {
 	noSmithyDocumentSerde
 }
 
-// An item referenced in a TimelineEvent that is involved in or somehow
-// associated with an incident. You can specify an Amazon Resource Name (ARN) for
-// an Amazon Web Services resource or a RelatedItem  ID.
+// An item referenced in a TimelineEvent that is involved in or somehow associated
+// with an incident. You can specify an Amazon Resource Name (ARN) for an Amazon
+// Web Services resource or a RelatedItem ID.
 //
 // The following types satisfy this interface:
 //
@@ -209,7 +209,7 @@ type EventReference interface {
 	isEventReference()
 }
 
-// The ID of a RelatedItem  referenced in a TimelineEvent .
+// The ID of a RelatedItem referenced in a TimelineEvent .
 type EventReferenceMemberRelatedItemId struct {
 	Value string
 
@@ -218,8 +218,8 @@ type EventReferenceMemberRelatedItemId struct {
 
 func (*EventReferenceMemberRelatedItemId) isEventReference() {}
 
-// The Amazon Resource Name (ARN) of an Amazon Web Services resource referenced
-// in a TimelineEvent .
+// The Amazon Resource Name (ARN) of an Amazon Web Services resource referenced in
+// a TimelineEvent .
 type EventReferenceMemberResource struct {
 	Value string
 
@@ -363,7 +363,7 @@ type IncidentRecordSource struct {
 	// This member is required.
 	Source *string
 
-	// The service principal that assumed the role specified in createdBy. If no
+	// The service principal that assumed the role specified in createdBy . If no
 	// service principal assumed the role this will be left blank.
 	InvokedBy *string
 
@@ -570,8 +570,7 @@ type PagerDutyConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the PagerDuty service where the response plan creates an
-// incident.
+// Details about the PagerDuty service where the response plan creates an incident.
 type PagerDutyIncidentConfiguration struct {
 
 	// The ID of the PagerDuty service that the response plan associates with an
@@ -648,7 +647,7 @@ type RelatedItem struct {
 	Identifier *ItemIdentifier
 
 	// A unique ID for a RelatedItem . Don't specify this parameter when you add a
-	// RelatedItem by using the UpdateRelatedItems  API action.
+	// RelatedItem by using the UpdateRelatedItems API action.
 	GeneratedId *string
 
 	// The title of the related item.
@@ -716,14 +715,14 @@ type ReplicationSet struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// The map between each Amazon Web Services Region in your replication set and
-	// the KMS key that's used to encrypt the data in that Region.
+	// The map between each Amazon Web Services Region in your replication set and the
+	// KMS key that's used to encrypt the data in that Region.
 	//
 	// This member is required.
 	RegionMap map[string]RegionInfo
 
-	// The status of the replication set. If the replication set is still pending,
-	// you can't use Incident Manager functionality.
+	// The status of the replication set. If the replication set is still pending, you
+	// can't use Incident Manager functionality.
 	//
 	// This member is required.
 	Status ReplicationSetStatus
@@ -851,8 +850,8 @@ type TimelineEvent struct {
 type TriggerDetails struct {
 
 	// Identifies the service that sourced the event. All events sourced from within
-	// Amazon Web Services begin with " aws." Customer-generated events can have any
-	// value here, as long as it doesn't begin with " aws." We recommend the use of
+	// Amazon Web Services begin with " aws. " Customer-generated events can have any
+	// value here, as long as it doesn't begin with " aws. " We recommend the use of
 	// Java package-name style reverse domain-name strings.
 	//
 	// This member is required.

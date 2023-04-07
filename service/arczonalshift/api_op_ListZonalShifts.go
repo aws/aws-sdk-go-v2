@@ -35,17 +35,16 @@ type ListZonalShiftsInput struct {
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it
-	// indicates that more output is available. Set this parameter to the value
-	// provided by the previous call's NextToken response to request the next page of
-	// results.
+	// received a NextToken response in the previous request. If you did, it indicates
+	// that more output is available. Set this parameter to the value provided by the
+	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
 	// A status for a zonal shift. The Status for a zonal shift can have one of the
 	// following values:
-	//     - ACTIVE: The zonal shift is started and active.
-	//     - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
-	//     - CANCELED: The zonal shift was canceled.
+	//   - ACTIVE: The zonal shift is started and active.
+	//   - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
+	//   - CANCELED: The zonal shift was canceled.
 	Status types.ZonalShiftStatus
 
 	noSmithyDocumentSerde
@@ -57,10 +56,9 @@ type ListZonalShiftsOutput struct {
 	Items []types.ZonalShiftSummary
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it
-	// indicates that more output is available. Set this parameter to the value
-	// provided by the previous call's NextToken response to request the next page of
-	// results.
+	// received a NextToken response in the previous request. If you did, it indicates
+	// that more output is available. Set this parameter to the value provided by the
+	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +140,8 @@ type ListZonalShiftsPaginatorOptions struct {
 	// The number of objects that you want to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

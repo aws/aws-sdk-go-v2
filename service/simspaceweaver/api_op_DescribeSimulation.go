@@ -70,9 +70,9 @@ type DescribeSimulationOutput struct {
 	// The name of the simulation.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
-	// role that the simulation assumes to perform actions. For more information about
-	// ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// that the simulation assumes to perform actions. For more information about ARNs,
+	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the Amazon Web Services General Reference. For more information about IAM
 	// roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 	// in the Identity and Access Management User Guide.

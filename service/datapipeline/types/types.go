@@ -7,7 +7,7 @@ import (
 )
 
 // A key-value pair that describes a property of a pipeline object. The value is
-// specified as either a string value ( StringValue) or a reference to another
+// specified as either a string value ( StringValue ) or a reference to another
 // object ( RefValue ) but not as both.
 type Field struct {
 
@@ -49,32 +49,32 @@ type InstanceIdentity struct {
 // specified value.
 type Operator struct {
 
-	// The logical operation to be performed: equal ( EQ ), equal reference ( REF_EQ
-	// ), less than or equal ( LE ), greater than or equal ( GE ), or between ( BETWEEN
-	// ). Equal reference ( REF_EQ) can be used only with reference fields. The other
+	// The logical operation to be performed: equal ( EQ ), equal reference ( REF_EQ ),
+	// less than or equal ( LE ), greater than or equal ( GE ), or between ( BETWEEN ).
+	// Equal reference ( REF_EQ ) can be used only with reference fields. The other
 	// comparison types can be used only with String fields. The comparison types you
 	// can use apply only to certain object fields, as detailed below. The comparison
 	// operators EQ and REF_EQ act on the following fields:
-	//     - name
-	//     - @sphere
-	//     - parent
-	//     - @componentParent
-	//     - @instanceParent
-	//     - @status
-	//     - @scheduledStartTime
-	//     - @scheduledEndTime
-	//     - @actualStartTime
-	//     - @actualEndTime
-	//  The comparison operators GE , LE , and BETWEEN  act on the following fields:
-	//     - @scheduledStartTime
-	//     - @scheduledEndTime
-	//     - @actualStartTime
-	//     - @actualEndTime
-	// Note that fields beginning with the at sign (@) are
-	// read-only and set by the web service. When you name fields, you should choose
-	// names containing only alpha-numeric values, as symbols may be reserved by AWS
-	// Data Pipeline. User-defined fields that you add to a pipeline should prefix
-	// their name with the string "my".
+	//   - name
+	//   - @sphere
+	//   - parent
+	//   - @componentParent
+	//   - @instanceParent
+	//   - @status
+	//   - @scheduledStartTime
+	//   - @scheduledEndTime
+	//   - @actualStartTime
+	//   - @actualEndTime
+	// The comparison operators GE , LE , and BETWEEN act on the following fields:
+	//   - @scheduledStartTime
+	//   - @scheduledEndTime
+	//   - @actualStartTime
+	//   - @actualEndTime
+	// Note that fields beginning with the at sign (@) are read-only and set by the
+	// web service. When you name fields, you should choose names containing only
+	// alpha-numeric values, as symbols may be reserved by AWS Data Pipeline.
+	// User-defined fields that you add to a pipeline should prefix their name with the
+	// string "my".
 	Type OperatorType
 
 	// The value that the actual field value will be compared with.
@@ -165,8 +165,8 @@ type PipelineDescription struct {
 // Contains the name and identifier of a pipeline.
 type PipelineIdName struct {
 
-	// The ID of the pipeline that was assigned by AWS Data Pipeline. This is a
-	// string of the form df-297EG78HU43EEXAMPLE .
+	// The ID of the pipeline that was assigned by AWS Data Pipeline. This is a string
+	// of the form df-297EG78HU43EEXAMPLE .
 	Id *string
 
 	// The name of the pipeline.
@@ -262,8 +262,8 @@ type TaskObject struct {
 	// The ID of the pipeline that provided the task.
 	PipelineId *string
 
-	// An internal identifier for the task. This ID is passed to the SetTaskStatus
-	// and ReportTaskProgress  actions.
+	// An internal identifier for the task. This ID is passed to the SetTaskStatus and
+	// ReportTaskProgress actions.
 	TaskId *string
 
 	noSmithyDocumentSerde

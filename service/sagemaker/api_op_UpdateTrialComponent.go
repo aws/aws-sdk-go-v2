@@ -36,14 +36,14 @@ type UpdateTrialComponentInput struct {
 	TrialComponentName *string
 
 	// The name of the component as displayed. The name doesn't need to be unique. If
-	// DisplayName isn't specified, TrialComponentName  is displayed.
+	// DisplayName isn't specified, TrialComponentName is displayed.
 	DisplayName *string
 
 	// When the component ended.
 	EndTime *time.Time
 
-	// Replaces all of the component's input artifacts with the specified artifacts
-	// or adds new input artifacts. Existing input artifacts are replaced if the trial
+	// Replaces all of the component's input artifacts with the specified artifacts or
+	// adds new input artifacts. Existing input artifacts are replaced if the trial
 	// component is updated with an identical input artifact key.
 	InputArtifacts map[string]types.TrialComponentArtifact
 

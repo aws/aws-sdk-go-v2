@@ -11,10 +11,9 @@ import (
 	"time"
 )
 
-// Restores an archived Amazon EBS snapshot for use temporarily or permanently,
-// or modifies the restore period or restore type for a snapshot that was
-// previously temporarily restored. For more information see Restore an archived
-// snapshot (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-snapshot-archiving.html#restore-archived-snapshot)
+// Restores an archived Amazon EBS snapshot for use temporarily or permanently, or
+// modifies the restore period or restore type for a snapshot that was previously
+// temporarily restored. For more information see Restore an archived snapshot (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-snapshot-archiving.html#restore-archived-snapshot)
 // and modify the restore period or restore type for a temporarily restored
 // snapshot (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-snapshot-archiving.html#modify-temp-restore-period)
 // in the Amazon Elastic Compute Cloud User Guide.
@@ -64,11 +63,11 @@ type RestoreSnapshotTierInput struct {
 type RestoreSnapshotTierOutput struct {
 
 	// Indicates whether the snapshot is permanently restored. true indicates a
-	// permanent restore. false  indicates a temporary restore.
+	// permanent restore. false indicates a temporary restore.
 	IsPermanentRestore *bool
 
-	// For temporary restores only. The number of days for which the archived
-	// snapshot is temporarily restored.
+	// For temporary restores only. The number of days for which the archived snapshot
+	// is temporarily restored.
 	RestoreDuration *int32
 
 	// The date and time when the snapshot restore process started.

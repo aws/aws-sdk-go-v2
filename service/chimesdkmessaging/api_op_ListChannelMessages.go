@@ -18,7 +18,7 @@ import (
 // messages appear in the results as empty, since they are only redacted, not
 // deleted. Deleted messages do not appear in the results. This action always
 // returns the latest version of an edited message. Also, the x-amz-chime-bearer
-// request header is mandatory. Use the ARN of the AppInstanceUser  or
+// request header is mandatory. Use the ARN of the AppInstanceUser or
 // AppInstanceBot that makes the API call as the value in the header.
 func (c *Client) ListChannelMessages(ctx context.Context, params *ListChannelMessagesInput, optFns ...func(*Options)) (*ListChannelMessagesOutput, error) {
 	if params == nil {
@@ -42,7 +42,7 @@ type ListChannelMessagesInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
@@ -169,8 +169,8 @@ type ListChannelMessagesPaginatorOptions struct {
 	// The maximum number of messages that you want returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

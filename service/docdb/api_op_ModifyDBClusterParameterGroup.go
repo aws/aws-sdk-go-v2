@@ -13,7 +13,7 @@ import (
 
 // Modifies the parameters of a cluster parameter group. To modify more than one
 // parameter, submit a list of the following: ParameterName , ParameterValue , and
-// ApplyMethod. A maximum of 20 parameters can be modified in a single request.
+// ApplyMethod . A maximum of 20 parameters can be modified in a single request.
 // Changes to dynamic parameters are applied immediately. Changes to static
 // parameters require a reboot or maintenance window before the change can take
 // effect. After you create a cluster parameter group, you should wait at least 5
@@ -22,7 +22,7 @@ import (
 // complete the create action before the parameter group is used as the default for
 // a new cluster. This step is especially important for parameters that are
 // critical when creating the default database for a cluster, such as the character
-// set for the default database defined by the character_set_database  parameter.
+// set for the default database defined by the character_set_database parameter.
 func (c *Client) ModifyDBClusterParameterGroup(ctx context.Context, params *ModifyDBClusterParameterGroupInput, optFns ...func(*Options)) (*ModifyDBClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &ModifyDBClusterParameterGroupInput{}
@@ -58,11 +58,10 @@ type ModifyDBClusterParameterGroupInput struct {
 type ModifyDBClusterParameterGroupOutput struct {
 
 	// The name of a cluster parameter group. Constraints:
-	//     - Must be from 1 to 255 letters or numbers.
-	//     - The first character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
-	// This value
-	// is stored as a lowercase string.
+	//   - Must be from 1 to 255 letters or numbers.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	// This value is stored as a lowercase string.
 	DBClusterParameterGroupName *string
 
 	// Metadata pertaining to the operation's result.

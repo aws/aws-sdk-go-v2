@@ -11,7 +11,7 @@ import (
 // Organizations entity last attempted to access an Amazon Web Services service. A
 // principal can be an IAM user, an IAM role, or the Amazon Web Services account
 // root user within the reported Organizations entity. This data type is a response
-// element in the GetOrganizationsAccessReport  operation.
+// element in the GetOrganizationsAccessReport operation.
 type AccessDetail struct {
 
 	// The name of the service in which access was attempted.
@@ -24,7 +24,7 @@ type AccessDetail struct {
 	// Amazon Web Services services (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 	// in the Service Authorization Reference. Choose the name of the service to view
 	// details for that service. In the first paragraph, find the service prefix. For
-	// example, (service prefix: a4b). For more information about service namespaces,
+	// example, (service prefix: a4b) . For more information about service namespaces,
 	// see Amazon Web Services service namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
@@ -53,17 +53,17 @@ type AccessDetail struct {
 	// .
 	Region *string
 
-	// The number of accounts with authenticated principals (root user, IAM users,
-	// and IAM roles) that attempted to access the service in the tracking period.
+	// The number of accounts with authenticated principals (root user, IAM users, and
+	// IAM roles) that attempted to access the service in the tracking period.
 	TotalAuthenticatedEntities *int32
 
 	noSmithyDocumentSerde
 }
 
-// Contains information about an Amazon Web Services access key. This data type
-// is used as a response element in the CreateAccessKey  and ListAccessKeys
-// operations. The SecretAccessKey  value is returned only in response to
-// CreateAccessKey. You can get a secret access key only when you first create an
+// Contains information about an Amazon Web Services access key. This data type is
+// used as a response element in the CreateAccessKey and ListAccessKeys
+// operations. The SecretAccessKey value is returned only in response to
+// CreateAccessKey . You can get a secret access key only when you first create an
 // access key; you cannot recover the secret access key later. If you lose a secret
 // access key, you must create a new access key.
 type AccessKey struct {
@@ -78,8 +78,8 @@ type AccessKey struct {
 	// This member is required.
 	SecretAccessKey *string
 
-	// The status of the access key. Active means that the key is valid for API
-	// calls, while Inactive  means it is not.
+	// The status of the access key. Active means that the key is valid for API calls,
+	// while Inactive means it is not.
 	//
 	// This member is required.
 	Status StatusType
@@ -97,37 +97,39 @@ type AccessKey struct {
 
 // Contains information about the last time an Amazon Web Services access key was
 // used since IAM began tracking this information on April 22, 2015. This data type
-// is used as a response element in the GetAccessKeyLastUsed  operation.
+// is used as a response element in the GetAccessKeyLastUsed operation.
 type AccessKeyLastUsed struct {
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601)
 	// , when the access key was most recently used. This field is null in the
 	// following situations:
-	//     - The user does not have an access key.
-	//     - An access key exists but has not been used since IAM began tracking this information.
-	//     - There is no sign-in data associated with the user.
+	//   - The user does not have an access key.
+	//   - An access key exists but has not been used since IAM began tracking this
+	//   information.
+	//   - There is no sign-in data associated with the user.
 	//
 	// This member is required.
 	LastUsedDate *time.Time
 
 	// The Amazon Web Services Region where this access key was most recently used.
 	// The value for this field is "N/A" in the following situations:
-	//     - The user does not have an access key.
-	//     - An access key exists but has not been used since IAM began tracking this information.
-	//     - There is no sign-in data associated with the user.
-	// For more information
-	// about Amazon Web Services Regions, see Regions and endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
-	// in the Amazon Web Services General Reference.
+	//   - The user does not have an access key.
+	//   - An access key exists but has not been used since IAM began tracking this
+	//   information.
+	//   - There is no sign-in data associated with the user.
+	// For more information about Amazon Web Services Regions, see Regions and
+	// endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html) in the
+	// Amazon Web Services General Reference.
 	//
 	// This member is required.
 	Region *string
 
-	// The name of the Amazon Web Services service with which this access key was
-	// most recently used. The value of this field is "N/A" in the following
-	// situations:
-	//     - The user does not have an access key.
-	//     - An access key exists but has not been used since IAM started tracking this information.
-	//     - There is no sign-in data associated with the user.
+	// The name of the Amazon Web Services service with which this access key was most
+	// recently used. The value of this field is "N/A" in the following situations:
+	//   - The user does not have an access key.
+	//   - An access key exists but has not been used since IAM started tracking this
+	//   information.
+	//   - There is no sign-in data associated with the user.
 	//
 	// This member is required.
 	ServiceName *string
@@ -146,8 +148,8 @@ type AccessKeyMetadata struct {
 	// The date when the access key was created.
 	CreateDate *time.Time
 
-	// The status of the access key. Active means that the key is valid for API
-	// calls; Inactive  means it is not.
+	// The status of the access key. Active means that the key is valid for API calls;
+	// Inactive means it is not.
 	Status StatusType
 
 	// The name of the IAM user that the key is associated with.
@@ -163,13 +165,12 @@ type AccessKeyMetadata struct {
 // in the IAM User Guide.
 type AttachedPermissionsBoundary struct {
 
-	// The ARN of the policy used to set the permissions boundary for the user or
-	// role.
+	// The ARN of the policy used to set the permissions boundary for the user or role.
 	PermissionsBoundaryArn *string
 
-	// The permissions boundary usage type that indicates what type of IAM resource
-	// is used as the permissions boundary for an entity. This data type can only have
-	// a value of Policy .
+	// The permissions boundary usage type that indicates what type of IAM resource is
+	// used as the permissions boundary for an entity. This data type can only have a
+	// value of Policy .
 	PermissionsBoundaryType PermissionsBoundaryAttachmentType
 
 	noSmithyDocumentSerde
@@ -179,7 +180,7 @@ type AttachedPermissionsBoundary struct {
 // policy that has been attached to a user, group, or role. This data type is used
 // as a response element in the ListAttachedGroupPolicies ,
 // ListAttachedRolePolicies , ListAttachedUserPolicies , and
-// GetAccountAuthorizationDetailsoperations. For more information about managed
+// GetAccountAuthorizationDetails operations. For more information about managed
 // policies, refer to Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 type AttachedPolicy struct {
@@ -196,31 +197,31 @@ type AttachedPolicy struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a condition context key. It includes the name of
-// the key and specifies the value (or values, if the context key supports multiple
+// Contains information about a condition context key. It includes the name of the
+// key and specifies the value (or values, if the context key supports multiple
 // values) to use in the simulation. This information is used when evaluating the
-// Conditionelements of the input policies. This data type is used as an input
-// parameter to SimulateCustomPolicy  and SimulatePrincipalPolicy .
+// Condition elements of the input policies. This data type is used as an input
+// parameter to SimulateCustomPolicy and SimulatePrincipalPolicy .
 type ContextEntry struct {
 
 	// The full name of a condition context key, including the service prefix. For
-	// example, aws:SourceIp  or s3:VersionId .
+	// example, aws:SourceIp or s3:VersionId .
 	ContextKeyName *string
 
 	// The data type of the value (or values) specified in the ContextKeyValues
 	// parameter.
 	ContextKeyType ContextKeyTypeEnum
 
-	// The value (or values, if the condition context key supports multiple values)
-	// to provide to the simulation when the key is referenced by a Condition element
-	// in an input policy.
+	// The value (or values, if the condition context key supports multiple values) to
+	// provide to the simulation when the key is referenced by a Condition element in
+	// an input policy.
 	ContextKeyValues []string
 
 	noSmithyDocumentSerde
 }
 
-// The reason that the service-linked role deletion failed. This data type is
-// used as a response element in the GetServiceLinkedRoleDeletionStatus  operation.
+// The reason that the service-linked role deletion failed. This data type is used
+// as a response element in the GetServiceLinkedRoleDeletionStatus operation.
 type DeletionTaskFailureReasonType struct {
 
 	// A short description of the reason that the service-linked role deletion failed.
@@ -243,7 +244,7 @@ type DeletionTaskFailureReasonType struct {
 // GetServiceLastAccessedDetailsWithEntities operation.
 type EntityDetails struct {
 
-	// The EntityInfo  object that contains details about the entity (user or role).
+	// The EntityInfo object that contains details about the entity (user or role).
 	//
 	// This member is required.
 	EntityInfo *EntityInfo
@@ -259,7 +260,7 @@ type EntityDetails struct {
 }
 
 // Contains details about the specified entity (user or role). This data type is
-// an element of the EntityDetails  object.
+// an element of the EntityDetails object.
 type EntityInfo struct {
 
 	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
@@ -293,8 +294,8 @@ type EntityInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the reason that the operation failed. This data
-// type is used as a response element in the GetOrganizationsAccessReport ,
+// Contains information about the reason that the operation failed. This data type
+// is used as a response element in the GetOrganizationsAccessReport ,
 // GetServiceLastAccessedDetails , and GetServiceLastAccessedDetailsWithEntities
 // operations.
 type ErrorDetails struct {
@@ -313,7 +314,7 @@ type ErrorDetails struct {
 }
 
 // Contains the results of a simulation. This data type is used by the return
-// parameter of SimulateCustomPolicy  and SimulatePrincipalPolicy .
+// parameter of SimulateCustomPolicy and SimulatePrincipalPolicy .
 type EvaluationResult struct {
 
 	// The name of the API operation tested on the indicated resource.
@@ -332,11 +333,11 @@ type EvaluationResult struct {
 	// decision. If the simulation evaluates policies within the same account and
 	// includes a resource ARN, then the parameter is present but the response is
 	// empty. If the simulation evaluates policies within the same account and
-	// specifies all resources ( *), then the parameter is not returned. When you
-	// make a cross-account request, Amazon Web Services evaluates the request in the
+	// specifies all resources ( * ), then the parameter is not returned. When you make
+	// a cross-account request, Amazon Web Services evaluates the request in the
 	// trusting account and the trusted account. The request is allowed only if both
-	// evaluations return true. For more information about how policies are
-	// evaluated, see Evaluating policies within a single account (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics)
+	// evaluations return true . For more information about how policies are evaluated,
+	// see Evaluating policies within a single account (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics)
 	// . If an Organizations SCP included in the evaluation denies access, the
 	// simulation ends. In this case, policy evaluation does not proceed any further
 	// and this parameter is not returned.
@@ -354,10 +355,10 @@ type EvaluationResult struct {
 
 	// A list of context keys that are required by the included input policies but
 	// that were not provided by one of the input parameters. This list is used when
-	// the resource in a simulation is "*", either explicitly, or when the
-	// ResourceArnsparameter blank. If you include a list of resources, then any
-	// missing context values are instead included under the ResourceSpecificResults
-	// section. To discover the context keys used by a set of policies, you can call
+	// the resource in a simulation is "*", either explicitly, or when the ResourceArns
+	// parameter blank. If you include a list of resources, then any missing context
+	// values are instead included under the ResourceSpecificResults section. To
+	// discover the context keys used by a set of policies, you can call
 	// GetContextKeysForCustomPolicy or GetContextKeysForPrincipalPolicy .
 	MissingContextValues []string
 
@@ -384,8 +385,8 @@ type EvaluationResult struct {
 //   - ListGroups
 type Group struct {
 
-	// The Amazon Resource Name (ARN) specifying the group. For more information
-	// about ARNs and how to use them in policies, see IAM identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
+	// The Amazon Resource Name (ARN) specifying the group. For more information about
+	// ARNs and how to use them in policies, see IAM identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
 	// in the IAM User Guide.
 	//
 	// This member is required.
@@ -418,8 +419,8 @@ type Group struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an IAM group, including all of the group's
-// policies. This data type is used as a response element in the
+// Contains information about an IAM group, including all of the group's policies.
+// This data type is used as a response element in the
 // GetAccountAuthorizationDetails operation.
 type GroupDetail struct {
 
@@ -508,11 +509,10 @@ type InstanceProfile struct {
 
 // Contains details about the permissions policies that are attached to the
 // specified identity (user, group, or role). This data type is used as a response
-// element in the ListPoliciesGrantingServiceAccess  operation.
+// element in the ListPoliciesGrantingServiceAccess operation.
 type ListPoliciesGrantingServiceAccessEntry struct {
 
-	// The PoliciesGrantingServiceAccess object that contains details about the
-	// policy.
+	// The PoliciesGrantingServiceAccess object that contains details about the policy.
 	Policies []PolicyGrantingServiceAccess
 
 	// The namespace of the service that was accessed. To learn the service namespace
@@ -520,7 +520,7 @@ type ListPoliciesGrantingServiceAccessEntry struct {
 	// Services services (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 	// in the Service Authorization Reference. Choose the name of the service to view
 	// details for that service. In the first paragraph, find the service prefix. For
-	// example, (service prefix: a4b). For more information about service namespaces,
+	// example, (service prefix: a4b) . For more information about service namespaces,
 	// see Amazon Web Services service namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	ServiceNamespace *string
@@ -529,7 +529,7 @@ type ListPoliciesGrantingServiceAccessEntry struct {
 }
 
 // Contains the user name and password create date for a user. This data type is
-// used as a response element in the CreateLoginProfile  and GetLoginProfile
+// used as a response element in the CreateLoginProfile and GetLoginProfile
 // operations.
 type LoginProfile struct {
 
@@ -553,7 +553,7 @@ type LoginProfile struct {
 // Contains information about a managed policy, including the policy's ARN,
 // versions, and the number of principal entities (users, groups, and roles) that
 // the policy is attached to. This data type is used as a response element in the
-// GetAccountAuthorizationDetailsoperation. For more information about managed
+// GetAccountAuthorizationDetails operation. For more information about managed
 // policies, see Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 type ManagedPolicyDetail struct {
@@ -573,8 +573,8 @@ type ManagedPolicyDetail struct {
 	CreateDate *time.Time
 
 	// The identifier for the version of the policy that is set as the default
-	// (operative) version. For more information about policy versions, see
-	// Versioning for managed policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
+	// (operative) version. For more information about policy versions, see Versioning
+	// for managed policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
 	DefaultVersionId *string
 
@@ -594,8 +594,8 @@ type ManagedPolicyDetail struct {
 	// in the IAM User Guide.
 	PermissionsBoundaryUsageCount *int32
 
-	// The stable and unique string identifying the policy. For more information
-	// about IDs, see IAM identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
+	// The stable and unique string identifying the policy. For more information about
+	// IDs, see IAM identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
 	// in the IAM User Guide.
 	PolicyId *string
 
@@ -616,7 +616,7 @@ type ManagedPolicyDetail struct {
 }
 
 // Contains information about an MFA device. This data type is used as a response
-// element in the ListMFADevices  operation.
+// element in the ListMFADevices operation.
 type MFADevice struct {
 
 	// The date when the MFA device was enabled for the user.
@@ -662,26 +662,26 @@ type OrganizationsDecisionDetail struct {
 }
 
 // Contains information about the account password policy. This data type is used
-// as a response element in the GetAccountPasswordPolicy  operation.
+// as a response element in the GetAccountPasswordPolicy operation.
 type PasswordPolicy struct {
 
-	// Specifies whether IAM users are allowed to change their own password. Gives
-	// IAM users permissions to iam:ChangePassword  for only their user and to the
-	// iam:GetAccountPasswordPolicyaction. This option does not attach a permissions
+	// Specifies whether IAM users are allowed to change their own password. Gives IAM
+	// users permissions to iam:ChangePassword for only their user and to the
+	// iam:GetAccountPasswordPolicy action. This option does not attach a permissions
 	// policy to each user, rather the permissions are applied at the account-level for
 	// all users by IAM.
 	AllowUsersToChangePassword bool
 
 	// Indicates whether passwords in the account expire. Returns true if
-	// MaxPasswordAgecontains a value greater than 0. Returns false if MaxPasswordAge
+	// MaxPasswordAge contains a value greater than 0. Returns false if MaxPasswordAge
 	// is 0 or not present.
 	ExpirePasswords bool
 
 	// Specifies whether IAM users are prevented from setting a new password via the
 	// Amazon Web Services Management Console after their password has expired. The IAM
 	// user cannot access the console until an administrator resets the password. IAM
-	// users with iam:ChangePassword permission and active access keys can reset
-	// their own expired console password using the CLI or API.
+	// users with iam:ChangePassword permission and active access keys can reset their
+	// own expired console password using the CLI or API.
 	HardExpiry *bool
 
 	// The number of days that an IAM user password is valid.
@@ -702,8 +702,8 @@ type PasswordPolicy struct {
 	// character (0 to 9).
 	RequireNumbers bool
 
-	// Specifies whether IAM user passwords must contain at least one of the
-	// following symbols: ! @ # $ % ^ & * ( ) _ + - = [ ] { } | '
+	// Specifies whether IAM user passwords must contain at least one of the following
+	// symbols: ! @ # $ % ^ & * ( ) _ + - = [ ] { } | '
 	RequireSymbols bool
 
 	// Specifies whether IAM user passwords must contain at least one uppercase
@@ -722,8 +722,7 @@ type PermissionsBoundaryDecisionDetail struct {
 	// permissions boundary does not deny the action. This means that the policy
 	// includes an Allow statement that matches the request. In this case, if an
 	// identity-based policy also allows the action, the request is allowed. A value of
-	//
-	// falsemeans that either the requested action is not allowed (implicitly denied)
+	// false means that either the requested action is not allowed (implicitly denied)
 	// or that the action is explicitly denied by the permissions boundary. In both of
 	// these cases, the action is not allowed, regardless of the identity-based policy.
 	AllowedByPermissionsBoundary bool
@@ -732,9 +731,9 @@ type PermissionsBoundaryDecisionDetail struct {
 }
 
 // Contains information about a managed policy. This data type is used as a
-// response element in the CreatePolicy , GetPolicy , and ListPolicies
-// operations. For more information about managed policies, refer to Managed
-// policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// response element in the CreatePolicy , GetPolicy , and ListPolicies operations.
+// For more information about managed policies, refer to Managed policies and
+// inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 type Policy struct {
 
@@ -752,12 +751,11 @@ type Policy struct {
 	// , when the policy was created.
 	CreateDate *time.Time
 
-	// The identifier for the version of the policy that is set as the default
-	// version.
+	// The identifier for the version of the policy that is set as the default version.
 	DefaultVersionId *string
 
 	// A friendly description of the policy. This element is included in the response
-	// to the GetPolicy  operation. It is not included in the response to the
+	// to the GetPolicy operation. It is not included in the response to the
 	// ListPolicies operation.
 	Description *string
 
@@ -770,13 +768,12 @@ type Policy struct {
 
 	// The number of entities (users and roles) for which the policy is used to set
 	// the permissions boundary. For more information about permissions boundaries, see
-	//
 	// Permissions boundaries for IAM identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide.
 	PermissionsBoundaryUsageCount *int32
 
-	// The stable and unique string identifying the policy. For more information
-	// about IDs, see IAM identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
+	// The stable and unique string identifying the policy. For more information about
+	// IDs, see IAM identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
 	// in the IAM User Guide.
 	PolicyId *string
 
@@ -835,8 +832,8 @@ type PolicyGrantingServiceAccess struct {
 	// in the IAM User Guide.
 	EntityName *string
 
-	// The type of entity (user or role) that used the policy to access the service
-	// to which the inline policy is attached. This field is null for managed policies.
+	// The type of entity (user or role) that used the policy to access the service to
+	// which the inline policy is attached. This field is null for managed policies.
 	// For more information about these policy types, see Managed policies and inline
 	// policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html)
 	// in the IAM User Guide.
@@ -852,9 +849,9 @@ type PolicyGrantingServiceAccess struct {
 }
 
 // Contains information about a group that a managed policy is attached to. This
-// data type is used as a response element in the ListEntitiesForPolicy
-// operation. For more information about managed policies, refer to Managed
-// policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// data type is used as a response element in the ListEntitiesForPolicy operation.
+// For more information about managed policies, refer to Managed policies and
+// inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 type PolicyGroup struct {
 
@@ -870,9 +867,9 @@ type PolicyGroup struct {
 }
 
 // Contains information about a role that a managed policy is attached to. This
-// data type is used as a response element in the ListEntitiesForPolicy
-// operation. For more information about managed policies, refer to Managed
-// policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// data type is used as a response element in the ListEntitiesForPolicy operation.
+// For more information about managed policies, refer to Managed policies and
+// inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 type PolicyRole struct {
 
@@ -888,9 +885,9 @@ type PolicyRole struct {
 }
 
 // Contains information about a user that a managed policy is attached to. This
-// data type is used as a response element in the ListEntitiesForPolicy
-// operation. For more information about managed policies, refer to Managed
-// policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// data type is used as a response element in the ListEntitiesForPolicy operation.
+// For more information about managed policies, refer to Managed policies and
+// inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 type PolicyUser struct {
 
@@ -919,11 +916,11 @@ type PolicyVersion struct {
 
 	// The policy document. The policy document is returned in the response to the
 	// GetPolicyVersion and GetAccountAuthorizationDetails operations. It is not
-	// returned in the response to the CreatePolicyVersion  or ListPolicyVersions
+	// returned in the response to the CreatePolicyVersion or ListPolicyVersions
 	// operations. The policy document returned in this structure is URL-encoded
-	// compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986). You can use a
+	// compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986) . You can use a
 	// URL decoding method to convert the policy back to plain JSON text. For example,
-	// if you use Java, you can use the decode  method of the java.net.URLDecoder
+	// if you use Java, you can use the decode method of the java.net.URLDecoder
 	// utility class in the Java SDK. Other languages and SDKs provide similar
 	// functionality.
 	Document *string
@@ -940,7 +937,7 @@ type PolicyVersion struct {
 }
 
 // Contains the row and column of a location of a Statement element in a policy
-// document. This data type is used as a member of the Statement  type.
+// document. This data type is used as a member of the Statement type.
 type Position struct {
 
 	// The column in the line containing the specified position in the document.
@@ -987,7 +984,7 @@ type ResourceSpecificResult struct {
 	// do not specify individual resources, by setting ResourceArns to "*" or by not
 	// including the ResourceArns parameter, then any missing context values are
 	// instead included under the EvaluationResults section. To discover the context
-	// keys used by a set of policies, you can call GetContextKeysForCustomPolicy  or
+	// keys used by a set of policies, you can call GetContextKeysForCustomPolicy or
 	// GetContextKeysForPrincipalPolicy .
 	MissingContextValues []string
 
@@ -1041,7 +1038,7 @@ type Role struct {
 
 	// The maximum session duration (in seconds) for the specified role. Anyone who
 	// uses the CLI, or API to assume the role can specify the duration using the
-	// optional DurationSeconds  API parameter or duration-seconds  CLI parameter.
+	// optional DurationSeconds API parameter or duration-seconds CLI parameter.
 	MaxSessionDuration *int32
 
 	// The ARN of the policy used to set the permissions boundary for the role. For
@@ -1138,7 +1135,7 @@ type RoleDetail struct {
 // might have been used more than 400 days ago. For more information, see Regions
 // where data is tracked (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period)
 // in the IAM user Guide. This data type is returned as a response element in the
-// GetRole and GetAccountAuthorizationDetails  operations.
+// GetRole and GetAccountAuthorizationDetails operations.
 type RoleLastUsed struct {
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601)
@@ -1156,7 +1153,7 @@ type RoleLastUsed struct {
 
 // An object that contains details about how a service-linked role is used, if
 // that information is returned by the service. This data type is used as a
-// response element in the GetServiceLinkedRoleDeletionStatus  operation.
+// response element in the GetServiceLinkedRoleDeletionStatus operation.
 type RoleUsageType struct {
 
 	// The name of the Region where the service-linked role is being used.
@@ -1184,7 +1181,7 @@ type SAMLProviderListEntry struct {
 }
 
 // Contains information about a server certificate. This data type is used as a
-// response element in the GetServerCertificate  operation.
+// response element in the GetServerCertificate operation.
 type ServerCertificate struct {
 
 	// The contents of the public key certificate.
@@ -1192,8 +1189,8 @@ type ServerCertificate struct {
 	// This member is required.
 	CertificateBody *string
 
-	// The meta information of the server certificate, such as its name, path, ID,
-	// and ARN.
+	// The meta information of the server certificate, such as its name, path, ID, and
+	// ARN.
 	//
 	// This member is required.
 	ServerCertificateMetadata *ServerCertificateMetadata
@@ -1211,7 +1208,7 @@ type ServerCertificate struct {
 
 // Contains information about a server certificate without its certificate body,
 // certificate chain, and private key. This data type is used as a response element
-// in the UploadServerCertificate  and ListServerCertificates  operations.
+// in the UploadServerCertificate and ListServerCertificates operations.
 type ServerCertificateMetadata struct {
 
 	// The Amazon Resource Name (ARN) specifying the server certificate. For more
@@ -1249,8 +1246,8 @@ type ServerCertificateMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about the most recent attempt to access the service. This
-// data type is used as a response element in the GetServiceLastAccessedDetails
+// Contains details about the most recent attempt to access the service. This data
+// type is used as a response element in the GetServiceLastAccessedDetails
 // operation.
 type ServiceLastAccessed struct {
 
@@ -1264,7 +1261,7 @@ type ServiceLastAccessed struct {
 	// Amazon Web Services services (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 	// in the Service Authorization Reference. Choose the name of the service to view
 	// details for that service. In the first paragraph, find the service prefix. For
-	// example, (service prefix: a4b). For more information about service namespaces,
+	// example, (service prefix: a4b) . For more information about service namespaces,
 	// see Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
@@ -1285,8 +1282,8 @@ type ServiceLastAccessed struct {
 	// .
 	LastAuthenticatedEntity *string
 
-	// The Region from which the authenticated entity (user or role) last attempted
-	// to access the service. Amazon Web Services does not report unauthenticated
+	// The Region from which the authenticated entity (user or role) last attempted to
+	// access the service. Amazon Web Services does not report unauthenticated
 	// requests. This field is null if no IAM entities attempted to access the service
 	// within the tracking period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period)
 	// .
@@ -1300,10 +1297,10 @@ type ServiceLastAccessed struct {
 
 	// An object that contains details about the most recent attempt to access a
 	// tracked action within the service. This field is null if there no tracked
-	// actions or if the principal did not use the tracked actions within the
-	// tracking period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period)
+	// actions or if the principal did not use the tracked actions within the tracking
+	// period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period)
 	// . This field is also null if the report was generated at the service level and
-	// not the action level. For more information, see the Granularity  field in
+	// not the action level. For more information, see the Granularity field in
 	// GenerateServiceLastAccessedDetails .
 	TrackedActionsLastAccessed []TrackedActionLastAccessed
 
@@ -1336,14 +1333,14 @@ type ServiceSpecificCredential struct {
 
 	// The generated user name for the service-specific credential. This value is
 	// generated by combining the IAM user's name combined with the ID number of the
-	// Amazon Web Services account, as in jane-at-123456789012, for example. This
+	// Amazon Web Services account, as in jane-at-123456789012 , for example. This
 	// value cannot be configured by the user.
 	//
 	// This member is required.
 	ServiceUserName *string
 
 	// The status of the service-specific credential. Active means that the key is
-	// valid for API calls, while Inactive  means it is not.
+	// valid for API calls, while Inactive means it is not.
 	//
 	// This member is required.
 	Status StatusType
@@ -1381,7 +1378,7 @@ type ServiceSpecificCredentialMetadata struct {
 	ServiceUserName *string
 
 	// The status of the service-specific credential. Active means that the key is
-	// valid for API calls, while Inactive  means it is not.
+	// valid for API calls, while Inactive means it is not.
 	//
 	// This member is required.
 	Status StatusType
@@ -1394,8 +1391,8 @@ type ServiceSpecificCredentialMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an X.509 signing certificate. This data type is
-// used as a response element in the UploadSigningCertificate  and
+// Contains information about an X.509 signing certificate. This data type is used
+// as a response element in the UploadSigningCertificate and
 // ListSigningCertificates operations.
 type SigningCertificate struct {
 
@@ -1410,7 +1407,7 @@ type SigningCertificate struct {
 	CertificateId *string
 
 	// The status of the signing certificate. Active means that the key is valid for
-	// API calls, while Inactive  means it is not.
+	// API calls, while Inactive means it is not.
 	//
 	// This member is required.
 	Status StatusType
@@ -1427,7 +1424,7 @@ type SigningCertificate struct {
 }
 
 // Contains information about an SSH public key. This data type is used as a
-// response element in the GetSSHPublicKey  and UploadSSHPublicKey  operations.
+// response element in the GetSSHPublicKey and UploadSSHPublicKey operations.
 type SSHPublicKey struct {
 
 	// The MD5 message digest of the SSH public key.
@@ -1497,10 +1494,10 @@ type SSHPublicKeyMetadata struct {
 
 // Contains a reference to a Statement element in a policy document that
 // determines the result of the simulation. This data type is used by the
-// MatchedStatements member of the EvaluationResult  type.
+// MatchedStatements member of the EvaluationResult type.
 type Statement struct {
 
-	// The row and column of the end of a Statement  in an IAM policy.
+	// The row and column of the end of a Statement in an IAM policy.
 	EndPosition *Position
 
 	// The identifier of the policy that was provided as an input.
@@ -1509,7 +1506,7 @@ type Statement struct {
 	// The type of the policy.
 	SourcePolicyType PolicySourceType
 
-	// The row and column of the beginning of the Statement  in an IAM policy.
+	// The row and column of the beginning of the Statement in an IAM policy.
 	StartPosition *Position
 
 	noSmithyDocumentSerde
@@ -1521,7 +1518,7 @@ type Statement struct {
 type Tag struct {
 
 	// The key name that can be used to look up or retrieve the associated value. For
-	// example, Department  or Cost Center  are common choices.
+	// example, Department or Cost Center are common choices.
 	//
 	// This member is required.
 	Key *string
@@ -1556,10 +1553,10 @@ type TrackedActionLastAccessed struct {
 	// in the Amazon Web Services General Reference.
 	LastAccessedEntity *string
 
-	// The Region from which the authenticated entity (user or role) last attempted
-	// to access the tracked action. Amazon Web Services does not report
-	// unauthenticated requests. This field is null if no IAM entities attempted to
-	// access the service within the tracking period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period)
+	// The Region from which the authenticated entity (user or role) last attempted to
+	// access the tracked action. Amazon Web Services does not report unauthenticated
+	// requests. This field is null if no IAM entities attempted to access the service
+	// within the tracking period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period)
 	// .
 	LastAccessedRegion *string
 
@@ -1621,13 +1618,13 @@ type User struct {
 	// five-minute span, only the first use is returned in this field. If the field is
 	// null (no value), then it indicates that they never signed in with a password.
 	// This can be because:
-	//     - The user never had a password.
-	//     - A password exists but has not been used since IAM started tracking this information on October 20, 2014.
-	//
-	// A null value does not mean that the user never had a password. Also, if the user
-	// does not currently have a password but had one in the past, then this field
+	//   - The user never had a password.
+	//   - A password exists but has not been used since IAM started tracking this
+	//   information on October 20, 2014.
+	// A null value does not mean that the user never had a password. Also, if the
+	// user does not currently have a password but had one in the past, then this field
 	// contains the date and time the most recent password was used. This value is
-	// returned only in the GetUser  and ListUsers  operations.
+	// returned only in the GetUser and ListUsers operations.
 	PasswordLastUsed *time.Time
 
 	// For more information about permissions boundaries, see Permissions boundaries
@@ -1645,7 +1642,7 @@ type User struct {
 
 // Contains information about an IAM user, including all the user's policies and
 // all the IAM groups the user is in. This data type is used as a response element
-// in the GetAccountAuthorizationDetails  operation.
+// in the GetAccountAuthorizationDetails operation.
 type UserDetail struct {
 
 	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
@@ -1702,7 +1699,7 @@ type VirtualMFADevice struct {
 	SerialNumber *string
 
 	// The base32 seed defined as specified in RFC3548 (https://tools.ietf.org/html/rfc3548.txt)
-	// . The Base32StringSeed  is base64-encoded.
+	// . The Base32StringSeed is base64-encoded.
 	Base32StringSeed []byte
 
 	// The date and time on which the virtual MFA device was enabled.
@@ -1711,8 +1708,8 @@ type VirtualMFADevice struct {
 	// A QR code PNG image that encodes
 	// otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String where
 	// $virtualMFADeviceName is one of the create call arguments. AccountName is the
-	// user name if set (otherwise, the account ID otherwise), and Base32String is
-	// the seed in base32 format. The Base32String  value is base64-encoded.
+	// user name if set (otherwise, the account ID otherwise), and Base32String is the
+	// seed in base32 format. The Base32String value is base64-encoded.
 	QRCodePNG []byte
 
 	// A list of tags that are attached to the virtual MFA device. For more

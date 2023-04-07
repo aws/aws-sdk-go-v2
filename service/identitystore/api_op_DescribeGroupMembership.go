@@ -35,7 +35,7 @@ type DescribeGroupMembershipInput struct {
 	// This member is required.
 	IdentityStoreId *string
 
-	// The identifier for a GroupMembership  in an identity store.
+	// The identifier for a GroupMembership in an identity store.
 	//
 	// This member is required.
 	MembershipId *string
@@ -60,7 +60,7 @@ type DescribeGroupMembershipOutput struct {
 	// This member is required.
 	MemberId types.MemberId
 
-	// The identifier for a GroupMembership  in an identity store.
+	// The identifier for a GroupMembership in an identity store.
 	//
 	// This member is required.
 	MembershipId *string

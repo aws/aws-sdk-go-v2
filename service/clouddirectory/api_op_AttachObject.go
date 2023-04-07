@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches an existing object to another object. An object can be accessed in
-// two ways:
+// Attaches an existing object to another object. An object can be accessed in two
+// ways:
 //   - Using the path
 //   - Using ObjectIdentifier
 func (c *Client) AttachObject(ctx context.Context, params *AttachObjectInput, optFns ...func(*Options)) (*AttachObjectOutput, error) {

@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Indicates that a problem occurred with the input to the request. For example,
-// a required parameter might be missing or out of range.
+// Indicates that a problem occurred with the input to the request. For example, a
+// required parameter might be missing or out of range.
 type InvalidRequestException struct {
 	Message *string
 
@@ -87,8 +87,8 @@ func (e *TooManyRequestsException) ErrorCode() string {
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the request is not authorized. This can happen due to an
-// invalid access token in the request.
+// Indicates that the request is not authorized. This can happen due to an invalid
+// access token in the request.
 type UnauthorizedException struct {
 	Message *string
 

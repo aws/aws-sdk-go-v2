@@ -34,15 +34,19 @@ func (c *Client) GetTemplateSummary(ctx context.Context, params *GetTemplateSumm
 	return out, nil
 }
 
-// The input for the GetTemplateSummary  action.
+// The input for the GetTemplateSummary action.
 type GetTemplateSummaryInput struct {
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
 	// administrator in the organization's management account or as a delegated
-	// administrator in a member account. By default, SELF  is specified. Use SELF
-	// for stack sets with self-managed permissions.
-	//     - If you are signed in to the management account, specify SELF .
-	//     - If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html) in the CloudFormation User Guide.
+	// administrator in a member account. By default, SELF is specified. Use SELF for
+	// stack sets with self-managed permissions.
+	//   - If you are signed in to the management account, specify SELF .
+	//   - If you are signed in to a delegated administrator account, specify
+	//   DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a
+	//   delegated administrator in the management account. For more information, see
+	//   Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
+	//   in the CloudFormation User Guide.
 	CallAs types.CallAs
 
 	// The name or the stack ID that's associated with the stack, which aren't always
@@ -64,10 +68,9 @@ type GetTemplateSummaryInput struct {
 	// following parameters: StackName , StackSetName , TemplateBody , or TemplateURL .
 	TemplateBody *string
 
-	// Location of file containing the template body. The URL must point to a
-	// template (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a
-	// Systems Manager document. For more information about templates, see Template
-	// anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
+	// Location of file containing the template body. The URL must point to a template
+	// (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems
+	// Manager document. For more information about templates, see Template anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the CloudFormation User Guide. Conditional: You must specify only one of the
 	// following parameters: StackName , StackSetName , TemplateBody , or TemplateURL .
 	TemplateURL *string
@@ -75,12 +78,12 @@ type GetTemplateSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output for the GetTemplateSummary  action.
+// The output for the GetTemplateSummary action.
 type GetTemplateSummaryOutput struct {
 
 	// The capabilities found within the template. If your template contains IAM
-	// resources, you must specify the CAPABILITY_IAM  or CAPABILITY_NAMED_IAM value
-	// for this parameter when you use the CreateStack  or UpdateStack actions with
+	// resources, you must specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value
+	// for this parameter when you use the CreateStack or UpdateStack actions with
 	// your template; otherwise, those actions return an InsufficientCapabilities
 	// error. For more information, see Acknowledging IAM Resources in CloudFormation
 	// Templates (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
@@ -94,10 +97,10 @@ type GetTemplateSummaryOutput struct {
 	// A list of the transforms that are declared in the template.
 	DeclaredTransforms []string
 
-	// The value that's defined in the Description  property of the template.
+	// The value that's defined in the Description property of the template.
 	Description *string
 
-	// The value that's defined for the Metadata  property of the template.
+	// The value that's defined for the Metadata property of the template.
 	Metadata *string
 
 	// A list of parameter declarations that describe various properties for each
@@ -106,8 +109,8 @@ type GetTemplateSummaryOutput struct {
 
 	// A list of resource identifier summaries that describe the target resources of
 	// an import operation and the properties you can provide during the import to
-	// identify the target resources. For example, BucketName is a possible
-	// identifier property for an AWS::S3::Bucket  resource.
+	// identify the target resources. For example, BucketName is a possible identifier
+	// property for an AWS::S3::Bucket resource.
 	ResourceIdentifierSummaries []types.ResourceIdentifierSummary
 
 	// A list of all the template resource types that are defined in the template,

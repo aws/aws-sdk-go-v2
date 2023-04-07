@@ -30,7 +30,7 @@ func (c *Client) ListInfrastructureConfigurations(ctx context.Context, params *L
 
 type ListInfrastructureConfigurationsInput struct {
 
-	// You can filter on name  to streamline results.
+	// You can filter on name to streamline results.
 	Filters []types.Filter
 
 	// The maximum items to return in a request.
@@ -136,8 +136,8 @@ type ListInfrastructureConfigurationsPaginatorOptions struct {
 	// The maximum items to return in a request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

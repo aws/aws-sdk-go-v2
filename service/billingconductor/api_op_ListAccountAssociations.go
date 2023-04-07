@@ -37,8 +37,8 @@ type ListAccountAssociationsInput struct {
 	BillingPeriod *string
 
 	// The filter on the account ID of the linked account, or any of the following:
-	// MONITORED : linked accounts that are associated to billing groups. UNMONITORED
-	// : linked accounts that aren't associated to billing groups. Billing Group Arn:
+	// MONITORED : linked accounts that are associated to billing groups. UNMONITORED :
+	// linked accounts that aren't associated to billing groups. Billing Group Arn :
 	// linked accounts that are associated to the provided billing group Arn.
 	Filters *types.ListAccountAssociationsFilter
 
@@ -133,8 +133,8 @@ var _ ListAccountAssociationsAPIClient = (*Client)(nil)
 // ListAccountAssociationsPaginatorOptions is the paginator options for
 // ListAccountAssociations
 type ListAccountAssociationsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

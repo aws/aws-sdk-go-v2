@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Resume an active App Runner service. App Runner provisions compute capacity
-// for the service. This is an asynchronous operation. On a successful call, you
-// can use the returned OperationId  and the ListOperations call to track the
+// Resume an active App Runner service. App Runner provisions compute capacity for
+// the service. This is an asynchronous operation. On a successful call, you can
+// use the returned OperationId and the ListOperations call to track the
 // operation's progress.
 func (c *Client) ResumeService(ctx context.Context, params *ResumeServiceInput, optFns ...func(*Options)) (*ResumeServiceOutput, error) {
 	if params == nil {
@@ -49,7 +49,7 @@ type ResumeServiceOutput struct {
 	Service *types.Service
 
 	// The unique ID of the asynchronous operation that this request started. You can
-	// use it combined with the ListOperations  call to track the operation's progress.
+	// use it combined with the ListOperations call to track the operation's progress.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

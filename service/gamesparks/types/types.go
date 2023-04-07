@@ -200,8 +200,8 @@ type Section struct {
 // A single modification to the configuration section.
 type SectionModification struct {
 
-	// The operation to be performed on a configuration section. Content can be
-	// added, deleted, or replaced within a section.
+	// The operation to be performed on a configuration section. Content can be added,
+	// deleted, or replaced within a section.
 	//
 	// This member is required.
 	Operation Operation
@@ -216,8 +216,8 @@ type SectionModification struct {
 	// This member is required.
 	Section *string
 
-	// For add and replace operations, this is the value that will be used. This
-	// field should be omitted for delete operations.
+	// For add and replace operations, this is the value that will be used. This field
+	// should be omitted for delete operations.
 	Value document.Interface
 
 	noSmithyDocumentSerde

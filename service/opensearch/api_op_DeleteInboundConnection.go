@@ -30,7 +30,7 @@ func (c *Client) DeleteInboundConnection(ctx context.Context, params *DeleteInbo
 	return out, nil
 }
 
-// Container for the parameters to the DeleteInboundConnection  operation.
+// Container for the parameters to the DeleteInboundConnection operation.
 type DeleteInboundConnectionInput struct {
 
 	// The ID of the inbound connection to permanently delete.

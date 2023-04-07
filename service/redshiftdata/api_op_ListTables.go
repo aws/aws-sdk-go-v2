@@ -12,12 +12,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the tables in a database. If neither SchemaPattern  nor TablePattern are
+// List the tables in a database. If neither SchemaPattern nor TablePattern are
 // specified, then all tables in the database are returned. A token is returned to
 // page through the table list. Depending on the authorization method, use one of
 // the following combinations of request parameters:
-//   - Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name.
-//   - Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the redshift-serverless:GetCredentials operation is required.
+//   - Secrets Manager - when connecting to a cluster, specify the Amazon Resource
+//     Name (ARN) of the secret, the database name, and the cluster identifier that
+//     matches the cluster in the secret. When connecting to a serverless workgroup,
+//     specify the Amazon Resource Name (ARN) of the secret and the database name.
+//   - Temporary credentials - when connecting to a cluster, specify the cluster
+//     identifier, the database name, and the database user name. Also, permission to
+//     call the redshift:GetClusterCredentials operation is required. When connecting
+//     to a serverless workgroup, specify the workgroup name and database name. Also,
+//     permission to call the redshift-serverless:GetCredentials operation is
+//     required.
 //
 // For more information about the Amazon Redshift Data API and CLI usage examples,
 // see Using the Amazon Redshift Data API (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html)
@@ -46,17 +54,16 @@ type ListTablesInput struct {
 	// This member is required.
 	Database *string
 
-	// The cluster identifier. This parameter is required when connecting to a
-	// cluster and authenticating using either Secrets Manager or temporary
-	// credentials.
+	// The cluster identifier. This parameter is required when connecting to a cluster
+	// and authenticating using either Secrets Manager or temporary credentials.
 	ClusterIdentifier *string
 
-	// A database name. The connected database is specified when you connect with
-	// your authentication credentials.
+	// A database name. The connected database is specified when you connect with your
+	// authentication credentials.
 	ConnectedDatabase *string
 
-	// The database user name. This parameter is required when connecting to a
-	// cluster and authenticating using temporary credentials.
+	// The database user name. This parameter is required when connecting to a cluster
+	// and authenticating using temporary credentials.
 	DbUser *string
 
 	// The maximum number of tables to return in the response. If more tables exist
@@ -74,9 +81,8 @@ type ListTablesInput struct {
 	// A pattern to filter results by schema name. Within a schema pattern, "%" means
 	// match any substring of 0 or more characters and "_" means match any one
 	// character. Only schema name entries matching the search pattern are returned. If
-	//
 	// SchemaPattern is not specified, then all tables that match TablePattern are
-	// returned. If neither SchemaPattern  or TablePattern are specified, then all
+	// returned. If neither SchemaPattern or TablePattern are specified, then all
 	// tables are returned.
 	SchemaPattern *string
 
@@ -87,8 +93,8 @@ type ListTablesInput struct {
 	// A pattern to filter results by table name. Within a table pattern, "%" means
 	// match any substring of 0 or more characters and "_" means match any one
 	// character. Only table name entries matching the search pattern are returned. If
-	// TablePattern is not specified, then all tables that match SchemaPatternare
-	// returned. If neither SchemaPattern  or TablePattern are specified, then all
+	// TablePattern is not specified, then all tables that match SchemaPattern are
+	// returned. If neither SchemaPattern or TablePattern are specified, then all
 	// tables are returned.
 	TablePattern *string
 
@@ -195,8 +201,8 @@ type ListTablesPaginatorOptions struct {
 	// results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

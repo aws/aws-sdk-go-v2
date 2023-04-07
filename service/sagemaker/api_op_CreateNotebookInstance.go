@@ -13,24 +13,32 @@ import (
 
 // Creates an SageMaker notebook instance. A notebook instance is a machine
 // learning (ML) compute instance running on a Jupyter notebook. In a
-// CreateNotebookInstancerequest, specify the type of ML compute instance that
-// you want to run. SageMaker launches the instance, installs common libraries that
-// you can use to explore datasets for model training, and attaches an ML storage
+// CreateNotebookInstance request, specify the type of ML compute instance that you
+// want to run. SageMaker launches the instance, installs common libraries that you
+// can use to explore datasets for model training, and attaches an ML storage
 // volume to the notebook instance. SageMaker also provides a set of example
 // notebooks. Each notebook demonstrates how to use SageMaker with a specific
 // algorithm or with a machine learning framework. After receiving the request,
 // SageMaker does the following:
 //   - Creates a network interface in the SageMaker VPC.
-//   - (Option) If you specified SubnetId , SageMaker creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.
-//   - Launches an EC2 instance of the type specified in the request in the SageMaker VPC. If you specified SubnetId of your VPC, SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.
+//   - (Option) If you specified SubnetId , SageMaker creates a network interface
+//     in your own VPC, which is inferred from the subnet ID that you provide in the
+//     input. When creating this network interface, SageMaker attaches the security
+//     group that you specified in the request to the network interface that it creates
+//     in your VPC.
+//   - Launches an EC2 instance of the type specified in the request in the
+//     SageMaker VPC. If you specified SubnetId of your VPC, SageMaker specifies both
+//     network interfaces when launching this instance. This enables inbound traffic
+//     from your own VPC to the notebook instance, assuming that the security groups
+//     allow it.
 //
-// After creating the notebook instance, SageMaker returns its Amazon Resource Name
-// (ARN). You can't change the name of a notebook instance after you create it.
-// After SageMaker creates the notebook instance, you can connect to the Jupyter
-// server and work in Jupyter notebooks. For example, you can write code to explore
-// a dataset that you can use for model training, train a model, host models by
-// creating SageMaker endpoints, and validate hosted models. For more information,
-// see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html)
+// After creating the notebook instance, SageMaker returns its Amazon Resource
+// Name (ARN). You can't change the name of a notebook instance after you create
+// it. After SageMaker creates the notebook instance, you can connect to the
+// Jupyter server and work in Jupyter notebooks. For example, you can write code to
+// explore a dataset that you can use for model training, train a model, host
+// models by creating SageMaker endpoints, and validate hosted models. For more
+// information, see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html)
 // .
 func (c *Client) CreateNotebookInstance(ctx context.Context, params *CreateNotebookInstanceInput, optFns ...func(*Options)) (*CreateNotebookInstanceOutput, error) {
 	if params == nil {
@@ -65,15 +73,15 @@ type CreateNotebookInstanceInput struct {
 	// policy must allow the SageMaker service principal (sagemaker.amazonaws.com)
 	// permissions to assume this role. For more information, see SageMaker Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
 	// . To be able to pass this role to SageMaker, the caller of this API must have
-	// the iam:PassRole  permission.
+	// the iam:PassRole permission.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// A list of Elastic Inference (EI) instance types to associate with this
-	// notebook instance. Currently, only one instance type can be associated with a
-	// notebook instance. For more information, see Using Elastic Inference in Amazon
-	// SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html) .
+	// A list of Elastic Inference (EI) instance types to associate with this notebook
+	// instance. Currently, only one instance type can be associated with a notebook
+	// instance. For more information, see Using Elastic Inference in Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html)
+	// .
 	AcceleratorTypes []types.NotebookInstanceAcceleratorType
 
 	// An array of up to three Git repositories to associate with the notebook
@@ -102,7 +110,7 @@ type CreateNotebookInstanceInput struct {
 	// endpoint services unless you configure a NAT Gateway in your VPC. For more
 	// information, see Notebook Instances Are Internet-Enabled by Default (https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access)
 	// . You can set the value of this parameter to Disabled only if you set a value
-	// for the SubnetId  parameter.
+	// for the SubnetId parameter.
 	DirectInternetAccess types.DirectInternetAccess
 
 	// Information on the IMDS configuration of the notebook instance
@@ -111,7 +119,6 @@ type CreateNotebookInstanceInput struct {
 	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
 	// key that SageMaker uses to encrypt data on the storage volume attached to your
 	// notebook instance. The KMS key you provide must be enabled. For information, see
-	//
 	// Enabling and Disabling Keys (https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
@@ -126,7 +133,7 @@ type CreateNotebookInstanceInput struct {
 	PlatformIdentifier *string
 
 	// Whether root access is enabled or disabled for users of the notebook instance.
-	// The default value is Enabled. Lifecycle configurations need root access to be
+	// The default value is Enabled . Lifecycle configurations need root access to be
 	// able to set up a notebook instance. Because of this, lifecycle configurations
 	// associated with a notebook instance always run with root access even if you
 	// disable root access for users.

@@ -42,22 +42,23 @@ type ListFirewallRulesInput struct {
 	// Optional additional filter for the rules to retrieve. The action that DNS
 	// Firewall should take on a DNS query when it matches one of the domains in the
 	// rule's domain list:
-	//     - ALLOW - Permit the request to go through.
-	//     - ALERT - Permit the request to go through but send an alert to the logs.
-	//     - BLOCK - Disallow the request. If this is specified, additional handling details are provided in the rule's BlockResponse setting.
+	//   - ALLOW - Permit the request to go through.
+	//   - ALERT - Permit the request to go through but send an alert to the logs.
+	//   - BLOCK - Disallow the request. If this is specified, additional handling
+	//   details are provided in the rule's BlockResponse setting.
 	Action types.Action
 
 	// The maximum number of objects that you want Resolver to return for this
 	// request. If more objects are available, in the response, Resolver provides a
-	// NextTokenvalue that you can use in a subsequent call to get the next batch of
-	// objects. If you don't specify a value for MaxResults, Resolver returns up to
+	// NextToken value that you can use in a subsequent call to get the next batch of
+	// objects. If you don't specify a value for MaxResults , Resolver returns up to
 	// 100 objects.
 	MaxResults *int32
 
 	// For the first call to this list request, omit this value. When you request a
 	// list of objects, Resolver returns at most the number of objects specified in
 	// MaxResults . If more objects are available for retrieval, Resolver returns a
-	// NextTokenvalue in the response. To retrieve the next batch of objects, use the
+	// NextToken value in the response. To retrieve the next batch of objects, use the
 	// token that was returned for the prior request in your next request.
 	NextToken *string
 
@@ -158,18 +159,17 @@ type ListFirewallRulesAPIClient interface {
 
 var _ ListFirewallRulesAPIClient = (*Client)(nil)
 
-// ListFirewallRulesPaginatorOptions is the paginator options for
-// ListFirewallRules
+// ListFirewallRulesPaginatorOptions is the paginator options for ListFirewallRules
 type ListFirewallRulesPaginatorOptions struct {
 	// The maximum number of objects that you want Resolver to return for this
 	// request. If more objects are available, in the response, Resolver provides a
-	// NextTokenvalue that you can use in a subsequent call to get the next batch of
-	// objects. If you don't specify a value for MaxResults, Resolver returns up to
+	// NextToken value that you can use in a subsequent call to get the next batch of
+	// objects. If you don't specify a value for MaxResults , Resolver returns up to
 	// 100 objects.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

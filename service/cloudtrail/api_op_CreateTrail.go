@@ -31,19 +31,20 @@ func (c *Client) CreateTrail(ctx context.Context, params *CreateTrailInput, optF
 // Specifies the settings for each trail.
 type CreateTrailInput struct {
 
-	// Specifies the name of the trail. The name must meet the following
-	// requirements:
-	//     - Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)
-	//     - Start with a letter or number, and end with a letter or number
-	//     - Be between 3 and 128 characters
-	//     - Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.
-	//     - Not be in IP address format (for example, 192.168.5.4)
+	// Specifies the name of the trail. The name must meet the following requirements:
+	//   - Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+	//   underscores (_), or dashes (-)
+	//   - Start with a letter or number, and end with a letter or number
+	//   - Be between 3 and 128 characters
+	//   - Have no adjacent periods, underscores or dashes. Names like my-_namespace
+	//   and my--namespace are not valid.
+	//   - Not be in IP address format (for example, 192.168.5.4)
 	//
 	// This member is required.
 	Name *string
 
-	// Specifies the name of the Amazon S3 bucket designated for publishing log
-	// files. See Amazon S3 Bucket Naming Requirements (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html)
+	// Specifies the name of the Amazon S3 bucket designated for publishing log files.
+	// See Amazon S3 Bucket Naming Requirements (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html)
 	// .
 	//
 	// This member is required.
@@ -74,10 +75,10 @@ type CreateTrailInput struct {
 	// IAM to the log files.
 	IncludeGlobalServiceEvents *bool
 
-	// Specifies whether the trail is created in the current region or in all
-	// regions. The default is false, which creates a trail only in the region where
-	// you are signed in. As a best practice, consider creating trails that log events
-	// in all regions.
+	// Specifies whether the trail is created in the current region or in all regions.
+	// The default is false, which creates a trail only in the region where you are
+	// signed in. As a best practice, consider creating trails that log events in all
+	// regions.
 	IsMultiRegionTrail *bool
 
 	// Specifies whether the trail is created for all accounts in an organization in
@@ -88,15 +89,15 @@ type CreateTrailInput struct {
 	IsOrganizationTrail *bool
 
 	// Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail.
-	// The value can be an alias name prefixed by alias/, a fully specified ARN to an
+	// The value can be an alias name prefixed by alias/ , a fully specified ARN to an
 	// alias, a fully specified ARN to a key, or a globally unique identifier.
 	// CloudTrail also supports KMS multi-Region keys. For more information about
 	// multi-Region keys, see Using multi-Region keys (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 	// in the Key Management Service Developer Guide. Examples:
-	//     - alias/MyAliasName
-	//     - arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
-	//     - arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
-	//     - 12345678-1234-1234-1234-123456789012
+	//   - alias/MyAliasName
+	//   - arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
+	//   - arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	//   - 12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket you
@@ -105,8 +106,8 @@ type CreateTrailInput struct {
 	// . The maximum length is 200 characters.
 	S3KeyPrefix *string
 
-	// Specifies the name of the Amazon SNS topic defined for notification of log
-	// file delivery. The maximum length is 256 characters.
+	// Specifies the name of the Amazon SNS topic defined for notification of log file
+	// delivery. The maximum length is 256 characters.
 	SnsTopicName *string
 
 	// A list of tags.

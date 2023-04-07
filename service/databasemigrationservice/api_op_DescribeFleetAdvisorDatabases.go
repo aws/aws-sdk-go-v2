@@ -32,14 +32,13 @@ type DescribeFleetAdvisorDatabasesInput struct {
 
 	// If you specify any of the following filters, the output includes information
 	// for only those databases that meet the filter criteria:
-	//     - database-id – The ID of the database.
-	//     - database-name – The name of the database.
-	//     - database-engine – The name of the database engine.
-	//     - server-ip-address – The IP address of the database server.
-	//     - database-ip-address – The IP address of the database.
-	//     - collector-name – The name of the associated Fleet Advisor collector.
-	// An
-	// example is: describe-fleet-advisor-databases --filter
+	//   - database-id – The ID of the database.
+	//   - database-name – The name of the database.
+	//   - database-engine – The name of the database engine.
+	//   - server-ip-address – The IP address of the database server.
+	//   - database-ip-address – The IP address of the database.
+	//   - collector-name – The name of the associated Fleet Advisor collector.
+	// An example is: describe-fleet-advisor-databases --filter
 	// Name="database-id",Values="45"
 	Filters []types.Filter
 
@@ -61,8 +60,8 @@ type DescribeFleetAdvisorDatabasesOutput struct {
 	// database's collector, ID, and name.
 	Databases []types.DatabaseResponse
 
-	// If NextToken  is returned, there are more results available. The value of
-	// NextTokenis a unique pagination token for each page. Make the call again using
+	// If NextToken is returned, there are more results available. The value of
+	// NextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged.
 	NextToken *string
@@ -150,8 +149,8 @@ type DescribeFleetAdvisorDatabasesPaginatorOptions struct {
 	// Sets the maximum number of records returned in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

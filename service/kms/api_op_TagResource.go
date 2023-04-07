@@ -23,15 +23,15 @@ import (
 // , an Amazon Web Services owned key (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk)
 // , a custom key store (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#keystore-concept)
 // , or an alias (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#alias-concept)
-// . You can also add tags to a KMS key while creating it ( CreateKey) or
+// . You can also add tags to a KMS key while creating it ( CreateKey ) or
 // replicating it ( ReplicateKey ). For information about using tags in KMS, see
 // Tagging keys (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html)
 // . For general information about tags, including the format and syntax, see
 // Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 // in the Amazon Web Services General Reference. The KMS key that you use for this
-// operation must be in a compatible key state. For details, see Key states of
-// KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-// in the Key Management Service Developer Guide. Cross-account use: No. You cannot
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.
 // Required permissions: kms:TagResource (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations
@@ -56,20 +56,20 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// Identifies a customer managed key in the account and Region. Specify the key
-	// ID or key ARN of the KMS key. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey .
+	// Identifies a customer managed key in the account and Region. Specify the key ID
+	// or key ARN of the KMS key. For example:
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey .
 	//
 	// This member is required.
 	KeyId *string
 
-	// One or more tags. Each tag consists of a tag key and a tag value. The tag
-	// value can be an empty (null) string. You cannot have more than one tag on a KMS
-	// key with the same tag key. If you specify an existing tag key with a different
-	// tag value, KMS replaces the current tag value with the specified one.
+	// One or more tags. Each tag consists of a tag key and a tag value. The tag value
+	// can be an empty (null) string. You cannot have more than one tag on a KMS key
+	// with the same tag key. If you specify an existing tag key with a different tag
+	// value, KMS replaces the current tag value with the specified one.
 	//
 	// This member is required.
 	Tags []types.Tag

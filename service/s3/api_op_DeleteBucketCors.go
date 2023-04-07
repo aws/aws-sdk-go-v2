@@ -12,8 +12,8 @@ import (
 )
 
 // Deletes the cors configuration information set for the bucket. To use this
-// operation, you must have permission to perform the s3:PutBucketCORS action.
-// The bucket owner has this permission by default and can grant this permission to
+// operation, you must have permission to perform the s3:PutBucketCORS action. The
+// bucket owner has this permission by default and can grant this permission to
 // others. For information about cors , see Enabling Cross-Origin Resource Sharing (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html)
 // in the Amazon S3 User Guide. Related Resources:
 //   - PutBucketCors (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketCors.html)
@@ -35,7 +35,7 @@ func (c *Client) DeleteBucketCors(ctx context.Context, params *DeleteBucketCorsI
 
 type DeleteBucketCorsInput struct {
 
-	// Specifies the bucket whose cors  configuration is being deleted.
+	// Specifies the bucket whose cors configuration is being deleted.
 	//
 	// This member is required.
 	Bucket *string
@@ -139,9 +139,9 @@ func newServiceMetadataMiddleware_opDeleteBucketCors(region string) *awsmiddlewa
 	}
 }
 
-// getDeleteBucketCorsBucketMember returns a pointer to string denoting a
-// provided bucket member valueand a boolean indicating if the input has a modeled
-// bucket name,
+// getDeleteBucketCorsBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
 func getDeleteBucketCorsBucketMember(input interface{}) (*string, bool) {
 	in := input.(*DeleteBucketCorsInput)
 	if in.Bucket == nil {

@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Task runners call EvaluateExpression to evaluate a string in the context of
-// the specified object. For example, a task runner can evaluate SQL queries stored
-// in Amazon S3. POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1
+// Task runners call EvaluateExpression to evaluate a string in the context of the
+// specified object. For example, a task runner can evaluate SQL queries stored in
+// Amazon S3. POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1
 // X-Amz-Target: DataPipeline.DescribePipelines Content-Length: 164 Host:
 // datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
 // Authorization: AuthParams {"pipelineId": "df-08785951KAKJEXAMPLE", "objectId":

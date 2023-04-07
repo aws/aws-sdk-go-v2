@@ -191,7 +191,7 @@ type FieldMemberStringValue struct {
 func (*FieldMemberStringValue) isField() {}
 
 // A record returned by a call. This data structure is only used with the
-// deprecated ExecuteSql  operation. Use the BatchExecuteStatement  or
+// deprecated ExecuteSql operation. Use the BatchExecuteStatement or
 // ExecuteStatement operation instead.
 type Record struct {
 
@@ -202,7 +202,7 @@ type Record struct {
 }
 
 // The result set returned by a SQL statement. This data structure is only used
-// with the deprecated ExecuteSql  operation. Use the BatchExecuteStatement  or
+// with the deprecated ExecuteSql operation. Use the BatchExecuteStatement or
 // ExecuteStatement operation instead.
 type ResultFrame struct {
 
@@ -231,15 +231,15 @@ type ResultSetMetadata struct {
 type ResultSetOptions struct {
 
 	// A value that indicates how a field of DECIMAL type is represented in the
-	// response. The value of STRING, the default, specifies that it is converted to
-	// a String value. The value of DOUBLE_OR_LONG specifies that it is converted to
-	// a Long value if its scale is 0, or to a Double value otherwise. Conversion to
+	// response. The value of STRING , the default, specifies that it is converted to a
+	// String value. The value of DOUBLE_OR_LONG specifies that it is converted to a
+	// Long value if its scale is 0, or to a Double value otherwise. Conversion to
 	// Double or Long can result in roundoff errors due to precision loss. We recommend
 	// converting to String, especially when working with currency values.
 	DecimalReturnType DecimalReturnType
 
 	// A value that indicates how a field of LONG type is represented. Allowed values
-	// are LONG  and STRING . The default is LONG . Specify STRING if the length or
+	// are LONG and STRING . The default is LONG . Specify STRING if the length or
 	// precision of numeric values might cause truncation or rounding errors.
 	LongReturnType LongReturnType
 
@@ -254,12 +254,19 @@ type SqlParameter struct {
 
 	// A hint that specifies the correct object type for data type mapping. Possible
 	// values are as follows:
-	//     - DATE - The corresponding String parameter value is sent as an object of DATE type to the database. The accepted format is YYYY-MM-DD .
-	//     - DECIMAL - The corresponding String parameter value is sent as an object of DECIMAL type to the database.
-	//     - JSON - The corresponding String parameter value is sent as an object of JSON type to the database.
-	//     - TIME - The corresponding String parameter value is sent as an object of TIME type to the database. The accepted format is HH:MM:SS[.FFF] .
-	//     - TIMESTAMP - The corresponding String parameter value is sent as an object of TIMESTAMP type to the database. The accepted format is YYYY-MM-DD HH:MM:SS[.FFF] .
-	//     - UUID - The corresponding String parameter value is sent as an object of UUID type to the database.
+	//   - DATE - The corresponding String parameter value is sent as an object of DATE
+	//   type to the database. The accepted format is YYYY-MM-DD .
+	//   - DECIMAL - The corresponding String parameter value is sent as an object of
+	//   DECIMAL type to the database.
+	//   - JSON - The corresponding String parameter value is sent as an object of JSON
+	//   type to the database.
+	//   - TIME - The corresponding String parameter value is sent as an object of TIME
+	//   type to the database. The accepted format is HH:MM:SS[.FFF] .
+	//   - TIMESTAMP - The corresponding String parameter value is sent as an object of
+	//   TIMESTAMP type to the database. The accepted format is YYYY-MM-DD
+	//   HH:MM:SS[.FFF] .
+	//   - UUID - The corresponding String parameter value is sent as an object of UUID
+	//   type to the database.
 	TypeHint TypeHint
 
 	// The value of the parameter.
@@ -269,7 +276,7 @@ type SqlParameter struct {
 }
 
 // The result of a SQL statement. This data structure is only used with the
-// deprecated ExecuteSql  operation. Use the BatchExecuteStatement  or
+// deprecated ExecuteSql operation. Use the BatchExecuteStatement or
 // ExecuteStatement operation instead.
 type SqlStatementResult struct {
 
@@ -282,8 +289,8 @@ type SqlStatementResult struct {
 	noSmithyDocumentSerde
 }
 
-// A structure value returned by a call. This data structure is only used with
-// the deprecated ExecuteSql  operation. Use the BatchExecuteStatement  or
+// A structure value returned by a call. This data structure is only used with the
+// deprecated ExecuteSql operation. Use the BatchExecuteStatement or
 // ExecuteStatement operation instead.
 type StructValue struct {
 
@@ -303,7 +310,7 @@ type UpdateResult struct {
 }
 
 // Contains the value of a column. This data structure is only used with the
-// deprecated ExecuteSql  operation. Use the BatchExecuteStatement  or
+// deprecated ExecuteSql operation. Use the BatchExecuteStatement or
 // ExecuteStatement operation instead.
 //
 // The following types satisfy this interface:

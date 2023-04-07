@@ -32,13 +32,13 @@ func (c *Client) ListReusableDelegationSets(ctx context.Context, params *ListReu
 // with the current Amazon Web Services account.
 type ListReusableDelegationSetsInput struct {
 
-	// If the value of IsTruncated  in the previous response was true, you have more
+	// If the value of IsTruncated in the previous response was true , you have more
 	// reusable delegation sets. To get another group, submit another
-	// ListReusableDelegationSets request. For the value of marker, specify the value
-	// of NextMarker from the previous response, which is the ID of the first
-	// reusable delegation set that Amazon Route 53 will return if you submit another
-	// request. If the value of IsTruncated  in the previous response was false,
-	// there are no more reusable delegation sets to get.
+	// ListReusableDelegationSets request. For the value of marker , specify the value
+	// of NextMarker from the previous response, which is the ID of the first reusable
+	// delegation set that Amazon Route 53 will return if you submit another request.
+	// If the value of IsTruncated in the previous response was false , there are no
+	// more reusable delegation sets to get.
 	Marker *string
 
 	// The number of reusable delegation sets that you want Amazon Route 53 to return
@@ -72,15 +72,15 @@ type ListReusableDelegationSetsOutput struct {
 	// This member is required.
 	Marker *string
 
-	// The value that you specified for the maxitems  parameter in the call to
+	// The value that you specified for the maxitems parameter in the call to
 	// ListReusableDelegationSets that produced the current response.
 	//
 	// This member is required.
 	MaxItems *int32
 
-	// If IsTruncated  is true , the value of NextMarker identifies the next reusable
+	// If IsTruncated is true , the value of NextMarker identifies the next reusable
 	// delegation set that Amazon Route 53 will return if you submit another
-	// ListReusableDelegationSets request and specify the value of NextMarker  in the
+	// ListReusableDelegationSets request and specify the value of NextMarker in the
 	// marker parameter.
 	NextMarker *string
 

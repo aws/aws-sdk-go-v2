@@ -70,7 +70,7 @@ type StartQueryInput struct {
 	// the ARN of the log group here. The query definition must also be defined in the
 	// monitoring account. If you specify an ARN, the ARN can't end with an asterisk
 	// (*). A StartQuery operation must include exactly one of the following
-	// parameters: logGroupName , logGroupNames  or logGroupIdentifiers .
+	// parameters: logGroupName , logGroupNames or logGroupIdentifiers .
 	LogGroupIdentifiers []string
 
 	// The log group on which to perform the query. A StartQuery operation must
@@ -80,7 +80,7 @@ type StartQueryInput struct {
 
 	// The list of log groups to be queried. You can include up to 50 log groups. A
 	// StartQuery operation must include exactly one of the following parameters:
-	// logGroupName , logGroupNames  or logGroupIdentifiers .
+	// logGroupName , logGroupNames or logGroupIdentifiers .
 	LogGroupNames []string
 
 	noSmithyDocumentSerde

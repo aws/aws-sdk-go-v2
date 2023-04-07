@@ -38,12 +38,12 @@ import (
 // record and NS resource record sets. If the hosted zone contains other resource
 // record sets, you must delete them before you can delete the hosted zone. If you
 // try to delete a hosted zone that contains other resource record sets, the
-// request fails, and Route 53 returns a HostedZoneNotEmpty error. For
-// information about deleting records from your hosted zone, see
-// ChangeResourceRecordSets (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html)
+// request fails, and Route 53 returns a HostedZoneNotEmpty error. For information
+// about deleting records from your hosted zone, see ChangeResourceRecordSets (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html)
 // . To verify that the hosted zone has been deleted, do one of the following:
 //   - Use the GetHostedZone action to request information about the hosted zone.
-//   - Use the ListHostedZones action to get a list of the hosted zones associated with the current Amazon Web Services account.
+//   - Use the ListHostedZones action to get a list of the hosted zones associated
+//     with the current Amazon Web Services account.
 func (c *Client) DeleteHostedZone(ctx context.Context, params *DeleteHostedZoneInput, optFns ...func(*Options)) (*DeleteHostedZoneOutput, error) {
 	if params == nil {
 		params = &DeleteHostedZoneInput{}
@@ -70,7 +70,7 @@ type DeleteHostedZoneInput struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains the response to a DeleteHostedZone  request.
+// A complex type that contains the response to a DeleteHostedZone request.
 type DeleteHostedZoneOutput struct {
 
 	// A complex type that contains the ID, the status, and the date and time of a

@@ -29,7 +29,7 @@ func (c *Client) ListElasticsearchInstanceTypes(ctx context.Context, params *Lis
 	return out, nil
 }
 
-// Container for the parameters to the ListElasticsearchInstanceTypes  operation.
+// Container for the parameters to the ListElasticsearchInstanceTypes operation.
 type ListElasticsearchInstanceTypesInput struct {
 
 	// Version of Elasticsearch for which list of supported elasticsearch instance
@@ -38,17 +38,17 @@ type ListElasticsearchInstanceTypesInput struct {
 	// This member is required.
 	ElasticsearchVersion *string
 
-	// DomainName represents the name of the Domain that we are trying to modify.
-	// This should be present only if we are querying for list of available
-	// Elasticsearch instance types when modifying existing domain.
+	// DomainName represents the name of the Domain that we are trying to modify. This
+	// should be present only if we are querying for list of available Elasticsearch
+	// instance types when modifying existing domain.
 	DomainName *string
 
 	// Set this value to limit the number of results returned. Value provided must be
 	// greater than 30 else it wont be honored.
 	MaxResults int32
 
-	// NextToken should be sent in case if earlier API call produced result
-	// containing NextToken. It is used for pagination.
+	// NextToken should be sent in case if earlier API call produced result containing
+	// NextToken. It is used for pagination.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -151,8 +151,8 @@ type ListElasticsearchInstanceTypesPaginatorOptions struct {
 	// greater than 30 else it wont be honored.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -43,8 +43,8 @@ type DescribeAssessmentTemplatesOutput struct {
 	// This member is required.
 	AssessmentTemplates []types.AssessmentTemplate
 
-	// Assessment template details that cannot be described. An error code is
-	// provided for each failed item.
+	// Assessment template details that cannot be described. An error code is provided
+	// for each failed item.
 	//
 	// This member is required.
 	FailedItems map[string]types.FailedItemDetails

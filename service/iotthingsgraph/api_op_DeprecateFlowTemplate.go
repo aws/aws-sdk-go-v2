@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deprecates the specified workflow. This action marks the workflow for
-// deletion. Deprecated flows can't be deployed, but existing deployments will
-// continue to run.
+// Deprecates the specified workflow. This action marks the workflow for deletion.
+// Deprecated flows can't be deployed, but existing deployments will continue to
+// run.
 //
 // Deprecated: since: 2022-08-30
 func (c *Client) DeprecateFlowTemplate(ctx context.Context, params *DeprecateFlowTemplateInput, optFns ...func(*Options)) (*DeprecateFlowTemplateOutput, error) {
@@ -32,8 +32,8 @@ func (c *Client) DeprecateFlowTemplate(ctx context.Context, params *DeprecateFlo
 
 type DeprecateFlowTemplateInput struct {
 
-	// The ID of the workflow to be deleted. The ID should be in the following
-	// format. urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
+	// The ID of the workflow to be deleted. The ID should be in the following format.
+	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
 	//
 	// This member is required.
 	Id *string

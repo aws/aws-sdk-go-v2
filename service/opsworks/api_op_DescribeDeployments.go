@@ -39,8 +39,8 @@ func (c *Client) DescribeDeployments(ctx context.Context, params *DescribeDeploy
 
 type DescribeDeploymentsInput struct {
 
-	// The app ID. If you include this parameter, the command returns a description
-	// of the commands associated with the specified app.
+	// The app ID. If you include this parameter, the command returns a description of
+	// the commands associated with the specified app.
 	AppId *string
 
 	// An array of deployment IDs to be described. If you include this parameter, the
@@ -55,10 +55,10 @@ type DescribeDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeDeployments  request.
+// Contains the response to a DescribeDeployments request.
 type DescribeDeploymentsOutput struct {
 
-	// An array of Deployment  objects that describe the deployments.
+	// An array of Deployment objects that describe the deployments.
 	Deployments []types.Deployment
 
 	// Metadata pertaining to the operation's result.

@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an endpoint for a specified stream for either reading or writing. Use
-// this endpoint in your application to read from the specified stream (using the
-// GetMedia or GetMediaForFragmentList  operations) or write to it (using the
-// PutMediaoperation). The returned endpoint does not have the API name appended.
+// Gets an endpoint for a specified stream for either reading or writing. Use this
+// endpoint in your application to read from the specified stream (using the
+// GetMedia or GetMediaForFragmentList operations) or write to it (using the
+// PutMedia operation). The returned endpoint does not have the API name appended.
 // The client needs to add the API name to the returned endpoint. In the request,
-// specify the stream either by StreamName  or StreamARN .
+// specify the stream either by StreamName or StreamARN .
 func (c *Client) GetDataEndpoint(ctx context.Context, params *GetDataEndpointInput, optFns ...func(*Options)) (*GetDataEndpointOutput, error) {
 	if params == nil {
 		params = &GetDataEndpointInput{}
@@ -40,11 +40,11 @@ type GetDataEndpointInput struct {
 	APIName types.APIName
 
 	// The Amazon Resource Name (ARN) of the stream that you want to get the endpoint
-	// for. You must specify either this parameter or a StreamName  in the request.
+	// for. You must specify either this parameter or a StreamName in the request.
 	StreamARN *string
 
 	// The name of the stream that you want to get the endpoint for. You must specify
-	// either this parameter or a StreamARN  in the request.
+	// either this parameter or a StreamARN in the request.
 	StreamName *string
 
 	noSmithyDocumentSerde

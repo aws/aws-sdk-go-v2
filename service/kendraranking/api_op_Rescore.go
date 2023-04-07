@@ -59,8 +59,8 @@ type RescoreOutput struct {
 	// re-ranks the results for the search service.
 	RescoreId *string
 
-	// A list of result items for documents with new relevancy scores. The results
-	// are in descending order.
+	// A list of result items for documents with new relevancy scores. The results are
+	// in descending order.
 	ResultItems []types.RescoreResultItem
 
 	// Metadata pertaining to the operation's result.

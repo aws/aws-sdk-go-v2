@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a query logging policy. A query logging policy
-// specifies the Resolver query logging operations and resources that you want to
-// allow another Amazon Web Services account to be able to use.
+// Gets information about a query logging policy. A query logging policy specifies
+// the Resolver query logging operations and resources that you want to allow
+// another Amazon Web Services account to be able to use.
 func (c *Client) GetResolverQueryLogConfigPolicy(ctx context.Context, params *GetResolverQueryLogConfigPolicyInput, optFns ...func(*Options)) (*GetResolverQueryLogConfigPolicyOutput, error) {
 	if params == nil {
 		params = &GetResolverQueryLogConfigPolicyInput{}
@@ -42,7 +42,7 @@ type GetResolverQueryLogConfigPolicyInput struct {
 type GetResolverQueryLogConfigPolicyOutput struct {
 
 	// Information about the query logging policy for the query logging configuration
-	// that you specified in a GetResolverQueryLogConfigPolicy  request.
+	// that you specified in a GetResolverQueryLogConfigPolicy request.
 	ResolverQueryLogConfigPolicy *string
 
 	// Metadata pertaining to the operation's result.

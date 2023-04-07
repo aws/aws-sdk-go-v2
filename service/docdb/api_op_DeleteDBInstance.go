@@ -32,7 +32,7 @@ type DeleteDBInstanceInput struct {
 
 	// The instance identifier for the instance to be deleted. This parameter isn't
 	// case sensitive. Constraints:
-	//     - Must match the name of an existing instance.
+	//   - Must match the name of an existing instance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string

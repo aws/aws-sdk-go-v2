@@ -42,16 +42,15 @@ type CreateDBInstanceInput struct {
 
 	// The instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//     - Must contain from 1 to 63 letters, numbers, or hyphens.
-	//     - The first character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: mydbinstance
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The name of the database engine to be used for this instance. Valid value:
-	// docdb
+	// The name of the database engine to be used for this instance. Valid value: docdb
 	//
 	// This member is required.
 	Engine *string
@@ -74,9 +73,9 @@ type CreateDBInstanceInput struct {
 	// .
 	EnablePerformanceInsights *bool
 
-	// The KMS key identifier for encryption of Performance Insights data. The KMS
-	// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
-	// If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
+	// The KMS key identifier for encryption of Performance Insights data. The KMS key
+	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If
+	// you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
 	// DocumentDB uses your default KMS key. There is a default KMS key for your Amazon
 	// Web Services account. Your Amazon Web Services account has a different default
 	// KMS key for each Amazon Web Services region.

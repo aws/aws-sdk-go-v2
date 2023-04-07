@@ -404,8 +404,8 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The port numbers that you specified are not valid numbers or are not unique
-// for this accelerator.
+// The port numbers that you specified are not valid numbers or are not unique for
+// this accelerator.
 type InvalidPortRangeException struct {
 	Message *string
 

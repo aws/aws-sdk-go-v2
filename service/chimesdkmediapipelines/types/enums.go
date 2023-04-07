@@ -10,10 +10,9 @@ const (
 	ArtifactsConcatenationStateDisabled ArtifactsConcatenationState = "Disabled"
 )
 
-// Values returns all known values for ArtifactsConcatenationState. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ArtifactsConcatenationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactsConcatenationState) Values() []ArtifactsConcatenationState {
 	return []ArtifactsConcatenationState{
 		"Enabled",
@@ -46,8 +45,8 @@ const (
 	AudioArtifactsConcatenationStateEnabled AudioArtifactsConcatenationState = "Enabled"
 )
 
-// Values returns all known values for AudioArtifactsConcatenationState. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for AudioArtifactsConcatenationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AudioArtifactsConcatenationState) Values() []AudioArtifactsConcatenationState {
@@ -149,9 +148,9 @@ const (
 	ConcatenationSourceTypeMediaCapturePipeline ConcatenationSourceType = "MediaCapturePipeline"
 )
 
-// Values returns all known values for ConcatenationSourceType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConcatenationSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ConcatenationSourceType) Values() []ConcatenationSourceType {
 	return []ConcatenationSourceType{
 		"MediaCapturePipeline",
@@ -219,9 +218,9 @@ const (
 	ContentTypePii ContentType = "PII"
 )
 
-// Values returns all known values for ContentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ContentType) Values() []ContentType {
 	return []ContentType{
 		"PII",
@@ -264,8 +263,8 @@ const (
 	FragmentSelectorTypeServerTimestamp   FragmentSelectorType = "ServerTimestamp"
 )
 
-// Values returns all known values for FragmentSelectorType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FragmentSelectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FragmentSelectorType) Values() []FragmentSelectorType {
 	return []FragmentSelectorType{
@@ -298,8 +297,8 @@ const (
 	LiveConnectorMuxTypeAudioWithActiveSpeakerVideo LiveConnectorMuxType = "AudioWithActiveSpeakerVideo"
 )
 
-// Values returns all known values for LiveConnectorMuxType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LiveConnectorMuxType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LiveConnectorMuxType) Values() []LiveConnectorMuxType {
 	return []LiveConnectorMuxType{
@@ -331,9 +330,9 @@ const (
 	LiveConnectorSourceTypeChimeSdkMeeting LiveConnectorSourceType = "ChimeSdkMeeting"
 )
 
-// Values returns all known values for LiveConnectorSourceType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LiveConnectorSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LiveConnectorSourceType) Values() []LiveConnectorSourceType {
 	return []LiveConnectorSourceType{
 		"ChimeSdkMeeting",
@@ -410,9 +409,9 @@ const (
 	MediaPipelineSourceTypeChimeSdkMeeting MediaPipelineSourceType = "ChimeSdkMeeting"
 )
 
-// Values returns all known values for MediaPipelineSourceType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MediaPipelineSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineSourceType) Values() []MediaPipelineSourceType {
 	return []MediaPipelineSourceType{
 		"ChimeSdkMeeting",
@@ -472,9 +471,9 @@ const (
 	PartialResultsStabilityLow    PartialResultsStability = "low"
 )
 
-// Values returns all known values for PartialResultsStability. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PartialResultsStability. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PartialResultsStability) Values() []PartialResultsStability {
 	return []PartialResultsStability{
 		"high",

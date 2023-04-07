@@ -10,10 +10,9 @@ const (
 	AccessDeniedExceptionReasonAccountDisabled               AccessDeniedExceptionReason = "ACCOUNT_DISABLED"
 )
 
-// Values returns all known values for AccessDeniedExceptionReason. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for AccessDeniedExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessDeniedExceptionReason) Values() []AccessDeniedExceptionReason {
 	return []AccessDeniedExceptionReason{
 		"INSUFFICIENT_ACCOUNT_REPUTATION",
@@ -28,8 +27,8 @@ const (
 	AccountAttributeNameAccountTier AccountAttributeName = "ACCOUNT_TIER"
 )
 
-// Values returns all known values for AccountAttributeName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AccountAttributeName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AccountAttributeName) Values() []AccountAttributeName {
 	return []AccountAttributeName{
@@ -106,9 +105,9 @@ const (
 	ConflictExceptionReasonTwoWayConfigMismatch               ConflictExceptionReason = "TWO_WAY_CONFIG_MISMATCH"
 )
 
-// Values returns all known values for ConflictExceptionReason. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConflictExceptionReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	return []ConflictExceptionReason{
 		"DELETION_PROTECTION_ENABLED",
@@ -260,9 +259,9 @@ const (
 	MessageTypePromotional   MessageType = "PROMOTIONAL"
 )
 
-// Values returns all known values for MessageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MessageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"TRANSACTIONAL",

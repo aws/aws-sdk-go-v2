@@ -47,34 +47,34 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 
 	// Name of the DB instance to create from the DB snapshot. This parameter isn't
 	// case-sensitive. Constraints:
-	//     - Must contain from 1 to 63 numbers, letters, or hyphens
-	//     - First character must be a letter
-	//     - Can't end with a hyphen or contain two consecutive hyphens
+	//   - Must contain from 1 to 63 numbers, letters, or hyphens
+	//   - First character must be a letter
+	//   - Can't end with a hyphen or contain two consecutive hyphens
 	// Example: my-snapshot-id
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The amount of storage (in gibibytes) to allocate initially for the DB
-	// instance. Follow the allocation rules specified in CreateDBInstance. Be sure to
-	// allocate enough storage for your new DB instance so that the restore operation
-	// can succeed. You can also allocate additional storage for future growth.
+	// The amount of storage (in gibibytes) to allocate initially for the DB instance.
+	// Follow the allocation rules specified in CreateDBInstance. Be sure to allocate
+	// enough storage for your new DB instance so that the restore operation can
+	// succeed. You can also allocate additional storage for future growth.
 	AllocatedStorage *int32
 
-	// A value that indicates whether minor version upgrades are applied
-	// automatically to the DB instance during the maintenance window. If you restore
-	// an RDS Custom DB instance, you must disable this parameter.
+	// A value that indicates whether minor version upgrades are applied automatically
+	// to the DB instance during the maintenance window. If you restore an RDS Custom
+	// DB instance, you must disable this parameter.
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone (AZ) where the DB instance will be created. Default: A
 	// random, system-chosen Availability Zone. Constraint: You can't specify the
-	// AvailabilityZoneparameter if the DB instance is a Multi-AZ deployment.
-	// Example: us-east-1a
+	// AvailabilityZone parameter if the DB instance is a Multi-AZ deployment. Example:
+	// us-east-1a
 	AvailabilityZone *string
 
 	// Specifies where automated backups and manual snapshots are stored for the
 	// restored DB instance. Possible values are outposts (Amazon Web Services
-	// Outposts) and region  (Amazon Web Services Region). The default is region. For
+	// Outposts) and region (Amazon Web Services Region). The default is region . For
 	// more information, see Working with Amazon RDS on Amazon Web Services Outposts (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
 	// in the Amazon RDS User Guide.
 	BackupTarget *string
@@ -92,11 +92,12 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// The instance profile associated with the underlying Amazon EC2 instance of an
 	// RDS Custom DB instance. The instance profile must meet the following
 	// requirements:
-	//     - The profile must exist in your account.
-	//     - The profile must have an IAM role that Amazon EC2 has permissions to assume.
-	//     - The instance profile name and the associated IAM role name must start with the prefix AWSRDSCustom .
-	//
-	// For the list of permissions required for the IAM role, see Configure IAM and
+	//   - The profile must exist in your account.
+	//   - The profile must have an IAM role that Amazon EC2 has permissions to
+	//   assume.
+	//   - The instance profile name and the associated IAM role name must start with
+	//   the prefix AWSRDSCustom .
+	// For the list of permissions required for the IAM role, see  Configure IAM and
 	// your VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc)
 	// in the Amazon RDS User Guide. This setting is required for RDS Custom.
 	CustomIamInstanceProfile *string
@@ -105,12 +106,14 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// from. For more information on Multi-AZ DB clusters, see Multi-AZ DB cluster
 	// deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 	// in the Amazon RDS User Guide. Constraints:
-	//     - Must match the identifier of an existing Multi-AZ DB cluster snapshot.
-	//     - Can't be specified when DBSnapshotIdentifier is specified.
-	//     - Must be specified when DBSnapshotIdentifier isn't specified.
-	//     - If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.
-	//     - Can't be the identifier of an Aurora DB cluster snapshot.
-	//     - Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.
+	//   - Must match the identifier of an existing Multi-AZ DB cluster snapshot.
+	//   - Can't be specified when DBSnapshotIdentifier is specified.
+	//   - Must be specified when DBSnapshotIdentifier isn't specified.
+	//   - If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the
+	//   DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.
+	//   - Can't be the identifier of an Aurora DB cluster snapshot.
+	//   - Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster
+	//   snapshot.
 	DBClusterSnapshotIdentifier *string
 
 	// The compute and memory capacity of the Amazon RDS DB instance, for example
@@ -121,37 +124,37 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// DB instance.
 	DBInstanceClass *string
 
-	// The database name for the restored DB instance. This parameter doesn't apply
-	// to the MySQL, PostgreSQL, or MariaDB engines. It also doesn't apply to RDS
-	// Custom DB instances.
+	// The database name for the restored DB instance. This parameter doesn't apply to
+	// the MySQL, PostgreSQL, or MariaDB engines. It also doesn't apply to RDS Custom
+	// DB instances.
 	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you
 	// don't specify a value for DBParameterGroupName , then RDS uses the default
-	// DBParameterGroupfor the specified DB engine. This setting doesn't apply to RDS
+	// DBParameterGroup for the specified DB engine. This setting doesn't apply to RDS
 	// Custom. Constraints:
-	//     - If supplied, must match the name of an existing DBParameterGroup.
-	//     - Must be 1 to 255 letters, numbers, or hyphens.
-	//     - First character must be a letter.
-	//     - Can't end with a hyphen or contain two consecutive hyphens.
+	//   - If supplied, must match the name of an existing DBParameterGroup.
+	//   - Must be 1 to 255 letters, numbers, or hyphens.
+	//   - First character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	DBParameterGroupName *string
 
 	// The identifier for the DB snapshot to restore from. Constraints:
-	//     - Must match the identifier of an existing DBSnapshot.
-	//     - Can't be specified when DBClusterSnapshotIdentifier is specified.
-	//     - Must be specified when DBClusterSnapshotIdentifier isn't specified.
-	//     - If you are restoring from a shared manual DB snapshot, the DBSnapshotIdentifier must be the ARN of the shared DB snapshot.
+	//   - Must match the identifier of an existing DBSnapshot.
+	//   - Can't be specified when DBClusterSnapshotIdentifier is specified.
+	//   - Must be specified when DBClusterSnapshotIdentifier isn't specified.
+	//   - If you are restoring from a shared manual DB snapshot, the
+	//   DBSnapshotIdentifier must be the ARN of the shared DB snapshot.
 	DBSnapshotIdentifier *string
 
-	// The DB subnet group name to use for the new instance. Constraints: If
-	// supplied, must match the name of an existing DBSubnetGroup. Example:
-	// mydbsubnetgroup
+	// The DB subnet group name to use for the new instance. Constraints: If supplied,
+	// must match the name of an existing DBSubnetGroup. Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
-	// A value that indicates whether the DB instance has deletion protection
-	// enabled. The database can't be deleted when deletion protection is enabled. By
-	// default, deletion protection isn't enabled. For more information, see Deleting
-	// a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
+	// A value that indicates whether the DB instance has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection isn't enabled. For more information, see Deleting a DB
+	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
 	// .
 	DeletionProtection *bool
 
@@ -166,19 +169,19 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// Directory Service. This setting doesn't apply to RDS Custom.
 	DomainIAMRoleName *string
 
-	// The list of logs that the restored DB instance is to export to CloudWatch
-	// Logs. The values in the list depend on the DB engine being used. For more
-	// information, see Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+	// The list of logs that the restored DB instance is to export to CloudWatch Logs.
+	// The values in the list depend on the DB engine being used. For more information,
+	// see Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	EnableCloudwatchLogsExports []string
 
-	// A value that indicates whether to enable a customer-owned IP address (CoIP)
-	// for an RDS on Outposts DB instance. A CoIP provides local or external
-	// connectivity to resources in your Outpost subnets through your on-premises
-	// network. For some use cases, a CoIP can provide lower latency for connections to
-	// the DB instance from outside of its virtual private cloud (VPC) on your local
-	// network. This setting doesn't apply to RDS Custom. For more information about
-	// RDS on Outposts, see Working with Amazon RDS on Amazon Web Services Outposts (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
+	// A value that indicates whether to enable a customer-owned IP address (CoIP) for
+	// an RDS on Outposts DB instance. A CoIP provides local or external connectivity
+	// to resources in your Outpost subnets through your on-premises network. For some
+	// use cases, a CoIP can provide lower latency for connections to the DB instance
+	// from outside of its virtual private cloud (VPC) on your local network. This
+	// setting doesn't apply to RDS Custom. For more information about RDS on Outposts,
+	// see Working with Amazon RDS on Amazon Web Services Outposts (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
 	// in the Amazon RDS User Guide. For more information about CoIPs, see
 	// Customer-owned IP addresses (https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing)
 	// in the Amazon Web Services Outposts User Guide.
@@ -187,7 +190,6 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// A value that indicates whether to enable mapping of Amazon Web Services
 	// Identity and Access Management (IAM) accounts to database accounts. By default,
 	// mapping is disabled. For more information about IAM database authentication, see
-	//
 	// IAM Database Authentication for MySQL and PostgreSQL (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	EnableIAMDatabaseAuthentication *bool
@@ -196,17 +198,17 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// RDS Custom. Default: The same as source Constraint: Must be compatible with the
 	// engine of the source. For example, you can restore a MariaDB 10.1 DB instance
 	// from a MySQL 5.6 snapshot. Valid Values:
-	//     - mariadb
-	//     - mysql
-	//     - oracle-ee
-	//     - oracle-ee-cdb
-	//     - oracle-se2
-	//     - oracle-se2-cdb
-	//     - postgres
-	//     - sqlserver-ee
-	//     - sqlserver-se
-	//     - sqlserver-ex
-	//     - sqlserver-web
+	//   - mariadb
+	//   - mysql
+	//   - oracle-ee
+	//   - oracle-ee-cdb
+	//   - oracle-se2
+	//   - oracle-se2-cdb
+	//   - postgres
+	//   - sqlserver-ee
+	//   - sqlserver-se
+	//   - sqlserver-ex
+	//   - sqlserver-web
 	Engine *string
 
 	// Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O
@@ -220,7 +222,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	Iops *int32
 
 	// License model information for the restored DB instance. This setting doesn't
-	// apply to RDS Custom. Default: Same as source. Valid values: license-included  |
+	// apply to RDS Custom. Default: Same as source. Valid values: license-included |
 	// bring-your-own-license | general-public-license
 	LicenseModel *string
 
@@ -230,20 +232,20 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	MultiAZ *bool
 
 	// The network type of the DB instance. Valid values:
-	//     - IPV4
-	//     - DUAL
-	//  The network type is determined by the DBSubnetGroup specified for the DB
+	//   - IPV4
+	//   - DUAL
+	// The network type is determined by the DBSubnetGroup specified for the DB
 	// instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and
 	// the IPv6 protocols ( DUAL ). For more information, see  Working with a DB
 	// instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
 	// in the Amazon RDS User Guide.
 	NetworkType *string
 
-	// The name of the option group to be used for the restored DB instance.
-	// Permanent options, such as the TDE option for Oracle Advanced Security TDE,
-	// can't be removed from an option group, and that option group can't be removed
-	// from a DB instance after it is associated with a DB instance. This setting
-	// doesn't apply to RDS Custom.
+	// The name of the option group to be used for the restored DB instance. Permanent
+	// options, such as the TDE option for Oracle Advanced Security TDE, can't be
+	// removed from an option group, and that option group can't be removed from a DB
+	// instance after it is associated with a DB instance. This setting doesn't apply
+	// to RDS Custom.
 	OptionGroupName *string
 
 	// The port number on which the database accepts connections. Default: The same
@@ -254,8 +256,8 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// class of the DB instance. This setting doesn't apply to RDS Custom.
 	ProcessorFeatures []types.ProcessorFeature
 
-	// A value that indicates whether the DB instance is publicly accessible. When
-	// the DB instance is publicly accessible, its Domain Name System (DNS) endpoint
+	// A value that indicates whether the DB instance is publicly accessible. When the
+	// DB instance is publicly accessible, its Domain Name System (DNS) endpoint
 	// resolves to the private IP address from within the DB instance's virtual private
 	// cloud (VPC). It resolves to the public IP address from outside of the DB
 	// instance's VPC. Access to the DB instance is ultimately controlled by the
@@ -269,10 +271,10 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// doesn't apply to RDS Custom or Amazon Aurora.
 	StorageThroughput *int32
 
-	// Specifies the storage type to be associated with the DB instance. Valid
-	// values: gp2 | gp3 | io1 | standard  If you specify io1  or gp3, you must also
-	// include a value for the Iops  parameter. Default: io1  if the Iops parameter
-	// is specified, otherwise gp2
+	// Specifies the storage type to be associated with the DB instance. Valid values:
+	// gp2 | gp3 | io1 | standard If you specify io1 or gp3 , you must also include a
+	// value for the Iops parameter. Default: io1 if the Iops parameter is specified,
+	// otherwise gp2
 	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)

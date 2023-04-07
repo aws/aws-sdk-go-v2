@@ -22,19 +22,18 @@ import (
 // . Returns the lifecycle configuration information set on the bucket. For
 // information about lifecycle configuration, see Object Lifecycle Management (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html)
 // . To use this operation, you must have permission to perform the
-// s3:GetLifecycleConfigurationaction. The bucket owner has this permission, by
+// s3:GetLifecycleConfiguration action. The bucket owner has this permission, by
 // default. The bucket owner can grant this permission to others. For more
 // information about permissions, see Permissions Related to Bucket Subresource
 // Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
-// . GetBucketLifecycleConfiguration  has the following special error:
+// . GetBucketLifecycleConfiguration has the following special error:
 //   - Error code: NoSuchLifecycleConfiguration
 //   - Description: The lifecycle configuration does not exist.
 //   - HTTP Status Code: 404 Not Found
 //   - SOAP Fault Code Prefix: Client
 //
-// The following operations are related
-// to GetBucketLifecycleConfiguration :
+// The following operations are related to GetBucketLifecycleConfiguration :
 //   - GetBucketLifecycle (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html)
 //   - PutBucketLifecycle (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html)
 //   - DeleteBucketLifecycle (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)

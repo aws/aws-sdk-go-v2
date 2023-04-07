@@ -41,10 +41,10 @@ type CreateLocationFsxOntapInput struct {
 	// Specifies the Amazon EC2 security groups that provide access to your file
 	// system's preferred subnet. The security groups must allow outbound traffic on
 	// the following ports (depending on the protocol you use):
-	//     - Network File System (NFS): TCP ports 111, 635, and 2049
-	//     - Server Message Block (SMB): TCP port 445
-	// Your file system's security
-	// groups must also allow inbound traffic on the same ports.
+	//   - Network File System (NFS): TCP ports 111, 635, and 2049
+	//   - Server Message Block (SMB): TCP port 445
+	// Your file system's security groups must also allow inbound traffic on the same
+	// ports.
 	//
 	// This member is required.
 	SecurityGroupArns []string
@@ -58,9 +58,9 @@ type CreateLocationFsxOntapInput struct {
 	// Specifies a path to the file share in the SVM where you'll copy your data. You
 	// can specify a junction path (also known as a mount point), qtree path (for NFS
 	// file shares), or share name (for SMB file shares). For example, your mount path
-	// might be /vol1 , /vol1/tree1 , or /share1. Don't specify a junction path in
-	// the SVM's root volume. For more information, see Managing FSx for ONTAP
-	// storage virtual machines (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
+	// might be /vol1 , /vol1/tree1 , or /share1 . Don't specify a junction path in the
+	// SVM's root volume. For more information, see Managing FSx for ONTAP storage
+	// virtual machines (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
 	// in the Amazon FSx for NetApp ONTAP User Guide.
 	Subdirectory *string
 

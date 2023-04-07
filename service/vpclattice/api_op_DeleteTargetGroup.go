@@ -46,9 +46,9 @@ type DeleteTargetGroupOutput struct {
 	// The ID of the target group.
 	Id *string
 
-	// The status. You can retry the operation if the status is DELETE_FAILED. However,
-	// if you retry it while the status is DELETE_IN_PROGRESS, the status doesn't
-	// change.
+	// The status. You can retry the operation if the status is DELETE_FAILED .
+	// However, if you retry it while the status is DELETE_IN_PROGRESS , the status
+	// doesn't change.
 	Status types.TargetGroupStatus
 
 	// Metadata pertaining to the operation's result.

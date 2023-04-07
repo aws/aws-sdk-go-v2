@@ -16,9 +16,9 @@ import (
 // The complete registration operation includes two tasks: installing the AWS
 // OpsWorks Stacks agent on the instance, and registering the instance with the
 // stack. RegisterInstance handles only the second step. You should instead use
-// the AWS CLI register command, which performs the entire registration
-// operation. For more information, see Registering an Instance with an AWS
-// OpsWorks Stacks Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html)
+// the AWS CLI register command, which performs the entire registration operation.
+// For more information, see Registering an Instance with an AWS OpsWorks Stacks
+// Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html)
 // . Registered instances have the same requirements as instances that are created
 // by using the CreateInstance API. For example, registered instances must be
 // running a supported Linux-based operating system, and they must have a supported
@@ -63,8 +63,8 @@ type RegisterInstanceInput struct {
 	// The instance's public IP address.
 	PublicIp *string
 
-	// The instances public RSA key. This key is used to encrypt communication
-	// between the instance and the service.
+	// The instances public RSA key. This key is used to encrypt communication between
+	// the instance and the service.
 	RsaPublicKey *string
 
 	// The instances public RSA key fingerprint.
@@ -73,7 +73,7 @@ type RegisterInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a RegisterInstanceResult  request.
+// Contains the response to a RegisterInstanceResult request.
 type RegisterInstanceOutput struct {
 
 	// The registered instance's AWS OpsWorks Stacks ID.

@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a simulation job batch. When you cancel a simulation job batch, you
-// are also cancelling all of the active simulation jobs created as part of the
-// batch.
+// Cancels a simulation job batch. When you cancel a simulation job batch, you are
+// also cancelling all of the active simulation jobs created as part of the batch.
 func (c *Client) CancelSimulationJobBatch(ctx context.Context, params *CancelSimulationJobBatchInput, optFns ...func(*Options)) (*CancelSimulationJobBatchOutput, error) {
 	if params == nil {
 		params = &CancelSimulationJobBatchInput{}

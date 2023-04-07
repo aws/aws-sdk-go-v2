@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a related item (comments, tasks, and contacts) and associates it with
-// a case. A Related Item is a resource that is associated with a case. It may or
-// may not have an external identifier linking it to an external resource (for
-// example, a contactArn). All Related Items have their own internal identifier,
-// the relatedItemArn . Examples of related items include comments  and contacts .
+// Creates a related item (comments, tasks, and contacts) and associates it with a
+// case. A Related Item is a resource that is associated with a case. It may or may
+// not have an external identifier linking it to an external resource (for example,
+// a contactArn ). All Related Items have their own internal identifier, the
+// relatedItemArn . Examples of related items include comments and contacts .
 func (c *Client) CreateRelatedItem(ctx context.Context, params *CreateRelatedItemInput, optFns ...func(*Options)) (*CreateRelatedItemOutput, error) {
 	if params == nil {
 		params = &CreateRelatedItemInput{}

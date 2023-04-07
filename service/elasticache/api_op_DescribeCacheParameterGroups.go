@@ -29,7 +29,7 @@ func (c *Client) DescribeCacheParameterGroups(ctx context.Context, params *Descr
 	return out, nil
 }
 
-// Represents the input of a DescribeCacheParameterGroups  operation.
+// Represents the input of a DescribeCacheParameterGroups operation.
 type DescribeCacheParameterGroupsInput struct {
 
 	// The name of a specific cache parameter group to return details for.
@@ -41,16 +41,16 @@ type DescribeCacheParameterGroupsInput struct {
 	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the
-	// response so that the remaining results can be retrieved. Default: 100
-	// Constraints: minimum 20; maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
+	// 20; maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DescribeCacheParameterGroups  operation.
+// Represents the output of a DescribeCacheParameterGroups operation.
 type DescribeCacheParameterGroupsOutput struct {
 
 	// A list of cache parameter groups. Each element in the list contains detailed
@@ -137,14 +137,14 @@ var _ DescribeCacheParameterGroupsAPIClient = (*Client)(nil)
 // DescribeCacheParameterGroupsPaginatorOptions is the paginator options for
 // DescribeCacheParameterGroups
 type DescribeCacheParameterGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the
-	// response so that the remaining results can be retrieved. Default: 100
-	// Constraints: minimum 20; maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
+	// 20; maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

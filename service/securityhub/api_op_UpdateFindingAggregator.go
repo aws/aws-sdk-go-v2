@@ -31,8 +31,8 @@ func (c *Client) UpdateFindingAggregator(ctx context.Context, params *UpdateFind
 
 type UpdateFindingAggregatorInput struct {
 
-	// The ARN of the finding aggregator. To obtain the ARN, use
-	// ListFindingAggregators .
+	// The ARN of the finding aggregator. To obtain the ARN, use ListFindingAggregators
+	// .
 	//
 	// This member is required.
 	FindingAggregatorArn *string
@@ -42,16 +42,25 @@ type UpdateFindingAggregatorInput struct {
 	// findings from new Regions as Security Hub supports them and you opt into them.
 	// The selected option also determines how to use the Regions provided in the
 	// Regions list. The options are as follows:
-	//     - ALL_REGIONS - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.
-	//     - ALL_REGIONS_EXCEPT_SPECIFIED - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the Regions parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.
-	//     - SPECIFIED_REGIONS - Indicates to aggregate findings only from the Regions listed in the Regions parameter. Security Hub does not automatically aggregate findings from new Regions.
+	//   - ALL_REGIONS - Indicates to aggregate findings from all of the Regions where
+	//   Security Hub is enabled. When you choose this option, Security Hub also
+	//   automatically aggregates findings from new Regions as Security Hub supports them
+	//   and you opt into them.
+	//   - ALL_REGIONS_EXCEPT_SPECIFIED - Indicates to aggregate findings from all of
+	//   the Regions where Security Hub is enabled, except for the Regions listed in the
+	//   Regions parameter. When you choose this option, Security Hub also
+	//   automatically aggregates findings from new Regions as Security Hub supports them
+	//   and you opt into them.
+	//   - SPECIFIED_REGIONS - Indicates to aggregate findings only from the Regions
+	//   listed in the Regions parameter. Security Hub does not automatically aggregate
+	//   findings from new Regions.
 	//
 	// This member is required.
 	RegionLinkingMode *string
 
-	// If RegionLinkingMode  is ALL_REGIONS_EXCEPT_SPECIFIED, then this is a
+	// If RegionLinkingMode is ALL_REGIONS_EXCEPT_SPECIFIED , then this is a
 	// space-separated list of Regions that do not aggregate findings to the
-	// aggregation Region. If RegionLinkingMode  is SPECIFIED_REGIONS, then this is a
+	// aggregation Region. If RegionLinkingMode is SPECIFIED_REGIONS , then this is a
 	// space-separated list of Regions that do aggregate findings to the aggregation
 	// Region.
 	Regions []string

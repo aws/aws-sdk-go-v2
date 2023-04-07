@@ -15,8 +15,8 @@ import (
 // Updates an Amazon EKS managed node group configuration. Your node group
 // continues to function during the update. The response output includes an update
 // ID that you can use to track the status of your node group update with the
-// DescribeUpdateAPI operation. Currently you can update the Kubernetes labels
-// for a node group or the scaling configuration.
+// DescribeUpdate API operation. Currently you can update the Kubernetes labels for
+// a node group or the scaling configuration.
 func (c *Client) UpdateNodegroupConfig(ctx context.Context, params *UpdateNodegroupConfigInput, optFns ...func(*Options)) (*UpdateNodegroupConfigOutput, error) {
 	if params == nil {
 		params = &UpdateNodegroupConfigInput{}
@@ -44,8 +44,8 @@ type UpdateNodegroupConfigInput struct {
 	// This member is required.
 	NodegroupName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
 	// The Kubernetes labels to be applied to the nodes in the node group after the

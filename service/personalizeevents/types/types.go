@@ -7,11 +7,11 @@ import (
 	"time"
 )
 
-// Represents user interaction event information sent using the PutEvents  API.
+// Represents user interaction event information sent using the PutEvents API.
 type Event struct {
 
 	// The type of event, such as click or download. This property corresponds to the
-	// EVENT_TYPEfield of your Interactions schema and depends on the types of events
+	// EVENT_TYPE field of your Interactions schema and depends on the types of events
 	// you are tracking.
 	//
 	// This member is required.
@@ -34,7 +34,7 @@ type Event struct {
 	EventValue *float32
 
 	// A list of item IDs that represents the sequence of items you have shown the
-	// user. For example, ["itemId1", "itemId2", "itemId3"]. Provide a list of items
+	// user. For example, ["itemId1", "itemId2", "itemId3"] . Provide a list of items
 	// to manually record impressions data for an event. For more information on
 	// recording impressions data, see Recording impressions data (https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data)
 	// .
@@ -44,20 +44,19 @@ type Event struct {
 	// schema.
 	ItemId *string
 
-	// Contains information about the metric attribution associated with an event.
-	// For more information about metric attributions, see Measuring impact of
+	// Contains information about the metric attribution associated with an event. For
+	// more information about metric attributions, see Measuring impact of
 	// recommendations (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html)
 	// .
 	MetricAttribution *MetricAttribution
 
 	// A string map of event-specific data that you might choose to record. For
-	// example, if a user rates a movie on your site, other than movie ID ( itemId)
-	// and rating ( eventValue) , you might also send the number of movie ratings
-	// made by the user. Each item in the map consists of a key-value pair. For
-	// example, {"numberOfRatings": "12"} The keys use camel case names that match
-	// the fields in the Interactions schema. In the above example, the
-	// numberOfRatingswould match the 'NUMBER_OF_RATINGS' field defined in the
-	// Interactions schema.
+	// example, if a user rates a movie on your site, other than movie ID ( itemId )
+	// and rating ( eventValue ) , you might also send the number of movie ratings made
+	// by the user. Each item in the map consists of a key-value pair. For example,
+	// {"numberOfRatings": "12"} The keys use camel case names that match the fields in
+	// the Interactions schema. In the above example, the numberOfRatings would match
+	// the 'NUMBER_OF_RATINGS' field defined in the Interactions schema.
 	//
 	// This value conforms to the media type: application/json
 	Properties *string
@@ -68,8 +67,8 @@ type Event struct {
 	// provide a recommendationId if you use a metric attribution to measure the
 	// impact of recommendations. For more information on recording impressions data,
 	// see Recording impressions data (https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data)
-	// . For more information on creating a metric attribution see Measuring impact
-	// of recommendations (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html)
+	// . For more information on creating a metric attribution see Measuring impact of
+	// recommendations (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html)
 	// .
 	RecommendationId *string
 
@@ -87,12 +86,12 @@ type Item struct {
 	ItemId *string
 
 	// A string map of item-specific metadata. Each element in the map consists of a
-	// key-value pair. For example, {"numberOfRatings": "12"}. The keys use camel
-	// case names that match the fields in the schema for the Items dataset. In the
-	// previous example, the numberOfRatings matches the 'NUMBER_OF_RATINGS' field
-	// defined in the Items schema. For categorical string data, to include multiple
-	// categories for a single item, separate each category with a pipe separator ( |
-	// ). For example, \"Horror|Action\" .
+	// key-value pair. For example, {"numberOfRatings": "12"} . The keys use camel case
+	// names that match the fields in the schema for the Items dataset. In the previous
+	// example, the numberOfRatings matches the 'NUMBER_OF_RATINGS' field defined in
+	// the Items schema. For categorical string data, to include multiple categories
+	// for a single item, separate each category with a pipe separator ( | ). For
+	// example, \"Horror|Action\" .
 	//
 	// This value conforms to the media type: application/json
 	Properties *string
@@ -125,7 +124,7 @@ type User struct {
 	UserId *string
 
 	// A string map of user-specific metadata. Each element in the map consists of a
-	// key-value pair. For example, {"numberOfVideosWatched": "45"}. The keys use
+	// key-value pair. For example, {"numberOfVideosWatched": "45"} . The keys use
 	// camel case names that match the fields in the schema for the Users dataset. In
 	// the previous example, the numberOfVideosWatched matches the
 	// 'NUMBER_OF_VIDEOS_WATCHED' field defined in the Users schema. For categorical

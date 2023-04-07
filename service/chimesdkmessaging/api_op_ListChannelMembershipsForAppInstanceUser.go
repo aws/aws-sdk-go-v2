@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all channels that anr AppInstanceUser  or AppInstanceBot is a part of.
+// Lists all channels that anr AppInstanceUser or AppInstanceBot is a part of.
 // Only an AppInstanceAdmin can call the API with a user ARN that is not their
-// own. The x-amz-chime-bearer  request header is mandatory. Use the ARN of the
+// own. The x-amz-chime-bearer request header is mandatory. Use the ARN of the
 // AppInstanceUser or AppInstanceBot that makes the API call as the value in the
 // header.
 func (c *Client) ListChannelMembershipsForAppInstanceUser(ctx context.Context, params *ListChannelMembershipsForAppInstanceUserInput, optFns ...func(*Options)) (*ListChannelMembershipsForAppInstanceUserOutput, error) {
@@ -34,7 +34,7 @@ func (c *Client) ListChannelMembershipsForAppInstanceUser(ctx context.Context, p
 
 type ListChannelMembershipsForAppInstanceUserInput struct {
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
@@ -143,8 +143,8 @@ type ListChannelMembershipsForAppInstanceUserPaginatorOptions struct {
 	// The maximum number of users that you want returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

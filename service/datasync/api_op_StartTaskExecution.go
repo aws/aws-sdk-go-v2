@@ -54,7 +54,7 @@ type StartTaskExecutionInput struct {
 	// handles files, objects, and their associated metadata. You also can specify how
 	// DataSync verifies data integrity, set bandwidth limits for your task, among
 	// other options. Each task setting has a default value. Unless you need to, you
-	// don't have to configure any of these Options  before starting your task.
+	// don't have to configure any of these Options before starting your task.
 	OverrideOptions *types.Options
 
 	// Specifies the tags that you want to apply to the Amazon Resource Name (ARN)

@@ -32,15 +32,15 @@ type GetCurrentUserDataInput struct {
 
 	// The filters to apply to returned user data. You can filter up to the following
 	// limits:
-	//     - Queues: 100
-	//     - Routing profiles: 100
-	//     - Agents: 100
-	//     - Contact states: 9
-	//     - User hierarchy groups: 1
-	// The user data is retrieved for only the
-	// specified values/resources in the filter. A maximum of one filter can be passed
-	// from queues, routing profiles, agents, and user hierarchy groups. Currently
-	// tagging is only supported on the resources that are passed in the filter.
+	//   - Queues: 100
+	//   - Routing profiles: 100
+	//   - Agents: 100
+	//   - Contact states: 9
+	//   - User hierarchy groups: 1
+	// The user data is retrieved for only the specified values/resources in the
+	// filter. A maximum of one filter can be passed from queues, routing profiles,
+	// agents, and user hierarchy groups. Currently tagging is only supported on the
+	// resources that are passed in the filter.
 	//
 	// This member is required.
 	Filters *types.UserDataFilters
@@ -155,8 +155,8 @@ type GetCurrentUserDataPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

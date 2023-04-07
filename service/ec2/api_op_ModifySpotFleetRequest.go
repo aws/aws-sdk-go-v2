@@ -12,23 +12,23 @@ import (
 )
 
 // Modifies the specified Spot Fleet request. You can only modify a Spot Fleet
-// request of type maintain. While the Spot Fleet request is being modified, it
-// is in the modifying state. To scale up your Spot Fleet, increase its target
+// request of type maintain . While the Spot Fleet request is being modified, it is
+// in the modifying state. To scale up your Spot Fleet, increase its target
 // capacity. The Spot Fleet launches the additional Spot Instances according to the
 // allocation strategy for the Spot Fleet request. If the allocation strategy is
-// lowestPrice, the Spot Fleet launches instances using the Spot Instance pool
-// with the lowest price. If the allocation strategy is diversified, the Spot
+// lowestPrice , the Spot Fleet launches instances using the Spot Instance pool
+// with the lowest price. If the allocation strategy is diversified , the Spot
 // Fleet distributes the instances across the Spot Instance pools. If the
-// allocation strategy is capacityOptimized, Spot Fleet launches instances from
+// allocation strategy is capacityOptimized , Spot Fleet launches instances from
 // Spot Instance pools with optimal capacity for the number of instances that are
 // launching. To scale down your Spot Fleet, decrease its target capacity. First,
 // the Spot Fleet cancels any open requests that exceed the new target capacity.
 // You can request that the Spot Fleet terminate Spot Instances until the size of
 // the fleet no longer exceeds the new target capacity. If the allocation strategy
-// is lowestPrice, the Spot Fleet terminates the instances with the highest price
-// per unit. If the allocation strategy is capacityOptimized, the Spot Fleet
+// is lowestPrice , the Spot Fleet terminates the instances with the highest price
+// per unit. If the allocation strategy is capacityOptimized , the Spot Fleet
 // terminates the instances in the Spot Instance pools that have the least
-// available Spot Instance capacity. If the allocation strategy is diversified,
+// available Spot Instance capacity. If the allocation strategy is diversified ,
 // the Spot Fleet terminates instances across the Spot Instance pools.
 // Alternatively, you can request that the Spot Fleet keep the fleet at its current
 // size, but not replace any Spot Instances that are interrupted or that you
@@ -60,15 +60,15 @@ type ModifySpotFleetRequestInput struct {
 	// Reserved.
 	Context *string
 
-	// Indicates whether running instances should be terminated if the target
-	// capacity of the Spot Fleet request is decreased below the current size of the
-	// Spot Fleet. Supported only for fleets of type maintain .
+	// Indicates whether running instances should be terminated if the target capacity
+	// of the Spot Fleet request is decreased below the current size of the Spot Fleet.
+	// Supported only for fleets of type maintain .
 	ExcessCapacityTerminationPolicy types.ExcessCapacityTerminationPolicy
 
 	// The launch template and overrides. You can only use this parameter if you
-	// specified a launch template ( LaunchTemplateConfigs) in your Spot Fleet
-	// request. If you specified LaunchSpecifications in your Spot Fleet request,
-	// then omit this parameter.
+	// specified a launch template ( LaunchTemplateConfigs ) in your Spot Fleet
+	// request. If you specified LaunchSpecifications in your Spot Fleet request, then
+	// omit this parameter.
 	LaunchTemplateConfigs []types.LaunchTemplateConfig
 
 	// The number of On-Demand Instances in the fleet.
@@ -83,7 +83,7 @@ type ModifySpotFleetRequestInput struct {
 // Contains the output of ModifySpotFleetRequest.
 type ModifySpotFleetRequestOutput struct {
 
-	// If the request succeeds, the response returns true. If the request fails, no
+	// If the request succeeds, the response returns true . If the request fails, no
 	// response is returned, and instead an error message is returned.
 	Return *bool
 

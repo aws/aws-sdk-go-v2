@@ -35,8 +35,8 @@ type ApplySecurityGroupsToClientVpnTargetNetworkInput struct {
 	// This member is required.
 	ClientVpnEndpointId *string
 
-	// The IDs of the security groups to apply to the associated target network. Up
-	// to 5 security groups can be applied to an associated target network.
+	// The IDs of the security groups to apply to the associated target network. Up to
+	// 5 security groups can be applied to an associated target network.
 	//
 	// This member is required.
 	SecurityGroupIds []string

@@ -36,8 +36,8 @@ type UpdateApiInput struct {
 	// This member is required.
 	ApiId *string
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API
-	// Key Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
+	// An API key selection expression. Supported only for WebSocket APIs. See API Key
+	// Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
 	// .
 	ApiKeySelectionExpression *string
 
@@ -112,8 +112,8 @@ type UpdateApiOutput struct {
 	// The API ID.
 	ApiId *string
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API
-	// Key Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
+	// An API key selection expression. Supported only for WebSocket APIs. See API Key
+	// Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
 	// .
 	ApiKeySelectionExpression *string
 

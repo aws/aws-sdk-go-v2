@@ -35,25 +35,25 @@ func (c *Client) ExportLambdaFunctionRecommendations(ctx context.Context, params
 
 type ExportLambdaFunctionRecommendationsInput struct {
 
-	// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket
-	// name and key prefix for a recommendations export job. You must create the
-	// destination Amazon S3 bucket for your recommendations export before you create
-	// the export job. Compute Optimizer does not create the S3 bucket for you. After
-	// you create the S3 bucket, ensure that it has the required permission policy to
-	// allow Compute Optimizer to write the export file to it. If you plan to specify
-	// an object prefix when you create the export job, you must include the object
-	// prefix in the policy that you add to the S3 bucket. For more information, see
-	// Amazon S3 Bucket Policy for Compute Optimizer (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
+	// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
+	// and key prefix for a recommendations export job. You must create the destination
+	// Amazon S3 bucket for your recommendations export before you create the export
+	// job. Compute Optimizer does not create the S3 bucket for you. After you create
+	// the S3 bucket, ensure that it has the required permission policy to allow
+	// Compute Optimizer to write the export file to it. If you plan to specify an
+	// object prefix when you create the export job, you must include the object prefix
+	// in the policy that you add to the S3 bucket. For more information, see Amazon
+	// S3 Bucket Policy for Compute Optimizer (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
 	// in the Compute Optimizer User Guide.
 	//
 	// This member is required.
 	S3DestinationConfig *types.S3DestinationConfig
 
-	// The IDs of the Amazon Web Services accounts for which to export Lambda
-	// function recommendations. If your account is the management account of an
-	// organization, use this parameter to specify the member account for which you
-	// want to export recommendations. This parameter cannot be specified together with
-	// the include member accounts parameter. The parameters are mutually exclusive.
+	// The IDs of the Amazon Web Services accounts for which to export Lambda function
+	// recommendations. If your account is the management account of an organization,
+	// use this parameter to specify the member account for which you want to export
+	// recommendations. This parameter cannot be specified together with the include
+	// member accounts parameter. The parameters are mutually exclusive.
 	// Recommendations for member accounts are not included in the export if this
 	// parameter, or the include member accounts parameter, is omitted. You can specify
 	// multiple account IDs per request.
@@ -92,13 +92,13 @@ type ExportLambdaFunctionRecommendationsInput struct {
 type ExportLambdaFunctionRecommendationsOutput struct {
 
 	// The identification number of the export job. Use the
-	// DescribeRecommendationExportJobsaction, and specify the job ID to view the
+	// DescribeRecommendationExportJobs action, and specify the job ID to view the
 	// status of an export job.
 	JobId *string
 
-	// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket
-	// name and object keys of a recommendations export file, and its associated
-	// metadata file.
+	// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
+	// and object keys of a recommendations export file, and its associated metadata
+	// file.
 	S3Destination *types.S3Destination
 
 	// Metadata pertaining to the operation's result.

@@ -32,17 +32,16 @@ type DescribeFleetAdvisorSchemasInput struct {
 
 	// If you specify any of the following filters, the output includes information
 	// for only those schemas that meet the filter criteria:
-	//     - complexity – The schema's complexity, for example Simple .
-	//     - database-id – The ID of the schema's database.
-	//     - database-ip-address – The IP address of the schema's database.
-	//     - database-name – The name of the schema's database.
-	//     - database-engine – The name of the schema database's engine.
-	//     - original-schema-name – The name of the schema's database's main schema.
-	//     - schema-id – The ID of the schema, for example 15 .
-	//     - schema-name – The name of the schema.
-	//     - server-ip-address – The IP address of the schema database's server.
-	// An
-	// example is: describe-fleet-advisor-schemas --filter
+	//   - complexity – The schema's complexity, for example Simple .
+	//   - database-id – The ID of the schema's database.
+	//   - database-ip-address – The IP address of the schema's database.
+	//   - database-name – The name of the schema's database.
+	//   - database-engine – The name of the schema database's engine.
+	//   - original-schema-name – The name of the schema's database's main schema.
+	//   - schema-id – The ID of the schema, for example 15 .
+	//   - schema-name – The name of the schema.
+	//   - server-ip-address – The IP address of the schema database's server.
+	// An example is: describe-fleet-advisor-schemas --filter
 	// Name="schema-id",Values="50"
 	Filters []types.Filter
 
@@ -60,11 +59,11 @@ type DescribeFleetAdvisorSchemasInput struct {
 
 type DescribeFleetAdvisorSchemasOutput struct {
 
-	// A collection of SchemaResponse  objects.
+	// A collection of SchemaResponse objects.
 	FleetAdvisorSchemas []types.SchemaResponse
 
-	// If NextToken  is returned, there are more results available. The value of
-	// NextTokenis a unique pagination token for each page. Make the call again using
+	// If NextToken is returned, there are more results available. The value of
+	// NextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged.
 	NextToken *string
@@ -152,8 +151,8 @@ type DescribeFleetAdvisorSchemasPaginatorOptions struct {
 	// Sets the maximum number of records returned in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

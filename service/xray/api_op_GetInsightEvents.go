@@ -32,8 +32,8 @@ func (c *Client) GetInsightEvents(ctx context.Context, params *GetInsightEventsI
 
 type GetInsightEventsInput struct {
 
-	// The insight's unique identifier. Use the GetInsightSummaries action to
-	// retrieve an InsightId.
+	// The insight's unique identifier. Use the GetInsightSummaries action to retrieve
+	// an InsightId.
 	//
 	// This member is required.
 	InsightId *string
@@ -140,8 +140,8 @@ type GetInsightEventsPaginatorOptions struct {
 	// Used to retrieve at most the specified value of events.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

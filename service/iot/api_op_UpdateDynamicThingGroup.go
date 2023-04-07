@@ -51,8 +51,8 @@ type UpdateDynamicThingGroupInput struct {
 	// The dynamic thing group search query string to update.
 	QueryString *string
 
-	// The dynamic thing group query version to update. Currently one query version
-	// is supported: "2017-09-30". If not specified, the query version defaults to this
+	// The dynamic thing group query version to update. Currently one query version is
+	// supported: "2017-09-30". If not specified, the query version defaults to this
 	// value.
 	QueryVersion *string
 

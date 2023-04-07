@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Type  object.
+// Deletes a Type object.
 func (c *Client) DeleteType(ctx context.Context, params *DeleteTypeInput, optFns ...func(*Options)) (*DeleteTypeOutput, error) {
 	if params == nil {
 		params = &DeleteTypeInput{}

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a natively supported Amazon Web Service as an Amazon Security Lake
-// source. Enables source types for member accounts in required Amazon Web Services
+// Adds a natively supported Amazon Web Service as an Amazon Security Lake source.
+// Enables source types for member accounts in required Amazon Web Services
 // Regions, based on the parameters you specify. You can choose any source type in
 // any Region for either accounts that are part of a trusted organization or
 // standalone accounts. At least one of the three dimensions is a mandatory input
@@ -43,8 +43,8 @@ func (c *Client) CreateAwsLogSource(ctx context.Context, params *CreateAwsLogSou
 
 type CreateAwsLogSourceInput struct {
 
-	// Specifies the input order to enable dimensions in Security Lake, namely
-	// Region, source type, and member account.
+	// Specifies the input order to enable dimensions in Security Lake, namely Region,
+	// source type, and member account.
 	//
 	// This member is required.
 	InputOrder []types.Dimension
@@ -66,8 +66,8 @@ type CreateAwsLogSourceInput struct {
 
 type CreateAwsLogSourceOutput struct {
 
-	// Lists all accounts in which enabling a natively supported Amazon Web Service
-	// as a Security Lake source failed. The failure occurred as these accounts are not
+	// Lists all accounts in which enabling a natively supported Amazon Web Service as
+	// a Security Lake source failed. The failure occurred as these accounts are not
 	// part of an organization.
 	Failed []string
 

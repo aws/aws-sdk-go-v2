@@ -20,20 +20,23 @@ import (
 // have the same key usage. This restriction prevents errors in code that uses
 // aliases. If you must assign an alias to a different type of KMS key, use
 // DeleteAlias to delete the old alias and CreateAlias to create a new alias. You
-// cannot use UpdateAlias  to change an alias name. To change an alias name, use
+// cannot use UpdateAlias to change an alias name. To change an alias name, use
 // DeleteAlias to delete the old alias and CreateAlias to create a new alias.
 // Because an alias is not a property of a KMS key, you can create, update, and
 // delete the aliases of a KMS key without affecting the KMS key. Also, aliases do
 // not appear in the response from the DescribeKey operation. To get the aliases
-// of all KMS keys in the account, use the ListAliases operation. The KMS key
-// that you use for this operation must be in a compatible key state. For details,
-// see Key states of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// of all KMS keys in the account, use the ListAliases operation. The KMS key that
+// you use for this operation must be in a compatible key state. For details, see
+// Key states of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.
 // Required permissions
-//   - kms:UpdateAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) on the alias (IAM policy).
-//   - kms:UpdateAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) on the current KMS key (key policy).
-//   - kms:UpdateAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) on the new KMS key (key policy).
+//   - kms:UpdateAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+//     on the alias (IAM policy).
+//   - kms:UpdateAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+//     on the current KMS key (key policy).
+//   - kms:UpdateAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+//     on the new KMS key (key policy).
 //
 // For details, see Controlling access to aliases (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access)
 // in the Key Management Service Developer Guide. Related operations:
@@ -71,10 +74,10 @@ type UpdateAliasInput struct {
 	// alias. Also, the new target KMS key must be the same type as the current target
 	// KMS key (both symmetric or both asymmetric or both HMAC) and they must have the
 	// same key usage. Specify the key ID or key ARN of the KMS key. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey. To
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey . To
 	// verify that the alias is mapped to the correct KMS key, use ListAliases .
 	//
 	// This member is required.

@@ -13,7 +13,7 @@ import (
 )
 
 // Returns information about the specified human loop. If the human loop was
-// deleted, this operation will return a ResourceNotFoundException  error.
+// deleted, this operation will return a ResourceNotFoundException error.
 func (c *Client) DescribeHumanLoop(ctx context.Context, params *DescribeHumanLoopInput, optFns ...func(*Options)) (*DescribeHumanLoopOutput, error) {
 	if params == nil {
 		params = &DescribeHumanLoopInput{}

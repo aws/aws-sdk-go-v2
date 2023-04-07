@@ -181,9 +181,9 @@ func NewClusterCreatedWaiter(client DescribeClusterAPIClient, optFns ...func(*Cl
 	}
 }
 
-// Wait calls the waiter function for ClusterCreated waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ClusterCreated waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ClusterCreatedWaiter) Wait(ctx context.Context, params *DescribeClusterInput, maxWaitDur time.Duration, optFns ...func(*ClusterCreatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -365,9 +365,9 @@ func NewClusterDeletedWaiter(client DescribeClusterAPIClient, optFns ...func(*Cl
 	}
 }
 
-// Wait calls the waiter function for ClusterDeleted waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ClusterDeleted waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ClusterDeletedWaiter) Wait(ctx context.Context, params *DescribeClusterInput, maxWaitDur time.Duration, optFns ...func(*ClusterDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

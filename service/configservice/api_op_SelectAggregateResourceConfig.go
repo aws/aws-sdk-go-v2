@@ -18,12 +18,12 @@ import (
 // configurations matching the properties. For more information about query
 // components, see the Query Components  (https://docs.aws.amazon.com/config/latest/developerguide/query-components.html)
 // section in the Config Developer Guide. If you run an aggregation query (i.e.,
-// using GROUP BY  or using aggregate functions such as COUNT ; e.g., SELECT
-// resourceId, COUNT(*) WHERE resourceType = 'AWS::IAM::Role' GROUP BY resourceId
-// ) and do not specify the MaxResults  or the Limit query parameters, the
-// default page size is set to 500. If you run a non-aggregation query (i.e., not
-// using GROUP BY  or aggregate function; e.g., SELECT * WHERE resourceType =
-// 'AWS::IAM::Role' ) and do not specify the MaxResults  or the Limit query
+// using GROUP BY or using aggregate functions such as COUNT ; e.g., SELECT
+// resourceId, COUNT(*) WHERE resourceType = 'AWS::IAM::Role' GROUP BY resourceId )
+// and do not specify the MaxResults or the Limit query parameters, the default
+// page size is set to 500. If you run a non-aggregation query (i.e., not using
+// GROUP BY or aggregate function; e.g., SELECT * WHERE resourceType =
+// 'AWS::IAM::Role' ) and do not specify the MaxResults or the Limit query
 // parameters, the default page size is set to 25.
 func (c *Client) SelectAggregateResourceConfig(ctx context.Context, params *SelectAggregateResourceConfigInput, optFns ...func(*Options)) (*SelectAggregateResourceConfigOutput, error) {
 	if params == nil {
@@ -59,8 +59,8 @@ type SelectAggregateResourceConfigInput struct {
 	// the Limit request parameter.
 	MaxResults int32
 
-	// The nextToken string returned in a previous request that you use to request
-	// the next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request the
+	// next page of results in a paginated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -68,8 +68,8 @@ type SelectAggregateResourceConfigInput struct {
 
 type SelectAggregateResourceConfigOutput struct {
 
-	// The nextToken string returned in a previous request that you use to request
-	// the next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request the
+	// next page of results in a paginated response.
 	NextToken *string
 
 	// Details about the query.
@@ -161,8 +161,8 @@ type SelectAggregateResourceConfigPaginatorOptions struct {
 	// The maximum number of query results returned on each page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

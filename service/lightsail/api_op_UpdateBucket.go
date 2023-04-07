@@ -39,8 +39,7 @@ type UpdateBucketInput struct {
 	// An object that describes the access log configuration for the bucket.
 	AccessLogConfig *types.BucketAccessLogConfig
 
-	// An object that sets the public accessibility of objects in the specified
-	// bucket.
+	// An object that sets the public accessibility of objects in the specified bucket.
 	AccessRules *types.AccessRules
 
 	// An array of strings to specify the Amazon Web Services account IDs that can
@@ -48,10 +47,11 @@ type UpdateBucketInput struct {
 	// access to a bucket.
 	ReadonlyAccessAccounts []string
 
-	// Specifies whether to enable or suspend versioning of objects in the bucket.
-	// The following options can be specified:
-	//     - Enabled - Enables versioning of objects in the specified bucket.
-	//     - Suspended - Suspends versioning of objects in the specified bucket. Existing object versions are retained.
+	// Specifies whether to enable or suspend versioning of objects in the bucket. The
+	// following options can be specified:
+	//   - Enabled - Enables versioning of objects in the specified bucket.
+	//   - Suspended - Suspends versioning of objects in the specified bucket. Existing
+	//   object versions are retained.
 	Versioning *string
 
 	noSmithyDocumentSerde

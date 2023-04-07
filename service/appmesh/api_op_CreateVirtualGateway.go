@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a virtual gateway. A virtual gateway allows resources outside your
-// mesh to communicate to resources that are inside your mesh. The virtual gateway
+// Creates a virtual gateway. A virtual gateway allows resources outside your mesh
+// to communicate to resources that are inside your mesh. The virtual gateway
 // represents an Envoy proxy running in an Amazon ECS task, in a Kubernetes
 // service, or on an Amazon EC2 instance. Unlike a virtual node, which represents
 // an Envoy running with an application, a virtual gateway represents Envoy
@@ -52,8 +52,8 @@ type CreateVirtualGatewayInput struct {
 	// This member is required.
 	VirtualGatewayName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
 
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the

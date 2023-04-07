@@ -17,7 +17,7 @@ type AdvancedRecognitionSetting struct {
 	noSmithyDocumentSerde
 }
 
-// Filters responses returned by the ListAggregatedUtterances  operation.
+// Filters responses returned by the ListAggregatedUtterances operation.
 type AggregatedUtterancesFilter struct {
 
 	// The name of the field to filter the utterance list.
@@ -25,10 +25,10 @@ type AggregatedUtterancesFilter struct {
 	// This member is required.
 	Name AggregatedUtterancesFilterName
 
-	// The operator to use for the filter. Specify EQ  when the
-	// ListAggregatedUtterancesoperation should return only utterances that equal the
-	// specified value. Specify CO  when the ListAggregatedUtterances operation
-	// should return utterances that contain the specified value.
+	// The operator to use for the filter. Specify EQ when the ListAggregatedUtterances
+	// operation should return only utterances that equal the specified value. Specify
+	// CO when the ListAggregatedUtterances operation should return utterances that
+	// contain the specified value.
 	//
 	// This member is required.
 	Operator AggregatedUtterancesFilterOperator
@@ -59,26 +59,25 @@ type AggregatedUtterancesSortBy struct {
 }
 
 // Provides summary information for aggregated utterances. The
-// ListAggregatedUtterancesoperations combines all instances of the same
-// utterance into a single aggregated summary.
+// ListAggregatedUtterances operations combines all instances of the same utterance
+// into a single aggregated summary.
 type AggregatedUtterancesSummary struct {
 
-	// Aggregated utterance data may contain utterances from versions of your bot
-	// that have since been deleted. When the aggregated contains this kind of data,
-	// this field is set to true.
+	// Aggregated utterance data may contain utterances from versions of your bot that
+	// have since been deleted. When the aggregated contains this kind of data, this
+	// field is set to true.
 	ContainsDataFromDeletedResources *bool
 
 	// The number of times that the utterance was detected by Amazon Lex during the
 	// time period. When an utterance is detected, it activates an intent or a slot.
 	HitCount *int32
 
-	// The number of times that the utterance was missed by Amazon Lex An utterance
-	// is missed when it doesn't activate an intent or slot.
+	// The number of times that the utterance was missed by Amazon Lex An utterance is
+	// missed when it doesn't activate an intent or slot.
 	MissedCount *int32
 
-	// The text of the utterance. If the utterance was used with the
-	// RecognizeUtteranceoperation, the text is the transcription of the audio
-	// utterance.
+	// The text of the utterance. If the utterance was used with the RecognizeUtterance
+	// operation, the text is the transcription of the audio utterance.
 	Utterance *string
 
 	// The date and time that the utterance was first recorded in the time window for
@@ -162,7 +161,7 @@ type AudioAndDTMFInputSpecification struct {
 type AudioLogDestination struct {
 
 	// The Amazon S3 bucket where the audio log files are stored. The IAM role
-	// specified in the roleArn  parameter of the CreateBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
+	// specified in the roleArn parameter of the CreateBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
 	// operation must have permission to write to this bucket.
 	//
 	// This member is required.
@@ -228,7 +227,7 @@ type BotAliasHistoryEvent struct {
 // different Lambda function depending on the bot's locale.
 type BotAliasLocaleSettings struct {
 
-	// Determines whether the locale is enabled for the bot. If the value is false,
+	// Determines whether the locale is enabled for the bot. If the value is false ,
 	// the locale isn't available for use.
 	//
 	// This member is required.
@@ -252,7 +251,7 @@ type BotAliasSummary struct {
 	// The name of the bot alias.
 	BotAliasName *string
 
-	// The current state of the bot alias. If the status is Available, the alias is
+	// The current state of the bot alias. If the status is Available , the alias is
 	// ready for use.
 	BotAliasStatus BotAliasStatus
 
@@ -288,7 +287,7 @@ type BotExportSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Filters the responses returned by the ListBots  operation.
+// Filters the responses returned by the ListBots operation.
 type BotFilter struct {
 
 	// The name of the field to filter the list of bots.
@@ -296,8 +295,8 @@ type BotFilter struct {
 	// This member is required.
 	Name BotFilterName
 
-	// The operator to use for the filter. Specify EQ  when the ListBots operation
-	// should return only aliases that equal the specified value. Specify CO  when the
+	// The operator to use for the filter. Specify EQ when the ListBots operation
+	// should return only aliases that equal the specified value. Specify CO when the
 	// ListBots operation should return aliases that contain the specified value.
 	//
 	// This member is required.
@@ -332,7 +331,7 @@ type BotImportSpecification struct {
 	RoleArn *string
 
 	// A list of tags to add to the bot. You can only add tags when you import a bot.
-	// You can't use the UpdateBot  operation to update tags. To update tags, use the
+	// You can't use the UpdateBot operation to update tags. To update tags, use the
 	// TagResource operation.
 	BotTags map[string]string
 
@@ -345,7 +344,7 @@ type BotImportSpecification struct {
 
 	// A list of tags to add to the test alias for a bot. You can only add tags when
 	// you import a bot. You can't use the UpdateAlias operation to update tags. To
-	// update tags on the test alias, use the TagResource  operation.
+	// update tags on the test alias, use the TagResource operation.
 	TestBotAliasTags map[string]string
 
 	noSmithyDocumentSerde
@@ -373,7 +372,7 @@ type BotLocaleExportSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Filters responses returned by the ListBotLocales  operation.
+// Filters responses returned by the ListBotLocales operation.
 type BotLocaleFilter struct {
 
 	// The name of the field to filter the list of bots.
@@ -381,7 +380,7 @@ type BotLocaleFilter struct {
 	// This member is required.
 	Name BotLocaleFilterName
 
-	// The operator to use for the filter. Specify EQ  when the ListBotLocales
+	// The operator to use for the filter. Specify EQ when the ListBotLocales
 	// operation should return only aliases that equal the specified value. Specify CO
 	// when the ListBotLocales operation should return aliases that contain the
 	// specified value.
@@ -440,14 +439,14 @@ type BotLocaleImportSpecification struct {
 	// , AMAZON.KendraSearchIntent , or both when returning alternative intents.
 	// AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they
 	// are configured for the bot. For example, suppose a bot is configured with the
-	// confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns
+	// confidence threshold of 0.80 and the AMAZON.FallbackIntent . Amazon Lex returns
 	// three alternative intents with the following confidence scores: IntentA (0.70),
 	// IntentB (0.60), IntentC (0.50). The response from the PostText operation would
 	// be:
-	//     - AMAZON.FallbackIntent
-	//     - IntentA
-	//     - IntentB
-	//     - IntentC
+	//   - AMAZON.FallbackIntent
+	//   - IntentA
+	//   - IntentB
+	//   - IntentC
 	NluIntentConfidenceThreshold *float64
 
 	// Defines settings for using an Amazon Polly voice to communicate with a user.
@@ -568,8 +567,8 @@ type BotRecommendationSummary struct {
 	// This member is required.
 	BotRecommendationId *string
 
-	// The status of the bot recommendation. If the status is Failed, then the
-	// reasons for the failure are listed in the failureReasons field.
+	// The status of the bot recommendation. If the status is Failed, then the reasons
+	// for the failure are listed in the failureReasons field.
 	//
 	// This member is required.
 	BotRecommendationStatus BotRecommendationStatus
@@ -853,9 +852,9 @@ type ConditionalSpecification struct {
 	// This member is required.
 	Active *bool
 
-	// A list of conditional branches. A conditional branch is made up of a
-	// condition, a response and a next step. The response and next step are executed
-	// when the condition is true.
+	// A list of conditional branches. A conditional branch is made up of a condition,
+	// a response and a next step. The response and next step are executed when the
+	// condition is true.
 	//
 	// This member is required.
 	ConditionalBranches []ConditionalBranch
@@ -980,27 +979,27 @@ type CustomVocabularyItem struct {
 // securing the data for your bot.
 type DataPrivacy struct {
 
-	// For each Amazon Lex bot created with the Amazon Lex Model Building Service,
-	// you must specify whether your use of Amazon Lex is related to a website,
+	// For each Amazon Lex bot created with the Amazon Lex Model Building Service, you
+	// must specify whether your use of Amazon Lex is related to a website, program, or
+	// other application that is directed or targeted, in whole or in part, to children
+	// under age 13 and subject to the Children's Online Privacy Protection Act (COPPA)
+	// by specifying true or false in the childDirected field. By specifying true in
+	// the childDirected field, you confirm that your use of Amazon Lex is related to
+	// a website, program, or other application that is directed or targeted, in whole
+	// or in part, to children under age 13 and subject to COPPA. By specifying false
+	// in the childDirected field, you confirm that your use of Amazon Lex is not
+	// related to a website, program, or other application that is directed or
+	// targeted, in whole or in part, to children under age 13 and subject to COPPA.
+	// You may not specify a default value for the childDirected field that does not
+	// accurately reflect whether your use of Amazon Lex is related to a website,
 	// program, or other application that is directed or targeted, in whole or in part,
-	// to children under age 13 and subject to the Children's Online Privacy Protection
-	// Act (COPPA) by specifying true  or false  in the childDirected field. By
-	// specifying true  in the childDirected field, you confirm that your use of
-	// Amazon Lex is related to a website, program, or other application that is
-	// directed or targeted, in whole or in part, to children under age 13 and subject
-	// to COPPA. By specifying false  in the childDirected field, you confirm that
-	// your use of Amazon Lex is not related to a website, program, or other
-	// application that is directed or targeted, in whole or in part, to children under
-	// age 13 and subject to COPPA. You may not specify a default value for the
-	// childDirectedfield that does not accurately reflect whether your use of Amazon
-	// Lex is related to a website, program, or other application that is directed or
-	// targeted, in whole or in part, to children under age 13 and subject to COPPA. If
-	// your use of Amazon Lex relates to a website, program, or other application that
-	// is directed in whole or in part, to children under age 13, you must obtain any
-	// required verifiable parental consent under COPPA. For information regarding the
-	// use of Amazon Lex in connection with websites, programs, or other applications
-	// that are directed or targeted, in whole or in part, to children under age 13,
-	// see the Amazon Lex FAQ (https://aws.amazon.com/lex/faqs#data-security) .
+	// to children under age 13 and subject to COPPA. If your use of Amazon Lex relates
+	// to a website, program, or other application that is directed in whole or in
+	// part, to children under age 13, you must obtain any required verifiable parental
+	// consent under COPPA. For information regarding the use of Amazon Lex in
+	// connection with websites, programs, or other applications that are directed or
+	// targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ (https://aws.amazon.com/lex/faqs#data-security)
+	// .
 	//
 	// This member is required.
 	ChildDirected bool
@@ -1025,8 +1024,8 @@ type DateRangeFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A set of actions that Amazon Lex should run if none of the other conditions
-// are met.
+// A set of actions that Amazon Lex should run if none of the other conditions are
+// met.
 type DefaultConditionalBranch struct {
 
 	// The next step in the conversation.
@@ -1084,8 +1083,8 @@ type DialogCodeHookInvocationSetting struct {
 	noSmithyDocumentSerde
 }
 
-// Settings that determine the Lambda function that Amazon Lex uses for
-// processing user responses.
+// Settings that determine the Lambda function that Amazon Lex uses for processing
+// user responses.
 type DialogCodeHookSettings struct {
 
 	// Enables the dialog code hook so that it processes user requests.
@@ -1117,14 +1116,14 @@ type DialogState struct {
 // Specifies the DTMF input specifications.
 type DTMFSpecification struct {
 
-	// The DTMF character that clears the accumulated DTMF digits and immediately
-	// ends the input.
+	// The DTMF character that clears the accumulated DTMF digits and immediately ends
+	// the input.
 	//
 	// This member is required.
 	DeletionCharacter *string
 
-	// The DTMF character that immediately ends input. If the user does not press
-	// this character, the input ends after the end timeout.
+	// The DTMF character that immediately ends input. If the user does not press this
+	// character, the input ends after the end timeout.
 	//
 	// This member is required.
 	EndCharacter *string
@@ -1143,8 +1142,8 @@ type DTMFSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Settings that specify the dialog code hook that is called by Amazon Lex
-// between eliciting slot values.
+// Settings that specify the dialog code hook that is called by Amazon Lex between
+// eliciting slot values.
 type ElicitationCodeHookInvocationSetting struct {
 
 	// Indicates whether a Lambda function should be invoked for the dialog.
@@ -1194,7 +1193,7 @@ type ExportFilter struct {
 	// This member is required.
 	Operator ExportFilterOperator
 
-	// The values to use to filter the response. The values must be Bot , BotLocale,
+	// The values to use to filter the response. The values must be Bot , BotLocale ,
 	// or CustomVocabulary .
 	//
 	// This member is required.
@@ -1204,8 +1203,8 @@ type ExportFilter struct {
 }
 
 // Provides information about the bot or bot locale that you want to export. You
-// can specify the botExportSpecification  or the botLocaleExportSpecification,
-// but not both.
+// can specify the botExportSpecification or the botLocaleExportSpecification , but
+// not both.
 type ExportResourceSpecification struct {
 
 	// Parameters for exporting a bot.
@@ -1281,8 +1280,8 @@ type FailedCustomVocabularyItem struct {
 	// vocabulary list.
 	ErrorMessage *string
 
-	// The unique item identifer for the failed custom vocabulary item from the
-	// custom vocabulary list.
+	// The unique item identifer for the failed custom vocabulary item from the custom
+	// vocabulary list.
 	ItemId *string
 
 	noSmithyDocumentSerde
@@ -1297,8 +1296,8 @@ type FulfillmentCodeHookSettings struct {
 	// This member is required.
 	Enabled bool
 
-	// Determines whether the fulfillment code hook is used. When active is false,
-	// the code hook doesn't run.
+	// Determines whether the fulfillment code hook is used. When active is false, the
+	// code hook doesn't run.
 	Active *bool
 
 	// Provides settings for update messages sent to the user for long-running Lambda
@@ -1331,8 +1330,7 @@ type FulfillmentStartResponseSpecification struct {
 	// This member is required.
 	MessageGroups []MessageGroup
 
-	// Determines whether the user can interrupt the start message while it is
-	// playing.
+	// Determines whether the user can interrupt the start message while it is playing.
 	AllowInterrupt *bool
 
 	noSmithyDocumentSerde
@@ -1350,14 +1348,13 @@ type FulfillmentUpdateResponseSpecification struct {
 	// This member is required.
 	FrequencyInSeconds *int32
 
-	// One to 5 message groups that contain update messages. Amazon Lex chooses one
-	// of the messages to play to the user.
+	// One to 5 message groups that contain update messages. Amazon Lex chooses one of
+	// the messages to play to the user.
 	//
 	// This member is required.
 	MessageGroups []MessageGroup
 
-	// Determines whether the user can interrupt an update message while it is
-	// playing.
+	// Determines whether the user can interrupt an update message while it is playing.
 	AllowInterrupt *bool
 
 	noSmithyDocumentSerde
@@ -1367,9 +1364,9 @@ type FulfillmentUpdateResponseSpecification struct {
 // intent.
 type FulfillmentUpdatesSpecification struct {
 
-	// Determines whether fulfillment updates are sent to the user. When this field
-	// is true, updates are sent. If the active  field is set to true, the
-	// startResponse , updateResponse , and timeoutInSeconds  fields are required.
+	// Determines whether fulfillment updates are sent to the user. When this field is
+	// true, updates are sent. If the active field is set to true, the startResponse ,
+	// updateResponse , and timeoutInSeconds fields are required.
 	//
 	// This member is required.
 	Active *bool
@@ -1464,7 +1461,7 @@ type ImportFilter struct {
 	// This member is required.
 	Operator ImportFilterOperator
 
-	// The values to use to filter the response. The values must be Bot , BotLocale,
+	// The values to use to filter the response. The values must be Bot , BotLocale ,
 	// or CustomVocabulary .
 	//
 	// This member is required.
@@ -1474,8 +1471,8 @@ type ImportFilter struct {
 }
 
 // Provides information about the bot or bot locale that you want to import. You
-// can specify the botImportSpecification  or the botLocaleImportSpecification,
-// but not both.
+// can specify the botImportSpecification or the botLocaleImportSpecification , but
+// not both.
 type ImportResourceSpecification struct {
 
 	// Parameters for importing a bot.
@@ -1588,7 +1585,7 @@ type IntentClosingSetting struct {
 	ClosingResponse *ResponseSpecification
 
 	// A list of conditional branches associated with the intent's closing response.
-	// These branches are executed when the nextStep  attribute is set to
+	// These branches are executed when the nextStep attribute is set to
 	// EvalutateConditional .
 	Conditional *ConditionalSpecification
 
@@ -1642,7 +1639,7 @@ type IntentConfirmationSetting struct {
 	// intent.
 	DeclinationNextStep *DialogState
 
-	// When the user answers "no" to the question defined in promptSpecification,
+	// When the user answers "no" to the question defined in promptSpecification ,
 	// Amazon Lex responds with this response to acknowledge that the intent was
 	// canceled.
 	DeclinationResponse *ResponseSpecification
@@ -1668,7 +1665,7 @@ type IntentConfirmationSetting struct {
 	noSmithyDocumentSerde
 }
 
-// Filters the response from the ListIntents  operation.
+// Filters the response from the ListIntents operation.
 type IntentFilter struct {
 
 	// The name of the field to use for the filter.
@@ -1676,8 +1673,8 @@ type IntentFilter struct {
 	// This member is required.
 	Name IntentFilterName
 
-	// The operator to use for the filter. Specify EQ  when the ListIntents operation
-	// should return only aliases that equal the specified value. Specify CO  when the
+	// The operator to use for the filter. Specify EQ when the ListIntents operation
+	// should return only aliases that equal the specified value. Specify CO when the
 	// ListIntents operation should return aliases that contain the specified value.
 	//
 	// This member is required.
@@ -1731,7 +1728,7 @@ type IntentStatistics struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information about an intent returned by the ListIntents  operation.
+// Summary information about an intent returned by the ListIntents operation.
 type IntentSummary struct {
 
 	// The description of the intent.
@@ -1742,7 +1739,7 @@ type IntentSummary struct {
 	InputContexts []InputContext
 
 	// The unique identifier assigned to the intent. Use this ID to get detailed
-	// information about the intent with the DescribeIntent  operation.
+	// information about the intent with the DescribeIntent operation.
 	IntentId *string
 
 	// The name of the intent.
@@ -1754,8 +1751,7 @@ type IntentSummary struct {
 	// The output contexts that are activated when this intent is fulfilled.
 	OutputContexts []OutputContext
 
-	// If this intent is derived from a built-in intent, the name of the parent
-	// intent.
+	// If this intent is derived from a built-in intent, the name of the parent intent.
 	ParentIntentSignature *string
 
 	noSmithyDocumentSerde
@@ -1843,8 +1839,8 @@ type MessageGroup struct {
 	// This member is required.
 	Message *Message
 
-	// Message variations to send to the user. When variations are defined, Amazon
-	// Lex chooses the primary message or one of the variations to send to the user.
+	// Message variations to send to the user. When variations are defined, Amazon Lex
+	// chooses the primary message or one of the variations to send to the user.
 	Variations []Message
 
 	noSmithyDocumentSerde
@@ -1853,10 +1849,10 @@ type MessageGroup struct {
 // Indicates whether a slot can return multiple values.
 type MultipleValuesSetting struct {
 
-	// Indicates whether a slot can return multiple values. When true, the slot may
-	// return more than one value in a response. When false, the slot returns only a
+	// Indicates whether a slot can return multiple values. When true , the slot may
+	// return more than one value in a response. When false , the slot returns only a
 	// single value. Multi-value slots are only available in the en-US locale. If you
-	// set this value to true  in any other locale, Amazon Lex throws a
+	// set this value to true in any other locale, Amazon Lex throws a
 	// ValidationException . If the allowMutlipleValues is not set, the default value
 	// is false .
 	AllowMultipleValues bool
@@ -1867,14 +1863,14 @@ type MultipleValuesSetting struct {
 // The new custom vocabulary item from the custom vocabulary list.
 type NewCustomVocabularyItem struct {
 
-	// The unique phrase for the new custom vocabulary item from the custom
-	// vocabulary list.
+	// The unique phrase for the new custom vocabulary item from the custom vocabulary
+	// list.
 	//
 	// This member is required.
 	Phrase *string
 
-	// The display as value assigned to the new custom vocabulary item from the
-	// custom vocabulary list.
+	// The display as value assigned to the new custom vocabulary item from the custom
+	// vocabulary list.
 	DisplayAs *string
 
 	// The weight assigned to the new custom vocabulary item from the custom
@@ -1963,13 +1959,12 @@ type PlainTextMessage struct {
 // Specifies next steps to run after the dialog code hook finishes.
 type PostDialogCodeHookInvocationSpecification struct {
 
-	// A list of conditional branches to evaluate after the dialog code hook throws
-	// an exception or returns with the State  field of the Intent  object set to
-	// Failed .
+	// A list of conditional branches to evaluate after the dialog code hook throws an
+	// exception or returns with the State field of the Intent object set to Failed .
 	FailureConditional *ConditionalSpecification
 
 	// Specifies the next step the bot runs after the dialog code hook throws an
-	// exception or returns with the State  field of the Intent  object set to Failed .
+	// exception or returns with the State field of the Intent object set to Failed .
 	FailureNextStep *DialogState
 
 	// Specifies a list of message groups that Amazon Lex uses to respond the user
@@ -2007,12 +2002,12 @@ type PostDialogCodeHookInvocationSpecification struct {
 type PostFulfillmentStatusSpecification struct {
 
 	// A list of conditional branches to evaluate after the fulfillment code hook
-	// throws an exception or returns with the State  field of the Intent object set
-	// to Failed .
+	// throws an exception or returns with the State field of the Intent object set to
+	// Failed .
 	FailureConditional *ConditionalSpecification
 
 	// Specifies the next step the bot runs after the fulfillment code hook throws an
-	// exception or returns with the State  field of the Intent  object set to Failed .
+	// exception or returns with the State field of the Intent object set to Failed .
 	FailureNextStep *DialogState
 
 	// Specifies a list of message groups that Amazon Lex uses to respond the user
@@ -2047,7 +2042,7 @@ type PostFulfillmentStatusSpecification struct {
 }
 
 // The IAM principal that you allowing or denying access to an Amazon Lex action.
-// You must provide a service  or an arn, but not both in the same statement. For
+// You must provide a service or an arn , but not both in the same statement. For
 // more information, see AWS JSON policy elements: Principal  (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)
 // .
 type Principal struct {
@@ -2129,25 +2124,30 @@ type RecommendedIntentSummary struct {
 
 // Specifies the time window that utterance statistics are returned for. The time
 // window is always relative to the last time that the that utterances were
-// aggregated. For example, if the ListAggregatedUtterances operation is called
-// at 1600, the time window is set to 1 hour, and the last refresh time was 1530,
-// only utterances made between 1430 and 1530 are returned. You can choose the time
+// aggregated. For example, if the ListAggregatedUtterances operation is called at
+// 1600, the time window is set to 1 hour, and the last refresh time was 1530, only
+// utterances made between 1430 and 1530 are returned. You can choose the time
 // window that statistics should be returned for.
-//   - Hours - You can request utterance statistics for 1, 3, 6, 12, or 24 hour time windows. Statistics are refreshed every half hour for 1 hour time windows, and hourly for the other time windows.
-//   - Days - You can request utterance statistics for 3 days. Statistics are refreshed every 6 hours.
-//   - Weeks - You can see statistics for one or two weeks. Statistics are refreshed every 12 hours for one week time windows, and once per day for two week time windows.
+//   - Hours - You can request utterance statistics for 1, 3, 6, 12, or 24 hour
+//     time windows. Statistics are refreshed every half hour for 1 hour time windows,
+//     and hourly for the other time windows.
+//   - Days - You can request utterance statistics for 3 days. Statistics are
+//     refreshed every 6 hours.
+//   - Weeks - You can see statistics for one or two weeks. Statistics are
+//     refreshed every 12 hours for one week time windows, and once per day for two
+//     week time windows.
 type RelativeAggregationDuration struct {
 
-	// The type of time period that the timeValue  field represents.
+	// The type of time period that the timeValue field represents.
 	//
 	// This member is required.
 	TimeDimension TimeDimension
 
-	// The period of the time window to gather statistics for. The valid value
-	// depends on the setting of the timeDimension  field.
-	//     - Hours - 1/3/6/12/24
-	//     - Days - 3
-	//     - Weeks - 1/2
+	// The period of the time window to gather statistics for. The valid value depends
+	// on the setting of the timeDimension field.
+	//   - Hours - 1/3/6/12/24
+	//   - Days - 3
+	//   - Weeks - 1/2
 	//
 	// This member is required.
 	TimeValue int32
@@ -2179,8 +2179,8 @@ type S3BucketLogDestination struct {
 	// This member is required.
 	LogPrefix *string
 
-	// The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files
-	// are stored.
+	// The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are
+	// stored.
 	//
 	// This member is required.
 	S3BucketArn *string
@@ -2192,8 +2192,8 @@ type S3BucketLogDestination struct {
 	noSmithyDocumentSerde
 }
 
-// The object representing the Amazon S3 bucket containing the transcript, as
-// well as the associated metadata.
+// The object representing the Amazon S3 bucket containing the transcript, as well
+// as the associated metadata.
 type S3BucketTranscriptSource struct {
 
 	// The name of the bucket containing the transcript and the associated metadata.
@@ -2201,8 +2201,8 @@ type S3BucketTranscriptSource struct {
 	// This member is required.
 	S3BucketName *string
 
-	// The format of the transcript content. Currently, Genie only supports the
-	// Amazon Lex transcript format.
+	// The format of the transcript content. Currently, Genie only supports the Amazon
+	// Lex transcript format.
 	//
 	// This member is required.
 	TranscriptFormat TranscriptFormat
@@ -2217,9 +2217,9 @@ type S3BucketTranscriptSource struct {
 	// only want Lex to read a subset of files in your Amazon S3 bucket.
 	PathFormat *PathFormat
 
-	// The object that contains the filter which will be applied when Amazon Lex
-	// reads through the Amazon S3 bucket. Specify this object if you want Amazon Lex
-	// to read only a subset of the Amazon S3 bucket based on the filter you provide.
+	// The object that contains the filter which will be applied when Amazon Lex reads
+	// through the Amazon S3 bucket. Specify this object if you want Amazon Lex to read
+	// only a subset of the Amazon S3 bucket based on the filter you provide.
 	TranscriptFilter *TranscriptFilter
 
 	noSmithyDocumentSerde
@@ -2321,7 +2321,7 @@ type SlotDefaultValueSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Filters the response from the ListSlots  operation.
+// Filters the response from the ListSlots operation.
 type SlotFilter struct {
 
 	// The name of the field to use for filtering.
@@ -2329,8 +2329,8 @@ type SlotFilter struct {
 	// This member is required.
 	Name SlotFilterName
 
-	// The operator to use for the filter. Specify EQ  when the ListSlots operation
-	// should return only aliases that equal the specified value. Specify CO  when the
+	// The operator to use for the filter. Specify EQ when the ListSlots operation
+	// should return only aliases that equal the specified value. Specify CO when the
 	// ListSlots operation should return aliases that contain the specified value.
 	//
 	// This member is required.
@@ -2405,7 +2405,7 @@ type SlotSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Filters the response from the ListSlotTypes  operation.
+// Filters the response from the ListSlotTypes operation.
 type SlotTypeFilter struct {
 
 	// The name of the field to use for filtering.
@@ -2413,10 +2413,9 @@ type SlotTypeFilter struct {
 	// This member is required.
 	Name SlotTypeFilterName
 
-	// The operator to use for the filter. Specify EQ  when the ListSlotTypes
-	// operation should return only aliases that equal the specified value. Specify CO
-	// when the ListSlotTypes operation should return aliases that contain the
-	// specified value.
+	// The operator to use for the filter. Specify EQ when the ListSlotTypes operation
+	// should return only aliases that equal the specified value. Specify CO when the
+	// ListSlotTypes operation should return aliases that contain the specified value.
 	//
 	// This member is required.
 	Operator SlotTypeFilterOperator
@@ -2469,9 +2468,15 @@ type SlotTypeSummary struct {
 	ParentSlotTypeSignature *string
 
 	// Indicates the type of the slot type.
-	//     - Custom - A slot type that you created using custom values. For more information, see Creating custom slot types (https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html) .
-	//     - Extended - A slot type created by extending the AMAZON.AlphaNumeric built-in slot type. For more information, see AMAZON.AlphaNumeric (https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html) .
-	//     - ExternalGrammar - A slot type using a custom GRXML grammar to define values. For more information, see Using a custom grammar slot type (https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html) .
+	//   - Custom - A slot type that you created using custom values. For more
+	//   information, see Creating custom slot types (https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html)
+	//   .
+	//   - Extended - A slot type created by extending the AMAZON.AlphaNumeric built-in
+	//   slot type. For more information, see AMAZON.AlphaNumeric (https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html)
+	//   .
+	//   - ExternalGrammar - A slot type using a custom GRXML grammar to define values.
+	//   For more information, see Using a custom grammar slot type (https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html)
+	//   .
 	SlotTypeCategory SlotTypeCategory
 
 	// The unique identifier assigned to the slot type.
@@ -2502,7 +2507,7 @@ type SlotValue struct {
 	// The value that Amazon Lex determines for the slot. The actual value depends on
 	// the setting of the value selection strategy for the bot. You can choose to use
 	// the value entered by the user, or you can have Amazon Lex choose the first value
-	// in the resolvedValues  list.
+	// in the resolvedValues list.
 	InterpretedValue *string
 
 	noSmithyDocumentSerde
@@ -2567,14 +2572,13 @@ type SlotValueRegexFilter struct {
 	// A regular expression used to validate the value of a slot. Use a standard
 	// regular expression. Amazon Lex supports the following characters in the regular
 	// expression:
-	//     - A-Z, a-z
-	//     - 0-9
-	//     - Unicode characters ("\ u")
-	// Represent Unicode characters with four
-	// digits, for example "\u0041" or "\u005A". The following regular expression
-	// operators are not supported:
-	//     - Infinite repeaters: *, +, or {x,} with no upper bound.
-	//     - Wild card (.)
+	//   - A-Z, a-z
+	//   - 0-9
+	//   - Unicode characters ("\ u")
+	// Represent Unicode characters with four digits, for example "\u0041" or
+	// "\u005A". The following regular expression operators are not supported:
+	//   - Infinite repeaters: *, +, or {x,} with no upper bound.
+	//   - Wild card (.)
 	//
 	// This member is required.
 	Pattern *string
@@ -2587,9 +2591,11 @@ type SlotValueSelectionSetting struct {
 
 	// Determines the slot resolution strategy that Amazon Lex uses to return slot
 	// type values. The field can be set to one of the following values:
-	//     - OriginalValue - Returns the value entered by the user, if the user value is similar to the slot value.
-	//     - TopResolution - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.
-	//
+	//   - OriginalValue - Returns the value entered by the user, if the user value is
+	//   similar to the slot value.
+	//   - TopResolution - If there is a resolution list for the slot, return the
+	//   first value in the resolution list as the slot type value. If there is no
+	//   resolution list, null is returned.
 	// If you don't specify the valueSelectionStrategy, the default is OriginalValue.
 	//
 	// This member is required.
@@ -2636,8 +2642,8 @@ type SSMLMessage struct {
 // bot is waiting for a response.
 type StillWaitingResponseSpecification struct {
 
-	// How often a message should be sent to the user. Minimum of 1 second, maximum
-	// of 5 minutes.
+	// How often a message should be sent to the user. Minimum of 1 second, maximum of
+	// 5 minutes.
 	//
 	// This member is required.
 	FrequencyInSeconds *int32
@@ -2683,8 +2689,8 @@ type SubSlotTypeComposition struct {
 	// This member is required.
 	Name *string
 
-	// The unique identifier assigned to a slot type. This refers to either a
-	// built-in slot type or the unique slotTypeId of a custom slot type.
+	// The unique identifier assigned to a slot type. This refers to either a built-in
+	// slot type or the unique slotTypeId of a custom slot type.
 	//
 	// This member is required.
 	SlotTypeId *string
@@ -2696,9 +2702,9 @@ type SubSlotTypeComposition struct {
 // values for a constituent sub slot in a composite slot. Default values are used
 // when Amazon Lex hasn't determined a value for a slot. You can specify default
 // values from context variables, session attributes, and defined values. This is
-// similar to DefaultValueSpecification  for slots. PromptSpecification is the
+// similar to DefaultValueSpecification for slots. PromptSpecification is the
 // prompt that Amazon Lex uses to elicit the sub slot value from the user. This is
-// similar to PromptSpecification  for slots.
+// similar to PromptSpecification for slots.
 type SubSlotValueElicitationSetting struct {
 
 	// Specifies a list of message groups that Amazon Lex sends to a user to elicit a
@@ -2714,7 +2720,7 @@ type SubSlotValueElicitationSetting struct {
 	// If you know a specific pattern that users might respond to an Amazon Lex
 	// request for a sub slot value, you can provide those utterances to improve
 	// accuracy. This is optional. In most cases Amazon Lex is capable of understanding
-	// user utterances. This is similar to SampleUtterances  for slots.
+	// user utterances. This is similar to SampleUtterances for slots.
 	SampleUtterances []SampleUtterance
 
 	// Specifies the prompts that Amazon Lex uses while a bot is waiting for customer
@@ -2807,7 +2813,7 @@ type VoiceSettings struct {
 
 	// Indicates the type of Amazon Polly voice that Amazon Lex should use for voice
 	// interaction with the user. For more information, see the engine parameter of
-	// the SynthesizeSpeech  operation (https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine)
+	// the SynthesizeSpeech operation (https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine)
 	// in the Amazon Polly developer guide. If you do not specify a value, the default
 	// is standard .
 	Engine VoiceEngine

@@ -39,7 +39,7 @@ type UpdateListenerInput struct {
 	// client request. Client affinity gives you control over whether to always route
 	// each client to the same specific endpoint. Global Accelerator uses a
 	// consistent-flow hashing algorithm to choose the optimal endpoint for a
-	// connection. If client affinity is NONE, Global Accelerator uses the
+	// connection. If client affinity is NONE , Global Accelerator uses the
 	// "five-tuple" (5-tuple) properties—source IP address, source port, destination IP
 	// address, destination port, and protocol—to select the hash value, and then
 	// chooses the best endpoint. However, with this setting, if someone uses different

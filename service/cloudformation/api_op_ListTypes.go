@@ -33,14 +33,15 @@ type ListTypesInput struct {
 
 	// The deprecation status of the extension that you want to get summary
 	// information about. Valid values include:
-	//     - LIVE : The extension is registered for use in CloudFormation operations.
-	//     - DEPRECATED : The extension has been deregistered and can no longer be used in CloudFormation operations.
+	//   - LIVE : The extension is registered for use in CloudFormation operations.
+	//   - DEPRECATED : The extension has been deregistered and can no longer be used
+	//   in CloudFormation operations.
 	DeprecatedStatus types.DeprecatedStatus
 
 	// Filter criteria to use in determining which extensions to return. Filters must
-	// be compatible with Visibility  to return valid results. For example, specifying
-	// AWS_TYPES for Category  and PRIVATE  for Visibility returns an empty list of
-	// types, but specifying PUBLIC  for Visibility  returns the desired list.
+	// be compatible with Visibility to return valid results. For example, specifying
+	// AWS_TYPES for Category and PRIVATE for Visibility returns an empty list of
+	// types, but specifying PUBLIC for Visibility returns the desired list.
 	Filters *types.TypeFilters
 
 	// The maximum number of results to be returned with a single call. If the number
@@ -53,17 +54,19 @@ type ListTypesInput struct {
 	// response object's NextToken parameter value is set to a token. To retrieve the
 	// next set of results, call this action again and assign that token to the request
 	// object's NextToken parameter. If there are no remaining results, the previous
-	// response object's NextToken  parameter is set to null .
+	// response object's NextToken parameter is set to null .
 	NextToken *string
 
 	// For resource types, the provisioning behavior of the resource type.
 	// CloudFormation determines the provisioning type during registration, based on
 	// the types of handlers in the schema handler package submitted. Valid values
 	// include:
-	//     - FULLY_MUTABLE : The resource type includes an update handler to process updates to the type during stack update operations.
-	//     - IMMUTABLE : The resource type doesn't include an update handler, so the type can't be updated and must instead be replaced during stack update operations.
-	//     - NON_PROVISIONABLE : The resource type doesn't include create, read, and delete handlers, and therefore can't actually be provisioned.
-	//
+	//   - FULLY_MUTABLE : The resource type includes an update handler to process
+	//   updates to the type during stack update operations.
+	//   - IMMUTABLE : The resource type doesn't include an update handler, so the type
+	//   can't be updated and must instead be replaced during stack update operations.
+	//   - NON_PROVISIONABLE : The resource type doesn't include create, read, and
+	//   delete handlers, and therefore can't actually be provisioned.
 	// The default is FULLY_MUTABLE .
 	ProvisioningType types.ProvisioningType
 
@@ -72,11 +75,13 @@ type ListTypesInput struct {
 
 	// The scope at which the extensions are visible and usable in CloudFormation
 	// operations. Valid values include:
-	//     - PRIVATE : Extensions that are visible and usable within this account and region. This includes:
-	//         - Private extensions you have registered in this account and region.
-	//         - Public extensions that you have activated in this account and region.
-	//     - PUBLIC : Extensions that are publicly visible and available to be activated within any Amazon Web Services account. This includes extensions from Amazon Web Services, in addition to third-party publishers.
-	//
+	//   - PRIVATE : Extensions that are visible and usable within this account and
+	//   region. This includes:
+	//   - Private extensions you have registered in this account and region.
+	//   - Public extensions that you have activated in this account and region.
+	//   - PUBLIC : Extensions that are publicly visible and available to be activated
+	//   within any Amazon Web Services account. This includes extensions from Amazon Web
+	//   Services, in addition to third-party publishers.
 	// The default is PRIVATE .
 	Visibility types.Visibility
 
@@ -88,7 +93,7 @@ type ListTypesOutput struct {
 	// If the request doesn't return all the remaining results, NextToken is set to a
 	// token. To retrieve the next set of results, call this action again and assign
 	// that token to the request object's NextToken parameter. If the request returns
-	// all results, NextToken  is set to null .
+	// all results, NextToken is set to null .
 	NextToken *string
 
 	// A list of TypeSummary structures that contain information about the specified
@@ -176,8 +181,8 @@ type ListTypesPaginatorOptions struct {
 	// set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

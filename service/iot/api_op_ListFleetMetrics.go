@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all your fleet metrics. Requires permission to access the
-// ListFleetMetrics (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Lists all your fleet metrics. Requires permission to access the ListFleetMetrics (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListFleetMetrics(ctx context.Context, params *ListFleetMetricsInput, optFns ...func(*Options)) (*ListFleetMetricsOutput, error) {
 	if params == nil {
@@ -36,7 +35,7 @@ type ListFleetMetricsInput struct {
 	MaxResults *int32
 
 	// To retrieve the next set of results, the nextToken value from a previous
-	// response; otherwise null  to receive the first set of results.
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -130,8 +129,8 @@ type ListFleetMetricsPaginatorOptions struct {
 	// The maximum number of results to return in this operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -32,8 +32,8 @@ func (c *Client) CreatePermissionSet(ctx context.Context, params *CreatePermissi
 type CreatePermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -50,8 +50,8 @@ type CreatePermissionSetInput struct {
 	// authentication process.
 	RelayState *string
 
-	// The length of time that the application user sessions are valid in the
-	// ISO-8601 standard.
+	// The length of time that the application user sessions are valid in the ISO-8601
+	// standard.
 	SessionDuration *string
 
 	// The tags to attach to the new PermissionSet .

@@ -40,14 +40,13 @@ type DescribeInstanceInformationInput struct {
 
 	// One or more filters. Use a filter to return a more specific list of managed
 	// nodes. You can filter based on tags applied to your managed nodes. Use this
-	// Filters data type instead of InstanceInformationFilterList, which is
-	// deprecated.
+	// Filters data type instead of InstanceInformationFilterList , which is deprecated.
 	Filters []types.InstanceInformationStringFilter
 
 	// This is a legacy method. We recommend that you don't use this method. Instead,
-	// use the Filters  data type. Filters enables you to return node information by
+	// use the Filters data type. Filters enables you to return node information by
 	// filtering based on tags applied to managed nodes. Attempting to use
-	// InstanceInformationFilterList and Filters  leads to an exception error.
+	// InstanceInformationFilterList and Filters leads to an exception error.
 	InstanceInformationFilterList []types.InstanceInformationFilter
 
 	// The maximum number of items to return for this call. The call also returns a
@@ -154,8 +153,8 @@ type DescribeInstanceInformationPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

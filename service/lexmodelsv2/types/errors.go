@@ -7,9 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The action that you tried to perform couldn't be completed because the
-// resource is in a conflicting state. For example, deleting a bot that is in the
-// CREATING state. Try your request again.
+// The action that you tried to perform couldn't be completed because the resource
+// is in a conflicting state. For example, deleting a bot that is in the CREATING
+// state. Try your request again.
 type ConflictException struct {
 	Message *string
 

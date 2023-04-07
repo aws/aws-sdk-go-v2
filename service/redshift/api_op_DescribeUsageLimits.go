@@ -15,10 +15,15 @@ import (
 // Shows usage limits on a cluster. Results are filtered based on the combination
 // of input usage limit identifier, cluster identifier, and feature type
 // parameters:
-//   - If usage limit identifier, cluster identifier, and feature type are not provided, then all usage limit objects for the current account in the current region are returned.
-//   - If usage limit identifier is provided, then the corresponding usage limit object is returned.
-//   - If cluster identifier is provided, then all usage limit objects for the specified cluster are returned.
-//   - If cluster identifier and feature type are provided, then all usage limit objects for the combination of cluster and feature are returned.
+//   - If usage limit identifier, cluster identifier, and feature type are not
+//     provided, then all usage limit objects for the current account in the current
+//     region are returned.
+//   - If usage limit identifier is provided, then the corresponding usage limit
+//     object is returned.
+//   - If cluster identifier is provided, then all usage limit objects for the
+//     specified cluster are returned.
+//   - If cluster identifier and feature type are provided, then all usage limit
+//     objects for the combination of cluster and feature are returned.
 func (c *Client) DescribeUsageLimits(ctx context.Context, params *DescribeUsageLimitsInput, optFns ...func(*Options)) (*DescribeUsageLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeUsageLimitsInput{}
@@ -45,30 +50,30 @@ type DescribeUsageLimitsInput struct {
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeUsageLimits request exceed the
 	// value specified in MaxRecords , Amazon Web Services returns a value in the
-	// Markerfield of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request.
+	// Marker field of the response. You can retrieve the next set of response records
+	// by providing the returned marker value in the Marker parameter and retrying the
+	// request.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next set
-	// of records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// A tag key or keys for which you want to return all matching usage limit
-	// objects that are associated with the specified key or keys. For example, suppose
-	// that you have parameter groups that are tagged with keys called owner  and
-	// environment. If you specify both of these tag keys in the request, Amazon
-	// Redshift returns a response with the usage limit objects have either or both of
-	// these tag keys associated with them.
+	// A tag key or keys for which you want to return all matching usage limit objects
+	// that are associated with the specified key or keys. For example, suppose that
+	// you have parameter groups that are tagged with keys called owner and environment
+	// . If you specify both of these tag keys in the request, Amazon Redshift returns
+	// a response with the usage limit objects have either or both of these tag keys
+	// associated with them.
 	TagKeys []string
 
 	// A tag value or values for which you want to return all matching usage limit
 	// objects that are associated with the specified tag value or values. For example,
 	// suppose that you have parameter groups that are tagged with values called admin
-	// and test. If you specify both of these tag values in the request, Amazon
+	// and test . If you specify both of these tag values in the request, Amazon
 	// Redshift returns a response with the usage limit objects that have either or
 	// both of these tag values associated with them.
 	TagValues []string
@@ -88,7 +93,7 @@ type DescribeUsageLimitsOutput struct {
 	// records have been retrieved for the request.
 	Marker *string
 
-	// Contains the output from the DescribeUsageLimits  action.
+	// Contains the output from the DescribeUsageLimits action.
 	UsageLimits []types.UsageLimit
 
 	// Metadata pertaining to the operation's result.
@@ -168,15 +173,15 @@ var _ DescribeUsageLimitsAPIClient = (*Client)(nil)
 // DescribeUsageLimitsPaginatorOptions is the paginator options for
 // DescribeUsageLimits
 type DescribeUsageLimitsPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next set
-	// of records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

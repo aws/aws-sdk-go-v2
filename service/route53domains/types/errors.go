@@ -116,8 +116,8 @@ func (e *InvalidInput) ErrorCode() string {
 }
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of operations or jobs running exceeded the allowed threshold for
-// the account.
+// The number of operations or jobs running exceeded the allowed threshold for the
+// account.
 type OperationLimitExceeded struct {
 	Message *string
 

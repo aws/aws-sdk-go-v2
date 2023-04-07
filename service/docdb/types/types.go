@@ -44,8 +44,8 @@ type Certificate struct {
 }
 
 // The configuration setting for the log types to be enabled for export to Amazon
-// CloudWatch Logs for a specific instance or cluster. The EnableLogTypes  and
-// DisableLogTypesarrays determine which logs are exported (or not exported) to
+// CloudWatch Logs for a specific instance or cluster. The EnableLogTypes and
+// DisableLogTypes arrays determine which logs are exported (or not exported) to
 // CloudWatch Logs. The values within these arrays depend on the engine that is
 // being used.
 type CloudwatchLogsExportConfiguration struct {
@@ -106,8 +106,8 @@ type DBCluster struct {
 
 	// Specifies whether this cluster can be deleted. If DeletionProtection is
 	// enabled, the cluster cannot be deleted unless it is modified and
-	// DeletionProtection is disabled. DeletionProtection protects clusters from
-	// being accidentally deleted.
+	// DeletionProtection is disabled. DeletionProtection protects clusters from being
+	// accidentally deleted.
 	DeletionProtection bool
 
 	// The earliest time to which a database can be restored with point-in-time
@@ -130,7 +130,7 @@ type DBCluster struct {
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
 
-	// If StorageEncrypted  is true , the KMS key identifier for the encrypted cluster.
+	// If StorageEncrypted is true , the KMS key identifier for the encrypted cluster.
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with
@@ -183,8 +183,8 @@ type DBCluster struct {
 	// Specifies whether the cluster is encrypted.
 	StorageEncrypted bool
 
-	// Provides a list of virtual private cloud (VPC) security groups that the
-	// cluster belongs to.
+	// Provides a list of virtual private cloud (VPC) security groups that the cluster
+	// belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
 
 	noSmithyDocumentSerde
@@ -201,7 +201,7 @@ type DBClusterMember struct {
 	DBInstanceIdentifier *string
 
 	// A value that is true if the cluster member is the primary instance for the
-	// cluster and false  otherwise.
+	// cluster and false otherwise.
 	IsClusterWriter bool
 
 	// A value that specifies the order in which an Amazon DocumentDB replica is
@@ -241,9 +241,12 @@ type DBClusterRole struct {
 
 	// Describes the state of association between the IAMrole and the cluster. The
 	// Status property returns one of the following values:
-	//     - ACTIVE - The IAMrole ARN is associated with the cluster and can be used to access other Amazon Web Services services on your behalf.
-	//     - PENDING - The IAMrole ARN is being associated with the cluster.
-	//     - INVALID - The IAMrole ARN is associated with the cluster, but the cluster cannot assume the IAMrole to access other Amazon Web Services services on your behalf.
+	//   - ACTIVE - The IAMrole ARN is associated with the cluster and can be used to
+	//   access other Amazon Web Services services on your behalf.
+	//   - PENDING - The IAMrole ARN is being associated with the cluster.
+	//   - INVALID - The IAMrole ARN is associated with the cluster, but the cluster
+	//   cannot assume the IAMrole to access other Amazon Web Services services on your
+	//   behalf.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -276,7 +279,7 @@ type DBClusterSnapshot struct {
 	// Provides the version of the database engine for this cluster snapshot.
 	EngineVersion *string
 
-	// If StorageEncrypted  is true, the KMS key identifier for the encrypted cluster
+	// If StorageEncrypted is true , the KMS key identifier for the encrypted cluster
 	// snapshot.
 	KmsKeyId *string
 
@@ -306,8 +309,8 @@ type DBClusterSnapshot struct {
 	// Specifies whether the cluster snapshot is encrypted.
 	StorageEncrypted bool
 
-	// Provides the virtual private cloud (VPC) ID that is associated with the
-	// cluster snapshot.
+	// Provides the virtual private cloud (VPC) ID that is associated with the cluster
+	// snapshot.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -324,10 +327,10 @@ type DBClusterSnapshotAttribute struct {
 	AttributeName *string
 
 	// The values for the manual cluster snapshot attribute. If the AttributeName
-	// field is set to restore, then this element returns a list of IDs of the Amazon
+	// field is set to restore , then this element returns a list of IDs of the Amazon
 	// Web Services accounts that are authorized to copy or restore the manual cluster
-	// snapshot. If a value of all is in the list, then the manual cluster snapshot
-	// is public and available for any Amazon Web Services account to copy or restore.
+	// snapshot. If a value of all is in the list, then the manual cluster snapshot is
+	// public and available for any Amazon Web Services account to copy or restore.
 	AttributeValues []string
 
 	noSmithyDocumentSerde
@@ -369,7 +372,7 @@ type DBEngineVersion struct {
 	ExportableLogTypes []string
 
 	// A value that indicates whether the engine version supports exporting the log
-	// types specified by ExportableLogTypes  to CloudWatch Logs.
+	// types specified by ExportableLogTypes to CloudWatch Logs.
 	SupportsLogExportsToCloudwatchLogs bool
 
 	// A list of engine versions that this database engine version can be upgraded to.
@@ -408,15 +411,15 @@ type DBInstance struct {
 	// Contains the name of the compute and memory capacity class of the instance.
 	DBInstanceClass *string
 
-	// Contains a user-provided database identifier. This identifier is the unique
-	// key that identifies an instance.
+	// Contains a user-provided database identifier. This identifier is the unique key
+	// that identifies an instance.
 	DBInstanceIdentifier *string
 
 	// Specifies the current state of this database.
 	DBInstanceStatus *string
 
-	// Specifies information on the subnet group that is associated with the
-	// instance, including the name, description, and subnets in the subnet group.
+	// Specifies information on the subnet group that is associated with the instance,
+	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *DBSubnetGroup
 
 	// The Amazon Web Services Region-unique, immutable identifier for the instance.
@@ -440,8 +443,7 @@ type DBInstance struct {
 	// Provides the date and time that the instance was created.
 	InstanceCreateTime *time.Time
 
-	// If StorageEncrypted  is true, the KMS key identifier for the encrypted
-	// instance.
+	// If StorageEncrypted is true , the KMS key identifier for the encrypted instance.
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with
@@ -466,7 +468,7 @@ type DBInstance struct {
 	PromotionTier *int32
 
 	// Not supported. Amazon DocumentDB does not currently support public endpoints.
-	// The value of PubliclyAccessible  is always false .
+	// The value of PubliclyAccessible is always false .
 	PubliclyAccessible bool
 
 	// The status of a read replica. If the instance is not a read replica, this is
@@ -489,11 +491,11 @@ type DBInstanceStatusInfo struct {
 	// not in an error state, this value is blank.
 	Message *string
 
-	// A Boolean value that is true  if the instance is operating normally, or false
-	// if the instance is in an error state.
+	// A Boolean value that is true if the instance is operating normally, or false if
+	// the instance is in an error state.
 	Normal bool
 
-	// Status of the instance. For a StatusType  of read replica, the values can be
+	// Status of the instance. For a StatusType of read replica, the values can be
 	// replicating , error, stopped , or terminated .
 	Status *string
 
@@ -630,9 +632,9 @@ type EventSubscription struct {
 
 	// The status of the Amazon DocumentDB event notification subscription.
 	// Constraints: Can be one of the following: creating , modifying , deleting ,
-	// active , no-permission , topic-not-exist  The no-permission status indicates
+	// active , no-permission , topic-not-exist The no-permission status indicates
 	// that Amazon DocumentDB no longer has permission to post to the SNS topic. The
-	// topic-not-existstatus indicates that the topic was deleted after the
+	// topic-not-exist status indicates that the topic was deleted after the
 	// subscription was created.
 	Status *string
 
@@ -762,7 +764,7 @@ type Parameter struct {
 	// Provides a description of the parameter.
 	Description *string
 
-	// Indicates whether ( true ) or not ( false) the parameter can be modified. Some
+	// Indicates whether ( true ) or not ( false ) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
 	IsModifiable bool
@@ -919,15 +921,15 @@ type Subnet struct {
 type Tag struct {
 
 	// The required name of the tag. The string value can be from 1 to 128 Unicode
-	// characters in length and can't be prefixed with " aws: " or " rds:". The
-	// string can contain only the set of Unicode letters, digits, white space, '_',
-	// '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+	// characters in length and can't be prefixed with " aws: " or " rds: ". The string
+	// can contain only the set of Unicode letters, digits, white space, '_', '.', '/',
+	// '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Key *string
 
 	// The optional value of the tag. The string value can be from 1 to 256 Unicode
-	// characters in length and can't be prefixed with " aws: " or " rds:". The
-	// string can contain only the set of Unicode letters, digits, white space, '_',
-	// '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+	// characters in length and can't be prefixed with " aws: " or " rds: ". The string
+	// can contain only the set of Unicode letters, digits, white space, '_', '.', '/',
+	// '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Value *string
 
 	noSmithyDocumentSerde
@@ -937,7 +939,7 @@ type Tag struct {
 type UpgradeTarget struct {
 
 	// A value that indicates whether the target version is applied to any source DB
-	// instances that have AutoMinorVersionUpgrade  set to true .
+	// instances that have AutoMinorVersionUpgrade set to true .
 	AutoUpgrade bool
 
 	// The version of the database engine that an instance can be upgraded to.
@@ -949,8 +951,7 @@ type UpgradeTarget struct {
 	// The version number of the upgrade target database engine.
 	EngineVersion *string
 
-	// A value that indicates whether a database engine is upgraded to a major
-	// version.
+	// A value that indicates whether a database engine is upgraded to a major version.
 	IsMajorVersionUpgrade bool
 
 	noSmithyDocumentSerde

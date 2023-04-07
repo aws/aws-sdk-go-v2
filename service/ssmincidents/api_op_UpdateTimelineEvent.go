@@ -37,8 +37,7 @@ type UpdateTimelineEventInput struct {
 	// This member is required.
 	EventId *string
 
-	// The Amazon Resource Name (ARN) of the incident that includes the timeline
-	// event.
+	// The Amazon Resource Name (ARN) of the incident that includes the timeline event.
 	//
 	// This member is required.
 	IncidentRecordArn *string
@@ -50,7 +49,7 @@ type UpdateTimelineEventInput struct {
 	// A short description of the event.
 	EventData *string
 
-	// Updates all existing references in a TimelineEvent. A reference is an Amazon
+	// Updates all existing references in a TimelineEvent . A reference is an Amazon
 	// Web Services resource involved or associated with the incident. To specify a
 	// reference, enter its Amazon Resource Name (ARN). You can also specify a related
 	// item associated with that resource. For example, to specify an Amazon DynamoDB

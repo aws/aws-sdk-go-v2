@@ -12,19 +12,22 @@ import (
 )
 
 // Sets the logging configuration for the specified firewall. To change the
-// logging configuration, retrieve the LoggingConfiguration  by calling
-// DescribeLoggingConfiguration, then change it and provide the modified object
-// to this update call. You must change the logging configuration one
+// logging configuration, retrieve the LoggingConfiguration by calling
+// DescribeLoggingConfiguration , then change it and provide the modified object to
+// this update call. You must change the logging configuration one
 // LogDestinationConfig at a time inside the retrieved LoggingConfiguration
 // object. You can perform only one of the following actions in any call to
 // UpdateLoggingConfiguration :
-//   - Create a new log destination object by adding a single LogDestinationConfig array element to LogDestinationConfigs .
-//   - Delete a log destination object by removing a single LogDestinationConfig array element from LogDestinationConfigs .
-//   - Change the LogDestination setting in a single LogDestinationConfig array element.
+//   - Create a new log destination object by adding a single LogDestinationConfig
+//     array element to LogDestinationConfigs .
+//   - Delete a log destination object by removing a single LogDestinationConfig
+//     array element from LogDestinationConfigs .
+//   - Change the LogDestination setting in a single LogDestinationConfig array
+//     element.
 //
-// You can't change the LogDestinationType  or LogType  in a LogDestinationConfig
-// . To change these settings, delete the existing LogDestinationConfig object
-// and create a new one, using two separate calls to this update operation.
+// You can't change the LogDestinationType or LogType in a LogDestinationConfig .
+// To change these settings, delete the existing LogDestinationConfig object and
+// create a new one, using two separate calls to this update operation.
 func (c *Client) UpdateLoggingConfiguration(ctx context.Context, params *UpdateLoggingConfigurationInput, optFns ...func(*Options)) (*UpdateLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateLoggingConfigurationInput{}
@@ -42,8 +45,8 @@ func (c *Client) UpdateLoggingConfiguration(ctx context.Context, params *UpdateL
 
 type UpdateLoggingConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or
-	// the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
+	// name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall

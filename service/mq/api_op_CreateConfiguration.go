@@ -33,14 +33,14 @@ func (c *Client) CreateConfiguration(ctx context.Context, params *CreateConfigur
 // uses the default configuration (the engine type and version).
 type CreateConfigurationInput struct {
 
-	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ
-	// and RABBITMQ.
+	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and
+	// RABBITMQ.
 	//
 	// This member is required.
 	EngineType types.EngineType
 
-	// Required. The broker engine's version. For a list of supported engine
-	// versions, see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
+	// Required. The broker engine's version. For a list of supported engine versions,
+	// see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
 	// .
 	//
 	// This member is required.

@@ -46,7 +46,7 @@ type UpdateCrawlerInput struct {
 	// .
 	Configuration *string
 
-	// The name of the SecurityConfiguration  structure to be used by this crawler.
+	// The name of the SecurityConfiguration structure to be used by this crawler.
 	CrawlerSecurityConfiguration *string
 
 	// The Glue database where results are stored, such as:
@@ -70,7 +70,7 @@ type UpdateCrawlerInput struct {
 	// new crawler to access customer resources.
 	Role *string
 
-	// A cron  expression used to specify the schedule (see Time-Based Schedules for
+	// A cron expression used to specify the schedule (see Time-Based Schedules for
 	// Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)
 	// . For example, to run something every day at 12:15 UTC, you would specify:
 	// cron(15 12 * * ? *) .

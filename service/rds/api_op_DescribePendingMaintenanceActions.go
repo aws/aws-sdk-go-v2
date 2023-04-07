@@ -33,19 +33,23 @@ type DescribePendingMaintenanceActionsInput struct {
 
 	// A filter that specifies one or more resources to return pending maintenance
 	// actions for. Supported filters:
-	//     - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list only includes pending maintenance actions for the DB clusters identified by these ARNs.
-	//     - db-instance-id - Accepts DB instance identifiers and DB instance ARNs. The results list only includes pending maintenance actions for the DB instances identified by these ARNs.
+	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	//   Resource Names (ARNs). The results list only includes pending maintenance
+	//   actions for the DB clusters identified by these ARNs.
+	//   - db-instance-id - Accepts DB instance identifiers and DB instance ARNs. The
+	//   results list only includes pending maintenance actions for the DB instances
+	//   identified by these ARNs.
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous
-	// DescribePendingMaintenanceActionsrequest. If this parameter is specified, the
+	// DescribePendingMaintenanceActions request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to a number of records
 	// specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -59,7 +63,7 @@ type DescribePendingMaintenanceActionsInput struct {
 type DescribePendingMaintenanceActionsOutput struct {
 
 	// An optional pagination token provided by a previous
-	// DescribePendingMaintenanceActionsrequest. If this parameter is specified, the
+	// DescribePendingMaintenanceActions request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to a number of records
 	// specified by MaxRecords .
 	Marker *string
@@ -147,14 +151,14 @@ var _ DescribePendingMaintenanceActionsAPIClient = (*Client)(nil)
 // DescribePendingMaintenanceActionsPaginatorOptions is the paginator options for
 // DescribePendingMaintenanceActions
 type DescribePendingMaintenanceActionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

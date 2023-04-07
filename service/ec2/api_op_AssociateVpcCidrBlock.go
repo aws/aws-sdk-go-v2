@@ -56,7 +56,7 @@ type AssociateVpcCidrBlockInput struct {
 
 	// The netmask length of the IPv4 CIDR you would like to associate from an Amazon
 	// VPC IP Address Manager (IPAM) pool. For more information about IPAM, see What
-	// is IPAM? (https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html)in
+	// is IPAM? (https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html) in
 	// the Amazon VPC IPAM User Guide.
 	Ipv4NetmaskLength *int32
 
@@ -78,7 +78,7 @@ type AssociateVpcCidrBlockInput struct {
 
 	// The netmask length of the IPv6 CIDR you would like to associate from an Amazon
 	// VPC IP Address Manager (IPAM) pool. For more information about IPAM, see What
-	// is IPAM? (https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html)in
+	// is IPAM? (https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html) in
 	// the Amazon VPC IPAM User Guide.
 	Ipv6NetmaskLength *int32
 

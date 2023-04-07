@@ -44,9 +44,9 @@ type ModifyVpcEndpointInput struct {
 	// network interface.
 	AddSecurityGroupIds []string
 
-	// (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in
-	// which to serve the endpoint. For a Gateway Load Balancer endpoint, you can
-	// specify only one subnet.
+	// (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which
+	// to serve the endpoint. For a Gateway Load Balancer endpoint, you can specify
+	// only one subnet.
 	AddSubnetIds []string
 
 	// The DNS options for the endpoint.
@@ -65,8 +65,8 @@ type ModifyVpcEndpointInput struct {
 	// controls access to the service. The policy must be in valid JSON format.
 	PolicyDocument *string
 
-	// (Interface endpoint) Indicates whether a private hosted zone is associated
-	// with the VPC.
+	// (Interface endpoint) Indicates whether a private hosted zone is associated with
+	// the VPC.
 	PrivateDnsEnabled *bool
 
 	// (Gateway endpoint) The IDs of the route tables to disassociate from the
@@ -89,7 +89,7 @@ type ModifyVpcEndpointInput struct {
 
 type ModifyVpcEndpointOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

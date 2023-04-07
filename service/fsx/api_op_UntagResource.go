@@ -26,7 +26,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	return out, nil
 }
 
-// The request object for UntagResource  action.
+// The request object for UntagResource action.
 type UntagResourceInput struct {
 
 	// The ARN of the Amazon FSx resource to untag.
@@ -43,7 +43,7 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response object for UntagResource  action.
+// The response object for UntagResource action.
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

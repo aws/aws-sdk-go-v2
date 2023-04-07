@@ -42,7 +42,7 @@ type ListStreamConsumersInput struct {
 	StreamARN *string
 
 	// The maximum number of consumers that you want a single call of
-	// ListStreamConsumersto return. The default value is 100. If you specify a value
+	// ListStreamConsumers to return. The default value is 100. If you specify a value
 	// greater than 100, at most 100 results are returned.
 	MaxResults *int32
 
@@ -52,15 +52,15 @@ type ListStreamConsumersInput struct {
 	// consumers that are registered with the data stream, the response includes a
 	// pagination token named NextToken . You can specify this NextToken value in a
 	// subsequent call to ListStreamConsumers to list the next set of registered
-	// consumers. Don't specify StreamName  or StreamCreationTimestamp  if you specify
-	// NextTokenbecause the latter unambiguously identifies the stream. You can
-	// optionally specify a value for the MaxResults  parameter when you specify
+	// consumers. Don't specify StreamName or StreamCreationTimestamp if you specify
+	// NextToken because the latter unambiguously identifies the stream. You can
+	// optionally specify a value for the MaxResults parameter when you specify
 	// NextToken . If you specify a MaxResults value that is less than the number of
-	// consumers that the operation returns if you don't specify MaxResults, the
-	// response will contain a new NextToken  value. You can use the new NextToken
+	// consumers that the operation returns if you don't specify MaxResults , the
+	// response will contain a new NextToken value. You can use the new NextToken
 	// value in a subsequent call to the ListStreamConsumers operation to list the
 	// next set of consumers. Tokens expire after 300 seconds. When you obtain a value
-	// for NextToken  in the response to a call to ListStreamConsumers, you have 300
+	// for NextToken in the response to a call to ListStreamConsumers , you have 300
 	// seconds to use that value. If you specify an expired token in a call to
 	// ListStreamConsumers , you get ExpiredNextTokenException .
 	NextToken *string
@@ -83,15 +83,14 @@ type ListStreamConsumersOutput struct {
 	// When the number of consumers that are registered with the data stream is
 	// greater than the default value for the MaxResults parameter, or if you
 	// explicitly specify a value for MaxResults that is less than the number of
-	// registered consumers, the response includes a pagination token named NextToken
-	// . You can specify this NextToken  value in a subsequent call to
-	// ListStreamConsumersto list the next set of registered consumers. For more
-	// information about the use of this pagination token when calling the
-	// ListStreamConsumers operation, see ListStreamConsumersInput$NextToken. Tokens
-	// expire after 300 seconds. When you obtain a value for NextToken in the
-	// response to a call to ListStreamConsumers, you have 300 seconds to use that
-	// value. If you specify an expired token in a call to ListStreamConsumers, you
-	// get ExpiredNextTokenException .
+	// registered consumers, the response includes a pagination token named NextToken .
+	// You can specify this NextToken value in a subsequent call to ListStreamConsumers
+	// to list the next set of registered consumers. For more information about the use
+	// of this pagination token when calling the ListStreamConsumers operation, see
+	// ListStreamConsumersInput$NextToken . Tokens expire after 300 seconds. When you
+	// obtain a value for NextToken in the response to a call to ListStreamConsumers ,
+	// you have 300 seconds to use that value. If you specify an expired token in a
+	// call to ListStreamConsumers , you get ExpiredNextTokenException .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -175,12 +174,12 @@ var _ ListStreamConsumersAPIClient = (*Client)(nil)
 // ListStreamConsumers
 type ListStreamConsumersPaginatorOptions struct {
 	// The maximum number of consumers that you want a single call of
-	// ListStreamConsumersto return. The default value is 100. If you specify a value
+	// ListStreamConsumers to return. The default value is 100. If you specify a value
 	// greater than 100, at most 100 results are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

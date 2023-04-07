@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations.
-// Compute Optimizer generates recommendations for Amazon EBS volumes that meet a
-// specific set of requirements. For more information, see the Supported
-// resources and requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
+// Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations. Compute
+// Optimizer generates recommendations for Amazon EBS volumes that meet a specific
+// set of requirements. For more information, see the Supported resources and
+// requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
 // in the Compute Optimizer User Guide.
 func (c *Client) GetEBSVolumeRecommendations(ctx context.Context, params *GetEBSVolumeRecommendationsInput, optFns ...func(*Options)) (*GetEBSVolumeRecommendationsOutput, error) {
 	if params == nil {

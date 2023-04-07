@@ -22,8 +22,8 @@ import (
 // role. For more information about roles, see Working with roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html)
 // . Policies returned by this operation are URL-encoded compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986)
 // . You can use a URL decoding method to convert the policy back to plain JSON
-// text. For example, if you use Java, you can use the decode  method of the
-// java.net.URLDecoderutility class in the Java SDK. Other languages and SDKs
+// text. For example, if you use Java, you can use the decode method of the
+// java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs
 // provide similar functionality.
 func (c *Client) GetRole(ctx context.Context, params *GetRoleInput, optFns ...func(*Options)) (*GetRoleOutput, error) {
 	if params == nil {
@@ -43,7 +43,7 @@ func (c *Client) GetRole(ctx context.Context, params *GetRoleInput, optFns ...fu
 type GetRoleInput struct {
 
 	// The name of the IAM role to get information about. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//
@@ -53,7 +53,7 @@ type GetRoleInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetRole  request.
+// Contains the response to a successful GetRole request.
 type GetRoleOutput struct {
 
 	// A structure containing details about the IAM role.

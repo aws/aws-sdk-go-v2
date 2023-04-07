@@ -62,8 +62,8 @@ type GetIpamAddressHistoryInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The start of the time period for which you are looking for history. If you
-	// omit this option, it will default to the value of EndTime.
+	// The start of the time period for which you are looking for history. If you omit
+	// this option, it will default to the value of EndTime.
 	StartTime *time.Time
 
 	// The ID of the VPC you want your history records filtered by.
@@ -167,8 +167,8 @@ type GetIpamAddressHistoryPaginatorOptions struct {
 	// Defaults to 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

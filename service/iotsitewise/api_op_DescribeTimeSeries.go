@@ -15,8 +15,10 @@ import (
 
 // Retrieves information about a time series (data stream). To identify a time
 // series, do one of the following:
-//   - If the time series isn't associated with an asset property, specify the alias of the time series.
-//   - If the time series is associated with an asset property, specify one of the following:
+//   - If the time series isn't associated with an asset property, specify the
+//     alias of the time series.
+//   - If the time series is associated with an asset property, specify one of the
+//     following:
 //   - The alias of the time series.
 //   - The assetId and propertyId that identifies the asset property.
 func (c *Client) DescribeTimeSeries(ctx context.Context, params *DescribeTimeSeriesInput, optFns ...func(*Options)) (*DescribeTimeSeriesOutput, error) {
@@ -84,11 +86,11 @@ type DescribeTimeSeriesOutput struct {
 	// The ID of the asset in which the asset property was created.
 	AssetId *string
 
-	// The data type of the structure for this time series. This parameter is
-	// required for time series that have the STRUCT data type. The options for this
-	// parameter depend on the type of the composite model in which you created the
-	// asset property that is associated with your time series. Use AWS/ALARM_STATE
-	// for alarm state in alarm composite models.
+	// The data type of the structure for this time series. This parameter is required
+	// for time series that have the STRUCT data type. The options for this parameter
+	// depend on the type of the composite model in which you created the asset
+	// property that is associated with your time series. Use AWS/ALARM_STATE for
+	// alarm state in alarm composite models.
 	DataTypeSpec *string
 
 	// The ID of the asset property.

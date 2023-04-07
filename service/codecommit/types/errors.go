@@ -476,8 +476,8 @@ func (e *BranchNameExistsException) ErrorCode() string {
 }
 func (e *BranchNameExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified branch name is not valid because it is a tag name. Enter the
-// name of a branch in the repository. For a list of valid branch names, use
+// The specified branch name is not valid because it is a tag name. Enter the name
+// of a branch in the repository. For a list of valid branch names, use
 // ListBranches .
 type BranchNameIsTagNameException struct {
 	Message *string
@@ -865,9 +865,8 @@ func (e *CommitIdRequiredException) ErrorCode() string {
 }
 func (e *CommitIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The maximum number of allowed commit IDs in a batch request is 100. Verify
-// that your batch requests contains no more than 100 commit IDs, and then try
-// again.
+// The maximum number of allowed commit IDs in a batch request is 100. Verify that
+// your batch requests contains no more than 100 commit IDs, and then try again.
 type CommitIdsLimitExceededException struct {
 	Message *string
 
@@ -1454,8 +1453,8 @@ func (e *FileTooLargeException) ErrorCode() string {
 }
 func (e *FileTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The commit cannot be created because at least one of the overall changes in
-// the commit results in a folder whose contents exceed the limit of 6 MB. Either
+// The commit cannot be created because at least one of the overall changes in the
+// commit results in a folder whose contents exceed the limit of 6 MB. Either
 // reduce the number and size of your changes, or split the changes across multiple
 // folders.
 type FolderContentSizeLimitExceededException struct {
@@ -2118,8 +2117,8 @@ func (e *InvalidDestinationCommitSpecifierException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
-// The specified email address either contains one or more characters that are
-// not allowed, or it exceeds the maximum number of characters allowed for an email
+// The specified email address either contains one or more characters that are not
+// allowed, or it exceeds the maximum number of characters allowed for an email
 // address.
 type InvalidEmailException struct {
 	Message *string
@@ -2146,8 +2145,8 @@ func (e *InvalidEmailException) ErrorCode() string {
 }
 func (e *InvalidEmailException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The location of the file is not valid. Make sure that you include the file
-// name and extension.
+// The location of the file is not valid. Make sure that you include the file name
+// and extension.
 type InvalidFileLocationException struct {
 	Message *string
 
@@ -2200,8 +2199,8 @@ func (e *InvalidFileModeException) ErrorCode() string {
 }
 func (e *InvalidFileModeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The position is not valid. Make sure that the line number exists in the
-// version of the file you want to comment on.
+// The position is not valid. Make sure that the line number exists in the version
+// of the file you want to comment on.
 type InvalidFilePositionException struct {
 	Message *string
 
@@ -2493,8 +2492,7 @@ func (e *InvalidPullRequestIdException) ErrorCode() string {
 }
 func (e *InvalidPullRequestIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The pull request status is not valid. The only valid values are OPEN  and
-// CLOSED .
+// The pull request status is not valid. The only valid values are OPEN and CLOSED .
 type InvalidPullRequestStatusException struct {
 	Message *string
 
@@ -2632,8 +2630,8 @@ func (e *InvalidReferenceNameException) ErrorCode() string {
 }
 func (e *InvalidReferenceNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Either the enum is not in a valid format, or the specified file version enum
-// is not valid in respect to the current file version.
+// Either the enum is not in a valid format, or the specified file version enum is
+// not valid in respect to the current file version.
 type InvalidRelativeFileVersionEnumException struct {
 	Message *string
 
@@ -2661,8 +2659,8 @@ func (e *InvalidRelativeFileVersionEnumException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// Automerge was specified for resolving the conflict, but the replacement type
-// is not valid or content is missing.
+// Automerge was specified for resolving the conflict, but the replacement type is
+// not valid or content is missing.
 type InvalidReplacementContentException struct {
 	Message *string
 
@@ -3052,8 +3050,8 @@ func (e *InvalidSortByException) ErrorCode() string {
 }
 func (e *InvalidSortByException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The source commit specifier is not valid. You must provide a valid branch
-// name, tag, or full commit ID.
+// The source commit specifier is not valid. You must provide a valid branch name,
+// tag, or full commit ID.
 type InvalidSourceCommitSpecifierException struct {
 	Message *string
 
@@ -3213,9 +3211,9 @@ func (e *InvalidTargetException) ErrorCode() string {
 }
 func (e *InvalidTargetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The targets for the pull request is not valid or not in a valid format.
-// Targets are a list of target objects. Each target object must contain the full
-// values for the repository name, source branch, and destination branch for a pull
+// The targets for the pull request is not valid or not in a valid format. Targets
+// are a list of target objects. Each target object must contain the full values
+// for the repository name, source branch, and destination branch for a pull
 // request.
 type InvalidTargetsException struct {
 	Message *string
@@ -3803,8 +3801,8 @@ func (e *OverrideAlreadySetException) ErrorCode() string {
 }
 func (e *OverrideAlreadySetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An override status is required, but no value was provided. Valid values
-// include OVERRIDE and REVOKE.
+// An override status is required, but no value was provided. Valid values include
+// OVERRIDE and REVOKE.
 type OverrideStatusRequiredException struct {
 	Message *string
 
@@ -3886,7 +3884,7 @@ func (e *ParentCommitIdOutdatedException) ErrorCode() string {
 func (e *ParentCommitIdOutdatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A parent commit ID is required. To view the full commit ID of a branch in a
-// repository, use GetBranch  or a Git command (for example, git pull or git log).
+// repository, use GetBranch or a Git command (for example, git pull or git log).
 type ParentCommitIdRequiredException struct {
 	Message *string
 
@@ -3990,8 +3988,8 @@ func (e *PullRequestAlreadyClosedException) ErrorCode() string {
 }
 func (e *PullRequestAlreadyClosedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The pull request cannot be merged because one or more approval rules applied
-// to the pull request have conditions that have not been met.
+// The pull request cannot be merged because one or more approval rules applied to
+// the pull request have conditions that have not been met.
 type PullRequestApprovalRulesNotSatisfiedException struct {
 	Message *string
 
@@ -4728,8 +4726,8 @@ func (e *RevisionIdRequiredException) ErrorCode() string {
 }
 func (e *RevisionIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The revision ID provided in the request does not match the current revision
-// ID. Use GetPullRequest to retrieve the current revision ID.
+// The revision ID provided in the request does not match the current revision ID.
+// Use GetPullRequest to retrieve the current revision ID.
 type RevisionNotCurrentException struct {
 	Message *string
 
@@ -4812,8 +4810,8 @@ func (e *SamePathRequestException) ErrorCode() string {
 }
 func (e *SamePathRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The source branch and destination branch for the pull request are the same.
-// You must specify different branches for the source and destination.
+// The source branch and destination branch for the pull request are the same. You
+// must specify different branches for the source and destination.
 type SourceAndDestinationAreSameException struct {
 	Message *string
 
@@ -5034,7 +5032,7 @@ func (e *TipOfSourceReferenceIsDifferentException) ErrorFault() smithy.ErrorFaul
 
 // The divergence between the tips of the provided commit specifiers is too great
 // to determine whether there might be any merge conflicts. Locally compare the
-// specifiers using git diff  or a diff tool.
+// specifiers using git diff or a diff tool.
 type TipsDivergenceExceededException struct {
 	Message *string
 

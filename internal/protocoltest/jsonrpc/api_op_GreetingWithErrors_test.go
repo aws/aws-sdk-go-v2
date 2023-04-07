@@ -325,10 +325,10 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 			}`),
 			ExpectError: &types.FooError{},
 		},
-		// Some services serialize errors using code, and it might contain a namespace.
-		// It also might contain a URI. Clients should just take the last part of the
-		// string after '#' and before ":". This is a pathalogical case that might not
-		// occur in any deployed AWS service.
+		// Some services serialize errors using code, and it might contain a namespace. It
+		// also might contain a URI. Clients should just take the last part of the string
+		// after '#' and before ":". This is a pathalogical case that might not occur in
+		// any deployed AWS service.
 		"AwsJson11FooErrorUsingCodeUriAndNamespace": {
 			StatusCode: 500,
 			Header: http.Header{

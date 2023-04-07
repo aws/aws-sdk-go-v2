@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified API key. The API key must have been deactivated more
-// than 90 days previously.
+// Deletes the specified API key. The API key must have been deactivated more than
+// 90 days previously.
 func (c *Client) DeleteKey(ctx context.Context, params *DeleteKeyInput, optFns ...func(*Options)) (*DeleteKeyOutput, error) {
 	if params == nil {
 		params = &DeleteKeyInput{}

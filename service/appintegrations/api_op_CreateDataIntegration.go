@@ -15,7 +15,7 @@ import (
 // Creates and persists a DataIntegration resource. You cannot create a
 // DataIntegration association for a DataIntegration that has been previously
 // associated. Use a different DataIntegration, or recreate the DataIntegration
-// using the CreateDataIntegration  API.
+// using the CreateDataIntegration API.
 func (c *Client) CreateDataIntegration(ctx context.Context, params *CreateDataIntegrationInput, optFns ...func(*Options)) (*CreateDataIntegrationOutput, error) {
 	if params == nil {
 		params = &CreateDataIntegrationInput{}

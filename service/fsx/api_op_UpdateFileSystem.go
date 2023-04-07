@@ -23,8 +23,8 @@ import (
 //   - ThroughputCapacity
 //   - WeeklyMaintenanceStartTime
 //
-// For Amazon FSx for Lustre file systems, you
-// can update the following properties:
+// For Amazon FSx for Lustre file systems, you can update the following
+// properties:
 //   - AutoImportPolicy
 //   - AutomaticBackupRetentionDays
 //   - DailyAutomaticBackupStartTime
@@ -33,8 +33,8 @@ import (
 //   - StorageCapacity
 //   - WeeklyMaintenanceStartTime
 //
-// For Amazon FSx for NetApp ONTAP file systems,
-// you can update the following properties:
+// For Amazon FSx for NetApp ONTAP file systems, you can update the following
+// properties:
 //   - AutomaticBackupRetentionDays
 //   - DailyAutomaticBackupStartTime
 //   - DiskIopsConfiguration
@@ -43,8 +43,8 @@ import (
 //   - ThroughputCapacity
 //   - WeeklyMaintenanceStartTime
 //
-// For the Amazon FSx for OpenZFS file systems,
-// you can update the following properties:
+// For the Amazon FSx for OpenZFS file systems, you can update the following
+// properties:
 //   - AutomaticBackupRetentionDays
 //   - CopyTagsToBackups
 //   - CopyTagsToVolumes
@@ -66,7 +66,7 @@ func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemI
 	return out, nil
 }
 
-// The request object for the UpdateFileSystem  operation.
+// The request object for the UpdateFileSystem operation.
 type UpdateFileSystemInput struct {
 
 	// The ID of the file system that you are updating.
@@ -74,9 +74,9 @@ type UpdateFileSystemInput struct {
 	// This member is required.
 	FileSystemId *string
 
-	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure
-	// idempotent updates. This string is automatically filled on your behalf when you
-	// use the Command Line Interface (CLI) or an Amazon Web Services SDK.
+	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// updates. This string is automatically filled on your behalf when you use the
+	// Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
 	// The configuration object for Amazon FSx for Lustre file systems used in the
@@ -101,26 +101,29 @@ type UpdateFileSystemInput struct {
 	// capacity (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)
 	// in the Amazon FSx for Windows File Server User Guide. For Lustre file systems,
 	// the storage capacity target value can be the following:
-	//     - For SCRATCH_2 , PERSISTENT_1 , and PERSISTENT_2 SSD deployment types, valid values are in multiples of 2400 GiB. The value must be greater than the current storage capacity.
-	//     - For PERSISTENT HDD file systems, valid values are multiples of 6000 GiB for 12-MBps throughput per TiB file systems and multiples of 1800 GiB for 40-MBps throughput per TiB file systems. The values must be greater than the current storage capacity.
-	//     - For SCRATCH_1 file systems, you can't increase the storage capacity.
-	// For
-	// more information, see Managing storage and throughput capacity (https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html)
+	//   - For SCRATCH_2 , PERSISTENT_1 , and PERSISTENT_2 SSD deployment types, valid
+	//   values are in multiples of 2400 GiB. The value must be greater than the current
+	//   storage capacity.
+	//   - For PERSISTENT HDD file systems, valid values are multiples of 6000 GiB for
+	//   12-MBps throughput per TiB file systems and multiples of 1800 GiB for 40-MBps
+	//   throughput per TiB file systems. The values must be greater than the current
+	//   storage capacity.
+	//   - For SCRATCH_1 file systems, you can't increase the storage capacity.
+	// For more information, see Managing storage and throughput capacity (https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html)
 	// in the Amazon FSx for Lustre User Guide. For ONTAP file systems, the storage
 	// capacity target value must be at least 10 percent greater than the current
-	// storage capacity value. For more information, see Managing storage capacity
-	// and provisioned IOPS (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html)
+	// storage capacity value. For more information, see Managing storage capacity and
+	// provisioned IOPS (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html)
 	// in the Amazon FSx for NetApp ONTAP User Guide.
 	StorageCapacity *int32
 
-	// The configuration updates for an Amazon FSx for Windows File Server file
-	// system.
+	// The configuration updates for an Amazon FSx for Windows File Server file system.
 	WindowsConfiguration *types.UpdateFileSystemWindowsConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// The response object for the UpdateFileSystem  operation.
+// The response object for the UpdateFileSystem operation.
 type UpdateFileSystemOutput struct {
 
 	// A description of the file system that was updated.

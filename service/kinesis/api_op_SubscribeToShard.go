@@ -14,22 +14,22 @@ import (
 )
 
 // This operation establishes an HTTP/2 connection between the consumer you
-// specify in the ConsumerARN  parameter and the shard you specify in the ShardId
+// specify in the ConsumerARN parameter and the shard you specify in the ShardId
 // parameter. After the connection is successfully established, Kinesis Data
 // Streams pushes records from the shard to the consumer over this connection.
 // Before you call this operation, call RegisterStreamConsumer to register the
 // consumer with Kinesis Data Streams. When the SubscribeToShard call succeeds,
 // your consumer starts receiving events of type SubscribeToShardEvent over the
 // HTTP/2 connection for up to 5 minutes, after which time you need to call
-// SubscribeToShardagain to renew the subscription if you want to continue to
+// SubscribeToShard again to renew the subscription if you want to continue to
 // receive records. You can make one call to SubscribeToShard per second per
 // registered consumer per shard. For example, if you have a 4000 shard stream and
 // two registered stream consumers, you can make one SubscribeToShard request per
 // second for each combination of shard and registered consumer, allowing you to
 // subscribe both consumers to all 4000 shards in one second. If you call
-// SubscribeToShard again with the same ConsumerARN  and ShardId within 5 seconds
+// SubscribeToShard again with the same ConsumerARN and ShardId within 5 seconds
 // of a successful call, you'll get a ResourceInUseException . If you call
-// SubscribeToShard5 seconds or more after a successful call, the second call
+// SubscribeToShard 5 seconds or more after a successful call, the second call
 // takes over the subscription and the previous connection expires or fails with a
 // ResourceInUseException . For an example of how to use this operations, see
 // Enhanced Fan-Out Using the Kinesis Data Streams API .
@@ -210,8 +210,8 @@ func (es *SubscribeToShardEventStream) safeClose() {
 	es.Reader.Close()
 }
 
-// Err returns any error that occurred while reading or writing EventStream
-// Events from the service API's response. Returns nil if there were no errors.
+// Err returns any error that occurred while reading or writing EventStream Events
+// from the service API's response. Returns nil if there were no errors.
 func (es *SubscribeToShardEventStream) Err() error {
 	if err := es.err.Err(); err != nil {
 		return err

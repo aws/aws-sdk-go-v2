@@ -32,9 +32,13 @@ type CopyDBClusterParameterGroupInput struct {
 
 	// The identifier or Amazon Resource Name (ARN) for the source cluster parameter
 	// group. Constraints:
-	//     - Must specify a valid cluster parameter group.
-	//     - If the source cluster parameter group is in the same Amazon Web Services Region as the copy, specify a valid parameter group identifier; for example, my-db-cluster-param-group , or a valid ARN.
-	//     - If the source parameter group is in a different Amazon Web Services Region than the copy, specify a valid cluster parameter group ARN; for example, arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group .
+	//   - Must specify a valid cluster parameter group.
+	//   - If the source cluster parameter group is in the same Amazon Web Services
+	//   Region as the copy, specify a valid parameter group identifier; for example,
+	//   my-db-cluster-param-group , or a valid ARN.
+	//   - If the source parameter group is in a different Amazon Web Services Region
+	//   than the copy, specify a valid cluster parameter group ARN; for example,
+	//   arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group .
 	//
 	// This member is required.
 	SourceDBClusterParameterGroupIdentifier *string
@@ -45,10 +49,10 @@ type CopyDBClusterParameterGroupInput struct {
 	TargetDBClusterParameterGroupDescription *string
 
 	// The identifier for the copied cluster parameter group. Constraints:
-	//     - Cannot be null, empty, or blank.
-	//     - Must contain from 1 to 255 letters, numbers, or hyphens.
-	//     - The first character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Cannot be null, empty, or blank.
+	//   - Must contain from 1 to 255 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: my-cluster-param-group1
 	//
 	// This member is required.

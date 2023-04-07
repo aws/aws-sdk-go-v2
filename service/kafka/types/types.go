@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// Specifies the EBS volume upgrade information. The broker identifier must be
-// set to the keyword ALL. This means the changes apply to all the brokers in the
+// Specifies the EBS volume upgrade information. The broker identifier must be set
+// to the keyword ALL. This means the changes apply to all the brokers in the
 // cluster.
 type BrokerEBSVolumeInfo struct {
 
@@ -47,19 +47,19 @@ type BrokerNodeGroupInfo struct {
 	// This member is required.
 	ClientSubnets []string
 
-	// The type of Amazon EC2 instances to use for Apache Kafka brokers. The
-	// following instance types are allowed: kafka.m5.large, kafka.m5.xlarge,
-	// kafka.m5.2xlarge, kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
+	// The type of Amazon EC2 instances to use for Apache Kafka brokers. The following
+	// instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
+	// kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
 	//
 	// This member is required.
 	InstanceType *string
 
-	// The distribution of broker nodes across Availability Zones. This is an
-	// optional parameter. If you don't specify it, Amazon MSK gives it the value
-	// DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No
-	// other values are currently allowed. Amazon MSK distributes the broker nodes
-	// evenly across the Availability Zones that correspond to the subnets you provide
-	// when you create the cluster.
+	// The distribution of broker nodes across Availability Zones. This is an optional
+	// parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You
+	// can also explicitly set this parameter to the value DEFAULT. No other values are
+	// currently allowed. Amazon MSK distributes the broker nodes evenly across the
+	// Availability Zones that correspond to the subnets you provide when you create
+	// the cluster.
 	BrokerAZDistribution BrokerAZDistribution
 
 	// Information about the broker access configuration.
@@ -215,8 +215,8 @@ type ClusterInfo struct {
 	// Includes all encryption-related information.
 	EncryptionInfo *EncryptionInfo
 
-	// Specifies which metrics are gathered for the MSK cluster. This property has
-	// the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and
+	// Specifies which metrics are gathered for the MSK cluster. This property has the
+	// following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and
 	// PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these
 	// levels of monitoring, see Monitoring (https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html)
 	// .
@@ -567,9 +567,8 @@ type MutableClusterInfo struct {
 	// The Apache Kafka version.
 	KafkaVersion *string
 
-	// You can configure your MSK cluster to send broker logs to different
-	// destination types. This is a container for the configuration details related to
-	// broker logs.
+	// You can configure your MSK cluster to send broker logs to different destination
+	// types. This is a container for the configuration details related to broker logs.
 	LoggingInfo *LoggingInfo
 
 	// The number of broker nodes in the cluster.
@@ -742,8 +741,8 @@ type ProvisionedRequest struct {
 	// Includes all client authentication information.
 	ClientAuthentication *ClientAuthentication
 
-	// Represents the configuration that you want Amazon MSK to use for the brokers
-	// in a cluster.
+	// Represents the configuration that you want Amazon MSK to use for the brokers in
+	// a cluster.
 	ConfigurationInfo *ConfigurationInfo
 
 	// Includes all encryption-related information.

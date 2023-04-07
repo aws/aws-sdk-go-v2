@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of built-in slot types that meet the specified criteria. For a
-// list of built-in slot types, see Slot Type Reference (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
+// Gets a list of built-in slot types that meet the specified criteria. For a list
+// of built-in slot types, see Slot Type Reference (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
 // in the Alexa Skills Kit. This operation requires permission for the
 // lex:GetBuiltInSlotTypes action.
 func (c *Client) GetBuiltinSlotTypes(ctx context.Context, params *GetBuiltinSlotTypesInput, optFns ...func(*Options)) (*GetBuiltinSlotTypesOutput, error) {
@@ -39,8 +39,8 @@ type GetBuiltinSlotTypesInput struct {
 	// The maximum number of slot types to return in the response. The default is 10.
 	MaxResults *int32
 
-	// A pagination token that fetches the next page of slot types. If the response
-	// to this API call is truncated, Amazon Lex returns a pagination token in the
+	// A pagination token that fetches the next page of slot types. If the response to
+	// this API call is truncated, Amazon Lex returns a pagination token in the
 	// response. To fetch the next page of slot types, specify the pagination token in
 	// the next request.
 	NextToken *string
@@ -55,8 +55,8 @@ type GetBuiltinSlotTypesInput struct {
 
 type GetBuiltinSlotTypesOutput struct {
 
-	// If the response is truncated, the response includes a pagination token that
-	// you can use in your next request to fetch the next page of slot types.
+	// If the response is truncated, the response includes a pagination token that you
+	// can use in your next request to fetch the next page of slot types.
 	NextToken *string
 
 	// An array of BuiltInSlotTypeMetadata objects, one entry for each slot type
@@ -143,8 +143,8 @@ type GetBuiltinSlotTypesPaginatorOptions struct {
 	// The maximum number of slot types to return in the response. The default is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

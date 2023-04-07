@@ -27,8 +27,10 @@ type BranchDiffSourceCodeType struct {
 
 // Code artifacts are source code artifacts and build artifacts used in a
 // repository analysis or a pull request review.
-//   - Source code artifacts are source code files in a Git repository that are compressed into a .zip file.
-//   - Build artifacts are .jar or .class files that are compressed in a .zip file.
+//   - Source code artifacts are source code files in a Git repository that are
+//     compressed into a .zip file.
+//   - Build artifacts are .jar or .class files that are compressed in a .zip
+//     file.
 type CodeArtifacts struct {
 
 	// The S3 object key for a source code .zip file. This is required for all code
@@ -118,10 +120,10 @@ type CodeReview struct {
 	SourceCodeType *SourceCodeType
 
 	// The valid code review states are:
-	//     - Completed : The code review is complete.
-	//     - Pending : The code review started and has not completed or failed.
-	//     - Failed : The code review failed.
-	//     - Deleting : The code review is being deleted.
+	//   - Completed : The code review is complete.
+	//   - Pending : The code review started and has not completed or failed.
+	//   - Failed : The code review failed.
+	//   - Deleting : The code review is being deleted.
 	State JobState
 
 	// The reason for the state of the code review.
@@ -173,10 +175,10 @@ type CodeReviewSummary struct {
 	SourceCodeType *SourceCodeType
 
 	// The state of the code review. The valid code review states are:
-	//     - Completed : The code review is complete.
-	//     - Pending : The code review started and has not completed or failed.
-	//     - Failed : The code review failed.
-	//     - Deleting : The code review is being deleted.
+	//   - Completed : The code review is complete.
+	//   - Pending : The code review started and has not completed or failed.
+	//   - Failed : The code review failed.
+	//   - Deleting : The code review is being deleted.
 	State JobState
 
 	// The type of the code review.
@@ -186,8 +188,12 @@ type CodeReviewSummary struct {
 }
 
 // The type of a code review. There are two code review types:
-//   - PullRequest - A code review that is automatically triggered by a pull request on an associated repository.
-//   - RepositoryAnalysis - A code review that analyzes all code under a specified branch in an associated repository. The associated repository is specified using its ARN in CreateCodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview) .
+//   - PullRequest - A code review that is automatically triggered by a pull
+//     request on an associated repository.
+//   - RepositoryAnalysis - A code review that analyzes all code under a specified
+//     branch in an associated repository. The associated repository is specified using
+//     its ARN in CreateCodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview)
+//     .
 type CodeReviewType struct {
 
 	// A code review that analyzes all code under a specified branch in an associated
@@ -198,8 +204,8 @@ type CodeReviewType struct {
 	// This member is required.
 	RepositoryAnalysis *RepositoryAnalysis
 
-	// They types of analysis performed during a repository analysis or a pull
-	// request review. You can specify either Security , CodeQuality , or both.
+	// They types of analysis performed during a repository analysis or a pull request
+	// review. You can specify either Security , CodeQuality , or both.
 	AnalysisTypes []AnalysisType
 
 	noSmithyDocumentSerde
@@ -207,12 +213,12 @@ type CodeReviewType struct {
 
 // A type of SourceCodeType (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
 // that specifies the commit diff for a pull request on an associated repository.
-// The SourceCommit  and DestinationCommit fields are required to do a pull
-// request code review.
+// The SourceCommit and DestinationCommit fields are required to do a pull request
+// code review.
 type CommitDiffSourceCodeType struct {
 
-	// The SHA of the destination commit used to generate a commit diff. This field
-	// is required for a pull request code review.
+	// The SHA of the destination commit used to generate a commit diff. This field is
+	// required for a pull request code review.
 	DestinationCommit *string
 
 	// The SHA of the merge base of a commit.
@@ -229,8 +235,8 @@ type CommitDiffSourceCodeType struct {
 // request, or another type of event.
 type EventInfo struct {
 
-	// The name of the event. The possible names are pull_request , workflow_dispatch
-	// , schedule , and push
+	// The name of the event. The possible names are pull_request , workflow_dispatch ,
+	// schedule , and push
 	Name *string
 
 	// The state of an event. The state might be open, closed, or another state.
@@ -240,12 +246,15 @@ type EventInfo struct {
 }
 
 // An object that contains:
-//   - The encryption option for a repository association. It is either owned by Amazon Web Services Key Management Service (KMS) ( AWS_OWNED_CMK ) or customer managed ( CUSTOMER_MANAGED_CMK ).
-//   - The ID of the Amazon Web Services KMS key that is associated with a repository association.
+//   - The encryption option for a repository association. It is either owned by
+//     Amazon Web Services Key Management Service (KMS) ( AWS_OWNED_CMK ) or customer
+//     managed ( CUSTOMER_MANAGED_CMK ).
+//   - The ID of the Amazon Web Services KMS key that is associated with a
+//     repository association.
 type KMSKeyDetails struct {
 
 	// The encryption option for a repository association. It is either owned by
-	// Amazon Web Services Key Management Service (KMS) ( AWS_OWNED_CMK) or customer
+	// Amazon Web Services Key Management Service (KMS) ( AWS_OWNED_CMK ) or customer
 	// managed ( CUSTOMER_MANAGED_CMK ).
 	EncryptionOption EncryptionOption
 
@@ -269,9 +278,9 @@ type Metrics struct {
 
 	// SuppressedLinesOfCodeCount is the number of lines of code in the repository
 	// where the code review happened that CodeGuru Reviewer did not analyze. The lines
-	// suppressed in the analysis is based on the excludeFiles  variable in the
-	// aws-codeguru-reviewer.ymlfile. This number does not include non-code lines
-	// such as comments and blank lines.
+	// suppressed in the analysis is based on the excludeFiles variable in the
+	// aws-codeguru-reviewer.yml file. This number does not include non-code lines such
+	// as comments and blank lines.
 	SuppressedLinesOfCodeCount *int64
 
 	noSmithyDocumentSerde
@@ -303,13 +312,13 @@ type MetricsSummary struct {
 	// suppressed. In both cases, this number does not include non-code lines such as
 	// comments and import statements. For example, if you initiate a full repository
 	// analysis on a repository containing 5 files, each file with 100 lines of code,
-	// and 2 files are listed as excluded in the aws-codeguru-reviewer.yml  file, then
-	// SuppressedLinesOfCodeCountreturns 200 (2 * 100) as the total number of lines
-	// of code suppressed. However, if you submit a pull request for the same
-	// repository, then SuppressedLinesOfCodeCount only includes the lines in the 2
-	// files that changed. If only 1 of the 2 files changed in the pull request, then
-	// SuppressedLinesOfCodeCountreturns 100 (1 * 100) as the total number of lines
-	// of code suppressed.
+	// and 2 files are listed as excluded in the aws-codeguru-reviewer.yml file, then
+	// SuppressedLinesOfCodeCount returns 200 (2 * 100) as the total number of lines of
+	// code suppressed. However, if you submit a pull request for the same repository,
+	// then SuppressedLinesOfCodeCount only includes the lines in the 2 files that
+	// changed. If only 1 of the 2 files changed in the pull request, then
+	// SuppressedLinesOfCodeCount returns 100 (1 * 100) as the total number of lines of
+	// code suppressed.
 	SuppressedLinesOfCodeCount *int64
 
 	noSmithyDocumentSerde
@@ -371,9 +380,9 @@ type RecommendationSummary struct {
 	// lines of code between the start line and the end line.
 	Description *string
 
-	// Last line where the recommendation is applicable in the source commit or
-	// source branch. For a single line comment the start line and end line values are
-	// the same.
+	// Last line where the recommendation is applicable in the source commit or source
+	// branch. For a single line comment the start line and end line values are the
+	// same.
 	EndLine *int32
 
 	// Name of the file on which a recommendation is provided.
@@ -402,8 +411,8 @@ type RecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an associated Amazon Web Services CodeCommit repository or
-// an associated repository that is managed by Amazon Web Services CodeStar
+// Information about an associated Amazon Web Services CodeCommit repository or an
+// associated repository that is managed by Amazon Web Services CodeStar
 // Connections (for example, Bitbucket). This Repository object is not used if
 // your source code is in an associated GitHub repository.
 type Repository struct {
@@ -440,7 +449,7 @@ type RepositoryAnalysis struct {
 }
 
 // Information about a repository association. The DescribeRepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRepositoryAssociation.html)
-// operation returns a RepositoryAssociation  object.
+// operation returns a RepositoryAssociation object.
 type RepositoryAssociation struct {
 
 	// The Amazon Resource Name (ARN) identifying the repository association.
@@ -451,8 +460,8 @@ type RepositoryAssociation struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections
 	// connection. Its format is
-	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id
-	// . For more information, see Connection (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
+	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id .
+	// For more information, see Connection (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
 	// in the Amazon Web Services CodeStar Connections API Reference.
 	ConnectionArn *string
 
@@ -460,9 +469,12 @@ type RepositoryAssociation struct {
 	// created.
 	CreatedTimeStamp *time.Time
 
-	// A KMSKeyDetails  object that contains:
-	//     - The encryption option for this repository association. It is either owned by Amazon Web Services Key Management Service (KMS) ( AWS_OWNED_CMK ) or customer managed ( CUSTOMER_MANAGED_CMK ).
-	//     - The ID of the Amazon Web Services KMS key that is associated with this repository association.
+	// A KMSKeyDetails object that contains:
+	//   - The encryption option for this repository association. It is either owned
+	//   by Amazon Web Services Key Management Service (KMS) ( AWS_OWNED_CMK ) or
+	//   customer managed ( CUSTOMER_MANAGED_CMK ).
+	//   - The ID of the Amazon Web Services KMS key that is associated with this
+	//   repository association.
 	KMSKeyDetails *KMSKeyDetails
 
 	// The time, in milliseconds since the epoch, when the repository association was
@@ -482,20 +494,31 @@ type RepositoryAssociation struct {
 	// The provider type of the repository association.
 	ProviderType ProviderType
 
-	// Specifies the name of an S3 bucket and a CodeArtifacts object that contains
-	// the S3 object keys for a source code .zip file and for a build artifacts .zip
-	// file that contains .jar or .class files.
+	// Specifies the name of an S3 bucket and a CodeArtifacts object that contains the
+	// S3 object keys for a source code .zip file and for a build artifacts .zip file
+	// that contains .jar or .class files.
 	S3RepositoryDetails *S3RepositoryDetails
 
 	// The state of the repository association. The valid repository association
 	// states are:
-	//     - Associated: The repository association is complete.
-	//     - Associating: CodeGuru Reviewer is:
-	//         - Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review. If your repository ProviderType is GitHub , GitHub Enterprise Server , or Bitbucket , CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.
-	//         - Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.
-	//     - Failed: The repository failed to associate or disassociate.
-	//     - Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.
-	//     - Disassociated: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in anassociated repository with tags after it has been disassociated. For more information, see Using tags to control access to associated repositories (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html) in the Amazon CodeGuru Reviewer User Guide.
+	//   - Associated: The repository association is complete.
+	//   - Associating: CodeGuru Reviewer is:
+	//   - Setting up pull request notifications. This is required for pull requests
+	//   to trigger a CodeGuru Reviewer review. If your repository ProviderType is
+	//   GitHub , GitHub Enterprise Server , or Bitbucket , CodeGuru Reviewer creates
+	//   webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete
+	//   these webhooks, reviews of code in your repository cannot be triggered.
+	//   - Setting up source code access. This is required for CodeGuru Reviewer to
+	//   securely clone code in your repository.
+	//   - Failed: The repository failed to associate or disassociate.
+	//   - Disassociating: CodeGuru Reviewer is removing the repository's pull request
+	//   notifications and source code access.
+	//   - Disassociated: CodeGuru Reviewer successfully disassociated the repository.
+	//   You can create a new association with this repository if you want to review
+	//   source code in it later. You can control access to code reviews created in
+	//   anassociated repository with tags after it has been disassociated. For more
+	//   information, see Using tags to control access to associated repositories (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html)
+	//   in the Amazon CodeGuru Reviewer User Guide.
 	State RepositoryAssociationState
 
 	// A description of why the repository association is in the current state.
@@ -506,7 +529,7 @@ type RepositoryAssociation struct {
 
 // Summary information about a repository association. The
 // ListRepositoryAssociations (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html)
-// operation returns a list of RepositoryAssociationSummary  objects.
+// operation returns a list of RepositoryAssociationSummary objects.
 type RepositoryAssociationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
@@ -519,13 +542,13 @@ type RepositoryAssociationSummary struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections
 	// connection. Its format is
-	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id
-	// . For more information, see Connection (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
+	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id .
+	// For more information, see Connection (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
 	// in the Amazon Web Services CodeStar Connections API Reference.
 	ConnectionArn *string
 
-	// The time, in milliseconds since the epoch, since the repository association
-	// was last updated.
+	// The time, in milliseconds since the epoch, since the repository association was
+	// last updated.
 	LastUpdatedTimeStamp *time.Time
 
 	// The name of the repository association.
@@ -543,13 +566,24 @@ type RepositoryAssociationSummary struct {
 
 	// The state of the repository association. The valid repository association
 	// states are:
-	//     - Associated: The repository association is complete.
-	//     - Associating: CodeGuru Reviewer is:
-	//         - Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review. If your repository ProviderType is GitHub , GitHub Enterprise Server , or Bitbucket , CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.
-	//         - Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.
-	//     - Failed: The repository failed to associate or disassociate.
-	//     - Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.
-	//     - Disassociated: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in anassociated repository with tags after it has been disassociated. For more information, see Using tags to control access to associated repositories (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html) in the Amazon CodeGuru Reviewer User Guide.
+	//   - Associated: The repository association is complete.
+	//   - Associating: CodeGuru Reviewer is:
+	//   - Setting up pull request notifications. This is required for pull requests
+	//   to trigger a CodeGuru Reviewer review. If your repository ProviderType is
+	//   GitHub , GitHub Enterprise Server , or Bitbucket , CodeGuru Reviewer creates
+	//   webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete
+	//   these webhooks, reviews of code in your repository cannot be triggered.
+	//   - Setting up source code access. This is required for CodeGuru Reviewer to
+	//   securely clone code in your repository.
+	//   - Failed: The repository failed to associate or disassociate.
+	//   - Disassociating: CodeGuru Reviewer is removing the repository's pull request
+	//   notifications and source code access.
+	//   - Disassociated: CodeGuru Reviewer successfully disassociated the repository.
+	//   You can create a new association with this repository if you want to review
+	//   source code in it later. You can control access to code reviews created in
+	//   anassociated repository with tags after it has been disassociated. For more
+	//   information, see Using tags to control access to associated repositories (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html)
+	//   in the Amazon CodeGuru Reviewer User Guide.
 	State RepositoryAssociationState
 
 	noSmithyDocumentSerde
@@ -579,16 +613,16 @@ type RequestMetadata struct {
 	RequestId *string
 
 	// An identifier, such as a name or account ID, that is associated with the
-	// requester. The Requester  is used to capture the author/actor name of the
-	// event request.
+	// requester. The Requester is used to capture the author/actor name of the event
+	// request.
 	Requester *string
 
 	// The name of the repository vendor used to upload code to an S3 bucket for a
 	// CI/CD code review. For example, if code and artifacts are uploaded to an S3
 	// bucket for a CI/CD code review by GitHub scripts from a GitHub repository, then
-	// the repository association's ProviderType  is S3Bucket and the CI/CD
-	// repository vendor name is GitHub. For more information, see the definition for
-	// ProviderType in RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
+	// the repository association's ProviderType is S3Bucket and the CI/CD repository
+	// vendor name is GitHub. For more information, see the definition for ProviderType
+	// in RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
 	// .
 	VendorName VendorName
 
@@ -624,12 +658,12 @@ type RuleMetadata struct {
 // contains .jar or .class files.
 type S3BucketRepository struct {
 
-	// The name of the repository when the ProviderType  is S3Bucket .
+	// The name of the repository when the ProviderType is S3Bucket .
 	//
 	// This member is required.
 	Name *string
 
-	// An S3RepositoryDetails  object that specifies the name of an S3 bucket and a
+	// An S3RepositoryDetails object that specifies the name of an S3 bucket and a
 	// CodeArtifacts object. The CodeArtifacts object includes the S3 object keys for
 	// a source code .zip file and for a build artifacts .zip file.
 	Details *S3RepositoryDetails
@@ -654,18 +688,18 @@ type S3Repository struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the name of an S3 bucket and a CodeArtifacts object that contains
-// the S3 object keys for a source code .zip file and for a build artifacts .zip
-// file that contains .jar or .class files.
+// Specifies the name of an S3 bucket and a CodeArtifacts object that contains the
+// S3 object keys for a source code .zip file and for a build artifacts .zip file
+// that contains .jar or .class files.
 type S3RepositoryDetails struct {
 
 	// The name of the S3 bucket used for associating a new S3 repository. It must
 	// begin with codeguru-reviewer- .
 	BucketName *string
 
-	// A CodeArtifacts  object. The CodeArtifacts object includes the S3 object key
-	// for a source code .zip file and for a build artifacts .zip file that contains
-	// .jar or .class files.
+	// A CodeArtifacts object. The CodeArtifacts object includes the S3 object key for
+	// a source code .zip file and for a build artifacts .zip file that contains .jar
+	// or .class files.
 	CodeArtifacts *CodeArtifacts
 
 	noSmithyDocumentSerde
@@ -695,11 +729,11 @@ type SourceCodeType struct {
 	RequestMetadata *RequestMetadata
 
 	// Information about an associated repository in an S3 bucket that includes its
-	// name and an S3RepositoryDetails  object. The S3RepositoryDetails object
-	// includes the name of an S3 bucket, an S3 key for a source code .zip file, and an
-	// S3 key for a build artifacts .zip file. S3BucketRepository  is required in
+	// name and an S3RepositoryDetails object. The S3RepositoryDetails object includes
+	// the name of an S3 bucket, an S3 key for a source code .zip file, and an S3 key
+	// for a build artifacts .zip file. S3BucketRepository is required in
 	// SourceCodeType (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
-	// for S3BucketRepository  based code reviews.
+	// for S3BucketRepository based code reviews.
 	S3BucketRepository *S3BucketRepository
 
 	noSmithyDocumentSerde
@@ -711,8 +745,8 @@ type ThirdPartySourceRepository struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections
 	// connection. Its format is
-	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id
-	// . For more information, see Connection (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
+	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id .
+	// For more information, see Connection (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
 	// in the Amazon Web Services CodeStar Connections API Reference.
 	//
 	// This member is required.

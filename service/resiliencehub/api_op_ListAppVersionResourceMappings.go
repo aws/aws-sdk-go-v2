@@ -45,9 +45,9 @@ type ListAppVersionResourceMappingsInput struct {
 	// This member is required.
 	AppVersion *string
 
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// Null, or the token from a previous call to get the next set of results.
@@ -58,10 +58,10 @@ type ListAppVersionResourceMappingsInput struct {
 
 type ListAppVersionResourceMappingsOutput struct {
 
-	// Mappings used to map logical resources from the template to physical
-	// resources. You can use the mapping type CFN_STACK if the application template
-	// uses a logical stack name. Or you can map individual resources by using the
-	// mapping type RESOURCE . We recommend using the mapping type CFN_STACK if the
+	// Mappings used to map logical resources from the template to physical resources.
+	// You can use the mapping type CFN_STACK if the application template uses a
+	// logical stack name. Or you can map individual resources by using the mapping
+	// type RESOURCE . We recommend using the mapping type CFN_STACK if the
 	// application is backed by a CloudFormation stack.
 	//
 	// This member is required.
@@ -150,13 +150,13 @@ var _ ListAppVersionResourceMappingsAPIClient = (*Client)(nil)
 // ListAppVersionResourceMappingsPaginatorOptions is the paginator options for
 // ListAppVersionResourceMappings
 type ListAppVersionResourceMappingsPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

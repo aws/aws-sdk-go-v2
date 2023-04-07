@@ -89,8 +89,8 @@ type CmafPackage struct {
 	// during content playback.
 	IncludeEncoderConfigurationInSegments bool
 
-	// Duration (in seconds) of each fragment. Actual fragments will be rounded to
-	// the nearest multiple of the source fragment duration.
+	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
+	// nearest multiple of the source fragment duration.
 	SegmentDurationSeconds int32
 
 	noSmithyDocumentSerde
@@ -209,10 +209,10 @@ type EgressEndpoint struct {
 	noSmithyDocumentSerde
 }
 
-// Use encryptionContractConfiguration to configure one or more content
-// encryption keys for your endpoints that use SPEKE 2.0. The encryption contract
-// defines which content keys are used to encrypt the audio and video tracks in
-// your stream. To configure the encryption contract, specify which audio and video
+// Use encryptionContractConfiguration to configure one or more content encryption
+// keys for your endpoints that use SPEKE 2.0. The encryption contract defines
+// which content keys are used to encrypt the audio and video tracks in your
+// stream. To configure the encryption contract, specify which audio and video
 // encryption presets to use. Note the following considerations when using
 // encryptionContractConfiguration: encryptionContractConfiguration can be used for
 // DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3
@@ -303,8 +303,8 @@ type HlsPackage struct {
 	// subtitles into the output.
 	IncludeDvbSubtitles bool
 
-	// Duration (in seconds) of each fragment. Actual fragments will be rounded to
-	// the nearest multiple of the source fragment duration.
+	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
+	// nearest multiple of the source fragment duration.
 	SegmentDurationSeconds int32
 
 	// When enabled, audio streams will be placed in rendition groups in the output.
@@ -437,10 +437,10 @@ type SpekeKeyProvider struct {
 	// This member is required.
 	Url *string
 
-	// Use encryptionContractConfiguration to configure one or more content
-	// encryption keys for your endpoints that use SPEKE 2.0. The encryption contract
-	// defines which content keys are used to encrypt the audio and video tracks in
-	// your stream. To configure the encryption contract, specify which audio and video
+	// Use encryptionContractConfiguration to configure one or more content encryption
+	// keys for your endpoints that use SPEKE 2.0. The encryption contract defines
+	// which content keys are used to encrypt the audio and video tracks in your
+	// stream. To configure the encryption contract, specify which audio and video
 	// encryption presets to use. Note the following considerations when using
 	// encryptionContractConfiguration: encryptionContractConfiguration can be used for
 	// DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3

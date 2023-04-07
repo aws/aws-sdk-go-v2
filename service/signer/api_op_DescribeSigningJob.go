@@ -18,7 +18,7 @@ import (
 )
 
 // Returns information about a specific code signing job. You specify the job by
-// using the jobId  value that is returned by the StartSigningJob  operation.
+// using the jobId value that is returned by the StartSigningJob operation.
 func (c *Client) DescribeSigningJob(ctx context.Context, params *DescribeSigningJobInput, optFns ...func(*Options)) (*DescribeSigningJobOutput, error) {
 	if params == nil {
 		params = &DescribeSigningJobInput{}

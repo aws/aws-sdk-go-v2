@@ -36,8 +36,8 @@ type UpdateArchiveRuleInput struct {
 	// This member is required.
 	AnalyzerName *string
 
-	// A filter to match for the rules to update. Only rules that match the filter
-	// are updated.
+	// A filter to match for the rules to update. Only rules that match the filter are
+	// updated.
 	//
 	// This member is required.
 	Filter map[string]types.Criterion

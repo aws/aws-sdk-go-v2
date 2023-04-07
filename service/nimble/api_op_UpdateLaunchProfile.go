@@ -40,8 +40,8 @@ type UpdateLaunchProfileInput struct {
 	// This member is required.
 	StudioId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
 	ClientToken *string
@@ -49,8 +49,8 @@ type UpdateLaunchProfileInput struct {
 	// The description.
 	Description *string
 
-	// The version number of the protocol that is used by the launch profile. The
-	// only valid version is "2021-03-31".
+	// The version number of the protocol that is used by the launch profile. The only
+	// valid version is "2021-03-31".
 	LaunchProfileProtocolVersions []string
 
 	// The name for the launch profile.

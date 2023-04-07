@@ -67,7 +67,7 @@ type CreateDatasetOutput struct {
 	// The name of the dataset being created.
 	DatasetName *string
 
-	// Indicates the status of the CreateDataset  operation.
+	// Indicates the status of the CreateDataset operation.
 	Status types.DatasetStatus
 
 	// Metadata pertaining to the operation's result.

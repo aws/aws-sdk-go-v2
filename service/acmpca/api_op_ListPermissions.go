@@ -18,9 +18,17 @@ import (
 // account as the CA. Permissions can be granted with the CreatePermission (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html)
 // action and revoked with the DeletePermission (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePermission.html)
 // action. About Permissions
-//   - If the private CA and the certificates it issues reside in the same account, you can use CreatePermission to grant permissions for ACM to carry out automatic certificate renewals.
-//   - For automatic certificate renewal to succeed, the ACM service principal needs permissions to create, retrieve, and list certificates.
-//   - If the private CA and the ACM certificates reside in different accounts, then permissions cannot be used to enable automatic renewals. Instead, the ACM certificate owner must set up a resource-based policy to enable cross-account issuance and renewals. For more information, see Using a Resource Based Policy with Amazon Web Services Private CA (https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html) .
+//   - If the private CA and the certificates it issues reside in the same
+//     account, you can use CreatePermission to grant permissions for ACM to carry
+//     out automatic certificate renewals.
+//   - For automatic certificate renewal to succeed, the ACM service principal
+//     needs permissions to create, retrieve, and list certificates.
+//   - If the private CA and the ACM certificates reside in different accounts,
+//     then permissions cannot be used to enable automatic renewals. Instead, the ACM
+//     certificate owner must set up a resource-based policy to enable cross-account
+//     issuance and renewals. For more information, see Using a Resource Based
+//     Policy with Amazon Web Services Private CA (https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html)
+//     .
 func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInput, optFns ...func(*Options)) (*ListPermissionsOutput, error) {
 	if params == nil {
 		params = &ListPermissionsInput{}
@@ -38,8 +46,8 @@ func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInp
 
 type ListPermissionsInput struct {
 
-	// The Amazon Resource Number (ARN) of the private CA to inspect. You can find
-	// the ARN by calling the ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
+	// The Amazon Resource Number (ARN) of the private CA to inspect. You can find the
+	// ARN by calling the ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
 	// action. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// You can get a private CA's ARN by running the ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
@@ -68,8 +76,8 @@ type ListPermissionsOutput struct {
 	// NextToken parameter in a subsequent pagination request.
 	NextToken *string
 
-	// Summary information about each permission assigned by the specified private
-	// CA, including the action enabled, the policy provided, and the time of creation.
+	// Summary information about each permission assigned by the specified private CA,
+	// including the action enabled, the policy provided, and the time of creation.
 	Permissions []types.Permission
 
 	// Metadata pertaining to the operation's result.
@@ -157,8 +165,8 @@ type ListPermissionsPaginatorOptions struct {
 	// in a subsequent request to retrieve additional items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

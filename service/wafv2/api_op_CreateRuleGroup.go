@@ -13,7 +13,7 @@ import (
 
 // Creates a RuleGroup per the specifications provided. A rule group defines a
 // collection of rules to inspect and control web requests that you can use in a
-// WebACL. When you create a rule group, you define an immutable capacity limit.
+// WebACL . When you create a rule group, you define an immutable capacity limit.
 // If you update a rule group, you must stay within the capacity. This allows
 // others to reuse the rule group with confidence in its capacity requirements.
 func (c *Client) CreateRuleGroup(ctx context.Context, params *CreateRuleGroupInput, optFns ...func(*Options)) (*CreateRuleGroupOutput, error) {
@@ -33,17 +33,16 @@ func (c *Client) CreateRuleGroup(ctx context.Context, params *CreateRuleGroupInp
 
 type CreateRuleGroupInput struct {
 
-	// The web ACL capacity units (WCUs) required for this rule group. When you
-	// create your own rule group, you define this, and you cannot change it after
-	// creation. When you add or modify the rules in a rule group, WAF enforces this
-	// limit. You can check the capacity for a set of rules using CheckCapacity. WAF
-	// uses WCUs to calculate and control the operating resources that are used to run
-	// your rules, rule groups, and web ACLs. WAF calculates capacity differently for
-	// each rule type, to reflect the relative cost of each rule. Simple rules that
-	// cost little to run use fewer WCUs than more complex rules that use more
-	// processing power. Rule group capacity is fixed at creation, which helps users
-	// plan their web ACL WCU usage when they use a rule group. The WCU limit for web
-	// ACLs is 1,500.
+	// The web ACL capacity units (WCUs) required for this rule group. When you create
+	// your own rule group, you define this, and you cannot change it after creation.
+	// When you add or modify the rules in a rule group, WAF enforces this limit. You
+	// can check the capacity for a set of rules using CheckCapacity . WAF uses WCUs to
+	// calculate and control the operating resources that are used to run your rules,
+	// rule groups, and web ACLs. WAF calculates capacity differently for each rule
+	// type, to reflect the relative cost of each rule. Simple rules that cost little
+	// to run use fewer WCUs than more complex rules that use more processing power.
+	// Rule group capacity is fixed at creation, which helps users plan their web ACL
+	// WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500.
 	//
 	// This member is required.
 	Capacity int64
@@ -59,20 +58,20 @@ type CreateRuleGroupInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//     - CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1 .
-	//     - API and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample
-	// collection.
+	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
 	//
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
-	// A map of custom response keys and content bodies. When you create a rule with
-	// a block action, you can send a custom response to the web request. You define
+	// A map of custom response keys and content bodies. When you create a rule with a
+	// block action, you can send a custom response to the web request. You define
 	// these for the rule group, and then use them in the rules that you define in the
 	// rule group. For information about customizing web requests and responses, see
 	// Customizing web requests and responses in WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
@@ -99,7 +98,7 @@ type CreateRuleGroupInput struct {
 
 type CreateRuleGroupOutput struct {
 
-	// High-level information about a RuleGroup, returned by operations like create
+	// High-level information about a RuleGroup , returned by operations like create
 	// and list. This provides information like the ID, that you can use to retrieve
 	// and manage a RuleGroup , and the ARN, that you provide to the
 	// RuleGroupReferenceStatement to use the rule group in a Rule .

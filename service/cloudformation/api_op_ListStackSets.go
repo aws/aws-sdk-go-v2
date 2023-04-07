@@ -12,11 +12,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summary information about stack sets that are associated with the
-// user.
-//   - [Self-managed permissions] If you set the CallAs parameter to SELF while signed in to your Amazon Web Services account, ListStackSets returns all self-managed stack sets in your Amazon Web Services account.
-//   - [Service-managed permissions] If you set the CallAs parameter to SELF while signed in to the organization's management account, ListStackSets returns all stack sets in the management account.
-//   - [Service-managed permissions] If you set the CallAs parameter to DELEGATED_ADMIN while signed in to your member account, ListStackSets returns all stack sets with service-managed permissions in the management account.
+// Returns summary information about stack sets that are associated with the user.
+//   - [Self-managed permissions] If you set the CallAs parameter to SELF while
+//     signed in to your Amazon Web Services account, ListStackSets returns all
+//     self-managed stack sets in your Amazon Web Services account.
+//   - [Service-managed permissions] If you set the CallAs parameter to SELF while
+//     signed in to the organization's management account, ListStackSets returns all
+//     stack sets in the management account.
+//   - [Service-managed permissions] If you set the CallAs parameter to
+//     DELEGATED_ADMIN while signed in to your member account, ListStackSets returns
+//     all stack sets with service-managed permissions in the management account.
 func (c *Client) ListStackSets(ctx context.Context, params *ListStackSetsInput, optFns ...func(*Options)) (*ListStackSetsOutput, error) {
 	if params == nil {
 		params = &ListStackSetsInput{}
@@ -36,10 +41,14 @@ type ListStackSetsInput struct {
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
 	// administrator in the management account or as a delegated administrator in a
-	// member account. By default, SELF  is specified. Use SELF for stack sets with
+	// member account. By default, SELF is specified. Use SELF for stack sets with
 	// self-managed permissions.
-	//     - If you are signed in to the management account, specify SELF .
-	//     - If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html) in the CloudFormation User Guide.
+	//   - If you are signed in to the management account, specify SELF .
+	//   - If you are signed in to a delegated administrator account, specify
+	//   DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a
+	//   delegated administrator in the management account. For more information, see
+	//   Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
+	//   in the CloudFormation User Guide.
 	CallAs types.CallAs
 
 	// The maximum number of results to be returned with a single call. If the number
@@ -52,7 +61,7 @@ type ListStackSetsInput struct {
 	// response object's NextToken parameter value is set to a token. To retrieve the
 	// next set of results, call ListStackSets again and assign that token to the
 	// request object's NextToken parameter. If there are no remaining results, the
-	// previous response object's NextToken  parameter is set to null .
+	// previous response object's NextToken parameter is set to null .
 	NextToken *string
 
 	// The status of the stack sets that you want to get summary information about.
@@ -63,10 +72,10 @@ type ListStackSetsInput struct {
 
 type ListStackSetsOutput struct {
 
-	// If the request doesn't return all of the remaining results, NextToken is set
-	// to a token. To retrieve the next set of results, call ListStackInstances again
-	// and assign that token to the request object's NextToken parameter. If the
-	// request returns all results, NextToken  is set to null .
+	// If the request doesn't return all of the remaining results, NextToken is set to
+	// a token. To retrieve the next set of results, call ListStackInstances again and
+	// assign that token to the request object's NextToken parameter. If the request
+	// returns all results, NextToken is set to null .
 	NextToken *string
 
 	// A list of StackSetSummary structures that contain information about the user's
@@ -154,8 +163,8 @@ type ListStackSetsPaginatorOptions struct {
 	// set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

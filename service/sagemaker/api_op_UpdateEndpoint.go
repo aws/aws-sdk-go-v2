@@ -14,15 +14,15 @@ import (
 // Deploys the new EndpointConfig specified in the request, switches to using
 // newly created endpoint, and then deletes resources provisioned for the endpoint
 // using the previous EndpointConfig (there is no availability loss). When
-// SageMaker receives the request, it sets the endpoint status to Updating. After
-// updating the endpoint, it sets the status to InService. To check the status of
-// an endpoint, use the DescribeEndpoint  API. You must not delete an
-// EndpointConfig in use by an endpoint that is live or while the UpdateEndpoint
-// or CreateEndpoint operations are being performed on the endpoint. To update an
-// endpoint, you must create a new EndpointConfig . If you delete the
-// EndpointConfigof an endpoint that is active or being created or updated you
-// may lose visibility into the instance type the endpoint is using. The endpoint
-// must be deleted in order to stop incurring charges.
+// SageMaker receives the request, it sets the endpoint status to Updating . After
+// updating the endpoint, it sets the status to InService . To check the status of
+// an endpoint, use the DescribeEndpoint API. You must not delete an EndpointConfig
+// in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint
+// operations are being performed on the endpoint. To update an endpoint, you must
+// create a new EndpointConfig . If you delete the EndpointConfig of an endpoint
+// that is active or being created or updated you may lose visibility into the
+// instance type the endpoint is using. The endpoint must be deleted in order to
+// stop incurring charges.
 func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput, optFns ...func(*Options)) (*UpdateEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateEndpointInput{}
@@ -57,22 +57,22 @@ type UpdateEndpointInput struct {
 	// When you are updating endpoint resources with
 	// UpdateEndpointInput$RetainAllVariantProperties , whose value is set to true ,
 	// ExcludeRetainedVariantProperties specifies the list of type VariantProperty to
-	// override with the values provided by EndpointConfig. If you don't specify a
-	// value for ExcludeRetainedVariantProperties, no variant properties are
+	// override with the values provided by EndpointConfig . If you don't specify a
+	// value for ExcludeRetainedVariantProperties , no variant properties are
 	// overridden.
 	ExcludeRetainedVariantProperties []types.VariantProperty
 
 	// When updating endpoint resources, enables or disables the retention of variant
 	// properties (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VariantProperty.html)
 	// , such as the instance count or the variant weight. To retain the variant
-	// properties of an endpoint when updating it, set RetainAllVariantProperties  to
+	// properties of an endpoint when updating it, set RetainAllVariantProperties to
 	// true . To use the variant properties specified in a new EndpointConfig call
-	// when updating an endpoint, set RetainAllVariantProperties  to false. The
-	// default is false .
+	// when updating an endpoint, set RetainAllVariantProperties to false . The default
+	// is false .
 	RetainAllVariantProperties bool
 
-	// Specifies whether to reuse the last deployment configuration. The default
-	// value is false (the configuration is not reused).
+	// Specifies whether to reuse the last deployment configuration. The default value
+	// is false (the configuration is not reused).
 	RetainDeploymentConfig bool
 
 	noSmithyDocumentSerde

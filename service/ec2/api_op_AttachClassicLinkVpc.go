@@ -38,8 +38,8 @@ func (c *Client) AttachClassicLinkVpc(ctx context.Context, params *AttachClassic
 
 type AttachClassicLinkVpcInput struct {
 
-	// The ID of one or more of the VPC's security groups. You cannot specify
-	// security groups from a different VPC.
+	// The ID of one or more of the VPC's security groups. You cannot specify security
+	// groups from a different VPC.
 	//
 	// This member is required.
 	Groups []string
@@ -65,7 +65,7 @@ type AttachClassicLinkVpcInput struct {
 
 type AttachClassicLinkVpcOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

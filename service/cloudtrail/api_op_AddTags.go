@@ -39,7 +39,7 @@ type AddTagsInput struct {
 
 	// Specifies the ARN of the trail, event data store, or channel to which one or
 	// more tags will be added. The format of a trail ARN is:
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrailThe format of an event
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail The format of an event
 	// data store ARN is:
 	// arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
 	// The format of a channel ARN is:

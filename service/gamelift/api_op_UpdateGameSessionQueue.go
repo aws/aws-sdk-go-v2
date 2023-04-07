@@ -50,8 +50,7 @@ type UpdateGameSessionQueueInput struct {
 
 	// A list of locations where a queue is allowed to place new game sessions.
 	// Locations are specified in the form of Amazon Web Services Region codes, such as
-	//
-	// us-west-2. If this parameter is not set, game sessions can be placed in any
+	// us-west-2 . If this parameter is not set, game sessions can be placed in any
 	// queue location. To remove an existing filter configuration, pass in an empty
 	// set.
 	FilterConfiguration *types.FilterConfiguration
@@ -61,8 +60,8 @@ type UpdateGameSessionQueueInput struct {
 	// .
 	NotificationTarget *string
 
-	// A set of policies that act as a sliding cap on player latency. FleetIQ works
-	// to deliver low latency for most players in a game session. These policies ensure
+	// A set of policies that act as a sliding cap on player latency. FleetIQ works to
+	// deliver low latency for most players in a game session. These policies ensure
 	// that no individual player can be placed into a game with unreasonably high
 	// latency. Use multiple policies to gradually relax latency requirements a step at
 	// a time. Multiple policies are applied based on their maximum allowed latency,
@@ -77,9 +76,9 @@ type UpdateGameSessionQueueInput struct {
 	// existing priority configuration, pass in an empty set.
 	PriorityConfiguration *types.PriorityConfiguration
 
-	// The maximum time, in seconds, that a new game session placement request
-	// remains in the queue. When a request exceeds this time, the game session
-	// placement changes to a TIMED_OUT  status.
+	// The maximum time, in seconds, that a new game session placement request remains
+	// in the queue. When a request exceeds this time, the game session placement
+	// changes to a TIMED_OUT status.
 	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde

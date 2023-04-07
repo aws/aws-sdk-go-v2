@@ -31,7 +31,7 @@ func (c *Client) GetLegalHold(ctx context.Context, params *GetLegalHoldInput, op
 
 type GetLegalHoldInput struct {
 
-	// This is the ID required to use GetLegalHold. This unique ID is associated with
+	// This is the ID required to use GetLegalHold . This unique ID is associated with
 	// a specific legal hold.
 	//
 	// This member is required.
@@ -62,8 +62,8 @@ type GetLegalHoldOutput struct {
 	// This is the returned ID associated with a specified legal hold.
 	LegalHoldId *string
 
-	// This specifies criteria to assign a set of resources, such as resource types
-	// or backup vaults.
+	// This specifies criteria to assign a set of resources, such as resource types or
+	// backup vaults.
 	RecoveryPointSelection *types.RecoveryPointSelection
 
 	// This is the date and time until which the legal hold record will be retained.

@@ -35,10 +35,10 @@ func (c *Client) DescribeHandshake(ctx context.Context, params *DescribeHandshak
 type DescribeHandshakeInput struct {
 
 	// The unique identifier (ID) of the handshake that you want information about.
-	// You can get the ID from the original call to InviteAccountToOrganization, or
-	// from a call to ListHandshakesForAccount  or ListHandshakesForOrganization . The
-	// regex pattern (http://wikipedia.org/wiki/regex)for handshake ID string
-	// requires "h-" followed by from 8 to 32 lowercase letters or digits.
+	// You can get the ID from the original call to InviteAccountToOrganization , or
+	// from a call to ListHandshakesForAccount or ListHandshakesForOrganization . The
+	// regex pattern (http://wikipedia.org/wiki/regex) for handshake ID string requires
+	// "h-" followed by from 8 to 32 lowercase letters or digits.
 	//
 	// This member is required.
 	HandshakeId *string

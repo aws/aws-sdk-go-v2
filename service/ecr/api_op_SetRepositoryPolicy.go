@@ -44,8 +44,8 @@ type SetRepositoryPolicyInput struct {
 
 	// If the policy you are attempting to set on a repository policy would prevent
 	// you from setting another policy in the future, you must force the
-	// SetRepositoryPolicyoperation. This is intended to prevent accidental
-	// repository lock outs.
+	// SetRepositoryPolicy operation. This is intended to prevent accidental repository
+	// lock outs.
 	Force bool
 
 	// The Amazon Web Services account ID associated with the registry that contains

@@ -14,7 +14,7 @@ import (
 
 // Updates the configuration of an existing data repository association on an
 // Amazon FSx for Lustre file system. Data repository associations are supported
-// only for file systems with the Persistent_2  deployment type.
+// only for file systems with the Persistent_2 deployment type.
 func (c *Client) UpdateDataRepositoryAssociation(ctx context.Context, params *UpdateDataRepositoryAssociationInput, optFns ...func(*Options)) (*UpdateDataRepositoryAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateDataRepositoryAssociationInput{}

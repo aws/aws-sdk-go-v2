@@ -35,16 +35,16 @@ func (c *Client) DeactivateType(ctx context.Context, params *DeactivateTypeInput
 type DeactivateTypeInput struct {
 
 	// The Amazon Resource Name (ARN) for the extension, in this account and region.
-	// Conditional: You must specify either Arn , or TypeName  and Type .
+	// Conditional: You must specify either Arn , or TypeName and Type .
 	Arn *string
 
-	// The extension type. Conditional: You must specify either Arn , or TypeName  and
+	// The extension type. Conditional: You must specify either Arn , or TypeName and
 	// Type .
 	Type types.ThirdPartyType
 
 	// The type name of the extension, in this account and region. If you specified a
 	// type name alias when enabling the extension, use the type name alias.
-	// Conditional: You must specify either Arn , or TypeName  and Type .
+	// Conditional: You must specify either Arn , or TypeName and Type .
 	TypeName *string
 
 	noSmithyDocumentSerde

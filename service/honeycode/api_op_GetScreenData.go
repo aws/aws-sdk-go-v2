@@ -46,9 +46,9 @@ type GetScreenDataInput struct {
 	// This member is required.
 	WorkbookId *string
 
-	// The number of results to be returned on a single page. Specify a number
-	// between 1 and 100. The maximum value is 100. This parameter is optional. If you
-	// don't specify this parameter, the default page size is 100.
+	// The number of results to be returned on a single page. Specify a number between
+	// 1 and 100. The maximum value is 100. This parameter is optional. If you don't
+	// specify this parameter, the default page size is 100.
 	MaxResults *int32
 
 	// This parameter is optional. If a nextToken is not specified, the API returns

@@ -13,12 +13,17 @@ import (
 
 // Creates an Firewall Manager policy. Firewall Manager provides the following
 // types of policies:
-//   - An WAF policy (type WAFV2), which defines rule groups to run first in the corresponding WAF web ACL and rule groups to run last in the web ACL.
+//   - An WAF policy (type WAFV2), which defines rule groups to run first in the
+//     corresponding WAF web ACL and rule groups to run last in the web ACL.
 //   - An WAF Classic policy (type WAF), which defines a rule group.
-//   - A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources.
-//   - A security group policy, which manages VPC security groups across your Amazon Web Services organization.
-//   - An Network Firewall policy, which provides firewall rules to filter network traffic in specified Amazon VPCs.
-//   - A DNS Firewall policy, which provides Route 53 Resolver DNS Firewall rules to filter DNS queries for specified VPCs.
+//   - A Shield Advanced policy, which applies Shield Advanced protection to
+//     specified accounts and resources.
+//   - A security group policy, which manages VPC security groups across your
+//     Amazon Web Services organization.
+//   - An Network Firewall policy, which provides firewall rules to filter network
+//     traffic in specified Amazon VPCs.
+//   - A DNS Firewall policy, which provides Route 53 Resolver DNS Firewall rules
+//     to filter DNS queries for specified VPCs.
 //
 // Each policy is specific to one of the types. If you want to enforce more than
 // one policy type across accounts, create multiple policies. You can create

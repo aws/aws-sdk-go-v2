@@ -42,9 +42,9 @@ type CreateOptOutListInput struct {
 	// This member is required.
 	OptOutListName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. If you don't specify a client token, a randomly generated token
-	// is used for the request to ensure idempotency.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don't specify a client token, a randomly generated token is
+	// used for the request to ensure idempotency.
 	ClientToken *string
 
 	// An array of tags (key and value pairs) to associate with the new OptOutList.

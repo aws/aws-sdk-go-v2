@@ -32,8 +32,10 @@ import (
 // separate requests for adding or removing replicas. If global secondary indexes
 // are specified, then the following conditions must also be met:
 //   - The global secondary indexes must have the same name.
-//   - The global secondary indexes must have the same hash key and sort key (if present).
-//   - The global secondary indexes must have the same provisioned and maximum write capacity units.
+//   - The global secondary indexes must have the same hash key and sort key (if
+//     present).
+//   - The global secondary indexes must have the same provisioned and maximum
+//     write capacity units.
 func (c *Client) UpdateGlobalTable(ctx context.Context, params *UpdateGlobalTableInput, optFns ...func(*Options)) (*UpdateGlobalTableOutput, error) {
 	if params == nil {
 		params = &UpdateGlobalTableInput{}

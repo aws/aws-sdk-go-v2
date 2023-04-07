@@ -37,7 +37,7 @@ func (c *Client) ModifyHsm(ctx context.Context, params *ModifyHsmInput, optFns .
 	return out, nil
 }
 
-// Contains the inputs for the ModifyHsm  operation.
+// Contains the inputs for the ModifyHsm operation.
 type ModifyHsmInput struct {
 
 	// The ARN of the HSM to modify.
@@ -45,10 +45,9 @@ type ModifyHsmInput struct {
 	// This member is required.
 	HsmArn *string
 
-	// The new IP address for the elastic network interface (ENI) attached to the
-	// HSM. If the HSM is moved to a different subnet, and an IP address is not
-	// specified, an IP address will be randomly chosen from the CIDR range of the new
-	// subnet.
+	// The new IP address for the elastic network interface (ENI) attached to the HSM.
+	// If the HSM is moved to a different subnet, and an IP address is not specified,
+	// an IP address will be randomly chosen from the CIDR range of the new subnet.
 	EniIp *string
 
 	// The new external ID.
@@ -68,7 +67,7 @@ type ModifyHsmInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the output of the ModifyHsm  operation.
+// Contains the output of the ModifyHsm operation.
 type ModifyHsmOutput struct {
 
 	// The ARN of the HSM.

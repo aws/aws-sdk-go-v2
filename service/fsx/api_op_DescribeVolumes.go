@@ -31,16 +31,16 @@ func (c *Client) DescribeVolumes(ctx context.Context, params *DescribeVolumesInp
 
 type DescribeVolumesInput struct {
 
-	// Enter a filter Name  and Values  pair to view a select set of volumes.
+	// Enter a filter Name and Values pair to view a select set of volumes.
 	Filters []types.VolumeFilter
 
 	// The maximum number of resources to return in the response. This value must be
 	// an integer greater than zero.
 	MaxResults *int32
 
-	// (Optional) Opaque pagination token returned from a previous operation
-	// (String). If present, this token indicates from what point you can continue
-	// processing the request, where the previous NextToken  value left off.
+	// (Optional) Opaque pagination token returned from a previous operation (String).
+	// If present, this token indicates from what point you can continue processing the
+	// request, where the previous NextToken value left off.
 	NextToken *string
 
 	// The IDs of the volumes whose descriptions you want to retrieve.
@@ -51,12 +51,12 @@ type DescribeVolumesInput struct {
 
 type DescribeVolumesOutput struct {
 
-	// (Optional) Opaque pagination token returned from a previous operation
-	// (String). If present, this token indicates from what point you can continue
-	// processing the request, where the previous NextToken  value left off.
+	// (Optional) Opaque pagination token returned from a previous operation (String).
+	// If present, this token indicates from what point you can continue processing the
+	// request, where the previous NextToken value left off.
 	NextToken *string
 
-	// Returned after a successful DescribeVolumes  operation, describing each volume.
+	// Returned after a successful DescribeVolumes operation, describing each volume.
 	Volumes []types.Volume
 
 	// Metadata pertaining to the operation's result.
@@ -139,8 +139,8 @@ type DescribeVolumesPaginatorOptions struct {
 	// an integer greater than zero.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

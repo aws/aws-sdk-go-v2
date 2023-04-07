@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of all the recommended strategies and tools for an
-// application component running on a server.
+// Retrieves a list of all the recommended strategies and tools for an application
+// component running on a server.
 func (c *Client) GetApplicationComponentStrategies(ctx context.Context, params *GetApplicationComponentStrategiesInput, optFns ...func(*Options)) (*GetApplicationComponentStrategiesOutput, error) {
 	if params == nil {
 		params = &GetApplicationComponentStrategiesInput{}

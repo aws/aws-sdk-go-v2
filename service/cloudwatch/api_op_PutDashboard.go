@@ -19,11 +19,11 @@ import (
 // can load the dashboard and then use the View/edit source command in the Actions
 // menu to display the JSON block for that dashboard. Another way to copy a
 // dashboard is to use GetDashboard , and then use the data returned within
-// DashboardBody as the template for the new dashboard when you call PutDashboard
-// . When you create a dashboard with PutDashboard, a good practice is to add a
-// text widget at the top of the dashboard with a message that the dashboard was
-// created by script and should not be changed in the console. This message could
-// also point console users to the location of the DashboardBody script or the
+// DashboardBody as the template for the new dashboard when you call PutDashboard .
+// When you create a dashboard with PutDashboard , a good practice is to add a text
+// widget at the top of the dashboard with a message that the dashboard was created
+// by script and should not be changed in the console. This message could also
+// point console users to the location of the DashboardBody script or the
 // CloudFormation template used to create the dashboard.
 func (c *Client) PutDashboard(ctx context.Context, params *PutDashboardInput, optFns ...func(*Options)) (*PutDashboardOutput, error) {
 	if params == nil {

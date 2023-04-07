@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the current user's special folders; the RootFolder  and the
-// RecycleBin . RootFolder  is the root of user's files and folders and RecycleBin
-// is the root of recycled items. This is not a valid action for SigV4
-// (administrative API) clients. This action requires an authentication token. To
-// get an authentication token, register an application with Amazon WorkDocs. For
-// more information, see Authentication and Access Control for User Applications (https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
+// Describes the current user's special folders; the RootFolder and the RecycleBin
+// . RootFolder is the root of user's files and folders and RecycleBin is the root
+// of recycled items. This is not a valid action for SigV4 (administrative API)
+// clients. This action requires an authentication token. To get an authentication
+// token, register an application with Amazon WorkDocs. For more information, see
+// Authentication and Access Control for User Applications (https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
 // in the Amazon WorkDocs Developer Guide.
 func (c *Client) DescribeRootFolders(ctx context.Context, params *DescribeRootFoldersInput, optFns ...func(*Options)) (*DescribeRootFoldersOutput, error) {
 	if params == nil {
@@ -142,8 +142,8 @@ type DescribeRootFoldersPaginatorOptions struct {
 	// The maximum number of items to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

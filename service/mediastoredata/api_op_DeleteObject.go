@@ -28,8 +28,8 @@ func (c *Client) DeleteObject(ctx context.Context, params *DeleteObjectInput, op
 
 type DeleteObjectInput struct {
 
-	// The path (including the file name) where the object is stored in the
-	// container. Format: //
+	// The path (including the file name) where the object is stored in the container.
+	// Format: //
 	//
 	// This member is required.
 	Path *string

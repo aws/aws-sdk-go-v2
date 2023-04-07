@@ -68,9 +68,9 @@ const (
 	CEStatusInvalid  CEStatus = "INVALID"
 )
 
-// Values returns all known values for CEStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CEStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (CEStatus) Values() []CEStatus {
 	return []CEStatus{
 		"CREATING",
@@ -109,8 +109,8 @@ const (
 	CRAllocationStrategySpotCapacityOptimized CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
 )
 
-// Values returns all known values for CRAllocationStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CRAllocationStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CRAllocationStrategy) Values() []CRAllocationStrategy {
 	return []CRAllocationStrategy{
@@ -206,8 +206,8 @@ const (
 	EFSTransitEncryptionDisabled EFSTransitEncryption = "DISABLED"
 )
 
-// Values returns all known values for EFSTransitEncryption. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for EFSTransitEncryption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EFSTransitEncryption) Values() []EFSTransitEncryption {
 	return []EFSTransitEncryption{
@@ -292,9 +292,9 @@ const (
 	JQStatusInvalid  JQStatus = "INVALID"
 )
 
-// Values returns all known values for JQStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JQStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (JQStatus) Values() []JQStatus {
 	return []JQStatus{
 		"CREATING",
@@ -398,9 +398,9 @@ const (
 	RetryActionExit  RetryAction = "EXIT"
 )
 
-// Values returns all known values for RetryAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RetryAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RetryAction) Values() []RetryAction {
 	return []RetryAction{
 		"RETRY",

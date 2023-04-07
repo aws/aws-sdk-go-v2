@@ -41,8 +41,8 @@ type UpdateTemplateInput struct {
 	// This member is required.
 	TemplateId *string
 
-	// The definition of a template. A definition is the data model of all features
-	// in a Dashboard, Template, or Analysis.
+	// The definition of a template. A definition is the data model of all features in
+	// a Dashboard, Template, or Analysis.
 	Definition *types.TemplateVersionDefinition
 
 	// The name for the template.
@@ -51,19 +51,19 @@ type UpdateTemplateInput struct {
 	// The entity that you are using as a source when you update the template. In
 	// SourceEntity , you specify the type of object you're using as source:
 	// SourceTemplate for a template or SourceAnalysis for an analysis. Both of these
-	// require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of
-	// the source template. For SourceAnalysis, specify the ARN of the source
+	// require an Amazon Resource Name (ARN). For SourceTemplate , specify the ARN of
+	// the source template. For SourceAnalysis , specify the ARN of the source
 	// analysis. The SourceTemplate ARN can contain any Amazon Web Services account
 	// and any Amazon QuickSight-supported Amazon Web Services Region;. Use the
-	// DataSetReferences entity within SourceTemplate  or SourceAnalysis to list the
+	// DataSetReferences entity within SourceTemplate or SourceAnalysis to list the
 	// replacement datasets for the placeholders listed in the original. The schema in
 	// each dataset must match its placeholder.
 	SourceEntity *types.TemplateSourceEntity
 
-	// A description of the current template version that is being updated. Every
-	// time you call UpdateTemplate, you create a new version of the template. Each
-	// version of the template maintains a description of the version in the
-	// VersionDescription field.
+	// A description of the current template version that is being updated. Every time
+	// you call UpdateTemplate , you create a new version of the template. Each version
+	// of the template maintains a description of the version in the VersionDescription
+	// field.
 	VersionDescription *string
 
 	noSmithyDocumentSerde

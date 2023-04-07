@@ -21,26 +21,35 @@ import (
 // creating KMS keys with no key material and then importing key material, see
 // Importing Key Material (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
 // in the Key Management Service Developer Guide. Before using this operation, call
-//
-// GetParametersForImport. Its response includes a public key and an import
-// token. Use the public key to encrypt the key material. Then, submit the import
-// token from the same GetParametersForImport response. When calling this
-// operation, you must specify the following values:
-//   - The key ID or key ARN of a KMS key with no key material. Its Origin must be EXTERNAL . To create a KMS key with no key material, call CreateKey and set the value of its Origin parameter to EXTERNAL . To get the Origin of a KMS key, call DescribeKey .)
-//   - The encrypted key material. To get the public key to encrypt the key material, call GetParametersForImport .
-//   - The import token that GetParametersForImport returned. You must use a public key and token from the same GetParametersForImport response.
-//   - Whether the key material expires ( ExpirationModel ) and, if so, when ( ValidTo ). If you set an expiration date, on the specified date, KMS deletes the key material from the KMS key, making the KMS key unusable. To use the KMS key in cryptographic operations again, you must reimport the same key material. The only way to change the expiration model or expiration date is by reimporting the same key material and specifying a new expiration date.
+// GetParametersForImport . Its response includes a public key and an import token.
+// Use the public key to encrypt the key material. Then, submit the import token
+// from the same GetParametersForImport response. When calling this operation, you
+// must specify the following values:
+//   - The key ID or key ARN of a KMS key with no key material. Its Origin must be
+//     EXTERNAL . To create a KMS key with no key material, call CreateKey and set
+//     the value of its Origin parameter to EXTERNAL . To get the Origin of a KMS
+//     key, call DescribeKey .)
+//   - The encrypted key material. To get the public key to encrypt the key
+//     material, call GetParametersForImport .
+//   - The import token that GetParametersForImport returned. You must use a public
+//     key and token from the same GetParametersForImport response.
+//   - Whether the key material expires ( ExpirationModel ) and, if so, when (
+//     ValidTo ). If you set an expiration date, on the specified date, KMS deletes
+//     the key material from the KMS key, making the KMS key unusable. To use the KMS
+//     key in cryptographic operations again, you must reimport the same key material.
+//     The only way to change the expiration model or expiration date is by reimporting
+//     the same key material and specifying a new expiration date.
 //
 // When this operation is successful, the key state of the KMS key changes from
-// PendingImport to Enabled, and you can use the KMS key. If this operation
-// fails, use the exception to help determine the problem. If the error is related
-// to the key material, the import token, or wrapping key, use
-// GetParametersForImportto get a new public key and import token for the KMS key
-// and repeat the import procedure. For help, see How To Import Key Material (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#importing-keys-overview)
+// PendingImport to Enabled , and you can use the KMS key. If this operation fails,
+// use the exception to help determine the problem. If the error is related to the
+// key material, the import token, or wrapping key, use GetParametersForImport to
+// get a new public key and import token for the KMS key and repeat the import
+// procedure. For help, see How To Import Key Material (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#importing-keys-overview)
 // in the Key Management Service Developer Guide. The KMS key that you use for this
-// operation must be in a compatible key state. For details, see Key states of
-// KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-// in the Key Management Service Developer Guide. Cross-account use: No. You cannot
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.
 // Required permissions: kms:ImportKeyMaterial (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
@@ -72,46 +81,46 @@ type ImportKeyMaterialInput struct {
 	EncryptedKeyMaterial []byte
 
 	// The import token that you received in the response to a previous
-	// GetParametersForImportrequest. It must be from the same response that
-	// contained the public key that you used to encrypt the key material.
+	// GetParametersForImport request. It must be from the same response that contained
+	// the public key that you used to encrypt the key material.
 	//
 	// This member is required.
 	ImportToken []byte
 
 	// The identifier of the symmetric encryption KMS key that receives the imported
-	// key material. This must be the same KMS key specified in the KeyID parameter
-	// of the corresponding GetParametersForImport  request. The Origin of the KMS
-	// key must be EXTERNAL. You cannot perform this operation on an asymmetric KMS
-	// key, an HMAC KMS key, a KMS key in a custom key store, or on a KMS key in a
-	// different Amazon Web Services account Specify the key ID or key ARN of the KMS
-	// key. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey .
+	// key material. This must be the same KMS key specified in the KeyID parameter of
+	// the corresponding GetParametersForImport request. The Origin of the KMS key
+	// must be EXTERNAL . You cannot perform this operation on an asymmetric KMS key,
+	// an HMAC KMS key, a KMS key in a custom key store, or on a KMS key in a different
+	// Amazon Web Services account Specify the key ID or key ARN of the KMS key. For
+	// example:
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey .
 	//
 	// This member is required.
 	KeyId *string
 
 	// Specifies whether the key material expires. The default is KEY_MATERIAL_EXPIRES
-	// . When the value of ExpirationModel  is KEY_MATERIAL_EXPIRES, you must specify
-	// a value for the ValidTo  parameter. When value is KEY_MATERIAL_DOES_NOT_EXPIRE
-	// , you must omit the ValidTo  parameter. You cannot change the ExpirationModel
-	// or ValidTo values for the current import after the request completes. To
-	// change either value, you must delete ( DeleteImportedKeyMaterial) and reimport
-	// the key material.
+	// . When the value of ExpirationModel is KEY_MATERIAL_EXPIRES , you must specify a
+	// value for the ValidTo parameter. When value is KEY_MATERIAL_DOES_NOT_EXPIRE ,
+	// you must omit the ValidTo parameter. You cannot change the ExpirationModel or
+	// ValidTo values for the current import after the request completes. To change
+	// either value, you must delete ( DeleteImportedKeyMaterial ) and reimport the key
+	// material.
 	ExpirationModel types.ExpirationModelType
 
 	// The date and time when the imported key material expires. This parameter is
-	// required when the value of the ExpirationModel  parameter is
-	// KEY_MATERIAL_EXPIRES. Otherwise it is not valid. The value of this parameter
-	// must be a future date and time. The maximum value is 365 days from the request
-	// date. When the key material expires, KMS deletes the key material from the KMS
-	// key. Without its key material, the KMS key is unusable. To use the KMS key in
-	// cryptographic operations, you must reimport the same key material. You cannot
-	// change the ExpirationModel  or ValidTo values for the current import after the
-	// request completes. To change either value, you must delete (
-	// DeleteImportedKeyMaterial ) and reimport the key material.
+	// required when the value of the ExpirationModel parameter is KEY_MATERIAL_EXPIRES
+	// . Otherwise it is not valid. The value of this parameter must be a future date
+	// and time. The maximum value is 365 days from the request date. When the key
+	// material expires, KMS deletes the key material from the KMS key. Without its key
+	// material, the KMS key is unusable. To use the KMS key in cryptographic
+	// operations, you must reimport the same key material. You cannot change the
+	// ExpirationModel or ValidTo values for the current import after the request
+	// completes. To change either value, you must delete ( DeleteImportedKeyMaterial )
+	// and reimport the key material.
 	ValidTo *time.Time
 
 	noSmithyDocumentSerde

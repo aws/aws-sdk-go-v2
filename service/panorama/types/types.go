@@ -224,7 +224,7 @@ type LatestDeviceJob struct {
 }
 
 // Parameter overrides for an application instance. This is a JSON document that
-// has a single key ( PayloadData) where the value is an escaped string
+// has a single key ( PayloadData ) where the value is an escaped string
 // representation of the overrides document.
 //
 // The following types satisfy this interface:
@@ -243,10 +243,10 @@ type ManifestOverridesPayloadMemberPayloadData struct {
 
 func (*ManifestOverridesPayloadMemberPayloadData) isManifestOverridesPayload() {}
 
-// A application verion's manifest file. This is a JSON document that has a
-// single key ( PayloadData) where the value is an escaped string representation
-// of the application manifest ( graph.json ). This file is located in the graphs
-// folder in your application source.
+// A application verion's manifest file. This is a JSON document that has a single
+// key ( PayloadData ) where the value is an escaped string representation of the
+// application manifest ( graph.json ). This file is located in the graphs folder
+// in your application source.
 //
 // The following types satisfy this interface:
 //

@@ -39,7 +39,7 @@ type ListOperationsInput struct {
 	ServiceArn *string
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	MaxResults *int32
 
@@ -59,7 +59,7 @@ type ListOperationsOutput struct {
 	NextToken *string
 
 	// A list of operation summary information records. In a paginated request, the
-	// request returns up to MaxResults  records for each call.
+	// request returns up to MaxResults records for each call.
 	OperationSummaryList []types.OperationSummary
 
 	// Metadata pertaining to the operation's result.
@@ -142,12 +142,12 @@ var _ ListOperationsAPIClient = (*Client)(nil)
 // ListOperationsPaginatorOptions is the paginator options for ListOperations
 type ListOperationsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

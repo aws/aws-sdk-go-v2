@@ -40,8 +40,7 @@ type DescribeServiceInput struct {
 
 type DescribeServiceOutput struct {
 
-	// A full description of the App Runner service that you specified in this
-	// request.
+	// A full description of the App Runner service that you specified in this request.
 	//
 	// This member is required.
 	Service *types.Service

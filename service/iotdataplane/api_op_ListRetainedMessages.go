@@ -19,9 +19,8 @@ import (
 // retained message, call GetRetainedMessage (https://docs.aws.amazon.com/iot/latest/developerguide/API_iotdata_GetRetainedMessage.html)
 // with the topic name of the retained message. Requires permission to access the
 // ListRetainedMessages (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions)
-// action. For more information about messaging costs, see Amazon Web Services
-// IoT Core pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging)
-// .
+// action. For more information about messaging costs, see Amazon Web Services IoT
+// Core pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging) .
 func (c *Client) ListRetainedMessages(ctx context.Context, params *ListRetainedMessagesInput, optFns ...func(*Options)) (*ListRetainedMessagesOutput, error) {
 	if params == nil {
 		params = &ListRetainedMessagesInput{}
@@ -139,8 +138,8 @@ type ListRetainedMessagesPaginatorOptions struct {
 	// The maximum number of results to return at one time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

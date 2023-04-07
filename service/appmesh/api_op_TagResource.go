@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the specified tags to a resource with the specified resourceArn. If
+// Associates the specified tags to a resource with the specified resourceArn . If
 // existing tags on a resource aren't specified in the request parameters, they
 // aren't changed. When a resource is deleted, the tags associated with that
 // resource are also deleted.
@@ -37,9 +37,9 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The tags to add to the resource. A tag is an array of key-value pairs. Tag
-	// keys can have a maximum character length of 128 characters, and tag values can
-	// have a maximum length of 256 characters.
+	// The tags to add to the resource. A tag is an array of key-value pairs. Tag keys
+	// can have a maximum character length of 128 characters, and tag values can have a
+	// maximum length of 256 characters.
 	//
 	// This member is required.
 	Tags []types.TagRef

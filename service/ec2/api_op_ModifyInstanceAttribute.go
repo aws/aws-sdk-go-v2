@@ -17,7 +17,7 @@ import (
 // instance in a VPC can result in an error if the instance has more than one ENI.
 // To change the security groups associated with an ENI attached to an instance
 // that has multiple ENIs, we recommend that you use the
-// ModifyNetworkInterfaceAttributeaction. To modify some attributes, the instance
+// ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance
 // must be stopped. For more information, see Modify a stopped instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html)
 // in the Amazon EC2 User Guide.
 func (c *Client) ModifyInstanceAttribute(ctx context.Context, params *ModifyInstanceAttributeInput, optFns ...func(*Options)) (*ModifyInstanceAttributeOutput, error) {
@@ -43,10 +43,10 @@ type ModifyInstanceAttributeInput struct {
 	InstanceId *string
 
 	// The name of the attribute to modify. You can modify the following attributes
-	// only: disableApiTermination  | instanceType  | kernel  | ramdisk  |
-	// instanceInitiatedShutdownBehavior | blockDeviceMapping  | userData  |
-	// sourceDestCheck | groupSet  | ebsOptimized  | sriovNetSupport  | enaSupport  |
-	// nvmeSupport | disableApiStop  | enclaveOptions
+	// only: disableApiTermination | instanceType | kernel | ramdisk |
+	// instanceInitiatedShutdownBehavior | blockDeviceMapping | userData |
+	// sourceDestCheck | groupSet | ebsOptimized | sriovNetSupport | enaSupport |
+	// nvmeSupport | disableApiStop | enclaveOptions
 	Attribute types.InstanceAttributeName
 
 	// Modifies the DeleteOnTermination attribute for volumes that are currently
@@ -63,7 +63,7 @@ type ModifyInstanceAttributeInput struct {
 	// .
 	DisableApiStop *types.AttributeBooleanValue
 
-	// If the value is true, you can't terminate the instance using the Amazon EC2
+	// If the value is true , you can't terminate the instance using the Amazon EC2
 	// console, CLI, or API; otherwise, you can. You cannot use this parameter for Spot
 	// Instances.
 	DisableApiTermination *types.AttributeBooleanValue
@@ -102,8 +102,8 @@ type ModifyInstanceAttributeInput struct {
 	// returned is InvalidInstanceAttributeValue .
 	InstanceType *types.AttributeValue
 
-	// Changes the instance's kernel to the specified value. We recommend that you
-	// use PV-GRUB instead of kernels and RAM disks. For more information, see PV-GRUB (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html)
+	// Changes the instance's kernel to the specified value. We recommend that you use
+	// PV-GRUB instead of kernels and RAM disks. For more information, see PV-GRUB (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html)
 	// .
 	Kernel *types.AttributeValue
 
@@ -114,10 +114,10 @@ type ModifyInstanceAttributeInput struct {
 
 	// Enable or disable source/destination checks, which ensure that the instance is
 	// either the source or the destination of any traffic that it receives. If the
-	// value is true, source/destination checks are enabled; otherwise, they are
-	// disabled. The default value is true. You must disable source/destination
-	// checks if the instance runs services such as network address translation,
-	// routing, or firewalls.
+	// value is true , source/destination checks are enabled; otherwise, they are
+	// disabled. The default value is true . You must disable source/destination checks
+	// if the instance runs services such as network address translation, routing, or
+	// firewalls.
 	SourceDestCheck *types.AttributeBooleanValue
 
 	// Set to simple to enable enhanced networking with the Intel 82599 Virtual
@@ -134,7 +134,7 @@ type ModifyInstanceAttributeInput struct {
 	UserData *types.BlobAttributeValue
 
 	// A new value for the attribute. Use only with the kernel , ramdisk , userData ,
-	// disableApiTermination , or instanceInitiatedShutdownBehavior  attribute.
+	// disableApiTermination , or instanceInitiatedShutdownBehavior attribute.
 	Value *string
 
 	noSmithyDocumentSerde

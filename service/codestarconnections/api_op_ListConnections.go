@@ -34,7 +34,7 @@ type ListConnectionsInput struct {
 	HostArnFilter *string
 
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults int32
 
 	// The token that was returned from the previous ListConnections call, which can
@@ -54,9 +54,9 @@ type ListConnectionsOutput struct {
 	// owner, and provider type.
 	Connections []types.Connection
 
-	// A token that can be used in the next ListConnections call. To view all items
-	// in the list, continue to call this operation with each subsequent token until no
-	// more nextToken  values are returned.
+	// A token that can be used in the next ListConnections call. To view all items in
+	// the list, continue to call this operation with each subsequent token until no
+	// more nextToken values are returned.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -136,11 +136,11 @@ var _ ListConnectionsAPIClient = (*Client)(nil)
 // ListConnectionsPaginatorOptions is the paginator options for ListConnections
 type ListConnectionsPaginatorOptions struct {
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

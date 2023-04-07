@@ -35,8 +35,8 @@ type ListDomainsInput struct {
 	// size is also 100.
 	MaxResults *int32
 
-	// If NextToken  is returned, there are more results available. The value of
-	// NextTokenis a unique pagination token for each page. Make the call again using
+	// If NextToken is returned, there are more results available. The value of
+	// NextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours.
 	NextToken *string
@@ -49,8 +49,8 @@ type ListDomainsOutput struct {
 	// A list containing details about each domain in the Amazon Web Services account.
 	DomainSummaries []types.DomainSummary
 
-	// If NextToken  is returned, there are more results available. The value of
-	// NextTokenis a unique pagination token for each page. Make the call again using
+	// If NextToken is returned, there are more results available. The value of
+	// NextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours.
 	NextToken *string
@@ -135,8 +135,8 @@ type ListDomainsPaginatorOptions struct {
 	// size is also 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

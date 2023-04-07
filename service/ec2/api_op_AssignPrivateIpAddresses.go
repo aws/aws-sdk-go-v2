@@ -64,7 +64,7 @@ type AssignPrivateIpAddressesInput struct {
 	Ipv4PrefixCount *int32
 
 	// One or more IPv4 prefixes assigned to the network interface. You cannot use
-	// this option if you use the Ipv4PrefixCount  option.
+	// this option if you use the Ipv4PrefixCount option.
 	Ipv4Prefixes []string
 
 	// The IP addresses to be assigned as a secondary private IP address to the

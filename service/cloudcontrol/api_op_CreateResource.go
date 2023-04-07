@@ -16,7 +16,7 @@ import (
 // in the Amazon Web Services Cloud Control API User Guide. After you have
 // initiated a resource creation request, you can monitor the progress of your
 // request by calling GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
-// using the RequestToken  of the ProgressEvent  type returned by CreateResource .
+// using the RequestToken of the ProgressEvent type returned by CreateResource .
 func (c *Client) CreateResource(ctx context.Context, params *CreateResourceInput, optFns ...func(*Options)) (*CreateResourceOutput, error) {
 	if params == nil {
 		params = &CreateResourceInput{}
@@ -38,10 +38,9 @@ type CreateResourceInput struct {
 	// consisting of that resource's properties and their desired values. Cloud Control
 	// API currently supports JSON as a structured data format. Specify the desired
 	// state as one of the following:
-	//     - A JSON blob
-	//     - A local path containing the desired state in JSON data format
-	// For more
-	// information, see Composing the desired state of the resource (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate)
+	//   - A JSON blob
+	//   - A local path containing the desired state in JSON data format
+	// For more information, see Composing the desired state of the resource (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate)
 	// in the Amazon Web Services Cloud Control API User Guide. For more information
 	// about the properties of a specific resource, refer to the related topic for the
 	// resource in the Resource and property types reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
@@ -67,10 +66,10 @@ type CreateResourceInput struct {
 	// in the Amazon Web Services Cloud Control API User Guide.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
-	// role for Cloud Control API to use when performing this resource operation. The
-	// role specified must have the permissions required for this operation. The
-	// necessary permissions for each event handler are defined in the handlers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// for Cloud Control API to use when performing this resource operation. The role
+	// specified must have the permissions required for this operation. The necessary
+	// permissions for each event handler are defined in the handlers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
 	// section of the resource type definition schema (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
 	// . If you do not specify a role, Cloud Control API uses a temporary session
 	// created using your Amazon Web Services user credentials. For more information,
@@ -78,9 +77,9 @@ type CreateResourceInput struct {
 	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 
-	// For private resource types, the type version to use in this resource
-	// operation. If you do not specify a resource version, CloudFormation uses the
-	// default version.
+	// For private resource types, the type version to use in this resource operation.
+	// If you do not specify a resource version, CloudFormation uses the default
+	// version.
 	TypeVersionId *string
 
 	noSmithyDocumentSerde
@@ -91,7 +90,7 @@ type CreateResourceOutput struct {
 	// Represents the current status of the resource creation request. After you have
 	// initiated a resource creation request, you can monitor the progress of your
 	// request by calling GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
-	// using the RequestToken  of the ProgressEvent  returned by CreateResource .
+	// using the RequestToken of the ProgressEvent returned by CreateResource .
 	ProgressEvent *types.ProgressEvent
 
 	// Metadata pertaining to the operation's result.

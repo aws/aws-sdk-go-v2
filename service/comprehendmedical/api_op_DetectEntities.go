@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The DetectEntities  operation is deprecated. You should use the
-// DetectEntitiesV2operation instead. Inspects the clinical text for a variety of
-// medical entities and returns specific information about them such as entity
-// category, location, and confidence score on that information .
+// The DetectEntities operation is deprecated. You should use the DetectEntitiesV2
+// operation instead. Inspects the clinical text for a variety of medical entities
+// and returns specific information about them such as entity category, location,
+// and confidence score on that information .
 //
 // Deprecated: This operation is deprecated, use DetectEntitiesV2 instead.
 func (c *Client) DetectEntities(ctx context.Context, params *DetectEntitiesInput, optFns ...func(*Options)) (*DetectEntitiesOutput, error) {
@@ -62,7 +62,7 @@ type DetectEntitiesOutput struct {
 	ModelVersion *string
 
 	// If the result of the previous request to DetectEntities was truncated, include
-	// the PaginationToken  to fetch the next page of entities.
+	// the PaginationToken to fetch the next page of entities.
 	PaginationToken *string
 
 	// Attributes extracted from the input text that we were unable to relate to an

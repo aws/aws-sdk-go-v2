@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The user has the required permissions, so the request would have succeeded,
-// but a dry run was performed.
+// The user has the required permissions, so the request would have succeeded, but
+// a dry run was performed.
 type DryRunOperationException struct {
 	Message *string
 
@@ -218,8 +218,8 @@ func (e *ReplicationJobNotFoundException) ErrorCode() string {
 }
 func (e *ReplicationJobNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have exceeded the number of on-demand replication runs you can request in
-// a 24-hour period.
+// You have exceeded the number of on-demand replication runs you can request in a
+// 24-hour period.
 type ReplicationRunLimitExceededException struct {
 	Message *string
 
@@ -299,8 +299,8 @@ func (e *TemporarilyUnavailableException) ErrorCode() string {
 }
 func (e *TemporarilyUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// You lack permissions needed to perform this operation. Check your IAM
-// policies, and ensure that you are using the correct access keys.
+// You lack permissions needed to perform this operation. Check your IAM policies,
+// and ensure that you are using the correct access keys.
 type UnauthorizedOperationException struct {
 	Message *string
 

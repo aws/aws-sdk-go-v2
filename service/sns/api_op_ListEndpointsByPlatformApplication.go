@@ -45,9 +45,8 @@ type ListEndpointsByPlatformApplicationInput struct {
 	// This member is required.
 	PlatformApplicationArn *string
 
-	// NextToken string is used when calling ListEndpointsByPlatformApplication
-	// action to retrieve additional records that are available after the first page
-	// results.
+	// NextToken string is used when calling ListEndpointsByPlatformApplication action
+	// to retrieve additional records that are available after the first page results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -140,11 +139,11 @@ type ListEndpointsByPlatformApplicationAPIClient interface {
 
 var _ ListEndpointsByPlatformApplicationAPIClient = (*Client)(nil)
 
-// ListEndpointsByPlatformApplicationPaginatorOptions is the paginator options
-// for ListEndpointsByPlatformApplication
+// ListEndpointsByPlatformApplicationPaginatorOptions is the paginator options for
+// ListEndpointsByPlatformApplication
 type ListEndpointsByPlatformApplicationPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

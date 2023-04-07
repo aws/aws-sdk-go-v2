@@ -52,7 +52,7 @@ type UpdateMapOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated map resource. Used to specify a
 	// resource across AWS.
-	//     - Format example: arn:aws:geo:region:account-id:map/ExampleMap
+	//   - Format example: arn:aws:geo:region:account-id:map/ExampleMap
 	//
 	// This member is required.
 	MapArn *string

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a dataset group. Before you delete a dataset group, you must delete
-// the following:
+// Deletes a dataset group. Before you delete a dataset group, you must delete the
+// following:
 //   - All associated event trackers.
 //   - All associated solutions.
 //   - All datasets in the dataset group.

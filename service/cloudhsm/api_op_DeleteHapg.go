@@ -33,7 +33,7 @@ func (c *Client) DeleteHapg(ctx context.Context, params *DeleteHapgInput, optFns
 	return out, nil
 }
 
-// Contains the inputs for the DeleteHapg  action.
+// Contains the inputs for the DeleteHapg action.
 type DeleteHapgInput struct {
 
 	// The ARN of the high-availability partition group to delete.
@@ -44,7 +44,7 @@ type DeleteHapgInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the output of the DeleteHapg  action.
+// Contains the output of the DeleteHapg action.
 type DeleteHapgOutput struct {
 
 	// The status of the action.

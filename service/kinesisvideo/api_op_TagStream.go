@@ -16,7 +16,7 @@ import (
 // that you specify in the request. For more information, see Using Cost
 // Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the Billing and Cost Management and Cost Management User Guide. You must
-// provide either the StreamName  or the StreamARN. This operation requires
+// provide either the StreamName or the StreamARN . This operation requires
 // permission for the KinesisVideo:TagStream action. A Kinesis video stream can
 // support up to 50 tags.
 func (c *Client) TagStream(ctx context.Context, params *TagStreamInput, optFns ...func(*Options)) (*TagStreamOutput, error) {

@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a document classifier training job while in progress. If the training
-// job state is TRAINING , the job is marked for termination and put into the
-// STOP_REQUESTEDstate. If the training job completes before it can be stopped,
-// it is put into the TRAINED; otherwise the training job is stopped and put into
-// the STOPPED state and the service sends back an HTTP 200 response with an
-// empty HTTP body.
+// Stops a document classifier training job while in progress. If the training job
+// state is TRAINING , the job is marked for termination and put into the
+// STOP_REQUESTED state. If the training job completes before it can be stopped, it
+// is put into the TRAINED ; otherwise the training job is stopped and put into the
+// STOPPED state and the service sends back an HTTP 200 response with an empty HTTP
+// body.
 func (c *Client) StopTrainingDocumentClassifier(ctx context.Context, params *StopTrainingDocumentClassifierInput, optFns ...func(*Options)) (*StopTrainingDocumentClassifierOutput, error) {
 	if params == nil {
 		params = &StopTrainingDocumentClassifierInput{}

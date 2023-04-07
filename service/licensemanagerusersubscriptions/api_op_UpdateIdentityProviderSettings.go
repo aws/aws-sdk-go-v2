@@ -43,9 +43,9 @@ type UpdateIdentityProviderSettingsInput struct {
 	// Updates the registered identity provider’s product related configuration
 	// settings. You can update any combination of settings in a single operation such
 	// as the:
-	//     - Subnets which you want to add to provision VPC endpoints.
-	//     - Subnets which you want to remove the VPC endpoints from.
-	//     - Security group ID which permits traffic to the VPC endpoints.
+	//   - Subnets which you want to add to provision VPC endpoints.
+	//   - Subnets which you want to remove the VPC endpoints from.
+	//   - Security group ID which permits traffic to the VPC endpoints.
 	//
 	// This member is required.
 	UpdateSettings *types.UpdateSettings

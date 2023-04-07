@@ -69,7 +69,7 @@ type ActionTarget struct {
 }
 
 // Specifies an action for an experiment template. For more information, see
-// Actions (https://docs.aws.amazon.com/fis/latest/userguide/actions.html)in the
+// Actions (https://docs.aws.amazon.com/fis/latest/userguide/actions.html) in the
 // Fault Injection Simulator User Guide.
 type CreateExperimentTemplateActionInput struct {
 
@@ -85,8 +85,8 @@ type CreateExperimentTemplateActionInput struct {
 	// The parameters for the action, if applicable.
 	Parameters map[string]string
 
-	// The name of the action that must be completed before the current action
-	// starts. Omit this parameter to run the action at the start of the experiment.
+	// The name of the action that must be completed before the current action starts.
+	// Omit this parameter to run the action at the start of the experiment.
 	StartAfter []string
 
 	// The targets for the action.
@@ -122,8 +122,8 @@ type CreateExperimentTemplateStopConditionInput struct {
 	// This member is required.
 	Source *string
 
-	// The Amazon Resource Name (ARN) of the CloudWatch alarm. This is required if
-	// the source is a CloudWatch alarm.
+	// The Amazon Resource Name (ARN) of the CloudWatch alarm. This is required if the
+	// source is a CloudWatch alarm.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -135,18 +135,21 @@ type CreateExperimentTemplateStopConditionInput struct {
 // in the Fault Injection Simulator User Guide.
 type CreateExperimentTemplateTargetInput struct {
 
-	// The resource type. The resource type must be supported for the specified
-	// action.
+	// The resource type. The resource type must be supported for the specified action.
 	//
 	// This member is required.
 	ResourceType *string
 
-	// Scopes the identified resources to a specific count of the resources at
-	// random, or a percentage of the resources. All identified resources are included
-	// in the target.
-	//     - ALL - Run the action on all identified targets. This is the default.
-	//     - COUNT(n) - Run the action on the specified number of targets, chosen from the identified targets at random. For example, COUNT(1) selects one of the targets.
-	//     - PERCENT(n) - Run the action on the specified percentage of targets, chosen from the identified targets at random. For example, PERCENT(25) selects 25% of the targets.
+	// Scopes the identified resources to a specific count of the resources at random,
+	// or a percentage of the resources. All identified resources are included in the
+	// target.
+	//   - ALL - Run the action on all identified targets. This is the default.
+	//   - COUNT(n) - Run the action on the specified number of targets, chosen from
+	//   the identified targets at random. For example, COUNT(1) selects one of the
+	//   targets.
+	//   - PERCENT(n) - Run the action on the specified percentage of targets, chosen
+	//   from the identified targets at random. For example, PERCENT(25) selects 25% of
+	//   the targets.
 	//
 	// This member is required.
 	SelectionMode *string
@@ -591,8 +594,8 @@ type TargetResourceType struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the parameters for a resource type. Use parameters to determine
-// which tasks are identified during target resolution.
+// Describes the parameters for a resource type. Use parameters to determine which
+// tasks are identified during target resolution.
 type TargetResourceTypeParameter struct {
 
 	// A description of the parameter.
@@ -628,8 +631,8 @@ type UpdateExperimentTemplateActionInputItem struct {
 	// The parameters for the action, if applicable.
 	Parameters map[string]string
 
-	// The name of the action that must be completed before the current action
-	// starts. Omit this parameter to run the action at the start of the experiment.
+	// The name of the action that must be completed before the current action starts.
+	// Omit this parameter to run the action at the start of the experiment.
 	StartAfter []string
 
 	// The targets for the action.
@@ -674,8 +677,7 @@ type UpdateExperimentTemplateStopConditionInput struct {
 // Resource Name (ARN) or at least one resource tag. You cannot specify both.
 type UpdateExperimentTemplateTargetInput struct {
 
-	// The resource type. The resource type must be supported for the specified
-	// action.
+	// The resource type. The resource type must be supported for the specified action.
 	//
 	// This member is required.
 	ResourceType *string

@@ -18,7 +18,7 @@ import (
 // override rules. If the user's entityID matches an override rule, the user is
 // served the variation specified by that rule. If there is a current launch with
 // this feature that uses segment overrides, and if the user session's
-// evaluationContextmatches a segment rule defined in a segment override, the
+// evaluationContext matches a segment rule defined in a segment override, the
 // configuration in the segment overrides is used. For more information about
 // segments, see CreateSegment (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html)
 // and Use segments to focus your audience (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html)
@@ -90,10 +90,10 @@ type EvaluateFeatureOutput struct {
 	Details *string
 
 	// Specifies the reason that the user session was assigned this variation.
-	// Possible values include DEFAULT, meaning the user was served the default
+	// Possible values include DEFAULT , meaning the user was served the default
 	// variation; LAUNCH_RULE_MATCH , if the user session was enrolled in a launch;
 	// EXPERIMENT_RULE_MATCH , if the user session was enrolled in an experiment; or
-	// ENTITY_OVERRIDES_MATCH , if the user's entityId  matches an override rule.
+	// ENTITY_OVERRIDES_MATCH , if the user's entityId matches an override rule.
 	Reason *string
 
 	// The value assigned to this variation to differentiate it from the other

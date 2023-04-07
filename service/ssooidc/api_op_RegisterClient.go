@@ -34,8 +34,8 @@ type RegisterClientInput struct {
 	// This member is required.
 	ClientName *string
 
-	// The type of client. The service supports only public as a client type.
-	// Anything other than public will be rejected by the service.
+	// The type of client. The service supports only public as a client type. Anything
+	// other than public will be rejected by the service.
 	//
 	// This member is required.
 	ClientType *string
@@ -56,14 +56,14 @@ type RegisterClientOutput struct {
 	// to get authenticated by the service in subsequent calls.
 	ClientId *string
 
-	// Indicates the time at which the clientId  and clientSecret  were issued.
+	// Indicates the time at which the clientId and clientSecret were issued.
 	ClientIdIssuedAt int64
 
 	// A secret string generated for the client. The client will use this string to
 	// get authenticated by the service in subsequent calls.
 	ClientSecret *string
 
-	// Indicates the time at which the clientId  and clientSecret  will become invalid.
+	// Indicates the time at which the clientId and clientSecret will become invalid.
 	ClientSecretExpiresAt int64
 
 	// The endpoint where the client can get an access token.

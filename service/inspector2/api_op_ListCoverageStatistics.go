@@ -39,8 +39,8 @@ type ListCoverageStatisticsInput struct {
 
 	// A token to use for paginating results that are returned in the response. Set
 	// the value of this parameter to null for the first request to a list action. For
-	// subsequent calls, use the NextToken value returned from the previous request
-	// to continue listing results after the first page.
+	// subsequent calls, use the NextToken value returned from the previous request to
+	// continue listing results after the first page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -58,8 +58,8 @@ type ListCoverageStatisticsOutput struct {
 
 	// A token to use for paginating results that are returned in the response. Set
 	// the value of this parameter to null for the first request to a list action. For
-	// subsequent calls, use the NextToken value returned from the previous request
-	// to continue listing results after the first page.
+	// subsequent calls, use the NextToken value returned from the previous request to
+	// continue listing results after the first page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +142,8 @@ var _ ListCoverageStatisticsAPIClient = (*Client)(nil)
 // ListCoverageStatisticsPaginatorOptions is the paginator options for
 // ListCoverageStatistics
 type ListCoverageStatisticsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -156,8 +156,7 @@ type ListCoverageStatisticsPaginator struct {
 	firstPage bool
 }
 
-// NewListCoverageStatisticsPaginator returns a new
-// ListCoverageStatisticsPaginator
+// NewListCoverageStatisticsPaginator returns a new ListCoverageStatisticsPaginator
 func NewListCoverageStatisticsPaginator(client ListCoverageStatisticsAPIClient, params *ListCoverageStatisticsInput, optFns ...func(*ListCoverageStatisticsPaginatorOptions)) *ListCoverageStatisticsPaginator {
 	if params == nil {
 		params = &ListCoverageStatisticsInput{}

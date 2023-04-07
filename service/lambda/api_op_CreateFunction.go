@@ -17,16 +17,16 @@ import (
 // your function code. The execution role grants the function permission to use
 // Amazon Web Services, such as Amazon CloudWatch Logs for log streaming and X-Ray
 // for request tracing. If the deployment package is a container image (https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html)
-// , then you set the package type to Image. For a container image, the code
+// , then you set the package type to Image . For a container image, the code
 // property must include the URI of a container image in the Amazon ECR registry.
 // You do not need to specify the handler and runtime properties. If the deployment
 // package is a .zip file archive (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)
-// , then you set the package type to Zip. For a .zip file archive, the code
+// , then you set the package type to Zip . For a .zip file archive, the code
 // property specifies the location of the .zip file. You must also specify the
 // handler and runtime properties. The code in the deployment package must be
 // compatible with the target instruction set architecture of the function ( x86-64
 // or arm64 ). If you do not specify the architecture, then the default value is
-// x86-64. When you create a function, Lambda provisions an instance of the
+// x86-64 . When you create a function, Lambda provisions an instance of the
 // function and its supporting resources. If your function connects to a VPC, this
 // process can take a minute or so. During this time, you can't invoke or modify
 // the function. The State , StateReason , and StateReasonCode fields in the
@@ -40,24 +40,23 @@ import (
 // parameter to create version 1 of your function from its initial configuration.
 // The other parameters let you configure version-specific and function-level
 // settings. You can modify version-specific settings later with
-// UpdateFunctionConfiguration. Function-level settings apply to both the
+// UpdateFunctionConfiguration . Function-level settings apply to both the
 // unpublished and published versions of the function, and include tags (
-// TagResource ) and per-function concurrency limits ( PutFunctionConcurrency).
+// TagResource ) and per-function concurrency limits ( PutFunctionConcurrency ).
 // You can use code signing if your deployment package is a .zip file archive. To
 // enable code signing for this function, specify the ARN of a code-signing
 // configuration. When a user attempts to deploy a code package with
-// UpdateFunctionCode, Lambda checks that the code package has a valid signature
+// UpdateFunctionCode , Lambda checks that the code package has a valid signature
 // from a trusted publisher. The code-signing configuration includes set of signing
 // profiles, which define the trusted publishers for this function. If another
 // Amazon Web Services account or an Amazon Web Service invokes your function, use
-// AddPermissionto grant permission by creating a resource-based Identity and
+// AddPermission to grant permission by creating a resource-based Identity and
 // Access Management (IAM) policy. You can grant permissions at the function level,
-// on a version, or on an alias. To invoke your function directly, use Invoke. To
+// on a version, or on an alias. To invoke your function directly, use Invoke . To
 // invoke your function in response to events in other Amazon Web Services, create
-// an event source mapping ( CreateEventSourceMapping), or configure a function
+// an event source mapping ( CreateEventSourceMapping ), or configure a function
 // trigger in the other service. For more information, see Invoking Lambda
-// functions (https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html)
-// .
+// functions (https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html) .
 func (c *Client) CreateFunction(ctx context.Context, params *CreateFunctionInput, optFns ...func(*Options)) (*CreateFunctionOutput, error) {
 	if params == nil {
 		params = &CreateFunctionInput{}
@@ -81,12 +80,11 @@ type CreateFunctionInput struct {
 	Code *types.FunctionCode
 
 	// The name of the Lambda function. Name formats
-	//     - Function name – my-function .
-	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
-	//     - Partial ARN – 123456789012:function:my-function .
-	// The length constraint
-	// applies only to the full ARN. If you specify only the function name, it is
-	// limited to 64 characters in length.
+	//   - Function name – my-function .
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -125,11 +123,10 @@ type CreateFunctionInput struct {
 	// Connection settings for an Amazon EFS file system.
 	FileSystemConfigs []types.FileSystemConfig
 
-	// The name of the method within your code that Lambda calls to run your
-	// function. Handler is required if the deployment package is a .zip file archive.
-	// The format includes the file name. It can also include namespaces and other
-	// qualifiers, depending on the runtime. For more information, see Lambda
-	// programming model (https://docs.aws.amazon.com/lambda/latest/dg/foundation-progmodel.html)
+	// The name of the method within your code that Lambda calls to run your function.
+	// Handler is required if the deployment package is a .zip file archive. The format
+	// includes the file name. It can also include namespaces and other qualifiers,
+	// depending on the runtime. For more information, see Lambda programming model (https://docs.aws.amazon.com/lambda/latest/dg/foundation-progmodel.html)
 	// .
 	Handler *string
 
@@ -137,8 +134,8 @@ type CreateFunctionInput struct {
 	// that override the values in the container image Dockerfile.
 	ImageConfig *types.ImageConfig
 
-	// The ARN of the Key Management Service (KMS) customer managed key that's used
-	// to encrypt your function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
+	// The ARN of the Key Management Service (KMS) customer managed key that's used to
+	// encrypt your function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
 	// . When Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
 	// is activated, this key is also used to encrypt your function's snapshot. If you
 	// don't provide a customer managed key, Lambda uses a default service key.
@@ -154,8 +151,8 @@ type CreateFunctionInput struct {
 	// The default value is 128 MB. The value can be any multiple of 1 MB.
 	MemorySize *int32
 
-	// The type of deployment package. Set to Image  for container image and set to
-	// Zip for .zip file archive.
+	// The type of deployment package. Set to Image for container image and set to Zip
+	// for .zip file archive.
 	PackageType types.PackageType
 
 	// Set to true to publish the first version of the function during creation.
@@ -182,8 +179,8 @@ type CreateFunctionInput struct {
 	// .
 	Timeout *int32
 
-	// Set Mode  to Active  to sample and trace a subset of incoming requests with
-	// X-Ray (https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html) .
+	// Set Mode to Active to sample and trace a subset of incoming requests with X-Ray (https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html)
+	// .
 	TracingConfig *types.TracingConfig
 
 	// For network connectivity to Amazon Web Services resources in a VPC, specify a
@@ -250,8 +247,8 @@ type CreateFunctionOutput struct {
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModified *string
 
-	// The status of the last update that was performed on the function. This is
-	// first set to Successful  after function creation completes.
+	// The status of the last update that was performed on the function. This is first
+	// set to Successful after function creation completes.
 	LastUpdateStatus types.LastUpdateStatus
 
 	// The reason for the last update that was performed on the function.
@@ -270,7 +267,7 @@ type CreateFunctionOutput struct {
 	// The amount of memory available to the function at runtime.
 	MemorySize *int32
 
-	// The type of deployment package. Set to Image  for container image and set Zip
+	// The type of deployment package. Set to Image for container image and set Zip
 	// for .zip file archive.
 	PackageType types.PackageType
 
@@ -292,20 +289,20 @@ type CreateFunctionOutput struct {
 	// The ARN of the signing profile version.
 	SigningProfileVersionArn *string
 
-	// Set ApplyOn  to PublishedVersions to create a snapshot of the initialized
+	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
 	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
 	// .
 	SnapStart *types.SnapStartResponse
 
-	// The current state of the function. When the state is Inactive, you can
+	// The current state of the function. When the state is Inactive , you can
 	// reactivate the function by invoking it.
 	State types.State
 
 	// The reason for the function's current state.
 	StateReason *string
 
-	// The reason code for the function's current state. When the code is Creating,
+	// The reason code for the function's current state. When the code is Creating ,
 	// you can't invoke or modify the function.
 	StateReasonCode types.StateReasonCode
 

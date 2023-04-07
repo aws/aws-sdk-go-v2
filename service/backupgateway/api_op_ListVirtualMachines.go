@@ -37,9 +37,9 @@ type ListVirtualMachinesInput struct {
 	// The maximum number of virtual machines to list.
 	MaxResults *int32
 
-	// The next item following a partial list of returned resources. For example, if
-	// a request is made to return maxResults  number of resources, NextToken allows
-	// you to return more items in your list starting at the location pointed to by the
+	// The next item following a partial list of returned resources. For example, if a
+	// request is made to return maxResults number of resources, NextToken allows you
+	// to return more items in your list starting at the location pointed to by the
 	// next token.
 	NextToken *string
 
@@ -48,9 +48,9 @@ type ListVirtualMachinesInput struct {
 
 type ListVirtualMachinesOutput struct {
 
-	// The next item following a partial list of returned resources. For example, if
-	// a request is made to return maxResults  number of resources, NextToken allows
-	// you to return more items in your list starting at the location pointed to by the
+	// The next item following a partial list of returned resources. For example, if a
+	// request is made to return maxResults number of resources, NextToken allows you
+	// to return more items in your list starting at the location pointed to by the
 	// next token.
 	NextToken *string
 
@@ -138,8 +138,8 @@ type ListVirtualMachinesPaginatorOptions struct {
 	// The maximum number of virtual machines to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

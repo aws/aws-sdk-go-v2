@@ -45,8 +45,8 @@ type StartHumanLoopInput struct {
 	// This member is required.
 	HumanLoopName *string
 
-	// Attributes of the specified data. Use DataAttributes to specify if your data
-	// is free of personally identifiable information and/or free of adult content.
+	// Attributes of the specified data. Use DataAttributes to specify if your data is
+	// free of personally identifiable information and/or free of adult content.
 	DataAttributes *types.HumanLoopDataAttributes
 
 	noSmithyDocumentSerde

@@ -44,9 +44,9 @@ const (
 	BackupStatePendingDeletion  BackupState = "PENDING_DELETION"
 )
 
-// Values returns all known values for BackupState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BackupState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BackupState) Values() []BackupState {
 	return []BackupState{
 		"CREATE_IN_PROGRESS",
@@ -99,9 +99,9 @@ const (
 	HsmStateDeleted          HsmState = "DELETED"
 )
 
-// Values returns all known values for HsmState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HsmState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (HsmState) Values() []HsmState {
 	return []HsmState{
 		"CREATE_IN_PROGRESS",

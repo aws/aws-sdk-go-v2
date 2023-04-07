@@ -11,8 +11,7 @@ import (
 	"time"
 )
 
-// Returns the website access logs for a specific time range using a presigned
-// URL.
+// Returns the website access logs for a specific time range using a presigned URL.
 func (c *Client) GenerateAccessLogs(ctx context.Context, params *GenerateAccessLogsInput, optFns ...func(*Options)) (*GenerateAccessLogsOutput, error) {
 	if params == nil {
 		params = &GenerateAccessLogsInput{}
@@ -41,8 +40,8 @@ type GenerateAccessLogsInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The time at which the logs should end. The time range specified is inclusive
-	// of the end time.
+	// The time at which the logs should end. The time range specified is inclusive of
+	// the end time.
 	EndTime *time.Time
 
 	// The time at which the logs should start. The time range specified is inclusive

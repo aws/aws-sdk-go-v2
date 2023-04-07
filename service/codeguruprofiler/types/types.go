@@ -19,30 +19,38 @@ type AgentConfiguration struct {
 	// This member is required.
 	PeriodInSeconds *int32
 
-	// A Boolean that specifies whether the profiling agent collects profiling data
-	// or not. Set to true  to enable profiling.
+	// A Boolean that specifies whether the profiling agent collects profiling data or
+	// not. Set to true to enable profiling.
 	//
 	// This member is required.
 	ShouldProfile *bool
 
 	// Parameters used by the profiler. The valid parameters are:
-	//     - MaxStackDepth - The maximum depth of the stacks in the code that is represented in the profile. For example, if CodeGuru Profiler finds a method A , which calls method B , which calls method C , which calls method D , then the depth is 4. If the maxDepth is set to 2, then the profiler evaluates A and B .
-	//     - MemoryUsageLimitPercent - The percentage of memory that is used by the profiler.
-	//     - MinimumTimeForReportingInMilliseconds - The minimum time in milliseconds between sending reports.
-	//     - ReportingIntervalInMilliseconds - The reporting interval in milliseconds used to report profiles.
-	//     - SamplingIntervalInMilliseconds - The sampling interval in milliseconds that is used to profile samples.
+	//   - MaxStackDepth - The maximum depth of the stacks in the code that is
+	//   represented in the profile. For example, if CodeGuru Profiler finds a method A
+	//   , which calls method B , which calls method C , which calls method D , then
+	//   the depth is 4. If the maxDepth is set to 2, then the profiler evaluates A and
+	//   B .
+	//   - MemoryUsageLimitPercent - The percentage of memory that is used by the
+	//   profiler.
+	//   - MinimumTimeForReportingInMilliseconds - The minimum time in milliseconds
+	//   between sending reports.
+	//   - ReportingIntervalInMilliseconds - The reporting interval in milliseconds
+	//   used to report profiles.
+	//   - SamplingIntervalInMilliseconds - The sampling interval in milliseconds that
+	//   is used to profile samples.
 	AgentParameters map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Specifies whether profiling is enabled or disabled for a profiling group. It
-// is used by ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
+// Specifies whether profiling is enabled or disabled for a profiling group. It is
+// used by ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
 // to enable or disable profiling for a profiling group.
 type AgentOrchestrationConfig struct {
 
-	// A Boolean that specifies whether the profiling agent collects profiling data
-	// or not. Set to true  to enable profiling.
+	// A Boolean that specifies whether the profiling agent collects profiling data or
+	// not. Set to true to enable profiling.
 	//
 	// This member is required.
 	ProfilingEnabled *bool
@@ -59,14 +67,14 @@ type AggregatedProfileTime struct {
 	// The aggregation period. This indicates the period during which an aggregation
 	// profile collects posted agent profiles for a profiling group. Use one of three
 	// valid durations that are specified using the ISO 8601 format.
-	//     - P1D — 1 day
-	//     - PT1H — 1 hour
-	//     - PT5M — 5 minutes
+	//   - P1D — 1 day
+	//   - PT1H — 1 hour
+	//   - PT5M — 5 minutes
 	Period AggregationPeriod
 
 	// The time that aggregation of posted agent profiles for a profiling group
 	// starts. The aggregation profile contains profiles posted by the agent starting
-	// at this time for an aggregation period specified by the period  property of the
+	// at this time for an aggregation period specified by the period property of the
 	// AggregatedProfileTime object. Specify start using the ISO 8601 format. For
 	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
 	// 1:15:02 PM UTC.
@@ -139,8 +147,8 @@ type Channel struct {
 	// This member is required.
 	EventPublishers []EventPublisher
 
-	// Unique arn of the resource to be used for notifications. We support a valid
-	// SNS topic arn as a channel uri.
+	// Unique arn of the resource to be used for notifications. We support a valid SNS
+	// topic arn as a channel uri.
 	//
 	// This member is required.
 	Uri *string
@@ -227,8 +235,8 @@ type FrameMetricDatum struct {
 // The part of a profile that contains a recommendation found during analysis.
 type Match struct {
 
-	// The location in the profiling graph that contains a recommendation found
-	// during analysis.
+	// The location in the profiling graph that contains a recommendation found during
+	// analysis.
 	FrameAddress *string
 
 	// The target frame that triggered a match.
@@ -257,9 +265,9 @@ type Metric struct {
 	// This member is required.
 	ThreadStates []string
 
-	// A type that specifies how a metric for a frame is analyzed. The supported
-	// value AggregatedRelativeTotalTime is an aggregation of the metric value for
-	// one frame that is calculated across the occurences of all frames in a profile.
+	// A type that specifies how a metric for a frame is analyzed. The supported value
+	// AggregatedRelativeTotalTime is an aggregation of the metric value for one frame
+	// that is calculated across the occurences of all frames in a profile.
 	//
 	// This member is required.
 	Type MetricType
@@ -332,8 +340,8 @@ type ProfilingGroupDescription struct {
 	// The Amazon Resource Name (ARN) identifying the profiling group resource.
 	Arn *string
 
-	// The compute platform of the profiling group. If it is set to AWSLambda, then
-	// the profiled application runs on AWS Lambda. If it is set to Default, then the
+	// The compute platform of the profiling group. If it is set to AWSLambda , then
+	// the profiled application runs on AWS Lambda. If it is set to Default , then the
 	// profiled application runs on a compute platform that is not AWS Lambda, such an
 	// Amazon EC2 instance, an on-premises server, or a different platform. The default
 	// is Default .
@@ -400,22 +408,21 @@ type Recommendation struct {
 	// This member is required.
 	AllMatchesSum *float64
 
-	// End time of the profile that was used by this analysis. This is specified
-	// using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
+	// End time of the profile that was used by this analysis. This is specified using
+	// the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
 	// millisecond past June 1, 2020 1:15:02 PM UTC.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// The pattern that analysis recognized in the profile to make this
-	// recommendation.
+	// The pattern that analysis recognized in the profile to make this recommendation.
 	//
 	// This member is required.
 	Pattern *Pattern
 
-	// The start time of the profile that was used by this analysis. This is
-	// specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z
-	// represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+	// The start time of the profile that was used by this analysis. This is specified
+	// using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
+	// millisecond past June 1, 2020 1:15:02 PM UTC.
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -433,7 +440,7 @@ type Recommendation struct {
 // June 1, 2020 1:15:02 PM UTC.
 type TimestampStructure struct {
 
-	// A Timestamp. This is specified using the ISO 8601 format. For example,
+	// A Timestamp . This is specified using the ISO 8601 format. For example,
 	// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM
 	// UTC.
 	//
@@ -448,8 +455,8 @@ type TimestampStructure struct {
 // application.
 type UserFeedback struct {
 
-	// Optional Positive  or Negative feedback submitted by the user about whether
-	// the recommendation is useful or not.
+	// Optional Positive or Negative feedback submitted by the user about whether the
+	// recommendation is useful or not.
 	//
 	// This member is required.
 	Type FeedbackType

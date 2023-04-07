@@ -18,24 +18,23 @@ import (
 // the bucket with website configuration information such as the file name of the
 // index document and any redirect rules. For more information, see Hosting
 // Websites on Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
-// . This PUT action requires the S3:PutBucketWebsite permission. By default,
-// only the bucket owner can configure the website attached to a bucket; however,
-// bucket owners can allow other users to set the website configuration by writing
-// a bucket policy that grants them the S3:PutBucketWebsite permission. To
-// redirect all website requests sent to the bucket's website endpoint, you add a
-// website configuration with the following elements. Because all requests are sent
-// to another website, you don't need to provide index document name for the
-// bucket.
+// . This PUT action requires the S3:PutBucketWebsite permission. By default, only
+// the bucket owner can configure the website attached to a bucket; however, bucket
+// owners can allow other users to set the website configuration by writing a
+// bucket policy that grants them the S3:PutBucketWebsite permission. To redirect
+// all website requests sent to the bucket's website endpoint, you add a website
+// configuration with the following elements. Because all requests are sent to
+// another website, you don't need to provide index document name for the bucket.
 //   - WebsiteConfiguration
 //   - RedirectAllRequestsTo
 //   - HostName
 //   - Protocol
 //
-// If you want granular control over redirects, you can use the
-// following elements to add routing rules that describe conditions for redirecting
-// requests and information about the redirect destination. In this case, the
-// website configuration must provide an index document for the bucket, because
-// some requests might not be redirected.
+// If you want granular control over redirects, you can use the following elements
+// to add routing rules that describe conditions for redirecting requests and
+// information about the redirect destination. In this case, the website
+// configuration must provide an index document for the bucket, because some
+// requests might not be redirected.
 //   - WebsiteConfiguration
 //   - IndexDocument
 //   - Suffix
@@ -53,9 +52,9 @@ import (
 //   - ReplaceKeyWith
 //   - HttpRedirectCode
 //
-// Amazon S3 has a limitation of 50 routing rules per
-// website configuration. If you require more than 50 routing rules, you can use
-// object redirect. For more information, see Configuring an Object Redirect (https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html)
+// Amazon S3 has a limitation of 50 routing rules per website configuration. If
+// you require more than 50 routing rules, you can use object redirect. For more
+// information, see Configuring an Object Redirect (https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html)
 // in the Amazon S3 User Guide.
 func (c *Client) PutBucketWebsite(ctx context.Context, params *PutBucketWebsiteInput, optFns ...func(*Options)) (*PutBucketWebsiteOutput, error) {
 	if params == nil {
@@ -91,7 +90,7 @@ type PutBucketWebsiteInput struct {
 	// HTTP status code 400 Bad Request . For more information, see Checking object
 	// integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide. If you provide an individual checksum, Amazon S3
-	// ignores any provided ChecksumAlgorithm  parameter.
+	// ignores any provided ChecksumAlgorithm parameter.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	// The base64-encoded 128-bit MD5 digest of the data. You must use this header as
@@ -223,9 +222,9 @@ func addPutBucketWebsiteInputChecksumMiddlewares(stack *middleware.Stack, option
 	})
 }
 
-// getPutBucketWebsiteBucketMember returns a pointer to string denoting a
-// provided bucket member valueand a boolean indicating if the input has a modeled
-// bucket name,
+// getPutBucketWebsiteBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
 func getPutBucketWebsiteBucketMember(input interface{}) (*string, bool) {
 	in := input.(*PutBucketWebsiteInput)
 	if in.Bucket == nil {

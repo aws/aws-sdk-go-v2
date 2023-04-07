@@ -22,8 +22,8 @@ import (
 // key policy. To enable the IAM role to access the Amazon S3 object, you must
 // grant it permission to call s3:GetObject on the Amazon S3 bucket returned by
 // the command. To enable the IAM role to access the KMS key, you must grant it
-// permission to call kms:Decrypt on the KMS key returned by the command. For
-// more information, see Grant the role permission to access the certificate and
+// permission to call kms:Decrypt on the KMS key returned by the command. For more
+// information, see Grant the role permission to access the certificate and
 // encryption key (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy)
 // in the Amazon Web Services Nitro Enclaves User Guide.
 func (c *Client) AssociateEnclaveCertificateIamRole(ctx context.Context, params *AssociateEnclaveCertificateIamRoleInput, optFns ...func(*Options)) (*AssociateEnclaveCertificateIamRoleOutput, error) {
@@ -70,7 +70,6 @@ type AssociateEnclaveCertificateIamRoleOutput struct {
 
 	// The Amazon S3 object key where the certificate, certificate chain, and
 	// encrypted private key bundle are stored. The object key is formatted as follows:
-	//
 	// role_arn / certificate_arn .
 	CertificateS3ObjectKey *string
 

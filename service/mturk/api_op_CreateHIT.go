@@ -15,19 +15,18 @@ import (
 // HIT is made available for Workers to find and accept on the Amazon Mechanical
 // Turk website. This operation allows you to specify a new HIT by passing in
 // values for the properties of the HIT, such as its title, reward amount and
-// number of assignments. When you pass these values to CreateHIT, a new HIT is
-// created for you, with a new HITTypeID. The HITTypeID can be used to create
+// number of assignments. When you pass these values to CreateHIT , a new HIT is
+// created for you, with a new HITTypeID . The HITTypeID can be used to create
 // additional HITs in the future without needing to specify common parameters such
 // as the title, description and reward amount each time. An alternative way to
 // create HITs is to first generate a HITTypeID using the CreateHITType operation
 // and then call the CreateHITWithHITType operation. This is the recommended best
 // practice for Requesters who are creating large numbers of HITs. CreateHIT also
 // supports several ways to provide question data: by providing a value for the
-// Questionparameter that fully specifies the contents of the HIT, or by
-// providing a HitLayoutId  and associated HitLayoutParameters. If a HIT is
-// created with 10 or more maximum assignments, there is an additional fee. For
-// more information, see Amazon Mechanical Turk Pricing (https://requester.mturk.com/pricing)
-// .
+// Question parameter that fully specifies the contents of the HIT, or by providing
+// a HitLayoutId and associated HitLayoutParameters . If a HIT is created with 10
+// or more maximum assignments, there is an additional fee. For more information,
+// see Amazon Mechanical Turk Pricing (https://requester.mturk.com/pricing) .
 func (c *Client) CreateHIT(ctx context.Context, params *CreateHITInput, optFns ...func(*Options)) (*CreateHITOutput, error) {
 	if params == nil {
 		params = &CreateHITInput{}
@@ -71,14 +70,14 @@ type CreateHITInput struct {
 	// This member is required.
 	LifetimeInSeconds *int64
 
-	// The amount of money the Requester will pay a Worker for successfully
-	// completing the HIT.
+	// The amount of money the Requester will pay a Worker for successfully completing
+	// the HIT.
 	//
 	// This member is required.
 	Reward *string
 
-	// The title of the HIT. A title should be short and descriptive about the kind
-	// of task the HIT contains. On the Amazon Mechanical Turk web site, the HIT title
+	// The title of the HIT. A title should be short and descriptive about the kind of
+	// task the HIT contains. On the Amazon Mechanical Turk web site, the HIT title
 	// appears in search results, and everywhere the HIT is mentioned.
 	//
 	// This member is required.
@@ -88,9 +87,9 @@ type CreateHITInput struct {
 	// You can specify for Mechanical Turk to take various actions based on the policy.
 	AssignmentReviewPolicy *types.ReviewPolicy
 
-	// The number of seconds after an assignment for the HIT has been submitted,
-	// after which the assignment is considered Approved automatically unless the
-	// Requester explicitly rejects it.
+	// The number of seconds after an assignment for the HIT has been submitted, after
+	// which the assignment is considered Approved automatically unless the Requester
+	// explicitly rejects it.
 	AutoApprovalDelayInSeconds *int64
 
 	// The HITLayoutId allows you to use a pre-existing HIT design with placeholder
@@ -116,10 +115,10 @@ type CreateHITInput struct {
 	// becomes unavailable.
 	MaxAssignments *int32
 
-	// Conditions that a Worker's Qualifications must meet in order to accept the
-	// HIT. A HIT can have between zero and ten Qualification requirements. All
-	// requirements must be met in order for a Worker to accept the HIT. Additionally,
-	// other actions can be restricted using the ActionsGuarded  field on each
+	// Conditions that a Worker's Qualifications must meet in order to accept the HIT.
+	// A HIT can have between zero and ten Qualification requirements. All requirements
+	// must be met in order for a Worker to accept the HIT. Additionally, other actions
+	// can be restricted using the ActionsGuarded field on each
 	// QualificationRequirement structure.
 	QualificationRequirements []types.QualificationRequirement
 

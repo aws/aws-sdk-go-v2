@@ -34,7 +34,7 @@ type GetGroupInput struct {
 	// The name or the ARN of the resource group to retrieve.
 	Group *string
 
-	// Deprecated - don't use this parameter. Use Group  instead.
+	// Deprecated - don't use this parameter. Use Group instead.
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string
@@ -45,7 +45,7 @@ type GetGroupInput struct {
 type GetGroupOutput struct {
 
 	// A structure that contains the metadata details for the specified resource
-	// group. Use GetGroupQuery  and GetGroupConfiguration to get those additional
+	// group. Use GetGroupQuery and GetGroupConfiguration to get those additional
 	// details of the resource group.
 	Group *types.Group
 

@@ -38,8 +38,8 @@ type UpdateAuthorizerInput struct {
 	// The ARN of the authorizer's Lambda function.
 	AuthorizerFunctionArn *string
 
-	// When true, the result from the authorizer’s Lambda function is cached for the
-	// time specified in refreshAfterInSeconds. The cached result is used while the
+	// When true , the result from the authorizer’s Lambda function is cached for the
+	// time specified in refreshAfterInSeconds . The cached result is used while the
 	// device reuses the same HTTP connection.
 	EnableCachingForHttp *bool
 

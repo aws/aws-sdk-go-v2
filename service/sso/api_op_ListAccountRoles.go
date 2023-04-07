@@ -29,7 +29,7 @@ func (c *Client) ListAccountRoles(ctx context.Context, params *ListAccountRolesI
 
 type ListAccountRolesInput struct {
 
-	// The token issued by the CreateToken  API call. For more information, see
+	// The token issued by the CreateToken API call. For more information, see
 	// CreateToken (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html)
 	// in the IAM Identity Center OIDC API Reference Guide.
 	//
@@ -136,8 +136,8 @@ type ListAccountRolesPaginatorOptions struct {
 	// The number of items that clients can request per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

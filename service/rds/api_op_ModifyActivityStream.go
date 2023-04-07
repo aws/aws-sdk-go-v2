@@ -36,14 +36,13 @@ func (c *Client) ModifyActivityStream(ctx context.Context, params *ModifyActivit
 
 type ModifyActivityStreamInput struct {
 
-	// The audit policy state. When a policy is unlocked, it is read/write. When it
-	// is locked, it is read-only. You can edit your audit policy only when the
-	// activity stream is unlocked or stopped.
+	// The audit policy state. When a policy is unlocked, it is read/write. When it is
+	// locked, it is read-only. You can edit your audit policy only when the activity
+	// stream is unlocked or stopped.
 	AuditPolicyState types.AuditPolicyState
 
-	// The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server
-	// DB instance. For example, arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db
-	// .
+	// The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server DB
+	// instance. For example, arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db .
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -55,8 +54,8 @@ type ModifyActivityStreamOutput struct {
 	// activity stream.
 	EngineNativeAuditFieldsIncluded *bool
 
-	// The name of the Amazon Kinesis data stream to be used for the database
-	// activity stream.
+	// The name of the Amazon Kinesis data stream to be used for the database activity
+	// stream.
 	KinesisStreamName *string
 
 	// The Amazon Web Services KMS key identifier for encryption of messages in the

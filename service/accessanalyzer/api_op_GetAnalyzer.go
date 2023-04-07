@@ -41,7 +41,7 @@ type GetAnalyzerInput struct {
 // The response to the request.
 type GetAnalyzerOutput struct {
 
-	// An AnalyzerSummary  object that contains information about the analyzer.
+	// An AnalyzerSummary object that contains information about the analyzer.
 	//
 	// This member is required.
 	Analyzer *types.AnalyzerSummary

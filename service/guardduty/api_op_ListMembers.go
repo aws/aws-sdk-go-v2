@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists details about all member accounts for the current GuardDuty
-// administrator account.
+// Lists details about all member accounts for the current GuardDuty administrator
+// account.
 func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optFns ...func(*Options)) (*ListMembersOutput, error) {
 	if params == nil {
 		params = &ListMembersInput{}
@@ -61,8 +61,8 @@ type ListMembersOutput struct {
 	// A list of members.
 	Members []types.Member
 
-	// The pagination parameter to be used on the next list operation to retrieve
-	// more items.
+	// The pagination parameter to be used on the next list operation to retrieve more
+	// items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -147,8 +147,8 @@ type ListMembersPaginatorOptions struct {
 	// the response. The default value is 50. The maximum value is 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -37,7 +37,7 @@ type DescribeMaintenanceWindowExecutionTasksInput struct {
 	WindowExecutionId *string
 
 	// Optional filters used to scope down the returned tasks. The supported filter
-	// key is STATUS  with the corresponding values PENDING , IN_PROGRESS , SUCCESS ,
+	// key is STATUS with the corresponding values PENDING , IN_PROGRESS , SUCCESS ,
 	// FAILED , TIMED_OUT , CANCELLING , and CANCELLED .
 	Filters []types.MaintenanceWindowFilter
 
@@ -145,8 +145,8 @@ type DescribeMaintenanceWindowExecutionTasksPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

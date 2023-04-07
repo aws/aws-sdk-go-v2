@@ -45,8 +45,7 @@ type CreateTransitGatewayRouteTableAnnouncementInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The tags specifications applied to the transit gateway route table
-	// announcement.
+	// The tags specifications applied to the transit gateway route table announcement.
 	TagSpecifications []types.TagSpecification
 
 	noSmithyDocumentSerde

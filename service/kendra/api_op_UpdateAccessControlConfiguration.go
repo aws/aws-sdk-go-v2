@@ -27,9 +27,9 @@ import (
 // API to apply the updated access control configuration, with the
 // AccessControlConfigurationId included in the Document (https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html)
 // object. If you use an S3 bucket as a data source, you synchronize your data
-// source to apply the AccessControlConfigurationId  in the .metadata.json file.
+// source to apply the AccessControlConfigurationId in the .metadata.json file.
 // Amazon Kendra currently only supports access control configuration for S3 data
-// sources and documents indexed using the BatchPutDocument  API.
+// sources and documents indexed using the BatchPutDocument API.
 func (c *Client) UpdateAccessControlConfiguration(ctx context.Context, params *UpdateAccessControlConfigurationInput, optFns ...func(*Options)) (*UpdateAccessControlConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateAccessControlConfigurationInput{}

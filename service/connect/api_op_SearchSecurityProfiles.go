@@ -151,8 +151,8 @@ type SearchSecurityProfilesPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -165,8 +165,7 @@ type SearchSecurityProfilesPaginator struct {
 	firstPage bool
 }
 
-// NewSearchSecurityProfilesPaginator returns a new
-// SearchSecurityProfilesPaginator
+// NewSearchSecurityProfilesPaginator returns a new SearchSecurityProfilesPaginator
 func NewSearchSecurityProfilesPaginator(client SearchSecurityProfilesAPIClient, params *SearchSecurityProfilesInput, optFns ...func(*SearchSecurityProfilesPaginatorOptions)) *SearchSecurityProfilesPaginator {
 	if params == nil {
 		params = &SearchSecurityProfilesInput{}

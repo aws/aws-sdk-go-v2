@@ -87,8 +87,8 @@ func (e *PipelineDeletedException) ErrorCode() string {
 }
 func (e *PipelineDeletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified pipeline was not found. Verify that you used the correct user
-// and account identifiers.
+// The specified pipeline was not found. Verify that you used the correct user and
+// account identifiers.
 type PipelineNotFoundException struct {
 	Message *string
 

@@ -49,15 +49,14 @@ type PutProfileObjectTypeInput struct {
 	ObjectTypeName *string
 
 	// Indicates whether a profile should be created when data is received if one
-	// doesn’t exist for an object of this type. The default is FALSE. If the
-	// AllowProfileCreation flag is set to FALSE, then the service tries to fetch a
+	// doesn’t exist for an object of this type. The default is FALSE . If the
+	// AllowProfileCreation flag is set to FALSE , then the service tries to fetch a
 	// standard profile and associate this object with the profile. If it is set to
-	// TRUE, and if no match is found, then the service creates a new standard
-	// profile.
+	// TRUE , and if no match is found, then the service creates a new standard profile.
 	AllowProfileCreation bool
 
-	// The customer-provided key to encrypt the profile object that will be created
-	// in this profile object type.
+	// The customer-provided key to encrypt the profile object that will be created in
+	// this profile object type.
 	EncryptionKey *string
 
 	// The number of days until the data in the object expires.
@@ -69,7 +68,7 @@ type PutProfileObjectTypeInput struct {
 	// A list of unique keys that can be used to map data to the profile.
 	Keys map[string][]types.ObjectTypeKey
 
-	// The format of your sourceLastUpdatedTimestamp  that was previously set up.
+	// The format of your sourceLastUpdatedTimestamp that was previously set up.
 	SourceLastUpdatedTimestampFormat *string
 
 	// The tags used to organize, track, or control access for this resource.
@@ -78,7 +77,7 @@ type PutProfileObjectTypeInput struct {
 	// A unique identifier for the object template. For some attributes in the
 	// request, the service will use the default value from the object template when
 	// TemplateId is present. If these attributes are present in the request, the
-	// service may return a BadRequestException. These attributes include:
+	// service may return a BadRequestException . These attributes include:
 	// AllowProfileCreation, SourceLastUpdatedTimestampFormat, Fields, and Keys. For
 	// example, if AllowProfileCreation is set to true when TemplateId is set, the
 	// service may return a BadRequestException .
@@ -100,18 +99,17 @@ type PutProfileObjectTypeOutput struct {
 	ObjectTypeName *string
 
 	// Indicates whether a profile should be created when data is received if one
-	// doesn’t exist for an object of this type. The default is FALSE. If the
-	// AllowProfileCreation flag is set to FALSE, then the service tries to fetch a
+	// doesn’t exist for an object of this type. The default is FALSE . If the
+	// AllowProfileCreation flag is set to FALSE , then the service tries to fetch a
 	// standard profile and associate this object with the profile. If it is set to
-	// TRUE, and if no match is found, then the service creates a new standard
-	// profile.
+	// TRUE , and if no match is found, then the service creates a new standard profile.
 	AllowProfileCreation bool
 
 	// The timestamp of when the domain was created.
 	CreatedAt *time.Time
 
-	// The customer-provided key to encrypt the profile object that will be created
-	// in this profile object type.
+	// The customer-provided key to encrypt the profile object that will be created in
+	// this profile object type.
 	EncryptionKey *string
 
 	// The number of days until the data in the object expires.
@@ -128,7 +126,7 @@ type PutProfileObjectTypeOutput struct {
 
 	// The format of your sourceLastUpdatedTimestamp that was previously set up in
 	// fields that were parsed using SimpleDateFormat (https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html)
-	// . If you have sourceLastUpdatedTimestamp  in your field, you must set up
+	// . If you have sourceLastUpdatedTimestamp in your field, you must set up
 	// sourceLastUpdatedTimestampFormat .
 	SourceLastUpdatedTimestampFormat *string
 

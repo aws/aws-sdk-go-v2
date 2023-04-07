@@ -30,24 +30,23 @@ func (c *Client) DescribePullThroughCacheRules(ctx context.Context, params *Desc
 
 type DescribePullThroughCacheRulesInput struct {
 
-	// The Amazon ECR repository prefixes associated with the pull through cache
-	// rules to return. If no repository prefix value is specified, all pull through
-	// cache rules are returned.
+	// The Amazon ECR repository prefixes associated with the pull through cache rules
+	// to return. If no repository prefix value is specified, all pull through cache
+	// rules are returned.
 	EcrRepositoryPrefixes []string
 
 	// The maximum number of pull through cache rules returned by
-	// DescribePullThroughCacheRulesRequestin paginated output. When this parameter
-	// is used, DescribePullThroughCacheRulesRequest  only returns maxResults results
-	// in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another
-	// DescribePullThroughCacheRulesRequest request with the returned nextToken
-	// value. This value can be between 1 and 1000. If this parameter is not used, then
-	//
+	// DescribePullThroughCacheRulesRequest in paginated output. When this parameter is
+	// used, DescribePullThroughCacheRulesRequest only returns maxResults results in a
+	// single page along with a nextToken response element. The remaining results of
+	// the initial request can be seen by sending another
+	// DescribePullThroughCacheRulesRequest request with the returned nextToken value.
+	// This value can be between 1 and 1000. If this parameter is not used, then
 	// DescribePullThroughCacheRulesRequest returns up to 100 results and a nextToken
 	// value, if applicable.
 	MaxResults *int32
 
-	// The nextToken  value returned from a previous paginated
+	// The nextToken value returned from a previous paginated
 	// DescribePullThroughCacheRulesRequest request where maxResults was used and the
 	// results exceeded the value of that parameter. Pagination continues from the end
 	// of the previous results that returned the nextToken value. This value is null
@@ -64,11 +63,10 @@ type DescribePullThroughCacheRulesInput struct {
 
 type DescribePullThroughCacheRulesOutput struct {
 
-	// The nextToken  value to include in a future
-	// DescribePullThroughCacheRulesRequest request. When the results of a
-	// DescribePullThroughCacheRulesRequest request exceed maxResults, this value can
-	// be used to retrieve the next page of results. This value is null when there are
-	// no more results to return.
+	// The nextToken value to include in a future DescribePullThroughCacheRulesRequest
+	// request. When the results of a DescribePullThroughCacheRulesRequest request
+	// exceed maxResults , this value can be used to retrieve the next page of results.
+	// This value is null when there are no more results to return.
 	NextToken *string
 
 	// The details of the pull through cache rules.
@@ -152,19 +150,18 @@ var _ DescribePullThroughCacheRulesAPIClient = (*Client)(nil)
 // DescribePullThroughCacheRules
 type DescribePullThroughCacheRulesPaginatorOptions struct {
 	// The maximum number of pull through cache rules returned by
-	// DescribePullThroughCacheRulesRequestin paginated output. When this parameter
-	// is used, DescribePullThroughCacheRulesRequest  only returns maxResults results
-	// in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another
-	// DescribePullThroughCacheRulesRequest request with the returned nextToken
-	// value. This value can be between 1 and 1000. If this parameter is not used, then
-	//
+	// DescribePullThroughCacheRulesRequest in paginated output. When this parameter is
+	// used, DescribePullThroughCacheRulesRequest only returns maxResults results in a
+	// single page along with a nextToken response element. The remaining results of
+	// the initial request can be seen by sending another
+	// DescribePullThroughCacheRulesRequest request with the returned nextToken value.
+	// This value can be between 1 and 1000. If this parameter is not used, then
 	// DescribePullThroughCacheRulesRequest returns up to 100 results and a nextToken
 	// value, if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

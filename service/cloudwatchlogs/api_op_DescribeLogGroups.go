@@ -40,33 +40,33 @@ func (c *Client) DescribeLogGroups(ctx context.Context, params *DescribeLogGroup
 
 type DescribeLogGroupsInput struct {
 
-	// When includeLinkedAccounts  is set to True, use this parameter to specify the
+	// When includeLinkedAccounts is set to True , use this parameter to specify the
 	// list of accounts to search. You can specify as many as 20 account IDs in the
 	// array.
 	AccountIdentifiers []string
 
 	// If you are using a monitoring account, set this to True to have the operation
-	// return log groups in the accounts listed in accountIdentifiers. If this
-	// parameter is set to true  and accountIdentifiers contains a null value, the
+	// return log groups in the accounts listed in accountIdentifiers . If this
+	// parameter is set to true and accountIdentifiers contains a null value, the
 	// operation returns all log groups in the monitoring account and all log groups in
 	// all source accounts that are linked to the monitoring account. If you specify
 	// includeLinkedAccounts in your request, then metricFilterCount , retentionInDays
-	// , and storedBytes  are not included in the response.
+	// , and storedBytes are not included in the response.
 	IncludeLinkedAccounts *bool
 
-	// The maximum number of items returned. If you don't specify a value, the
-	// default is up to 50 items.
+	// The maximum number of items returned. If you don't specify a value, the default
+	// is up to 50 items.
 	Limit *int32
 
 	// If you specify a string for this parameter, the operation returns only log
 	// groups that have names that match the string based on a case-sensitive substring
-	// search. For example, if you specify Foo , log groups named FooBar , aws/Foo,
-	// and GroupFoo  would match, but foo , F/o/o  and Froo  would not match.
+	// search. For example, if you specify Foo , log groups named FooBar , aws/Foo ,
+	// and GroupFoo would match, but foo , F/o/o and Froo would not match.
 	// logGroupNamePattern and logGroupNamePrefix are mutually exclusive. Only one of
 	// these parameters can be passed.
 	LogGroupNamePattern *string
 
-	// The prefix to match. logGroupNamePrefix  and logGroupNamePattern are mutually
+	// The prefix to match. logGroupNamePrefix and logGroupNamePattern are mutually
 	// exclusive. Only one of these parameters can be passed.
 	LogGroupNamePrefix *string
 
@@ -83,8 +83,7 @@ type DescribeLogGroupsOutput struct {
 	// then that log group's events do not expire.
 	LogGroups []types.LogGroup
 
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
+	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -161,15 +160,14 @@ type DescribeLogGroupsAPIClient interface {
 
 var _ DescribeLogGroupsAPIClient = (*Client)(nil)
 
-// DescribeLogGroupsPaginatorOptions is the paginator options for
-// DescribeLogGroups
+// DescribeLogGroupsPaginatorOptions is the paginator options for DescribeLogGroups
 type DescribeLogGroupsPaginatorOptions struct {
-	// The maximum number of items returned. If you don't specify a value, the
-	// default is up to 50 items.
+	// The maximum number of items returned. If you don't specify a value, the default
+	// is up to 50 items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

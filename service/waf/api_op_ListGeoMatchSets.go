@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF
-// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
 // and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 // . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns an array of GeoMatchSetSummary  objects in the response.
+// and global use. Returns an array of GeoMatchSetSummary objects in the response.
 func (c *Client) ListGeoMatchSets(ctx context.Context, params *ListGeoMatchSetsInput, optFns ...func(*Options)) (*ListGeoMatchSetsOutput, error) {
 	if params == nil {
 		params = &ListGeoMatchSetsInput{}
@@ -34,18 +33,17 @@ func (c *Client) ListGeoMatchSets(ctx context.Context, params *ListGeoMatchSetsI
 
 type ListGeoMatchSetsInput struct {
 
-	// Specifies the number of GeoMatchSet objects that you want AWS WAF to return
-	// for this request. If you have more GeoMatchSet objects than the number you
-	// specify for Limit , the response includes a NextMarker value that you can use
-	// to get another batch of GeoMatchSet  objects.
+	// Specifies the number of GeoMatchSet objects that you want AWS WAF to return for
+	// this request. If you have more GeoMatchSet objects than the number you specify
+	// for Limit , the response includes a NextMarker value that you can use to get
+	// another batch of GeoMatchSet objects.
 	Limit int32
 
-	// If you specify a value for Limit  and you have more GeoMatchSets than the
-	// value of Limit , AWS WAF returns a NextMarker value in the response that
-	// allows you to list another group of GeoMatchSet objects. For the second and
-	// subsequent ListGeoMatchSets  requests, specify the value of NextMarker from
-	// the previous response to get information about another batch of GeoMatchSet
-	// objects.
+	// If you specify a value for Limit and you have more GeoMatchSet s than the value
+	// of Limit , AWS WAF returns a NextMarker value in the response that allows you
+	// to list another group of GeoMatchSet objects. For the second and subsequent
+	// ListGeoMatchSets requests, specify the value of NextMarker from the previous
+	// response to get information about another batch of GeoMatchSet objects.
 	NextMarker *string
 
 	noSmithyDocumentSerde
@@ -53,13 +51,13 @@ type ListGeoMatchSetsInput struct {
 
 type ListGeoMatchSetsOutput struct {
 
-	// An array of GeoMatchSetSummary  objects.
+	// An array of GeoMatchSetSummary objects.
 	GeoMatchSets []types.GeoMatchSetSummary
 
-	// If you have more GeoMatchSet  objects than the number that you specified for
-	// Limit in the request, the response includes a NextMarker  value. To list more
-	// GeoMatchSet objects, submit another ListGeoMatchSets  request, and specify the
-	// NextMarker value from the response in the NextMarker  value in the next request.
+	// If you have more GeoMatchSet objects than the number that you specified for
+	// Limit in the request, the response includes a NextMarker value. To list more
+	// GeoMatchSet objects, submit another ListGeoMatchSets request, and specify the
+	// NextMarker value from the response in the NextMarker value in the next request.
 	NextMarker *string
 
 	// Metadata pertaining to the operation's result.

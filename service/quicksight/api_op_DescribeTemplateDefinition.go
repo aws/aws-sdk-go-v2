@@ -46,8 +46,8 @@ type DescribeTemplateDefinitionInput struct {
 
 	// The alias of the template that you want to describe. If you name a specific
 	// alias, you describe the version that the alias points to. You can specify the
-	// latest version of the template by providing the keyword $LATEST  in the
-	// AliasName parameter. The keyword $PUBLISHED  doesn't apply to templates.
+	// latest version of the template by providing the keyword $LATEST in the AliasName
+	// parameter. The keyword $PUBLISHED doesn't apply to templates.
 	AliasName *string
 
 	// The version number of the template.
@@ -72,13 +72,13 @@ type DescribeTemplateDefinitionOutput struct {
 	RequestId *string
 
 	// Status associated with the template.
-	//     - CREATION_IN_PROGRESS
-	//     - CREATION_SUCCESSFUL
-	//     - CREATION_FAILED
-	//     - UPDATE_IN_PROGRESS
-	//     - UPDATE_SUCCESSFUL
-	//     - UPDATE_FAILED
-	//     - DELETED
+	//   - CREATION_IN_PROGRESS
+	//   - CREATION_SUCCESSFUL
+	//   - CREATION_FAILED
+	//   - UPDATE_IN_PROGRESS
+	//   - UPDATE_SUCCESSFUL
+	//   - UPDATE_FAILED
+	//   - DELETED
 	ResourceStatus types.ResourceStatus
 
 	// The HTTP status of the request.

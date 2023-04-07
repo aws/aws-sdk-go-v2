@@ -11,8 +11,8 @@ import (
 )
 
 // Stops a batch transform job. When Amazon SageMaker receives a StopTransformJob
-// request, the status of the job changes to Stopping. After Amazon SageMaker
-// stops the job, the status is set to Stopped. When you stop a batch transform
+// request, the status of the job changes to Stopping . After Amazon SageMaker
+// stops the job, the status is set to Stopped . When you stop a batch transform
 // job before it is completed, Amazon SageMaker doesn't store the job's output in
 // Amazon S3.
 func (c *Client) StopTransformJob(ctx context.Context, params *StopTransformJobInput, optFns ...func(*Options)) (*StopTransformJobOutput, error) {

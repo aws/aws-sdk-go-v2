@@ -51,8 +51,7 @@ type CreateAssessmentReportInput struct {
 	// , or associated with a report using the API (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_BatchAssociateAssessmentReportEvidence.html)
 	// . To use this parameter, the enablementStatus (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_EvidenceFinderEnablement.html#auditmanager-Type-EvidenceFinderEnablement-enablementStatus)
 	// of evidence finder must be ENABLED . For examples and help resolving
-	// queryStatement validation exceptions, see Troubleshooting evidence finder
-	// issues (https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-finder-issues.html#querystatement-exceptions)
+	// queryStatement validation exceptions, see Troubleshooting evidence finder issues (https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-finder-issues.html#querystatement-exceptions)
 	// in the Audit Manager User Guide.
 	QueryStatement *string
 
@@ -61,7 +60,7 @@ type CreateAssessmentReportInput struct {
 
 type CreateAssessmentReportOutput struct {
 
-	// The new assessment report that the CreateAssessmentReport  API returned.
+	// The new assessment report that the CreateAssessmentReport API returned.
 	AssessmentReport *types.AssessmentReport
 
 	// Metadata pertaining to the operation's result.

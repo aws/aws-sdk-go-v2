@@ -15,15 +15,16 @@ import (
 // in the Key Management Service Developer Guide. Because an alias is not a
 // property of a KMS key, you can delete and change the aliases of a KMS key
 // without affecting the KMS key. Also, aliases do not appear in the response from
-// the DescribeKey  operation. To get the aliases of all KMS keys, use the
-// ListAliasesoperation. Each KMS key can have multiple aliases. To change the
-// alias of a KMS key, use DeleteAlias  to delete the current alias and
-// CreateAliasto create a new alias. To associate an existing alias with a
-// different KMS key, call UpdateAlias. Cross-account use: No. You cannot perform
-// this operation on an alias in a different Amazon Web Services account. Required
-// permissions
-//   - kms:DeleteAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) on the alias (IAM policy).
-//   - kms:DeleteAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) on the KMS key (key policy).
+// the DescribeKey operation. To get the aliases of all KMS keys, use the
+// ListAliases operation. Each KMS key can have multiple aliases. To change the
+// alias of a KMS key, use DeleteAlias to delete the current alias and CreateAlias
+// to create a new alias. To associate an existing alias with a different KMS key,
+// call UpdateAlias . Cross-account use: No. You cannot perform this operation on
+// an alias in a different Amazon Web Services account. Required permissions
+//   - kms:DeleteAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+//     on the alias (IAM policy).
+//   - kms:DeleteAlias (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+//     on the KMS key (key policy).
 //
 // For details, see Controlling access to aliases (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access)
 // in the Key Management Service Developer Guide. Related operations:

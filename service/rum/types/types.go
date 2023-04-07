@@ -53,14 +53,14 @@ type AppMonitor struct {
 // This structure contains much of the configuration data for the app monitor.
 type AppMonitorConfiguration struct {
 
-	// If you set this to true, the RUM web client sets two cookies, a session cookie
+	// If you set this to true , the RUM web client sets two cookies, a session cookie
 	// and a user cookie. The cookies allow the RUM web client to collect data relating
 	// to the number of users an application has and the behavior of the application
 	// across a sequence of events. Cookies are stored in the top-level domain of the
 	// current page.
 	AllowCookies *bool
 
-	// If you set this to true, RUM enables X-Ray tracing for the user sessions that
+	// If you set this to true , RUM enables X-Ray tracing for the user sessions that
 	// RUM samples. RUM adds an X-Ray trace header to allowed HTTP requests. It also
 	// records an X-Ray segment for allowed HTTP requests. You can see traces and
 	// segments from these user sessions in the X-Ray console and the CloudWatch
@@ -68,8 +68,8 @@ type AppMonitorConfiguration struct {
 	EnableXRay *bool
 
 	// A list of URLs in your website or application to exclude from RUM data
-	// collection. You can't include both ExcludedPages  and IncludedPages in the
-	// same operation.
+	// collection. You can't include both ExcludedPages and IncludedPages in the same
+	// operation.
 	ExcludedPages []string
 
 	// A list of pages in your application that are to be displayed with a "favorite"
@@ -86,22 +86,26 @@ type AppMonitorConfiguration struct {
 
 	// If this app monitor is to collect data from only certain pages in your
 	// application, this structure lists those pages. You can't include both
-	// ExcludedPages and IncludedPages  in the same operation.
+	// ExcludedPages and IncludedPages in the same operation.
 	IncludedPages []string
 
-	// Specifies the portion of user sessions to use for RUM data collection.
-	// Choosing a higher portion gives you more data but also incurs more costs. The
-	// range for this value is 0 to 1 inclusive. Setting this to 1 means that 100% of
-	// user sessions are sampled, and setting it to 0.1 means that 10% of user sessions
-	// are sampled. If you omit this parameter, the default of 0.1 is used, and 10% of
+	// Specifies the portion of user sessions to use for RUM data collection. Choosing
+	// a higher portion gives you more data but also incurs more costs. The range for
+	// this value is 0 to 1 inclusive. Setting this to 1 means that 100% of user
+	// sessions are sampled, and setting it to 0.1 means that 10% of user sessions are
+	// sampled. If you omit this parameter, the default of 0.1 is used, and 10% of
 	// sessions will be sampled.
 	SessionSampleRate float64
 
 	// An array that lists the types of telemetry data that this app monitor is to
 	// collect.
-	//     - errors indicates that RUM collects data about unhandled JavaScript errors raised by your application.
-	//     - performance indicates that RUM collects performance data about how your application and its resources are loaded and rendered. This includes Core Web Vitals.
-	//     - http indicates that RUM collects data about HTTP errors thrown by your application.
+	//   - errors indicates that RUM collects data about unhandled JavaScript errors
+	//   raised by your application.
+	//   - performance indicates that RUM collects performance data about how your
+	//   application and its resources are loaded and rendered. This includes Core Web
+	//   Vitals.
+	//   - http indicates that RUM collects data about HTTP errors thrown by your
+	//   application.
 	Telemetries []Telemetry
 
 	noSmithyDocumentSerde
@@ -243,20 +247,19 @@ type MetricDefinition struct {
 
 	// This field is a map of field paths to dimension names. It defines the
 	// dimensions to associate with this metric in CloudWatch The value of this field
-	// is used only if the metric destination is CloudWatch. If the metric
-	// destination is Evidently , the value of DimensionKeys  is ignored.
+	// is used only if the metric destination is CloudWatch . If the metric destination
+	// is Evidently , the value of DimensionKeys is ignored.
 	DimensionKeys map[string]string
 
 	// The pattern that defines the metric. RUM checks events that happen in a user's
 	// session against the pattern, and events that match the pattern are sent to the
-	// metric destination. If the metrics destination is CloudWatch and the event
-	// also matches a value in DimensionKeys, then the metric is published with the
+	// metric destination. If the metrics destination is CloudWatch and the event also
+	// matches a value in DimensionKeys , then the metric is published with the
 	// specified dimensions.
 	EventPattern *string
 
-	// If this metric definition is for a custom metric instead of an extended
-	// metric, this field displays the metric namespace that the custom metric is
-	// published to.
+	// If this metric definition is for a custom metric instead of an extended metric,
+	// this field displays the metric namespace that the custom metric is published to.
 	Namespace *string
 
 	// Use this field only if you are sending this metric to CloudWatch. It defines
@@ -269,38 +272,69 @@ type MetricDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// Use this structure to define one extended metric or custom metric that RUM
-// will send to CloudWatch or CloudWatch Evidently. For more information, see
+// Use this structure to define one extended metric or custom metric that RUM will
+// send to CloudWatch or CloudWatch Evidently. For more information, see
 // Additional metrics that you can send to CloudWatch and CloudWatch Evidently (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html)
 // . This structure is validated differently for extended metrics and custom
 // metrics. For extended metrics that are sent to the AWS/RUM namespace, the
 // following validations apply:
 //   - The Namespace parameter must be omitted or set to AWS/RUM .
-//   - Only certain combinations of values for Name , ValueKey , and EventPattern are valid. In addition to what is displayed in the list below, the EventPattern can also include information used by the DimensionKeys field.
-//   - If Name is PerformanceNavigationDuration , then ValueKey must be event_details.duration and the EventPattern must include {"event_type":["com.amazon.rum.performance_navigation_event"]}
-//   - If Name is PerformanceResourceDuration , then ValueKey must be event_details.duration and the EventPattern must include {"event_type":["com.amazon.rum.performance_resource_event"]}
-//   - If Name is NavigationSatisfiedTransaction , then ValueKey must be null and the EventPattern must include { "event_type": ["com.amazon.rum.performance_navigation_event"], "event_details": { "duration": [{ "numeric": [">",2000] }] } }
-//   - If Name is NavigationToleratedTransaction , then ValueKey must be null and the EventPattern must include { "event_type": ["com.amazon.rum.performance_navigation_event"], "event_details": { "duration": [{ "numeric": [">=",2000,"<"8000] }] } }
-//   - If Name is NavigationFrustratedTransaction , then ValueKey must be null and the EventPattern must include { "event_type": ["com.amazon.rum.performance_navigation_event"], "event_details": { "duration": [{ "numeric": [">=",8000] }] } }
-//   - If Name is WebVitalsCumulativeLayoutShift , then ValueKey must be event_details.value and the EventPattern must include {"event_type":["com.amazon.rum.cumulative_layout_shift_event"]}
-//   - If Name is WebVitalsFirstInputDelay , then ValueKey must be event_details.value and the EventPattern must include {"event_type":["com.amazon.rum.first_input_delay_event"]}
-//   - If Name is WebVitalsLargestContentfulPaint , then ValueKey must be event_details.value and the EventPattern must include {"event_type":["com.amazon.rum.largest_contentful_paint_event"]}
-//   - If Name is JsErrorCount , then ValueKey must be null and the EventPattern must include {"event_type":["com.amazon.rum.js_error_event"]}
-//   - If Name is HttpErrorCount , then ValueKey must be null and the EventPattern must include {"event_type":["com.amazon.rum.http_event"]}
-//   - If Name is SessionCount , then ValueKey must be null and the EventPattern must include {"event_type":["com.amazon.rum.session_start_event"]}
+//   - Only certain combinations of values for Name , ValueKey , and EventPattern
+//     are valid. In addition to what is displayed in the list below, the
+//     EventPattern can also include information used by the DimensionKeys field.
+//   - If Name is PerformanceNavigationDuration , then ValueKey must be
+//     event_details.duration and the EventPattern must include
+//     {"event_type":["com.amazon.rum.performance_navigation_event"]}
+//   - If Name is PerformanceResourceDuration , then ValueKey must be
+//     event_details.duration and the EventPattern must include
+//     {"event_type":["com.amazon.rum.performance_resource_event"]}
+//   - If Name is NavigationSatisfiedTransaction , then ValueKey must be null and
+//     the EventPattern must include { "event_type":
+//     ["com.amazon.rum.performance_navigation_event"], "event_details": { "duration":
+//     [{ "numeric": [">",2000] }] } }
+//   - If Name is NavigationToleratedTransaction , then ValueKey must be null and
+//     the EventPattern must include { "event_type":
+//     ["com.amazon.rum.performance_navigation_event"], "event_details": { "duration":
+//     [{ "numeric": [">=",2000,"<"8000] }] } }
+//   - If Name is NavigationFrustratedTransaction , then ValueKey must be null and
+//     the EventPattern must include { "event_type":
+//     ["com.amazon.rum.performance_navigation_event"], "event_details": { "duration":
+//     [{ "numeric": [">=",8000] }] } }
+//   - If Name is WebVitalsCumulativeLayoutShift , then ValueKey must be
+//     event_details.value and the EventPattern must include
+//     {"event_type":["com.amazon.rum.cumulative_layout_shift_event"]}
+//   - If Name is WebVitalsFirstInputDelay , then ValueKey must be
+//     event_details.value and the EventPattern must include
+//     {"event_type":["com.amazon.rum.first_input_delay_event"]}
+//   - If Name is WebVitalsLargestContentfulPaint , then ValueKey must be
+//     event_details.value and the EventPattern must include
+//     {"event_type":["com.amazon.rum.largest_contentful_paint_event"]}
+//   - If Name is JsErrorCount , then ValueKey must be null and the EventPattern
+//     must include {"event_type":["com.amazon.rum.js_error_event"]}
+//   - If Name is HttpErrorCount , then ValueKey must be null and the EventPattern
+//     must include {"event_type":["com.amazon.rum.http_event"]}
+//   - If Name is SessionCount , then ValueKey must be null and the EventPattern
+//     must include {"event_type":["com.amazon.rum.session_start_event"]}
 //
 // For custom metrics, the following validation rules apply:
-//   - The namespace can't be omitted and can't be AWS/RUM . You can use the AWS/RUM namespace only for extended metrics.
-//   - All dimensions listed in the DimensionKeys field must be present in the value of EventPattern .
-//   - The values that you specify for ValueKey , EventPattern , and DimensionKeys must be fields in RUM events, so all first-level keys in these fields must be one of the keys in the list later in this section.
+//   - The namespace can't be omitted and can't be AWS/RUM . You can use the
+//     AWS/RUM namespace only for extended metrics.
+//   - All dimensions listed in the DimensionKeys field must be present in the
+//     value of EventPattern .
+//   - The values that you specify for ValueKey , EventPattern , and DimensionKeys
+//     must be fields in RUM events, so all first-level keys in these fields must be
+//     one of the keys in the list later in this section.
 //   - If you set a value for EventPattern , it must be a JSON object.
 //   - For every non-empty event_details , there must be a non-empty event_type .
-//   - If EventPattern contains an event_details field, it must also contain an event_type . For every built-in event_type that you use, you must use a value for event_details that corresponds to that event_type . For information about event details that correspond to event types, see RUM event details (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-datacollected.html#CloudWatch-RUM-datacollected-eventDetails) .
+//   - If EventPattern contains an event_details field, it must also contain an
+//     event_type . For every built-in event_type that you use, you must use a value
+//     for event_details that corresponds to that event_type . For information about
+//     event details that correspond to event types, see RUM event details (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-datacollected.html#CloudWatch-RUM-datacollected-eventDetails)
+//     .
 //   - In EventPattern , any JSON array must contain only one value.
 //
-// Valid key
-// values for first-level keys in the ValueKey , EventPattern , and DimensionKeys
-// fields:
+// Valid key values for first-level keys in the ValueKey , EventPattern , and
+// DimensionKeys fields:
 //   - account_id
 //   - application_Id
 //   - application_version
@@ -322,17 +356,17 @@ type MetricDefinitionRequest struct {
 	// The name for the metric that is defined in this structure. For custom metrics,
 	// you can specify any name that you like. For extended metrics, valid values are
 	// the following:
-	//     - PerformanceNavigationDuration
-	//     - PerformanceResourceDuration
-	//     - NavigationSatisfiedTransaction
-	//     - NavigationToleratedTransaction
-	//     - NavigationFrustratedTransaction
-	//     - WebVitalsCumulativeLayoutShift
-	//     - WebVitalsFirstInputDelay
-	//     - WebVitalsLargestContentfulPaint
-	//     - JsErrorCount
-	//     - HttpErrorCount
-	//     - SessionCount
+	//   - PerformanceNavigationDuration
+	//   - PerformanceResourceDuration
+	//   - NavigationSatisfiedTransaction
+	//   - NavigationToleratedTransaction
+	//   - NavigationFrustratedTransaction
+	//   - WebVitalsCumulativeLayoutShift
+	//   - WebVitalsFirstInputDelay
+	//   - WebVitalsLargestContentfulPaint
+	//   - JsErrorCount
+	//   - HttpErrorCount
+	//   - SessionCount
 	//
 	// This member is required.
 	Name *string
@@ -341,65 +375,67 @@ type MetricDefinitionRequest struct {
 	// a map of field paths to dimension names. It defines the dimensions to associate
 	// with this metric in CloudWatch. For extended metrics, valid values for the
 	// entries in this field are the following:
-	//     - "metadata.pageId": "PageId"
-	//     - "metadata.browserName": "BrowserName"
-	//     - "metadata.deviceType": "DeviceType"
-	//     - "metadata.osName": "OSName"
-	//     - "metadata.countryCode": "CountryCode"
-	//     - "event_details.fileType": "FileType"
-	// For both extended metrics and custom
-	// metrics, all dimensions listed in this field must also be included in
-	// EventPattern .
+	//   - "metadata.pageId": "PageId"
+	//   - "metadata.browserName": "BrowserName"
+	//   - "metadata.deviceType": "DeviceType"
+	//   - "metadata.osName": "OSName"
+	//   - "metadata.countryCode": "CountryCode"
+	//   - "event_details.fileType": "FileType"
+	// For both extended metrics and custom metrics, all dimensions listed in this
+	// field must also be included in EventPattern .
 	DimensionKeys map[string]string
 
 	// The pattern that defines the metric, specified as a JSON object. RUM checks
 	// events that happen in a user's session against the pattern, and events that
 	// match the pattern are sent to the metric destination. When you define extended
-	// metrics, the metric definition is not valid if EventPattern is omitted.
-	// Example event patterns:
-	//     - '{ "event_type": ["com.amazon.rum.js_error_event"], "metadata": { "browserName": [ "Chrome", "Safari" ], } }'
-	//     - '{ "event_type": ["com.amazon.rum.performance_navigation_event"], "metadata": { "browserName": [ "Chrome", "Firefox" ] }, "event_details": { "duration": [{ "numeric": [ "<", 2000 ] }] } }'
-	//     - '{ "event_type": ["com.amazon.rum.performance_navigation_event"], "metadata": { "browserName": [ "Chrome", "Safari" ], "countryCode": [ "US" ] }, "event_details": { "duration": [{ "numeric": [ ">=", 2000, "<", 8000 ] }] } }'
-	//
-	// If the metrics destination' is CloudWatch and the event also matches a value
-	// in DimensionKeys , then the metric is published with the specified dimensions.
+	// metrics, the metric definition is not valid if EventPattern is omitted. Example
+	// event patterns:
+	//   - '{ "event_type": ["com.amazon.rum.js_error_event"], "metadata": {
+	//   "browserName": [ "Chrome", "Safari" ], } }'
+	//   - '{ "event_type": ["com.amazon.rum.performance_navigation_event"],
+	//   "metadata": { "browserName": [ "Chrome", "Firefox" ] }, "event_details": {
+	//   "duration": [{ "numeric": [ "<", 2000 ] }] } }'
+	//   - '{ "event_type": ["com.amazon.rum.performance_navigation_event"],
+	//   "metadata": { "browserName": [ "Chrome", "Safari" ], "countryCode": [ "US" ] },
+	//   "event_details": { "duration": [{ "numeric": [ ">=", 2000, "<", 8000 ] }] } }'
+	// If the metrics destination' is CloudWatch and the event also matches a value in
+	// DimensionKeys , then the metric is published with the specified dimensions.
 	EventPattern *string
 
 	// If this structure is for a custom metric instead of an extended metrics, use
 	// this parameter to define the metric namespace for that custom metric. Do not
 	// specify this parameter if this structure is for an extended metric. You cannot
-	// use any string that starts with AWS/  for your namespace.
+	// use any string that starts with AWS/ for your namespace.
 	Namespace *string
 
 	// The CloudWatch metric unit to use for this metric. If you omit this field, the
 	// metric is recorded with no unit.
 	UnitLabel *string
 
-	// The field within the event object that the metric value is sourced from. If
-	// you omit this field, a hardcoded value of 1 is pushed as the metric value. This
-	// is useful if you just want to count the number of events that the filter
-	// catches. If this metric is sent to CloudWatch Evidently, this field will be
-	// passed to Evidently raw and Evidently will handle data extraction from the
-	// event.
+	// The field within the event object that the metric value is sourced from. If you
+	// omit this field, a hardcoded value of 1 is pushed as the metric value. This is
+	// useful if you just want to count the number of events that the filter catches.
+	// If this metric is sent to CloudWatch Evidently, this field will be passed to
+	// Evidently raw and Evidently will handle data extraction from the event.
 	ValueKey *string
 
 	noSmithyDocumentSerde
 }
 
-// A structure that displays information about one destination that CloudWatch
-// RUM sends extended metrics to.
+// A structure that displays information about one destination that CloudWatch RUM
+// sends extended metrics to.
 type MetricDestinationSummary struct {
 
-	// Specifies whether the destination is CloudWatch  or Evidently .
+	// Specifies whether the destination is CloudWatch or Evidently .
 	Destination MetricDestination
 
-	// If the destination is Evidently, this specifies the ARN of the Evidently
+	// If the destination is Evidently , this specifies the ARN of the Evidently
 	// experiment that receives the metrics.
 	DestinationArn *string
 
-	// This field appears only when the destination is Evidently. It specifies the
-	// ARN of the IAM role that is used to write to the Evidently experiment that
-	// receives the metrics.
+	// This field appears only when the destination is Evidently . It specifies the ARN
+	// of the IAM role that is used to write to the Evidently experiment that receives
+	// the metrics.
 	IamRoleArn *string
 
 	noSmithyDocumentSerde
@@ -408,19 +444,19 @@ type MetricDestinationSummary struct {
 // A structure that defines a key and values that you can use to filter the
 // results. The only performance events that are returned are those that have
 // values matching the ones that you specify in one of your QueryFilter
-// structures. For example, you could specify Browser  as the Name  and specify
+// structures. For example, you could specify Browser as the Name and specify
 // Chrome,Firefox as the Values to return events generated only from those
-// browsers. Specifying Invert  as the Name works as a "not equal to" filter. For
-// example, specify Invert  as the Name  and specify Chrome as the value to
-// return all events except events from user sessions with the Chrome browser.
+// browsers. Specifying Invert as the Name works as a "not equal to" filter. For
+// example, specify Invert as the Name and specify Chrome as the value to return
+// all events except events from user sessions with the Chrome browser.
 type QueryFilter struct {
 
 	// The name of a key to search for. The filter returns only the events that match
-	// the Name  and Values  that you specify. Valid values for Name  are Browser  |
-	// Device | Country  | Page  | OS  | EventType  | Invert
+	// the Name and Values that you specify. Valid values for Name are Browser | Device
+	// | Country | Page | OS | EventType | Invert
 	Name *string
 
-	// The values of the Name  that are to be be included in the returned results.
+	// The values of the Name that are to be be included in the returned results.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -478,8 +514,8 @@ type TimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains information about the user session that this batch
-// of events was collected from.
+// A structure that contains information about the user session that this batch of
+// events was collected from.
 type UserDetails struct {
 
 	// The session ID that the performance events are from.

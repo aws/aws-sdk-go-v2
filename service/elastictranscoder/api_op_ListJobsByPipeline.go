@@ -31,7 +31,7 @@ func (c *Client) ListJobsByPipeline(ctx context.Context, params *ListJobsByPipel
 	return out, nil
 }
 
-// The ListJobsByPipelineRequest  structure.
+// The ListJobsByPipelineRequest structure.
 type ListJobsByPipelineInput struct {
 
 	// The ID of the pipeline for which you want to get job information.
@@ -40,26 +40,26 @@ type ListJobsByPipelineInput struct {
 	PipelineId *string
 
 	// To list jobs in chronological order by the date and time that they were
-	// submitted, enter true . To list jobs in reverse chronological order, enter
-	// false .
+	// submitted, enter true . To list jobs in reverse chronological order, enter false
+	// .
 	Ascending *string
 
-	// When Elastic Transcoder returns more than one page of results, use pageToken
-	// in subsequent GET  requests to get each successive page of results.
+	// When Elastic Transcoder returns more than one page of results, use pageToken in
+	// subsequent GET requests to get each successive page of results.
 	PageToken *string
 
 	noSmithyDocumentSerde
 }
 
-// The ListJobsByPipelineResponse  structure.
+// The ListJobsByPipelineResponse structure.
 type ListJobsByPipelineOutput struct {
 
-	// An array of Job  objects that are in the specified pipeline.
+	// An array of Job objects that are in the specified pipeline.
 	Jobs []types.Job
 
 	// A value that you use to access the second and subsequent pages of results, if
 	// any. When the jobs in the specified pipeline fit on one page or when you've
-	// reached the last page of results, the value of NextPageToken  is null .
+	// reached the last page of results, the value of NextPageToken is null .
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +142,8 @@ var _ ListJobsByPipelineAPIClient = (*Client)(nil)
 // ListJobsByPipelinePaginatorOptions is the paginator options for
 // ListJobsByPipeline
 type ListJobsByPipelinePaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

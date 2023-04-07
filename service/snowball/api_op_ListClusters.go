@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of ClusterListEntry  objects of the specified length. Each
-// ClusterListEntryobject contains a cluster's state, a cluster's ID, and other
+// Returns an array of ClusterListEntry objects of the specified length. Each
+// ClusterListEntry object contains a cluster's state, a cluster's ID, and other
 // important status information.
 func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, optFns ...func(*Options)) (*ListClustersOutput, error) {
 	if params == nil {
@@ -32,12 +32,12 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 
 type ListClustersInput struct {
 
-	// The number of ClusterListEntry  objects to return.
+	// The number of ClusterListEntry objects to return.
 	MaxResults *int32
 
 	// HTTP requests are stateless. To identify what object comes "next" in the list
-	// of ClusterListEntry  objects, you have the option of specifying NextToken as
-	// the starting point for your returned list.
+	// of ClusterListEntry objects, you have the option of specifying NextToken as the
+	// starting point for your returned list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -129,11 +129,11 @@ var _ ListClustersAPIClient = (*Client)(nil)
 
 // ListClustersPaginatorOptions is the paginator options for ListClusters
 type ListClustersPaginatorOptions struct {
-	// The number of ClusterListEntry  objects to return.
+	// The number of ClusterListEntry objects to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -29,7 +29,7 @@ func (c *Client) AssociatePackage(ctx context.Context, params *AssociatePackageI
 	return out, nil
 }
 
-// Container for the request parameters to the AssociatePackage  operation.
+// Container for the request parameters to the AssociatePackage operation.
 type AssociatePackageInput struct {
 
 	// Name of the domain to associate the package with.
@@ -46,7 +46,7 @@ type AssociatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by the AssociatePackage  operation.
+// Container for the response returned by the AssociatePackage operation.
 type AssociatePackageOutput struct {
 
 	// Information about a package that is associated with a domain.

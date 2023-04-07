@@ -64,8 +64,8 @@ type GetBucketStatisticsOutput struct {
 	// value for each statistic is 0.
 	BucketStatisticsBySensitivity *types.BucketStatisticsBySensitivity
 
-	// The total number of objects that Amazon Macie can analyze in the buckets.
-	// These objects use a supported storage class and have a file name extension for a
+	// The total number of objects that Amazon Macie can analyze in the buckets. These
+	// objects use a supported storage class and have a file name extension for a
 	// supported file or storage format.
 	ClassifiableObjectCount int64
 

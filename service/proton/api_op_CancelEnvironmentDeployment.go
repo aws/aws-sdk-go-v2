@@ -11,14 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attempts to cancel an environment deployment on an UpdateEnvironment action,
-// if the deployment is IN_PROGRESS . For more information, see Update an
-// environment (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-update.html)
+// Attempts to cancel an environment deployment on an UpdateEnvironment action, if
+// the deployment is IN_PROGRESS . For more information, see Update an environment (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-update.html)
 // in the Proton User guide. The following list includes potential cancellation
 // scenarios.
-//   - If the cancellation attempt succeeds, the resulting deployment state is CANCELLED .
-//   - If the cancellation attempt fails, the resulting deployment state is FAILED .
-//   - If the current UpdateEnvironment action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.
+//   - If the cancellation attempt succeeds, the resulting deployment state is
+//     CANCELLED .
+//   - If the cancellation attempt fails, the resulting deployment state is FAILED
+//     .
+//   - If the current UpdateEnvironment action succeeds before the cancellation
+//     attempt starts, the resulting deployment state is SUCCEEDED and the
+//     cancellation attempt has no effect.
 func (c *Client) CancelEnvironmentDeployment(ctx context.Context, params *CancelEnvironmentDeploymentInput, optFns ...func(*Options)) (*CancelEnvironmentDeploymentOutput, error) {
 	if params == nil {
 		params = &CancelEnvironmentDeploymentInput{}

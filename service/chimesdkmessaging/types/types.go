@@ -10,10 +10,10 @@ import (
 // Summary of the membership details of an AppInstanceUser .
 type AppInstanceUserMembershipSummary struct {
 
-	// The time at which an AppInstanceUser  last marked a channel as read.
+	// The time at which an AppInstanceUser last marked a channel as read.
 	ReadMarkerTimestamp *time.Time
 
-	// The ID of the SubChannel that the AppInstanceUser  is a member of.
+	// The ID of the SubChannel that the AppInstanceUser is a member of.
 	SubChannelId *string
 
 	// The type of ChannelMembership .
@@ -53,7 +53,7 @@ type BatchCreateChannelMembershipError struct {
 	// The error message.
 	ErrorMessage *string
 
-	// The AppInstanceUserArn  of the member that the service couldn't add.
+	// The AppInstanceUserArn of the member that the service couldn't add.
 	MemberArn *string
 
 	noSmithyDocumentSerde
@@ -68,10 +68,10 @@ type Channel struct {
 	// The ARN of the channel flow.
 	ChannelFlowArn *string
 
-	// The AppInstanceUser  who created the channel.
+	// The AppInstanceUser who created the channel.
 	CreatedBy *Identity
 
-	// The time at which the AppInstanceUser  created the channel.
+	// The time at which the AppInstanceUser created the channel.
 	CreatedTimestamp *time.Time
 
 	// The attributes required to configure and create an elastic channel. An elastic
@@ -129,7 +129,7 @@ type ChannelBan struct {
 	// The ARN of the channel from which a member is being banned.
 	ChannelArn *string
 
-	// The AppInstanceUser  who created the ban.
+	// The AppInstanceUser who created the ban.
 	CreatedBy *Identity
 
 	// The time at which the ban was created.
@@ -396,7 +396,7 @@ type ChannelModerator struct {
 	// The ARN of the moderator's channel.
 	ChannelArn *string
 
-	// The AppInstanceUser  who created the moderator.
+	// The AppInstanceUser who created the moderator.
 	CreatedBy *Identity
 
 	// The time at which the moderator was created.
@@ -445,14 +445,13 @@ type ChannelSummary struct {
 // channel can support a maximum of 1-million members.
 type ElasticChannelConfiguration struct {
 
-	// The maximum number of SubChannels that you want to allow in the elastic
-	// channel.
+	// The maximum number of SubChannels that you want to allow in the elastic channel.
 	//
 	// This member is required.
 	MaximumSubChannels *int32
 
-	// The minimum allowed percentage of TargetMembershipsPerSubChannel users. Ceil
-	// of the calculated value is used in balancing members among SubChannels of the
+	// The minimum allowed percentage of TargetMembershipsPerSubChannel users. Ceil of
+	// the calculated value is used in balancing members among SubChannels of the
 	// elastic channel.
 	//
 	// This member is required.
@@ -546,11 +545,11 @@ type Processor struct {
 
 	// Determines whether to continue with message processing or stop it in cases
 	// where communication with a processor fails. If a processor has a fallback action
-	// of ABORT and communication with it fails, the processor sets the message
-	// status to FAILED and does not send the message to any recipients. Note that if
-	// the last processor in the channel flow sequence has a fallback action of
-	// CONTINUEand communication with the processor fails, then the message is
-	// considered processed and sent to recipients of the channel.
+	// of ABORT and communication with it fails, the processor sets the message status
+	// to FAILED and does not send the message to any recipients. Note that if the
+	// last processor in the channel flow sequence has a fallback action of CONTINUE
+	// and communication with the processor fails, then the message is considered
+	// processed and sent to recipients of the channel.
 	//
 	// This member is required.
 	FallbackAction FallbackAction
@@ -594,8 +593,8 @@ type PushNotificationConfiguration struct {
 type PushNotificationPreferences struct {
 
 	// Enum value that indicates which push notifications to send to the requested
-	// member of a channel. ALL  sends all push notifications, NONE sends no push
-	// notifications, FILTERED  sends only filtered push notifications.
+	// member of a channel. ALL sends all push notifications, NONE sends no push
+	// notifications, FILTERED sends only filtered push notifications.
 	//
 	// This member is required.
 	AllowNotifications AllowNotifications
@@ -607,10 +606,10 @@ type PushNotificationPreferences struct {
 	noSmithyDocumentSerde
 }
 
-// A Field  of the channel that you want to search.
+// A Field of the channel that you want to search.
 type SearchField struct {
 
-	// An enum  value that indicates the key to search the channel on. MEMBERS allows
+	// An enum value that indicates the key to search the channel on. MEMBERS allows
 	// you to search channels based on memberships. You can use it with the EQUALS
 	// operator to get channels whose memberships are equal to the specified values,
 	// and with the INCLUDES operator to get channels whose memberships include the
@@ -619,7 +618,7 @@ type SearchField struct {
 	// This member is required.
 	Key SearchFieldKey
 
-	// The operator used to compare field values, currently EQUALS  or INCLUDES. Use
+	// The operator used to compare field values, currently EQUALS or INCLUDES . Use
 	// the EQUALS operator to find channels whose memberships equal the specified
 	// values. Use the INCLUDES operator to find channels whose memberships include
 	// the specified values.
@@ -628,8 +627,8 @@ type SearchField struct {
 	Operator SearchFieldOperator
 
 	// The values that you want to search for, a list of strings. The values must be
-	// AppInstanceUserArnsspecified as a list of strings. This operation isn't
-	// supported for AppInstanceUsers  with large number of memberships.
+	// AppInstanceUserArns specified as a list of strings. This operation isn't
+	// supported for AppInstanceUsers with large number of memberships.
 	//
 	// This member is required.
 	Values []string

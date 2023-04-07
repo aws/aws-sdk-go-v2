@@ -29,8 +29,8 @@ func (c *Client) UpdateAnalysisPermissions(ctx context.Context, params *UpdateAn
 
 type UpdateAnalysisPermissionsInput struct {
 
-	// The ID of the analysis whose permissions you're updating. The ID is part of
-	// the analysis URL.
+	// The ID of the analysis whose permissions you're updating. The ID is part of the
+	// analysis URL.
 	//
 	// This member is required.
 	AnalysisId *string
@@ -42,8 +42,8 @@ type UpdateAnalysisPermissionsInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// A structure that describes the permissions to add and the principal to add
-	// them to.
+	// A structure that describes the permissions to add and the principal to add them
+	// to.
 	GrantPermissions []types.ResourcePermission
 
 	// A structure that describes the permissions to remove and the principal to
@@ -61,8 +61,8 @@ type UpdateAnalysisPermissionsOutput struct {
 	// The ID of the analysis that you updated permissions for.
 	AnalysisId *string
 
-	// A structure that describes the principals and the resource-level permissions
-	// on an analysis.
+	// A structure that describes the principals and the resource-level permissions on
+	// an analysis.
 	Permissions []types.ResourcePermission
 
 	// The Amazon Web Services request ID for this operation.

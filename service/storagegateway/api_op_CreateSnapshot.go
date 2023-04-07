@@ -77,10 +77,9 @@ type CreateSnapshotInput struct {
 // A JSON object containing the following fields:
 type CreateSnapshotOutput struct {
 
-	// The snapshot ID that is used to refer to the snapshot in future operations
-	// such as describing snapshots (Amazon Elastic Compute Cloud API
-	// DescribeSnapshots ) or creating a volume from a snapshot (
-	// CreateStorediSCSIVolume ).
+	// The snapshot ID that is used to refer to the snapshot in future operations such
+	// as describing snapshots (Amazon Elastic Compute Cloud API DescribeSnapshots ) or
+	// creating a volume from a snapshot ( CreateStorediSCSIVolume ).
 	SnapshotId *string
 
 	// The Amazon Resource Name (ARN) of the volume of which the snapshot was taken.

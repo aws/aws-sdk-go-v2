@@ -70,8 +70,8 @@ type ImportTerminologyInput struct {
 
 type ImportTerminologyOutput struct {
 
-	// The Amazon S3 location of a file that provides any errors or warnings that
-	// were produced by your input file. This file was created when Amazon Translate
+	// The Amazon S3 location of a file that provides any errors or warnings that were
+	// produced by your input file. This file was created when Amazon Translate
 	// attempted to create a terminology resource. The location is returned as a
 	// presigned URL to that has a 30 minute expiration.
 	AuxiliaryDataLocation *types.TerminologyDataLocation

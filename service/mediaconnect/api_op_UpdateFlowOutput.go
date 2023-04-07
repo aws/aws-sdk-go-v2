@@ -40,24 +40,24 @@ type UpdateFlowOutputInput struct {
 	// This member is required.
 	OutputArn *string
 
-	// The range of IP addresses that should be allowed to initiate output requests
-	// to this flow. These IP addresses should be in the form of a Classless
-	// Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+	// The range of IP addresses that should be allowed to initiate output requests to
+	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
+	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	CidrAllowList []string
 
-	// A description of the output. This description appears only on the AWS
-	// Elemental MediaConnect console and will not be seen by the end user.
+	// A description of the output. This description appears only on the AWS Elemental
+	// MediaConnect console and will not be seen by the end user.
 	Description *string
 
 	// The IP address where you want to send the output.
 	Destination *string
 
-	// The type of key used for the encryption. If no keyType is provided, the
-	// service will use the default setting (static-key).
+	// The type of key used for the encryption. If no keyType is provided, the service
+	// will use the default setting (static-key).
 	Encryption *types.UpdateEncryption
 
-	// The maximum latency in milliseconds. This parameter applies only to
-	// RIST-based, Zixi-based, and Fujitsu-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
+	// Zixi-based, and Fujitsu-based streams.
 	MaxLatency int32
 
 	// The media streams that are associated with the output, and the parameters for

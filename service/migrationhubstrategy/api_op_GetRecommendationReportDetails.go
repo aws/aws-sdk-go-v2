@@ -29,7 +29,7 @@ func (c *Client) GetRecommendationReportDetails(ctx context.Context, params *Get
 
 type GetRecommendationReportDetailsInput struct {
 
-	// The recommendation report generation task id  returned by
+	// The recommendation report generation task id returned by
 	// StartRecommendationReportGeneration .
 	//
 	// This member is required.

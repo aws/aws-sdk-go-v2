@@ -61,8 +61,8 @@ type DescribeWorkingStorageOutput struct {
 	// storage is configured for the gateway, this field returns 0.
 	WorkingStorageAllocatedInBytes int64
 
-	// The total working storage in bytes in use by the gateway. If no working
-	// storage is configured for the gateway, this field returns 0.
+	// The total working storage in bytes in use by the gateway. If no working storage
+	// is configured for the gateway, this field returns 0.
 	WorkingStorageUsedInBytes int64
 
 	// Metadata pertaining to the operation's result.

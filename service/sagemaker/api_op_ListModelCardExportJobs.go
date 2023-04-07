@@ -52,7 +52,7 @@ type ListModelCardExportJobsInput struct {
 	ModelCardVersion int32
 
 	// If the response to a previous ListModelCardExportJobs request was truncated,
-	// the response includes a NextToken. To retrieve the next set of model card
+	// the response includes a NextToken . To retrieve the next set of model card
 	// export jobs, use the token in the next request.
 	NextToken *string
 
@@ -163,8 +163,8 @@ type ListModelCardExportJobsPaginatorOptions struct {
 	// The maximum number of model card export jobs to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

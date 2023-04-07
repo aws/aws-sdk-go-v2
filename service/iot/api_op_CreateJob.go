@@ -52,17 +52,17 @@ type CreateJobInput struct {
 	Document *string
 
 	// Parameters of an Amazon Web Services managed template that you can specify to
-	// create the job document. documentParameters can only be used when creating
-	// jobs from Amazon Web Services managed templates. This parameter can't be used
-	// with custom job templates or to create jobs from them.
+	// create the job document. documentParameters can only be used when creating jobs
+	// from Amazon Web Services managed templates. This parameter can't be used with
+	// custom job templates or to create jobs from them.
 	DocumentParameters map[string]string
 
 	// An S3 link to the job document. Required if you don't specify a value for
-	// document. If the job document resides in an S3 bucket, you must use a
+	// document . If the job document resides in an S3 bucket, you must use a
 	// placeholder link when specifying the document. The placeholder link is of the
-	// following form:
-	// ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}where bucket is
-	// your bucket name and key is the object in the bucket to which you are linking.
+	// following form: ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}
+	// where bucket is your bucket name and key is the object in the bucket to which
+	// you are linking.
 	DocumentSource *string
 
 	// Allows you to create the criteria to retry a job.
@@ -103,7 +103,7 @@ type CreateJobInput struct {
 	TargetSelection types.TargetSelection
 
 	// Specifies the amount of time each device has to finish its execution of the
-	// job. The timer is started when the job execution status is set to IN_PROGRESS.
+	// job. The timer is started when the job execution status is set to IN_PROGRESS .
 	// If the job execution status is not set to another terminal state before the time
 	// expires, it will be automatically set to TIMED_OUT .
 	TimeoutConfig *types.TimeoutConfig

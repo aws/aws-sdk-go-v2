@@ -63,8 +63,7 @@ func (e *ConcurrentLimitExceededException) ErrorCode() string {
 }
 func (e *ConcurrentLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request uses the same client token as a previous, but non-identical
-// request.
+// The request uses the same client token as a previous, but non-identical request.
 type ConflictException struct {
 	Message *string
 

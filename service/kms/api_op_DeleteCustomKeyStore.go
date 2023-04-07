@@ -23,8 +23,8 @@ import (
 // the KMS keys in the key store for any cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 // . Then, use ScheduleKeyDeletion to delete the KMS keys from the key store.
 // After the required waiting period expires and all KMS keys are deleted from the
-// custom key store, use DisconnectCustomKeyStore to disconnect the key store
-// from KMS. Then, you can delete the custom key store. For keys in an CloudHSM key
+// custom key store, use DisconnectCustomKeyStore to disconnect the key store from
+// KMS. Then, you can delete the custom key store. For keys in an CloudHSM key
 // store, the ScheduleKeyDeletion operation makes a best effort to delete the key
 // material from the associated cluster. However, you might need to manually
 // delete the orphaned key material (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key)
@@ -63,7 +63,7 @@ func (c *Client) DeleteCustomKeyStore(ctx context.Context, params *DeleteCustomK
 type DeleteCustomKeyStoreInput struct {
 
 	// Enter the ID of the custom key store you want to delete. To find the ID of a
-	// custom key store, use the DescribeCustomKeyStores  operation.
+	// custom key store, use the DescribeCustomKeyStores operation.
 	//
 	// This member is required.
 	CustomKeyStoreId *string

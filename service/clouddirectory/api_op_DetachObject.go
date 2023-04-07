@@ -52,7 +52,7 @@ type DetachObjectInput struct {
 
 type DetachObjectOutput struct {
 
-	// The ObjectIdentifier  that was detached from the object.
+	// The ObjectIdentifier that was detached from the object.
 	DetachedObjectIdentifier *string
 
 	// Metadata pertaining to the operation's result.

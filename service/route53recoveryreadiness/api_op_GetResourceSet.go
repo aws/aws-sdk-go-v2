@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays the details about a resource set, including a list of the resources
-// in the set.
+// Displays the details about a resource set, including a list of the resources in
+// the set.
 func (c *Client) GetResourceSet(ctx context.Context, params *GetResourceSetInput, optFns ...func(*Options)) (*GetResourceSetOutput, error) {
 	if params == nil {
 		params = &GetResourceSetInput{}

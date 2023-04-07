@@ -31,8 +31,8 @@ func (c *Client) RegisterConnector(ctx context.Context, params *RegisterConnecto
 
 type RegisterConnectorInput struct {
 
-	// The name of the connector. The name is unique for each ConnectorRegistration
-	// in your Amazon Web Services account.
+	// The name of the connector. The name is unique for each ConnectorRegistration in
+	// your Amazon Web Services account.
 	ConnectorLabel *string
 
 	// The provisioning type of the connector. Currently the only supported value is

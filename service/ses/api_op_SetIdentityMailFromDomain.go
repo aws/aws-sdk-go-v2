@@ -15,8 +15,8 @@ import (
 // (an email address or a domain). To send emails using the specified MAIL FROM
 // domain, you must add an MX record to your MAIL FROM domain's DNS settings. If
 // you want your emails to pass Sender Policy Framework (SPF) checks, you must also
-// add or update an SPF record. For more information, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-set.html)
+// add or update an SPF record. For more information, see the Amazon SES Developer
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-set.html)
 // . You can execute this operation no more than once per second.
 func (c *Client) SetIdentityMailFromDomain(ctx context.Context, params *SetIdentityMailFromDomainInput, optFns ...func(*Options)) (*SetIdentityMailFromDomainOutput, error) {
 	if params == nil {
@@ -46,12 +46,12 @@ type SetIdentityMailFromDomainInput struct {
 	Identity *string
 
 	// The action that you want Amazon SES to take if it cannot successfully read the
-	// required MX record when you send an email. If you choose UseDefaultValue,
+	// required MX record when you send an email. If you choose UseDefaultValue ,
 	// Amazon SES will use amazonses.com (or a subdomain of that) as the MAIL FROM
 	// domain. If you choose RejectMessage , Amazon SES will return a
 	// MailFromDomainNotVerified error and not send the email. The action specified in
 	// BehaviorOnMXFailure is taken when the custom MAIL FROM domain setup is in the
-	// Pending , Failed , and TemporaryFailure  states.
+	// Pending , Failed , and TemporaryFailure states.
 	BehaviorOnMXFailure types.BehaviorOnMXFailure
 
 	// The custom MAIL FROM domain that you want the verified identity to use. The

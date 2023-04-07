@@ -20,9 +20,9 @@ import (
 // Retrieves the specified alarms. You can filter the results by specifying a
 // prefix for the alarm name, the alarm state, or a prefix for any action. To use
 // this operation and return information about composite alarms, you must be signed
-// on with the cloudwatch:DescribeAlarms  permission that is scoped to *. You
-// can't return information about composite alarms if your
-// cloudwatch:DescribeAlarms permission has a narrower scope.
+// on with the cloudwatch:DescribeAlarms permission that is scoped to * . You can't
+// return information about composite alarms if your cloudwatch:DescribeAlarms
+// permission has a narrower scope.
 func (c *Client) DescribeAlarms(ctx context.Context, params *DescribeAlarmsInput, optFns ...func(*Options)) (*DescribeAlarmsOutput, error) {
 	if params == nil {
 		params = &DescribeAlarmsInput{}
@@ -61,15 +61,15 @@ type DescribeAlarmsInput struct {
 	// If you use this parameter and specify the name of a composite alarm, the
 	// operation returns information about the "children" alarms of the alarm you
 	// specify. These are the metric alarms and composite alarms referenced in the
-	// AlarmRule field of the composite alarm that you specify in ChildrenOfAlarmName
-	// . Information about the composite alarm that you name in ChildrenOfAlarmName
-	// is not returned. If you specify ChildrenOfAlarmName, you cannot specify any
-	// other parameters in the request except for MaxRecords  and NextToken. If you
-	// do so, you receive a validation error. Only the Alarm Name , ARN , StateValue
+	// AlarmRule field of the composite alarm that you specify in ChildrenOfAlarmName .
+	// Information about the composite alarm that you name in ChildrenOfAlarmName is
+	// not returned. If you specify ChildrenOfAlarmName , you cannot specify any other
+	// parameters in the request except for MaxRecords and NextToken . If you do so,
+	// you receive a validation error. Only the Alarm Name , ARN , StateValue
 	// (OK/ALARM/INSUFFICIENT_DATA), and StateUpdatedTimestamp information are
 	// returned by this operation when you use this parameter. To get complete
 	// information about these alarms, perform another DescribeAlarms operation and
-	// specify the parent alarm names in the AlarmNames  parameter.
+	// specify the parent alarm names in the AlarmNames parameter.
 	ChildrenOfAlarmName *string
 
 	// The maximum number of alarm descriptions to retrieve.
@@ -82,10 +82,10 @@ type DescribeAlarmsInput struct {
 	// If you use this parameter and specify the name of a metric or composite alarm,
 	// the operation returns information about the "parent" alarms of the alarm you
 	// specify. These are the composite alarms that have AlarmRule parameters that
-	// reference the alarm named in ParentsOfAlarmName. Information about the alarm
-	// that you specify in ParentsOfAlarmName  is not returned. If you specify
-	// ParentsOfAlarmName, you cannot specify any other parameters in the request
-	// except for MaxRecords  and NextToken. If you do so, you receive a validation
+	// reference the alarm named in ParentsOfAlarmName . Information about the alarm
+	// that you specify in ParentsOfAlarmName is not returned. If you specify
+	// ParentsOfAlarmName , you cannot specify any other parameters in the request
+	// except for MaxRecords and NextToken . If you do so, you receive a validation
 	// error. Only the Alarm Name and ARN are returned by this operation when you use
 	// this parameter. To get complete information about these alarms, perform another
 	// DescribeAlarms operation and specify the parent alarm names in the AlarmNames
@@ -189,8 +189,8 @@ type DescribeAlarmsPaginatorOptions struct {
 	// The maximum number of alarm descriptions to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

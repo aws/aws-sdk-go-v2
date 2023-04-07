@@ -12,8 +12,8 @@ import (
 )
 
 // Removes the PublicAccessBlock configuration for an Amazon S3 bucket. To use
-// this operation, you must have the s3:PutBucketPublicAccessBlock permission.
-// For more information about permissions, see Permissions Related to Bucket
+// this operation, you must have the s3:PutBucketPublicAccessBlock permission. For
+// more information about permissions, see Permissions Related to Bucket
 // Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
 // . The following operations are related to DeletePublicAccessBlock :
@@ -38,7 +38,7 @@ func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePubl
 
 type DeletePublicAccessBlockInput struct {
 
-	// The Amazon S3 bucket whose PublicAccessBlock  configuration you want to delete.
+	// The Amazon S3 bucket whose PublicAccessBlock configuration you want to delete.
 	//
 	// This member is required.
 	Bucket *string

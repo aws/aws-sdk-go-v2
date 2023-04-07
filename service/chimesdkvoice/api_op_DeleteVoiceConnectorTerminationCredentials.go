@@ -29,8 +29,8 @@ func (c *Client) DeleteVoiceConnectorTerminationCredentials(ctx context.Context,
 
 type DeleteVoiceConnectorTerminationCredentialsInput struct {
 
-	// The RFC2617 compliant username associated with the SIP credentials, in
-	// US-ASCII format.
+	// The RFC2617 compliant username associated with the SIP credentials, in US-ASCII
+	// format.
 	//
 	// This member is required.
 	Usernames []string

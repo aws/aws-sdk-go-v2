@@ -29,10 +29,9 @@ func (c *Client) DescribeTrafficDistributionGroup(ctx context.Context, params *D
 
 type DescribeTrafficDistributionGroupInput struct {
 
-	// The identifier of the traffic distribution group. This can be the ID or the
-	// ARN if the API is being called in the Region where the traffic distribution
-	// group was created. The ARN must be provided if the call is from the replicated
-	// Region.
+	// The identifier of the traffic distribution group. This can be the ID or the ARN
+	// if the API is being called in the Region where the traffic distribution group
+	// was created. The ARN must be provided if the call is from the replicated Region.
 	//
 	// This member is required.
 	TrafficDistributionGroupId *string

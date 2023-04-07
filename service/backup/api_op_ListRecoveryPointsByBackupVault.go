@@ -13,8 +13,7 @@ import (
 	"time"
 )
 
-// Returns detailed information about the recovery points stored in a backup
-// vault.
+// Returns detailed information about the recovery points stored in a backup vault.
 func (c *Client) ListRecoveryPointsByBackupVault(ctx context.Context, params *ListRecoveryPointsByBackupVaultInput, optFns ...func(*Options)) (*ListRecoveryPointsByBackupVaultOutput, error) {
 	if params == nil {
 		params = &ListRecoveryPointsByBackupVaultInput{}
@@ -65,7 +64,7 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults  number of items, NextToken allows you to
+	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -76,7 +75,7 @@ type ListRecoveryPointsByBackupVaultInput struct {
 type ListRecoveryPointsByBackupVaultOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults  number of items, NextToken allows you to
+	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -168,8 +167,8 @@ type ListRecoveryPointsByBackupVaultPaginatorOptions struct {
 	// The maximum number of items to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

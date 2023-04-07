@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about an array of TableRestoreStatus  objects.
+// Returns information about an array of TableRestoreStatus objects.
 func (c *Client) ListTableRestoreStatus(ctx context.Context, params *ListTableRestoreStatusInput, optFns ...func(*Options)) (*ListTableRestoreStatusOutput, error) {
 	if params == nil {
 		params = &ListTableRestoreStatusInput{}
@@ -34,17 +34,17 @@ type ListTableRestoreStatusInput struct {
 	// You can use nextToken to display the next page of results.
 	MaxResults *int32
 
-	// The namespace from which to list all of the statuses of
-	// RestoreTableFromSnapshot operations .
+	// The namespace from which to list all of the statuses of RestoreTableFromSnapshot
+	// operations .
 	NamespaceName *string
 
 	// If your initial ListTableRestoreStatus operation returns a nextToken, you can
-	// include the returned nextToken  in following ListTableRestoreStatus
-	// operations. This will return results on the next page.
+	// include the returned nextToken in following ListTableRestoreStatus operations.
+	// This will return results on the next page.
 	NextToken *string
 
-	// The workgroup from which to list all of the statuses of
-	// RestoreTableFromSnapshot operations.
+	// The workgroup from which to list all of the statuses of RestoreTableFromSnapshot
+	// operations.
 	WorkgroupName *string
 
 	noSmithyDocumentSerde
@@ -52,12 +52,12 @@ type ListTableRestoreStatusInput struct {
 
 type ListTableRestoreStatusOutput struct {
 
-	// If your initial ListTableRestoreStatus  operation returns a nextToken, you can
-	// include the returned nextToken  in following ListTableRestoreStatus
-	// operations. This will returns results on the next page.
+	// If your initial ListTableRestoreStatus operation returns a nextToken , you can
+	// include the returned nextToken in following ListTableRestoreStatus operations.
+	// This will returns results on the next page.
 	NextToken *string
 
-	// The array of returned TableRestoreStatus  objects.
+	// The array of returned TableRestoreStatus objects.
 	TableRestoreStatuses []types.TableRestoreStatus
 
 	// Metadata pertaining to the operation's result.
@@ -141,8 +141,8 @@ type ListTableRestoreStatusPaginatorOptions struct {
 	// You can use nextToken to display the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -155,8 +155,7 @@ type ListTableRestoreStatusPaginator struct {
 	firstPage bool
 }
 
-// NewListTableRestoreStatusPaginator returns a new
-// ListTableRestoreStatusPaginator
+// NewListTableRestoreStatusPaginator returns a new ListTableRestoreStatusPaginator
 func NewListTableRestoreStatusPaginator(client ListTableRestoreStatusAPIClient, params *ListTableRestoreStatusInput, optFns ...func(*ListTableRestoreStatusPaginatorOptions)) *ListTableRestoreStatusPaginator {
 	if params == nil {
 		params = &ListTableRestoreStatusInput{}

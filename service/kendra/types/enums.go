@@ -146,9 +146,9 @@ const (
 	ConfluenceBlogFieldNameVersion     ConfluenceBlogFieldName = "VERSION"
 )
 
-// Values returns all known values for ConfluenceBlogFieldName. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConfluenceBlogFieldName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ConfluenceBlogFieldName) Values() []ConfluenceBlogFieldName {
 	return []ConfluenceBlogFieldName{
 		"AUTHOR",
@@ -181,9 +181,9 @@ const (
 	ConfluencePageFieldNameVersion       ConfluencePageFieldName = "VERSION"
 )
 
-// Values returns all known values for ConfluencePageFieldName. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConfluencePageFieldName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ConfluencePageFieldName) Values() []ConfluencePageFieldName {
 	return []ConfluencePageFieldName{
 		"AUTHOR",
@@ -259,9 +259,9 @@ const (
 	ContentTypeMd        ContentType = "MD"
 )
 
-// Values returns all known values for ContentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ContentType) Values() []ContentType {
 	return []ContentType{
 		"PDF",
@@ -338,9 +338,9 @@ const (
 	DataSourceSyncJobStatusSyncingIndexing DataSourceSyncJobStatus = "SYNCING_INDEXING"
 )
 
-// Values returns all known values for DataSourceSyncJobStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataSourceSyncJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceSyncJobStatus) Values() []DataSourceSyncJobStatus {
 	return []DataSourceSyncJobStatus{
 		"FAILED",
@@ -579,9 +579,9 @@ const (
 	FeaturedResultsSetStatusInactive FeaturedResultsSetStatus = "INACTIVE"
 )
 
-// Values returns all known values for FeaturedResultsSetStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FeaturedResultsSetStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FeaturedResultsSetStatus) Values() []FeaturedResultsSetStatus {
 	return []FeaturedResultsSetStatus{
 		"ACTIVE",
@@ -653,9 +653,9 @@ const (
 	IndexStatusSystemUpdating IndexStatus = "SYSTEM_UPDATING"
 )
 
-// Values returns all known values for IndexStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IndexStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (IndexStatus) Values() []IndexStatus {
 	return []IndexStatus{
 		"CREATING",
@@ -679,9 +679,9 @@ const (
 	IntervalTwoMonthsAgo Interval = "TWO_MONTHS_AGO"
 )
 
-// Values returns all known values for Interval. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Interval. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Interval) Values() []Interval {
 	return []Interval{
 		"THIS_MONTH",
@@ -721,9 +721,9 @@ const (
 	KeyLocationSecretManager KeyLocation = "SECRET_MANAGER"
 )
 
-// Values returns all known values for KeyLocation. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for KeyLocation. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (KeyLocation) Values() []KeyLocation {
 	return []KeyLocation{
 		"URL",
@@ -765,8 +765,8 @@ const (
 	ModeLearnOnly Mode = "LEARN_ONLY"
 )
 
-// Values returns all known values for Mode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Mode. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Mode) Values() []Mode {
 	return []Mode{
@@ -1192,9 +1192,9 @@ const (
 	SlackEntityDirectMessage  SlackEntity = "DIRECT_MESSAGE"
 )
 
-// Values returns all known values for SlackEntity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SlackEntity. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SlackEntity) Values() []SlackEntity {
 	return []SlackEntity{
 		"PUBLIC_CHANNEL",
@@ -1256,8 +1256,8 @@ const (
 	TypeOnPremise Type = "ON_PREMISE"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{
@@ -1292,9 +1292,9 @@ const (
 	UserGroupResolutionModeNone   UserGroupResolutionMode = "NONE"
 )
 
-// Values returns all known values for UserGroupResolutionMode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserGroupResolutionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UserGroupResolutionMode) Values() []UserGroupResolutionMode {
 	return []UserGroupResolutionMode{
 		"AWS_SSO",
@@ -1309,9 +1309,9 @@ const (
 	WarningCodeQueryLanguageInvalidSyntax WarningCode = "QUERY_LANGUAGE_INVALID_SYNTAX"
 )
 
-// Values returns all known values for WarningCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WarningCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (WarningCode) Values() []WarningCode {
 	return []WarningCode{
 		"QUERY_LANGUAGE_INVALID_SYNTAX",

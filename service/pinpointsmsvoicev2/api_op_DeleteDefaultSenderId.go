@@ -30,9 +30,9 @@ func (c *Client) DeleteDefaultSenderId(ctx context.Context, params *DeleteDefaul
 
 type DeleteDefaultSenderIdInput struct {
 
-	// The name of the configuration set or the configuration set Amazon Resource
-	// Name (ARN) to delete the default sender ID from. The ConfigurationSetName and
-	// ConfigurationSetArn can be found using the DescribeConfigurationSets  action.
+	// The name of the configuration set or the configuration set Amazon Resource Name
+	// (ARN) to delete the default sender ID from. The ConfigurationSetName and
+	// ConfigurationSetArn can be found using the DescribeConfigurationSets action.
 	//
 	// This member is required.
 	ConfigurationSetName *string

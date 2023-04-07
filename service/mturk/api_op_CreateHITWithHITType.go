@@ -17,7 +17,7 @@ import (
 // recommended best practice for Requesters who are creating large numbers of HITs.
 // CreateHITWithHITType also supports several ways to provide question data: by
 // providing a value for the Question parameter that fully specifies the contents
-// of the HIT, or by providing a HitLayoutId  and associated HitLayoutParameters.
+// of the HIT, or by providing a HitLayoutId and associated HitLayoutParameters .
 // If a HIT is created with 10 or more maximum assignments, there is an additional
 // fee. For more information, see Amazon Mechanical Turk Pricing (https://requester.mturk.com/pricing)
 // .

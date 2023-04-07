@@ -52,7 +52,7 @@ type DeleteAlternateContactInput struct {
 	// features enabled (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
 	// , and the organization must have trusted access (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html)
 	// enabled for the Account Management service, and optionally a delegated admin (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html)
-	// account assigned. The management account can't specify its own AccountId; it
+	// account assigned. The management account can't specify its own AccountId ; it
 	// must call the operation in standalone context by not including the AccountId
 	// parameter. To call this operation on an account that is not a member of an
 	// organization, then don't specify this parameter, and call the operation using an

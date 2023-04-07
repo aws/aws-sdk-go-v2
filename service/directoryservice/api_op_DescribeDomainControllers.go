@@ -52,7 +52,7 @@ type DescribeDomainControllersInput struct {
 
 type DescribeDomainControllersOutput struct {
 
-	// List of the DomainController  objects that were retrieved.
+	// List of the DomainController objects that were retrieved.
 	DomainControllers []types.DomainController
 
 	// If not null, more results are available. Pass this value for the NextToken
@@ -143,8 +143,8 @@ type DescribeDomainControllersPaginatorOptions struct {
 	// The maximum number of items to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

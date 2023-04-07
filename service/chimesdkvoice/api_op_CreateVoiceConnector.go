@@ -42,7 +42,7 @@ type CreateVoiceConnectorInput struct {
 	RequireEncryption *bool
 
 	// The AWS Region in which the Amazon Chime SDK Voice Connector is created.
-	// Default value: us-east-1  .
+	// Default value: us-east-1 .
 	AwsRegion types.VoiceConnectorAwsRegion
 
 	noSmithyDocumentSerde

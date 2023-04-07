@@ -59,10 +59,9 @@ type GetIntegrationResponseInput struct {
 type GetIntegrationResponseOutput struct {
 
 	// Specifies how to handle response payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY  and CONVERT_TO_TEXT, with the following
-	// behaviors: If this property is not defined, the response payload will be passed
-	// through from the integration response to the method response without
-	// modification.
+	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT , with the following behaviors:
+	// If this property is not defined, the response payload will be passed through
+	// from the integration response to the method response without modification.
 	ContentHandling types.ContentHandlingStrategy
 
 	// A key-value map specifying response parameters that are passed to the method
@@ -74,8 +73,8 @@ type GetIntegrationResponseOutput struct {
 	// The mapped non-static value must match the pattern of
 	// integration.response.header.{name} or
 	// integration.response.body.{JSON-expression} , where name is a valid and unique
-	// response header name and JSON-expression is a valid JSON expression without
-	// the $  prefix.
+	// response header name and JSON-expression is a valid JSON expression without the
+	// $ prefix.
 	ResponseParameters map[string]string
 
 	// Specifies the templates used to transform the integration response body.
@@ -87,7 +86,7 @@ type GetIntegrationResponseOutput struct {
 	// response based on the response from the back end. For example, if the success
 	// response returns nothing and the error response returns some string, you could
 	// use the .+ regex to match error response. However, make sure that the error
-	// response does not contain any newline ( \n) character in such cases. If the
+	// response does not contain any newline ( \n ) character in such cases. If the
 	// back end is an AWS Lambda function, the AWS Lambda function error header is
 	// matched. For all other HTTP and AWS back ends, the HTTP status code is matched.
 	SelectionPattern *string

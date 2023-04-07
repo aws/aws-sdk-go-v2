@@ -40,12 +40,12 @@ type StartSimulationJobBatchInput struct {
 	// The batch policy.
 	BatchPolicy *types.BatchPolicy
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
-	// A map that contains tag keys and tag values that are attached to the
-	// deployment job batch.
+	// A map that contains tag keys and tag values that are attached to the deployment
+	// job batch.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -59,8 +59,8 @@ type StartSimulationJobBatchOutput struct {
 	// The batch policy.
 	BatchPolicy *types.BatchPolicy
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the simulation job batch was
@@ -70,8 +70,8 @@ type StartSimulationJobBatchOutput struct {
 	// A list of created simulation job request summaries.
 	CreatedRequests []types.SimulationJobSummary
 
-	// A list of failed simulation job requests. The request failed to be created
-	// into a simulation job. Failed requests do not have a simulation job ID.
+	// A list of failed simulation job requests. The request failed to be created into
+	// a simulation job. Failed requests do not have a simulation job ID.
 	FailedRequests []types.FailedCreateSimulationJobRequest
 
 	// The failure code if the simulation job batch failed.
@@ -92,18 +92,18 @@ type StartSimulationJobBatchOutput struct {
 	// batch job completed. A batch is complete when (1) there are no pending
 	// simulation job requests in the batch and none of the failed simulation job
 	// requests are due to InternalServiceError and (2) when all created simulation
-	// jobs have reached a terminal state (for example, Completed  or Failed).
-	// Canceled The simulation batch job was cancelled. Canceling The simulation batch
-	// job is being cancelled. Completing The simulation batch job is completing.
-	// TimingOut The simulation job batch is timing out. If a batch timing out, and
-	// there are pending requests that were failing due to an internal failure (like
-	// InternalServiceError ), the batch status will be Failed. If there are no such
-	// failing request, the batch status will be TimedOut. TimedOut The simulation
+	// jobs have reached a terminal state (for example, Completed or Failed ). Canceled
+	// The simulation batch job was cancelled. Canceling The simulation batch job is
+	// being cancelled. Completing The simulation batch job is completing. TimingOut
+	// The simulation job batch is timing out. If a batch timing out, and there are
+	// pending requests that were failing due to an internal failure (like
+	// InternalServiceError ), the batch status will be Failed . If there are no such
+	// failing request, the batch status will be TimedOut . TimedOut The simulation
 	// batch job timed out.
 	Status types.SimulationJobBatchStatus
 
-	// A map that contains tag keys and tag values that are attached to the
-	// deployment job batch.
+	// A map that contains tag keys and tag values that are attached to the deployment
+	// job batch.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

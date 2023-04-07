@@ -46,13 +46,13 @@ type CreateMediaCapturePipelineInput struct {
 	// This member is required.
 	SourceArn *string
 
-	// Source type from which the media artifacts are captured. A Chime SDK Meeting
-	// is the only supported source.
+	// Source type from which the media artifacts are captured. A Chime SDK Meeting is
+	// the only supported source.
 	//
 	// This member is required.
 	SourceType types.MediaPipelineSourceType
 
-	// The configuration for a specified media pipeline. SourceType  must be
+	// The configuration for a specified media pipeline. SourceType must be
 	// ChimeSdkMeeting .
 	ChimeSdkMeetingConfiguration *types.ChimeSdkMeetingConfiguration
 

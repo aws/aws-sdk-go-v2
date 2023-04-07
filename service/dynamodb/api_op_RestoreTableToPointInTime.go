@@ -15,7 +15,7 @@ import (
 )
 
 // Restores the specified table to the specified point in time within
-// EarliestRestorableDateTime and LatestRestorableDateTime. You can restore your
+// EarliestRestorableDateTime and LatestRestorableDateTime . You can restore your
 // table to any point in time during the last 35 days. Any number of users can
 // execute up to 4 concurrent restores (any type of restore) in a given account.
 // When you restore using point in time recovery, DynamoDB restores your table data
@@ -25,7 +25,8 @@ import (
 //   - Global secondary indexes (GSIs)
 //   - Local secondary indexes (LSIs)
 //   - Provisioned read and write capacity
-//   - Encryption settings All these settings come from the current settings of the source table at the time of restore.
+//   - Encryption settings All these settings come from the current settings of
+//     the source table at the time of restore.
 //
 // You must manually set up the following on the restored table:
 //   - Auto scaling policies
@@ -79,8 +80,8 @@ type RestoreTableToPointInTimeInput struct {
 	// The new server-side encryption settings for the restored table.
 	SSESpecificationOverride *types.SSESpecification
 
-	// The DynamoDB table that will be restored. This value is an Amazon Resource
-	// Name (ARN).
+	// The DynamoDB table that will be restored. This value is an Amazon Resource Name
+	// (ARN).
 	SourceTableArn *string
 
 	// Name of the source table that is being restored.

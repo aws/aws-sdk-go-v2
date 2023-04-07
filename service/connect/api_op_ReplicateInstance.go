@@ -39,7 +39,7 @@ type ReplicateInstanceInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The alias for the replicated instance. The ReplicaAlias  must be unique.
+	// The alias for the replicated instance. The ReplicaAlias must be unique.
 	//
 	// This member is required.
 	ReplicaAlias *string

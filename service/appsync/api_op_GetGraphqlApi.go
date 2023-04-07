@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a GraphqlApi  object.
+// Retrieves a GraphqlApi object.
 func (c *Client) GetGraphqlApi(ctx context.Context, params *GetGraphqlApiInput, optFns ...func(*Options)) (*GetGraphqlApiOutput, error) {
 	if params == nil {
 		params = &GetGraphqlApiInput{}
@@ -39,7 +39,7 @@ type GetGraphqlApiInput struct {
 
 type GetGraphqlApiOutput struct {
 
-	// The GraphqlApi  object.
+	// The GraphqlApi object.
 	GraphqlApi *types.GraphqlApi
 
 	// Metadata pertaining to the operation's result.

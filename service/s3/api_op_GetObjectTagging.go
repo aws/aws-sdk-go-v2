@@ -42,9 +42,9 @@ func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingI
 
 type GetObjectTaggingInput struct {
 
-	// The bucket name containing the object for which to get the tagging
-	// information. When using this action with an access point, you must direct
-	// requests to the access point hostname. The access point hostname takes the form
+	// The bucket name containing the object for which to get the tagging information.
+	// When using this action with an access point, you must direct requests to the
+	// access point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the Amazon Web Services SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
@@ -52,7 +52,7 @@ type GetObjectTaggingInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -184,9 +184,9 @@ func newServiceMetadataMiddleware_opGetObjectTagging(region string) *awsmiddlewa
 	}
 }
 
-// getGetObjectTaggingBucketMember returns a pointer to string denoting a
-// provided bucket member valueand a boolean indicating if the input has a modeled
-// bucket name,
+// getGetObjectTaggingBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
 func getGetObjectTaggingBucketMember(input interface{}) (*string, bool) {
 	in := input.(*GetObjectTaggingInput)
 	if in.Bucket == nil {

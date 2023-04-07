@@ -21,7 +21,7 @@ import (
 // Advanced automatic application layer DDoS mitigation (https://docs.aws.amazon.com/waf/latest/developerguide/ddos-advanced-automatic-app-layer-response.html)
 // . Don't use this action to make changes to automatic mitigation settings when
 // it's already enabled for a resource. Instead, use
-// UpdateApplicationLayerAutomaticResponse. To use this feature, you must
+// UpdateApplicationLayerAutomaticResponse . To use this feature, you must
 // associate a web ACL with the protected resource. The web ACL must be created
 // using the latest version of WAF (v2). You can associate the web ACL through the
 // Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/ (https://console.aws.amazon.com/wafv2/shieldv2#/)

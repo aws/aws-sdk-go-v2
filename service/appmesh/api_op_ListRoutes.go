@@ -41,12 +41,12 @@ type ListRoutesInput struct {
 	VirtualRouterName *string
 
 	// The maximum number of results returned by ListRoutes in paginated output. When
-	// you use this parameter, ListRoutes  returns only limit results in a single
-	// page along with a nextToken response element. You can see the remaining
-	// results of the initial request by sending another ListRoutes request with the
-	// returned nextToken value. This value can be between 1 and 100. If you don't
-	// use this parameter, ListRoutes  returns up to 100 results and a nextToken
-	// value if applicable.
+	// you use this parameter, ListRoutes returns only limit results in a single page
+	// along with a nextToken response element. You can see the remaining results of
+	// the initial request by sending another ListRoutes request with the returned
+	// nextToken value. This value can be between 1 and 100. If you don't use this
+	// parameter, ListRoutes returns up to 100 results and a nextToken value if
+	// applicable.
 	Limit *int32
 
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the
@@ -56,10 +56,10 @@ type ListRoutesInput struct {
 	// .
 	MeshOwner *string
 
-	// The nextToken  value returned from a previous paginated ListRoutes request
-	// where limit was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
+	// The nextToken value returned from a previous paginated ListRoutes request where
+	// limit was used and the results exceeded the value of that parameter. Pagination
+	// continues from the end of the previous results that returned the nextToken
+	// value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -72,10 +72,10 @@ type ListRoutesOutput struct {
 	// This member is required.
 	Routes []types.RouteRef
 
-	// The nextToken  value to include in a future ListRoutes request. When the
-	// results of a ListRoutes  request exceed limit, you can use this value to
-	// retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// The nextToken value to include in a future ListRoutes request. When the results
+	// of a ListRoutes request exceed limit , you can use this value to retrieve the
+	// next page of results. This value is null when there are no more results to
+	// return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -157,16 +157,16 @@ var _ ListRoutesAPIClient = (*Client)(nil)
 // ListRoutesPaginatorOptions is the paginator options for ListRoutes
 type ListRoutesPaginatorOptions struct {
 	// The maximum number of results returned by ListRoutes in paginated output. When
-	// you use this parameter, ListRoutes  returns only limit results in a single
-	// page along with a nextToken response element. You can see the remaining
-	// results of the initial request by sending another ListRoutes request with the
-	// returned nextToken value. This value can be between 1 and 100. If you don't
-	// use this parameter, ListRoutes  returns up to 100 results and a nextToken
-	// value if applicable.
+	// you use this parameter, ListRoutes returns only limit results in a single page
+	// along with a nextToken response element. You can see the remaining results of
+	// the initial request by sending another ListRoutes request with the returned
+	// nextToken value. This value can be between 1 and 100. If you don't use this
+	// parameter, ListRoutes returns up to 100 results and a nextToken value if
+	// applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -86,8 +86,8 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// omitted.
 	IncludeMemberAccounts bool
 
-	// An object to specify the preferences for the Auto Scaling group
-	// recommendations to export.
+	// An object to specify the preferences for the Auto Scaling group recommendations
+	// to export.
 	RecommendationPreferences *types.RecommendationPreferences
 
 	noSmithyDocumentSerde
@@ -96,7 +96,7 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 type ExportAutoScalingGroupRecommendationsOutput struct {
 
 	// The identification number of the export job. Use the
-	// DescribeRecommendationExportJobsaction, and specify the job ID to view the
+	// DescribeRecommendationExportJobs action, and specify the job ID to view the
 	// status of an export job.
 	JobId *string
 

@@ -49,7 +49,7 @@ type ListHubsInput struct {
 	NameContains *string
 
 	// If the response to a previous ListHubs request was truncated, the response
-	// includes a NextToken. To retrieve the next set of hubs, use the token in the
+	// includes a NextToken . To retrieve the next set of hubs, use the token in the
 	// next request.
 	NextToken *string
 

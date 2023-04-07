@@ -11,14 +11,14 @@ import (
 )
 
 // Deletes a delivery stream and its data. To check the state of a delivery
-// stream, use DescribeDeliveryStream. You can delete a delivery stream only if
-// it is in one of the following states: ACTIVE , DELETING , CREATING_FAILED , or
+// stream, use DescribeDeliveryStream . You can delete a delivery stream only if it
+// is in one of the following states: ACTIVE , DELETING , CREATING_FAILED , or
 // DELETING_FAILED . You can't delete a delivery stream that is in the CREATING
 // state. While the deletion request is in process, the delivery stream is in the
-// DELETING state. While the delivery stream is in the DELETING state, the
-// service might continue to accept records, but it doesn't make any guarantees
-// with respect to delivering the data. Therefore, as a best practice, first stop
-// any applications that are sending records before you delete a delivery stream.
+// DELETING state. While the delivery stream is in the DELETING state, the service
+// might continue to accept records, but it doesn't make any guarantees with
+// respect to delivering the data. Therefore, as a best practice, first stop any
+// applications that are sending records before you delete a delivery stream.
 func (c *Client) DeleteDeliveryStream(ctx context.Context, params *DeleteDeliveryStreamInput, optFns ...func(*Options)) (*DeleteDeliveryStreamOutput, error) {
 	if params == nil {
 		params = &DeleteDeliveryStreamInput{}
@@ -41,11 +41,11 @@ type DeleteDeliveryStreamInput struct {
 	// This member is required.
 	DeliveryStreamName *string
 
-	// Set this to true if you want to delete the delivery stream even if Kinesis
-	// Data Firehose is unable to retire the grant for the CMK. Kinesis Data Firehose
-	// might be unable to retire the grant due to a customer error, such as when the
-	// CMK or the grant are in an invalid state. If you force deletion, you can then
-	// use the RevokeGrant (https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html)
+	// Set this to true if you want to delete the delivery stream even if Kinesis Data
+	// Firehose is unable to retire the grant for the CMK. Kinesis Data Firehose might
+	// be unable to retire the grant due to a customer error, such as when the CMK or
+	// the grant are in an invalid state. If you force deletion, you can then use the
+	// RevokeGrant (https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html)
 	// operation to revoke the grant you gave to Kinesis Data Firehose. If a failure to
 	// retire the grant happens due to an Amazon Web Services KMS issue, Kinesis Data
 	// Firehose keeps retrying the delete operation. The default value is false.

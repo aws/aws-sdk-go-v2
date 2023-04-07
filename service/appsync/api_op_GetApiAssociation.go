@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves an ApiAssociation  object.
+// Retrieves an ApiAssociation object.
 func (c *Client) GetApiAssociation(ctx context.Context, params *GetApiAssociationInput, optFns ...func(*Options)) (*GetApiAssociationOutput, error) {
 	if params == nil {
 		params = &GetApiAssociationInput{}
@@ -39,7 +39,7 @@ type GetApiAssociationInput struct {
 
 type GetApiAssociationOutput struct {
 
-	// The ApiAssociation  object.
+	// The ApiAssociation object.
 	ApiAssociation *types.ApiAssociation
 
 	// Metadata pertaining to the operation's result.

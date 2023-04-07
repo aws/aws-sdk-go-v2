@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a callback for asynchronous custom steps. The ExecutionId , WorkflowId,
+// Sends a callback for asynchronous custom steps. The ExecutionId , WorkflowId ,
 // and Token are passed to the target resource during execution of a custom step
 // of a workflow. You must include those with their callback as well as providing a
 // status.
@@ -42,8 +42,8 @@ type SendWorkflowStepStateInput struct {
 	// This member is required.
 	Status types.CustomStepStatus
 
-	// Used to distinguish between multiple callbacks for multiple Lambda steps
-	// within the same execution.
+	// Used to distinguish between multiple callbacks for multiple Lambda steps within
+	// the same execution.
 	//
 	// This member is required.
 	Token *string

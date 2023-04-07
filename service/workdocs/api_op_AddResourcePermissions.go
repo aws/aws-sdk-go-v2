@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a set of permissions for the specified folder or document. The
-// resource permissions are overwritten if the principals already have different
+// Creates a set of permissions for the specified folder or document. The resource
+// permissions are overwritten if the principals already have different
 // permissions.
 func (c *Client) AddResourcePermissions(ctx context.Context, params *AddResourcePermissionsInput, optFns ...func(*Options)) (*AddResourcePermissionsOutput, error) {
 	if params == nil {

@@ -55,8 +55,8 @@ type CreateMembersInput struct {
 
 type CreateMembersOutput struct {
 
-	// A list of objects that include the accountIds of the unprocessed accounts and
-	// a result string that explains why each was unprocessed.
+	// A list of objects that include the accountIds of the unprocessed accounts and a
+	// result string that explains why each was unprocessed.
 	//
 	// This member is required.
 	UnprocessedAccounts []types.UnprocessedAccount

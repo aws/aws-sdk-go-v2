@@ -57,9 +57,9 @@ type UpdateMonitorInput struct {
 	// Resource Names (ARNs).
 	ResourcesToRemove []string
 
-	// The status for a monitor. The accepted values for Status  with the
-	// UpdateMonitor API call are the following: ACTIVE  and INACTIVE. The following
-	// values are not accepted: PENDING , and ERROR .
+	// The status for a monitor. The accepted values for Status with the UpdateMonitor
+	// API call are the following: ACTIVE and INACTIVE . The following values are not
+	// accepted: PENDING , and ERROR .
 	Status types.MonitorConfigState
 
 	noSmithyDocumentSerde

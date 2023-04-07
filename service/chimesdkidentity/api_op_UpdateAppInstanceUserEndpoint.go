@@ -41,7 +41,7 @@ type UpdateAppInstanceUserEndpointInput struct {
 	EndpointId *string
 
 	// Boolean that controls whether the AppInstanceUserEndpoint is opted in to
-	// receive messages. ALL  indicates the endpoint will receive all messages. NONE
+	// receive messages. ALL indicates the endpoint will receive all messages. NONE
 	// indicates the endpoint will receive no messages.
 	AllowMessages types.AllowMessages
 

@@ -14,9 +14,13 @@ import (
 // Updates a response headers policy. When you update a response headers policy,
 // the entire policy is replaced. You cannot update some policy fields independent
 // of others. To update a response headers policy configuration:
-//   - Use GetResponseHeadersPolicyConfig to get the current policy's configuration.
-//   - Modify the fields in the response headers policy configuration that you want to update.
-//   - Call UpdateResponseHeadersPolicy , providing the entire response headers policy configuration, including the fields that you modified and those that you didn't.
+//   - Use GetResponseHeadersPolicyConfig to get the current policy's
+//     configuration.
+//   - Modify the fields in the response headers policy configuration that you
+//     want to update.
+//   - Call UpdateResponseHeadersPolicy , providing the entire response headers
+//     policy configuration, including the fields that you modified and those that you
+//     didn't.
 func (c *Client) UpdateResponseHeadersPolicy(ctx context.Context, params *UpdateResponseHeadersPolicyInput, optFns ...func(*Options)) (*UpdateResponseHeadersPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateResponseHeadersPolicyInput{}
@@ -45,7 +49,7 @@ type UpdateResponseHeadersPolicyInput struct {
 	ResponseHeadersPolicyConfig *types.ResponseHeadersPolicyConfig
 
 	// The version of the response headers policy that you are updating. The version
-	// is returned in the cache policy's ETag  field in the response to
+	// is returned in the cache policy's ETag field in the response to
 	// GetResponseHeadersPolicyConfig .
 	IfMatch *string
 

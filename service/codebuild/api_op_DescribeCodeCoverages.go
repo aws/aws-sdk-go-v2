@@ -44,7 +44,7 @@ type DescribeCodeCoveragesInput struct {
 	// The minimum line coverage percentage to report.
 	MinLineCoveragePercentage *float64
 
-	// The nextToken  value returned from a previous call to DescribeCodeCoverages.
+	// The nextToken value returned from a previous call to DescribeCodeCoverages .
 	// This specifies the next item to return. To return the beginning of the list,
 	// exclude this parameter.
 	NextToken *string
@@ -62,11 +62,11 @@ type DescribeCodeCoveragesInput struct {
 
 type DescribeCodeCoveragesOutput struct {
 
-	// An array of CodeCoverage  objects that contain the results.
+	// An array of CodeCoverage objects that contain the results.
 	CodeCoverages []types.CodeCoverage
 
 	// If there are more items to return, this contains a token that is passed to a
-	// subsequent call to DescribeCodeCoverages  to retrieve the next set of items.
+	// subsequent call to DescribeCodeCoverages to retrieve the next set of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -152,8 +152,8 @@ type DescribeCodeCoveragesPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

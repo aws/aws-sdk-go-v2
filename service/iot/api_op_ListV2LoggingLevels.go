@@ -38,8 +38,7 @@ type ListV2LoggingLevelsInput struct {
 	// response; otherwise null to receive the first set of results.
 	NextToken *string
 
-	// The type of resource for which you are configuring logging. Must be THING_Group
-	// .
+	// The type of resource for which you are configuring logging. Must be THING_Group .
 	TargetType types.LogTargetType
 
 	noSmithyDocumentSerde
@@ -134,8 +133,8 @@ type ListV2LoggingLevelsPaginatorOptions struct {
 	// The maximum number of results to return at one time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

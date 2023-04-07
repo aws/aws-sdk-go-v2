@@ -47,9 +47,13 @@ type CreateWebACLMigrationStackInput struct {
 
 	// The name of the Amazon S3 bucket to store the CloudFormation template in. The
 	// S3 bucket must be configured as follows for the migration:
-	//     - The bucket name must start with aws-waf-migration- . For example, aws-waf-migration-my-web-acl .
-	//     - The bucket must be in the Region where you are deploying the template. For example, for a web ACL in us-west-2, you must use an Amazon S3 bucket in us-west-2 and you must deploy the template stack to us-west-2.
-	//     - The bucket policies must permit the migration process to write data. For listings of the bucket policies, see the Examples section.
+	//   - The bucket name must start with aws-waf-migration- . For example,
+	//   aws-waf-migration-my-web-acl .
+	//   - The bucket must be in the Region where you are deploying the template. For
+	//   example, for a web ACL in us-west-2, you must use an Amazon S3 bucket in
+	//   us-west-2 and you must deploy the template stack to us-west-2.
+	//   - The bucket policies must permit the migration process to write data. For
+	//   listings of the bucket policies, see the Examples section.
 	//
 	// This member is required.
 	S3BucketName *string

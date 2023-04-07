@@ -41,8 +41,7 @@ type UpdateFailbackReplicationConfigurationInput struct {
 	// The name of the Failback Replication Configuration.
 	Name *string
 
-	// Whether to use Private IP for the failback replication of the Recovery
-	// Instance.
+	// Whether to use Private IP for the failback replication of the Recovery Instance.
 	UsePrivateIP *bool
 
 	noSmithyDocumentSerde

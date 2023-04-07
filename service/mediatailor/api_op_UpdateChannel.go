@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Updates a channel. For information about MediaTailor channels, see Working
-// with channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
+// Updates a channel. For information about MediaTailor channels, see Working with
+// channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
 // in the MediaTailor User Guide.
 func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, optFns ...func(*Options)) (*UpdateChannelOutput, error) {
 	if params == nil {
@@ -43,9 +43,9 @@ type UpdateChannelInput struct {
 	Outputs []types.RequestOutputItem
 
 	// The slate used to fill gaps between programs in the schedule. You must
-	// configure filler slate if your channel uses the LINEAR PlaybackMode.
-	// MediaTailor doesn't support filler slate for channels using the LOOP
-	// PlaybackMode .
+	// configure filler slate if your channel uses the LINEAR PlaybackMode .
+	// MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode
+	// .
 	FillerSlate *types.SlateSource
 
 	noSmithyDocumentSerde
@@ -66,9 +66,9 @@ type UpdateChannelOutput struct {
 	CreationTime *time.Time
 
 	// The slate used to fill gaps between programs in the schedule. You must
-	// configure filler slate if your channel uses the LINEAR PlaybackMode.
-	// MediaTailor doesn't support filler slate for channels using the LOOP
-	// PlaybackMode .
+	// configure filler slate if your channel uses the LINEAR PlaybackMode .
+	// MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode
+	// .
 	FillerSlate *types.SlateSource
 
 	// The timestamp that indicates when the channel was last modified.
@@ -77,10 +77,10 @@ type UpdateChannelOutput struct {
 	// The channel's output properties.
 	Outputs []types.ResponseOutputItem
 
-	// The type of playback mode for this channel. LINEAR - Programs play
-	// back-to-back only once. LOOP - Programs play back-to-back in an endless loop.
-	// When the last program in the schedule plays, playback loops back to the first
-	// program in the schedule.
+	// The type of playback mode for this channel. LINEAR - Programs play back-to-back
+	// only once. LOOP - Programs play back-to-back in an endless loop. When the last
+	// program in the schedule plays, playback loops back to the first program in the
+	// schedule.
 	PlaybackMode *string
 
 	// The tags to assign to the channel. Tags are key-value pairs that you can

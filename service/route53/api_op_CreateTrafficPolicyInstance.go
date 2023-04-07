@@ -16,7 +16,7 @@ import (
 // associates the resource record sets with a specified domain name (such as
 // example.com) or subdomain name (such as www.example.com). Amazon Route 53
 // responds to DNS queries for the domain or subdomain name by using the resource
-// record sets that CreateTrafficPolicyInstance  created.
+// record sets that CreateTrafficPolicyInstance created.
 func (c *Client) CreateTrafficPolicyInstance(ctx context.Context, params *CreateTrafficPolicyInstanceInput, optFns ...func(*Options)) (*CreateTrafficPolicyInstanceOutput, error) {
 	if params == nil {
 		params = &CreateTrafficPolicyInstanceInput{}

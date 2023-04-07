@@ -13,16 +13,15 @@ import (
 
 // Returns a list of your queues in the current region. The response includes a
 // maximum of 1,000 results. If you specify a value for the optional
-// QueueNamePrefixparameter, only queues with a name that begins with the
+// QueueNamePrefix parameter, only queues with a name that begins with the
 // specified value are returned. The listQueues methods supports pagination. Set
-// parameter MaxResults in the request to specify the maximum number of results
-// to be returned in the response. If you do not set MaxResults, the response
+// parameter MaxResults in the request to specify the maximum number of results to
+// be returned in the response. If you do not set MaxResults , the response
 // includes a maximum of 1,000 results. If you set MaxResults and there are
-// additional results to display, the response includes a value for NextToken.
-// Use NextToken  as a parameter in your next request to listQueues to receive
-// the next page of results. Cross-account permissions don't apply to this action.
-// For more information, see Grant cross-account permissions to a role and a user
-// name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+// additional results to display, the response includes a value for NextToken . Use
+// NextToken as a parameter in your next request to listQueues to receive the next
+// page of results. Cross-account permissions don't apply to this action. For more
+// information, see Grant cross-account permissions to a role and a user name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon SQS Developer Guide.
 func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns ...func(*Options)) (*ListQueuesOutput, error) {
 	if params == nil {
@@ -41,9 +40,8 @@ func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns
 
 type ListQueuesInput struct {
 
-	// Maximum number of results to include in the response. Value range is 1 to
-	// 1000. You must set MaxResults  to receive a value for NextToken in the
-	// response.
+	// Maximum number of results to include in the response. Value range is 1 to 1000.
+	// You must set MaxResults to receive a value for NextToken in the response.
 	MaxResults *int32
 
 	// Pagination token to request the next set of results.
@@ -144,13 +142,12 @@ var _ ListQueuesAPIClient = (*Client)(nil)
 
 // ListQueuesPaginatorOptions is the paginator options for ListQueues
 type ListQueuesPaginatorOptions struct {
-	// Maximum number of results to include in the response. Value range is 1 to
-	// 1000. You must set MaxResults  to receive a value for NextToken in the
-	// response.
+	// Maximum number of results to include in the response. Value range is 1 to 1000.
+	// You must set MaxResults to receive a value for NextToken in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

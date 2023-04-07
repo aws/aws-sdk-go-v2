@@ -44,16 +44,16 @@ type StopDBClusterInput struct {
 
 type StopDBClusterOutput struct {
 
-	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.
-	// For an Amazon Aurora DB cluster, this data type is used as a response element in
-	// the operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
+	// an Amazon Aurora DB cluster, this data type is used as a response element in the
+	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
 	// FailoverDBCluster , ModifyDBCluster , PromoteReadReplicaDBCluster ,
 	// RestoreDBClusterFromS3 , RestoreDBClusterFromSnapshot ,
-	// RestoreDBClusterToPointInTime , StartDBCluster , and StopDBCluster. For a
+	// RestoreDBClusterToPointInTime , StartDBCluster , and StopDBCluster . For a
 	// Multi-AZ DB cluster, this data type is used as a response element in the
 	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
 	// FailoverDBCluster , ModifyDBCluster , RebootDBCluster ,
-	// RestoreDBClusterFromSnapshot , and RestoreDBClusterToPointInTime. For more
+	// RestoreDBClusterFromSnapshot , and RestoreDBClusterToPointInTime . For more
 	// information on Amazon Aurora DB clusters, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 	// see Multi-AZ deployments with two readable standby DB instances (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)

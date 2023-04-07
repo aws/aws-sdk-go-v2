@@ -14,20 +14,20 @@ import (
 // Initializes an Amazon Security Lake instance with the provided (or default)
 // configuration. You can enable Security Lake in Amazon Web Services Regions with
 // customized settings before enabling log collection in Regions. You can either
-// use the enableAll parameter to specify all Regions or specify the Regions
-// where you want to enable Security Lake. To specify particular Regions, use the
-// Regions parameter and then configure these Regions using the configurations
-// parameter. If you have already enabled Security Lake in a Region when you call
-// this command, the command will update the Region if you provide new
-// configuration parameters. If you have not already enabled Security Lake in the
-// Region when you call this API, it will set up the data lake in the Region with
-// the specified configurations. When you enable Security Lake, it starts ingesting
-// security data after the CreateAwsLogSource call. This includes ingesting
-// security data from sources, storing data, and making data accessible to
-// subscribers. Security Lake also enables all the existing settings and resources
-// that it stores or maintains for your Amazon Web Services account in the current
-// Region, including security log and event data. For more information, see the
-// Amazon Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html)
+// use the enableAll parameter to specify all Regions or specify the Regions where
+// you want to enable Security Lake. To specify particular Regions, use the Regions
+// parameter and then configure these Regions using the configurations parameter.
+// If you have already enabled Security Lake in a Region when you call this
+// command, the command will update the Region if you provide new configuration
+// parameters. If you have not already enabled Security Lake in the Region when you
+// call this API, it will set up the data lake in the Region with the specified
+// configurations. When you enable Security Lake, it starts ingesting security data
+// after the CreateAwsLogSource call. This includes ingesting security data from
+// sources, storing data, and making data accessible to subscribers. Security Lake
+// also enables all the existing settings and resources that it stores or maintains
+// for your Amazon Web Services account in the current Region, including security
+// log and event data. For more information, see the Amazon Security Lake User
+// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html)
 // .
 func (c *Client) CreateDatalake(ctx context.Context, params *CreateDatalakeInput, optFns ...func(*Options)) (*CreateDatalakeOutput, error) {
 	if params == nil {
@@ -60,7 +60,7 @@ type CreateDatalakeInput struct {
 	// Enable Security Lake in the specified Regions. To enable Security Lake in
 	// specific Amazon Web Services Regions, such as us-east-1 or ap-northeast-3,
 	// provide the Region codes. For a list of Region codes, see Amazon Security Lake
-	// endpoints (https://docs.aws.amazon.com/general/latest/gr/securitylake.html)in
+	// endpoints (https://docs.aws.amazon.com/general/latest/gr/securitylake.html) in
 	// the Amazon Web Services General Reference.
 	Regions []types.Region
 

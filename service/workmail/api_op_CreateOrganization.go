@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new WorkMail organization. Optionally, you can choose to associate
-// an existing AWS Directory Service directory with your organization. If an AWS
+// Creates a new WorkMail organization. Optionally, you can choose to associate an
+// existing AWS Directory Service directory with your organization. If an AWS
 // Directory Service directory ID is specified, the organization alias must match
 // the directory alias. If you choose not to associate an existing directory with
 // your organization, then we create a new WorkMail directory for you. For more
@@ -58,7 +58,7 @@ type CreateOrganizationInput struct {
 	// The email domains to associate with the organization.
 	Domains []types.Domain
 
-	// When true, allows organization interoperability between WorkMail and Microsoft
+	// When true , allows organization interoperability between WorkMail and Microsoft
 	// Exchange. If true , you must include a AD Connector directory ID in the request.
 	EnableInteroperability bool
 

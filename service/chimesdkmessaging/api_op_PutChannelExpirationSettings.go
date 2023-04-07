@@ -12,9 +12,13 @@ import (
 )
 
 // Sets the number of days before the channel is automatically deleted.
-//   - A background process deletes expired channels within 6 hours of expiration. Actual deletion times may vary.
-//   - Expired channels that have not yet been deleted appear as active, and you can update their expiration settings. The system honors the new settings.
-//   - The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header.
+//   - A background process deletes expired channels within 6 hours of expiration.
+//     Actual deletion times may vary.
+//   - Expired channels that have not yet been deleted appear as active, and you
+//     can update their expiration settings. The system honors the new settings.
+//   - The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+//     AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+//     header.
 func (c *Client) PutChannelExpirationSettings(ctx context.Context, params *PutChannelExpirationSettingsInput, optFns ...func(*Options)) (*PutChannelExpirationSettingsOutput, error) {
 	if params == nil {
 		params = &PutChannelExpirationSettingsInput{}
@@ -37,7 +41,7 @@ type PutChannelExpirationSettingsInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	ChimeBearer *string
 
 	// Settings that control the interval after which a channel is deleted.

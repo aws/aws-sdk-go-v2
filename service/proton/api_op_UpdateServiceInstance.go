@@ -13,10 +13,10 @@ import (
 )
 
 // Update a service instance. There are a few modes for updating a service
-// instance. The deploymentType field defines the mode. You can't update a
-// service instance while its deployment status, or the deployment status of a
-// component attached to it, is IN_PROGRESS. For more information about
-// components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+// instance. The deploymentType field defines the mode. You can't update a service
+// instance while its deployment status, or the deployment status of a component
+// attached to it, is IN_PROGRESS . For more information about components, see
+// Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
 // in the Proton User Guide.
 func (c *Client) UpdateServiceInstance(ctx context.Context, params *UpdateServiceInstanceInput, optFns ...func(*Options)) (*UpdateServiceInstanceOutput, error) {
 	if params == nil {
@@ -44,7 +44,7 @@ type UpdateServiceInstanceInput struct {
 	// service instance is deployed and updated with the published, recommended
 	// (latest) minor version of the current major version in use, by default. You can
 	// also specify a different minor version of the current major version in use.
-	// MAJOR_VERSIONIn this mode, the service instance is deployed and updated with
+	// MAJOR_VERSION In this mode, the service instance is deployed and updated with
 	// the published, recommended (latest) major and minor version of the current
 	// template, by default. You can specify a different major version that's higher
 	// than the major version in use and a minor version.

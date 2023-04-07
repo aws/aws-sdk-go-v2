@@ -71,10 +71,10 @@ type CreateCertificateAuthorityInput struct {
 	// Specifies a cryptographic key management compliance standard used for handling
 	// CA keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note:
 	// FIPS_140_2_LEVEL_3_OR_HIGHER is not supported in the following Regions:
-	//     - ap-northeast-3
-	//     - ap-southeast-3
+	//   - ap-northeast-3
+	//   - ap-southeast-3
 	// When creating a CA in these Regions, you must provide
-	// FIPS_140_2_LEVEL_2_OR_HIGHER as the argument for KeyStorageSecurityStandard.
+	// FIPS_140_2_LEVEL_2_OR_HIGHER as the argument for KeyStorageSecurityStandard .
 	// Failure to do this results in an InvalidArgsException with the message, "A
 	// certificate authority cannot be created in this region with the specified
 	// security standard."
@@ -84,11 +84,17 @@ type CreateCertificateAuthorityInput struct {
 	// support, to enable a certificate revocation list (CRL), to enable both, or to
 	// enable neither. The default is for both certificate validation mechanisms to be
 	// disabled. The following requirements apply to revocation configurations.
-	//     - A configuration disabling CRLs or OCSP must contain only the Enabled=False parameter, and will fail if other parameters such as CustomCname or ExpirationInDays are included.
-	//     - In a CRL configuration, the S3BucketName parameter must conform to Amazon S3 bucket naming rules (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) .
-	//     - A configuration containing a custom Canonical Name (CNAME) parameter for CRLs or OCSP must conform to RFC2396 (https://www.ietf.org/rfc/rfc2396.txt) restrictions on the use of special characters in a CNAME.
-	//     - In a CRL or OCSP configuration, the value of a CNAME parameter must not include a protocol prefix such as "http://" or "https://".
-	//
+	//   - A configuration disabling CRLs or OCSP must contain only the Enabled=False
+	//   parameter, and will fail if other parameters such as CustomCname or
+	//   ExpirationInDays are included.
+	//   - In a CRL configuration, the S3BucketName parameter must conform to Amazon
+	//   S3 bucket naming rules (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
+	//   .
+	//   - A configuration containing a custom Canonical Name (CNAME) parameter for
+	//   CRLs or OCSP must conform to RFC2396 (https://www.ietf.org/rfc/rfc2396.txt)
+	//   restrictions on the use of special characters in a CNAME.
+	//   - In a CRL or OCSP configuration, the value of a CNAME parameter must not
+	//   include a protocol prefix such as "http://" or "https://".
 	// For more information, see the OcspConfiguration (https://docs.aws.amazon.com/privateca/latest/APIReference/API_OcspConfiguration.html)
 	// and CrlConfiguration (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html)
 	// types.
@@ -114,7 +120,6 @@ type CreateCertificateAuthorityOutput struct {
 	// If successful, the Amazon Resource Name (ARN) of the certificate authority
 	// (CA). This is of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
 	// .
 	CertificateAuthorityArn *string
 

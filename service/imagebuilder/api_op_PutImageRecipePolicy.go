@@ -12,8 +12,8 @@ import (
 
 // Applies a policy to an image recipe. We recommend that you call the RAM API
 // CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html)
-// to share resources. If you call the Image Builder API PutImageRecipePolicy,
-// you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html)
+// to share resources. If you call the Image Builder API PutImageRecipePolicy , you
+// must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html)
 // in order for the resource to be visible to all principals with whom the resource
 // is shared.
 func (c *Client) PutImageRecipePolicy(ctx context.Context, params *PutImageRecipePolicyInput, optFns ...func(*Options)) (*PutImageRecipePolicyOutput, error) {
@@ -49,8 +49,8 @@ type PutImageRecipePolicyInput struct {
 
 type PutImageRecipePolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the image recipe that this policy was
-	// applied to.
+	// The Amazon Resource Name (ARN) of the image recipe that this policy was applied
+	// to.
 	ImageRecipeArn *string
 
 	// The request ID that uniquely identifies this request.

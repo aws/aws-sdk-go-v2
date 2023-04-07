@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// DescribeExportConfigurations  is deprecated. Use DescribeExportTasks (https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html)
+// DescribeExportConfigurations is deprecated. Use DescribeExportTasks (https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html)
 // , instead.
 //
 // Deprecated: This operation has been deprecated.

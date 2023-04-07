@@ -40,9 +40,9 @@ type ReimportApiInput struct {
 	// This member is required.
 	Body *string
 
-	// Specifies how to interpret the base path of the API during import. Valid
-	// values are ignore, prepend, and split. The default value is ignore. To learn
-	// more, see Set the OpenAPI basePath Property (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html)
+	// Specifies how to interpret the base path of the API during import. Valid values
+	// are ignore, prepend, and split. The default value is ignore. To learn more, see
+	// Set the OpenAPI basePath Property (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html)
 	// . Supported only for HTTP APIs.
 	Basepath *string
 
@@ -68,8 +68,8 @@ type ReimportApiOutput struct {
 	// The API ID.
 	ApiId *string
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API
-	// Key Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
+	// An API key selection expression. Supported only for WebSocket APIs. See API Key
+	// Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
 	// .
 	ApiKeySelectionExpression *string
 

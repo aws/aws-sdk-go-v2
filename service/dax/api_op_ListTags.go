@@ -46,7 +46,7 @@ type ListTagsInput struct {
 type ListTagsOutput struct {
 
 	// If this value is present, there are additional results to be displayed. To
-	// retrieve them, call ListTags  again, with NextToken  set to this value.
+	// retrieve them, call ListTags again, with NextToken set to this value.
 	NextToken *string
 
 	// A list of tags currently associated with the DAX cluster.

@@ -35,63 +35,66 @@ func (c *Client) DescribeEvaluations(ctx context.Context, params *DescribeEvalua
 
 type DescribeEvaluationsInput struct {
 
-	// The equal to operator. The Evaluation  results will have FilterVariable values
+	// The equal to operator. The Evaluation results will have FilterVariable values
 	// that exactly match the value specified with EQ .
 	EQ *string
 
-	// Use one of the following variable to filter a list of Evaluation  objects:
-	//     - CreatedAt - Sets the search criteria to the Evaluation creation date.
-	//     - Status - Sets the search criteria to the Evaluation status.
-	//     - Name - Sets the search criteria to the contents of Evaluation Name .
-	//     - IAMUser - Sets the search criteria to the user account that invoked an Evaluation .
-	//     - MLModelId - Sets the search criteria to the MLModel that was evaluated.
-	//     - DataSourceId - Sets the search criteria to the DataSource used in Evaluation .
-	//     - DataUri - Sets the search criteria to the data file(s) used in Evaluation . The URL can identify either a file or an Amazon Simple Storage Solution (Amazon S3) bucket or directory.
+	// Use one of the following variable to filter a list of Evaluation objects:
+	//   - CreatedAt - Sets the search criteria to the Evaluation creation date.
+	//   - Status - Sets the search criteria to the Evaluation status.
+	//   - Name - Sets the search criteria to the contents of Evaluation Name .
+	//   - IAMUser - Sets the search criteria to the user account that invoked an
+	//   Evaluation .
+	//   - MLModelId - Sets the search criteria to the MLModel that was evaluated.
+	//   - DataSourceId - Sets the search criteria to the DataSource used in Evaluation
+	//   .
+	//   - DataUri - Sets the search criteria to the data file(s) used in Evaluation .
+	//   The URL can identify either a file or an Amazon Simple Storage Solution (Amazon
+	//   S3) bucket or directory.
 	FilterVariable types.EvaluationFilterVariable
 
-	// The greater than or equal to operator. The Evaluation  results will have
-	// FilterVariablevalues that are greater than or equal to the value specified
-	// with GE .
+	// The greater than or equal to operator. The Evaluation results will have
+	// FilterVariable values that are greater than or equal to the value specified with
+	// GE .
 	GE *string
 
-	// The greater than operator. The Evaluation  results will have FilterVariable
+	// The greater than operator. The Evaluation results will have FilterVariable
 	// values that are greater than the value specified with GT .
 	GT *string
 
-	// The less than or equal to operator. The Evaluation  results will have
-	// FilterVariable values that are less than or equal to the value specified with
-	// LE .
+	// The less than or equal to operator. The Evaluation results will have
+	// FilterVariable values that are less than or equal to the value specified with LE
+	// .
 	LE *string
 
-	// The less than operator. The Evaluation  results will have FilterVariable
-	// values that are less than the value specified with LT .
+	// The less than operator. The Evaluation results will have FilterVariable values
+	// that are less than the value specified with LT .
 	LT *string
 
-	// The maximum number of Evaluation  to include in the result.
+	// The maximum number of Evaluation to include in the result.
 	Limit *int32
 
-	// The not equal to operator. The Evaluation  results will have FilterVariable
+	// The not equal to operator. The Evaluation results will have FilterVariable
 	// values not equal to the value specified with NE .
 	NE *string
 
 	// The ID of the page in the paginated results.
 	NextToken *string
 
-	// A string that is found at the beginning of a variable, such as Name  or Id.
-	// For example, an Evaluation  could have the Name 2014-09-09-HolidayGiftMailer.
-	// To search for this Evaluation , select Name  for the FilterVariable and any of
-	// the following strings for the Prefix :
-	//     - 2014-09
-	//     - 2014-09-09
-	//     - 2014-09-09-Holiday
+	// A string that is found at the beginning of a variable, such as Name or Id . For
+	// example, an Evaluation could have the Name 2014-09-09-HolidayGiftMailer . To
+	// search for this Evaluation , select Name for the FilterVariable and any of the
+	// following strings for the Prefix :
+	//   - 2014-09
+	//   - 2014-09-09
+	//   - 2014-09-09-Holiday
 	Prefix *string
 
 	// A two-value parameter that determines the sequence of the resulting list of
 	// Evaluation .
-	//     - asc - Arranges the list in ascending order (A-Z, 0-9).
-	//     - dsc - Arranges the list in descending order (Z-A, 9-0).
-	// Results are
-	// sorted by FilterVariable .
+	//   - asc - Arranges the list in ascending order (A-Z, 0-9).
+	//   - dsc - Arranges the list in descending order (Z-A, 9-0).
+	// Results are sorted by FilterVariable .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -105,7 +108,7 @@ type DescribeEvaluationsOutput struct {
 	// more page follows.
 	NextToken *string
 
-	// A list of Evaluation  that meet the search criteria.
+	// A list of Evaluation that meet the search criteria.
 	Results []types.Evaluation
 
 	// Metadata pertaining to the operation's result.
@@ -185,11 +188,11 @@ var _ DescribeEvaluationsAPIClient = (*Client)(nil)
 // DescribeEvaluationsPaginatorOptions is the paginator options for
 // DescribeEvaluations
 type DescribeEvaluationsPaginatorOptions struct {
-	// The maximum number of Evaluation  to include in the result.
+	// The maximum number of Evaluation to include in the result.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

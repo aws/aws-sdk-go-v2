@@ -52,9 +52,8 @@ type DeleteConnectionOutput struct {
 	// The Direct Connect endpoint that terminates the physical connection.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This
-	// device might be different than the device that terminates the physical
-	// connection.
+	// The Direct Connect endpoint that terminates the logical connection. This device
+	// might be different than the device that terminates the physical connection.
 	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
@@ -67,15 +66,20 @@ type DeleteConnectionOutput struct {
 	ConnectionName *string
 
 	// The state of the connection. The following are the possible values:
-	//     - ordering : The initial state of a hosted connection provisioned on an interconnect. The connection stays in the ordering state until the owner of the hosted connection confirms or declines the connection order.
-	//     - requested : The initial state of a standard connection. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.
-	//     - pending : The connection has been approved and is being initialized.
-	//     - available : The network link is up and the connection is ready for use.
-	//     - down : The network link is down.
-	//     - deleting : The connection is being deleted.
-	//     - deleted : The connection has been deleted.
-	//     - rejected : A hosted connection in the ordering state enters the rejected state if it is deleted by the customer.
-	//     - unknown : The state of the connection is not available.
+	//   - ordering : The initial state of a hosted connection provisioned on an
+	//   interconnect. The connection stays in the ordering state until the owner of the
+	//   hosted connection confirms or declines the connection order.
+	//   - requested : The initial state of a standard connection. The connection stays
+	//   in the requested state until the Letter of Authorization (LOA) is sent to the
+	//   customer.
+	//   - pending : The connection has been approved and is being initialized.
+	//   - available : The network link is up and the connection is ready for use.
+	//   - down : The network link is down.
+	//   - deleting : The connection is being deleted.
+	//   - deleted : The connection has been deleted.
+	//   - rejected : A hosted connection in the ordering state enters the rejected
+	//   state if it is deleted by the customer.
+	//   - unknown : The state of the connection is not available.
 	ConnectionState types.ConnectionState
 
 	// The MAC Security (MACsec) connection encryption mode. The valid values are
@@ -92,7 +96,7 @@ type DeleteConnectionOutput struct {
 	// The ID of the LAG.
 	LagId *string
 
-	// The time of the most recent call to DescribeLoa  for this connection.
+	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time
 
 	// The location of the connection.

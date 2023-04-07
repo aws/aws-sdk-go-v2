@@ -36,8 +36,8 @@ type StartLifecyclePolicyPreviewInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The policy to be evaluated against. If you do not specify a policy, the
-	// current policy for the repository is used.
+	// The policy to be evaluated against. If you do not specify a policy, the current
+	// policy for the repository is used.
 	LifecyclePolicyText *string
 
 	// The Amazon Web Services account ID associated with the registry that contains

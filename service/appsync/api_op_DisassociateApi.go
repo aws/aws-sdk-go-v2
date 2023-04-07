@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes an ApiAssociation  object from a custom domain.
+// Removes an ApiAssociation object from a custom domain.
 func (c *Client) DisassociateApi(ctx context.Context, params *DisassociateApiInput, optFns ...func(*Options)) (*DisassociateApiOutput, error) {
 	if params == nil {
 		params = &DisassociateApiInput{}

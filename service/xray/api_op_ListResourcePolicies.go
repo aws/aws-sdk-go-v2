@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of resource policies in the target Amazon Web Services
-// account.
+// Returns the list of resource policies in the target Amazon Web Services account.
 func (c *Client) ListResourcePolicies(ctx context.Context, params *ListResourcePoliciesInput, optFns ...func(*Options)) (*ListResourcePoliciesOutput, error) {
 	if params == nil {
 		params = &ListResourcePoliciesInput{}
@@ -122,8 +121,8 @@ var _ ListResourcePoliciesAPIClient = (*Client)(nil)
 // ListResourcePoliciesPaginatorOptions is the paginator options for
 // ListResourcePolicies
 type ListResourcePoliciesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

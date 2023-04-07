@@ -36,8 +36,8 @@ type ListSchemasInput struct {
 	// The maximum number of schemas to return.
 	MaxResults *int32
 
-	// A token returned from the previous call to ListSchemas for getting the next
-	// set of schemas (if they exist).
+	// A token returned from the previous call to ListSchemas for getting the next set
+	// of schemas (if they exist).
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -129,8 +129,8 @@ type ListSchemasPaginatorOptions struct {
 	// The maximum number of schemas to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

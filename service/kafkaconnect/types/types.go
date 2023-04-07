@@ -24,8 +24,7 @@ type ApacheKafkaCluster struct {
 	noSmithyDocumentSerde
 }
 
-// The description of the Apache Kafka cluster to which the connector is
-// connected.
+// The description of the Apache Kafka cluster to which the connector is connected.
 type ApacheKafkaClusterDescription struct {
 
 	// The bootstrap servers of the cluster.
@@ -791,8 +790,8 @@ type WorkerConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Workers can send worker logs to different destination types. This
-// configuration specifies the details of these destinations.
+// Workers can send worker logs to different destination types. This configuration
+// specifies the details of these destinations.
 type WorkerLogDelivery struct {
 
 	// Details about delivering logs to Amazon CloudWatch Logs.
@@ -807,8 +806,8 @@ type WorkerLogDelivery struct {
 	noSmithyDocumentSerde
 }
 
-// Workers can send worker logs to different destination types. This
-// configuration specifies the details of these destinations.
+// Workers can send worker logs to different destination types. This configuration
+// specifies the details of these destinations.
 type WorkerLogDeliveryDescription struct {
 
 	// Details about delivering logs to Amazon CloudWatch Logs.

@@ -33,8 +33,8 @@ func (c *Client) CreateSpotDatafeedSubscription(ctx context.Context, params *Cre
 // Contains the parameters for CreateSpotDatafeedSubscription.
 type CreateSpotDatafeedSubscriptionInput struct {
 
-	// The name of the Amazon S3 bucket in which to store the Spot Instance data
-	// feed. For more information about bucket names, see Rules for bucket naming (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules)
+	// The name of the Amazon S3 bucket in which to store the Spot Instance data feed.
+	// For more information about bucket names, see Rules for bucket naming (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules)
 	// in the Amazon S3 Developer Guide.
 	//
 	// This member is required.

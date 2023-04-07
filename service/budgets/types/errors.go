@@ -164,8 +164,7 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error on the client occurred. Typically, the cause is an invalid input
-// value.
+// An error on the client occurred. Typically, the cause is an invalid input value.
 type InvalidParameterException struct {
 	Message *string
 

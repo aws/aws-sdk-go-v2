@@ -49,9 +49,9 @@ type BatchExecuteStatementInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The ARN of the secret that enables access to the DB cluster. Enter the
-	// database user name and password for the credentials in the secret. For
-	// information about creating the secret, see Create a database secret (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html)
+	// The ARN of the secret that enables access to the DB cluster. Enter the database
+	// user name and password for the credentials in the secret. For information about
+	// creating the secret, see Create a database secret (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html)
 	// .
 	//
 	// This member is required.
@@ -69,9 +69,9 @@ type BatchExecuteStatementInput struct {
 	// The parameter set for the batch operation. The SQL statement is executed as
 	// many times as the number of parameter sets provided. To execute a SQL statement
 	// with no parameters, use one of the following options:
-	//     - Specify one or more empty parameter sets.
-	//     - Use the ExecuteStatement operation instead of the BatchExecuteStatement operation.
-	//
+	//   - Specify one or more empty parameter sets.
+	//   - Use the ExecuteStatement operation instead of the BatchExecuteStatement
+	//   operation.
 	// Array parameters are not supported.
 	ParameterSets [][]types.SqlParameter
 

@@ -52,8 +52,8 @@ type CreateUserProfileInput struct {
 	// Identity Center, this field cannot be specified.
 	SingleSignOnUserIdentifier *string
 
-	// The username of the associated Amazon Web Services Single Sign-On User for
-	// this UserProfile. If the Domain's AuthMode is IAM Identity Center, this field is
+	// The username of the associated Amazon Web Services Single Sign-On User for this
+	// UserProfile. If the Domain's AuthMode is IAM Identity Center, this field is
 	// required, and must match a valid username of a user in your directory. If the
 	// Domain's AuthMode is not IAM Identity Center, this field cannot be specified.
 	SingleSignOnUserValue *string

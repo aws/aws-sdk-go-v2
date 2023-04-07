@@ -136,9 +136,9 @@ const (
 	ContentHandlingStrategyConvertToText   ContentHandlingStrategy = "CONVERT_TO_TEXT"
 )
 
-// Values returns all known values for ContentHandlingStrategy. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContentHandlingStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ContentHandlingStrategy) Values() []ContentHandlingStrategy {
 	return []ContentHandlingStrategy{
 		"CONVERT_TO_BINARY",

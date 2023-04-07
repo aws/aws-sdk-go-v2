@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// (Discontinued) Lists all the S3 resources associated with Amazon Macie
-// Classic. If memberAccountId isn't specified, the action lists the S3 resources
+// (Discontinued) Lists all the S3 resources associated with Amazon Macie Classic.
+// If memberAccountId isn't specified, the action lists the S3 resources
 // associated with Macie Classic for the current Macie Classic administrator
 // account. If memberAccountId is specified, the action lists the S3 resources
 // associated with Macie Classic for the specified member account.
@@ -44,7 +44,7 @@ type ListS3ResourcesInput struct {
 
 	// (Discontinued) Use this parameter when paginating results. Set its value to
 	// null on your first call to the ListS3Resources action. Subsequent calls to the
-	// action fill nextToken  in the request with the value of nextToken from the
+	// action fill nextToken in the request with the value of nextToken from the
 	// previous response to continue listing data.
 	NextToken *string
 
@@ -142,8 +142,8 @@ type ListS3ResourcesPaginatorOptions struct {
 	// you want in the response. The default value is 250.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

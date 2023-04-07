@@ -40,7 +40,7 @@ type GetResourcesInput struct {
 	// returned Resources resource in the response. This embed parameter value is a
 	// list of comma-separated strings. Currently, the request supports only retrieval
 	// of the embedded Method resources this way. The query parameter value must be a
-	// single-valued list and contain the "methods"  string. For example, GET
+	// single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources?embed=methods .
 	Embed []string
 
@@ -148,8 +148,8 @@ type GetResourcesPaginatorOptions struct {
 	// the maximum value is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

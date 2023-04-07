@@ -16,8 +16,8 @@ import (
 // the deleted database. Glue deletes these "orphaned" resources asynchronously in
 // a timely manner, at the discretion of the service. To ensure the immediate
 // deletion of all related resources, before calling DeleteDatabase , use
-// DeleteTableVersion or BatchDeleteTableVersion , DeletePartition  or
-// BatchDeletePartition , DeleteUserDefinedFunction , and DeleteTable  or
+// DeleteTableVersion or BatchDeleteTableVersion , DeletePartition or
+// BatchDeletePartition , DeleteUserDefinedFunction , and DeleteTable or
 // BatchDeleteTable , to delete any resources that belong to the database.
 func (c *Client) DeleteDatabase(ctx context.Context, params *DeleteDatabaseInput, optFns ...func(*Options)) (*DeleteDatabaseOutput, error) {
 	if params == nil {

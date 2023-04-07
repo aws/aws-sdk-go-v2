@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a Type  object.
+// Updates a Type object.
 func (c *Client) UpdateType(ctx context.Context, params *UpdateTypeInput, optFns ...func(*Options)) (*UpdateTypeOutput, error) {
 	if params == nil {
 		params = &UpdateTypeInput{}
@@ -52,7 +52,7 @@ type UpdateTypeInput struct {
 
 type UpdateTypeOutput struct {
 
-	// The updated Type  object.
+	// The updated Type object.
 	Type *types.Type
 
 	// Metadata pertaining to the operation's result.

@@ -23,8 +23,8 @@ import (
 // archives and their total size are as of the last inventory generation. This
 // means that if you add or remove an archive from a vault, and then immediately
 // use Describe Vault, the change in contents will not be immediately reflected. If
-// you want to retrieve the latest inventory of the vault, use InitiateJob.
-// Amazon S3 Glacier generates vault inventories approximately daily. For more
+// you want to retrieve the latest inventory of the vault, use InitiateJob . Amazon
+// S3 Glacier generates vault inventories approximately daily. For more
 // information, see Downloading a Vault Inventory in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html)
 // . An AWS account has full permission to perform all operations (actions).
 // However, AWS Identity and Access Management (IAM) users don't have any
@@ -50,12 +50,11 @@ func (c *Client) DescribeVault(ctx context.Context, params *DescribeVaultInput, 
 	return out, nil
 }
 
-// Provides options for retrieving metadata for a specific vault in Amazon
-// Glacier.
+// Provides options for retrieving metadata for a specific vault in Amazon Glacier.
 type DescribeVaultInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
 	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
@@ -393,9 +392,9 @@ func NewVaultNotExistsWaiter(client DescribeVaultAPIClient, optFns ...func(*Vaul
 	}
 }
 
-// Wait calls the waiter function for VaultNotExists waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for VaultNotExists waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *VaultNotExistsWaiter) Wait(ctx context.Context, params *DescribeVaultInput, maxWaitDur time.Duration, optFns ...func(*VaultNotExistsWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -47,7 +47,7 @@ type DeleteServiceNetworkServiceAssociationOutput struct {
 	Id *string
 
 	// The operation's status. You can retry the operation if the status is
-	// DELETE_FAILED. However, if you retry it when the status is DELETE_IN_PROGRESS,
+	// DELETE_FAILED . However, if you retry it when the status is DELETE_IN_PROGRESS ,
 	// there is no change in the status.
 	Status types.ServiceNetworkServiceAssociationStatus
 

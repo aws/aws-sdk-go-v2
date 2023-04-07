@@ -72,8 +72,8 @@ type UpdateBotRecommendationOutput struct {
 	// The unique identifier of the bot recommendation to be updated.
 	BotRecommendationId *string
 
-	// The status of the bot recommendation. If the status is Failed, then the
-	// reasons for the failure are listed in the failureReasons field.
+	// The status of the bot recommendation. If the status is Failed, then the reasons
+	// for the failure are listed in the failureReasons field.
 	BotRecommendationStatus types.BotRecommendationStatus
 
 	// The version of the bot containing the bot recommendation that has been updated.
@@ -95,8 +95,8 @@ type UpdateBotRecommendationOutput struct {
 	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
 	LocaleId *string
 
-	// The object representing the Amazon S3 bucket containing the transcript, as
-	// well as the associated metadata.
+	// The object representing the Amazon S3 bucket containing the transcript, as well
+	// as the associated metadata.
 	TranscriptSourceSetting *types.TranscriptSourceSetting
 
 	// Metadata pertaining to the operation's result.

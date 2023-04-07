@@ -80,8 +80,8 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// This member is required.
 	TrainingJobStatusCounters *types.TrainingJobStatusCounters
 
-	// A TrainingJobSummary object that describes the training job that completed
-	// with the best current HyperParameterTuningJobObjective .
+	// A TrainingJobSummary object that describes the training job that completed with
+	// the best current HyperParameterTuningJobObjective .
 	BestTrainingJob *types.HyperParameterTrainingJobSummary
 
 	// The total resources consumed by your hyperparameter tuning job.
@@ -103,8 +103,8 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// tuning job.
 	OverallBestTrainingJob *types.HyperParameterTrainingJobSummary
 
-	// The HyperParameterTrainingJobDefinition object that specifies the definition
-	// of the training jobs that this tuning job launches.
+	// The HyperParameterTrainingJobDefinition object that specifies the definition of
+	// the training jobs that this tuning job launches.
 	TrainingJobDefinition *types.HyperParameterTrainingJobDefinition
 
 	// A list of the HyperParameterTrainingJobDefinition objects launched for this

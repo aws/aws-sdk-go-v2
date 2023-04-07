@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a Device Defender's ML Detect Security Profile training model's
-// status. Requires permission to access the GetBehaviorModelTrainingSummaries (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Returns a Device Defender's ML Detect Security Profile training model's status.
+// Requires permission to access the GetBehaviorModelTrainingSummaries (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) GetBehaviorModelTrainingSummaries(ctx context.Context, params *GetBehaviorModelTrainingSummariesInput, optFns ...func(*Options)) (*GetBehaviorModelTrainingSummariesOutput, error) {
 	if params == nil {
@@ -134,8 +134,8 @@ type GetBehaviorModelTrainingSummariesPaginatorOptions struct {
 	// The maximum number of results to return at one time. The default is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

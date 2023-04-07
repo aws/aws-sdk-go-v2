@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the lifecycle hooks for the specified Auto Scaling
-// group.
+// Gets information about the lifecycle hooks for the specified Auto Scaling group.
 func (c *Client) DescribeLifecycleHooks(ctx context.Context, params *DescribeLifecycleHooksInput, optFns ...func(*Options)) (*DescribeLifecycleHooksOutput, error) {
 	if params == nil {
 		params = &DescribeLifecycleHooksInput{}

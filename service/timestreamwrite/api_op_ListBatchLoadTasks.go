@@ -13,8 +13,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a list of batch load tasks, along with the name, status, when the
-// task is resumable until, and other details. See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-batch-load-tasks.html)
+// Provides a list of batch load tasks, along with the name, status, when the task
+// is resumable until, and other details. See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-batch-load-tasks.html)
 // for details.
 func (c *Client) ListBatchLoadTasks(ctx context.Context, params *ListBatchLoadTasksInput, optFns ...func(*Options)) (*ListBatchLoadTasksOutput, error) {
 	if params == nil {
@@ -33,8 +33,8 @@ func (c *Client) ListBatchLoadTasks(ctx context.Context, params *ListBatchLoadTa
 
 type ListBatchLoadTasksInput struct {
 
-	// The total number of items to return in the output. If the total number of
-	// items available is more than the value specified, a NextToken is provided in the
+	// The total number of items to return in the output. If the total number of items
+	// available is more than the value specified, a NextToken is provided in the
 	// output. To resume pagination, provide the NextToken value as argument of a
 	// subsequent API invocation.
 	MaxResults *int32
@@ -187,14 +187,14 @@ var _ ListBatchLoadTasksAPIClient = (*Client)(nil)
 // ListBatchLoadTasksPaginatorOptions is the paginator options for
 // ListBatchLoadTasks
 type ListBatchLoadTasksPaginatorOptions struct {
-	// The total number of items to return in the output. If the total number of
-	// items available is more than the value specified, a NextToken is provided in the
+	// The total number of items to return in the output. If the total number of items
+	// available is more than the value specified, a NextToken is provided in the
 	// output. To resume pagination, provide the NextToken value as argument of a
 	// subsequent API invocation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -43,13 +43,14 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - principal - The ARN of the principal.
-	//     - principal-type - The principal type ( All | Service | OrganizationUnit | Account | User | Role ).
+	//   - principal - The ARN of the principal.
+	//   - principal-type - The principal type ( All | Service | OrganizationUnit |
+	//   Account | User | Role ).
 	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
-	// with the returned NextToken  value. This value can be between 5 and 1,000; if
+	// with the returned NextToken value. This value can be between 5 and 1,000; if
 	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
 	MaxResults *int32
 
@@ -150,12 +151,12 @@ var _ DescribeVpcEndpointServicePermissionsAPIClient = (*Client)(nil)
 type DescribeVpcEndpointServicePermissionsPaginatorOptions struct {
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
-	// with the returned NextToken  value. This value can be between 5 and 1,000; if
+	// with the returned NextToken value. This value can be between 5 and 1,000; if
 	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

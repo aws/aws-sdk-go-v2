@@ -15,9 +15,10 @@ import (
 // Lists all Channels created under a single Chime App as a paginated list. You
 // can specify filters to narrow results. Functionality & restrictions
 //   - Use privacy = PUBLIC to retrieve all public channels in the account.
-//   - Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.
+//   - Only an AppInstanceAdmin can set privacy = PRIVATE to list the private
+//     channels in an account.
 //
-// The x-amz-chime-bearer  request header is mandatory. Use the AppInstanceUserArn
+// The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
 // of the user that makes the API call as the value in the header.
 func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, optFns ...func(*Options)) (*ListChannelsOutput, error) {
 	if params == nil {
@@ -41,7 +42,7 @@ type ListChannelsInput struct {
 	// This member is required.
 	AppInstanceArn *string
 
-	// The AppInstanceUserArn  of the user that makes the API call.
+	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
 
 	// The maximum number of channels that you want to return.
@@ -51,7 +52,7 @@ type ListChannelsInput struct {
 	// returned.
 	NextToken *string
 
-	// The privacy setting. PUBLIC  retrieves all the public channels. PRIVATE
+	// The privacy setting. PUBLIC retrieves all the public channels. PRIVATE
 	// retrieves private channels. Only an AppInstanceAdmin can retrieve private
 	// channels.
 	Privacy types.ChannelPrivacy
@@ -179,8 +180,8 @@ type ListChannelsPaginatorOptions struct {
 	// The maximum number of channels that you want to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

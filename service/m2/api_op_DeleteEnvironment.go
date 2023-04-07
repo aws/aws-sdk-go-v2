@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specific runtime environment. The environment cannot contain
-// deployed applications. If it does, you must delete those applications before you
-// delete the environment.
+// Deletes a specific runtime environment. The environment cannot contain deployed
+// applications. If it does, you must delete those applications before you delete
+// the environment.
 func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmentInput, optFns ...func(*Options)) (*DeleteEnvironmentOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentInput{}

@@ -35,7 +35,7 @@ type GetDataSetImportTaskInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The task identifier returned by the CreateDataSetImportTask  operation.
+	// The task identifier returned by the CreateDataSetImportTask operation.
 	//
 	// This member is required.
 	TaskId *string

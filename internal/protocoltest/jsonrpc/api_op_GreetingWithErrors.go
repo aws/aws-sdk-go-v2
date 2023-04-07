@@ -15,8 +15,8 @@ import (
 //   - An InvalidGreeting error.
 //   - A ComplexError error.
 //
-// Implementations must be able to successfully take a
-// response and properly deserialize successful and error responses.
+// Implementations must be able to successfully take a response and properly
+// deserialize successful and error responses.
 func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErrorsInput, optFns ...func(*Options)) (*GreetingWithErrorsOutput, error) {
 	if params == nil {
 		params = &GreetingWithErrorsInput{}

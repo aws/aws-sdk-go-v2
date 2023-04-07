@@ -22,8 +22,8 @@ import (
 // . If you are using CloudWatch cross-account observability, you can use this
 // operation in a monitoring account and view metrics from the linked source
 // accounts. For more information, see CloudWatch cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html)
-// . ListMetrics doesn't return information about metrics if those metrics
-// haven't reported data in the past two weeks. To retrieve those metrics, use
+// . ListMetrics doesn't return information about metrics if those metrics haven't
+// reported data in the past two weeks. To retrieve those metrics, use
 // GetMetricData (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
 // or GetMetricStatistics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html)
 // .
@@ -49,16 +49,15 @@ type ListMetricsInput struct {
 	Dimensions []types.DimensionFilter
 
 	// If you are using this operation in a monitoring account, specify true to
-	// include metrics from source accounts in the returned data. The default is false
-	// .
+	// include metrics from source accounts in the returned data. The default is false .
 	IncludeLinkedAccounts bool
 
 	// The name of the metric to filter against. Only the metrics with names that
 	// match exactly will be returned.
 	MetricName *string
 
-	// The metric namespace to filter against. Only the namespace that matches
-	// exactly will be returned.
+	// The metric namespace to filter against. Only the namespace that matches exactly
+	// will be returned.
 	Namespace *string
 
 	// The token returned by a previous call to indicate that there is more data
@@ -67,11 +66,11 @@ type ListMetricsInput struct {
 
 	// When you use this operation in a monitoring account, use this field to return
 	// metrics only from one source account. To do so, specify that source account ID
-	// in this field, and also specify true  for IncludeLinkedAccounts .
+	// in this field, and also specify true for IncludeLinkedAccounts .
 	OwningAccount *string
 
 	// To filter the results to show only metrics that have had data points published
-	// in the past three hours, specify this parameter with a value of PT3H. This is
+	// in the past three hours, specify this parameter with a value of PT3H . This is
 	// the only valid value for this parameter. The results that are returned are an
 	// approximation of the value you specify. There is a low probability that the
 	// returned results include metrics with last published data as much as 40 minutes
@@ -173,8 +172,8 @@ var _ ListMetricsAPIClient = (*Client)(nil)
 
 // ListMetricsPaginatorOptions is the paginator options for ListMetrics
 type ListMetricsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

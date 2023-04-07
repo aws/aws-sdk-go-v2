@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specify the time-based auto scaling configuration for a specified instance.
-// For more information, see Managing Load with Time-based and Load-based
-// Instances (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html)
+// Specify the time-based auto scaling configuration for a specified instance. For
+// more information, see Managing Load with Time-based and Load-based Instances (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html)
 // . Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
@@ -41,7 +40,7 @@ type SetTimeBasedAutoScalingInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// An AutoScalingSchedule  with the instance schedule.
+	// An AutoScalingSchedule with the instance schedule.
 	AutoScalingSchedule *types.WeeklyAutoScalingSchedule
 
 	noSmithyDocumentSerde

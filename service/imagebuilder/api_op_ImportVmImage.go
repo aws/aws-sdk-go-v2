@@ -68,7 +68,7 @@ type ImportVmImageInput struct {
 	// This member is required.
 	SemanticVersion *string
 
-	// The importTaskId  (API) or ImportTaskId (CLI) from the Amazon EC2 VM import
+	// The importTaskId (API) or ImportTaskId (CLI) from the Amazon EC2 VM import
 	// process. Image Builder retrieves information from the import process to pull in
 	// the AMI that is created from the VM source as the base image for your recipe.
 	//
@@ -92,9 +92,8 @@ type ImportVmImageOutput struct {
 	// The idempotency token that was used for this request.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the AMI that was created during the VM
-	// import process. This AMI is used as the base image for the recipe that imported
-	// the VM.
+	// The Amazon Resource Name (ARN) of the AMI that was created during the VM import
+	// process. This AMI is used as the base image for the recipe that imported the VM.
 	ImageArn *string
 
 	// The request ID that uniquely identifies this request.

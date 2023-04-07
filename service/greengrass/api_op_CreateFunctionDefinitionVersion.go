@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a version of a Lambda function definition that has already been
-// defined.
+// Creates a version of a Lambda function definition that has already been defined.
 func (c *Client) CreateFunctionDefinitionVersion(ctx context.Context, params *CreateFunctionDefinitionVersionInput, optFns ...func(*Options)) (*CreateFunctionDefinitionVersionOutput, error) {
 	if params == nil {
 		params = &CreateFunctionDefinitionVersionInput{}
@@ -39,9 +38,8 @@ type CreateFunctionDefinitionVersionInput struct {
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
 
-	// The default configuration that applies to all Lambda functions in this
-	// function definition version. Individual Lambda functions can override these
-	// settings.
+	// The default configuration that applies to all Lambda functions in this function
+	// definition version. Individual Lambda functions can override these settings.
 	DefaultConfig *types.FunctionDefaultConfig
 
 	// A list of Lambda functions in this function definition version.

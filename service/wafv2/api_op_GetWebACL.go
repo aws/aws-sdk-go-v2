@@ -46,8 +46,9 @@ type GetWebACLInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//     - CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1 .
-	//     - API and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -59,20 +60,20 @@ type GetWebACLOutput struct {
 
 	// The URL to use in SDK integrations with Amazon Web Services managed rule
 	// groups. For example, you can use the integration SDKs with the account takeover
-	// prevention managed rule group AWSManagedRulesATPRuleSet. This is only
-	// populated if you are using a rule group in your web ACL that integrates with
-	// your applications in this way. For more information, see WAF client
-	// application integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
+	// prevention managed rule group AWSManagedRulesATPRuleSet . This is only populated
+	// if you are using a rule group in your web ACL that integrates with your
+	// applications in this way. For more information, see WAF client application
+	// integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
 	// in the WAF Developer Guide.
 	ApplicationIntegrationURL *string
 
-	// A token used for optimistic locking. WAF returns a token to your get  and list
+	// A token used for optimistic locking. WAF returns a token to your get and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update  and delete. WAF uses the token to ensure that no
-	// changes have been made to the entity since you last retrieved it. If a change
-	// has been made, the update fails with a WAFOptimisticLockException. If this
-	// happens, perform another get , and use the new token returned by that operation.
+	// operations like update and delete . WAF uses the token to ensure that no changes
+	// have been made to the entity since you last retrieved it. If a change has been
+	// made, the update fails with a WAFOptimisticLockException . If this happens,
+	// perform another get , and use the new token returned by that operation.
 	LockToken *string
 
 	// The web ACL specification. You can modify the settings in this web ACL and use

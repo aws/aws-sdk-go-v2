@@ -15,7 +15,7 @@ import (
 // game server process and all instances that are still active in the location are
 // shut down. To delete fleet locations, identify the fleet ID and provide a list
 // of the locations to be deleted. If successful, GameLift sets the location status
-// to DELETING, and begins to shut down existing server processes and terminate
+// to DELETING , and begins to shut down existing server processes and terminate
 // instances in each location being deleted. When completed, the location status
 // changes to TERMINATED . Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DeleteFleetLocations(ctx context.Context, params *DeleteFleetLocationsInput, optFns ...func(*Options)) (*DeleteFleetLocationsOutput, error) {

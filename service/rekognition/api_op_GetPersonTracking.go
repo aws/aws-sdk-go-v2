@@ -13,27 +13,27 @@ import (
 )
 
 // Gets the path tracking results of a Amazon Rekognition Video analysis started
-// by StartPersonTracking. The person path tracking operation is started by a
-// call to StartPersonTracking  which returns a job identifier ( JobId). When the
+// by StartPersonTracking . The person path tracking operation is started by a call
+// to StartPersonTracking which returns a job identifier ( JobId ). When the
 // operation finishes, Amazon Rekognition Video publishes a completion status to
 // the Amazon Simple Notification Service topic registered in the initial call to
-// StartPersonTracking. To get the results of the person path tracking operation,
-// first check that the status value published to the Amazon SNS topic is
-// SUCCEEDED . If so, call GetPersonTracking  and pass the job identifier ( JobId
-// ) from the initial call to StartPersonTracking . GetPersonTracking returns an
-// array, Persons, of tracked persons and the time(s) their paths were tracked in
-// the video. GetPersonTracking  only returns the default facial attributes (
-// BoundingBox , Confidence , Landmarks , Pose , and Quality). The other facial
-// attributes listed in the Face object of the following response syntax are not
-// returned. For more information, see FaceDetail in the Amazon Rekognition
-// Developer Guide. By default, the array is sorted by the time(s) a person's path
-// is tracked in the video. You can sort by tracked persons by specifying INDEX
-// for the SortBy  input parameter. Use the MaxResults parameter to limit the
-// number of items returned. If there are more results than specified in
-// MaxResults , the value of NextToken in the operation response contains a
-// pagination token for getting the next set of results. To get the next page of
-// results, call GetPersonTracking  and populate the NextToken request parameter
-// with the token value returned from the previous call to GetPersonTracking .
+// StartPersonTracking . To get the results of the person path tracking operation,
+// first check that the status value published to the Amazon SNS topic is SUCCEEDED
+// . If so, call GetPersonTracking and pass the job identifier ( JobId ) from the
+// initial call to StartPersonTracking . GetPersonTracking returns an array,
+// Persons , of tracked persons and the time(s) their paths were tracked in the
+// video. GetPersonTracking only returns the default facial attributes ( BoundingBox
+// , Confidence , Landmarks , Pose , and Quality ). The other facial attributes
+// listed in the Face object of the following response syntax are not returned.
+// For more information, see FaceDetail in the Amazon Rekognition Developer Guide.
+// By default, the array is sorted by the time(s) a person's path is tracked in the
+// video. You can sort by tracked persons by specifying INDEX for the SortBy input
+// parameter. Use the MaxResults parameter to limit the number of items returned.
+// If there are more results than specified in MaxResults , the value of NextToken
+// in the operation response contains a pagination token for getting the next set
+// of results. To get the next page of results, call GetPersonTracking and
+// populate the NextToken request parameter with the token value returned from the
+// previous call to GetPersonTracking .
 func (c *Client) GetPersonTracking(ctx context.Context, params *GetPersonTrackingInput, optFns ...func(*Options)) (*GetPersonTrackingOutput, error) {
 	if params == nil {
 		params = &GetPersonTrackingInput{}
@@ -51,8 +51,8 @@ func (c *Client) GetPersonTracking(ctx context.Context, params *GetPersonTrackin
 
 type GetPersonTrackingInput struct {
 
-	// The identifier for a job that tracks persons in a video. You get the JobId
-	// from a call to StartPersonTracking .
+	// The identifier for a job that tracks persons in a video. You get the JobId from
+	// a call to StartPersonTracking .
 	//
 	// This member is required.
 	JobId *string
@@ -67,10 +67,10 @@ type GetPersonTrackingInput struct {
 	// You can use this pagination token to retrieve the next set of persons.
 	NextToken *string
 
-	// Sort to use for elements in the Persons  array. Use TIMESTAMP to sort array
+	// Sort to use for elements in the Persons array. Use TIMESTAMP to sort array
 	// elements by the time persons are detected. Use INDEX to sort by the tracked
-	// persons. If you sort by INDEX, the array elements for each person are sorted
-	// by detection confidence. The default sort is by TIMESTAMP .
+	// persons. If you sort by INDEX , the array elements for each person are sorted by
+	// detection confidence. The default sort is by TIMESTAMP .
 	SortBy types.PersonTrackingSortBy
 
 	noSmithyDocumentSerde
@@ -90,7 +90,7 @@ type GetPersonTrackingOutput struct {
 	// person's path is tracked.
 	Persons []types.PersonDetection
 
-	// If the job fails, StatusMessage  provides a descriptive error message.
+	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
 
 	// Information about a video that Amazon Rekognition Video analyzed. Videometadata
@@ -175,16 +175,15 @@ type GetPersonTrackingAPIClient interface {
 
 var _ GetPersonTrackingAPIClient = (*Client)(nil)
 
-// GetPersonTrackingPaginatorOptions is the paginator options for
-// GetPersonTracking
+// GetPersonTrackingPaginatorOptions is the paginator options for GetPersonTracking
 type GetPersonTrackingPaginatorOptions struct {
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000. If you specify a value greater than 1000, a maximum of 1000
 	// results is returned. The default value is 1000.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

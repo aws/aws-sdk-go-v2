@@ -34,10 +34,10 @@ func (e *ExpiredTokenException) ErrorCode() string {
 }
 func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request could not be fulfilled because the identity provider (IDP) that
-// was asked to verify the incoming identity token could not be reached. This is
-// often a transient error caused by network conditions. Retry the request a
-// limited number of times so that you don't exceed the request rate. If the error
+// The request could not be fulfilled because the identity provider (IDP) that was
+// asked to verify the incoming identity token could not be reached. This is often
+// a transient error caused by network conditions. Retry the request a limited
+// number of times so that you don't exceed the request rate. If the error
 // persists, the identity provider might be down or not responding.
 type IDPCommunicationErrorException struct {
 	Message *string
@@ -66,8 +66,8 @@ func (e *IDPCommunicationErrorException) ErrorFault() smithy.ErrorFault { return
 
 // The identity provider (IdP) reported that authentication failed. This might be
 // because the claim is invalid. If this error is returned for the
-// AssumeRoleWithWebIdentityoperation, it can also mean that the claim has
-// expired or has been explicitly revoked.
+// AssumeRoleWithWebIdentity operation, it can also mean that the claim has expired
+// or has been explicitly revoked.
 type IDPRejectedClaimException struct {
 	Message *string
 

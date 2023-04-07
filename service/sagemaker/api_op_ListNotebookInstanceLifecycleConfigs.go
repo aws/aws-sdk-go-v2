@@ -32,8 +32,8 @@ func (c *Client) ListNotebookInstanceLifecycleConfigs(ctx context.Context, param
 
 type ListNotebookInstanceLifecycleConfigsInput struct {
 
-	// A filter that returns only lifecycle configurations that were created after
-	// the specified time (timestamp).
+	// A filter that returns only lifecycle configurations that were created after the
+	// specified time (timestamp).
 	CreationTimeAfter *time.Time
 
 	// A filter that returns only lifecycle configurations that were created before
@@ -56,7 +56,7 @@ type ListNotebookInstanceLifecycleConfigsInput struct {
 	NameContains *string
 
 	// If the result of a ListNotebookInstanceLifecycleConfigs request was truncated,
-	// the response includes a NextToken. To get the next set of lifecycle
+	// the response includes a NextToken . To get the next set of lifecycle
 	// configurations, use the token in the next request.
 	NextToken *string
 
@@ -71,8 +71,8 @@ type ListNotebookInstanceLifecycleConfigsInput struct {
 
 type ListNotebookInstanceLifecycleConfigsOutput struct {
 
-	// If the response is truncated, SageMaker returns this token. To get the next
-	// set of lifecycle configurations, use it in the next request.
+	// If the response is truncated, SageMaker returns this token. To get the next set
+	// of lifecycle configurations, use it in the next request.
 	NextToken *string
 
 	// An array of NotebookInstanceLifecycleConfiguration objects, each listing a
@@ -159,8 +159,8 @@ type ListNotebookInstanceLifecycleConfigsPaginatorOptions struct {
 	// The maximum number of lifecycle configurations to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

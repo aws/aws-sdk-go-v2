@@ -14,9 +14,12 @@ import (
 
 // Retrieves information about a fleet's instances, including instance IDs,
 // connection data, and status. This operation can be used in the following ways:
-//   - To get information on all instances that are deployed to a fleet's home Region, provide the fleet ID.
-//   - To get information on all instances that are deployed to a fleet's remote location, provide the fleet ID and location name.
-//   - To get information on a specific instance in a fleet, provide the fleet ID and instance ID.
+//   - To get information on all instances that are deployed to a fleet's home
+//     Region, provide the fleet ID.
+//   - To get information on all instances that are deployed to a fleet's remote
+//     location, provide the fleet ID and location name.
+//   - To get information on a specific instance in a fleet, provide the fleet ID
+//     and instance ID.
 //
 // Use the pagination parameters to retrieve results as a set of sequential pages.
 // If successful, an Instance object is returned for each requested instance.
@@ -41,8 +44,8 @@ func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstance
 
 type DescribeInstancesInput struct {
 
-	// A unique identifier for the fleet to retrieve instance information for. You
-	// can use either the fleet ID or ARN value.
+	// A unique identifier for the fleet to retrieve instance information for. You can
+	// use either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
@@ -154,15 +157,14 @@ type DescribeInstancesAPIClient interface {
 
 var _ DescribeInstancesAPIClient = (*Client)(nil)
 
-// DescribeInstancesPaginatorOptions is the paginator options for
-// DescribeInstances
+// DescribeInstancesPaginatorOptions is the paginator options for DescribeInstances
 type DescribeInstancesPaginatorOptions struct {
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

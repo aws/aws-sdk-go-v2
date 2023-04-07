@@ -256,9 +256,9 @@ const (
 	ContainerInstanceStatusRegistrationFailed ContainerInstanceStatus = "REGISTRATION_FAILED"
 )
 
-// Values returns all known values for ContainerInstanceStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContainerInstanceStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerInstanceStatus) Values() []ContainerInstanceStatus {
 	return []ContainerInstanceStatus{
 		"ACTIVE",
@@ -393,8 +393,8 @@ const (
 	EFSTransitEncryptionDisabled EFSTransitEncryption = "DISABLED"
 )
 
-// Values returns all known values for EFSTransitEncryption. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for EFSTransitEncryption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EFSTransitEncryption) Values() []EFSTransitEncryption {
 	return []EFSTransitEncryption{
@@ -506,9 +506,9 @@ const (
 	InstanceHealthCheckTypeContainerRuntime InstanceHealthCheckType = "CONTAINER_RUNTIME"
 )
 
-// Values returns all known values for InstanceHealthCheckType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InstanceHealthCheckType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceHealthCheckType) Values() []InstanceHealthCheckType {
 	return []InstanceHealthCheckType{
 		"CONTAINER_RUNTIME",
@@ -609,8 +609,8 @@ const (
 	ManagedScalingStatusDisabled ManagedScalingStatus = "DISABLED"
 )
 
-// Values returns all known values for ManagedScalingStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ManagedScalingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ManagedScalingStatus) Values() []ManagedScalingStatus {
 	return []ManagedScalingStatus{
@@ -648,9 +648,9 @@ const (
 	NetworkModeNone   NetworkMode = "none"
 )
 
-// Values returns all known values for NetworkMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NetworkMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (NetworkMode) Values() []NetworkMode {
 	return []NetworkMode{
 		"bridge",
@@ -674,9 +674,9 @@ const (
 	OSFamilyLinux                 OSFamily = "LINUX"
 )
 
-// Values returns all known values for OSFamily. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OSFamily. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (OSFamily) Values() []OSFamily {
 	return []OSFamily{
 		"WINDOWS_SERVER_2019_FULL",
@@ -716,9 +716,9 @@ const (
 	PlacementConstraintTypeMemberOf         PlacementConstraintType = "memberOf"
 )
 
-// Values returns all known values for PlacementConstraintType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PlacementConstraintType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementConstraintType) Values() []PlacementConstraintType {
 	return []PlacementConstraintType{
 		"distinctInstance",
@@ -895,9 +895,9 @@ const (
 	SettingNameContainerInsights              SettingName = "containerInsights"
 )
 
-// Values returns all known values for SettingName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SettingName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SettingName) Values() []SettingName {
 	return []SettingName{
 		"serviceLongArnFormat",
@@ -1003,9 +1003,9 @@ const (
 	TaskDefinitionPlacementConstraintTypeMemberOf TaskDefinitionPlacementConstraintType = "memberOf"
 )
 
-// Values returns all known values for TaskDefinitionPlacementConstraintType.
-// Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for TaskDefinitionPlacementConstraintType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (TaskDefinitionPlacementConstraintType) Values() []TaskDefinitionPlacementConstraintType {
 	return []TaskDefinitionPlacementConstraintType{
@@ -1022,8 +1022,8 @@ const (
 	TaskDefinitionStatusDeleteInProgress TaskDefinitionStatus = "DELETE_IN_PROGRESS"
 )
 
-// Values returns all known values for TaskDefinitionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TaskDefinitionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TaskDefinitionStatus) Values() []TaskDefinitionStatus {
 	return []TaskDefinitionStatus{

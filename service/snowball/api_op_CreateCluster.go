@@ -12,7 +12,7 @@ import (
 )
 
 // Creates an empty cluster. Each cluster supports five nodes. You use the
-// CreateJobaction separately to create the jobs for each of these nodes. The
+// CreateJob action separately to create the jobs for each of these nodes. The
 // cluster does not ship until these five node jobs have been created.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
@@ -37,7 +37,7 @@ type CreateClusterInput struct {
 	AddressId *string
 
 	// The type of job for this cluster. Currently, the only job type supported for
-	// clusters is LOCAL_USE. For more information, see
+	// clusters is LOCAL_USE . For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
@@ -52,7 +52,7 @@ type CreateClusterInput struct {
 	// This member is required.
 	Resources *types.JobResource
 
-	// The RoleARN  that you want to associate with this cluster. RoleArn values are
+	// The RoleARN that you want to associate with this cluster. RoleArn values are
 	// created by using the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
 	// API action in Identity and Access Management (IAM).
 	//
@@ -63,15 +63,24 @@ type CreateClusterInput struct {
 	// how soon you'll get each Snowball Edge device, rather it represents how quickly
 	// each device moves to its destination while in transit. Regional shipping speeds
 	// are as follows:
-	//     - In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.
-	//     - In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.
-	//     - In India, Snow devices are delivered in one to seven days.
-	//     - In the United States of America (US), you have access to one-day shipping and two-day shipping.
+	//   - In Australia, you have access to express shipping. Typically, Snow devices
+	//   shipped express are delivered in about a day.
+	//   - In the European Union (EU), you have access to express shipping. Typically,
+	//   Snow devices shipped express are delivered in about a day. In addition, most
+	//   countries in the EU have access to standard shipping, which typically takes less
+	//   than a week, one way.
+	//   - In India, Snow devices are delivered in one to seven days.
+	//   - In the United States of America (US), you have access to one-day shipping
+	//   and two-day shipping.
 	//
-	//     - In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.
-	//     - In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.
-	//     - In India, Snow devices are delivered in one to seven days.
-	//     - In the US, you have access to one-day shipping and two-day shipping.
+	//   - In Australia, you have access to express shipping. Typically, devices
+	//   shipped express are delivered in about a day.
+	//   - In the European Union (EU), you have access to express shipping. Typically,
+	//   Snow devices shipped express are delivered in about a day. In addition, most
+	//   countries in the EU have access to standard shipping, which typically takes less
+	//   than a week, one way.
+	//   - In India, Snow devices are delivered in one to seven days.
+	//   - In the US, you have access to one-day shipping and two-day shipping.
 	//
 	// This member is required.
 	ShippingOption types.ShippingOption
@@ -95,7 +104,7 @@ type CreateClusterInput struct {
 	// regions.
 	ForwardingAddressId *string
 
-	// The KmsKeyARN  value that you want to associate with this cluster. KmsKeyARN
+	// The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN
 	// values are created by using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
 	// API action in Key Management Service (KMS).
 	KmsKeyARN *string
@@ -110,7 +119,7 @@ type CreateClusterInput struct {
 	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
 
 	// Allows you to securely operate and manage Snow devices in a cluster remotely
-	// from outside of your internal network. When set to INSTALLED_AUTOSTART, remote
+	// from outside of your internal network. When set to INSTALLED_AUTOSTART , remote
 	// management will automatically be available when the device arrives at your
 	// location. Otherwise, you need to use the Snowball Client to manage the device.
 	RemoteManagement types.RemoteManagement

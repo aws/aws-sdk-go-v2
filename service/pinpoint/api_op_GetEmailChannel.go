@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the status and settings of the email channel for
-// an application.
+// Retrieves information about the status and settings of the email channel for an
+// application.
 func (c *Client) GetEmailChannel(ctx context.Context, params *GetEmailChannelInput, optFns ...func(*Options)) (*GetEmailChannelOutput, error) {
 	if params == nil {
 		params = &GetEmailChannelInput{}

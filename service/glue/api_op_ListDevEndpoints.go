@@ -48,8 +48,8 @@ type ListDevEndpointsInput struct {
 
 type ListDevEndpointsOutput struct {
 
-	// The names of all the DevEndpoint s in the account, or the DevEndpoints with
-	// the specified tags.
+	// The names of all the DevEndpoint s in the account, or the DevEndpoint s with the
+	// specified tags.
 	DevEndpointNames []string
 
 	// A continuation token, if the returned list does not contain the last metric
@@ -135,8 +135,8 @@ type ListDevEndpointsPaginatorOptions struct {
 	// The maximum size of a list to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

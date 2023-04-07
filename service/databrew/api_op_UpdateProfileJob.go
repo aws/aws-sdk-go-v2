@@ -40,8 +40,8 @@ type UpdateProfileJobInput struct {
 	// This member is required.
 	OutputLocation *types.S3Location
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
-	// role to be assumed when DataBrew runs the job.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// to be assumed when DataBrew runs the job.
 	//
 	// This member is required.
 	RoleArn *string
@@ -51,13 +51,13 @@ type UpdateProfileJobInput struct {
 	// profile job will run with default settings.
 	Configuration *types.ProfileConfiguration
 
-	// The Amazon Resource Name (ARN) of an encryption key that is used to protect
-	// the job.
+	// The Amazon Resource Name (ARN) of an encryption key that is used to protect the
+	// job.
 	EncryptionKeyArn *string
 
 	// The encryption mode for the job, which can be one of the following:
-	//     - SSE-KMS - Server-side encryption with keys managed by KMS.
-	//     - SSE-S3 - Server-side encryption with keys managed by Amazon S3.
+	//   - SSE-KMS - Server-side encryption with keys managed by KMS.
+	//   - SSE-S3 - Server-side encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 
 	// Sample configuration for Profile Jobs only. Determines the number of rows on

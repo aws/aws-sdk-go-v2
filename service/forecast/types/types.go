@@ -10,9 +10,9 @@ import (
 // Defines the modifications that you are making to an attribute for a what-if
 // forecast. For example, you can use this operation to create a what-if forecast
 // that investigates a 10% off sale on all shoes. To do this, you specify
-// "AttributeName": "shoes" , "Operation": "MULTIPLY" , and "Value": "0.90". Pair
-// this operation with the TimeSeriesCondition  operation within the
-// CreateWhatIfForecastRequest$TimeSeriesTransformationsoperation to define a
+// "AttributeName": "shoes" , "Operation": "MULTIPLY" , and "Value": "0.90" . Pair
+// this operation with the TimeSeriesCondition operation within the
+// CreateWhatIfForecastRequest$TimeSeriesTransformations operation to define a
 // subset of attribute items that are modified.
 type Action struct {
 
@@ -22,10 +22,10 @@ type Action struct {
 	AttributeName *string
 
 	// The operation that is applied to the provided attribute. Operations include:
-	//     - ADD - adds Value to all rows of AttributeName .
-	//     - SUBTRACT - subtracts Value from all rows of AttributeName .
-	//     - MULTIPLY - multiplies all rows of AttributeName by Value .
-	//     - DIVIDE - divides all rows of AttributeName by Value .
+	//   - ADD - adds Value to all rows of AttributeName .
+	//   - SUBTRACT - subtracts Value from all rows of AttributeName .
+	//   - MULTIPLY - multiplies all rows of AttributeName by Value .
+	//   - DIVIDE - divides all rows of AttributeName by Value .
 	//
 	// This member is required.
 	Operation Operation
@@ -43,89 +43,89 @@ type Action struct {
 // Index The Amazon Forecast Weather Index is a built-in dataset that incorporates
 // historical and projected weather information into your model. The Weather Index
 // supplements your datasets with over two years of historical weather data and up
-// to 14 days of projected weather data. For more information, see Amazon
-// Forecast Weather Index (https://docs.aws.amazon.com/forecast/latest/dg/weather.html)
-// . Holidays Holidays is a built-in dataset that incorporates national holiday
+// to 14 days of projected weather data. For more information, see Amazon Forecast
+// Weather Index (https://docs.aws.amazon.com/forecast/latest/dg/weather.html) .
+// Holidays Holidays is a built-in dataset that incorporates national holiday
 // information into your model. It provides native support for the holiday
 // calendars of 66 countries. To view the holiday calendars, refer to the Jollyday (http://jollyday.sourceforge.net/data.html)
 // library. For more information, see Holidays Featurization (https://docs.aws.amazon.com/forecast/latest/dg/holidays.html)
 // .
 type AdditionalDataset struct {
 
-	// The name of the additional dataset. Valid names: "holiday"  and "weather" .
+	// The name of the additional dataset. Valid names: "holiday" and "weather" .
 	//
 	// This member is required.
 	Name *string
 
 	// Weather Index To enable the Weather Index, do not specify a value for
-	// Configuration . Holidays Holidays To enable Holidays, set CountryCode to one
-	// of the following two-letter country codes:
-	//     - "AL" - ALBANIA
-	//     - "AR" - ARGENTINA
-	//     - "AT" - AUSTRIA
-	//     - "AU" - AUSTRALIA
-	//     - "BA" - BOSNIA HERZEGOVINA
-	//     - "BE" - BELGIUM
-	//     - "BG" - BULGARIA
-	//     - "BO" - BOLIVIA
-	//     - "BR" - BRAZIL
-	//     - "BY" - BELARUS
-	//     - "CA" - CANADA
-	//     - "CL" - CHILE
-	//     - "CO" - COLOMBIA
-	//     - "CR" - COSTA RICA
-	//     - "HR" - CROATIA
-	//     - "CZ" - CZECH REPUBLIC
-	//     - "DK" - DENMARK
-	//     - "EC" - ECUADOR
-	//     - "EE" - ESTONIA
-	//     - "ET" - ETHIOPIA
-	//     - "FI" - FINLAND
-	//     - "FR" - FRANCE
-	//     - "DE" - GERMANY
-	//     - "GR" - GREECE
-	//     - "HU" - HUNGARY
-	//     - "IS" - ICELAND
-	//     - "IN" - INDIA
-	//     - "IE" - IRELAND
-	//     - "IT" - ITALY
-	//     - "JP" - JAPAN
-	//     - "KZ" - KAZAKHSTAN
-	//     - "KR" - KOREA
-	//     - "LV" - LATVIA
-	//     - "LI" - LIECHTENSTEIN
-	//     - "LT" - LITHUANIA
-	//     - "LU" - LUXEMBOURG
-	//     - "MK" - MACEDONIA
-	//     - "MT" - MALTA
-	//     - "MX" - MEXICO
-	//     - "MD" - MOLDOVA
-	//     - "ME" - MONTENEGRO
-	//     - "NL" - NETHERLANDS
-	//     - "NZ" - NEW ZEALAND
-	//     - "NI" - NICARAGUA
-	//     - "NG" - NIGERIA
-	//     - "NO" - NORWAY
-	//     - "PA" - PANAMA
-	//     - "PY" - PARAGUAY
-	//     - "PE" - PERU
-	//     - "PL" - POLAND
-	//     - "PT" - PORTUGAL
-	//     - "RO" - ROMANIA
-	//     - "RU" - RUSSIA
-	//     - "RS" - SERBIA
-	//     - "SK" - SLOVAKIA
-	//     - "SI" - SLOVENIA
-	//     - "ZA" - SOUTH AFRICA
-	//     - "ES" - SPAIN
-	//     - "SE" - SWEDEN
-	//     - "CH" - SWITZERLAND
-	//     - "UA" - UKRAINE
-	//     - "AE" - UNITED ARAB EMIRATES
-	//     - "US" - UNITED STATES
-	//     - "UK" - UNITED KINGDOM
-	//     - "UY" - URUGUAY
-	//     - "VE" - VENEZUELA
+	// Configuration . Holidays Holidays To enable Holidays, set CountryCode to one of
+	// the following two-letter country codes:
+	//   - "AL" - ALBANIA
+	//   - "AR" - ARGENTINA
+	//   - "AT" - AUSTRIA
+	//   - "AU" - AUSTRALIA
+	//   - "BA" - BOSNIA HERZEGOVINA
+	//   - "BE" - BELGIUM
+	//   - "BG" - BULGARIA
+	//   - "BO" - BOLIVIA
+	//   - "BR" - BRAZIL
+	//   - "BY" - BELARUS
+	//   - "CA" - CANADA
+	//   - "CL" - CHILE
+	//   - "CO" - COLOMBIA
+	//   - "CR" - COSTA RICA
+	//   - "HR" - CROATIA
+	//   - "CZ" - CZECH REPUBLIC
+	//   - "DK" - DENMARK
+	//   - "EC" - ECUADOR
+	//   - "EE" - ESTONIA
+	//   - "ET" - ETHIOPIA
+	//   - "FI" - FINLAND
+	//   - "FR" - FRANCE
+	//   - "DE" - GERMANY
+	//   - "GR" - GREECE
+	//   - "HU" - HUNGARY
+	//   - "IS" - ICELAND
+	//   - "IN" - INDIA
+	//   - "IE" - IRELAND
+	//   - "IT" - ITALY
+	//   - "JP" - JAPAN
+	//   - "KZ" - KAZAKHSTAN
+	//   - "KR" - KOREA
+	//   - "LV" - LATVIA
+	//   - "LI" - LIECHTENSTEIN
+	//   - "LT" - LITHUANIA
+	//   - "LU" - LUXEMBOURG
+	//   - "MK" - MACEDONIA
+	//   - "MT" - MALTA
+	//   - "MX" - MEXICO
+	//   - "MD" - MOLDOVA
+	//   - "ME" - MONTENEGRO
+	//   - "NL" - NETHERLANDS
+	//   - "NZ" - NEW ZEALAND
+	//   - "NI" - NICARAGUA
+	//   - "NG" - NIGERIA
+	//   - "NO" - NORWAY
+	//   - "PA" - PANAMA
+	//   - "PY" - PARAGUAY
+	//   - "PE" - PERU
+	//   - "PL" - POLAND
+	//   - "PT" - PORTUGAL
+	//   - "RO" - ROMANIA
+	//   - "RU" - RUSSIA
+	//   - "RS" - SERBIA
+	//   - "SK" - SLOVAKIA
+	//   - "SI" - SLOVENIA
+	//   - "ZA" - SOUTH AFRICA
+	//   - "ES" - SPAIN
+	//   - "SE" - SWEDEN
+	//   - "CH" - SWITZERLAND
+	//   - "UA" - UKRAINE
+	//   - "AE" - UNITED ARAB EMIRATES
+	//   - "US" - UNITED STATES
+	//   - "UK" - UNITED KINGDOM
+	//   - "UY" - URUGUAY
+	//   - "VE" - VENEZUELA
 	Configuration map[string][]string
 
 	noSmithyDocumentSerde
@@ -134,10 +134,10 @@ type AdditionalDataset struct {
 // Provides information about the method used to transform attributes. The
 //
 //	following is an example using the RETAIL domain: {
-//	     "AttributeName": "demand",
+//	    "AttributeName": "demand",
 //
-//	    "Transformations": {"aggregation": "sum", "middlefill": "zero",
-//	    "backfill": "zero"}
+//	    "Transformations": {"aggregation": "sum", "middlefill": "zero", "backfill":
+//	    "zero"}
 //
 //	    }
 type AttributeConfig struct {
@@ -154,20 +154,18 @@ type AttributeConfig struct {
 	// Time Series attributes do not accept aggregation parameters. The following list
 	// shows the parameters and their valid values for the "filling" featurization
 	// method for a Target Time Series dataset. Default values are bolded.
-	//     - aggregation : sum, avg , first , min , max
-	//     - frontfill : none
-	//     - middlefill : zero, nan (not a number), value , median , mean , min , max
-	//     - backfill : zero, nan , value , median , mean , min , max
-	// The following
-	// list shows the parameters and their valid values for a Related Time Series
-	// featurization method (there are no defaults):
-	//     - middlefill : zero , value , median , mean , min , max
-	//     - backfill : zero , value , median , mean , min , max
-	//     - futurefill : zero , value , median , mean , min , max
-	// To set a filling
-	// method to a specific value, set the fill parameter to value and define the
-	// value in a corresponding _value parameter. For example, to set backfilling to
-	// a value of 2, include the following: "backfill": "value"  and
+	//   - aggregation : sum, avg , first , min , max
+	//   - frontfill : none
+	//   - middlefill : zero, nan (not a number), value , median , mean , min , max
+	//   - backfill : zero, nan , value , median , mean , min , max
+	// The following list shows the parameters and their valid values for a Related
+	// Time Series featurization method (there are no defaults):
+	//   - middlefill : zero , value , median , mean , min , max
+	//   - backfill : zero , value , median , mean , min , max
+	//   - futurefill : zero , value , median , mean , min , max
+	// To set a filling method to a specific value, set the fill parameter to value
+	// and define the value in a corresponding _value parameter. For example, to set
+	// backfilling to a value of 2, include the following: "backfill": "value" and
 	// "backfill_value":"2" .
 	//
 	// This member is required.
@@ -202,7 +200,7 @@ type BaselineMetric struct {
 }
 
 // Specifies a categorical hyperparameter and it's range of tunable values. This
-// object is part of the ParameterRanges  object.
+// object is part of the ParameterRanges object.
 type CategoricalParameterRange struct {
 
 	// The name of the categorical hyperparameter to tune.
@@ -219,7 +217,7 @@ type CategoricalParameterRange struct {
 }
 
 // Specifies a continuous hyperparameter and it's range of tunable values. This
-// object is part of the ParameterRanges  object.
+// object is part of the ParameterRanges object.
 type ContinuousParameterRange struct {
 
 	// The maximum tunable value of the hyperparameter.
@@ -285,8 +283,7 @@ type DataDestination struct {
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of the dataset group properties used in the
-// ListDatasetGroups (https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetGroups.html)
+// Provides a summary of the dataset group properties used in the ListDatasetGroups (https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetGroups.html)
 // operation. To get the complete set of properties, call the DescribeDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html)
 // operation, and provide the DatasetGroupArn .
 type DatasetGroupSummary struct {
@@ -303,7 +300,7 @@ type DatasetGroupSummary struct {
 	// When the dataset group was created or last updated from a call to the
 	// UpdateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html)
 	// operation. While the dataset group is being updated, LastModificationTime is
-	// the current time of the ListDatasetGroups  call.
+	// the current time of the ListDatasetGroups call.
 	LastModificationTime *time.Time
 
 	noSmithyDocumentSerde
@@ -334,23 +331,23 @@ type DatasetImportJobSummary struct {
 	// The import mode of the dataset import job, FULL or INCREMENTAL.
 	ImportMode ImportMode
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the dataset import job. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -376,9 +373,9 @@ type DatasetSummary struct {
 	// The domain associated with the dataset.
 	Domain Domain
 
-	// When you create a dataset, LastModificationTime  is the same as CreationTime.
+	// When you create a dataset, LastModificationTime is the same as CreationTime .
 	// While data is being imported to the dataset, LastModificationTime is the
-	// current time of the ListDatasets  call. After a CreateDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
+	// current time of the ListDatasets call. After a CreateDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
 	// operation has finished, LastModificationTime is when the import job completed
 	// or failed.
 	LastModificationTime *time.Time
@@ -400,9 +397,9 @@ type DataSource struct {
 	noSmithyDocumentSerde
 }
 
-// An Key Management Service (KMS) key and an Identity and Access Management
-// (IAM) role that Amazon Forecast can assume to access the key. You can specify
-// this optional object in the CreateDataset  and CreatePredictor  requests.
+// An Key Management Service (KMS) key and an Identity and Access Management (IAM)
+// role that Amazon Forecast can assume to access the key. You can specify this
+// optional object in the CreateDataset and CreatePredictor requests.
 type EncryptionConfig struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key.
@@ -412,7 +409,7 @@ type EncryptionConfig struct {
 
 	// The ARN of the IAM role that Amazon Forecast can assume to access the KMS key.
 	// Passing a role across Amazon Web Services accounts is not allowed. If you pass a
-	// role that isn't in your account, you get an InvalidInputException  error.
+	// role that isn't in your account, you get an InvalidInputException error.
 	//
 	// This member is required.
 	RoleArn *string
@@ -421,7 +418,7 @@ type EncryptionConfig struct {
 }
 
 // Provides detailed error metrics to evaluate the performance of a predictor.
-// This object is part of the Metrics  object.
+// This object is part of the Metrics object.
 type ErrorMetric struct {
 
 	// The Forecast type used to compute WAPE, MAPE, MASE, and RMSE.
@@ -453,12 +450,12 @@ type EvaluationParameters struct {
 	// points. The default is the value of the forecast horizon. BackTestWindowOffset
 	// can be used to mimic a past virtual forecast start date. This value must be
 	// greater than or equal to the forecast horizon and less than half of the
-	// TARGET_TIME_SERIES dataset length. ForecastHorizon  <= BackTestWindowOffset <
+	// TARGET_TIME_SERIES dataset length. ForecastHorizon <= BackTestWindowOffset <
 	// 1/2 * TARGET_TIME_SERIES dataset length
 	BackTestWindowOffset *int32
 
-	// The number of times to split the input data. The default is 1. Valid values
-	// are 1 through 5.
+	// The number of times to split the input data. The default is 1. Valid values are
+	// 1 through 5.
 	NumberOfBacktestWindows *int32
 
 	noSmithyDocumentSerde
@@ -481,25 +478,25 @@ type EvaluationResult struct {
 
 // The ExplainabilityConfig data type defines the number of time series and time
 // points included in CreateExplainability . If you provide a predictor ARN for
-// ResourceArn , you must set both TimePointGranularity  and TimeSeriesGranularity
+// ResourceArn , you must set both TimePointGranularity and TimeSeriesGranularity
 // to “ALL”. When creating Predictor Explainability, Amazon Forecast considers all
-// time series and time points. If you provide a forecast ARN for ResourceArn,
-// you can set TimePointGranularity  and TimeSeriesGranularity to either “ALL” or
+// time series and time points. If you provide a forecast ARN for ResourceArn , you
+// can set TimePointGranularity and TimeSeriesGranularity to either “ALL” or
 // “Specific”.
 type ExplainabilityConfig struct {
 
 	// To create an Explainability for all time points in your forecast horizon, use
-	// ALL. To create an Explainability for specific time points in your forecast
-	// horizon, use SPECIFIC . Specify time points with the StartDateTime  and
-	// EndDateTime parameters within the CreateExplainability  operation.
+	// ALL . To create an Explainability for specific time points in your forecast
+	// horizon, use SPECIFIC . Specify time points with the StartDateTime and
+	// EndDateTime parameters within the CreateExplainability operation.
 	//
 	// This member is required.
 	TimePointGranularity TimePointGranularity
 
-	// To create an Explainability for all time series in your datasets, use ALL. To
-	// create an Explainability for specific time series in your datasets, use
-	// SPECIFIC. Specify time series by uploading a CSV or Parquet file to an Amazon
-	// S3 bucket and set the location within the DataDestination  data type.
+	// To create an Explainability for all time series in your datasets, use ALL . To
+	// create an Explainability for specific time series in your datasets, use SPECIFIC
+	// . Specify time series by uploading a CSV or Parquet file to an Amazon S3 bucket
+	// and set the location within the DataDestination data type.
 	//
 	// This member is required.
 	TimeSeriesGranularity TimeSeriesGranularity
@@ -508,8 +505,8 @@ type ExplainabilityConfig struct {
 }
 
 // Provides a summary of the Explainability export properties used in the
-// ListExplainabilityExportsoperation. To get a complete set of properties, call
-// the DescribeExplainabilityExport  operation, and provide the
+// ListExplainabilityExports operation. To get a complete set of properties, call
+// the DescribeExplainabilityExport operation, and provide the
 // ExplainabilityExportArn .
 type ExplainabilityExportSummary struct {
 
@@ -527,13 +524,13 @@ type ExplainabilityExportSummary struct {
 	// The name of the Explainability export
 	ExplainabilityExportName *string
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// Information about any errors that may have occurred during the Explainability
@@ -541,10 +538,10 @@ type ExplainabilityExportSummary struct {
 	Message *string
 
 	// The status of the Explainability export. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -557,10 +554,10 @@ type ExplainabilityInfo struct {
 	ExplainabilityArn *string
 
 	// The status of the Explainability. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -584,13 +581,13 @@ type ExplainabilitySummary struct {
 	// The name of the Explainability.
 	ExplainabilityName *string
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// Information about any errors that may have occurred during the Explainability
@@ -602,22 +599,21 @@ type ExplainabilitySummary struct {
 	ResourceArn *string
 
 	// The status of the Explainability. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
 // This object belongs to the CreatePredictor operation. If you created your
-// predictor with CreateAutoPredictor , see AttributeConfig. Provides
+// predictor with CreateAutoPredictor , see AttributeConfig . Provides
 // featurization (transformation) information for a dataset field. This object is
 //
-//	part of the FeaturizationConfig  object. For example: {
-//	    "AttributeName":
-//	    "demand",
+//	part of the FeaturizationConfig object. For example: {
+//	    "AttributeName": "demand",
 //
 //	    FeaturizationPipeline [ {
 //
@@ -632,8 +628,8 @@ type Featurization struct {
 
 	// The name of the schema attribute that specifies the data field to be
 	// featurized. Amazon Forecast supports the target field of the TARGET_TIME_SERIES
-	// and the RELATED_TIME_SERIES  datasets. For example, for the RETAIL domain, the
-	// target is demand , and for the CUSTOM  domain, the target is target_value. For
+	// and the RELATED_TIME_SERIES datasets. For example, for the RETAIL domain, the
+	// target is demand , and for the CUSTOM domain, the target is target_value . For
 	// more information, see howitworks-missing-values .
 	//
 	// This member is required.
@@ -651,11 +647,11 @@ type Featurization struct {
 // operation, the specified algorithm trains a model using the specified dataset
 // group. You can optionally tell the operation to modify data fields prior to
 // training a model. These modifications are referred to as featurization. You
-// define featurization using the FeaturizationConfig object. You specify an
-// array of transformations, one for each field that you want to featurize. You
-// then include the FeaturizationConfig  object in your CreatePredictor request.
-// Amazon Forecast applies the featurization to the TARGET_TIME_SERIES  and
-// RELATED_TIME_SERIESdatasets before model training. You can create multiple
+// define featurization using the FeaturizationConfig object. You specify an array
+// of transformations, one for each field that you want to featurize. You then
+// include the FeaturizationConfig object in your CreatePredictor request. Amazon
+// Forecast applies the featurization to the TARGET_TIME_SERIES and
+// RELATED_TIME_SERIES datasets before model training. You can create multiple
 // featurization configurations. For example, you might call the CreatePredictor
 // operation twice by specifying different featurization configurations.
 type FeaturizationConfig struct {
@@ -667,17 +663,17 @@ type FeaturizationConfig struct {
 	// That means, for example, you cannot specify a frequency of 60 minutes, because
 	// that is equivalent to 1 hour. The valid values for each frequency are the
 	// following:
-	//     - Minute - 1-59
-	//     - Hour - 1-23
-	//     - Day - 1-6
-	//     - Week - 1-4
-	//     - Month - 1-11
-	//     - Year - 1
-	// Thus, if you want every other week forecasts, specify "2W". Or,
-	// if you want quarterly forecasts, you specify "3M". The frequency must be greater
-	// than or equal to the TARGET_TIME_SERIES dataset frequency. When a
-	// RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the
-	// TARGET_TIME_SERIES dataset frequency.
+	//   - Minute - 1-59
+	//   - Hour - 1-23
+	//   - Day - 1-6
+	//   - Week - 1-4
+	//   - Month - 1-11
+	//   - Year - 1
+	// Thus, if you want every other week forecasts, specify "2W". Or, if you want
+	// quarterly forecasts, you specify "3M". The frequency must be greater than or
+	// equal to the TARGET_TIME_SERIES dataset frequency. When a RELATED_TIME_SERIES
+	// dataset is provided, the frequency must be equal to the TARGET_TIME_SERIES
+	// dataset frequency.
 	//
 	// This member is required.
 	ForecastFrequency *string
@@ -691,23 +687,23 @@ type FeaturizationConfig struct {
 	// across all of your stores, and your dataset contains a store_id field. If you
 	// want the sales forecast for each item by store, you would specify store_id as
 	// the dimension. All forecast dimensions specified in the TARGET_TIME_SERIES
-	// dataset don't need to be specified in the CreatePredictor request. All
-	// forecast dimensions specified in the RELATED_TIME_SERIES dataset must be
-	// specified in the CreatePredictor  request.
+	// dataset don't need to be specified in the CreatePredictor request. All forecast
+	// dimensions specified in the RELATED_TIME_SERIES dataset must be specified in
+	// the CreatePredictor request.
 	ForecastDimensions []string
 
 	noSmithyDocumentSerde
 }
 
 // Provides information about the method that featurizes (transforms) a dataset
-// field. The method is part of the FeaturizationPipeline  of the Featurization
+// field. The method is part of the FeaturizationPipeline of the Featurization
 // object. The following is an example of how you specify a FeaturizationMethod
 //
 //	object. {
-//	     "FeaturizationMethodName": "filling",
+//	    "FeaturizationMethodName": "filling",
 //
-//	    "FeaturizationMethodParameters": {"aggregation": "sum", "middlefill":
-//	    "zero", "backfill": "zero"}
+//	    "FeaturizationMethodParameters": {"aggregation": "sum", "middlefill": "zero",
+//	    "backfill": "zero"}
 //
 //	    }
 type FeaturizationMethod struct {
@@ -722,20 +718,18 @@ type FeaturizationMethod struct {
 	// Time Series attributes do not accept aggregation parameters. The following list
 	// shows the parameters and their valid values for the "filling" featurization
 	// method for a Target Time Series dataset. Bold signifies the default value.
-	//     - aggregation : sum, avg , first , min , max
-	//     - frontfill : none
-	//     - middlefill : zero, nan (not a number), value , median , mean , min , max
-	//     - backfill : zero, nan , value , median , mean , min , max
-	// The following
-	// list shows the parameters and their valid values for a Related Time Series
-	// featurization method (there are no defaults):
-	//     - middlefill : zero , value , median , mean , min , max
-	//     - backfill : zero , value , median , mean , min , max
-	//     - futurefill : zero , value , median , mean , min , max
-	// To set a filling
-	// method to a specific value, set the fill parameter to value and define the
-	// value in a corresponding _value parameter. For example, to set backfilling to
-	// a value of 2, include the following: "backfill": "value"  and
+	//   - aggregation : sum, avg , first , min , max
+	//   - frontfill : none
+	//   - middlefill : zero, nan (not a number), value , median , mean , min , max
+	//   - backfill : zero, nan , value , median , mean , min , max
+	// The following list shows the parameters and their valid values for a Related
+	// Time Series featurization method (there are no defaults):
+	//   - middlefill : zero , value , median , mean , min , max
+	//   - backfill : zero , value , median , mean , min , max
+	//   - futurefill : zero , value , median , mean , min , max
+	// To set a filling method to a specific value, set the fill parameter to value
+	// and define the value in a corresponding _value parameter. For example, to set
+	// backfilling to a value of 2, include the following: "backfill": "value" and
 	// "backfill_value":"2" .
 	FeaturizationMethodParameters map[string]string
 
@@ -743,7 +737,7 @@ type FeaturizationMethod struct {
 }
 
 // Describes a filter for choosing a subset of objects. Each filter consists of a
-// condition and a match statement. The condition is either IS  or IS_NOT, which
+// condition and a match statement. The condition is either IS or IS_NOT , which
 // specifies whether to include or exclude the objects that match the statement,
 // respectively. The match statement consists of a key and a value.
 type Filter struct {
@@ -768,8 +762,8 @@ type Filter struct {
 }
 
 // Provides a summary of the forecast export job properties used in the
-// ListForecastExportJobsoperation. To get the complete set of properties, call
-// the DescribeForecastExportJob  operation, and provide the listed
+// ListForecastExportJobs operation. To get the complete set of properties, call
+// the DescribeForecastExportJob operation, and provide the listed
 // ForecastExportJobArn .
 type ForecastExportJobSummary struct {
 
@@ -786,25 +780,25 @@ type ForecastExportJobSummary struct {
 	// The name of the forecast export job.
 	ForecastExportJobName *string
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the forecast export job. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
-	//  The Status  of the forecast export job must be ACTIVE before you can access
-	// the forecast in your S3 bucket.
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	// The Status of the forecast export job must be ACTIVE before you can access the
+	// forecast in your S3 bucket.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -812,7 +806,7 @@ type ForecastExportJobSummary struct {
 
 // Provides a summary of the forecast properties used in the ListForecasts
 // operation. To get the complete set of properties, call the DescribeForecast
-// operation, and provide the ForecastArn  that is listed in the summary.
+// operation, and provide the ForecastArn that is listed in the summary.
 type ForecastSummary struct {
 
 	// Whether the Forecast was created from an AutoPredictor.
@@ -821,8 +815,8 @@ type ForecastSummary struct {
 	// When the forecast creation task was created.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the dataset group that provided the data
-	// used to train the predictor.
+	// The Amazon Resource Name (ARN) of the dataset group that provided the data used
+	// to train the predictor.
 	DatasetGroupArn *string
 
 	// The ARN of the forecast.
@@ -831,13 +825,13 @@ type ForecastSummary struct {
 	// The name of the forecast.
 	ForecastName *string
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -847,11 +841,11 @@ type ForecastSummary struct {
 	PredictorArn *string
 
 	// The status of the forecast. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
-	//  The Status  of the forecast must be ACTIVE before you can query or export the
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	// The Status of the forecast must be ACTIVE before you can query or export the
 	// forecast.
 	Status *string
 
@@ -877,9 +871,9 @@ type HyperParameterTuningJobConfig struct {
 }
 
 // This object belongs to the CreatePredictor operation. If you created your
-// predictor with CreateAutoPredictor , see DataConfig. The data used to train a
+// predictor with CreateAutoPredictor , see DataConfig . The data used to train a
 // predictor. The data includes a dataset group and any supplementary features. You
-// specify this object in the CreatePredictor  request.
+// specify this object in the CreatePredictor request.
 type InputDataConfig struct {
 
 	// The Amazon Resource Name (ARN) of the dataset group.
@@ -895,7 +889,7 @@ type InputDataConfig struct {
 }
 
 // Specifies an integer hyperparameter and it's range of tunable values. This
-// object is part of the ParameterRanges  object.
+// object is part of the ParameterRanges object.
 type IntegerParameterRange struct {
 
 	// The maximum tunable value of the hyperparameter.
@@ -919,10 +913,10 @@ type IntegerParameterRange struct {
 	// hyperparameter range by using a linear scale. Logarithmic Hyperparameter tuning
 	// searches the values in the hyperparameter range by using a logarithmic scale.
 	// Logarithmic scaling works only for ranges that have values greater than 0.
-	// ReverseLogarithmic Not supported for IntegerParameterRange. Reverse
-	// logarithmic scaling works only for ranges that are entirely within the range 0
-	// <= x < 1.0. For information about choosing a hyperparameter scale, see
-	// Hyperparameter Scaling (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type)
+	// ReverseLogarithmic Not supported for IntegerParameterRange . Reverse logarithmic
+	// scaling works only for ranges that are entirely within the range 0 <= x < 1.0.
+	// For information about choosing a hyperparameter scale, see Hyperparameter
+	// Scaling (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type)
 	// . One of the following values:
 	ScalingType ScalingType
 
@@ -944,8 +938,8 @@ type MetricResult struct {
 	noSmithyDocumentSerde
 }
 
-// Provides metrics that are used to evaluate the performance of a predictor.
-// This object is part of the WindowSummary  object.
+// Provides metrics that are used to evaluate the performance of a predictor. This
+// object is part of the WindowSummary object.
 type Metrics struct {
 
 	// The average value of all weighted quantile losses.
@@ -1005,11 +999,11 @@ type MonitorInfo struct {
 	MonitorArn *string
 
 	// The status of the monitor. States include:
-	//     - ACTIVE
-	//     - ACTIVE_STOPPING , ACTIVE_STOPPED
-	//     - UPDATE_IN_PROGRESS
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - ACTIVE
+	//   - ACTIVE_STOPPING , ACTIVE_STOPPED
+	//   - UPDATE_IN_PROGRESS
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1025,10 +1019,10 @@ type MonitorSummary struct {
 
 	// The last time the monitor resource was modified. The timestamp depends on the
 	// status of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - STOPPED - When the resource stopped.
-	//     - ACTIVE or CREATE_FAILED - When the monitor creation finished or failed.
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - STOPPED - When the resource stopped.
+	//   - ACTIVE or CREATE_FAILED - When the monitor creation finished or failed.
 	LastModificationTime *time.Time
 
 	// The Amazon Resource Name (ARN) of the monitor resource.
@@ -1041,11 +1035,11 @@ type MonitorSummary struct {
 	ResourceArn *string
 
 	// The status of the monitor. States include:
-	//     - ACTIVE
-	//     - ACTIVE_STOPPING , ACTIVE_STOPPED
-	//     - UPDATE_IN_PROGRESS
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - ACTIVE
+	//   - ACTIVE_STOPPING , ACTIVE_STOPPED
+	//   - UPDATE_IN_PROGRESS
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1054,7 +1048,7 @@ type MonitorSummary struct {
 // Specifies the categorical, continuous, and integer hyperparameters, and their
 // ranges of tunable values. The range of tunable values determines which values
 // that a hyperparameter tuning job can choose for the specified hyperparameter.
-// This object is part of the HyperParameterTuningJobConfig  object.
+// This object is part of the HyperParameterTuningJobConfig object.
 type ParameterRanges struct {
 
 	// Specifies the tunable range for each categorical hyperparameter.
@@ -1070,8 +1064,8 @@ type ParameterRanges struct {
 }
 
 // Provides a summary of the predictor backtest export job properties used in the
-// ListPredictorBacktestExportJobsoperation. To get a complete set of properties,
-// call the DescribePredictorBacktestExportJob  operation, and provide the listed
+// ListPredictorBacktestExportJobs operation. To get a complete set of properties,
+// call the DescribePredictorBacktestExportJob operation, and provide the listed
 // PredictorBacktestExportJobArn .
 type PredictorBacktestExportJobSummary struct {
 
@@ -1083,13 +1077,13 @@ type PredictorBacktestExportJobSummary struct {
 	// Key Management Service (KMS) key (optional).
 	Destination *DataDestination
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// Information about any errors that may have occurred during the backtest export.
@@ -1102,10 +1096,10 @@ type PredictorBacktestExportJobSummary struct {
 	PredictorBacktestExportJobName *string
 
 	// The status of the predictor backtest export job. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1129,9 +1123,9 @@ type PredictorEvent struct {
 	// The timestamp for when the event occurred.
 	Datetime *time.Time
 
-	// The type of event. For example, Retrain. A retraining event denotes the
+	// The type of event. For example, Retrain . A retraining event denotes the
 	// timepoint when a predictor was retrained. Any monitor results from before the
-	// Datetimeare from the previous predictor. Any new metrics are for the newly
+	// Datetime are from the previous predictor. Any new metrics are for the newly
 	// retrained predictor.
 	Detail *string
 
@@ -1145,7 +1139,7 @@ type PredictorExecution struct {
 	AlgorithmArn *string
 
 	// An array of test windows used to evaluate the algorithm. The
-	// NumberOfBacktestWindowsfrom the object determines the number of windows in the
+	// NumberOfBacktestWindows from the object determines the number of windows in the
 	// array.
 	TestWindows []TestWindowSummary
 
@@ -1169,7 +1163,7 @@ type PredictorExecutionDetails struct {
 // Describes the results of a monitor evaluation.
 type PredictorMonitorEvaluation struct {
 
-	// The status of the monitor evaluation. The state can be SUCCESS  or FAILURE .
+	// The status of the monitor evaluation. The state can be SUCCESS or FAILURE .
 	EvaluationState *string
 
 	// The timestamp that indicates when the monitor evaluation was started.
@@ -1218,20 +1212,20 @@ type PredictorSummary struct {
 	// When the model training task was created.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the dataset group that contains the data
-	// used to train the predictor.
+	// The Amazon Resource Name (ARN) of the dataset group that contains the data used
+	// to train the predictor.
 	DatasetGroupArn *string
 
 	// Whether AutoPredictor was used to create the predictor.
 	IsAutoPredictor *bool
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -1248,35 +1242,35 @@ type PredictorSummary struct {
 	ReferencePredictorSummary *ReferencePredictorSummary
 
 	// The status of the predictor. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//  The Status  of the predictor must be ACTIVE before you can use the predictor
-	// to create a forecast.
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	// The Status of the predictor must be ACTIVE before you can use the predictor to
+	// create a forecast.
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of the reference predictor used when retraining or
-// upgrading a predictor.
+// Provides a summary of the reference predictor used when retraining or upgrading
+// a predictor.
 type ReferencePredictorSummary struct {
 
 	// The ARN of the reference predictor.
 	Arn *string
 
-	// Whether the reference predictor is Active  or Deleted .
+	// Whether the reference predictor is Active or Deleted .
 	State State
 
 	noSmithyDocumentSerde
 }
 
-// The path to the file(s) in an Amazon Simple Storage Service (Amazon S3)
-// bucket, and an Identity and Access Management (IAM) role that Amazon Forecast
-// can assume to access the file(s). Optionally, includes an Key Management Service
-// (KMS) key. This object is part of the DataSource object that is submitted in
-// the CreateDatasetImportJob  request, and part of the DataDestination  object.
+// The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket,
+// and an Identity and Access Management (IAM) role that Amazon Forecast can assume
+// to access the file(s). Optionally, includes an Key Management Service (KMS) key.
+// This object is part of the DataSource object that is submitted in the
+// CreateDatasetImportJob request, and part of the DataDestination object.
 type S3Config struct {
 
 	// The path to an Amazon Simple Storage Service (Amazon S3) bucket or file(s) in
@@ -1287,9 +1281,9 @@ type S3Config struct {
 
 	// The ARN of the Identity and Access Management (IAM) role that Amazon Forecast
 	// can assume to access the Amazon S3 bucket or files. If you provide a value for
-	// the KMSKeyArn key, the role must allow access to the key. Passing a role
-	// across Amazon Web Services accounts is not allowed. If you pass a role that
-	// isn't in your account, you get an InvalidInputException  error.
+	// the KMSKeyArn key, the role must allow access to the key. Passing a role across
+	// Amazon Web Services accounts is not allowed. If you pass a role that isn't in
+	// your account, you get an InvalidInputException error.
 	//
 	// This member is required.
 	RoleArn *string
@@ -1311,14 +1305,14 @@ type Schema struct {
 
 // An attribute of a schema, which defines a dataset field. A schema attribute is
 // required for every field in a dataset. The Schema (https://docs.aws.amazon.com/forecast/latest/dg/API_Schema.html)
-// object contains an array of SchemaAttribute  objects.
+// object contains an array of SchemaAttribute objects.
 type SchemaAttribute struct {
 
 	// The name of the dataset field.
 	AttributeName *string
 
-	// The data type of the field. For a related time series dataset, other than
-	// date, item_id, and forecast dimensions attributes, all attributes should be of
+	// The data type of the field. For a related time series dataset, other than date,
+	// item_id, and forecast dimensions attributes, all attributes should be of
 	// numerical type (integer/float).
 	AttributeType AttributeType
 
@@ -1342,10 +1336,10 @@ type Statistics struct {
 	CountDistinct *int32
 
 	// The number of distinct values in the field. CountDistinctLong is used instead
-	// of CountDistinct  if the value is greater than 2,147,483,647.
+	// of CountDistinct if the value is greater than 2,147,483,647.
 	CountDistinctLong *int64
 
-	// The number of values in the field. CountLong  is used instead of Count if the
+	// The number of values in the field. CountLong is used instead of Count if the
 	// value is greater than 2,147,483,647.
 	CountLong *int64
 
@@ -1354,14 +1348,14 @@ type Statistics struct {
 	CountNan *int32
 
 	// The number of NAN (not a number) values in the field. CountNanLong is used
-	// instead of CountNan  if the value is greater than 2,147,483,647.
+	// instead of CountNan if the value is greater than 2,147,483,647.
 	CountNanLong *int64
 
 	// The number of null values in the field. If the response value is -1, refer to
 	// CountNullLong .
 	CountNull *int32
 
-	// The number of null values in the field. CountNullLong  is used instead of
+	// The number of null values in the field. CountNullLong is used instead of
 	// CountNull if the value is greater than 2,147,483,647.
 	CountNullLong *int64
 
@@ -1378,9 +1372,9 @@ type Statistics struct {
 }
 
 // This object belongs to the CreatePredictor operation. If you created your
-// predictor with CreateAutoPredictor , see AdditionalDataset. Describes a
+// predictor with CreateAutoPredictor , see AdditionalDataset . Describes a
 // supplementary feature of a dataset group. This object is part of the
-// InputDataConfigobject. Forecast supports the Weather Index and Holidays
+// InputDataConfig object. Forecast supports the Weather Index and Holidays
 // built-in featurizations. Weather Index The Amazon Forecast Weather Index is a
 // built-in featurization that incorporates historical and projected weather
 // information into your model. The Weather Index supplements your datasets with
@@ -1394,7 +1388,7 @@ type Statistics struct {
 // .
 type SupplementaryFeature struct {
 
-	// The name of the feature. Valid values: "holiday"  and "weather" .
+	// The name of the feature. Valid values: "holiday" and "weather" .
 	//
 	// This member is required.
 	Name *string
@@ -1402,72 +1396,72 @@ type SupplementaryFeature struct {
 	// Weather Index To enable the Weather Index, set the value to "true" Holidays To
 	// enable Holidays, specify a country with one of the following two-letter country
 	// codes:
-	//     - "AL" - ALBANIA
-	//     - "AR" - ARGENTINA
-	//     - "AT" - AUSTRIA
-	//     - "AU" - AUSTRALIA
-	//     - "BA" - BOSNIA HERZEGOVINA
-	//     - "BE" - BELGIUM
-	//     - "BG" - BULGARIA
-	//     - "BO" - BOLIVIA
-	//     - "BR" - BRAZIL
-	//     - "BY" - BELARUS
-	//     - "CA" - CANADA
-	//     - "CL" - CHILE
-	//     - "CO" - COLOMBIA
-	//     - "CR" - COSTA RICA
-	//     - "HR" - CROATIA
-	//     - "CZ" - CZECH REPUBLIC
-	//     - "DK" - DENMARK
-	//     - "EC" - ECUADOR
-	//     - "EE" - ESTONIA
-	//     - "ET" - ETHIOPIA
-	//     - "FI" - FINLAND
-	//     - "FR" - FRANCE
-	//     - "DE" - GERMANY
-	//     - "GR" - GREECE
-	//     - "HU" - HUNGARY
-	//     - "IS" - ICELAND
-	//     - "IN" - INDIA
-	//     - "IE" - IRELAND
-	//     - "IT" - ITALY
-	//     - "JP" - JAPAN
-	//     - "KZ" - KAZAKHSTAN
-	//     - "KR" - KOREA
-	//     - "LV" - LATVIA
-	//     - "LI" - LIECHTENSTEIN
-	//     - "LT" - LITHUANIA
-	//     - "LU" - LUXEMBOURG
-	//     - "MK" - MACEDONIA
-	//     - "MT" - MALTA
-	//     - "MX" - MEXICO
-	//     - "MD" - MOLDOVA
-	//     - "ME" - MONTENEGRO
-	//     - "NL" - NETHERLANDS
-	//     - "NZ" - NEW ZEALAND
-	//     - "NI" - NICARAGUA
-	//     - "NG" - NIGERIA
-	//     - "NO" - NORWAY
-	//     - "PA" - PANAMA
-	//     - "PY" - PARAGUAY
-	//     - "PE" - PERU
-	//     - "PL" - POLAND
-	//     - "PT" - PORTUGAL
-	//     - "RO" - ROMANIA
-	//     - "RU" - RUSSIA
-	//     - "RS" - SERBIA
-	//     - "SK" - SLOVAKIA
-	//     - "SI" - SLOVENIA
-	//     - "ZA" - SOUTH AFRICA
-	//     - "ES" - SPAIN
-	//     - "SE" - SWEDEN
-	//     - "CH" - SWITZERLAND
-	//     - "UA" - UKRAINE
-	//     - "AE" - UNITED ARAB EMIRATES
-	//     - "US" - UNITED STATES
-	//     - "UK" - UNITED KINGDOM
-	//     - "UY" - URUGUAY
-	//     - "VE" - VENEZUELA
+	//   - "AL" - ALBANIA
+	//   - "AR" - ARGENTINA
+	//   - "AT" - AUSTRIA
+	//   - "AU" - AUSTRALIA
+	//   - "BA" - BOSNIA HERZEGOVINA
+	//   - "BE" - BELGIUM
+	//   - "BG" - BULGARIA
+	//   - "BO" - BOLIVIA
+	//   - "BR" - BRAZIL
+	//   - "BY" - BELARUS
+	//   - "CA" - CANADA
+	//   - "CL" - CHILE
+	//   - "CO" - COLOMBIA
+	//   - "CR" - COSTA RICA
+	//   - "HR" - CROATIA
+	//   - "CZ" - CZECH REPUBLIC
+	//   - "DK" - DENMARK
+	//   - "EC" - ECUADOR
+	//   - "EE" - ESTONIA
+	//   - "ET" - ETHIOPIA
+	//   - "FI" - FINLAND
+	//   - "FR" - FRANCE
+	//   - "DE" - GERMANY
+	//   - "GR" - GREECE
+	//   - "HU" - HUNGARY
+	//   - "IS" - ICELAND
+	//   - "IN" - INDIA
+	//   - "IE" - IRELAND
+	//   - "IT" - ITALY
+	//   - "JP" - JAPAN
+	//   - "KZ" - KAZAKHSTAN
+	//   - "KR" - KOREA
+	//   - "LV" - LATVIA
+	//   - "LI" - LIECHTENSTEIN
+	//   - "LT" - LITHUANIA
+	//   - "LU" - LUXEMBOURG
+	//   - "MK" - MACEDONIA
+	//   - "MT" - MALTA
+	//   - "MX" - MEXICO
+	//   - "MD" - MOLDOVA
+	//   - "ME" - MONTENEGRO
+	//   - "NL" - NETHERLANDS
+	//   - "NZ" - NEW ZEALAND
+	//   - "NI" - NICARAGUA
+	//   - "NG" - NIGERIA
+	//   - "NO" - NORWAY
+	//   - "PA" - PANAMA
+	//   - "PY" - PARAGUAY
+	//   - "PE" - PERU
+	//   - "PL" - POLAND
+	//   - "PT" - PORTUGAL
+	//   - "RO" - ROMANIA
+	//   - "RU" - RUSSIA
+	//   - "RS" - SERBIA
+	//   - "SK" - SLOVAKIA
+	//   - "SI" - SLOVENIA
+	//   - "ZA" - SOUTH AFRICA
+	//   - "ES" - SPAIN
+	//   - "SE" - SWEDEN
+	//   - "CH" - SWITZERLAND
+	//   - "UA" - UKRAINE
+	//   - "AE" - UNITED ARAB EMIRATES
+	//   - "US" - UNITED STATES
+	//   - "UK" - UNITED KINGDOM
+	//   - "UY" - URUGUAY
+	//   - "VE" - VENEZUELA
 	//
 	// This member is required.
 	Value *string
@@ -1479,16 +1473,25 @@ type SupplementaryFeature struct {
 // organize them. Each tag consists of a key and an optional value, both of which
 // you define. The following basic restrictions apply to tags:
 //   - Maximum number of tags per resource - 50.
-//   - For each resource, each tag key must be unique, and each tag key can have only one value.
+//   - For each resource, each tag key must be unique, and each tag key can have
+//     only one value.
 //   - Maximum key length - 128 Unicode characters in UTF-8.
 //   - Maximum value length - 256 Unicode characters in UTF-8.
-//   - If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+//   - If your tagging schema is used across multiple services and resources,
+//     remember that other services may have restrictions on allowed characters.
+//     Generally allowed characters are: letters, numbers, and spaces representable in
+//     UTF-8, and the following characters: + - = . _ : / @.
 //   - Tag keys and values are case sensitive.
-//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a prefix for keys as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.
+//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
+//     prefix for keys as it is reserved for Amazon Web Services use. You cannot edit
+//     or delete tag keys with this prefix. Values can have this prefix. If a tag value
+//     has aws as its prefix but the key does not, then Forecast considers it to be a
+//     user tag and will count against the limit of 50 tags. Tags with only the key
+//     prefix of aws do not count against your tags per resource limit.
 type Tag struct {
 
-	// One part of a key-value pair that makes up a tag. A key is a general label
-	// that acts like a category for more specific tag values.
+	// One part of a key-value pair that makes up a tag. A key is a general label that
+	// acts like a category for more specific tag values.
 	//
 	// This member is required.
 	Key *string
@@ -1502,17 +1505,17 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// The status, start time, and end time of a backtest, as well as a failure
-// reason if applicable.
+// The status, start time, and end time of a backtest, as well as a failure reason
+// if applicable.
 type TestWindowSummary struct {
 
 	// If the test failed, the reason why it failed.
 	Message *string
 
 	// The status of the test. Possible status values are:
-	//     - ACTIVE
-	//     - CREATE_IN_PROGRESS
-	//     - CREATE_FAILED
+	//   - ACTIVE
+	//   - CREATE_IN_PROGRESS
+	//   - CREATE_FAILED
 	Status *string
 
 	// The time at which the test ended.
@@ -1555,9 +1558,9 @@ type TimeAlignmentBoundary struct {
 // Creates a subset of items within an attribute that are modified. For example,
 // you can use this operation to create a subset of items that cost $5 or less. To
 // do this, you specify "AttributeName": "price" , "AttributeValue": "5" , and
-// "Condition": "LESS_THAN" . Pair this operation with the Action operation
-// within the CreateWhatIfForecastRequest$TimeSeriesTransformations operation to
-// define how the attribute is modified.
+// "Condition": "LESS_THAN" . Pair this operation with the Action operation within
+// the CreateWhatIfForecastRequest$TimeSeriesTransformations operation to define
+// how the attribute is modified.
 type TimeSeriesCondition struct {
 
 	// The item_id, dimension name, IM name, or timestamp that you are modifying.
@@ -1570,7 +1573,7 @@ type TimeSeriesCondition struct {
 	// This member is required.
 	AttributeValue *string
 
-	// The condition to apply. Valid values are EQUALS , NOT_EQUALS , LESS_THAN  and
+	// The condition to apply. Valid values are EQUALS , NOT_EQUALS , LESS_THAN and
 	// GREATER_THAN .
 	//
 	// This member is required.
@@ -1597,19 +1600,19 @@ type TimeSeriesIdentifiers struct {
 	noSmithyDocumentSerde
 }
 
-// A replacement dataset is a modified version of the baseline related time
-// series that contains only the values that you want to include in a what-if
-// forecast. The replacement dataset must contain the forecast dimensions and item
+// A replacement dataset is a modified version of the baseline related time series
+// that contains only the values that you want to include in a what-if forecast.
+// The replacement dataset must contain the forecast dimensions and item
 // identifiers in the baseline related time series as well as at least 1 changed
 // time series. This dataset is merged with the baseline related time series to
 // create a transformed dataset that is used for the what-if forecast.
 type TimeSeriesReplacementsDataSource struct {
 
-	// The path to the file(s) in an Amazon Simple Storage Service (Amazon S3)
-	// bucket, and an Identity and Access Management (IAM) role that Amazon Forecast
-	// can assume to access the file(s). Optionally, includes an Key Management Service
-	// (KMS) key. This object is part of the DataSource object that is submitted in
-	// the CreateDatasetImportJob  request, and part of the DataDestination  object.
+	// The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket,
+	// and an Identity and Access Management (IAM) role that Amazon Forecast can assume
+	// to access the file(s). Optionally, includes an Key Management Service (KMS) key.
+	// This object is part of the DataSource object that is submitted in the
+	// CreateDatasetImportJob request, and part of the DataDestination object.
 	//
 	// This member is required.
 	S3Config *S3Config
@@ -1655,8 +1658,8 @@ type TimeSeriesTransformation struct {
 	// transformations create a new time series that is used for the what-if analysis.
 	Action *Action
 
-	// An array of conditions that define which members of the related time series
-	// are transformed.
+	// An array of conditions that define which members of the related time series are
+	// transformed.
 	TimeSeriesConditions []TimeSeriesCondition
 
 	noSmithyDocumentSerde
@@ -1670,9 +1673,9 @@ type WeightedQuantileLoss struct {
 	// quantile, weighted (normalized) by dividing by the sum over all quantiles.
 	LossValue *float64
 
-	// The quantile. Quantiles divide a probability distribution into regions of
-	// equal probability. For example, if the distribution was divided into 5 regions
-	// of equal probability, the quantiles would be 0.2, 0.4, 0.6, and 0.8.
+	// The quantile. Quantiles divide a probability distribution into regions of equal
+	// probability. For example, if the distribution was divided into 5 regions of
+	// equal probability, the quantiles would be 0.2, 0.4, 0.6, and 0.8.
 	Quantile *float64
 
 	noSmithyDocumentSerde
@@ -1691,24 +1694,24 @@ type WhatIfAnalysisSummary struct {
 	// this what-if analysis.
 	ForecastArn *string
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the what-if analysis. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
-	//  The Status  of the what-if analysis must be ACTIVE before you can access the
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	// The Status of the what-if analysis must be ACTIVE before you can access the
 	// analysis.
 	Status *string
 
@@ -1722,8 +1725,8 @@ type WhatIfAnalysisSummary struct {
 }
 
 // Provides a summary of the what-if forecast export properties used in the
-// ListWhatIfForecastExportsoperation. To get the complete set of properties,
-// call the DescribeWhatIfForecastExport  operation, and provide the
+// ListWhatIfForecastExports operation. To get the complete set of properties, call
+// the DescribeWhatIfForecastExport operation, and provide the
 // WhatIfForecastExportArn that is listed in the summary.
 type WhatIfForecastExportSummary struct {
 
@@ -1734,24 +1737,24 @@ type WhatIfForecastExportSummary struct {
 	// forecast is exported.
 	Destination *DataDestination
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the what-if forecast export. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
-	//  The Status  of the what-if analysis must be ACTIVE before you can access the
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	// The Status of the what-if analysis must be ACTIVE before you can access the
 	// analysis.
 	Status *string
 
@@ -1777,24 +1780,24 @@ type WhatIfForecastSummary struct {
 	// When the what-if forecast was created.
 	CreationTime *time.Time
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the what-if forecast. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
-	//  The Status  of the what-if analysis must be ACTIVE before you can access the
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	// The Status of the what-if analysis must be ACTIVE before you can access the
 	// analysis.
 	Status *string
 
@@ -1812,14 +1815,14 @@ type WhatIfForecastSummary struct {
 }
 
 // The metrics for a time range within the evaluation portion of a dataset. This
-// object is part of the EvaluationResult  object. The TestWindowStart  and
+// object is part of the EvaluationResult object. The TestWindowStart and
 // TestWindowEnd parameters are determined by the BackTestWindowOffset parameter
-// of the EvaluationParameters  object.
+// of the EvaluationParameters object.
 type WindowSummary struct {
 
 	// The type of evaluation.
-	//     - SUMMARY - The average metrics across all windows.
-	//     - COMPUTED - The metrics for the specified window.
+	//   - SUMMARY - The average metrics across all windows.
+	//   - COMPUTED - The metrics for the specified window.
 	EvaluationType EvaluationType
 
 	// The number of data points within the window.

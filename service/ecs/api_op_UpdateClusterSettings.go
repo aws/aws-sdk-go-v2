@@ -36,8 +36,8 @@ type UpdateClusterSettingsInput struct {
 
 	// The setting to use by default for a cluster. This parameter is used to turn on
 	// CloudWatch Container Insights for a cluster. If this value is specified, it
-	// overrides the containerInsights  value set with PutAccountSetting  or
-	// PutAccountSettingDefault. Currently, if you delete an existing cluster that
+	// overrides the containerInsights value set with PutAccountSetting or
+	// PutAccountSettingDefault . Currently, if you delete an existing cluster that
 	// does not have Container Insights turned on, and then create a new cluster with
 	// the same name with Container Insights tuned on, Container Insights will not
 	// actually be turned on. If you want to preserve the same name for your existing

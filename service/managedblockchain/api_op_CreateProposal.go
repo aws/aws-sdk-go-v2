@@ -34,7 +34,7 @@ type CreateProposalInput struct {
 
 	// The type of actions proposed, such as inviting a member or removing a member.
 	// The types of Actions in a proposal are mutually exclusive. For example, a
-	// proposal with Invitations  actions cannot also contain Removals  actions.
+	// proposal with Invitations actions cannot also contain Removals actions.
 	//
 	// This member is required.
 	Actions *types.ProposalActions

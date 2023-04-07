@@ -71,10 +71,10 @@ type StopInstancesInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// Forces the instances to stop. The instances do not have an opportunity to
-	// flush file system caches or file system metadata. If you use this option, you
-	// must perform file system check and repair procedures. This option is not
-	// recommended for Windows instances. Default: false
+	// Forces the instances to stop. The instances do not have an opportunity to flush
+	// file system caches or file system metadata. If you use this option, you must
+	// perform file system check and repair procedures. This option is not recommended
+	// for Windows instances. Default: false
 	Force *bool
 
 	// Hibernates the instance if the instance was enabled for hibernation at launch.

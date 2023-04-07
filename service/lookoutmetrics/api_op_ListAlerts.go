@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the alerts attached to a detector. Amazon Lookout for Metrics API
-// actions are eventually consistent. If you do a read operation on a resource
-// immediately after creating or modifying it, use retries to allow time for the
-// write operation to complete.
+// Lists the alerts attached to a detector. Amazon Lookout for Metrics API actions
+// are eventually consistent. If you do a read operation on a resource immediately
+// after creating or modifying it, use retries to allow time for the write
+// operation to complete.
 func (c *Client) ListAlerts(ctx context.Context, params *ListAlertsInput, optFns ...func(*Options)) (*ListAlertsOutput, error) {
 	if params == nil {
 		params = &ListAlertsInput{}
@@ -40,7 +40,7 @@ type ListAlertsInput struct {
 	MaxResults *int32
 
 	// If the result of the previous request is truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
+	// NextToken . To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
 
@@ -134,8 +134,8 @@ type ListAlertsPaginatorOptions struct {
 	// The maximum number of results that will be displayed by the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -168,8 +168,8 @@ func (e *TextSizeLimitExceededException) ErrorCode() string {
 }
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have made too many requests within a short period of time. Wait for a
-// short time and then try your request again. Contact customer support for more
+// You have made too many requests within a short period of time. Wait for a short
+// time and then try your request again. Contact customer support for more
 // information about a service limit increase.
 type TooManyRequestsException struct {
 	Message *string

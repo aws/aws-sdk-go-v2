@@ -51,11 +51,11 @@ type ListModelBiasJobDefinitionsInput struct {
 	// job executions, use it in the next request.
 	NextToken *string
 
-	// Whether to sort results by the Name  or CreationTime  field. The default is
+	// Whether to sort results by the Name or CreationTime field. The default is
 	// CreationTime .
 	SortBy types.MonitoringJobDefinitionSortKey
 
-	// Whether to sort the results in Ascending  or Descending  order. The default is
+	// Whether to sort the results in Ascending or Descending order. The default is
 	// Descending .
 	SortOrder types.SortOrder
 
@@ -154,8 +154,8 @@ type ListModelBiasJobDefinitionsPaginatorOptions struct {
 	// value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

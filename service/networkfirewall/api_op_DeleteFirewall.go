@@ -11,17 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified Firewall  and its FirewallStatus. This operation
-// requires the firewall's DeleteProtection  flag to be FALSE. You can't revert
-// this operation. You can check whether a firewall is in use by reviewing the
-// route tables for the Availability Zones where you have firewall subnet mappings.
-// Retrieve the subnet mappings by calling DescribeFirewall. You define and
-// update the route tables through Amazon VPC. As needed, update the route tables
-// for the zones to remove the firewall endpoints. When the route tables no longer
-// use the firewall endpoints, you can remove the firewall safely. To delete a
-// firewall, remove the delete protection if you need to using
-// UpdateFirewallDeleteProtection , then delete the firewall by calling
-// DeleteFirewall .
+// Deletes the specified Firewall and its FirewallStatus . This operation requires
+// the firewall's DeleteProtection flag to be FALSE . You can't revert this
+// operation. You can check whether a firewall is in use by reviewing the route
+// tables for the Availability Zones where you have firewall subnet mappings.
+// Retrieve the subnet mappings by calling DescribeFirewall . You define and update
+// the route tables through Amazon VPC. As needed, update the route tables for the
+// zones to remove the firewall endpoints. When the route tables no longer use the
+// firewall endpoints, you can remove the firewall safely. To delete a firewall,
+// remove the delete protection if you need to using UpdateFirewallDeleteProtection
+// , then delete the firewall by calling DeleteFirewall .
 func (c *Client) DeleteFirewall(ctx context.Context, params *DeleteFirewallInput, optFns ...func(*Options)) (*DeleteFirewallOutput, error) {
 	if params == nil {
 		params = &DeleteFirewallInput{}
@@ -39,8 +38,8 @@ func (c *Client) DeleteFirewall(ctx context.Context, params *DeleteFirewallInput
 
 type DeleteFirewallInput struct {
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or
-	// the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
+	// name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall
@@ -61,9 +60,9 @@ type DeleteFirewallOutput struct {
 	// FirewallStatus . You can retrieve both objects by calling DescribeFirewall .
 	Firewall *types.Firewall
 
-	// Detailed information about the current status of a Firewall. You can retrieve
-	// this for a firewall by calling DescribeFirewall and providing the firewall
-	// name and ARN.
+	// Detailed information about the current status of a Firewall . You can retrieve
+	// this for a firewall by calling DescribeFirewall and providing the firewall name
+	// and ARN.
 	FirewallStatus *types.FirewallStatus
 
 	// Metadata pertaining to the operation's result.

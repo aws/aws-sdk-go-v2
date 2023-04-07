@@ -45,9 +45,9 @@ type TerminateClientVpnConnectionsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The name of the user who initiated the connection. Use this option to
-	// terminate all active connections for the specified user. This option can only be
-	// used if the user has established up to five connections.
+	// The name of the user who initiated the connection. Use this option to terminate
+	// all active connections for the specified user. This option can only be used if
+	// the user has established up to five connections.
 	Username *string
 
 	noSmithyDocumentSerde

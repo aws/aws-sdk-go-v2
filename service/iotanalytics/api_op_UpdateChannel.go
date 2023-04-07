@@ -34,8 +34,8 @@ type UpdateChannelInput struct {
 	// This member is required.
 	ChannelName *string
 
-	// Where channel data is stored. You can choose one of serviceManagedS3  or
-	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
+	// Where channel data is stored. You can choose one of serviceManagedS3 or
+	// customerManagedS3 storage. If not specified, the default is serviceManagedS3 .
 	// You can't change this storage option after the channel is created.
 	ChannelStorage *types.ChannelStorage
 

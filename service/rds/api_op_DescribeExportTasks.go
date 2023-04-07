@@ -38,32 +38,34 @@ type DescribeExportTasksInput struct {
 	// filters are specified as name-value pairs that define what to include in the
 	// output. Filter names and values are case-sensitive. Supported filters include
 	// the following:
-	//     - export-task-identifier - An identifier for the snapshot or cluster export task.
-	//     - s3-bucket - The Amazon S3 bucket the data is exported to.
-	//     - source-arn - The Amazon Resource Name (ARN) of the snapshot or cluster exported to Amazon S3.
-	//     - status - The status of the export task. Must be lowercase. Valid statuses are the following:
-	//         - canceled
-	//         - canceling
-	//         - complete
-	//         - failed
-	//         - in_progress
-	//         - starting
+	//   - export-task-identifier - An identifier for the snapshot or cluster export
+	//   task.
+	//   - s3-bucket - The Amazon S3 bucket the data is exported to.
+	//   - source-arn - The Amazon Resource Name (ARN) of the snapshot or cluster
+	//   exported to Amazon S3.
+	//   - status - The status of the export task. Must be lowercase. Valid statuses
+	//   are the following:
+	//   - canceled
+	//   - canceling
+	//   - complete
+	//   - failed
+	//   - in_progress
+	//   - starting
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeExportTasks
 	// request. If you specify this parameter, the response includes only records
-	// beyond the marker, up to the value specified by the MaxRecords  parameter.
+	// beyond the marker, up to the value specified by the MaxRecords parameter.
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified value, a pagination token called a marker is included
-	// in the response. You can use the marker in a later DescribeExportTasks request
-	// to retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified value, a pagination token called a marker is included in the
+	// response. You can use the marker in a later DescribeExportTasks request to
+	// retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum
 	// 100.
 	MaxRecords *int32
 
-	// The Amazon Resource Name (ARN) of the snapshot or cluster exported to Amazon
-	// S3.
+	// The Amazon Resource Name (ARN) of the snapshot or cluster exported to Amazon S3.
 	SourceArn *string
 
 	// The type of source for the export.
@@ -162,15 +164,15 @@ var _ DescribeExportTasksAPIClient = (*Client)(nil)
 // DescribeExportTasksPaginatorOptions is the paginator options for
 // DescribeExportTasks
 type DescribeExportTasksPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified value, a pagination token called a marker is included
-	// in the response. You can use the marker in a later DescribeExportTasks request
-	// to retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified value, a pagination token called a marker is included in the
+	// response. You can use the marker in a later DescribeExportTasks request to
+	// retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum
 	// 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -41,10 +41,10 @@ type ListBotsInput struct {
 	MaxResults *int32
 
 	// If the response from the ListBots operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response.
-	// Use the returned token in the nextToken  parameter of a ListBots request to
-	// return the next page of results. For a complete set of results, call the
-	// ListBots operation until the nextToken  returned in the response is null.
+	// specified in the maxResults parameter, a token is returned in the response. Use
+	// the returned token in the nextToken parameter of a ListBots request to return
+	// the next page of results. For a complete set of results, call the ListBots
+	// operation until the nextToken returned in the response is null.
 	NextToken *string
 
 	// Specifies sorting parameters for the list of bots. You can specify that the
@@ -56,16 +56,16 @@ type ListBotsInput struct {
 
 type ListBotsOutput struct {
 
-	// Summary information for the bots that meet the filter criteria specified in
-	// the request. The length of the list is specified in the maxResults parameter
-	// of the request. If there are more bots available, the nextToken field contains
-	// a token to the next page of results.
+	// Summary information for the bots that meet the filter criteria specified in the
+	// request. The length of the list is specified in the maxResults parameter of the
+	// request. If there are more bots available, the nextToken field contains a token
+	// to the next page of results.
 	BotSummaries []types.BotSummary
 
 	// A token that indicates whether there are more results to return in a response
-	// to the ListBots  operation. If the nextToken field is present, you send the
-	// contents as the nextToken  parameter of a ListBots operation request to get
-	// the next page of results.
+	// to the ListBots operation. If the nextToken field is present, you send the
+	// contents as the nextToken parameter of a ListBots operation request to get the
+	// next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -151,8 +151,8 @@ type ListBotsPaginatorOptions struct {
 	// returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

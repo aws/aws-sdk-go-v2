@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the list of tags applied to an AWS Elastic Beanstalk resource. Two
-// lists can be passed: TagsToAdd  for tags to add or update, and TagsToRemove.
-// Elastic Beanstalk supports tagging of all of its resources. For details about
-// resource tagging, see Tagging Application Resources (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html)
+// Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists
+// can be passed: TagsToAdd for tags to add or update, and TagsToRemove . Elastic
+// Beanstalk supports tagging of all of its resources. For details about resource
+// tagging, see Tagging Application Resources (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html)
 // . If you create a custom IAM user policy to control permission to this
 // operation, specify one of the following two virtual actions (or both) instead of
 // the API operation name: elasticbeanstalk:AddTags Controls permission to call
@@ -41,8 +41,8 @@ func (c *Client) UpdateTagsForResource(ctx context.Context, params *UpdateTagsFo
 
 type UpdateTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resouce to be updated. Must be the ARN
-	// of an Elastic Beanstalk resource.
+	// The Amazon Resource Name (ARN) of the resouce to be updated. Must be the ARN of
+	// an Elastic Beanstalk resource.
 	//
 	// This member is required.
 	ResourceArn *string

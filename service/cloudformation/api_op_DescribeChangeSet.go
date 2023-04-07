@@ -18,9 +18,9 @@ import (
 	"time"
 )
 
-// Returns the inputs for the change set and a list of changes that
-// CloudFormation will make if you execute the change set. For more information,
-// see Updating Stacks Using Change Sets (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html)
+// Returns the inputs for the change set and a list of changes that CloudFormation
+// will make if you execute the change set. For more information, see Updating
+// Stacks Using Change Sets (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html)
 // in the CloudFormation User Guide.
 func (c *Client) DescribeChangeSet(ctx context.Context, params *DescribeChangeSetInput, optFns ...func(*Options)) (*DescribeChangeSetOutput, error) {
 	if params == nil {
@@ -37,7 +37,7 @@ func (c *Client) DescribeChangeSet(ctx context.Context, params *DescribeChangeSe
 	return out, nil
 }
 
-// The input for the DescribeChangeSet  action.
+// The input for the DescribeChangeSet action.
 type DescribeChangeSetInput struct {
 
 	// The name or Amazon Resource Name (ARN) of the change set that you want to
@@ -57,7 +57,7 @@ type DescribeChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output for the DescribeChangeSet  action.
+// The output for the DescribeChangeSet action.
 type DescribeChangeSetOutput struct {
 
 	// If you execute the change set, the list of capabilities that were explicitly
@@ -70,8 +70,8 @@ type DescribeChangeSetOutput struct {
 	// The name of the change set.
 	ChangeSetName *string
 
-	// A list of Change structures that describes the resources CloudFormation
-	// changes if you execute the change set.
+	// A list of Change structures that describes the resources CloudFormation changes
+	// if you execute the change set.
 	Changes []types.Change
 
 	// The start time when the change set was created, in UTC.
@@ -80,13 +80,13 @@ type DescribeChangeSetOutput struct {
 	// Information about the change set.
 	Description *string
 
-	// If the change set execution status is AVAILABLE, you can execute the change
+	// If the change set execution status is AVAILABLE , you can execute the change
 	// set. If you can't execute the change set, the status indicates why. For example,
 	// a change set might be in an UNAVAILABLE state because CloudFormation is still
-	// creating it or in an OBSOLETE  state because the stack was already updated.
+	// creating it or in an OBSOLETE state because the stack was already updated.
 	ExecutionStatus types.ExecutionStatus
 
-	// Verifies if IncludeNestedStacks  is set to True .
+	// Verifies if IncludeNestedStacks is set to True .
 	IncludeNestedStacks *bool
 
 	// If the output exceeds 1 MB, a string that identifies the next page of changes.
@@ -110,8 +110,8 @@ type DescribeChangeSetOutput struct {
 	// updating operations, and for the specified monitoring period afterwards.
 	RollbackConfiguration *types.RollbackConfiguration
 
-	// Specifies the change set ID of the root change set in the current nested
-	// change set hierarchy.
+	// Specifies the change set ID of the root change set in the current nested change
+	// set hierarchy.
 	RootChangeSetId *string
 
 	// The Amazon Resource Name (ARN) of the stack that's associated with the change

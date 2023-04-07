@@ -34,8 +34,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) for the Step Functions state machine or
-	// activity.
+	// The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
 	//
 	// This member is required.
 	ResourceArn *string

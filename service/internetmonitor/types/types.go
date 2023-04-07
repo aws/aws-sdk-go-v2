@@ -19,22 +19,22 @@ import (
 // represents the estimated percentage of traffic that is not seeing an
 // availability drop. For example, an availability score of 99% for an end user and
 // service location pair is equivalent to 1% of the traffic experiencing an
-// availability drop for that pair. For more information, see How Internet
-// Monitor calculates performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+// availability drop for that pair. For more information, see How Internet Monitor
+// calculates performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 // in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User
 // Guide.
 type AvailabilityMeasurement struct {
 
-	// Experience scores, or health scores are calculated for different geographic
-	// and network provider combinations (that is, different granularities) and also
-	// summed into global scores. If you view performance or availability scores
-	// without filtering for any specific geography or service provider, Amazon
-	// CloudWatch Internet Monitor provides global health scores. The Amazon CloudWatch
-	// Internet Monitor chapter in the CloudWatch User Guide includes detailed
-	// information about how Internet Monitor calculates health scores, including
-	// performance and availability scores, and when it creates and resolves health
-	// events. For more information, see How Amazon Web Services calculates
-	// performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+	// Experience scores, or health scores are calculated for different geographic and
+	// network provider combinations (that is, different granularities) and also summed
+	// into global scores. If you view performance or availability scores without
+	// filtering for any specific geography or service provider, Amazon CloudWatch
+	// Internet Monitor provides global health scores. The Amazon CloudWatch Internet
+	// Monitor chapter in the CloudWatch User Guide includes detailed information about
+	// how Internet Monitor calculates health scores, including performance and
+	// availability scores, and when it creates and resolves health events. For more
+	// information, see How Amazon Web Services calculates performance and
+	// availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	ExperienceScore *float64
 
@@ -134,10 +134,9 @@ type ImpactedLocation struct {
 	// This member is required.
 	Status HealthEventStatus
 
-	// The cause of the impairment. There are two types of network impairments:
-	// Amazon Web Services network issues or internet issues. Internet issues are
-	// typically a problem with a network provider, like an internet service provider
-	// (ISP).
+	// The cause of the impairment. There are two types of network impairments: Amazon
+	// Web Services network issues or internet issues. Internet issues are typically a
+	// problem with a network provider, like an internet service provider (ISP).
 	CausedBy *NetworkImpairment
 
 	// The name of the city where the health event is located.
@@ -190,12 +189,11 @@ type ImpactedLocation struct {
 // you in the form of health scores: a performance score and an availability score.
 type InternetHealth struct {
 
-	// Availability in Internet Monitor represents the estimated percentage of
-	// traffic that is not seeing an availability drop. For example, an availability
-	// score of 99% for an end user and service location pair is equivalent to 1% of
-	// the traffic experiencing an availability drop for that pair. For more
-	// information, see How Internet Monitor calculates performance and availability
-	// scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+	// Availability in Internet Monitor represents the estimated percentage of traffic
+	// that is not seeing an availability drop. For example, an availability score of
+	// 99% for an end user and service location pair is equivalent to 1% of the traffic
+	// experiencing an availability drop for that pair. For more information, see How
+	// Internet Monitor calculates performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 	// in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User
 	// Guide.
 	Availability *AvailabilityMeasurement

@@ -118,9 +118,9 @@ const (
 	AuthModeSso AuthMode = "SSO"
 )
 
-// Values returns all known values for AuthMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AuthMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (AuthMode) Values() []AuthMode {
 	return []AuthMode{
 		"IAM",
@@ -197,10 +197,10 @@ const (
 	BatchGetAssetPropertyValueHistoryErrorCodeAccessDeniedException     BatchGetAssetPropertyValueHistoryErrorCode = "AccessDeniedException"
 )
 
-// Values returns all known values for
-// BatchGetAssetPropertyValueHistoryErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for BatchGetAssetPropertyValueHistoryErrorCode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (BatchGetAssetPropertyValueHistoryErrorCode) Values() []BatchGetAssetPropertyValueHistoryErrorCode {
 	return []BatchGetAssetPropertyValueHistoryErrorCode{
 		"ResourceNotFoundException",
@@ -252,8 +252,8 @@ const (
 	CapabilitySyncStatusUnknown    CapabilitySyncStatus = "UNKNOWN"
 )
 
-// Values returns all known values for CapabilitySyncStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CapabilitySyncStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CapabilitySyncStatus) Values() []CapabilitySyncStatus {
 	return []CapabilitySyncStatus{
@@ -655,9 +655,9 @@ const (
 	PortalStateFailed   PortalState = "FAILED"
 )
 
-// Values returns all known values for PortalState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PortalState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PortalState) Values() []PortalState {
 	return []PortalState{
 		"CREATING",
@@ -756,9 +756,9 @@ const (
 	StorageTypeMultiLayerStorage      StorageType = "MULTI_LAYER_STORAGE"
 )
 
-// Values returns all known values for StorageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StorageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StorageType) Values() []StorageType {
 	return []StorageType{
 		"SITEWISE_DEFAULT_STORAGE",

@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the user pool multi-factor authentication (MFA) configuration. This
-// action might generate an SMS text message. Starting June 1, 2021, US telecom
-// carriers require you to register an origination phone number before you can send
-// SMS messages to US phone numbers. If you use SMS text messages in Amazon
-// Cognito, you must register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
+// Sets the user pool multi-factor authentication (MFA) configuration. This action
+// might generate an SMS text message. Starting June 1, 2021, US telecom carriers
+// require you to register an origination phone number before you can send SMS
+// messages to US phone numbers. If you use SMS text messages in Amazon Cognito,
+// you must register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
 // . Amazon Cognito uses the registered number automatically. Otherwise, Amazon
 // Cognito users who must receive SMS messages might not be able to sign up,
 // activate their accounts, or sign in. If you have never used SMS text messages
@@ -52,9 +52,10 @@ type SetUserPoolMfaConfigInput struct {
 	// users who have set up an MFA factor can sign in. To learn more, see Adding
 	// Multi-Factor Authentication (MFA) to a user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html)
 	// . Valid values include:
-	//     - OFF MFA won't be used for any users.
-	//     - ON MFA is required for all users to sign in.
-	//     - OPTIONAL MFA will be required only for individual users who have an MFA factor activated.
+	//   - OFF MFA won't be used for any users.
+	//   - ON MFA is required for all users to sign in.
+	//   - OPTIONAL MFA will be required only for individual users who have an MFA
+	//   factor activated.
 	MfaConfiguration types.UserPoolMfaType
 
 	// The SMS text message MFA configuration.
@@ -69,9 +70,10 @@ type SetUserPoolMfaConfigInput struct {
 type SetUserPoolMfaConfigOutput struct {
 
 	// The MFA configuration. Valid values include:
-	//     - OFF MFA won't be used for any users.
-	//     - ON MFA is required for all users to sign in.
-	//     - OPTIONAL MFA will be required only for individual users who have an MFA factor enabled.
+	//   - OFF MFA won't be used for any users.
+	//   - ON MFA is required for all users to sign in.
+	//   - OPTIONAL MFA will be required only for individual users who have an MFA
+	//   factor enabled.
 	MfaConfiguration types.UserPoolMfaType
 
 	// The SMS text message MFA configuration.

@@ -37,7 +37,7 @@ type GetGroupQueryInput struct {
 	// The name or the ARN of the resource group to query.
 	Group *string
 
-	// Don't use this parameter. Use Group  instead.
+	// Don't use this parameter. Use Group instead.
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string

@@ -12,8 +12,8 @@ import (
 )
 
 // Restarts a specific instance. The reboot instance operation supports tag-based
-// access control via resource tags applied to the resource identified by
-// instance name . For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// access control via resource tags applied to the resource identified by instance
+// name . For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
 // .
 func (c *Client) RebootInstance(ctx context.Context, params *RebootInstanceInput, optFns ...func(*Options)) (*RebootInstanceOutput, error) {
 	if params == nil {

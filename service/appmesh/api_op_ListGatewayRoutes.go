@@ -42,12 +42,12 @@ type ListGatewayRoutesInput struct {
 	VirtualGatewayName *string
 
 	// The maximum number of results returned by ListGatewayRoutes in paginated
-	// output. When you use this parameter, ListGatewayRoutes  returns only limit
+	// output. When you use this parameter, ListGatewayRoutes returns only limit
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another
 	// ListGatewayRoutes request with the returned nextToken value. This value can be
 	// between 1 and 100. If you don't use this parameter, ListGatewayRoutes returns
-	// up to 100 results and a nextToken  value if applicable.
+	// up to 100 results and a nextToken value if applicable.
 	Limit *int32
 
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the
@@ -57,10 +57,10 @@ type ListGatewayRoutesInput struct {
 	// .
 	MeshOwner *string
 
-	// The nextToken  value returned from a previous paginated ListGatewayRoutes
+	// The nextToken value returned from a previous paginated ListGatewayRoutes
 	// request where limit was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken  value.
+	// returned the nextToken value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -74,10 +74,10 @@ type ListGatewayRoutesOutput struct {
 	// This member is required.
 	GatewayRoutes []types.GatewayRouteRef
 
-	// The nextToken  value to include in a future ListGatewayRoutes request. When
-	// the results of a ListGatewayRoutes  request exceed limit, you can use this
-	// value to retrieve the next page of results. This value is null when there are
-	// no more results to return.
+	// The nextToken value to include in a future ListGatewayRoutes request. When the
+	// results of a ListGatewayRoutes request exceed limit , you can use this value to
+	// retrieve the next page of results. This value is null when there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -157,20 +157,19 @@ type ListGatewayRoutesAPIClient interface {
 
 var _ ListGatewayRoutesAPIClient = (*Client)(nil)
 
-// ListGatewayRoutesPaginatorOptions is the paginator options for
-// ListGatewayRoutes
+// ListGatewayRoutesPaginatorOptions is the paginator options for ListGatewayRoutes
 type ListGatewayRoutesPaginatorOptions struct {
 	// The maximum number of results returned by ListGatewayRoutes in paginated
-	// output. When you use this parameter, ListGatewayRoutes  returns only limit
+	// output. When you use this parameter, ListGatewayRoutes returns only limit
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another
 	// ListGatewayRoutes request with the returned nextToken value. This value can be
 	// between 1 and 100. If you don't use this parameter, ListGatewayRoutes returns
-	// up to 100 results and a nextToken  value if applicable.
+	// up to 100 results and a nextToken value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

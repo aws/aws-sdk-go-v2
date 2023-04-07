@@ -41,15 +41,15 @@ type CreateRoleAliasInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// How long (in seconds) the credentials will be valid. The default value is
-	// 3,600 seconds. This value must be less than or equal to the maximum session
-	// duration of the IAM role that the role alias references.
+	// How long (in seconds) the credentials will be valid. The default value is 3,600
+	// seconds. This value must be less than or equal to the maximum session duration
+	// of the IAM role that the role alias references.
 	CredentialDurationSeconds *int32
 
-	// Metadata which can be used to manage the role alias. For URI Request
-	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
-	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
-	// file use format: "tags": "key1=value1&key2=value2..."
+	// Metadata which can be used to manage the role alias. For URI Request parameters
+	// use format: ...key1=value1&key2=value2... For the CLI command-line parameter use
+	// format: &&tags "key1=value1&key2=value2..." For the cli-input-json file use
+	// format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

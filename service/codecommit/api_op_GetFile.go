@@ -41,8 +41,8 @@ type GetFileInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The fully quaified reference that identifies the commit that contains the
-	// file. For example, you can specify a full commit ID, a tag, a branch name, or a
+	// The fully quaified reference that identifies the commit that contains the file.
+	// For example, you can specify a full commit ID, a tag, a branch name, or a
 	// reference such as refs/heads/master. If none is provided, the head commit is
 	// used.
 	CommitSpecifier *string

@@ -37,10 +37,10 @@ type StartReplicationTaskInput struct {
 	// This member is required.
 	ReplicationTaskArn *string
 
-	// The type of replication task to start. When the migration type is full-load  or
+	// The type of replication task to start. When the migration type is full-load or
 	// full-load-and-cdc , the only valid value for the first run of the task is
 	// start-replication . This option will start the migration. You can also use
-	// ReloadTablesto reload specific tables that failed during migration instead of
+	// ReloadTables to reload specific tables that failed during migration instead of
 	// restarting the task. The resume-processing option isn't applicable for a
 	// full-load task, because you can't resume partially loaded tables during the full
 	// load phase. For a full-load-and-cdc task, DMS migrates table data, and then

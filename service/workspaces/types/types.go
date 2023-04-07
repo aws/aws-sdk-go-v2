@@ -18,8 +18,7 @@ type AccountModification struct {
 	// The status of BYOL (whether BYOL is being enabled or disabled).
 	DedicatedTenancySupport DedicatedTenancySupportResultEnum
 
-	// The error code that is returned if the configuration of BYOL cannot be
-	// modified.
+	// The error code that is returned if the configuration of BYOL cannot be modified.
 	ErrorCode *string
 
 	// The text of the error message that is returned if the configuration of BYOL
@@ -117,8 +116,8 @@ type ConnectionAlias struct {
 	// The association status of the connection alias.
 	Associations []ConnectionAliasAssociation
 
-	// The connection string specified for the connection alias. The connection
-	// string must be in the form of a fully qualified domain name (FQDN), such as
+	// The connection string specified for the connection alias. The connection string
+	// must be in the form of a fully qualified domain name (FQDN), such as
 	// www.example.com .
 	ConnectionString *string
 
@@ -177,9 +176,9 @@ type ConnectionAliasPermission struct {
 	noSmithyDocumentSerde
 }
 
-// Returns default client branding attributes that were imported. These
-// attributes display on the client login screen. Client branding attributes are
-// public facing. Ensure that you don't include sensitive information.
+// Returns default client branding attributes that were imported. These attributes
+// display on the client login screen. Client branding attributes are public
+// facing. Ensure that you don't include sensitive information.
 type DefaultClientBrandingAttributes struct {
 
 	// The forgotten password link. This is the web address that users can go to if
@@ -188,32 +187,36 @@ type DefaultClientBrandingAttributes struct {
 
 	// The login message. Specified as a key value pair, in which the key is a locale
 	// and the value is the localized message for that locale. The only key supported
-	// is en_US . The HTML tags supported include the following: a, b, blockquote,
-	// br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// is en_US . The HTML tags supported include the following: a, b, blockquote, br,
+	// cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
 	// strong, sub, sup, u, ul .
 	LoginMessage map[string]string
 
 	// The logo. The only image format accepted is a binary data object that is
-	// converted from a .png  file.
+	// converted from a .png file.
 	LogoUrl *string
 
 	// The support email. The company's customer support email address.
-	//     - In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.
-	//     - The default email is workspaces-feedback@amazon.com .
+	//   - In each platform type, the SupportEmail and SupportLink parameters are
+	//   mutually exclusive. You can specify one parameter for each platform type, but
+	//   not both.
+	//   - The default email is workspaces-feedback@amazon.com .
 	SupportEmail *string
 
 	// The support link. The link for the company's customer support page for their
 	// WorkSpace.
-	//     - In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive.You can specify one parameter for each platform type, but not both.
-	//     - The default support link is workspaces-feedback@amazon.com .
+	//   - In each platform type, the SupportEmail and SupportLink parameters are
+	//   mutually exclusive.You can specify one parameter for each platform type, but not
+	//   both.
+	//   - The default support link is workspaces-feedback@amazon.com .
 	SupportLink *string
 
 	noSmithyDocumentSerde
 }
 
-// The default client branding attributes to be imported. These attributes
-// display on the client login screen. Client branding attributes are public
-// facing. Ensure that you do not include sensitive information.
+// The default client branding attributes to be imported. These attributes display
+// on the client login screen. Client branding attributes are public facing. Ensure
+// that you do not include sensitive information.
 type DefaultImportClientBrandingAttributes struct {
 
 	// The forgotten password link. This is the web address that users can go to if
@@ -222,24 +225,28 @@ type DefaultImportClientBrandingAttributes struct {
 
 	// The login message. Specified as a key value pair, in which the key is a locale
 	// and the value is the localized message for that locale. The only key supported
-	// is en_US . The HTML tags supported include the following: a, b, blockquote,
-	// br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// is en_US . The HTML tags supported include the following: a, b, blockquote, br,
+	// cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
 	// strong, sub, sup, u, ul .
 	LoginMessage map[string]string
 
 	// The logo. The only image format accepted is a binary data object that is
-	// converted from a .png  file.
+	// converted from a .png file.
 	Logo []byte
 
 	// The support email. The company's customer support email address.
-	//     - In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.
-	//     - The default email is workspaces-feedback@amazon.com .
+	//   - In each platform type, the SupportEmail and SupportLink parameters are
+	//   mutually exclusive. You can specify one parameter for each platform type, but
+	//   not both.
+	//   - The default email is workspaces-feedback@amazon.com .
 	SupportEmail *string
 
 	// The support link. The link for the company's customer support page for their
 	// WorkSpace.
-	//     - In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.
-	//     - The default support link is workspaces-feedback@amazon.com .
+	//   - In each platform type, the SupportEmail and SupportLink parameters are
+	//   mutually exclusive. You can specify one parameter for each platform type, but
+	//   not both.
+	//   - The default support link is workspaces-feedback@amazon.com .
 	SupportLink *string
 
 	noSmithyDocumentSerde
@@ -317,8 +324,8 @@ type FailedCreateWorkspaceRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a WorkSpace that could not be rebooted. ( RebootWorkspaces), rebuilt
-// ( RebuildWorkspaces ), restored ( RestoreWorkspace ), terminated (
+// Describes a WorkSpace that could not be rebooted. ( RebootWorkspaces ), rebuilt (
+// RebuildWorkspaces ), restored ( RestoreWorkspace ), terminated (
 // TerminateWorkspaces ), started ( StartWorkspaces ), or stopped ( StopWorkspaces
 // ).
 type FailedWorkspaceChangeRequest struct {
@@ -336,14 +343,14 @@ type FailedWorkspaceChangeRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the Amazon Web Services accounts that have been granted permission
-// to use a shared image. For more information about sharing images, see Share or
+// Describes the Amazon Web Services accounts that have been granted permission to
+// use a shared image. For more information about sharing images, see Share or
 // Unshare a Custom WorkSpaces Image (https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html)
 // .
 type ImagePermission struct {
 
-	// The identifier of the Amazon Web Services account that an image has been
-	// shared with.
+	// The identifier of the Amazon Web Services account that an image has been shared
+	// with.
 	SharedAccountId *string
 
 	noSmithyDocumentSerde
@@ -360,47 +367,51 @@ type IosClientBrandingAttributes struct {
 
 	// The login message. Specified as a key value pair, in which the key is a locale
 	// and the value is the localized message for that locale. The only key supported
-	// is en_US . The HTML tags supported include the following: a, b, blockquote,
-	// br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// is en_US . The HTML tags supported include the following: a, b, blockquote, br,
+	// cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
 	// strong, sub, sup, u, ul .
 	LoginMessage map[string]string
 
 	// The @2x version of the logo. This is the higher resolution display that offers
 	// a scale factor of 2.0 (or @2x). The only image format accepted is a binary data
-	// object that is converted from a .png file. For more information about iOS
-	// image size and resolution, see Image Size and Resolution  (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// object that is converted from a .png file. For more information about iOS image
+	// size and resolution, see Image Size and Resolution  (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
 	// in the Apple Human Interface Guidelines.
 	Logo2xUrl *string
 
 	// The @3x version of the logo. This is the higher resolution display that offers
 	// a scale factor of 3.0 (or @3x).The only image format accepted is a binary data
-	// object that is converted from a .png file. For more information about iOS
-	// image size and resolution, see Image Size and Resolution  (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// object that is converted from a .png file. For more information about iOS image
+	// size and resolution, see Image Size and Resolution  (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
 	// in the Apple Human Interface Guidelines.
 	Logo3xUrl *string
 
 	// The logo. This is the standard-resolution display that has a 1:1 pixel density
 	// (or @1x), where one pixel is equal to one point. The only image format accepted
-	// is a binary data object that is converted from a .png  file.
+	// is a binary data object that is converted from a .png file.
 	LogoUrl *string
 
 	// The support email. The company's customer support email address.
-	//     - In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.
-	//     - The default email is workspaces-feedback@amazon.com .
+	//   - In each platform type, the SupportEmail and SupportLink parameters are
+	//   mutually exclusive. You can specify one parameter for each platform type, but
+	//   not both.
+	//   - The default email is workspaces-feedback@amazon.com .
 	SupportEmail *string
 
 	// The support link. The link for the company's customer support page for their
 	// WorkSpace.
-	//     - In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.
-	//     - The default support link is workspaces-feedback@amazon.com .
+	//   - In each platform type, the SupportEmail and SupportLink parameters are
+	//   mutually exclusive. You can specify one parameter for each platform type, but
+	//   not both.
+	//   - The default support link is workspaces-feedback@amazon.com .
 	SupportLink *string
 
 	noSmithyDocumentSerde
 }
 
-// The client branding attributes to import for iOS device types. These
-// attributes are displayed on the iOS client login screen. Client branding
-// attributes are public facing. Ensure you do not include sensitive information.
+// The client branding attributes to import for iOS device types. These attributes
+// are displayed on the iOS client login screen. Client branding attributes are
+// public facing. Ensure you do not include sensitive information.
 type IosImportClientBrandingAttributes struct {
 
 	// The forgotten password link. This is the web address that users can go to if
@@ -409,39 +420,43 @@ type IosImportClientBrandingAttributes struct {
 
 	// The login message. Specified as a key value pair, in which the key is a locale
 	// and the value is the localized message for that locale. The only key supported
-	// is en_US . The HTML tags supported include the following: a, b, blockquote,
-	// br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// is en_US . The HTML tags supported include the following: a, b, blockquote, br,
+	// cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
 	// strong, sub, sup, u, ul .
 	LoginMessage map[string]string
 
 	// The logo. This is the standard-resolution display that has a 1:1 pixel density
 	// (or @1x), where one pixel is equal to one point. The only image format accepted
-	// is a binary data object that is converted from a .png  file.
+	// is a binary data object that is converted from a .png file.
 	Logo []byte
 
 	// The @2x version of the logo. This is the higher resolution display that offers
 	// a scale factor of 2.0 (or @2x). The only image format accepted is a binary data
-	// object that is converted from a .png file. For more information about iOS
-	// image size and resolution, see Image Size and Resolution  (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// object that is converted from a .png file. For more information about iOS image
+	// size and resolution, see Image Size and Resolution  (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
 	// in the Apple Human Interface Guidelines.
 	Logo2x []byte
 
 	// The @3x version of the logo. This is the higher resolution display that offers
 	// a scale factor of 3.0 (or @3x). The only image format accepted is a binary data
-	// object that is converted from a .png file. For more information about iOS
-	// image size and resolution, see Image Size and Resolution  (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// object that is converted from a .png file. For more information about iOS image
+	// size and resolution, see Image Size and Resolution  (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
 	// in the Apple Human Interface Guidelines.
 	Logo3x []byte
 
 	// The support email. The company's customer support email address.
-	//     - In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.
-	//     - The default email is workspaces-feedback@amazon.com .
+	//   - In each platform type, the SupportEmail and SupportLink parameters are
+	//   mutually exclusive. You can specify one parameter for each platform type, but
+	//   not both.
+	//   - The default email is workspaces-feedback@amazon.com .
 	SupportEmail *string
 
 	// The support link. The link for the company's customer support page for their
 	// WorkSpace.
-	//     - In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.
-	//     - The default support link is workspaces-feedback@amazon.com .
+	//   - In each platform type, the SupportEmail and SupportLink parameters are
+	//   mutually exclusive. You can specify one parameter for each platform type, but
+	//   not both.
+	//   - The default support link is workspaces-feedback@amazon.com .
 	SupportLink *string
 
 	noSmithyDocumentSerde
@@ -567,9 +582,15 @@ type SamlProperties struct {
 
 	// Indicates the status of SAML 2.0 authentication. These statuses include the
 	// following.
-	//     - If the setting is DISABLED , end users will be directed to login with their directory credentials.
-	//     - If the setting is ENABLED , end users will be directed to login via the user access URL. Users attempting to connect to WorkSpaces from a client application that does not support SAML 2.0 authentication will not be able to connect.
-	//     - If the setting is ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK , end users will be directed to login via the user access URL on supported client applications, but will not prevent clients that do not support SAML 2.0 authentication from connecting as if SAML 2.0 authentication was disabled.
+	//   - If the setting is DISABLED , end users will be directed to login with their
+	//   directory credentials.
+	//   - If the setting is ENABLED , end users will be directed to login via the user
+	//   access URL. Users attempting to connect to WorkSpaces from a client application
+	//   that does not support SAML 2.0 authentication will not be able to connect.
+	//   - If the setting is ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK , end users will be
+	//   directed to login via the user access URL on supported client applications, but
+	//   will not prevent clients that do not support SAML 2.0 authentication from
+	//   connecting as if SAML 2.0 authentication was disabled.
 	Status SamlStatusEnum
 
 	// The SAML 2.0 identity provider (IdP) user access URL is the URL a user would
@@ -680,9 +701,9 @@ type TerminateRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes whether a WorkSpace image needs to be updated with the latest
-// drivers and other components required by Amazon WorkSpaces. Only Windows 10
-// WorkSpace images can be programmatically updated at this time.
+// Describes whether a WorkSpace image needs to be updated with the latest drivers
+// and other components required by Amazon WorkSpaces. Only Windows 10 WorkSpace
+// images can be programmatically updated at this time.
 type UpdateResult struct {
 
 	// A description of whether updates for the WorkSpace image are pending or
@@ -739,7 +760,7 @@ type Workspace struct {
 	RootVolumeEncryptionEnabled *bool
 
 	// The operational state of the WorkSpace. After a WorkSpace is terminated, the
-	// TERMINATEDstate is returned only briefly before the WorkSpace directory
+	// TERMINATED state is returned only briefly before the WorkSpace directory
 	// metadata is cleaned up, so this state is rarely returned. To confirm that a
 	// WorkSpace is terminated, check for the WorkSpace ID by using DescribeWorkSpaces (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html)
 	// . If the WorkSpace ID isn't returned, then the WorkSpace has been successfully
@@ -875,11 +896,13 @@ type WorkspaceCreationProperties struct {
 	// The default organizational unit (OU) for your WorkSpaces directories. This
 	// string must be the full Lightweight Directory Access Protocol (LDAP)
 	// distinguished name for the target domain and OU. It must be in the form
-	// "OU=value,DC=value,DC=value", where value is any string of characters, and the
+	// "OU=value,DC=value,DC=value" , where value is any string of characters, and the
 	// number of domain components (DCs) is two or more. For example,
 	// OU=WorkSpaces_machines,DC=machines,DC=example,DC=com .
-	//     - To avoid errors, certain characters in the distinguished name must be escaped. For more information, see Distinguished Names (https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names) in the Microsoft documentation.
-	//     - The API doesn't validate whether the OU exists.
+	//   - To avoid errors, certain characters in the distinguished name must be
+	//   escaped. For more information, see Distinguished Names (https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names)
+	//   in the Microsoft documentation.
+	//   - The API doesn't validate whether the OU exists.
 	DefaultOu *string
 
 	// Indicates whether internet access is enabled for your WorkSpaces.
@@ -958,7 +981,6 @@ type WorkspaceDirectory struct {
 	// directory is deregistered, the DEREGISTERED state is returned very briefly
 	// before the directory metadata is cleaned up, so this state is rarely returned.
 	// To confirm that a directory is deregistered, check for the directory ID by using
-	//
 	// DescribeWorkspaceDirectories (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceDirectories.html)
 	// . If the directory ID isn't returned, then the directory has been successfully
 	// deregistered.
@@ -1015,7 +1037,7 @@ type WorkspaceImage struct {
 	OwnerAccountId *string
 
 	// Specifies whether the image is running on dedicated hardware. When Bring Your
-	// Own License (BYOL) is enabled, this value is set to DEDICATED. For more
+	// Own License (BYOL) is enabled, this value is set to DEDICATED . For more
 	// information, see Bring Your Own Windows Desktop Images (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html)
 	// .
 	RequiredTenancy WorkspaceImageRequiredTenancy
@@ -1038,9 +1060,10 @@ type WorkspaceProperties struct {
 
 	// The protocol. For more information, see  Protocols for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html)
 	// .
-	//     - Only available for WorkSpaces created with PCoIP bundles.
-	//     - The Protocols property is case sensitive. Ensure you use PCOIP or WSP .
-	//     - Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).
+	//   - Only available for WorkSpaces created with PCoIP bundles.
+	//   - The Protocols property is case sensitive. Ensure you use PCOIP or WSP .
+	//   - Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles
+	//   (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).
 	Protocols []Protocol
 
 	// The size of the root volume. For important information about how to modify the
@@ -1058,8 +1081,8 @@ type WorkspaceProperties struct {
 	// Configured in 60-minute intervals.
 	RunningModeAutoStopTimeoutInMinutes *int32
 
-	// The size of the user storage. For important information about how to modify
-	// the size of the root and user volumes, see Modify a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html)
+	// The size of the user storage. For important information about how to modify the
+	// size of the root and user volumes, see Modify a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html)
 	// .
 	UserVolumeSizeGib *int32
 
@@ -1076,7 +1099,7 @@ type WorkspaceRequest struct {
 	BundleId *string
 
 	// The identifier of the Directory Service directory for the WorkSpace. You can
-	// use DescribeWorkspaceDirectories  to list the available directories.
+	// use DescribeWorkspaceDirectories to list the available directories.
 	//
 	// This member is required.
 	DirectoryId *string

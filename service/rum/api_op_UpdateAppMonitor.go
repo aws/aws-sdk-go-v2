@@ -46,14 +46,14 @@ type UpdateAppMonitorInput struct {
 	// If you are using Amazon Cognito for authorization, you must include this
 	// structure in your request, and it must include the ID of the Amazon Cognito
 	// identity pool to use for authorization. If you don't include
-	// AppMonitorConfiguration, you must set up your own authorization method. For
+	// AppMonitorConfiguration , you must set up your own authorization method. For
 	// more information, see Authorize your application to send data to Amazon Web
 	// Services (https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html)
 	// .
 	AppMonitorConfiguration *types.AppMonitorConfiguration
 
 	// Specifies whether this app monitor allows the web client to define and send
-	// custom events. The default is for custom events to be DISABLED. For more
+	// custom events. The default is for custom events to be DISABLED . For more
 	// information about custom events, see Send custom events (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html)
 	// .
 	CustomEvents *types.CustomEvents

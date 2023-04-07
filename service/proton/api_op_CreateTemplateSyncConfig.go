@@ -13,7 +13,7 @@ import (
 
 // Set up a template to create new template versions automatically by tracking a
 // linked repository. A linked repository is a repository that has been registered
-// with Proton. For more information, see CreateRepository. When a commit is
+// with Proton. For more information, see CreateRepository . When a commit is
 // pushed to your linked repository, Proton checks for changes to your repository
 // template bundles. If it detects a template bundle change, a new major or minor
 // version of its template is created, if the version doesn’t already exist. For

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Batch compute environment. You can create MANAGED  or UNMANAGED
+// Creates an Batch compute environment. You can create MANAGED or UNMANAGED
 // compute environments. MANAGED compute environments can use Amazon EC2 or
 // Fargate resources. UNMANAGED compute environments can only use EC2 resources.
 // In a managed compute environment, Batch manages the capacity and instance types
@@ -32,11 +32,10 @@ import (
 // unmanaged compute environment, you can use the DescribeComputeEnvironments
 // operation to find the Amazon ECS cluster that's associated with it. Then, launch
 // your container instances into that Amazon ECS cluster. For more information, see
-//
 // Launching an Amazon ECS container instance (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html)
 // in the Amazon Elastic Container Service Developer Guide. To create a compute
 // environment that uses EKS resources, the caller must have permissions to call
-// eks:DescribeCluster. Batch doesn't automatically upgrade the AMIs in a compute
+// eks:DescribeCluster . Batch doesn't automatically upgrade the AMIs in a compute
 // environment after it's created. For example, it also doesn't update the AMIs in
 // your compute environment when a newer version of the Amazon ECS optimized AMI is
 // available. You're responsible for the management of the guest operating system.
@@ -49,21 +48,34 @@ import (
 //   - Remove the earlier compute environment from your job queue.
 //   - Delete the earlier compute environment.
 //
-// In April 2022, Batch added
-// enhanced support for updating compute environments. For more information, see
-// Updating compute environments (https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html)
+// In April 2022, Batch added enhanced support for updating compute environments.
+// For more information, see Updating compute environments (https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html)
 // . To use the enhanced updating of compute environments to update AMIs, follow
 // these rules:
-//   - Either don't set the service role ( serviceRole ) parameter or set it to the AWSBatchServiceRole service-linked role.
-//   - Set the allocation strategy ( allocationStrategy ) parameter to BEST_FIT_PROGRESSIVE or SPOT_CAPACITY_OPTIMIZED .
-//   - Set the update to latest image version ( updateToLatestImageVersion ) parameter to true .
-//   - Don't specify an AMI ID in imageId , imageIdOverride (in ec2Configuration (https://docs.aws.amazon.com/batch/latest/APIReference/API_Ec2Configuration.html) ), or in the launch template ( launchTemplate ). In that case, Batch selects the latest Amazon ECS optimized AMI that's supported by Batch at the time the infrastructure update is initiated. Alternatively, you can specify the AMI ID in the imageId or imageIdOverride parameters, or the launch template identified by the LaunchTemplate properties. Changing any of these properties starts an infrastructure update. If the AMI ID is specified in the launch template, it can't be replaced by specifying an AMI ID in either the imageId or imageIdOverride parameters. It can only be replaced by specifying a different launch template, or if the launch template version is set to $Default or $Latest , by setting either a new default version for the launch template (if $Default ) or by adding a new version to the launch template (if $Latest ).
+//   - Either don't set the service role ( serviceRole ) parameter or set it to the
+//     AWSBatchServiceRole service-linked role.
+//   - Set the allocation strategy ( allocationStrategy ) parameter to
+//     BEST_FIT_PROGRESSIVE or SPOT_CAPACITY_OPTIMIZED .
+//   - Set the update to latest image version ( updateToLatestImageVersion )
+//     parameter to true .
+//   - Don't specify an AMI ID in imageId , imageIdOverride (in ec2Configuration (https://docs.aws.amazon.com/batch/latest/APIReference/API_Ec2Configuration.html)
+//     ), or in the launch template ( launchTemplate ). In that case, Batch selects
+//     the latest Amazon ECS optimized AMI that's supported by Batch at the time the
+//     infrastructure update is initiated. Alternatively, you can specify the AMI ID in
+//     the imageId or imageIdOverride parameters, or the launch template identified
+//     by the LaunchTemplate properties. Changing any of these properties starts an
+//     infrastructure update. If the AMI ID is specified in the launch template, it
+//     can't be replaced by specifying an AMI ID in either the imageId or
+//     imageIdOverride parameters. It can only be replaced by specifying a different
+//     launch template, or if the launch template version is set to $Default or
+//     $Latest , by setting either a new default version for the launch template (if
+//     $Default ) or by adding a new version to the launch template (if $Latest ).
 //
 // If these rules are followed, any update that starts an infrastructure update
 // causes the AMI ID to be re-selected. If the version setting in the launch
-// template ( launchTemplate ) is set to $Latest  or $Default, the latest or
+// template ( launchTemplate ) is set to $Latest or $Default , the latest or
 // default version of the launch template is evaluated up at the time of the
-// infrastructure update, even if the launchTemplate  wasn't updated.
+// infrastructure update, even if the launchTemplate wasn't updated.
 func (c *Client) CreateComputeEnvironment(ctx context.Context, params *CreateComputeEnvironmentInput, optFns ...func(*Options)) (*CreateComputeEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateComputeEnvironmentInput{}
@@ -89,7 +101,7 @@ type CreateComputeEnvironmentInput struct {
 	// This member is required.
 	ComputeEnvironmentName *string
 
-	// The type of the compute environment: MANAGED  or UNMANAGED. For more
+	// The type of the compute environment: MANAGED or UNMANAGED . For more
 	// information, see Compute Environments (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
 	// in the Batch User Guide.
 	//
@@ -113,10 +125,10 @@ type CreateComputeEnvironmentInput struct {
 	// unless you specify a different role here. If the Batch service-linked role
 	// doesn't exist in your account, and no role is specified here, the service
 	// attempts to create the Batch service-linked role in your account. If your
-	// specified role has a path other than /, then you must specify either the full
+	// specified role has a path other than / , then you must specify either the full
 	// role ARN (recommended) or prefix the role name with the path. For example, if a
-	// role with the name bar  has a path of /foo/ , specify /foo/bar as the role
-	// name. For more information, see Friendly names and paths (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names)
+	// role with the name bar has a path of /foo/ , specify /foo/bar as the role name.
+	// For more information, see Friendly names and paths (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names)
 	// in the IAM User Guide. Depending on how you created your Batch service role, its
 	// ARN might contain the service-role path prefix. When you only specify the name
 	// of the service role, Batch assumes that your ARN doesn't use the service-role
@@ -124,22 +136,22 @@ type CreateComputeEnvironmentInput struct {
 	// service role when you create compute environments.
 	ServiceRole *string
 
-	// The state of the compute environment. If the state is ENABLED, then the
-	// compute environment accepts jobs from a queue and can scale out automatically
-	// based on queues. If the state is ENABLED, then the Batch scheduler can attempt
-	// to place jobs from an associated job queue on the compute resources within the
+	// The state of the compute environment. If the state is ENABLED , then the compute
+	// environment accepts jobs from a queue and can scale out automatically based on
+	// queues. If the state is ENABLED , then the Batch scheduler can attempt to place
+	// jobs from an associated job queue on the compute resources within the
 	// environment. If the compute environment is managed, then it can scale its
 	// instances out or in automatically, based on the job queue demand. If the state
-	// is DISABLED, then the Batch scheduler doesn't attempt to place jobs within the
-	// environment. Jobs in a STARTING  or RUNNING state continue to progress
-	// normally. Managed compute environments in the DISABLED state don't scale out.
-	// Compute environments in a DISABLED state may continue to incur billing
-	// charges. To prevent additional charges, turn off and then delete the compute
-	// environment. For more information, see State (https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state)
+	// is DISABLED , then the Batch scheduler doesn't attempt to place jobs within the
+	// environment. Jobs in a STARTING or RUNNING state continue to progress normally.
+	// Managed compute environments in the DISABLED state don't scale out. Compute
+	// environments in a DISABLED state may continue to incur billing charges. To
+	// prevent additional charges, turn off and then delete the compute environment.
+	// For more information, see State (https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state)
 	// in the Batch User Guide. When an instance is idle, the instance scales down to
 	// the minvCpus value. However, the instance size doesn't change. For example,
-	// consider a c5.8xlarge  instance with a minvCpus  value of 4  and a desiredvCpus
-	// value of 36 . This instance doesn't scale down to a c5.large  instance.
+	// consider a c5.8xlarge instance with a minvCpus value of 4 and a desiredvCpus
+	// value of 36 . This instance doesn't scale down to a c5.large instance.
 	State types.CEState
 
 	// The tags that you apply to the compute environment to help you categorize and

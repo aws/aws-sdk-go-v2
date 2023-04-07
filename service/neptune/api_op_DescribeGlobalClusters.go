@@ -38,14 +38,14 @@ type DescribeGlobalClustersInput struct {
 	GlobalClusterIdentifier *string
 
 	// (Optional) A pagination token returned by a previous call to
-	// DescribeGlobalClusters. If this parameter is specified, the response will only
+	// DescribeGlobalClusters . If this parameter is specified, the response will only
 	// include records beyond the marker, up to the number specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination marker token is
-	// included in the response that you can use to retrieve the remaining results.
-	// Default: 100  Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination marker token is included in
+	// the response that you can use to retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -56,9 +56,8 @@ type DescribeGlobalClustersOutput struct {
 	// The list of global clusters and instances returned by this request.
 	GlobalClusters []types.GlobalCluster
 
-	// A pagination token. If this parameter is returned in the response, more
-	// records are available, which can be retrieved by one or more additional calls to
-	//
+	// A pagination token. If this parameter is returned in the response, more records
+	// are available, which can be retrieved by one or more additional calls to
 	// DescribeGlobalClusters .
 	Marker *string
 
@@ -139,14 +138,14 @@ var _ DescribeGlobalClustersAPIClient = (*Client)(nil)
 // DescribeGlobalClustersPaginatorOptions is the paginator options for
 // DescribeGlobalClusters
 type DescribeGlobalClustersPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination marker token is
-	// included in the response that you can use to retrieve the remaining results.
-	// Default: 100  Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination marker token is included in
+	// the response that you can use to retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -159,8 +158,7 @@ type DescribeGlobalClustersPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeGlobalClustersPaginator returns a new
-// DescribeGlobalClustersPaginator
+// NewDescribeGlobalClustersPaginator returns a new DescribeGlobalClustersPaginator
 func NewDescribeGlobalClustersPaginator(client DescribeGlobalClustersAPIClient, params *DescribeGlobalClustersInput, optFns ...func(*DescribeGlobalClustersPaginatorOptions)) *DescribeGlobalClustersPaginator {
 	if params == nil {
 		params = &DescribeGlobalClustersInput{}

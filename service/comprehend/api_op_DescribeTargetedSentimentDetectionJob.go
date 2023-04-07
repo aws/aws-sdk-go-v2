@@ -31,7 +31,7 @@ func (c *Client) DescribeTargetedSentimentDetectionJob(ctx context.Context, para
 type DescribeTargetedSentimentDetectionJobInput struct {
 
 	// The identifier that Amazon Comprehend generated for the job. The
-	// StartTargetedSentimentDetectionJoboperation returns this identifier in its
+	// StartTargetedSentimentDetectionJob operation returns this identifier in its
 	// response.
 	//
 	// This member is required.

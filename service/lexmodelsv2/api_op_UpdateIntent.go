@@ -50,10 +50,9 @@ type UpdateIntentInput struct {
 	// This member is required.
 	IntentName *string
 
-	// The identifier of the language and locale where this intent is used. The
-	// string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// The identifier of the language and locale where this intent is used. The string
+	// must match one of the supported locales. For more information, see Supported
+	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
 	//
 	// This member is required.
 	LocaleId *string
@@ -132,8 +131,8 @@ type UpdateIntentOutput struct {
 	// The updated response that Amazon Lex sends the user when the intent is closed.
 	IntentClosingSetting *types.IntentClosingSetting
 
-	// The updated prompts that Amazon Lex sends to the user to confirm the
-	// completion of an intent.
+	// The updated prompts that Amazon Lex sends to the user to confirm the completion
+	// of an intent.
 	IntentConfirmationSetting *types.IntentConfirmationSetting
 
 	// The identifier of the intent that was updated.

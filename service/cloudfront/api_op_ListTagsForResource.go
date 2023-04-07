@@ -41,7 +41,7 @@ type ListTagsForResourceInput struct {
 // The returned result of the corresponding request.
 type ListTagsForResourceOutput struct {
 
-	// A complex type that contains zero or more Tag  elements.
+	// A complex type that contains zero or more Tag elements.
 	//
 	// This member is required.
 	Tags *types.Tags

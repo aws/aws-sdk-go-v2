@@ -15,7 +15,7 @@ import (
 )
 
 // Removes the entire tag set from the specified S3 Batch Operations job. To use
-// the DeleteJobTagging  operation, you must have permission to perform the
+// the DeleteJobTagging operation, you must have permission to perform the
 // s3:DeleteJobTagging action. For more information, see Controlling access and
 // labeling jobs using tags (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
 // in the Amazon S3 User Guide. Related actions include:

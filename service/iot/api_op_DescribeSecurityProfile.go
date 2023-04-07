@@ -42,24 +42,23 @@ type DescribeSecurityProfileInput struct {
 
 type DescribeSecurityProfileOutput struct {
 
-	// Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2
-	// instead. A list of metrics whose data is retained (stored). By default, data is
-	// retained for any metric used in the profile's behaviors, but it is also
-	// retained for any metric specified here.
+	// Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.
+	// A list of metrics whose data is retained (stored). By default, data is retained
+	// for any metric used in the profile's behaviors , but it is also retained for any
+	// metric specified here.
 	//
 	// Deprecated: Use additionalMetricsToRetainV2.
 	AdditionalMetricsToRetain []string
 
-	// A list of metrics whose data is retained (stored). By default, data is
-	// retained for any metric used in the profile's behaviors, but it is also retained
-	// for any metric specified here.
+	// A list of metrics whose data is retained (stored). By default, data is retained
+	// for any metric used in the profile's behaviors, but it is also retained for any
+	// metric specified here.
 	AdditionalMetricsToRetainV2 []types.MetricToRetain
 
 	// Where the alerts are sent. (Alerts are always sent to the console.)
 	AlertTargets map[string]types.AlertTarget
 
-	// Specifies the behaviors that, when violated by a device (thing), cause an
-	// alert.
+	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	Behaviors []types.Behavior
 
 	// The time the security profile was created.

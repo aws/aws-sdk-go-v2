@@ -20,8 +20,8 @@ import (
 // This action is useful to determine if a bucket exists and you have permission
 // to access it. The action returns a 200 OK if the bucket exists and you have
 // permission to access it. If the bucket does not exist or you do not have
-// permission to access it, the HEAD  request returns a generic 404 Not Found  or
-// 403 Forbiddencode. A message body is not included, so you cannot determine the
+// permission to access it, the HEAD request returns a generic 404 Not Found or
+// 403 Forbidden code. A message body is not included, so you cannot determine the
 // exception beyond these error codes. To use this operation, you must have
 // permissions to perform the s3:ListBucket action. The bucket owner has this
 // permission by default and can grant this permission to others. For more
@@ -62,7 +62,7 @@ type HeadBucketInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -231,10 +231,9 @@ func (w *BucketExistsWaiter) Wait(ctx context.Context, params *HeadBucketInput, 
 	return err
 }
 
-// WaitForOutput calls the waiter function for BucketExists waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for BucketExists waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
 func (w *BucketExistsWaiter) WaitForOutput(ctx context.Context, params *HeadBucketInput, maxWaitDur time.Duration, optFns ...func(*BucketExistsWaiterOptions)) (*HeadBucketOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

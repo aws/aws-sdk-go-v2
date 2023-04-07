@@ -15,8 +15,8 @@ type AuthorizationData struct {
 	// user:password for public registry authentication using docker login .
 	AuthorizationToken *string
 
-	// The Unix time in seconds and milliseconds when the authorization token
-	// expires. Authorization tokens are valid for 12 hours.
+	// The Unix time in seconds and milliseconds when the authorization token expires.
+	// Authorization tokens are valid for 12 hours.
 	ExpiresAt *time.Time
 
 	noSmithyDocumentSerde
@@ -25,8 +25,7 @@ type AuthorizationData struct {
 // An object that represents an Amazon ECR image.
 type Image struct {
 
-	// An object that contains the image tag and image digest associated with an
-	// image.
+	// An object that contains the image tag and image digest associated with an image.
 	ImageId *ImageIdentifier
 
 	// The image manifest that's associated with the image.
@@ -45,14 +44,13 @@ type Image struct {
 	noSmithyDocumentSerde
 }
 
-// An object that describes an image that's returned by a DescribeImages
-// operation.
+// An object that describes an image that's returned by a DescribeImages operation.
 type ImageDetail struct {
 
 	// The artifact media type of the image.
 	ArtifactMediaType *string
 
-	// The sha256  digest of the image manifest.
+	// The sha256 digest of the image manifest.
 	ImageDigest *string
 
 	// The media type of the image manifest.
@@ -101,7 +99,7 @@ type ImageFailure struct {
 // An object with identifying information for an Amazon ECR image.
 type ImageIdentifier struct {
 
-	// The sha256  digest of the image manifest.
+	// The sha256 digest of the image manifest.
 	ImageDigest *string
 
 	// The tag that's used for the image.
@@ -131,7 +129,7 @@ type Layer struct {
 	// The availability status of the image layer.
 	LayerAvailability LayerAvailability
 
-	// The sha256  digest of the image layer.
+	// The sha256 digest of the image layer.
 	LayerDigest *string
 
 	// The size, in bytes, of the image layer.
@@ -167,7 +165,7 @@ type ReferencedImageDetail struct {
 	// The artifact media type of the image.
 	ArtifactMediaType *string
 
-	// The sha256  digest of the image manifest.
+	// The sha256 digest of the image manifest.
 	ImageDigest *string
 
 	// The media type of the image manifest.
@@ -243,9 +241,9 @@ type RegistryAlias struct {
 
 	// Indicates whether the registry alias is the primary alias for the registry. If
 	// true, the alias is the primary registry alias and is displayed in both the
-	// repository URL and the image URI used in the docker pull commands on the
-	// Amazon ECR Public Gallery. A registry alias that isn't the primary registry
-	// alias can be used in the repository URI in a docker pull  command.
+	// repository URL and the image URI used in the docker pull commands on the Amazon
+	// ECR Public Gallery. A registry alias that isn't the primary registry alias can
+	// be used in the repository URI in a docker pull command.
 	//
 	// This member is required.
 	PrimaryRegistryAlias bool
@@ -279,17 +277,16 @@ type Repository struct {
 	// that contains the repository.
 	RegistryId *string
 
-	// The Amazon Resource Name (ARN) that identifies the repository. The ARN
-	// contains the arn:aws:ecr namespace, followed by the region of the repository,
-	// Amazon Web Services account ID of the repository owner, repository namespace,
-	// and repository name. For example,
-	// arn:aws:ecr:region:012345678910:repository/test .
+	// The Amazon Resource Name (ARN) that identifies the repository. The ARN contains
+	// the arn:aws:ecr namespace, followed by the region of the repository, Amazon Web
+	// Services account ID of the repository owner, repository namespace, and
+	// repository name. For example, arn:aws:ecr:region:012345678910:repository/test .
 	RepositoryArn *string
 
 	// The name of the repository.
 	RepositoryName *string
 
-	// The URI for the repository. You can use this URI for container image push  and
+	// The URI for the repository. You can use this URI for container image push and
 	// pull operations.
 	RepositoryUri *string
 
@@ -335,8 +332,8 @@ type RepositoryCatalogData struct {
 // publicly visible in the Amazon ECR Public Gallery.
 type RepositoryCatalogDataInput struct {
 
-	// A detailed description of the contents of the repository. It's publicly
-	// visible in the Amazon ECR Public Gallery. The text must be in markdown format.
+	// A detailed description of the contents of the repository. It's publicly visible
+	// in the Amazon ECR Public Gallery. The text must be in markdown format.
 	AboutText *string
 
 	// The system architecture that the images in the repository are compatible with.
@@ -345,10 +342,10 @@ type RepositoryCatalogDataInput struct {
 	// tag is added to your repository catalog data, it's associated with the
 	// repository and can be retrieved using the API but isn't discoverable in the
 	// Amazon ECR Public Gallery.
-	//     - ARM
-	//     - ARM 64
-	//     - x86
-	//     - x86-64
+	//   - ARM
+	//   - ARM 64
+	//   - x86
+	//   - x86-64
 	Architectures []string
 
 	// A short description of the contents of the repository. This text appears in
@@ -360,14 +357,14 @@ type RepositoryCatalogDataInput struct {
 	// publicly visible in the Amazon ECR Public Gallery for verified accounts.
 	LogoImageBlob []byte
 
-	// The operating systems that the images in the repository are compatible with.
-	// On the Amazon ECR Public Gallery, the following supported operating systems
-	// appear as badges on the repository and are used as search filters. If an
-	// unsupported tag is added to your repository catalog data, it's associated with
-	// the repository and can be retrieved using the API but isn't discoverable in the
+	// The operating systems that the images in the repository are compatible with. On
+	// the Amazon ECR Public Gallery, the following supported operating systems appear
+	// as badges on the repository and are used as search filters. If an unsupported
+	// tag is added to your repository catalog data, it's associated with the
+	// repository and can be retrieved using the API but isn't discoverable in the
 	// Amazon ECR Public Gallery.
-	//     - Linux
-	//     - Windows
+	//   - Linux
+	//   - Windows
 	OperatingSystems []string
 
 	// Detailed information about how to use the contents of the repository. It's

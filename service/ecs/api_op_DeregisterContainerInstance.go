@@ -46,9 +46,9 @@ type DeregisterContainerInstanceInput struct {
 	// This member is required.
 	ContainerInstance *string
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the container instance to deregister. If you do not specify a cluster, the
-	// default cluster is assumed.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// container instance to deregister. If you do not specify a cluster, the default
+	// cluster is assumed.
 	Cluster *string
 
 	// Forces the container instance to be deregistered. If you have tasks running on

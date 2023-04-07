@@ -41,15 +41,15 @@ type GetVpnConnectionDeviceTypesInput struct {
 	DryRun *bool
 
 	// The maximum number of results returned by GetVpnConnectionDeviceTypes in
-	// paginated output. When this parameter is used, GetVpnConnectionDeviceTypes
-	// only returns MaxResults  results in a single page along with a NextToken
-	// response element. The remaining results of the initial request can be seen by
-	// sending another GetVpnConnectionDeviceTypes  request with the returned
-	// NextTokenvalue. This value can be between 200 and 1000. If this parameter is
-	// not used, then GetVpnConnectionDeviceTypes  returns all results.
+	// paginated output. When this parameter is used, GetVpnConnectionDeviceTypes only
+	// returns MaxResults results in a single page along with a NextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another GetVpnConnectionDeviceTypes request with the returned NextToken value.
+	// This value can be between 200 and 1000. If this parameter is not used, then
+	// GetVpnConnectionDeviceTypes returns all results.
 	MaxResults *int32
 
-	// The NextToken  value returned from a previous paginated
+	// The NextToken value returned from a previous paginated
 	// GetVpnConnectionDeviceTypes request where MaxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
 	// previous results that returned the NextToken value. This value is null when
@@ -61,10 +61,10 @@ type GetVpnConnectionDeviceTypesInput struct {
 
 type GetVpnConnectionDeviceTypesOutput struct {
 
-	// The NextToken  value to include in a future GetVpnConnectionDeviceTypes
-	// request. When the results of a GetVpnConnectionDeviceTypes  request exceed
-	// MaxResults, this value can be used to retrieve the next page of results. This
-	// value is null when there are no more results to return.
+	// The NextToken value to include in a future GetVpnConnectionDeviceTypes request.
+	// When the results of a GetVpnConnectionDeviceTypes request exceed MaxResults ,
+	// this value can be used to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string
 
 	// List of customer gateway devices that have a sample configuration file
@@ -149,16 +149,16 @@ var _ GetVpnConnectionDeviceTypesAPIClient = (*Client)(nil)
 // GetVpnConnectionDeviceTypes
 type GetVpnConnectionDeviceTypesPaginatorOptions struct {
 	// The maximum number of results returned by GetVpnConnectionDeviceTypes in
-	// paginated output. When this parameter is used, GetVpnConnectionDeviceTypes
-	// only returns MaxResults  results in a single page along with a NextToken
-	// response element. The remaining results of the initial request can be seen by
-	// sending another GetVpnConnectionDeviceTypes  request with the returned
-	// NextTokenvalue. This value can be between 200 and 1000. If this parameter is
-	// not used, then GetVpnConnectionDeviceTypes  returns all results.
+	// paginated output. When this parameter is used, GetVpnConnectionDeviceTypes only
+	// returns MaxResults results in a single page along with a NextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another GetVpnConnectionDeviceTypes request with the returned NextToken value.
+	// This value can be between 200 and 1000. If this parameter is not used, then
+	// GetVpnConnectionDeviceTypes returns all results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

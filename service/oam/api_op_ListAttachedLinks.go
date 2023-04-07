@@ -136,14 +136,13 @@ type ListAttachedLinksAPIClient interface {
 
 var _ ListAttachedLinksAPIClient = (*Client)(nil)
 
-// ListAttachedLinksPaginatorOptions is the paginator options for
-// ListAttachedLinks
+// ListAttachedLinksPaginatorOptions is the paginator options for ListAttachedLinks
 type ListAttachedLinksPaginatorOptions struct {
 	// Limits the number of returned links to the specified number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

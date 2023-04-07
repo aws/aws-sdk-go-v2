@@ -37,16 +37,16 @@ type ResumeProcessesInput struct {
 	AutoScalingGroupName *string
 
 	// One or more of the following processes:
-	//     - Launch
-	//     - Terminate
-	//     - AddToLoadBalancer
-	//     - AlarmNotification
-	//     - AZRebalance
-	//     - HealthCheck
-	//     - InstanceRefresh
-	//     - ReplaceUnhealthy
-	//     - ScheduledActions
-	//  If you omit this property, all processes are specified.
+	//   - Launch
+	//   - Terminate
+	//   - AddToLoadBalancer
+	//   - AlarmNotification
+	//   - AZRebalance
+	//   - HealthCheck
+	//   - InstanceRefresh
+	//   - ReplaceUnhealthy
+	//   - ScheduledActions
+	// If you omit this property, all processes are specified.
 	ScalingProcesses []string
 
 	noSmithyDocumentSerde

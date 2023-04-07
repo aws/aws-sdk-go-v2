@@ -32,8 +32,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The Amazon RDS resource with tags to be listed. This value is an Amazon
-	// Resource Name (ARN). For information about creating an ARN, see Constructing
-	// an ARN for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
+	// Resource Name (ARN). For information about creating an ARN, see Constructing an
+	// ARN for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// in the Amazon RDS User Guide.
 	//
 	// This member is required.
@@ -47,7 +47,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// List of tags returned by the ListTagsForResource  operation.
+	// List of tags returned by the ListTagsForResource operation.
 	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.

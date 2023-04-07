@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Client VPN endpoint. A Client VPN endpoint is the resource you
-// create and configure to enable and manage client VPN sessions. It is the
-// destination endpoint at which all client VPN sessions are terminated.
+// Creates a Client VPN endpoint. A Client VPN endpoint is the resource you create
+// and configure to enable and manage client VPN sessions. It is the destination
+// endpoint at which all client VPN sessions are terminated.
 func (c *Client) CreateClientVpnEndpoint(ctx context.Context, params *CreateClientVpnEndpointInput, optFns ...func(*Options)) (*CreateClientVpnEndpointOutput, error) {
 	if params == nil {
 		params = &CreateClientVpnEndpointInput{}
@@ -50,10 +50,10 @@ type CreateClientVpnEndpointInput struct {
 	// Information about the client connection logging options. If you enable client
 	// connection logging, data about client connections is sent to a Cloudwatch Logs
 	// log stream. The following information is logged:
-	//     - Client connection requests
-	//     - Client connection results (successful and unsuccessful)
-	//     - Reasons for unsuccessful client connection requests
-	//     - Client connection termination time
+	//   - Client connection requests
+	//   - Client connection results (successful and unsuccessful)
+	//   - Reasons for unsuccessful client connection requests
+	//   - Client connection termination time
 	//
 	// This member is required.
 	ConnectionLogOptions *types.ConnectionLogOptions
@@ -71,8 +71,8 @@ type CreateClientVpnEndpointInput struct {
 	// Amazon Web Services provided clients when a VPN session is established.
 	ClientLoginBannerOptions *types.ClientLoginBannerOptions
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 
@@ -90,8 +90,8 @@ type CreateClientVpnEndpointInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The IDs of one or more security groups to apply to the target network. You
-	// must also specify the ID of the VPC that contains the security groups.
+	// The IDs of one or more security groups to apply to the target network. You must
+	// also specify the ID of the VPC that contains the security groups.
 	SecurityGroupIds []string
 
 	// Specify whether to enable the self-service portal for the Client VPN endpoint.
@@ -120,7 +120,7 @@ type CreateClientVpnEndpointInput struct {
 	VpcId *string
 
 	// The port number to assign to the Client VPN endpoint for TCP and UDP traffic.
-	// Valid Values: 443  | 1194  Default Value: 443
+	// Valid Values: 443 | 1194 Default Value: 443
 	VpnPort *int32
 
 	noSmithyDocumentSerde

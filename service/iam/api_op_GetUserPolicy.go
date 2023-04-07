@@ -12,15 +12,15 @@ import (
 
 // Retrieves the specified inline policy document that is embedded in the
 // specified IAM user. Policies returned by this operation are URL-encoded
-// compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986). You can use a
+// compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986) . You can use a
 // URL decoding method to convert the policy back to plain JSON text. For example,
-// if you use Java, you can use the decode  method of the java.net.URLDecoder
+// if you use Java, you can use the decode method of the java.net.URLDecoder
 // utility class in the Java SDK. Other languages and SDKs provide similar
 // functionality. An IAM user can also have managed policies attached to it. To
-// retrieve a managed policy document that is attached to a user, use GetPolicy
-// to determine the policy's default version. Then use GetPolicyVersion to
-// retrieve the policy document. For more information about policies, see Managed
-// policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// retrieve a managed policy document that is attached to a user, use GetPolicy to
+// determine the policy's default version. Then use GetPolicyVersion to retrieve
+// the policy document. For more information about policies, see Managed policies
+// and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) GetUserPolicy(ctx context.Context, params *GetUserPolicyInput, optFns ...func(*Options)) (*GetUserPolicyOutput, error) {
 	if params == nil {
@@ -40,7 +40,7 @@ func (c *Client) GetUserPolicy(ctx context.Context, params *GetUserPolicyInput, 
 type GetUserPolicyInput struct {
 
 	// The name of the policy document to get. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
 	//
@@ -48,7 +48,7 @@ type GetUserPolicyInput struct {
 	PolicyName *string
 
 	// The name of the user who the policy is associated with. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//
@@ -58,7 +58,7 @@ type GetUserPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetUserPolicy  request.
+// Contains the response to a successful GetUserPolicy request.
 type GetUserPolicyOutput struct {
 
 	// The policy document. IAM stores policies in JSON format. However, resources

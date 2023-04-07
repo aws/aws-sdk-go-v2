@@ -32,7 +32,7 @@ func (c *Client) DeleteAccountAlias(ctx context.Context, params *DeleteAccountAl
 type DeleteAccountAliasInput struct {
 
 	// The name of the account alias to delete. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of lowercase letters, digits, and dashes. You cannot start or finish
 	// with a dash, nor can you have two dashes in a row.
 	//

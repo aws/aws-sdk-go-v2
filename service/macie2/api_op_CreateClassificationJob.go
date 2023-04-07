@@ -37,8 +37,11 @@ type CreateClassificationJobInput struct {
 	ClientToken *string
 
 	// The schedule for running the job. Valid values are:
-	//     - ONE_TIME - Run the job only once. If you specify this value, don't specify a value for the scheduleFrequency property.
-	//     - SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to define the recurrence pattern for the job.
+	//   - ONE_TIME - Run the job only once. If you specify this value, don't specify
+	//   a value for the scheduleFrequency property.
+	//   - SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you
+	//   specify this value, use the scheduleFrequency property to define the recurrence
+	//   pattern for the job.
 	//
 	// This member is required.
 	JobType types.JobType
@@ -54,12 +57,12 @@ type CreateClassificationJobInput struct {
 	// This member is required.
 	S3JobDefinition *types.S3JobDefinition
 
-	// An array of unique identifiers, one for each allow list for the job to use
-	// when it analyzes data.
+	// An array of unique identifiers, one for each allow list for the job to use when
+	// it analyzes data.
 	AllowListIds []string
 
-	// An array of unique identifiers, one for each custom data identifier for the
-	// job to use when it analyzes data. To use only managed data identifiers, don't
+	// An array of unique identifiers, one for each custom data identifier for the job
+	// to use when it analyzes data. To use only managed data identifiers, don't
 	// specify a value for this property and specify a value other than NONE for the
 	// managedDataIdentifierSelector property.
 	CustomDataIdentifierIds []string
@@ -82,13 +85,19 @@ type CreateClassificationJobInput struct {
 	// for this property, use the ListManagedDataIdentifiers operation.
 	ManagedDataIdentifierIds []string
 
-	// The selection type to apply when determining which managed data identifiers
-	// the job uses to analyze data. Valid values are:
-	//     - ALL - Use all the managed data identifiers that Amazon Macie provides. If you specify this value, don't specify any values for the managedDataIdentifierIds property.
-	//     - EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property.
-	//     - INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.
-	//     - NONE - Don't use any managed data identifiers. If you specify this value, specify at least one custom data identifier for the job (customDataIdentifierIds) and don't specify any values for the managedDataIdentifierIds property.
-	//
+	// The selection type to apply when determining which managed data identifiers the
+	// job uses to analyze data. Valid values are:
+	//   - ALL - Use all the managed data identifiers that Amazon Macie provides. If
+	//   you specify this value, don't specify any values for the
+	//   managedDataIdentifierIds property.
+	//   - EXCLUDE - Use all the managed data identifiers that Macie provides except
+	//   the managed data identifiers specified by the managedDataIdentifierIds property.
+	//   - INCLUDE - Use only the managed data identifiers specified by the
+	//   managedDataIdentifierIds property.
+	//   - NONE - Don't use any managed data identifiers. If you specify this value,
+	//   specify at least one custom data identifier for the job
+	//   (customDataIdentifierIds) and don't specify any values for the
+	//   managedDataIdentifierIds property.
 	// If you don't specify a value for this property, the job uses all managed data
 	// identifiers. If you don't specify a value for this property or you specify ALL
 	// or EXCLUDE for a recurring job, the job also uses new managed data identifiers

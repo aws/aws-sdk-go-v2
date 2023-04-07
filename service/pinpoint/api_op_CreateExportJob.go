@@ -35,8 +35,8 @@ type CreateExportJobInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// Specifies the settings for a job that exports endpoint definitions to an
-	// Amazon Simple Storage Service (Amazon S3) bucket.
+	// Specifies the settings for a job that exports endpoint definitions to an Amazon
+	// Simple Storage Service (Amazon S3) bucket.
 	//
 	// This member is required.
 	ExportJobRequest *types.ExportJobRequest

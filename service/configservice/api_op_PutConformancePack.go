@@ -16,9 +16,9 @@ import (
 // an organization. For information on how many conformance packs you can have per
 // account, see Service Limits  (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html)
 // in the Config Developer Guide. This API creates a service-linked role
-// AWSServiceRoleForConfigConformsin your account. The service-linked role is
+// AWSServiceRoleForConfigConforms in your account. The service-linked role is
 // created only when the role does not exist in your account. You must specify only
-// one of the follow parameters: TemplateS3Uri , TemplateBody  or
+// one of the follow parameters: TemplateS3Uri , TemplateBody or
 // TemplateSSMDocumentDetails .
 func (c *Client) PutConformancePack(ctx context.Context, params *PutConformancePackInput, optFns ...func(*Options)) (*PutConformancePackOutput, error) {
 	if params == nil {
@@ -42,7 +42,7 @@ type PutConformancePackInput struct {
 	// This member is required.
 	ConformancePackName *string
 
-	// A list of ConformancePackInputParameter  objects.
+	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []types.ConformancePackInputParameter
 
 	// The name of the Amazon S3 bucket where Config stores conformance pack
@@ -65,7 +65,7 @@ type PutConformancePackInput struct {
 	// must have access to read Amazon S3 bucket.
 	TemplateS3Uri *string
 
-	// An object of type TemplateSSMDocumentDetails, which contains the name or the
+	// An object of type TemplateSSMDocumentDetails , which contains the name or the
 	// Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document
 	// (SSM document) and the version of the SSM document that is used to create a
 	// conformance pack.

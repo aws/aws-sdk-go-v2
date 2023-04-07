@@ -68,9 +68,9 @@ type AssociateFileSystemInput struct {
 	// The refresh cache information for the file share or FSx file systems.
 	CacheAttributes *types.CacheAttributes
 
-	// Specifies the network configuration information for the gateway associated
-	// with the Amazon FSx file system. If multiple file systems are associated with
-	// this gateway, this parameter's IpAddresses  field is required.
+	// Specifies the network configuration information for the gateway associated with
+	// the Amazon FSx file system. If multiple file systems are associated with this
+	// gateway, this parameter's IpAddresses field is required.
 	EndpointNetworkConfiguration *types.EndpointNetworkConfiguration
 
 	// A list of up to 50 tags that can be assigned to the file system association.

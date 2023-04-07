@@ -55,9 +55,9 @@ type SearchResourcesInput struct {
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more
-	// output is available. Set this parameter to the value provided by a previous
-	// call's NextToken  response to indicate where the output should continue from.
+	// response in a previous request. A NextToken response indicates that more output
+	// is available. Set this parameter to the value provided by a previous call's
+	// NextToken response to indicate where the output should continue from.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -68,17 +68,17 @@ type SearchResourcesOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken  response element comes back as null .
+	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
-	// A list of QueryError  objects. Each error is an object that contains ErrorCode
-	// and Message  structures. Possible values for ErrorCode :
-	//     - CLOUDFORMATION_STACK_INACTIVE
-	//     - CLOUDFORMATION_STACK_NOT_EXISTING
+	// A list of QueryError objects. Each error is an object that contains ErrorCode
+	// and Message structures. Possible values for ErrorCode :
+	//   - CLOUDFORMATION_STACK_INACTIVE
+	//   - CLOUDFORMATION_STACK_NOT_EXISTING
 	QueryErrors []types.QueryError
 
-	// The ARNs and resource types of resources that are members of the group that
-	// you specified.
+	// The ARNs and resource types of resources that are members of the group that you
+	// specified.
 	ResourceIdentifiers []types.ResourceIdentifier
 
 	// Metadata pertaining to the operation's result.
@@ -171,8 +171,8 @@ type SearchResourcesPaginatorOptions struct {
 	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

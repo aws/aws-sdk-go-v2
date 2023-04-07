@@ -38,8 +38,8 @@ func (c *Client) BatchUpsertTableRows(ctx context.Context, params *BatchUpsertTa
 
 type BatchUpsertTableRowsInput struct {
 
-	// The list of rows to upsert in the table. Each item in this list needs to have
-	// a batch item id to uniquely identify the element in the request, a filter
+	// The list of rows to upsert in the table. Each item in this list needs to have a
+	// batch item id to uniquely identify the element in the request, a filter
 	// expression to find the rows to update for that element and the cell values to
 	// set for each column in the upserted rows. You need to specify at least one item
 	// in this list. Note that if one of the filter formulas in the request fails to
@@ -89,8 +89,8 @@ type BatchUpsertTableRowsOutput struct {
 	// This member is required.
 	WorkbookCursor int64
 
-	// The list of batch items in the request that could not be updated or appended
-	// in the table. Each element in this list contains one item from the request that
+	// The list of batch items in the request that could not be updated or appended in
+	// the table. Each element in this list contains one item from the request that
 	// could not be updated in the table along with the reason why that item could not
 	// be updated or appended.
 	FailedBatchItems []types.FailedBatchItem

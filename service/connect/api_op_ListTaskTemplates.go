@@ -49,8 +49,8 @@ type ListTaskTemplatesInput struct {
 	// is always null.
 	NextToken *string
 
-	// Marks a template as ACTIVE  or INACTIVE for a task to refer to it. Tasks can
-	// only be created from ACTIVE  templates. If a template is marked as INACTIVE,
+	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can
+	// only be created from ACTIVE templates. If a template is marked as INACTIVE ,
 	// then a task that refers to this template cannot be created.
 	Status types.TaskTemplateStatus
 
@@ -59,8 +59,8 @@ type ListTaskTemplatesInput struct {
 
 type ListTaskTemplatesOutput struct {
 
-	// If there are additional results, this is the token for the next set of
-	// results. This is always returned as a null in the response.
+	// If there are additional results, this is the token for the next set of results.
+	// This is always returned as a null in the response.
 	NextToken *string
 
 	// Provides details about a list of task templates belonging to an instance.
@@ -143,15 +143,14 @@ type ListTaskTemplatesAPIClient interface {
 
 var _ ListTaskTemplatesAPIClient = (*Client)(nil)
 
-// ListTaskTemplatesPaginatorOptions is the paginator options for
-// ListTaskTemplates
+// ListTaskTemplatesPaginatorOptions is the paginator options for ListTaskTemplates
 type ListTaskTemplatesPaginatorOptions struct {
 	// The maximum number of results to return per page. It is not expected that you
 	// set this.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

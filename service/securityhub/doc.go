@@ -16,16 +16,21 @@
 // configuration or settings change that results from the operation is applied only
 // to that Region. To make the same change in other Regions, run the same command
 // for each Region in which you want to apply the change. For example, if your
-// Region is set to us-west-2 , when you use CreateMembers to add a member
-// account to Security Hub, the association of the member account with the
-// administrator account is created only in the us-west-2 Region. Security Hub
-// must be enabled for the member account in the same Region that the invitation
-// was sent from. The following throttling limits apply to using Security Hub API
-// operations.
-//   - BatchEnableStandards - RateLimit of 1 request per second. BurstLimit of 1 request per second.
-//   - GetFindings - RateLimit of 3 requests per second. BurstLimit of 6 requests per second.
-//   - BatchImportFindings - RateLimit of 10 requests per second. BurstLimit of 30 requests per second.
-//   - BatchUpdateFindings - RateLimit of 10 requests per second. BurstLimit of 30 requests per second.
-//   - UpdateStandardsControl - RateLimit of 1 request per second. BurstLimit of 5 requests per second.
-//   - All other operations - RateLimit of 10 requests per second. BurstLimit of 30 requests per second.
+// Region is set to us-west-2 , when you use CreateMembers to add a member account
+// to Security Hub, the association of the member account with the administrator
+// account is created only in the us-west-2 Region. Security Hub must be enabled
+// for the member account in the same Region that the invitation was sent from. The
+// following throttling limits apply to using Security Hub API operations.
+//   - BatchEnableStandards - RateLimit of 1 request per second. BurstLimit of 1
+//     request per second.
+//   - GetFindings - RateLimit of 3 requests per second. BurstLimit of 6 requests
+//     per second.
+//   - BatchImportFindings - RateLimit of 10 requests per second. BurstLimit of 30
+//     requests per second.
+//   - BatchUpdateFindings - RateLimit of 10 requests per second. BurstLimit of 30
+//     requests per second.
+//   - UpdateStandardsControl - RateLimit of 1 request per second. BurstLimit of 5
+//     requests per second.
+//   - All other operations - RateLimit of 10 requests per second. BurstLimit of 30
+//     requests per second.
 package securityhub

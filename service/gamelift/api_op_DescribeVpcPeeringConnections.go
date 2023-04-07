@@ -36,8 +36,7 @@ func (c *Client) DescribeVpcPeeringConnections(ctx context.Context, params *Desc
 
 type DescribeVpcPeeringConnectionsInput struct {
 
-	// A unique identifier for the fleet. You can use either the fleet ID or ARN
-	// value.
+	// A unique identifier for the fleet. You can use either the fleet ID or ARN value.
 	FleetId *string
 
 	noSmithyDocumentSerde

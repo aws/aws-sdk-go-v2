@@ -52,7 +52,7 @@ type ScheduleRunInput struct {
 
 	// The filter criteria used to dynamically select a set of devices for a test run
 	// and the maximum number of devices to be included in the run. Either
-	// devicePoolArn or deviceSelectionConfiguration  is required in a request.
+	// devicePoolArn or deviceSelectionConfiguration is required in a request.
 	DeviceSelectionConfiguration *types.DeviceSelectionConfiguration
 
 	// Specifies configuration information about a test run, such as the execution

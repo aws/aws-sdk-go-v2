@@ -31,8 +31,8 @@ func (c *Client) CreateAttendee(ctx context.Context, params *CreateAttendeeInput
 
 type CreateAttendeeInput struct {
 
-	// The Amazon Chime SDK external user ID. An idempotency token. Links the
-	// attendee to an identity managed by a builder application.
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
+	// to an identity managed by a builder application.
 	//
 	// This member is required.
 	ExternalUserId *string

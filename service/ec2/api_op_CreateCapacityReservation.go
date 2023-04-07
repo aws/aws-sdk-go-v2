@@ -71,8 +71,8 @@ type CreateCapacityReservationInput struct {
 	// The ID of the Availability Zone in which to create the Capacity Reservation.
 	AvailabilityZoneId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 
@@ -92,9 +92,9 @@ type CreateCapacityReservationInput struct {
 	// The date and time at which the Capacity Reservation expires. When a Capacity
 	// Reservation expires, the reserved capacity is released and you can no longer
 	// launch instances into it. The Capacity Reservation's state changes to expired
-	// when it reaches its end date and time. You must provide an EndDate  value if
-	// EndDateType is limited . Omit EndDate  if EndDateType  is unlimited . If the
-	// EndDateType is limited, the Capacity Reservation is cancelled within an hour
+	// when it reaches its end date and time. You must provide an EndDate value if
+	// EndDateType is limited . Omit EndDate if EndDateType is unlimited . If the
+	// EndDateType is limited , the Capacity Reservation is cancelled within an hour
 	// from the specified time. For example, if you specify 5/31/2019, 13:30:55, the
 	// Capacity Reservation is guaranteed to end between 13:30:55 and 14:30:55 on
 	// 5/31/2019.
@@ -102,8 +102,11 @@ type CreateCapacityReservationInput struct {
 
 	// Indicates the way in which the Capacity Reservation ends. A Capacity
 	// Reservation can have one of the following end types:
-	//     - unlimited - The Capacity Reservation remains active until you explicitly cancel it. Do not provide an EndDate if the EndDateType is unlimited .
-	//     - limited - The Capacity Reservation expires automatically at a specified date and time. You must provide an EndDate value if the EndDateType value is limited .
+	//   - unlimited - The Capacity Reservation remains active until you explicitly
+	//   cancel it. Do not provide an EndDate if the EndDateType is unlimited .
+	//   - limited - The Capacity Reservation expires automatically at a specified date
+	//   and time. You must provide an EndDate value if the EndDateType value is
+	//   limited .
 	EndDateType types.EndDateType
 
 	// Deprecated.
@@ -111,9 +114,14 @@ type CreateCapacityReservationInput struct {
 
 	// Indicates the type of instance launches that the Capacity Reservation accepts.
 	// The options include:
-	//     - open - The Capacity Reservation automatically matches all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes run in the Capacity Reservation automatically without specifying any additional parameters.
-	//     - targeted - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity.
-	//
+	//   - open - The Capacity Reservation automatically matches all instances that
+	//   have matching attributes (instance type, platform, and Availability Zone).
+	//   Instances that have matching attributes run in the Capacity Reservation
+	//   automatically without specifying any additional parameters.
+	//   - targeted - The Capacity Reservation only accepts instances that have
+	//   matching attributes (instance type, platform, and Availability Zone), and
+	//   explicitly target the Capacity Reservation. This ensures that only permitted
+	//   instances can use the reserved capacity.
 	// Default: open
 	InstanceMatchCriteria types.InstanceMatchCriteria
 
@@ -132,8 +140,10 @@ type CreateCapacityReservationInput struct {
 
 	// Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can
 	// have one of the following tenancy settings:
-	//     - default - The Capacity Reservation is created on hardware that is shared with other Amazon Web Services accounts.
-	//     - dedicated - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single Amazon Web Services account.
+	//   - default - The Capacity Reservation is created on hardware that is shared
+	//   with other Amazon Web Services accounts.
+	//   - dedicated - The Capacity Reservation is created on single-tenant hardware
+	//   that is dedicated to a single Amazon Web Services account.
 	Tenancy types.CapacityReservationTenancy
 
 	noSmithyDocumentSerde

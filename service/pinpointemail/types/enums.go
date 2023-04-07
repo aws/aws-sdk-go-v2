@@ -68,8 +68,8 @@ const (
 	DimensionValueSourceLinkTag     DimensionValueSource = "LINK_TAG"
 )
 
-// Values returns all known values for DimensionValueSource. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DimensionValueSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DimensionValueSource) Values() []DimensionValueSource {
 	return []DimensionValueSource{
@@ -163,8 +163,8 @@ const (
 	MailFromDomainStatusTemporaryFailure MailFromDomainStatus = "TEMPORARY_FAILURE"
 )
 
-// Values returns all known values for MailFromDomainStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for MailFromDomainStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (MailFromDomainStatus) Values() []MailFromDomainStatus {
 	return []MailFromDomainStatus{

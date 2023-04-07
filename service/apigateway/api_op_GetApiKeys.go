@@ -35,7 +35,7 @@ type GetApiKeysInput struct {
 	// a developer portal.
 	CustomerId *string
 
-	// A boolean flag to specify whether ( true ) or not ( false) the result contains
+	// A boolean flag to specify whether ( true ) or not ( false ) the result contains
 	// key values.
 	IncludeValues *bool
 
@@ -147,8 +147,8 @@ type GetApiKeysPaginatorOptions struct {
 	// the maximum value is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

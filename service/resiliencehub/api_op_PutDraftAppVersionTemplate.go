@@ -38,34 +38,65 @@ type PutDraftAppVersionTemplateInput struct {
 	AppArn *string
 
 	// A JSON string that provides information about your application structure. To
-	// learn more about the appTemplateBody template, see the sample template
-	// provided in the Examples section. The appTemplateBody JSON string has the
-	// following structure:
-	//     - resources The list of logical resources that needs to be included in the Resilience Hub application. Type: Array Don't add the resources that you want to exclude. Each resources array item includes the following fields:
-	//         - logicalResourceId The logical identifier of the resource. Type: Object Each logicalResourceId object includes the following fields:
-	//             - identifier The identifier of the resource. Type: String
-	//             - logicalStackName The name of the CloudFormation stack this resource belongs to. Type: String
-	//             - resourceGroupName The name of the resource group this resource belongs to. Type: String
-	//             - terraformSourceName The name of the Terraform S3 state file this resource belongs to. Type: String
-	//         - type The type of resource. Type: string
-	//         - name The name of the resource. Type: String
-	//         - additionalInfo Additional configuration parameters for an AWS Resilience Hub application. Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions" Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
-	//     - appComponents The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added. Type: Array Each appComponents array item includes the following fields:
-	//         - name The name of the Application Component. Type: String
-	//         - type The type of Application Component. For more information about the types of Application Component, see Grouping resources in an AppComponent (https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html) . Type: String
-	//         - resourceNames The list of included resources that are assigned to the Application Component. Type: Array of strings
-	//         - additionalInfo Additional configuration parameters for an AWS Resilience Hub application. Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions" Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
-	//     - excludedResources The list of logical resource identifiers to be excluded from the application. Type: Array Don't add the resources that you want to include. Each excludedResources array item includes the following fields:
-	//         - logicalResourceIds The logical identifier of the resource. Type: Object You can configure only one of the following fields:
-	//             - logicalStackName
-	//             - resourceGroupName
-	//             - terraformSourceName Each logicalResourceIds object includes the following fields:
-	//             - identifier The identifier of the resource. Type: String
-	//             - logicalStackName The name of the CloudFormation stack this resource belongs to. Type: String
-	//             - resourceGroupName The name of the resource group this resource belongs to. Type: String
-	//             - terraformSourceName The name of the Terraform S3 state file this resource belongs to. Type: String
-	//     - version The AWS Resilience Hub application version.
-	//     - additionalInfo Additional configuration parameters for an AWS Resilience Hub application. Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions" Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
+	// learn more about the appTemplateBody template, see the sample template provided
+	// in the Examples section. The appTemplateBody JSON string has the following
+	// structure:
+	//   - resources The list of logical resources that needs to be included in the
+	//   Resilience Hub application. Type: Array Don't add the resources that you want to
+	//   exclude. Each resources array item includes the following fields:
+	//   - logicalResourceId The logical identifier of the resource. Type: Object Each
+	//   logicalResourceId object includes the following fields:
+	//   - identifier The identifier of the resource. Type: String
+	//   - logicalStackName The name of the CloudFormation stack this resource belongs
+	//   to. Type: String
+	//   - resourceGroupName The name of the resource group this resource belongs to.
+	//   Type: String
+	//   - terraformSourceName The name of the Terraform S3 state file this resource
+	//   belongs to. Type: String
+	//   - type The type of resource. Type: string
+	//   - name The name of the resource. Type: String
+	//   - additionalInfo Additional configuration parameters for an AWS Resilience Hub
+	//   application. Currently, this parameter accepts a key-value mapping (in a string
+	//   format) of only one failover region and one associated account. Key:
+	//   "failover-regions" Value: "[{"region":"<REGION>",
+	//   "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
+	//   - appComponents The list of Application Components that this resource belongs
+	//   to. If an Application Component is not part of the AWS Resilience Hub
+	//   application, it will be added. Type: Array Each appComponents array item
+	//   includes the following fields:
+	//   - name The name of the Application Component. Type: String
+	//   - type The type of Application Component. For more information about the types
+	//   of Application Component, see Grouping resources in an AppComponent (https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html)
+	//   . Type: String
+	//   - resourceNames The list of included resources that are assigned to the
+	//   Application Component. Type: Array of strings
+	//   - additionalInfo Additional configuration parameters for an AWS Resilience Hub
+	//   application. Currently, this parameter accepts a key-value mapping (in a string
+	//   format) of only one failover region and one associated account. Key:
+	//   "failover-regions" Value: "[{"region":"<REGION>",
+	//   "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
+	//   - excludedResources The list of logical resource identifiers to be excluded
+	//   from the application. Type: Array Don't add the resources that you want to
+	//   include. Each excludedResources array item includes the following fields:
+	//   - logicalResourceIds The logical identifier of the resource. Type: Object You
+	//   can configure only one of the following fields:
+	//   - logicalStackName
+	//   - resourceGroupName
+	//   - terraformSourceName Each logicalResourceIds object includes the following
+	//   fields:
+	//   - identifier The identifier of the resource. Type: String
+	//   - logicalStackName The name of the CloudFormation stack this resource belongs
+	//   to. Type: String
+	//   - resourceGroupName The name of the resource group this resource belongs to.
+	//   Type: String
+	//   - terraformSourceName The name of the Terraform S3 state file this resource
+	//   belongs to. Type: String
+	//   - version The AWS Resilience Hub application version.
+	//   - additionalInfo Additional configuration parameters for an AWS Resilience Hub
+	//   application. Currently, this parameter accepts a key-value mapping (in a string
+	//   format) of only one failover region and one associated account. Key:
+	//   "failover-regions" Value: "[{"region":"<REGION>",
+	//   "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
 	//
 	// This member is required.
 	AppTemplateBody *string

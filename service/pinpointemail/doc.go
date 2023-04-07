@@ -21,8 +21,8 @@
 // as Amazon Pinpoint integration with other AWS services and the limits that apply
 // to using the service. The Amazon Pinpoint Email API is available in several AWS
 // Regions and it provides an endpoint for each of these Regions. For a list of all
-// the Regions and endpoints where the API is currently available, see AWS
-// Service Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region)
+// the Regions and endpoints where the API is currently available, see AWS Service
+// Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region)
 // in the Amazon Web Services General Reference. To learn more about AWS Regions,
 // see Managing AWS Regions (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html)
 // in the Amazon Web Services General Reference. In each Region, AWS maintains

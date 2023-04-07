@@ -12,10 +12,10 @@ import (
 )
 
 // (Discontinued) Removes specified S3 resources from being monitored by Amazon
-// Macie Classic. If memberAccountId isn't specified, the action removes
-// specified S3 resources from Macie Classic for the current Macie Classic
-// administrator account. If memberAccountId is specified, the action removes
-// specified S3 resources from Macie Classic for the specified member account.
+// Macie Classic. If memberAccountId isn't specified, the action removes specified
+// S3 resources from Macie Classic for the current Macie Classic administrator
+// account. If memberAccountId is specified, the action removes specified S3
+// resources from Macie Classic for the specified member account.
 func (c *Client) DisassociateS3Resources(ctx context.Context, params *DisassociateS3ResourcesInput, optFns ...func(*Options)) (*DisassociateS3ResourcesOutput, error) {
 	if params == nil {
 		params = &DisassociateS3ResourcesInput{}

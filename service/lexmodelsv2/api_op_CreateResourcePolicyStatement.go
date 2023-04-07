@@ -32,8 +32,8 @@ func (c *Client) CreateResourcePolicyStatement(ctx context.Context, params *Crea
 
 type CreateResourcePolicyStatementInput struct {
 
-	// The Amazon Lex action that this policy either allows or denies. The action
-	// must apply to the resource type of the specified ARN. For more information, see
+	// The Amazon Lex action that this policy either allows or denies. The action must
+	// apply to the resource type of the specified ARN. For more information, see
 	// Actions, resources, and condition keys for Amazon Lex V2 (https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonlexv2.html)
 	// .
 	//
@@ -53,8 +53,8 @@ type CreateResourcePolicyStatementInput struct {
 	// This member is required.
 	Principal []types.Principal
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
-	// policy is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
+	// is attached to.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -85,8 +85,8 @@ type CreateResourcePolicyStatementInput struct {
 
 type CreateResourcePolicyStatementOutput struct {
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
-	// policy is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
+	// is attached to.
 	ResourceArn *string
 
 	// The current revision of the resource policy. Use the revision ID to make sure

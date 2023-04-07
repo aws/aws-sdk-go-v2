@@ -12,8 +12,8 @@ import (
 
 // Deletes a saved CloudWatch Logs Insights query definition. A query definition
 // contains details about a saved CloudWatch Logs Insights query. Each
-// DeleteQueryDefinitionoperation can delete one query definition. You must have
-// the logs:DeleteQueryDefinition  permission to be able to perform this operation.
+// DeleteQueryDefinition operation can delete one query definition. You must have
+// the logs:DeleteQueryDefinition permission to be able to perform this operation.
 func (c *Client) DeleteQueryDefinition(ctx context.Context, params *DeleteQueryDefinitionInput, optFns ...func(*Options)) (*DeleteQueryDefinitionOutput, error) {
 	if params == nil {
 		params = &DeleteQueryDefinitionInput{}

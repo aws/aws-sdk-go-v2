@@ -20,7 +20,7 @@ import (
 // . When Amazon S3 evaluates the PublicAccessBlock configuration for a bucket or
 // an object, it checks the PublicAccessBlock configuration for both the bucket
 // (or the bucket that contains the object) and the bucket owner's account. If the
-// PublicAccessBlockconfigurations are different between the bucket and the
+// PublicAccessBlock configurations are different between the bucket and the
 // account, Amazon S3 uses the most restrictive combination of the bucket-level and
 // account-level settings. For more information about when Amazon S3 considers a
 // bucket or an object public, see The Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
@@ -46,8 +46,8 @@ func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAcce
 
 type PutPublicAccessBlockInput struct {
 
-	// The name of the Amazon S3 bucket whose PublicAccessBlock configuration you
-	// want to set.
+	// The name of the Amazon S3 bucket whose PublicAccessBlock configuration you want
+	// to set.
 	//
 	// This member is required.
 	Bucket *string
@@ -68,7 +68,7 @@ type PutPublicAccessBlockInput struct {
 	// HTTP status code 400 Bad Request . For more information, see Checking object
 	// integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide. If you provide an individual checksum, Amazon S3
-	// ignores any provided ChecksumAlgorithm  parameter.
+	// ignores any provided ChecksumAlgorithm parameter.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	// The MD5 hash of the PutPublicAccessBlock request body. For requests made using

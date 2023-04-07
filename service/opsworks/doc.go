@@ -28,7 +28,8 @@
 //   - opsworks.us-east-2.amazonaws.com
 //   - opsworks.us-west-1.amazonaws.com
 //   - opsworks.us-west-2.amazonaws.com
-//   - opsworks.ca-central-1.amazonaws.com (API only; not available in the AWS console)
+//   - opsworks.ca-central-1.amazonaws.com (API only; not available in the AWS
+//     console)
 //   - opsworks.eu-west-1.amazonaws.com
 //   - opsworks.eu-west-2.amazonaws.com
 //   - opsworks.eu-west-3.amazonaws.com

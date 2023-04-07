@@ -18,7 +18,7 @@ import (
 // settings might not take effect right away. The time for your updated settings to
 // take effect depends on the updates made and the number of search queries in your
 // index. You can still enable/disable query suggestions at any time.
-// UpdateQuerySuggestionsConfigis currently not supported in the Amazon Web
+// UpdateQuerySuggestionsConfig is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
 func (c *Client) UpdateQuerySuggestionsConfig(ctx context.Context, params *UpdateQuerySuggestionsConfigInput, optFns ...func(*Options)) (*UpdateQuerySuggestionsConfigOutput, error) {
 	if params == nil {
@@ -46,9 +46,9 @@ type UpdateQuerySuggestionsConfigInput struct {
 	// irrespective of the user), otherwise FALSE to only include queries with user
 	// information. If you pass user information to Amazon Kendra along with the
 	// queries, you can set this flag to FALSE and instruct Amazon Kendra to only
-	// consider queries with user information. If you set to FALSE, Amazon Kendra
-	// only considers queries searched at least MinimumQueryCount  times across
-	// MinimumNumberOfQueryingUsers unique users for suggestions. If you set to TRUE,
+	// consider queries with user information. If you set to FALSE , Amazon Kendra only
+	// considers queries searched at least MinimumQueryCount times across
+	// MinimumNumberOfQueryingUsers unique users for suggestions. If you set to TRUE ,
 	// Amazon Kendra ignores all user information and learns from all queries.
 	IncludeQueriesWithoutUserInformation *bool
 
@@ -66,11 +66,11 @@ type UpdateQuerySuggestionsConfigInput struct {
 	// this setting depends on your specific needs.
 	MinimumQueryCount *int32
 
-	// Set the mode to ENABLED  or LEARN_ONLY. By default, Amazon Kendra enables
-	// query suggestions. LEARN_ONLY mode allows you to turn off query suggestions.
-	// You can to update this at any time. In LEARN_ONLY mode, Amazon Kendra
-	// continues to learn from new queries to keep suggestions up to date for when you
-	// are ready to switch to ENABLED mode again.
+	// Set the mode to ENABLED or LEARN_ONLY . By default, Amazon Kendra enables query
+	// suggestions. LEARN_ONLY mode allows you to turn off query suggestions. You can
+	// to update this at any time. In LEARN_ONLY mode, Amazon Kendra continues to
+	// learn from new queries to keep suggestions up to date for when you are ready to
+	// switch to ENABLED mode again.
 	Mode types.Mode
 
 	// How recent your queries are in your query log time window. The time window is

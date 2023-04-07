@@ -27,7 +27,7 @@ func (c *Client) StopDeployment(ctx context.Context, params *StopDeploymentInput
 	return out, nil
 }
 
-// Represents the input of a StopDeployment  operation.
+// Represents the input of a StopDeployment operation.
 type StopDeploymentInput struct {
 
 	// The unique ID of a deployment.
@@ -43,12 +43,12 @@ type StopDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a StopDeployment  operation.
+// Represents the output of a StopDeployment operation.
 type StopDeploymentOutput struct {
 
 	// The status of the stop deployment operation:
-	//     - Pending: The stop operation is pending.
-	//     - Succeeded: The stop operation was successful.
+	//   - Pending: The stop operation is pending.
+	//   - Succeeded: The stop operation was successful.
 	Status types.StopStatus
 
 	// An accompanying status message.

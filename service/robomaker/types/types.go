@@ -10,16 +10,16 @@ import (
 // Information about the batch policy.
 type BatchPolicy struct {
 
-	// The number of active simulation jobs create as part of the batch that can be
-	// in an active state at the same time. Active states include: Pending , Preparing
-	// , Running , Restarting , RunningFailed  and Terminating. All other states are
+	// The number of active simulation jobs create as part of the batch that can be in
+	// an active state at the same time. Active states include: Pending , Preparing ,
+	// Running , Restarting , RunningFailed and Terminating . All other states are
 	// terminal states.
 	MaxConcurrency *int32
 
 	// The amount of time, in seconds, to wait for the batch to complete. If a batch
 	// times out, and there are pending requests that were failing due to an internal
-	// failure (like InternalServiceError), they will be moved to the failed list and
-	// the batch status will be Failed. If the pending requests were failing for any
+	// failure (like InternalServiceError ), they will be moved to the failed list and
+	// the batch status will be Failed . If the pending requests were failing for any
 	// other reason, the failed pending requests will be moved to the failed list and
 	// the batch status will be TimedOut .
 	TimeoutInSeconds *int64
@@ -69,13 +69,13 @@ type ComputeResponse struct {
 type DataSource struct {
 
 	// The location where your files are mounted in the container image. If you've
-	// specified the type  of the data source as an Archive, you must provide an
-	// Amazon S3 object key to your archive. The object key must point to either a
-	// .zip or .tar.gz  file. If you've specified the type  of the data source as a
-	// Prefix, you provide the Amazon S3 prefix that points to the files that you are
-	// using for your data source. If you've specified the type of the data source as
-	// a File, you provide the Amazon S3 path to the file that you're using as your
-	// data source.
+	// specified the type of the data source as an Archive , you must provide an Amazon
+	// S3 object key to your archive. The object key must point to either a .zip or
+	// .tar.gz file. If you've specified the type of the data source as a Prefix , you
+	// provide the Amazon S3 prefix that points to the files that you are using for
+	// your data source. If you've specified the type of the data source as a File ,
+	// you provide the Amazon S3 path to the file that you're using as your data
+	// source.
 	Destination *string
 
 	// The name of the data source.
@@ -87,9 +87,9 @@ type DataSource struct {
 	// The list of S3 keys identifying the data source files.
 	S3Keys []S3KeyOutput
 
-	// The data type for the data source that you're using for your container image
-	// or simulation job. You can use this field to specify whether your data source is
-	// an Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the
+	// The data type for the data source that you're using for your container image or
+	// simulation job. You can use this field to specify whether your data source is an
+	// Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the
 	// default value is File .
 	Type DataSourceType
 
@@ -115,18 +115,18 @@ type DataSourceConfig struct {
 	S3Keys []string
 
 	// The location where your files are mounted in the container image. If you've
-	// specified the type  of the data source as an Archive, you must provide an
-	// Amazon S3 object key to your archive. The object key must point to either a
-	// .zip or .tar.gz  file. If you've specified the type  of the data source as a
-	// Prefix, you provide the Amazon S3 prefix that points to the files that you are
-	// using for your data source. If you've specified the type of the data source as
-	// a File, you provide the Amazon S3 path to the file that you're using as your
-	// data source.
+	// specified the type of the data source as an Archive , you must provide an Amazon
+	// S3 object key to your archive. The object key must point to either a .zip or
+	// .tar.gz file. If you've specified the type of the data source as a Prefix , you
+	// provide the Amazon S3 prefix that points to the files that you are using for
+	// your data source. If you've specified the type of the data source as a File ,
+	// you provide the Amazon S3 path to the file that you're using as your data
+	// source.
 	Destination *string
 
-	// The data type for the data source that you're using for your container image
-	// or simulation job. You can use this field to specify whether your data source is
-	// an Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the
+	// The data type for the data source that you're using for your container image or
+	// simulation job. You can use this field to specify whether your data source is an
+	// Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the
 	// default value is File .
 	Type DataSourceType
 
@@ -244,8 +244,7 @@ type Environment struct {
 // Information about a failed create simulation job request.
 type FailedCreateSimulationJobRequest struct {
 
-	// The time, in milliseconds since the epoch, when the simulation job batch
-	// failed.
+	// The time, in milliseconds since the epoch, when the simulation job batch failed.
 	FailedAt *time.Time
 
 	// The failure code.
@@ -326,10 +325,10 @@ type Fleet struct {
 // Information about a launch configuration.
 type LaunchConfig struct {
 
-	// If you've specified General  as the value for your RobotSoftwareSuite, you can
+	// If you've specified General as the value for your RobotSoftwareSuite , you can
 	// use this field to specify a list of commands for your container image. If you've
-	// specified SimulationRuntime  as the value for your SimulationSoftwareSuite,
-	// you can use this field to specify a list of commands for your container image.
+	// specified SimulationRuntime as the value for your SimulationSoftwareSuite , you
+	// can use this field to specify a list of commands for your container image.
 	Command []string
 
 	// The environment variables for the application launch.
@@ -345,7 +344,7 @@ type LaunchConfig struct {
 	PortForwardingConfig *PortForwardingConfig
 
 	// Boolean indicating whether a streaming session will be configured for the
-	// application. If True, AWS RoboMaker will configure a connection so you can
+	// application. If True , AWS RoboMaker will configure a connection so you can
 	// interact with your application as it is running in the simulation. You must
 	// configure and launch the component. It must have a graphical user interface.
 	StreamUI bool
@@ -388,7 +387,7 @@ type OutputLocation struct {
 	// The S3 bucket for output.
 	S3Bucket *string
 
-	// The S3 folder in the s3Bucket  where output files will be placed.
+	// The S3 folder in the s3Bucket where output files will be placed.
 	S3Prefix *string
 
 	noSmithyDocumentSerde
@@ -516,7 +515,7 @@ type RobotApplicationConfig struct {
 	UploadConfigurations []UploadConfiguration
 
 	// A Boolean indicating whether to use default robot application tools. The
-	// default tools are rviz, rqt, terminal and rosbag record. The default is False.
+	// default tools are rviz, rqt, terminal and rosbag record. The default is False .
 	// This API is no longer supported and will throw an error if used.
 	//
 	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
@@ -525,10 +524,9 @@ type RobotApplicationConfig struct {
 	UseDefaultTools *bool
 
 	// A Boolean indicating whether to use default upload configurations. By default,
-	// .ros and .gazebo files are uploaded when the application terminates and all
-	// ROS topics will be recorded. If you set this value, you must specify an
-	// outputLocation. This API is no longer supported and will throw an error if
-	// used.
+	// .ros and .gazebo files are uploaded when the application terminates and all ROS
+	// topics will be recorded. If you set this value, you must specify an
+	// outputLocation . This API is no longer supported and will throw an error if used.
 	//
 	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
 	// additional information, see
@@ -653,7 +651,7 @@ type SimulationApplicationConfig struct {
 	UploadConfigurations []UploadConfiguration
 
 	// A Boolean indicating whether to use default simulation application tools. The
-	// default tools are rviz, rqt, terminal and rosbag record. The default is False.
+	// default tools are rviz, rqt, terminal and rosbag record. The default is False .
 	// This API is no longer supported and will throw an error if used.
 	//
 	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
@@ -662,10 +660,9 @@ type SimulationApplicationConfig struct {
 	UseDefaultTools *bool
 
 	// A Boolean indicating whether to use default upload configurations. By default,
-	// .ros and .gazebo files are uploaded when the application terminates and all
-	// ROS topics will be recorded. If you set this value, you must specify an
-	// outputLocation. This API is no longer supported and will throw an error if
-	// used.
+	// .ros and .gazebo files are uploaded when the application terminates and all ROS
+	// topics will be recorded. If you set this value, you must specify an
+	// outputLocation . This API is no longer supported and will throw an error if used.
 	//
 	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
 	// additional information, see
@@ -709,7 +706,7 @@ type SimulationJob struct {
 	// The Amazon Resource Name (ARN) of the simulation job.
 	Arn *string
 
-	// A unique identifier for this SimulationJob  request.
+	// A unique identifier for this SimulationJob request.
 	ClientRequestToken *string
 
 	// Compute information for the simulation job
@@ -770,8 +767,8 @@ type SimulationJob struct {
 	// Status of the simulation job.
 	Status SimulationJobStatus
 
-	// A map that contains tag keys and tag values that are attached to the
-	// simulation job.
+	// A map that contains tag keys and tag values that are attached to the simulation
+	// job.
 	Tags map[string]string
 
 	// VPC configuration information.
@@ -811,13 +808,13 @@ type SimulationJobBatchSummary struct {
 	// batch job completed. A batch is complete when (1) there are no pending
 	// simulation job requests in the batch and none of the failed simulation job
 	// requests are due to InternalServiceError and (2) when all created simulation
-	// jobs have reached a terminal state (for example, Completed  or Failed).
-	// Canceled The simulation batch job was cancelled. Canceling The simulation batch
-	// job is being cancelled. Completing The simulation batch job is completing.
-	// TimingOut The simulation job batch is timing out. If a batch timing out, and
-	// there are pending requests that were failing due to an internal failure (like
-	// InternalServiceError ), the batch status will be Failed. If there are no such
-	// failing request, the batch status will be TimedOut. TimedOut The simulation
+	// jobs have reached a terminal state (for example, Completed or Failed ). Canceled
+	// The simulation batch job was cancelled. Canceling The simulation batch job is
+	// being cancelled. Completing The simulation batch job is completing. TimingOut
+	// The simulation job batch is timing out. If a batch timing out, and there are
+	// pending requests that were failing due to an internal failure (like
+	// InternalServiceError ), the batch status will be Failed . If there are no such
+	// failing request, the batch status will be TimedOut . TimedOut The simulation
 	// batch job timed out.
 	Status SimulationJobBatchStatus
 
@@ -837,7 +834,7 @@ type SimulationJobRequest struct {
 	Compute *Compute
 
 	// Specify data sources to mount read-only files from S3 into your simulation.
-	// These files are available under /opt/robomaker/datasources/data_source_name.
+	// These files are available under /opt/robomaker/datasources/data_source_name .
 	// There is a limit of 100 files and a combined size of 25GB for all
 	// DataSourceConfig objects.
 	DataSources []DataSourceConfig
@@ -847,9 +844,9 @@ type SimulationJobRequest struct {
 	// job and terminate the instance.
 	FailureBehavior FailureBehavior
 
-	// The IAM role name that allows the simulation instance to call the AWS APIs
-	// that are specified in its associated policies on your behalf. This is how
-	// credentials are passed in to your simulation job.
+	// The IAM role name that allows the simulation instance to call the AWS APIs that
+	// are specified in its associated policies on your behalf. This is how credentials
+	// are passed in to your simulation job.
 	IamRole *string
 
 	// The logging configuration.
@@ -864,12 +861,12 @@ type SimulationJobRequest struct {
 	// The simulation applications to use in the simulation job.
 	SimulationApplications []SimulationApplicationConfig
 
-	// A map that contains tag keys and tag values that are attached to the
-	// simulation job request.
+	// A map that contains tag keys and tag values that are attached to the simulation
+	// job request.
 	Tags map[string]string
 
-	// A Boolean indicating whether to use default applications in the simulation
-	// job. Default applications include Gazebo, rqt, rviz and terminal access.
+	// A Boolean indicating whether to use default applications in the simulation job.
+	// Default applications include Gazebo, rqt, rviz and terminal access.
 	UseDefaultApplications *bool
 
 	// If your simulation job accesses resources in a VPC, you provide this parameter
@@ -929,7 +926,7 @@ type Source struct {
 	// The taget processor architecture for the application.
 	Architecture Architecture
 
-	// A hash of the object specified by s3Bucket  and s3Key .
+	// A hash of the object specified by s3Bucket and s3Key .
 	Etag *string
 
 	// The s3 bucket name.
@@ -1015,9 +1012,9 @@ type Tool struct {
 	// The default is False .
 	StreamOutputToCloudWatch *bool
 
-	// Boolean indicating whether a streaming session will be configured for the
-	// tool. If True, AWS RoboMaker will configure a connection so you can interact
-	// with the tool as it is running in the simulation. It must have a graphical user
+	// Boolean indicating whether a streaming session will be configured for the tool.
+	// If True , AWS RoboMaker will configure a connection so you can interact with the
+	// tool as it is running in the simulation. It must have a graphical user
 	// interface. The default is False .
 	StreamUI *bool
 
@@ -1039,8 +1036,8 @@ type UploadConfiguration struct {
 
 	// Specifies the path of the file(s) to upload. Standard Unix glob matching rules
 	// are accepted, with the addition of ** as a super asterisk. For example,
-	// specifying /var/log/**.log  causes all .log files in the /var/log directory
-	// tree to be collected. For more examples, see Glob Library (https://github.com/gobwas/glob)
+	// specifying /var/log/**.log causes all .log files in the /var/log directory tree
+	// to be collected. For more examples, see Glob Library (https://github.com/gobwas/glob)
 	// .
 	//
 	// This member is required.
@@ -1109,10 +1106,10 @@ type WorldConfig struct {
 
 // The number of worlds that will be created. You can configure the number of
 // unique floorplans and the number of unique interiors for each floor plan. For
-// example, if you want 1 world with 20 unique interiors, you set floorplanCount
-// = 1 and interiorCountPerFloorplan = 20 . This will result in 20 worlds (
-// floorplanCount * interiorCountPerFloorplan) . If you set floorplanCount = 4
-// and interiorCountPerFloorplan = 5, there will be 20 worlds with 5 unique floor
+// example, if you want 1 world with 20 unique interiors, you set floorplanCount =
+// 1 and interiorCountPerFloorplan = 20 . This will result in 20 worlds (
+// floorplanCount * interiorCountPerFloorplan) . If you set floorplanCount = 4 and
+// interiorCountPerFloorplan = 5 , there will be 20 worlds with 5 unique floor
 // plans.
 type WorldCount struct {
 

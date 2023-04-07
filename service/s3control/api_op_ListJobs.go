@@ -15,8 +15,8 @@ import (
 	"strings"
 )
 
-// Lists current S3 Batch Operations jobs and jobs that have ended within the
-// last 30 days for the Amazon Web Services account making the request. For more
+// Lists current S3 Batch Operations jobs and jobs that have ended within the last
+// 30 days for the Amazon Web Services account making the request. For more
 // information, see S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html)
 // in the Amazon S3 User Guide. Related actions include:
 //   - CreateJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
@@ -51,13 +51,13 @@ type ListJobsInput struct {
 
 	// The maximum number of jobs that Amazon S3 will include in the List Jobs
 	// response. If there are more jobs than this number, the response will include a
-	// pagination token in the NextToken field to enable you to retrieve the next
-	// page of results.
+	// pagination token in the NextToken field to enable you to retrieve the next page
+	// of results.
 	MaxResults *int32
 
 	// A pagination token to request the next page of results. Use the token that
-	// Amazon S3 returned in the NextToken  element of the ListJobsResult from the
-	// previous List Jobs  request.
+	// Amazon S3 returned in the NextToken element of the ListJobsResult from the
+	// previous List Jobs request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -203,12 +203,12 @@ var _ ListJobsAPIClient = (*Client)(nil)
 type ListJobsPaginatorOptions struct {
 	// The maximum number of jobs that Amazon S3 will include in the List Jobs
 	// response. If there are more jobs than this number, the response will include a
-	// pagination token in the NextToken field to enable you to retrieve the next
-	// page of results.
+	// pagination token in the NextToken field to enable you to retrieve the next page
+	// of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

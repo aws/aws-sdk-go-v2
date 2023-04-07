@@ -43,12 +43,18 @@ type AddAssociationInput struct {
 	// This member is required.
 	SourceArn *string
 
-	// The type of association. The following are suggested uses for each type.
-	// Amazon SageMaker places no restrictions on their use.
-	//     - ContributedTo - The source contributed to the destination or had a part in enabling the destination. For example, the training data contributed to the training job.
-	//     - AssociatedWith - The source is connected to the destination. For example, an approval workflow is associated with a model deployment.
-	//     - DerivedFrom - The destination is a modification of the source. For example, a digest output of a channel input for a processing job is derived from the original inputs.
-	//     - Produced - The source generated the destination. For example, a training job produced a model artifact.
+	// The type of association. The following are suggested uses for each type. Amazon
+	// SageMaker places no restrictions on their use.
+	//   - ContributedTo - The source contributed to the destination or had a part in
+	//   enabling the destination. For example, the training data contributed to the
+	//   training job.
+	//   - AssociatedWith - The source is connected to the destination. For example,
+	//   an approval workflow is associated with a model deployment.
+	//   - DerivedFrom - The destination is a modification of the source. For example,
+	//   a digest output of a channel input for a processing job is derived from the
+	//   original inputs.
+	//   - Produced - The source generated the destination. For example, a training
+	//   job produced a model artifact.
 	AssociationType types.AssociationEdgeType
 
 	noSmithyDocumentSerde

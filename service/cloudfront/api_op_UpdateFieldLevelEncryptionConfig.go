@@ -48,8 +48,8 @@ type UpdateFieldLevelEncryptionConfigInput struct {
 
 type UpdateFieldLevelEncryptionConfigOutput struct {
 
-	// The value of the ETag header that you received when updating the
-	// configuration. For example: E2QWRUHAPOMQZL .
+	// The value of the ETag header that you received when updating the configuration.
+	// For example: E2QWRUHAPOMQZL .
 	ETag *string
 
 	// Return the results of updating the configuration.

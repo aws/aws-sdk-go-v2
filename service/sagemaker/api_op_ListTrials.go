@@ -44,8 +44,7 @@ type ListTrialsInput struct {
 	// A filter that returns only trials that are part of the specified experiment.
 	ExperimentName *string
 
-	// The maximum number of trials to return in the response. The default value is
-	// 10.
+	// The maximum number of trials to return in the response. The default value is 10.
 	MaxResults *int32
 
 	// If the previous call to ListTrials didn't return the full set of trials, the
@@ -148,12 +147,11 @@ var _ ListTrialsAPIClient = (*Client)(nil)
 
 // ListTrialsPaginatorOptions is the paginator options for ListTrials
 type ListTrialsPaginatorOptions struct {
-	// The maximum number of trials to return in the response. The default value is
-	// 10.
+	// The maximum number of trials to return in the response. The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -56,8 +56,8 @@ type DescribeEndpointConfigOutput struct {
 	// This member is required.
 	EndpointConfigName *string
 
-	// An array of ProductionVariant objects, one for each model that you want to
-	// host at this endpoint.
+	// An array of ProductionVariant objects, one for each model that you want to host
+	// at this endpoint.
 	//
 	// This member is required.
 	ProductionVariants []types.ProductionVariant
@@ -77,8 +77,8 @@ type DescribeEndpointConfigOutput struct {
 	// storing it on the ML storage volume attached to the instance.
 	KmsKeyId *string
 
-	// An array of ProductionVariant objects, one for each model that you want to
-	// host at this endpoint in shadow mode with production traffic replicated from the
+	// An array of ProductionVariant objects, one for each model that you want to host
+	// at this endpoint in shadow mode with production traffic replicated from the
 	// model specified on ProductionVariants .
 	ShadowProductionVariants []types.ProductionVariant
 

@@ -42,12 +42,12 @@ type UpdateAvailabilityConfigurationInput struct {
 	OrganizationId *string
 
 	// The EWS availability provider definition. The request must contain exactly one
-	// provider definition, either EwsProvider  or LambdaProvider. The previously
+	// provider definition, either EwsProvider or LambdaProvider . The previously
 	// stored provider will be overridden by the one provided.
 	EwsProvider *types.EwsAvailabilityProvider
 
 	// The Lambda availability provider definition. The request must contain exactly
-	// one provider definition, either EwsProvider  or LambdaProvider. The previously
+	// one provider definition, either EwsProvider or LambdaProvider . The previously
 	// stored provider will be overridden by the one provided.
 	LambdaProvider *types.LambdaAvailabilityProvider
 

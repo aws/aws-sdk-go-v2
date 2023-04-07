@@ -50,9 +50,9 @@ type ExportBundleInput struct {
 // packages used to integrate mobile web or app clients with backed AWS resources.
 type ExportBundleOutput struct {
 
-	// URL which contains the custom-generated SDK and tool packages used to
-	// integrate the client mobile app or web app with the AWS resources created by the
-	// AWS Mobile Hub project.
+	// URL which contains the custom-generated SDK and tool packages used to integrate
+	// the client mobile app or web app with the AWS resources created by the AWS
+	// Mobile Hub project.
 	DownloadUrl *string
 
 	// Metadata pertaining to the operation's result.

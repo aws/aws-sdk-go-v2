@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified destination, and eventually disables all the
-// subscription filters that publish to it. This operation does not delete the
-// physical resource encapsulated by the destination.
+// Deletes the specified destination, and eventually disables all the subscription
+// filters that publish to it. This operation does not delete the physical resource
+// encapsulated by the destination.
 func (c *Client) DeleteDestination(ctx context.Context, params *DeleteDestinationInput, optFns ...func(*Options)) (*DeleteDestinationOutput, error) {
 	if params == nil {
 		params = &DeleteDestinationInput{}

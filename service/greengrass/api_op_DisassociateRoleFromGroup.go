@@ -38,8 +38,8 @@ type DisassociateRoleFromGroupInput struct {
 
 type DisassociateRoleFromGroupOutput struct {
 
-	// The time, in milliseconds since the epoch, when the role was disassociated
-	// from the group.
+	// The time, in milliseconds since the epoch, when the role was disassociated from
+	// the group.
 	DisassociatedAt *string
 
 	// Metadata pertaining to the operation's result.

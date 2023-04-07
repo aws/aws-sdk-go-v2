@@ -33,9 +33,9 @@ func (c *Client) AssociateResolverEndpointIpAddress(ctx context.Context, params 
 
 type AssociateResolverEndpointIpAddressInput struct {
 
-	// Either the IPv4 address that you want to add to a Resolver endpoint or a
-	// subnet ID. If you specify a subnet ID, Resolver chooses an IP address for you
-	// from the available IPs in the specified subnet.
+	// Either the IPv4 address that you want to add to a Resolver endpoint or a subnet
+	// ID. If you specify a subnet ID, Resolver chooses an IP address for you from the
+	// available IPs in the specified subnet.
 	//
 	// This member is required.
 	IpAddress *types.IpAddressUpdate
@@ -50,7 +50,7 @@ type AssociateResolverEndpointIpAddressInput struct {
 
 type AssociateResolverEndpointIpAddressOutput struct {
 
-	// The response to an AssociateResolverEndpointIpAddress  request.
+	// The response to an AssociateResolverEndpointIpAddress request.
 	ResolverEndpoint *types.ResolverEndpoint
 
 	// Metadata pertaining to the operation's result.

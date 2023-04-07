@@ -66,9 +66,15 @@ type DescribeAffectedAccountsForOrganizationOutput struct {
 
 	// This parameter specifies if the Health event is a public Amazon Web Services
 	// service event or an account-specific event.
-	//     - If the eventScopeCode value is PUBLIC , then the affectedAccounts value is always empty.
-	//     - If the eventScopeCode value is ACCOUNT_SPECIFIC , then the affectedAccounts value lists the affected Amazon Web Services accounts in your organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you have Amazon Web Services accounts that use that service, those account IDs appear in the response.
-	//     - If the eventScopeCode value is NONE , then the eventArn that you specified in the request is invalid or doesn't exist.
+	//   - If the eventScopeCode value is PUBLIC , then the affectedAccounts value is
+	//   always empty.
+	//   - If the eventScopeCode value is ACCOUNT_SPECIFIC , then the affectedAccounts
+	//   value lists the affected Amazon Web Services accounts in your organization. For
+	//   example, if an event affects a service such as Amazon Elastic Compute Cloud and
+	//   you have Amazon Web Services accounts that use that service, those account IDs
+	//   appear in the response.
+	//   - If the eventScopeCode value is NONE , then the eventArn that you specified
+	//   in the request is invalid or doesn't exist.
 	EventScopeCode types.EventScopeCode
 
 	// If the results of a search are large, only a portion of the results are
@@ -162,8 +168,8 @@ type DescribeAffectedAccountsForOrganizationPaginatorOptions struct {
 	// inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

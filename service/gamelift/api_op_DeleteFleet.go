@@ -18,7 +18,7 @@ import (
 // . You do not need to explicitly delete the VPC peering connection. To delete a
 // fleet, specify the fleet ID to be terminated. During the deletion process the
 // fleet status is changed to DELETING . When completed, the status switches to
-// TERMINATED and the fleet event FLEET_DELETED  is sent. Learn more Setting up
+// TERMINATED and the fleet event FLEET_DELETED is sent. Learn more Setting up
 // GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optFns ...func(*Options)) (*DeleteFleetOutput, error) {
 	if params == nil {

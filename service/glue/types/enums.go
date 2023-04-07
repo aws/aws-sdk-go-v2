@@ -23,9 +23,9 @@ const (
 	AggFunctionVarPop        AggFunction = "var_pop"
 )
 
-// Values returns all known values for AggFunction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AggFunction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AggFunction) Values() []AggFunction {
 	return []AggFunction{
 		"avg",
@@ -163,8 +163,8 @@ const (
 	ColumnStatisticsTypeBinary  ColumnStatisticsType = "BINARY"
 )
 
-// Values returns all known values for ColumnStatisticsType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ColumnStatisticsType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ColumnStatisticsType) Values() []ColumnStatisticsType {
 	return []ColumnStatisticsType{
@@ -487,10 +487,9 @@ const (
 	DataQualityRuleResultStatusError DataQualityRuleResultStatus = "ERROR"
 )
 
-// Values returns all known values for DataQualityRuleResultStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for DataQualityRuleResultStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataQualityRuleResultStatus) Values() []DataQualityRuleResultStatus {
 	return []DataQualityRuleResultStatus{
 		"PASS",
@@ -990,9 +989,9 @@ const (
 	JobRunStateWaiting   JobRunState = "WAITING"
 )
 
-// Values returns all known values for JobRunState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobRunState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobRunState) Values() []JobRunState {
 	return []JobRunState{
 		"STARTING",
@@ -1019,9 +1018,9 @@ const (
 	JoinTypeLeftAnti JoinType = "leftanti"
 )
 
-// Values returns all known values for JoinType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JoinType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (JoinType) Values() []JoinType {
 	return []JoinType{
 		"equijoin",
@@ -1041,9 +1040,9 @@ const (
 	LanguageScala  Language = "SCALA"
 )
 
-// Values returns all known values for Language. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Language. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Language) Values() []Language {
 	return []Language{
 		"PYTHON",
@@ -1133,9 +1132,9 @@ const (
 	NodeTypeTrigger NodeType = "TRIGGER"
 )
 
-// Values returns all known values for NodeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NodeType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (NodeType) Values() []NodeType {
 	return []NodeType{
 		"CRAWLER",
@@ -1206,8 +1205,8 @@ const (
 	PartitionIndexStatusFailed   PartitionIndexStatus = "FAILED"
 )
 
-// Values returns all known values for PartitionIndexStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PartitionIndexStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PartitionIndexStatus) Values() []PartitionIndexStatus {
 	return []PartitionIndexStatus{
@@ -1566,8 +1565,8 @@ const (
 	SortDescending Sort = "DESC"
 )
 
-// Values returns all known values for Sort. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Sort. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Sort) Values() []Sort {
 	return []Sort{
@@ -1763,9 +1762,9 @@ const (
 	TaskTypeFindMatches           TaskType = "FIND_MATCHES"
 )
 
-// Values returns all known values for TaskType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaskType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (TaskType) Values() []TaskType {
 	return []TaskType{
 		"EVALUATION",
@@ -1787,9 +1786,9 @@ const (
 	TransformSortColumnTypeLastModified  TransformSortColumnType = "LAST_MODIFIED"
 )
 
-// Values returns all known values for TransformSortColumnType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TransformSortColumnType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TransformSortColumnType) Values() []TransformSortColumnType {
 	return []TransformSortColumnType{
 		"NAME",
@@ -1876,9 +1875,9 @@ const (
 	TriggerTypeEvent       TriggerType = "EVENT"
 )
 
-// Values returns all known values for TriggerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TriggerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TriggerType) Values() []TriggerType {
 	return []TriggerType{
 		"SCHEDULED",

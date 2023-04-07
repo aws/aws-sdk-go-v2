@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Type  object.
+// Creates a Type object.
 func (c *Client) CreateType(ctx context.Context, params *CreateTypeInput, optFns ...func(*Options)) (*CreateTypeOutput, error) {
 	if params == nil {
 		params = &CreateTypeInput{}
@@ -51,7 +51,7 @@ type CreateTypeInput struct {
 
 type CreateTypeOutput struct {
 
-	// The Type  object.
+	// The Type object.
 	Type *types.Type
 
 	// Metadata pertaining to the operation's result.

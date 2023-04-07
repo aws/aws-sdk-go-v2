@@ -65,13 +65,13 @@ type ModifyReplicationTaskInput struct {
 	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
 	CdcStopPosition *string
 
-	// The migration type. Valid values: full-load  | cdc  | full-load-and-cdc
+	// The migration type. Valid values: full-load | cdc | full-load-and-cdc
 	MigrationType types.MigrationTypeValue
 
 	// The replication task identifier. Constraints:
-	//     - Must contain 1-255 alphanumeric characters or hyphens.
-	//     - First character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must contain 1-255 alphanumeric characters or hyphens.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	ReplicationTaskIdentifier *string
 
 	// JSON file that contains settings for the task, such as task metadata settings.
@@ -79,13 +79,13 @@ type ModifyReplicationTaskInput struct {
 
 	// When using the CLI or boto3, provide the path of the JSON file that contains
 	// the table mappings. Precede the path with file:// . For example,
-	// --table-mappings file://mappingfile.json. When working with the DMS API,
+	// --table-mappings file://mappingfile.json . When working with the DMS API,
 	// provide the JSON as the parameter value.
 	TableMappings *string
 
-	// Supplemental information that the task requires to migrate the data for
-	// certain source and target endpoints. For more information, see Specifying
-	// Supplemental Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
+	// Supplemental information that the task requires to migrate the data for certain
+	// source and target endpoints. For more information, see Specifying Supplemental
+	// Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
 	// in the Database Migration Service User Guide.
 	TaskData *string
 

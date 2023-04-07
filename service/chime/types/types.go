@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// The Amazon Chime account details. An AWS account can have multiple Amazon
-// Chime accounts.
+// The Amazon Chime account details. An AWS account can have multiple Amazon Chime
+// accounts.
 type Account struct {
 
 	// The Amazon Chime account ID.
@@ -49,10 +49,10 @@ type Account struct {
 	noSmithyDocumentSerde
 }
 
-// Settings related to the Amazon Chime account. This includes settings that
-// start or stop remote control of shared screens, or start or stop the dial-out
-// option in the Amazon Chime web application. For more information about these
-// settings, see Use the Policies Page (https://docs.aws.amazon.com/chime/latest/ag/policies.html)
+// Settings related to the Amazon Chime account. This includes settings that start
+// or stop remote control of shared screens, or start or stop the dial-out option
+// in the Amazon Chime web application. For more information about these settings,
+// see Use the Policies Page (https://docs.aws.amazon.com/chime/latest/ag/policies.html)
 // in the Amazon Chime Administration Guide.
 type AccountSettings struct {
 
@@ -61,8 +61,7 @@ type AccountSettings struct {
 
 	// Setting that allows meeting participants to choose the Call me at a phone
 	// number option. For more information, see Join a Meeting without the Amazon
-	// Chime App (https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html)
-	// .
+	// Chime App (https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html) .
 	EnableDialOut *bool
 
 	noSmithyDocumentSerde
@@ -77,7 +76,7 @@ type Address struct {
 	// The country of an address.
 	Country *string
 
-	// An address suffix location, such as the S. Unit A  in Central Park S. Unit A .
+	// An address suffix location, such as the S. Unit A in Central Park S. Unit A .
 	PostDirectional *string
 
 	// The postal code of an address.
@@ -86,7 +85,7 @@ type Address struct {
 	// The Zip + 4 or postal code + 4 of an address.
 	PostalCodePlus4 *string
 
-	// An address prefix location, such as the N  in N. Third St. .
+	// An address prefix location, such as the N in N. Third St. .
 	PreDirectional *string
 
 	// The state of an address.
@@ -98,7 +97,7 @@ type Address struct {
 	// The numeric portion of an address.
 	StreetNumber *string
 
-	// The address suffix, such as the N  in 8th Avenue N .
+	// The address suffix, such as the N in 8th Avenue N .
 	StreetSuffix *string
 
 	noSmithyDocumentSerde
@@ -117,17 +116,17 @@ type AlexaForBusinessMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// The details of an AppInstance, an instance of an Amazon Chime SDK messaging
+// The details of an AppInstance , an instance of an Amazon Chime SDK messaging
 // application.
 type AppInstance struct {
 
 	// The ARN of the messaging instance.
 	AppInstanceArn *string
 
-	// The time at which an AppInstance  was created. In epoch milliseconds.
+	// The time at which an AppInstance was created. In epoch milliseconds.
 	CreatedTimestamp *time.Time
 
-	// The time an AppInstance  was last updated. In epoch milliseconds.
+	// The time an AppInstance was last updated. In epoch milliseconds.
 	LastUpdatedTimestamp *time.Time
 
 	// The metadata of an AppInstance .
@@ -142,10 +141,10 @@ type AppInstance struct {
 // The details of an AppInstanceAdmin .
 type AppInstanceAdmin struct {
 
-	// The AppInstanceAdmin  data.
+	// The AppInstanceAdmin data.
 	Admin *Identity
 
-	// The ARN of the AppInstance  for which the user is an administrator.
+	// The ARN of the AppInstance for which the user is an administrator.
 	AppInstanceArn *string
 
 	// The time at which an administrator was created.
@@ -191,7 +190,7 @@ type AppInstanceStreamingConfiguration struct {
 // Summary of the data for an AppInstance .
 type AppInstanceSummary struct {
 
-	// The AppInstance  ARN.
+	// The AppInstance ARN.
 	AppInstanceArn *string
 
 	// The metadata of the AppInstance .
@@ -209,10 +208,10 @@ type AppInstanceUser struct {
 	// The ARN of the AppInstanceUser .
 	AppInstanceUserArn *string
 
-	// The time at which the AppInstanceUser  was created.
+	// The time at which the AppInstanceUser was created.
 	CreatedTimestamp *time.Time
 
-	// The time at which the AppInstanceUser  was last updated.
+	// The time at which the AppInstanceUser was last updated.
 	LastUpdatedTimestamp *time.Time
 
 	// The metadata of the AppInstanceUser .
@@ -272,20 +271,20 @@ type ArtifactsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId  and
-// JoinToken . The JoinToken allows a client to authenticate and join as the
-// specified attendee. The JoinToken  expires when the meeting ends or when
-// DeleteAttendeeis called. After that, the attendee is unable to join the
-// meeting. We recommend securely transferring each JoinToken from your server
-// application to the client so that no other client has access to the token except
-// for the one authorized to represent the attendee.
+// An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and JoinToken
+// . The JoinToken allows a client to authenticate and join as the specified
+// attendee. The JoinToken expires when the meeting ends or when DeleteAttendee is
+// called. After that, the attendee is unable to join the meeting. We recommend
+// securely transferring each JoinToken from your server application to the client
+// so that no other client has access to the token except for the one authorized to
+// represent the attendee.
 type Attendee struct {
 
 	// The Amazon Chime SDK attendee ID.
 	AttendeeId *string
 
-	// The Amazon Chime SDK external user ID. An idempotency token. Links the
-	// attendee to an identity managed by a builder application.
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
+	// to an identity managed by a builder application.
 	ExternalUserId *string
 
 	// The join token used by the Amazon Chime SDK attendee.
@@ -374,9 +373,8 @@ type Bot struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Chime Business Calling settings for the administrator's AWS
-// account. Includes any Amazon S3 buckets designated for storing call detail
-// records.
+// The Amazon Chime Business Calling settings for the administrator's AWS account.
+// Includes any Amazon S3 buckets designated for storing call detail records.
 type BusinessCallingSettings struct {
 
 	// The Amazon S3 bucket designated for call detail record storage.
@@ -418,10 +416,10 @@ type Channel struct {
 	// The ARN of the channel.
 	ChannelArn *string
 
-	// The AppInstanceUser  who created the channel.
+	// The AppInstanceUser who created the channel.
 	CreatedBy *Identity
 
-	// The time at which the AppInstanceUser  created the channel.
+	// The time at which the AppInstanceUser created the channel.
 	CreatedTimestamp *time.Time
 
 	// The time at which a member sent the last message in the channel.
@@ -451,7 +449,7 @@ type ChannelBan struct {
 	// The ARN of the channel from which a member is being banned.
 	ChannelArn *string
 
-	// The AppInstanceUser  who created the ban.
+	// The AppInstanceUser who created the ban.
 	CreatedBy *Identity
 
 	// The time at which the ban was created.
@@ -604,7 +602,7 @@ type ChannelModerator struct {
 	// The ARN of the moderator's channel.
 	ChannelArn *string
 
-	// The AppInstanceUser  who created the moderator.
+	// The AppInstanceUser who created the moderator.
 	CreatedBy *Identity
 
 	// The time at which the moderator was created.
@@ -659,7 +657,7 @@ type ChannelSummary struct {
 }
 
 // The configuration object of the Amazon Chime SDK meeting for a specified media
-// capture pipeline. SourceType  must be ChimeSdkMeeting .
+// capture pipeline. SourceType must be ChimeSdkMeeting .
 type ChimeSdkMeetingConfiguration struct {
 
 	// The configuration for the artifacts in an Amazon Chime SDK meeting.
@@ -706,8 +704,8 @@ type CreateAttendeeError struct {
 	// The error message.
 	ErrorMessage *string
 
-	// The Amazon Chime SDK external user ID. An idempotency token. Links the
-	// attendee to an identity managed by a builder application.
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
+	// to an identity managed by a builder application.
 	ExternalUserId *string
 
 	noSmithyDocumentSerde
@@ -717,8 +715,8 @@ type CreateAttendeeError struct {
 // BatchCreateAttendee action.
 type CreateAttendeeRequestItem struct {
 
-	// The Amazon Chime SDK external user ID. An idempotency token. Links the
-	// attendee to an identity managed by a builder application.
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
+	// to an identity managed by a builder application.
 	//
 	// This member is required.
 	ExternalUserId *string
@@ -733,8 +731,8 @@ type CreateAttendeeRequestItem struct {
 // Connector.
 type Credential struct {
 
-	// The RFC2617 compliant password associated with the SIP credentials, in
-	// US-ASCII format.
+	// The RFC2617 compliant password associated with the SIP credentials, in US-ASCII
+	// format.
 	Password *string
 
 	// The RFC2617 compliant user name associated with the SIP credentials, in
@@ -744,9 +742,9 @@ type Credential struct {
 	noSmithyDocumentSerde
 }
 
-// The Dialed Number Identification Service (DNIS) emergency calling
-// configuration details associated with an Amazon Chime Voice Connector's
-// emergency calling configuration.
+// The Dialed Number Identification Service (DNIS) emergency calling configuration
+// details associated with an Amazon Chime Voice Connector's emergency calling
+// configuration.
 type DNISEmergencyCallingConfiguration struct {
 
 	// The country from which emergency calls are allowed, in ISO 3166-1 alpha-2
@@ -770,8 +768,8 @@ type DNISEmergencyCallingConfiguration struct {
 // Voice Connector.
 type EmergencyCallingConfiguration struct {
 
-	// The Dialed Number Identification Service (DNIS) emergency calling
-	// configuration details.
+	// The Dialed Number Identification Service (DNIS) emergency calling configuration
+	// details.
 	DNIS []DNISEmergencyCallingConfiguration
 
 	noSmithyDocumentSerde
@@ -834,13 +832,13 @@ type EngineTranscribeSettings struct {
 	// The name of the language model used during transcription.
 	LanguageModelName *string
 
-	// The stabity level of a partial results transcription. Determines how stable
-	// you want the transcription results to be. A higher level means the transcription
+	// The stabity level of a partial results transcription. Determines how stable you
+	// want the transcription results to be. A higher level means the transcription
 	// results are less likely to change.
 	PartialResultsStability TranscribePartialResultsStability
 
 	// Lists the PII entity types you want to identify or redact. To specify entity
-	// types, you must enable ContentIdentificationType  or ContentRedactionType .
+	// types, you must enable ContentIdentificationType or ContentRedactionType .
 	// PIIEntityTypes must be comma-separated. The available values are:
 	// BANK_ACCOUNT_NUMBER , BANK_ROUTING, CREDIT_DEBIT_NUMBER , CREDIT_DEBIT_CVV ,
 	// CREDIT_DEBIT_EXPIRY , PIN , EMAIL , ADDRESS , NAME , PHONE , SSN , and ALL .
@@ -908,7 +906,7 @@ type Identity struct {
 }
 
 // Invitation object returned after emailing users to invite them to join the
-// Amazon Chime Team  account.
+// Amazon Chime Team account.
 type Invite struct {
 
 	// The email address to which the invite is sent.
@@ -940,11 +938,11 @@ type LoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A media capture pipeline object consisting of an ID, source type, source ARN,
-// a sink type, a sink ARN, and a configuration object.
+// A media capture pipeline object consisting of an ID, source type, source ARN, a
+// sink type, a sink ARN, and a configuration object.
 type MediaCapturePipeline struct {
 
-	// The configuration for a specified media capture pipeline. SourceType  must be
+	// The configuration for a specified media capture pipeline. SourceType must be
 	// ChimeSdkMeeting .
 	ChimeSdkMeetingConfiguration *ChimeSdkMeetingConfiguration
 
@@ -976,8 +974,8 @@ type MediaCapturePipeline struct {
 	noSmithyDocumentSerde
 }
 
-// A set of endpoints used by clients to connect to the media service group for
-// an Amazon Chime SDK meeting.
+// A set of endpoints used by clients to connect to the media service group for an
+// Amazon Chime SDK meeting.
 type MediaPlacement struct {
 
 	// The audio fallback URL.
@@ -1017,9 +1015,9 @@ type Meeting struct {
 	MediaPlacement *MediaPlacement
 
 	// The Region in which you create the meeting. Available values: af-south-1 ,
-	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2
-	// , ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2
-	// , eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 .
+	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 ,
+	// ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 ,
+	// eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 .
 	MediaRegion *string
 
 	// The Amazon Chime SDK meeting ID.
@@ -1437,8 +1435,8 @@ type RoomMembership struct {
 	noSmithyDocumentSerde
 }
 
-// The retention settings that determine how long to retain chat-room messages
-// for an Amazon Chime Enterprise account.
+// The retention settings that determine how long to retain chat-room messages for
+// an Amazon Chime Enterprise account.
 type RoomRetentionSettings struct {
 
 	// The number of days for which to retain chat-room messages.
@@ -1496,7 +1494,7 @@ type SipMediaApplication struct {
 	noSmithyDocumentSerde
 }
 
-// A Call  instance for a SIP media application.
+// A Call instance for a SIP media application.
 type SipMediaApplicationCall struct {
 
 	// The transaction ID of a call.
@@ -1524,8 +1522,8 @@ type SipMediaApplicationLoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The SIP rule details, including name, triggers, and target applications. An
-// AWS account can have multiple SIP rules.
+// The SIP rule details, including name, triggers, and target applications. An AWS
+// account can have multiple SIP rules.
 type SipRule struct {
 
 	// The time at which the SIP rule was created, in ISO 8601 format.
@@ -1550,9 +1548,9 @@ type SipRule struct {
 	// RequestUriHostname or ToPhoneNumber .
 	TriggerType SipRuleTriggerType
 
-	// If TriggerType  is RequestUriHostname, then the value can be the outbound host
-	// name of the Amazon Chime Voice Connector. If TriggerType  is ToPhoneNumber,
-	// then the value can be a customer-owned phone number in E164 format. SipRule is
+	// If TriggerType is RequestUriHostname , then the value can be the outbound host
+	// name of the Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber , then
+	// the value can be a customer-owned phone number in E164 format. SipRule is
 	// triggered when a SIP rule requests host name or ToPhoneNumber matches in the
 	// incoming SIP request.
 	TriggerValue *string
@@ -1683,7 +1681,7 @@ type Termination struct {
 }
 
 // The termination health details, including the source IP address and timestamp
-// of the last successful SIP OPTIONS  message from your SIP infrastructure.
+// of the last successful SIP OPTIONS message from your SIP infrastructure.
 type TerminationHealth struct {
 
 	// The source IP address.
@@ -1709,7 +1707,7 @@ type TranscriptionConfiguration struct {
 }
 
 // The phone number ID, product type, or calling name fields to update, used with
-// the BatchUpdatePhoneNumber  and UpdatePhoneNumber  actions.
+// the BatchUpdatePhoneNumber and UpdatePhoneNumber actions.
 type UpdatePhoneNumberRequestItem struct {
 
 	// The phone number ID to update.
@@ -1726,7 +1724,7 @@ type UpdatePhoneNumberRequestItem struct {
 	noSmithyDocumentSerde
 }
 
-// The user ID and user fields to update, used with the BatchUpdateUser  action.
+// The user ID and user fields to update, used with the BatchUpdateUser action.
 type UpdateUserRequestItem struct {
 
 	// The user ID.
@@ -1763,8 +1761,8 @@ type User struct {
 	// The display name of the user.
 	DisplayName *string
 
-	// Date and time when the user is invited to the Amazon Chime account, in ISO
-	// 8601 format.
+	// Date and time when the user is invited to the Amazon Chime account, in ISO 8601
+	// format.
 	InvitedOn *time.Time
 
 	// The license type for the user.
@@ -1898,13 +1896,12 @@ type VoiceConnectorGroup struct {
 
 // For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to
 // which to route inbound calls. Includes priority configuration settings. Limit: 3
-//
 // VoiceConnectorItems per Amazon Chime Voice Connector group.
 type VoiceConnectorItem struct {
 
-	// The priority associated with the Amazon Chime Voice Connector, with 1 being
-	// the highest priority. Higher priority Amazon Chime Voice Connectors are
-	// attempted first.
+	// The priority associated with the Amazon Chime Voice Connector, with 1 being the
+	// highest priority. Higher priority Amazon Chime Voice Connectors are attempted
+	// first.
 	//
 	// This member is required.
 	Priority *int32

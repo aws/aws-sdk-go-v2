@@ -149,8 +149,7 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation did not succeed because too many requests are sent to the
-// service.
+// The operation did not succeed because too many requests are sent to the service.
 type ThrottlingException struct {
 	Message *string
 

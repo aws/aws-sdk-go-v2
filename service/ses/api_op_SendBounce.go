@@ -42,9 +42,9 @@ type SendBounceInput struct {
 	// This member is required.
 	BounceSender *string
 
-	// A list of recipients of the bounced message, including the information
-	// required to create the Delivery Status Notifications (DSNs) for the recipients.
-	// You must specify at least one BouncedRecipientInfo  in the list.
+	// A list of recipients of the bounced message, including the information required
+	// to create the Delivery Status Notifications (DSNs) for the recipients. You must
+	// specify at least one BouncedRecipientInfo in the list.
 	//
 	// This member is required.
 	BouncedRecipientInfoList []types.BouncedRecipientInfo
@@ -66,8 +66,7 @@ type SendBounceInput struct {
 	// information.
 	Explanation *string
 
-	// Message-related DSN fields. If not specified, Amazon SES will choose the
-	// values.
+	// Message-related DSN fields. If not specified, Amazon SES will choose the values.
 	MessageDsn *types.MessageDsn
 
 	noSmithyDocumentSerde

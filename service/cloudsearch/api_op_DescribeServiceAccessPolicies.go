@@ -13,7 +13,7 @@ import (
 
 // Gets information about the access policies that control access to the domain's
 // document and search endpoints. By default, shows the configuration with any
-// pending changes. Set the Deployed  option to true to show the active
+// pending changes. Set the Deployed option to true to show the active
 // configuration and exclude pending changes. For more information, see
 // Configuring Access for a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html)
 // in the Amazon CloudSearch Developer Guide.
@@ -34,8 +34,7 @@ func (c *Client) DescribeServiceAccessPolicies(ctx context.Context, params *Desc
 
 // Container for the parameters to the DescribeServiceAccessPolicies operation.
 // Specifies the name of the domain you want to describe. To show the active
-// configuration and exclude any pending changes, set the Deployed  option to true
-// .
+// configuration and exclude any pending changes, set the Deployed option to true .
 type DescribeServiceAccessPoliciesInput struct {
 
 	// The name of the domain you want to describe.
@@ -43,14 +42,14 @@ type DescribeServiceAccessPoliciesInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Whether to display the deployed configuration ( true) or include any pending
+	// Whether to display the deployed configuration ( true ) or include any pending
 	// changes ( false ). Defaults to false .
 	Deployed *bool
 
 	noSmithyDocumentSerde
 }
 
-// The result of a DescribeServiceAccessPolicies  request.
+// The result of a DescribeServiceAccessPolicies request.
 type DescribeServiceAccessPoliciesOutput struct {
 
 	// The access rules configured for the domain specified in the request.

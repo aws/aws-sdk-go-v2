@@ -35,21 +35,21 @@ type ListLinuxSubscriptionInstancesInput struct {
 
 	// An array of structures that you can use to filter the results to those that
 	// match one or more sets of key-value pairs that you specify. For example, you can
-	// filter by the name of AmiID with an optional operator to see subscriptions
-	// that match, partially match, or don't match a certain Amazon Machine Image (AMI)
-	// ID. The valid names for this filter are:
-	//     - AmiID
-	//     - InstanceID
-	//     - AccountID
-	//     - Status
-	//     - Region
-	//     - UsageOperation
-	//     - ProductCode
-	//     - InstanceType
-	//  The valid Operators for this filter are:
-	//     - contains
-	//     - equals
-	//     - Notequal
+	// filter by the name of AmiID with an optional operator to see subscriptions that
+	// match, partially match, or don't match a certain Amazon Machine Image (AMI) ID.
+	// The valid names for this filter are:
+	//   - AmiID
+	//   - InstanceID
+	//   - AccountID
+	//   - Status
+	//   - Region
+	//   - UsageOperation
+	//   - ProductCode
+	//   - InstanceType
+	// The valid Operators for this filter are:
+	//   - contains
+	//   - equals
+	//   - Notequal
 	Filters []types.Filter
 
 	// Maximum number of results to return in a single call.
@@ -149,8 +149,8 @@ type ListLinuxSubscriptionInstancesPaginatorOptions struct {
 	// Maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

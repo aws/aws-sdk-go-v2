@@ -63,8 +63,7 @@ type CreateElasticsearchDomainInput struct {
 	// Options to specify configuration that will be applied to the domain endpoint.
 	DomainEndpointOptions *types.DomainEndpointOptions
 
-	// Options to enable, disable and specify the type and size of EBS storage
-	// volumes.
+	// Options to enable, disable and specify the type and size of EBS storage volumes.
 	EBSOptions *types.EBSOptions
 
 	// Configuration options for an Elasticsearch domain. Specifies the instance type
@@ -79,7 +78,7 @@ type CreateElasticsearchDomainInput struct {
 	// Specifies the Encryption At Rest Options.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
-	// Map of LogType  and LogPublishingOption, each containing options to publish a
+	// Map of LogType and LogPublishingOption , each containing options to publish a
 	// given type of Elasticsearch log.
 	LogPublishingOptions map[string]types.LogPublishingOption
 
@@ -90,7 +89,7 @@ type CreateElasticsearchDomainInput struct {
 	// value is 0 hours.
 	SnapshotOptions *types.SnapshotOptions
 
-	// A list of Tag  added during domain creation.
+	// A list of Tag added during domain creation.
 	TagList []types.Tag
 
 	// Options to specify the subnets and security groups for VPC endpoint. For more
@@ -101,8 +100,8 @@ type CreateElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a CreateElasticsearchDomain operation. Contains the status of
-// the newly created Elasticsearch domain.
+// The result of a CreateElasticsearchDomain operation. Contains the status of the
+// newly created Elasticsearch domain.
 type CreateElasticsearchDomainOutput struct {
 
 	// The status of the newly created Elasticsearch domain.

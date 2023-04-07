@@ -68,15 +68,15 @@ type ListTableRowsOutput struct {
 	// This member is required.
 	ColumnIds []string
 
-	// The list of rows in the table. Note that this result is paginated, so this
-	// list contains a maximum of 100 rows.
+	// The list of rows in the table. Note that this result is paginated, so this list
+	// contains a maximum of 100 rows.
 	//
 	// This member is required.
 	Rows []types.TableRow
 
-	// Indicates the cursor of the workbook at which the data returned by this
-	// request is read. Workbook cursor keeps increasing with every update and the
-	// increments are not sequential.
+	// Indicates the cursor of the workbook at which the data returned by this request
+	// is read. Workbook cursor keeps increasing with every update and the increments
+	// are not sequential.
 	//
 	// This member is required.
 	WorkbookCursor int64
@@ -170,8 +170,8 @@ type ListTableRowsPaginatorOptions struct {
 	// The maximum number of rows to return in each page of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

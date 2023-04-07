@@ -18,7 +18,10 @@ import (
 // in the IoT SiteWise User Guide. To identify an asset property, you must specify
 // one of the following:
 //   - The assetId and propertyId of an asset property.
-//   - A propertyAlias , which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature ). To define an asset property's alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html) .
+//   - A propertyAlias , which is a data stream alias (for example,
+//     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
+//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
+//     .
 func (c *Client) GetAssetPropertyValueHistory(ctx context.Context, params *GetAssetPropertyValueHistoryInput, optFns ...func(*Options)) (*GetAssetPropertyValueHistoryOutput, error) {
 	if params == nil {
 		params = &GetAssetPropertyValueHistoryInput{}
@@ -43,15 +46,14 @@ type GetAssetPropertyValueHistoryInput struct {
 	// in seconds in Unix epoch time.
 	EndDate *time.Time
 
-	// The maximum number of results to return for each paginated request. Default:
-	// 100
+	// The maximum number of results to return for each paginated request. Default: 100
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
-	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
 	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
@@ -62,12 +64,11 @@ type GetAssetPropertyValueHistoryInput struct {
 	// The quality by which to filter asset data.
 	Qualities []types.Quality
 
-	// The exclusive start of the range from which to query historical data,
-	// expressed in seconds in Unix epoch time.
+	// The exclusive start of the range from which to query historical data, expressed
+	// in seconds in Unix epoch time.
 	StartDate *time.Time
 
-	// The chronological sorting order of the requested information. Default:
-	// ASCENDING
+	// The chronological sorting order of the requested information. Default: ASCENDING
 	TimeOrdering types.TimeOrdering
 
 	noSmithyDocumentSerde
@@ -191,12 +192,11 @@ var _ GetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
 // GetAssetPropertyValueHistoryPaginatorOptions is the paginator options for
 // GetAssetPropertyValueHistory
 type GetAssetPropertyValueHistoryPaginatorOptions struct {
-	// The maximum number of results to return for each paginated request. Default:
-	// 100
+	// The maximum number of results to return for each paginated request. Default: 100
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

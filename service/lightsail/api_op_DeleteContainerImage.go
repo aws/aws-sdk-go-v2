@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a container image that is registered to your Amazon Lightsail
-// container service.
+// Deletes a container image that is registered to your Amazon Lightsail container
+// service.
 func (c *Client) DeleteContainerImage(ctx context.Context, params *DeleteContainerImageInput, optFns ...func(*Options)) (*DeleteContainerImageOutput, error) {
 	if params == nil {
 		params = &DeleteContainerImageInput{}
@@ -30,12 +30,12 @@ func (c *Client) DeleteContainerImage(ctx context.Context, params *DeleteContain
 type DeleteContainerImageInput struct {
 
 	// The name of the container image to delete from the container service. Use the
-	// GetContainerImagesaction to get the name of the container images that are
+	// GetContainerImages action to get the name of the container images that are
 	// registered to a container service. Container images sourced from your Lightsail
 	// container service, that are registered and stored on your service, start with a
-	// colon ( : ). For example, :container-service-1.mystaticwebsite.1. Container
+	// colon ( : ). For example, :container-service-1.mystaticwebsite.1 . Container
 	// images sourced from a public registry like Docker Hub don't start with a colon.
-	// For example, nginx:latest  or nginx .
+	// For example, nginx:latest or nginx .
 	//
 	// This member is required.
 	Image *string

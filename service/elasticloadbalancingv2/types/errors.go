@@ -800,8 +800,8 @@ func (e *TooManyLoadBalancersException) ErrorCode() string {
 }
 func (e *TooManyLoadBalancersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit on the number of times a target can be registered
-// with a load balancer.
+// You've reached the limit on the number of times a target can be registered with
+// a load balancer.
 type TooManyRegistrationsForTargetIdException struct {
 	Message *string
 

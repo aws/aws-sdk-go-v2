@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a virtual tape by using your own barcode. You write data to the
-// virtual tape and then archive the tape. A barcode is unique and cannot be reused
-// if it has already been used on a tape. This applies to barcodes used on deleted
-// tapes. This operation is only supported in the tape gateway type. Cache storage
-// must be allocated to the gateway before you can create a virtual tape. Use the
-// AddCache operation to add cache storage to a gateway.
+// Creates a virtual tape by using your own barcode. You write data to the virtual
+// tape and then archive the tape. A barcode is unique and cannot be reused if it
+// has already been used on a tape. This applies to barcodes used on deleted tapes.
+// This operation is only supported in the tape gateway type. Cache storage must be
+// allocated to the gateway before you can create a virtual tape. Use the AddCache
+// operation to add cache storage to a gateway.
 func (c *Client) CreateTapeWithBarcode(ctx context.Context, params *CreateTapeWithBarcodeInput, optFns ...func(*Options)) (*CreateTapeWithBarcodeOutput, error) {
 	if params == nil {
 		params = &CreateTapeWithBarcodeInput{}
@@ -54,21 +54,20 @@ type CreateTapeWithBarcodeInput struct {
 	// This member is required.
 	TapeSizeInBytes *int64
 
-	// Set to true  to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true  | false
+	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
 	// for Amazon S3 server-side encryption. Storage Gateway does not support
-	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
-	// Optional.
+	// asymmetric CMKs. This value can only be set when KMSEncrypted is true . Optional.
 	KMSKey *string
 
-	// The ID of the pool that you want to add your tape to for archiving. The tape
-	// in this pool is archived in the S3 storage class that is associated with the
-	// pool. When you use your backup application to eject the tape, the tape is
-	// archived directly into the storage class (S3 Glacier or S3 Deep Archive) that
-	// corresponds to the pool.
+	// The ID of the pool that you want to add your tape to for archiving. The tape in
+	// this pool is archived in the S3 storage class that is associated with the pool.
+	// When you use your backup application to eject the tape, the tape is archived
+	// directly into the storage class (S3 Glacier or S3 Deep Archive) that corresponds
+	// to the pool.
 	PoolId *string
 
 	// A list of up to 50 tags that can be assigned to a virtual tape that has a

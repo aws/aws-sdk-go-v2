@@ -39,7 +39,7 @@ type UpdatePortalInput struct {
 	// through your identity provider. You need to call CreateIdentityProvider to
 	// integrate your identity provider with your web portal. User and group access to
 	// your web portal is controlled through your identity provider.
-	// IAM_Identity_Centerweb portals are authenticated through AWS IAM Identity
+	// IAM_Identity_Center web portals are authenticated through AWS IAM Identity
 	// Center (successor to AWS Single Sign-On). They provide additional features, such
 	// as IdP-initiated authentication. Identity sources (including external identity
 	// provider integration), plus user and group access to your web portal, can be

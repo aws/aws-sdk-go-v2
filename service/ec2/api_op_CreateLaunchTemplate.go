@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a launch template. A launch template contains the parameters to launch
-// an instance. When you launch an instance using RunInstances, you can specify a
+// an instance. When you launch an instance using RunInstances , you can specify a
 // launch template instead of providing the launch parameters in the request. For
 // more information, see Launch an instance from a launch template (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
 // in the Amazon Elastic Compute Cloud User Guide. If you want to clone an existing
@@ -60,7 +60,7 @@ type CreateLaunchTemplateInput struct {
 	DryRun *bool
 
 	// The tags to apply to the launch template on creation. To tag the launch
-	// template, the resource type must be launch-template. To specify the tags for
+	// template, the resource type must be launch-template . To specify the tags for
 	// the resources that are created when an instance is launched, you must use the
 	// TagSpecifications parameter in the launch template data (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestLaunchTemplateData.html)
 	// structure.

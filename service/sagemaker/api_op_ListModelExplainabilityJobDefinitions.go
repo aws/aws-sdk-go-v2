@@ -35,8 +35,8 @@ type ListModelExplainabilityJobDefinitionsInput struct {
 	// time.
 	CreationTimeAfter *time.Time
 
-	// A filter that returns only model explainability jobs created before a
-	// specified time.
+	// A filter that returns only model explainability jobs created before a specified
+	// time.
 	CreationTimeBefore *time.Time
 
 	// Name of the endpoint to monitor for model explainability.
@@ -52,11 +52,11 @@ type ListModelExplainabilityJobDefinitionsInput struct {
 	// job executions, use it in the next request.
 	NextToken *string
 
-	// Whether to sort results by the Name  or CreationTime  field. The default is
+	// Whether to sort results by the Name or CreationTime field. The default is
 	// CreationTime .
 	SortBy types.MonitoringJobDefinitionSortKey
 
-	// Whether to sort the results in Ascending  or Descending  order. The default is
+	// Whether to sort the results in Ascending or Descending order. The default is
 	// Descending .
 	SortOrder types.SortOrder
 
@@ -154,8 +154,8 @@ type ListModelExplainabilityJobDefinitionsPaginatorOptions struct {
 	// The maximum number of jobs to return in the response. The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

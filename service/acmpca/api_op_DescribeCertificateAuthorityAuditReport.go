@@ -47,7 +47,6 @@ type DescribeCertificateAuthorityAuditReportInput struct {
 
 	// The Amazon Resource Name (ARN) of the private CA. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
 	// .
 	//
 	// This member is required.
@@ -202,9 +201,9 @@ func NewAuditReportCreatedWaiter(client DescribeCertificateAuthorityAuditReportA
 	}
 }
 
-// Wait calls the waiter function for AuditReportCreated waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for AuditReportCreated waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *AuditReportCreatedWaiter) Wait(ctx context.Context, params *DescribeCertificateAuthorityAuditReportInput, maxWaitDur time.Duration, optFns ...func(*AuditReportCreatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

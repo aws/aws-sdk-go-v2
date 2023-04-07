@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves (queries) pre-aggregated data for a standard metric that applies to
-// a campaign.
+// Retrieves (queries) pre-aggregated data for a standard metric that applies to a
+// campaign.
 func (c *Client) GetCampaignDateRangeKpi(ctx context.Context, params *GetCampaignDateRangeKpiInput, optFns ...func(*Options)) (*GetCampaignDateRangeKpiOutput, error) {
 	if params == nil {
 		params = &GetCampaignDateRangeKpiInput{}
@@ -53,10 +53,10 @@ type GetCampaignDateRangeKpiInput struct {
 	// This member is required.
 	KpiName *string
 
-	// The last date and time to retrieve data for, as part of an inclusive date
-	// range that filters the query results. This value should be in extended ISO 8601
-	// format and use Coordinated Universal Time (UTC), for example:
-	// 2019-07-26T20:00:00Z for 8:00 PM UTC July 26, 2019.
+	// The last date and time to retrieve data for, as part of an inclusive date range
+	// that filters the query results. This value should be in extended ISO 8601 format
+	// and use Coordinated Universal Time (UTC), for example: 2019-07-26T20:00:00Z for
+	// 8:00 PM UTC July 26, 2019.
 	EndTime *time.Time
 
 	// The string that specifies which page of results to return in a paginated

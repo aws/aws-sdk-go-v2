@@ -21,8 +21,10 @@ import (
 // CreateParticipantConnection (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
 // with WEBSOCKET and CONNECTION_CREDENTIALS. A 429 error occurs in the following
 // situations:
-//   - API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.
-//   - The quota for concurrent active chats (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html) is exceeded. Active chat throttling returns a LimitExceededException .
+//   - API rate limit is exceeded. API TPS throttling returns a TooManyRequests
+//     exception.
+//   - The quota for concurrent active chats (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
+//     is exceeded. Active chat throttling returns a LimitExceededException .
 //
 // If you use the ChatDurationInMinutes parameter and receive a 400 error, your
 // account may not support the ability to configure custom chat durations. For more
@@ -46,11 +48,11 @@ func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactI
 
 type StartChatContactInput struct {
 
-	// The identifier of the flow for initiating the chat. To see the ContactFlowId
-	// in the Amazon Connect console user interface, on the navigation menu go to
-	// Routing, Contact Flows. Choose the flow. On the flow page, under the name of the
-	// flow, choose Show additional flow information. The ContactFlowId is the last
-	// part of the ARN, shown here in bold:
+	// The identifier of the flow for initiating the chat. To see the ContactFlowId in
+	// the Amazon Connect console user interface, on the navigation menu go to Routing,
+	// Contact Flows. Choose the flow. On the flow page, under the name of the flow,
+	// choose Show additional flow information. The ContactFlowId is the last part of
+	// the ARN, shown here in bold:
 	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	//
 	// This member is required.
@@ -95,16 +97,16 @@ type StartChatContactInput struct {
 	// .
 	PersistentChat *types.PersistentChat
 
-	// The unique identifier for an Amazon Connect contact. This identifier is
-	// related to the chat starting. You cannot provide data for both RelatedContactId
-	// and PersistentChat.
+	// The unique identifier for an Amazon Connect contact. This identifier is related
+	// to the chat starting. You cannot provide data for both RelatedContactId and
+	// PersistentChat.
 	RelatedContactId *string
 
 	// The supported chat message content types. Supported types are text/plain ,
 	// text/markdown , application/json ,
 	// application/vnd.amazonaws.connect.message.interactive , and
-	// application/vnd.amazonaws.connect.message.interactive.response. Content types
-	// must always contain text/plain. You can then put any other supported type in
+	// application/vnd.amazonaws.connect.message.interactive.response . Content types
+	// must always contain text/plain . You can then put any other supported type in
 	// the list. For example, all the following lists are valid because they contain
 	// text/plain : [text/plain, text/markdown, application/json] , [text/markdown,
 	// text/plain] , [text/plain, application/json,
@@ -126,8 +128,8 @@ type StartChatContactOutput struct {
 	// populated only for persistent chats.
 	ContinuedFromContactId *string
 
-	// The identifier for a chat participant. The participantId for a chat
-	// participant is the same throughout the chat lifecycle.
+	// The identifier for a chat participant. The participantId for a chat participant
+	// is the same throughout the chat lifecycle.
 	ParticipantId *string
 
 	// The token used by the chat participant to call CreateParticipantConnection (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)

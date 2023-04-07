@@ -51,7 +51,7 @@ type ListArchivesInput struct {
 
 type ListArchivesOutput struct {
 
-	// An array of Archive  objects that include details about an archive.
+	// An array of Archive objects that include details about an archive.
 	Archives []types.Archive
 
 	// The token returned by a previous call to retrieve the next set of results.

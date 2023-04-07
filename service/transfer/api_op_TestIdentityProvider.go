@@ -11,18 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// If the IdentityProviderType  of a file transfer protocol-enabled server is
-// AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is
+// If the IdentityProviderType of a file transfer protocol-enabled server is
+// AWS_DIRECTORY_SERVICE or API_Gateway , tests whether your identity provider is
 // set up successfully. We highly recommend that you call this operation to test
 // your authentication method as soon as you create your server. By doing so, you
 // can troubleshoot issues with the identity provider integration to ensure that
-// your users can successfully use the service. The ServerId  and UserName
+// your users can successfully use the service. The ServerId and UserName
 // parameters are required. The ServerProtocol , SourceIp , and UserPassword are
-// all optional. You cannot use TestIdentityProvider  if the IdentityProviderType
+// all optional. You cannot use TestIdentityProvider if the IdentityProviderType
 // of your server is SERVICE_MANAGED .
-//   - If you provide any incorrect values for any parameters, the Response field is empty.
-//   - If you provide a server ID for a server that uses service-managed users, you get an error: An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-server-ID not configured for external auth
-//   - If you enter a Server ID for the --server-id parameter that does not identify an actual Transfer server, you receive the following error: An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server
+//
+//   - If you provide any incorrect values for any parameters, the Response field
+//     is empty.
+//
+//   - If you provide a server ID for a server that uses service-managed users,
+//     you get an error: An error occurred (InvalidRequestException) when calling
+//     the TestIdentityProvider operation: s-server-ID not configured for external auth
+//
+//   - If you enter a Server ID for the --server-id parameter that does not
+//     identify an actual Transfer server, you receive the following error: An error
+//     occurred (ResourceNotFoundException) when calling the TestIdentityProvider
+//     operation: Unknown server
 func (c *Client) TestIdentityProvider(ctx context.Context, params *TestIdentityProviderInput, optFns ...func(*Options)) (*TestIdentityProviderOutput, error) {
 	if params == nil {
 		params = &TestIdentityProviderInput{}
@@ -52,9 +61,9 @@ type TestIdentityProviderInput struct {
 	UserName *string
 
 	// The type of file transfer protocol to be tested. The available protocols are:
-	//     - Secure Shell (SSH) File Transfer Protocol (SFTP)
-	//     - File Transfer Protocol Secure (FTPS)
-	//     - File Transfer Protocol (FTP)
+	//   - Secure Shell (SSH) File Transfer Protocol (SFTP)
+	//   - File Transfer Protocol Secure (FTPS)
+	//   - File Transfer Protocol (FTP)
 	ServerProtocol types.Protocol
 
 	// The source IP address of the user account to be tested.

@@ -28,7 +28,7 @@ func (c *Client) RejectInboundConnection(ctx context.Context, params *RejectInbo
 	return out, nil
 }
 
-// Container for the request parameters to the RejectInboundConnection  operation.
+// Container for the request parameters to the RejectInboundConnection operation.
 type RejectInboundConnectionInput struct {
 
 	// The unique identifier of the inbound connection to reject.
@@ -39,7 +39,7 @@ type RejectInboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a RejectInboundConnection  operation.
+// Represents the output of a RejectInboundConnection operation.
 type RejectInboundConnectionOutput struct {
 
 	// Contains details about the rejected inbound connection.

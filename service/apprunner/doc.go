@@ -15,7 +15,7 @@
 // . For release information, see the App Runner Release Notes (https://docs.aws.amazon.com/apprunner/latest/relnotes/)
 // . To install the Software Development Kits (SDKs), Integrated Development
 // Environment (IDE) Toolkits, and command line tools that you can use to access
-// the API, see Tools for Amazon Web Services (http://aws.amazon.com/tools/).
+// the API, see Tools for Amazon Web Services (http://aws.amazon.com/tools/) .
 // Endpoints For a list of Region-specific endpoints that App Runner supports, see
 // App Runner endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/apprunner.html)
 // in the Amazon Web Services General Reference.

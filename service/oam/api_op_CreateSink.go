@@ -56,8 +56,7 @@ type CreateSinkOutput struct {
 	// The ARN of the sink that is newly created.
 	Arn *string
 
-	// The random ID string that Amazon Web Services generated as part of the sink
-	// ARN.
+	// The random ID string that Amazon Web Services generated as part of the sink ARN.
 	Id *string
 
 	// The name of the sink.

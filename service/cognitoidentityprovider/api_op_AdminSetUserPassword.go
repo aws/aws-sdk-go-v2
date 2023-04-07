@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the specified user's password in a user pool as an administrator. Works
-// on any user. The password can be temporary or permanent. If it is temporary, the
-// user status enters the FORCE_CHANGE_PASSWORD state. When the user next tries
-// to sign in, the InitiateAuth/AdminInitiateAuth response will contain the
-// NEW_PASSWORD_REQUIREDchallenge. If the user doesn't sign in before it expires,
+// Sets the specified user's password in a user pool as an administrator. Works on
+// any user. The password can be temporary or permanent. If it is temporary, the
+// user status enters the FORCE_CHANGE_PASSWORD state. When the user next tries to
+// sign in, the InitiateAuth/AdminInitiateAuth response will contain the
+// NEW_PASSWORD_REQUIRED challenge. If the user doesn't sign in before it expires,
 // the user won't be able to sign in, and an administrator must reset their
 // password. Once the user has set a new password, or the password is permanent,
 // the user status is set to Confirmed .
@@ -50,7 +50,7 @@ type AdminSetUserPasswordInput struct {
 	// This member is required.
 	Username *string
 
-	// True  if the password is permanent, False  if it is temporary.
+	// True if the password is permanent, False if it is temporary.
 	Permanent bool
 
 	noSmithyDocumentSerde

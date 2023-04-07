@@ -14,13 +14,13 @@ import (
 
 // Use this operation to see information from the most recent run of each canary
 // that you have created. This operation supports resource-level authorization
-// using an IAM policy and the Names  parameter. If you specify the Names
+// using an IAM policy and the Names parameter. If you specify the Names
 // parameter, the operation is successful only if you have authorization to view
 // all the canaries that you specify in your request. If you do not have permission
 // to view any of the canaries, the request fails with a 403 response. You are
-// required to use the Names parameter if you are logged on to a user or role
-// that has an IAM policy that restricts which canaries that you are allowed to
-// view. For more information, see Limiting a user to viewing specific canaries (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html)
+// required to use the Names parameter if you are logged on to a user or role that
+// has an IAM policy that restricts which canaries that you are allowed to view.
+// For more information, see Limiting a user to viewing specific canaries (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html)
 // .
 func (c *Client) DescribeCanariesLastRun(ctx context.Context, params *DescribeCanariesLastRunInput, optFns ...func(*Options)) (*DescribeCanariesLastRunOutput, error) {
 	if params == nil {
@@ -49,9 +49,9 @@ type DescribeCanariesLastRunInput struct {
 	// parameter, the operation is successful only if you have authorization to view
 	// all the canaries that you specify in your request. If you do not have permission
 	// to view any of the canaries, the request fails with a 403 response. You are
-	// required to use the Names parameter if you are logged on to a user or role
-	// that has an IAM policy that restricts which canaries that you are allowed to
-	// view. For more information, see Limiting a user to viewing specific canaries (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html)
+	// required to use the Names parameter if you are logged on to a user or role that
+	// has an IAM policy that restricts which canaries that you are allowed to view.
+	// For more information, see Limiting a user to viewing specific canaries (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html)
 	// .
 	Names []string
 
@@ -155,8 +155,8 @@ type DescribeCanariesLastRunPaginatorOptions struct {
 	// is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

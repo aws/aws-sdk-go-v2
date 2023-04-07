@@ -36,14 +36,14 @@ type ListTagsForResourceInput struct {
 	ResourceArn *string
 
 	// The maximum number of tags that you want to return in the response to a
-	// ListTagsForResource request. If you don't specify a value for MaxResults,
+	// ListTagsForResource request. If you don't specify a value for MaxResults ,
 	// Resolver returns up to 100 tags.
 	MaxResults *int32
 
 	// For the first ListTagsForResource request, omit this value. If you have more
-	// than MaxResults  tags, you can submit another ListTagsForResource request to
-	// get the next group of tags for the resource. In the next request, specify the
-	// value of NextToken  from the previous response.
+	// than MaxResults tags, you can submit another ListTagsForResource request to get
+	// the next group of tags for the resource. In the next request, specify the value
+	// of NextToken from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,7 +53,7 @@ type ListTagsForResourceOutput struct {
 
 	// If more than MaxResults tags match the specified criteria, you can submit
 	// another ListTagsForResource request to get the next group of results. In the
-	// next request, specify the value of NextToken  from the previous response.
+	// next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
 	// The tags that are associated with the resource that you specified in the
@@ -141,12 +141,12 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 // ListTagsForResource
 type ListTagsForResourcePaginatorOptions struct {
 	// The maximum number of tags that you want to return in the response to a
-	// ListTagsForResource request. If you don't specify a value for MaxResults,
+	// ListTagsForResource request. If you don't specify a value for MaxResults ,
 	// Resolver returns up to 100 tags.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

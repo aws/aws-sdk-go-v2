@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the sprite sheet corresponding to a map resource. The sprite sheet
-// is a PNG image paired with a JSON document describing the offsets of individual
+// Retrieves the sprite sheet corresponding to a map resource. The sprite sheet is
+// a PNG image paired with a JSON document describing the offsets of individual
 // icons that will be displayed on a rendered map.
 func (c *Client) GetMapSprites(ctx context.Context, params *GetMapSpritesInput, optFns ...func(*Options)) (*GetMapSpritesOutput, error) {
 	if params == nil {
@@ -32,12 +32,11 @@ func (c *Client) GetMapSprites(ctx context.Context, params *GetMapSpritesInput, 
 type GetMapSpritesInput struct {
 
 	// The name of the sprite ﬁle. Use the following ﬁle names for the sprite sheet:
-	//     - sprites.png
-	//     - sprites@2x.png for high pixel density displays
-	// For the JSON document
-	// containing image offsets. Use the following ﬁle names:
-	//     - sprites.json
-	//     - sprites@2x.json for high pixel density displays
+	//   - sprites.png
+	//   - sprites@2x.png for high pixel density displays
+	// For the JSON document containing image offsets. Use the following ﬁle names:
+	//   - sprites.json
+	//   - sprites@2x.json for high pixel density displays
 	//
 	// This member is required.
 	FileName *string
@@ -62,8 +61,8 @@ type GetMapSpritesOutput struct {
 	// The HTTP Cache-Control directive for the value.
 	CacheControl *string
 
-	// The content type of the sprite sheet and offsets. For example, the sprite
-	// sheet content type is image/png , and the sprite offset JSON document is
+	// The content type of the sprite sheet and offsets. For example, the sprite sheet
+	// content type is image/png , and the sprite offset JSON document is
 	// application/json .
 	ContentType *string
 

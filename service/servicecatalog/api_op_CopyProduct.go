@@ -16,7 +16,7 @@ import (
 // product. You can copy a product to the same account or another account. You can
 // copy a product to the same Region or another Region. If you copy a product to
 // another account, you must first share the product in a portfolio using
-// CreatePortfolioShare. This operation is performed asynchronously. To track the
+// CreatePortfolioShare . This operation is performed asynchronously. To track the
 // progress of the operation, use DescribeCopyProductStatus .
 func (c *Client) CopyProduct(ctx context.Context, params *CopyProductInput, optFns ...func(*Options)) (*CopyProductOutput, error) {
 	if params == nil {
@@ -48,12 +48,12 @@ type CopyProductInput struct {
 	SourceProductArn *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// The copy options. If the value is CopyTags, the tags from the source product
+	// The copy options. If the value is CopyTags , the tags from the source product
 	// are copied to the target product.
 	CopyOptions []types.CopyOption
 

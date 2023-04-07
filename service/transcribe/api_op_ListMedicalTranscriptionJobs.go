@@ -44,15 +44,15 @@ type ListMedicalTranscriptionJobsInput struct {
 	MaxResults *int32
 
 	// If your ListMedicalTranscriptionJobs request returns more results than can be
-	// displayed, NextToken is displayed in the response with an associated string.
-	// To get the next page of results, copy this string and repeat your request,
+	// displayed, NextToken is displayed in the response with an associated string. To
+	// get the next page of results, copy this string and repeat your request,
 	// including NextToken with the value of the copied string. Repeat as needed to
 	// view all your results.
 	NextToken *string
 
 	// Returns only medical transcription jobs with the specified status. Jobs are
-	// ordered by creation date, with the newest job first. If you don't include
-	// Status , all medical transcription jobs are returned.
+	// ordered by creation date, with the newest job first. If you don't include Status
+	// , all medical transcription jobs are returned.
 	Status types.TranscriptionJobStatus
 
 	noSmithyDocumentSerde
@@ -63,9 +63,9 @@ type ListMedicalTranscriptionJobsOutput struct {
 	// Provides a summary of information about each result.
 	MedicalTranscriptionJobSummaries []types.MedicalTranscriptionJobSummary
 
-	// If NextToken is present in your response, it indicates that not all results
-	// are displayed. To view the next set of results, copy the string associated with
-	// the NextToken parameter in your results output, then run your request again
+	// If NextToken is present in your response, it indicates that not all results are
+	// displayed. To view the next set of results, copy the string associated with the
+	// NextToken parameter in your results output, then run your request again
 	// including NextToken with the value of the copied string. Repeat as needed to
 	// view all your results.
 	NextToken *string
@@ -157,8 +157,8 @@ type ListMedicalTranscriptionJobsPaginatorOptions struct {
 	// used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

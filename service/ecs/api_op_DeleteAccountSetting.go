@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables an account setting for a specified user, role, or the root user for
-// an account.
+// Disables an account setting for a specified user, role, or the root user for an
+// account.
 func (c *Client) DeleteAccountSetting(ctx context.Context, params *DeleteAccountSettingInput, optFns ...func(*Options)) (*DeleteAccountSettingOutput, error) {
 	if params == nil {
 		params = &DeleteAccountSettingInput{}
@@ -32,10 +32,10 @@ type DeleteAccountSettingInput struct {
 
 	// The resource name to disable the account setting for. If serviceLongArnFormat
 	// is specified, the ARN for your Amazon ECS services is affected. If
-	// taskLongArnFormatis specified, the ARN and resource ID for your Amazon ECS
+	// taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS
 	// tasks is affected. If containerInstanceLongArnFormat is specified, the ARN and
 	// resource ID for your Amazon ECS container instances is affected. If
-	// awsvpcTrunkingis specified, the ENI limit for your Amazon ECS container
+	// awsvpcTrunking is specified, the ENI limit for your Amazon ECS container
 	// instances is affected.
 	//
 	// This member is required.

@@ -37,8 +37,8 @@ type UpdateResolverDnssecConfigInput struct {
 	ResourceId *string
 
 	// The new value that you are specifying for DNSSEC validation for the VPC. The
-	// value can be ENABLE  or DISABLE. Be aware that it can take time for a
-	// validation status change to be completed.
+	// value can be ENABLE or DISABLE . Be aware that it can take time for a validation
+	// status change to be completed.
 	//
 	// This member is required.
 	Validation types.Validation

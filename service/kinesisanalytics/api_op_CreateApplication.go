@@ -14,7 +14,7 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Creates an Amazon Kinesis Analytics
+// Analytics API V2 Documentation . Creates an Amazon Kinesis Analytics
 // application. You can configure each application with one streaming source as
 // input, application code to process the input, and up to three destinations where
 // you want Amazon Kinesis Analytics to write the output data from your
@@ -66,8 +66,8 @@ type CreateApplicationInput struct {
 	// . You can provide such series of SQL statements, where output of one statement
 	// can be used as the input for the next statement. You store intermediate results
 	// by creating in-application streams and pumps. Note that the application code
-	// must create the streams with names specified in the Outputs. For example, if
-	// your Outputs  defines output streams named ExampleOutputStream1  and
+	// must create the streams with names specified in the Outputs . For example, if
+	// your Outputs defines output streams named ExampleOutputStream1 and
 	// ExampleOutputStream2 , then your application code must create these streams.
 	ApplicationCode *string
 
@@ -121,8 +121,8 @@ type CreateApplicationInput struct {
 // TBD
 type CreateApplicationOutput struct {
 
-	// In response to your CreateApplication request, Amazon Kinesis Analytics
-	// returns a response with a summary of the application it created, including the
+	// In response to your CreateApplication request, Amazon Kinesis Analytics returns
+	// a response with a summary of the application it created, including the
 	// application Amazon Resource Name (ARN), name, and status.
 	//
 	// This member is required.

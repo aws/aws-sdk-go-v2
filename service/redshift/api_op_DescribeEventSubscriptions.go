@@ -17,8 +17,8 @@ import (
 // description for that subscription. If you specify both tag keys and tag values
 // in the same request, Amazon Redshift returns all event notification
 // subscriptions that match any combination of the specified keys and values. For
-// example, if you have owner  and environment  for tag keys, and admin  and test
-// for tag values, all subscriptions that have any combination of those values are
+// example, if you have owner and environment for tag keys, and admin and test for
+// tag values, all subscriptions that have any combination of those values are
 // returned. If both tag keys and values are omitted from the request,
 // subscriptions are returned regardless of whether they have tag keys or values
 // associated with them.
@@ -41,27 +41,26 @@ type DescribeEventSubscriptionsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeEventSubscriptions request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value
+	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
 	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next set
-	// of records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// The name of the Amazon Redshift event notification subscription to be
-	// described.
+	// The name of the Amazon Redshift event notification subscription to be described.
 	SubscriptionName *string
 
 	// A tag key or keys for which you want to return all matching event notification
 	// subscriptions that are associated with the specified key or keys. For example,
-	// suppose that you have subscriptions that are tagged with keys called owner  and
-	// environment. If you specify both of these tag keys in the request, Amazon
+	// suppose that you have subscriptions that are tagged with keys called owner and
+	// environment . If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the subscriptions that have either or both of
 	// these tag keys associated with them.
 	TagKeys []string
@@ -69,7 +68,7 @@ type DescribeEventSubscriptionsInput struct {
 	// A tag value or values for which you want to return all matching event
 	// notification subscriptions that are associated with the specified tag value or
 	// values. For example, suppose that you have subscriptions that are tagged with
-	// values called admin  and test. If you specify both of these tag values in the
+	// values called admin and test . If you specify both of these tag values in the
 	// request, Amazon Redshift returns a response with the subscriptions that have
 	// either or both of these tag values associated with them.
 	TagValues []string
@@ -166,15 +165,15 @@ var _ DescribeEventSubscriptionsAPIClient = (*Client)(nil)
 // DescribeEventSubscriptionsPaginatorOptions is the paginator options for
 // DescribeEventSubscriptions
 type DescribeEventSubscriptionsPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next set
-	// of records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

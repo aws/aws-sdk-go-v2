@@ -13,16 +13,18 @@ import (
 
 // Tests a registered extension to make sure it meets all necessary requirements
 // for being published in the CloudFormation registry.
-//   - For resource types, this includes passing all contracts tests defined for the type.
-//   - For modules, this includes determining if the module's model meets all necessary requirements.
+//   - For resource types, this includes passing all contracts tests defined for
+//     the type.
+//   - For modules, this includes determining if the module's model meets all
+//     necessary requirements.
 //
 // For more information, see Testing your public extension prior to publishing (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing)
 // in the CloudFormation CLI User Guide. If you don't specify a version,
 // CloudFormation uses the default version of the extension in your account and
 // region for testing. To perform testing, CloudFormation assumes the execution
 // role specified when the type was registered. For more information, see
-// RegisterType . Once you've initiated testing on an extension using TestType,
-// you can pass the returned TypeVersionArn  into DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
+// RegisterType . Once you've initiated testing on an extension using TestType ,
+// you can pass the returned TypeVersionArn into DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
 // to monitor the current test status and test status description for the
 // extension. An extension must have a test status of PASSED before it can be
 // published. For more information, see Publishing extensions to make them
@@ -46,17 +48,17 @@ func (c *Client) TestType(ctx context.Context, params *TestTypeInput, optFns ...
 type TestTypeInput struct {
 
 	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
-	// Arn , or TypeName  and Type .
+	// Arn , or TypeName and Type .
 	Arn *string
 
 	// The S3 bucket to which CloudFormation delivers the contract test execution
 	// logs. CloudFormation delivers the logs by the time contract testing has
-	// completed and the extension has been assigned a test type status of PASSED  or
+	// completed and the extension has been assigned a test type status of PASSED or
 	// FAILED . The user calling TestType must be able to access items in the
 	// specified S3 bucket. Specifically, the user needs the following permissions:
-	//     - GetObject
-	//     - PutObject
-	//  For more information, see Actions, Resources, and Condition Keys for Amazon S3 (https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html)
+	//   - GetObject
+	//   - PutObject
+	// For more information, see Actions, Resources, and Condition Keys for Amazon S3 (https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html)
 	// in the Amazon Web Services Identity and Access Management User Guide.
 	LogDeliveryBucket *string
 
@@ -69,7 +71,7 @@ type TestTypeInput struct {
 	TypeName *string
 
 	// The version of the extension to test. You can specify the version id with
-	// either Arn , or with TypeName  and Type. If you don't specify a version,
+	// either Arn , or with TypeName and Type . If you don't specify a version,
 	// CloudFormation uses the default version of the extension in this account and
 	// region for testing.
 	VersionId *string

@@ -69,8 +69,7 @@ type ContactInformation struct {
 	// The third line of the primary contact address, if any.
 	AddressLine3 *string
 
-	// The name of the company associated with the primary contact information, if
-	// any.
+	// The name of the company associated with the primary contact information, if any.
 	CompanyName *string
 
 	// The district or county of the primary contact address, if any.

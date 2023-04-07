@@ -87,13 +87,14 @@ type CopySnapshotInput struct {
 
 	// The identifier of the Key Management Service (KMS) KMS key to use for Amazon
 	// EBS encryption. If this parameter is not specified, your KMS key for Amazon EBS
-	// is used. If KmsKeyId  is specified, the encrypted state must be true. You can
+	// is used. If KmsKeyId is specified, the encrypted state must be true . You can
 	// specify the KMS key using any of the following:
-	//     - Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//     - Key alias. For example, alias/ExampleAlias.
-	//     - Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//     - Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
-	//
+	//   - Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
+	//   - Key alias. For example, alias/ExampleAlias.
+	//   - Key ARN. For example,
+	//   arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
+	//   - Alias ARN. For example,
+	//   arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
 	// Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you
 	// specify an ID, alias, or ARN that is not valid, the action can appear to
 	// complete, but eventually fails.
@@ -102,16 +103,15 @@ type CopySnapshotInput struct {
 	// When you copy an encrypted source snapshot using the Amazon EC2 Query API, you
 	// must supply a pre-signed URL. This parameter is optional for unencrypted
 	// snapshots. For more information, see Query requests (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html)
-	// . The PresignedUrl  should use the snapshot source endpoint, the CopySnapshot
+	// . The PresignedUrl should use the snapshot source endpoint, the CopySnapshot
 	// action, and include the SourceRegion , SourceSnapshotId , and DestinationRegion
-	// parameters. The PresignedUrl must be signed using Amazon Web Services
-	// Signature Version 4. Because EBS snapshots are stored in Amazon S3, the signing
-	// algorithm for this parameter uses the same logic that is described in
-	// Authenticating Requests: Using Query Parameters (Amazon Web Services Signature
-	// Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
+	// parameters. The PresignedUrl must be signed using Amazon Web Services Signature
+	// Version 4. Because EBS snapshots are stored in Amazon S3, the signing algorithm
+	// for this parameter uses the same logic that is described in Authenticating
+	// Requests: Using Query Parameters (Amazon Web Services Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 	// in the Amazon Simple Storage Service API Reference. An invalid or improperly
 	// signed PresignedUrl will cause the copy operation to fail asynchronously, and
-	// the snapshot will move to an error  state.
+	// the snapshot will move to an error state.
 	PresignedUrl *string
 
 	// The tags to apply to the new snapshot.
@@ -292,8 +292,8 @@ func newServiceMetadataMiddleware_opCopySnapshot(region string) *awsmiddleware.R
 	}
 }
 
-// PresignCopySnapshot is used to generate a presigned HTTP Request which
-// contains presigned URL, signed headers and HTTP method used.
+// PresignCopySnapshot is used to generate a presigned HTTP Request which contains
+// presigned URL, signed headers and HTTP method used.
 func (c *PresignClient) PresignCopySnapshot(ctx context.Context, params *CopySnapshotInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
 	if params == nil {
 		params = &CopySnapshotInput{}

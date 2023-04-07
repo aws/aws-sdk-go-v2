@@ -14,13 +14,13 @@ import (
 // Starts asynchronous detection of faces in a stored video. Amazon Rekognition
 // Video can detect faces in a video stored in an Amazon S3 bucket. Use Video to
 // specify the bucket name and the filename of the video. StartFaceDetection
-// returns a job identifier ( JobId) that you use to get the results of the
+// returns a job identifier ( JobId ) that you use to get the results of the
 // operation. When face detection is finished, Amazon Rekognition Video publishes a
 // completion status to the Amazon Simple Notification Service topic that you
-// specify in NotificationChannel. To get the results of the face detection
+// specify in NotificationChannel . To get the results of the face detection
 // operation, first check that the status value published to the Amazon SNS topic
-// is SUCCEEDED . If so, call GetFaceDetection  and pass the job identifier ( JobId
-// ) from the initial call to StartFaceDetection. For more information, see
+// is SUCCEEDED . If so, call GetFaceDetection and pass the job identifier ( JobId
+// ) from the initial call to StartFaceDetection . For more information, see
 // Detecting faces in a stored video in the Amazon Rekognition Developer Guide.
 func (c *Client) StartFaceDetection(ctx context.Context, params *StartFaceDetectionInput, optFns ...func(*Options)) (*StartFaceDetectionOutput, error) {
 	if params == nil {
@@ -46,19 +46,19 @@ type StartFaceDetectionInput struct {
 	Video *types.Video
 
 	// Idempotent token used to identify the start request. If you use the same token
-	// with multiple StartFaceDetection  requests, the same JobId  is returned. Use
-	// ClientRequestTokento prevent the same job from being accidently started more
+	// with multiple StartFaceDetection requests, the same JobId is returned. Use
+	// ClientRequestToken to prevent the same job from being accidently started more
 	// than once.
 	ClientRequestToken *string
 
-	// The face attributes you want returned. DEFAULT - The following subset of
-	// facial attributes are returned: BoundingBox, Confidence, Pose, Quality and
-	// Landmarks. ALL  - All facial attributes are returned.
+	// The face attributes you want returned. DEFAULT - The following subset of facial
+	// attributes are returned: BoundingBox, Confidence, Pose, Quality and Landmarks.
+	// ALL - All facial attributes are returned.
 	FaceAttributes types.FaceAttributes
 
-	// An identifier you specify that's returned in the completion notification
-	// that's published to your Amazon Simple Notification Service topic. For example,
-	// you can use JobTag to group related jobs and identify them in the completion
+	// An identifier you specify that's returned in the completion notification that's
+	// published to your Amazon Simple Notification Service topic. For example, you can
+	// use JobTag to group related jobs and identify them in the completion
 	// notification.
 	JobTag *string
 

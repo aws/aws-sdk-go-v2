@@ -28,7 +28,7 @@ func (c *Client) PutThirdPartyJobFailureResult(ctx context.Context, params *PutT
 	return out, nil
 }
 
-// Represents the input of a PutThirdPartyJobFailureResult  action.
+// Represents the input of a PutThirdPartyJobFailureResult action.
 type PutThirdPartyJobFailureResultInput struct {
 
 	// The clientToken portion of the clientId and clientToken pair used to verify

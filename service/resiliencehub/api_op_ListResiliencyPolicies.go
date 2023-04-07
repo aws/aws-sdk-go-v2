@@ -30,9 +30,9 @@ func (c *Client) ListResiliencyPolicies(ctx context.Context, params *ListResilie
 
 type ListResiliencyPoliciesInput struct {
 
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// Null, or the token from a previous call to get the next set of results.
@@ -131,13 +131,13 @@ var _ ListResiliencyPoliciesAPIClient = (*Client)(nil)
 // ListResiliencyPoliciesPaginatorOptions is the paginator options for
 // ListResiliencyPolicies
 type ListResiliencyPoliciesPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -150,8 +150,7 @@ type ListResiliencyPoliciesPaginator struct {
 	firstPage bool
 }
 
-// NewListResiliencyPoliciesPaginator returns a new
-// ListResiliencyPoliciesPaginator
+// NewListResiliencyPoliciesPaginator returns a new ListResiliencyPoliciesPaginator
 func NewListResiliencyPoliciesPaginator(client ListResiliencyPoliciesAPIClient, params *ListResiliencyPoliciesInput, optFns ...func(*ListResiliencyPoliciesPaginatorOptions)) *ListResiliencyPoliciesPaginator {
 	if params == nil {
 		params = &ListResiliencyPoliciesInput{}

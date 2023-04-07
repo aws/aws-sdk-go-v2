@@ -40,7 +40,7 @@ func (c *Client) DeleteServerCertificate(ctx context.Context, params *DeleteServ
 type DeleteServerCertificateInput struct {
 
 	// The name of the server certificate you want to delete. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//

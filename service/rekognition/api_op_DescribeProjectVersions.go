@@ -17,7 +17,7 @@ import (
 )
 
 // Lists and describes the versions of a model in an Amazon Rekognition Custom
-// Labels project. You can specify up to 10 model versions in ProjectVersionArns.
+// Labels project. You can specify up to 10 model versions in ProjectVersionArns .
 // If you don't specify a value, descriptions for all model versions in the project
 // are returned. This operation requires permissions to perform the
 // rekognition:DescribeProjectVersions action.
@@ -38,8 +38,8 @@ func (c *Client) DescribeProjectVersions(ctx context.Context, params *DescribePr
 
 type DescribeProjectVersionsInput struct {
 
-	// The Amazon Resource Name (ARN) of the project that contains the models you
-	// want to describe.
+	// The Amazon Resource Name (ARN) of the project that contains the models you want
+	// to describe.
 	//
 	// This member is required.
 	ProjectArn *string
@@ -162,8 +162,8 @@ type DescribeProjectVersionsPaginatorOptions struct {
 	// ValidationException error occurs. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -297,9 +297,9 @@ func NewProjectVersionRunningWaiter(client DescribeProjectVersionsAPIClient, opt
 	}
 }
 
-// Wait calls the waiter function for ProjectVersionRunning waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for ProjectVersionRunning waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *ProjectVersionRunningWaiter) Wait(ctx context.Context, params *DescribeProjectVersionsInput, maxWaitDur time.Duration, optFns ...func(*ProjectVersionRunningWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -51,7 +51,7 @@ type ChannelFlowCallbackInput struct {
 	// This member is required.
 	ChannelMessage *types.ChannelMessageCallback
 
-	// When a processor determines that a message needs to be DENIED, pass this
+	// When a processor determines that a message needs to be DENIED , pass this
 	// parameter with a value of true.
 	DeleteResource bool
 

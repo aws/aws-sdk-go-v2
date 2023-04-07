@@ -40,12 +40,12 @@ type UpdateEnvironmentInput struct {
 	// Allows the environment owner to turn on or turn off the Amazon Web Services
 	// managed temporary credentials for an Cloud9 environment by using one of the
 	// following values:
-	//     - ENABLE
-	//     - DISABLE
-	// Only the environment owner can change the status of managed
-	// temporary credentials. An AccessDeniedException is thrown if an attempt to
-	// turn on or turn off managed temporary credentials is made by an account that's
-	// not the environment owner.
+	//   - ENABLE
+	//   - DISABLE
+	// Only the environment owner can change the status of managed temporary
+	// credentials. An AccessDeniedException is thrown if an attempt to turn on or
+	// turn off managed temporary credentials is made by an account that's not the
+	// environment owner.
 	ManagedCredentialsAction types.ManagedCredentialsAction
 
 	// A replacement name for the environment.

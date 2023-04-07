@@ -20,8 +20,7 @@ import (
 //   - Twitter: api.twitter.com
 //   - Digits: www.digits.com
 //
-// You must use AWS Developer credentials to call
-// this API.
+// You must use AWS Developer credentials to call this API.
 func (c *Client) CreateIdentityPool(ctx context.Context, params *CreateIdentityPoolInput, optFns ...func(*Options)) (*CreateIdentityPoolOutput, error) {
 	if params == nil {
 		params = &CreateIdentityPoolInput{}
@@ -60,10 +59,10 @@ type CreateIdentityPoolInput struct {
 
 	// The "domain" by which Cognito will refer to your users. This name acts as a
 	// placeholder that allows your backend and the Cognito service to communicate
-	// about the developer provider. For the DeveloperProviderName, you can use
-	// letters as well as period ( . ), underscore ( _ ), and dash ( -). Once you
-	// have set a developer provider name, you cannot change it. Please take care in
-	// setting this parameter.
+	// about the developer provider. For the DeveloperProviderName , you can use
+	// letters as well as period ( . ), underscore ( _ ), and dash ( - ). Once you have
+	// set a developer provider name, you cannot change it. Please take care in setting
+	// this parameter.
 	DeveloperProviderName *string
 
 	// Tags to assign to the identity pool. A tag is a label that you can apply to
@@ -74,8 +73,8 @@ type CreateIdentityPoolInput struct {
 	// The Amazon Resource Names (ARN) of the OpenID Connect providers.
 	OpenIdConnectProviderARNs []string
 
-	// An array of Amazon Resource Names (ARNs) of the SAML provider for your
-	// identity pool.
+	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity
+	// pool.
 	SamlProviderARNs []string
 
 	// Optional key:value pairs mapping provider names to provider app IDs.
@@ -121,8 +120,8 @@ type CreateIdentityPoolOutput struct {
 	// The ARNs of the OpenID Connect providers.
 	OpenIdConnectProviderARNs []string
 
-	// An array of Amazon Resource Names (ARNs) of the SAML provider for your
-	// identity pool.
+	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity
+	// pool.
 	SamlProviderARNs []string
 
 	// Optional key:value pairs mapping provider names to provider app IDs.

@@ -28,7 +28,7 @@ func (c *Client) PutJobFailureResult(ctx context.Context, params *PutJobFailureR
 	return out, nil
 }
 
-// Represents the input of a PutJobFailureResult  action.
+// Represents the input of a PutJobFailureResult action.
 type PutJobFailureResultInput struct {
 
 	// The details about the failure of a job.

@@ -13,14 +13,14 @@ import (
 
 // Retrieves information about the specified version of the specified managed
 // policy, including the policy document. Policies returned by this operation are
-// URL-encoded compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986). You
+// URL-encoded compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986) . You
 // can use a URL decoding method to convert the policy back to plain JSON text. For
-// example, if you use Java, you can use the decode  method of the
-// java.net.URLDecoderutility class in the Java SDK. Other languages and SDKs
+// example, if you use Java, you can use the decode method of the
+// java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs
 // provide similar functionality. To list the available versions for a policy, use
-// ListPolicyVersions. This operation retrieves information about managed
+// ListPolicyVersions . This operation retrieves information about managed
 // policies. To retrieve information about an inline policy that is embedded in a
-// user, group, or role, use GetUserPolicy , GetGroupPolicy , or GetRolePolicy.
+// user, group, or role, use GetUserPolicy , GetGroupPolicy , or GetRolePolicy .
 // For more information about the types of policies, see Managed policies and
 // inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. For more information about managed policy versions, see
@@ -51,7 +51,7 @@ type GetPolicyVersionInput struct {
 	PolicyArn *string
 
 	// Identifies the policy version to retrieve. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters that
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters that
 	// consists of the lowercase letter 'v' followed by one or two digits, and
 	// optionally followed by a period '.' and a string of letters and digits.
 	//
@@ -61,7 +61,7 @@ type GetPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetPolicyVersion  request.
+// Contains the response to a successful GetPolicyVersion request.
 type GetPolicyVersionOutput struct {
 
 	// A structure containing details about the policy version.

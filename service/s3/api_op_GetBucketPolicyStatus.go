@@ -14,7 +14,7 @@ import (
 
 // Retrieves the policy status for an Amazon S3 bucket, indicating whether the
 // bucket is public. In order to use this operation, you must have the
-// s3:GetBucketPolicyStatuspermission. For more information about Amazon S3
+// s3:GetBucketPolicyStatus permission. For more information about Amazon S3
 // permissions, see Specifying Permissions in a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
 // . For more information about when Amazon S3 considers a bucket public, see The
 // Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)

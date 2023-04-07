@@ -17,12 +17,12 @@ import (
 // systems. Therefore, a get request soon after put or delete can return a wrong
 // result. For information about replication configuration, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html)
 // in the Amazon S3 User Guide. This action requires permissions for the
-// s3:GetReplicationConfigurationaction. For more information about permissions,
+// s3:GetReplicationConfiguration action. For more information about permissions,
 // see Using Bucket Policies and User Policies (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
 // . If you include the Filter element in a replication configuration, you must
-// also include the DeleteMarkerReplication  and Priority elements. The response
-// also returns those elements. For information about GetBucketReplication
-// errors, see List of replication-related error codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList)
+// also include the DeleteMarkerReplication and Priority elements. The response
+// also returns those elements. For information about GetBucketReplication errors,
+// see List of replication-related error codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList)
 // The following operations are related to GetBucketReplication :
 //   - PutBucketReplication (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html)
 //   - DeleteBucketReplication (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html)

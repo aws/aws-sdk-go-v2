@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an HTTP namespace. Service instances registered using an HTTP
-// namespace can be discovered using a DiscoverInstances request but can't be
-// discovered using DNS. For the current quota on the number of namespaces that you
-// can create using the same Amazon Web Services account, see Cloud Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// Creates an HTTP namespace. Service instances registered using an HTTP namespace
+// can be discovered using a DiscoverInstances request but can't be discovered
+// using DNS. For the current quota on the number of namespaces that you can create
+// using the same Amazon Web Services account, see Cloud Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
 // in the Cloud Map Developer Guide.
 func (c *Client) CreateHttpNamespace(ctx context.Context, params *CreateHttpNamespaceInput, optFns ...func(*Options)) (*CreateHttpNamespaceOutput, error) {
 	if params == nil {
@@ -40,7 +40,7 @@ type CreateHttpNamespaceInput struct {
 	Name *string
 
 	// A unique string that identifies the request and that allows failed
-	// CreateHttpNamespacerequests to be retried without the risk of running the
+	// CreateHttpNamespace requests to be retried without the risk of running the
 	// operation twice. CreatorRequestId can be any unique string (for example, a
 	// date/time stamp).
 	CreatorRequestId *string

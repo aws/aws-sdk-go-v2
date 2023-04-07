@@ -13,11 +13,11 @@ import (
 )
 
 // Creates a rescore execution plan. A rescore execution plan is an Amazon Kendra
-// Intelligent Ranking resource used for provisioning the Rescore API. You set
-// the number of capacity units that you require for Amazon Kendra Intelligent
-// Ranking to rescore or re-rank a search service's results. For an example of
-// using the CreateRescoreExecutionPlan API, including using the Python and Java
-// SDKs, see Semantically ranking a search service's results (https://docs.aws.amazon.com/kendra/latest/dg/search-service-rerank.html)
+// Intelligent Ranking resource used for provisioning the Rescore API. You set the
+// number of capacity units that you require for Amazon Kendra Intelligent Ranking
+// to rescore or re-rank a search service's results. For an example of using the
+// CreateRescoreExecutionPlan API, including using the Python and Java SDKs, see
+// Semantically ranking a search service's results (https://docs.aws.amazon.com/kendra/latest/dg/search-service-rerank.html)
 // .
 func (c *Client) CreateRescoreExecutionPlan(ctx context.Context, params *CreateRescoreExecutionPlanInput, optFns ...func(*Options)) (*CreateRescoreExecutionPlanOutput, error) {
 	if params == nil {
@@ -50,8 +50,8 @@ type CreateRescoreExecutionPlanInput struct {
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// A token that you provide to identify the request to create a rescore execution
-	// plan. Multiple calls to the CreateRescoreExecutionPlanRequest API with the
-	// same client token will create only one rescore execution plan.
+	// plan. Multiple calls to the CreateRescoreExecutionPlanRequest API with the same
+	// client token will create only one rescore execution plan.
 	ClientToken *string
 
 	// A description for the rescore execution plan.

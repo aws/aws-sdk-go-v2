@@ -35,8 +35,8 @@ func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *Descr
 
 type DescribeRuntimeConfigurationInput struct {
 
-	// A unique identifier for the fleet to get the runtime configuration for. You
-	// can use either the fleet ID or ARN value.
+	// A unique identifier for the fleet to get the runtime configuration for. You can
+	// use either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string

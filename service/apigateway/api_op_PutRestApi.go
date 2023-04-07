@@ -46,8 +46,8 @@ type PutRestApiInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// A query parameter to indicate whether to rollback the API update ( true) or
-	// not ( false ) when a warning is encountered. The default value is false .
+	// A query parameter to indicate whether to rollback the API update ( true ) or not
+	// ( false ) when a warning is encountered. The default value is false .
 	FailOnWarnings bool
 
 	// The mode query parameter to specify the update mode. Valid values are "merge"
@@ -55,7 +55,7 @@ type PutRestApiInput struct {
 	Mode types.PutMode
 
 	// Custom header parameters as part of the request. For example, to exclude
-	// DocumentationParts from an imported API, set ignore=documentation  as a
+	// DocumentationParts from an imported API, set ignore=documentation as a
 	// parameters value, as in the AWS CLI command of aws apigateway import-rest-api
 	// --parameters ignore=documentation --body
 	// 'file:///path/to/imported-api-body.json' .
@@ -68,8 +68,8 @@ type PutRestApiInput struct {
 type PutRestApiOutput struct {
 
 	// The source of the API key for metering requests according to a usage plan.
-	// Valid values are: > HEADER  to read the API key from the X-API-Key header of a
-	// request. AUTHORIZER  to read the API key from the UsageIdentifierKey from a
+	// Valid values are: > HEADER to read the API key from the X-API-Key header of a
+	// request. AUTHORIZER to read the API key from the UsageIdentifierKey from a
 	// custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
@@ -85,7 +85,7 @@ type PutRestApiOutput struct {
 
 	// Specifies whether clients can invoke your API by using the default execute-api
 	// endpoint. By default, clients can invoke your API with the default
-	// https://{api_id}.execute-api.{region}.amazonaws.comendpoint. To require that
+	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
 	DisableExecuteApiEndpoint bool

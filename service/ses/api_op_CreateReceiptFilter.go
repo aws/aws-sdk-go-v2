@@ -35,9 +35,8 @@ func (c *Client) CreateReceiptFilter(ctx context.Context, params *CreateReceiptF
 // .
 type CreateReceiptFilterInput struct {
 
-	// A data structure that describes the IP address filter to create, which
-	// consists of a name, an IP address range, and whether to allow or block mail from
-	// it.
+	// A data structure that describes the IP address filter to create, which consists
+	// of a name, an IP address range, and whether to allow or block mail from it.
 	//
 	// This member is required.
 	Filter *types.ReceiptFilter

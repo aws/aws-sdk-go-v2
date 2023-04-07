@@ -62,7 +62,7 @@ type ListMultipartUploadsInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -73,7 +73,7 @@ type ListMultipartUploadsInput struct {
 
 	// Character you use to group keys. All keys that contain the same string between
 	// the prefix, if specified, and the first occurrence of the delimiter after the
-	// prefix are grouped under a single result element, CommonPrefixes. If you don't
+	// prefix are grouped under a single result element, CommonPrefixes . If you don't
 	// specify the prefix parameter, then the substring starts at the beginning of the
 	// key. The keys that are grouped under CommonPrefixes result element are not
 	// returned elsewhere in the response.
@@ -101,9 +101,9 @@ type ListMultipartUploadsInput struct {
 	// upload-id-marker .
 	KeyMarker *string
 
-	// Sets the maximum number of multipart uploads, from 1 to 1,000, to return in
-	// the response body. 1,000 is the maximum number of uploads that can be returned
-	// in a response.
+	// Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the
+	// response body. 1,000 is the maximum number of uploads that can be returned in a
+	// response.
 	MaxUploads int32
 
 	// Lists in-progress uploads only for those keys that begin with the specified
@@ -130,7 +130,7 @@ type ListMultipartUploadsOutput struct {
 
 	// If you specify a delimiter in the request, then the result returns each
 	// distinct key prefix containing the delimiter in a CommonPrefixes element. The
-	// distinct key prefixes are returned in the Prefix  child element.
+	// distinct key prefixes are returned in the Prefix child element.
 	CommonPrefixes []types.CommonPrefix
 
 	// Contains the delimiter you specified in the request. If you don't specify a
@@ -138,8 +138,8 @@ type ListMultipartUploadsOutput struct {
 	Delimiter *string
 
 	// Encoding type used by Amazon S3 to encode object keys in the response. If you
-	// specify encoding-type request parameter, Amazon S3 includes this element in
-	// the response, and returns encoded key name values in the following response
+	// specify encoding-type request parameter, Amazon S3 includes this element in the
+	// response, and returns encoded key name values in the following response
 	// elements: Delimiter , KeyMarker , Prefix , NextKeyMarker , Key .
 	EncodingType types.EncodingType
 
@@ -161,7 +161,7 @@ type ListMultipartUploadsOutput struct {
 	NextKeyMarker *string
 
 	// When a list is truncated, this element specifies the value that should be used
-	// for the upload-id-marker  request parameter in a subsequent request.
+	// for the upload-id-marker request parameter in a subsequent request.
 	NextUploadIdMarker *string
 
 	// When a prefix is provided in the request, this field contains the specified
@@ -171,8 +171,8 @@ type ListMultipartUploadsOutput struct {
 	// Upload ID after which listing began.
 	UploadIdMarker *string
 
-	// Container for elements related to a particular multipart upload. A response
-	// can contain zero or more Upload  elements.
+	// Container for elements related to a particular multipart upload. A response can
+	// contain zero or more Upload elements.
 	Uploads []types.MultipartUpload
 
 	// Metadata pertaining to the operation's result.

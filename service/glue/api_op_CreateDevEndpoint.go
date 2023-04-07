@@ -47,10 +47,10 @@ type CreateDevEndpointInput struct {
 	// in your DevEndpoint .
 	ExtraJarsS3Path *string
 
-	// The paths to one or more Python libraries in an Amazon S3 bucket that should
-	// be loaded in your DevEndpoint. Multiple values must be complete paths
-	// separated by a comma. You can only use pure Python libraries with a DevEndpoint
-	// . Libraries that rely on C extensions, such as the pandas (http://pandas.pydata.org/)
+	// The paths to one or more Python libraries in an Amazon S3 bucket that should be
+	// loaded in your DevEndpoint . Multiple values must be complete paths separated by
+	// a comma. You can only use pure Python libraries with a DevEndpoint . Libraries
+	// that rely on C extensions, such as the pandas (http://pandas.pydata.org/)
 	// Python data analysis library, are not yet supported.
 	ExtraPythonLibsS3Path *string
 
@@ -61,12 +61,11 @@ type CreateDevEndpointInput struct {
 	// in the developer guide. Development endpoints that are created without
 	// specifying a Glue version default to Glue 0.9. You can specify a version of
 	// Python support for development endpoints by using the Arguments parameter in
-	// the CreateDevEndpoint  or UpdateDevEndpoint APIs. If no arguments are
-	// provided, the version defaults to Python 2.
+	// the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided,
+	// the version defaults to Python 2.
 	GlueVersion *string
 
-	// The number of Glue Data Processing Units (DPUs) to allocate to this DevEndpoint
-	// .
+	// The number of Glue Data Processing Units (DPUs) to allocate to this DevEndpoint .
 	NumberOfNodes int32
 
 	// The number of workers of a defined workerType that are allocated to the
@@ -85,31 +84,35 @@ type CreateDevEndpointInput struct {
 	// you previously created an endpoint with a public key, you must remove that key
 	// to be able to set a list of public keys. Call the UpdateDevEndpoint API with
 	// the public key content in the deletePublicKeys attribute, and the list of new
-	// keys in the addPublicKeys  attribute.
+	// keys in the addPublicKeys attribute.
 	PublicKeys []string
 
-	// The name of the SecurityConfiguration  structure to be used with this
-	// DevEndpoint .
+	// The name of the SecurityConfiguration structure to be used with this DevEndpoint
+	// .
 	SecurityConfiguration *string
 
 	// Security group IDs for the security groups to be used by the new DevEndpoint .
 	SecurityGroupIds []string
 
-	// The subnet ID for the new DevEndpoint  to use.
+	// The subnet ID for the new DevEndpoint to use.
 	SubnetId *string
 
 	// The tags to use with this DevEndpoint. You may use tags to limit access to the
 	// DevEndpoint. For more information about tags in Glue, see Amazon Web Services
-	// Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)in
+	// Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in
 	// the developer guide.
 	Tags map[string]string
 
 	// The type of predefined worker that is allocated to the development endpoint.
 	// Accepts a value of Standard, G.1X, or G.2X.
-	//     - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//     - For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.
-	//     - For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.
-	//
+	//   - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory
+	//   and a 50GB disk, and 2 executors per worker.
+	//   - For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
+	//   memory, 64 GB disk), and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive jobs.
+	//   - For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of
+	//   memory, 128 GB disk), and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive jobs.
 	// Known issue: when a development endpoint is created with the G.2X WorkerType
 	// configuration, the Spark drivers for the development endpoint will run on 4
 	// vCPU, 16 GB of memory, and a 64 GB disk.
@@ -121,24 +124,23 @@ type CreateDevEndpointInput struct {
 type CreateDevEndpointOutput struct {
 
 	// The map of arguments used to configure this DevEndpoint . Valid arguments are:
-	//     - "--enable-glue-datacatalog": ""
-	// You can specify a version of Python
-	// support for development endpoints by using the Arguments  parameter in the
-	// CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the
-	// version defaults to Python 2.
+	//   - "--enable-glue-datacatalog": ""
+	// You can specify a version of Python support for development endpoints by using
+	// the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If
+	// no arguments are provided, the version defaults to Python 2.
 	Arguments map[string]string
 
-	// The Amazon Web Services Availability Zone where this DevEndpoint  is located.
+	// The Amazon Web Services Availability Zone where this DevEndpoint is located.
 	AvailabilityZone *string
 
-	// The point in time at which this DevEndpoint  was created.
+	// The point in time at which this DevEndpoint was created.
 	CreatedTimestamp *time.Time
 
 	// The name assigned to the new DevEndpoint .
 	EndpointName *string
 
-	// Path to one or more Java .jar files in an S3 bucket that will be loaded in
-	// your DevEndpoint .
+	// Path to one or more Java .jar files in an S3 bucket that will be loaded in your
+	// DevEndpoint .
 	ExtraJarsS3Path *string
 
 	// The paths to one or more Python libraries in an S3 bucket that will be loaded
@@ -165,8 +167,8 @@ type CreateDevEndpointOutput struct {
 	// The Amazon Resource Name (ARN) of the role assigned to the new DevEndpoint .
 	RoleArn *string
 
-	// The name of the SecurityConfiguration  structure being used with this
-	// DevEndpoint .
+	// The name of the SecurityConfiguration structure being used with this DevEndpoint
+	// .
 	SecurityConfiguration *string
 
 	// The security groups assigned to the new DevEndpoint .

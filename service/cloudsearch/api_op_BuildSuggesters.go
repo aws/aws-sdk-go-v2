@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Indexes the search suggestions. For more information, see Configuring
-// Suggesters (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters)
+// Indexes the search suggestions. For more information, see Configuring Suggesters (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) BuildSuggesters(ctx context.Context, params *BuildSuggestersInput, optFns ...func(*Options)) (*BuildSuggestersOutput, error) {
 	if params == nil {

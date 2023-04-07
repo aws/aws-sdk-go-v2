@@ -61,7 +61,7 @@ type DescribeGatewayInformationOutput struct {
 	// The Amazon Web Services Region where the Amazon EC2 instance is located.
 	Ec2InstanceRegion *string
 
-	// The type of endpoint for your gateway. Valid Values: STANDARD  | FIPS
+	// The type of endpoint for your gateway. Valid Values: STANDARD | FIPS
 	EndpointType *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
@@ -121,7 +121,7 @@ type DescribeGatewayInformationOutput struct {
 
 	// A list of up to 50 tags assigned to the gateway, sorted alphabetically by key
 	// name. Each tag is a key-value pair. For a gateway with more than 10 tags
-	// assigned, you can view all tags using the ListTagsForResource  API operation.
+	// assigned, you can view all tags using the ListTagsForResource API operation.
 	Tags []types.Tag
 
 	// The configuration settings for the virtual private cloud (VPC) endpoint for

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Sets the amount of time in days that a given AppInstance  retains data.
+// Sets the amount of time in days that a given AppInstance retains data.
 func (c *Client) PutAppInstanceRetentionSettings(ctx context.Context, params *PutAppInstanceRetentionSettingsInput, optFns ...func(*Options)) (*PutAppInstanceRetentionSettingsOutput, error) {
 	if params == nil {
 		params = &PutAppInstanceRetentionSettingsInput{}

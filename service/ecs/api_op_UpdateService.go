@@ -11,24 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the parameters of a service. For services using the rolling update (
-// ECS) you can update the desired count, deployment configuration, network
+// Modifies the parameters of a service. For services using the rolling update ( ECS
+// ) you can update the desired count, deployment configuration, network
 // configuration, load balancers, service registries, enable ECS managed tags
 // option, propagate tags option, task placement constraints and strategies, and
 // task definition. When you update any of these parameters, Amazon ECS starts new
-// tasks with the new configuration. For services using the blue/green (
-// CODE_DEPLOY) deployment controller, only the desired count, deployment
-// configuration, health check grace period, task placement constraints and
-// strategies, enable ECS managed tags option, and propagate tags can be updated
-// using this API. If the network configuration, platform version, task definition,
-// or load balancer need to be updated, create a new CodeDeploy deployment. For
-// more information, see CreateDeployment (https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html)
+// tasks with the new configuration. For services using the blue/green ( CODE_DEPLOY
+// ) deployment controller, only the desired count, deployment configuration,
+// health check grace period, task placement constraints and strategies, enable ECS
+// managed tags option, and propagate tags can be updated using this API. If the
+// network configuration, platform version, task definition, or load balancer need
+// to be updated, create a new CodeDeploy deployment. For more information, see
+// CreateDeployment (https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html)
 // in the CodeDeploy API Reference. For services using an external deployment
 // controller, you can update only the desired count, task placement constraints
 // and strategies, health check grace period, enable ECS managed tags option, and
 // propagate tags option, using this API. If the launch type, load balancer,
 // network configuration, platform version, or task definition need to be updated,
-// create a new task set For more information, see CreateTaskSet. You can add to
+// create a new task set For more information, see CreateTaskSet . You can add to
 // or subtract from the number of instantiations of a task definition in a service
 // by specifying the cluster that the service is running in and a new desiredCount
 // parameter. If you have updated the Docker image of your application, you can
@@ -43,31 +43,54 @@ import (
 // when they start. You can also update the deployment configuration of a service.
 // When a deployment is triggered by updating the task definition of a service, the
 // service scheduler uses the deployment configuration parameters,
-// minimumHealthyPercent and maximumPercent, to determine the deployment
-// strategy.
-//   - If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during a deployment. For example, if desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that don't use a load balancer are considered healthy if they're in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they're in the RUNNING state and are reported as healthy by the load balancer.
-//   - The maximumPercent parameter represents an upper limit on the number of running tasks during a deployment. You can use it to define the deployment batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).
+// minimumHealthyPercent and maximumPercent , to determine the deployment strategy.
+//   - If minimumHealthyPercent is below 100%, the scheduler can ignore
+//     desiredCount temporarily during a deployment. For example, if desiredCount is
+//     four tasks, a minimum of 50% allows the scheduler to stop two existing tasks
+//     before starting two new tasks. Tasks for services that don't use a load balancer
+//     are considered healthy if they're in the RUNNING state. Tasks for services
+//     that use a load balancer are considered healthy if they're in the RUNNING
+//     state and are reported as healthy by the load balancer.
+//   - The maximumPercent parameter represents an upper limit on the number of
+//     running tasks during a deployment. You can use it to define the deployment batch
+//     size. For example, if desiredCount is four tasks, a maximum of 200% starts
+//     four new tasks before stopping the four older tasks (provided that the cluster
+//     resources required to do this are available).
 //
-// When UpdateService  stops a task during a deployment, the equivalent of docker
+// When UpdateService stops a task during a deployment, the equivalent of docker
 // stop is issued to the containers running in the task. This results in a SIGTERM
 // and a 30-second timeout. After this, SIGKILL is sent and the containers are
 // forcibly stopped. If the container handles the SIGTERM gracefully and exits
 // within 30 seconds from receiving it, no SIGKILL is sent. When the service
 // scheduler launches new tasks, it determines task placement in your cluster with
 // the following logic.
-//   - Determine which of the container instances in your cluster can support your service's task definition. For example, they have the required CPU, memory, ports, and container instance attributes.
-//   - By default, the service scheduler attempts to balance tasks across Availability Zones in this manner even though you can choose a different placement strategy.
-//   - Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.
-//   - Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.
+//   - Determine which of the container instances in your cluster can support your
+//     service's task definition. For example, they have the required CPU, memory,
+//     ports, and container instance attributes.
+//   - By default, the service scheduler attempts to balance tasks across
+//     Availability Zones in this manner even though you can choose a different
+//     placement strategy.
+//   - Sort the valid container instances by the fewest number of running tasks
+//     for this service in the same Availability Zone as the instance. For example, if
+//     zone A has one running service task and zones B and C each have zero, valid
+//     container instances in either zone B or C are considered optimal for placement.
+//   - Place the new service task on a valid container instance in an optimal
+//     Availability Zone (based on the previous steps), favoring container instances
+//     with the fewest number of running tasks for this service.
 //
 // When the service scheduler stops running tasks, it attempts to maintain balance
 // across the Availability Zones in your cluster using the following logic:
-//   - Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.
-//   - Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.
+//   - Sort the container instances by the largest number of running tasks for
+//     this service in the same Availability Zone as the instance. For example, if zone
+//     A has one running service task and zones B and C each have two, container
+//     instances in either zone B or C are considered optimal for termination.
+//   - Stop the task on a container instance in an optimal Availability Zone
+//     (based on the previous steps), favoring container instances with the largest
+//     number of running tasks for this service.
 //
-// You must have a service-linked role when you update any of the following service
-// properties. If you specified a custom role when you created the service, Amazon
-// ECS automatically replaces the roleARN (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Service.html#ECS-Type-Service-roleArn)
+// You must have a service-linked role when you update any of the following
+// service properties. If you specified a custom role when you created the service,
+// Amazon ECS automatically replaces the roleARN (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Service.html#ECS-Type-Service-roleArn)
 // associated with the service with the ARN of your service-linked role. For more
 // information, see Service-linked roles (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 // in the Amazon Elastic Container Service Developer Guide.
@@ -101,19 +124,19 @@ type UpdateServiceInput struct {
 	// provider strategy. However, when a service is using a capacity provider strategy
 	// that's not the default capacity provider strategy, the service can't be updated
 	// to use the cluster's default capacity provider strategy. A capacity provider
-	// strategy consists of one or more capacity providers along with the base  and
-	// weightto assign to them. A capacity provider must be associated with the
+	// strategy consists of one or more capacity providers along with the base and
+	// weight to assign to them. A capacity provider must be associated with the
 	// cluster to be used in a capacity provider strategy. The
-	// PutClusterCapacityProvidersAPI is used to associate a capacity provider with a
-	// cluster. Only capacity providers with an ACTIVE  or UPDATING status can be
-	// used. If specifying a capacity provider that uses an Auto Scaling group, the
-	// capacity provider must already be created. New capacity providers can be created
-	// with the CreateCapacityProvider API operation. To use a Fargate capacity
-	// provider, specify either the FARGATE  or FARGATE_SPOT capacity providers. The
-	// Fargate capacity providers are available to all accounts and only need to be
-	// associated with a cluster to be used. The PutClusterCapacityProviders API
-	// operation is used to update the list of available capacity providers for a
-	// cluster after the cluster is created.
+	// PutClusterCapacityProviders API is used to associate a capacity provider with a
+	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
+	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
+	// provider must already be created. New capacity providers can be created with the
+	// CreateCapacityProvider API operation. To use a Fargate capacity provider,
+	// specify either the FARGATE or FARGATE_SPOT capacity providers. The Fargate
+	// capacity providers are available to all accounts and only need to be associated
+	// with a cluster to be used. The PutClusterCapacityProviders API operation is
+	// used to update the list of available capacity providers for a cluster after the
+	// cluster is created.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that your
@@ -133,13 +156,13 @@ type UpdateServiceInput struct {
 	// service. For more information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide. Only tasks launched
 	// after the update will reflect the update. To update the tags on all tasks, set
-	// forceNewDeployment to true, so that Amazon ECS starts new tasks with the
+	// forceNewDeployment to true , so that Amazon ECS starts new tasks with the
 	// updated tags.
 	EnableECSManagedTags *bool
 
-	// If true, this enables execute command functionality on all task containers. If
+	// If true , this enables execute command functionality on all task containers. If
 	// you do not want to override the value that was set when the service was created,
-	// you can set this to null  when performing this action.
+	// you can set this to null when performing this action.
 	EnableExecuteCommand *bool
 
 	// Determines whether to force a new deployment of the service. By default,
@@ -180,7 +203,6 @@ type UpdateServiceInput struct {
 	// . Note that multiple target groups are not supported for external deployments.
 	// For more information see Register multiple target groups with a service (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html)
 	// in the Amazon Elastic Container Service Developer Guide. You can remove existing
-	//
 	// loadBalancers by passing an empty list.
 	LoadBalancers []types.LoadBalancer
 
@@ -214,8 +236,8 @@ type UpdateServiceInput struct {
 	// Determines whether to propagate the tags from the task definition or the
 	// service to the task. If no value is specified, the tags aren't propagated. Only
 	// tasks launched after the update will reflect the update. To update the tags on
-	// all tasks, set forceNewDeployment  to true, so that Amazon ECS starts new
-	// tasks with the updated tags.
+	// all tasks, set forceNewDeployment to true , so that Amazon ECS starts new tasks
+	// with the updated tags.
 	PropagateTags types.PropagateTags
 
 	// The configuration for this service to discover and connect to services, and be
@@ -228,19 +250,19 @@ type UpdateServiceInput struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	ServiceConnectConfiguration *types.ServiceConnectConfiguration
 
-	// The details for the service discovery registries to assign to this service.
-	// For more information, see Service Discovery (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html)
+	// The details for the service discovery registries to assign to this service. For
+	// more information, see Service Discovery (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html)
 	// . When you add, update, or remove the service registries configuration, Amazon
 	// ECS starts new tasks with the updated service registries configuration, and then
 	// stops the old tasks when the new tasks are running. You can remove existing
 	// serviceRegistries by passing an empty list.
 	ServiceRegistries []types.ServiceRegistry
 
-	// The family  and revision  ( family:revision) or full ARN of the task
-	// definition to run in your service. If a revision  is not specified, the latest
-	// ACTIVE revision is used. If you modify the task definition with UpdateService,
-	// Amazon ECS spawns a task with the new version of the task definition and then
-	// stops an old task after the new version is running.
+	// The family and revision ( family:revision ) or full ARN of the task definition
+	// to run in your service. If a revision is not specified, the latest ACTIVE
+	// revision is used. If you modify the task definition with UpdateService , Amazon
+	// ECS spawns a task with the new version of the task definition and then stops an
+	// old task after the new version is running.
 	TaskDefinition *string
 
 	noSmithyDocumentSerde

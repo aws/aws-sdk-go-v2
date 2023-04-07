@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the subjects in the authenticated account and Amazon Web Services
-// Region. Required permissions: rolesanywhere:ListSubjects .
+// Lists the subjects in the authenticated account and Amazon Web Services Region.
+// Required permissions: rolesanywhere:ListSubjects .
 func (c *Client) ListSubjects(ctx context.Context, params *ListSubjectsInput, optFns ...func(*Options)) (*ListSubjectsOutput, error) {
 	if params == nil {
 		params = &ListSubjectsInput{}
@@ -127,8 +127,8 @@ var _ ListSubjectsAPIClient = (*Client)(nil)
 
 // ListSubjectsPaginatorOptions is the paginator options for ListSubjects
 type ListSubjectsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -21,9 +21,13 @@ import (
 // snapshots, private snapshots that you own, and private snapshots owned by other
 // Amazon Web Services accounts for which you have explicit create volume
 // permissions. The create volume permissions fall into the following categories:
-//   - public: The owner of the snapshot granted create volume permissions for the snapshot to the all group. All Amazon Web Services accounts have create volume permissions for these snapshots.
-//   - explicit: The owner of the snapshot granted create volume permissions to a specific Amazon Web Services account.
-//   - implicit: An Amazon Web Services account has implicit create volume permissions for all snapshots it owns.
+//   - public: The owner of the snapshot granted create volume permissions for the
+//     snapshot to the all group. All Amazon Web Services accounts have create volume
+//     permissions for these snapshots.
+//   - explicit: The owner of the snapshot granted create volume permissions to a
+//     specific Amazon Web Services account.
+//   - implicit: An Amazon Web Services account has implicit create volume
+//     permissions for all snapshots it owns.
 //
 // The list of snapshots returned can be filtered by specifying snapshot IDs,
 // snapshot owners, or Amazon Web Services accounts with create volume permissions.
@@ -34,14 +38,14 @@ import (
 // not have access, it is not included in the returned results. If you specify one
 // or more snapshot owners using the OwnerIds option, only snapshots from the
 // specified owners and for which you have access are returned. The results can
-// include the Amazon Web Services account IDs of the specified owners, amazon
-// for snapshots owned by Amazon, or self for snapshots that you own. If you
-// specify a list of restorable users, only snapshots with create snapshot
-// permissions for those users are returned. You can specify Amazon Web Services
-// account IDs (if you own the snapshots), self for snapshots for which you own
-// or have explicit permissions, or all for public snapshots. If you are
-// describing a long list of snapshots, we recommend that you paginate the output
-// to make the list more manageable. For more information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+// include the Amazon Web Services account IDs of the specified owners, amazon for
+// snapshots owned by Amazon, or self for snapshots that you own. If you specify a
+// list of restorable users, only snapshots with create snapshot permissions for
+// those users are returned. You can specify Amazon Web Services account IDs (if
+// you own the snapshots), self for snapshots for which you own or have explicit
+// permissions, or all for public snapshots. If you are describing a long list of
+// snapshots, we recommend that you paginate the output to make the list more
+// manageable. For more information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 // . To get the state of fast snapshot restores for a snapshot, use
 // DescribeFastSnapshotRestores . For more information about EBS snapshots, see
 // Amazon EBS snapshots (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html)
@@ -70,19 +74,27 @@ type DescribeSnapshotsInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - description - A description of the snapshot.
-	//     - encrypted - Indicates whether the snapshot is encrypted ( true | false )
-	//     - owner-alias - The owner alias, from an Amazon-maintained list ( amazon ). This is not the user-configured Amazon Web Services account alias set using the IAM console. We recommend that you use the related parameter instead of this filter.
-	//     - owner-id - The Amazon Web Services account ID of the owner. We recommend that you use the related parameter instead of this filter.
-	//     - progress - The progress of the snapshot, as a percentage (for example, 80%).
-	//     - snapshot-id - The snapshot ID.
-	//     - start-time - The time stamp when the snapshot was initiated.
-	//     - status - The status of the snapshot ( pending | completed | error ).
-	//     - storage-tier - The storage tier of the snapshot ( archive | standard ).
-	//     - tag : - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
-	//     - tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
-	//     - volume-id - The ID of the volume the snapshot is for.
-	//     - volume-size - The size of the volume, in GiB.
+	//   - description - A description of the snapshot.
+	//   - encrypted - Indicates whether the snapshot is encrypted ( true | false )
+	//   - owner-alias - The owner alias, from an Amazon-maintained list ( amazon ).
+	//   This is not the user-configured Amazon Web Services account alias set using the
+	//   IAM console. We recommend that you use the related parameter instead of this
+	//   filter.
+	//   - owner-id - The Amazon Web Services account ID of the owner. We recommend
+	//   that you use the related parameter instead of this filter.
+	//   - progress - The progress of the snapshot, as a percentage (for example, 80%).
+	//   - snapshot-id - The snapshot ID.
+	//   - start-time - The time stamp when the snapshot was initiated.
+	//   - status - The status of the snapshot ( pending | completed | error ).
+	//   - storage-tier - The storage tier of the snapshot ( archive | standard ).
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - volume-id - The ID of the volume the snapshot is for.
+	//   - volume-size - The size of the volume, in GiB.
 	Filters []types.Filter
 
 	// The maximum number of snapshots to return for this request. This value can be
@@ -93,8 +105,8 @@ type DescribeSnapshotsInput struct {
 	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues
-	// from the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	// Scopes the results to snapshots with the specified owners. You can specify a
@@ -115,7 +127,7 @@ type DescribeSnapshotsInput struct {
 type DescribeSnapshotsOutput struct {
 
 	// The token to include in another request to return the next page of snapshots.
-	// This value is null  when there are no more snapshots to return.
+	// This value is null when there are no more snapshots to return.
 	NextToken *string
 
 	// Information about the snapshots.
@@ -195,8 +207,7 @@ type DescribeSnapshotsAPIClient interface {
 
 var _ DescribeSnapshotsAPIClient = (*Client)(nil)
 
-// DescribeSnapshotsPaginatorOptions is the paginator options for
-// DescribeSnapshots
+// DescribeSnapshotsPaginatorOptions is the paginator options for DescribeSnapshots
 type DescribeSnapshotsPaginatorOptions struct {
 	// The maximum number of snapshots to return for this request. This value can be
 	// between 5 and 1,000; if this value is larger than 1,000, only 1,000 results are
@@ -206,8 +217,8 @@ type DescribeSnapshotsPaginatorOptions struct {
 	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

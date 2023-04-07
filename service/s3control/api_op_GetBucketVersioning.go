@@ -15,8 +15,8 @@ import (
 	"strings"
 )
 
-// This operation returns the versioning state for S3 on Outposts buckets only.
-// To return the versioning state for an S3 bucket, see GetBucketVersioning (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html)
+// This operation returns the versioning state for S3 on Outposts buckets only. To
+// return the versioning state for an S3 bucket, see GetBucketVersioning (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html)
 // in the Amazon S3 API Reference. Returns the versioning state for an S3 on
 // Outposts bucket. With S3 Versioning, you can save multiple distinct copies of
 // your objects and recover from unintended user actions and application failures.
@@ -26,7 +26,7 @@ import (
 // in the Amazon S3 User Guide. All Amazon S3 on Outposts REST API requests for
 // this action require an additional parameter of x-amz-outpost-id to be passed
 // with the request. In addition, you must use an S3 on Outposts endpoint hostname
-// prefix instead of s3-control. For an example of the request syntax for Amazon
+// prefix instead of s3-control . For an example of the request syntax for Amazon
 // S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the
 // x-amz-outpost-id derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html#API_control_GetBucketVersioning_Examples)
 // section. The following operations are related to GetBucketVersioning for S3 on
@@ -66,10 +66,10 @@ type GetBucketVersioningInput struct {
 
 type GetBucketVersioningOutput struct {
 
-	// Specifies whether MFA delete is enabled in the bucket versioning
-	// configuration. This element is returned only if the bucket has been configured
-	// with MFA delete. If MFA delete has never been configured for the bucket, this
-	// element is not returned.
+	// Specifies whether MFA delete is enabled in the bucket versioning configuration.
+	// This element is returned only if the bucket has been configured with MFA delete.
+	// If MFA delete has never been configured for the bucket, this element is not
+	// returned.
 	MFADelete types.MFADeleteStatus
 
 	// The versioning state of the S3 on Outposts bucket.

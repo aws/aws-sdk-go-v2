@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a bot under an Amazon Chime AppInstance. The request consists of a
-// unique Configuration  and Name  for that bot.
+// Creates a bot under an Amazon Chime AppInstance . The request consists of a
+// unique Configuration and Name for that bot.
 func (c *Client) CreateAppInstanceBot(ctx context.Context, params *CreateAppInstanceBotInput, optFns ...func(*Options)) (*CreateAppInstanceBotOutput, error) {
 	if params == nil {
 		params = &CreateAppInstanceBotInput{}
@@ -31,7 +31,7 @@ func (c *Client) CreateAppInstanceBot(ctx context.Context, params *CreateAppInst
 
 type CreateAppInstanceBotInput struct {
 
-	// The ARN of the AppInstance  request.
+	// The ARN of the AppInstance request.
 	//
 	// This member is required.
 	AppInstanceArn *string

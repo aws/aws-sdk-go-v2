@@ -43,10 +43,10 @@ type ListResourceTagsInput struct {
 
 	// Gets tags on the specified KMS key. Specify the key ID or key ARN of the KMS
 	// key. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey .
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey .
 	//
 	// This member is required.
 	KeyId *string
@@ -61,7 +61,7 @@ type ListResourceTagsInput struct {
 	// Use this parameter in a subsequent request after you receive a response with
 	// truncated results. Set it to the value of NextMarker from the truncated
 	// response you just received. Do not attempt to construct this value. Use only the
-	// value of NextMarker  from the truncated response you just received.
+	// value of NextMarker from the truncated response you just received.
 	Marker *string
 
 	noSmithyDocumentSerde
@@ -80,10 +80,10 @@ type ListResourceTagsOutput struct {
 	// in the Key Management Service Developer Guide.
 	Tags []types.Tag
 
-	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To get more items, pass
-	// the value of the NextMarker  element in thisresponse to the Marker parameter
-	// in a subsequent request.
+	// A flag that indicates whether there are more items in the list. When this value
+	// is true, the list in this response is truncated. To get more items, pass the
+	// value of the NextMarker element in thisresponse to the Marker parameter in a
+	// subsequent request.
 	Truncated bool
 
 	// Metadata pertaining to the operation's result.
@@ -172,8 +172,8 @@ type ListResourceTagsPaginatorOptions struct {
 	// to 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

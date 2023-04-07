@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// Returns a list of DataSource  that match the search criteria in the request.
+// Returns a list of DataSource that match the search criteria in the request.
 func (c *Client) DescribeDataSources(ctx context.Context, params *DescribeDataSourcesInput, optFns ...func(*Options)) (*DescribeDataSourcesOutput, error) {
 	if params == nil {
 		params = &DescribeDataSourcesInput{}
@@ -34,61 +34,63 @@ func (c *Client) DescribeDataSources(ctx context.Context, params *DescribeDataSo
 
 type DescribeDataSourcesInput struct {
 
-	// The equal to operator. The DataSource  results will have FilterVariable values
+	// The equal to operator. The DataSource results will have FilterVariable values
 	// that exactly match the value specified with EQ .
 	EQ *string
 
 	// Use one of the following variables to filter a list of DataSource :
-	//     - CreatedAt - Sets the search criteria to DataSource creation dates.
-	//     - Status - Sets the search criteria to DataSource statuses.
-	//     - Name - Sets the search criteria to the contents of DataSource Name .
-	//     - DataUri - Sets the search criteria to the URI of data files used to create the DataSource . The URI can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.
-	//     - IAMUser - Sets the search criteria to the user account that invoked the DataSource creation.
+	//   - CreatedAt - Sets the search criteria to DataSource creation dates.
+	//   - Status - Sets the search criteria to DataSource statuses.
+	//   - Name - Sets the search criteria to the contents of DataSource Name .
+	//   - DataUri - Sets the search criteria to the URI of data files used to create
+	//   the DataSource . The URI can identify either a file or an Amazon Simple
+	//   Storage Service (Amazon S3) bucket or directory.
+	//   - IAMUser - Sets the search criteria to the user account that invoked the
+	//   DataSource creation.
 	FilterVariable types.DataSourceFilterVariable
 
-	// The greater than or equal to operator. The DataSource  results will have
-	// FilterVariablevalues that are greater than or equal to the value specified
-	// with GE .
+	// The greater than or equal to operator. The DataSource results will have
+	// FilterVariable values that are greater than or equal to the value specified with
+	// GE .
 	GE *string
 
-	// The greater than operator. The DataSource  results will have FilterVariable
+	// The greater than operator. The DataSource results will have FilterVariable
 	// values that are greater than the value specified with GT .
 	GT *string
 
-	// The less than or equal to operator. The DataSource  results will have
-	// FilterVariable values that are less than or equal to the value specified with
-	// LE .
+	// The less than or equal to operator. The DataSource results will have
+	// FilterVariable values that are less than or equal to the value specified with LE
+	// .
 	LE *string
 
-	// The less than operator. The DataSource  results will have FilterVariable
-	// values that are less than the value specified with LT .
+	// The less than operator. The DataSource results will have FilterVariable values
+	// that are less than the value specified with LT .
 	LT *string
 
-	// The maximum number of DataSource  to include in the result.
+	// The maximum number of DataSource to include in the result.
 	Limit *int32
 
-	// The not equal to operator. The DataSource  results will have FilterVariable
+	// The not equal to operator. The DataSource results will have FilterVariable
 	// values not equal to the value specified with NE .
 	NE *string
 
 	// The ID of the page in the paginated results.
 	NextToken *string
 
-	// A string that is found at the beginning of a variable, such as Name  or Id.
-	// For example, a DataSource  could have the Name 2014-09-09-HolidayGiftMailer.
-	// To search for this DataSource , select Name  for the FilterVariable and any of
-	// the following strings for the Prefix :
-	//     - 2014-09
-	//     - 2014-09-09
-	//     - 2014-09-09-Holiday
+	// A string that is found at the beginning of a variable, such as Name or Id . For
+	// example, a DataSource could have the Name 2014-09-09-HolidayGiftMailer . To
+	// search for this DataSource , select Name for the FilterVariable and any of the
+	// following strings for the Prefix :
+	//   - 2014-09
+	//   - 2014-09-09
+	//   - 2014-09-09-Holiday
 	Prefix *string
 
 	// A two-value parameter that determines the sequence of the resulting list of
 	// DataSource .
-	//     - asc - Arranges the list in ascending order (A-Z, 0-9).
-	//     - dsc - Arranges the list in descending order (Z-A, 9-0).
-	// Results are
-	// sorted by FilterVariable .
+	//   - asc - Arranges the list in ascending order (A-Z, 0-9).
+	//   - dsc - Arranges the list in descending order (Z-A, 9-0).
+	// Results are sorted by FilterVariable .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -102,7 +104,7 @@ type DescribeDataSourcesOutput struct {
 	// more page follows.
 	NextToken *string
 
-	// A list of DataSource  that meet the search criteria.
+	// A list of DataSource that meet the search criteria.
 	Results []types.DataSource
 
 	// Metadata pertaining to the operation's result.
@@ -182,11 +184,11 @@ var _ DescribeDataSourcesAPIClient = (*Client)(nil)
 // DescribeDataSourcesPaginatorOptions is the paginator options for
 // DescribeDataSources
 type DescribeDataSourcesPaginatorOptions struct {
-	// The maximum number of DataSource  to include in the result.
+	// The maximum number of DataSource to include in the result.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

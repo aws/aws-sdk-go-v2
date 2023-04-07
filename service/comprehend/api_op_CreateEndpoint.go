@@ -45,8 +45,8 @@ type CreateEndpointInput struct {
 	// This member is required.
 	EndpointName *string
 
-	// An idempotency token provided by the customer. If this token matches a
-	// previous endpoint creation request, Amazon Comprehend will not return a
+	// An idempotency token provided by the customer. If this token matches a previous
+	// endpoint creation request, Amazon Comprehend will not return a
 	// ResourceInUseException .
 	ClientRequestToken *string
 
@@ -76,8 +76,7 @@ type CreateEndpointOutput struct {
 	// The Amazon Resource Number (ARN) of the endpoint being created.
 	EndpointArn *string
 
-	// The Amazon Resource Number (ARN) of the model to which the endpoint is
-	// attached.
+	// The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
 	ModelArn *string
 
 	// Metadata pertaining to the operation's result.

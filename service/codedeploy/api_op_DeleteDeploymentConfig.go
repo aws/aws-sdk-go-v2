@@ -27,7 +27,7 @@ func (c *Client) DeleteDeploymentConfig(ctx context.Context, params *DeleteDeplo
 	return out, nil
 }
 
-// Represents the input of a DeleteDeploymentConfig  operation.
+// Represents the input of a DeleteDeploymentConfig operation.
 type DeleteDeploymentConfigInput struct {
 
 	// The name of a deployment configuration associated with the IAM user or Amazon

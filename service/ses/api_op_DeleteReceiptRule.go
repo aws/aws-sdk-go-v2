@@ -28,9 +28,8 @@ func (c *Client) DeleteReceiptRule(ctx context.Context, params *DeleteReceiptRul
 	return out, nil
 }
 
-// Represents a request to delete a receipt rule. You use receipt rules to
-// receive email with Amazon SES. For more information, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// Represents a request to delete a receipt rule. You use receipt rules to receive
+// email with Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
 // .
 type DeleteReceiptRuleInput struct {
 

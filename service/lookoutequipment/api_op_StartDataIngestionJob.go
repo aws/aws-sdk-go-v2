@@ -62,7 +62,7 @@ type StartDataIngestionJobOutput struct {
 	// Indicates the job ID of the data ingestion job.
 	JobId *string
 
-	// Indicates the status of the StartDataIngestionJob  operation.
+	// Indicates the status of the StartDataIngestionJob operation.
 	Status types.IngestionJobStatus
 
 	// Metadata pertaining to the operation's result.

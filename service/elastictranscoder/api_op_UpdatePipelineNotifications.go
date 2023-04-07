@@ -30,7 +30,7 @@ func (c *Client) UpdatePipelineNotifications(ctx context.Context, params *Update
 	return out, nil
 }
 
-// The UpdatePipelineNotificationsRequest  structure.
+// The UpdatePipelineNotificationsRequest structure.
 type UpdatePipelineNotificationsInput struct {
 
 	// The identifier of the pipeline for which you want to change notification
@@ -42,10 +42,19 @@ type UpdatePipelineNotificationsInput struct {
 	// The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic
 	// that you want to notify to report job status. To receive notifications, you must
 	// also subscribe to the new topic in the Amazon SNS console.
-	//     - Progressing: The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process jobs that are added to this pipeline. This is the ARN that Amazon SNS returned when you created the topic.
-	//     - Complete: The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing a job. This is the ARN that Amazon SNS returned when you created the topic.
-	//     - Warning: The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition. This is the ARN that Amazon SNS returned when you created the topic.
-	//     - Error: The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition. This is the ARN that Amazon SNS returned when you created the topic.
+	//   - Progressing: The topic ARN for the Amazon Simple Notification Service
+	//   (Amazon SNS) topic that you want to notify when Elastic Transcoder has started
+	//   to process jobs that are added to this pipeline. This is the ARN that Amazon SNS
+	//   returned when you created the topic.
+	//   - Complete: The topic ARN for the Amazon SNS topic that you want to notify
+	//   when Elastic Transcoder has finished processing a job. This is the ARN that
+	//   Amazon SNS returned when you created the topic.
+	//   - Warning: The topic ARN for the Amazon SNS topic that you want to notify
+	//   when Elastic Transcoder encounters a warning condition. This is the ARN that
+	//   Amazon SNS returned when you created the topic.
+	//   - Error: The topic ARN for the Amazon SNS topic that you want to notify when
+	//   Elastic Transcoder encounters an error condition. This is the ARN that Amazon
+	//   SNS returned when you created the topic.
 	//
 	// This member is required.
 	Notifications *types.Notifications
@@ -53,7 +62,7 @@ type UpdatePipelineNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The UpdatePipelineNotificationsResponse  structure.
+// The UpdatePipelineNotificationsResponse structure.
 type UpdatePipelineNotificationsOutput struct {
 
 	// A section of the response body that provides information about the pipeline

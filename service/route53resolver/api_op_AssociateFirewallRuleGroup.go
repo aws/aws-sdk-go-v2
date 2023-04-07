@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a FirewallRuleGroup with a VPC, to provide DNS filtering for the
-// VPC.
+// Associates a FirewallRuleGroup with a VPC, to provide DNS filtering for the VPC.
 func (c *Client) AssociateFirewallRuleGroup(ctx context.Context, params *AssociateFirewallRuleGroupInput, optFns ...func(*Options)) (*AssociateFirewallRuleGroupOutput, error) {
 	if params == nil {
 		params = &AssociateFirewallRuleGroupInput{}
@@ -55,14 +54,12 @@ type AssociateFirewallRuleGroupInput struct {
 	// single VPC. To make it easier to insert rule groups later, leave space between
 	// the numbers, for example, use 101, 200, and so on. You can change the priority
 	// setting for a rule group association after you create it. The allowed values for
-	//
 	// Priority are between 100 and 9900.
 	//
 	// This member is required.
 	Priority *int32
 
-	// The unique identifier of the VPC that you want to associate with the rule
-	// group.
+	// The unique identifier of the VPC that you want to associate with the rule group.
 	//
 	// This member is required.
 	VpcId *string

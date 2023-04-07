@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the emergency calling details from the specified Amazon Chime SDK
-// Voice Connector.
+// Deletes the emergency calling details from the specified Amazon Chime SDK Voice
+// Connector.
 func (c *Client) DeleteVoiceConnectorEmergencyCallingConfiguration(ctx context.Context, params *DeleteVoiceConnectorEmergencyCallingConfigurationInput, optFns ...func(*Options)) (*DeleteVoiceConnectorEmergencyCallingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorEmergencyCallingConfigurationInput{}

@@ -37,13 +37,15 @@ type DescribeTransitGatewayMulticastDomainsInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	//     - state - The state of the transit gateway multicast domain. Valid values are pending | available | deleting | deleted .
-	//     - transit-gateway-id - The ID of the transit gateway.
-	//     - transit-gateway-multicast-domain-id - The ID of the transit gateway multicast domain.
+	//   - state - The state of the transit gateway multicast domain. Valid values are
+	//   pending | available | deleting | deleted .
+	//   - transit-gateway-id - The ID of the transit gateway.
+	//   - transit-gateway-multicast-domain-id - The ID of the transit gateway
+	//   multicast domain.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -130,23 +132,23 @@ func (c *Client) addOperationDescribeTransitGatewayMulticastDomainsMiddlewares(s
 	return nil
 }
 
-// DescribeTransitGatewayMulticastDomainsAPIClient is a client that implements
-// the DescribeTransitGatewayMulticastDomains operation.
+// DescribeTransitGatewayMulticastDomainsAPIClient is a client that implements the
+// DescribeTransitGatewayMulticastDomains operation.
 type DescribeTransitGatewayMulticastDomainsAPIClient interface {
 	DescribeTransitGatewayMulticastDomains(context.Context, *DescribeTransitGatewayMulticastDomainsInput, ...func(*Options)) (*DescribeTransitGatewayMulticastDomainsOutput, error)
 }
 
 var _ DescribeTransitGatewayMulticastDomainsAPIClient = (*Client)(nil)
 
-// DescribeTransitGatewayMulticastDomainsPaginatorOptions is the paginator
-// options for DescribeTransitGatewayMulticastDomains
+// DescribeTransitGatewayMulticastDomainsPaginatorOptions is the paginator options
+// for DescribeTransitGatewayMulticastDomains
 type DescribeTransitGatewayMulticastDomainsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

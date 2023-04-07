@@ -14,8 +14,8 @@ import (
 // directory from a snapshot, any changes made to the directory after the snapshot
 // date are overwritten. This action returns as soon as the restore operation is
 // initiated. You can monitor the progress of the restore operation by calling the
-// DescribeDirectoriesoperation with the directory identifier. When the
-// DirectoryDescription.Stage value changes to Active, the restore operation is
+// DescribeDirectories operation with the directory identifier. When the
+// DirectoryDescription.Stage value changes to Active , the restore operation is
 // complete.
 func (c *Client) RestoreFromSnapshot(ctx context.Context, params *RestoreFromSnapshotInput, optFns ...func(*Options)) (*RestoreFromSnapshotOutput, error) {
 	if params == nil {
@@ -32,7 +32,7 @@ func (c *Client) RestoreFromSnapshot(ctx context.Context, params *RestoreFromSna
 	return out, nil
 }
 
-// An object representing the inputs for the RestoreFromSnapshot  operation.
+// An object representing the inputs for the RestoreFromSnapshot operation.
 type RestoreFromSnapshotInput struct {
 
 	// The identifier of the snapshot to restore from.
@@ -43,7 +43,7 @@ type RestoreFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the RestoreFromSnapshot  operation.
+// Contains the results of the RestoreFromSnapshot operation.
 type RestoreFromSnapshotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

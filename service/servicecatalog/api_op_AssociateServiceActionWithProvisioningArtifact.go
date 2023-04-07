@@ -44,9 +44,9 @@ type AssociateServiceActionWithProvisioningArtifactInput struct {
 	ServiceActionId *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

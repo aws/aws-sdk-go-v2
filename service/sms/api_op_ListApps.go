@@ -48,8 +48,8 @@ type ListAppsOutput struct {
 	// The application summaries.
 	Apps []types.AppSummary
 
-	// The token required to retrieve the next set of results. This value is null
-	// when there are no more results to return.
+	// The token required to retrieve the next set of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

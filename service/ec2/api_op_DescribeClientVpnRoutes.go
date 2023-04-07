@@ -42,9 +42,10 @@ type DescribeClientVpnRoutesInput struct {
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.
-	//     - destination-cidr - The CIDR of the route destination.
-	//     - origin - How the route was associated with the Client VPN endpoint ( associate | add-route ).
-	//     - target-subnet - The ID of the subnet through which traffic is routed.
+	//   - destination-cidr - The CIDR of the route destination.
+	//   - origin - How the route was associated with the Client VPN endpoint (
+	//   associate | add-route ).
+	//   - target-subnet - The ID of the subnet through which traffic is routed.
 	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
@@ -152,8 +153,8 @@ type DescribeClientVpnRoutesPaginatorOptions struct {
 	// value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

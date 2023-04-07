@@ -27,7 +27,7 @@ func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput
 	return out, nil
 }
 
-// Represents the input of a GetApplication  operation.
+// Represents the input of a GetApplication operation.
 type GetApplicationInput struct {
 
 	// The name of an CodeDeploy application associated with the IAM user or Amazon
@@ -39,7 +39,7 @@ type GetApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetApplication  operation.
+// Represents the output of a GetApplication operation.
 type GetApplicationOutput struct {
 
 	// Information about the application.

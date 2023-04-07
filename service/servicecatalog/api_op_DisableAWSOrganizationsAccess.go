@@ -17,7 +17,7 @@ import (
 // management account in the organization can call this API. You cannot call this
 // API if there are active delegated administrators in the organization. Note that
 // a delegated administrator is not authorized to invoke
-// DisableAWSOrganizationsAccess. If you share an Service Catalog portfolio in an
+// DisableAWSOrganizationsAccess . If you share an Service Catalog portfolio in an
 // organization within Organizations, and then disable Organizations access for
 // Service Catalog, the portfolio access permissions will not sync with the latest
 // changes to the organization structure. Specifically, accounts that you removed

@@ -56,14 +56,14 @@ type DescribeSpotFleetRequestHistoryInput struct {
 	// The type of events to describe. By default, all events are described.
 	EventType types.EventType
 
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	MaxResults *int32
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -81,7 +81,7 @@ type DescribeSpotFleetRequestHistoryOutput struct {
 	LastEvaluatedTime *time.Time
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// The ID of the Spot Fleet request.

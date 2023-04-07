@@ -6,8 +6,8 @@ import (
 	internaldocument "github.com/aws/aws-sdk-go-v2/service/kendra/internal/document"
 )
 
-// Interface defines a document which is a protocol-agnostic type which supports
-// a JSON-like data-model. You can use this type to send UTF-8 strings, arbitrary
+// Interface defines a document which is a protocol-agnostic type which supports a
+// JSON-like data-model. You can use this type to send UTF-8 strings, arbitrary
 // precision numbers, booleans, nulls, a list of these values, and a map of UTF-8
 // strings to these values.
 //

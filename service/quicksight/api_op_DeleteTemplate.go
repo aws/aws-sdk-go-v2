@@ -40,7 +40,7 @@ type DeleteTemplateInput struct {
 	TemplateId *string
 
 	// Specifies the version of the template that you want to delete. If you don't
-	// provide a version number, DeleteTemplate  deletes all versions of the template.
+	// provide a version number, DeleteTemplate deletes all versions of the template.
 	VersionNumber *int64
 
 	noSmithyDocumentSerde

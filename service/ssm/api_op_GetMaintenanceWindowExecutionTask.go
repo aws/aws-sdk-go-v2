@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves the details about a specific task run as part of a maintenance
-// window execution.
+// Retrieves the details about a specific task run as part of a maintenance window
+// execution.
 func (c *Client) GetMaintenanceWindowExecutionTask(ctx context.Context, params *GetMaintenanceWindowExecutionTaskInput, optFns ...func(*Options)) (*GetMaintenanceWindowExecutionTaskOutput, error) {
 	if params == nil {
 		params = &GetMaintenanceWindowExecutionTaskInput{}
@@ -85,12 +85,12 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 
 	// The parameters passed to the task when it was run. TaskParameters has been
 	// deprecated. To specify parameters to pass to a task when it runs, instead use
-	// the Parameters  option in the TaskInvocationParameters structure. For
+	// the Parameters option in the TaskInvocationParameters structure. For
 	// information about how Systems Manager handles these options for the supported
-	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
+	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters .
 	// The map has the following format:
-	//     - Key : string, between 1 and 255 characters
-	//     - Value : an array of strings, each between 1 and 255 characters
+	//   - Key : string, between 1 and 255 characters
+	//   - Value : an array of strings, each between 1 and 255 characters
 	TaskParameters []map[string]types.MaintenanceWindowTaskParameterValueExpression
 
 	// The CloudWatch alarms that were invoked by the maintenance window task.

@@ -40,8 +40,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The list of tag keys and values associated with the resource that you
-	// specified.
+	// The list of tag keys and values associated with the resource that you specified.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

@@ -94,8 +94,7 @@ func (e *InternalErrorException) ErrorCode() string {
 }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Exception that indicates that the operation would not cause any change to
-// occur.
+// Exception that indicates that the operation would not cause any change to occur.
 type InvalidOperationException struct {
 	Message *string
 

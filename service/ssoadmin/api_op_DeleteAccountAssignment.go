@@ -13,7 +13,7 @@ import (
 
 // Deletes a principal's access from a specified AWS account using a specified
 // permission set. After a successful response, call
-// DescribeAccountAssignmentCreationStatusto describe the status of an assignment
+// DescribeAccountAssignmentCreationStatus to describe the status of an assignment
 // deletion request.
 func (c *Client) DeleteAccountAssignment(ctx context.Context, params *DeleteAccountAssignmentInput, optFns ...func(*Options)) (*DeleteAccountAssignmentOutput, error) {
 	if params == nil {
@@ -33,8 +33,8 @@ func (c *Client) DeleteAccountAssignment(ctx context.Context, params *DeleteAcco
 type DeleteAccountAssignmentInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string

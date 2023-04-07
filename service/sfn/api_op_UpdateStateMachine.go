@@ -14,17 +14,17 @@ import (
 
 // Updates an existing state machine by modifying its definition , roleArn , or
 // loggingConfiguration . Running executions will continue to use the previous
-// definition and roleArn . You must include at least one of definition  or
-// roleArn or you will receive a MissingRequiredParameter error. If the given
-// state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it
-// will fail with ValidationException. A qualified state machine ARN refers to a
+// definition and roleArn . You must include at least one of definition or roleArn
+// or you will receive a MissingRequiredParameter error. If the given state
+// machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will
+// fail with ValidationException. A qualified state machine ARN refers to a
 // Distributed Map state defined within a state machine. For example, the qualified
 // state machine ARN
 // arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel
 // refers to a Distributed Map state with a label mapStateLabel in the state
 // machine named stateMachineName . All StartExecution calls within a few seconds
-// will use the updated definition  and roleArn. Executions started immediately
-// after calling UpdateStateMachine  may use the previous state machine definition
+// will use the updated definition and roleArn . Executions started immediately
+// after calling UpdateStateMachine may use the previous state machine definition
 // and roleArn .
 func (c *Client) UpdateStateMachine(ctx context.Context, params *UpdateStateMachineInput, optFns ...func(*Options)) (*UpdateStateMachineOutput, error) {
 	if params == nil {
@@ -53,7 +53,7 @@ type UpdateStateMachineInput struct {
 	// .
 	Definition *string
 
-	// The LoggingConfiguration  data type is used to set CloudWatch Logs options.
+	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// The Amazon Resource Name (ARN) of the IAM role of the state machine.

@@ -58,8 +58,8 @@ type UpdateJobExecutionInput struct {
 	// status data.)
 	ExpectedVersion *int64
 
-	// Optional. When set to true, the response contains the job document. The
-	// default is false.
+	// Optional. When set to true, the response contains the job document. The default
+	// is false.
 	IncludeJobDocument *bool
 
 	// Optional. When included and set to true, the response contains the
@@ -72,9 +72,9 @@ type UpdateJobExecutionInput struct {
 
 	// Specifies the amount of time this device has to finish execution of this job.
 	// If the job execution status is not set to a terminal state before this timer
-	// expires, or before the timer is reset (by again calling UpdateJobExecution,
+	// expires, or before the timer is reset (by again calling UpdateJobExecution ,
 	// setting the status to IN_PROGRESS and specifying a new timeout value in this
-	// field) the job execution status will be automatically set to TIMED_OUT. Note
+	// field) the job execution status will be automatically set to TIMED_OUT . Note
 	// that setting or resetting this timeout has no effect on that job execution
 	// timeout which may have been specified when the job was created ( CreateJob
 	// using field timeoutConfig ).

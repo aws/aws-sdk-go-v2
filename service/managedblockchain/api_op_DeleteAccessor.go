@@ -12,12 +12,12 @@ import (
 
 // Deletes an accessor that your Amazon Web Services account owns. An accessor
 // object is a container that has the information required for token based access
-// to your Ethereum nodes including, the BILLING_TOKEN. After an accessor is
-// deleted, the status of the accessor changes from AVAILABLE  to PENDING_DELETION
-// . An accessor in the PENDING_DELETION state can’t be used for new WebSocket
+// to your Ethereum nodes including, the BILLING_TOKEN . After an accessor is
+// deleted, the status of the accessor changes from AVAILABLE to PENDING_DELETION .
+// An accessor in the PENDING_DELETION state can’t be used for new WebSocket
 // requests or HTTP requests. However, WebSocket connections that were initiated
-// while the accessor was in the AVAILABLE state remain open until they expire
-// (up to 2 hours).
+// while the accessor was in the AVAILABLE state remain open until they expire (up
+// to 2 hours).
 func (c *Client) DeleteAccessor(ctx context.Context, params *DeleteAccessorInput, optFns ...func(*Options)) (*DeleteAccessorOutput, error) {
 	if params == nil {
 		params = &DeleteAccessorInput{}

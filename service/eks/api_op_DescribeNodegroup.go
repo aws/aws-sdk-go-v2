@@ -370,10 +370,10 @@ func (w *NodegroupDeletedWaiter) Wait(ctx context.Context, params *DescribeNodeg
 	return err
 }
 
-// WaitForOutput calls the waiter function for NodegroupDeleted waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for NodegroupDeleted waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *NodegroupDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeNodegroupInput, maxWaitDur time.Duration, optFns ...func(*NodegroupDeletedWaiterOptions)) (*DescribeNodegroupOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

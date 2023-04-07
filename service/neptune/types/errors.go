@@ -949,8 +949,7 @@ func (e *InsufficientDBClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Specified DB instance class is not available in the specified Availability
-// Zone.
+// Specified DB instance class is not available in the specified Availability Zone.
 type InsufficientDBInstanceCapacityFault struct {
 	Message *string
 
@@ -978,8 +977,8 @@ func (e *InsufficientDBInstanceCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// There is insufficient storage available for the current action. You may be
-// able to resolve this error by updating your subnet group to use different
+// There is insufficient storage available for the current action. You may be able
+// to resolve this error by updating your subnet group to use different
 // Availability Zones that have more storage available.
 type InsufficientStorageClusterCapacityFault struct {
 	Message *string
@@ -1490,8 +1489,8 @@ func (e *ResourceNotFoundFault) ErrorCode() string {
 }
 func (e *ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have exceeded the maximum number of accounts that you can share a manual
-// DB snapshot with.
+// You have exceeded the maximum number of accounts that you can share a manual DB
+// snapshot with.
 type SharedSnapshotQuotaExceededFault struct {
 	Message *string
 

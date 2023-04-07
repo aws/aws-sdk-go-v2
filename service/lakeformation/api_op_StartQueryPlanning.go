@@ -50,7 +50,7 @@ type StartQueryPlanningOutput struct {
 
 	// The ID of the plan query operation can be used to fetch the actual work unit
 	// descriptors that are produced as the result of the operation. The ID is also
-	// used to get the query state and as an input to the Execute  operation.
+	// used to get the query state and as an input to the Execute operation.
 	//
 	// This member is required.
 	QueryId *string

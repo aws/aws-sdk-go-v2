@@ -38,14 +38,13 @@ type DeleteAnomalyDetectorInput struct {
 	Dimensions []types.Dimension
 
 	// The metric math anomaly detector to be deleted. When using
-	// MetricMathAnomalyDetector, you cannot include following parameters in the same
+	// MetricMathAnomalyDetector , you cannot include following parameters in the same
 	// operation:
-	//     - Dimensions ,
-	//     - MetricName
-	//     - Namespace
-	//     - Stat
-	//     - the SingleMetricAnomalyDetector parameters of DeleteAnomalyDetectorInput
-	//
+	//   - Dimensions ,
+	//   - MetricName
+	//   - Namespace
+	//   - Stat
+	//   - the SingleMetricAnomalyDetector parameters of DeleteAnomalyDetectorInput
 	// Instead, specify the metric math anomaly detector attributes as part of the
 	// MetricMathAnomalyDetector property.
 	MetricMathAnomalyDetector *types.MetricMathAnomalyDetector
@@ -61,14 +60,13 @@ type DeleteAnomalyDetectorInput struct {
 	Namespace *string
 
 	// A single metric anomaly detector to be deleted. When using
-	// SingleMetricAnomalyDetector, you cannot include the following parameters in
-	// the same operation:
-	//     - Dimensions ,
-	//     - MetricName
-	//     - Namespace
-	//     - Stat
-	//     - the MetricMathAnomalyDetector parameters of DeleteAnomalyDetectorInput
-	//
+	// SingleMetricAnomalyDetector , you cannot include the following parameters in the
+	// same operation:
+	//   - Dimensions ,
+	//   - MetricName
+	//   - Namespace
+	//   - Stat
+	//   - the MetricMathAnomalyDetector parameters of DeleteAnomalyDetectorInput
 	// Instead, specify the single metric anomaly detector attributes as part of the
 	// SingleMetricAnomalyDetector property.
 	SingleMetricAnomalyDetector *types.SingleMetricAnomalyDetector

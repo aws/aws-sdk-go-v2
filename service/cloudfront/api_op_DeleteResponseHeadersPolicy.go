@@ -40,7 +40,7 @@ type DeleteResponseHeadersPolicyInput struct {
 	Id *string
 
 	// The version of the response headers policy that you are deleting. The version
-	// is the response headers policy's ETag  value, which you can get using
+	// is the response headers policy's ETag value, which you can get using
 	// ListResponseHeadersPolicies , GetResponseHeadersPolicy , or
 	// GetResponseHeadersPolicyConfig .
 	IfMatch *string

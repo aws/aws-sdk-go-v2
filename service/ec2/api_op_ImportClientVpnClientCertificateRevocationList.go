@@ -31,8 +31,8 @@ func (c *Client) ImportClientVpnClientCertificateRevocationList(ctx context.Cont
 
 type ImportClientVpnClientCertificateRevocationListInput struct {
 
-	// The client certificate revocation list file. For more information, see
-	// Generate a Client Certificate Revocation List (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate)
+	// The client certificate revocation list file. For more information, see Generate
+	// a Client Certificate Revocation List (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate)
 	// in the Client VPN Administrator Guide.
 	//
 	// This member is required.
@@ -55,7 +55,7 @@ type ImportClientVpnClientCertificateRevocationListInput struct {
 
 type ImportClientVpnClientCertificateRevocationListOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

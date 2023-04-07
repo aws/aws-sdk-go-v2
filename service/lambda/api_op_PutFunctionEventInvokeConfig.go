@@ -16,12 +16,12 @@ import (
 // on a function, version, or alias. If a configuration already exists for a
 // function, version, or alias, this operation overwrites it. If you exclude any
 // settings, they are removed. To set one option without affecting existing
-// settings for other options, use UpdateFunctionEventInvokeConfig. By default,
+// settings for other options, use UpdateFunctionEventInvokeConfig . By default,
 // Lambda retries an asynchronous invocation twice if the function returns an
 // error. It retains events in a queue for up to six hours. When an event fails all
 // processing attempts or stays in the asynchronous invocation queue for too long,
 // Lambda discards it. To retain discarded events, configure a dead-letter queue
-// with UpdateFunctionConfiguration. To send an invocation record to a queue,
+// with UpdateFunctionConfiguration . To send an invocation record to a queue,
 // topic, function, or event bus, specify a destination (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations)
 // . You can configure separate destinations for successful invocations
 // (on-success) and events that fail all processing attempts (on-failure). You can
@@ -44,23 +44,22 @@ func (c *Client) PutFunctionEventInvokeConfig(ctx context.Context, params *PutFu
 type PutFunctionEventInvokeConfigInput struct {
 
 	// The name of the Lambda function, version, or alias. Name formats
-	//     - Function name - my-function (name-only), my-function:v1 (with alias).
-	//     - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function .
-	//     - Partial ARN - 123456789012:function:my-function .
-	// You can append a
-	// version number or alias to any of the formats. The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//   - Function name - my-function (name-only), my-function:v1 (with alias).
+	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN - 123456789012:function:my-function .
+	// You can append a version number or alias to any of the formats. The length
+	// constraint applies only to the full ARN. If you specify only the function name,
+	// it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
 
 	// A destination for events after they have been sent to a function for
 	// processing. Destinations
-	//     - Function - The Amazon Resource Name (ARN) of a Lambda function.
-	//     - Queue - The ARN of an SQS queue.
-	//     - Topic - The ARN of an SNS topic.
-	//     - Event Bus - The ARN of an Amazon EventBridge event bus.
+	//   - Function - The Amazon Resource Name (ARN) of a Lambda function.
+	//   - Queue - The ARN of an SQS queue.
+	//   - Topic - The ARN of an SNS topic.
+	//   - Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig
 
 	// The maximum age of a request that Lambda sends to a function for processing.
@@ -79,10 +78,10 @@ type PutFunctionEventInvokeConfigOutput struct {
 
 	// A destination for events after they have been sent to a function for
 	// processing. Destinations
-	//     - Function - The Amazon Resource Name (ARN) of a Lambda function.
-	//     - Queue - The ARN of an SQS queue.
-	//     - Topic - The ARN of an SNS topic.
-	//     - Event Bus - The ARN of an Amazon EventBridge event bus.
+	//   - Function - The Amazon Resource Name (ARN) of a Lambda function.
+	//   - Queue - The ARN of an SQS queue.
+	//   - Topic - The ARN of an SNS topic.
+	//   - Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig
 
 	// The Amazon Resource Name (ARN) of the function.

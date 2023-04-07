@@ -49,8 +49,12 @@ type ListAliasesInput struct {
 	// The routing type to filter results on. Use this parameter to retrieve only
 	// aliases with a certain routing type. To retrieve all aliases, leave this
 	// parameter empty. Possible routing types include the following:
-	//     - SIMPLE -- The alias resolves to one specific fleet. Use this type when routing to active fleets.
-	//     - TERMINAL -- The alias does not resolve to a fleet but instead can be used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException with the RoutingStrategy (https://docs.aws.amazon.com/gamelift/latest/apireference/API_RoutingStrategy.html) message embedded.
+	//   - SIMPLE -- The alias resolves to one specific fleet. Use this type when
+	//   routing to active fleets.
+	//   - TERMINAL -- The alias does not resolve to a fleet but instead can be used
+	//   to display a message to the user. A terminal alias throws a
+	//   TerminalRoutingStrategyException with the RoutingStrategy (https://docs.aws.amazon.com/gamelift/latest/apireference/API_RoutingStrategy.html)
+	//   message embedded.
 	RoutingStrategyType types.RoutingStrategyType
 
 	noSmithyDocumentSerde
@@ -145,8 +149,8 @@ type ListAliasesPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -83,8 +83,8 @@ type DescribeFlowDefinitionOutput struct {
 	// An object containing information about what triggers a human review workflow.
 	HumanLoopActivationConfig *types.HumanLoopActivationConfig
 
-	// Container for configuring the source of human task requests. Used to specify
-	// if Amazon Rekognition or Amazon Textract is used as an integration source.
+	// Container for configuring the source of human task requests. Used to specify if
+	// Amazon Rekognition or Amazon Textract is used as an integration source.
 	HumanLoopRequestSource *types.HumanLoopRequestSource
 
 	// Metadata pertaining to the operation's result.

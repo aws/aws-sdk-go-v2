@@ -13,10 +13,10 @@ import (
 
 // Removes the specified metrics from being sent to an extended metrics
 // destination. If some metric definition IDs specified in a
-// BatchDeleteRumMetricDefinitionsoperations are not valid, those metric
+// BatchDeleteRumMetricDefinitions operations are not valid, those metric
 // definitions fail and return errors, but all valid metric definition IDs in the
 // same operation are still deleted. The maximum number of metric definitions that
-// you can specify in one BatchDeleteRumMetricDefinitions  operation is 200.
+// you can specify in one BatchDeleteRumMetricDefinitions operation is 200.
 func (c *Client) BatchDeleteRumMetricDefinitions(ctx context.Context, params *BatchDeleteRumMetricDefinitionsInput, optFns ...func(*Options)) (*BatchDeleteRumMetricDefinitionsOutput, error) {
 	if params == nil {
 		params = &BatchDeleteRumMetricDefinitionsInput{}
@@ -40,9 +40,9 @@ type BatchDeleteRumMetricDefinitionsInput struct {
 	AppMonitorName *string
 
 	// Defines the destination where you want to stop sending the specified metrics.
-	// Valid values are CloudWatch  and Evidently . If you specify Evidently, you
-	// must also specify the ARN of the CloudWatchEvidently experiment that is to be
-	// the destination and an IAM role that has permission to write to the experiment.
+	// Valid values are CloudWatch and Evidently . If you specify Evidently , you must
+	// also specify the ARN of the CloudWatchEvidently experiment that is to be the
+	// destination and an IAM role that has permission to write to the experiment.
 	//
 	// This member is required.
 	Destination types.MetricDestination
@@ -52,8 +52,8 @@ type BatchDeleteRumMetricDefinitionsInput struct {
 	// This member is required.
 	MetricDefinitionIds []string
 
-	// This parameter is required if Destination  is Evidently . If Destination  is
-	// CloudWatch, do not use this parameter. This parameter specifies the ARN of the
+	// This parameter is required if Destination is Evidently . If Destination is
+	// CloudWatch , do not use this parameter. This parameter specifies the ARN of the
 	// Evidently experiment that was receiving the metrics that are being deleted.
 	DestinationArn *string
 

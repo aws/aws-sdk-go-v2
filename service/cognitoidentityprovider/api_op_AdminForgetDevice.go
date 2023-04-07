@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Forgets the device, as an administrator. Calling this action requires
-// developer credentials.
+// Forgets the device, as an administrator. Calling this action requires developer
+// credentials.
 func (c *Client) AdminForgetDevice(ctx context.Context, params *AdminForgetDeviceInput, optFns ...func(*Options)) (*AdminForgetDeviceOutput, error) {
 	if params == nil {
 		params = &AdminForgetDeviceInput{}

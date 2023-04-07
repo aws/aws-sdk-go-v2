@@ -35,10 +35,10 @@ type PutEventsInput struct {
 	// This member is required.
 	EventList []types.Event
 
-	// The session ID associated with the user's visit. Your application generates
-	// the sessionId when a user first visits your website or uses your application.
-	// Amazon Personalize uses the sessionId to associate events with the user before
-	// they log in. For more information, see Recording Events (https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html)
+	// The session ID associated with the user's visit. Your application generates the
+	// sessionId when a user first visits your website or uses your application. Amazon
+	// Personalize uses the sessionId to associate events with the user before they log
+	// in. For more information, see Recording Events (https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html)
 	// .
 	//
 	// This member is required.

@@ -22,9 +22,8 @@ import (
 //   - NFS and SMB file shares
 //   - File System associations
 //
-// You can create a maximum of 50 tags for each
-// resource. Virtual tapes and storage volumes that are recovered to a new gateway
-// maintain their tags.
+// You can create a maximum of 50 tags for each resource. Virtual tapes and
+// storage volumes that are recovered to a new gateway maintain their tags.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddTagsToResourceInput{}
@@ -48,10 +47,10 @@ type AddTagsToResourceInput struct {
 	// This member is required.
 	ResourceARN *string
 
-	// The key-value pair that represents the tag you want to add to the resource.
-	// The value can be an empty string. Valid characters for key and value are
-	// letters, spaces, and numbers representable in UTF-8 format, and the following
-	// special characters: + - = . _ : / @. The maximum length of a tag's key is 128
+	// The key-value pair that represents the tag you want to add to the resource. The
+	// value can be an empty string. Valid characters for key and value are letters,
+	// spaces, and numbers representable in UTF-8 format, and the following special
+	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
 	// characters, and the maximum length for a tag's value is 256.
 	//
 	// This member is required.

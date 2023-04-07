@@ -244,7 +244,7 @@ type AssetModelCompositeModelDefinition struct {
 type AssetModelHierarchy struct {
 
 	// The ID of the asset model. All assets in this hierarchy must be instances of
-	// the childAssetModelId  asset model.
+	// the childAssetModelId asset model.
 	//
 	// This member is required.
 	ChildAssetModelId *string
@@ -302,13 +302,13 @@ type AssetModelProperty struct {
 	Type *PropertyType
 
 	// The data type of the structure for this property. This parameter exists on
-	// properties that have the STRUCT  data type.
+	// properties that have the STRUCT data type.
 	DataTypeSpec *string
 
 	// The ID of the asset model property.
 	Id *string
 
-	// The unit of the asset model property, such as Newtons  or RPM .
+	// The unit of the asset model property, such as Newtons or RPM .
 	Unit *string
 
 	noSmithyDocumentSerde
@@ -318,8 +318,8 @@ type AssetModelProperty struct {
 // applied to all assets created from the asset model.
 type AssetModelPropertyDefinition struct {
 
-	// The data type of the property definition. If you specify STRUCT, you must also
-	// specify dataTypeSpec  to identify the type of the structure for this property.
+	// The data type of the property definition. If you specify STRUCT , you must also
+	// specify dataTypeSpec to identify the type of the structure for this property.
 	//
 	// This member is required.
 	DataType PropertyDataType
@@ -329,20 +329,19 @@ type AssetModelPropertyDefinition struct {
 	// This member is required.
 	Name *string
 
-	// The property definition type (see PropertyType). You can only specify one type
+	// The property definition type (see PropertyType ). You can only specify one type
 	// in a property definition.
 	//
 	// This member is required.
 	Type *PropertyType
 
-	// The data type of the structure for this property. This parameter is required
-	// on properties that have the STRUCT data type. The options for this parameter
+	// The data type of the structure for this property. This parameter is required on
+	// properties that have the STRUCT data type. The options for this parameter
 	// depend on the type of the composite model in which you define this property. Use
-	//
 	// AWS/ALARM_STATE for alarm state in alarm composite models.
 	DataTypeSpec *string
 
-	// The unit of the property definition, such as Newtons  or RPM .
+	// The unit of the property definition, such as Newtons or RPM .
 	Unit *string
 
 	noSmithyDocumentSerde
@@ -361,8 +360,8 @@ type AssetModelPropertySummary struct {
 	// This member is required.
 	Name *string
 
-	// Contains a property type, which can be one of attribute , measurement , metric
-	// , or transform .
+	// Contains a property type, which can be one of attribute , measurement , metric ,
+	// or transform .
 	//
 	// This member is required.
 	Type *PropertyType
@@ -371,13 +370,13 @@ type AssetModelPropertySummary struct {
 	AssetModelCompositeModelId *string
 
 	// The data type of the structure for this property. This parameter exists on
-	// properties that have the STRUCT  data type.
+	// properties that have the STRUCT data type.
 	DataTypeSpec *string
 
 	// The ID of the property.
 	Id *string
 
-	// The unit (such as Newtons  or RPM ) of the property.
+	// The unit (such as Newtons or RPM ) of the property.
 	Unit *string
 
 	noSmithyDocumentSerde
@@ -461,13 +460,13 @@ type AssetProperty struct {
 	Name *string
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
-	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
 	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	Alias *string
 
 	// The data type of the structure for this property. This parameter exists on
-	// properties that have the STRUCT  data type.
+	// properties that have the STRUCT data type.
 	DataTypeSpec *string
 
 	// The asset property's notification topic and state. For more information, see
@@ -475,7 +474,7 @@ type AssetProperty struct {
 	// .
 	Notification *PropertyNotification
 
-	// The unit (such as Newtons  or RPM ) of the asset property.
+	// The unit (such as Newtons or RPM ) of the asset property.
 	Unit *string
 
 	noSmithyDocumentSerde
@@ -485,7 +484,7 @@ type AssetProperty struct {
 type AssetPropertySummary struct {
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
-	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
 	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	Alias *string
@@ -532,13 +531,15 @@ type AssetRelationshipSummary struct {
 
 	// The relationship type of the assets in this relationship. This value is one of
 	// the following:
-	//     - HIERARCHY – The assets are related through an asset hierarchy. If you specify this relationship type, this asset relationship includes the hierarchyInfo object.
+	//   - HIERARCHY – The assets are related through an asset hierarchy. If you
+	//   specify this relationship type, this asset relationship includes the
+	//   hierarchyInfo object.
 	//
 	// This member is required.
 	RelationshipType AssetRelationshipType
 
 	// The assets that are related through an asset hierarchy. This object is present
-	// if the relationshipType  is HIERARCHY .
+	// if the relationshipType is HIERARCHY .
 	HierarchyInfo *AssetHierarchyInfo
 
 	noSmithyDocumentSerde
@@ -580,7 +581,7 @@ type AssetSummary struct {
 	// This member is required.
 	CreationDate *time.Time
 
-	// A list of asset hierarchies that each contain a hierarchyId. A hierarchy
+	// A list of asset hierarchies that each contain a hierarchyId . A hierarchy
 	// specifies allowed parent/child asset relationships.
 	//
 	// This member is required.
@@ -632,7 +633,7 @@ type AssociatedAssetsSummary struct {
 	// This member is required.
 	CreationDate *time.Time
 
-	// A list of asset hierarchies that each contain a hierarchyId. A hierarchy
+	// A list of asset hierarchies that each contain a hierarchyId . A hierarchy
 	// specifies allowed parent/child asset relationships.
 	//
 	// This member is required.
@@ -670,8 +671,8 @@ type Attribute struct {
 
 	// The default value of the asset model property attribute. All assets that you
 	// create from the asset model contain this attribute value. You can update an
-	// attribute's value after you create an asset. For more information, see
-	// Updating attribute values (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-attribute-values.html)
+	// attribute's value after you create an asset. For more information, see Updating
+	// attribute values (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-attribute-values.html)
 	// in the IoT SiteWise User Guide.
 	DefaultValue *string
 
@@ -682,7 +683,10 @@ type Attribute struct {
 // with the BatchGetAssetPropertyAggregates (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html)
 // API. To identify an asset property, you must specify one of the following:
 //   - The assetId and propertyId of an asset property.
-//   - A propertyAlias , which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature ). To define an asset property's alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html) .
+//   - A propertyAlias , which is a data stream alias (for example,
+//     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
+//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
+//     .
 type BatchGetAssetPropertyAggregatesEntry struct {
 
 	// The data aggregating function.
@@ -706,8 +710,8 @@ type BatchGetAssetPropertyAggregatesEntry struct {
 	// This member is required.
 	Resolution *string
 
-	// The exclusive start of the range from which to query historical data,
-	// expressed in seconds in Unix epoch time.
+	// The exclusive start of the range from which to query historical data, expressed
+	// in seconds in Unix epoch time.
 	//
 	// This member is required.
 	StartDate *time.Time
@@ -716,7 +720,7 @@ type BatchGetAssetPropertyAggregatesEntry struct {
 	AssetId *string
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
-	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
 	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
@@ -727,8 +731,7 @@ type BatchGetAssetPropertyAggregatesEntry struct {
 	// The quality by which to filter asset data.
 	Qualities []Quality
 
-	// The chronological sorting order of the requested information. Default:
-	// ASCENDING
+	// The chronological sorting order of the requested information. Default: ASCENDING
 	TimeOrdering TimeOrdering
 
 	noSmithyDocumentSerde
@@ -757,8 +760,8 @@ type BatchGetAssetPropertyAggregatesErrorEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the error code and the timestamp for an asset property aggregate
-// entry that is associated with the BatchGetAssetPropertyAggregates (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html)
+// Contains the error code and the timestamp for an asset property aggregate entry
+// that is associated with the BatchGetAssetPropertyAggregates (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html)
 // API.
 type BatchGetAssetPropertyAggregatesErrorInfo struct {
 
@@ -821,7 +824,10 @@ type BatchGetAssetPropertyAggregatesSuccessEntry struct {
 // the BatchGetAssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
 // API. To identify an asset property, you must specify one of the following:
 //   - The assetId and propertyId of an asset property.
-//   - A propertyAlias , which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature ). To define an asset property's alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html) .
+//   - A propertyAlias , which is a data stream alias (for example,
+//     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
+//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
+//     .
 type BatchGetAssetPropertyValueEntry struct {
 
 	// The ID of the entry.
@@ -833,7 +839,7 @@ type BatchGetAssetPropertyValueEntry struct {
 	AssetId *string
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
-	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
 	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
@@ -844,8 +850,8 @@ type BatchGetAssetPropertyValueEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Contains error information for an asset property value entry that is
-// associated with the BatchGetAssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
+// Contains error information for an asset property value entry that is associated
+// with the BatchGetAssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
 // API.
 type BatchGetAssetPropertyValueErrorEntry struct {
 
@@ -887,7 +893,10 @@ type BatchGetAssetPropertyValueErrorInfo struct {
 // associated with the BatchGetAssetPropertyValueHistory (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
 // API. To identify an asset property, you must specify one of the following:
 //   - The assetId and propertyId of an asset property.
-//   - A propertyAlias , which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature ). To define an asset property's alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html) .
+//   - A propertyAlias , which is a data stream alias (for example,
+//     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
+//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
+//     .
 type BatchGetAssetPropertyValueHistoryEntry struct {
 
 	// The ID of the entry.
@@ -903,7 +912,7 @@ type BatchGetAssetPropertyValueHistoryEntry struct {
 	EndDate *time.Time
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
-	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
 	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
@@ -914,19 +923,18 @@ type BatchGetAssetPropertyValueHistoryEntry struct {
 	// The quality by which to filter asset data.
 	Qualities []Quality
 
-	// The exclusive start of the range from which to query historical data,
-	// expressed in seconds in Unix epoch time.
+	// The exclusive start of the range from which to query historical data, expressed
+	// in seconds in Unix epoch time.
 	StartDate *time.Time
 
-	// The chronological sorting order of the requested information. Default:
-	// ASCENDING
+	// The chronological sorting order of the requested information. Default: ASCENDING
 	TimeOrdering TimeOrdering
 
 	noSmithyDocumentSerde
 }
 
 // A list of the errors (if any) associated with the batch request. Each error
-// entry contains the entryId  of the entry that failed.
+// entry contains the entryId of the entry that failed.
 type BatchGetAssetPropertyValueHistoryErrorEntry struct {
 
 	// The ID of the entry.
@@ -1064,8 +1072,8 @@ type BatchPutAssetPropertyError struct {
 	noSmithyDocumentSerde
 }
 
-// Contains error information for asset property value entries that are
-// associated with the BatchPutAssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchPutAssetPropertyValue.html)
+// Contains error information for asset property value entries that are associated
+// with the BatchPutAssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchPutAssetPropertyValue.html)
 // API.
 type BatchPutAssetPropertyErrorEntry struct {
 
@@ -1226,8 +1234,8 @@ type ErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon S3 destination where errors associated with the job creation
-// request are saved.
+// The Amazon S3 destination where errors associated with the job creation request
+// are saved.
 type ErrorReportLocation struct {
 
 	// The name of the Amazon S3 bucket to which errors associated with the bulk
@@ -1236,10 +1244,10 @@ type ErrorReportLocation struct {
 	// This member is required.
 	Bucket *string
 
-	// Amazon S3 uses the prefix as a folder name to organize data in the bucket.
-	// Each Amazon S3 object has a key that is its unique identifier in the bucket.
-	// Each object in a bucket has exactly one key. The prefix must end with a forward
-	// slash (/). For more information, see Organizing objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)
+	// Amazon S3 uses the prefix as a folder name to organize data in the bucket. Each
+	// Amazon S3 object has a key that is its unique identifier in the bucket. Each
+	// object in a bucket has exactly one key. The prefix must end with a forward slash
+	// (/). For more information, see Organizing objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)
 	// in the Amazon Simple Storage Service User Guide.
 	//
 	// This member is required.
@@ -1316,11 +1324,11 @@ type GatewayCapabilitySummary struct {
 	// This member is required.
 	CapabilityNamespace *string
 
-	// The synchronization status of the capability configuration. The sync status
-	// can be one of the following:
-	//     - IN_SYNC – The gateway is running the capability configuration.
-	//     - OUT_OF_SYNC – The gateway hasn't received the capability configuration.
-	//     - SYNC_FAILED – The gateway rejected the capability configuration.
+	// The synchronization status of the capability configuration. The sync status can
+	// be one of the following:
+	//   - IN_SYNC – The gateway is running the capability configuration.
+	//   - OUT_OF_SYNC – The gateway hasn't received the capability configuration.
+	//   - SYNC_FAILED – The gateway rejected the capability configuration.
 	//
 	// This member is required.
 	CapabilitySyncStatus CapabilitySyncStatus
@@ -1376,11 +1384,11 @@ type GatewaySummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details for a gateway that runs on IoT Greengrass. To create a
-// gateway that runs on IoT Greengrass, you must add the IoT SiteWise connector to
-// a Greengrass group and deploy it. Your Greengrass group must also have
-// permissions to upload data to IoT SiteWise. For more information, see
-// Ingesting data using a gateway (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html)
+// Contains details for a gateway that runs on IoT Greengrass. To create a gateway
+// that runs on IoT Greengrass, you must add the IoT SiteWise connector to a
+// Greengrass group and deploy it. Your Greengrass group must also have permissions
+// to upload data to IoT SiteWise. For more information, see Ingesting data using
+// a gateway (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html)
 // in the IoT SiteWise User Guide.
 type Greengrass struct {
 
@@ -1399,7 +1407,7 @@ type Greengrass struct {
 // Contains details for a gateway that runs on IoT Greengrass V2. To create a
 // gateway that runs on IoT Greengrass V2, you must deploy the IoT SiteWise Edge
 // component to your gateway device. Your Greengrass device role (https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html)
-// must use the AWSIoTSiteWiseEdgeAccess  policy. For more information, see Using
+// must use the AWSIoTSiteWiseEdgeAccess policy. For more information, see Using
 // IoT SiteWise at the edge (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/sw-gateways.html)
 // in the IoT SiteWise User Guide.
 type GreengrassV2 struct {
@@ -1442,7 +1450,7 @@ type IAMUserIdentity struct {
 
 	// The ARN of the IAM user. For more information, see IAM ARNs (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
 	// in the IAM User Guide. If you delete the IAM user, access policies that contain
-	// this identity include an empty arn. You can delete the access policy for the
+	// this identity include an empty arn . You can delete the access policy for the
 	// IAM user that no longer exists.
 	//
 	// This member is required.
@@ -1563,12 +1571,18 @@ type JobSummary struct {
 	Name *string
 
 	// The status of the bulk import job can be one of following values.
-	//     - PENDING – IoT SiteWise is waiting for the current bulk import job to finish.
-	//     - CANCELLED – The bulk import job has been canceled.
-	//     - RUNNING – IoT SiteWise is processing your request to import your data from Amazon S3.
-	//     - COMPLETED – IoT SiteWise successfully completed your request to import data from Amazon S3.
-	//     - FAILED – IoT SiteWise couldn't process your request to import data from Amazon S3. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.
-	//     - COMPLETED_WITH_FAILURES – IoT SiteWise completed your request to import data from Amazon S3 with errors. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.
+	//   - PENDING – IoT SiteWise is waiting for the current bulk import job to finish.
+	//   - CANCELLED – The bulk import job has been canceled.
+	//   - RUNNING – IoT SiteWise is processing your request to import your data from
+	//   Amazon S3.
+	//   - COMPLETED – IoT SiteWise successfully completed your request to import data
+	//   from Amazon S3.
+	//   - FAILED – IoT SiteWise couldn't process your request to import data from
+	//   Amazon S3. You can use logs saved in the specified error report location in
+	//   Amazon S3 to troubleshoot issues.
+	//   - COMPLETED_WITH_FAILURES – IoT SiteWise completed your request to import data
+	//   from Amazon S3 with errors. You can use logs saved in the specified error report
+	//   location in Amazon S3 to troubleshoot issues.
 	//
 	// This member is required.
 	Status JobStatus
@@ -1618,8 +1632,8 @@ type MeasurementProcessingConfig struct {
 // maximum number of dependent/cascading variables used in any one metric
 // calculation is 10. Therefore, a root metric can have up to 10 cascading metrics
 // in its computational dependency tree. Additionally, a metric can only have a
-// data type of DOUBLE  and consume properties with data types of INTEGER  or
-// DOUBLE . For more information, see Metrics (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#metrics)
+// data type of DOUBLE and consume properties with data types of INTEGER or DOUBLE
+// . For more information, see Metrics (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#metrics)
 // in the IoT SiteWise User Guide.
 type Metric struct {
 
@@ -1758,8 +1772,8 @@ type PortalSummary struct {
 
 	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the service role that allows the portal's users to access your IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for
-	// IoT SiteWise Monitor (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
+	// resources on your behalf. For more information, see Using service roles for IoT
+	// SiteWise Monitor (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
 	// in the IoT SiteWise User Guide.
 	RoleArn *string
 
@@ -1821,7 +1835,7 @@ type Property struct {
 	Name *string
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
-	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
 	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	Alias *string
@@ -1834,7 +1848,7 @@ type Property struct {
 	// The property type (see PropertyType ). A property contains one type.
 	Type *PropertyType
 
-	// The unit (such as Newtons  or RPM ) of the asset property.
+	// The unit (such as Newtons or RPM ) of the asset property.
 	Unit *string
 
 	noSmithyDocumentSerde
@@ -1860,8 +1874,8 @@ type PropertyNotification struct {
 	noSmithyDocumentSerde
 }
 
-// Contains a property type, which can be one of attribute , measurement , metric
-// , or transform .
+// Contains a property type, which can be one of attribute , measurement , metric ,
+// or transform .
 type PropertyType struct {
 
 	// Specifies an asset attribute property. An attribute generally contains static
@@ -1874,10 +1888,10 @@ type PropertyType struct {
 	// power values.
 	Measurement *Measurement
 
-	// Specifies an asset metric property. A metric contains a mathematical
-	// expression that uses aggregate functions to process all input data points over a
-	// time interval and output a single data point, such as to calculate the average
-	// hourly temperature.
+	// Specifies an asset metric property. A metric contains a mathematical expression
+	// that uses aggregate functions to process all input data points over a time
+	// interval and output a single data point, such as to calculate the average hourly
+	// temperature.
 	Metric *Metric
 
 	// Specifies an asset transform property. A transform contains a mathematical
@@ -1909,7 +1923,7 @@ type PutAssetPropertyValueEntry struct {
 	AssetId *string
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
-	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
 	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
@@ -1937,11 +1951,11 @@ type Resource struct {
 type RetentionPeriod struct {
 
 	// The number of days that your data is kept. If you specified a value for this
-	// parameter, the unlimited  parameter must be false .
+	// parameter, the unlimited parameter must be false .
 	NumberOfDays *int32
 
-	// If true, your data is kept indefinitely. If configured to true, you must not
-	// specify a value for the numberOfDays  parameter.
+	// If true, your data is kept indefinitely. If configured to true , you must not
+	// specify a value for the numberOfDays parameter.
 	Unlimited *bool
 
 	noSmithyDocumentSerde
@@ -1950,8 +1964,8 @@ type RetentionPeriod struct {
 // Contains a timestamp with optional nanosecond granularity.
 type TimeInNanos struct {
 
-	// The timestamp date, in seconds, in the Unix epoch format. Fractional
-	// nanosecond data is provided by offsetInNanos .
+	// The timestamp date, in seconds, in the Unix epoch format. Fractional nanosecond
+	// data is provided by offsetInNanos .
 	//
 	// This member is required.
 	TimeInSeconds *int64
@@ -1999,11 +2013,11 @@ type TimeSeriesSummary struct {
 	// The ID of the asset in which the asset property was created.
 	AssetId *string
 
-	// The data type of the structure for this time series. This parameter is
-	// required for time series that have the STRUCT data type. The options for this
-	// parameter depend on the type of the composite model in which you created the
-	// asset property that is associated with your time series. Use AWS/ALARM_STATE
-	// for alarm state in alarm composite models.
+	// The data type of the structure for this time series. This parameter is required
+	// for time series that have the STRUCT data type. The options for this parameter
+	// depend on the type of the composite model in which you created the asset
+	// property that is associated with your time series. Use AWS/ALARM_STATE for
+	// alarm state in alarm composite models.
 	DataTypeSpec *string
 
 	// The ID of the asset property.
@@ -2016,7 +2030,7 @@ type TimeSeriesSummary struct {
 // property's data points from one form to another. For example, you can use a
 // transform to convert a Celsius data stream to Fahrenheit by applying the
 // transformation expression to each data point of the Celsius stream. A transform
-// can only have a data type of DOUBLE  and consume properties with data types of
+// can only have a data type of DOUBLE and consume properties with data types of
 // INTEGER or DOUBLE . For more information, see Transforms (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#transforms)
 // in the IoT SiteWise User Guide.
 type Transform struct {
@@ -2063,11 +2077,11 @@ type TransformProcessingConfig struct {
 // Contains a tumbling window, which is a repeating fixed-sized, non-overlapping,
 // and contiguous time window. You can use this window in metrics to aggregate data
 // from properties and other assets. You can use m , h , d , and w when you
-// specify an interval or offset. Note that m  represents minutes, h represents
-// hours, d  represents days, and w  represents weeks. You can also use s to
-// represent seconds in offset . The interval  and offset  parameters support the
+// specify an interval or offset. Note that m represents minutes, h represents
+// hours, d represents days, and w represents weeks. You can also use s to
+// represent seconds in offset . The interval and offset parameters support the
 // ISO 8601 format (https://en.wikipedia.org/wiki/ISO_8601) . For example, PT5S
-// represents 5 seconds, PT5M  represents 5 minutes, and PT5H  represents 5 hours.
+// represents 5 seconds, PT5M represents 5 minutes, and PT5H represents 5 hours.
 type TumblingWindow struct {
 
 	// The time interval for the tumbling window. The interval time must be between 1
@@ -2081,18 +2095,30 @@ type TumblingWindow struct {
 	// This member is required.
 	Interval *string
 
-	// The offset for the tumbling window. The offset parameter accepts the
-	// following:
-	//     - The offset time. For example, if you specify 18h for offset and 1d for interval , IoT SiteWise aggregates data in one of the following ways:
-	//         - If you create the metric before or at 6 PM (UTC), you get the first aggregation result at 6 PM (UTC) on the day when you create the metric.
-	//         - If you create the metric after 6 PM (UTC), you get the first aggregation result at 6 PM (UTC) the next day.
-	//     - The ISO 8601 format. For example, if you specify PT18H for offset and 1d for interval , IoT SiteWise aggregates data in one of the following ways:
-	//         - If you create the metric before or at 6 PM (UTC), you get the first aggregation result at 6 PM (UTC) on the day when you create the metric.
-	//         - If you create the metric after 6 PM (UTC), you get the first aggregation result at 6 PM (UTC) the next day.
-	//     - The 24-hour clock. For example, if you specify 00:03:00 for offset , 5m for interval , and you create the metric at 2 PM (UTC), you get the first aggregation result at 2:03 PM (UTC). You get the second aggregation result at 2:08 PM (UTC).
-	//     - The offset time zone. For example, if you specify 2021-07-23T18:00-08 for offset and 1d for interval , IoT SiteWise aggregates data in one of the following ways:
-	//         - If you create the metric before or at 6 PM (PST), you get the first aggregation result at 6 PM (PST) on the day when you create the metric.
-	//         - If you create the metric after 6 PM (PST), you get the first aggregation result at 6 PM (PST) the next day.
+	// The offset for the tumbling window. The offset parameter accepts the following:
+	//   - The offset time. For example, if you specify 18h for offset and 1d for
+	//   interval , IoT SiteWise aggregates data in one of the following ways:
+	//   - If you create the metric before or at 6 PM (UTC), you get the first
+	//   aggregation result at 6 PM (UTC) on the day when you create the metric.
+	//   - If you create the metric after 6 PM (UTC), you get the first aggregation
+	//   result at 6 PM (UTC) the next day.
+	//   - The ISO 8601 format. For example, if you specify PT18H for offset and 1d for
+	//   interval , IoT SiteWise aggregates data in one of the following ways:
+	//   - If you create the metric before or at 6 PM (UTC), you get the first
+	//   aggregation result at 6 PM (UTC) on the day when you create the metric.
+	//   - If you create the metric after 6 PM (UTC), you get the first aggregation
+	//   result at 6 PM (UTC) the next day.
+	//   - The 24-hour clock. For example, if you specify 00:03:00 for offset , 5m for
+	//   interval , and you create the metric at 2 PM (UTC), you get the first
+	//   aggregation result at 2:03 PM (UTC). You get the second aggregation result at
+	//   2:08 PM (UTC).
+	//   - The offset time zone. For example, if you specify 2021-07-23T18:00-08 for
+	//   offset and 1d for interval , IoT SiteWise aggregates data in one of the
+	//   following ways:
+	//   - If you create the metric before or at 6 PM (PST), you get the first
+	//   aggregation result at 6 PM (PST) on the day when you create the metric.
+	//   - If you create the metric after 6 PM (PST), you get the first aggregation
+	//   result at 6 PM (PST) the next day.
 	Offset *string
 
 	noSmithyDocumentSerde
@@ -2112,8 +2138,8 @@ type UserIdentity struct {
 // Identifies a property value used in an expression.
 type VariableValue struct {
 
-	// The ID of the property to use as the variable. You can use the property name
-	// if it's from the same asset model.
+	// The ID of the property to use as the variable. You can use the property name if
+	// it's from the same asset model.
 	//
 	// This member is required.
 	PropertyId *string
@@ -2121,7 +2147,7 @@ type VariableValue struct {
 	// The ID of the hierarchy to query for the property ID. You can use the
 	// hierarchy's name instead of the hierarchy's ID. You use a hierarchy ID instead
 	// of a model ID because you can have several hierarchies using the same model and
-	// therefore the same propertyId. For example, you might have separately grouped
+	// therefore the same propertyId . For example, you might have separately grouped
 	// assets that come from the same asset model. For more information, see Asset
 	// hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the IoT SiteWise User Guide.

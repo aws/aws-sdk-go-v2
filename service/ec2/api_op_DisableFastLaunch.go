@@ -34,8 +34,8 @@ func (c *Client) DisableFastLaunch(ctx context.Context, params *DisableFastLaunc
 
 type DisableFastLaunchInput struct {
 
-	// The ID of the image for which you’re turning off faster launching, and
-	// removing pre-provisioned snapshots.
+	// The ID of the image for which you’re turning off faster launching, and removing
+	// pre-provisioned snapshots.
 	//
 	// This member is required.
 	ImageId *string

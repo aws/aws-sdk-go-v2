@@ -49,7 +49,7 @@ type CreateVolumeFromBackupInput struct {
 	// Specifies the configuration of the ONTAP volume that you are creating.
 	OntapConfiguration *types.CreateOntapVolumeConfiguration
 
-	// A list of Tag  values, with a maximum of 50 elements.
+	// A list of Tag values, with a maximum of 50 elements.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

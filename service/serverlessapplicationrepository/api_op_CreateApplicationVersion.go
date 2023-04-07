@@ -95,8 +95,8 @@ type CreateApplicationVersionOutput struct {
 	// application that requires capabilities, the call will fail.
 	RequiredCapabilities []types.Capability
 
-	// Whether all of the AWS resources contained in this application are supported
-	// in the region in which it is being retrieved.
+	// Whether all of the AWS resources contained in this application are supported in
+	// the region in which it is being retrieved.
 	ResourcesSupported bool
 
 	// The semantic version of the application: https://semver.org/ (https://semver.org/)

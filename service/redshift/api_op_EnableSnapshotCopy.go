@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the automatic copy of snapshots from one region to another region for
-// a specified cluster.
+// Enables the automatic copy of snapshots from one region to another region for a
+// specified cluster.
 func (c *Client) EnableSnapshotCopy(ctx context.Context, params *EnableSnapshotCopyInput, optFns ...func(*Options)) (*EnableSnapshotCopyOutput, error) {
 	if params == nil {
 		params = &EnableSnapshotCopyInput{}

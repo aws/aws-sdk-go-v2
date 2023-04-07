@@ -43,7 +43,7 @@ type DeleteBotVersionInput struct {
 
 	// By default, Amazon Lex checks if any other resource, such as an alias or bot
 	// network, is using the bot version before it is deleted and throws a
-	// ResourceInUseExceptionexception if the version is being used by another
+	// ResourceInUseException exception if the version is being used by another
 	// resource. Set this parameter to true to skip this check and remove the version
 	// even if it is being used by another resource.
 	SkipResourceInUseCheck bool

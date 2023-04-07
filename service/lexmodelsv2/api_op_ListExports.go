@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the exports for a bot, bot locale, or custom vocabulary. Exports are
-// kept in the list for 7 days.
+// Lists the exports for a bot, bot locale, or custom vocabulary. Exports are kept
+// in the list for 7 days.
 func (c *Client) ListExports(ctx context.Context, params *ListExportsInput, optFns ...func(*Options)) (*ListExportsOutput, error) {
 	if params == nil {
 		params = &ListExportsInput{}
@@ -53,14 +53,14 @@ type ListExportsInput struct {
 	MaxResults *int32
 
 	// If the response from the ListExports operation contains more results that
-	// specified in the maxResults parameter, a token is returned in the response.
-	// Use the returned token in the nextToken  parameter of a ListExports request to
+	// specified in the maxResults parameter, a token is returned in the response. Use
+	// the returned token in the nextToken parameter of a ListExports request to
 	// return the next page of results. For a complete set of results, call the
-	// ListExports operation until the nextToken  returned in the response is null.
+	// ListExports operation until the nextToken returned in the response is null.
 	NextToken *string
 
-	// Determines the field that the list of exports is sorted by. You can sort by
-	// the LastUpdatedDateTime  field in ascending or descending order.
+	// Determines the field that the list of exports is sorted by. You can sort by the
+	// LastUpdatedDateTime field in ascending or descending order.
 	SortBy *types.ExportSortBy
 
 	noSmithyDocumentSerde
@@ -84,8 +84,8 @@ type ListExportsOutput struct {
 	LocaleId *string
 
 	// A token that indicates whether there are more results to return in a response
-	// to the ListExports  operation. If the nextToken field is present, you send the
-	// contents as the nextToken  parameter of a ListExports operation request to get
+	// to the ListExports operation. If the nextToken field is present, you send the
+	// contents as the nextToken parameter of a ListExports operation request to get
 	// the next page of results.
 	NextToken *string
 
@@ -172,8 +172,8 @@ type ListExportsPaginatorOptions struct {
 	// returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

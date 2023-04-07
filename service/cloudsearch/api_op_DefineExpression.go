@@ -56,7 +56,7 @@ type DefineExpressionInput struct {
 // newly-configured expression.
 type DefineExpressionOutput struct {
 
-	// The value of an Expression  and its current status.
+	// The value of an Expression and its current status.
 	//
 	// This member is required.
 	Expression *types.ExpressionStatus

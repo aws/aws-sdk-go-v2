@@ -32,8 +32,7 @@ func (c *Client) GetComputeAuthToken(ctx context.Context, params *GetComputeAuth
 
 type GetComputeAuthTokenInput struct {
 
-	// The name of the compute resource you are requesting the authorization token
-	// for.
+	// The name of the compute resource you are requesting the authorization token for.
 	//
 	// This member is required.
 	ComputeName *string
@@ -58,8 +57,7 @@ type GetComputeAuthTokenOutput struct {
 	// arn:aws:gamelift:::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912
 	ComputeArn *string
 
-	// The name of the compute resource you are requesting the authorization token
-	// for.
+	// The name of the compute resource you are requesting the authorization token for.
 	ComputeName *string
 
 	// The amount of time until the authorization token is no longer valid. To

@@ -46,8 +46,8 @@ type RemoveAttributesFromFindingsInput struct {
 
 type RemoveAttributesFromFindingsOutput struct {
 
-	// Attributes details that cannot be described. An error code is provided for
-	// each failed item.
+	// Attributes details that cannot be described. An error code is provided for each
+	// failed item.
 	//
 	// This member is required.
 	FailedItems map[string]types.FailedItemDetails

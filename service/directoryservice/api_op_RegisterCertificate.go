@@ -39,8 +39,8 @@ type RegisterCertificateInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// A ClientCertAuthSettings object that contains client certificate
-	// authentication settings.
+	// A ClientCertAuthSettings object that contains client certificate authentication
+	// settings.
 	ClientCertAuthSettings *types.ClientCertAuthSettings
 
 	// The function that the registered certificate performs. Valid values include

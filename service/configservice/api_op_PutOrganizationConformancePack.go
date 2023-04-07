@@ -21,16 +21,16 @@ import (
 // administrators. This API enables organization service access for
 // config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess
 // action and creates a service-linked role
-// AWSServiceRoleForConfigMultiAccountSetupin the management or delegated
+// AWSServiceRoleForConfigMultiAccountSetup in the management or delegated
 // administrator account of your organization. The service-linked role is created
 // only when the role does not exist in the caller account. To use this API with
 // delegated administrator, register a delegated administrator by calling Amazon
-// Web Services Organization register-delegate-admin  for
+// Web Services Organization register-delegate-admin for
 // config-multiaccountsetup.amazonaws.com . Prerequisite: Ensure you call
-// EnableAllFeaturesAPI to enable all features in an organization. You must
-// specify either the TemplateS3Uri  or the TemplateBody parameter, but not both.
-// If you provide both Config uses the TemplateS3Uri  parameter and ignores the
-// TemplateBodyparameter. Config sets the state of a conformance pack to
+// EnableAllFeatures API to enable all features in an organization. You must
+// specify either the TemplateS3Uri or the TemplateBody parameter, but not both.
+// If you provide both Config uses the TemplateS3Uri parameter and ignores the
+// TemplateBody parameter. Config sets the state of a conformance pack to
 // CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created
 // or updated. You cannot update a conformance pack while it is in this state.
 func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *PutOrganizationConformancePackInput, optFns ...func(*Options)) (*PutOrganizationConformancePackOutput, error) {
@@ -55,7 +55,7 @@ type PutOrganizationConformancePackInput struct {
 	// This member is required.
 	OrganizationConformancePackName *string
 
-	// A list of ConformancePackInputParameter  objects.
+	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []types.ConformancePackInputParameter
 
 	// The name of the Amazon S3 bucket where Config stores conformance pack

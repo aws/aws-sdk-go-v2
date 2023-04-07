@@ -472,9 +472,8 @@ type UpdateVpcEndpointDetail struct {
 	// The name of the endpoint.
 	Name *string
 
-	// The unique identifiers of the security groups that define the ports,
-	// protocols, and sources for inbound traffic that you are authorizing into your
-	// endpoint.
+	// The unique identifiers of the security groups that define the ports, protocols,
+	// and sources for inbound traffic that you are authorizing into your endpoint.
 	SecurityGroupIds []string
 
 	// The current status of the endpoint update process.
@@ -498,9 +497,8 @@ type VpcEndpointDetail struct {
 	// The name of the endpoint.
 	Name *string
 
-	// The unique identifiers of the security groups that define the ports,
-	// protocols, and sources for inbound traffic that you are authorizing into your
-	// endpoint.
+	// The unique identifiers of the security groups that define the ports, protocols,
+	// and sources for inbound traffic that you are authorizing into your endpoint.
 	SecurityGroupIds []string
 
 	// The current status of the endpoint.
@@ -515,7 +513,7 @@ type VpcEndpointDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Error information for a failed BatchGetVpcEndpoint  request.
+// Error information for a failed BatchGetVpcEndpoint request.
 type VpcEndpointErrorDetail struct {
 
 	// The error code for the failed request.
@@ -530,7 +528,7 @@ type VpcEndpointErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Filter the results of a ListVpcEndpoints  request.
+// Filter the results of a ListVpcEndpoints request.
 type VpcEndpointFilters struct {
 
 	// The current status of the endpoint.

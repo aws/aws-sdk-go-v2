@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists information about the versions of the specified managed policy,
-// including the version that is currently set as the policy's default version. For
-// more information about managed policies, see Managed policies and inline
-// policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// Lists information about the versions of the specified managed policy, including
+// the version that is currently set as the policy's default version. For more
+// information about managed policies, see Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) ListPolicyVersions(ctx context.Context, params *ListPolicyVersionsInput, optFns ...func(*Options)) (*ListPolicyVersionsOutput, error) {
 	if params == nil {
@@ -43,13 +42,13 @@ type ListPolicyVersionsInput struct {
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
-	// Markerelement in the response that you received to indicate where the next
-	// call should start.
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
 	Marker *string
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
@@ -59,7 +58,7 @@ type ListPolicyVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListPolicyVersions  request.
+// Contains the response to a successful ListPolicyVersions request.
 type ListPolicyVersionsOutput struct {
 
 	// A flag that indicates whether there are more items to return. If your results
@@ -70,8 +69,8 @@ type ListPolicyVersionsOutput struct {
 	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated  is true, this element is present and contains the value to
-	// use for the Marker  parameter in a subsequent pagination request.
+	// When IsTruncated is true , this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
 	// A list of policy versions. For more information about managed policy versions,
@@ -161,15 +160,15 @@ var _ ListPolicyVersionsAPIClient = (*Client)(nil)
 type ListPolicyVersionsPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

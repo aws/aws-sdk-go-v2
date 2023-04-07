@@ -66,8 +66,8 @@ type CreateHyperParameterTuningJobInput struct {
 	// that the tuning job launches.
 	Tags []types.Tag
 
-	// The HyperParameterTrainingJobDefinition object that describes the training
-	// jobs that this tuning job launches, including static hyperparameters, input data
+	// The HyperParameterTrainingJobDefinition object that describes the training jobs
+	// that this tuning job launches, including static hyperparameters, input data
 	// configuration, output data configuration, resource configuration, and stopping
 	// condition.
 	TrainingJobDefinition *types.HyperParameterTrainingJobDefinition
@@ -95,8 +95,8 @@ type CreateHyperParameterTuningJobInput struct {
 
 type CreateHyperParameterTuningJobOutput struct {
 
-	// The Amazon Resource Name (ARN) of the tuning job. SageMaker assigns an ARN to
-	// a hyperparameter tuning job when you create it.
+	// The Amazon Resource Name (ARN) of the tuning job. SageMaker assigns an ARN to a
+	// hyperparameter tuning job when you create it.
 	//
 	// This member is required.
 	HyperParameterTuningJobArn *string

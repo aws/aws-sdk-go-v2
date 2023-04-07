@@ -15,8 +15,8 @@ import (
 // Displays backups for both current and deleted instances. For example, use this
 // operation to find details about automated backups for previously deleted
 // instances. Current instances with retention periods greater than zero (0) are
-// returned for both the DescribeDBInstanceAutomatedBackups  and
-// DescribeDBInstances operations. All parameters are optional.
+// returned for both the DescribeDBInstanceAutomatedBackups and DescribeDBInstances
+// operations. All parameters are optional.
 func (c *Client) DescribeDBInstanceAutomatedBackups(ctx context.Context, params *DescribeDBInstanceAutomatedBackupsInput, optFns ...func(*Options)) (*DescribeDBInstanceAutomatedBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeDBInstanceAutomatedBackupsInput{}
@@ -37,7 +37,7 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 
 	// The Amazon Resource Name (ARN) of the replicated automated backups, for
 	// example,
-	// arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE.
+	// arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE .
 	// This setting doesn't apply to RDS Custom.
 	DBInstanceAutomatedBackupsArn *string
 
@@ -53,25 +53,30 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 
 	// A filter that specifies which resources to return based on status. Supported
 	// filters are the following:
-	//     - status
-	//         - active - automated backups for current instances
-	//         - retained - automated backups for deleted instances and after backup replication is stopped
-	//         - creating - automated backups that are waiting for the first automated snapshot to be available
-	//     - db-instance-id - Accepts DB instance identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance automated backups identified by these ARNs.
-	//     - dbi-resource-id - Accepts DB resource identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance resources identified by these ARNs.
-	//
+	//   - status
+	//   - active - automated backups for current instances
+	//   - retained - automated backups for deleted instances and after backup
+	//   replication is stopped
+	//   - creating - automated backups that are waiting for the first automated
+	//   snapshot to be available
+	//   - db-instance-id - Accepts DB instance identifiers and Amazon Resource Names
+	//   (ARNs). The results list includes only information about the DB instance
+	//   automated backups identified by these ARNs.
+	//   - dbi-resource-id - Accepts DB resource identifiers and Amazon Resource Names
+	//   (ARNs). The results list includes only information about the DB instance
+	//   resources identified by these ARNs.
 	// Returns all resources by default. The status for each resource is specified in
 	// the response.
 	Filters []types.Filter
 
 	// The pagination token provided in the previous request. If this parameter is
-	// specified the response includes only records beyond the marker, up to
-	// MaxRecords .
+	// specified the response includes only records beyond the marker, up to MaxRecords
+	// .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -81,7 +86,7 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 // DescribeDBInstanceAutomatedBackups action.
 type DescribeDBInstanceAutomatedBackupsOutput struct {
 
-	// A list of DBInstanceAutomatedBackup  instances.
+	// A list of DBInstanceAutomatedBackup instances.
 	DBInstanceAutomatedBackups []types.DBInstanceAutomatedBackup
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -166,16 +171,16 @@ type DescribeDBInstanceAutomatedBackupsAPIClient interface {
 
 var _ DescribeDBInstanceAutomatedBackupsAPIClient = (*Client)(nil)
 
-// DescribeDBInstanceAutomatedBackupsPaginatorOptions is the paginator options
-// for DescribeDBInstanceAutomatedBackups
+// DescribeDBInstanceAutomatedBackupsPaginatorOptions is the paginator options for
+// DescribeDBInstanceAutomatedBackups
 type DescribeDBInstanceAutomatedBackupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

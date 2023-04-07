@@ -54,8 +54,10 @@ type UpdateInfrastructureConfigurationInput struct {
 	// The instance metadata options that you can set for the HTTP requests that
 	// pipeline builds use to launch EC2 build and test instances. For more information
 	// about instance metadata options, see one of the following links:
-	//     - Configure the instance metadata options (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html) in the Amazon EC2 User Guide for Linux instances.
-	//     - Configure the instance metadata options (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html) in the Amazon EC2 Windows Guide for Windows instances.
+	//   - Configure the instance metadata options (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html)
+	//   in the Amazon EC2 User Guide for Linux instances.
+	//   - Configure the instance metadata options (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html)
+	//   in the Amazon EC2 Windows Guide for Windows instances.
 	InstanceMetadataOptions *types.InstanceMetadataOptions
 
 	// The instance types of the infrastructure configuration. You can specify one or
@@ -63,8 +65,8 @@ type UpdateInfrastructureConfigurationInput struct {
 	// instance types based on availability.
 	InstanceTypes []string
 
-	// The key pair of the infrastructure configuration. You can use this to log on
-	// to and debug the instance used to create your image.
+	// The key pair of the infrastructure configuration. You can use this to log on to
+	// and debug the instance used to create your image.
 	KeyPair *string
 
 	// The logging configuration of the infrastructure configuration.

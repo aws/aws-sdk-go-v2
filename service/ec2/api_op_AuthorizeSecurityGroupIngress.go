@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified inbound (ingress) rules to a security group. An inbound
-// rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR
+// Adds the specified inbound (ingress) rules to a security group. An inbound rule
+// permits instances to receive traffic from the specified IPv4 or IPv6 CIDR
 // address range, or from the instances that are associated with the specified
 // destination security groups. When specifying an inbound rule for your security
 // group in a VPC, the IpPermissions must include a source for the traffic. You
@@ -76,8 +76,8 @@ type AuthorizeSecurityGroupIngressInput struct {
 
 	// The IP protocol name ( tcp , udp , icmp ) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
 	// ). To specify icmpv6 , use a set of IP permissions. [VPC only] Use -1 to
-	// specify all protocols. If you specify -1  or a protocol other than tcp , udp,
-	// or icmp, traffic on all ports is allowed, regardless of any ports you specify.
+	// specify all protocols. If you specify -1 or a protocol other than tcp , udp , or
+	// icmp , traffic on all ports is allowed, regardless of any ports you specify.
 	// Alternatively, use a set of IP permissions to specify multiple rules and a
 	// description for the rule.
 	IpProtocol *string
@@ -113,7 +113,7 @@ type AuthorizeSecurityGroupIngressInput struct {
 
 type AuthorizeSecurityGroupIngressOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, returns an error.
+	// Returns true if the request succeeds; otherwise, returns an error.
 	Return *bool
 
 	// Information about the inbound (ingress) security group rules that were added.

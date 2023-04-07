@@ -47,7 +47,7 @@ type ListObjectParentsInput struct {
 	// object is reflected in a subsequent read operation of that same object.
 	ConsistencyLevel types.ConsistencyLevel
 
-	// When set to True, returns all ListObjectParentsResponse$ParentLinks. There
+	// When set to True, returns all ListObjectParentsResponse$ParentLinks . There
 	// could be multiple links between a parent-child pair.
 	IncludeAllLinksToEachParent bool
 
@@ -150,15 +150,14 @@ type ListObjectParentsAPIClient interface {
 
 var _ ListObjectParentsAPIClient = (*Client)(nil)
 
-// ListObjectParentsPaginatorOptions is the paginator options for
-// ListObjectParents
+// ListObjectParentsPaginatorOptions is the paginator options for ListObjectParents
 type ListObjectParentsPaginatorOptions struct {
 	// The maximum number of items to be retrieved in a single call. This is an
 	// approximate number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

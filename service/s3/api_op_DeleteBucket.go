@@ -163,8 +163,8 @@ func addDeleteBucketUpdateEndpoint(stack *middleware.Stack, options Options) err
 	})
 }
 
-// PresignDeleteBucket is used to generate a presigned HTTP Request which
-// contains presigned URL, signed headers and HTTP method used.
+// PresignDeleteBucket is used to generate a presigned HTTP Request which contains
+// presigned URL, signed headers and HTTP method used.
 func (c *PresignClient) PresignDeleteBucket(ctx context.Context, params *DeleteBucketInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
 	if params == nil {
 		params = &DeleteBucketInput{}

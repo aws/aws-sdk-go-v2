@@ -39,14 +39,14 @@ type DescribeImagesInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The filter key and value with which to filter your DescribeImages  results.
+	// The filter key and value with which to filter your DescribeImages results.
 	Filter *types.DescribeImagesFilter
 
 	// The list of image IDs for the requested repository.
 	ImageIds []types.ImageIdentifier
 
 	// The maximum number of repository results returned by DescribeImages in
-	// paginated output. When this parameter is used, DescribeImages  only returns
+	// paginated output. When this parameter is used, DescribeImages only returns
 	// maxResults results in a single page along with a nextToken response element.
 	// The remaining results of the initial request can be seen by sending another
 	// DescribeImages request with the returned nextToken value. This value can be
@@ -55,12 +55,11 @@ type DescribeImagesInput struct {
 	// used when you specify images with imageIds .
 	MaxResults *int32
 
-	// The nextToken  value returned from a previous paginated DescribeImages request
-	// where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken  value. This value is null when there are no more
-	// results to return. This option cannot be used when you specify images with
-	// imageIds .
+	// The nextToken value returned from a previous paginated DescribeImages request
+	// where maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value. This value is null when there are no more results to return.
+	// This option cannot be used when you specify images with imageIds .
 	NextToken *string
 
 	// The Amazon Web Services account ID associated with the registry that contains
@@ -73,13 +72,13 @@ type DescribeImagesInput struct {
 
 type DescribeImagesOutput struct {
 
-	// A list of ImageDetail  objects that contain data about the image.
+	// A list of ImageDetail objects that contain data about the image.
 	ImageDetails []types.ImageDetail
 
-	// The nextToken  value to include in a future DescribeImages request. When the
-	// results of a DescribeImages  request exceed maxResults, this value can be used
-	// to retrieve the next page of results. This value is null when there are no
-	// more results to return.
+	// The nextToken value to include in a future DescribeImages request. When the
+	// results of a DescribeImages request exceed maxResults , this value can be used
+	// to retrieve the next page of results. This value is null when there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -162,7 +161,7 @@ var _ DescribeImagesAPIClient = (*Client)(nil)
 // DescribeImagesPaginatorOptions is the paginator options for DescribeImages
 type DescribeImagesPaginatorOptions struct {
 	// The maximum number of repository results returned by DescribeImages in
-	// paginated output. When this parameter is used, DescribeImages  only returns
+	// paginated output. When this parameter is used, DescribeImages only returns
 	// maxResults results in a single page along with a nextToken response element.
 	// The remaining results of the initial request can be seen by sending another
 	// DescribeImages request with the returned nextToken value. This value can be
@@ -171,8 +170,8 @@ type DescribeImagesPaginatorOptions struct {
 	// used when you specify images with imageIds .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

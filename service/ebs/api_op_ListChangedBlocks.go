@@ -48,7 +48,7 @@ type ListChangedBlocksInput struct {
 	// blocks can be retrieved from the snapshot, the request can return less blocks
 	// than MaxResults or an empty array of blocks. To retrieve the next set of blocks
 	// from the snapshot, make another request with the returned NextToken value. The
-	// value of NextToken is null  when there are no more blocks to return.
+	// value of NextToken is null when there are no more blocks to return.
 	MaxResults *int32
 
 	// The token to request the next page of results. If you specify NextToken, then
@@ -71,7 +71,7 @@ type ListChangedBlocksOutput struct {
 	// An array of objects containing information about the changed blocks.
 	ChangedBlocks []types.ChangedBlock
 
-	// The time when the BlockToken  expires.
+	// The time when the BlockToken expires.
 	ExpiryTime *time.Time
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -158,18 +158,17 @@ type ListChangedBlocksAPIClient interface {
 
 var _ ListChangedBlocksAPIClient = (*Client)(nil)
 
-// ListChangedBlocksPaginatorOptions is the paginator options for
-// ListChangedBlocks
+// ListChangedBlocksPaginatorOptions is the paginator options for ListChangedBlocks
 type ListChangedBlocksPaginatorOptions struct {
 	// The maximum number of blocks to be returned by the request. Even if additional
 	// blocks can be retrieved from the snapshot, the request can return less blocks
 	// than MaxResults or an empty array of blocks. To retrieve the next set of blocks
 	// from the snapshot, make another request with the returned NextToken value. The
-	// value of NextToken is null  when there are no more blocks to return.
+	// value of NextToken is null when there are no more blocks to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

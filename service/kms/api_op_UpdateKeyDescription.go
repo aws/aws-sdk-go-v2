@@ -11,7 +11,7 @@ import (
 )
 
 // Updates the description of a KMS key. To see the description of a KMS key, use
-// DescribeKey. The KMS key that you use for this operation must be in a
+// DescribeKey . The KMS key that you use for this operation must be in a
 // compatible key state. For details, see Key states of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.
@@ -41,12 +41,12 @@ type UpdateKeyDescriptionInput struct {
 	// This member is required.
 	Description *string
 
-	// Updates the description of the specified KMS key. Specify the key ID or key
-	// ARN of the KMS key. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey .
+	// Updates the description of the specified KMS key. Specify the key ID or key ARN
+	// of the KMS key. For example:
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey .
 	//
 	// This member is required.
 	KeyId *string

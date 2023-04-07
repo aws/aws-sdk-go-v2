@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing registry which is used to hold a collection of schemas.
-// The updated properties relate to the registry, and do not modify any of the
-// schemas within the registry.
+// Updates an existing registry which is used to hold a collection of schemas. The
+// updated properties relate to the registry, and do not modify any of the schemas
+// within the registry.
 func (c *Client) UpdateRegistry(ctx context.Context, params *UpdateRegistryInput, optFns ...func(*Options)) (*UpdateRegistryOutput, error) {
 	if params == nil {
 		params = &UpdateRegistryInput{}

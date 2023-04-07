@@ -29,9 +29,9 @@ func (c *Client) DescribeProtectionGroup(ctx context.Context, params *DescribePr
 
 type DescribeProtectionGroupInput struct {
 
-	// The name of the protection group. You use this to identify the protection
-	// group in lists and to manage the protection group, for example to update,
-	// delete, or describe it.
+	// The name of the protection group. You use this to identify the protection group
+	// in lists and to manage the protection group, for example to update, delete, or
+	// describe it.
 	//
 	// This member is required.
 	ProtectionGroupId *string
@@ -41,8 +41,8 @@ type DescribeProtectionGroupInput struct {
 
 type DescribeProtectionGroupOutput struct {
 
-	// A grouping of protected resources that you and Shield Advanced can monitor as
-	// a collective. This resource grouping improves the accuracy of detection and
+	// A grouping of protected resources that you and Shield Advanced can monitor as a
+	// collective. This resource grouping improves the accuracy of detection and
 	// reduces false positives.
 	//
 	// This member is required.

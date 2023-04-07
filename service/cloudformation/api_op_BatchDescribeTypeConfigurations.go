@@ -42,12 +42,12 @@ type BatchDescribeTypeConfigurationsInput struct {
 
 type BatchDescribeTypeConfigurationsOutput struct {
 
-	// A list of information concerning any errors generated during the setting of
-	// the specified configurations.
+	// A list of information concerning any errors generated during the setting of the
+	// specified configurations.
 	Errors []types.BatchDescribeTypeConfigurationsError
 
-	// A list of any of the specified extension configurations from the
-	// CloudFormation registry.
+	// A list of any of the specified extension configurations from the CloudFormation
+	// registry.
 	TypeConfigurations []types.TypeConfigurationDetails
 
 	// A list of any of the specified extension configurations that CloudFormation

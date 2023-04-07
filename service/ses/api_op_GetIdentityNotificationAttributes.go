@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Given a list of verified identities (email addresses and/or domains), returns
-// a structure describing identity notification attributes. This operation is
+// Given a list of verified identities (email addresses and/or domains), returns a
+// structure describing identity notification attributes. This operation is
 // throttled at one request per second and can only get notification attributes for
 // up to 100 identities at a time. For more information about using notifications
 // with Amazon SES, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html)
@@ -38,8 +38,8 @@ func (c *Client) GetIdentityNotificationAttributes(ctx context.Context, params *
 // .
 type GetIdentityNotificationAttributesInput struct {
 
-	// A list of one or more identities. You can specify an identity by using its
-	// name or by using its Amazon Resource Name (ARN). Examples: user@example.com ,
+	// A list of one or more identities. You can specify an identity by using its name
+	// or by using its Amazon Resource Name (ARN). Examples: user@example.com ,
 	// example.com , arn:aws:ses:us-east-1:123456789012:identity/example.com .
 	//
 	// This member is required.

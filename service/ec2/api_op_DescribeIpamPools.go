@@ -136,14 +136,13 @@ type DescribeIpamPoolsAPIClient interface {
 
 var _ DescribeIpamPoolsAPIClient = (*Client)(nil)
 
-// DescribeIpamPoolsPaginatorOptions is the paginator options for
-// DescribeIpamPools
+// DescribeIpamPoolsPaginatorOptions is the paginator options for DescribeIpamPools
 type DescribeIpamPoolsPaginatorOptions struct {
 	// The maximum number of results to return in the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

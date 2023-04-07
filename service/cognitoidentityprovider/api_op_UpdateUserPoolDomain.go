@@ -56,7 +56,7 @@ type UpdateUserPoolDomainInput struct {
 	CustomDomainConfig *types.CustomDomainConfigType
 
 	// The domain name for the custom domain that hosts the sign-up and sign-in pages
-	// for your application. One example might be auth.example.com. This string can
+	// for your application. One example might be auth.example.com . This string can
 	// include only lowercase letters, numbers, and hyphens. Don't use a hyphen for the
 	// first or last character. Use periods to separate subdomain names.
 	//

@@ -46,7 +46,7 @@ type GetImportOutput struct {
 	// The ARN of the destination event data store.
 	Destinations []string
 
-	// Used with StartEventTime  to bound a StartImport request, and limit imported
+	// Used with StartEventTime to bound a StartImport request, and limit imported
 	// trail events to only those events logged within a specified time period.
 	EndEventTime *time.Time
 
@@ -65,8 +65,8 @@ type GetImportOutput struct {
 	// The status of the import.
 	ImportStatus types.ImportStatus
 
-	// Used with EndEventTime  to bound a StartImport request, and limit imported
-	// trail events to only those events logged within a specified time period.
+	// Used with EndEventTime to bound a StartImport request, and limit imported trail
+	// events to only those events logged within a specified time period.
 	StartEventTime *time.Time
 
 	// The timestamp of when the import was updated.

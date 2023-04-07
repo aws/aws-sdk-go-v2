@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the detector version’s status. You can perform the following
-// promotions or demotions using UpdateDetectorVersionStatus : DRAFT  to ACTIVE ,
-// ACTIVE to INACTIVE , and INACTIVE  to ACTIVE .
+// Updates the detector version’s status. You can perform the following promotions
+// or demotions using UpdateDetectorVersionStatus : DRAFT to ACTIVE , ACTIVE to
+// INACTIVE , and INACTIVE to ACTIVE .
 func (c *Client) UpdateDetectorVersionStatus(ctx context.Context, params *UpdateDetectorVersionStatusInput, optFns ...func(*Options)) (*UpdateDetectorVersionStatusOutput, error) {
 	if params == nil {
 		params = &UpdateDetectorVersionStatusInput{}
@@ -41,7 +41,7 @@ type UpdateDetectorVersionStatusInput struct {
 	// This member is required.
 	DetectorVersionId *string
 
-	// The new status. The only supported values are ACTIVE  and INACTIVE
+	// The new status. The only supported values are ACTIVE and INACTIVE
 	//
 	// This member is required.
 	Status types.DetectorVersionStatus

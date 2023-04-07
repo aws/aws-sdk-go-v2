@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the properties associated with an InferSNOMEDCT job. Use this operation
-// to get the status of an inference job.
+// Gets the properties associated with an InferSNOMEDCT job. Use this operation to
+// get the status of an inference job.
 func (c *Client) DescribeSNOMEDCTInferenceJob(ctx context.Context, params *DescribeSNOMEDCTInferenceJobInput, optFns ...func(*Options)) (*DescribeSNOMEDCTInferenceJobOutput, error) {
 	if params == nil {
 		params = &DescribeSNOMEDCTInferenceJobInput{}

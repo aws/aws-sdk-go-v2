@@ -31,18 +31,18 @@ func (c *Client) GetLensReviewReport(ctx context.Context, params *GetLensReviewR
 type GetLensReviewReportInput struct {
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless, or the lens ARN, such as
-	// arn:aws:wellarchitected:us-east-1::lens/serverless. Note that some operations
+	// the lens alias, such as serverless , or the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
 	// Services official lenses. For custom lenses, this is the lens ARN, such as
-	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef.
-	// Each lens is identified by its LensSummary$LensAlias.
+	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
+	// . Each lens is identified by its LensSummary$LensAlias .
 	//
 	// This member is required.
 	LensAlias *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -62,8 +62,8 @@ type GetLensReviewReportOutput struct {
 	// The milestone number. A workload can have a maximum of 100 milestones.
 	MilestoneNumber int32
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

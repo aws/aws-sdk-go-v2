@@ -19,13 +19,13 @@ import (
 // StackSets, and non-root nested stacks are not supported. The CloudFormation
 // stack must have one of the following statuses to be imported: CREATE_COMPLETE ,
 // UPDATE_COMPLETE , UPDATE_ROLLBACK_COMPLETE , IMPORT_COMPLETE , and
-// IMPORT_ROLLBACK_COMPLETE. Import of the resource requires that the
+// IMPORT_ROLLBACK_COMPLETE . Import of the resource requires that the
 // CloudFormation stack template matches the associated Service Catalog product
 // provisioning artifact. When you import an existing CloudFormation stack into a
 // portfolio, constraints that are associated with the product aren't applied
 // during the import process. The constraints are applied after you call
-// UpdateProvisionedProductfor the provisioned product. The user or role that
-// performs this operation must have the cloudformation:GetTemplate  and
+// UpdateProvisionedProduct for the provisioned product. The user or role that
+// performs this operation must have the cloudformation:GetTemplate and
 // cloudformation:DescribeStacks IAM policy permissions.
 func (c *Client) ImportAsProvisionedProduct(ctx context.Context, params *ImportAsProvisionedProductInput, optFns ...func(*Options)) (*ImportAsProvisionedProductOutput, error) {
 	if params == nil {
@@ -62,9 +62,9 @@ type ImportAsProvisionedProductInput struct {
 	// This member is required.
 	ProductId *string
 
-	// The user-friendly name of the provisioned product. The value must be unique
-	// for the Amazon Web Services account. The name cannot be updated after the
-	// product is provisioned.
+	// The user-friendly name of the provisioned product. The value must be unique for
+	// the Amazon Web Services account. The name cannot be updated after the product is
+	// provisioned.
 	//
 	// This member is required.
 	ProvisionedProductName *string
@@ -75,9 +75,9 @@ type ImportAsProvisionedProductInput struct {
 	ProvisioningArtifactId *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

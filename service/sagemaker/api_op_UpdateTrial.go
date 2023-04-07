@@ -34,7 +34,7 @@ type UpdateTrialInput struct {
 	TrialName *string
 
 	// The name of the trial as displayed. The name doesn't need to be unique. If
-	// DisplayName isn't specified, TrialName  is displayed.
+	// DisplayName isn't specified, TrialName is displayed.
 	DisplayName *string
 
 	noSmithyDocumentSerde

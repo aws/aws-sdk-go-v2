@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// AnalyzeExpense synchronously analyzes an input document for financially
-// related relationships between text. Information is returned as ExpenseDocuments
-// and seperated as follows:
-//   - LineItemGroups - A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.
-//   - SummaryFields - Contains all other information a receipt, such as header information or the vendors name.
+// AnalyzeExpense synchronously analyzes an input document for financially related
+// relationships between text. Information is returned as ExpenseDocuments and
+// seperated as follows:
+//   - LineItemGroups - A data set containing LineItems which store information
+//     about the lines of text, such as an item purchased and its price on a receipt.
+//   - SummaryFields - Contains all other information a receipt, such as header
+//     information or the vendors name.
 func (c *Client) AnalyzeExpense(ctx context.Context, params *AnalyzeExpenseInput, optFns ...func(*Options)) (*AnalyzeExpenseOutput, error) {
 	if params == nil {
 		params = &AnalyzeExpenseInput{}
@@ -33,9 +35,9 @@ func (c *Client) AnalyzeExpense(ctx context.Context, params *AnalyzeExpenseInput
 
 type AnalyzeExpenseInput struct {
 
-	// The input document, either as bytes or as an S3 object. You pass image bytes
-	// to an Amazon Textract API operation by using the Bytes property. For example,
-	// you would use the Bytes property to pass a document loaded from a local file
+	// The input document, either as bytes or as an S3 object. You pass image bytes to
+	// an Amazon Textract API operation by using the Bytes property. For example, you
+	// would use the Bytes property to pass a document loaded from a local file
 	// system. Image bytes passed by using the Bytes property must be base64 encoded.
 	// Your code might not need to encode document file bytes if you're using an AWS
 	// SDK to call Amazon Textract API operations. You pass images stored in an S3

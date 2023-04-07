@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the necessary configuration for push sync.This API can only be called
-// with developer credentials. You cannot call this API with the temporary user
+// Sets the necessary configuration for push sync.This API can only be called with
+// developer credentials. You cannot call this API with the temporary user
 // credentials provided by Cognito Identity. SetIdentityPoolConfiguration The
 // following examples have been edited for readability. POST / HTTP/1.1
 // CONTENT-TYPE: application/json X-AMZN-REQUESTID:

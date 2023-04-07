@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all of the configuration sets associated with your Amazon Pinpoint
-// account in the current region. In Amazon Pinpoint, configuration sets are groups
-// of rules that you can apply to the emails you send. You apply a configuration
-// set to an email by including a reference to the configuration set in the headers
-// of the email. When you apply a configuration set to an email, all of the rules
-// in that configuration set are applied to the email.
+// List all of the configuration sets associated with your Amazon Pinpoint account
+// in the current region. In Amazon Pinpoint, configuration sets are groups of
+// rules that you can apply to the emails you send. You apply a configuration set
+// to an email by including a reference to the configuration set in the headers of
+// the email. When you apply a configuration set to an email, all of the rules in
+// that configuration set are applied to the email.
 func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigurationSetsInput, optFns ...func(*Options)) (*ListConfigurationSetsOutput, error) {
 	if params == nil {
 		params = &ListConfigurationSetsInput{}
@@ -40,8 +40,8 @@ type ListConfigurationSetsInput struct {
 	// position in the list of configuration sets.
 	NextToken *string
 
-	// The number of results to show in a single call to ListConfigurationSets. If
-	// the number of results is larger than the number you specified in this parameter,
+	// The number of results to show in a single call to ListConfigurationSets . If the
+	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	PageSize *int32
@@ -49,17 +49,17 @@ type ListConfigurationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
-// A list of configuration sets in your Amazon Pinpoint account in the current
-// AWS Region.
+// A list of configuration sets in your Amazon Pinpoint account in the current AWS
+// Region.
 type ListConfigurationSetsOutput struct {
 
 	// An array that contains all of the configuration sets in your Amazon Pinpoint
 	// account in the current AWS Region.
 	ConfigurationSets []string
 
-	// A token that indicates that there are additional configuration sets to list.
-	// To view additional configuration sets, issue another request to
-	// ListConfigurationSets , and pass this token in the NextToken  parameter.
+	// A token that indicates that there are additional configuration sets to list. To
+	// view additional configuration sets, issue another request to
+	// ListConfigurationSets , and pass this token in the NextToken parameter.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -139,14 +139,14 @@ var _ ListConfigurationSetsAPIClient = (*Client)(nil)
 // ListConfigurationSetsPaginatorOptions is the paginator options for
 // ListConfigurationSets
 type ListConfigurationSetsPaginatorOptions struct {
-	// The number of results to show in a single call to ListConfigurationSets. If
-	// the number of results is larger than the number you specified in this parameter,
+	// The number of results to show in a single call to ListConfigurationSets . If the
+	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

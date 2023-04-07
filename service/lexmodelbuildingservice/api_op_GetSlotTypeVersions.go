@@ -14,12 +14,11 @@ import (
 
 // Gets information about all versions of a slot type. The GetSlotTypeVersions
 // operation returns a SlotTypeMetadata object for each version of a slot type.
-// For example, if a slot type has three numbered versions, the
-// GetSlotTypeVersions operation returns four SlotTypeMetadata objects in the
-// response, one for each numbered version and one for the $LATEST  version. The
-// GetSlotTypeVersions operation always returns at least one version, the $LATEST
-// version. This operation requires permissions for the lex:GetSlotTypeVersions
-// action.
+// For example, if a slot type has three numbered versions, the GetSlotTypeVersions
+// operation returns four SlotTypeMetadata objects in the response, one for each
+// numbered version and one for the $LATEST version. The GetSlotTypeVersions
+// operation always returns at least one version, the $LATEST version. This
+// operation requires permissions for the lex:GetSlotTypeVersions action.
 func (c *Client) GetSlotTypeVersions(ctx context.Context, params *GetSlotTypeVersionsInput, optFns ...func(*Options)) (*GetSlotTypeVersionsOutput, error) {
 	if params == nil {
 		params = &GetSlotTypeVersionsInput{}
@@ -42,8 +41,8 @@ type GetSlotTypeVersionsInput struct {
 	// This member is required.
 	Name *string
 
-	// The maximum number of slot type versions to return in the response. The
-	// default is 10.
+	// The maximum number of slot type versions to return in the response. The default
+	// is 10.
 	MaxResults *int32
 
 	// A pagination token for fetching the next page of slot type versions. If the
@@ -63,8 +62,8 @@ type GetSlotTypeVersionsOutput struct {
 	// the next request.
 	NextToken *string
 
-	// An array of SlotTypeMetadata objects, one for each numbered version of the
-	// slot type plus one for the $LATEST  version.
+	// An array of SlotTypeMetadata objects, one for each numbered version of the slot
+	// type plus one for the $LATEST version.
 	SlotTypes []types.SlotTypeMetadata
 
 	// Metadata pertaining to the operation's result.
@@ -147,12 +146,12 @@ var _ GetSlotTypeVersionsAPIClient = (*Client)(nil)
 // GetSlotTypeVersionsPaginatorOptions is the paginator options for
 // GetSlotTypeVersions
 type GetSlotTypeVersionsPaginatorOptions struct {
-	// The maximum number of slot type versions to return in the response. The
-	// default is 10.
+	// The maximum number of slot type versions to return in the response. The default
+	// is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

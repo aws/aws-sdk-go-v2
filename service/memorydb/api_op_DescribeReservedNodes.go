@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about reserved nodes for this account, or about a
-// specified reserved node.
+// Returns information about reserved nodes for this account, or about a specified
+// reserved node.
 func (c *Client) DescribeReservedNodes(ctx context.Context, params *DescribeReservedNodesInput, optFns ...func(*Options)) (*DescribeReservedNodesOutput, error) {
 	if params == nil {
 		params = &DescribeReservedNodesInput{}
@@ -31,13 +31,13 @@ func (c *Client) DescribeReservedNodes(ctx context.Context, params *DescribeRese
 
 type DescribeReservedNodesInput struct {
 
-	// The duration filter value, specified in years or seconds. Use this parameter
-	// to show only reservations for this duration.
+	// The duration filter value, specified in years or seconds. Use this parameter to
+	// show only reservations for this duration.
 	Duration *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional marker returned from a prior request. Use this marker for
@@ -47,8 +47,7 @@ type DescribeReservedNodesInput struct {
 	NextToken *string
 
 	// The node type filter value. Use this parameter to show only those reservations
-	// matching the specified node type. For more information, see Supported node
-	// types (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported)
+	// matching the specified node type. For more information, see Supported node types (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported)
 	// .
 	NodeType *string
 
@@ -61,8 +60,8 @@ type DescribeReservedNodesInput struct {
 	// reservation that matches the specified reservation ID.
 	ReservationId *string
 
-	// The offering identifier filter value. Use this parameter to show only
-	// purchased reservations matching the specified offering identifier.
+	// The offering identifier filter value. Use this parameter to show only purchased
+	// reservations matching the specified offering identifier.
 	ReservedNodesOfferingId *string
 
 	noSmithyDocumentSerde
@@ -76,8 +75,8 @@ type DescribeReservedNodesOutput struct {
 	// MaxRecords.
 	NextToken *string
 
-	// Returns information about reserved nodes for this account, or about a
-	// specified reserved node.
+	// Returns information about reserved nodes for this account, or about a specified
+	// reserved node.
 	ReservedNodes []types.ReservedNode
 
 	// Metadata pertaining to the operation's result.
@@ -157,13 +156,13 @@ var _ DescribeReservedNodesAPIClient = (*Client)(nil)
 // DescribeReservedNodesPaginatorOptions is the paginator options for
 // DescribeReservedNodes
 type DescribeReservedNodesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

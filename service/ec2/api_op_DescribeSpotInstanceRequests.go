@@ -19,11 +19,11 @@ import (
 )
 
 // Describes the specified Spot Instance requests. You can use
-// DescribeSpotInstanceRequeststo find a running Spot Instance by examining the
-// response. If the status of the Spot Instance is fulfilled, the instance ID
+// DescribeSpotInstanceRequests to find a running Spot Instance by examining the
+// response. If the status of the Spot Instance is fulfilled , the instance ID
 // appears in the response and contains the identifier of the instance.
 // Alternatively, you can use DescribeInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances)
-// with a filter to look for instances where the instance lifecycle is spot. We
+// with a filter to look for instances where the instance lifecycle is spot . We
 // recommend that you set MaxResults to a value between 5 and 1000 to limit the
 // number of items returned. This paginates the output, which makes the list more
 // manageable and returns the items faster. If the list of items exceeds your
@@ -56,55 +56,80 @@ type DescribeSpotInstanceRequestsInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//     - availability-zone-group - The Availability Zone group.
-	//     - create-time - The time stamp when the Spot Instance request was created.
-	//     - fault-code - The fault code related to the request.
-	//     - fault-message - The fault message related to the request.
-	//     - instance-id - The ID of the instance that fulfilled the request.
-	//     - launch-group - The Spot Instance launch group.
-	//     - launch.block-device-mapping.delete-on-termination - Indicates whether the EBS volume is deleted on instance termination.
-	//     - launch.block-device-mapping.device-name - The device name for the volume in the block device mapping (for example, /dev/sdh or xvdh ).
-	//     - launch.block-device-mapping.snapshot-id - The ID of the snapshot for the EBS volume.
-	//     - launch.block-device-mapping.volume-size - The size of the EBS volume, in GiB.
-	//     - launch.block-device-mapping.volume-type - The type of EBS volume: gp2 for General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic.
-	//     - launch.group-id - The ID of the security group for the instance.
-	//     - launch.group-name - The name of the security group for the instance.
-	//     - launch.image-id - The ID of the AMI.
-	//     - launch.instance-type - The type of instance (for example, m3.medium ).
-	//     - launch.kernel-id - The kernel ID.
-	//     - launch.key-name - The name of the key pair the instance launched with.
-	//     - launch.monitoring-enabled - Whether detailed monitoring is enabled for the Spot Instance.
-	//     - launch.ramdisk-id - The RAM disk ID.
-	//     - launched-availability-zone - The Availability Zone in which the request is launched.
-	//     - network-interface.addresses.primary - Indicates whether the IP address is the primary private IP address.
-	//     - network-interface.delete-on-termination - Indicates whether the network interface is deleted when the instance is terminated.
-	//     - network-interface.description - A description of the network interface.
-	//     - network-interface.device-index - The index of the device for the network interface attachment on the instance.
-	//     - network-interface.group-id - The ID of the security group associated with the network interface.
-	//     - network-interface.network-interface-id - The ID of the network interface.
-	//     - network-interface.private-ip-address - The primary private IP address of the network interface.
-	//     - network-interface.subnet-id - The ID of the subnet for the instance.
-	//     - product-description - The product description associated with the instance ( Linux/UNIX | Windows ).
-	//     - spot-instance-request-id - The Spot Instance request ID.
-	//     - spot-price - The maximum hourly price for any Spot Instance launched to fulfill the request.
-	//     - state - The state of the Spot Instance request ( open | active | closed | cancelled | failed ). Spot request status information can help you track your Amazon EC2 Spot Instance requests. For more information, see Spot request status (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-request-status.html) in the Amazon EC2 User Guide for Linux Instances.
-	//     - status-code - The short code describing the most recent evaluation of your Spot Instance request.
-	//     - status-message - The message explaining the status of the Spot Instance request.
-	//     - tag: - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
-	//     - tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
-	//     - type - The type of Spot Instance request ( one-time | persistent ).
-	//     - valid-from - The start date of the request.
-	//     - valid-until - The end date of the request.
+	//   - availability-zone-group - The Availability Zone group.
+	//   - create-time - The time stamp when the Spot Instance request was created.
+	//   - fault-code - The fault code related to the request.
+	//   - fault-message - The fault message related to the request.
+	//   - instance-id - The ID of the instance that fulfilled the request.
+	//   - launch-group - The Spot Instance launch group.
+	//   - launch.block-device-mapping.delete-on-termination - Indicates whether the
+	//   EBS volume is deleted on instance termination.
+	//   - launch.block-device-mapping.device-name - The device name for the volume in
+	//   the block device mapping (for example, /dev/sdh or xvdh ).
+	//   - launch.block-device-mapping.snapshot-id - The ID of the snapshot for the EBS
+	//   volume.
+	//   - launch.block-device-mapping.volume-size - The size of the EBS volume, in
+	//   GiB.
+	//   - launch.block-device-mapping.volume-type - The type of EBS volume: gp2 for
+	//   General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput
+	//   Optimized HDD, sc1 for Cold HDD, or standard for Magnetic.
+	//   - launch.group-id - The ID of the security group for the instance.
+	//   - launch.group-name - The name of the security group for the instance.
+	//   - launch.image-id - The ID of the AMI.
+	//   - launch.instance-type - The type of instance (for example, m3.medium ).
+	//   - launch.kernel-id - The kernel ID.
+	//   - launch.key-name - The name of the key pair the instance launched with.
+	//   - launch.monitoring-enabled - Whether detailed monitoring is enabled for the
+	//   Spot Instance.
+	//   - launch.ramdisk-id - The RAM disk ID.
+	//   - launched-availability-zone - The Availability Zone in which the request is
+	//   launched.
+	//   - network-interface.addresses.primary - Indicates whether the IP address is
+	//   the primary private IP address.
+	//   - network-interface.delete-on-termination - Indicates whether the network
+	//   interface is deleted when the instance is terminated.
+	//   - network-interface.description - A description of the network interface.
+	//   - network-interface.device-index - The index of the device for the network
+	//   interface attachment on the instance.
+	//   - network-interface.group-id - The ID of the security group associated with
+	//   the network interface.
+	//   - network-interface.network-interface-id - The ID of the network interface.
+	//   - network-interface.private-ip-address - The primary private IP address of the
+	//   network interface.
+	//   - network-interface.subnet-id - The ID of the subnet for the instance.
+	//   - product-description - The product description associated with the instance (
+	//   Linux/UNIX | Windows ).
+	//   - spot-instance-request-id - The Spot Instance request ID.
+	//   - spot-price - The maximum hourly price for any Spot Instance launched to
+	//   fulfill the request.
+	//   - state - The state of the Spot Instance request ( open | active | closed |
+	//   cancelled | failed ). Spot request status information can help you track your
+	//   Amazon EC2 Spot Instance requests. For more information, see Spot request
+	//   status (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-request-status.html)
+	//   in the Amazon EC2 User Guide for Linux Instances.
+	//   - status-code - The short code describing the most recent evaluation of your
+	//   Spot Instance request.
+	//   - status-message - The message explaining the status of the Spot Instance
+	//   request.
+	//   - tag: - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - type - The type of Spot Instance request ( one-time | persistent ).
+	//   - valid-from - The start date of the request.
+	//   - valid-until - The end date of the request.
 	Filters []types.Filter
 
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues
-	// from the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	// One or more Spot Instance request IDs.
@@ -117,7 +142,7 @@ type DescribeSpotInstanceRequestsInput struct {
 type DescribeSpotInstanceRequestsOutput struct {
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// One or more Spot Instance requests.
@@ -200,14 +225,14 @@ var _ DescribeSpotInstanceRequestsAPIClient = (*Client)(nil)
 // DescribeSpotInstanceRequestsPaginatorOptions is the paginator options for
 // DescribeSpotInstanceRequests
 type DescribeSpotInstanceRequestsPaginatorOptions struct {
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -352,8 +377,8 @@ func (w *SpotInstanceRequestFulfilledWaiter) Wait(ctx context.Context, params *D
 	return err
 }
 
-// WaitForOutput calls the waiter function for SpotInstanceRequestFulfilled
-// waiter and returns the output of the successful operation. The maxWaitDur is the
+// WaitForOutput calls the waiter function for SpotInstanceRequestFulfilled waiter
+// and returns the output of the successful operation. The maxWaitDur is the
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *SpotInstanceRequestFulfilledWaiter) WaitForOutput(ctx context.Context, params *DescribeSpotInstanceRequestsInput, maxWaitDur time.Duration, optFns ...func(*SpotInstanceRequestFulfilledWaiterOptions)) (*DescribeSpotInstanceRequestsOutput, error) {

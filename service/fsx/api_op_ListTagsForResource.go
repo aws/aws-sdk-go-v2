@@ -18,12 +18,15 @@ import (
 // response. In this case, send a later request with the NextToken request
 // parameter set to the value of NextToken from the last response. This action is
 // used in an iterative process to retrieve a list of your tags.
-// ListTagsForResource is called first without a NextTokenvalue. Then the action
+// ListTagsForResource is called first without a NextToken value. Then the action
 // continues to be called with the NextToken parameter set to the value of the
-// last NextToken  value until a response has no NextToken. When using this
-// action, keep the following in mind:
-//   - The implementation might return fewer than MaxResults file system descriptions while still including a NextToken value.
-//   - The order of tags returned in the response of one ListTagsForResource call and the order of tags returned across the responses of a multi-call iteration is unspecified.
+// last NextToken value until a response has no NextToken . When using this action,
+// keep the following in mind:
+//   - The implementation might return fewer than MaxResults file system
+//     descriptions while still including a NextToken value.
+//   - The order of tags returned in the response of one ListTagsForResource call
+//     and the order of tags returned across the responses of a multi-call iteration is
+//     unspecified.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -39,7 +42,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 	return out, nil
 }
 
-// The request object for ListTagsForResource  operation.
+// The request object for ListTagsForResource operation.
 type ListTagsForResourceInput struct {
 
 	// The ARN of the Amazon FSx resource that will have its tags listed.
@@ -61,11 +64,11 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response object for ListTagsForResource  operation.
+// The response object for ListTagsForResource operation.
 type ListTagsForResourceOutput struct {
 
 	// This is present if there are more tags than returned in the response (String).
-	// You can use the NextToken  value in the later request to fetch the tags.
+	// You can use the NextToken value in the later request to fetch the tags.
 	NextToken *string
 
 	// A list of tags on the resource.
@@ -157,8 +160,8 @@ type ListTagsForResourcePaginatorOptions struct {
 	// internal maximum number of items per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

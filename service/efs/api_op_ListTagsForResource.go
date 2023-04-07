@@ -14,7 +14,7 @@ import (
 
 // Lists all tags for a top-level EFS resource. You must provide the ID of the
 // resource that you want to retrieve the tags for. This operation requires
-// permissions for the elasticfilesystem:DescribeAccessPoints  action.
+// permissions for the elasticfilesystem:DescribeAccessPoints action.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -32,8 +32,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// Specifies the EFS resource you want to retrieve tags for. You can retrieve
-	// tags for EFS file systems and access points using this API endpoint.
+	// Specifies the EFS resource you want to retrieve tags for. You can retrieve tags
+	// for EFS file systems and access points using this API endpoint.
 	//
 	// This member is required.
 	ResourceId *string
@@ -42,8 +42,8 @@ type ListTagsForResourceInput struct {
 	// response. The default value is 100.
 	MaxResults *int32
 
-	// (Optional) You can use NextToken in a subsequent request to fetch the next
-	// page of access point descriptions if the response payload was paginated.
+	// (Optional) You can use NextToken in a subsequent request to fetch the next page
+	// of access point descriptions if the response payload was paginated.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,9 +51,8 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// NextToken  is present if the response payload is paginated. You can use
-	// NextTokenin a subsequent request to fetch the next page of access point
-	// descriptions.
+	// NextToken is present if the response payload is paginated. You can use NextToken
+	// in a subsequent request to fetch the next page of access point descriptions.
 	NextToken *string
 
 	// An array of the tags for the specified EFS resource.
@@ -143,8 +142,8 @@ type ListTagsForResourcePaginatorOptions struct {
 	// response. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

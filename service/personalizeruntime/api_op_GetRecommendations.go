@@ -17,12 +17,11 @@ import (
 //   - USER_PERSONALIZATION - userId required, itemId not used
 //   - RELATED_ITEMS - itemId required, userId not used
 //
-// Campaigns that are
-// backed by a solution created using a recipe of type PERSONALIZED_RANKING use the
-// API. For recommenders, the recommender's ARN is required and the required item
-// and user input depends on the use case (domain-based recipe) backing the
-// recommender. For information on use case requirements see Choosing recommender
-// use cases (https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html)
+// Campaigns that are backed by a solution created using a recipe of type
+// PERSONALIZED_RANKING use the API. For recommenders, the recommender's ARN is
+// required and the required item and user input depends on the use case
+// (domain-based recipe) backing the recommender. For information on use case
+// requirements see Choosing recommender use cases (https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html)
 // .
 func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendationsInput, optFns ...func(*Options)) (*GetRecommendationsOutput, error) {
 	if params == nil {
@@ -60,13 +59,12 @@ type GetRecommendationsInput struct {
 	// parameter in your filter expression, provide the parameter name (in matching
 	// case) as a key and the filter value(s) as the corresponding value. Separate
 	// multiple values for one parameter with a comma. For filter expressions that use
-	// an INCLUDE element to include items, you must provide values for all
-	// parameters that are defined in the expression. For filters with expressions that
-	// use an EXCLUDE  element to exclude items, you can omit the filter-values.In
-	// this case, Amazon Personalize doesn't use that portion of the expression to
-	// filter recommendations. For more information, see Filtering recommendations
-	// and user segments (https://docs.aws.amazon.com/personalize/latest/dg/filter.html)
-	// .
+	// an INCLUDE element to include items, you must provide values for all parameters
+	// that are defined in the expression. For filters with expressions that use an
+	// EXCLUDE element to exclude items, you can omit the filter-values .In this case,
+	// Amazon Personalize doesn't use that portion of the expression to filter
+	// recommendations. For more information, see Filtering recommendations and user
+	// segments (https://docs.aws.amazon.com/personalize/latest/dg/filter.html) .
 	FilterValues map[string]string
 
 	// The item ID to provide recommendations for. Required for RELATED_ITEMS recipe
@@ -95,8 +93,8 @@ type GetRecommendationsInput struct {
 
 type GetRecommendationsOutput struct {
 
-	// A list of recommendations sorted in descending order by prediction score.
-	// There can be a maximum of 500 items in the list.
+	// A list of recommendations sorted in descending order by prediction score. There
+	// can be a maximum of 500 items in the list.
 	ItemList []types.PredictedItem
 
 	// The ID of the recommendation.

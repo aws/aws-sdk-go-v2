@@ -66,8 +66,7 @@ type GetEntityOutput struct {
 	// This member is required.
 	EntityName *string
 
-	// A Boolean value that specifies whether the entity has associated child
-	// entities.
+	// A Boolean value that specifies whether the entity has associated child entities.
 	//
 	// This member is required.
 	HasChildEntities *bool
@@ -92,8 +91,8 @@ type GetEntityOutput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// An object that maps strings to the components in the entity. Each string in
-	// the mapping must be unique to this object.
+	// An object that maps strings to the components in the entity. Each string in the
+	// mapping must be unique to this object.
 	Components map[string]types.ComponentResponse
 
 	// The description of the entity.

@@ -66,12 +66,12 @@ type CreateDistributionInput struct {
 	// distribution.
 	CacheBehaviors []types.CacheBehaviorPerPath
 
-	// The IP address type for the distribution. The possible values are ipv4 for
-	// IPv4 only, and dualstack  for IPv4 and IPv6. The default value is dualstack .
+	// The IP address type for the distribution. The possible values are ipv4 for IPv4
+	// only, and dualstack for IPv4 and IPv6. The default value is dualstack .
 	IpAddressType types.IpAddressType
 
 	// The tag keys and optional values to add to the distribution during create. Use
-	// the TagResource  action to tag a resource after it's created.
+	// the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

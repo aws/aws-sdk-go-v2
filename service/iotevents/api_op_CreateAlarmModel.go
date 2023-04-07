@@ -44,8 +44,8 @@ type CreateAlarmModelInput struct {
 	// This member is required.
 	AlarmRule *types.AlarmRule
 
-	// The ARN of the IAM role that allows the alarm to perform actions and access
-	// AWS resources. For more information, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// The ARN of the IAM role that allows the alarm to perform actions and access AWS
+	// resources. For more information, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference.
 	//
 	// This member is required.
@@ -72,8 +72,8 @@ type CreateAlarmModelInput struct {
 	Severity *int32
 
 	// A list of key-value pairs that contain metadata for the alarm model. The tags
-	// help you manage the alarm model. For more information, see Tagging your AWS
-	// IoT Events resources (https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html)
+	// help you manage the alarm model. For more information, see Tagging your AWS IoT
+	// Events resources (https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html)
 	// in the AWS IoT Events Developer Guide. You can create up to 50 tags for one
 	// alarm model.
 	Tags []types.Tag
@@ -98,10 +98,13 @@ type CreateAlarmModelOutput struct {
 	LastUpdateTime *time.Time
 
 	// The status of the alarm model. The status can be one of the following values:
-	//     - ACTIVE - The alarm model is active and it's ready to evaluate data.
-	//     - ACTIVATING - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.
-	//     - INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.
-	//     - FAILED - You couldn't create or update the alarm model. Check your alarm model information and try again.
+	//   - ACTIVE - The alarm model is active and it's ready to evaluate data.
+	//   - ACTIVATING - AWS IoT Events is activating your alarm model. Activating an
+	//   alarm model can take up to a few minutes.
+	//   - INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data.
+	//   Check your alarm model information and update the alarm model.
+	//   - FAILED - You couldn't create or update the alarm model. Check your alarm
+	//   model information and try again.
 	Status types.AlarmModelVersionStatus
 
 	// Metadata pertaining to the operation's result.

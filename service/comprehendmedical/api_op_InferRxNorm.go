@@ -50,13 +50,13 @@ type InferRxNormOutput struct {
 	// This member is required.
 	Entities []types.RxNormEntity
 
-	// The version of the model used to analyze the documents, in the format n.n.n
-	// You can use this information to track the model used for a particular batch of
+	// The version of the model used to analyze the documents, in the format n.n.n You
+	// can use this information to track the model used for a particular batch of
 	// documents.
 	ModelVersion *string
 
-	// If the result of the previous request to InferRxNorm was truncated, include
-	// the PaginationToken  to fetch the next page of medication entities.
+	// If the result of the previous request to InferRxNorm was truncated, include the
+	// PaginationToken to fetch the next page of medication entities.
 	PaginationToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -14,8 +14,8 @@ import (
 // Creates one of the following domain name system (DNS) records in a domain DNS
 // zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server
 // (NS), start of authority (SOA), service locator (SRV), or text (TXT). The
-// create domain entryoperation supports tag-based access control via resource
-// tags applied to the resource identified by domain name. For more information,
+// create domain entry operation supports tag-based access control via resource
+// tags applied to the resource identified by domain name . For more information,
 // see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
 // .
 func (c *Client) CreateDomainEntry(ctx context.Context, params *CreateDomainEntryInput, optFns ...func(*Options)) (*CreateDomainEntryOutput, error) {
@@ -41,7 +41,7 @@ type CreateDomainEntryInput struct {
 	// This member is required.
 	DomainEntry *types.DomainEntry
 
-	// The domain name (e.g., example.com) for which you want to create the domain
+	// The domain name (e.g., example.com ) for which you want to create the domain
 	// entry.
 	//
 	// This member is required.

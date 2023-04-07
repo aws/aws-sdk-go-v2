@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an analysis in Amazon QuickSight. Analyses can be created either from
-// a template or from an AnalysisDefinition .
+// Creates an analysis in Amazon QuickSight. Analyses can be created either from a
+// template or from an AnalysisDefinition .
 func (c *Client) CreateAnalysis(ctx context.Context, params *CreateAnalysisInput, optFns ...func(*Options)) (*CreateAnalysisOutput, error) {
 	if params == nil {
 		params = &CreateAnalysisInput{}
@@ -48,7 +48,7 @@ type CreateAnalysisInput struct {
 	Name *string
 
 	// The definition of an analysis. A definition is the data model of all features
-	// in a Dashboard, Template, or Analysis. Either a SourceEntity  or a Definition
+	// in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition
 	// must be provided in order for the request to be valid.
 	Definition *types.AnalysisDefinition
 
@@ -56,8 +56,8 @@ type CreateAnalysisInput struct {
 	// have any parameter type, and some parameters might accept multiple values.
 	Parameters *types.Parameters
 
-	// A structure that describes the principals and the resource-level permissions
-	// on an analysis. You can use the Permissions structure to grant permissions by
+	// A structure that describes the principals and the resource-level permissions on
+	// an analysis. You can use the Permissions structure to grant permissions by
 	// providing a list of Identity and Access Management (IAM) action information for
 	// each principal listed by Amazon Resource Name (ARN). To specify no permissions,
 	// omit Permissions .
@@ -65,7 +65,7 @@ type CreateAnalysisInput struct {
 
 	// A source entity to use for the analysis that you're creating. This metadata
 	// structure contains details that describe a source template and one or more
-	// datasets. Either a SourceEntity  or a Definition must be provided in order for
+	// datasets. Either a SourceEntity or a Definition must be provided in order for
 	// the request to be valid.
 	SourceEntity *types.AnalysisSourceEntity
 
@@ -73,9 +73,8 @@ type CreateAnalysisInput struct {
 	// the analysis.
 	Tags []types.Tag
 
-	// The ARN for the theme to apply to the analysis that you're creating. To see
-	// the theme in the Amazon QuickSight console, make sure that you have access to
-	// it.
+	// The ARN for the theme to apply to the analysis that you're creating. To see the
+	// theme in the Amazon QuickSight console, make sure that you have access to it.
 	ThemeArn *string
 
 	noSmithyDocumentSerde

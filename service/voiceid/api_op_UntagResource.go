@@ -28,8 +28,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Voice ID resource you want to remove
-	// tags from.
+	// The Amazon Resource Name (ARN) of the Voice ID resource you want to remove tags
+	// from.
 	//
 	// This member is required.
 	ResourceArn *string

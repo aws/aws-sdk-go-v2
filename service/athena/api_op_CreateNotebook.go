@@ -29,7 +29,7 @@ func (c *Client) CreateNotebook(ctx context.Context, params *CreateNotebookInput
 
 type CreateNotebookInput struct {
 
-	// The name of the ipynb  file to be created in the Spark workgroup, without the
+	// The name of the ipynb file to be created in the Spark workgroup, without the
 	// .ipynb extension.
 	//
 	// This member is required.

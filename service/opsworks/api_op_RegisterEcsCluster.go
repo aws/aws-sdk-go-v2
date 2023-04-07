@@ -48,7 +48,7 @@ type RegisterEcsClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a RegisterEcsCluster  request.
+// Contains the response to a RegisterEcsCluster request.
 type RegisterEcsClusterOutput struct {
 
 	// The cluster's ARN.

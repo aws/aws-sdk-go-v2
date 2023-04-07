@@ -37,8 +37,7 @@ func (e *ConcurrentUpdateException) ErrorFault() smithy.ErrorFault { return smit
 // Failed access to resources caused an exception. This exception is thrown when
 // Application Auto Scaling is unable to retrieve the alarms associated with a
 // scaling policy due to a client error, for example, if the role ARN specified for
-// a scalable target does not have permission to call the CloudWatch
-// DescribeAlarms (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html)
+// a scalable target does not have permission to call the CloudWatch DescribeAlarms (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html)
 // on your behalf.
 type FailedResourceAccessException struct {
 	Message *string
@@ -117,8 +116,8 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A per-account resource limit is exceeded. For more information, see
-// Application Auto Scaling service quotas (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-limits.html)
+// A per-account resource limit is exceeded. For more information, see Application
+// Auto Scaling service quotas (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-limits.html)
 // .
 type LimitExceededException struct {
 	Message *string
@@ -231,8 +230,8 @@ func (e *TooManyTagsException) ErrorCode() string {
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception was thrown for a validation issue. Review the available
-// parameters for the API request.
+// An exception was thrown for a validation issue. Review the available parameters
+// for the API request.
 type ValidationException struct {
 	Message *string
 

@@ -44,9 +44,9 @@ type UpdateSiteInput struct {
 	Description *string
 
 	// The site location:
-	//     - Address : The physical address of the site.
-	//     - Latitude : The latitude of the site.
-	//     - Longitude : The longitude of the site.
+	//   - Address : The physical address of the site.
+	//   - Latitude : The latitude of the site.
+	//   - Longitude : The longitude of the site.
 	Location *types.Location
 
 	noSmithyDocumentSerde

@@ -48,9 +48,9 @@ type CreatePortfolioInput struct {
 	ProviderName *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The description of the portfolio.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests an ACM certificate for use with other Amazon Web Services services.
-// To request an ACM certificate, you must specify a fully qualified domain name
+// Requests an ACM certificate for use with other Amazon Web Services services. To
+// request an ACM certificate, you must specify a fully qualified domain name
 // (FQDN) in the DomainName parameter. You can also specify additional FQDNs in
 // the SubjectAlternativeNames parameter. If you are requesting a private
 // certificate, domain validation is not required. If you are requesting a public
@@ -20,12 +20,12 @@ import (
 // you own or control the domain. You can use DNS validation (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html)
 // or email validation (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html)
 // . We recommend that you use DNS validation. ACM issues public certificates after
-// receiving approval from the domain owner. ACM behavior differs from the RFC
-// 6125 (https://datatracker.ietf.org/doc/html/rfc6125#appendix-B.2)specification
-// of the certificate validation process. ACM first checks for a Subject
-// Alternative Name, and, if it finds one, ignores the common name (CN). After
-// successful completion of the RequestCertificate action, there is a delay of
-// several seconds before you can retrieve information about the new certificate.
+// receiving approval from the domain owner. ACM behavior differs from the RFC 6125 (https://datatracker.ietf.org/doc/html/rfc6125#appendix-B.2)
+// specification of the certificate validation process. ACM first checks for a
+// Subject Alternative Name, and, if it finds one, ignores the common name (CN).
+// After successful completion of the RequestCertificate action, there is a delay
+// of several seconds before you can retrieve information about the new
+// certificate.
 func (c *Client) RequestCertificate(ctx context.Context, params *RequestCertificateInput, optFns ...func(*Options)) (*RequestCertificateOutput, error) {
 	if params == nil {
 		params = &RequestCertificateInput{}
@@ -70,7 +70,7 @@ type RequestCertificateInput struct {
 	DomainValidationOptions []types.DomainValidationOption
 
 	// Customer chosen string that can be used to distinguish between calls to
-	// RequestCertificate. Idempotency tokens time out after one hour. Therefore, if
+	// RequestCertificate . Idempotency tokens time out after one hour. Therefore, if
 	// you call RequestCertificate multiple times with the same idempotency token
 	// within one hour, ACM recognizes that you are requesting only one certificate and
 	// will issue only one. If you change the idempotency token for each call, ACM
@@ -88,12 +88,12 @@ type RequestCertificateInput struct {
 	// you plan to deploy your certificate. Default: RSA_2048
 	KeyAlgorithm types.KeyAlgorithm
 
-	// Currently, you can use this parameter to specify whether to add the
-	// certificate to a certificate transparency log. Certificate transparency makes it
-	// possible to detect SSL/TLS certificates that have been mistakenly or maliciously
-	// issued. Certificates that have not been logged typically produce an error
-	// message in a browser. For more information, see Opting Out of Certificate
-	// Transparency Logging (https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency)
+	// Currently, you can use this parameter to specify whether to add the certificate
+	// to a certificate transparency log. Certificate transparency makes it possible to
+	// detect SSL/TLS certificates that have been mistakenly or maliciously issued.
+	// Certificates that have not been logged typically produce an error message in a
+	// browser. For more information, see Opting Out of Certificate Transparency
+	// Logging (https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency)
 	// .
 	Options *types.CertificateOptions
 
@@ -107,9 +107,13 @@ type RequestCertificateInput struct {
 	// . The maximum length of a SAN DNS name is 253 octets. The name is made up of
 	// multiple labels separated by periods. No label can be longer than 63 octets.
 	// Consider the following examples:
-	//     - (63 octets).(63 octets).(63 octets).(61 octets) is legal because the total length is 253 octets (63+1+63+1+63+1+61) and no label exceeds 63 octets.
-	//     - (64 octets).(63 octets).(63 octets).(61 octets) is not legal because the total length exceeds 253 octets (64+1+63+1+63+1+61) and the first label exceeds 63 octets.
-	//     - (63 octets).(63 octets).(63 octets).(62 octets) is not legal because the total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets.
+	//   - (63 octets).(63 octets).(63 octets).(61 octets) is legal because the total
+	//   length is 253 octets (63+1+63+1+63+1+61) and no label exceeds 63 octets.
+	//   - (64 octets).(63 octets).(63 octets).(61 octets) is not legal because the
+	//   total length exceeds 253 octets (64+1+63+1+63+1+61) and the first label exceeds
+	//   63 octets.
+	//   - (63 octets).(63 octets).(63 octets).(62 octets) is not legal because the
+	//   total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets.
 	SubjectAlternativeNames []string
 
 	// One or more resource tags to associate with the certificate.

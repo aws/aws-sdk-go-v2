@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Exports project configuration to a snapshot which can be downloaded and
-// shared. Note that mobile app push credentials are encrypted in exported
-// projects, so they can only be shared successfully within the same AWS account.
+// Exports project configuration to a snapshot which can be downloaded and shared.
+// Note that mobile app push credentials are encrypted in exported projects, so
+// they can only be shared successfully within the same AWS account.
 func (c *Client) ExportProject(ctx context.Context, params *ExportProjectInput, optFns ...func(*Options)) (*ExportProjectOutput, error) {
 	if params == nil {
 		params = &ExportProjectInput{}
@@ -45,8 +45,8 @@ type ExportProjectOutput struct {
 	// URL which can be used to download the exported project configuation file(s).
 	DownloadUrl *string
 
-	// URL which can be shared to allow other AWS users to create their own project
-	// in AWS Mobile Hub with the same configuration as the specified project. This URL
+	// URL which can be shared to allow other AWS users to create their own project in
+	// AWS Mobile Hub with the same configuration as the specified project. This URL
 	// pertains to a snapshot in time of the project configuration that is created when
 	// this API is called. If you want to share additional changes to your project
 	// configuration, then you will need to create and share a new snapshot by calling

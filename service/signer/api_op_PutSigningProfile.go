@@ -41,17 +41,17 @@ type PutSigningProfileInput struct {
 	// This member is required.
 	ProfileName *string
 
-	// A subfield of platform. This specifies any different configuration options
-	// that you want to apply to the chosen platform (such as a different
-	// hash-algorithm or signing-algorithm ).
+	// A subfield of platform . This specifies any different configuration options that
+	// you want to apply to the chosen platform (such as a different hash-algorithm or
+	// signing-algorithm ).
 	Overrides *types.SigningPlatformOverrides
 
 	// The default validity period override for any signature generated using this
 	// signing profile. If unspecified, the default is 135 months.
 	SignatureValidityPeriod *types.SignatureValidityPeriod
 
-	// The AWS Certificate Manager certificate that will be used to sign code with
-	// the new signing profile.
+	// The AWS Certificate Manager certificate that will be used to sign code with the
+	// new signing profile.
 	SigningMaterial *types.SigningMaterial
 
 	// Map of key-value pairs for signing. These can include any information that you

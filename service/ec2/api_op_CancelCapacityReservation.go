@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels the specified Capacity Reservation, releases the reserved capacity,
-// and changes the Capacity Reservation's state to cancelled. Instances running
-// in the reserved capacity continue running until you stop them. Stopped instances
-// that target the Capacity Reservation can no longer launch. Modify these
-// instances to either target a different Capacity Reservation, launch On-Demand
-// Instance capacity, or run in any open Capacity Reservation that has matching
-// attributes and sufficient capacity.
+// Cancels the specified Capacity Reservation, releases the reserved capacity, and
+// changes the Capacity Reservation's state to cancelled . Instances running in the
+// reserved capacity continue running until you stop them. Stopped instances that
+// target the Capacity Reservation can no longer launch. Modify these instances to
+// either target a different Capacity Reservation, launch On-Demand Instance
+// capacity, or run in any open Capacity Reservation that has matching attributes
+// and sufficient capacity.
 func (c *Client) CancelCapacityReservation(ctx context.Context, params *CancelCapacityReservationInput, optFns ...func(*Options)) (*CancelCapacityReservationOutput, error) {
 	if params == nil {
 		params = &CancelCapacityReservationInput{}
@@ -50,7 +50,7 @@ type CancelCapacityReservationInput struct {
 
 type CancelCapacityReservationOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

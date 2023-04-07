@@ -35,9 +35,9 @@ type UpdateJobShipmentStateInput struct {
 	// This member is required.
 	JobId *string
 
-	// The state of a device when it is being shipped. Set to RECEIVED when the
-	// device arrives at your location. Set to RETURNED when you have returned the
-	// device to Amazon Web Services.
+	// The state of a device when it is being shipped. Set to RECEIVED when the device
+	// arrives at your location. Set to RETURNED when you have returned the device to
+	// Amazon Web Services.
 	//
 	// This member is required.
 	ShipmentState types.ShipmentState

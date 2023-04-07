@@ -29,8 +29,8 @@ type AppliedTerminology struct {
 // The encryption key used to encrypt this object.
 type EncryptionKey struct {
 
-	// The Amazon Resource Name (ARN) of the encryption key being used to encrypt
-	// this object.
+	// The Amazon Resource Name (ARN) of the encryption key being used to encrypt this
+	// object.
 	//
 	// This member is required.
 	Id *string
@@ -49,18 +49,24 @@ type InputDataConfig struct {
 	// Describes the format of the data that you submit to Amazon Translate as input.
 	// You can specify one of the following multipurpose internet mail extension (MIME)
 	// types:
-	//     - text/html : The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the html element in each file.
-	//     - text/plain : The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input.
-	//     - application/vnd.openxmlformats-officedocument.wordprocessingml.document : The input data consists of one or more Word documents (.docx).
-	//     - application/vnd.openxmlformats-officedocument.presentationml.presentation : The input data consists of one or more PowerPoint Presentation files (.pptx).
-	//     - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet : The input data consists of one or more Excel Workbook files (.xlsx).
-	//     - application/x-xliff+xml : The input data consists of one or more XML Localization Interchange File Format (XLIFF) files (.xlf). Amazon Translate supports only XLIFF version 1.2.
-	//
+	//   - text/html : The input data consists of one or more HTML files. Amazon
+	//   Translate translates only the text that resides in the html element in each
+	//   file.
+	//   - text/plain : The input data consists of one or more unformatted text files.
+	//   Amazon Translate translates every character in this type of input.
+	//   - application/vnd.openxmlformats-officedocument.wordprocessingml.document :
+	//   The input data consists of one or more Word documents (.docx).
+	//   - application/vnd.openxmlformats-officedocument.presentationml.presentation :
+	//   The input data consists of one or more PowerPoint Presentation files (.pptx).
+	//   - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet : The
+	//   input data consists of one or more Excel Workbook files (.xlsx).
+	//   - application/x-xliff+xml : The input data consists of one or more XML
+	//   Localization Interchange File Format (XLIFF) files (.xlf). Amazon Translate
+	//   supports only XLIFF version 1.2.
 	// If you structure your input data as HTML, ensure that you set this parameter to
-	// text/html. By doing so, you cut costs by limiting the translation to the
-	// contents of the html element in each file. Otherwise, if you set this
-	// parameter to text/plain, your costs will cover the translation of every
-	// character.
+	// text/html . By doing so, you cut costs by limiting the translation to the
+	// contents of the html element in each file. Otherwise, if you set this parameter
+	// to text/plain , your costs will cover the translation of every character.
 	//
 	// This member is required.
 	ContentType *string
@@ -130,8 +136,8 @@ type ParallelDataConfig struct {
 	// This member is required.
 	Format ParallelDataFormat
 
-	// The URI of the Amazon S3 folder that contains the parallel data input file.
-	// The folder must be in the same Region as the API endpoint you are calling.
+	// The URI of the Amazon S3 folder that contains the parallel data input file. The
+	// folder must be in the same Region as the API endpoint you are calling.
 	//
 	// This member is required.
 	S3Uri *string
@@ -178,15 +184,14 @@ type ParallelDataProperties struct {
 	// The encryption key used to encrypt this object.
 	EncryptionKey *EncryptionKey
 
-	// The number of records unsuccessfully imported from the parallel data input
-	// file.
+	// The number of records unsuccessfully imported from the parallel data input file.
 	FailedRecordCount *int64
 
-	// The number of UTF-8 characters that Amazon Translate imported from the
-	// parallel data input file. This number includes only the characters in your
-	// translation examples. It does not include characters that are used to format
-	// your file. For example, if you provided a Translation Memory Exchange (.tmx)
-	// file, this number does not include the tags.
+	// The number of UTF-8 characters that Amazon Translate imported from the parallel
+	// data input file. This number includes only the characters in your translation
+	// examples. It does not include characters that are used to format your file. For
+	// example, if you provided a Translation Memory Exchange (.tmx) file, this number
+	// does not include the tags.
 	ImportedDataSize *int64
 
 	// The number of records successfully imported from the parallel data input file.
@@ -229,8 +234,7 @@ type ParallelDataProperties struct {
 	noSmithyDocumentSerde
 }
 
-// A key-value pair that adds as a metadata to a resource used by Amazon
-// Translate.
+// A key-value pair that adds as a metadata to a resource used by Amazon Translate.
 type Tag struct {
 
 	// The initial part of a key-value pair that forms a tag associated with a given
@@ -449,15 +453,15 @@ type TextTranslationJobProperties struct {
 	TargetLanguageCodes []string
 
 	// A list containing the names of the terminologies applied to a translation job.
-	// Only one terminology can be applied per StartTextTranslationJob request at
-	// this time.
+	// Only one terminology can be applied per StartTextTranslationJob request at this
+	// time.
 	TerminologyNames []string
 
 	noSmithyDocumentSerde
 }
 
-// Optional settings that configure the translation output. Use these settings
-// for real time translations and asynchronous translation jobs.
+// Optional settings that configure the translation output. Use these settings for
+// real time translations and asynchronous translation jobs.
 type TranslationSettings struct {
 
 	// You can optionally specify the desired level of formality for translations to
@@ -472,8 +476,8 @@ type TranslationSettings struct {
 	// in the Amazon Translate Developer Guide.
 	Formality Formality
 
-	// Enable the profanity setting if you want Amazon Translate to mask profane
-	// words and phrases in your translation output. To mask profane words and phrases,
+	// Enable the profanity setting if you want Amazon Translate to mask profane words
+	// and phrases in your translation output. To mask profane words and phrases,
 	// Amazon Translate replaces them with the grawlix string “?$#@$“. This
 	// 5-character sequence is used for each profane word or phrase, regardless of the
 	// length or number of words. Amazon Translate doesn't detect profanity in all of

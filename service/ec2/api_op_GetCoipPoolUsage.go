@@ -41,14 +41,16 @@ type GetCoipPoolUsageInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//     - coip-address-usage.allocation-id - The allocation ID of the address.
-	//     - coip-address-usage.aws-account-id - The ID of the Amazon Web Services account that is using the customer-owned IP address.
-	//     - coip-address-usage.aws-service - The Amazon Web Services service that is using the customer-owned IP address.
-	//     - coip-address-usage.co-ip - The customer-owned IP address.
+	//   - coip-address-usage.allocation-id - The allocation ID of the address.
+	//   - coip-address-usage.aws-account-id - The ID of the Amazon Web Services
+	//   account that is using the customer-owned IP address.
+	//   - coip-address-usage.aws-service - The Amazon Web Services service that is
+	//   using the customer-owned IP address.
+	//   - coip-address-usage.co-ip - The customer-owned IP address.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The token for the next page of results.

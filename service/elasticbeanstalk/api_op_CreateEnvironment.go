@@ -49,7 +49,7 @@ type CreateEnvironmentInput struct {
 	// in length. The name can contain only letters, numbers, and hyphens. It can't
 	// start or end with a hyphen. This name must be unique within a region in your
 	// account. If the specified name already exists in the region, Elastic Beanstalk
-	// returns an InvalidParameterValue  error. If you don't specify the CNAMEPrefix
+	// returns an InvalidParameterValue error. If you don't specify the CNAMEPrefix
 	// parameter, the environment name becomes part of the CNAME, and therefore part of
 	// the visible URL for your application.
 	EnvironmentName *string
@@ -69,8 +69,8 @@ type CreateEnvironmentInput struct {
 	// in the AWS Elastic Beanstalk Developer Guide.
 	OperationsRole *string
 
-	// If specified, AWS Elastic Beanstalk sets the specified configuration options
-	// to the requested value in the configuration set for the new environment. These
+	// If specified, AWS Elastic Beanstalk sets the specified configuration options to
+	// the requested value in the configuration set for the new environment. These
 	// override the values obtained from the solution stack or the configuration
 	// template.
 	OptionSettings []types.ConfigurationOptionSetting
@@ -81,24 +81,23 @@ type CreateEnvironmentInput struct {
 
 	// The Amazon Resource Name (ARN) of the custom platform to use with the
 	// environment. For more information, see Custom Platforms (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html)
-	// in the AWS Elastic Beanstalk Developer Guide. If you specify PlatformArn,
-	// don't specify SolutionStackName .
+	// in the AWS Elastic Beanstalk Developer Guide. If you specify PlatformArn , don't
+	// specify SolutionStackName .
 	PlatformArn *string
 
 	// The name of an Elastic Beanstalk solution stack (platform version) to use with
 	// the environment. If specified, Elastic Beanstalk sets the configuration values
 	// to the default values associated with the specified solution stack. For a list
 	// of current solution stacks, see Elastic Beanstalk Supported Platforms (https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html)
-	// in the AWS Elastic Beanstalk Platforms guide. If you specify SolutionStackName
-	// , don't specify PlatformArn  or TemplateName .
+	// in the AWS Elastic Beanstalk Platforms guide. If you specify SolutionStackName ,
+	// don't specify PlatformArn or TemplateName .
 	SolutionStackName *string
 
 	// Specifies the tags applied to resources in the environment.
 	Tags []types.Tag
 
 	// The name of the Elastic Beanstalk configuration template to use with the
-	// environment. If you specify TemplateName , then don't specify SolutionStackName
-	// .
+	// environment. If you specify TemplateName , then don't specify SolutionStackName .
 	TemplateName *string
 
 	// Specifies the tier to use in creating this environment. The environment tier
@@ -118,8 +117,8 @@ type CreateEnvironmentInput struct {
 type CreateEnvironmentOutput struct {
 
 	// Indicates if there is an in-progress environment configuration update or
-	// application version deployment that you can cancel. true: There is an update
-	// in progress. false:  There are no updates currently in progress.
+	// application version deployment that you can cancel. true: There is an update in
+	// progress. false: There are no updates currently in progress.
 	AbortableOperationInProgress *bool
 
 	// The name of the application associated with this environment.
@@ -154,13 +153,16 @@ type CreateEnvironmentOutput struct {
 	// The name of this environment.
 	EnvironmentName *string
 
-	// Describes the health status of the environment. AWS Elastic Beanstalk
-	// indicates the failure levels for a running environment:
-	//     - Red : Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.
-	//     - Yellow : Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.
-	//     - Green : Indicates the environment is healthy and fully functional.
-	//     - Grey : Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an UpdateEnvironment or RestartEnvironment request.
-	//
+	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
+	// the failure levels for a running environment:
+	//   - Red : Indicates the environment is not responsive. Occurs when three or more
+	//   consecutive failures occur for an environment.
+	//   - Yellow : Indicates that something is wrong. Occurs when two consecutive
+	//   failures occur for an environment.
+	//   - Green : Indicates the environment is healthy and fully functional.
+	//   - Grey : Default health for a new environment. The environment is not fully
+	//   launched and health checks have not started or health checks are suspended
+	//   during an UpdateEnvironment or RestartEnvironment request.
 	// Default: Grey
 	Health types.EnvironmentHealth
 
@@ -180,15 +182,17 @@ type CreateEnvironmentOutput struct {
 	// The description of the AWS resources used by this environment.
 	Resources *types.EnvironmentResourcesDescription
 
-	// The name of the SolutionStack  deployed with this environment.
+	// The name of the SolutionStack deployed with this environment.
 	SolutionStackName *string
 
 	// The current operational status of the environment:
-	//     - Launching : Environment is in the process of initial deployment.
-	//     - Updating : Environment is in the process of updating its configuration settings or application version.
-	//     - Ready : Environment is available to have an action performed on it, such as update or terminate.
-	//     - Terminating : Environment is in the shut-down process.
-	//     - Terminated : Environment is not running.
+	//   - Launching : Environment is in the process of initial deployment.
+	//   - Updating : Environment is in the process of updating its configuration
+	//   settings or application version.
+	//   - Ready : Environment is available to have an action performed on it, such as
+	//   update or terminate.
+	//   - Terminating : Environment is in the shut-down process.
+	//   - Terminated : Environment is not running.
 	Status types.EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this

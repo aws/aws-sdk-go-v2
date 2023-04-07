@@ -44,17 +44,17 @@ type ResyncMFADeviceInput struct {
 	AuthenticationCode2 *string
 
 	// Serial number that uniquely identifies the MFA device. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	SerialNumber *string
 
-	// The name of the user whose MFA device you want to resynchronize. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
+	// The name of the user whose MFA device you want to resynchronize. This parameter
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
+	// of characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	UserName *string

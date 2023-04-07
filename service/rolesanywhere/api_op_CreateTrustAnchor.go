@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a trust anchor. You establish trust between IAM Roles Anywhere and
-// your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is
+// Creates a trust anchor. You establish trust between IAM Roles Anywhere and your
+// certificate authority (CA) by configuring a trust anchor. A Trust Anchor is
 // defined either as a reference to a AWS Certificate Manager Private Certificate
 // Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate.
 // Your AWS workloads can authenticate with the trust anchor using certificates

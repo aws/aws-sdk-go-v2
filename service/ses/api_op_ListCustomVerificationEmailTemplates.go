@@ -38,10 +38,10 @@ func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, param
 // in the Amazon SES Developer Guide.
 type ListCustomVerificationEmailTemplatesInput struct {
 
-	// The maximum number of custom verification email templates to return. This
-	// value must be at least 1 and less than or equal to 50. If you do not specify a
-	// value, or if you specify a value less than 1 or greater than 50, the operation
-	// will return up to 50 results.
+	// The maximum number of custom verification email templates to return. This value
+	// must be at least 1 and less than or equal to 50. If you do not specify a value,
+	// or if you specify a value less than 1 or greater than 50, the operation will
+	// return up to 50 results.
 	MaxResults *int32
 
 	// An array the contains the name and creation time stamp for each template in
@@ -139,14 +139,14 @@ var _ ListCustomVerificationEmailTemplatesAPIClient = (*Client)(nil)
 // ListCustomVerificationEmailTemplatesPaginatorOptions is the paginator options
 // for ListCustomVerificationEmailTemplates
 type ListCustomVerificationEmailTemplatesPaginatorOptions struct {
-	// The maximum number of custom verification email templates to return. This
-	// value must be at least 1 and less than or equal to 50. If you do not specify a
-	// value, or if you specify a value less than 1 or greater than 50, the operation
-	// will return up to 50 results.
+	// The maximum number of custom verification email templates to return. This value
+	// must be at least 1 and less than or equal to 50. If you do not specify a value,
+	// or if you specify a value less than 1 or greater than 50, the operation will
+	// return up to 50 results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

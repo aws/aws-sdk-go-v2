@@ -43,12 +43,12 @@ type ModifyListenerInput struct {
 
 	// [TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN)
 	// policy. You can specify one policy name. The following are the possible values:
-	//     - HTTP1Only
-	//     - HTTP2Only
-	//     - HTTP2Optional
-	//     - HTTP2Preferred
-	//     - None
-	//  For more information, see ALPN policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
+	//   - HTTP1Only
+	//   - HTTP2Only
+	//   - HTTP2Optional
+	//   - HTTP2Preferred
+	//   - None
+	// For more information, see ALPN policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
 	// in the Network Load Balancers Guide.
 	AlpnPolicy []string
 

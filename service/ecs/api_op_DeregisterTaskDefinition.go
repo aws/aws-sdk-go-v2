@@ -12,7 +12,7 @@ import (
 )
 
 // Deregisters the specified task definition by family and revision. Upon
-// deregistration, the task definition is marked as INACTIVE. Existing tasks and
+// deregistration, the task definition is marked as INACTIVE . Existing tasks and
 // services that reference an INACTIVE task definition continue to run without
 // disruption. Existing services that reference an INACTIVE task definition can
 // still scale up or down by modifying the service's desired count. If you want to
@@ -21,8 +21,7 @@ import (
 // new services, and you can't update an existing service to reference an INACTIVE
 // task definition. However, there may be up to a 10-minute window following
 // deregistration where these restrictions have not yet taken effect. At this time,
-//
-// INACTIVEtask definitions remain discoverable in your account indefinitely.
+// INACTIVE task definitions remain discoverable in your account indefinitely.
 // However, this behavior is subject to change in the future. We don't recommend
 // that you rely on INACTIVE task definitions persisting beyond the lifecycle of
 // any associated tasks and services. You must deregister a task definition
@@ -45,8 +44,8 @@ func (c *Client) DeregisterTaskDefinition(ctx context.Context, params *Deregiste
 
 type DeregisterTaskDefinitionInput struct {
 
-	// The family  and revision  ( family:revision) or full Amazon Resource Name
-	// (ARN) of the task definition to deregister. You must specify a revision .
+	// The family and revision ( family:revision ) or full Amazon Resource Name (ARN)
+	// of the task definition to deregister. You must specify a revision .
 	//
 	// This member is required.
 	TaskDefinition *string

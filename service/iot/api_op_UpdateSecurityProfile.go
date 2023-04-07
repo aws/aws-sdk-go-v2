@@ -39,24 +39,23 @@ type UpdateSecurityProfileInput struct {
 
 	// Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead. A
 	// list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the profile's behaviors, but it is also retained for
-	// any metric specified here. Can be used with custom metrics; cannot be used with
+	// for any metric used in the profile's behaviors , but it is also retained for any
+	// metric specified here. Can be used with custom metrics; cannot be used with
 	// dimensions.
 	//
 	// Deprecated: Use additionalMetricsToRetainV2.
 	AdditionalMetricsToRetain []string
 
-	// A list of metrics whose data is retained (stored). By default, data is
-	// retained for any metric used in the profile's behaviors, but it is also retained
-	// for any metric specified here. Can be used with custom metrics; cannot be used
-	// with dimensions.
+	// A list of metrics whose data is retained (stored). By default, data is retained
+	// for any metric used in the profile's behaviors, but it is also retained for any
+	// metric specified here. Can be used with custom metrics; cannot be used with
+	// dimensions.
 	AdditionalMetricsToRetainV2 []types.MetricToRetain
 
 	// Where the alerts are sent. (Alerts are always sent to the console.)
 	AlertTargets map[string]types.AlertTarget
 
-	// Specifies the behaviors that, when violated by a device (thing), cause an
-	// alert.
+	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	Behaviors []types.Behavior
 
 	// If true, delete all additionalMetricsToRetain defined for this security
@@ -64,17 +63,17 @@ type UpdateSecurityProfileInput struct {
 	// invocation, an exception occurs.
 	DeleteAdditionalMetricsToRetain bool
 
-	// If true, delete all alertTargets  defined for this security profile. If any
+	// If true, delete all alertTargets defined for this security profile. If any
 	// alertTargets are defined in the current invocation, an exception occurs.
 	DeleteAlertTargets bool
 
-	// If true, delete all behaviors  defined for this security profile. If any
+	// If true, delete all behaviors defined for this security profile. If any
 	// behaviors are defined in the current invocation, an exception occurs.
 	DeleteBehaviors bool
 
 	// The expected version of the security profile. A new version is generated
 	// whenever the security profile is updated. If you specify a value that is
-	// different from the actual version, a VersionConflictException  is thrown.
+	// different from the actual version, a VersionConflictException is thrown.
 	ExpectedVersion *int64
 
 	// A description of the security profile.
@@ -85,25 +84,24 @@ type UpdateSecurityProfileInput struct {
 
 type UpdateSecurityProfileOutput struct {
 
-	// Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
-	// A list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the security profile's behaviors, but it is also
+	// Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead. A
+	// list of metrics whose data is retained (stored). By default, data is retained
+	// for any metric used in the security profile's behaviors , but it is also
 	// retained for any metric specified here.
 	//
 	// Deprecated: Use additionalMetricsToRetainV2.
 	AdditionalMetricsToRetain []string
 
-	// A list of metrics whose data is retained (stored). By default, data is
-	// retained for any metric used in the profile's behaviors, but it is also retained
-	// for any metric specified here. Can be used with custom metrics; cannot be used
-	// with dimensions.
+	// A list of metrics whose data is retained (stored). By default, data is retained
+	// for any metric used in the profile's behaviors, but it is also retained for any
+	// metric specified here. Can be used with custom metrics; cannot be used with
+	// dimensions.
 	AdditionalMetricsToRetainV2 []types.MetricToRetain
 
 	// Where the alerts are sent. (Alerts are always sent to the console.)
 	AlertTargets map[string]types.AlertTarget
 
-	// Specifies the behaviors that, when violated by a device (thing), cause an
-	// alert.
+	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	Behaviors []types.Behavior
 
 	// The time the security profile was created.

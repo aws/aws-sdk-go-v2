@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an Elastic IP address, or carrier IP address (for instances that
-// are in subnets in Wavelength Zones) with an instance or a network interface.
-// Before you can use an Elastic IP address, you must allocate it to your account.
-// An Elastic IP address is for use in either the EC2-Classic platform or in a VPC.
+// Associates an Elastic IP address, or carrier IP address (for instances that are
+// in subnets in Wavelength Zones) with an instance or a network interface. Before
+// you can use an Elastic IP address, you must allocate it to your account. An
+// Elastic IP address is for use in either the EC2-Classic platform or in a VPC.
 // For more information, see Elastic IP Addresses (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 // in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an
 // EC2-VPC-only account] If the Elastic IP address is already associated with a
@@ -56,13 +56,12 @@ type AssociateAddressInput struct {
 	// [EC2-VPC] The allocation ID. This is required for EC2-VPC.
 	AllocationId *string
 
-	// [EC2-VPC] For a VPC in an EC2-Classic account, specify true to allow an
-	// Elastic IP address that is already associated with an instance or network
-	// interface to be reassociated with the specified instance or network interface.
-	// Otherwise, the operation fails. In a VPC in an EC2-VPC-only account,
-	// reassociation is automatic, therefore you can specify false to ensure the
-	// operation fails if the Elastic IP address is already associated with another
-	// resource.
+	// [EC2-VPC] For a VPC in an EC2-Classic account, specify true to allow an Elastic
+	// IP address that is already associated with an instance or network interface to
+	// be reassociated with the specified instance or network interface. Otherwise, the
+	// operation fails. In a VPC in an EC2-VPC-only account, reassociation is
+	// automatic, therefore you can specify false to ensure the operation fails if the
+	// Elastic IP address is already associated with another resource.
 	AllowReassociation *bool
 
 	// Checks whether you have the required permissions for the action, without
@@ -96,8 +95,8 @@ type AssociateAddressInput struct {
 
 type AssociateAddressOutput struct {
 
-	// [EC2-VPC] The ID that represents the association of the Elastic IP address
-	// with an instance.
+	// [EC2-VPC] The ID that represents the association of the Elastic IP address with
+	// an instance.
 	AssociationId *string
 
 	// Metadata pertaining to the operation's result.

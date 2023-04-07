@@ -14,8 +14,7 @@ import (
 // be updated in the specified pipeline. This update might not occur immediately,
 // but is eventually consistent. The status that can be set depends on the type of
 // object (for example, DataNode or Activity). You cannot perform this operation on
-//
-// FINISHED pipelines and attempting to do so returns InvalidRequestException.
+// FINISHED pipelines and attempting to do so returns InvalidRequestException .
 // POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1 X-Amz-Target:
 // DataPipeline.SetStatus Content-Length: 100 Host:
 // datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
@@ -53,9 +52,8 @@ type SetStatusInput struct {
 	// This member is required.
 	PipelineId *string
 
-	// The status to be set on all the objects specified in objectIds. For
-	// components, use PAUSE  or RESUME . For instances, use TRY_CANCEL , RERUN , or
-	// MARK_FINISHED .
+	// The status to be set on all the objects specified in objectIds . For components,
+	// use PAUSE or RESUME . For instances, use TRY_CANCEL , RERUN , or MARK_FINISHED .
 	//
 	// This member is required.
 	Status *string

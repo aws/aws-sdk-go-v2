@@ -130,9 +130,9 @@ const (
 	ScheduledQueryRunStatusManualTriggerFailure ScheduledQueryRunStatus = "MANUAL_TRIGGER_FAILURE"
 )
 
-// Values returns all known values for ScheduledQueryRunStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScheduledQueryRunStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduledQueryRunStatus) Values() []ScheduledQueryRunStatus {
 	return []ScheduledQueryRunStatus{
 		"AUTO_TRIGGER_SUCCESS",

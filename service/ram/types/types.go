@@ -49,8 +49,9 @@ type Resource struct {
 	ResourceGroupArn *string
 
 	// Specifies the scope of visibility of this resource:
-	//     - REGIONAL – The resource can be accessed only by using requests that target the Amazon Web Services Region in which the resource exists.
-	//     - GLOBAL – The resource can be accessed from any Amazon Web Services Region.
+	//   - REGIONAL – The resource can be accessed only by using requests that target
+	//   the Amazon Web Services Region in which the resource exists.
+	//   - GLOBAL – The resource can be accessed from any Amazon Web Services Region.
 	ResourceRegionScope ResourceRegionScope
 
 	// The Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
@@ -80,9 +81,17 @@ type ResourceShare struct {
 	CreationTime *time.Time
 
 	// Indicates how the resource share was created. Possible values include:
-	//     - CREATED_FROM_POLICY - Indicates that the resource share was created from an Identity and Access Management (IAM) resource-based permission policy attached to the resource. This type of resource share is visible only to the Amazon Web Services account that created it. You can't modify it in RAM unless you promote it. For more information, see PromoteResourceShareCreatedFromPolicy .
-	//     - PROMOTING_TO_STANDARD - The resource share is in the process of being promoted. For more information, see PromoteResourceShareCreatedFromPolicy .
-	//     - STANDARD - Indicates that the resource share was created in RAM using the console or APIs. These resource shares are visible to all principals you share the resource share with. You can modify these resource shares in RAM using the console or APIs.
+	//   - CREATED_FROM_POLICY - Indicates that the resource share was created from an
+	//   Identity and Access Management (IAM) resource-based permission policy attached
+	//   to the resource. This type of resource share is visible only to the Amazon Web
+	//   Services account that created it. You can't modify it in RAM unless you promote
+	//   it. For more information, see PromoteResourceShareCreatedFromPolicy .
+	//   - PROMOTING_TO_STANDARD - The resource share is in the process of being
+	//   promoted. For more information, see PromoteResourceShareCreatedFromPolicy .
+	//   - STANDARD - Indicates that the resource share was created in RAM using the
+	//   console or APIs. These resource shares are visible to all principals you share
+	//   the resource share with. You can modify these resource shares in RAM using the
+	//   console or APIs.
 	FeatureSet ResourceShareFeatureSet
 
 	// The date and time when the resource share was last updated.
@@ -115,13 +124,15 @@ type ResourceShare struct {
 type ResourceShareAssociation struct {
 
 	// The associated entity. This can be either of the following:
-	//     - For a resource association, this is the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource.
-	//     - For principal associations, this is one of the following:
-	//         - The ID of an Amazon Web Services account
-	//         - The Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of an organization in Organizations
-	//         - The ARN of an organizational unit (OU) in Organizations
-	//         - The ARN of an IAM role
-	//         - The ARN of an IAM user
+	//   - For a resource association, this is the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	//   of the resource.
+	//   - For principal associations, this is one of the following:
+	//   - The ID of an Amazon Web Services account
+	//   - The Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	//   of an organization in Organizations
+	//   - The ARN of an organizational unit (OU) in Organizations
+	//   - The ARN of an IAM role
+	//   - The ARN of an IAM user
 	AssociatedEntity *string
 
 	// The type of entity included in this association.
@@ -174,8 +185,7 @@ type ResourceShareInvitation struct {
 	// To view the resources associated with a pending resource share invitation, use
 	// ListPendingInvitationResources .
 	//
-	// Deprecated: This member has been deprecated. Use
-	// ListPendingInvitationResources.
+	// Deprecated: This member has been deprecated. Use ListPendingInvitationResources.
 	ResourceShareAssociations []ResourceShareAssociation
 
 	// The Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
@@ -269,13 +279,14 @@ type ResourceSharePermissionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a shareable resource type and the Amazon Web Services
-// service to which resources of that type belong.
+// Information about a shareable resource type and the Amazon Web Services service
+// to which resources of that type belong.
 type ServiceNameAndResourceType struct {
 
 	// Specifies the scope of visibility of resources of this type:
-	//     - REGIONAL – The resource can be accessed only by using requests that target the Amazon Web Services Region in which the resource exists.
-	//     - GLOBAL – The resource can be accessed from any Amazon Web Services Region.
+	//   - REGIONAL – The resource can be accessed only by using requests that target
+	//   the Amazon Web Services Region in which the resource exists.
+	//   - GLOBAL – The resource can be accessed from any Amazon Web Services Region.
 	ResourceRegionScope ResourceRegionScope
 
 	// The type of the resource.
@@ -296,8 +307,8 @@ type ServiceNameAndResourceType struct {
 // in the Amazon Web Services General Reference Guide.
 type Tag struct {
 
-	// The key, or name, attached to the tag. Every tag must have a key. Key names
-	// are case sensitive.
+	// The key, or name, attached to the tag. Every tag must have a key. Key names are
+	// case sensitive.
 	Key *string
 
 	// The string value attached to the tag. The value can be an empty string. Key

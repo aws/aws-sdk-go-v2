@@ -51,8 +51,8 @@ type CreateTableInput struct {
 	// Contains properties to set on the table when enabling magnetic store writes.
 	MagneticStoreWriteProperties *types.MagneticStoreWriteProperties
 
-	// The duration for which your time-series data must be stored in the memory
-	// store and the magnetic store.
+	// The duration for which your time-series data must be stored in the memory store
+	// and the magnetic store.
 	RetentionProperties *types.RetentionProperties
 
 	// A list of key-value pairs to label the table.

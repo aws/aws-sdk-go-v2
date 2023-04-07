@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a new cross-cluster search connection from a source Amazon OpenSearch
-// Service domain to a destination domain. For more information, see
-// Cross-cluster search for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html)
+// Service domain to a destination domain. For more information, see Cross-cluster
+// search for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html)
 // .
 func (c *Client) CreateOutboundConnection(ctx context.Context, params *CreateOutboundConnectionInput, optFns ...func(*Options)) (*CreateOutboundConnectionOutput, error) {
 	if params == nil {
@@ -30,7 +30,7 @@ func (c *Client) CreateOutboundConnection(ctx context.Context, params *CreateOut
 	return out, nil
 }
 
-// Container for the parameters to the CreateOutboundConnection  operation.
+// Container for the parameters to the CreateOutboundConnection operation.
 type CreateOutboundConnectionInput struct {
 
 	// Name of the connection.
@@ -68,7 +68,7 @@ type CreateOutboundConnectionOutput struct {
 	// The connection mode.
 	ConnectionMode types.ConnectionMode
 
-	// The ConnectionProperties  for the newly created connection.
+	// The ConnectionProperties for the newly created connection.
 	ConnectionProperties *types.ConnectionProperties
 
 	// The status of the connection.

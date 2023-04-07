@@ -35,8 +35,8 @@ type ListFindingAggregatorsInput struct {
 	// a single result.
 	MaxResults int32
 
-	// The token returned with the previous set of results. Identifies the next set
-	// of results to return.
+	// The token returned with the previous set of results. Identifies the next set of
+	// results to return.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,8 +44,8 @@ type ListFindingAggregatorsInput struct {
 
 type ListFindingAggregatorsOutput struct {
 
-	// The list of finding aggregators. This operation currently only returns a
-	// single result.
+	// The list of finding aggregators. This operation currently only returns a single
+	// result.
 	FindingAggregators []types.FindingAggregator
 
 	// If there are more results, this is the token to provide in the next call to
@@ -133,8 +133,8 @@ type ListFindingAggregatorsPaginatorOptions struct {
 	// a single result.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -147,8 +147,7 @@ type ListFindingAggregatorsPaginator struct {
 	firstPage bool
 }
 
-// NewListFindingAggregatorsPaginator returns a new
-// ListFindingAggregatorsPaginator
+// NewListFindingAggregatorsPaginator returns a new ListFindingAggregatorsPaginator
 func NewListFindingAggregatorsPaginator(client ListFindingAggregatorsAPIClient, params *ListFindingAggregatorsInput, optFns ...func(*ListFindingAggregatorsPaginatorOptions)) *ListFindingAggregatorsPaginator {
 	if params == nil {
 		params = &ListFindingAggregatorsInput{}

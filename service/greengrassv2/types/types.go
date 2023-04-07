@@ -69,9 +69,13 @@ type CloudComponentStatus struct {
 	// The vendor guidance state for the component version. This state indicates
 	// whether the component version has any issues that you should consider before you
 	// deploy it. The vendor guidance state can be:
-	//     - ACTIVE – This component version is available and recommended for use.
-	//     - DISCONTINUED – This component version has been discontinued by its publisher. You can deploy this component version, but we recommend that you use a different version of this component.
-	//     - DELETED – This component version has been deleted by its publisher, so you can't deploy it. If you have any existing deployments that specify this component version, those deployments will fail.
+	//   - ACTIVE – This component version is available and recommended for use.
+	//   - DISCONTINUED – This component version has been discontinued by its
+	//   publisher. You can deploy this component version, but we recommend that you use
+	//   a different version of this component.
+	//   - DELETED – This component version has been deleted by its publisher, so you
+	//   can't deploy it. If you have any existing deployments that specify this
+	//   component version, those deployments will fail.
 	VendorGuidance VendorGuidance
 
 	// A message that communicates details about the vendor guidance state of the
@@ -110,16 +114,16 @@ type ComponentCandidate struct {
 
 	// The version requirements for the component's dependencies. Greengrass core
 	// devices get the version requirements from component recipes. IoT Greengrass V2
-	// uses semantic version constraints. For more information, see Semantic
-	// Versioning (https://semver.org/) .
+	// uses semantic version constraints. For more information, see Semantic Versioning (https://semver.org/)
+	// .
 	VersionRequirements map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Contains information about a deployment's update to a component's
-// configuration on Greengrass core devices. For more information, see Update
-// component configurations (https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html)
+// Contains information about a deployment's update to a component's configuration
+// on Greengrass core devices. For more information, see Update component
+// configurations (https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html)
 // in the IoT Greengrass V2 Developer Guide.
 type ComponentConfigurationUpdate struct {
 
@@ -135,7 +139,7 @@ type ComponentConfigurationUpdate struct {
 
 	// The list of configuration nodes to reset to default values on target devices.
 	// Use JSON pointers to specify each node to reset. JSON pointers start with a
-	// forward slash ( /) and use forward slashes to separate the key for each level
+	// forward slash ( / ) and use forward slashes to separate the key for each level
 	// in the object. For more information, see the JSON pointer specification (https://tools.ietf.org/html/rfc6901)
 	// and Reset configuration updates (https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update)
 	// in the IoT Greengrass V2 Developer Guide.
@@ -149,8 +153,8 @@ type ComponentConfigurationUpdate struct {
 type ComponentDependencyRequirement struct {
 
 	// The type of this dependency. Choose from the following options:
-	//     - SOFT – The component doesn't restart if the dependency changes state.
-	//     - HARD – The component restarts if the dependency changes state.
+	//   - SOFT – The component doesn't restart if the dependency changes state.
+	//   - HARD – The component restarts if the dependency changes state.
 	// Default: HARD
 	DependencyType ComponentDependencyType
 
@@ -217,15 +221,15 @@ type ComponentLatestVersion struct {
 type ComponentPlatform struct {
 
 	// A dictionary of attributes for the platform. The IoT Greengrass Core software
-	// defines the os  and architecture by default. You can specify additional
-	// platform attributes for a core device when you deploy the Greengrass nucleus
-	// component. For more information, see the Greengrass nucleus component (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html)
+	// defines the os and architecture by default. You can specify additional platform
+	// attributes for a core device when you deploy the Greengrass nucleus component.
+	// For more information, see the Greengrass nucleus component (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html)
 	// in the IoT Greengrass V2 Developer Guide.
 	Attributes map[string]string
 
 	// The friendly name of the platform. This name helps you identify the platform.
 	// If you omit this parameter, IoT Greengrass creates a friendly name from the os
-	// and architecture  of the platform.
+	// and architecture of the platform.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -239,8 +243,8 @@ type ComponentRunWith struct {
 
 	// The POSIX system user and, optionally, group to use to run this component on
 	// Linux core devices. The user, and group if specified, must exist on each Linux
-	// core device. Specify the user and group separated by a colon ( :) in the
-	// following format: user:group. The group is optional. If you don't specify a
+	// core device. Specify the user and group separated by a colon ( : ) in the
+	// following format: user:group . The group is optional. If you don't specify a
 	// group, the IoT Greengrass Core software uses the primary user for the group. If
 	// you omit this parameter, the IoT Greengrass Core software uses the default
 	// system user and group that you configure on the Greengrass nucleus component.
@@ -257,11 +261,11 @@ type ComponentRunWith struct {
 	// .
 	SystemResourceLimits *SystemResourceLimits
 
-	// The Windows user to use to run this component on Windows core devices. The
-	// user must exist on each Windows core device, and its name and password must be
-	// in the LocalSystem account's Credentials Manager instance. If you omit this
-	// parameter, the IoT Greengrass Core software uses the default Windows user that
-	// you configure on the Greengrass nucleus component. For more information, see
+	// The Windows user to use to run this component on Windows core devices. The user
+	// must exist on each Windows core device, and its name and password must be in the
+	// LocalSystem account's Credentials Manager instance. If you omit this parameter,
+	// the IoT Greengrass Core software uses the default Windows user that you
+	// configure on the Greengrass nucleus component. For more information, see
 	// Configure the user and group that run components (https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user)
 	// .
 	WindowsUser *string
@@ -308,8 +312,8 @@ type ConnectivityInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a Greengrass core device, which is an IoT thing
-// that runs the IoT Greengrass Core software.
+// Contains information about a Greengrass core device, which is an IoT thing that
+// runs the IoT Greengrass Core software.
 type CoreDevice struct {
 
 	// The name of the core device. This is also the name of the IoT thing.
@@ -320,8 +324,10 @@ type CoreDevice struct {
 	LastStatusUpdateTimestamp *time.Time
 
 	// The status of the core device. Core devices can have the following statuses:
-	//     - HEALTHY – The IoT Greengrass Core software and all components run on the core device without issue.
-	//     - UNHEALTHY – The IoT Greengrass Core software or a component is in a failed state on the core device.
+	//   - HEALTHY – The IoT Greengrass Core software and all components run on the
+	//   core device without issue.
+	//   - UNHEALTHY – The IoT Greengrass Core software or a component is in a failed
+	//   state on the core device.
 	Status CoreDeviceStatus
 
 	noSmithyDocumentSerde
@@ -371,9 +377,14 @@ type DeploymentComponentUpdatePolicy struct {
 
 	// Whether or not to notify components and wait for components to become safe to
 	// update. Choose from the following options:
-	//     - NOTIFY_COMPONENTS – The deployment notifies each component before it stops and updates that component. Components can use the SubscribeToComponentUpdates (https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates) IPC operation to receive these notifications. Then, components can respond with the DeferComponentUpdate (https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate) IPC operation. For more information, see Create deployments (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html) in the IoT Greengrass V2 Developer Guide.
-	//     - SKIP_NOTIFY_COMPONENTS – The deployment doesn't notify components or wait for them to be safe to update.
-	//
+	//   - NOTIFY_COMPONENTS – The deployment notifies each component before it stops
+	//   and updates that component. Components can use the SubscribeToComponentUpdates (https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates)
+	//   IPC operation to receive these notifications. Then, components can respond with
+	//   the DeferComponentUpdate (https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate)
+	//   IPC operation. For more information, see Create deployments (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
+	//   in the IoT Greengrass V2 Developer Guide.
+	//   - SKIP_NOTIFY_COMPONENTS – The deployment doesn't notify components or wait
+	//   for them to be safe to update.
 	// Default: NOTIFY_COMPONENTS
 	Action DeploymentComponentUpdatePolicyAction
 
@@ -414,8 +425,8 @@ type DeploymentIoTJobConfiguration struct {
 	// which the job rolls out to the fleet of target devices.
 	JobExecutionsRolloutConfig *IoTJobExecutionsRolloutConfig
 
-	// The timeout configuration for the job. This configuration defines the amount
-	// of time each device has to complete the job.
+	// The timeout configuration for the job. This configuration defines the amount of
+	// time each device has to complete the job.
 	TimeoutConfig *IoTJobTimeoutConfig
 
 	noSmithyDocumentSerde
@@ -528,7 +539,7 @@ type EffectiveDeployment struct {
 
 // Contains all error-related information for the deployment record. The status
 // details will be null if the deployment is in a success state. Greengrass nucleus
-// v2.8.0 or later is required to get an accurate errorStack  and errorTypes
+// v2.8.0 or later is required to get an accurate errorStack and errorTypes
 // response. This field will not be returned for earlier Greengrass nucleus
 // versions.
 type EffectiveDeploymentStatusDetails struct {
@@ -539,9 +550,9 @@ type EffectiveDeploymentStatusDetails struct {
 	// be an empty list if there is no error.
 	ErrorStack []string
 
-	// Contains tags which describe the error. You can use the error types to
-	// classify errors to assist with remediating the failure. The response will be an
-	// empty list if there is no error.
+	// Contains tags which describe the error. You can use the error types to classify
+	// errors to assist with remediating the failure. The response will be an empty
+	// list if there is no error.
 	ErrorTypes []string
 
 	noSmithyDocumentSerde
@@ -583,7 +594,7 @@ type InstalledComponent struct {
 	LifecycleStateDetails *string
 
 	// The status codes that indicate the reason for failure whenever the
-	// lifecycleStatehas an error or is in a broken state. Greengrass nucleus v2.8.0
+	// lifecycleState has an error or is in a broken state. Greengrass nucleus v2.8.0
 	// or later is required to get an accurate lifecycleStatusCodes response. This
 	// response can be inaccurate in earlier Greengrass nucleus versions.
 	LifecycleStatusCodes []string
@@ -606,8 +617,10 @@ type IoTJobAbortConfig struct {
 
 // Contains criteria that define when and how to cancel a job. The deployment
 // stops if the following conditions are true:
-//   - The number of things that receive the deployment exceeds the minNumberOfExecutedThings .
-//   - The percentage of failures with type failureType exceeds the thresholdPercentage .
+//   - The number of things that receive the deployment exceeds the
+//     minNumberOfExecutedThings .
+//   - The percentage of failures with type failureType exceeds the
+//     thresholdPercentage .
 type IoTJobAbortCriteria struct {
 
 	// The action to perform when the criteria are met.
@@ -628,7 +641,7 @@ type IoTJobAbortCriteria struct {
 
 	// The minimum percentage of failureType failures that occur before the job can
 	// cancel. This parameter supports up to two digits after the decimal (for example,
-	// you can specify 10.9  or 10.99 , but not 10.999 ).
+	// you can specify 10.9 or 10.99 , but not 10.999 ).
 	//
 	// This member is required.
 	ThresholdPercentage float64
@@ -662,9 +675,9 @@ type IoTJobExponentialRolloutRate struct {
 	// This member is required.
 	BaseRatePerMinute int32
 
-	// The exponential factor to increase the rollout rate for the job. This
-	// parameter supports up to one digit after the decimal (for example, you can
-	// specify 1.5 , but not 1.55 ).
+	// The exponential factor to increase the rollout rate for the job. This parameter
+	// supports up to one digit after the decimal (for example, you can specify 1.5 ,
+	// but not 1.55 ).
 	//
 	// This member is required.
 	IncrementFactor float64
@@ -678,7 +691,7 @@ type IoTJobExponentialRolloutRate struct {
 }
 
 // Contains information about criteria to meet before a job increases its rollout
-// rate. Specify either numberOfNotifiedThings  or numberOfSucceededThings .
+// rate. Specify either numberOfNotifiedThings or numberOfSucceededThings .
 type IoTJobRateIncreaseCriteria struct {
 
 	// The number of devices to receive the job notification before the rollout rate
@@ -696,9 +709,9 @@ type IoTJobRateIncreaseCriteria struct {
 type IoTJobTimeoutConfig struct {
 
 	// The amount of time, in minutes, that devices have to complete the job. The
-	// timer starts when the job status is set to IN_PROGRESS. If the job status
+	// timer starts when the job status is set to IN_PROGRESS . If the job status
 	// doesn't change to a terminal state before the time expires, then the job status
-	// is set to TIMED_OUT. The timeout interval must be between 1 minute and 7 days
+	// is set to TIMED_OUT . The timeout interval must be between 1 minute and 7 days
 	// (10080 minutes).
 	InProgressTimeoutInMinutes *int64
 
@@ -712,8 +725,7 @@ type LambdaContainerParams struct {
 	// The list of system devices that the container can access.
 	Devices []LambdaDeviceMount
 
-	// The memory size of the container, expressed in kilobytes. Default: 16384 (16
-	// MB)
+	// The memory size of the container, expressed in kilobytes. Default: 16384 (16 MB)
 	MemorySizeInKB *int32
 
 	// Whether or not the container can read information from the device's /sys
@@ -739,7 +751,7 @@ type LambdaDeviceMount struct {
 	// Default: false
 	AddGroupOwner *bool
 
-	// The permission to access the device: read/only ( ro ) or read/write ( rw).
+	// The permission to access the device: read/only ( ro ) or read/write ( rw ).
 	// Default: ro
 	Permission LambdaFilesystemPermission
 
@@ -757,8 +769,11 @@ type LambdaEventSource struct {
 	Topic *string
 
 	// The type of event source. Choose from the following options:
-	//     - PUB_SUB – Subscribe to local publish/subscribe messages. This event source type doesn't support MQTT wildcards ( + and # ) in the event source topic.
-	//     - IOT_CORE – Subscribe to Amazon Web Services IoT Core MQTT messages. This event source type supports MQTT wildcards ( + and # ) in the event source topic.
+	//   - PUB_SUB – Subscribe to local publish/subscribe messages. This event source
+	//   type doesn't support MQTT wildcards ( + and # ) in the event source topic.
+	//   - IOT_CORE – Subscribe to Amazon Web Services IoT Core MQTT messages. This
+	//   event source type supports MQTT wildcards ( + and # ) in the event source
+	//   topic.
 	//
 	// This member is required.
 	Type LambdaEventSourceType
@@ -769,8 +784,8 @@ type LambdaEventSource struct {
 // Contains parameters for a Lambda function that runs on IoT Greengrass.
 type LambdaExecutionParameters struct {
 
-	// The map of environment variables that are available to the Lambda function
-	// when it runs.
+	// The map of environment variables that are available to the Lambda function when
+	// it runs.
 	EnvironmentVariables map[string]string
 
 	// The list of event sources to which to subscribe to receive work messages. The
@@ -802,9 +817,12 @@ type LambdaExecutionParameters struct {
 	MaxQueueSize *int32
 
 	// Whether or not the Lambda function is pinned, or long-lived.
-	//     - A pinned Lambda function starts when IoT Greengrass starts and keeps running in its own container.
-	//     - A non-pinned Lambda function starts only when it receives a work item and exists after it idles for maxIdleTimeInSeconds . If the function has multiple work items, the IoT Greengrass Core software creates multiple instances of the function.
-	//
+	//   - A pinned Lambda function starts when IoT Greengrass starts and keeps
+	//   running in its own container.
+	//   - A non-pinned Lambda function starts only when it receives a work item and
+	//   exists after it idles for maxIdleTimeInSeconds . If the function has multiple
+	//   work items, the IoT Greengrass Core software creates multiple instances of the
+	//   function.
 	// Default: true
 	Pinned *bool
 
@@ -842,9 +860,9 @@ type LambdaFunctionRecipeSource struct {
 	// The platforms that the component version supports.
 	ComponentPlatforms []ComponentPlatform
 
-	// The version of the component. Defaults to the version of the Lambda function
-	// as a semantic version. For example, if your function version is 3, the
-	// component version becomes 3.0.0 .
+	// The version of the component. Defaults to the version of the Lambda function as
+	// a semantic version. For example, if your function version is 3 , the component
+	// version becomes 3.0.0 .
 	ComponentVersion *string
 
 	noSmithyDocumentSerde
@@ -884,7 +902,7 @@ type LambdaVolumeMount struct {
 	// Default: false
 	AddGroupOwner *bool
 
-	// The permission to access the volume: read/only ( ro ) or read/write ( rw).
+	// The permission to access the volume: read/only ( ro ) or read/write ( rw ).
 	// Default: ro
 	Permission LambdaFilesystemPermission
 
@@ -916,9 +934,13 @@ type ResolvedComponentVersion struct {
 	// The vendor guidance state for the component version. This state indicates
 	// whether the component version has any issues that you should consider before you
 	// deploy it. The vendor guidance state can be:
-	//     - ACTIVE – This component version is available and recommended for use.
-	//     - DISCONTINUED – This component version has been discontinued by its publisher. You can deploy this component version, but we recommend that you use a different version of this component.
-	//     - DELETED – This component version has been deleted by its publisher, so you can't deploy it. If you have any existing deployments that specify this component version, those deployments will fail.
+	//   - ACTIVE – This component version is available and recommended for use.
+	//   - DISCONTINUED – This component version has been discontinued by its
+	//   publisher. You can deploy this component version, but we recommend that you use
+	//   a different version of this component.
+	//   - DELETED – This component version has been deleted by its publisher, so you
+	//   can't deploy it. If you have any existing deployments that specify this
+	//   component version, those deployments will fail.
 	VendorGuidance VendorGuidance
 
 	noSmithyDocumentSerde
@@ -930,9 +952,9 @@ type ResolvedComponentVersion struct {
 // .
 type SystemResourceLimits struct {
 
-	// The maximum amount of CPU time that a component's processes can use on the
-	// core device. A core device's total CPU time is equivalent to the device's number
-	// of CPU cores. For example, on a core device with 4 CPU cores, you can set this
+	// The maximum amount of CPU time that a component's processes can use on the core
+	// device. A core device's total CPU time is equivalent to the device's number of
+	// CPU cores. For example, on a core device with 4 CPU cores, you can set this
 	// value to 2 to limit the component's processes to 50 percent usage of each CPU
 	// core. On a device with 1 CPU core, you can set this value to 0.25 to limit the
 	// component's processes to 25 percent usage of the CPU. If you set this value to a
@@ -940,8 +962,8 @@ type SystemResourceLimits struct {
 	// doesn't limit the component's CPU usage.
 	Cpus float64
 
-	// The maximum amount of RAM, expressed in kilobytes, that a component's
-	// processes can use on the core device.
+	// The maximum amount of RAM, expressed in kilobytes, that a component's processes
+	// can use on the core device.
 	Memory int64
 
 	noSmithyDocumentSerde

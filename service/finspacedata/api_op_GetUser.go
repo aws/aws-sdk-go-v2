@@ -42,12 +42,12 @@ type GetUserOutput struct {
 	// Indicates whether the user can use the GetProgrammaticAccessCredentials API to
 	// obtain credentials that can then be used to access other FinSpace Data API
 	// operations.
-	//     - ENABLED – The user has permissions to use the APIs.
-	//     - DISABLED – The user does not have permissions to use any APIs.
+	//   - ENABLED – The user has permissions to use the APIs.
+	//   - DISABLED – The user does not have permissions to use any APIs.
 	ApiAccess types.ApiAccess
 
 	// The ARN identifier of an AWS user or role that is allowed to call the
-	// GetProgrammaticAccessCredentialsAPI to obtain a credentials token for a
+	// GetProgrammaticAccessCredentials API to obtain a credentials token for a
 	// specific FinSpace user. This must be an IAM role within your FinSpace account.
 	ApiAccessPrincipalArn *string
 
@@ -81,15 +81,17 @@ type GetUserOutput struct {
 	LastName *string
 
 	// The current status of the user account.
-	//     - CREATING – The user account creation is in progress.
-	//     - ENABLED – The user account is created and is currently active.
-	//     - DISABLED – The user account is currently inactive.
+	//   - CREATING – The user account creation is in progress.
+	//   - ENABLED – The user account is created and is currently active.
+	//   - DISABLED – The user account is currently inactive.
 	Status types.UserStatus
 
 	// Indicates the type of user.
-	//     - SUPER_USER – A user with permission to all the functionality and data in FinSpace.
+	//   - SUPER_USER – A user with permission to all the functionality and data in
+	//   FinSpace.
 	//
-	//     - APP_USER – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.
+	//   - APP_USER – A user with specific permissions in FinSpace. The users are
+	//   assigned permissions by adding them to a permission group.
 	Type types.UserType
 
 	// The unique identifier for the user account that is retrieved.

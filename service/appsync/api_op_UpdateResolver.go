@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a Resolver  object.
+// Updates a Resolver object.
 func (c *Client) UpdateResolver(ctx context.Context, params *UpdateResolverInput, optFns ...func(*Options)) (*UpdateResolverOutput, error) {
 	if params == nil {
 		params = &UpdateResolverInput{}
@@ -48,15 +48,19 @@ type UpdateResolverInput struct {
 	CachingConfig *types.CachingConfig
 
 	// The resolver code that contains the request and response functions. When code
-	// is used, the runtime  is required. The runtime  value must be APPSYNC_JS .
+	// is used, the runtime is required. The runtime value must be APPSYNC_JS .
 	Code *string
 
 	// The new data source name.
 	DataSourceName *string
 
 	// The resolver type.
-	//     - UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.
-	//     - PIPELINE: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of Function objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.
+	//   - UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type.
+	//   You can use a UNIT resolver to run a GraphQL query against a single data source.
+	//
+	//   - PIPELINE: A PIPELINE resolver type. You can use a PIPELINE resolver to
+	//   invoke a series of Function objects in a serial manner. You can use a pipeline
+	//   resolver to run a GraphQL query against multiple data sources.
 	Kind types.ResolverKind
 
 	// The maximum batching size for a resolver.
@@ -65,8 +69,8 @@ type UpdateResolverInput struct {
 	// The PipelineConfig .
 	PipelineConfig *types.PipelineConfig
 
-	// The new request mapping template. A resolver uses a request mapping template
-	// to convert a GraphQL expression into a format that a data source can understand.
+	// The new request mapping template. A resolver uses a request mapping template to
+	// convert a GraphQL expression into a format that a data source can understand.
 	// Mapping templates are written in Apache Velocity Template Language (VTL). VTL
 	// request mapping templates are optional when using an Lambda data source. For all
 	// other data sources, VTL request and response mapping templates are required.
@@ -75,13 +79,13 @@ type UpdateResolverInput struct {
 	// The new response mapping template.
 	ResponseMappingTemplate *string
 
-	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver
-	// or Amazon Web Services AppSync function. Specifies the name and version of the
+	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or
+	// Amazon Web Services AppSync function. Specifies the name and version of the
 	// runtime to use. Note that if a runtime is specified, code must also be
 	// specified.
 	Runtime *types.AppSyncRuntime
 
-	// The SyncConfig  for a resolver attached to a versioned data source.
+	// The SyncConfig for a resolver attached to a versioned data source.
 	SyncConfig *types.SyncConfig
 
 	noSmithyDocumentSerde
@@ -89,7 +93,7 @@ type UpdateResolverInput struct {
 
 type UpdateResolverOutput struct {
 
-	// The updated Resolver  object.
+	// The updated Resolver object.
 	Resolver *types.Resolver
 
 	// Metadata pertaining to the operation's result.

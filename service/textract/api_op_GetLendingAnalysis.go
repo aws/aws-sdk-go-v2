@@ -13,10 +13,10 @@ import (
 
 // Gets the results for an Amazon Textract asynchronous operation that analyzes
 // text in a lending document. You start asynchronous text analysis by calling
-// StartLendingAnalysis , which returns a job identifier ( JobId). When the text
+// StartLendingAnalysis , which returns a job identifier ( JobId ). When the text
 // analysis operation finishes, Amazon Textract publishes a completion status to
 // the Amazon Simple Notification Service (Amazon SNS) topic that's registered in
-// the initial call to StartLendingAnalysis. To get the results of the text
+// the initial call to StartLendingAnalysis . To get the results of the text
 // analysis operation, first check that the status value published to the Amazon
 // SNS topic is SUCCEEDED. If so, call GetLendingAnalysis, and pass the job
 // identifier ( JobId ) from the initial call to StartLendingAnalysis .
@@ -38,7 +38,7 @@ func (c *Client) GetLendingAnalysis(ctx context.Context, params *GetLendingAnaly
 type GetLendingAnalysisInput struct {
 
 	// A unique identifier for the lending or text-detection job. The JobId is
-	// returned from StartLendingAnalysis . A JobId  value is only valid for 7 days.
+	// returned from StartLendingAnalysis . A JobId value is only valid for 7 days.
 	//
 	// This member is required.
 	JobId *string

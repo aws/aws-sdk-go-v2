@@ -31,7 +31,7 @@ func (c *Client) ListServers(ctx context.Context, params *ListServersInput, optF
 type ListServersInput struct {
 
 	// Specifies the filter value, which is based on the type of server criteria. For
-	// example, if serverCriteria  is OS_NAME , and the filterValue  is equal to
+	// example, if serverCriteria is OS_NAME , and the filterValue is equal to
 	// WindowsServer , then ListServers returns all of the servers matching the OS
 	// name WindowsServer .
 	FilterValue *string
@@ -146,8 +146,8 @@ type ListServersPaginatorOptions struct {
 	// 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

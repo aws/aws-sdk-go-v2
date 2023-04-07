@@ -19,10 +19,10 @@ import (
 
 // Returns descriptive information about an Amazon EKS cluster. The API server
 // endpoint and certificate authority data returned by this operation are required
-// for kubelet  and kubectl to communicate with your Kubernetes API server. For
+// for kubelet and kubectl to communicate with your Kubernetes API server. For
 // more information, see Create a kubeconfig for Amazon EKS (https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
 // . The API server endpoint and certificate authority data aren't available until
-// the cluster reaches the ACTIVE  state.
+// the cluster reaches the ACTIVE state.
 func (c *Client) DescribeCluster(ctx context.Context, params *DescribeClusterInput, optFns ...func(*Options)) (*DescribeClusterOutput, error) {
 	if params == nil {
 		params = &DescribeClusterInput{}
@@ -379,9 +379,9 @@ func NewClusterDeletedWaiter(client DescribeClusterAPIClient, optFns ...func(*Cl
 	}
 }
 
-// Wait calls the waiter function for ClusterDeleted waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ClusterDeleted waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ClusterDeletedWaiter) Wait(ctx context.Context, params *DescribeClusterInput, maxWaitDur time.Duration, optFns ...func(*ClusterDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

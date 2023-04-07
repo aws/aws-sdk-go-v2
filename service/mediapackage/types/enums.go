@@ -100,8 +100,8 @@ const (
 	CmafEncryptionMethodAesCtr    CmafEncryptionMethod = "AES_CTR"
 )
 
-// Values returns all known values for CmafEncryptionMethod. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CmafEncryptionMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CmafEncryptionMethod) Values() []CmafEncryptionMethod {
 	return []CmafEncryptionMethod{
@@ -154,9 +154,9 @@ const (
 	OriginationDeny  Origination = "DENY"
 )
 
-// Values returns all known values for Origination. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Origination. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Origination) Values() []Origination {
 	return []Origination{
 		"ALLOW",
@@ -313,9 +313,9 @@ const (
 	StreamOrderVideoBitrateDescending StreamOrder = "VIDEO_BITRATE_DESCENDING"
 )
 
-// Values returns all known values for StreamOrder. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StreamOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StreamOrder) Values() []StreamOrder {
 	return []StreamOrder{
 		"ORIGINAL",

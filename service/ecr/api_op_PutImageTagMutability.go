@@ -38,8 +38,7 @@ type PutImageTagMutabilityInput struct {
 	// This member is required.
 	ImageTagMutability types.ImageTagMutability
 
-	// The name of the repository in which to update the image tag mutability
-	// settings.
+	// The name of the repository in which to update the image tag mutability settings.
 	//
 	// This member is required.
 	RepositoryName *string

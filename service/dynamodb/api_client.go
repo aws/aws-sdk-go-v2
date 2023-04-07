@@ -91,8 +91,8 @@ type Options struct {
 	// clients initial default settings.
 	DefaultsMode aws.DefaultsMode
 
-	// Allows you to disable the client's validation of response integrity using
-	// CRC32 checksum. Enabled by default.
+	// Allows you to disable the client's validation of response integrity using CRC32
+	// checksum. Enabled by default.
 	DisableValidateResponseChecksum bool
 
 	// Allows you to enable the client's support for compressed gzip responses.
@@ -145,8 +145,8 @@ type Options struct {
 	// option.
 	Retryer aws.Retryer
 
-	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is
-	// set to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
+	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is set
+	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig . You
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment

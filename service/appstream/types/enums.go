@@ -54,8 +54,8 @@ const (
 	ApplicationAttributeWorkingDirectory ApplicationAttribute = "WORKING_DIRECTORY"
 )
 
-// Values returns all known values for ApplicationAttribute. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ApplicationAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationAttribute) Values() []ApplicationAttribute {
 	return []ApplicationAttribute{
@@ -548,8 +548,8 @@ const (
 	StorageConnectorTypeOneDrive    StorageConnectorType = "ONE_DRIVE"
 )
 
-// Values returns all known values for StorageConnectorType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StorageConnectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StorageConnectorType) Values() []StorageConnectorType {
 	return []StorageConnectorType{

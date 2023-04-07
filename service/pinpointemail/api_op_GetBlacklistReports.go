@@ -27,8 +27,8 @@ func (c *Client) GetBlacklistReports(ctx context.Context, params *GetBlacklistRe
 	return out, nil
 }
 
-// A request to retrieve a list of the blacklists that your dedicated IP
-// addresses appear on.
+// A request to retrieve a list of the blacklists that your dedicated IP addresses
+// appear on.
 type GetBlacklistReportsInput struct {
 
 	// A list of IP addresses that you want to retrieve blacklist information about.

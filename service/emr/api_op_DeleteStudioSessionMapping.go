@@ -43,14 +43,14 @@ type DeleteStudioSessionMappingInput struct {
 	// The globally unique identifier (GUID) of the user or group to remove from the
 	// Amazon EMR Studio. For more information, see UserId (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
 	// and GroupId (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId)
-	// in the IAM Identity Center Identity Store API Reference. Either IdentityName
-	// or IdentityId  must be specified.
+	// in the IAM Identity Center Identity Store API Reference. Either IdentityName or
+	// IdentityId must be specified.
 	IdentityId *string
 
 	// The name of the user name or group to remove from the Amazon EMR Studio. For
 	// more information, see UserName (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
-	// in the IAM Identity Center Store API Reference. Either IdentityName  or
+	// in the IAM Identity Center Store API Reference. Either IdentityName or
 	// IdentityId must be specified.
 	IdentityName *string
 

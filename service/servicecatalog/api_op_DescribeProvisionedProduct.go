@@ -34,9 +34,9 @@ func (c *Client) DescribeProvisionedProduct(ctx context.Context, params *Describ
 type DescribeProvisionedProductInput struct {
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The provisioned product identifier. You must provide the name or ID, but not

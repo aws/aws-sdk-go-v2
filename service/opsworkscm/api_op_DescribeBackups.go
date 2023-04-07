@@ -37,10 +37,10 @@ type DescribeBackupsInput struct {
 	// Describes a single backup.
 	BackupId *string
 
-	// This is not currently implemented for DescribeBackups  requests.
+	// This is not currently implemented for DescribeBackups requests.
 	MaxResults *int32
 
-	// This is not currently implemented for DescribeBackups  requests.
+	// This is not currently implemented for DescribeBackups requests.
 	NextToken *string
 
 	// Returns backups for the server with the specified ServerName.
@@ -51,10 +51,10 @@ type DescribeBackupsInput struct {
 
 type DescribeBackupsOutput struct {
 
-	// Contains the response to a DescribeBackups  request.
+	// Contains the response to a DescribeBackups request.
 	Backups []types.Backup
 
-	// This is not currently implemented for DescribeBackups  requests.
+	// This is not currently implemented for DescribeBackups requests.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -133,11 +133,11 @@ var _ DescribeBackupsAPIClient = (*Client)(nil)
 
 // DescribeBackupsPaginatorOptions is the paginator options for DescribeBackups
 type DescribeBackupsPaginatorOptions struct {
-	// This is not currently implemented for DescribeBackups  requests.
+	// This is not currently implemented for DescribeBackups requests.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -50,8 +50,8 @@ type PutRolePermissionsBoundaryInput struct {
 	// This member is required.
 	PermissionsBoundary *string
 
-	// The name (friendly name, not ARN) of the IAM role for which you want to set
-	// the permissions boundary.
+	// The name (friendly name, not ARN) of the IAM role for which you want to set the
+	// permissions boundary.
 	//
 	// This member is required.
 	RoleName *string

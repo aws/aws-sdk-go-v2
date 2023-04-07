@@ -30,8 +30,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource that you want to tag. To get
-	// the ARN, send a GET request with the resource name.
+	// The Amazon Resource Name (ARN) of the resource that you want to tag. To get the
+	// ARN, send a GET request with the resource name.
 	//
 	// This member is required.
 	Arn *string

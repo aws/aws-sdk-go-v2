@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a list of App Runner VPC Ingress Connections in your Amazon Web
-// Services account.
+// Return a list of App Runner VPC Ingress Connections in your Amazon Web Services
+// account.
 func (c *Client) ListVpcIngressConnections(ctx context.Context, params *ListVpcIngressConnectionsInput, optFns ...func(*Options)) (*ListVpcIngressConnectionsOutput, error) {
 	if params == nil {
 		params = &ListVpcIngressConnectionsInput{}
@@ -31,12 +31,12 @@ func (c *Client) ListVpcIngressConnections(ctx context.Context, params *ListVpcI
 
 type ListVpcIngressConnectionsInput struct {
 
-	// The VPC Ingress Connections to be listed based on either the Service Arn or
-	// Vpc Endpoint Id, or both.
+	// The VPC Ingress Connections to be listed based on either the Service Arn or Vpc
+	// Endpoint Id, or both.
 	Filter *types.ListVpcIngressConnectionsFilter
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	MaxResults *int32
 
@@ -52,7 +52,7 @@ type ListVpcIngressConnectionsInput struct {
 type ListVpcIngressConnectionsOutput struct {
 
 	// A list of summary information records for VPC Ingress Connections. In a
-	// paginated request, the request returns up to MaxResults  records for each call.
+	// paginated request, the request returns up to MaxResults records for each call.
 	//
 	// This member is required.
 	VpcIngressConnectionSummaryList []types.VpcIngressConnectionSummary
@@ -139,12 +139,12 @@ var _ ListVpcIngressConnectionsAPIClient = (*Client)(nil)
 // ListVpcIngressConnections
 type ListVpcIngressConnectionsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

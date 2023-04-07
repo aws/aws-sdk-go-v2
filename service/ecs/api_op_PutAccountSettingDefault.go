@@ -32,11 +32,11 @@ func (c *Client) PutAccountSettingDefault(ctx context.Context, params *PutAccoun
 type PutAccountSettingDefaultInput struct {
 
 	// The resource name for which to modify the account setting. If
-	// serviceLongArnFormatis specified, the ARN for your Amazon ECS services is
+	// serviceLongArnFormat is specified, the ARN for your Amazon ECS services is
 	// affected. If taskLongArnFormat is specified, the ARN and resource ID for your
 	// Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified,
 	// the ARN and resource ID for your Amazon ECS container instances is affected. If
-	// awsvpcTrunkingis specified, the ENI limit for your Amazon ECS container
+	// awsvpcTrunking is specified, the ENI limit for your Amazon ECS container
 	// instances is affected. If containerInsights is specified, the default setting
 	// for CloudWatch Container Insights for your clusters is affected. Fargate is
 	// transitioning from task count-based quotas to vCPU-based quotas. You can set the

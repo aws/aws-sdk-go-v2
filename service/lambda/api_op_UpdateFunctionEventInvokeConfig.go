@@ -33,23 +33,22 @@ func (c *Client) UpdateFunctionEventInvokeConfig(ctx context.Context, params *Up
 type UpdateFunctionEventInvokeConfigInput struct {
 
 	// The name of the Lambda function, version, or alias. Name formats
-	//     - Function name - my-function (name-only), my-function:v1 (with alias).
-	//     - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function .
-	//     - Partial ARN - 123456789012:function:my-function .
-	// You can append a
-	// version number or alias to any of the formats. The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//   - Function name - my-function (name-only), my-function:v1 (with alias).
+	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN - 123456789012:function:my-function .
+	// You can append a version number or alias to any of the formats. The length
+	// constraint applies only to the full ARN. If you specify only the function name,
+	// it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
 
 	// A destination for events after they have been sent to a function for
 	// processing. Destinations
-	//     - Function - The Amazon Resource Name (ARN) of a Lambda function.
-	//     - Queue - The ARN of an SQS queue.
-	//     - Topic - The ARN of an SNS topic.
-	//     - Event Bus - The ARN of an Amazon EventBridge event bus.
+	//   - Function - The Amazon Resource Name (ARN) of a Lambda function.
+	//   - Queue - The ARN of an SQS queue.
+	//   - Topic - The ARN of an SNS topic.
+	//   - Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig
 
 	// The maximum age of a request that Lambda sends to a function for processing.
@@ -68,10 +67,10 @@ type UpdateFunctionEventInvokeConfigOutput struct {
 
 	// A destination for events after they have been sent to a function for
 	// processing. Destinations
-	//     - Function - The Amazon Resource Name (ARN) of a Lambda function.
-	//     - Queue - The ARN of an SQS queue.
-	//     - Topic - The ARN of an SNS topic.
-	//     - Event Bus - The ARN of an Amazon EventBridge event bus.
+	//   - Function - The Amazon Resource Name (ARN) of a Lambda function.
+	//   - Queue - The ARN of an SQS queue.
+	//   - Topic - The ARN of an SNS topic.
+	//   - Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig
 
 	// The Amazon Resource Name (ARN) of the function.

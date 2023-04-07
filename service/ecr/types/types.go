@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// This data type is used in the ImageScanFinding  data type.
+// This data type is used in the ImageScanFinding data type.
 type Attribute struct {
 
 	// The attribute key.
@@ -29,12 +29,12 @@ type AuthorizationData struct {
 	// user:password for private registry authentication using docker login .
 	AuthorizationToken *string
 
-	// The Unix time in seconds and milliseconds when the authorization token
-	// expires. Authorization tokens are valid for 12 hours.
+	// The Unix time in seconds and milliseconds when the authorization token expires.
+	// Authorization tokens are valid for 12 hours.
 	ExpiresAt *time.Time
 
-	// The registry URL to use for this authorization token in a docker login
-	// command. The Amazon ECR registry URL format is
+	// The registry URL to use for this authorization token in a docker login command.
+	// The Amazon ECR registry URL format is
 	// https://aws_account_id.dkr.ecr.region.amazonaws.com . For example,
 	// https://012345678910.dkr.ecr.us-east-1.amazonaws.com ..
 	ProxyEndpoint *string
@@ -124,11 +124,11 @@ type CvssScoreDetails struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing a filter on a DescribeImages  operation.
+// An object representing a filter on a DescribeImages operation.
 type DescribeImagesFilter struct {
 
-	// The tag status with which to filter your DescribeImages results. You can
-	// filter results based on whether they are TAGGED  or UNTAGGED .
+	// The tag status with which to filter your DescribeImages results. You can filter
+	// results based on whether they are TAGGED or UNTAGGED .
 	TagStatus TagStatus
 
 	noSmithyDocumentSerde
@@ -146,15 +146,15 @@ type DescribeImagesFilter struct {
 // in the Amazon Elastic Container Registry User Guide.
 type EncryptionConfiguration struct {
 
-	// The encryption type to use. If you use the KMS encryption type, the contents
-	// of the repository will be encrypted using server-side encryption with Key
+	// The encryption type to use. If you use the KMS encryption type, the contents of
+	// the repository will be encrypted using server-side encryption with Key
 	// Management Service key stored in KMS. When you use KMS to encrypt your data, you
 	// can either use the default Amazon Web Services managed KMS key for Amazon ECR,
 	// or specify your own KMS key, which you already created. For more information,
 	// see Protecting data using server-side encryption with an KMS key stored in Key
 	// Management Service (SSE-KMS) (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
 	// in the Amazon Simple Storage Service Console Developer Guide. If you use the
-	// AES256encryption type, Amazon ECR uses server-side encryption with Amazon
+	// AES256 encryption type, Amazon ECR uses server-side encryption with Amazon
 	// S3-managed encryption keys which encrypts the images in the repository using an
 	// AES-256 encryption algorithm. For more information, see Protecting data using
 	// server-side encryption with Amazon S3-managed encryption keys (SSE-S3) (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
@@ -246,13 +246,13 @@ type Image struct {
 	noSmithyDocumentSerde
 }
 
-// An object that describes an image returned by a DescribeImages  operation.
+// An object that describes an image returned by a DescribeImages operation.
 type ImageDetail struct {
 
 	// The artifact media type of the image.
 	ArtifactMediaType *string
 
-	// The sha256  digest of the image manifest.
+	// The sha256 digest of the image manifest.
 	ImageDigest *string
 
 	// The media type of the image manifest.
@@ -271,8 +271,8 @@ type ImageDetail struct {
 	// The size, in bytes, of the image in the repository. If the image is a manifest
 	// list, this will be the max size of all manifests in the list. Beginning with
 	// Docker version 1.9, the Docker client compresses image layers before pushing
-	// them to a V2 Docker registry. The output of the docker images command shows
-	// the uncompressed image size, so it may return a larger image size than the image
+	// them to a V2 Docker registry. The output of the docker images command shows the
+	// uncompressed image size, so it may return a larger image size than the image
 	// sizes returned by DescribeImages .
 	ImageSizeInBytes *int64
 
@@ -313,11 +313,10 @@ type ImageFailure struct {
 	noSmithyDocumentSerde
 }
 
-// An object with identifying information for an image in an Amazon ECR
-// repository.
+// An object with identifying information for an image in an Amazon ECR repository.
 type ImageIdentifier struct {
 
-	// The sha256  digest of the image manifest.
+	// The sha256 digest of the image manifest.
 	ImageDigest *string
 
 	// The tag used for the image.
@@ -406,7 +405,7 @@ type ImageScanFindingsSummary struct {
 type ImageScanningConfiguration struct {
 
 	// The setting that determines whether images are scanned after being pushed to a
-	// repository. If set to true, images will be scanned after being pushed. If this
+	// repository. If set to true , images will be scanned after being pushed. If this
 	// parameter is not specified, it will default to false and images will not be
 	// scanned unless a scan is manually started with the API_StartImageScan (https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_StartImageScan.html)
 	// API.
@@ -433,7 +432,7 @@ type Layer struct {
 	// The availability status of the image layer.
 	LayerAvailability LayerAvailability
 
-	// The sha256  digest of the image layer.
+	// The sha256 digest of the image layer.
 	LayerDigest *string
 
 	// The size, in bytes, of the image layer.
@@ -480,7 +479,7 @@ type LifecyclePolicyPreviewResult struct {
 	// The priority of the applied rule.
 	AppliedRulePriority *int32
 
-	// The sha256  digest of the image manifest.
+	// The sha256 digest of the image manifest.
 	ImageDigest *string
 
 	// The date and time, expressed in standard JavaScript date format, at which the
@@ -511,11 +510,11 @@ type LifecyclePolicyRuleAction struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing a filter on a ListImages  operation.
+// An object representing a filter on a ListImages operation.
 type ListImagesFilter struct {
 
 	// The tag status with which to filter your ListImages results. You can filter
-	// results based on whether they are TAGGED  or UNTAGGED .
+	// results based on whether they are TAGGED or UNTAGGED .
 	TagStatus TagStatus
 
 	noSmithyDocumentSerde
@@ -604,16 +603,16 @@ type RegistryScanningConfiguration struct {
 // The details of a scanning rule for a private registry.
 type RegistryScanningRule struct {
 
-	// The repository filters associated with the scanning configuration for a
-	// private registry.
+	// The repository filters associated with the scanning configuration for a private
+	// registry.
 	//
 	// This member is required.
 	RepositoryFilters []ScanningRepositoryFilter
 
 	// The frequency that scans are performed at for a private registry. When the
 	// ENHANCED scan type is specified, the supported scan frequencies are
-	// CONTINUOUS_SCAN and SCAN_ON_PUSH . When the BASIC  scan type is specified, the
-	// SCAN_ON_PUSH and MANUAL  scan frequencies are supported.
+	// CONTINUOUS_SCAN and SCAN_ON_PUSH . When the BASIC scan type is specified, the
+	// SCAN_ON_PUSH and MANUAL scan frequencies are supported.
 	//
 	// This member is required.
 	ScanFrequency ScanFrequency
@@ -670,9 +669,9 @@ type ReplicationRule struct {
 	// This member is required.
 	Destinations []ReplicationDestination
 
-	// An array of objects representing the filters for a replication rule.
-	// Specifying a repository filter for a replication rule provides a method for
-	// controlling which repositories in a private registry are replicated.
+	// An array of objects representing the filters for a replication rule. Specifying
+	// a repository filter for a replication rule provides a method for controlling
+	// which repositories in a private registry are replicated.
 	RepositoryFilters []RepositoryFilter
 
 	noSmithyDocumentSerde
@@ -698,27 +697,26 @@ type Repository struct {
 	// the repository.
 	RegistryId *string
 
-	// The Amazon Resource Name (ARN) that identifies the repository. The ARN
-	// contains the arn:aws:ecr namespace, followed by the region of the repository,
-	// Amazon Web Services account ID of the repository owner, repository namespace,
-	// and repository name. For example,
-	// arn:aws:ecr:region:012345678910:repository/test .
+	// The Amazon Resource Name (ARN) that identifies the repository. The ARN contains
+	// the arn:aws:ecr namespace, followed by the region of the repository, Amazon Web
+	// Services account ID of the repository owner, repository namespace, and
+	// repository name. For example, arn:aws:ecr:region:012345678910:repository/test .
 	RepositoryArn *string
 
 	// The name of the repository.
 	RepositoryName *string
 
-	// The URI for the repository. You can use this URI for container image push  and
+	// The URI for the repository. You can use this URI for container image push and
 	// pull operations.
 	RepositoryUri *string
 
 	noSmithyDocumentSerde
 }
 
-// The filter settings used with image replication. Specifying a repository
-// filter to a replication rule provides a method for controlling which
-// repositories in a private registry are replicated. If no repository filter is
-// specified, all images in the repository are replicated.
+// The filter settings used with image replication. Specifying a repository filter
+// to a replication rule provides a method for controlling which repositories in a
+// private registry are replicated. If no repository filter is specified, all
+// images in the repository are replicated.
 type RepositoryFilter struct {
 
 	// The repository filter details. When the PREFIX_MATCH filter type is specified,
@@ -728,8 +726,8 @@ type RepositoryFilter struct {
 	// This member is required.
 	Filter *string
 
-	// The repository filter type. The only supported value is PREFIX_MATCH, which is
-	// a repository name prefix specified with the filter  parameter.
+	// The repository filter type. The only supported value is PREFIX_MATCH , which is
+	// a repository name prefix specified with the filter parameter.
 	//
 	// This member is required.
 	FilterType RepositoryFilterType
@@ -802,8 +800,8 @@ type ResourceDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The details of a scanning repository filter. For more information on how to
-// use filters, see Using filters (https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters)
+// The details of a scanning repository filter. For more information on how to use
+// filters, see Using filters (https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters)
 // in the Amazon Elastic Container Registry User Guide.
 type ScanningRepositoryFilter struct {
 
@@ -839,7 +837,7 @@ type Tag struct {
 	// acts like a category for more specific tag values.
 	Key *string
 
-	// A value  acts as a descriptor within a tag category (key).
+	// A value acts as a descriptor within a tag category (key).
 	Value *string
 
 	noSmithyDocumentSerde

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allocates a Dedicated Host to your account. At a minimum, specify the
-// supported instance type or instance family, the Availability Zone in which to
-// allocate the host, and the number of hosts to allocate.
+// Allocates a Dedicated Host to your account. At a minimum, specify the supported
+// instance type or instance family, the Availability Zone in which to allocate the
+// host, and the number of hosts to allocate.
 func (c *Client) AllocateHosts(ctx context.Context, params *AllocateHostsInput, optFns ...func(*Options)) (*AllocateHostsOutput, error) {
 	if params == nil {
 		params = &AllocateHostsInput{}
@@ -36,8 +36,7 @@ type AllocateHostsInput struct {
 	// This member is required.
 	AvailabilityZone *string
 
-	// The number of Dedicated Hosts to allocate to your account with these
-	// parameters.
+	// The number of Dedicated Hosts to allocate to your account with these parameters.
 	//
 	// This member is required.
 	Quantity *int32
@@ -49,13 +48,13 @@ type AllocateHostsInput struct {
 	// in the Amazon EC2 User Guide. Default: on
 	AutoPlacement types.AutoPlacement
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 
-	// Indicates whether to enable or disable host maintenance for the Dedicated
-	// Host. For more information, see Host maintenance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html)
+	// Indicates whether to enable or disable host maintenance for the Dedicated Host.
+	// For more information, see Host maintenance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html)
 	// in the Amazon EC2 User Guide.
 	HostMaintenance types.HostMaintenance
 
@@ -92,8 +91,8 @@ type AllocateHostsInput struct {
 // Contains the output of AllocateHosts.
 type AllocateHostsOutput struct {
 
-	// The ID of the allocated Dedicated Host. This is used to launch an instance
-	// onto a specific host.
+	// The ID of the allocated Dedicated Host. This is used to launch an instance onto
+	// a specific host.
 	HostIds []string
 
 	// Metadata pertaining to the operation's result.

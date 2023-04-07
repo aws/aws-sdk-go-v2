@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about one or more application revisions. The maximum number
-// of application revisions that can be returned is 25.
+// Gets information about one or more application revisions. The maximum number of
+// application revisions that can be returned is 25.
 func (c *Client) BatchGetApplicationRevisions(ctx context.Context, params *BatchGetApplicationRevisionsInput, optFns ...func(*Options)) (*BatchGetApplicationRevisionsOutput, error) {
 	if params == nil {
 		params = &BatchGetApplicationRevisionsInput{}
@@ -28,7 +28,7 @@ func (c *Client) BatchGetApplicationRevisions(ctx context.Context, params *Batch
 	return out, nil
 }
 
-// Represents the input of a BatchGetApplicationRevisions  operation.
+// Represents the input of a BatchGetApplicationRevisions operation.
 type BatchGetApplicationRevisionsInput struct {
 
 	// The name of an CodeDeploy application about which to get revision information.
@@ -46,7 +46,7 @@ type BatchGetApplicationRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a BatchGetApplicationRevisions  operation.
+// Represents the output of a BatchGetApplicationRevisions operation.
 type BatchGetApplicationRevisionsOutput struct {
 
 	// The name of the application that corresponds to the revisions.

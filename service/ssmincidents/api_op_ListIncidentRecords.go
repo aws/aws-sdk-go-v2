@@ -31,16 +31,18 @@ func (c *Client) ListIncidentRecords(ctx context.Context, params *ListIncidentRe
 
 type ListIncidentRecordsInput struct {
 
-	// Filters the list of incident records you want to search through. You can
-	// filter on the following keys:
-	//     - creationTime
-	//     - impact
-	//     - status
-	//     - createdBy
-	//  Note the following when when you use Filters:
-	//     - If you don't specify a Filter, the response includes all incident records.
-	//     - If you specify more than one filter in a single request, the response returns incident records that match all filters.
-	//     - If you specify a filter with more than one value, the response returns incident records that match any of the values provided.
+	// Filters the list of incident records you want to search through. You can filter
+	// on the following keys:
+	//   - creationTime
+	//   - impact
+	//   - status
+	//   - createdBy
+	// Note the following when when you use Filters:
+	//   - If you don't specify a Filter, the response includes all incident records.
+	//   - If you specify more than one filter in a single request, the response
+	//   returns incident records that match all filters.
+	//   - If you specify a filter with more than one value, the response returns
+	//   incident records that match any of the values provided.
 	Filters []types.Filter
 
 	// The maximum number of results per page.
@@ -145,8 +147,8 @@ type ListIncidentRecordsPaginatorOptions struct {
 	// The maximum number of results per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

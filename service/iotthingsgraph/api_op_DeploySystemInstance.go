@@ -12,7 +12,7 @@ import (
 )
 
 // Greengrass and Cloud Deployments Deploys the system instance to the target
-// specified in CreateSystemInstance. Greengrass Deployments If the system or any
+// specified in CreateSystemInstance . Greengrass Deployments If the system or any
 // workflows and entities have been updated before this action is called, then the
 // deployment will create a new Amazon Simple Storage Service resource file and
 // then deploy it. Since this action creates a Greengrass deployment on the

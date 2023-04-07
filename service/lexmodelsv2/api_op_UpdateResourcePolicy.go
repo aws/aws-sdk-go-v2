@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Replaces the existing resource policy for a bot or bot alias with a new one.
-// If the policy doesn't exist, Amazon Lex returns an exception.
+// Replaces the existing resource policy for a bot or bot alias with a new one. If
+// the policy doesn't exist, Amazon Lex returns an exception.
 func (c *Client) UpdateResourcePolicy(ctx context.Context, params *UpdateResourcePolicyInput, optFns ...func(*Options)) (*UpdateResourcePolicyOutput, error) {
 	if params == nil {
 		params = &UpdateResourcePolicyInput{}
@@ -38,8 +38,8 @@ type UpdateResourcePolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
-	// policy is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
+	// is attached to.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -55,8 +55,8 @@ type UpdateResourcePolicyInput struct {
 
 type UpdateResourcePolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
-	// policy is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
+	// is attached to.
 	ResourceArn *string
 
 	// The current revision of the resource policy. Use the revision ID to make sure

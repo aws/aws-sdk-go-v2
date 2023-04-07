@@ -56,8 +56,8 @@ type CreateGatewayRouteInput struct {
 	// This member is required.
 	VirtualGatewayName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
 
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the

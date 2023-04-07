@@ -39,8 +39,8 @@ type DescribeScalingPlanResourcesInput struct {
 	// This member is required.
 	ScalingPlanVersion *int64
 
-	// The maximum number of scalable resources to return. The value must be between
-	// 1 and 50. The default value is 50.
+	// The maximum number of scalable resources to return. The value must be between 1
+	// and 50. The default value is 50.
 	MaxResults *int32
 
 	// The token for the next set of results.

@@ -12,15 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the history of the specified execution as a list of events. By
-// default, the results are returned in ascending order of the timeStamp of the
-// events. Use the reverseOrder  parameter to get the latest events first. If
-// nextToken is returned, there are more results available. The value of nextToken
-// is a unique pagination token for each page. Make the call again using the
-// returned token to retrieve the next page. Keep all other arguments unchanged.
-// Each pagination token expires after 24 hours. Using an expired pagination token
-// will return an HTTP 400 InvalidToken error. This API action is not supported by
-// EXPRESS state machines.
+// Returns the history of the specified execution as a list of events. By default,
+// the results are returned in ascending order of the timeStamp of the events. Use
+// the reverseOrder parameter to get the latest events first. If nextToken is
+// returned, there are more results available. The value of nextToken is a unique
+// pagination token for each page. Make the call again using the returned token to
+// retrieve the next page. Keep all other arguments unchanged. Each pagination
+// token expires after 24 hours. Using an expired pagination token will return an
+// HTTP 400 InvalidToken error. This API action is not supported by EXPRESS state
+// machines.
 func (c *Client) GetExecutionHistory(ctx context.Context, params *GetExecutionHistoryInput, optFns ...func(*Options)) (*GetExecutionHistoryOutput, error) {
 	if params == nil {
 		params = &GetExecutionHistoryInput{}
@@ -54,8 +54,8 @@ type GetExecutionHistoryInput struct {
 	// maximum.
 	MaxResults int32
 
-	// If nextToken  is returned, there are more results available. The value of
-	// nextTokenis a unique pagination token for each page. Make the call again using
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.
@@ -74,8 +74,8 @@ type GetExecutionHistoryOutput struct {
 	// This member is required.
 	Events []types.HistoryEvent
 
-	// If nextToken  is returned, there are more results available. The value of
-	// nextTokenis a unique pagination token for each page. Make the call again using
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.
@@ -168,8 +168,8 @@ type GetExecutionHistoryPaginatorOptions struct {
 	// maximum.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

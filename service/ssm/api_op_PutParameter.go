@@ -34,15 +34,18 @@ type PutParameterInput struct {
 	// and name. For parameters in a hierarchy, you must include a leading forward
 	// slash character (/) when you create or reference a parameter. For example:
 	// /Dev/DBServer/MySQL/db-string13 Naming Constraints:
-	//     - Parameter names are case sensitive.
-	//     - A parameter name must be unique within an Amazon Web Services Region
-	//     - A parameter name can't be prefixed with " aws " or " ssm " (case-insensitive).
-	//     - Parameter names can include only the following symbols and letters: a-zA-Z0-9_.- In addition, the slash character ( / ) is used to delineate hierarchies in parameter names. For example: /Dev/Production/East/Project-ABC/MyParameter
-	//     - A parameter name can't include spaces.
-	//     - Parameter hierarchies are limited to a maximum depth of fifteen levels.
-	//
-	// For additional information about valid values for parameter names, see
-	// Creating Systems Manager parameters (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html)
+	//   - Parameter names are case sensitive.
+	//   - A parameter name must be unique within an Amazon Web Services Region
+	//   - A parameter name can't be prefixed with " aws " or " ssm "
+	//   (case-insensitive).
+	//   - Parameter names can include only the following symbols and letters:
+	//   a-zA-Z0-9_.- In addition, the slash character ( / ) is used to delineate
+	//   hierarchies in parameter names. For example:
+	//   /Dev/Production/East/Project-ABC/MyParameter
+	//   - A parameter name can't include spaces.
+	//   - Parameter hierarchies are limited to a maximum depth of fifteen levels.
+	// For additional information about valid values for parameter names, see Creating
+	// Systems Manager parameters (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html)
 	// in the Amazon Web Services Systems Manager User Guide. The maximum length
 	// constraint of 2048 characters listed below includes 1037 characters reserved for
 	// internal use by Systems Manager. The maximum length for a parameter name that
@@ -56,7 +59,7 @@ type PutParameterInput struct {
 	// The parameter value that you want to add to the system. Standard parameters
 	// have a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.
 	// Parameters can't be referenced or nested in the values of other parameters. You
-	// can't include {{}}  or {{ssm:parameter-name}}  in a parameter value.
+	// can't include {{}} or {{ssm:parameter-name}} in a parameter value.
 	//
 	// This member is required.
 	Value *string
@@ -69,23 +72,23 @@ type PutParameterInput struct {
 	// The data type for a String parameter. Supported data types include plain text
 	// and Amazon Machine Image (AMI) IDs. The following data type values are
 	// supported.
-	//     - text
-	//     - aws:ec2:image
-	//     - aws:ssm:integration
-	//  When you create a String  parameter and specify aws:ec2:image, Amazon Web
+	//   - text
+	//   - aws:ec2:image
+	//   - aws:ssm:integration
+	// When you create a String parameter and specify aws:ec2:image , Amazon Web
 	// Services Systems Manager validates the parameter value is in the required
-	// format, such as ami-12345abcdeEXAMPLE, and that the specified AMI is available
+	// format, such as ami-12345abcdeEXAMPLE , and that the specified AMI is available
 	// in your Amazon Web Services account. If the action is successful, the service
 	// sends back an HTTP 200 response which indicates a successful PutParameter call
 	// for all cases except for data type aws:ec2:image . If you call PutParameter
-	// with aws:ec2:image data type, a successful HTTP 200 response does not
-	// guarantee that your parameter was successfully created or updated. The
-	// aws:ec2:image value is validated asynchronously, and the PutParameter call
-	// returns before the validation is complete. If you submit an invalid AMI value,
-	// the PutParameter operation will return success, but the asynchronous validation
-	// will fail and the parameter will not be created or updated. To monitor whether
-	// your aws:ec2:image  parameters are created successfully, see Setting up
-	// notifications or trigger actions based on Parameter Store events (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html)
+	// with aws:ec2:image data type, a successful HTTP 200 response does not guarantee
+	// that your parameter was successfully created or updated. The aws:ec2:image
+	// value is validated asynchronously, and the PutParameter call returns before the
+	// validation is complete. If you submit an invalid AMI value, the PutParameter
+	// operation will return success, but the asynchronous validation will fail and the
+	// parameter will not be created or updated. To monitor whether your aws:ec2:image
+	// parameters are created successfully, see Setting up notifications or trigger
+	// actions based on Parameter Store events (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html)
 	// . For more information about AMI format validation , see Native parameter
 	// support for Amazon Machine Image (AMI) IDs (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html)
 	// .
@@ -100,7 +103,8 @@ type PutParameterInput struct {
 	// use the SecureString data type. If you don't specify a key ID, the system uses
 	// the default key associated with your Amazon Web Services account which is not as
 	// secure as using a custom key.
-	//     - To use a custom KMS key, choose the SecureString data type with the Key ID parameter.
+	//   - To use a custom KMS key, choose the SecureString data type with the Key ID
+	//   parameter.
 	KeyId *string
 
 	// Overwrite an existing parameter. The default value is false .
@@ -131,11 +135,11 @@ type PutParameterInput struct {
 	// of resource to which it applies, the environment, or the type of configuration
 	// data referenced by the parameter. In this case, you could specify the following
 	// key-value pairs:
-	//     - Key=Resource,Value=S3bucket
-	//     - Key=OS,Value=Windows
-	//     - Key=ParameterType,Value=LicenseKey
-	// To add tags to an existing Systems
-	// Manager parameter, use the AddTagsToResource  operation.
+	//   - Key=Resource,Value=S3bucket
+	//   - Key=OS,Value=Windows
+	//   - Key=ParameterType,Value=LicenseKey
+	// To add tags to an existing Systems Manager parameter, use the AddTagsToResource
+	// operation.
 	Tags []types.Tag
 
 	// The parameter tier to assign to a parameter. Parameter Store offers a standard
@@ -164,25 +168,32 @@ type PutParameterInput struct {
 	// default tier when you begin using Parameter Store is the standard-parameter
 	// tier. If you use the advanced-parameter tier, you can specify one of the
 	// following as the default:
-	//     - Advanced: With this option, Parameter Store evaluates all requests as advanced parameters.
-	//     - Intelligent-Tiering: With this option, Parameter Store evaluates each request to determine if the parameter is standard or advanced. If the request doesn't include any options that require an advanced parameter, the parameter is created in the standard-parameter tier. If one or more options requiring an advanced parameter are included in the request, Parameter Store create a parameter in the advanced-parameter tier. This approach helps control your parameter-related costs by always creating standard parameters unless an advanced parameter is necessary.
-	//
+	//   - Advanced: With this option, Parameter Store evaluates all requests as
+	//   advanced parameters.
+	//   - Intelligent-Tiering: With this option, Parameter Store evaluates each
+	//   request to determine if the parameter is standard or advanced. If the request
+	//   doesn't include any options that require an advanced parameter, the parameter is
+	//   created in the standard-parameter tier. If one or more options requiring an
+	//   advanced parameter are included in the request, Parameter Store create a
+	//   parameter in the advanced-parameter tier. This approach helps control your
+	//   parameter-related costs by always creating standard parameters unless an
+	//   advanced parameter is necessary.
 	// Options that require an advanced parameter include the following:
-	//     - The content size of the parameter is more than 4 KB.
-	//     - The parameter uses a parameter policy.
-	//     - More than 10,000 parameters already exist in your Amazon Web Services account in the current Amazon Web Services Region.
-	//
+	//   - The content size of the parameter is more than 4 KB.
+	//   - The parameter uses a parameter policy.
+	//   - More than 10,000 parameters already exist in your Amazon Web Services
+	//   account in the current Amazon Web Services Region.
 	// For more information about configuring the default tier option, see Specifying
 	// a default parameter tier (https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Tier types.ParameterTier
 
 	// The type of parameter that you want to add to the system. SecureString isn't
-	// currently supported for CloudFormation templates. Items in a StringList must
-	// be separated by a comma (,). You can't use other punctuation or special
-	// character to escape items in the list. If you have a parameter value that
-	// requires a comma, then use the String data type. Specifying a parameter type
-	// isn't required when updating a parameter. You must specify a parameter type when
+	// currently supported for CloudFormation templates. Items in a StringList must be
+	// separated by a comma (,). You can't use other punctuation or special character
+	// to escape items in the list. If you have a parameter value that requires a
+	// comma, then use the String data type. Specifying a parameter type isn't
+	// required when updating a parameter. You must specify a parameter type when
 	// creating a parameter.
 	Type types.ParameterType
 
@@ -194,12 +205,12 @@ type PutParameterOutput struct {
 	// The tier assigned to the parameter.
 	Tier types.ParameterTier
 
-	// The new version number of a parameter. If you edit a parameter value,
-	// Parameter Store automatically creates a new version and assigns this new version
-	// a unique ID. You can reference a parameter version ID in API operations or in
-	// Systems Manager documents (SSM documents). By default, if you don't specify a
-	// specific version, the system returns the latest parameter value when a parameter
-	// is called.
+	// The new version number of a parameter. If you edit a parameter value, Parameter
+	// Store automatically creates a new version and assigns this new version a unique
+	// ID. You can reference a parameter version ID in API operations or in Systems
+	// Manager documents (SSM documents). By default, if you don't specify a specific
+	// version, the system returns the latest parameter value when a parameter is
+	// called.
 	Version int64
 
 	// Metadata pertaining to the operation's result.

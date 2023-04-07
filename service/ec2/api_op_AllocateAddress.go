@@ -34,7 +34,7 @@ import (
 // network interface which resides in a subnet in a Wavelength Zone (for example an
 // EC2 instance). We are retiring EC2-Classic. We recommend that you migrate from
 // EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
-// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)in
+// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
 // the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) AllocateAddress(ctx context.Context, params *AllocateAddressInput, optFns ...func(*Options)) (*AllocateAddressOutput, error) {
 	if params == nil {
@@ -73,9 +73,9 @@ type AllocateAddressInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// A unique set of Availability Zones, Local Zones, or Wavelength Zones from
-	// which Amazon Web Services advertises IP addresses. Use this parameter to limit
-	// the IP address to this location. IP addresses cannot move between network border
+	// A unique set of Availability Zones, Local Zones, or Wavelength Zones from which
+	// Amazon Web Services advertises IP addresses. Use this parameter to limit the IP
+	// address to this location. IP addresses cannot move between network border
 	// groups. Use DescribeAvailabilityZones (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html)
 	// to view the network border groups. You cannot use a network border group with
 	// EC2 Classic. If you attempt this operation on EC2 Classic, you receive an
@@ -84,7 +84,7 @@ type AllocateAddressInput struct {
 
 	// The ID of an address pool that you own. Use this parameter to let Amazon EC2
 	// select an address from the address pool. To specify a specific address from the
-	// address pool, use the Address  parameter instead.
+	// address pool, use the Address parameter instead.
 	PublicIpv4Pool *string
 
 	// The tags to assign to the Elastic IP address.
@@ -109,8 +109,8 @@ type AllocateAddressOutput struct {
 	// The ID of the customer-owned address pool.
 	CustomerOwnedIpv4Pool *string
 
-	// Indicates whether the Elastic IP address is for use with instances in a VPC (
-	// vpc ) or instances in EC2-Classic ( standard ).
+	// Indicates whether the Elastic IP address is for use with instances in a VPC ( vpc
+	// ) or instances in EC2-Classic ( standard ).
 	Domain types.DomainType
 
 	// The set of Availability Zones, Local Zones, or Wavelength Zones from which

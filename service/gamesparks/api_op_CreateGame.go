@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a new game with an empty configuration. After creating your game, you
-// can update the configuration using UpdateGameConfiguration  or
+// can update the configuration using UpdateGameConfiguration or
 // ImportGameConfiguration .
 func (c *Client) CreateGame(ctx context.Context, params *CreateGameInput, optFns ...func(*Options)) (*CreateGameOutput, error) {
 	if params == nil {
@@ -36,8 +36,8 @@ type CreateGameInput struct {
 	// This member is required.
 	GameName *string
 
-	// A client-defined token. With an active client token in the request, this
-	// action is idempotent.
+	// A client-defined token. With an active client token in the request, this action
+	// is idempotent.
 	ClientToken *string
 
 	// The description of the game.

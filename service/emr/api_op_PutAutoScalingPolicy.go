@@ -43,8 +43,8 @@ type PutAutoScalingPolicyInput struct {
 	// This member is required.
 	ClusterId *string
 
-	// Specifies the ID of the instance group to which the automatic scaling policy
-	// is applied.
+	// Specifies the ID of the instance group to which the automatic scaling policy is
+	// applied.
 	//
 	// This member is required.
 	InstanceGroupId *string

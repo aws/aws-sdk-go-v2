@@ -21,8 +21,8 @@ import (
 //   - language-code or identify-language
 //   - media-encoding
 //   - sample-rate
-//     For more information on streaming with Amazon Transcribe, see Transcribing
 //
+// For more information on streaming with Amazon Transcribe, see Transcribing
 // streaming audio (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html)
 // .
 func (c *Client) StartStreamTranscription(ctx context.Context, params *StartStreamTranscriptionInput, optFns ...func(*Options)) (*StartStreamTranscriptionOutput, error) {
@@ -43,10 +43,10 @@ func (c *Client) StartStreamTranscription(ctx context.Context, params *StartStre
 type StartStreamTranscriptionInput struct {
 
 	// Specify the encoding of your input audio. Supported formats are:
-	//     - FLAC
-	//     - OPUS-encoded audio in an Ogg container
-	//     - PCM (only signed 16-bit little-endian audio formats, which does not include WAV)
-	//
+	//   - FLAC
+	//   - OPUS-encoded audio in an Ogg container
+	//   - PCM (only signed 16-bit little-endian audio formats, which does not include
+	//   WAV)
 	// For more information, see Media formats (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
 	// .
 	//
@@ -64,8 +64,8 @@ type StartStreamTranscriptionInput struct {
 	// Labels all personally identifiable information (PII) identified in your
 	// transcript. Content identification is performed at the segment level; PII
 	// specified in PiiEntityTypes is flagged upon complete transcription of an audio
-	// segment. You can’t set ContentIdentificationType  and ContentRedactionType in
-	// the same request. If you set both, your request returns a BadRequestException.
+	// segment. You can’t set ContentIdentificationType and ContentRedactionType in
+	// the same request. If you set both, your request returns a BadRequestException .
 	// For more information, see Redacting or identifying personally identifiable
 	// information (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
 	// .
@@ -74,8 +74,8 @@ type StartStreamTranscriptionInput struct {
 	// Redacts all personally identifiable information (PII) identified in your
 	// transcript. Content redaction is performed at the segment level; PII specified
 	// in PiiEntityTypes is redacted upon complete transcription of an audio segment.
-	// You can’t set ContentRedactionType  and ContentIdentificationType in the same
-	// request. If you set both, your request returns a BadRequestException. For more
+	// You can’t set ContentRedactionType and ContentIdentificationType in the same
+	// request. If you set both, your request returns a BadRequestException . For more
 	// information, see Redacting or identifying personally identifiable information (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
 	// .
 	ContentRedactionType types.ContentRedactionType
@@ -96,22 +96,22 @@ type StartStreamTranscriptionInput struct {
 	EnablePartialResultsStabilization bool
 
 	// Enables automatic language identification for your transcription. If you
-	// include IdentifyLanguage, you can optionally include a list of language codes,
-	// using LanguageOptions, that you think may be present in your audio stream.
+	// include IdentifyLanguage , you can optionally include a list of language codes,
+	// using LanguageOptions , that you think may be present in your audio stream.
 	// Including language options can improve transcription accuracy. You can also
-	// include a preferred language using PreferredLanguage. Adding a preferred
+	// include a preferred language using PreferredLanguage . Adding a preferred
 	// language can help Amazon Transcribe identify the language faster than if you
 	// omit this parameter. If you have multi-channel audio that contains different
 	// languages on each channel, and you've enabled channel identification, automatic
 	// language identification identifies the dominant language on each audio channel.
-	// Note that you must include either LanguageCode  or IdentifyLanguage in your
+	// Note that you must include either LanguageCode or IdentifyLanguage in your
 	// request. If you include both parameters, your request fails. Streaming language
 	// identification can't be combined with custom language models or redaction.
 	IdentifyLanguage bool
 
-	// Specify the language code that represents the language spoken in your audio.
-	// If you're unsure of the language spoken in your audio, consider using
-	// IdentifyLanguageto enable automatic language identification. For a list of
+	// Specify the language code that represents the language spoken in your audio. If
+	// you're unsure of the language spoken in your audio, consider using
+	// IdentifyLanguage to enable automatic language identification. For a list of
 	// languages supported with Amazon Transcribe streaming, refer to the Supported
 	// languages (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
 	// table.
@@ -131,11 +131,11 @@ type StartStreamTranscriptionInput struct {
 	// be present in your media; including more than five is not recommended. If you're
 	// unsure what languages are present, do not include this parameter. Including
 	// language options can improve the accuracy of language identification. If you
-	// include LanguageOptions  in your request, you must also include
-	// IdentifyLanguage. For a list of languages supported with Amazon Transcribe
-	// streaming, refer to the Supported languages (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// include LanguageOptions in your request, you must also include IdentifyLanguage
+	// . For a list of languages supported with Amazon Transcribe streaming, refer to
+	// the Supported languages (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
 	// table. You can only include one language dialect per language per stream. For
-	// example, you cannot include en-US  and en-AU  in the same request.
+	// example, you cannot include en-US and en-AU in the same request.
 	LanguageOptions *string
 
 	// Specify the number of channels in your audio stream. Up to two channels are
@@ -143,7 +143,7 @@ type StartStreamTranscriptionInput struct {
 	NumberOfChannels *int32
 
 	// Specify the level of stability to use when you enable partial results
-	// stabilization ( EnablePartialResultsStabilization). Low stability provides the
+	// stabilization ( EnablePartialResultsStabilization ). Low stability provides the
 	// highest accuracy. High stability transcribes faster, but with slightly lower
 	// accuracy. For more information, see Partial-result stabilization (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
 	// .
@@ -152,7 +152,7 @@ type StartStreamTranscriptionInput struct {
 	// Specify which types of personally identifiable information (PII) you want to
 	// redact in your transcript. You can include as many types as you'd like, or you
 	// can select ALL . To include PiiEntityTypes in your request, you must also
-	// include either ContentIdentificationType  or ContentRedactionType. Values must
+	// include either ContentIdentificationType or ContentRedactionType . Values must
 	// be comma-separated and can include: BANK_ACCOUNT_NUMBER , BANK_ROUTING ,
 	// CREDIT_DEBIT_NUMBER , CREDIT_DEBIT_CVV , CREDIT_DEBIT_EXPIRY , PIN , EMAIL ,
 	// ADDRESS , NAME , PHONE , SSN , or ALL .
@@ -160,7 +160,7 @@ type StartStreamTranscriptionInput struct {
 
 	// Specify a preferred language from the subset of languages codes you specified
 	// in LanguageOptions . You can only use this parameter if you've included
-	// IdentifyLanguage and LanguageOptions  in your request.
+	// IdentifyLanguage and LanguageOptions in your request.
 	PreferredLanguage types.LanguageCode
 
 	// Specify a name for your transcription session. If you don't include this
@@ -175,7 +175,7 @@ type StartStreamTranscriptionInput struct {
 	ShowSpeakerLabel bool
 
 	// Specify how you want your vocabulary filter applied to your transcript. To
-	// replace words with *** , choose mask . To delete words, choose remove. To flag
+	// replace words with *** , choose mask . To delete words, choose remove . To flag
 	// words without changing them, choose tag .
 	VocabularyFilterMethod types.VocabularyFilterMethod
 
@@ -186,7 +186,7 @@ type StartStreamTranscriptionInput struct {
 	// applied to your transcription. This parameter is not intended for use with the
 	// IdentifyLanguage parameter. If you're including IdentifyLanguage in your
 	// request and want to use one or more vocabulary filters with your transcription,
-	// use the VocabularyFilterNames  parameter instead. For more information, see
+	// use the VocabularyFilterNames parameter instead. For more information, see
 	// Using vocabulary filtering with unwanted words (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html)
 	// .
 	VocabularyFilterName *string
@@ -197,9 +197,8 @@ type StartStreamTranscriptionInput struct {
 	// match the language identified in your media, your job fails. This parameter is
 	// only intended for use with the IdentifyLanguage parameter. If you're not
 	// including IdentifyLanguage in your request and want to use a custom vocabulary
-	// filter with your transcription, use the VocabularyFilterName parameter
-	// instead. For more information, see Using vocabulary filtering with unwanted
-	// words (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html)
+	// filter with your transcription, use the VocabularyFilterName parameter instead.
+	// For more information, see Using vocabulary filtering with unwanted words (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html)
 	// .
 	VocabularyFilterNames *string
 
@@ -208,10 +207,9 @@ type StartStreamTranscriptionInput struct {
 	// language of the specified custom vocabulary doesn't match the language
 	// identified in your media, the custom vocabulary is not applied to your
 	// transcription. This parameter is not intended for use with the IdentifyLanguage
-	// parameter. If you're including IdentifyLanguage in your request and want to
-	// use one or more custom vocabularies with your transcription, use the
-	// VocabularyNames parameter instead. For more information, see Custom
-	// vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html)
+	// parameter. If you're including IdentifyLanguage in your request and want to use
+	// one or more custom vocabularies with your transcription, use the VocabularyNames
+	// parameter instead. For more information, see Custom vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html)
 	// .
 	VocabularyName *string
 
@@ -219,8 +217,8 @@ type StartStreamTranscriptionInput struct {
 	// processing your transcription. Note that vocabulary names are case sensitive. If
 	// none of the languages of the specified custom vocabularies match the language
 	// identified in your media, your job fails. This parameter is only intended for
-	// use with the IdentifyLanguage  parameter. If you're not including
-	// IdentifyLanguagein your request and want to use a custom vocabulary with your
+	// use with the IdentifyLanguage parameter. If you're not including
+	// IdentifyLanguage in your request and want to use a custom vocabulary with your
 	// transcription, use the VocabularyName parameter instead. For more information,
 	// see Custom vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html)
 	// .
@@ -476,8 +474,8 @@ func (es *StartStreamTranscriptionEventStream) safeClose() {
 	es.Reader.Close()
 }
 
-// Err returns any error that occurred while reading or writing EventStream
-// Events from the service API's response. Returns nil if there were no errors.
+// Err returns any error that occurred while reading or writing EventStream Events
+// from the service API's response. Returns nil if there were no errors.
 func (es *StartStreamTranscriptionEventStream) Err() error {
 	if err := es.err.Err(); err != nil {
 		return err

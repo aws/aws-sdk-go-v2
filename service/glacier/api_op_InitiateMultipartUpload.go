@@ -14,12 +14,12 @@ import (
 // This operation initiates a multipart upload. Amazon S3 Glacier creates a
 // multipart upload resource and returns its ID in the response. The multipart
 // upload ID is used in subsequent requests to upload parts of an archive (see
-// UploadMultipartPart). When you initiate a multipart upload, you specify the
+// UploadMultipartPart ). When you initiate a multipart upload, you specify the
 // part size in number of bytes. The part size must be a megabyte (1024 KB)
 // multiplied by a power of 2-for example, 1048576 (1 MB), 2097152 (2 MB), 4194304
 // (4 MB), 8388608 (8 MB), and so on. The minimum allowable part size is 1 MB, and
 // the maximum is 4 GB. Every part you upload to this resource (see
-// UploadMultipartPart), except the last one, must have the same size. The last
+// UploadMultipartPart ), except the last one, must have the same size. The last
 // one can be the same size or smaller. For example, suppose you want to upload a
 // 16.2 MB file. If you initiate the multipart upload with a part size of 4 MB, you
 // will upload four parts of 4 MB each and one part of 0.2 MB. You don't need to
@@ -57,7 +57,7 @@ func (c *Client) InitiateMultipartUpload(ctx context.Context, params *InitiateMu
 type InitiateMultipartUploadInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
 	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.

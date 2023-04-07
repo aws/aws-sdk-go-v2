@@ -32,7 +32,7 @@ type GetServiceEndpointInput struct {
 
 	// The service type for which to get endpoint information about. Can be CUPS for
 	// the Configuration and Update Server endpoint, or LNS for the LoRaWAN Network
-	// Server endpoint or CLAIM  for the global endpoint.
+	// Server endpoint or CLAIM for the global endpoint.
 	ServiceType types.WirelessGatewayServiceType
 
 	noSmithyDocumentSerde

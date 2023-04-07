@@ -36,25 +36,25 @@ type ListCertificatesInput struct {
 	// Filter the certificate list by status value.
 	CertificateStatuses []types.CertificateStatus
 
-	// Filter the certificate list. For more information, see the Filters  structure.
+	// Filter the certificate list. For more information, see the Filters structure.
 	Includes *types.Filters
 
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response. If additional items exist beyond the number you
-	// specify, the NextToken  element is sent in the response. Use this NextToken
+	// specify, the NextToken element is sent in the response. Use this NextToken
 	// value in a subsequent request to retrieve additional items.
 	MaxItems *int32
 
 	// Use this parameter only when paginating results and only in a subsequent
 	// request after you receive a response with truncated results. Set it to the value
-	// of NextToken  from the response you just received.
+	// of NextToken from the response you just received.
 	NextToken *string
 
-	// Specifies the field to sort results by. If you specify SortBy, you must also
+	// Specifies the field to sort results by. If you specify SortBy , you must also
 	// specify SortOrder .
 	SortBy types.SortBy
 
-	// Specifies the order of sorted results. If you specify SortOrder, you must also
+	// Specifies the order of sorted results. If you specify SortOrder , you must also
 	// specify SortBy .
 	SortOrder types.SortOrder
 
@@ -66,8 +66,8 @@ type ListCertificatesOutput struct {
 	// A list of ACM certificates.
 	CertificateSummaryList []types.CertificateSummary
 
-	// When the list is truncated, this value is present and contains the value to
-	// use for the NextToken  parameter in a subsequent pagination request.
+	// When the list is truncated, this value is present and contains the value to use
+	// for the NextToken parameter in a subsequent pagination request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -148,12 +148,12 @@ var _ ListCertificatesAPIClient = (*Client)(nil)
 type ListCertificatesPaginatorOptions struct {
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response. If additional items exist beyond the number you
-	// specify, the NextToken  element is sent in the response. Use this NextToken
+	// specify, the NextToken element is sent in the response. Use this NextToken
 	// value in a subsequent request to retrieve additional items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

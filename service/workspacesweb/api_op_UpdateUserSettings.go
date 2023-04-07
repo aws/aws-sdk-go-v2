@@ -51,8 +51,8 @@ type UpdateUserSettingsInput struct {
 	// disconnect.
 	DisconnectTimeoutInMinutes *int32
 
-	// Specifies whether the user can download files from the streaming session to
-	// the local device.
+	// Specifies whether the user can download files from the streaming session to the
+	// local device.
 	DownloadAllowed types.EnabledType
 
 	// The amount of time that users can be idle (inactive) before they are

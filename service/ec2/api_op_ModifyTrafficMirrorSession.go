@@ -55,16 +55,16 @@ type ModifyTrafficMirrorSessionInput struct {
 	// default.
 	RemoveFields []types.TrafficMirrorSessionField
 
-	// The session number determines the order in which sessions are evaluated when
-	// an interface is used by multiple sessions. The first session with a matching
-	// filter is the one that mirrors the packets. Valid values are 1-32766.
+	// The session number determines the order in which sessions are evaluated when an
+	// interface is used by multiple sessions. The first session with a matching filter
+	// is the one that mirrors the packets. Valid values are 1-32766.
 	SessionNumber *int32
 
 	// The ID of the Traffic Mirror filter.
 	TrafficMirrorFilterId *string
 
-	// The Traffic Mirror target. The target must be in the same VPC as the source,
-	// or have a VPC peering connection with the source.
+	// The Traffic Mirror target. The target must be in the same VPC as the source, or
+	// have a VPC peering connection with the source.
 	TrafficMirrorTargetId *string
 
 	// The virtual network ID of the Traffic Mirror session.

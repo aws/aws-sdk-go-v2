@@ -41,14 +41,12 @@ type UpdateTaskInput struct {
 
 	// Specifies a list of filter rules that exclude specific data during your
 	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
-	// .
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
 	Excludes []types.FilterRule
 
 	// Specifies a list of filter rules that include specific data during your
 	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
-	// .
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
 	Includes []types.FilterRule
 
 	// The name of the task to update.
@@ -58,7 +56,7 @@ type UpdateTaskInput struct {
 	// handles files, objects, and their associated metadata. You also can specify how
 	// DataSync verifies data integrity, set bandwidth limits for your task, among
 	// other options. Each task setting has a default value. Unless you need to, you
-	// don't have to configure any of these Options  before starting your task.
+	// don't have to configure any of these Options before starting your task.
 	Options *types.Options
 
 	// Specifies a schedule used to periodically transfer files from a source to a

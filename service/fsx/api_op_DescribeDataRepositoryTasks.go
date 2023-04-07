@@ -22,7 +22,7 @@ import (
 // the response by using the optional MaxResults parameter to limit the number of
 // tasks returned in a response. If more tasks remain, a NextToken value is
 // returned in the response. In this case, send a later request with the NextToken
-// request parameter set to the value of NextToken  from the last response.
+// request parameter set to the value of NextToken from the last response.
 func (c *Client) DescribeDataRepositoryTasks(ctx context.Context, params *DescribeDataRepositoryTasksInput, optFns ...func(*Options)) (*DescribeDataRepositoryTasksOutput, error) {
 	if params == nil {
 		params = &DescribeDataRepositoryTasksInput{}
@@ -49,9 +49,9 @@ type DescribeDataRepositoryTasksInput struct {
 	// an integer greater than zero.
 	MaxResults *int32
 
-	// (Optional) Opaque pagination token returned from a previous operation
-	// (String). If present, this token indicates from what point you can continue
-	// processing the request, where the previous NextToken  value left off.
+	// (Optional) Opaque pagination token returned from a previous operation (String).
+	// If present, this token indicates from what point you can continue processing the
+	// request, where the previous NextToken value left off.
 	NextToken *string
 
 	// (Optional) IDs of the tasks whose descriptions you want to retrieve (String).
@@ -65,9 +65,9 @@ type DescribeDataRepositoryTasksOutput struct {
 	// The collection of data repository task descriptions returned.
 	DataRepositoryTasks []types.DataRepositoryTask
 
-	// (Optional) Opaque pagination token returned from a previous operation
-	// (String). If present, this token indicates from what point you can continue
-	// processing the request, where the previous NextToken  value left off.
+	// (Optional) Opaque pagination token returned from a previous operation (String).
+	// If present, this token indicates from what point you can continue processing the
+	// request, where the previous NextToken value left off.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -151,8 +151,8 @@ type DescribeDataRepositoryTasksPaginatorOptions struct {
 	// an integer greater than zero.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

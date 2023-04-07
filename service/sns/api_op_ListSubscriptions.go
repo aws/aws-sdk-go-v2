@@ -14,7 +14,7 @@ import (
 
 // Returns a list of the requester's subscriptions. Each call returns a limited
 // list of subscriptions, up to 100. If there are more subscriptions, a NextToken
-// is also returned. Use the NextToken  parameter in a new ListSubscriptions call
+// is also returned. Use the NextToken parameter in a new ListSubscriptions call
 // to get further results. This action is throttled at 30 transactions per second
 // (TPS).
 func (c *Client) ListSubscriptions(ctx context.Context, params *ListSubscriptionsInput, optFns ...func(*Options)) (*ListSubscriptionsOutput, error) {
@@ -35,7 +35,7 @@ func (c *Client) ListSubscriptions(ctx context.Context, params *ListSubscription
 // Input for ListSubscriptions action.
 type ListSubscriptionsInput struct {
 
-	// Token returned by the previous ListSubscriptions  request.
+	// Token returned by the previous ListSubscriptions request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -125,11 +125,10 @@ type ListSubscriptionsAPIClient interface {
 
 var _ ListSubscriptionsAPIClient = (*Client)(nil)
 
-// ListSubscriptionsPaginatorOptions is the paginator options for
-// ListSubscriptions
+// ListSubscriptionsPaginatorOptions is the paginator options for ListSubscriptions
 type ListSubscriptionsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

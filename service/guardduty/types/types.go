@@ -189,21 +189,20 @@ type AwsApiCallAction struct {
 }
 
 // Contains information on how the bucker owner's S3 Block Public Access settings
-// are being applied to the S3 bucket. See S3 Block Public Access
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
+// are being applied to the S3 bucket. See S3 Block Public Access (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
 // for more information.
 type BlockPublicAccess struct {
 
-	// Indicates if S3 Block Public Access is set to BlockPublicAcls.
+	// Indicates if S3 Block Public Access is set to BlockPublicAcls .
 	BlockPublicAcls bool
 
-	// Indicates if S3 Block Public Access is set to BlockPublicPolicy.
+	// Indicates if S3 Block Public Access is set to BlockPublicPolicy .
 	BlockPublicPolicy bool
 
-	// Indicates if S3 Block Public Access is set to IgnorePublicAcls.
+	// Indicates if S3 Block Public Access is set to IgnorePublicAcls .
 	IgnorePublicAcls bool
 
-	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets.
+	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets .
 	RestrictPublicBuckets bool
 
 	noSmithyDocumentSerde
@@ -263,8 +262,8 @@ type CloudTrailConfigurationResult struct {
 // Contains information about the condition.
 type Condition struct {
 
-	// Represents the equal condition to be applied to a single field when querying for
-	// findings.
+	// Represents the equal condition to be applied to a single field when querying
+	// for findings.
 	//
 	// Deprecated: This member has been deprecated.
 	Eq []string
@@ -313,8 +312,8 @@ type Condition struct {
 	// Deprecated: This member has been deprecated.
 	Lte int32
 
-	// Represents the not equal condition to be applied to a single field when querying
-	// for findings.
+	// Represents the not equal condition to be applied to a single field when
+	// querying for findings.
 	//
 	// Deprecated: This member has been deprecated.
 	Neq []string
@@ -390,8 +389,8 @@ type CoverageEksClusterDetails struct {
 // operation.
 type CoverageFilterCondition struct {
 
-	// Represents an equal condition that is applied to a single field while retrieving
-	// the coverage details.
+	// Represents an equal condition that is applied to a single field while
+	// retrieving the coverage details.
 	Equals []string
 
 	// Represents a not equal condition that is applied to a single field while
@@ -575,17 +574,16 @@ type DataSourcesFreeTrial struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information on the server side encryption method used in the S3 bucket.
-// See S3 Server-Side Encryption
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) for
-// more information.
+// Contains information on the server side encryption method used in the S3
+// bucket. See S3 Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)
+// for more information.
 type DefaultServerSideEncryption struct {
 
 	// The type of encryption used for objects within the S3 bucket.
 	EncryptionType *string
 
 	// The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the
-	// bucket EncryptionType is aws:kms.
+	// bucket EncryptionType is aws:kms .
 	KmsMasterKeyArn *string
 
 	noSmithyDocumentSerde
@@ -600,8 +598,8 @@ type Destination struct {
 	// This member is required.
 	DestinationId *string
 
-	// The type of resource used for the publishing destination. Currently, only Amazon
-	// S3 buckets are supported.
+	// The type of resource used for the publishing destination. Currently, only
+	// Amazon S3 buckets are supported.
 	//
 	// This member is required.
 	DestinationType DestinationType
@@ -650,8 +648,8 @@ type DetectorAdditionalConfigurationResult struct {
 	// Status of the additional configuration.
 	Status FeatureStatus
 
-	// The timestamp at which the additional configuration was last updated. This is in
-	// UTC format.
+	// The timestamp at which the additional configuration was last updated. This is
+	// in UTC format.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -710,8 +708,8 @@ type DnsRequestAction struct {
 	// The domain information for the API request.
 	Domain *string
 
-	// The network connection protocol observed in the activity that prompted GuardDuty
-	// to generate the finding.
+	// The network connection protocol observed in the activity that prompted
+	// GuardDuty to generate the finding.
 	Protocol *string
 
 	noSmithyDocumentSerde
@@ -1160,8 +1158,8 @@ type KubernetesApiCallAction struct {
 	// The Kubernetes API request URI.
 	RequestUri *string
 
-	// The IP of the Kubernetes API caller and the IPs of any proxies or load balancers
-	// between the caller and the API endpoint.
+	// The IP of the Kubernetes API caller and the IPs of any proxies or load
+	// balancers between the caller and the API endpoint.
 	SourceIps []string
 
 	// The resulting HTTP response code of the Kubernetes API call action.
@@ -1371,8 +1369,8 @@ type MalwareProtectionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of all Malware Protection data
-// sources.
+// An object that contains information on the status of all Malware Protection
+// data sources.
 type MalwareProtectionConfigurationResult struct {
 
 	// Describes the configuration of Malware Protection for EC2 instances with
@@ -1520,8 +1518,8 @@ type MemberFeaturesConfiguration struct {
 // Contains information about the features for the member account.
 type MemberFeaturesConfigurationResult struct {
 
-	// Indicates the additional configuration of the feature that is configured for the
-	// member account.
+	// Indicates the additional configuration of the feature that is configured for
+	// the member account.
 	AdditionalConfiguration []MemberAdditionalConfigurationResult
 
 	// Indicates the name of the feature that is enabled for the detector.
@@ -1638,10 +1636,10 @@ type OrganizationAdditionalConfiguration struct {
 // organization.
 type OrganizationAdditionalConfigurationResult struct {
 
-	// Describes how The status of the additional configuration that are configured for
-	// the member accounts within the organization. If you set AutoEnable to NEW, a
-	// feature will be configured for only the new accounts when they join the
-	// organization. If you set AutoEnable to NONE, no feature will be configured for
+	// Describes how The status of the additional configuration that are configured
+	// for the member accounts within the organization. If you set AutoEnable to NEW ,
+	// a feature will be configured for only the new accounts when they join the
+	// organization. If you set AutoEnable to NONE , no feature will be configured for
 	// the accounts when they join the organization.
 	AutoEnable OrgFeatureStatus
 
@@ -1734,10 +1732,10 @@ type OrganizationFeatureConfigurationResult struct {
 	AdditionalConfiguration []OrganizationAdditionalConfigurationResult
 
 	// Describes how The status of the feature that are configured for the member
-	// accounts within the organization. If you set AutoEnable to NEW, a feature will
+	// accounts within the organization. If you set AutoEnable to NEW , a feature will
 	// be configured for only the new accounts when they join the organization. If you
-	// set AutoEnable to NONE, no feature will be configured for the accounts when they
-	// join the organization.
+	// set AutoEnable to NONE , no feature will be configured for the accounts when
+	// they join the organization.
 	AutoEnable OrgFeatureStatus
 
 	// The name of the feature that is configured for the member accounts within the
@@ -1763,8 +1761,8 @@ type OrganizationKubernetesAuditLogsConfiguration struct {
 // organization.
 type OrganizationKubernetesAuditLogsConfigurationResult struct {
 
-	// Whether Kubernetes audit logs data source should be auto-enabled for new members
-	// joining the organization.
+	// Whether Kubernetes audit logs data source should be auto-enabled for new
+	// members joining the organization.
 	//
 	// This member is required.
 	AutoEnable bool
@@ -1775,8 +1773,8 @@ type OrganizationKubernetesAuditLogsConfigurationResult struct {
 // Organization-wide Kubernetes data sources configurations.
 type OrganizationKubernetesConfiguration struct {
 
-	// Whether Kubernetes audit logs data source should be auto-enabled for new members
-	// joining the organization.
+	// Whether Kubernetes audit logs data source should be auto-enabled for new
+	// members joining the organization.
 	//
 	// This member is required.
 	AuditLogs *OrganizationKubernetesAuditLogsConfiguration
@@ -1806,8 +1804,8 @@ type OrganizationMalwareProtectionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of all Malware Protection data
-// source for an organization.
+// An object that contains information on the status of all Malware Protection
+// data source for an organization.
 type OrganizationMalwareProtectionConfigurationResult struct {
 
 	// Describes the configuration for scanning EC2 instances with findings for an
@@ -1853,8 +1851,8 @@ type OrganizationScanEc2InstanceWithFindings struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of scanning EC2 instances with
-// findings for an organization.
+// An object that contains information on the status of scanning EC2 instances
+// with findings for an organization.
 type OrganizationScanEc2InstanceWithFindingsResult struct {
 
 	// Describes the configuration for scanning EBS volumes for an organization.
@@ -1867,8 +1865,7 @@ type OrganizationScanEc2InstanceWithFindingsResult struct {
 type Owner struct {
 
 	// The canonical user ID of the bucket owner. For information about locating your
-	// canonical user ID see Finding Your Account Canonical User ID.
-	// (https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)
+	// canonical user ID see Finding Your Account Canonical User ID. (https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)
 	Id *string
 
 	noSmithyDocumentSerde
@@ -2005,8 +2002,8 @@ type RdsDbInstanceDetails struct {
 	// involved in the finding.
 	DbClusterIdentifier *string
 
-	// The Amazon Resource Name (ARN) that identifies the database instance involved in
-	// the finding.
+	// The Amazon Resource Name (ARN) that identifies the database instance involved
+	// in the finding.
 	DbInstanceArn *string
 
 	// The identifier associated to the database instance that was involved in the
@@ -2354,8 +2351,8 @@ type Scan struct {
 // Contains information about the condition.
 type ScanCondition struct {
 
-	// Represents an mapEqual condition to be applied to a single field when triggering
-	// for malware scan.
+	// Represents an mapEqual condition to be applied to a single field when
+	// triggering for malware scan.
 	//
 	// This member is required.
 	MapEquals []ScanConditionPair
@@ -2454,8 +2451,8 @@ type ScannedItemCount struct {
 // malware scan.
 type ScanResourceCriteria struct {
 
-	// Represents condition that when matched will prevent a malware scan for a certain
-	// resource.
+	// Represents condition that when matched will prevent a malware scan for a
+	// certain resource.
 	Exclude map[string]ScanCondition
 
 	// Represents condition that when matched will allow a malware scan for a certain
@@ -2539,8 +2536,8 @@ type Service struct {
 	// this finding.
 	EventFirstSeen *string
 
-	// The last-seen timestamp of the activity that prompted GuardDuty to generate this
-	// finding.
+	// The last-seen timestamp of the activity that prompted GuardDuty to generate
+	// this finding.
 	EventLastSeen *string
 
 	// An evidence object associated with the service.
@@ -2581,7 +2578,7 @@ type ServiceAdditionalInfo struct {
 // Contains information about the criteria used for sorting findings.
 type SortCriteria struct {
 
-	// Represents the finding attribute, such as accountId, that sorts the findings.
+	// Represents the finding attribute, such as accountId , that sorts the findings.
 	AttributeName *string
 
 	// The order by which the sorted findings are to be displayed.
@@ -2608,8 +2605,8 @@ type ThreatDetectedByName struct {
 	// Total number of infected files identified.
 	ItemCount int32
 
-	// Flag to determine if the finding contains every single infected file-path and/or
-	// every threat.
+	// Flag to determine if the finding contains every single infected file-path
+	// and/or every threat.
 	Shortened bool
 
 	// List of identified threats with details, organized by threat name.
@@ -2687,8 +2684,8 @@ type UnprocessedAccount struct {
 // Specifies the names of the data sources that couldn't be enabled.
 type UnprocessedDataSourcesResult struct {
 
-	// An object that contains information on the status of all Malware Protection data
-	// sources.
+	// An object that contains information on the status of all Malware Protection
+	// data sources.
 	MalwareProtection *MalwareProtectionConfigurationResult
 
 	noSmithyDocumentSerde

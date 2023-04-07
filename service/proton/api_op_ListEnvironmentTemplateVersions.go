@@ -36,7 +36,7 @@ type ListEnvironmentTemplateVersionsInput struct {
 	TemplateName *string
 
 	// To view a list of minor of versions under a major version of an environment
-	// template, include major Version. To view a list of major versions of an
+	// template, include major Version . To view a list of major versions of an
 	// environment template, exclude major Version .
 	MajorVersion *string
 
@@ -148,8 +148,8 @@ type ListEnvironmentTemplateVersionsPaginatorOptions struct {
 	// list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

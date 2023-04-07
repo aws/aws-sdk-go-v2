@@ -10,9 +10,9 @@ const (
 	AccessControlRuleEffectDeny  AccessControlRuleEffect = "DENY"
 )
 
-// Values returns all known values for AccessControlRuleEffect. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AccessControlRuleEffect. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AccessControlRuleEffect) Values() []AccessControlRuleEffect {
 	return []AccessControlRuleEffect{
 		"ALLOW",
@@ -65,10 +65,9 @@ const (
 	DnsRecordVerificationStatusFailed   DnsRecordVerificationStatus = "FAILED"
 )
 
-// Values returns all known values for DnsRecordVerificationStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for DnsRecordVerificationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DnsRecordVerificationStatus) Values() []DnsRecordVerificationStatus {
 	return []DnsRecordVerificationStatus{
 		"PENDING",
@@ -86,9 +85,9 @@ const (
 	EntityStateDeleted  EntityState = "DELETED"
 )
 
-// Values returns all known values for EntityState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EntityState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EntityState) Values() []EntityState {
 	return []EntityState{
 		"ENABLED",
@@ -265,9 +264,9 @@ const (
 	UserRoleSystemUser UserRole = "SYSTEM_USER"
 )
 
-// Values returns all known values for UserRole. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserRole. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (UserRole) Values() []UserRole {
 	return []UserRole{
 		"USER",

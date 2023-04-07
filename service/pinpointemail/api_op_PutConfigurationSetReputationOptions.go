@@ -31,13 +31,13 @@ func (c *Client) PutConfigurationSetReputationOptions(ctx context.Context, param
 // configuration set.
 type PutConfigurationSetReputationOptionsInput struct {
 
-	// The name of the configuration set that you want to enable or disable
-	// reputation metric tracking for.
+	// The name of the configuration set that you want to enable or disable reputation
+	// metric tracking for.
 	//
 	// This member is required.
 	ConfigurationSetName *string
 
-	// If true, tracking of reputation metrics is enabled for the configuration set.
+	// If true , tracking of reputation metrics is enabled for the configuration set.
 	// If false , tracking of reputation metrics is disabled for the configuration set.
 	ReputationMetricsEnabled bool
 

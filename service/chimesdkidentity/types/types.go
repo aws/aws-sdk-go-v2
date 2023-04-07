@@ -7,17 +7,17 @@ import (
 	"time"
 )
 
-// The details of an AppInstance, an instance of an Amazon Chime SDK messaging
+// The details of an AppInstance , an instance of an Amazon Chime SDK messaging
 // application.
 type AppInstance struct {
 
 	// The ARN of the messaging instance.
 	AppInstanceArn *string
 
-	// The time at which an AppInstance  was created. In epoch milliseconds.
+	// The time at which an AppInstance was created. In epoch milliseconds.
 	CreatedTimestamp *time.Time
 
-	// The time an AppInstance  was last updated. In epoch milliseconds.
+	// The time an AppInstance was last updated. In epoch milliseconds.
 	LastUpdatedTimestamp *time.Time
 
 	// The metadata of an AppInstance .
@@ -32,10 +32,10 @@ type AppInstance struct {
 // The name and ARN of the admin for the AppInstance .
 type AppInstanceAdmin struct {
 
-	// The AppInstanceAdmin  data.
+	// The AppInstanceAdmin data.
 	Admin *Identity
 
-	// The ARN of the AppInstance  for which the user is an administrator.
+	// The ARN of the AppInstance for which the user is an administrator.
 	AppInstanceArn *string
 
 	// The time at which an administrator was created.
@@ -62,10 +62,10 @@ type AppInstanceBot struct {
 	// The data processing instructions for an AppInstanceBot.
 	Configuration *Configuration
 
-	// The time at which the AppInstanceBot  was created.
+	// The time at which the AppInstanceBot was created.
 	CreatedTimestamp *time.Time
 
-	// The time at which the AppInstanceBot  was last updated.
+	// The time at which the AppInstanceBot was last updated.
 	LastUpdatedTimestamp *time.Time
 
 	// The metadata for an AppInstanceBot.
@@ -104,7 +104,7 @@ type AppInstanceRetentionSettings struct {
 // Summary of the data for an AppInstance .
 type AppInstanceSummary struct {
 
-	// The AppInstance  ARN.
+	// The AppInstance ARN.
 	AppInstanceArn *string
 
 	// The metadata of the AppInstance .
@@ -122,13 +122,13 @@ type AppInstanceUser struct {
 	// The ARN of the AppInstanceUser .
 	AppInstanceUserArn *string
 
-	// The time at which the AppInstanceUser  was created.
+	// The time at which the AppInstanceUser was created.
 	CreatedTimestamp *time.Time
 
-	// The interval after which an AppInstanceUser  is automatically deleted.
+	// The interval after which an AppInstanceUser is automatically deleted.
 	ExpirationSettings *ExpirationSettings
 
-	// The time at which the AppInstanceUser  was last updated.
+	// The time at which the AppInstanceUser was last updated.
 	LastUpdatedTimestamp *time.Time
 
 	// The metadata of the AppInstanceUser .
@@ -146,14 +146,14 @@ type AppInstanceUser struct {
 type AppInstanceUserEndpoint struct {
 
 	// Boolean that controls whether the AppInstanceUserEndpoint is opted in to
-	// receive messages. ALL  indicates the endpoint will receive all messages. NONE
+	// receive messages. ALL indicates the endpoint will receive all messages. NONE
 	// indicates the endpoint will receive no messages.
 	AllowMessages AllowMessages
 
 	// The ARN of the AppInstanceUser .
 	AppInstanceUserArn *string
 
-	// The time at which an AppInstanceUserEndpoint  was created.
+	// The time at which an AppInstanceUserEndpoint was created.
 	CreatedTimestamp *time.Time
 
 	// The attributes of an Endpoint .
@@ -162,15 +162,20 @@ type AppInstanceUserEndpoint struct {
 	// The unique identifier of the AppInstanceUserEndpoint .
 	EndpointId *string
 
-	// A read-only field that represents the state of an AppInstanceUserEndpoint.
+	// A read-only field that represents the state of an AppInstanceUserEndpoint .
 	// Supported values:
-	//     - ACTIVE : The AppInstanceUserEndpoint is active and able to receive messages. When ACTIVE , the EndpointStatusReason remains empty.
-	//     - INACTIVE : The AppInstanceUserEndpoint is inactive and can't receive message. When INACTIVE , the corresponding reason will be conveyed through EndpointStatusReason .
-	//     - INVALID_DEVICE_TOKEN indicates that an AppInstanceUserEndpoint is INACTIVE due to invalid device token
-	//     - INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE due to an invalid pinpoint ARN that was input through the ResourceArn field.
+	//   - ACTIVE : The AppInstanceUserEndpoint is active and able to receive messages.
+	//   When ACTIVE , the EndpointStatusReason remains empty.
+	//   - INACTIVE : The AppInstanceUserEndpoint is inactive and can't receive
+	//   message. When INACTIVE , the corresponding reason will be conveyed through
+	//   EndpointStatusReason .
+	//   - INVALID_DEVICE_TOKEN indicates that an AppInstanceUserEndpoint is INACTIVE
+	//   due to invalid device token
+	//   - INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE
+	//   due to an invalid pinpoint ARN that was input through the ResourceArn field.
 	EndpointState *EndpointState
 
-	// The time at which an AppInstanceUserEndpoint  was last updated.
+	// The time at which an AppInstanceUserEndpoint was last updated.
 	LastUpdatedTimestamp *time.Time
 
 	// The name of the AppInstanceUserEndpoint .
@@ -189,7 +194,7 @@ type AppInstanceUserEndpoint struct {
 type AppInstanceUserEndpointSummary struct {
 
 	// BBoolean that controls whether the AppInstanceUserEndpoint is opted in to
-	// receive messages. ALL  indicates the endpoint will receive all messages. NONE
+	// receive messages. ALL indicates the endpoint will receive all messages. NONE
 	// indicates the endpoint will receive no messages.
 	AllowMessages AllowMessages
 
@@ -260,12 +265,17 @@ type EndpointAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// A read-only field that represents the state of an AppInstanceUserEndpoint.
+// A read-only field that represents the state of an AppInstanceUserEndpoint .
 // Supported values:
-//   - ACTIVE : The AppInstanceUserEndpoint is active and able to receive messages. When ACTIVE , the EndpointStatusReason remains empty.
-//   - INACTIVE : The AppInstanceUserEndpoint is inactive and can't receive message. When INACTIVE, the corresponding reason will be conveyed through EndpointStatusReason.
-//   - INVALID_DEVICE_TOKEN indicates that an AppInstanceUserEndpoint is INACTIVE due to invalid device token
-//   - INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE due to an invalid pinpoint ARN that was input through the ResourceArn field.
+//   - ACTIVE : The AppInstanceUserEndpoint is active and able to receive messages.
+//     When ACTIVE , the EndpointStatusReason remains empty.
+//   - INACTIVE : The AppInstanceUserEndpoint is inactive and can't receive
+//     message. When INACTIVE, the corresponding reason will be conveyed through
+//     EndpointStatusReason.
+//   - INVALID_DEVICE_TOKEN indicates that an AppInstanceUserEndpoint is INACTIVE
+//     due to invalid device token
+//   - INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE
+//     due to an invalid pinpoint ARN that was input through the ResourceArn field.
 type EndpointState struct {
 
 	// Enum that indicates the Status of an AppInstanceUserEndpoint .
@@ -279,17 +289,15 @@ type EndpointState struct {
 	noSmithyDocumentSerde
 }
 
-// Determines the interval after which an AppInstanceUser is automatically
-// deleted.
+// Determines the interval after which an AppInstanceUser is automatically deleted.
 type ExpirationSettings struct {
 
-	// Specifies the conditions under which an AppInstanceUser  will expire.
+	// Specifies the conditions under which an AppInstanceUser will expire.
 	//
 	// This member is required.
 	ExpirationCriterion ExpirationCriterion
 
-	// The period in days after which an AppInstanceUser will be automatically
-	// deleted.
+	// The period in days after which an AppInstanceUser will be automatically deleted.
 	//
 	// This member is required.
 	ExpirationDays *int32

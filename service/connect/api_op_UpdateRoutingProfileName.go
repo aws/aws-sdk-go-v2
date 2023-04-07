@@ -11,7 +11,7 @@ import (
 )
 
 // Updates the name and description of a routing profile. The request accepts the
-// following data in JSON format. At least Name  or Description  must be provided.
+// following data in JSON format. At least Name or Description must be provided.
 func (c *Client) UpdateRoutingProfileName(ctx context.Context, params *UpdateRoutingProfileNameInput, optFns ...func(*Options)) (*UpdateRoutingProfileNameOutput, error) {
 	if params == nil {
 		params = &UpdateRoutingProfileNameInput{}

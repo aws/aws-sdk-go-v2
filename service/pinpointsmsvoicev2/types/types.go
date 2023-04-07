@@ -271,8 +271,7 @@ type OptOutListInformation struct {
 // The metadata for an origination identity associated with a pool.
 type OriginationIdentityMetadata struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -326,8 +325,7 @@ type PhoneNumberInformation struct {
 	// This member is required.
 	DeletionProtectionEnabled bool
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -385,8 +383,8 @@ type PhoneNumberInformation struct {
 	// This member is required.
 	Status NumberStatus
 
-	// By default this is set to false. When set to true you can receive incoming
-	// text messages from your end recipients using the TwoWayChannelArn.
+	// By default this is set to false. When set to true you can receive incoming text
+	// messages from your end recipients using the TwoWayChannelArn.
 	//
 	// This member is required.
 	TwoWayEnabled bool
@@ -466,7 +464,7 @@ type PoolInformation struct {
 	SelfManagedOptOutsEnabled bool
 
 	// Allows you to enable shared routes on your pool. By default, this is set to
-	// False . If you set this value to True, your messages are sent using phone
+	// False . If you set this value to True , your messages are sent using phone
 	// numbers or sender IDs (depending on the country) that are shared with other
 	// Amazon Pinpoint users. In some countries, such as the United States, senders
 	// aren't allowed to use shared routes and must use a dedicated phone number or
@@ -509,14 +507,13 @@ type PoolOriginationIdentitiesFilter struct {
 	noSmithyDocumentSerde
 }
 
-// The alphanumeric sender ID in a specific country that you want to describe.
-// For more information on sender IDs see Requesting sender IDs for SMS messaging
-// with Amazon Pinpoint  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html)
+// The alphanumeric sender ID in a specific country that you want to describe. For
+// more information on sender IDs see Requesting sender IDs for SMS messaging with
+// Amazon Pinpoint  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html)
 // in the Amazon Pinpoint User Guide.
 type SenderIdAndCountry struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -548,8 +545,7 @@ type SenderIdFilter struct {
 // The information for all SenderIds in an Amazon Web Services account.
 type SenderIdInformation struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -579,12 +575,12 @@ type SenderIdInformation struct {
 	noSmithyDocumentSerde
 }
 
-// An object that defines an Amazon SNS destination for events. You can use
-// Amazon SNS to send notification when certain events occur.
+// An object that defines an Amazon SNS destination for events. You can use Amazon
+// SNS to send notification when certain events occur.
 type SnsDestination struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to
-	// publish events to.
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish
+	// events to.
 	//
 	// This member is required.
 	TopicArn *string
@@ -594,14 +590,13 @@ type SnsDestination struct {
 
 // Describes the current Amazon Pinpoint monthly spend limits for sending voice
 // and text messages. For more information on increasing your monthly spend limit,
-// see Requesting increases to your monthly SMS spending quota for Amazon
-// Pinpoint  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html)
+// see Requesting increases to your monthly SMS spending quota for Amazon Pinpoint  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html)
 // in the Amazon Pinpoint User Guide.
 type SpendLimit struct {
 
 	// The maximum amount of money, in US dollars, that you want to be able to spend
 	// sending messages each month. This value has to be less than or equal to the
-	// amount in MaxLimit . To use this custom limit, Overridden  must be set to true.
+	// amount in MaxLimit . To use this custom limit, Overridden must be set to true.
 	//
 	// This member is required.
 	EnforcedLimit int64

@@ -56,8 +56,7 @@ type GetBotAliasOutput struct {
 	// Checksum of the bot alias.
 	Checksum *string
 
-	// The settings that determine how Amazon Lex uses conversation logs for the
-	// alias.
+	// The settings that determine how Amazon Lex uses conversation logs for the alias.
 	ConversationLogs *types.ConversationLogsResponse
 
 	// The date that the bot alias was created.

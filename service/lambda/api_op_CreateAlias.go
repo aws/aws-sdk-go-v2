@@ -15,7 +15,7 @@ import (
 // for a Lambda function version. Use aliases to provide clients with a function
 // identifier that you can update to invoke a different version. You can also map
 // an alias to split invocation requests between two versions. Use the
-// RoutingConfigparameter to specify a second version and the percentage of
+// RoutingConfig parameter to specify a second version and the percentage of
 // invocation requests that it receives.
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
@@ -35,12 +35,11 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 type CreateAliasInput struct {
 
 	// The name of the Lambda function. Name formats
-	//     - Function name - MyFunction .
-	//     - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
-	//     - Partial ARN - 123456789012:function:MyFunction .
-	// The length constraint
-	// applies only to the full ARN. If you specify only the function name, it is
-	// limited to 64 characters in length.
+	//   - Function name - MyFunction .
+	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//   - Partial ARN - 123456789012:function:MyFunction .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string

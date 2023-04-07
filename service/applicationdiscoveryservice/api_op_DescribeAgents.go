@@ -40,13 +40,13 @@ type DescribeAgentsInput struct {
 	// format. For example: {"key": "collectionStatus", "value": "STARTED"}
 	Filters []types.Filter
 
-	// The total number of agents/Connectors to return in a single page of output.
-	// The maximum value is 100.
+	// The total number of agents/Connectors to return in a single page of output. The
+	// maximum value is 100.
 	MaxResults int32
 
 	// Token to retrieve the next set of results. For example, if you previously
-	// specified 100 IDs for DescribeAgentsRequest$agentIds  but set
-	// DescribeAgentsRequest$maxResultsto 10, you received a set of 10 results along
+	// specified 100 IDs for DescribeAgentsRequest$agentIds but set
+	// DescribeAgentsRequest$maxResults to 10, you received a set of 10 results along
 	// with a token. Use that token in this query to get the next set of 10.
 	NextToken *string
 
@@ -63,10 +63,9 @@ type DescribeAgentsOutput struct {
 	AgentsInfo []types.AgentInfo
 
 	// Token to retrieve the next set of results. For example, if you specified 100
-	// IDs for DescribeAgentsRequest$agentIds  but set
-	// DescribeAgentsRequest$maxResultsto 10, you received a set of 10 results along
-	// with this token. Use this token in the next query to retrieve the next set of
-	// 10.
+	// IDs for DescribeAgentsRequest$agentIds but set DescribeAgentsRequest$maxResults
+	// to 10, you received a set of 10 results along with this token. Use this token in
+	// the next query to retrieve the next set of 10.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -62,7 +62,7 @@ type ModifyVpcEndpointServicePermissionsOutput struct {
 	// Information about the added principals.
 	AddedPrincipals []types.AddedPrincipal
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	ReturnValue *bool
 
 	// Metadata pertaining to the operation's result.

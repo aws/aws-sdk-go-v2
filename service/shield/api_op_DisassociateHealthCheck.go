@@ -40,8 +40,8 @@ type DisassociateHealthCheckInput struct {
 	// This member is required.
 	HealthCheckArn *string
 
-	// The unique identifier (ID) for the Protection object to remove the health
-	// check association from.
+	// The unique identifier (ID) for the Protection object to remove the health check
+	// association from.
 	//
 	// This member is required.
 	ProtectionId *string

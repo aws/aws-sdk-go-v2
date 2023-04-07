@@ -61,7 +61,7 @@ type DescribeChangeSetHooksOutput struct {
 	// List of hook objects.
 	Hooks []types.ChangeSetHook
 
-	// Pagination token, null  or empty if no more results.
+	// Pagination token, null or empty if no more results.
 	NextToken *string
 
 	// The stack identifier (stack ID).

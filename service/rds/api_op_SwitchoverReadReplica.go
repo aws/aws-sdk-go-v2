@@ -33,7 +33,7 @@ type SwitchoverReadReplicaInput struct {
 
 	// The DB instance identifier of the current standby database. This value is
 	// stored as a lowercase string. Constraints:
-	//     - Must match the identiﬁer of an existing Oracle read replica DB instance.
+	//   - Must match the identiﬁer of an existing Oracle read replica DB instance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string

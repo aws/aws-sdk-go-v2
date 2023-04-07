@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DBSubnetGroup  descriptions. If a DBSubnetGroupName is
+// Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is
 // specified, the list will contain only the descriptions of the specified
 // DBSubnetGroup .
 func (c *Client) DescribeDBSubnetGroups(ctx context.Context, params *DescribeDBSubnetGroupsInput, optFns ...func(*Options)) (*DescribeDBSubnetGroupsOutput, error) {
@@ -44,10 +44,10 @@ type DescribeDBSubnetGroupsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -144,14 +144,14 @@ var _ DescribeDBSubnetGroupsAPIClient = (*Client)(nil)
 // DescribeDBSubnetGroupsPaginatorOptions is the paginator options for
 // DescribeDBSubnetGroups
 type DescribeDBSubnetGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -164,8 +164,7 @@ type DescribeDBSubnetGroupsPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeDBSubnetGroupsPaginator returns a new
-// DescribeDBSubnetGroupsPaginator
+// NewDescribeDBSubnetGroupsPaginator returns a new DescribeDBSubnetGroupsPaginator
 func NewDescribeDBSubnetGroupsPaginator(client DescribeDBSubnetGroupsAPIClient, params *DescribeDBSubnetGroupsInput, optFns ...func(*DescribeDBSubnetGroupsPaginatorOptions)) *DescribeDBSubnetGroupsPaginator {
 	if params == nil {
 		params = &DescribeDBSubnetGroupsInput{}

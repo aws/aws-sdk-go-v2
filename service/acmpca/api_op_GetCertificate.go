@@ -52,7 +52,6 @@ type GetCertificateInput struct {
 	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 	// . This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
 	// .
 	//
 	// This member is required.
@@ -63,7 +62,7 @@ type GetCertificateInput struct {
 
 type GetCertificateOutput struct {
 
-	// The base64 PEM-encoded certificate specified by the CertificateArn  parameter.
+	// The base64 PEM-encoded certificate specified by the CertificateArn parameter.
 	Certificate *string
 
 	// The base64 PEM-encoded certificate chain that chains up to the root CA

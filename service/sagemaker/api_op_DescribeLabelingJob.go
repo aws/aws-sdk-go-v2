@@ -108,13 +108,12 @@ type DescribeLabelingJobOutput struct {
 	// The attribute used as the label in the output manifest file.
 	LabelAttributeName *string
 
-	// The S3 location of the JSON file that defines the categories used to label
-	// data objects. Please note the following label-category limits:
-	//     - Semantic segmentation labeling jobs using automated labeling: 20 labels
-	//     - Box bounding labeling jobs (all): 10 labels
-	// The file is a JSON structure
-	// in the following format: {
-	//      "document-version": "2018-11-28"
+	// The S3 location of the JSON file that defines the categories used to label data
+	// objects. Please note the following label-category limits:
+	//   - Semantic segmentation labeling jobs using automated labeling: 20 labels
+	//   - Box bounding labeling jobs (all): 10 labels
+	// The file is a JSON structure in the following format: {
+	//     "document-version": "2018-11-28"
 	//
 	//     "labels": [
 	//

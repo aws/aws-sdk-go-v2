@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts analyzing the routing path between the specified source and
-// destination. For more information, see Route Analyzer (https://docs.aws.amazon.com/vpc/latest/tgw/route-analyzer.html)
+// Starts analyzing the routing path between the specified source and destination.
+// For more information, see Route Analyzer (https://docs.aws.amazon.com/vpc/latest/tgw/route-analyzer.html)
 // .
 func (c *Client) StartRouteAnalysis(ctx context.Context, params *StartRouteAnalysisInput, optFns ...func(*Options)) (*StartRouteAnalysisOutput, error) {
 	if params == nil {

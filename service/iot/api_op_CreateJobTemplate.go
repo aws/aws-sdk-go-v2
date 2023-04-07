@@ -48,10 +48,10 @@ type CreateJobTemplateInput struct {
 	Document *string
 
 	// An S3 link to the job document to use in the template. Required if you don't
-	// specify a value for document. If the job document resides in an S3 bucket, you
+	// specify a value for document . If the job document resides in an S3 bucket, you
 	// must use a placeholder link when specifying the document. The placeholder link
 	// is of the following form:
-	// ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}where bucket is
+	// ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key} where bucket is
 	// your bucket name and key is the object in the bucket to which you are linking.
 	DocumentSource *string
 
@@ -64,8 +64,8 @@ type CreateJobTemplateInput struct {
 	// Allows you to create a staged rollout of a job.
 	JobExecutionsRolloutConfig *types.JobExecutionsRolloutConfig
 
-	// Allows you to configure an optional maintenance window for the rollout of a
-	// job document to all devices in the target group for a job.
+	// Allows you to configure an optional maintenance window for the rollout of a job
+	// document to all devices in the target group for a job.
 	MaintenanceWindows []types.MaintenanceWindow
 
 	// Configuration for pre-signed S3 URLs.
@@ -75,9 +75,9 @@ type CreateJobTemplateInput struct {
 	Tags []types.Tag
 
 	// Specifies the amount of time each device has to finish its execution of the
-	// job. A timer is started when the job execution status is set to IN_PROGRESS.
-	// If the job execution status is not set to another terminal state before the
-	// timer expires, it will be automatically set to TIMED_OUT .
+	// job. A timer is started when the job execution status is set to IN_PROGRESS . If
+	// the job execution status is not set to another terminal state before the timer
+	// expires, it will be automatically set to TIMED_OUT .
 	TimeoutConfig *types.TimeoutConfig
 
 	noSmithyDocumentSerde

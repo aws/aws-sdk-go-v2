@@ -32,8 +32,7 @@ func (c *Client) StartTopicsDetectionJob(ctx context.Context, params *StartTopic
 type StartTopicsDetectionJobInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
-	// read access to your input data. For more information, see Role-based
-	// permissions (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions)
+	// read access to your input data. For more information, see Role-based permissions (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions)
 	// .
 	//
 	// This member is required.
@@ -46,7 +45,7 @@ type StartTopicsDetectionJobInput struct {
 
 	// Specifies where to send the output files. The output is a compressed archive
 	// with two files, topic-terms.csv that lists the terms associated with each
-	// topic, and doc-topics.csv  that lists the documents associated with each topic
+	// topic, and doc-topics.csv that lists the documents associated with each topic
 	//
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
@@ -61,18 +60,19 @@ type StartTopicsDetectionJobInput struct {
 	// The number of topics to detect.
 	NumberOfTopics *int32
 
-	// Tags to associate with the topics detection job. A tag is a key-value pair
-	// that adds metadata to a resource used by Amazon Comprehend. For example, a tag
-	// with "Sales" as the key might be added to a resource to indicate its use by the
-	// sales department.
+	// Tags to associate with the topics detection job. A tag is a key-value pair that
+	// adds metadata to a resource used by Amazon Comprehend. For example, a tag with
+	// "Sales" as the key might be added to a resource to indicate its use by the sales
+	// department.
 	Tags []types.Tag
 
 	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
 	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
 	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
 	// the following formats:
-	//     - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//     - Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - Amazon Resource Name (ARN) of a KMS Key:
+	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
 	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
@@ -95,14 +95,15 @@ type StartTopicsDetectionJobOutput struct {
 	JobArn *string
 
 	// The identifier generated for the job. To get the status of the job, use this
-	// identifier with the DescribeTopicDetectionJob  operation.
+	// identifier with the DescribeTopicDetectionJob operation.
 	JobId *string
 
 	// The status of the job:
-	//     - SUBMITTED - The job has been received and is queued for processing.
-	//     - IN_PROGRESS - Amazon Comprehend is processing the job.
-	//     - COMPLETED - The job was successfully completed and the output is available.
-	//     - FAILED - The job did not complete. To get details, use the DescribeTopicDetectionJob operation.
+	//   - SUBMITTED - The job has been received and is queued for processing.
+	//   - IN_PROGRESS - Amazon Comprehend is processing the job.
+	//   - COMPLETED - The job was successfully completed and the output is available.
+	//   - FAILED - The job did not complete. To get details, use the
+	//   DescribeTopicDetectionJob operation.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

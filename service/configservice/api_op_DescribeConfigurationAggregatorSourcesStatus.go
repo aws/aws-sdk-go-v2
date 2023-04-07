@@ -38,8 +38,8 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 	// This member is required.
 	ConfigurationAggregatorName *string
 
-	// The maximum number of AggregatorSourceStatus returned on each page. The
-	// default is maximum. If you specify 0, Config uses the default.
+	// The maximum number of AggregatorSourceStatus returned on each page. The default
+	// is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -47,9 +47,9 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 	NextToken *string
 
 	// Filters the status type.
-	//     - Valid value FAILED indicates errors while moving data.
-	//     - Valid value SUCCEEDED indicates the data was successfully moved.
-	//     - Valid value OUTDATED indicates the data is not the most recent.
+	//   - Valid value FAILED indicates errors while moving data.
+	//   - Valid value SUCCEEDED indicates the data was successfully moved.
+	//   - Valid value OUTDATED indicates the data is not the most recent.
 	UpdateStatus []types.AggregatedSourceStatusType
 
 	noSmithyDocumentSerde
@@ -144,12 +144,12 @@ var _ DescribeConfigurationAggregatorSourcesStatusAPIClient = (*Client)(nil)
 // DescribeConfigurationAggregatorSourcesStatusPaginatorOptions is the paginator
 // options for DescribeConfigurationAggregatorSourcesStatus
 type DescribeConfigurationAggregatorSourcesStatusPaginatorOptions struct {
-	// The maximum number of AggregatorSourceStatus returned on each page. The
-	// default is maximum. If you specify 0, Config uses the default.
+	// The maximum number of AggregatorSourceStatus returned on each page. The default
+	// is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -45,8 +45,8 @@ type AssociateDataShareConsumerInput struct {
 	// datashare.
 	ConsumerArn *string
 
-	// From a datashare consumer account, associates a datashare with all existing
-	// and future namespaces in the specified Amazon Web Services Region.
+	// From a datashare consumer account, associates a datashare with all existing and
+	// future namespaces in the specified Amazon Web Services Region.
 	ConsumerRegion *string
 
 	noSmithyDocumentSerde

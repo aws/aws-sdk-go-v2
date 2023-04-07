@@ -16,10 +16,23 @@ import (
 // . The policy can be displayed with GetPolicy (https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetPolicy.html)
 // and removed with DeletePolicy (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePolicy.html)
 // . About Policies
-//   - A policy grants access on a private CA to an Amazon Web Services customer account, to Amazon Web Services Organizations, or to an Amazon Web Services Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with Amazon Web Services Private CA (https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html) .
-//   - A policy permits a user of Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.
-//   - For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the Amazon Web Services Private CA policy. For more information, see Using a Service Linked Role with ACM (https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html) .
-//   - Updates made in Amazon Web Services Resource Manager (RAM) are reflected in policies. For more information, see Attach a Policy for Cross-Account Access (https://docs.aws.amazon.com/privateca/latest/userguide/pca-ram.html) .
+//   - A policy grants access on a private CA to an Amazon Web Services customer
+//     account, to Amazon Web Services Organizations, or to an Amazon Web Services
+//     Organizations unit. Policies are under the control of a CA administrator. For
+//     more information, see Using a Resource Based Policy with Amazon Web Services
+//     Private CA (https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html)
+//     .
+//   - A policy permits a user of Certificate Manager (ACM) to issue ACM
+//     certificates signed by a CA in another account.
+//   - For ACM to manage automatic renewal of these certificates, the ACM user
+//     must configure a Service Linked Role (SLR). The SLR allows the ACM service to
+//     assume the identity of the user, subject to confirmation against the Amazon Web
+//     Services Private CA policy. For more information, see Using a Service Linked
+//     Role with ACM (https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html)
+//     .
+//   - Updates made in Amazon Web Services Resource Manager (RAM) are reflected in
+//     policies. For more information, see Attach a Policy for Cross-Account Access (https://docs.aws.amazon.com/privateca/latest/userguide/pca-ram.html)
+//     .
 func (c *Client) PutPolicy(ctx context.Context, params *PutPolicyInput, optFns ...func(*Options)) (*PutPolicyOutput, error) {
 	if params == nil {
 		params = &PutPolicyInput{}
@@ -40,7 +53,7 @@ type PutPolicyInput struct {
 	// The path and file name of a JSON-formatted IAM policy to attach to the
 	// specified private CA resource. If this policy does not contain all required
 	// statements or if it includes any statement that is not allowed, the PutPolicy
-	// action returns an InvalidPolicyException. For information about IAM policy and
+	// action returns an InvalidPolicyException . For information about IAM policy and
 	// statement structure, see Overview of JSON Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json)
 	// .
 	//
@@ -48,8 +61,7 @@ type PutPolicyInput struct {
 	Policy *string
 
 	// The Amazon Resource Number (ARN) of the private CA to associate with the
-	// policy. The ARN of the CA can be found by calling the
-	// ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
+	// policy. The ARN of the CA can be found by calling the ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
 	// action.
 	//
 	// This member is required.

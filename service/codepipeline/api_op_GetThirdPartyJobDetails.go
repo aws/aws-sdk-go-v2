@@ -31,7 +31,7 @@ func (c *Client) GetThirdPartyJobDetails(ctx context.Context, params *GetThirdPa
 	return out, nil
 }
 
-// Represents the input of a GetThirdPartyJobDetails  action.
+// Represents the input of a GetThirdPartyJobDetails action.
 type GetThirdPartyJobDetailsInput struct {
 
 	// The clientToken portion of the clientId and clientToken pair used to verify
@@ -48,7 +48,7 @@ type GetThirdPartyJobDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetThirdPartyJobDetails  action.
+// Represents the output of a GetThirdPartyJobDetails action.
 type GetThirdPartyJobDetailsOutput struct {
 
 	// The details of the job, including any protected values defined for the job.

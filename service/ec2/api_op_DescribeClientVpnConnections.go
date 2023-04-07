@@ -43,8 +43,9 @@ type DescribeClientVpnConnectionsInput struct {
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.
-	//     - connection-id - The ID of the connection.
-	//     - username - For Active Directory client authentication, the user name of the client who established the client connection.
+	//   - connection-id - The ID of the connection.
+	//   - username - For Active Directory client authentication, the user name of the
+	//   client who established the client connection.
 	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
@@ -152,8 +153,8 @@ type DescribeClientVpnConnectionsPaginatorOptions struct {
 	// value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

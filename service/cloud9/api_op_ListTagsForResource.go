@@ -29,8 +29,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Cloud9 development environment to get
-	// the tags for.
+	// The Amazon Resource Name (ARN) of the Cloud9 development environment to get the
+	// tags for.
 	//
 	// This member is required.
 	ResourceARN *string

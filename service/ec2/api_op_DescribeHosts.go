@@ -34,17 +34,21 @@ func (c *Client) DescribeHosts(ctx context.Context, params *DescribeHostsInput, 
 type DescribeHostsInput struct {
 
 	// The filters.
-	//     - auto-placement - Whether auto-placement is enabled or disabled ( on | off ).
-	//     - availability-zone - The Availability Zone of the host.
-	//     - client-token - The idempotency token that you provided when you allocated the host.
-	//     - host-reservation-id - The ID of the reservation assigned to this host.
-	//     - instance-type - The instance type size that the Dedicated Host is configured to support.
-	//     - state - The allocation state of the Dedicated Host ( available | under-assessment | permanent-failure | released | released-permanent-failure ).
-	//     - tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - auto-placement - Whether auto-placement is enabled or disabled ( on | off ).
+	//   - availability-zone - The Availability Zone of the host.
+	//   - client-token - The idempotency token that you provided when you allocated
+	//   the host.
+	//   - host-reservation-id - The ID of the reservation assigned to this host.
+	//   - instance-type - The instance type size that the Dedicated Host is configured
+	//   to support.
+	//   - state - The allocation state of the Dedicated Host ( available |
+	//   under-assessment | permanent-failure | released | released-permanent-failure
+	//   ).
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
 	Filter []types.Filter
 
-	// The IDs of the Dedicated Hosts. The IDs are used for targeted instance
-	// launches.
+	// The IDs of the Dedicated Hosts. The IDs are used for targeted instance launches.
 	HostIds []string
 
 	// The maximum number of results to return for the request in a single page. The
@@ -151,8 +155,8 @@ type DescribeHostsPaginatorOptions struct {
 	// and the host IDs parameter in the same request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

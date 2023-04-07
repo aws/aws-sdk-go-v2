@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the associations for the specified transit gateway
-// route table.
+// Gets information about the associations for the specified transit gateway route
+// table.
 func (c *Client) GetTransitGatewayRouteTableAssociations(ctx context.Context, params *GetTransitGatewayRouteTableAssociationsInput, optFns ...func(*Options)) (*GetTransitGatewayRouteTableAssociationsOutput, error) {
 	if params == nil {
 		params = &GetTransitGatewayRouteTableAssociationsInput{}
@@ -43,13 +43,14 @@ type GetTransitGatewayRouteTableAssociationsInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	//     - resource-id - The ID of the resource.
-	//     - resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering | connect .
-	//     - transit-gateway-attachment-id - The ID of the attachment.
+	//   - resource-id - The ID of the resource.
+	//   - resource-type - The resource type. Valid values are vpc | vpn |
+	//   direct-connect-gateway | peering | connect .
+	//   - transit-gateway-attachment-id - The ID of the attachment.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -148,11 +149,11 @@ var _ GetTransitGatewayRouteTableAssociationsAPIClient = (*Client)(nil)
 // options for GetTransitGatewayRouteTableAssociations
 type GetTransitGatewayRouteTableAssociationsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

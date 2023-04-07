@@ -45,7 +45,7 @@ type ListConnectorEntitiesInput struct {
 	// This optional parameter is specific to connector implementation. Some
 	// connectors support multiple levels or categories of entities. You can find out
 	// the list of roots for such providers by sending a request without the
-	// entitiesPathparameter. If the connector supports entities at different roots,
+	// entitiesPath parameter. If the connector supports entities at different roots,
 	// this initial request returns the list of roots. Otherwise, this request returns
 	// all entities supported by the provider.
 	EntitiesPath *string

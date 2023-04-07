@@ -89,7 +89,7 @@ func (e *InstanceRefreshInProgressFault) ErrorCode() string {
 }
 func (e *InstanceRefreshInProgressFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The NextToken  value is not valid.
+// The NextToken value is not valid.
 type InvalidNextToken struct {
 	Message *string
 
@@ -117,7 +117,7 @@ func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 
 // The request failed because a desired configuration was not found or an
 // incompatible launch template (uses a Systems Manager parameter instead of an AMI
-// ID) or launch template version ( $Latest  or $Default) is present on the Auto
+// ID) or launch template version ( $Latest or $Default ) is present on the Auto
 // Scaling group.
 type IrreversibleInstanceRefreshFault struct {
 	Message *string

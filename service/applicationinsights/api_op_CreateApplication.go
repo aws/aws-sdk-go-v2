@@ -38,12 +38,12 @@ type CreateApplicationInput struct {
 	AutoCreate *bool
 
 	// Indicates whether Application Insights can listen to CloudWatch events for the
-	// application resources, such as instance terminated , failed deployment, and
+	// application resources, such as instance terminated , failed deployment , and
 	// others.
 	CWEMonitorEnabled *bool
 
-	// Application Insights can create applications based on a resource group or on
-	// an account. To create an account-based application using all of the resources in
+	// Application Insights can create applications based on a resource group or on an
+	// account. To create an account-based application using all of the resources in
 	// the account, set this parameter to ACCOUNT_BASED .
 	GroupingType types.GroupingType
 
@@ -57,8 +57,8 @@ type CreateApplicationInput struct {
 	// The name of the resource group.
 	ResourceGroupName *string
 
-	// List of tags to add to the application. tag key ( Key) and an associated tag
-	// value ( Value). The maximum length of a tag key is 128 characters. The maximum
+	// List of tags to add to the application. tag key ( Key ) and an associated tag
+	// value ( Value ). The maximum length of a tag key is 128 characters. The maximum
 	// length of a tag value is 256 characters.
 	Tags []types.Tag
 

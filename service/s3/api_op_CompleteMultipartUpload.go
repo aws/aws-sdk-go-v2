@@ -12,9 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Completes a multipart upload by assembling previously uploaded parts. You
-// first initiate the multipart upload and then upload all parts using the
-// UploadPart (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
+// Completes a multipart upload by assembling previously uploaded parts. You first
+// initiate the multipart upload and then upload all parts using the UploadPart (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
 // operation. After successfully uploading all relevant parts of an upload, you
 // call this action to complete the upload. Upon receiving this request, Amazon S3
 // concatenates all the parts in ascending order by part number to create a new
@@ -32,23 +31,28 @@ import (
 // fails, applications should be prepared to retry the failed requests. For more
 // information, see Amazon S3 Error Best Practices (https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html)
 // . You cannot use Content-Type: application/x-www-form-urlencoded with Complete
-// Multipart Upload requests. Also, if you do not provide a Content-Type  header,
-// CompleteMultipartUploadreturns a 200 OK response. For more information about
+// Multipart Upload requests. Also, if you do not provide a Content-Type header,
+// CompleteMultipartUpload returns a 200 OK response. For more information about
 // multipart uploads, see Uploading Objects Using Multipart Upload (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html)
 // . For information about permissions required to use the multipart upload API,
 // see Multipart Upload and Permissions (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
-// . CompleteMultipartUpload  has the following special errors:
+// . CompleteMultipartUpload has the following special errors:
 //   - Error code: EntityTooSmall
-//   - Description: Your proposed upload is smaller than the minimum allowed object size. Each part must be at least 5 MB in size, except the last part.
+//   - Description: Your proposed upload is smaller than the minimum allowed
+//     object size. Each part must be at least 5 MB in size, except the last part.
 //   - 400 Bad Request
 //   - Error code: InvalidPart
-//   - Description: One or more of the specified parts could not be found. The part might not have been uploaded, or the specified entity tag might not have matched the part's entity tag.
+//   - Description: One or more of the specified parts could not be found. The
+//     part might not have been uploaded, or the specified entity tag might not have
+//     matched the part's entity tag.
 //   - 400 Bad Request
 //   - Error code: InvalidPartOrder
-//   - Description: The list of parts was not in ascending order. The parts list must be specified in order by part number.
+//   - Description: The list of parts was not in ascending order. The parts list
+//     must be specified in order by part number.
 //   - 400 Bad Request
 //   - Error code: NoSuchUpload
-//   - Description: The specified multipart upload does not exist. The upload ID might be invalid, or the multipart upload might have been aborted or completed.
+//   - Description: The specified multipart upload does not exist. The upload ID
+//     might be invalid, or the multipart upload might have been aborted or completed.
 //   - 404 Not Found
 //
 // The following operations are related to CompleteMultipartUpload :
@@ -74,8 +78,8 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 
 type CompleteMultipartUploadInput struct {
 
-	// Name of the bucket to which the multipart upload was initiated. When using
-	// this action with an access point, you must direct requests to the access point
+	// Name of the bucket to which the multipart upload was initiated. When using this
+	// action with an access point, you must direct requests to the access point
 	// hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the Amazon Web Services SDKs, you provide
@@ -84,7 +88,7 @@ type CompleteMultipartUploadInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -152,8 +156,8 @@ type CompleteMultipartUploadInput struct {
 	// in the Amazon S3 User Guide.
 	SSECustomerAlgorithm *string
 
-	// The server-side encryption (SSE) customer managed key. This parameter is
-	// needed only when the object was created using a checksum algorithm. For more
+	// The server-side encryption (SSE) customer managed key. This parameter is needed
+	// only when the object was created using a checksum algorithm. For more
 	// information, see Protecting data using SSE-C keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)
 	// in the Amazon S3 User Guide.
 	SSECustomerKey *string
@@ -180,7 +184,7 @@ type CompleteMultipartUploadOutput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -230,7 +234,7 @@ type CompleteMultipartUploadOutput struct {
 	ETag *string
 
 	// If the object expiration is configured, this will contain the expiration date (
-	// expiry-date ) and rule ID ( rule-id ). The value of rule-id  is URL-encoded.
+	// expiry-date ) and rule ID ( rule-id ). The value of rule-id is URL-encoded.
 	Expiration *string
 
 	// The object key of the newly created object.

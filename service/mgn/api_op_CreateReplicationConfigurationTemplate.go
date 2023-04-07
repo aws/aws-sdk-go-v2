@@ -94,8 +94,8 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	UseDedicatedReplicationServer *bool
 
-	// Request to configure an EBS encryption key during Replication Settings
-	// template creation.
+	// Request to configure an EBS encryption key during Replication Settings template
+	// creation.
 	EbsEncryptionKeyArn *string
 
 	// Request to configure tags during Replication Settings template creation.

@@ -41,8 +41,8 @@ type GetDeploymentInput struct {
 
 type GetDeploymentOutput struct {
 
-	// The components to deploy. This is a dictionary, where each key is the name of
-	// a component, and each key's value is the version and configuration to deploy for
+	// The components to deploy. This is a dictionary, where each key is the name of a
+	// component, and each key's value is the version and configuration to deploy for
 	// that component.
 	Components map[string]types.ComponentDeploymentSpecification
 

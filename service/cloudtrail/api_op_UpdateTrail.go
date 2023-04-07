@@ -14,9 +14,8 @@ import (
 // handle log files. Changes to a trail do not require stopping the CloudTrail
 // service. Use this action to designate an existing bucket for log delivery. If
 // the existing bucket has previously been a target for CloudTrail log files, an
-// IAM policy exists for the bucket. UpdateTrail must be called from the region
-// in which the trail was created; otherwise, an InvalidHomeRegionException is
-// thrown.
+// IAM policy exists for the bucket. UpdateTrail must be called from the region in
+// which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
 func (c *Client) UpdateTrail(ctx context.Context, params *UpdateTrailInput, optFns ...func(*Options)) (*UpdateTrailOutput, error) {
 	if params == nil {
 		params = &UpdateTrailInput{}
@@ -37,12 +36,14 @@ type UpdateTrailInput struct {
 
 	// Specifies the name of the trail or trail ARN. If Name is a trail name, the
 	// string must meet the following requirements:
-	//     - Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)
-	//     - Start with a letter or number, and end with a letter or number
-	//     - Be between 3 and 128 characters
-	//     - Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.
-	//     - Not be in IP address format (for example, 192.168.5.4)
-	// If Name  is a trail ARN, it must be in the following format.
+	//   - Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+	//   underscores (_), or dashes (-)
+	//   - Start with a letter or number, and end with a letter or number
+	//   - Be between 3 and 128 characters
+	//   - Have no adjacent periods, underscores or dashes. Names like my-_namespace
+	//   and my--namespace are not valid.
+	//   - Not be in IP address format (for example, 192.168.5.4)
+	// If Name is a trail ARN, it must be in the following format.
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// This member is required.
@@ -87,9 +88,9 @@ type UpdateTrailInput struct {
 	// is false, and cannot be true unless the call is made on behalf of an Amazon Web
 	// Services account that is the management account or delegated administrator
 	// account for an organization in Organizations. If the trail is not an
-	// organization trail and this is set to true, the trail will be created in all
+	// organization trail and this is set to true , the trail will be created in all
 	// Amazon Web Services accounts that belong to the organization. If the trail is an
-	// organization trail and this is set to false, the trail will remain in the
+	// organization trail and this is set to false , the trail will remain in the
 	// current Amazon Web Services account but be deleted from all member accounts in
 	// the organization.
 	IsOrganizationTrail *bool
@@ -100,14 +101,14 @@ type UpdateTrailInput struct {
 	// CloudTrail also supports KMS multi-Region keys. For more information about
 	// multi-Region keys, see Using multi-Region keys (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 	// in the Key Management Service Developer Guide. Examples:
-	//     - alias/MyAliasName
-	//     - arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
-	//     - arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
-	//     - 12345678-1234-1234-1234-123456789012
+	//   - alias/MyAliasName
+	//   - arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
+	//   - arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	//   - 12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
-	// Specifies the name of the Amazon S3 bucket designated for publishing log
-	// files. See Amazon S3 Bucket Naming Requirements (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html)
+	// Specifies the name of the Amazon S3 bucket designated for publishing log files.
+	// See Amazon S3 Bucket Naming Requirements (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html)
 	// .
 	S3BucketName *string
 
@@ -117,8 +118,8 @@ type UpdateTrailInput struct {
 	// . The maximum length is 200 characters.
 	S3KeyPrefix *string
 
-	// Specifies the name of the Amazon SNS topic defined for notification of log
-	// file delivery. The maximum length is 256 characters.
+	// Specifies the name of the Amazon SNS topic defined for notification of log file
+	// delivery. The maximum length is 256 characters.
 	SnsTopicName *string
 
 	noSmithyDocumentSerde
@@ -176,8 +177,8 @@ type UpdateTrailOutput struct {
 	// Deprecated: This member has been deprecated.
 	SnsTopicName *string
 
-	// Specifies the ARN of the trail that was updated. The following is the format
-	// of a trail ARN. arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	// Specifies the ARN of the trail that was updated. The following is the format of
+	// a trail ARN. arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	TrailARN *string
 
 	// Metadata pertaining to the operation's result.

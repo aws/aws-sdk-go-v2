@@ -28,7 +28,7 @@ func (c *Client) ListApplicationRevisions(ctx context.Context, params *ListAppli
 	return out, nil
 }
 
-// Represents the input of a ListApplicationRevisions  operation.
+// Represents the input of a ListApplicationRevisions operation.
 type ListApplicationRevisionsInput struct {
 
 	// The name of an CodeDeploy application associated with the IAM user or Amazon
@@ -39,43 +39,44 @@ type ListApplicationRevisionsInput struct {
 
 	// Whether to list revisions based on whether the revision is the target revision
 	// of a deployment group:
-	//     - include : List revisions that are target revisions of a deployment group.
-	//     - exclude : Do not list revisions that are target revisions of a deployment group.
-	//     - ignore : List all revisions.
+	//   - include : List revisions that are target revisions of a deployment group.
+	//   - exclude : Do not list revisions that are target revisions of a deployment
+	//   group.
+	//   - ignore : List all revisions.
 	Deployed types.ListStateFilterAction
 
 	// An identifier returned from the previous ListApplicationRevisions call. It can
 	// be used to return the next set of applications in the list.
 	NextToken *string
 
-	// An Amazon S3 bucket name to limit the search for revisions. If set to null,
-	// all of the user's buckets are searched.
+	// An Amazon S3 bucket name to limit the search for revisions. If set to null, all
+	// of the user's buckets are searched.
 	S3Bucket *string
 
-	// A key prefix for the set of Amazon S3 objects to limit the search for
-	// revisions.
+	// A key prefix for the set of Amazon S3 objects to limit the search for revisions.
 	S3KeyPrefix *string
 
 	// The column name to use to sort the list results:
-	//     - registerTime : Sort by the time the revisions were registered with CodeDeploy.
-	//     - firstUsedTime : Sort by the time the revisions were first used in a deployment.
-	//     - lastUsedTime : Sort by the time the revisions were last used in a deployment.
-	//
+	//   - registerTime : Sort by the time the revisions were registered with
+	//   CodeDeploy.
+	//   - firstUsedTime : Sort by the time the revisions were first used in a
+	//   deployment.
+	//   - lastUsedTime : Sort by the time the revisions were last used in a
+	//   deployment.
 	// If not specified or set to null, the results are returned in an arbitrary order.
 	SortBy types.ApplicationRevisionSortBy
 
 	// The order in which to sort the list results:
-	//     - ascending : ascending order.
-	//     - descending : descending order.
-	// If not specified, the results are sorted
-	// in ascending order. If set to null, the results are sorted in an arbitrary
-	// order.
+	//   - ascending : ascending order.
+	//   - descending : descending order.
+	// If not specified, the results are sorted in ascending order. If set to null,
+	// the results are sorted in an arbitrary order.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListApplicationRevisions  operation.
+// Represents the output of a ListApplicationRevisions operation.
 type ListApplicationRevisionsOutput struct {
 
 	// If a large amount of information is returned, an identifier is also returned.
@@ -166,8 +167,8 @@ var _ ListApplicationRevisionsAPIClient = (*Client)(nil)
 // ListApplicationRevisionsPaginatorOptions is the paginator options for
 // ListApplicationRevisions
 type ListApplicationRevisionsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

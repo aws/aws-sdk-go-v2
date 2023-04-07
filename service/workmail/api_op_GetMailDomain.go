@@ -51,8 +51,8 @@ type GetMailDomainOutput struct {
 	// Specifies whether the domain is the default domain for your organization.
 	IsDefault bool
 
-	// Specifies whether the domain is a test domain provided by WorkMail, or a
-	// custom domain.
+	// Specifies whether the domain is a test domain provided by WorkMail, or a custom
+	// domain.
 	IsTestDomain bool
 
 	// Indicates the status of the domain ownership verification.

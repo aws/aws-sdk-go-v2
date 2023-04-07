@@ -11,13 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF
-// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
 // and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 // . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns the RateBasedRule  that is specified by the RuleId
-// that you included in the GetRateBasedRule  request.
+// and global use. Returns the RateBasedRule that is specified by the RuleId that
+// you included in the GetRateBasedRule request.
 func (c *Client) GetRateBasedRule(ctx context.Context, params *GetRateBasedRuleInput, optFns ...func(*Options)) (*GetRateBasedRuleOutput, error) {
 	if params == nil {
 		params = &GetRateBasedRuleInput{}
@@ -35,7 +34,7 @@ func (c *Client) GetRateBasedRule(ctx context.Context, params *GetRateBasedRuleI
 
 type GetRateBasedRuleInput struct {
 
-	// The RuleId  of the RateBasedRule  that you want to get. RuleId  is returned by
+	// The RuleId of the RateBasedRule that you want to get. RuleId is returned by
 	// CreateRateBasedRule and by ListRateBasedRules .
 	//
 	// This member is required.
@@ -46,7 +45,7 @@ type GetRateBasedRuleInput struct {
 
 type GetRateBasedRuleOutput struct {
 
-	// Information about the RateBasedRule  that you specified in the GetRateBasedRule
+	// Information about the RateBasedRule that you specified in the GetRateBasedRule
 	// request.
 	Rule *types.RateBasedRule
 

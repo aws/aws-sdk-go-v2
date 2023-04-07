@@ -69,8 +69,8 @@ type CreateDBClusterEndpointInput struct {
 //   - ModifyDBClusterEndpoint
 //   - DeleteDBClusterEndpoint
 //
-// For the data structure that represents Amazon RDS
-// DB instance endpoints, see Endpoint .
+// For the data structure that represents Amazon RDS DB instance endpoints, see
+// Endpoint .
 type CreateDBClusterEndpointOutput struct {
 
 	// The type associated with a custom endpoint. One of: READER , WRITER , ANY .

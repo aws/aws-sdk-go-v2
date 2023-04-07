@@ -40,28 +40,28 @@ func (c *Client) DetectEntities(ctx context.Context, params *DetectEntitiesInput
 
 type DetectEntitiesInput struct {
 
-	// This field applies only when you use a custom entity recognition model that
-	// was trained with PDF annotations. For other cases, enter your text input in the
-	// Text field. Use the Bytes parameter to input a text, PDF, Word or image file.
-	// Using a plain-text file in the Bytes  parameter is equivelent to using the Text
+	// This field applies only when you use a custom entity recognition model that was
+	// trained with PDF annotations. For other cases, enter your text input in the Text
+	// field. Use the Bytes parameter to input a text, PDF, Word or image file. Using
+	// a plain-text file in the Bytes parameter is equivelent to using the Text
 	// parameter (the Entities field in the response is identical). You can also use
-	// the Bytes  parameter to input an Amazon Textract DetectDocumentText  or
-	// AnalyzeDocumentoutput file. Provide the input document as a sequence of
+	// the Bytes parameter to input an Amazon Textract DetectDocumentText or
+	// AnalyzeDocument output file. Provide the input document as a sequence of
 	// base64-encoded bytes. If your code uses an Amazon Web Services SDK to detect
 	// entities, the SDK may encode the document file bytes for you. The maximum length
 	// of this field depends on the input document type. For details, see Inputs for
 	// real-time custom analysis (https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html)
 	// in the Comprehend Developer Guide. If you use the Bytes parameter, do not use
-	// the Text  parameter.
+	// the Text parameter.
 	Bytes []byte
 
 	// Provides configuration parameters to override the default actions for
 	// extracting text from PDF documents and image files.
 	DocumentReaderConfig *types.DocumentReaderConfig
 
-	// The Amazon Resource Name of an endpoint that is associated with a custom
-	// entity recognition model. Provide an endpoint if you want to detect entities by
-	// using your own custom model instead of the default model that is used by Amazon
+	// The Amazon Resource Name of an endpoint that is associated with a custom entity
+	// recognition model. Provide an endpoint if you want to detect entities by using
+	// your own custom model instead of the default model that is used by Amazon
 	// Comprehend. If you specify an endpoint, Amazon Comprehend uses the language of
 	// your custom model, and it ignores any language code that you provide in your
 	// request. For information about endpoints, see Managing endpoints (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html)
@@ -75,8 +75,8 @@ type DetectEntitiesInput struct {
 	// input documents must be in the same language.
 	LanguageCode types.LanguageCode
 
-	// A UTF-8 text string. The maximum string size is 100 KB. If you enter text
-	// using this parameter, do not use the Bytes  parameter.
+	// A UTF-8 text string. The maximum string size is 100 KB. If you enter text using
+	// this parameter, do not use the Bytes parameter.
 	Text *string
 
 	noSmithyDocumentSerde
@@ -86,17 +86,17 @@ type DetectEntitiesOutput struct {
 
 	// Information about each block of text in the input document. Blocks are nested.
 	// A page block contains a block for each line of text, which contains a block for
-	// each word. The Block  content for a Word input document does not include a
+	// each word. The Block content for a Word input document does not include a
 	// Geometry field. The Block field is not present in the response for plain-text
 	// inputs.
 	Blocks []types.Block
 
 	// Information about the document, discovered during text extraction. This field
-	// is present in the response only if your request used the Byte  parameter.
+	// is present in the response only if your request used the Byte parameter.
 	DocumentMetadata *types.DocumentMetadata
 
-	// The document type for each page in the input document. This field is present
-	// in the response only if your request used the Byte  parameter.
+	// The document type for each page in the input document. This field is present in
+	// the response only if your request used the Byte parameter.
 	DocumentType []types.DocumentTypeListItem
 
 	// A collection of entities identified in the input text. For each entity, the
@@ -105,12 +105,12 @@ type DetectEntitiesOutput struct {
 	// If your request uses a custom entity recognition model, Amazon Comprehend
 	// detects the entities that the model is trained to recognize. Otherwise, it
 	// detects the default entity types. For a list of default entity types, see
-	// Entities (https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html)
-	// in the Comprehend Developer Guide.
+	// Entities (https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html) in
+	// the Comprehend Developer Guide.
 	Entities []types.Entity
 
-	// Page-level errors that the system detected while processing the input
-	// document. The field is empty if the system encountered no errors.
+	// Page-level errors that the system detected while processing the input document.
+	// The field is empty if the system encountered no errors.
 	Errors []types.ErrorsListItem
 
 	// Metadata pertaining to the operation's result.

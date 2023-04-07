@@ -30,19 +30,19 @@ func (c *Client) DeleteRumMetricsDestination(ctx context.Context, params *Delete
 
 type DeleteRumMetricsDestinationInput struct {
 
-	// The name of the app monitor that is sending metrics to the destination that
-	// you want to delete.
+	// The name of the app monitor that is sending metrics to the destination that you
+	// want to delete.
 	//
 	// This member is required.
 	AppMonitorName *string
 
-	// The type of destination to delete. Valid values are CloudWatch  and Evidently .
+	// The type of destination to delete. Valid values are CloudWatch and Evidently .
 	//
 	// This member is required.
 	Destination types.MetricDestination
 
-	// This parameter is required if Destination  is Evidently . If Destination  is
-	// CloudWatch, do not use this parameter. This parameter specifies the ARN of the
+	// This parameter is required if Destination is Evidently . If Destination is
+	// CloudWatch , do not use this parameter. This parameter specifies the ARN of the
 	// Evidently experiment that corresponds to the destination to delete.
 	DestinationArn *string
 

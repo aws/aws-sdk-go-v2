@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A complex type that contains settings for encryption of your firewall
-// resources.
+// A complex type that contains settings for encryption of your firewall resources.
 func (c *Client) UpdateFirewallEncryptionConfiguration(ctx context.Context, params *UpdateFirewallEncryptionConfigurationInput, optFns ...func(*Options)) (*UpdateFirewallEncryptionConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateFirewallEncryptionConfigurationInput{}
@@ -56,7 +55,7 @@ type UpdateFirewallEncryptionConfigurationInput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
@@ -92,7 +91,7 @@ type UpdateFirewallEncryptionConfigurationOutput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

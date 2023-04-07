@@ -60,9 +60,9 @@ type SendBulkEmailInput struct {
 	// parameter. For example, if the owner of example.com (which has ARN
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
 	// that authorizes you to use feedback@example.com, then you would specify the
-	// FeedbackForwardingEmailAddressIdentityArnto be
+	// FeedbackForwardingEmailAddressIdentityArn to be
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
-	// FeedbackForwardingEmailAddressto be feedback@example.com. For more information
+	// FeedbackForwardingEmailAddress to be feedback@example.com. For more information
 	// about sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
 	// .
 	FeedbackForwardingEmailAddressIdentityArn *string
@@ -77,9 +77,9 @@ type SendBulkEmailInput struct {
 	// example, if the owner of example.com (which has ARN
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
 	// that authorizes you to use sender@example.com, then you would specify the
-	// FromEmailAddressIdentityArnto be
+	// FromEmailAddressIdentityArn to be
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
-	// FromEmailAddressto be sender@example.com. For more information about sending
+	// FromEmailAddress to be sender@example.com. For more information about sending
 	// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
 	// .
 	FromEmailAddressIdentityArn *string

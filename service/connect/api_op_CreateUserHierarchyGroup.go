@@ -39,8 +39,8 @@ type CreateUserHierarchyGroupInput struct {
 	// This member is required.
 	Name *string
 
-	// The identifier for the parent hierarchy group. The user hierarchy is created
-	// at level one if the parent group ID is null.
+	// The identifier for the parent hierarchy group. The user hierarchy is created at
+	// level one if the parent group ID is null.
 	ParentGroupId *string
 
 	// The tags used to organize, track, or control access for this resource. For

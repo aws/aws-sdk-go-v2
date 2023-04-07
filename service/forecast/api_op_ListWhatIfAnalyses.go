@@ -35,16 +35,19 @@ func (c *Client) ListWhatIfAnalyses(ctx context.Context, params *ListWhatIfAnaly
 type ListWhatIfAnalysesInput struct {
 
 	// An array of filters. For each filter, you provide a condition and a match
-	// statement. The condition is either IS  or IS_NOT, which specifies whether to
+	// statement. The condition is either IS or IS_NOT , which specifies whether to
 	// include or exclude the what-if analysis jobs that match the statement from the
 	// list, respectively. The match statement consists of a key and a value. Filter
 	// properties
-	//     - Condition - The condition to apply. Valid values are IS and IS_NOT . To include the what-if analysis jobs that match the statement, specify IS . To exclude matching what-if analysis jobs, specify IS_NOT .
-	//     - Key - The name of the parameter to filter on. Valid values are WhatIfAnalysisArn and Status .
-	//     - Value - The value to match.
-	// For example, to list all jobs that export a
-	// forecast named electricityWhatIf, specify the following filter: "Filters": [ {
-	// "Condition": "IS", "Key": "WhatIfAnalysisArn", "Value":
+	//   - Condition - The condition to apply. Valid values are IS and IS_NOT . To
+	//   include the what-if analysis jobs that match the statement, specify IS . To
+	//   exclude matching what-if analysis jobs, specify IS_NOT .
+	//   - Key - The name of the parameter to filter on. Valid values are
+	//   WhatIfAnalysisArn and Status .
+	//   - Value - The value to match.
+	// For example, to list all jobs that export a forecast named electricityWhatIf,
+	// specify the following filter: "Filters": [ { "Condition": "IS", "Key":
+	// "WhatIfAnalysisArn", "Value":
 	// "arn:aws:forecast:us-west-2::forecast/electricityWhatIf" } ]
 	Filters []types.Filter
 
@@ -52,7 +55,7 @@ type ListWhatIfAnalysesInput struct {
 	MaxResults *int32
 
 	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
+	// NextToken . To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
 
@@ -61,11 +64,11 @@ type ListWhatIfAnalysesInput struct {
 
 type ListWhatIfAnalysesOutput struct {
 
-	// If the response is truncated, Forecast returns this token. To retrieve the
-	// next set of results, use the token in the next request.
+	// If the response is truncated, Forecast returns this token. To retrieve the next
+	// set of results, use the token in the next request.
 	NextToken *string
 
-	// An array of WhatIfAnalysisSummary  objects that describe the matched analyses.
+	// An array of WhatIfAnalysisSummary objects that describe the matched analyses.
 	WhatIfAnalyses []types.WhatIfAnalysisSummary
 
 	// Metadata pertaining to the operation's result.
@@ -151,8 +154,8 @@ type ListWhatIfAnalysesPaginatorOptions struct {
 	// The number of items to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

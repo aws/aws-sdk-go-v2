@@ -29,7 +29,7 @@ func (c *Client) ModifyDBProxy(ctx context.Context, params *ModifyDBProxyInput, 
 
 type ModifyDBProxyInput struct {
 
-	// The identifier for the DBProxy  to modify.
+	// The identifier for the DBProxy to modify.
 	//
 	// This member is required.
 	DBProxyName *string
@@ -46,12 +46,12 @@ type ModifyDBProxyInput struct {
 	// in the logs.
 	DebugLogging *bool
 
-	// The number of seconds that a connection to the proxy can be inactive before
-	// the proxy disconnects it. You can set this value higher or lower than the
-	// connection timeout limit for the associated database.
+	// The number of seconds that a connection to the proxy can be inactive before the
+	// proxy disconnects it. You can set this value higher or lower than the connection
+	// timeout limit for the associated database.
 	IdleClientTimeout *int32
 
-	// The new identifier for the DBProxy. An identifier must begin with a letter and
+	// The new identifier for the DBProxy . An identifier must begin with a letter and
 	// must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen
 	// or contain two consecutive hyphens.
 	NewDBProxyName *string
@@ -73,7 +73,7 @@ type ModifyDBProxyInput struct {
 
 type ModifyDBProxyOutput struct {
 
-	// The DBProxy  object representing the new settings for the proxy.
+	// The DBProxy object representing the new settings for the proxy.
 	DBProxy *types.DBProxy
 
 	// Metadata pertaining to the operation's result.

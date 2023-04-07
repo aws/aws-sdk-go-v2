@@ -33,20 +33,20 @@ type ListResolverRulesInput struct {
 
 	// An optional specification to return a subset of Resolver rules, such as all
 	// Resolver rules that are associated with the same Resolver endpoint. If you
-	// submit a second or subsequent ListResolverRules  request and specify the
-	// NextToken parameter, you must use the same values for Filters, if any, as in
+	// submit a second or subsequent ListResolverRules request and specify the
+	// NextToken parameter, you must use the same values for Filters , if any, as in
 	// the previous request.
 	Filters []types.Filter
 
-	// The maximum number of Resolver rules that you want to return in the response
-	// to a ListResolverRules  request. If you don't specify a value for MaxResults,
+	// The maximum number of Resolver rules that you want to return in the response to
+	// a ListResolverRules request. If you don't specify a value for MaxResults ,
 	// Resolver returns up to 100 Resolver rules.
 	MaxResults *int32
 
-	// For the first ListResolverRules request, omit this value. If you have more
-	// than MaxResults  Resolver rules, you can submit another ListResolverRules
-	// request to get the next group of Resolver rules. In the next request, specify
-	// the value of NextToken  from the previous response.
+	// For the first ListResolverRules request, omit this value. If you have more than
+	// MaxResults Resolver rules, you can submit another ListResolverRules request to
+	// get the next group of Resolver rules. In the next request, specify the value of
+	// NextToken from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,12 +54,12 @@ type ListResolverRulesInput struct {
 
 type ListResolverRulesOutput struct {
 
-	// The value that you specified for MaxResults  in the request.
+	// The value that you specified for MaxResults in the request.
 	MaxResults *int32
 
 	// If more than MaxResults Resolver rules match the specified criteria, you can
 	// submit another ListResolverRules request to get the next group of results. In
-	// the next request, specify the value of NextToken  from the previous response.
+	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
 	// The Resolver rules that were created using the current Amazon Web Services
@@ -140,16 +140,15 @@ type ListResolverRulesAPIClient interface {
 
 var _ ListResolverRulesAPIClient = (*Client)(nil)
 
-// ListResolverRulesPaginatorOptions is the paginator options for
-// ListResolverRules
+// ListResolverRulesPaginatorOptions is the paginator options for ListResolverRules
 type ListResolverRulesPaginatorOptions struct {
-	// The maximum number of Resolver rules that you want to return in the response
-	// to a ListResolverRules  request. If you don't specify a value for MaxResults,
+	// The maximum number of Resolver rules that you want to return in the response to
+	// a ListResolverRules request. If you don't specify a value for MaxResults ,
 	// Resolver returns up to 100 Resolver rules.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

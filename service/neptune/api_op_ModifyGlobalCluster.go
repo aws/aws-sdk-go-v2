@@ -31,20 +31,20 @@ func (c *Client) ModifyGlobalCluster(ctx context.Context, params *ModifyGlobalCl
 
 type ModifyGlobalClusterInput struct {
 
-	// The DB cluster identifier for the global cluster being modified. This
-	// parameter is not case-sensitive. Constraints: Must match the identifier of an
-	// existing global database cluster.
+	// The DB cluster identifier for the global cluster being modified. This parameter
+	// is not case-sensitive. Constraints: Must match the identifier of an existing
+	// global database cluster.
 	//
 	// This member is required.
 	GlobalClusterIdentifier *string
 
-	// A value that indicates whether major version upgrades are allowed.
-	// Constraints: You must allow major version upgrades if you specify a value for
-	// the EngineVersion parameter that is a different major version than the DB
-	// cluster's current version. If you upgrade the major version of a global
-	// database, the cluster and DB instance parameter groups are set to the default
-	// parameter groups for the new version, so you will need to apply any custom
-	// parameter groups after completing the upgrade.
+	// A value that indicates whether major version upgrades are allowed. Constraints:
+	// You must allow major version upgrades if you specify a value for the
+	// EngineVersion parameter that is a different major version than the DB cluster's
+	// current version. If you upgrade the major version of a global database, the
+	// cluster and DB instance parameter groups are set to the default parameter groups
+	// for the new version, so you will need to apply any custom parameter groups after
+	// completing the upgrade.
 	AllowMajorVersionUpgrade *bool
 
 	// Indicates whether the global database has deletion protection enabled. The
@@ -57,11 +57,11 @@ type ModifyGlobalClusterInput struct {
 	// the available Neptune engine versions, use the following command:
 	EngineVersion *string
 
-	// A new cluster identifier to assign to the global database. This value is
-	// stored as a lowercase string. Constraints:
-	//     - Must contain from 1 to 63 letters, numbers, or hyphens.
-	//     - The first character must be a letter.
-	//     - Can't end with a hyphen or contain two consecutive hyphens
+	// A new cluster identifier to assign to the global database. This value is stored
+	// as a lowercase string. Constraints:
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens
 	// Example: my-cluster2
 	NewGlobalClusterIdentifier *string
 

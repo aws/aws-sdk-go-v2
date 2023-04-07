@@ -32,9 +32,9 @@ const (
 	CompressionSnappy Compression = "SNAPPY"
 )
 
-// Values returns all known values for Compression. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Compression. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Compression) Values() []Compression {
 	return []Compression{
 		"OFF",
@@ -131,8 +131,8 @@ const (
 	NetworkInterfaceTypeObdInterface NetworkInterfaceType = "OBD_INTERFACE"
 )
 
-// Values returns all known values for NetworkInterfaceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for NetworkInterfaceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 	return []NetworkInterfaceType{
@@ -305,9 +305,9 @@ const (
 	TriggerModeRisingEdge TriggerMode = "RISING_EDGE"
 )
 
-// Values returns all known values for TriggerMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TriggerMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TriggerMode) Values() []TriggerMode {
 	return []TriggerMode{
 		"ALWAYS",
@@ -325,8 +325,8 @@ const (
 	UpdateCampaignActionUpdate  UpdateCampaignAction = "UPDATE"
 )
 
-// Values returns all known values for UpdateCampaignAction. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for UpdateCampaignAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateCampaignAction) Values() []UpdateCampaignAction {
 	return []UpdateCampaignAction{

@@ -27,7 +27,7 @@ func (c *Client) ReadPreset(ctx context.Context, params *ReadPresetInput, optFns
 	return out, nil
 }
 
-// The ReadPresetRequest  structure.
+// The ReadPresetRequest structure.
 type ReadPresetInput struct {
 
 	// The identifier of the preset for which you want to get detailed information.
@@ -38,7 +38,7 @@ type ReadPresetInput struct {
 	noSmithyDocumentSerde
 }
 
-// The ReadPresetResponse  structure.
+// The ReadPresetResponse structure.
 type ReadPresetOutput struct {
 
 	// A section of the response body that provides information about the preset.

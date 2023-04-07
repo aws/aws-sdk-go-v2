@@ -30,15 +30,15 @@ func (c *Client) ListFeatureGroups(ctx context.Context, params *ListFeatureGroup
 
 type ListFeatureGroupsInput struct {
 
-	// Use this parameter to search for FeatureGroupss created after a specific date
+	// Use this parameter to search for FeatureGroups s created after a specific date
 	// and time.
 	CreationTimeAfter *time.Time
 
-	// Use this parameter to search for FeatureGroupss created before a specific date
+	// Use this parameter to search for FeatureGroups s created before a specific date
 	// and time.
 	CreationTimeBefore *time.Time
 
-	// A FeatureGroup  status. Filters by FeatureGroup  status.
+	// A FeatureGroup status. Filters by FeatureGroup status.
 	FeatureGroupStatusEquals types.FeatureGroupStatus
 
 	// The maximum number of results returned by ListFeatureGroups .
@@ -48,10 +48,10 @@ type ListFeatureGroupsInput struct {
 	// FeatureGroup s by name.
 	NameContains *string
 
-	// A token to resume pagination of ListFeatureGroups  results.
+	// A token to resume pagination of ListFeatureGroups results.
 	NextToken *string
 
-	// An OfflineStore  status. Filters by OfflineStore  status.
+	// An OfflineStore status. Filters by OfflineStore status.
 	OfflineStoreStatusEquals types.OfflineStoreStatusValue
 
 	// The value on which the feature group list is sorted.
@@ -70,7 +70,7 @@ type ListFeatureGroupsOutput struct {
 	// This member is required.
 	FeatureGroupSummaries []types.FeatureGroupSummary
 
-	// A token to resume pagination of ListFeatureGroups  results.
+	// A token to resume pagination of ListFeatureGroups results.
 	//
 	// This member is required.
 	NextToken *string

@@ -53,9 +53,9 @@ type AssociateOriginationIdentityInput struct {
 	// This member is required.
 	PoolId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. If you don't specify a client token, a randomly generated token
-	// is used for the request to ensure idempotency.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don't specify a client token, a randomly generated token is
+	// used for the request to ensure idempotency.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -63,8 +63,7 @@ type AssociateOriginationIdentityInput struct {
 
 type AssociateOriginationIdentityOutput struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
 	IsoCountryCode *string
 
 	// The PhoneNumberId or SenderId of the origination identity.

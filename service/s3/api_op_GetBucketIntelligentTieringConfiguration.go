@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the S3 Intelligent-Tiering configuration from the specified bucket. The
-// S3 Intelligent-Tiering storage class is designed to optimize storage costs by
+// Gets the S3 Intelligent-Tiering configuration from the specified bucket. The S3
+// Intelligent-Tiering storage class is designed to optimize storage costs by
 // automatically moving data to the most cost-effective storage access tier,
 // without performance impact or operational overhead. S3 Intelligent-Tiering
 // delivers automatic cost savings in three low latency and high throughput access
@@ -26,7 +26,7 @@ import (
 // they are always charged at the Frequent Access tier rates in the S3
 // Intelligent-Tiering storage class. For more information, see Storage class for
 // automatically optimizing frequently and infrequently accessed objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access)
-// . Operations related to GetBucketIntelligentTieringConfiguration  include:
+// . Operations related to GetBucketIntelligentTieringConfiguration include:
 //   - DeleteBucketIntelligentTieringConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html)
 //   - PutBucketIntelligentTieringConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html)
 //   - ListBucketIntelligentTieringConfigurations (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html)

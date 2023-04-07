@@ -80,9 +80,9 @@ const (
 	ActionOwnerCustom     ActionOwner = "Custom"
 )
 
-// Values returns all known values for ActionOwner. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ActionOwner. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ActionOwner) Values() []ActionOwner {
 	return []ActionOwner{
 		"AWS",
@@ -116,8 +116,8 @@ const (
 	ArtifactLocationTypeS3 ArtifactLocationType = "S3"
 )
 
-// Values returns all known values for ArtifactLocationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ArtifactLocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactLocationType) Values() []ArtifactLocationType {
 	return []ArtifactLocationType{
@@ -148,9 +148,9 @@ const (
 	BlockerTypeSchedule BlockerType = "Schedule"
 )
 
-// Values returns all known values for BlockerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BlockerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BlockerType) Values() []BlockerType {
 	return []BlockerType{
 		"Schedule",
@@ -203,9 +203,9 @@ const (
 	FailureTypeSystemUnavailable   FailureType = "SystemUnavailable"
 )
 
-// Values returns all known values for FailureType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FailureType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FailureType) Values() []FailureType {
 	return []FailureType{
 		"JobFailed",
@@ -258,9 +258,9 @@ const (
 	PipelineExecutionStatusFailed     PipelineExecutionStatus = "Failed"
 )
 
-// Values returns all known values for PipelineExecutionStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PipelineExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PipelineExecutionStatus) Values() []PipelineExecutionStatus {
 	return []PipelineExecutionStatus{
 		"Cancelled",
@@ -285,8 +285,8 @@ const (
 	StageExecutionStatusSucceeded  StageExecutionStatus = "Succeeded"
 )
 
-// Values returns all known values for StageExecutionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StageExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StageExecutionStatus) Values() []StageExecutionStatus {
 	return []StageExecutionStatus{
@@ -345,9 +345,9 @@ const (
 	TriggerTypePutActionRevision      TriggerType = "PutActionRevision"
 )
 
-// Values returns all known values for TriggerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TriggerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TriggerType) Values() []TriggerType {
 	return []TriggerType{
 		"CreatePipeline",

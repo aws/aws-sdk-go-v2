@@ -54,8 +54,8 @@ type DescribeUpdateActionsInput struct {
 	// The status of the service update
 	ServiceUpdateStatus []types.ServiceUpdateStatus
 
-	// The range of time specified to search for service updates that are in
-	// available status
+	// The range of time specified to search for service updates that are in available
+	// status
 	ServiceUpdateTimeRange *types.TimeRangeFilter
 
 	// Dictates whether to include node level update status in the response
@@ -158,8 +158,8 @@ type DescribeUpdateActionsPaginatorOptions struct {
 	// The maximum number of records to include in the response
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

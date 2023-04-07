@@ -44,9 +44,9 @@ type ListModelPackageGroupsInput struct {
 	// name contains the specified string.
 	NameContains *string
 
-	// If the result of the previous ListModelPackageGroups request was truncated,
-	// the response includes a NextToken. To retrieve the next set of model groups,
-	// use the token in the next request.
+	// If the result of the previous ListModelPackageGroups request was truncated, the
+	// response includes a NextToken . To retrieve the next set of model groups, use
+	// the token in the next request.
 	NextToken *string
 
 	// The field to sort results by. The default is CreationTime .
@@ -149,8 +149,8 @@ type ListModelPackageGroupsPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -163,8 +163,7 @@ type ListModelPackageGroupsPaginator struct {
 	firstPage bool
 }
 
-// NewListModelPackageGroupsPaginator returns a new
-// ListModelPackageGroupsPaginator
+// NewListModelPackageGroupsPaginator returns a new ListModelPackageGroupsPaginator
 func NewListModelPackageGroupsPaginator(client ListModelPackageGroupsAPIClient, params *ListModelPackageGroupsInput, optFns ...func(*ListModelPackageGroupsPaginatorOptions)) *ListModelPackageGroupsPaginator {
 	if params == nil {
 		params = &ListModelPackageGroupsInput{}

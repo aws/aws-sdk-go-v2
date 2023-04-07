@@ -45,8 +45,8 @@ type CreateDataRepositoryTaskInput struct {
 	// This member is required.
 	FileSystemId *string
 
-	// Defines whether or not Amazon FSx provides a CompletionReport once the task
-	// has completed. A CompletionReport provides a detailed report on the files that
+	// Defines whether or not Amazon FSx provides a CompletionReport once the task has
+	// completed. A CompletionReport provides a detailed report on the files that
 	// Amazon FSx processed that meet the criteria specified by the Scope parameter.
 	// For more information, see Working with Task Completion Reports (https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html)
 	// .
@@ -68,13 +68,21 @@ type CreateDataRepositoryTaskInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// A list of paths for the data repository task to use when the task is
-	// processed. If a path that you provide isn't valid, the task fails.
-	//     - For export tasks, the list contains paths on the Amazon FSx file system from which the files are exported to the Amazon S3 bucket. The default path is the file system root directory. The paths you provide need to be relative to the mount point of the file system. If the mount point is /mnt/fsx and /mnt/fsx/path1 is a directory or file on the file system you want to export, then the path to provide is path1 .
-	//     - For import tasks, the list contains paths in the Amazon S3 bucket from which POSIX metadata changes are imported to the Amazon FSx file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix (where myPrefix is optional).
+	// A list of paths for the data repository task to use when the task is processed.
+	// If a path that you provide isn't valid, the task fails.
+	//   - For export tasks, the list contains paths on the Amazon FSx file system
+	//   from which the files are exported to the Amazon S3 bucket. The default path is
+	//   the file system root directory. The paths you provide need to be relative to the
+	//   mount point of the file system. If the mount point is /mnt/fsx and
+	//   /mnt/fsx/path1 is a directory or file on the file system you want to export,
+	//   then the path to provide is path1 .
+	//   - For import tasks, the list contains paths in the Amazon S3 bucket from
+	//   which POSIX metadata changes are imported to the Amazon FSx file system. The
+	//   path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix (where
+	//   myPrefix is optional).
 	Paths []string
 
-	// A list of Tag  values, with a maximum of 50 elements.
+	// A list of Tag values, with a maximum of 50 elements.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a subset of information about the sensitivity inspection template
-// for an account.
+// Retrieves a subset of information about the sensitivity inspection template for
+// an account.
 func (c *Client) ListSensitivityInspectionTemplates(ctx context.Context, params *ListSensitivityInspectionTemplatesInput, optFns ...func(*Options)) (*ListSensitivityInspectionTemplatesOutput, error) {
 	if params == nil {
 		params = &ListSensitivityInspectionTemplatesInput{}
@@ -125,14 +125,14 @@ type ListSensitivityInspectionTemplatesAPIClient interface {
 
 var _ ListSensitivityInspectionTemplatesAPIClient = (*Client)(nil)
 
-// ListSensitivityInspectionTemplatesPaginatorOptions is the paginator options
-// for ListSensitivityInspectionTemplates
+// ListSensitivityInspectionTemplatesPaginatorOptions is the paginator options for
+// ListSensitivityInspectionTemplates
 type ListSensitivityInspectionTemplatesPaginatorOptions struct {
 	// The maximum number of items to include in each page of a paginated response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

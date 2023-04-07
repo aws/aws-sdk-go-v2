@@ -16,14 +16,14 @@ import (
 // machine (VM) and not the host VM. If you want to shut down the VM, it is
 // recommended that you first shut down the gateway component in the VM to avoid
 // unpredictable conditions. After the gateway is shutdown, you cannot call any
-// other API except StartGateway , DescribeGatewayInformation , and ListGateways.
-// For more information, see ActivateGateway. Your applications cannot read from
+// other API except StartGateway , DescribeGatewayInformation , and ListGateways .
+// For more information, see ActivateGateway . Your applications cannot read from
 // or write to the gateway's storage volumes, and there are no snapshots taken.
 // When you make a shutdown request, you will get a 200 OK success response
 // immediately. However, it might take some time for the gateway to shut down. You
 // can call the DescribeGatewayInformation API to check the status. For more
-// information, see ActivateGateway. If do not intend to use the gateway again,
-// you must delete the gateway (using DeleteGateway) to no longer pay software
+// information, see ActivateGateway . If do not intend to use the gateway again,
+// you must delete the gateway (using DeleteGateway ) to no longer pay software
 // charges associated with the gateway.
 func (c *Client) ShutdownGateway(ctx context.Context, params *ShutdownGatewayInput, optFns ...func(*Options)) (*ShutdownGatewayOutput, error) {
 	if params == nil {
@@ -53,8 +53,8 @@ type ShutdownGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
-// A JSON object containing the Amazon Resource Name (ARN) of the gateway that
-// was shut down.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
+// shut down.
 type ShutdownGatewayOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

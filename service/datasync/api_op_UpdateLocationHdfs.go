@@ -56,8 +56,7 @@ type UpdateLocationHdfsInput struct {
 	// base64-encoded text.
 	KerberosKrb5Conf []byte
 
-	// The Kerberos principal with access to the files and folders on the HDFS
-	// cluster.
+	// The Kerberos principal with access to the files and folders on the HDFS cluster.
 	KerberosPrincipal *string
 
 	// The URI of the HDFS cluster's Key Management Server (KMS).
@@ -81,8 +80,8 @@ type UpdateLocationHdfsInput struct {
 	// The user name used to identify the client on the host operating system.
 	SimpleUser *string
 
-	// A subdirectory in the HDFS cluster. This subdirectory is used to read data
-	// from or write data to the HDFS cluster.
+	// A subdirectory in the HDFS cluster. This subdirectory is used to read data from
+	// or write data to the HDFS cluster.
 	Subdirectory *string
 
 	noSmithyDocumentSerde

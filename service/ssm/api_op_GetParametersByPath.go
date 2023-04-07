@@ -16,10 +16,10 @@ import (
 // Request results are returned on a best-effort basis. If you specify MaxResults
 // in the request, the response includes information up to the limit specified. The
 // number of items returned, however, can be between zero and the value of
-// MaxResults. If the service reaches an internal limit while processing the
+// MaxResults . If the service reaches an internal limit while processing the
 // results, it stops the operation and returns the matching values up to that point
-// and a NextToken . You can specify the NextToken in a subsequent call to get
-// the next set of results.
+// and a NextToken . You can specify the NextToken in a subsequent call to get the
+// next set of results.
 func (c *Client) GetParametersByPath(ctx context.Context, params *GetParametersByPathInput, optFns ...func(*Options)) (*GetParametersByPathOutput, error) {
 	if params == nil {
 		params = &GetParametersByPathInput{}
@@ -61,9 +61,9 @@ type GetParametersByPathInput struct {
 
 	// Retrieve all parameters within a hierarchy. If a user has access to a path,
 	// then the user can access all levels of that path. For example, if a user has
-	// permission to access path /a , then the user can also access /a/b. Even if a
-	// user has explicitly been denied access in IAM for parameter /a/b, they can
-	// still call the GetParametersByPath API operation recursively for /a  and view
+	// permission to access path /a , then the user can also access /a/b . Even if a
+	// user has explicitly been denied access in IAM for parameter /a/b , they can
+	// still call the GetParametersByPath API operation recursively for /a and view
 	// /a/b .
 	Recursive *bool
 
@@ -166,8 +166,8 @@ type GetParametersByPathPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

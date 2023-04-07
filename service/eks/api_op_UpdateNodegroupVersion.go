@@ -60,13 +60,13 @@ type UpdateNodegroupVersionInput struct {
 	// This member is required.
 	NodegroupName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
-	// Force the update if the existing node group's pods are unable to be drained
-	// due to a pod disruption budget issue. If an update fails because pods could not
-	// be drained, you can force the update after it fails to terminate the old node
+	// Force the update if the existing node group's pods are unable to be drained due
+	// to a pod disruption budget issue. If an update fails because pods could not be
+	// drained, you can force the update after it fails to terminate the old node
 	// whether or not any pods are running on the node.
 	Force bool
 
@@ -77,13 +77,13 @@ type UpdateNodegroupVersionInput struct {
 
 	// The AMI version of the Amazon EKS optimized AMI to use for the update. By
 	// default, the latest available AMI version for the node group's Kubernetes
-	// version is used. For information about Linux versions, see Amazon EKS
-	// optimized Amazon Linux AMI versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
+	// version is used. For information about Linux versions, see Amazon EKS optimized
+	// Amazon Linux AMI versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
 	// in the Amazon EKS User Guide. Amazon EKS managed node groups support the
 	// November 2022 and later releases of the Windows AMIs. For information about
 	// Windows versions, see Amazon EKS optimized Windows AMI versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html)
-	// in the Amazon EKS User Guide. If you specify launchTemplate, and your launch
-	// template uses a custom AMI, then don't specify releaseVersion, or the node
+	// in the Amazon EKS User Guide. If you specify launchTemplate , and your launch
+	// template uses a custom AMI, then don't specify releaseVersion , or the node
 	// group update will fail. For more information about using launch templates with
 	// Amazon EKS, see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
 	// in the Amazon EKS User Guide.
@@ -92,10 +92,10 @@ type UpdateNodegroupVersionInput struct {
 	// The Kubernetes version to update to. If no version is specified, then the
 	// Kubernetes version of the node group does not change. You can specify the
 	// Kubernetes version of the cluster to update the node group to the latest AMI
-	// version of the cluster's Kubernetes version. If you specify launchTemplate,
-	// and your launch template uses a custom AMI, then don't specify version, or the
-	// node group update will fail. For more information about using launch templates
-	// with Amazon EKS, see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
+	// version of the cluster's Kubernetes version. If you specify launchTemplate , and
+	// your launch template uses a custom AMI, then don't specify version , or the node
+	// group update will fail. For more information about using launch templates with
+	// Amazon EKS, see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
 	// in the Amazon EKS User Guide.
 	Version *string
 

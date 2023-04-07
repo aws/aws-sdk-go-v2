@@ -89,9 +89,11 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 
 // One of the dependencies, such as AWS Lambda or Amazon Polly, threw an
 // exception. For example,
-//   - If Amazon Lex does not have sufficient permissions to call a Lambda function.
+//   - If Amazon Lex does not have sufficient permissions to call a Lambda
+//     function.
 //   - If a Lambda function takes longer than 30 seconds to execute.
-//   - If a fulfillment Lambda function returns a Delegate dialog action without removing any slot values.
+//   - If a fulfillment Lambda function returns a Delegate dialog action without
+//     removing any slot values.
 type DependencyFailedException struct {
 	Message *string
 
@@ -276,7 +278,7 @@ func (e *RequestTimeoutException) ErrorCode() string {
 }
 func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Content-Type header ( PostContent  API) has an invalid value.
+// The Content-Type header ( PostContent API) has an invalid value.
 type UnsupportedMediaTypeException struct {
 	Message *string
 

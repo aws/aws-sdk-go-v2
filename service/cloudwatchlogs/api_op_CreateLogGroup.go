@@ -13,9 +13,12 @@ import (
 // Creates a log group with the specified name. You can create up to 20,000 log
 // groups per account. You must use the following guidelines when naming a log
 // group:
-//   - Log group names must be unique within a Region for an Amazon Web Services account.
+//   - Log group names must be unique within a Region for an Amazon Web Services
+//     account.
 //   - Log group names can be between 1 and 512 characters long.
-//   - Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), '.' (period), and '#' (number sign)
+//   - Log group names consist of the following characters: a-z, A-Z, 0-9, '_'
+//     (underscore), '-' (hyphen), '/' (forward slash), '.' (period), and '#' (number
+//     sign)
 //
 // When you create a log group, by default the log events in the log group do not
 // expire. To set a retention policy so that events expire and are deleted after a
@@ -59,7 +62,7 @@ type CreateLogGroupInput struct {
 	// The key-value pairs to use for the tags. You can grant users access to certain
 	// log groups while preventing them from accessing other log groups. To do so, tag
 	// your groups and use IAM policies that refer to those tags. To assign tags when
-	// you create a log group, you must have either the logs:TagResource  or
+	// you create a log group, you must have either the logs:TagResource or
 	// logs:TagLogGroup permission. For more information about tagging, see Tagging
 	// Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 	// . For more information about using tags to control access, see Controlling

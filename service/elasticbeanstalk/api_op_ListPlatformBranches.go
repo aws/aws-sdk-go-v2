@@ -34,24 +34,23 @@ func (c *Client) ListPlatformBranches(ctx context.Context, params *ListPlatformB
 
 type ListPlatformBranchesInput struct {
 
-	// Criteria for restricting the resulting list of platform branches. The filter
-	// is evaluated as a logical conjunction (AND) of the separate SearchFilter
-	// terms. The following list shows valid attribute values for each of the
-	// SearchFilter terms. Most operators take a single value. The in  and not_in
-	// operators can take multiple values.
-	//     - Attribute = BranchName :
-	//         - Operator : = | != | begins_with | ends_with | contains | in | not_in
-	//     - Attribute = LifecycleState :
-	//         - Operator : = | != | in | not_in
-	//         - Values : beta | supported | deprecated | retired
-	//     - Attribute = PlatformName :
-	//         - Operator : = | != | begins_with | ends_with | contains | in | not_in
-	//     - Attribute = TierType :
-	//         - Operator : = | !=
-	//         - Values : WebServer/Standard | Worker/SQS/HTTP
-	// Array size: limited to
-	// 10 SearchFilter  objects. Within each SearchFilter  item, the Values array is
-	// limited to 10 items.
+	// Criteria for restricting the resulting list of platform branches. The filter is
+	// evaluated as a logical conjunction (AND) of the separate SearchFilter terms.
+	// The following list shows valid attribute values for each of the SearchFilter
+	// terms. Most operators take a single value. The in and not_in operators can take
+	// multiple values.
+	//   - Attribute = BranchName :
+	//   - Operator : = | != | begins_with | ends_with | contains | in | not_in
+	//   - Attribute = LifecycleState :
+	//   - Operator : = | != | in | not_in
+	//   - Values : beta | supported | deprecated | retired
+	//   - Attribute = PlatformName :
+	//   - Operator : = | != | begins_with | ends_with | contains | in | not_in
+	//   - Attribute = TierType :
+	//   - Operator : = | !=
+	//   - Values : WebServer/Standard | Worker/SQS/HTTP
+	// Array size: limited to 10 SearchFilter objects. Within each SearchFilter item,
+	// the Values array is limited to 10 items.
 	Filters []types.SearchFilter
 
 	// The maximum number of platform branch values returned in one call.
@@ -68,7 +67,7 @@ type ListPlatformBranchesInput struct {
 
 type ListPlatformBranchesOutput struct {
 
-	// In a paginated request, if this value isn't null, it's the token that you can
+	// In a paginated request, if this value isn't null , it's the token that you can
 	// pass in a subsequent request to get the next response page.
 	NextToken *string
 
@@ -155,8 +154,8 @@ type ListPlatformBranchesPaginatorOptions struct {
 	// The maximum number of platform branch values returned in one call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

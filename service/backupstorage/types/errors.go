@@ -62,8 +62,8 @@ func (e *DataAlreadyExistsException) ErrorCode() string {
 }
 func (e *DataAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Non-retryable exception, indicates client error (wrong argument passed to
-// API). See exception message for details.
+// Non-retryable exception, indicates client error (wrong argument passed to API).
+// See exception message for details.
 type IllegalArgumentException struct {
 	Message *string
 
@@ -116,8 +116,8 @@ func (e *KMSInvalidKeyUsageException) ErrorCode() string {
 }
 func (e *KMSInvalidKeyUsageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Retryalble exception. Indicated issues while reading an input stream due to
-// the networking issues or connection drop on the client side.
+// Retryalble exception. Indicated issues while reading an input stream due to the
+// networking issues or connection drop on the client side.
 type NotReadableInputStreamException struct {
 	Message *string
 
@@ -170,8 +170,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Retryable exception. In general indicates internal failure that can be fixed
-// by retry.
+// Retryable exception. In general indicates internal failure that can be fixed by
+// retry.
 type RetryableException struct {
 	Message *string
 

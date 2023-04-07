@@ -39,9 +39,9 @@ type ListWorkteamsInput struct {
 	// name contains the specified string.
 	NameContains *string
 
-	// If the result of the previous ListWorkteams request was truncated, the
-	// response includes a NextToken. To retrieve the next set of labeling jobs, use
-	// the token in the next request.
+	// If the result of the previous ListWorkteams request was truncated, the response
+	// includes a NextToken . To retrieve the next set of labeling jobs, use the token
+	// in the next request.
 	NextToken *string
 
 	// The field to sort results by. The default is CreationTime .
@@ -55,7 +55,7 @@ type ListWorkteamsInput struct {
 
 type ListWorkteamsOutput struct {
 
-	// An array of Workteam  objects, each describing a work team.
+	// An array of Workteam objects, each describing a work team.
 	//
 	// This member is required.
 	Workteams []types.Workteam
@@ -142,8 +142,8 @@ type ListWorkteamsPaginatorOptions struct {
 	// The maximum number of work teams to return in each page of the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

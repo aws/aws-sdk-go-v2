@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays information about the certificate registered for secure LDAP or
-// client certificate authentication.
+// Displays information about the certificate registered for secure LDAP or client
+// certificate authentication.
 func (c *Client) DescribeCertificate(ctx context.Context, params *DescribeCertificateInput, optFns ...func(*Options)) (*DescribeCertificateOutput, error) {
 	if params == nil {
 		params = &DescribeCertificateInput{}

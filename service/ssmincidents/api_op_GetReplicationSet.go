@@ -409,8 +409,8 @@ func (w *WaitForReplicationSetDeletedWaiter) Wait(ctx context.Context, params *G
 	return err
 }
 
-// WaitForOutput calls the waiter function for WaitForReplicationSetDeleted
-// waiter and returns the output of the successful operation. The maxWaitDur is the
+// WaitForOutput calls the waiter function for WaitForReplicationSetDeleted waiter
+// and returns the output of the successful operation. The maxWaitDur is the
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *WaitForReplicationSetDeletedWaiter) WaitForOutput(ctx context.Context, params *GetReplicationSetInput, maxWaitDur time.Duration, optFns ...func(*WaitForReplicationSetDeletedWaiterOptions)) (*GetReplicationSetOutput, error) {

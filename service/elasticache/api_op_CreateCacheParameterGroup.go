@@ -18,8 +18,10 @@ import (
 // of the default parameter group for the CacheParameterGroupFamily. To customize
 // the newly created CacheParameterGroup you can change the values of specific
 // parameters. For more information, see:
-//   - ModifyCacheParameterGroup (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html) in the ElastiCache API Reference.
-//   - Parameters and Parameter Groups (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html) in the ElastiCache User Guide.
+//   - ModifyCacheParameterGroup (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html)
+//     in the ElastiCache API Reference.
+//   - Parameters and Parameter Groups (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html)
+//     in the ElastiCache User Guide.
 func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCacheParameterGroupInput, optFns ...func(*Options)) (*CreateCacheParameterGroupOutput, error) {
 	if params == nil {
 		params = &CreateCacheParameterGroupInput{}
@@ -35,13 +37,12 @@ func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCa
 	return out, nil
 }
 
-// Represents the input of a CreateCacheParameterGroup  operation.
+// Represents the input of a CreateCacheParameterGroup operation.
 type CreateCacheParameterGroupInput struct {
 
-	// The name of the cache parameter group family that the cache parameter group
-	// can be used with. Valid values are: memcached1.4  | memcached1.5  |
-	// memcached1.6 | redis2.6  | redis2.8  | redis3.2  | redis4.0  | redis5.0  |
-	// redis6.x
+	// The name of the cache parameter group family that the cache parameter group can
+	// be used with. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 |
+	// redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x
 	//
 	// This member is required.
 	CacheParameterGroupFamily *string
@@ -65,7 +66,7 @@ type CreateCacheParameterGroupInput struct {
 
 type CreateCacheParameterGroupOutput struct {
 
-	// Represents the output of a CreateCacheParameterGroup  operation.
+	// Represents the output of a CreateCacheParameterGroup operation.
 	CacheParameterGroup *types.CacheParameterGroup
 
 	// Metadata pertaining to the operation's result.

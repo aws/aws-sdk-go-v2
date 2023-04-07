@@ -29,12 +29,12 @@ func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, 
 	return out, nil
 }
 
-// Deletes a package from OpenSearch Service. The package can't be associated
-// with any OpenSearch Service domain.
+// Deletes a package from OpenSearch Service. The package can't be associated with
+// any OpenSearch Service domain.
 type DeletePackageInput struct {
 
-	// The internal ID of the package you want to delete. Use DescribePackages to
-	// find this value.
+	// The internal ID of the package you want to delete. Use DescribePackages to find
+	// this value.
 	//
 	// This member is required.
 	PackageID *string
@@ -42,7 +42,7 @@ type DeletePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response parameters to the DeletePackage  operation.
+// Container for the response parameters to the DeletePackage operation.
 type DeletePackageOutput struct {
 
 	// Information about the deleted package.

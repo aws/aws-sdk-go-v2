@@ -24,8 +24,8 @@ type HumanLoopDataAttributes struct {
 // An object containing the human loop input in JSON format.
 type HumanLoopInput struct {
 
-	// Serialized input from the human loop. The input must be a string
-	// representation of a file in JSON format.
+	// Serialized input from the human loop. The input must be a string representation
+	// of a file in JSON format.
 	//
 	// This member is required.
 	InputContent *string

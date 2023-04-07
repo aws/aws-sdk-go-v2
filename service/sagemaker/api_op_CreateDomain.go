@@ -25,11 +25,17 @@ import (
 // Encryption (https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html)
 // . VPC configuration All SageMaker Studio traffic between the domain and the EFS
 // volume is through the specified VPC and subnets. For other Studio traffic, you
-// can specify the AppNetworkAccessType  parameter. AppNetworkAccessType
+// can specify the AppNetworkAccessType parameter. AppNetworkAccessType
 // corresponds to the network access type that you choose when you onboard to
 // Studio. The following options are available:
-//   - PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.
-//   - VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.
+//   - PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon
+//     SageMaker, which allows internet access. This is the default value.
+//   - VpcOnly - All Studio traffic is through the specified VPC and subnets.
+//     Internet access is disabled by default. To allow internet access, you must
+//     specify a NAT gateway. When internet access is disabled, you won't be able to
+//     run a Studio notebook or to train or host models unless your VPC has an
+//     interface endpoint to the SageMaker API and runtime or a NAT gateway and your
+//     security groups allow outbound connections.
 //
 // NFS traffic over TCP on port 2049 needs to be allowed in both inbound and
 // outbound rules in order to launch a SageMaker Studio app successfully. For more
@@ -58,7 +64,7 @@ type CreateDomainInput struct {
 	AuthMode types.AuthMode
 
 	// The default settings to use to create a user profile when UserSettings isn't
-	// specified in the call to the CreateUserProfile  API. SecurityGroups is
+	// specified in the call to the CreateUserProfile API. SecurityGroups is
 	// aggregated when specified in both calls. For all other settings in UserSettings
 	// , the values specified in CreateUserProfile take precedence over those
 	// specified in CreateDomain .
@@ -84,21 +90,21 @@ type CreateDomainInput struct {
 
 	// Specifies the VPC used for non-EFS traffic. The default value is
 	// PublicInternetOnly .
-	//     - PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access
-	//     - VpcOnly - All Studio traffic is through the specified VPC and subnets
+	//   - PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon
+	//   SageMaker, which allows direct internet access
+	//   - VpcOnly - All Studio traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
 	// The entity that creates and manages the required security groups for inter-app
-	// communication in VPCOnly  mode. Required when CreateDomain.AppNetworkAccessType
-	// is VPCOnly  and
-	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArnis
-	// provided.
+	// communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType
+	// is VPCOnly and
+	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
 	AppSecurityGroupManagement types.AppSecurityGroupManagement
 
 	// The default settings used to create a space.
 	DefaultSpaceSettings *types.DefaultSpaceSettings
 
-	// A collection of Domain  settings.
+	// A collection of Domain settings.
 	DomainSettings *types.DomainSettings
 
 	// Use KmsKeyId .
@@ -113,8 +119,8 @@ type CreateDomainInput struct {
 
 	// Tags to associated with the Domain. Each tag consists of a key and an optional
 	// value. Tag keys must be unique per resource. Tags are searchable using the
-	// SearchAPI. Tags that you specify for the Domain are also added to all Apps
-	// that the Domain launches.
+	// Search API. Tags that you specify for the Domain are also added to all Apps that
+	// the Domain launches.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

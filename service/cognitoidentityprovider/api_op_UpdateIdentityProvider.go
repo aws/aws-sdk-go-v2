@@ -45,7 +45,7 @@ type UpdateIdentityProviderInput struct {
 	// A list of IdP identifiers.
 	IdpIdentifiers []string
 
-	// The IdP details to be updated, such as MetadataURL  and MetadataFile .
+	// The IdP details to be updated, such as MetadataURL and MetadataFile .
 	ProviderDetails map[string]string
 
 	noSmithyDocumentSerde

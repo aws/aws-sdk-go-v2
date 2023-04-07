@@ -40,8 +40,7 @@ type Environment struct {
 	// The name of the FinSpace environment.
 	Name *string
 
-	// The url of the integrated FinSpace notebook environment in your web
-	// application.
+	// The url of the integrated FinSpace notebook environment in your web application.
 	SageMakerStudioDomainUrl *string
 
 	// The current status of creation of the FinSpace environment.
@@ -59,8 +58,8 @@ type FederationParameters struct {
 
 	// SAML attribute name and value. The name must always be Email and the value
 	// should be set to the attribute definition in which user email is set. For
-	// example, name would be Email  and value
-	// http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress. Please
+	// example, name would be Email and value
+	// http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress . Please
 	// check your SAML 2.0 compliant identity provider (IdP) documentation for details.
 	AttributeMap map[string]string
 

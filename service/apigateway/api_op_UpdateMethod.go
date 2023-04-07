@@ -78,9 +78,9 @@ type UpdateMethodOutput struct {
 	// purposes.
 	AuthorizationScopes []string
 
-	// The method's authorization type. Valid values are NONE  for open access,
-	// AWS_IAM for using AWS IAM permissions, CUSTOM for using a custom authorizer,
-	// or COGNITO_USER_POOLS  for using a Cognito user pool.
+	// The method's authorization type. Valid values are NONE for open access, AWS_IAM
+	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or
+	// COGNITO_USER_POOLS for using a Cognito user pool.
 	AuthorizationType *string
 
 	// The identifier of an Authorizer to use on this method. The authorizationType
@@ -99,8 +99,8 @@ type UpdateMethodOutput struct {
 	MethodResponses map[string]types.MethodResponse
 
 	// A human-friendly operation identifier for the method. For example, you can
-	// assign the operationName  of ListPets  for the GET /pets  method in the
-	// PetStore example.
+	// assign the operationName of ListPets for the GET /pets method in the PetStore
+	// example.
 	OperationName *string
 
 	// A key-value map specifying data schemas, represented by Model resources, (as
@@ -110,10 +110,10 @@ type UpdateMethodOutput struct {
 
 	// A key-value map defining required or optional method request parameters that
 	// can be accepted by API Gateway. A key is a method request parameter name
-	// matching the pattern of method.request.{location}.{name} , where location  is
-	// querystring , path , or header  and name is a valid and unique parameter name.
+	// matching the pattern of method.request.{location}.{name} , where location is
+	// querystring , path , or header and name is a valid and unique parameter name.
 	// The value associated with the key is a Boolean flag indicating whether the
-	// parameter is required ( true ) or optional ( false). The method request
+	// parameter is required ( true ) or optional ( false ). The method request
 	// parameter names defined here are available in Integration to be mapped to
 	// integration request parameters or templates.
 	RequestParameters map[string]bool

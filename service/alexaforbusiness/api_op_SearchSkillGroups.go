@@ -35,9 +35,9 @@ type SearchSkillGroupsInput struct {
 	// filter key is SkillGroupName.
 	Filters []types.Filter
 
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
@@ -141,16 +141,15 @@ type SearchSkillGroupsAPIClient interface {
 
 var _ SearchSkillGroupsAPIClient = (*Client)(nil)
 
-// SearchSkillGroupsPaginatorOptions is the paginator options for
-// SearchSkillGroups
+// SearchSkillGroupsPaginatorOptions is the paginator options for SearchSkillGroups
 type SearchSkillGroupsPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

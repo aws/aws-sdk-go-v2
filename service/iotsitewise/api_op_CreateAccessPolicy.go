@@ -32,8 +32,8 @@ func (c *Client) CreateAccessPolicy(ctx context.Context, params *CreateAccessPol
 
 type CreateAccessPolicyInput struct {
 
-	// The identity for this access policy. Choose an IAM Identity Center user, an
-	// IAM Identity Center group, or an IAM user.
+	// The identity for this access policy. Choose an IAM Identity Center user, an IAM
+	// Identity Center group, or an IAM user.
 	//
 	// This member is required.
 	AccessPolicyIdentity *types.Identity
@@ -55,8 +55,8 @@ type CreateAccessPolicyInput struct {
 	// request is required.
 	ClientToken *string
 
-	// A list of key-value pairs that contain metadata for the access policy. For
-	// more information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
+	// A list of key-value pairs that contain metadata for the access policy. For more
+	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 

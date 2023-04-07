@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a medical transcription job. To use this operation, specify the name
-// of the job you want to delete using MedicalTranscriptionJobName. Job names are
+// Deletes a medical transcription job. To use this operation, specify the name of
+// the job you want to delete using MedicalTranscriptionJobName . Job names are
 // case sensitive.
 func (c *Client) DeleteMedicalTranscriptionJob(ctx context.Context, params *DeleteMedicalTranscriptionJobInput, optFns ...func(*Options)) (*DeleteMedicalTranscriptionJobOutput, error) {
 	if params == nil {

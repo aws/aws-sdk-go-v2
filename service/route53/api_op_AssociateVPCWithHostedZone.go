@@ -17,17 +17,16 @@ import (
 // associate a VPC that was created by using one Amazon Web Services account with a
 // private hosted zone that was created by using a different account, the Amazon
 // Web Services account that created the private hosted zone must first submit a
-// CreateVPCAssociationAuthorizationrequest. Then the account that created the
-// VPC must submit an AssociateVPCWithHostedZone request. When granting access,
-// the hosted zone and the Amazon VPC must belong to the same partition. A
-// partition is a group of Amazon Web Services Regions. Each Amazon Web Services
-// account is scoped to one partition. The following are the supported partitions:
+// CreateVPCAssociationAuthorization request. Then the account that created the VPC
+// must submit an AssociateVPCWithHostedZone request. When granting access, the
+// hosted zone and the Amazon VPC must belong to the same partition. A partition is
+// a group of Amazon Web Services Regions. Each Amazon Web Services account is
+// scoped to one partition. The following are the supported partitions:
 //   - aws - Amazon Web Services Regions
 //   - aws-cn - China Regions
 //   - aws-us-gov - Amazon Web Services GovCloud (US) Region
 //
-// For more
-// information, see Access Management (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+// For more information, see Access Management (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 // in the Amazon Web Services General Reference.
 func (c *Client) AssociateVPCWithHostedZone(ctx context.Context, params *AssociateVPCWithHostedZoneInput, optFns ...func(*Options)) (*AssociateVPCWithHostedZoneOutput, error) {
 	if params == nil {

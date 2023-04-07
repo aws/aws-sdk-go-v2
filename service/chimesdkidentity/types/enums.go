@@ -29,10 +29,9 @@ const (
 	AppInstanceUserEndpointTypeGcm         AppInstanceUserEndpointType = "GCM"
 )
 
-// Values returns all known values for AppInstanceUserEndpointType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for AppInstanceUserEndpointType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppInstanceUserEndpointType) Values() []AppInstanceUserEndpointType {
 	return []AppInstanceUserEndpointType{
 		"APNS",
@@ -67,8 +66,8 @@ const (
 	EndpointStatusReasonInvalidPinpointArn EndpointStatusReason = "INVALID_PINPOINT_ARN"
 )
 
-// Values returns all known values for EndpointStatusReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for EndpointStatusReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointStatusReason) Values() []EndpointStatusReason {
 	return []EndpointStatusReason{

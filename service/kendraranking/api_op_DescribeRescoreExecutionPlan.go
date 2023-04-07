@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Gets information about a rescore execution plan. A rescore execution plan is
-// an Amazon Kendra Intelligent Ranking resource used for provisioning the Rescore
+// Gets information about a rescore execution plan. A rescore execution plan is an
+// Amazon Kendra Intelligent Ranking resource used for provisioning the Rescore
 // API.
 func (c *Client) DescribeRescoreExecutionPlan(ctx context.Context, params *DescribeRescoreExecutionPlanInput, optFns ...func(*Options)) (*DescribeRescoreExecutionPlanOutput, error) {
 	if params == nil {
@@ -59,7 +59,7 @@ type DescribeRescoreExecutionPlanOutput struct {
 	// The description for the rescore execution plan.
 	Description *string
 
-	// When the Status  field value is FAILED , the ErrorMessage field contains a
+	// When the Status field value is FAILED , the ErrorMessage field contains a
 	// message that explains why.
 	ErrorMessage *string
 
@@ -69,9 +69,9 @@ type DescribeRescoreExecutionPlanOutput struct {
 	// The name for the rescore execution plan.
 	Name *string
 
-	// The current status of the rescore execution plan. When the value is ACTIVE,
-	// the rescore execution plan is ready for use. If the Status  field value is
-	// FAILED , the ErrorMessage  field contains a message that explains why.
+	// The current status of the rescore execution plan. When the value is ACTIVE , the
+	// rescore execution plan is ready for use. If the Status field value is FAILED ,
+	// the ErrorMessage field contains a message that explains why.
 	Status types.RescoreExecutionPlanStatus
 
 	// The Unix timestamp of when the rescore execution plan was last updated.

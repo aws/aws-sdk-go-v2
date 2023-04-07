@@ -12,18 +12,17 @@ import (
 )
 
 // Encrypts plaintext of up to 4,096 bytes using a KMS key. You can use a
-// symmetric or asymmetric KMS key with a KeyUsage  of ENCRYPT_DECRYPT. You can
-// use this operation to encrypt small amounts of arbitrary data, such as a
-// personal identifier or database password, or other sensitive information. You
-// don't need to use the Encrypt  operation to encrypt a data key. The
-// GenerateDataKey and GenerateDataKeyPair operations return a plaintext data key
-// and an encrypted copy of that data key. If you use a symmetric encryption KMS
-// key, you can use an encryption context to add additional security to your
-// encryption operation. If you specify an EncryptionContext when encrypting
-// data, you must specify the same encryption context (a case-sensitive exact
-// match) when decrypting the data. Otherwise, the request to decrypt fails with an
-//
-// InvalidCiphertextException . For more information, see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+// symmetric or asymmetric KMS key with a KeyUsage of ENCRYPT_DECRYPT . You can use
+// this operation to encrypt small amounts of arbitrary data, such as a personal
+// identifier or database password, or other sensitive information. You don't need
+// to use the Encrypt operation to encrypt a data key. The GenerateDataKey and
+// GenerateDataKeyPair operations return a plaintext data key and an encrypted copy
+// of that data key. If you use a symmetric encryption KMS key, you can use an
+// encryption context to add additional security to your encryption operation. If
+// you specify an EncryptionContext when encrypting data, you must specify the
+// same encryption context (a case-sensitive exact match) when decrypting the data.
+// Otherwise, the request to decrypt fails with an InvalidCiphertextException . For
+// more information, see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 // in the Key Management Service Developer Guide. If you specify an asymmetric KMS
 // key, you must also specify the encryption algorithm. The algorithm must be
 // compatible with the KMS key spec. When you use an asymmetric KMS key to encrypt
@@ -50,9 +49,8 @@ import (
 //   - RSAES_OAEP_SHA_256 : 446 bytes
 //   - SM2PKE : 1024 bytes (China Regions only)
 //
-// The KMS key that you use for
-// this operation must be in a compatible key state. For details, see Key states
-// of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// The KMS key that you use for this operation must be in a compatible key state.
+// For details, see Key states of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the Key Management Service Developer Guide. Cross-account use: Yes. To
 // perform this operation with a KMS key in a different Amazon Web Services
 // account, specify the key ARN or alias ARN in the value of the KeyId parameter.
@@ -79,18 +77,18 @@ func (c *Client) Encrypt(ctx context.Context, params *EncryptInput, optFns ...fu
 type EncryptInput struct {
 
 	// Identifies the KMS key to use in the encryption operation. The KMS key must
-	// have a KeyUsage  of ENCRYPT_DECRYPT . To find the KeyUsage of a KMS key, use
-	// the DescribeKey operation. To specify a KMS key, use its key ID, key ARN,
-	// alias name, or alias ARN. When using an alias name, prefix it with "alias/".
-	// To specify a KMS key in a different Amazon Web Services account, you must use
-	// the key ARN or alias ARN. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Alias name: alias/ExampleAlias
-	//     - Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
-	// To get
-	// the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey. To get the
-	// alias name and alias ARN, use ListAliases .
+	// have a KeyUsage of ENCRYPT_DECRYPT . To find the KeyUsage of a KMS key, use the
+	// DescribeKey operation. To specify a KMS key, use its key ID, key ARN, alias
+	// name, or alias ARN. When using an alias name, prefix it with "alias/" . To
+	// specify a KMS key in a different Amazon Web Services account, you must use the
+	// key ARN or alias ARN. For example:
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Alias name: alias/ExampleAlias
+	//   - Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey . To
+	// get the alias name and alias ARN, use ListAliases .
 	//
 	// This member is required.
 	KeyId *string
@@ -103,7 +101,7 @@ type EncryptInput struct {
 	// Specifies the encryption algorithm that KMS will use to encrypt the plaintext
 	// message. The algorithm must be compatible with the KMS key that you specify.
 	// This parameter is required only for asymmetric KMS keys. The default value,
-	// SYMMETRIC_DEFAULT, is the algorithm used for symmetric encryption KMS keys. If
+	// SYMMETRIC_DEFAULT , is the algorithm used for symmetric encryption KMS keys. If
 	// you are using an asymmetric KMS key, we recommend RSAES_OAEP_SHA_256. The SM2PKE
 	// algorithm is only available in China Regions.
 	EncryptionAlgorithm types.EncryptionAlgorithmSpec

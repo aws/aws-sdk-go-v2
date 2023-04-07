@@ -16,7 +16,7 @@ import (
 // being used in the input is claimed to a traffic distribution group, and you are
 // calling this API using an instance in the Amazon Web Services Region where the
 // traffic distribution group was created, you can use either a full phone number
-// ARN or UUID value for the OutboundCallerIdNumberId  value of the
+// ARN or UUID value for the OutboundCallerIdNumberId value of the
 // OutboundCallerConfig (https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig)
 // request body parameter. However, if the number is claimed to a traffic
 // distribution group and you are calling this API using an instance in the
@@ -59,8 +59,8 @@ type CreateQueueInput struct {
 	// The description of the queue.
 	Description *string
 
-	// The maximum number of contacts that can be in the queue before it is
-	// considered full.
+	// The maximum number of contacts that can be in the queue before it is considered
+	// full.
 	MaxContacts *int32
 
 	// The outbound caller ID name, number, and outbound whisper flow.

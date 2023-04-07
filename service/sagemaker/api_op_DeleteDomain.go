@@ -37,8 +37,8 @@ type DeleteDomainInput struct {
 	// This member is required.
 	DomainId *string
 
-	// The retention policy for this domain, which specifies whether resources will
-	// be retained after the Domain is deleted. By default, all resources are retained
+	// The retention policy for this domain, which specifies whether resources will be
+	// retained after the Domain is deleted. By default, all resources are retained
 	// (not automatically deleted).
 	RetentionPolicy *types.RetentionPolicy
 

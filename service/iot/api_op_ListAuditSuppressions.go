@@ -37,9 +37,9 @@ type ListAuditSuppressionsInput struct {
 	AscendingOrder bool
 
 	// An audit check name. Checks must be enabled for your account. (Use
-	// DescribeAccountAuditConfigurationto see the list of all checks, including
-	// those that are enabled or use UpdateAccountAuditConfiguration to select which
-	// checks are enabled.)
+	// DescribeAccountAuditConfiguration to see the list of all checks, including those
+	// that are enabled or use UpdateAccountAuditConfiguration to select which checks
+	// are enabled.)
 	CheckName *string
 
 	// The maximum number of results to return at one time. The default is 25.
@@ -143,8 +143,8 @@ type ListAuditSuppressionsPaginatorOptions struct {
 	// The maximum number of results to return at one time. The default is 25.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

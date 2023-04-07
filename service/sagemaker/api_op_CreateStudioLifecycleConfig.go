@@ -34,8 +34,8 @@ type CreateStudioLifecycleConfigInput struct {
 	// This member is required.
 	StudioLifecycleConfigAppType types.StudioLifecycleConfigAppType
 
-	// The content of your Studio Lifecycle Configuration script. This content must
-	// be base64 encoded.
+	// The content of your Studio Lifecycle Configuration script. This content must be
+	// base64 encoded.
 	//
 	// This member is required.
 	StudioLifecycleConfigContent *string

@@ -23,34 +23,34 @@ import (
 // in the Amazon S3 User Guide. This operation supports metadata that can be
 // returned by GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 // , in addition to RequestRoute , RequestToken , StatusCode , ErrorCode , and
-// ErrorMessage . The GetObject  response metadata is supported so that the
-// WriteGetObjectResponsecaller, typically an Lambda function, can provide the
-// same metadata when it internally invokes GetObject . When
-// WriteGetObjectResponseis called by a customer-owned Lambda function, the
-// metadata returned to the end user GetObject call might differ from what Amazon
-// S3 would normally return. You can include any number of metadata headers. When
-// including a metadata header, it should be prefaced with x-amz-meta. For
-// example, x-amz-meta-my-custom-header: MyCustomValue. The primary use case for
-// this is to forward GetObject metadata. Amazon Web Services provides some
-// prebuilt Lambda functions that you can use with S3 Object Lambda to detect and
-// redact personally identifiable information (PII) and decompress S3 objects.
-// These Lambda functions are available in the Amazon Web Services Serverless
-// Application Repository, and can be selected through the Amazon Web Services
-// Management Console when you create your Object Lambda access point. Example 1:
-// PII Access Control - This Lambda function uses Amazon Comprehend, a natural
-// language processing (NLP) service using machine learning to find insights and
-// relationships in text. It automatically detects personally identifiable
-// information (PII) such as names, addresses, dates, credit card numbers, and
-// social security numbers from documents in your Amazon S3 bucket. Example 2: PII
-// Redaction - This Lambda function uses Amazon Comprehend, a natural language
-// processing (NLP) service using machine learning to find insights and
-// relationships in text. It automatically redacts personally identifiable
-// information (PII) such as names, addresses, dates, credit card numbers, and
-// social security numbers from documents in your Amazon S3 bucket. Example 3:
-// Decompression - The Lambda function S3ObjectLambdaDecompression, is equipped to
-// decompress objects stored in S3 in one of six compressed file formats including
-// bzip2, gzip, snappy, zlib, zstandard and ZIP. For information on how to view and
-// use these functions, see Using Amazon Web Services built Lambda functions (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-examples.html)
+// ErrorMessage . The GetObject response metadata is supported so that the
+// WriteGetObjectResponse caller, typically an Lambda function, can provide the
+// same metadata when it internally invokes GetObject . When WriteGetObjectResponse
+// is called by a customer-owned Lambda function, the metadata returned to the end
+// user GetObject call might differ from what Amazon S3 would normally return. You
+// can include any number of metadata headers. When including a metadata header, it
+// should be prefaced with x-amz-meta . For example, x-amz-meta-my-custom-header:
+// MyCustomValue . The primary use case for this is to forward GetObject metadata.
+// Amazon Web Services provides some prebuilt Lambda functions that you can use
+// with S3 Object Lambda to detect and redact personally identifiable information
+// (PII) and decompress S3 objects. These Lambda functions are available in the
+// Amazon Web Services Serverless Application Repository, and can be selected
+// through the Amazon Web Services Management Console when you create your Object
+// Lambda access point. Example 1: PII Access Control - This Lambda function uses
+// Amazon Comprehend, a natural language processing (NLP) service using machine
+// learning to find insights and relationships in text. It automatically detects
+// personally identifiable information (PII) such as names, addresses, dates,
+// credit card numbers, and social security numbers from documents in your Amazon
+// S3 bucket. Example 2: PII Redaction - This Lambda function uses Amazon
+// Comprehend, a natural language processing (NLP) service using machine learning
+// to find insights and relationships in text. It automatically redacts personally
+// identifiable information (PII) such as names, addresses, dates, credit card
+// numbers, and social security numbers from documents in your Amazon S3 bucket.
+// Example 3: Decompression - The Lambda function S3ObjectLambdaDecompression, is
+// equipped to decompress objects stored in S3 in one of six compressed file
+// formats including bzip2, gzip, snappy, zlib, zstandard and ZIP. For information
+// on how to view and use these functions, see Using Amazon Web Services built
+// Lambda functions (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-examples.html)
 // in the Amazon S3 User Guide.
 func (c *Client) WriteGetObjectResponse(ctx context.Context, params *WriteGetObjectResponseInput, optFns ...func(*Options)) (*WriteGetObjectResponseOutput, error) {
 	if params == nil {
@@ -74,7 +74,7 @@ type WriteGetObjectResponseInput struct {
 	// This member is required.
 	RequestRoute *string
 
-	// A single use encrypted token that maps WriteGetObjectResponse  to the end user
+	// A single use encrypted token that maps WriteGetObjectResponse to the end user
 	// GetObject request.
 	//
 	// This member is required.
@@ -120,7 +120,7 @@ type WriteGetObjectResponseInput struct {
 	// base64-encoded, 160-bit SHA-1 digest of the object returned by the Object Lambda
 	// function. This may not match the checksum for the object stored in Amazon S3.
 	// Amazon S3 will perform validation of the checksum values only when the original
-	// GetObjectrequest required checksum validation. For more information about
+	// GetObject request required checksum validation. For more information about
 	// checksums, see Checking object integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide. Only one checksum header can be specified at a
 	// time. If you supply multiple checksum headers, this request will fail.
@@ -157,7 +157,7 @@ type WriteGetObjectResponseInput struct {
 	// A standard MIME type describing the format of the object data.
 	ContentType *string
 
-	// Specifies whether an object stored in Amazon S3 is ( true ) or is not ( false)
+	// Specifies whether an object stored in Amazon S3 is ( true ) or is not ( false )
 	// a delete marker.
 	DeleteMarker bool
 
@@ -178,11 +178,10 @@ type WriteGetObjectResponseInput struct {
 	// body.
 	ErrorMessage *string
 
-	// If the object expiration is configured (see PUT Bucket lifecycle), the
-	// response includes this header. It includes the expiry-date  and rule-id
-	// key-value pairs that provide the object expiration information. The value of the
-	//
-	// rule-id is URL-encoded.
+	// If the object expiration is configured (see PUT Bucket lifecycle), the response
+	// includes this header. It includes the expiry-date and rule-id key-value pairs
+	// that provide the object expiration information. The value of the rule-id is
+	// URL-encoded.
 	Expiration *string
 
 	// The date and time at which the object is no longer cacheable.
@@ -248,24 +247,24 @@ type WriteGetObjectResponseInput struct {
 
 	// The integer status code for an HTTP response of a corresponding GetObject
 	// request. Status Codes
-	//     - 200 - OK
-	//     - 206 - Partial Content
-	//     - 304 - Not Modified
-	//     - 400 - Bad Request
-	//     - 401 - Unauthorized
-	//     - 403 - Forbidden
-	//     - 404 - Not Found
-	//     - 405 - Method Not Allowed
-	//     - 409 - Conflict
-	//     - 411 - Length Required
-	//     - 412 - Precondition Failed
-	//     - 416 - Range Not Satisfiable
-	//     - 500 - Internal Server Error
-	//     - 503 - Service Unavailable
+	//   - 200 - OK
+	//   - 206 - Partial Content
+	//   - 304 - Not Modified
+	//   - 400 - Bad Request
+	//   - 401 - Unauthorized
+	//   - 403 - Forbidden
+	//   - 404 - Not Found
+	//   - 405 - Method Not Allowed
+	//   - 409 - Conflict
+	//   - 411 - Length Required
+	//   - 412 - Precondition Failed
+	//   - 416 - Range Not Satisfiable
+	//   - 500 - Internal Server Error
+	//   - 503 - Service Unavailable
 	StatusCode int32
 
-	// Provides storage class information of the object. Amazon S3 returns this
-	// header for all objects except for S3 Standard storage class objects. For more
+	// Provides storage class information of the object. Amazon S3 returns this header
+	// for all objects except for S3 Standard storage class objects. For more
 	// information, see Storage Classes (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)
 	// .
 	StorageClass types.StorageClass

@@ -56,8 +56,8 @@ type ModifyDBClusterEndpointInput struct {
 //   - ModifyDBClusterEndpoint
 //   - DeleteDBClusterEndpoint
 //
-// For the data structure that represents Amazon RDS
-// DB instance endpoints, see Endpoint .
+// For the data structure that represents Amazon RDS DB instance endpoints, see
+// Endpoint .
 type ModifyDBClusterEndpointOutput struct {
 
 	// The type associated with a custom endpoint. One of: READER , WRITER , ANY .
@@ -93,9 +93,9 @@ type ModifyDBClusterEndpointOutput struct {
 	StaticMembers []string
 
 	// The current status of the endpoint. One of: creating , available , deleting ,
-	// inactive , modifying . The inactive state applies to an endpoint that cannot
-	// be used for a certain kind of cluster, such as a writer endpoint for a
-	// read-only secondary cluster in a global database.
+	// inactive , modifying . The inactive state applies to an endpoint that cannot be
+	// used for a certain kind of cluster, such as a writer endpoint for a read-only
+	// secondary cluster in a global database.
 	Status *string
 
 	// Metadata pertaining to the operation's result.

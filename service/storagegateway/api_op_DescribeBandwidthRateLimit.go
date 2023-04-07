@@ -14,7 +14,7 @@ import (
 // not set, which means no bandwidth rate limiting is in effect. This operation is
 // supported only for the stored volume, cached volume, and tape gateway types. To
 // describe bandwidth rate limits for S3 file gateways, use
-// DescribeBandwidthRateLimitSchedule. This operation returns a value for a
+// DescribeBandwidthRateLimitSchedule . This operation returns a value for a
 // bandwidth rate limit only if the limit is set. If no limits are set for the
 // gateway, then this operation returns only the gateway ARN in the response body.
 // To specify which gateway to describe, use the Amazon Resource Name (ARN) of the
@@ -53,8 +53,8 @@ type DescribeBandwidthRateLimitOutput struct {
 	// not appear in the response if the download rate limit is not set.
 	AverageDownloadRateLimitInBitsPerSec *int64
 
-	// The average upload bandwidth rate limit in bits per second. This field does
-	// not appear in the response if the upload rate limit is not set.
+	// The average upload bandwidth rate limit in bits per second. This field does not
+	// appear in the response if the upload rate limit is not set.
 	AverageUploadRateLimitInBitsPerSec *int64
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified namespace. This action deletes all of the entities in
-// the namespace. Delete the systems and flows that use entities in the namespace
+// Deletes the specified namespace. This action deletes all of the entities in the
+// namespace. Delete the systems and flows that use entities in the namespace
 // before performing this action. This action takes no request parameters.
 //
 // Deprecated: since: 2022-08-30

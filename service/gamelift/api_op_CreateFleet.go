@@ -55,8 +55,8 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 
 type CreateFleetInput struct {
 
-	// A descriptive label that is associated with a fleet. Fleet names do not need
-	// to be unique.
+	// A descriptive label that is associated with a fleet. Fleet names do not need to
+	// be unique.
 	//
 	// This member is required.
 	Name *string
@@ -66,20 +66,20 @@ type CreateFleetInput struct {
 
 	// The unique identifier for a custom game server build to be deployed on fleet
 	// instances. You can use either the build ID or ARN. The build must be uploaded to
-	// GameLift and in READY  status. This fleet property cannot be changed later.
+	// GameLift and in READY status. This fleet property cannot be changed later.
 	BuildId *string
 
-	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. GameLift
-	// uses the certificates to encrypt traffic between game clients and the game
-	// servers running on GameLift. By default, the CertificateConfiguration  is
-	// DISABLED. You can't change this property after you create the fleet.
-	// Certificate Manager (ACM) certificates expire after 13 months. Certificate
-	// expiration can cause fleets to fail, preventing players from connecting to
-	// instances in the fleet. We recommend you replace fleets before 13 months,
-	// consider using fleet aliases for a smooth transition. ACM isn't available in all
-	// Amazon Web Services regions. A fleet creation request with certificate
-	// generation enabled in an unsupported Region, fails with a 4xx error. For more
-	// information about the supported Regions, see Supported Regions (https://docs.aws.amazon.com/acm/latest/userguide/acm-regions.html)
+	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. GameLift uses
+	// the certificates to encrypt traffic between game clients and the game servers
+	// running on GameLift. By default, the CertificateConfiguration is DISABLED . You
+	// can't change this property after you create the fleet. Certificate Manager (ACM)
+	// certificates expire after 13 months. Certificate expiration can cause fleets to
+	// fail, preventing players from connecting to instances in the fleet. We recommend
+	// you replace fleets before 13 months, consider using fleet aliases for a smooth
+	// transition. ACM isn't available in all Amazon Web Services regions. A fleet
+	// creation request with certificate generation enabled in an unsupported Region,
+	// fails with a 4xx error. For more information about the supported Regions, see
+	// Supported Regions (https://docs.aws.amazon.com/acm/latest/userguide/acm-regions.html)
 	// in the Certificate Manager User Guide.
 	CertificateConfiguration *types.CertificateConfiguration
 
@@ -97,10 +97,10 @@ type CreateFleetInput struct {
 	// Realtime Servers fleets, GameLift automatically sets TCP and UDP ranges.
 	EC2InboundPermissions []types.IpPermission
 
-	// The GameLift-supported Amazon EC2 instance type to use for all fleet
-	// instances. Instance type determines the computing resources that will be used to
-	// host your game servers, including CPU, memory, storage, and networking capacity.
-	// See Amazon Elastic Compute Cloud Instance Types (http://aws.amazon.com/ec2/instance-types/)
+	// The GameLift-supported Amazon EC2 instance type to use for all fleet instances.
+	// Instance type determines the computing resources that will be used to host your
+	// game servers, including CPU, memory, storage, and networking capacity. See
+	// Amazon Elastic Compute Cloud Instance Types (http://aws.amazon.com/ec2/instance-types/)
 	// for detailed descriptions of Amazon EC2 instance types.
 	EC2InstanceType types.EC2InstanceType
 
@@ -125,13 +125,13 @@ type CreateFleetInput struct {
 	// of the fleet. This parameter can only be used when creating fleets in Amazon Web
 	// Services Regions that support multiple locations. You can add any
 	// GameLift-supported Amazon Web Services Region as a remote location, in the form
-	// of an Amazon Web Services Region code such as us-west-2. To create a fleet
-	// with instances in the home Region only, omit this parameter.
+	// of an Amazon Web Services Region code such as us-west-2 . To create a fleet with
+	// instances in the home Region only, omit this parameter.
 	Locations []types.LocationConfiguration
 
 	// This parameter is no longer used. To specify where GameLift should store log
 	// files once a server process shuts down, use the GameLift server API
-	// ProcessReady() and specify one or more directory paths in logParameters. For
+	// ProcessReady() and specify one or more directory paths in logParameters . For
 	// more information, see Initialize the server process (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-initialize)
 	// in the GameLift Developer Guide.
 	LogPaths []string
@@ -143,15 +143,17 @@ type CreateFleetInput struct {
 	MetricGroups []string
 
 	// The status of termination protection for active game sessions on the fleet. By
-	// default, this property is set to NoProtection. You can also set game session
+	// default, this property is set to NoProtection . You can also set game session
 	// protection for an individual game session by calling UpdateGameSession .
-	//     - NoProtection - Game sessions can be terminated during active gameplay as a result of a scale-down event.
-	//     - FullProtection - Game sessions in ACTIVE status cannot be terminated during a scale-down event.
+	//   - NoProtection - Game sessions can be terminated during active gameplay as a
+	//   result of a scale-down event.
+	//   - FullProtection - Game sessions in ACTIVE status cannot be terminated during
+	//   a scale-down event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
-	// Used when peering your GameLift fleet with a VPC, the unique identifier for
-	// the Amazon Web Services account that owns the VPC. You can find your account ID
-	// in the Amazon Web Services Management Console under account settings.
+	// Used when peering your GameLift fleet with a VPC, the unique identifier for the
+	// Amazon Web Services account that owns the VPC. You can find your account ID in
+	// the Amazon Web Services Management Console under account settings.
 	PeerVpcAwsAccountId *string
 
 	// A unique identifier for a VPC with resources to be accessed by your GameLift
@@ -170,8 +172,8 @@ type CreateFleetInput struct {
 	// the fleet. The runtime configuration defines one or more server process
 	// configurations, each identifying a build executable or Realtime script file and
 	// the number of processes of that type to run concurrently. The
-	// RuntimeConfigurationparameter is required unless the fleet is being configured
-	// using the older parameters ServerLaunchPath  and ServerLaunchParameters, which
+	// RuntimeConfiguration parameter is required unless the fleet is being configured
+	// using the older parameters ServerLaunchPath and ServerLaunchParameters , which
 	// are still supported for backward compatibility.
 	RuntimeConfiguration *types.RuntimeConfiguration
 
@@ -182,12 +184,12 @@ type CreateFleetInput struct {
 	ScriptId *string
 
 	// This parameter is no longer used. Specify server launch parameters using the
-	// RuntimeConfigurationparameter. Requests that use this parameter instead
+	// RuntimeConfiguration parameter. Requests that use this parameter instead
 	// continue to be valid.
 	ServerLaunchParameters *string
 
 	// This parameter is no longer used. Specify a server launch path using the
-	// RuntimeConfigurationparameter. Requests that use this parameter instead
+	// RuntimeConfiguration parameter. Requests that use this parameter instead
 	// continue to be valid.
 	ServerLaunchPath *string
 
@@ -204,11 +206,11 @@ type CreateFleetInput struct {
 type CreateFleetOutput struct {
 
 	// The properties for the new fleet, including the current status. All fleets are
-	// placed in NEW  status on creation.
+	// placed in NEW status on creation.
 	FleetAttributes *types.FleetAttributes
 
 	// The fleet's locations and life-cycle status of each location. For new fleets,
-	// the status of all locations is set to NEW. During fleet creation, GameLift
+	// the status of all locations is set to NEW . During fleet creation, GameLift
 	// updates each location status as instances are deployed there and prepared for
 	// game hosting. This list includes an entry for the fleet's home Region. For
 	// fleets with no remote locations, only one entry, representing the home Region,

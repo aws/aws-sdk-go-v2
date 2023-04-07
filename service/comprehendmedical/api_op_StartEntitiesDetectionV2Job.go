@@ -13,8 +13,8 @@ import (
 )
 
 // Starts an asynchronous medical entity detection job for a collection of
-// documents. Use the DescribeEntitiesDetectionV2Job operation to track the
-// status of a job.
+// documents. Use the DescribeEntitiesDetectionV2Job operation to track the status
+// of a job.
 func (c *Client) StartEntitiesDetectionV2Job(ctx context.Context, params *StartEntitiesDetectionV2JobInput, optFns ...func(*Options)) (*StartEntitiesDetectionV2JobOutput, error) {
 	if params == nil {
 		params = &StartEntitiesDetectionV2JobInput{}
@@ -57,8 +57,8 @@ type StartEntitiesDetectionV2JobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// A unique identifier for the request. If you don't set the client request
-	// token, Comprehend Medical; generates one for you.
+	// A unique identifier for the request. If you don't set the client request token,
+	// Comprehend Medical; generates one for you.
 	ClientRequestToken *string
 
 	// The identifier of the job.
@@ -74,7 +74,7 @@ type StartEntitiesDetectionV2JobInput struct {
 type StartEntitiesDetectionV2JobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this
-	// identifier with the DescribeEntitiesDetectionV2Job  operation.
+	// identifier with the DescribeEntitiesDetectionV2Job operation.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

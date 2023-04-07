@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the MembershipId  in an identity store.
+// Retrieves the MembershipId in an identity store.
 func (c *Client) GetGroupMembershipId(ctx context.Context, params *GetGroupMembershipIdInput, optFns ...func(*Options)) (*GetGroupMembershipIdOutput, error) {
 	if params == nil {
 		params = &GetGroupMembershipIdInput{}
@@ -56,7 +56,7 @@ type GetGroupMembershipIdOutput struct {
 	// This member is required.
 	IdentityStoreId *string
 
-	// The identifier for a GroupMembership  in an identity store.
+	// The identifier for a GroupMembership in an identity store.
 	//
 	// This member is required.
 	MembershipId *string

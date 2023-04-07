@@ -39,7 +39,7 @@ type UpdateFirewallPolicyInput struct {
 	// policy resource at the time of the request. To make changes to the policy, you
 	// provide the token in your request. Network Firewall uses the token to ensure
 	// that the policy hasn't changed since you last retrieved it. If it has changed,
-	// the operation fails with an InvalidTokenException. If this happens, retrieve
+	// the operation fails with an InvalidTokenException . If this happens, retrieve
 	// the firewall policy again to get a current copy of it with current token.
 	// Reapply your changes as needed, then try the operation again using the new
 	// token.
@@ -51,10 +51,10 @@ type UpdateFirewallPolicyInput struct {
 	Description *string
 
 	// Indicates whether you want Network Firewall to just check the validity of the
-	// request, rather than run the request. If set to TRUE, Network Firewall checks
+	// request, rather than run the request. If set to TRUE , Network Firewall checks
 	// whether the request can run successfully, but doesn't actually make the
 	// requested changes. The call returns the value that the request would return if
-	// you ran it with dry run set to FALSE, but doesn't make additions or changes to
+	// you ran it with dry run set to FALSE , but doesn't make additions or changes to
 	// your resources. This option allows you to make sure that you have the required
 	// permissions to run the request and that your request parameters are valid. If
 	// set to FALSE , Network Firewall makes the requested changes to your resources.
@@ -64,8 +64,8 @@ type UpdateFirewallPolicyInput struct {
 	// resources.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// The Amazon Resource Name (ARN) of the firewall policy. You must specify the
-	// ARN or the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall policy. You must specify the ARN
+	// or the name, and you can specify both.
 	FirewallPolicyArn *string
 
 	// The descriptive name of the firewall policy. You can't change the name of a
@@ -79,7 +79,7 @@ type UpdateFirewallPolicyInput struct {
 type UpdateFirewallPolicyOutput struct {
 
 	// The high-level properties of a firewall policy. This, along with the
-	// FirewallPolicy, define the policy. You can retrieve all objects for a firewall
+	// FirewallPolicy , define the policy. You can retrieve all objects for a firewall
 	// policy by calling DescribeFirewallPolicy .
 	//
 	// This member is required.
@@ -90,7 +90,7 @@ type UpdateFirewallPolicyOutput struct {
 	// policy resource at the time of the request. To make changes to the policy, you
 	// provide the token in your request. Network Firewall uses the token to ensure
 	// that the policy hasn't changed since you last retrieved it. If it has changed,
-	// the operation fails with an InvalidTokenException. If this happens, retrieve
+	// the operation fails with an InvalidTokenException . If this happens, retrieve
 	// the firewall policy again to get a current copy of it with current token.
 	// Reapply your changes as needed, then try the operation again using the new
 	// token.

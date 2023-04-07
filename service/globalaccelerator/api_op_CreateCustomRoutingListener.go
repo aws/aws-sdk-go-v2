@@ -32,8 +32,7 @@ func (c *Client) CreateCustomRoutingListener(ctx context.Context, params *Create
 
 type CreateCustomRoutingListenerInput struct {
 
-	// The Amazon Resource Name (ARN) of the accelerator for a custom routing
-	// listener.
+	// The Amazon Resource Name (ARN) of the accelerator for a custom routing listener.
 	//
 	// This member is required.
 	AcceleratorArn *string

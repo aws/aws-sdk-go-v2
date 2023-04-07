@@ -45,8 +45,8 @@ type ListCustomRoutingPortMappingsByDestinationInput struct {
 	// This member is required.
 	EndpointId *string
 
-	// The number of destination port mappings that you want to return with this
-	// call. The default value is 10.
+	// The number of destination port mappings that you want to return with this call.
+	// The default value is 10.
 	MaxResults *int32
 
 	// The token for the next set of results. You receive this token from a previous
@@ -58,8 +58,7 @@ type ListCustomRoutingPortMappingsByDestinationInput struct {
 
 type ListCustomRoutingPortMappingsByDestinationOutput struct {
 
-	// The port mappings for the endpoint IP address that you specified in the
-	// request.
+	// The port mappings for the endpoint IP address that you specified in the request.
 	DestinationPortMappings []types.DestinationPortMapping
 
 	// The token for the next set of results. You receive this token from a previous
@@ -135,8 +134,8 @@ func (c *Client) addOperationListCustomRoutingPortMappingsByDestinationMiddlewar
 	return nil
 }
 
-// ListCustomRoutingPortMappingsByDestinationAPIClient is a client that
-// implements the ListCustomRoutingPortMappingsByDestination operation.
+// ListCustomRoutingPortMappingsByDestinationAPIClient is a client that implements
+// the ListCustomRoutingPortMappingsByDestination operation.
 type ListCustomRoutingPortMappingsByDestinationAPIClient interface {
 	ListCustomRoutingPortMappingsByDestination(context.Context, *ListCustomRoutingPortMappingsByDestinationInput, ...func(*Options)) (*ListCustomRoutingPortMappingsByDestinationOutput, error)
 }
@@ -146,12 +145,12 @@ var _ ListCustomRoutingPortMappingsByDestinationAPIClient = (*Client)(nil)
 // ListCustomRoutingPortMappingsByDestinationPaginatorOptions is the paginator
 // options for ListCustomRoutingPortMappingsByDestination
 type ListCustomRoutingPortMappingsByDestinationPaginatorOptions struct {
-	// The number of destination port mappings that you want to return with this
-	// call. The default value is 10.
+	// The number of destination port mappings that you want to return with this call.
+	// The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a segment. You can't delete a segment that is being used in a launch
-// or experiment, even if that launch or experiment is not currently running.
+// Deletes a segment. You can't delete a segment that is being used in a launch or
+// experiment, even if that launch or experiment is not currently running.
 func (c *Client) DeleteSegment(ctx context.Context, params *DeleteSegmentInput, optFns ...func(*Options)) (*DeleteSegmentOutput, error) {
 	if params == nil {
 		params = &DeleteSegmentInput{}

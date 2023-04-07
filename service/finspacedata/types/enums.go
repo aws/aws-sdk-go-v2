@@ -114,9 +114,9 @@ const (
 	DatasetKindNonTabular DatasetKind = "NON_TABULAR"
 )
 
-// Values returns all known values for DatasetKind. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DatasetKind. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DatasetKind) Values() []DatasetKind {
 	return []DatasetKind{
 		"TABULAR",
@@ -315,9 +315,9 @@ const (
 	UserTypeAppUser   UserType = "APP_USER"
 )
 
-// Values returns all known values for UserType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (UserType) Values() []UserType {
 	return []UserType{
 		"SUPER_USER",

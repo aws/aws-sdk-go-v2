@@ -96,8 +96,8 @@ type DescribeBrokerOutput struct {
 	// to the broker.
 	LdapServerMetadata *types.LdapServerMetadataOutput
 
-	// The list of information about logs currently enabled and pending to be
-	// deployed for the specified broker.
+	// The list of information about logs currently enabled and pending to be deployed
+	// for the specified broker.
 	Logs *types.LogsSummary
 
 	// The parameters that determine the WeeklyStartTime.
@@ -112,13 +112,13 @@ type DescribeBrokerOutput struct {
 	// .
 	PendingEngineVersion *string
 
-	// The broker's host instance type to upgrade to. For a list of supported
-	// instance types, see Broker instance types (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types)
+	// The broker's host instance type to upgrade to. For a list of supported instance
+	// types, see Broker instance types (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types)
 	// .
 	PendingHostInstanceType *string
 
-	// The metadata of the LDAP server that will be used to authenticate and
-	// authorize connections to the broker after it is rebooted.
+	// The metadata of the LDAP server that will be used to authenticate and authorize
+	// connections to the broker after it is rebooted.
 	PendingLdapServerMetadata *types.LdapServerMetadataOutput
 
 	// The list of pending security groups to authorize connections to brokers.

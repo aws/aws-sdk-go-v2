@@ -10,8 +10,8 @@ const (
 	AutoTuneDesiredStateDisabled AutoTuneDesiredState = "DISABLED"
 )
 
-// Values returns all known values for AutoTuneDesiredState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AutoTuneDesiredState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AutoTuneDesiredState) Values() []AutoTuneDesiredState {
 	return []AutoTuneDesiredState{
@@ -218,9 +218,9 @@ const (
 	ESPartitionInstanceTypeI316xlargeElasticsearch       ESPartitionInstanceType = "i3.16xlarge.elasticsearch"
 )
 
-// Values returns all known values for ESPartitionInstanceType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ESPartitionInstanceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ESPartitionInstanceType) Values() []ESPartitionInstanceType {
 	return []ESPartitionInstanceType{
 		"m3.medium.elasticsearch",
@@ -292,10 +292,9 @@ const (
 	ESWarmPartitionInstanceTypeUltrawarm1LargeElasticsearch  ESWarmPartitionInstanceType = "ultrawarm1.large.elasticsearch"
 )
 
-// Values returns all known values for ESWarmPartitionInstanceType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ESWarmPartitionInstanceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ESWarmPartitionInstanceType) Values() []ESWarmPartitionInstanceType {
 	return []ESWarmPartitionInstanceType{
 		"ultrawarm1.medium.elasticsearch",
@@ -361,9 +360,9 @@ const (
 	OptionStateActive                 OptionState = "Active"
 )
 
-// Values returns all known values for OptionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OptionState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OptionState) Values() []OptionState {
 	return []OptionState{
 		"RequiresIndexDocuments",
@@ -462,9 +461,9 @@ const (
 	PackageTypeTxtDictionary PackageType = "TXT-DICTIONARY"
 )
 
-// Values returns all known values for PackageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PackageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PackageType) Values() []PackageType {
 	return []PackageType{
 		"TXT-DICTIONARY",
@@ -498,10 +497,10 @@ const (
 	ReservedElasticsearchInstancePaymentOptionNoUpfront      ReservedElasticsearchInstancePaymentOption = "NO_UPFRONT"
 )
 
-// Values returns all known values for
-// ReservedElasticsearchInstancePaymentOption. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReservedElasticsearchInstancePaymentOption.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ReservedElasticsearchInstancePaymentOption) Values() []ReservedElasticsearchInstancePaymentOption {
 	return []ReservedElasticsearchInstancePaymentOption{
 		"ALL_UPFRONT",
@@ -536,10 +535,9 @@ const (
 	ScheduledAutoTuneActionTypeJvmYoungGenTuning ScheduledAutoTuneActionType = "JVM_YOUNG_GEN_TUNING"
 )
 
-// Values returns all known values for ScheduledAutoTuneActionType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ScheduledAutoTuneActionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduledAutoTuneActionType) Values() []ScheduledAutoTuneActionType {
 	return []ScheduledAutoTuneActionType{
 		"JVM_HEAP_SIZE_TUNING",
@@ -575,9 +573,9 @@ const (
 	TimeUnitHours TimeUnit = "HOURS"
 )
 
-// Values returns all known values for TimeUnit. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TimeUnit. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (TimeUnit) Values() []TimeUnit {
 	return []TimeUnit{
 		"HOURS",
@@ -633,9 +631,9 @@ const (
 	UpgradeStepUpgrade         UpgradeStep = "UPGRADE"
 )
 
-// Values returns all known values for UpgradeStep. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpgradeStep. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (UpgradeStep) Values() []UpgradeStep {
 	return []UpgradeStep{
 		"PRE_UPGRADE_CHECK",
@@ -674,8 +672,8 @@ const (
 	VpcEndpointErrorCodeServerError      VpcEndpointErrorCode = "SERVER_ERROR"
 )
 
-// Values returns all known values for VpcEndpointErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for VpcEndpointErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (VpcEndpointErrorCode) Values() []VpcEndpointErrorCode {
 	return []VpcEndpointErrorCode{

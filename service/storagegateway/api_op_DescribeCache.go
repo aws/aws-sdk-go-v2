@@ -54,8 +54,8 @@ type DescribeCacheOutput struct {
 	// from cache. The sample is taken at the end of the reporting period.
 	CacheHitPercentage float64
 
-	// Percent of application read operations from the file shares that are not
-	// served from cache. The sample is taken at the end of the reporting period.
+	// Percent of application read operations from the file shares that are not served
+	// from cache. The sample is taken at the end of the reporting period.
 	CacheMissPercentage float64
 
 	// Percent use of the gateway's cache storage. This metric applies only to the
@@ -65,7 +65,7 @@ type DescribeCacheOutput struct {
 
 	// An array of strings that identify disks that are to be configured as working
 	// storage. Each string has a minimum length of 1 and maximum length of 300. You
-	// can get the disk IDs from the ListLocalDisks  API.
+	// can get the disk IDs from the ListLocalDisks API.
 	DiskIds []string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

@@ -12,9 +12,9 @@ import (
 )
 
 // Returns a list of key-value pairs assigned to a target recovery point, backup
-// plan, or backup vault. ListTags only works for resource types that support
-// full Backup management of their backups. Those resource types are listed in the
-// "Full Backup management" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
+// plan, or backup vault. ListTags only works for resource types that support full
+// Backup management of their backups. Those resource types are listed in the "Full
+// Backup management" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 // table.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
@@ -44,7 +44,7 @@ type ListTagsInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults  number of items, NextToken allows you to
+	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -55,7 +55,7 @@ type ListTagsInput struct {
 type ListTagsOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults  number of items, NextToken allows you to
+	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -145,8 +145,8 @@ type ListTagsPaginatorOptions struct {
 	// The maximum number of items to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

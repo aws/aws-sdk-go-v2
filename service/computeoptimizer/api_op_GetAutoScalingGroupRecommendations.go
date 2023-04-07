@@ -13,8 +13,7 @@ import (
 
 // Returns Auto Scaling group recommendations. Compute Optimizer generates
 // recommendations for Amazon EC2 Auto Scaling groups that meet a specific set of
-// requirements. For more information, see the Supported resources and
-// requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
+// requirements. For more information, see the Supported resources and requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
 // in the Compute Optimizer User Guide.
 func (c *Client) GetAutoScalingGroupRecommendations(ctx context.Context, params *GetAutoScalingGroupRecommendationsInput, optFns ...func(*Options)) (*GetAutoScalingGroupRecommendationsOutput, error) {
 	if params == nil {
@@ -50,14 +49,14 @@ type GetAutoScalingGroupRecommendationsInput struct {
 
 	// The maximum number of Auto Scaling group recommendations to return with a
 	// single request. To retrieve the remaining results, make another request with the
-	// returned nextToken  value.
+	// returned nextToken value.
 	MaxResults *int32
 
 	// The token to advance to the next page of Auto Scaling group recommendations.
 	NextToken *string
 
-	// An object to specify the preferences for the Auto Scaling group
-	// recommendations to return in the response.
+	// An object to specify the preferences for the Auto Scaling group recommendations
+	// to return in the response.
 	RecommendationPreferences *types.RecommendationPreferences
 
 	noSmithyDocumentSerde

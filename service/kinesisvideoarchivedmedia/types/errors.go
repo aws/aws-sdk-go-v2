@@ -63,8 +63,8 @@ func (e *InvalidArgumentException) ErrorCode() string {
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The codec private data in at least one of the tracks of the video stream is
-// not valid for this operation.
+// The codec private data in at least one of the tracks of the video stream is not
+// valid for this operation.
 type InvalidCodecPrivateDataException struct {
 	Message *string
 
@@ -144,7 +144,7 @@ func (e *MissingCodecPrivateDataException) ErrorCode() string {
 func (e *MissingCodecPrivateDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A streaming session was requested for a stream that does not retain data (that
-// is, has a DataRetentionInHours  of 0).
+// is, has a DataRetentionInHours of 0).
 type NoDataRetentionException struct {
 	Message *string
 
@@ -198,11 +198,11 @@ func (e *NotAuthorizedException) ErrorCode() string {
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // GetMedia throws this error when Kinesis Video Streams can't find the stream
-// that you specified. GetHLSStreamingSessionURL  and GetDASHStreamingSessionURL
-// throw this error if a session with a PlaybackMode  of ON_DEMAND  or LIVE_REPLAY
-// is requested for a stream that has no fragments within the requested time range,
-// or if a session with a PlaybackMode  of LIVE is requested for a stream that
-// has no fragments within the last 30 seconds.
+// that you specified. GetHLSStreamingSessionURL and GetDASHStreamingSessionURL
+// throw this error if a session with a PlaybackMode of ON_DEMAND or LIVE_REPLAY is
+// requested for a stream that has no fragments within the requested time range, or
+// if a session with a PlaybackMode of LIVE is requested for a stream that has no
+// fragments within the last 30 seconds.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -228,10 +228,10 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The type of the media (for example, h.264 or h.265 video or ACC or G.711
-// audio) could not be determined from the codec IDs of the tracks in the first
-// fragment for a playback session. The codec ID for track 1 should be
-// V_MPEG/ISO/AVC and, optionally, the codec ID for track 2 should be A_AAC .
+// The type of the media (for example, h.264 or h.265 video or ACC or G.711 audio)
+// could not be determined from the codec IDs of the tracks in the first fragment
+// for a playback session. The codec ID for track 1 should be V_MPEG/ISO/AVC and,
+// optionally, the codec ID for track 2 should be A_AAC .
 type UnsupportedStreamMediaTypeException struct {
 	Message *string
 

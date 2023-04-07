@@ -29,21 +29,21 @@ func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInp
 	return out, nil
 }
 
-// Represents the input of a ListDeployments  operation.
+// Represents the input of a ListDeployments operation.
 type ListDeploymentsInput struct {
 
 	// The name of an CodeDeploy application associated with the IAM user or Amazon
-	// Web Services account. If applicationName  is specified, then
-	// deploymentGroupName must be specified. If it is not specified, then
-	// deploymentGroupName must not be specified.
+	// Web Services account. If applicationName is specified, then deploymentGroupName
+	// must be specified. If it is not specified, then deploymentGroupName must not be
+	// specified.
 	ApplicationName *string
 
 	// A time range (start and end) for returning a subset of the list of deployments.
 	CreateTimeRange *types.TimeRange
 
 	// The name of a deployment group for the specified application. If
-	// deploymentGroupName is specified, then applicationName must be specified. If
-	// it is not specified, then applicationName  must not be specified.
+	// deploymentGroupName is specified, then applicationName must be specified. If it
+	// is not specified, then applicationName must not be specified.
 	DeploymentGroupName *string
 
 	// The unique ID of an external resource for returning deployments linked to the
@@ -51,12 +51,12 @@ type ListDeploymentsInput struct {
 	ExternalId *string
 
 	// A subset of deployments to list by status:
-	//     - Created : Include created deployments in the resulting list.
-	//     - Queued : Include queued deployments in the resulting list.
-	//     - In Progress : Include in-progress deployments in the resulting list.
-	//     - Succeeded : Include successful deployments in the resulting list.
-	//     - Failed : Include failed deployments in the resulting list.
-	//     - Stopped : Include stopped deployments in the resulting list.
+	//   - Created : Include created deployments in the resulting list.
+	//   - Queued : Include queued deployments in the resulting list.
+	//   - In Progress : Include in-progress deployments in the resulting list.
+	//   - Succeeded : Include successful deployments in the resulting list.
+	//   - Failed : Include failed deployments in the resulting list.
+	//   - Stopped : Include stopped deployments in the resulting list.
 	IncludeOnlyStatuses []types.DeploymentStatus
 
 	// An identifier returned from the previous list deployments call. It can be used
@@ -66,7 +66,7 @@ type ListDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListDeployments  operation.
+// Represents the output of a ListDeployments operation.
 type ListDeploymentsOutput struct {
 
 	// A list of deployment IDs.
@@ -153,8 +153,8 @@ var _ ListDeploymentsAPIClient = (*Client)(nil)
 
 // ListDeploymentsPaginatorOptions is the paginator options for ListDeployments
 type ListDeploymentsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

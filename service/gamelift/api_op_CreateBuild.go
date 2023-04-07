@@ -11,19 +11,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon GameLift build resource for your game server binary
-// files. Combine game server binaries into a zip file for use with Amazon
-// GameLift. When setting up a new game build for GameLift, we recommend using the
-// CLI command upload-build (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html)
+// Creates a new Amazon GameLift build resource for your game server binary files.
+// Combine game server binaries into a zip file for use with Amazon GameLift. When
+// setting up a new game build for GameLift, we recommend using the CLI command
+// upload-build (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html)
 // . This helper command combines two tasks: (1) it uploads your build files from a
 // file directory to a GameLift Amazon S3 location, and (2) it creates a new build
 // resource. You can use the operation in the following scenarios:
-//   - To create a new game build with build files that are in an Amazon S3 location under an Amazon Web Services account that you control. To use this option, you give Amazon GameLift access to the Amazon S3 bucket. With permissions in place, specify a build name, operating system, and the Amazon S3 storage location of your game build.
-//   - To directly upload your build files to a GameLift Amazon S3 location. To use this option, specify a build name and operating system. This operation creates a new build resource and also returns an Amazon S3 location with temporary access credentials. Use the credentials to manually upload your build files to the specified Amazon S3 location. For more information, see Uploading Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html) in the Amazon S3 Developer Guide. After you upload build files to the GameLift Amazon S3 location, you can't update them.
+//   - To create a new game build with build files that are in an Amazon S3
+//     location under an Amazon Web Services account that you control. To use this
+//     option, you give Amazon GameLift access to the Amazon S3 bucket. With
+//     permissions in place, specify a build name, operating system, and the Amazon S3
+//     storage location of your game build.
+//   - To directly upload your build files to a GameLift Amazon S3 location. To
+//     use this option, specify a build name and operating system. This operation
+//     creates a new build resource and also returns an Amazon S3 location with
+//     temporary access credentials. Use the credentials to manually upload your build
+//     files to the specified Amazon S3 location. For more information, see
+//     Uploading Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html)
+//     in the Amazon S3 Developer Guide. After you upload build files to the GameLift
+//     Amazon S3 location, you can't update them.
 //
 // If successful, this operation creates a new build resource with a unique build
-// ID and places it in INITIALIZED  status. A build must be in READY status
-// before you can create fleets with it. Learn more Uploading Your Game (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
+// ID and places it in INITIALIZED status. A build must be in READY status before
+// you can create fleets with it. Learn more Uploading Your Game (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
 // Create a Build with Files in Amazon S3 (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
 // All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateBuild(ctx context.Context, params *CreateBuildInput, optFns ...func(*Options)) (*CreateBuildOutput, error) {
@@ -65,9 +76,9 @@ type CreateBuildInput struct {
 	// that you own. The storage location must specify an Amazon S3 bucket name and
 	// key. The location must also specify a role ARN that you set up to allow Amazon
 	// GameLift to access your Amazon S3 bucket. The S3 bucket and your new build must
-	// be in the same Region. If a StorageLocation is specified, the size of your
-	// file can be found in your Amazon S3 bucket. Amazon GameLift will report a
-	// SizeOnDisk of 0.
+	// be in the same Region. If a StorageLocation is specified, the size of your file
+	// can be found in your Amazon S3 bucket. Amazon GameLift will report a SizeOnDisk
+	// of 0.
 	StorageLocation *types.S3Location
 
 	// A list of labels to assign to the new build resource. Tags are developer

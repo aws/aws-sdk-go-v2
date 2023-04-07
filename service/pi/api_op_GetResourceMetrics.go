@@ -46,7 +46,7 @@ type GetResourceMetricsInput struct {
 	// An immutable identifier for a data source that is unique for an Amazon Web
 	// Services Region. Performance Insights gathers metrics from this data source. In
 	// the console, the identifier is shown as ResourceID. When you call
-	// DescribeDBInstances , the identifier is returned as DbiResourceId. To use a DB
+	// DescribeDBInstances , the identifier is returned as DbiResourceId . To use a DB
 	// instance as a data source, specify its DbiResourceId value. For example,
 	// specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X .
 	//
@@ -60,10 +60,10 @@ type GetResourceMetricsInput struct {
 	// This member is required.
 	MetricQueries []types.MetricQuery
 
-	// The Amazon Web Services service for which Performance Insights returns
-	// metrics. Valid values are as follows:
-	//     - RDS
-	//     - DOCDB
+	// The Amazon Web Services service for which Performance Insights returns metrics.
+	// Valid values are as follows:
+	//   - RDS
+	//   - DOCDB
 	//
 	// This member is required.
 	ServiceType types.ServiceType
@@ -78,9 +78,9 @@ type GetResourceMetricsInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The maximum number of items to return in the response. If more items exist
-	// than the specified MaxRecords value, a pagination token is included in the
-	// response so that the remaining results can be retrieved.
+	// The maximum number of items to return in the response. If more items exist than
+	// the specified MaxRecords value, a pagination token is included in the response
+	// so that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -95,12 +95,12 @@ type GetResourceMetricsInput struct {
 	// The granularity, in seconds, of the data points returned from Performance
 	// Insights. A period can be as short as one second, or as long as one day (86400
 	// seconds). Valid values are:
-	//     - 1 (one second)
-	//     - 60 (one minute)
-	//     - 300 (five minutes)
-	//     - 3600 (one hour)
-	//     - 86400 (twenty-four hours)
-	// If you don't specify PeriodInSeconds, then Performance Insights will choose a
+	//   - 1 (one second)
+	//   - 60 (one minute)
+	//   - 300 (five minutes)
+	//   - 3600 (one hour)
+	//   - 86400 (twenty-four hours)
+	// If you don't specify PeriodInSeconds , then Performance Insights will choose a
 	// value for you, with a goal of returning roughly 100-200 data points in the
 	// response.
 	PeriodInSeconds *int32
@@ -115,9 +115,9 @@ type GetResourceMetricsOutput struct {
 	// equal to the value of the user-specified Endtime .
 	AlignedEndTime *time.Time
 
-	// The start time for the returned metrics, after alignment to a granular
-	// boundary (as specified by PeriodInSeconds ). AlignedStartTime will be less
-	// than or equal to the value of the user-specified StartTime .
+	// The start time for the returned metrics, after alignment to a granular boundary
+	// (as specified by PeriodInSeconds ). AlignedStartTime will be less than or equal
+	// to the value of the user-specified StartTime .
 	AlignedStartTime *time.Time
 
 	// An immutable identifier for a data source that is unique for an Amazon Web
@@ -215,13 +215,13 @@ var _ GetResourceMetricsAPIClient = (*Client)(nil)
 // GetResourceMetricsPaginatorOptions is the paginator options for
 // GetResourceMetrics
 type GetResourceMetricsPaginatorOptions struct {
-	// The maximum number of items to return in the response. If more items exist
-	// than the specified MaxRecords value, a pagination token is included in the
-	// response so that the remaining results can be retrieved.
+	// The maximum number of items to return in the response. If more items exist than
+	// the specified MaxRecords value, a pagination token is included in the response
+	// so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

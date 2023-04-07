@@ -47,10 +47,10 @@ type CreateCustomLogSourceInput struct {
 	// This member is required.
 	EventClass types.OcsfEventClass
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
-	// role to be used by the Glue crawler. The recommended IAM policies are:
-	//     - The managed policy AWSGlueServiceRole
-	//     - A custom policy granting access to your Amazon S3 Data Lake
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// to be used by the Glue crawler. The recommended IAM policies are:
+	//   - The managed policy AWSGlueServiceRole
+	//   - A custom policy granting access to your Amazon S3 Data Lake
 	//
 	// This member is required.
 	GlueInvocationRoleArn *string

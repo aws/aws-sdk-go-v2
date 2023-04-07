@@ -41,8 +41,8 @@ type UpdateQueueMaxContactsInput struct {
 	// This member is required.
 	QueueId *string
 
-	// The maximum number of contacts that can be in the queue before it is
-	// considered full.
+	// The maximum number of contacts that can be in the queue before it is considered
+	// full.
 	MaxContacts *int32
 
 	noSmithyDocumentSerde

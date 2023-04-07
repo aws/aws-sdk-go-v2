@@ -29,9 +29,9 @@ func (c *Client) ListResourcesInProtectionGroup(ctx context.Context, params *Lis
 
 type ListResourcesInProtectionGroupInput struct {
 
-	// The name of the protection group. You use this to identify the protection
-	// group in lists and to manage the protection group, for example to update,
-	// delete, or describe it.
+	// The name of the protection group. You use this to identify the protection group
+	// in lists and to manage the protection group, for example to update, delete, or
+	// describe it.
 	//
 	// This member is required.
 	ProtectionGroupId *string
@@ -45,14 +45,14 @@ type ListResourcesInProtectionGroupInput struct {
 
 	// When you request a list of objects from Shield Advanced, if the response does
 	// not include all of the remaining available objects, Shield Advanced includes a
-	// NextTokenvalue in the response. You can retrieve the next batch of objects by
+	// NextToken value in the response. You can retrieve the next batch of objects by
 	// requesting the list again and providing the token that was returned by the prior
 	// call in your request. You can indicate the maximum number of objects that you
 	// want Shield Advanced to return for a single call with the MaxResults setting.
 	// Shield Advanced will not return more than MaxResults objects, but may return
 	// fewer, even if more objects are still available. Whenever more objects remain
 	// that Shield Advanced has not yet returned to you, the response will include a
-	// NextTokenvalue. On your first call to a list operation, leave this setting
+	// NextToken value. On your first call to a list operation, leave this setting
 	// empty.
 	NextToken *string
 
@@ -69,7 +69,7 @@ type ListResourcesInProtectionGroupOutput struct {
 
 	// When you request a list of objects from Shield Advanced, if the response does
 	// not include all of the remaining available objects, Shield Advanced includes a
-	// NextTokenvalue in the response. You can retrieve the next batch of objects by
+	// NextToken value in the response. You can retrieve the next batch of objects by
 	// requesting the list again and providing the token that was returned by the prior
 	// call in your request. You can indicate the maximum number of objects that you
 	// want Shield Advanced to return for a single call with the MaxResults setting.
@@ -166,8 +166,8 @@ type ListResourcesInProtectionGroupPaginatorOptions struct {
 	// response. The default setting is 20.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

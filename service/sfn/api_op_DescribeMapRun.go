@@ -50,13 +50,13 @@ type DescribeMapRunOutput struct {
 
 	// A JSON object that contains information about the total number of child
 	// workflow executions for the Map Run, and the count of child workflow executions
-	// for each status, such as failed  and succeeded .
+	// for each status, such as failed and succeeded .
 	//
 	// This member is required.
 	ExecutionCounts *types.MapRunExecutionCounts
 
 	// A JSON object that contains information about the total number of items, and
-	// the item count for each processing status, such as pending  and failed .
+	// the item count for each processing status, such as pending and failed .
 	//
 	// This member is required.
 	ItemCounts *types.MapRunItemCounts
@@ -82,8 +82,7 @@ type DescribeMapRunOutput struct {
 	// This member is required.
 	Status types.MapRunStatus
 
-	// The maximum number of failed child workflow executions before the Map Run
-	// fails.
+	// The maximum number of failed child workflow executions before the Map Run fails.
 	//
 	// This member is required.
 	ToleratedFailureCount int64

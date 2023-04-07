@@ -43,8 +43,8 @@ type DescribeEventsInput struct {
 	// 8601 format. Example: 2009-07-08T18:00Z
 	EndTime *time.Time
 
-	// A list of event categories that trigger notifications for an event
-	// notification subscription.
+	// A list of event categories that trigger notifications for an event notification
+	// subscription.
 	EventCategories []string
 
 	// This parameter is not currently supported.
@@ -55,20 +55,22 @@ type DescribeEventsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The identifier of the event source for which events are returned. If not
 	// specified, then all sources are included in the response. Constraints:
-	//     - If SourceIdentifier is provided, SourceType must also be provided.
-	//     - If the source type is DBInstance , a DBInstanceIdentifier must be provided.
-	//     - If the source type is DBSecurityGroup , a DBSecurityGroupName must be provided.
-	//     - If the source type is DBParameterGroup , a DBParameterGroupName must be provided.
-	//     - If the source type is DBSnapshot , a DBSnapshotIdentifier must be provided.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - If SourceIdentifier is provided, SourceType must also be provided.
+	//   - If the source type is DBInstance , a DBInstanceIdentifier must be provided.
+	//   - If the source type is DBSecurityGroup , a DBSecurityGroupName must be
+	//   provided.
+	//   - If the source type is DBParameterGroup , a DBParameterGroupName must be
+	//   provided.
+	//   - If the source type is DBSnapshot , a DBSnapshotIdentifier must be provided.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	SourceIdentifier *string
 
 	// The event source to retrieve events for. If no value is specified, all events
@@ -172,14 +174,14 @@ var _ DescribeEventsAPIClient = (*Client)(nil)
 
 // DescribeEventsPaginatorOptions is the paginator options for DescribeEvents
 type DescribeEventsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

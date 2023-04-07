@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Lists the start times of the available aggregated profiles of a profiling
-// group for an aggregation period within the specified time range.
+// Lists the start times of the available aggregated profiles of a profiling group
+// for an aggregation period within the specified time range.
 func (c *Client) ListProfileTimes(ctx context.Context, params *ListProfileTimesInput, optFns ...func(*Options)) (*ListProfileTimesOutput, error) {
 	if params == nil {
 		params = &ListProfileTimesInput{}
@@ -41,9 +41,9 @@ type ListProfileTimesInput struct {
 	// The aggregation period. This specifies the period during which an aggregation
 	// profile collects posted agent profiles for a profiling group. There are 3 valid
 	// values.
-	//     - P1D — 1 day
-	//     - PT1H — 1 hour
-	//     - PT5M — 5 minutes
+	//   - P1D — 1 day
+	//   - PT1H — 1 hour
+	//   - PT5M — 5 minutes
 	//
 	// This member is required.
 	Period types.AggregationPeriod
@@ -59,18 +59,18 @@ type ListProfileTimesInput struct {
 	StartTime *time.Time
 
 	// The maximum number of profile time results returned by ListProfileTimes in
-	// paginated output. When this parameter is used, ListProfileTimes  only returns
+	// paginated output. When this parameter is used, ListProfileTimes only returns
 	// maxResults results in a single page with a nextToken response element. The
 	// remaining results of the initial request can be seen by sending another
-	// ListProfileTimes request with the returned nextToken  value.
+	// ListProfileTimes request with the returned nextToken value.
 	MaxResults *int32
 
-	// The nextToken  value returned from a previous paginated ListProfileTimes
-	// request where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value. This token should be treated as an opaque
-	// identifier that is only used to retrieve the next items in a list and not for
-	// other programmatic purposes.
+	// The nextToken value returned from a previous paginated ListProfileTimes request
+	// where maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value. This token should be treated as an opaque identifier that is
+	// only used to retrieve the next items in a list and not for other programmatic
+	// purposes.
 	NextToken *string
 
 	// The order (ascending or descending by start time of the profile) to use when
@@ -83,16 +83,16 @@ type ListProfileTimesInput struct {
 // The structure representing the listProfileTimesResponse.
 type ListProfileTimesOutput struct {
 
-	// The list of start times of the available profiles for the aggregation period
-	// in the specified time range.
+	// The list of start times of the available profiles for the aggregation period in
+	// the specified time range.
 	//
 	// This member is required.
 	ProfileTimes []types.ProfileTime
 
-	// The nextToken  value to include in a future ListProfileTimes request. When the
-	// results of a ListProfileTimes  request exceed maxResults, this value can be
-	// used to retrieve the next page of results. This value is null when there are
-	// no more results to return.
+	// The nextToken value to include in a future ListProfileTimes request. When the
+	// results of a ListProfileTimes request exceed maxResults , this value can be used
+	// to retrieve the next page of results. This value is null when there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -175,14 +175,14 @@ var _ ListProfileTimesAPIClient = (*Client)(nil)
 // ListProfileTimesPaginatorOptions is the paginator options for ListProfileTimes
 type ListProfileTimesPaginatorOptions struct {
 	// The maximum number of profile time results returned by ListProfileTimes in
-	// paginated output. When this parameter is used, ListProfileTimes  only returns
+	// paginated output. When this parameter is used, ListProfileTimes only returns
 	// maxResults results in a single page with a nextToken response element. The
 	// remaining results of the initial request can be seen by sending another
-	// ListProfileTimes request with the returned nextToken  value.
+	// ListProfileTimes request with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

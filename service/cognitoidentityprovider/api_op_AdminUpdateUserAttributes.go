@@ -13,7 +13,7 @@ import (
 
 // Updates the specified user's attributes, including developer attributes, as an
 // administrator. Works on any user. For custom attributes, you must prepend the
-// custom:prefix to the attribute name. In addition to updating user attributes,
+// custom: prefix to the attribute name. In addition to updating user attributes,
 // this API can also be used to mark phone and email as verified. This action might
 // generate an SMS text message. Starting June 1, 2021, US telecom carriers require
 // you to register an origination phone number before you can send SMS messages to
@@ -56,10 +56,10 @@ type AdminUpdateUserAttributesInput struct {
 	// message to verify the new value, Amazon Cognito updates the attribute value.
 	// Your user can sign in and receive messages with the original attribute value
 	// until they verify the new value. To update the value of an attribute that
-	// requires verification in the same API request, include the email_verified  or
+	// requires verification in the same API request, include the email_verified or
 	// phone_number_verified attribute, with a value of true . If you set the
-	// email_verified or phone_number_verified  value for an email  or phone_number
-	// attribute that requires verification to true, Amazon Cognito doesn’t send a
+	// email_verified or phone_number_verified value for an email or phone_number
+	// attribute that requires verification to true , Amazon Cognito doesn’t send a
 	// verification message to your user.
 	//
 	// This member is required.
@@ -88,9 +88,13 @@ type AdminUpdateUserAttributesInput struct {
 	// see Customizing user pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	//     - Store the ClientMetadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration doesn't include triggers, the ClientMetadata parameter serves no purpose.
-	//     - Validate the ClientMetadata value.
-	//     - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide sensitive information.
+	//   - Store the ClientMetadata value. This data is available only to Lambda
+	//   triggers that are assigned to a user pool to support custom workflows. If your
+	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
+	//   serves no purpose.
+	//   - Validate the ClientMetadata value.
+	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
+	//   sensitive information.
 	ClientMetadata map[string]string
 
 	noSmithyDocumentSerde

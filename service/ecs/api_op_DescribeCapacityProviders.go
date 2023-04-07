@@ -30,7 +30,7 @@ func (c *Client) DescribeCapacityProviders(ctx context.Context, params *Describe
 type DescribeCapacityProvidersInput struct {
 
 	// The short name or full Amazon Resource Name (ARN) of one or more capacity
-	// providers. Up to 100  capacity providers can be described in an action.
+	// providers. Up to 100 capacity providers can be described in an action.
 	CapacityProviders []string
 
 	// Specifies whether or not you want to see the resource tags for the capacity
@@ -45,15 +45,15 @@ type DescribeCapacityProvidersInput struct {
 	// request can be seen by sending another DescribeCapacityProviders request with
 	// the returned nextToken value. This value can be between 1 and 10. If this
 	// parameter is not used, then DescribeCapacityProviders returns up to 10 results
-	// and a nextToken  value if applicable.
+	// and a nextToken value if applicable.
 	MaxResults *int32
 
-	// The nextToken  value returned from a previous paginated
-	// DescribeCapacityProviders request where maxResults was used and the results
-	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value. This token should be
-	// treated as an opaque identifier that is only used to retrieve the next items in
-	// a list and not for other programmatic purposes.
+	// The nextToken value returned from a previous paginated DescribeCapacityProviders
+	// request where maxResults was used and the results exceeded the value of that
+	// parameter. Pagination continues from the end of the previous results that
+	// returned the nextToken value. This token should be treated as an opaque
+	// identifier that is only used to retrieve the next items in a list and not for
+	// other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -67,10 +67,10 @@ type DescribeCapacityProvidersOutput struct {
 	// Any failures associated with the call.
 	Failures []types.Failure
 
-	// The nextToken  value to include in a future DescribeCapacityProviders request.
-	// When the results of a DescribeCapacityProviders  request exceed maxResults,
-	// this value can be used to retrieve the next page of results. This value is null
-	// when there are no more results to return.
+	// The nextToken value to include in a future DescribeCapacityProviders request.
+	// When the results of a DescribeCapacityProviders request exceed maxResults , this
+	// value can be used to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

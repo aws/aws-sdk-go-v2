@@ -145,8 +145,8 @@ var _ ListRepositorySyncDefinitionsAPIClient = (*Client)(nil)
 // ListRepositorySyncDefinitionsPaginatorOptions is the paginator options for
 // ListRepositorySyncDefinitions
 type ListRepositorySyncDefinitionsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

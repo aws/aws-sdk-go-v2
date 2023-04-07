@@ -33,7 +33,7 @@ type GetHostedZoneCountInput struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains the response to a GetHostedZoneCount  request.
+// A complex type that contains the response to a GetHostedZoneCount request.
 type GetHostedZoneCountOutput struct {
 
 	// The total number of public and private hosted zones that are associated with

@@ -14,9 +14,9 @@ import (
 
 // Lists the Amazon Lookout for Vision projects in your AWS account that are in
 // the AWS Region in which you call ListProjects . The ListProjects operation is
-// eventually consistent. Recent calls to CreateProject  and DeleteProject might
-// take a while to appear in the response from ListProjects. This operation
-// requires permissions to perform the lookoutvision:ListProjects  operation.
+// eventually consistent. Recent calls to CreateProject and DeleteProject might
+// take a while to appear in the response from ListProjects . This operation
+// requires permissions to perform the lookoutvision:ListProjects operation.
 func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, optFns ...func(*Options)) (*ListProjectsOutput, error) {
 	if params == nil {
 		params = &ListProjectsInput{}
@@ -49,8 +49,8 @@ type ListProjectsInput struct {
 
 type ListProjectsOutput struct {
 
-	// If the response is truncated, Amazon Lookout for Vision returns this token
-	// that you can use in the subsequent request to retrieve the next set of projects.
+	// If the response is truncated, Amazon Lookout for Vision returns this token that
+	// you can use in the subsequent request to retrieve the next set of projects.
 	NextToken *string
 
 	// A list of projects in your AWS account.
@@ -136,8 +136,8 @@ type ListProjectsPaginatorOptions struct {
 	// ValidationException error occurs. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

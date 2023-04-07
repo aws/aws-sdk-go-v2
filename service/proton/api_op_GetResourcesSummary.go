@@ -22,7 +22,6 @@ import (
 // exceptions—see the components , environments , and serviceTemplates field
 // descriptions. For context, the action also returns the total number of each type
 // of Proton template in the Amazon Web Services account. For more information, see
-//
 // Proton dashboard (https://docs.aws.amazon.com/proton/latest/userguide/monitoring-dashboard.html)
 // in the Proton User Guide.
 func (c *Client) GetResourcesSummary(ctx context.Context, params *GetResourcesSummaryInput, optFns ...func(*Options)) (*GetResourcesSummaryOutput, error) {

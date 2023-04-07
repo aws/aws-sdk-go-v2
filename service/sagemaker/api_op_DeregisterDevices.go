@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters the specified devices. After you deregister a device, you will
-// need to re-register the devices.
+// Deregisters the specified devices. After you deregister a device, you will need
+// to re-register the devices.
 func (c *Client) DeregisterDevices(ctx context.Context, params *DeregisterDevicesInput, optFns ...func(*Options)) (*DeregisterDevicesOutput, error) {
 	if params == nil {
 		params = &DeregisterDevicesInput{}

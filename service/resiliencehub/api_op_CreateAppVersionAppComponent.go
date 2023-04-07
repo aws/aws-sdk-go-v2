@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Application Component in the Resilience Hub application. This
-// API updates the Resilience Hub application draft version. To use this
-// Application Component for running assessments, you must publish the Resilience
-// Hub application using the PublishAppVersion  API.
+// Creates a new Application Component in the Resilience Hub application. This API
+// updates the Resilience Hub application draft version. To use this Application
+// Component for running assessments, you must publish the Resilience Hub
+// application using the PublishAppVersion API.
 func (c *Client) CreateAppVersionAppComponent(ctx context.Context, params *CreateAppVersionAppComponentInput, optFns ...func(*Options)) (*CreateAppVersionAppComponentOutput, error) {
 	if params == nil {
 		params = &CreateAppVersionAppComponentInput{}

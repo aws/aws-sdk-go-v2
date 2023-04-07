@@ -34,8 +34,8 @@ type UpdateEndpointAccessInput struct {
 	// This member is required.
 	EndpointName *string
 
-	// The list of VPC security groups associated with the endpoint after the
-	// endpoint is modified.
+	// The list of VPC security groups associated with the endpoint after the endpoint
+	// is modified.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde

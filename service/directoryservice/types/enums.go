@@ -265,9 +265,9 @@ const (
 	LDAPSStatusDisabled     LDAPSStatus = "Disabled"
 )
 
-// Values returns all known values for LDAPSStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LDAPSStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LDAPSStatus) Values() []LDAPSStatus {
 	return []LDAPSStatus{
 		"Enabling",
@@ -446,9 +446,9 @@ const (
 	ShareMethodHandshake     ShareMethod = "HANDSHAKE"
 )
 
-// Values returns all known values for ShareMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ShareMethod. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ShareMethod) Values() []ShareMethod {
 	return []ShareMethod{
 		"ORGANIZATIONS",
@@ -471,9 +471,9 @@ const (
 	ShareStatusDeleting          ShareStatus = "Deleting"
 )
 
-// Values returns all known values for ShareStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ShareStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ShareStatus) Values() []ShareStatus {
 	return []ShareStatus{
 		"Shared",
@@ -552,9 +552,9 @@ const (
 	TopicStatusDeleted       TopicStatus = "Deleted"
 )
 
-// Values returns all known values for TopicStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TopicStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TopicStatus) Values() []TopicStatus {
 	return []TopicStatus{
 		"Registered",

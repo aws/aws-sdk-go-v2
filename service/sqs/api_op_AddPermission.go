@@ -16,14 +16,19 @@ import (
 // grant or deny permissions to the queue. For more information about these
 // permissions, see Allow Developers to Write Messages to a Shared Queue (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue)
 // in the Amazon SQS Developer Guide.
-//   - AddPermission generates a policy for you. You can use SetQueueAttributes to upload your policy. For more information, see Using Custom Policies with the Amazon SQS Access Policy Language (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html) in the Amazon SQS Developer Guide.
+//   - AddPermission generates a policy for you. You can use SetQueueAttributes to
+//     upload your policy. For more information, see Using Custom Policies with the
+//     Amazon SQS Access Policy Language (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html)
+//     in the Amazon SQS Developer Guide.
 //   - An Amazon SQS policy can have a maximum of 7 actions.
-//   - To remove the ability to change queue permissions, you must deny permission to the AddPermission , RemovePermission , and SetQueueAttributes actions in your IAM policy.
+//   - To remove the ability to change queue permissions, you must deny permission
+//     to the AddPermission , RemovePermission , and SetQueueAttributes actions in
+//     your IAM policy.
 //
 // Some actions take lists of parameters. These lists are specified using the
 // param.n notation. Values of n are integers starting from 1. For example, a
 // parameter list with two elements looks like this: &AttributeName.1=first
-// &AttributeName.2=secondCross-account permissions don't apply to this action.
+// &AttributeName.2=second Cross-account permissions don't apply to this action.
 // For more information, see Grant cross-account permissions to a role and a user
 // name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon SQS Developer Guide.
@@ -52,10 +57,10 @@ type AddPermissionInput struct {
 	// This member is required.
 	AWSAccountIds []string
 
-	// The action the client wants to allow for the specified principal. Valid
-	// values: the name of any action or *. For more information about these actions,
-	// see Overview of Managing Access Permissions to Your Amazon Simple Queue
-	// Service Resource (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html)
+	// The action the client wants to allow for the specified principal. Valid values:
+	// the name of any action or * . For more information about these actions, see
+	// Overview of Managing Access Permissions to Your Amazon Simple Queue Service
+	// Resource (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html)
 	// in the Amazon SQS Developer Guide. Specifying SendMessage , DeleteMessage , or
 	// ChangeMessageVisibility for ActionName.n also grants permissions for the
 	// corresponding batch versions of those actions: SendMessageBatch ,
@@ -65,7 +70,7 @@ type AddPermissionInput struct {
 	Actions []string
 
 	// The unique identification of the permission you're setting (for example,
-	// AliceSendMessage). Maximum 80 characters. Allowed characters include
+	// AliceSendMessage ). Maximum 80 characters. Allowed characters include
 	// alphanumeric characters, hyphens ( - ), and underscores ( _ ).
 	//
 	// This member is required.

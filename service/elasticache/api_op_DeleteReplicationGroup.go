@@ -15,7 +15,7 @@ import (
 // entire replication group, including the primary/primaries and all of the read
 // replicas. If the replication group has only one primary, you can optionally
 // delete only the read replicas, while retaining the primary by setting
-// RetainPrimaryCluster=true. When you receive a successful response from this
+// RetainPrimaryCluster=true . When you receive a successful response from this
 // operation, Amazon ElastiCache immediately begins deleting the selected
 // resources; you cannot cancel or revert this operation. This operation is valid
 // for Redis only.
@@ -34,7 +34,7 @@ func (c *Client) DeleteReplicationGroup(ctx context.Context, params *DeleteRepli
 	return out, nil
 }
 
-// Represents the input of a DeleteReplicationGroup  operation.
+// Represents the input of a DeleteReplicationGroup operation.
 type DeleteReplicationGroupInput struct {
 
 	// The identifier for the cluster to be deleted. This parameter is not case
@@ -49,7 +49,7 @@ type DeleteReplicationGroupInput struct {
 	// is taken, the replication group is immediately deleted.
 	FinalSnapshotIdentifier *string
 
-	// If set to true, all of the read replicas are deleted, but the primary node is
+	// If set to true , all of the read replicas are deleted, but the primary node is
 	// retained.
 	RetainPrimaryCluster *bool
 

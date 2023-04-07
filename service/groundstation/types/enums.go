@@ -12,9 +12,9 @@ const (
 	AgentStatusInactive AgentStatus = "INACTIVE"
 )
 
-// Values returns all known values for AgentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AgentStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AgentStatus) Values() []AgentStatus {
 	return []AgentStatus{
 		"SUCCESS",
@@ -113,8 +113,8 @@ const (
 	ConfigCapabilityTypeS3Recording                ConfigCapabilityType = "s3-recording"
 )
 
-// Values returns all known values for ConfigCapabilityType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ConfigCapabilityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigCapabilityType) Values() []ConfigCapabilityType {
 	return []ConfigCapabilityType{
@@ -177,9 +177,9 @@ const (
 	CriticalityRequired  Criticality = "REQUIRED"
 )
 
-// Values returns all known values for Criticality. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Criticality. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Criticality) Values() []Criticality {
 	return []Criticality{
 		"PREFERRED",

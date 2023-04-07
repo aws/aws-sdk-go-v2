@@ -644,8 +644,8 @@ func (e *KMSNotFoundException) ErrorCode() string {
 }
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The permissions policy for the resource is too large. For more information,
-// see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
+// The permissions policy for the resource is too large. For more information, see
+// Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
 // .
 type PolicyLengthExceededException struct {
 	Message *string
@@ -675,7 +675,7 @@ func (e *PolicyLengthExceededException) ErrorCode() string {
 func (e *PolicyLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The RevisionId provided does not match the latest RevisionId for the Lambda
-// function or alias. Call the GetFunction  or the GetAlias API operation to
+// function or alias. Call the GetFunction or the GetAlias API operation to
 // retrieve the latest RevisionId for your resource.
 type PreconditionFailedException struct {
 	Message *string
@@ -734,8 +734,8 @@ func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorFault() smithy.Erro
 	return smithy.FaultClient
 }
 
-// The request payload exceeded the Invoke request body JSON input quota. For
-// more information, see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
+// The request payload exceeded the Invoke request body JSON input quota. For more
+// information, see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
 // .
 type RequestTooLargeException struct {
 	Message *string
@@ -1057,7 +1057,7 @@ func (e *TooManyRequestsException) ErrorCode() string {
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The content type of the Invoke  request body is not JSON.
+// The content type of the Invoke request body is not JSON.
 type UnsupportedMediaTypeException struct {
 	Message *string
 

@@ -35,8 +35,8 @@ type StartApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// Identifies the run configuration (start parameters) of a Kinesis Data
-	// Analytics application.
+	// Identifies the run configuration (start parameters) of a Kinesis Data Analytics
+	// application.
 	RunConfiguration *types.RunConfiguration
 
 	noSmithyDocumentSerde

@@ -13,9 +13,9 @@ import (
 	"time"
 )
 
-// Lists the AppImageConfigs in your account and their properties. The list can
-// be filtered by creation time or modified time, and whether the AppImageConfig
-// name contains a specified string.
+// Lists the AppImageConfigs in your account and their properties. The list can be
+// filtered by creation time or modified time, and whether the AppImageConfig name
+// contains a specified string.
 func (c *Client) ListAppImageConfigs(ctx context.Context, params *ListAppImageConfigsInput, optFns ...func(*Options)) (*ListAppImageConfigsOutput, error) {
 	if params == nil {
 		params = &ListAppImageConfigsInput{}
@@ -160,8 +160,8 @@ type ListAppImageConfigsPaginatorOptions struct {
 	// value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -57,8 +57,8 @@ type RegisterAccountInput struct {
 
 type RegisterAccountOutput struct {
 
-	// The time the account was registered, in seconds since epoch (January 1, 1970
-	// at midnight UTC time).
+	// The time the account was registered, in seconds since epoch (January 1, 1970 at
+	// midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -69,8 +69,8 @@ type RegisterAccountOutput struct {
 	// This member is required.
 	IamResources *types.IamResources
 
-	// The time this registration was last updated, in seconds since epoch (January
-	// 1, 1970 at midnight UTC time).
+	// The time this registration was last updated, in seconds since epoch (January 1,
+	// 1970 at midnight UTC time).
 	//
 	// This member is required.
 	LastModificationTime *time.Time

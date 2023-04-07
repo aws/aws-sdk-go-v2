@@ -21,13 +21,13 @@ import (
 // of a disaster in the primary Region, you can restore from backup and recover
 // availability quickly in the other Region. You can make cross-Region copies only
 // within your Amazon Web Services partition. A partition is a grouping of Regions.
-// Amazon Web Services currently has three partitions: aws  (Standard Regions),
+// Amazon Web Services currently has three partitions: aws (Standard Regions),
 // aws-cn (China Regions), and aws-us-gov (Amazon Web Services GovCloud [US]
 // Regions). You can also use backup copies to clone your file dataset to another
 // Region or within the same Region. You can use the SourceRegion parameter to
 // specify the Amazon Web Services Region from which the backup will be copied. For
 // example, if you make the call from the us-west-1 Region and want to copy a
-// backup from the us-east-2  Region, you specify us-east-2  in the SourceRegion
+// backup from the us-east-2 Region, you specify us-east-2 in the SourceRegion
 // parameter to make a cross-Region copy. If you don't specify a Region, the backup
 // copy is created in the same Region where the request is sent from (in-Region
 // copy). For more information about creating backup copies, see Copying backups (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups)
@@ -51,8 +51,7 @@ func (c *Client) CopyBackup(ctx context.Context, params *CopyBackupInput, optFns
 
 type CopyBackupInput struct {
 
-	// The ID of the source backup. Specifies the ID of the backup that's being
-	// copied.
+	// The ID of the source backup. Specifies the ID of the backup that's being copied.
 	//
 	// This member is required.
 	SourceBackupId *string
@@ -63,20 +62,22 @@ type CopyBackupInput struct {
 	ClientRequestToken *string
 
 	// A Boolean flag indicating whether tags from the source backup should be copied
-	// to the backup copy. This value defaults to false . If you set CopyTags  to true
+	// to the backup copy. This value defaults to false . If you set CopyTags to true
 	// and the source backup has existing tags, you can use the Tags parameter to
 	// create new tags, provided that the sum of the source backup tags and the new
 	// tags doesn't exceed 50. Both sets of tags are merged. If there are tag conflicts
 	// (for example, two tags with the same key but different values), the tags created
-	// with the Tags  parameter take precedence.
+	// with the Tags parameter take precedence.
 	CopyTags *bool
 
 	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting
 	// data on Amazon FSx file systems, as follows:
-	//     - Amazon FSx for Lustre PERSISTENT_1 and PERSISTENT_2 deployment types only. SCRATCH_1 and SCRATCH_2 types are encrypted using the Amazon FSx service KMS key for your account.
-	//     - Amazon FSx for NetApp ONTAP
-	//     - Amazon FSx for OpenZFS
-	//     - Amazon FSx for Windows File Server
+	//   - Amazon FSx for Lustre PERSISTENT_1 and PERSISTENT_2 deployment types only.
+	//   SCRATCH_1 and SCRATCH_2 types are encrypted using the Amazon FSx service KMS
+	//   key for your account.
+	//   - Amazon FSx for NetApp ONTAP
+	//   - Amazon FSx for OpenZFS
+	//   - Amazon FSx for Windows File Server
 	// If a KmsKeyId isn't specified, the Amazon FSx-managed KMS key for your account
 	// is used. For more information, see Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
 	// in the Key Management Service API Reference.
@@ -89,7 +90,7 @@ type CopyBackupInput struct {
 	// is sent from (in-Region copy).
 	SourceRegion *string
 
-	// A list of Tag  values, with a maximum of 50 elements.
+	// A list of Tag values, with a maximum of 50 elements.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -40,7 +40,7 @@ type UpdatePublishingDestinationInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// A DestinationProperties  object that includes the DestinationArn  and KmsKeyArn
+	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn
 	// of the publishing destination.
 	DestinationProperties *types.DestinationProperties
 

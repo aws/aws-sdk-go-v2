@@ -18,7 +18,8 @@ import (
 //   - Owner
 //   - IDs for an ID target
 //   - Tags for a Tag target
-//   - From any supported tag type to another. The three supported tag types are ID target, Tag target, and resource group. For more information, see Target .
+//   - From any supported tag type to another. The three supported tag types are
+//     ID target, Tag target, and resource group. For more information, see Target .
 //
 // If a parameter is null, then the corresponding field isn't modified.
 func (c *Client) UpdateMaintenanceWindowTarget(ctx context.Context, params *UpdateMaintenanceWindowTargetInput, optFns ...func(*Options)) (*UpdateMaintenanceWindowTargetOutput, error) {
@@ -59,7 +60,7 @@ type UpdateMaintenanceWindowTargetInput struct {
 	OwnerInformation *string
 
 	// If True , then all fields that are required by the
-	// RegisterTargetWithMaintenanceWindowoperation are also required for this API
+	// RegisterTargetWithMaintenanceWindow operation are also required for this API
 	// request. Optional fields that aren't specified are set to null.
 	Replace *bool
 

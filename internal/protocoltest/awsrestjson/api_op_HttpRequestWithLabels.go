@@ -10,8 +10,8 @@ import (
 	"time"
 )
 
-// The example tests how requests are serialized when there's no input payload
-// but there are HTTP labels.
+// The example tests how requests are serialized when there's no input payload but
+// there are HTTP labels.
 func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestWithLabelsInput, optFns ...func(*Options)) (*HttpRequestWithLabelsOutput, error) {
 	if params == nil {
 		params = &HttpRequestWithLabelsInput{}

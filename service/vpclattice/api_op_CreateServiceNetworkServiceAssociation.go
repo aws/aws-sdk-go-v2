@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a service with a service network. You can't use this operation if the
-// service and service network are already associated or if there is a
+// Associates a service with a service network. You can't use this operation if
+// the service and service network are already associated or if there is a
 // disassociation or deletion in progress. If the association fails, you can retry
 // the operation by deleting the association and recreating it. You cannot
 // associate a service and service network that are shared with a caller. The

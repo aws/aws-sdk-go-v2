@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a task that restores an AMI from an Amazon S3 object that was
-// previously created by using CreateStoreImageTask (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html)
+// Starts a task that restores an AMI from an Amazon S3 object that was previously
+// created by using CreateStoreImageTask (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html)
 // . To use this API, you must have the required permissions. For more information,
 // see Permissions for storing and restoring AMIs using Amazon S3 (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions)
 // in the Amazon EC2 User Guide. For more information, see Store and restore an
@@ -56,10 +56,11 @@ type CreateRestoreImageTaskInput struct {
 	// as the original AMI.
 	Name *string
 
-	// The tags to apply to the AMI and snapshots on restoration. You can tag the
-	// AMI, the snapshots, or both.
-	//     - To tag the AMI, the value for ResourceType must be image .
-	//     - To tag the snapshots, the value for ResourceType must be snapshot . The same tag is applied to all of the snapshots that are created.
+	// The tags to apply to the AMI and snapshots on restoration. You can tag the AMI,
+	// the snapshots, or both.
+	//   - To tag the AMI, the value for ResourceType must be image .
+	//   - To tag the snapshots, the value for ResourceType must be snapshot . The same
+	//   tag is applied to all of the snapshots that are created.
 	TagSpecifications []types.TagSpecification
 
 	noSmithyDocumentSerde

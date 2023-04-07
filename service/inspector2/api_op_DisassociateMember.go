@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a member account from an Amazon Inspector delegated
-// administrator.
+// Disassociates a member account from an Amazon Inspector delegated administrator.
 func (c *Client) DisassociateMember(ctx context.Context, params *DisassociateMemberInput, optFns ...func(*Options)) (*DisassociateMemberOutput, error) {
 	if params == nil {
 		params = &DisassociateMemberInput{}

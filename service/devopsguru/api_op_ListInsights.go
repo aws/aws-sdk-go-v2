@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of insights in your Amazon Web Services account. You can
-// specify which insights are returned by their start time and status ( ONGOING ,
-// CLOSED , or ANY ).
+// Returns a list of insights in your Amazon Web Services account. You can specify
+// which insights are returned by their start time and status ( ONGOING , CLOSED ,
+// or ANY ).
 func (c *Client) ListInsights(ctx context.Context, params *ListInsightsInput, optFns ...func(*Options)) (*ListInsightsOutput, error) {
 	if params == nil {
 		params = &ListInsightsInput{}
@@ -39,7 +39,7 @@ type ListInsightsInput struct {
 	StatusFilter *types.ListInsightsStatusFilter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -140,11 +140,11 @@ var _ ListInsightsAPIClient = (*Client)(nil)
 // ListInsightsPaginatorOptions is the paginator options for ListInsights
 type ListInsightsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

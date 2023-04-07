@@ -28,7 +28,7 @@ func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInp
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomains  operation.
+// Container for the parameters to the DescribeDomains operation.
 type DescribeDomainsInput struct {
 
 	// Array of OpenSearch Service domain names that you want information about. If

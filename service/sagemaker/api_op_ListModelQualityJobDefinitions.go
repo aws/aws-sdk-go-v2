@@ -52,8 +52,8 @@ type ListModelQualityJobDefinitionsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListModelQualityJobDefinitions request was
-	// truncated, the response includes a NextToken. To retrieve the next set of
-	// model quality monitoring job definitions, use the token in the next request.
+	// truncated, the response includes a NextToken . To retrieve the next set of model
+	// quality monitoring job definitions, use the token in the next request.
 	NextToken *string
 
 	// The field to sort results by. The default is CreationTime .
@@ -158,8 +158,8 @@ type ListModelQualityJobDefinitionsPaginatorOptions struct {
 	// ListModelQualityJobDefinitions .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

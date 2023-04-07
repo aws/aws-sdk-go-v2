@@ -20,7 +20,7 @@ import (
 // their events go to your default event bus or a custom event bus that you have
 // created. For more information, see CreateEventBus (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html)
 // . If you are updating an existing rule, the rule is replaced with what you
-// specify in this PutRule  command. If you omit arguments in PutRule, the old
+// specify in this PutRule command. If you omit arguments in PutRule , the old
 // values for those arguments are not kept. Instead, they are replaced with null
 // values. When you create or update a rule, incoming events might not immediately
 // start matching to new or updated rules. Allow a short period of time for changes
@@ -33,7 +33,7 @@ import (
 // rule. Tags can help you organize and categorize your resources. You can also use
 // them to scope user permissions, by granting a user permission to access or
 // change only rules with certain tag values. To use the PutRule operation and
-// assign tags, you must have both the events:PutRule  and events:TagResource
+// assign tags, you must have both the events:PutRule and events:TagResource
 // permissions. If you are updating an existing rule, any tags you specify in the
 // PutRule operation are ignored. To update the tags of an existing rule, use
 // TagResource (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_TagResource.html)
@@ -51,8 +51,8 @@ import (
 // your rule could fire only if ACLs are found to be in a bad state, instead of
 // after any change. An infinite loop can quickly cause higher than expected
 // charges. We recommend that you use budgeting, which alerts you when charges
-// exceed your specified limit. For more information, see Managing Your Costs
-// with Budgets (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html)
+// exceed your specified limit. For more information, see Managing Your Costs with
+// Budgets (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html)
 // .
 func (c *Client) PutRule(ctx context.Context, params *PutRuleInput, optFns ...func(*Options)) (*PutRuleOutput, error) {
 	if params == nil {
@@ -79,8 +79,8 @@ type PutRuleInput struct {
 	// A description of the rule.
 	Description *string
 
-	// The name or ARN of the event bus to associate with this rule. If you omit
-	// this, the default event bus is used.
+	// The name or ARN of the event bus to associate with this rule. If you omit this,
+	// the default event bus is used.
 	EventBusName *string
 
 	// The event pattern. For more information, see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
@@ -90,7 +90,7 @@ type PutRuleInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role associated with the rule. If
 	// you're setting an event bus in another account as the target and that account
 	// granted permission to your account through an organization instead of directly
-	// by the account ID, you must specify a RoleArn  with proper permissions in the
+	// by the account ID, you must specify a RoleArn with proper permissions in the
 	// Target structure, instead of here in this parameter.
 	RoleArn *string
 

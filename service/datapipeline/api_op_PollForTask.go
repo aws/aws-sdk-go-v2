@@ -13,16 +13,16 @@ import (
 
 // Task runners call PollForTask to receive a task to perform from AWS Data
 // Pipeline. The task runner specifies which tasks it can perform by setting a
-// value for the workerGroup parameter. The task returned can come from any of
-// the pipelines that match the workerGroup value passed in by the task runner
-// and that was launched using the IAM user credentials specified by the task
-// runner. If tasks are ready in the work queue, PollForTask returns a response
+// value for the workerGroup parameter. The task returned can come from any of the
+// pipelines that match the workerGroup value passed in by the task runner and
+// that was launched using the IAM user credentials specified by the task runner.
+// If tasks are ready in the work queue, PollForTask returns a response
 // immediately. If no tasks are available in the queue, PollForTask uses
 // long-polling and holds on to a poll connection for up to a 90 seconds, during
 // which time the first newly scheduled task is handed to the task runner. To
 // accomodate this, set the socket timeout in your task runner to 90 seconds. The
-// task runner should not call PollForTask  again on the same workerGroup until
-// it receives a response, and this can take up to 90 seconds. POST / HTTP/1.1
+// task runner should not call PollForTask again on the same workerGroup until it
+// receives a response, and this can take up to 90 seconds. POST / HTTP/1.1
 // Content-Type: application/x-amz-json-1.1 X-Amz-Target: DataPipeline.PollForTask
 // Content-Length: 59 Host: datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon,
 // 12 Nov 2012 17:49:52 GMT Authorization: AuthParams {"workerGroup":
@@ -68,8 +68,8 @@ type PollForTaskInput struct {
 
 	// The type of task the task runner is configured to accept and process. The
 	// worker group is set as a field on objects in the pipeline when they are created.
-	// You can only specify a single value for workerGroup  in the call to PollForTask
-	// . There are no wildcard values permitted in workerGroup; the string must be an
+	// You can only specify a single value for workerGroup in the call to PollForTask .
+	// There are no wildcard values permitted in workerGroup ; the string must be an
 	// exact, case-sensitive, match.
 	//
 	// This member is required.
@@ -94,9 +94,9 @@ type PollForTaskInput struct {
 type PollForTaskOutput struct {
 
 	// The information needed to complete the task that is being assigned to the task
-	// runner. One of the fields returned in this object is taskId, which contains an
+	// runner. One of the fields returned in this object is taskId , which contains an
 	// identifier for the task being assigned. The calling task runner uses taskId in
-	// subsequent calls to ReportTaskProgress  and SetTaskStatus .
+	// subsequent calls to ReportTaskProgress and SetTaskStatus .
 	TaskObject *types.TaskObject
 
 	// Metadata pertaining to the operation's result.

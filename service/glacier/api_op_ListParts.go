@@ -16,11 +16,11 @@ import (
 // This operation lists the parts of an archive that have been uploaded in a
 // specific multipart upload. You can make this request at any time during an
 // in-progress multipart upload before you complete the upload (see
-// CompleteMultipartUpload. List Parts returns an error for completed uploads.
-// The list returned in the List Parts response is sorted by part range. The List
-// Parts operation supports pagination. By default, this operation returns up to 50
+// CompleteMultipartUpload . List Parts returns an error for completed uploads. The
+// list returned in the List Parts response is sorted by part range. The List Parts
+// operation supports pagination. By default, this operation returns up to 50
 // uploaded parts in the response. You should always check the response for a
-// marker at which to continue the list; if there are no more items the marker  is
+// marker at which to continue the list; if there are no more items the marker is
 // null . To return a list of parts that begins at a specific part, set the marker
 // request parameter to the value you obtained from a previous List Parts request.
 // You can also limit the number of parts returned in the response by specifying
@@ -53,7 +53,7 @@ func (c *Client) ListParts(ctx context.Context, params *ListPartsInput, optFns .
 type ListPartsInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
 	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
@@ -71,9 +71,9 @@ type ListPartsInput struct {
 	// This member is required.
 	VaultName *string
 
-	// The maximum number of parts to be returned. The default limit is 50. The
-	// number of parts returned might be fewer than the specified limit, but the number
-	// of returned parts never exceeds the limit.
+	// The maximum number of parts to be returned. The default limit is 50. The number
+	// of parts returned might be fewer than the specified limit, but the number of
+	// returned parts never exceeds the limit.
 	Limit *int32
 
 	// An opaque string used for pagination. This value specifies the part at which
@@ -108,7 +108,7 @@ type ListPartsOutput struct {
 	PartSizeInBytes int64
 
 	// A list of the part sizes of the multipart upload. Each object in the array
-	// contains a RangeBytes  and sha256-tree-hash  name/value pair.
+	// contains a RangeBytes and sha256-tree-hash name/value pair.
 	Parts []types.PartListElement
 
 	// The Amazon Resource Name (ARN) of the vault to which the multipart upload was
@@ -202,13 +202,13 @@ var _ ListPartsAPIClient = (*Client)(nil)
 
 // ListPartsPaginatorOptions is the paginator options for ListParts
 type ListPartsPaginatorOptions struct {
-	// The maximum number of parts to be returned. The default limit is 50. The
-	// number of parts returned might be fewer than the specified limit, but the number
-	// of returned parts never exceeds the limit.
+	// The maximum number of parts to be returned. The default limit is 50. The number
+	// of parts returned might be fewer than the specified limit, but the number of
+	// returned parts never exceeds the limit.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

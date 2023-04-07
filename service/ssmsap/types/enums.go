@@ -168,9 +168,9 @@ const (
 	HostRoleUnknown HostRole = "UNKNOWN"
 )
 
-// Values returns all known values for HostRole. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HostRole. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (HostRole) Values() []HostRole {
 	return []HostRole{
 		"LEADER",
@@ -207,8 +207,8 @@ const (
 	PermissionActionTypeRestore PermissionActionType = "RESTORE"
 )
 
-// Values returns all known values for PermissionActionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PermissionActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionActionType) Values() []PermissionActionType {
 	return []PermissionActionType{

@@ -46,9 +46,9 @@ const (
 	CurrencyCny Currency = "CNY"
 )
 
-// Values returns all known values for Currency. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Currency. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Currency) Values() []Currency {
 	return []Currency{
 		"USD",
@@ -142,8 +142,8 @@ const (
 	ECSServiceLaunchTypeFargate ECSServiceLaunchType = "Fargate"
 )
 
-// Values returns all known values for ECSServiceLaunchType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ECSServiceLaunchType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ECSServiceLaunchType) Values() []ECSServiceLaunchType {
 	return []ECSServiceLaunchType{
@@ -160,8 +160,8 @@ const (
 	ECSServiceMetricNameMemory ECSServiceMetricName = "Memory"
 )
 
-// Values returns all known values for ECSServiceMetricName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ECSServiceMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ECSServiceMetricName) Values() []ECSServiceMetricName {
 	return []ECSServiceMetricName{
@@ -277,8 +277,8 @@ const (
 	EnrollmentFilterNameStatus EnrollmentFilterName = "Status"
 )
 
-// Values returns all known values for EnrollmentFilterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for EnrollmentFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EnrollmentFilterName) Values() []EnrollmentFilterName {
 	return []EnrollmentFilterName{
@@ -529,9 +529,9 @@ const (
 	ExportableInstanceFieldInstanceState                                                   ExportableInstanceField = "InstanceState"
 )
 
-// Values returns all known values for ExportableInstanceField. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExportableInstanceField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExportableInstanceField) Values() []ExportableInstanceField {
 	return []ExportableInstanceField{
 		"AccountId",
@@ -842,8 +842,8 @@ const (
 	InferredWorkloadTypeKafka           InferredWorkloadType = "Kafka"
 )
 
-// Values returns all known values for InferredWorkloadType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InferredWorkloadType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InferredWorkloadType) Values() []InferredWorkloadType {
 	return []InferredWorkloadType{

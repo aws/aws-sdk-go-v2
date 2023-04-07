@@ -29,8 +29,8 @@ func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns .
 
 type CreateAppInput struct {
 
-	// Specifies the display name of an application and the tags to associate with
-	// the application.
+	// Specifies the display name of an application and the tags to associate with the
+	// application.
 	//
 	// This member is required.
 	CreateApplicationRequest *types.CreateApplicationRequest

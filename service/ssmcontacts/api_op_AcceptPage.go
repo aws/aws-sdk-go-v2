@@ -34,7 +34,7 @@ type AcceptPageInput struct {
 	// This member is required.
 	AcceptCode *string
 
-	// The type indicates if the page was DELIVERED  or READ .
+	// The type indicates if the page was DELIVERED or READ .
 	//
 	// This member is required.
 	AcceptType types.AcceptType

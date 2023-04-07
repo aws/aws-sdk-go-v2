@@ -50,8 +50,7 @@ type ListDataIntegrationAssociationsInput struct {
 
 type ListDataIntegrationAssociationsOutput struct {
 
-	// The Amazon Resource Name (ARN) and unique ID of the DataIntegration
-	// association.
+	// The Amazon Resource Name (ARN) and unique ID of the DataIntegration association.
 	DataIntegrationAssociations []types.DataIntegrationAssociationSummary
 
 	// If there are additional results, this is the token for the next set of results.

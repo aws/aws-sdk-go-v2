@@ -43,7 +43,7 @@ type ListResolverDnssecConfigsInput struct {
 	// DNSSEC configurations, use NextToken to get the second and subsequent pages of
 	// results. For the first ListResolverDnssecConfigs request, omit this value. For
 	// the second and subsequent requests, get the value of NextToken from the
-	// previous response and specify that value for NextToken  in the request.
+	// previous response and specify that value for NextToken in the request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -57,7 +57,7 @@ type ListResolverDnssecConfigsOutput struct {
 	// configurations, you can get more configurations by submitting another
 	// ListResolverDnssecConfigs (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListResolverDnssecConfigs.html)
 	// request. Get the value of NextToken that Amazon Route 53 returned in the
-	// previous response and include it in NextToken  in the next request.
+	// previous response and include it in NextToken in the next request.
 	NextToken *string
 
 	// An array that contains one ResolverDnssecConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html)
@@ -147,8 +147,8 @@ type ListResolverDnssecConfigsPaginatorOptions struct {
 	// for MaxResults , Route 53 returns up to 100 configuration per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

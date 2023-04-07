@@ -15,8 +15,8 @@ import (
 // from the current code and configuration of a function. Use versions to create a
 // snapshot of your function code and configuration that doesn't change. Lambda
 // doesn't publish a version if the function's configuration and code haven't
-// changed since the last version. Use UpdateFunctionCode  or
-// UpdateFunctionConfigurationto update the function before publishing a version.
+// changed since the last version. Use UpdateFunctionCode or
+// UpdateFunctionConfiguration to update the function before publishing a version.
 // Clients can invoke versions directly or with an alias. To create an alias, use
 // CreateAlias .
 func (c *Client) PublishVersion(ctx context.Context, params *PublishVersionInput, optFns ...func(*Options)) (*PublishVersionOutput, error) {
@@ -37,12 +37,11 @@ func (c *Client) PublishVersion(ctx context.Context, params *PublishVersionInput
 type PublishVersionInput struct {
 
 	// The name of the Lambda function. Name formats
-	//     - Function name - MyFunction .
-	//     - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
-	//     - Partial ARN - 123456789012:function:MyFunction .
-	// The length constraint
-	// applies only to the full ARN. If you specify only the function name, it is
-	// limited to 64 characters in length.
+	//   - Function name - MyFunction .
+	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//   - Partial ARN - 123456789012:function:MyFunction .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -119,8 +118,8 @@ type PublishVersionOutput struct {
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModified *string
 
-	// The status of the last update that was performed on the function. This is
-	// first set to Successful  after function creation completes.
+	// The status of the last update that was performed on the function. This is first
+	// set to Successful after function creation completes.
 	LastUpdateStatus types.LastUpdateStatus
 
 	// The reason for the last update that was performed on the function.
@@ -139,7 +138,7 @@ type PublishVersionOutput struct {
 	// The amount of memory available to the function at runtime.
 	MemorySize *int32
 
-	// The type of deployment package. Set to Image  for container image and set Zip
+	// The type of deployment package. Set to Image for container image and set Zip
 	// for .zip file archive.
 	PackageType types.PackageType
 
@@ -161,20 +160,20 @@ type PublishVersionOutput struct {
 	// The ARN of the signing profile version.
 	SigningProfileVersionArn *string
 
-	// Set ApplyOn  to PublishedVersions to create a snapshot of the initialized
+	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
 	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
 	// .
 	SnapStart *types.SnapStartResponse
 
-	// The current state of the function. When the state is Inactive, you can
+	// The current state of the function. When the state is Inactive , you can
 	// reactivate the function by invoking it.
 	State types.State
 
 	// The reason for the function's current state.
 	StateReason *string
 
-	// The reason code for the function's current state. When the code is Creating,
+	// The reason code for the function's current state. When the code is Creating ,
 	// you can't invoke or modify the function.
 	StateReasonCode types.StateReasonCode
 

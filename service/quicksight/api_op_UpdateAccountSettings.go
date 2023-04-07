@@ -35,7 +35,7 @@ type UpdateAccountSettingsInput struct {
 	AwsAccountId *string
 
 	// The default namespace for this Amazon Web Services account. Currently, the
-	// default is default. IAM users that register for the first time with Amazon
+	// default is default . IAM users that register for the first time with Amazon
 	// QuickSight provide an email address that becomes associated with the default
 	// namespace.
 	//
@@ -46,10 +46,10 @@ type UpdateAccountSettingsInput struct {
 	// regarding your Amazon Web Services account or Amazon QuickSight subscription.
 	NotificationEmail *string
 
-	// A boolean value that determines whether or not an Amazon QuickSight account
-	// can be deleted. A True value doesn't allow the account to be deleted and
-	// results in an error message if a user tries to make a DeleteAccountSubscription
-	// request. A False  value will allow the account to be deleted.
+	// A boolean value that determines whether or not an Amazon QuickSight account can
+	// be deleted. A True value doesn't allow the account to be deleted and results in
+	// an error message if a user tries to make a DeleteAccountSubscription request. A
+	// False value will allow the account to be deleted.
 	TerminationProtectionEnabled bool
 
 	noSmithyDocumentSerde

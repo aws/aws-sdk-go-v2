@@ -156,8 +156,8 @@ type ListBatchJobExecutionsPaginatorOptions struct {
 	// The maximum number of batch job executions to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -170,8 +170,7 @@ type ListBatchJobExecutionsPaginator struct {
 	firstPage bool
 }
 
-// NewListBatchJobExecutionsPaginator returns a new
-// ListBatchJobExecutionsPaginator
+// NewListBatchJobExecutionsPaginator returns a new ListBatchJobExecutionsPaginator
 func NewListBatchJobExecutionsPaginator(client ListBatchJobExecutionsAPIClient, params *ListBatchJobExecutionsInput, optFns ...func(*ListBatchJobExecutionsPaginatorOptions)) *ListBatchJobExecutionsPaginator {
 	if params == nil {
 		params = &ListBatchJobExecutionsInput{}

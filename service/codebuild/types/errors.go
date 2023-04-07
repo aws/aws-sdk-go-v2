@@ -86,8 +86,8 @@ func (e *OAuthProviderException) ErrorCode() string {
 }
 func (e *OAuthProviderException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Amazon Web Services resource cannot be created, because an
-// Amazon Web Services resource with the same settings already exists.
+// The specified Amazon Web Services resource cannot be created, because an Amazon
+// Web Services resource with the same settings already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
 

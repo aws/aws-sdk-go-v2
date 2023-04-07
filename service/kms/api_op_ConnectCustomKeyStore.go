@@ -26,21 +26,21 @@ import (
 // operation is part of the custom key stores (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in KMS, which combines the convenience and extensive integration of KMS
 // with the isolation and control of a key store that you own and manage. The
-// ConnectCustomKeyStoreoperation might fail for various reasons. To find the
-// reason, use the DescribeCustomKeyStores  operation and see the
+// ConnectCustomKeyStore operation might fail for various reasons. To find the
+// reason, use the DescribeCustomKeyStores operation and see the
 // ConnectionErrorCode in the response. For help interpreting the
-// ConnectionErrorCode , see CustomKeyStoresListEntry. To fix the failure, use
-// the DisconnectCustomKeyStore operation to disconnect the custom key store,
-// correct the error, use the UpdateCustomKeyStore operation if necessary, and
-// then use ConnectCustomKeyStore again. CloudHSM key store During the connection
-// process for an CloudHSM key store, KMS finds the CloudHSM cluster that is
-// associated with the custom key store, creates the connection infrastructure,
-// connects to the cluster, logs into the CloudHSM client as the kmsuser CU, and
-// rotates its password. To connect an CloudHSM key store, its associated CloudHSM
-// cluster must have at least one active HSM. To get the number of active HSMs in a
-// cluster, use the DescribeClusters (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
+// ConnectionErrorCode , see CustomKeyStoresListEntry . To fix the failure, use the
+// DisconnectCustomKeyStore operation to disconnect the custom key store, correct
+// the error, use the UpdateCustomKeyStore operation if necessary, and then use
+// ConnectCustomKeyStore again. CloudHSM key store During the connection process
+// for an CloudHSM key store, KMS finds the CloudHSM cluster that is associated
+// with the custom key store, creates the connection infrastructure, connects to
+// the cluster, logs into the CloudHSM client as the kmsuser CU, and rotates its
+// password. To connect an CloudHSM key store, its associated CloudHSM cluster must
+// have at least one active HSM. To get the number of active HSMs in a cluster, use
+// the DescribeClusters (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
 // operation. To add HSMs to the cluster, use the CreateHsm (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html)
-// operation. Also, the kmsuser  crypto user (https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
+// operation. Also, the kmsuser crypto user (https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
 // (CU) must not be logged into the cluster. This prevents KMS from using this
 // account to log in. If you are having trouble connecting or disconnecting a
 // CloudHSM key store, see Troubleshooting an CloudHSM key store (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html)
@@ -84,7 +84,7 @@ func (c *Client) ConnectCustomKeyStore(ctx context.Context, params *ConnectCusto
 type ConnectCustomKeyStoreInput struct {
 
 	// Enter the key store ID of the custom key store that you want to connect. To
-	// find the ID of a custom key store, use the DescribeCustomKeyStores  operation.
+	// find the ID of a custom key store, use the DescribeCustomKeyStores operation.
 	//
 	// This member is required.
 	CustomKeyStoreId *string

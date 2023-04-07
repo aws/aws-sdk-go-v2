@@ -60,7 +60,7 @@ type UpdateQuerySuggestionsBlockListInput struct {
 	// block list and provide the same path to the block list text file in S3, then
 	// Amazon Kendra reloads the file to refresh the block list. Amazon Kendra does not
 	// automatically refresh your block list. You need to call the
-	// UpdateQuerySuggestionsBlockListAPI to refresh you block list. If you update
+	// UpdateQuerySuggestionsBlockList API to refresh you block list. If you update
 	// your block list, then Amazon Kendra asynchronously refreshes all query
 	// suggestions with the latest content in the S3 file. This means changes might not
 	// take effect immediately.

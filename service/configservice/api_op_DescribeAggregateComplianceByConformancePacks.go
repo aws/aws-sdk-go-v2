@@ -40,7 +40,7 @@ type DescribeAggregateComplianceByConformancePacksInput struct {
 	// This member is required.
 	ConfigurationAggregatorName *string
 
-	// Filters the result by AggregateConformancePackComplianceFilters  object.
+	// Filters the result by AggregateConformancePackComplianceFilters object.
 	Filters *types.AggregateConformancePackComplianceFilters
 
 	// The maximum number of conformance packs compliance details returned on each
@@ -56,7 +56,7 @@ type DescribeAggregateComplianceByConformancePacksInput struct {
 
 type DescribeAggregateComplianceByConformancePacksOutput struct {
 
-	// Returns the AggregateComplianceByConformancePack  object.
+	// Returns the AggregateComplianceByConformancePack object.
 	AggregateComplianceByConformancePacks []types.AggregateComplianceByConformancePack
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -147,8 +147,8 @@ type DescribeAggregateComplianceByConformancePacksPaginatorOptions struct {
 	// page. The default is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

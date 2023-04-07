@@ -62,9 +62,9 @@ const (
 	MessageTypeTimeSignal   MessageType = "TIME_SIGNAL"
 )
 
-// Values returns all known values for MessageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MessageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"SPLICE_INSERT",
@@ -80,8 +80,8 @@ const (
 	ModeBehindLiveEdge Mode = "BEHIND_LIVE_EDGE"
 )
 
-// Values returns all known values for Mode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Mode. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Mode) Values() []Mode {
 	return []Mode{
@@ -97,9 +97,9 @@ const (
 	OperatorEquals Operator = "EQUALS"
 )
 
-// Values returns all known values for Operator. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"EQUALS",
@@ -186,8 +186,8 @@ const (
 	TierStandard Tier = "STANDARD"
 )
 
-// Values returns all known values for Tier. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Tier. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Tier) Values() []Tier {
 	return []Tier{
@@ -204,8 +204,8 @@ const (
 	TypeHls  Type = "HLS"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

@@ -40,8 +40,8 @@ func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, op
 //   - ListGatewaysInput$Marker
 type ListGatewaysInput struct {
 
-	// Specifies that the list of gateways returned be limited to the specified
-	// number of items.
+	// Specifies that the list of gateways returned be limited to the specified number
+	// of items.
 	Limit *int32
 
 	// An opaque string that indicates the position at which to begin the returned
@@ -53,7 +53,7 @@ type ListGatewaysInput struct {
 
 type ListGatewaysOutput struct {
 
-	// An array of GatewayInfo  objects.
+	// An array of GatewayInfo objects.
 	Gateways []types.GatewayInfo
 
 	// Use the marker in your next request to fetch the next set of gateways in the
@@ -136,12 +136,12 @@ var _ ListGatewaysAPIClient = (*Client)(nil)
 
 // ListGatewaysPaginatorOptions is the paginator options for ListGateways
 type ListGatewaysPaginatorOptions struct {
-	// Specifies that the list of gateways returned be limited to the specified
-	// number of items.
+	// Specifies that the list of gateways returned be limited to the specified number
+	// of items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -49,7 +49,7 @@ type CreateReplaceRootVolumeTaskInput struct {
 
 	// Indicates whether to automatically delete the original root volume after the
 	// root volume replacement task completes. To delete the original root volume,
-	// specify true. If you choose to keep the original root volume after the
+	// specify true . If you choose to keep the original root volume after the
 	// replacement task completes, you must manually delete it when you no longer need
 	// it.
 	DeleteReplacedRootVolume *bool

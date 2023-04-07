@@ -39,7 +39,7 @@ type DescribeDirectConnectGatewayAttachmentsInput struct {
 	DirectConnectGatewayId *string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value. If
+	// remaining results, make another call with the returned nextToken value. If
 	// MaxResults is given a value larger than 100, only 100 results are returned.
 	MaxResults *int32
 

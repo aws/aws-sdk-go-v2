@@ -46,7 +46,7 @@ type ListControlsInput struct {
 
 type ListControlsOutput struct {
 
-	// The list of control metadata objects that the ListControls  API returned.
+	// The list of control metadata objects that the ListControls API returned.
 	ControlMetadataList []types.ControlMetadata
 
 	// The pagination token that's used to fetch the next set of results.
@@ -133,8 +133,8 @@ type ListControlsPaginatorOptions struct {
 	// Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the latest version of the DefinitionDocument  and FlowTemplateSummary for
+// Gets the latest version of the DefinitionDocument and FlowTemplateSummary for
 // the specified workflow.
 //
 // Deprecated: since: 2022-08-30

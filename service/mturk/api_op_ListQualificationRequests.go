@@ -54,9 +54,8 @@ type ListQualificationRequestsOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of Qualification requests on this page in the filtered results
-	// list, equivalent to the number of Qualification requests being returned by this
-	// call.
+	// The number of Qualification requests on this page in the filtered results list,
+	// equivalent to the number of Qualification requests being returned by this call.
 	NumResults *int32
 
 	// The Qualification request. The response includes one QualificationRequest
@@ -143,8 +142,8 @@ type ListQualificationRequestsPaginatorOptions struct {
 	// The maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

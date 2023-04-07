@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the flag, DeleteProtection, which indicates whether it is possible to
-// delete the firewall. If the flag is set to TRUE, the firewall is protected
+// Modifies the flag, DeleteProtection , which indicates whether it is possible to
+// delete the firewall. If the flag is set to TRUE , the firewall is protected
 // against deletion. This setting helps protect against accidentally deleting a
 // firewall that's in use.
 func (c *Client) UpdateFirewallDeleteProtection(ctx context.Context, params *UpdateFirewallDeleteProtectionInput, optFns ...func(*Options)) (*UpdateFirewallDeleteProtectionOutput, error) {
@@ -32,15 +32,15 @@ func (c *Client) UpdateFirewallDeleteProtection(ctx context.Context, params *Upd
 type UpdateFirewallDeleteProtectionInput struct {
 
 	// A flag indicating whether it is possible to delete the firewall. A setting of
-	// TRUEindicates that the firewall is protected against deletion. Use this
-	// setting to protect against accidentally deleting a firewall that is in use. When
-	// you create a firewall, the operation initializes this flag to TRUE .
+	// TRUE indicates that the firewall is protected against deletion. Use this setting
+	// to protect against accidentally deleting a firewall that is in use. When you
+	// create a firewall, the operation initializes this flag to TRUE .
 	//
 	// This member is required.
 	DeleteProtection bool
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or
-	// the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
+	// name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall
@@ -57,7 +57,7 @@ type UpdateFirewallDeleteProtectionInput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
@@ -68,9 +68,9 @@ type UpdateFirewallDeleteProtectionInput struct {
 type UpdateFirewallDeleteProtectionOutput struct {
 
 	// A flag indicating whether it is possible to delete the firewall. A setting of
-	// TRUEindicates that the firewall is protected against deletion. Use this
-	// setting to protect against accidentally deleting a firewall that is in use. When
-	// you create a firewall, the operation initializes this flag to TRUE .
+	// TRUE indicates that the firewall is protected against deletion. Use this setting
+	// to protect against accidentally deleting a firewall that is in use. When you
+	// create a firewall, the operation initializes this flag to TRUE .
 	DeleteProtection bool
 
 	// The Amazon Resource Name (ARN) of the firewall.
@@ -89,7 +89,7 @@ type UpdateFirewallDeleteProtectionOutput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

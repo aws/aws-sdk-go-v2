@@ -32,8 +32,8 @@ func (c *Client) CreateThreatIntelSet(ctx context.Context, params *CreateThreatI
 
 type CreateThreatIntelSetInput struct {
 
-	// A Boolean value that indicates whether GuardDuty is to start using the
-	// uploaded ThreatIntelSet.
+	// A Boolean value that indicates whether GuardDuty is to start using the uploaded
+	// ThreatIntelSet.
 	//
 	// This member is required.
 	Activate bool

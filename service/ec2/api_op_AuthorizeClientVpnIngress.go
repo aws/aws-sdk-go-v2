@@ -44,18 +44,18 @@ type AuthorizeClientVpnIngressInput struct {
 	// This member is required.
 	TargetNetworkCidr *string
 
-	// The ID of the group to grant access to, for example, the Active Directory
-	// group or identity provider (IdP) group. Required if AuthorizeAllGroups  is
-	// false or not specified.
+	// The ID of the group to grant access to, for example, the Active Directory group
+	// or identity provider (IdP) group. Required if AuthorizeAllGroups is false or
+	// not specified.
 	AccessGroupId *string
 
 	// Indicates whether to grant access to all clients. Specify true to grant all
 	// clients who successfully establish a VPN connection access to the network. Must
-	// be set to true  if AccessGroupId  is not specified.
+	// be set to true if AccessGroupId is not specified.
 	AuthorizeAllGroups *bool
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 

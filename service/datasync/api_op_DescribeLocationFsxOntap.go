@@ -52,16 +52,14 @@ type DescribeLocationFsxOntapOutput struct {
 	// The ARN of the FSx for ONTAP file system location.
 	LocationArn *string
 
-	// The uniform resource identifier (URI) of the FSx for ONTAP file system
-	// location.
+	// The uniform resource identifier (URI) of the FSx for ONTAP file system location.
 	LocationUri *string
 
 	// Specifies the data transfer protocol that DataSync uses to access your Amazon
 	// FSx file system.
 	Protocol *types.FsxProtocol
 
-	// The security groups that DataSync uses to access your FSx for ONTAP file
-	// system.
+	// The security groups that DataSync uses to access your FSx for ONTAP file system.
 	SecurityGroupArns []string
 
 	// The ARN of the storage virtual machine (SVM) on your FSx for ONTAP file system

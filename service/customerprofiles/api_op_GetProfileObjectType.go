@@ -56,18 +56,17 @@ type GetProfileObjectTypeOutput struct {
 	ObjectTypeName *string
 
 	// Indicates whether a profile should be created when data is received if one
-	// doesn’t exist for an object of this type. The default is FALSE. If the
-	// AllowProfileCreation flag is set to FALSE, then the service tries to fetch a
+	// doesn’t exist for an object of this type. The default is FALSE . If the
+	// AllowProfileCreation flag is set to FALSE , then the service tries to fetch a
 	// standard profile and associate this object with the profile. If it is set to
-	// TRUE, and if no match is found, then the service creates a new standard
-	// profile.
+	// TRUE , and if no match is found, then the service creates a new standard profile.
 	AllowProfileCreation bool
 
 	// The timestamp of when the domain was created.
 	CreatedAt *time.Time
 
-	// The customer-provided key to encrypt the profile object that will be created
-	// in this profile object type.
+	// The customer-provided key to encrypt the profile object that will be created in
+	// this profile object type.
 	EncryptionKey *string
 
 	// The number of days until the data in the object expires.
@@ -82,7 +81,7 @@ type GetProfileObjectTypeOutput struct {
 	// The timestamp of when the domain was most recently edited.
 	LastUpdatedAt *time.Time
 
-	// The format of your sourceLastUpdatedTimestamp  that was previously set up.
+	// The format of your sourceLastUpdatedTimestamp that was previously set up.
 	SourceLastUpdatedTimestampFormat *string
 
 	// The tags used to organize, track, or control access for this resource.

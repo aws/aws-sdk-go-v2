@@ -51,7 +51,7 @@ type ListEntitiesInput struct {
 	// The value of the next token, if it exists. Null if there are no more results.
 	NextToken *string
 
-	// An object that contains two attributes, SortBy  and SortOrder .
+	// An object that contains two attributes, SortBy and SortOrder .
 	Sort *types.Sort
 
 	noSmithyDocumentSerde
@@ -59,7 +59,7 @@ type ListEntitiesInput struct {
 
 type ListEntitiesOutput struct {
 
-	// Array of EntitySummary  object.
+	// Array of EntitySummary object.
 	EntitySummaryList []types.EntitySummary
 
 	// The value of the next token if it exists. Null if there is no more result.
@@ -147,8 +147,8 @@ type ListEntitiesPaginatorOptions struct {
 	// provided, the default value is 20.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

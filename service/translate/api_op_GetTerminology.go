@@ -34,12 +34,12 @@ type GetTerminologyInput struct {
 	// This member is required.
 	Name *string
 
-	// The data format of the custom terminology being retrieved. If you don't
-	// specify this parameter, Amazon Translate returns a file with the same format as
-	// the file that was imported to create the terminology. If you specify this
-	// parameter when you retrieve a multi-directional terminology resource, you must
-	// specify the same format as the input file that was imported to create it.
-	// Otherwise, Amazon Translate throws an error.
+	// The data format of the custom terminology being retrieved. If you don't specify
+	// this parameter, Amazon Translate returns a file with the same format as the file
+	// that was imported to create the terminology. If you specify this parameter when
+	// you retrieve a multi-directional terminology resource, you must specify the same
+	// format as the input file that was imported to create it. Otherwise, Amazon
+	// Translate throws an error.
 	TerminologyDataFormat types.TerminologyDataFormat
 
 	noSmithyDocumentSerde
@@ -47,8 +47,8 @@ type GetTerminologyInput struct {
 
 type GetTerminologyOutput struct {
 
-	// The Amazon S3 location of a file that provides any errors or warnings that
-	// were produced by your input file. This file was created when Amazon Translate
+	// The Amazon S3 location of a file that provides any errors or warnings that were
+	// produced by your input file. This file was created when Amazon Translate
 	// attempted to create a terminology resource. The location is returned as a
 	// presigned URL to that has a 30-minute expiration.
 	AuxiliaryDataLocation *types.TerminologyDataLocation

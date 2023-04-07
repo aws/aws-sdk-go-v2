@@ -48,8 +48,8 @@ type CreateVerifiedAccessEndpointInput struct {
 	// This member is required.
 	DomainCertificateArn *string
 
-	// A custom identifier that gets prepended to a DNS name that is generated for
-	// the endpoint.
+	// A custom identifier that gets prepended to a DNS name that is generated for the
+	// endpoint.
 	//
 	// This member is required.
 	EndpointDomainPrefix *string

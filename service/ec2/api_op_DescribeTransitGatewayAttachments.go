@@ -39,19 +39,26 @@ type DescribeTransitGatewayAttachmentsInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	//     - association.state - The state of the association ( associating | associated | disassociating ).
-	//     - association.transit-gateway-route-table-id - The ID of the route table for the transit gateway.
-	//     - resource-id - The ID of the resource.
-	//     - resource-owner-id - The ID of the Amazon Web Services account that owns the resource.
-	//     - resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering | connect .
-	//     - state - The state of the attachment. Valid values are available | deleted | deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting .
-	//     - transit-gateway-attachment-id - The ID of the attachment.
-	//     - transit-gateway-id - The ID of the transit gateway.
-	//     - transit-gateway-owner-id - The ID of the Amazon Web Services account that owns the transit gateway.
+	//   - association.state - The state of the association ( associating | associated
+	//   | disassociating ).
+	//   - association.transit-gateway-route-table-id - The ID of the route table for
+	//   the transit gateway.
+	//   - resource-id - The ID of the resource.
+	//   - resource-owner-id - The ID of the Amazon Web Services account that owns the
+	//   resource.
+	//   - resource-type - The resource type. Valid values are vpc | vpn |
+	//   direct-connect-gateway | peering | connect .
+	//   - state - The state of the attachment. Valid values are available | deleted |
+	//   deleting | failed | failing | initiatingRequest | modifying |
+	//   pendingAcceptance | pending | rollingBack | rejected | rejecting .
+	//   - transit-gateway-attachment-id - The ID of the attachment.
+	//   - transit-gateway-id - The ID of the transit gateway.
+	//   - transit-gateway-owner-id - The ID of the Amazon Web Services account that
+	//   owns the transit gateway.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -150,11 +157,11 @@ var _ DescribeTransitGatewayAttachmentsAPIClient = (*Client)(nil)
 // DescribeTransitGatewayAttachments
 type DescribeTransitGatewayAttachmentsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -37,7 +37,7 @@ func (c *Client) SwitchoverBlueGreenDeployment(ctx context.Context, params *Swit
 type SwitchoverBlueGreenDeploymentInput struct {
 
 	// The blue/green deployment identifier. Constraints:
-	//     - Must match an existing blue/green deployment identifier.
+	//   - Must match an existing blue/green deployment identifier.
 	//
 	// This member is required.
 	BlueGreenDeploymentIdentifier *string

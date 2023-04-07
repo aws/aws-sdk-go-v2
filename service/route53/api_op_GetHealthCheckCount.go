@@ -33,7 +33,7 @@ type GetHealthCheckCountInput struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains the response to a GetHealthCheckCount  request.
+// A complex type that contains the response to a GetHealthCheckCount request.
 type GetHealthCheckCountOutput struct {
 
 	// The number of health checks associated with the current Amazon Web Services

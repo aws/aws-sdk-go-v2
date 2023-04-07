@@ -46,7 +46,7 @@ type PutDefaultEncryptionConfigurationInput struct {
 
 type PutDefaultEncryptionConfigurationOutput struct {
 
-	// The status of the account configuration. This contains the ConfigurationState.
+	// The status of the account configuration. This contains the ConfigurationState .
 	// If there is an error, it also contains the ErrorDetails .
 	//
 	// This member is required.

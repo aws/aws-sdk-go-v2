@@ -39,8 +39,8 @@ type GetParallelDataInput struct {
 
 type GetParallelDataOutput struct {
 
-	// The Amazon S3 location of a file that provides any errors or warnings that
-	// were produced by your input file. This file was created when Amazon Translate
+	// The Amazon S3 location of a file that provides any errors or warnings that were
+	// produced by your input file. This file was created when Amazon Translate
 	// attempted to create a parallel data resource. The location is returned as a
 	// presigned URL to that has a 30-minute expiration.
 	AuxiliaryDataLocation *types.ParallelDataDataLocation
@@ -56,8 +56,8 @@ type GetParallelDataOutput struct {
 	// Amazon S3, ensure that you recognize the file and trust its creator.
 	DataLocation *types.ParallelDataDataLocation
 
-	// The Amazon S3 location of a file that provides any errors or warnings that
-	// were produced by your input file. This file was created when Amazon Translate
+	// The Amazon S3 location of a file that provides any errors or warnings that were
+	// produced by your input file. This file was created when Amazon Translate
 	// attempted to update a parallel data resource. The location is returned as a
 	// presigned URL to that has a 30-minute expiration.
 	LatestUpdateAttemptAuxiliaryDataLocation *types.ParallelDataDataLocation

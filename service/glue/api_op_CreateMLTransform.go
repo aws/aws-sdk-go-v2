@@ -14,9 +14,8 @@ import (
 // Creates an Glue machine learning transform. This operation creates the
 // transform and all the necessary parameters to train it. Call this operation as
 // the first step in the process of using a machine learning transform (such as the
-//
 // FindMatches transform) for deduplicating data. You can provide an optional
-// Description, in addition to the parameters that you want to use for your
+// Description , in addition to the parameters that you want to use for your
 // algorithm. You must also specify certain parameters for the tasks that Glue runs
 // on your behalf as part of learning from your data and creating a high-quality
 // machine learning transform. These parameters include Role , and optionally,
@@ -58,8 +57,12 @@ type CreateMLTransformInput struct {
 	// The name or Amazon Resource Name (ARN) of the IAM role with the required
 	// permissions. The required permissions include both Glue service role permissions
 	// to Glue resources, and Amazon S3 permissions required by the transform.
-	//     - This role needs Glue service role permissions to allow access to resources in Glue. See Attach a Policy to IAM Users That Access Glue (https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html) .
-	//     - This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.
+	//   - This role needs Glue service role permissions to allow access to resources
+	//   in Glue. See Attach a Policy to IAM Users That Access Glue (https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html)
+	//   .
+	//   - This role needs permission to your Amazon Simple Storage Service (Amazon
+	//   S3) sources, targets, temporary directory, scripts, and any libraries used by
+	//   the task run for this transform.
 	//
 	// This member is required.
 	Role *string
@@ -75,40 +78,40 @@ type CreateMLTransformInput struct {
 	// in the developer guide.
 	GlueVersion *string
 
-	// The number of Glue data processing units (DPUs) that are allocated to task
-	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
-	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
+	// The number of Glue data processing units (DPUs) that are allocated to task runs
+	// for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A
+	// DPU is a relative measure of processing power that consists of 4 vCPUs of
 	// compute capacity and 16 GB of memory. For more information, see the Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/) . MaxCapacity is a
-	// mutually exclusive option with NumberOfWorkers  and WorkerType .
-	//     - If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.
-	//     - If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.
-	//     - If WorkerType is set, then NumberOfWorkers is required (and vice versa).
-	//     - MaxCapacity and NumberOfWorkers must both be at least 1.
-	// When the WorkerType  field is set to a value other than Standard , the
+	// pricing page (https://aws.amazon.com/glue/pricing/) . MaxCapacity is a mutually
+	// exclusive option with NumberOfWorkers and WorkerType .
+	//   - If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be
+	//   set.
+	//   - If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.
+	//   - If WorkerType is set, then NumberOfWorkers is required (and vice versa).
+	//   - MaxCapacity and NumberOfWorkers must both be at least 1.
+	// When the WorkerType field is set to a value other than Standard , the
 	// MaxCapacity field is set automatically and becomes read-only. When the
 	// WorkerType field is set to a value other than Standard , the MaxCapacity field
 	// is set automatically and becomes read-only.
 	MaxCapacity *float64
 
-	// The maximum number of times to retry a task for this transform after a task
-	// run fails.
+	// The maximum number of times to retry a task for this transform after a task run
+	// fails.
 	MaxRetries *int32
 
-	// The number of workers of a defined workerType that are allocated when this
-	// task runs. If WorkerType  is set, then NumberOfWorkers is required (and vice
-	// versa).
+	// The number of workers of a defined workerType that are allocated when this task
+	// runs. If WorkerType is set, then NumberOfWorkers is required (and vice versa).
 	NumberOfWorkers *int32
 
-	// The tags to use with this machine learning transform. You may use tags to
-	// limit access to the machine learning transform. For more information about tags
-	// in Glue, see Amazon Web Services Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)
+	// The tags to use with this machine learning transform. You may use tags to limit
+	// access to the machine learning transform. For more information about tags in
+	// Glue, see Amazon Web Services Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)
 	// in the developer guide.
 	Tags map[string]string
 
 	// The timeout of the task run for this transform in minutes. This is the maximum
 	// time that a task run for this transform can consume resources before it is
-	// terminated and enters TIMEOUT  status. The default is 2,880 minutes (48 hours).
+	// terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
 	Timeout *int32
 
 	// The encryption-at-rest settings of the transform that apply to accessing user
@@ -118,16 +121,18 @@ type CreateMLTransformInput struct {
 
 	// The type of predefined worker that is allocated when this task runs. Accepts a
 	// value of Standard, G.1X, or G.2X.
-	//     - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//     - For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.
-	//     - For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.
-	//
-	// MaxCapacity is a mutually exclusive option with NumberOfWorkers  and WorkerType
-	// .
-	//     - If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.
-	//     - If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.
-	//     - If WorkerType is set, then NumberOfWorkers is required (and vice versa).
-	//     - MaxCapacity and NumberOfWorkers must both be at least 1.
+	//   - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory
+	//   and a 50GB disk, and 2 executors per worker.
+	//   - For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a
+	//   64GB disk, and 1 executor per worker.
+	//   - For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a
+	//   128GB disk, and 1 executor per worker.
+	// MaxCapacity is a mutually exclusive option with NumberOfWorkers and WorkerType .
+	//   - If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be
+	//   set.
+	//   - If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.
+	//   - If WorkerType is set, then NumberOfWorkers is required (and vice versa).
+	//   - MaxCapacity and NumberOfWorkers must both be at least 1.
 	WorkerType types.WorkerType
 
 	noSmithyDocumentSerde

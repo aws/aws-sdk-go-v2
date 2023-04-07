@@ -53,7 +53,7 @@ type CreateAppInput struct {
 	// This member is required.
 	Type types.AppType
 
-	// A Source  object that specifies the app repository.
+	// A Source object that specifies the app repository.
 	AppSource *types.Source
 
 	// One or more user-defined key/value pairs to be added to the stack attributes.
@@ -88,13 +88,13 @@ type CreateAppInput struct {
 	// The app's short name.
 	Shortname *string
 
-	// An SslConfiguration  object with the SSL configuration.
+	// An SslConfiguration object with the SSL configuration.
 	SslConfiguration *types.SslConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a CreateApp  request.
+// Contains the response to a CreateApp request.
 type CreateAppOutput struct {
 
 	// The app ID.

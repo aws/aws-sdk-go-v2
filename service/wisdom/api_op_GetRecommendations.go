@@ -51,7 +51,7 @@ type GetRecommendationsInput struct {
 
 	// The duration (in seconds) for which the call waits for a recommendation to be
 	// made available before returning. If a recommendation is available, the call
-	// returns sooner than WaitTimeSeconds. If no messages are available and the wait
+	// returns sooner than WaitTimeSeconds . If no messages are available and the wait
 	// time expires, the call returns successfully with an empty list.
 	WaitTimeSeconds int32
 

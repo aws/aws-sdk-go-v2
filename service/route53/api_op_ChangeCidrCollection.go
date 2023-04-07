@@ -50,12 +50,16 @@ type ChangeCidrCollectionInput struct {
 
 	// A sequential counter that Amazon Route 53 sets to 1 when you create a
 	// collection and increments it by 1 each time you update the collection. We
-	// recommend that you use ListCidrCollection  to get the current value of
-	// CollectionVersionfor the collection that you want to update, and then include
+	// recommend that you use ListCidrCollection to get the current value of
+	// CollectionVersion for the collection that you want to update, and then include
 	// that value with the change request. This prevents Route 53 from overwriting an
 	// intervening update:
-	//     - If the value in the request matches the value of CollectionVersion in the collection, Route 53 updates the collection.
-	//     - If the value of CollectionVersion in the collection is greater than the value in the request, the collection was changed after you got the version number. Route 53 does not update the collection, and it returns a CidrCollectionVersionMismatch error.
+	//   - If the value in the request matches the value of CollectionVersion in the
+	//   collection, Route 53 updates the collection.
+	//   - If the value of CollectionVersion in the collection is greater than the
+	//   value in the request, the collection was changed after you got the version
+	//   number. Route 53 does not update the collection, and it returns a
+	//   CidrCollectionVersionMismatch error.
 	CollectionVersion *int64
 
 	noSmithyDocumentSerde

@@ -142,8 +142,8 @@ type ListModelManifestNodesPaginatorOptions struct {
 	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -156,8 +156,7 @@ type ListModelManifestNodesPaginator struct {
 	firstPage bool
 }
 
-// NewListModelManifestNodesPaginator returns a new
-// ListModelManifestNodesPaginator
+// NewListModelManifestNodesPaginator returns a new ListModelManifestNodesPaginator
 func NewListModelManifestNodesPaginator(client ListModelManifestNodesAPIClient, params *ListModelManifestNodesInput, optFns ...func(*ListModelManifestNodesPaginatorOptions)) *ListModelManifestNodesPaginator {
 	if params == nil {
 		params = &ListModelManifestNodesInput{}

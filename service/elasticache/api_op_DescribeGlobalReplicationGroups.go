@@ -40,9 +40,9 @@ type DescribeGlobalReplicationGroupsInput struct {
 	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.
 	MaxRecords *int32
 
 	// Returns the list of members that comprise the Global datastore.
@@ -139,13 +139,13 @@ var _ DescribeGlobalReplicationGroupsAPIClient = (*Client)(nil)
 // DescribeGlobalReplicationGroupsPaginatorOptions is the paginator options for
 // DescribeGlobalReplicationGroups
 type DescribeGlobalReplicationGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

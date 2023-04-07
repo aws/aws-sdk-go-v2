@@ -13,11 +13,11 @@ import (
 )
 
 // Lists the attributes for Amazon ECS resources within a specified target type
-// and cluster. When you specify a target type and cluster, ListAttributes
-// returns a list of attribute objects, one for each attribute on each resource.
-// You can filter the list of results to a single attribute name to only return
-// results that have that name. You can also filter the results by attribute name
-// and value. You can do this, for example, to see which container instances in a
+// and cluster. When you specify a target type and cluster, ListAttributes returns
+// a list of attribute objects, one for each attribute on each resource. You can
+// filter the list of results to a single attribute name to only return results
+// that have that name. You can also filter the results by attribute name and
+// value. You can do this, for example, to see which container instances in a
 // cluster are running a Linux AMI ( ecs.os-type=linux ).
 func (c *Client) ListAttributes(ctx context.Context, params *ListAttributesInput, optFns ...func(*Options)) (*ListAttributesOutput, error) {
 	if params == nil {
@@ -52,20 +52,20 @@ type ListAttributesInput struct {
 	// attributes. If you do not specify a cluster, the default cluster is assumed.
 	Cluster *string
 
-	// The maximum number of cluster results that ListAttributes returned in
-	// paginated output. When this parameter is used, ListAttributes  only returns
-	// maxResults results in a single page along with a nextToken response element.
-	// The remaining results of the initial request can be seen by sending another
-	// ListAttributes request with the returned nextToken value. This value can be
-	// between 1 and 100. If this parameter isn't used, then ListAttributes returns
-	// up to 100 results and a nextToken  value if applicable.
+	// The maximum number of cluster results that ListAttributes returned in paginated
+	// output. When this parameter is used, ListAttributes only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another ListAttributes
+	// request with the returned nextToken value. This value can be between 1 and 100.
+	// If this parameter isn't used, then ListAttributes returns up to 100 results and
+	// a nextToken value if applicable.
 	MaxResults *int32
 
-	// The nextToken  value returned from a ListAttributes request indicating that
-	// more results are available to fulfill the request and further calls are needed.
-	// If maxResults was provided, it's possible the number of results to be fewer
-	// than maxResults. This token should be treated as an opaque identifier that is
-	// only used to retrieve the next items in a list and not for other programmatic
+	// The nextToken value returned from a ListAttributes request indicating that more
+	// results are available to fulfill the request and further calls are needed. If
+	// maxResults was provided, it's possible the number of results to be fewer than
+	// maxResults . This token should be treated as an opaque identifier that is only
+	// used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
 
@@ -77,10 +77,10 @@ type ListAttributesOutput struct {
 	// A list of attribute objects that meet the criteria of the request.
 	Attributes []types.Attribute
 
-	// The nextToken  value to include in a future ListAttributes request. When the
-	// results of a ListAttributes  request exceed maxResults, this value can be used
-	// to retrieve the next page of results. This value is null when there are no
-	// more results to return.
+	// The nextToken value to include in a future ListAttributes request. When the
+	// results of a ListAttributes request exceed maxResults , this value can be used
+	// to retrieve the next page of results. This value is null when there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -162,17 +162,17 @@ var _ ListAttributesAPIClient = (*Client)(nil)
 
 // ListAttributesPaginatorOptions is the paginator options for ListAttributes
 type ListAttributesPaginatorOptions struct {
-	// The maximum number of cluster results that ListAttributes returned in
-	// paginated output. When this parameter is used, ListAttributes  only returns
-	// maxResults results in a single page along with a nextToken response element.
-	// The remaining results of the initial request can be seen by sending another
-	// ListAttributes request with the returned nextToken value. This value can be
-	// between 1 and 100. If this parameter isn't used, then ListAttributes returns
-	// up to 100 results and a nextToken  value if applicable.
+	// The maximum number of cluster results that ListAttributes returned in paginated
+	// output. When this parameter is used, ListAttributes only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another ListAttributes
+	// request with the returned nextToken value. This value can be between 1 and 100.
+	// If this parameter isn't used, then ListAttributes returns up to 100 results and
+	// a nextToken value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -45,10 +45,10 @@ type DescribeRdsDbInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeRdsDbInstances  request.
+// Contains the response to a DescribeRdsDbInstances request.
 type DescribeRdsDbInstancesOutput struct {
 
-	// An a array of RdsDbInstance  objects that describe the instances.
+	// An a array of RdsDbInstance objects that describe the instances.
 	RdsDbInstances []types.RdsDbInstance
 
 	// Metadata pertaining to the operation's result.

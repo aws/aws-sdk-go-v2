@@ -13,8 +13,8 @@ import (
 )
 
 // Creates an empty firewall domain list for use in DNS Firewall rules. You can
-// populate the domains for the new list with a file, using ImportFirewallDomains
-// , or with domain strings, using UpdateFirewallDomains .
+// populate the domains for the new list with a file, using ImportFirewallDomains ,
+// or with domain strings, using UpdateFirewallDomains .
 func (c *Client) CreateFirewallDomainList(ctx context.Context, params *CreateFirewallDomainListInput, optFns ...func(*Options)) (*CreateFirewallDomainListOutput, error) {
 	if params == nil {
 		params = &CreateFirewallDomainListInput{}
@@ -32,9 +32,9 @@ func (c *Client) CreateFirewallDomainList(ctx context.Context, params *CreateFir
 
 type CreateFirewallDomainListInput struct {
 
-	// A unique string that identifies the request and that allows you to retry
-	// failed requests without the risk of running the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
+	// A unique string that identifies the request and that allows you to retry failed
+	// requests without the risk of running the operation twice. CreatorRequestId can
+	// be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string

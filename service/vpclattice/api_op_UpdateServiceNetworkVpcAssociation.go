@@ -60,9 +60,9 @@ type UpdateServiceNetworkVpcAssociationOutput struct {
 	// The IDs of the security groups.
 	SecurityGroupIds []string
 
-	// The status. You can retry the operation if the status is DELETE_FAILED. However,
-	// if you retry it while the status is DELETE_IN_PROGRESS, there is no change in
-	// the status.
+	// The status. You can retry the operation if the status is DELETE_FAILED .
+	// However, if you retry it while the status is DELETE_IN_PROGRESS , there is no
+	// change in the status.
 	Status types.ServiceNetworkVpcAssociationStatus
 
 	// Metadata pertaining to the operation's result.

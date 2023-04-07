@@ -47,8 +47,8 @@ type UpdateAddonInput struct {
 	// .
 	AddonVersion *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
 	// The set of configuration values for the add-on that's created. The values that
@@ -56,19 +56,22 @@ type UpdateAddonInput struct {
 	// .
 	ConfigurationValues *string
 
-	// How to resolve field value conflicts for an Amazon EKS add-on if you've
-	// changed a value from the Amazon EKS default value. Conflicts are handled based
-	// on the option you choose:
-	//     - None – Amazon EKS doesn't change the value. The update might fail.
-	//     - Overwrite – Amazon EKS overwrites the changed value back to the Amazon EKS default value.
-	//     - Preserve – Amazon EKS preserves the value. If you choose this option, we recommend that you test any field and value changes on a non-production cluster before updating the add-on on your production cluster.
+	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed
+	// a value from the Amazon EKS default value. Conflicts are handled based on the
+	// option you choose:
+	//   - None – Amazon EKS doesn't change the value. The update might fail.
+	//   - Overwrite – Amazon EKS overwrites the changed value back to the Amazon EKS
+	//   default value.
+	//   - Preserve – Amazon EKS preserves the value. If you choose this option, we
+	//   recommend that you test any field and value changes on a non-production cluster
+	//   before updating the add-on on your production cluster.
 	ResolveConflicts types.ResolveConflicts
 
 	// The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on's
 	// service account. The role must be assigned the IAM permissions required by the
 	// add-on. If you don't specify an existing IAM role, then the add-on uses the
-	// permissions assigned to the node IAM role. For more information, see Amazon
-	// EKS node IAM role (https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html)
+	// permissions assigned to the node IAM role. For more information, see Amazon EKS
+	// node IAM role (https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html)
 	// in the Amazon EKS User Guide. To specify an existing IAM role, you must have an
 	// IAM OpenID Connect (OIDC) provider created for your cluster. For more
 	// information, see Enabling IAM roles for service accounts on your cluster (https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)

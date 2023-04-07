@@ -52,9 +52,9 @@ func (c *Client) UpdateDestination(ctx context.Context, params *UpdateDestinatio
 
 type UpdateDestinationInput struct {
 
-	// Obtain this value from the VersionId  result of DeliveryStreamDescription.
-	// This value is required, and helps the service perform conditional operations.
-	// For example, if there is an interleaving update and this value is null, then the
+	// Obtain this value from the VersionId result of DeliveryStreamDescription . This
+	// value is required, and helps the service perform conditional operations. For
+	// example, if there is an interleaving update and this value is null, then the
 	// update destination fails. After the update is successful, the VersionId value
 	// is updated. The service then performs a merge of the old configuration with the
 	// new configuration.

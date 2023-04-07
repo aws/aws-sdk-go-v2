@@ -32,11 +32,11 @@ type AcceleratorTypeOffering struct {
 	// value.
 	Location *string
 
-	// The location type for the offering. It can assume the following values:
-	// region: defines that the offering is at the regional level. availability-zone:
-	// defines that the offering is at the availability zone level.
-	// availability-zone-id: defines that the offering is at the availability zone
-	// level, defined by the availability zone id.
+	// The location type for the offering. It can assume the following values: region:
+	// defines that the offering is at the regional level. availability-zone: defines
+	// that the offering is at the availability zone level. availability-zone-id:
+	// defines that the offering is at the availability zone level, defined by the
+	// availability zone id.
 	LocationType LocationType
 
 	noSmithyDocumentSerde

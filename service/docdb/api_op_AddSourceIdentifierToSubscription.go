@@ -31,16 +31,18 @@ func (c *Client) AddSourceIdentifierToSubscription(ctx context.Context, params *
 type AddSourceIdentifierToSubscriptionInput struct {
 
 	// The identifier of the event source to be added:
-	//     - If the source type is an instance, a DBInstanceIdentifier must be provided.
-	//     - If the source type is a security group, a DBSecurityGroupName must be provided.
-	//     - If the source type is a parameter group, a DBParameterGroupName must be provided.
-	//     - If the source type is a snapshot, a DBSnapshotIdentifier must be provided.
+	//   - If the source type is an instance, a DBInstanceIdentifier must be provided.
+	//   - If the source type is a security group, a DBSecurityGroupName must be
+	//   provided.
+	//   - If the source type is a parameter group, a DBParameterGroupName must be
+	//   provided.
+	//   - If the source type is a snapshot, a DBSnapshotIdentifier must be provided.
 	//
 	// This member is required.
 	SourceIdentifier *string
 
-	// The name of the Amazon DocumentDB event notification subscription that you
-	// want to add a source identifier to.
+	// The name of the Amazon DocumentDB event notification subscription that you want
+	// to add a source identifier to.
 	//
 	// This member is required.
 	SubscriptionName *string

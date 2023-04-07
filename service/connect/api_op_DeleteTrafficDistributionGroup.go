@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a traffic distribution group. This API can be called only in the
-// Region where the traffic distribution group is created. For more information
-// about deleting traffic distribution groups, see Delete traffic distribution
-// groups (https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html)
+// Deletes a traffic distribution group. This API can be called only in the Region
+// where the traffic distribution group is created. For more information about
+// deleting traffic distribution groups, see Delete traffic distribution groups (https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) DeleteTrafficDistributionGroup(ctx context.Context, params *DeleteTrafficDistributionGroupInput, optFns ...func(*Options)) (*DeleteTrafficDistributionGroupOutput, error) {
 	if params == nil {
@@ -32,10 +31,9 @@ func (c *Client) DeleteTrafficDistributionGroup(ctx context.Context, params *Del
 
 type DeleteTrafficDistributionGroupInput struct {
 
-	// The identifier of the traffic distribution group. This can be the ID or the
-	// ARN if the API is being called in the Region where the traffic distribution
-	// group was created. The ARN must be provided if the call is from the replicated
-	// Region.
+	// The identifier of the traffic distribution group. This can be the ID or the ARN
+	// if the API is being called in the Region where the traffic distribution group
+	// was created. The ARN must be provided if the call is from the replicated Region.
 	//
 	// This member is required.
 	TrafficDistributionGroupId *string

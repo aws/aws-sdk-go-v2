@@ -12,9 +12,9 @@ import (
 )
 
 // An API operation for adding one or more tags (key-value pairs) to a resource.
-// You can use the TagResource operation with a resource that already has tags.
-// If you specify a new tag key for the resource, this tag is appended to the list
-// of tags associated with the resource. If you specify a tag key that is already
+// You can use the TagResource operation with a resource that already has tags. If
+// you specify a new tag key for the resource, this tag is appended to the list of
+// tags associated with the resource. If you specify a tag key that is already
 // associated with the resource, the new tag value you specify replaces the
 // previous value for that tag. Although the maximum number of array members is
 // 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services
@@ -43,16 +43,20 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// A list of tag key-value pairs to be added to the resource. Each tag consists
-	// of a key and a value, and each key must be unique for the resource. The
-	// following restrictions apply to resource tags:
-	//     - Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use
-	//     - The maximum length of a key is 128 characters
-	//     - The maximum length of a value is 256 characters
-	//     - Keys and values can only contain alphanumeric characters, spaces, and any of the following: _.:/=+@-
-	//     - Keys and values are case sensitive
-	//     - Keys and values are trimmed for any leading or trailing whitespaces
-	//     - Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon Web Services use
+	// A list of tag key-value pairs to be added to the resource. Each tag consists of
+	// a key and a value, and each key must be unique for the resource. The following
+	// restrictions apply to resource tags:
+	//   - Although the maximum number of array members is 200, you can assign a
+	//   maximum of 50 user-tags to one resource. The remaining are reserved for Amazon
+	//   Web Services use
+	//   - The maximum length of a key is 128 characters
+	//   - The maximum length of a value is 256 characters
+	//   - Keys and values can only contain alphanumeric characters, spaces, and any
+	//   of the following: _.:/=+@-
+	//   - Keys and values are case sensitive
+	//   - Keys and values are trimmed for any leading or trailing whitespaces
+	//   - Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon
+	//   Web Services use
 	//
 	// This member is required.
 	ResourceTags []types.ResourceTag

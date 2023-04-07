@@ -32,8 +32,8 @@ func (c *Client) CreateGrantVersion(ctx context.Context, params *CreateGrantVers
 
 type CreateGrantVersionInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	//
 	// This member is required.
 	ClientToken *string

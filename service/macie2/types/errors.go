@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Provides information about an error that occurred due to insufficient access
-// to a specified resource.
+// Provides information about an error that occurred due to insufficient access to
+// a specified resource.
 type AccessDeniedException struct {
 	Message *string
 

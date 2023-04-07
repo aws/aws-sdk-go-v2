@@ -49,8 +49,8 @@ type ListCustomRoutingEndpointGroupsInput struct {
 
 type ListCustomRoutingEndpointGroupsOutput struct {
 
-	// The list of the endpoint groups associated with a listener for a custom
-	// routing accelerator.
+	// The list of the endpoint groups associated with a listener for a custom routing
+	// accelerator.
 	EndpointGroups []types.CustomRoutingEndpointGroup
 
 	// The token for the next set of results. You receive this token from a previous
@@ -141,8 +141,8 @@ type ListCustomRoutingEndpointGroupsPaginatorOptions struct {
 	// The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

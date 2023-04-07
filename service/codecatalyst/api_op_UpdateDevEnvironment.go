@@ -54,8 +54,8 @@ type UpdateDevEnvironmentInput struct {
 	// original successful request and have no additional effect.
 	ClientToken *string
 
-	// Information about the integrated development environment (IDE) configured for
-	// a Dev Environment.
+	// Information about the integrated development environment (IDE) configured for a
+	// Dev Environment.
 	Ides []types.IdeConfiguration
 
 	// The amount of time the Dev Environment will run without any activity detected
@@ -64,8 +64,8 @@ type UpdateDevEnvironmentInput struct {
 	// of the Dev Environment if it is running.
 	InactivityTimeoutMinutes int32
 
-	// The Amazon EC2 instace type to use for the Dev Environment. Changing this
-	// value will cause a restart of the Dev Environment if it is running.
+	// The Amazon EC2 instace type to use for the Dev Environment. Changing this value
+	// will cause a restart of the Dev Environment if it is running.
 	InstanceType types.InstanceType
 
 	noSmithyDocumentSerde

@@ -19,16 +19,16 @@ import (
 // Verification indicates that the message hasn't changed since the HMAC was
 // calculated, and the specified key was used to generate and verify the HMAC. HMAC
 // KMS keys and the HMAC algorithms that KMS uses conform to industry standards
-// defined in RFC 2104 (https://datatracker.ietf.org/doc/html/rfc2104). This
+// defined in RFC 2104 (https://datatracker.ietf.org/doc/html/rfc2104) . This
 // operation is part of KMS support for HMAC KMS keys. For details, see HMAC keys
-// in KMS (https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html)in the
+// in KMS (https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html) in the
 // Key Management Service Developer Guide. The KMS key that you use for this
-// operation must be in a compatible key state. For details, see Key states of
-// KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-// in the Key Management Service Developer Guide. Cross-account use: Yes. To
-// perform this operation with a KMS key in a different Amazon Web Services
-// account, specify the key ARN or alias ARN in the value of the KeyId parameter.
-// Required permissions: kms:VerifyMac (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. Cross-account use: Yes. To perform
+// this operation with a KMS key in a different Amazon Web Services account,
+// specify the key ARN or alias ARN in the value of the KeyId parameter. Required
+// permissions: kms:VerifyMac (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations: GenerateMac
 func (c *Client) VerifyMac(ctx context.Context, params *VerifyMacInput, optFns ...func(*Options)) (*VerifyMacOutput, error) {
 	if params == nil {
@@ -49,7 +49,6 @@ type VerifyMacInput struct {
 
 	// The KMS key that will be used in the verification. Enter a key ID of the KMS
 	// key that was used to generate the HMAC. If you identify a different KMS key, the
-	//
 	// VerifyMac operation fails.
 	//
 	// This member is required.
@@ -64,15 +63,15 @@ type VerifyMacInput struct {
 
 	// The MAC algorithm that will be used in the verification. Enter the same MAC
 	// algorithm that was used to compute the HMAC. This algorithm must be supported by
-	// the HMAC KMS key identified by the KeyId  parameter.
+	// the HMAC KMS key identified by the KeyId parameter.
 	//
 	// This member is required.
 	MacAlgorithm types.MacAlgorithmSpec
 
 	// The message that will be used in the verification. Enter the same message that
-	// was used to generate the HMAC. GenerateMac  and VerifyMac do not provide
-	// special handling for message digests. If you generated an HMAC for a hash digest
-	// of a message, you must verify the HMAC for the same hash digest.
+	// was used to generate the HMAC. GenerateMac and VerifyMac do not provide special
+	// handling for message digests. If you generated an HMAC for a hash digest of a
+	// message, you must verify the HMAC for the same hash digest.
 	//
 	// This member is required.
 	Message []byte
@@ -96,11 +95,10 @@ type VerifyMacOutput struct {
 	MacAlgorithm types.MacAlgorithmSpec
 
 	// A Boolean value that indicates whether the HMAC was verified. A value of True
-	// indicates that the HMAC ( Mac ) was generated with the specified Message, HMAC
-	// KMS key ( KeyID ) and MacAlgorithm. . If the HMAC is not verified, the
-	// VerifyMac operation fails with a KMSInvalidMacException exception. This
-	// exception indicates that one or more of the inputs changed since the HMAC was
-	// computed.
+	// indicates that the HMAC ( Mac ) was generated with the specified Message , HMAC
+	// KMS key ( KeyID ) and MacAlgorithm. . If the HMAC is not verified, the VerifyMac
+	// operation fails with a KMSInvalidMacException exception. This exception
+	// indicates that one or more of the inputs changed since the HMAC was computed.
 	MacValid bool
 
 	// Metadata pertaining to the operation's result.

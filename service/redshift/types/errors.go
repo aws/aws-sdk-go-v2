@@ -335,7 +335,7 @@ func (e *ClusterAlreadyExistsFault) ErrorCode() string {
 }
 func (e *ClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The ClusterIdentifier  parameter does not refer to an existing cluster.
+// The ClusterIdentifier parameter does not refer to an existing cluster.
 type ClusterNotFoundFault struct {
 	Message *string
 
@@ -724,9 +724,9 @@ func (e *ClusterSubnetGroupNotFoundFault) ErrorCode() string {
 }
 func (e *ClusterSubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request would result in user exceeding the allowed number of cluster
-// subnet groups. For information about increasing your quota, go to Limits in
-// Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+// The request would result in user exceeding the allowed number of cluster subnet
+// groups. For information about increasing your quota, go to Limits in Amazon
+// Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 // in the Amazon Redshift Cluster Management Guide.
 type ClusterSubnetGroupQuotaExceededFault struct {
 	Message *string
@@ -1003,8 +1003,8 @@ func (e *EndpointNotFoundFault) ErrorCode() string {
 }
 func (e *EndpointNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of Redshift-managed VPC endpoints per authorization has exceeded
-// its limit.
+// The number of Redshift-managed VPC endpoints per authorization has exceeded its
+// limit.
 type EndpointsPerAuthorizationLimitExceededFault struct {
 	Message *string
 
@@ -1032,8 +1032,7 @@ func (e *EndpointsPerAuthorizationLimitExceededFault) ErrorFault() smithy.ErrorF
 	return smithy.FaultClient
 }
 
-// The number of Redshift-managed VPC endpoints per cluster has exceeded its
-// limit.
+// The number of Redshift-managed VPC endpoints per cluster has exceeded its limit.
 type EndpointsPerClusterLimitExceededFault struct {
 	Message *string
 
@@ -1371,8 +1370,8 @@ func (e *InsufficientS3BucketPolicyFault) ErrorCode() string {
 }
 func (e *InsufficientS3BucketPolicyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The authentication profile request is not valid. The profile name can't be
-// null or empty. The authentication profile API operation must be available in the
+// The authentication profile request is not valid. The profile name can't be null
+// or empty. The authentication profile API operation must be available in the
 // Amazon Web Services Region.
 type InvalidAuthenticationProfileRequestFault struct {
 	Message *string
@@ -1427,8 +1426,8 @@ func (e *InvalidAuthorizationStateFault) ErrorCode() string {
 }
 func (e *InvalidAuthorizationStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The cluster parameter group action can not be completed because another task
-// is in progress that involves the parameter group. Wait a few moments and try the
+// The cluster parameter group action can not be completed because another task is
+// in progress that involves the parameter group. Wait a few moments and try the
 // operation again.
 type InvalidClusterParameterGroupStateFault struct {
 	Message *string
@@ -1513,8 +1512,8 @@ func (e *InvalidClusterSnapshotScheduleStateFault) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
-// The specified cluster snapshot is not in the available state, or other
-// accounts are authorized to access the snapshot.
+// The specified cluster snapshot is not in the available state, or other accounts
+// are authorized to access the snapshot.
 type InvalidClusterSnapshotStateFault struct {
 	Message *string
 
@@ -1540,7 +1539,7 @@ func (e *InvalidClusterSnapshotStateFault) ErrorCode() string {
 }
 func (e *InvalidClusterSnapshotStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified cluster is not in the available  state.
+// The specified cluster is not in the available state.
 type InvalidClusterStateFault struct {
 	Message *string
 
@@ -2077,7 +2076,7 @@ func (e *InvalidSubscriptionStateFault) ErrorCode() string {
 func (e *InvalidSubscriptionStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value specified for the sourceDatabaseName , sourceSchemaName , or
-// sourceTableNameparameter, or a combination of these, doesn't exist in the
+// sourceTableName parameter, or a combination of these, doesn't exist in the
 // snapshot.
 type InvalidTableRestoreArgumentFault struct {
 	Message *string
@@ -3039,8 +3038,8 @@ func (e *SubnetAlreadyInUse) ErrorCode() string {
 }
 func (e *SubnetAlreadyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// There is already an existing event notification subscription with the
-// specified name.
+// There is already an existing event notification subscription with the specified
+// name.
 type SubscriptionAlreadyExistFault struct {
 	Message *string
 
@@ -3120,8 +3119,8 @@ func (e *SubscriptionEventIdNotFoundFault) ErrorCode() string {
 }
 func (e *SubscriptionEventIdNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An Amazon Redshift event notification subscription with the specified name
-// does not exist.
+// An Amazon Redshift event notification subscription with the specified name does
+// not exist.
 type SubscriptionNotFoundFault struct {
 	Message *string
 
@@ -3202,7 +3201,7 @@ func (e *TableLimitExceededFault) ErrorCode() string {
 }
 func (e *TableLimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified TableRestoreRequestId  value was not found.
+// The specified TableRestoreRequestId value was not found.
 type TableRestoreNotFoundFault struct {
 	Message *string
 

@@ -12,8 +12,8 @@ import (
 )
 
 // Modifies the parameters of a DB cluster parameter group. To modify more than
-// one parameter, submit a list of the following: ParameterName , ParameterValue,
-// and ApplyMethod. A maximum of 20 parameters can be modified in a single
+// one parameter, submit a list of the following: ParameterName , ParameterValue ,
+// and ApplyMethod . A maximum of 20 parameters can be modified in a single
 // request. After you create a DB cluster parameter group, you should wait at least
 // 5 minutes before creating your first DB cluster that uses that DB cluster
 // parameter group as the default parameter group. This allows Amazon RDS to fully
@@ -55,12 +55,12 @@ type ModifyDBClusterParameterGroupInput struct {
 	DBClusterParameterGroupName *string
 
 	// A list of parameters in the DB cluster parameter group to modify. Valid Values
-	// (for the application method): immediate | pending-reboot  You can use the
+	// (for the application method): immediate | pending-reboot You can use the
 	// immediate value with dynamic parameters only. You can use the pending-reboot
 	// value for both dynamic and static parameters. When the application method is
-	// immediate, changes to dynamic parameters are applied immediately to the DB
+	// immediate , changes to dynamic parameters are applied immediately to the DB
 	// clusters associated with the parameter group. When the application method is
-	// pending-reboot, changes to dynamic and static parameters are applied after a
+	// pending-reboot , changes to dynamic and static parameters are applied after a
 	// reboot without failover to the DB clusters associated with the parameter group.
 	//
 	// This member is required.
@@ -72,11 +72,10 @@ type ModifyDBClusterParameterGroupInput struct {
 type ModifyDBClusterParameterGroupOutput struct {
 
 	// The name of the DB cluster parameter group. Constraints:
-	//     - Must be 1 to 255 letters or numbers.
-	//     - First character must be a letter
-	//     - Can't end with a hyphen or contain two consecutive hyphens
-	// This value is
-	// stored as a lowercase string.
+	//   - Must be 1 to 255 letters or numbers.
+	//   - First character must be a letter
+	//   - Can't end with a hyphen or contain two consecutive hyphens
+	// This value is stored as a lowercase string.
 	DBClusterParameterGroupName *string
 
 	// Metadata pertaining to the operation's result.

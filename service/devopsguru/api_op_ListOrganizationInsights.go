@@ -30,7 +30,7 @@ func (c *Client) ListOrganizationInsights(ctx context.Context, params *ListOrgan
 
 type ListOrganizationInsightsInput struct {
 
-	// A filter used by ListInsights  to specify which insights to return.
+	// A filter used by ListInsights to specify which insights to return.
 	//
 	// This member is required.
 	StatusFilter *types.ListInsightsStatusFilter
@@ -39,7 +39,7 @@ type ListOrganizationInsightsInput struct {
 	AccountIds []string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -147,11 +147,11 @@ var _ ListOrganizationInsightsAPIClient = (*Client)(nil)
 // ListOrganizationInsights
 type ListOrganizationInsightsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

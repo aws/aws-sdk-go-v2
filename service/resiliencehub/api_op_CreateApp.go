@@ -70,8 +70,8 @@ type CreateAppInput struct {
 
 type CreateAppOutput struct {
 
-	// The created application returned as an object with details including
-	// compliance status, creation time, description, resiliency score, and more.
+	// The created application returned as an object with details including compliance
+	// status, creation time, description, resiliency score, and more.
 	//
 	// This member is required.
 	App *types.App

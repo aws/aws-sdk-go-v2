@@ -43,7 +43,7 @@ type EnableReachabilityAnalyzerOrganizationSharingInput struct {
 
 type EnableReachabilityAnalyzerOrganizationSharingOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, returns an error.
+	// Returns true if the request succeeds; otherwise, returns an error.
 	ReturnValue *bool
 
 	// Metadata pertaining to the operation's result.

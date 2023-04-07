@@ -53,7 +53,7 @@ type ListInferenceRecommendationsJobsInput struct {
 	NameContains *string
 
 	// If the response to a previous ListInferenceRecommendationsJobsRequest request
-	// was truncated, the response includes a NextToken. To retrieve the next set of
+	// was truncated, the response includes a NextToken . To retrieve the next set of
 	// recommendations, use the token in the next request.
 	NextToken *string
 
@@ -72,8 +72,7 @@ type ListInferenceRecommendationsJobsInput struct {
 
 type ListInferenceRecommendationsJobsOutput struct {
 
-	// The recommendations created from the Amazon SageMaker Inference Recommender
-	// job.
+	// The recommendations created from the Amazon SageMaker Inference Recommender job.
 	//
 	// This member is required.
 	InferenceRecommendationsJobs []types.InferenceRecommendationsJob
@@ -161,8 +160,8 @@ type ListInferenceRecommendationsJobsPaginatorOptions struct {
 	// The maximum number of recommendations to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

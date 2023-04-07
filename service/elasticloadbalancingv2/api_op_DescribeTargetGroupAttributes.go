@@ -13,9 +13,12 @@ import (
 
 // Describes the attributes for the specified target group. For more information,
 // see the following:
-//   - Target group attributes (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes) in the Application Load Balancers Guide
-//   - Target group attributes (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes) in the Network Load Balancers Guide
-//   - Target group attributes (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html#target-group-attributes) in the Gateway Load Balancers Guide
+//   - Target group attributes (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes)
+//     in the Application Load Balancers Guide
+//   - Target group attributes (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes)
+//     in the Network Load Balancers Guide
+//   - Target group attributes (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html#target-group-attributes)
+//     in the Gateway Load Balancers Guide
 func (c *Client) DescribeTargetGroupAttributes(ctx context.Context, params *DescribeTargetGroupAttributesInput, optFns ...func(*Options)) (*DescribeTargetGroupAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeTargetGroupAttributesInput{}

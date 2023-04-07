@@ -12,15 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the tag set associated with the bucket. To use this operation, you
-// must have permission to perform the s3:GetBucketTagging action. By default,
-// the bucket owner has this permission and can grant this permission to others.
+// Returns the tag set associated with the bucket. To use this operation, you must
+// have permission to perform the s3:GetBucketTagging action. By default, the
+// bucket owner has this permission and can grant this permission to others.
 // GetBucketTagging has the following special error:
 //   - Error code: NoSuchTagSet
 //   - Description: There is no tag set associated with the bucket.
 //
-// The
-// following operations are related to GetBucketTagging :
+// The following operations are related to GetBucketTagging :
 //   - PutBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html)
 //   - DeleteBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html)
 func (c *Client) GetBucketTagging(ctx context.Context, params *GetBucketTaggingInput, optFns ...func(*Options)) (*GetBucketTaggingOutput, error) {
@@ -150,9 +149,9 @@ func newServiceMetadataMiddleware_opGetBucketTagging(region string) *awsmiddlewa
 	}
 }
 
-// getGetBucketTaggingBucketMember returns a pointer to string denoting a
-// provided bucket member valueand a boolean indicating if the input has a modeled
-// bucket name,
+// getGetBucketTaggingBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
 func getGetBucketTaggingBucketMember(input interface{}) (*string, bool) {
 	in := input.(*GetBucketTaggingInput)
 	if in.Bucket == nil {

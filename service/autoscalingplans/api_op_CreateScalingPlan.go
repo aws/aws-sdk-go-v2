@@ -53,7 +53,7 @@ type CreateScalingPlanInput struct {
 
 type CreateScalingPlanOutput struct {
 
-	// The version number of the scaling plan. This value is always 1. Currently, you
+	// The version number of the scaling plan. This value is always 1 . Currently, you
 	// cannot have multiple scaling plan versions.
 	//
 	// This member is required.

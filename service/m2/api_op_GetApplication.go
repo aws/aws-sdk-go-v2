@@ -88,8 +88,8 @@ type GetApplicationOutput struct {
 	// The identifier of a customer managed key.
 	KmsKeyId *string
 
-	// The timestamp when you last started the application. Null until the
-	// application runs for the first time.
+	// The timestamp when you last started the application. Null until the application
+	// runs for the first time.
 	LastStartTime *time.Time
 
 	// The Amazon Resource Name (ARN) for the network load balancer listener created
@@ -117,8 +117,8 @@ type GetApplicationOutput struct {
 	// A list of tags associated with the application.
 	Tags map[string]string
 
-	// Returns the Amazon Resource Names (ARNs) of the target groups that are
-	// attached to the network load balancer.
+	// Returns the Amazon Resource Names (ARNs) of the target groups that are attached
+	// to the network load balancer.
 	TargetGroupArns []string
 
 	// Metadata pertaining to the operation's result.

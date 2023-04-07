@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates status for cost allocation tags in bulk, with maximum batch size of
-// 20. If the tag status that's updated is the same as the existing tag status, the
+// Updates status for cost allocation tags in bulk, with maximum batch size of 20.
+// If the tag status that's updated is the same as the existing tag status, the
 // request doesn't fail. Instead, it doesn't have any effect on the tag status (for
 // example, activating the active tag).
 func (c *Client) UpdateCostAllocationTagsStatus(ctx context.Context, params *UpdateCostAllocationTagsStatusInput, optFns ...func(*Options)) (*UpdateCostAllocationTagsStatusOutput, error) {

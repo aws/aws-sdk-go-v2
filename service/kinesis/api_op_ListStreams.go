@@ -13,14 +13,14 @@ import (
 )
 
 // Lists your Kinesis data streams. The number of streams may be too large to
-// return from a single call to ListStreams. You can limit the number of returned
-// streams using the Limit  parameter. If you do not specify a value for the Limit
+// return from a single call to ListStreams . You can limit the number of returned
+// streams using the Limit parameter. If you do not specify a value for the Limit
 // parameter, Kinesis Data Streams uses the default limit, which is currently 100.
 // You can detect if there are more streams available to list by using the
-// HasMoreStreamsflag from the returned output. If there are more streams
+// HasMoreStreams flag from the returned output. If there are more streams
 // available, you can request more streams by using the name of the last stream
-// returned by the ListStreams  request in the ExclusiveStartStreamName parameter
-// in a subsequent request to ListStreams. The group of stream names returned by
+// returned by the ListStreams request in the ExclusiveStartStreamName parameter
+// in a subsequent request to ListStreams . The group of stream names returned by
 // the subsequent request is then added to the list. You can continue this process
 // until all the stream names have been collected in the list. ListStreams has a
 // limit of five transactions per second per account.
@@ -45,8 +45,8 @@ type ListStreamsInput struct {
 	// The name of the stream to start the list with.
 	ExclusiveStartStreamName *string
 
-	// The maximum number of streams to list. The default value is 100. If you
-	// specify a value greater than 100, at most 100 results are returned.
+	// The maximum number of streams to list. The default value is 100. If you specify
+	// a value greater than 100, at most 100 results are returned.
 	Limit *int32
 
 	//
@@ -64,7 +64,7 @@ type ListStreamsOutput struct {
 	HasMoreStreams *bool
 
 	// The names of the streams that are associated with the Amazon Web Services
-	// account making the ListStreams  request.
+	// account making the ListStreams request.
 	//
 	// This member is required.
 	StreamNames []string
@@ -150,12 +150,12 @@ var _ ListStreamsAPIClient = (*Client)(nil)
 
 // ListStreamsPaginatorOptions is the paginator options for ListStreams
 type ListStreamsPaginatorOptions struct {
-	// The maximum number of streams to list. The default value is 100. If you
-	// specify a value greater than 100, at most 100 results are returned.
+	// The maximum number of streams to list. The default value is 100. If you specify
+	// a value greater than 100, at most 100 results are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

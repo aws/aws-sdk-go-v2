@@ -35,8 +35,8 @@ type AwsCloudMapInstanceAttribute struct {
 	// This member is required.
 	Key *string
 
-	// The value of an Cloud Map service instance attribute key. Any Cloud Map
-	// service instance that contains the specified key and value is returned.
+	// The value of an Cloud Map service instance attribute key. Any Cloud Map service
+	// instance that contains the specified key and value is returned.
 	//
 	// This member is required.
 	Value *string
@@ -64,9 +64,9 @@ type AwsCloudMapServiceDiscovery struct {
 	// returned.
 	Attributes []AwsCloudMapInstanceAttribute
 
-	// The preferred IP version that this virtual node uses. Setting the IP
-	// preference on the virtual node only overrides the IP preference set for the mesh
-	// on this specific node.
+	// The preferred IP version that this virtual node uses. Setting the IP preference
+	// on the virtual node only overrides the IP preference set for the mesh on this
+	// specific node.
 	IpPreference IpPreference
 
 	noSmithyDocumentSerde
@@ -122,8 +122,7 @@ type ClientPolicyTls struct {
 	// A reference to an object that represents a client's TLS certificate.
 	Certificate ClientTlsCertificate
 
-	// Whether the policy is enforced. The default is True, if a value isn't
-	// specified.
+	// Whether the policy is enforced. The default is True , if a value isn't specified.
 	Enforce *bool
 
 	// One or more ports that the policy is enforced for.
@@ -173,9 +172,9 @@ type DnsServiceDiscovery struct {
 	// This member is required.
 	Hostname *string
 
-	// The preferred IP version that this virtual node uses. Setting the IP
-	// preference on the virtual node only overrides the IP preference set for the mesh
-	// on this specific node.
+	// The preferred IP version that this virtual node uses. Setting the IP preference
+	// on the virtual node only overrides the IP preference set for the mesh on this
+	// specific node.
 	IpPreference IpPreference
 
 	// Specifies the DNS response type for the virtual node.
@@ -199,7 +198,7 @@ type Duration struct {
 // An object that represents the egress filter rules for a service mesh.
 type EgressFilter struct {
 
-	// The egress filter type. By default, the type is DROP_ALL, which allows egress
+	// The egress filter type. By default, the type is DROP_ALL , which allows egress
 	// only from virtual nodes to other defined resources in the service mesh (and any
 	// traffic to *.amazonaws.com for Amazon Web Services API calls). You can set the
 	// egress filter type to ALLOW_ALL to allow egress to any endpoint inside or
@@ -216,7 +215,7 @@ type FileAccessLog struct {
 
 	// The file path to write access logs to. You can use /dev/stdout to send access
 	// logs to standard out and configure your Envoy container to use a log driver,
-	// such as awslogs, to export the access logs to a log storage service such as
+	// such as awslogs , to export the access logs to a log storage service such as
 	// Amazon CloudWatch Logs. You can also specify a path in the Envoy container's
 	// file system to write the files to disk. The Envoy process must have write
 	// permissions to the path that you specify here. Otherwise, Envoy fails to
@@ -225,7 +224,7 @@ type FileAccessLog struct {
 	// This member is required.
 	Path *string
 
-	// The specified format for the logs. The format is either json_format  or
+	// The specified format for the logs. The format is either json_format or
 	// text_format .
 	Format LoggingFormat
 
@@ -326,10 +325,10 @@ type GatewayRouteRef struct {
 	// This member is required.
 	MeshOwner *string
 
-	// The Amazon Web Services IAM account ID of the resource owner. If the account
-	// ID is not your own, then it's the ID of the mesh owner or of another account
-	// that the mesh is shared with. For more information about mesh sharing, see
-	// Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
 	// .
 	//
 	// This member is required.
@@ -461,7 +460,7 @@ type GrpcGatewayRouteMetadata struct {
 	// This member is required.
 	Name *string
 
-	// Specify True  to match anything except the match criteria. The default value is
+	// Specify True to match anything except the match criteria. The default value is
 	// False .
 	Invert *bool
 
@@ -541,10 +540,10 @@ type GrpcMetadataMatchMethodMemberSuffix struct {
 func (*GrpcMetadataMatchMethodMemberSuffix) isGrpcMetadataMatchMethod() {}
 
 // An object that represents a retry policy. Specify at least one value for at
-// least one of the types of RetryEvents , a value for maxRetries, and a value
-// for perRetryTimeout . Both server-error  and gateway-error  under
-// httpRetryEvents include the Envoy reset  policy. For more information on the
-// reset policy, see the Envoy documentation (https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on)
+// least one of the types of RetryEvents , a value for maxRetries , and a value for
+// perRetryTimeout . Both server-error and gateway-error under httpRetryEvents
+// include the Envoy reset policy. For more information on the reset policy, see
+// the Envoy documentation (https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on)
 // .
 type GrpcRetryPolicy struct {
 
@@ -562,10 +561,11 @@ type GrpcRetryPolicy struct {
 	GrpcRetryEvents []GrpcRetryPolicyEvent
 
 	// Specify at least one of the following values.
-	//     - server-error – HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511
-	//     - gateway-error – HTTP status codes 502, 503, and 504
-	//     - client-error – HTTP status code 409
-	//     - stream-error – Retry on refused stream
+	//   - server-error – HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507,
+	//   508, 510, and 511
+	//   - gateway-error – HTTP status codes 502, 503, and 504
+	//   - client-error – HTTP status code 409
+	//   - stream-error – Retry on refused stream
 	HttpRetryEvents []string
 
 	// Specify a valid value. The event occurs before any processing of a request has
@@ -616,8 +616,8 @@ type GrpcRouteMatch struct {
 	// An object that represents the data to match from the request.
 	Metadata []GrpcRouteMetadata
 
-	// The method name to match from the request. If you specify a name, you must
-	// also specify a serviceName .
+	// The method name to match from the request. If you specify a name, you must also
+	// specify a serviceName .
 	MethodName *string
 
 	// The port number to match on.
@@ -637,7 +637,7 @@ type GrpcRouteMetadata struct {
 	// This member is required.
 	Name *string
 
-	// Specify True  to match anything except the match criteria. The default value is
+	// Specify True to match anything except the match criteria. The default value is
 	// False .
 	Invert *bool
 
@@ -708,8 +708,8 @@ func (*GrpcRouteMetadataMatchMethodMemberSuffix) isGrpcRouteMetadataMatchMethod(
 // An object that represents types of timeouts.
 type GrpcTimeout struct {
 
-	// An object that represents an idle timeout. An idle timeout bounds the amount
-	// of time that a connection may be idle. The default value is none.
+	// An object that represents an idle timeout. An idle timeout bounds the amount of
+	// time that a connection may be idle. The default value is none.
 	Idle *Duration
 
 	// An object that represents a per request timeout. The default value is 15
@@ -782,8 +782,7 @@ type HeaderMatchMethodMemberSuffix struct {
 
 func (*HeaderMatchMethodMemberSuffix) isHeaderMatchMethod() {}
 
-// An object that represents the health check policy for a virtual node's
-// listener.
+// An object that represents the health check policy for a virtual node's listener.
 type HealthCheckPolicy struct {
 
 	// The number of consecutive successful health checks that must occur before
@@ -797,7 +796,7 @@ type HealthCheckPolicy struct {
 	// This member is required.
 	IntervalMillis *int64
 
-	// The protocol for the health check request. If you specify grpc, then your
+	// The protocol for the health check request. If you specify grpc , then your
 	// service must conform to the GRPC Health Checking Protocol (https://github.com/grpc/grpc/blob/master/doc/health-checking.md)
 	// .
 	//
@@ -810,8 +809,8 @@ type HealthCheckPolicy struct {
 	// This member is required.
 	TimeoutMillis *int64
 
-	// The number of consecutive failed health checks that must occur before
-	// declaring a virtual node unhealthy.
+	// The number of consecutive failed health checks that must occur before declaring
+	// a virtual node unhealthy.
 	//
 	// This member is required.
 	UnhealthyThreshold int32
@@ -822,7 +821,7 @@ type HealthCheckPolicy struct {
 	Path *string
 
 	// The destination port for the health check request. This port must match the
-	// port defined in the PortMapping  for the listener.
+	// port defined in the PortMapping for the listener.
 	Port int32
 
 	noSmithyDocumentSerde
@@ -867,7 +866,7 @@ type HttpGatewayRouteHeader struct {
 	// This member is required.
 	Name *string
 
-	// Specify True  to match anything except the match criteria. The default value is
+	// Specify True to match anything except the match criteria. The default value is
 	// False .
 	Invert *bool
 
@@ -897,9 +896,9 @@ type HttpGatewayRouteMatch struct {
 	Port *int32
 
 	// Specifies the path to match requests with. This parameter must always start
-	// with /, which by itself matches all requests to the virtual service name. You
+	// with / , which by itself matches all requests to the virtual service name. You
 	// can also match for path-based routing of requests. For example, if your virtual
-	// service name is my-service.local  and you want the route to match requests to
+	// service name is my-service.local and you want the route to match requests to
 	// my-service.local/metrics , your prefix should be /metrics .
 	Prefix *string
 
@@ -972,10 +971,10 @@ type HttpQueryParameter struct {
 }
 
 // An object that represents a retry policy. Specify at least one value for at
-// least one of the types of RetryEvents , a value for maxRetries, and a value
-// for perRetryTimeout . Both server-error  and gateway-error  under
-// httpRetryEvents include the Envoy reset  policy. For more information on the
-// reset policy, see the Envoy documentation (https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on)
+// least one of the types of RetryEvents , a value for maxRetries , and a value for
+// perRetryTimeout . Both server-error and gateway-error under httpRetryEvents
+// include the Envoy reset policy. For more information on the reset policy, see
+// the Envoy documentation (https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on)
 // .
 type HttpRetryPolicy struct {
 
@@ -990,10 +989,11 @@ type HttpRetryPolicy struct {
 	PerRetryTimeout *Duration
 
 	// Specify at least one of the following values.
-	//     - server-error – HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511
-	//     - gateway-error – HTTP status codes 502, 503, and 504
-	//     - client-error – HTTP status code 409
-	//     - stream-error – Retry on refused stream
+	//   - server-error – HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507,
+	//   508, 510, and 511
+	//   - gateway-error – HTTP status codes 502, 503, and 504
+	//   - client-error – HTTP status code 409
+	//   - stream-error – Retry on refused stream
 	HttpRetryEvents []string
 
 	// Specify a valid value. The event occurs before any processing of a request has
@@ -1046,11 +1046,11 @@ type HttpRouteHeader struct {
 	// This member is required.
 	Name *string
 
-	// Specify True  to match anything except the match criteria. The default value is
+	// Specify True to match anything except the match criteria. The default value is
 	// False .
 	Invert *bool
 
-	// The HeaderMatchMethod  object.
+	// The HeaderMatchMethod object.
 	Match HeaderMatchMethod
 
 	noSmithyDocumentSerde
@@ -1073,9 +1073,9 @@ type HttpRouteMatch struct {
 	Port *int32
 
 	// Specifies the path to match requests with. This parameter must always start
-	// with /, which by itself matches all requests to the virtual service name. You
+	// with / , which by itself matches all requests to the virtual service name. You
 	// can also match for path-based routing of requests. For example, if your virtual
-	// service name is my-service.local  and you want the route to match requests to
+	// service name is my-service.local and you want the route to match requests to
 	// my-service.local/metrics , your prefix should be /metrics .
 	Prefix *string
 
@@ -1092,8 +1092,8 @@ type HttpRouteMatch struct {
 // An object that represents types of timeouts.
 type HttpTimeout struct {
 
-	// An object that represents an idle timeout. An idle timeout bounds the amount
-	// of time that a connection may be idle. The default value is none.
+	// An object that represents an idle timeout. An idle timeout bounds the amount of
+	// time that a connection may be idle. The default value is none.
 	Idle *Duration
 
 	// An object that represents a per request timeout. The default value is 15
@@ -1209,9 +1209,9 @@ type ListenerTls struct {
 	Certificate ListenerTlsCertificate
 
 	// Specify one of the following modes.
-	//     - STRICT – Listener only accepts connections with TLS enabled.
-	//     - PERMISSIVE – Listener accepts connections with or without TLS enabled.
-	//     - DISABLED – Listener only accepts connections without TLS.
+	//   - STRICT – Listener only accepts connections with TLS enabled.
+	//   - PERMISSIVE – Listener accepts connections with or without TLS enabled.
+	//   - DISABLED – Listener only accepts connections without TLS.
 	//
 	// This member is required.
 	Mode ListenerTlsMode
@@ -1288,8 +1288,8 @@ type ListenerTlsFileCertificate struct {
 	// This member is required.
 	CertificateChain *string
 
-	// The private key for a certificate stored on the file system of the virtual
-	// node that the proxy is running on.
+	// The private key for a certificate stored on the file system of the virtual node
+	// that the proxy is running on.
 	//
 	// This member is required.
 	PrivateKey *string
@@ -1472,10 +1472,10 @@ type MeshRef struct {
 	// This member is required.
 	MeshOwner *string
 
-	// The Amazon Web Services IAM account ID of the resource owner. If the account
-	// ID is not your own, then it's the ID of the mesh owner or of another account
-	// that the mesh is shared with. For more information about mesh sharing, see
-	// Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
 	// .
 	//
 	// This member is required.
@@ -1539,7 +1539,7 @@ type OutlierDetection struct {
 	// This member is required.
 	MaxEjectionPercent *int32
 
-	// Number of consecutive 5xx  errors required for ejection.
+	// Number of consecutive 5xx errors required for ejection.
 	//
 	// This member is required.
 	MaxServerErrors *int64
@@ -1599,10 +1599,10 @@ type ResourceMetadata struct {
 	// This member is required.
 	MeshOwner *string
 
-	// The Amazon Web Services IAM account ID of the resource owner. If the account
-	// ID is not your own, then it's the ID of the mesh owner or of another account
-	// that the mesh is shared with. For more information about mesh sharing, see
-	// Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
 	// .
 	//
 	// This member is required.
@@ -1690,10 +1690,10 @@ type RouteRef struct {
 	// This member is required.
 	MeshOwner *string
 
-	// The Amazon Web Services IAM account ID of the resource owner. If the account
-	// ID is not your own, then it's the ID of the mesh owner or of another account
-	// that the mesh is shared with. For more information about mesh sharing, see
-	// Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
 	// .
 	//
 	// This member is required.
@@ -1865,15 +1865,15 @@ type TcpRouteMatch struct {
 // An object that represents types of timeouts.
 type TcpTimeout struct {
 
-	// An object that represents an idle timeout. An idle timeout bounds the amount
-	// of time that a connection may be idle. The default value is none.
+	// An object that represents an idle timeout. An idle timeout bounds the amount of
+	// time that a connection may be idle. The default value is none.
 	Idle *Duration
 
 	noSmithyDocumentSerde
 }
 
-// An object that represents how the proxy will validate its peer during
-// Transport Layer Security (TLS) negotiation.
+// An object that represents how the proxy will validate its peer during Transport
+// Layer Security (TLS) negotiation.
 type TlsValidationContext struct {
 
 	// A reference to where to retrieve the trust chain when validating a peer’s
@@ -1926,9 +1926,8 @@ type TlsValidationContextFileTrust struct {
 // for more info.
 type TlsValidationContextSdsTrust struct {
 
-	// A reference to an object that represents the name of the secret for a
-	// Transport Layer Security (TLS) Secret Discovery Service validation context
-	// trust.
+	// A reference to an object that represents the name of the secret for a Transport
+	// Layer Security (TLS) Secret Discovery Service validation context trust.
 	//
 	// This member is required.
 	SecretName *string
@@ -2024,12 +2023,11 @@ type VirtualGatewayClientPolicyTls struct {
 	// This member is required.
 	Validation *VirtualGatewayTlsValidationContext
 
-	// A reference to an object that represents a virtual gateway's client's
-	// Transport Layer Security (TLS) certificate.
+	// A reference to an object that represents a virtual gateway's client's Transport
+	// Layer Security (TLS) certificate.
 	Certificate VirtualGatewayClientTlsCertificate
 
-	// Whether the policy is enforced. The default is True, if a value isn't
-	// specified.
+	// Whether the policy is enforced. The default is True , if a value isn't specified.
 	Enforce *bool
 
 	// One or more ports that the policy is enforced for.
@@ -2071,9 +2069,9 @@ type VirtualGatewayClientTlsCertificateMemberSds struct {
 
 func (*VirtualGatewayClientTlsCertificateMemberSds) isVirtualGatewayClientTlsCertificate() {}
 
-// An object that represents the type of virtual gateway connection pool. Only
-// one protocol is used at a time and should be the same protocol as the one chosen
-// under port mapping. If not present the default value for maxPendingRequests  is
+// An object that represents the type of virtual gateway connection pool. Only one
+// protocol is used at a time and should be the same protocol as the one chosen
+// under port mapping. If not present the default value for maxPendingRequests is
 // 2147483647 .
 //
 // The following types satisfy this interface:
@@ -2148,7 +2146,7 @@ type VirtualGatewayFileAccessLog struct {
 
 	// The file path to write access logs to. You can use /dev/stdout to send access
 	// logs to standard out and configure your Envoy container to use a log driver,
-	// such as awslogs, to export the access logs to a log storage service such as
+	// such as awslogs , to export the access logs to a log storage service such as
 	// Amazon CloudWatch Logs. You can also specify a path in the Envoy container's
 	// file system to write the files to disk.
 	//
@@ -2165,8 +2163,8 @@ type VirtualGatewayFileAccessLog struct {
 // An object that represents a type of connection pool.
 type VirtualGatewayGrpcConnectionPool struct {
 
-	// Maximum number of inflight requests Envoy can concurrently support across
-	// hosts in upstream cluster.
+	// Maximum number of inflight requests Envoy can concurrently support across hosts
+	// in upstream cluster.
 	//
 	// This member is required.
 	MaxRequests int32
@@ -2189,7 +2187,7 @@ type VirtualGatewayHealthCheckPolicy struct {
 	// This member is required.
 	IntervalMillis *int64
 
-	// The protocol for the health check request. If you specify grpc, then your
+	// The protocol for the health check request. If you specify grpc , then your
 	// service must conform to the GRPC Health Checking Protocol (https://github.com/grpc/grpc/blob/master/doc/health-checking.md)
 	// .
 	//
@@ -2202,8 +2200,8 @@ type VirtualGatewayHealthCheckPolicy struct {
 	// This member is required.
 	TimeoutMillis *int64
 
-	// The number of consecutive failed health checks that must occur before
-	// declaring a virtual gateway unhealthy.
+	// The number of consecutive failed health checks that must occur before declaring
+	// a virtual gateway unhealthy.
 	//
 	// This member is required.
 	UnhealthyThreshold int32
@@ -2214,7 +2212,7 @@ type VirtualGatewayHealthCheckPolicy struct {
 	Path *string
 
 	// The destination port for the health check request. This port must match the
-	// port defined in the PortMapping  for the listener.
+	// port defined in the PortMapping for the listener.
 	Port int32
 
 	noSmithyDocumentSerde
@@ -2223,8 +2221,8 @@ type VirtualGatewayHealthCheckPolicy struct {
 // An object that represents a type of connection pool.
 type VirtualGatewayHttp2ConnectionPool struct {
 
-	// Maximum number of inflight requests Envoy can concurrently support across
-	// hosts in upstream cluster.
+	// Maximum number of inflight requests Envoy can concurrently support across hosts
+	// in upstream cluster.
 	//
 	// This member is required.
 	MaxRequests int32
@@ -2279,9 +2277,9 @@ type VirtualGatewayListenerTls struct {
 	Certificate VirtualGatewayListenerTlsCertificate
 
 	// Specify one of the following modes.
-	//     - STRICT – Listener only accepts connections with TLS enabled.
-	//     - PERMISSIVE – Listener accepts connections with or without TLS enabled.
-	//     - DISABLED – Listener only accepts connections without TLS.
+	//   - STRICT – Listener only accepts connections with TLS enabled.
+	//   - PERMISSIVE – Listener accepts connections with or without TLS enabled.
+	//   - DISABLED – Listener only accepts connections without TLS.
 	//
 	// This member is required.
 	Mode VirtualGatewayListenerTlsMode
@@ -2491,10 +2489,10 @@ type VirtualGatewayRef struct {
 	// This member is required.
 	MeshOwner *string
 
-	// The Amazon Web Services IAM account ID of the resource owner. If the account
-	// ID is not your own, then it's the ID of the mesh owner or of another account
-	// that the mesh is shared with. For more information about mesh sharing, see
-	// Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
 	// .
 	//
 	// This member is required.
@@ -2648,7 +2646,7 @@ func (*VirtualGatewayTlsValidationContextTrustMemberSds) isVirtualGatewayTlsVali
 
 // An object that represents the type of virtual node connection pool. Only one
 // protocol is used at a time and should be the same protocol as the one chosen
-// under port mapping. If not present the default value for maxPendingRequests  is
+// under port mapping. If not present the default value for maxPendingRequests is
 // 2147483647 .
 //
 // The following types satisfy this interface:
@@ -2731,8 +2729,8 @@ type VirtualNodeData struct {
 // An object that represents a type of connection pool.
 type VirtualNodeGrpcConnectionPool struct {
 
-	// Maximum number of inflight requests Envoy can concurrently support across
-	// hosts in upstream cluster.
+	// Maximum number of inflight requests Envoy can concurrently support across hosts
+	// in upstream cluster.
 	//
 	// This member is required.
 	MaxRequests int32
@@ -2743,8 +2741,8 @@ type VirtualNodeGrpcConnectionPool struct {
 // An object that represents a type of connection pool.
 type VirtualNodeHttp2ConnectionPool struct {
 
-	// Maximum number of inflight requests Envoy can concurrently support across
-	// hosts in upstream cluster.
+	// Maximum number of inflight requests Envoy can concurrently support across hosts
+	// in upstream cluster.
 	//
 	// This member is required.
 	MaxRequests int32
@@ -2800,10 +2798,10 @@ type VirtualNodeRef struct {
 	// This member is required.
 	MeshOwner *string
 
-	// The Amazon Web Services IAM account ID of the resource owner. If the account
-	// ID is not your own, then it's the ID of the mesh owner or of another account
-	// that the mesh is shared with. For more information about mesh sharing, see
-	// Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
 	// .
 	//
 	// This member is required.
@@ -2843,8 +2841,8 @@ type VirtualNodeSpec struct {
 	// The backends that the virtual node is expected to send outbound traffic to.
 	Backends []Backend
 
-	// The listener that the virtual node is expected to receive inbound traffic
-	// from. You can specify one listener.
+	// The listener that the virtual node is expected to receive inbound traffic from.
+	// You can specify one listener.
 	Listeners []Listener
 
 	// The inbound and outbound access logging information for the virtual node.
@@ -2955,10 +2953,10 @@ type VirtualRouterRef struct {
 	// This member is required.
 	MeshOwner *string
 
-	// The Amazon Web Services IAM account ID of the resource owner. If the account
-	// ID is not your own, then it's the ID of the mesh owner or of another account
-	// that the mesh is shared with. For more information about mesh sharing, see
-	// Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
 	// .
 	//
 	// This member is required.
@@ -3115,10 +3113,10 @@ type VirtualServiceRef struct {
 	// This member is required.
 	MeshOwner *string
 
-	// The Amazon Web Services IAM account ID of the resource owner. If the account
-	// ID is not your own, then it's the ID of the mesh owner or of another account
-	// that the mesh is shared with. For more information about mesh sharing, see
-	// Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
 	// .
 	//
 	// This member is required.

@@ -64,7 +64,7 @@ type DescribeObjectsInput struct {
 
 	// The starting point for the results to be returned. For the first call, this
 	// value should be empty. As long as there are more results, continue to call
-	// DescribeObjectswith the marker value from the previous call to retrieve the
+	// DescribeObjects with the marker value from the previous call to retrieve the
 	// next set of results.
 	Marker *string
 
@@ -166,8 +166,8 @@ var _ DescribeObjectsAPIClient = (*Client)(nil)
 
 // DescribeObjectsPaginatorOptions is the paginator options for DescribeObjects
 type DescribeObjectsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

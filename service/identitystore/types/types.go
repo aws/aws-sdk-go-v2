@@ -79,8 +79,8 @@ type AttributeOperation struct {
 	// This member is required.
 	AttributePath *string
 
-	// The value of the attribute. This is a Document type. This type is not
-	// supported by Java V1, Go V1, and older versions of the AWS CLI.
+	// The value of the attribute. This is a Document type. This type is not supported
+	// by Java V1, Go V1, and older versions of the AWS CLI.
 	AttributeValue document.Interface
 
 	noSmithyDocumentSerde
@@ -118,13 +118,13 @@ type ExternalId struct {
 	noSmithyDocumentSerde
 }
 
-// A query filter used by ListUsers  and ListGroups. This filter object provides
+// A query filter used by ListUsers and ListGroups . This filter object provides
 // the attribute name and attribute value to search users or groups.
 type Filter struct {
 
 	// The attribute path that is used to specify which attribute name to search.
-	// Length limit is 255 characters. For example, UserName is a valid attribute
-	// path for the ListUsers  API, and DisplayName  is a valid attribute path for the
+	// Length limit is 255 characters. For example, UserName is a valid attribute path
+	// for the ListUsers API, and DisplayName is a valid attribute path for the
 	// ListGroups API.
 	//
 	// This member is required.
@@ -186,7 +186,7 @@ type GroupMembership struct {
 	// of the group.
 	MemberId MemberId
 
-	// The identifier for a GroupMembership  object in an identity store.
+	// The identifier for a GroupMembership object in an identity store.
 	MembershipId *string
 
 	noSmithyDocumentSerde
@@ -277,8 +277,8 @@ type UniqueAttribute struct {
 	// This member is required.
 	AttributePath *string
 
-	// The value of the attribute. This is a Document type. This type is not
-	// supported by Java V1, Go V1, and older versions of the AWS CLI.
+	// The value of the attribute. This is a Document type. This type is not supported
+	// by Java V1, Go V1, and older versions of the AWS CLI.
 	//
 	// This member is required.
 	AttributeValue document.Interface
@@ -299,14 +299,14 @@ type User struct {
 	// This member is required.
 	UserId *string
 
-	// A list of Address  objects containing addresses associated with the user.
+	// A list of Address objects containing addresses associated with the user.
 	Addresses []Address
 
 	// A string containing the user's name that's formatted for display when the user
 	// is referenced. For example, "John Doe."
 	DisplayName *string
 
-	// A list of Email  objects containing email addresses associated with the user.
+	// A list of Email objects containing email addresses associated with the user.
 	Emails []Email
 
 	// A list of ExternalId objects that contains the identifiers issued to this
@@ -322,8 +322,7 @@ type User struct {
 	// A string containing an alternate name for the user.
 	NickName *string
 
-	// A list of PhoneNumber objects containing phone numbers associated with the
-	// user.
+	// A list of PhoneNumber objects containing phone numbers associated with the user.
 	PhoneNumbers []PhoneNumber
 
 	// A string containing the preferred language of the user. For example, "American
@@ -336,8 +335,8 @@ type User struct {
 	// A string containing the user's time zone.
 	Timezone *string
 
-	// A string containing the user's title. Possible values depend on each
-	// customer's specific needs, so they are left unspecified.
+	// A string containing the user's title. Possible values depend on each customer's
+	// specific needs, so they are left unspecified.
 	Title *string
 
 	// A unique string used to identify the user. The length limit is 128 characters.

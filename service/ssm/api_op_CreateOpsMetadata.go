@@ -45,8 +45,8 @@ type CreateOpsMetadataInput struct {
 	// might want to tag an OpsMetadata object to identify an environment or target
 	// Amazon Web Services Region. In this case, you could specify the following
 	// key-value pairs:
-	//     - Key=Environment,Value=Production
-	//     - Key=Region,Value=us-east-2
+	//   - Key=Environment,Value=Production
+	//   - Key=Region,Value=us-east-2
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -54,8 +54,8 @@ type CreateOpsMetadataInput struct {
 
 type CreateOpsMetadataOutput struct {
 
-	// The Amazon Resource Name (ARN) of the OpsMetadata Object or blob created by
-	// the call.
+	// The Amazon Resource Name (ARN) of the OpsMetadata Object or blob created by the
+	// call.
 	OpsMetadataArn *string
 
 	// Metadata pertaining to the operation's result.

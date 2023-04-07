@@ -31,9 +31,9 @@ func (c *Client) ListImageRecipes(ctx context.Context, params *ListImageRecipesI
 type ListImageRecipesInput struct {
 
 	// Use the following filters to streamline results:
-	//     - name
-	//     - parentImage
-	//     - platform
+	//   - name
+	//   - parentImage
+	//   - platform
 	Filters []types.Filter
 
 	// The maximum items to return in a request.
@@ -144,8 +144,8 @@ type ListImageRecipesPaginatorOptions struct {
 	// The maximum items to return in a request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

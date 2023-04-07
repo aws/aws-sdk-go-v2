@@ -6,29 +6,38 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId  and
-// JoinToken . The JoinToken allows a client to authenticate and join as the
-// specified attendee. The JoinToken  expires when the meeting ends, or when
-// DeleteAttendeeis called. After that, the attendee is unable to join the
-// meeting. We recommend securely transferring each JoinToken from your server
-// application to the client so that no other client has access to the token except
-// for the one authorized to represent the attendee.
+// An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and JoinToken
+// . The JoinToken allows a client to authenticate and join as the specified
+// attendee. The JoinToken expires when the meeting ends, or when DeleteAttendee
+// is called. After that, the attendee is unable to join the meeting. We recommend
+// securely transferring each JoinToken from your server application to the client
+// so that no other client has access to the token except for the one authorized to
+// represent the attendee.
 type Attendee struct {
 
 	// The Amazon Chime SDK attendee ID.
 	AttendeeId *string
 
-	// The capabilities assigned to an attendee: audio, video, or content. You use
-	// the capabilities with a set of values that control what the capabilities can do,
+	// The capabilities assigned to an attendee: audio, video, or content. You use the
+	// capabilities with a set of values that control what the capabilities can do,
 	// such as SendReceive data. For more information about those values, see . When
 	// using capabilities, be aware of these corner cases:
-	//     - You can't set content capabilities to SendReceive or Receive unless you also set video capabilities to SendReceive or Receive . If you don't set the video capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your video capability to receive and you set your content capability to not receive.
-	//     - When you change an audio capability from None or Receive to Send or SendReceive , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.
-	//     - When you change a video or content capability from None or Receive to Send or SendReceive , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.
+	//   - You can't set content capabilities to SendReceive or Receive unless you also
+	//   set video capabilities to SendReceive or Receive . If you don't set the video
+	//   capability to receive, the response will contain an HTTP 400 Bad Request status
+	//   code. However, you can set your video capability to receive and you set your
+	//   content capability to not receive.
+	//   - When you change an audio capability from None or Receive to Send or
+	//   SendReceive , and if the attendee left their microphone unmuted, audio will
+	//   flow from the attendee to the other meeting participants.
+	//   - When you change a video or content capability from None or Receive to Send
+	//   or SendReceive , and if the attendee turned on their video or content streams,
+	//   remote attendess can receive those streams, but only after media renegotiation
+	//   between the client and the Amazon Chime back-end server.
 	Capabilities *AttendeeCapabilities
 
-	// The Amazon Chime SDK external user ID. An idempotency token. Links the
-	// attendee to an identity managed by a builder application. Pattern:
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
+	// to an identity managed by a builder application. Pattern:
 	// [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]* Values that begin with aws: are
 	// reserved. You can't configure a value that uses this prefix. Case insensitive.
 	ExternalUserId *string
@@ -43,9 +52,18 @@ type Attendee struct {
 // capabilities with a set of values that control what the capabilities can do,
 // such as SendReceive data. For more information about those values, see . When
 // using capabilities, be aware of these corner cases:
-//   - You can't set content capabilities to SendReceive or Receive unless you also set video capabilities to SendReceive or Receive . If you don't set the video capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your video capability to receive and you set your content capability to not receive.
-//   - When you change an audio capability from None or Receive to Send or SendReceive , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.
-//   - When you change a video or content capability from None or Receive to Send or SendReceive , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.
+//   - You can't set content capabilities to SendReceive or Receive unless you also
+//     set video capabilities to SendReceive or Receive . If you don't set the video
+//     capability to receive, the response will contain an HTTP 400 Bad Request status
+//     code. However, you can set your video capability to receive and you set your
+//     content capability to not receive.
+//   - When you change an audio capability from None or Receive to Send or
+//     SendReceive , and if the attendee left their microphone unmuted, audio will
+//     flow from the attendee to the other meeting participants.
+//   - When you change a video or content capability from None or Receive to Send
+//     or SendReceive , and if the attendee turned on their video or content streams,
+//     remote attendess can receive those streams, but only after media renegotiation
+//     between the client and the Amazon Chime back-end server.
 type AttendeeCapabilities struct {
 
 	// The audio capability assigned to an attendee.
@@ -98,8 +116,8 @@ type CreateAttendeeError struct {
 	// The error message.
 	ErrorMessage *string
 
-	// The Amazon Chime SDK external user ID. An idempotency token. Links the
-	// attendee to an identity managed by a builder application. Pattern:
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
+	// to an identity managed by a builder application. Pattern:
 	// [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]* Values that begin with aws: are
 	// reserved. You can't configure a value that uses this prefix. Case insensitive.
 	ExternalUserId *string
@@ -111,8 +129,8 @@ type CreateAttendeeError struct {
 // BatchCreateAttendee action.
 type CreateAttendeeRequestItem struct {
 
-	// The Amazon Chime SDK external user ID. An idempotency token. Links the
-	// attendee to an identity managed by a builder application. Pattern:
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
+	// to an identity managed by a builder application. Pattern:
 	// [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]* Values that begin with aws: are
 	// reserved. You can't configure a value that uses this prefix. Case insensitive.
 	//
@@ -166,8 +184,8 @@ type EngineTranscribeSettings struct {
 
 	// Set this field to PII to redact personally identifiable information in the
 	// transcription output. Content redaction is performed only upon complete
-	// transcription of the audio segments. You can’t set ContentRedactionType  and
-	// ContentIdentificationTypein the same request. If you set both, your request
+	// transcription of the audio segments. You can’t set ContentRedactionType and
+	// ContentIdentificationType in the same request. If you set both, your request
 	// returns a BadRequestException .
 	ContentRedactionType TranscribeContentRedactionType
 
@@ -185,17 +203,17 @@ type EngineTranscribeSettings struct {
 	// The name of the language model used during transcription.
 	LanguageModelName *string
 
-	// Language codes for the languages that you want to identify. You must provide
-	// at least 2 codes.
+	// Language codes for the languages that you want to identify. You must provide at
+	// least 2 codes.
 	LanguageOptions *string
 
-	// The stabity level of a partial results transcription. Determines how stable
-	// you want the transcription results to be. A higher level means the transcription
+	// The stabity level of a partial results transcription. Determines how stable you
+	// want the transcription results to be. A higher level means the transcription
 	// results are less likely to change.
 	PartialResultsStability TranscribePartialResultsStability
 
 	// Lists the PII entity types you want to identify or redact. To specify entity
-	// types, you must enable ContentIdentificationType  or ContentRedactionType .
+	// types, you must enable ContentIdentificationType or ContentRedactionType .
 	// PIIEntityTypes must be comma-separated. The available values are:
 	// BANK_ACCOUNT_NUMBER , BANK_ROUTING, CREDIT_DEBIT_NUMBER , CREDIT_DEBIT_CVV ,
 	// CREDIT_DEBIT_EXPIRY , PIN , EMAIL , ADDRESS , NAME , PHONE , SSN , and ALL .
@@ -221,8 +239,8 @@ type EngineTranscribeSettings struct {
 	noSmithyDocumentSerde
 }
 
-// A set of endpoints used by clients to connect to the media service group for
-// an Amazon Chime SDK meeting.
+// A set of endpoints used by clients to connect to the media service group for an
+// Amazon Chime SDK meeting.
 type MediaPlacement struct {
 
 	// The audio fallback URL.
@@ -256,17 +274,17 @@ type MediaPlacement struct {
 type Meeting struct {
 
 	// The external meeting ID. Pattern: [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*
-	// Values that begin with aws: are reserved. You can't configure a value that
-	// uses this prefix. Case insensitive.
+	// Values that begin with aws: are reserved. You can't configure a value that uses
+	// this prefix. Case insensitive.
 	ExternalMeetingId *string
 
 	// The media placement for the meeting.
 	MediaPlacement *MediaPlacement
 
 	// The Region in which you create the meeting. Available values: af-south-1 ,
-	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2
-	// , ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2
-	// , eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2.
+	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 ,
+	// ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 ,
+	// eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 .
 	// Available values in AWS GovCloud (US) Regions: us-gov-east-1 , us-gov-west-1 .
 	MediaRegion *string
 

@@ -72,20 +72,21 @@ type UpdatePackageVersionsStatusInput struct {
 
 	// The package version’s expected status before it is updated. If expectedStatus
 	// is provided, the package version's status is updated only if its status at the
-	// time UpdatePackageVersionsStatus  is called matches expectedStatus .
+	// time UpdatePackageVersionsStatus is called matches expectedStatus .
 	ExpectedStatus types.PackageVersionStatus
 
 	// The namespace of the package version to be updated. The package version
 	// component that specifies its namespace depends on its type. For example:
-	//     - The namespace of a Maven package version is its groupId .
-	//     - The namespace of an npm package version is its scope .
-	//     - Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.
-	//     - The namespace of a generic package is its namespace .
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// A map of package versions and package version revisions. The map key is the
-	// package version (for example, 3.5.2 ), and the map value is the package
-	// version revision.
+	// package version (for example, 3.5.2 ), and the map value is the package version
+	// revision.
 	VersionRevisions map[string]string
 
 	noSmithyDocumentSerde

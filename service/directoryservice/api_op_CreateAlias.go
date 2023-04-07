@@ -12,7 +12,7 @@ import (
 
 // Creates an alias for a directory and assigns the alias to the directory. The
 // alias is used to construct the access URL for the directory, such as
-// http://.awsapps.com. After an alias has been created, it cannot be deleted or
+// http://.awsapps.com . After an alias has been created, it cannot be deleted or
 // reused, so this operation should only be used when absolutely necessary.
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
@@ -29,12 +29,12 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 	return out, nil
 }
 
-// Contains the inputs for the CreateAlias  operation.
+// Contains the inputs for the CreateAlias operation.
 type CreateAliasInput struct {
 
-	// The requested alias. The alias must be unique amongst all aliases in Amazon
-	// Web Services. This operation throws an EntityAlreadyExistsException error if
-	// the alias already exists.
+	// The requested alias. The alias must be unique amongst all aliases in Amazon Web
+	// Services. This operation throws an EntityAlreadyExistsException error if the
+	// alias already exists.
 	//
 	// This member is required.
 	Alias *string
@@ -47,7 +47,7 @@ type CreateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the CreateAlias  operation.
+// Contains the results of the CreateAlias operation.
 type CreateAliasOutput struct {
 
 	// The alias for the directory.

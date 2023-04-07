@@ -72,8 +72,8 @@ type ExportTask struct {
 // Represents the status of an export task.
 type ExportTaskExecutionInfo struct {
 
-	// The completion time of the export task, expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC .
+	// The completion time of the export task, expressed as the number of milliseconds
+	// after Jan 1, 1970 00:00:00 UTC .
 	CompletionTime *int64
 
 	// The creation time of the export task, expressed as the number of milliseconds
@@ -227,9 +227,9 @@ type LogStream struct {
 	// streams. The storedBytes parameter for log groups is not affected.
 	StoredBytes *int64
 
-	// The sequence token. The sequence token is now ignored in PutLogEvents  actions.
-	// PutLogEventsactions are always accepted regardless of receiving an invalid
-	// sequence token. You don't need to obtain uploadSequenceToken  to use a
+	// The sequence token. The sequence token is now ignored in PutLogEvents actions.
+	// PutLogEvents actions are always accepted regardless of receiving an invalid
+	// sequence token. You don't need to obtain uploadSequenceToken to use a
 	// PutLogEvents action.
 	UploadSequenceToken *string
 
@@ -241,15 +241,15 @@ type LogStream struct {
 // metric.
 type MetricFilter struct {
 
-	// The creation time of the metric filter, expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC .
+	// The creation time of the metric filter, expressed as the number of milliseconds
+	// after Jan 1, 1970 00:00:00 UTC .
 	CreationTime *int64
 
 	// The name of the metric filter.
 	FilterName *string
 
-	// A symbolic description of how CloudWatch Logs should interpret the data in
-	// each log event. For example, a log event can contain timestamps, IP addresses,
+	// A symbolic description of how CloudWatch Logs should interpret the data in each
+	// log event. For example, a log event can contain timestamps, IP addresses,
 	// strings, and so on. You use the filter pattern to specify what to look for in
 	// the log event message.
 	FilterPattern *string
@@ -307,14 +307,14 @@ type MetricTransformation struct {
 	// The fields to use as dimensions for the metric. One metric filter can include
 	// as many as three dimensions. Metrics extracted from log events are charged as
 	// custom metrics. To prevent unexpected high charges, do not specify
-	// high-cardinality fields such as IPAddress  or requestID as dimensions. Each
+	// high-cardinality fields such as IPAddress or requestID as dimensions. Each
 	// different value found for a dimension is treated as a separate metric and
 	// accrues charges as a separate custom metric. CloudWatch Logs disables a metric
 	// filter if it generates 1000 different name/value pairs for your specified
 	// dimensions within a certain amount of time. This helps to prevent accidental
 	// high charges. You can also set up a billing alarm to alert you if your charges
-	// are higher than expected. For more information, see Creating a Billing Alarm
-	// to Monitor Your Estimated Amazon Web Services Charges (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html)
+	// are higher than expected. For more information, see Creating a Billing Alarm to
+	// Monitor Your Estimated Amazon Web Services Charges (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html)
 	// .
 	Dimensions map[string]string
 
@@ -391,7 +391,7 @@ type QueryDefinition struct {
 }
 
 // Information about one CloudWatch Logs Insights query that matches the request
-// in a DescribeQueries  operation.
+// in a DescribeQueries operation.
 type QueryInfo struct {
 
 	// The date and time that this query was created.
@@ -449,8 +449,8 @@ type RejectedLogEventsInfo struct {
 // account.
 type ResourcePolicy struct {
 
-	// Timestamp showing when this policy was last updated, expressed as the number
-	// of milliseconds after Jan 1, 1970 00:00:00 UTC .
+	// Timestamp showing when this policy was last updated, expressed as the number of
+	// milliseconds after Jan 1, 1970 00:00:00 UTC .
 	LastUpdatedTime *int64
 
 	// The details of the policy.
@@ -506,8 +506,8 @@ type SubscriptionFilter struct {
 	// The name of the subscription filter.
 	FilterName *string
 
-	// A symbolic description of how CloudWatch Logs should interpret the data in
-	// each log event. For example, a log event can contain timestamps, IP addresses,
+	// A symbolic description of how CloudWatch Logs should interpret the data in each
+	// log event. For example, a log event can contain timestamps, IP addresses,
 	// strings, and so on. You use the filter pattern to specify what to look for in
 	// the log event message.
 	FilterPattern *string

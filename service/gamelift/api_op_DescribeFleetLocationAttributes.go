@@ -15,12 +15,14 @@ import (
 // Retrieves information on a fleet's remote locations, including life-cycle
 // status and any suspended fleet activity. This operation can be used in the
 // following ways:
-//   - To get data for specific locations, provide a fleet identifier and a list of locations. Location data is returned in the order that it is requested.
-//   - To get data for all locations, provide a fleet identifier only. Location data is returned in no particular order.
+//   - To get data for specific locations, provide a fleet identifier and a list
+//     of locations. Location data is returned in the order that it is requested.
+//   - To get data for all locations, provide a fleet identifier only. Location
+//     data is returned in no particular order.
 //
-// When requesting attributes for multiple locations, use the pagination parameters
-// to retrieve results as a set of sequential pages. If successful, a
-// LocationAttributesobject is returned for each requested location. If the fleet
+// When requesting attributes for multiple locations, use the pagination
+// parameters to retrieve results as a set of sequential pages. If successful, a
+// LocationAttributes object is returned for each requested location. If the fleet
 // does not have a requested location, no information is returned. This operation
 // does not return the home Region. To get information on a fleet's home Region,
 // call DescribeFleetAttributes . Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
@@ -41,8 +43,8 @@ func (c *Client) DescribeFleetLocationAttributes(ctx context.Context, params *De
 
 type DescribeFleetLocationAttributesInput struct {
 
-	// A unique identifier for the fleet to retrieve remote locations for. You can
-	// use either the fleet ID or ARN value.
+	// A unique identifier for the fleet to retrieve remote locations for. You can use
+	// either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
@@ -51,8 +53,8 @@ type DescribeFleetLocationAttributesInput struct {
 	// get results as a set of sequential pages. This limit is not currently enforced.
 	Limit *int32
 
-	// A list of fleet locations to retrieve information for. Specify locations in
-	// the form of an Amazon Web Services Region code, such as us-west-2 .
+	// A list of fleet locations to retrieve information for. Specify locations in the
+	// form of an Amazon Web Services Region code, such as us-west-2 .
 	Locations []string
 
 	// A token that indicates the start of the next sequential page of results. Use
@@ -166,8 +168,8 @@ type DescribeFleetLocationAttributesPaginatorOptions struct {
 	// get results as a set of sequential pages. This limit is not currently enforced.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

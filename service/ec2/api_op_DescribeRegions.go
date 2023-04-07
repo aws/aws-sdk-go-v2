@@ -45,13 +45,15 @@ type DescribeRegionsInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - endpoint - The endpoint of the Region (for example, ec2.us-east-1.amazonaws.com ).
-	//     - opt-in-status - The opt-in status of the Region ( opt-in-not-required | opted-in | not-opted-in ).
-	//     - region-name - The name of the Region (for example, us-east-1 ).
+	//   - endpoint - The endpoint of the Region (for example,
+	//   ec2.us-east-1.amazonaws.com ).
+	//   - opt-in-status - The opt-in status of the Region ( opt-in-not-required |
+	//   opted-in | not-opted-in ).
+	//   - region-name - The name of the Region (for example, us-east-1 ).
 	Filters []types.Filter
 
-	// The names of the Regions. You can specify any Regions, whether they are
-	// enabled and disabled for your account.
+	// The names of the Regions. You can specify any Regions, whether they are enabled
+	// and disabled for your account.
 	RegionNames []string
 
 	noSmithyDocumentSerde

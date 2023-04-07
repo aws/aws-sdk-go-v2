@@ -10,8 +10,8 @@ const (
 	AcceptCodeValidationEnforce AcceptCodeValidation = "ENFORCE"
 )
 
-// Values returns all known values for AcceptCodeValidation. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AcceptCodeValidation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AcceptCodeValidation) Values() []AcceptCodeValidation {
 	return []AcceptCodeValidation{
@@ -65,9 +65,9 @@ const (
 	ChannelTypeEmail ChannelType = "EMAIL"
 )
 
-// Values returns all known values for ChannelType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ChannelType) Values() []ChannelType {
 	return []ChannelType{
 		"SMS",
@@ -85,9 +85,9 @@ const (
 	ContactTypeOncallSchedule ContactType = "ONCALL_SCHEDULE"
 )
 
-// Values returns all known values for ContactType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContactType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ContactType) Values() []ContactType {
 	return []ContactType{
 		"PERSONAL",
@@ -135,9 +135,9 @@ const (
 	ReceiptTypeStop      ReceiptType = "STOP"
 )
 
-// Values returns all known values for ReceiptType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReceiptType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ReceiptType) Values() []ReceiptType {
 	return []ReceiptType{
 		"DELIVERED",

@@ -52,16 +52,16 @@ type GenerateMacInput struct {
 
 	// The HMAC KMS key to use in the operation. The MAC algorithm computes the HMAC
 	// for the message and the key as described in RFC 2104 (https://datatracker.ietf.org/doc/html/rfc2104)
-	// . To identify an HMAC KMS key, use the DescribeKey  operation and see the
-	// KeySpec field in the response.
+	// . To identify an HMAC KMS key, use the DescribeKey operation and see the KeySpec
+	// field in the response.
 	//
 	// This member is required.
 	KeyId *string
 
 	// The MAC algorithm used in the operation. The algorithm must be compatible with
 	// the HMAC KMS key that you specify. To find the MAC algorithms that your HMAC KMS
-	// key supports, use the DescribeKey  operation and see the MacAlgorithms field
-	// in the DescribeKey  response.
+	// key supports, use the DescribeKey operation and see the MacAlgorithms field in
+	// the DescribeKey response.
 	//
 	// This member is required.
 	MacAlgorithm types.MacAlgorithmSpec

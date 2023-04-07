@@ -37,12 +37,12 @@ type ListFileSystemAssociationsInput struct {
 	GatewayARN *string
 
 	// The maximum number of file system associations to return in the response. If
-	// present, Limit  must be an integer with a value greater than zero. Optional.
+	// present, Limit must be an integer with a value greater than zero. Optional.
 	Limit *int32
 
 	// Opaque pagination token returned from a previous ListFileSystemAssociations
-	// operation. If present, Marker specifies where to continue the list from after
-	// a previous call to ListFileSystemAssociations . Optional.
+	// operation. If present, Marker specifies where to continue the list from after a
+	// previous call to ListFileSystemAssociations . Optional.
 	Marker *string
 
 	noSmithyDocumentSerde
@@ -50,16 +50,15 @@ type ListFileSystemAssociationsInput struct {
 
 type ListFileSystemAssociationsOutput struct {
 
-	// An array of information about the Amazon FSx gateway's file system
-	// associations.
+	// An array of information about the Amazon FSx gateway's file system associations.
 	FileSystemAssociationSummaryList []types.FileSystemAssociationSummary
 
 	// If the request includes Marker , the response returns that value in this field.
 	Marker *string
 
 	// If a value is present, there are more file system associations to return. In a
-	// subsequent request, use NextMarker  as the value for Marker to retrieve the
-	// next set of file system associations.
+	// subsequent request, use NextMarker as the value for Marker to retrieve the next
+	// set of file system associations.
 	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
@@ -140,11 +139,11 @@ var _ ListFileSystemAssociationsAPIClient = (*Client)(nil)
 // ListFileSystemAssociations
 type ListFileSystemAssociationsPaginatorOptions struct {
 	// The maximum number of file system associations to return in the response. If
-	// present, Limit  must be an integer with a value greater than zero. Optional.
+	// present, Limit must be an integer with a value greater than zero. Optional.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

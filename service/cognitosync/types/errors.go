@@ -60,8 +60,8 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception thrown when there is an IN_PROGRESS bulk publish operation for
-// the given identity pool.
+// An exception thrown when there is an IN_PROGRESS bulk publish operation for the
+// given identity pool.
 type DuplicateRequestException struct {
 	Message *string
 
@@ -166,8 +166,7 @@ func (e *InvalidLambdaFunctionOutputException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Thrown when a request parameter does not comply with the associated
-// constraints.
+// Thrown when a request parameter does not comply with the associated constraints.
 type InvalidParameterException struct {
 	Message *string
 

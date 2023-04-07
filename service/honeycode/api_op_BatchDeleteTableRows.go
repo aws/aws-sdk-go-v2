@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The BatchDeleteTableRows API allows you to delete one or more rows from a
-// table in a workbook. You need to specify the ids of the rows that you want to
-// delete from the table.
+// The BatchDeleteTableRows API allows you to delete one or more rows from a table
+// in a workbook. You need to specify the ids of the rows that you want to delete
+// from the table.
 func (c *Client) BatchDeleteTableRows(ctx context.Context, params *BatchDeleteTableRowsInput, optFns ...func(*Options)) (*BatchDeleteTableRowsOutput, error) {
 	if params == nil {
 		params = &BatchDeleteTableRowsInput{}
@@ -45,8 +45,8 @@ type BatchDeleteTableRowsInput struct {
 	// This member is required.
 	TableId *string
 
-	// The ID of the workbook where the rows are being deleted. If a workbook with
-	// the specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the workbook where the rows are being deleted. If a workbook with the
+	// specified id could not be found, this API throws ResourceNotFoundException.
 	//
 	// This member is required.
 	WorkbookId *string

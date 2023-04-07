@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the full details of a user's channel membership. The x-amz-chime-bearer
-// request header is mandatory. Use the ARN of the AppInstanceUser  or
+// request header is mandatory. Use the ARN of the AppInstanceUser or
 // AppInstanceBot that makes the API call as the value in the header.
 func (c *Client) DescribeChannelMembership(ctx context.Context, params *DescribeChannelMembershipInput, optFns ...func(*Options)) (*DescribeChannelMembershipOutput, error) {
 	if params == nil {
@@ -36,18 +36,18 @@ type DescribeChannelMembershipInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
 
-	// The AppInstanceUserArn  of the member.
+	// The AppInstanceUserArn of the member.
 	//
 	// This member is required.
 	MemberArn *string
 
 	// The ID of the SubChannel in the request. The response contains an
-	// ElasticChannelConfigurationobject. Only required to get a user’s SubChannel
+	// ElasticChannelConfiguration object. Only required to get a user’s SubChannel
 	// membership details.
 	SubChannelId *string
 

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the job executions for the specified thing. Requires permission to
-// access the ListJobExecutionsForThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Lists the job executions for the specified thing. Requires permission to access
+// the ListJobExecutionsForThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListJobExecutionsForThing(ctx context.Context, params *ListJobExecutionsForThingInput, optFns ...func(*Options)) (*ListJobExecutionsForThingOutput, error) {
 	if params == nil {
@@ -53,8 +53,7 @@ type ListJobExecutionsForThingInput struct {
 	// The token to retrieve the next set of results.
 	NextToken *string
 
-	// An optional filter that lets you search for jobs that have the specified
-	// status.
+	// An optional filter that lets you search for jobs that have the specified status.
 	Status types.JobExecutionStatus
 
 	noSmithyDocumentSerde
@@ -152,8 +151,8 @@ type ListJobExecutionsForThingPaginatorOptions struct {
 	// The maximum number of results to be returned per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

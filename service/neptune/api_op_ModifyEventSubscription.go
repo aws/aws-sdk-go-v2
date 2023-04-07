@@ -13,8 +13,8 @@ import (
 
 // Modifies an existing event notification subscription. Note that you can't
 // modify the source identifiers using this call; to change source identifiers for
-// a subscription, use the AddSourceIdentifierToSubscription  and
-// RemoveSourceIdentifierFromSubscriptioncalls. You can see a list of the event
+// a subscription, use the AddSourceIdentifierToSubscription and
+// RemoveSourceIdentifierFromSubscription calls. You can see a list of the event
 // categories for a given SourceType by using the DescribeEventCategories action.
 func (c *Client) ModifyEventSubscription(ctx context.Context, params *ModifyEventSubscriptionInput, optFns ...func(*Options)) (*ModifyEventSubscriptionOutput, error) {
 	if params == nil {
@@ -46,9 +46,8 @@ type ModifyEventSubscriptionInput struct {
 	// DescribeEventCategories action.
 	EventCategories []string
 
-	// The Amazon Resource Name (ARN) of the SNS topic created for event
-	// notification. The ARN is created by Amazon SNS when you create a topic and
-	// subscribe to it.
+	// The Amazon Resource Name (ARN) of the SNS topic created for event notification.
+	// The ARN is created by Amazon SNS when you create a topic and subscribe to it.
 	SnsTopicArn *string
 
 	// The type of source that is generating the events. For example, if you want to

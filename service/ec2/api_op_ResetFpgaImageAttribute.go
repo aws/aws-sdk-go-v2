@@ -49,7 +49,7 @@ type ResetFpgaImageAttributeInput struct {
 
 type ResetFpgaImageAttributeOutput struct {
 
-	// Is true  if the request succeeds, and an error otherwise.
+	// Is true if the request succeeds, and an error otherwise.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

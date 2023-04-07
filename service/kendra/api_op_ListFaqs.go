@@ -52,8 +52,8 @@ type ListFaqsOutput struct {
 	// information about the FAQs associated with the specified index.
 	FaqSummaryItems []types.FaqSummary
 
-	// If the response is truncated, Amazon Kendra returns this token that you can
-	// use in the subsequent request to retrieve the next set of FAQs.
+	// If the response is truncated, Amazon Kendra returns this token that you can use
+	// in the subsequent request to retrieve the next set of FAQs.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -138,8 +138,8 @@ type ListFaqsPaginatorOptions struct {
 	// results in the list, this response contains only the actual results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

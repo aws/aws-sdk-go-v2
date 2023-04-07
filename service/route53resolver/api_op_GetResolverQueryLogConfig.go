@@ -43,7 +43,7 @@ type GetResolverQueryLogConfigInput struct {
 type GetResolverQueryLogConfigOutput struct {
 
 	// Information about the Resolver query logging configuration that you specified
-	// in a GetQueryLogConfig  request.
+	// in a GetQueryLogConfig request.
 	ResolverQueryLogConfig *types.ResolverQueryLogConfig
 
 	// Metadata pertaining to the operation's result.

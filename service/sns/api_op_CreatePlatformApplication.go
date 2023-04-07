@@ -12,19 +12,26 @@ import (
 
 // Creates a platform application object for one of the supported push
 // notification services, such as APNS and GCM (Firebase Cloud Messaging), to which
-// devices and mobile apps may register. You must specify PlatformPrincipal  and
-// PlatformCredential attributes when using the CreatePlatformApplication  action.
+// devices and mobile apps may register. You must specify PlatformPrincipal and
+// PlatformCredential attributes when using the CreatePlatformApplication action.
 // PlatformPrincipal and PlatformCredential are received from the notification
 // service.
-//   - For ADM , PlatformPrincipal is client id and PlatformCredential is client secret .
-//   - For Baidu , PlatformPrincipal is API key and PlatformCredential is secret key .
-//   - For APNS and APNS_SANDBOX using certificate credentials, PlatformPrincipal is SSL certificate and PlatformCredential is private key .
-//   - For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is signing key ID and PlatformCredential is signing key .
-//   - For GCM (Firebase Cloud Messaging), there is no PlatformPrincipal and the PlatformCredential is API key .
-//   - For MPNS , PlatformPrincipal is TLS certificate and PlatformCredential is private key .
-//   - For WNS , PlatformPrincipal is Package Security Identifier and PlatformCredential is secret key .
+//   - For ADM , PlatformPrincipal is client id and PlatformCredential is client
+//     secret .
+//   - For Baidu , PlatformPrincipal is API key and PlatformCredential is secret
+//     key .
+//   - For APNS and APNS_SANDBOX using certificate credentials, PlatformPrincipal
+//     is SSL certificate and PlatformCredential is private key .
+//   - For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is
+//     signing key ID and PlatformCredential is signing key .
+//   - For GCM (Firebase Cloud Messaging), there is no PlatformPrincipal and the
+//     PlatformCredential is API key .
+//   - For MPNS , PlatformPrincipal is TLS certificate and PlatformCredential is
+//     private key .
+//   - For WNS , PlatformPrincipal is Package Security Identifier and
+//     PlatformCredential is secret key .
 //
-// You can use the returned PlatformApplicationArn  as an attribute for the
+// You can use the returned PlatformApplicationArn as an attribute for the
 // CreatePlatformEndpoint action.
 func (c *Client) CreatePlatformApplication(ctx context.Context, params *CreatePlatformApplicationInput, optFns ...func(*Options)) (*CreatePlatformApplicationOutput, error) {
 	if params == nil {

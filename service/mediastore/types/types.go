@@ -19,7 +19,7 @@ type Container struct {
 	// The state of access logging on the container. This value is false by default,
 	// indicating that AWS Elemental MediaStore does not send access logs to Amazon
 	// CloudWatch Logs. When you enable access logging on the container, MediaStore
-	// changes this value to true, indicating that the service delivers access logs
+	// changes this value to true , indicating that the service delivers access logs
 	// for objects stored in that container to CloudWatch Logs.
 	AccessLoggingEnabled *bool
 
@@ -36,31 +36,31 @@ type Container struct {
 	Name *string
 
 	// The status of container creation or deletion. The status is one of the
-	// following: CREATING , ACTIVE , or DELETING. While the service is creating the
-	// container, the status is CREATING. When the endpoint is available, the status
+	// following: CREATING , ACTIVE , or DELETING . While the service is creating the
+	// container, the status is CREATING . When the endpoint is available, the status
 	// changes to ACTIVE .
 	Status ContainerStatus
 
 	noSmithyDocumentSerde
 }
 
-// A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If
-// more than one rule applies, the service uses the first applicable rule listed.
+// A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more
+// than one rule applies, the service uses the first applicable rule listed.
 type CorsRule struct {
 
-	// Specifies which headers are allowed in a preflight OPTIONS  request through the
+	// Specifies which headers are allowed in a preflight OPTIONS request through the
 	// Access-Control-Request-Headers header. Each header name that is specified in
-	// Access-Control-Request-Headersmust have a corresponding entry in the rule.
-	// Only the headers that were requested are sent back. This element can contain
-	// only one wildcard character (*).
+	// Access-Control-Request-Headers must have a corresponding entry in the rule. Only
+	// the headers that were requested are sent back. This element can contain only one
+	// wildcard character (*).
 	//
 	// This member is required.
 	AllowedHeaders []string
 
 	// One or more response headers that you want users to be able to access from
-	// their applications (for example, from a JavaScript XMLHttpRequest object).
-	// Each CORS rule must have at least one AllowedOrigins element. The string value
-	// can include only one wildcard character (*), for example, http://*.example.com.
+	// their applications (for example, from a JavaScript XMLHttpRequest object). Each
+	// CORS rule must have at least one AllowedOrigins element. The string value can
+	// include only one wildcard character (*), for example, http://*.example.com.
 	// Additionally, you can specify only one wildcard character to allow cross-origin
 	// access for all origins.
 	//
@@ -68,28 +68,28 @@ type CorsRule struct {
 	AllowedOrigins []string
 
 	// Identifies an HTTP method that the origin that is specified in the rule is
-	// allowed to execute. Each CORS rule must contain at least one AllowedMethods
-	// and one AllowedOrigins  element.
+	// allowed to execute. Each CORS rule must contain at least one AllowedMethods and
+	// one AllowedOrigins element.
 	AllowedMethods []MethodName
 
 	// One or more headers in the response that you want users to be able to access
-	// from their applications (for example, from a JavaScript XMLHttpRequest
-	// object). This element is optional for each rule.
+	// from their applications (for example, from a JavaScript XMLHttpRequest object).
+	// This element is optional for each rule.
 	ExposeHeaders []string
 
 	// The time in seconds that your browser caches the preflight response for the
-	// specified resource. A CORS rule can have only one MaxAgeSeconds  element.
+	// specified resource. A CORS rule can have only one MaxAgeSeconds element.
 	MaxAgeSeconds int32
 
 	noSmithyDocumentSerde
 }
 
-// The metric policy that is associated with the container. A metric policy
-// allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. In the
-// policy, you must indicate whether you want MediaStore to send container-level
-// metrics. You can also include rules to define groups of objects that you want
-// MediaStore to send object-level metrics for. To view examples of how to
-// construct a metric policy for your use case, see Example Metric Policies (https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html)
+// The metric policy that is associated with the container. A metric policy allows
+// AWS Elemental MediaStore to send metrics to Amazon CloudWatch. In the policy,
+// you must indicate whether you want MediaStore to send container-level metrics.
+// You can also include rules to define groups of objects that you want MediaStore
+// to send object-level metrics for. To view examples of how to construct a metric
+// policy for your use case, see Example Metric Policies (https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html)
 // .
 type MetricPolicy struct {
 
@@ -135,8 +135,8 @@ type MetricPolicyRule struct {
 // represents a category (such as "environment") and the tag value represents a
 // specific value within that category (such as "test," "development," or
 // "production"). You can add up to 50 tags to each container. For more information
-// about tagging, including naming and usage conventions, see Tagging Resources
-// in MediaStore (https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html) .
+// about tagging, including naming and usage conventions, see Tagging Resources in
+// MediaStore (https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html) .
 type Tag struct {
 
 	// Part of the key:value pair that defines a tag. You can use a tag key to

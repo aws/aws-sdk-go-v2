@@ -36,7 +36,7 @@ type ListComponentsInput struct {
 	ResourceGroupName *string
 
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken  value.
+	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32
 
 	// The token to request the next page of results.
@@ -133,11 +133,11 @@ var _ ListComponentsAPIClient = (*Client)(nil)
 // ListComponentsPaginatorOptions is the paginator options for ListComponents
 type ListComponentsPaginatorOptions struct {
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken  value.
+	// remaining results, make another call with the returned NextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

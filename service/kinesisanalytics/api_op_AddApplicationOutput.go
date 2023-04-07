@@ -14,7 +14,7 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Adds an external destination to your Amazon
+// Analytics API V2 Documentation . Adds an external destination to your Amazon
 // Kinesis Analytics application. If you want Amazon Kinesis Analytics to deliver
 // data from an in-application stream within your application to an external
 // destination (such as an Amazon Kinesis stream, an Amazon Kinesis Firehose
@@ -57,7 +57,7 @@ type AddApplicationOutputInput struct {
 	// Version of the application to which you want to add the output configuration.
 	// You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the current application version. If the version specified is
-	// not the current version, the ConcurrentModificationException  is returned.
+	// not the current version, the ConcurrentModificationException is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64

@@ -37,19 +37,19 @@ func (c *Client) ListTrafficPolicies(ctx context.Context, params *ListTrafficPol
 // account.
 type ListTrafficPoliciesInput struct {
 
-	// (Optional) The maximum number of traffic policies that you want Amazon Route
-	// 53 to return in response to this request. If you have more than MaxItems
-	// traffic policies, the value of IsTruncated  in the response is true, and the
-	// value of TrafficPolicyIdMarker is the ID of the first traffic policy that
-	// Route 53 will return if you submit another request.
+	// (Optional) The maximum number of traffic policies that you want Amazon Route 53
+	// to return in response to this request. If you have more than MaxItems traffic
+	// policies, the value of IsTruncated in the response is true , and the value of
+	// TrafficPolicyIdMarker is the ID of the first traffic policy that Route 53 will
+	// return if you submit another request.
 	MaxItems *int32
 
 	// (Conditional) For your first request to ListTrafficPolicies , don't include the
-	// TrafficPolicyIdMarkerparameter. If you have more traffic policies than the
-	// value of MaxItems , ListTrafficPolicies  returns only the first MaxItems
-	// traffic policies. To get the next group of policies, submit another request to
-	// ListTrafficPolicies . For the value of TrafficPolicyIdMarker, specify the
-	// value of TrafficPolicyIdMarker  that was returned in the previous response.
+	// TrafficPolicyIdMarker parameter. If you have more traffic policies than the
+	// value of MaxItems , ListTrafficPolicies returns only the first MaxItems traffic
+	// policies. To get the next group of policies, submit another request to
+	// ListTrafficPolicies . For the value of TrafficPolicyIdMarker , specify the value
+	// of TrafficPolicyIdMarker that was returned in the previous response.
 	TrafficPolicyIdMarker *string
 
 	noSmithyDocumentSerde
@@ -60,20 +60,20 @@ type ListTrafficPoliciesOutput struct {
 
 	// A flag that indicates whether there are more traffic policies to be listed. If
 	// the response was truncated, you can get the next group of traffic policies by
-	// submitting another ListTrafficPolicies  request and specifying the value of
-	// TrafficPolicyIdMarker in the TrafficPolicyIdMarker  request parameter.
+	// submitting another ListTrafficPolicies request and specifying the value of
+	// TrafficPolicyIdMarker in the TrafficPolicyIdMarker request parameter.
 	//
 	// This member is required.
 	IsTruncated bool
 
-	// The value that you specified for the MaxItems  parameter in the
+	// The value that you specified for the MaxItems parameter in the
 	// ListTrafficPolicies request that produced the current response.
 	//
 	// This member is required.
 	MaxItems *int32
 
-	// If the value of IsTruncated  is true , TrafficPolicyIdMarker is the ID of the
-	// first traffic policy in the next group of MaxItems  traffic policies.
+	// If the value of IsTruncated is true , TrafficPolicyIdMarker is the ID of the
+	// first traffic policy in the next group of MaxItems traffic policies.
 	//
 	// This member is required.
 	TrafficPolicyIdMarker *string

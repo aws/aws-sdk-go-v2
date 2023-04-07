@@ -20,7 +20,7 @@ import (
 // the corresponding IAM policies attached to roles in your accounts will not be
 // updated automatically. In this case, you must call ProvisionPermissionSet to
 // make these updates. After a successful response, call
-// DescribeAccountAssignmentCreationStatusto describe the status of an assignment
+// DescribeAccountAssignmentCreationStatus to describe the status of an assignment
 // creation request.
 func (c *Client) CreateAccountAssignment(ctx context.Context, params *CreateAccountAssignmentInput, optFns ...func(*Options)) (*CreateAccountAssignmentOutput, error) {
 	if params == nil {
@@ -40,8 +40,8 @@ func (c *Client) CreateAccountAssignment(ctx context.Context, params *CreateAcco
 type CreateAccountAssignmentInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string

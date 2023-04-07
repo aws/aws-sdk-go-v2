@@ -11,17 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds permissions to a profiling group's resource-based policy that are
-// provided using an action group. If a profiling group doesn't have a
-// resource-based policy, one is created for it using the permissions in the action
-// group and the roles and users in the principals parameter. The one supported
-// action group that can be added is agentPermission  which grants ConfigureAgent
-// and PostAgent  permissions. For more information, see Resource-based policies
-// in CodeGuru Profiler (https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html)
+// Adds permissions to a profiling group's resource-based policy that are provided
+// using an action group. If a profiling group doesn't have a resource-based
+// policy, one is created for it using the permissions in the action group and the
+// roles and users in the principals parameter. The one supported action group
+// that can be added is agentPermission which grants ConfigureAgent and PostAgent
+// permissions. For more information, see Resource-based policies in CodeGuru
+// Profiler (https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html)
 // in the Amazon CodeGuru Profiler User Guide, ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
 // , and PostAgentProfile (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html)
-// . The first time you call PutPermission  on a profiling group, do not specify a
-// revisionIdbecause it doesn't have a resource-based policy. Subsequent calls
+// . The first time you call PutPermission on a profiling group, do not specify a
+// revisionId because it doesn't have a resource-based policy. Subsequent calls
 // must provide a revisionId to specify which revision of the resource-based
 // policy to add the permissions to. The response contains the profiling group's
 // JSON-formatted resource policy.
@@ -43,10 +43,10 @@ func (c *Client) PutPermission(ctx context.Context, params *PutPermissionInput, 
 // The structure representing the putPermissionRequest .
 type PutPermissionInput struct {
 
-	// Specifies an action group that contains permissions to add to a profiling
-	// group resource. One action group is supported, agentPermissions, which grants
+	// Specifies an action group that contains permissions to add to a profiling group
+	// resource. One action group is supported, agentPermissions , which grants
 	// permission to perform actions required by the profiling agent, ConfigureAgent
-	// and PostAgentProfile  permissions.
+	// and PostAgentProfile permissions.
 	//
 	// This member is required.
 	ActionGroup types.ActionGroup

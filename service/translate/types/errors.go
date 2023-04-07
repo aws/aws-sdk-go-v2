@@ -120,8 +120,7 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The filter specified for the operation is not valid. Specify a different
-// filter.
+// The filter specified for the operation is not valid. Specify a different filter.
 type InvalidFilterException struct {
 	Message *string
 
@@ -228,9 +227,9 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource you are looking for has not been found. Review the resource
-// you're looking for and see if a different resource will accomplish your needs
-// before retrying the revised request.
+// The resource you are looking for has not been found. Review the resource you're
+// looking for and see if a different resource will accomplish your needs before
+// retrying the revised request.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -310,8 +309,8 @@ func (e *TextSizeLimitExceededException) ErrorCode() string {
 }
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have made too many requests within a short period of time. Wait for a
-// short time and then try your request again.
+// You have made too many requests within a short period of time. Wait for a short
+// time and then try your request again.
 type TooManyRequestsException struct {
 	Message *string
 

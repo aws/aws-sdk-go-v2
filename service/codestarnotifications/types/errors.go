@@ -114,8 +114,8 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One of the AWS CodeStar Notifications limits has been exceeded. Limits apply
-// to accounts, notification rules, notifications, resources, and targets. For more
+// One of the AWS CodeStar Notifications limits has been exceeded. Limits apply to
+// accounts, notification rules, notifications, resources, and targets. For more
 // information, see Limits.
 type LimitExceededException struct {
 	Message *string

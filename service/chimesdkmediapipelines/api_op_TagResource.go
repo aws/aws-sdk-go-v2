@@ -30,8 +30,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The ARN of the media pipeline associated with any tags. The ARN consists of
-	// the pipeline's endpoint region, resource ID, and pipeline ID.
+	// The ARN of the media pipeline associated with any tags. The ARN consists of the
+	// pipeline's endpoint region, resource ID, and pipeline ID.
 	//
 	// This member is required.
 	ResourceARN *string

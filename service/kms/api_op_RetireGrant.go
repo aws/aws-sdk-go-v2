@@ -50,12 +50,13 @@ type RetireGrantInput struct {
 
 	// Identifies the grant to retire. To get the grant ID, use CreateGrant ,
 	// ListGrants , or ListRetirableGrants .
-	//     - Grant ID Example - 0123456789012345678901234567890123456789012345678901234567890123
+	//   - Grant ID Example -
+	//   0123456789012345678901234567890123456789012345678901234567890123
 	GrantId *string
 
-	// Identifies the grant to be retired. You can use a grant token to identify a
-	// new grant even before it has achieved eventual consistency. Only the
-	// CreateGrant operation returns a grant token. For details, see Grant token (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token)
+	// Identifies the grant to be retired. You can use a grant token to identify a new
+	// grant even before it has achieved eventual consistency. Only the CreateGrant
+	// operation returns a grant token. For details, see Grant token (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token)
 	// and Eventual consistency (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-eventual-consistency)
 	// in the Key Management Service Developer Guide.
 	GrantToken *string

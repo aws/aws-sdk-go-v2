@@ -32,7 +32,7 @@ func (c *Client) ReadJob(ctx context.Context, params *ReadJobInput, optFns ...fu
 	return out, nil
 }
 
-// The ReadJobRequest  structure.
+// The ReadJobRequest structure.
 type ReadJobInput struct {
 
 	// The identifier of the job for which you want to get detailed information.
@@ -43,7 +43,7 @@ type ReadJobInput struct {
 	noSmithyDocumentSerde
 }
 
-// The ReadJobResponse  structure.
+// The ReadJobResponse structure.
 type ReadJobOutput struct {
 
 	// A section of the response body that provides information about the job.

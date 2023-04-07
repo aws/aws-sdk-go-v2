@@ -11,8 +11,7 @@ import (
 )
 
 // Deletes a Call Analytics job. To use this operation, specify the name of the
-// job you want to delete using CallAnalyticsJobName. Job names are case
-// sensitive.
+// job you want to delete using CallAnalyticsJobName . Job names are case sensitive.
 func (c *Client) DeleteCallAnalyticsJob(ctx context.Context, params *DeleteCallAnalyticsJobInput, optFns ...func(*Options)) (*DeleteCallAnalyticsJobOutput, error) {
 	if params == nil {
 		params = &DeleteCallAnalyticsJobInput{}

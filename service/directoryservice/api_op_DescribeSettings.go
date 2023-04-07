@@ -35,7 +35,7 @@ type DescribeSettingsInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The DescribeSettingsResult.NextToken  value from a previous call to
+	// The DescribeSettingsResult.NextToken value from a previous call to
 	// DescribeSettings . Pass null if this is the first call.
 	NextToken *string
 
@@ -51,7 +51,7 @@ type DescribeSettingsOutput struct {
 	DirectoryId *string
 
 	// If not null, token that indicates that more results are available. Pass this
-	// value for the NextToken  parameter in a subsequent call to DescribeSettings to
+	// value for the NextToken parameter in a subsequent call to DescribeSettings to
 	// retrieve the next set of items.
 	NextToken *string
 

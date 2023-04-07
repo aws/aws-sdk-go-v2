@@ -40,20 +40,20 @@ type UpdateNetworkAnalyzerConfigurationInput struct {
 	// Trace content for your wireless gateway and wireless device resources.
 	TraceContent *types.TraceContent
 
-	// Wireless device resources to add to the network analyzer configuration.
-	// Provide the WirelessDeviceId  of the resource to add in the input array.
+	// Wireless device resources to add to the network analyzer configuration. Provide
+	// the WirelessDeviceId of the resource to add in the input array.
 	WirelessDevicesToAdd []string
 
 	// Wireless device resources to remove from the network analyzer configuration.
-	// Provide the WirelessDeviceId  of the resources to remove in the input array.
+	// Provide the WirelessDeviceId of the resources to remove in the input array.
 	WirelessDevicesToRemove []string
 
 	// Wireless gateway resources to add to the network analyzer configuration.
-	// Provide the WirelessGatewayId  of the resource to add in the input array.
+	// Provide the WirelessGatewayId of the resource to add in the input array.
 	WirelessGatewaysToAdd []string
 
 	// Wireless gateway resources to remove from the network analyzer configuration.
-	// Provide the WirelessGatewayId  of the resources to remove in the input array.
+	// Provide the WirelessGatewayId of the resources to remove in the input array.
 	WirelessGatewaysToRemove []string
 
 	noSmithyDocumentSerde

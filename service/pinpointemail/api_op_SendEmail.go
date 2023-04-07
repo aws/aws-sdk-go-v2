@@ -13,8 +13,13 @@ import (
 
 // Sends an email message. You can use the Amazon Pinpoint Email API to send two
 // types of messages:
-//   - Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon Pinpoint assembles the message for you.
-//   - Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.
+//   - Simple – A standard email message. When you create this type of message,
+//     you specify the sender, the recipient, and the message body, and Amazon Pinpoint
+//     assembles the message for you.
+//   - Raw – A raw, MIME-formatted email message. When you send this type of
+//     email, you have to specify all of the message headers, as well as the message
+//     body. You can use this message type to send messages that contain attachments.
+//     The message that you specify has to be a valid MIME message.
 func (c *Client) SendEmail(ctx context.Context, params *SendEmailInput, optFns ...func(*Options)) (*SendEmailOutput, error) {
 	if params == nil {
 		params = &SendEmailInput{}
@@ -52,12 +57,12 @@ type SendEmailInput struct {
 	// email that you define, so that you can publish email sending events.
 	EmailTags []types.MessageTag
 
-	// The address that Amazon Pinpoint should send bounce and complaint
-	// notifications to.
+	// The address that Amazon Pinpoint should send bounce and complaint notifications
+	// to.
 	FeedbackForwardingEmailAddress *string
 
-	// The email address that you want to use as the "From" address for the email.
-	// The address that you specify has to be verified.
+	// The email address that you want to use as the "From" address for the email. The
+	// address that you specify has to be verified.
 	FromEmailAddress *string
 
 	// The "Reply-to" email addresses for the message. When the recipient replies to

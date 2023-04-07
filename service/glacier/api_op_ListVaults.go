@@ -16,9 +16,8 @@ import (
 // This operation lists all vaults owned by the calling user's account. The list
 // returned in the response is ASCII-sorted by vault name. By default, this
 // operation returns up to 10 items. If there are more vaults to list, the response
-//
-// markerfield contains the vault Amazon Resource Name (ARN) at which to continue
-// the list with a new List Vaults request; otherwise, the marker  field is null.
+// marker field contains the vault Amazon Resource Name (ARN) at which to continue
+// the list with a new List Vaults request; otherwise, the marker field is null .
 // To return a list of vaults that begins at a specific vault, set the marker
 // request parameter to the vault ARN you obtained from a previous List Vaults
 // request. You can also limit the number of vaults returned in the response by
@@ -52,10 +51,10 @@ type ListVaultsInput struct {
 
 	// The AccountId value is the AWS account ID. This value must match the AWS
 	// account ID associated with the credentials used to sign the request. You can
-	// either specify an AWS account ID or optionally a single ' -' (hyphen), in
-	// which case Amazon Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you specify your account ID, do not
-	// include any hyphens ('-') in the ID.
+	// either specify an AWS account ID or optionally a single ' - ' (hyphen), in which
+	// case Amazon Glacier uses the AWS account ID associated with the credentials used
+	// to sign the request. If you specify your account ID, do not include any hyphens
+	// ('-') in the ID.
 	//
 	// This member is required.
 	AccountId *string
@@ -174,8 +173,8 @@ type ListVaultsPaginatorOptions struct {
 	// number of returned vaults never exceeds the limit.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

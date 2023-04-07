@@ -36,13 +36,14 @@ type ListDevicePoolsInput struct {
 	// This member is required.
 	Arn *string
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	// The device pools' type. Allowed values include:
-	//     - CURATED: A device pool that is created and managed by AWS Device Farm.
-	//     - PRIVATE: A device pool that is created and managed by the device pool developer.
+	//   - CURATED: A device pool that is created and managed by AWS Device Farm.
+	//   - PRIVATE: A device pool that is created and managed by the device pool
+	//   developer.
 	Type types.DevicePoolType
 
 	noSmithyDocumentSerde
@@ -138,8 +139,8 @@ var _ ListDevicePoolsAPIClient = (*Client)(nil)
 
 // ListDevicePoolsPaginatorOptions is the paginator options for ListDevicePools
 type ListDevicePoolsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

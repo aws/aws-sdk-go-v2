@@ -28,7 +28,7 @@ func (c *Client) DeleteProtection(ctx context.Context, params *DeleteProtectionI
 
 type DeleteProtectionInput struct {
 
-	// The unique identifier (ID) for the Protection  object to be deleted.
+	// The unique identifier (ID) for the Protection object to be deleted.
 	//
 	// This member is required.
 	ProtectionId *string

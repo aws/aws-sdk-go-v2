@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an agreement. An agreement is a bilateral trading partner agreement,
-// or partnership, between an Transfer Family server and an AS2 process. The
-// agreement defines the file and message transfer relationship between the server
-// and the AS2 process. To define an agreement, Transfer Family combines a server,
-// local profile, partner profile, certificate, and other attributes. The partner
-// is identified with the PartnerProfileId, and the AS2 process is identified
-// with the LocalProfileId .
+// Creates an agreement. An agreement is a bilateral trading partner agreement, or
+// partnership, between an Transfer Family server and an AS2 process. The agreement
+// defines the file and message transfer relationship between the server and the
+// AS2 process. To define an agreement, Transfer Family combines a server, local
+// profile, partner profile, certificate, and other attributes. The partner is
+// identified with the PartnerProfileId , and the AS2 process is identified with
+// the LocalProfileId .
 func (c *Client) CreateAgreement(ctx context.Context, params *CreateAgreementInput, optFns ...func(*Options)) (*CreateAgreementOutput, error) {
 	if params == nil {
 		params = &CreateAgreementInput{}
@@ -36,9 +36,9 @@ func (c *Client) CreateAgreement(ctx context.Context, params *CreateAgreementInp
 type CreateAgreementInput struct {
 
 	// With AS2, you can send files by calling StartFileTransfer and specifying the
-	// file paths in the request parameter, SendFilePaths. We use the file’s parent
-	// directory (for example, for --send-file-paths /bucket/dir/file.txt, parent
-	// directory is /bucket/dir/) to temporarily store a processed AS2 message file,
+	// file paths in the request parameter, SendFilePaths . We use the file’s parent
+	// directory (for example, for --send-file-paths /bucket/dir/file.txt , parent
+	// directory is /bucket/dir/ ) to temporarily store a processed AS2 message file,
 	// store the MDN when we receive them from the partner, and write a final JSON file
 	// containing relevant metadata of the transmission. So, the AccessRole needs to
 	// provide read and write access to the parent directory of the file location used
@@ -49,8 +49,8 @@ type CreateAgreementInput struct {
 	// This member is required.
 	AccessRole *string
 
-	// The landing directory (folder) for files transferred by using the AS2
-	// protocol. A BaseDirectory  example is /DOC-EXAMPLE-BUCKET/home/mydirectory .
+	// The landing directory (folder) for files transferred by using the AS2 protocol.
+	// A BaseDirectory example is /DOC-EXAMPLE-BUCKET/home/mydirectory .
 	//
 	// This member is required.
 	BaseDirectory *string
@@ -65,8 +65,8 @@ type CreateAgreementInput struct {
 	// This member is required.
 	PartnerProfileId *string
 
-	// A system-assigned unique identifier for a server instance. This is the
-	// specific server that the agreement uses.
+	// A system-assigned unique identifier for a server instance. This is the specific
+	// server that the agreement uses.
 	//
 	// This member is required.
 	ServerId *string
@@ -74,7 +74,7 @@ type CreateAgreementInput struct {
 	// A name or short description to identify the agreement.
 	Description *string
 
-	// The status of the agreement. The agreement can be either ACTIVE  or INACTIVE .
+	// The status of the agreement. The agreement can be either ACTIVE or INACTIVE .
 	Status types.AgreementStatusType
 
 	// Key-value pairs that can be used to group and search for agreements.

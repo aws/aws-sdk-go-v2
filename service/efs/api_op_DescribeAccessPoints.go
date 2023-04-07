@@ -13,11 +13,10 @@ import (
 )
 
 // Returns the description of a specific Amazon EFS access point if the
-// AccessPointId is provided. If you provide an EFS FileSystemId, it returns
+// AccessPointId is provided. If you provide an EFS FileSystemId , it returns
 // descriptions of all access points for that file system. You can provide either
-// an AccessPointId  or a FileSystemId in the request, but not both. This
-// operation requires permissions for the elasticfilesystem:DescribeAccessPoints
-// action.
+// an AccessPointId or a FileSystemId in the request, but not both. This operation
+// requires permissions for the elasticfilesystem:DescribeAccessPoints action.
 func (c *Client) DescribeAccessPoints(ctx context.Context, params *DescribeAccessPointsInput, optFns ...func(*Options)) (*DescribeAccessPointsOutput, error) {
 	if params == nil {
 		params = &DescribeAccessPointsInput{}
@@ -39,7 +38,7 @@ type DescribeAccessPointsInput struct {
 	// exclusive with FileSystemId .
 	AccessPointId *string
 
-	// (Optional) If you provide a FileSystemId, EFS returns all access points for
+	// (Optional) If you provide a FileSystemId , EFS returns all access points for
 	// that file system; mutually exclusive with AccessPointId .
 	FileSystemId *string
 
@@ -48,7 +47,7 @@ type DescribeAccessPointsInput struct {
 	// returned in a response. The default value is 100.
 	MaxResults *int32
 
-	// NextToken  is present if the response is paginated. You can use NextMarker in
+	// NextToken is present if the response is paginated. You can use NextMarker in
 	// the subsequent request to fetch the next page of access point descriptions.
 	NextToken *string
 
@@ -147,8 +146,8 @@ type DescribeAccessPointsPaginatorOptions struct {
 	// returned in a response. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

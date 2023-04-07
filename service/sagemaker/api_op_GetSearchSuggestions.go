@@ -44,7 +44,7 @@ type GetSearchSuggestionsInput struct {
 
 type GetSearchSuggestionsOutput struct {
 
-	// A list of property names for a Resource  that match a SuggestionQuery .
+	// A list of property names for a Resource that match a SuggestionQuery .
 	PropertyNameSuggestions []types.PropertyNameSuggestion
 
 	// Metadata pertaining to the operation's result.

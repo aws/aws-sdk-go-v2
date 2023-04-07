@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the plans for the specified provisioned product or all plans to which
-// the user has access.
+// Lists the plans for the specified provisioned product or all plans to which the
+// user has access.
 func (c *Client) ListProvisionedProductPlans(ctx context.Context, params *ListProvisionedProductPlansInput, optFns ...func(*Options)) (*ListProvisionedProductPlansOutput, error) {
 	if params == nil {
 		params = &ListProvisionedProductPlansInput{}
@@ -31,9 +31,9 @@ func (c *Client) ListProvisionedProductPlans(ctx context.Context, params *ListPr
 type ListProvisionedProductPlansInput struct {
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The access level to use to obtain results. The default is User .

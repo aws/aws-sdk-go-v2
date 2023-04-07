@@ -17,9 +17,14 @@ import (
 // the root resource record set name (such as example.com) while it replaces one
 // group of resource record sets with another. Route 53 performs the following
 // operations:
-//   - Route 53 creates a new group of resource record sets based on the specified traffic policy. This is true regardless of how significant the differences are between the existing resource record sets and the new resource record sets.
-//   - When all of the new resource record sets have been created, Route 53 starts to respond to DNS queries for the root resource record set name (such as example.com) by using the new resource record sets.
-//   - Route 53 deletes the old group of resource record sets that are associated with the root resource record set name.
+//   - Route 53 creates a new group of resource record sets based on the specified
+//     traffic policy. This is true regardless of how significant the differences are
+//     between the existing resource record sets and the new resource record sets.
+//   - When all of the new resource record sets have been created, Route 53 starts
+//     to respond to DNS queries for the root resource record set name (such as
+//     example.com) by using the new resource record sets.
+//   - Route 53 deletes the old group of resource record sets that are associated
+//     with the root resource record set name.
 func (c *Client) UpdateTrafficPolicyInstance(ctx context.Context, params *UpdateTrafficPolicyInstanceInput, optFns ...func(*Options)) (*UpdateTrafficPolicyInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateTrafficPolicyInstanceInput{}

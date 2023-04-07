@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to delete the access specified in the ServerID  and ExternalID
+// Allows you to delete the access specified in the ServerID and ExternalID
 // parameters.
 func (c *Client) DeleteAccess(ctx context.Context, params *DeleteAccessInput, optFns ...func(*Options)) (*DeleteAccessOutput, error) {
 	if params == nil {
@@ -34,7 +34,7 @@ type DeleteAccessInput struct {
 	// S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If
 	// you know the group name, you can view the SID values by running the following
 	// command using Windows PowerShell. Get-ADGroup -Filter {samAccountName -like
-	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSidIn that
+	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid In that
 	// command, replace YourGroupName with the name of your Active Directory group. The
 	// regular expression used to validate this parameter is a string of characters
 	// consisting of uppercase and lowercase alphanumeric characters with no spaces.

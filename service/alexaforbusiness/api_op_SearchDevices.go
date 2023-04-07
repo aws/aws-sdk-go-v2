@@ -36,15 +36,14 @@ type SearchDevicesInput struct {
 	// NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.
 	Filters []types.Filter
 
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults
-	// .
+	// includes only results beyond the token, up to the value specified by MaxResults .
 	NextToken *string
 
 	// The sort order to use in listing the specified set of devices. Supported sort
@@ -145,13 +144,13 @@ var _ SearchDevicesAPIClient = (*Client)(nil)
 
 // SearchDevicesPaginatorOptions is the paginator options for SearchDevices
 type SearchDevicesPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

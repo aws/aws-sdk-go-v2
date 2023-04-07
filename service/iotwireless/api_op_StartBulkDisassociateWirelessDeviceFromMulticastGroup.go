@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a bulk disassociatin of all qualifying wireless devices from a
-// multicast group.
+// Starts a bulk disassociatin of all qualifying wireless devices from a multicast
+// group.
 func (c *Client) StartBulkDisassociateWirelessDeviceFromMulticastGroup(ctx context.Context, params *StartBulkDisassociateWirelessDeviceFromMulticastGroupInput, optFns ...func(*Options)) (*StartBulkDisassociateWirelessDeviceFromMulticastGroupOutput, error) {
 	if params == nil {
 		params = &StartBulkDisassociateWirelessDeviceFromMulticastGroupInput{}
@@ -39,8 +39,8 @@ type StartBulkDisassociateWirelessDeviceFromMulticastGroupInput struct {
 	// and disassociate process.
 	QueryString *string
 
-	// The tag to attach to the specified resource. Tags are metadata that you can
-	// use to manage a resource.
+	// The tag to attach to the specified resource. Tags are metadata that you can use
+	// to manage a resource.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

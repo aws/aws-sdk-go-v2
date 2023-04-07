@@ -38,8 +38,8 @@ type StartCopyJobInput struct {
 	// This member is required.
 	DestinationBackupVaultArn *string
 
-	// Specifies the IAM role ARN used to copy the target recovery point; for
-	// example, arn:aws:iam::123456789012:role/S3Access .
+	// Specifies the IAM role ARN used to copy the target recovery point; for example,
+	// arn:aws:iam::123456789012:role/S3Access .
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -60,7 +60,7 @@ type StartCopyJobInput struct {
 	SourceBackupVaultName *string
 
 	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to StartCopyJob. Retrying a successful request with the same
+	// identical calls to StartCopyJob . Retrying a successful request with the same
 	// idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 

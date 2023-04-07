@@ -12,9 +12,9 @@ import (
 )
 
 // Returns the template body for a specified stack. You can get the template for
-// running or deleted stacks. For deleted stacks, GetTemplate returns the
-// template for up to 90 days after the stack has been deleted. If the template
-// doesn't exist, a ValidationError  is returned.
+// running or deleted stacks. For deleted stacks, GetTemplate returns the template
+// for up to 90 days after the stack has been deleted. If the template doesn't
+// exist, a ValidationError is returned.
 func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optFns ...func(*Options)) (*GetTemplateOutput, error) {
 	if params == nil {
 		params = &GetTemplateInput{}
@@ -30,39 +30,39 @@ func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optF
 	return out, nil
 }
 
-// The input for a GetTemplate  action.
+// The input for a GetTemplate action.
 type GetTemplateInput struct {
 
-	// The name or Amazon Resource Name (ARN) of a change set for which
-	// CloudFormation returns the associated template. If you specify a name, you must
-	// also specify the StackName .
+	// The name or Amazon Resource Name (ARN) of a change set for which CloudFormation
+	// returns the associated template. If you specify a name, you must also specify
+	// the StackName .
 	ChangeSetName *string
 
 	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
-	//     - Running stacks: You can specify either the stack's name or its unique stack ID.
-	//     - Deleted stacks: You must specify the unique stack ID.
-	// Default: There is
-	// no default value.
+	//   - Running stacks: You can specify either the stack's name or its unique stack
+	//   ID.
+	//   - Deleted stacks: You must specify the unique stack ID.
+	// Default: There is no default value.
 	StackName *string
 
 	// For templates that include transforms, the stage of the template that
-	// CloudFormation returns. To get the user-submitted template, specify Original.
+	// CloudFormation returns. To get the user-submitted template, specify Original .
 	// To get the template after CloudFormation has processed all transforms, specify
-	// Processed . If the template doesn't include transforms, Original  and Processed
+	// Processed . If the template doesn't include transforms, Original and Processed
 	// return the same template. By default, CloudFormation specifies Processed .
 	TemplateStage types.TemplateStage
 
 	noSmithyDocumentSerde
 }
 
-// The output for GetTemplate  action.
+// The output for GetTemplate action.
 type GetTemplateOutput struct {
 
-	// The stage of the template that you can retrieve. For stacks, the Original  and
+	// The stage of the template that you can retrieve. For stacks, the Original and
 	// Processed templates are always available. For change sets, the Original
 	// template is always available. After CloudFormation finishes creating the change
-	// set, the Processed  template becomes available.
+	// set, the Processed template becomes available.
 	StagesAvailable []types.TemplateStage
 
 	// Structure containing the template body. (For more information, go to Template

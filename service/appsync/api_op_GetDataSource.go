@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a DataSource  object.
+// Retrieves a DataSource object.
 func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, optFns ...func(*Options)) (*GetDataSourceOutput, error) {
 	if params == nil {
 		params = &GetDataSourceInput{}
@@ -44,7 +44,7 @@ type GetDataSourceInput struct {
 
 type GetDataSourceOutput struct {
 
-	// The DataSource  object.
+	// The DataSource object.
 	DataSource *types.DataSource
 
 	// Metadata pertaining to the operation's result.

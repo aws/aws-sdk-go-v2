@@ -50,7 +50,7 @@ type SyncResourceInput struct {
 type SyncResourceOutput struct {
 
 	// The results of the output if an application is associated with an ARN value,
-	// which could be syncStarted  or None.
+	// which could be syncStarted or None.
 	ActionTaken types.SyncAction
 
 	// The Amazon resource name (ARN) that specifies the application.

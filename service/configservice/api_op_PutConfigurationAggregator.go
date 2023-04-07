@@ -15,7 +15,7 @@ import (
 // accounts and regions. The source account can be individual account(s) or an
 // organization. accountIds that are passed will be replaced with existing
 // accounts. If you want to add additional accounts into the aggregator, call
-// DescribeConfigurationAggregatorsto get the previous accounts and then append
+// DescribeConfigurationAggregators to get the previous accounts and then append
 // new ones. Config should be enabled in source accounts and regions you want to
 // aggregate. If your source type is an organization, you must be signed in to the
 // management account or a registered delegated administrator and all the features
@@ -25,11 +25,11 @@ import (
 // calls ListDelegatedAdministrators API to verify whether the caller is a valid
 // delegated administrator. To register a delegated administrator, see Register a
 // Delegated Administrator (https://docs.aws.amazon.com/config/latest/developerguide/set-up-aggregator-cli.html#register-a-delegated-administrator-cli)
-// in the Config developer guide. PutConfigurationAggregator is an idempotent
-// API. Subsequent requests won’t create a duplicate resource if one was already
+// in the Config developer guide. PutConfigurationAggregator is an idempotent API.
+// Subsequent requests won’t create a duplicate resource if one was already
 // created. If a following request has different tags values, Config will ignore
 // these differences and treat it as an idempotent request of the previous. In this
-// case, tags  will not be updated, even if they are different.
+// case, tags will not be updated, even if they are different.
 func (c *Client) PutConfigurationAggregator(ctx context.Context, params *PutConfigurationAggregatorInput, optFns ...func(*Options)) (*PutConfigurationAggregatorOutput, error) {
 	if params == nil {
 		params = &PutConfigurationAggregatorInput{}

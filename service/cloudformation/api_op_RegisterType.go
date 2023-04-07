@@ -18,14 +18,12 @@ import (
 //   - Determining which handlers, if any, have been specified for the extension.
 //   - Making the extension available for use in your account.
 //
-// For more
-// information about how to develop extensions and ready them for registration, see
-//
-// Creating Resource Providers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
+// For more information about how to develop extensions and ready them for
+// registration, see Creating Resource Providers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
 // in the CloudFormation CLI User Guide. You can have a maximum of 50 resource
 // extension versions registered at a time. This maximum is per account and per
 // region. Use DeregisterType to deregister specific extension versions if
-// necessary. Once you have initiated a registration request using RegisterType,
+// necessary. Once you have initiated a registration request using RegisterType ,
 // you can use DescribeTypeRegistration to monitor the progress of the
 // registration request. Once you have registered a private extension in your
 // account and region, use SetTypeConfiguration to specify configuration
@@ -65,17 +63,17 @@ type RegisterTypeInput struct {
 
 	// The name of the extension being registered. We suggest that extension names
 	// adhere to the following patterns:
-	//     - For resource types, company_or_organization::service::type.
-	//     - For modules, company_or_organization::service::type::MODULE.
-	//     - For hooks, MyCompany::Testing::MyTestHook.
-	// The following organization
-	// namespaces are reserved and can't be used in your extension names:
-	//     - Alexa
-	//     - AMZN
-	//     - Amazon
-	//     - AWS
-	//     - Custom
-	//     - Dev
+	//   - For resource types, company_or_organization::service::type.
+	//   - For modules, company_or_organization::service::type::MODULE.
+	//   - For hooks, MyCompany::Testing::MyTestHook.
+	// The following organization namespaces are reserved and can't be used in your
+	// extension names:
+	//   - Alexa
+	//   - AMZN
+	//   - Amazon
+	//   - AWS
+	//   - Custom
+	//   - Dev
 	//
 	// This member is required.
 	TypeName *string
@@ -89,11 +87,11 @@ type RegisterTypeInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume
 	// when invoking the extension. For CloudFormation to assume the specified
 	// execution role, the role must contain a trust relationship with the
-	// CloudFormation service principle ( resources.cloudformation.amazonaws.com).
-	// For more information about adding trust relationships, see Modifying a role
-	// trust policyin the Identity and Access Management User Guide. If your
-	// extension calls Amazon Web Services APIs in any of its handlers, you must create
-	// an IAM execution role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+	// CloudFormation service principle ( resources.cloudformation.amazonaws.com ). For
+	// more information about adding trust relationships, see Modifying a role trust
+	// policy in the Identity and Access Management User Guide. If your extension calls
+	// Amazon Web Services APIs in any of its handlers, you must create an IAM
+	// execution role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 	// that includes the necessary permissions to call those Amazon Web Services APIs,
 	// and provision that execution role in your account. When CloudFormation needs to
 	// invoke the resource type handler, CloudFormation assumes this execution role to
@@ -113,7 +111,7 @@ type RegisterTypeInput struct {
 type RegisterTypeOutput struct {
 
 	// The identifier for this registration request. Use this registration token when
-	// calling DescribeTypeRegistration, which returns information about the status
+	// calling DescribeTypeRegistration , which returns information about the status
 	// and IDs of the extension registration.
 	RegistrationToken *string
 

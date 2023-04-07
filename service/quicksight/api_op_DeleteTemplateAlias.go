@@ -31,8 +31,8 @@ type DeleteTemplateAliasInput struct {
 
 	// The name for the template alias. To delete a specific alias, you delete the
 	// version that the alias points to. You can specify the alias name, or specify the
-	// latest version of the template by providing the keyword $LATEST  in the
-	// AliasName parameter.
+	// latest version of the template by providing the keyword $LATEST in the AliasName
+	// parameter.
 	//
 	// This member is required.
 	AliasName *string

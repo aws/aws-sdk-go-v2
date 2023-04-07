@@ -36,8 +36,8 @@ type RemoveSourceIdentifierFromSubscriptionInput struct {
 	// This member is required.
 	SourceIdentifier *string
 
-	// The name of the RDS event notification subscription you want to remove a
-	// source identifier from.
+	// The name of the RDS event notification subscription you want to remove a source
+	// identifier from.
 	//
 	// This member is required.
 	SubscriptionName *string

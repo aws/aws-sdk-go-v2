@@ -52,7 +52,7 @@ type PurchaseReservedDBInstancesOfferingInput struct {
 type PurchaseReservedDBInstancesOfferingOutput struct {
 
 	// This data type is used as a response element in the DescribeReservedDBInstances
-	// and PurchaseReservedDBInstancesOffering  actions.
+	// and PurchaseReservedDBInstancesOffering actions.
 	ReservedDBInstance *types.ReservedDBInstance
 
 	// Metadata pertaining to the operation's result.

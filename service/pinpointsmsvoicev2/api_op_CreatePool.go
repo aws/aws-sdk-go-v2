@@ -54,19 +54,19 @@ type CreatePoolInput struct {
 
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
 	// SenderId or SenderIdArn. You can use DescribePhoneNumbers to find the values
-	// for PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to
-	// get the values for SenderId and SenderIdArn.
+	// for PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get
+	// the values for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. If you don't specify a client token, a randomly generated token
-	// is used for the request to ensure idempotency.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don't specify a client token, a randomly generated token is
+	// used for the request to ensure idempotency.
 	ClientToken *string
 
 	// By default this is set to false. When set to true the pool can't be deleted.
-	// You can change this value using the UpdatePool  action.
+	// You can change this value using the UpdatePool action.
 	DeletionProtectionEnabled *bool
 
 	// An array of tags (key and value pairs) associated with the pool.
@@ -109,9 +109,10 @@ type CreatePoolOutput struct {
 	SharedRoutesEnabled bool
 
 	// The current status of the pool.
-	//     - CREATING: The pool is currently being created and isn't yet available for use.
-	//     - ACTIVE: The pool is active and available for use.
-	//     - DELETING: The pool is being deleted.
+	//   - CREATING: The pool is currently being created and isn't yet available for
+	//   use.
+	//   - ACTIVE: The pool is active and available for use.
+	//   - DELETING: The pool is being deleted.
 	Status types.PoolStatus
 
 	// An array of tags (key and value pairs) associated with the pool.
@@ -120,8 +121,8 @@ type CreatePoolOutput struct {
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
 
-	// By default this is set to false. When set to true you can receive incoming
-	// text messages from your end recipients.
+	// By default this is set to false. When set to true you can receive incoming text
+	// messages from your end recipients.
 	TwoWayEnabled bool
 
 	// Metadata pertaining to the operation's result.

@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a listener for a service. Before you start using your Amazon VPC Lattice
-// service, you must add one or more listeners. A listener is a process that checks
-// for connection requests to your services. For more information, see Listeners
-// (https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html) in the Amazon
-// VPC Lattice User Guide.
+// Creates a listener for a service. Before you start using your Amazon VPC
+// Lattice service, you must add one or more listeners. A listener is a process
+// that checks for connection requests to your services. For more information, see
+// Listeners (https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html) in
+// the Amazon VPC Lattice User Guide.
 func (c *Client) CreateListener(ctx context.Context, params *CreateListenerInput, optFns ...func(*Options)) (*CreateListenerOutput, error) {
 	if params == nil {
 		params = &CreateListenerInput{}
@@ -37,8 +37,8 @@ type CreateListenerInput struct {
 	// The action for the default rule. Each listener has a default rule. Each rule
 	// consists of a priority, one or more actions, and one or more conditions. The
 	// default rule is the rule that's used if no other rules match. Each rule must
-	// include exactly one of the following types of actions: forward or
-	// fixed-response, and it must be the last action to be performed.
+	// include exactly one of the following types of actions: forward or fixed-response
+	// , and it must be the last action to be performed.
 	//
 	// This member is required.
 	DefaultAction types.RuleAction
@@ -66,8 +66,8 @@ type CreateListenerInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
-	// The listener port. You can specify a value from 1 to 65535. For HTTP, the
-	// default is 80. For HTTPS, the default is 443.
+	// The listener port. You can specify a value from 1 to 65535 . For HTTP, the
+	// default is 80 . For HTTPS, the default is 443 .
 	Port *int32
 
 	// The tags for the listener.

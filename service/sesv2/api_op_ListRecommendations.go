@@ -34,14 +34,14 @@ func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommenda
 type ListRecommendationsInput struct {
 
 	// Filters applied when retrieving recommendations. Can eiter be an individual
-	// filter, or combinations of STATUS  and IMPACT  or STATUS  and TYPE
+	// filter, or combinations of STATUS and IMPACT or STATUS and TYPE
 	Filter map[string]string
 
 	// A token returned from a previous call to ListRecommendations to indicate the
 	// position in the list of recommendations.
 	NextToken *string
 
-	// The number of results to show in a single call to ListRecommendations. If the
+	// The number of results to show in a single call to ListRecommendations . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 1, and can be no
@@ -57,9 +57,8 @@ type ListRecommendationsOutput struct {
 
 	// A string token indicating that there might be additional recommendations
 	// available to be listed. Use the token provided in the
-	// ListRecommendationsResponse to use in the subsequent call to
-	// ListRecommendationswith the same parameters to retrieve the next page of
-	// recommendations.
+	// ListRecommendationsResponse to use in the subsequent call to ListRecommendations
+	// with the same parameters to retrieve the next page of recommendations.
 	NextToken *string
 
 	// The recommendations applicable to your account.
@@ -142,15 +141,15 @@ var _ ListRecommendationsAPIClient = (*Client)(nil)
 // ListRecommendationsPaginatorOptions is the paginator options for
 // ListRecommendations
 type ListRecommendationsPaginatorOptions struct {
-	// The number of results to show in a single call to ListRecommendations. If the
+	// The number of results to show in a single call to ListRecommendations . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 1, and can be no
 	// more than 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -155,8 +155,8 @@ type ListAutoMLJobsPaginatorOptions struct {
 	// Request a list of jobs up to a specified limit.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -30,8 +30,8 @@ func (c *Client) DescribeModelQualityJobDefinition(ctx context.Context, params *
 
 type DescribeModelQualityJobDefinitionInput struct {
 
-	// The name of the model quality job. The name must be unique within an Amazon
-	// Web Services Region in the Amazon Web Services account.
+	// The name of the model quality job. The name must be unique within an Amazon Web
+	// Services Region in the Amazon Web Services account.
 	//
 	// This member is required.
 	JobDefinitionName *string

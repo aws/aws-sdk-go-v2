@@ -33,8 +33,8 @@ func (c *Client) SearchSystemInstances(ctx context.Context, params *SearchSystem
 type SearchSystemInstancesInput struct {
 
 	// Optional filter to apply to the search. Valid filters are SYSTEM_TEMPLATE_ID ,
-	// STATUS , and GREENGRASS_GROUP_NAME. Multiple filters function as OR criteria
-	// in the query. Multiple values passed inside the filter function as AND criteria.
+	// STATUS , and GREENGRASS_GROUP_NAME . Multiple filters function as OR criteria in
+	// the query. Multiple values passed inside the filter function as AND criteria.
 	Filters []types.SystemInstanceFilter
 
 	// The maximum number of results to return in the response.
@@ -49,11 +49,11 @@ type SearchSystemInstancesInput struct {
 
 type SearchSystemInstancesOutput struct {
 
-	// The string to specify as nextToken  when you request the next page of results.
+	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
 
-	// An array of objects that contain summary data abour the system instances in
-	// the result set.
+	// An array of objects that contain summary data abour the system instances in the
+	// result set.
 	Summaries []types.SystemInstanceSummary
 
 	// Metadata pertaining to the operation's result.
@@ -136,8 +136,8 @@ type SearchSystemInstancesPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -135,8 +135,8 @@ type ListBatchInferenceJobsPaginatorOptions struct {
 	// default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -149,8 +149,7 @@ type ListBatchInferenceJobsPaginator struct {
 	firstPage bool
 }
 
-// NewListBatchInferenceJobsPaginator returns a new
-// ListBatchInferenceJobsPaginator
+// NewListBatchInferenceJobsPaginator returns a new ListBatchInferenceJobsPaginator
 func NewListBatchInferenceJobsPaginator(client ListBatchInferenceJobsAPIClient, params *ListBatchInferenceJobsInput, optFns ...func(*ListBatchInferenceJobsPaginatorOptions)) *ListBatchInferenceJobsPaginator {
 	if params == nil {
 		params = &ListBatchInferenceJobsInput{}

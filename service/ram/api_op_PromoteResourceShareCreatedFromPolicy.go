@@ -45,7 +45,7 @@ type PromoteResourceShareCreatedFromPolicyInput struct {
 
 type PromoteResourceShareCreatedFromPolicyOutput struct {
 
-	// A return value of true  indicates that the request succeeded. A value of false
+	// A return value of true indicates that the request succeeded. A value of false
 	// indicates that the request failed.
 	ReturnValue *bool
 

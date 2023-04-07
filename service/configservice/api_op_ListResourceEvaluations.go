@@ -30,11 +30,11 @@ func (c *Client) ListResourceEvaluations(ctx context.Context, params *ListResour
 
 type ListResourceEvaluationsInput struct {
 
-	// Returns a ResourceEvaluationFilters  object.
+	// Returns a ResourceEvaluationFilters object.
 	Filters *types.ResourceEvaluationFilters
 
-	// The maximum number of evaluations returned on each page. The default is 10.
-	// You cannot specify a number greater than 100. If you specify 0, Config uses the
+	// The maximum number of evaluations returned on each page. The default is 10. You
+	// cannot specify a number greater than 100. If you specify 0, Config uses the
 	// default.
 	Limit int32
 
@@ -51,7 +51,7 @@ type ListResourceEvaluationsOutput struct {
 	// page of results in a paginated response.
 	NextToken *string
 
-	// Returns a ResourceEvaluations  object.
+	// Returns a ResourceEvaluations object.
 	ResourceEvaluations []types.ResourceEvaluation
 
 	// Metadata pertaining to the operation's result.
@@ -131,13 +131,13 @@ var _ ListResourceEvaluationsAPIClient = (*Client)(nil)
 // ListResourceEvaluationsPaginatorOptions is the paginator options for
 // ListResourceEvaluations
 type ListResourceEvaluationsPaginatorOptions struct {
-	// The maximum number of evaluations returned on each page. The default is 10.
-	// You cannot specify a number greater than 100. If you specify 0, Config uses the
+	// The maximum number of evaluations returned on each page. The default is 10. You
+	// cannot specify a number greater than 100. If you specify 0, Config uses the
 	// default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

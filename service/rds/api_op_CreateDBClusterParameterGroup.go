@@ -16,8 +16,8 @@ import (
 // group is initially created with the default parameters for the database engine
 // used by instances in the DB cluster. To provide custom values for any of the
 // parameters, you must modify the group after creating it using
-// ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter
-// group, you need to associate it with your DB cluster using ModifyDBCluster.
+// ModifyDBClusterParameterGroup . Once you've created a DB cluster parameter
+// group, you need to associate it with your DB cluster using ModifyDBCluster .
 // When you associate a new DB cluster parameter group with a running Aurora DB
 // cluster, reboot the DB instances in the DB cluster without failover for the new
 // DB cluster parameter group and associated settings to take effect. When you
@@ -31,8 +31,8 @@ import (
 // important for parameters that are critical when creating the default database
 // for a DB cluster, such as the character set for the default database defined by
 // the character_set_database parameter. You can use the Parameter Groups option
-// of the Amazon RDS console (https://console.aws.amazon.com/rds/)  or the
-// DescribeDBClusterParametersoperation to verify that your DB cluster parameter
+// of the Amazon RDS console (https://console.aws.amazon.com/rds/) or the
+// DescribeDBClusterParameters operation to verify that your DB cluster parameter
 // group has been created or modified. For more information on Amazon Aurora, see
 // What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
@@ -56,31 +56,30 @@ func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *Crea
 type CreateDBClusterParameterGroupInput struct {
 
 	// The name of the DB cluster parameter group. Constraints:
-	//     - Must not match the name of an existing DB cluster parameter group.
-	// This
-	// value is stored as a lowercase string.
+	//   - Must not match the name of an existing DB cluster parameter group.
+	// This value is stored as a lowercase string.
 	//
 	// This member is required.
 	DBClusterParameterGroupName *string
 
-	// The DB cluster parameter group family name. A DB cluster parameter group can
-	// be associated with one and only one DB cluster parameter group family, and can
-	// be applied only to a DB cluster running a database engine and engine version
+	// The DB cluster parameter group family name. A DB cluster parameter group can be
+	// associated with one and only one DB cluster parameter group family, and can be
+	// applied only to a DB cluster running a database engine and engine version
 	// compatible with that DB cluster parameter group family. Aurora MySQL Example:
-	// aurora5.6 , aurora-mysql5.7 , aurora-mysql8.0  Aurora PostgreSQL Example:
+	// aurora5.6 , aurora-mysql5.7 , aurora-mysql8.0 Aurora PostgreSQL Example:
 	// aurora-postgresql9.6 RDS for MySQL Example: mysql8.0 RDS for PostgreSQL
-	// Example: postgres12 To list all of the available parameter group families for
-	// a DB engine, use the following command: aws rds describe-db-engine-versions
+	// Example: postgres12 To list all of the available parameter group families for a
+	// DB engine, use the following command: aws rds describe-db-engine-versions
 	// --query "DBEngineVersions[].DBParameterGroupFamily" --engine For example, to
 	// list all of the available parameter group families for the Aurora PostgreSQL DB
 	// engine, use the following command: aws rds describe-db-engine-versions --query
-	// "DBEngineVersions[].DBParameterGroupFamily" --engine aurora-postgresqlThe
+	// "DBEngineVersions[].DBParameterGroupFamily" --engine aurora-postgresql The
 	// output contains duplicates. The following are the valid DB engine values:
-	//     - aurora (for MySQL 5.6-compatible Aurora)
-	//     - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
-	//     - aurora-postgresql
-	//     - mysql
-	//     - postgres
+	//   - aurora (for MySQL 5.6-compatible Aurora)
+	//   - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
+	//   - aurora-postgresql
+	//   - mysql
+	//   - postgres
 	//
 	// This member is required.
 	DBParameterGroupFamily *string

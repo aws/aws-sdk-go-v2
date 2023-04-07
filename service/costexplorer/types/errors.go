@@ -192,8 +192,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit on the number of resources you can create, or
-// exceeded the size of an individual resource.
+// You've reached the limit on the number of resources you can create, or exceeded
+// the size of an individual resource.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -301,7 +301,7 @@ func (e *UnknownSubscriptionException) ErrorCode() string {
 func (e *UnknownSubscriptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Cost Explorer was unable to identify the usage unit. Provide
-// UsageType/UsageTypeGroupfilter selections that contain matching units, for
+// UsageType/UsageTypeGroup filter selections that contain matching units, for
 // example: hours .
 type UnresolvableUsageUnitException struct {
 	Message *string

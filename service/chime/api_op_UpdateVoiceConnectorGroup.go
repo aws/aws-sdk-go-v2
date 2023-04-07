@@ -40,7 +40,7 @@ type UpdateVoiceConnectorGroupInput struct {
 	// This member is required.
 	VoiceConnectorGroupId *string
 
-	// The VoiceConnectorItems  to associate with the group.
+	// The VoiceConnectorItems to associate with the group.
 	//
 	// This member is required.
 	VoiceConnectorItems []types.VoiceConnectorItem

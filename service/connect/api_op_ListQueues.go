@@ -13,10 +13,10 @@ import (
 )
 
 // Provides information about the queues for the specified Amazon Connect
-// instance. If you do not specify a QueueTypes parameter, both standard and
-// agent queues are returned. This might cause an unexpected truncation of results
-// if you have more than 1000 agents and you limit the number of results of the API
-// call in code. For more information about queues, see Queues: Standard and Agent (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html)
+// instance. If you do not specify a QueueTypes parameter, both standard and agent
+// queues are returned. This might cause an unexpected truncation of results if you
+// have more than 1000 agents and you limit the number of results of the API call
+// in code. For more information about queues, see Queues: Standard and Agent (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns ...func(*Options)) (*ListQueuesOutput, error) {
 	if params == nil {
@@ -41,8 +41,8 @@ type ListQueuesInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The maximum number of results to return per page. The default MaxResult size
-	// is 100.
+	// The maximum number of results to return per page. The default MaxResult size is
+	// 100.
 	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -141,12 +141,12 @@ var _ ListQueuesAPIClient = (*Client)(nil)
 
 // ListQueuesPaginatorOptions is the paginator options for ListQueues
 type ListQueuesPaginatorOptions struct {
-	// The maximum number of results to return per page. The default MaxResult size
-	// is 100.
+	// The maximum number of results to return per page. The default MaxResult size is
+	// 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

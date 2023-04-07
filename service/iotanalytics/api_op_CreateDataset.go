@@ -12,7 +12,7 @@ import (
 )
 
 // Used to create a dataset. A dataset stores data retrieved from a data store by
-// applying a queryAction  (a SQL query) or a containerAction (executing a
+// applying a queryAction (a SQL query) or a containerAction (executing a
 // containerized application). This operation creates the skeleton of a dataset.
 // The dataset can be populated manually by calling CreateDatasetContent or
 // automatically according to a trigger you specify.
@@ -43,8 +43,8 @@ type CreateDatasetInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// When dataset contents are created, they are delivered to destinations
-	// specified here.
+	// When dataset contents are created, they are delivered to destinations specified
+	// here.
 	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
 	// A list of data rules that send notifications to CloudWatch, when data arrives
@@ -53,7 +53,7 @@ type CreateDatasetInput struct {
 	LateDataRules []types.LateDataRule
 
 	// Optional. How long, in days, versions of dataset contents are kept for the
-	// dataset. If not specified or set to null, versions of dataset contents are
+	// dataset. If not specified or set to null , versions of dataset contents are
 	// retained for at most 90 days. The number of versions of dataset contents
 	// retained is determined by the versioningConfiguration parameter. For more
 	// information, see Keeping Multiple Versions of IoT Analytics datasets (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
@@ -65,14 +65,14 @@ type CreateDatasetInput struct {
 
 	// A list of triggers. A trigger causes dataset contents to be populated at a
 	// specified time interval or when another dataset's contents are created. The list
-	// of triggers can be empty or contain up to five DataSetTrigger  objects.
+	// of triggers can be empty or contain up to five DataSetTrigger objects.
 	Triggers []types.DatasetTrigger
 
 	// Optional. How many versions of dataset contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
 	// are different) are kept for the time period specified by the retentionPeriod
-	// parameter. For more information, see Keeping Multiple Versions of IoT
-	// Analytics datasets (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// parameter. For more information, see Keeping Multiple Versions of IoT Analytics
+	// datasets (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
 	// in the IoT Analytics User Guide.
 	VersioningConfiguration *types.VersioningConfiguration
 

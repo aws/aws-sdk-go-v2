@@ -28,7 +28,7 @@ func (c *Client) ResumeCluster(ctx context.Context, params *ResumeClusterInput, 
 }
 
 // Describes a resume cluster operation. For example, a scheduled action to run
-// the ResumeCluster  API operation.
+// the ResumeCluster API operation.
 type ResumeClusterInput struct {
 
 	// The identifier of the cluster to be resumed.

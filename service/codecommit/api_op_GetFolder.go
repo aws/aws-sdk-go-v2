@@ -41,10 +41,10 @@ type GetFolderInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// A fully qualified reference used to identify a commit that contains the
-	// version of the folder's content to return. A fully qualified reference can be a
-	// commit ID, branch name, tag, or reference such as HEAD. If no specifier is
-	// provided, the folder content is returned as it exists in the HEAD commit.
+	// A fully qualified reference used to identify a commit that contains the version
+	// of the folder's content to return. A fully qualified reference can be a commit
+	// ID, branch name, tag, or reference such as HEAD. If no specifier is provided,
+	// the folder content is returned as it exists in the HEAD commit.
 	CommitSpecifier *string
 
 	noSmithyDocumentSerde
@@ -76,8 +76,8 @@ type GetFolderOutput struct {
 	// if any.
 	SymbolicLinks []types.SymbolicLink
 
-	// The full SHA-1 pointer of the tree information for the commit that contains
-	// the folder.
+	// The full SHA-1 pointer of the tree information for the commit that contains the
+	// folder.
 	TreeId *string
 
 	// Metadata pertaining to the operation's result.

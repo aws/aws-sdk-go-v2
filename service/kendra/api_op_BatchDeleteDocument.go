@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more documents from an index. The documents must have been
-// added with the BatchPutDocument API. The documents are deleted asynchronously.
-// You can see the progress of the deletion by using Amazon Web Services
-// CloudWatch. Any error messages related to the processing of the batch are sent
-// to you CloudWatch log.
+// Removes one or more documents from an index. The documents must have been added
+// with the BatchPutDocument API. The documents are deleted asynchronously. You
+// can see the progress of the deletion by using Amazon Web Services CloudWatch.
+// Any error messages related to the processing of the batch are sent to you
+// CloudWatch log.
 func (c *Client) BatchDeleteDocument(ctx context.Context, params *BatchDeleteDocumentInput, optFns ...func(*Options)) (*BatchDeleteDocumentOutput, error) {
 	if params == nil {
 		params = &BatchDeleteDocumentInput{}

@@ -46,8 +46,8 @@ type GetSessionOutput struct {
 	// Contains engine configuration information like DPU usage.
 	EngineConfiguration *types.EngineConfiguration
 
-	// The engine version used by the session (for example, PySpark engine version 3
-	// ). You can get a list of engine versions by calling ListEngineVersions .
+	// The engine version used by the session (for example, PySpark engine version 3 ).
+	// You can get a list of engine versions by calling ListEngineVersions .
 	EngineVersion *string
 
 	// The notebook version.

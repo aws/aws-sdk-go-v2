@@ -13,7 +13,7 @@ import (
 
 // Gets the expressions configured for the search domain. Can be limited to
 // specific expressions by name. By default, shows all expressions and includes any
-// pending changes to the configuration. Set the Deployed  option to true to show
+// pending changes to the configuration. Set the Deployed option to true to show
 // the active configuration and exclude pending changes. For more information, see
 // Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
 // in the Amazon CloudSearch Developer Guide.
@@ -44,7 +44,7 @@ type DescribeExpressionsInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Whether to display the deployed configuration ( true) or include any pending
+	// Whether to display the deployed configuration ( true ) or include any pending
 	// changes ( false ). Defaults to false .
 	Deployed *bool
 

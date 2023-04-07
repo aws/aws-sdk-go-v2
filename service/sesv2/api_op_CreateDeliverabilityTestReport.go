@@ -17,8 +17,8 @@ import (
 // you provide a sample message that contains the content that you plan to send to
 // your customers. Amazon SES then sends that message to special email addresses
 // spread across several major email providers. After about 24 hours, the test is
-// complete, and you can use the GetDeliverabilityTestReport operation to view
-// the results of the test.
+// complete, and you can use the GetDeliverabilityTestReport operation to view the
+// results of the test.
 func (c *Client) CreateDeliverabilityTestReport(ctx context.Context, params *CreateDeliverabilityTestReportInput, optFns ...func(*Options)) (*CreateDeliverabilityTestReportOutput, error) {
 	if params == nil {
 		params = &CreateDeliverabilityTestReportInput{}

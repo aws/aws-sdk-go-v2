@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// (Deprecated) Retrieves information about the Amazon Macie administrator
-// account for an account. This operation has been replaced by the
-// GetAdministratorAccount operation.
+// (Deprecated) Retrieves information about the Amazon Macie administrator account
+// for an account. This operation has been replaced by the GetAdministratorAccount
+// operation.
 func (c *Client) GetMasterAccount(ctx context.Context, params *GetMasterAccountInput, optFns ...func(*Options)) (*GetMasterAccountOutput, error) {
 	if params == nil {
 		params = &GetMasterAccountInput{}

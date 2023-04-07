@@ -14,13 +14,13 @@ import (
 
 // Creates a public namespace based on DNS, which is visible on the internet. The
 // namespace defines your service naming scheme. For example, if you name your
-// namespace example.com  and name your service backend, the resulting DNS name
-// for the service is backend.example.com. You can discover instances that were
+// namespace example.com and name your service backend , the resulting DNS name for
+// the service is backend.example.com . You can discover instances that were
 // registered with a public DNS namespace by using either a DiscoverInstances
 // request or using DNS. For the current quota on the number of namespaces that you
 // can create using the same Amazon Web Services account, see Cloud Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the Cloud Map Developer Guide. The CreatePublicDnsNamespace API operation
-// is not supported in the Amazon Web Services GovCloud (US) Regions.
+// in the Cloud Map Developer Guide. The CreatePublicDnsNamespace API operation is
+// not supported in the Amazon Web Services GovCloud (US) Regions.
 func (c *Client) CreatePublicDnsNamespace(ctx context.Context, params *CreatePublicDnsNamespaceInput, optFns ...func(*Options)) (*CreatePublicDnsNamespaceOutput, error) {
 	if params == nil {
 		params = &CreatePublicDnsNamespaceInput{}
@@ -45,7 +45,7 @@ type CreatePublicDnsNamespaceInput struct {
 	Name *string
 
 	// A unique string that identifies the request and that allows failed
-	// CreatePublicDnsNamespacerequests to be retried without the risk of running the
+	// CreatePublicDnsNamespace requests to be retried without the risk of running the
 	// operation twice. CreatorRequestId can be any unique string (for example, a
 	// date/timestamp).
 	CreatorRequestId *string

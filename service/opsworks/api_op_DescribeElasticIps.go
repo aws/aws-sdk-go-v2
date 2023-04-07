@@ -40,8 +40,8 @@ type DescribeElasticIpsInput struct {
 	InstanceId *string
 
 	// An array of Elastic IP addresses to be described. If you include this
-	// parameter, DescribeElasticIps returns a description of the specified Elastic
-	// IP addresses. Otherwise, it returns a description of every Elastic IP address.
+	// parameter, DescribeElasticIps returns a description of the specified Elastic IP
+	// addresses. Otherwise, it returns a description of every Elastic IP address.
 	Ips []string
 
 	// A stack ID. If you include this parameter, DescribeElasticIps returns a
@@ -52,10 +52,10 @@ type DescribeElasticIpsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeElasticIps  request.
+// Contains the response to a DescribeElasticIps request.
 type DescribeElasticIpsOutput struct {
 
-	// An ElasticIps  object that describes the specified Elastic IP addresses.
+	// An ElasticIps object that describes the specified Elastic IP addresses.
 	ElasticIps []types.ElasticIp
 
 	// Metadata pertaining to the operation's result.

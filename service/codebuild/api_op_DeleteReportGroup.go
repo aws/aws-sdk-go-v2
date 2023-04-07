@@ -34,7 +34,7 @@ type DeleteReportGroupInput struct {
 	// This member is required.
 	Arn *string
 
-	// If true, deletes any reports that belong to a report group before deleting the
+	// If true , deletes any reports that belong to a report group before deleting the
 	// report group. If false , you must delete any reports in the report group. Use
 	// ListReportsForReportGroup (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html)
 	// to get the reports in a report group. Use DeleteReport (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html)

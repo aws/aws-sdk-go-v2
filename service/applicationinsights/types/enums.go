@@ -92,9 +92,9 @@ const (
 	FeedbackKeyInsightsFeedback FeedbackKey = "INSIGHTS_FEEDBACK"
 )
 
-// Values returns all known values for FeedbackKey. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FeedbackKey. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FeedbackKey) Values() []FeedbackKey {
 	return []FeedbackKey{
 		"INSIGHTS_FEEDBACK",
@@ -243,8 +243,8 @@ const (
 	TierActiveDirectory                    Tier = "ACTIVE_DIRECTORY"
 )
 
-// Values returns all known values for Tier. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Tier. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Tier) Values() []Tier {
 	return []Tier{

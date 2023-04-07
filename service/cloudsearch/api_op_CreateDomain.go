@@ -42,7 +42,7 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a CreateDomainRequest. Contains the status of a newly created
+// The result of a CreateDomainRequest . Contains the status of a newly created
 // domain.
 type CreateDomainOutput struct {
 

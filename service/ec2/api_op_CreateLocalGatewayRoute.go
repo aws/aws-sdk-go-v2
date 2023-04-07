@@ -37,12 +37,12 @@ type CreateLocalGatewayRouteInput struct {
 	// This member is required.
 	LocalGatewayRouteTableId *string
 
-	// The CIDR range used for destination matches. Routing decisions are based on
-	// the most specific match.
+	// The CIDR range used for destination matches. Routing decisions are based on the
+	// most specific match.
 	DestinationCidrBlock *string
 
-	// The ID of the prefix list. Use a prefix list in place of DestinationCidrBlock.
-	// You cannot use DestinationPrefixListId  and DestinationCidrBlock in the same
+	// The ID of the prefix list. Use a prefix list in place of DestinationCidrBlock .
+	// You cannot use DestinationPrefixListId and DestinationCidrBlock in the same
 	// request.
 	DestinationPrefixListId *string
 

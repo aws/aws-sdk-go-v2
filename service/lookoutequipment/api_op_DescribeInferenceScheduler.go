@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Specifies information about the inference scheduler being used, including
-// name, model, status, and associated metadata
+// Specifies information about the inference scheduler being used, including name,
+// model, status, and associated metadata
 func (c *Client) DescribeInferenceScheduler(ctx context.Context, params *DescribeInferenceSchedulerInput, optFns ...func(*Options)) (*DescribeInferenceSchedulerOutput, error) {
 	if params == nil {
 		params = &DescribeInferenceSchedulerInput{}
@@ -80,8 +80,8 @@ type DescribeInferenceSchedulerOutput struct {
 	// Anomalous (anomalous events found) or Normal (no anomalous events found).
 	LatestInferenceResult types.LatestInferenceResult
 
-	// The Amazon Resource Name (ARN) of the ML model of the inference scheduler
-	// being described.
+	// The Amazon Resource Name (ARN) of the ML model of the inference scheduler being
+	// described.
 	ModelArn *string
 
 	// The name of the ML model of the inference scheduler being described.
@@ -91,15 +91,14 @@ type DescribeInferenceSchedulerOutput struct {
 	// source for the inference scheduler being described.
 	RoleArn *string
 
-	// Provides the identifier of the KMS key used to encrypt inference scheduler
-	// data by Amazon Lookout for Equipment.
+	// Provides the identifier of the KMS key used to encrypt inference scheduler data
+	// by Amazon Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
 	// Indicates the status of the inference scheduler.
 	Status types.InferenceSchedulerStatus
 
-	// Specifies the time at which the inference scheduler was last updated, if it
-	// was.
+	// Specifies the time at which the inference scheduler was last updated, if it was.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

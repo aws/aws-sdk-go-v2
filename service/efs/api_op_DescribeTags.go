@@ -15,10 +15,10 @@ import (
 // DEPRECATED - The DescribeTags action is deprecated and not maintained. To view
 // tags associated with EFS resources, use the ListTagsForResource API action.
 // Returns the tags associated with a file system. The order of tags returned in
-// the response of one DescribeTags call and the order of tags returned across
-// the responses of a multiple-call iteration (when using pagination) is
-// unspecified. This operation requires permissions for the
-// elasticfilesystem:DescribeTags action.
+// the response of one DescribeTags call and the order of tags returned across the
+// responses of a multiple-call iteration (when using pagination) is unspecified.
+// This operation requires permissions for the elasticfilesystem:DescribeTags
+// action.
 //
 // Deprecated: Use ListTagsForResource.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
@@ -59,18 +59,17 @@ type DescribeTagsInput struct {
 
 type DescribeTagsOutput struct {
 
-	// Returns tags associated with the file system as an array of Tag  objects.
+	// Returns tags associated with the file system as an array of Tag objects.
 	//
 	// This member is required.
 	Tags []types.Tag
 
-	// If the request included a Marker, the response returns that value in this
-	// field.
+	// If the request included a Marker , the response returns that value in this field.
 	Marker *string
 
 	// If a value is present, there are more tags to return. In a subsequent request,
-	// you can provide the value of NextMarker  as the value of the Marker parameter
-	// in your next request to retrieve the next set of tags.
+	// you can provide the value of NextMarker as the value of the Marker parameter in
+	// your next request to retrieve the next set of tags.
 	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
@@ -157,8 +156,8 @@ type DescribeTagsPaginatorOptions struct {
 	// tags.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

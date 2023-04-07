@@ -64,8 +64,7 @@ type CreateVerifiedAccessTrustProviderInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The OpenID Connect details for an oidc-type, user-identity based trust
-	// provider.
+	// The OpenID Connect details for an oidc -type, user-identity based trust provider.
 	OidcOptions *types.CreateVerifiedAccessTrustProviderOidcOptions
 
 	// The tags to assign to the Amazon Web Services Verified Access trust provider.

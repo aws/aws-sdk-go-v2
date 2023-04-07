@@ -43,9 +43,9 @@ type DeleteAddonInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// Specifying this option preserves the add-on software on your cluster but
-	// Amazon EKS stops managing any settings for the add-on. If an IAM account is
-	// associated with the add-on, it isn't removed.
+	// Specifying this option preserves the add-on software on your cluster but Amazon
+	// EKS stops managing any settings for the add-on. If an IAM account is associated
+	// with the add-on, it isn't removed.
 	Preserve bool
 
 	noSmithyDocumentSerde

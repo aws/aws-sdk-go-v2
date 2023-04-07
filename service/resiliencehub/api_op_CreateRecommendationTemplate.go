@@ -31,7 +31,7 @@ func (c *Client) CreateRecommendationTemplate(ctx context.Context, params *Creat
 type CreateRecommendationTemplateInput struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id. For
+	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
@@ -59,8 +59,8 @@ type CreateRecommendationTemplateInput struct {
 	RecommendationIds []string
 
 	// An array of strings that specify the recommendation template type or types.
-	// Alarm The template is an AlarmRecommendation  template. Sop The template is a
-	// SopRecommendation template. Test The template is a TestRecommendation  template.
+	// Alarm The template is an AlarmRecommendation template. Sop The template is a
+	// SopRecommendation template. Test The template is a TestRecommendation template.
 	RecommendationTypes []types.RenderRecommendationType
 
 	// The tags assigned to the resource. A tag is a label that you assign to an

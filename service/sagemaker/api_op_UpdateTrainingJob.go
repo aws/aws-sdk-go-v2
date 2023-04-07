@@ -43,7 +43,7 @@ type UpdateTrainingJobInput struct {
 	// system and framework metrics.
 	ProfilerRuleConfigurations []types.ProfilerRuleConfiguration
 
-	// The training job ResourceConfig  to update warm pool retention length.
+	// The training job ResourceConfig to update warm pool retention length.
 	ResourceConfig *types.ResourceConfigForUpdate
 
 	noSmithyDocumentSerde

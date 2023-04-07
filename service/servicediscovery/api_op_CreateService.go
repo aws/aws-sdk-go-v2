@@ -14,7 +14,8 @@ import (
 
 // Creates a service. This action defines the configuration for the following
 // entities:
-//   - For public and private DNS namespaces, one of the following combinations of DNS records in Amazon Route 53:
+//   - For public and private DNS namespaces, one of the following combinations of
+//     DNS records in Amazon Route 53:
 //   - A
 //   - AAAA
 //   - A and AAAA
@@ -22,12 +23,11 @@ import (
 //   - CNAME
 //   - Optionally, a health check
 //
-// After you create the service, you can submit
-// a RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+// After you create the service, you can submit a RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
 // request, and Cloud Map uses the values in the configuration to create the
 // specified entities. For the current quota on the number of instances that you
-// can register using the same namespace and using the same service, see Cloud
-// Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// can register using the same namespace and using the same service, see Cloud Map
+// quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
 // in the Cloud Map Developer Guide.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
@@ -48,48 +48,46 @@ type CreateServiceInput struct {
 
 	// The name that you want to assign to the service. Do not include sensitive
 	// information in the name if the namespace is discoverable by public DNS queries.
-	// If you want Cloud Map to create an SRV record when you register an instance
-	// and you're using a system that requires a specific SRV  format, such as HAProxy (http://www.haproxy.org/)
+	// If you want Cloud Map to create an SRV record when you register an instance and
+	// you're using a system that requires a specific SRV format, such as HAProxy (http://www.haproxy.org/)
 	// , specify the following for Name :
-	//     - Start the name with an underscore (_), such as _exampleservice .
-	//     - End the name with ._protocol, such as ._tcp .
-	// When you register an
-	// instance, Cloud Map creates an SRV record and assigns a name to the record by
-	// concatenating the service name and the namespace name (for example,
-	// _exampleservice._tcp.example.com). For services that are accessible by DNS
-	// queries, you can't create multiple services with names that differ only by case
-	// (such as EXAMPLE and example). Otherwise, these services have the same DNS name
-	// and can't be distinguished. However, if you use a namespace that's only
+	//   - Start the name with an underscore (_), such as _exampleservice .
+	//   - End the name with ._protocol, such as ._tcp .
+	// When you register an instance, Cloud Map creates an SRV record and assigns a
+	// name to the record by concatenating the service name and the namespace name (for
+	// example, _exampleservice._tcp.example.com ). For services that are accessible by
+	// DNS queries, you can't create multiple services with names that differ only by
+	// case (such as EXAMPLE and example). Otherwise, these services have the same DNS
+	// name and can't be distinguished. However, if you use a namespace that's only
 	// accessible by API calls, then you can create services that with names that
 	// differ only by case.
 	//
 	// This member is required.
 	Name *string
 
-	// A unique string that identifies the request and that allows failed
-	// CreateServicerequests to be retried without the risk of running the operation
-	// twice. CreatorRequestId can be any unique string (for example, a
-	// date/timestamp).
+	// A unique string that identifies the request and that allows failed CreateService
+	// requests to be retried without the risk of running the operation twice.
+	// CreatorRequestId can be any unique string (for example, a date/timestamp).
 	CreatorRequestId *string
 
 	// A description for the service.
 	Description *string
 
-	// A complex type that contains information about the Amazon Route 53 records
-	// that you want Cloud Map to create when you register an instance.
+	// A complex type that contains information about the Amazon Route 53 records that
+	// you want Cloud Map to create when you register an instance.
 	DnsConfig *types.DnsConfig
 
 	// Public DNS and HTTP namespaces only. A complex type that contains settings for
 	// an optional Route 53 health check. If you specify settings for a health check,
 	// Cloud Map associates the health check with all the Route 53 DNS records that you
-	// specify in DnsConfig. If you specify a health check configuration, you can
-	// specify either HealthCheckCustomConfig  or HealthCheckConfig but not both. For
+	// specify in DnsConfig . If you specify a health check configuration, you can
+	// specify either HealthCheckCustomConfig or HealthCheckConfig but not both. For
 	// information about the charges for health checks, see Cloud Map Pricing (http://aws.amazon.com/cloud-map/pricing/)
 	// .
 	HealthCheckConfig *types.HealthCheckConfig
 
-	// A complex type that contains information about an optional custom health
-	// check. If you specify a health check configuration, you can specify either
+	// A complex type that contains information about an optional custom health check.
+	// If you specify a health check configuration, you can specify either
 	// HealthCheckCustomConfig or HealthCheckConfig but not both. You can't add,
 	// update, or delete a HealthCheckCustomConfig configuration from an existing
 	// service.

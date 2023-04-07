@@ -30,20 +30,22 @@ func (c *Client) ListBuildBatches(ctx context.Context, params *ListBuildBatchesI
 
 type ListBuildBatchesInput struct {
 
-	// A BuildBatchFilter  object that specifies the filters for the search.
+	// A BuildBatchFilter object that specifies the filters for the search.
 	Filter *types.BuildBatchFilter
 
 	// The maximum number of results to return.
 	MaxResults *int32
 
-	// The nextToken  value returned from a previous call to ListBuildBatches. This
+	// The nextToken value returned from a previous call to ListBuildBatches . This
 	// specifies the next item to return. To return the beginning of the list, exclude
 	// this parameter.
 	NextToken *string
 
 	// Specifies the sort order of the returned items. Valid values include:
-	//     - ASCENDING : List the batch build identifiers in ascending order by identifier.
-	//     - DESCENDING : List the batch build identifiers in descending order by identifier.
+	//   - ASCENDING : List the batch build identifiers in ascending order by
+	//   identifier.
+	//   - DESCENDING : List the batch build identifiers in descending order by
+	//   identifier.
 	SortOrder types.SortOrderType
 
 	noSmithyDocumentSerde
@@ -55,7 +57,7 @@ type ListBuildBatchesOutput struct {
 	Ids []string
 
 	// If there are more items to return, this contains a token that is passed to a
-	// subsequent call to ListBuildBatches  to retrieve the next set of items.
+	// subsequent call to ListBuildBatches to retrieve the next set of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +139,8 @@ type ListBuildBatchesPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

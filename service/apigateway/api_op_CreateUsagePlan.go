@@ -48,8 +48,8 @@ type CreateUsagePlanInput struct {
 	Quota *types.QuotaSettings
 
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
-	// tag key can be up to 128 characters and must not start with aws:. The tag
-	// value can be up to 256 characters.
+	// tag key can be up to 128 characters and must not start with aws: . The tag value
+	// can be up to 256 characters.
 	Tags map[string]string
 
 	// The throttling limits of the usage plan.

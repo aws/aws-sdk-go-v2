@@ -14,7 +14,7 @@ import (
 // with a cache behavior. First, update your distributions to remove the function
 // association from all cache behaviors, then delete the function. To delete a
 // function, you must provide the function's name and version ( ETag value). To
-// get these values, you can use ListFunctions  and DescribeFunction .
+// get these values, you can use ListFunctions and DescribeFunction .
 func (c *Client) DeleteFunction(ctx context.Context, params *DeleteFunctionInput, optFns ...func(*Options)) (*DeleteFunctionOutput, error) {
 	if params == nil {
 		params = &DeleteFunctionInput{}

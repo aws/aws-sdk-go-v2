@@ -40,7 +40,7 @@ func (c *Client) CreateFlowLogs(ctx context.Context, params *CreateFlowLogsInput
 
 type CreateFlowLogsInput struct {
 
-	// The IDs of the resources to monitor. For example, if the resource type is VPC,
+	// The IDs of the resources to monitor. For example, if the resource type is VPC ,
 	// specify the IDs of the VPCs. Constraints: Maximum of 25 for transit gateway
 	// resource types. Maximum of 1000 for the other resource types.
 	//
@@ -52,8 +52,8 @@ type CreateFlowLogsInput struct {
 	// This member is required.
 	ResourceType types.FlowLogsResourceType
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 
@@ -63,7 +63,7 @@ type CreateFlowLogsInput struct {
 
 	// The ARN of the IAM role that allows Amazon EC2 to publish flow logs to a
 	// CloudWatch Logs log group in your account. This parameter is required if the
-	// destination type is cloud-watch-logs  and unsupported otherwise.
+	// destination type is cloud-watch-logs and unsupported otherwise.
 	DeliverLogsPermissionArn *string
 
 	// The destination options.
@@ -75,11 +75,18 @@ type CreateFlowLogsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The destination for the flow log data. The meaning of this parameter depends
-	// on the destination type.
-	//     - If the destination type is cloud-watch-logs , specify the ARN of a CloudWatch Logs log group. For example: arn:aws:logs:region:account_id:log-group:my_group Alternatively, use the LogGroupName parameter.
-	//     - If the destination type is s3 , specify the ARN of an S3 bucket. For example: arn:aws:s3:::my_bucket/my_subfolder/ The subfolder is optional. Note that you can't use AWSLogs as a subfolder name.
-	//     - If the destination type is kinesis-data-firehose , specify the ARN of a Kinesis Data Firehose delivery stream. For example: arn:aws:firehose:region:account_id:deliverystream:my_stream
+	// The destination for the flow log data. The meaning of this parameter depends on
+	// the destination type.
+	//   - If the destination type is cloud-watch-logs , specify the ARN of a
+	//   CloudWatch Logs log group. For example:
+	//   arn:aws:logs:region:account_id:log-group:my_group Alternatively, use the
+	//   LogGroupName parameter.
+	//   - If the destination type is s3 , specify the ARN of an S3 bucket. For
+	//   example: arn:aws:s3:::my_bucket/my_subfolder/ The subfolder is optional. Note
+	//   that you can't use AWSLogs as a subfolder name.
+	//   - If the destination type is kinesis-data-firehose , specify the ARN of a
+	//   Kinesis Data Firehose delivery stream. For example:
+	//   arn:aws:firehose:region:account_id:deliverystream:my_stream
 	LogDestination *string
 
 	// The type of destination for the flow log data. Default: cloud-watch-logs
@@ -92,7 +99,7 @@ type CreateFlowLogsInput struct {
 	// records (https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records)
 	// in the Amazon VPC User Guide or Transit Gateway Flow Log records (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records)
 	// in the Amazon Web Services Transit Gateway Guide. Specify the fields using the
-	// ${field-id}format, separated by spaces. For the CLI, surround this parameter
+	// ${field-id} format, separated by spaces. For the CLI, surround this parameter
 	// value with single quotes on Linux or double quotes on Windows.
 	LogFormat *string
 
@@ -123,8 +130,8 @@ type CreateFlowLogsInput struct {
 
 type CreateFlowLogsOutput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientToken *string
 
 	// The IDs of the flow logs.

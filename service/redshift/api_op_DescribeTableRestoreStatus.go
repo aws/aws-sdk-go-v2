@@ -13,11 +13,11 @@ import (
 )
 
 // Lists the status of one or more table restore requests made using the
-// RestoreTableFromClusterSnapshotAPI action. If you don't specify a value for
-// the TableRestoreRequestId  parameter, then DescribeTableRestoreStatus returns
-// the status of all table restore requests ordered by the date and time of the
-// request in ascending order. Otherwise DescribeTableRestoreStatus returns the
-// status of the table specified by TableRestoreRequestId .
+// RestoreTableFromClusterSnapshot API action. If you don't specify a value for the
+// TableRestoreRequestId parameter, then DescribeTableRestoreStatus returns the
+// status of all table restore requests ordered by the date and time of the request
+// in ascending order. Otherwise DescribeTableRestoreStatus returns the status of
+// the table specified by TableRestoreRequestId .
 func (c *Client) DescribeTableRestoreStatus(ctx context.Context, params *DescribeTableRestoreStatusInput, optFns ...func(*Options)) (*DescribeTableRestoreStatusOutput, error) {
 	if params == nil {
 		params = &DescribeTableRestoreStatusInput{}
@@ -40,17 +40,17 @@ type DescribeTableRestoreStatusInput struct {
 
 	// An optional pagination token provided by a previous DescribeTableRestoreStatus
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by the MaxRecords  parameter.
+	// beyond the marker, up to the value specified by the MaxRecords parameter.
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
 	MaxRecords *int32
 
 	// The identifier of the table restore request to return status for. If you don't
-	// specify a TableRestoreRequestId  value, then DescribeTableRestoreStatus
-	// returns the status of all in-progress table restore requests.
+	// specify a TableRestoreRequestId value, then DescribeTableRestoreStatus returns
+	// the status of all in-progress table restore requests.
 	TableRestoreRequestId *string
 
 	noSmithyDocumentSerde
@@ -142,13 +142,13 @@ var _ DescribeTableRestoreStatusAPIClient = (*Client)(nil)
 // DescribeTableRestoreStatusPaginatorOptions is the paginator options for
 // DescribeTableRestoreStatus
 type DescribeTableRestoreStatusPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

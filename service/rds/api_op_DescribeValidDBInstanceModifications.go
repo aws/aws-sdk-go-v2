@@ -43,7 +43,7 @@ type DescribeValidDBInstanceModificationsOutput struct {
 
 	// Information about valid modifications that you can make to your DB instance.
 	// Contains the result of a successful call to the
-	// DescribeValidDBInstanceModificationsaction. You can use this information when
+	// DescribeValidDBInstanceModifications action. You can use this information when
 	// you call ModifyDBInstance .
 	ValidDBInstanceModificationsMessage *types.ValidDBInstanceModificationsMessage
 

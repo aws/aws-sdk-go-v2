@@ -30,7 +30,7 @@ func (c *Client) UpdateRoute(ctx context.Context, params *UpdateRouteInput, optF
 
 type UpdateRouteInput struct {
 
-	// If set to ACTIVE, traffic is forwarded to this route’s service after the route
+	// If set to ACTIVE , traffic is forwarded to this route’s service after the route
 	// is updated.
 	//
 	// This member is required.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a GraphqlApi  object.
+// Creates a GraphqlApi object.
 func (c *Client) CreateGraphqlApi(ctx context.Context, params *CreateGraphqlApiInput, optFns ...func(*Options)) (*CreateGraphqlApiOutput, error) {
 	if params == nil {
 		params = &CreateGraphqlApiInput{}
@@ -40,7 +40,7 @@ type CreateGraphqlApiInput struct {
 	// This member is required.
 	Name *string
 
-	// A list of additional authentication providers for the GraphqlApi  API.
+	// A list of additional authentication providers for the GraphqlApi API.
 	AdditionalAuthenticationProviders []types.AdditionalAuthenticationProvider
 
 	// Configuration for Lambda function authorization.
@@ -52,7 +52,7 @@ type CreateGraphqlApiInput struct {
 	// The OIDC configuration.
 	OpenIDConnectConfig *types.OpenIDConnectConfig
 
-	// A TagMap  object.
+	// A TagMap object.
 	Tags map[string]string
 
 	// The Amazon Cognito user pool configuration.

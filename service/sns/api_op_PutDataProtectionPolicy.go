@@ -30,7 +30,7 @@ func (c *Client) PutDataProtectionPolicy(ctx context.Context, params *PutDataPro
 type PutDataProtectionPolicyInput struct {
 
 	// The JSON serialization of the topic's DataProtectionPolicy . The
-	// DataProtectionPolicymust be in JSON string format. Length Constraints: Maximum
+	// DataProtectionPolicy must be in JSON string format. Length Constraints: Maximum
 	// length of 30,720.
 	//
 	// This member is required.

@@ -41,14 +41,12 @@ type UpdateMediaInsightsPipelineConfigurationInput struct {
 	// This member is required.
 	Identifier *string
 
-	// The ARN of the role used by the service to access Amazon Web Services
-	// resources.
+	// The ARN of the role used by the service to access Amazon Web Services resources.
 	//
 	// This member is required.
 	ResourceAccessRoleArn *string
 
-	// The configuration settings for real-time alerts for the media insights
-	// pipeline.
+	// The configuration settings for real-time alerts for the media insights pipeline.
 	RealTimeAlertConfiguration *types.RealTimeAlertConfiguration
 
 	noSmithyDocumentSerde

@@ -14,7 +14,7 @@ import (
 
 // This operation retrieves the notification-configuration subresource of the
 // specified vault. For information about setting a notification configuration on a
-// vault, see SetVaultNotifications. If a notification configuration for a vault
+// vault, see SetVaultNotifications . If a notification configuration for a vault
 // is not set, the operation returns a 404 Not Found error. For more information
 // about vault notifications, see Configuring Vault Notifications in Amazon S3
 // Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
@@ -42,12 +42,12 @@ func (c *Client) GetVaultNotifications(ctx context.Context, params *GetVaultNoti
 	return out, nil
 }
 
-// Provides options for retrieving the notification configuration set on an
-// Amazon Glacier vault.
+// Provides options for retrieving the notification configuration set on an Amazon
+// Glacier vault.
 type GetVaultNotificationsInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
 	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.

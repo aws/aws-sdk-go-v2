@@ -50,15 +50,15 @@ type SetPermissionInput struct {
 	// The user is allowed to use sudo to elevate privileges.
 	AllowSudo *bool
 
-	// The user's permission level, which must be set to one of the following
-	// strings. You cannot set your own permissions level.
-	//     - deny
-	//     - show
-	//     - deploy
-	//     - manage
-	//     - iam_only
-	// For more information about the permissions associated with these
-	// levels, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+	// The user's permission level, which must be set to one of the following strings.
+	// You cannot set your own permissions level.
+	//   - deny
+	//   - show
+	//   - deploy
+	//   - manage
+	//   - iam_only
+	// For more information about the permissions associated with these levels, see
+	// Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
 	// .
 	Level *string
 

@@ -44,7 +44,7 @@ type DescribeElasticLoadBalancersInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeElasticLoadBalancers  request.
+// Contains the response to a DescribeElasticLoadBalancers request.
 type DescribeElasticLoadBalancersOutput struct {
 
 	// A list of ElasticLoadBalancer objects that describe the specified Elastic Load

@@ -39,16 +39,16 @@ type DeleteApplicationVpcConfigurationInput struct {
 	VpcConfigurationId *string
 
 	// A value you use to implement strong concurrency for application updates. You
-	// must provide the CurrentApplicationVersionId  or the ConditionalToken. You get
-	// the application's current ConditionalToken  using DescribeApplication. For
-	// better concurrency support, use the ConditionalToken  parameter instead of
+	// must provide the CurrentApplicationVersionId or the ConditionalToken . You get
+	// the application's current ConditionalToken using DescribeApplication . For
+	// better concurrency support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId .
 	ConditionalToken *string
 
 	// The current application version ID. You must provide the
-	// CurrentApplicationVersionId or the ConditionalToken. You can retrieve the
-	// application version ID using DescribeApplication. For better concurrency
-	// support, use the ConditionalToken  parameter instead of
+	// CurrentApplicationVersionId or the ConditionalToken . You can retrieve the
+	// application version ID using DescribeApplication . For better concurrency
+	// support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId .
 	CurrentApplicationVersionId *int64
 

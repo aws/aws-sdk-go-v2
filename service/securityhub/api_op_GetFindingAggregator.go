@@ -28,8 +28,8 @@ func (c *Client) GetFindingAggregator(ctx context.Context, params *GetFindingAgg
 
 type GetFindingAggregatorInput struct {
 
-	// The ARN of the finding aggregator to return details for. To obtain the ARN,
-	// use ListFindingAggregators .
+	// The ARN of the finding aggregator to return details for. To obtain the ARN, use
+	// ListFindingAggregators .
 	//
 	// This member is required.
 	FindingAggregatorArn *string

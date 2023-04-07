@@ -39,7 +39,7 @@ type GetHostedZoneInput struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contain the response to a GetHostedZone  request.
+// A complex type that contain the response to a GetHostedZone request.
 type GetHostedZoneOutput struct {
 
 	// A complex type that contains general information about the specified hosted

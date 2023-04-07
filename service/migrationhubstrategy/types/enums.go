@@ -33,9 +33,9 @@ const (
 	AntipatternReportStatusSuccess    AntipatternReportStatus = "SUCCESS"
 )
 
-// Values returns all known values for AntipatternReportStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AntipatternReportStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AntipatternReportStatus) Values() []AntipatternReportStatus {
 	return []AntipatternReportStatus{
 		"FAILED",
@@ -164,8 +164,8 @@ const (
 	AppUnitErrorCategoryOtherError        AppUnitErrorCategory = "OTHER_ERROR"
 )
 
-// Values returns all known values for AppUnitErrorCategory. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AppUnitErrorCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AppUnitErrorCategory) Values() []AppUnitErrorCategory {
 	return []AppUnitErrorCategory{
@@ -208,9 +208,9 @@ const (
 	AuthTypeCert AuthType = "CERT"
 )
 
-// Values returns all known values for AuthType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AuthType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (AuthType) Values() []AuthType {
 	return []AuthType{
 		"NTLM",
@@ -228,10 +228,9 @@ const (
 	AwsManagedTargetDestinationAwsFargate          AwsManagedTargetDestination = "AWS Fargate"
 )
 
-// Values returns all known values for AwsManagedTargetDestination. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for AwsManagedTargetDestination. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AwsManagedTargetDestination) Values() []AwsManagedTargetDestination {
 	return []AwsManagedTargetDestination{
 		"None specified",
@@ -423,8 +422,8 @@ const (
 	ImportFileTaskStatusDeleteSuccess        ImportFileTaskStatus = "DeleteSuccess"
 )
 
-// Values returns all known values for ImportFileTaskStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ImportFileTaskStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ImportFileTaskStatus) Values() []ImportFileTaskStatus {
 	return []ImportFileTaskStatus{
@@ -635,9 +634,9 @@ const (
 	RunTimeAssessmentStatusDcPartialSuccess RunTimeAssessmentStatus = "dataCollectionTaskPartialSuccess"
 )
 
-// Values returns all known values for RunTimeAssessmentStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RunTimeAssessmentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RunTimeAssessmentStatus) Values() []RunTimeAssessmentStatus {
 	return []RunTimeAssessmentStatus{
 		"dataCollectionTaskToBeScheduled",
@@ -660,10 +659,9 @@ const (
 	SelfManageTargetDestinationAmazonElasticKubernetesService SelfManageTargetDestination = "Amazon Elastic Kubernetes Service (EKS)"
 )
 
-// Values returns all known values for SelfManageTargetDestination. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for SelfManageTargetDestination. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SelfManageTargetDestination) Values() []SelfManageTargetDestination {
 	return []SelfManageTargetDestination{
 		"None specified",
@@ -758,9 +756,9 @@ const (
 	SeverityLow    Severity = "LOW"
 )
 
-// Values returns all known values for Severity. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Severity. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Severity) Values() []Severity {
 	return []Severity{
 		"HIGH",
@@ -850,9 +848,9 @@ const (
 	StrategyRepurchase Strategy = "Repurchase"
 )
 
-// Values returns all known values for Strategy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Strategy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Strategy) Values() []Strategy {
 	return []Strategy{
 		"Rehost",
@@ -903,8 +901,8 @@ const (
 	TargetDatabaseEngineMongoDb            TargetDatabaseEngine = "MongoDB"
 )
 
-// Values returns all known values for TargetDatabaseEngine. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TargetDatabaseEngine. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TargetDatabaseEngine) Values() []TargetDatabaseEngine {
 	return []TargetDatabaseEngine{

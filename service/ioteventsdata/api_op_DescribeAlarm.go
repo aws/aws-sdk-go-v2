@@ -34,8 +34,8 @@ type DescribeAlarmInput struct {
 	// This member is required.
 	AlarmModelName *string
 
-	// The value of the key used as a filter to select only the alarms associated
-	// with the key (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key)
+	// The value of the key used as a filter to select only the alarms associated with
+	// the key (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key)
 	// .
 	KeyValue *string
 

@@ -11,7 +11,7 @@ import (
 )
 
 // Removes the specified tags from the specified Amazon Transcribe resource. If
-// you include UntagResource  in your request, you must also include ResourceArn
+// you include UntagResource in your request, you must also include ResourceArn
 // and TagKeys .
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
@@ -32,10 +32,9 @@ type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to
 	// remove tags from. ARNs have the format
-	// arn:partition:service:region:account-id:resource-type/resource-id. For
-	// example,
+	// arn:partition:service:region:account-id:resource-type/resource-id . For example,
 	// arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name
-	// . Valid values for resource-type  are: transcription-job ,
+	// . Valid values for resource-type are: transcription-job ,
 	// medical-transcription-job , vocabulary , medical-vocabulary , vocabulary-filter
 	// , and language-model .
 	//

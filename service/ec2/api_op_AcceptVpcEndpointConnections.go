@@ -50,8 +50,7 @@ type AcceptVpcEndpointConnectionsInput struct {
 
 type AcceptVpcEndpointConnectionsOutput struct {
 
-	// Information about the interface endpoints that were not accepted, if
-	// applicable.
+	// Information about the interface endpoints that were not accepted, if applicable.
 	Unsuccessful []types.UnsuccessfulItem
 
 	// Metadata pertaining to the operation's result.

@@ -31,10 +31,10 @@ func (c *Client) ListWorkgroups(ctx context.Context, params *ListWorkgroupsInput
 type ListWorkgroupsInput struct {
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken  to display the next page of results.
+	// You can use nextToken to display the next page of results.
 	MaxResults *int32
 
-	// If your initial ListWorkgroups operation returns a nextToken, you can include
+	// If your initial ListWorkgroups operation returns a nextToken , you can include
 	// the returned nextToken in following ListNamespaces operations, which returns
 	// results in the next page.
 	NextToken *string
@@ -49,9 +49,9 @@ type ListWorkgroupsOutput struct {
 	// This member is required.
 	Workgroups []types.Workgroup
 
-	// If nextToken  is returned, there are more results available. The value of
-	// nextTokenis a unique pagination token for each page. To retrieve the next
-	// page, make the call again using the returned token.
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. To retrieve the next page,
+	// make the call again using the returned token.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -131,11 +131,11 @@ var _ ListWorkgroupsAPIClient = (*Client)(nil)
 // ListWorkgroupsPaginatorOptions is the paginator options for ListWorkgroups
 type ListWorkgroupsPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken  to display the next page of results.
+	// You can use nextToken to display the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

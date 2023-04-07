@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Submits profiling data to an aggregated profile of a profiling group. To get
-// an aggregated profile that is created with this profiling data, use GetProfile (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_GetProfile.html)
+// Submits profiling data to an aggregated profile of a profiling group. To get an
+// aggregated profile that is created with this profiling data, use GetProfile (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_GetProfile.html)
 // .
 func (c *Client) PostAgentProfile(ctx context.Context, params *PostAgentProfileInput, optFns ...func(*Options)) (*PostAgentProfileOutput, error) {
 	if params == nil {
@@ -37,11 +37,12 @@ type PostAgentProfileInput struct {
 	// This member is required.
 	AgentProfile []byte
 
-	// The format of the submitted profiling data. The format maps to the Accept  and
-	// Content-Typeheaders of the HTTP request. You can specify one of the following:
+	// The format of the submitted profiling data. The format maps to the Accept and
+	// Content-Type headers of the HTTP request. You can specify one of the following:
 	// or the default .
-	//     - application/json — standard JSON format
-	//     - application/x-amzn-ion — the Amazon Ion data format. For more information, see Amazon Ion (http://amzn.github.io/ion-docs/) .
+	//   - application/json — standard JSON format
+	//   - application/x-amzn-ion — the Amazon Ion data format. For more information,
+	//   see Amazon Ion (http://amzn.github.io/ion-docs/) .
 	//
 	// This member is required.
 	ContentType *string

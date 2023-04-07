@@ -41,7 +41,7 @@ type ListPipelinesInput struct {
 
 	// The starting point for the results to be returned. For the first call, this
 	// value should be empty. As long as there are more results, continue to call
-	// ListPipelineswith the marker value from the previous call to retrieve the next
+	// ListPipelines with the marker value from the previous call to retrieve the next
 	// set of results.
 	Marker *string
 
@@ -52,7 +52,7 @@ type ListPipelinesInput struct {
 type ListPipelinesOutput struct {
 
 	// The pipeline identifiers. If you require additional information about the
-	// pipelines, you can use these identifiers to call DescribePipelines  and
+	// pipelines, you can use these identifiers to call DescribePipelines and
 	// GetPipelineDefinition .
 	//
 	// This member is required.
@@ -63,8 +63,8 @@ type ListPipelinesOutput struct {
 	HasMoreResults bool
 
 	// The starting point for the next page of results. To view the next page of
-	// results, call ListPipelinesOutput again with this marker value. If the value
-	// is null, there are no more results.
+	// results, call ListPipelinesOutput again with this marker value. If the value is
+	// null, there are no more results.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +142,8 @@ var _ ListPipelinesAPIClient = (*Client)(nil)
 
 // ListPipelinesPaginatorOptions is the paginator options for ListPipelines
 type ListPipelinesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

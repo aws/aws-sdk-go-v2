@@ -37,8 +37,8 @@ type DescribeTableDataImportJobInput struct {
 	// This member is required.
 	JobId *string
 
-	// The ID of the table into which data was imported. If a table with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the table into which data was imported. If a table with the specified
+	// id could not be found, this API throws ResourceNotFoundException.
 	//
 	// This member is required.
 	TableId *string

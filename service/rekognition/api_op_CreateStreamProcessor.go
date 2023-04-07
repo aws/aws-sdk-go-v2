@@ -16,15 +16,28 @@ import (
 // Video is a consumer of live video from Amazon Kinesis Video Streams. There are
 // two different settings for stream processors in Amazon Rekognition: detecting
 // faces and detecting labels.
-//   - If you are creating a stream processor for detecting faces, you provide as input a Kinesis video stream ( Input ) and a Kinesis data stream ( Output ) stream. You also specify the face recognition criteria in Settings . For example, the collection containing faces that you want to recognize. After you have finished analyzing a streaming video, use StopStreamProcessor to stop processing.
-//   - If you are creating a stream processor to detect labels, you provide as input a Kinesis video stream ( Input ), Amazon S3 bucket information ( Output ), and an Amazon SNS topic ARN ( NotificationChannel ). You can also provide a KMS key ID to encrypt the data sent to your Amazon S3 bucket. You specify what you want to detect in ConnectedHomeSettings , such as people, packages and people, or pets, people, and packages. You can also specify where in the frame you want Amazon Rekognition to monitor with RegionsOfInterest . When you run the StartStreamProcessor operation on a label detection stream processor, you input start and stop information to determine the length of the processing time.
+//   - If you are creating a stream processor for detecting faces, you provide as
+//     input a Kinesis video stream ( Input ) and a Kinesis data stream ( Output )
+//     stream. You also specify the face recognition criteria in Settings . For
+//     example, the collection containing faces that you want to recognize. After you
+//     have finished analyzing a streaming video, use StopStreamProcessor to stop
+//     processing.
+//   - If you are creating a stream processor to detect labels, you provide as
+//     input a Kinesis video stream ( Input ), Amazon S3 bucket information ( Output
+//     ), and an Amazon SNS topic ARN ( NotificationChannel ). You can also provide a
+//     KMS key ID to encrypt the data sent to your Amazon S3 bucket. You specify what
+//     you want to detect in ConnectedHomeSettings , such as people, packages and
+//     people, or pets, people, and packages. You can also specify where in the frame
+//     you want Amazon Rekognition to monitor with RegionsOfInterest . When you run
+//     the StartStreamProcessor operation on a label detection stream processor, you
+//     input start and stop information to determine the length of the processing time.
 //
-// Use Name  to assign an identifier for the stream processor. You use Name to
+// Use Name to assign an identifier for the stream processor. You use Name to
 // manage the stream processor. For example, you can start processing the source
-// video by calling StartStreamProcessor  with the Name field. This operation
+// video by calling StartStreamProcessor with the Name field. This operation
 // requires permissions to perform the rekognition:CreateStreamProcessor action.
 // If you want to tag your stream processor, you also require permission to perform
-// the rekognition:TagResource  operation.
+// the rekognition:TagResource operation.
 func (c *Client) CreateStreamProcessor(ctx context.Context, params *CreateStreamProcessorInput, optFns ...func(*Options)) (*CreateStreamProcessorOutput, error) {
 	if params == nil {
 		params = &CreateStreamProcessorInput{}
@@ -43,7 +56,7 @@ func (c *Client) CreateStreamProcessor(ctx context.Context, params *CreateStream
 type CreateStreamProcessorInput struct {
 
 	// Kinesis video stream stream that provides the source streaming video. If you
-	// are using the AWS CLI, the parameter name is StreamProcessorInput. This is
+	// are using the AWS CLI, the parameter name is StreamProcessorInput . This is
 	// required for both face search and label detection stream processors.
 	//
 	// This member is required.
@@ -76,7 +89,7 @@ type CreateStreamProcessorInput struct {
 	RoleArn *string
 
 	// Input parameters used in a streaming video analyzed by a stream processor. You
-	// can use FaceSearch  to recognize faces in a streaming video, or you can use
+	// can use FaceSearch to recognize faces in a streaming video, or you can use
 	// ConnectedHome to detect labels.
 	//
 	// This member is required.
@@ -115,8 +128,7 @@ type CreateStreamProcessorInput struct {
 	// stream processor.
 	RegionsOfInterest []types.RegionOfInterest
 
-	// A set of tags (key-value pairs) that you want to attach to the stream
-	// processor.
+	// A set of tags (key-value pairs) that you want to attach to the stream processor.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

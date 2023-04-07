@@ -34,7 +34,7 @@ type ModifyDBInstanceInput struct {
 
 	// The DB instance identifier. This value is stored as a lowercase string.
 	// Constraints:
-	//     - Must match the identifier of an existing DBInstance.
+	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
@@ -57,32 +57,30 @@ type ModifyDBInstanceInput struct {
 
 	// A value that indicates whether the modifications in this request and any
 	// pending modifications are asynchronously applied as soon as possible, regardless
-	// of the PreferredMaintenanceWindow setting for the DB instance. By default,
-	// this parameter is disabled. If this parameter is disabled, changes to the DB
-	// instance are applied during the next maintenance window. Some parameter changes
-	// can cause an outage and are applied on the next call to RebootDBInstance, or
-	// the next failure reboot. Review the table of parameters in Modifying a DB
-	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html)
+	// of the PreferredMaintenanceWindow setting for the DB instance. By default, this
+	// parameter is disabled. If this parameter is disabled, changes to the DB instance
+	// are applied during the next maintenance window. Some parameter changes can cause
+	// an outage and are applied on the next call to RebootDBInstance , or the next
+	// failure reboot. Review the table of parameters in Modifying a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html)
 	// in the Amazon RDS User Guide to see the impact of enabling or disabling
-	// ApplyImmediatelyfor each modified parameter and to determine when the changes
+	// ApplyImmediately for each modified parameter and to determine when the changes
 	// are applied.
 	ApplyImmediately bool
 
-	// A value that indicates whether minor version upgrades are applied
-	// automatically to the DB instance during the maintenance window. An outage occurs
-	// when all the following conditions are met:
-	//     - The automatic upgrade is enabled for the maintenance window.
-	//     - A newer minor version is available.
-	//     - RDS has enabled automatic patching for the engine version.
-	// If any of the
-	// preceding conditions isn't met, RDS applies the change as soon as possible and
-	// doesn't cause an outage. For an RDS Custom DB instance, set
+	// A value that indicates whether minor version upgrades are applied automatically
+	// to the DB instance during the maintenance window. An outage occurs when all the
+	// following conditions are met:
+	//   - The automatic upgrade is enabled for the maintenance window.
+	//   - A newer minor version is available.
+	//   - RDS has enabled automatic patching for the engine version.
+	// If any of the preceding conditions isn't met, RDS applies the change as soon as
+	// possible and doesn't cause an outage. For an RDS Custom DB instance, set
 	// AutoMinorVersionUpgrade to false . Otherwise, the operation returns an error.
 	AutoMinorVersionUpgrade *bool
 
-	// The automation mode of the RDS Custom DB instance: full  or all paused . If
-	// full , the DB instance automates monitoring and instance recovery. If all
-	// paused , the instance pauses automation for the duration set by
+	// The automation mode of the RDS Custom DB instance: full or all paused . If full
+	// , the DB instance automates monitoring and instance recovery. If all paused ,
+	// the instance pauses automation for the duration set by
 	// ResumeFullAutomationModeMinutes .
 	AutomationMode types.AutomationMode
 
@@ -99,16 +97,19 @@ type ModifyDBInstanceInput struct {
 	// you change the parameter from one non-zero value to another non-zero value, the
 	// change is asynchronously applied as soon as possible. Amazon Aurora Not
 	// applicable. The retention period for automated backups is managed by the DB
-	// cluster. For more information, see ModifyDBCluster. Default: Uses existing
+	// cluster. For more information, see ModifyDBCluster . Default: Uses existing
 	// setting Constraints:
-	//     - It must be a value from 0 to 35. It can't be set to 0 if the DB instance is a source to read replicas. It can't be set to 0 for an RDS Custom for Oracle DB instance.
-	//     - It can be specified for a MySQL read replica only if the source is running MySQL 5.6 or later.
-	//     - It can be specified for a PostgreSQL read replica only if the source is running PostgreSQL 9.3.5.
+	//   - It must be a value from 0 to 35. It can't be set to 0 if the DB instance is
+	//   a source to read replicas. It can't be set to 0 for an RDS Custom for Oracle DB
+	//   instance.
+	//   - It can be specified for a MySQL read replica only if the source is running
+	//   MySQL 5.6 or later.
+	//   - It can be specified for a PostgreSQL read replica only if the source is
+	//   running PostgreSQL 9.3.5.
 	BackupRetentionPeriod *int32
 
 	// Specifies the CA certificate identifier to use for the DB instance’s server
 	// certificate. This setting doesn't apply to RDS Custom. For more information, see
-	//
 	// Using SSL/TLS to encrypt a connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
 	// in the Amazon RDS User Guide and Using SSL/TLS to encrypt a connection to a DB
 	// cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
@@ -122,17 +123,20 @@ type ModifyDBInstanceInput struct {
 	// connect to the DB instance. If you are using SSL/TLS to connect to the DB
 	// instance, follow the appropriate instructions for your DB engine to rotate your
 	// SSL/TLS certificate:
-	//     - For more information about rotating your SSL/TLS certificate for RDS DB engines, see Rotating Your SSL/TLS Certificate. (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the Amazon RDS User Guide.
-	//     - For more information about rotating your SSL/TLS certificate for Aurora DB engines, see Rotating Your SSL/TLS Certificate (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the Amazon Aurora User Guide.
-	//
+	//   - For more information about rotating your SSL/TLS certificate for RDS DB
+	//   engines, see Rotating Your SSL/TLS Certificate. (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html)
+	//   in the Amazon RDS User Guide.
+	//   - For more information about rotating your SSL/TLS certificate for Aurora DB
+	//   engines, see Rotating Your SSL/TLS Certificate (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html)
+	//   in the Amazon Aurora User Guide.
 	// This setting doesn't apply to RDS Custom.
 	CertificateRotationRestart *bool
 
 	// The configuration setting for the log types to be enabled for export to
 	// CloudWatch Logs for a specific DB instance. A change to the
-	// CloudwatchLogsExportConfigurationparameter is always applied to the DB
-	// instance immediately. Therefore, the ApplyImmediately parameter has no effect.
-	// This setting doesn't apply to RDS Custom.
+	// CloudwatchLogsExportConfiguration parameter is always applied to the DB instance
+	// immediately. Therefore, the ApplyImmediately parameter has no effect. This
+	// setting doesn't apply to RDS Custom.
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
 	// A value that indicates whether to copy all tags from the DB instance to
@@ -168,38 +172,38 @@ type ModifyDBInstanceInput struct {
 	DBParameterGroupName *string
 
 	// The port number on which the database accepts connections. The value of the
-	// DBPortNumberparameter must not match any of the port values specified for
+	// DBPortNumber parameter must not match any of the port values specified for
 	// options in the option group for the DB instance. If you change the DBPortNumber
 	// value, your database restarts regardless of the value of the ApplyImmediately
 	// parameter. This setting doesn't apply to RDS Custom. MySQL Default: 3306 Valid
-	// values: 1150-65535  MariaDB Default: 3306  Valid values: 1150-65535 PostgreSQL
-	// Default: 5432  Valid values: 1150-65535  Type: Integer Oracle Default: 1521
-	// Valid values: 1150-65535  SQL Server Default: 1433  Valid values: 1150-65535
-	// except 1234 , 1434 , 3260 , 3343 , 3389 , 47001 , and 49152-49156. Amazon
-	// Aurora Default: 3306  Valid values: 1150-65535
+	// values: 1150-65535 MariaDB Default: 3306 Valid values: 1150-65535 PostgreSQL
+	// Default: 5432 Valid values: 1150-65535 Type: Integer Oracle Default: 1521 Valid
+	// values: 1150-65535 SQL Server Default: 1433 Valid values: 1150-65535 except 1234
+	// , 1434 , 3260 , 3343 , 3389 , 47001 , and 49152-49156 . Amazon Aurora Default:
+	// 3306 Valid values: 1150-65535
 	DBPortNumber *int32
 
 	// A list of DB security groups to authorize on this DB instance. Changing this
 	// setting doesn't result in an outage and the change is asynchronously applied as
 	// soon as possible. This setting doesn't apply to RDS Custom. Constraints:
-	//     - If supplied, must match existing DBSecurityGroups.
+	//   - If supplied, must match existing DBSecurityGroups.
 	DBSecurityGroups []string
 
-	// The new DB subnet group for the DB instance. You can use this parameter to
-	// move your DB instance to a different VPC. If your DB instance isn't in a VPC,
-	// you can also use this parameter to move your DB instance into a VPC. For more
+	// The new DB subnet group for the DB instance. You can use this parameter to move
+	// your DB instance to a different VPC. If your DB instance isn't in a VPC, you can
+	// also use this parameter to move your DB instance into a VPC. For more
 	// information, see Working with a DB instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)
 	// in the Amazon RDS User Guide. Changing the subnet group causes an outage during
 	// the change. The change is applied during the next maintenance window, unless you
-	// enable ApplyImmediately. This parameter doesn't apply to RDS Custom.
+	// enable ApplyImmediately . This parameter doesn't apply to RDS Custom.
 	// Constraints: If supplied, must match the name of an existing DBSubnetGroup.
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
-	// A value that indicates whether the DB instance has deletion protection
-	// enabled. The database can't be deleted when deletion protection is enabled. By
-	// default, deletion protection isn't enabled. For more information, see Deleting
-	// a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
+	// A value that indicates whether the DB instance has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection isn't enabled. For more information, see Deleting a DB
+	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
 	// .
 	DeletionProtection *bool
 
@@ -211,17 +215,17 @@ type ModifyDBInstanceInput struct {
 	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	Domain *string
 
-	// The name of the IAM role to use when making API calls to the Directory
-	// Service. This setting doesn't apply to RDS Custom.
+	// The name of the IAM role to use when making API calls to the Directory Service.
+	// This setting doesn't apply to RDS Custom.
 	DomainIAMRoleName *string
 
-	// A value that indicates whether to enable a customer-owned IP address (CoIP)
-	// for an RDS on Outposts DB instance. A CoIP provides local or external
-	// connectivity to resources in your Outpost subnets through your on-premises
-	// network. For some use cases, a CoIP can provide lower latency for connections to
-	// the DB instance from outside of its virtual private cloud (VPC) on your local
-	// network. For more information about RDS on Outposts, see Working with Amazon
-	// RDS on Amazon Web Services Outposts (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
+	// A value that indicates whether to enable a customer-owned IP address (CoIP) for
+	// an RDS on Outposts DB instance. A CoIP provides local or external connectivity
+	// to resources in your Outpost subnets through your on-premises network. For some
+	// use cases, a CoIP can provide lower latency for connections to the DB instance
+	// from outside of its virtual private cloud (VPC) on your local network. For more
+	// information about RDS on Outposts, see Working with Amazon RDS on Amazon Web
+	// Services Outposts (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
 	// in the Amazon RDS User Guide. For more information about CoIPs, see
 	// Customer-owned IP addresses (https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing)
 	// in the Amazon Web Services Outposts User Guide.
@@ -250,12 +254,11 @@ type ModifyDBInstanceInput struct {
 	// default for that DB parameter group family. If you specify only a major version,
 	// Amazon RDS will update the DB instance to the default minor version if the
 	// current minor version is lower. For information about valid engine versions, see
-	//
-	// CreateDBInstance , or call DescribeDBEngineVersions. If the instance that
+	// CreateDBInstance , or call DescribeDBEngineVersions . If the instance that
 	// you're modifying is acting as a read replica, the engine version that you
 	// specify must be the same or later than the version that the source DB instance
 	// or cluster is running. In RDS Custom for Oracle, this parameter is supported for
-	// read replicas only if they are in the PATCH_DB_FAILURE  lifecycle.
+	// read replicas only if they are in the PATCH_DB_FAILURE lifecycle.
 	EngineVersion *string
 
 	// The new Provisioned IOPS (I/O operations per second) value for the RDS
@@ -283,22 +286,23 @@ type ModifyDBInstanceInput struct {
 	Iops *int32
 
 	// The license model for the DB instance. This setting doesn't apply to RDS
-	// Custom. Valid values: license-included  | bring-your-own-license  |
+	// Custom. Valid values: license-included | bring-your-own-license |
 	// general-public-license
 	LicenseModel *string
 
 	// A value that indicates whether to manage the master user password with Amazon
 	// Web Services Secrets Manager. If the DB cluster doesn't manage the master user
 	// password with Amazon Web Services Secrets Manager, you can turn on this
-	// management. In this case, you can't specify MasterUserPassword. If the DB
+	// management. In this case, you can't specify MasterUserPassword . If the DB
 	// cluster already manages the master user password with Amazon Web Services
 	// Secrets Manager, and you specify that the master user password is not managed
 	// with Amazon Web Services Secrets Manager, then you must specify
-	// MasterUserPassword. In this case, RDS deletes the secret and uses the new
-	// password for the master user specified by MasterUserPassword. For more
+	// MasterUserPassword . In this case, RDS deletes the secret and uses the new
+	// password for the master user specified by MasterUserPassword . For more
 	// information, see Password management with Amazon Web Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
 	// in the Amazon RDS User Guide. Constraints:
-	//     - Can't manage the master user password with Amazon Web Services Secrets Manager if MasterUserPassword is specified.
+	//   - Can't manage the master user password with Amazon Web Services Secrets
+	//   Manager if MasterUserPassword is specified.
 	ManageMasterUserPassword *bool
 
 	// The new password for the master user. The password can include any printable
@@ -308,7 +312,7 @@ type ModifyDBInstanceInput struct {
 	// MasterUserPassword element exists in the PendingModifiedValues element of the
 	// operation response. This setting doesn't apply to RDS Custom. Amazon Aurora Not
 	// applicable. The password for the master user is managed by the DB cluster. For
-	// more information, see ModifyDBCluster. Default: Uses existing setting
+	// more information, see ModifyDBCluster . Default: Uses existing setting
 	// Constraints: Can't be specified if ManageMasterUserPassword is turned on.
 	// MariaDB Constraints: Must contain from 8 to 41 characters. Microsoft SQL Server
 	// Constraints: Must contain from 8 to 128 characters. MySQL Constraints: Must
@@ -322,14 +326,22 @@ type ModifyDBInstanceInput struct {
 	// The Amazon Web Services KMS key identifier to encrypt a secret that is
 	// automatically generated and managed in Amazon Web Services Secrets Manager. This
 	// setting is valid only if both of the following conditions are met:
-	//     - The DB instance doesn't manage the master user password in Amazon Web Services Secrets Manager. If the DB instance already manages the master user password in Amazon Web Services Secrets Manager, you can't change the KMS key used to encrypt the secret.
-	//     - You are turning on ManageMasterUserPassword to manage the master user password in Amazon Web Services Secrets Manager. If you are turning on ManageMasterUserPassword and don't specify MasterUserSecretKmsKeyId , then the aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't use the aws/secretsmanager KMS key to encrypt the secret, and you must use a customer managed KMS key.
-	//
-	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
-	// alias name for the KMS key. To use a KMS key in a different Amazon Web Services
-	// account, specify the key ARN or alias ARN. There is a default KMS key for your
-	// Amazon Web Services account. Your Amazon Web Services account has a different
-	// default KMS key for each Amazon Web Services Region.
+	//   - The DB instance doesn't manage the master user password in Amazon Web
+	//   Services Secrets Manager. If the DB instance already manages the master user
+	//   password in Amazon Web Services Secrets Manager, you can't change the KMS key
+	//   used to encrypt the secret.
+	//   - You are turning on ManageMasterUserPassword to manage the master user
+	//   password in Amazon Web Services Secrets Manager. If you are turning on
+	//   ManageMasterUserPassword and don't specify MasterUserSecretKmsKeyId , then the
+	//   aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in
+	//   a different Amazon Web Services account, then you can't use the
+	//   aws/secretsmanager KMS key to encrypt the secret, and you must use a customer
+	//   managed KMS key.
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the KMS key. To use a KMS key in a different Amazon Web
+	// Services account, specify the key ARN or alias ARN. There is a default KMS key
+	// for your Amazon Web Services account. Your Amazon Web Services account has a
+	// different default KMS key for each Amazon Web Services Region.
 	MasterUserSecretKmsKeyId *string
 
 	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
@@ -347,8 +359,8 @@ type ModifyDBInstanceInput struct {
 	MonitoringInterval *int32
 
 	// The ARN for the IAM role that permits RDS to send enhanced monitoring metrics
-	// to Amazon CloudWatch Logs. For example, arn:aws:iam:123456789012:role/emaccess
-	// . For information on creating a monitoring role, see To create an IAM role for
+	// to Amazon CloudWatch Logs. For example, arn:aws:iam:123456789012:role/emaccess .
+	// For information on creating a monitoring role, see To create an IAM role for
 	// Amazon RDS Enhanced Monitoring (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole)
 	// in the Amazon RDS User Guide. If MonitoringInterval is set to a value other
 	// than 0, supply a MonitoringRoleArn value. This setting doesn't apply to RDS
@@ -362,23 +374,23 @@ type ModifyDBInstanceInput struct {
 	MultiAZ *bool
 
 	// The network type of the DB instance. Valid values:
-	//     - IPV4
-	//     - DUAL
-	//  The network type is determined by the DBSubnetGroup specified for the DB
+	//   - IPV4
+	//   - DUAL
+	// The network type is determined by the DBSubnetGroup specified for the DB
 	// instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and
 	// the IPv6 protocols ( DUAL ). For more information, see  Working with a DB
 	// instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
 	// in the Amazon RDS User Guide.
 	NetworkType *string
 
-	// The new DB instance identifier for the DB instance when renaming a DB
-	// instance. When you change the DB instance identifier, an instance reboot occurs
-	// immediately if you enable ApplyImmediately, or will occur during the next
+	// The new DB instance identifier for the DB instance when renaming a DB instance.
+	// When you change the DB instance identifier, an instance reboot occurs
+	// immediately if you enable ApplyImmediately , or will occur during the next
 	// maintenance window if you disable Apply Immediately. This value is stored as a
 	// lowercase string. This setting doesn't apply to RDS Custom. Constraints:
-	//     - Must contain from 1 to 63 letters, numbers, or hyphens.
-	//     - The first character must be a letter.
-	//     - Can't end with a hyphen or contain two consecutive hyphens.
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
 
@@ -397,7 +409,7 @@ type ModifyDBInstanceInput struct {
 	// The Amazon Web Services KMS key identifier for encryption of Performance
 	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
 	// ID, alias ARN, or alias name for the KMS key. If you do not specify a value for
-	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default KMS key. There
+	// PerformanceInsightsKMSKeyId , then Amazon RDS uses your default KMS key. There
 	// is a default KMS key for your Amazon Web Services account. Your Amazon Web
 	// Services account has a different default KMS key for each Amazon Web Services
 	// Region. This setting doesn't apply to RDS Custom.
@@ -405,16 +417,16 @@ type ModifyDBInstanceInput struct {
 
 	// The number of days to retain Performance Insights data. The default is 7 days.
 	// The following values are valid:
-	//     - 7
-	//     - month * 31, where month is a number of months from 1-23
-	//     - 731
+	//   - 7
+	//   - month * 31, where month is a number of months from 1-23
+	//   - 731
 	// For example, the following values are valid:
-	//     - 93 (3 months * 31)
-	//     - 341 (11 months * 31)
-	//     - 589 (19 months * 31)
-	//     - 731
-	// If you specify a retention period such as 94, which isn't a valid
-	// value, RDS issues an error. This setting doesn't apply to RDS Custom.
+	//   - 93 (3 months * 31)
+	//   - 341 (11 months * 31)
+	//   - 589 (19 months * 31)
+	//   - 731
+	// If you specify a retention period such as 94, which isn't a valid value, RDS
+	// issues an error. This setting doesn't apply to RDS Custom.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The daily time range during which automated backups are created if automated
@@ -426,21 +438,21 @@ type ModifyDBInstanceInput struct {
 	// in the Amazon RDS User Guide. Amazon Aurora Not applicable. The daily time range
 	// for creating automated backups is managed by the DB cluster. For more
 	// information, see ModifyDBCluster . Constraints:
-	//     - Must be in the format hh24:mi-hh24:mi
-	//     - Must be in Universal Time Coordinated (UTC)
-	//     - Must not conflict with the preferred maintenance window
-	//     - Must be at least 30 minutes
+	//   - Must be in the format hh24:mi-hh24:mi
+	//   - Must be in Universal Time Coordinated (UTC)
+	//   - Must not conflict with the preferred maintenance window
+	//   - Must be at least 30 minutes
 	PreferredBackupWindow *string
 
-	// The weekly time range (in UTC) during which system maintenance can occur,
-	// which might result in an outage. Changing this parameter doesn't result in an
-	// outage, except in the following situation, and the change is asynchronously
-	// applied as soon as possible. If there are pending actions that cause a reboot,
-	// and the maintenance window is changed to include the current time, then changing
-	// this parameter will cause a reboot of the DB instance. If moving this window to
-	// the current time, there must be at least 30 minutes between the current time and
-	// end of the window to ensure pending changes are applied. For more information,
-	// see Amazon RDS Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance)
+	// The weekly time range (in UTC) during which system maintenance can occur, which
+	// might result in an outage. Changing this parameter doesn't result in an outage,
+	// except in the following situation, and the change is asynchronously applied as
+	// soon as possible. If there are pending actions that cause a reboot, and the
+	// maintenance window is changed to include the current time, then changing this
+	// parameter will cause a reboot of the DB instance. If moving this window to the
+	// current time, there must be at least 30 minutes between the current time and end
+	// of the window to ensure pending changes are applied. For more information, see
+	// Amazon RDS Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance)
 	// in the Amazon RDS User Guide. Default: Uses existing setting Format:
 	// ddd:hh24:mi-ddd:hh24:mi Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun
 	// Constraints: Must be at least 30 minutes
@@ -457,8 +469,8 @@ type ModifyDBInstanceInput struct {
 	// Default: 1 Valid Values: 0 - 15
 	PromotionTier *int32
 
-	// A value that indicates whether the DB instance is publicly accessible. When
-	// the DB cluster is publicly accessible, its Domain Name System (DNS) endpoint
+	// A value that indicates whether the DB instance is publicly accessible. When the
+	// DB cluster is publicly accessible, its Domain Name System (DNS) endpoint
 	// resolves to the private IP address from within the DB cluster's virtual private
 	// cloud (VPC). It resolves to the public IP address from outside of the DB
 	// cluster's VPC. Access to the DB cluster is ultimately controlled by the security
@@ -478,8 +490,8 @@ type ModifyDBInstanceInput struct {
 	// for mounted replicas is cross-Region disaster recovery. The primary database
 	// doesn't use Active Data Guard to transmit information to the mounted replica.
 	// Because it doesn't accept user connections, a mounted replica can't serve a
-	// read-only workload. For more information, see Working with Oracle Read
-	// Replicas for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html)
+	// read-only workload. For more information, see Working with Oracle Read Replicas
+	// for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html)
 	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	ReplicaMode types.ReplicaMode
 
@@ -495,7 +507,8 @@ type ModifyDBInstanceInput struct {
 	// password. For more information, see Password management with Amazon Web
 	// Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
 	// in the Amazon RDS User Guide. Constraints:
-	//     - You must apply the change immediately when rotating the master user password.
+	//   - You must apply the change immediately when rotating the master user
+	//   password.
 	RotateMasterUserPassword *bool
 
 	// Specifies the storage throughput value for the DB instance. This setting
@@ -517,8 +530,8 @@ type ModifyDBInstanceInput struct {
 	// No other Amazon RDS operations can take place for the instance, including
 	// modifying the instance, rebooting the instance, deleting the instance, creating
 	// a read replica for the instance, and creating a DB snapshot of the instance.
-	// Valid values: gp2 | gp3 | io1 | standard  Default: io1  if the Iops parameter
-	// is specified, otherwise gp2
+	// Valid values: gp2 | gp3 | io1 | standard Default: io1 if the Iops parameter is
+	// specified, otherwise gp2
 	StorageType *string
 
 	// The ARN from the key store with which to associate the instance for TDE
@@ -533,12 +546,12 @@ type ModifyDBInstanceInput struct {
 	// its default processor features. This setting doesn't apply to RDS Custom.
 	UseDefaultProcessorFeatures *bool
 
-	// A list of Amazon EC2 VPC security groups to authorize on this DB instance.
-	// This change is asynchronously applied as soon as possible. This setting doesn't
-	// apply to RDS Custom. Amazon Aurora Not applicable. The associated list of EC2
-	// VPC security groups is managed by the DB cluster. For more information, see
+	// A list of Amazon EC2 VPC security groups to authorize on this DB instance. This
+	// change is asynchronously applied as soon as possible. This setting doesn't apply
+	// to RDS Custom. Amazon Aurora Not applicable. The associated list of EC2 VPC
+	// security groups is managed by the DB cluster. For more information, see
 	// ModifyDBCluster . Constraints:
-	//     - If supplied, must match existing VpcSecurityGroupIds.
+	//   - If supplied, must match existing VpcSecurityGroupIds.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde

@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The request was rejected because it attempted to create a resource that
-// already exists.
+// The request was rejected because it attempted to create a resource that already
+// exists.
 type AlreadyExistsException struct {
 	Message *string
 
@@ -68,9 +68,22 @@ func (e *CloudHsmClusterInUseException) ErrorFault() smithy.ErrorFault { return 
 
 // The request was rejected because the associated CloudHSM cluster did not meet
 // the configuration requirements for an CloudHSM key store.
-//   - The CloudHSM cluster must be configured with private subnets in at least two different Availability Zones in the Region.
-//   - The security group for the cluster (https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html) (cloudhsm-cluster--sg) must include inbound rules and outbound rules that allow TCP traffic on ports 2223-2225. The Source in the inbound rules and the Destination in the outbound rules must match the security group ID. These rules are set by default when you create the CloudHSM cluster. Do not delete or change them. To get information about a particular security group, use the DescribeSecurityGroups (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html) operation.
-//   - The CloudHSM cluster must contain at least as many HSMs as the operation requires. To add HSMs, use the CloudHSM CreateHsm (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html) operation. For the CreateCustomKeyStore , UpdateCustomKeyStore , and CreateKey operations, the CloudHSM cluster must have at least two active HSMs, each in a different Availability Zone. For the ConnectCustomKeyStore operation, the CloudHSM must contain at least one active HSM.
+//   - The CloudHSM cluster must be configured with private subnets in at least
+//     two different Availability Zones in the Region.
+//   - The security group for the cluster (https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html)
+//     (cloudhsm-cluster--sg) must include inbound rules and outbound rules that allow
+//     TCP traffic on ports 2223-2225. The Source in the inbound rules and the
+//     Destination in the outbound rules must match the security group ID. These rules
+//     are set by default when you create the CloudHSM cluster. Do not delete or change
+//     them. To get information about a particular security group, use the
+//     DescribeSecurityGroups (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html)
+//     operation.
+//   - The CloudHSM cluster must contain at least as many HSMs as the operation
+//     requires. To add HSMs, use the CloudHSM CreateHsm (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html)
+//     operation. For the CreateCustomKeyStore , UpdateCustomKeyStore , and CreateKey
+//     operations, the CloudHSM cluster must have at least two active HSMs, each in a
+//     different Availability Zone. For the ConnectCustomKeyStore operation, the
+//     CloudHSM must contain at least one active HSM.
 //
 // For information about the requirements for an CloudHSM cluster that is
 // associated with an CloudHSM key store, see Assemble the Prerequisites (https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore)
@@ -162,15 +175,14 @@ func (e *CloudHsmClusterNotFoundException) ErrorCode() string {
 }
 func (e *CloudHsmClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the specified CloudHSM cluster has a
-// different cluster certificate than the original cluster. You cannot use the
-// operation to specify an unrelated cluster for an CloudHSM key store. Specify an
-// CloudHSM cluster that shares a backup history with the original cluster. This
-// includes clusters that were created from a backup of the current cluster, and
-// clusters that were created from the same backup that produced the current
-// cluster. CloudHSM clusters that share a backup history have the same cluster
-// certificate. To view the cluster certificate of an CloudHSM cluster, use the
-// DescribeClusters (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
+// The request was rejected because the specified CloudHSM cluster has a different
+// cluster certificate than the original cluster. You cannot use the operation to
+// specify an unrelated cluster for an CloudHSM key store. Specify an CloudHSM
+// cluster that shares a backup history with the original cluster. This includes
+// clusters that were created from a backup of the current cluster, and clusters
+// that were created from the same backup that produced the current cluster.
+// CloudHSM clusters that share a backup history have the same cluster certificate.
+// To view the cluster certificate of an CloudHSM cluster, use the DescribeClusters (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
 // operation.
 type CloudHsmClusterNotRelatedException struct {
 	Message *string
@@ -229,14 +241,26 @@ func (e *CustomKeyStoreHasCMKsException) ErrorCode() string {
 func (e *CustomKeyStoreHasCMKsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because of the ConnectionState of the custom key
-// store. To get the ConnectionState  of a custom key store, use the
-// DescribeCustomKeyStoresoperation. This exception is thrown under the following
+// store. To get the ConnectionState of a custom key store, use the
+// DescribeCustomKeyStores operation. This exception is thrown under the following
 // conditions:
-//   - You requested the ConnectCustomKeyStore operation on a custom key store with a ConnectionState of DISCONNECTING or FAILED . This operation is valid for all other ConnectionState values. To reconnect a custom key store in a FAILED state, disconnect it ( DisconnectCustomKeyStore ), then connect it ( ConnectCustomKeyStore ).
-//   - You requested the CreateKey operation in a custom key store that is not connected. This operations is valid only when the custom key store ConnectionState is CONNECTED .
-//   - You requested the DisconnectCustomKeyStore operation on a custom key store with a ConnectionState of DISCONNECTING or DISCONNECTED . This operation is valid for all other ConnectionState values.
-//   - You requested the UpdateCustomKeyStore or DeleteCustomKeyStore operation on a custom key store that is not disconnected. This operation is valid only when the custom key store ConnectionState is DISCONNECTED .
-//   - You requested the GenerateRandom operation in an CloudHSM key store that is not connected. This operation is valid only when the CloudHSM key store ConnectionState is CONNECTED .
+//   - You requested the ConnectCustomKeyStore operation on a custom key store with
+//     a ConnectionState of DISCONNECTING or FAILED . This operation is valid for all
+//     other ConnectionState values. To reconnect a custom key store in a FAILED
+//     state, disconnect it ( DisconnectCustomKeyStore ), then connect it (
+//     ConnectCustomKeyStore ).
+//   - You requested the CreateKey operation in a custom key store that is not
+//     connected. This operations is valid only when the custom key store
+//     ConnectionState is CONNECTED .
+//   - You requested the DisconnectCustomKeyStore operation on a custom key store
+//     with a ConnectionState of DISCONNECTING or DISCONNECTED . This operation is
+//     valid for all other ConnectionState values.
+//   - You requested the UpdateCustomKeyStore or DeleteCustomKeyStore operation on
+//     a custom key store that is not disconnected. This operation is valid only when
+//     the custom key store ConnectionState is DISCONNECTED .
+//   - You requested the GenerateRandom operation in an CloudHSM key store that is
+//     not connected. This operation is valid only when the CloudHSM key store
+//     ConnectionState is CONNECTED .
 type CustomKeyStoreInvalidStateException struct {
 	Message *string
 
@@ -264,9 +288,9 @@ func (e *CustomKeyStoreInvalidStateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The request was rejected because the specified custom key store name is
-// already assigned to another custom key store in the account. Try again with a
-// custom key store name that is unique in the account.
+// The request was rejected because the specified custom key store name is already
+// assigned to another custom key store in the account. Try again with a custom key
+// store name that is unique in the account.
 type CustomKeyStoreNameInUseException struct {
 	Message *string
 
@@ -373,7 +397,7 @@ func (e *DisabledException) ErrorCode() string {
 func (e *DisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the specified import token is expired. Use
-// GetParametersForImportto get a new import token and public key, use the new
+// GetParametersForImport to get a new import token and public key, use the new
 // public key to encrypt the key material, and then try the request again.
 type ExpiredImportTokenException struct {
 	Message *string
@@ -400,9 +424,9 @@ func (e *ExpiredImportTokenException) ErrorCode() string {
 }
 func (e *ExpiredImportTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the specified KMS key cannot decrypt the
-// data. The KeyId  in a Decrypt  request and the SourceKeyId  in a ReEncrypt
-// request must identify the same KMS key that was used to encrypt the ciphertext.
+// The request was rejected because the specified KMS key cannot decrypt the data.
+// The KeyId in a Decrypt request and the SourceKeyId in a ReEncrypt request must
+// identify the same KMS key that was used to encrypt the ciphertext.
 type IncorrectKeyException struct {
 	Message *string
 
@@ -456,8 +480,8 @@ func (e *IncorrectKeyMaterialException) ErrorCode() string {
 }
 func (e *IncorrectKeyMaterialException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the trust anchor certificate in the request
-// to create an CloudHSM key store is not the trust anchor certificate for the
+// The request was rejected because the trust anchor certificate in the request to
+// create an CloudHSM key store is not the trust anchor certificate for the
 // specified CloudHSM cluster. When you initialize the CloudHSM cluster (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr)
 // , you create the trust anchor certificate and save it in the customerCA.crt
 // file.
@@ -512,8 +536,8 @@ func (e *InvalidAliasNameException) ErrorCode() string {
 }
 func (e *InvalidAliasNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because a specified ARN, or an ARN in a key policy,
-// is not valid.
+// The request was rejected because a specified ARN, or an ARN in a key policy, is
+// not valid.
 type InvalidArnException struct {
 	Message *string
 
@@ -539,11 +563,11 @@ func (e *InvalidArnException) ErrorCode() string {
 }
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// From the Decrypt  or ReEncrypt operation, the request was rejected because the
+// From the Decrypt or ReEncrypt operation, the request was rejected because the
 // specified ciphertext, or additional authenticated data incorporated into the
 // ciphertext, such as the encryption context, is corrupted, missing, or otherwise
-// invalid. From the ImportKeyMaterial operation, the request was rejected
-// because KMS could not decrypt the encrypted (wrapped) key material.
+// invalid. From the ImportKeyMaterial operation, the request was rejected because
+// KMS could not decrypt the encrypted (wrapped) key material.
 type InvalidCiphertextException struct {
 	Message *string
 
@@ -569,7 +593,7 @@ func (e *InvalidCiphertextException) ErrorCode() string {
 }
 func (e *InvalidCiphertextException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the specified GrantId  is not valid.
+// The request was rejected because the specified GrantId is not valid.
 type InvalidGrantIdException struct {
 	Message *string
 
@@ -650,13 +674,14 @@ func (e *InvalidImportTokenException) ErrorFault() smithy.ErrorFault { return sm
 
 // The request was rejected for one of the following reasons:
 //   - The KeyUsage value of the KMS key is incompatible with the API operation.
-//   - The encryption algorithm or signing algorithm specified for the operation is incompatible with the type of key material in the KMS key (KeySpec ).
+//   - The encryption algorithm or signing algorithm specified for the operation
+//     is incompatible with the type of key material in the KMS key (KeySpec ).
 //
 // For encrypting, decrypting, re-encrypting, and generating data keys, the
 // KeyUsage must be ENCRYPT_DECRYPT . For signing and verifying messages, the
-// KeyUsage must be SIGN_VERIFY. For generating and verifying message
-// authentication codes (MACs), the KeyUsage  must be GENERATE_VERIFY_MAC. To
-// find the KeyUsage  of a KMS key, use the DescribeKey operation. To find the
+// KeyUsage must be SIGN_VERIFY . For generating and verifying message
+// authentication codes (MACs), the KeyUsage must be GENERATE_VERIFY_MAC . To find
+// the KeyUsage of a KMS key, use the DescribeKey operation. To find the
 // encryption or signing algorithms supported for a particular KMS key, use the
 // DescribeKey operation.
 type InvalidKeyUsageException struct {
@@ -823,8 +848,13 @@ func (e *KMSInvalidSignatureException) ErrorFault() smithy.ErrorFault { return s
 
 // The request was rejected because the state of the specified resource is not
 // valid for this request. This exceptions means one of the following:
-//   - The key state of the KMS key is not compatible with the operation. To find the key state, use the DescribeKey operation. For more information about which key states are compatible with each KMS operation, see Key states of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the Key Management Service Developer Guide .
-//   - For cryptographic operations on KMS keys in custom key stores, this exception represents a general failure with many possible causes. To identify the cause, see the error message that accompanies the exception.
+//   - The key state of the KMS key is not compatible with the operation. To find
+//     the key state, use the DescribeKey operation. For more information about which
+//     key states are compatible with each KMS operation, see Key states of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+//     in the Key Management Service Developer Guide .
+//   - For cryptographic operations on KMS keys in custom key stores, this
+//     exception represents a general failure with many possible causes. To identify
+//     the cause, see the error message that accompanies the exception.
 type KMSInvalidStateException struct {
 	Message *string
 
@@ -985,7 +1015,7 @@ func (e *UnsupportedOperationException) ErrorCode() string {
 }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the ( XksKeyId) is already associated with a
+// The request was rejected because the ( XksKeyId ) is already associated with a
 // KMS key in this external key store. Each KMS key in an external key store must
 // be associated with a different external key.
 type XksKeyAlreadyInUseException struct {
@@ -1225,10 +1255,10 @@ func (e *XksProxyUriInUseException) ErrorCode() string {
 }
 func (e *XksProxyUriInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// KMS was unable to reach the specified XksProxyUriPath. The path must be
+// KMS was unable to reach the specified XksProxyUriPath . The path must be
 // reachable before you create the external key store or update its settings. This
 // exception is also thrown when the external key store proxy response to a
-// GetHealthStatusrequest indicates that all external key manager instances are
+// GetHealthStatus request indicates that all external key manager instances are
 // unavailable.
 type XksProxyUriUnreachableException struct {
 	Message *string

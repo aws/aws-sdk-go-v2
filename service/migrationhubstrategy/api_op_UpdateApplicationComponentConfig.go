@@ -54,7 +54,7 @@ type UpdateApplicationComponentConfigInput struct {
 	SourceCodeList []types.SourceCode
 
 	// The preferred strategy options for the application component. Use values from
-	// the GetApplicationComponentStrategies  response.
+	// the GetApplicationComponentStrategies response.
 	StrategyOption *types.StrategyOption
 
 	noSmithyDocumentSerde

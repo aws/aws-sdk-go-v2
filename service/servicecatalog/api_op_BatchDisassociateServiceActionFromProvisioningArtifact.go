@@ -30,16 +30,16 @@ func (c *Client) BatchDisassociateServiceActionFromProvisioningArtifact(ctx cont
 
 type BatchDisassociateServiceActionFromProvisioningArtifactInput struct {
 
-	// One or more associations, each consisting of the Action ID, the Product ID,
-	// and the Provisioning Artifact ID.
+	// One or more associations, each consisting of the Action ID, the Product ID, and
+	// the Provisioning Artifact ID.
 	//
 	// This member is required.
 	ServiceActionAssociations []types.ServiceActionAssociation
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

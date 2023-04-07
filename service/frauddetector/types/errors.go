@@ -8,7 +8,7 @@ import (
 )
 
 // An exception indicating Amazon Fraud Detector does not have the needed
-// permissions. This can occur if you submit a request, such as PutExternalModel,
+// permissions. This can occur if you submit a request, such as PutExternalModel ,
 // that specifies a role that is not in your account.
 type AccessDeniedException struct {
 	Message *string
@@ -113,8 +113,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception indicating that the attached customer-owned (external) model
-// threw an exception when Amazon Fraud Detector invoked the model.
+// An exception indicating that the attached customer-owned (external) model threw
+// an exception when Amazon Fraud Detector invoked the model.
 type ResourceUnavailableException struct {
 	Message *string
 

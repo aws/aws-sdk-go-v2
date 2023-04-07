@@ -49,14 +49,14 @@ type CreateEndpointInput struct {
 	SubnetId *string
 
 	// The type of access for the network connectivity for the Amazon S3 on Outposts
-	// endpoint. To use the Amazon Web Services VPC, choose Private. To use the
+	// endpoint. To use the Amazon Web Services VPC, choose Private . To use the
 	// endpoint with an on-premises network, choose CustomerOwnedIp . If you choose
-	// CustomerOwnedIp, you must also provide the customer-owned IP address pool
-	// (CoIP pool). Private  is the default access type value.
+	// CustomerOwnedIp , you must also provide the customer-owned IP address pool (CoIP
+	// pool). Private is the default access type value.
 	AccessType types.EndpointAccessType
 
-	// The ID of the customer-owned IPv4 address pool (CoIP pool) for the endpoint.
-	// IP addresses are allocated from this pool for the endpoint.
+	// The ID of the customer-owned IPv4 address pool (CoIP pool) for the endpoint. IP
+	// addresses are allocated from this pool for the endpoint.
 	CustomerOwnedIpv4Pool *string
 
 	noSmithyDocumentSerde

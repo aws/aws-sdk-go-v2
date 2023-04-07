@@ -31,8 +31,8 @@ func (c *Client) UpdateTaskSet(ctx context.Context, params *UpdateTaskSetInput, 
 
 type UpdateTaskSetInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the service that the task set is found in.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// service that the task set is found in.
 	//
 	// This member is required.
 	Cluster *string

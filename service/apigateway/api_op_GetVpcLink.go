@@ -54,8 +54,8 @@ type GetVpcLinkOutput struct {
 	Name *string
 
 	// The status of the VPC link. The valid values are AVAILABLE , PENDING , DELETING
-	// , or FAILED . Deploying an API will wait if the status is PENDING and will
-	// fail if the status is DELETING .
+	// , or FAILED . Deploying an API will wait if the status is PENDING and will fail
+	// if the status is DELETING .
 	Status types.VpcLinkStatus
 
 	// A description about the VPC link status.

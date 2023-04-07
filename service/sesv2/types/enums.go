@@ -88,9 +88,9 @@ const (
 	ContactListImportActionPut    ContactListImportAction = "PUT"
 )
 
-// Values returns all known values for ContactListImportAction. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContactListImportAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ContactListImportAction) Values() []ContactListImportAction {
 	return []ContactListImportAction{
 		"DELETE",
@@ -164,8 +164,8 @@ const (
 	DimensionValueSourceLinkTag     DimensionValueSource = "LINK_TAG"
 )
 
-// Values returns all known values for DimensionValueSource. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DimensionValueSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DimensionValueSource) Values() []DimensionValueSource {
 	return []DimensionValueSource{
@@ -183,10 +183,9 @@ const (
 	DkimSigningAttributesOriginExternal DkimSigningAttributesOrigin = "EXTERNAL"
 )
 
-// Values returns all known values for DkimSigningAttributesOrigin. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for DkimSigningAttributesOrigin. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DkimSigningAttributesOrigin) Values() []DkimSigningAttributesOrigin {
 	return []DkimSigningAttributesOrigin{
 		"AWS_SES",
@@ -202,8 +201,8 @@ const (
 	DkimSigningKeyLengthRsa2048Bit DkimSigningKeyLength = "RSA_2048_BIT"
 )
 
-// Values returns all known values for DkimSigningKeyLength. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DkimSigningKeyLength. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DkimSigningKeyLength) Values() []DkimSigningKeyLength {
 	return []DkimSigningKeyLength{
@@ -381,8 +380,8 @@ const (
 	MailFromDomainStatusTemporaryFailure MailFromDomainStatus = "TEMPORARY_FAILURE"
 )
 
-// Values returns all known values for MailFromDomainStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for MailFromDomainStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (MailFromDomainStatus) Values() []MailFromDomainStatus {
 	return []MailFromDomainStatus{
@@ -401,9 +400,9 @@ const (
 	MailTypeTransactional MailType = "TRANSACTIONAL"
 )
 
-// Values returns all known values for MailType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MailType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (MailType) Values() []MailType {
 	return []MailType{
 		"MARKETING",
@@ -507,8 +506,8 @@ const (
 	RecommendationImpactHigh RecommendationImpact = "HIGH"
 )
 
-// Values returns all known values for RecommendationImpact. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RecommendationImpact. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationImpact) Values() []RecommendationImpact {
 	return []RecommendationImpact{
@@ -525,8 +524,8 @@ const (
 	RecommendationStatusFixed RecommendationStatus = "FIXED"
 )
 
-// Values returns all known values for RecommendationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RecommendationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationStatus) Values() []RecommendationStatus {
 	return []RecommendationStatus{
@@ -587,9 +586,9 @@ const (
 	ScalingModeManaged  ScalingMode = "MANAGED"
 )
 
-// Values returns all known values for ScalingMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScalingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ScalingMode) Values() []ScalingMode {
 	return []ScalingMode{
 		"STANDARD",
@@ -623,10 +622,9 @@ const (
 	SuppressionListImportActionPut    SuppressionListImportAction = "PUT"
 )
 
-// Values returns all known values for SuppressionListImportAction. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for SuppressionListImportAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SuppressionListImportAction) Values() []SuppressionListImportAction {
 	return []SuppressionListImportAction{
 		"DELETE",

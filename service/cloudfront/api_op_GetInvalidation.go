@@ -190,9 +190,9 @@ func NewInvalidationCompletedWaiter(client GetInvalidationAPIClient, optFns ...f
 	}
 }
 
-// Wait calls the waiter function for InvalidationCompleted waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for InvalidationCompleted waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *InvalidationCompletedWaiter) Wait(ctx context.Context, params *GetInvalidationInput, maxWaitDur time.Duration, optFns ...func(*InvalidationCompletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

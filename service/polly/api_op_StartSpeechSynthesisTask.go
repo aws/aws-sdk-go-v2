@@ -12,10 +12,10 @@ import (
 )
 
 // Allows the creation of an asynchronous synthesis task, by starting a new
-// SpeechSynthesisTask. This operation requires all the standard information
+// SpeechSynthesisTask . This operation requires all the standard information
 // needed for speech synthesis, plus the name of an Amazon S3 bucket for the
 // service to store the output of the synthesis task and two optional parameters (
-// OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created, this
+// OutputS3KeyPrefix and SnsTopicArn ). Once the synthesis task is created, this
 // operation will return a SpeechSynthesisTask object, which will include an
 // identifier of this task as well as the current status. The SpeechSynthesisTask
 // object is available for 72 hours after starting the asynchronous synthesis task.
@@ -36,8 +36,8 @@ func (c *Client) StartSpeechSynthesisTask(ctx context.Context, params *StartSpee
 
 type StartSpeechSynthesisTaskInput struct {
 
-	// The format in which the returned output will be encoded. For audio stream,
-	// this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
+	// The format in which the returned output will be encoded. For audio stream, this
+	// will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
 	//
 	// This member is required.
 	OutputFormat types.OutputFormat
@@ -58,16 +58,16 @@ type StartSpeechSynthesisTaskInput struct {
 	// This member is required.
 	VoiceId types.VoiceId
 
-	// Specifies the engine ( standard  or neural) for Amazon Polly to use when
+	// Specifies the engine ( standard or neural ) for Amazon Polly to use when
 	// processing input text for speech synthesis. Using a voice that is not supported
 	// for the engine selected will result in an error.
 	Engine types.Engine
 
-	// Optional language code for the Speech Synthesis request. This is only
-	// necessary if using a bilingual voice, such as Aditi, which can be used for
-	// either Indian English (en-IN) or Hindi (hi-IN). If a bilingual voice is used and
-	// no language code is specified, Amazon Polly uses the default language of the
-	// bilingual voice. The default language for any voice is the one returned by the
+	// Optional language code for the Speech Synthesis request. This is only necessary
+	// if using a bilingual voice, such as Aditi, which can be used for either Indian
+	// English (en-IN) or Hindi (hi-IN). If a bilingual voice is used and no language
+	// code is specified, Amazon Polly uses the default language of the bilingual
+	// voice. The default language for any voice is the one returned by the
 	// DescribeVoices (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
 	// operation for the LanguageCode parameter. For example, if no language code is
 	// specified, Aditi will use Indian English rather than Hindi.

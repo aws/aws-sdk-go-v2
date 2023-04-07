@@ -29,8 +29,8 @@ func (c *Client) DescribeDetector(ctx context.Context, params *DescribeDetectorI
 
 type DescribeDetectorInput struct {
 
-	// The name of the detector model whose detectors (instances) you want
-	// information about.
+	// The name of the detector model whose detectors (instances) you want information
+	// about.
 	//
 	// This member is required.
 	DetectorModelName *string

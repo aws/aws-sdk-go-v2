@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the state of a file transfer protocol-enabled server from ONLINE  to
+// Changes the state of a file transfer protocol-enabled server from ONLINE to
 // OFFLINE . An OFFLINE server cannot accept and process file transfer jobs.
 // Information tied to your server, such as server and user properties, are not
 // affected by stopping your server. Stopping the server does not reduce or impact

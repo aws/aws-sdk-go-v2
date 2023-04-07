@@ -39,9 +39,9 @@ type ExecuteStatementInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The ARN of the secret that enables access to the DB cluster. Enter the
-	// database user name and password for the credentials in the secret. For
-	// information about creating the secret, see Create a database secret (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html)
+	// The ARN of the secret that enables access to the DB cluster. Enter the database
+	// user name and password for the credentials in the secret. For information about
+	// creating the secret, see Create a database secret (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html)
 	// .
 	//
 	// This member is required.
@@ -52,9 +52,9 @@ type ExecuteStatementInput struct {
 	// This member is required.
 	Sql *string
 
-	// A value that indicates whether to continue running the statement after the
-	// call times out. By default, the statement stops running when the call times out.
-	// For DDL statements, we recommend continuing to run the statement after the call
+	// A value that indicates whether to continue running the statement after the call
+	// times out. By default, the statement stops running when the call times out. For
+	// DDL statements, we recommend continuing to run the statement after the call
 	// times out. When a DDL statement terminates before it is finished running, it can
 	// result in errors and possibly corrupted data structures.
 	ContinueAfterTimeout bool
@@ -64,9 +64,9 @@ type ExecuteStatementInput struct {
 
 	// A value that indicates whether to format the result set as a single JSON
 	// string. This parameter only applies to SELECT statements and is ignored for
-	// other types of statements. Allowed values are NONE  and JSON. The default
-	// value is NONE . The result is returned in the formattedRecords field. For
-	// usage information about the JSON format for result sets, see Using the Data API (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
+	// other types of statements. Allowed values are NONE and JSON . The default value
+	// is NONE . The result is returned in the formattedRecords field. For usage
+	// information about the JSON format for result sets, see Using the Data API (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
 	// in the Amazon Aurora User Guide.
 	FormatRecordsAs types.RecordsFormatType
 
@@ -101,16 +101,16 @@ type ExecuteStatementOutput struct {
 	ColumnMetadata []types.ColumnMetadata
 
 	// A string value that represents the result set of a SELECT statement in JSON
-	// format. This value is only present when the formatRecordsAs parameter is set
-	// to JSON. The size limit for this field is currently 10 MB. If the
-	// JSON-formatted string representing the result set requires more than 10 MB, the
-	// call returns an error.
+	// format. This value is only present when the formatRecordsAs parameter is set to
+	// JSON . The size limit for this field is currently 10 MB. If the JSON-formatted
+	// string representing the result set requires more than 10 MB, the call returns an
+	// error.
 	FormattedRecords *string
 
 	// Values for fields generated during a DML request. The generatedFields data
 	// isn't supported by Aurora PostgreSQL. To get the values of generated fields, use
-	// the RETURNING  clause. For more information, see Returning Data From Modified
-	// Rows (https://www.postgresql.org/docs/10/dml-returning.html)in the PostgreSQL
+	// the RETURNING clause. For more information, see Returning Data From Modified
+	// Rows (https://www.postgresql.org/docs/10/dml-returning.html) in the PostgreSQL
 	// documentation.
 	GeneratedFields []types.Field
 

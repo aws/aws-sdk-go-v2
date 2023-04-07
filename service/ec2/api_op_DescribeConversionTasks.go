@@ -16,8 +16,8 @@ import (
 	"time"
 )
 
-// Describes the specified conversion tasks or all your conversion tasks. For
-// more information, see the VM Import/Export User Guide (https://docs.aws.amazon.com/vm-import/latest/userguide/)
+// Describes the specified conversion tasks or all your conversion tasks. For more
+// information, see the VM Import/Export User Guide (https://docs.aws.amazon.com/vm-import/latest/userguide/)
 // . For information about the import manifest referenced by this API action, see
 // VM Import Manifest (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html)
 // .
@@ -588,9 +588,9 @@ func NewConversionTaskDeletedWaiter(client DescribeConversionTasksAPIClient, opt
 	}
 }
 
-// Wait calls the waiter function for ConversionTaskDeleted waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for ConversionTaskDeleted waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *ConversionTaskDeletedWaiter) Wait(ctx context.Context, params *DescribeConversionTasksInput, maxWaitDur time.Duration, optFns ...func(*ConversionTaskDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -29,8 +29,7 @@ func (c *Client) UpdateClassificationScope(ctx context.Context, params *UpdateCl
 
 type UpdateClassificationScopeInput struct {
 
-	// The unique identifier for the Amazon Macie resource that the request applies
-	// to.
+	// The unique identifier for the Amazon Macie resource that the request applies to.
 	//
 	// This member is required.
 	Id *string

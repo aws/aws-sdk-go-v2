@@ -34,7 +34,7 @@ type ListResolverQueryLogConfigsInput struct {
 
 	// An optional specification to return a subset of query logging configurations.
 	// If you submit a second or subsequent ListResolverQueryLogConfigs request and
-	// specify the NextToken  parameter, you must use the same values for Filters, if
+	// specify the NextToken parameter, you must use the same values for Filters , if
 	// any, as in the previous request.
 	Filters []types.Filter
 
@@ -46,37 +46,46 @@ type ListResolverQueryLogConfigsInput struct {
 	// For the first ListResolverQueryLogConfigs request, omit this value. If there
 	// are more than MaxResults query logging configurations that match the values
 	// that you specify for Filters , you can submit another
-	// ListResolverQueryLogConfigsrequest to get the next group of configurations. In
-	// the next request, specify the value of NextToken  from the previous response.
+	// ListResolverQueryLogConfigs request to get the next group of configurations. In
+	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
 	// The element that you want Resolver to sort query logging configurations by. If
 	// you submit a second or subsequent ListResolverQueryLogConfigs request and
-	// specify the NextToken  parameter, you must use the same value for SortBy, if
+	// specify the NextToken parameter, you must use the same value for SortBy , if
 	// any, as in the previous request. Valid values include the following elements:
-	//     - Arn : The ARN of the query logging configuration
-	//     - AssociationCount : The number of VPCs that are associated with the specified configuration
-	//     - CreationTime : The date and time that Resolver returned when the configuration was created
-	//     - CreatorRequestId : The value that was specified for CreatorRequestId when the configuration was created
-	//     - DestinationArn : The location that logs are sent to
-	//     - Id : The ID of the configuration
-	//     - Name : The name of the configuration
-	//     - OwnerId : The Amazon Web Services account number of the account that created the configuration
-	//     - ShareStatus : Whether the configuration is shared with other Amazon Web Services accounts or shared with the current account by another Amazon Web Services account. Sharing is configured through Resource Access Manager (RAM).
-	//     - Status : The current status of the configuration. Valid values include the following:
-	//         - CREATING : Resolver is creating the query logging configuration.
-	//         - CREATED : The query logging configuration was successfully created. Resolver is logging queries that originate in the specified VPC.
-	//         - DELETING : Resolver is deleting this query logging configuration.
-	//         - FAILED : Resolver either couldn't create or couldn't delete the query logging configuration. Here are two common causes:
-	//             - The specified destination (for example, an Amazon S3 bucket) was deleted.
-	//             - Permissions don't allow sending logs to the destination.
+	//   - Arn : The ARN of the query logging configuration
+	//   - AssociationCount : The number of VPCs that are associated with the specified
+	//   configuration
+	//   - CreationTime : The date and time that Resolver returned when the
+	//   configuration was created
+	//   - CreatorRequestId : The value that was specified for CreatorRequestId when
+	//   the configuration was created
+	//   - DestinationArn : The location that logs are sent to
+	//   - Id : The ID of the configuration
+	//   - Name : The name of the configuration
+	//   - OwnerId : The Amazon Web Services account number of the account that created
+	//   the configuration
+	//   - ShareStatus : Whether the configuration is shared with other Amazon Web
+	//   Services accounts or shared with the current account by another Amazon Web
+	//   Services account. Sharing is configured through Resource Access Manager (RAM).
+	//   - Status : The current status of the configuration. Valid values include the
+	//   following:
+	//   - CREATING : Resolver is creating the query logging configuration.
+	//   - CREATED : The query logging configuration was successfully created. Resolver
+	//   is logging queries that originate in the specified VPC.
+	//   - DELETING : Resolver is deleting this query logging configuration.
+	//   - FAILED : Resolver either couldn't create or couldn't delete the query
+	//   logging configuration. Here are two common causes:
+	//   - The specified destination (for example, an Amazon S3 bucket) was deleted.
+	//   - Permissions don't allow sending logs to the destination.
 	SortBy *string
 
-	// If you specified a value for SortBy, the order that you want query logging
-	// configurations to be listed in, ASCENDING  or DESCENDING. If you submit a
-	// second or subsequent ListResolverQueryLogConfigs  request and specify the
-	// NextToken parameter, you must use the same value for SortOrder, if any, as in
-	// the previous request.
+	// If you specified a value for SortBy , the order that you want query logging
+	// configurations to be listed in, ASCENDING or DESCENDING . If you submit a second
+	// or subsequent ListResolverQueryLogConfigs request and specify the NextToken
+	// parameter, you must use the same value for SortOrder , if any, as in the
+	// previous request.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -97,7 +106,7 @@ type ListResolverQueryLogConfigsOutput struct {
 	// The total number of query logging configurations that were created by the
 	// current account in the specified Region. This count can differ from the number
 	// of query logging configurations that are returned in a
-	// ListResolverQueryLogConfigsresponse, depending on the values that you specify
+	// ListResolverQueryLogConfigs response, depending on the values that you specify
 	// in the request.
 	TotalCount int32
 
@@ -190,8 +199,8 @@ type ListResolverQueryLogConfigsPaginatorOptions struct {
 	// value for MaxResults , Resolver returns up to 100 query logging configurations.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

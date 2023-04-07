@@ -13,10 +13,11 @@ import (
 
 // Returns information about a CloudFormation extension publisher. If you don't
 // supply a PublisherId , and you have registered as an extension publisher,
-// DescribePublisherreturns information about your own publisher account. For
-// more information about registering as a publisher, see:
+// DescribePublisher returns information about your own publisher account. For more
+// information about registering as a publisher, see:
 //   - RegisterPublisher (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html)
-//   - Publishing extensions to make them available for public use (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html) in the CloudFormation CLI User Guide
+//   - Publishing extensions to make them available for public use (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html)
+//     in the CloudFormation CLI User Guide
 func (c *Client) DescribePublisher(ctx context.Context, params *DescribePublisherInput, optFns ...func(*Options)) (*DescribePublisherOutput, error) {
 	if params == nil {
 		params = &DescribePublisherInput{}
@@ -34,7 +35,7 @@ func (c *Client) DescribePublisher(ctx context.Context, params *DescribePublishe
 
 type DescribePublisherInput struct {
 
-	// The ID of the extension publisher. If you don't supply a PublisherId, and you
+	// The ID of the extension publisher. If you don't supply a PublisherId , and you
 	// have registered as an extension publisher, DescribePublisher returns
 	// information about your own publisher account.
 	PublisherId *string

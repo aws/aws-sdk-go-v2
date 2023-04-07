@@ -29,8 +29,8 @@ func (c *Client) CreateGroupMembership(ctx context.Context, params *CreateGroupM
 
 type CreateGroupMembershipInput struct {
 
-	// The ID for the Amazon Web Services account that the group is in. Currently,
-	// you use the ID for the Amazon Web Services account that contains your Amazon
+	// The ID for the Amazon Web Services account that the group is in. Currently, you
+	// use the ID for the Amazon Web Services account that contains your Amazon
 	// QuickSight account.
 	//
 	// This member is required.

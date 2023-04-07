@@ -20,12 +20,12 @@ import (
 // Retrieves information about the specified managed policy, including the
 // policy's default version and the total number of IAM users, groups, and roles to
 // which the policy is attached. To retrieve the list of the specific users,
-// groups, and roles that the policy is attached to, use ListEntitiesForPolicy.
+// groups, and roles that the policy is attached to, use ListEntitiesForPolicy .
 // This operation returns metadata about the policy. To retrieve the actual policy
-// document for a specific version of the policy, use GetPolicyVersion. This
+// document for a specific version of the policy, use GetPolicyVersion . This
 // operation retrieves information about managed policies. To retrieve information
 // about an inline policy that is embedded with an IAM user, group, or role, use
-// GetUserPolicy , GetGroupPolicy , or GetRolePolicy. For more information about
+// GetUserPolicy , GetGroupPolicy , or GetRolePolicy . For more information about
 // policies, see Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns ...func(*Options)) (*GetPolicyOutput, error) {
@@ -55,7 +55,7 @@ type GetPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetPolicy  request.
+// Contains the response to a successful GetPolicy request.
 type GetPolicyOutput struct {
 
 	// A structure containing details about the policy.
@@ -200,10 +200,9 @@ func (w *PolicyExistsWaiter) Wait(ctx context.Context, params *GetPolicyInput, m
 	return err
 }
 
-// WaitForOutput calls the waiter function for PolicyExists waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for PolicyExists waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
 func (w *PolicyExistsWaiter) WaitForOutput(ctx context.Context, params *GetPolicyInput, maxWaitDur time.Duration, optFns ...func(*PolicyExistsWaiterOptions)) (*GetPolicyOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

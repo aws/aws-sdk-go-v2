@@ -38,10 +38,10 @@ type AddDraftAppVersionResourceMappingsInput struct {
 	// This member is required.
 	AppArn *string
 
-	// Mappings used to map logical resources from the template to physical
-	// resources. You can use the mapping type CFN_STACK if the application template
-	// uses a logical stack name. Or you can map individual resources by using the
-	// mapping type RESOURCE . We recommend using the mapping type CFN_STACK if the
+	// Mappings used to map logical resources from the template to physical resources.
+	// You can use the mapping type CFN_STACK if the application template uses a
+	// logical stack name. Or you can map individual resources by using the mapping
+	// type RESOURCE . We recommend using the mapping type CFN_STACK if the
 	// application is backed by a CloudFormation stack.
 	//
 	// This member is required.
@@ -65,10 +65,10 @@ type AddDraftAppVersionResourceMappingsOutput struct {
 	// This member is required.
 	AppVersion *string
 
-	// Mappings used to map logical resources from the template to physical
-	// resources. You can use the mapping type CFN_STACK if the application template
-	// uses a logical stack name. Or you can map individual resources by using the
-	// mapping type RESOURCE . We recommend using the mapping type CFN_STACK if the
+	// Mappings used to map logical resources from the template to physical resources.
+	// You can use the mapping type CFN_STACK if the application template uses a
+	// logical stack name. Or you can map individual resources by using the mapping
+	// type RESOURCE . We recommend using the mapping type CFN_STACK if the
 	// application is backed by a CloudFormation stack.
 	//
 	// This member is required.

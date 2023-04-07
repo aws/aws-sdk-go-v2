@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the configuration of your Reserved Instances, such as the
-// Availability Zone, instance count, or instance type. The Reserved Instances to
-// be modified must be identical, except for Availability Zone, network platform,
-// and instance type. For more information, see Modifying Reserved Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html)
+// Modifies the configuration of your Reserved Instances, such as the Availability
+// Zone, instance count, or instance type. The Reserved Instances to be modified
+// must be identical, except for Availability Zone, network platform, and instance
+// type. For more information, see Modifying Reserved Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html)
 // in the Amazon EC2 User Guide. We are retiring EC2-Classic. We recommend that you
 // migrate from EC2-Classic to a VPC. For more information, see Migrate from
 // EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)

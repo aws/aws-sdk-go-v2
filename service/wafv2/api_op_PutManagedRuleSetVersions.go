@@ -18,11 +18,11 @@ import (
 // can use the managed rule set APIs to provide controlled rollout of your
 // versioned managed rule group offerings for your customers. The APIs are
 // ListManagedRuleSets , GetManagedRuleSet , PutManagedRuleSetVersions , and
-// UpdateManagedRuleSetVersionExpiryDate. Customers retrieve their managed rule
-// group list by calling ListAvailableManagedRuleGroups. The name that you
-// provide here for your managed rule set is the name the customer sees for the
+// UpdateManagedRuleSetVersionExpiryDate . Customers retrieve their managed rule
+// group list by calling ListAvailableManagedRuleGroups . The name that you provide
+// here for your managed rule set is the name the customer sees for the
 // corresponding managed rule group. Customers can retrieve the available versions
-// for a managed rule group by calling ListAvailableManagedRuleGroupVersions. You
+// for a managed rule group by calling ListAvailableManagedRuleGroupVersions . You
 // provide a rule group specification for each version. For each managed rule set,
 // you must specify a version that you recommend using. To initiate the expiration
 // of a managed rule group version, use UpdateManagedRuleSetVersionExpiryDate .
@@ -44,19 +44,19 @@ func (c *Client) PutManagedRuleSetVersions(ctx context.Context, params *PutManag
 type PutManagedRuleSetVersionsInput struct {
 
 	// A unique identifier for the managed rule set. The ID is returned in the
-	// responses to commands like list . You provide it to operations like get  and
+	// responses to commands like list . You provide it to operations like get and
 	// update .
 	//
 	// This member is required.
 	Id *string
 
-	// A token used for optimistic locking. WAF returns a token to your get  and list
+	// A token used for optimistic locking. WAF returns a token to your get and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update  and delete. WAF uses the token to ensure that no
-	// changes have been made to the entity since you last retrieved it. If a change
-	// has been made, the update fails with a WAFOptimisticLockException. If this
-	// happens, perform another get , and use the new token returned by that operation.
+	// operations like update and delete . WAF uses the token to ensure that no changes
+	// have been made to the entity since you last retrieved it. If a change has been
+	// made, the update fails with a WAFOptimisticLockException . If this happens,
+	// perform another get , and use the new token returned by that operation.
 	//
 	// This member is required.
 	LockToken *string
@@ -73,8 +73,9 @@ type PutManagedRuleSetVersionsInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//     - CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1 .
-	//     - API and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -92,13 +93,13 @@ type PutManagedRuleSetVersionsInput struct {
 
 type PutManagedRuleSetVersionsOutput struct {
 
-	// A token used for optimistic locking. WAF returns a token to your get  and list
+	// A token used for optimistic locking. WAF returns a token to your get and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update  and delete. WAF uses the token to ensure that no
-	// changes have been made to the entity since you last retrieved it. If a change
-	// has been made, the update fails with a WAFOptimisticLockException. If this
-	// happens, perform another get , and use the new token returned by that operation.
+	// operations like update and delete . WAF uses the token to ensure that no changes
+	// have been made to the entity since you last retrieved it. If a change has been
+	// made, the update fails with a WAFOptimisticLockException . If this happens,
+	// perform another get , and use the new token returned by that operation.
 	NextLockToken *string
 
 	// Metadata pertaining to the operation's result.

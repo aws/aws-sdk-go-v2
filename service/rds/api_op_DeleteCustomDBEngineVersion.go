@@ -14,8 +14,10 @@ import (
 
 // Deletes a custom engine version. To run this command, make sure you meet the
 // following prerequisites:
-//   - The CEV must not be the default for RDS Custom. If it is, change the default before running this command.
-//   - The CEV must not be associated with an RDS Custom DB instance, RDS Custom instance snapshot, or automated backup of your RDS Custom instance.
+//   - The CEV must not be the default for RDS Custom. If it is, change the
+//     default before running this command.
+//   - The CEV must not be associated with an RDS Custom DB instance, RDS Custom
+//     instance snapshot, or automated backup of your RDS Custom instance.
 //
 // Typically, deletion takes a few minutes. The MediaImport service that imports
 // files from Amazon S3 to create CEVs isn't integrated with Amazon Web Services
@@ -48,7 +50,7 @@ type DeleteCustomDBEngineVersionInput struct {
 	Engine *string
 
 	// The custom engine version (CEV) for your DB instance. This option is required
-	// for RDS Custom, but optional for Amazon RDS. The combination of Engine  and
+	// for RDS Custom, but optional for Amazon RDS. The combination of Engine and
 	// EngineVersion is unique per customer per Amazon Web Services Region.
 	//
 	// This member is required.
@@ -88,8 +90,7 @@ type DeleteCustomDBEngineVersionOutput struct {
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string
 
-	// The name of the Amazon S3 bucket that contains your database installation
-	// files.
+	// The name of the Amazon S3 bucket that contains your database installation files.
 	DatabaseInstallationFilesS3BucketName *string
 
 	// The Amazon S3 directory that contains the database installation files. If not
@@ -113,14 +114,14 @@ type DeleteCustomDBEngineVersionOutput struct {
 	// The EC2 image
 	Image *types.CustomDBEngineVersionAMI
 
-	// The Amazon Web Services KMS key identifier for an encrypted CEV. This
-	// parameter is required for RDS Custom, but optional for Amazon RDS.
+	// The Amazon Web Services KMS key identifier for an encrypted CEV. This parameter
+	// is required for RDS Custom, but optional for Amazon RDS.
 	KMSKeyId *string
 
 	// The major engine version of the CEV.
 	MajorEngineVersion *string
 
-	// The status of the DB engine version, either available  or deprecated .
+	// The status of the DB engine version, either available or deprecated .
 	Status *string
 
 	// A list of the supported CA certificate identifiers. For more information, see
@@ -131,7 +132,7 @@ type DeleteCustomDBEngineVersionOutput struct {
 	SupportedCACertificateIdentifiers []string
 
 	// A list of the character sets supported by this engine for the CharacterSetName
-	// parameter of the CreateDBInstance  operation.
+	// parameter of the CreateDBInstance operation.
 	SupportedCharacterSets []types.CharacterSet
 
 	// A list of the supported DB engine modes.
@@ -148,15 +149,15 @@ type DeleteCustomDBEngineVersionOutput struct {
 	SupportedFeatureNames []string
 
 	// A list of the character sets supported by the Oracle DB engine for the
-	// NcharCharacterSetName parameter of the CreateDBInstance  operation.
+	// NcharCharacterSetName parameter of the CreateDBInstance operation.
 	SupportedNcharCharacterSets []types.CharacterSet
 
-	// A list of the time zones supported by this engine for the Timezone parameter
-	// of the CreateDBInstance  action.
+	// A list of the time zones supported by this engine for the Timezone parameter of
+	// the CreateDBInstance action.
 	SupportedTimezones []types.Timezone
 
-	// A value that indicates whether the engine version supports Babelfish for
-	// Aurora PostgreSQL.
+	// A value that indicates whether the engine version supports Babelfish for Aurora
+	// PostgreSQL.
 	SupportsBabelfish bool
 
 	// A value that indicates whether the engine version supports rotating the server

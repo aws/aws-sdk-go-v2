@@ -40,7 +40,7 @@ type ListUserImportJobsInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// An identifier that was returned from the previous call to ListUserImportJobs,
+	// An identifier that was returned from the previous call to ListUserImportJobs ,
 	// which can be used to return the next set of import jobs in the list.
 	PaginationToken *string
 

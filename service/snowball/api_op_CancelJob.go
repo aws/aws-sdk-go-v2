@@ -11,8 +11,8 @@ import (
 )
 
 // Cancels the specified job. You can only cancel a job before its JobState value
-// changes to PreparingAppliance . Requesting the ListJobs  or DescribeJob action
-// returns a job's JobState  as part of the response element data returned.
+// changes to PreparingAppliance . Requesting the ListJobs or DescribeJob action
+// returns a job's JobState as part of the response element data returned.
 func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns ...func(*Options)) (*CancelJobOutput, error) {
 	if params == nil {
 		params = &CancelJobInput{}

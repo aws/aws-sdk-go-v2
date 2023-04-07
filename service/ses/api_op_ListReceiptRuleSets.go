@@ -13,9 +13,9 @@ import (
 
 // Lists the receipt rule sets that exist under your AWS account in the current
 // AWS Region. If there are additional receipt rule sets to be retrieved, you will
-// receive a NextToken  that you can provide to the next call to
-// ListReceiptRuleSetsto retrieve the additional entries. For information about
-// managing receipt rule sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html)
+// receive a NextToken that you can provide to the next call to ListReceiptRuleSets
+// to retrieve the additional entries. For information about managing receipt rule
+// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html)
 // . You can execute this operation no more than once per second.
 func (c *Client) ListReceiptRuleSets(ctx context.Context, params *ListReceiptRuleSetsInput, optFns ...func(*Options)) (*ListReceiptRuleSetsOutput, error) {
 	if params == nil {

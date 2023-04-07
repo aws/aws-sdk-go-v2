@@ -30,16 +30,16 @@ func (c *Client) UpdateEnvironmentMembership(ctx context.Context, params *Update
 
 type UpdateEnvironmentMembershipInput struct {
 
-	// The ID of the environment for the environment member whose settings you want
-	// to change.
+	// The ID of the environment for the environment member whose settings you want to
+	// change.
 	//
 	// This member is required.
 	EnvironmentId *string
 
 	// The replacement type of environment member permissions you want to associate
 	// with this environment member. Available values include:
-	//     - read-only : Has read-only access to the environment.
-	//     - read-write : Has read-write access to the environment.
+	//   - read-only : Has read-only access to the environment.
+	//   - read-write : Has read-write access to the environment.
 	//
 	// This member is required.
 	Permissions types.MemberPermissions

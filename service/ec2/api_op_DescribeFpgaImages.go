@@ -39,17 +39,22 @@ type DescribeFpgaImagesInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - create-time - The creation time of the AFI.
-	//     - fpga-image-id - The FPGA image identifier (AFI ID).
-	//     - fpga-image-global-id - The global FPGA image identifier (AGFI ID).
-	//     - name - The name of the AFI.
-	//     - owner-id - The Amazon Web Services account ID of the AFI owner.
-	//     - product-code - The product code.
-	//     - shell-version - The version of the Amazon Web Services Shell that was used to create the bitstream.
-	//     - state - The state of the AFI ( pending | failed | available | unavailable ).
-	//     - tag : - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
-	//     - tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
-	//     - update-time - The time of the most recent update.
+	//   - create-time - The creation time of the AFI.
+	//   - fpga-image-id - The FPGA image identifier (AFI ID).
+	//   - fpga-image-global-id - The global FPGA image identifier (AGFI ID).
+	//   - name - The name of the AFI.
+	//   - owner-id - The Amazon Web Services account ID of the AFI owner.
+	//   - product-code - The product code.
+	//   - shell-version - The version of the Amazon Web Services Shell that was used
+	//   to create the bitstream.
+	//   - state - The state of the AFI ( pending | failed | available | unavailable ).
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - update-time - The time of the most recent update.
 	Filters []types.Filter
 
 	// The AFI IDs.
@@ -63,7 +68,7 @@ type DescribeFpgaImagesInput struct {
 
 	// Filters the AFI by owner. Specify an Amazon Web Services account ID, self
 	// (owner is the sender of the request), or an Amazon Web Services owner alias
-	// (valid values are amazon  | aws-marketplace ).
+	// (valid values are amazon | aws-marketplace ).
 	Owners []string
 
 	noSmithyDocumentSerde
@@ -158,8 +163,8 @@ type DescribeFpgaImagesPaginatorOptions struct {
 	// The maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,22 +12,21 @@ import (
 )
 
 // Starts the classification and analysis of an input document.
-// StartLendingAnalysisinitiates the classification and analysis of a packet of
+// StartLendingAnalysis initiates the classification and analysis of a packet of
 // lending documents. StartLendingAnalysis operates on a document file located in
 // an Amazon S3 bucket. StartLendingAnalysis can analyze text in documents that
 // are in one of the following formats: JPEG, PNG, TIFF, PDF. Use DocumentLocation
 // to specify the bucket name and the file name of the document.
-// StartLendingAnalysis returns a job identifier ( JobId) that you use to get the
+// StartLendingAnalysis returns a job identifier ( JobId ) that you use to get the
 // results of the operation. When the text analysis is finished, Amazon Textract
 // publishes a completion status to the Amazon Simple Notification Service (Amazon
-// SNS) topic that you specify in NotificationChannel. To get the results of the
+// SNS) topic that you specify in NotificationChannel . To get the results of the
 // text analysis operation, first check that the status value published to the
 // Amazon SNS topic is SUCCEEDED. If the status is SUCCEEDED you can call either
-// GetLendingAnalysis or GetLendingAnalysisSummary  and provide the JobId to
-// obtain the results of the analysis. If using OutputConfig to specify an Amazon
-// S3 bucket, the output will be contained within the specified prefix in a
-// directory labeled with the job-id. In the directory there are 3 sub-directories:
-//
+// GetLendingAnalysis or GetLendingAnalysisSummary and provide the JobId to obtain
+// the results of the analysis. If using OutputConfig to specify an Amazon S3
+// bucket, the output will be contained within the specified prefix in a directory
+// labeled with the job-id. In the directory there are 3 sub-directories:
 //   - detailedResponse (contains the GetLendingAnalysis response)
 //   - summaryResponse (for the GetLendingAnalysisSummary response)
 //   - splitDocuments (documents split across logical boundaries)
@@ -55,8 +54,8 @@ type StartLendingAnalysisInput struct {
 	// This member is required.
 	DocumentLocation *types.DocumentLocation
 
-	// The idempotent token that you use to identify the start request. If you use
-	// the same token with multiple StartLendingAnalysis  requests, the same JobId is
+	// The idempotent token that you use to identify the start request. If you use the
+	// same token with multiple StartLendingAnalysis requests, the same JobId is
 	// returned. Use ClientRequestToken to prevent the same job from being
 	// accidentally started more than once. For more information, see Calling Amazon
 	// Textract Asynchronous Operations (https://docs.aws.amazon.com/textract/latest/dg/api-sync.html)
@@ -69,8 +68,8 @@ type StartLendingAnalysisInput struct {
 	// tax form or a receipt).
 	JobTag *string
 
-	// The KMS key used to encrypt the inference results. This can be in either Key
-	// ID or Key Alias format. When a KMS key is provided, the KMS key will be used for
+	// The KMS key used to encrypt the inference results. This can be in either Key ID
+	// or Key Alias format. When a KMS key is provided, the KMS key will be used for
 	// server-side encryption of the objects in the customer bucket. When this
 	// parameter is not enabled, the result will be encrypted server side, using
 	// SSE-S3.
@@ -105,7 +104,7 @@ type StartLendingAnalysisInput struct {
 type StartLendingAnalysisOutput struct {
 
 	// A unique identifier for the lending or text-detection job. The JobId is
-	// returned from StartLendingAnalysis . A JobId  value is only valid for 7 days.
+	// returned from StartLendingAnalysis . A JobId value is only valid for 7 days.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

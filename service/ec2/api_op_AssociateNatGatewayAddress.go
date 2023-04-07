@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a
-// public NAT gateway. For more information, see Work with NAT gateways (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with)
+// Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public
+// NAT gateway. For more information, see Work with NAT gateways (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with)
 // in the Amazon Virtual Private Cloud User Guide. By default, you can associate up
 // to 2 Elastic IP addresses per public NAT gateway. You can increase the limit by
 // requesting a quota adjustment. For more information, see Elastic IP address

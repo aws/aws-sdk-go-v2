@@ -54,8 +54,8 @@ type GetStageOutput struct {
 	// modify the $default stage.
 	ApiGatewayManaged bool
 
-	// Specifies whether updates to an API automatically trigger a new deployment.
-	// The default value is false.
+	// Specifies whether updates to an API automatically trigger a new deployment. The
+	// default value is false.
 	AutoDeploy bool
 
 	// The identifier of a client certificate for a Stage. Supported only for
@@ -88,8 +88,8 @@ type GetStageOutput struct {
 	// The name of the stage.
 	StageName *string
 
-	// A map that defines the stage variables for a stage resource. Variable names
-	// can have alphanumeric and underscore characters, and the values must match
+	// A map that defines the stage variables for a stage resource. Variable names can
+	// have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	StageVariables map[string]string
 

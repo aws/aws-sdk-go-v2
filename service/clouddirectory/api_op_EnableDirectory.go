@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the specified directory. Only disabled directories can be enabled.
-// Once enabled, the directory can then be read and written to.
+// Enables the specified directory. Only disabled directories can be enabled. Once
+// enabled, the directory can then be read and written to.
 func (c *Client) EnableDirectory(ctx context.Context, params *EnableDirectoryInput, optFns ...func(*Options)) (*EnableDirectoryOutput, error) {
 	if params == nil {
 		params = &EnableDirectoryInput{}

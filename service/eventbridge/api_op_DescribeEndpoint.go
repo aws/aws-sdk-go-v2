@@ -85,8 +85,7 @@ type DescribeEndpointOutput struct {
 	// The current state of the endpoint you asked for information about.
 	State types.EndpointState
 
-	// The reason the endpoint you asked for information about is in its current
-	// state.
+	// The reason the endpoint you asked for information about is in its current state.
 	StateReason *string
 
 	// Metadata pertaining to the operation's result.

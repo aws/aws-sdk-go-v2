@@ -12,10 +12,10 @@ import (
 
 // Stops an entity recognizer training job while in progress. If the training job
 // state is TRAINING , the job is marked for termination and put into the
-// STOP_REQUESTEDstate. If the training job completes before it can be stopped,
-// it is put into the TRAINED; otherwise the training job is stopped and putted
-// into the STOPPED state and the service sends back an HTTP 200 response with an
-// empty HTTP body.
+// STOP_REQUESTED state. If the training job completes before it can be stopped, it
+// is put into the TRAINED ; otherwise the training job is stopped and putted into
+// the STOPPED state and the service sends back an HTTP 200 response with an empty
+// HTTP body.
 func (c *Client) StopTrainingEntityRecognizer(ctx context.Context, params *StopTrainingEntityRecognizerInput, optFns ...func(*Options)) (*StopTrainingEntityRecognizerOutput, error) {
 	if params == nil {
 		params = &StopTrainingEntityRecognizerInput{}

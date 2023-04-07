@@ -34,8 +34,8 @@ type PutCaseEventConfigurationInput struct {
 	// This member is required.
 	DomainId *string
 
-	// Configuration to enable EventBridge case event delivery and determine what
-	// data is delivered.
+	// Configuration to enable EventBridge case event delivery and determine what data
+	// is delivered.
 	//
 	// This member is required.
 	EventBridge *types.EventBridgeConfiguration

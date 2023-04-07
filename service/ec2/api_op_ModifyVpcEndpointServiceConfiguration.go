@@ -70,8 +70,8 @@ type ModifyVpcEndpointServiceConfigurationInput struct {
 	// service configuration.
 	RemoveNetworkLoadBalancerArns []string
 
-	// (Interface endpoint configuration) Removes the private DNS name of the
-	// endpoint service.
+	// (Interface endpoint configuration) Removes the private DNS name of the endpoint
+	// service.
 	RemovePrivateDnsName *bool
 
 	// The IP address types to remove from your service configuration.
@@ -82,7 +82,7 @@ type ModifyVpcEndpointServiceConfigurationInput struct {
 
 type ModifyVpcEndpointServiceConfigurationOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

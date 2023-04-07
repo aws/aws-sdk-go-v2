@@ -46,10 +46,10 @@ type RegisterJobDefinitionInput struct {
 	Type types.JobDefinitionType
 
 	// An object with various properties specific to Amazon ECS based single-node
-	// container-based jobs. If the job definition's type  parameter is container,
-	// then you must specify either containerProperties  or nodeProperties. This must
-	// not be specified for Amazon EKS based job definitions. If the job runs on
-	// Fargate resources, then you must not specify nodeProperties ; use only
+	// container-based jobs. If the job definition's type parameter is container , then
+	// you must specify either containerProperties or nodeProperties . This must not be
+	// specified for Amazon EKS based job definitions. If the job runs on Fargate
+	// resources, then you must not specify nodeProperties ; use only
 	// containerProperties .
 	ContainerProperties *types.ContainerProperties
 
@@ -60,10 +60,10 @@ type RegisterJobDefinitionInput struct {
 	// An object with various properties specific to multi-node parallel jobs. If you
 	// specify node properties for a job, it becomes a multi-node parallel job. For
 	// more information, see Multi-node Parallel Jobs (https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html)
-	// in the Batch User Guide. If the job definition's type  parameter is container,
-	// then you must specify either containerProperties  or nodeProperties. If the
-	// job runs on Fargate resources, then you must not specify nodeProperties ; use
-	// containerPropertiesinstead. If the job runs on Amazon EKS resources, then you
+	// in the Batch User Guide. If the job definition's type parameter is container ,
+	// then you must specify either containerProperties or nodeProperties . If the job
+	// runs on Fargate resources, then you must not specify nodeProperties ; use
+	// containerProperties instead. If the job runs on Amazon EKS resources, then you
 	// must not specify nodeProperties .
 	NodeProperties *types.NodeProperties
 
@@ -106,11 +106,11 @@ type RegisterJobDefinitionInput struct {
 	// in Batch User Guide.
 	Tags map[string]string
 
-	// The timeout configuration for jobs that are submitted with this job
-	// definition, after which Batch terminates your jobs if they have not finished. If
-	// a job is terminated due to a timeout, it isn't retried. The minimum value for
-	// the timeout is 60 seconds. Any timeout configuration that's specified during a
-	// SubmitJoboperation overrides the timeout configuration defined here. For more
+	// The timeout configuration for jobs that are submitted with this job definition,
+	// after which Batch terminates your jobs if they have not finished. If a job is
+	// terminated due to a timeout, it isn't retried. The minimum value for the timeout
+	// is 60 seconds. Any timeout configuration that's specified during a SubmitJob
+	// operation overrides the timeout configuration defined here. For more
 	// information, see Job Timeouts (https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html)
 	// in the Batch User Guide.
 	Timeout *types.JobTimeout

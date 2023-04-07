@@ -36,20 +36,19 @@ type ListRobotApplicationsInput struct {
 	// to three filters.
 	Filters []types.Filter
 
-	// When this parameter is used, ListRobotApplications  only returns maxResults
-	// results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListRobotApplications request with the returned nextToken value. This value
-	// can be between 1 and 100. If this parameter is not used, then
-	// ListRobotApplications returns up to 100 results and a nextToken value if
-	// applicable.
+	// When this parameter is used, ListRobotApplications only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another
+	// ListRobotApplications request with the returned nextToken value. This value can
+	// be between 1 and 100. If this parameter is not used, then ListRobotApplications
+	// returns up to 100 results and a nextToken value if applicable.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
 	// the response object's nextToken parameter value is set to a token. To retrieve
-	// the next set of results, call ListRobotApplications again and assign that
-	// token to the request object's nextToken parameter. If there are no remaining
-	// results, the previous response object's NextToken parameter is set to null.
+	// the next set of results, call ListRobotApplications again and assign that token
+	// to the request object's nextToken parameter. If there are no remaining results,
+	// the previous response object's NextToken parameter is set to null.
 	NextToken *string
 
 	// The version qualifier of the robot application.
@@ -62,9 +61,9 @@ type ListRobotApplicationsOutput struct {
 
 	// If the previous paginated request did not return all of the remaining results,
 	// the response object's nextToken parameter value is set to a token. To retrieve
-	// the next set of results, call ListRobotApplications again and assign that
-	// token to the request object's nextToken parameter. If there are no remaining
-	// results, the previous response object's NextToken parameter is set to null.
+	// the next set of results, call ListRobotApplications again and assign that token
+	// to the request object's nextToken parameter. If there are no remaining results,
+	// the previous response object's NextToken parameter is set to null.
 	NextToken *string
 
 	// A list of robot application summaries that meet the criteria of the request.
@@ -147,17 +146,16 @@ var _ ListRobotApplicationsAPIClient = (*Client)(nil)
 // ListRobotApplicationsPaginatorOptions is the paginator options for
 // ListRobotApplications
 type ListRobotApplicationsPaginatorOptions struct {
-	// When this parameter is used, ListRobotApplications  only returns maxResults
-	// results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListRobotApplications request with the returned nextToken value. This value
-	// can be between 1 and 100. If this parameter is not used, then
-	// ListRobotApplications returns up to 100 results and a nextToken value if
-	// applicable.
+	// When this parameter is used, ListRobotApplications only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another
+	// ListRobotApplications request with the returned nextToken value. This value can
+	// be between 1 and 100. If this parameter is not used, then ListRobotApplications
+	// returns up to 100 results and a nextToken value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

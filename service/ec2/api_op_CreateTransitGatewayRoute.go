@@ -29,8 +29,8 @@ func (c *Client) CreateTransitGatewayRoute(ctx context.Context, params *CreateTr
 
 type CreateTransitGatewayRouteInput struct {
 
-	// The CIDR range used for destination matches. Routing decisions are based on
-	// the most specific match.
+	// The CIDR range used for destination matches. Routing decisions are based on the
+	// most specific match.
 	//
 	// This member is required.
 	DestinationCidrBlock *string

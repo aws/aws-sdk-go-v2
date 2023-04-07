@@ -34,9 +34,9 @@ type SearchUsersInput struct {
 	// filter keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.
 	Filters []types.Filter
 
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved. Required.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved. Required.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
@@ -45,9 +45,8 @@ type SearchUsersInput struct {
 	// . Required.
 	NextToken *string
 
-	// The sort order to use in listing the filtered set of users. Required.
-	// Supported sort keys are UserId, FirstName, LastName, Email, and
-	// EnrollmentStatus.
+	// The sort order to use in listing the filtered set of users. Required. Supported
+	// sort keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.
 	SortCriteria []types.Sort
 
 	noSmithyDocumentSerde
@@ -142,13 +141,13 @@ var _ SearchUsersAPIClient = (*Client)(nil)
 
 // SearchUsersPaginatorOptions is the paginator options for SearchUsers
 type SearchUsersPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved. Required.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved. Required.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

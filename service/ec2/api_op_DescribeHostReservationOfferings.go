@@ -38,8 +38,9 @@ func (c *Client) DescribeHostReservationOfferings(ctx context.Context, params *D
 type DescribeHostReservationOfferingsInput struct {
 
 	// The filters.
-	//     - instance-family - The instance family of the offering (for example, m4 ).
-	//     - payment-option - The payment option ( NoUpfront | PartialUpfront | AllUpfront ).
+	//   - instance-family - The instance family of the offering (for example, m4 ).
+	//   - payment-option - The payment option ( NoUpfront | PartialUpfront |
+	//   AllUpfront ).
 	Filter []types.Filter
 
 	// This is the maximum duration of the reservation to purchase, specified in
@@ -163,8 +164,8 @@ type DescribeHostReservationOfferingsPaginatorOptions struct {
 	// larger value than 500, you receive an error.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

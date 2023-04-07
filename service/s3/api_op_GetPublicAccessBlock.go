@@ -13,13 +13,13 @@ import (
 )
 
 // Retrieves the PublicAccessBlock configuration for an Amazon S3 bucket. To use
-// this operation, you must have the s3:GetBucketPublicAccessBlock permission.
-// For more information about Amazon S3 permissions, see Specifying Permissions
-// in a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
+// this operation, you must have the s3:GetBucketPublicAccessBlock permission. For
+// more information about Amazon S3 permissions, see Specifying Permissions in a
+// Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
 // . When Amazon S3 evaluates the PublicAccessBlock configuration for a bucket or
 // an object, it checks the PublicAccessBlock configuration for both the bucket
 // (or the bucket that contains the object) and the bucket owner's account. If the
-// PublicAccessBlocksettings are different between the bucket and the account,
+// PublicAccessBlock settings are different between the bucket and the account,
 // Amazon S3 uses the most restrictive combination of the bucket-level and
 // account-level settings. For more information about when Amazon S3 considers a
 // bucket or an object public, see The Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
@@ -45,8 +45,8 @@ func (c *Client) GetPublicAccessBlock(ctx context.Context, params *GetPublicAcce
 
 type GetPublicAccessBlockInput struct {
 
-	// The name of the Amazon S3 bucket whose PublicAccessBlock configuration you
-	// want to retrieve.
+	// The name of the Amazon S3 bucket whose PublicAccessBlock configuration you want
+	// to retrieve.
 	//
 	// This member is required.
 	Bucket *string

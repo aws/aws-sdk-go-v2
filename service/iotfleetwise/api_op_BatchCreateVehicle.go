@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a group, or batch, of vehicles. You must specify a decoder manifest
-// and a vehicle model (model manifest) for each vehicle. For more information, see
-//
+// Creates a group, or batch, of vehicles. You must specify a decoder manifest and
+// a vehicle model (model manifest) for each vehicle. For more information, see
 // Create multiple vehicles (AWS CLI) (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicles-cli.html)
 // in the Amazon Web Services IoT FleetWise Developer Guide.
 func (c *Client) BatchCreateVehicle(ctx context.Context, params *BatchCreateVehicleInput, optFns ...func(*Options)) (*BatchCreateVehicleOutput, error) {

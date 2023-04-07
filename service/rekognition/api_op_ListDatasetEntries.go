@@ -46,15 +46,15 @@ type ListDatasetEntriesInput struct {
 	DatasetArn *string
 
 	// Specifies a label filter for the response. The response includes an entry only
-	// if one or more of the labels in ContainsLabels  exist in the entry.
+	// if one or more of the labels in ContainsLabels exist in the entry.
 	ContainsLabels []string
 
 	// Specifies an error filter for the response. Specify True to only include
 	// entries that have errors.
 	HasErrors *bool
 
-	// Specify true  to get only the JSON Lines where the image is labeled. Specify
-	// falseto get only the JSON Lines where the image isn't labeled. If you don't
+	// Specify true to get only the JSON Lines where the image is labeled. Specify
+	// false to get only the JSON Lines where the image isn't labeled. If you don't
 	// specify Labeled , ListDatasetEntries returns JSON Lines for labeled and
 	// unlabeled images.
 	Labeled *bool
@@ -69,8 +69,8 @@ type ListDatasetEntriesInput struct {
 	// response. You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// If specified, ListDatasetEntries  only returns JSON Lines where the value of
-	// SourceRefContains is part of the source-ref  field. The source-ref field
+	// If specified, ListDatasetEntries only returns JSON Lines where the value of
+	// SourceRefContains is part of the source-ref field. The source-ref field
 	// contains the Amazon S3 location of the image. You can use SouceRefContains for
 	// tasks such as getting the JSON Line for a single image, or gettting JSON Lines
 	// for all images within a specific folder.
@@ -174,8 +174,8 @@ type ListDatasetEntriesPaginatorOptions struct {
 	// ValidationException error occurs. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

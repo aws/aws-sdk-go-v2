@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation allows a search on TABLE  resources by LFTags. This will be
-// used by admins who want to grant user permissions on certain LF-tags. Before
-// making a grant, the admin can use SearchTablesByLFTags to find all resources
-// where the given LFTags are valid to verify whether the returned resources can
-// be shared.
+// This operation allows a search on TABLE resources by LFTag s. This will be used
+// by admins who want to grant user permissions on certain LF-tags. Before making a
+// grant, the admin can use SearchTablesByLFTags to find all resources where the
+// given LFTag s are valid to verify whether the returned resources can be shared.
 func (c *Client) SearchTablesByLFTags(ctx context.Context, params *SearchTablesByLFTagsInput, optFns ...func(*Options)) (*SearchTablesByLFTagsOutput, error) {
 	if params == nil {
 		params = &SearchTablesByLFTagsInput{}
@@ -34,7 +33,7 @@ func (c *Client) SearchTablesByLFTags(ctx context.Context, params *SearchTablesB
 
 type SearchTablesByLFTagsInput struct {
 
-	// A list of conditions ( LFTag  structures) to search for in table resources.
+	// A list of conditions ( LFTag structures) to search for in table resources.
 	//
 	// This member is required.
 	Expression []types.LFTag
@@ -145,8 +144,8 @@ type SearchTablesByLFTagsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

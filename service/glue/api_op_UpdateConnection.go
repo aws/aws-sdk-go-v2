@@ -29,7 +29,7 @@ func (c *Client) UpdateConnection(ctx context.Context, params *UpdateConnectionI
 
 type UpdateConnectionInput struct {
 
-	// A ConnectionInput  object that redefines the connection in question.
+	// A ConnectionInput object that redefines the connection in question.
 	//
 	// This member is required.
 	ConnectionInput *types.ConnectionInput

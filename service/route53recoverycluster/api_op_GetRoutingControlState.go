@@ -46,8 +46,8 @@ func (c *Client) GetRoutingControlState(ctx context.Context, params *GetRoutingC
 
 type GetRoutingControlStateInput struct {
 
-	// The Amazon Resource Name (ARN) for the routing control that you want to get
-	// the state for.
+	// The Amazon Resource Name (ARN) for the routing control that you want to get the
+	// state for.
 	//
 	// This member is required.
 	RoutingControlArn *string

@@ -15,9 +15,8 @@ import (
 // Gets information about all of the versions of a bot. The ListBotVersions
 // operation returns a summary of each version of a bot. For example, if a bot has
 // three numbered versions, the ListBotVersions operation returns for summaries,
-// one for each numbered version and one for the DRAFT  version. The
-// ListBotVersions operation always returns at least one version, the DRAFT
-// version.
+// one for each numbered version and one for the DRAFT version. The ListBotVersions
+// operation always returns at least one version, the DRAFT version.
 func (c *Client) ListBotVersions(ctx context.Context, params *ListBotVersionsInput, optFns ...func(*Options)) (*ListBotVersionsOutput, error) {
 	if params == nil {
 		params = &ListBotVersionsInput{}
@@ -46,12 +45,12 @@ type ListBotVersionsInput struct {
 	MaxResults *int32
 
 	// If the response to the ListBotVersion operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response.
-	// Use that token in the nextToken  parameter to return the next page of results.
+	// specified in the maxResults parameter, a token is returned in the response. Use
+	// that token in the nextToken parameter to return the next page of results.
 	NextToken *string
 
-	// Specifies sorting parameters for the list of versions. You can specify that
-	// the list be sorted by version name in either ascending or descending order.
+	// Specifies sorting parameters for the list of versions. You can specify that the
+	// list be sorted by version name in either ascending or descending order.
 	SortBy *types.BotVersionSortBy
 
 	noSmithyDocumentSerde
@@ -69,8 +68,8 @@ type ListBotVersionsOutput struct {
 	BotVersionSummaries []types.BotVersionSummary
 
 	// A token that indicates whether there are more results to return in a response
-	// to the ListBotVersions  operation. If the nextToken field is present, you send
-	// the contents as the nextToken  parameter of a ListBotAliases operation request
+	// to the ListBotVersions operation. If the nextToken field is present, you send
+	// the contents as the nextToken parameter of a ListBotAliases operation request
 	// to get the next page of results.
 	NextToken *string
 
@@ -158,8 +157,8 @@ type ListBotVersionsPaginatorOptions struct {
 	// returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

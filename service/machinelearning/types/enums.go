@@ -190,9 +190,9 @@ const (
 	MLModelTypeMulticlass MLModelType = "MULTICLASS"
 )
 
-// Values returns all known values for MLModelType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MLModelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MLModelType) Values() []MLModelType {
 	return []MLModelType{
 		"REGRESSION",
@@ -251,8 +251,8 @@ const (
 	TaggableResourceTypeMlModel         TaggableResourceType = "MLModel"
 )
 
-// Values returns all known values for TaggableResourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TaggableResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TaggableResourceType) Values() []TaggableResourceType {
 	return []TaggableResourceType{

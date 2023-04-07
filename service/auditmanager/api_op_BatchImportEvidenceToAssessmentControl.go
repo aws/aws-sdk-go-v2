@@ -21,7 +21,8 @@ import (
 // apply to this action:
 //   - Maximum size of an individual evidence file: 100 MB
 //   - Number of daily manual evidence uploads per control: 100
-//   - Supported file formats: See Supported file types for manual evidence (https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files) in the Audit Manager User Guide
+//   - Supported file formats: See Supported file types for manual evidence (https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files)
+//     in the Audit Manager User Guide
 //
 // For more information about Audit Manager service restrictions, see Quotas and
 // restrictions for Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html)
@@ -68,7 +69,7 @@ type BatchImportEvidenceToAssessmentControlInput struct {
 
 type BatchImportEvidenceToAssessmentControlOutput struct {
 
-	// A list of errors that the BatchImportEvidenceToAssessmentControl  API returned.
+	// A list of errors that the BatchImportEvidenceToAssessmentControl API returned.
 	Errors []types.BatchImportEvidenceToAssessmentControlError
 
 	// Metadata pertaining to the operation's result.

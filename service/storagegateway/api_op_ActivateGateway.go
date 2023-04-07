@@ -16,7 +16,7 @@ import (
 // want to use for storing snapshots or tapes, the time zone for scheduled
 // snapshots the gateway snapshot schedule window, an activation key, and a name
 // for your gateway. The activation process also associates your gateway with your
-// account. For more information, see UpdateGatewayInformation. You must turn on
+// account. For more information, see UpdateGatewayInformation . You must turn on
 // the gateway VM before you can activate your gateway.
 func (c *Client) ActivateGateway(ctx context.Context, params *ActivateGatewayInput, optFns ...func(*Options)) (*ActivateGatewayOutput, error) {
 	if params == nil {
@@ -46,7 +46,7 @@ type ActivateGatewayInput struct {
 	// Your gateway activation key. You can obtain the activation key by sending an
 	// HTTP GET request with redirects enabled to the gateway IP address (port 80). The
 	// redirect URL returned in the response provides you the activation key for your
-	// gateway in the query string parameter activationKey. It may also include other
+	// gateway in the query string parameter activationKey . It may also include other
 	// activation-related parameters, however, these are merely defaults -- the
 	// arguments you pass to the ActivateGateway API call determine the actual
 	// configuration of your gateway. For more information, see Getting activation key (https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html)
@@ -65,10 +65,10 @@ type ActivateGatewayInput struct {
 	// Amazon Web Services Region as the Amazon Web Services Region in your Host
 	// header in the request. For more information about available Amazon Web Services
 	// Regions and endpoints for Storage Gateway, see Storage Gateway endpoints and
-	// quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html)in the Amazon
-	// Web Services General Reference. Valid Values: See Storage Gateway endpoints
-	// and quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html)in the
-	// Amazon Web Services General Reference.
+	// quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the Amazon Web
+	// Services General Reference. Valid Values: See Storage Gateway endpoints and
+	// quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the Amazon Web
+	// Services General Reference.
 	//
 	// This member is required.
 	GatewayRegion *string
@@ -84,12 +84,12 @@ type ActivateGatewayInput struct {
 
 	// A value that defines the type of gateway to activate. The type specified is
 	// critical to all later functions of the gateway and cannot be changed after
-	// activation. The default value is CACHED . Valid Values: STORED  | CACHED  | VTL
-	// | VTL_SNOW  | FILE_S3  | FILE_FSX_SMB
+	// activation. The default value is CACHED . Valid Values: STORED | CACHED | VTL |
+	// VTL_SNOW | FILE_S3 | FILE_FSX_SMB
 	GatewayType *string
 
 	// The value that indicates the type of medium changer to use for tape gateway.
-	// This field is optional. Valid Values: STK-L700  | AWS-Gateway-VTL  |
+	// This field is optional. Valid Values: STK-L700 | AWS-Gateway-VTL |
 	// IBM-03584L32-0402
 	MediumChangerType *string
 

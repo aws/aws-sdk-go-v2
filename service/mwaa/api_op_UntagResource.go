@@ -36,8 +36,8 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The key-value tag pair you want to remove. For example, "Environment":
-	// "Staging" .
+	// The key-value tag pair you want to remove. For example, "Environment": "Staging"
+	// .
 	//
 	// This member is required.
 	TagKeys []string

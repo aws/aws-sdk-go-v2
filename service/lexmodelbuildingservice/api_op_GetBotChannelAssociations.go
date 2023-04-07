@@ -43,14 +43,13 @@ type GetBotChannelAssociationsInput struct {
 	// This member is required.
 	BotName *string
 
-	// The maximum number of associations to return in the response. The default is
-	// 50.
+	// The maximum number of associations to return in the response. The default is 50.
 	MaxResults *int32
 
 	// Substring to match in channel association names. An association will be
 	// returned if any part of its name matches the substring. For example, "xyz"
 	// matches both "xyzabc" and "abcxyz." To return all bot channel associations, use
-	// a hyphen ("-") as the nameContains  parameter.
+	// a hyphen ("-") as the nameContains parameter.
 	NameContains *string
 
 	// A pagination token for fetching the next page of associations. If the response
@@ -154,12 +153,11 @@ var _ GetBotChannelAssociationsAPIClient = (*Client)(nil)
 // GetBotChannelAssociationsPaginatorOptions is the paginator options for
 // GetBotChannelAssociations
 type GetBotChannelAssociationsPaginatorOptions struct {
-	// The maximum number of associations to return in the response. The default is
-	// 50.
+	// The maximum number of associations to return in the response. The default is 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -58,15 +58,15 @@ type CreateContainerRecipeInput struct {
 	// This member is required.
 	ParentImage *string
 
-	// The semantic version of the container recipe. This version follows the
-	// semantic version syntax. The semantic version has four nodes: ../. You can
-	// assign values for the first three, and can filter on all of them. Assignment:
-	// For the first three nodes you can assign any positive integer value, including
-	// zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder
-	// automatically assigns the build number to the fourth node. Patterns: You can use
-	// any numeric pattern that adheres to the assignment requirements for the nodes
-	// that you can assign. For example, you might choose a software version pattern,
-	// such as 1.0.0, or a date, such as 2021.01.01.
+	// The semantic version of the container recipe. This version follows the semantic
+	// version syntax. The semantic version has four nodes: ../. You can assign values
+	// for the first three, and can filter on all of them. Assignment: For the first
+	// three nodes you can assign any positive integer value, including zero, with an
+	// upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically
+	// assigns the build number to the fourth node. Patterns: You can use any numeric
+	// pattern that adheres to the assignment requirements for the nodes that you can
+	// assign. For example, you might choose a software version pattern, such as 1.0.0,
+	// or a date, such as 2021.01.01.
 	//
 	// This member is required.
 	SemanticVersion *string
@@ -113,8 +113,8 @@ type CreateContainerRecipeOutput struct {
 	// The client token used to make this request idempotent.
 	ClientToken *string
 
-	// Returns the Amazon Resource Name (ARN) of the container recipe that the
-	// request created.
+	// Returns the Amazon Resource Name (ARN) of the container recipe that the request
+	// created.
 	ContainerRecipeArn *string
 
 	// The request ID that uniquely identifies this request.

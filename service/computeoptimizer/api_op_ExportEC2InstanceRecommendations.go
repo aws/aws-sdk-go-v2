@@ -94,7 +94,7 @@ type ExportEC2InstanceRecommendationsInput struct {
 type ExportEC2InstanceRecommendationsOutput struct {
 
 	// The identification number of the export job. Use the
-	// DescribeRecommendationExportJobsaction, and specify the job ID to view the
+	// DescribeRecommendationExportJobs action, and specify the job ID to view the
 	// status of an export job.
 	JobId *string
 

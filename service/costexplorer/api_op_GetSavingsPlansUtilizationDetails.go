@@ -15,9 +15,9 @@ import (
 // Retrieves attribute data along with aggregate utilization and savings data for
 // a given time period. This doesn't support granular or grouped data
 // (daily/monthly) in response. You can't retrieve data by dates in a single
-// response similar to GetSavingsPlanUtilization, but you have the option to make
+// response similar to GetSavingsPlanUtilization , but you have the option to make
 // multiple calls to GetSavingsPlanUtilizationDetails by providing individual
-// dates. You can use GetDimensionValues  in SAVINGS_PLANS to determine the
+// dates. You can use GetDimensionValues in SAVINGS_PLANS to determine the
 // possible dimension values. GetSavingsPlanUtilizationDetails internally groups
 // data by SavingsPlansArn .
 func (c *Client) GetSavingsPlansUtilizationDetails(ctx context.Context, params *GetSavingsPlansUtilizationDetailsInput, optFns ...func(*Options)) (*GetSavingsPlansUtilizationDetailsOutput, error) {
@@ -38,8 +38,8 @@ func (c *Client) GetSavingsPlansUtilizationDetails(ctx context.Context, params *
 type GetSavingsPlansUtilizationDetailsInput struct {
 
 	// The time period that you want the usage and costs for. The Start date must be
-	// within 13 months. The End  date must be after the Start date, and before the
-	// current date. Future dates can't be used as an End  date.
+	// within 13 months. The End date must be after the Start date, and before the
+	// current date. Future dates can't be used as an End date.
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval
@@ -49,34 +49,34 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 
 	// Filters Savings Plans utilization coverage data for active Savings Plans
 	// dimensions. You can filter data with the following dimensions:
-	//     - LINKED_ACCOUNT
-	//     - SAVINGS_PLAN_ARN
-	//     - REGION
-	//     - PAYMENT_OPTION
-	//     - INSTANCE_TYPE_FAMILY
-	//  GetSavingsPlansUtilizationDetails  uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
-	// object as the other operations, but only AND  is supported among each dimension.
+	//   - LINKED_ACCOUNT
+	//   - SAVINGS_PLAN_ARN
+	//   - REGION
+	//   - PAYMENT_OPTION
+	//   - INSTANCE_TYPE_FAMILY
+	// GetSavingsPlansUtilizationDetails uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// object as the other operations, but only AND is supported among each dimension.
 	Filter *types.Expression
 
-	// The number of items to be returned in a response. The default is 20, with a
+	// The number of items to be returned in a response. The default is 20 , with a
 	// minimum value of 1 .
 	MaxResults *int32
 
-	// The token to retrieve the next set of results. Amazon Web Services provides
-	// the token when the response from a previous call has more results than the
-	// maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextToken *string
 
-	// The value that you want to sort the data by. The following values are
-	// supported for Key :
-	//     - UtilizationPercentage
-	//     - TotalCommitment
-	//     - UsedCommitment
-	//     - UnusedCommitment
-	//     - NetSavings
-	//     - AmortizedRecurringCommitment
-	//     - AmortizedUpfrontCommitment
-	//  The supported values for SortOrder  are ASCENDING  and DESCENDING .
+	// The value that you want to sort the data by. The following values are supported
+	// for Key :
+	//   - UtilizationPercentage
+	//   - TotalCommitment
+	//   - UsedCommitment
+	//   - UnusedCommitment
+	//   - NetSavings
+	//   - AmortizedRecurringCommitment
+	//   - AmortizedUpfrontCommitment
+	// The supported values for SortOrder are ASCENDING and DESCENDING .
 	SortBy *types.SortDefinition
 
 	noSmithyDocumentSerde
@@ -95,9 +95,9 @@ type GetSavingsPlansUtilizationDetailsOutput struct {
 	// This member is required.
 	TimePeriod *types.DateInterval
 
-	// The token to retrieve the next set of results. Amazon Web Services provides
-	// the token when the response from a previous call has more results than the
-	// maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextToken *string
 
 	// The total Savings Plans utilization, regardless of time period.
@@ -183,12 +183,12 @@ var _ GetSavingsPlansUtilizationDetailsAPIClient = (*Client)(nil)
 // GetSavingsPlansUtilizationDetailsPaginatorOptions is the paginator options for
 // GetSavingsPlansUtilizationDetails
 type GetSavingsPlansUtilizationDetailsPaginatorOptions struct {
-	// The number of items to be returned in a response. The default is 20, with a
+	// The number of items to be returned in a response. The default is 20 , with a
 	// minimum value of 1 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

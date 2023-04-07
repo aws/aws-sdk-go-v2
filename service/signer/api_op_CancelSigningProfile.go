@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the state of an ACTIVE  signing profile to CANCELED. A canceled
-// profile is still viewable with the ListSigningProfiles operation, but it
-// cannot perform new signing jobs, and is deleted two years after cancelation.
+// Changes the state of an ACTIVE signing profile to CANCELED . A canceled profile
+// is still viewable with the ListSigningProfiles operation, but it cannot perform
+// new signing jobs, and is deleted two years after cancelation.
 func (c *Client) CancelSigningProfile(ctx context.Context, params *CancelSigningProfileInput, optFns ...func(*Options)) (*CancelSigningProfileOutput, error) {
 	if params == nil {
 		params = &CancelSigningProfileInput{}

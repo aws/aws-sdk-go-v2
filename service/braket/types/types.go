@@ -106,8 +106,8 @@ type InputFileConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Configures the resource instances to use while running the Amazon Braket
-// hybrid job on Amazon Braket.
+// Configures the resource instances to use while running the Amazon Braket hybrid
+// job on Amazon Braket.
 type InstanceConfig struct {
 
 	// Configures the type resource instances to use while running an Amazon Braket
@@ -160,8 +160,8 @@ type JobEventDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the path to the S3 location where you want to store job artifacts
-// and the encryption key used to store them.
+// Specifies the path to the S3 location where you want to store job artifacts and
+// the encryption key used to store them.
 type JobOutputDataConfig struct {
 
 	// Identifies the S3 path where you want Amazon Braket to store the job training
@@ -170,9 +170,8 @@ type JobOutputDataConfig struct {
 	// This member is required.
 	S3Path *string
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to
-	// encrypt the job training artifacts at rest using Amazon S3 server-side
-	// encryption.
+	// The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to encrypt
+	// the job training artifacts at rest using Amazon S3 server-side encryption.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -279,7 +278,7 @@ type QuantumTaskSummary struct {
 // Information about the data stored in Amazon S3 used by the Amazon Braket job.
 type S3DataSource struct {
 
-	// Depending on the value specified for the S3DataType, identifies either a key
+	// Depending on the value specified for the S3DataType , identifies either a key
 	// name prefix or a manifest that locates the S3 data source.
 	//
 	// This member is required.

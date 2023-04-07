@@ -9,10 +9,9 @@ const (
 	AccessDeniedExceptionReasonInsufficientPermissions AccessDeniedExceptionReason = "INSUFFICIENT_PERMISSIONS"
 )
 
-// Values returns all known values for AccessDeniedExceptionReason. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for AccessDeniedExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessDeniedExceptionReason) Values() []AccessDeniedExceptionReason {
 	return []AccessDeniedExceptionReason{
 		"INSUFFICIENT_PERMISSIONS",
@@ -101,10 +100,9 @@ const (
 	CollaborationQueryLogStatusDisabled CollaborationQueryLogStatus = "DISABLED"
 )
 
-// Values returns all known values for CollaborationQueryLogStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for CollaborationQueryLogStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CollaborationQueryLogStatus) Values() []CollaborationQueryLogStatus {
 	return []CollaborationQueryLogStatus{
 		"ENABLED",
@@ -140,9 +138,9 @@ const (
 	ConflictExceptionReasonInvalidState      ConflictExceptionReason = "INVALID_STATE"
 )
 
-// Values returns all known values for ConflictExceptionReason. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConflictExceptionReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	return []ConflictExceptionReason{
 		"ALREADY_EXISTS",
@@ -276,8 +274,8 @@ const (
 	ProtectedQueryStatusTimedOut   ProtectedQueryStatus = "TIMED_OUT"
 )
 
-// Values returns all known values for ProtectedQueryStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ProtectedQueryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ProtectedQueryStatus) Values() []ProtectedQueryStatus {
 	return []ProtectedQueryStatus{

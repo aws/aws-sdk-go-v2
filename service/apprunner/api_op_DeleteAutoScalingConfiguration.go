@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an App Runner automatic scaling configuration resource. You can delete
-// a specific revision or the latest active revision. You can't delete a
+// Delete an App Runner automatic scaling configuration resource. You can delete a
+// specific revision or the latest active revision. You can't delete a
 // configuration that's used by one or more App Runner services.
 func (c *Client) DeleteAutoScalingConfiguration(ctx context.Context, params *DeleteAutoScalingConfigurationInput, optFns ...func(*Options)) (*DeleteAutoScalingConfigurationOutput, error) {
 	if params == nil {

@@ -115,8 +115,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the principal has crossed the permitted number of resources
-// that can be created.
+// Indicates that the principal has crossed the permitted number of resources that
+// can be created.
 type ServiceQuotaExceededException struct {
 	Message *string
 

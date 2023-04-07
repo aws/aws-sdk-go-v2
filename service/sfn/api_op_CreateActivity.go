@@ -14,13 +14,13 @@ import (
 
 // Creates an activity. An activity is a task that you write in any programming
 // language and host on any machine that has access to Step Functions. Activities
-// must poll Step Functions using the GetActivityTask API action and respond
-// using SendTask* API actions. This function lets Step Functions know the
-// existence of your activity and returns an identifier for use in a state machine
-// and when polling from the activity. This operation is eventually consistent. The
-// results are best effort and may not reflect very recent updates and changes.
-// CreateActivityis an idempotent API. Subsequent requests won’t create a
-// duplicate resource if it was already created. CreateActivity's idempotency
+// must poll Step Functions using the GetActivityTask API action and respond using
+// SendTask* API actions. This function lets Step Functions know the existence of
+// your activity and returns an identifier for use in a state machine and when
+// polling from the activity. This operation is eventually consistent. The results
+// are best effort and may not reflect very recent updates and changes.
+// CreateActivity is an idempotent API. Subsequent requests won’t create a
+// duplicate resource if it was already created. CreateActivity 's idempotency
 // check is based on the activity name . If a following request has different tags
 // values, Step Functions will ignore these differences and treat it as an
 // idempotent request of the previous. In this case, tags will not be updated,
@@ -46,13 +46,13 @@ type CreateActivityInput struct {
 	// Web Services account and region for 90 days. For more information, see Limits
 	// Related to State Machine Executions (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
 	// in the Step Functions Developer Guide. A name must not contain:
-	//     - white space
-	//     - brackets < > { } [ ]
-	//     - wildcard characters ? *
-	//     - special characters " # % \ ^ | ~ ` $ & , ; : /
-	//     - control characters ( U+0000-001F , U+007F-009F )
-	// To enable logging with
-	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+	//   - white space
+	//   - brackets < > { } [ ]
+	//   - wildcard characters ? *
+	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//   - control characters ( U+0000-001F , U+007F-009F )
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
+	// a-z, - and _.
 	//
 	// This member is required.
 	Name *string

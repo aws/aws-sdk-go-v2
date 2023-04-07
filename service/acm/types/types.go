@@ -8,7 +8,7 @@ import (
 )
 
 // Contains metadata about an ACM certificate. This structure is returned in the
-// response to a DescribeCertificate  request.
+// response to a DescribeCertificate request.
 type CertificateDetail struct {
 
 	// The Amazon Resource Name (ARN) of the certificate. For more information about
@@ -24,8 +24,8 @@ type CertificateDetail struct {
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
 
-	// The fully qualified domain name for the certificate, such as www.example.com
-	// or example.com.
+	// The fully qualified domain name for the certificate, such as www.example.com or
+	// example.com.
 	DomainName *string
 
 	// Contains information about the initial validation of each domain name that
@@ -83,7 +83,7 @@ type CertificateDetail struct {
 	Options *CertificateOptions
 
 	// Specifies whether the certificate is eligible for renewal. At this time, only
-	// exported private certificates can be renewed with the RenewCertificate  command.
+	// exported private certificates can be renewed with the RenewCertificate command.
 	RenewalEligibility RenewalEligibility
 
 	// Contains information about the status of ACM's managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
@@ -127,8 +127,8 @@ type CertificateDetail struct {
 	SubjectAlternativeNames []string
 
 	// The source of the certificate. For certificates provided by ACM, this value is
-	// AMAZON_ISSUED . For certificates that you imported with ImportCertificate,
-	// this value is IMPORTED . ACM does not provide managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+	// AMAZON_ISSUED . For certificates that you imported with ImportCertificate , this
+	// value is IMPORTED . ACM does not provide managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
 	// for imported certificates. For more information about the differences between
 	// certificates that you import and those that ACM provides, see Importing
 	// Certificates (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
@@ -155,7 +155,7 @@ type CertificateOptions struct {
 	noSmithyDocumentSerde
 }
 
-// This structure is returned in the response object of ListCertificates  action.
+// This structure is returned in the response object of ListCertificates action.
 type CertificateSummary struct {
 
 	// Amazon Resource Name (ARN) of the certificate. This is of the form:
@@ -167,8 +167,8 @@ type CertificateSummary struct {
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
 
-	// Fully qualified domain name (FQDN), such as www.example.com or example.com,
-	// for the certificate.
+	// Fully qualified domain name (FQDN), such as www.example.com or example.com, for
+	// the certificate.
 	DomainName *string
 
 	// Indicates whether the certificate has been exported. This value exists only
@@ -217,7 +217,7 @@ type CertificateSummary struct {
 	NotBefore *time.Time
 
 	// Specifies whether the certificate is eligible for renewal. At this time, only
-	// exported private certificates can be renewed with the RenewCertificate  command.
+	// exported private certificates can be renewed with the RenewCertificate command.
 	RenewalEligibility RenewalEligibility
 
 	// The time at which the certificate was revoked. This value exists only when the
@@ -246,8 +246,8 @@ type CertificateSummary struct {
 	SubjectAlternativeNameSummaries []string
 
 	// The source of the certificate. For certificates provided by ACM, this value is
-	// AMAZON_ISSUED . For certificates that you imported with ImportCertificate,
-	// this value is IMPORTED . ACM does not provide managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+	// AMAZON_ISSUED . For certificates that you imported with ImportCertificate , this
+	// value is IMPORTED . ACM does not provide managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
 	// for imported certificates. For more information about the differences between
 	// certificates that you import and those that ACM provides, see Importing
 	// Certificates (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
@@ -287,9 +287,9 @@ type DomainValidation struct {
 
 	// The validation status of the domain name. This can be one of the following
 	// values:
-	//     - PENDING_VALIDATION
-	//     - SUCCESS
-	//     - FAILED
+	//   - PENDING_VALIDATION
+	//   - SUCCESS
+	//   - FAILED
 	ValidationStatus DomainStatus
 
 	noSmithyDocumentSerde
@@ -306,15 +306,15 @@ type DomainValidationOption struct {
 
 	// The domain name that you want ACM to use to send you validation emails. This
 	// domain name is the suffix of the email addresses that you want ACM to use. This
-	// must be the same as the DomainName  value or a superdomain of the DomainName
-	// value. For example, if you request a certificate for testing.example.com, you
+	// must be the same as the DomainName value or a superdomain of the DomainName
+	// value. For example, if you request a certificate for testing.example.com , you
 	// can specify example.com for this value. In that case, ACM sends domain
 	// validation emails to the following five addresses:
-	//     - admin@example.com
-	//     - administrator@example.com
-	//     - hostmaster@example.com
-	//     - postmaster@example.com
-	//     - webmaster@example.com
+	//   - admin@example.com
+	//   - administrator@example.com
+	//   - hostmaster@example.com
+	//   - postmaster@example.com
+	//   - webmaster@example.com
 	//
 	// This member is required.
 	ValidationDomain *string
@@ -343,18 +343,17 @@ type ExtendedKeyUsage struct {
 	// The name of an Extended Key Usage value.
 	Name ExtendedKeyUsageName
 
-	// An object identifier (OID) for the extension value. OIDs are strings of
-	// numbers separated by periods. The following OIDs are defined in RFC 3280 and RFC
-	// 5280.
-	//     - 1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)
-	//     - 1.3.6.1.5.5.7.3.2 (TLS_WEB_CLIENT_AUTHENTICATION)
-	//     - 1.3.6.1.5.5.7.3.3 (CODE_SIGNING)
-	//     - 1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)
-	//     - 1.3.6.1.5.5.7.3.8 (TIME_STAMPING)
-	//     - 1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)
-	//     - 1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)
-	//     - 1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)
-	//     - 1.3.6.1.5.5.7.3.7 (IPSEC_USER)
+	// An object identifier (OID) for the extension value. OIDs are strings of numbers
+	// separated by periods. The following OIDs are defined in RFC 3280 and RFC 5280.
+	//   - 1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)
+	//   - 1.3.6.1.5.5.7.3.2 (TLS_WEB_CLIENT_AUTHENTICATION)
+	//   - 1.3.6.1.5.5.7.3.3 (CODE_SIGNING)
+	//   - 1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)
+	//   - 1.3.6.1.5.5.7.3.8 (TIME_STAMPING)
+	//   - 1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)
+	//   - 1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)
+	//   - 1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)
+	//   - 1.3.6.1.5.5.7.3.7 (IPSEC_USER)
 	OID *string
 
 	noSmithyDocumentSerde
@@ -364,17 +363,17 @@ type ExtendedKeyUsage struct {
 // of the certificate list.
 type Filters struct {
 
-	// Specify one or more ExtendedKeyUsage  extension values.
+	// Specify one or more ExtendedKeyUsage extension values.
 	ExtendedKeyUsage []ExtendedKeyUsageName
 
 	// Specify one or more algorithms that can be used to generate key pairs. Default
-	// filtering returns only RSA_1024  and RSA_2048 certificates that have at least
+	// filtering returns only RSA_1024 and RSA_2048 certificates that have at least
 	// one domain. To return other certificate types, provide the desired type
 	// signatures in a comma-separated list. For example, "keyTypes":
-	// ["RSA_2048","RSA_4096"] returns both RSA_2048  and RSA_4096  certificates.
+	// ["RSA_2048","RSA_4096"] returns both RSA_2048 and RSA_4096 certificates.
 	KeyTypes []KeyAlgorithm
 
-	// Specify one or more KeyUsage  extension values.
+	// Specify one or more KeyUsage extension values.
 	KeyUsage []KeyUsageName
 
 	noSmithyDocumentSerde
@@ -422,7 +421,7 @@ type RenewalSummary struct {
 }
 
 // Contains a DNS record value that you can use to validate ownership or control
-// of a domain. This is used by the DescribeCertificate  action.
+// of a domain. This is used by the DescribeCertificate action.
 type ResourceRecord struct {
 
 	// The name of the DNS record to create in your domain. This is supplied by ACM.

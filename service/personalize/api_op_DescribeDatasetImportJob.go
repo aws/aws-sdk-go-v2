@@ -42,10 +42,10 @@ type DescribeDatasetImportJobOutput struct {
 
 	// Information about the dataset import job, including the status. The status is
 	// one of the following values:
-	//     - CREATE PENDING
-	//     - CREATE IN_PROGRESS
-	//     - ACTIVE
-	//     - CREATE FAILED
+	//   - CREATE PENDING
+	//   - CREATE IN_PROGRESS
+	//   - ACTIVE
+	//   - CREATE FAILED
 	DatasetImportJob *types.DatasetImportJob
 
 	// Metadata pertaining to the operation's result.

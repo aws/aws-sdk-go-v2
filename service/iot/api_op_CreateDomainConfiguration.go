@@ -48,7 +48,7 @@ type CreateDomainConfigurationInput struct {
 	ServerCertificateArns []string
 
 	// The type of service delivered by the endpoint. Amazon Web Services IoT Core
-	// currently supports only the DATA  service type.
+	// currently supports only the DATA service type.
 	ServiceType types.ServiceType
 
 	// Metadata which can be used to manage the domain configuration. For URI Request

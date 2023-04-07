@@ -37,7 +37,7 @@ type TestSegmentPatternInput struct {
 	// This member is required.
 	Pattern *string
 
-	// A sample evaluationContext  JSON block to test against the specified pattern.
+	// A sample evaluationContext JSON block to test against the specified pattern.
 	//
 	// This value conforms to the media type: application/json
 	//
@@ -49,7 +49,7 @@ type TestSegmentPatternInput struct {
 
 type TestSegmentPatternOutput struct {
 
-	// Returns true  if the pattern matches the payload.
+	// Returns true if the pattern matches the payload.
 	//
 	// This member is required.
 	Match *bool

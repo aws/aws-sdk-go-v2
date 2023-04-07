@@ -40,8 +40,8 @@ type ListRecoveryPointsByLegalHoldInput struct {
 	MaxResults *int32
 
 	// This is the next item following a partial list of returned resources. For
-	// example, if a request is made to return maxResults  number of resources,
-	// NextTokenallows you to return more items in your list starting at the location
+	// example, if a request is made to return maxResults number of resources,
+	// NextToken allows you to return more items in your list starting at the location
 	// pointed to by the next token.
 	NextToken *string
 
@@ -53,8 +53,7 @@ type ListRecoveryPointsByLegalHoldOutput struct {
 	// This return is the next item following a partial list of returned resources.
 	NextToken *string
 
-	// This is a list of the recovery points returned by ListRecoveryPointsByLegalHold
-	// .
+	// This is a list of the recovery points returned by ListRecoveryPointsByLegalHold .
 	RecoveryPoints []types.RecoveryPointMember
 
 	// Metadata pertaining to the operation's result.
@@ -140,8 +139,8 @@ type ListRecoveryPointsByLegalHoldPaginatorOptions struct {
 	// This is the maximum number of resource list items to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

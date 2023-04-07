@@ -10,16 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an export task so that you can efficiently export data from a log
-// group to an Amazon S3 bucket. When you perform a CreateExportTask operation,
-// you must use credentials that have permission to write to the S3 bucket that you
-// specify as the destination. Exporting log data to S3 buckets that are encrypted
-// by KMS is supported. Exporting log data to Amazon S3 buckets that have S3 Object
-// Lock enabled with a retention period is also supported. Exporting to S3 buckets
-// that are encrypted with AES-256 is supported. This is an asynchronous call. If
-// all the required information is provided, this operation initiates an export
-// task and responds with the ID of the task. After the task has started, you can
-// use DescribeExportTasks (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html)
+// Creates an export task so that you can efficiently export data from a log group
+// to an Amazon S3 bucket. When you perform a CreateExportTask operation, you must
+// use credentials that have permission to write to the S3 bucket that you specify
+// as the destination. Exporting log data to S3 buckets that are encrypted by KMS
+// is supported. Exporting log data to Amazon S3 buckets that have S3 Object Lock
+// enabled with a retention period is also supported. Exporting to S3 buckets that
+// are encrypted with AES-256 is supported. This is an asynchronous call. If all
+// the required information is provided, this operation initiates an export task
+// and responds with the ID of the task. After the task has started, you can use
+// DescribeExportTasks (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html)
 // to get the status of the export task. Each account can only have one active (
 // RUNNING or PENDING ) export task at a time. To cancel an export task, use
 // CancelExportTask (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html)
@@ -45,14 +45,14 @@ func (c *Client) CreateExportTask(ctx context.Context, params *CreateExportTaskI
 
 type CreateExportTaskInput struct {
 
-	// The name of S3 bucket for the exported log data. The bucket must be in the
-	// same Amazon Web Services Region.
+	// The name of S3 bucket for the exported log data. The bucket must be in the same
+	// Amazon Web Services Region.
 	//
 	// This member is required.
 	Destination *string
 
 	// The start time of the range for the request, expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier
+	// milliseconds after Jan 1, 1970 00:00:00 UTC . Events with a timestamp earlier
 	// than this time are not exported.
 	//
 	// This member is required.
@@ -64,15 +64,15 @@ type CreateExportTaskInput struct {
 	LogGroupName *string
 
 	// The end time of the range for the request, expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later
-	// than this time are not exported. You must specify a time that is not earlier
-	// than when this log group was created.
+	// milliseconds after Jan 1, 1970 00:00:00 UTC . Events with a timestamp later than
+	// this time are not exported. You must specify a time that is not earlier than
+	// when this log group was created.
 	//
 	// This member is required.
 	To *int64
 
-	// The prefix used as the start of the key for every object exported. If you
-	// don't specify a value, the default is exportedlogs .
+	// The prefix used as the start of the key for every object exported. If you don't
+	// specify a value, the default is exportedlogs .
 	DestinationPrefix *string
 
 	// Export only log streams that match the provided prefix. If you don't specify a

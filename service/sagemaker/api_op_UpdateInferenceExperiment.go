@@ -12,7 +12,7 @@ import (
 )
 
 // Updates an inference experiment that you created. The status of the inference
-// experiment has to be either Created , Running. For more information on the
+// experiment has to be either Created , Running . For more information on the
 // status of an inference experiment, see
 // DescribeInferenceExperimentResponse$Status .
 func (c *Client) UpdateInferenceExperiment(ctx context.Context, params *UpdateInferenceExperimentInput, optFns ...func(*Options)) (*UpdateInferenceExperimentOutput, error) {
@@ -49,8 +49,8 @@ type UpdateInferenceExperimentInput struct {
 	ModelVariants []types.ModelVariantConfig
 
 	// The duration for which the inference experiment will run. If the status of the
-	// inference experiment is Created, then you can update both the start and end
-	// dates. If the status of the inference experiment is Running, then you can
+	// inference experiment is Created , then you can update both the start and end
+	// dates. If the status of the inference experiment is Running , then you can
 	// update only the end date.
 	Schedule *types.InferenceExperimentSchedule
 

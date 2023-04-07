@@ -34,8 +34,8 @@ type GetAccountConfigurationInput struct {
 
 type GetAccountConfigurationOutput struct {
 
-	// Expiration events configuration options associated with the Amazon Web
-	// Services account.
+	// Expiration events configuration options associated with the Amazon Web Services
+	// account.
 	ExpiryEvents *types.ExpiryEventsConfiguration
 
 	// Metadata pertaining to the operation's result.

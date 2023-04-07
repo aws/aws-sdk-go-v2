@@ -35,9 +35,9 @@ const (
 	ColorimetryXyz     Colorimetry = "XYZ"
 )
 
-// Values returns all known values for Colorimetry. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Colorimetry. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Colorimetry) Values() []Colorimetry {
 	return []Colorimetry{
 		"BT601",
@@ -218,8 +218,8 @@ const (
 	NetworkInterfaceTypeEfa NetworkInterfaceType = "efa"
 )
 
-// Values returns all known values for NetworkInterfaceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for NetworkInterfaceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 	return []NetworkInterfaceType{
@@ -260,9 +260,9 @@ const (
 	ProtocolFujitsuQos   Protocol = "fujitsu-qos"
 )
 
-// Values returns all known values for Protocol. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Protocol. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"zixi-push",
@@ -345,9 +345,9 @@ const (
 	ScanModeProgressiveSegmentedFrame ScanMode = "progressive-segmented-frame"
 )
 
-// Values returns all known values for ScanMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScanMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (ScanMode) Values() []ScanMode {
 	return []ScanMode{
 		"progressive",

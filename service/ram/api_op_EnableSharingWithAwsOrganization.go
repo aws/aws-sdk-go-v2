@@ -40,7 +40,7 @@ type EnableSharingWithAwsOrganizationInput struct {
 
 type EnableSharingWithAwsOrganizationOutput struct {
 
-	// A return value of true  indicates that the request succeeded. A value of false
+	// A return value of true indicates that the request succeeded. A value of false
 	// indicates that the request failed.
 	ReturnValue *bool
 

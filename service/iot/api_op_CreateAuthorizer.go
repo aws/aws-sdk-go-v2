@@ -40,15 +40,14 @@ type CreateAuthorizerInput struct {
 	// This member is required.
 	AuthorizerName *string
 
-	// When true, the result from the authorizer’s Lambda function is cached for
+	// When true , the result from the authorizer’s Lambda function is cached for
 	// clients that use persistent HTTP connections. The results are cached for the
-	// time specified by the Lambda function in refreshAfterInSeconds. This value
-	// does not affect authorization of clients that use MQTT connections. The default
-	// value is false .
+	// time specified by the Lambda function in refreshAfterInSeconds . This value does
+	// not affect authorization of clients that use MQTT connections. The default value
+	// is false .
 	EnableCachingForHttp *bool
 
-	// Specifies whether IoT validates the token signature in an authorization
-	// request.
+	// Specifies whether IoT validates the token signature in an authorization request.
 	SigningDisabled *bool
 
 	// The status of the create authorizer request.

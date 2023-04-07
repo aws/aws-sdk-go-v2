@@ -14,7 +14,7 @@ import (
 // Lists the tags that have been applied to the ACM certificate. Use the
 // certificate's Amazon Resource Name (ARN) to specify the certificate. To add a
 // tag to an ACM certificate, use the AddTagsToCertificate action. To delete a
-// tag, use the RemoveTagsFromCertificate  action.
+// tag, use the RemoveTagsFromCertificate action.
 func (c *Client) ListTagsForCertificate(ctx context.Context, params *ListTagsForCertificateInput, optFns ...func(*Options)) (*ListTagsForCertificateOutput, error) {
 	if params == nil {
 		params = &ListTagsForCertificateInput{}

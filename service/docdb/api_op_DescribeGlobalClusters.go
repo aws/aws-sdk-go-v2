@@ -47,9 +47,9 @@ type DescribeGlobalClustersInput struct {
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -143,13 +143,13 @@ var _ DescribeGlobalClustersAPIClient = (*Client)(nil)
 // DescribeGlobalClustersPaginatorOptions is the paginator options for
 // DescribeGlobalClusters
 type DescribeGlobalClustersPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -162,8 +162,7 @@ type DescribeGlobalClustersPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeGlobalClustersPaginator returns a new
-// DescribeGlobalClustersPaginator
+// NewDescribeGlobalClustersPaginator returns a new DescribeGlobalClustersPaginator
 func NewDescribeGlobalClustersPaginator(client DescribeGlobalClustersAPIClient, params *DescribeGlobalClustersInput, optFns ...func(*DescribeGlobalClustersPaginatorOptions)) *DescribeGlobalClustersPaginator {
 	if params == nil {
 		params = &DescribeGlobalClustersInput{}

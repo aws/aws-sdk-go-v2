@@ -31,8 +31,8 @@ type GetPermissionInput struct {
 
 	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the permission whose contents you want to retrieve. To find the ARN for a
-	// permission, use either the ListPermissions  operation or go to the Permissions
-	// library (https://console.aws.amazon.com/ram/home#Permissions:)page in the RAM
+	// permission, use either the ListPermissions operation or go to the Permissions
+	// library (https://console.aws.amazon.com/ram/home#Permissions:) page in the RAM
 	// console and then choose the name of the permission. The ARN is displayed on the
 	// detail page.
 	//

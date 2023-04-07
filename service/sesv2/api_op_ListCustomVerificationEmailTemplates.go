@@ -41,10 +41,10 @@ type ListCustomVerificationEmailTemplatesInput struct {
 	NextToken *string
 
 	// The number of results to show in a single call to
-	// ListCustomVerificationEmailTemplates. If the number of results is larger than
+	// ListCustomVerificationEmailTemplates . If the number of results is larger than
 	// the number you specified in this parameter, then the response includes a
-	// NextTokenelement, which you can use to obtain additional results. The value
-	// you specify has to be at least 1, and can be no more than 50.
+	// NextToken element, which you can use to obtain additional results. The value you
+	// specify has to be at least 1, and can be no more than 50.
 	PageSize *int32
 
 	noSmithyDocumentSerde
@@ -58,8 +58,8 @@ type ListCustomVerificationEmailTemplatesOutput struct {
 
 	// A token indicating that there are additional custom verification email
 	// templates available to be listed. Pass this token to a subsequent call to
-	// ListCustomVerificationEmailTemplatesto retrieve the next 50 custom
-	// verification email templates.
+	// ListCustomVerificationEmailTemplates to retrieve the next 50 custom verification
+	// email templates.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -140,14 +140,14 @@ var _ ListCustomVerificationEmailTemplatesAPIClient = (*Client)(nil)
 // for ListCustomVerificationEmailTemplates
 type ListCustomVerificationEmailTemplatesPaginatorOptions struct {
 	// The number of results to show in a single call to
-	// ListCustomVerificationEmailTemplates. If the number of results is larger than
+	// ListCustomVerificationEmailTemplates . If the number of results is larger than
 	// the number you specified in this parameter, then the response includes a
-	// NextTokenelement, which you can use to obtain additional results. The value
-	// you specify has to be at least 1, and can be no more than 50.
+	// NextToken element, which you can use to obtain additional results. The value you
+	// specify has to be at least 1, and can be no more than 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

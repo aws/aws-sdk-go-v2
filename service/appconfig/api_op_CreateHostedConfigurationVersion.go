@@ -60,9 +60,9 @@ type CreateHostedConfigurationVersionInput struct {
 	// version.
 	LatestVersionNumber *int32
 
-	// An optional, user-defined label for the AppConfig hosted configuration
-	// version. This value must contain at least one non-numeric character. For
-	// example, "v2.2.0".
+	// An optional, user-defined label for the AppConfig hosted configuration version.
+	// This value must contain at least one non-numeric character. For example,
+	// "v2.2.0".
 	VersionLabel *string
 
 	noSmithyDocumentSerde

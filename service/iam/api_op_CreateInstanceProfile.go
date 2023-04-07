@@ -35,7 +35,7 @@ func (c *Client) CreateInstanceProfile(ctx context.Context, params *CreateInstan
 type CreateInstanceProfileInput struct {
 
 	// The name of the instance profile to create. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
 	//
@@ -48,7 +48,7 @@ type CreateInstanceProfileInput struct {
 	// defaults to a slash (/). This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
 	// ) a string of characters consisting of either a forward slash (/) by itself or a
 	// string that must begin and end with forward slashes. In addition, it can contain
-	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F),
+	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F ),
 	// including most punctuation characters, digits, and upper and lowercased letters.
 	Path *string
 
@@ -63,7 +63,7 @@ type CreateInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful CreateInstanceProfile  request.
+// Contains the response to a successful CreateInstanceProfile request.
 type CreateInstanceProfileOutput struct {
 
 	// A structure containing details about the new instance profile.

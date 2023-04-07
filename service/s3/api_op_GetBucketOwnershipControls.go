@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves OwnershipControls for an Amazon S3 bucket. To use this operation,
-// you must have the s3:GetBucketOwnershipControls permission. For more
-// information about Amazon S3 permissions, see Specifying permissions in a policy (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html)
+// Retrieves OwnershipControls for an Amazon S3 bucket. To use this operation, you
+// must have the s3:GetBucketOwnershipControls permission. For more information
+// about Amazon S3 permissions, see Specifying permissions in a policy (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html)
 // . For information about Amazon S3 Object Ownership, see Using Object Ownership (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
 // . The following operations are related to GetBucketOwnershipControls :
 //   - PutBucketOwnershipControls
@@ -36,7 +36,7 @@ func (c *Client) GetBucketOwnershipControls(ctx context.Context, params *GetBuck
 
 type GetBucketOwnershipControlsInput struct {
 
-	// The name of the Amazon S3 bucket whose OwnershipControls  you want to retrieve.
+	// The name of the Amazon S3 bucket whose OwnershipControls you want to retrieve.
 	//
 	// This member is required.
 	Bucket *string

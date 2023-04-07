@@ -55,10 +55,10 @@ type ListThingsInput struct {
 	// The name of the thing type used to search for things.
 	ThingTypeName *string
 
-	// When true, the action returns the thing resources with attribute values that
-	// start with the attributeValue  provided. When false, or not present, the
-	// action returns only the thing resources with attribute values that match the
-	// entire attributeValue  provided.
+	// When true , the action returns the thing resources with attribute values that
+	// start with the attributeValue provided. When false , or not present, the action
+	// returns only the thing resources with attribute values that match the entire
+	// attributeValue provided.
 	UsePrefixAttributeValue bool
 
 	noSmithyDocumentSerde
@@ -152,8 +152,8 @@ type ListThingsPaginatorOptions struct {
 	// The maximum number of results to return in this operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

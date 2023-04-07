@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Activates an DataSync agent that you have deployed in your storage
-// environment. The activation process associates your agent with your account. In
-// the activation process, you specify information such as the Amazon Web Services
+// Activates an DataSync agent that you have deployed in your storage environment.
+// The activation process associates your agent with your account. In the
+// activation process, you specify information such as the Amazon Web Services
 // Region that you want to activate the agent in. You activate the agent in the
 // Amazon Web Services Region where your target locations (in Amazon S3 or Amazon
 // EFS) reside. Your tasks are created in this Amazon Web Services Region. You can
@@ -47,7 +47,7 @@ type CreateAgentInput struct {
 	// HTTP GET request with redirects that enable you to get the agent IP address
 	// (port 80). Alternatively, you can get it from the DataSync console. The redirect
 	// URL returned in the response provides you the activation key for your agent in
-	// the query string parameter activationKey. It might also include other
+	// the query string parameter activationKey . It might also include other
 	// activation-related parameters; however, these are merely defaults. The arguments
 	// you pass to this API call determine the actual configuration of your agent. For
 	// more information, see Activating an Agent in the DataSync User Guide.

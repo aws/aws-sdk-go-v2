@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a skill with the organization under the customer's AWS account. If
-// a skill is private, the user implicitly accepts access to this skill during
+// Associates a skill with the organization under the customer's AWS account. If a
+// skill is private, the user implicitly accepts access to this skill during
 // enablement.
 func (c *Client) ApproveSkill(ctx context.Context, params *ApproveSkillInput, optFns ...func(*Options)) (*ApproveSkillOutput, error) {
 	if params == nil {

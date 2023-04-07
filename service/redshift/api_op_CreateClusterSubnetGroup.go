@@ -35,10 +35,10 @@ type CreateClusterSubnetGroupInput struct {
 
 	// The name for the subnet group. Amazon Redshift stores the value as a lowercase
 	// string. Constraints:
-	//     - Must contain no more than 255 alphanumeric characters or hyphens.
-	//     - Must not be "Default".
-	//     - Must be unique for all subnet groups that are created by your Amazon Web Services account.
-	//
+	//   - Must contain no more than 255 alphanumeric characters or hyphens.
+	//   - Must not be "Default".
+	//   - Must be unique for all subnet groups that are created by your Amazon Web
+	//   Services account.
 	// Example: examplesubnetgroup
 	//
 	// This member is required.
@@ -49,8 +49,8 @@ type CreateClusterSubnetGroupInput struct {
 	// This member is required.
 	Description *string
 
-	// An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a
-	// single request.
+	// An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single
+	// request.
 	//
 	// This member is required.
 	SubnetIds []string

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List position configurations for a given resource, such as positioning
-// solvers. This action is no longer supported. Calls to retrieve position
-// information should use the GetResourcePosition (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html)
+// List position configurations for a given resource, such as positioning solvers.
+// This action is no longer supported. Calls to retrieve position information
+// should use the GetResourcePosition (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html)
 // API operation instead.
 //
 // Deprecated: This operation is no longer supported.
@@ -137,8 +137,8 @@ type ListPositionConfigurationsPaginatorOptions struct {
 	// The maximum number of results to return in this operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

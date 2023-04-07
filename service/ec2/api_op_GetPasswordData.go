@@ -17,9 +17,9 @@ import (
 )
 
 // Retrieves the encrypted administrator password for a running Windows instance.
-// The Windows password is generated at boot by the EC2Config  service or
-// EC2Launchscripts (Windows Server 2016 and later). This usually only happens
-// the first time an instance is launched. For more information, see EC2Config (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html)
+// The Windows password is generated at boot by the EC2Config service or EC2Launch
+// scripts (Windows Server 2016 and later). This usually only happens the first
+// time an instance is launched. For more information, see EC2Config (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html)
 // and EC2Launch (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html)
 // in the Amazon EC2 User Guide. For the EC2Config service, the password is not
 // generated for rebundled AMIs unless Ec2SetPassword is enabled before bundling.
@@ -206,9 +206,9 @@ func NewPasswordDataAvailableWaiter(client GetPasswordDataAPIClient, optFns ...f
 	}
 }
 
-// Wait calls the waiter function for PasswordDataAvailable waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for PasswordDataAvailable waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *PasswordDataAvailableWaiter) Wait(ctx context.Context, params *GetPasswordDataInput, maxWaitDur time.Duration, optFns ...func(*PasswordDataAvailableWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

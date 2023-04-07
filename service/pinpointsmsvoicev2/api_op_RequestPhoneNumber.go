@@ -33,8 +33,7 @@ func (c *Client) RequestPhoneNumber(ctx context.Context, params *RequestPhoneNum
 
 type RequestPhoneNumberInput struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -57,9 +56,9 @@ type RequestPhoneNumberInput struct {
 	// This member is required.
 	NumberType types.RequestableNumberType
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. If you don't specify a client token, a randomly generated token
-	// is used for the request to ensure idempotency.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don't specify a client token, a randomly generated token is
+	// used for the request to ensure idempotency.
 	ClientToken *string
 
 	// By default this is set to false. When set to true the phone number can't be
@@ -70,12 +69,10 @@ type RequestPhoneNumberInput struct {
 	// OutOutListName or OptPutListArn.
 	OptOutListName *string
 
-	// The pool to associated with the phone number. You can use the PoolId or
-	// PoolArn.
+	// The pool to associated with the phone number. You can use the PoolId or PoolArn.
 	PoolId *string
 
-	// Use this field to attach your phone number for an external registration
-	// process.
+	// Use this field to attach your phone number for an external registration process.
 	RegistrationId *string
 
 	// An array of tags (key and value pairs) associate with the requested phone
@@ -95,8 +92,7 @@ type RequestPhoneNumberOutput struct {
 	// deleted.
 	DeletionProtectionEnabled bool
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
 	IsoCountryCode *string
 
 	// The type of message. Valid values are TRANSACTIONAL for messages that are
@@ -107,8 +103,8 @@ type RequestPhoneNumberOutput struct {
 	// The monthly price, in US dollars, to lease the phone number.
 	MonthlyLeasingPrice *string
 
-	// Indicates if the phone number will be used for text messages, voice messages
-	// or both.
+	// Indicates if the phone number will be used for text messages, voice messages or
+	// both.
 	NumberCapabilities []types.NumberCapability
 
 	// The type of number that was released.
@@ -146,8 +142,8 @@ type RequestPhoneNumberOutput struct {
 	// The ARN used to identify the two way channel.
 	TwoWayChannelArn *string
 
-	// By default this is set to false. When set to true you can receive incoming
-	// text messages from your end recipients.
+	// By default this is set to false. When set to true you can receive incoming text
+	// messages from your end recipients.
 	TwoWayEnabled bool
 
 	// Metadata pertaining to the operation's result.

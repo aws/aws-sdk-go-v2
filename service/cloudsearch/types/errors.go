@@ -35,8 +35,7 @@ func (e *BaseException) ErrorCode() string {
 }
 func (e *BaseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because it attempted an operation which is not
-// enabled.
+// The request was rejected because it attempted an operation which is not enabled.
 type DisabledOperationException struct {
 	Message *string
 
@@ -150,8 +149,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because it attempted to create a resource that
-// already exists.
+// The request was rejected because it attempted to create a resource that already
+// exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
 
@@ -179,8 +178,8 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because it attempted to reference a resource that
-// does not exist.
+// The request was rejected because it attempted to reference a resource that does
+// not exist.
 type ResourceNotFoundException struct {
 	Message *string
 

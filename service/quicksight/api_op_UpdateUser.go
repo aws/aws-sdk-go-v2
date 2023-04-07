@@ -48,10 +48,11 @@ type UpdateUserInput struct {
 
 	// The Amazon QuickSight role of the user. The role can be one of the following
 	// default security cohorts:
-	//     - READER : A user who has read-only access to dashboards.
-	//     - AUTHOR : A user who can create data sources, datasets, analyses, and dashboards.
-	//     - ADMIN : A user who is an author, who can also manage Amazon QuickSight settings.
-	//
+	//   - READER : A user who has read-only access to dashboards.
+	//   - AUTHOR : A user who can create data sources, datasets, analyses, and
+	//   dashboards.
+	//   - ADMIN : A user who is an author, who can also manage Amazon QuickSight
+	//   settings.
 	// The name of the Amazon QuickSight role is invisible to the user except for the
 	// console screens dealing with permissions.
 	//
@@ -72,28 +73,35 @@ type UpdateUserInput struct {
 	// (Enterprise edition only) The name of the custom permissions profile that you
 	// want to assign to this user. Customized permissions allows you to control a
 	// user's access by restricting access the following operations:
-	//     - Create and update data sources
-	//     - Create and update datasets
-	//     - Create and update email reports
-	//     - Subscribe to email reports
-	// A set of custom permissions includes any
-	// combination of these restrictions. Currently, you need to create the profile
-	// names for custom permission sets by using the Amazon QuickSight console. Then,
-	// you use the RegisterUser API operation to assign the named set of permissions
-	// to a Amazon QuickSight user. Amazon QuickSight custom permissions are applied
-	// through IAM policies. Therefore, they override the permissions typically granted
-	// by assigning Amazon QuickSight users to one of the default security cohorts in
-	// Amazon QuickSight (admin, author, reader). This feature is available only to
-	// Amazon QuickSight Enterprise edition subscriptions.
+	//   - Create and update data sources
+	//   - Create and update datasets
+	//   - Create and update email reports
+	//   - Subscribe to email reports
+	// A set of custom permissions includes any combination of these restrictions.
+	// Currently, you need to create the profile names for custom permission sets by
+	// using the Amazon QuickSight console. Then, you use the RegisterUser API
+	// operation to assign the named set of permissions to a Amazon QuickSight user.
+	// Amazon QuickSight custom permissions are applied through IAM policies.
+	// Therefore, they override the permissions typically granted by assigning Amazon
+	// QuickSight users to one of the default security cohorts in Amazon QuickSight
+	// (admin, author, reader). This feature is available only to Amazon QuickSight
+	// Enterprise edition subscriptions.
 	CustomPermissionsName *string
 
 	// The type of supported external login provider that provides identity to let a
 	// user federate into Amazon QuickSight with an associated Identity and Access
 	// Management(IAM) role. The type of supported external login provider can be one
 	// of the following.
-	//     - COGNITO : Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the COGNITO provider type, don’t use the "CustomFederationProviderUrl" parameter which is only needed when the external provider is custom.
-	//     - CUSTOM_OIDC : Custom OpenID Connect (OIDC) provider. When choosing CUSTOM_OIDC type, use the CustomFederationProviderUrl parameter to provide the custom OIDC provider URL.
-	//     - NONE : This clears all the previously saved external login information for a user. Use the DescribeUser (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeUser.html) API operation to check the external login information.
+	//   - COGNITO : Amazon Cognito. The provider URL is
+	//   cognito-identity.amazonaws.com. When choosing the COGNITO provider type, don’t
+	//   use the "CustomFederationProviderUrl" parameter which is only needed when the
+	//   external provider is custom.
+	//   - CUSTOM_OIDC : Custom OpenID Connect (OIDC) provider. When choosing
+	//   CUSTOM_OIDC type, use the CustomFederationProviderUrl parameter to provide the
+	//   custom OIDC provider URL.
+	//   - NONE : This clears all the previously saved external login information for a
+	//   user. Use the DescribeUser (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeUser.html)
+	//   API operation to check the external login information.
 	ExternalLoginFederationProviderType *string
 
 	// The identity ID for a user in the external login provider.

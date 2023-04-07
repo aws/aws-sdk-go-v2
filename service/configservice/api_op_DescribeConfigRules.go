@@ -30,8 +30,8 @@ func (c *Client) DescribeConfigRules(ctx context.Context, params *DescribeConfig
 
 type DescribeConfigRulesInput struct {
 
-	// The names of the Config rules for which you want details. If you do not
-	// specify any names, Config returns details for all your rules.
+	// The names of the Config rules for which you want details. If you do not specify
+	// any names, Config returns details for all your rules.
 	ConfigRuleNames []string
 
 	// Returns a list of Detective or Proactive Config rules. By default, this API
@@ -52,8 +52,8 @@ type DescribeConfigRulesOutput struct {
 	// The details about your Config rules.
 	ConfigRules []types.ConfigRule
 
-	// The string that you use in a subsequent request to get the next page of
-	// results in a paginated response.
+	// The string that you use in a subsequent request to get the next page of results
+	// in a paginated response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -133,8 +133,8 @@ var _ DescribeConfigRulesAPIClient = (*Client)(nil)
 // DescribeConfigRulesPaginatorOptions is the paginator options for
 // DescribeConfigRules
 type DescribeConfigRulesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

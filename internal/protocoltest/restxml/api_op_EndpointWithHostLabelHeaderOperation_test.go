@@ -35,8 +35,8 @@ func TestClient_EndpointWithHostLabelHeaderOperation_awsRestxmlSerialize(t *test
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Operations can prepend to the given host if they define the endpoint trait,
-		// and can use the host label trait to define further customization based on user
+		// Operations can prepend to the given host if they define the endpoint trait, and
+		// can use the host label trait to define further customization based on user
 		// input. The label must also be serialized in into any other location it is bound
 		// to, such as the body or in this case an http header.
 		"RestXmlEndpointTraitWithHostLabelAndHttpBinding": {

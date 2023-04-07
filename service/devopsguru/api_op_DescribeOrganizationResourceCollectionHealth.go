@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides an overview of your system's health. If additional member accounts
-// are part of your organization, you can filter those accounts using the
-// AccountIds field.
+// Provides an overview of your system's health. If additional member accounts are
+// part of your organization, you can filter those accounts using the AccountIds
+// field.
 func (c *Client) DescribeOrganizationResourceCollectionHealth(ctx context.Context, params *DescribeOrganizationResourceCollectionHealthInput, optFns ...func(*Options)) (*DescribeOrganizationResourceCollectionHealthOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationResourceCollectionHealthInput{}
@@ -47,7 +47,7 @@ type DescribeOrganizationResourceCollectionHealthInput struct {
 	AccountIds []string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -65,7 +65,7 @@ type DescribeOrganizationResourceCollectionHealthOutput struct {
 	// The name of the organization's account.
 	Account []types.AccountHealth
 
-	// The returned CloudFormationHealthOverview  object that contains an
+	// The returned CloudFormationHealthOverview object that contains an
 	// InsightHealthOverview object with the requested system health information.
 	CloudFormation []types.CloudFormationHealth
 
@@ -84,16 +84,18 @@ type DescribeOrganizationResourceCollectionHealthOutput struct {
 	// that you assign to an Lambda function. For more information about using tags,
 	// see the Tagging best practices (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
 	// whitepaper. Each Amazon Web Services tag has two parts.
-	//     - A tag key (for example, CostCenter , Environment , Project , or Secret ). Tag keys are case-sensitive.
-	//     - An optional field known as a tag value (for example, 111122223333 , Production , or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.
-	//
+	//   - A tag key (for example, CostCenter , Environment , Project , or Secret ).
+	//   Tag keys are case-sensitive.
+	//   - An optional field known as a tag value (for example, 111122223333 ,
+	//   Production , or a team name). Omitting the tag value is the same as using an
+	//   empty string. Like tag keys, tag values are case-sensitive.
 	// Together these are known as key-value pairs. The string used for a key in a tag
 	// that you use to define your resource coverage must begin with the prefix
-	// Devops-guru- . The tag key might be DevOps-Guru-deployment-application  or
-	// devops-guru-rds-application. When you create a key, the case of characters in
+	// Devops-guru- . The tag key might be DevOps-Guru-deployment-application or
+	// devops-guru-rds-application . When you create a key, the case of characters in
 	// the key can be whatever you choose. After you create a key, it is
 	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
-	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
+	// and a key named DevOps-Guru-RDS , and these act as two different keys. Possible
 	// key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
 	// Devops-Guru-production-application/containers .
@@ -179,8 +181,8 @@ var _ DescribeOrganizationResourceCollectionHealthAPIClient = (*Client)(nil)
 // DescribeOrganizationResourceCollectionHealthPaginatorOptions is the paginator
 // options for DescribeOrganizationResourceCollectionHealth
 type DescribeOrganizationResourceCollectionHealthPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

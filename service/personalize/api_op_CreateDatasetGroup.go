@@ -18,20 +18,20 @@ import (
 //   - Items
 //   - Users
 //
-// A dataset group can be a Domain dataset group, where you specify a
-// domain and use pre-configured resources like recommenders, or a Custom dataset
-// group, where you use custom resources, such as a solution with a solution
-// version, that you deploy with a campaign. If you start with a Domain dataset
-// group, you can still add custom resources such as solutions and solution
-// versions trained with recipes for custom use cases and deployed with campaigns.
-// A dataset group can be in one of the following states:
+// A dataset group can be a Domain dataset group, where you specify a domain and
+// use pre-configured resources like recommenders, or a Custom dataset group, where
+// you use custom resources, such as a solution with a solution version, that you
+// deploy with a campaign. If you start with a Domain dataset group, you can still
+// add custom resources such as solutions and solution versions trained with
+// recipes for custom use cases and deployed with campaigns. A dataset group can be
+// in one of the following states:
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //   - DELETE PENDING
 //
 // To get the status of the dataset group, call DescribeDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html)
 // . If the status shows as CREATE FAILED, the response includes a failureReason
-// key, which describes why the creation failed. You must wait until the status
-// of the dataset group is ACTIVE before adding a dataset to the group. You can
+// key, which describes why the creation failed. You must wait until the status of
+// the dataset group is ACTIVE before adding a dataset to the group. You can
 // specify an Key Management Service (KMS) key to encrypt the datasets in the
 // group. If you specify a KMS key, you must also include an Identity and Access
 // Management (IAM) role that has permission to access the key. APIs that require a

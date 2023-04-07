@@ -35,7 +35,7 @@ func (c *Client) PutDeliveryChannel(ctx context.Context, params *PutDeliveryChan
 	return out, nil
 }
 
-// The input for the PutDeliveryChannel  action.
+// The input for the PutDeliveryChannel action.
 type PutDeliveryChannelInput struct {
 
 	// The configuration delivery channel object that delivers the configuration

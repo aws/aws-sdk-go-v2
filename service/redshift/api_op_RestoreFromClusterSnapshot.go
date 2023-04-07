@@ -39,13 +39,13 @@ func (c *Client) RestoreFromClusterSnapshot(ctx context.Context, params *Restore
 
 type RestoreFromClusterSnapshotInput struct {
 
-	// The identifier of the cluster that will be created from restoring the
-	// snapshot. Constraints:
-	//     - Must contain from 1 to 63 alphanumeric characters or hyphens.
-	//     - Alphabetic characters must be lowercase.
-	//     - First character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
-	//     - Must be unique for all clusters within an Amazon Web Services account.
+	// The identifier of the cluster that will be created from restoring the snapshot.
+	// Constraints:
+	//   - Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//   - Alphabetic characters must be lowercase.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must be unique for all clusters within an Amazon Web Services account.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -53,8 +53,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// Reserved.
 	AdditionalInfo *string
 
-	// If true, major version upgrades can be applied during the maintenance window
-	// to the Amazon Redshift engine that is running on the cluster. Default: true
+	// If true , major version upgrades can be applied during the maintenance window to
+	// the Amazon Redshift engine that is running on the cluster. Default: true
 	AllowVersionUpgrade *bool
 
 	// This parameter is retired. It does not set the AQUA configuration status.
@@ -64,8 +64,8 @@ type RestoreFromClusterSnapshotInput struct {
 
 	// The number of days that automated snapshots are retained. If the value is 0,
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
-	// can still create manual snapshots when you want with CreateClusterSnapshot.
-	// You can't disable automated snapshots for RA3 node types. Set the automated
+	// can still create manual snapshots when you want with CreateClusterSnapshot . You
+	// can't disable automated snapshots for RA3 node types. Set the automated
 	// retention period from 1-35 days. Default: The value selected for the cluster
 	// from which the snapshot was taken. Constraints: Must be a value from 0 to 35.
 	AutomatedSnapshotRetentionPeriod *int32
@@ -82,9 +82,9 @@ type RestoreFromClusterSnapshotInput struct {
 	// The default Amazon Redshift cluster parameter group. For information about the
 	// default parameter group, go to Working with Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	// . Constraints:
-	//     - Must be 1 to 255 alphanumeric characters or hyphens.
-	//     - First character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must be 1 to 255 alphanumeric characters or hyphens.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	ClusterParameterGroupName *string
 
 	// A list of security groups to be associated with this cluster. Default: The
@@ -97,8 +97,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// group name where you want the cluster restored.
 	ClusterSubnetGroupName *string
 
-	// The Amazon Resource Name (ARN) for the IAM role that was set as default for
-	// the cluster when the cluster was last modified while it was restored from a
+	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the
+	// cluster when the cluster was last modified while it was restored from a
 	// snapshot.
 	DefaultIamRoleArn *string
 
@@ -114,7 +114,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the cluster
 	// must be in a VPC. For more information, see Enhanced VPC Routing (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
-	// in the Amazon Redshift Cluster Management Guide. If this option is true,
+	// in the Amazon Redshift Cluster Management Guide. If this option is true ,
 	// enhanced VPC routing is enabled. Default: false
 	EnhancedVpcRouting *bool
 
@@ -151,8 +151,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// tracks.
 	MaintenanceTrackName *string
 
-	// The default number of days to retain a manual snapshot. If the value is -1,
-	// the snapshot is retained indefinitely. This setting doesn't change the retention
+	// The default number of days to retain a manual snapshot. If the value is -1, the
+	// snapshot is retained indefinitely. This setting doesn't change the retention
 	// period of existing snapshots. The value must be either -1 or an integer between
 	// 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int32
@@ -179,7 +179,7 @@ type RestoreFromClusterSnapshotInput struct {
 	OwnerAccount *string
 
 	// The port number on which the cluster accepts connections. Default: The same
-	// port as the original cluster. Constraints: Must be between 1115  and 65535 .
+	// port as the original cluster. Constraints: Must be between 1115 and 65535 .
 	Port *int32
 
 	// The weekly time range (in UTC) during which automated cluster maintenance can
@@ -197,17 +197,17 @@ type RestoreFromClusterSnapshotInput struct {
 	ReservedNodeId *string
 
 	// The Amazon Resource Name (ARN) of the snapshot associated with the message to
-	// restore from a cluster. You must specify this parameter or snapshotIdentifier,
+	// restore from a cluster. You must specify this parameter or snapshotIdentifier ,
 	// but not both.
 	SnapshotArn *string
 
-	// The name of the cluster the source snapshot was created from. This parameter
-	// is required if your IAM user or role has a policy containing a snapshot resource
+	// The name of the cluster the source snapshot was created from. This parameter is
+	// required if your IAM user or role has a policy containing a snapshot resource
 	// element that specifies anything other than * for the cluster name.
 	SnapshotClusterIdentifier *string
 
 	// The name of the snapshot from which to create the new cluster. This parameter
-	// isn't case sensitive. You must specify this parameter or snapshotArn, but not
+	// isn't case sensitive. You must specify this parameter or snapshotArn , but not
 	// both. Example: my-snapshot-id
 	SnapshotIdentifier *string
 
@@ -217,9 +217,9 @@ type RestoreFromClusterSnapshotInput struct {
 	// The identifier of the target reserved node offering.
 	TargetReservedNodeOfferingId *string
 
-	// A list of Virtual Private Cloud (VPC) security groups to be associated with
-	// the cluster. Default: The default VPC security group is associated with the
-	// cluster. VPC security groups only apply to clusters in VPCs.
+	// A list of Virtual Private Cloud (VPC) security groups to be associated with the
+	// cluster. Default: The default VPC security group is associated with the cluster.
+	// VPC security groups only apply to clusters in VPCs.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde

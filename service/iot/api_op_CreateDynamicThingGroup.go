@@ -42,8 +42,8 @@ type CreateDynamicThingGroupInput struct {
 	// This member is required.
 	ThingGroupName *string
 
-	// The dynamic thing group index name. Currently one index is supported:
-	// AWS_Things .
+	// The dynamic thing group index name. Currently one index is supported: AWS_Things
+	// .
 	IndexName *string
 
 	// The dynamic thing group query version. Currently one query version is

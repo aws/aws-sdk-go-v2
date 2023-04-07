@@ -26,8 +26,8 @@ type SlackChannelConfiguration struct {
 	ChannelName *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that you want to use to perform
-	// operations on Amazon Web Services. For more information, see Managing access
-	// to the Amazon Web Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
+	// operations on Amazon Web Services. For more information, see Managing access to
+	// the Amazon Web Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
 	// in the Amazon Web Services Support User Guide.
 	ChannelRoleArn *string
 
@@ -56,8 +56,8 @@ type SlackWorkspaceConfiguration struct {
 	// This member is required.
 	TeamId *string
 
-	// Whether to allow member accounts to authorize Slack workspaces. Member
-	// accounts must be part of an organization in Organizations.
+	// Whether to allow member accounts to authorize Slack workspaces. Member accounts
+	// must be part of an organization in Organizations.
 	AllowOrganizationMemberAccount *bool
 
 	// The name of the Slack workspace.

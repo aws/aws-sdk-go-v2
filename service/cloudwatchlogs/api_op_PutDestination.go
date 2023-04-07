@@ -22,7 +22,7 @@ import (
 // against this destination. To enable this, the destination owner must call
 // PutDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html)
 // after PutDestination . To perform a PutDestination operation, you must also
-// have the iam:PassRole  permission.
+// have the iam:PassRole permission.
 func (c *Client) PutDestination(ctx context.Context, params *PutDestinationInput, optFns ...func(*Options)) (*PutDestinationOutput, error) {
 	if params == nil {
 		params = &PutDestinationInput{}
@@ -46,7 +46,7 @@ type PutDestinationInput struct {
 	DestinationName *string
 
 	// The ARN of an IAM role that grants CloudWatch Logs permissions to call the
-	// Amazon Kinesis PutRecord  operation on the destination stream.
+	// Amazon Kinesis PutRecord operation on the destination stream.
 	//
 	// This member is required.
 	RoleArn *string

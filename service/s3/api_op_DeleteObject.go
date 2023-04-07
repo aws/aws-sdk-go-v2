@@ -18,11 +18,11 @@ import (
 // command was successful. To remove a specific version, you must be the bucket
 // owner and you must use the version Id subresource. Using this subresource
 // permanently deletes the version. If the object deleted is a delete marker,
-// Amazon S3 sets the response header, x-amz-delete-marker, to true. If the
-// object you want to delete is in a bucket where the bucket versioning
-// configuration is MFA Delete enabled, you must include the x-amz-mfa request
-// header in the DELETE versionId  request. Requests that include x-amz-mfa must
-// use HTTPS. For more information about MFA Delete, see Using MFA Delete (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html)
+// Amazon S3 sets the response header, x-amz-delete-marker , to true. If the object
+// you want to delete is in a bucket where the bucket versioning configuration is
+// MFA Delete enabled, you must include the x-amz-mfa request header in the DELETE
+// versionId request. Requests that include x-amz-mfa must use HTTPS. For more
+// information about MFA Delete, see Using MFA Delete (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html)
 // . To see sample requests that use versioning, see Sample Request (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete)
 // . You can delete objects by explicitly calling DELETE Object or configure its
 // lifecycle ( PutBucketLifecycle (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html)
@@ -58,7 +58,7 @@ type DeleteObjectInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -231,8 +231,8 @@ func addDeleteObjectUpdateEndpoint(stack *middleware.Stack, options Options) err
 	})
 }
 
-// PresignDeleteObject is used to generate a presigned HTTP Request which
-// contains presigned URL, signed headers and HTTP method used.
+// PresignDeleteObject is used to generate a presigned HTTP Request which contains
+// presigned URL, signed headers and HTTP method used.
 func (c *PresignClient) PresignDeleteObject(ctx context.Context, params *DeleteObjectInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
 	if params == nil {
 		params = &DeleteObjectInput{}

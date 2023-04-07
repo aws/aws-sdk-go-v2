@@ -62,8 +62,8 @@ type DescribeUserOutput struct {
 	// The name for the user.
 	Name *string
 
-	// The state of a user: enabled (registered to WorkMail) or disabled
-	// (deregistered or never registered to WorkMail).
+	// The state of a user: enabled (registered to WorkMail) or disabled (deregistered
+	// or never registered to WorkMail).
 	State types.EntityState
 
 	// The identifier for the described user.

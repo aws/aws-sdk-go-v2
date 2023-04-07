@@ -29,8 +29,8 @@ func (c *Client) UpdateMonitoringSchedule(ctx context.Context, params *UpdateMon
 
 type UpdateMonitoringScheduleInput struct {
 
-	// The configuration object that specifies the monitoring schedule and defines
-	// the monitoring job.
+	// The configuration object that specifies the monitoring schedule and defines the
+	// monitoring job.
 	//
 	// This member is required.
 	MonitoringScheduleConfig *types.MonitoringScheduleConfig

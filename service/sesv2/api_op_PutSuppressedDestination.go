@@ -30,8 +30,7 @@ func (c *Client) PutSuppressedDestination(ctx context.Context, params *PutSuppre
 // A request to add an email destination to the suppression list for your account.
 type PutSuppressedDestinationInput struct {
 
-	// The email address that should be added to the suppression list for your
-	// account.
+	// The email address that should be added to the suppression list for your account.
 	//
 	// This member is required.
 	EmailAddress *string

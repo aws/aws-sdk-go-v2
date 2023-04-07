@@ -12,7 +12,7 @@ import (
 )
 
 // Takes an AddressId and returns specific details about that address in the form
-// of an Address  object.
+// of an Address object.
 func (c *Client) DescribeAddress(ctx context.Context, params *DescribeAddressInput, optFns ...func(*Options)) (*DescribeAddressOutput, error) {
 	if params == nil {
 		params = &DescribeAddressInput{}

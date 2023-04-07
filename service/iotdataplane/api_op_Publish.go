@@ -54,12 +54,12 @@ type PublishInput struct {
 	// from the Amazon Web Services Reference Guide.
 	MessageExpiry int64
 
-	// The message body. MQTT accepts text, binary, and empty (null) message
-	// payloads. Publishing an empty (null) payload with retain = true deletes the
-	// retained message identified by topic from Amazon Web Services IoT Core.
+	// The message body. MQTT accepts text, binary, and empty (null) message payloads.
+	// Publishing an empty (null) payload with retain = true deletes the retained
+	// message identified by topic from Amazon Web Services IoT Core.
 	Payload []byte
 
-	// An Enum  string value that indicates whether the payload is formatted as UTF-8.
+	// An Enum string value that indicates whether the payload is formatted as UTF-8.
 	// payloadFormatIndicator is an HTTP header value in the API.
 	PayloadFormatIndicator types.PayloadFormatIndicator
 
@@ -72,10 +72,9 @@ type PublishInput struct {
 	// wildcard characters.
 	ResponseTopic *string
 
-	// A Boolean value that determines whether to set the RETAIN flag when the
-	// message is published. Setting the RETAIN flag causes the message to be retained
-	// and sent to new subscribers to the topic. Valid values: true  | false Default
-	// value: false
+	// A Boolean value that determines whether to set the RETAIN flag when the message
+	// is published. Setting the RETAIN flag causes the message to be retained and sent
+	// to new subscribers to the topic. Valid values: true | false Default value: false
 	Retain bool
 
 	// A JSON string that contains an array of JSON objects. If you don’t use Amazon

@@ -43,15 +43,19 @@ type GetScalingPlanResourceForecastDataInput struct {
 	EndTime *time.Time
 
 	// The type of forecast data to get.
-	//     - LoadForecast : The load metric forecast.
-	//     - CapacityForecast : The capacity forecast.
-	//     - ScheduledActionMinCapacity : The minimum capacity for each scheduled scaling action. This data is calculated as the larger of two values: the capacity forecast or the minimum capacity in the scaling instruction.
-	//     - ScheduledActionMaxCapacity : The maximum capacity for each scheduled scaling action. The calculation used is determined by the predictive scaling maximum capacity behavior setting in the scaling instruction.
+	//   - LoadForecast : The load metric forecast.
+	//   - CapacityForecast : The capacity forecast.
+	//   - ScheduledActionMinCapacity : The minimum capacity for each scheduled scaling
+	//   action. This data is calculated as the larger of two values: the capacity
+	//   forecast or the minimum capacity in the scaling instruction.
+	//   - ScheduledActionMaxCapacity : The maximum capacity for each scheduled scaling
+	//   action. The calculation used is determined by the predictive scaling maximum
+	//   capacity behavior setting in the scaling instruction.
 	//
 	// This member is required.
 	ForecastDataType types.ForecastDataType
 
-	// The ID of the resource. This string consists of a prefix ( autoScalingGroup)
+	// The ID of the resource. This string consists of a prefix ( autoScalingGroup )
 	// followed by the name of a specified Auto Scaling group ( my-asg ). Example:
 	// autoScalingGroup/my-asg .
 	//

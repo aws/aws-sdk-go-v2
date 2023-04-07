@@ -34,8 +34,8 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// A list of one or more tag keys for the tags that you are removing. Specify
-	// only the tag keys, not the tag values.
+	// A list of one or more tag keys for the tags that you are removing. Specify only
+	// the tag keys, not the tag values.
 	//
 	// This member is required.
 	TagKeyList []string

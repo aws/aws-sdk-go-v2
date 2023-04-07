@@ -33,8 +33,8 @@ type ListMetricAttributionMetricsInput struct {
 	// The maximum number of metrics to return in one page of results.
 	MaxResults *int32
 
-	// The Amazon Resource Name (ARN) of the metric attribution to retrieve
-	// attributes for.
+	// The Amazon Resource Name (ARN) of the metric attribution to retrieve attributes
+	// for.
 	MetricAttributionArn *string
 
 	// Specify the pagination token from a previous request to retrieve the next page
@@ -50,7 +50,7 @@ type ListMetricAttributionMetricsOutput struct {
 	Metrics []types.MetricAttribute
 
 	// Specify the pagination token from a previous
-	// ListMetricAttributionMetricsResponserequest to retrieve the next page of
+	// ListMetricAttributionMetricsResponse request to retrieve the next page of
 	// results.
 	NextToken *string
 
@@ -134,8 +134,8 @@ type ListMetricAttributionMetricsPaginatorOptions struct {
 	// The maximum number of metrics to return in one page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

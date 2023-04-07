@@ -36,8 +36,8 @@ type PutEmailIdentityDkimAttributesInput struct {
 	EmailIdentity *string
 
 	// Sets the DKIM signing configuration for the identity. When you set this value
-	// true, then the messages that Amazon Pinpoint sends from the identity are
-	// DKIM-signed. When you set this value to false, then the messages that Amazon
+	// true , then the messages that Amazon Pinpoint sends from the identity are
+	// DKIM-signed. When you set this value to false , then the messages that Amazon
 	// Pinpoint sends from the identity aren't DKIM-signed.
 	SigningEnabled bool
 

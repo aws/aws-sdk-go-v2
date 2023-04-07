@@ -236,9 +236,9 @@ func NewChannelCreatedWaiter(client DescribeChannelAPIClient, optFns ...func(*Ch
 	}
 }
 
-// Wait calls the waiter function for ChannelCreated waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ChannelCreated waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ChannelCreatedWaiter) Wait(ctx context.Context, params *DescribeChannelInput, maxWaitDur time.Duration, optFns ...func(*ChannelCreatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -437,9 +437,9 @@ func NewChannelDeletedWaiter(client DescribeChannelAPIClient, optFns ...func(*Ch
 	}
 }
 
-// Wait calls the waiter function for ChannelDeleted waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ChannelDeleted waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ChannelDeletedWaiter) Wait(ctx context.Context, params *DescribeChannelInput, maxWaitDur time.Duration, optFns ...func(*ChannelDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -621,9 +621,9 @@ func NewChannelRunningWaiter(client DescribeChannelAPIClient, optFns ...func(*Ch
 	}
 }
 
-// Wait calls the waiter function for ChannelRunning waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ChannelRunning waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ChannelRunningWaiter) Wait(ctx context.Context, params *DescribeChannelInput, maxWaitDur time.Duration, optFns ...func(*ChannelRunningWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -805,9 +805,9 @@ func NewChannelStoppedWaiter(client DescribeChannelAPIClient, optFns ...func(*Ch
 	}
 }
 
-// Wait calls the waiter function for ChannelStopped waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ChannelStopped waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ChannelStoppedWaiter) Wait(ctx context.Context, params *DescribeChannelInput, maxWaitDur time.Duration, optFns ...func(*ChannelStoppedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -54,8 +54,8 @@ type DescribeGatewayCapabilityConfigurationInput struct {
 
 type DescribeGatewayCapabilityConfigurationOutput struct {
 
-	// The JSON document that defines the gateway capability's configuration. For
-	// more information, see Configuring data sources (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli)
+	// The JSON document that defines the gateway capability's configuration. For more
+	// information, see Configuring data sources (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli)
 	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
@@ -66,11 +66,11 @@ type DescribeGatewayCapabilityConfigurationOutput struct {
 	// This member is required.
 	CapabilityNamespace *string
 
-	// The synchronization status of the capability configuration. The sync status
-	// can be one of the following:
-	//     - IN_SYNC – The gateway is running the capability configuration.
-	//     - OUT_OF_SYNC – The gateway hasn't received the capability configuration.
-	//     - SYNC_FAILED – The gateway rejected the capability configuration.
+	// The synchronization status of the capability configuration. The sync status can
+	// be one of the following:
+	//   - IN_SYNC – The gateway is running the capability configuration.
+	//   - OUT_OF_SYNC – The gateway hasn't received the capability configuration.
+	//   - SYNC_FAILED – The gateway rejected the capability configuration.
 	//
 	// This member is required.
 	CapabilitySyncStatus types.CapabilitySyncStatus

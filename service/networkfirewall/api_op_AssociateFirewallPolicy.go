@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a FirewallPolicy  to a Firewall. A firewall policy defines how to
+// Associates a FirewallPolicy to a Firewall . A firewall policy defines how to
 // monitor and manage your VPC network traffic, using a collection of inspection
 // rule groups and other settings. Each firewall requires one firewall policy
 // association, and you can use the same firewall policy for multiple firewalls.
@@ -36,8 +36,8 @@ type AssociateFirewallPolicyInput struct {
 	// This member is required.
 	FirewallPolicyArn *string
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or
-	// the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
+	// name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall
@@ -54,7 +54,7 @@ type AssociateFirewallPolicyInput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
@@ -83,7 +83,7 @@ type AssociateFirewallPolicyOutput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

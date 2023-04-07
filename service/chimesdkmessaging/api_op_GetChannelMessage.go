@@ -12,8 +12,8 @@ import (
 )
 
 // Gets the full details of a channel message. The x-amz-chime-bearer request
-// header is mandatory. Use the ARN of the AppInstanceUser  or AppInstanceBot
-// that makes the API call as the value in the header.
+// header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that
+// makes the API call as the value in the header.
 func (c *Client) GetChannelMessage(ctx context.Context, params *GetChannelMessageInput, optFns ...func(*Options)) (*GetChannelMessageOutput, error) {
 	if params == nil {
 		params = &GetChannelMessageInput{}
@@ -36,7 +36,7 @@ type GetChannelMessageInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
@@ -46,8 +46,8 @@ type GetChannelMessageInput struct {
 	// This member is required.
 	MessageId *string
 
-	// The ID of the SubChannel in the request. Only required when getting messages
-	// in a SubChannel that the user belongs to.
+	// The ID of the SubChannel in the request. Only required when getting messages in
+	// a SubChannel that the user belongs to.
 	SubChannelId *string
 
 	noSmithyDocumentSerde

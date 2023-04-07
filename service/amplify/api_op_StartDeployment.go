@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a deployment for a manually deployed app. Manually deployed apps are
-// not connected to a repository.
+// Starts a deployment for a manually deployed app. Manually deployed apps are not
+// connected to a repository.
 func (c *Client) StartDeployment(ctx context.Context, params *StartDeploymentInput, optFns ...func(*Options)) (*StartDeploymentOutput, error) {
 	if params == nil {
 		params = &StartDeploymentInput{}

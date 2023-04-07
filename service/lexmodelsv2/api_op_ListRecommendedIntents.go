@@ -51,15 +51,14 @@ type ListRecommendedIntentsInput struct {
 	// This member is required.
 	LocaleId *string
 
-	// The maximum number of bot recommendations to return in each page of results.
-	// If there are fewer results than the max page size, only the actual number of
+	// The maximum number of bot recommendations to return in each page of results. If
+	// there are fewer results than the max page size, only the actual number of
 	// results are returned.
 	MaxResults *int32
 
-	// If the response from the ListRecommendedIntents operation contains more
-	// results than specified in the maxResults parameter, a token is returned in the
-	// response. Use that token in the nextToken parameter to return the next page of
-	// results.
+	// If the response from the ListRecommendedIntents operation contains more results
+	// than specified in the maxResults parameter, a token is returned in the response.
+	// Use that token in the nextToken parameter to return the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -173,13 +172,13 @@ var _ ListRecommendedIntentsAPIClient = (*Client)(nil)
 // ListRecommendedIntentsPaginatorOptions is the paginator options for
 // ListRecommendedIntents
 type ListRecommendedIntentsPaginatorOptions struct {
-	// The maximum number of bot recommendations to return in each page of results.
-	// If there are fewer results than the max page size, only the actual number of
+	// The maximum number of bot recommendations to return in each page of results. If
+	// there are fewer results than the max page size, only the actual number of
 	// results are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -192,8 +191,7 @@ type ListRecommendedIntentsPaginator struct {
 	firstPage bool
 }
 
-// NewListRecommendedIntentsPaginator returns a new
-// ListRecommendedIntentsPaginator
+// NewListRecommendedIntentsPaginator returns a new ListRecommendedIntentsPaginator
 func NewListRecommendedIntentsPaginator(client ListRecommendedIntentsAPIClient, params *ListRecommendedIntentsInput, optFns ...func(*ListRecommendedIntentsPaginatorOptions)) *ListRecommendedIntentsPaginator {
 	if params == nil {
 		params = &ListRecommendedIntentsInput{}

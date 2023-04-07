@@ -60,8 +60,8 @@ type ListHubContentVersionsInput struct {
 	// The lower bound of the hub content versions to list.
 	MinVersion *string
 
-	// If the response to a previous ListHubContentVersions request was truncated,
-	// the response includes a NextToken. To retrieve the next set of hub content
+	// If the response to a previous ListHubContentVersions request was truncated, the
+	// response includes a NextToken . To retrieve the next set of hub content
 	// versions, use the token in the next request.
 	NextToken *string
 

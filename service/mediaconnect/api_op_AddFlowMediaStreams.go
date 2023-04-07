@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds media streams to an existing flow. After you add a media stream to a
-// flow, you can associate it with a source and/or an output that uses the ST 2110
-// JPEG XS or CDI protocol.
+// Adds media streams to an existing flow. After you add a media stream to a flow,
+// you can associate it with a source and/or an output that uses the ST 2110 JPEG
+// XS or CDI protocol.
 func (c *Client) AddFlowMediaStreams(ctx context.Context, params *AddFlowMediaStreamsInput, optFns ...func(*Options)) (*AddFlowMediaStreamsOutput, error) {
 	if params == nil {
 		params = &AddFlowMediaStreamsInput{}

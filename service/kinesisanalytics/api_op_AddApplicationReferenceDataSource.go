@@ -14,7 +14,7 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Adds a reference data source to an existing
+// Analytics API V2 Documentation . Adds a reference data source to an existing
 // application. Amazon Kinesis Analytics reads reference data (that is, an Amazon
 // S3 object) and creates an in-application table within your application. In the
 // request, you provide the source (S3 bucket name and object key name), name of
@@ -50,7 +50,7 @@ type AddApplicationReferenceDataSourceInput struct {
 	// Version of the application for which you are adding the reference data source.
 	// You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the current application version. If the version specified is
-	// not the current version, the ConcurrentModificationException  is returned.
+	// not the current version, the ConcurrentModificationException is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64

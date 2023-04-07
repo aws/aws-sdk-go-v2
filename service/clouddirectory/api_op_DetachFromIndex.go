@@ -49,7 +49,7 @@ type DetachFromIndexInput struct {
 
 type DetachFromIndexOutput struct {
 
-	// The ObjectIdentifier  of the object that was detached from the index.
+	// The ObjectIdentifier of the object that was detached from the index.
 	DetachedObjectIdentifier *string
 
 	// Metadata pertaining to the operation's result.

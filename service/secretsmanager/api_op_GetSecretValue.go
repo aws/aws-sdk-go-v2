@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-// Retrieves the contents of the encrypted fields SecretString  or SecretBinary
+// Retrieves the contents of the encrypted fields SecretString or SecretBinary
 // from the specified version of a secret, whichever contains content. We recommend
 // that you cache your secret values by using client-side caching. Caching secrets
 // improves speed and reduces your costs. For more information, see Cache secrets
@@ -21,12 +21,11 @@ import (
 // UpdateSecretVersionStage (https://docs.aws.amazon.com/cli/latest/reference/secretsmanager/update-secret-version-stage.html)
 // . Secrets Manager generates a CloudTrail log entry when you call this action. Do
 // not include sensitive information in request parameters because it might be
-// logged. For more information, see Logging Secrets Manager events with
-// CloudTrail (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html)
-// . Required permissions: secretsmanager:GetSecretValue. If the secret is
+// logged. For more information, see Logging Secrets Manager events with CloudTrail (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html)
+// . Required permissions: secretsmanager:GetSecretValue . If the secret is
 // encrypted using a customer-managed key instead of the Amazon Web Services
-// managed key aws/secretsmanager , then you also need kms:Decrypt permissions
-// for that key. For more information, see IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
+// managed key aws/secretsmanager , then you also need kms:Decrypt permissions for
+// that key. For more information, see IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
 // .
 func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput, optFns ...func(*Options)) (*GetSecretValueOutput, error) {
@@ -55,18 +54,18 @@ type GetSecretValueInput struct {
 	SecretId *string
 
 	// The unique identifier of the version of the secret to retrieve. If you include
-	// both this parameter and VersionStage, the two parameters must refer to the
-	// same secret version. If you don't specify either a VersionStage  or VersionId,
-	// then Secrets Manager returns the AWSCURRENT  version. This value is typically a
-	// UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier)value with
+	// both this parameter and VersionStage , the two parameters must refer to the same
+	// secret version. If you don't specify either a VersionStage or VersionId , then
+	// Secrets Manager returns the AWSCURRENT version. This value is typically a
+	// UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier) value with
 	// 32 hexadecimal digits.
 	VersionId *string
 
 	// The staging label of the version of the secret to retrieve. Secrets Manager
 	// uses staging labels to keep track of different versions during the rotation
-	// process. If you include both this parameter and VersionId, the two parameters
+	// process. If you include both this parameter and VersionId , the two parameters
 	// must refer to the same secret version. If you don't specify either a
-	// VersionStage or VersionId , Secrets Manager returns the AWSCURRENT  version.
+	// VersionStage or VersionId , Secrets Manager returns the AWSCURRENT version.
 	VersionStage *string
 
 	noSmithyDocumentSerde
@@ -78,8 +77,8 @@ type GetSecretValueOutput struct {
 	ARN *string
 
 	// The date and time that this version of the secret was created. If you don't
-	// specify which version in VersionId  or VersionStage, then Secrets Manager uses
-	// the AWSCURRENT  version.
+	// specify which version in VersionId or VersionStage , then Secrets Manager uses
+	// the AWSCURRENT version.
 	CreatedDate *time.Time
 
 	// The friendly name of the secret.
@@ -90,7 +89,7 @@ type GetSecretValueOutput struct {
 	// binary data as a base64-encoded (https://tools.ietf.org/html/rfc4648#section-4)
 	// string. If the secret was created by using the Secrets Manager console, or if
 	// the secret value was originally provided as a string, then this field is
-	// omitted. The secret value appears in SecretString  instead.
+	// omitted. The secret value appears in SecretString instead.
 	SecretBinary []byte
 
 	// The decrypted secret value, if the secret value was originally provided as a

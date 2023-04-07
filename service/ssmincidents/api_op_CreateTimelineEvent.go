@@ -59,7 +59,7 @@ type CreateTimelineEventInput struct {
 	// specified details.
 	ClientToken *string
 
-	// Adds one or more references to the TimelineEvent. A reference is an Amazon Web
+	// Adds one or more references to the TimelineEvent . A reference is an Amazon Web
 	// Services resource involved or associated with the incident. To specify a
 	// reference, enter its Amazon Resource Name (ARN). You can also specify a related
 	// item associated with a resource. For example, to specify an Amazon DynamoDB

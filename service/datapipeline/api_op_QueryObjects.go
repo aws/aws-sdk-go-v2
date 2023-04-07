@@ -57,14 +57,14 @@ type QueryObjectsInput struct {
 
 	// The starting point for the results to be returned. For the first call, this
 	// value should be empty. As long as there are more results, continue to call
-	// QueryObjectswith the marker value from the previous call to retrieve the next
+	// QueryObjects with the marker value from the previous call to retrieve the next
 	// set of results.
 	Marker *string
 
-	// The query that defines the objects to be returned. The Query object can
-	// contain a maximum of ten selectors. The conditions in the query are limited to
-	// top-level String fields in the object. These filters can be applied to
-	// components, instances, and attempts.
+	// The query that defines the objects to be returned. The Query object can contain
+	// a maximum of ten selectors. The conditions in the query are limited to top-level
+	// String fields in the object. These filters can be applied to components,
+	// instances, and attempts.
 	Query *types.Query
 
 	noSmithyDocumentSerde
@@ -167,8 +167,8 @@ type QueryObjectsPaginatorOptions struct {
 	// call. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

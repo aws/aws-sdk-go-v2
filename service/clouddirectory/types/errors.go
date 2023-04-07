@@ -8,8 +8,8 @@ import (
 )
 
 // Access denied or directory not found. Either you don't have permissions for
-// this directory or the directory does not exist. Try calling ListDirectories
-// and check your permissions.
+// this directory or the directory does not exist. Try calling ListDirectories and
+// check your permissions.
 type AccessDeniedException struct {
 	Message *string
 
@@ -35,7 +35,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A BatchWrite  exception has occurred.
+// A BatchWrite exception has occurred.
 type BatchWriteException struct {
 	Message *string
 
@@ -64,7 +64,7 @@ func (e *BatchWriteException) ErrorCode() string {
 }
 func (e *BatchWriteException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Cannot list the parents of a Directory  root.
+// Cannot list the parents of a Directory root.
 type CannotListParentOfRootException struct {
 	Message *string
 
@@ -117,8 +117,8 @@ func (e *DirectoryAlreadyExistsException) ErrorCode() string {
 }
 func (e *DirectoryAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A directory that has been deleted and to which access has been attempted.
-// Note: The requested resource will eventually cease to exist.
+// A directory that has been deleted and to which access has been attempted. Note:
+// The requested resource will eventually cease to exist.
 type DirectoryDeletedException struct {
 	Message *string
 
@@ -249,7 +249,7 @@ func (e *FacetInUseException) ErrorCode() string {
 }
 func (e *FacetInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Facet  could not be found.
+// The specified Facet could not be found.
 type FacetNotFoundException struct {
 	Message *string
 
@@ -330,8 +330,8 @@ func (e *IncompatibleSchemaException) ErrorCode() string {
 }
 func (e *IncompatibleSchemaException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An object has been attempted to be attached to an object that does not have
-// the appropriate attribute value.
+// An object has been attempted to be attached to an object that does not have the
+// appropriate attribute value.
 type IndexedAttributeMissingException struct {
 	Message *string
 
@@ -357,8 +357,8 @@ func (e *IndexedAttributeMissingException) ErrorCode() string {
 }
 func (e *IndexedAttributeMissingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates a problem that must be resolved by Amazon Web Services. This might
-// be a transient error in which case you can retry your request until it succeeds.
+// Indicates a problem that must be resolved by Amazon Web Services. This might be
+// a transient error in which case you can retry your request until it succeeds.
 // Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
 // site to see if there are any operational issues with the service.
 type InternalServiceException struct {
@@ -440,7 +440,7 @@ func (e *InvalidAttachmentException) ErrorCode() string {
 }
 func (e *InvalidAttachmentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An attempt to modify a Facet  resulted in an invalid schema exception.
+// An attempt to modify a Facet resulted in an invalid schema exception.
 type InvalidFacetUpdateException struct {
 	Message *string
 
@@ -466,7 +466,7 @@ func (e *InvalidFacetUpdateException) ErrorCode() string {
 }
 func (e *InvalidFacetUpdateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the NextToken  value is not valid.
+// Indicates that the NextToken value is not valid.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -518,7 +518,7 @@ func (e *InvalidRuleException) ErrorCode() string {
 }
 func (e *InvalidRuleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the provided SchemaDoc  value is not valid.
+// Indicates that the provided SchemaDoc value is not valid.
 type InvalidSchemaDocException struct {
 	Message *string
 
@@ -653,7 +653,7 @@ func (e *NotIndexException) ErrorCode() string {
 func (e *NotIndexException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Occurs when any invalid operations are performed on an object that is not a
-// node, such as calling ListObjectChildren  for a leaf node object.
+// node, such as calling ListObjectChildren for a leaf node object.
 type NotNodeException struct {
 	Message *string
 
@@ -868,8 +868,8 @@ func (e *SchemaAlreadyPublishedException) ErrorCode() string {
 }
 func (e *SchemaAlreadyPublishedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The object could not be deleted because links still exist. Remove the links
-// and then try the operation again.
+// The object could not be deleted because links still exist. Remove the links and
+// then try the operation again.
 type StillContainsLinksException struct {
 	Message *string
 

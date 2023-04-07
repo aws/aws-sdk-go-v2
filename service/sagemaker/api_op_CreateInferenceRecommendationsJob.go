@@ -42,10 +42,10 @@ type CreateInferenceRecommendationsJobInput struct {
 	// This member is required.
 	JobName *string
 
-	// Defines the type of recommendation job. Specify Default to initiate an
-	// instance recommendation and Advanced to initiate a load test. If left
-	// unspecified, Amazon SageMaker Inference Recommender will run an instance
-	// recommendation ( DEFAULT ) job.
+	// Defines the type of recommendation job. Specify Default to initiate an instance
+	// recommendation and Advanced to initiate a load test. If left unspecified,
+	// Amazon SageMaker Inference Recommender will run an instance recommendation (
+	// DEFAULT ) job.
 	//
 	// This member is required.
 	JobType types.RecommendationJobType
@@ -63,14 +63,14 @@ type CreateInferenceRecommendationsJobInput struct {
 	// Amazon S3 server-side encryption.
 	OutputConfig *types.RecommendationJobOutputConfig
 
-	// A set of conditions for stopping a recommendation job. If any of the
-	// conditions are met, the job is automatically stopped.
+	// A set of conditions for stopping a recommendation job. If any of the conditions
+	// are met, the job is automatically stopped.
 	StoppingConditions *types.RecommendationJobStoppingConditions
 
 	// The metadata that you apply to Amazon Web Services resources to help you
 	// categorize and organize them. Each tag consists of a key and a value, both of
 	// which you define. For more information, see Tagging Amazon Web Services
-	// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)in
+	// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
 	// the Amazon Web Services General Reference.
 	Tags []types.Tag
 

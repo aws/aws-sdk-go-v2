@@ -32,8 +32,8 @@ func (c *Client) BatchGetCrawlers(ctx context.Context, params *BatchGetCrawlersI
 
 type BatchGetCrawlersInput struct {
 
-	// A list of crawler names, which might be the names returned from the
-	// ListCrawlers operation.
+	// A list of crawler names, which might be the names returned from the ListCrawlers
+	// operation.
 	//
 	// This member is required.
 	CrawlerNames []string

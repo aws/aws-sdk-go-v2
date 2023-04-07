@@ -65,9 +65,9 @@ const (
 	CatalogTypeGlue CatalogType = "GLUE"
 )
 
-// Values returns all known values for CatalogType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CatalogType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (CatalogType) Values() []CatalogType {
 	return []CatalogType{
 		"GLUE",
@@ -305,9 +305,9 @@ const (
 	FileTypeParquet FileType = "PARQUET"
 )
 
-// Values returns all known values for FileType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FileType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (FileType) Values() []FileType {
 	return []FileType{
 		"CSV",
@@ -350,8 +350,8 @@ const (
 	GoogleAnalyticsConnectorOperatorBetween    GoogleAnalyticsConnectorOperator = "BETWEEN"
 )
 
-// Values returns all known values for GoogleAnalyticsConnectorOperator. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for GoogleAnalyticsConnectorOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (GoogleAnalyticsConnectorOperator) Values() []GoogleAnalyticsConnectorOperator {
@@ -382,10 +382,9 @@ const (
 	InforNexusConnectorOperatorNoOp                InforNexusConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for InforNexusConnectorOperator. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for InforNexusConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InforNexusConnectorOperator) Values() []InforNexusConnectorOperator {
 	return []InforNexusConnectorOperator{
 		"PROJECTION",
@@ -460,8 +459,8 @@ const (
 	OAuth2CustomPropTypeAuthUrl  OAuth2CustomPropType = "AUTH_URL"
 )
 
-// Values returns all known values for OAuth2CustomPropType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for OAuth2CustomPropType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (OAuth2CustomPropType) Values() []OAuth2CustomPropType {
 	return []OAuth2CustomPropType{
@@ -515,9 +514,9 @@ const (
 	OperatorNoOp                 Operator = "NO_OP"
 )
 
-// Values returns all known values for Operator. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"PROJECTION",
@@ -668,9 +667,9 @@ const (
 	PardotConnectorOperatorValidateNumeric     PardotConnectorOperator = "VALIDATE_NUMERIC"
 )
 
-// Values returns all known values for PardotConnectorOperator. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PardotConnectorOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PardotConnectorOperator) Values() []PardotConnectorOperator {
 	return []PardotConnectorOperator{
 		"PROJECTION",
@@ -897,10 +896,9 @@ const (
 	SalesforceConnectorOperatorNoOp                 SalesforceConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for SalesforceConnectorOperator. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for SalesforceConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SalesforceConnectorOperator) Values() []SalesforceConnectorOperator {
 	return []SalesforceConnectorOperator{
 		"PROJECTION",
@@ -1056,10 +1054,9 @@ const (
 	ServiceNowConnectorOperatorNoOp                 ServiceNowConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for ServiceNowConnectorOperator. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ServiceNowConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceNowConnectorOperator) Values() []ServiceNowConnectorOperator {
 	return []ServiceNowConnectorOperator{
 		"PROJECTION",
@@ -1196,9 +1193,9 @@ const (
 	TaskTypePartition   TaskType = "Partition"
 )
 
-// Values returns all known values for TaskType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaskType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (TaskType) Values() []TaskType {
 	return []TaskType{
 		"Arithmetic",
@@ -1234,10 +1231,9 @@ const (
 	TrendmicroConnectorOperatorNoOp                TrendmicroConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for TrendmicroConnectorOperator. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for TrendmicroConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrendmicroConnectorOperator) Values() []TrendmicroConnectorOperator {
 	return []TrendmicroConnectorOperator{
 		"PROJECTION",
@@ -1266,9 +1262,9 @@ const (
 	TriggerTypeOndemand  TriggerType = "OnDemand"
 )
 
-// Values returns all known values for TriggerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TriggerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TriggerType) Values() []TriggerType {
 	return []TriggerType{
 		"Scheduled",

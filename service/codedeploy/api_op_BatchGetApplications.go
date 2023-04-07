@@ -28,7 +28,7 @@ func (c *Client) BatchGetApplications(ctx context.Context, params *BatchGetAppli
 	return out, nil
 }
 
-// Represents the input of a BatchGetApplications  operation.
+// Represents the input of a BatchGetApplications operation.
 type BatchGetApplicationsInput struct {
 
 	// A list of application names separated by spaces. The maximum number of
@@ -40,7 +40,7 @@ type BatchGetApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a BatchGetApplications  operation.
+// Represents the output of a BatchGetApplications operation.
 type BatchGetApplicationsOutput struct {
 
 	// Information about the applications.

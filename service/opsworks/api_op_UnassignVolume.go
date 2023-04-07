@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Unassigns an assigned Amazon EBS volume. The volume remains registered with
-// the stack. For more information, see Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html)
+// Unassigns an assigned Amazon EBS volume. The volume remains registered with the
+// stack. For more information, see Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html)
 // . Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User

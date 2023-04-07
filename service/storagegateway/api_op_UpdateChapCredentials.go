@@ -51,7 +51,7 @@ type UpdateChapCredentialsInput struct {
 	SecretToAuthenticateInitiator *string
 
 	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
-	// DescribeStorediSCSIVolumesoperation to return the TargetARN for specified
+	// DescribeStorediSCSIVolumes operation to return the TargetARN for specified
 	// VolumeARN.
 	//
 	// This member is required.
@@ -73,8 +73,8 @@ type UpdateChapCredentialsOutput struct {
 	// name specified in the request.
 	InitiatorName *string
 
-	// The Amazon Resource Name (ARN) of the target. This is the same target
-	// specified in the request.
+	// The Amazon Resource Name (ARN) of the target. This is the same target specified
+	// in the request.
 	TargetARN *string
 
 	// Metadata pertaining to the operation's result.

@@ -41,7 +41,7 @@ type DescribeStackProvisioningParametersInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeStackProvisioningParameters  request.
+// Contains the response to a DescribeStackProvisioningParameters request.
 type DescribeStackProvisioningParametersOutput struct {
 
 	// The AWS OpsWorks Stacks agent installer's URL.

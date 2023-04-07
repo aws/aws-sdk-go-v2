@@ -39,17 +39,20 @@ type GetRegisterAccountStatusInput struct {
 
 type GetRegisterAccountStatusOutput struct {
 
-	// The status of registering your account and resources. The status can be one
-	// of:
-	//     - REGISTRATION_SUCCESS - The Amazon Web Services resource is successfully registered.
-	//     - REGISTRATION_PENDING - Amazon Web Services IoT FleetWise is processing the registration request. This process takes approximately five minutes to complete.
-	//     - REGISTRATION_FAILURE - Amazon Web Services IoT FleetWise can't register the AWS resource. Try again later.
+	// The status of registering your account and resources. The status can be one of:
+	//   - REGISTRATION_SUCCESS - The Amazon Web Services resource is successfully
+	//   registered.
+	//   - REGISTRATION_PENDING - Amazon Web Services IoT FleetWise is processing the
+	//   registration request. This process takes approximately five minutes to complete.
+	//
+	//   - REGISTRATION_FAILURE - Amazon Web Services IoT FleetWise can't register the
+	//   AWS resource. Try again later.
 	//
 	// This member is required.
 	AccountStatus types.RegistrationStatus
 
-	// The time the account was registered, in seconds since epoch (January 1, 1970
-	// at midnight UTC time).
+	// The time the account was registered, in seconds since epoch (January 1, 1970 at
+	// midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -64,8 +67,8 @@ type GetRegisterAccountStatusOutput struct {
 	// This member is required.
 	IamRegistrationResponse *types.IamRegistrationResponse
 
-	// The time this registration was last updated, in seconds since epoch (January
-	// 1, 1970 at midnight UTC time).
+	// The time this registration was last updated, in seconds since epoch (January 1,
+	// 1970 at midnight UTC time).
 	//
 	// This member is required.
 	LastModificationTime *time.Time

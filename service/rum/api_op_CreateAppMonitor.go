@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Amazon CloudWatch RUM app monitor, which collects telemetry data
-// from your application and sends that data to RUM. The data includes performance
-// and reliability information such as page load time, client-side errors, and user
+// Creates a Amazon CloudWatch RUM app monitor, which collects telemetry data from
+// your application and sends that data to RUM. The data includes performance and
+// reliability information such as page load time, client-side errors, and user
 // behavior. You use this operation only to create a new app monitor. To update an
 // existing app monitor, use UpdateAppMonitor (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_UpdateAppMonitor.html)
 // instead. After you create an app monitor, sign in to the CloudWatch RUM console
@@ -51,7 +51,7 @@ type CreateAppMonitorInput struct {
 	// If you are using Amazon Cognito for authorization, you must include this
 	// structure in your request, and it must include the ID of the Amazon Cognito
 	// identity pool to use for authorization. If you don't include
-	// AppMonitorConfiguration, you must set up your own authorization method. For
+	// AppMonitorConfiguration , you must set up your own authorization method. For
 	// more information, see Authorize your application to send data to Amazon Web
 	// Services (https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html)
 	// . If you omit this argument, the sample rate used for RUM is set to 10% of the
@@ -59,8 +59,8 @@ type CreateAppMonitorInput struct {
 	AppMonitorConfiguration *types.AppMonitorConfiguration
 
 	// Specifies whether this app monitor allows the web client to define and send
-	// custom events. If you omit this parameter, custom events are DISABLED. For
-	// more information about custom events, see Send custom events (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html)
+	// custom events. If you omit this parameter, custom events are DISABLED . For more
+	// information about custom events, see Send custom events (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html)
 	// .
 	CustomEvents *types.CustomEvents
 

@@ -25,12 +25,12 @@ import (
 // volume. For information about CloudWatch Events, see the Amazon CloudWatch
 // Events User Guide (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/)
 // . You can also track the status of a modification using
-// DescribeVolumesModifications. For information about tracking status changes
+// DescribeVolumesModifications . For information about tracking status changes
 // using either method, see Monitor the progress of volume modifications (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html)
 // . With previous-generation instance types, resizing an EBS volume might require
 // detaching and reattaching the volume or stopping and restarting the instance.
 // After modifying a volume, you must wait at least six hours and ensure that the
-// volume is in the in-use  or available state before you can modify the same
+// volume is in the in-use or available state before you can modify the same
 // volume. This is sometimes referred to as a cooldown period.
 func (c *Client) ModifyVolume(ctx context.Context, params *ModifyVolumeInput, optFns ...func(*Options)) (*ModifyVolumeOutput, error) {
 	if params == nil {
@@ -60,20 +60,18 @@ type ModifyVolumeInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The target IOPS rate of the volume. This parameter is valid only for gp3 , io1
-	// , and io2 volumes. The following are the supported values for each volume
-	// type:
-	//     - gp3 : 3,000-16,000 IOPS
-	//     - io1 : 100-64,000 IOPS
-	//     - io2 : 100-64,000 IOPS
-	// Default: The existing value is retained if you
-	// keep the same volume type. If you change the volume type to io1 , io2 , or gp3
-	// , the default is 3,000.
+	// The target IOPS rate of the volume. This parameter is valid only for gp3 , io1 ,
+	// and io2 volumes. The following are the supported values for each volume type:
+	//   - gp3 : 3,000-16,000 IOPS
+	//   - io1 : 100-64,000 IOPS
+	//   - io2 : 100-64,000 IOPS
+	// Default: The existing value is retained if you keep the same volume type. If
+	// you change the volume type to io1 , io2 , or gp3 , the default is 3,000.
 	Iops *int32
 
 	// Specifies whether to enable Amazon EBS Multi-Attach. If you enable
 	// Multi-Attach, you can attach the volume to up to 16 Nitro-based instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances)
-	// in the same Availability Zone. This parameter is supported with io1  and io2
+	// in the same Availability Zone. This parameter is supported with io1 and io2
 	// volumes only. For more information, see Amazon EBS Multi-Attach (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	MultiAttachEnabled *bool
@@ -81,17 +79,17 @@ type ModifyVolumeInput struct {
 	// The target size of the volume, in GiB. The target volume size must be greater
 	// than or equal to the existing size of the volume. The following are the
 	// supported volumes sizes for each volume type:
-	//     - gp2 and gp3 : 1-16,384
-	//     - io1 and io2 : 4-16,384
-	//     - st1 and sc1 : 125-16,384
-	//     - standard : 1-1,024
+	//   - gp2 and gp3 : 1-16,384
+	//   - io1 and io2 : 4-16,384
+	//   - st1 and sc1 : 125-16,384
+	//   - standard : 1-1,024
 	// Default: The existing size is retained.
 	Size *int32
 
-	// The target throughput of the volume, in MiB/s. This parameter is valid only
-	// for gp3 volumes. The maximum value is 1,000. Default: The existing value is
-	// retained if the source and target volume type is gp3. Otherwise, the default
-	// value is 125. Valid Range: Minimum value of 125. Maximum value of 1000.
+	// The target throughput of the volume, in MiB/s. This parameter is valid only for
+	// gp3 volumes. The maximum value is 1,000. Default: The existing value is retained
+	// if the source and target volume type is gp3 . Otherwise, the default value is
+	// 125. Valid Range: Minimum value of 125. Maximum value of 1000.
 	Throughput *int32
 
 	// The target EBS volume type of the volume. For more information, see Amazon EBS

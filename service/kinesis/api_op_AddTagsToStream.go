@@ -12,7 +12,7 @@ import (
 
 // Adds or updates tags for the specified Kinesis data stream. You can assign up
 // to 50 tags to a data stream. When invoking this API, it is recommended you use
-// the StreamARN  input parameter rather than the StreamName input parameter. If
+// the StreamARN input parameter rather than the StreamName input parameter. If
 // tags have already been assigned to the stream, AddTagsToStream overwrites any
 // existing tags that correspond to the specified tag keys. AddTagsToStream has a
 // limit of five transactions per second per account.

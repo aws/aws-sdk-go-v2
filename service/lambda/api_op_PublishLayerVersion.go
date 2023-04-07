@@ -47,16 +47,17 @@ type PublishLayerVersionInput struct {
 	CompatibleArchitectures []types.Architecture
 
 	// A list of compatible function runtimes (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-	// . Used for filtering with ListLayers  and ListLayerVersions .
+	// . Used for filtering with ListLayers and ListLayerVersions .
 	CompatibleRuntimes []types.Runtime
 
 	// The description of the version.
 	Description *string
 
 	// The layer's software license. It can be any of the following:
-	//     - An SPDX license identifier (https://spdx.org/licenses/) . For example, MIT .
-	//     - The URL of a license hosted on the internet. For example, https://opensource.org/licenses/MIT .
-	//     - The full text of the license.
+	//   - An SPDX license identifier (https://spdx.org/licenses/) . For example, MIT .
+	//   - The URL of a license hosted on the internet. For example,
+	//   https://opensource.org/licenses/MIT .
+	//   - The full text of the license.
 	LicenseInfo *string
 
 	noSmithyDocumentSerde

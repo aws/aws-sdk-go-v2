@@ -30,7 +30,7 @@ func (c *Client) CreateReplicationTask(ctx context.Context, params *CreateReplic
 
 type CreateReplicationTaskInput struct {
 
-	// The migration type. Valid values: full-load  | cdc  | full-load-and-cdc
+	// The migration type. Valid values: full-load | cdc | full-load-and-cdc
 	//
 	// This member is required.
 	MigrationType types.MigrationTypeValue
@@ -41,9 +41,9 @@ type CreateReplicationTaskInput struct {
 	ReplicationInstanceArn *string
 
 	// An identifier for the replication task. Constraints:
-	//     - Must contain 1-255 alphanumeric characters or hyphens.
-	//     - First character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must contain 1-255 alphanumeric characters or hyphens.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
 	ReplicationTaskIdentifier *string
@@ -103,7 +103,7 @@ type CreateReplicationTaskInput struct {
 	// letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain
 	// two consecutive hyphens, and can only begin with a letter, such as
 	// Example-App-ARN1 . For example, this value might result in the EndpointArn
-	// value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't
+	// value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1 . If you don't
 	// specify a ResourceIdentifier value, DMS generates a default identifier value
 	// for the end of EndpointArn .
 	ResourceIdentifier *string
@@ -111,9 +111,9 @@ type CreateReplicationTaskInput struct {
 	// One or more tags to be assigned to the replication task.
 	Tags []types.Tag
 
-	// Supplemental information that the task requires to migrate the data for
-	// certain source and target endpoints. For more information, see Specifying
-	// Supplemental Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
+	// Supplemental information that the task requires to migrate the data for certain
+	// source and target endpoints. For more information, see Specifying Supplemental
+	// Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
 	// in the Database Migration Service User Guide.
 	TaskData *string
 

@@ -144,9 +144,9 @@ func newServiceMetadataMiddleware_opGetBucketLogging(region string) *awsmiddlewa
 	}
 }
 
-// getGetBucketLoggingBucketMember returns a pointer to string denoting a
-// provided bucket member valueand a boolean indicating if the input has a modeled
-// bucket name,
+// getGetBucketLoggingBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
 func getGetBucketLoggingBucketMember(input interface{}) (*string, bool) {
 	in := input.(*GetBucketLoggingInput)
 	if in.Bucket == nil {

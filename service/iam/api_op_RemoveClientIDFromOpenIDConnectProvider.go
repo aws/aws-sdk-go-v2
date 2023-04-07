@@ -32,8 +32,8 @@ func (c *Client) RemoveClientIDFromOpenIDConnectProvider(ctx context.Context, pa
 type RemoveClientIDFromOpenIDConnectProviderInput struct {
 
 	// The client ID (also known as audience) to remove from the IAM OIDC provider
-	// resource. For more information about client IDs, see
-	// CreateOpenIDConnectProvider .
+	// resource. For more information about client IDs, see CreateOpenIDConnectProvider
+	// .
 	//
 	// This member is required.
 	ClientID *string

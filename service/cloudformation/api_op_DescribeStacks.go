@@ -20,7 +20,7 @@ import (
 
 // Returns the description for the specified stack; if no stack name was
 // specified, then it returns the description for all the stacks created. If the
-// stack doesn't exist, an ValidationError  is returned.
+// stack doesn't exist, an ValidationError is returned.
 func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput, optFns ...func(*Options)) (*DescribeStacksOutput, error) {
 	if params == nil {
 		params = &DescribeStacksInput{}
@@ -36,7 +36,7 @@ func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput
 	return out, nil
 }
 
-// The input for DescribeStacks  action.
+// The input for DescribeStacks action.
 type DescribeStacksInput struct {
 
 	// A string that identifies the next page of stacks that you want to retrieve.
@@ -44,16 +44,16 @@ type DescribeStacksInput struct {
 
 	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
-	//     - Running stacks: You can specify either the stack's name or its unique stack ID.
-	//     - Deleted stacks: You must specify the unique stack ID.
-	// Default: There is
-	// no default value.
+	//   - Running stacks: You can specify either the stack's name or its unique stack
+	//   ID.
+	//   - Deleted stacks: You must specify the unique stack ID.
+	// Default: There is no default value.
 	StackName *string
 
 	noSmithyDocumentSerde
 }
 
-// The output for a DescribeStacks  action.
+// The output for a DescribeStacks action.
 type DescribeStacksOutput struct {
 
 	// If the output exceeds 1 MB in size, a string that identifies the next page of
@@ -139,8 +139,8 @@ var _ DescribeStacksAPIClient = (*Client)(nil)
 
 // DescribeStacksPaginatorOptions is the paginator options for DescribeStacks
 type DescribeStacksPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -1397,9 +1397,9 @@ func NewStackRollbackCompleteWaiter(client DescribeStacksAPIClient, optFns ...fu
 	}
 }
 
-// Wait calls the waiter function for StackRollbackComplete waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for StackRollbackComplete waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *StackRollbackCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackRollbackCompleteWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

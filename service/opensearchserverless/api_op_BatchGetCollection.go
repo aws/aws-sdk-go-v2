@@ -38,8 +38,7 @@ type BatchGetCollectionInput struct {
 	// API.
 	Ids []string
 
-	// A list of collection names. You can't provide names and IDs in the same
-	// request.
+	// A list of collection names. You can't provide names and IDs in the same request.
 	Names []string
 
 	noSmithyDocumentSerde

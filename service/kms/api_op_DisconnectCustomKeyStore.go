@@ -23,10 +23,10 @@ import (
 // attempts to create KMS keys in the custom key store or to use existing KMS keys
 // in cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 // will fail. This action can prevent users from storing and accessing sensitive
-// data. When you disconnect a custom key store, its ConnectionState  changes to
+// data. When you disconnect a custom key store, its ConnectionState changes to
 // Disconnected . To find the connection state of a custom key store, use the
 // DescribeCustomKeyStores operation. To reconnect a custom key store, use the
-// ConnectCustomKeyStoreoperation. If the operation succeeds, it returns a JSON
+// ConnectCustomKeyStore operation. If the operation succeeds, it returns a JSON
 // object with no properties. Cross-account use: No. You cannot perform this
 // operation on a custom key store in a different Amazon Web Services account.
 // Required permissions: kms:DisconnectCustomKeyStore (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
@@ -54,7 +54,7 @@ func (c *Client) DisconnectCustomKeyStore(ctx context.Context, params *Disconnec
 type DisconnectCustomKeyStoreInput struct {
 
 	// Enter the ID of the custom key store you want to disconnect. To find the ID of
-	// a custom key store, use the DescribeCustomKeyStores  operation.
+	// a custom key store, use the DescribeCustomKeyStores operation.
 	//
 	// This member is required.
 	CustomKeyStoreId *string

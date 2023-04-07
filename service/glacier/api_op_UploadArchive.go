@@ -12,22 +12,22 @@ import (
 	"io"
 )
 
-// This operation adds an archive to a vault. This is a synchronous operation,
-// and for a successful upload, your data is durably persisted. Amazon S3 Glacier
-// returns the archive ID in the x-amz-archive-id header of the response. You
-// must use the archive ID to access your data in Amazon S3 Glacier. After you
-// upload an archive, you should save the archive ID returned so that you can
-// retrieve or delete the archive later. Besides saving the archive ID, you can
-// also index it and give it a friendly name to allow for better searching. You can
-// also use the optional archive description field to specify how the archive is
-// referred to in an external index of archives, such as you might create in Amazon
-// DynamoDB. You can also get the vault inventory to obtain a list of archive IDs
-// in a vault. For more information, see InitiateJob. You must provide a SHA256
-// tree hash of the data you are uploading. For information about computing a
-// SHA256 tree hash, see Computing Checksums (https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html)
+// This operation adds an archive to a vault. This is a synchronous operation, and
+// for a successful upload, your data is durably persisted. Amazon S3 Glacier
+// returns the archive ID in the x-amz-archive-id header of the response. You must
+// use the archive ID to access your data in Amazon S3 Glacier. After you upload an
+// archive, you should save the archive ID returned so that you can retrieve or
+// delete the archive later. Besides saving the archive ID, you can also index it
+// and give it a friendly name to allow for better searching. You can also use the
+// optional archive description field to specify how the archive is referred to in
+// an external index of archives, such as you might create in Amazon DynamoDB. You
+// can also get the vault inventory to obtain a list of archive IDs in a vault. For
+// more information, see InitiateJob . You must provide a SHA256 tree hash of the
+// data you are uploading. For information about computing a SHA256 tree hash, see
+// Computing Checksums (https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html)
 // . You can optionally specify an archive description of up to 1,024 printable
 // ASCII characters. You can get the archive description when you either retrieve
-// the archive or get the vault inventory. For more information, see InitiateJob.
+// the archive or get the vault inventory. For more information, see InitiateJob .
 // Amazon Glacier does not interpret the description in any way. An archive
 // description does not need to be unique. You cannot use the description to
 // retrieve or sort the archive list. Archives are immutable. After you upload an
@@ -59,7 +59,7 @@ func (c *Client) UploadArchive(ctx context.Context, params *UploadArchiveInput, 
 type UploadArchiveInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
 	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.

@@ -24,9 +24,8 @@ import (
 //   - Tags
 //   - LifecycleConfigurations for deleting expired objects
 //
-// For a complete list
-// of restrictions and Amazon S3 feature limitations on S3 on Outposts, see
-// Amazon S3 on Outposts Restrictions and Limitations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OnOutpostsRestrictionsLimitations.html)
+// For a complete list of restrictions and Amazon S3 feature limitations on S3 on
+// Outposts, see Amazon S3 on Outposts Restrictions and Limitations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OnOutpostsRestrictionsLimitations.html)
 // . For an example of the request syntax for Amazon S3 on Outposts that uses the
 // S3 on Outposts endpoint hostname prefix and x-amz-outpost-id in your API
 // request, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples)
@@ -104,10 +103,10 @@ type CreateBucketOutput struct {
 	// Amazon S3 on Outposts with the REST API, you must specify the name and the
 	// x-amz-outpost-id as well. For using this parameter with S3 on Outposts with the
 	// Amazon Web Services SDK and CLI, you must specify the ARN of the bucket accessed
-	// in the format arn:aws:s3-outposts:::outpost//bucket/. For example, to access
-	// the bucket reports  through Outpost my-outpost  owned by account 123456789012
-	// in Region us-west-2 , use the URL encoding of
-	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
+	// in the format arn:aws:s3-outposts:::outpost//bucket/ . For example, to access
+	// the bucket reports through Outpost my-outpost owned by account 123456789012 in
+	// Region us-west-2 , use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports .
 	// The value must be URL encoded.
 	BucketArn *string
 

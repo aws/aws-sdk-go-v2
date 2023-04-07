@@ -45,13 +45,13 @@ type GetIndexOutput struct {
 	// The date and time when the index was last updated.
 	LastUpdatedAt *time.Time
 
-	// This response value is present only if this index is Type=AGGREGATOR. A list
-	// of the Amazon Web Services Regions that replicate their content to the index in
+	// This response value is present only if this index is Type=AGGREGATOR . A list of
+	// the Amazon Web Services Regions that replicate their content to the index in
 	// this Region.
 	ReplicatingFrom []string
 
-	// This response value is present only if this index is Type=LOCAL. The Amazon
-	// Web Services Region that contains the aggregator index, if one exists. If an
+	// This response value is present only if this index is Type=LOCAL . The Amazon Web
+	// Services Region that contains the aggregator index, if one exists. If an
 	// aggregator index does exist then the Region in which you called this operation
 	// replicates its index information to the Region specified in this response value.
 	ReplicatingTo []string
@@ -63,8 +63,8 @@ type GetIndexOutput struct {
 	Tags map[string]string
 
 	// The type of the index in this Region. For information about the aggregator
-	// index and how it differs from a local index, see Turning on cross-Region
-	// search by creating an aggregator index (https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html)
+	// index and how it differs from a local index, see Turning on cross-Region search
+	// by creating an aggregator index (https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html)
 	// .
 	Type types.IndexType
 

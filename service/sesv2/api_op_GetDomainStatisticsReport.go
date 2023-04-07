@@ -66,7 +66,7 @@ type GetDomainStatisticsReportOutput struct {
 
 	// An object that contains deliverability metrics for the domain that you
 	// specified. The data in this object is a summary of all of the data that was
-	// collected from the StartDate  to the EndDate .
+	// collected from the StartDate to the EndDate .
 	//
 	// This member is required.
 	OverallVolume *types.OverallVolume

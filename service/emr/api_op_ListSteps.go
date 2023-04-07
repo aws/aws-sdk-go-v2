@@ -13,9 +13,9 @@ import (
 )
 
 // Provides a list of steps for the cluster in reverse order unless you specify
-// stepIds with the request or filter by StepStates. You can specify a maximum of
-// 10 stepIDs. The CLI automatically paginates results to return a list greater
-// than 50 steps. To return more than 50 steps using the CLI, specify a Marker,
+// stepIds with the request or filter by StepStates . You can specify a maximum of
+// 10 stepIDs . The CLI automatically paginates results to return a list greater
+// than 50 steps. To return more than 50 steps using the CLI, specify a Marker ,
 // which is a pagination token that indicates the next set of steps to retrieve.
 func (c *Client) ListSteps(ctx context.Context, params *ListStepsInput, optFns ...func(*Options)) (*ListStepsOutput, error) {
 	if params == nil {
@@ -41,13 +41,13 @@ type ListStepsInput struct {
 	ClusterId *string
 
 	// The maximum number of steps that a single ListSteps action returns is 50. To
-	// return a longer list of steps, use multiple ListSteps  actions along with the
-	// Markerparameter, which is a pagination token that indicates the next set of
+	// return a longer list of steps, use multiple ListSteps actions along with the
+	// Marker parameter, which is a pagination token that indicates the next set of
 	// results to retrieve.
 	Marker *string
 
-	// The filter to limit the step list based on the identifier of the steps. You
-	// can specify a maximum of ten Step IDs. The character constraint applies to the
+	// The filter to limit the step list based on the identifier of the steps. You can
+	// specify a maximum of ten Step IDs. The character constraint applies to the
 	// overall length of the array.
 	StepIds []string
 
@@ -62,8 +62,8 @@ type ListStepsInput struct {
 type ListStepsOutput struct {
 
 	// The maximum number of steps that a single ListSteps action returns is 50. To
-	// return a longer list of steps, use multiple ListSteps  actions along with the
-	// Markerparameter, which is a pagination token that indicates the next set of
+	// return a longer list of steps, use multiple ListSteps actions along with the
+	// Marker parameter, which is a pagination token that indicates the next set of
 	// results to retrieve.
 	Marker *string
 
@@ -148,8 +148,8 @@ var _ ListStepsAPIClient = (*Client)(nil)
 
 // ListStepsPaginatorOptions is the paginator options for ListSteps
 type ListStepsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

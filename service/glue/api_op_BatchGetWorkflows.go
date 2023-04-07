@@ -32,8 +32,8 @@ func (c *Client) BatchGetWorkflows(ctx context.Context, params *BatchGetWorkflow
 
 type BatchGetWorkflowsInput struct {
 
-	// A list of workflow names, which may be the names returned from the
-	// ListWorkflows operation.
+	// A list of workflow names, which may be the names returned from the ListWorkflows
+	// operation.
 	//
 	// This member is required.
 	Names []string

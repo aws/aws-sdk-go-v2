@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF
-// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
 // and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 // . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns the ByteMatchSet  specified by ByteMatchSetId .
+// and global use. Returns the ByteMatchSet specified by ByteMatchSetId .
 func (c *Client) GetByteMatchSet(ctx context.Context, params *GetByteMatchSetInput, optFns ...func(*Options)) (*GetByteMatchSetOutput, error) {
 	if params == nil {
 		params = &GetByteMatchSetInput{}
@@ -34,8 +33,8 @@ func (c *Client) GetByteMatchSet(ctx context.Context, params *GetByteMatchSetInp
 
 type GetByteMatchSetInput struct {
 
-	// The ByteMatchSetId  of the ByteMatchSet  that you want to get. ByteMatchSetId
-	// is returned by CreateByteMatchSet  and by ListByteMatchSets .
+	// The ByteMatchSetId of the ByteMatchSet that you want to get. ByteMatchSetId is
+	// returned by CreateByteMatchSet and by ListByteMatchSets .
 	//
 	// This member is required.
 	ByteMatchSetId *string
@@ -45,11 +44,13 @@ type GetByteMatchSetInput struct {
 
 type GetByteMatchSetOutput struct {
 
-	// Information about the ByteMatchSet  that you specified in the GetByteMatchSet
+	// Information about the ByteMatchSet that you specified in the GetByteMatchSet
 	// request. For more information, see the following topics:
-	//     - ByteMatchSet : Contains ByteMatchSetId , ByteMatchTuples , and Name
-	//     - ByteMatchTuples : Contains an array of ByteMatchTuple objects. Each ByteMatchTuple object contains FieldToMatch , PositionalConstraint , TargetString , and TextTransformation
-	//     - FieldToMatch : Contains Data and Type
+	//   - ByteMatchSet : Contains ByteMatchSetId , ByteMatchTuples , and Name
+	//   - ByteMatchTuples : Contains an array of ByteMatchTuple objects. Each
+	//   ByteMatchTuple object contains FieldToMatch , PositionalConstraint ,
+	//   TargetString , and TextTransformation
+	//   - FieldToMatch : Contains Data and Type
 	ByteMatchSet *types.ByteMatchSet
 
 	// Metadata pertaining to the operation's result.

@@ -53,7 +53,7 @@ type DescribeVolumesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeVolumes  request.
+// Contains the response to a DescribeVolumes request.
 type DescribeVolumesOutput struct {
 
 	// An array of volume IDs.

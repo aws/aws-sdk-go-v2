@@ -14,7 +14,7 @@ import (
 // Updates an existing Application Component in the Resilience Hub application.
 // This API updates the Resilience Hub application draft version. To use this
 // Application Component for running assessments, you must publish the Resilience
-// Hub application using the PublishAppVersion  API.
+// Hub application using the PublishAppVersion API.
 func (c *Client) UpdateAppVersionAppComponent(ctx context.Context, params *UpdateAppVersionAppComponentInput, optFns ...func(*Options)) (*UpdateAppVersionAppComponentOutput, error) {
 	if params == nil {
 		params = &UpdateAppVersionAppComponentInput{}

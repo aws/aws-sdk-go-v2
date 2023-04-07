@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used to failover the primary region to a secondary region. The secondary
-// region will become primary, and all other clusters will become secondary.
+// Used to failover the primary region to a secondary region. The secondary region
+// will become primary, and all other clusters will become secondary.
 func (c *Client) FailoverGlobalReplicationGroup(ctx context.Context, params *FailoverGlobalReplicationGroupInput, optFns ...func(*Options)) (*FailoverGlobalReplicationGroupOutput, error) {
 	if params == nil {
 		params = &FailoverGlobalReplicationGroupInput{}
@@ -54,7 +54,8 @@ type FailoverGlobalReplicationGroupOutput struct {
 	// cluster that resides in a different Amazon region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
 	// secondary cluster.
-	//     - The GlobalReplicationGroupIdSuffix represents the name of the Global datastore, which is what you use to associate a secondary cluster.
+	//   - The GlobalReplicationGroupIdSuffix represents the name of the Global
+	//   datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

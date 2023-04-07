@@ -18,7 +18,6 @@ import (
 // cross-Region features are supported between other Regions and your current
 // Region. This operation supports pagination. To return information about the
 // Regions that are enabled for your account, or all Regions, use the EC2 operation
-//
 // DescribeRegions . For more information, see  DescribeRegions (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html)
 // in the Amazon EC2 API Reference.
 func (c *Client) DescribeSourceRegions(ctx context.Context, params *DescribeSourceRegionsInput, optFns ...func(*Options)) (*DescribeSourceRegionsOutput, error) {
@@ -46,15 +45,15 @@ type DescribeSourceRegionsInput struct {
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so you can retrieve the remaining results. Default:
-	// 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// The source Amazon Web Services Region name. For example, us-east-1.
+	// The source Amazon Web Services Region name. For example, us-east-1 .
 	// Constraints:
-	//     - Must specify a valid Amazon Web Services Region name.
+	//   - Must specify a valid Amazon Web Services Region name.
 	RegionName *string
 
 	noSmithyDocumentSerde
@@ -154,14 +153,14 @@ var _ DescribeSourceRegionsAPIClient = (*Client)(nil)
 // DescribeSourceRegionsPaginatorOptions is the paginator options for
 // DescribeSourceRegions
 type DescribeSourceRegionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so you can retrieve the remaining results. Default:
-	// 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

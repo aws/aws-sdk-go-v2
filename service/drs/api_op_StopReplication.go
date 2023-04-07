@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops replication for a Source Server. This action would make the Source
-// Server unprotected, delete its existing snapshots and stop billing for it.
+// Stops replication for a Source Server. This action would make the Source Server
+// unprotected, delete its existing snapshots and stop billing for it.
 func (c *Client) StopReplication(ctx context.Context, params *StopReplicationInput, optFns ...func(*Options)) (*StopReplicationOutput, error) {
 	if params == nil {
 		params = &StopReplicationInput{}

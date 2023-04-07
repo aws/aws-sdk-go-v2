@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of SourceCredentialsInfo  objects.
+// Returns a list of SourceCredentialsInfo objects.
 func (c *Client) ListSourceCredentials(ctx context.Context, params *ListSourceCredentialsInput, optFns ...func(*Options)) (*ListSourceCredentialsOutput, error) {
 	if params == nil {
 		params = &ListSourceCredentialsInput{}
@@ -33,7 +33,7 @@ type ListSourceCredentialsInput struct {
 
 type ListSourceCredentialsOutput struct {
 
-	// A list of SourceCredentialsInfo  objects. Each SourceCredentialsInfo object
+	// A list of SourceCredentialsInfo objects. Each SourceCredentialsInfo object
 	// includes the authentication type, token ARN, and type of source provider for one
 	// set of credentials.
 	SourceCredentialsInfos []types.SourceCredentialsInfo

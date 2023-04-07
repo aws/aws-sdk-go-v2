@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an entry (a rule) in a network ACL with the specified rule number.
-// Each network ACL has a set of numbered ingress rules and a separate set of
-// numbered egress rules. When determining whether a packet should be allowed in or
-// out of a subnet associated with the ACL, we process the entries in the ACL
-// according to the rule numbers, in ascending order. Each network ACL has a set of
-// ingress rules and a separate set of egress rules. We recommend that you leave
-// room between the rule numbers (for example, 100, 110, 120, ...), and not number
-// them one right after the other (for example, 101, 102, 103, ...). This makes it
+// Creates an entry (a rule) in a network ACL with the specified rule number. Each
+// network ACL has a set of numbered ingress rules and a separate set of numbered
+// egress rules. When determining whether a packet should be allowed in or out of a
+// subnet associated with the ACL, we process the entries in the ACL according to
+// the rule numbers, in ascending order. Each network ACL has a set of ingress
+// rules and a separate set of egress rules. We recommend that you leave room
+// between the rule numbers (for example, 100, 110, 120, ...), and not number them
+// one right after the other (for example, 101, 102, 103, ...). This makes it
 // easier to add a rule between existing ones without having to renumber the rules.
 // After you add an entry, you can't modify it; you must either replace it, or
 // create an entry and delete the old one. For more information about network ACLs,
@@ -76,7 +76,7 @@ type CreateNetworkAclEntryInput struct {
 	RuleNumber *int32
 
 	// The IPv4 network range to allow or deny, in CIDR notation (for example
-	// 172.16.0.0/24). We modify the specified CIDR block to its canonical form; for
+	// 172.16.0.0/24 ). We modify the specified CIDR block to its canonical form; for
 	// example, if you specify 100.68.0.18/18 , we modify it to 100.68.0.0/18 .
 	CidrBlock *string
 

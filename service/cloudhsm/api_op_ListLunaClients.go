@@ -18,7 +18,7 @@ import (
 // , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Lists all of the clients. This operation supports pagination with the use of
-// the NextToken  member. If more results are available, the NextToken member of
+// the NextToken member. If more results are available, the NextToken member of
 // the response contains a token that you pass in the next call to ListLunaClients
 // to retrieve the next set of items.
 func (c *Client) ListLunaClients(ctx context.Context, params *ListLunaClientsInput, optFns ...func(*Options)) (*ListLunaClientsOutput, error) {
@@ -38,8 +38,8 @@ func (c *Client) ListLunaClients(ctx context.Context, params *ListLunaClientsInp
 
 type ListLunaClientsInput struct {
 
-	// The NextToken  value from a previous call to ListLunaClients. Pass null if
-	// this is the first call.
+	// The NextToken value from a previous call to ListLunaClients . Pass null if this
+	// is the first call.
 	NextToken *string
 
 	noSmithyDocumentSerde

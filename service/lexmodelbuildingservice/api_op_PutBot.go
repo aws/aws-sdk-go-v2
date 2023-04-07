@@ -17,8 +17,8 @@ import (
 // whether the bot is directed toward children under age 13. You can use this to
 // add intents later, or to remove intents from an existing bot. When you create a
 // bot with the minimum information, the bot is created or updated but Amazon Lex
-// returns the response FAILED. You can build the bot after you add one or more
-// intents. For more information about Amazon Lex bots, see how-it-works. If you
+// returns the response FAILED . You can build the bot after you add one or more
+// intents. For more information about Amazon Lex bots, see how-it-works . If you
 // specify the name of an existing bot, the fields in the request replace the
 // existing values in the $LATEST version of the bot. Amazon Lex removes any
 // fields that you don't provide values for in the request, except for the
@@ -43,27 +43,26 @@ func (c *Client) PutBot(ctx context.Context, params *PutBotInput, optFns ...func
 
 type PutBotInput struct {
 
-	// For each Amazon Lex bot created with the Amazon Lex Model Building Service,
-	// you must specify whether your use of Amazon Lex is related to a website,
+	// For each Amazon Lex bot created with the Amazon Lex Model Building Service, you
+	// must specify whether your use of Amazon Lex is related to a website, program, or
+	// other application that is directed or targeted, in whole or in part, to children
+	// under age 13 and subject to the Children's Online Privacy Protection Act (COPPA)
+	// by specifying true or false in the childDirected field. By specifying true in
+	// the childDirected field, you confirm that your use of Amazon Lex is related to
+	// a website, program, or other application that is directed or targeted, in whole
+	// or in part, to children under age 13 and subject to COPPA. By specifying false
+	// in the childDirected field, you confirm that your use of Amazon Lex is not
+	// related to a website, program, or other application that is directed or
+	// targeted, in whole or in part, to children under age 13 and subject to COPPA.
+	// You may not specify a default value for the childDirected field that does not
+	// accurately reflect whether your use of Amazon Lex is related to a website,
 	// program, or other application that is directed or targeted, in whole or in part,
-	// to children under age 13 and subject to the Children's Online Privacy Protection
-	// Act (COPPA) by specifying true  or false  in the childDirected field. By
-	// specifying true  in the childDirected field, you confirm that your use of
-	// Amazon Lex is related to a website, program, or other application that is
-	// directed or targeted, in whole or in part, to children under age 13 and subject
-	// to COPPA. By specifying false  in the childDirected field, you confirm that
-	// your use of Amazon Lex is not related to a website, program, or other
-	// application that is directed or targeted, in whole or in part, to children under
-	// age 13 and subject to COPPA. You may not specify a default value for the
-	// childDirectedfield that does not accurately reflect whether your use of Amazon
-	// Lex is related to a website, program, or other application that is directed or
-	// targeted, in whole or in part, to children under age 13 and subject to COPPA. If
-	// your use of Amazon Lex relates to a website, program, or other application that
-	// is directed in whole or in part, to children under age 13, you must obtain any
-	// required verifiable parental consent under COPPA. For information regarding the
-	// use of Amazon Lex in connection with websites, programs, or other applications
-	// that are directed or targeted, in whole or in part, to children under age 13,
-	// see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
+	// to children under age 13 and subject to COPPA. If your use of Amazon Lex relates
+	// to a website, program, or other application that is directed in whole or in
+	// part, to children under age 13, you must obtain any required verifiable parental
+	// consent under COPPA. For information regarding the use of Amazon Lex in
+	// connection with websites, programs, or other applications that are directed or
+	// targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
 	//
 	// This member is required.
 	ChildDirected *bool
@@ -88,7 +87,7 @@ type PutBotInput struct {
 	// responses (for example, "thin crust, "deep dish," etc.), Amazon Lex tries to
 	// elicit a correct response a few more times. For example, in a pizza ordering
 	// application, OrderPizza might be one of the intents. This intent might require
-	// the CrustType  slot. You specify the valueElicitationPrompt field when you
+	// the CrustType slot. You specify the valueElicitationPrompt field when you
 	// create the CrustType slot. If you have defined a fallback intent the cancel
 	// statement will not be sent to the user, the fallback intent is used instead. For
 	// more information, see AMAZON.FallbackIntent (https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html)
@@ -96,18 +95,18 @@ type PutBotInput struct {
 	AbortStatement *types.Statement
 
 	// Identifies a specific revision of the $LATEST version. When you create a new
-	// bot, leave the checksum  field blank. If you specify a checksum you get a
+	// bot, leave the checksum field blank. If you specify a checksum you get a
 	// BadRequestException exception. When you want to update a bot, set the checksum
 	// field to the checksum of the most recent revision of the $LATEST version. If
-	// you don't specify the checksum  field, or if the checksum does not match the
-	// $LATEST version, you get a PreconditionFailedException  exception.
+	// you don't specify the checksum field, or if the checksum does not match the
+	// $LATEST version, you get a PreconditionFailedException exception.
 	Checksum *string
 
 	// When Amazon Lex doesn't understand the user's intent, it uses this message to
 	// get clarification. To specify how many times Amazon Lex should repeat the
 	// clarification prompt, use the maxAttempts field. If Amazon Lex still doesn't
-	// understand, it sends the message in the abortStatement field. When you create
-	// a clarification prompt, make sure that it suggests the correct response from the
+	// understand, it sends the message in the abortStatement field. When you create a
+	// clarification prompt, make sure that it suggests the correct response from the
 	// user. for example, for a bot that orders pizza and drinks, you might create this
 	// clarification prompt: "What would you like to do? You can say 'Order a pizza' or
 	// 'Order a drink.'" If you have defined a fallback intent, it will be invoked if
@@ -115,14 +114,22 @@ type PutBotInput struct {
 	// maxAttempts field. For more information, see  AMAZON.FallbackIntent (https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html)
 	// . If you don't define a clarification prompt, at runtime Amazon Lex will return
 	// a 400 Bad Request exception in three cases:
-	//     - Follow-up prompt - When the user responds to a follow-up prompt but does not provide an intent. For example, in response to a follow-up prompt that says "Would you like anything else today?" the user says "Yes." Amazon Lex will return a 400 Bad Request exception because it does not have a clarification prompt to send to the user to get an intent.
-	//     - Lambda function - When using a Lambda function, you return an ElicitIntent dialog type. Since Amazon Lex does not have a clarification prompt to get an intent from the user, it returns a 400 Bad Request exception.
-	//     - PutSession operation - When using the PutSession operation, you send an ElicitIntent dialog type. Since Amazon Lex does not have a clarification prompt to get an intent from the user, it returns a 400 Bad Request exception.
+	//   - Follow-up prompt - When the user responds to a follow-up prompt but does
+	//   not provide an intent. For example, in response to a follow-up prompt that says
+	//   "Would you like anything else today?" the user says "Yes." Amazon Lex will
+	//   return a 400 Bad Request exception because it does not have a clarification
+	//   prompt to send to the user to get an intent.
+	//   - Lambda function - When using a Lambda function, you return an ElicitIntent
+	//   dialog type. Since Amazon Lex does not have a clarification prompt to get an
+	//   intent from the user, it returns a 400 Bad Request exception.
+	//   - PutSession operation - When using the PutSession operation, you send an
+	//   ElicitIntent dialog type. Since Amazon Lex does not have a clarification
+	//   prompt to get an intent from the user, it returns a 400 Bad Request exception.
 	ClarificationPrompt *types.Prompt
 
-	// When set to true a new numbered version of the bot is created. This is the
-	// same as calling the CreateBotVersion  operation. If you don't specify
-	// createVersion , the default is false .
+	// When set to true a new numbered version of the bot is created. This is the same
+	// as calling the CreateBotVersion operation. If you don't specify createVersion ,
+	// the default is false .
 	CreateVersion *bool
 
 	// A description of the bot.
@@ -133,19 +140,19 @@ type PutBotInput struct {
 	DetectSentiment *bool
 
 	// Set to true to enable access to natural language understanding improvements.
-	// When you set the enableModelImprovements  parameter to true  you can use the
-	// nluIntentConfidenceThresholdparameter to configure confidence scores. For more
+	// When you set the enableModelImprovements parameter to true you can use the
+	// nluIntentConfidenceThreshold parameter to configure confidence scores. For more
 	// information, see Confidence Scores (https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html)
-	// . You can only set the enableModelImprovements parameter in certain Regions.
-	// If you set the parameter to true, your bot has access to accuracy
-	// improvements. The Regions where you can set the enableModelImprovements
-	// parameter to true  are:
-	//     - US East (N. Virginia) (us-east-1)
-	//     - US West (Oregon) (us-west-2)
-	//     - Asia Pacific (Sydney) (ap-southeast-2)
-	//     - EU (Ireland) (eu-west-1)
-	// In other Regions, the enableModelImprovements  parameter is set to true by
-	// default. In these Regions setting the parameter to false  throws a
+	// . You can only set the enableModelImprovements parameter in certain Regions. If
+	// you set the parameter to true , your bot has access to accuracy improvements.
+	// The Regions where you can set the enableModelImprovements parameter to true
+	// are:
+	//   - US East (N. Virginia) (us-east-1)
+	//   - US West (Oregon) (us-west-2)
+	//   - Asia Pacific (Sydney) (ap-southeast-2)
+	//   - EU (Ireland) (eu-west-1)
+	// In other Regions, the enableModelImprovements parameter is set to true by
+	// default. In these Regions setting the parameter to false throws a
 	// ValidationException exception.
 	EnableModelImprovements *bool
 
@@ -156,8 +163,8 @@ type PutBotInput struct {
 	// that a user chooses the OrderPizza intent, but gets sidetracked halfway through
 	// placing an order. If the user doesn't complete the order within the specified
 	// time, Amazon Lex discards the slot information that it gathered, and the user
-	// must start over. If you don't include the idleSessionTTLInSeconds  element in a
-	// PutBotoperation request, Amazon Lex uses the default value. This is also true
+	// must start over. If you don't include the idleSessionTTLInSeconds element in a
+	// PutBot operation request, Amazon Lex uses the default value. This is also true
 	// if the request replaces an existing bot. The default is 300 seconds (5 minutes).
 	IdleSessionTTLInSeconds *int32
 
@@ -170,34 +177,33 @@ type PutBotInput struct {
 	// , AMAZON.KendraSearchIntent , or both when returning alternative intents in a
 	// PostContent (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html)
 	// or PostText (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
-	// response. AMAZON.FallbackIntent  and AMAZON.KendraSearchIntent are only
-	// inserted if they are configured for the bot. You must set the
-	// enableModelImprovements parameter to true to use confidence scores in the
-	// following regions.
-	//     - US East (N. Virginia) (us-east-1)
-	//     - US West (Oregon) (us-west-2)
-	//     - Asia Pacific (Sydney) (ap-southeast-2)
-	//     - EU (Ireland) (eu-west-1)
-	// In other Regions, the enableModelImprovements  parameter is set to true by
+	// response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted
+	// if they are configured for the bot. You must set the enableModelImprovements
+	// parameter to true to use confidence scores in the following regions.
+	//   - US East (N. Virginia) (us-east-1)
+	//   - US West (Oregon) (us-west-2)
+	//   - Asia Pacific (Sydney) (ap-southeast-2)
+	//   - EU (Ireland) (eu-west-1)
+	// In other Regions, the enableModelImprovements parameter is set to true by
 	// default. For example, suppose a bot is configured with the confidence threshold
-	// of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative
+	// of 0.80 and the AMAZON.FallbackIntent . Amazon Lex returns three alternative
 	// intents with the following confidence scores: IntentA (0.70), IntentB (0.60),
-	// IntentC (0.50). The response from the PostText  operation would be:
-	//     - AMAZON.FallbackIntent
-	//     - IntentA
-	//     - IntentB
-	//     - IntentC
+	// IntentC (0.50). The response from the PostText operation would be:
+	//   - AMAZON.FallbackIntent
+	//   - IntentA
+	//   - IntentB
+	//   - IntentC
 	NluIntentConfidenceThreshold *float64
 
-	// If you set the processBehavior  element to BUILD, Amazon Lex builds the bot so
+	// If you set the processBehavior element to BUILD , Amazon Lex builds the bot so
 	// that it can be run. If you set the element to SAVE Amazon Lex saves the bot,
 	// but doesn't build it. If you don't specify this value, the default value is
 	// BUILD .
 	ProcessBehavior types.ProcessBehavior
 
 	// A list of tags to add to the bot. You can only add tags when you create a bot,
-	// you can't use the PutBot operation to update the tags on a bot. To update
-	// tags, use the TagResource  operation.
+	// you can't use the PutBot operation to update the tags on a bot. To update tags,
+	// use the TagResource operation.
 	Tags []types.Tag
 
 	// The Amazon Polly voice ID that you want Amazon Lex to use for voice
@@ -218,34 +224,33 @@ type PutBotOutput struct {
 	// Checksum of the bot that you created.
 	Checksum *string
 
-	// For each Amazon Lex bot created with the Amazon Lex Model Building Service,
-	// you must specify whether your use of Amazon Lex is related to a website,
+	// For each Amazon Lex bot created with the Amazon Lex Model Building Service, you
+	// must specify whether your use of Amazon Lex is related to a website, program, or
+	// other application that is directed or targeted, in whole or in part, to children
+	// under age 13 and subject to the Children's Online Privacy Protection Act (COPPA)
+	// by specifying true or false in the childDirected field. By specifying true in
+	// the childDirected field, you confirm that your use of Amazon Lex is related to
+	// a website, program, or other application that is directed or targeted, in whole
+	// or in part, to children under age 13 and subject to COPPA. By specifying false
+	// in the childDirected field, you confirm that your use of Amazon Lex is not
+	// related to a website, program, or other application that is directed or
+	// targeted, in whole or in part, to children under age 13 and subject to COPPA.
+	// You may not specify a default value for the childDirected field that does not
+	// accurately reflect whether your use of Amazon Lex is related to a website,
 	// program, or other application that is directed or targeted, in whole or in part,
-	// to children under age 13 and subject to the Children's Online Privacy Protection
-	// Act (COPPA) by specifying true  or false  in the childDirected field. By
-	// specifying true  in the childDirected field, you confirm that your use of
-	// Amazon Lex is related to a website, program, or other application that is
-	// directed or targeted, in whole or in part, to children under age 13 and subject
-	// to COPPA. By specifying false  in the childDirected field, you confirm that
-	// your use of Amazon Lex is not related to a website, program, or other
-	// application that is directed or targeted, in whole or in part, to children under
-	// age 13 and subject to COPPA. You may not specify a default value for the
-	// childDirectedfield that does not accurately reflect whether your use of Amazon
-	// Lex is related to a website, program, or other application that is directed or
-	// targeted, in whole or in part, to children under age 13 and subject to COPPA. If
-	// your use of Amazon Lex relates to a website, program, or other application that
-	// is directed in whole or in part, to children under age 13, you must obtain any
-	// required verifiable parental consent under COPPA. For information regarding the
-	// use of Amazon Lex in connection with websites, programs, or other applications
-	// that are directed or targeted, in whole or in part, to children under age 13,
-	// see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
+	// to children under age 13 and subject to COPPA. If your use of Amazon Lex relates
+	// to a website, program, or other application that is directed in whole or in
+	// part, to children under age 13, you must obtain any required verifiable parental
+	// consent under COPPA. For information regarding the use of Amazon Lex in
+	// connection with websites, programs, or other applications that are directed or
+	// targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
 	ChildDirected *bool
 
 	// The prompts that Amazon Lex uses when it doesn't understand the user's intent.
 	// For more information, see PutBot .
 	ClarificationPrompt *types.Prompt
 
-	// True  if a new version of the bot was created. If the createVersion field was
+	// True if a new version of the bot was created. If the createVersion field was
 	// not specified in the request, the createVersion field is set to false in the
 	// response.
 	CreateVersion *bool
@@ -258,22 +263,22 @@ type PutBotOutput struct {
 
 	// true if the bot is configured to send user utterances to Amazon Comprehend for
 	// sentiment analysis. If the detectSentiment field was not specified in the
-	// request, the detectSentiment  field is false  in the response.
+	// request, the detectSentiment field is false in the response.
 	DetectSentiment *bool
 
 	// Indicates whether the bot uses accuracy improvements. true indicates that the
 	// bot is using the improvements, otherwise, false .
 	EnableModelImprovements *bool
 
-	// If status  is FAILED, Amazon Lex provides the reason that it failed to build
-	// the bot.
+	// If status is FAILED , Amazon Lex provides the reason that it failed to build the
+	// bot.
 	FailureReason *string
 
 	// The maximum length of time that Amazon Lex retains the data gathered in a
 	// conversation. For more information, see PutBot .
 	IdleSessionTTLInSeconds *int32
 
-	// An array of Intent  objects. For more information, see PutBot .
+	// An array of Intent objects. For more information, see PutBot .
 	Intents []types.Intent
 
 	// The date that the bot was updated. When you create a resource, the creation
@@ -295,15 +300,15 @@ type PutBotOutput struct {
 	// is configured for the bot.
 	NluIntentConfidenceThreshold *float64
 
-	// When you send a request to create a bot with processBehavior  set to BUILD,
-	// Amazon Lex sets the status  response element to BUILDING . In the
-	// READY_BASIC_TESTINGstate you can test the bot with user inputs that exactly
+	// When you send a request to create a bot with processBehavior set to BUILD ,
+	// Amazon Lex sets the status response element to BUILDING . In the
+	// READY_BASIC_TESTING state you can test the bot with user inputs that exactly
 	// match the utterances configured for the bot's intents and values in the slot
-	// types. If Amazon Lex can't build the bot, Amazon Lex sets status  to FAILED.
+	// types. If Amazon Lex can't build the bot, Amazon Lex sets status to FAILED .
 	// Amazon Lex returns the reason for the failure in the failureReason response
-	// element. When you set processBehavior  to SAVE, Amazon Lex sets the status
-	// code to NOT BUILT . When the bot is in the READY state you can test and
-	// publish the bot.
+	// element. When you set processBehavior to SAVE , Amazon Lex sets the status code
+	// to NOT BUILT . When the bot is in the READY state you can test and publish the
+	// bot.
 	Status types.Status
 
 	// A list of tags associated with the bot.

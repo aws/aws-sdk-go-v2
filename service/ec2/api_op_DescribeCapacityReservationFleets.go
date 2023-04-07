@@ -40,10 +40,13 @@ type DescribeCapacityReservationFleetsInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//     - state - The state of the Fleet ( submitted | modifying | active | partially_fulfilled | expiring | expired | cancelling | cancelled | failed ).
-	//     - instance-match-criteria - The instance matching criteria for the Fleet. Only open is supported.
-	//     - tenancy - The tenancy of the Fleet ( default | dedicated ).
-	//     - allocation-strategy - The allocation strategy used by the Fleet. Only prioritized is supported.
+	//   - state - The state of the Fleet ( submitted | modifying | active |
+	//   partially_fulfilled | expiring | expired | cancelling | cancelled | failed ).
+	//   - instance-match-criteria - The instance matching criteria for the Fleet. Only
+	//   open is supported.
+	//   - tenancy - The tenancy of the Fleet ( default | dedicated ).
+	//   - allocation-strategy - The allocation strategy used by the Fleet. Only
+	//   prioritized is supported.
 	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
@@ -150,8 +153,8 @@ type DescribeCapacityReservationFleetsPaginatorOptions struct {
 	// larger value than 500, you receive an error.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

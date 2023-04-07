@@ -40,15 +40,15 @@ type ListInferenceRecommendationsJobStepsInput struct {
 	// The maximum number of results to return.
 	MaxResults *int32
 
-	// A token that you can specify to return more results from the list. Specify
-	// this field if you have a token that was returned from a previous request.
+	// A token that you can specify to return more results from the list. Specify this
+	// field if you have a token that was returned from a previous request.
 	NextToken *string
 
 	// A filter to return benchmarks of a specified status. If this field is left
 	// empty, then all benchmarks are returned.
 	Status types.RecommendationJobStatus
 
-	// A filter to return details about the specified type of subtask. BENCHMARK:
+	// A filter to return details about the specified type of subtask. BENCHMARK :
 	// Evaluate the performance of your model on different instance types.
 	StepType types.RecommendationStepType
 
@@ -147,8 +147,8 @@ type ListInferenceRecommendationsJobStepsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

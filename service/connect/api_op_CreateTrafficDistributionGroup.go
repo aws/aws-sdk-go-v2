@@ -32,8 +32,8 @@ func (c *Client) CreateTrafficDistributionGroup(ctx context.Context, params *Cre
 
 type CreateTrafficDistributionGroupInput struct {
 
-	// The identifier of the Amazon Connect instance that has been replicated. You
-	// can find the instanceId  in the ARN of the instance.
+	// The identifier of the Amazon Connect instance that has been replicated. You can
+	// find the instanceId in the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -65,10 +65,9 @@ type CreateTrafficDistributionGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the traffic distribution group.
 	Arn *string
 
-	// The identifier of the traffic distribution group. This can be the ID or the
-	// ARN if the API is being called in the Region where the traffic distribution
-	// group was created. The ARN must be provided if the call is from the replicated
-	// Region.
+	// The identifier of the traffic distribution group. This can be the ID or the ARN
+	// if the API is being called in the Region where the traffic distribution group
+	// was created. The ARN must be provided if the call is from the replicated Region.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

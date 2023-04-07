@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// Metadata assigned to an allocation. Each tag is made up of a key  and a value .
+// Metadata assigned to an allocation. Each tag is made up of a key and a value .
 type Tag struct {
 
 	// One part of a key-value pair that makes up a tag . A key is a label that acts
@@ -16,8 +16,8 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	// One part of a key-value pair that makes up a tag . A value acts as a
-	// descriptor within a tag category (key). The value can be empty or null.
+	// One part of a key-value pair that makes up a tag . A value acts as a descriptor
+	// within a tag category (key). The value can be empty or null.
 	//
 	// This member is required.
 	Value *string
@@ -46,7 +46,7 @@ type UsageAllocation struct {
 // be de-duplicated to prevent double charges.
 type UsageRecord struct {
 
-	// The CustomerIdentifier  is obtained through the ResolveCustomer operation and
+	// The CustomerIdentifier is obtained through the ResolveCustomer operation and
 	// represents an individual buyer in your application.
 	//
 	// This member is required.
@@ -66,34 +66,40 @@ type UsageRecord struct {
 	Timestamp *time.Time
 
 	// The quantity of usage consumed by the customer for the given dimension and
-	// time. Defaults to 0  if not specified.
+	// time. Defaults to 0 if not specified.
 	Quantity *int32
 
-	// The set of UsageAllocations  to submit. The sum of all UsageAllocation
+	// The set of UsageAllocations to submit. The sum of all UsageAllocation
 	// quantities must equal the Quantity of the UsageRecord .
 	UsageAllocations []UsageAllocation
 
 	noSmithyDocumentSerde
 }
 
-// A UsageRecordResult  indicates the status of a given UsageRecord  processed by
+// A UsageRecordResult indicates the status of a given UsageRecord processed by
 // BatchMeterUsage .
 type UsageRecordResult struct {
 
-	// The MeteringRecordId  is a unique identifier for this metering event.
+	// The MeteringRecordId is a unique identifier for this metering event.
 	MeteringRecordId *string
 
-	// The UsageRecordResult Status  indicates the status of an individual UsageRecord
+	// The UsageRecordResult Status indicates the status of an individual UsageRecord
 	// processed by BatchMeterUsage .
-	//     - Success- The UsageRecord was accepted and honored by BatchMeterUsage .
-	//     - CustomerNotSubscribed- The CustomerIdentifier specified is not able to use your product. The UsageRecord was not honored. There are three causes for this result:
-	//         - The customer identifier is invalid.
-	//         - The customer identifier provided in the metering record does not have an active agreement or subscription with this product. Future UsageRecords for this customer will fail until the customer subscribes to your product.
-	//         - The customer's AWS account was suspended.
-	//     - DuplicateRecord- Indicates that the UsageRecord was invalid and not honored. A previously metered UsageRecord had the same customer, dimension, and time, but a different quantity.
+	//   - Success- The UsageRecord was accepted and honored by BatchMeterUsage .
+	//   - CustomerNotSubscribed- The CustomerIdentifier specified is not able to use
+	//   your product. The UsageRecord was not honored. There are three causes for this
+	//   result:
+	//   - The customer identifier is invalid.
+	//   - The customer identifier provided in the metering record does not have an
+	//   active agreement or subscription with this product. Future UsageRecords for
+	//   this customer will fail until the customer subscribes to your product.
+	//   - The customer's AWS account was suspended.
+	//   - DuplicateRecord- Indicates that the UsageRecord was invalid and not honored.
+	//   A previously metered UsageRecord had the same customer, dimension, and time,
+	//   but a different quantity.
 	Status UsageRecordResultStatus
 
-	// The UsageRecord  that was part of the BatchMeterUsage  request.
+	// The UsageRecord that was part of the BatchMeterUsage request.
 	UsageRecord *UsageRecord
 
 	noSmithyDocumentSerde

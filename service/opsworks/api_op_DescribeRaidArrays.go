@@ -49,10 +49,10 @@ type DescribeRaidArraysInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeRaidArrays  request.
+// Contains the response to a DescribeRaidArrays request.
 type DescribeRaidArraysOutput struct {
 
-	// A RaidArrays  object that describes the specified RAID arrays.
+	// A RaidArrays object that describes the specified RAID arrays.
 	RaidArrays []types.RaidArray
 
 	// Metadata pertaining to the operation's result.

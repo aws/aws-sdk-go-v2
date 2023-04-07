@@ -10,9 +10,9 @@ import (
 // Object specifying a participant token in a stage.
 type ParticipantToken struct {
 
-	// Application-provided attributes to encode into the token and attach to a
-	// stage. This field is exposed to all stage participants and should not be used
-	// for personally identifying, confidential, or sensitive information.
+	// Application-provided attributes to encode into the token and attach to a stage.
+	// This field is exposed to all stage participants and should not be used for
+	// personally identifying, confidential, or sensitive information.
 	Attributes map[string]string
 
 	// Set of capabilities that the user is allowed to perform in the stage.
@@ -31,8 +31,8 @@ type ParticipantToken struct {
 	// The issued client token, encrypted.
 	Token *string
 
-	// Name to help identify the token. This can be any UTF-8 encoded text. This
-	// field is exposed to all stage participants and should not be used for personally
+	// Name to help identify the token. This can be any UTF-8 encoded text. This field
+	// is exposed to all stage participants and should not be used for personally
 	// identifying, confidential, or sensitive information.
 	UserId *string
 
@@ -52,8 +52,8 @@ type ParticipantTokenConfiguration struct {
 	// Set of capabilities that the user is allowed to perform in the stage.
 	Capabilities []ParticipantTokenCapability
 
-	// Duration (in minutes), after which the corresponding participant token
-	// expires. Default: 60 (1 hour).
+	// Duration (in minutes), after which the corresponding participant token expires.
+	// Default: 60 (1 hour).
 	Duration int32
 
 	// Name that can be specified to help identify the corresponding participant

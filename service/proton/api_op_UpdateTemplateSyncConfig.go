@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update template sync configuration parameters, except for the templateName  and
-// templateType. Repository details (branch, name, and provider) should be of a
+// Update template sync configuration parameters, except for the templateName and
+// templateType . Repository details (branch, name, and provider) should be of a
 // linked repository. A linked repository is a repository that has been registered
 // with Proton. For more information, see CreateRepository .
 func (c *Client) UpdateTemplateSyncConfig(ctx context.Context, params *UpdateTemplateSyncConfigInput, optFns ...func(*Options)) (*UpdateTemplateSyncConfigOutput, error) {

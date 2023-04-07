@@ -29,7 +29,7 @@ import (
 // cannot pause all file writes to the volume, you should unmount the volume from
 // within the instance, issue the snapshot command, and then remount the volume to
 // ensure a consistent and complete snapshot. You may remount and use your volume
-// while the snapshot status is pending. When you create a snapshot for an EBS
+// while the snapshot status is pending . When you create a snapshot for an EBS
 // volume that serves as a root device, we recommend that you stop the instance
 // before taking the snapshot. Snapshots that are taken from encrypted volumes are
 // automatically encrypted. Volumes that are created from encrypted snapshots are
@@ -73,10 +73,14 @@ type CreateSnapshotInput struct {
 
 	// The Amazon Resource Name (ARN) of the Outpost on which to create a local
 	// snapshot.
-	//     - To create a snapshot of a volume in a Region, omit this parameter. The snapshot is created in the same Region as the volume.
-	//     - To create a snapshot of a volume on an Outpost and store the snapshot in the Region, omit this parameter. The snapshot is created in the Region for the Outpost.
-	//     - To create a snapshot of a volume on an Outpost and store the snapshot on an Outpost, specify the ARN of the destination Outpost. The snapshot must be created on the same Outpost as the volume.
-	//
+	//   - To create a snapshot of a volume in a Region, omit this parameter. The
+	//   snapshot is created in the same Region as the volume.
+	//   - To create a snapshot of a volume on an Outpost and store the snapshot in
+	//   the Region, omit this parameter. The snapshot is created in the Region for the
+	//   Outpost.
+	//   - To create a snapshot of a volume on an Outpost and store the snapshot on an
+	//   Outpost, specify the ARN of the destination Outpost. The snapshot must be
+	//   created on the same Outpost as the volume.
 	// For more information, see Create local snapshots from volumes on an Outpost (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	OutpostArn *string
@@ -104,8 +108,8 @@ type CreateSnapshotOutput struct {
 	// Indicates whether the snapshot is encrypted.
 	Encrypted *bool
 
-	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS key
-	// that was used to protect the volume encryption key for the parent volume.
+	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS key that
+	// was used to protect the volume encryption key for the parent volume.
 	KmsKeyId *string
 
 	// The ARN of the Outpost on which the snapshot is stored. For more information,
@@ -113,7 +117,7 @@ type CreateSnapshotOutput struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	OutpostArn *string
 
-	// The Amazon Web Services owner alias, from an Amazon-maintained list ( amazon).
+	// The Amazon Web Services owner alias, from an Amazon-maintained list ( amazon ).
 	// This is not the user-configured Amazon Web Services account alias set using the
 	// IAM console.
 	OwnerAlias *string
@@ -154,9 +158,9 @@ type CreateSnapshotOutput struct {
 	// Any tags assigned to the snapshot.
 	Tags []types.Tag
 
-	// The ID of the volume that was used to create the snapshot. Snapshots created
-	// by the CopySnapshot action have an arbitrary volume ID that should not be used
-	// for any purpose.
+	// The ID of the volume that was used to create the snapshot. Snapshots created by
+	// the CopySnapshot action have an arbitrary volume ID that should not be used for
+	// any purpose.
 	VolumeId *string
 
 	// The size of the volume, in GiB.

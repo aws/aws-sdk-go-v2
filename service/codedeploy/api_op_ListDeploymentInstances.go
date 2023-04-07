@@ -34,7 +34,7 @@ func (c *Client) ListDeploymentInstances(ctx context.Context, params *ListDeploy
 	return out, nil
 }
 
-// Represents the input of a ListDeploymentInstances  operation.
+// Represents the input of a ListDeploymentInstances operation.
 type ListDeploymentInstancesInput struct {
 
 	// The unique ID of a deployment.
@@ -43,12 +43,13 @@ type ListDeploymentInstancesInput struct {
 	DeploymentId *string
 
 	// A subset of instances to list by status:
-	//     - Pending : Include those instances with pending deployments.
-	//     - InProgress : Include those instances where deployments are still in progress.
-	//     - Succeeded : Include those instances with successful deployments.
-	//     - Failed : Include those instances with failed deployments.
-	//     - Skipped : Include those instances with skipped deployments.
-	//     - Unknown : Include those instances with deployments in an unknown state.
+	//   - Pending : Include those instances with pending deployments.
+	//   - InProgress : Include those instances where deployments are still in
+	//   progress.
+	//   - Succeeded : Include those instances with successful deployments.
+	//   - Failed : Include those instances with failed deployments.
+	//   - Skipped : Include those instances with skipped deployments.
+	//   - Unknown : Include those instances with deployments in an unknown state.
 	InstanceStatusFilter []types.InstanceStatus
 
 	// The set of instances in a blue/green deployment, either those in the original
@@ -56,14 +57,14 @@ type ListDeploymentInstancesInput struct {
 	// which you want to view instance information.
 	InstanceTypeFilter []types.InstanceType
 
-	// An identifier returned from the previous list deployment instances call. It
-	// can be used to return the next set of deployment instances in the list.
+	// An identifier returned from the previous list deployment instances call. It can
+	// be used to return the next set of deployment instances in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListDeploymentInstances  operation.
+// Represents the output of a ListDeploymentInstances operation.
 type ListDeploymentInstancesOutput struct {
 
 	// A list of instance IDs.
@@ -154,8 +155,8 @@ var _ ListDeploymentInstancesAPIClient = (*Client)(nil)
 // ListDeploymentInstancesPaginatorOptions is the paginator options for
 // ListDeploymentInstances
 type ListDeploymentInstancesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

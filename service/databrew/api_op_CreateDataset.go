@@ -44,8 +44,8 @@ type CreateDatasetInput struct {
 	// The file format of a dataset that is created from an Amazon S3 file or folder.
 	Format types.InputFormat
 
-	// Represents a set of options that define the structure of either
-	// comma-separated value (CSV), Excel, or JSON input.
+	// Represents a set of options that define the structure of either comma-separated
+	// value (CSV), Excel, or JSON input.
 	FormatOptions *types.FormatOptions
 
 	// A set of options that defines how DataBrew interprets an Amazon S3 path of the

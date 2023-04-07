@@ -29,9 +29,8 @@ func (c *Client) UpdateReceiptRule(ctx context.Context, params *UpdateReceiptRul
 	return out, nil
 }
 
-// Represents a request to update a receipt rule. You use receipt rules to
-// receive email with Amazon SES. For more information, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// Represents a request to update a receipt rule. You use receipt rules to receive
+// email with Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
 // .
 type UpdateReceiptRuleInput struct {
 

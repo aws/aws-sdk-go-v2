@@ -50,8 +50,8 @@ type DescribeLocationFsxLustreOutput struct {
 	// The URI of the FSx for Lustre location that was described.
 	LocationUri *string
 
-	// The Amazon Resource Names (ARNs) of the security groups that are configured
-	// for the FSx for Lustre file system.
+	// The Amazon Resource Names (ARNs) of the security groups that are configured for
+	// the FSx for Lustre file system.
 	SecurityGroupArns []string
 
 	// Metadata pertaining to the operation's result.

@@ -73,8 +73,8 @@ type CreateAppInput struct {
 	// Enables automated branch creation for an Amplify app.
 	EnableAutoBranchCreation *bool
 
-	// Enables basic authorization for an Amplify app. This will apply to all
-	// branches that are part of this app.
+	// Enables basic authorization for an Amplify app. This will apply to all branches
+	// that are part of this app.
 	EnableBasicAuth *bool
 
 	// Enables the auto building of branches for an Amplify app.
@@ -90,22 +90,22 @@ type CreateAppInput struct {
 	// The AWS Identity and Access Management (IAM) service role for an Amplify app.
 	IamServiceRoleArn *string
 
-	// The OAuth token for a third-party source control system for an Amplify app.
-	// The OAuth token is used to create a webhook and a read-only deploy key using SSH
-	// cloning. The OAuth token is not stored. Use oauthToken for repository
-	// providers other than GitHub, such as Bitbucket or CodeCommit. To authorize
-	// access to GitHub as your repository provider, use accessToken. You must
-	// specify either oauthToken  or accessToken when you create a new app. Existing
-	// Amplify apps deployed from a GitHub repository using OAuth continue to work with
-	// CI/CD. However, we strongly recommend that you migrate these apps to use the
-	// GitHub App. For more information, see Migrating an existing OAuth app to the
-	// Amplify GitHub App (https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth)
+	// The OAuth token for a third-party source control system for an Amplify app. The
+	// OAuth token is used to create a webhook and a read-only deploy key using SSH
+	// cloning. The OAuth token is not stored. Use oauthToken for repository providers
+	// other than GitHub, such as Bitbucket or CodeCommit. To authorize access to
+	// GitHub as your repository provider, use accessToken . You must specify either
+	// oauthToken or accessToken when you create a new app. Existing Amplify apps
+	// deployed from a GitHub repository using OAuth continue to work with CI/CD.
+	// However, we strongly recommend that you migrate these apps to use the GitHub
+	// App. For more information, see Migrating an existing OAuth app to the Amplify
+	// GitHub App (https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth)
 	// in the Amplify User Guide .
 	OauthToken *string
 
-	// The platform for the Amplify app. For a static app, set the platform type to
-	// WEB . For a dynamic server-side rendered (SSR) app, set the platform type to
-	// WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only,
+	// The platform for the Amplify app. For a static app, set the platform type to WEB
+	// . For a dynamic server-side rendered (SSR) app, set the platform type to
+	// WEB_COMPUTE . For an app requiring Amplify Hosting's original SSR support only,
 	// set the platform type to WEB_DYNAMIC .
 	Platform types.Platform
 

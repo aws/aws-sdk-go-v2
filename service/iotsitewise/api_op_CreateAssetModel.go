@@ -49,9 +49,9 @@ type CreateAssetModelInput struct {
 	// A description for the asset model.
 	AssetModelDescription *string
 
-	// The hierarchy definitions of the asset model. Each hierarchy specifies an
-	// asset model whose assets can be children of any other assets created from this
-	// asset model. For more information, see Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
+	// The hierarchy definitions of the asset model. Each hierarchy specifies an asset
+	// model whose assets can be children of any other assets created from this asset
+	// model. For more information, see Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the IoT SiteWise User Guide. You can specify up to 10 hierarchies per asset
 	// model. For more information, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
 	// in the IoT SiteWise User Guide.
@@ -86,8 +86,8 @@ type CreateAssetModelOutput struct {
 	// This member is required.
 	AssetModelArn *string
 
-	// The ID of the asset model. You can use this ID when you call other IoT
-	// SiteWise APIs.
+	// The ID of the asset model. You can use this ID when you call other IoT SiteWise
+	// APIs.
 	//
 	// This member is required.
 	AssetModelId *string

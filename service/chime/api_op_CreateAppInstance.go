@@ -32,7 +32,7 @@ func (c *Client) CreateAppInstance(ctx context.Context, params *CreateAppInstanc
 
 type CreateAppInstanceInput struct {
 
-	// The ClientRequestToken  of the AppInstance .
+	// The ClientRequestToken of the AppInstance .
 	//
 	// This member is required.
 	ClientRequestToken *string

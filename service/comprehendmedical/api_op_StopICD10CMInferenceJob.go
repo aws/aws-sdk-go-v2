@@ -39,7 +39,7 @@ type StopICD10CMInferenceJobInput struct {
 type StopICD10CMInferenceJobOutput struct {
 
 	// The identifier generated for the job. To get the status of job, use this
-	// identifier with the DescribeICD10CMInferenceJob  operation.
+	// identifier with the DescribeICD10CMInferenceJob operation.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

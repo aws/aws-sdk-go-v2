@@ -30,8 +30,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The ARN of the Kinesis Data Analytics application from which to remove the
-	// tags.
+	// The ARN of the Kinesis Data Analytics application from which to remove the tags.
 	//
 	// This member is required.
 	ResourceARN *string

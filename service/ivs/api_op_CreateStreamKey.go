@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a stream key, used to initiate a stream, for the specified channel
-// ARN. Note that CreateChannel creates a stream key. If you subsequently use
+// Creates a stream key, used to initiate a stream, for the specified channel ARN.
+// Note that CreateChannel creates a stream key. If you subsequently use
 // CreateStreamKey on the same channel, it will fail because a stream key already
 // exists and there is a limit of 1 stream key per channel. To reset the stream key
-// on a channel, use DeleteStreamKey  and then CreateStreamKey.
+// on a channel, use DeleteStreamKey and then CreateStreamKey.
 func (c *Client) CreateStreamKey(ctx context.Context, params *CreateStreamKeyInput, optFns ...func(*Options)) (*CreateStreamKeyOutput, error) {
 	if params == nil {
 		params = &CreateStreamKeyInput{}

@@ -38,10 +38,10 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 
 type CreateClusterInput struct {
 
-	// The short name of one or more capacity providers to associate with the
-	// cluster. A capacity provider must be associated with a cluster before it can be
-	// included as part of the default capacity provider strategy of the cluster or
-	// used in a capacity provider strategy when calling the CreateService (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html)
+	// The short name of one or more capacity providers to associate with the cluster.
+	// A capacity provider must be associated with a cluster before it can be included
+	// as part of the default capacity provider strategy of the cluster or used in a
+	// capacity provider strategy when calling the CreateService (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html)
 	// or RunTask (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html)
 	// actions. If specifying a capacity provider that uses an Auto Scaling group, the
 	// capacity provider must be created but not associated with another cluster. New
@@ -56,11 +56,11 @@ type CreateClusterInput struct {
 	CapacityProviders []string
 
 	// The name of your cluster. If you don't specify a name for your cluster, you
-	// create a cluster that's named default. Up to 255 letters (uppercase and
+	// create a cluster that's named default . Up to 255 letters (uppercase and
 	// lowercase), numbers, underscores, and hyphens are allowed.
 	ClusterName *string
 
-	// The execute  command configuration for the cluster.
+	// The execute command configuration for the cluster.
 	Configuration *types.ClusterConfiguration
 
 	// The capacity provider strategy to set as the default for the cluster. After a
@@ -70,40 +70,47 @@ type CreateClusterInput struct {
 	// APIs with no capacity provider strategy or launch type specified, the default
 	// capacity provider strategy for the cluster is used. If a default capacity
 	// provider strategy isn't defined for a cluster when it was created, it can be
-	// defined later with the PutClusterCapacityProviders  API operation.
+	// defined later with the PutClusterCapacityProviders API operation.
 	DefaultCapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// Use this parameter to set a default Service Connect namespace. After you set a
 	// default Service Connect namespace, any new services with Service Connect turned
 	// on that are created in the cluster are added as client services in the
 	// namespace. This setting only applies to new services that set the enabled
-	// parameter to true  in the ServiceConnectConfiguration. You can set the
-	// namespace of each service individually in the ServiceConnectConfiguration to
-	// override this default parameter. Tasks that run in a namespace can use short
-	// names to connect to services in the namespace. Tasks can connect to services
-	// across all of the clusters in the namespace. Tasks connect through a managed
-	// proxy container that collects logs and metrics for increased visibility. Only
-	// the tasks that Amazon ECS services create are supported with Service Connect.
-	// For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// parameter to true in the ServiceConnectConfiguration . You can set the namespace
+	// of each service individually in the ServiceConnectConfiguration to override
+	// this default parameter. Tasks that run in a namespace can use short names to
+	// connect to services in the namespace. Tasks can connect to services across all
+	// of the clusters in the namespace. Tasks connect through a managed proxy
+	// container that collects logs and metrics for increased visibility. Only the
+	// tasks that Amazon ECS services create are supported with Service Connect. For
+	// more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ServiceConnectDefaults *types.ClusterServiceConnectDefaultsRequest
 
 	// The setting to use when creating a cluster. This parameter is used to turn on
 	// CloudWatch Container Insights for a cluster. If this value is specified, it
-	// overrides the containerInsights  value set with PutAccountSetting  or
+	// overrides the containerInsights value set with PutAccountSetting or
 	// PutAccountSettingDefault .
 	Settings []types.ClusterSetting
 
 	// The metadata that you apply to the cluster to help you categorize and organize
 	// them. Each tag consists of a key and an optional value. You define both. The
 	// following basic restrictions apply to tags:
-	//     - Maximum number of tags per resource - 50
-	//     - For each resource, each tag key must be unique, and each tag key can have only one value.
-	//     - Maximum key length - 128 Unicode characters in UTF-8
-	//     - Maximum value length - 256 Unicode characters in UTF-8
-	//     - If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
-	//     - Tag keys and values are case-sensitive.
-	//     - Do not use aws: , AWS: , or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.
+	//   - Maximum number of tags per resource - 50
+	//   - For each resource, each tag key must be unique, and each tag key can have
+	//   only one value.
+	//   - Maximum key length - 128 Unicode characters in UTF-8
+	//   - Maximum value length - 256 Unicode characters in UTF-8
+	//   - If your tagging schema is used across multiple services and resources,
+	//   remember that other services may have restrictions on allowed characters.
+	//   Generally allowed characters are: letters, numbers, and spaces representable in
+	//   UTF-8, and the following characters: + - = . _ : / @.
+	//   - Tag keys and values are case-sensitive.
+	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
+	//   prefix for either keys or values as it is reserved for Amazon Web Services use.
+	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
+	//   prefix do not count against your tags per resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

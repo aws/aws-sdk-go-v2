@@ -37,18 +37,18 @@ type UpdateServerInput struct {
 	// Sets the number of automated backups that you want to keep.
 	BackupRetentionCount *int32
 
-	// Setting DisableAutomatedBackup to true disables automated or scheduled
-	// backups. Automated backups are enabled by default.
+	// Setting DisableAutomatedBackup to true disables automated or scheduled backups.
+	// Automated backups are enabled by default.
 	DisableAutomatedBackup *bool
 
-	// DDD:HH:MM  (weekly start time) or HH:MM (daily start time). Time windows
-	// always use coordinated universal time (UTC). Valid strings for day of week ( DDD
-	// ) are: Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
+	// DDD:HH:MM (weekly start time) or HH:MM (daily start time). Time windows always
+	// use coordinated universal time (UTC). Valid strings for day of week ( DDD ) are:
+	// Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
 	PreferredBackupWindow *string
 
-	// DDD:HH:MM  (weekly start time) or HH:MM (daily start time). Time windows
-	// always use coordinated universal time (UTC). Valid strings for day of week ( DDD
-	// ) are: Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
+	// DDD:HH:MM (weekly start time) or HH:MM (daily start time). Time windows always
+	// use coordinated universal time (UTC). Valid strings for day of week ( DDD ) are:
+	// Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
 	PreferredMaintenanceWindow *string
 
 	noSmithyDocumentSerde
@@ -56,7 +56,7 @@ type UpdateServerInput struct {
 
 type UpdateServerOutput struct {
 
-	// Contains the response to a UpdateServer  request.
+	// Contains the response to a UpdateServer request.
 	Server *types.Server
 
 	// Metadata pertaining to the operation's result.

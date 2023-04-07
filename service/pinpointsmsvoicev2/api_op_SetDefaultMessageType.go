@@ -34,8 +34,8 @@ func (c *Client) SetDefaultMessageType(ctx context.Context, params *SetDefaultMe
 
 type SetDefaultMessageTypeInput struct {
 
-	// The configuration set to update with a new default message type. This field
-	// can be the ConsigurationSetName or ConfigurationSetArn.
+	// The configuration set to update with a new default message type. This field can
+	// be the ConsigurationSetName or ConfigurationSetArn.
 	//
 	// This member is required.
 	ConfigurationSetName *string

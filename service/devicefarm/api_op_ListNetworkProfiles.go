@@ -35,8 +35,8 @@ type ListNetworkProfilesInput struct {
 	// This member is required.
 	Arn *string
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	// The type of network profile to return information about. Valid values are
@@ -51,8 +51,8 @@ type ListNetworkProfilesOutput struct {
 	// A list of the available network profiles.
 	NetworkProfiles []types.NetworkProfile
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

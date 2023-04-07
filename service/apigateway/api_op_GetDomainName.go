@@ -44,17 +44,17 @@ type GetDomainNameInput struct {
 // (RestApi).
 type GetDomainNameOutput struct {
 
-	// The reference to an AWS-managed certificate that will be used by
-	// edge-optimized endpoint for this domain name. AWS Certificate Manager is the
-	// only supported source.
+	// The reference to an AWS-managed certificate that will be used by edge-optimized
+	// endpoint for this domain name. AWS Certificate Manager is the only supported
+	// source.
 	CertificateArn *string
 
 	// The name of the certificate that will be used by edge-optimized endpoint for
 	// this domain name.
 	CertificateName *string
 
-	// The timestamp when the certificate that was used by edge-optimized endpoint
-	// for this domain name was uploaded.
+	// The timestamp when the certificate that was used by edge-optimized endpoint for
+	// this domain name was uploaded.
 	CertificateUploadDate *time.Time
 
 	// The domain name of the Amazon CloudFront distribution associated with this
@@ -73,18 +73,18 @@ type GetDomainNameOutput struct {
 	// The custom domain name as an API host name, for example, my-api.example.com .
 	DomainName *string
 
-	// The status of the DomainName migration. The valid values are AVAILABLE  and
-	// UPDATING . If the status is UPDATING, the domain cannot be modified further
-	// until the existing operation is complete. If it is AVAILABLE, the domain can
-	// be updated.
+	// The status of the DomainName migration. The valid values are AVAILABLE and
+	// UPDATING . If the status is UPDATING , the domain cannot be modified further
+	// until the existing operation is complete. If it is AVAILABLE , the domain can be
+	// updated.
 	DomainNameStatus types.DomainNameStatus
 
 	// An optional text message containing detailed information about status of the
 	// DomainName migration.
 	DomainNameStatusMessage *string
 
-	// The endpoint configuration of this DomainName showing the endpoint types of
-	// the domain name.
+	// The endpoint configuration of this DomainName showing the endpoint types of the
+	// domain name.
 	EndpointConfiguration *types.EndpointConfiguration
 
 	// The mutual TLS authentication configuration for a custom domain name. If
@@ -117,7 +117,7 @@ type GetDomainNameOutput struct {
 	RegionalHostedZoneId *string
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
-	// The valid values are TLS_1_0  and TLS_1_2 .
+	// The valid values are TLS_1_0 and TLS_1_2 .
 	SecurityPolicy types.SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.

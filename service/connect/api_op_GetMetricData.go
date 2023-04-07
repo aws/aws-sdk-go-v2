@@ -51,9 +51,9 @@ type GetMetricDataInput struct {
 	// This member is required.
 	Filters *types.Filters
 
-	// The metrics to retrieve. Specify the name, unit, and statistic for each
-	// metric. The following historical metrics are available. For a description of
-	// each metric, see Historical Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
+	// The metrics to retrieve. Specify the name, unit, and statistic for each metric.
+	// The following historical metrics are available. For a description of each
+	// metric, see Historical Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
 	// in the Amazon Connect Administrator Guide. This API does not support a contacts
 	// incoming metric (there's no CONTACTS_INCOMING metric missing from the documented
 	// list). ABANDON_TIME Unit: SECONDS Statistic: AVG AFTER_CONTACT_WORK_TIME Unit:
@@ -73,7 +73,7 @@ type GetMetricDataInput struct {
 	// SECONDS Statistic: AVG OCCUPANCY Unit: PERCENT Statistic: AVG QUEUE_ANSWER_TIME
 	// Unit: SECONDS Statistic: AVG QUEUED_TIME Unit: SECONDS Statistic: MAX
 	// SERVICE_LEVEL You can include up to 20 SERVICE_LEVEL metrics in a request. Unit:
-	// PERCENT Statistic: AVG Threshold: For ThresholdValue, enter any whole number
+	// PERCENT Statistic: AVG Threshold: For ThresholdValue , enter any whole number
 	// from 1 to 604800 (inclusive), in seconds. For Comparison , you must enter LT
 	// (for "Less than").
 	//
@@ -117,10 +117,10 @@ type GetMetricDataOutput struct {
 	// summary of metric data is returned.
 	MetricResults []types.HistoricalMetricResult
 
-	// If there are additional results, this is the token for the next set of
-	// results. The token expires after 5 minutes from the time it is created.
-	// Subsequent requests that use the token must use the same request parameters as
-	// the request that generated the token.
+	// If there are additional results, this is the token for the next set of results.
+	// The token expires after 5 minutes from the time it is created. Subsequent
+	// requests that use the token must use the same request parameters as the request
+	// that generated the token.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -204,8 +204,8 @@ type GetMetricDataPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

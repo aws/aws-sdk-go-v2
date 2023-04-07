@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new crawler with specified targets, role, configuration, and
-// optional schedule. At least one crawl target must be specified, in the
-// s3Targets field, the jdbcTargets  field, or the DynamoDBTargets  field.
+// Creates a new crawler with specified targets, role, configuration, and optional
+// schedule. At least one crawl target must be specified, in the s3Targets field,
+// the jdbcTargets field, or the DynamoDBTargets field.
 func (c *Client) CreateCrawler(ctx context.Context, params *CreateCrawlerInput, optFns ...func(*Options)) (*CreateCrawlerOutput, error) {
 	if params == nil {
 		params = &CreateCrawlerInput{}
@@ -58,7 +58,7 @@ type CreateCrawlerInput struct {
 	// .
 	Configuration *string
 
-	// The name of the SecurityConfiguration  structure to be used by this crawler.
+	// The name of the SecurityConfiguration structure to be used by this crawler.
 	CrawlerSecurityConfiguration *string
 
 	// The Glue database where results are written, such as:
@@ -78,7 +78,7 @@ type CreateCrawlerInput struct {
 	// only folders that were added since the last crawler run.
 	RecrawlPolicy *types.RecrawlPolicy
 
-	// A cron  expression used to specify the schedule (see Time-Based Schedules for
+	// A cron expression used to specify the schedule (see Time-Based Schedules for
 	// Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)
 	// . For example, to run something every day at 12:15 UTC, you would specify:
 	// cron(15 12 * * ? *) .
@@ -92,7 +92,7 @@ type CreateCrawlerInput struct {
 
 	// The tags to use with this crawler request. You may use tags to limit access to
 	// the crawler. For more information about tags in Glue, see Amazon Web Services
-	// Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)in
+	// Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in
 	// the developer guide.
 	Tags map[string]string
 

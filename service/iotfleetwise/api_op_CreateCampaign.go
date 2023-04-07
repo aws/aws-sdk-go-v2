@@ -59,15 +59,15 @@ type CreateCampaignInput struct {
 	TargetArn *string
 
 	// (Optional) Whether to compress signals before transmitting data to Amazon Web
-	// Services IoT FleetWise. If you don't want to compress the signals, use OFF. If
-	// it's not specified, SNAPPY  is used. Default: SNAPPY
+	// Services IoT FleetWise. If you don't want to compress the signals, use OFF . If
+	// it's not specified, SNAPPY is used. Default: SNAPPY
 	Compression types.Compression
 
 	// (Optional) A list of vehicle attributes to associate with a campaign. Enrich
-	// the data with specified vehicle attributes. For example, add make  and model
-	// to the campaign, and Amazon Web Services IoT FleetWise will associate the data
-	// with those attributes as dimensions in Amazon Timestream. You can then query the
-	// data against make  and model . Default: An empty array
+	// the data with specified vehicle attributes. For example, add make and model to
+	// the campaign, and Amazon Web Services IoT FleetWise will associate the data with
+	// those attributes as dimensions in Amazon Timestream. You can then query the data
+	// against make and model . Default: An empty array
 	DataExtraDimensions []string
 
 	// An optional description of the campaign to help identify its purpose.
@@ -75,7 +75,7 @@ type CreateCampaignInput struct {
 
 	// (Optional) Option for a vehicle to send diagnostic trouble codes to Amazon Web
 	// Services IoT FleetWise. If you want to send diagnostic trouble codes, use
-	// SEND_ACTIVE_DTCS . If it's not specified, OFF  is used. Default: OFF
+	// SEND_ACTIVE_DTCS . If it's not specified, OFF is used. Default: OFF
 	DiagnosticsMode types.DiagnosticsMode
 
 	// (Optional) The time the campaign expires, in seconds since epoch (January 1,
@@ -84,7 +84,7 @@ type CreateCampaignInput struct {
 	ExpiryTime *time.Time
 
 	// (Optional) How long (in milliseconds) to collect raw data after a triggering
-	// event initiates the collection. If it's not specified, 0  is used. Default: 0
+	// event initiates the collection. If it's not specified, 0 is used. Default: 0
 	PostTriggerCollectionDuration *int64
 
 	// (Optional) A number indicating the priority of one campaign over another
@@ -99,12 +99,12 @@ type CreateCampaignInput struct {
 	// (Optional) Whether to store collected data after a vehicle lost a connection
 	// with the cloud. After a connection is re-established, the data is automatically
 	// forwarded to Amazon Web Services IoT FleetWise. If you want to store collected
-	// data when a vehicle loses connection with the cloud, use TO_DISK. If it's not
-	// specified, OFF  is used. Default: OFF
+	// data when a vehicle loses connection with the cloud, use TO_DISK . If it's not
+	// specified, OFF is used. Default: OFF
 	SpoolingMode types.SpoolingMode
 
 	// (Optional) The time, in milliseconds, to deliver a campaign after it was
-	// approved. If it's not specified, 0  is used. Default: 0
+	// approved. If it's not specified, 0 is used. Default: 0
 	StartTime *time.Time
 
 	// Metadata that can be used to manage the campaign.

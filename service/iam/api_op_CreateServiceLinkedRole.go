@@ -38,9 +38,9 @@ func (c *Client) CreateServiceLinkedRole(ctx context.Context, params *CreateServ
 
 type CreateServiceLinkedRoleInput struct {
 
-	// The service principal for the Amazon Web Services service to which this role
-	// is attached. You use a string similar to a URL but without the http:// in front.
-	// For example: elasticbeanstalk.amazonaws.com. Service principals are unique and
+	// The service principal for the Amazon Web Services service to which this role is
+	// attached. You use a string similar to a URL but without the http:// in front.
+	// For example: elasticbeanstalk.amazonaws.com . Service principals are unique and
 	// case-sensitive. To find the exact service principal for your service-linked
 	// role, see Amazon Web Services services that work with IAM (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html)
 	// in the IAM User Guide. Look for the services that have Yes in the Service-Linked
@@ -54,8 +54,8 @@ type CreateServiceLinkedRoleInput struct {
 	// to form the complete role name. If you make multiple requests for the same
 	// service, then you must supply a different CustomSuffix for each request.
 	// Otherwise the request fails with a duplicate role name error. For example, you
-	// could add -1  or -debug  to the suffix. Some services do not support the
-	// CustomSuffixparameter. If you provide an optional suffix and the operation
+	// could add -1 or -debug to the suffix. Some services do not support the
+	// CustomSuffix parameter. If you provide an optional suffix and the operation
 	// fails, try the operation again without the suffix.
 	CustomSuffix *string
 
@@ -67,7 +67,7 @@ type CreateServiceLinkedRoleInput struct {
 
 type CreateServiceLinkedRoleOutput struct {
 
-	// A Role  object that contains details about the newly created role.
+	// A Role object that contains details about the newly created role.
 	Role *types.Role
 
 	// Metadata pertaining to the operation's result.

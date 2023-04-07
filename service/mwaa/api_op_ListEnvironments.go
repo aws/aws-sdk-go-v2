@@ -29,8 +29,8 @@ func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsI
 
 type ListEnvironmentsInput struct {
 
-	// The maximum number of results to retrieve per page. For example, 5
-	// environments per page.
+	// The maximum number of results to retrieve per page. For example, 5 environments
+	// per page.
 	MaxResults *int32
 
 	// Retrieves the next page of the results.
@@ -155,12 +155,12 @@ var _ ListEnvironmentsAPIClient = (*Client)(nil)
 
 // ListEnvironmentsPaginatorOptions is the paginator options for ListEnvironments
 type ListEnvironmentsPaginatorOptions struct {
-	// The maximum number of results to retrieve per page. For example, 5
-	// environments per page.
+	// The maximum number of results to retrieve per page. For example, 5 environments
+	// per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

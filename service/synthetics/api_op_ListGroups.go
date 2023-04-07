@@ -32,8 +32,7 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 type ListGroupsInput struct {
 
 	// Specify this parameter to limit how many groups are returned each time you use
-	// the ListGroups operation. If you omit this parameter, the default of 20 is
-	// used.
+	// the ListGroups operation. If you omit this parameter, the default of 20 is used.
 	MaxResults *int32
 
 	// A token that indicates that there is more data available. You can use this
@@ -49,7 +48,7 @@ type ListGroupsOutput struct {
 	Groups []types.GroupSummary
 
 	// A token that indicates that there is more data available. You can use this
-	// token in a subsequent ListGroups  operation to retrieve the next set of results.
+	// token in a subsequent ListGroups operation to retrieve the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -128,12 +127,11 @@ var _ ListGroupsAPIClient = (*Client)(nil)
 // ListGroupsPaginatorOptions is the paginator options for ListGroups
 type ListGroupsPaginatorOptions struct {
 	// Specify this parameter to limit how many groups are returned each time you use
-	// the ListGroups operation. If you omit this parameter, the default of 20 is
-	// used.
+	// the ListGroups operation. If you omit this parameter, the default of 20 is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

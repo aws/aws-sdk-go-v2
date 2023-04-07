@@ -12,7 +12,7 @@ import (
 type AssumedRoleUser struct {
 
 	// The ARN of the temporary security credentials that are returned from the
-	// AssumeRoleaction. For more information about ARNs and how to use them in
+	// AssumeRole action. For more information about ARNs and how to use them in
 	// policies, see IAM Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
 	// in the IAM User Guide.
 	//
@@ -81,8 +81,8 @@ type FederatedUser struct {
 type PolicyDescriptorType struct {
 
 	// The Amazon Resource Name (ARN) of the IAM managed policy to use as a session
-	// policy for the role. For more information about ARNs, see Amazon Resource
-	// Names (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// policy for the role. For more information about ARNs, see Amazon Resource Names
+	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the Amazon Web Services General Reference.
 	Arn *string
 
@@ -104,9 +104,9 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	// The value for a session tag. You can pass up to 50 session tags. The plain
-	// text session tag values can’t exceed 256 characters. For these and additional
-	// limits, see IAM and STS Character Limits (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length)
+	// The value for a session tag. You can pass up to 50 session tags. The plain text
+	// session tag values can’t exceed 256 characters. For these and additional limits,
+	// see IAM and STS Character Limits (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length)
 	// in the IAM User Guide.
 	//
 	// This member is required.

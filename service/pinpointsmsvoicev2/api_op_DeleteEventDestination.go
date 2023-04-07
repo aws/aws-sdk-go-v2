@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing event destination. An event destination is a location
-// where you send response information about the messages that you send. For
-// example, when a message is delivered successfully, you can send information
-// about that event to an Amazon CloudWatch destination, or send notifications to
-// endpoints that are subscribed to an Amazon SNS topic.
+// Deletes an existing event destination. An event destination is a location where
+// you send response information about the messages that you send. For example,
+// when a message is delivered successfully, you can send information about that
+// event to an Amazon CloudWatch destination, or send notifications to endpoints
+// that are subscribed to an Amazon SNS topic.
 func (c *Client) DeleteEventDestination(ctx context.Context, params *DeleteEventDestinationInput, optFns ...func(*Options)) (*DeleteEventDestinationOutput, error) {
 	if params == nil {
 		params = &DeleteEventDestinationInput{}
@@ -35,7 +35,7 @@ type DeleteEventDestinationInput struct {
 
 	// The name of the configuration set or the configuration set's Amazon Resource
 	// Name (ARN) to remove the event destination from. The ConfigurateSetName and
-	// ConfigurationSetArn can be found using the DescribeConfigurationSets  action.
+	// ConfigurationSetArn can be found using the DescribeConfigurationSets action.
 	//
 	// This member is required.
 	ConfigurationSetName *string

@@ -40,7 +40,7 @@ type ListInvalidationsInput struct {
 	// list of invalidation batches. Because the results are returned in decreasing
 	// order from most recent to oldest, the most recent results are on the first page,
 	// the second page will contain earlier results, and so on. To get the next page of
-	// results, set Marker  to the value of the NextMarker from the current page's
+	// results, set Marker to the value of the NextMarker from the current page's
 	// response. This value is the same as the ID of the last invalidation batch on
 	// that page.
 	Marker *string
@@ -134,14 +134,13 @@ type ListInvalidationsAPIClient interface {
 
 var _ ListInvalidationsAPIClient = (*Client)(nil)
 
-// ListInvalidationsPaginatorOptions is the paginator options for
-// ListInvalidations
+// ListInvalidationsPaginatorOptions is the paginator options for ListInvalidations
 type ListInvalidationsPaginatorOptions struct {
 	// The maximum number of invalidation batches that you want in the response body.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

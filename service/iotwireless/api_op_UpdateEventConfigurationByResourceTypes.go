@@ -33,8 +33,8 @@ type UpdateEventConfigurationByResourceTypesInput struct {
 	// disabling wireless gateway topic.
 	ConnectionStatus *types.ConnectionStatusResourceTypeEventConfiguration
 
-	// Device registration state resource type event configuration object for
-	// enabling and disabling wireless gateway topic.
+	// Device registration state resource type event configuration object for enabling
+	// and disabling wireless gateway topic.
 	DeviceRegistrationState *types.DeviceRegistrationStateResourceTypeEventConfiguration
 
 	// Join resource type event configuration object for enabling and disabling

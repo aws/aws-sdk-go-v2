@@ -32,8 +32,8 @@ func (c *Client) UpdateParallelData(ctx context.Context, params *UpdateParallelD
 
 type UpdateParallelDataInput struct {
 
-	// A unique identifier for the request. This token is automatically generated
-	// when you use Amazon Translate through an AWS SDK.
+	// A unique identifier for the request. This token is automatically generated when
+	// you use Amazon Translate through an AWS SDK.
 	//
 	// This member is required.
 	ClientToken *string
@@ -67,8 +67,7 @@ type UpdateParallelDataOutput struct {
 	Name *string
 
 	// The status of the parallel data resource that you are attempting to update.
-	// Your update request is accepted only if this status is either ACTIVE  or FAILED
-	// .
+	// Your update request is accepted only if this status is either ACTIVE or FAILED .
 	Status types.ParallelDataStatus
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified managed prefix list. You must first remove all
-// references to the prefix list in your resources.
+// Deletes the specified managed prefix list. You must first remove all references
+// to the prefix list in your resources.
 func (c *Client) DeleteManagedPrefixList(ctx context.Context, params *DeleteManagedPrefixListInput, optFns ...func(*Options)) (*DeleteManagedPrefixListOutput, error) {
 	if params == nil {
 		params = &DeleteManagedPrefixListInput{}

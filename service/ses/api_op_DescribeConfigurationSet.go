@@ -46,8 +46,8 @@ type DescribeConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the details of a configuration set. Configuration sets enable you
-// to publish email sending events. For information about using configuration sets,
+// Represents the details of a configuration set. Configuration sets enable you to
+// publish email sending events. For information about using configuration sets,
 // see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
 // .
 type DescribeConfigurationSetOutput struct {

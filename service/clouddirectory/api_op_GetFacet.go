@@ -12,7 +12,7 @@ import (
 )
 
 // Gets details of the Facet , such as facet name, attributes, Rule s, or
-// ObjectType. You can call this on all kinds of schema facets -- published,
+// ObjectType . You can call this on all kinds of schema facets -- published,
 // development, or applied.
 func (c *Client) GetFacet(ctx context.Context, params *GetFacetInput, optFns ...func(*Options)) (*GetFacetOutput, error) {
 	if params == nil {
@@ -36,7 +36,7 @@ type GetFacetInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) that is associated with the Facet. For more
+	// The Amazon Resource Name (ARN) that is associated with the Facet . For more
 	// information, see arns .
 	//
 	// This member is required.
@@ -47,7 +47,7 @@ type GetFacetInput struct {
 
 type GetFacetOutput struct {
 
-	// The Facet  structure that is associated with the facet.
+	// The Facet structure that is associated with the facet.
 	Facet *types.Facet
 
 	// Metadata pertaining to the operation's result.

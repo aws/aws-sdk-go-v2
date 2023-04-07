@@ -43,12 +43,11 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// and assign each task the same priority level. You can specify targets using
 	// managed node IDs, resource group names, or tags that have been applied to
 	// managed nodes. Example 1: Specify managed node IDs Key=InstanceIds,Values=,,
-	// Example 2: Use tag key-pairs applied to managed nodes Key=tag:,Values=,
-	// Example 3: Use tag-keys applied to managed nodes Key=tag-key,Values=, Example
-	// 4: Use resource group names Key=resource-groups:Name,Values= Example 5: Use
-	// filters for resource group types
-	// Key=resource-groups:ResourceTypeFilters,Values=, For
-	// Key=resource-groups:ResourceTypeFilters, specify resource types in the
+	// Example 2: Use tag key-pairs applied to managed nodes Key=tag:,Values=, Example
+	// 3: Use tag-keys applied to managed nodes Key=tag-key,Values=, Example 4: Use
+	// resource group names Key=resource-groups:Name,Values= Example 5: Use filters
+	// for resource group types Key=resource-groups:ResourceTypeFilters,Values=, For
+	// Key=resource-groups:ResourceTypeFilters , specify resource types in the
 	// following format
 	// Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
 	// For more information about these examples formats, including the best use case

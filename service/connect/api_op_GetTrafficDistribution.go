@@ -43,10 +43,9 @@ type GetTrafficDistributionOutput struct {
 	// The Amazon Resource Name (ARN) of the traffic distribution group.
 	Arn *string
 
-	// The identifier of the traffic distribution group. This can be the ID or the
-	// ARN if the API is being called in the Region where the traffic distribution
-	// group was created. The ARN must be provided if the call is from the replicated
-	// Region.
+	// The identifier of the traffic distribution group. This can be the ID or the ARN
+	// if the API is being called in the Region where the traffic distribution group
+	// was created. The ARN must be provided if the call is from the replicated Region.
 	Id *string
 
 	// The distribution of traffic between the instance and its replicas.

@@ -31,8 +31,8 @@ func (c *Client) ListAssessmentTemplates(ctx context.Context, params *ListAssess
 
 type ListAssessmentTemplatesInput struct {
 
-	// A list of ARNs that specifies the assessment targets whose assessment
-	// templates you want to list.
+	// A list of ARNs that specifies the assessment targets whose assessment templates
+	// you want to list.
 	AssessmentTargetArns []string
 
 	// You can use this parameter to specify a subset of data to be included in the
@@ -148,8 +148,8 @@ type ListAssessmentTemplatesPaginatorOptions struct {
 	// the response. The default value is 10. The maximum value is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

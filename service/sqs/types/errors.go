@@ -111,7 +111,7 @@ func (e *InvalidAttributeName) ErrorCode() string {
 }
 func (e *InvalidAttributeName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Id  of a batch entry in a batch request doesn't abide by the specification.
+// The Id of a batch entry in a batch request doesn't abide by the specification.
 type InvalidBatchEntryId struct {
 	Message *string
 
@@ -215,10 +215,10 @@ func (e *MessageNotInflight) ErrorCode() string {
 }
 func (e *MessageNotInflight) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified action violates a limit. For example, ReceiveMessage returns
-// this error if the maximum number of inflight messages is reached and
-// AddPermissionreturns this error if the maximum number of permissions for the
-// queue is reached.
+// The specified action violates a limit. For example, ReceiveMessage returns this
+// error if the maximum number of inflight messages is reached and AddPermission
+// returns this error if the maximum number of permissions for the queue is
+// reached.
 type OverLimit struct {
 	Message *string
 

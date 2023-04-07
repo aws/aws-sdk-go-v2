@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches an Identity and Access Management (Amazon Web Services IAM) policy
-// for sharing the rule group. You can use the policy to share the rule group using
+// Attaches an Identity and Access Management (Amazon Web Services IAM) policy for
+// sharing the rule group. You can use the policy to share the rule group using
 // Resource Access Manager (RAM).
 func (c *Client) PutFirewallRuleGroupPolicy(ctx context.Context, params *PutFirewallRuleGroupPolicyInput, optFns ...func(*Options)) (*PutFirewallRuleGroupPolicyOutput, error) {
 	if params == nil {

@@ -16,19 +16,19 @@ import (
 // action. Deleting a CA will invalidate other CAs and certificates below it in
 // your CA hierarchy. Before you can delete a CA that you have created and
 // activated, you must disable it. To do this, call the UpdateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html)
-// action and set the CertificateAuthorityStatus parameter to DISABLED.
+// action and set the CertificateAuthorityStatus parameter to DISABLED .
 // Additionally, you can delete a CA if you are waiting for it to be created (that
-// is, the status of the CA is CREATING). You can also delete it if the CA has
+// is, the status of the CA is CREATING ). You can also delete it if the CA has
 // been created but you haven't yet imported the signed certificate into Amazon Web
-// Services Private CA (that is, the status of the CA is PENDING_CERTIFICATE).
+// Services Private CA (that is, the status of the CA is PENDING_CERTIFICATE ).
 // When you successfully call DeleteCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthority.html)
-// , the CA's status changes to DELETED. However, the CA won't be permanently
+// , the CA's status changes to DELETED . However, the CA won't be permanently
 // deleted until the restoration period has passed. By default, if you do not set
 // the PermanentDeletionTimeInDays parameter, the CA remains restorable for 30
 // days. You can set the parameter from 7 to 30 days. The
 // DescribeCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DescribeCertificateAuthority.html)
 // action returns the time remaining in the restoration window of a private CA in
-// the DELETED  state. To restore an eligible CA, call the
+// the DELETED state. To restore an eligible CA, call the
 // RestoreCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_RestoreCertificateAuthority.html)
 // action.
 func (c *Client) DeleteCertificateAuthority(ctx context.Context, params *DeleteCertificateAuthorityInput, optFns ...func(*Options)) (*DeleteCertificateAuthorityOutput, error) {
@@ -52,7 +52,6 @@ type DeleteCertificateAuthorityInput struct {
 	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 	// . This must have the following form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
 	// .
 	//
 	// This member is required.

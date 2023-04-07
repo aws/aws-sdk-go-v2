@@ -52,8 +52,8 @@ const (
 	ActivityStreamStatusStopping ActivityStreamStatus = "stopping"
 )
 
-// Values returns all known values for ActivityStreamStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ActivityStreamStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ActivityStreamStatus) Values() []ActivityStreamStatus {
 	return []ActivityStreamStatus{
@@ -72,9 +72,9 @@ const (
 	ApplyMethodPendingReboot ApplyMethod = "pending-reboot"
 )
 
-// Values returns all known values for ApplyMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ApplyMethod. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ApplyMethod) Values() []ApplyMethod {
 	return []ApplyMethod{
 		"immediate",
@@ -319,9 +319,9 @@ const (
 	IAMAuthModeEnabled  IAMAuthMode = "ENABLED"
 )
 
-// Values returns all known values for IAMAuthMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IAMAuthMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (IAMAuthMode) Values() []IAMAuthMode {
 	return []IAMAuthMode{
 		"DISABLED",
@@ -338,9 +338,9 @@ const (
 	ReplicaModeMounted      ReplicaMode = "mounted"
 )
 
-// Values returns all known values for ReplicaMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReplicaMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ReplicaMode) Values() []ReplicaMode {
 	return []ReplicaMode{
 		"open-read-only",
@@ -433,9 +433,9 @@ const (
 	TargetStateUnavailable TargetState = "UNAVAILABLE"
 )
 
-// Values returns all known values for TargetState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TargetState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TargetState) Values() []TargetState {
 	return []TargetState{
 		"REGISTERING",

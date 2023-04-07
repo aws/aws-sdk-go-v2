@@ -11,34 +11,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified WebACL. While updating a web ACL, WAF provides
-// continuous coverage to the resources that you have associated with the web ACL.
-// This operation completely replaces the mutable specifications that you already
-// have for the web ACL with the ones that you provide to this call. To modify a
-// web ACL, do the following:
+// Updates the specified WebACL . While updating a web ACL, WAF provides continuous
+// coverage to the resources that you have associated with the web ACL. This
+// operation completely replaces the mutable specifications that you already have
+// for the web ACL with the ones that you provide to this call. To modify a web
+// ACL, do the following:
 //   - Retrieve it by calling GetWebACL
 //   - Update its settings as needed
 //   - Provide the complete web ACL specification to this call
 //
-// When you make
-// changes to web ACLs or web ACL components, like rules and rule groups, WAF
-// propagates the changes everywhere that the web ACL and its components are stored
-// and used. Your changes are applied within seconds, but there might be a brief
-// period of inconsistency when the changes have arrived in some places and not in
-// others. So, for example, if you change a rule action setting, the action might
-// be the old action in one area and the new action in another area. Or if you add
-// an IP address to an IP set used in a blocking rule, the new address might
-// briefly be blocked in one area while still allowed in another. This temporary
-// inconsistency can occur when you first associate a web ACL with an Amazon Web
-// Services resource and when you change a web ACL that is already associated with
-// a resource. Generally, any inconsistencies of this type last only a few seconds.
-// A web ACL defines a collection of rules to use to inspect and control web
-// requests. Each rule has an action defined (allow, block, or count) for requests
-// that match the statement of the rule. In the web ACL, you assign a default
-// action to take (allow, block) for any request that does not match any of the
-// rules. The rules in a web ACL can be a combination of the types Rule ,
-// RuleGroup, and managed rule group. You can associate a web ACL with one or
-// more Amazon Web Services resources to protect. The resources can be an Amazon
+// When you make changes to web ACLs or web ACL components, like rules and rule
+// groups, WAF propagates the changes everywhere that the web ACL and its
+// components are stored and used. Your changes are applied within seconds, but
+// there might be a brief period of inconsistency when the changes have arrived in
+// some places and not in others. So, for example, if you change a rule action
+// setting, the action might be the old action in one area and the new action in
+// another area. Or if you add an IP address to an IP set used in a blocking rule,
+// the new address might briefly be blocked in one area while still allowed in
+// another. This temporary inconsistency can occur when you first associate a web
+// ACL with an Amazon Web Services resource and when you change a web ACL that is
+// already associated with a resource. Generally, any inconsistencies of this type
+// last only a few seconds. A web ACL defines a collection of rules to use to
+// inspect and control web requests. Each rule has an action defined (allow, block,
+// or count) for requests that match the statement of the rule. In the web ACL, you
+// assign a default action to take (allow, block) for any request that does not
+// match any of the rules. The rules in a web ACL can be a combination of the types
+// Rule , RuleGroup , and managed rule group. You can associate a web ACL with one
+// or more Amazon Web Services resources to protect. The resources can be an Amazon
 // CloudFront distribution, an Amazon API Gateway REST API, an Application Load
 // Balancer, an AppSync GraphQL API, Amazon Cognito user pool, or an App Runner
 // service.
@@ -59,7 +58,7 @@ func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, op
 
 type UpdateWebACLInput struct {
 
-	// The action to perform if none of the Rules  contained in the WebACL  match.
+	// The action to perform if none of the Rules contained in the WebACL match.
 	//
 	// This member is required.
 	DefaultAction *types.DefaultAction
@@ -70,13 +69,13 @@ type UpdateWebACLInput struct {
 	// This member is required.
 	Id *string
 
-	// A token used for optimistic locking. WAF returns a token to your get  and list
+	// A token used for optimistic locking. WAF returns a token to your get and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update  and delete. WAF uses the token to ensure that no
-	// changes have been made to the entity since you last retrieved it. If a change
-	// has been made, the update fails with a WAFOptimisticLockException. If this
-	// happens, perform another get , and use the new token returned by that operation.
+	// operations like update and delete . WAF uses the token to ensure that no changes
+	// have been made to the entity since you last retrieved it. If a change has been
+	// made, the update fails with a WAFOptimisticLockException . If this happens,
+	// perform another get , and use the new token returned by that operation.
 	//
 	// This member is required.
 	LockToken *string
@@ -92,14 +91,14 @@ type UpdateWebACLInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//     - CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1 .
-	//     - API and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample
-	// collection.
+	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
 	//
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
@@ -109,13 +108,13 @@ type UpdateWebACLInput struct {
 	// default settings for CaptchaConfig .
 	CaptchaConfig *types.CaptchaConfig
 
-	// Specifies how WAF should handle challenge evaluations for rules that don't
-	// have their own ChallengeConfig settings. If you don't specify this, WAF uses
-	// its default settings for ChallengeConfig .
+	// Specifies how WAF should handle challenge evaluations for rules that don't have
+	// their own ChallengeConfig settings. If you don't specify this, WAF uses its
+	// default settings for ChallengeConfig .
 	ChallengeConfig *types.ChallengeConfig
 
-	// A map of custom response keys and content bodies. When you create a rule with
-	// a block action, you can send a custom response to the web request. You define
+	// A map of custom response keys and content bodies. When you create a rule with a
+	// block action, you can send a custom response to the web request. You define
 	// these for the web ACL, and then use them in the rules and default actions that
 	// you define in the web ACL. For information about customizing web requests and
 	// responses, see Customizing web requests and responses in WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
@@ -141,8 +140,8 @@ type UpdateWebACLInput struct {
 	// only for the domain of the protected resource. With a token domain list, WAF
 	// accepts the resource's host domain plus all domains in the token domain list,
 	// including their prefixed subdomains. Example JSON: "TokenDomains": {
-	// "mywebsite.com", "myotherwebsite.com" }Public suffixes aren't allowed. For
-	// example, you can't use usa.gov  or co.uk  as token domains.
+	// "mywebsite.com", "myotherwebsite.com" } Public suffixes aren't allowed. For
+	// example, you can't use usa.gov or co.uk as token domains.
 	TokenDomains []string
 
 	noSmithyDocumentSerde
@@ -151,7 +150,7 @@ type UpdateWebACLInput struct {
 type UpdateWebACLOutput struct {
 
 	// A token used for optimistic locking. WAF returns this token to your update
-	// requests. You use NextLockToken  in the same manner as you use LockToken .
+	// requests. You use NextLockToken in the same manner as you use LockToken .
 	NextLockToken *string
 
 	// Metadata pertaining to the operation's result.

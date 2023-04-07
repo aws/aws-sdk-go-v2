@@ -212,7 +212,7 @@ func (e *JobStatusException) ErrorCode() string {
 func (e *JobStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon S3 throws this exception if you make a GetPublicAccessBlock request
-// against an account that doesn't have a PublicAccessBlockConfiguration  set.
+// against an account that doesn't have a PublicAccessBlockConfiguration set.
 type NoSuchPublicAccessBlockConfiguration struct {
 	Message *string
 

@@ -28,7 +28,7 @@ func (c *Client) ListPipelineExecutions(ctx context.Context, params *ListPipelin
 	return out, nil
 }
 
-// Represents the input of a ListPipelineExecutions  action.
+// Represents the input of a ListPipelineExecutions action.
 type ListPipelineExecutionsInput struct {
 
 	// The name of the pipeline for which you want to get execution summary
@@ -50,7 +50,7 @@ type ListPipelineExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListPipelineExecutions  action.
+// Represents the output of a ListPipelineExecutions action.
 type ListPipelineExecutionsOutput struct {
 
 	// A token that can be used in the next ListPipelineExecutions call. To view all
@@ -147,8 +147,8 @@ type ListPipelineExecutionsPaginatorOptions struct {
 	// start times. Default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -161,8 +161,7 @@ type ListPipelineExecutionsPaginator struct {
 	firstPage bool
 }
 
-// NewListPipelineExecutionsPaginator returns a new
-// ListPipelineExecutionsPaginator
+// NewListPipelineExecutionsPaginator returns a new ListPipelineExecutionsPaginator
 func NewListPipelineExecutionsPaginator(client ListPipelineExecutionsAPIClient, params *ListPipelineExecutionsInput, optFns ...func(*ListPipelineExecutionsPaginatorOptions)) *ListPipelineExecutionsPaginator {
 	if params == nil {
 		params = &ListPipelineExecutionsInput{}

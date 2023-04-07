@@ -30,9 +30,9 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 
 type CreateRepositoryInput struct {
 
-	// The name to use for the repository. The repository name may be specified on
-	// its own (such as nginx-web-app) or it can be prepended with a namespace to
-	// group the repository into a category (such as project-a/nginx-web-app ).
+	// The name to use for the repository. The repository name may be specified on its
+	// own (such as nginx-web-app ) or it can be prepended with a namespace to group
+	// the repository into a category (such as project-a/nginx-web-app ).
 	//
 	// This member is required.
 	RepositoryName *string

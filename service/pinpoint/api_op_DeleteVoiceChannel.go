@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables the voice channel for an application and deletes any existing
-// settings for the channel.
+// Disables the voice channel for an application and deletes any existing settings
+// for the channel.
 func (c *Client) DeleteVoiceChannel(ctx context.Context, params *DeleteVoiceChannelInput, optFns ...func(*Options)) (*DeleteVoiceChannelOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceChannelInput{}

@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the flag, ChangeProtection, which indicates whether it is possible to
-// change the firewall. If the flag is set to TRUE, the firewall is protected
-// from changes. This setting helps protect against accidentally changing a
-// firewall that's in use.
+// Modifies the flag, ChangeProtection , which indicates whether it is possible to
+// change the firewall. If the flag is set to TRUE , the firewall is protected from
+// changes. This setting helps protect against accidentally changing a firewall
+// that's in use.
 func (c *Client) UpdateFirewallPolicyChangeProtection(ctx context.Context, params *UpdateFirewallPolicyChangeProtectionInput, optFns ...func(*Options)) (*UpdateFirewallPolicyChangeProtectionOutput, error) {
 	if params == nil {
 		params = &UpdateFirewallPolicyChangeProtectionInput{}
@@ -39,8 +39,8 @@ type UpdateFirewallPolicyChangeProtectionInput struct {
 	// This member is required.
 	FirewallPolicyChangeProtection bool
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or
-	// the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
+	// name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall
@@ -57,7 +57,7 @@ type UpdateFirewallPolicyChangeProtectionInput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
@@ -89,7 +89,7 @@ type UpdateFirewallPolicyChangeProtectionOutput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

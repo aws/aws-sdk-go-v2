@@ -25,12 +25,12 @@ type ChangedBlock struct {
 	// The block index.
 	BlockIndex *int32
 
-	// The block token for the block index of the FirstSnapshotId  specified in the
-	// ListChangedBlocksoperation. This value is absent if the first snapshot does
-	// not have the changed block that is on the second snapshot.
+	// The block token for the block index of the FirstSnapshotId specified in the
+	// ListChangedBlocks operation. This value is absent if the first snapshot does not
+	// have the changed block that is on the second snapshot.
 	FirstBlockToken *string
 
-	// The block token for the block index of the SecondSnapshotId  specified in the
+	// The block token for the block index of the SecondSnapshotId specified in the
 	// ListChangedBlocks operation.
 	SecondBlockToken *string
 

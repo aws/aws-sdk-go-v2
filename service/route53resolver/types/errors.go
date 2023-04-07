@@ -88,7 +88,7 @@ func (e *InternalServiceErrorException) ErrorCode() string {
 }
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The value that you specified for NextToken  in a List  request isn't valid.
+// The value that you specified for NextToken in a List request isn't valid.
 type InvalidNextTokenException struct {
 	Message *string
 

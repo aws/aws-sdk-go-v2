@@ -14,7 +14,7 @@ import (
 )
 
 // UpdateContinuousBackups enables or disables point in time recovery for the
-// specified table. A successful UpdateContinuousBackups  call returns the current
+// specified table. A successful UpdateContinuousBackups call returns the current
 // ContinuousBackupsDescription . Continuous backups are ENABLED on all tables at
 // table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus
 // will be set to ENABLED. Once continuous backups and point in time recovery are

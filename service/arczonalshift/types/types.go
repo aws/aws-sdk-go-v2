@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// A complex structure for a managed resource in an account. A managed resource
-// is a Network Load Balancer or Application Load Balancer that has been registered
+// A complex structure for a managed resource in an account. A managed resource is
+// a Network Load Balancer or Application Load Balancer that has been registered
 // with Route 53 ARC by Elastic Load Balancing. You can start a zonal shift in
 // Route 53 ARC for a managed resource to temporarily move traffic for the resource
 // away from an Availability Zone in an AWS Region. At this time, you can only
@@ -34,7 +34,7 @@ type ManagedResourceSummary struct {
 // their statuses for the resource.
 type ZonalShiftInResource struct {
 
-	// An appliedStatus  for a zonal shift for a resource can have one of two values:
+	// An appliedStatus for a zonal shift for a resource can have one of two values:
 	// APPLIED or NOT_APPLIED .
 	//
 	// This member is required.
@@ -144,9 +144,9 @@ type ZonalShiftSummary struct {
 
 	// A status for a zonal shift. The Status for a zonal shift can have one of the
 	// following values:
-	//     - ACTIVE: The zonal shift is started and active.
-	//     - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
-	//     - CANCELED: The zonal shift was canceled.
+	//   - ACTIVE: The zonal shift is started and active.
+	//   - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
+	//   - CANCELED: The zonal shift was canceled.
 	//
 	// This member is required.
 	Status ZonalShiftStatus

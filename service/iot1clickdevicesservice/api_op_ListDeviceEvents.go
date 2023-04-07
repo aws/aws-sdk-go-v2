@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Using a device ID, returns a DeviceEventsResponse object containing an array
-// of events for the device.
+// Using a device ID, returns a DeviceEventsResponse object containing an array of
+// events for the device.
 func (c *Client) ListDeviceEvents(ctx context.Context, params *ListDeviceEventsInput, optFns ...func(*Options)) (*ListDeviceEventsOutput, error) {
 	if params == nil {
 		params = &ListDeviceEventsInput{}

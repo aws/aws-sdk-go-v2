@@ -39,9 +39,9 @@ func (c *Client) PutAccountPreferences(ctx context.Context, params *PutAccountPr
 type PutAccountPreferencesInput struct {
 
 	// Specifies the EFS resource ID preference to set for the user's Amazon Web
-	// Services account, in the current Amazon Web Services Region, either LONG_ID
-	// (17 characters), or SHORT_ID (8 characters). Starting in October, 2021, you
-	// will receive an error when setting the account preference to SHORT_ID. Contact
+	// Services account, in the current Amazon Web Services Region, either LONG_ID (17
+	// characters), or SHORT_ID (8 characters). Starting in October, 2021, you will
+	// receive an error when setting the account preference to SHORT_ID . Contact
 	// Amazon Web Services support if you receive an error and must use short IDs for
 	// file system and mount target resources.
 	//

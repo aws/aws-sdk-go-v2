@@ -15,9 +15,17 @@ import (
 // Retrieves a set of one or more game sessions in a specific fleet location. You
 // can optionally filter the results by current game session status. This operation
 // can be used in the following ways:
-//   - To retrieve all game sessions that are currently running on all locations in a fleet, provide a fleet or alias ID, with an optional status filter. This approach returns all game sessions in the fleet's home Region and all remote locations.
-//   - To retrieve all game sessions that are currently running on a specific fleet location, provide a fleet or alias ID and a location name, with optional status filter. The location can be the fleet's home Region or any remote location.
-//   - To retrieve a specific game session, provide the game session ID. This approach looks for the game session ID in all fleets that reside in the Amazon Web Services Region defined in the request.
+//   - To retrieve all game sessions that are currently running on all locations
+//     in a fleet, provide a fleet or alias ID, with an optional status filter. This
+//     approach returns all game sessions in the fleet's home Region and all remote
+//     locations.
+//   - To retrieve all game sessions that are currently running on a specific
+//     fleet location, provide a fleet or alias ID and a location name, with optional
+//     status filter. The location can be the fleet's home Region or any remote
+//     location.
+//   - To retrieve a specific game session, provide the game session ID. This
+//     approach looks for the game session ID in all fleets that reside in the Amazon
+//     Web Services Region defined in the request.
 //
 // Use the pagination parameters to retrieve results as a set of sequential pages.
 // If successful, a GameSession object is returned for each game session that
@@ -72,7 +80,7 @@ type DescribeGameSessionsInput struct {
 	NextToken *string
 
 	// Game session status to filter results on. You can filter on the following
-	// states: ACTIVE , TERMINATED , ACTIVATING , and TERMINATING. The last two are
+	// states: ACTIVE , TERMINATED , ACTIVATING , and TERMINATING . The last two are
 	// transitory and used for only very brief periods of time.
 	StatusFilter *string
 
@@ -170,8 +178,8 @@ type DescribeGameSessionsPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

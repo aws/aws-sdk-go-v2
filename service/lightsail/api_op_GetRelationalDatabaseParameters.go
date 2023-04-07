@@ -39,9 +39,9 @@ type GetRelationalDatabaseParametersInput struct {
 	RelationalDatabaseName *string
 
 	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetRelationalDatabaseParameters request. If
-	// your results are paginated, the response will return a next page token that you
-	// can specify as the page token in a subsequent request.
+	// page token, perform an initial GetRelationalDatabaseParameters request. If your
+	// results are paginated, the response will return a next page token that you can
+	// specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -49,10 +49,10 @@ type GetRelationalDatabaseParametersInput struct {
 
 type GetRelationalDatabaseParametersOutput struct {
 
-	// The token to advance to the next page of results from your request. A next
-	// page token is not returned if there are no more results to display. To get the
-	// next page of results, perform another GetRelationalDatabaseParameters request
-	// and specify the next page token using the pageToken  parameter.
+	// The token to advance to the next page of results from your request. A next page
+	// token is not returned if there are no more results to display. To get the next
+	// page of results, perform another GetRelationalDatabaseParameters request and
+	// specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// An object describing the result of your get relational database parameters

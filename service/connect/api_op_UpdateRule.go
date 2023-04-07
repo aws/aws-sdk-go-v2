@@ -47,9 +47,9 @@ type UpdateRuleInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The name of the rule. You can change the name only if TriggerEventSource is
-	// one of the following values: OnZendeskTicketCreate  |
-	// OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate
+	// The name of the rule. You can change the name only if TriggerEventSource is one
+	// of the following values: OnZendeskTicketCreate | OnZendeskTicketStatusUpdate |
+	// OnSalesforceCaseCreate
 	//
 	// This member is required.
 	Name *string

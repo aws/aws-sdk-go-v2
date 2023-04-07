@@ -34,7 +34,7 @@ type GetEnabledStandardsInput struct {
 	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the
-	// GetEnabledStandards operation, set the value of this parameter to NULL. For
+	// GetEnabledStandards operation, set the value of this parameter to NULL . For
 	// subsequent calls to the operation, to continue listing data, set the value of
 	// this parameter to the value returned from the previous response.
 	NextToken *string
@@ -134,8 +134,8 @@ type GetEnabledStandardsPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

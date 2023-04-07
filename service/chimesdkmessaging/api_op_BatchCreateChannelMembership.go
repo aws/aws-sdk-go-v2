@@ -34,24 +34,24 @@ type BatchCreateChannelMembershipInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
 
 	// The ARNs of the members you want to add to the channel. Only AppInstanceUsers
-	// and AppInstanceBots  can be added as a channel member.
+	// and AppInstanceBots can be added as a channel member.
 	//
 	// This member is required.
 	MemberArns []string
 
-	// The ID of the SubChannel in the request. Only required when creating
-	// membership in a SubChannel for a moderator in an elastic channel.
+	// The ID of the SubChannel in the request. Only required when creating membership
+	// in a SubChannel for a moderator in an elastic channel.
 	SubChannelId *string
 
-	// The membership type of a user, DEFAULT  or HIDDEN. Default members are always
-	// returned as part of ListChannelMemberships. Hidden members are only returned
-	// if the type filter in ListChannelMemberships  equals HIDDEN. Otherwise hidden
+	// The membership type of a user, DEFAULT or HIDDEN . Default members are always
+	// returned as part of ListChannelMemberships . Hidden members are only returned if
+	// the type filter in ListChannelMemberships equals HIDDEN . Otherwise hidden
 	// members are not returned. This is only supported by moderators.
 	Type types.ChannelMembershipType
 

@@ -55,15 +55,15 @@ type GetExportInput struct {
 type GetExportOutput struct {
 
 	// The status of the export.
-	//     - IN_PROGRESS - The export is in progress.
-	//     - READY - The export is complete.
-	//     - FAILED - The export could not be completed.
+	//   - IN_PROGRESS - The export is in progress.
+	//   - READY - The export is complete.
+	//   - FAILED - The export could not be completed.
 	ExportStatus types.ExportStatus
 
 	// The format of the exported data.
 	ExportType types.ExportType
 
-	// If status  is FAILED, Amazon Lex provides the reason that it failed to export
+	// If status is FAILED , Amazon Lex provides the reason that it failed to export
 	// the resource.
 	FailureReason *string
 

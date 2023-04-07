@@ -73,9 +73,8 @@ type DescribeDeviceOutput struct {
 	// The software installed on the device.
 	Software *types.SoftwareInformation
 
-	// Optional metadata that you assign to a resource. You can use tags to
-	// categorize a resource in different ways, such as by purpose, owner, or
-	// environment.
+	// Optional metadata that you assign to a resource. You can use tags to categorize
+	// a resource in different ways, such as by purpose, owner, or environment.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

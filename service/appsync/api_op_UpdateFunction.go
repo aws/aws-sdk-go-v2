@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a Function  object.
+// Updates a Function object.
 func (c *Client) UpdateFunction(ctx context.Context, params *UpdateFunctionInput, optFns ...func(*Options)) (*UpdateFunctionOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionInput{}
@@ -34,7 +34,7 @@ type UpdateFunctionInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The Function DataSource  name.
+	// The Function DataSource name.
 	//
 	// This member is required.
 	DataSourceName *string
@@ -44,16 +44,16 @@ type UpdateFunctionInput struct {
 	// This member is required.
 	FunctionId *string
 
-	// The Function  name.
+	// The Function name.
 	//
 	// This member is required.
 	Name *string
 
 	// The function code that contains the request and response functions. When code
-	// is used, the runtime  is required. The runtime  value must be APPSYNC_JS .
+	// is used, the runtime is required. The runtime value must be APPSYNC_JS .
 	Code *string
 
-	// The Function  description.
+	// The Function description.
 	Description *string
 
 	// The version of the request mapping template. Currently, the supported value is
@@ -68,11 +68,11 @@ type UpdateFunctionInput struct {
 	// version of the request mapping template.
 	RequestMappingTemplate *string
 
-	// The Function  request mapping template.
+	// The Function request mapping template.
 	ResponseMappingTemplate *string
 
-	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver
-	// or Amazon Web Services AppSync function. Specifies the name and version of the
+	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or
+	// Amazon Web Services AppSync function. Specifies the name and version of the
 	// runtime to use. Note that if a runtime is specified, code must also be
 	// specified.
 	Runtime *types.AppSyncRuntime
@@ -86,7 +86,7 @@ type UpdateFunctionInput struct {
 
 type UpdateFunctionOutput struct {
 
-	// The Function  object.
+	// The Function object.
 	FunctionConfiguration *types.FunctionConfiguration
 
 	// Metadata pertaining to the operation's result.

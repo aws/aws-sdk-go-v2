@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a built-in intent. This operation requires
-// permission for the lex:GetBuiltinIntent  action.
+// Returns information about a built-in intent. This operation requires permission
+// for the lex:GetBuiltinIntent action.
 func (c *Client) GetBuiltinIntent(ctx context.Context, params *GetBuiltinIntentInput, optFns ...func(*Options)) (*GetBuiltinIntentOutput, error) {
 	if params == nil {
 		params = &GetBuiltinIntentInput{}

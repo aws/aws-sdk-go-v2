@@ -27,8 +27,8 @@ const (
 	LaunchProfilePersonaUser LaunchProfilePersona = "USER"
 )
 
-// Values returns all known values for LaunchProfilePersona. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LaunchProfilePersona. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfilePersona) Values() []LaunchProfilePersona {
 	return []LaunchProfilePersona{
@@ -105,9 +105,9 @@ const (
 	LaunchProfileStatusCodeInvalidSubnetsCombination                 LaunchProfileStatusCode = "INVALID_SUBNETS_COMBINATION"
 )
 
-// Values returns all known values for LaunchProfileStatusCode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LaunchProfileStatusCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfileStatusCode) Values() []LaunchProfileStatusCode {
 	return []LaunchProfileStatusCode{
 		"LAUNCH_PROFILE_CREATED",
@@ -196,10 +196,9 @@ const (
 	LaunchProfileValidationTypeValidateSecurityGroupAssociation       LaunchProfileValidationType = "VALIDATE_SECURITY_GROUP_ASSOCIATION"
 )
 
-// Values returns all known values for LaunchProfileValidationType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for LaunchProfileValidationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfileValidationType) Values() []LaunchProfileValidationType {
 	return []LaunchProfileValidationType{
 		"VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT",
@@ -467,10 +466,9 @@ const (
 	StreamingSessionStorageModeUpload StreamingSessionStorageMode = "UPLOAD"
 )
 
-// Values returns all known values for StreamingSessionStorageMode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for StreamingSessionStorageMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingSessionStorageMode) Values() []StreamingSessionStorageMode {
 	return []StreamingSessionStorageMode{
 		"UPLOAD",
@@ -489,10 +487,9 @@ const (
 	StreamingSessionStreamStateDeleteFailed     StreamingSessionStreamState = "DELETE_FAILED"
 )
 
-// Values returns all known values for StreamingSessionStreamState. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for StreamingSessionStreamState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingSessionStreamState) Values() []StreamingSessionStreamState {
 	return []StreamingSessionStreamState{
 		"READY",
@@ -516,8 +513,8 @@ const (
 	StreamingSessionStreamStatusCodeNetworkConnectionError StreamingSessionStreamStatusCode = "NETWORK_CONNECTION_ERROR"
 )
 
-// Values returns all known values for StreamingSessionStreamStatusCode. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for StreamingSessionStreamStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (StreamingSessionStreamStatusCode) Values() []StreamingSessionStreamStatusCode {
@@ -564,8 +561,8 @@ const (
 	StudioComponentStateUpdateFailed     StudioComponentState = "UPDATE_FAILED"
 )
 
-// Values returns all known values for StudioComponentState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StudioComponentState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StudioComponentState) Values() []StudioComponentState {
 	return []StudioComponentState{
@@ -709,9 +706,9 @@ const (
 	StudioStateUpdateFailed     StudioState = "UPDATE_FAILED"
 )
 
-// Values returns all known values for StudioState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StudioState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StudioState) Values() []StudioState {
 	return []StudioState{
 		"CREATE_IN_PROGRESS",

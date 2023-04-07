@@ -93,9 +93,9 @@ const (
 	CheckStatusFetchFailed  CheckStatus = "FETCH_FAILED"
 )
 
-// Values returns all known values for CheckStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CheckStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (CheckStatus) Values() []CheckStatus {
 	return []CheckStatus{
 		"OKAY",
@@ -243,9 +243,9 @@ const (
 	LensTypeCustomSelf   LensType = "CUSTOM_SELF"
 )
 
-// Values returns all known values for LensType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LensType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (LensType) Values() []LensType {
 	return []LensType{
 		"AWS_OFFICIAL",
@@ -332,9 +332,9 @@ const (
 	ReportFormatJson ReportFormat = "JSON"
 )
 
-// Values returns all known values for ReportFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ReportFormat) Values() []ReportFormat {
 	return []ReportFormat{
 		"PDF",
@@ -353,8 +353,8 @@ const (
 	RiskNotApplicable Risk = "NOT_APPLICABLE"
 )
 
-// Values returns all known values for Risk. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Risk. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Risk) Values() []Risk {
 	return []Risk{
@@ -416,9 +416,9 @@ const (
 	ShareStatusFailed      ShareStatus = "FAILED"
 )
 
-// Values returns all known values for ShareStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ShareStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ShareStatus) Values() []ShareStatus {
 	return []ShareStatus{
 		"ACCEPTED",

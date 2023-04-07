@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the configured contact methods. Specify a protocol
-// in your request to return information about a specific contact method. A contact
+// Returns information about the configured contact methods. Specify a protocol in
+// your request to return information about a specific contact method. A contact
 // method is used to send you notifications about your Amazon Lightsail resources.
 // You can add one email address and one mobile phone number contact method in each
 // Amazon Web Services Region. However, SMS text messaging is not supported in some

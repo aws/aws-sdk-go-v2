@@ -82,9 +82,9 @@ type Cell struct {
 	noSmithyDocumentSerde
 }
 
-// CellInput object contains the data needed to create or update cells in a
-// table. CellInput object has only a facts field or a fact field, but not both. A
-// 400 bad request will be thrown if both fact and facts field are present.
+// CellInput object contains the data needed to create or update cells in a table.
+// CellInput object has only a facts field or a fact field, but not both. A 400 bad
+// request will be thrown if both fact and facts field are present.
 type CellInput struct {
 
 	// Fact represents the data that is entered into a cell. This data can be free
@@ -127,8 +127,8 @@ type CreateRowData struct {
 	// This member is required.
 	BatchItemId *string
 
-	// A map representing the cells to create in the new row. The key is the column
-	// id of the cell and the value is the CellInput object that represents the data to
+	// A map representing the cells to create in the new row. The key is the column id
+	// of the cell and the value is the CellInput object that represents the data to
 	// set in that cell.
 	//
 	// This member is required.
@@ -206,8 +206,8 @@ type FailedBatchItem struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents a filter formula along with the id of the context
-// row under which the filter function needs to evaluate.
+// An object that represents a filter formula along with the id of the context row
+// under which the filter function needs to evaluate.
 type Filter struct {
 
 	// A formula representing a filter function that returns zero or more matching
@@ -439,11 +439,11 @@ type UpsertRowData struct {
 	// This member is required.
 	CellsToUpdate map[string]CellInput
 
-	// The filter formula to use to find existing matching rows to update. The
-	// formula needs to return zero or more rows. If the formula returns 0 rows, then a
-	// new row will be appended in the target table. If the formula returns one or more
-	// rows, then the returned rows will be updated. Note that the filter formula needs
-	// to return rows from the target table for the upsert operation to succeed. If the
+	// The filter formula to use to find existing matching rows to update. The formula
+	// needs to return zero or more rows. If the formula returns 0 rows, then a new row
+	// will be appended in the target table. If the formula returns one or more rows,
+	// then the returned rows will be updated. Note that the filter formula needs to
+	// return rows from the target table for the upsert operation to succeed. If the
 	// filter formula has a syntax error or it doesn't evaluate to zero or more rows in
 	// the target table for any one item in the input list, then the entire
 	// BatchUpsertTableRows request fails and no updates are made to the table.

@@ -13,7 +13,7 @@ type ConfigParameter struct {
 
 	// The key of the parameter. The options are auto_mv , datestyle ,
 	// enable_case_sensitivity_identifier , enable_user_activity_logging , query_group
-	// , search_path, and query monitoring metrics that let you define performance
+	// , search_path , and query monitoring metrics that let you define performance
 	// boundaries. For more information about query monitoring rules and available
 	// metrics, see Query monitoring metrics for Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
 	// .
@@ -34,7 +34,7 @@ type Endpoint struct {
 	// The port that Amazon Redshift Serverless listens on.
 	Port *int32
 
-	// An array of VpcEndpoint  objects.
+	// An array of VpcEndpoint objects.
 	VpcEndpoints []VpcEndpoint
 
 	noSmithyDocumentSerde
@@ -124,8 +124,8 @@ type Namespace struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a network interface in an Amazon Redshift
-// Serverless managed VPC endpoint.
+// Contains information about a network interface in an Amazon Redshift Serverless
+// managed VPC endpoint.
 type NetworkInterface struct {
 
 	// The availability Zone.
@@ -253,8 +253,8 @@ type Snapshot struct {
 // Contains information about a table restore request.
 type TableRestoreStatus struct {
 
-	// A description of the status of the table restore request. Status values
-	// include SUCCEEDED , FAILED , CANCELED , PENDING , IN_PROGRESS .
+	// A description of the status of the table restore request. Status values include
+	// SUCCEEDED , FAILED , CANCELED , PENDING , IN_PROGRESS .
 	Message *string
 
 	// The namespace of the table being restored from.
@@ -266,8 +266,8 @@ type TableRestoreStatus struct {
 	// The amount of data restored to the new table so far, in megabytes (MB).
 	ProgressInMegaBytes *int64
 
-	// The time that the table restore request was made, in Universal Coordinated
-	// Time (UTC).
+	// The time that the table restore request was made, in Universal Coordinated Time
+	// (UTC).
 	RequestTime *time.Time
 
 	// The name of the snapshot being restored from.
@@ -282,8 +282,8 @@ type TableRestoreStatus struct {
 	// The name of the source table being restored from.
 	SourceTableName *string
 
-	// A value that describes the current state of the table restore request.
-	// Possible values include SUCCEEDED , FAILED , CANCELED , PENDING , IN_PROGRESS .
+	// A value that describes the current state of the table restore request. Possible
+	// values include SUCCEEDED , FAILED , CANCELED , PENDING , IN_PROGRESS .
 	Status *string
 
 	// The ID of the RestoreTableFromSnapshot request.
@@ -387,9 +387,9 @@ type Workgroup struct {
 	// (RPUs).
 	BaseCapacity *int32
 
-	// An array of parameters to set for advanced control over a database. The
-	// options are auto_mv , datestyle , enable_case_sensitivity_identifier ,
-	// enable_user_activity_logging , query_group , , search_path, and query
+	// An array of parameters to set for advanced control over a database. The options
+	// are auto_mv , datestyle , enable_case_sensitivity_identifier ,
+	// enable_user_activity_logging , query_group , , search_path , and query
 	// monitoring metrics that let you define performance boundaries. For more
 	// information about query monitoring rules and available metrics, see Query
 	// monitoring metrics for Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
@@ -402,9 +402,9 @@ type Workgroup struct {
 	// The endpoint that is created from the workgroup.
 	Endpoint *Endpoint
 
-	// The value that specifies whether to enable enhanced virtual private cloud
-	// (VPC) routing, which forces Amazon Redshift Serverless to route traffic through
-	// your VPC.
+	// The value that specifies whether to enable enhanced virtual private cloud (VPC)
+	// routing, which forces Amazon Redshift Serverless to route traffic through your
+	// VPC.
 	EnhancedVpcRouting *bool
 
 	// The namespace the workgroup is associated with.

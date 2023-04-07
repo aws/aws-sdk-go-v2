@@ -75,7 +75,7 @@ type DescribeProvisioningTemplateOutput struct {
 
 	// The type you define in a provisioning template. You can create a template with
 	// only one type. You can't change the template type after its creation. The
-	// default value is FLEET_PROVISIONING. For more information about provisioning
+	// default value is FLEET_PROVISIONING . For more information about provisioning
 	// template, see: Provisioning template (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html)
 	// .
 	Type types.TemplateType

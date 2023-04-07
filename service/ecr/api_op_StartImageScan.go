@@ -32,8 +32,7 @@ func (c *Client) StartImageScan(ctx context.Context, params *StartImageScanInput
 
 type StartImageScanInput struct {
 
-	// An object with identifying information for an image in an Amazon ECR
-	// repository.
+	// An object with identifying information for an image in an Amazon ECR repository.
 	//
 	// This member is required.
 	ImageId *types.ImageIdentifier
@@ -53,8 +52,7 @@ type StartImageScanInput struct {
 
 type StartImageScanOutput struct {
 
-	// An object with identifying information for an image in an Amazon ECR
-	// repository.
+	// An object with identifying information for an image in an Amazon ECR repository.
 	ImageId *types.ImageIdentifier
 
 	// The current state of the scan.

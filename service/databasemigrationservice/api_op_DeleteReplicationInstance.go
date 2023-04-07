@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified replication instance. You must delete any migration
-// tasks that are associated with the replication instance before you can delete
-// it.
+// Deletes the specified replication instance. You must delete any migration tasks
+// that are associated with the replication instance before you can delete it.
 func (c *Client) DeleteReplicationInstance(ctx context.Context, params *DeleteReplicationInstanceInput, optFns ...func(*Options)) (*DeleteReplicationInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteReplicationInstanceInput{}

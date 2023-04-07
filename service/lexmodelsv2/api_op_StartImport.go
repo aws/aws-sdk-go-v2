@@ -38,9 +38,9 @@ type StartImportInput struct {
 	// This member is required.
 	ImportId *string
 
-	// The strategy to use when there is a name conflict between the imported
-	// resource and an existing resource. When the merge strategy is FailOnConflict
-	// existing resources are not overwritten and the import fails.
+	// The strategy to use when there is a name conflict between the imported resource
+	// and an existing resource. When the merge strategy is FailOnConflict existing
+	// resources are not overwritten and the import fails.
 	//
 	// This member is required.
 	MergeStrategy types.MergeStrategy

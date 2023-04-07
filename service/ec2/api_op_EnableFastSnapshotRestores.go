@@ -14,7 +14,7 @@ import (
 // Enables fast snapshot restores for the specified snapshots in the specified
 // Availability Zones. You get the full benefit of fast snapshot restores after
 // they enter the enabled state. To get the current state of fast snapshot
-// restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores,
+// restores, use DescribeFastSnapshotRestores . To disable fast snapshot restores,
 // use DisableFastSnapshotRestores . For more information, see Amazon EBS fast
 // snapshot restore (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-fast-snapshot-restore.html)
 // in the Amazon Elastic Compute Cloud User Guide.
@@ -40,7 +40,7 @@ type EnableFastSnapshotRestoresInput struct {
 	// This member is required.
 	AvailabilityZones []string
 
-	// The IDs of one or more snapshots. For example, snap-1234567890abcdef0. You can
+	// The IDs of one or more snapshots. For example, snap-1234567890abcdef0 . You can
 	// specify a snapshot that was shared with you from another Amazon Web Services
 	// account.
 	//

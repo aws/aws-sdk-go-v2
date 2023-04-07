@@ -12,12 +12,12 @@ import (
 	"time"
 )
 
-// Deletes the specified index and turns off Amazon Web Services Resource
-// Explorer in the specified Amazon Web Services Region. When you delete an index,
-// Resource Explorer stops discovering and indexing resources in that Region.
-// Resource Explorer also deletes all views in that Region. These actions occur as
+// Deletes the specified index and turns off Amazon Web Services Resource Explorer
+// in the specified Amazon Web Services Region. When you delete an index, Resource
+// Explorer stops discovering and indexing resources in that Region. Resource
+// Explorer also deletes all views in that Region. These actions occur as
 // asynchronous background tasks. You can check to see when the actions are
-// complete by using the GetIndex  operation and checking the Status response
+// complete by using the GetIndex operation and checking the Status response
 // value. If the index you delete is the aggregator index for the Amazon Web
 // Services account, you must wait 24 hours before you can promote another local
 // index to be the aggregator index for the account. Users can't perform
@@ -53,7 +53,7 @@ type DeleteIndexOutput struct {
 
 	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the index that you successfully started the deletion process. This operation
-	// is asynchronous. To check its status, call the GetIndex  operation.
+	// is asynchronous. To check its status, call the GetIndex operation.
 	Arn *string
 
 	// The date and time when you last updated this index.

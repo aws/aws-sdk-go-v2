@@ -41,9 +41,9 @@ type DescribeScheduledAuditInput struct {
 
 type DescribeScheduledAuditOutput struct {
 
-	// The day of the month on which the scheduled audit takes place. This is will be
-	// 1 through 31  or LAST . If days 29 - 31 are specified, and the month does not
-	// have that many days, the audit takes place on the LAST  day of the month.
+	// The day of the month on which the scheduled audit takes place. This is will be 1
+	// through 31 or LAST . If days 29 - 31 are specified, and the month does not have
+	// that many days, the audit takes place on the LAST day of the month.
 	DayOfMonth *string
 
 	// The day of the week on which the scheduled audit takes place, either one of SUN
@@ -51,8 +51,7 @@ type DescribeScheduledAuditOutput struct {
 	DayOfWeek types.DayOfWeek
 
 	// How often the scheduled audit takes place, either one of DAILY , WEEKLY ,
-	// BIWEEKLY , or MONTHLY. The start time of each audit is determined by the
-	// system.
+	// BIWEEKLY , or MONTHLY . The start time of each audit is determined by the system.
 	Frequency types.AuditFrequency
 
 	// The ARN of the scheduled audit.
@@ -62,9 +61,9 @@ type DescribeScheduledAuditOutput struct {
 	ScheduledAuditName *string
 
 	// Which checks are performed during the scheduled audit. Checks must be enabled
-	// for your account. (Use DescribeAccountAuditConfiguration to see the list of
-	// all checks, including those that are enabled or use
-	// UpdateAccountAuditConfiguration to select which checks are enabled.)
+	// for your account. (Use DescribeAccountAuditConfiguration to see the list of all
+	// checks, including those that are enabled or use UpdateAccountAuditConfiguration
+	// to select which checks are enabled.)
 	TargetCheckNames []string
 
 	// Metadata pertaining to the operation's result.

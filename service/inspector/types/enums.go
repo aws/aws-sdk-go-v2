@@ -41,9 +41,9 @@ const (
 	AgentHealthUnknown   AgentHealth = "UNKNOWN"
 )
 
-// Values returns all known values for AgentHealth. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AgentHealth. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AgentHealth) Values() []AgentHealth {
 	return []AgentHealth{
 		"HEALTHY",
@@ -215,8 +215,8 @@ const (
 	InvalidCrossAccountRoleErrorCodeRoleDoesNotHaveCorrectPolicy               InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_HAVE_CORRECT_POLICY"
 )
 
-// Values returns all known values for InvalidCrossAccountRoleErrorCode. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for InvalidCrossAccountRoleErrorCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (InvalidCrossAccountRoleErrorCode) Values() []InvalidCrossAccountRoleErrorCode {
@@ -521,9 +521,9 @@ const (
 	SeverityUndefined     Severity = "Undefined"
 )
 
-// Values returns all known values for Severity. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Severity. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Severity) Values() []Severity {
 	return []Severity{
 		"Low",

@@ -18,8 +18,10 @@ import (
 // The following parameters are required when creating a new predictor:
 //   - PredictorName - A unique name for the predictor.
 //   - DatasetGroupArn - The ARN of the dataset group used to train the predictor.
-//   - ForecastFrequency - The granularity of your forecasts (hourly, daily, weekly, etc).
-//   - ForecastHorizon - The number of time-steps that the model predicts. The forecast horizon is also called the prediction length.
+//   - ForecastFrequency - The granularity of your forecasts (hourly, daily,
+//     weekly, etc).
+//   - ForecastHorizon - The number of time-steps that the model predicts. The
+//     forecast horizon is also called the prediction length.
 //
 // When creating a new predictor, do not specify a value for ReferencePredictorArn
 // . Upgrading and retraining predictors The following parameters are required when
@@ -54,9 +56,9 @@ type CreateAutoPredictorInput struct {
 	// The data configuration for your dataset group and any additional datasets.
 	DataConfig *types.DataConfig
 
-	// An Key Management Service (KMS) key and an Identity and Access Management
-	// (IAM) role that Amazon Forecast can assume to access the key. You can specify
-	// this optional object in the CreateDataset  and CreatePredictor  requests.
+	// An Key Management Service (KMS) key and an Identity and Access Management (IAM)
+	// role that Amazon Forecast can assume to access the key. You can specify this
+	// optional object in the CreateDataset and CreatePredictor requests.
 	EncryptionConfig *types.EncryptionConfig
 
 	// Create an Explainability resource for the predictor.
@@ -64,7 +66,7 @@ type CreateAutoPredictorInput struct {
 
 	// An array of dimension (field) names that specify how to group the generated
 	// forecast. For example, if you are generating forecasts for item sales across all
-	// your stores, and your dataset contains a store_id  field, you would specify
+	// your stores, and your dataset contains a store_id field, you would specify
 	// store_id as a dimension to group sales forecasts for each store.
 	ForecastDimensions []string
 
@@ -75,17 +77,17 @@ type CreateAutoPredictorInput struct {
 	// That means, for example, you cannot specify a frequency of 60 minutes, because
 	// that is equivalent to 1 hour. The valid values for each frequency are the
 	// following:
-	//     - Minute - 1-59
-	//     - Hour - 1-23
-	//     - Day - 1-6
-	//     - Week - 1-4
-	//     - Month - 1-11
-	//     - Year - 1
-	// Thus, if you want every other week forecasts, specify "2W". Or,
-	// if you want quarterly forecasts, you specify "3M". The frequency must be greater
-	// than or equal to the TARGET_TIME_SERIES dataset frequency. When a
-	// RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the
-	// RELATED_TIME_SERIES dataset frequency.
+	//   - Minute - 1-59
+	//   - Hour - 1-23
+	//   - Day - 1-6
+	//   - Week - 1-4
+	//   - Month - 1-11
+	//   - Year - 1
+	// Thus, if you want every other week forecasts, specify "2W". Or, if you want
+	// quarterly forecasts, you specify "3M". The frequency must be greater than or
+	// equal to the TARGET_TIME_SERIES dataset frequency. When a RELATED_TIME_SERIES
+	// dataset is provided, the frequency must be equal to the RELATED_TIME_SERIES
+	// dataset frequency.
 	ForecastFrequency *string
 
 	// The number of time-steps that the model predicts. The forecast horizon is also
@@ -116,19 +118,27 @@ type CreateAutoPredictorInput struct {
 	// The ARN of the predictor to retrain or upgrade. This parameter is only used
 	// when retraining or upgrading a predictor. When creating a new predictor, do not
 	// specify a value for this parameter. When upgrading or retraining a predictor,
-	// only specify values for the ReferencePredictorArn  and PredictorName. The
-	// value for PredictorName  must be a unique predictor name.
+	// only specify values for the ReferencePredictorArn and PredictorName . The value
+	// for PredictorName must be a unique predictor name.
 	ReferencePredictorArn *string
 
-	// Optional metadata to help you categorize and organize your predictors. Each
-	// tag consists of a key and an optional value, both of which you define. Tag keys
-	// and values are case sensitive. The following restrictions apply to tags:
-	//     - For each resource, each tag key must be unique and each tag key must have one value.
-	//     - Maximum number of tags per resource: 50.
-	//     - Maximum key length: 128 Unicode characters in UTF-8.
-	//     - Maximum value length: 256 Unicode characters in UTF-8.
-	//     - Accepted characters: all letters and numbers, spaces representable in UTF-8, and + - = . _ : / @. If your tagging schema is used across other services and resources, the character restrictions of those services also apply.
-	//     - Key prefixes cannot include any upper or lowercase combination of aws: or AWS: . Values can have this prefix. If a tag value has aws as its prefix but the key does not, Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit. You cannot edit or delete tag keys with this prefix.
+	// Optional metadata to help you categorize and organize your predictors. Each tag
+	// consists of a key and an optional value, both of which you define. Tag keys and
+	// values are case sensitive. The following restrictions apply to tags:
+	//   - For each resource, each tag key must be unique and each tag key must have
+	//   one value.
+	//   - Maximum number of tags per resource: 50.
+	//   - Maximum key length: 128 Unicode characters in UTF-8.
+	//   - Maximum value length: 256 Unicode characters in UTF-8.
+	//   - Accepted characters: all letters and numbers, spaces representable in
+	//   UTF-8, and + - = . _ : / @. If your tagging schema is used across other services
+	//   and resources, the character restrictions of those services also apply.
+	//   - Key prefixes cannot include any upper or lowercase combination of aws: or
+	//   AWS: . Values can have this prefix. If a tag value has aws as its prefix but
+	//   the key does not, Forecast considers it to be a user tag and will count against
+	//   the limit of 50 tags. Tags with only the key prefix of aws do not count
+	//   against your tags per resource limit. You cannot edit or delete tag keys with
+	//   this prefix.
 	Tags []types.Tag
 
 	// The time boundary Forecast uses to align and aggregate any data that doesn't

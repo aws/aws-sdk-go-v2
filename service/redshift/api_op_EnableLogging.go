@@ -39,11 +39,11 @@ type EnableLoggingInput struct {
 
 	// The name of an existing S3 bucket where the log files are to be stored.
 	// Constraints:
-	//     - Must be in the same region as the cluster
-	//     - The cluster must have read bucket and put object permissions
+	//   - Must be in the same region as the cluster
+	//   - The cluster must have read bucket and put object permissions
 	BucketName *string
 
-	// The log destination type. An enum with possible values of s3  and cloudwatch .
+	// The log destination type. An enum with possible values of s3 and cloudwatch .
 	LogDestinationType types.LogDestinationType
 
 	// The collection of exported log types. Possible values are connectionlog ,
@@ -51,13 +51,14 @@ type EnableLoggingInput struct {
 	LogExports []string
 
 	// The prefix applied to the log file names. Constraints:
-	//     - Cannot exceed 512 characters
-	//     - Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash (\), or control characters. The hexadecimal codes for invalid characters are:
-	//         - x00 to x20
-	//         - x22
-	//         - x27
-	//         - x5c
-	//         - x7f or larger
+	//   - Cannot exceed 512 characters
+	//   - Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash
+	//   (\), or control characters. The hexadecimal codes for invalid characters are:
+	//   - x00 to x20
+	//   - x22
+	//   - x27
+	//   - x5c
+	//   - x7f or larger
 	S3KeyPrefix *string
 
 	noSmithyDocumentSerde
@@ -78,14 +79,14 @@ type EnableLoggingOutput struct {
 	// The last time that logs were delivered.
 	LastSuccessfulDeliveryTime *time.Time
 
-	// The log destination type. An enum with possible values of s3  and cloudwatch .
+	// The log destination type. An enum with possible values of s3 and cloudwatch .
 	LogDestinationType types.LogDestinationType
 
 	// The collection of exported log types. Possible values are connectionlog ,
 	// useractivitylog , and userlog .
 	LogExports []string
 
-	// true  if logging is on, false  if logging is off.
+	// true if logging is on, false if logging is off.
 	LoggingEnabled bool
 
 	// The prefix applied to the log file names.

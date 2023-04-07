@@ -42,8 +42,8 @@ type UpdateConditionalForwarderInput struct {
 	// This member is required.
 	DnsIpAddrs []string
 
-	// The fully qualified domain name (FQDN) of the remote domain with which you
-	// will set up a trust relationship.
+	// The fully qualified domain name (FQDN) of the remote domain with which you will
+	// set up a trust relationship.
 	//
 	// This member is required.
 	RemoteDomainName *string

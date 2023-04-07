@@ -37,8 +37,7 @@ func (c *Client) DescribeCustomerGateways(ctx context.Context, params *DescribeC
 // Contains the parameters for DescribeCustomerGateways.
 type DescribeCustomerGatewaysInput struct {
 
-	// One or more customer gateway IDs. Default: Describes all your customer
-	// gateways.
+	// One or more customer gateway IDs. Default: Describes all your customer gateways.
 	CustomerGatewayIds []string
 
 	// Checks whether you have the required permissions for the action, without
@@ -48,13 +47,21 @@ type DescribeCustomerGatewaysInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//     - bgp-asn - The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).
-	//     - customer-gateway-id - The ID of the customer gateway.
-	//     - ip-address - The IP address of the customer gateway device's external interface.
-	//     - state - The state of the customer gateway ( pending | available | deleting | deleted ).
-	//     - type - The type of customer gateway. Currently, the only supported type is ipsec.1 .
-	//     - tag : - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
-	//     - tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - bgp-asn - The customer gateway's Border Gateway Protocol (BGP) Autonomous
+	//   System Number (ASN).
+	//   - customer-gateway-id - The ID of the customer gateway.
+	//   - ip-address - The IP address of the customer gateway device's external
+	//   interface.
+	//   - state - The state of the customer gateway ( pending | available | deleting |
+	//   deleted ).
+	//   - type - The type of customer gateway. Currently, the only supported type is
+	//   ipsec.1 .
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
 	Filters []types.Filter
 
 	noSmithyDocumentSerde
@@ -205,10 +212,10 @@ func (w *CustomerGatewayAvailableWaiter) Wait(ctx context.Context, params *Descr
 	return err
 }
 
-// WaitForOutput calls the waiter function for CustomerGatewayAvailable waiter
-// and returns the output of the successful operation. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// WaitForOutput calls the waiter function for CustomerGatewayAvailable waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *CustomerGatewayAvailableWaiter) WaitForOutput(ctx context.Context, params *DescribeCustomerGatewaysInput, maxWaitDur time.Duration, optFns ...func(*CustomerGatewayAvailableWaiterOptions)) (*DescribeCustomerGatewaysOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

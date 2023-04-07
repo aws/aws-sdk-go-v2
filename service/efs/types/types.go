@@ -25,7 +25,7 @@ type AccessPointDescription struct {
 	// Identifies the lifecycle phase of the access point.
 	LifeCycleState LifeCycleState
 
-	// The name of the access point. This is the value of the Name  tag.
+	// The name of the access point. This is the value of the Name tag.
 	Name *string
 
 	// Identifies the Amazon Web Services account that owns the access point resource.
@@ -40,24 +40,23 @@ type AccessPointDescription struct {
 	// the root directory to NFS clients using the access point.
 	RootDirectory *RootDirectory
 
-	// The tags associated with the access point, presented as an array of Tag
-	// objects.
+	// The tags associated with the access point, presented as an array of Tag objects.
 	Tags []Tag
 
 	noSmithyDocumentSerde
 }
 
 // The backup policy for the file system used to create automatic daily backups.
-// If status has a value of ENABLED, the file system is being automatically
-// backed up. For more information, see Automatic backups (https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups)
+// If status has a value of ENABLED , the file system is being automatically backed
+// up. For more information, see Automatic backups (https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups)
 // .
 type BackupPolicy struct {
 
 	// Describes the status of the file system's backup policy.
-	//     - ENABLED - EFS is automatically backing up the file system.
-	//     - ENABLING - EFS is turning on automatic backups for the file system.
-	//     - DISABLED - Automatic back ups are turned off for the file system.
-	//     - DISABLING - EFS is turning off automatic backups for the file system.
+	//   - ENABLED - EFS is automatically backing up the file system.
+	//   - ENABLING - EFS is turning on automatic backups for the file system.
+	//   - DISABLED - Automatic back ups are turned off for the file system.
+	//   - DISABLING - EFS is turning off automatic backups for the file system.
 	//
 	// This member is required.
 	Status Status
@@ -65,11 +64,11 @@ type BackupPolicy struct {
 	noSmithyDocumentSerde
 }
 
-// Required if the RootDirectory  > Path specified does not exist. Specifies the
-// POSIX IDs and permissions to apply to the access point's RootDirectory  > Path
-// . If the access point root directory does not exist, EFS creates it with these
+// Required if the RootDirectory > Path specified does not exist. Specifies the
+// POSIX IDs and permissions to apply to the access point's RootDirectory > Path .
+// If the access point root directory does not exist, EFS creates it with these
 // settings when a client connects to the access point. When specifying
-// CreationInfo, you must include values for all properties. Amazon EFS creates a
+// CreationInfo , you must include values for all properties. Amazon EFS creates a
 // root directory only if you have provided the CreationInfo: OwnUid, OwnGID, and
 // permissions for the directory. If you do not provide this information, Amazon
 // EFS does not create the root directory. If the root directory does not exist,
@@ -78,20 +77,20 @@ type BackupPolicy struct {
 // the file system using the access point will fail.
 type CreationInfo struct {
 
-	// Specifies the POSIX group ID to apply to the RootDirectory. Accepts values
-	// from 0 to 2^32 (4294967295).
+	// Specifies the POSIX group ID to apply to the RootDirectory . Accepts values from
+	// 0 to 2^32 (4294967295).
 	//
 	// This member is required.
 	OwnerGid *int64
 
-	// Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from
+	// Specifies the POSIX user ID to apply to the RootDirectory . Accepts values from
 	// 0 to 2^32 (4294967295).
 	//
 	// This member is required.
 	OwnerUid *int64
 
-	// Specifies the POSIX permissions to apply to the RootDirectory, in the format
-	// of an octal number representing the file's mode bits.
+	// Specifies the POSIX permissions to apply to the RootDirectory , in the format of
+	// an octal number representing the file's mode bits.
 	//
 	// This member is required.
 	Permissions *string
@@ -113,7 +112,7 @@ type Destination struct {
 	Region *string
 
 	// Describes the status of the destination Amazon EFS file system. If the status
-	// is ERROR, the destination file system in the replication configuration is in a
+	// is ERROR , the destination file system in the replication configuration is in a
 	// failed state and is unrecoverable. To access the file system data, restore a
 	// backup of the failed file system to a new file system.
 	//
@@ -134,18 +133,22 @@ type Destination struct {
 // configuration.
 type DestinationToCreate struct {
 
-	// To create a file system that uses EFS One Zone storage, specify the name of
-	// the Availability Zone in which to create the destination file system.
+	// To create a file system that uses EFS One Zone storage, specify the name of the
+	// Availability Zone in which to create the destination file system.
 	AvailabilityZoneName *string
 
 	// Specifies the Key Management Service (KMS) key that you want to use to encrypt
 	// the destination file system. If you do not specify a KMS key, Amazon EFS uses
-	// your default KMS key for Amazon EFS, /aws/elasticfilesystem. This ID can be in
+	// your default KMS key for Amazon EFS, /aws/elasticfilesystem . This ID can be in
 	// one of the following formats:
-	//     - Key ID - The unique identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab .
-	//     - ARN - The Amazon Resource Name (ARN) for the key, for example arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
-	//     - Key alias - A previously created display name for a key, for example alias/projectKey1 .
-	//     - Key alias ARN - The ARN for a key alias, for example arn:aws:kms:us-west-2:444455556666:alias/projectKey1 .
+	//   - Key ID - The unique identifier of the key, for example
+	//   1234abcd-12ab-34cd-56ef-1234567890ab .
+	//   - ARN - The Amazon Resource Name (ARN) for the key, for example
+	//   arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//   - Key alias - A previously created display name for a key, for example
+	//   alias/projectKey1 .
+	//   - Key alias ARN - The ARN for a key alias, for example
+	//   arn:aws:kms:us-west-2:444455556666:alias/projectKey1 .
 	KmsKeyId *string
 
 	// To create a file system that uses Regional storage, specify the Amazon Web
@@ -196,8 +199,8 @@ type FileSystemDescription struct {
 	PerformanceMode PerformanceMode
 
 	// The latest known metered size (in bytes) of data stored in the file system, in
-	// its Value  field, and the time at which that size was determined in its
-	// Timestamp field. The Timestamp value is the integer number of seconds since
+	// its Value field, and the time at which that size was determined in its Timestamp
+	// field. The Timestamp value is the integer number of seconds since
 	// 1970-01-01T00:00:00Z. The SizeInBytes value doesn't represent the size of a
 	// consistent snapshot of the file system, but it is eventually consistent when
 	// there are no writes to the file system. That is, SizeInBytes represents actual
@@ -208,20 +211,20 @@ type FileSystemDescription struct {
 	// This member is required.
 	SizeInBytes *FileSystemSize
 
-	// The tags associated with the file system, presented as an array of Tag  objects.
+	// The tags associated with the file system, presented as an array of Tag objects.
 	//
 	// This member is required.
 	Tags []Tag
 
-	// The unique and consistent identifier of the Availability Zone in which the
-	// file system's One Zone storage classes exist. For example, use1-az1 is an
+	// The unique and consistent identifier of the Availability Zone in which the file
+	// system's One Zone storage classes exist. For example, use1-az1 is an
 	// Availability Zone ID for the us-east-1 Amazon Web Services Region, and it has
 	// the same location in every Amazon Web Services account.
 	AvailabilityZoneId *string
 
-	// Describes the Amazon Web Services Availability Zone in which the file system
-	// is located, and is valid only for file systems using One Zone storage classes.
-	// For more information, see Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
+	// Describes the Amazon Web Services Availability Zone in which the file system is
+	// located, and is valid only for file systems using One Zone storage classes. For
+	// more information, see Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
 	// in the Amazon EFS User Guide.
 	AvailabilityZoneName *string
 
@@ -243,7 +246,7 @@ type FileSystemDescription struct {
 	Name *string
 
 	// The amount of provisioned throughput, measured in MiB/s, for the file system.
-	// Valid for file systems using ThroughputMode  set to provisioned .
+	// Valid for file systems using ThroughputMode set to provisioned .
 	ProvisionedThroughputInMibps *float64
 
 	// Displays the file system's throughput mode. For more information, see
@@ -255,13 +258,12 @@ type FileSystemDescription struct {
 }
 
 // The latest known metered size (in bytes) of data stored in the file system, in
-// its Value  field, and the time at which that size was determined in its
-// Timestampfield. The value doesn't represent the size of a consistent snapshot
-// of the file system, but it is eventually consistent when there are no writes to
-// the file system. That is, the value represents the actual size only if the file
-// system is not modified for a period longer than a couple of hours. Otherwise,
-// the value is not necessarily the exact size the file system was at any instant
-// in time.
+// its Value field, and the time at which that size was determined in its Timestamp
+// field. The value doesn't represent the size of a consistent snapshot of the file
+// system, but it is eventually consistent when there are no writes to the file
+// system. That is, the value represents the actual size only if the file system is
+// not modified for a period longer than a couple of hours. Otherwise, the value is
+// not necessarily the exact size the file system was at any instant in time.
 type FileSystemSize struct {
 
 	// The latest known metered size (in bytes) of data stored in the file system.
@@ -278,24 +280,24 @@ type FileSystemSize struct {
 	// Access storage class.
 	ValueInIA *int64
 
-	// The latest known metered size (in bytes) of data stored in the Standard
-	// storage class.
+	// The latest known metered size (in bytes) of data stored in the Standard storage
+	// class.
 	ValueInStandard *int64
 
 	noSmithyDocumentSerde
 }
 
-// Describes a policy used by EFS lifecycle management and EFS
-// Intelligent-Tiering that specifies when to transition files into and out of the
-// file system's Infrequent Access (IA) storage class. For more information, see
-// EFS Intelligent‐Tiering and EFS Lifecycle Management (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html)
-// . When using the put-lifecycle-configuration  CLI command or the
+// Describes a policy used by EFS lifecycle management and EFS Intelligent-Tiering
+// that specifies when to transition files into and out of the file system's
+// Infrequent Access (IA) storage class. For more information, see EFS
+// Intelligent‐Tiering and EFS Lifecycle Management (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html)
+// . When using the put-lifecycle-configuration CLI command or the
 // PutLifecycleConfiguration API action, Amazon EFS requires that each
-// LifecyclePolicyobject have only a single transition. This means that in a
-// request body, LifecyclePolicies  must be structured as an array of
+// LifecyclePolicy object have only a single transition. This means that in a
+// request body, LifecyclePolicies must be structured as an array of
 // LifecyclePolicy objects, one object for each transition, TransitionToIA ,
-// TransitionToPrimaryStorageClass. For more information, see the request
-// examples in PutLifecycleConfiguration .
+// TransitionToPrimaryStorageClass . For more information, see the request examples
+// in PutLifecycleConfiguration .
 type LifecyclePolicy struct {
 
 	// Describes the period of time that a file is not accessed, after which it
@@ -341,9 +343,9 @@ type MountTargetDescription struct {
 
 	// The name of the Availability Zone in which the mount target is located.
 	// Availability Zones are independently mapped to names for each Amazon Web
-	// Services account. For example, the Availability Zone us-east-1a for your
-	// Amazon Web Services account might not be the same location as us-east-1a for
-	// another Amazon Web Services account.
+	// Services account. For example, the Availability Zone us-east-1a for your Amazon
+	// Web Services account might not be the same location as us-east-1a for another
+	// Amazon Web Services account.
 	AvailabilityZoneName *string
 
 	// Address at which the file system can be mounted by using the mount target.
@@ -377,8 +379,8 @@ type PosixUser struct {
 	// This member is required.
 	Uid *int64
 
-	// Secondary POSIX group IDs used for all file system operations using this
-	// access point.
+	// Secondary POSIX group IDs used for all file system operations using this access
+	// point.
 	SecondaryGids []int64
 
 	noSmithyDocumentSerde
@@ -396,8 +398,8 @@ type ReplicationConfigurationDescription struct {
 	// This member is required.
 	Destinations []Destination
 
-	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system
-	// in the replication configuration.
+	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system in
+	// the replication configuration.
 	//
 	// This member is required.
 	OriginalSourceFileSystemArn *string
@@ -426,12 +428,12 @@ type ReplicationConfigurationDescription struct {
 // Services account, in the current Amazon Web Services Region.
 type ResourceIdPreference struct {
 
-	// Identifies the EFS resource ID preference, either LONG_ID  (17 characters) or
+	// Identifies the EFS resource ID preference, either LONG_ID (17 characters) or
 	// SHORT_ID (8 characters).
 	ResourceIdType ResourceIdType
 
-	// Identifies the Amazon EFS resources to which the ID preference setting
-	// applies, FILE_SYSTEM  and MOUNT_TARGET .
+	// Identifies the Amazon EFS resources to which the ID preference setting applies,
+	// FILE_SYSTEM and MOUNT_TARGET .
 	Resources []Resource
 
 	noSmithyDocumentSerde
@@ -445,12 +447,12 @@ type ResourceIdPreference struct {
 type RootDirectory struct {
 
 	// (Optional) Specifies the POSIX IDs and permissions to apply to the access
-	// point's RootDirectory . If the RootDirectory  > Path specified does not exist,
+	// point's RootDirectory . If the RootDirectory > Path specified does not exist,
 	// EFS creates the root directory using the CreationInfo settings when a client
-	// connects to an access point. When specifying the CreationInfo, you must
-	// provide values for all properties. If you do not provide CreationInfo and the
-	// specified RootDirectory  > Path does not exist, attempts to mount the file
-	// system using the access point will fail.
+	// connects to an access point. When specifying the CreationInfo , you must provide
+	// values for all properties. If you do not provide CreationInfo and the specified
+	// RootDirectory > Path does not exist, attempts to mount the file system using
+	// the access point will fail.
 	CreationInfo *CreationInfo
 
 	// Specifies the path on the EFS file system to expose as the root directory to
@@ -463,7 +465,7 @@ type RootDirectory struct {
 }
 
 // A tag is a key-value pair. Allowed characters are letters, white space, and
-// numbers that can be represented in UTF-8, and the following characters:+ - = .
+// numbers that can be represented in UTF-8, and the following characters: + - = .
 // _ : / .
 type Tag struct {
 

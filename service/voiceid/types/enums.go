@@ -92,10 +92,9 @@ const (
 	DuplicateRegistrationActionRegisterAsNew DuplicateRegistrationAction = "REGISTER_AS_NEW"
 )
 
-// Values returns all known values for DuplicateRegistrationAction. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for DuplicateRegistrationAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DuplicateRegistrationAction) Values() []DuplicateRegistrationAction {
 	return []DuplicateRegistrationAction{
 		"SKIP",
@@ -129,8 +128,8 @@ const (
 	FraudDetectionActionFail   FraudDetectionAction = "FAIL"
 )
 
-// Values returns all known values for FraudDetectionAction. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FraudDetectionAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FraudDetectionAction) Values() []FraudDetectionAction {
 	return []FraudDetectionAction{
@@ -167,8 +166,8 @@ const (
 	FraudDetectionReasonVoiceSpoofing  FraudDetectionReason = "VOICE_SPOOFING"
 )
 
-// Values returns all known values for FraudDetectionReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FraudDetectionReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FraudDetectionReason) Values() []FraudDetectionReason {
 	return []FraudDetectionReason{
@@ -239,8 +238,8 @@ const (
 	ServerSideEncryptionUpdateStatusFailed     ServerSideEncryptionUpdateStatus = "FAILED"
 )
 
-// Values returns all known values for ServerSideEncryptionUpdateStatus. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for ServerSideEncryptionUpdateStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ServerSideEncryptionUpdateStatus) Values() []ServerSideEncryptionUpdateStatus {

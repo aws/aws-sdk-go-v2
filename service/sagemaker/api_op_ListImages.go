@@ -13,9 +13,9 @@ import (
 	"time"
 )
 
-// Lists the images in your account and their properties. The list can be
-// filtered by creation time or modified time, and whether the image name contains
-// a specified string.
+// Lists the images in your account and their properties. The list can be filtered
+// by creation time or modified time, and whether the image name contains a
+// specified string.
 func (c *Client) ListImages(ctx context.Context, params *ListImagesInput, optFns ...func(*Options)) (*ListImagesOutput, error) {
 	if params == nil {
 		params = &ListImagesInput{}
@@ -45,8 +45,7 @@ type ListImagesInput struct {
 	// A filter that returns only images modified on or before the specified time.
 	LastModifiedTimeBefore *time.Time
 
-	// The maximum number of images to return in the response. The default value is
-	// 10.
+	// The maximum number of images to return in the response. The default value is 10.
 	MaxResults *int32
 
 	// A filter that returns only images whose name contains the specified string.
@@ -148,12 +147,11 @@ var _ ListImagesAPIClient = (*Client)(nil)
 
 // ListImagesPaginatorOptions is the paginator options for ListImages
 type ListImagesPaginatorOptions struct {
-	// The maximum number of images to return in the response. The default value is
-	// 10.
+	// The maximum number of images to return in the response. The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

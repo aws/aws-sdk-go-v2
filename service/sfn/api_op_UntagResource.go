@@ -28,8 +28,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) for the Step Functions state machine or
-	// activity.
+	// The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
 	//
 	// This member is required.
 	ResourceArn *string

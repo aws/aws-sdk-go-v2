@@ -39,8 +39,8 @@ type GetChannelPolicyInput struct {
 
 type GetChannelPolicyOutput struct {
 
-	// The IAM policy for the channel. IAM policies are used to control access to
-	// your channel.
+	// The IAM policy for the channel. IAM policies are used to control access to your
+	// channel.
 	Policy *string
 
 	// Metadata pertaining to the operation's result.

@@ -33,7 +33,7 @@ type ListThirdPartyFirewallFirewallPoliciesInput struct {
 
 	// The maximum number of third-party firewall policies that you want Firewall
 	// Manager to return. If the specified third-party firewall vendor is associated
-	// with more than MaxResults  firewall policies, the response includes a NextToken
+	// with more than MaxResults firewall policies, the response includes a NextToken
 	// element. NextToken contains an encrypted token that identifies the first
 	// third-party firewall policies that Firewall Manager will return if you submit
 	// another request.
@@ -60,7 +60,7 @@ type ListThirdPartyFirewallFirewallPoliciesInput struct {
 
 type ListThirdPartyFirewallFirewallPoliciesOutput struct {
 
-	// The value that you will use for NextToken  in the next
+	// The value that you will use for NextToken in the next
 	// ListThirdPartyFirewallFirewallPolicies request.
 	NextToken *string
 
@@ -139,27 +139,27 @@ func (c *Client) addOperationListThirdPartyFirewallFirewallPoliciesMiddlewares(s
 	return nil
 }
 
-// ListThirdPartyFirewallFirewallPoliciesAPIClient is a client that implements
-// the ListThirdPartyFirewallFirewallPolicies operation.
+// ListThirdPartyFirewallFirewallPoliciesAPIClient is a client that implements the
+// ListThirdPartyFirewallFirewallPolicies operation.
 type ListThirdPartyFirewallFirewallPoliciesAPIClient interface {
 	ListThirdPartyFirewallFirewallPolicies(context.Context, *ListThirdPartyFirewallFirewallPoliciesInput, ...func(*Options)) (*ListThirdPartyFirewallFirewallPoliciesOutput, error)
 }
 
 var _ ListThirdPartyFirewallFirewallPoliciesAPIClient = (*Client)(nil)
 
-// ListThirdPartyFirewallFirewallPoliciesPaginatorOptions is the paginator
-// options for ListThirdPartyFirewallFirewallPolicies
+// ListThirdPartyFirewallFirewallPoliciesPaginatorOptions is the paginator options
+// for ListThirdPartyFirewallFirewallPolicies
 type ListThirdPartyFirewallFirewallPoliciesPaginatorOptions struct {
 	// The maximum number of third-party firewall policies that you want Firewall
 	// Manager to return. If the specified third-party firewall vendor is associated
-	// with more than MaxResults  firewall policies, the response includes a NextToken
+	// with more than MaxResults firewall policies, the response includes a NextToken
 	// element. NextToken contains an encrypted token that identifies the first
 	// third-party firewall policies that Firewall Manager will return if you submit
 	// another request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

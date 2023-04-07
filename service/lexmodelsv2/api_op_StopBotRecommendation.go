@@ -64,8 +64,8 @@ type StopBotRecommendationOutput struct {
 	// The unique identifier of the bot recommendation that is being stopped.
 	BotRecommendationId *string
 
-	// The status of the bot recommendation. If the status is Failed, then the
-	// reasons for the failure are listed in the failureReasons field.
+	// The status of the bot recommendation. If the status is Failed, then the reasons
+	// for the failure are listed in the failureReasons field.
 	BotRecommendationStatus types.BotRecommendationStatus
 
 	// The version of the bot containing the recommendation that is being stopped.

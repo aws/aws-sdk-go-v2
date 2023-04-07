@@ -50,9 +50,9 @@ type DescribeAutoPredictorOutput struct {
 	// for the predictor.
 	DatasetImportJobArns []string
 
-	// An Key Management Service (KMS) key and an Identity and Access Management
-	// (IAM) role that Amazon Forecast can assume to access the key. You can specify
-	// this optional object in the CreateDataset  and CreatePredictor  requests.
+	// An Key Management Service (KMS) key and an Identity and Access Management (IAM)
+	// role that Amazon Forecast can assume to access the key. You can specify this
+	// optional object in the CreateDataset and CreatePredictor requests.
 	EncryptionConfig *types.EncryptionConfig
 
 	// The estimated time remaining in minutes for the predictor training job to
@@ -80,20 +80,19 @@ type DescribeAutoPredictorOutput struct {
 	// ["0.1","0.5","0.9"].
 	ForecastTypes []string
 
-	// The last time the resource was modified. The timestamp depends on the status
-	// of the job:
-	//     - CREATE_PENDING - The CreationTime .
-	//     - CREATE_IN_PROGRESS - The current timestamp.
-	//     - CREATE_STOPPING - The current timestamp.
-	//     - CREATE_STOPPED - When the job stopped.
-	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// In the event of an error, a message detailing the cause of the error.
 	Message *string
 
-	// A object with the Amazon Resource Name (ARN) and status of the monitor
-	// resource.
+	// A object with the Amazon Resource Name (ARN) and status of the monitor resource.
 	MonitorInfo *types.MonitorInfo
 
 	// The accuracy metric used to optimize the predictor.
@@ -110,10 +109,10 @@ type DescribeAutoPredictorOutput struct {
 	ReferencePredictorSummary *types.ReferencePredictorSummary
 
 	// The status of the predictor. States include:
-	//     - ACTIVE
-	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
-	//     - CREATE_STOPPING , CREATE_STOPPED
-	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
 	Status *string
 
 	// The time boundary Forecast uses when aggregating data.

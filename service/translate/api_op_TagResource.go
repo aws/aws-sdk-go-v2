@@ -37,8 +37,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Tags being associated with a specific Amazon Translate resource. There can be
-	// a maximum of 50 tags (both existing and pending) associated with a specific
+	// Tags being associated with a specific Amazon Translate resource. There can be a
+	// maximum of 50 tags (both existing and pending) associated with a specific
 	// resource.
 	//
 	// This member is required.

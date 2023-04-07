@@ -29,8 +29,7 @@ func (c *Client) GetEnvironmentTemplate(ctx context.Context, params *GetEnvironm
 
 type GetEnvironmentTemplateInput struct {
 
-	// The name of the environment template that you want to get the detailed data
-	// for.
+	// The name of the environment template that you want to get the detailed data for.
 	//
 	// This member is required.
 	Name *string

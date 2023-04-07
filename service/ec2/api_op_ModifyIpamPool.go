@@ -12,7 +12,7 @@ import (
 )
 
 // Modify the configurations of an IPAM pool. For more information, see Modify a
-// pool (https://docs.aws.amazon.com/vpc/latest/ipam/mod-pool-ipam.html)in the
+// pool (https://docs.aws.amazon.com/vpc/latest/ipam/mod-pool-ipam.html) in the
 // Amazon VPC IPAM User Guide.
 func (c *Client) ModifyIpamPool(ctx context.Context, params *ModifyIpamPoolInput, optFns ...func(*Options)) (*ModifyIpamPoolOutput, error) {
 	if params == nil {
@@ -41,8 +41,8 @@ type ModifyIpamPoolInput struct {
 	// in the Amazon VPC IPAM User Guide.
 	AddAllocationResourceTags []types.RequestIpamResourceTag
 
-	// The default netmask length for allocations added to this pool. If, for
-	// example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new
+	// The default netmask length for allocations added to this pool. If, for example,
+	// the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new
 	// allocations will default to 10.0.0.0/16.
 	AllocationDefaultNetmaskLength *int32
 

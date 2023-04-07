@@ -37,8 +37,8 @@ type DescribeImportImageTasksInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// Filter tasks using the task-state  filter and one of the following values:
-	// active , completed , deleting , or deleted .
+	// Filter tasks using the task-state filter and one of the following values: active
+	// , completed , deleting , or deleted .
 	Filters []types.Filter
 
 	// The IDs of the import image tasks.
@@ -59,8 +59,8 @@ type DescribeImportImageTasksOutput struct {
 	// completed or canceled in the previous 7 days.
 	ImportImageTasks []types.ImportImageTask
 
-	// The token to use to get the next page of results. This value is null when
-	// there are no more results to return.
+	// The token to use to get the next page of results. This value is null when there
+	// are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,8 +143,8 @@ type DescribeImportImageTasksPaginatorOptions struct {
 	// The maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

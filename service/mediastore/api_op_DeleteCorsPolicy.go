@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the cross-origin resource sharing (CORS) configuration information
-// that is set for the container. To use this operation, you must have permission
-// to perform the MediaStore:DeleteCorsPolicy action. The container owner has
-// this permission by default and can grant this permission to others.
+// Deletes the cross-origin resource sharing (CORS) configuration information that
+// is set for the container. To use this operation, you must have permission to
+// perform the MediaStore:DeleteCorsPolicy action. The container owner has this
+// permission by default and can grant this permission to others.
 func (c *Client) DeleteCorsPolicy(ctx context.Context, params *DeleteCorsPolicyInput, optFns ...func(*Options)) (*DeleteCorsPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteCorsPolicyInput{}

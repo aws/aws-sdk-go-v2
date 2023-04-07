@@ -57,7 +57,7 @@ type CreateIndexInput struct {
 
 type CreateIndexOutput struct {
 
-	// The ObjectIdentifier  of the index created by this operation.
+	// The ObjectIdentifier of the index created by this operation.
 	ObjectIdentifier *string
 
 	// Metadata pertaining to the operation's result.

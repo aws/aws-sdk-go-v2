@@ -11,7 +11,7 @@ import (
 // variables (aggregated variables) based on historical events. For example, your
 // ATI model might calculate the number of times an user has logged in using the
 // same IP address. In this case, event variables used to derive the aggregated
-// variables are IP address  and user .
+// variables are IP address and user .
 type AggregatedLogOddsMetric struct {
 
 	// The relative importance of the variables in the list to the other event
@@ -33,17 +33,17 @@ type AggregatedLogOddsMetric struct {
 // continuously calculate a set of variables (aggregated variables) based on
 // historical events. For example, the model might calculate the number of times an
 // user has logged in using the same IP address. In this case, event variables used
-// to derive the aggregated variables are IP address  and user .
+// to derive the aggregated variables are IP address and user .
 type AggregatedVariablesImpactExplanation struct {
 
 	// The names of all the event variables that were used to derive the aggregated
 	// variables.
 	EventVariableNames []string
 
-	// The raw, uninterpreted value represented as log-odds of the fraud. These
-	// values are usually between -10 to +10, but range from -infinity to +infinity.
-	//     - A positive value indicates that the variables drove the risk score up.
-	//     - A negative value indicates that the variables drove the risk score down.
+	// The raw, uninterpreted value represented as log-odds of the fraud. These values
+	// are usually between -10 to +10, but range from -infinity to +infinity.
+	//   - A positive value indicates that the variables drove the risk score up.
+	//   - A negative value indicates that the variables drove the risk score down.
 	LogOddsImpact *float32
 
 	// The relative impact of the aggregated variables in terms of magnitude on the
@@ -58,8 +58,7 @@ type AggregatedVariablesImpactExplanation struct {
 // provide to continuously calculate a set of variables (aggregated variables)
 // based on historical events. For example, your ATI model might calculate the
 // number of times an user has logged in using the same IP address. In this case,
-// event variables used to derive the aggregated variables are IP address  and
-// user .
+// event variables used to derive the aggregated variables are IP address and user .
 type AggregatedVariablesImportanceMetrics struct {
 
 	// List of variables' metrics.
@@ -334,8 +333,8 @@ type DetectorVersionSummary struct {
 // The entity details.
 type Entity struct {
 
-	// The entity ID. If you do not know the entityId , you can pass unknown, which
-	// is areserved string literal.
+	// The entity ID. If you do not know the entityId , you can pass unknown , which is
+	// areserved string literal.
 	//
 	// This member is required.
 	EntityId *string
@@ -397,8 +396,7 @@ type EvaluatedModelVersion struct {
 	// The model ID.
 	ModelId *string
 
-	// The model type. Valid values: ONLINE_FRAUD_INSIGHTS  |
-	// TRANSACTION_FRAUD_INSIGHTS
+	// The model type. Valid values: ONLINE_FRAUD_INSIGHTS | TRANSACTION_FRAUD_INSIGHTS
 	ModelType *string
 
 	// The model version.
@@ -504,9 +502,9 @@ type EventType struct {
 	// The event type entity types.
 	EntityTypes []string
 
-	// If Enabled, Amazon Fraud Detector stores event data when you generate a
+	// If Enabled , Amazon Fraud Detector stores event data when you generate a
 	// prediction and uses that data to update calculated variables in near real-time.
-	// Amazon Fraud Detector uses this data, known as INGESTED_EVENTS, to train your
+	// Amazon Fraud Detector uses this data, known as INGESTED_EVENTS , to train your
 	// model and improve fraud predictions.
 	EventIngestion EventIngestion
 
@@ -747,20 +745,23 @@ type LabelSchema struct {
 
 	// The label mapper maps the Amazon Fraud Detector supported model classification
 	// labels ( FRAUD , LEGIT ) to the appropriate event type labels. For example, if "
-	// FRAUD " and " LEGIT" are Amazon Fraud Detector supported labels, this mapper
-	// could be: {"FRAUD" => ["0"] , "LEGIT" => ["1"]}  or {"FRAUD" => ["false"] ,
+	// FRAUD " and " LEGIT " are Amazon Fraud Detector supported labels, this mapper
+	// could be: {"FRAUD" => ["0"] , "LEGIT" => ["1"]} or {"FRAUD" => ["false"] ,
 	// "LEGIT" => ["true"]} or {"FRAUD" => ["fraud", "abuse"] , "LEGIT" => ["legit",
-	// "safe"]}. The value part of the mapper is a list, because you may have
-	// multiple label variants from your event type for a single Amazon Fraud Detector
-	// label.
+	// "safe"]} . The value part of the mapper is a list, because you may have multiple
+	// label variants from your event type for a single Amazon Fraud Detector label.
 	LabelMapper map[string][]string
 
 	// The action to take for unlabeled events.
-	//     - Use IGNORE if you want the unlabeled events to be ignored. This is recommended when the majority of the events in the dataset are labeled.
-	//     - Use FRAUD if you want to categorize all unlabeled events as “Fraud”. This is recommended when most of the events in your dataset are fraudulent.
-	//     - Use LEGIT f you want to categorize all unlabeled events as “Legit”. This is recommended when most of the events in your dataset are legitimate.
-	//     - Use AUTO if you want Amazon Fraud Detector to decide how to use the unlabeled data. This is recommended when there is significant unlabeled events in the dataset.
-	//
+	//   - Use IGNORE if you want the unlabeled events to be ignored. This is
+	//   recommended when the majority of the events in the dataset are labeled.
+	//   - Use FRAUD if you want to categorize all unlabeled events as “Fraud”. This is
+	//   recommended when most of the events in your dataset are fraudulent.
+	//   - Use LEGIT f you want to categorize all unlabeled events as “Legit”. This is
+	//   recommended when most of the events in your dataset are legitimate.
+	//   - Use AUTO if you want Amazon Fraud Detector to decide how to use the
+	//   unlabeled data. This is recommended when there is significant unlabeled events
+	//   in the dataset.
 	// By default, Amazon Fraud Detector ignores the unlabeled data.
 	UnlabeledEventsTreatment UnlabeledEventsTreatment
 
@@ -793,12 +794,12 @@ type LogOddsMetric struct {
 // Model performance metrics data points.
 type MetricDataPoint struct {
 
-	// The false positive rate. This is the percentage of total legitimate events
-	// that are incorrectly predicted as fraud.
+	// The false positive rate. This is the percentage of total legitimate events that
+	// are incorrectly predicted as fraud.
 	Fpr *float32
 
-	// The percentage of fraud events correctly predicted as fraudulent as compared
-	// to all events predicted as fraudulent.
+	// The percentage of fraud events correctly predicted as fraudulent as compared to
+	// all events predicted as fraudulent.
 	Precision *float32
 
 	// The model threshold that specifies an acceptable fraud capture rate. For
@@ -870,8 +871,8 @@ type ModelInputConfiguration struct {
 	// The event type name.
 	EventTypeName *string
 
-	// The format of the model input configuration. The format differs depending on
-	// if it is passed through to SageMaker or constructed by Amazon Fraud Detector.
+	// The format of the model input configuration. The format differs depending on if
+	// it is passed through to SageMaker or constructed by Amazon Fraud Detector.
 	Format ModelInputDataFormat
 
 	// Template for constructing the JSON input-data sent to SageMaker. At
@@ -978,8 +979,8 @@ type ModelVersionDetail struct {
 	// The training results.
 	TrainingResult *TrainingResult
 
-	// The training result details. The details include the relative importance of
-	// the variables.
+	// The training result details. The details include the relative importance of the
+	// variables.
 	TrainingResultV2 *TrainingResultV2
 
 	noSmithyDocumentSerde
@@ -1003,12 +1004,12 @@ type ModelVersionEvaluation struct {
 // The Online Fraud Insights (OFI) model performance metrics data points.
 type OFIMetricDataPoint struct {
 
-	// The false positive rate. This is the percentage of total legitimate events
-	// that are incorrectly predicted as fraud.
+	// The false positive rate. This is the percentage of total legitimate events that
+	// are incorrectly predicted as fraud.
 	Fpr *float32
 
-	// The percentage of fraud events correctly predicted as fraudulent as compared
-	// to all events predicted as fraudulent.
+	// The percentage of fraud events correctly predicted as fraudulent as compared to
+	// all events predicted as fraudulent.
 	Precision *float32
 
 	// The model threshold that specifies an acceptable fraud capture rate. For
@@ -1074,13 +1075,12 @@ type Outcome struct {
 // impacted the model version's fraud prediction score.
 type PredictionExplanations struct {
 
-	// The details of the aggregated variables impact on the prediction score.
-	// Account Takeover Insights (ATI) model uses event variables from the login data
-	// you provide to continuously calculate a set of variables (aggregated variables)
+	// The details of the aggregated variables impact on the prediction score. Account
+	// Takeover Insights (ATI) model uses event variables from the login data you
+	// provide to continuously calculate a set of variables (aggregated variables)
 	// based on historical events. For example, your ATI model might calculate the
 	// number of times an user has logged in using the same IP address. In this case,
-	// event variables used to derive the aggregated variables are IP address  and
-	// user .
+	// event variables used to derive the aggregated variables are IP address and user .
 	AggregatedVariablesImpactExplanations []AggregatedVariablesImpactExplanation
 
 	// The details of the event variable's impact on the prediction score.
@@ -1193,12 +1193,12 @@ type Tag struct {
 // The performance metrics data points for Transaction Fraud Insights (TFI) model.
 type TFIMetricDataPoint struct {
 
-	// The false positive rate. This is the percentage of total legitimate events
-	// that are incorrectly predicted as fraud.
+	// The false positive rate. This is the percentage of total legitimate events that
+	// are incorrectly predicted as fraud.
 	Fpr *float32
 
-	// The percentage of fraud events correctly predicted as fraudulent as compared
-	// to all events predicted as fraudulent.
+	// The percentage of fraud events correctly predicted as fraudulent as compared to
+	// all events predicted as fraudulent.
 	Precision *float32
 
 	// The model threshold that specifies an acceptable fraud capture rate. For
@@ -1305,7 +1305,7 @@ type TrainingResultV2 struct {
 	// continuously calculate a set of variables (aggregated variables) based on
 	// historical events. For example, your ATI model might calculate the number of
 	// times an user has logged in using the same IP address. In this case, event
-	// variables used to derive the aggregated variables are IP address  and user .
+	// variables used to derive the aggregated variables are IP address and user .
 	AggregatedVariablesImportanceMetrics *AggregatedVariablesImportanceMetrics
 
 	// The model training data validation metrics.
@@ -1416,10 +1416,10 @@ type VariableImpactExplanation struct {
 	// The event variable name.
 	EventVariableName *string
 
-	// The raw, uninterpreted value represented as log-odds of the fraud. These
-	// values are usually between -10 to +10, but range from - infinity to + infinity.
-	//     - A positive value indicates that the variable drove the risk score up.
-	//     - A negative value indicates that the variable drove the risk score down.
+	// The raw, uninterpreted value represented as log-odds of the fraud. These values
+	// are usually between -10 to +10, but range from - infinity to + infinity.
+	//   - A positive value indicates that the variable drove the risk score up.
+	//   - A negative value indicates that the variable drove the risk score down.
 	LogOddsImpact *float32
 
 	// The event variable's relative impact in terms of magnitude on the prediction

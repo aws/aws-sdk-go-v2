@@ -39,21 +39,21 @@ type AddApplicationInputProcessingConfigurationInput struct {
 	ApplicationName *string
 
 	// The version of the application to which you want to add the input processing
-	// configuration. You can use the DescribeApplication operation to get the
-	// current application version. If the version specified is not the current
-	// version, the ConcurrentModificationException  is returned.
+	// configuration. You can use the DescribeApplication operation to get the current
+	// application version. If the version specified is not the current version, the
+	// ConcurrentModificationException is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
-	// The ID of the input configuration to add the input processing configuration
-	// to. You can get a list of the input IDs for an application using the
+	// The ID of the input configuration to add the input processing configuration to.
+	// You can get a list of the input IDs for an application using the
 	// DescribeApplication operation.
 	//
 	// This member is required.
 	InputId *string
 
-	// The InputProcessingConfiguration  to add to the application.
+	// The InputProcessingConfiguration to add to the application.
 	//
 	// This member is required.
 	InputProcessingConfiguration *types.InputProcessingConfiguration
@@ -69,9 +69,9 @@ type AddApplicationInputProcessingConfigurationOutput struct {
 	// Provides the current application version.
 	ApplicationVersionId *int64
 
-	// The input ID that is associated with the application input. This is the ID
-	// that Kinesis Data Analytics assigns to each input configuration that you add to
-	// your application.
+	// The input ID that is associated with the application input. This is the ID that
+	// Kinesis Data Analytics assigns to each input configuration that you add to your
+	// application.
 	InputId *string
 
 	// The description of the preprocessor that executes on records in this input

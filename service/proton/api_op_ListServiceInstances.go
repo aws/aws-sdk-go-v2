@@ -31,23 +31,22 @@ func (c *Client) ListServiceInstances(ctx context.Context, params *ListServiceIn
 
 type ListServiceInstancesInput struct {
 
-	// An array of filtering criteria that scope down the result list. By default,
-	// all service instances in the Amazon Web Services account are returned.
+	// An array of filtering criteria that scope down the result list. By default, all
+	// service instances in the Amazon Web Services account are returned.
 	Filters []types.ListServiceInstancesFilter
 
 	// The maximum number of service instances to list.
 	MaxResults *int32
 
-	// A token that indicates the location of the next service in the array of
-	// service instances, after the list of service instances that was previously
-	// requested.
+	// A token that indicates the location of the next service in the array of service
+	// instances, after the list of service instances that was previously requested.
 	NextToken *string
 
 	// The name of the service that the service instance belongs to.
 	ServiceName *string
 
 	// The field that the result list is sorted by. When you choose to sort by
-	// serviceName, service instances within each service are sorted by service
+	// serviceName , service instances within each service are sorted by service
 	// instance name. Default: serviceName
 	SortBy types.ListServiceInstancesSortBy
 
@@ -148,8 +147,8 @@ type ListServiceInstancesPaginatorOptions struct {
 	// The maximum number of service instances to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

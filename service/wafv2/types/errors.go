@@ -37,11 +37,11 @@ func (e *WAFAssociatedItemException) ErrorFault() smithy.ErrorFault { return smi
 // The operation failed because you are inspecting the web request body, headers,
 // or cookies without specifying how to handle oversize components. Rules that
 // inspect the body must either provide an OversizeHandling configuration or they
-// must be preceded by a SizeConstraintStatement that blocks the body content
-// from being too large. Rules that inspect the headers or cookies must provide an
-// OversizeHandlingconfiguration. Provide the handling configuration and retry
+// must be preceded by a SizeConstraintStatement that blocks the body content from
+// being too large. Rules that inspect the headers or cookies must provide an
+// OversizeHandling configuration. Provide the handling configuration and retry
 // your operation. Alternately, you can suppress this warning by adding the
-// following tag to the resource that you provide to this operation: Tag  (key:
+// following tag to the resource that you provide to this operation: Tag (key:
 // WAF:OversizeFieldsHandlingConstraintOptOut , value: true ).
 type WAFConfigurationWarningException struct {
 	Message *string
@@ -181,9 +181,12 @@ func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return s
 // The operation failed because WAF didn't recognize a parameter in the request.
 // For example:
 //   - You specified a parameter name or value that isn't valid.
-//   - Your nested statement isn't valid. You might have tried to nest a statement that can’t be nested.
-//   - You tried to update a WebACL with a DefaultAction that isn't among the types available at DefaultAction .
-//   - Your request references an ARN that is malformed, or corresponds to a resource with which a web ACL can't be associated.
+//   - Your nested statement isn't valid. You might have tried to nest a statement
+//     that can’t be nested.
+//   - You tried to update a WebACL with a DefaultAction that isn't among the types
+//     available at DefaultAction .
+//   - Your request references an ARN that is malformed, or corresponds to a
+//     resource with which a web ACL can't be associated.
 type WAFInvalidParameterException struct {
 	Message *string
 
@@ -215,14 +218,17 @@ func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return s
 
 // The operation failed because the specified policy isn't in the proper format.
 // The policy specifications must conform to the following:
-//   - The policy must be composed using IAM Policy version 2012-10-17 or version 2015-01-01.
+//   - The policy must be composed using IAM Policy version 2012-10-17 or version
+//     2015-01-01.
 //   - The policy must include specifications for Effect , Action , and Principal .
 //   - Effect must specify Allow .
-//   - Action must specify wafv2:CreateWebACL , wafv2:UpdateWebACL , and wafv2:PutFirewallManagerRuleGroups and may optionally specify wafv2:GetRuleGroup . WAF rejects any extra actions or wildcard actions in the policy.
+//   - Action must specify wafv2:CreateWebACL , wafv2:UpdateWebACL , and
+//     wafv2:PutFirewallManagerRuleGroups and may optionally specify
+//     wafv2:GetRuleGroup . WAF rejects any extra actions or wildcard actions in the
+//     policy.
 //   - The policy must not include a Resource parameter.
 //
-// For more information,
-// see IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
+// For more information, see IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
 // .
 type WAFInvalidPermissionPolicyException struct {
 	Message *string
@@ -308,8 +314,7 @@ func (e *WAFLimitsExceededException) ErrorCode() string {
 func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because you don't have the permissions that your logging
-// configuration requires. For information, see Logging web ACL traffic
-// information (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
+// configuration requires. For information, see Logging web ACL traffic information (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
 // in the WAF Developer Guide.
 type WAFLogDestinationPermissionIssueException struct {
 	Message *string
@@ -367,9 +372,9 @@ func (e *WAFNonexistentItemException) ErrorCode() string {
 }
 func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// WAF couldn’t save your changes because you tried to update or delete a
-// resource that has changed since you last retrieved it. Get the resource again,
-// make any changes you need to make to the new copy, and retry your operation.
+// WAF couldn’t save your changes because you tried to update or delete a resource
+// that has changed since you last retrieved it. Get the resource again, make any
+// changes you need to make to the new copy, and retry your operation.
 type WAFOptimisticLockException struct {
 	Message *string
 
@@ -400,8 +405,8 @@ func (e *WAFOptimisticLockException) ErrorFault() smithy.ErrorFault { return smi
 // role for about 20 seconds. Please try your request again. The service linked
 // role can also be locked by a previous DeleteServiceLinkedRole request, which
 // can lock the role for 15 minutes or more. If you recently made a call to
-// DeleteServiceLinkedRole, wait at least 15 minutes and try the request again.
-// If you receive this same exception again, you will have to wait additional time
+// DeleteServiceLinkedRole , wait at least 15 minutes and try the request again. If
+// you receive this same exception again, you will have to wait additional time
 // until the role is unlocked.
 type WAFServiceLinkedRoleErrorException struct {
 	Message *string
@@ -430,8 +435,8 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// You tried to use a managed rule group that's available by subscription, but
-// you aren't subscribed to it yet.
+// You tried to use a managed rule group that's available by subscription, but you
+// aren't subscribed to it yet.
 type WAFSubscriptionNotFoundException struct {
 	Message *string
 
@@ -483,8 +488,8 @@ func (e *WAFTagOperationException) ErrorCode() string {
 }
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// WAF couldn’t perform your tagging operation because of an internal error.
-// Retry your request.
+// WAF couldn’t perform your tagging operation because of an internal error. Retry
+// your request.
 type WAFTagOperationInternalErrorException struct {
 	Message *string
 

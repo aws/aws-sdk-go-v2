@@ -31,9 +31,8 @@ func (c *Client) CreateInsight(ctx context.Context, params *CreateInsightInput, 
 
 type CreateInsightInput struct {
 
-	// One or more attributes used to filter the findings included in the insight.
-	// The insight only includes findings that match the criteria defined in the
-	// filters.
+	// One or more attributes used to filter the findings included in the insight. The
+	// insight only includes findings that match the criteria defined in the filters.
 	//
 	// This member is required.
 	Filters *types.AwsSecurityFindingFilters

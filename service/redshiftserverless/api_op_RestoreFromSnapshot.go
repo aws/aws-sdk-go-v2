@@ -44,7 +44,7 @@ type RestoreFromSnapshotInput struct {
 
 	// The Amazon Resource Name (ARN) of the snapshot to restore from. Required if
 	// restoring from Amazon Redshift Serverless to a provisioned cluster. Must not be
-	// specified at the same time as snapshotName. The format of the ARN is
+	// specified at the same time as snapshotName . The format of the ARN is
 	// arn:aws:redshift:<region>:<account_id>:snapshot:<cluster_identifier>/<snapshot_identifier>.
 	SnapshotArn *string
 

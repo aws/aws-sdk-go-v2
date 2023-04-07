@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Starts a Synchronous Express state machine execution. StartSyncExecution is
-// not available for STANDARD  workflows. StartSyncExecution  will return a 200 OK
+// Starts a Synchronous Express state machine execution. StartSyncExecution is not
+// available for STANDARD workflows. StartSyncExecution will return a 200 OK
 // response, even if your execution fails, because the status code in the API
 // response doesn't reflect function errors. Error codes are reserved for errors
 // that prevent your execution from running, such as permissions errors, limit
@@ -43,8 +43,8 @@ type StartSyncExecutionInput struct {
 	StateMachineArn *string
 
 	// The string that contains the JSON input data for the execution, for example:
-	// "input": "{\"first_name\" : \"test\"}"If you don't include any JSON input
-	// data, you still must include the two braces, for example: "input": "{}" Length
+	// "input": "{\"first_name\" : \"test\"}" If you don't include any JSON input data,
+	// you still must include the two braces, for example: "input": "{}" Length
 	// constraints apply to the payload size, and are expressed as bytes in UTF-8
 	// encoding.
 	Input *string

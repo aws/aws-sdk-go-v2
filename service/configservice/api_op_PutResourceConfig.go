@@ -67,8 +67,7 @@ type PutResourceConfigInput struct {
 
 	// Tags associated with the resource. This field is not to be confused with the
 	// Amazon Web Services-wide tag feature for Amazon Web Services resources. Tags for
-	//
-	// PutResourceConfigare tags that you supply for the configuration items of your
+	// PutResourceConfig are tags that you supply for the configuration items of your
 	// custom resources.
 	Tags map[string]string
 

@@ -51,10 +51,10 @@ type GetPlaceInput struct {
 	// specified, or not supported for a particular result, the partner automatically
 	// chooses a language for the result. For an example, we'll use the Greek language.
 	// You search for a location around Athens, Greece, with the language parameter
-	// set to en . The city  in the results will most likely be returned as Athens.
-	// If you set the language  parameter to el , for Greek, then the city in the
-	// results will more likely be returned as Αθήνα. If the data provider does not
-	// have a value for Greek, the result will be in a language that the provider does
+	// set to en . The city in the results will most likely be returned as Athens . If
+	// you set the language parameter to el , for Greek, then the city in the results
+	// will more likely be returned as Αθήνα . If the data provider does not have a
+	// value for Greek, the result will be in a language that the provider does
 	// support.
 	Language *string
 

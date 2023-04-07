@@ -32,8 +32,8 @@ func (c *Client) PutAnomalyDetector(ctx context.Context, params *PutAnomalyDetec
 
 type PutAnomalyDetectorInput struct {
 
-	// The configuration specifies details about how the anomaly detection model is
-	// to be trained, including time ranges to exclude when training and updating the
+	// The configuration specifies details about how the anomaly detection model is to
+	// be trained, including time ranges to exclude when training and updating the
 	// model. You can specify as many as 10 time ranges. The configuration can also
 	// include the time zone to use for the metric.
 	Configuration *types.AnomalyDetectorConfiguration
@@ -44,14 +44,13 @@ type PutAnomalyDetectorInput struct {
 	Dimensions []types.Dimension
 
 	// The metric math anomaly detector to be created. When using
-	// MetricMathAnomalyDetector, you cannot include the following parameters in the
+	// MetricMathAnomalyDetector , you cannot include the following parameters in the
 	// same operation:
-	//     - Dimensions
-	//     - MetricName
-	//     - Namespace
-	//     - Stat
-	//     - the SingleMetricAnomalyDetector parameters of PutAnomalyDetectorInput
-	//
+	//   - Dimensions
+	//   - MetricName
+	//   - Namespace
+	//   - Stat
+	//   - the SingleMetricAnomalyDetector parameters of PutAnomalyDetectorInput
 	// Instead, specify the metric math anomaly detector attributes as part of the
 	// property MetricMathAnomalyDetector .
 	MetricMathAnomalyDetector *types.MetricMathAnomalyDetector
@@ -67,14 +66,13 @@ type PutAnomalyDetectorInput struct {
 	Namespace *string
 
 	// A single metric anomaly detector to be created. When using
-	// SingleMetricAnomalyDetector, you cannot include the following parameters in
-	// the same operation:
-	//     - Dimensions
-	//     - MetricName
-	//     - Namespace
-	//     - Stat
-	//     - the MetricMatchAnomalyDetector parameters of PutAnomalyDetectorInput
-	//
+	// SingleMetricAnomalyDetector , you cannot include the following parameters in the
+	// same operation:
+	//   - Dimensions
+	//   - MetricName
+	//   - Namespace
+	//   - Stat
+	//   - the MetricMatchAnomalyDetector parameters of PutAnomalyDetectorInput
 	// Instead, specify the single metric anomaly detector attributes as part of the
 	// property SingleMetricAnomalyDetector .
 	SingleMetricAnomalyDetector *types.SingleMetricAnomalyDetector

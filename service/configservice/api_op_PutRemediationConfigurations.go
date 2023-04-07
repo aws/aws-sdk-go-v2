@@ -21,10 +21,10 @@ import (
 // Rules such as Organization Config rules, the rules deployed by conformance
 // packs, and rules deployed by Amazon Web Services Security Hub. For manual
 // remediation configuration, you need to provide a value for automationAssumeRole
-// or use a value in the assumeRolefield to remediate your resources. The SSM
+// or use a value in the assumeRole field to remediate your resources. The SSM
 // automation document can use either as long as it maps to a valid parameter.
 // However, for automatic remediation configuration, the only valid assumeRole
-// field value is AutomationAssumeRole  and you need to provide a value for
+// field value is AutomationAssumeRole and you need to provide a value for
 // AutomationAssumeRole to remediate your resources.
 func (c *Client) PutRemediationConfigurations(ctx context.Context, params *PutRemediationConfigurationsInput, optFns ...func(*Options)) (*PutRemediationConfigurationsOutput, error) {
 	if params == nil {

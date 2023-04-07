@@ -34,9 +34,9 @@ type DescribeReservedNodesOfferingsInput struct {
 	// show only reservations for a given duration.
 	Duration *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional marker returned from a prior request. Use this marker for
@@ -150,13 +150,13 @@ var _ DescribeReservedNodesOfferingsAPIClient = (*Client)(nil)
 // DescribeReservedNodesOfferingsPaginatorOptions is the paginator options for
 // DescribeReservedNodesOfferings
 type DescribeReservedNodesOfferingsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

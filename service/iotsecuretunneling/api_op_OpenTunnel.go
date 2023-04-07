@@ -53,8 +53,7 @@ type OpenTunnelOutput struct {
 	// Tunneling.
 	DestinationAccessToken *string
 
-	// The access token the source local proxy uses to connect to IoT Secure
-	// Tunneling.
+	// The access token the source local proxy uses to connect to IoT Secure Tunneling.
 	SourceAccessToken *string
 
 	// The Amazon Resource Name for the tunnel.

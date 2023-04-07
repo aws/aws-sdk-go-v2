@@ -32,9 +32,9 @@ const (
 	ChannelTypeKik       ChannelType = "Kik"
 )
 
-// Values returns all known values for ChannelType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ChannelType) Values() []ChannelType {
 	return []ChannelType{
 		"Facebook",
@@ -53,9 +53,9 @@ const (
 	ContentTypeCustomPayload ContentType = "CustomPayload"
 )
 
-// Values returns all known values for ContentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ContentType) Values() []ContentType {
 	return []ContentType{
 		"PlainText",
@@ -72,9 +72,9 @@ const (
 	DestinationS3             Destination = "S3"
 )
 
-// Values returns all known values for Destination. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Destination. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Destination) Values() []Destination {
 	return []Destination{
 		"CLOUDWATCH_LOGS",
@@ -128,9 +128,9 @@ const (
 	FulfillmentActivityTypeCodeHook     FulfillmentActivityType = "CodeHook"
 )
 
-// Values returns all known values for FulfillmentActivityType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FulfillmentActivityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FulfillmentActivityType) Values() []FulfillmentActivityType {
 	return []FulfillmentActivityType{
 		"ReturnIntent",

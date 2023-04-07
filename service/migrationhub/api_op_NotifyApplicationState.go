@@ -13,7 +13,7 @@ import (
 )
 
 // Sets the migration state of an application. For a given application identified
-// by the value passed to ApplicationId, its status is set or updated by passing
+// by the value passed to ApplicationId , its status is set or updated by passing
 // one of three values to Status : NOT_STARTED | IN_PROGRESS | COMPLETED .
 func (c *Client) NotifyApplicationState(ctx context.Context, params *NotifyApplicationStateInput, optFns ...func(*Options)) (*NotifyApplicationStateOutput, error) {
 	if params == nil {
@@ -43,8 +43,8 @@ type NotifyApplicationStateInput struct {
 	// This member is required.
 	Status types.ApplicationStatus
 
-	// Optional boolean flag to indicate whether any effect should take place. Used
-	// to test if the caller has permission to make the call.
+	// Optional boolean flag to indicate whether any effect should take place. Used to
+	// test if the caller has permission to make the call.
 	DryRun bool
 
 	// The timestamp when the application state changed.

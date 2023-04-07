@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Synthetics canary runtime versions. For more information,
-// see Canary Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
+// Returns a list of Synthetics canary runtime versions. For more information, see
+// Canary Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
 // .
 func (c *Client) DescribeRuntimeVersions(ctx context.Context, params *DescribeRuntimeVersionsInput, optFns ...func(*Options)) (*DescribeRuntimeVersionsOutput, error) {
 	if params == nil {
@@ -138,8 +138,8 @@ type DescribeRuntimeVersionsPaginatorOptions struct {
 	// of 100 is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

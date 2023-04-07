@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the default encryption configuration for the
-// Amazon Web Services account in the default or specified Region. For more
-// information, see Key management (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html)
+// Retrieves information about the default encryption configuration for the Amazon
+// Web Services account in the default or specified Region. For more information,
+// see Key management (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html)
 // in the IoT SiteWise User Guide.
 func (c *Client) DescribeDefaultEncryptionConfiguration(ctx context.Context, params *DescribeDefaultEncryptionConfigurationInput, optFns ...func(*Options)) (*DescribeDefaultEncryptionConfigurationOutput, error) {
 	if params == nil {
@@ -37,7 +37,7 @@ type DescribeDefaultEncryptionConfigurationInput struct {
 
 type DescribeDefaultEncryptionConfigurationOutput struct {
 
-	// The status of the account configuration. This contains the ConfigurationState.
+	// The status of the account configuration. This contains the ConfigurationState .
 	// If there's an error, it also contains the ErrorDetails .
 	//
 	// This member is required.

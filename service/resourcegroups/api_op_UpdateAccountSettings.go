@@ -14,7 +14,7 @@ import (
 // Turns on or turns off optional features in Resource Groups. The preceding
 // example shows that the request to turn on group lifecycle events is IN_PROGRESS
 // . You can call the GetAccountSettings operation to check for completion by
-// looking for GroupLifecycleEventsStatus  to change to ACTIVE .
+// looking for GroupLifecycleEventsStatus to change to ACTIVE .
 func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSettingsInput{}

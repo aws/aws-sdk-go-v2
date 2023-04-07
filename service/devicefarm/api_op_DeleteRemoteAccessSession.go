@@ -38,8 +38,8 @@ type DeleteRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response from the server when a request is made to delete the remote
-// access session.
+// The response from the server when a request is made to delete the remote access
+// session.
 type DeleteRemoteAccessSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

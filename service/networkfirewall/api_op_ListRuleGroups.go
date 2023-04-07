@@ -35,8 +35,8 @@ type ListRuleGroupsInput struct {
 	// Indicates the general category of the Amazon Web Services managed rule group.
 	ManagedType types.ResourceManagedType
 
-	// The maximum number of objects that you want Network Firewall to return for
-	// this request. If more objects are available, in the response, Network Firewall
+	// The maximum number of objects that you want Network Firewall to return for this
+	// request. If more objects are available, in the response, Network Firewall
 	// provides a NextToken value that you can use in a subsequent call to get the
 	// next batch of objects.
 	MaxResults *int32
@@ -48,14 +48,14 @@ type ListRuleGroupsInput struct {
 	// request in your next request.
 	NextToken *string
 
-	// The scope of the request. The default setting of ACCOUNT  or a setting of NULL
+	// The scope of the request. The default setting of ACCOUNT or a setting of NULL
 	// returns all of the rule groups in your account. A setting of MANAGED returns
 	// all available managed rule groups.
 	Scope types.ResourceManagedStatus
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group
-	// is stateless, it contains stateless rules. If it is stateful, it contains
-	// stateful rules.
+	// Indicates whether the rule group is stateless or stateful. If the rule group is
+	// stateless, it contains stateless rules. If it is stateful, it contains stateful
+	// rules.
 	Type types.RuleGroupType
 
 	noSmithyDocumentSerde
@@ -150,14 +150,14 @@ var _ ListRuleGroupsAPIClient = (*Client)(nil)
 
 // ListRuleGroupsPaginatorOptions is the paginator options for ListRuleGroups
 type ListRuleGroupsPaginatorOptions struct {
-	// The maximum number of objects that you want Network Firewall to return for
-	// this request. If more objects are available, in the response, Network Firewall
+	// The maximum number of objects that you want Network Firewall to return for this
+	// request. If more objects are available, in the response, Network Firewall
 	// provides a NextToken value that you can use in a subsequent call to get the
 	// next batch of objects.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

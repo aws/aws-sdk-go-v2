@@ -72,7 +72,7 @@ type CreateTrustInput struct {
 	// Optional parameter to enable selective authentication for the trust.
 	SelectiveAuth types.SelectiveAuth
 
-	// The trust relationship type. Forest  is the default.
+	// The trust relationship type. Forest is the default.
 	TrustType types.TrustType
 
 	noSmithyDocumentSerde

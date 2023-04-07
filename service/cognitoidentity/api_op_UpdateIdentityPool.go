@@ -65,8 +65,8 @@ type UpdateIdentityPoolInput struct {
 	// The ARNs of the OpenID Connect providers.
 	OpenIdConnectProviderARNs []string
 
-	// An array of Amazon Resource Names (ARNs) of the SAML provider for your
-	// identity pool.
+	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity
+	// pool.
 	SamlProviderARNs []string
 
 	// Optional key:value pairs mapping provider names to provider app IDs.
@@ -112,8 +112,8 @@ type UpdateIdentityPoolOutput struct {
 	// The ARNs of the OpenID Connect providers.
 	OpenIdConnectProviderARNs []string
 
-	// An array of Amazon Resource Names (ARNs) of the SAML provider for your
-	// identity pool.
+	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity
+	// pool.
 	SamlProviderARNs []string
 
 	// Optional key:value pairs mapping provider names to provider app IDs.

@@ -30,8 +30,7 @@ func (c *Client) DescribeSnapshotSchedules(ctx context.Context, params *Describe
 
 type DescribeSnapshotSchedulesInput struct {
 
-	// The unique identifier for the cluster whose snapshot schedules you want to
-	// view.
+	// The unique identifier for the cluster whose snapshot schedules you want to view.
 	ClusterIdentifier *string
 
 	// A value that indicates the starting point for the next set of response records
@@ -41,10 +40,10 @@ type DescribeSnapshotSchedulesInput struct {
 	// records have been retrieved for the request.
 	Marker *string
 
-	// The maximum number or response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next set
-	// of records by retrying the command with the returned marker  value.
+	// The maximum number or response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value.
 	MaxRecords *int32
 
 	// A unique identifier for a snapshot schedule.
@@ -148,14 +147,14 @@ var _ DescribeSnapshotSchedulesAPIClient = (*Client)(nil)
 // DescribeSnapshotSchedulesPaginatorOptions is the paginator options for
 // DescribeSnapshotSchedules
 type DescribeSnapshotSchedulesPaginatorOptions struct {
-	// The maximum number or response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next set
-	// of records by retrying the command with the returned marker  value.
+	// The maximum number or response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

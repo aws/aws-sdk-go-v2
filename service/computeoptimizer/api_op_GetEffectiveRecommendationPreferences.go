@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the recommendation preferences that are in effect for a given
-// resource, such as enhanced infrastructure metrics. Considers all applicable
-// preferences that you might have set at the resource, account, and organization
-// level. When you create a recommendation preference, you can set its status to
-// Active or Inactive. Use this action to view the recommendation preferences
-// that are in effect, or Active .
+// Returns the recommendation preferences that are in effect for a given resource,
+// such as enhanced infrastructure metrics. Considers all applicable preferences
+// that you might have set at the resource, account, and organization level. When
+// you create a recommendation preference, you can set its status to Active or
+// Inactive . Use this action to view the recommendation preferences that are in
+// effect, or Active .
 func (c *Client) GetEffectiveRecommendationPreferences(ctx context.Context, params *GetEffectiveRecommendationPreferencesInput, optFns ...func(*Options)) (*GetEffectiveRecommendationPreferencesOutput, error) {
 	if params == nil {
 		params = &GetEffectiveRecommendationPreferencesInput{}
@@ -50,9 +50,9 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	// Considers all applicable preferences that you might have set at the resource,
 	// account, and organization level. A status of Active confirms that the
 	// preference is applied in the latest recommendation refresh, and a status of
-	// Inactiveconfirms that it's not yet applied to recommendations. To validate
+	// Inactive confirms that it's not yet applied to recommendations. To validate
 	// whether the preference is applied to your last generated set of recommendations,
-	// review the effectiveRecommendationPreferences  value in the response of the
+	// review the effectiveRecommendationPreferences value in the response of the
 	// GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations actions.
 	// For more information, see Enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.

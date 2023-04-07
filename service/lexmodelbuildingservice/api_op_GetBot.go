@@ -55,27 +55,26 @@ type GetBotOutput struct {
 	// version.
 	Checksum *string
 
-	// For each Amazon Lex bot created with the Amazon Lex Model Building Service,
-	// you must specify whether your use of Amazon Lex is related to a website,
+	// For each Amazon Lex bot created with the Amazon Lex Model Building Service, you
+	// must specify whether your use of Amazon Lex is related to a website, program, or
+	// other application that is directed or targeted, in whole or in part, to children
+	// under age 13 and subject to the Children's Online Privacy Protection Act (COPPA)
+	// by specifying true or false in the childDirected field. By specifying true in
+	// the childDirected field, you confirm that your use of Amazon Lex is related to
+	// a website, program, or other application that is directed or targeted, in whole
+	// or in part, to children under age 13 and subject to COPPA. By specifying false
+	// in the childDirected field, you confirm that your use of Amazon Lex is not
+	// related to a website, program, or other application that is directed or
+	// targeted, in whole or in part, to children under age 13 and subject to COPPA.
+	// You may not specify a default value for the childDirected field that does not
+	// accurately reflect whether your use of Amazon Lex is related to a website,
 	// program, or other application that is directed or targeted, in whole or in part,
-	// to children under age 13 and subject to the Children's Online Privacy Protection
-	// Act (COPPA) by specifying true  or false  in the childDirected field. By
-	// specifying true  in the childDirected field, you confirm that your use of
-	// Amazon Lex is related to a website, program, or other application that is
-	// directed or targeted, in whole or in part, to children under age 13 and subject
-	// to COPPA. By specifying false  in the childDirected field, you confirm that
-	// your use of Amazon Lex is not related to a website, program, or other
-	// application that is directed or targeted, in whole or in part, to children under
-	// age 13 and subject to COPPA. You may not specify a default value for the
-	// childDirectedfield that does not accurately reflect whether your use of Amazon
-	// Lex is related to a website, program, or other application that is directed or
-	// targeted, in whole or in part, to children under age 13 and subject to COPPA. If
-	// your use of Amazon Lex relates to a website, program, or other application that
-	// is directed in whole or in part, to children under age 13, you must obtain any
-	// required verifiable parental consent under COPPA. For information regarding the
-	// use of Amazon Lex in connection with websites, programs, or other applications
-	// that are directed or targeted, in whole or in part, to children under age 13,
-	// see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
+	// to children under age 13 and subject to COPPA. If your use of Amazon Lex relates
+	// to a website, program, or other application that is directed in whole or in
+	// part, to children under age 13, you must obtain any required verifiable parental
+	// consent under COPPA. For information regarding the use of Amazon Lex in
+	// connection with websites, programs, or other applications that are directed or
+	// targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
 	ChildDirected *bool
 
 	// The message Amazon Lex uses when it doesn't understand the user's request. For
@@ -96,14 +95,14 @@ type GetBotOutput struct {
 	// bot is using the improvements, otherwise, false .
 	EnableModelImprovements *bool
 
-	// If status  is FAILED , Amazon Lex explains why it failed to build the bot.
+	// If status is FAILED , Amazon Lex explains why it failed to build the bot.
 	FailureReason *string
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
 	// conversation. For more information, see PutBot .
 	IdleSessionTTLInSeconds *int32
 
-	// An array of intent  objects. For more information, see PutBot .
+	// An array of intent objects. For more information, see PutBot .
 	Intents []types.Intent
 
 	// The date that the bot was updated. When you create a resource, the creation
@@ -126,10 +125,10 @@ type GetBotOutput struct {
 	NluIntentConfidenceThreshold *float64
 
 	// The status of the bot. When the status is BUILDING Amazon Lex is building the
-	// bot for testing and use. If the status of the bot is READY_BASIC_TESTING, you
+	// bot for testing and use. If the status of the bot is READY_BASIC_TESTING , you
 	// can test the bot using the exact utterances specified in the bot's intents. When
-	// the bot is ready for full testing or to run, the status is READY. If there was
-	// a problem with building the bot, the status is FAILED  and the failureReason
+	// the bot is ready for full testing or to run, the status is READY . If there was
+	// a problem with building the bot, the status is FAILED and the failureReason
 	// field explains why the bot did not build. If the bot was saved but not built,
 	// the status is NOT_BUILT .
 	Status types.Status

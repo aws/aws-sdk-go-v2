@@ -12,7 +12,7 @@ import (
 )
 
 // Seals and completes the snapshot after all of the required blocks of data have
-// been written to it. Completing the snapshot changes the status to completed.
+// been written to it. Completing the snapshot changes the status to completed .
 // You cannot write new blocks to a snapshot after it has been completed.
 func (c *Client) CompleteSnapshot(ctx context.Context, params *CompleteSnapshotInput, optFns ...func(*Options)) (*CompleteSnapshotOutput, error) {
 	if params == nil {

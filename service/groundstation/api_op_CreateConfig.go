@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Config  with the specified configData  parameters. Only one type of
+// Creates a Config with the specified configData parameters. Only one type of
 // configData can be specified.
 func (c *Client) CreateConfig(ctx context.Context, params *CreateConfigInput, optFns ...func(*Options)) (*CreateConfigOutput, error) {
 	if params == nil {

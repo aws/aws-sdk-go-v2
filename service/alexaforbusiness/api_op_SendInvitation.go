@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends an enrollment invitation email with a URL to a user. The URL is valid
-// for 30 days or until you call this operation again, whichever comes first.
+// Sends an enrollment invitation email with a URL to a user. The URL is valid for
+// 30 days or until you call this operation again, whichever comes first.
 func (c *Client) SendInvitation(ctx context.Context, params *SendInvitationInput, optFns ...func(*Options)) (*SendInvitationOutput, error) {
 	if params == nil {
 		params = &SendInvitationInput{}

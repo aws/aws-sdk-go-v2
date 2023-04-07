@@ -61,7 +61,7 @@ type UpdateSecurityGroupRuleDescriptionsIngressInput struct {
 
 type UpdateSecurityGroupRuleDescriptionsIngressOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, returns an error.
+	// Returns true if the request succeeds; otherwise, returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

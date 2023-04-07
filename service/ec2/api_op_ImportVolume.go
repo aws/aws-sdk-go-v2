@@ -13,7 +13,6 @@ import (
 
 // Creates an import volume task using metadata from the specified disk image.
 // This API action supports only single-volume VMs. To import multi-volume VMs, use
-//
 // ImportImage instead. To import a disk to a snapshot, use ImportSnapshot
 // instead. This API action is not supported by the Command Line Interface (CLI).
 // For information about using the Amazon EC2 CLI, which is deprecated, see

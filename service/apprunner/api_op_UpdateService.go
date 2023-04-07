@@ -16,9 +16,9 @@ import (
 // scaling configuration resource that's associated with the service. However, you
 // can't change the name or the encryption configuration of the service. These can
 // be set only when you create the service. To update the tags applied to your
-// service, use the separate actions TagResource  and UntagResource. This is an
+// service, use the separate actions TagResource and UntagResource . This is an
 // asynchronous operation. On a successful call, you can use the returned
-// OperationId and the ListOperations  call to track the operation's progress.
+// OperationId and the ListOperations call to track the operation's progress.
 func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, optFns ...func(*Options)) (*UpdateServiceOutput, error) {
 	if params == nil {
 		params = &UpdateServiceInput{}
@@ -42,16 +42,15 @@ type UpdateServiceInput struct {
 	// This member is required.
 	ServiceArn *string
 
-	// The Amazon Resource Name (ARN) of an App Runner automatic scaling
-	// configuration resource that you want to associate with the App Runner service.
+	// The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration
+	// resource that you want to associate with the App Runner service.
 	AutoScalingConfigurationArn *string
 
 	// The settings for the health check that App Runner performs to monitor the
 	// health of the App Runner service.
 	HealthCheckConfiguration *types.HealthCheckConfiguration
 
-	// The runtime configuration to apply to instances (scaling units) of your
-	// service.
+	// The runtime configuration to apply to instances (scaling units) of your service.
 	InstanceConfiguration *types.InstanceConfiguration
 
 	// Configuration settings related to network traffic of the web application that
@@ -61,13 +60,13 @@ type UpdateServiceInput struct {
 	// The observability configuration of your service.
 	ObservabilityConfiguration *types.ServiceObservabilityConfiguration
 
-	// The source configuration to apply to the App Runner service. You can change
-	// the configuration of the code or image repository that the service uses.
-	// However, you can't switch from code to image or the other way around. This means
-	// that you must provide the same structure member of SourceConfiguration that
-	// you originally included when you created the service. Specifically, you can
-	// include either CodeRepository  or ImageRepository. To update the source
-	// configuration, set the values to members of the structure that you include.
+	// The source configuration to apply to the App Runner service. You can change the
+	// configuration of the code or image repository that the service uses. However,
+	// you can't switch from code to image or the other way around. This means that you
+	// must provide the same structure member of SourceConfiguration that you
+	// originally included when you created the service. Specifically, you can include
+	// either CodeRepository or ImageRepository . To update the source configuration,
+	// set the values to members of the structure that you include.
 	SourceConfiguration *types.SourceConfiguration
 
 	noSmithyDocumentSerde
@@ -76,7 +75,7 @@ type UpdateServiceInput struct {
 type UpdateServiceOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can
-	// use it combined with the ListOperations  call to track the operation's progress.
+	// use it combined with the ListOperations call to track the operation's progress.
 	//
 	// This member is required.
 	OperationId *string

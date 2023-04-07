@@ -56,7 +56,7 @@ type CreateDBSubnetGroupInput struct {
 type CreateDBSubnetGroupOutput struct {
 
 	// Contains the details of an Amazon Neptune DB subnet group. This data type is
-	// used as a response element in the DescribeDBSubnetGroups  action.
+	// used as a response element in the DescribeDBSubnetGroups action.
 	DBSubnetGroup *types.DBSubnetGroup
 
 	// Metadata pertaining to the operation's result.

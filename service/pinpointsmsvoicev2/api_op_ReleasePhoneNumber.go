@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Releases an existing origination phone number in your account. Once released,
-// a phone number is no longer available for sending messages. If the origination
+// Releases an existing origination phone number in your account. Once released, a
+// phone number is no longer available for sending messages. If the origination
 // phone number has deletion protection enabled or is associated with a pool, an
 // Error is returned.
 func (c *Client) ReleasePhoneNumber(ctx context.Context, params *ReleasePhoneNumberInput, optFns ...func(*Options)) (*ReleasePhoneNumberOutput, error) {
@@ -33,9 +33,8 @@ func (c *Client) ReleasePhoneNumber(ctx context.Context, params *ReleasePhoneNum
 
 type ReleasePhoneNumberInput struct {
 
-	// The PhoneNumberId or PhoneNumberArn of the phone number to release. You can
-	// use DescribePhoneNumbers to get the values for PhoneNumberId and
-	// PhoneNumberArn.
+	// The PhoneNumberId or PhoneNumberArn of the phone number to release. You can use
+	// DescribePhoneNumbers to get the values for PhoneNumberId and PhoneNumberArn.
 	//
 	// This member is required.
 	PhoneNumberId *string
@@ -49,8 +48,7 @@ type ReleasePhoneNumberOutput struct {
 	// format.
 	CreatedTimestamp *time.Time
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
 	IsoCountryCode *string
 
 	// The message type that was associated with the phone number.
@@ -91,8 +89,8 @@ type ReleasePhoneNumberOutput struct {
 	// The Amazon Resource Name (ARN) of the TwoWayChannel.
 	TwoWayChannelArn *string
 
-	// By default this is set to false. When set to true you can receive incoming
-	// text messages from your end recipients.
+	// By default this is set to false. When set to true you can receive incoming text
+	// messages from your end recipients.
 	TwoWayEnabled bool
 
 	// Metadata pertaining to the operation's result.

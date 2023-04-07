@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the detector version's description. You can update the metadata for
-// any detector version ( DRAFT, ACTIVE,  or INACTIVE ).
+// Updates the detector version's description. You can update the metadata for any
+// detector version ( DRAFT, ACTIVE, or INACTIVE ).
 func (c *Client) UpdateDetectorVersionMetadata(ctx context.Context, params *UpdateDetectorVersionMetadataInput, optFns ...func(*Options)) (*UpdateDetectorVersionMetadataOutput, error) {
 	if params == nil {
 		params = &UpdateDetectorVersionMetadataInput{}

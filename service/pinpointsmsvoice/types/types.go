@@ -124,8 +124,8 @@ type PlainTextMessageType struct {
 // to Amazon SNS.
 type SnsDestination struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to
-	// publish events to.
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish
+	// events to.
 	TopicArn *string
 
 	noSmithyDocumentSerde

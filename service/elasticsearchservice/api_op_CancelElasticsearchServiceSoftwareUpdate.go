@@ -12,8 +12,8 @@ import (
 )
 
 // Cancels a scheduled service software update for an Amazon ES domain. You can
-// only perform this operation before the AutomatedUpdateDate  and when the
-// UpdateStatus is in the PENDING_UPDATE  state.
+// only perform this operation before the AutomatedUpdateDate and when the
+// UpdateStatus is in the PENDING_UPDATE state.
 func (c *Client) CancelElasticsearchServiceSoftwareUpdate(ctx context.Context, params *CancelElasticsearchServiceSoftwareUpdateInput, optFns ...func(*Options)) (*CancelElasticsearchServiceSoftwareUpdateOutput, error) {
 	if params == nil {
 		params = &CancelElasticsearchServiceSoftwareUpdateInput{}
@@ -34,8 +34,8 @@ func (c *Client) CancelElasticsearchServiceSoftwareUpdate(ctx context.Context, p
 // cancel a service software update on.
 type CancelElasticsearchServiceSoftwareUpdateInput struct {
 
-	// The name of the domain that you want to stop the latest service software
-	// update on.
+	// The name of the domain that you want to stop the latest service software update
+	// on.
 	//
 	// This member is required.
 	DomainName *string

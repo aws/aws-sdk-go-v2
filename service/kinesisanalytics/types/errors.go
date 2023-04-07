@@ -279,8 +279,8 @@ func (e *TooManyTagsException) ErrorCode() string {
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Data format is not valid. Amazon Kinesis Analytics is not able to detect
-// schema for the given streaming source.
+// Data format is not valid. Amazon Kinesis Analytics is not able to detect schema
+// for the given streaming source.
 type UnableToDetectSchemaException struct {
 	Message *string
 

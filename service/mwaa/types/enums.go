@@ -89,8 +89,8 @@ const (
 	UnitNone               Unit = "None"
 )
 
-// Values returns all known values for Unit. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Unit. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Unit) Values() []Unit {
 	return []Unit{

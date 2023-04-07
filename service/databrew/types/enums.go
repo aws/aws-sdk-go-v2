@@ -97,9 +97,9 @@ const (
 	InputFormatOrc     InputFormat = "ORC"
 )
 
-// Values returns all known values for InputFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InputFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (InputFormat) Values() []InputFormat {
 	return []InputFormat{
 		"CSV",
@@ -123,9 +123,9 @@ const (
 	JobRunStateTimeout   JobRunState = "TIMEOUT"
 )
 
-// Values returns all known values for JobRunState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobRunState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobRunState) Values() []JobRunState {
 	return []JobRunState{
 		"STARTING",

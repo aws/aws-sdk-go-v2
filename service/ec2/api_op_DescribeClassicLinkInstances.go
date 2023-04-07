@@ -17,7 +17,7 @@ import (
 // ClassicLink. You cannot use this request to return information about other
 // instances. We are retiring EC2-Classic. We recommend that you migrate from
 // EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
-// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)in
+// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
 // the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DescribeClassicLinkInstances(ctx context.Context, params *DescribeClassicLinkInstancesInput, optFns ...func(*Options)) (*DescribeClassicLinkInstancesOutput, error) {
 	if params == nil {
@@ -43,25 +43,30 @@ type DescribeClassicLinkInstancesInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//     - group-id - The ID of a VPC security group that's associated with the instance.
-	//     - instance-id - The ID of the instance.
-	//     - tag : - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
-	//     - tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
-	//     - vpc-id - The ID of the VPC to which the instance is linked. vpc-id - The ID of the VPC that the instance is linked to.
+	//   - group-id - The ID of a VPC security group that's associated with the
+	//   instance.
+	//   - instance-id - The ID of the instance.
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - vpc-id - The ID of the VPC to which the instance is linked. vpc-id - The ID
+	//   of the VPC that the instance is linked to.
 	Filters []types.Filter
 
-	// One or more instance IDs. Must be instances linked to a VPC through
-	// ClassicLink.
+	// One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
 	InstanceIds []string
 
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// . Constraint: If the value is greater than 1000, we return only 1000 items.
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues
-	// from the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -73,7 +78,7 @@ type DescribeClassicLinkInstancesOutput struct {
 	Instances []types.ClassicLinkInstance
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -153,14 +158,14 @@ var _ DescribeClassicLinkInstancesAPIClient = (*Client)(nil)
 // DescribeClassicLinkInstancesPaginatorOptions is the paginator options for
 // DescribeClassicLinkInstances
 type DescribeClassicLinkInstancesPaginatorOptions struct {
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// . Constraint: If the value is greater than 1000, we return only 1000 items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

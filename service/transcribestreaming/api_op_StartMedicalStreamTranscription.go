@@ -22,8 +22,8 @@ import (
 //   - media-encoding
 //   - sample-rate
 //
-// For more information on streaming with Amazon Transcribe
-// Medical, see Transcribing streaming audio (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html)
+// For more information on streaming with Amazon Transcribe Medical, see
+// Transcribing streaming audio (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html)
 // .
 func (c *Client) StartMedicalStreamTranscription(ctx context.Context, params *StartMedicalStreamTranscriptionInput, optFns ...func(*Options)) (*StartMedicalStreamTranscriptionOutput, error) {
 	if params == nil {
@@ -49,10 +49,10 @@ type StartMedicalStreamTranscriptionInput struct {
 	LanguageCode types.LanguageCode
 
 	// Specify the encoding used for the input audio. Supported formats are:
-	//     - FLAC
-	//     - OPUS-encoded audio in an Ogg container
-	//     - PCM (only signed 16-bit little-endian audio formats, which does not include WAV)
-	//
+	//   - FLAC
+	//   - OPUS-encoded audio in an Ogg container
+	//   - PCM (only signed 16-bit little-endian audio formats, which does not include
+	//   WAV)
 	// For more information, see Media formats (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
 	// .
 	//
@@ -72,8 +72,8 @@ type StartMedicalStreamTranscriptionInput struct {
 	Specialty types.Specialty
 
 	// Specify the type of input audio. For example, choose DICTATION for a provider
-	// dictating patient notes and CONVERSATION for a dialogue between a patient and
-	// a medical professional.
+	// dictating patient notes and CONVERSATION for a dialogue between a patient and a
+	// medical professional.
 	//
 	// This member is required.
 	Type types.Type
@@ -329,8 +329,8 @@ func (es *StartMedicalStreamTranscriptionEventStream) safeClose() {
 	es.Reader.Close()
 }
 
-// Err returns any error that occurred while reading or writing EventStream
-// Events from the service API's response. Returns nil if there were no errors.
+// Err returns any error that occurred while reading or writing EventStream Events
+// from the service API's response. Returns nil if there were no errors.
 func (es *StartMedicalStreamTranscriptionEventStream) Err() error {
 	if err := es.err.Err(); err != nil {
 		return err

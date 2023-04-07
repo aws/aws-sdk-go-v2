@@ -18,30 +18,47 @@ import (
 // exceed your API limit, which results in errors. Instead, you must configure
 // configure an Amazon Simple Notification Service (SNS) topic to receive
 // notifications from FlexMatch or queues. Continuously polling game session status
-// with DescribeGameSessions should only be used for games in development with
-// low game session usage. When searching for game sessions, you specify exactly
-// where you want to search and provide a search filter expression, a sort
-// expression, or both. A search request can search only one fleet, but it can
-// search all of a fleet's locations. This operation can be used in the following
-// ways:
-//   - To search all game sessions that are currently running on all locations in a fleet, provide a fleet or alias ID. This approach returns game sessions in the fleet's home Region and all remote locations that fit the search criteria.
-//   - To search all game sessions that are currently running on a specific fleet location, provide a fleet or alias ID and a location name. For location, you can specify a fleet's home Region or any remote location.
+// with DescribeGameSessions should only be used for games in development with low
+// game session usage. When searching for game sessions, you specify exactly where
+// you want to search and provide a search filter expression, a sort expression, or
+// both. A search request can search only one fleet, but it can search all of a
+// fleet's locations. This operation can be used in the following ways:
+//   - To search all game sessions that are currently running on all locations in
+//     a fleet, provide a fleet or alias ID. This approach returns game sessions in the
+//     fleet's home Region and all remote locations that fit the search criteria.
+//   - To search all game sessions that are currently running on a specific fleet
+//     location, provide a fleet or alias ID and a location name. For location, you can
+//     specify a fleet's home Region or any remote location.
 //
 // Use the pagination parameters to retrieve results as a set of sequential pages.
 // If successful, a GameSession object is returned for each game session that
-// matches the request. Search finds game sessions that are in ACTIVE status
-// only. To retrieve information on game sessions in other statuses, use
+// matches the request. Search finds game sessions that are in ACTIVE status only.
+// To retrieve information on game sessions in other statuses, use
 // DescribeGameSessions (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessions.html)
 // . You can search or sort by the following game session attributes:
-//   - gameSessionId -- A unique identifier for the game session. You can use either a GameSessionId or GameSessionArn value.
-//   - gameSessionName -- Name assigned to a game session. Game session names do not need to be unique to a game session.
-//   - gameSessionProperties -- Custom data defined in a game session's GameProperty parameter. GameProperty values are stored as key:value pairs; the filter expression must indicate the key and a string to search the data values for. For example, to search for game sessions with custom data containing the key:value pair "gameMode:brawl", specify the following: gameSessionProperties.gameMode = "brawl" . All custom data values are searched as strings.
-//   - maximumSessions -- Maximum number of player sessions allowed for a game session.
-//   - creationTimeMillis -- Value indicating when a game session was created. It is expressed in Unix time as milliseconds.
-//   - playerSessionCount -- Number of players currently connected to a game session. This value changes rapidly as players join the session or drop out.
-//   - hasAvailablePlayerSessions -- Boolean value indicating whether a game session has reached its maximum number of players. It is highly recommended that all search requests include this filter attribute to optimize search performance and return only sessions that players can join.
+//   - gameSessionId -- A unique identifier for the game session. You can use
+//     either a GameSessionId or GameSessionArn value.
+//   - gameSessionName -- Name assigned to a game session. Game session names do
+//     not need to be unique to a game session.
+//   - gameSessionProperties -- Custom data defined in a game session's
+//     GameProperty parameter. GameProperty values are stored as key:value pairs; the
+//     filter expression must indicate the key and a string to search the data values
+//     for. For example, to search for game sessions with custom data containing the
+//     key:value pair "gameMode:brawl", specify the following:
+//     gameSessionProperties.gameMode = "brawl" . All custom data values are searched
+//     as strings.
+//   - maximumSessions -- Maximum number of player sessions allowed for a game
+//     session.
+//   - creationTimeMillis -- Value indicating when a game session was created. It
+//     is expressed in Unix time as milliseconds.
+//   - playerSessionCount -- Number of players currently connected to a game
+//     session. This value changes rapidly as players join the session or drop out.
+//   - hasAvailablePlayerSessions -- Boolean value indicating whether a game
+//     session has reached its maximum number of players. It is highly recommended that
+//     all search requests include this filter attribute to optimize search performance
+//     and return only sessions that players can join.
 //
-// Returned values for playerSessionCount  and hasAvailablePlayerSessions change
+// Returned values for playerSessionCount and hasAvailablePlayerSessions change
 // quickly as players join sessions and others drop out. Results should be
 // considered a snapshot in time. Be sure to refresh search results often, and
 // handle sessions that fill up before a player can join. All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
@@ -71,21 +88,27 @@ type SearchGameSessionsInput struct {
 	// expression is included, the request returns results for all game sessions in the
 	// fleet that are in ACTIVE status. A filter expression can contain one or
 	// multiple conditions. Each condition consists of the following:
-	//     - Operand -- Name of a game session attribute. Valid values are gameSessionName , gameSessionId , gameSessionProperties , maximumSessions , creationTimeMillis , playerSessionCount , hasAvailablePlayerSessions .
-	//     - Comparator -- Valid comparators are: = , <> , < , > , <= , >= .
-	//     - Value -- Value to be searched for. Values may be numbers, boolean values (true/false) or strings depending on the operand. String values are case sensitive and must be enclosed in single quotes. Special characters must be escaped. Boolean and string values can only be used with the comparators = and <> . For example, the following filter expression searches on gameSessionName : " FilterExpression": "gameSessionName = 'Matt\\'s Awesome Game 1'" .
-	//
+	//   - Operand -- Name of a game session attribute. Valid values are
+	//   gameSessionName , gameSessionId , gameSessionProperties , maximumSessions ,
+	//   creationTimeMillis , playerSessionCount , hasAvailablePlayerSessions .
+	//   - Comparator -- Valid comparators are: = , <> , < , > , <= , >= .
+	//   - Value -- Value to be searched for. Values may be numbers, boolean values
+	//   (true/false) or strings depending on the operand. String values are case
+	//   sensitive and must be enclosed in single quotes. Special characters must be
+	//   escaped. Boolean and string values can only be used with the comparators = and
+	//   <> . For example, the following filter expression searches on gameSessionName
+	//   : " FilterExpression": "gameSessionName = 'Matt\\'s Awesome Game 1'" .
 	// To chain multiple conditions in a single expression, use the logical keywords
-	// AND , OR , and NOT  and parentheses as needed. For example: x AND y AND NOT z ,
-	// NOT (x OR y). Session search evaluates conditions from left to right using the
+	// AND , OR , and NOT and parentheses as needed. For example: x AND y AND NOT z ,
+	// NOT (x OR y) . Session search evaluates conditions from left to right using the
 	// following precedence rules:
-	//     - = , <> , < , > , <= , >=
-	//     - Parentheses
-	//     - NOT
-	//     - AND
-	//     - OR
-	// For example, this filter expression retrieves game sessions hosting
-	// at least ten players that have an open player slot: "maximumSessions>=10 AND
+	//   - = , <> , < , > , <= , >=
+	//   - Parentheses
+	//   - NOT
+	//   - AND
+	//   - OR
+	// For example, this filter expression retrieves game sessions hosting at least
+	// ten players that have an open player slot: "maximumSessions>=10 AND
 	// hasAvailablePlayerSessions=true" .
 	FilterExpression *string
 
@@ -112,11 +135,12 @@ type SearchGameSessionsInput struct {
 	// Instructions on how to sort the search results. If no sort expression is
 	// included, the request returns results in random order. A sort expression
 	// consists of the following elements:
-	//     - Operand -- Name of a game session attribute. Valid values are gameSessionName , gameSessionId , gameSessionProperties , maximumSessions , creationTimeMillis , playerSessionCount , hasAvailablePlayerSessions .
-	//     - Order -- Valid sort orders are ASC (ascending) and DESC (descending).
-	//
+	//   - Operand -- Name of a game session attribute. Valid values are
+	//   gameSessionName , gameSessionId , gameSessionProperties , maximumSessions ,
+	//   creationTimeMillis , playerSessionCount , hasAvailablePlayerSessions .
+	//   - Order -- Valid sort orders are ASC (ascending) and DESC (descending).
 	// For example, this sort expression returns the oldest active sessions first:
-	// "SortExpression": "creationTimeMillis ASC". Results with a null value for the
+	// "SortExpression": "creationTimeMillis ASC" . Results with a null value for the
 	// sort operand are returned at the end of the list.
 	SortExpression *string
 
@@ -216,8 +240,8 @@ type SearchGameSessionsPaginatorOptions struct {
 	// is 20, even if this value is not set or is set higher than 20.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -9,10 +9,9 @@ const (
 	AnalyticsS3ExportFileFormatCsv AnalyticsS3ExportFileFormat = "CSV"
 )
 
-// Values returns all known values for AnalyticsS3ExportFileFormat. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for AnalyticsS3ExportFileFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalyticsS3ExportFileFormat) Values() []AnalyticsS3ExportFileFormat {
 	return []AnalyticsS3ExportFileFormat{
 		"CSV",
@@ -152,8 +151,8 @@ const (
 	BucketLogsPermissionWrite       BucketLogsPermission = "WRITE"
 )
 
-// Values returns all known values for BucketLogsPermission. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for BucketLogsPermission. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (BucketLogsPermission) Values() []BucketLogsPermission {
 	return []BucketLogsPermission{
@@ -544,9 +543,9 @@ const (
 	JSONTypeLines    JSONType = "LINES"
 )
 
-// Values returns all known values for JSONType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JSONType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (JSONType) Values() []JSONType {
 	return []JSONType{
 		"DOCUMENT",
@@ -738,9 +737,9 @@ const (
 	ObjectLockRetentionModeCompliance ObjectLockRetentionMode = "COMPLIANCE"
 )
 
-// Values returns all known values for ObjectLockRetentionMode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ObjectLockRetentionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ObjectLockRetentionMode) Values() []ObjectLockRetentionMode {
 	return []ObjectLockRetentionMode{
 		"GOVERNANCE",
@@ -882,9 +881,9 @@ const (
 	ProtocolHttps Protocol = "https"
 )
 
-// Values returns all known values for Protocol. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Protocol. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"http",
@@ -900,9 +899,9 @@ const (
 	QuoteFieldsAsneeded QuoteFields = "ASNEEDED"
 )
 
-// Values returns all known values for QuoteFields. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for QuoteFields. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (QuoteFields) Values() []QuoteFields {
 	return []QuoteFields{
 		"ALWAYS",
@@ -1042,8 +1041,8 @@ const (
 	ServerSideEncryptionAwsKms ServerSideEncryption = "aws:kms"
 )
 
-// Values returns all known values for ServerSideEncryption. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ServerSideEncryption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ServerSideEncryption) Values() []ServerSideEncryption {
 	return []ServerSideEncryption{
@@ -1147,8 +1146,8 @@ const (
 	TierExpedited Tier = "Expedited"
 )
 
-// Values returns all known values for Tier. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Tier. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Tier) Values() []Tier {
 	return []Tier{
@@ -1193,8 +1192,8 @@ const (
 	TypeGroup                 Type = "Group"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

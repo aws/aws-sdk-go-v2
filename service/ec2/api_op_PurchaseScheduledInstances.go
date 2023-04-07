@@ -16,9 +16,9 @@ import (
 // Instances with the specified schedule. Scheduled Instances enable you to
 // purchase Amazon EC2 compute capacity by the hour for a one-year term. Before you
 // can purchase a Scheduled Instance, you must call
-// DescribeScheduledInstanceAvailabilityto check for available schedules and
+// DescribeScheduledInstanceAvailability to check for available schedules and
 // obtain a purchase token. After you purchase a Scheduled Instance, you must call
-// RunScheduledInstancesduring each scheduled time period. After you purchase a
+// RunScheduledInstances during each scheduled time period. After you purchase a
 // Scheduled Instance, you can't cancel, modify, or resell your purchase.
 func (c *Client) PurchaseScheduledInstances(ctx context.Context, params *PurchaseScheduledInstancesInput, optFns ...func(*Options)) (*PurchaseScheduledInstancesOutput, error) {
 	if params == nil {

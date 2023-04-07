@@ -26,7 +26,7 @@ import (
 // they are always charged at the Frequent Access tier rates in the S3
 // Intelligent-Tiering storage class. For more information, see Storage class for
 // automatically optimizing frequently and infrequently accessed objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access)
-// . Operations related to ListBucketIntelligentTieringConfigurations  include:
+// . Operations related to ListBucketIntelligentTieringConfigurations include:
 //   - DeleteBucketIntelligentTieringConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html)
 //   - PutBucketIntelligentTieringConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html)
 //   - GetBucketIntelligentTieringConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html)
@@ -70,14 +70,13 @@ type ListBucketIntelligentTieringConfigurationsOutput struct {
 	IntelligentTieringConfigurationList []types.IntelligentTieringConfiguration
 
 	// Indicates whether the returned list of analytics configurations is complete. A
-	// value of true  indicates that the list is not complete and the
+	// value of true indicates that the list is not complete and the
 	// NextContinuationToken will be provided for a subsequent request.
 	IsTruncated bool
 
 	// The marker used to continue this inventory configuration listing. Use the
-	// NextContinuationTokenfrom this response to continue the listing in a
-	// subsequent request. The continuation token is an opaque value that Amazon S3
-	// understands.
+	// NextContinuationToken from this response to continue the listing in a subsequent
+	// request. The continuation token is an opaque value that Amazon S3 understands.
 	NextContinuationToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the metadata, structure, stages, and actions of a pipeline. Can be
-// used to return the entire structure of a pipeline in JSON format, which can then
-// be modified and used to update the pipeline structure with UpdatePipeline .
+// Returns the metadata, structure, stages, and actions of a pipeline. Can be used
+// to return the entire structure of a pipeline in JSON format, which can then be
+// modified and used to update the pipeline structure with UpdatePipeline .
 func (c *Client) GetPipeline(ctx context.Context, params *GetPipelineInput, optFns ...func(*Options)) (*GetPipelineOutput, error) {
 	if params == nil {
 		params = &GetPipelineInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetPipeline(ctx context.Context, params *GetPipelineInput, optF
 	return out, nil
 }
 
-// Represents the input of a GetPipeline  action.
+// Represents the input of a GetPipeline action.
 type GetPipelineInput struct {
 
 	// The name of the pipeline for which you want to get information. Pipeline names
@@ -45,11 +45,11 @@ type GetPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetPipeline  action.
+// Represents the output of a GetPipeline action.
 type GetPipelineOutput struct {
 
 	// Represents the pipeline metadata information returned as part of the output of
-	// a GetPipeline  action.
+	// a GetPipeline action.
 	Metadata *types.PipelineMetadata
 
 	// Represents the structure of actions and stages to be performed in the pipeline.

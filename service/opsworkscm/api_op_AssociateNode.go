@@ -12,20 +12,20 @@ import (
 )
 
 // Associates a new node with the server. For more information about how to
-// disassociate a node, see DisassociateNode. On a Chef server: This command is
-// an alternative to knife bootstrap . Example (Chef): aws opsworks-cm
-// associate-node --server-name MyServer --node-name MyManagedNode
-// --engine-attributes "Name=CHEF_ORGANIZATION,Value=default"
-// "Name=CHEF_NODE_PUBLIC_KEY,Value=public-key-pem"On a Puppet server, this
+// disassociate a node, see DisassociateNode . On a Chef server: This command is an
+// alternative to knife bootstrap . Example (Chef): aws opsworks-cm associate-node
+// --server-name MyServer --node-name MyManagedNode --engine-attributes
+// "Name=CHEF_ORGANIZATION,Value=default"
+// "Name=CHEF_NODE_PUBLIC_KEY,Value=public-key-pem" On a Puppet server, this
 // command is an alternative to the puppet cert sign command that signs a Puppet
 // node CSR. Example (Puppet): aws opsworks-cm associate-node --server-name
 // MyServer --node-name MyManagedNode --engine-attributes
-// "Name=PUPPET_NODE_CSR,Value=csr-pem"A node can can only be associated with
-// servers that are in a HEALTHY  state. Otherwise, an InvalidStateException is
-// thrown. A ResourceNotFoundException is thrown when the server does not exist.
-// A ValidationException is raised when parameters of the request are not valid.
-// The AssociateNode API call can be integrated into Auto Scaling configurations,
-// AWS Cloudformation templates, or the user data of a server's instance.
+// "Name=PUPPET_NODE_CSR,Value=csr-pem" A node can can only be associated with
+// servers that are in a HEALTHY state. Otherwise, an InvalidStateException is
+// thrown. A ResourceNotFoundException is thrown when the server does not exist. A
+// ValidationException is raised when parameters of the request are not valid. The
+// AssociateNode API call can be integrated into Auto Scaling configurations, AWS
+// Cloudformation templates, or the user data of a server's instance.
 func (c *Client) AssociateNode(ctx context.Context, params *AssociateNodeInput, optFns ...func(*Options)) (*AssociateNodeOutput, error) {
 	if params == nil {
 		params = &AssociateNodeInput{}
@@ -45,11 +45,13 @@ type AssociateNodeInput struct {
 
 	// Engine attributes used for associating the node. Attributes accepted in a
 	// AssociateNode request for Chef
-	//     - CHEF_ORGANIZATION : The Chef organization with which the node is associated. By default only one organization named default can exist.
-	//     - CHEF_NODE_PUBLIC_KEY : A PEM-formatted public key. This key is required for the chef-client agent to access the Chef API.
-	//
+	//   - CHEF_ORGANIZATION : The Chef organization with which the node is associated.
+	//   By default only one organization named default can exist.
+	//   - CHEF_NODE_PUBLIC_KEY : A PEM-formatted public key. This key is required for
+	//   the chef-client agent to access the Chef API.
 	// Attributes accepted in a AssociateNode request for Puppet
-	//     - PUPPET_NODE_CSR : A PEM-formatted certificate-signing request (CSR) that is created by the node.
+	//   - PUPPET_NODE_CSR : A PEM-formatted certificate-signing request (CSR) that is
+	//   created by the node.
 	//
 	// This member is required.
 	EngineAttributes []types.EngineAttribute

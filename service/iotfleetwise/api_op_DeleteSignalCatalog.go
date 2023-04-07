@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a signal catalog. If the signal catalog is successfully deleted,
-// Amazon Web Services IoT FleetWise sends back an HTTP 200 response with an empty
-// body.
+// Deletes a signal catalog. If the signal catalog is successfully deleted, Amazon
+// Web Services IoT FleetWise sends back an HTTP 200 response with an empty body.
 func (c *Client) DeleteSignalCatalog(ctx context.Context, params *DeleteSignalCatalogInput, optFns ...func(*Options)) (*DeleteSignalCatalogOutput, error) {
 	if params == nil {
 		params = &DeleteSignalCatalogInput{}

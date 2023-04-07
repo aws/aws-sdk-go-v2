@@ -35,10 +35,10 @@ type DescribeMyUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeMyUserProfile  request.
+// Contains the response to a DescribeMyUserProfile request.
 type DescribeMyUserProfileOutput struct {
 
-	// A UserProfile  object that describes the user's SSH information.
+	// A UserProfile object that describes the user's SSH information.
 	UserProfile *types.SelfUserProfile
 
 	// Metadata pertaining to the operation's result.

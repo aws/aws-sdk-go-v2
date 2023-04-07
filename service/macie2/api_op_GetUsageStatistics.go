@@ -30,9 +30,9 @@ func (c *Client) GetUsageStatistics(ctx context.Context, params *GetUsageStatist
 
 type GetUsageStatisticsInput struct {
 
-	// An array of objects, one for each condition to use to filter the query
-	// results. If you specify more than one condition, Amazon Macie uses an AND
-	// operator to join the conditions.
+	// An array of objects, one for each condition to use to filter the query results.
+	// If you specify more than one condition, Amazon Macie uses an AND operator to
+	// join the conditions.
 	FilterBy []types.UsageStatisticsFilter
 
 	// The maximum number of items to include in each page of the response.
@@ -150,8 +150,8 @@ type GetUsageStatisticsPaginatorOptions struct {
 	// The maximum number of items to include in each page of the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing subscription for the given Amazon Security Lake account
-// ID. You can update a subscriber by changing the sources that the subscriber
-// consumes data from.
+// Updates an existing subscription for the given Amazon Security Lake account ID.
+// You can update a subscriber by changing the sources that the subscriber consumes
+// data from.
 func (c *Client) UpdateSubscriber(ctx context.Context, params *UpdateSubscriberInput, optFns ...func(*Options)) (*UpdateSubscriberOutput, error) {
 	if params == nil {
 		params = &UpdateSubscriberInput{}
@@ -36,9 +36,9 @@ type UpdateSubscriberInput struct {
 	// This member is required.
 	Id *string
 
-	// The supported Amazon Web Services from which logs and events are collected.
-	// For the list of supported Amazon Web Services, see the Amazon Security Lake
-	// User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
+	// The supported Amazon Web Services from which logs and events are collected. For
+	// the list of supported Amazon Web Services, see the Amazon Security Lake User
+	// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
 	// .
 	//
 	// This member is required.

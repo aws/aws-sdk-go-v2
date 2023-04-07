@@ -45,7 +45,7 @@ type ExitStandbyInput struct {
 
 type ExitStandbyOutput struct {
 
-	// The activities related to moving instances out of Standby  mode.
+	// The activities related to moving instances out of Standby mode.
 	Activities []types.Activity
 
 	// Metadata pertaining to the operation's result.

@@ -85,8 +85,8 @@ type ApplicationConfiguration struct {
 // Kinesis Data Analytics application.
 type ApplicationConfigurationDescription struct {
 
-	// The details about the application code for a Flink-based Kinesis Data
-	// Analytics application.
+	// The details about the application code for a Flink-based Kinesis Data Analytics
+	// application.
 	ApplicationCodeConfigurationDescription *ApplicationCodeConfigurationDescription
 
 	// Describes whether snapshots are enabled for a Flink-based Kinesis Data
@@ -190,12 +190,12 @@ type ApplicationDetail struct {
 	ApplicationMaintenanceConfigurationDescription *ApplicationMaintenanceConfigurationDescription
 
 	// To create a Kinesis Data Analytics Studio notebook, you must set the mode to
-	// INTERACTIVE. However, for a Kinesis Data Analytics for Apache Flink
+	// INTERACTIVE . However, for a Kinesis Data Analytics for Apache Flink
 	// application, the mode is optional.
 	ApplicationMode ApplicationMode
 
-	// If you reverted the application using RollbackApplication, the application
-	// version when RollbackApplication  was called.
+	// If you reverted the application using RollbackApplication , the application
+	// version when RollbackApplication was called.
 	ApplicationVersionRolledBackFrom *int64
 
 	// The version to which you want to roll back the application.
@@ -334,8 +334,8 @@ type ApplicationSummary struct {
 	// This member is required.
 	RuntimeEnvironment RuntimeEnvironment
 
-	// For a Kinesis Data Analytics for Apache Flink application, the mode is
-	// STREAMING . For a Kinesis Data Analytics Studio notebook, it is INTERACTIVE .
+	// For a Kinesis Data Analytics for Apache Flink application, the mode is STREAMING
+	// . For a Kinesis Data Analytics Studio notebook, it is INTERACTIVE .
 	ApplicationMode ApplicationMode
 
 	noSmithyDocumentSerde
@@ -358,14 +358,14 @@ type ApplicationVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration parameters for the default Amazon Glue database. You use
-// this database for SQL queries that you write in a Kinesis Data Analytics Studio
+// The configuration parameters for the default Amazon Glue database. You use this
+// database for SQL queries that you write in a Kinesis Data Analytics Studio
 // notebook.
 type CatalogConfiguration struct {
 
-	// The configuration parameters for the default Amazon Glue database. You use
-	// this database for Apache Flink SQL queries and table API transforms that you
-	// write in a Kinesis Data Analytics Studio notebook.
+	// The configuration parameters for the default Amazon Glue database. You use this
+	// database for Apache Flink SQL queries and table API transforms that you write in
+	// a Kinesis Data Analytics Studio notebook.
 	//
 	// This member is required.
 	GlueDataCatalogConfiguration *GlueDataCatalogConfiguration
@@ -373,13 +373,13 @@ type CatalogConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration parameters for the default Amazon Glue database. You use
-// this database for Apache Flink SQL queries and table API transforms that you
-// write in a Kinesis Data Analytics Studio notebook.
+// The configuration parameters for the default Amazon Glue database. You use this
+// database for Apache Flink SQL queries and table API transforms that you write in
+// a Kinesis Data Analytics Studio notebook.
 type CatalogConfigurationDescription struct {
 
-	// The configuration parameters for the default Amazon Glue database. You use
-	// this database for SQL queries that you write in a Kinesis Data Analytics Studio
+	// The configuration parameters for the default Amazon Glue database. You use this
+	// database for SQL queries that you write in a Kinesis Data Analytics Studio
 	// notebook.
 	//
 	// This member is required.
@@ -413,36 +413,36 @@ type CheckpointConfiguration struct {
 	// Describes whether the application uses Kinesis Data Analytics' default
 	// checkpointing behavior. You must set this property to CUSTOM in order to set
 	// the CheckpointingEnabled , CheckpointInterval , or MinPauseBetweenCheckpoints
-	// parameters. If this value is set to DEFAULT, the application will use the
+	// parameters. If this value is set to DEFAULT , the application will use the
 	// following values, even if they are set to other values using APIs or application
 	// code:
-	//     - CheckpointingEnabled: true
-	//     - CheckpointInterval: 60000
-	//     - MinPauseBetweenCheckpoints: 5000
+	//   - CheckpointingEnabled: true
+	//   - CheckpointInterval: 60000
+	//   - MinPauseBetweenCheckpoints: 5000
 	//
 	// This member is required.
 	ConfigurationType ConfigurationType
 
 	// Describes the interval in milliseconds between checkpoint operations. If
-	// CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use
-	// a CheckpointInterval value of 60000, even if this value is set to another
-	// value using this API or in application code.
+	// CheckpointConfiguration.ConfigurationType is DEFAULT , the application will use
+	// a CheckpointInterval value of 60000, even if this value is set to another value
+	// using this API or in application code.
 	CheckpointInterval *int64
 
 	// Describes whether checkpointing is enabled for a Flink-based Kinesis Data
-	// Analytics application. If CheckpointConfiguration.ConfigurationType  is DEFAULT
-	// , the application will use a CheckpointingEnabled  value of true, even if this
+	// Analytics application. If CheckpointConfiguration.ConfigurationType is DEFAULT ,
+	// the application will use a CheckpointingEnabled value of true , even if this
 	// value is set to another value using this API or in application code.
 	CheckpointingEnabled *bool
 
 	// Describes the minimum time in milliseconds after a checkpoint operation
 	// completes that a new checkpoint operation can start. If a checkpoint operation
-	// takes longer than the CheckpointInterval, the application otherwise performs
+	// takes longer than the CheckpointInterval , the application otherwise performs
 	// continual checkpoint operations. For more information, see Tuning Checkpointing (https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/state/large_state_tuning.html#tuning-checkpointing)
 	// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.8/)
-	// . If CheckpointConfiguration.ConfigurationType  is DEFAULT, the application
-	// will use a MinPauseBetweenCheckpoints value of 5000, even if this value is set
-	// using this API or in application code.
+	// . If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
+	// use a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
+	// this API or in application code.
 	MinPauseBetweenCheckpoints *int64
 
 	noSmithyDocumentSerde
@@ -453,29 +453,29 @@ type CheckpointConfiguration struct {
 type CheckpointConfigurationDescription struct {
 
 	// Describes the interval in milliseconds between checkpoint operations. If
-	// CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use
-	// a CheckpointInterval value of 60000, even if this value is set to another
-	// value using this API or in application code.
+	// CheckpointConfiguration.ConfigurationType is DEFAULT , the application will use
+	// a CheckpointInterval value of 60000, even if this value is set to another value
+	// using this API or in application code.
 	CheckpointInterval *int64
 
 	// Describes whether checkpointing is enabled for a Flink-based Kinesis Data
-	// Analytics application. If CheckpointConfiguration.ConfigurationType  is DEFAULT
-	// , the application will use a CheckpointingEnabled  value of true, even if this
+	// Analytics application. If CheckpointConfiguration.ConfigurationType is DEFAULT ,
+	// the application will use a CheckpointingEnabled value of true , even if this
 	// value is set to another value using this API or in application code.
 	CheckpointingEnabled *bool
 
 	// Describes whether the application uses the default checkpointing behavior in
-	// Kinesis Data Analytics. If this value is set to DEFAULT, the application will
+	// Kinesis Data Analytics. If this value is set to DEFAULT , the application will
 	// use the following values, even if they are set to other values using APIs or
 	// application code:
-	//     - CheckpointingEnabled: true
-	//     - CheckpointInterval: 60000
-	//     - MinPauseBetweenCheckpoints: 5000
+	//   - CheckpointingEnabled: true
+	//   - CheckpointInterval: 60000
+	//   - MinPauseBetweenCheckpoints: 5000
 	ConfigurationType ConfigurationType
 
 	// Describes the minimum time in milliseconds after a checkpoint operation
 	// completes that a new checkpoint operation can start. If
-	// CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use
+	// CheckpointConfiguration.ConfigurationType is DEFAULT , the application will use
 	// a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
 	// this API or in application code.
 	MinPauseBetweenCheckpoints *int64
@@ -488,31 +488,31 @@ type CheckpointConfigurationDescription struct {
 type CheckpointConfigurationUpdate struct {
 
 	// Describes updates to the interval in milliseconds between checkpoint
-	// operations. If CheckpointConfiguration.ConfigurationType  is DEFAULT, the
-	// application will use a CheckpointInterval value of 60000, even if this value
-	// is set to another value using this API or in application code.
+	// operations. If CheckpointConfiguration.ConfigurationType is DEFAULT , the
+	// application will use a CheckpointInterval value of 60000, even if this value is
+	// set to another value using this API or in application code.
 	CheckpointIntervalUpdate *int64
 
 	// Describes updates to whether checkpointing is enabled for an application. If
-	// CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use
-	// a CheckpointingEnabled  value of true, even if this value is set to another
+	// CheckpointConfiguration.ConfigurationType is DEFAULT , the application will use
+	// a CheckpointingEnabled value of true , even if this value is set to another
 	// value using this API or in application code.
 	CheckpointingEnabledUpdate *bool
 
 	// Describes updates to whether the application uses the default checkpointing
 	// behavior of Kinesis Data Analytics. You must set this property to CUSTOM in
 	// order to set the CheckpointingEnabled , CheckpointInterval , or
-	// MinPauseBetweenCheckpoints parameters. If this value is set to DEFAULT, the
+	// MinPauseBetweenCheckpoints parameters. If this value is set to DEFAULT , the
 	// application will use the following values, even if they are set to other values
 	// using APIs or application code:
-	//     - CheckpointingEnabled: true
-	//     - CheckpointInterval: 60000
-	//     - MinPauseBetweenCheckpoints: 5000
+	//   - CheckpointingEnabled: true
+	//   - CheckpointInterval: 60000
+	//   - MinPauseBetweenCheckpoints: 5000
 	ConfigurationTypeUpdate ConfigurationType
 
 	// Describes updates to the minimum time in milliseconds after a checkpoint
 	// operation completes that a new checkpoint operation can start. If
-	// CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use
+	// CheckpointConfiguration.ConfigurationType is DEFAULT , the application will use
 	// a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
 	// this API or in application code.
 	MinPauseBetweenCheckpointsUpdate *int64
@@ -567,8 +567,8 @@ type CloudWatchLoggingOptionUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies either the application code, or the location of the application
-// code, for a Flink-based Kinesis Data Analytics application.
+// Specifies either the application code, or the location of the application code,
+// for a Flink-based Kinesis Data Analytics application.
 type CodeContent struct {
 
 	// Information about the Amazon S3 bucket that contains the application code.
@@ -619,11 +619,10 @@ type CodeContentUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application, provides additional
-// mapping information when the record format uses delimiters, such as CSV. For
-// example, the following sample records use CSV format, where the records use the
-// '\n' as the row delimiter and a comma (",") as the column delimiter: "name1",
-// "address1"
+// For a SQL-based Kinesis Data Analytics application, provides additional mapping
+// information when the record format uses delimiters, such as CSV. For example,
+// the following sample records use CSV format, where the records use the '\n' as
+// the row delimiter and a comma (",") as the column delimiter: "name1", "address1"
 //
 //	"name2", "address2"
 type CSVMappingParameters struct {
@@ -648,7 +647,7 @@ type CSVMappingParameters struct {
 type CustomArtifactConfiguration struct {
 
 	// UDF stands for user-defined functions. This type of artifact must be in an S3
-	// bucket. A DEPENDENCY_JAR  can be in either Maven or an S3 bucket.
+	// bucket. A DEPENDENCY_JAR can be in either Maven or an S3 bucket.
 	//
 	// This member is required.
 	ArtifactType ArtifactType
@@ -656,9 +655,9 @@ type CustomArtifactConfiguration struct {
 	// The parameters required to fully specify a Maven reference.
 	MavenReference *MavenReference
 
-	// For a Kinesis Data Analytics application provides a description of an Amazon
-	// S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the name
-	// of the Amazon S3 object that contains the data, and the version number of the
+	// For a Kinesis Data Analytics application provides a description of an Amazon S3
+	// object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of
+	// the Amazon S3 object that contains the data, and the version number of the
 	// Amazon S3 object that contains the data.
 	S3ContentLocation *S3ContentLocation
 
@@ -669,15 +668,15 @@ type CustomArtifactConfiguration struct {
 type CustomArtifactConfigurationDescription struct {
 
 	// UDF stands for user-defined functions. This type of artifact must be in an S3
-	// bucket. A DEPENDENCY_JAR  can be in either Maven or an S3 bucket.
+	// bucket. A DEPENDENCY_JAR can be in either Maven or an S3 bucket.
 	ArtifactType ArtifactType
 
 	// The parameters that are required to specify a Maven dependency.
 	MavenReferenceDescription *MavenReference
 
-	// For a Kinesis Data Analytics application provides a description of an Amazon
-	// S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the name
-	// of the Amazon S3 object that contains the data, and the version number of the
+	// For a Kinesis Data Analytics application provides a description of an Amazon S3
+	// object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of
+	// the Amazon S3 object that contains the data, and the version number of the
 	// Amazon S3 object that contains the data.
 	S3ContentLocationDescription *S3ContentLocation
 
@@ -826,8 +825,8 @@ type FlinkApplicationConfigurationUpdate struct {
 	// tolerance.
 	CheckpointConfigurationUpdate *CheckpointConfigurationUpdate
 
-	// Describes updates to the configuration parameters for Amazon CloudWatch
-	// logging for an application.
+	// Describes updates to the configuration parameters for Amazon CloudWatch logging
+	// for an application.
 	MonitoringConfigurationUpdate *MonitoringConfigurationUpdate
 
 	// Describes updates to the parameters for how an application executes multiple
@@ -847,9 +846,9 @@ type FlinkRunConfiguration struct {
 	// data in the snapshot no longer corresponds to valid application data. For more
 	// information, see Allowing Non-Restored State (https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/state/savepoints.html#allowing-non-restored-state)
 	// in the Apache Flink documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.8/)
-	// . This value defaults to false. If you update your application without
-	// specifying this parameter, AllowNonRestoredState  will be set to false, even
-	// if it was previously set to true .
+	// . This value defaults to false . If you update your application without
+	// specifying this parameter, AllowNonRestoredState will be set to false , even if
+	// it was previously set to true .
 	AllowNonRestoredState *bool
 
 	noSmithyDocumentSerde
@@ -891,9 +890,9 @@ type GlueDataCatalogConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// When you configure the application input for a SQL-based Kinesis Data
-// Analytics application, you specify the streaming source, the in-application
-// stream name that is created, and the mapping between the two.
+// When you configure the application input for a SQL-based Kinesis Data Analytics
+// application, you specify the streaming source, the in-application stream name
+// that is created, and the mapping between the two.
 type Input struct {
 
 	// Describes the format of the data in the streaming source, and how each data
@@ -903,11 +902,11 @@ type Input struct {
 	// This member is required.
 	InputSchema *SourceSchema
 
-	// The name prefix to use when creating an in-application stream. Suppose that
-	// you specify a prefix " MyInApplicationStream." Kinesis Data Analytics then
-	// creates one or more (as per the InputParallelism count you specified)
-	// in-application streams with the names " MyInApplicationStream_001 ," "
-	// MyInApplicationStream_002 ," and so on.
+	// The name prefix to use when creating an in-application stream. Suppose that you
+	// specify a prefix " MyInApplicationStream ." Kinesis Data Analytics then creates
+	// one or more (as per the InputParallelism count you specified) in-application
+	// streams with the names " MyInApplicationStream_001 ," " MyInApplicationStream_002
+	// ," and so on.
 	//
 	// This member is required.
 	NamePrefix *string
@@ -939,9 +938,9 @@ type InputDescription struct {
 	// Returns the in-application stream names that are mapped to the stream source.
 	InAppStreamNames []string
 
-	// The input ID that is associated with the application input. This is the ID
-	// that Kinesis Data Analytics assigns to each input configuration that you add to
-	// your application.
+	// The input ID that is associated with the application input. This is the ID that
+	// Kinesis Data Analytics assigns to each input configuration that you add to your
+	// application.
 	InputId *string
 
 	// Describes the configured parallelism (number of in-application streams mapped
@@ -960,8 +959,8 @@ type InputDescription struct {
 	// The point at which the application is configured to read from the input stream.
 	InputStartingPositionConfiguration *InputStartingPositionConfiguration
 
-	// If a Kinesis Data Firehose delivery stream is configured as a streaming
-	// source, provides the delivery stream's ARN.
+	// If a Kinesis Data Firehose delivery stream is configured as a streaming source,
+	// provides the delivery stream's ARN.
 	KinesisFirehoseInputDescription *KinesisFirehoseInputDescription
 
 	// If a Kinesis data stream is configured as a streaming source, provides the
@@ -990,13 +989,13 @@ type InputLambdaProcessor struct {
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application, an object that contains
-// the Amazon Resource Name (ARN) of the Amazon Lambda function that is used to
+// For a SQL-based Kinesis Data Analytics application, an object that contains the
+// Amazon Resource Name (ARN) of the Amazon Lambda function that is used to
 // preprocess records in the stream.
 type InputLambdaProcessorDescription struct {
 
-	// The ARN of the Amazon Lambda function that is used to preprocess the records
-	// in the stream. To specify an earlier version of the Lambda function than the
+	// The ARN of the Amazon Lambda function that is used to preprocess the records in
+	// the stream. To specify an earlier version of the Lambda function than the
 	// latest, include the Lambda function version in the Lambda function ARN. For more
 	// information about Lambda ARNs, see Example ARNs: Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
@@ -1012,8 +1011,8 @@ type InputLambdaProcessorDescription struct {
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application, represents an update to
-// the InputLambdaProcessor  that is used to preprocess the records in the stream.
+// For a SQL-based Kinesis Data Analytics application, represents an update to the
+// InputLambdaProcessor that is used to preprocess the records in the stream.
 type InputLambdaProcessorUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the new Amazon Lambda function that is used
@@ -1053,8 +1052,8 @@ type InputParallelismUpdate struct {
 
 // For a SQL-based Kinesis Data Analytics application, describes a processor that
 // is used to preprocess the records in the stream before being processed by your
-// application code. Currently, the only input processor available is Amazon
-// Lambda (https://docs.aws.amazon.com/lambda/) .
+// application code. Currently, the only input processor available is Amazon Lambda (https://docs.aws.amazon.com/lambda/)
+// .
 type InputProcessingConfiguration struct {
 
 	// The InputLambdaProcessor that is used to preprocess the records in the stream
@@ -1113,16 +1112,20 @@ type InputSchemaUpdate struct {
 type InputStartingPositionConfiguration struct {
 
 	// The starting position on the stream.
-	//     - NOW - Start reading just after the most recent record in the stream, and start at the request timestamp that the customer issued.
-	//     - TRIM_HORIZON - Start reading at the last untrimmed record in the stream, which is the oldest record available in the stream. This option is not available for an Amazon Kinesis Data Firehose delivery stream.
-	//     - LAST_STOPPED_POINT - Resume reading from where the application last stopped reading.
+	//   - NOW - Start reading just after the most recent record in the stream, and
+	//   start at the request timestamp that the customer issued.
+	//   - TRIM_HORIZON - Start reading at the last untrimmed record in the stream,
+	//   which is the oldest record available in the stream. This option is not available
+	//   for an Amazon Kinesis Data Firehose delivery stream.
+	//   - LAST_STOPPED_POINT - Resume reading from where the application last stopped
+	//   reading.
 	InputStartingPosition InputStartingPosition
 
 	noSmithyDocumentSerde
 }
 
 // For a SQL-based Kinesis Data Analytics application, describes updates to a
-// specific input configuration (identified by the InputId  of an application).
+// specific input configuration (identified by the InputId of an application).
 type InputUpdate struct {
 
 	// The input ID of the application input to be updated.
@@ -1130,8 +1133,8 @@ type InputUpdate struct {
 	// This member is required.
 	InputId *string
 
-	// Describes the parallelism updates (the number of in-application streams
-	// Kinesis Data Analytics creates for the specific streaming source).
+	// Describes the parallelism updates (the number of in-application streams Kinesis
+	// Data Analytics creates for the specific streaming source).
 	InputParallelismUpdate *InputParallelismUpdate
 
 	// Describes updates to an InputProcessingConfiguration .
@@ -1157,8 +1160,8 @@ type InputUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application, provides additional
-// mapping information when JSON is the record format on the streaming source.
+// For a SQL-based Kinesis Data Analytics application, provides additional mapping
+// information when JSON is the record format on the streaming source.
 type JSONMappingParameters struct {
 
 	// The path to the top-level parent that contains the records.
@@ -1246,9 +1249,8 @@ type KinesisFirehoseOutputDescription struct {
 }
 
 // For a SQL-based Kinesis Data Analytics application, when updating an output
-// configuration using the UpdateApplication operation, provides information
-// about a Kinesis Data Firehose delivery stream that is configured as the
-// destination.
+// configuration using the UpdateApplication operation, provides information about
+// a Kinesis Data Firehose delivery stream that is configured as the destination.
 type KinesisFirehoseOutputUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the delivery stream to write to.
@@ -1335,8 +1337,8 @@ type KinesisStreamsOutputDescription struct {
 }
 
 // When you update a SQL-based Kinesis Data Analytics application's output
-// configuration using the UpdateApplication operation, provides information
-// about a Kinesis data stream that is configured as the destination.
+// configuration using the UpdateApplication operation, provides information about
+// a Kinesis data stream that is configured as the destination.
 type KinesisStreamsOutputUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the Kinesis data stream where you want to
@@ -1383,8 +1385,8 @@ type LambdaOutputDescription struct {
 }
 
 // When you update an SQL-based Kinesis Data Analytics application's output
-// configuration using the UpdateApplication operation, provides information
-// about an Amazon Lambda function that is configured as the destination.
+// configuration using the UpdateApplication operation, provides information about
+// an Amazon Lambda function that is configured as the destination.
 type LambdaOutputUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the destination Amazon Lambda function. To
@@ -1443,8 +1445,8 @@ type MavenReference struct {
 type MonitoringConfiguration struct {
 
 	// Describes whether to use the default CloudWatch logging configuration for an
-	// application. You must set this property to CUSTOM  in order to set the LogLevel
-	// or MetricsLevel  parameters.
+	// application. You must set this property to CUSTOM in order to set the LogLevel
+	// or MetricsLevel parameters.
 	//
 	// This member is required.
 	ConfigurationType ConfigurationType
@@ -1453,8 +1455,8 @@ type MonitoringConfiguration struct {
 	LogLevel LogLevel
 
 	// Describes the granularity of the CloudWatch Logs for an application. The
-	// Parallelismlevel is not recommended for applications with a Parallelism over
-	// 64 due to excessive costs.
+	// Parallelism level is not recommended for applications with a Parallelism over 64
+	// due to excessive costs.
 	MetricsLevel MetricsLevel
 
 	noSmithyDocumentSerde
@@ -1476,21 +1478,21 @@ type MonitoringConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Describes updates to configuration parameters for Amazon CloudWatch logging
-// for an application.
+// Describes updates to configuration parameters for Amazon CloudWatch logging for
+// an application.
 type MonitoringConfigurationUpdate struct {
 
 	// Describes updates to whether to use the default CloudWatch logging
-	// configuration for an application. You must set this property to CUSTOM in
-	// order to set the LogLevel  or MetricsLevel  parameters.
+	// configuration for an application. You must set this property to CUSTOM in order
+	// to set the LogLevel or MetricsLevel parameters.
 	ConfigurationTypeUpdate ConfigurationType
 
 	// Describes updates to the verbosity of the CloudWatch Logs for an application.
 	LogLevelUpdate LogLevel
 
-	// Describes updates to the granularity of the CloudWatch Logs for an
-	// application. The Parallelism level is not recommended for applications with a
-	// Parallelism over 64 due to excessive costs.
+	// Describes updates to the granularity of the CloudWatch Logs for an application.
+	// The Parallelism level is not recommended for applications with a Parallelism
+	// over 64 due to excessive costs.
 	MetricsLevelUpdate MetricsLevel
 
 	noSmithyDocumentSerde
@@ -1591,9 +1593,9 @@ type OutputUpdate struct {
 type ParallelismConfiguration struct {
 
 	// Describes whether the application uses the default parallelism for the Kinesis
-	// Data Analytics service. You must set this property to CUSTOM in order to
-	// change your application's AutoScalingEnabled , Parallelism , or
-	// ParallelismPerKPU properties.
+	// Data Analytics service. You must set this property to CUSTOM in order to change
+	// your application's AutoScalingEnabled , Parallelism , or ParallelismPerKPU
+	// properties.
 	//
 	// This member is required.
 	ConfigurationType ConfigurationType
@@ -1609,14 +1611,13 @@ type ParallelismConfiguration struct {
 	// the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for
 	// the application. The maximum KPUs for an application is 32 by default, and can
 	// be increased by requesting a limit increase. If application load is reduced, the
-	// service can reduce the CurrentParallelism  value down to the Parallelism
-	// setting.
+	// service can reduce the CurrentParallelism value down to the Parallelism setting.
 	Parallelism *int32
 
 	// Describes the number of parallel tasks that a Flink-based Kinesis Data
 	// Analytics application can perform per Kinesis Processing Unit (KPU) used by the
-	// application. For more information about KPUs, see Amazon Kinesis Data
-	// Analytics Pricing (http://aws.amazon.com/kinesis/data-analytics/pricing/) .
+	// application. For more information about KPUs, see Amazon Kinesis Data Analytics
+	// Pricing (http://aws.amazon.com/kinesis/data-analytics/pricing/) .
 	ParallelismPerKPU *int32
 
 	noSmithyDocumentSerde
@@ -1638,21 +1639,20 @@ type ParallelismConfigurationDescription struct {
 	// Analytics application can perform. If AutoScalingEnabled is set to True,
 	// Kinesis Data Analytics can increase this value in response to application load.
 	// The service can increase this value up to the maximum parallelism, which is
-	// ParalellismPerKPUtimes the maximum KPUs for the application. The maximum KPUs
+	// ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs
 	// for an application is 32 by default, and can be increased by requesting a limit
 	// increase. If application load is reduced, the service can reduce the
-	// CurrentParallelism value down to the Parallelism  setting.
+	// CurrentParallelism value down to the Parallelism setting.
 	CurrentParallelism *int32
 
 	// Describes the initial number of parallel tasks that a Flink-based Kinesis Data
 	// Analytics application can perform. If AutoScalingEnabled is set to True, then
-	// Kinesis Data Analytics can increase the CurrentParallelism value in response
-	// to application load. The service can increase CurrentParallelism up to the
-	// maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the
+	// Kinesis Data Analytics can increase the CurrentParallelism value in response to
+	// application load. The service can increase CurrentParallelism up to the maximum
+	// parallelism, which is ParalellismPerKPU times the maximum KPUs for the
 	// application. The maximum KPUs for an application is 32 by default, and can be
 	// increased by requesting a limit increase. If application load is reduced, the
-	// service can reduce the CurrentParallelism  value down to the Parallelism
-	// setting.
+	// service can reduce the CurrentParallelism value down to the Parallelism setting.
 	Parallelism *int32
 
 	// Describes the number of parallel tasks that a Flink-based Kinesis Data
@@ -1674,8 +1674,8 @@ type ParallelismConfigurationUpdate struct {
 
 	// Describes updates to whether the application uses the default parallelism for
 	// the Kinesis Data Analytics service, or if a custom parallelism is used. You must
-	// set this property to CUSTOM  in order to change your application's
-	// AutoScalingEnabled , Parallelism , or ParallelismPerKPU  properties.
+	// set this property to CUSTOM in order to change your application's
+	// AutoScalingEnabled , Parallelism , or ParallelismPerKPU properties.
 	ConfigurationTypeUpdate ConfigurationType
 
 	// Describes updates to the number of parallel tasks an application can perform
@@ -1685,11 +1685,11 @@ type ParallelismConfigurationUpdate struct {
 	// Describes updates to the initial number of parallel tasks an application can
 	// perform. If AutoScalingEnabled is set to True, then Kinesis Data Analytics can
 	// increase the CurrentParallelism value in response to application load. The
-	// service can increase CurrentParallelism up to the maximum parallelism, which
-	// is ParalellismPerKPU times the maximum KPUs for the application. The maximum
-	// KPUs for an application is 32 by default, and can be increased by requesting a
-	// limit increase. If application load is reduced, the service will reduce
-	// CurrentParallelism down to the Parallelism  setting.
+	// service can increase CurrentParallelism up to the maximum parallelism, which is
+	// ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs
+	// for an application is 32 by default, and can be increased by requesting a limit
+	// increase. If application load is reduced, the service will reduce
+	// CurrentParallelism down to the Parallelism setting.
 	ParallelismUpdate *int32
 
 	noSmithyDocumentSerde
@@ -1736,8 +1736,8 @@ type RecordColumn struct {
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application, describes the record
-// format and relevant mapping information that should be applied to schematize the
+// For a SQL-based Kinesis Data Analytics application, describes the record format
+// and relevant mapping information that should be applied to schematize the
 // records on the stream.
 type RecordFormat struct {
 
@@ -1773,10 +1773,10 @@ type ReferenceDataSource struct {
 	// This member is required.
 	TableName *string
 
-	// Identifies the S3 bucket and object that contains the reference data. A
-	// Kinesis Data Analytics application loads reference data only once. If the data
-	// changes, you call the UpdateApplication operation to trigger reloading of data
-	// into your application.
+	// Identifies the S3 bucket and object that contains the reference data. A Kinesis
+	// Data Analytics application loads reference data only once. If the data changes,
+	// you call the UpdateApplication operation to trigger reloading of data into your
+	// application.
 	S3ReferenceDataSource *S3ReferenceDataSource
 
 	noSmithyDocumentSerde
@@ -1786,9 +1786,9 @@ type ReferenceDataSource struct {
 // data source configured for an application.
 type ReferenceDataSourceDescription struct {
 
-	// The ID of the reference data source. This is the ID that Kinesis Data
-	// Analytics assigns when you add the reference data source to your application
-	// using the CreateApplication  or UpdateApplication  operation.
+	// The ID of the reference data source. This is the ID that Kinesis Data Analytics
+	// assigns when you add the reference data source to your application using the
+	// CreateApplication or UpdateApplication operation.
 	//
 	// This member is required.
 	ReferenceId *string
@@ -1963,9 +1963,9 @@ type S3ContentBaseLocationUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// For a Kinesis Data Analytics application provides a description of an Amazon
-// S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the name
-// of the Amazon S3 object that contains the data, and the version number of the
+// For a Kinesis Data Analytics application provides a description of an Amazon S3
+// object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of
+// the Amazon S3 object that contains the data, and the version number of the
 // Amazon S3 object that contains the data.
 type S3ContentLocation struct {
 
@@ -1989,8 +1989,8 @@ type S3ContentLocation struct {
 // Describes an update for the Amazon S3 code content location for an application.
 type S3ContentLocationUpdate struct {
 
-	// The new Amazon Resource Name (ARN) for the S3 bucket containing the
-	// application code.
+	// The new Amazon Resource Name (ARN) for the S3 bucket containing the application
+	// code.
 	BucketARNUpdate *string
 
 	// The new file key for the object containing the application code.
@@ -2078,12 +2078,12 @@ type SnapshotDetails struct {
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application, describes the format of
-// the data in the streaming source, and how each data element maps to
-// corresponding columns created in the in-application stream.
+// For a SQL-based Kinesis Data Analytics application, describes the format of the
+// data in the streaming source, and how each data element maps to corresponding
+// columns created in the in-application stream.
 type SourceSchema struct {
 
-	// A list of RecordColumn  objects.
+	// A list of RecordColumn objects.
 	//
 	// This member is required.
 	RecordColumns []RecordColumn
@@ -2104,8 +2104,7 @@ type SourceSchema struct {
 // Kinesis Data Analytics application.
 type SqlApplicationConfiguration struct {
 
-	// The array of Input objects describing the input streams used by the
-	// application.
+	// The array of Input objects describing the input streams used by the application.
 	Inputs []Input
 
 	// The array of Output objects describing the destination streams used by the
@@ -2138,8 +2137,8 @@ type SqlApplicationConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Describes updates to the input streams, destination streams, and reference
-// data sources for a SQL-based Kinesis Data Analytics application.
+// Describes updates to the input streams, destination streams, and reference data
+// sources for a SQL-based Kinesis Data Analytics application.
 type SqlApplicationConfigurationUpdate struct {
 
 	// The array of InputUpdate objects describing the new input streams used by the
@@ -2288,8 +2287,8 @@ type ZeppelinApplicationConfigurationDescription struct {
 	// This member is required.
 	MonitoringConfigurationDescription *ZeppelinMonitoringConfigurationDescription
 
-	// The Amazon Glue Data Catalog that is associated with the Kinesis Data
-	// Analytics Studio notebook.
+	// The Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics
+	// Studio notebook.
 	CatalogConfigurationDescription *CatalogConfigurationDescription
 
 	// Custom artifacts are dependency JARs and user-defined functions (UDF).
@@ -2305,8 +2304,8 @@ type ZeppelinApplicationConfigurationDescription struct {
 // Updates to the configuration of Kinesis Data Analytics Studio notebook.
 type ZeppelinApplicationConfigurationUpdate struct {
 
-	// Updates to the configuration of the Amazon Glue Data Catalog that is
-	// associated with the Kinesis Data Analytics Studio notebook.
+	// Updates to the configuration of the Amazon Glue Data Catalog that is associated
+	// with the Kinesis Data Analytics Studio notebook.
 	CatalogConfigurationUpdate *CatalogConfigurationUpdate
 
 	// Updates to the customer artifacts. Custom artifacts are dependency JAR files

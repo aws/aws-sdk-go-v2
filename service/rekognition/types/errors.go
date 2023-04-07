@@ -69,9 +69,9 @@ func (e *HumanLoopQuotaExceededException) ErrorCode() string {
 }
 func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A ClientRequestToken input parameter was reused with an operation, but at
-// least one of the other input parameters is different from the previous call to
-// the operation.
+// A ClientRequestToken input parameter was reused with an operation, but at least
+// one of the other input parameters is different from the previous call to the
+// operation.
 type IdempotentParameterMismatchException struct {
 	Message *string
 
@@ -309,8 +309,8 @@ func (e *InvalidS3ObjectException) ErrorCode() string {
 }
 func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An Amazon Rekognition service limit was exceeded. For example, if you start
-// too many Amazon Rekognition Video jobs concurrently, calls to start operations (
+// An Amazon Rekognition service limit was exceeded. For example, if you start too
+// many Amazon Rekognition Video jobs concurrently, calls to start operations (
 // StartLabelDetection , for example) will raise a LimitExceededException
 // exception (HTTP status code: 400) until the number of concurrently running jobs
 // is below the Amazon Rekognition service limit.
@@ -491,8 +491,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested resource isn't ready. For example, this exception occurs when
-// you call DetectCustomLabels  with a model version that isn't deployed.
+// The requested resource isn't ready. For example, this exception occurs when you
+// call DetectCustomLabels with a model version that isn't deployed.
 type ResourceNotReadyException struct {
 	Message *string
 
@@ -521,9 +521,9 @@ func (e *ResourceNotReadyException) ErrorCode() string {
 }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The size of the collection exceeds the allowed limit. For more information,
-// see Guidelines and quotas in Amazon Rekognition in the Amazon Rekognition
-// Developer Guide.
+// The size of the collection exceeds the allowed limit. For more information, see
+// Guidelines and quotas in Amazon Rekognition in the Amazon Rekognition Developer
+// Guide.
 type ServiceQuotaExceededException struct {
 	Message *string
 

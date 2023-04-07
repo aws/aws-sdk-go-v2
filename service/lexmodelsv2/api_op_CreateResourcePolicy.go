@@ -37,8 +37,8 @@ type CreateResourcePolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
-	// policy is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
+	// is attached to.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -48,8 +48,8 @@ type CreateResourcePolicyInput struct {
 
 type CreateResourcePolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
-	// policy was attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
+	// was attached to.
 	ResourceArn *string
 
 	// The current revision of the resource policy. Use the revision ID to make sure

@@ -190,8 +190,8 @@ const (
 	DeploymentTargetTypeCloudformationTarget DeploymentTargetType = "CloudFormationTarget"
 )
 
-// Values returns all known values for DeploymentTargetType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DeploymentTargetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentTargetType) Values() []DeploymentTargetType {
 	return []DeploymentTargetType{
@@ -481,8 +481,8 @@ const (
 	LifecycleEventStatusUnknown    LifecycleEventStatus = "Unknown"
 )
 
-// Values returns all known values for LifecycleEventStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LifecycleEventStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LifecycleEventStatus) Values() []LifecycleEventStatus {
 	return []LifecycleEventStatus{
@@ -523,9 +523,9 @@ const (
 	MinimumHealthyHostsTypeFleetPercent MinimumHealthyHostsType = "FLEET_PERCENT"
 )
 
-// Values returns all known values for MinimumHealthyHostsType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MinimumHealthyHostsType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MinimumHealthyHostsType) Values() []MinimumHealthyHostsType {
 	return []MinimumHealthyHostsType{
 		"HOST_COUNT",
@@ -579,8 +579,8 @@ const (
 	RevisionLocationTypeAppSpecContent RevisionLocationType = "AppSpecContent"
 )
 
-// Values returns all known values for RevisionLocationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RevisionLocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RevisionLocationType) Values() []RevisionLocationType {
 	return []RevisionLocationType{
@@ -673,9 +673,9 @@ const (
 	TargetLabelGreen TargetLabel = "Green"
 )
 
-// Values returns all known values for TargetLabel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TargetLabel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TargetLabel) Values() []TargetLabel {
 	return []TargetLabel{
 		"Blue",

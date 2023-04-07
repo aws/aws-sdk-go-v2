@@ -203,10 +203,10 @@ func (w *ServicesInactiveWaiter) Wait(ctx context.Context, params *DescribeServi
 	return err
 }
 
-// WaitForOutput calls the waiter function for ServicesInactive waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for ServicesInactive waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *ServicesInactiveWaiter) WaitForOutput(ctx context.Context, params *DescribeServicesInput, maxWaitDur time.Duration, optFns ...func(*ServicesInactiveWaiterOptions)) (*DescribeServicesOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -386,9 +386,9 @@ func NewServicesStableWaiter(client DescribeServicesAPIClient, optFns ...func(*S
 	}
 }
 
-// Wait calls the waiter function for ServicesStable waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ServicesStable waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ServicesStableWaiter) Wait(ctx context.Context, params *DescribeServicesInput, maxWaitDur time.Duration, optFns ...func(*ServicesStableWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

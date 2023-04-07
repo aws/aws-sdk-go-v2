@@ -12,7 +12,7 @@ import (
 )
 
 // Accepts a transit gateway peering attachment request. The peering attachment
-// must be in the pendingAcceptance  state.
+// must be in the pendingAcceptance state.
 func (c *Client) AcceptTransitGatewayPeeringAttachment(ctx context.Context, params *AcceptTransitGatewayPeeringAttachmentInput, optFns ...func(*Options)) (*AcceptTransitGatewayPeeringAttachmentOutput, error) {
 	if params == nil {
 		params = &AcceptTransitGatewayPeeringAttachmentInput{}

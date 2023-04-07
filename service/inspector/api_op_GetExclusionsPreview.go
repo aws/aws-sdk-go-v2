@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the exclusions preview (a list of ExclusionPreview objects)
-// specified by the preview token. You can obtain the preview token by running the
+// Retrieves the exclusions preview (a list of ExclusionPreview objects) specified
+// by the preview token. You can obtain the preview token by running the
 // CreateExclusionsPreview API.
 func (c *Client) GetExclusionsPreview(ctx context.Context, params *GetExclusionsPreviewInput, optFns ...func(*Options)) (*GetExclusionsPreviewOutput, error) {
 	if params == nil {
@@ -32,8 +32,8 @@ func (c *Client) GetExclusionsPreview(ctx context.Context, params *GetExclusions
 
 type GetExclusionsPreviewInput struct {
 
-	// The ARN that specifies the assessment template for which the exclusions
-	// preview was requested.
+	// The ARN that specifies the assessment template for which the exclusions preview
+	// was requested.
 	//
 	// This member is required.
 	AssessmentTemplateArn *string
@@ -43,8 +43,8 @@ type GetExclusionsPreviewInput struct {
 	// This member is required.
 	PreviewToken *string
 
-	// The locale into which you want to translate the exclusion's title,
-	// description, and recommendation.
+	// The locale into which you want to translate the exclusion's title, description,
+	// and recommendation.
 	Locale types.Locale
 
 	// You can use this parameter to indicate the maximum number of items you want in
@@ -160,8 +160,8 @@ type GetExclusionsPreviewPaginatorOptions struct {
 	// the response. The default value is 100. The maximum value is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -30,7 +30,7 @@ func (c *Client) ListOnPremisesInstances(ctx context.Context, params *ListOnPrem
 	return out, nil
 }
 
-// Represents the input of a ListOnPremisesInstances  operation.
+// Represents the input of a ListOnPremisesInstances operation.
 type ListOnPremisesInstancesInput struct {
 
 	// An identifier returned from the previous list on-premises instances call. It
@@ -38,8 +38,9 @@ type ListOnPremisesInstancesInput struct {
 	NextToken *string
 
 	// The registration status of the on-premises instances:
-	//     - Deregistered : Include deregistered on-premises instances in the resulting list.
-	//     - Registered : Include registered on-premises instances in the resulting list.
+	//   - Deregistered : Include deregistered on-premises instances in the resulting
+	//   list.
+	//   - Registered : Include registered on-premises instances in the resulting list.
 	RegistrationStatus types.RegistrationStatus
 
 	// The on-premises instance tags that are used to restrict the on-premises

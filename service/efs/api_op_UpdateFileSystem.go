@@ -39,12 +39,12 @@ type UpdateFileSystemInput struct {
 	// (Optional) Sets the amount of provisioned throughput, in MiB/s, for the file
 	// system. Valid values are 1-1024. If you are changing the throughput mode to
 	// provisioned, you must also provide the amount of provisioned throughput.
-	// Required if ThroughputMode  is changed to provisioned  on update.
+	// Required if ThroughputMode is changed to provisioned on update.
 	ProvisionedThroughputInMibps *float64
 
 	// (Optional) Updates the file system's throughput mode. If you're not updating
 	// your throughput mode, you don't need to provide this value in your request. If
-	// you are changing the ThroughputMode  to provisioned, you must also set a value
+	// you are changing the ThroughputMode to provisioned , you must also set a value
 	// for ProvisionedThroughputInMibps .
 	ThroughputMode types.ThroughputMode
 
@@ -92,8 +92,8 @@ type UpdateFileSystemOutput struct {
 	PerformanceMode types.PerformanceMode
 
 	// The latest known metered size (in bytes) of data stored in the file system, in
-	// its Value  field, and the time at which that size was determined in its
-	// Timestamp field. The Timestamp value is the integer number of seconds since
+	// its Value field, and the time at which that size was determined in its Timestamp
+	// field. The Timestamp value is the integer number of seconds since
 	// 1970-01-01T00:00:00Z. The SizeInBytes value doesn't represent the size of a
 	// consistent snapshot of the file system, but it is eventually consistent when
 	// there are no writes to the file system. That is, SizeInBytes represents actual
@@ -104,20 +104,20 @@ type UpdateFileSystemOutput struct {
 	// This member is required.
 	SizeInBytes *types.FileSystemSize
 
-	// The tags associated with the file system, presented as an array of Tag  objects.
+	// The tags associated with the file system, presented as an array of Tag objects.
 	//
 	// This member is required.
 	Tags []types.Tag
 
-	// The unique and consistent identifier of the Availability Zone in which the
-	// file system's One Zone storage classes exist. For example, use1-az1 is an
+	// The unique and consistent identifier of the Availability Zone in which the file
+	// system's One Zone storage classes exist. For example, use1-az1 is an
 	// Availability Zone ID for the us-east-1 Amazon Web Services Region, and it has
 	// the same location in every Amazon Web Services account.
 	AvailabilityZoneId *string
 
-	// Describes the Amazon Web Services Availability Zone in which the file system
-	// is located, and is valid only for file systems using One Zone storage classes.
-	// For more information, see Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
+	// Describes the Amazon Web Services Availability Zone in which the file system is
+	// located, and is valid only for file systems using One Zone storage classes. For
+	// more information, see Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
 	// in the Amazon EFS User Guide.
 	AvailabilityZoneName *string
 
@@ -139,7 +139,7 @@ type UpdateFileSystemOutput struct {
 	Name *string
 
 	// The amount of provisioned throughput, measured in MiB/s, for the file system.
-	// Valid for file systems using ThroughputMode  set to provisioned .
+	// Valid for file systems using ThroughputMode set to provisioned .
 	ProvisionedThroughputInMibps *float64
 
 	// Displays the file system's throughput mode. For more information, see

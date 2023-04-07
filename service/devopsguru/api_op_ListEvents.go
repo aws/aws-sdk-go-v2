@@ -31,7 +31,7 @@ func (c *Client) ListEvents(ctx context.Context, params *ListEventsInput, optFns
 
 type ListEventsInput struct {
 
-	// A ListEventsFilters  object used to specify which events to return.
+	// A ListEventsFilters object used to specify which events to return.
 	//
 	// This member is required.
 	Filters *types.ListEventsFilters
@@ -40,7 +40,7 @@ type ListEventsInput struct {
 	AccountId *string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -140,11 +140,11 @@ var _ ListEventsAPIClient = (*Client)(nil)
 // ListEventsPaginatorOptions is the paginator options for ListEvents
 type ListEventsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

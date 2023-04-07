@@ -49,9 +49,9 @@ const (
 	AggregationResourceTypeAwsLambdaFunction    AggregationResourceType = "AWS_LAMBDA_FUNCTION"
 )
 
-// Values returns all known values for AggregationResourceType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AggregationResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AggregationResourceType) Values() []AggregationResourceType {
 	return []AggregationResourceType{
 		"AWS_EC2_INSTANCE",
@@ -182,8 +182,8 @@ const (
 	CoverageResourceTypeAwsLambdaFunction    CoverageResourceType = "AWS_LAMBDA_FUNCTION"
 )
 
-// Values returns all known values for CoverageResourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CoverageResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CoverageResourceType) Values() []CoverageResourceType {
 	return []CoverageResourceType{
@@ -219,9 +219,9 @@ const (
 	CurrencyUsd Currency = "USD"
 )
 
-// Values returns all known values for Currency. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Currency. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Currency) Values() []Currency {
 	return []Currency{
 		"USD",
@@ -236,8 +236,8 @@ const (
 	DelegatedAdminStatusDisableInProgress DelegatedAdminStatus = "DISABLE_IN_PROGRESS"
 )
 
-// Values returns all known values for DelegatedAdminStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DelegatedAdminStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DelegatedAdminStatus) Values() []DelegatedAdminStatus {
 	return []DelegatedAdminStatus{
@@ -277,9 +277,9 @@ const (
 	Ec2PlatformUnknown Ec2Platform = "UNKNOWN"
 )
 
-// Values returns all known values for Ec2Platform. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Ec2Platform. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Ec2Platform) Values() []Ec2Platform {
 	return []Ec2Platform{
 		"WINDOWS",
@@ -317,9 +317,9 @@ const (
 	EcrRescanDurationStatusFailed  EcrRescanDurationStatus = "FAILED"
 )
 
-// Values returns all known values for EcrRescanDurationStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EcrRescanDurationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EcrRescanDurationStatus) Values() []EcrRescanDurationStatus {
 	return []EcrRescanDurationStatus{
 		"SUCCESS",
@@ -418,8 +418,8 @@ const (
 	ExternalReportStatusFailed     ExternalReportStatus = "FAILED"
 )
 
-// Values returns all known values for ExternalReportStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ExternalReportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ExternalReportStatus) Values() []ExternalReportStatus {
 	return []ExternalReportStatus{
@@ -476,9 +476,9 @@ const (
 	FindingTypePackageVulnerability FindingType = "PACKAGE_VULNERABILITY"
 )
 
-// Values returns all known values for FindingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FindingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FindingType) Values() []FindingType {
 	return []FindingType{
 		"NETWORK_REACHABILITY",
@@ -593,9 +593,9 @@ const (
 	GroupKeyEcrRepositoryName GroupKey = "ECR_REPOSITORY_NAME"
 )
 
-// Values returns all known values for GroupKey. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for GroupKey. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (GroupKey) Values() []GroupKey {
 	return []GroupKey{
 		"SCAN_STATUS_CODE",
@@ -635,8 +635,8 @@ const (
 	LambdaFunctionSortByAll      LambdaFunctionSortBy = "ALL"
 )
 
-// Values returns all known values for LambdaFunctionSortBy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LambdaFunctionSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFunctionSortBy) Values() []LambdaFunctionSortBy {
 	return []LambdaFunctionSortBy{
@@ -796,9 +796,9 @@ const (
 	PackageTypeZip   PackageType = "ZIP"
 )
 
-// Values returns all known values for PackageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PackageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PackageType) Values() []PackageType {
 	return []PackageType{
 		"IMAGE",
@@ -1068,9 +1068,9 @@ const (
 	ScanTypePackage ScanType = "PACKAGE"
 )
 
-// Values returns all known values for ScanType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScanType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (ScanType) Values() []ScanType {
 	return []ScanType{
 		"NETWORK",
@@ -1110,9 +1110,9 @@ const (
 	SeverityUntriaged     Severity = "UNTRIAGED"
 )
 
-// Values returns all known values for Severity. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Severity. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Severity) Values() []Severity {
 	return []Severity{
 		"INFORMATIONAL",
@@ -1243,9 +1243,9 @@ const (
 	TitleSortByAll      TitleSortBy = "ALL"
 )
 
-// Values returns all known values for TitleSortBy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TitleSortBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TitleSortBy) Values() []TitleSortBy {
 	return []TitleSortBy{
 		"CRITICAL",

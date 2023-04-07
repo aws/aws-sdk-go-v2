@@ -15,9 +15,9 @@ import (
 
 // Deploys a specific version of a robot application to robots in a fleet. This
 // API is no longer supported and will throw an error if used. The robot
-// application must have a numbered applicationVersion for consistency reasons.
-// To create a new version, use CreateRobotApplicationVersion  or see Creating a
-// Robot Application Version (https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html)
+// application must have a numbered applicationVersion for consistency reasons. To
+// create a new version, use CreateRobotApplicationVersion or see Creating a Robot
+// Application Version (https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html)
 // . After 90 days, deployment jobs expire and will be deleted. They will no longer
 // be accessible.
 //
@@ -41,8 +41,8 @@ func (c *Client) CreateDeploymentJob(ctx context.Context, params *CreateDeployme
 
 type CreateDeploymentJobInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -60,8 +60,8 @@ type CreateDeploymentJobInput struct {
 	// The requested deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
 
-	// A map that contains tag keys and tag values that are attached to the
-	// deployment job.
+	// A map that contains tag keys and tag values that are attached to the deployment
+	// job.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -83,7 +83,7 @@ type CreateDeploymentJobOutput struct {
 
 	// The failure code of the simulation job if it failed: BadPermissionError AWS
 	// Greengrass requires a service-level role permission to access other services.
-	// The role must include the AWSGreengrassResourceAccessRolePolicy  managed policy (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor)
+	// The role must include the AWSGreengrassResourceAccessRolePolicy managed policy (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor)
 	// . ExtractingBundleFailure The robot application could not be extracted from the
 	// bundle. FailureThresholdBreached The percentage of robots that could not be
 	// updated exceeded the percentage set for the deployment.

@@ -38,14 +38,14 @@ type DescribeSpotFleetRequestsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	MaxResults *int32
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// The IDs of the Spot Fleet requests.
@@ -58,7 +58,7 @@ type DescribeSpotFleetRequestsInput struct {
 type DescribeSpotFleetRequestsOutput struct {
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Information about the configuration of your Spot Fleet.
@@ -141,14 +141,14 @@ var _ DescribeSpotFleetRequestsAPIClient = (*Client)(nil)
 // DescribeSpotFleetRequestsPaginatorOptions is the paginator options for
 // DescribeSpotFleetRequests
 type DescribeSpotFleetRequestsPaginatorOptions struct {
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

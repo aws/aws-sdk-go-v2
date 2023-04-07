@@ -12,7 +12,7 @@ import (
 )
 
 // Updates the identity information for the specified user. We strongly recommend
-// limiting who has the ability to invoke UpdateUserIdentityInfo. Someone with
+// limiting who has the ability to invoke UpdateUserIdentityInfo . Someone with
 // that ability can change the login credentials of other users by changing their
 // email address. This poses a security risk to your organization. They can change
 // the email address of a user to the attacker's email address, and then reset the

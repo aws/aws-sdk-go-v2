@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a RepositoryDescription object that contains detailed information
-// about the requested repository.
+// Returns a RepositoryDescription object that contains detailed information about
+// the requested repository.
 func (c *Client) DescribeRepository(ctx context.Context, params *DescribeRepositoryInput, optFns ...func(*Options)) (*DescribeRepositoryOutput, error) {
 	if params == nil {
 		params = &DescribeRepositoryInput{}

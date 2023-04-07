@@ -45,19 +45,21 @@ type CreateFacetInput struct {
 	Attributes []types.FacetAttribute
 
 	// There are two different styles that you can define on any given facet, Static
-	// and Dynamic. For static facets, all attributes must be defined in the schema.
+	// and Dynamic . For static facets, all attributes must be defined in the schema.
 	// For dynamic facets, attributes can be defined during data plane operations.
 	FacetStyle types.FacetStyle
 
 	// Specifies whether a given object created from this facet is of type node, leaf
 	// node, policy or index.
-	//     - Node: Can have multiple children but one parent.
+	//   - Node: Can have multiple children but one parent.
 	//
-	//     - Leaf node: Cannot have children but can have multiple parents.
+	//   - Leaf node: Cannot have children but can have multiple parents.
 	//
-	//     - Policy: Allows you to store a policy document and policy type. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies) .
+	//   - Policy: Allows you to store a policy document and policy type. For more
+	//   information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies)
+	//   .
 	//
-	//     - Index: Can be created with the Index API.
+	//   - Index: Can be created with the Index API.
 	ObjectType types.ObjectType
 
 	noSmithyDocumentSerde

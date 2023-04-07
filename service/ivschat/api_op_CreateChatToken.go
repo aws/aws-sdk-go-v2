@@ -40,8 +40,8 @@ func (c *Client) CreateChatToken(ctx context.Context, params *CreateChatTokenInp
 
 type CreateChatTokenInput struct {
 
-	// Identifier of the room that the client is trying to access. Currently this
-	// must be an ARN.
+	// Identifier of the room that the client is trying to access. Currently this must
+	// be an ARN.
 	//
 	// This member is required.
 	RoomIdentifier *string

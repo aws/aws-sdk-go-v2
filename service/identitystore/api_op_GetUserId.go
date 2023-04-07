@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the UserId  in an identity store.
+// Retrieves the UserId in an identity store.
 func (c *Client) GetUserId(ctx context.Context, params *GetUserIdInput, optFns ...func(*Options)) (*GetUserIdOutput, error) {
 	if params == nil {
 		params = &GetUserIdInput{}

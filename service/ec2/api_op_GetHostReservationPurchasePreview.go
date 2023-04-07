@@ -13,8 +13,8 @@ import (
 
 // Preview a reservation purchase with configurations that match those of your
 // Dedicated Host. You must have active Dedicated Hosts in your account before you
-// purchase a reservation. This is a preview of the PurchaseHostReservation
-// action and does not result in the offering being purchased.
+// purchase a reservation. This is a preview of the PurchaseHostReservation action
+// and does not result in the offering being purchased.
 func (c *Client) GetHostReservationPurchasePreview(ctx context.Context, params *GetHostReservationPurchasePreviewInput, optFns ...func(*Options)) (*GetHostReservationPurchasePreviewOutput, error) {
 	if params == nil {
 		params = &GetHostReservationPurchasePreviewInput{}
@@ -47,7 +47,7 @@ type GetHostReservationPurchasePreviewInput struct {
 
 type GetHostReservationPurchasePreviewOutput struct {
 
-	// The currency in which the totalUpfrontPrice  and totalHourlyPrice amounts are
+	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts are
 	// specified. At this time, the only supported currency is USD .
 	CurrencyCode types.CurrencyCodeValues
 

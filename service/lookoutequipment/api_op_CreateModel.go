@@ -55,14 +55,14 @@ type CreateModelInput struct {
 	// This member is required.
 	ModelName *string
 
-	// The configuration is the TargetSamplingRate, which is the sampling rate of the
+	// The configuration is the TargetSamplingRate , which is the sampling rate of the
 	// data after post processing by Amazon Lookout for Equipment. For example, if you
 	// provide data that has been collected at a 1 second level and you want the system
 	// to resample the data at a 1 minute rate before training, the TargetSamplingRate
-	// is 1 minute. When providing a value for the TargetSamplingRate, you must
-	// attach the prefix "PT" to the rate you want. The value for a 1 second rate is
-	// therefore PT1S, the value for a 15 minute rate is PT15M, and the value for a 1
-	// hour rate is PT1H
+	// is 1 minute. When providing a value for the TargetSamplingRate , you must attach
+	// the prefix "PT" to the rate you want. The value for a 1 second rate is therefore
+	// PT1S, the value for a 15 minute rate is PT15M, and the value for a 1 hour rate
+	// is PT1H
 	DataPreProcessingConfiguration *types.DataPreProcessingConfiguration
 
 	// The data schema for the ML model being created.
@@ -76,12 +76,12 @@ type CreateModelInput struct {
 	// subset of evaluation data for the ML model.
 	EvaluationDataStartTime *time.Time
 
-	// The input configuration for the labels being used for the ML model that's
-	// being created.
+	// The input configuration for the labels being used for the ML model that's being
+	// created.
 	LabelsInputConfiguration *types.LabelsInputConfiguration
 
-	// Indicates that the asset associated with this sensor has been shut off. As
-	// long as this condition is met, Lookout for Equipment will not use data from this
+	// Indicates that the asset associated with this sensor has been shut off. As long
+	// as this condition is met, Lookout for Equipment will not use data from this
 	// asset for training, evaluation, or inference.
 	OffCondition *string
 
@@ -112,7 +112,7 @@ type CreateModelOutput struct {
 	// The Amazon Resource Name (ARN) of the model being created.
 	ModelArn *string
 
-	// Indicates the status of the CreateModel  operation.
+	// Indicates the status of the CreateModel operation.
 	Status types.ModelStatus
 
 	// Metadata pertaining to the operation's result.

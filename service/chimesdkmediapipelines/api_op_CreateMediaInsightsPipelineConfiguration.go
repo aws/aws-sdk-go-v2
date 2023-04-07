@@ -43,8 +43,8 @@ type CreateMediaInsightsPipelineConfigurationInput struct {
 	MediaInsightsPipelineConfigurationName *string
 
 	// The ARN of the role used by the service to access Amazon Web Services
-	// resources, including Transcribe  and Transcribe Call Analytics, on the
-	// caller’s behalf.
+	// resources, including Transcribe and Transcribe Call Analytics , on the caller’s
+	// behalf.
 	//
 	// This member is required.
 	ResourceAccessRoleArn *string

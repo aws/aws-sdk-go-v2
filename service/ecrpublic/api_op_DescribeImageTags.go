@@ -37,20 +37,19 @@ type DescribeImageTagsInput struct {
 
 	// The maximum number of repository results that's returned by DescribeImageTags
 	// in paginated output. When this parameter is used, DescribeImageTags only
-	// returns maxResults  results in a single page along with a nextToken response
+	// returns maxResults results in a single page along with a nextToken response
 	// element. You can see the remaining results of the initial request by sending
-	// another DescribeImageTags  request with the returned nextToken value. This
-	// value can be between 1 and 1000. If this parameter isn't used, then
-	// DescribeImageTags returns up to 100 results and a nextToken value, if
-	// applicable. If you specify images with imageIds , you can't use this option.
+	// another DescribeImageTags request with the returned nextToken value. This value
+	// can be between 1 and 1000. If this parameter isn't used, then DescribeImageTags
+	// returns up to 100 results and a nextToken value, if applicable. If you specify
+	// images with imageIds , you can't use this option.
 	MaxResults *int32
 
-	// The nextToken  value that's returned from a previous paginated
-	// DescribeImageTags request where maxResults was used and the results exceeded
-	// the value of that parameter. Pagination continues from the end of the previous
-	// results that returned the nextToken value. If there are no more results to
-	// return, this value is null . If you specify images with imageIds, you can't
-	// use this option.
+	// The nextToken value that's returned from a previous paginated DescribeImageTags
+	// request where maxResults was used and the results exceeded the value of that
+	// parameter. Pagination continues from the end of the previous results that
+	// returned the nextToken value. If there are no more results to return, this
+	// value is null . If you specify images with imageIds , you can't use this option.
 	NextToken *string
 
 	// The Amazon Web Services account ID that's associated with the public registry
@@ -66,9 +65,9 @@ type DescribeImageTagsOutput struct {
 	// The image tag details for the images in the requested repository.
 	ImageTagDetails []types.ImageTagDetail
 
-	// The nextToken  value to include in a future DescribeImageTags request. When
-	// the results of a DescribeImageTags  request exceed maxResults, you can use
-	// this value to retrieve the next page of results. If there are no more results to
+	// The nextToken value to include in a future DescribeImageTags request. When the
+	// results of a DescribeImageTags request exceed maxResults , you can use this
+	// value to retrieve the next page of results. If there are no more results to
 	// return, this value is null .
 	NextToken *string
 
@@ -149,21 +148,20 @@ type DescribeImageTagsAPIClient interface {
 
 var _ DescribeImageTagsAPIClient = (*Client)(nil)
 
-// DescribeImageTagsPaginatorOptions is the paginator options for
-// DescribeImageTags
+// DescribeImageTagsPaginatorOptions is the paginator options for DescribeImageTags
 type DescribeImageTagsPaginatorOptions struct {
 	// The maximum number of repository results that's returned by DescribeImageTags
 	// in paginated output. When this parameter is used, DescribeImageTags only
-	// returns maxResults  results in a single page along with a nextToken response
+	// returns maxResults results in a single page along with a nextToken response
 	// element. You can see the remaining results of the initial request by sending
-	// another DescribeImageTags  request with the returned nextToken value. This
-	// value can be between 1 and 1000. If this parameter isn't used, then
-	// DescribeImageTags returns up to 100 results and a nextToken value, if
-	// applicable. If you specify images with imageIds , you can't use this option.
+	// another DescribeImageTags request with the returned nextToken value. This value
+	// can be between 1 and 1000. If this parameter isn't used, then DescribeImageTags
+	// returns up to 100 results and a nextToken value, if applicable. If you specify
+	// images with imageIds , you can't use this option.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

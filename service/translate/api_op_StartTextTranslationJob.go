@@ -15,12 +15,12 @@ import (
 // Starts an asynchronous batch translation job. Use batch translation jobs to
 // translate large volumes of text across multiple documents at once. For batch
 // translation, you can input documents with different source languages (specify
-// autoas the source language). You can specify one or more target languages.
+// auto as the source language). You can specify one or more target languages.
 // Batch translation translates each input document into each of the target
 // languages. For more information, see Asynchronous batch processing (https://docs.aws.amazon.com/translate/latest/dg/async.html)
 // . Batch translation jobs can be described with the DescribeTextTranslationJob
 // operation, listed with the ListTextTranslationJobs operation, and stopped with
-// the StopTextTranslationJob  operation.
+// the StopTextTranslationJob operation.
 func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextTranslationJobInput, optFns ...func(*Options)) (*StartTextTranslationJobOutput, error) {
 	if params == nil {
 		params = &StartTextTranslationJobInput{}
@@ -38,8 +38,8 @@ func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextT
 
 type StartTextTranslationJobInput struct {
 
-	// A unique identifier for the request. This token is generated for you when
-	// using the Amazon Translate SDK.
+	// A unique identifier for the request. This token is generated for you when using
+	// the Amazon Translate SDK.
 	//
 	// This member is required.
 	ClientToken *string
@@ -119,17 +119,20 @@ type StartTextTranslationJobInput struct {
 type StartTextTranslationJobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this ID
-	// with the DescribeTextTranslationJob  operation.
+	// with the DescribeTextTranslationJob operation.
 	JobId *string
 
 	// The status of the job. Possible values include:
-	//     - SUBMITTED - The job has been received and is queued for processing.
-	//     - IN_PROGRESS - Amazon Translate is processing the job.
-	//     - COMPLETED - The job was successfully completed and the output is available.
-	//     - COMPLETED_WITH_ERROR - The job was completed with errors. The errors can be analyzed in the job's output.
-	//     - FAILED - The job did not complete. To get details, use the DescribeTextTranslationJob operation.
-	//     - STOP_REQUESTED - The user who started the job has requested that it be stopped.
-	//     - STOPPED - The job has been stopped.
+	//   - SUBMITTED - The job has been received and is queued for processing.
+	//   - IN_PROGRESS - Amazon Translate is processing the job.
+	//   - COMPLETED - The job was successfully completed and the output is available.
+	//   - COMPLETED_WITH_ERROR - The job was completed with errors. The errors can be
+	//   analyzed in the job's output.
+	//   - FAILED - The job did not complete. To get details, use the
+	//   DescribeTextTranslationJob operation.
+	//   - STOP_REQUESTED - The user who started the job has requested that it be
+	//   stopped.
+	//   - STOPPED - The job has been stopped.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

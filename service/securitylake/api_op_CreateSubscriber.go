@@ -36,9 +36,9 @@ type CreateSubscriberInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The external ID of the subscriber. This lets the user that is assuming the
-	// role assert the circumstances in which they are operating. It also provides a
-	// way for the account owner to permit the role to be assumed only under specific
+	// The external ID of the subscriber. This lets the user that is assuming the role
+	// assert the circumstances in which they are operating. It also provides a way for
+	// the account owner to permit the role to be assumed only under specific
 	// circumstances.
 	//
 	// This member is required.
@@ -67,7 +67,7 @@ type CreateSubscriberInput struct {
 
 type CreateSubscriberOutput struct {
 
-	// The subscriptionId  created by the CreateSubscriber  API call.
+	// The subscriptionId created by the CreateSubscriber API call.
 	//
 	// This member is required.
 	SubscriptionId *string
@@ -80,8 +80,8 @@ type CreateSubscriberOutput struct {
 	// The name of the resource share.
 	ResourceShareName *string
 
-	// The Amazon Resource Name (ARN) created by you to provide to the subscriber.
-	// For more information about ARNs and how to use them in policies, see Amazon
+	// The Amazon Resource Name (ARN) created by you to provide to the subscriber. For
+	// more information about ARNs and how to use them in policies, see Amazon
 	// Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html)
 	// .
 	RoleArn *string

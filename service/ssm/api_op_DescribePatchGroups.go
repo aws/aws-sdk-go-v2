@@ -30,10 +30,10 @@ func (c *Client) DescribePatchGroups(ctx context.Context, params *DescribePatchG
 
 type DescribePatchGroupsInput struct {
 
-	// Each element in the array is a structure containing a key-value pair.
-	// Supported keys for DescribePatchGroups  include the following:
-	//     - NAME_PREFIX Sample values: AWS- | My- .
-	//     - OPERATING_SYSTEM Sample values: AMAZON_LINUX | SUSE | WINDOWS
+	// Each element in the array is a structure containing a key-value pair. Supported
+	// keys for DescribePatchGroups include the following:
+	//   - NAME_PREFIX Sample values: AWS- | My- .
+	//   - OPERATING_SYSTEM Sample values: AMAZON_LINUX | SUSE | WINDOWS
 	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patch groups to return (per page).
@@ -49,8 +49,9 @@ type DescribePatchGroupsInput struct {
 type DescribePatchGroupsOutput struct {
 
 	// Each entry in the array contains:
-	//     - PatchGroup : string (between 1 and 256 characters. Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)
-	//     - PatchBaselineIdentity : A PatchBaselineIdentity element.
+	//   - PatchGroup : string (between 1 and 256 characters. Regex:
+	//   ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)
+	//   - PatchBaselineIdentity : A PatchBaselineIdentity element.
 	Mappings []types.PatchGroupPatchBaselineMapping
 
 	// The token to use when requesting the next set of items. If there are no
@@ -137,8 +138,8 @@ type DescribePatchGroupsPaginatorOptions struct {
 	// The maximum number of patch groups to return (per page).
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

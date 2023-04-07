@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists your delivery streams in alphabetical order of their names. The number
-// of delivery streams might be too large to return using a single call to
-// ListDeliveryStreams. You can limit the number of delivery streams returned,
-// using the Limit parameter. To determine whether there are more delivery
-// streams to list, check the value of HasMoreDeliveryStreams in the output. If
-// there are more delivery streams to list, you can request them by calling this
-// operation again and setting the ExclusiveStartDeliveryStreamName parameter to
-// the name of the last delivery stream returned in the last call.
+// Lists your delivery streams in alphabetical order of their names. The number of
+// delivery streams might be too large to return using a single call to
+// ListDeliveryStreams . You can limit the number of delivery streams returned,
+// using the Limit parameter. To determine whether there are more delivery streams
+// to list, check the value of HasMoreDeliveryStreams in the output. If there are
+// more delivery streams to list, you can request them by calling this operation
+// again and setting the ExclusiveStartDeliveryStreamName parameter to the name of
+// the last delivery stream returned in the last call.
 func (c *Client) ListDeliveryStreams(ctx context.Context, params *ListDeliveryStreamsInput, optFns ...func(*Options)) (*ListDeliveryStreamsOutput, error) {
 	if params == nil {
 		params = &ListDeliveryStreamsInput{}
@@ -37,9 +37,9 @@ func (c *Client) ListDeliveryStreams(ctx context.Context, params *ListDeliverySt
 type ListDeliveryStreamsInput struct {
 
 	// The delivery stream type. This can be one of the following values:
-	//     - DirectPut : Provider applications access the delivery stream directly.
-	//     - KinesisStreamAsSource : The delivery stream uses a Kinesis data stream as a source.
-	//
+	//   - DirectPut : Provider applications access the delivery stream directly.
+	//   - KinesisStreamAsSource : The delivery stream uses a Kinesis data stream as a
+	//   source.
 	// This parameter is optional. If this parameter is omitted, delivery streams of
 	// all types are returned.
 	DeliveryStreamType types.DeliveryStreamType

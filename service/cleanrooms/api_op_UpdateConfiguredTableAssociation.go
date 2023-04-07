@@ -29,8 +29,8 @@ func (c *Client) UpdateConfiguredTableAssociation(ctx context.Context, params *U
 
 type UpdateConfiguredTableAssociationInput struct {
 
-	// The unique identifier for the configured table association to update.
-	// Currently accepts the configured table association ID.
+	// The unique identifier for the configured table association to update. Currently
+	// accepts the configured table association ID.
 	//
 	// This member is required.
 	ConfiguredTableAssociationIdentifier *string

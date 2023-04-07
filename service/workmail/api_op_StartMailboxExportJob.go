@@ -42,8 +42,8 @@ type StartMailboxExportJobInput struct {
 	// This member is required.
 	EntityId *string
 
-	// The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service
-	// (AWS KMS) key that encrypts the exported mailbox content.
+	// The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS
+	// KMS) key that encrypts the exported mailbox content.
 	//
 	// This member is required.
 	KmsKeyArn *string

@@ -84,9 +84,9 @@ const (
 	DeviceStateRegisteredunreachable DeviceState = "RegisteredUnreachable"
 )
 
-// Values returns all known values for DeviceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeviceState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DeviceState) Values() []DeviceState {
 	return []DeviceState{
 		"Provisioned",
@@ -352,9 +352,9 @@ const (
 	LogLevelDisabled LogLevel = "DISABLED"
 )
 
-// Values returns all known values for LogLevel. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LogLevel. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (LogLevel) Values() []LogLevel {
 	return []LogLevel{
 		"INFO",
@@ -373,9 +373,9 @@ const (
 	MessageTypeCustomCommandIdResp   MessageType = "CUSTOM_COMMAND_ID_RESP"
 )
 
-// Values returns all known values for MessageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MessageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"CUSTOM_COMMAND_ID_NOTIFY",
@@ -414,9 +414,9 @@ const (
 	PartnerTypeSidewalk PartnerType = "Sidewalk"
 )
 
-// Values returns all known values for PartnerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PartnerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PartnerType) Values() []PartnerType {
 	return []PartnerType{
 		"Sidewalk",
@@ -449,10 +449,9 @@ const (
 	PositionConfigurationStatusDisabled PositionConfigurationStatus = "Disabled"
 )
 
-// Values returns all known values for PositionConfigurationStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for PositionConfigurationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PositionConfigurationStatus) Values() []PositionConfigurationStatus {
 	return []PositionConfigurationStatus{
 		"Enabled",
@@ -468,9 +467,9 @@ const (
 	PositioningConfigStatusDisabled PositioningConfigStatus = "Disabled"
 )
 
-// Values returns all known values for PositioningConfigStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PositioningConfigStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PositioningConfigStatus) Values() []PositioningConfigStatus {
 	return []PositioningConfigStatus{
 		"Enabled",
@@ -486,8 +485,8 @@ const (
 	PositionResourceTypeWirelessGateway PositionResourceType = "WirelessGateway"
 )
 
-// Values returns all known values for PositionResourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PositionResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PositionResourceType) Values() []PositionResourceType {
 	return []PositionResourceType{
@@ -618,9 +617,9 @@ const (
 	WirelessDeviceFrameInfoDisabled WirelessDeviceFrameInfo = "DISABLED"
 )
 
-// Values returns all known values for WirelessDeviceFrameInfo. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WirelessDeviceFrameInfo. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (WirelessDeviceFrameInfo) Values() []WirelessDeviceFrameInfo {
 	return []WirelessDeviceFrameInfo{
 		"ENABLED",
@@ -638,8 +637,8 @@ const (
 	WirelessDeviceIdTypeSidewalkManufacturingSn WirelessDeviceIdType = "SidewalkManufacturingSn"
 )
 
-// Values returns all known values for WirelessDeviceIdType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for WirelessDeviceIdType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (WirelessDeviceIdType) Values() []WirelessDeviceIdType {
 	return []WirelessDeviceIdType{
@@ -699,8 +698,8 @@ const (
 	WirelessGatewayEventCertificate WirelessGatewayEvent = "Certificate"
 )
 
-// Values returns all known values for WirelessGatewayEvent. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for WirelessGatewayEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (WirelessGatewayEvent) Values() []WirelessGatewayEvent {
 	return []WirelessGatewayEvent{

@@ -57,7 +57,7 @@ type CreateGroupMembershipOutput struct {
 	// This member is required.
 	IdentityStoreId *string
 
-	// The identifier for a newly created GroupMembership  in an identity store.
+	// The identifier for a newly created GroupMembership in an identity store.
 	//
 	// This member is required.
 	MembershipId *string

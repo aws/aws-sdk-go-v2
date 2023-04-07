@@ -39,7 +39,7 @@ type DescribePipelineInput struct {
 
 type DescribePipelineOutput struct {
 
-	// A Pipeline  object that contains information about the pipeline.
+	// A Pipeline object that contains information about the pipeline.
 	Pipeline *types.Pipeline
 
 	// Metadata pertaining to the operation's result.

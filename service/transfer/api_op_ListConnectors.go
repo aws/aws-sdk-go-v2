@@ -33,9 +33,9 @@ type ListConnectorsInput struct {
 	// The maximum number of connectors to return.
 	MaxResults *int32
 
-	// When you can get additional results from the ListConnectors  call, a NextToken
+	// When you can get additional results from the ListConnectors call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
-	// to the NextToken  parameter to continue listing additional connectors.
+	// to the NextToken parameter to continue listing additional connectors.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -131,8 +131,8 @@ type ListConnectorsPaginatorOptions struct {
 	// The maximum number of connectors to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

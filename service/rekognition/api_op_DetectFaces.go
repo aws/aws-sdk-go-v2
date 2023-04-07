@@ -24,7 +24,7 @@ import (
 // operations, passing image bytes is not supported. The image must be either a PNG
 // or JPEG formatted file. This is a stateless API operation. That is, the
 // operation does not persist any data. This operation requires permissions to
-// perform the rekognition:DetectFaces  action.
+// perform the rekognition:DetectFaces action.
 func (c *Client) DetectFaces(ctx context.Context, params *DetectFacesInput, optFns ...func(*Options)) (*DetectFacesOutput, error) {
 	if params == nil {
 		params = &DetectFacesInput{}
@@ -42,10 +42,10 @@ func (c *Client) DetectFaces(ctx context.Context, params *DetectFacesInput, optF
 
 type DetectFacesInput struct {
 
-	// The input image as base64-encoded bytes or an S3 object. If you use the AWS
-	// CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is
-	// not supported. If you are using an AWS SDK to call Amazon Rekognition, you might
-	// not need to base64-encode image bytes passed using the Bytes field. For more
+	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
+	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
+	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
+	// need to base64-encode image bytes passed using the Bytes field. For more
 	// information, see Images in the Amazon Rekognition developer guide.
 	//
 	// This member is required.
@@ -53,12 +53,12 @@ type DetectFacesInput struct {
 
 	// An array of facial attributes you want to be returned. This can be the default
 	// list of attributes or all attributes. If you don't specify a value for
-	// Attributes or if you specify ["DEFAULT"], the API returns the following subset
+	// Attributes or if you specify ["DEFAULT"] , the API returns the following subset
 	// of facial attributes: BoundingBox , Confidence , Pose , Quality , and Landmarks
-	// . If you provide ["ALL"], all facial attributes are returned, but the
-	// operation takes longer to complete. If you provide both, ["ALL", "DEFAULT"],
-	// the service uses a logical AND operator to determine which attributes to return
-	// (in this case, all attributes).
+	// . If you provide ["ALL"] , all facial attributes are returned, but the operation
+	// takes longer to complete. If you provide both, ["ALL", "DEFAULT"] , the service
+	// uses a logical AND operator to determine which attributes to return (in this
+	// case, all attributes).
 	Attributes []types.Attribute
 
 	noSmithyDocumentSerde

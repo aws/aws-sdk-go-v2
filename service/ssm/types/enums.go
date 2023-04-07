@@ -83,8 +83,8 @@ const (
 	AssociationFilterKeyResourceGroupName  AssociationFilterKey = "ResourceGroupName"
 )
 
-// Values returns all known values for AssociationFilterKey. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AssociationFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AssociationFilterKey) Values() []AssociationFilterKey {
 	return []AssociationFilterKey{
@@ -183,8 +183,8 @@ const (
 	AttachmentsSourceKeyAttachmentReference AttachmentsSourceKey = "AttachmentReference"
 )
 
-// Values returns all known values for AttachmentsSourceKey. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AttachmentsSourceKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AttachmentsSourceKey) Values() []AttachmentsSourceKey {
 	return []AttachmentsSourceKey{
@@ -373,9 +373,9 @@ const (
 	CommandInvocationStatusCancelling CommandInvocationStatus = "Cancelling"
 )
 
-// Values returns all known values for CommandInvocationStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CommandInvocationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (CommandInvocationStatus) Values() []CommandInvocationStatus {
 	return []CommandInvocationStatus{
 		"Pending",
@@ -454,10 +454,9 @@ const (
 	ComplianceQueryOperatorTypeGreaterThan ComplianceQueryOperatorType = "GREATER_THAN"
 )
 
-// Values returns all known values for ComplianceQueryOperatorType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ComplianceQueryOperatorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComplianceQueryOperatorType) Values() []ComplianceQueryOperatorType {
 	return []ComplianceQueryOperatorType{
 		"EQUAL",
@@ -520,8 +519,8 @@ const (
 	ComplianceUploadTypePartial  ComplianceUploadType = "PARTIAL"
 )
 
-// Values returns all known values for ComplianceUploadType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ComplianceUploadType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ComplianceUploadType) Values() []ComplianceUploadType {
 	return []ComplianceUploadType{
@@ -636,8 +635,8 @@ const (
 	DocumentMetadataEnumDocumentReviews DocumentMetadataEnum = "DocumentReviews"
 )
 
-// Values returns all known values for DocumentMetadataEnum. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DocumentMetadataEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DocumentMetadataEnum) Values() []DocumentMetadataEnum {
 	return []DocumentMetadataEnum{
@@ -689,8 +688,8 @@ const (
 	DocumentReviewActionReject        DocumentReviewAction = "Reject"
 )
 
-// Values returns all known values for DocumentReviewAction. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DocumentReviewAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DocumentReviewAction) Values() []DocumentReviewAction {
 	return []DocumentReviewAction{
@@ -921,9 +920,9 @@ const (
 	InventoryDeletionStatusComplete   InventoryDeletionStatus = "Complete"
 )
 
-// Values returns all known values for InventoryDeletionStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InventoryDeletionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InventoryDeletionStatus) Values() []InventoryDeletionStatus {
 	return []InventoryDeletionStatus{
 		"InProgress",
@@ -965,10 +964,9 @@ const (
 	InventorySchemaDeleteOptionDeleteSchema  InventorySchemaDeleteOption = "DeleteSchema"
 )
 
-// Values returns all known values for InventorySchemaDeleteOption. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for InventorySchemaDeleteOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InventorySchemaDeleteOption) Values() []InventorySchemaDeleteOption {
 	return []InventorySchemaDeleteOption{
 		"DisableSchema",
@@ -1010,8 +1008,8 @@ const (
 	MaintenanceWindowExecutionStatusSkippedOverlapping MaintenanceWindowExecutionStatus = "SKIPPED_OVERLAPPING"
 )
 
-// Values returns all known values for MaintenanceWindowExecutionStatus. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for MaintenanceWindowExecutionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (MaintenanceWindowExecutionStatus) Values() []MaintenanceWindowExecutionStatus {
@@ -1501,9 +1499,9 @@ const (
 	PatchActionBlock             PatchAction = "BLOCK"
 )
 
-// Values returns all known values for PatchAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PatchAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PatchAction) Values() []PatchAction {
 	return []PatchAction{
 		"ALLOW_AS_DEPENDENCY",
@@ -1551,8 +1549,8 @@ const (
 	PatchComplianceLevelUnspecified   PatchComplianceLevel = "UNSPECIFIED"
 )
 
-// Values returns all known values for PatchComplianceLevel. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PatchComplianceLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PatchComplianceLevel) Values() []PatchComplianceLevel {
 	return []PatchComplianceLevel{
@@ -1691,9 +1689,9 @@ const (
 	PatchSetApplication PatchSet = "APPLICATION"
 )
 
-// Values returns all known values for PatchSet. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PatchSet. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (PatchSet) Values() []PatchSet {
 	return []PatchSet{
 		"OS",
@@ -1997,9 +1995,9 @@ const (
 	StopTypeCancel   StopType = "Cancel"
 )
 
-// Values returns all known values for StopType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StopType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (StopType) Values() []StopType {
 	return []StopType{
 		"Complete",

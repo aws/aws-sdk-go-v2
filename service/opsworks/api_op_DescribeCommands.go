@@ -50,10 +50,10 @@ type DescribeCommandsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeCommands  request.
+// Contains the response to a DescribeCommands request.
 type DescribeCommandsOutput struct {
 
-	// An array of Command  objects that describe each of the specified commands.
+	// An array of Command objects that describe each of the specified commands.
 	Commands []types.Command
 
 	// Metadata pertaining to the operation's result.

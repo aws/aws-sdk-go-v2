@@ -33,18 +33,18 @@ type GetActionTypeInput struct {
 
 	// Defines what kind of action can be taken in the stage. The following are the
 	// valid values:
-	//     - Source
-	//     - Build
-	//     - Test
-	//     - Deploy
-	//     - Approval
-	//     - Invoke
+	//   - Source
+	//   - Build
+	//   - Test
+	//   - Deploy
+	//   - Approval
+	//   - Invoke
 	//
 	// This member is required.
 	Category types.ActionCategory
 
 	// The creator of an action type that was created with any supported integration
-	// model. There are two valid values: AWS  and ThirdParty .
+	// model. There are two valid values: AWS and ThirdParty .
 	//
 	// This member is required.
 	Owner *string

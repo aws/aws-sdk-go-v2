@@ -31,7 +31,7 @@ func (c *Client) CreateManagedPrefixList(ctx context.Context, params *CreateMana
 
 type CreateManagedPrefixListInput struct {
 
-	// The IP address type. Valid Values: IPv4  | IPv6
+	// The IP address type. Valid Values: IPv4 | IPv6
 	//
 	// This member is required.
 	AddressFamily *string

@@ -38,8 +38,7 @@ type NotifyWorkersInput struct {
 	// This member is required.
 	MessageText *string
 
-	// The subject line of the email message to send. Can include up to 200
-	// characters.
+	// The subject line of the email message to send. Can include up to 200 characters.
 	//
 	// This member is required.
 	Subject *string

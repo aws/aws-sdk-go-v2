@@ -76,8 +76,8 @@ type DescribeApplicationOutput struct {
 	// This member is required.
 	ApplicationUrl *string
 
-	// The ARN of the role that the web application assumes when it interacts with
-	// AWS IoT Core.
+	// The ARN of the role that the web application assumes when it interacts with AWS
+	// IoT Core.
 	//
 	// This member is required.
 	RoleArn *string
@@ -85,7 +85,7 @@ type DescribeApplicationOutput struct {
 	// An optional description of the web application.
 	ApplicationDescription *string
 
-	// A message indicating why the DescribeApplication  API failed.
+	// A message indicating why the DescribeApplication API failed.
 	ErrorMessage *string
 
 	// The Id of the single sign-on client that you use to authenticate and authorize

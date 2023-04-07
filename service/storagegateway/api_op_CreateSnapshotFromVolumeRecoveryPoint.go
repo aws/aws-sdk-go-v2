@@ -16,7 +16,7 @@ import (
 // a point in time at which all data of the volume is consistent and from which you
 // can create a snapshot. To get a list of volume recovery point for cached volume
 // gateway, use ListVolumeRecoveryPoints . In the
-// CreateSnapshotFromVolumeRecoveryPointrequest, you identify the volume by
+// CreateSnapshotFromVolumeRecoveryPoint request, you identify the volume by
 // providing its Amazon Resource Name (ARN). You must also provide a description
 // for the snapshot. When the gateway takes a snapshot of the specified volume, the
 // snapshot and its description appear in the Storage Gateway console. In response,
@@ -51,7 +51,7 @@ type CreateSnapshotFromVolumeRecoveryPointInput struct {
 	SnapshotDescription *string
 
 	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
-	// DescribeStorediSCSIVolumesoperation to return to retrieve the TargetARN for
+	// DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for
 	// specified VolumeARN.
 	//
 	// This member is required.
@@ -73,7 +73,7 @@ type CreateSnapshotFromVolumeRecoveryPointOutput struct {
 	SnapshotId *string
 
 	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
-	// DescribeStorediSCSIVolumesoperation to return to retrieve the TargetARN for
+	// DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for
 	// specified VolumeARN.
 	VolumeARN *string
 

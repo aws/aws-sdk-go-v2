@@ -36,7 +36,7 @@ type PutConfigurationSetReputationOptionsInput struct {
 	// This member is required.
 	ConfigurationSetName *string
 
-	// If true, tracking of reputation metrics is enabled for the configuration set.
+	// If true , tracking of reputation metrics is enabled for the configuration set.
 	// If false , tracking of reputation metrics is disabled for the configuration set.
 	ReputationMetricsEnabled bool
 

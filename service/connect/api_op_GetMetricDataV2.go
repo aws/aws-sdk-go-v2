@@ -19,8 +19,8 @@ import (
 // metric level, and offers the ability to filter and group data by channels,
 // queues, routing profiles, agents, and agent hierarchy levels. It can retrieve
 // historical data for the last 14 days, in 24-hour intervals. For a description of
-// the historical metrics that are supported by GetMetricDataV2  and GetMetricData
-// , see Historical metrics definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
+// the historical metrics that are supported by GetMetricDataV2 and GetMetricData ,
+// see Historical metrics definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
 // in the Amazon Connect Administrator's Guide. This API is not available in the
 // Amazon Web Services GovCloud (US) Regions.
 func (c *Client) GetMetricDataV2(ctx context.Context, params *GetMetricDataV2Input, optFns ...func(*Options)) (*GetMetricDataV2Output, error) {
@@ -50,17 +50,24 @@ type GetMetricDataV2Input struct {
 
 	// The filters to apply to returned metrics. You can filter on the following
 	// resources:
-	//     - Queues
-	//     - Routing profiles
-	//     - Agents
-	//     - Channels
-	//     - User hierarchy groups
-	// At least one filter must be passed from queues,
-	// routing profiles, agents, or user hierarchy groups. To filter by phone number,
-	// see Create a historical metrics report (https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html)
+	//   - Queues
+	//   - Routing profiles
+	//   - Agents
+	//   - Channels
+	//   - User hierarchy groups
+	// At least one filter must be passed from queues, routing profiles, agents, or
+	// user hierarchy groups. To filter by phone number, see Create a historical
+	// metrics report (https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html)
 	// in the Amazon Connect Administrator's Guide. Note the following limits:
-	//     - Filter keys: A maximum of 5 filter keys are supported in a single request. Valid filter keys: QUEUE | ROUTING_PROFILE | AGENT | CHANNEL | AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE
-	//     - Filter values: A maximum of 100 filter values are supported in a single request. For example, a GetMetricDataV2 request can filter by 50 queues, 35 agents, and 15 routing profiles for a total of 100 filter values. VOICE , CHAT , and TASK are valid filterValue for the CHANNEL filter key.
+	//   - Filter keys: A maximum of 5 filter keys are supported in a single request.
+	//   Valid filter keys: QUEUE | ROUTING_PROFILE | AGENT | CHANNEL |
+	//   AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO |
+	//   AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
+	//   AGENT_HIERARCHY_LEVEL_FIVE
+	//   - Filter values: A maximum of 100 filter values are supported in a single
+	//   request. For example, a GetMetricDataV2 request can filter by 50 queues, 35
+	//   agents, and 15 routing profiles for a total of 100 filter values. VOICE , CHAT
+	//   , and TASK are valid filterValue for the CHANNEL filter key.
 	//
 	// This member is required.
 	Filters []types.FilterV2
@@ -76,8 +83,7 @@ type GetMetricDataV2Input struct {
 	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
 	// AGENT_OCCUPANCY Unit: Percentage Valid groupings and filters: Routing Profile,
 	// Agent, Agent Hierarchy AGENT_SCHEDULE_ADHERENCE This metric is available only in
-	// Amazon Web Services Regions where Forecasting, capacity planning, and
-	// scheduling (https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region)
+	// Amazon Web Services Regions where Forecasting, capacity planning, and scheduling (https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region)
 	// is available. Unit: Percent Valid groupings and filters: Queue, Channel, Routing
 	// Profile, Agent, Agent Hierarchy AGENT_SCHEDULED_TIME This metric is available
 	// only in Amazon Web Services Regions where Forecasting, capacity planning, and
@@ -87,13 +93,13 @@ type GetMetricDataV2Input struct {
 	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
 	// AVG_AFTER_CONTACT_WORK_TIME Unit: Seconds Valid groupings and filters: Queue,
 	// Channel, Routing Profile, Agent, Agent Hierarchy AVG_AGENT_CONNECTING_TIME Unit:
-	// Seconds Valid metric filter key: INITIATION_METHOD. For now, this metric only
-	// supports the following as INITIATION_METHOD : INBOUND  | OUTBOUND  | CALLBACK
-	// | API Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy AVG_HANDLE_TIME Unit: Seconds Valid groupings and filters:
-	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy AVG_HOLD_TIME Unit:
-	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy AVG_INTERACTION_AND_HOLD_TIME Unit: Seconds Valid groupings and
+	// Seconds Valid metric filter key: INITIATION_METHOD . For now, this metric only
+	// supports the following as INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK |
+	// API Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy AVG_HANDLE_TIME Unit: Seconds Valid groupings and filters: Queue,
+	// Channel, Routing Profile, Agent, Agent Hierarchy AVG_HOLD_TIME Unit: Seconds
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy AVG_INTERACTION_AND_HOLD_TIME Unit: Seconds Valid groupings and
 	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
 	// AVG_INTERACTION_TIME Unit: Seconds Valid groupings and filters: Queue, Channel,
 	// Routing Profile AVG_QUEUE_ANSWER_TIME Unit: Seconds Valid groupings and filters:
@@ -115,7 +121,7 @@ type GetMetricDataV2Input struct {
 	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
 	// Agent Hierarchy SERVICE_LEVEL You can include up to 20 SERVICE_LEVEL metrics in
 	// a request. Unit: Percent Valid groupings and filters: Queue, Channel, Routing
-	// Profile Threshold: For ThresholdValue, enter any whole number from 1 to 604800
+	// Profile Threshold: For ThresholdValue , enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
 	// SUM_CONTACTS_ANSWERED_IN_X Unit: Count Valid groupings and filters: Queue,
 	// Channel, Routing Profile SUM_CONTACTS_ABANDONED_IN_X Unit: Count Valid groupings
@@ -127,8 +133,8 @@ type GetMetricDataV2Input struct {
 	// This member is required.
 	Metrics []types.MetricV2
 
-	// The Amazon Resource Name (ARN) of the resource. This includes the instanceId
-	// an Amazon Connect instance.
+	// The Amazon Resource Name (ARN) of the resource. This includes the instanceId an
+	// Amazon Connect instance.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -146,9 +152,9 @@ type GetMetricDataV2Input struct {
 	// results are grouped by queue, the metrics returned are grouped by queue. The
 	// values that are returned apply to the metrics for each queue. They are not
 	// aggregated for all queues. If no grouping is specified, a summary of all metrics
-	// is returned. Valid grouping keys: QUEUE  | ROUTING_PROFILE  | AGENT  | CHANNEL
-	// | AGENT_HIERARCHY_LEVEL_ONE  | AGENT_HIERARCHY_LEVEL_TWO  |
-	// AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR  |
+	// is returned. Valid grouping keys: QUEUE | ROUTING_PROFILE | AGENT | CHANNEL |
+	// AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO |
+	// AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
 	// AGENT_HIERARCHY_LEVEL_FIVE
 	Groupings []string
 
@@ -253,8 +259,8 @@ type GetMetricDataV2PaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -57,11 +57,15 @@ type CreateSnapshotsInput struct {
 
 	// The Amazon Resource Name (ARN) of the Outpost on which to create the local
 	// snapshots.
-	//     - To create snapshots from an instance in a Region, omit this parameter. The snapshots are created in the same Region as the instance.
-	//     - To create snapshots from an instance on an Outpost and store the snapshots in the Region, omit this parameter. The snapshots are created in the Region for the Outpost.
-	//     - To create snapshots from an instance on an Outpost and store the snapshots on an Outpost, specify the ARN of the destination Outpost. The snapshots must be created on the same Outpost as the instance.
-	//
-	// For more information, see Create multi-volume local snapshots from instances
+	//   - To create snapshots from an instance in a Region, omit this parameter. The
+	//   snapshots are created in the same Region as the instance.
+	//   - To create snapshots from an instance on an Outpost and store the snapshots
+	//   in the Region, omit this parameter. The snapshots are created in the Region for
+	//   the Outpost.
+	//   - To create snapshots from an instance on an Outpost and store the snapshots
+	//   on an Outpost, specify the ARN of the destination Outpost. The snapshots must be
+	//   created on the same Outpost as the instance.
+	// For more information, see  Create multi-volume local snapshots from instances
 	// on an Outpost (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-multivol-snapshot)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	OutpostArn *string

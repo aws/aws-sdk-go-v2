@@ -19,8 +19,8 @@ type AwsVpcConfiguration struct {
 	Subnets []string
 
 	// Specifies whether the task's elastic network interface receives a public IP
-	// address. You can specify ENABLED  only when LaunchType  in EcsParameters is
-	// set to FARGATE .
+	// address. You can specify ENABLED only when LaunchType in EcsParameters is set
+	// to FARGATE .
 	AssignPublicIp AssignPublicIp
 
 	// Specifies the security groups associated with the task. These security groups
@@ -40,11 +40,10 @@ type CapacityProviderStrategyItem struct {
 	// This member is required.
 	CapacityProvider *string
 
-	// The base value designates how many tasks, at a minimum, to run on the
-	// specified capacity provider. Only one capacity provider in a capacity provider
-	// strategy can have a base defined. If no value is specified, the default value of
-	//
-	// 0 is used.
+	// The base value designates how many tasks, at a minimum, to run on the specified
+	// capacity provider. Only one capacity provider in a capacity provider strategy
+	// can have a base defined. If no value is specified, the default value of 0 is
+	// used.
 	Base int32
 
 	// The weight value designates the relative percentage of the total number of
@@ -172,7 +171,7 @@ type FlexibleTimeWindow struct {
 	noSmithyDocumentSerde
 }
 
-// The templated target type for the Amazon Kinesis PutRecord  API operation.
+// The templated target type for the Amazon Kinesis PutRecord API operation.
 type KinesisParameters struct {
 
 	// Specifies the shard to which EventBridge Scheduler sends the event. For more
@@ -200,7 +199,7 @@ type NetworkConfiguration struct {
 type PlacementConstraint struct {
 
 	// A cluster query language expression to apply to the constraint. You cannot
-	// specify an expression if the constraint type is distinctInstance. For more
+	// specify an expression if the constraint type is distinctInstance . For more
 	// information, see Cluster query language (https://docs.aws.amazon.com/latest/developerguide/cluster-query-language.html)
 	// in the Amazon ECS Developer Guide.
 	Expression *string
@@ -217,10 +216,10 @@ type PlacementConstraint struct {
 type PlacementStrategy struct {
 
 	// The field to apply the placement strategy against. For the spread placement
-	// strategy, valid values are instanceId  (or instanceId, which has the same
+	// strategy, valid values are instanceId (or instanceId , which has the same
 	// effect), or any platform or custom attribute that is applied to a container
-	// instance, such as attribute:ecs.availability-zone. For the binpack placement
-	// strategy, valid values are cpu  and memory. For the random placement strategy,
+	// instance, such as attribute:ecs.availability-zone . For the binpack placement
+	// strategy, valid values are cpu and memory . For the random placement strategy,
 	// this field is not used.
 	Field *string
 
@@ -236,8 +235,8 @@ type PlacementStrategy struct {
 	noSmithyDocumentSerde
 }
 
-// A RetryPolicy object that includes information about the retry policy
-// settings, including the maximum age of an event, and the maximum number of times
+// A RetryPolicy object that includes information about the retry policy settings,
+// including the maximum age of an event, and the maximum number of times
 // EventBridge Scheduler will try to deliver the event to a target.
 type RetryPolicy struct {
 
@@ -253,8 +252,8 @@ type RetryPolicy struct {
 	noSmithyDocumentSerde
 }
 
-// The name and value pair of a parameter to use to start execution of a
-// SageMaker Model Building Pipeline.
+// The name and value pair of a parameter to use to start execution of a SageMaker
+// Model Building Pipeline.
 type SageMakerPipelineParameter struct {
 
 	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
@@ -332,8 +331,8 @@ type ScheduleSummary struct {
 // The templated target type for the Amazon SQS SendMessage (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
 // API operation. Contains the message group ID to use when the target is a FIFO
 // queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have
-// content-based deduplication enabled. For more information, see Using the
-// Amazon SQS message deduplication ID (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
+// content-based deduplication enabled. For more information, see Using the Amazon
+// SQS message deduplication ID (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
 // in the Amazon SQS Developer Guide.
 type SqsParameters struct {
 
@@ -397,11 +396,11 @@ type Target struct {
 	// default notification to the target.
 	Input *string
 
-	// The templated target type for the Amazon Kinesis PutRecord  API operation.
+	// The templated target type for the Amazon Kinesis PutRecord API operation.
 	KinesisParameters *KinesisParameters
 
-	// A RetryPolicy object that includes information about the retry policy
-	// settings, including the maximum age of an event, and the maximum number of times
+	// A RetryPolicy object that includes information about the retry policy settings,
+	// including the maximum age of an event, and the maximum number of times
 	// EventBridge Scheduler will try to deliver the event to a target.
 	RetryPolicy *RetryPolicy
 
@@ -412,8 +411,8 @@ type Target struct {
 	// The templated target type for the Amazon SQS SendMessage (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
 	// API operation. Contains the message group ID to use when the target is a FIFO
 	// queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have
-	// content-based deduplication enabled. For more information, see Using the
-	// Amazon SQS message deduplication ID (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
+	// content-based deduplication enabled. For more information, see Using the Amazon
+	// SQS message deduplication ID (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
 	// in the Amazon SQS Developer Guide.
 	SqsParameters *SqsParameters
 

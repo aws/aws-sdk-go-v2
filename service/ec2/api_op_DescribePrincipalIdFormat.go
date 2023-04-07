@@ -17,15 +17,14 @@ import (
 // By default, all IAM roles and IAM users default to the same ID settings as the
 // root user, unless they explicitly override the settings. This request is useful
 // for identifying those IAM users and IAM roles that have overridden the default
-// ID settings. The following resource types support longer IDs: bundle  |
-// conversion-task | customer-gateway  | dhcp-options  | elastic-ip-allocation  |
-// elastic-ip-association | export-task  | flow-log  | image  | import-task  |
-// instance | internet-gateway  | network-acl  | network-acl-association  |
-// network-interface | network-interface-attachment  | prefix-list  | reservation
-// | route-table  | route-table-association  | security-group  | snapshot  |
-// subnet | subnet-cidr-block-association  | volume  | vpc  |
-// vpc-cidr-block-association | vpc-endpoint  | vpc-peering-connection  |
-// vpn-connection | vpn-gateway .
+// ID settings. The following resource types support longer IDs: bundle |
+// conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation |
+// elastic-ip-association | export-task | flow-log | image | import-task | instance
+// | internet-gateway | network-acl | network-acl-association | network-interface
+// | network-interface-attachment | prefix-list | reservation | route-table |
+// route-table-association | security-group | snapshot | subnet |
+// subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association |
+// vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway .
 func (c *Client) DescribePrincipalIdFormat(ctx context.Context, params *DescribePrincipalIdFormatInput, optFns ...func(*Options)) (*DescribePrincipalIdFormatOutput, error) {
 	if params == nil {
 		params = &DescribePrincipalIdFormatInput{}
@@ -56,14 +55,14 @@ type DescribePrincipalIdFormatInput struct {
 	// The token to request the next page of results.
 	NextToken *string
 
-	// The type of resource: bundle  | conversion-task  | customer-gateway  |
-	// dhcp-options | elastic-ip-allocation  | elastic-ip-association  | export-task
-	// | flow-log  | image  | import-task  | instance  | internet-gateway  |
-	// network-acl | network-acl-association  | network-interface  |
-	// network-interface-attachment | prefix-list  | reservation  | route-table  |
-	// route-table-association | security-group  | snapshot  | subnet  |
-	// subnet-cidr-block-association | volume  | vpc  | vpc-cidr-block-association  |
-	// vpc-endpoint | vpc-peering-connection  | vpn-connection  | vpn-gateway
+	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
+	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log |
+	// image | import-task | instance | internet-gateway | network-acl |
+	// network-acl-association | network-interface | network-interface-attachment |
+	// prefix-list | reservation | route-table | route-table-association |
+	// security-group | snapshot | subnet | subnet-cidr-block-association | volume |
+	// vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection |
+	// vpn-connection | vpn-gateway
 	Resources []string
 
 	noSmithyDocumentSerde
@@ -159,8 +158,8 @@ type DescribePrincipalIdFormatPaginatorOptions struct {
 	// remaining results, make another call with the returned NextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

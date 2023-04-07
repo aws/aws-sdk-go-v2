@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Terminates a job in a job queue. Jobs that are in the STARTING  or RUNNING
-// state are terminated, which causes them to transition to FAILED. Jobs that
-// have not progressed to the STARTING  state are cancelled.
+// Terminates a job in a job queue. Jobs that are in the STARTING or RUNNING state
+// are terminated, which causes them to transition to FAILED . Jobs that have not
+// progressed to the STARTING state are cancelled.
 func (c *Client) TerminateJob(ctx context.Context, params *TerminateJobInput, optFns ...func(*Options)) (*TerminateJobOutput, error) {
 	if params == nil {
 		params = &TerminateJobInput{}

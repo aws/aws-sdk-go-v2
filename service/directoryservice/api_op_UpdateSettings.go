@@ -34,7 +34,7 @@ type UpdateSettingsInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The list of Setting  objects.
+	// The list of Setting objects.
 	//
 	// This member is required.
 	Settings []types.Setting

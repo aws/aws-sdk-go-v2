@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the suggesters configured for a domain. A suggester enables you to
-// display possible matches before users finish typing their queries. Can be
-// limited to specific suggesters by name. By default, shows all suggesters and
-// includes any pending changes to the configuration. Set the Deployed  option to
-// trueto show the active configuration and exclude pending changes. For more
-// information, see Getting Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
+// Gets the suggesters configured for a domain. A suggester enables you to display
+// possible matches before users finish typing their queries. Can be limited to
+// specific suggesters by name. By default, shows all suggesters and includes any
+// pending changes to the configuration. Set the Deployed option to true to show
+// the active configuration and exclude pending changes. For more information, see
+// Getting Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DescribeSuggesters(ctx context.Context, params *DescribeSuggestersInput, optFns ...func(*Options)) (*DescribeSuggestersOutput, error) {
 	if params == nil {
@@ -45,7 +45,7 @@ type DescribeSuggestersInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Whether to display the deployed configuration ( true) or include any pending
+	// Whether to display the deployed configuration ( true ) or include any pending
 	// changes ( false ). Defaults to false .
 	Deployed *bool
 
@@ -55,7 +55,7 @@ type DescribeSuggestersInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DescribeSuggesters  request.
+// The result of a DescribeSuggesters request.
 type DescribeSuggestersOutput struct {
 
 	// The suggesters configured for the domain specified in the request.

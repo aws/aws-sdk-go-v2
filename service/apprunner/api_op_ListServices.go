@@ -32,13 +32,13 @@ func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, op
 type ListServicesInput struct {
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. Used for a paginated request. The request
 	// retrieves the next result page. All other parameter values must be identical to
-	// the ones specified in the initial request. If you don't specify NextToken, the
+	// the ones specified in the initial request. If you don't specify NextToken , the
 	// request retrieves the first result page.
 	NextToken *string
 
@@ -48,7 +48,7 @@ type ListServicesInput struct {
 type ListServicesOutput struct {
 
 	// A list of service summary information records. In a paginated request, the
-	// request returns up to MaxResults  records for each call.
+	// request returns up to MaxResults records for each call.
 	//
 	// This member is required.
 	ServiceSummaryList []types.ServiceSummary
@@ -133,12 +133,12 @@ var _ ListServicesAPIClient = (*Client)(nil)
 // ListServicesPaginatorOptions is the paginator options for ListServices
 type ListServicesPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

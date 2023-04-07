@@ -27,9 +27,9 @@ const (
 	BrowserTypeChrome BrowserType = "Chrome"
 )
 
-// Values returns all known values for BrowserType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BrowserType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BrowserType) Values() []BrowserType {
 	return []BrowserType{
 		"Chrome",
@@ -44,9 +44,9 @@ const (
 	EnabledTypeEnabled  EnabledType = "Enabled"
 )
 
-// Values returns all known values for EnabledType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EnabledType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EnabledType) Values() []EnabledType {
 	return []EnabledType{
 		"Disabled",
@@ -66,8 +66,8 @@ const (
 	IdentityProviderTypeOidc            IdentityProviderType = "OIDC"
 )
 
-// Values returns all known values for IdentityProviderType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for IdentityProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityProviderType) Values() []IdentityProviderType {
 	return []IdentityProviderType{

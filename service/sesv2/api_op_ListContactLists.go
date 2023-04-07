@@ -38,7 +38,7 @@ type ListContactListsInput struct {
 
 	// Maximum number of contact lists to return at once. Use this parameter to
 	// paginate results. If additional contact lists exist beyond the specified limit,
-	// the NextToken  element is sent in the response. Use the NextToken value in
+	// the NextToken element is sent in the response. Use the NextToken value in
 	// subsequent requests to retrieve additional lists.
 	PageSize *int32
 
@@ -51,9 +51,8 @@ type ListContactListsOutput struct {
 	ContactLists []types.ContactList
 
 	// A string token indicating that there might be additional contact lists
-	// available to be listed. Copy this token to a subsequent call to
-	// ListContactListswith the same parameters to retrieve the next page of contact
-	// lists.
+	// available to be listed. Copy this token to a subsequent call to ListContactLists
+	// with the same parameters to retrieve the next page of contact lists.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -134,12 +133,12 @@ var _ ListContactListsAPIClient = (*Client)(nil)
 type ListContactListsPaginatorOptions struct {
 	// Maximum number of contact lists to return at once. Use this parameter to
 	// paginate results. If additional contact lists exist beyond the specified limit,
-	// the NextToken  element is sent in the response. Use the NextToken value in
+	// the NextToken element is sent in the response. Use the NextToken value in
 	// subsequent requests to retrieve additional lists.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

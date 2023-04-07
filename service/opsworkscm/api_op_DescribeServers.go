@@ -34,10 +34,10 @@ func (c *Client) DescribeServers(ctx context.Context, params *DescribeServersInp
 
 type DescribeServersInput struct {
 
-	// This is not currently implemented for DescribeServers  requests.
+	// This is not currently implemented for DescribeServers requests.
 	MaxResults *int32
 
-	// This is not currently implemented for DescribeServers  requests.
+	// This is not currently implemented for DescribeServers requests.
 	NextToken *string
 
 	// Describes the server with the specified ServerName.
@@ -48,7 +48,7 @@ type DescribeServersInput struct {
 
 type DescribeServersOutput struct {
 
-	// This is not currently implemented for DescribeServers  requests.
+	// This is not currently implemented for DescribeServers requests.
 	NextToken *string
 
 	// Contains the response to a DescribeServers request. For Chef Automate servers:
@@ -58,8 +58,14 @@ type DescribeServersOutput struct {
 	// have had at least one successful maintenance run after November 1, 2019. For
 	// Puppet servers: DescribeServersResponse$Servers$EngineAttributes contains the
 	// following two responses:
-	//     - PUPPET_API_CA_CERT , the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. The CA certificate is also used to sign node certificates.
-	//     - PUPPET_API_CRL , a certificate revocation list. The certificate revocation list is for internal maintenance purposes only. For more information about the Puppet certificate revocation list, see Man Page: puppet certificate_revocation_list (https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html) in the Puppet documentation.
+	//   - PUPPET_API_CA_CERT , the PEM-encoded CA certificate that is used by the
+	//   Puppet API over TCP port number 8140. The CA certificate is also used to sign
+	//   node certificates.
+	//   - PUPPET_API_CRL , a certificate revocation list. The certificate revocation
+	//   list is for internal maintenance purposes only. For more information about the
+	//   Puppet certificate revocation list, see Man Page: puppet
+	//   certificate_revocation_list (https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html)
+	//   in the Puppet documentation.
 	Servers []types.Server
 
 	// Metadata pertaining to the operation's result.
@@ -138,11 +144,11 @@ var _ DescribeServersAPIClient = (*Client)(nil)
 
 // DescribeServersPaginatorOptions is the paginator options for DescribeServers
 type DescribeServersPaginatorOptions struct {
-	// This is not currently implemented for DescribeServers  requests.
+	// This is not currently implemented for DescribeServers requests.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

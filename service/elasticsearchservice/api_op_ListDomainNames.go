@@ -28,7 +28,7 @@ func (c *Client) ListDomainNames(ctx context.Context, params *ListDomainNamesInp
 	return out, nil
 }
 
-// Container for the parameters to the ListDomainNames  operation.
+// Container for the parameters to the ListDomainNames operation.
 type ListDomainNamesInput struct {
 
 	// Optional parameter to filter the output by domain engine type. Acceptable

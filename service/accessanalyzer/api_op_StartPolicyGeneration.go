@@ -45,8 +45,8 @@ type StartPolicyGenerationInput struct {
 	// Services SDK.
 	ClientToken *string
 
-	// A CloudTrailDetails  object that contains details about a Trail that you want
-	// to analyze to generate policies.
+	// A CloudTrailDetails object that contains details about a Trail that you want to
+	// analyze to generate policies.
 	CloudTrailDetails *types.CloudTrailDetails
 
 	noSmithyDocumentSerde
@@ -54,9 +54,9 @@ type StartPolicyGenerationInput struct {
 
 type StartPolicyGenerationOutput struct {
 
-	// The JobId  that is returned by the StartPolicyGeneration  operation. The JobId
+	// The JobId that is returned by the StartPolicyGeneration operation. The JobId
 	// can be used with GetGeneratedPolicy to retrieve the generated policies or used
-	// with CancelPolicyGeneration  to cancel the policy generation request.
+	// with CancelPolicyGeneration to cancel the policy generation request.
 	//
 	// This member is required.
 	JobId *string

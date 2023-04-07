@@ -51,18 +51,18 @@ type StartBuildBatchInput struct {
 	// to the value of the built-in CODEBUILD_SRC_DIR environment variable, or the
 	// path to an S3 bucket. The bucket must be in the same Amazon Web Services Region
 	// as the build project. Specify the buildspec file using its ARN (for example,
-	// arn:aws:s3:::my-codebuild-sample2/buildspec.yml). If this value is not
-	// provided or is set to an empty string, the source code must contain a buildspec
-	// file in its root directory. For more information, see Buildspec File Name and
-	// Storage Location (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage)
+	// arn:aws:s3:::my-codebuild-sample2/buildspec.yml ). If this value is not provided
+	// or is set to an empty string, the source code must contain a buildspec file in
+	// its root directory. For more information, see Buildspec File Name and Storage
+	// Location (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage)
 	// .
 	BuildspecOverride *string
 
-	// A ProjectCache  object that specifies cache overrides.
+	// A ProjectCache object that specifies cache overrides.
 	CacheOverride *types.ProjectCache
 
-	// The name of a certificate for this batch build that overrides the one
-	// specified in the batch build project.
+	// The name of a certificate for this batch build that overrides the one specified
+	// in the batch build project.
 	CertificateOverride *string
 
 	// The name of a compute type for this batch build that overrides the one
@@ -100,7 +100,7 @@ type StartBuildBatchInput struct {
 	GitSubmodulesConfigOverride *types.GitSubmodulesConfig
 
 	// A unique, case sensitive identifier you provide to ensure the idempotency of
-	// the StartBuildBatch  request. The token is included in the StartBuildBatch
+	// the StartBuildBatch request. The token is included in the StartBuildBatch
 	// request and is valid for five minutes. If you repeat the StartBuildBatch
 	// request with the same token, but change a parameter, CodeBuild returns a
 	// parameter mismatch error.
@@ -116,7 +116,7 @@ type StartBuildBatchInput struct {
 	// CodeBuild's service principal. SERVICE_ROLE Specifies that CodeBuild uses your
 	// build project's service role. When using a cross-account or private registry
 	// image, you must use SERVICE_ROLE credentials. When using an CodeBuild curated
-	// image, you must use CODEBUILD  credentials.
+	// image, you must use CODEBUILD credentials.
 	ImagePullCredentialsTypeOverride types.ImagePullCredentialsType
 
 	// Enable this flag to override the insecure SSL setting that is specified in the
@@ -132,8 +132,7 @@ type StartBuildBatchInput struct {
 	// Enable this flag to override privileged mode in the batch build project.
 	PrivilegedModeOverride *bool
 
-	// The number of minutes a batch build is allowed to be queued before it times
-	// out.
+	// The number of minutes a batch build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutesOverride *int32
 
 	// A RegistryCredential object that overrides credentials for access to a private
@@ -167,8 +166,8 @@ type StartBuildBatchInput struct {
 	// This override applies only if the build project's source is BitBucket or GitHub.
 	SourceAuthOverride *types.SourceAuth
 
-	// A location that overrides, for this batch build, the source location defined
-	// in the batch build project.
+	// A location that overrides, for this batch build, the source location defined in
+	// the batch build project.
 	SourceLocationOverride *string
 
 	// The source input type that overrides the source input defined in the batch
@@ -180,16 +179,15 @@ type StartBuildBatchInput struct {
 	// source provider: CodeCommit The commit ID, branch, or Git tag to use. GitHub The
 	// commit ID, pull request ID, branch name, or tag name that corresponds to the
 	// version of the source code you want to build. If a pull request ID is specified,
-	// it must use the format pr/pull-request-ID  (for example pr/25). If a branch
-	// name is specified, the branch's HEAD commit ID is used. If not specified, the
-	// default branch's HEAD commit ID is used. Bitbucket The commit ID, branch name,
-	// or tag name that corresponds to the version of the source code you want to
-	// build. If a branch name is specified, the branch's HEAD commit ID is used. If
-	// not specified, the default branch's HEAD commit ID is used. Amazon S3 The
-	// version ID of the object that represents the build input ZIP file to use. If
-	// sourceVersion is specified at the project level, then this sourceVersion (at
-	// the build level) takes precedence. For more information, see Source Version
-	// Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// it must use the format pr/pull-request-ID (for example pr/25 ). If a branch name
+	// is specified, the branch's HEAD commit ID is used. If not specified, the default
+	// branch's HEAD commit ID is used. Bitbucket The commit ID, branch name, or tag
+	// name that corresponds to the version of the source code you want to build. If a
+	// branch name is specified, the branch's HEAD commit ID is used. If not specified,
+	// the default branch's HEAD commit ID is used. Amazon S3 The version ID of the
+	// object that represents the build input ZIP file to use. If sourceVersion is
+	// specified at the project level, then this sourceVersion (at the build level)
+	// takes precedence. For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
 	// in the CodeBuild User Guide.
 	SourceVersion *string
 
@@ -198,7 +196,7 @@ type StartBuildBatchInput struct {
 
 type StartBuildBatchOutput struct {
 
-	// A BuildBatch  object that contains information about the batch build.
+	// A BuildBatch object that contains information about the batch build.
 	BuildBatch *types.BuildBatch
 
 	// Metadata pertaining to the operation's result.

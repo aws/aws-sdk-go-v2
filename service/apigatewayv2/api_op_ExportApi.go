@@ -32,8 +32,7 @@ type ExportApiInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The output type of the exported definition file. Valid values are JSON and
-	// YAML.
+	// The output type of the exported definition file. Valid values are JSON and YAML.
 	//
 	// This member is required.
 	OutputType *string

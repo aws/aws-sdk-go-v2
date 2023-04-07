@@ -64,7 +64,7 @@ type PutObjectRetentionInput struct {
 	// HTTP status code 400 Bad Request . For more information, see Checking object
 	// integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide. If you provide an individual checksum, Amazon S3
-	// ignores any provided ChecksumAlgorithm  parameter.
+	// ignores any provided ChecksumAlgorithm parameter.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	// The MD5 hash for the request body. For requests made using the Amazon Web
@@ -193,8 +193,8 @@ func newServiceMetadataMiddleware_opPutObjectRetention(region string) *awsmiddle
 	}
 }
 
-// getPutObjectRetentionRequestAlgorithmMember gets the request checksum
-// algorithm value provided as input.
+// getPutObjectRetentionRequestAlgorithmMember gets the request checksum algorithm
+// value provided as input.
 func getPutObjectRetentionRequestAlgorithmMember(input interface{}) (string, bool) {
 	in := input.(*PutObjectRetentionInput)
 	if len(in.ChecksumAlgorithm) == 0 {

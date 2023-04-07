@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new flow. The request must include one source. The request
-// optionally can include outputs (up to 50) and entitlements (up to 50).
+// Creates a new flow. The request must include one source. The request optionally
+// can include outputs (up to 50) and entitlements (up to 50).
 func (c *Client) CreateFlow(ctx context.Context, params *CreateFlowInput, optFns ...func(*Options)) (*CreateFlowOutput, error) {
 	if params == nil {
 		params = &CreateFlowInput{}
@@ -28,8 +28,8 @@ func (c *Client) CreateFlow(ctx context.Context, params *CreateFlowInput, optFns
 	return out, nil
 }
 
-// Creates a new flow. The request must include one source. The request
-// optionally can include outputs (up to 50) and entitlements (up to 50).
+// Creates a new flow. The request must include one source. The request optionally
+// can include outputs (up to 50) and entitlements (up to 50).
 type CreateFlowInput struct {
 
 	// The name of the flow.

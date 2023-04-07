@@ -41,7 +41,7 @@ type CreateVirtualMFADeviceInput struct {
 
 	// The name of the virtual MFA device, which must be unique. Use with path to
 	// uniquely identify a virtual MFA device. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
 	//
@@ -54,7 +54,7 @@ type CreateVirtualMFADeviceInput struct {
 	// defaults to a slash (/). This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
 	// ) a string of characters consisting of either a forward slash (/) by itself or a
 	// string that must begin and end with forward slashes. In addition, it can contain
-	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F),
+	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F ),
 	// including most punctuation characters, digits, and upper and lowercased letters.
 	Path *string
 
@@ -69,7 +69,7 @@ type CreateVirtualMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful CreateVirtualMFADevice  request.
+// Contains the response to a successful CreateVirtualMFADevice request.
 type CreateVirtualMFADeviceOutput struct {
 
 	// A structure containing details about the new virtual MFA device.

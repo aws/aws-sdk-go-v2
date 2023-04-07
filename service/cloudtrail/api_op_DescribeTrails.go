@@ -41,11 +41,13 @@ type DescribeTrailsInput struct {
 
 	// Specifies a list of trail names, trail ARNs, or both, of the trails to
 	// describe. The format of a trail ARN is:
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrailIf an empty list is
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail If an empty list is
 	// specified, information for the trail in the current region is returned.
-	//     - If an empty list is specified and IncludeShadowTrails is false, then information for all trails in the current region is returned.
-	//     - If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.
-	//
+	//   - If an empty list is specified and IncludeShadowTrails is false, then
+	//   information for all trails in the current region is returned.
+	//   - If an empty list is specified and IncludeShadowTrails is null or true, then
+	//   information for all trails in the current region and any associated shadow
+	//   trails in other regions is returned.
 	// If one or more trail names are specified, information is returned only if the
 	// names match the names of trails belonging only to the current region and current
 	// account. To return information about a trail in another region, you must specify

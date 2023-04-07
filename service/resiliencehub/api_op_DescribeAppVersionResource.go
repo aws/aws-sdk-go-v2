@@ -15,7 +15,8 @@ import (
 // one of the following parameters to descibe the resource:
 //   - resourceName
 //   - logicalResourceId
-//   - physicalResourceId (Along with physicalResourceId , you can also provide awsAccountId , and awsRegion )
+//   - physicalResourceId (Along with physicalResourceId , you can also provide
+//     awsAccountId , and awsRegion )
 func (c *Client) DescribeAppVersionResource(ctx context.Context, params *DescribeAppVersionResourceInput, optFns ...func(*Options)) (*DescribeAppVersionResourceOutput, error) {
 	if params == nil {
 		params = &DescribeAppVersionResourceInput{}

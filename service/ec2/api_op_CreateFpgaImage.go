@@ -34,14 +34,14 @@ func (c *Client) CreateFpgaImage(ctx context.Context, params *CreateFpgaImageInp
 
 type CreateFpgaImageInput struct {
 
-	// The location of the encrypted design checkpoint in Amazon S3. The input must
-	// be a tarball.
+	// The location of the encrypted design checkpoint in Amazon S3. The input must be
+	// a tarball.
 	//
 	// This member is required.
 	InputStorageLocation *types.StorageLocation
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 

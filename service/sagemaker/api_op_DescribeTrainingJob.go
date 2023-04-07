@@ -20,7 +20,7 @@ import (
 
 // Returns information about a training job. Some of the attributes below only
 // appear if the training job successfully starts. If the training job fails,
-// TrainingJobStatus is Failed  and, depending on the FailureReason, attributes
+// TrainingJobStatus is Failed and, depending on the FailureReason , attributes
 // like TrainingStartTime , TrainingTimeInSeconds , TrainingEndTime , and
 // BillableTimeInSeconds may not be present in the response.
 func (c *Client) DescribeTrainingJob(ctx context.Context, params *DescribeTrainingJobInput, optFns ...func(*Options)) (*DescribeTrainingJobOutput, error) {
@@ -72,32 +72,37 @@ type DescribeTrainingJobOutput struct {
 	// This member is required.
 	ResourceConfig *types.ResourceConfig
 
-	// Provides detailed information about the state of the training job. For
-	// detailed information on the secondary status of the training job, see
-	// StatusMessage under SecondaryStatusTransition. SageMaker provides primary
-	// statuses and secondary statuses that apply to each of them: InProgress
-	//     - Starting - Starting the training job.
-	//     - Downloading - An optional stage for algorithms that support File training input mode. It indicates that data is being downloaded to the ML storage volumes.
-	//     - Training - Training is in progress.
-	//     - Interrupted - The job stopped because the managed spot training instances were interrupted.
-	//     - Uploading - Training is complete and the model artifacts are being uploaded to the S3 location.
-	//
+	// Provides detailed information about the state of the training job. For detailed
+	// information on the secondary status of the training job, see StatusMessage
+	// under SecondaryStatusTransition . SageMaker provides primary statuses and
+	// secondary statuses that apply to each of them: InProgress
+	//   - Starting - Starting the training job.
+	//   - Downloading - An optional stage for algorithms that support File training
+	//   input mode. It indicates that data is being downloaded to the ML storage
+	//   volumes.
+	//   - Training - Training is in progress.
+	//   - Interrupted - The job stopped because the managed spot training instances
+	//   were interrupted.
+	//   - Uploading - Training is complete and the model artifacts are being uploaded
+	//   to the S3 location.
 	// Completed
-	//     - Completed - The training job has completed.
+	//   - Completed - The training job has completed.
 	// Failed
-	//     - Failed - The training job has failed. The reason for the failure is returned in the FailureReason field of DescribeTrainingJobResponse .
-	//
+	//   - Failed - The training job has failed. The reason for the failure is returned
+	//   in the FailureReason field of DescribeTrainingJobResponse .
 	// Stopped
-	//     - MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed runtime.
-	//     - MaxWaitTimeExceeded - The job stopped because it exceeded the maximum allowed wait time.
-	//     - Stopped - The training job has stopped.
+	//   - MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed
+	//   runtime.
+	//   - MaxWaitTimeExceeded - The job stopped because it exceeded the maximum
+	//   allowed wait time.
+	//   - Stopped - The training job has stopped.
 	// Stopping
-	//     - Stopping - Stopping the training job.
+	//   - Stopping - Stopping the training job.
 	// Valid values for SecondaryStatus are subject to change. We no longer support
 	// the following secondary statuses:
-	//     - LaunchingMLInstances
-	//     - PreparingTraining
-	//     - DownloadingTrainingImage
+	//   - LaunchingMLInstances
+	//   - PreparingTraining
+	//   - DownloadingTrainingImage
 	//
 	// This member is required.
 	SecondaryStatus types.SecondaryStatus
@@ -124,13 +129,13 @@ type DescribeTrainingJobOutput struct {
 
 	// The status of the training job. SageMaker provides the following training job
 	// statuses:
-	//     - InProgress - The training is in progress.
-	//     - Completed - The training job has completed.
-	//     - Failed - The training job has failed. To see the reason for the failure, see the FailureReason field in the response to a DescribeTrainingJobResponse call.
-	//     - Stopping - The training job is stopping.
-	//     - Stopped - The training job has stopped.
-	// For more detailed information,
-	// see SecondaryStatus .
+	//   - InProgress - The training is in progress.
+	//   - Completed - The training job has completed.
+	//   - Failed - The training job has failed. To see the reason for the failure, see
+	//   the FailureReason field in the response to a DescribeTrainingJobResponse call.
+	//   - Stopping - The training job is stopping.
+	//   - Stopped - The training job has stopped.
+	// For more detailed information, see SecondaryStatus .
 	//
 	// This member is required.
 	TrainingJobStatus types.TrainingJobStatus
@@ -139,13 +144,13 @@ type DescribeTrainingJobOutput struct {
 	AutoMLJobArn *string
 
 	// The billable time in seconds. Billable time refers to the absolute wall-clock
-	// time. Multiply BillableTimeInSeconds  by the number of instances ( InstanceCount
+	// time. Multiply BillableTimeInSeconds by the number of instances ( InstanceCount
 	// ) in your training cluster to get the total compute time SageMaker bills you if
 	// you run distributed training. The formula is as follows: BillableTimeInSeconds
-	// * InstanceCount. You can calculate the savings from using managed spot
-	// training using the formula (1 - BillableTimeInSeconds / TrainingTimeInSeconds)
-	// * 100 . For example, if BillableTimeInSeconds  is 100 and TrainingTimeInSeconds
-	// is 500, the savings is 80%.
+	// * InstanceCount . You can calculate the savings from using managed spot training
+	// using the formula (1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100 .
+	// For example, if BillableTimeInSeconds is 100 and TrainingTimeInSeconds is 500,
+	// the savings is 80%.
 	BillableTimeInSeconds *int32
 
 	// Contains information about the output location for managed spot training
@@ -154,7 +159,7 @@ type DescribeTrainingJobOutput struct {
 
 	// Configuration information for the Amazon SageMaker Debugger hook parameters,
 	// metric and tensor collections, and storage paths. To learn more about how to
-	// configure the DebugHookConfig  parameter, see Use the SageMaker and Debugger
+	// configure the DebugHookConfig parameter, see Use the SageMaker and Debugger
 	// Configuration API Operations to Create, Update, and Debug Your Training Job (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html)
 	// .
 	DebugHookConfig *types.DebugHookConfig
@@ -168,7 +173,7 @@ type DescribeTrainingJobOutput struct {
 	DebugRuleEvaluationStatuses []types.DebugRuleEvaluationStatus
 
 	// To encrypt all communications between ML compute instances in distributed
-	// training, choose True. Encryption provides greater security for distributed
+	// training, choose True . Encryption provides greater security for distributed
 	// training, but training might take longer. How long it takes depends on the
 	// amount of communication between compute instances, especially if you use a deep
 	// learning algorithms in distributed training.
@@ -179,7 +184,7 @@ type DescribeTrainingJobOutput struct {
 	EnableManagedSpotTraining bool
 
 	// If you want to allow inbound or outbound network calls, except for calls
-	// between peers within a training cluster for distributed training, choose True.
+	// between peers within a training cluster for distributed training, choose True .
 	// If you enable network isolation for training jobs that are configured to use a
 	// VPC, SageMaker downloads and uploads customer data and model artifacts through
 	// the specified VPC, but the training container does not have network access.
@@ -190,9 +195,9 @@ type DescribeTrainingJobOutput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//     - CreateProcessingJob
-	//     - CreateTrainingJob
-	//     - CreateTransformJob
+	//   - CreateProcessingJob
+	//   - CreateTrainingJob
+	//   - CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// If the training job failed, the reason it failed.
@@ -205,7 +210,7 @@ type DescribeTrainingJobOutput struct {
 	// Algorithm-specific parameters.
 	HyperParameters map[string]string
 
-	// An array of Channel  objects that describes each data input channel.
+	// An array of Channel objects that describes each data input channel.
 	InputDataConfig []types.Channel
 
 	// The Amazon Resource Name (ARN) of the SageMaker Ground Truth labeling job that
@@ -216,8 +221,8 @@ type DescribeTrainingJobOutput struct {
 	// modified.
 	LastModifiedTime *time.Time
 
-	// The S3 path where model artifacts that you configured when creating the job
-	// are stored. SageMaker creates subfolders for model artifacts.
+	// The S3 path where model artifacts that you configured when creating the job are
+	// stored. SageMaker creates subfolders for model artifacts.
 	OutputDataConfig *types.OutputDataConfig
 
 	// Configuration information for Amazon SageMaker Debugger system monitoring,
@@ -272,8 +277,8 @@ type DescribeTrainingJobOutput struct {
 	// the training job was launched by a hyperparameter tuning job.
 	TuningJobArn *string
 
-	// A VpcConfig object that specifies the VPC that this training job has access
-	// to. For more information, see Protect Training Jobs by Using an Amazon Virtual
+	// A VpcConfig object that specifies the VPC that this training job has access to.
+	// For more information, see Protect Training Jobs by Using an Amazon Virtual
 	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html) .
 	VpcConfig *types.VpcConfig
 

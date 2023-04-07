@@ -39,7 +39,7 @@ type BatchGetBuildBatchesInput struct {
 
 type BatchGetBuildBatchesOutput struct {
 
-	// An array of BuildBatch  objects that represent the retrieved batch builds.
+	// An array of BuildBatch objects that represent the retrieved batch builds.
 	BuildBatches []types.BuildBatch
 
 	// An array that contains the identifiers of any batch builds that are not found.

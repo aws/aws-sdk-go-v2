@@ -12,7 +12,7 @@ import (
 
 // Applies a policy to a component. We recommend that you call the RAM API
 // CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html)
-// to share resources. If you call the Image Builder API PutComponentPolicy, you
+// to share resources. If you call the Image Builder API PutComponentPolicy , you
 // must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html)
 // in order for the resource to be visible to all principals with whom the resource
 // is shared.
@@ -49,8 +49,7 @@ type PutComponentPolicyInput struct {
 
 type PutComponentPolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the component that this policy was applied
-	// to.
+	// The Amazon Resource Name (ARN) of the component that this policy was applied to.
 	ComponentArn *string
 
 	// The request ID that uniquely identifies this request.

@@ -63,8 +63,8 @@ type DescribeBotLocaleOutput struct {
 	// place for the locale.
 	BotLocaleHistoryEvents []types.BotLocaleHistoryEvent
 
-	// The status of the bot. If the status is Failed, the reasons for the failure
-	// are listed in the failureReasons  field.
+	// The status of the bot. If the status is Failed , the reasons for the failure are
+	// listed in the failureReasons field.
 	BotLocaleStatus types.BotLocaleStatus
 
 	// The identifier of the version of the bot associated with the locale.
@@ -76,7 +76,7 @@ type DescribeBotLocaleOutput struct {
 	// The description of the locale.
 	Description *string
 
-	// if botLocaleStatus  is Failed, Amazon Lex explains why it failed to build the
+	// if botLocaleStatus is Failed , Amazon Lex explains why it failed to build the
 	// bot.
 	FailureReasons []string
 
@@ -95,12 +95,12 @@ type DescribeBotLocaleOutput struct {
 	// The name of the locale.
 	LocaleName *string
 
-	// The confidence threshold where Amazon Lex inserts the AMAZON.FallbackIntent
-	// and AMAZON.KendraSearchIntent intents in the list of possible intents for an
+	// The confidence threshold where Amazon Lex inserts the AMAZON.FallbackIntent and
+	// AMAZON.KendraSearchIntent intents in the list of possible intents for an
 	// utterance.
 	NluIntentConfidenceThreshold *float64
 
-	// Recommended actions to take to resolve an error in the failureReasons  field.
+	// Recommended actions to take to resolve an error in the failureReasons field.
 	RecommendedActions []string
 
 	// The number of slot types defined for the locale.
@@ -241,9 +241,9 @@ func NewBotLocaleBuiltWaiter(client DescribeBotLocaleAPIClient, optFns ...func(*
 	}
 }
 
-// Wait calls the waiter function for BotLocaleBuilt waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for BotLocaleBuilt waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *BotLocaleBuiltWaiter) Wait(ctx context.Context, params *DescribeBotLocaleInput, maxWaitDur time.Duration, optFns ...func(*BotLocaleBuiltWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -460,10 +460,10 @@ func (w *BotLocaleCreatedWaiter) Wait(ctx context.Context, params *DescribeBotLo
 	return err
 }
 
-// WaitForOutput calls the waiter function for BotLocaleCreated waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for BotLocaleCreated waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *BotLocaleCreatedWaiter) WaitForOutput(ctx context.Context, params *DescribeBotLocaleInput, maxWaitDur time.Duration, optFns ...func(*BotLocaleCreatedWaiterOptions)) (*DescribeBotLocaleOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -685,9 +685,9 @@ func NewBotLocaleExpressTestingAvailableWaiter(client DescribeBotLocaleAPIClient
 	}
 }
 
-// Wait calls the waiter function for BotLocaleExpressTestingAvailable waiter.
-// The maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur
-// is required and must be greater than zero.
+// Wait calls the waiter function for BotLocaleExpressTestingAvailable waiter. The
+// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
+// required and must be greater than zero.
 func (w *BotLocaleExpressTestingAvailableWaiter) Wait(ctx context.Context, params *DescribeBotLocaleInput, maxWaitDur time.Duration, optFns ...func(*BotLocaleExpressTestingAvailableWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -29,7 +29,7 @@ func (c *Client) GetPackageVersionHistory(ctx context.Context, params *GetPackag
 	return out, nil
 }
 
-// Container for request parameters to GetPackageVersionHistory  operation.
+// Container for request parameters to GetPackageVersionHistory operation.
 type GetPackageVersionHistoryInput struct {
 
 	// Returns an audit history of versions of the package.
@@ -47,13 +47,13 @@ type GetPackageVersionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response returned by GetPackageVersionHistory  operation.
+// Container for response returned by GetPackageVersionHistory operation.
 type GetPackageVersionHistoryOutput struct {
 	NextToken *string
 
 	PackageID *string
 
-	// List of PackageVersionHistory  objects.
+	// List of PackageVersionHistory objects.
 	PackageVersionHistoryList []types.PackageVersionHistory
 
 	// Metadata pertaining to the operation's result.
@@ -139,8 +139,8 @@ type GetPackageVersionHistoryPaginatorOptions struct {
 	// Limits results to a maximum number of versions.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

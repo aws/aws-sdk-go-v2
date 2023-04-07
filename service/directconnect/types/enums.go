@@ -214,9 +214,9 @@ const (
 	GatewayTypeTransitGateway        GatewayType = "transitGateway"
 )
 
-// Values returns all known values for GatewayType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for GatewayType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (GatewayType) Values() []GatewayType {
 	return []GatewayType{
 		"virtualPrivateGateway",
@@ -233,8 +233,8 @@ const (
 	HasLogicalRedundancyNo      HasLogicalRedundancy = "no"
 )
 
-// Values returns all known values for HasLogicalRedundancy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for HasLogicalRedundancy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (HasLogicalRedundancy) Values() []HasLogicalRedundancy {
 	return []HasLogicalRedundancy{
@@ -285,9 +285,9 @@ const (
 	LagStateUnknown   LagState = "unknown"
 )
 
-// Values returns all known values for LagState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LagState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (LagState) Values() []LagState {
 	return []LagState{
 		"requested",

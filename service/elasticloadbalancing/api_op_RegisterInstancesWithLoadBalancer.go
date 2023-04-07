@@ -18,13 +18,13 @@ import (
 // then register the linked EC2-Classic instances with the load balancer in the
 // VPC. Note that RegisterInstanceWithLoadBalancer completes when the request has
 // been registered. Instance registration takes a little time to complete. To check
-// the state of the registered instances, use DescribeLoadBalancers  or
-// DescribeInstanceHealth. After the instance is registered, it starts receiving
+// the state of the registered instances, use DescribeLoadBalancers or
+// DescribeInstanceHealth . After the instance is registered, it starts receiving
 // traffic and requests from the load balancer. Any instance that is not in one of
 // the Availability Zones registered for the load balancer is moved to the
-// OutOfServicestate. If an Availability Zone is added to the load balancer
-// later, any instances registered with the load balancer move to the InService
-// state. To deregister instances from a load balancer, use
+// OutOfService state. If an Availability Zone is added to the load balancer later,
+// any instances registered with the load balancer move to the InService state. To
+// deregister instances from a load balancer, use
 // DeregisterInstancesFromLoadBalancer . For more information, see Register or
 // De-Register EC2 Instances (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html)
 // in the Classic Load Balancers Guide.

@@ -33,8 +33,8 @@ type AbortEnvironmentUpdateInput struct {
 	// want to cancel.
 	EnvironmentId *string
 
-	// This specifies the name of the environment with the in-progress update that
-	// you want to cancel.
+	// This specifies the name of the environment with the in-progress update that you
+	// want to cancel.
 	EnvironmentName *string
 
 	noSmithyDocumentSerde

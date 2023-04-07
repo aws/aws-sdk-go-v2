@@ -14,7 +14,7 @@ import (
 
 // Returns an array of all Amazon QLDB journal stream descriptors for a given
 // ledger. The output of each stream descriptor includes the same details that are
-// returned by DescribeJournalKinesisStream. This action does not return any
+// returned by DescribeJournalKinesisStream . This action does not return any
 // expired journal streams. For more information, see Expiration for terminal
 // streams (https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration)
 // in the Amazon QLDB Developer Guide. This action returns a maximum of MaxResults
@@ -43,14 +43,13 @@ type ListJournalKinesisStreamsForLedgerInput struct {
 	LedgerName *string
 
 	// The maximum number of results to return in a single
-	// ListJournalKinesisStreamsForLedgerrequest. (The actual number of results
+	// ListJournalKinesisStreamsForLedger request. (The actual number of results
 	// returned might be fewer.)
 	MaxResults *int32
 
 	// A pagination token, indicating that you want to retrieve the next page of
-	// results. If you received a value for NextToken  in the response from a previous
-	// ListJournalKinesisStreamsForLedgercall, you should use that value as input
-	// here.
+	// results. If you received a value for NextToken in the response from a previous
+	// ListJournalKinesisStreamsForLedger call, you should use that value as input here.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -58,12 +57,15 @@ type ListJournalKinesisStreamsForLedgerInput struct {
 
 type ListJournalKinesisStreamsForLedgerOutput struct {
 
-	//     - If NextToken is empty, the last page of results has been processed and there are no more results to be retrieved.
-	//     - If NextToken is not empty, more results are available. To retrieve the next page of results, use the value of NextToken in a subsequent ListJournalKinesisStreamsForLedger call.
+	//   - If NextToken is empty, the last page of results has been processed and there
+	//   are no more results to be retrieved.
+	//   - If NextToken is not empty, more results are available. To retrieve the next
+	//   page of results, use the value of NextToken in a subsequent
+	//   ListJournalKinesisStreamsForLedger call.
 	NextToken *string
 
-	// The array of QLDB journal stream descriptors that are associated with the
-	// given ledger.
+	// The array of QLDB journal stream descriptors that are associated with the given
+	// ledger.
 	Streams []types.JournalKinesisStreamDescription
 
 	// Metadata pertaining to the operation's result.
@@ -143,16 +145,16 @@ type ListJournalKinesisStreamsForLedgerAPIClient interface {
 
 var _ ListJournalKinesisStreamsForLedgerAPIClient = (*Client)(nil)
 
-// ListJournalKinesisStreamsForLedgerPaginatorOptions is the paginator options
-// for ListJournalKinesisStreamsForLedger
+// ListJournalKinesisStreamsForLedgerPaginatorOptions is the paginator options for
+// ListJournalKinesisStreamsForLedger
 type ListJournalKinesisStreamsForLedgerPaginatorOptions struct {
 	// The maximum number of results to return in a single
-	// ListJournalKinesisStreamsForLedgerrequest. (The actual number of results
+	// ListJournalKinesisStreamsForLedger request. (The actual number of results
 	// returned might be fewer.)
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

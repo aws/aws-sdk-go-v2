@@ -16,9 +16,9 @@ import (
 //   - CREATE_PENDING > CREATE_STOPPED or
 //   - CREATE_IN_PROGRESS > CREATE_STOPPING > CREATE_STOPPED
 //
-// You are billed for
-// all of the training completed up until you stop the solution version creation.
-// You cannot resume creating a solution version once it has been stopped.
+// You are billed for all of the training completed up until you stop the solution
+// version creation. You cannot resume creating a solution version once it has been
+// stopped.
 func (c *Client) StopSolutionVersionCreation(ctx context.Context, params *StopSolutionVersionCreationInput, optFns ...func(*Options)) (*StopSolutionVersionCreationOutput, error) {
 	if params == nil {
 		params = &StopSolutionVersionCreationInput{}

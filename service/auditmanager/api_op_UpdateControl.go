@@ -61,7 +61,7 @@ type UpdateControlInput struct {
 
 type UpdateControlOutput struct {
 
-	// The name of the updated control set that the UpdateControl  API returned.
+	// The name of the updated control set that the UpdateControl API returned.
 	Control *types.Control
 
 	// Metadata pertaining to the operation's result.

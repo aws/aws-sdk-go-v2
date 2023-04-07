@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all license usage records for a license configuration, displaying
-// license consumption details by resource at a selected point in time. Use this
-// action to audit the current license consumption for any license inventory and
+// Lists all license usage records for a license configuration, displaying license
+// consumption details by resource at a selected point in time. Use this action to
+// audit the current license consumption for any license inventory and
 // configuration.
 func (c *Client) ListUsageForLicenseConfiguration(ctx context.Context, params *ListUsageForLicenseConfigurationInput, optFns ...func(*Options)) (*ListUsageForLicenseConfigurationOutput, error) {
 	if params == nil {
@@ -39,9 +39,13 @@ type ListUsageForLicenseConfigurationInput struct {
 
 	// Filters to scope the results. The following filters and logical operators are
 	// supported:
-	//     - resourceArn - The ARN of the license configuration resource. Logical operators are EQUALS | NOT_EQUALS .
-	//     - resourceType - The resource type ( EC2_INSTANCE | EC2_HOST | EC2_AMI | SYSTEMS_MANAGER_MANAGED_INSTANCE ). Logical operators are EQUALS | NOT_EQUALS .
-	//     - resourceAccount - The ID of the account that owns the resource. Logical operators are EQUALS | NOT_EQUALS .
+	//   - resourceArn - The ARN of the license configuration resource. Logical
+	//   operators are EQUALS | NOT_EQUALS .
+	//   - resourceType - The resource type ( EC2_INSTANCE | EC2_HOST | EC2_AMI |
+	//   SYSTEMS_MANAGER_MANAGED_INSTANCE ). Logical operators are EQUALS | NOT_EQUALS
+	//   .
+	//   - resourceAccount - The ID of the account that owns the resource. Logical
+	//   operators are EQUALS | NOT_EQUALS .
 	Filters []types.Filter
 
 	// Maximum number of results to return in a single call.

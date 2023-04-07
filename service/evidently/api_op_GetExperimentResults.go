@@ -70,15 +70,26 @@ type GetExperimentResultsInput struct {
 	// In seconds, the amount of time to aggregate results together.
 	Period int64
 
-	// The names of the report types that you want to see. Currently,
-	// BayesianInference is the only valid value.
+	// The names of the report types that you want to see. Currently, BayesianInference
+	// is the only valid value.
 	ReportNames []types.ExperimentReportName
 
 	// The statistics that you want to see in the returned results.
-	//     - PValue specifies to use p-values for the results. A p-value is used in hypothesis testing to measure how often you are willing to make a mistake in rejecting the null hypothesis. A general practice is to reject the null hypothesis and declare that the results are statistically significant when the p-value is less than 0.05.
-	//     - ConfidenceInterval specifies a confidence interval for the results. The confidence interval represents the range of values for the chosen metric that is likely to contain the true difference between the baseStat of a variation and the baseline. Evidently returns the 95% confidence interval.
-	//     - TreatmentEffect is the difference in the statistic specified by the baseStat parameter between each variation and the default variation.
-	//     - BaseStat returns the statistical values collected for the metric for each variation. The statistic uses the same statistic specified in the baseStat parameter. Therefore, if baseStat is mean , this returns the mean of the values collected for each variation.
+	//   - PValue specifies to use p-values for the results. A p-value is used in
+	//   hypothesis testing to measure how often you are willing to make a mistake in
+	//   rejecting the null hypothesis. A general practice is to reject the null
+	//   hypothesis and declare that the results are statistically significant when the
+	//   p-value is less than 0.05.
+	//   - ConfidenceInterval specifies a confidence interval for the results. The
+	//   confidence interval represents the range of values for the chosen metric that is
+	//   likely to contain the true difference between the baseStat of a variation and
+	//   the baseline. Evidently returns the 95% confidence interval.
+	//   - TreatmentEffect is the difference in the statistic specified by the baseStat
+	//   parameter between each variation and the default variation.
+	//   - BaseStat returns the statistical values collected for the metric for each
+	//   variation. The statistic uses the same statistic specified in the baseStat
+	//   parameter. Therefore, if baseStat is mean , this returns the mean of the
+	//   values collected for each variation.
 	ResultStats []types.ExperimentResultRequestType
 
 	// The date and time that the experiment started.
@@ -89,9 +100,9 @@ type GetExperimentResultsInput struct {
 
 type GetExperimentResultsOutput struct {
 
-	// If the experiment doesn't yet have enough events to provide valid results,
-	// this field is returned with the message Not enough events to generate results.
-	// If there are enough events to provide valid results, this field is not returned.
+	// If the experiment doesn't yet have enough events to provide valid results, this
+	// field is returned with the message Not enough events to generate results . If
+	// there are enough events to provide valid results, this field is not returned.
 	Details *string
 
 	// An array of structures that include the reports that you requested.

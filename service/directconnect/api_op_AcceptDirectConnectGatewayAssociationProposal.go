@@ -30,8 +30,8 @@ func (c *Client) AcceptDirectConnectGatewayAssociationProposal(ctx context.Conte
 
 type AcceptDirectConnectGatewayAssociationProposalInput struct {
 
-	// The ID of the Amazon Web Services account that owns the virtual private
-	// gateway or transit gateway.
+	// The ID of the Amazon Web Services account that owns the virtual private gateway
+	// or transit gateway.
 	//
 	// This member is required.
 	AssociatedGatewayOwnerAccount *string
@@ -46,8 +46,8 @@ type AcceptDirectConnectGatewayAssociationProposalInput struct {
 	// This member is required.
 	ProposalId *string
 
-	// Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.
-	// For information about how to set the prefixes, see Allowed Prefixes (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
+	// Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway. For
+	// information about how to set the prefixes, see Allowed Prefixes (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
 	// in the Direct Connect User Guide.
 	OverrideAllowedPrefixesToDirectConnectGateway []types.RouteFilterPrefix
 
@@ -56,8 +56,8 @@ type AcceptDirectConnectGatewayAssociationProposalInput struct {
 
 type AcceptDirectConnectGatewayAssociationProposalOutput struct {
 
-	// Information about an association between a Direct Connect gateway and a
-	// virtual private gateway or transit gateway.
+	// Information about an association between a Direct Connect gateway and a virtual
+	// private gateway or transit gateway.
 	DirectConnectGatewayAssociation *types.DirectConnectGatewayAssociation
 
 	// Metadata pertaining to the operation's result.

@@ -39,8 +39,7 @@ type ExportNotebookInput struct {
 
 type ExportNotebookOutput struct {
 
-	// The notebook metadata, including notebook ID, notebook name, and workgroup
-	// name.
+	// The notebook metadata, including notebook ID, notebook name, and workgroup name.
 	NotebookMetadata *types.NotebookMetadata
 
 	// The content of the exported notebook.

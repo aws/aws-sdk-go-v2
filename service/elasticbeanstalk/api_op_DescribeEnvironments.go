@@ -47,18 +47,18 @@ type DescribeEnvironmentsInput struct {
 	// include only those that have the specified names.
 	EnvironmentNames []string
 
-	// Indicates whether to include deleted environments: true: Environments that
-	// have been deleted after IncludedDeletedBackTo  are displayed. false: Do not
-	// include deleted environments.
+	// Indicates whether to include deleted environments: true : Environments that have
+	// been deleted after IncludedDeletedBackTo are displayed. false : Do not include
+	// deleted environments.
 	IncludeDeleted *bool
 
-	// If specified when IncludeDeleted  is set to true, then environments deleted
+	// If specified when IncludeDeleted is set to true , then environments deleted
 	// after this date are displayed.
 	IncludedDeletedBackTo *time.Time
 
-	// For a paginated request. Specify a maximum number of environments to include
-	// in each response. If no MaxRecords is specified, all available environments
-	// are retrieved in a single response.
+	// For a paginated request. Specify a maximum number of environments to include in
+	// each response. If no MaxRecords is specified, all available environments are
+	// retrieved in a single response.
 	MaxRecords *int32
 
 	// For a paginated request. Specify a token from a previous response page to
@@ -77,7 +77,7 @@ type DescribeEnvironmentsInput struct {
 // Result message containing a list of environment descriptions.
 type DescribeEnvironmentsOutput struct {
 
-	// Returns an EnvironmentDescription  list.
+	// Returns an EnvironmentDescription list.
 	Environments []types.EnvironmentDescription
 
 	// In a paginated request, the token that you can pass in a subsequent request to
@@ -422,9 +422,9 @@ func NewEnvironmentTerminatedWaiter(client DescribeEnvironmentsAPIClient, optFns
 	}
 }
 
-// Wait calls the waiter function for EnvironmentTerminated waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for EnvironmentTerminated waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *EnvironmentTerminatedWaiter) Wait(ctx context.Context, params *DescribeEnvironmentsInput, maxWaitDur time.Duration, optFns ...func(*EnvironmentTerminatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -629,9 +629,9 @@ func NewEnvironmentUpdatedWaiter(client DescribeEnvironmentsAPIClient, optFns ..
 	}
 }
 
-// Wait calls the waiter function for EnvironmentUpdated waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for EnvironmentUpdated waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *EnvironmentUpdatedWaiter) Wait(ctx context.Context, params *DescribeEnvironmentsInput, maxWaitDur time.Duration, optFns ...func(*EnvironmentUpdatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -91,8 +91,8 @@ type CmafPackage struct {
 	// nearest multiple of the source segment duration.
 	SegmentDurationSeconds int32
 
-	// An optional custom string that is prepended to the name of each segment. If
-	// not specified, it defaults to the ChannelId.
+	// An optional custom string that is prepended to the name of each segment. If not
+	// specified, it defaults to the ChannelId.
 	SegmentPrefix *string
 
 	// A StreamSelection configuration.
@@ -114,8 +114,8 @@ type CmafPackageCreateOrUpdateParameters struct {
 	// nearest multiple of the source segment duration.
 	SegmentDurationSeconds int32
 
-	// An optional custom string that is prepended to the name of each segment. If
-	// not specified, it defaults to the ChannelId.
+	// An optional custom string that is prepended to the name of each segment. If not
+	// specified, it defaults to the ChannelId.
 	SegmentPrefix *string
 
 	// A StreamSelection configuration.
@@ -178,8 +178,8 @@ type DashPackage struct {
 	// the presentation.
 	MinBufferTimeSeconds int32
 
-	// Minimum duration (in seconds) between potential changes to the Dynamic
-	// Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).
+	// Minimum duration (in seconds) between potential changes to the Dynamic Adaptive
+	// Streaming over HTTP (DASH) Media Presentation Description (MPD).
 	MinUpdatePeriodSeconds int32
 
 	// A list of triggers that controls when the outgoing Dynamic Adaptive Streaming
@@ -212,8 +212,8 @@ type DashPackage struct {
 	// Duration (in seconds) to delay live content before presentation.
 	SuggestedPresentationDelaySeconds int32
 
-	// Determines the type of UTCTiming included in the Media Presentation
-	// Description (MPD)
+	// Determines the type of UTCTiming included in the Media Presentation Description
+	// (MPD)
 	UtcTiming UtcTiming
 
 	// Specifies the value attribute of the UTCTiming field when utcTiming is set to
@@ -232,10 +232,10 @@ type EgressAccessLogs struct {
 	noSmithyDocumentSerde
 }
 
-// Use encryptionContractConfiguration to configure one or more content
-// encryption keys for your endpoints that use SPEKE 2.0. The encryption contract
-// defines which content keys are used to encrypt the audio and video tracks in
-// your stream. To configure the encryption contract, specify which audio and video
+// Use encryptionContractConfiguration to configure one or more content encryption
+// keys for your endpoints that use SPEKE 2.0. The encryption contract defines
+// which content keys are used to encrypt the audio and video tracks in your
+// stream. To configure the encryption contract, specify which audio and video
 // encryption presets to use. Note the following considerations when using
 // encryptionContractConfiguration: encryptionContractConfiguration can be used for
 // DASH or CMAF endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3
@@ -271,12 +271,12 @@ type HarvestJob struct {
 	// The end of the time-window which will be harvested.
 	EndTime *string
 
-	// The ID of the HarvestJob. The ID must be unique within the region and it
-	// cannot be changed after the HarvestJob is submitted.
+	// The ID of the HarvestJob. The ID must be unique within the region and it cannot
+	// be changed after the HarvestJob is submitted.
 	Id *string
 
-	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This
-	// cannot be changed after the HarvestJob is submitted.
+	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This cannot
+	// be changed after the HarvestJob is submitted.
 	OriginEndpointId *string
 
 	// Configuration parameters for where in an S3 bucket to place the harvested
@@ -286,8 +286,8 @@ type HarvestJob struct {
 	// The start of the time-window which will be harvested.
 	StartTime *string
 
-	// The current status of the HarvestJob. Consider setting up a CloudWatch Event
-	// to listen for HarvestJobs as they succeed or fail. In the event of failure, the
+	// The current status of the HarvestJob. Consider setting up a CloudWatch Event to
+	// listen for HarvestJobs as they succeed or fail. In the event of failure, the
 	// CloudWatch Event will include an explanation of why the HarvestJob failed.
 	Status Status
 
@@ -517,8 +517,8 @@ type HlsPackage struct {
 	// output.
 	ProgramDateTimeIntervalSeconds int32
 
-	// Duration (in seconds) of each fragment. Actual fragments will be rounded to
-	// the nearest multiple of the source fragment duration.
+	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
+	// nearest multiple of the source fragment duration.
 	SegmentDurationSeconds int32
 
 	// A StreamSelection configuration.
@@ -623,8 +623,8 @@ type OriginEndpoint struct {
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *MssPackage
 
-	// Control whether origination of video is allowed for this OriginEndpoint. If
-	// set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
+	// Control whether origination of video is allowed for this OriginEndpoint. If set
+	// to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
 	// access control. If set to DENY, the OriginEndpoint may not be requested. This
 	// can be helpful for Live to VOD harvesting, or for temporarily disabling
 	// origination
@@ -704,10 +704,10 @@ type SpekeKeyProvider struct {
 	// provider service.
 	CertificateArn *string
 
-	// Use encryptionContractConfiguration to configure one or more content
-	// encryption keys for your endpoints that use SPEKE 2.0. The encryption contract
-	// defines which content keys are used to encrypt the audio and video tracks in
-	// your stream. To configure the encryption contract, specify which audio and video
+	// Use encryptionContractConfiguration to configure one or more content encryption
+	// keys for your endpoints that use SPEKE 2.0. The encryption contract defines
+	// which content keys are used to encrypt the audio and video tracks in your
+	// stream. To configure the encryption contract, specify which audio and video
 	// encryption presets to use. Note the following considerations when using
 	// encryptionContractConfiguration: encryptionContractConfiguration can be used for
 	// DASH or CMAF endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3

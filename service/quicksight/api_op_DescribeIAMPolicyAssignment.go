@@ -35,8 +35,8 @@ type DescribeIAMPolicyAssignmentInput struct {
 	// This member is required.
 	AssignmentName *string
 
-	// The ID of the Amazon Web Services account that contains the assignment that
-	// you want to describe.
+	// The ID of the Amazon Web Services account that contains the assignment that you
+	// want to describe.
 	//
 	// This member is required.
 	AwsAccountId *string

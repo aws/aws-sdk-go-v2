@@ -36,17 +36,17 @@ type PutObjectInput struct {
 	// This member is required.
 	Body io.Reader
 
-	// The path (including the file name) where the object is stored in the
-	// container. Format: // For example, to upload the file mlaw.avi to the folder
-	// path premium\canada  in the container movies , enter the path
-	// premium/canada/mlaw.avi. Do not include the container name in this path. If
-	// the path includes any folders that don't exist yet, the service creates them.
-	// For example, suppose you have an existing premium/usa subfolder. If you
-	// specify premium/canada , the service creates a canada  subfolder in the premium
-	// folder. You then have two subfolders, usa  and canada , in the premium folder.
-	// There is no correlation between the path to the source and the path (folders) in
-	// the container in AWS Elemental MediaStore. For more information about folders
-	// and how they exist in a container, see the AWS Elemental MediaStore User Guide (http://docs.aws.amazon.com/mediastore/latest/ug/)
+	// The path (including the file name) where the object is stored in the container.
+	// Format: // For example, to upload the file mlaw.avi to the folder path
+	// premium\canada in the container movies , enter the path premium/canada/mlaw.avi
+	// . Do not include the container name in this path. If the path includes any
+	// folders that don't exist yet, the service creates them. For example, suppose you
+	// have an existing premium/usa subfolder. If you specify premium/canada , the
+	// service creates a canada subfolder in the premium folder. You then have two
+	// subfolders, usa and canada , in the premium folder. There is no correlation
+	// between the path to the source and the path (folders) in the container in AWS
+	// Elemental MediaStore. For more information about folders and how they exist in a
+	// container, see the AWS Elemental MediaStore User Guide (http://docs.aws.amazon.com/mediastore/latest/ug/)
 	// . The file name is the name that is assigned to the file that you upload. The
 	// file can have the same name inside and outside of AWS Elemental MediaStore, or
 	// it can have the same name. The file name can include or omit an extension.
@@ -69,11 +69,11 @@ type PutObjectInput struct {
 	StorageClass types.StorageClass
 
 	// Indicates the availability of an object while it is still uploading. If the
-	// value is set to streaming, the object is available for downloading after some
+	// value is set to streaming , the object is available for downloading after some
 	// initial buffering but before the object is uploaded completely. If the value is
-	// set to standard, the object is available for downloading only when it is
-	// uploaded completely. The default value for this header is standard. To use
-	// this header, you must also set the HTTP Transfer-Encoding  header to chunked .
+	// set to standard , the object is available for downloading only when it is
+	// uploaded completely. The default value for this header is standard . To use this
+	// header, you must also set the HTTP Transfer-Encoding header to chunked .
 	UploadAvailability types.UploadAvailability
 
 	noSmithyDocumentSerde

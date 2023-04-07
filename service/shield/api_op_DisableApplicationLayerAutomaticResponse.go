@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disable the Shield Advanced automatic application layer DDoS mitigation
-// feature for the protected resource. This stops Shield Advanced from creating,
-// verifying, and applying WAF rules for attacks that it detects for the resource.
+// Disable the Shield Advanced automatic application layer DDoS mitigation feature
+// for the protected resource. This stops Shield Advanced from creating, verifying,
+// and applying WAF rules for attacks that it detects for the resource.
 func (c *Client) DisableApplicationLayerAutomaticResponse(ctx context.Context, params *DisableApplicationLayerAutomaticResponseInput, optFns ...func(*Options)) (*DisableApplicationLayerAutomaticResponseOutput, error) {
 	if params == nil {
 		params = &DisableApplicationLayerAutomaticResponseInput{}

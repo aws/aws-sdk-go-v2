@@ -62,12 +62,12 @@ type CreateLocationHdfsInput struct {
 	// The krb5.conf file that contains the Kerberos configuration information. You
 	// can load the krb5.conf file by providing the file's address. If you're using
 	// the CLI, it performs the base64 encoding for you. Otherwise, provide the
-	// base64-encoded text. If KERBEROS  is specified for AuthenticationType, this
+	// base64-encoded text. If KERBEROS is specified for AuthenticationType , this
 	// parameter is required.
 	KerberosKrb5Conf []byte
 
 	// The Kerberos principal with access to the files and folders on the HDFS
-	// cluster. If KERBEROS  is specified for AuthenticationType, this parameter is
+	// cluster. If KERBEROS is specified for AuthenticationType , this parameter is
 	// required.
 	KerberosPrincipal *string
 
@@ -76,9 +76,9 @@ type CreateLocationHdfsInput struct {
 
 	// The Quality of Protection (QOP) configuration specifies the Remote Procedure
 	// Call (RPC) and data transfer protection settings configured on the Hadoop
-	// Distributed File System (HDFS) cluster. If QopConfiguration  isn't specified,
-	// RpcProtection and DataTransferProtection  default to PRIVACY . If you set
-	// RpcProtection or DataTransferProtection, the other parameter assumes the same
+	// Distributed File System (HDFS) cluster. If QopConfiguration isn't specified,
+	// RpcProtection and DataTransferProtection default to PRIVACY . If you set
+	// RpcProtection or DataTransferProtection , the other parameter assumes the same
 	// value.
 	QopConfiguration *types.QopConfiguration
 
@@ -90,9 +90,9 @@ type CreateLocationHdfsInput struct {
 	// SIMPLE is specified for AuthenticationType , this parameter is required.
 	SimpleUser *string
 
-	// A subdirectory in the HDFS cluster. This subdirectory is used to read data
-	// from or write data to the HDFS cluster. If the subdirectory isn't specified, it
-	// will default to / .
+	// A subdirectory in the HDFS cluster. This subdirectory is used to read data from
+	// or write data to the HDFS cluster. If the subdirectory isn't specified, it will
+	// default to / .
 	Subdirectory *string
 
 	// The key-value pair that represents the tag that you want to add to the

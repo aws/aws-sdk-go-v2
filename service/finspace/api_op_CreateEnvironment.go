@@ -36,16 +36,20 @@ type CreateEnvironmentInput struct {
 
 	// The list of Amazon Resource Names (ARN) of the data bundles to install.
 	// Currently supported data bundle ARNs:
-	//     - arn:aws:finspace:${Region}::data-bundle/capital-markets-sample - Contains sample Capital Markets datasets, categories and controlled vocabularies.
-	//     - arn:aws:finspace:${Region}::data-bundle/taq (default) - Contains trades and quotes data in addition to sample Capital Markets data.
+	//   - arn:aws:finspace:${Region}::data-bundle/capital-markets-sample - Contains
+	//   sample Capital Markets datasets, categories and controlled vocabularies.
+	//   - arn:aws:finspace:${Region}::data-bundle/taq (default) - Contains trades and
+	//   quotes data in addition to sample Capital Markets data.
 	DataBundles []string
 
 	// The description of the FinSpace environment to be created.
 	Description *string
 
 	// Authentication mode for the environment.
-	//     - FEDERATED - Users access FinSpace through Single Sign On (SSO) via your Identity provider.
-	//     - LOCAL - Users access FinSpace via email and password managed within the FinSpace environment.
+	//   - FEDERATED - Users access FinSpace through Single Sign On (SSO) via your
+	//   Identity provider.
+	//   - LOCAL - Users access FinSpace via email and password managed within the
+	//   FinSpace environment.
 	FederationMode types.FederationMode
 
 	// Configuration information when authentication mode is FEDERATED.
@@ -71,8 +75,7 @@ type CreateEnvironmentOutput struct {
 	// The unique identifier for FinSpace environment that you created.
 	EnvironmentId *string
 
-	// The sign-in url for the web application of the FinSpace environment you
-	// created.
+	// The sign-in url for the web application of the FinSpace environment you created.
 	EnvironmentUrl *string
 
 	// Metadata pertaining to the operation's result.

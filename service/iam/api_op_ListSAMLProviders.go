@@ -36,7 +36,7 @@ type ListSAMLProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListSAMLProviders  request.
+// Contains the response to a successful ListSAMLProviders request.
 type ListSAMLProvidersOutput struct {
 
 	// The list of SAML provider resource objects defined in IAM for this Amazon Web

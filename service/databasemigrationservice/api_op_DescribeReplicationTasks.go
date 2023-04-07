@@ -45,15 +45,15 @@ type DescribeReplicationTasksInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// An option to set to avoid returning information about settings. Use this to
 	// reduce overhead when setting information is too large. To use this option,
-	// choose true ; otherwise, choose false  (the default).
+	// choose true ; otherwise, choose false (the default).
 	WithoutSettings *bool
 
 	noSmithyDocumentSerde
@@ -149,14 +149,14 @@ var _ DescribeReplicationTasksAPIClient = (*Client)(nil)
 // DescribeReplicationTasksPaginatorOptions is the paginator options for
 // DescribeReplicationTasks
 type DescribeReplicationTasksPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -33,8 +33,8 @@ type UntagResourceInput struct {
 	// This member is required.
 	Arn *string
 
-	// The tags to be removed from the specified resource. Do not provide system
-	// tags. Required.
+	// The tags to be removed from the specified resource. Do not provide system tags.
+	// Required.
 	//
 	// This member is required.
 	TagKeys []string

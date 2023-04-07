@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified tags for your EC2 resources. For more information
-// about tags, see Tag your Amazon EC2 resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
+// Describes the specified tags for your EC2 resources. For more information about
+// tags, see Tag your Amazon EC2 resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
@@ -39,11 +39,19 @@ type DescribeTagsInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - key - The tag key.
-	//     - resource-id - The ID of the resource.
-	//     - resource-type - The resource type ( customer-gateway | dedicated-host | dhcp-options | elastic-ip | fleet | fpga-image | host-reservation | image | instance | internet-gateway | key-pair | launch-template | natgateway | network-acl | network-interface | placement-group | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpc-endpoint | vpc-endpoint-service | vpc-peering-connection | vpn-connection | vpn-gateway ).
-	//     - tag : - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".
-	//     - value - The tag value.
+	//   - key - The tag key.
+	//   - resource-id - The ID of the resource.
+	//   - resource-type - The resource type ( customer-gateway | dedicated-host |
+	//   dhcp-options | elastic-ip | fleet | fpga-image | host-reservation | image |
+	//   instance | internet-gateway | key-pair | launch-template | natgateway |
+	//   network-acl | network-interface | placement-group | reserved-instances |
+	//   route-table | security-group | snapshot | spot-instances-request | subnet |
+	//   volume | vpc | vpc-endpoint | vpc-endpoint-service | vpc-peering-connection |
+	//   vpn-connection | vpn-gateway ).
+	//   - tag : - The key/value combination of the tag. For example, specify
+	//   "tag:Owner" for the filter name and "TeamA" for the filter value to find
+	//   resources with the tag "Owner=TeamA".
+	//   - value - The tag value.
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. This value can be
@@ -52,8 +60,8 @@ type DescribeTagsInput struct {
 	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues
-	// from the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -62,7 +70,7 @@ type DescribeTagsInput struct {
 type DescribeTagsOutput struct {
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// The tags.
@@ -149,8 +157,8 @@ type DescribeTagsPaginatorOptions struct {
 	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

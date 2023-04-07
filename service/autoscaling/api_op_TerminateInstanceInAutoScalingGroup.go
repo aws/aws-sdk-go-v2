@@ -14,7 +14,7 @@ import (
 // Terminates the specified instance and optionally adjusts the desired group
 // size. This operation cannot be called on instances in a warm pool. This call
 // simply makes a termination request. The instance is not terminated immediately.
-// When an instance is terminated, the instance status changes to terminated. You
+// When an instance is terminated, the instance status changes to terminated . You
 // can't connect to or start an instance after you've terminated it. If you do not
 // specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling
 // launches instances to replace the ones that are terminated. By default, Amazon
@@ -46,8 +46,8 @@ type TerminateInstanceInAutoScalingGroupInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// Indicates whether terminating the instance also decrements the size of the
-	// Auto Scaling group.
+	// Indicates whether terminating the instance also decrements the size of the Auto
+	// Scaling group.
 	//
 	// This member is required.
 	ShouldDecrementDesiredCapacity *bool

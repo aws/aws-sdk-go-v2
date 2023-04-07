@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom DomainName  object.
+// Deletes a custom DomainName object.
 func (c *Client) DeleteDomainName(ctx context.Context, params *DeleteDomainNameInput, optFns ...func(*Options)) (*DeleteDomainNameOutput, error) {
 	if params == nil {
 		params = &DeleteDomainNameInput{}

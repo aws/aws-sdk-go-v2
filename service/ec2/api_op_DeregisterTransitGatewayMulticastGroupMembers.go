@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters the specified members (network interfaces) from the transit
-// gateway multicast group.
+// Deregisters the specified members (network interfaces) from the transit gateway
+// multicast group.
 func (c *Client) DeregisterTransitGatewayMulticastGroupMembers(ctx context.Context, params *DeregisterTransitGatewayMulticastGroupMembersInput, optFns ...func(*Options)) (*DeregisterTransitGatewayMulticastGroupMembersOutput, error) {
 	if params == nil {
 		params = &DeregisterTransitGatewayMulticastGroupMembersInput{}

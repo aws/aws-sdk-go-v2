@@ -51,7 +51,7 @@ type ModifyDBSubnetGroupInput struct {
 type ModifyDBSubnetGroupOutput struct {
 
 	// Contains the details of an Amazon RDS DB subnet group. This data type is used
-	// as a response element in the DescribeDBSubnetGroups  action.
+	// as a response element in the DescribeDBSubnetGroups action.
 	DBSubnetGroup *types.DBSubnetGroup
 
 	// Metadata pertaining to the operation's result.

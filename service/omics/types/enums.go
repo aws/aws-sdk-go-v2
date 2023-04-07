@@ -65,9 +65,9 @@ const (
 	FileTypeCram  FileType = "CRAM"
 )
 
-// Values returns all known values for FileType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FileType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (FileType) Values() []FileType {
 	return []FileType{
 		"FASTQ",
@@ -244,9 +244,9 @@ const (
 	ReadSetFileIndex   ReadSetFile = "INDEX"
 )
 
-// Values returns all known values for ReadSetFile. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReadSetFile. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ReadSetFile) Values() []ReadSetFile {
 	return []ReadSetFile{
 		"SOURCE1",
@@ -444,9 +444,9 @@ const (
 	RunLogLevelAll   RunLogLevel = "ALL"
 )
 
-// Values returns all known values for RunLogLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RunLogLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RunLogLevel) Values() []RunLogLevel {
 	return []RunLogLevel{
 		"OFF",
@@ -530,9 +530,9 @@ const (
 	StoreFormatVcf StoreFormat = "VCF"
 )
 
-// Values returns all known values for StoreFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StoreFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StoreFormat) Values() []StoreFormat {
 	return []StoreFormat{
 		"GFF",
@@ -557,9 +557,9 @@ const (
 	StoreStatusFailed StoreStatus = "FAILED"
 )
 
-// Values returns all known values for StoreStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StoreStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StoreStatus) Values() []StoreStatus {
 	return []StoreStatus{
 		"CREATING",

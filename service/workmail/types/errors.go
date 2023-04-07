@@ -142,8 +142,8 @@ func (e *EntityAlreadyRegisteredException) ErrorCode() string {
 }
 func (e *EntityAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The identifier supplied for the user, group, or resource does not exist in
-// your organization.
+// The identifier supplied for the user, group, or resource does not exist in your
+// organization.
 type EntityNotFoundException struct {
 	Message *string
 
@@ -169,8 +169,8 @@ func (e *EntityNotFoundException) ErrorCode() string {
 }
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You are performing an operation on a user, group, or resource that isn't in
-// the expected state, such as trying to delete an active user.
+// You are performing an operation on a user, group, or resource that isn't in the
+// expected state, such as trying to delete an active user.
 type EntityStateException struct {
 	Message *string
 
@@ -196,9 +196,9 @@ func (e *EntityStateException) ErrorCode() string {
 }
 func (e *EntityStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The configuration for a resource isn't valid. A resource must either be able
-// to auto-respond to requests or have at least one delegate associated that can do
-// so on its behalf.
+// The configuration for a resource isn't valid. A resource must either be able to
+// auto-respond to requests or have at least one delegate associated that can do so
+// on its behalf.
 type InvalidConfigurationException struct {
 	Message *string
 
@@ -334,8 +334,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The domain you're trying to change is in use by another user or organization
-// in your account. See the error message for details.
+// The domain you're trying to change is in use by another user or organization in
+// your account. See the error message for details.
 type MailDomainInUseException struct {
 	Message *string
 

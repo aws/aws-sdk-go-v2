@@ -13,7 +13,7 @@ import (
 )
 
 // Gets a list of the project policies attached to a project. To attach a project
-// policy to a project, call PutProjectPolicy. To remove a project policy from a
+// policy to a project, call PutProjectPolicy . To remove a project policy from a
 // project, call DeleteProjectPolicy .
 func (c *Client) ListProjectPolicies(ctx context.Context, params *ListProjectPoliciesInput, optFns ...func(*Options)) (*ListProjectPoliciesOutput, error) {
 	if params == nil {
@@ -144,8 +144,8 @@ type ListProjectPoliciesPaginatorOptions struct {
 	// ValidationException error occurs. The default value is 5.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

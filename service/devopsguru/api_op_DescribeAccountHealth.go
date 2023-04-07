@@ -35,8 +35,8 @@ type DescribeAccountHealthInput struct {
 
 type DescribeAccountHealthOutput struct {
 
-	// An integer that specifies the number of metrics that have been analyzed in
-	// your Amazon Web Services account.
+	// An integer that specifies the number of metrics that have been analyzed in your
+	// Amazon Web Services account.
 	//
 	// This member is required.
 	MetricsAnalyzed int32

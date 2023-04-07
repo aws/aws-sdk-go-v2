@@ -37,15 +37,17 @@ type BatchPutMessageInput struct {
 	// The list of messages to be sent. Each message has the format: { "messageId":
 	// "string", "payload": "string"}. The field names of message payloads (data) that
 	// you send to IoT Analytics:
-	//     - Must contain only alphanumeric characters and undescores (_). No other special characters are allowed.
-	//     - Must begin with an alphabetic character or single underscore (_).
-	//     - Cannot contain hyphens (-).
-	//     - In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$".
-	//     - Cannot be more than 255 characters.
-	//     - Are case insensitive. (Fields named foo and FOO in the same payload are considered duplicates.)
-	//
-	// For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29},
-	// {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads.
+	//   - Must contain only alphanumeric characters and undescores (_). No other
+	//   special characters are allowed.
+	//   - Must begin with an alphabetic character or single underscore (_).
+	//   - Cannot contain hyphens (-).
+	//   - In regular expression terms:
+	//   "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$".
+	//   - Cannot be more than 255 characters.
+	//   - Are case insensitive. (Fields named foo and FOO in the same payload are
+	//   considered duplicates.)
+	// For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01":
+	// 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads.
 	//
 	// This member is required.
 	Messages []types.Message

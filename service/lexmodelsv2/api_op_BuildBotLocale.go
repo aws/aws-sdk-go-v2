@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Builds a bot, its intents, and its slot types into a specific locale. A bot
-// can be built into multiple locales. At runtime the locale is used to choose a
+// Builds a bot, its intents, and its slot types into a specific locale. A bot can
+// be built into multiple locales. At runtime the locale is used to choose a
 // specific build of the bot.
 func (c *Client) BuildBotLocale(ctx context.Context, params *BuildBotLocaleInput, optFns ...func(*Options)) (*BuildBotLocaleOutput, error) {
 	if params == nil {
@@ -61,10 +61,9 @@ type BuildBotLocaleOutput struct {
 	// The identifier of the specified bot.
 	BotId *string
 
-	// The bot's build status. When the status is ReadyExpressTesting you can test
-	// the bot using the utterances defined for the intents and slot types. When the
-	// status is Built, the bot is ready for use and can be tested using any
-	// utterance.
+	// The bot's build status. When the status is ReadyExpressTesting you can test the
+	// bot using the utterances defined for the intents and slot types. When the status
+	// is Built , the bot is ready for use and can be tested using any utterance.
 	BotLocaleStatus types.BotLocaleStatus
 
 	// The version of the bot that was built. This is only the draft version of the

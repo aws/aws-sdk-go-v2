@@ -54,8 +54,7 @@ type ReportDefinition struct {
 	// This member is required.
 	TimeUnit TimeUnit
 
-	// A list of manifests that you want Amazon Web Services to create for this
-	// report.
+	// A list of manifests that you want Amazon Web Services to create for this report.
 	AdditionalArtifacts []AdditionalArtifact
 
 	// The Amazon resource name of the billing view. You can get this value by using

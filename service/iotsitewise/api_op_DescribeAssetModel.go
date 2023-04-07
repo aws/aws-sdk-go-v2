@@ -65,8 +65,8 @@ type DescribeAssetModelOutput struct {
 	// This member is required.
 	AssetModelDescription *string
 
-	// A list of asset model hierarchies that each contain a childAssetModelId  and a
-	// hierarchyId (named id). A hierarchy specifies allowed parent/child asset
+	// A list of asset model hierarchies that each contain a childAssetModelId and a
+	// hierarchyId (named id ). A hierarchy specifies allowed parent/child asset
 	// relationships for an asset model.
 	//
 	// This member is required.
@@ -89,7 +89,7 @@ type DescribeAssetModelOutput struct {
 
 	// The list of asset properties for the asset model. This object doesn't include
 	// properties that you define in composite models. You can find composite model
-	// properties in the assetModelCompositeModels  object.
+	// properties in the assetModelCompositeModels object.
 	//
 	// This member is required.
 	AssetModelProperties []types.AssetModelProperty
@@ -273,10 +273,10 @@ func (w *AssetModelActiveWaiter) Wait(ctx context.Context, params *DescribeAsset
 	return err
 }
 
-// WaitForOutput calls the waiter function for AssetModelActive waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for AssetModelActive waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *AssetModelActiveWaiter) WaitForOutput(ctx context.Context, params *DescribeAssetModelInput, maxWaitDur time.Duration, optFns ...func(*AssetModelActiveWaiterOptions)) (*DescribeAssetModelOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

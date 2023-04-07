@@ -13,9 +13,9 @@ import (
 
 // Updates the attributes of an existing template. The template attributes that
 // can be modified include name , description , layoutConfiguration ,
-// requiredFields , and status. At least one of these attributes must not be
-// null. If a null value is provided for a given attribute, that attribute is
-// ignored and its current value is preserved.
+// requiredFields , and status . At least one of these attributes must not be null.
+// If a null value is provided for a given attribute, that attribute is ignored and
+// its current value is preserved.
 func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput, optFns ...func(*Options)) (*UpdateTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateTemplateInput{}

@@ -52,7 +52,7 @@ type UpdateSipMediaApplicationCallInput struct {
 
 type UpdateSipMediaApplicationCallOutput struct {
 
-	// A Call  instance for a SIP media application.
+	// A Call instance for a SIP media application.
 	SipMediaApplicationCall *types.SipMediaApplicationCall
 
 	// Metadata pertaining to the operation's result.

@@ -36,8 +36,8 @@ type ListRemoteAccessSessionsInput struct {
 	// This member is required.
 	Arn *string
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,8 +47,8 @@ type ListRemoteAccessSessionsInput struct {
 // to return information about the remote access session.
 type ListRemoteAccessSessionsOutput struct {
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	// A container that represents the metadata from the service about each remote

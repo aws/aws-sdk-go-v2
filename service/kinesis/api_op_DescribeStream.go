@@ -56,9 +56,9 @@ type DescribeStreamInput struct {
 
 	// The shard ID of the shard to start with. Specify this parameter to indicate
 	// that you want to describe the stream starting with the shard whose ID
-	// immediately follows ExclusiveStartShardId. If you don't specify this
-	// parameter, the default behavior for DescribeStream is to describe the stream
-	// starting with the first shard in the stream.
+	// immediately follows ExclusiveStartShardId . If you don't specify this parameter,
+	// the default behavior for DescribeStream is to describe the stream starting with
+	// the first shard in the stream.
 	ExclusiveStartShardId *string
 
 	// The maximum number of shards to return in a single call. The default value is
@@ -221,10 +221,9 @@ func (w *StreamExistsWaiter) Wait(ctx context.Context, params *DescribeStreamInp
 	return err
 }
 
-// WaitForOutput calls the waiter function for StreamExists waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for StreamExists waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
 func (w *StreamExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeStreamInput, maxWaitDur time.Duration, optFns ...func(*StreamExistsWaiterOptions)) (*DescribeStreamOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

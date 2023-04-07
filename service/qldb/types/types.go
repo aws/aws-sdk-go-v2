@@ -12,8 +12,8 @@ import (
 // the original stream creation request.
 type JournalKinesisStreamDescription struct {
 
-	// The configuration settings of the Amazon Kinesis Data Streams destination for
-	// a QLDB journal stream.
+	// The configuration settings of the Amazon Kinesis Data Streams destination for a
+	// QLDB journal stream.
 	//
 	// This member is required.
 	KinesisConfiguration *KinesisConfiguration
@@ -23,8 +23,8 @@ type JournalKinesisStreamDescription struct {
 	// This member is required.
 	LedgerName *string
 
-	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions
-	// for a journal stream to write data records to a Kinesis Data Streams resource.
+	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
+	// a journal stream to write data records to a Kinesis Data Streams resource.
 	//
 	// This member is required.
 	RoleArn *string
@@ -53,7 +53,7 @@ type JournalKinesisStreamDescription struct {
 	CreationTime *time.Time
 
 	// The error message that describes the reason that a stream has a status of
-	// IMPAIRED or FAILED. This is not applicable to streams that have other status
+	// IMPAIRED or FAILED . This is not applicable to streams that have other status
 	// values.
 	ErrorCause ErrorCause
 
@@ -101,10 +101,11 @@ type JournalS3ExportDescription struct {
 	// This member is required.
 	LedgerName *string
 
-	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions
-	// for a journal export job to do the following:
-	//     - Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.
-	//     - (Optional) Use your customer managed key in Key Management Service (KMS) for server-side encryption of your exported data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
+	// a journal export job to do the following:
+	//   - Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.
+	//   - (Optional) Use your customer managed key in Key Management Service (KMS)
+	//   for server-side encryption of your exported data.
 	//
 	// This member is required.
 	RoleArn *string
@@ -147,18 +148,29 @@ type KinesisConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the encryption of data at rest in an Amazon QLDB ledger.
-// This includes the current status, the key in Key Management Service (KMS), and
-// when the key became inaccessible (in the case of an error). For more
-// information, see Encryption at rest (https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html)
+// Information about the encryption of data at rest in an Amazon QLDB ledger. This
+// includes the current status, the key in Key Management Service (KMS), and when
+// the key became inaccessible (in the case of an error). For more information, see
+// Encryption at rest (https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html)
 // in the Amazon QLDB Developer Guide.
 type LedgerEncryptionDescription struct {
 
 	// The current state of encryption at rest for the ledger. This can be one of the
 	// following values:
-	//     - ENABLED : Encryption is fully enabled using the specified key.
-	//     - UPDATING : The ledger is actively processing the specified key change. Key changes in QLDB are asynchronous. The ledger is fully accessible without any performance impact while the key change is being processed. The amount of time it takes to update a key varies depending on the ledger size.
-	//     - KMS_KEY_INACCESSIBLE : The specified customer managed KMS key is not accessible, and the ledger is impaired. Either the key was disabled or deleted, or the grants on the key were revoked. When a ledger is impaired, it is not accessible and does not accept any read or write requests. An impaired ledger automatically returns to an active state after you restore the grants on the key, or re-enable the key that was disabled. However, deleting a customer managed KMS key is irreversible. After a key is deleted, you can no longer access the ledgers that are protected with that key, and the data becomes unrecoverable permanently.
+	//   - ENABLED : Encryption is fully enabled using the specified key.
+	//   - UPDATING : The ledger is actively processing the specified key change. Key
+	//   changes in QLDB are asynchronous. The ledger is fully accessible without any
+	//   performance impact while the key change is being processed. The amount of time
+	//   it takes to update a key varies depending on the ledger size.
+	//   - KMS_KEY_INACCESSIBLE : The specified customer managed KMS key is not
+	//   accessible, and the ledger is impaired. Either the key was disabled or deleted,
+	//   or the grants on the key were revoked. When a ledger is impaired, it is not
+	//   accessible and does not accept any read or write requests. An impaired ledger
+	//   automatically returns to an active state after you restore the grants on the
+	//   key, or re-enable the key that was disabled. However, deleting a customer
+	//   managed KMS key is irreversible. After a key is deleted, you can no longer
+	//   access the ledgers that are protected with that key, and the data becomes
+	//   unrecoverable permanently.
 	//
 	// This member is required.
 	EncryptionStatus EncryptionStatus
@@ -210,8 +222,8 @@ type S3EncryptionConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of a symmetric key in Key Management Service
 	// (KMS). Amazon S3 does not support asymmetric KMS keys. You must provide a
-	// KmsKeyArn if you specify SSE_KMS  as the ObjectEncryptionType . KmsKeyArn is
-	// not required if you specify SSE_S3  as the ObjectEncryptionType .
+	// KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType . KmsKeyArn is not
+	// required if you specify SSE_S3 as the ObjectEncryptionType .
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -240,9 +252,9 @@ type S3ExportConfiguration struct {
 	// restrictions. For more information, see Object Key and Metadata (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html)
 	// in the Amazon S3 Developer Guide. The following are examples of valid Prefix
 	// values:
-	//     - JournalExports-ForMyLedger/Testing/
-	//     - JournalExports
-	//     - My:Tests/
+	//   - JournalExports-ForMyLedger/Testing/
+	//   - JournalExports
+	//   - My:Tests/
 	//
 	// This member is required.
 	Prefix *string
@@ -253,7 +265,7 @@ type S3ExportConfiguration struct {
 // A structure that can contain a value in multiple encoding formats.
 type ValueHolder struct {
 
-	// An Amazon Ion plaintext value contained in a ValueHolder  structure.
+	// An Amazon Ion plaintext value contained in a ValueHolder structure.
 	IonText *string
 
 	noSmithyDocumentSerde

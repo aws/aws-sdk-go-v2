@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the data sets imported for a specific application. In Amazon Web
-// Services Mainframe Modernization, data sets are associated with applications
-// deployed on runtime environments. This is known as importing data sets.
-// Currently, Amazon Web Services Mainframe Modernization can import data sets into
-// catalogs using CreateDataSetImportTask (https://docs.aws.amazon.com/m2/latest/APIReference/API_CreateDataSetImportTask.html)
+// Lists the data sets imported for a specific application. In Amazon Web Services
+// Mainframe Modernization, data sets are associated with applications deployed on
+// runtime environments. This is known as importing data sets. Currently, Amazon
+// Web Services Mainframe Modernization can import data sets into catalogs using
+// CreateDataSetImportTask (https://docs.aws.amazon.com/m2/latest/APIReference/API_CreateDataSetImportTask.html)
 // .
 func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, optFns ...func(*Options)) (*ListDataSetsOutput, error) {
 	if params == nil {
@@ -150,8 +150,8 @@ type ListDataSetsPaginatorOptions struct {
 	// The maximum number of objects to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

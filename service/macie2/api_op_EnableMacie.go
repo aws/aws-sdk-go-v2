@@ -35,9 +35,9 @@ type EnableMacieInput struct {
 	// the request.
 	ClientToken *string
 
-	// Specifies how often to publish updates to policy findings for the account.
-	// This includes publishing updates to Security Hub and Amazon EventBridge
-	// (formerly Amazon CloudWatch Events).
+	// Specifies how often to publish updates to policy findings for the account. This
+	// includes publishing updates to Security Hub and Amazon EventBridge (formerly
+	// Amazon CloudWatch Events).
 	FindingPublishingFrequency types.FindingPublishingFrequency
 
 	// Specifies the new status for the account. To enable Amazon Macie and start all

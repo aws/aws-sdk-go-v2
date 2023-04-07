@@ -50,7 +50,7 @@ type PurchaseReservedNodesOfferingInput struct {
 
 type PurchaseReservedNodesOfferingOutput struct {
 
-	// Represents the output of a PurchaseReservedNodesOffering  operation.
+	// Represents the output of a PurchaseReservedNodesOffering operation.
 	ReservedNode *types.ReservedNode
 
 	// Metadata pertaining to the operation's result.

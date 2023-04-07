@@ -42,8 +42,7 @@ type BatchGetViewOutput struct {
 	// the error.
 	Errors []types.BatchGetViewError
 
-	// A structure with a list of objects with details for each of the specified
-	// views.
+	// A structure with a list of objects with details for each of the specified views.
 	Views []types.View
 
 	// Metadata pertaining to the operation's result.

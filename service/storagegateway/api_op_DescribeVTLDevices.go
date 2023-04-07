@@ -63,9 +63,9 @@ type DescribeVTLDevicesOutput struct {
 	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
-	// An opaque string that indicates the position at which the VTL devices that
-	// were fetched for description ended. Use the marker in your next request to fetch
-	// the next set of VTL devices in the list. If there are no more VTL devices to
+	// An opaque string that indicates the position at which the VTL devices that were
+	// fetched for description ended. Use the marker in your next request to fetch the
+	// next set of VTL devices in the list. If there are no more VTL devices to
 	// describe, this field does not appear in the response.
 	Marker *string
 
@@ -157,8 +157,8 @@ type DescribeVTLDevicesPaginatorOptions struct {
 	// number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

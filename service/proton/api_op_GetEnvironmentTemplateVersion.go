@@ -197,9 +197,9 @@ func NewEnvironmentTemplateVersionRegisteredWaiter(client GetEnvironmentTemplate
 	}
 }
 
-// Wait calls the waiter function for EnvironmentTemplateVersionRegistered
-// waiter. The maxWaitDur is the maximum wait duration the waiter will wait. The
-// maxWaitDur is required and must be greater than zero.
+// Wait calls the waiter function for EnvironmentTemplateVersionRegistered waiter.
+// The maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur
+// is required and must be greater than zero.
 func (w *EnvironmentTemplateVersionRegisteredWaiter) Wait(ctx context.Context, params *GetEnvironmentTemplateVersionInput, maxWaitDur time.Duration, optFns ...func(*EnvironmentTemplateVersionRegisteredWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

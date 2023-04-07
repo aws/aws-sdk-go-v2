@@ -53,9 +53,9 @@ type DescribeAccessControlConfigurationOutput struct {
 	// This member is required.
 	Name *string
 
-	// Information on principals (users and/or groups) and which documents they
-	// should have access to. This is useful for user context filtering, where search
-	// results are filtered based on the user or their group access to documents.
+	// Information on principals (users and/or groups) and which documents they should
+	// have access to. This is useful for user context filtering, where search results
+	// are filtered based on the user or their group access to documents.
 	AccessControlList []types.Principal
 
 	// The description for the access control configuration.

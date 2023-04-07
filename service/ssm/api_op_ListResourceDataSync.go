@@ -15,11 +15,10 @@ import (
 // Lists your resource data sync configurations. Includes information about the
 // last time a sync attempted to start, the last sync status, and the last time a
 // sync successfully completed. The number of sync configurations might be too
-// large to return using a single call to ListResourceDataSync. You can limit the
+// large to return using a single call to ListResourceDataSync . You can limit the
 // number of sync configurations returned by using the MaxResults parameter. To
 // determine whether there are more sync configurations to list, check the value of
-//
-// NextTokenin the output. If there are more sync configurations to list, you can
+// NextToken in the output. If there are more sync configurations to list, you can
 // request them by specifying the NextToken returned in the call to the parameter
 // of a subsequent call.
 func (c *Client) ListResourceDataSync(ctx context.Context, params *ListResourceDataSyncInput, optFns ...func(*Options)) (*ListResourceDataSyncOutput, error) {
@@ -47,8 +46,8 @@ type ListResourceDataSyncInput struct {
 	NextToken *string
 
 	// View a list of resource data syncs according to the sync type. Specify
-	// SyncToDestinationto view resource data syncs that synchronize data to an
-	// Amazon S3 bucket. Specify SyncFromSource to view resource data syncs from
+	// SyncToDestination to view resource data syncs that synchronize data to an Amazon
+	// S3 bucket. Specify SyncFromSource to view resource data syncs from
 	// Organizations or from multiple Amazon Web Services Regions.
 	SyncType *string
 
@@ -145,8 +144,8 @@ type ListResourceDataSyncPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

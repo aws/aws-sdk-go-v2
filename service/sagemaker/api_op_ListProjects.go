@@ -44,7 +44,7 @@ type ListProjectsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListProjects request was truncated, the response
-	// includes a NextToken. To retrieve the next set of projects, use the token in
+	// includes a NextToken . To retrieve the next set of projects, use the token in
 	// the next request.
 	NextToken *string
 
@@ -65,7 +65,7 @@ type ListProjectsOutput struct {
 	ProjectSummaryList []types.ProjectSummary
 
 	// If the result of the previous ListCompilationJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of model compilation
+	// response includes a NextToken . To retrieve the next set of model compilation
 	// jobs, use the token in the next request.
 	NextToken *string
 
@@ -147,8 +147,8 @@ type ListProjectsPaginatorOptions struct {
 	// The maximum number of projects to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

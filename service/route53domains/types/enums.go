@@ -13,9 +13,9 @@ const (
 	ContactTypeReseller    ContactType = "RESELLER"
 )
 
-// Values returns all known values for ContactType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContactType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ContactType) Values() []ContactType {
 	return []ContactType{
 		"PERSON",
@@ -283,9 +283,9 @@ const (
 	CountryCodeZw CountryCode = "ZW"
 )
 
-// Values returns all known values for CountryCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CountryCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (CountryCode) Values() []CountryCode {
 	return []CountryCode{
 		"AC",
@@ -766,9 +766,9 @@ const (
 	OperatorBeginsWith Operator = "BEGINS_WITH"
 )
 
-// Values returns all known values for Operator. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"LE",

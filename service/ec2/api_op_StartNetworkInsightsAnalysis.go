@@ -31,8 +31,8 @@ func (c *Client) StartNetworkInsightsAnalysis(ctx context.Context, params *Start
 
 type StartNetworkInsightsAnalysisInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	//
 	// This member is required.

@@ -33,8 +33,8 @@ func (c *Client) UpdateContact(ctx context.Context, params *UpdateContactInput, 
 
 type UpdateContactInput struct {
 
-	// The identifier of the contact. This is the identifier of the contact
-	// associated with the first interaction with your contact center.
+	// The identifier of the contact. This is the identifier of the contact associated
+	// with the first interaction with your contact center.
 	//
 	// This member is required.
 	ContactId *string

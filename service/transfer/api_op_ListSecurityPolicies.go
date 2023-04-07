@@ -34,7 +34,7 @@ type ListSecurityPoliciesInput struct {
 	// ListSecurityPolicies query.
 	MaxResults *int32
 
-	// When additional results are obtained from the ListSecurityPolicies  command, a
+	// When additional results are obtained from the ListSecurityPolicies command, a
 	// NextToken parameter is returned in the output. You can then pass the NextToken
 	// parameter in a subsequent command to continue listing additional security
 	// policies.
@@ -50,9 +50,9 @@ type ListSecurityPoliciesOutput struct {
 	// This member is required.
 	SecurityPolicyNames []string
 
-	// When you can get additional results from the ListSecurityPolicies  operation, a
-	// NextTokenparameter is returned in the output. In a following command, you can
-	// pass in the NextToken  parameter to continue listing security policies.
+	// When you can get additional results from the ListSecurityPolicies operation, a
+	// NextToken parameter is returned in the output. In a following command, you can
+	// pass in the NextToken parameter to continue listing security policies.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -136,8 +136,8 @@ type ListSecurityPoliciesPaginatorOptions struct {
 	// ListSecurityPolicies query.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

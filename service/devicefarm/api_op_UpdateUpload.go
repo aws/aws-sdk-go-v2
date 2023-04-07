@@ -37,13 +37,12 @@ type UpdateUploadInput struct {
 	// The upload's content type (for example, application/x-yaml ).
 	ContentType *string
 
-	// Set to true if the YAML file has changed and must be updated. Otherwise, set
-	// to false.
+	// Set to true if the YAML file has changed and must be updated. Otherwise, set to
+	// false.
 	EditContent *bool
 
-	// The upload's test spec file name. The name must not contain any forward
-	// slashes (/). The test spec file name must end with the .yaml  or .yml file
-	// extension.
+	// The upload's test spec file name. The name must not contain any forward slashes
+	// (/). The test spec file name must end with the .yaml or .yml file extension.
 	Name *string
 
 	noSmithyDocumentSerde

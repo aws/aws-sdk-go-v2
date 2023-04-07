@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use GetPrincipalTagAttributeMap  to list all mappings between PrincipalTags
-// and user attributes.
+// Use GetPrincipalTagAttributeMap to list all mappings between PrincipalTags and
+// user attributes.
 func (c *Client) GetPrincipalTagAttributeMap(ctx context.Context, params *GetPrincipalTagAttributeMapInput, optFns ...func(*Options)) (*GetPrincipalTagAttributeMapOutput, error) {
 	if params == nil {
 		params = &GetPrincipalTagAttributeMapInput{}
@@ -52,7 +52,7 @@ type GetPrincipalTagAttributeMapOutput struct {
 	// You can use this operation to get the provider name.
 	IdentityProviderName *string
 
-	// You can use this operation to add principal tags. The PrincipalTagsoperation
+	// You can use this operation to add principal tags. The PrincipalTags operation
 	// enables you to reference user attributes in your IAM permissions policy.
 	PrincipalTags map[string]string
 

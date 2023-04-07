@@ -153,8 +153,7 @@ func (e *InvalidNodeException) ErrorCode() string {
 }
 func (e *InvalidNodeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request couldn't be completed because it contains signals that aren't
-// valid.
+// The request couldn't be completed because it contains signals that aren't valid.
 type InvalidSignalsException struct {
 	Message *string
 

@@ -34,16 +34,15 @@ type CreateDBClusterInput struct {
 
 	// The cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//     - Must contain from 1 to 63 letters, numbers, or hyphens.
-	//     - The first character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: my-cluster
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
-	// The name of the database engine to be used for this cluster. Valid values:
-	// docdb
+	// The name of the database engine to be used for this cluster. Valid values: docdb
 	//
 	// This member is required.
 	Engine *string
@@ -52,22 +51,22 @@ type CreateDBClusterInput struct {
 	// created in.
 	AvailabilityZones []string
 
-	// The number of days for which automated backups are retained. You must specify
-	// a minimum value of 1. Default: 1 Constraints:
-	//     - Must be a value from 1 to 35.
+	// The number of days for which automated backups are retained. You must specify a
+	// minimum value of 1. Default: 1 Constraints:
+	//   - Must be a value from 1 to 35.
 	BackupRetentionPeriod *int32
 
 	// The name of the cluster parameter group to associate with this cluster.
 	DBClusterParameterGroupName *string
 
-	// A subnet group to associate with this cluster. Constraints: Must match the
-	// name of an existing DBSubnetGroup . Must not be default. Example: mySubnetgroup
+	// A subnet group to associate with this cluster. Constraints: Must match the name
+	// of an existing DBSubnetGroup . Must not be default. Example: mySubnetgroup
 	DBSubnetGroupName *string
 
 	// Specifies whether this cluster can be deleted. If DeletionProtection is
 	// enabled, the cluster cannot be deleted unless it is modified and
-	// DeletionProtection is disabled. DeletionProtection protects clusters from
-	// being accidentally deleted.
+	// DeletionProtection is disabled. DeletionProtection protects clusters from being
+	// accidentally deleted.
 	DeletionProtection *bool
 
 	// A list of log types that need to be enabled for exporting to Amazon CloudWatch
@@ -92,8 +91,8 @@ type CreateDBClusterInput struct {
 	// key that is used to encrypt the new cluster, you can use the KMS key alias
 	// instead of the ARN for the KMS encryption key. If an encryption key is not
 	// specified in KmsKeyId :
-	//     - If the StorageEncrypted parameter is true , Amazon DocumentDB uses your default encryption key.
-	//
+	//   - If the StorageEncrypted parameter is true , Amazon DocumentDB uses your
+	//   default encryption key.
 	// KMS creates the default encryption key for your Amazon Web Services account.
 	// Your Amazon Web Services account has a different default encryption key for each
 	// Amazon Web Services Regions.
@@ -105,9 +104,9 @@ type CreateDBClusterInput struct {
 	MasterUserPassword *string
 
 	// The name of the master user for the cluster. Constraints:
-	//     - Must be from 1 to 63 letters or numbers.
-	//     - The first character must be a letter.
-	//     - Cannot be a reserved word for the chosen database engine.
+	//   - Must be from 1 to 63 letters or numbers.
+	//   - The first character must be a letter.
+	//   - Cannot be a reserved word for the chosen database engine.
 	MasterUsername *string
 
 	// The port number on which the instances in the cluster accept connections.
@@ -117,13 +116,13 @@ type CreateDBClusterInput struct {
 	PreSignedUrl *string
 
 	// The daily time range during which automated backups are created if automated
-	// backups are enabled using the BackupRetentionPeriod parameter. The default is
-	// a 30-minute window selected at random from an 8-hour block of time for each
-	// Amazon Web Services Region. Constraints:
-	//     - Must be in the format hh24:mi-hh24:mi .
-	//     - Must be in Universal Coordinated Time (UTC).
-	//     - Must not conflict with the preferred maintenance window.
-	//     - Must be at least 30 minutes.
+	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
+	// Web Services Region. Constraints:
+	//   - Must be in the format hh24:mi-hh24:mi .
+	//   - Must be in Universal Coordinated Time (UTC).
+	//   - Must not conflict with the preferred maintenance window.
+	//   - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal

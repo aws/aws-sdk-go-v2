@@ -34,15 +34,15 @@ import (
 // in Amazon Web Services General Reference. By default, only the bucket owner can
 // configure notifications on a bucket. However, bucket owners can use a bucket
 // policy to grant permission to other users to set this configuration with
-// s3:PutBucketNotificationpermission. The PUT notification is an atomic
+// s3:PutBucketNotification permission. The PUT notification is an atomic
 // operation. For example, suppose your notification configuration includes SNS
 // topic, SQS queue, and Lambda function configurations. When you send a PUT
 // request with this configuration, Amazon S3 sends test messages to your SNS
 // topic. If the message fails, the entire PUT action will fail, and Amazon S3 will
 // not add the configuration to your bucket. Responses If the configuration in the
-// request body includes only one TopicConfiguration  specifying only the
+// request body includes only one TopicConfiguration specifying only the
 // s3:ReducedRedundancyLostObject event type, the response will also include the
-// x-amz-sns-test-message-idheader containing the message ID of the test
+// x-amz-sns-test-message-id header containing the message ID of the test
 // notification sent to the topic. The following action is related to
 // PutBucketNotificationConfiguration :
 //   - GetBucketNotificationConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html)

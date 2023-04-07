@@ -12,8 +12,8 @@ import (
 )
 
 // Gets the definition of the specified pipeline. You can call
-// GetPipelineDefinitionto retrieve the pipeline definition that you provided
-// using PutPipelineDefinition. POST / HTTP/1.1 Content-Type:
+// GetPipelineDefinition to retrieve the pipeline definition that you provided
+// using PutPipelineDefinition . POST / HTTP/1.1 Content-Type:
 // application/x-amz-json-1.1 X-Amz-Target: DataPipeline.GetPipelineDefinition
 // Content-Length: 40 Host: datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon,
 // 12 Nov 2012 17:49:52 GMT Authorization: AuthParams {"pipelineId":
@@ -51,9 +51,9 @@ type GetPipelineDefinitionInput struct {
 	// This member is required.
 	PipelineId *string
 
-	// The version of the pipeline definition to retrieve. Set this parameter to
-	// latest (default) to use the last definition saved to the pipeline or active to
-	// use the last definition that was activated.
+	// The version of the pipeline definition to retrieve. Set this parameter to latest
+	// (default) to use the last definition saved to the pipeline or active to use the
+	// last definition that was activated.
 	Version *string
 
 	noSmithyDocumentSerde

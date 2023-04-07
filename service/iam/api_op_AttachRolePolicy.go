@@ -14,8 +14,8 @@ import (
 // attach a managed policy to a role, the managed policy becomes part of the role's
 // permission (access) policy. You cannot use a managed policy as the role's trust
 // policy. The role's trust policy is created at the same time as the role, using
-// CreateRole . You can update a role's trust policy using UpdateAssumeRolePolicy
-// . Use this operation to attach a managed policy to a role. To embed an inline
+// CreateRole . You can update a role's trust policy using UpdateAssumeRolePolicy .
+// Use this operation to attach a managed policy to a role. To embed an inline
 // policy in a role, use PutRolePolicy . For more information about policies, see
 // Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. As a best practice, you can validate your IAM policies.
@@ -46,7 +46,7 @@ type AttachRolePolicyInput struct {
 	PolicyArn *string
 
 	// The name (friendly name, not ARN) of the role to attach the policy to. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex) )
 	// a string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//

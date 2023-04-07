@@ -107,8 +107,8 @@ type UpdateSlotTypeOutput struct {
 	// The language and locale of the updated slot type.
 	LocaleId *string
 
-	// The updated signature of the built-in slot type that is the parent of this
-	// slot type.
+	// The updated signature of the built-in slot type that is the parent of this slot
+	// type.
 	ParentSlotTypeSignature *string
 
 	// The unique identifier of the updated slot type.

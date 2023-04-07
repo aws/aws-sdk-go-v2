@@ -51,8 +51,8 @@ type ListTagsForResourceOutput struct {
 	// next set of application revisions in the list.
 	NextToken *string
 
-	// A list of tags returned by ListTagsForResource. The tags are associated with
-	// the resource identified by the input ResourceArn  parameter.
+	// A list of tags returned by ListTagsForResource . The tags are associated with
+	// the resource identified by the input ResourceArn parameter.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

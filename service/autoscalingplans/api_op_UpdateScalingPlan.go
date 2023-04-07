@@ -35,7 +35,7 @@ type UpdateScalingPlanInput struct {
 	// This member is required.
 	ScalingPlanName *string
 
-	// The version number of the scaling plan. The only valid value is 1. Currently,
+	// The version number of the scaling plan. The only valid value is 1 . Currently,
 	// you cannot have multiple scaling plan versions.
 	//
 	// This member is required.

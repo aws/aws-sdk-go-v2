@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Returns information about an event data store specified as either an ARN or
-// the ID portion of the ARN.
+// Returns information about an event data store specified as either an ARN or the
+// ID portion of the ARN.
 func (c *Client) GetEventDataStore(ctx context.Context, params *GetEventDataStoreInput, optFns ...func(*Options)) (*GetEventDataStoreOutput, error) {
 	if params == nil {
 		params = &GetEventDataStoreInput{}
@@ -70,7 +70,7 @@ type GetEventDataStoreOutput struct {
 	// The retention period of the event data store, in days.
 	RetentionPeriod *int32
 
-	// The status of an event data store. Values can be ENABLED  and PENDING_DELETION .
+	// The status of an event data store. Values can be ENABLED and PENDING_DELETION .
 	Status types.EventDataStoreStatus
 
 	// Indicates that termination protection is enabled.

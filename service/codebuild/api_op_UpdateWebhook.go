@@ -12,7 +12,7 @@ import (
 )
 
 // Updates the webhook associated with an CodeBuild build project. If you use
-// Bitbucket for your repository, rotateSecret  is ignored.
+// Bitbucket for your repository, rotateSecret is ignored.
 func (c *Client) UpdateWebhook(ctx context.Context, params *UpdateWebhookInput, optFns ...func(*Options)) (*UpdateWebhookOutput, error) {
 	if params == nil {
 		params = &UpdateWebhookInput{}
@@ -35,10 +35,10 @@ type UpdateWebhookInput struct {
 	// This member is required.
 	ProjectName *string
 
-	// A regular expression used to determine which repository branches are built
-	// when a webhook is triggered. If the name of a branch matches the regular
-	// expression, then it is built. If branchFilter is empty, then all branches are
-	// built. It is recommended that you use filterGroups  instead of branchFilter .
+	// A regular expression used to determine which repository branches are built when
+	// a webhook is triggered. If the name of a branch matches the regular expression,
+	// then it is built. If branchFilter is empty, then all branches are built. It is
+	// recommended that you use filterGroups instead of branchFilter .
 	BranchFilter *string
 
 	// Specifies the type of build this webhook will trigger.

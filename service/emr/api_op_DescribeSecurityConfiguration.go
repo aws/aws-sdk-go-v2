@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Provides the details of a security configuration by returning the
-// configuration JSON.
+// Provides the details of a security configuration by returning the configuration
+// JSON.
 func (c *Client) DescribeSecurityConfiguration(ctx context.Context, params *DescribeSecurityConfigurationInput, optFns ...func(*Options)) (*DescribeSecurityConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeSecurityConfigurationInput{}

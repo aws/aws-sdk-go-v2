@@ -16,20 +16,20 @@ import (
 // built with that configuration cannot be completed unless all players accept the
 // proposed match within a specified time limit. When FlexMatch builds a match, all
 // the matchmaking tickets involved in the proposed match are placed into status
-// REQUIRES_ACCEPTANCE. This is a trigger for your game to get acceptance from
-// all players in the ticket. Acceptances are only valid for tickets when they are
-// in this status; all other acceptances result in an error. To register
-// acceptance, specify the ticket ID, a response, and one or more players. Once all
-// players have registered acceptance, the matchmaking tickets advance to status
-// PLACING, where a new game session is created for the match. If any player
-// rejects the match, or if acceptances are not received before a specified
-// timeout, the proposed match is dropped. The matchmaking tickets are then handled
-// in one of two ways: For tickets where one or more players rejected the match or
-// failed to respond, the ticket status is set to CANCELLED, and processing is
-// terminated. For tickets where players have accepted or not yet responded, the
-// ticket status is returned to SEARCHING to find a new match. A new matchmaking
-// request for these players can be submitted as needed. Learn more Add FlexMatch
-// to a game client (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
+// REQUIRES_ACCEPTANCE . This is a trigger for your game to get acceptance from all
+// players in the ticket. Acceptances are only valid for tickets when they are in
+// this status; all other acceptances result in an error. To register acceptance,
+// specify the ticket ID, a response, and one or more players. Once all players
+// have registered acceptance, the matchmaking tickets advance to status PLACING ,
+// where a new game session is created for the match. If any player rejects the
+// match, or if acceptances are not received before a specified timeout, the
+// proposed match is dropped. The matchmaking tickets are then handled in one of
+// two ways: For tickets where one or more players rejected the match or failed to
+// respond, the ticket status is set to CANCELLED , and processing is terminated.
+// For tickets where players have accepted or not yet responded, the ticket status
+// is returned to SEARCHING to find a new match. A new matchmaking request for
+// these players can be submitted as needed. Learn more Add FlexMatch to a game
+// client (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
 // FlexMatch events (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html)
 // (reference)
 func (c *Client) AcceptMatch(ctx context.Context, params *AcceptMatchInput, optFns ...func(*Options)) (*AcceptMatchOutput, error) {

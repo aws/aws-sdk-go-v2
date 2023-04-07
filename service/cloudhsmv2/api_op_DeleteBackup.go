@@ -42,7 +42,7 @@ type DeleteBackupInput struct {
 
 type DeleteBackupOutput struct {
 
-	// Information on the Backup  object deleted.
+	// Information on the Backup object deleted.
 	Backup *types.Backup
 
 	// Metadata pertaining to the operation's result.

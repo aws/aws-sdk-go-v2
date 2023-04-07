@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tasks in a maintenance window. For maintenance window tasks without
-// a specified target, you can't supply values for --max-errors  and
-// --max-concurrency . Instead, the system inserts a placeholder value of 1,
-// which may be reported in the response to this command. These values don't affect
-// the running of your task and can be ignored.
+// Lists the tasks in a maintenance window. For maintenance window tasks without a
+// specified target, you can't supply values for --max-errors and --max-concurrency
+// . Instead, the system inserts a placeholder value of 1 , which may be reported
+// in the response to this command. These values don't affect the running of your
+// task and can be ignored.
 func (c *Client) DescribeMaintenanceWindowTasks(ctx context.Context, params *DescribeMaintenanceWindowTasksInput, optFns ...func(*Options)) (*DescribeMaintenanceWindowTasksOutput, error) {
 	if params == nil {
 		params = &DescribeMaintenanceWindowTasksInput{}
@@ -147,8 +147,8 @@ type DescribeMaintenanceWindowTasksPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

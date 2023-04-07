@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves an array of your LoggingConfiguration  objects.
+// Retrieves an array of your LoggingConfiguration objects.
 func (c *Client) ListLoggingConfigurations(ctx context.Context, params *ListLoggingConfigurationsInput, optFns ...func(*Options)) (*ListLoggingConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListLoggingConfigurationsInput{}
@@ -34,8 +34,9 @@ type ListLoggingConfigurationsInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//     - CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1 .
-	//     - API and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -47,8 +48,8 @@ type ListLoggingConfigurationsInput struct {
 
 	// When you request a list of objects with a Limit setting, if the number of
 	// objects that are still available for retrieval exceeds the limit, WAF returns a
-	// NextMarkervalue in the response. To retrieve the next batch of objects,
-	// provide the marker from the prior call in your next request.
+	// NextMarker value in the response. To retrieve the next batch of objects, provide
+	// the marker from the prior call in your next request.
 	NextMarker *string
 
 	noSmithyDocumentSerde
@@ -61,8 +62,8 @@ type ListLoggingConfigurationsOutput struct {
 
 	// When you request a list of objects with a Limit setting, if the number of
 	// objects that are still available for retrieval exceeds the limit, WAF returns a
-	// NextMarkervalue in the response. To retrieve the next batch of objects,
-	// provide the marker from the prior call in your next request.
+	// NextMarker value in the response. To retrieve the next batch of objects, provide
+	// the marker from the prior call in your next request.
 	NextMarker *string
 
 	// Metadata pertaining to the operation's result.

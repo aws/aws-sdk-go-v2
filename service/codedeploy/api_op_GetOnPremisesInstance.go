@@ -27,7 +27,7 @@ func (c *Client) GetOnPremisesInstance(ctx context.Context, params *GetOnPremise
 	return out, nil
 }
 
-// Represents the input of a GetOnPremisesInstance  operation.
+// Represents the input of a GetOnPremisesInstance operation.
 type GetOnPremisesInstanceInput struct {
 
 	// The name of the on-premises instance about which to get information.
@@ -38,7 +38,7 @@ type GetOnPremisesInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetOnPremisesInstance  operation.
+// Represents the output of a GetOnPremisesInstance operation.
 type GetOnPremisesInstanceOutput struct {
 
 	// Information about the on-premises instance.

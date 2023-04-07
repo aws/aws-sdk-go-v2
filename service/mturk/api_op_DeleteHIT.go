@@ -19,9 +19,11 @@ import (
 // its submitted assignments already approved or rejected, the service will return
 // an error.
 //   - HITs are automatically disposed of after 120 days.
-//   - After you dispose of a HIT, you can no longer approve the HIT's rejected assignments.
+//   - After you dispose of a HIT, you can no longer approve the HIT's rejected
+//     assignments.
 //   - Disposed HITs are not returned in results for the ListHITs operation.
-//   - Disposing HITs can improve the performance of operations such as ListReviewableHITs and ListHITs.
+//   - Disposing HITs can improve the performance of operations such as
+//     ListReviewableHITs and ListHITs.
 func (c *Client) DeleteHIT(ctx context.Context, params *DeleteHITInput, optFns ...func(*Options)) (*DeleteHITOutput, error) {
 	if params == nil {
 		params = &DeleteHITInput{}

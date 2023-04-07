@@ -20,7 +20,7 @@ import (
 // refers to a Distributed Map state with a label mapStateLabel in the state
 // machine named stateMachineName . For EXPRESS state machines, the deletion will
 // happen eventually (usually less than a minute). Running executions may emit logs
-// after DeleteStateMachine  API is called.
+// after DeleteStateMachine API is called.
 func (c *Client) DeleteStateMachine(ctx context.Context, params *DeleteStateMachineInput, optFns ...func(*Options)) (*DeleteStateMachineOutput, error) {
 	if params == nil {
 		params = &DeleteStateMachineInput{}

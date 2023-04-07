@@ -15,7 +15,7 @@ import (
 // Retrieves a paginated list of the components that a Greengrass core device
 // runs. By default, this list doesn't include components that are deployed as
 // dependencies of other components. To include dependencies in the response, set
-// the topologyFilter  parameter to ALL. IoT Greengrass relies on individual
+// the topologyFilter parameter to ALL . IoT Greengrass relies on individual
 // devices to send status updates to the Amazon Web Services Cloud. If the IoT
 // Greengrass Core software isn't running on the device, or if device isn't
 // connected to the Amazon Web Services Cloud, then the reported status of that
@@ -23,10 +23,13 @@ import (
 // the device status was last updated. Core devices send status updates at the
 // following times:
 //   - When the IoT Greengrass Core software starts
-//   - When the core device receives a deployment from the Amazon Web Services Cloud
+//   - When the core device receives a deployment from the Amazon Web Services
+//     Cloud
 //   - When the status of any component on the core device becomes BROKEN
-//   - At a regular interval that you can configure (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss) , which defaults to 24 hours
-//   - For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and cloud deployment
+//   - At a regular interval that you can configure (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss)
+//     , which defaults to 24 hours
+//   - For IoT Greengrass Core v2.7.0, the core device sends status updates upon
+//     local deployment and cloud deployment
 func (c *Client) ListInstalledComponents(ctx context.Context, params *ListInstalledComponentsInput, optFns ...func(*Options)) (*ListInstalledComponentsOutput, error) {
 	if params == nil {
 		params = &ListInstalledComponentsInput{}
@@ -56,9 +59,10 @@ type ListInstalledComponentsInput struct {
 	NextToken *string
 
 	// The filter for the list of components. Choose from the following options:
-	//     - ALL – The list includes all components installed on the core device.
-	//     - ROOT – The list includes only root components, which are components that you specify in a deployment. When you choose this option, the list doesn't include components that the core device installs as dependencies of other components.
-	//
+	//   - ALL – The list includes all components installed on the core device.
+	//   - ROOT – The list includes only root components, which are components that you
+	//   specify in a deployment. When you choose this option, the list doesn't include
+	//   components that the core device installs as dependencies of other components.
 	// Default: ROOT
 	TopologyFilter types.InstalledComponentTopologyFilter
 
@@ -71,8 +75,8 @@ type ListInstalledComponentsOutput struct {
 	// v2.7.0 or later is required to get an accurate lastStatusChangeTimestamp
 	// response. This response can be inaccurate in earlier Greengrass nucleus
 	// versions. Greengrass nucleus v2.8.0 or later is required to get an accurate
-	// lastInstallationSource and lastReportedTimestamp response. This response can
-	// be inaccurate or null in earlier Greengrass nucleus versions.
+	// lastInstallationSource and lastReportedTimestamp response. This response can be
+	// inaccurate or null in earlier Greengrass nucleus versions.
 	InstalledComponents []types.InstalledComponent
 
 	// The token for the next set of results, or null if there are no additional
@@ -162,8 +166,8 @@ type ListInstalledComponentsPaginatorOptions struct {
 	// The maximum number of results to be returned per paginated request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

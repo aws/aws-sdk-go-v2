@@ -38,8 +38,8 @@ type DeletePullRequestApprovalRuleInput struct {
 	// This member is required.
 	ApprovalRuleName *string
 
-	// The system-generated ID of the pull request that contains the approval rule
-	// you want to delete.
+	// The system-generated ID of the pull request that contains the approval rule you
+	// want to delete.
 	//
 	// This member is required.
 	PullRequestId *string

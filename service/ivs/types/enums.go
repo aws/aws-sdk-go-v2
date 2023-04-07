@@ -28,9 +28,9 @@ const (
 	ChannelTypeStandardChannelType ChannelType = "STANDARD"
 )
 
-// Values returns all known values for ChannelType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ChannelType) Values() []ChannelType {
 	return []ChannelType{
 		"BASIC",
@@ -47,10 +47,9 @@ const (
 	RecordingConfigurationStateActive       RecordingConfigurationState = "ACTIVE"
 )
 
-// Values returns all known values for RecordingConfigurationState. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for RecordingConfigurationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecordingConfigurationState) Values() []RecordingConfigurationState {
 	return []RecordingConfigurationState{
 		"CREATING",
@@ -105,9 +104,9 @@ const (
 	StreamStateStreamOffline StreamState = "OFFLINE"
 )
 
-// Values returns all known values for StreamState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StreamState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StreamState) Values() []StreamState {
 	return []StreamState{
 		"LIVE",

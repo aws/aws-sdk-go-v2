@@ -12,15 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the metrics configurations for the bucket. The metrics configurations
-// are only for the request metrics of the bucket and do not provide information on
+// Lists the metrics configurations for the bucket. The metrics configurations are
+// only for the request metrics of the bucket and do not provide information on
 // daily storage metrics. You can have up to 1,000 configurations per bucket. This
 // action supports list pagination and does not return more than 100 configurations
 // at a time. Always check the IsTruncated element in the response. If there are
 // no more configurations to list, IsTruncated is set to false. If there are more
-// configurations to list, IsTruncated  is set to true, and there is a value in
-// NextContinuationToken . You use the NextContinuationToken value to continue
-// the pagination of the list by passing the value in continuation-token in the
+// configurations to list, IsTruncated is set to true, and there is a value in
+// NextContinuationToken . You use the NextContinuationToken value to continue the
+// pagination of the list by passing the value in continuation-token in the
 // request to GET the next page. To use this operation, you must have permissions
 // to perform the s3:GetMetricsConfiguration action. The bucket owner has this
 // permission by default. The bucket owner can grant this permission to others. For
@@ -71,8 +71,8 @@ type ListBucketMetricsConfigurationsInput struct {
 
 type ListBucketMetricsConfigurationsOutput struct {
 
-	// The marker that is used as a starting point for this metrics configuration
-	// list response. This value is present if it was sent in the request.
+	// The marker that is used as a starting point for this metrics configuration list
+	// response. This value is present if it was sent in the request.
 	ContinuationToken *string
 
 	// Indicates whether the returned list of metrics configurations is complete. A

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets permissions for a user, group, or resource. This replaces any
-// pre-existing permissions.
+// Sets permissions for a user, group, or resource. This replaces any pre-existing
+// permissions.
 func (c *Client) PutMailboxPermissions(ctx context.Context, params *PutMailboxPermissionsInput, optFns ...func(*Options)) (*PutMailboxPermissionsOutput, error) {
 	if params == nil {
 		params = &PutMailboxPermissionsInput{}

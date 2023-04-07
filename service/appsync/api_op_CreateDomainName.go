@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a custom DomainName  object.
+// Creates a custom DomainName object.
 func (c *Client) CreateDomainName(ctx context.Context, params *CreateDomainNameInput, optFns ...func(*Options)) (*CreateDomainNameOutput, error) {
 	if params == nil {
 		params = &CreateDomainNameInput{}

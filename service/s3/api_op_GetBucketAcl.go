@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This implementation of the GET  action uses the acl subresource to return the
+// This implementation of the GET action uses the acl subresource to return the
 // access control list (ACL) of a bucket. To use GET to return the ACL of the
-// bucket, you must have READ_ACP  access to the bucket. If READ_ACP permission
-// is granted to the anonymous user, you can return the ACL of the bucket without
+// bucket, you must have READ_ACP access to the bucket. If READ_ACP permission is
+// granted to the anonymous user, you can return the ACL of the bucket without
 // using an authorization header. If your bucket uses the bucket owner enforced
 // setting for S3 Object Ownership, requests to read ACLs are still supported and
 // return the bucket-owner-full-control ACL with the owner being the account that

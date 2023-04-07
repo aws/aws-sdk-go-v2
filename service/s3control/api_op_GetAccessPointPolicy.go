@@ -14,8 +14,8 @@ import (
 	"strings"
 )
 
-// Returns the access point policy associated with the specified access point.
-// The following actions are related to GetAccessPointPolicy :
+// Returns the access point policy associated with the specified access point. The
+// following actions are related to GetAccessPointPolicy :
 //   - PutAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html)
 //   - DeleteAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html)
 func (c *Client) GetAccessPointPolicy(ctx context.Context, params *GetAccessPointPolicyInput, optFns ...func(*Options)) (*GetAccessPointPolicyOutput, error) {
@@ -45,8 +45,8 @@ type GetAccessPointPolicyInput struct {
 	// name and the x-amz-outpost-id as well. For using this parameter with S3 on
 	// Outposts with the Amazon Web Services SDK and CLI, you must specify the ARN of
 	// the access point accessed in the format
-	// arn:aws:s3-outposts:::outpost//accesspoint/. For example, to access the access
-	// point reports-ap  through Outpost my-outpost  owned by account 123456789012 in
+	// arn:aws:s3-outposts:::outpost//accesspoint/ . For example, to access the access
+	// point reports-ap through Outpost my-outpost owned by account 123456789012 in
 	// Region us-west-2 , use the URL encoding of
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap
 	// . The value must be URL encoded.

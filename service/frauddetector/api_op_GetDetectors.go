@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets all detectors or a single detector if a detectorId is specified. This is
-// a paginated API. If you provide a null maxResults, this action retrieves a
-// maximum of 10 records per page. If you provide a maxResults, the value must be
+// Gets all detectors or a single detector if a detectorId is specified. This is a
+// paginated API. If you provide a null maxResults , this action retrieves a
+// maximum of 10 records per page. If you provide a maxResults , the value must be
 // between 5 and 10. To get the next page results, provide the pagination token
 // from the GetDetectorsResponse as part of your request. A null pagination token
 // fetches the records from the beginning.
@@ -133,8 +133,8 @@ type GetDetectorsPaginatorOptions struct {
 	// The maximum number of objects to return for the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

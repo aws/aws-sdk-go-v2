@@ -21,7 +21,7 @@ import (
 // parts returned is 1,000 parts. You can restrict the number of parts returned by
 // specifying the max-parts request parameter. If your multipart upload consists
 // of more than 1,000 parts, the response returns an IsTruncated field with the
-// value of true, and a NextPartNumberMarker  element. In subsequent ListParts
+// value of true, and a NextPartNumberMarker element. In subsequent ListParts
 // requests you can include the part-number-marker query string parameter and set
 // its value to the NextPartNumberMarker field value from the previous response.
 // If the upload was created using a checksum algorithm, you will need to have
@@ -63,7 +63,7 @@ type ListPartsInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -107,8 +107,8 @@ type ListPartsInput struct {
 	// in the Amazon S3 User Guide.
 	SSECustomerAlgorithm *string
 
-	// The server-side encryption (SSE) customer managed key. This parameter is
-	// needed only when the object was created using a checksum algorithm. For more
+	// The server-side encryption (SSE) customer managed key. This parameter is needed
+	// only when the object was created using a checksum algorithm. For more
 	// information, see Protecting data using SSE-C keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)
 	// in the Amazon S3 User Guide.
 	SSECustomerKey *string
@@ -148,8 +148,8 @@ type ListPartsOutput struct {
 
 	// Container element that identifies who initiated the multipart upload. If the
 	// initiator is an Amazon Web Services account, this element provides the same
-	// information as the Owner element. If the initiator is an IAM User, this
-	// element provides the user ARN and display name.
+	// information as the Owner element. If the initiator is an IAM User, this element
+	// provides the user ARN and display name.
 	Initiator *types.Initiator
 
 	// Indicates whether the returned list of parts is truncated. A true value
@@ -179,7 +179,7 @@ type ListPartsOutput struct {
 	PartNumberMarker *string
 
 	// Container for elements related to a particular part. A response can contain
-	// zero or more Part  elements.
+	// zero or more Part elements.
 	Parts []types.Part
 
 	// If present, indicates that the requester was successfully charged for the
@@ -286,8 +286,8 @@ type ListPartsPaginatorOptions struct {
 	// Sets the maximum number of parts to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -371,9 +371,8 @@ func newServiceMetadataMiddleware_opListParts(region string) *awsmiddleware.Regi
 	}
 }
 
-// getListPartsBucketMember returns a pointer to string denoting a provided
-// bucket member valueand a boolean indicating if the input has a modeled bucket
-// name,
+// getListPartsBucketMember returns a pointer to string denoting a provided bucket
+// member valueand a boolean indicating if the input has a modeled bucket name,
 func getListPartsBucketMember(input interface{}) (*string, bool) {
 	in := input.(*ListPartsInput)
 	if in.Bucket == nil {

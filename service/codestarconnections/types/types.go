@@ -100,8 +100,8 @@ type VpcConfiguration struct {
 	// This member is required.
 	SecurityGroupIds []string
 
-	// The ID of the subnet or subnets associated with the Amazon VPC connected to
-	// the infrastructure where your provider type is installed.
+	// The ID of the subnet or subnets associated with the Amazon VPC connected to the
+	// infrastructure where your provider type is installed.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -112,8 +112,8 @@ type VpcConfiguration struct {
 	// This member is required.
 	VpcId *string
 
-	// The value of the Transport Layer Security (TLS) certificate associated with
-	// the infrastructure where your provider type is installed.
+	// The value of the Transport Layer Security (TLS) certificate associated with the
+	// infrastructure where your provider type is installed.
 	TlsCertificate *string
 
 	noSmithyDocumentSerde

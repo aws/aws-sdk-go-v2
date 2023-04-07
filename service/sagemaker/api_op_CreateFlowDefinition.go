@@ -54,8 +54,7 @@ type CreateFlowDefinitionInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// An object containing information about the events that trigger a human
-	// workflow.
+	// An object containing information about the events that trigger a human workflow.
 	HumanLoopActivationConfig *types.HumanLoopActivationConfig
 
 	// Container for configuring the source of human task requests. Use to specify if

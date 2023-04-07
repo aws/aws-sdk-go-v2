@@ -33,8 +33,8 @@ func (c *Client) CreateRealtimeLogConfig(ctx context.Context, params *CreateReal
 
 type CreateRealtimeLogConfigInput struct {
 
-	// Contains information about the Amazon Kinesis data stream where you are
-	// sending real-time log data.
+	// Contains information about the Amazon Kinesis data stream where you are sending
+	// real-time log data.
 	//
 	// This member is required.
 	EndPoints []types.EndPoint

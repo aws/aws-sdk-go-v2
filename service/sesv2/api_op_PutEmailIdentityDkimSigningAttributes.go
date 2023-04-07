@@ -13,7 +13,8 @@ import (
 
 // Used to configure or change the DKIM authentication settings for an email
 // domain identity. You can use this operation to do any of the following:
-//   - Update the signing attributes for an identity that uses Bring Your Own DKIM (BYODKIM).
+//   - Update the signing attributes for an identity that uses Bring Your Own DKIM
+//     (BYODKIM).
 //   - Update the key length that should be used for Easy DKIM.
 //   - Change from using no DKIM authentication to using Easy DKIM.
 //   - Change from using no DKIM authentication to using BYODKIM.
@@ -44,16 +45,18 @@ type PutEmailIdentityDkimSigningAttributesInput struct {
 
 	// The method to use to configure DKIM for the identity. There are the following
 	// possible values:
-	//     - AWS_SES – Configure DKIM for the identity by using Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html) .
-	//     - EXTERNAL – Configure DKIM for the identity by using Bring Your Own DKIM (BYODKIM).
+	//   - AWS_SES – Configure DKIM for the identity by using Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
+	//   .
+	//   - EXTERNAL – Configure DKIM for the identity by using Bring Your Own DKIM
+	//   (BYODKIM).
 	//
 	// This member is required.
 	SigningAttributesOrigin types.DkimSigningAttributesOrigin
 
-	// An object that contains information about the private key and selector that
-	// you want to use to configure DKIM for the identity for Bring Your Own DKIM
-	// (BYODKIM) for the identity, or, configures the key length to be used for Easy
-	// DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html) .
+	// An object that contains information about the private key and selector that you
+	// want to use to configure DKIM for the identity for Bring Your Own DKIM (BYODKIM)
+	// for the identity, or, configures the key length to be used for Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
+	// .
 	SigningAttributes *types.DkimSigningAttributes
 
 	noSmithyDocumentSerde
@@ -72,11 +75,15 @@ type PutEmailIdentityDkimSigningAttributesOutput struct {
 	// the selector that you specified. The value of the TXT record must be a public
 	// key that's paired with the private key that you specified in the process of
 	// creating the identity. The status can be one of the following:
-	//     - PENDING – The verification process was initiated, but Amazon SES hasn't yet detected the DKIM records in the DNS configuration for the domain.
-	//     - SUCCESS – The verification process completed successfully.
-	//     - FAILED – The verification process failed. This typically occurs when Amazon SES fails to find the DKIM records in the DNS configuration of the domain.
-	//     - TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining the DKIM authentication status of the domain.
-	//     - NOT_STARTED – The DKIM verification process hasn't been initiated for the domain.
+	//   - PENDING – The verification process was initiated, but Amazon SES hasn't yet
+	//   detected the DKIM records in the DNS configuration for the domain.
+	//   - SUCCESS – The verification process completed successfully.
+	//   - FAILED – The verification process failed. This typically occurs when Amazon
+	//   SES fails to find the DKIM records in the DNS configuration of the domain.
+	//   - TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from
+	//   determining the DKIM authentication status of the domain.
+	//   - NOT_STARTED – The DKIM verification process hasn't been initiated for the
+	//   domain.
 	DkimStatus types.DkimStatus
 
 	// If you used Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)

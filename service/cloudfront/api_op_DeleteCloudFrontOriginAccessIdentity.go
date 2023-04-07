@@ -34,8 +34,8 @@ type DeleteCloudFrontOriginAccessIdentityInput struct {
 	// This member is required.
 	Id *string
 
-	// The value of the ETag  header you received from a previous GET  or PUT
-	// request. For example: E2QWRUHAPOMQZL .
+	// The value of the ETag header you received from a previous GET or PUT request.
+	// For example: E2QWRUHAPOMQZL .
 	IfMatch *string
 
 	noSmithyDocumentSerde

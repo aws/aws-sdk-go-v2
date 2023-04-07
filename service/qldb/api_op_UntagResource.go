@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags from a specified Amazon QLDB resource. You can
-// specify up to 50 tag keys to remove.
+// Removes one or more tags from a specified Amazon QLDB resource. You can specify
+// up to 50 tag keys to remove.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

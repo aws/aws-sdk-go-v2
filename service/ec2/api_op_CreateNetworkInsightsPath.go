@@ -33,8 +33,8 @@ func (c *Client) CreateNetworkInsightsPath(ctx context.Context, params *CreateNe
 
 type CreateNetworkInsightsPathInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	//
 	// This member is required.
@@ -72,9 +72,9 @@ type CreateNetworkInsightsPathInput struct {
 	// the destination IP address.
 	FilterAtDestination *types.PathRequestFilter
 
-	// Scopes the analysis to network paths that match specific filters at the
-	// source. If you specify this parameter, you can't specify the parameters for the
-	// source IP address or the destination port.
+	// Scopes the analysis to network paths that match specific filters at the source.
+	// If you specify this parameter, you can't specify the parameters for the source
+	// IP address or the destination port.
 	FilterAtSource *types.PathRequestFilter
 
 	// The IP address of the source.

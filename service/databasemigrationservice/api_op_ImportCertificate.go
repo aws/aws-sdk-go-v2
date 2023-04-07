@@ -36,13 +36,12 @@ type ImportCertificateInput struct {
 	// This member is required.
 	CertificateIdentifier *string
 
-	// The contents of a .pem  file, which contains an X.509 certificate.
+	// The contents of a .pem file, which contains an X.509 certificate.
 	CertificatePem *string
 
-	// The location of an imported Oracle Wallet certificate for use with SSL.
-	// Provide the name of a .sso  file using the fileb:// prefix. You can't provide
-	// the certificate inline. Example:
-	// filebase64("${path.root}/rds-ca-2019-root.sso")
+	// The location of an imported Oracle Wallet certificate for use with SSL. Provide
+	// the name of a .sso file using the fileb:// prefix. You can't provide the
+	// certificate inline. Example: filebase64("${path.root}/rds-ca-2019-root.sso")
 	CertificateWallet []byte
 
 	// The tags associated with the certificate.

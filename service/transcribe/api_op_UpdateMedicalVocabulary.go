@@ -33,7 +33,7 @@ func (c *Client) UpdateMedicalVocabulary(ctx context.Context, params *UpdateMedi
 type UpdateMedicalVocabularyInput struct {
 
 	// The language code that represents the language of the entries in the custom
-	// vocabulary you want to update. US English ( en-US) is the only language
+	// vocabulary you want to update. US English ( en-US ) is the only language
 	// supported with Amazon Transcribe Medical.
 	//
 	// This member is required.
@@ -70,8 +70,8 @@ type UpdateMedicalVocabularyOutput struct {
 	// The name of the updated custom medical vocabulary.
 	VocabularyName *string
 
-	// The processing state of your custom medical vocabulary. If the state is READY,
-	// you can use the custom vocabulary in a StartMedicalTranscriptionJob  request.
+	// The processing state of your custom medical vocabulary. If the state is READY ,
+	// you can use the custom vocabulary in a StartMedicalTranscriptionJob request.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.

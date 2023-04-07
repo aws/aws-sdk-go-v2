@@ -34,8 +34,8 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// HTTP Status Code 409: Conflict. A resource with this name already exists.
-// Retry your request with another name.
+// HTTP Status Code 409: Conflict. A resource with this name already exists. Retry
+// your request with another name.
 type ConflictException struct {
 	Message *string
 
@@ -61,8 +61,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// HTTP Status Code 403: Access forbidden. Correct your credentials and then
-// retry your request.
+// HTTP Status Code 403: Access forbidden. Correct your credentials and then retry
+// your request.
 type ForbiddenException struct {
 	Message *string
 

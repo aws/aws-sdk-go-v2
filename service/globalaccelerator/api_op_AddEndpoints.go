@@ -15,9 +15,12 @@ import (
 // recommended option for adding endpoints. The alternative options are to add
 // endpoints when you create an endpoint group (with the CreateEndpointGroup (https://docs.aws.amazon.com/global-accelerator/latest/api/API_CreateEndpointGroup.html)
 // API) or when you update an endpoint group (with the UpdateEndpointGroup (https://docs.aws.amazon.com/global-accelerator/latest/api/API_UpdateEndpointGroup.html)
-// API). There are two advantages to using AddEndpoints  to add endpoints:
-//   - It's faster, because Global Accelerator only has to resolve the new endpoints that you're adding.
-//   - It's more convenient, because you don't need to specify all of the current endpoints that are already in the endpoint group in addition to the new endpoints that you want to add.
+// API). There are two advantages to using AddEndpoints to add endpoints:
+//   - It's faster, because Global Accelerator only has to resolve the new
+//     endpoints that you're adding.
+//   - It's more convenient, because you don't need to specify all of the current
+//     endpoints that are already in the endpoint group in addition to the new
+//     endpoints that you want to add.
 func (c *Client) AddEndpoints(ctx context.Context, params *AddEndpointsInput, optFns ...func(*Options)) (*AddEndpointsOutput, error) {
 	if params == nil {
 		params = &AddEndpointsInput{}

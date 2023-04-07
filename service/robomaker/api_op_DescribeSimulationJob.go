@@ -43,8 +43,8 @@ type DescribeSimulationJobOutput struct {
 	// The Amazon Resource Name (ARN) of the simulation job.
 	Arn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
 	// Compute information for the simulation job.
@@ -94,8 +94,8 @@ type DescribeSimulationJobOutput struct {
 	// The logging configuration.
 	LoggingConfig *types.LoggingConfig
 
-	// The maximum job duration in seconds. The value must be 8 days (691,200
-	// seconds) or less.
+	// The maximum job duration in seconds. The value must be 8 days (691,200 seconds)
+	// or less.
 	MaxJobDurationInSeconds int64
 
 	// The name of the simulation job.

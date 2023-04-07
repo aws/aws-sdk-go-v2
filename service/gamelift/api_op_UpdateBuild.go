@@ -33,8 +33,8 @@ func (c *Client) UpdateBuild(ctx context.Context, params *UpdateBuildInput, optF
 
 type UpdateBuildInput struct {
 
-	// A unique identifier for the build to update. You can use either the build ID
-	// or ARN value.
+	// A unique identifier for the build to update. You can use either the build ID or
+	// ARN value.
 	//
 	// This member is required.
 	BuildId *string

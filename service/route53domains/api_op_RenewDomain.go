@@ -36,8 +36,8 @@ func (c *Client) RenewDomain(ctx context.Context, params *RenewDomainInput, optF
 // and the current expiration year.
 type RenewDomainInput struct {
 
-	// The year when the registration for the domain is set to expire. This value
-	// must match the current expiration date for the domain.
+	// The year when the registration for the domain is set to expire. This value must
+	// match the current expiration date for the domain.
 	//
 	// This member is required.
 	CurrentExpiryYear int32

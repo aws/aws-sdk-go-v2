@@ -10,23 +10,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Replaces the existing list of server certificate thumbprints associated with
-// an OpenID Connect (OIDC) provider resource object with a new list of
-// thumbprints. The list that you pass with this operation completely replaces the
-// existing list of thumbprints. (The lists are not merged.) Typically, you need to
-// update a thumbprint only when the identity provider certificate changes, which
-// occurs rarely. However, if the provider's certificate does change, any attempt
-// to assume an IAM role that specifies the OIDC provider as a principal fails
-// until the certificate thumbprint is updated. Amazon Web Services secures
-// communication with some OIDC identity providers (IdPs) through our library of
-// trusted certificate authorities (CAs) instead of using a certificate thumbprint
-// to verify your IdP server certificate. These OIDC IdPs include Google, Auth0,
-// and those that use an Amazon S3 bucket to host a JSON Web Key Set (JWKS)
-// endpoint. In these cases, your legacy thumbprint remains in your configuration,
-// but is no longer used for validation. Trust for the OIDC provider is derived
-// from the provider certificate and is validated by the thumbprint. Therefore, it
-// is best to limit access to the UpdateOpenIDConnectProviderThumbprint operation
-// to highly privileged users.
+// Replaces the existing list of server certificate thumbprints associated with an
+// OpenID Connect (OIDC) provider resource object with a new list of thumbprints.
+// The list that you pass with this operation completely replaces the existing list
+// of thumbprints. (The lists are not merged.) Typically, you need to update a
+// thumbprint only when the identity provider certificate changes, which occurs
+// rarely. However, if the provider's certificate does change, any attempt to
+// assume an IAM role that specifies the OIDC provider as a principal fails until
+// the certificate thumbprint is updated. Amazon Web Services secures communication
+// with some OIDC identity providers (IdPs) through our library of trusted
+// certificate authorities (CAs) instead of using a certificate thumbprint to
+// verify your IdP server certificate. These OIDC IdPs include Google, Auth0, and
+// those that use an Amazon S3 bucket to host a JSON Web Key Set (JWKS) endpoint.
+// In these cases, your legacy thumbprint remains in your configuration, but is no
+// longer used for validation. Trust for the OIDC provider is derived from the
+// provider certificate and is validated by the thumbprint. Therefore, it is best
+// to limit access to the UpdateOpenIDConnectProviderThumbprint operation to
+// highly privileged users.
 func (c *Client) UpdateOpenIDConnectProviderThumbprint(ctx context.Context, params *UpdateOpenIDConnectProviderThumbprintInput, optFns ...func(*Options)) (*UpdateOpenIDConnectProviderThumbprintOutput, error) {
 	if params == nil {
 		params = &UpdateOpenIDConnectProviderThumbprintInput{}

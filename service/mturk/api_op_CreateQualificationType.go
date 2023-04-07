@@ -12,7 +12,7 @@ import (
 )
 
 // The CreateQualificationType operation creates a new Qualification type, which
-// is represented by a QualificationType  data structure.
+// is represented by a QualificationType data structure.
 func (c *Client) CreateQualificationType(ctx context.Context, params *CreateQualificationTypeInput, optFns ...func(*Options)) (*CreateQualificationTypeOutput, error) {
 	if params == nil {
 		params = &CreateQualificationTypeInput{}
@@ -37,10 +37,9 @@ type CreateQualificationTypeInput struct {
 	// This member is required.
 	Description *string
 
-	// The name you give to the Qualification type. The type name is used to
-	// represent the Qualification to Workers, and to find the type using a
-	// Qualification type search. It must be unique across all of your Qualification
-	// types.
+	// The name you give to the Qualification type. The type name is used to represent
+	// the Qualification to Workers, and to find the type using a Qualification type
+	// search. It must be unique across all of your Qualification types.
 	//
 	// This member is required.
 	Name *string
@@ -66,8 +65,8 @@ type CreateQualificationTypeInput struct {
 	// parameter is used only if the AutoGranted parameter is true.
 	AutoGrantedValue *int32
 
-	// One or more words or phrases that describe the Qualification type, separated
-	// by commas. The keywords of a type make the type easier to find during a search.
+	// One or more words or phrases that describe the Qualification type, separated by
+	// commas. The keywords of a type make the type easier to find during a search.
 	Keywords *string
 
 	// The number of seconds that a Worker must wait after requesting a Qualification
@@ -82,7 +81,7 @@ type CreateQualificationTypeInput struct {
 
 	// The questions for the Qualification test a Worker must answer correctly to
 	// obtain a Qualification of this type. If this parameter is specified,
-	// TestDurationInSecondsmust also be specified. Constraints: Must not be longer
+	// TestDurationInSeconds must also be specified. Constraints: Must not be longer
 	// than 65535 bytes. Must be a QuestionForm data structure. This parameter cannot
 	// be specified if AutoGranted is true. Constraints: None. If not specified, the
 	// Worker may request the Qualification without answering any questions.

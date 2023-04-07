@@ -13,11 +13,11 @@ import (
 
 // Modifies the parameters of a DB parameter group to the engine/system default
 // value. To reset specific parameters, provide a list of the following:
-// ParameterName and ApplyMethod. To reset the entire DB parameter group, specify
-// the DBParameterGroup  name and ResetAllParameters parameters. When resetting
-// the entire group, dynamic parameters are updated immediately and static
-// parameters are set to pending-reboot to take effect on the next DB instance
-// restart or RebootDBInstance  request.
+// ParameterName and ApplyMethod . To reset the entire DB parameter group, specify
+// the DBParameterGroup name and ResetAllParameters parameters. When resetting the
+// entire group, dynamic parameters are updated immediately and static parameters
+// are set to pending-reboot to take effect on the next DB instance restart or
+// RebootDBInstance request.
 func (c *Client) ResetDBParameterGroup(ctx context.Context, params *ResetDBParameterGroupInput, optFns ...func(*Options)) (*ResetDBParameterGroupOutput, error) {
 	if params == nil {
 		params = &ResetDBParameterGroupInput{}
@@ -36,19 +36,18 @@ func (c *Client) ResetDBParameterGroup(ctx context.Context, params *ResetDBParam
 type ResetDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:
-	//     - Must match the name of an existing DBParameterGroup.
+	//   - Must match the name of an existing DBParameterGroup.
 	//
 	// This member is required.
 	DBParameterGroupName *string
 
-	// To reset the entire DB parameter group, specify the DBParameterGroup  name and
-	// ResetAllParametersparameters. To reset specific parameters, provide a list of
-	// the following: ParameterName  and ApplyMethod. A maximum of 20 parameters can
-	// be modified in a single request. Valid Values (for Apply method):
-	// pending-reboot
+	// To reset the entire DB parameter group, specify the DBParameterGroup name and
+	// ResetAllParameters parameters. To reset specific parameters, provide a list of
+	// the following: ParameterName and ApplyMethod . A maximum of 20 parameters can be
+	// modified in a single request. Valid Values (for Apply method): pending-reboot
 	Parameters []types.Parameter
 
-	// Specifies whether ( true ) or not ( false) to reset all parameters in the DB
+	// Specifies whether ( true ) or not ( false ) to reset all parameters in the DB
 	// parameter group to default values. Default: true
 	ResetAllParameters bool
 

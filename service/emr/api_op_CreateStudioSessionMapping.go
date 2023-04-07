@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Maps a user or group to the Amazon EMR Studio specified by StudioId, and
+// Maps a user or group to the Amazon EMR Studio specified by StudioId , and
 // applies a session policy to refine Studio permissions for that user or group.
 // Use CreateStudioSessionMapping to assign users to a Studio when you use IAM
 // Identity Center authentication. For instructions on how to assign users to a
@@ -58,14 +58,14 @@ type CreateStudioSessionMappingInput struct {
 	// The globally unique identifier (GUID) of the user or group from the IAM
 	// Identity Center Identity Store. For more information, see UserId (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
 	// and GroupId (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId)
-	// in the IAM Identity Center Identity Store API Reference. Either IdentityName
-	// or IdentityId  must be specified, but not both.
+	// in the IAM Identity Center Identity Store API Reference. Either IdentityName or
+	// IdentityId must be specified, but not both.
 	IdentityId *string
 
 	// The name of the user or group. For more information, see UserName (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
-	// in the IAM Identity Center Identity Store API Reference. Either IdentityName
-	// or IdentityId  must be specified, but not both.
+	// in the IAM Identity Center Identity Store API Reference. Either IdentityName or
+	// IdentityId must be specified, but not both.
 	IdentityName *string
 
 	noSmithyDocumentSerde

@@ -40,8 +40,8 @@ type UpdateAuthorizerInput struct {
 	// This member is required.
 	AuthorizerId *string
 
-	// Specifies the required credentials as an IAM role for API Gateway to invoke
-	// the authorizer. To specify an IAM role for API Gateway to assume, use the role's
+	// Specifies the required credentials as an IAM role for API Gateway to invoke the
+	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
 	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
 	// function, don't specify this parameter.
 	AuthorizerCredentialsArn *string
@@ -75,11 +75,11 @@ type UpdateAuthorizerInput struct {
 	// authorizers.
 	AuthorizerUri *string
 
-	// Specifies whether a Lambda authorizer returns a response in a simple format.
-	// By default, a Lambda authorizer must return an IAM policy. If enabled, the
-	// Lambda authorizer can return a boolean value instead of an IAM policy. Supported
-	// only for HTTP APIs. To learn more, see Working with AWS Lambda authorizers for
-	// HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// Specifies whether a Lambda authorizer returns a response in a simple format. By
+	// default, a Lambda authorizer must return an IAM policy. If enabled, the Lambda
+	// authorizer can return a boolean value instead of an IAM policy. Supported only
+	// for HTTP APIs. To learn more, see Working with AWS Lambda authorizers for HTTP
+	// APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
 	EnableSimpleResponses bool
 
 	// The identity source for which authorization is requested. For a REQUEST
@@ -119,8 +119,8 @@ type UpdateAuthorizerInput struct {
 
 type UpdateAuthorizerOutput struct {
 
-	// Specifies the required credentials as an IAM role for API Gateway to invoke
-	// the authorizer. To specify an IAM role for API Gateway to assume, use the role's
+	// Specifies the required credentials as an IAM role for API Gateway to invoke the
+	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
 	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
 	// function, don't specify this parameter. Supported only for REQUEST authorizers.
 	AuthorizerCredentialsArn *string
@@ -157,8 +157,8 @@ type UpdateAuthorizerOutput struct {
 	// authorizers.
 	AuthorizerUri *string
 
-	// Specifies whether a Lambda authorizer returns a response in a simple format.
-	// If enabled, the Lambda authorizer can return a boolean value instead of an IAM
+	// Specifies whether a Lambda authorizer returns a response in a simple format. If
+	// enabled, the Lambda authorizer can return a boolean value instead of an IAM
 	// policy. Supported only for HTTP APIs. To learn more, see Working with AWS
 	// Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
 	EnableSimpleResponses bool

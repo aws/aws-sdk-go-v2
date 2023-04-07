@@ -31,13 +31,13 @@ func (c *Client) ListManagedPoliciesInPermissionSet(ctx context.Context, params 
 type ListManagedPoliciesInPermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
 
-	// The ARN of the PermissionSet  whose managed policies will be listed.
+	// The ARN of the PermissionSet whose managed policies will be listed.
 	//
 	// This member is required.
 	PermissionSetArn *string
@@ -54,7 +54,7 @@ type ListManagedPoliciesInPermissionSetInput struct {
 
 type ListManagedPoliciesInPermissionSetOutput struct {
 
-	// An array of the AttachedManagedPolicy  data type object.
+	// An array of the AttachedManagedPolicy data type object.
 	AttachedManagedPolicies []types.AttachedManagedPolicy
 
 	// The pagination token for the list API. Initially the value is null. Use the
@@ -138,14 +138,14 @@ type ListManagedPoliciesInPermissionSetAPIClient interface {
 
 var _ ListManagedPoliciesInPermissionSetAPIClient = (*Client)(nil)
 
-// ListManagedPoliciesInPermissionSetPaginatorOptions is the paginator options
-// for ListManagedPoliciesInPermissionSet
+// ListManagedPoliciesInPermissionSetPaginatorOptions is the paginator options for
+// ListManagedPoliciesInPermissionSet
 type ListManagedPoliciesInPermissionSetPaginatorOptions struct {
 	// The maximum number of results to display for the PermissionSet .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

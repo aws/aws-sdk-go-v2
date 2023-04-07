@@ -45,8 +45,8 @@ type CreateBusinessReportScheduleInput struct {
 	// The client request token.
 	ClientRequestToken *string
 
-	// The recurrence of the reports. If this isn't specified, the report will only
-	// be delivered one time when the API is called.
+	// The recurrence of the reports. If this isn't specified, the report will only be
+	// delivered one time when the API is called.
 	Recurrence *types.BusinessReportRecurrence
 
 	// The S3 bucket name of the output reports. If this isn't specified, the report

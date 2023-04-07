@@ -14,14 +14,14 @@ import (
 
 // Updates the specified property values in the resource. You specify your
 // resource property updates as a list of patch operations contained in a JSON
-// patch document that adheres to the RFC 6902 - JavaScript Object Notation
-// (JSON) Patch  (https://datatracker.ietf.org/doc/html/rfc6902)standard. For
-// details on how Cloud Control API performs resource update operations, see
-// Updating a resource (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html)
+// patch document that adheres to the RFC 6902 - JavaScript Object Notation (JSON)
+// Patch  (https://datatracker.ietf.org/doc/html/rfc6902) standard. For details on
+// how Cloud Control API performs resource update operations, see Updating a
+// resource (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html)
 // in the Amazon Web Services Cloud Control API User Guide. After you have
 // initiated a resource update request, you can monitor the progress of your
 // request by calling GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
-// using the RequestToken  of the ProgressEvent  returned by UpdateResource. For
+// using the RequestToken of the ProgressEvent returned by UpdateResource . For
 // more information about the properties of a specific resource, refer to the
 // related topic for the resource in the Resource and property types reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 // in the CloudFormation Users Guide.
@@ -42,9 +42,9 @@ func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput
 
 type UpdateResourceInput struct {
 
-	// The identifier for the resource. You can specify the primary identifier, or
-	// any secondary identifier defined for the resource type in its resource schema.
-	// You can only specify one identifier. Primary identifiers can be specified as a
+	// The identifier for the resource. You can specify the primary identifier, or any
+	// secondary identifier defined for the resource type in its resource schema. You
+	// can only specify one identifier. Primary identifiers can be specified as a
 	// string or JSON; secondary identifiers must be specified as JSON. For compound
 	// primary identifiers (that is, one that consists of multiple resource properties
 	// strung together), to specify the primary identifier as a string, list the
@@ -80,10 +80,10 @@ type UpdateResourceInput struct {
 	// in the Amazon Web Services Cloud Control API User Guide.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
-	// role for Cloud Control API to use when performing this resource operation. The
-	// role specified must have the permissions required for this operation. The
-	// necessary permissions for each event handler are defined in the handlers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// for Cloud Control API to use when performing this resource operation. The role
+	// specified must have the permissions required for this operation. The necessary
+	// permissions for each event handler are defined in the handlers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
 	// section of the resource type definition schema (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
 	// . If you do not specify a role, Cloud Control API uses a temporary session
 	// created using your Amazon Web Services user credentials. For more information,
@@ -91,9 +91,9 @@ type UpdateResourceInput struct {
 	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 
-	// For private resource types, the type version to use in this resource
-	// operation. If you do not specify a resource version, CloudFormation uses the
-	// default version.
+	// For private resource types, the type version to use in this resource operation.
+	// If you do not specify a resource version, CloudFormation uses the default
+	// version.
 	TypeVersionId *string
 
 	noSmithyDocumentSerde
@@ -102,7 +102,7 @@ type UpdateResourceInput struct {
 type UpdateResourceOutput struct {
 
 	// Represents the current status of the resource update request. Use the
-	// RequestToken of the ProgressEvent  with GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
+	// RequestToken of the ProgressEvent with GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
 	// to return the current status of a resource operation request.
 	ProgressEvent *types.ProgressEvent
 

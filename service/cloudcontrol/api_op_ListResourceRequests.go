@@ -44,7 +44,7 @@ type ListResourceRequestsInput struct {
 	// the response object's NextToken parameter value is set to a token. To retrieve
 	// the next set of results, call this action again and assign that token to the
 	// request object's NextToken parameter. If there are no remaining results, the
-	// previous response object's NextToken  parameter is set to null .
+	// previous response object's NextToken parameter is set to null .
 	NextToken *string
 
 	// The filter criteria to apply to the requests returned.
@@ -55,10 +55,10 @@ type ListResourceRequestsInput struct {
 
 type ListResourceRequestsOutput struct {
 
-	// If the request doesn't return all of the remaining results, NextToken is set
-	// to a token. To retrieve the next set of results, call ListResources again and
+	// If the request doesn't return all of the remaining results, NextToken is set to
+	// a token. To retrieve the next set of results, call ListResources again and
 	// assign that token to the request object's NextToken parameter. If the request
-	// returns all results, NextToken  is set to null.
+	// returns all results, NextToken is set to null.
 	NextToken *string
 
 	// The requests that match the specified filter criteria.
@@ -147,8 +147,8 @@ type ListResourceRequestsPaginatorOptions struct {
 	// set of results. The default is 20 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

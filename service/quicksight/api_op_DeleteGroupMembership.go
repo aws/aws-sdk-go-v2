@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a user from a group so that the user is no longer a member of the
-// group.
+// Removes a user from a group so that the user is no longer a member of the group.
 func (c *Client) DeleteGroupMembership(ctx context.Context, params *DeleteGroupMembershipInput, optFns ...func(*Options)) (*DeleteGroupMembershipOutput, error) {
 	if params == nil {
 		params = &DeleteGroupMembershipInput{}
@@ -29,8 +28,8 @@ func (c *Client) DeleteGroupMembership(ctx context.Context, params *DeleteGroupM
 
 type DeleteGroupMembershipInput struct {
 
-	// The ID for the Amazon Web Services account that the group is in. Currently,
-	// you use the ID for the Amazon Web Services account that contains your Amazon
+	// The ID for the Amazon Web Services account that the group is in. Currently, you
+	// use the ID for the Amazon Web Services account that contains your Amazon
 	// QuickSight account.
 	//
 	// This member is required.

@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an Amazon RDS DB instance that was stopped using the Amazon Web
-// Services console, the stop-db-instance CLI command, or the StopDBInstance
-// action. For more information, see Starting an Amazon RDS DB instance That Was
-// Previously Stopped (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html)
+// Starts an Amazon RDS DB instance that was stopped using the Amazon Web Services
+// console, the stop-db-instance CLI command, or the StopDBInstance action. For
+// more information, see Starting an Amazon RDS DB instance That Was Previously
+// Stopped (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html)
 // in the Amazon RDS User Guide. This command doesn't apply to RDS Custom, Aurora
 // MySQL, and Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster
 // instead.

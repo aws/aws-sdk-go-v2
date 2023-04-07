@@ -34,8 +34,8 @@ type CreateLicenseInput struct {
 	// This member is required.
 	Beneficiary *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	//
 	// This member is required.
 	ClientToken *string

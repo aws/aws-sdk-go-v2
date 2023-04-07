@@ -53,7 +53,7 @@ type ListDataQualityJobDefinitionsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListDataQualityJobDefinitions request was
-	// truncated, the response includes a NextToken. To retrieve the next set of
+	// truncated, the response includes a NextToken . To retrieve the next set of
 	// transform jobs, use the token in the next request.>
 	NextToken *string
 
@@ -74,7 +74,7 @@ type ListDataQualityJobDefinitionsOutput struct {
 	JobDefinitionSummaries []types.MonitoringJobDefinitionSummary
 
 	// If the result of the previous ListDataQualityJobDefinitions request was
-	// truncated, the response includes a NextToken. To retrieve the next set of data
+	// truncated, the response includes a NextToken . To retrieve the next set of data
 	// quality monitoring job definitions, use the token in the next request.
 	NextToken *string
 
@@ -159,8 +159,8 @@ type ListDataQualityJobDefinitionsPaginatorOptions struct {
 	// response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

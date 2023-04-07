@@ -13,8 +13,8 @@ import (
 )
 
 // Gets all batch import jobs or a specific job of the specified ID. This is a
-// paginated API. If you provide a null maxResults, this action retrieves a
-// maximum of 50 records per page. If you provide a maxResults, the value must be
+// paginated API. If you provide a null maxResults , this action retrieves a
+// maximum of 50 records per page. If you provide a maxResults , the value must be
 // between 1 and 50. To get the next page results, provide the pagination token
 // from the GetBatchImportJobsResponse as part of your request. A null pagination
 // token fetches the records from the beginning.
@@ -135,8 +135,8 @@ type GetBatchImportJobsPaginatorOptions struct {
 	// The maximum number of objects to return for request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -50,7 +50,7 @@ type AttachToIndexInput struct {
 
 type AttachToIndexOutput struct {
 
-	// The ObjectIdentifier  of the object that was attached to the index.
+	// The ObjectIdentifier of the object that was attached to the index.
 	AttachedObjectIdentifier *string
 
 	// Metadata pertaining to the operation's result.

@@ -185,14 +185,13 @@ type GetMergeConflictsAPIClient interface {
 
 var _ GetMergeConflictsAPIClient = (*Client)(nil)
 
-// GetMergeConflictsPaginatorOptions is the paginator options for
-// GetMergeConflicts
+// GetMergeConflictsPaginatorOptions is the paginator options for GetMergeConflicts
 type GetMergeConflictsPaginatorOptions struct {
 	// The maximum number of files to include in the output.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

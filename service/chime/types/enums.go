@@ -30,9 +30,9 @@ const (
 	AccountTypeEnterpriseOIDC      AccountType = "EnterpriseOIDC"
 )
 
-// Values returns all known values for AccountType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AccountType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AccountType) Values() []AccountType {
 	return []AccountType{
 		"Team",
@@ -215,9 +215,9 @@ const (
 	ChannelModeRestricted   ChannelMode = "RESTRICTED"
 )
 
-// Values returns all known values for ChannelMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ChannelMode) Values() []ChannelMode {
 	return []ChannelMode{
 		"UNRESTRICTED",
@@ -268,9 +268,9 @@ const (
 	EmailStatusFailed  EmailStatus = "Failed"
 )
 
-// Values returns all known values for EmailStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EmailStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EmailStatus) Values() []EmailStatus {
 	return []EmailStatus{
 		"NotSent",
@@ -406,9 +406,9 @@ const (
 	MediaPipelineSourceTypeChimeSdkMeeting MediaPipelineSourceType = "ChimeSdkMeeting"
 )
 
-// Values returns all known values for MediaPipelineSourceType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MediaPipelineSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineSourceType) Values() []MediaPipelineSourceType {
 	return []MediaPipelineSourceType{
 		"ChimeSdkMeeting",
@@ -487,9 +487,9 @@ const (
 	NumberSelectionBehaviorAvoidSticky  NumberSelectionBehavior = "AvoidSticky"
 )
 
-// Values returns all known values for NumberSelectionBehavior. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NumberSelectionBehavior. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (NumberSelectionBehavior) Values() []NumberSelectionBehavior {
 	return []NumberSelectionBehavior{
 		"PreferSticky",
@@ -822,10 +822,10 @@ const (
 	TranscribeMedicalContentIdentificationTypePhi TranscribeMedicalContentIdentificationType = "PHI"
 )
 
-// Values returns all known values for
-// TranscribeMedicalContentIdentificationType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TranscribeMedicalContentIdentificationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (TranscribeMedicalContentIdentificationType) Values() []TranscribeMedicalContentIdentificationType {
 	return []TranscribeMedicalContentIdentificationType{
 		"PHI",
@@ -862,9 +862,9 @@ const (
 	TranscribeMedicalRegionAuto         TranscribeMedicalRegion = "auto"
 )
 
-// Values returns all known values for TranscribeMedicalRegion. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TranscribeMedicalRegion. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TranscribeMedicalRegion) Values() []TranscribeMedicalRegion {
 	return []TranscribeMedicalRegion{
 		"us-east-1",
@@ -989,8 +989,8 @@ const (
 	TranscribeVocabularyFilterMethodTag    TranscribeVocabularyFilterMethod = "tag"
 )
 
-// Values returns all known values for TranscribeVocabularyFilterMethod. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for TranscribeVocabularyFilterMethod. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (TranscribeVocabularyFilterMethod) Values() []TranscribeVocabularyFilterMethod {
@@ -1009,9 +1009,9 @@ const (
 	UserTypeSharedDevice UserType = "SharedDevice"
 )
 
-// Values returns all known values for UserType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (UserType) Values() []UserType {
 	return []UserType{
 		"PrivateUser",
@@ -1043,9 +1043,9 @@ const (
 	VoiceConnectorAwsRegionUsWest2 VoiceConnectorAwsRegion = "us-west-2"
 )
 
-// Values returns all known values for VoiceConnectorAwsRegion. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VoiceConnectorAwsRegion. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceConnectorAwsRegion) Values() []VoiceConnectorAwsRegion {
 	return []VoiceConnectorAwsRegion{
 		"us-east-1",

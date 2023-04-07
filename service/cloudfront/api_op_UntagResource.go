@@ -35,7 +35,7 @@ type UntagResourceInput struct {
 	// This member is required.
 	Resource *string
 
-	// A complex type that contains zero or more Tag  key elements.
+	// A complex type that contains zero or more Tag key elements.
 	//
 	// This member is required.
 	TagKeys *types.TagKeys

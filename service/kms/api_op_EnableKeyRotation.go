@@ -59,18 +59,18 @@ func (c *Client) EnableKeyRotation(ctx context.Context, params *EnableKeyRotatio
 
 type EnableKeyRotationInput struct {
 
-	// Identifies a symmetric encryption KMS key. You cannot enable automatic
-	// rotation of asymmetric KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// Identifies a symmetric encryption KMS key. You cannot enable automatic rotation
+	// of asymmetric KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// , HMAC KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html)
 	// , KMS keys with imported key material (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
 	// , or KMS keys in a custom key store (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 	// . To enable or disable automatic rotation of a set of related multi-Region keys (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate)
 	// , set the property on the primary key. Specify the key ID or key ARN of the KMS
 	// key. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey .
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey .
 	//
 	// This member is required.
 	KeyId *string

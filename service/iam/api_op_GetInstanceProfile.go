@@ -38,7 +38,7 @@ func (c *Client) GetInstanceProfile(ctx context.Context, params *GetInstanceProf
 type GetInstanceProfileInput struct {
 
 	// The name of the instance profile to get information about. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
 	// of characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//
@@ -48,7 +48,7 @@ type GetInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetInstanceProfile  request.
+// Contains the response to a successful GetInstanceProfile request.
 type GetInstanceProfileOutput struct {
 
 	// A structure containing details about the instance profile.
@@ -190,9 +190,9 @@ func NewInstanceProfileExistsWaiter(client GetInstanceProfileAPIClient, optFns .
 	}
 }
 
-// Wait calls the waiter function for InstanceProfileExists waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for InstanceProfileExists waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *InstanceProfileExistsWaiter) Wait(ctx context.Context, params *GetInstanceProfileInput, maxWaitDur time.Duration, optFns ...func(*InstanceProfileExistsWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

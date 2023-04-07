@@ -39,7 +39,7 @@ type ListContactsInput struct {
 	// The pagination token to continue to the next page of results.
 	NextToken *string
 
-	// The type of contact. A contact is type PERSONAL  and an escalation plan is type
+	// The type of contact. A contact is type PERSONAL and an escalation plan is type
 	// ESCALATION .
 	Type types.ContactType
 
@@ -132,8 +132,8 @@ type ListContactsPaginatorOptions struct {
 	// The maximum number of contacts and escalation plans per page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

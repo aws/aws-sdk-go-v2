@@ -386,10 +386,10 @@ func (w *WorkspaceDeletedWaiter) Wait(ctx context.Context, params *DescribeWorks
 	return err
 }
 
-// WaitForOutput calls the waiter function for WorkspaceDeleted waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for WorkspaceDeleted waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *WorkspaceDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeWorkspaceInput, maxWaitDur time.Duration, optFns ...func(*WorkspaceDeletedWaiterOptions)) (*DescribeWorkspaceOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

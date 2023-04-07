@@ -10,7 +10,7 @@
 // . We provide the Query API as well as AWS software development kits (SDK) for
 // Amazon Fraud Detector in Java and Python programming languages. The Amazon Fraud
 // Detector Query API provides HTTPS requests that use the HTTP verb GET or POST
-// and a Query parameter Action. AWS SDK provides libraries, sample code,
+// and a Query parameter Action . AWS SDK provides libraries, sample code,
 // tutorials, and other resources for software developers who prefer to build
 // applications using language-specific APIs instead of submitting a request over
 // HTTP or HTTPS. These libraries provide basic functions that automatically take

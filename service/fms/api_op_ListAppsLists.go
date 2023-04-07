@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of AppsListDataSummary  objects.
+// Returns an array of AppsListDataSummary objects.
 func (c *Client) ListAppsLists(ctx context.Context, params *ListAppsListsInput, optFns ...func(*Options)) (*ListAppsListsOutput, error) {
 	if params == nil {
 		params = &ListAppsListsInput{}
@@ -30,8 +30,8 @@ func (c *Client) ListAppsLists(ctx context.Context, params *ListAppsListsInput, 
 
 type ListAppsListsInput struct {
 
-	// The maximum number of objects that you want Firewall Manager to return for
-	// this request. If more objects are available, in the response, Firewall Manager
+	// The maximum number of objects that you want Firewall Manager to return for this
+	// request. If more objects are available, in the response, Firewall Manager
 	// provides a NextToken value that you can use in a subsequent call to get the
 	// next batch of objects. If you don't specify this, Firewall Manager returns all
 	// available objects.
@@ -54,7 +54,7 @@ type ListAppsListsInput struct {
 
 type ListAppsListsOutput struct {
 
-	// An array of AppsListDataSummary  objects.
+	// An array of AppsListDataSummary objects.
 	AppsLists []types.AppsListDataSummary
 
 	// If you specify a value for MaxResults in your list request, and you have more
@@ -141,15 +141,15 @@ var _ ListAppsListsAPIClient = (*Client)(nil)
 
 // ListAppsListsPaginatorOptions is the paginator options for ListAppsLists
 type ListAppsListsPaginatorOptions struct {
-	// The maximum number of objects that you want Firewall Manager to return for
-	// this request. If more objects are available, in the response, Firewall Manager
+	// The maximum number of objects that you want Firewall Manager to return for this
+	// request. If more objects are available, in the response, Firewall Manager
 	// provides a NextToken value that you can use in a subsequent call to get the
 	// next batch of objects. If you don't specify this, Firewall Manager returns all
 	// available objects.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

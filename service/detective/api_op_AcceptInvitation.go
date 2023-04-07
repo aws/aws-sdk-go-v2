@@ -32,8 +32,7 @@ func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationI
 type AcceptInvitationInput struct {
 
 	// The ARN of the behavior graph that the member account is accepting the
-	// invitation for. The member account status in the behavior graph must be INVITED
-	// .
+	// invitation for. The member account status in the behavior graph must be INVITED .
 	//
 	// This member is required.
 	GraphArn *string

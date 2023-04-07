@@ -48,8 +48,8 @@ type CreateLegalHoldInput struct {
 	// a success message with no action taken.
 	IdempotencyToken *string
 
-	// This specifies criteria to assign a set of resources, such as resource types
-	// or backup vaults.
+	// This specifies criteria to assign a set of resources, such as resource types or
+	// backup vaults.
 	RecoveryPointSelection *types.RecoveryPointSelection
 
 	// Optional tags to include. A tag is a key-value pair you can use to manage,
@@ -74,8 +74,8 @@ type CreateLegalHoldOutput struct {
 	// Legal hold ID returned for the specified legal hold on a recovery point.
 	LegalHoldId *string
 
-	// This specifies criteria to assign a set of resources, such as resource types
-	// or backup vaults.
+	// This specifies criteria to assign a set of resources, such as resource types or
+	// backup vaults.
 	RecoveryPointSelection *types.RecoveryPointSelection
 
 	// This displays the status of the legal hold returned after creating the legal

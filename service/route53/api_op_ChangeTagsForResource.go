@@ -12,8 +12,7 @@ import (
 )
 
 // Adds, edits, or deletes tags for a health check or a hosted zone. For
-// information about using tags for cost allocation, see Using Cost Allocation
-// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// information about using tags for cost allocation, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the Billing and Cost Management User Guide.
 func (c *Client) ChangeTagsForResource(ctx context.Context, params *ChangeTagsForResourceInput, optFns ...func(*Options)) (*ChangeTagsForResourceOutput, error) {
 	if params == nil {
@@ -40,8 +39,8 @@ type ChangeTagsForResourceInput struct {
 	ResourceId *string
 
 	// The type of the resource.
-	//     - The resource type for health checks is healthcheck .
-	//     - The resource type for hosted zones is hostedzone .
+	//   - The resource type for health checks is healthcheck .
+	//   - The resource type for hosted zones is hostedzone .
 	//
 	// This member is required.
 	ResourceType types.TagResourceType

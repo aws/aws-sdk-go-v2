@@ -13,7 +13,7 @@ import (
 
 // Cancels a game session placement that is in PENDING status. To stop a
 // placement, provide the placement ID values. If successful, the placement is
-// moved to CANCELLED  status.
+// moved to CANCELLED status.
 func (c *Client) StopGameSessionPlacement(ctx context.Context, params *StopGameSessionPlacementInput, optFns ...func(*Options)) (*StopGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &StopGameSessionPlacementInput{}

@@ -55,7 +55,7 @@ type AssociateResourceResponseElement struct {
 	// The resource ARN that was associated to the custom line item.
 	Arn *string
 
-	// An AssociateResourceError  that will populate if the resource association fails.
+	// An AssociateResourceError that will populate if the resource association fails.
 	Error *AssociateResourceError
 
 	noSmithyDocumentSerde
@@ -176,8 +176,8 @@ type CustomLineItemBillingPeriodRange struct {
 	noSmithyDocumentSerde
 }
 
-// The charge details of a custom line item. It should contain only one of Flat
-// or Percentage .
+// The charge details of a custom line item. It should contain only one of Flat or
+// Percentage .
 type CustomLineItemChargeDetails struct {
 
 	// The type of the custom line item that indicates whether the charge is a fee or
@@ -222,8 +222,8 @@ type CustomLineItemListElement struct {
 	// custom line item applies to.
 	BillingGroupArn *string
 
-	// A ListCustomLineItemChargeDetails that describes the charge details of a
-	// custom line item.
+	// A ListCustomLineItemChargeDetails that describes the charge details of a custom
+	// line item.
 	ChargeDetails *ListCustomLineItemChargeDetails
 
 	// The time created.
@@ -268,8 +268,7 @@ type CustomLineItemPercentageChargeDetails struct {
 // A representation of a custom line item version.
 type CustomLineItemVersionListElement struct {
 
-	// A list of custom line item Amazon Resource Names (ARNs) to retrieve
-	// information.
+	// A list of custom line item Amazon Resource Names (ARNs) to retrieve information.
 	Arn *string
 
 	// The number of resources that are associated with the custom line item.
@@ -318,7 +317,7 @@ type DisassociateResourceResponseElement struct {
 	// The resource ARN that was disassociated from the custom line item.
 	Arn *string
 
-	// An AssociateResourceError  that's shown if the resource disassociation fails.
+	// An AssociateResourceError that's shown if the resource disassociation fails.
 	Error *AssociateResourceError
 
 	noSmithyDocumentSerde
@@ -336,9 +335,9 @@ type FreeTierConfig struct {
 }
 
 // The filter on the account ID of the linked account, or any of the following:
-// MONITORED : linked accounts that are associated to billing groups. UNMONITORED
-// : linked accounts that are not associated to billing groups. Billing Group Arn
-// : linked accounts that are associated to the provided Billing Group Arn.
+// MONITORED : linked accounts that are associated to billing groups. UNMONITORED :
+// linked accounts that are not associated to billing groups. Billing Group Arn :
+// linked accounts that are associated to the provided Billing Group Arn.
 type ListAccountAssociationsFilter struct {
 
 	// The Amazon Web Services account ID to filter on.
@@ -348,9 +347,9 @@ type ListAccountAssociationsFilter struct {
 	// for a given time range.
 	AccountIds []string
 
-	// MONITORED : linked accounts that are associated to billing groups. UNMONITORED
-	// : linked accounts that are not associated to billing groups. Billing Group Arn
-	// : linked accounts that are associated to the provided Billing Group Arn.
+	// MONITORED : linked accounts that are associated to billing groups. UNMONITORED :
+	// linked accounts that are not associated to billing groups. Billing Group Arn :
+	// linked accounts that are associated to the provided Billing Group Arn.
 	Association *string
 
 	noSmithyDocumentSerde
@@ -386,7 +385,7 @@ type ListBillingGroupsFilter struct {
 // A representation of the charge details of a custom line item.
 type ListCustomLineItemChargeDetails struct {
 
-	// The type of the custom line item that indicates whether the charge is a fee  or
+	// The type of the custom line item that indicates whether the charge is a fee or
 	// credit .
 	//
 	// This member is required.
@@ -469,8 +468,8 @@ type ListCustomLineItemVersionsFilter struct {
 	noSmithyDocumentSerde
 }
 
-// The filter that specifies the Amazon Resource Names (ARNs) of pricing plans,
-// to retrieve pricing plan information.
+// The filter that specifies the Amazon Resource Names (ARNs) of pricing plans, to
+// retrieve pricing plan information.
 type ListPricingPlansFilter struct {
 
 	// A list of pricing plan Amazon Resource Names (ARNs) to retrieve information.
@@ -536,8 +535,8 @@ type PricingPlanListElement struct {
 	// The name of a pricing plan.
 	Name *string
 
-	// The pricing rules count that's currently associated with this pricing plan
-	// list element.
+	// The pricing rules count that's currently associated with this pricing plan list
+	// element.
 	Size int64
 
 	noSmithyDocumentSerde
@@ -571,18 +570,18 @@ type PricingRuleListElement struct {
 	// The name of a pricing rule.
 	Name *string
 
-	// Operation is the specific Amazon Web Services action covered by this line
-	// item. This describes the specific usage of the line item. If the Scope
-	// attribute is set to SKU , this attribute indicates which operation the
-	// PricingRule is modifying. For example, a value of RunInstances:0202 indicates
-	// the operation of running an Amazon EC2 instance.
+	// Operation is the specific Amazon Web Services action covered by this line item.
+	// This describes the specific usage of the line item. If the Scope attribute is
+	// set to SKU , this attribute indicates which operation the PricingRule is
+	// modifying. For example, a value of RunInstances:0202 indicates the operation of
+	// running an Amazon EC2 instance.
 	Operation *string
 
-	// The scope of pricing rule that indicates if it is globally applicable, or if
-	// it is service-specific.
+	// The scope of pricing rule that indicates if it is globally applicable, or if it
+	// is service-specific.
 	Scope PricingRuleScope
 
-	// If the Scope  attribute is SERVICE , this attribute indicates which service the
+	// If the Scope attribute is SERVICE , this attribute indicates which service the
 	// PricingRule is applicable for.
 	Service *string
 
@@ -593,10 +592,10 @@ type PricingRuleListElement struct {
 	Type PricingRuleType
 
 	// Usage type is the unit that each service uses to measure the usage of a
-	// specific type of resource. If the Scope  attribute is set to SKU, this
-	// attribute indicates which usage type the PricingRule is modifying. For
-	// example, USW2-BoxUsage:m2.2xlarge  describes an M2 High Memory Double Extra
-	// Large instance in the US West (Oregon) Region.
+	// specific type of resource. If the Scope attribute is set to SKU , this attribute
+	// indicates which usage type the PricingRule is modifying. For example,
+	// USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large
+	// instance in the US West (Oregon) Region.
 	UsageType *string
 
 	noSmithyDocumentSerde
@@ -614,7 +613,7 @@ type Tiering struct {
 }
 
 // A representation of the new charge details of a custom line item. This should
-// contain only one of Flat  or Percentage .
+// contain only one of Flat or Percentage .
 type UpdateCustomLineItemChargeDetails struct {
 
 	// An UpdateCustomLineItemFlatChargeDetails that describes the new charge details

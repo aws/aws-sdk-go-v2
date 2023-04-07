@@ -14,9 +14,8 @@ import (
 // action returns the message payload of the retained message, which can incur
 // messaging costs. To list only the topic names of the retained messages, call
 // ListRetainedMessages . Requires permission to access the GetRetainedMessage (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions)
-// action. For more information about messaging costs, see Amazon Web Services
-// IoT Core pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging)
-// .
+// action. For more information about messaging costs, see Amazon Web Services IoT
+// Core pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging) .
 func (c *Client) GetRetainedMessage(ctx context.Context, params *GetRetainedMessageInput, optFns ...func(*Options)) (*GetRetainedMessageOutput, error) {
 	if params == nil {
 		params = &GetRetainedMessageInput{}

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the ability of the specified Amazon Web Services account to restore
-// the specified snapshot. If the account is currently restoring the snapshot, the
+// Removes the ability of the specified Amazon Web Services account to restore the
+// specified snapshot. If the account is currently restoring the snapshot, the
 // restore will run to completion. For more information about working with
 // snapshots, go to Amazon Redshift Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.

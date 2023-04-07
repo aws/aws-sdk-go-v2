@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Fargate profile. When you delete a Fargate profile, any pods
-// running on Fargate that were created with the profile are deleted. If those pods
-// match another Fargate profile, then they are scheduled on Fargate with that
-// profile. If they no longer match any Fargate profiles, then they are not
-// scheduled on Fargate and they may remain in a pending state. Only one Fargate
-// profile in a cluster can be in the DELETING status at a time. You must wait
-// for a Fargate profile to finish deleting before you can delete any other
-// profiles in that cluster.
+// Deletes an Fargate profile. When you delete a Fargate profile, any pods running
+// on Fargate that were created with the profile are deleted. If those pods match
+// another Fargate profile, then they are scheduled on Fargate with that profile.
+// If they no longer match any Fargate profiles, then they are not scheduled on
+// Fargate and they may remain in a pending state. Only one Fargate profile in a
+// cluster can be in the DELETING status at a time. You must wait for a Fargate
+// profile to finish deleting before you can delete any other profiles in that
+// cluster.
 func (c *Client) DeleteFargateProfile(ctx context.Context, params *DeleteFargateProfileInput, optFns ...func(*Options)) (*DeleteFargateProfileOutput, error) {
 	if params == nil {
 		params = &DeleteFargateProfileInput{}

@@ -23,8 +23,8 @@ import (
 // of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
 // . You must also associate the security group with a cluster so that clients
 // running on these IP addresses or the EC2 instance are authorized to connect to
-// the cluster. For information about managing security groups, go to Working
-// with Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// the cluster. For information about managing security groups, go to Working with
+// Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) AuthorizeClusterSecurityGroupIngress(ctx context.Context, params *AuthorizeClusterSecurityGroupIngressInput, optFns ...func(*Options)) (*AuthorizeClusterSecurityGroupIngressOutput, error) {
 	if params == nil {

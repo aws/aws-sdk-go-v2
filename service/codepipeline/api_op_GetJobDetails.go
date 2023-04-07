@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a job. Used for custom actions only. When this API
-// is called, AWS CodePipeline returns temporary credentials for the S3 bucket used
-// to store artifacts for the pipeline, if the action requires access to that S3
+// Returns information about a job. Used for custom actions only. When this API is
+// called, AWS CodePipeline returns temporary credentials for the S3 bucket used to
+// store artifacts for the pipeline, if the action requires access to that S3
 // bucket for input or output artifacts. This API also returns any secret values
 // defined for the action.
 func (c *Client) GetJobDetails(ctx context.Context, params *GetJobDetailsInput, optFns ...func(*Options)) (*GetJobDetailsOutput, error) {
@@ -31,7 +31,7 @@ func (c *Client) GetJobDetails(ctx context.Context, params *GetJobDetailsInput, 
 	return out, nil
 }
 
-// Represents the input of a GetJobDetails  action.
+// Represents the input of a GetJobDetails action.
 type GetJobDetailsInput struct {
 
 	// The unique system-generated ID for the job.
@@ -42,11 +42,11 @@ type GetJobDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetJobDetails  action.
+// Represents the output of a GetJobDetails action.
 type GetJobDetailsOutput struct {
 
 	// The details of the job. If AWSSessionCredentials is used, a long-running job
-	// can call GetJobDetails  again to obtain new credentials.
+	// can call GetJobDetails again to obtain new credentials.
 	JobDetails *types.JobDetails
 
 	// Metadata pertaining to the operation's result.

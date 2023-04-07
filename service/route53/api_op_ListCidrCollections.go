@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of CIDR collections in the Amazon Web Services
-// account (metadata only).
+// Returns a paginated list of CIDR collections in the Amazon Web Services account
+// (metadata only).
 func (c *Client) ListCidrCollections(ctx context.Context, params *ListCidrCollectionsInput, optFns ...func(*Options)) (*ListCidrCollectionsOutput, error) {
 	if params == nil {
 		params = &ListCidrCollectionsInput{}
@@ -132,8 +132,8 @@ type ListCidrCollectionsPaginatorOptions struct {
 	// The maximum number of CIDR collections to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

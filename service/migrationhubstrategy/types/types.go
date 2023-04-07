@@ -400,8 +400,8 @@ type ConfigurationSummary struct {
 // Configuration information used for assessing databases.
 type DatabaseConfigDetail struct {
 
-	// AWS Secrets Manager key that holds the credentials that you use to connect to
-	// a database.
+	// AWS Secrets Manager key that holds the credentials that you use to connect to a
+	// database.
 	SecretName *string
 
 	noSmithyDocumentSerde
@@ -490,8 +490,8 @@ type DataCollectionDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The object containing information about distinct imports or groups for
-// Strategy Recommendations.
+// The object containing information about distinct imports or groups for Strategy
+// Recommendations.
 type Group struct {
 
 	// The key of the specific import group.
@@ -625,8 +625,7 @@ type NetworkInfo struct {
 	// This member is required.
 	InterfaceName *string
 
-	// Information about the IP address of the server for which the assessment was
-	// run.
+	// Information about the IP address of the server for which the assessment was run.
 	//
 	// This member is required.
 	IpAddress *string

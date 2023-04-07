@@ -15,9 +15,9 @@ import (
 // Gets the current status and future status of all offerings purchased by an AWS
 // account. The response indicates how many offerings are currently available and
 // the offerings that will be available in the next period. The API returns a
-// NotEligibleerror if the user is not permitted to invoke the operation. If you
-// must be able to invoke this operation, contact
-// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com) .
+// NotEligible error if the user is not permitted to invoke the operation. If you
+// must be able to invoke this operation, contact aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
+// .
 func (c *Client) GetOfferingStatus(ctx context.Context, params *GetOfferingStatusInput, optFns ...func(*Options)) (*GetOfferingStatusOutput, error) {
 	if params == nil {
 		params = &GetOfferingStatusInput{}
@@ -37,8 +37,8 @@ func (c *Client) GetOfferingStatus(ctx context.Context, params *GetOfferingStatu
 // customer or account.
 type GetOfferingStatusInput struct {
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,8 +53,8 @@ type GetOfferingStatusOutput struct {
 	// When specified, gets the offering status for the next period.
 	NextPeriod map[string]types.OfferingStatus
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -131,11 +131,10 @@ type GetOfferingStatusAPIClient interface {
 
 var _ GetOfferingStatusAPIClient = (*Client)(nil)
 
-// GetOfferingStatusPaginatorOptions is the paginator options for
-// GetOfferingStatus
+// GetOfferingStatusPaginatorOptions is the paginator options for GetOfferingStatus
 type GetOfferingStatusPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

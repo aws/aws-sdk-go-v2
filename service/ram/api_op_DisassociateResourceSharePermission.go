@@ -60,11 +60,11 @@ type DisassociateResourceSharePermissionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
 	// the same operation in an idempotent manner then you must include this value in
-	// the clientToken request parameter of that later call. All other parameters
-	// must also have the same values that you used in the first call.
+	// the clientToken request parameter of that later call. All other parameters must
+	// also have the same values that you used in the first call.
 	ClientToken *string
 
-	// A return value of true  indicates that the request succeeded. A value of false
+	// A return value of true indicates that the request succeeded. A value of false
 	// indicates that the request failed.
 	ReturnValue *bool
 

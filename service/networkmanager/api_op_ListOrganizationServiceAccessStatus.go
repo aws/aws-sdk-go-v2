@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the status of the Service Linked Role (SLR) deployment for the accounts
-// in a given Amazon Web Services Organization.
+// Gets the status of the Service Linked Role (SLR) deployment for the accounts in
+// a given Amazon Web Services Organization.
 func (c *Client) ListOrganizationServiceAccessStatus(ctx context.Context, params *ListOrganizationServiceAccessStatusInput, optFns ...func(*Options)) (*ListOrganizationServiceAccessStatusOutput, error) {
 	if params == nil {
 		params = &ListOrganizationServiceAccessStatusInput{}

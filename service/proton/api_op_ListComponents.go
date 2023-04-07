@@ -33,9 +33,8 @@ func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput
 
 type ListComponentsInput struct {
 
-	// The name of an environment for result list filtering. Proton returns
-	// components associated with the environment or attached to service instances
-	// running in it.
+	// The name of an environment for result list filtering. Proton returns components
+	// associated with the environment or attached to service instances running in it.
 	EnvironmentName *string
 
 	// The maximum number of components to list.
@@ -146,8 +145,8 @@ type ListComponentsPaginatorOptions struct {
 	// The maximum number of components to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

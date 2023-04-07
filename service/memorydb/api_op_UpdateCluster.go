@@ -42,24 +42,24 @@ type UpdateClusterInput struct {
 	// The description of the cluster to update
 	Description *string
 
-	// The upgraded version of the engine to be run on the nodes. You can upgrade to
-	// a newer engine version, but you cannot downgrade to an earlier engine version.
-	// If you want to use an earlier engine version, you must delete the existing
-	// cluster and create it anew with the earlier engine version.
+	// The upgraded version of the engine to be run on the nodes. You can upgrade to a
+	// newer engine version, but you cannot downgrade to an earlier engine version. If
+	// you want to use an earlier engine version, you must delete the existing cluster
+	// and create it anew with the earlier engine version.
 	EngineVersion *string
 
 	// Specifies the weekly time range during which maintenance on the cluster is
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
-	// for ddd  are:
-	//     - sun
-	//     - mon
-	//     - tue
-	//     - wed
-	//     - thu
-	//     - fri
-	//     - sat
-	//  Example: sun:23:00-mon:01:30
+	// for ddd are:
+	//   - sun
+	//   - mon
+	//   - tue
+	//   - wed
+	//   - thu
+	//   - fri
+	//   - sat
+	// Example: sun:23:00-mon:01:30
 	MaintenanceWindow *string
 
 	// A valid node type that you want to scale this cluster up or down to.
@@ -89,8 +89,8 @@ type UpdateClusterInput struct {
 	// The SNS topic ARN to update
 	SnsTopicArn *string
 
-	// The status of the Amazon SNS notification topic. Notifications are sent only
-	// if the status is active.
+	// The status of the Amazon SNS notification topic. Notifications are sent only if
+	// the status is active.
 	SnsTopicStatus *string
 
 	noSmithyDocumentSerde

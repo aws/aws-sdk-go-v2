@@ -22,13 +22,12 @@ import (
 //   - MatchmakingConfiguration
 //   - MatchmakingRuleSet
 //
-// To remove a tag from a resource, specify the unique
-// ARN value for the resource and provide a string list containing one or more tags
-// to be removed. This operation succeeds even if the list includes tags that are
-// not currently assigned to the specified resource. Learn more Tagging Amazon
-// Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-// in the Amazon Web Services General Reference Amazon Web Services Tagging
-// Strategies (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
+// To remove a tag from a resource, specify the unique ARN value for the resource
+// and provide a string list containing one or more tags to be removed. This
+// operation succeeds even if the list includes tags that are not currently
+// assigned to the specified resource. Learn more Tagging Amazon Web Services
+// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
+// the Amazon Web Services General Reference Amazon Web Services Tagging Strategies (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
 // Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {

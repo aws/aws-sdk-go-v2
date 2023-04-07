@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the MFA devices for an IAM user. If the request includes a IAM user
-// name, then this operation lists all the MFA devices associated with the
-// specified user. If you do not specify a user name, IAM determines the user name
-// implicitly based on the Amazon Web Services access key ID signing the request
-// for this operation. You can paginate the results using the MaxItems  and Marker
+// Lists the MFA devices for an IAM user. If the request includes a IAM user name,
+// then this operation lists all the MFA devices associated with the specified
+// user. If you do not specify a user name, IAM determines the user name implicitly
+// based on the Amazon Web Services access key ID signing the request for this
+// operation. You can paginate the results using the MaxItems and Marker
 // parameters.
 func (c *Client) ListMFADevices(ctx context.Context, params *ListMFADevicesInput, optFns ...func(*Options)) (*ListMFADevicesOutput, error) {
 	if params == nil {
@@ -37,13 +37,13 @@ type ListMFADevicesInput struct {
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
-	// Markerelement in the response that you received to indicate where the next
-	// call should start.
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
 	Marker *string
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
@@ -51,7 +51,7 @@ type ListMFADevicesInput struct {
 	MaxItems *int32
 
 	// The name of the user whose MFA devices you want to list. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string
@@ -59,7 +59,7 @@ type ListMFADevicesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListMFADevices  request.
+// Contains the response to a successful ListMFADevices request.
 type ListMFADevicesOutput struct {
 
 	// A list of MFA devices.
@@ -75,8 +75,8 @@ type ListMFADevicesOutput struct {
 	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated  is true, this element is present and contains the value to
-	// use for the Marker  parameter in a subsequent pagination request.
+	// When IsTruncated is true , this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -157,15 +157,15 @@ var _ ListMFADevicesAPIClient = (*Client)(nil)
 type ListMFADevicesPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,12 +12,12 @@ import (
 )
 
 // Requests the cancellation of a calculation. A StopCalculationExecution call on
-// a calculation that is already in a terminal state (for example, STOPPED ,
-// FAILED , or COMPLETED) succeeds but has no effect. Cancelling a calculation is
-// done on a best effort basis. If a calculation cannot be cancelled, you can be
-// charged for its completion. If you are concerned about being charged for a
-// calculation that cannot be cancelled, consider terminating the session in which
-// the calculation is running.
+// a calculation that is already in a terminal state (for example, STOPPED , FAILED
+// , or COMPLETED ) succeeds but has no effect. Cancelling a calculation is done on
+// a best effort basis. If a calculation cannot be cancelled, you can be charged
+// for its completion. If you are concerned about being charged for a calculation
+// that cannot be cancelled, consider terminating the session in which the
+// calculation is running.
 func (c *Client) StopCalculationExecution(ctx context.Context, params *StopCalculationExecutionInput, optFns ...func(*Options)) (*StopCalculationExecutionOutput, error) {
 	if params == nil {
 		params = &StopCalculationExecutionInput{}
@@ -45,13 +45,13 @@ type StopCalculationExecutionInput struct {
 
 type StopCalculationExecutionOutput struct {
 
-	// CREATING  - The calculation is in the process of being created. CREATED - The
+	// CREATING - The calculation is in the process of being created. CREATED - The
 	// calculation has been created and is ready to run. QUEUED - The calculation has
-	// been queued for processing. RUNNING  - The calculation is running. CANCELING -
-	// A request to cancel the calculation has been received and the system is working
-	// to stop it. CANCELED - The calculation is no longer running as the result of a
-	// cancel request. COMPLETED  - The calculation has completed without error.
-	// FAILED - The calculation failed and is no longer running.
+	// been queued for processing. RUNNING - The calculation is running. CANCELING - A
+	// request to cancel the calculation has been received and the system is working to
+	// stop it. CANCELED - The calculation is no longer running as the result of a
+	// cancel request. COMPLETED - The calculation has completed without error. FAILED
+	// - The calculation failed and is no longer running.
 	State types.CalculationExecutionState
 
 	// Metadata pertaining to the operation's result.

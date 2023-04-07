@@ -28,13 +28,13 @@ func (c *Client) UpgradeElasticsearchDomain(ctx context.Context, params *Upgrade
 	return out, nil
 }
 
-// Container for request parameters to UpgradeElasticsearchDomain  operation.
+// Container for request parameters to UpgradeElasticsearchDomain operation.
 type UpgradeElasticsearchDomainInput struct {
 
-	// The name of an Elasticsearch domain. Domain names are unique across the
-	// domains owned by an account within an AWS region. Domain names start with a
-	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
-	// and - (hyphen).
+	// The name of an Elasticsearch domain. Domain names are unique across the domains
+	// owned by an account within an AWS region. Domain names start with a letter or
+	// number and can contain the following characters: a-z (lowercase), 0-9, and -
+	// (hyphen).
 	//
 	// This member is required.
 	DomainName *string
@@ -51,16 +51,16 @@ type UpgradeElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response returned by UpgradeElasticsearchDomain  operation.
+// Container for response returned by UpgradeElasticsearchDomain operation.
 type UpgradeElasticsearchDomainOutput struct {
 
 	// Specifies change details of the domain configuration change.
 	ChangeProgressDetails *types.ChangeProgressDetails
 
-	// The name of an Elasticsearch domain. Domain names are unique across the
-	// domains owned by an account within an AWS region. Domain names start with a
-	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
-	// and - (hyphen).
+	// The name of an Elasticsearch domain. Domain names are unique across the domains
+	// owned by an account within an AWS region. Domain names start with a letter or
+	// number and can contain the following characters: a-z (lowercase), 0-9, and -
+	// (hyphen).
 	DomainName *string
 
 	// This flag, when set to True, indicates that an Upgrade Eligibility Check needs

@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development
-// Dev Environment that you can use to quickly work on the code stored in the
-// source repositories of your project. When created in the Amazon CodeCatalyst
-// console, by default a Dev Environment is configured to have a 2 core processor,
-// 4GB of RAM, and 16GB of persistent storage. None of these defaults apply to a
-// Dev Environment created programmatically.
+// Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development Dev
+// Environment that you can use to quickly work on the code stored in the source
+// repositories of your project. When created in the Amazon CodeCatalyst console,
+// by default a Dev Environment is configured to have a 2 core processor, 4GB of
+// RAM, and 16GB of persistent storage. None of these defaults apply to a Dev
+// Environment created programmatically.
 func (c *Client) CreateDevEnvironment(ctx context.Context, params *CreateDevEnvironmentInput, optFns ...func(*Options)) (*CreateDevEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateDevEnvironmentInput{}
@@ -66,8 +66,8 @@ type CreateDevEnvironmentInput struct {
 	// original successful request and have no additional effect.
 	ClientToken *string
 
-	// Information about the integrated development environment (IDE) configured for
-	// a Dev Environment. An IDE is required to create a Dev Environment. For Dev
+	// Information about the integrated development environment (IDE) configured for a
+	// Dev Environment. An IDE is required to create a Dev Environment. For Dev
 	// Environment creation, this field contains configuration information and must be
 	// provided.
 	Ides []types.IdeConfiguration

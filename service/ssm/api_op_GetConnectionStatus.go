@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the Session Manager connection status for a managed node to
-// determine whether it is running and ready to receive Session Manager
-// connections.
+// Retrieves the Session Manager connection status for a managed node to determine
+// whether it is running and ready to receive Session Manager connections.
 func (c *Client) GetConnectionStatus(ctx context.Context, params *GetConnectionStatusInput, optFns ...func(*Options)) (*GetConnectionStatusOutput, error) {
 	if params == nil {
 		params = &GetConnectionStatusInput{}

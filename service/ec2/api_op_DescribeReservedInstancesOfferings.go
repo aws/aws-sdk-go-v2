@@ -49,15 +49,31 @@ type DescribeReservedInstancesOfferingsInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//     - availability-zone - The Availability Zone where the Reserved Instance can be used.
-	//     - duration - The duration of the Reserved Instance (for example, one year or three years), in seconds ( 31536000 | 94608000 ).
-	//     - fixed-price - The purchase price of the Reserved Instance (for example, 9800.0).
-	//     - instance-type - The instance type that is covered by the reservation.
-	//     - marketplace - Set to true to show only Reserved Instance Marketplace offerings. When this filter is not used, which is the default behavior, all offerings from both Amazon Web Services and the Reserved Instance Marketplace are listed.
-	//     - product-description - The Reserved Instance product platform description. Instances that include (Amazon VPC) in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. ( Linux/UNIX | Linux/UNIX (Amazon VPC) | SUSE Linux | SUSE Linux (Amazon VPC) | Red Hat Enterprise Linux | Red Hat Enterprise Linux (Amazon VPC) | Red Hat Enterprise Linux with HA (Amazon VPC) | Windows | Windows (Amazon VPC) | Windows with SQL Server Standard | Windows with SQL Server Standard (Amazon VPC) | Windows with SQL Server Web | Windows with SQL Server Web (Amazon VPC) | Windows with SQL Server Enterprise | Windows with SQL Server Enterprise (Amazon VPC) )
-	//     - reserved-instances-offering-id - The Reserved Instances offering ID.
-	//     - scope - The scope of the Reserved Instance ( Availability Zone or Region ).
-	//     - usage-price - The usage price of the Reserved Instance, per hour (for example, 0.84).
+	//   - availability-zone - The Availability Zone where the Reserved Instance can be
+	//   used.
+	//   - duration - The duration of the Reserved Instance (for example, one year or
+	//   three years), in seconds ( 31536000 | 94608000 ).
+	//   - fixed-price - The purchase price of the Reserved Instance (for example,
+	//   9800.0).
+	//   - instance-type - The instance type that is covered by the reservation.
+	//   - marketplace - Set to true to show only Reserved Instance Marketplace
+	//   offerings. When this filter is not used, which is the default behavior, all
+	//   offerings from both Amazon Web Services and the Reserved Instance Marketplace
+	//   are listed.
+	//   - product-description - The Reserved Instance product platform description.
+	//   Instances that include (Amazon VPC) in the product platform description will
+	//   only be displayed to EC2-Classic account holders and are for use with Amazon
+	//   VPC. ( Linux/UNIX | Linux/UNIX (Amazon VPC) | SUSE Linux | SUSE Linux (Amazon
+	//   VPC) | Red Hat Enterprise Linux | Red Hat Enterprise Linux (Amazon VPC) | Red
+	//   Hat Enterprise Linux with HA (Amazon VPC) | Windows | Windows (Amazon VPC) |
+	//   Windows with SQL Server Standard | Windows with SQL Server Standard (Amazon
+	//   VPC) | Windows with SQL Server Web | Windows with SQL Server Web (Amazon VPC)
+	//   | Windows with SQL Server Enterprise | Windows with SQL Server Enterprise
+	//   (Amazon VPC) )
+	//   - reserved-instances-offering-id - The Reserved Instances offering ID.
+	//   - scope - The scope of the Reserved Instance ( Availability Zone or Region ).
+	//   - usage-price - The usage price of the Reserved Instance, per hour (for
+	//   example, 0.84).
 	Filters []types.Filter
 
 	// Include Reserved Instance Marketplace offerings in the response.
@@ -66,11 +82,11 @@ type DescribeReservedInstancesOfferingsInput struct {
 	// The tenancy of the instances covered by the reservation. A Reserved Instance
 	// with a tenancy of dedicated is applied to instances that run in a VPC on
 	// single-tenant hardware (i.e., Dedicated Instances). Important: The host value
-	// cannot be used with this parameter. Use the default  or dedicated values only.
+	// cannot be used with this parameter. Use the default or dedicated values only.
 	// Default: default
 	InstanceTenancy types.Tenancy
 
-	// The instance type that the reservation will cover (for example, m1.small). For
+	// The instance type that the reservation will cover (for example, m1.small ). For
 	// more information, see Instance types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
 	// in the Amazon EC2 User Guide.
 	InstanceType types.InstanceType
@@ -85,7 +101,7 @@ type DescribeReservedInstancesOfferingsInput struct {
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
-	// with the returned NextToken  value. The maximum is 100. Default: 100
+	// with the returned NextToken value. The maximum is 100. Default: 100
 	MaxResults *int32
 
 	// The minimum duration (in seconds) to filter when searching for offerings.
@@ -95,12 +111,12 @@ type DescribeReservedInstancesOfferingsInput struct {
 	// The token to retrieve the next page of results.
 	NextToken *string
 
-	// The offering class of the Reserved Instance. Can be standard  or convertible .
+	// The offering class of the Reserved Instance. Can be standard or convertible .
 	OfferingClass types.OfferingClassType
 
 	// The Reserved Instance offering type. If you are using tools that predate the
-	// 2011-11-01 API version, you only have access to the Medium Utilization
-	// Reserved Instance offering type.
+	// 2011-11-01 API version, you only have access to the Medium Utilization Reserved
+	// Instance offering type.
 	OfferingType types.OfferingTypeValues
 
 	// The Reserved Instance product platform description. Instances that include
@@ -197,16 +213,16 @@ type DescribeReservedInstancesOfferingsAPIClient interface {
 
 var _ DescribeReservedInstancesOfferingsAPIClient = (*Client)(nil)
 
-// DescribeReservedInstancesOfferingsPaginatorOptions is the paginator options
-// for DescribeReservedInstancesOfferings
+// DescribeReservedInstancesOfferingsPaginatorOptions is the paginator options for
+// DescribeReservedInstancesOfferings
 type DescribeReservedInstancesOfferingsPaginatorOptions struct {
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
-	// with the returned NextToken  value. The maximum is 100. Default: 100
+	// with the returned NextToken value. The maximum is 100. Default: 100
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -30,8 +30,8 @@ func (c *Client) PutConfigurationSetDeliveryOptions(ctx context.Context, params 
 // A request to modify the delivery options for a configuration set.
 type PutConfigurationSetDeliveryOptionsInput struct {
 
-	// The name of the configuration set that you want to specify the delivery
-	// options for.
+	// The name of the configuration set that you want to specify the delivery options
+	// for.
 	//
 	// This member is required.
 	ConfigurationSetName *string

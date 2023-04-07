@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of the Policy  object.
+// Returns an array of the Policy object.
 func (c *Client) GetResourcePolicies(ctx context.Context, params *GetResourcePoliciesInput, optFns ...func(*Options)) (*GetResourcePoliciesOutput, error) {
 	if params == nil {
 		params = &GetResourcePoliciesInput{}
@@ -51,7 +51,7 @@ type GetResourcePoliciesOutput struct {
 	// set of results.
 	NextToken *string
 
-	// An array of the Policy  object.
+	// An array of the Policy object.
 	Policies []types.GetResourcePoliciesResponseEntry
 
 	// Metadata pertaining to the operation's result.
@@ -138,8 +138,8 @@ type GetResourcePoliciesPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

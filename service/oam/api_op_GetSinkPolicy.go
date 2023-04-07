@@ -46,8 +46,7 @@ type GetSinkPolicyOutput struct {
 	// The ARN of the sink.
 	SinkArn *string
 
-	// The random ID string that Amazon Web Services generated as part of the sink
-	// ARN.
+	// The random ID string that Amazon Web Services generated as part of the sink ARN.
 	SinkId *string
 
 	// Metadata pertaining to the operation's result.

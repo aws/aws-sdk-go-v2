@@ -45,8 +45,8 @@ type GetCalculationExecutionOutput struct {
 	// The description of the calculation execution.
 	Description *string
 
-	// Contains result information. This field is populated only if the calculation
-	// is completed.
+	// Contains result information. This field is populated only if the calculation is
+	// completed.
 	Result *types.CalculationResult
 
 	// The session ID that the calculation ran in.

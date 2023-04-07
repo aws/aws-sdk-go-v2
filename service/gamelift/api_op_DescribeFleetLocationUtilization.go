@@ -15,7 +15,7 @@ import (
 // snapshot of current game hosting activity at the requested location. Use this
 // operation to retrieve utilization information for a fleet's remote location or
 // home Region (you can also retrieve home Region utilization by calling
-// DescribeFleetUtilization). To retrieve utilization data, identify a fleet and
+// DescribeFleetUtilization ). To retrieve utilization data, identify a fleet and
 // location. If successful, a FleetUtilization object is returned for the
 // requested fleet location. Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // GameLift metrics for fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)

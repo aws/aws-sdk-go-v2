@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the details of the host key that's specified by the HostKeyId  and
+// Returns the details of the host key that's specified by the HostKeyId and
 // ServerId .
 func (c *Client) DescribeHostKey(ctx context.Context, params *DescribeHostKeyInput, optFns ...func(*Options)) (*DescribeHostKeyOutput, error) {
 	if params == nil {
@@ -35,8 +35,7 @@ type DescribeHostKeyInput struct {
 	// This member is required.
 	HostKeyId *string
 
-	// The identifier of the server that contains the host key that you want
-	// described.
+	// The identifier of the server that contains the host key that you want described.
 	//
 	// This member is required.
 	ServerId *string

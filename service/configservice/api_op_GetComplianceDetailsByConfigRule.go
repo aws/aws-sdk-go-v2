@@ -38,9 +38,9 @@ type GetComplianceDetailsByConfigRuleInput struct {
 	// This member is required.
 	ConfigRuleName *string
 
-	// Filters the results by compliance. INSUFFICIENT_DATA  is a valid ComplianceType
+	// Filters the results by compliance. INSUFFICIENT_DATA is a valid ComplianceType
 	// that is returned when an Config rule cannot be evaluated. However,
-	// INSUFFICIENT_DATA cannot be used as a ComplianceType  for filtering results.
+	// INSUFFICIENT_DATA cannot be used as a ComplianceType for filtering results.
 	ComplianceTypes []types.ComplianceType
 
 	// The maximum number of evaluation results returned on each page. The default is
@@ -61,8 +61,8 @@ type GetComplianceDetailsByConfigRuleOutput struct {
 	// Config rule.
 	EvaluationResults []types.EvaluationResult
 
-	// The string that you use in a subsequent request to get the next page of
-	// results in a paginated response.
+	// The string that you use in a subsequent request to get the next page of results
+	// in a paginated response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,8 +150,8 @@ type GetComplianceDetailsByConfigRulePaginatorOptions struct {
 	// the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

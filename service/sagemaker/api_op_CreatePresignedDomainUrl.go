@@ -23,7 +23,7 @@ import (
 // Endpoints that you specify. For more information, see Connect to SageMaker
 // Studio Through an Interface VPC Endpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html)
 // . The URL that you get from a call to CreatePresignedDomainUrl has a default
-// timeout of 5 minutes. You can configure this value using ExpiresInSeconds. If
+// timeout of 5 minutes. You can configure this value using ExpiresInSeconds . If
 // you try to use the URL after the timeout limit expires, you are directed to the
 // Amazon Web Services console sign-in page.
 func (c *Client) CreatePresignedDomainUrl(ctx context.Context, params *CreatePresignedDomainUrlInput, optFns ...func(*Options)) (*CreatePresignedDomainUrlOutput, error) {

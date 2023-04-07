@@ -30,7 +30,7 @@ func (c *Client) AcceptInboundConnection(ctx context.Context, params *AcceptInbo
 	return out, nil
 }
 
-// Container for the parameters to the AcceptInboundConnection  operation.
+// Container for the parameters to the AcceptInboundConnection operation.
 type AcceptInboundConnectionInput struct {
 
 	// The ID of the inbound connection to accept.

@@ -36,8 +36,8 @@ type GetMigrationsInput struct {
 	// Filters the list to contain only migrations in the specified state.
 	MigrationStatusEquals types.MigrationStatus
 
-	// A pagination token that fetches the next page of migrations. If the response
-	// to this operation is truncated, Amazon Lex returns a pagination token in the
+	// A pagination token that fetches the next page of migrations. If the response to
+	// this operation is truncated, Amazon Lex returns a pagination token in the
 	// response. To fetch the next page of migrations, specify the pagination token in
 	// the request.
 	NextToken *string
@@ -49,8 +49,8 @@ type GetMigrationsInput struct {
 	// The order so sort the list.
 	SortByOrder types.SortOrder
 
-	// Filters the list to contain only bots whose name contains the specified
-	// string. The string is matched anywhere in bot name.
+	// Filters the list to contain only bots whose name contains the specified string.
+	// The string is matched anywhere in bot name.
 	V1BotNameContains *string
 
 	noSmithyDocumentSerde
@@ -59,8 +59,8 @@ type GetMigrationsInput struct {
 type GetMigrationsOutput struct {
 
 	// An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To
-	// see details of the migration, use the migrationId from the summary in a call
-	// to the operation.
+	// see details of the migration, use the migrationId from the summary in a call to
+	// the operation.
 	MigrationSummaries []types.MigrationSummary
 
 	// If the response is truncated, it includes a pagination token that you can
@@ -145,8 +145,8 @@ type GetMigrationsPaginatorOptions struct {
 	// The maximum number of migrations to return in the response. The default is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

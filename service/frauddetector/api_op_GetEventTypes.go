@@ -13,11 +13,11 @@ import (
 )
 
 // Gets all event types or a specific event type if name is provided. This is a
-// paginated API. If you provide a null maxResults, this action retrieves a
-// maximum of 10 records per page. If you provide a maxResults, the value must be
+// paginated API. If you provide a null maxResults , this action retrieves a
+// maximum of 10 records per page. If you provide a maxResults , the value must be
 // between 5 and 10. To get the next page results, provide the pagination token
-// from the GetEventTypesResponse as part of your request. A null pagination
-// token fetches the records from the beginning.
+// from the GetEventTypesResponse as part of your request. A null pagination token
+// fetches the records from the beginning.
 func (c *Client) GetEventTypes(ctx context.Context, params *GetEventTypesInput, optFns ...func(*Options)) (*GetEventTypesOutput, error) {
 	if params == nil {
 		params = &GetEventTypesInput{}
@@ -133,8 +133,8 @@ type GetEventTypesPaginatorOptions struct {
 	// The maximum number of objects to return for the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

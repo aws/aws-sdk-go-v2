@@ -12,8 +12,8 @@ import (
 )
 
 // Used for data ingestion into the FeatureStore . The PutRecord API writes to
-// both the OnlineStore  and OfflineStore. If the record is the latest record for
-// the recordIdentifier , the record is written to both the OnlineStore  and
+// both the OnlineStore and OfflineStore . If the record is the latest record for
+// the recordIdentifier , the record is written to both the OnlineStore and
 // OfflineStore . If the record is a historic record, it is written only to the
 // OfflineStore .
 func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns ...func(*Options)) (*PutRecordOutput, error) {
@@ -40,9 +40,9 @@ type PutRecordInput struct {
 
 	// List of FeatureValues to be inserted. This will be a full over-write. If you
 	// only want to update few of the feature values, do the following:
-	//     - Use GetRecord to retrieve the latest record.
-	//     - Update the record returned from GetRecord .
-	//     - Use PutRecord to update feature values.
+	//   - Use GetRecord to retrieve the latest record.
+	//   - Update the record returned from GetRecord .
+	//   - Use PutRecord to update feature values.
 	//
 	// This member is required.
 	Record []types.FeatureValue

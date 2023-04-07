@@ -29,7 +29,7 @@ func (c *Client) UpdatePackage(ctx context.Context, params *UpdatePackageInput, 
 	return out, nil
 }
 
-// Container for request parameters to the UpdatePackage  operation.
+// Container for request parameters to the UpdatePackage operation.
 type UpdatePackageInput struct {
 
 	// The unique identifier for the package.
@@ -52,7 +52,7 @@ type UpdatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by the UpdatePackage  operation.
+// Container for the response returned by the UpdatePackage operation.
 type UpdatePackageOutput struct {
 
 	// Information about a package.

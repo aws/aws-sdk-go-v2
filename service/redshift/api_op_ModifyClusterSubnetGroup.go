@@ -36,8 +36,8 @@ type ModifyClusterSubnetGroupInput struct {
 	// This member is required.
 	ClusterSubnetGroupName *string
 
-	// An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a
-	// single request.
+	// An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single
+	// request.
 	//
 	// This member is required.
 	SubnetIds []string

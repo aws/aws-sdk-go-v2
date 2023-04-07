@@ -31,10 +31,11 @@ type Domain struct {
 	// The type of lifecycle management for apps in the domain. This value indicates
 	// whether apps in this domain are managed (SimSpace Weaver starts and stops the
 	// apps) or unmanaged (you must start and stop the apps). Lifecycle types
-	//     - PerWorker – Managed: SimSpace Weaver starts 1 app on each worker
-	//     - BySpatialSubdivision – Managed: SimSpace Weaver starts 1 app for each spatial partition
-	//     - ByRequest – Unmanaged: You use the StartApp API to start the apps and use the StopApp API to stop the apps.
-	//
+	//   - PerWorker – Managed: SimSpace Weaver starts 1 app on each worker
+	//   - BySpatialSubdivision – Managed: SimSpace Weaver starts 1 app for each
+	//   spatial partition
+	//   - ByRequest – Unmanaged: You use the StartApp API to start the apps and use
+	//   the StopApp API to stop the apps.
 	// The lifecycle types will change when the service is released for general
 	// availability (GA).
 	Lifecycle LifecycleManagementStrategy
@@ -151,15 +152,15 @@ type SimulationAppMetadata struct {
 // A collection of TCP/UDP ports for a custom or service app.
 type SimulationAppPortMapping struct {
 
-	// The TCP/UDP port number of the running app. SimSpace Weaver dynamically
-	// assigns this port number when the app starts. SimSpace Weaver maps the Declared
-	// port to the Actual port. Clients connect to the app using the app's IP address
-	// and the Actual  port number.
+	// The TCP/UDP port number of the running app. SimSpace Weaver dynamically assigns
+	// this port number when the app starts. SimSpace Weaver maps the Declared port to
+	// the Actual port. Clients connect to the app using the app's IP address and the
+	// Actual port number.
 	Actual *int32
 
-	// The TCP/UDP port number of the app, declared in the simulation schema.
-	// SimSpace Weaver maps the Declared  port to the Actual port. The source code
-	// for the app should bind to the Declared  port.
+	// The TCP/UDP port number of the app, declared in the simulation schema. SimSpace
+	// Weaver maps the Declared port to the Actual port. The source code for the app
+	// should bind to the Declared port.
 	Declared *int32
 
 	noSmithyDocumentSerde

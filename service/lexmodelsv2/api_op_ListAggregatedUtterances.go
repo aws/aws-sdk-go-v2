@@ -105,17 +105,17 @@ type ListAggregatedUtterancesOutput struct {
 
 	// The last date and time that the aggregated data was collected. The time period
 	// depends on the length of the aggregation window.
-	//     - Hours - for 1 hour time window, every half hour; otherwise every hour.
-	//     - Days - every 6 hours
-	//     - Weeks - for a one week time window, every 12 hours; otherwise, every day
+	//   - Hours - for 1 hour time window, every half hour; otherwise every hour.
+	//   - Days - every 6 hours
+	//   - Weeks - for a one week time window, every 12 hours; otherwise, every day
 	AggregationLastRefreshedDateTime *time.Time
 
-	// The date and time that the aggregation window ends. Only data collected
-	// between the start time and the end time are returned in the results.
+	// The date and time that the aggregation window ends. Only data collected between
+	// the start time and the end time are returned in the results.
 	AggregationWindowEndTime *time.Time
 
-	// The date and time that the aggregation window begins. Only data collected
-	// after this time is returned in the results.
+	// The date and time that the aggregation window begins. Only data collected after
+	// this time is returned in the results.
 	AggregationWindowStartTime *time.Time
 
 	// The identifier of the bot alias that contains the utterances. If you specified
@@ -133,8 +133,8 @@ type ListAggregatedUtterancesOutput struct {
 	LocaleId *string
 
 	// A token that indicates whether there are more results to return in a response
-	// to the ListAggregatedUtterances  operation. If the nextToken field is present,
-	// you send the contents as the nextToken  parameter of a ListAggregatedUtterances
+	// to the ListAggregatedUtterances operation. If the nextToken field is present,
+	// you send the contents as the nextToken parameter of a ListAggregatedUtterances
 	// operation request to get the next page of results.
 	NextToken *string
 
@@ -224,8 +224,8 @@ type ListAggregatedUtterancesPaginatorOptions struct {
 	// returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

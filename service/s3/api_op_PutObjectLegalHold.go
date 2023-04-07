@@ -57,7 +57,7 @@ type PutObjectLegalHoldInput struct {
 	// HTTP status code 400 Bad Request . For more information, see Checking object
 	// integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide. If you provide an individual checksum, Amazon S3
-	// ignores any provided ChecksumAlgorithm  parameter.
+	// ignores any provided ChecksumAlgorithm parameter.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	// The MD5 hash for the request body. For requests made using the Amazon Web
@@ -186,8 +186,8 @@ func newServiceMetadataMiddleware_opPutObjectLegalHold(region string) *awsmiddle
 	}
 }
 
-// getPutObjectLegalHoldRequestAlgorithmMember gets the request checksum
-// algorithm value provided as input.
+// getPutObjectLegalHoldRequestAlgorithmMember gets the request checksum algorithm
+// value provided as input.
 func getPutObjectLegalHoldRequestAlgorithmMember(input interface{}) (string, bool) {
 	in := input.(*PutObjectLegalHoldInput)
 	if len(in.ChecksumAlgorithm) == 0 {

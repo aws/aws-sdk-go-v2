@@ -34,10 +34,10 @@ type ListSimulationJobBatchesInput struct {
 	// Optional filters to limit results.
 	Filters []types.Filter
 
-	// When this parameter is used, ListSimulationJobBatches  only returns maxResults
-	// results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListSimulationJobBatches request with the returned nextToken  value.
+	// When this parameter is used, ListSimulationJobBatches only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another
+	// ListSimulationJobBatches request with the returned nextToken value.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -139,14 +139,14 @@ var _ ListSimulationJobBatchesAPIClient = (*Client)(nil)
 // ListSimulationJobBatchesPaginatorOptions is the paginator options for
 // ListSimulationJobBatches
 type ListSimulationJobBatchesPaginatorOptions struct {
-	// When this parameter is used, ListSimulationJobBatches  only returns maxResults
-	// results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListSimulationJobBatches request with the returned nextToken  value.
+	// When this parameter is used, ListSimulationJobBatches only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another
+	// ListSimulationJobBatches request with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

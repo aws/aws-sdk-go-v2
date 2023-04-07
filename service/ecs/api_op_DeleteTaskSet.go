@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specified task set within a service. This is used when a service
-// uses the EXTERNAL  deployment controller type. For more information, see
-// Amazon ECS deployment types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// Deletes a specified task set within a service. This is used when a service uses
+// the EXTERNAL deployment controller type. For more information, see Amazon ECS
+// deployment types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) DeleteTaskSet(ctx context.Context, params *DeleteTaskSetInput, optFns ...func(*Options)) (*DeleteTaskSetOutput, error) {
 	if params == nil {
@@ -32,14 +32,14 @@ func (c *Client) DeleteTaskSet(ctx context.Context, params *DeleteTaskSetInput, 
 
 type DeleteTaskSetInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the service that the task set found in to delete.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// service that the task set found in to delete.
 	//
 	// This member is required.
 	Cluster *string
 
-	// The short name or full Amazon Resource Name (ARN) of the service that hosts
-	// the task set to delete.
+	// The short name or full Amazon Resource Name (ARN) of the service that hosts the
+	// task set to delete.
 	//
 	// This member is required.
 	Service *string

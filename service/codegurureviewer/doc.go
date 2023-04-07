@@ -10,10 +10,9 @@
 // detecting and providing recommendations for addressing code defects and
 // implementing best practices, CodeGuru Reviewer improves the overall quality and
 // maintainability of your code base during the code review stage. For more
-// information about CodeGuru Reviewer, see the Amazon CodeGuru Reviewer User
-// Guide (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html).
-// To improve the security of your CodeGuru Reviewer API calls, you can establish a
-// private connection between your VPC and CodeGuru Reviewer by creating an
+// information about CodeGuru Reviewer, see the Amazon CodeGuru Reviewer User Guide (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html)
+// . To improve the security of your CodeGuru Reviewer API calls, you can establish
+// a private connection between your VPC and CodeGuru Reviewer by creating an
 // interface VPC endpoint. For more information, see CodeGuru Reviewer and
 // interface VPC endpoints (Amazon Web Services PrivateLink) (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html)
 // in the Amazon CodeGuru Reviewer User Guide.

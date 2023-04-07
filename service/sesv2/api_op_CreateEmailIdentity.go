@@ -65,9 +65,9 @@ type CreateEmailIdentityInput struct {
 	// precedence.
 	ConfigurationSetName *string
 
-	// If your request includes this object, Amazon SES configures the identity to
-	// use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, or,
-	// configures the key length to be used for Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
+	// If your request includes this object, Amazon SES configures the identity to use
+	// Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, or, configures
+	// the key length to be used for Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
 	// . You can only specify this object if the email identity is a domain, as opposed
 	// to an address.
 	DkimSigningAttributes *types.DkimSigningAttributes
@@ -91,8 +91,8 @@ type CreateEmailIdentityOutput struct {
 	// supported.
 	IdentityType types.IdentityType
 
-	// Specifies whether or not the identity is verified. You can only send email
-	// from verified email addresses or domains. For more information about verifying
+	// Specifies whether or not the identity is verified. You can only send email from
+	// verified email addresses or domains. For more information about verifying
 	// identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html)
 	// .
 	VerifiedForSendingStatus bool

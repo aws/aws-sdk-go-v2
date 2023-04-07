@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the status, configuration, and other settings for
-// a journey.
+// Retrieves information about the status, configuration, and other settings for a
+// journey.
 func (c *Client) GetJourney(ctx context.Context, params *GetJourneyInput, optFns ...func(*Options)) (*GetJourneyOutput, error) {
 	if params == nil {
 		params = &GetJourneyInput{}

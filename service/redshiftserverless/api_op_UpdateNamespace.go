@@ -14,7 +14,7 @@ import (
 // Updates a namespace with the specified settings. Unless required, you can't
 // update multiple parameters in one request. For example, you must specify both
 // adminUsername and adminUserPassword to update either field, but you can't
-// update both kmsKeyId  and logExports  in a single request.
+// update both kmsKeyId and logExports in a single request.
 func (c *Client) UpdateNamespace(ctx context.Context, params *UpdateNamespaceInput, optFns ...func(*Options)) (*UpdateNamespaceOutput, error) {
 	if params == nil {
 		params = &UpdateNamespaceInput{}

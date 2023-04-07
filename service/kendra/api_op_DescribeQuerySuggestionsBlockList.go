@@ -14,7 +14,7 @@ import (
 
 // Gets information about a block list used for query suggestions for an index.
 // This is used to check the current settings that are applied to a block list.
-// DescribeQuerySuggestionsBlockListis currently not supported in the Amazon Web
+// DescribeQuerySuggestionsBlockList is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
 func (c *Client) DescribeQuerySuggestionsBlockList(ctx context.Context, params *DescribeQuerySuggestionsBlockListInput, optFns ...func(*Options)) (*DescribeQuerySuggestionsBlockListOutput, error) {
 	if params == nil {
@@ -86,7 +86,7 @@ type DescribeQuerySuggestionsBlockListOutput struct {
 	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) .
 	SourceS3Path *types.S3Path
 
-	// The current status of the block list. When the value is ACTIVE, the block list
+	// The current status of the block list. When the value is ACTIVE , the block list
 	// is ready for use.
 	Status types.QuerySuggestionsBlockListStatus
 

@@ -39,8 +39,8 @@ type GetMaintenanceWindowInput struct {
 
 type GetMaintenanceWindowOutput struct {
 
-	// Whether targets must be registered with the maintenance window before tasks
-	// can be defined for those targets.
+	// Whether targets must be registered with the maintenance window before tasks can
+	// be defined for those targets.
 	AllowUnassociatedTargets bool
 
 	// The date the maintenance window was created.
@@ -59,9 +59,9 @@ type GetMaintenanceWindowOutput struct {
 	// Indicates whether the maintenance window is enabled.
 	Enabled bool
 
-	// The date and time, in ISO-8601 Extended format, for when the maintenance
-	// window is scheduled to become inactive. The maintenance window won't run after
-	// this specified time.
+	// The date and time, in ISO-8601 Extended format, for when the maintenance window
+	// is scheduled to become inactive. The maintenance window won't run after this
+	// specified time.
 	EndDate *string
 
 	// The date the maintenance window was last modified.
@@ -70,27 +70,26 @@ type GetMaintenanceWindowOutput struct {
 	// The name of the maintenance window.
 	Name *string
 
-	// The next time the maintenance window will actually run, taking into account
-	// any specified times for the maintenance window to become active or inactive.
+	// The next time the maintenance window will actually run, taking into account any
+	// specified times for the maintenance window to become active or inactive.
 	NextExecutionTime *string
 
-	// The schedule of the maintenance window in the form of a cron or rate
-	// expression.
+	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string
 
-	// The number of days to wait to run a maintenance window after the scheduled
-	// cron expression date and time.
+	// The number of days to wait to run a maintenance window after the scheduled cron
+	// expression date and time.
 	ScheduleOffset *int32
 
-	// The time zone that the scheduled maintenance window executions are based on,
-	// in Internet Assigned Numbers Authority (IANA) format. For example:
+	// The time zone that the scheduled maintenance window executions are based on, in
+	// Internet Assigned Numbers Authority (IANA) format. For example:
 	// "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string
 
-	// The date and time, in ISO-8601 Extended format, for when the maintenance
-	// window is scheduled to become active. The maintenance window won't run before
-	// this specified time.
+	// The date and time, in ISO-8601 Extended format, for when the maintenance window
+	// is scheduled to become active. The maintenance window won't run before this
+	// specified time.
 	StartDate *string
 
 	// The ID of the created maintenance window.

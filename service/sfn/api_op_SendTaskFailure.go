@@ -11,7 +11,7 @@ import (
 )
 
 // Used by activity workers and task states using the callback (https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token)
-// pattern to report that the task identified by the taskToken  failed.
+// pattern to report that the task identified by the taskToken failed.
 func (c *Client) SendTaskFailure(ctx context.Context, params *SendTaskFailureInput, optFns ...func(*Options)) (*SendTaskFailureOutput, error) {
 	if params == nil {
 		params = &SendTaskFailureInput{}

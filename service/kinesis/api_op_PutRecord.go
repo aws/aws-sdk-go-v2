@@ -15,8 +15,8 @@ import (
 // to send data into the stream for real-time ingestion and subsequent processing,
 // one record at a time. Each shard can support writes up to 1,000 records per
 // second, up to a maximum data write total of 1 MiB per second. When invoking this
-// API, it is recommended you use the StreamARN  input parameter rather than the
-// StreamNameinput parameter. You must specify the name of the stream that
+// API, it is recommended you use the StreamARN input parameter rather than the
+// StreamName input parameter. You must specify the name of the stream that
 // captures, stores, and transports the data; a partition key; and the data blob
 // itself. The data blob can be any type of data; for example, a segment from a log
 // file, geographic/location data, website clickstream data, and so on. The
@@ -30,21 +30,21 @@ import (
 // You can override hashing the partition key to determine the shard by explicitly
 // specifying a hash value using the ExplicitHashKey parameter. For more
 // information, see Adding Data to a Stream (https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream)
-// in the Amazon Kinesis Data Streams Developer Guide. PutRecord returns the
-// shard ID of where the data record was placed and the sequence number that was
-// assigned to the data record. Sequence numbers increase over time and are
-// specific to a shard within a stream, not across all shards within a stream. To
-// guarantee strictly increasing ordering, write serially to a shard and use the
-// SequenceNumberForOrdering parameter. For more information, see Adding Data to
-// a Stream (https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream)
+// in the Amazon Kinesis Data Streams Developer Guide. PutRecord returns the shard
+// ID of where the data record was placed and the sequence number that was assigned
+// to the data record. Sequence numbers increase over time and are specific to a
+// shard within a stream, not across all shards within a stream. To guarantee
+// strictly increasing ordering, write serially to a shard and use the
+// SequenceNumberForOrdering parameter. For more information, see Adding Data to a
+// Stream (https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream)
 // in the Amazon Kinesis Data Streams Developer Guide. After you write a record to
 // a stream, you cannot modify that record or its order within the stream. If a
-// PutRecordrequest cannot be processed because of insufficient provisioned
-// throughput on the shard involved in the request, PutRecord  throws
-// ProvisionedThroughputExceededException. By default, data records are
-// accessible for 24 hours from the time that they are added to a stream. You can
-// use IncreaseStreamRetentionPeriod  or DecreaseStreamRetentionPeriod to modify
-// this retention period.
+// PutRecord request cannot be processed because of insufficient provisioned
+// throughput on the shard involved in the request, PutRecord throws
+// ProvisionedThroughputExceededException . By default, data records are accessible
+// for 24 hours from the time that they are added to a stream. You can use
+// IncreaseStreamRetentionPeriod or DecreaseStreamRetentionPeriod to modify this
+// retention period.
 func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns ...func(*Options)) (*PutRecordOutput, error) {
 	if params == nil {
 		params = &PutRecordInput{}
@@ -121,8 +121,9 @@ type PutRecordOutput struct {
 
 	// The encryption type to use on the record. This parameter can be one of the
 	// following values:
-	//     - NONE : Do not encrypt the records in the stream.
-	//     - KMS : Use server-side encryption on the records in the stream using a customer-managed Amazon Web Services KMS key.
+	//   - NONE : Do not encrypt the records in the stream.
+	//   - KMS : Use server-side encryption on the records in the stream using a
+	//   customer-managed Amazon Web Services KMS key.
 	EncryptionType types.EncryptionType
 
 	// Metadata pertaining to the operation's result.

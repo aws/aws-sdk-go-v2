@@ -36,18 +36,19 @@ type ApplyPendingMaintenanceActionInput struct {
 	// This member is required.
 	ApplyAction *string
 
-	// A value that specifies the type of opt-in request, or undoes an opt-in
-	// request. An opt-in request of type immediate  can't be undone. Valid values:
-	//     - immediate - Apply the maintenance action immediately.
-	//     - next-maintenance - Apply the maintenance action during the next maintenance window for the resource.
-	//     - undo-opt-in - Cancel any existing next-maintenance opt-in requests.
+	// A value that specifies the type of opt-in request, or undoes an opt-in request.
+	// An opt-in request of type immediate can't be undone. Valid values:
+	//   - immediate - Apply the maintenance action immediately.
+	//   - next-maintenance - Apply the maintenance action during the next maintenance
+	//   window for the resource.
+	//   - undo-opt-in - Cancel any existing next-maintenance opt-in requests.
 	//
 	// This member is required.
 	OptInType *string
 
-	// The RDS Amazon Resource Name (ARN) of the resource that the pending
-	// maintenance action applies to. For information about creating an ARN, see
-	// Constructing an RDS Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
+	// The RDS Amazon Resource Name (ARN) of the resource that the pending maintenance
+	// action applies to. For information about creating an ARN, see Constructing an
+	// RDS Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// .
 	//
 	// This member is required.

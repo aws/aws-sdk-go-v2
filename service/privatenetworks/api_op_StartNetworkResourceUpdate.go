@@ -13,10 +13,9 @@ import (
 
 // Starts an update of the specified network resource. After you submit a request
 // to replace or return a network resource, the status of the network resource is
-// CREATING_SHIPPING_LABEL. The shipping label is available when the status of
-// the network resource is PENDING_RETURN. After the network resource is
-// successfully returned, its status is DELETED . For more information, see
-// Return a radio unit (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit)
+// CREATING_SHIPPING_LABEL . The shipping label is available when the status of the
+// network resource is PENDING_RETURN . After the network resource is successfully
+// returned, its status is DELETED . For more information, see Return a radio unit (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit)
 // .
 func (c *Client) StartNetworkResourceUpdate(ctx context.Context, params *StartNetworkResourceUpdateInput, optFns ...func(*Options)) (*StartNetworkResourceUpdateOutput, error) {
 	if params == nil {
@@ -41,8 +40,11 @@ type StartNetworkResourceUpdateInput struct {
 	NetworkResourceArn *string
 
 	// The update type.
-	//     - REPLACE - Submits a request to replace a defective radio unit. We provide a shipping label that you can use for the return process and we ship a replacement radio unit to you.
-	//     - RETURN - Submits a request to replace a radio unit that you no longer need. We provide a shipping label that you can use for the return process.
+	//   - REPLACE - Submits a request to replace a defective radio unit. We provide a
+	//   shipping label that you can use for the return process and we ship a replacement
+	//   radio unit to you.
+	//   - RETURN - Submits a request to replace a radio unit that you no longer need.
+	//   We provide a shipping label that you can use for the return process.
 	//
 	// This member is required.
 	UpdateType types.UpdateType
@@ -50,9 +52,9 @@ type StartNetworkResourceUpdateInput struct {
 	// The reason for the return. Providing a reason for a return is optional.
 	ReturnReason *string
 
-	// The shipping address. If you don't provide a shipping address when replacing
-	// or returning a network resource, we use the address from the original order for
-	// the network resource.
+	// The shipping address. If you don't provide a shipping address when replacing or
+	// returning a network resource, we use the address from the original order for the
+	// network resource.
 	ShippingAddress *types.Address
 
 	noSmithyDocumentSerde

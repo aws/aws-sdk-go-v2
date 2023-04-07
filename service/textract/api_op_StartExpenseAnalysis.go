@@ -16,16 +16,15 @@ import (
 // analyze text in documents that are in JPEG, PNG, and PDF format. The documents
 // must be stored in an Amazon S3 bucket. Use the DocumentLocation parameter to
 // specify the name of your S3 bucket and the name of the document in that bucket.
-// StartExpenseAnalysis returns a job identifier ( JobId) that you will provide
-// to GetExpenseAnalysis to retrieve the results of the operation. When the
-// analysis of the input invoices/receipts is finished, Amazon Textract publishes a
+// StartExpenseAnalysis returns a job identifier ( JobId ) that you will provide to
+// GetExpenseAnalysis to retrieve the results of the operation. When the analysis
+// of the input invoices/receipts is finished, Amazon Textract publishes a
 // completion status to the Amazon Simple Notification Service (Amazon SNS) topic
-// that you provide to the NotificationChannel. To obtain the results of the
+// that you provide to the NotificationChannel . To obtain the results of the
 // invoice and receipt analysis operation, ensure that the status value published
-// to the Amazon SNS topic is SUCCEEDED . If so, call GetExpenseAnalysis, and
-// pass the job identifier ( JobId ) that was returned by your call to
-// StartExpenseAnalysis . For more information, see Analyzing Invoices and
-// Receipts (https://docs.aws.amazon.com/textract/latest/dg/invoice-receipts.html)
+// to the Amazon SNS topic is SUCCEEDED . If so, call GetExpenseAnalysis , and pass
+// the job identifier ( JobId ) that was returned by your call to
+// StartExpenseAnalysis . For more information, see Analyzing Invoices and Receipts (https://docs.aws.amazon.com/textract/latest/dg/invoice-receipts.html)
 // .
 func (c *Client) StartExpenseAnalysis(ctx context.Context, params *StartExpenseAnalysisInput, optFns ...func(*Options)) (*StartExpenseAnalysisOutput, error) {
 	if params == nil {
@@ -50,8 +49,8 @@ type StartExpenseAnalysisInput struct {
 	DocumentLocation *types.DocumentLocation
 
 	// The idempotent token that's used to identify the start request. If you use the
-	// same token with multiple StartDocumentTextDetection  requests, the same JobId
-	// is returned. Use ClientRequestToken to prevent the same job from being
+	// same token with multiple StartDocumentTextDetection requests, the same JobId is
+	// returned. Use ClientRequestToken to prevent the same job from being
 	// accidentally started more than once. For more information, see Calling Amazon
 	// Textract Asynchronous Operations (https://docs.aws.amazon.com/textract/latest/dg/api-async.html)
 	ClientRequestToken *string
@@ -62,8 +61,8 @@ type StartExpenseAnalysisInput struct {
 	// tax form or a receipt).
 	JobTag *string
 
-	// The KMS key used to encrypt the inference results. This can be in either Key
-	// ID or Key Alias format. When a KMS key is provided, the KMS key will be used for
+	// The KMS key used to encrypt the inference results. This can be in either Key ID
+	// or Key Alias format. When a KMS key is provided, the KMS key will be used for
 	// server-side encryption of the objects in the customer bucket. When this
 	// parameter is not enabled, the result will be encrypted server side,using SSE-S3.
 	KMSKeyId *string
@@ -82,8 +81,8 @@ type StartExpenseAnalysisInput struct {
 
 type StartExpenseAnalysisOutput struct {
 
-	// A unique identifier for the text detection job. The JobId  is returned from
-	// StartExpenseAnalysis . A JobId  value is only valid for 7 days.
+	// A unique identifier for the text detection job. The JobId is returned from
+	// StartExpenseAnalysis . A JobId value is only valid for 7 days.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

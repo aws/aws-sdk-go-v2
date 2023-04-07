@@ -13,9 +13,9 @@ import (
 )
 
 // Returns a list of the agreements for the server that's identified by the
-// ServerIdthat you supply. If you want to limit the results to a certain number,
+// ServerId that you supply. If you want to limit the results to a certain number,
 // supply a value for the MaxResults parameter. If you ran the command previously
-// and received a value for NextToken, you can supply that value to continue
+// and received a value for NextToken , you can supply that value to continue
 // listing agreements from where you left off.
 func (c *Client) ListAgreements(ctx context.Context, params *ListAgreementsInput, optFns ...func(*Options)) (*ListAgreementsOutput, error) {
 	if params == nil {
@@ -42,9 +42,9 @@ type ListAgreementsInput struct {
 	// The maximum number of agreements to return.
 	MaxResults *int32
 
-	// When you can get additional results from the ListAgreements  call, a NextToken
+	// When you can get additional results from the ListAgreements call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
-	// to the NextToken  parameter to continue listing additional agreements.
+	// to the NextToken parameter to continue listing additional agreements.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -143,8 +143,8 @@ type ListAgreementsPaginatorOptions struct {
 	// The maximum number of agreements to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

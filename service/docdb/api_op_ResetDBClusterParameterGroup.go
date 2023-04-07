@@ -12,7 +12,7 @@ import (
 )
 
 // Modifies the parameters of a cluster parameter group to the default value. To
-// reset specific parameters, submit a list of the following: ParameterName  and
+// reset specific parameters, submit a list of the following: ParameterName and
 // ApplyMethod . To reset the entire cluster parameter group, specify the
 // DBClusterParameterGroupName and ResetAllParameters parameters. When you reset
 // the entire group, dynamic parameters are updated immediately and static
@@ -59,11 +59,10 @@ type ResetDBClusterParameterGroupInput struct {
 type ResetDBClusterParameterGroupOutput struct {
 
 	// The name of a cluster parameter group. Constraints:
-	//     - Must be from 1 to 255 letters or numbers.
-	//     - The first character must be a letter.
-	//     - Cannot end with a hyphen or contain two consecutive hyphens.
-	// This value
-	// is stored as a lowercase string.
+	//   - Must be from 1 to 255 letters or numbers.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	// This value is stored as a lowercase string.
 	DBClusterParameterGroupName *string
 
 	// Metadata pertaining to the operation's result.

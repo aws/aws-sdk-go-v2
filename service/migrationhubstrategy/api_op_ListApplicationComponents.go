@@ -34,8 +34,8 @@ type ListApplicationComponentsInput struct {
 	ApplicationComponentCriteria types.ApplicationComponentCriteria
 
 	// Specify the value based on the application component criteria type. For
-	// example, if applicationComponentCriteria  is set to SERVER_ID  and filterValue
-	// is set to server1 , then ListApplicationComponents returns all the application
+	// example, if applicationComponentCriteria is set to SERVER_ID and filterValue is
+	// set to server1 , then ListApplicationComponents returns all the application
 	// components running on server1.
 	FilterValue *string
 
@@ -149,8 +149,8 @@ type ListApplicationComponentsPaginatorOptions struct {
 	// 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

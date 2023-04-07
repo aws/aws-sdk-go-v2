@@ -14,9 +14,9 @@ import (
 )
 
 // Returns a list of queries and query statuses for the past seven days. You must
-// specify an ARN value for EventDataStore. Optionally, to shorten the list of
+// specify an ARN value for EventDataStore . Optionally, to shorten the list of
 // results, you can specify a time range, formatted as timestamps, by adding
-// StartTime and EndTime  parameters, and a QueryStatus  value. Valid values for
+// StartTime and EndTime parameters, and a QueryStatus value. Valid values for
 // QueryStatus include QUEUED , RUNNING , FINISHED , FAILED , TIMED_OUT , or
 // CANCELLED .
 func (c *Client) ListQueries(ctx context.Context, params *ListQueriesInput, optFns ...func(*Options)) (*ListQueriesOutput, error) {
@@ -42,7 +42,7 @@ type ListQueriesInput struct {
 	// This member is required.
 	EventDataStore *string
 
-	// Use with StartTime  to bound a ListQueries request, and limit its results to
+	// Use with StartTime to bound a ListQueries request, and limit its results to
 	// only those queries run within a specified time period.
 	EndTime *time.Time
 
@@ -57,8 +57,8 @@ type ListQueriesInput struct {
 	// CANCELLED .
 	QueryStatus types.QueryStatus
 
-	// Use with EndTime  to bound a ListQueries request, and limit its results to
-	// only those queries run within a specified time period.
+	// Use with EndTime to bound a ListQueries request, and limit its results to only
+	// those queries run within a specified time period.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -154,8 +154,8 @@ type ListQueriesPaginatorOptions struct {
 	// The maximum number of queries to show on a page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

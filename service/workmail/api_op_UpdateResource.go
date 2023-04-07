@@ -13,7 +13,7 @@ import (
 
 // Updates data for the resource. To have the latest information, it must be
 // preceded by a DescribeResource call. The dataset in the request should be the
-// one expected when performing another DescribeResource  call.
+// one expected when performing another DescribeResource call.
 func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput, optFns ...func(*Options)) (*UpdateResourceOutput, error) {
 	if params == nil {
 		params = &UpdateResourceInput{}

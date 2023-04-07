@@ -22,7 +22,7 @@ import (
 // called on an Auto Scaling group that has a mixed instances policy or a launch
 // template or launch configuration that requests Spot Instances. You can view the
 // instances in the warm pool using the DescribeWarmPool API call. If you are no
-// longer using a warm pool, you can delete it by calling the DeleteWarmPool  API.
+// longer using a warm pool, you can delete it by calling the DeleteWarmPool API.
 func (c *Client) PutWarmPool(ctx context.Context, params *PutWarmPoolInput, optFns ...func(*Options)) (*PutWarmPoolOutput, error) {
 	if params == nil {
 		params = &PutWarmPoolInput{}
@@ -57,14 +57,14 @@ type PutWarmPoolInput struct {
 	// desired capacity. If a value for MaxGroupPreparedCapacity is not specified,
 	// Amazon EC2 Auto Scaling launches and maintains the difference between the
 	// group's maximum capacity and its desired capacity. If you specify a value for
-	// MaxGroupPreparedCapacity, Amazon EC2 Auto Scaling uses the difference between
+	// MaxGroupPreparedCapacity , Amazon EC2 Auto Scaling uses the difference between
 	// the MaxGroupPreparedCapacity and the desired capacity instead. The size of the
-	// warm pool is dynamic. Only when MaxGroupPreparedCapacity  and MinSize are set
-	// to the same value does the warm pool have an absolute size. If the desired
-	// capacity of the Auto Scaling group is higher than the MaxGroupPreparedCapacity
-	// , the capacity of the warm pool is 0, unless you specify a value for MinSize.
-	// To remove a value that you previously set, include the property but specify -1
-	// for the value.
+	// warm pool is dynamic. Only when MaxGroupPreparedCapacity and MinSize are set to
+	// the same value does the warm pool have an absolute size. If the desired capacity
+	// of the Auto Scaling group is higher than the MaxGroupPreparedCapacity , the
+	// capacity of the warm pool is 0, unless you specify a value for MinSize . To
+	// remove a value that you previously set, include the property but specify -1 for
+	// the value.
 	MaxGroupPreparedCapacity *int32
 
 	// Specifies the minimum number of instances to maintain in the warm pool. This

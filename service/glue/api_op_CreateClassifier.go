@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a classifier in the user's account. This can be a GrokClassifier , an
-// XMLClassifier , a JsonClassifier , or a CsvClassifier, depending on which
-// field of the request is present.
+// XMLClassifier , a JsonClassifier , or a CsvClassifier , depending on which field
+// of the request is present.
 func (c *Client) CreateClassifier(ctx context.Context, params *CreateClassifierInput, optFns ...func(*Options)) (*CreateClassifierOutput, error) {
 	if params == nil {
 		params = &CreateClassifierInput{}
@@ -31,16 +31,16 @@ func (c *Client) CreateClassifier(ctx context.Context, params *CreateClassifierI
 
 type CreateClassifierInput struct {
 
-	// A CsvClassifier  object specifying the classifier to create.
+	// A CsvClassifier object specifying the classifier to create.
 	CsvClassifier *types.CreateCsvClassifierRequest
 
-	// A GrokClassifier  object specifying the classifier to create.
+	// A GrokClassifier object specifying the classifier to create.
 	GrokClassifier *types.CreateGrokClassifierRequest
 
-	// A JsonClassifier  object specifying the classifier to create.
+	// A JsonClassifier object specifying the classifier to create.
 	JsonClassifier *types.CreateJsonClassifierRequest
 
-	// An XMLClassifier  object specifying the classifier to create.
+	// An XMLClassifier object specifying the classifier to create.
 	XMLClassifier *types.CreateXMLClassifierRequest
 
 	noSmithyDocumentSerde

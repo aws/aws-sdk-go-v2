@@ -17,7 +17,10 @@ import (
 // in the IoT SiteWise User Guide. To identify an asset property, you must specify
 // one of the following:
 //   - The assetId and propertyId of an asset property.
-//   - A propertyAlias , which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature ). To define an asset property's alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html) .
+//   - A propertyAlias , which is a data stream alias (for example,
+//     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
+//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
+//     .
 func (c *Client) GetAssetPropertyValue(ctx context.Context, params *GetAssetPropertyValueInput, optFns ...func(*Options)) (*GetAssetPropertyValueOutput, error) {
 	if params == nil {
 		params = &GetAssetPropertyValueInput{}
@@ -39,7 +42,7 @@ type GetAssetPropertyValueInput struct {
 	AssetId *string
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
-	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
 	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string

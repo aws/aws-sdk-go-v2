@@ -52,7 +52,7 @@ type CreateLaunchConfigurationInput struct {
 	// public IPv4 address, unless you disabled the option to assign a public IPv4
 	// address on the subnet. If the instance is launched into a nondefault subnet, the
 	// default is not to assign a public IPv4 address, unless you enabled the option to
-	// assign a public IPv4 address on the subnet. If you specify true, each instance
+	// assign a public IPv4 address on the subnet. If you specify true , each instance
 	// in the Auto Scaling group receives a unique public IPv4 address. For more
 	// information, see Launching Auto Scaling instances in a VPC (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html)
 	// in the Amazon EC2 Auto Scaling User Guide. If you specify this property, you
@@ -60,10 +60,9 @@ type CreateLaunchConfigurationInput struct {
 	// group.
 	AssociatePublicIpAddress *bool
 
-	// The block device mapping entries that define the block devices to attach to
-	// the instances at launch. By default, the block devices specified in the block
-	// device mapping for the AMI are used. For more information, see Block device
-	// mappings (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html)
+	// The block device mapping entries that define the block devices to attach to the
+	// instances at launch. By default, the block devices specified in the block device
+	// mapping for the AMI are used. For more information, see Block device mappings (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	BlockDeviceMappings []types.BlockDeviceMapping
 
@@ -73,8 +72,8 @@ type CreateLaunchConfigurationInput struct {
 	// Available for backward compatibility.
 	ClassicLinkVPCSecurityGroups []string
 
-	// Specifies whether the launch configuration is optimized for EBS I/O ( true) or
-	// not ( false). The optimization provides dedicated throughput to Amazon EBS and
+	// Specifies whether the launch configuration is optimized for EBS I/O ( true ) or
+	// not ( false ). The optimization provides dedicated throughput to Amazon EBS and
 	// an optimized configuration stack to provide optimal I/O performance. This
 	// optimization is not available with all instance types. Additional fees are
 	// incurred when you enable EBS optimization for an instance type that is not
@@ -90,22 +89,22 @@ type CreateLaunchConfigurationInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	IamInstanceProfile *string
 
-	// The ID of the Amazon Machine Image (AMI) that was assigned during
-	// registration. For more information, see Finding a Linux AMI (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html)
-	// in the Amazon EC2 User Guide for Linux Instances. If you specify InstanceId,
-	// an ImageId  is not required.
+	// The ID of the Amazon Machine Image (AMI) that was assigned during registration.
+	// For more information, see Finding a Linux AMI (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html)
+	// in the Amazon EC2 User Guide for Linux Instances. If you specify InstanceId , an
+	// ImageId is not required.
 	ImageId *string
 
 	// The ID of the instance to use to create the launch configuration. The new
 	// launch configuration derives attributes from the instance, except for the block
 	// device mapping. To create a launch configuration with a block device mapping or
 	// override any other instance attributes, specify them as part of the same
-	// request. For more information, see Creating a launch configuration using an
-	// EC2 instance (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-lc-with-instanceID.html)
+	// request. For more information, see Creating a launch configuration using an EC2
+	// instance (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-lc-with-instanceID.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	InstanceId *string
 
-	// Controls whether instances in this group are launched with detailed ( true) or
+	// Controls whether instances in this group are launched with detailed ( true ) or
 	// basic ( false ) monitoring. The default value is true (enabled). When detailed
 	// monitoring is enabled, Amazon CloudWatch generates metrics every minute and your
 	// account is charged a fee. When you disable detailed monitoring, CloudWatch
@@ -116,13 +115,13 @@ type CreateLaunchConfigurationInput struct {
 
 	// Specifies the instance type of the EC2 instance. For information about
 	// available instance types, see Available instance types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes)
-	// in the Amazon EC2 User Guide for Linux Instances. If you specify InstanceId,
-	// an InstanceType  is not required.
+	// in the Amazon EC2 User Guide for Linux Instances. If you specify InstanceId , an
+	// InstanceType is not required.
 	InstanceType *string
 
-	// The ID of the kernel associated with the AMI. We recommend that you use
-	// PV-GRUB instead of kernels and RAM disks. For more information, see User
-	// provided kernels (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html)
+	// The ID of the kernel associated with the AMI. We recommend that you use PV-GRUB
+	// instead of kernels and RAM disks. For more information, see User provided
+	// kernels (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	KernelId *string
 
@@ -136,15 +135,15 @@ type CreateLaunchConfigurationInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MetadataOptions *types.InstanceMetadataOptions
 
-	// The tenancy of the instance, either default  or dedicated . An instance with
-	// dedicatedtenancy runs on isolated, single-tenant hardware and can only be
+	// The tenancy of the instance, either default or dedicated . An instance with
+	// dedicated tenancy runs on isolated, single-tenant hardware and can only be
 	// launched into a VPC. To launch dedicated instances into a shared tenancy VPC (a
-	// VPC with the instance placement tenancy attribute set to default), you must
-	// set the value of this property to dedicated . For more information, see
-	// Configuring instance tenancy with Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html)
-	// in the Amazon EC2 Auto Scaling User Guide. If you specify PlacementTenancy,
-	// you must specify at least one subnet for VPCZoneIdentifier when you create
-	// your group. Valid values: default  | dedicated
+	// VPC with the instance placement tenancy attribute set to default ), you must set
+	// the value of this property to dedicated . For more information, see Configuring
+	// instance tenancy with Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html)
+	// in the Amazon EC2 Auto Scaling User Guide. If you specify PlacementTenancy , you
+	// must specify at least one subnet for VPCZoneIdentifier when you create your
+	// group. Valid values: default | dedicated
 	PlacementTenancy *string
 
 	// The ID of the RAM disk to select. We recommend that you use PV-GRUB instead of

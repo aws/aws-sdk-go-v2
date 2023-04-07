@@ -34,9 +34,9 @@ const (
 	ComponentDependencyTypeSoft ComponentDependencyType = "SOFT"
 )
 
-// Values returns all known values for ComponentDependencyType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ComponentDependencyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ComponentDependencyType) Values() []ComponentDependencyType {
 	return []ComponentDependencyType{
 		"HARD",
@@ -88,9 +88,9 @@ const (
 	DeploymentComponentUpdatePolicyActionSkipNotifyComponents DeploymentComponentUpdatePolicyAction = "SKIP_NOTIFY_COMPONENTS"
 )
 
-// Values returns all known values for DeploymentComponentUpdatePolicyAction.
-// Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for DeploymentComponentUpdatePolicyAction. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (DeploymentComponentUpdatePolicyAction) Values() []DeploymentComponentUpdatePolicyAction {
 	return []DeploymentComponentUpdatePolicyAction{
@@ -126,9 +126,9 @@ const (
 	DeploymentHistoryFilterLatestOnly DeploymentHistoryFilter = "LATEST_ONLY"
 )
 
-// Values returns all known values for DeploymentHistoryFilter. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeploymentHistoryFilter. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentHistoryFilter) Values() []DeploymentHistoryFilter {
 	return []DeploymentHistoryFilter{
 		"ALL",
@@ -205,8 +205,8 @@ const (
 	InstalledComponentLifecycleStateFinished  InstalledComponentLifecycleState = "FINISHED"
 )
 
-// Values returns all known values for InstalledComponentLifecycleState. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for InstalledComponentLifecycleState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (InstalledComponentLifecycleState) Values() []InstalledComponentLifecycleState {
@@ -230,8 +230,8 @@ const (
 	InstalledComponentTopologyFilterRoot InstalledComponentTopologyFilter = "ROOT"
 )
 
-// Values returns all known values for InstalledComponentTopologyFilter. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for InstalledComponentTopologyFilter. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (InstalledComponentTopologyFilter) Values() []InstalledComponentTopologyFilter {

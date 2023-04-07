@@ -20,8 +20,7 @@ import (
 // Testing functions (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function)
 // in the Amazon CloudFront Developer Guide. To test a function, you provide the
 // function's name and version ( ETag value) along with the event object. To get
-// the function's name and version, you can use ListFunctions  and
-// DescribeFunction .
+// the function's name and version, you can use ListFunctions and DescribeFunction .
 func (c *Client) TestFunction(ctx context.Context, params *TestFunctionInput, optFns ...func(*Options)) (*TestFunctionOutput, error) {
 	if params == nil {
 		params = &TestFunctionInput{}
@@ -57,7 +56,7 @@ type TestFunctionInput struct {
 	// This member is required.
 	Name *string
 
-	// The stage of the function that you are testing, either DEVELOPMENT  or LIVE .
+	// The stage of the function that you are testing, either DEVELOPMENT or LIVE .
 	Stage types.FunctionStage
 
 	noSmithyDocumentSerde

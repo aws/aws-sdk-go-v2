@@ -55,7 +55,7 @@ type ListEventLogsInput struct {
 
 	// The maximum number of results to show in a single call to this API. If the
 	// number of results is larger than the number you specified, the response will
-	// include a NextToken  element, which you can use to obtain additional results.
+	// include a NextToken element, which you can use to obtain additional results.
 	MaxResults *int32
 
 	// A token returned from a call to this API to indicate the next batch of results
@@ -153,11 +153,11 @@ var _ ListEventLogsAPIClient = (*Client)(nil)
 type ListEventLogsPaginatorOptions struct {
 	// The maximum number of results to show in a single call to this API. If the
 	// number of results is larger than the number you specified, the response will
-	// include a NextToken  element, which you can use to obtain additional results.
+	// include a NextToken element, which you can use to obtain additional results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

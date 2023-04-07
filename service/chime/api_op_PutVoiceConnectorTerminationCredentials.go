@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds termination SIP credentials for the specified Amazon Chime Voice
-// Connector.
+// Adds termination SIP credentials for the specified Amazon Chime Voice Connector.
 func (c *Client) PutVoiceConnectorTerminationCredentials(ctx context.Context, params *PutVoiceConnectorTerminationCredentialsInput, optFns ...func(*Options)) (*PutVoiceConnectorTerminationCredentialsOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorTerminationCredentialsInput{}

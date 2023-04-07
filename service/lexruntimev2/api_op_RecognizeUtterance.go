@@ -19,24 +19,31 @@ import (
 //   - requestAttributes
 //   - sessionState
 //
-// The following response fields are compressed using gzip and
-// then base64 encoded by Amazon Lex V2. Before you can use these fields, you must
-// decode and decompress them.
+// The following response fields are compressed using gzip and then base64 encoded
+// by Amazon Lex V2. Before you can use these fields, you must decode and
+// decompress them.
 //   - inputTranscript
 //   - interpretations
 //   - messages
 //   - requestAttributes
 //   - sessionState
 //
-// The example contains a Java application that compresses and
-// encodes a Java object to send to Amazon Lex V2, and a second that decodes and
-// decompresses a response from Amazon Lex V2. If the optional post-fulfillment
-// response is specified, the messages are returned as follows. For more
-// information, see PostFulfillmentStatusSpecification (https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html)
+// The example contains a Java application that compresses and encodes a Java
+// object to send to Amazon Lex V2, and a second that decodes and decompresses a
+// response from Amazon Lex V2. If the optional post-fulfillment response is
+// specified, the messages are returned as follows. For more information, see
+// PostFulfillmentStatusSpecification (https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html)
 // .
-//   - Success message - Returned if the Lambda function completes successfully and the intent state is fulfilled or ready fulfillment if the message is present.
-//   - Failed message - The failed message is returned if the Lambda function throws an exception or if the Lambda function returns a failed intent state without a message.
-//   - Timeout message - If you don't configure a timeout message and a timeout, and the Lambda function doesn't return within 30 seconds, the timeout message is returned. If you configure a timeout, the timeout message is returned when the period times out.
+//   - Success message - Returned if the Lambda function completes successfully
+//     and the intent state is fulfilled or ready fulfillment if the message is
+//     present.
+//   - Failed message - The failed message is returned if the Lambda function
+//     throws an exception or if the Lambda function returns a failed intent state
+//     without a message.
+//   - Timeout message - If you don't configure a timeout message and a timeout,
+//     and the Lambda function doesn't return within 30 seconds, the timeout message is
+//     returned. If you configure a timeout, the timeout message is returned when the
+//     period times out.
 //
 // For more information, see Completion message (https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html)
 // .
@@ -74,14 +81,17 @@ type RecognizeUtteranceInput struct {
 
 	// Indicates the format for audio input or that the content is text. The header
 	// must start with one of the following prefixes:
-	//     - PCM format, audio data must be in little-endian byte order.
-	//         - audio/l16; rate=16000; channels=1
-	//         - audio/x-l16; sample-rate=16000; channel-count=1
-	//         - audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1; is-big-endian=false
-	//     - Opus format
-	//         - audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4
-	//     - Text format
-	//         - text/plain; charset=utf-8
+	//   - PCM format, audio data must be in little-endian byte order.
+	//   - audio/l16; rate=16000; channels=1
+	//   - audio/x-l16; sample-rate=16000; channel-count=1
+	//   - audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1;
+	//   is-big-endian=false
+	//   - Opus format
+	//   -
+	//   audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4
+	//
+	//   - Text format
+	//   - text/plain; charset=utf-8
 	//
 	// This member is required.
 	RequestContentType *string
@@ -103,16 +113,22 @@ type RecognizeUtteranceInput struct {
 	RequestAttributes *string
 
 	// The message that Amazon Lex V2 returns in the response can be either text or
-	// speech based on the responseContentType  value.
-	//     - If the value is text/plain;charset=utf-8 , Amazon Lex V2 returns text in the response.
-	//     - If the value begins with audio/ , Amazon Lex V2 returns speech in the response. Amazon Lex V2 uses Amazon Polly to generate the speech using the configuration that you specified in the responseContentType parameter. For example, if you specify audio/mpeg as the value, Amazon Lex V2 returns speech in the MPEG format.
-	//     - If the value is audio/pcm , the speech returned is audio/pcm at 16 KHz in 16-bit, little-endian format.
-	//     - The following are the accepted values:
-	//         - audio/mpeg
-	//         - audio/ogg
-	//         - audio/pcm (16 KHz)
-	//         - audio/* (defaults to mpeg)
-	//         - text/plain; charset=utf-8
+	// speech based on the responseContentType value.
+	//   - If the value is text/plain;charset=utf-8 , Amazon Lex V2 returns text in the
+	//   response.
+	//   - If the value begins with audio/ , Amazon Lex V2 returns speech in the
+	//   response. Amazon Lex V2 uses Amazon Polly to generate the speech using the
+	//   configuration that you specified in the responseContentType parameter. For
+	//   example, if you specify audio/mpeg as the value, Amazon Lex V2 returns speech
+	//   in the MPEG format.
+	//   - If the value is audio/pcm , the speech returned is audio/pcm at 16 KHz in
+	//   16-bit, little-endian format.
+	//   - The following are the accepted values:
+	//   - audio/mpeg
+	//   - audio/ogg
+	//   - audio/pcm (16 KHz)
+	//   - audio/* (defaults to mpeg)
+	//   - text/plain; charset=utf-8
 	ResponseContentType *string
 
 	// Sets the state of the session with the user. You can use this to set the
@@ -131,20 +147,20 @@ type RecognizeUtteranceOutput struct {
 	// configuration and context. For example, if Amazon Lex V2 did not understand the
 	// user intent, it sends the clarificationPrompt configured for the bot. If the
 	// intent requires confirmation before taking the fulfillment action, it sends the
-	// confirmationPrompt. Another example: Suppose that the Lambda function
+	// confirmationPrompt . Another example: Suppose that the Lambda function
 	// successfully fulfilled the intent, and sent a message to convey to the user.
 	// Then Amazon Lex V2 sends that message in the response.
 	AudioStream io.ReadCloser
 
-	// Content type as specified in the responseContentType  in the request.
+	// Content type as specified in the responseContentType in the request.
 	ContentType *string
 
 	// Indicates whether the input mode to the operation was text or speech.
 	InputMode *string
 
 	// The text used to process the request. If the input was an audio stream, the
-	// inputTranscriptfield contains the text extracted from the audio stream. This
-	// is the text that is actually processed to recognize intents and slot values. You
+	// inputTranscript field contains the text extracted from the audio stream. This is
+	// the text that is actually processed to recognize intents and slot values. You
 	// can use this information to determine if Amazon Lex V2 is correctly processing
 	// the audio that you send. The inputTranscript field is compressed with gzip and
 	// then base64 encoded. Before you can use the contents of the field, you must

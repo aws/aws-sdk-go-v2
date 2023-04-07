@@ -16,21 +16,20 @@ import (
 // This includes objects like flower, tree, and table; events like wedding,
 // graduation, and birthday party; concepts like landscape, evening, and nature;
 // and activities like a person getting out of a car or a person skiing. The video
-// must be stored in an Amazon S3 bucket. Use Video to specify the bucket name
-// and the filename of the video. StartLabelDetection  returns a job identifier (
-// JobId) which you use to get the results of the operation. When label detection
-// is finished, Amazon Rekognition Video publishes a completion status to the
-// Amazon Simple Notification Service topic that you specify in
-// NotificationChannel. To get the results of the label detection operation,
-// first check that the status value published to the Amazon SNS topic is
-// SUCCEEDED . If so, call GetLabelDetection  and pass the job identifier ( JobId
-// ) from the initial call to StartLabelDetection . Optional Parameters
-// StartLabelDetection has the GENERAL_LABELS Feature applied by default. This
-// feature allows you to provide filtering criteria to the Settings parameter.
-// You can filter with sets of individual labels or with label categories. You can
-// specify inclusive filters, exclusive filters, or a combination of inclusive and
-// exclusive filters. For more information on filtering, see Detecting labels in
-// a video (https://docs.aws.amazon.com/rekognition/latest/dg/labels-detecting-labels-video.html)
+// must be stored in an Amazon S3 bucket. Use Video to specify the bucket name and
+// the filename of the video. StartLabelDetection returns a job identifier ( JobId
+// ) which you use to get the results of the operation. When label detection is
+// finished, Amazon Rekognition Video publishes a completion status to the Amazon
+// Simple Notification Service topic that you specify in NotificationChannel . To
+// get the results of the label detection operation, first check that the status
+// value published to the Amazon SNS topic is SUCCEEDED . If so, call
+// GetLabelDetection and pass the job identifier ( JobId ) from the initial call to
+// StartLabelDetection . Optional Parameters StartLabelDetection has the
+// GENERAL_LABELS Feature applied by default. This feature allows you to provide
+// filtering criteria to the Settings parameter. You can filter with sets of
+// individual labels or with label categories. You can specify inclusive filters,
+// exclusive filters, or a combination of inclusive and exclusive filters. For more
+// information on filtering, see Detecting labels in a video (https://docs.aws.amazon.com/rekognition/latest/dg/labels-detecting-labels-video.html)
 // . You can specify MinConfidence to control the confidence threshold for the
 // labels returned. The default is 50.
 func (c *Client) StartLabelDetection(ctx context.Context, params *StartLabelDetectionInput, optFns ...func(*Options)) (*StartLabelDetectionOutput, error) {
@@ -57,8 +56,8 @@ type StartLabelDetectionInput struct {
 	Video *types.Video
 
 	// Idempotent token used to identify the start request. If you use the same token
-	// with multiple StartLabelDetection  requests, the same JobId  is returned. Use
-	// ClientRequestTokento prevent the same job from being accidently started more
+	// with multiple StartLabelDetection requests, the same JobId is returned. Use
+	// ClientRequestToken to prevent the same job from being accidently started more
 	// than once.
 	ClientRequestToken *string
 
@@ -66,9 +65,9 @@ type StartLabelDetectionInput struct {
 	// GENERAL_LABELS are returned.
 	Features []types.LabelDetectionFeatureName
 
-	// An identifier you specify that's returned in the completion notification
-	// that's published to your Amazon Simple Notification Service topic. For example,
-	// you can use JobTag to group related jobs and identify them in the completion
+	// An identifier you specify that's returned in the completion notification that's
+	// published to your Amazon Simple Notification Service topic. For example, you can
+	// use JobTag to group related jobs and identify them in the completion
 	// notification.
 	JobTag *string
 
@@ -77,7 +76,7 @@ type StartLabelDetectionInput struct {
 	// Rekognition is that a label is correctly identified.0 is the lowest confidence.
 	// 100 is the highest confidence. Amazon Rekognition Video doesn't return any
 	// labels with a confidence level lower than this specified value. If you don't
-	// specify MinConfidence, the operation returns labels and bounding boxes (if
+	// specify MinConfidence , the operation returns labels and bounding boxes (if
 	// detected) with confidence values greater than or equal to 50 percent.
 	MinConfidence *float32
 

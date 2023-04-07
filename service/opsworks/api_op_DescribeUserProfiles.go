@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe specified users. Required Permissions: To use this action, an IAM
-// user must have an attached policy that explicitly grants permissions. For more
+// Describe specified users. Required Permissions: To use this action, an IAM user
+// must have an attached policy that explicitly grants permissions. For more
 // information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
 // .
 func (c *Client) DescribeUserProfiles(ctx context.Context, params *DescribeUserProfilesInput, optFns ...func(*Options)) (*DescribeUserProfilesOutput, error) {
@@ -38,10 +38,10 @@ type DescribeUserProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeUserProfiles  request.
+// Contains the response to a DescribeUserProfiles request.
 type DescribeUserProfilesOutput struct {
 
-	// A Users  object that describes the specified users.
+	// A Users object that describes the specified users.
 	UserProfiles []types.UserProfile
 
 	// Metadata pertaining to the operation's result.

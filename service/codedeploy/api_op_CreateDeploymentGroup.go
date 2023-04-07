@@ -27,7 +27,7 @@ func (c *Client) CreateDeploymentGroup(ctx context.Context, params *CreateDeploy
 	return out, nil
 }
 
-// Represents the input of a CreateDeploymentGroup  operation.
+// Represents the input of a CreateDeploymentGroup operation.
 type CreateDeploymentGroupInput struct {
 
 	// The name of an CodeDeploy application associated with the IAM user or Amazon
@@ -72,8 +72,8 @@ type CreateDeploymentGroupInput struct {
 	// in the CodeDeploy User Guide.
 	DeploymentConfigName *string
 
-	// Information about the type of deployment, in-place or blue/green, that you
-	// want to run and whether to route deployment traffic behind a load balancer.
+	// Information about the type of deployment, in-place or blue/green, that you want
+	// to run and whether to route deployment traffic behind a load balancer.
 	DeploymentStyle *types.DeploymentStyle
 
 	// The Amazon EC2 tags on which to filter. The deployment group includes Amazon
@@ -95,9 +95,9 @@ type CreateDeploymentGroupInput struct {
 	// Information about the load balancer used in a deployment.
 	LoadBalancerInfo *types.LoadBalancerInfo
 
-	// The on-premises instance tags on which to filter. The deployment group
-	// includes on-premises instances with any of the specified tags. Cannot be used in
-	// the same call as OnPremisesTagSet .
+	// The on-premises instance tags on which to filter. The deployment group includes
+	// on-premises instances with any of the specified tags. Cannot be used in the same
+	// call as OnPremisesTagSet .
 	OnPremisesInstanceTagFilters []types.TagFilter
 
 	// Information about groups of tags applied to on-premises instances. The
@@ -109,7 +109,7 @@ type CreateDeploymentGroupInput struct {
 	// mid-deployment and do not receive the deployed application revision. If this
 	// option is set to UPDATE or is unspecified, CodeDeploy initiates one or more
 	// 'auto-update outdated instances' deployments to apply the deployed application
-	// revision to the new Amazon EC2 instances. If this option is set to IGNORE,
+	// revision to the new Amazon EC2 instances. If this option is set to IGNORE ,
 	// CodeDeploy does not initiate a deployment to update the new Amazon EC2
 	// instances. This may result in instances having different revisions.
 	OutdatedInstancesStrategy types.OutdatedInstancesStrategy
@@ -127,7 +127,7 @@ type CreateDeploymentGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreateDeploymentGroup  operation.
+// Represents the output of a CreateDeploymentGroup operation.
 type CreateDeploymentGroupOutput struct {
 
 	// A unique deployment group ID.

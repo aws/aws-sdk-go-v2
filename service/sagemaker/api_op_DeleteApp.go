@@ -48,7 +48,7 @@ type DeleteAppInput struct {
 	// set.
 	SpaceName *string
 
-	// The user profile name. If this value is not set, then SpaceName  must be set.
+	// The user profile name. If this value is not set, then SpaceName must be set.
 	UserProfileName *string
 
 	noSmithyDocumentSerde

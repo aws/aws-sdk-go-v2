@@ -164,9 +164,9 @@ func (e *EndpointDisabledException) ErrorCode() string {
 }
 func (e *EndpointDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the number of filter polices in your Amazon Web Services
-// account exceeds the limit. To add more filter polices, submit an Amazon SNS
-// Limit Increase case in the Amazon Web Services Support Center.
+// Indicates that the number of filter polices in your Amazon Web Services account
+// exceeds the limit. To add more filter polices, submit an Amazon SNS Limit
+// Increase case in the Amazon Web Services Support Center.
 type FilterPolicyLimitExceededException struct {
 	Message *string
 
@@ -220,7 +220,7 @@ func (e *InternalErrorException) ErrorCode() string {
 }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The Id  of a batch entry in a batch request doesn't abide by the specification.
+// The Id of a batch entry in a batch request doesn't abide by the specification.
 type InvalidBatchEntryIdException struct {
 	Message *string
 
@@ -573,8 +573,8 @@ func (e *PlatformApplicationDisabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Can’t perform the action on the specified resource. Make sure that the
-// resource exists.
+// Can’t perform the action on the specified resource. Make sure that the resource
+// exists.
 type ResourceNotFoundException struct {
 	Message *string
 

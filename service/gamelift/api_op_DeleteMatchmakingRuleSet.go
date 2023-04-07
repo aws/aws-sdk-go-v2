@@ -31,9 +31,9 @@ func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMat
 
 type DeleteMatchmakingRuleSetInput struct {
 
-	// A unique identifier for the matchmaking rule set to be deleted. (Note: The
-	// rule set name is different from the optional "name" field in the rule set body.)
-	// You can use either the rule set name or ARN value.
+	// A unique identifier for the matchmaking rule set to be deleted. (Note: The rule
+	// set name is different from the optional "name" field in the rule set body.) You
+	// can use either the rule set name or ARN value.
 	//
 	// This member is required.
 	Name *string

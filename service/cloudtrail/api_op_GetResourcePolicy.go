@@ -45,8 +45,8 @@ type GetResourcePolicyOutput struct {
 	// resource-based policy.
 	ResourceArn *string
 
-	// A JSON-formatted string that contains the resource-based policy attached to
-	// the CloudTrail channel.
+	// A JSON-formatted string that contains the resource-based policy attached to the
+	// CloudTrail channel.
 	ResourcePolicy *string
 
 	// Metadata pertaining to the operation's result.

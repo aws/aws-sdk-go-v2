@@ -54,8 +54,8 @@ type InferSNOMEDCTOutput struct {
 	// The number of characters in the input request documentation.
 	Characters *types.Characters
 
-	// The version of the model used to analyze the documents, in the format n.n.n
-	// You can use this information to track the model used for a particular batch of
+	// The version of the model used to analyze the documents, in the format n.n.n You
+	// can use this information to track the model used for a particular batch of
 	// documents.
 	ModelVersion *string
 

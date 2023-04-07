@@ -12,11 +12,11 @@ import (
 )
 
 // Returns the current LifecycleConfiguration object for the specified Amazon EFS
-// file system. EFS lifecycle management uses the LifecycleConfiguration object
-// to identify which files to move to the EFS Infrequent Access (IA) storage class.
+// file system. EFS lifecycle management uses the LifecycleConfiguration object to
+// identify which files to move to the EFS Infrequent Access (IA) storage class.
 // For a file system without a LifecycleConfiguration object, the call returns an
 // empty array in the response. When EFS Intelligent-Tiering is enabled,
-// TransitionToPrimaryStorageClass has a value of AFTER_1_ACCESS. This operation
+// TransitionToPrimaryStorageClass has a value of AFTER_1_ACCESS . This operation
 // requires permissions for the elasticfilesystem:DescribeLifecycleConfiguration
 // operation.
 func (c *Client) DescribeLifecycleConfiguration(ctx context.Context, params *DescribeLifecycleConfigurationInput, optFns ...func(*Options)) (*DescribeLifecycleConfigurationOutput, error) {
@@ -47,8 +47,8 @@ type DescribeLifecycleConfigurationInput struct {
 
 type DescribeLifecycleConfigurationOutput struct {
 
-	// An array of lifecycle management policies. EFS supports a maximum of one
-	// policy per file system.
+	// An array of lifecycle management policies. EFS supports a maximum of one policy
+	// per file system.
 	LifecyclePolicies []types.LifecyclePolicy
 
 	// Metadata pertaining to the operation's result.

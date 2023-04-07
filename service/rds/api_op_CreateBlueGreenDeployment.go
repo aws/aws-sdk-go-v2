@@ -44,7 +44,8 @@ func (c *Client) CreateBlueGreenDeployment(ctx context.Context, params *CreateBl
 type CreateBlueGreenDeploymentInput struct {
 
 	// The name of the blue/green deployment. Constraints:
-	//     - Can't be the same as an existing blue/green deployment name in the same account and Amazon Web Services Region.
+	//   - Can't be the same as an existing blue/green deployment name in the same
+	//   account and Amazon Web Services Region.
 	//
 	// This member is required.
 	BlueGreenDeploymentName *string
@@ -71,8 +72,8 @@ type CreateBlueGreenDeploymentInput struct {
 	// different from the one associated with the source DB instance.
 	TargetDBParameterGroupName *string
 
-	// The engine version of the database in the green environment. Specify the
-	// engine version to upgrade to in the green environment.
+	// The engine version of the database in the green environment. Specify the engine
+	// version to upgrade to in the green environment.
 	TargetEngineVersion *string
 
 	noSmithyDocumentSerde

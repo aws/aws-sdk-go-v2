@@ -29,8 +29,8 @@ func (c *Client) GetTaskProtection(ctx context.Context, params *GetTaskProtectio
 
 type GetTaskProtectionInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the service that the task sets exist in.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// service that the task sets exist in.
 	//
 	// This member is required.
 	Cluster *string
@@ -47,9 +47,10 @@ type GetTaskProtectionOutput struct {
 	Failures []types.Failure
 
 	// A list of tasks with the following information.
-	//     - taskArn : The task ARN.
-	//     - protectionEnabled : The protection status of the task. If scale-in protection is enabled for a task, the value is true . Otherwise, it is false .
-	//     - expirationDate : The epoch time when protection for the task will expire.
+	//   - taskArn : The task ARN.
+	//   - protectionEnabled : The protection status of the task. If scale-in
+	//   protection is enabled for a task, the value is true . Otherwise, it is false .
+	//   - expirationDate : The epoch time when protection for the task will expire.
 	ProtectedTasks []types.ProtectedTask
 
 	// Metadata pertaining to the operation's result.

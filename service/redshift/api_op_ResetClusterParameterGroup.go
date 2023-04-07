@@ -42,8 +42,8 @@ type ResetClusterParameterGroupInput struct {
 	// maximum of 20 parameters can be reset in a single request.
 	Parameters []types.Parameter
 
-	// If true, all parameters in the specified parameter group will be reset to
-	// their default values. Default: true
+	// If true , all parameters in the specified parameter group will be reset to their
+	// default values. Default: true
 	ResetAllParameters bool
 
 	noSmithyDocumentSerde

@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example serializes an XML attributes on a document targeted by
-// httpPayload.
+// This example serializes an XML attributes on a document targeted by httpPayload.
 func (c *Client) XmlAttributesOnPayload(ctx context.Context, params *XmlAttributesOnPayloadInput, optFns ...func(*Options)) (*XmlAttributesOnPayloadOutput, error) {
 	if params == nil {
 		params = &XmlAttributesOnPayloadInput{}

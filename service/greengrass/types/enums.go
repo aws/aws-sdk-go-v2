@@ -14,8 +14,8 @@ const (
 	BulkDeploymentStatusFailed       BulkDeploymentStatus = "Failed"
 )
 
-// Values returns all known values for BulkDeploymentStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for BulkDeploymentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (BulkDeploymentStatus) Values() []BulkDeploymentStatus {
 	return []BulkDeploymentStatus{
@@ -36,9 +36,9 @@ const (
 	ConfigurationSyncStatusOutOfSync ConfigurationSyncStatus = "OutOfSync"
 )
 
-// Values returns all known values for ConfigurationSyncStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConfigurationSyncStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationSyncStatus) Values() []ConfigurationSyncStatus {
 	return []ConfigurationSyncStatus{
 		"InSync",
@@ -133,9 +133,9 @@ const (
 	LoggerLevelFatal LoggerLevel = "FATAL"
 )
 
-// Values returns all known values for LoggerLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LoggerLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LoggerLevel) Values() []LoggerLevel {
 	return []LoggerLevel{
 		"DEBUG",

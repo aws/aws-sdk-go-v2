@@ -193,10 +193,9 @@ func (w *StepCompleteWaiter) Wait(ctx context.Context, params *DescribeStepInput
 	return err
 }
 
-// WaitForOutput calls the waiter function for StepComplete waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for StepComplete waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
 func (w *StepCompleteWaiter) WaitForOutput(ctx context.Context, params *DescribeStepInput, maxWaitDur time.Duration, optFns ...func(*StepCompleteWaiterOptions)) (*DescribeStepOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

@@ -36,8 +36,8 @@ type ListPermissionSetsProvisionedToAccountInput struct {
 	AccountId *string
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -133,22 +133,22 @@ func (c *Client) addOperationListPermissionSetsProvisionedToAccountMiddlewares(s
 	return nil
 }
 
-// ListPermissionSetsProvisionedToAccountAPIClient is a client that implements
-// the ListPermissionSetsProvisionedToAccount operation.
+// ListPermissionSetsProvisionedToAccountAPIClient is a client that implements the
+// ListPermissionSetsProvisionedToAccount operation.
 type ListPermissionSetsProvisionedToAccountAPIClient interface {
 	ListPermissionSetsProvisionedToAccount(context.Context, *ListPermissionSetsProvisionedToAccountInput, ...func(*Options)) (*ListPermissionSetsProvisionedToAccountOutput, error)
 }
 
 var _ ListPermissionSetsProvisionedToAccountAPIClient = (*Client)(nil)
 
-// ListPermissionSetsProvisionedToAccountPaginatorOptions is the paginator
-// options for ListPermissionSetsProvisionedToAccount
+// ListPermissionSetsProvisionedToAccountPaginatorOptions is the paginator options
+// for ListPermissionSetsProvisionedToAccount
 type ListPermissionSetsProvisionedToAccountPaginatorOptions struct {
 	// The maximum number of results to display for the assignment.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

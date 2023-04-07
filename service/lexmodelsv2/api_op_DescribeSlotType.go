@@ -91,8 +91,8 @@ type DescribeSlotTypeOutput struct {
 	// The name specified for the slot type.
 	SlotTypeName *string
 
-	// The values that the slot type can take. Includes any synonyms for the slot
-	// type values.
+	// The values that the slot type can take. Includes any synonyms for the slot type
+	// values.
 	SlotTypeValues []types.SlotTypeValue
 
 	// The strategy that Amazon Lex uses to choose a value from a list of possible

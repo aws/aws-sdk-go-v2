@@ -54,8 +54,8 @@ type DetachVolumeInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// Forces detachment if the previous detachment attempt did not occur cleanly
-	// (for example, logging into an instance, unmounting the volume, and detaching
+	// Forces detachment if the previous detachment attempt did not occur cleanly (for
+	// example, logging into an instance, unmounting the volume, and detaching
 	// normally). This option can lead to data loss or a corrupted file system. Use
 	// this option only as a last resort to detach a volume from a failed instance. The
 	// instance won't have an opportunity to flush file system caches or file system
@@ -63,8 +63,8 @@ type DetachVolumeInput struct {
 	// procedures.
 	Force *bool
 
-	// The ID of the instance. If you are detaching a Multi-Attach enabled volume,
-	// you must specify an instance ID.
+	// The ID of the instance. If you are detaching a Multi-Attach enabled volume, you
+	// must specify an instance ID.
 	InstanceId *string
 
 	noSmithyDocumentSerde

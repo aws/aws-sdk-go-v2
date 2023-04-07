@@ -362,8 +362,8 @@ func (e *AutomationStepNotFoundException) ErrorCode() string {
 }
 func (e *AutomationStepNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You specified too many custom compliance types. You can specify a maximum of
-// 10 different types.
+// You specified too many custom compliance types. You can specify a maximum of 10
+// different types.
 type ComplianceTypeCountLimitExceededException struct {
 	Message *string
 
@@ -639,8 +639,8 @@ func (e *DuplicateInstanceId) ErrorCode() string {
 }
 func (e *DuplicateInstanceId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You attempted to register a LAMBDA  or STEP_FUNCTIONS task in a region where
-// the corresponding service isn't available.
+// You attempted to register a LAMBDA or STEP_FUNCTIONS task in a region where the
+// corresponding service isn't available.
 type FeatureNotAvailableException struct {
 	Message *string
 
@@ -697,7 +697,7 @@ func (e *HierarchyLevelLimitExceededException) ErrorFault() smithy.ErrorFault {
 }
 
 // Parameter Store doesn't support changing a parameter type in a hierarchy. For
-// example, you can't change a parameter from a String  type to a SecureString
+// example, you can't change a parameter from a String type to a SecureString
 // type. You must create a new, unique parameter.
 type HierarchyTypeMismatchException struct {
 	Message *string
@@ -724,8 +724,8 @@ func (e *HierarchyTypeMismatchException) ErrorCode() string {
 }
 func (e *HierarchyTypeMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Error returned when an idempotent operation is retried and the parameters
-// don't match the original call to the API with the same idempotency token.
+// Error returned when an idempotent operation is retried and the parameters don't
+// match the original call to the API with the same idempotency token.
 type IdempotentParameterMismatch struct {
 	Message *string
 
@@ -860,7 +860,7 @@ func (e *InvalidActivationId) ErrorCode() string {
 func (e *InvalidActivationId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified aggregator isn't valid for inventory groups. Verify that the
-// aggregator uses a valid inventory type such as AWS:Application  or
+// aggregator uses a valid inventory type such as AWS:Application or
 // AWS:InstanceInformation .
 type InvalidAggregatorException struct {
 	Message *string
@@ -940,8 +940,8 @@ func (e *InvalidAssociation) ErrorCode() string {
 func (e *InvalidAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The version you specified isn't valid. Use ListAssociationVersions to view all
-// versions of an association according to the association ID. Or, use the
-// $LATEST parameter to view the latest version of the association.
+// versions of an association according to the association ID. Or, use the $LATEST
+// parameter to view the latest version of the association.
 type InvalidAssociationVersion struct {
 	Message *string
 
@@ -1399,9 +1399,12 @@ func (e *InvalidFilterValue) ErrorFault() smithy.ErrorFault { return smithy.Faul
 
 // The following problems can cause this exception:
 //   - You don't have permission to access the managed node.
-//   - Amazon Web Services Systems Manager Agent(SSM Agent) isn't running. Verify that SSM Agent is running.
-//   - SSM Agent isn't registered with the SSM endpoint. Try reinstalling SSM Agent.
-//   - The managed node isn't in valid state. Valid states are: Running , Pending , Stopped , and Stopping . Invalid states are: Shutting-down and Terminated .
+//   - Amazon Web Services Systems Manager Agent(SSM Agent) isn't running. Verify
+//     that SSM Agent is running.
+//   - SSM Agent isn't registered with the SSM endpoint. Try reinstalling SSM
+//     Agent.
+//   - The managed node isn't in valid state. Valid states are: Running , Pending ,
+//     Stopped , and Stopping . Invalid states are: Shutting-down and Terminated .
 type InvalidInstanceId struct {
 	Message *string
 
@@ -1481,8 +1484,8 @@ func (e *InvalidInventoryGroupException) ErrorCode() string {
 }
 func (e *InvalidInventoryGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You specified invalid keys or values in the Context  attribute for
-// InventoryItem . Verify the keys and values, and try again.
+// You specified invalid keys or values in the Context attribute for InventoryItem
+// . Verify the keys and values, and try again.
 type InvalidInventoryItemContextException struct {
 	Message *string
 
@@ -1884,8 +1887,8 @@ func (e *InvalidResourceId) ErrorCode() string {
 }
 func (e *InvalidResourceId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource type isn't valid. For example, if you are attempting to tag an
-// EC2 instance, the instance must be a registered managed node.
+// The resource type isn't valid. For example, if you are attempting to tag an EC2
+// instance, the instance must be a registered managed node.
 type InvalidResourceType struct {
 	Message *string
 
@@ -2019,8 +2022,8 @@ func (e *InvalidTag) ErrorCode() string {
 }
 func (e *InvalidTag) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The target isn't valid or doesn't exist. It might not be configured for
-// Systems Manager or you might not have permission to perform the operation.
+// The target isn't valid or doesn't exist. It might not be configured for Systems
+// Manager or you might not have permission to perform the operation.
 type InvalidTarget struct {
 	Message *string
 
@@ -2318,8 +2321,8 @@ func (e *OpsItemInvalidParameterException) ErrorCode() string {
 }
 func (e *OpsItemInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request caused OpsItems to exceed one or more quotas. For information
-// about OpsItem quotas, see What are the resource limits for OpsCenter? (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-learn-more.html#OpsCenter-learn-more-limits)
+// The request caused OpsItems to exceed one or more quotas. For information about
+// OpsItem quotas, see What are the resource limits for OpsCenter? (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-learn-more.html#OpsCenter-learn-more-limits)
 // .
 type OpsItemLimitExceededException struct {
 	Message *string
@@ -2664,7 +2667,7 @@ func (e *ParameterLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.
 // attempted to create a new version of parameter-name by calling the PutParameter
 // API with the overwrite flag. Version version-number, the oldest version, can't
 // be deleted because it has a label associated with it. Move the label to another
-// version of the parameter, and try again.This safeguard is to prevent parameter
+// version of the parameter, and try again. This safeguard is to prevent parameter
 // versions with mission critical labels assigned to them from being deleted. To
 // continue creating new parameters, first move the label from the oldest version
 // of the parameter to a newer one for use in your operations. For information
@@ -3088,9 +3091,9 @@ func (e *ResourcePolicyInvalidParameterException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// The PutResourcePolicy API action enforces two limits. A policy can't be
-// greater than 1024 bytes in size. And only one policy can be attached to
-// OpsItemGroup . Verify these limits and try again.
+// The PutResourcePolicy API action enforces two limits. A policy can't be greater
+// than 1024 bytes in size. And only one policy can be attached to OpsItemGroup .
+// Verify these limits and try again.
 type ResourcePolicyLimitExceededException struct {
 	Message *string
 
@@ -3397,7 +3400,7 @@ func (e *UnsupportedFeatureRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The Context  attribute that you specified for the InventoryItem isn't allowed
+// The Context attribute that you specified for the InventoryItem isn't allowed
 // for this inventory type. You can only use the Context attribute with inventory
 // types like AWS:ComplianceItem .
 type UnsupportedInventoryItemContextException struct {
@@ -3512,9 +3515,8 @@ func (e *UnsupportedParameterType) ErrorCode() string {
 }
 func (e *UnsupportedParameterType) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The document doesn't support the platform type of the given managed node
-// ID(s). For example, you sent an document for a Windows managed node to a Linux
-// node.
+// The document doesn't support the platform type of the given managed node ID(s).
+// For example, you sent an document for a Windows managed node to a Linux node.
 type UnsupportedPlatformType struct {
 	Message *string
 

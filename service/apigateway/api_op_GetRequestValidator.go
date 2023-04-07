@@ -55,7 +55,7 @@ type GetRequestValidatorOutput struct {
 	// configured Model schema.
 	ValidateRequestBody bool
 
-	// A Boolean flag to indicate whether to validate request parameters ( true) or
+	// A Boolean flag to indicate whether to validate request parameters ( true ) or
 	// not ( false ).
 	ValidateRequestParameters bool
 

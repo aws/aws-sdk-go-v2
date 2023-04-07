@@ -513,10 +513,9 @@ func (w *RunCompletedWaiter) Wait(ctx context.Context, params *GetRunInput, maxW
 	return err
 }
 
-// WaitForOutput calls the waiter function for RunCompleted waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for RunCompleted waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
 func (w *RunCompletedWaiter) WaitForOutput(ctx context.Context, params *GetRunInput, maxWaitDur time.Duration, optFns ...func(*RunCompletedWaiterOptions)) (*GetRunOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

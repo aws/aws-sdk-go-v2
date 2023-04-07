@@ -20,7 +20,6 @@ import (
 // package is the first step for creating a network in AWS TNB. This request
 // creates an empty container with an ID. The next step is to upload the actual
 // CSAR zip file into that empty container. To upload function package content, see
-//
 // PutSolFunctionPackageContent (https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html)
 // .
 func (c *Client) CreateSolFunctionPackage(ctx context.Context, params *CreateSolFunctionPackageInput, optFns ...func(*Options)) (*CreateSolFunctionPackageOutput, error) {

@@ -35,9 +35,9 @@ type CreateApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The ARN of the role that the web application assumes when it interacts with
-	// AWS IoT Core. The name of the role must be in the form
-	// AWSIotFleetHub_random_string .
+	// The ARN of the role that the web application assumes when it interacts with AWS
+	// IoT Core. The name of the role must be in the form AWSIotFleetHub_random_string
+	// .
 	//
 	// This member is required.
 	RoleArn *string

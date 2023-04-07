@@ -18,8 +18,8 @@ import (
 // once per second. This operation will return up to 1,000 configuration sets each
 // time it is run. If your Amazon SES account has more than 1,000 configuration
 // sets, this operation will also return a NextToken element. You can then execute
-// the ListConfigurationSets  operation again, passing the NextToken parameter
-// and the value of the NextToken element to retrieve additional results.
+// the ListConfigurationSets operation again, passing the NextToken parameter and
+// the value of the NextToken element to retrieve additional results.
 func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigurationSetsInput, optFns ...func(*Options)) (*ListConfigurationSetsOutput, error) {
 	if params == nil {
 		params = &ListConfigurationSetsInput{}
@@ -60,8 +60,8 @@ type ListConfigurationSetsOutput struct {
 	// A list of configuration sets.
 	ConfigurationSets []types.ConfigurationSet
 
-	// A token indicating that there are additional configuration sets available to
-	// be listed. Pass this token to successive calls of ListConfigurationSets .
+	// A token indicating that there are additional configuration sets available to be
+	// listed. Pass this token to successive calls of ListConfigurationSets .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

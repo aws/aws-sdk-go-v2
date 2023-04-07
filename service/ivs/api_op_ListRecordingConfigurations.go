@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets summary information about all recording configurations in your account,
-// in the Amazon Web Services region where the API request is processed.
+// Gets summary information about all recording configurations in your account, in
+// the Amazon Web Services region where the API request is processed.
 func (c *Client) ListRecordingConfigurations(ctx context.Context, params *ListRecordingConfigurationsInput, optFns ...func(*Options)) (*ListRecordingConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListRecordingConfigurationsInput{}
@@ -35,8 +35,8 @@ type ListRecordingConfigurationsInput struct {
 	// quota or 100, whichever is smaller.
 	MaxResults int32
 
-	// The first recording configuration to retrieve. This is used for pagination;
-	// see the nextToken  response field.
+	// The first recording configuration to retrieve. This is used for pagination; see
+	// the nextToken response field.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -134,8 +134,8 @@ type ListRecordingConfigurationsPaginatorOptions struct {
 	// quota or 100, whichever is smaller.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

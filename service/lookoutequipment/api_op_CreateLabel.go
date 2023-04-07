@@ -63,10 +63,9 @@ type CreateLabelInput struct {
 	// security of your data.
 	Equipment *string
 
-	// Provides additional information about the label. The fault code must be
-	// defined in the FaultCodes attribute of the label group. Data in this field will
-	// be retained for service usage. Follow best practices for the security of your
-	// data.
+	// Provides additional information about the label. The fault code must be defined
+	// in the FaultCodes attribute of the label group. Data in this field will be
+	// retained for service usage. Follow best practices for the security of your data.
 	FaultCode *string
 
 	// Metadata providing additional information about the label. Data in this field

@@ -13,8 +13,7 @@ import (
 )
 
 // Lists the budgets that are associated with an account. The Request Syntax
-// section shows the BudgetLimit  syntax. For PlannedBudgetLimits , see the
-// Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples)
+// section shows the BudgetLimit syntax. For PlannedBudgetLimits , see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples)
 // section.
 func (c *Client) DescribeBudgets(ctx context.Context, params *DescribeBudgetsInput, optFns ...func(*Options)) (*DescribeBudgetsOutput, error) {
 	if params == nil {
@@ -34,8 +33,7 @@ func (c *Client) DescribeBudgets(ctx context.Context, params *DescribeBudgetsInp
 // Request of DescribeBudgets
 type DescribeBudgetsInput struct {
 
-	// The accountId that is associated with the budgets that you want descriptions
-	// of.
+	// The accountId that is associated with the budgets that you want descriptions of.
 	//
 	// This member is required.
 	AccountId *string
@@ -144,8 +142,8 @@ type DescribeBudgetsPaginatorOptions struct {
 	// contains. The maximum is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

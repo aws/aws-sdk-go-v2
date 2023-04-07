@@ -15,7 +15,7 @@ import (
 // Returns a list of PackageVersionSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
 // objects for package versions in a repository that match the request parameters.
 // Package versions of all statuses will be returned by default when calling
-// list-package-versions with no --status  parameter.
+// list-package-versions with no --status parameter.
 func (c *Client) ListPackageVersions(ctx context.Context, params *ListPackageVersionsInput, optFns ...func(*Options)) (*ListPackageVersionsOutput, error) {
 	if params == nil {
 		params = &ListPackageVersionsInput{}
@@ -33,8 +33,8 @@ func (c *Client) ListPackageVersions(ctx context.Context, params *ListPackageVer
 
 type ListPackageVersionsInput struct {
 
-	// The name of the domain that contains the repository that contains the
-	// requested package versions.
+	// The name of the domain that contains the repository that contains the requested
+	// package versions.
 	//
 	// This member is required.
 	Domain *string
@@ -64,10 +64,11 @@ type ListPackageVersionsInput struct {
 	// The namespace of the package that contains the requested package versions. The
 	// package component that specifies its namespace depends on its type. For example:
 	//
-	//     - The namespace of a Maven package is its groupId .
-	//     - The namespace of an npm package is its scope .
-	//     - Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.
-	//     - The namespace of a generic package is its namespace .
+	//   - The namespace of a Maven package is its groupId .
+	//   - The namespace of an npm package is its scope .
+	//   - Python and NuGet packages do not contain a corresponding component,
+	//   packages of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -75,7 +76,7 @@ type ListPackageVersionsInput struct {
 	NextToken *string
 
 	// The originType used to filter package versions. Only package versions with the
-	// provided originType  will be returned.
+	// provided originType will be returned.
 	OriginType types.PackageVersionOriginType
 
 	// How to sort the requested list of package versions.
@@ -90,8 +91,10 @@ type ListPackageVersionsInput struct {
 type ListPackageVersionsOutput struct {
 
 	// The default package version to display. This depends on the package format:
-	//     - For Maven and PyPI packages, it's the most recently published package version.
-	//     - For npm packages, it's the version referenced by the latest tag. If the latest tag is not set, it's the most recently published package version.
+	//   - For Maven and PyPI packages, it's the most recently published package
+	//   version.
+	//   - For npm packages, it's the version referenced by the latest tag. If the
+	//   latest tag is not set, it's the most recently published package version.
 	DefaultDisplayVersion *string
 
 	// A format of the package.
@@ -100,9 +103,10 @@ type ListPackageVersionsOutput struct {
 	// The namespace of the package that contains the requested package versions. The
 	// package component that specifies its namespace depends on its type. For example:
 	//
-	//     - The namespace of a Maven package is its groupId .
-	//     - The namespace of an npm package is its scope .
-	//     - Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.
+	//   - The namespace of a Maven package is its groupId .
+	//   - The namespace of an npm package is its scope .
+	//   - Python and NuGet packages do not contain a corresponding component,
+	//   packages of those formats do not have a namespace.
 	Namespace *string
 
 	// If there are additional results, this is the token for the next set of results.
@@ -198,8 +202,8 @@ type ListPackageVersionsPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

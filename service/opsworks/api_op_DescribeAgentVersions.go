@@ -40,7 +40,7 @@ type DescribeAgentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeAgentVersions  request.
+// Contains the response to a DescribeAgentVersions request.
 type DescribeAgentVersionsOutput struct {
 
 	// The agent versions for the specified stack or configuration manager. Note that

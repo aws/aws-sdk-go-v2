@@ -72,15 +72,15 @@ type BackendAPIResourceConfig struct {
 	// Additional authentication methods used to interact with your data models.
 	AdditionalAuthTypes []BackendAPIAuthType
 
-	// The API name used to interact with the data model, configured as a part of
-	// your Amplify project.
+	// The API name used to interact with the data model, configured as a part of your
+	// Amplify project.
 	ApiName *string
 
 	// The conflict resolution strategy for your data stored in the data models.
 	ConflictResolution *BackendAPIConflictResolution
 
-	// The default authentication type for interacting with the configured data
-	// models in your Amplify project.
+	// The default authentication type for interacting with the configured data models
+	// in your Amplify project.
 	DefaultAuthType *BackendAPIAuthType
 
 	// The service used to provision and interact with the data model.
@@ -93,8 +93,8 @@ type BackendAPIResourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Describes Apple social federation configurations for allowing your app users
-// to sign in using OAuth.
+// Describes Apple social federation configurations for allowing your app users to
+// sign in using OAuth.
 type BackendAuthAppleProviderConfig struct {
 
 	// Describes the client_id (also called Services ID) that comes from Apple.
@@ -208,8 +208,8 @@ type CreateBackendAuthIdentityPoolConfig struct {
 	// This member is required.
 	IdentityPoolName *string
 
-	// Set to true or false based on whether you want to enable guest authorization
-	// to your Amplify app.
+	// Set to true or false based on whether you want to enable guest authorization to
+	// your Amplify app.
 	//
 	// This member is required.
 	UnauthenticatedLogin bool
@@ -217,8 +217,8 @@ type CreateBackendAuthIdentityPoolConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Describes whether to apply multi-factor authentication policies for your
-// Amazon Cognito user pool configured as a part of your Amplify project.
+// Describes whether to apply multi-factor authentication policies for your Amazon
+// Cognito user pool configured as a part of your Amplify project.
 type CreateBackendAuthMFAConfig struct {
 
 	// Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in
@@ -306,8 +306,8 @@ type CreateBackendAuthResourceConfig struct {
 	// This member is required.
 	UserPoolConfigs *CreateBackendAuthUserPoolConfig
 
-	// Describes the authorization configuration for the Amazon Cognito identity
-	// pool, provisioned as a part of your auth resource in the Amplify project.
+	// Describes the authorization configuration for the Amazon Cognito identity pool,
+	// provisioned as a part of your auth resource in the Amplify project.
 	IdentityPoolConfigs *CreateBackendAuthIdentityPoolConfig
 
 	noSmithyDocumentSerde
@@ -337,8 +337,8 @@ type CreateBackendAuthUserPoolConfig struct {
 	// user pool, configured as a part of your Amplify project.
 	ForgotPassword *CreateBackendAuthForgotPasswordConfig
 
-	// Describes whether to apply multi-factor authentication policies for your
-	// Amazon Cognito user pool configured as a part of your Amplify project.
+	// Describes whether to apply multi-factor authentication policies for your Amazon
+	// Cognito user pool configured as a part of your Amplify project.
 	Mfa *CreateBackendAuthMFAConfig
 
 	// Describes the OAuth policy and rules for your Amazon Cognito user pool,
@@ -484,8 +484,8 @@ type SmsSettings struct {
 	noSmithyDocumentSerde
 }
 
-// The settings for using the social identity providers for access to your
-// Amplify app.
+// The settings for using the social identity providers for access to your Amplify
+// app.
 type SocialProviderSettings struct {
 
 	// Describes third-party social federation configurations for allowing your app
@@ -500,8 +500,8 @@ type SocialProviderSettings struct {
 	// users to sign in using OAuth.
 	LoginWithAmazon *BackendAuthSocialProviderConfig
 
-	// Describes Apple social federation configurations for allowing your app users
-	// to sign in using OAuth.
+	// Describes Apple social federation configurations for allowing your app users to
+	// sign in using OAuth.
 	SignInWithApple *BackendAuthAppleProviderConfig
 
 	noSmithyDocumentSerde
@@ -526,8 +526,8 @@ type UpdateBackendAuthForgotPasswordConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the authorization configuration for the Amazon Cognito identity
-// pool, provisioned as a part of your auth resource in the Amplify project.
+// Describes the authorization configuration for the Amazon Cognito identity pool,
+// provisioned as a part of your auth resource in the Amplify project.
 type UpdateBackendAuthIdentityPoolConfig struct {
 
 	// A boolean value that can be set to allow or disallow guest-level authorization
@@ -576,8 +576,8 @@ type UpdateBackendAuthOAuthConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the password policy for your Amazon Cognito user pool configured as
-// a part of your Amplify project.
+// Describes the password policy for your Amazon Cognito user pool configured as a
+// part of your Amplify project.
 type UpdateBackendAuthPasswordPolicyConfig struct {
 
 	// Describes additional constraints on password requirements to sign in to the
@@ -613,8 +613,8 @@ type UpdateBackendAuthResourceConfig struct {
 	// This member is required.
 	UserPoolConfigs *UpdateBackendAuthUserPoolConfig
 
-	// Describes the authorization configuration for the Amazon Cognito identity
-	// pool, provisioned as a part of your auth resource in the Amplify project.
+	// Describes the authorization configuration for the Amazon Cognito identity pool,
+	// provisioned as a part of your auth resource in the Amplify project.
 	IdentityPoolConfigs *UpdateBackendAuthIdentityPoolConfig
 
 	noSmithyDocumentSerde
@@ -628,8 +628,8 @@ type UpdateBackendAuthUserPoolConfig struct {
 	// pool, configured as a part of your Amplify project.
 	ForgotPassword *UpdateBackendAuthForgotPasswordConfig
 
-	// Describes whether to apply multi-factor authentication policies for your
-	// Amazon Cognito user pool configured as a part of your Amplify project.
+	// Describes whether to apply multi-factor authentication policies for your Amazon
+	// Cognito user pool configured as a part of your Amplify project.
 	Mfa *UpdateBackendAuthMFAConfig
 
 	// Describes the OAuth policy and rules for your Amazon Cognito user pool,

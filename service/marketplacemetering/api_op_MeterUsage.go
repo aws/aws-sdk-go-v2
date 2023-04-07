@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// API to emit metering records. For identical requests, the API is idempotent.
-// It simply returns the metering record ID. MeterUsage is authenticated on the
+// API to emit metering records. For identical requests, the API is idempotent. It
+// simply returns the metering record ID. MeterUsage is authenticated on the
 // buyer's AWS account using credentials from the EC2 instance, ECS task, or EKS
 // pod. MeterUsage can optionally include multiple usage allocations, to provide
 // customers with usage data split into buckets by tags that you define (or allow
@@ -63,12 +63,12 @@ type MeterUsageInput struct {
 	// false if not specified.
 	DryRun *bool
 
-	// The set of UsageAllocations  to submit. The sum of all UsageAllocation
-	// quantities must equal the UsageQuantity  of the MeterUsage  request, and each
+	// The set of UsageAllocations to submit. The sum of all UsageAllocation
+	// quantities must equal the UsageQuantity of the MeterUsage request, and each
 	// UsageAllocation must have a unique set of tags (include no tags).
 	UsageAllocations []types.UsageAllocation
 
-	// Consumption value for the hour. Defaults to 0  if not specified.
+	// Consumption value for the hour. Defaults to 0 if not specified.
 	UsageQuantity *int32
 
 	noSmithyDocumentSerde

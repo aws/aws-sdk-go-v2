@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified connection alias. For more information, see
-// Cross-Region Redirection for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html)
+// Deletes the specified connection alias. For more information, see  Cross-Region
+// Redirection for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html)
 // . If you will no longer be using a fully qualified domain name (FQDN) as the
 // registration code for your WorkSpaces users, you must take certain precautions
 // to prevent potential security issues. For more information, see Security

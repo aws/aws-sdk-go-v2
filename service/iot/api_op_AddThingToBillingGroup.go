@@ -33,8 +33,8 @@ type AddThingToBillingGroupInput struct {
 	// The ARN of the billing group.
 	BillingGroupArn *string
 
-	// The name of the billing group. This call is asynchronous. It might take
-	// several seconds for the detachment to propagate.
+	// The name of the billing group. This call is asynchronous. It might take several
+	// seconds for the detachment to propagate.
 	BillingGroupName *string
 
 	// The ARN of the thing to be added to the billing group.

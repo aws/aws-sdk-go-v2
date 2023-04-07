@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves details of events stored with Amazon Fraud Detector. This action
-// does not retrieve prediction results.
+// Retrieves details of events stored with Amazon Fraud Detector. This action does
+// not retrieve prediction results.
 func (c *Client) GetEvent(ctx context.Context, params *GetEventInput, optFns ...func(*Options)) (*GetEventOutput, error) {
 	if params == nil {
 		params = &GetEventInput{}

@@ -29,7 +29,7 @@ func (c *Client) DeregisterInstance(ctx context.Context, params *DeregisterInsta
 
 type DeregisterInstanceInput struct {
 
-	// The value that you specified for Id  in the RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+	// The value that you specified for Id in the RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
 	// request.
 	//
 	// This member is required.

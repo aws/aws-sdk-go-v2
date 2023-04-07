@@ -17,10 +17,10 @@ import (
 // activities. For more information, see Verifying a scaling activity for an Auto
 // Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html)
 // in the Amazon EC2 Auto Scaling User Guide. If the scaling event succeeds, the
-// value of the StatusCode  element in the response is Successful. If an attempt
-// to launch instances failed, the StatusCode  value is Failed  or Cancelled and
-// the StatusMessage element in the response indicates the cause of the failure.
-// For help interpreting the StatusMessage , see Troubleshooting Amazon EC2 Auto
+// value of the StatusCode element in the response is Successful . If an attempt to
+// launch instances failed, the StatusCode value is Failed or Cancelled and the
+// StatusMessage element in the response indicates the cause of the failure. For
+// help interpreting the StatusMessage , see Troubleshooting Amazon EC2 Auto
 // Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/CHAP_Troubleshooting.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeScalingActivities(ctx context.Context, params *DescribeScalingActivitiesInput, optFns ...func(*Options)) (*DescribeScalingActivitiesOutput, error) {
@@ -158,8 +158,8 @@ type DescribeScalingActivitiesPaginatorOptions struct {
 	// and the maximum value is 100 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

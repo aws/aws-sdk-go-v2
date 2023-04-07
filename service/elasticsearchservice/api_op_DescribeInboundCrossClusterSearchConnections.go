@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the inbound cross-cluster search connections for a destination
-// domain.
+// Lists all the inbound cross-cluster search connections for a destination domain.
 func (c *Client) DescribeInboundCrossClusterSearchConnections(ctx context.Context, params *DescribeInboundCrossClusterSearchConnectionsInput, optFns ...func(*Options)) (*DescribeInboundCrossClusterSearchConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeInboundCrossClusterSearchConnectionsInput{}
@@ -29,17 +28,17 @@ func (c *Client) DescribeInboundCrossClusterSearchConnections(ctx context.Contex
 	return out, nil
 }
 
-// Container for the parameters to the
-// DescribeInboundCrossClusterSearchConnections operation.
+// Container for the parameters to the DescribeInboundCrossClusterSearchConnections
+// operation.
 type DescribeInboundCrossClusterSearchConnectionsInput struct {
 
 	// A list of filters used to match properties for inbound cross-cluster search
-	// connection. Available Filter  names for this operation are:
-	//     - cross-cluster-search-connection-id
-	//     - source-domain-info.domain-name
-	//     - source-domain-info.owner-id
-	//     - source-domain-info.region
-	//     - destination-domain-info.domain-name
+	// connection. Available Filter names for this operation are:
+	//   - cross-cluster-search-connection-id
+	//   - source-domain-info.domain-name
+	//   - source-domain-info.owner-id
+	//   - source-domain-info.region
+	//   - destination-domain-info.domain-name
 	Filters []types.Filter
 
 	// Set this value to limit the number of results returned. If not specified,
@@ -146,8 +145,8 @@ type DescribeInboundCrossClusterSearchConnectionsPaginatorOptions struct {
 	// defaults to 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

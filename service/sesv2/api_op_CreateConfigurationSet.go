@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a configuration set. Configuration sets are groups of rules that you
-// can apply to the emails that you send. You apply a configuration set to an email
-// by specifying the name of the configuration set when you call the Amazon SES API
+// Create a configuration set. Configuration sets are groups of rules that you can
+// apply to the emails that you send. You apply a configuration set to an email by
+// specifying the name of the configuration set when you call the Amazon SES API
 // v2. When you apply a configuration set to an email, all of the rules in that
 // configuration set are applied to the email.
 func (c *Client) CreateConfigurationSet(ctx context.Context, params *CreateConfigurationSetInput, optFns ...func(*Options)) (*CreateConfigurationSetOutput, error) {

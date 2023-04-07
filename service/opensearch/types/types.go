@@ -30,8 +30,12 @@ type AccessPoliciesStatus struct {
 // List of limits that are specific to a given instance type.
 type AdditionalLimit struct {
 
-	//     - MaximumNumberOfDataNodesSupported - This attribute only applies to master nodes and specifies the maximum number of data nodes of a given instance type a master node can support.
-	//     - MaximumNumberOfDataNodesWithoutMasterNode - This attribute only applies to data nodes and specifies the maximum number of data nodes of a given instance type can exist without a master node governing them.
+	//   - MaximumNumberOfDataNodesSupported - This attribute only applies to master
+	//   nodes and specifies the maximum number of data nodes of a given instance type a
+	//   master node can support.
+	//   - MaximumNumberOfDataNodesWithoutMasterNode - This attribute only applies to
+	//   data nodes and specifies the maximum number of data nodes of a given instance
+	//   type can exist without a master node governing them.
 	LimitName *string
 
 	// The values of the additional instance type limits.
@@ -42,10 +46,22 @@ type AdditionalLimit struct {
 
 // Status of the advanced options for the specified domain. The following options
 // are available:
-//   - "rest.action.multi.allow_explicit_index": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether explicit references to indexes are allowed inside the body of HTTP requests. If you want to configure access policies for domain sub-resources, such as specific indexes and domain APIs, you must disable this property. Default is true.
-//   - "indices.fielddata.cache.size": "80" - Note the use of a string rather than a boolean. Specifies the percentage of heap space allocated to field data. Default is unbounded.
-//   - "indices.query.bool.max_clause_count": "1024" - Note the use of a string rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries with more than the permitted number of clauses result in a TooManyClauses error.
-//   - "override_main_response_version": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether the domain reports its version as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with it. Default is false when creating a domain and true when upgrading a domain.
+//   - "rest.action.multi.allow_explicit_index": "true" | "false" - Note the use of
+//     a string rather than a boolean. Specifies whether explicit references to indexes
+//     are allowed inside the body of HTTP requests. If you want to configure access
+//     policies for domain sub-resources, such as specific indexes and domain APIs, you
+//     must disable this property. Default is true.
+//   - "indices.fielddata.cache.size": "80" - Note the use of a string rather than
+//     a boolean. Specifies the percentage of heap space allocated to field data.
+//     Default is unbounded.
+//   - "indices.query.bool.max_clause_count": "1024" - Note the use of a string
+//     rather than a boolean. Specifies the maximum number of clauses allowed in a
+//     Lucene boolean query. Default is 1,024. Queries with more than the permitted
+//     number of clauses result in a TooManyClauses error.
+//   - "override_main_response_version": "true" | "false" - Note the use of a
+//     string rather than a boolean. Specifies whether the domain reports its version
+//     as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with
+//     it. Default is false when creating a domain and true when upgrading a domain.
 //
 // For more information, see Advanced cluster parameters (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options)
 // .
@@ -96,9 +112,9 @@ type AdvancedSecurityOptions struct {
 // .
 type AdvancedSecurityOptionsInput struct {
 
-	// True to enable a 30-day migration period during which administrators can
-	// create role mappings. Only necessary when enabling fine-grained access control
-	// on an existing domain (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing)
+	// True to enable a 30-day migration period during which administrators can create
+	// role mappings. Only necessary when enabling fine-grained access control on an
+	// existing domain (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing)
 	// .
 	AnonymousAuthEnabled *bool
 
@@ -163,8 +179,8 @@ type AutoTune struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies details about a scheduled Auto-Tune action. For more information,
-// see Auto-Tune for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
+// Specifies details about a scheduled Auto-Tune action. For more information, see
+// Auto-Tune for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
 // .
 type AutoTuneDetails struct {
 
@@ -186,8 +202,8 @@ type AutoTuneMaintenanceSchedule struct {
 	// can deploy changes.
 	CronExpressionForRecurrence *string
 
-	// The duration of the maintenance schedule. For example, "Duration": {"Value":
-	// 2, "Unit": "HOURS"} .
+	// The duration of the maintenance schedule. For example, "Duration": {"Value": 2,
+	// "Unit": "HOURS"} .
 	Duration *Duration
 
 	// The Epoch timestamp at which the Auto-Tune maintenance schedule starts.
@@ -235,8 +251,8 @@ type AutoTuneOptionsInput struct {
 	// .
 	MaintenanceSchedules []AutoTuneMaintenanceSchedule
 
-	// Whether to schedule Auto-Tune optimizations that require blue/green
-	// deployments during the domain's configured daily off-peak window.
+	// Whether to schedule Auto-Tune optimizations that require blue/green deployments
+	// during the domain's configured daily off-peak window.
 	UseOffPeakWindow *bool
 
 	noSmithyDocumentSerde
@@ -393,7 +409,7 @@ type ClusterConfig struct {
 	DedicatedMasterCount *int32
 
 	// Indicates whether dedicated master nodes are enabled for the cluster. True if
-	// the cluster will use a dedicated master node. False  if the cluster will not.
+	// the cluster will use a dedicated master node. False if the cluster will not.
 	DedicatedMasterEnabled *bool
 
 	// OpenSearch Service instance type of the dedicated master nodes in the cluster.
@@ -444,8 +460,8 @@ type ClusterConfigStatus struct {
 }
 
 // Container for the parameters required to enable Cognito authentication for an
-// OpenSearch Service domain. For more information, see Configuring Amazon
-// Cognito authentication for OpenSearch Dashboards (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html)
+// OpenSearch Service domain. For more information, see Configuring Amazon Cognito
+// authentication for OpenSearch Dashboards (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html)
 // .
 type CognitoOptions struct {
 
@@ -453,12 +469,12 @@ type CognitoOptions struct {
 	// Dashboards.
 	Enabled *bool
 
-	// The Amazon Cognito identity pool ID that you want OpenSearch Service to use
-	// for OpenSearch Dashboards authentication.
+	// The Amazon Cognito identity pool ID that you want OpenSearch Service to use for
+	// OpenSearch Dashboards authentication.
 	IdentityPoolId *string
 
-	// The AmazonOpenSearchServiceCognitoAccess role that allows OpenSearch Service
-	// to configure your user pool and identity pool.
+	// The AmazonOpenSearchServiceCognitoAccess role that allows OpenSearch Service to
+	// configure your user pool and identity pool.
 	RoleArn *string
 
 	// The Amazon Cognito user pool ID that you want OpenSearch Service to use for
@@ -520,7 +536,7 @@ type ConnectionProperties struct {
 	noSmithyDocumentSerde
 }
 
-// A filter to apply to the DescribePackage  response.
+// A filter to apply to the DescribePackage response.
 type DescribePackagesFilter struct {
 
 	// Any field from PackageDetails .
@@ -613,8 +629,10 @@ type DomainEndpointOptions struct {
 
 	// Specify the TLS security policy to apply to the HTTPS endpoint of the domain.
 	// Can be one of the following values:
-	//     - Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLS version 1.0 and higher.
-	//     - Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLS version 1.2
+	//   - Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLS version
+	//   1.0 and higher.
+	//   - Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLS
+	//   version 1.2
 	TLSSecurityPolicy TLSSecurityPolicy
 
 	noSmithyDocumentSerde
@@ -643,7 +661,7 @@ type DomainInfo struct {
 	DomainName *string
 
 	// The type of search engine that the domain is running. OpenSearch for an
-	// OpenSearch engine, or Elasticsearch  for a legacy Elasticsearch OSS engine.
+	// OpenSearch engine, or Elasticsearch for a legacy Elasticsearch OSS engine.
 	EngineType EngineType
 
 	noSmithyDocumentSerde
@@ -688,7 +706,7 @@ type DomainPackageDetails struct {
 	PackageVersion *string
 
 	// Denotes the location of the package on the OpenSearch Service cluster nodes.
-	// It's the same as synonym_path  for dictionary files.
+	// It's the same as synonym_path for dictionary files.
 	ReferencePath *string
 
 	noSmithyDocumentSerde
@@ -759,8 +777,8 @@ type DomainStatus struct {
 	// Encryption at rest settings for the domain.
 	EncryptionAtRestOptions *EncryptionAtRestOptions
 
-	// Domain-specific endpoint used to submit index, search, and data upload
-	// requests to the domain.
+	// Domain-specific endpoint used to submit index, search, and data upload requests
+	// to the domain.
 	Endpoint *string
 
 	// The key-value pair that exists if the OpenSearch Service domain uses VPC
@@ -769,7 +787,7 @@ type DomainStatus struct {
 	Endpoints map[string]string
 
 	// Version of OpenSearch or Elasticsearch that the domain is running, in the
-	// format Elasticsearch_X.Y  or OpenSearch_X.Y .
+	// format Elasticsearch_X.Y or OpenSearch_X.Y .
 	EngineVersion *string
 
 	// Log publishing options for the domain.
@@ -841,10 +859,11 @@ type DryRunResults struct {
 
 	// Specifies the way in which OpenSearch Service will apply an update. Possible
 	// values are:
-	//     - Blue/Green - The update requires a blue/green deployment.
-	//     - DynamicUpdate - No blue/green deployment required
-	//     - Undetermined - The domain is in the middle of an update and can't predict the deployment type. Try again after the update is complete.
-	//     - None - The request doesn't include any configuration changes.
+	//   - Blue/Green - The update requires a blue/green deployment.
+	//   - DynamicUpdate - No blue/green deployment required
+	//   - Undetermined - The domain is in the middle of an update and can't predict
+	//   the deployment type. Try again after the update is complete.
+	//   - None - The request doesn't include any configuration changes.
 	DeploymentType *string
 
 	// A message corresponding to the deployment type.
@@ -853,8 +872,8 @@ type DryRunResults struct {
 	noSmithyDocumentSerde
 }
 
-// The duration of a maintenance schedule. For more information, see Auto-Tune
-// for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
+// The duration of a maintenance schedule. For more information, see Auto-Tune for
+// Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
 // .
 type Duration struct {
 
@@ -881,7 +900,7 @@ type EBSOptions struct {
 	Iops *int32
 
 	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes.
-	// Applicable only for the gp3  volume type.
+	// Applicable only for the gp3 volume type.
 	Throughput *int32
 
 	// Specifies the size (in GiB) of EBS volumes attached to data nodes.
@@ -997,21 +1016,23 @@ type InboundConnectionStatus struct {
 	Message *string
 
 	// The status code for the connection. Can be one of the following:
-	//     - PENDING_ACCEPTANCE - Inbound connection is not yet accepted by the remote domain owner.
-	//     - APPROVED: Inbound connection is pending acceptance by the remote domain owner.
-	//     - PROVISIONING: Inbound connection is being provisioned.
-	//     - ACTIVE: Inbound connection is active and ready to use.
-	//     - REJECTING: Inbound connection rejection is in process.
-	//     - REJECTED: Inbound connection is rejected.
-	//     - DELETING: Inbound connection deletion is in progress.
-	//     - DELETED: Inbound connection is deleted and can no longer be used.
+	//   - PENDING_ACCEPTANCE - Inbound connection is not yet accepted by the remote
+	//   domain owner.
+	//   - APPROVED: Inbound connection is pending acceptance by the remote domain
+	//   owner.
+	//   - PROVISIONING: Inbound connection is being provisioned.
+	//   - ACTIVE: Inbound connection is active and ready to use.
+	//   - REJECTING: Inbound connection rejection is in process.
+	//   - REJECTED: Inbound connection is rejected.
+	//   - DELETING: Inbound connection deletion is in progress.
+	//   - DELETED: Inbound connection is deleted and can no longer be used.
 	StatusCode InboundConnectionStatusCode
 
 	noSmithyDocumentSerde
 }
 
-// Limits on the number of instances that can be created in OpenSearch Service
-// for a given instance type.
+// Limits on the number of instances that can be created in OpenSearch Service for
+// a given instance type.
 type InstanceCountLimits struct {
 
 	// The minimum allowed number of instances.
@@ -1026,8 +1047,7 @@ type InstanceCountLimits struct {
 // Instance-related attributes that are available for a given instance type.
 type InstanceLimits struct {
 
-	// Limits on the number of instances that can be created for a given instance
-	// type.
+	// Limits on the number of instances that can be created for a given instance type.
 	InstanceCountLimits *InstanceCountLimits
 
 	noSmithyDocumentSerde
@@ -1079,9 +1099,9 @@ type Limits struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies whether the Amazon OpenSearch Service domain publishes the
-// OpenSearch application and slow logs to Amazon CloudWatch. For more information,
-// see Monitoring OpenSearch logs with Amazon CloudWatch Logs (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html)
+// Specifies whether the Amazon OpenSearch Service domain publishes the OpenSearch
+// application and slow logs to Amazon CloudWatch. For more information, see
+// Monitoring OpenSearch logs with Amazon CloudWatch Logs (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html)
 // . After you enable log publishing, you still have to enable the collection of
 // slow logs using the OpenSearch REST API.
 type LogPublishingOption struct {
@@ -1114,11 +1134,11 @@ type MasterUserOptions struct {
 	// InternalUserDatabaseEnabled is false .
 	MasterUserARN *string
 
-	// User name for the master user. Only specify if InternalUserDatabaseEnabled  is
+	// User name for the master user. Only specify if InternalUserDatabaseEnabled is
 	// true .
 	MasterUserName *string
 
-	// Password for the master user. Only specify if InternalUserDatabaseEnabled  is
+	// Password for the master user. Only specify if InternalUserDatabaseEnabled is
 	// true .
 	MasterUserPassword *string
 
@@ -1157,8 +1177,8 @@ type NodeToNodeEncryptionOptionsStatus struct {
 // scheduled service software updates and blue/green Auto-Tune enhancements.
 // OpenSearch Service will schedule these actions during the window that you
 // specify. If you don't specify a window start time, it defaults to 10:00 P.M.
-// local time. For more information, see Defining off-peak maintenance windows
-// for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html)
+// local time. For more information, see Defining off-peak maintenance windows for
+// Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html)
 // .
 type OffPeakWindow struct {
 
@@ -1262,16 +1282,19 @@ type OutboundConnectionStatus struct {
 	Message *string
 
 	// The status code for the outbound connection. Can be one of the following:
-	//     - VALIDATING - The outbound connection request is being validated.
-	//     - VALIDATION_FAILED - Validation failed for the connection request.
-	//     - PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet accepted by the remote domain owner.
-	//     - APPROVED - Outbound connection has been approved by the remote domain owner for getting provisioned.
-	//     - PROVISIONING - Outbound connection request is in process.
-	//     - ACTIVE - Outbound connection is active and ready to use.
-	//     - REJECTING - Outbound connection rejection by remote domain owner is in progress.
-	//     - REJECTED - Outbound connection request is rejected by remote domain owner.
-	//     - DELETING - Outbound connection deletion is in progress.
-	//     - DELETED - Outbound connection is deleted and can no longer be used.
+	//   - VALIDATING - The outbound connection request is being validated.
+	//   - VALIDATION_FAILED - Validation failed for the connection request.
+	//   - PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet
+	//   accepted by the remote domain owner.
+	//   - APPROVED - Outbound connection has been approved by the remote domain owner
+	//   for getting provisioned.
+	//   - PROVISIONING - Outbound connection request is in process.
+	//   - ACTIVE - Outbound connection is active and ready to use.
+	//   - REJECTING - Outbound connection rejection by remote domain owner is in
+	//   progress.
+	//   - REJECTED - Outbound connection request is rejected by remote domain owner.
+	//   - DELETING - Outbound connection deletion is in progress.
+	//   - DELETED - Outbound connection is deleted and can no longer be used.
 	StatusCode OutboundConnectionStatusCode
 
 	noSmithyDocumentSerde
@@ -1536,7 +1559,7 @@ type ScheduledAction struct {
 	// Whether the action is required or optional.
 	Mandatory *bool
 
-	// Whether the action was scheduled manually ( CUSTOMER, or by OpenSearch Service
+	// Whether the action was scheduled manually ( CUSTOMER , or by OpenSearch Service
 	// automatically ( SYSTEM ).
 	ScheduledBy ScheduledBy
 
@@ -1546,8 +1569,8 @@ type ScheduledAction struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies details about a scheduled Auto-Tune action. For more information,
-// see Auto-Tune for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
+// Specifies details about a scheduled Auto-Tune action. For more information, see
+// Auto-Tune for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
 // .
 type ScheduledAutoTuneDetails struct {
 
@@ -1567,8 +1590,8 @@ type ScheduledAutoTuneDetails struct {
 }
 
 // The current status of the service software for an Amazon OpenSearch Service
-// domain. For more information, see Service software updates in Amazon
-// OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
+// domain. For more information, see Service software updates in Amazon OpenSearch
+// Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
 // .
 type ServiceSoftwareOptions struct {
 
@@ -1593,8 +1616,8 @@ type ServiceSoftwareOptions struct {
 	// software is automatically updated after the automated update date.
 	OptionalDeployment *bool
 
-	// True if you're able to update your service software version. False if you
-	// can't update your service software version.
+	// True if you're able to update your service software version. False if you can't
+	// update your service software version.
 	UpdateAvailable *bool
 
 	// The status of your service software update.
@@ -1604,11 +1627,11 @@ type ServiceSoftwareOptions struct {
 }
 
 // The time, in UTC format, when OpenSearch Service takes a daily automated
-// snapshot of the specified domain. Default is 0  hours.
+// snapshot of the specified domain. Default is 0 hours.
 type SnapshotOptions struct {
 
 	// The time, in UTC format, when OpenSearch Service takes a daily automated
-	// snapshot of the specified domain. Default is 0  hours.
+	// snapshot of the specified domain. Default is 0 hours.
 	AutomatedSnapshotStartHour *int32
 
 	noSmithyDocumentSerde
@@ -1646,8 +1669,8 @@ type SoftwareUpdateOptionsStatus struct {
 	// The service software update options for a domain.
 	Options *SoftwareUpdateOptions
 
-	// The status of service software update options, including creation date and
-	// last updated date.
+	// The status of service software update options, including creation date and last
+	// updated date.
 	Status *OptionStatus
 
 	noSmithyDocumentSerde
@@ -1657,7 +1680,7 @@ type SoftwareUpdateOptionsStatus struct {
 // available for a given intance type.
 type StorageType struct {
 
-	// The storage sub-type, such as gp3  or io1 .
+	// The storage sub-type, such as gp3 or io1 .
 	StorageSubTypeName *string
 
 	// Limits that are applicable for the given storage type.
@@ -1669,18 +1692,23 @@ type StorageType struct {
 	noSmithyDocumentSerde
 }
 
-// Limits that are applicable for the given Amazon OpenSearch Service storage
-// type.
+// Limits that are applicable for the given Amazon OpenSearch Service storage type.
 type StorageTypeLimit struct {
 
 	// Name of storage limits that are applicable for the given storage type. If
 	// StorageType is ebs , the following options are available:
-	//     - MinimumVolumeSize - Minimum volume size that is available for the given storage type. Can be empty if not applicable.
-	//     - MaximumVolumeSize - Maximum volume size that is available for the given storage type. Can be empty if not applicable.
-	//     - MaximumIops - Maximum amount of IOPS that is available for the given the storage type. Can be empty if not applicable.
-	//     - MinimumIops - Minimum amount of IOPS that is available for the given the storage type. Can be empty if not applicable.
-	//     - MaximumThroughput - Maximum amount of throughput that is available for the given the storage type. Can be empty if not applicable.
-	//     - MinimumThroughput - Minimum amount of throughput that is available for the given the storage type. Can be empty if not applicable.
+	//   - MinimumVolumeSize - Minimum volume size that is available for the given
+	//   storage type. Can be empty if not applicable.
+	//   - MaximumVolumeSize - Maximum volume size that is available for the given
+	//   storage type. Can be empty if not applicable.
+	//   - MaximumIops - Maximum amount of IOPS that is available for the given the
+	//   storage type. Can be empty if not applicable.
+	//   - MinimumIops - Minimum amount of IOPS that is available for the given the
+	//   storage type. Can be empty if not applicable.
+	//   - MaximumThroughput - Maximum amount of throughput that is available for the
+	//   given the storage type. Can be empty if not applicable.
+	//   - MinimumThroughput - Minimum amount of throughput that is available for the
+	//   given the storage type. Can be empty if not applicable.
 	LimitName *string
 
 	// The limit values.
@@ -1699,7 +1727,7 @@ type Tag struct {
 
 	// The value assigned to the corresponding tag key. Tag values can be null and
 	// don't have to be unique in a tag set. For example, you can have a key value pair
-	// in a tag set of project : Trinity  and cost-center : Trinity
+	// in a tag set of project : Trinity and cost-center : Trinity
 	//
 	// This member is required.
 	Value *string
@@ -1724,10 +1752,10 @@ type UpgradeHistory struct {
 
 	// The current status of the upgrade. The status can take one of the following
 	// values:
-	//     - In Progress
-	//     - Succeeded
-	//     - Succeeded with Issues
-	//     - Failed
+	//   - In Progress
+	//   - Succeeded
+	//   - Succeeded with Issues
+	//   - Failed
 	UpgradeStatus UpgradeStatus
 
 	noSmithyDocumentSerde
@@ -1745,17 +1773,17 @@ type UpgradeStepItem struct {
 	ProgressPercent *float64
 
 	// One of three steps that an upgrade or upgrade eligibility check goes through:
-	//     - PreUpgradeCheck
-	//     - Snapshot
-	//     - Upgrade
+	//   - PreUpgradeCheck
+	//   - Snapshot
+	//   - Upgrade
 	UpgradeStep UpgradeStep
 
 	// The current status of the upgrade. The status can take one of the following
 	// values:
-	//     - In Progress
-	//     - Succeeded
-	//     - Succeeded with Issues
-	//     - Failed
+	//   - In Progress
+	//   - Succeeded
+	//   - Succeeded with Issues
+	//   - Failed
 	UpgradeStepStatus UpgradeStatus
 
 	noSmithyDocumentSerde
@@ -1800,8 +1828,7 @@ type VPCDerivedInfo struct {
 	// The list of Availability Zones associated with the VPC subnets.
 	AvailabilityZones []string
 
-	// The list of security group IDs associated with the VPC endpoints for the
-	// domain.
+	// The list of security group IDs associated with the VPC endpoints for the domain.
 	SecurityGroupIds []string
 
 	// A list of subnet IDs associated with the VPC endpoints for the domain.
@@ -1912,8 +1939,8 @@ type VPCOptions struct {
 // .
 type WindowStartTime struct {
 
-	// The start hour of the window in Coordinated Universal Time (UTC), using
-	// 24-hour time. For example, 17  refers to 5:00 P.M. UTC.
+	// The start hour of the window in Coordinated Universal Time (UTC), using 24-hour
+	// time. For example, 17 refers to 5:00 P.M. UTC.
 	//
 	// This member is required.
 	Hours int64
@@ -1930,7 +1957,7 @@ type WindowStartTime struct {
 type ZoneAwarenessConfig struct {
 
 	// If you enabled multiple Availability Zones, this value is the number of zones
-	// that you want the domain to use. Valid values are 2  and 3. If your domain is
+	// that you want the domain to use. Valid values are 2 and 3 . If your domain is
 	// provisioned within a VPC, this value be equal to number of subnets.
 	AvailabilityZoneCount *int32
 

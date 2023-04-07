@@ -33,17 +33,17 @@ type ListSchedulingPoliciesInput struct {
 
 	// The maximum number of results that's returned by ListSchedulingPolicies in
 	// paginated output. When this parameter is used, ListSchedulingPolicies only
-	// returns maxResults  results in a single page and a nextToken response element.
+	// returns maxResults results in a single page and a nextToken response element.
 	// You can see the remaining results of the initial request by sending another
 	// ListSchedulingPolicies request with the returned nextToken value. This value
 	// can be between 1 and 100. If this parameter isn't used, ListSchedulingPolicies
-	// returns up to 100 results and a nextToken  value if applicable.
+	// returns up to 100 results and a nextToken value if applicable.
 	MaxResults *int32
 
-	// The nextToken  value that's returned from a previous paginated
+	// The nextToken value that's returned from a previous paginated
 	// ListSchedulingPolicies request where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken  value. This value is null when
+	// previous results that returned the nextToken value. This value is null when
 	// there are no more results to return. Treat this token as an opaque identifier
 	// that's only used to retrieve the next items in a list and not for other
 	// programmatic purposes.
@@ -54,10 +54,10 @@ type ListSchedulingPoliciesInput struct {
 
 type ListSchedulingPoliciesOutput struct {
 
-	// The nextToken  value to include in a future ListSchedulingPolicies request.
-	// When the results of a ListSchedulingPolicies  request exceed maxResults, this
-	// value can be used to retrieve the next page of results. This value is null
-	// when there are no more results to return.
+	// The nextToken value to include in a future ListSchedulingPolicies request. When
+	// the results of a ListSchedulingPolicies request exceed maxResults , this value
+	// can be used to retrieve the next page of results. This value is null when there
+	// are no more results to return.
 	NextToken *string
 
 	// A list of scheduling policies that match the request.
@@ -142,15 +142,15 @@ var _ ListSchedulingPoliciesAPIClient = (*Client)(nil)
 type ListSchedulingPoliciesPaginatorOptions struct {
 	// The maximum number of results that's returned by ListSchedulingPolicies in
 	// paginated output. When this parameter is used, ListSchedulingPolicies only
-	// returns maxResults  results in a single page and a nextToken response element.
+	// returns maxResults results in a single page and a nextToken response element.
 	// You can see the remaining results of the initial request by sending another
 	// ListSchedulingPolicies request with the returned nextToken value. This value
 	// can be between 1 and 100. If this parameter isn't used, ListSchedulingPolicies
-	// returns up to 100 results and a nextToken  value if applicable.
+	// returns up to 100 results and a nextToken value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -163,8 +163,7 @@ type ListSchedulingPoliciesPaginator struct {
 	firstPage bool
 }
 
-// NewListSchedulingPoliciesPaginator returns a new
-// ListSchedulingPoliciesPaginator
+// NewListSchedulingPoliciesPaginator returns a new ListSchedulingPoliciesPaginator
 func NewListSchedulingPoliciesPaginator(client ListSchedulingPoliciesAPIClient, params *ListSchedulingPoliciesInput, optFns ...func(*ListSchedulingPoliciesPaginatorOptions)) *ListSchedulingPoliciesPaginator {
 	if params == nil {
 		params = &ListSchedulingPoliciesInput{}

@@ -35,8 +35,8 @@ type StartFlywheelIterationInput struct {
 	// This member is required.
 	FlywheelArn *string
 
-	// A unique identifier for the request. If you don't set the client request
-	// token, Amazon Comprehend generates one.
+	// A unique identifier for the request. If you don't set the client request token,
+	// Amazon Comprehend generates one.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde

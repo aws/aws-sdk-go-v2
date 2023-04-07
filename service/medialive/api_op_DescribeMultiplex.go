@@ -217,10 +217,10 @@ func (w *MultiplexCreatedWaiter) Wait(ctx context.Context, params *DescribeMulti
 	return err
 }
 
-// WaitForOutput calls the waiter function for MultiplexCreated waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for MultiplexCreated waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *MultiplexCreatedWaiter) WaitForOutput(ctx context.Context, params *DescribeMultiplexInput, maxWaitDur time.Duration, optFns ...func(*MultiplexCreatedWaiterOptions)) (*DescribeMultiplexOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -418,10 +418,10 @@ func (w *MultiplexDeletedWaiter) Wait(ctx context.Context, params *DescribeMulti
 	return err
 }
 
-// WaitForOutput calls the waiter function for MultiplexDeleted waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for MultiplexDeleted waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *MultiplexDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeMultiplexInput, maxWaitDur time.Duration, optFns ...func(*MultiplexDeletedWaiterOptions)) (*DescribeMultiplexOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -602,10 +602,10 @@ func (w *MultiplexRunningWaiter) Wait(ctx context.Context, params *DescribeMulti
 	return err
 }
 
-// WaitForOutput calls the waiter function for MultiplexRunning waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for MultiplexRunning waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *MultiplexRunningWaiter) WaitForOutput(ctx context.Context, params *DescribeMultiplexInput, maxWaitDur time.Duration, optFns ...func(*MultiplexRunningWaiterOptions)) (*DescribeMultiplexOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -786,10 +786,10 @@ func (w *MultiplexStoppedWaiter) Wait(ctx context.Context, params *DescribeMulti
 	return err
 }
 
-// WaitForOutput calls the waiter function for MultiplexStopped waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for MultiplexStopped waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *MultiplexStoppedWaiter) WaitForOutput(ctx context.Context, params *DescribeMultiplexInput, maxWaitDur time.Duration, optFns ...func(*MultiplexStoppedWaiterOptions)) (*DescribeMultiplexOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

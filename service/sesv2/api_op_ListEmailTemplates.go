@@ -32,7 +32,6 @@ func (c *Client) ListEmailTemplates(ctx context.Context, params *ListEmailTempla
 
 // Represents a request to list the email templates present in your Amazon SES
 // account in the current Amazon Web Services Region. For more information, see the
-//
 // Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
 // .
 type ListEmailTemplatesInput struct {
@@ -41,7 +40,7 @@ type ListEmailTemplatesInput struct {
 	// position in the list of email templates.
 	NextToken *string
 
-	// The number of results to show in a single call to ListEmailTemplates. If the
+	// The number of results to show in a single call to ListEmailTemplates . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 1, and can be no
@@ -55,8 +54,8 @@ type ListEmailTemplatesInput struct {
 type ListEmailTemplatesOutput struct {
 
 	// A token indicating that there are additional email templates available to be
-	// listed. Pass this token to a subsequent ListEmailTemplates call to retrieve
-	// the next 10 email templates.
+	// listed. Pass this token to a subsequent ListEmailTemplates call to retrieve the
+	// next 10 email templates.
 	NextToken *string
 
 	// An array the contains the name and creation time stamp for each template in
@@ -140,15 +139,15 @@ var _ ListEmailTemplatesAPIClient = (*Client)(nil)
 // ListEmailTemplatesPaginatorOptions is the paginator options for
 // ListEmailTemplates
 type ListEmailTemplatesPaginatorOptions struct {
-	// The number of results to show in a single call to ListEmailTemplates. If the
+	// The number of results to show in a single call to ListEmailTemplates . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 1, and can be no
 	// more than 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

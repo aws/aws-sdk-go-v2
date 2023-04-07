@@ -28,7 +28,7 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 	return out, nil
 }
 
-// Represents the input of a CreateSnapshot  operation.
+// Represents the input of a CreateSnapshot operation.
 type CreateSnapshotInput struct {
 
 	// A name for the snapshot being created.

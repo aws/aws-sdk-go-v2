@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF
-// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
 // and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 // . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns an array of ActivatedRule  objects.
+// and global use. Returns an array of ActivatedRule objects.
 func (c *Client) ListActivatedRulesInRuleGroup(ctx context.Context, params *ListActivatedRulesInRuleGroupInput, optFns ...func(*Options)) (*ListActivatedRulesInRuleGroupOutput, error) {
 	if params == nil {
 		params = &ListActivatedRulesInRuleGroupInput{}
@@ -34,21 +33,20 @@ func (c *Client) ListActivatedRulesInRuleGroup(ctx context.Context, params *List
 
 type ListActivatedRulesInRuleGroupInput struct {
 
-	// Specifies the number of ActivatedRules that you want AWS WAF to return for
-	// this request. If you have more ActivatedRules than the number that you specify
-	// for Limit , the response includes a NextMarker value that you can use to get
+	// Specifies the number of ActivatedRules that you want AWS WAF to return for this
+	// request. If you have more ActivatedRules than the number that you specify for
+	// Limit , the response includes a NextMarker value that you can use to get
 	// another batch of ActivatedRules .
 	Limit int32
 
-	// If you specify a value for Limit  and you have more ActivatedRules than the
-	// value of Limit , AWS WAF returns a NextMarker value in the response that
-	// allows you to list another group of ActivatedRules. For the second and
-	// subsequent ListActivatedRulesInRuleGroup  requests, specify the value of
-	// NextMarker from the previous response to get information about another batch of
-	// ActivatedRules .
+	// If you specify a value for Limit and you have more ActivatedRules than the
+	// value of Limit , AWS WAF returns a NextMarker value in the response that allows
+	// you to list another group of ActivatedRules . For the second and subsequent
+	// ListActivatedRulesInRuleGroup requests, specify the value of NextMarker from
+	// the previous response to get information about another batch of ActivatedRules .
 	NextMarker *string
 
-	// The RuleGroupId  of the RuleGroup  for which you want to get a list of
+	// The RuleGroupId of the RuleGroup for which you want to get a list of
 	// ActivatedRule objects.
 	RuleGroupId *string
 
@@ -57,13 +55,13 @@ type ListActivatedRulesInRuleGroupInput struct {
 
 type ListActivatedRulesInRuleGroupOutput struct {
 
-	// An array of ActivatedRules  objects.
+	// An array of ActivatedRules objects.
 	ActivatedRules []types.ActivatedRule
 
-	// If you have more ActivatedRules  than the number that you specified for Limit
-	// in the request, the response includes a NextMarker  value. To list more
+	// If you have more ActivatedRules than the number that you specified for Limit in
+	// the request, the response includes a NextMarker value. To list more
 	// ActivatedRules , submit another ListActivatedRulesInRuleGroup request, and
-	// specify the NextMarker  value from the response in the NextMarker value in the
+	// specify the NextMarker value from the response in the NextMarker value in the
 	// next request.
 	NextMarker *string
 

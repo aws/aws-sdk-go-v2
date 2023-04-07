@@ -35,9 +35,9 @@ func (c *Client) DeleteContactMethod(ctx context.Context, params *DeleteContactM
 
 type DeleteContactMethodInput struct {
 
-	// The protocol that will be deleted, such as Email  or SMS (text messaging). To
-	// delete an Email  and an SMS contact method if you added both, you must run
-	// separate DeleteContactMethod  actions to delete each protocol.
+	// The protocol that will be deleted, such as Email or SMS (text messaging). To
+	// delete an Email and an SMS contact method if you added both, you must run
+	// separate DeleteContactMethod actions to delete each protocol.
 	//
 	// This member is required.
 	Protocol types.ContactProtocol

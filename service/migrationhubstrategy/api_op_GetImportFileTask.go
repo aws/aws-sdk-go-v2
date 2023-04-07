@@ -44,7 +44,7 @@ type GetImportFileTaskOutput struct {
 	// The time that the import task completed.
 	CompletionTime *time.Time
 
-	// The import file task id  returned in the response of StartImportFileTask .
+	// The import file task id returned in the response of StartImportFileTask .
 	Id *string
 
 	// The name of the import task given in StartImportFileTask .

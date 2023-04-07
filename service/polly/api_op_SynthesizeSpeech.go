@@ -34,37 +34,37 @@ func (c *Client) SynthesizeSpeech(ctx context.Context, params *SynthesizeSpeechI
 
 type SynthesizeSpeechInput struct {
 
-	// The format in which the returned output will be encoded. For audio stream,
-	// this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. When
-	// pcm is used, the content returned is audio/pcm in a signed 16-bit, 1 channel
-	// (mono), little-endian format.
+	// The format in which the returned output will be encoded. For audio stream, this
+	// will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. When pcm
+	// is used, the content returned is audio/pcm in a signed 16-bit, 1 channel (mono),
+	// little-endian format.
 	//
 	// This member is required.
 	OutputFormat types.OutputFormat
 
-	// Input text to synthesize. If you specify ssml  as the TextType, follow the
-	// SSML format for the input text.
+	// Input text to synthesize. If you specify ssml as the TextType , follow the SSML
+	// format for the input text.
 	//
 	// This member is required.
 	Text *string
 
-	// Voice ID to use for the synthesis. You can get a list of available voice IDs
-	// by calling the DescribeVoices (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
+	// Voice ID to use for the synthesis. You can get a list of available voice IDs by
+	// calling the DescribeVoices (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
 	// operation.
 	//
 	// This member is required.
 	VoiceId types.VoiceId
 
-	// Specifies the engine ( standard  or neural) for Amazon Polly to use when
+	// Specifies the engine ( standard or neural ) for Amazon Polly to use when
 	// processing input text for speech synthesis. For information on Amazon Polly
 	// voices and which voices are available in standard-only, NTTS-only, and both
 	// standard and NTTS formats, see Available Voices (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html)
 	// . NTTS-only voices When using NTTS-only voices such as Kevin (en-US), this
-	// parameter is required and must be set to neural. If the engine is not
-	// specified, or is set to standard, this will result in an error. Type: String
-	// Valid Values: standard  | neural Required: Yes Standard voices For standard
-	// voices, this is not required; the engine parameter defaults to standard. If
-	// the engine is not specified, or is set to standard and an NTTS-only voice is
+	// parameter is required and must be set to neural . If the engine is not
+	// specified, or is set to standard , this will result in an error. Type: String
+	// Valid Values: standard | neural Required: Yes Standard voices For standard
+	// voices, this is not required; the engine parameter defaults to standard . If the
+	// engine is not specified, or is set to standard and an NTTS-only voice is
 	// selected, this will result in an error.
 	Engine types.Engine
 
@@ -107,12 +107,16 @@ type SynthesizeSpeechOutput struct {
 	// Stream containing the synthesized speech.
 	AudioStream io.ReadCloser
 
-	// Specifies the type audio stream. This should reflect the OutputFormat
-	// parameter in your request.
-	//     - If you request mp3 as the OutputFormat , the ContentType returned is audio/mpeg.
-	//     - If you request ogg_vorbis as the OutputFormat , the ContentType returned is audio/ogg.
-	//     - If you request pcm as the OutputFormat , the ContentType returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.
-	//     - If you request json as the OutputFormat , the ContentType returned is application/x-json-stream.
+	// Specifies the type audio stream. This should reflect the OutputFormat parameter
+	// in your request.
+	//   - If you request mp3 as the OutputFormat , the ContentType returned is
+	//   audio/mpeg.
+	//   - If you request ogg_vorbis as the OutputFormat , the ContentType returned is
+	//   audio/ogg.
+	//   - If you request pcm as the OutputFormat , the ContentType returned is
+	//   audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.
+	//   - If you request json as the OutputFormat , the ContentType returned is
+	//   application/x-json-stream.
 	ContentType *string
 
 	// Number of characters synthesized.

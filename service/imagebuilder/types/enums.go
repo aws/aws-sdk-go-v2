@@ -190,9 +190,9 @@ const (
 	ImageSourceCustom         ImageSource = "CUSTOM"
 )
 
-// Values returns all known values for ImageSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImageSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ImageSource) Values() []ImageSource {
 	return []ImageSource{
 		"AMAZON_MANAGED",
@@ -219,9 +219,9 @@ const (
 	ImageStatusDeleted      ImageStatus = "DELETED"
 )
 
-// Values returns all known values for ImageStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImageStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ImageStatus) Values() []ImageStatus {
 	return []ImageStatus{
 		"PENDING",
@@ -323,9 +323,9 @@ const (
 	PlatformLinux   Platform = "Linux"
 )
 
-// Values returns all known values for Platform. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Platform. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Platform) Values() []Platform {
 	return []Platform{
 		"Windows",
@@ -417,9 +417,9 @@ const (
 	WorkflowTypeDistribution WorkflowType = "DISTRIBUTION"
 )
 
-// Values returns all known values for WorkflowType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WorkflowType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowType) Values() []WorkflowType {
 	return []WorkflowType{
 		"BUILD",

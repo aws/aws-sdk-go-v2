@@ -80,8 +80,7 @@ type RestoreTableFromSnapshotInput struct {
 
 type RestoreTableFromSnapshotOutput struct {
 
-	// The TableRestoreStatus object that contains the status of the restore
-	// operation.
+	// The TableRestoreStatus object that contains the status of the restore operation.
 	TableRestoreStatus *types.TableRestoreStatus
 
 	// Metadata pertaining to the operation's result.

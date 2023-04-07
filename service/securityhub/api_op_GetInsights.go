@@ -38,10 +38,10 @@ type GetInsightsInput struct {
 	// The maximum number of items to return in the response.
 	MaxResults int32
 
-	// The token that is required for pagination. On your first call to the
-	// GetInsights operation, set the value of this parameter to NULL. For subsequent
-	// calls to the operation, to continue listing data, set the value of this
-	// parameter to the value returned from the previous response.
+	// The token that is required for pagination. On your first call to the GetInsights
+	// operation, set the value of this parameter to NULL . For subsequent calls to the
+	// operation, to continue listing data, set the value of this parameter to the
+	// value returned from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -135,8 +135,8 @@ type GetInsightsPaginatorOptions struct {
 	// The maximum number of items to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

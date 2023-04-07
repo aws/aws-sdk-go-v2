@@ -50,7 +50,7 @@ type GetIceServerConfigInput struct {
 	// Unique identifier for the viewer. Must be unique within the signaling channel.
 	ClientId *string
 
-	// Specifies the desired service. Currently, TURN  is the only valid value.
+	// Specifies the desired service. Currently, TURN is the only valid value.
 	Service types.Service
 
 	// An optional user ID to be associated with the credentials.

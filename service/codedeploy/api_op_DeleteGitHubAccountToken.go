@@ -26,7 +26,7 @@ func (c *Client) DeleteGitHubAccountToken(ctx context.Context, params *DeleteGit
 	return out, nil
 }
 
-// Represents the input of a DeleteGitHubAccount  operation.
+// Represents the input of a DeleteGitHubAccount operation.
 type DeleteGitHubAccountTokenInput struct {
 
 	// The name of the GitHub account connection to delete.
@@ -35,7 +35,7 @@ type DeleteGitHubAccountTokenInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DeleteGitHubAccountToken  operation.
+// Represents the output of a DeleteGitHubAccountToken operation.
 type DeleteGitHubAccountTokenOutput struct {
 
 	// The name of the GitHub account connection that was deleted.

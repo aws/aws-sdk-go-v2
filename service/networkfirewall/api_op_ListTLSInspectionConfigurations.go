@@ -34,8 +34,8 @@ type ListTLSInspectionConfigurationsInput struct {
 
 	// The maximum number of objects that you want Network Firewall to return for this
 	// request. If more objects are available, in the response, Network Firewall
-	// provides a NextToken value that you can use in a subsequent call to get the next
-	// batch of objects.
+	// provides a NextToken value that you can use in a subsequent call to get the
+	// next batch of objects.
 	MaxResults *int32
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -57,9 +57,9 @@ type ListTLSInspectionConfigurationsOutput struct {
 	// request in your next request.
 	NextToken *string
 
-	// The TLS inspection configuration metadata objects that you've defined. Depending
-	// on your setting for max results and the number of TLS inspection configurations,
-	// this might not be the full list.
+	// The TLS inspection configuration metadata objects that you've defined.
+	// Depending on your setting for max results and the number of TLS inspection
+	// configurations, this might not be the full list.
 	TLSInspectionConfigurations []types.TLSInspectionConfigurationMetadata
 
 	// Metadata pertaining to the operation's result.
@@ -141,8 +141,8 @@ var _ ListTLSInspectionConfigurationsAPIClient = (*Client)(nil)
 type ListTLSInspectionConfigurationsPaginatorOptions struct {
 	// The maximum number of objects that you want Network Firewall to return for this
 	// request. If more objects are available, in the response, Network Firewall
-	// provides a NextToken value that you can use in a subsequent call to get the next
-	// batch of objects.
+	// provides a NextToken value that you can use in a subsequent call to get the
+	// next batch of objects.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

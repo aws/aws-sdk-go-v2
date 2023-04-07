@@ -31,8 +31,7 @@ func (c *Client) ListCustomVocabularyItems(ctx context.Context, params *ListCust
 
 type ListCustomVocabularyItemsInput struct {
 
-	// The identifier of the version of the bot associated with this custom
-	// vocabulary.
+	// The identifier of the version of the bot associated with this custom vocabulary.
 	//
 	// This member is required.
 	BotId *string
@@ -42,9 +41,9 @@ type ListCustomVocabularyItemsInput struct {
 	// This member is required.
 	BotVersion *string
 
-	// The identifier of the language and locale where this custom vocabulary is
-	// used. The string must match one of the supported locales. For more information,
-	// see Supported languages
+	// The identifier of the language and locale where this custom vocabulary is used.
+	// The string must match one of the supported locales. For more information, see
+	// Supported languages
 	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 	//
 	// This member is required.
@@ -64,16 +63,15 @@ type ListCustomVocabularyItemsOutput struct {
 	// The identifier of the bot associated with this custom vocabulary.
 	BotId *string
 
-	// The identifier of the version of the bot associated with this custom
-	// vocabulary.
+	// The identifier of the version of the bot associated with this custom vocabulary.
 	BotVersion *string
 
 	// The custom vocabulary items from the list custom vocabulary response.
 	CustomVocabularyItems []types.CustomVocabularyItem
 
-	// The identifier of the language and locale where this custom vocabulary is
-	// used. The string must match one of the supported locales. For more information,
-	// see Supported Languages  (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// The identifier of the language and locale where this custom vocabulary is used.
+	// The string must match one of the supported locales. For more information, see
+	// Supported Languages  (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
 	// .
 	LocaleId *string
 
@@ -163,8 +161,8 @@ type ListCustomVocabularyItemsPaginatorOptions struct {
 	// The maximum number of items returned by the list operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

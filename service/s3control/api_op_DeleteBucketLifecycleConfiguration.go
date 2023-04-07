@@ -28,11 +28,11 @@ import (
 // permission to others. All Amazon S3 on Outposts REST API requests for this
 // action require an additional parameter of x-amz-outpost-id to be passed with
 // the request. In addition, you must use an S3 on Outposts endpoint hostname
-// prefix instead of s3-control. For an example of the request syntax for Amazon
+// prefix instead of s3-control . For an example of the request syntax for Amazon
 // S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the
 // x-amz-outpost-id derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples)
-// section. For more information about object expiration, see Elements to
-// Describe Lifecycle Actions (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions)
+// section. For more information about object expiration, see Elements to Describe
+// Lifecycle Actions (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions)
 // . Related actions include:
 //   - PutBucketLifecycleConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html)
 //   - GetBucketLifecycleConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html)
@@ -63,9 +63,9 @@ type DeleteBucketLifecycleConfigurationInput struct {
 	// using this parameter with S3 on Outposts with the Amazon Web Services SDK and
 	// CLI, you must specify the ARN of the bucket accessed in the format
 	// arn:aws:s3-outposts:::outpost//bucket/ . For example, to access the bucket
-	// reports through Outpost my-outpost  owned by account 123456789012  in Region
+	// reports through Outpost my-outpost owned by account 123456789012 in Region
 	// us-west-2 , use the URL encoding of
-	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports .
 	// The value must be URL encoded.
 	//
 	// This member is required.

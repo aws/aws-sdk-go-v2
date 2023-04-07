@@ -120,8 +120,8 @@ const (
 	CustomMailFromStatusTemporaryFailure CustomMailFromStatus = "TemporaryFailure"
 )
 
-// Values returns all known values for CustomMailFromStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CustomMailFromStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CustomMailFromStatus) Values() []CustomMailFromStatus {
 	return []CustomMailFromStatus{
@@ -141,8 +141,8 @@ const (
 	DimensionValueSourceLinkTag     DimensionValueSource = "linkTag"
 )
 
-// Values returns all known values for DimensionValueSource. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DimensionValueSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DimensionValueSource) Values() []DimensionValueSource {
 	return []DimensionValueSource{

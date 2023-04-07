@@ -14,7 +14,7 @@ import (
 
 // Lists the server certificates stored in IAM that have the specified path
 // prefix. If none exist, the operation returns an empty list. You can paginate the
-// results using the MaxItems  and Marker parameters. For more information about
+// results using the MaxItems and Marker parameters. For more information about
 // working with server certificates, see Working with server certificates (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
 // in the IAM User Guide. This topic also includes a list of Amazon Web Services
 // services that can use the server certificates that you manage with IAM. IAM
@@ -41,13 +41,13 @@ type ListServerCertificatesInput struct {
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
-	// Markerelement in the response that you received to indicate where the next
-	// call should start.
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
 	Marker *string
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
@@ -56,19 +56,19 @@ type ListServerCertificatesInput struct {
 
 	// The path prefix for filtering the results. For example: /company/servercerts
 	// would get all server certificates for which the path starts with
-	// /company/servercerts. This parameter is optional. If it is not included, it
+	// /company/servercerts . This parameter is optional. If it is not included, it
 	// defaults to a slash (/), listing all server certificates. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters consisting of either a forward slash (/) by itself or a string that
 	// must begin and end with forward slashes. In addition, it can contain any ASCII
-	// character from the ! ( \u0021 ) through the DEL character ( \u007F), including
+	// character from the ! ( \u0021 ) through the DEL character ( \u007F ), including
 	// most punctuation characters, digits, and upper and lowercased letters.
 	PathPrefix *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListServerCertificates  request.
+// Contains the response to a successful ListServerCertificates request.
 type ListServerCertificatesOutput struct {
 
 	// A list of server certificates.
@@ -84,8 +84,8 @@ type ListServerCertificatesOutput struct {
 	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated  is true, this element is present and contains the value to
-	// use for the Marker  parameter in a subsequent pagination request.
+	// When IsTruncated is true , this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -167,15 +167,15 @@ var _ ListServerCertificatesAPIClient = (*Client)(nil)
 type ListServerCertificatesPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -188,8 +188,7 @@ type ListServerCertificatesPaginator struct {
 	firstPage bool
 }
 
-// NewListServerCertificatesPaginator returns a new
-// ListServerCertificatesPaginator
+// NewListServerCertificatesPaginator returns a new ListServerCertificatesPaginator
 func NewListServerCertificatesPaginator(client ListServerCertificatesAPIClient, params *ListServerCertificatesInput, optFns ...func(*ListServerCertificatesPaginatorOptions)) *ListServerCertificatesPaginator {
 	if params == nil {
 		params = &ListServerCertificatesInput{}

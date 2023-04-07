@@ -14,7 +14,7 @@ import (
 // Creates the configuration for training a model. A trained model is known as a
 // solution. After the configuration is created, you train the model (create a
 // solution) by calling the CreateSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
-// operation. Every time you call CreateSolutionVersion, a new version of the
+// operation. Every time you call CreateSolutionVersion , a new version of the
 // solution is created. After creating a solution version, you check its accuracy
 // by calling GetSolutionMetrics (https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html)
 // . When you are satisfied with the version, you deploy it using CreateCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html)
@@ -32,9 +32,8 @@ import (
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //   - DELETE PENDING > DELETE IN_PROGRESS
 //
-// To get the status of the solution,
-// call DescribeSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
-// . Wait until the status shows as ACTIVE before calling CreateSolutionVersion.
+// To get the status of the solution, call DescribeSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
+// . Wait until the status shows as ACTIVE before calling CreateSolutionVersion .
 // Related APIs
 //
 //   - ListSolutions (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html)
@@ -78,22 +77,22 @@ type CreateSolutionInput struct {
 
 	// When your have multiple event types (using an EVENT_TYPE schema field), this
 	// parameter specifies which event type (for example, 'click' or 'like') is used
-	// for training the model. If you do not provide an eventType, Amazon Personalize
+	// for training the model. If you do not provide an eventType , Amazon Personalize
 	// will use all interactions for training with equal weight regardless of type.
 	EventType *string
 
-	// Whether to perform automated machine learning (AutoML). The default is false.
-	// For this case, you must specify recipeArn . When set to true, Amazon
+	// Whether to perform automated machine learning (AutoML). The default is false .
+	// For this case, you must specify recipeArn . When set to true , Amazon
 	// Personalize analyzes your training data and selects the optimal
 	// USER_PERSONALIZATION recipe and hyperparameters. In this case, you must omit
-	// recipeArn. Amazon Personalize determines the optimal recipe by running tests
+	// recipeArn . Amazon Personalize determines the optimal recipe by running tests
 	// with different values for the hyperparameters. AutoML lengthens the training
 	// process as compared to selecting a specific recipe.
 	PerformAutoML bool
 
 	// Whether to perform hyperparameter optimization (HPO) on the specified or
-	// selected recipe. The default is false. When performing AutoML, this parameter
-	// is always true  and you should not set it to false .
+	// selected recipe. The default is false . When performing AutoML, this parameter
+	// is always true and you should not set it to false .
 	PerformHPO *bool
 
 	// The ARN of the recipe to use for model training. Only specified when

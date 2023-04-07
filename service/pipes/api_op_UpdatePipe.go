@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Update an existing pipe. When you call UpdatePipe, only the fields that are
+// Update an existing pipe. When you call UpdatePipe , only the fields that are
 // included in the request are changed, the rest are unchanged. The exception to
 // this is if you modify any Amazon Web Services-service specific fields in the
 // SourceParameters , EnrichmentParameters , or TargetParameters objects. The

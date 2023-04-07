@@ -36,9 +36,9 @@ type ListPolicyGenerationsInput struct {
 	// A token used for pagination of results returned.
 	NextToken *string
 
-	// The ARN of the IAM entity (user or role) for which you are generating a
-	// policy. Use this with ListGeneratedPolicies to filter the results to only
-	// include results for a specific principal.
+	// The ARN of the IAM entity (user or role) for which you are generating a policy.
+	// Use this with ListGeneratedPolicies to filter the results to only include
+	// results for a specific principal.
 	PrincipalArn *string
 
 	noSmithyDocumentSerde
@@ -46,7 +46,7 @@ type ListPolicyGenerationsInput struct {
 
 type ListPolicyGenerationsOutput struct {
 
-	// A PolicyGeneration  object that contains details about the generated policy.
+	// A PolicyGeneration object that contains details about the generated policy.
 	//
 	// This member is required.
 	PolicyGenerations []types.PolicyGeneration
@@ -134,8 +134,8 @@ type ListPolicyGenerationsPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

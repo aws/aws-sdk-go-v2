@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new major or minor version of an environment template. A major
-// version of an environment template is a version that isn't backwards compatible.
-// A minor version of an environment template is a version that's backwards
-// compatible within its major version.
+// Create a new major or minor version of an environment template. A major version
+// of an environment template is a version that isn't backwards compatible. A minor
+// version of an environment template is a version that's backwards compatible
+// within its major version.
 func (c *Client) CreateEnvironmentTemplateVersion(ctx context.Context, params *CreateEnvironmentTemplateVersionInput, optFns ...func(*Options)) (*CreateEnvironmentTemplateVersionOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentTemplateVersionInput{}
@@ -33,8 +33,8 @@ func (c *Client) CreateEnvironmentTemplateVersion(ctx context.Context, params *C
 
 type CreateEnvironmentTemplateVersionInput struct {
 
-	// An object that includes the template bundle S3 bucket path and name for the
-	// new version of an template.
+	// An object that includes the template bundle S3 bucket path and name for the new
+	// version of an template.
 	//
 	// This member is required.
 	Source types.TemplateVersionSourceInput
@@ -51,9 +51,9 @@ type CreateEnvironmentTemplateVersionInput struct {
 	// A description of the new version of an environment template.
 	Description *string
 
-	// To create a new minor version of the environment template, include major
-	// Version. To create a new major and minor version of the environment template,
-	// exclude major Version .
+	// To create a new minor version of the environment template, include major Version
+	// . To create a new major and minor version of the environment template, exclude
+	// major Version .
 	MajorVersion *string
 
 	// An optional list of metadata items that you can associate with the Proton

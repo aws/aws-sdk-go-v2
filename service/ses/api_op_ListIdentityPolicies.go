@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of sending authorization policies that are attached to the
-// given identity (an email address or a domain). This API returns only a list. If
-// you want the actual policy content, you can use GetIdentityPolicies. This API
-// is for the identity owner only. If you have not verified the identity, this API
+// Returns a list of sending authorization policies that are attached to the given
+// identity (an email address or a domain). This API returns only a list. If you
+// want the actual policy content, you can use GetIdentityPolicies . This API is
+// for the identity owner only. If you have not verified the identity, this API
 // will return an error. Sending authorization is a feature that enables an
 // identity owner to authorize other senders to use its identities. For information
 // about using sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
@@ -43,7 +43,7 @@ type ListIdentityPoliciesInput struct {
 	// The identity that is associated with the policy for which the policies will be
 	// listed. You can specify an identity by using its name or by using its Amazon
 	// Resource Name (ARN). Examples: user@example.com , example.com ,
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com. To successfully call
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com . To successfully call
 	// this API, you must own the identity.
 	//
 	// This member is required.

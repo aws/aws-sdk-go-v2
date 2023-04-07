@@ -42,10 +42,10 @@ type DescribeAnomalyInput struct {
 
 type DescribeAnomalyOutput struct {
 
-	// A ProactiveAnomaly  object that represents the requested anomaly.
+	// A ProactiveAnomaly object that represents the requested anomaly.
 	ProactiveAnomaly *types.ProactiveAnomaly
 
-	// A ReactiveAnomaly  object that represents the requested anomaly.
+	// A ReactiveAnomaly object that represents the requested anomaly.
 	ReactiveAnomaly *types.ReactiveAnomaly
 
 	// Metadata pertaining to the operation's result.

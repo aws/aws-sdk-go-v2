@@ -58,8 +58,8 @@ type RegisterComputeInput struct {
 	// address to manage your compute resource.
 	IpAddress *string
 
-	// The name of the custom location you added to the fleet you are registering
-	// this compute resource to.
+	// The name of the custom location you added to the fleet you are registering this
+	// compute resource to.
 	Location *string
 
 	noSmithyDocumentSerde

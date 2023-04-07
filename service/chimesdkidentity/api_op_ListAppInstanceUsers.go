@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all AppInstanceUsers  created under a single AppInstance .
+// List all AppInstanceUsers created under a single AppInstance .
 func (c *Client) ListAppInstanceUsers(ctx context.Context, params *ListAppInstanceUsersInput, optFns ...func(*Options)) (*ListAppInstanceUsersOutput, error) {
 	if params == nil {
 		params = &ListAppInstanceUsersInput{}
@@ -138,8 +138,8 @@ type ListAppInstanceUsersPaginatorOptions struct {
 	// The maximum number of requests that you want returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

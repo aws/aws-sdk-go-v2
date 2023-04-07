@@ -104,7 +104,7 @@ type App struct {
 type AppAssessment struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id. For
+	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
@@ -154,8 +154,8 @@ type AppAssessment struct {
 	// The current resiliency score for the application.
 	ResiliencyScore *ResiliencyScore
 
-	// A resource error object containing a list of errors retrieving an
-	// application's resources.
+	// A resource error object containing a list of errors retrieving an application's
+	// resources.
 	ResourceErrorsDetails *ResourceErrorsDetails
 
 	// The starting time for the action.
@@ -172,7 +172,7 @@ type AppAssessment struct {
 type AppAssessmentSummary struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id. For
+	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
@@ -478,9 +478,9 @@ type DisruptionCompliance struct {
 type EksSource struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service
-	// cluster. The format for this ARN is: arn: aws :eks: region : account-id
-	// :cluster/ cluster-name . For more information about ARNs, see  Amazon Resource
-	// Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// cluster. The format for this ARN is: arn: aws :eks: region : account-id :cluster/
+	// cluster-name . For more information about ARNs, see  Amazon Resource Names
+	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -500,16 +500,16 @@ type EksSource struct {
 type EksSourceClusterNamespace struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service
-	// cluster. The format for this ARN is: arn: aws :eks: region : account-id
-	// :cluster/ cluster-name . For more information about ARNs, see  Amazon Resource
-	// Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// cluster. The format for this ARN is: arn: aws :eks: region : account-id :cluster/
+	// cluster-name . For more information about ARNs, see  Amazon Resource Names
+	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	EksClusterArn *string
 
-	// Name of the namespace that is located on your Amazon Elastic Kubernetes
-	// Service cluster.
+	// Name of the namespace that is located on your Amazon Elastic Kubernetes Service
+	// cluster.
 	//
 	// This member is required.
 	Namespace *string
@@ -604,9 +604,9 @@ type PhysicalResourceId struct {
 	// This member is required.
 	Identifier *string
 
-	// Specifies the type of physical resource identifier. Arn The resource
-	// identifier is an Amazon Resource Name (ARN) . Native The resource identifier is
-	// an Resilience Hub-native identifier.
+	// Specifies the type of physical resource identifier. Arn The resource identifier
+	// is an Amazon Resource Name (ARN) . Native The resource identifier is an
+	// Resilience Hub-native identifier.
 	//
 	// This member is required.
 	Type PhysicalIdentifierType
@@ -669,7 +669,7 @@ type RecommendationItem struct {
 type RecommendationTemplate struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id. For
+	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
@@ -693,8 +693,8 @@ type RecommendationTemplate struct {
 	RecommendationTemplateArn *string
 
 	// An array of strings that specify the recommendation template type or types.
-	// Alarm The template is an AlarmRecommendation  template. Sop The template is a
-	// SopRecommendation template. Test The template is a TestRecommendation  template.
+	// Alarm The template is an AlarmRecommendation template. Sop The template is a
+	// SopRecommendation template. Test The template is a TestRecommendation template.
 	//
 	// This member is required.
 	RecommendationTypes []RenderRecommendationType
@@ -823,12 +823,12 @@ type ResourceMapping struct {
 
 	// Specifies the type of resource mapping. AppRegistryApp The resource is mapped
 	// to another application. The name of the application is contained in the
-	// appRegistryAppNameproperty. CfnStack The resource is mapped to a
-	// CloudFormation stack. The name of the CloudFormation stack is contained in the
-	// logicalStackNameproperty. Resource The resource is mapped to another resource.
-	// The name of the resource is contained in the resourceName property.
-	// ResourceGroup The resource is mapped to an Resource Groups. The name of the
-	// resource group is contained in the resourceGroupName  property.
+	// appRegistryAppName property. CfnStack The resource is mapped to a CloudFormation
+	// stack. The name of the CloudFormation stack is contained in the logicalStackName
+	// property. Resource The resource is mapped to another resource. The name of the
+	// resource is contained in the resourceName property. ResourceGroup The resource
+	// is mapped to an Resource Groups. The name of the resource group is contained in
+	// the resourceGroupName property.
 	//
 	// This member is required.
 	MappingType ResourceMappingType

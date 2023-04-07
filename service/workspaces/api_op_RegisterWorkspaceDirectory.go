@@ -34,9 +34,9 @@ func (c *Client) RegisterWorkspaceDirectory(ctx context.Context, params *Registe
 
 type RegisterWorkspaceDirectoryInput struct {
 
-	// The identifier of the directory. You cannot register a directory if it does
-	// not have a status of Active. If the directory does not have a status of Active,
-	// you will receive an InvalidResourceStateException error. If you have already
+	// The identifier of the directory. You cannot register a directory if it does not
+	// have a status of Active. If the directory does not have a status of Active, you
+	// will receive an InvalidResourceStateException error. If you have already
 	// registered the maximum number of directories that you can register with Amazon
 	// WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister
 	// directories that you are not using for WorkSpaces, and try again.
@@ -64,10 +64,10 @@ type RegisterWorkspaceDirectoryInput struct {
 	// The tags associated with the directory.
 	Tags []types.Tag
 
-	// Indicates whether your WorkSpace directory is dedicated or shared. To use
-	// Bring Your Own License (BYOL) images, this value must be set to DEDICATED and
-	// your Amazon Web Services account must be enabled for BYOL. If your account has
-	// not been enabled for BYOL, you will receive an InvalidParameterValuesException
+	// Indicates whether your WorkSpace directory is dedicated or shared. To use Bring
+	// Your Own License (BYOL) images, this value must be set to DEDICATED and your
+	// Amazon Web Services account must be enabled for BYOL. If your account has not
+	// been enabled for BYOL, you will receive an InvalidParameterValuesException
 	// error. For more information about BYOL images, see Bring Your Own Windows
 	// Desktop Images (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html)
 	// .

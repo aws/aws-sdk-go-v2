@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates account details for the specified Amazon Chime account. Currently,
-// only account name and default license updates are supported for this action.
+// Updates account details for the specified Amazon Chime account. Currently, only
+// account name and default license updates are supported for this action.
 func (c *Client) UpdateAccount(ctx context.Context, params *UpdateAccountInput, optFns ...func(*Options)) (*UpdateAccountOutput, error) {
 	if params == nil {
 		params = &UpdateAccountInput{}

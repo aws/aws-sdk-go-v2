@@ -46,7 +46,7 @@ type PurchaseReservedInstanceOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a PurchaseReservedInstanceOffering  operation.
+// Represents the output of a PurchaseReservedInstanceOffering operation.
 type PurchaseReservedInstanceOfferingOutput struct {
 
 	// The customer-specified identifier used to track this reservation.

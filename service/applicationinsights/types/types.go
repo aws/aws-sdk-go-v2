@@ -27,8 +27,8 @@ type ApplicationComponent struct {
 	// The operating system of the component.
 	OsType OsType
 
-	// The resource type. Supported resource types include EC2 instances, Auto
-	// Scaling group, Classic ELB, Application ELB, and SQS Queue.
+	// The resource type. Supported resource types include EC2 instances, Auto Scaling
+	// group, Classic ELB, Application ELB, and SQS Queue.
 	ResourceType *string
 
 	// The stack tier of the application component.
@@ -44,7 +44,7 @@ type ApplicationInfo struct {
 	AutoConfigEnabled *bool
 
 	// Indicates whether Application Insights can listen to CloudWatch events for the
-	// application resources, such as instance terminated , failed deployment, and
+	// application resources, such as instance terminated , failed deployment , and
 	// others.
 	CWEMonitorEnabled *bool
 
@@ -64,8 +64,8 @@ type ApplicationInfo struct {
 
 	// The issues on the user side that block Application Insights from successfully
 	// monitoring an application. Example remarks include:
-	//     - “Configuring application, detected 1 Errors, 3 Warnings”
-	//     - “Configuring application, detected 1 Unconfigured Components”
+	//   - “Configuring application, detected 1 Errors, 3 Warnings”
+	//   - “Configuring application, detected 1 Unconfigured Components”
 	Remarks *string
 
 	// The name of the resource group used for the application.
@@ -103,8 +103,8 @@ type ConfigurationEvent struct {
 // An object that defines the log patterns that belongs to a LogPatternSet .
 type LogPattern struct {
 
-	// A regular expression that defines the log pattern. A log pattern can contain
-	// as many as 50 characters, and it cannot be empty. The pattern must be DFA
+	// A regular expression that defines the log pattern. A log pattern can contain as
+	// many as 50 characters, and it cannot be empty. The pattern must be DFA
 	// compatible. Patterns that utilize forward lookahead or backreference
 	// constructions are not supported.
 	Pattern *string
@@ -119,15 +119,14 @@ type LogPattern struct {
 	// digits, or one of the following symbols: period, dash, underscore.
 	PatternSetName *string
 
-	// Rank of the log pattern. Must be a value between 1  and 1,000,000. The
-	// patterns are sorted by rank, so we recommend that you set your highest priority
-	// patterns with the lowest rank. A pattern of rank 1 will be the first to get
-	// matched to a log line. A pattern of rank 1,000,000 will be last to get
-	// matched. When you configure custom log patterns from the console, a Low
-	// severity pattern translates to a 750,000  rank. A Medium severity pattern
-	// translates to a 500,000  rank. And a High  severity pattern translates to a
-	// 250,000 rank. Rank values less than 1  or greater than 1,000,000 are reserved
-	// for AWS-provided patterns.
+	// Rank of the log pattern. Must be a value between 1 and 1,000,000 . The patterns
+	// are sorted by rank, so we recommend that you set your highest priority patterns
+	// with the lowest rank. A pattern of rank 1 will be the first to get matched to a
+	// log line. A pattern of rank 1,000,000 will be last to get matched. When you
+	// configure custom log patterns from the console, a Low severity pattern
+	// translates to a 750,000 rank. A Medium severity pattern translates to a 500,000
+	// rank. And a High severity pattern translates to a 250,000 rank. Rank values
+	// less than 1 or greater than 1,000,000 are reserved for AWS-provided patterns.
 	Rank int32
 
 	noSmithyDocumentSerde
@@ -160,23 +159,23 @@ type Observation struct {
 	// The instance group to which the CodeDeploy instance belongs.
 	CodeDeployInstanceGroupId *string
 
-	// The status of the CodeDeploy deployment, for example SUCCESS  or  FAILURE .
+	// The status of the CodeDeploy deployment, for example SUCCESS or  FAILURE .
 	CodeDeployState *string
 
 	// The cause of an EBS CloudWatch event.
 	EbsCause *string
 
-	// The type of EBS CloudWatch event, such as createVolume , deleteVolume  or
+	// The type of EBS CloudWatch event, such as createVolume , deleteVolume or
 	// attachVolume .
 	EbsEvent *string
 
 	// The request ID of an EBS CloudWatch event.
 	EbsRequestId *string
 
-	// The result of an EBS CloudWatch event, such as failed  or succeeded .
+	// The result of an EBS CloudWatch event, such as failed or succeeded .
 	EbsResult *string
 
-	// The state of the instance, such as STOPPING  or TERMINATING .
+	// The state of the instance, such as STOPPING or TERMINATING .
 	Ec2State *string
 
 	// The time when the observation ended, in epoch seconds.
@@ -185,15 +184,14 @@ type Observation struct {
 	// The Amazon Resource Name (ARN) of the AWS Health Event-based observation.
 	HealthEventArn *string
 
-	// The description of the AWS Health event provided by the service, such as
-	// Amazon EC2.
+	// The description of the AWS Health event provided by the service, such as Amazon
+	// EC2.
 	HealthEventDescription *string
 
 	// The category of the AWS Health event, such as issue .
 	HealthEventTypeCategory *string
 
-	// The type of the AWS Health event, for example, AWS_EC2_POWER_CONNECTIVITY_ISSUE
-	// .
+	// The type of the AWS Health event, for example, AWS_EC2_POWER_CONNECTIVITY_ISSUE .
 	HealthEventTypeCode *string
 
 	// The service to which the AWS Health Event belongs, such as EC2.
@@ -242,8 +240,7 @@ type Observation struct {
 	// The Amazon Resource Name (ARN) of the step function-based observation.
 	StatesArn *string
 
-	// The Amazon Resource Name (ARN) of the step function execution-based
-	// observation.
+	// The Amazon Resource Name (ARN) of the step function execution-based observation.
 	StatesExecutionArn *string
 
 	// The input to the step function-based observation.
@@ -345,8 +342,11 @@ type RelatedObservations struct {
 // letters, digits, white space, or one of the following symbols: _ . : / = + -.
 // The following additional restrictions apply to tags:
 //   - Tag keys and values are case sensitive.
-//   - For each associated resource, each tag key must be unique and it can have only one value.
-//   - The aws: prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can't edit or remove tag keys or values that use this prefix.
+//   - For each associated resource, each tag key must be unique and it can have
+//     only one value.
+//   - The aws: prefix is reserved for use by AWS; you can’t use it in any tag keys
+//     or values that you define. In addition, you can't edit or remove tag keys or
+//     values that use this prefix.
 type Tag struct {
 
 	// One part of a key-value pair that defines a tag. The maximum length of a tag
@@ -355,10 +355,10 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	// The optional part of a key-value pair that defines a tag. The maximum length
-	// of a tag value is 256 characters. The minimum length is 0 characters. If you
-	// don't want an application to have a specific tag value, don't specify a value
-	// for this parameter.
+	// The optional part of a key-value pair that defines a tag. The maximum length of
+	// a tag value is 256 characters. The minimum length is 0 characters. If you don't
+	// want an application to have a specific tag value, don't specify a value for this
+	// parameter.
 	//
 	// This member is required.
 	Value *string

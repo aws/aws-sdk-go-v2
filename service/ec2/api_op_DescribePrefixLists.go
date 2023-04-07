@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes available Amazon Web Services services in a prefix list format,
-// which includes the prefix list name and prefix list ID of the service and the IP
+// Describes available Amazon Web Services services in a prefix list format, which
+// includes the prefix list name and prefix list ID of the service and the IP
 // address range for the service. We recommend that you use
 // DescribeManagedPrefixLists instead.
 func (c *Client) DescribePrefixLists(ctx context.Context, params *DescribePrefixListsInput, optFns ...func(*Options)) (*DescribePrefixListsOutput, error) {
@@ -40,12 +40,12 @@ type DescribePrefixListsInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//     - prefix-list-id : The ID of a prefix list.
-	//     - prefix-list-name : The name of a prefix list.
+	//   - prefix-list-id : The ID of a prefix list.
+	//   - prefix-list-name : The name of a prefix list.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -144,11 +144,11 @@ var _ DescribePrefixListsAPIClient = (*Client)(nil)
 // DescribePrefixLists
 type DescribePrefixListsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

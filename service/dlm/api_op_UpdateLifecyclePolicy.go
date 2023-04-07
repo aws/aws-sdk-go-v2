@@ -43,8 +43,8 @@ type UpdateLifecyclePolicyInput struct {
 	// specified by the lifecycle policy.
 	ExecutionRoleArn *string
 
-	// The configuration of the lifecycle policy. You cannot update the policy type
-	// or the resource type.
+	// The configuration of the lifecycle policy. You cannot update the policy type or
+	// the resource type.
 	PolicyDetails *types.PolicyDetails
 
 	// The desired activation state of the lifecycle policy after creation.

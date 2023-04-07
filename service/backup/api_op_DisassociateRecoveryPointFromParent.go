@@ -30,10 +30,10 @@ func (c *Client) DisassociateRecoveryPointFromParent(ctx context.Context, params
 
 type DisassociateRecoveryPointFromParentInput struct {
 
-	// This is the name of a logical container where the child (nested) recovery
-	// point is stored. Backup vaults are identified by names that are unique to the
-	// account used to create them and the Amazon Web Services Region where they are
-	// created. They consist of lowercase letters, numbers, and hyphens.
+	// This is the name of a logical container where the child (nested) recovery point
+	// is stored. Backup vaults are identified by names that are unique to the account
+	// used to create them and the Amazon Web Services Region where they are created.
+	// They consist of lowercase letters, numbers, and hyphens.
 	//
 	// This member is required.
 	BackupVaultName *string

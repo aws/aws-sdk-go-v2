@@ -15,8 +15,8 @@ import (
 // Creates a virtual service within a service mesh. A virtual service is an
 // abstraction of a real service that is provided by a virtual node directly or
 // indirectly by means of a virtual router. Dependent services call your virtual
-// service by its virtualServiceName, and those requests are routed to the
-// virtual node or virtual router that is specified as the provider for the virtual
+// service by its virtualServiceName , and those requests are routed to the virtual
+// node or virtual router that is specified as the provider for the virtual
 // service. For more information about virtual services, see Virtual services (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html)
 // .
 func (c *Client) CreateVirtualService(ctx context.Context, params *CreateVirtualServiceInput, optFns ...func(*Options)) (*CreateVirtualServiceOutput, error) {
@@ -51,8 +51,8 @@ type CreateVirtualServiceInput struct {
 	// This member is required.
 	VirtualServiceName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
 
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the

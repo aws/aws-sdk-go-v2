@@ -51,8 +51,8 @@ type UpdateFlowEntitlementInput struct {
 	// entitlement.
 	Encryption *types.UpdateEncryption
 
-	// An indication of whether you want to enable the entitlement to allow access,
-	// or disable it to stop streaming content to the subscriber’s flow temporarily. If
+	// An indication of whether you want to enable the entitlement to allow access, or
+	// disable it to stop streaming content to the subscriber’s flow temporarily. If
 	// you don’t specify the entitlementStatus field in your request, MediaConnect
 	// leaves the value unchanged.
 	EntitlementStatus types.EntitlementStatus

@@ -177,9 +177,9 @@ const (
 	ControlTypeCustom   ControlType = "Custom"
 )
 
-// Values returns all known values for ControlType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ControlType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ControlType) Values() []ControlType {
 	return []ControlType{
 		"Standard",
@@ -335,9 +335,9 @@ const (
 	RoleTypeResourceOwner RoleType = "RESOURCE_OWNER"
 )
 
-// Values returns all known values for RoleType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RoleType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (RoleType) Values() []RoleType {
 	return []RoleType{
 		"PROCESS_OWNER",

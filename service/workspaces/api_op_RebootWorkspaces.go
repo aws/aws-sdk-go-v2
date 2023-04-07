@@ -12,7 +12,7 @@ import (
 )
 
 // Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its
-// state is AVAILABLE  or UNHEALTHY. This operation is asynchronous and returns
+// state is AVAILABLE or UNHEALTHY . This operation is asynchronous and returns
 // before the WorkSpaces have rebooted.
 func (c *Client) RebootWorkspaces(ctx context.Context, params *RebootWorkspacesInput, optFns ...func(*Options)) (*RebootWorkspacesOutput, error) {
 	if params == nil {

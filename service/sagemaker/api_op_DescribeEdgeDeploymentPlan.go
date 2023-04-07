@@ -38,8 +38,8 @@ type DescribeEdgeDeploymentPlanInput struct {
 	// The maximum number of results to select (50 by default).
 	MaxResults int32
 
-	// If the edge deployment plan has enough stages to require tokening, then this
-	// is the response from the last list of stages returned.
+	// If the edge deployment plan has enough stages to require tokening, then this is
+	// the response from the last list of stages returned.
 	NextToken *string
 
 	noSmithyDocumentSerde

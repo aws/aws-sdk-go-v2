@@ -39,7 +39,7 @@ type DeleteChapCredentialsInput struct {
 	InitiatorName *string
 
 	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
-	// DescribeStorediSCSIVolumesoperation to return to retrieve the TargetARN for
+	// DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for
 	// specified VolumeARN.
 	//
 	// This member is required.

@@ -36,11 +36,11 @@ type ListSecurityPoliciesInput struct {
 	Type types.SecurityPolicyType
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken  to get the next page of results. The default is 20.
+	// You can use nextToken to get the next page of results. The default is 20.
 	MaxResults *int32
 
-	// If your initial ListSecurityPolicies  operation returns a nextToken, you can
-	// include the returned nextToken  in subsequent ListSecurityPolicies operations,
+	// If your initial ListSecurityPolicies operation returns a nextToken , you can
+	// include the returned nextToken in subsequent ListSecurityPolicies operations,
 	// which returns results in the next page.
 	NextToken *string
 
@@ -52,8 +52,8 @@ type ListSecurityPoliciesInput struct {
 
 type ListSecurityPoliciesOutput struct {
 
-	// When nextToken  is returned, there are more results available. The value of
-	// nextTokenis a unique pagination token for each page. Make the call again using
+	// When nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -140,8 +140,8 @@ var _ ListSecurityPoliciesAPIClient = (*Client)(nil)
 // ListSecurityPoliciesPaginatorOptions is the paginator options for
 // ListSecurityPolicies
 type ListSecurityPoliciesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

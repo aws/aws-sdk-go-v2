@@ -46,8 +46,7 @@ type GetUserEndpointsInput struct {
 
 type GetUserEndpointsOutput struct {
 
-	// Provides information about all the endpoints that are associated with a user
-	// ID.
+	// Provides information about all the endpoints that are associated with a user ID.
 	//
 	// This member is required.
 	EndpointsResponse *types.EndpointsResponse

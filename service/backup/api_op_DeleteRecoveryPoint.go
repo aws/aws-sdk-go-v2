@@ -15,12 +15,12 @@ import (
 // existing continuous backup and stops future continuous backup. When an IAM
 // role's permissions are insufficient to call this API, the service sends back an
 // HTTP 200 response with an empty HTTP body, but the recovery point is not
-// deleted. Instead, it enters an EXPIRED  state. EXPIRED recovery points can be
+// deleted. Instead, it enters an EXPIRED state. EXPIRED recovery points can be
 // deleted with this API once the IAM role has the iam:CreateServiceLinkedRole
 // action. To learn more about adding this role, see Troubleshooting manual
 // deletions (https://docs.aws.amazon.com/aws-backup/latest/devguide/deleting-backups.html#deleting-backups-troubleshooting)
 // . If the user or role is deleted or the permission within the role is removed,
-// the deletion will not be successful and will enter an EXPIRED  state.
+// the deletion will not be successful and will enter an EXPIRED state.
 func (c *Client) DeleteRecoveryPoint(ctx context.Context, params *DeleteRecoveryPointInput, optFns ...func(*Options)) (*DeleteRecoveryPointOutput, error) {
 	if params == nil {
 		params = &DeleteRecoveryPointInput{}

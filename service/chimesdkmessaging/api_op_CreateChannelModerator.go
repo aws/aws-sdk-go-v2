@@ -18,8 +18,8 @@ import (
 //   - Redact messages in the channel.
 //   - List messages in the channel.
 //
-// The x-amz-chime-bearer  request header is mandatory. Use the ARN of the
-// AppInstanceUser or AppInstanceBotof the user that makes the API call as the
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot of the user that makes the API call as the
 // value in the header.
 func (c *Client) CreateChannelModerator(ctx context.Context, params *CreateChannelModeratorInput, optFns ...func(*Options)) (*CreateChannelModeratorOutput, error) {
 	if params == nil {
@@ -43,12 +43,12 @@ type CreateChannelModeratorInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The AppInstanceUserArn  of the moderator.
+	// The AppInstanceUserArn of the moderator.
 	//
 	// This member is required.
 	ChannelModeratorArn *string
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string

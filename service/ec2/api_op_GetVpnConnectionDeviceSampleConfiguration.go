@@ -29,7 +29,7 @@ func (c *Client) GetVpnConnectionDeviceSampleConfiguration(ctx context.Context, 
 
 type GetVpnConnectionDeviceSampleConfigurationInput struct {
 
-	// Device identifier provided by the GetVpnConnectionDeviceTypes  API.
+	// Device identifier provided by the GetVpnConnectionDeviceTypes API.
 	//
 	// This member is required.
 	VpnConnectionDeviceTypeId *string
@@ -47,7 +47,7 @@ type GetVpnConnectionDeviceSampleConfigurationInput struct {
 	DryRun *bool
 
 	// The IKE version to be used in the sample configuration file for your customer
-	// gateway device. You can specify one of the following versions: ikev1  or ikev2 .
+	// gateway device. You can specify one of the following versions: ikev1 or ikev2 .
 	InternetKeyExchangeVersion *string
 
 	noSmithyDocumentSerde

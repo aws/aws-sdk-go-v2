@@ -34,7 +34,7 @@ type CreatePartitionInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// A PartitionInput  structure defining the partition to be created.
+	// A PartitionInput structure defining the partition to be created.
 	//
 	// This member is required.
 	PartitionInput *types.PartitionInput

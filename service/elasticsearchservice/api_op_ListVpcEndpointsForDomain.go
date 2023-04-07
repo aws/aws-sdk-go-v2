@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated with
-// a particular domain.
+// Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated with a
+// particular domain.
 func (c *Client) ListVpcEndpointsForDomain(ctx context.Context, params *ListVpcEndpointsForDomainInput, optFns ...func(*Options)) (*ListVpcEndpointsForDomainOutput, error) {
 	if params == nil {
 		params = &ListVpcEndpointsForDomainInput{}
@@ -52,7 +52,7 @@ type ListVpcEndpointsForDomainOutput struct {
 	// This member is required.
 	NextToken *string
 
-	// Provides list of VpcEndpointSummary  summarizing details of the VPC endpoints.
+	// Provides list of VpcEndpointSummary summarizing details of the VPC endpoints.
 	//
 	// This member is required.
 	VpcEndpointSummaryList []types.VpcEndpointSummary

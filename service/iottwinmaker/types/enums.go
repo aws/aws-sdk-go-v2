@@ -124,9 +124,9 @@ const (
 	OrderByTimeDescending OrderByTime = "DESCENDING"
 )
 
-// Values returns all known values for OrderByTime. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrderByTime. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OrderByTime) Values() []OrderByTime {
 	return []OrderByTime{
 		"ASCENDING",
@@ -161,9 +161,9 @@ const (
 	PricingModeTieredBundle PricingMode = "TIERED_BUNDLE"
 )
 
-// Values returns all known values for PricingMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PricingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PricingMode) Values() []PricingMode {
 	return []PricingMode{
 		"BASIC",
@@ -182,9 +182,9 @@ const (
 	PricingTierTier4 PricingTier = "TIER_4"
 )
 
-// Values returns all known values for PricingTier. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PricingTier. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PricingTier) Values() []PricingTier {
 	return []PricingTier{
 		"TIER_1",
@@ -203,9 +203,9 @@ const (
 	PropertyGroupUpdateTypeCreate PropertyGroupUpdateType = "CREATE"
 )
 
-// Values returns all known values for PropertyGroupUpdateType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PropertyGroupUpdateType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PropertyGroupUpdateType) Values() []PropertyGroupUpdateType {
 	return []PropertyGroupUpdateType{
 		"UPDATE",
@@ -356,8 +356,8 @@ const (
 	TypeMap          Type = "MAP"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

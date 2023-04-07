@@ -47,7 +47,7 @@ type DescribeImportSnapshotTasksInput struct {
 	ImportTaskIds []string
 
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken  value.
+	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32
 
 	// A token that indicates the next page of results.
@@ -62,8 +62,8 @@ type DescribeImportSnapshotTasksOutput struct {
 	// completed or canceled in the previous 7 days.
 	ImportSnapshotTasks []types.ImportSnapshotTask
 
-	// The token to use to get the next page of results. This value is null when
-	// there are no more results to return.
+	// The token to use to get the next page of results. This value is null when there
+	// are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -144,11 +144,11 @@ var _ DescribeImportSnapshotTasksAPIClient = (*Client)(nil)
 // DescribeImportSnapshotTasks
 type DescribeImportSnapshotTasksPaginatorOptions struct {
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken  value.
+	// remaining results, make another call with the returned NextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -289,10 +289,10 @@ func (w *SnapshotImportedWaiter) Wait(ctx context.Context, params *DescribeImpor
 	return err
 }
 
-// WaitForOutput calls the waiter function for SnapshotImported waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for SnapshotImported waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *SnapshotImportedWaiter) WaitForOutput(ctx context.Context, params *DescribeImportSnapshotTasksInput, maxWaitDur time.Duration, optFns ...func(*SnapshotImportedWaiterOptions)) (*DescribeImportSnapshotTasksOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

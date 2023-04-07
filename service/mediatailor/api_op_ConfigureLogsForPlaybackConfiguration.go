@@ -31,11 +31,11 @@ type ConfigureLogsForPlaybackConfigurationInput struct {
 
 	// The percentage of session logs that MediaTailor sends to your Cloudwatch Logs
 	// account. For example, if your playback configuration has 1000 sessions and
-	// percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to
+	// percentEnabled is set to 60 , MediaTailor sends logs for 600 of the sessions to
 	// CloudWatch Logs. MediaTailor decides at random which of the playback
 	// configuration sessions to send logs for. If you want to view logs for a specific
 	// session, you can use the debug log mode (https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html)
-	// . Valid values: 0  - 100
+	// . Valid values: 0 - 100
 	//
 	// This member is required.
 	PercentEnabled int32

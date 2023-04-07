@@ -38,8 +38,7 @@ type CreateFilterInput struct {
 
 	// The filter expression defines which items are included or excluded from
 	// recommendations. Filter expression must follow specific format rules. For
-	// information about filter expression structure and syntax, see Filter
-	// expressions (https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html)
+	// information about filter expression structure and syntax, see Filter expressions (https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html)
 	// .
 	//
 	// This member is required.

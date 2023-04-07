@@ -16,7 +16,7 @@ import (
 // to the workgroup in which the queries were saved. Use ListNamedQueriesInput to
 // get the list of named query IDs in the specified workgroup. If information could
 // not be retrieved for a submitted query ID, information about the query ID
-// submitted is listed under UnprocessedNamedQueryId. Named queries differ from
+// submitted is listed under UnprocessedNamedQueryId . Named queries differ from
 // executed queries. Use BatchGetQueryExecutionInput to get details about each
 // unique query execution, and ListQueryExecutionsInput to get a list of query
 // execution IDs.

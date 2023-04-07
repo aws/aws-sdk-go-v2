@@ -12,10 +12,10 @@ import (
 )
 
 // Describes the specified attribute of the specified instance. You can specify
-// only one attribute at a time. Valid attribute values are: instanceType  |
-// kernel | ramdisk  | userData  | disableApiTermination  |
-// instanceInitiatedShutdownBehavior | rootDeviceName  | blockDeviceMapping  |
-// productCodes | sourceDestCheck  | groupSet  | ebsOptimized  | sriovNetSupport
+// only one attribute at a time. Valid attribute values are: instanceType | kernel
+// | ramdisk | userData | disableApiTermination | instanceInitiatedShutdownBehavior
+// | rootDeviceName | blockDeviceMapping | productCodes | sourceDestCheck |
+// groupSet | ebsOptimized | sriovNetSupport
 func (c *Client) DescribeInstanceAttribute(ctx context.Context, params *DescribeInstanceAttributeInput, optFns ...func(*Options)) (*DescribeInstanceAttributeOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceAttributeInput{}
@@ -33,8 +33,8 @@ func (c *Client) DescribeInstanceAttribute(ctx context.Context, params *Describe
 
 type DescribeInstanceAttributeInput struct {
 
-	// The instance attribute. Note: The enaSupport attribute is not supported at
-	// this time.
+	// The instance attribute. Note: The enaSupport attribute is not supported at this
+	// time.
 	//
 	// This member is required.
 	Attribute types.InstanceAttributeName
@@ -63,7 +63,7 @@ type DescribeInstanceAttributeOutput struct {
 	// parameter to true ; otherwise, set it to false .
 	DisableApiStop *types.AttributeBooleanValue
 
-	// If the value is true, you can't terminate the instance through the Amazon EC2
+	// If the value is true , you can't terminate the instance through the Amazon EC2
 	// console, CLI, or API; otherwise, you can.
 	DisableApiTermination *types.AttributeBooleanValue
 
@@ -104,10 +104,10 @@ type DescribeInstanceAttributeOutput struct {
 
 	// Enable or disable source/destination checks, which ensure that the instance is
 	// either the source or the destination of any traffic that it receives. If the
-	// value is true, source/destination checks are enabled; otherwise, they are
-	// disabled. The default value is true. You must disable source/destination
-	// checks if the instance runs services such as network address translation,
-	// routing, or firewalls.
+	// value is true , source/destination checks are enabled; otherwise, they are
+	// disabled. The default value is true . You must disable source/destination checks
+	// if the instance runs services such as network address translation, routing, or
+	// firewalls.
 	SourceDestCheck *types.AttributeBooleanValue
 
 	// Indicates whether enhanced networking with the Intel 82599 Virtual Function

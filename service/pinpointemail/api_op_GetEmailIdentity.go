@@ -43,21 +43,21 @@ type GetEmailIdentityInput struct {
 // Details about an email identity.
 type GetEmailIdentityOutput struct {
 
-	// An object that contains information about the DKIM attributes for the
-	// identity. This object includes the tokens that you use to create the CNAME
-	// records that are required to complete the DKIM verification process.
+	// An object that contains information about the DKIM attributes for the identity.
+	// This object includes the tokens that you use to create the CNAME records that
+	// are required to complete the DKIM verification process.
 	DkimAttributes *types.DkimAttributes
 
-	// The feedback forwarding configuration for the identity. If the value is true,
+	// The feedback forwarding configuration for the identity. If the value is true ,
 	// Amazon Pinpoint sends you email notifications when bounce or complaint events
 	// occur. Amazon Pinpoint sends this notification to the address that you specified
 	// in the Return-Path header of the original email. When you set this value to
-	// false, Amazon Pinpoint sends notifications through other mechanisms, such as
-	// by notifying an Amazon SNS topic or another event destination. You're required
-	// to have a method of tracking bounces and complaints. If you haven't set up
-	// another mechanism for receiving bounce or complaint notifications, Amazon
-	// Pinpoint sends an email notification when these events occur (even if this
-	// setting is disabled).
+	// false , Amazon Pinpoint sends notifications through other mechanisms, such as by
+	// notifying an Amazon SNS topic or another event destination. You're required to
+	// have a method of tracking bounces and complaints. If you haven't set up another
+	// mechanism for receiving bounce or complaint notifications, Amazon Pinpoint sends
+	// an email notification when these events occur (even if this setting is
+	// disabled).
 	FeedbackForwardingStatus bool
 
 	// The email identity type.

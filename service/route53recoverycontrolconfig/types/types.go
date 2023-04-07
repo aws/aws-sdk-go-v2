@@ -48,8 +48,8 @@ type AssertionRule struct {
 	// This member is required.
 	SafetyRuleArn *string
 
-	// The deployment status of an assertion rule. Status can be one of the
-	// following: PENDING, DEPLOYED, PENDING_DELETION.
+	// The deployment status of an assertion rule. Status can be one of the following:
+	// PENDING, DEPLOYED, PENDING_DELETION.
 	//
 	// This member is required.
 	Status Status
@@ -98,8 +98,8 @@ type Cluster struct {
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
 
-	// Endpoints for a cluster. Specify one of these endpoints when you want to set
-	// or retrieve a routing control state in the cluster. To get or update the routing
+	// Endpoints for a cluster. Specify one of these endpoints when you want to set or
+	// retrieve a routing control state in the cluster. To get or update the routing
 	// control state, see the Amazon Route 53 Application Recovery Controller Routing
 	// Control Actions.
 	ClusterEndpoints []ClusterEndpoint
@@ -118,9 +118,9 @@ type Cluster struct {
 // routing control state in the cluster.
 type ClusterEndpoint struct {
 
-	// A cluster endpoint. Specify an endpoint and Amazon Web Services Region when
-	// you want to set or retrieve a routing control state in the cluster. To get or
-	// update the routing control state, see the Amazon Route 53 Application Recovery
+	// A cluster endpoint. Specify an endpoint and Amazon Web Services Region when you
+	// want to set or retrieve a routing control state in the cluster. To get or update
+	// the routing control state, see the Amazon Route 53 Application Recovery
 	// Controller Routing Control Actions.
 	Endpoint *string
 
@@ -147,8 +147,8 @@ type ControlPanel struct {
 	// this flag is set to false.
 	DefaultControlPanel bool
 
-	// The name of the control panel. You can use any non-white space character in
-	// the name.
+	// The name of the control panel. You can use any non-white space character in the
+	// name.
 	Name *string
 
 	// The number of routing controls in the control panel.
@@ -228,9 +228,8 @@ type GatingRule struct {
 	noSmithyDocumentSerde
 }
 
-// Update to a gating rule. You can update the name or the evaluation period
-// (wait period). If you don't specify one of the items to update, the item is
-// unchanged.
+// Update to a gating rule. You can update the name or the evaluation period (wait
+// period). If you don't specify one of the items to update, the item is unchanged.
 type GatingRuleUpdate struct {
 
 	// The name for the gating rule. You can use any non-white space character in the
@@ -304,8 +303,8 @@ type NewGatingRule struct {
 	// This member is required.
 	ControlPanelArn *string
 
-	// The gating controls for the new gating rule. That is, routing controls that
-	// are evaluated by the rule configuration that you specify.
+	// The gating controls for the new gating rule. That is, routing controls that are
+	// evaluated by the rule configuration that you specify.
 	//
 	// This member is required.
 	GatingControls []string
@@ -359,8 +358,8 @@ type RoutingControl struct {
 	// The Amazon Resource Name (ARN) of the routing control.
 	RoutingControlArn *string
 
-	// The deployment status of a routing control. Status can be one of the
-	// following: PENDING, DEPLOYED, PENDING_DELETION.
+	// The deployment status of a routing control. Status can be one of the following:
+	// PENDING, DEPLOYED, PENDING_DELETION.
 	Status Status
 
 	noSmithyDocumentSerde

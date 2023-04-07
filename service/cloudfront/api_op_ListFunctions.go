@@ -13,11 +13,11 @@ import (
 
 // Gets a list of all CloudFront functions in your Amazon Web Services account.
 // You can optionally apply a filter to return only the functions that are in the
-// specified stage, either DEVELOPMENT  or LIVE. You can optionally specify the
+// specified stage, either DEVELOPMENT or LIVE . You can optionally specify the
 // maximum number of items to receive in the response. If the total number of items
 // in the list exceeds the maximum that you specify, or the default maximum, the
 // response is paginated. To get the next page of items, send a subsequent request
-// that specifies the NextMarker  value from the current response as the Marker
+// that specifies the NextMarker value from the current response as the Marker
 // value in the subsequent request.
 func (c *Client) ListFunctions(ctx context.Context, params *ListFunctionsInput, optFns ...func(*Options)) (*ListFunctionsOutput, error) {
 	if params == nil {
@@ -39,7 +39,6 @@ type ListFunctionsInput struct {
 	// Use this field when paginating results to indicate where to begin in your list
 	// of functions. The response includes functions in the list that occur after the
 	// marker. To get the next page of the list, set this field's value to the value of
-	//
 	// NextMarker from the current page's response.
 	Marker *string
 
@@ -47,7 +46,7 @@ type ListFunctionsInput struct {
 	MaxItems *int32
 
 	// An optional filter to return only the functions that are in the specified
-	// stage, either DEVELOPMENT  or LIVE .
+	// stage, either DEVELOPMENT or LIVE .
 	Stage types.FunctionStage
 
 	noSmithyDocumentSerde

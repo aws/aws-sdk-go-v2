@@ -16,8 +16,8 @@ import (
 // the specified target capacity and compute requirements. You can specify your
 // compute requirements either by using InstanceRequirementsWithMetadata and
 // letting Amazon EC2 choose the optimal instance types to fulfill your Spot
-// request, or you can specify the instance types by using InstanceTypes. For
-// more information, see Spot placement score (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html)
+// request, or you can specify the instance types by using InstanceTypes . For more
+// information, see Spot placement score (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html)
 // in the Amazon EC2 User Guide.
 func (c *Client) GetSpotPlacementScores(ctx context.Context, params *GetSpotPlacementScoresInput, optFns ...func(*Options)) (*GetSpotPlacementScoresOutput, error) {
 	if params == nil {
@@ -59,14 +59,14 @@ type GetSpotPlacementScoresInput struct {
 	// InstanceTypes , you can't specify InstanceRequirementsWithMetadata .
 	InstanceTypes []string
 
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues
-	// from the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	// The Regions used to narrow down the list of Regions to be scored. Enter the
@@ -89,7 +89,7 @@ type GetSpotPlacementScoresInput struct {
 type GetSpotPlacementScoresOutput struct {
 
 	// The token to include in another request to get the next page of items. This
-	// value is null  when there are no more items to return.
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// The Spot placement score for the top 10 Regions or Availability Zones, scored
@@ -99,8 +99,7 @@ type GetSpotPlacementScoresOutput struct {
 	// Spot capacity request is highly likely to succeed in that Region or Availability
 	// Zone. If you request a Spot placement score for Regions, a high score assumes
 	// that your fleet request will be configured to use all Availability Zones and the
-	//
-	// capacity-optimizedallocation strategy. If you request a Spot placement score
+	// capacity-optimized allocation strategy. If you request a Spot placement score
 	// for Availability Zones, a high score assumes that your fleet request will be
 	// configured to use a single Availability Zone and the capacity-optimized
 	// allocation strategy. Different  Regions or Availability Zones might return the
@@ -188,14 +187,14 @@ var _ GetSpotPlacementScoresAPIClient = (*Client)(nil)
 // GetSpotPlacementScoresPaginatorOptions is the paginator options for
 // GetSpotPlacementScores
 type GetSpotPlacementScoresPaginatorOptions struct {
-	// The maximum number of items to return for this request. To get the next page
-	// of items, make another request with the token returned in the output. For more
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
 	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -208,8 +207,7 @@ type GetSpotPlacementScoresPaginator struct {
 	firstPage bool
 }
 
-// NewGetSpotPlacementScoresPaginator returns a new
-// GetSpotPlacementScoresPaginator
+// NewGetSpotPlacementScoresPaginator returns a new GetSpotPlacementScoresPaginator
 func NewGetSpotPlacementScoresPaginator(client GetSpotPlacementScoresAPIClient, params *GetSpotPlacementScoresInput, optFns ...func(*GetSpotPlacementScoresPaginatorOptions)) *GetSpotPlacementScoresPaginator {
 	if params == nil {
 		params = &GetSpotPlacementScoresInput{}

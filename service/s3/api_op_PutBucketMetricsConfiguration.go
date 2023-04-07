@@ -31,7 +31,8 @@ import (
 //
 // GetBucketLifecycle has the following special error:
 //   - Error code: TooManyConfigurations
-//   - Description: You are attempting to create a new configuration but have already reached the 1,000-configuration limit.
+//   - Description: You are attempting to create a new configuration but have
+//     already reached the 1,000-configuration limit.
 //   - HTTP Status Code: HTTP 400 Bad Request
 func (c *Client) PutBucketMetricsConfiguration(ctx context.Context, params *PutBucketMetricsConfigurationInput, optFns ...func(*Options)) (*PutBucketMetricsConfigurationOutput, error) {
 	if params == nil {

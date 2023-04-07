@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a temporary session URL and authorization code(bearer token) that
-// you can use to embed an Amazon QuickSight read-only dashboard in your website or
+// Generates a temporary session URL and authorization code(bearer token) that you
+// can use to embed an Amazon QuickSight read-only dashboard in your website or
 // application. Before you use this command, make sure that you have configured the
 // dashboards and permissions. Currently, you can use GetDashboardEmbedURL only
 // from the server, not from the user's browser. The following rules apply to the
@@ -20,8 +20,11 @@ import (
 //   - They must be used together.
 //   - They can be used one time only.
 //   - They are valid for 5 minutes after you run this command.
-//   - You are charged only when the URL is used or there is interaction with Amazon QuickSight.
-//   - The resulting user session is valid for 15 minutes (default) up to 10 hours (maximum). You can use the optional SessionLifetimeInMinutes parameter to customize session duration.
+//   - You are charged only when the URL is used or there is interaction with
+//     Amazon QuickSight.
+//   - The resulting user session is valid for 15 minutes (default) up to 10 hours
+//     (maximum). You can use the optional SessionLifetimeInMinutes parameter to
+//     customize session duration.
 //
 // For more information, see Embedding Analytics Using GetDashboardEmbedUrl (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html)
 // in the Amazon QuickSight User Guide. For more information about the high-level
@@ -63,11 +66,10 @@ type GetDashboardEmbedUrlInput struct {
 	IdentityType types.EmbeddingIdentityType
 
 	// A list of one or more dashboard IDs that you want anonymous users to have
-	// tempporary access to. Currently, the IdentityType  parameter must be set to
-	// ANONYMOUSbecause other identity types authenticate as Amazon QuickSight or IAM
-	// users. For example, if you set "--dashboard-id dash_id1 --dashboard-id
-	// dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three
-	// dashboards.
+	// tempporary access to. Currently, the IdentityType parameter must be set to
+	// ANONYMOUS because other identity types authenticate as Amazon QuickSight or IAM
+	// users. For example, if you set " --dashboard-id dash_id1 --dashboard-id dash_id2
+	// dash_id3 identity-type ANONYMOUS ", the session can access all three dashboards.
 	AdditionalDashboardIds []string
 
 	// The Amazon QuickSight namespace that contains the dashboard IDs in this
@@ -85,7 +87,7 @@ type GetDashboardEmbedUrlInput struct {
 	// Adds persistence of state for the user session in an embedded dashboard.
 	// Persistence applies to the sheet and the parameter settings. These are control
 	// settings that the dashboard subscriber (Amazon QuickSight reader) chooses while
-	// viewing the dashboard. If this is set to TRUE, the settings are the same when
+	// viewing the dashboard. If this is set to TRUE , the settings are the same when
 	// the subscriber reopens the same dashboard URL. The state is stored in Amazon
 	// QuickSight, not in a browser cookie. If this is set to FALSE, the state of the
 	// user session is not persisted. The default is FALSE .
@@ -95,14 +97,13 @@ type GetDashboardEmbedUrlInput struct {
 	// which enables the undo/redo button.
 	UndoRedoDisabled bool
 
-	// The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
-	// QUICKSIGHTidentity type. You can use this for any Amazon QuickSight users in
-	// your account (readers, authors, or admins) authenticated as one of the
-	// following:
-	//     - Active Directory (AD) users or group members
-	//     - Invited nonfederated users
-	//     - IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.
-	//
+	// The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT
+	// identity type. You can use this for any Amazon QuickSight users in your account
+	// (readers, authors, or admins) authenticated as one of the following:
+	//   - Active Directory (AD) users or group members
+	//   - Invited nonfederated users
+	//   - IAM users and IAM role-based sessions authenticated through Federated
+	//   Single Sign-On using SAML, OpenID Connect, or IAM federation.
 	// Omit this parameter for users in the third group – IAM users and IAM role-based
 	// sessions.
 	UserArn *string
@@ -110,7 +111,7 @@ type GetDashboardEmbedUrlInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output returned from the GetDashboardEmbedUrl  operation.
+// Output returned from the GetDashboardEmbedUrl operation.
 type GetDashboardEmbedUrlOutput struct {
 
 	// A single-use URL that you can put into your server-side webpage to embed your

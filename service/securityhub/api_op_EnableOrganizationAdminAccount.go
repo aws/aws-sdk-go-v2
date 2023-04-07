@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Designates the Security Hub administrator account for an organization. Can
-// only be called by the organization management account.
+// Designates the Security Hub administrator account for an organization. Can only
+// be called by the organization management account.
 func (c *Client) EnableOrganizationAdminAccount(ctx context.Context, params *EnableOrganizationAdminAccountInput, optFns ...func(*Options)) (*EnableOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &EnableOrganizationAdminAccountInput{}

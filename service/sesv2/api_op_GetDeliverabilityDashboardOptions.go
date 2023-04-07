@@ -52,15 +52,15 @@ type GetDeliverabilityDashboardOptionsInput struct {
 // An object that shows the status of the Deliverability dashboard.
 type GetDeliverabilityDashboardOptionsOutput struct {
 
-	// Specifies whether the Deliverability dashboard is enabled. If this value is
-	// true , the dashboard is enabled.
+	// Specifies whether the Deliverability dashboard is enabled. If this value is true
+	// , the dashboard is enabled.
 	//
 	// This member is required.
 	DashboardEnabled bool
 
-	// The current status of your Deliverability dashboard subscription. If this
-	// value is PENDING_EXPIRATION, your subscription is scheduled to expire at the
-	// end of the current calendar month.
+	// The current status of your Deliverability dashboard subscription. If this value
+	// is PENDING_EXPIRATION , your subscription is scheduled to expire at the end of
+	// the current calendar month.
 	AccountStatus types.DeliverabilityDashboardAccountStatus
 
 	// An array of objects, one for each verified domain that you use to send email

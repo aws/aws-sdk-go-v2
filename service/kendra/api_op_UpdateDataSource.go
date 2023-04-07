@@ -42,11 +42,11 @@ type UpdateDataSourceInput struct {
 	// Configuration information you want to update for the data source connector.
 	Configuration *types.DataSourceConfiguration
 
-	// Configuration information you want to update for altering document metadata
-	// and content during the document ingestion process. For more information on how
-	// to create, modify and delete document metadata, or make other content
-	// alterations when you ingest documents into Amazon Kendra, see Customizing
-	// document metadata during the ingestion process (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html)
+	// Configuration information you want to update for altering document metadata and
+	// content during the document ingestion process. For more information on how to
+	// create, modify and delete document metadata, or make other content alterations
+	// when you ingest documents into Amazon Kendra, see Customizing document metadata
+	// during the ingestion process (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html)
 	// .
 	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
@@ -57,8 +57,7 @@ type UpdateDataSourceInput struct {
 	// allows you to support a language for all documents when updating the data
 	// source. English is supported by default. For more information on supported
 	// languages, including their codes, see Adding documents in languages other than
-	// English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html)
-	// .
+	// English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html) .
 	LanguageCode *string
 
 	// A new name for the data source connector.

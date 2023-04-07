@@ -19,17 +19,16 @@ import (
 //   - The version list size exceeds 50.
 //   - The version list contains duplicate entries.
 //
-// The request will complete
-// successfully, but with partial failures, if:
+// The request will complete successfully, but with partial failures, if:
 //   - A version does not exist.
 //   - A version is being used by a job.
 //   - You specify LATEST_WORKING , but it's being used by a project.
 //   - The version fails to be deleted.
 //
 // The LATEST_WORKING version will only be deleted if the recipe has no other
-// versions. If you try to delete LATEST_WORKING while other versions exist (or
-// if they can't be deleted), then LATEST_WORKING will be listed as partial
-// failure in the response.
+// versions. If you try to delete LATEST_WORKING while other versions exist (or if
+// they can't be deleted), then LATEST_WORKING will be listed as partial failure
+// in the response.
 func (c *Client) BatchDeleteRecipeVersion(ctx context.Context, params *BatchDeleteRecipeVersionInput, optFns ...func(*Options)) (*BatchDeleteRecipeVersionOutput, error) {
 	if params == nil {
 		params = &BatchDeleteRecipeVersionInput{}
@@ -52,9 +51,9 @@ type BatchDeleteRecipeVersionInput struct {
 	// This member is required.
 	Name *string
 
-	// An array of version identifiers, for the recipe versions to be deleted. You
-	// can specify numeric versions ( X.Y ) or LATEST_WORKING . LATEST_PUBLISHED is
-	// not supported.
+	// An array of version identifiers, for the recipe versions to be deleted. You can
+	// specify numeric versions ( X.Y ) or LATEST_WORKING . LATEST_PUBLISHED is not
+	// supported.
 	//
 	// This member is required.
 	RecipeVersions []string

@@ -35,8 +35,8 @@ type SearchAssociatedTranscriptsInput struct {
 	// This member is required.
 	BotId *string
 
-	// The unique identifier of the bot recommendation associated with the
-	// transcripts to search.
+	// The unique identifier of the bot recommendation associated with the transcripts
+	// to search.
 	//
 	// This member is required.
 	BotRecommendationId *string
@@ -58,8 +58,8 @@ type SearchAssociatedTranscriptsInput struct {
 	// This member is required.
 	LocaleId *string
 
-	// The maximum number of bot recommendations to return in each page of results.
-	// If there are fewer results than the max page size, only the actual number of
+	// The maximum number of bot recommendations to return in each page of results. If
+	// there are fewer results than the max page size, only the actual number of
 	// results are returned.
 	MaxResults *int32
 
@@ -86,8 +86,8 @@ type SearchAssociatedTranscriptsOutput struct {
 	// searching.
 	BotId *string
 
-	// The unique identifier of the bot recommendation associated with the
-	// transcripts to search.
+	// The unique identifier of the bot recommendation associated with the transcripts
+	// to search.
 	BotRecommendationId *string
 
 	// The version of the bot containing the transcripts that you are searching.

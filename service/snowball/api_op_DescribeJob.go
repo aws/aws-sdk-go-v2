@@ -45,8 +45,8 @@ type DescribeJobOutput struct {
 	// and other important metadata.
 	JobMetadata *types.JobMetadata
 
-	// Information about a specific job part (in the case of an export job),
-	// including shipping information, job status, and other important metadata.
+	// Information about a specific job part (in the case of an export job), including
+	// shipping information, job status, and other important metadata.
 	SubJobMetadata []types.JobMetadata
 
 	// Metadata pertaining to the operation's result.

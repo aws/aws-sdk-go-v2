@@ -37,8 +37,8 @@ type CancelArchivalInput struct {
 	// This member is required.
 	GatewayARN *string
 
-	// The Amazon Resource Name (ARN) of the virtual tape you want to cancel
-	// archiving for.
+	// The Amazon Resource Name (ARN) of the virtual tape you want to cancel archiving
+	// for.
 	//
 	// This member is required.
 	TapeARN *string

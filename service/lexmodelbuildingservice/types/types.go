@@ -60,7 +60,7 @@ type BotChannelAssociation struct {
 	// A text description of the association you are creating.
 	Description *string
 
-	// If status  is FAILED, Amazon Lex provides the reason that it failed to create
+	// If status is FAILED , Amazon Lex provides the reason that it failed to create
 	// the association.
 	FailureReason *string
 
@@ -68,9 +68,10 @@ type BotChannelAssociation struct {
 	Name *string
 
 	// The status of the bot channel.
-	//     - CREATED - The channel has been created and is ready for use.
-	//     - IN_PROGRESS - Channel creation is in progress.
-	//     - FAILED - There was an error creating the channel. For information about the reason for the failure, see the failureReason field.
+	//   - CREATED - The channel has been created and is ready for use.
+	//   - IN_PROGRESS - Channel creation is in progress.
+	//   - FAILED - There was an error creating the channel. For information about the
+	//   reason for the failure, see the failureReason field.
 	Status ChannelStatus
 
 	// Specifies the type of association by indicating the type of channel being
@@ -89,8 +90,8 @@ type BotMetadata struct {
 	// A description of the bot.
 	Description *string
 
-	// The date that the bot was updated. When you create a bot, the creation date
-	// and last updated date are the same.
+	// The date that the bot was updated. When you create a bot, the creation date and
+	// last updated date are the same.
 	LastUpdatedDate *time.Time
 
 	// The name of the bot.
@@ -216,8 +217,8 @@ type EnumerationValue struct {
 }
 
 // A prompt for additional activity after an intent is fulfilled. For example,
-// after the OrderPizza intent is fulfilled, you might prompt the user to find
-// out whether the user wants to order drinks.
+// after the OrderPizza intent is fulfilled, you might prompt the user to find out
+// whether the user wants to order drinks.
 type FollowUpPrompt struct {
 
 	// Prompts for information from the user.
@@ -242,8 +243,13 @@ type FollowUpPrompt struct {
 // presentation. If you need to update the logic, you only update the Lambda
 // function; you don't need to upgrade your client application. Consider the
 // following examples:
-//   - In a pizza ordering application, after the user provides all of the information for placing an order, you use a Lambda function to place an order with a pizzeria.
-//   - In a gaming application, when a user says "pick up a rock," this information must go back to the client application so that it can perform the operation and update the graphics. In this case, you want Amazon Lex to return the intent data to the client.
+//   - In a pizza ordering application, after the user provides all of the
+//     information for placing an order, you use a Lambda function to place an order
+//     with a pizzeria.
+//   - In a gaming application, when a user says "pick up a rock," this
+//     information must go back to the client application so that it can perform the
+//     operation and update the graphics. In this case, you want Amazon Lex to return
+//     the intent data to the client.
 type FulfillmentActivity struct {
 
 	// How the intent should be fulfilled, either by running a Lambda function or by
@@ -318,15 +324,15 @@ type KendraConfiguration struct {
 	// The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the
 	// AMAZON.KendraSearchIntent intent to search. The index must be in the same
 	// account and Region as the Amazon Lex bot. If the Amazon Kendra index does not
-	// exist, you get an exception when you call the PutIntent  operation.
+	// exist, you get an exception when you call the PutIntent operation.
 	//
 	// This member is required.
 	KendraIndex *string
 
-	// The Amazon Resource Name (ARN) of an IAM role that has permission to search
-	// the Amazon Kendra index. The role must be in the same account and Region as the
+	// The Amazon Resource Name (ARN) of an IAM role that has permission to search the
+	// Amazon Kendra index. The role must be in the same account and Region as the
 	// Amazon Lex bot. If the role does not exist, you get an exception when you call
-	// the PutIntent  operation.
+	// the PutIntent operation.
 	//
 	// This member is required.
 	Role *string
@@ -349,8 +355,8 @@ type LogSettingsRequest struct {
 	// This member is required.
 	Destination Destination
 
-	// The type of logging to enable. Text logs are delivered to a CloudWatch Logs
-	// log group. Audio logs are delivered to an S3 bucket.
+	// The type of logging to enable. Text logs are delivered to a CloudWatch Logs log
+	// group. Audio logs are delivered to an S3 bucket.
 	//
 	// This member is required.
 	LogType LogType
@@ -386,9 +392,9 @@ type LogSettingsResponse struct {
 	// where the logs are delivered.
 	ResourceArn *string
 
-	// The resource prefix is the first part of the S3 object key within the S3
-	// bucket that you specified to contain audio logs. For CloudWatch Logs it is the
-	// prefix of the log stream name within the log group that you specified.
+	// The resource prefix is the first part of the S3 object key within the S3 bucket
+	// that you specified to contain audio logs. For CloudWatch Logs it is the prefix
+	// of the log stream name within the log group that you specified.
 	ResourcePrefix *string
 
 	noSmithyDocumentSerde
@@ -429,8 +435,10 @@ type MigrationAlert struct {
 	ReferenceURLs []string
 
 	// The type of alert. There are two kinds of alerts:
-	//     - ERROR - There was an issue with the migration that can't be resolved. The migration stops.
-	//     - WARN - There was an issue with the migration that requires manual changes to the new Amazon Lex V2 bot. The migration continues.
+	//   - ERROR - There was an issue with the migration that can't be resolved. The
+	//   migration stops.
+	//   - WARN - There was an issue with the migration that requires manual changes to
+	//   the new Amazon Lex V2 bot. The migration continues.
 	Type MigrationAlertType
 
 	noSmithyDocumentSerde
@@ -481,15 +489,15 @@ type OutputContext struct {
 	Name *string
 
 	// The number of seconds that the context should be active after it is first sent
-	// in a PostContent  or PostText response. You can set the value between 5 and
+	// in a PostContent or PostText response. You can set the value between 5 and
 	// 86,400 seconds (24 hours).
 	//
 	// This member is required.
 	TimeToLiveInSeconds *int32
 
 	// The number of conversation turns that the context should be active. A
-	// conversation turn is one PostContent  or PostText request and the
-	// corresponding response from Amazon Lex.
+	// conversation turn is one PostContent or PostText request and the corresponding
+	// response from Amazon Lex.
 	//
 	// This member is required.
 	TurnsToLive *int32
@@ -524,8 +532,7 @@ type Prompt struct {
 }
 
 // Describes the resource that refers to the resource that you are attempting to
-// delete. This object is returned as part of the ResourceInUseException
-// exception.
+// delete. This object is returned as part of the ResourceInUseException exception.
 type ResourceReference struct {
 
 	// The name of the resource that is using the resource that you are trying to
@@ -600,9 +607,10 @@ type Slot struct {
 type SlotDefaultValue struct {
 
 	// The default value for the slot. You can specify one of the following:
-	//     - #context-name.slot-name - The slot value "slot-name" in the context "context-name."
-	//     - {attribute} - The slot value of the session attribute "attribute."
-	//     - 'value' - The discrete value "value."
+	//   - #context-name.slot-name - The slot value "slot-name" in the context
+	//   "context-name."
+	//   - {attribute} - The slot value of the session attribute "attribute."
+	//   - 'value' - The discrete value "value."
 	//
 	// This member is required.
 	DefaultValue *string
@@ -610,8 +618,8 @@ type SlotDefaultValue struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the default values for a slot. Default values are used when Amazon
-// Lex hasn't determined a value for a slot.
+// Contains the default values for a slot. Default values are used when Amazon Lex
+// hasn't determined a value for a slot.
 type SlotDefaultValueSpec struct {
 
 	// The default values for a slot. You can specify more than one default. For
@@ -664,14 +672,13 @@ type SlotTypeRegexConfiguration struct {
 	// A regular expression used to validate the value of a slot. Use a standard
 	// regular expression. Amazon Lex supports the following characters in the regular
 	// expression:
-	//     - A-Z, a-z
-	//     - 0-9
-	//     - Unicode characters ("\ u")
-	// Represent Unicode characters with four
-	// digits, for example "\u0041" or "\u005A". The following regular expression
-	// operators are not supported:
-	//     - Infinite repeaters: *, +, or {x,} with no upper bound.
-	//     - Wild card (.)
+	//   - A-Z, a-z
+	//   - 0-9
+	//   - Unicode characters ("\ u")
+	// Represent Unicode characters with four digits, for example "\u0041" or
+	// "\u005A". The following regular expression operators are not supported:
+	//   - Infinite repeaters: *, +, or {x,} with no upper bound.
+	//   - Wild card (.)
 	//
 	// This member is required.
 	Pattern *string
@@ -737,15 +744,15 @@ type UtteranceData struct {
 	noSmithyDocumentSerde
 }
 
-// Provides a list of utterances that have been made to a specific version of
-// your bot. The list contains a maximum of 100 utterances.
+// Provides a list of utterances that have been made to a specific version of your
+// bot. The list contains a maximum of 100 utterances.
 type UtteranceList struct {
 
 	// The version of the bot that processed the list.
 	BotVersion *string
 
-	// One or more UtteranceData objects that contain information about the
-	// utterances that have been made to a bot. The maximum number of object is 100.
+	// One or more UtteranceData objects that contain information about the utterances
+	// that have been made to a bot. The maximum number of object is 100.
 	Utterances []UtteranceData
 
 	noSmithyDocumentSerde

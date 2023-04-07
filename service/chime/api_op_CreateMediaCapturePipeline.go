@@ -52,7 +52,7 @@ type CreateMediaCapturePipelineInput struct {
 	// This member is required.
 	SourceType types.MediaPipelineSourceType
 
-	// The configuration for a specified media capture pipeline. SourceType  must be
+	// The configuration for a specified media capture pipeline. SourceType must be
 	// ChimeSdkMeeting .
 	ChimeSdkMeetingConfiguration *types.ChimeSdkMeetingConfiguration
 

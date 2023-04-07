@@ -139,8 +139,8 @@ var _ GetPartitionIndexesAPIClient = (*Client)(nil)
 // GetPartitionIndexesPaginatorOptions is the paginator options for
 // GetPartitionIndexes
 type GetPartitionIndexesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

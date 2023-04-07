@@ -40,9 +40,9 @@ type UpdateProvisionedProductInput struct {
 	UpdateToken *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The path identifier. This value is optional if the product has a default path,
@@ -59,8 +59,8 @@ type UpdateProvisionedProductInput struct {
 	// The name of the product. You must provide the name or ID, but not both.
 	ProductName *string
 
-	// The identifier of the provisioned product. You must provide the name or ID,
-	// but not both.
+	// The identifier of the provisioned product. You must provide the name or ID, but
+	// not both.
 	ProvisionedProductId *string
 
 	// The name of the provisioned product. You cannot specify both
@@ -70,8 +70,8 @@ type UpdateProvisionedProductInput struct {
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
 
-	// The name of the provisioning artifact. You must provide the name or ID, but
-	// not both.
+	// The name of the provisioning artifact. You must provide the name or ID, but not
+	// both.
 	ProvisioningArtifactName *string
 
 	// The new parameters.
@@ -81,8 +81,8 @@ type UpdateProvisionedProductInput struct {
 	// stack set.
 	ProvisioningPreferences *types.UpdateProvisioningPreferences
 
-	// One or more tags. Requires the product to have RESOURCE_UPDATE  constraint with
-	// TagUpdatesOnProvisionedProduct set to ALLOWED  to allow tag updates.
+	// One or more tags. Requires the product to have RESOURCE_UPDATE constraint with
+	// TagUpdatesOnProvisionedProduct set to ALLOWED to allow tag updates.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

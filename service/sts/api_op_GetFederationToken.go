@@ -15,11 +15,10 @@ import (
 // ID, a secret access key, and a security token) for a federated user. A typical
 // use is in a proxy application that gets temporary security credentials on behalf
 // of distributed applications inside a corporate network. You must call the
-// GetFederationTokenoperation using the long-term security credentials of an IAM
+// GetFederationToken operation using the long-term security credentials of an IAM
 // user. As a result, this call is appropriate in contexts where those credentials
 // can be safely stored, usually in a server-based application. For a comparison of
-//
-// GetFederationTokenwith the other API operations that produce temporary
+// GetFederationToken with the other API operations that produce temporary
 // credentials, see Requesting Temporary Security Credentials (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html)
 // and Comparing the Amazon Web Services STS API operations (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison)
 // in the IAM User Guide. You can create a mobile-based or browser-based app that
@@ -41,12 +40,12 @@ import (
 // user credentials have a maximum duration of 3,600 seconds (1 hour). Permissions
 // You can use the temporary credentials created by GetFederationToken in any
 // Amazon Web Services service with the following exceptions:
-//   - You cannot call any IAM operations using the CLI or the Amazon Web Services API. This limitation does not apply to console sessions.
+//   - You cannot call any IAM operations using the CLI or the Amazon Web Services
+//     API. This limitation does not apply to console sessions.
 //   - You cannot call any STS operations except GetCallerIdentity .
 //
-// You can
-// use temporary credentials for single sign-on (SSO) to the console. You must pass
-// an inline or managed session policy (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
+// You can use temporary credentials for single sign-on (SSO) to the console. You
+// must pass an inline or managed session policy (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 // to this operation. You can pass a single JSON policy document to use as an
 // inline session policy. You can also specify up to 10 managed policy Amazon
 // Resource Names (ARNs) to use as managed session policies. The plaintext that you
@@ -58,13 +57,12 @@ import (
 // restrict the permissions for a federated user. You cannot use session policies
 // to grant more permissions than those that are defined in the permissions policy
 // of the IAM user. For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
-// in the IAM User Guide. For information about using GetFederationToken to
-// create temporary security credentials, see GetFederationToken—Federation
-// Through a Custom Identity Broker (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getfederationtoken)
+// in the IAM User Guide. For information about using GetFederationToken to create
+// temporary security credentials, see GetFederationToken—Federation Through a
+// Custom Identity Broker (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getfederationtoken)
 // . You can use the credentials to access a resource that has a resource-based
 // policy. If that policy specifically references the federated user session in the
-//
-// Principalelement of the policy, the session has the permissions allowed by the
+// Principal element of the policy, the session has the permissions allowed by the
 // policy. These permissions are granted in addition to the permissions granted by
 // the session policies. Tags (Optional) You can pass tag key-value pairs to your
 // session. These are called session tags. For more information about session tags,
@@ -80,11 +78,11 @@ import (
 // allow you to pass only specific session tags. For more information, see
 // Tutorial: Using Tags for Attribute-Based Access Control (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html)
 // in the IAM User Guide. Tag key–value pairs are not case sensitive, but case is
-// preserved. This means that you cannot have separate Department  and department
+// preserved. This means that you cannot have separate Department and department
 // tag keys. Assume that the user that you are federating has the Department =
-// Marketing tag and you pass the department = engineering  session tag.
-// Department and department are not saved as separate tags, and the session tag
-// passed in the request takes precedence over the user tag.
+// Marketing tag and you pass the department = engineering session tag. Department
+// and department are not saved as separate tags, and the session tag passed in
+// the request takes precedence over the user tag.
 func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTokenInput, optFns ...func(*Options)) (*GetFederationTokenOutput, error) {
 	if params == nil {
 		params = &GetFederationTokenInput{}
@@ -103,7 +101,7 @@ func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTo
 type GetFederationTokenInput struct {
 
 	// The name of the federated user. The name is used as an identifier for the
-	// temporary security credentials (such as Bob). For example, you can reference
+	// temporary security credentials (such as Bob ). For example, you can reference
 	// the federated user name in a resource-based policy, such as in an Amazon S3
 	// bucket policy. The regex used to validate this parameter is a string of
 	// characters consisting of upper- and lower-case alphanumeric characters with no
@@ -198,10 +196,10 @@ type GetFederationTokenInput struct {
 	// same key as a tag that is already attached to the user you are federating. When
 	// you do, session tags override a user tag with the same key. Tag key–value pairs
 	// are not case sensitive, but case is preserved. This means that you cannot have
-	// separate Department  and department  tag keys. Assume that the role has the
-	// Department = Marketing  tag and you pass the department = engineering session
-	// tag. Department  and department are not saved as separate tags, and the
-	// session tag passed in the request takes precedence over the role tag.
+	// separate Department and department tag keys. Assume that the role has the
+	// Department = Marketing tag and you pass the department = engineering session
+	// tag. Department and department are not saved as separate tags, and the session
+	// tag passed in the request takes precedence over the role tag.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -219,7 +217,7 @@ type GetFederationTokenOutput struct {
 	Credentials *types.Credentials
 
 	// Identifiers for the federated user associated with the credentials (such as
-	// arn:aws:sts::123456789012:federated-user/Bob or 123456789012:Bob). You can use
+	// arn:aws:sts::123456789012:federated-user/Bob or 123456789012:Bob ). You can use
 	// the federated user's ARN in your resource-based policies, such as an Amazon S3
 	// bucket policy.
 	FederatedUser *types.FederatedUser

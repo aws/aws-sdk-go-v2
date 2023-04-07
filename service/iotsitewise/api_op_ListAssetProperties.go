@@ -39,9 +39,9 @@ type ListAssetPropertiesInput struct {
 
 	// Filters the requested list of asset properties. You can choose one of the
 	// following options:
-	//     - ALL – The list includes all asset properties for a given asset model ID.
-	//     - BASE – The list includes only base asset properties for a given asset model ID.
-	//
+	//   - ALL – The list includes all asset properties for a given asset model ID.
+	//   - BASE – The list includes only base asset properties for a given asset model
+	//   ID.
 	// Default: BASE
 	Filter types.ListAssetPropertiesFilter
 
@@ -180,8 +180,8 @@ type ListAssetPropertiesPaginatorOptions struct {
 	// specified, the default value is 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

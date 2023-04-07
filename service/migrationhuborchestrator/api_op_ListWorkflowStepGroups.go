@@ -137,8 +137,8 @@ type ListWorkflowStepGroupsPaginatorOptions struct {
 	// The maximum number of results that can be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -151,8 +151,7 @@ type ListWorkflowStepGroupsPaginator struct {
 	firstPage bool
 }
 
-// NewListWorkflowStepGroupsPaginator returns a new
-// ListWorkflowStepGroupsPaginator
+// NewListWorkflowStepGroupsPaginator returns a new ListWorkflowStepGroupsPaginator
 func NewListWorkflowStepGroupsPaginator(client ListWorkflowStepGroupsAPIClient, params *ListWorkflowStepGroupsInput, optFns ...func(*ListWorkflowStepGroupsPaginatorOptions)) *ListWorkflowStepGroupsPaginator {
 	if params == nil {
 		params = &ListWorkflowStepGroupsInput{}

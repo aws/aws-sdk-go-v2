@@ -12,9 +12,9 @@ import (
 )
 
 // Initiates a request to compile the specified type of information of the
-// deployed environment. Setting the InfoType  to tail compiles the last lines
-// from the application server log files of every Amazon EC2 instance in your
-// environment. Setting the InfoType  to bundle compresses the application server
+// deployed environment. Setting the InfoType to tail compiles the last lines from
+// the application server log files of every Amazon EC2 instance in your
+// environment. Setting the InfoType to bundle compresses the application server
 // log files for every Amazon EC2 instance into a .zip file. Legacy and .NET
 // containers do not support bundle logs. Use RetrieveEnvironmentInfo to obtain
 // the set of logs. Related Topics
@@ -44,14 +44,14 @@ type RequestEnvironmentInfoInput struct {
 	InfoType types.EnvironmentInfoType
 
 	// The ID of the environment of the requested data. If no such environment is
-	// found, RequestEnvironmentInfo  returns an InvalidParameterValue error.
+	// found, RequestEnvironmentInfo returns an InvalidParameterValue error.
 	// Condition: You must specify either this or an EnvironmentName, or both. If you
 	// do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
 	// error.
 	EnvironmentId *string
 
 	// The name of the environment of the requested data. If no such environment is
-	// found, RequestEnvironmentInfo  returns an InvalidParameterValue error.
+	// found, RequestEnvironmentInfo returns an InvalidParameterValue error.
 	// Condition: You must specify either this or an EnvironmentId, or both. If you do
 	// not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
 	// error.

@@ -13,7 +13,7 @@ import (
 
 // Modifies the parameters of a DB parameter group. To modify more than one
 // parameter, submit a list of the following: ParameterName , ParameterValue , and
-// ApplyMethod. A maximum of 20 parameters can be modified in a single request.
+// ApplyMethod . A maximum of 20 parameters can be modified in a single request.
 // Changes to dynamic parameters are applied immediately. Changes to static
 // parameters require a reboot without failover to the DB instance associated with
 // the parameter group before the change can take effect. After you modify a DB
@@ -44,7 +44,7 @@ func (c *Client) ModifyDBParameterGroup(ctx context.Context, params *ModifyDBPar
 type ModifyDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:
-	//     - If supplied, must match the name of an existing DBParameterGroup.
+	//   - If supplied, must match the name of an existing DBParameterGroup.
 	//
 	// This member is required.
 	DBParameterGroupName *string
@@ -53,8 +53,8 @@ type ModifyDBParameterGroupInput struct {
 	// update. At least one parameter name, value, and apply method must be supplied;
 	// subsequent arguments are optional. A maximum of 20 parameters can be modified in
 	// a single request. Valid Values (for the application method): immediate |
-	// pending-rebootYou can use the immediate value with dynamic parameters only.
-	// You can use the pending-reboot value for both dynamic and static parameters, and
+	// pending-reboot You can use the immediate value with dynamic parameters only. You
+	// can use the pending-reboot value for both dynamic and static parameters, and
 	// changes are applied when you reboot the DB instance without failover.
 	//
 	// This member is required.

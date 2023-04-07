@@ -127,8 +127,8 @@ type DescribeVcenterClientsPaginatorOptions struct {
 	// Maximum results to be returned in DescribeVcenterClients.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -141,8 +141,7 @@ type DescribeVcenterClientsPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeVcenterClientsPaginator returns a new
-// DescribeVcenterClientsPaginator
+// NewDescribeVcenterClientsPaginator returns a new DescribeVcenterClientsPaginator
 func NewDescribeVcenterClientsPaginator(client DescribeVcenterClientsAPIClient, params *DescribeVcenterClientsInput, optFns ...func(*DescribeVcenterClientsPaginatorOptions)) *DescribeVcenterClientsPaginator {
 	if params == nil {
 		params = &DescribeVcenterClientsInput{}

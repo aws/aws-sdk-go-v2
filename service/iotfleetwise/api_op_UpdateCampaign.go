@@ -30,10 +30,10 @@ func (c *Client) UpdateCampaign(ctx context.Context, params *UpdateCampaignInput
 type UpdateCampaignInput struct {
 
 	// Specifies how to update a campaign. The action can be one of the following:
-	//     - APPROVE - To approve delivering a data collection scheme to vehicles.
-	//     - SUSPEND - To suspend collecting signal data.
-	//     - RESUME - To resume collecting signal data.
-	//     - UPDATE - To update a campaign.
+	//   - APPROVE - To approve delivering a data collection scheme to vehicles.
+	//   - SUSPEND - To suspend collecting signal data.
+	//   - RESUME - To resume collecting signal data.
+	//   - UPDATE - To update a campaign.
 	//
 	// This member is required.
 	Action types.UpdateCampaignAction
@@ -43,8 +43,7 @@ type UpdateCampaignInput struct {
 	// This member is required.
 	Name *string
 
-	// A list of vehicle attributes to associate with a signal. Default: An empty
-	// array
+	// A list of vehicle attributes to associate with a signal. Default: An empty array
 	DataExtraDimensions []string
 
 	// The description of the campaign.
@@ -62,10 +61,15 @@ type UpdateCampaignOutput struct {
 	Name *string
 
 	// The state of a campaign. The status can be one of:
-	//     - CREATING - Amazon Web Services IoT FleetWise is processing your request to create the campaign.
-	//     - WAITING_FOR_APPROVAL - After a campaign is created, it enters the WAITING_FOR_APPROVAL state. To allow Amazon Web Services IoT FleetWise to deploy the campaign to the target vehicle or fleet, use the API operation to approve the campaign.
-	//     - RUNNING - The campaign is active.
-	//     - SUSPENDED - The campaign is suspended. To resume the campaign, use the API operation.
+	//   - CREATING - Amazon Web Services IoT FleetWise is processing your request to
+	//   create the campaign.
+	//   - WAITING_FOR_APPROVAL - After a campaign is created, it enters the
+	//   WAITING_FOR_APPROVAL state. To allow Amazon Web Services IoT FleetWise to
+	//   deploy the campaign to the target vehicle or fleet, use the API operation to
+	//   approve the campaign.
+	//   - RUNNING - The campaign is active.
+	//   - SUSPENDED - The campaign is suspended. To resume the campaign, use the API
+	//   operation.
 	Status types.CampaignStatus
 
 	// Metadata pertaining to the operation's result.

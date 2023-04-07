@@ -48,9 +48,9 @@ type DeleteAppInputSourceInput struct {
 	// to delete from the Resilience Hub application.
 	EksSourceClusterNamespace *types.EksSourceClusterNamespace
 
-	// The Amazon Resource Name (ARN) of the imported resource you want to remove
-	// from the Resilience Hub application. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// The Amazon Resource Name (ARN) of the imported resource you want to remove from
+	// the Resilience Hub application. For more information about ARNs, see Amazon
+	// Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	SourceArn *string
 

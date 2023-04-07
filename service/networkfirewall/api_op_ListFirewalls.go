@@ -33,8 +33,8 @@ func (c *Client) ListFirewalls(ctx context.Context, params *ListFirewallsInput, 
 
 type ListFirewallsInput struct {
 
-	// The maximum number of objects that you want Network Firewall to return for
-	// this request. If more objects are available, in the response, Network Firewall
+	// The maximum number of objects that you want Network Firewall to return for this
+	// request. If more objects are available, in the response, Network Firewall
 	// provides a NextToken value that you can use in a subsequent call to get the
 	// next batch of objects.
 	MaxResults *int32
@@ -143,14 +143,14 @@ var _ ListFirewallsAPIClient = (*Client)(nil)
 
 // ListFirewallsPaginatorOptions is the paginator options for ListFirewalls
 type ListFirewallsPaginatorOptions struct {
-	// The maximum number of objects that you want Network Firewall to return for
-	// this request. If more objects are available, in the response, Network Firewall
+	// The maximum number of objects that you want Network Firewall to return for this
+	// request. If more objects are available, in the response, Network Firewall
 	// provides a NextToken value that you can use in a subsequent call to get the
 	// next batch of objects.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -16,7 +16,7 @@ import (
 // status is useful if you want to cancel one or more jobs. You can't cancel jobs
 // after Elastic Transcoder has started processing them; if you pause the pipeline
 // to which you submitted the jobs, you have more time to get the job IDs for the
-// jobs that you want to cancel, and to send a CancelJob  request.
+// jobs that you want to cancel, and to send a CancelJob request.
 func (c *Client) UpdatePipelineStatus(ctx context.Context, params *UpdatePipelineStatusInput, optFns ...func(*Options)) (*UpdatePipelineStatusOutput, error) {
 	if params == nil {
 		params = &UpdatePipelineStatusInput{}
@@ -32,7 +32,7 @@ func (c *Client) UpdatePipelineStatus(ctx context.Context, params *UpdatePipelin
 	return out, nil
 }
 
-// The UpdatePipelineStatusRequest  structure.
+// The UpdatePipelineStatusRequest structure.
 type UpdatePipelineStatusInput struct {
 
 	// The identifier of the pipeline to update.
@@ -41,8 +41,8 @@ type UpdatePipelineStatusInput struct {
 	Id *string
 
 	// The desired status of the pipeline:
-	//     - Active : The pipeline is processing jobs.
-	//     - Paused : The pipeline is not currently processing jobs.
+	//   - Active : The pipeline is processing jobs.
+	//   - Paused : The pipeline is not currently processing jobs.
 	//
 	// This member is required.
 	Status *string

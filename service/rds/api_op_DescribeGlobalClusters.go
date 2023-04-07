@@ -38,7 +38,7 @@ type DescribeGlobalClustersInput struct {
 	// The user-supplied DB cluster identifier. If this parameter is specified,
 	// information from only the specific DB cluster is returned. This parameter isn't
 	// case-sensitive. Constraints:
-	//     - If supplied, must match an existing DBClusterIdentifier.
+	//   - If supplied, must match an existing DBClusterIdentifier.
 	GlobalClusterIdentifier *string
 
 	// An optional pagination token provided by a previous DescribeGlobalClusters
@@ -46,9 +46,9 @@ type DescribeGlobalClustersInput struct {
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -145,14 +145,14 @@ var _ DescribeGlobalClustersAPIClient = (*Client)(nil)
 // DescribeGlobalClustersPaginatorOptions is the paginator options for
 // DescribeGlobalClusters
 type DescribeGlobalClustersPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -165,8 +165,7 @@ type DescribeGlobalClustersPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeGlobalClustersPaginator returns a new
-// DescribeGlobalClustersPaginator
+// NewDescribeGlobalClustersPaginator returns a new DescribeGlobalClustersPaginator
 func NewDescribeGlobalClustersPaginator(client DescribeGlobalClustersAPIClient, params *DescribeGlobalClustersInput, optFns ...func(*DescribeGlobalClustersPaginatorOptions)) *DescribeGlobalClustersPaginator {
 	if params == nil {
 		params = &DescribeGlobalClustersInput{}

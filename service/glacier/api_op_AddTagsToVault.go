@@ -14,7 +14,7 @@ import (
 // This operation adds the specified tags to a vault. Each tag is composed of a
 // key and a value. Each vault can have up to 10 tags. If your request would cause
 // the tag limit for the vault to be exceeded, the operation throws the
-// LimitExceededExceptionerror. If a tag already exists on the vault under a
+// LimitExceededException error. If a tag already exists on the vault under a
 // specified key, the existing key value will be overwritten. For more information
 // about tags, see Tagging Amazon S3 Glacier Resources (https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html)
 // .
@@ -37,7 +37,7 @@ func (c *Client) AddTagsToVault(ctx context.Context, params *AddTagsToVaultInput
 type AddTagsToVaultInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
 	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.

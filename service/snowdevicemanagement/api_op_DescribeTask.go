@@ -43,7 +43,7 @@ type DescribeTaskOutput struct {
 	// When the task was completed.
 	CompletedAt *time.Time
 
-	// When the CreateTask  operation was called.
+	// When the CreateTask operation was called.
 	CreatedAt *time.Time
 
 	// The description provided of the task and managed devices.
@@ -55,9 +55,8 @@ type DescribeTaskOutput struct {
 	// The current state of the task.
 	State types.TaskState
 
-	// Optional metadata that you assign to a resource. You can use tags to
-	// categorize a resource in different ways, such as by purpose, owner, or
-	// environment.
+	// Optional metadata that you assign to a resource. You can use tags to categorize
+	// a resource in different ways, such as by purpose, owner, or environment.
 	Tags map[string]string
 
 	// The managed devices that the task was sent to.

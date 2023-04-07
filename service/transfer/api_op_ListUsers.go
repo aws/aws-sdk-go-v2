@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the users for a file transfer protocol-enabled server that you specify
-// by passing the ServerId  parameter.
+// Lists the users for a file transfer protocol-enabled server that you specify by
+// passing the ServerId parameter.
 func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if params == nil {
 		params = &ListUsersInput{}
@@ -36,12 +36,12 @@ type ListUsersInput struct {
 	// This member is required.
 	ServerId *string
 
-	// Specifies the number of users to return as a response to the ListUsers  request.
+	// Specifies the number of users to return as a response to the ListUsers request.
 	MaxResults *int32
 
-	// When you can get additional results from the ListUsers  call, a NextToken
+	// When you can get additional results from the ListUsers call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
-	// to the NextToken  parameter to continue listing additional users.
+	// to the NextToken parameter to continue listing additional users.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,8 +49,7 @@ type ListUsersInput struct {
 
 type ListUsersOutput struct {
 
-	// A system-assigned unique identifier for a server that the users are assigned
-	// to.
+	// A system-assigned unique identifier for a server that the users are assigned to.
 	//
 	// This member is required.
 	ServerId *string
@@ -61,9 +60,9 @@ type ListUsersOutput struct {
 	// This member is required.
 	Users []types.ListedUser
 
-	// When you can get additional results from the ListUsers  call, a NextToken
+	// When you can get additional results from the ListUsers call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
-	// to the NextToken  parameter to continue listing additional users.
+	// to the NextToken parameter to continue listing additional users.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -144,11 +143,11 @@ var _ ListUsersAPIClient = (*Client)(nil)
 
 // ListUsersPaginatorOptions is the paginator options for ListUsers
 type ListUsersPaginatorOptions struct {
-	// Specifies the number of users to return as a response to the ListUsers  request.
+	// Specifies the number of users to return as a response to the ListUsers request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -46,8 +46,7 @@ type GetDataQualityRulesetOutput struct {
 	// A description of the ruleset.
 	Description *string
 
-	// A timestamp. The last point in time when this data quality ruleset was
-	// modified.
+	// A timestamp. The last point in time when this data quality ruleset was modified.
 	LastModifiedOn *time.Time
 
 	// The name of the ruleset.

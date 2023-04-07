@@ -38,8 +38,8 @@ type DescribeCustomDomainsInput struct {
 	ServiceArn *string
 
 	// The maximum number of results that each response (result page) can include.
-	// It's used for a paginated request. If you don't specify MaxResults, the
-	// request retrieves all available results in a single response.
+	// It's used for a paginated request. If you don't specify MaxResults , the request
+	// retrieves all available results in a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. It's used for a paginated request. The
@@ -162,12 +162,12 @@ var _ DescribeCustomDomainsAPIClient = (*Client)(nil)
 // DescribeCustomDomains
 type DescribeCustomDomainsPaginatorOptions struct {
 	// The maximum number of results that each response (result page) can include.
-	// It's used for a paginated request. If you don't specify MaxResults, the
-	// request retrieves all available results in a single response.
+	// It's used for a paginated request. If you don't specify MaxResults , the request
+	// retrieves all available results in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -34,8 +34,8 @@ func (c *Client) PutDataLakeSettings(ctx context.Context, params *PutDataLakeSet
 
 type PutDataLakeSettingsInput struct {
 
-	// A structure representing a list of Lake Formation principals designated as
-	// data lake administrators.
+	// A structure representing a list of Lake Formation principals designated as data
+	// lake administrators.
 	//
 	// This member is required.
 	DataLakeSettings *types.DataLakeSettings

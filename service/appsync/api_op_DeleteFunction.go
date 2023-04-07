@@ -33,7 +33,7 @@ type DeleteFunctionInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The Function  ID.
+	// The Function ID.
 	//
 	// This member is required.
 	FunctionId *string

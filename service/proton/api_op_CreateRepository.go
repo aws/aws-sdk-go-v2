@@ -56,8 +56,8 @@ type CreateRepositoryInput struct {
 	// This member is required.
 	Provider types.RepositoryProvider
 
-	// The ARN of your customer Amazon Web Services Key Management Service (Amazon
-	// Web Services KMS) key.
+	// The ARN of your customer Amazon Web Services Key Management Service (Amazon Web
+	// Services KMS) key.
 	EncryptionKey *string
 
 	// An optional list of metadata items that you can associate with the Proton

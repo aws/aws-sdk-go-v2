@@ -33,7 +33,7 @@ type GetInventoryInput struct {
 
 	// Returns counts of inventory types based on one or more expressions. For
 	// example, if you aggregate by using an expression that uses the
-	// AWS:InstanceInformation.PlatformTypetype, you can see a count of how many
+	// AWS:InstanceInformation.PlatformType type, you can see a count of how many
 	// Windows and Linux managed nodes exist in your inventoried fleet.
 	Aggregators []types.InventoryAggregator
 
@@ -56,8 +56,7 @@ type GetInventoryInput struct {
 
 type GetInventoryOutput struct {
 
-	// Collection of inventory entities such as a collection of managed node
-	// inventory.
+	// Collection of inventory entities such as a collection of managed node inventory.
 	Entities []types.InventoryResultEntity
 
 	// The token to use when requesting the next set of items. If there are no
@@ -146,8 +145,8 @@ type GetInventoryPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

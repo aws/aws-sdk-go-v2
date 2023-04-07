@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Synchronizes a job from the source control repository. This operation takes
-// the job artifacts that are located in the remote repository and updates the Glue
+// Synchronizes a job from the source control repository. This operation takes the
+// job artifacts that are located in the remote repository and updates the Glue
 // internal stores with these artifacts. This API supports optional parameters
 // which take in the repository information.
 func (c *Client) UpdateJobFromSourceControl(ctx context.Context, params *UpdateJobFromSourceControlInput, optFns ...func(*Options)) (*UpdateJobFromSourceControlOutput, error) {

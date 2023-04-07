@@ -14,9 +14,9 @@ const (
 	AgentStatusShutdown    AgentStatus = "SHUTDOWN"
 )
 
-// Values returns all known values for AgentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AgentStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AgentStatus) Values() []AgentStatus {
 	return []AgentStatus{
 		"HEALTHY",
@@ -198,8 +198,8 @@ const (
 	ImportTaskFilterNameName         ImportTaskFilterName = "NAME"
 )
 
-// Values returns all known values for ImportTaskFilterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ImportTaskFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ImportTaskFilterName) Values() []ImportTaskFilterName {
 	return []ImportTaskFilterName{
@@ -217,9 +217,9 @@ const (
 	OrderStringDesc OrderString = "DESC"
 )
 
-// Values returns all known values for OrderString. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrderString. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OrderString) Values() []OrderString {
 	return []OrderString{
 		"ASC",

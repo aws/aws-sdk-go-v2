@@ -29,8 +29,7 @@ func (c *Client) DeleteExtension(ctx context.Context, params *DeleteExtensionInp
 
 type DeleteExtensionInput struct {
 
-	// The name, ID, or Amazon Resource Name (ARN) of the extension you want to
-	// delete.
+	// The name, ID, or Amazon Resource Name (ARN) of the extension you want to delete.
 	//
 	// This member is required.
 	ExtensionIdentifier *string

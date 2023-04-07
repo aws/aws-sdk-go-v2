@@ -39,8 +39,8 @@ type ListBuildsInput struct {
 	NextToken *string
 
 	// The order to list build IDs. Valid values include:
-	//     - ASCENDING : List the build IDs in ascending order by build ID.
-	//     - DESCENDING : List the build IDs in descending order by build ID.
+	//   - ASCENDING : List the build IDs in ascending order by build ID.
+	//   - DESCENDING : List the build IDs in descending order by build ID.
 	SortOrder types.SortOrderType
 
 	noSmithyDocumentSerde
@@ -132,8 +132,8 @@ var _ ListBuildsAPIClient = (*Client)(nil)
 
 // ListBuildsPaginatorOptions is the paginator options for ListBuilds
 type ListBuildsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

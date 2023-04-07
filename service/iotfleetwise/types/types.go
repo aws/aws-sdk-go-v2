@@ -18,8 +18,8 @@ type Actuator struct {
 	// This member is required.
 	DataType NodeDataType
 
-	// The fully qualified name of the actuator. For example, the fully qualified
-	// name of an actuator might be Vehicle.Front.Left.Door.Lock .
+	// The fully qualified name of the actuator. For example, the fully qualified name
+	// of an actuator might be Vehicle.Front.Left.Door.Lock .
 	//
 	// This member is required.
 	FullyQualifiedName *string
@@ -130,10 +130,15 @@ type CampaignSummary struct {
 	SignalCatalogArn *string
 
 	// The state of a campaign. The status can be one of the following:
-	//     - CREATING - Amazon Web Services IoT FleetWise is processing your request to create the campaign.
-	//     - WAITING_FOR_APPROVAL - After a campaign is created, it enters the WAITING_FOR_APPROVAL state. To allow Amazon Web Services IoT FleetWise to deploy the campaign to the target vehicle or fleet, use the API operation to approve the campaign.
-	//     - RUNNING - The campaign is active.
-	//     - SUSPENDED - The campaign is suspended. To resume the campaign, use the API operation.
+	//   - CREATING - Amazon Web Services IoT FleetWise is processing your request to
+	//   create the campaign.
+	//   - WAITING_FOR_APPROVAL - After a campaign is created, it enters the
+	//   WAITING_FOR_APPROVAL state. To allow Amazon Web Services IoT FleetWise to
+	//   deploy the campaign to the target vehicle or fleet, use the API operation to
+	//   approve the campaign.
+	//   - RUNNING - The campaign is active.
+	//   - SUSPENDED - The campaign is suspended. To resume the campaign, use the API
+	//   operation.
 	Status CampaignStatus
 
 	// The ARN of a vehicle or fleet to which the campaign is deployed.
@@ -287,7 +292,7 @@ type ConditionBasedCollectionScheme struct {
 	MinimumTriggerIntervalMs *int64
 
 	// Whether to collect data for all triggering events ( ALWAYS ). Specify (
-	// RISING_EDGE), or specify only when the condition first evaluates to false. For
+	// RISING_EDGE ), or specify only when the condition first evaluates to false. For
 	// example, triggering on "AirbagDeployed"; Users aren't interested on triggering
 	// when the airbag is already exploded; they only care about the change from not
 	// deployed => deployed.
@@ -389,8 +394,8 @@ type DecoderManifestSummary struct {
 	// The name of the decoder manifest.
 	Name *string
 
-	// The state of the decoder manifest. If the status is ACTIVE, the decoder
-	// manifest can't be edited. If the status is marked DRAFT, you can edit the
+	// The state of the decoder manifest. If the status is ACTIVE , the decoder
+	// manifest can't be edited. If the status is marked DRAFT , you can edit the
 	// decoder manifest.
 	Status ManifestStatus
 
@@ -529,14 +534,14 @@ type InvalidSignalDecoder struct {
 // operation to return this information about multiple vehicle models.
 type ModelManifestSummary struct {
 
-	// The time the vehicle model was created, in seconds since epoch (January 1,
-	// 1970 at midnight UTC time).
+	// The time the vehicle model was created, in seconds since epoch (January 1, 1970
+	// at midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The time the vehicle model was last updated, in seconds since epoch (January
-	// 1, 1970 at midnight UTC time).
+	// The time the vehicle model was last updated, in seconds since epoch (January 1,
+	// 1970 at midnight UTC time).
 	//
 	// This member is required.
 	LastModificationTime *time.Time
@@ -553,7 +558,7 @@ type ModelManifestSummary struct {
 	// The ARN of the signal catalog associated with the vehicle model.
 	SignalCatalogArn *string
 
-	// The state of the vehicle model. If the status is ACTIVE, the vehicle model
+	// The state of the vehicle model. If the status is ACTIVE , the vehicle model
 	// can't be edited. If the status is DRAFT , you can edit the vehicle model.
 	Status ManifestStatus
 
@@ -569,8 +574,8 @@ type NetworkFileDefinition interface {
 	isNetworkFileDefinition()
 }
 
-// Information, including CAN DBC files, about the configurations used to create
-// a decoder manifest.
+// Information, including CAN DBC files, about the configurations used to create a
+// decoder manifest.
 type NetworkFileDefinitionMemberCanDbc struct {
 	Value CanDbcDefinition
 
@@ -805,12 +810,12 @@ type SignalCatalogSummary struct {
 	// The Amazon Resource Name (ARN) of the signal catalog.
 	Arn *string
 
-	// The time the signal catalog was created in seconds since epoch (January 1,
-	// 1970 at midnight UTC time).
+	// The time the signal catalog was created in seconds since epoch (January 1, 1970
+	// at midnight UTC time).
 	CreationTime *time.Time
 
-	// The time the signal catalog was last updated in seconds since epoch (January
-	// 1, 1970 at midnight UTC time).
+	// The time the signal catalog was last updated in seconds since epoch (January 1,
+	// 1970 at midnight UTC time).
 	LastModificationTime *time.Time
 
 	// The name of the signal catalog.
@@ -863,8 +868,8 @@ type SignalInformation struct {
 	// The maximum number of samples to collect.
 	MaxSampleCount *int64
 
-	// The minimum duration of time (in milliseconds) between two triggering events
-	// to collect data. If a signal changes often, you might want to collect data at a
+	// The minimum duration of time (in milliseconds) between two triggering events to
+	// collect data. If a signal changes often, you might want to collect data at a
 	// slower rate.
 	MinimumSamplingIntervalMs *int64
 
@@ -892,7 +897,7 @@ type Tag struct {
 type TimeBasedCollectionScheme struct {
 
 	// The time period (in milliseconds) to decide how often to collect data. For
-	// example, if the time period is 60000, the Edge Agent software collects data
+	// example, if the time period is 60000 , the Edge Agent software collects data
 	// once every minute.
 	//
 	// This member is required.
@@ -1029,11 +1034,13 @@ type VehicleStatus struct {
 	CampaignName *string
 
 	// The state of a vehicle, which can be one of the following:
-	//     - CREATED - Amazon Web Services IoT FleetWise sucessfully created the vehicle.
-	//     - READY - The vehicle is ready to receive a campaign deployment.
-	//     - HEALTHY - A campaign deployment was delivered to the vehicle.
-	//     - SUSPENDED - A campaign associated with the vehicle was suspended and data collection was paused.
-	//     - DELETING - Amazon Web Services IoT FleetWise is removing a campaign from the vehicle.
+	//   - CREATED - Amazon Web Services IoT FleetWise sucessfully created the vehicle.
+	//   - READY - The vehicle is ready to receive a campaign deployment.
+	//   - HEALTHY - A campaign deployment was delivered to the vehicle.
+	//   - SUSPENDED - A campaign associated with the vehicle was suspended and data
+	//   collection was paused.
+	//   - DELETING - Amazon Web Services IoT FleetWise is removing a campaign from the
+	//   vehicle.
 	Status VehicleState
 
 	// The unique ID of the vehicle.

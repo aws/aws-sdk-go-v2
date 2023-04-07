@@ -47,8 +47,8 @@ type GetAggregateConformancePackComplianceSummaryInput struct {
 	// Services Region.
 	GroupByKey types.AggregateConformancePackComplianceSummaryGroupKey
 
-	// The maximum number of results returned on each page. The default is maximum.
-	// If you specify 0, Config uses the default.
+	// The maximum number of results returned on each page. The default is maximum. If
+	// you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -60,7 +60,7 @@ type GetAggregateConformancePackComplianceSummaryInput struct {
 
 type GetAggregateConformancePackComplianceSummaryOutput struct {
 
-	// Returns a list of AggregateConformancePackComplianceSummary  object.
+	// Returns a list of AggregateConformancePackComplianceSummary object.
 	AggregateConformancePackComplianceSummaries []types.AggregateConformancePackComplianceSummary
 
 	// Groups the result based on Amazon Web Services account ID or Amazon Web
@@ -151,12 +151,12 @@ var _ GetAggregateConformancePackComplianceSummaryAPIClient = (*Client)(nil)
 // GetAggregateConformancePackComplianceSummaryPaginatorOptions is the paginator
 // options for GetAggregateConformancePackComplianceSummary
 type GetAggregateConformancePackComplianceSummaryPaginatorOptions struct {
-	// The maximum number of results returned on each page. The default is maximum.
-	// If you specify 0, Config uses the default.
+	// The maximum number of results returned on each page. The default is maximum. If
+	// you specify 0, Config uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

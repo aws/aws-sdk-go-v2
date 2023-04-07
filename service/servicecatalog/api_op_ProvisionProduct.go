@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provisions the specified product. A provisioned product is a resourced
-// instance of a product. For example, provisioning a product that's based on an
+// Provisions the specified product. A provisioned product is a resourced instance
+// of a product. For example, provisioning a product that's based on an
 // CloudFormation template launches an CloudFormation stack and its underlying
-// resources. You can check the status of this request using DescribeRecord. If
+// resources. You can check the status of this request using DescribeRecord . If
 // the request contains a tag key with an empty list of values, there's a tag
 // conflict for that key. Don't include conflicted keys as tags, or this will cause
 // the error "Parameter validation failed: Missing required parameter in
@@ -45,26 +45,26 @@ type ProvisionProductInput struct {
 	// This member is required.
 	ProvisionToken *string
 
-	// A user-friendly name for the provisioned product. This value must be unique
-	// for the Amazon Web Services account and cannot be updated after the product is
+	// A user-friendly name for the provisioned product. This value must be unique for
+	// the Amazon Web Services account and cannot be updated after the product is
 	// provisioned.
 	//
 	// This member is required.
 	ProvisionedProductName *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
 	// events.
 	NotificationArns []string
 
-	// The path identifier of the product. This value is optional if the product has
-	// a default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths. You must provide the name or ID, but
+	// The path identifier of the product. This value is optional if the product has a
+	// default path, and required if the product has more than one path. To list the
+	// paths for a product, use ListLaunchPaths . You must provide the name or ID, but
 	// not both.
 	PathId *string
 
@@ -81,8 +81,8 @@ type ProvisionProductInput struct {
 	// but not both.
 	ProvisioningArtifactId *string
 
-	// The name of the provisioning artifact. You must provide the name or ID, but
-	// not both.
+	// The name of the provisioning artifact. You must provide the name or ID, but not
+	// both.
 	ProvisioningArtifactName *string
 
 	// Parameters specified by the administrator that are required for provisioning

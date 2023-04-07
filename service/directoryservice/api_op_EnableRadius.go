@@ -28,7 +28,7 @@ func (c *Client) EnableRadius(ctx context.Context, params *EnableRadiusInput, op
 	return out, nil
 }
 
-// Contains the inputs for the EnableRadius  operation.
+// Contains the inputs for the EnableRadius operation.
 type EnableRadiusInput struct {
 
 	// The identifier of the directory for which to enable MFA.
@@ -36,7 +36,7 @@ type EnableRadiusInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// A RadiusSettings  object that contains information about the RADIUS server.
+	// A RadiusSettings object that contains information about the RADIUS server.
 	//
 	// This member is required.
 	RadiusSettings *types.RadiusSettings
@@ -44,7 +44,7 @@ type EnableRadiusInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the EnableRadius  operation.
+// Contains the results of the EnableRadius operation.
 type EnableRadiusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

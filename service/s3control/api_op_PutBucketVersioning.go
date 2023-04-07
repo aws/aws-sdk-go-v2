@@ -21,8 +21,10 @@ import (
 // bucket. With S3 Versioning, you can save multiple distinct copies of your
 // objects and recover from unintended user actions and application failures. You
 // can set the versioning state to one of the following:
-//   - Enabled - Enables versioning for the objects in the bucket. All objects added to the bucket receive a unique version ID.
-//   - Suspended - Suspends versioning for the objects in the bucket. All objects added to the bucket receive the version ID null .
+//   - Enabled - Enables versioning for the objects in the bucket. All objects
+//     added to the bucket receive a unique version ID.
+//   - Suspended - Suspends versioning for the objects in the bucket. All objects
+//     added to the bucket receive the version ID null .
 //
 // If you've never set versioning on your bucket, it has no versioning state. In
 // that case, a GetBucketVersioning (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html)
@@ -40,7 +42,7 @@ import (
 // in the Amazon S3 User Guide. All Amazon S3 on Outposts REST API requests for
 // this action require an additional parameter of x-amz-outpost-id to be passed
 // with the request. In addition, you must use an S3 on Outposts endpoint hostname
-// prefix instead of s3-control. For an example of the request syntax for Amazon
+// prefix instead of s3-control . For an example of the request syntax for Amazon
 // S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the
 // x-amz-outpost-id derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html#API_control_PutBucketVersioning_Examples)
 // section. The following operations are related to PutBucketVersioning for S3 on
@@ -75,7 +77,7 @@ type PutBucketVersioningInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The root-level tag for the VersioningConfiguration  parameters.
+	// The root-level tag for the VersioningConfiguration parameters.
 	//
 	// This member is required.
 	VersioningConfiguration *types.VersioningConfiguration

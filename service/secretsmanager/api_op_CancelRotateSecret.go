@@ -12,18 +12,18 @@ import (
 
 // Turns off automatic rotation, and if a rotation is currently in progress,
 // cancels the rotation. If you cancel a rotation in progress, it can leave the
-// VersionStagelabels in an unexpected state. You might need to remove the
-// staging label AWSPENDING from the partially created version. You also need to
-// determine whether to roll back to the previous version of the secret by moving
-// the staging label AWSCURRENT  to the version that has AWSPENDING. To determine
-// which version has a specific staging label, call ListSecretVersionIds. Then
-// use UpdateSecretVersionStage to change staging labels. For more information,
-// see How rotation works (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html)
-// . To turn on automatic rotation again, call RotateSecret. Secrets Manager
+// VersionStage labels in an unexpected state. You might need to remove the staging
+// label AWSPENDING from the partially created version. You also need to determine
+// whether to roll back to the previous version of the secret by moving the staging
+// label AWSCURRENT to the version that has AWSPENDING . To determine which version
+// has a specific staging label, call ListSecretVersionIds . Then use
+// UpdateSecretVersionStage to change staging labels. For more information, see
+// How rotation works (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html)
+// . To turn on automatic rotation again, call RotateSecret . Secrets Manager
 // generates a CloudTrail log entry when you call this action. Do not include
 // sensitive information in request parameters because it might be logged. For more
 // information, see Logging Secrets Manager events with CloudTrail (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html)
-// . Required permissions: secretsmanager:CancelRotateSecret. For more
+// . Required permissions: secretsmanager:CancelRotateSecret . For more
 // information, see IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
 // .
@@ -62,11 +62,11 @@ type CancelRotateSecretOutput struct {
 	// The name of the secret.
 	Name *string
 
-	// The unique identifier of the version of the secret created during the
-	// rotation. This version might not be complete, and should be evaluated for
-	// possible deletion. We recommend that you remove the VersionStage  value
-	// AWSPENDINGfrom this version so that Secrets Manager can delete it. Failing to
-	// clean up a cancelled rotation can block you from starting future rotations.
+	// The unique identifier of the version of the secret created during the rotation.
+	// This version might not be complete, and should be evaluated for possible
+	// deletion. We recommend that you remove the VersionStage value AWSPENDING from
+	// this version so that Secrets Manager can delete it. Failing to clean up a
+	// cancelled rotation can block you from starting future rotations.
 	VersionId *string
 
 	// Metadata pertaining to the operation's result.

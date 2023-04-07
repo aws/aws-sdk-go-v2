@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows a user to update a specific attribute (one at a time). This action
-// might generate an SMS text message. Starting June 1, 2021, US telecom carriers
-// require you to register an origination phone number before you can send SMS
-// messages to US phone numbers. If you use SMS text messages in Amazon Cognito,
-// you must register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
+// Allows a user to update a specific attribute (one at a time). This action might
+// generate an SMS text message. Starting June 1, 2021, US telecom carriers require
+// you to register an origination phone number before you can send SMS messages to
+// US phone numbers. If you use SMS text messages in Amazon Cognito, you must
+// register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
 // . Amazon Cognito uses the registered number automatically. Otherwise, Amazon
 // Cognito users who must receive SMS messages might not be able to sign up,
 // activate their accounts, or sign in. If you have never used SMS text messages
@@ -67,16 +67,20 @@ type UpdateUserAttributesInput struct {
 	// API action, Amazon Cognito invokes the function that is assigned to the custom
 	// message trigger. When Amazon Cognito invokes this function, it passes a JSON
 	// payload, which the function receives as input. This payload contains a
-	// clientMetadataattribute, which provides the data that you assigned to the
+	// clientMetadata attribute, which provides the data that you assigned to the
 	// ClientMetadata parameter in your UpdateUserAttributes request. In your function
 	// code in Lambda, you can process the clientMetadata value to enhance your
 	// workflow for your specific needs. For more information, see Customizing user
 	// pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	//     - Store the ClientMetadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration doesn't include triggers, the ClientMetadata parameter serves no purpose.
-	//     - Validate the ClientMetadata value.
-	//     - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide sensitive information.
+	//   - Store the ClientMetadata value. This data is available only to Lambda
+	//   triggers that are assigned to a user pool to support custom workflows. If your
+	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
+	//   serves no purpose.
+	//   - Validate the ClientMetadata value.
+	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
+	//   sensitive information.
 	ClientMetadata map[string]string
 
 	noSmithyDocumentSerde

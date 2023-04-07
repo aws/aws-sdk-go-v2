@@ -36,9 +36,9 @@ type ListRecipesInput struct {
 	// The token returned by a previous call to retrieve the next set of results.
 	NextToken *string
 
-	// Return only those recipes with a version identifier of LATEST_WORKING  or
-	// LATEST_PUBLISHED . If RecipeVersion  is omitted, ListRecipes returns all of
-	// the LATEST_PUBLISHED  recipe versions. Valid values: LATEST_WORKING  |
+	// Return only those recipes with a version identifier of LATEST_WORKING or
+	// LATEST_PUBLISHED . If RecipeVersion is omitted, ListRecipes returns all of the
+	// LATEST_PUBLISHED recipe versions. Valid values: LATEST_WORKING |
 	// LATEST_PUBLISHED
 	RecipeVersion *string
 
@@ -134,8 +134,8 @@ type ListRecipesPaginatorOptions struct {
 	// The maximum number of results to return in this request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

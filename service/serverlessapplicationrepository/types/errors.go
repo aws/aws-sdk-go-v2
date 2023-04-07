@@ -91,8 +91,7 @@ func (e *ForbiddenException) ErrorCode() string {
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The AWS Serverless Application Repository service encountered an internal
-// error.
+// The AWS Serverless Application Repository service encountered an internal error.
 type InternalServerErrorException struct {
 	Message *string
 
@@ -120,8 +119,8 @@ func (e *InternalServerErrorException) ErrorCode() string {
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The resource (for example, an access policy statement) specified in the
-// request doesn't exist.
+// The resource (for example, an access policy statement) specified in the request
+// doesn't exist.
 type NotFoundException struct {
 	Message *string
 
@@ -149,8 +148,7 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The client is sending more than the allowed number of requests per unit of
-// time.
+// The client is sending more than the allowed number of requests per unit of time.
 type TooManyRequestsException struct {
 	Message *string
 

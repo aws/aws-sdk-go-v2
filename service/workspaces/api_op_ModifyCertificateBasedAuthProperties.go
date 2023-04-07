@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the properties of the certificate-based authentication you want to
-// use with your WorkSpaces.
+// Modifies the properties of the certificate-based authentication you want to use
+// with your WorkSpaces.
 func (c *Client) ModifyCertificateBasedAuthProperties(ctx context.Context, params *ModifyCertificateBasedAuthPropertiesInput, optFns ...func(*Options)) (*ModifyCertificateBasedAuthPropertiesOutput, error) {
 	if params == nil {
 		params = &ModifyCertificateBasedAuthPropertiesInput{}

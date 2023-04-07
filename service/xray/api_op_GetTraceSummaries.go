@@ -15,13 +15,13 @@ import (
 
 // Retrieves IDs and annotations for traces available for a specified time frame
 // using an optional filter. To get the full traces, pass the trace IDs to
-// BatchGetTraces. A filter expression can target traced requests that hit
+// BatchGetTraces . A filter expression can target traced requests that hit
 // specific service nodes or edges, have errors, or come from a known user. For
 // example, the following filter expression targets traces that pass through
 // api.example.com : service("api.example.com") This filter expression finds
-// traces that have an annotation named account  with the value 12345 :
-// annotation.account = "12345"For a full list of indexed fields and keywords
-// that you can use in filter expressions, see Using Filter Expressions (https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html)
+// traces that have an annotation named account with the value 12345 :
+// annotation.account = "12345" For a full list of indexed fields and keywords that
+// you can use in filter expressions, see Using Filter Expressions (https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html)
 // in the Amazon Web Services X-Ray Developer Guide.
 func (c *Client) GetTraceSummaries(ctx context.Context, params *GetTraceSummariesInput, optFns ...func(*Options)) (*GetTraceSummariesOutput, error) {
 	if params == nil {
@@ -58,7 +58,7 @@ type GetTraceSummariesInput struct {
 	// next page of results.
 	NextToken *string
 
-	// Set to true  to get summaries for only a subset of available traces.
+	// Set to true to get summaries for only a subset of available traces.
 	Sampling *bool
 
 	// A parameter to indicate whether to enable sampling on trace summaries. Input
@@ -167,11 +167,10 @@ type GetTraceSummariesAPIClient interface {
 
 var _ GetTraceSummariesAPIClient = (*Client)(nil)
 
-// GetTraceSummariesPaginatorOptions is the paginator options for
-// GetTraceSummaries
+// GetTraceSummariesPaginatorOptions is the paginator options for GetTraceSummaries
 type GetTraceSummariesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

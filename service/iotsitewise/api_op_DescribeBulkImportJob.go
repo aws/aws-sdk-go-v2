@@ -43,8 +43,8 @@ type DescribeBulkImportJobInput struct {
 
 type DescribeBulkImportJobOutput struct {
 
-	// The Amazon S3 destination where errors associated with the job creation
-	// request are saved.
+	// The Amazon S3 destination where errors associated with the job creation request
+	// are saved.
 	//
 	// This member is required.
 	ErrorReportLocation *types.ErrorReportLocation
@@ -87,12 +87,18 @@ type DescribeBulkImportJobOutput struct {
 	JobRoleArn *string
 
 	// The status of the bulk import job can be one of following values.
-	//     - PENDING – IoT SiteWise is waiting for the current bulk import job to finish.
-	//     - CANCELLED – The bulk import job has been canceled.
-	//     - RUNNING – IoT SiteWise is processing your request to import your data from Amazon S3.
-	//     - COMPLETED – IoT SiteWise successfully completed your request to import data from Amazon S3.
-	//     - FAILED – IoT SiteWise couldn't process your request to import data from Amazon S3. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.
-	//     - COMPLETED_WITH_FAILURES – IoT SiteWise completed your request to import data from Amazon S3 with errors. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.
+	//   - PENDING – IoT SiteWise is waiting for the current bulk import job to finish.
+	//   - CANCELLED – The bulk import job has been canceled.
+	//   - RUNNING – IoT SiteWise is processing your request to import your data from
+	//   Amazon S3.
+	//   - COMPLETED – IoT SiteWise successfully completed your request to import data
+	//   from Amazon S3.
+	//   - FAILED – IoT SiteWise couldn't process your request to import data from
+	//   Amazon S3. You can use logs saved in the specified error report location in
+	//   Amazon S3 to troubleshoot issues.
+	//   - COMPLETED_WITH_FAILURES – IoT SiteWise completed your request to import data
+	//   from Amazon S3 with errors. You can use logs saved in the specified error report
+	//   location in Amazon S3 to troubleshoot issues.
 	//
 	// This member is required.
 	JobStatus types.JobStatus

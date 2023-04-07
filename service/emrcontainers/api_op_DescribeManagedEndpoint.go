@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays detailed information about a managed endpoint. A managed endpoint is
-// a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon
-// EMR Studio can communicate with your virtual cluster.
+// Displays detailed information about a managed endpoint. A managed endpoint is a
+// gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR
+// Studio can communicate with your virtual cluster.
 func (c *Client) DescribeManagedEndpoint(ctx context.Context, params *DescribeManagedEndpointInput, optFns ...func(*Options)) (*DescribeManagedEndpointOutput, error) {
 	if params == nil {
 		params = &DescribeManagedEndpointInput{}

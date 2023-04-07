@@ -34,8 +34,8 @@ type ListCertificateAuthoritiesInput struct {
 
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response on each page. If additional items exist beyond
-	// the number you specify, the NextToken element is sent in the response. Use
-	// this NextToken  value in a subsequent request to retrieve additional items.
+	// the number you specify, the NextToken element is sent in the response. Use this
+	// NextToken value in a subsequent request to retrieve additional items.
 	MaxResults *int32
 
 	// Use this parameter when paginating results in a subsequent request after you
@@ -138,12 +138,12 @@ var _ ListCertificateAuthoritiesAPIClient = (*Client)(nil)
 type ListCertificateAuthoritiesPaginatorOptions struct {
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response on each page. If additional items exist beyond
-	// the number you specify, the NextToken element is sent in the response. Use
-	// this NextToken  value in a subsequent request to retrieve additional items.
+	// the number you specify, the NextToken element is sent in the response. Use this
+	// NextToken value in a subsequent request to retrieve additional items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

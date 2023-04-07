@@ -83,7 +83,7 @@ type DescribeDataIngestionJobOutput struct {
 	// data source being ingested.
 	RoleArn *string
 
-	// Indicates the status of the DataIngestionJob  operation.
+	// Indicates the status of the DataIngestionJob operation.
 	Status types.IngestionJobStatus
 
 	// Provides details about status of the ingestion job that is currently in

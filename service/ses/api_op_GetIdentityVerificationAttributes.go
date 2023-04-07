@@ -204,9 +204,9 @@ func NewIdentityExistsWaiter(client GetIdentityVerificationAttributesAPIClient, 
 	}
 }
 
-// Wait calls the waiter function for IdentityExists waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for IdentityExists waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *IdentityExistsWaiter) Wait(ctx context.Context, params *GetIdentityVerificationAttributesInput, maxWaitDur time.Duration, optFns ...func(*IdentityExistsWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

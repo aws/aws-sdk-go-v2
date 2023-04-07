@@ -32,11 +32,11 @@ import (
 //   - Event name
 //   - Event source
 //
-// All attributes are optional. The default number of results
-// returned is 50, with a maximum of 50 possible. The response includes a token
-// that you can use to get the next page of results. The rate of lookup requests is
-// limited to two per second, per account, per region. If this limit is exceeded, a
-// throttling error occurs.
+// All attributes are optional. The default number of results returned is 50, with
+// a maximum of 50 possible. The response includes a token that you can use to get
+// the next page of results. The rate of lookup requests is limited to two per
+// second, per account, per region. If this limit is exceeded, a throttling error
+// occurs.
 func (c *Client) LookupEvents(ctx context.Context, params *LookupEventsInput, optFns ...func(*Options)) (*LookupEventsOutput, error) {
 	if params == nil {
 		params = &LookupEventsInput{}
@@ -62,8 +62,7 @@ type LookupEventsInput struct {
 
 	// Specifies the event category. If you do not specify an event category, events
 	// of the category are not returned in the response. For example, if you do not
-	// specify insight  as the value of EventCategory, no Insights events are
-	// returned.
+	// specify insight as the value of EventCategory , no Insights events are returned.
 	EventCategory types.EventCategory
 
 	// Contains a list of lookup attributes. Currently the list can contain only one
@@ -186,8 +185,8 @@ type LookupEventsPaginatorOptions struct {
 	// is 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

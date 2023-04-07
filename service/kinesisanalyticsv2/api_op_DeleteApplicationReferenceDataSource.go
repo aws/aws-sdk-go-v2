@@ -13,7 +13,7 @@ import (
 // Deletes a reference data source configuration from the specified SQL-based
 // Kinesis Data Analytics application's configuration. If the application is
 // running, Kinesis Data Analytics immediately removes the in-application table
-// that you created using the AddApplicationReferenceDataSource  operation.
+// that you created using the AddApplicationReferenceDataSource operation.
 func (c *Client) DeleteApplicationReferenceDataSource(ctx context.Context, params *DeleteApplicationReferenceDataSourceInput, optFns ...func(*Options)) (*DeleteApplicationReferenceDataSourceOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationReferenceDataSourceInput{}
@@ -38,13 +38,13 @@ type DeleteApplicationReferenceDataSourceInput struct {
 
 	// The current application version. You can use the DescribeApplication operation
 	// to get the current application version. If the version specified is not the
-	// current version, the ConcurrentModificationException  is returned.
+	// current version, the ConcurrentModificationException is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
 	// The ID of the reference data source. When you add a reference data source to
-	// your application using the AddApplicationReferenceDataSource, Kinesis Data
+	// your application using the AddApplicationReferenceDataSource , Kinesis Data
 	// Analytics assigns an ID. You can use the DescribeApplication operation to get
 	// the reference ID.
 	//

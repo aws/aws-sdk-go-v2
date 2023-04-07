@@ -16,7 +16,7 @@ import (
 // URLs. If there is no additional information about the celebrity, this list is
 // empty. For more information, see Getting information about a celebrity in the
 // Amazon Rekognition Developer Guide. This operation requires permissions to
-// perform the rekognition:GetCelebrityInfo  action.
+// perform the rekognition:GetCelebrityInfo action.
 func (c *Client) GetCelebrityInfo(ctx context.Context, params *GetCelebrityInfoInput, optFns ...func(*Options)) (*GetCelebrityInfoOutput, error) {
 	if params == nil {
 		params = &GetCelebrityInfoInput{}

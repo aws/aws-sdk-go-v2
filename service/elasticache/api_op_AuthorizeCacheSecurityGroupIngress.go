@@ -57,9 +57,9 @@ type AuthorizeCacheSecurityGroupIngressInput struct {
 type AuthorizeCacheSecurityGroupIngressOutput struct {
 
 	// Represents the output of one of the following operations:
-	//     - AuthorizeCacheSecurityGroupIngress
-	//     - CreateCacheSecurityGroup
-	//     - RevokeCacheSecurityGroupIngress
+	//   - AuthorizeCacheSecurityGroupIngress
+	//   - CreateCacheSecurityGroup
+	//   - RevokeCacheSecurityGroupIngress
 	CacheSecurityGroup *types.CacheSecurityGroup
 
 	// Metadata pertaining to the operation's result.

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DBSecurityGroup  descriptions. If a DBSecurityGroupName is
+// Returns a list of DBSecurityGroup descriptions. If a DBSecurityGroupName is
 // specified, the list will contain only the descriptions of the specified DB
 // security group. EC2-Classic was retired on August 15, 2022. If you haven't
 // migrated from EC2-Classic to a VPC, we recommend that you migrate as soon as
@@ -49,9 +49,9 @@ type DescribeDBSecurityGroupsInput struct {
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -62,7 +62,7 @@ type DescribeDBSecurityGroupsInput struct {
 // action.
 type DescribeDBSecurityGroupsOutput struct {
 
-	// A list of DBSecurityGroup  instances.
+	// A list of DBSecurityGroup instances.
 	DBSecurityGroups []types.DBSecurityGroup
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -150,14 +150,14 @@ var _ DescribeDBSecurityGroupsAPIClient = (*Client)(nil)
 // DescribeDBSecurityGroupsPaginatorOptions is the paginator options for
 // DescribeDBSecurityGroups
 type DescribeDBSecurityGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

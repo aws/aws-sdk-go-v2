@@ -7,6 +7,6 @@
 // migration status and integrate your resource-specific migration tool by
 // providing a programmatic interface to Migration Hub. Remember that you must set
 // your AWS Migration Hub home region before you call any of these APIs, or a
-// HomeRegionNotSetExceptionerror will be returned. Also, you must make the API
+// HomeRegionNotSetException error will be returned. Also, you must make the API
 // calls while in your home region.
 package migrationhub

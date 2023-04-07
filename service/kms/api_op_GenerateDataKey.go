@@ -20,46 +20,53 @@ import (
 // encryption KMS key that will be used to encrypt the data key. You cannot use an
 // asymmetric KMS key to encrypt data keys. To get the type of your KMS key, use
 // the DescribeKey operation. You must also specify the length of the data key.
-// Use either the KeySpec  or NumberOfBytes parameters (but not both). For
-// 128-bit and 256-bit data keys, use the KeySpec parameter. To generate a
-// 128-bit SM4 data key (China Regions only), specify a KeySpec  value of AES_128
-// or a NumberOfBytes  value of 16. The symmetric encryption key used in China
-// Regions to encrypt your data key is an SM4 encryption key. To get only an
-// encrypted copy of the data key, use GenerateDataKeyWithoutPlaintext. To
-// generate an asymmetric data key pair, use the GenerateDataKeyPair  or
-// GenerateDataKeyPairWithoutPlaintextoperation. To get a cryptographically
-// secure random byte string, use GenerateRandom. You can use an optional
-// encryption context to add additional security to the encryption operation. If
-// you specify an EncryptionContext, you must specify the same encryption context
-// (a case-sensitive exact match) when decrypting the encrypted data key.
-// Otherwise, the request to decrypt fails with an InvalidCiphertextException.
-// For more information, see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+// Use either the KeySpec or NumberOfBytes parameters (but not both). For 128-bit
+// and 256-bit data keys, use the KeySpec parameter. To generate a 128-bit SM4
+// data key (China Regions only), specify a KeySpec value of AES_128 or a
+// NumberOfBytes value of 16 . The symmetric encryption key used in China Regions
+// to encrypt your data key is an SM4 encryption key. To get only an encrypted copy
+// of the data key, use GenerateDataKeyWithoutPlaintext . To generate an asymmetric
+// data key pair, use the GenerateDataKeyPair or
+// GenerateDataKeyPairWithoutPlaintext operation. To get a cryptographically secure
+// random byte string, use GenerateRandom . You can use an optional encryption
+// context to add additional security to the encryption operation. If you specify
+// an EncryptionContext , you must specify the same encryption context (a
+// case-sensitive exact match) when decrypting the encrypted data key. Otherwise,
+// the request to decrypt fails with an InvalidCiphertextException . For more
+// information, see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 // in the Key Management Service Developer Guide. Applications in Amazon Web
 // Services Nitro Enclaves can call this operation by using the Amazon Web
 // Services Nitro Enclaves Development Kit (https://github.com/aws/aws-nitro-enclaves-sdk-c)
 // . For information about the supporting parameters, see How Amazon Web Services
 // Nitro Enclaves use KMS (https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html)
 // in the Key Management Service Developer Guide. The KMS key that you use for this
-// operation must be in a compatible key state. For details, see Key states of
-// KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-// in the Key Management Service Developer Guide. How to use your data key We
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. How to use your data key We
 // recommend that you use the following pattern to encrypt data locally in your
 // application. You can write your own code or use a client-side encryption
 // library, such as the Amazon Web Services Encryption SDK (https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/)
 // , the Amazon DynamoDB Encryption Client (https://docs.aws.amazon.com/dynamodb-encryption-client/latest/devguide/)
 // , or Amazon S3 client-side encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)
 // to do these tasks for you. To encrypt data outside of KMS:
+//
 //   - Use the GenerateDataKey operation to get a data key.
-//   - Use the plaintext data key (in the Plaintext field of the response) to encrypt your data outside of KMS. Then erase the plaintext data key from memory.
-//   - Store the encrypted data key (in the CiphertextBlob field of the response) with the encrypted data.
+//
+//   - Use the plaintext data key (in the Plaintext field of the response) to
+//     encrypt your data outside of KMS. Then erase the plaintext data key from memory.
+//
+//   - Store the encrypted data key (in the CiphertextBlob field of the response)
+//     with the encrypted data.
 //
 // To decrypt data outside of KMS:
-//   - Use the Decrypt operation to decrypt the encrypted data key. The operation returns a plaintext copy of the data key.
-//   - Use the plaintext data key to decrypt data outside of KMS, then erase the plaintext data key from memory.
+//   - Use the Decrypt operation to decrypt the encrypted data key. The operation
+//     returns a plaintext copy of the data key.
+//   - Use the plaintext data key to decrypt data outside of KMS, then erase the
+//     plaintext data key from memory.
 //
 // Cross-account use: Yes. To perform this operation with a KMS key in a different
 // Amazon Web Services account, specify the key ARN or alias ARN in the value of
-// the KeyId  parameter. Required permissions: kms:GenerateDataKey (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// the KeyId parameter. Required permissions: kms:GenerateDataKey (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //   - Decrypt
 //   - Encrypt
@@ -87,16 +94,15 @@ type GenerateDataKeyInput struct {
 	// cannot specify an asymmetric KMS key or a KMS key in a custom key store. To get
 	// the type and origin of your KMS key, use the DescribeKey operation. To specify
 	// a KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an
-	// alias name, prefix it with "alias/". To specify a KMS key in a different
-	// Amazon Web Services account, you must use the key ARN or alias ARN. For example:
-	//
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Alias name: alias/ExampleAlias
-	//     - Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
-	// To get
-	// the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey. To get the
-	// alias name and alias ARN, use ListAliases .
+	// alias name, prefix it with "alias/" . To specify a KMS key in a different Amazon
+	// Web Services account, you must use the key ARN or alias ARN. For example:
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Alias name: alias/ExampleAlias
+	//   - Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey . To
+	// get the alias name and alias ARN, use ListAliases .
 	//
 	// This member is required.
 	KeyId *string
@@ -120,15 +126,15 @@ type GenerateDataKeyInput struct {
 	GrantTokens []string
 
 	// Specifies the length of the data key. Use AES_128 to generate a 128-bit
-	// symmetric key, or AES_256 to generate a 256-bit symmetric key. You must
-	// specify either the KeySpec  or the NumberOfBytes parameter (but not both) in
-	// every GenerateDataKey  request.
+	// symmetric key, or AES_256 to generate a 256-bit symmetric key. You must specify
+	// either the KeySpec or the NumberOfBytes parameter (but not both) in every
+	// GenerateDataKey request.
 	KeySpec types.DataKeySpec
 
-	// Specifies the length of the data key in bytes. For example, use the value 64
-	// to generate a 512-bit data key (64 bytes is 512 bits). For 128-bit (16-byte) and
-	// 256-bit (32-byte) data keys, use the KeySpec parameter. You must specify
-	// either the KeySpec  or the NumberOfBytes  parameter (but not both) in every
+	// Specifies the length of the data key in bytes. For example, use the value 64 to
+	// generate a 512-bit data key (64 bytes is 512 bits). For 128-bit (16-byte) and
+	// 256-bit (32-byte) data keys, use the KeySpec parameter. You must specify either
+	// the KeySpec or the NumberOfBytes parameter (but not both) in every
 	// GenerateDataKey request.
 	NumberOfBytes *int32
 
@@ -137,9 +143,8 @@ type GenerateDataKeyInput struct {
 
 type GenerateDataKeyOutput struct {
 
-	// The encrypted copy of the data key. When you use the HTTP API or the Amazon
-	// Web Services CLI, the value is Base64-encoded. Otherwise, it is not
-	// Base64-encoded.
+	// The encrypted copy of the data key. When you use the HTTP API or the Amazon Web
+	// Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.
 	CiphertextBlob []byte
 
 	// The Amazon Resource Name ( key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN)

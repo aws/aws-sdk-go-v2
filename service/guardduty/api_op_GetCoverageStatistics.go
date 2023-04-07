@@ -50,7 +50,7 @@ type GetCoverageStatisticsInput struct {
 
 type GetCoverageStatisticsOutput struct {
 
-	// Represents the count aggregated by the statusCode and resourceType.
+	// Represents the count aggregated by the statusCode and resourceType .
 	CoverageStatistics *types.CoverageStatistics
 
 	// Metadata pertaining to the operation's result.

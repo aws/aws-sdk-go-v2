@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a slot type from a bot locale. If a slot is using the slot type,
-// Amazon Lex throws a ResourceInUseException exception. To avoid the exception,
-// set the skipResourceInUseCheck  parameter to true .
+// Deletes a slot type from a bot locale. If a slot is using the slot type, Amazon
+// Lex throws a ResourceInUseException exception. To avoid the exception, set the
+// skipResourceInUseCheck parameter to true .
 func (c *Client) DeleteSlotType(ctx context.Context, params *DeleteSlotTypeInput, optFns ...func(*Options)) (*DeleteSlotTypeOutput, error) {
 	if params == nil {
 		params = &DeleteSlotTypeInput{}
@@ -53,10 +53,10 @@ type DeleteSlotTypeInput struct {
 	// This member is required.
 	SlotTypeId *string
 
-	// By default, the DeleteSlotType  operations throws a ResourceInUseException
+	// By default, the DeleteSlotType operations throws a ResourceInUseException
 	// exception if you try to delete a slot type used by a slot. Set the
-	// skipResourceInUseCheck parameter to true to skip this check and remove the
-	// slot type even if a slot uses it.
+	// skipResourceInUseCheck parameter to true to skip this check and remove the slot
+	// type even if a slot uses it.
 	SkipResourceInUseCheck bool
 
 	noSmithyDocumentSerde

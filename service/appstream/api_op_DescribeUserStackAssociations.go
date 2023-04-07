@@ -14,7 +14,8 @@ import (
 // Retrieves a list that describes the UserStackAssociation objects. You must
 // specify either or both of the following:
 //   - The stack name
-//   - The user name (email address of the user associated with the stack) and the authentication type for the user
+//   - The user name (email address of the user associated with the stack) and the
+//     authentication type for the user
 func (c *Client) DescribeUserStackAssociations(ctx context.Context, params *DescribeUserStackAssociationsInput, optFns ...func(*Options)) (*DescribeUserStackAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeUserStackAssociationsInput{}
@@ -32,8 +33,8 @@ func (c *Client) DescribeUserStackAssociations(ctx context.Context, params *Desc
 
 type DescribeUserStackAssociationsInput struct {
 
-	// The authentication type for the user who is associated with the stack. You
-	// must specify USERPOOL.
+	// The authentication type for the user who is associated with the stack. You must
+	// specify USERPOOL.
 	AuthenticationType types.AuthenticationType
 
 	// The maximum size of each page of results.

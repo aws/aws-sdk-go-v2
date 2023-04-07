@@ -168,7 +168,7 @@ func (e *BlueGreenDeploymentNotFoundFault) ErrorCode() string {
 }
 func (e *BlueGreenDeploymentNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// CertificateIdentifier  doesn't refer to an existing certificate.
+// CertificateIdentifier doesn't refer to an existing certificate.
 type CertificateNotFoundFault struct {
 	Message *string
 
@@ -359,7 +359,7 @@ func (e *DBClusterAlreadyExistsFault) ErrorCode() string {
 }
 func (e *DBClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// BacktrackIdentifier  doesn't refer to an existing backtrack.
+// BacktrackIdentifier doesn't refer to an existing backtrack.
 type DBClusterBacktrackNotFoundFault struct {
 	Message *string
 
@@ -467,7 +467,7 @@ func (e *DBClusterEndpointQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// DBClusterIdentifier  doesn't refer to an existing DB cluster.
+// DBClusterIdentifier doesn't refer to an existing DB cluster.
 type DBClusterNotFoundFault struct {
 	Message *string
 
@@ -658,7 +658,7 @@ func (e *DBClusterSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// DBClusterSnapshotIdentifier  doesn't refer to an existing DB cluster snapshot.
+// DBClusterSnapshotIdentifier doesn't refer to an existing DB cluster snapshot.
 type DBClusterSnapshotNotFoundFault struct {
 	Message *string
 
@@ -768,7 +768,7 @@ func (e *DBInstanceAutomatedBackupQuotaExceededFault) ErrorFault() smithy.ErrorF
 	return smithy.FaultClient
 }
 
-// DBInstanceIdentifier  doesn't refer to an existing DB instance.
+// DBInstanceIdentifier doesn't refer to an existing DB instance.
 type DBInstanceNotFoundFault struct {
 	Message *string
 
@@ -794,7 +794,7 @@ func (e *DBInstanceNotFoundFault) ErrorCode() string {
 }
 func (e *DBInstanceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified RoleArn  or FeatureName value is already associated with the DB
+// The specified RoleArn or FeatureName value is already associated with the DB
 // instance.
 type DBInstanceRoleAlreadyExistsFault struct {
 	Message *string
@@ -848,8 +848,8 @@ func (e *DBInstanceRoleNotFoundFault) ErrorCode() string {
 }
 func (e *DBInstanceRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You can't associate any more Amazon Web Services Identity and Access
-// Management (IAM) roles with the DB instance because the quota has been reached.
+// You can't associate any more Amazon Web Services Identity and Access Management
+// (IAM) roles with the DB instance because the quota has been reached.
 type DBInstanceRoleQuotaExceededFault struct {
 	Message *string
 
@@ -875,7 +875,7 @@ func (e *DBInstanceRoleQuotaExceededFault) ErrorCode() string {
 }
 func (e *DBInstanceRoleQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// LogFileName  doesn't refer to an existing DB log file.
+// LogFileName doesn't refer to an existing DB log file.
 type DBLogFileNotFoundFault struct {
 	Message *string
 
@@ -929,7 +929,7 @@ func (e *DBParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// DBParameterGroupName  doesn't refer to an existing DB parameter group.
+// DBParameterGroupName doesn't refer to an existing DB parameter group.
 type DBParameterGroupNotFoundFault struct {
 	Message *string
 
@@ -1091,8 +1091,8 @@ func (e *DBProxyEndpointQuotaExceededFault) ErrorCode() string {
 }
 func (e *DBProxyEndpointQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified proxy name doesn't correspond to a proxy owned by your Amazon
-// Web Services account in the specified Amazon Web Services Region.
+// The specified proxy name doesn't correspond to a proxy owned by your Amazon Web
+// Services account in the specified Amazon Web Services Region.
 type DBProxyNotFoundFault struct {
 	Message *string
 
@@ -1145,8 +1145,8 @@ func (e *DBProxyQuotaExceededFault) ErrorCode() string {
 }
 func (e *DBProxyQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The proxy is already associated with the specified RDS DB instance or Aurora
-// DB cluster.
+// The proxy is already associated with the specified RDS DB instance or Aurora DB
+// cluster.
 type DBProxyTargetAlreadyRegisteredFault struct {
 	Message *string
 
@@ -1174,8 +1174,8 @@ func (e *DBProxyTargetAlreadyRegisteredFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified target group isn't available for a proxy owned by your Amazon
-// Web Services account in the specified Amazon Web Services Region.
+// The specified target group isn't available for a proxy owned by your Amazon Web
+// Services account in the specified Amazon Web Services Region.
 type DBProxyTargetGroupNotFoundFault struct {
 	Message *string
 
@@ -1256,7 +1256,7 @@ func (e *DBSecurityGroupAlreadyExistsFault) ErrorCode() string {
 }
 func (e *DBSecurityGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBSecurityGroupName  doesn't refer to an existing DB security group.
+// DBSecurityGroupName doesn't refer to an existing DB security group.
 type DBSecurityGroupNotFoundFault struct {
 	Message *string
 
@@ -1335,7 +1335,7 @@ func (e *DBSecurityGroupQuotaExceededFault) ErrorCode() string {
 }
 func (e *DBSecurityGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBSnapshotIdentifier  is already used by an existing snapshot.
+// DBSnapshotIdentifier is already used by an existing snapshot.
 type DBSnapshotAlreadyExistsFault struct {
 	Message *string
 
@@ -1361,7 +1361,7 @@ func (e *DBSnapshotAlreadyExistsFault) ErrorCode() string {
 }
 func (e *DBSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBSnapshotIdentifier  doesn't refer to an existing DB snapshot.
+// DBSnapshotIdentifier doesn't refer to an existing DB snapshot.
 type DBSnapshotNotFoundFault struct {
 	Message *string
 
@@ -1387,7 +1387,7 @@ func (e *DBSnapshotNotFoundFault) ErrorCode() string {
 }
 func (e *DBSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBSubnetGroupName  is already used by an existing DB subnet group.
+// DBSubnetGroupName is already used by an existing DB subnet group.
 type DBSubnetGroupAlreadyExistsFault struct {
 	Message *string
 
@@ -1469,7 +1469,7 @@ func (e *DBSubnetGroupNotAllowedFault) ErrorCode() string {
 }
 func (e *DBSubnetGroupNotAllowedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBSubnetGroupName  doesn't refer to an existing DB subnet group.
+// DBSubnetGroupName doesn't refer to an existing DB subnet group.
 type DBSubnetGroupNotFoundFault struct {
 	Message *string
 
@@ -1522,8 +1522,8 @@ func (e *DBSubnetGroupQuotaExceededFault) ErrorCode() string {
 }
 func (e *DBSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request would result in the user exceeding the allowed number of subnets
-// in a DB subnet groups.
+// The request would result in the user exceeding the allowed number of subnets in
+// a DB subnet groups.
 type DBSubnetQuotaExceededFault struct {
 	Message *string
 
@@ -1575,7 +1575,7 @@ func (e *DBUpgradeDependencyFailureFault) ErrorCode() string {
 }
 func (e *DBUpgradeDependencyFailureFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Domain  doesn't refer to an existing Active Directory domain.
+// Domain doesn't refer to an existing Active Directory domain.
 type DomainNotFoundFault struct {
 	Message *string
 
@@ -1986,8 +1986,8 @@ func (e *InsufficientStorageClusterCapacityFault) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// The blue/green deployment can't be switched over or deleted because there is
-// an invalid configuration in the green environment.
+// The blue/green deployment can't be switched over or deleted because there is an
+// invalid configuration in the green environment.
 type InvalidBlueGreenDeploymentStateFault struct {
 	Message *string
 
@@ -2153,8 +2153,8 @@ func (e *InvalidDBClusterStateFault) ErrorCode() string {
 }
 func (e *InvalidDBClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The automated backup is in an invalid state. For example, this automated
-// backup is associated with an active instance.
+// The automated backup is in an invalid state. For example, this automated backup
+// is associated with an active instance.
 type InvalidDBInstanceAutomatedBackupStateFault struct {
 	Message *string
 
@@ -2236,8 +2236,8 @@ func (e *InvalidDBParameterGroupStateFault) ErrorCode() string {
 }
 func (e *InvalidDBParameterGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You can't perform this operation while the DB proxy endpoint is in a
-// particular state.
+// You can't perform this operation while the DB proxy endpoint is in a particular
+// state.
 type InvalidDBProxyEndpointStateFault struct {
 	Message *string
 
@@ -2794,8 +2794,7 @@ func (e *OptionGroupNotFoundFault) ErrorCode() string {
 }
 func (e *OptionGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The quota of 20 option groups was exceeded for this Amazon Web Services
-// account.
+// The quota of 20 option groups was exceeded for this Amazon Web Services account.
 type OptionGroupQuotaExceededFault struct {
 	Message *string
 
@@ -2821,7 +2820,7 @@ func (e *OptionGroupQuotaExceededFault) ErrorCode() string {
 }
 func (e *OptionGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// SourceDBInstanceIdentifier  refers to a DB instance with BackupRetentionPeriod
+// SourceDBInstanceIdentifier refers to a DB instance with BackupRetentionPeriod
 // equal to 0.
 type PointInTimeRestoreNotEnabledFault struct {
 	Message *string
@@ -3012,8 +3011,8 @@ func (e *ResourceNotFoundFault) ErrorCode() string {
 }
 func (e *ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have exceeded the maximum number of accounts that you can share a manual
-// DB snapshot with.
+// You have exceeded the maximum number of accounts that you can share a manual DB
+// snapshot with.
 type SharedSnapshotQuotaExceededFault struct {
 	Message *string
 
@@ -3249,7 +3248,7 @@ func (e *StorageQuotaExceededFault) ErrorCode() string {
 }
 func (e *StorageQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Storage of the StorageType  specified can't be associated with the DB instance.
+// Storage of the StorageType specified can't be associated with the DB instance.
 type StorageTypeNotSupportedFault struct {
 	Message *string
 

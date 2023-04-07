@@ -7,9 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Unable to verify the CA certificate used to sign the device certificate you
-// are attempting to register. This is happens when you have registered more than
-// one CA certificate that has the same subject field and public key.
+// Unable to verify the CA certificate used to sign the device certificate you are
+// attempting to register. This is happens when you have registered more than one
+// CA certificate that has the same subject field and public key.
 type CertificateConflictException struct {
 	Message *string
 

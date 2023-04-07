@@ -27,10 +27,9 @@ const (
 	S3OneTimeClassificationTypeNone S3OneTimeClassificationType = "NONE"
 )
 
-// Values returns all known values for S3OneTimeClassificationType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for S3OneTimeClassificationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3OneTimeClassificationType) Values() []S3OneTimeClassificationType {
 	return []S3OneTimeClassificationType{
 		"FULL",

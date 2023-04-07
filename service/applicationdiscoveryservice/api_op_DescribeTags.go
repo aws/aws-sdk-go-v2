@@ -12,15 +12,14 @@ import (
 )
 
 // Retrieves a list of configuration items that have tags as specified by the
-// key-value pairs, name and value, passed to the optional parameter filters.
+// key-value pairs, name and value, passed to the optional parameter filters .
 // There are three valid tag filter names:
 //   - tagKey
 //   - tagValue
 //   - configurationId
 //
-// Also, all configuration items associated with your user
-// account that have tags can be listed if you call DescribeTags as is without
-// passing any parameters.
+// Also, all configuration items associated with your user account that have tags
+// can be listed if you call DescribeTags as is without passing any parameters.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
 		params = &DescribeTagsInput{}

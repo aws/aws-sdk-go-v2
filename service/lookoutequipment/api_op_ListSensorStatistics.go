@@ -58,8 +58,8 @@ type ListSensorStatisticsOutput struct {
 	// statistics.
 	NextToken *string
 
-	// Provides ingestion-based statistics regarding the specified sensor with
-	// respect to various validation types, such as whether data exists, the number and
+	// Provides ingestion-based statistics regarding the specified sensor with respect
+	// to various validation types, such as whether data exists, the number and
 	// percentage of missing values, and the number and percentage of duplicate
 	// timestamps.
 	SensorStatisticsSummaries []types.SensorStatisticsSummary
@@ -147,8 +147,8 @@ type ListSensorStatisticsPaginatorOptions struct {
 	// Specifies the maximum number of sensors for which to retrieve statistics.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

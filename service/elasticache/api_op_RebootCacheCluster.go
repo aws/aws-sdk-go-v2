@@ -37,7 +37,7 @@ func (c *Client) RebootCacheCluster(ctx context.Context, params *RebootCacheClus
 	return out, nil
 }
 
-// Represents the input of a RebootCacheCluster  operation.
+// Represents the input of a RebootCacheCluster operation.
 type RebootCacheClusterInput struct {
 
 	// The cluster identifier. This parameter is stored as a lowercase string.

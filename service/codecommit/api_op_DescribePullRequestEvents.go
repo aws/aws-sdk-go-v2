@@ -36,9 +36,9 @@ type DescribePullRequestEventsInput struct {
 	// This member is required.
 	PullRequestId *string
 
-	// The Amazon Resource Name (ARN) of the user whose actions resulted in the
-	// event. Examples include updating the pull request with more commits or changing
-	// the status of a pull request.
+	// The Amazon Resource Name (ARN) of the user whose actions resulted in the event.
+	// Examples include updating the pull request with more commits or changing the
+	// status of a pull request.
 	ActorArn *string
 
 	// A non-zero, non-negative integer used to limit the number of returned results.
@@ -153,8 +153,8 @@ type DescribePullRequestEventsPaginatorOptions struct {
 	// be returned in a result.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

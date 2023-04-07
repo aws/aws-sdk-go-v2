@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a DataSource  object.
+// Creates a DataSource object.
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -81,7 +81,7 @@ type CreateDataSourceInput struct {
 
 type CreateDataSourceOutput struct {
 
-	// The DataSource  object.
+	// The DataSource object.
 	DataSource *types.DataSource
 
 	// Metadata pertaining to the operation's result.

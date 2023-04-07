@@ -39,17 +39,17 @@ type ListRepositoryAssociationsInput struct {
 	// The maximum number of repository association results returned by
 	// ListRepositoryAssociations in paginated output. When this parameter is used,
 	// ListRepositoryAssociations only returns maxResults results in a single page
-	// with a nextToken response element. The remaining results of the initial
-	// request can be seen by sending another ListRepositoryAssociations request with
-	// the returned nextToken value. This value can be between 1 and 100. If this
-	// parameter is not used, ListRepositoryAssociations returns up to 100 results
-	// and a nextToken  value if applicable.
+	// with a nextToken response element. The remaining results of the initial request
+	// can be seen by sending another ListRepositoryAssociations request with the
+	// returned nextToken value. This value can be between 1 and 100. If this
+	// parameter is not used, ListRepositoryAssociations returns up to 100 results and
+	// a nextToken value if applicable.
 	MaxResults *int32
 
 	// List of repository names to use as a filter.
 	Names []string
 
-	// The nextToken  value returned from a previous paginated
+	// The nextToken value returned from a previous paginated
 	// ListRepositoryAssociations request where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
 	// previous results that returned the nextToken value. Treat this token as an
@@ -68,13 +68,24 @@ type ListRepositoryAssociationsInput struct {
 
 	// List of repository association states to use as a filter. The valid repository
 	// association states are:
-	//     - Associated: The repository association is complete.
-	//     - Associating: CodeGuru Reviewer is:
-	//         - Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review. If your repository ProviderType is GitHub , GitHub Enterprise Server , or Bitbucket , CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.
-	//         - Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.
-	//     - Failed: The repository failed to associate or disassociate.
-	//     - Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.
-	//     - Disassociated: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in anassociated repository with tags after it has been disassociated. For more information, see Using tags to control access to associated repositories (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html) in the Amazon CodeGuru Reviewer User Guide.
+	//   - Associated: The repository association is complete.
+	//   - Associating: CodeGuru Reviewer is:
+	//   - Setting up pull request notifications. This is required for pull requests
+	//   to trigger a CodeGuru Reviewer review. If your repository ProviderType is
+	//   GitHub , GitHub Enterprise Server , or Bitbucket , CodeGuru Reviewer creates
+	//   webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete
+	//   these webhooks, reviews of code in your repository cannot be triggered.
+	//   - Setting up source code access. This is required for CodeGuru Reviewer to
+	//   securely clone code in your repository.
+	//   - Failed: The repository failed to associate or disassociate.
+	//   - Disassociating: CodeGuru Reviewer is removing the repository's pull request
+	//   notifications and source code access.
+	//   - Disassociated: CodeGuru Reviewer successfully disassociated the repository.
+	//   You can create a new association with this repository if you want to review
+	//   source code in it later. You can control access to code reviews created in
+	//   anassociated repository with tags after it has been disassociated. For more
+	//   information, see Using tags to control access to associated repositories (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html)
+	//   in the Amazon CodeGuru Reviewer User Guide.
 	States []types.RepositoryAssociationState
 
 	noSmithyDocumentSerde
@@ -82,10 +93,10 @@ type ListRepositoryAssociationsInput struct {
 
 type ListRepositoryAssociationsOutput struct {
 
-	// The nextToken  value to include in a future ListRecommendations request. When
-	// the results of a ListRecommendations  request exceed maxResults, this value
-	// can be used to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// The nextToken value to include in a future ListRecommendations request. When
+	// the results of a ListRecommendations request exceed maxResults , this value can
+	// be used to retrieve the next page of results. This value is null when there are
+	// no more results to return.
 	NextToken *string
 
 	// A list of repository associations that meet the criteria of the request.
@@ -171,15 +182,15 @@ type ListRepositoryAssociationsPaginatorOptions struct {
 	// The maximum number of repository association results returned by
 	// ListRepositoryAssociations in paginated output. When this parameter is used,
 	// ListRepositoryAssociations only returns maxResults results in a single page
-	// with a nextToken response element. The remaining results of the initial
-	// request can be seen by sending another ListRepositoryAssociations request with
-	// the returned nextToken value. This value can be between 1 and 100. If this
-	// parameter is not used, ListRepositoryAssociations returns up to 100 results
-	// and a nextToken  value if applicable.
+	// with a nextToken response element. The remaining results of the initial request
+	// can be seen by sending another ListRepositoryAssociations request with the
+	// returned nextToken value. This value can be between 1 and 100. If this
+	// parameter is not used, ListRepositoryAssociations returns up to 100 results and
+	// a nextToken value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

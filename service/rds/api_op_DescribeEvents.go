@@ -59,23 +59,29 @@ type DescribeEventsInput struct {
 	// marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The identifier of the event source for which events are returned. If not
 	// specified, then all sources are included in the response. Constraints:
-	//     - If SourceIdentifier is supplied, SourceType must also be provided.
-	//     - If the source type is a DB instance, a DBInstanceIdentifier value must be supplied.
-	//     - If the source type is a DB cluster, a DBClusterIdentifier value must be supplied.
-	//     - If the source type is a DB parameter group, a DBParameterGroupName value must be supplied.
-	//     - If the source type is a DB security group, a DBSecurityGroupName value must be supplied.
-	//     - If the source type is a DB snapshot, a DBSnapshotIdentifier value must be supplied.
-	//     - If the source type is a DB cluster snapshot, a DBClusterSnapshotIdentifier value must be supplied.
-	//     - If the source type is an RDS Proxy, a DBProxyName value must be supplied.
-	//     - Can't end with a hyphen or contain two consecutive hyphens.
+	//   - If SourceIdentifier is supplied, SourceType must also be provided.
+	//   - If the source type is a DB instance, a DBInstanceIdentifier value must be
+	//   supplied.
+	//   - If the source type is a DB cluster, a DBClusterIdentifier value must be
+	//   supplied.
+	//   - If the source type is a DB parameter group, a DBParameterGroupName value
+	//   must be supplied.
+	//   - If the source type is a DB security group, a DBSecurityGroupName value must
+	//   be supplied.
+	//   - If the source type is a DB snapshot, a DBSnapshotIdentifier value must be
+	//   supplied.
+	//   - If the source type is a DB cluster snapshot, a DBClusterSnapshotIdentifier
+	//   value must be supplied.
+	//   - If the source type is an RDS Proxy, a DBProxyName value must be supplied.
+	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	SourceIdentifier *string
 
 	// The event source to retrieve events for. If no value is specified, all events
@@ -90,10 +96,10 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the result of a successful invocation of the DescribeEvents  action.
+// Contains the result of a successful invocation of the DescribeEvents action.
 type DescribeEventsOutput struct {
 
-	// A list of Event  instances.
+	// A list of Event instances.
 	Events []types.Event
 
 	// An optional pagination token provided by a previous Events request. If this
@@ -180,14 +186,14 @@ var _ DescribeEventsAPIClient = (*Client)(nil)
 
 // DescribeEventsPaginatorOptions is the paginator options for DescribeEvents
 type DescribeEventsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

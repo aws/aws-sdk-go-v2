@@ -38,7 +38,7 @@ type DeleteLocalGatewayRouteInput struct {
 	DestinationCidrBlock *string
 
 	// Use a prefix list in place of DestinationCidrBlock . You cannot use
-	// DestinationPrefixListId and DestinationCidrBlock  in the same request.
+	// DestinationPrefixListId and DestinationCidrBlock in the same request.
 	DestinationPrefixListId *string
 
 	// Checks whether you have the required permissions for the action, without

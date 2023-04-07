@@ -36,11 +36,11 @@ type GetCheckerIpRangesInput struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains the CheckerIpRanges  element.
+// A complex type that contains the CheckerIpRanges element.
 type GetCheckerIpRangesOutput struct {
 
-	// A complex type that contains sorted list of IP ranges in CIDR format for
-	// Amazon Route 53 health checkers.
+	// A complex type that contains sorted list of IP ranges in CIDR format for Amazon
+	// Route 53 health checkers.
 	//
 	// This member is required.
 	CheckerIpRanges []string

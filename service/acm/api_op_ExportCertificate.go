@@ -60,8 +60,8 @@ type ExportCertificateOutput struct {
 	// The base64 PEM-encoded certificate.
 	Certificate *string
 
-	// The base64 PEM-encoded certificate chain. This does not include the
-	// certificate that you are exporting.
+	// The base64 PEM-encoded certificate chain. This does not include the certificate
+	// that you are exporting.
 	CertificateChain *string
 
 	// The encrypted private key associated with the public key in the certificate.

@@ -34,7 +34,7 @@ func (c *Client) SelectResourceConfig(ctx context.Context, params *SelectResourc
 
 type SelectResourceConfigInput struct {
 
-	// The SQL query SELECT  command.
+	// The SQL query SELECT command.
 	//
 	// This member is required.
 	Expression *string
@@ -42,8 +42,8 @@ type SelectResourceConfigInput struct {
 	// The maximum number of query results returned on each page.
 	Limit int32
 
-	// The nextToken string returned in a previous request that you use to request
-	// the next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request the
+	// next page of results in a paginated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,11 +51,11 @@ type SelectResourceConfigInput struct {
 
 type SelectResourceConfigOutput struct {
 
-	// The nextToken string returned in a previous request that you use to request
-	// the next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request the
+	// next page of results in a paginated response.
 	NextToken *string
 
-	// Returns the QueryInfo  object.
+	// Returns the QueryInfo object.
 	QueryInfo *types.QueryInfo
 
 	// Returns the results for the SQL query.
@@ -144,8 +144,8 @@ type SelectResourceConfigPaginatorOptions struct {
 	// The maximum number of query results returned on each page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

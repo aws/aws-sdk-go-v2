@@ -60,8 +60,8 @@ func (e *ConflictingOperationException) ErrorCode() string {
 }
 func (e *ConflictingOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The limit has been reached on the number of custom properties for the
-// specified resource.
+// The limit has been reached on the number of custom properties for the specified
+// resource.
 type CustomMetadataLimitExceededException struct {
 	Message *string
 

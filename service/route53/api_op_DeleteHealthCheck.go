@@ -15,8 +15,8 @@ import (
 // record sets. If you delete a health check and you don't update the associated
 // resource record sets, the future status of the health check can't be predicted
 // and may change. This will affect the routing of DNS queries for your DNS
-// failover configuration. For more information, see Replacing and Deleting
-// Health Checks (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html)
+// failover configuration. For more information, see Replacing and Deleting Health
+// Checks (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html)
 // in the Amazon Route 53 Developer Guide. If you're using Cloud Map and you
 // configured Cloud Map to create a Route 53 health check when you register an
 // instance, you can't use the Route 53 DeleteHealthCheck command to delete the

@@ -88,8 +88,8 @@ const (
 	AutoImportPolicyTypeNewChangedDeleted AutoImportPolicyType = "NEW_CHANGED_DELETED"
 )
 
-// Values returns all known values for AutoImportPolicyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AutoImportPolicyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AutoImportPolicyType) Values() []AutoImportPolicyType {
 	return []AutoImportPolicyType{
@@ -178,9 +178,9 @@ const (
 	DataRepositoryLifecycleFailed        DataRepositoryLifecycle = "FAILED"
 )
 
-// Values returns all known values for DataRepositoryLifecycle. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataRepositoryLifecycle. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DataRepositoryLifecycle) Values() []DataRepositoryLifecycle {
 	return []DataRepositoryLifecycle{
 		"CREATING",
@@ -227,10 +227,9 @@ const (
 	DataRepositoryTaskLifecycleCanceling DataRepositoryTaskLifecycle = "CANCELING"
 )
 
-// Values returns all known values for DataRepositoryTaskLifecycle. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for DataRepositoryTaskLifecycle. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataRepositoryTaskLifecycle) Values() []DataRepositoryTaskLifecycle {
 	return []DataRepositoryTaskLifecycle{
 		"PENDING",
@@ -535,8 +534,8 @@ const (
 	InputOntapVolumeTypeDp InputOntapVolumeType = "DP"
 )
 
-// Values returns all known values for InputOntapVolumeType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InputOntapVolumeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InputOntapVolumeType) Values() []InputOntapVolumeType {
 	return []InputOntapVolumeType{
@@ -577,8 +576,8 @@ const (
 	LustreDeploymentTypePersistent2 LustreDeploymentType = "PERSISTENT_2"
 )
 
-// Values returns all known values for LustreDeploymentType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LustreDeploymentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LustreDeploymentType) Values() []LustreDeploymentType {
 	return []LustreDeploymentType{
@@ -740,9 +739,9 @@ const (
 	ReportScopeFailedFilesOnly ReportScope = "FAILED_FILES_ONLY"
 )
 
-// Values returns all known values for ReportScope. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReportScope. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ReportScope) Values() []ReportScope {
 	return []ReportScope{
 		"FAILED_FILES_ONLY",
@@ -911,9 +910,9 @@ const (
 	StorageTypeHdd StorageType = "HDD"
 )
 
-// Values returns all known values for StorageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StorageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StorageType) Values() []StorageType {
 	return []StorageType{
 		"SSD",

@@ -87,8 +87,8 @@ func (e *ActivityWorkerLimitExceeded) ErrorCode() string {
 }
 func (e *ActivityWorkerLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The execution has the same name  as another execution (but a different input).
-// Executions with the same name  and input  are considered idempotent.
+// The execution has the same name as another execution (but a different input ).
+// Executions with the same name and input are considered idempotent.
 type ExecutionAlreadyExists struct {
 	Message *string
 
@@ -348,7 +348,7 @@ func (e *InvalidToken) ErrorCode() string {
 }
 func (e *InvalidToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your tracingConfiguration  key does not match, or enabled  has not been set to
+// Your tracingConfiguration key does not match, or enabled has not been set to
 // true or false .
 type InvalidTracingConfiguration struct {
 	Message *string
@@ -376,7 +376,7 @@ func (e *InvalidTracingConfiguration) ErrorCode() string {
 func (e *InvalidTracingConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request is missing a required parameter. This error occurs if both definition
-// and roleArn  are not specified.
+// and roleArn are not specified.
 type MissingRequiredParameter struct {
 	Message *string
 
@@ -612,9 +612,8 @@ func (e *TaskTimedOut) ErrorCode() string {
 }
 func (e *TaskTimedOut) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've exceeded the number of tags allowed for a resource. See the  Limits
-// Topic (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html)in the
-// Step Functions Developer Guide.
+// You've exceeded the number of tags allowed for a resource. See the  Limits Topic (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html)
+// in the Step Functions Developer Guide.
 type TooManyTags struct {
 	Message *string
 

@@ -15,7 +15,7 @@ import (
 // images or text for Computer Vision or Natural Language Processing problems. Find
 // the resulting model after you run an AutoML job V2 by calling
 // DescribeAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html)
-// . To create an AutoMLJob  using tabular data, see CreateAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html)
+// . To create an AutoMLJob using tabular data, see CreateAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html)
 // . This API action is callable through SageMaker Canvas only. Calling it directly
 // from the CLI or an SDK results in an error.
 func (c *Client) CreateAutoMLJobV2(ctx context.Context, params *CreateAutoMLJobV2Input, optFns ...func(*Options)) (*CreateAutoMLJobV2Output, error) {
@@ -37,10 +37,9 @@ type CreateAutoMLJobV2Input struct {
 
 	// An array of channel objects describing the input data and their location. Each
 	// channel is a named input source. Similar to InputDataConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig)
-	// supported by CreateAutoMLJob. The supported formats depend on the problem
-	// type:
-	//     - ImageClassification: S3Prefix, ManifestFile , AugmentedManifestFile
-	//     - TextClassification: S3Prefix
+	// supported by CreateAutoMLJob . The supported formats depend on the problem type:
+	//   - ImageClassification: S3Prefix, ManifestFile , AugmentedManifestFile
+	//   - TextClassification: S3Prefix
 	//
 	// This member is required.
 	AutoMLJobInputDataConfig []types.AutoMLJobChannel
@@ -69,11 +68,11 @@ type CreateAutoMLJobV2Input struct {
 
 	// Specifies a metric to minimize or maximize as the objective of a job. For
 	// CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
-	// , only Accuracy  is supported.
+	// , only Accuracy is supported.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// This structure specifies how to split the data into train and validation
-	// datasets. If you are using the V1 API (for example CreateAutoMLJob) or the V2
+	// datasets. If you are using the V1 API (for example CreateAutoMLJob ) or the V2
 	// API for Natural Language Processing problems (for example CreateAutoMLJobV2
 	// with a TextClassificationJobConfig problem type), the validation and training
 	// datasets must contain the same headers. Also, for V1 API jobs, the validation

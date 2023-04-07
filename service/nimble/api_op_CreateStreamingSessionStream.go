@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a streaming session stream for a streaming session. After invoking
-// this API, invoke GetStreamingSessionStream with the returned streamId to poll
-// the resource until it is in the READY  state.
+// Creates a streaming session stream for a streaming session. After invoking this
+// API, invoke GetStreamingSessionStream with the returned streamId to poll the
+// resource until it is in the READY state.
 func (c *Client) CreateStreamingSessionStream(ctx context.Context, params *CreateStreamingSessionStreamInput, optFns ...func(*Options)) (*CreateStreamingSessionStreamOutput, error) {
 	if params == nil {
 		params = &CreateStreamingSessionStreamInput{}
@@ -42,8 +42,8 @@ type CreateStreamingSessionStreamInput struct {
 	// This member is required.
 	StudioId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
 	ClientToken *string

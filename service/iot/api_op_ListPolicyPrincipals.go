@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the principals associated with the specified policy. Note: This action
-// is deprecated and works as expected for backward compatibility, but we won't add
+// Lists the principals associated with the specified policy. Note: This action is
+// deprecated and works as expected for backward compatibility, but we won't add
 // enhancements. Use ListTargetsForPolicy instead. Requires permission to access
 // the ListPolicyPrincipals (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
@@ -41,8 +41,8 @@ type ListPolicyPrincipalsInput struct {
 	// This member is required.
 	PolicyName *string
 
-	// Specifies the order for results. If true, the results are returned in
-	// ascending creation order.
+	// Specifies the order for results. If true, the results are returned in ascending
+	// creation order.
 	AscendingOrder bool
 
 	// The marker for the next set of results.
@@ -147,8 +147,8 @@ type ListPolicyPrincipalsPaginatorOptions struct {
 	// The result page size.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

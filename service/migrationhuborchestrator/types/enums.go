@@ -12,9 +12,9 @@ const (
 	DataTypeStringmap  DataType = "STRINGMAP"
 )
 
-// Values returns all known values for DataType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (DataType) Values() []DataType {
 	return []DataType{
 		"STRING",
@@ -44,10 +44,9 @@ const (
 	MigrationWorkflowStatusEnumCompleted             MigrationWorkflowStatusEnum = "COMPLETED"
 )
 
-// Values returns all known values for MigrationWorkflowStatusEnum. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for MigrationWorkflowStatusEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MigrationWorkflowStatusEnum) Values() []MigrationWorkflowStatusEnum {
 	return []MigrationWorkflowStatusEnum{
 		"CREATING",

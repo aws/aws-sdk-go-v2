@@ -29,8 +29,8 @@ func (c *Client) GetConfiguredTableAnalysisRule(ctx context.Context, params *Get
 
 type GetConfiguredTableAnalysisRuleInput struct {
 
-	// The analysis rule to be retrieved. Configured table analysis rules are
-	// uniquely identified by their configured table identifier and analysis rule type.
+	// The analysis rule to be retrieved. Configured table analysis rules are uniquely
+	// identified by their configured table identifier and analysis rule type.
 	//
 	// This member is required.
 	AnalysisRuleType types.ConfiguredTableAnalysisRuleType

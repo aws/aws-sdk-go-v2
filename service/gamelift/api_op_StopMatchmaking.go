@@ -13,7 +13,7 @@ import (
 // Cancels a matchmaking ticket or match backfill ticket that is currently being
 // processed. To stop the matchmaking operation, specify the ticket ID. If
 // successful, work on the ticket is stopped, and the ticket status is changed to
-// CANCELLED. This call is also used to turn off automatic backfill for an
+// CANCELLED . This call is also used to turn off automatic backfill for an
 // individual game session. This is for game sessions that are created with a
 // matchmaking configuration that has automatic backfill enabled. The ticket ID is
 // included in the MatchmakerData of an updated game session object, which is

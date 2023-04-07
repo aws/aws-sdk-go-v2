@@ -51,15 +51,18 @@ type GetChangesetOutput struct {
 	// 12:00:00 PM UTC is specified as 1635768000000.
 	ActiveFromTimestamp *int64
 
-	// Time until which the Changeset is active. The value is determined as epoch
-	// time in milliseconds. For example, the value for Monday, November 1, 2021
-	// 12:00:00 PM UTC is specified as 1635768000000.
+	// Time until which the Changeset is active. The value is determined as epoch time
+	// in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
+	// UTC is specified as 1635768000000.
 	ActiveUntilTimestamp *int64
 
 	// Type that indicates how a Changeset is applied to a Dataset.
-	//     - REPLACE – Changeset is considered as a replacement to all prior loaded Changesets.
-	//     - APPEND – Changeset is considered as an addition to the end of all prior loaded Changesets.
-	//     - MODIFY – Changeset is considered as a replacement to a specific prior ingested Changeset.
+	//   - REPLACE – Changeset is considered as a replacement to all prior loaded
+	//   Changesets.
+	//   - APPEND – Changeset is considered as an addition to the end of all prior
+	//   loaded Changesets.
+	//   - MODIFY – Changeset is considered as a replacement to a specific prior
+	//   ingested Changeset.
 	ChangeType types.ChangeType
 
 	// The ARN identifier of the Changeset.

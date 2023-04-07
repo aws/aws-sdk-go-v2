@@ -35,21 +35,21 @@ func (c *Client) DescribeHsm(ctx context.Context, params *DescribeHsmInput, optF
 	return out, nil
 }
 
-// Contains the inputs for the DescribeHsm  operation.
+// Contains the inputs for the DescribeHsm operation.
 type DescribeHsmInput struct {
 
-	// The ARN of the HSM. Either the HsmArn  or the SerialNumber parameter must be
+	// The ARN of the HSM. Either the HsmArn or the SerialNumber parameter must be
 	// specified.
 	HsmArn *string
 
-	// The serial number of the HSM. Either the HsmArn  or the HsmSerialNumber
+	// The serial number of the HSM. Either the HsmArn or the HsmSerialNumber
 	// parameter must be specified.
 	HsmSerialNumber *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the output of the DescribeHsm  operation.
+// Contains the output of the DescribeHsm operation.
 type DescribeHsmOutput struct {
 
 	// The Availability Zone that the HSM is in.
@@ -107,8 +107,8 @@ type DescribeHsmOutput struct {
 	SubscriptionStartDate *string
 
 	// Specifies the type of subscription for the HSM.
-	//     - PRODUCTION - The HSM is being used in a production environment.
-	//     - TRIAL - The HSM is being used in a product trial.
+	//   - PRODUCTION - The HSM is being used in a production environment.
+	//   - TRIAL - The HSM is being used in a product trial.
 	SubscriptionType types.SubscriptionType
 
 	// The name of the HSM vendor.

@@ -33,8 +33,8 @@ type CreateCellInput struct {
 	// This member is required.
 	CellName *string
 
-	// A list of cell Amazon Resource Names (ARNs) contained within this cell, for
-	// use in nested cells. For example, Availability Zones within specific Amazon Web
+	// A list of cell Amazon Resource Names (ARNs) contained within this cell, for use
+	// in nested cells. For example, Availability Zones within specific Amazon Web
 	// Services Regions.
 	Cells []string
 

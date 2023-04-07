@@ -33,10 +33,10 @@ func (c *Client) CreateDisk(ctx context.Context, params *CreateDiskInput, optFns
 
 type CreateDiskInput struct {
 
-	// The Availability Zone where you want to create the disk (e.g., us-east-2a).
-	// Use the same Availability Zone as the Lightsail instance to which you want to
-	// attach the disk. Use the get regions operation to list the Availability Zones
-	// where Lightsail is currently available.
+	// The Availability Zone where you want to create the disk (e.g., us-east-2a ). Use
+	// the same Availability Zone as the Lightsail instance to which you want to attach
+	// the disk. Use the get regions operation to list the Availability Zones where
+	// Lightsail is currently available.
 	//
 	// This member is required.
 	AvailabilityZone *string

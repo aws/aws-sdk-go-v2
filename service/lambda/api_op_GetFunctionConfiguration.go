@@ -18,7 +18,7 @@ import (
 
 // Returns the version-specific settings of a Lambda function or version. The
 // output includes only options that can vary between versions of a function. To
-// modify these settings, use UpdateFunctionConfiguration. To get all of a
+// modify these settings, use UpdateFunctionConfiguration . To get all of a
 // function's details, including function-level settings, use GetFunction .
 func (c *Client) GetFunctionConfiguration(ctx context.Context, params *GetFunctionConfigurationInput, optFns ...func(*Options)) (*GetFunctionConfigurationOutput, error) {
 	if params == nil {
@@ -38,13 +38,12 @@ func (c *Client) GetFunctionConfiguration(ctx context.Context, params *GetFuncti
 type GetFunctionConfigurationInput struct {
 
 	// The name of the Lambda function, version, or alias. Name formats
-	//     - Function name – my-function (name-only), my-function:v1 (with alias).
-	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
-	//     - Partial ARN – 123456789012:function:my-function .
-	// You can append a
-	// version number or alias to any of the formats. The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//   - Function name – my-function (name-only), my-function:v1 (with alias).
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// You can append a version number or alias to any of the formats. The length
+	// constraint applies only to the full ARN. If you specify only the function name,
+	// it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -110,8 +109,8 @@ type GetFunctionConfigurationOutput struct {
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModified *string
 
-	// The status of the last update that was performed on the function. This is
-	// first set to Successful  after function creation completes.
+	// The status of the last update that was performed on the function. This is first
+	// set to Successful after function creation completes.
 	LastUpdateStatus types.LastUpdateStatus
 
 	// The reason for the last update that was performed on the function.
@@ -130,7 +129,7 @@ type GetFunctionConfigurationOutput struct {
 	// The amount of memory available to the function at runtime.
 	MemorySize *int32
 
-	// The type of deployment package. Set to Image  for container image and set Zip
+	// The type of deployment package. Set to Image for container image and set Zip
 	// for .zip file archive.
 	PackageType types.PackageType
 
@@ -152,20 +151,20 @@ type GetFunctionConfigurationOutput struct {
 	// The ARN of the signing profile version.
 	SigningProfileVersionArn *string
 
-	// Set ApplyOn  to PublishedVersions to create a snapshot of the initialized
+	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
 	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
 	// .
 	SnapStart *types.SnapStartResponse
 
-	// The current state of the function. When the state is Inactive, you can
+	// The current state of the function. When the state is Inactive , you can
 	// reactivate the function by invoking it.
 	State types.State
 
 	// The reason for the function's current state.
 	StateReason *string
 
-	// The reason code for the function's current state. When the code is Creating,
+	// The reason code for the function's current state. When the code is Creating ,
 	// you can't invoke or modify the function.
 	StateReasonCode types.StateReasonCode
 
@@ -314,9 +313,9 @@ func NewFunctionActiveWaiter(client GetFunctionConfigurationAPIClient, optFns ..
 	}
 }
 
-// Wait calls the waiter function for FunctionActive waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for FunctionActive waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *FunctionActiveWaiter) Wait(ctx context.Context, params *GetFunctionConfigurationInput, maxWaitDur time.Duration, optFns ...func(*FunctionActiveWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

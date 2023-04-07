@@ -31,8 +31,7 @@ func (c *Client) ValidateSecurityProfileBehaviors(ctx context.Context, params *V
 
 type ValidateSecurityProfileBehaviorsInput struct {
 
-	// Specifies the behaviors that, when violated by a device (thing), cause an
-	// alert.
+	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	//
 	// This member is required.
 	Behaviors []types.Behavior

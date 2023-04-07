@@ -51,8 +51,8 @@ type GetServersOutput struct {
 	// The time when the server was last modified.
 	LastModifiedOn *time.Time
 
-	// The token required to retrieve the next set of results. This value is null
-	// when there are no more results to return.
+	// The token required to retrieve the next set of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// The status of the server catalog.
@@ -141,8 +141,8 @@ type GetServersPaginatorOptions struct {
 	// NextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

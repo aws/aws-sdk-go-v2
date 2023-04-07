@@ -52,9 +52,9 @@ const (
 	AuthModeIam AuthMode = "IAM"
 )
 
-// Values returns all known values for AuthMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AuthMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (AuthMode) Values() []AuthMode {
 	return []AuthMode{
 		"SSO",
@@ -563,9 +563,9 @@ const (
 	NotebookExecutionStatusStopped      NotebookExecutionStatus = "STOPPED"
 )
 
-// Values returns all known values for NotebookExecutionStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NotebookExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (NotebookExecutionStatus) Values() []NotebookExecutionStatus {
 	return []NotebookExecutionStatus{
 		"START_PENDING",
@@ -589,9 +589,9 @@ const (
 	OnDemandCapacityReservationPreferenceNone OnDemandCapacityReservationPreference = "none"
 )
 
-// Values returns all known values for OnDemandCapacityReservationPreference.
-// Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for OnDemandCapacityReservationPreference. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OnDemandCapacityReservationPreference) Values() []OnDemandCapacityReservationPreference {
 	return []OnDemandCapacityReservationPreference{
@@ -893,8 +893,8 @@ const (
 	UnitCountPerSecond     Unit = "COUNT_PER_SECOND"
 )
 
-// Values returns all known values for Unit. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Unit. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Unit) Values() []Unit {
 	return []Unit{

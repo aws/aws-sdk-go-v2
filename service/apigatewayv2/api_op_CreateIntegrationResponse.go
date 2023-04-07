@@ -27,8 +27,7 @@ func (c *Client) CreateIntegrationResponse(ctx context.Context, params *CreateIn
 	return out, nil
 }
 
-// Creates a new IntegrationResponse resource to represent an integration
-// response.
+// Creates a new IntegrationResponse resource to represent an integration response.
 type CreateIntegrationResponseInput struct {
 
 	// The API identifier.

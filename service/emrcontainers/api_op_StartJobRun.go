@@ -82,8 +82,7 @@ type StartJobRunOutput struct {
 	// This output displays the name of the started job run.
 	Name *string
 
-	// This output displays the virtual cluster ID for which the job run was
-	// submitted.
+	// This output displays the virtual cluster ID for which the job run was submitted.
 	VirtualClusterId *string
 
 	// Metadata pertaining to the operation's result.

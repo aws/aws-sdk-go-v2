@@ -16,7 +16,7 @@ import (
 // configuring and an index field configuration. The index field configuration
 // specifies a unique name, the index field type, and the options you want to
 // configure for the field. The options you can specify depend on the
-// IndexFieldType. If the field exists, the new configuration replaces the old
+// IndexFieldType . If the field exists, the new configuration replaces the old
 // one. For more information, see Configuring Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DefineIndexField(ctx context.Context, params *DefineIndexFieldInput, optFns ...func(*Options)) (*DefineIndexFieldOutput, error) {
@@ -58,7 +58,7 @@ type DefineIndexFieldInput struct {
 // newly-configured index field.
 type DefineIndexFieldOutput struct {
 
-	// The value of an IndexField  and its current status.
+	// The value of an IndexField and its current status.
 	//
 	// This member is required.
 	IndexField *types.IndexFieldStatus

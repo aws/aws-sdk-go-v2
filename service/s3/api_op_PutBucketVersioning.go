@@ -22,7 +22,7 @@ import (
 // request does not return a versioning state value. In order to enable MFA Delete,
 // you must be the bucket owner. If you are the bucket owner and want to enable MFA
 // Delete in the bucket versioning configuration, you must include the x-amz-mfa
-// request header and the Status  and the MfaDelete request elements in a request
+// request header and the Status and the MfaDelete request elements in a request
 // to set the versioning state of the bucket. If you have an object expiration
 // lifecycle policy in your non-versioned bucket and you want to maintain the same
 // permanent delete behavior when you enable versioning, you must add a noncurrent
@@ -68,12 +68,12 @@ type PutBucketVersioningInput struct {
 	// HTTP status code 400 Bad Request . For more information, see Checking object
 	// integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide. If you provide an individual checksum, Amazon S3
-	// ignores any provided ChecksumAlgorithm  parameter.
+	// ignores any provided ChecksumAlgorithm parameter.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
-	// >The base64-encoded 128-bit MD5 digest of the data. You must use this header
-	// as a message integrity check to verify that the request body was not corrupted
-	// in transit. For more information, see RFC 1864 (http://www.ietf.org/rfc/rfc1864.txt)
+	// >The base64-encoded 128-bit MD5 digest of the data. You must use this header as
+	// a message integrity check to verify that the request body was not corrupted in
+	// transit. For more information, see RFC 1864 (http://www.ietf.org/rfc/rfc1864.txt)
 	// . For requests made using the Amazon Web Services Command Line Interface (CLI)
 	// or Amazon Web Services SDKs, this field is calculated automatically.
 	ContentMD5 *string

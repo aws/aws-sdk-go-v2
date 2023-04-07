@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified TLSInspectionConfiguration.
+// Deletes the specified TLSInspectionConfiguration .
 func (c *Client) DeleteTLSInspectionConfiguration(ctx context.Context, params *DeleteTLSInspectionConfigurationInput, optFns ...func(*Options)) (*DeleteTLSInspectionConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteTLSInspectionConfigurationInput{}
@@ -44,9 +44,9 @@ type DeleteTLSInspectionConfigurationInput struct {
 type DeleteTLSInspectionConfigurationOutput struct {
 
 	// The high-level properties of a TLS inspection configuration. This, along with
-	// the TLSInspectionConfiguration, define the TLS inspection configuration. You can
-	// retrieve all objects for a TLS inspection configuration by calling
-	// DescribeTLSInspectionConfiguration.
+	// the TLSInspectionConfiguration , define the TLS inspection configuration. You
+	// can retrieve all objects for a TLS inspection configuration by calling
+	// DescribeTLSInspectionConfiguration .
 	//
 	// This member is required.
 	TLSInspectionConfigurationResponse *types.TLSInspectionConfigurationResponse

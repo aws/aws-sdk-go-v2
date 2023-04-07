@@ -39,7 +39,7 @@ type ListSchemaExtensionsInput struct {
 	// The maximum number of items to return.
 	Limit *int32
 
-	// The ListSchemaExtensions.NextToken  value from a previous call to
+	// The ListSchemaExtensions.NextToken value from a previous call to
 	// ListSchemaExtensions . Pass null if this is the first call.
 	NextToken *string
 
@@ -49,8 +49,8 @@ type ListSchemaExtensionsInput struct {
 type ListSchemaExtensionsOutput struct {
 
 	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to ListSchemaExtensions to retrieve the next
-	// set of items.
+	// parameter in a subsequent call to ListSchemaExtensions to retrieve the next set
+	// of items.
 	NextToken *string
 
 	// Information about the schema extensions applied to the directory.
@@ -139,8 +139,8 @@ type ListSchemaExtensionsPaginatorOptions struct {
 	// The maximum number of items to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

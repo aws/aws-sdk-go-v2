@@ -19,25 +19,24 @@ type ApplicationSource struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a CloudWatch metric of your choosing that can be used for
-// predictive scaling. For predictive scaling to work with a customized load metric
-// specification, AWS Auto Scaling needs access to the Sum  and Average
-// statistics that CloudWatch computes from metric data. When you choose a load
-// metric, make sure that the required Sum  and Average statistics for your
-// metric are available in CloudWatch and that they provide relevant data for
-// predictive scaling. The Sum statistic must represent the total load on the
-// resource, and the Average statistic must represent the average load per
-// capacity unit of the resource. For example, there is a metric that counts the
-// number of requests processed by your Auto Scaling group. If the Sum statistic
-// represents the total request count processed by the group, then the Average
-// statistic for the specified metric must represent the average request count
-// processed by each instance of the group. If you publish your own metrics, you
-// can aggregate the data points at a given interval and then publish the
-// aggregated data points to CloudWatch. Before AWS Auto Scaling generates the
-// forecast, it sums up all the metric data points that occurred within each hour
-// to match the granularity period that is used in the forecast (60 minutes). For
-// information about terminology, available metrics, or how to publish new metrics,
-// see Amazon CloudWatch Concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
+// Represents a CloudWatch metric of your choosing that can be used for predictive
+// scaling. For predictive scaling to work with a customized load metric
+// specification, AWS Auto Scaling needs access to the Sum and Average statistics
+// that CloudWatch computes from metric data. When you choose a load metric, make
+// sure that the required Sum and Average statistics for your metric are available
+// in CloudWatch and that they provide relevant data for predictive scaling. The
+// Sum statistic must represent the total load on the resource, and the Average
+// statistic must represent the average load per capacity unit of the resource. For
+// example, there is a metric that counts the number of requests processed by your
+// Auto Scaling group. If the Sum statistic represents the total request count
+// processed by the group, then the Average statistic for the specified metric
+// must represent the average request count processed by each instance of the
+// group. If you publish your own metrics, you can aggregate the data points at a
+// given interval and then publish the aggregated data points to CloudWatch. Before
+// AWS Auto Scaling generates the forecast, it sums up all the metric data points
+// that occurred within each hour to match the granularity period that is used in
+// the forecast (60 minutes). For information about terminology, available metrics,
+// or how to publish new metrics, see Amazon CloudWatch Concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
 // in the Amazon CloudWatch User Guide. After creating your scaling plan, you can
 // use the AWS Auto Scaling console to visualize forecasts for the specified
 // metric. For more information, see View Scaling Information for a Resource (https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource)
@@ -73,8 +72,15 @@ type CustomizedLoadMetricSpecification struct {
 // Represents a CloudWatch metric of your choosing that can be used for dynamic
 // scaling as part of a target tracking scaling policy. To create your customized
 // scaling metric specification:
-//   - Add values for each required parameter from CloudWatch. You can use an existing metric, or a new metric that you create. To use your own metric, you must first publish the metric to CloudWatch. For more information, see Publish Custom Metrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html) in the Amazon CloudWatch User Guide.
-//   - Choose a metric that changes proportionally with capacity. The value of the metric should increase or decrease in inverse proportion to the number of capacity units. That is, the value of the metric should decrease when capacity increases.
+//   - Add values for each required parameter from CloudWatch. You can use an
+//     existing metric, or a new metric that you create. To use your own metric, you
+//     must first publish the metric to CloudWatch. For more information, see
+//     Publish Custom Metrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
+//     in the Amazon CloudWatch User Guide.
+//   - Choose a metric that changes proportionally with capacity. The value of the
+//     metric should increase or decrease in inverse proportion to the number of
+//     capacity units. That is, the value of the metric should decrease when capacity
+//     increases.
 //
 // For information about terminology, available metrics, or how to publish new
 // metrics, see Amazon CloudWatch Concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
@@ -153,10 +159,9 @@ type PredefinedLoadMetricSpecification struct {
 	// group. You create the resource label by appending the final portion of the load
 	// balancer ARN and the final portion of the target group ARN into a single value,
 	// separated by a forward slash (/). The format is app///targetgroup//, where:
-	//     - app// is the final portion of the load balancer ARN
-	//     - targetgroup// is the final portion of the target group ARN.
-	// This is an
-	// example:
+	//   - app// is the final portion of the load balancer ARN
+	//   - targetgroup// is the final portion of the target group ARN.
+	// This is an example:
 	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
 	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
@@ -184,10 +189,9 @@ type PredefinedScalingMetricSpecification struct {
 	// appending the final portion of the load balancer ARN and the final portion of
 	// the target group ARN into a single value, separated by a forward slash (/). The
 	// format is app///targetgroup//, where:
-	//     - app// is the final portion of the load balancer ARN
-	//     - targetgroup// is the final portion of the target group ARN.
-	// This is an
-	// example:
+	//   - app// is the final portion of the load balancer ARN
+	//   - targetgroup// is the final portion of the target group ARN.
+	// This is an example:
 	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
 	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
@@ -198,23 +202,22 @@ type PredefinedScalingMetricSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a scaling instruction for a scalable resource in a scaling plan.
-// Each scaling instruction applies to one resource. AWS Auto Scaling creates
-// target tracking scaling policies based on the scaling instructions. Target
-// tracking scaling policies adjust the capacity of your scalable resource as
-// required to maintain resource utilization at the target value that you
-// specified. AWS Auto Scaling also configures predictive scaling for your Amazon
-// EC2 Auto Scaling groups using a subset of parameters, including the load metric,
-// the scaling metric, the target value for the scaling metric, the predictive
-// scaling mode (forecast and scale or forecast only), and the desired behavior
-// when the forecast capacity exceeds the maximum capacity of the resource. With
-// predictive scaling, AWS Auto Scaling generates forecasts with traffic
-// predictions for the two days ahead and schedules scaling actions that
-// proactively add and remove resource capacity to match the forecast. We recommend
-// waiting a minimum of 24 hours after creating an Auto Scaling group to configure
-// predictive scaling. At minimum, there must be 24 hours of historical data to
-// generate a forecast. For more information, see Best Practices for AWS Auto
-// Scaling (https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-best-practices.html)
+// Describes a scaling instruction for a scalable resource in a scaling plan. Each
+// scaling instruction applies to one resource. AWS Auto Scaling creates target
+// tracking scaling policies based on the scaling instructions. Target tracking
+// scaling policies adjust the capacity of your scalable resource as required to
+// maintain resource utilization at the target value that you specified. AWS Auto
+// Scaling also configures predictive scaling for your Amazon EC2 Auto Scaling
+// groups using a subset of parameters, including the load metric, the scaling
+// metric, the target value for the scaling metric, the predictive scaling mode
+// (forecast and scale or forecast only), and the desired behavior when the
+// forecast capacity exceeds the maximum capacity of the resource. With predictive
+// scaling, AWS Auto Scaling generates forecasts with traffic predictions for the
+// two days ahead and schedules scaling actions that proactively add and remove
+// resource capacity to match the forecast. We recommend waiting a minimum of 24
+// hours after creating an Auto Scaling group to configure predictive scaling. At
+// minimum, there must be 24 hours of historical data to generate a forecast. For
+// more information, see Best Practices for AWS Auto Scaling (https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-best-practices.html)
 // in the AWS Auto Scaling User Guide.
 type ScalingInstruction struct {
 
@@ -231,25 +234,41 @@ type ScalingInstruction struct {
 
 	// The ID of the resource. This string consists of the resource type and unique
 	// identifier.
-	//     - Auto Scaling group - The resource type is autoScalingGroup and the unique identifier is the name of the Auto Scaling group. Example: autoScalingGroup/my-asg .
-	//     - ECS service - The resource type is service and the unique identifier is the cluster name and service name. Example: service/default/sample-webapp .
-	//     - Spot Fleet request - The resource type is spot-fleet-request and the unique identifier is the Spot Fleet request ID. Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE .
-	//     - DynamoDB table - The resource type is table and the unique identifier is the resource ID. Example: table/my-table .
-	//     - DynamoDB global secondary index - The resource type is index and the unique identifier is the resource ID. Example: table/my-table/index/my-table-index .
-	//     - Aurora DB cluster - The resource type is cluster and the unique identifier is the cluster name. Example: cluster:my-db-cluster .
+	//   - Auto Scaling group - The resource type is autoScalingGroup and the unique
+	//   identifier is the name of the Auto Scaling group. Example:
+	//   autoScalingGroup/my-asg .
+	//   - ECS service - The resource type is service and the unique identifier is the
+	//   cluster name and service name. Example: service/default/sample-webapp .
+	//   - Spot Fleet request - The resource type is spot-fleet-request and the unique
+	//   identifier is the Spot Fleet request ID. Example:
+	//   spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE .
+	//   - DynamoDB table - The resource type is table and the unique identifier is the
+	//   resource ID. Example: table/my-table .
+	//   - DynamoDB global secondary index - The resource type is index and the unique
+	//   identifier is the resource ID. Example: table/my-table/index/my-table-index .
+	//   - Aurora DB cluster - The resource type is cluster and the unique identifier
+	//   is the cluster name. Example: cluster:my-db-cluster .
 	//
 	// This member is required.
 	ResourceId *string
 
 	// The scalable dimension associated with the resource.
-	//     - autoscaling:autoScalingGroup:DesiredCapacity - The desired capacity of an Auto Scaling group.
-	//     - ecs:service:DesiredCount - The desired task count of an ECS service.
-	//     - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet request.
-	//     - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a DynamoDB table.
-	//     - dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a DynamoDB table.
-	//     - dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB global secondary index.
-	//     - dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a DynamoDB global secondary index.
-	//     - rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.
+	//   - autoscaling:autoScalingGroup:DesiredCapacity - The desired capacity of an
+	//   Auto Scaling group.
+	//   - ecs:service:DesiredCount - The desired task count of an ECS service.
+	//   - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet
+	//   request.
+	//   - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
+	//   DynamoDB table.
+	//   - dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
+	//   DynamoDB table.
+	//   - dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a
+	//   DynamoDB global secondary index.
+	//   - dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
+	//   DynamoDB global secondary index.
+	//   - rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
+	//   cluster. Available for Aurora MySQL-compatible edition and Aurora
+	//   PostgreSQL-compatible edition.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -281,14 +300,19 @@ type ScalingInstruction struct {
 	// scaling, and cannot be used otherwise.
 	PredefinedLoadMetricSpecification *PredefinedLoadMetricSpecification
 
-	// Defines the behavior that should be applied if the forecast capacity
-	// approaches or exceeds the maximum capacity specified for the resource. The
-	// default value is SetForecastCapacityToMaxCapacity. The following are possible
-	// values:
-	//     - SetForecastCapacityToMaxCapacity - AWS Auto Scaling cannot scale resource capacity higher than the maximum capacity. The maximum capacity is enforced as a hard limit.
-	//     - SetMaxCapacityToForecastCapacity - AWS Auto Scaling may scale resource capacity higher than the maximum capacity to equal but not exceed forecast capacity.
-	//     - SetMaxCapacityAboveForecastCapacity - AWS Auto Scaling may scale resource capacity higher than the maximum capacity by a specified buffer value. The intention is to give the target tracking scaling policy extra capacity if unexpected traffic occurs.
-	//
+	// Defines the behavior that should be applied if the forecast capacity approaches
+	// or exceeds the maximum capacity specified for the resource. The default value is
+	// SetForecastCapacityToMaxCapacity . The following are possible values:
+	//   - SetForecastCapacityToMaxCapacity - AWS Auto Scaling cannot scale resource
+	//   capacity higher than the maximum capacity. The maximum capacity is enforced as a
+	//   hard limit.
+	//   - SetMaxCapacityToForecastCapacity - AWS Auto Scaling may scale resource
+	//   capacity higher than the maximum capacity to equal but not exceed forecast
+	//   capacity.
+	//   - SetMaxCapacityAboveForecastCapacity - AWS Auto Scaling may scale resource
+	//   capacity higher than the maximum capacity by a specified buffer value. The
+	//   intention is to give the target tracking scaling policy extra capacity if
+	//   unexpected traffic occurs.
 	// Only valid when configuring predictive scaling.
 	PredictiveScalingMaxCapacityBehavior PredictiveScalingMaxCapacityBehavior
 
@@ -299,18 +323,18 @@ type ScalingInstruction struct {
 	// capacity is 40, then the effective maximum capacity is 55. Only valid when
 	// configuring predictive scaling. Required if the
 	// PredictiveScalingMaxCapacityBehavior is set to
-	// SetMaxCapacityAboveForecastCapacity, and cannot be used otherwise. The range
-	// is 1-100.
+	// SetMaxCapacityAboveForecastCapacity , and cannot be used otherwise. The range is
+	// 1-100.
 	PredictiveScalingMaxCapacityBuffer *int32
 
-	// The predictive scaling mode. The default value is ForecastAndScale. Otherwise,
+	// The predictive scaling mode. The default value is ForecastAndScale . Otherwise,
 	// AWS Auto Scaling forecasts capacity but does not create any scheduled scaling
 	// actions based on the capacity forecast.
 	PredictiveScalingMode PredictiveScalingMode
 
 	// Controls whether a resource's externally created scaling policies are kept or
-	// replaced. The default value is KeepExternalPolicies. If the parameter is set
-	// to ReplaceExternalPolicies, any scaling policies that are external to AWS Auto
+	// replaced. The default value is KeepExternalPolicies . If the parameter is set to
+	// ReplaceExternalPolicies , any scaling policies that are external to AWS Auto
 	// Scaling are deleted and new target tracking scaling policies created. Only valid
 	// when configuring dynamic scaling. Condition: The number of existing policies to
 	// be replaced must be less than or equal to 50. If there are more than 50 policies
@@ -358,14 +382,15 @@ type ScalingPlan struct {
 	ScalingPlanVersion *int64
 
 	// The status of the scaling plan.
-	//     - Active - The scaling plan is active.
-	//     - ActiveWithProblems - The scaling plan is active, but the scaling configuration for one or more resources could not be applied.
-	//     - CreationInProgress - The scaling plan is being created.
-	//     - CreationFailed - The scaling plan could not be created.
-	//     - DeletionInProgress - The scaling plan is being deleted.
-	//     - DeletionFailed - The scaling plan could not be deleted.
-	//     - UpdateInProgress - The scaling plan is being updated.
-	//     - UpdateFailed - The scaling plan could not be updated.
+	//   - Active - The scaling plan is active.
+	//   - ActiveWithProblems - The scaling plan is active, but the scaling
+	//   configuration for one or more resources could not be applied.
+	//   - CreationInProgress - The scaling plan is being created.
+	//   - CreationFailed - The scaling plan could not be created.
+	//   - DeletionInProgress - The scaling plan is being deleted.
+	//   - DeletionFailed - The scaling plan could not be deleted.
+	//   - UpdateInProgress - The scaling plan is being updated.
+	//   - UpdateFailed - The scaling plan could not be updated.
 	//
 	// This member is required.
 	StatusCode ScalingPlanStatusCode
@@ -387,25 +412,41 @@ type ScalingPlanResource struct {
 
 	// The ID of the resource. This string consists of the resource type and unique
 	// identifier.
-	//     - Auto Scaling group - The resource type is autoScalingGroup and the unique identifier is the name of the Auto Scaling group. Example: autoScalingGroup/my-asg .
-	//     - ECS service - The resource type is service and the unique identifier is the cluster name and service name. Example: service/default/sample-webapp .
-	//     - Spot Fleet request - The resource type is spot-fleet-request and the unique identifier is the Spot Fleet request ID. Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE .
-	//     - DynamoDB table - The resource type is table and the unique identifier is the resource ID. Example: table/my-table .
-	//     - DynamoDB global secondary index - The resource type is index and the unique identifier is the resource ID. Example: table/my-table/index/my-table-index .
-	//     - Aurora DB cluster - The resource type is cluster and the unique identifier is the cluster name. Example: cluster:my-db-cluster .
+	//   - Auto Scaling group - The resource type is autoScalingGroup and the unique
+	//   identifier is the name of the Auto Scaling group. Example:
+	//   autoScalingGroup/my-asg .
+	//   - ECS service - The resource type is service and the unique identifier is the
+	//   cluster name and service name. Example: service/default/sample-webapp .
+	//   - Spot Fleet request - The resource type is spot-fleet-request and the unique
+	//   identifier is the Spot Fleet request ID. Example:
+	//   spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE .
+	//   - DynamoDB table - The resource type is table and the unique identifier is the
+	//   resource ID. Example: table/my-table .
+	//   - DynamoDB global secondary index - The resource type is index and the unique
+	//   identifier is the resource ID. Example: table/my-table/index/my-table-index .
+	//   - Aurora DB cluster - The resource type is cluster and the unique identifier
+	//   is the cluster name. Example: cluster:my-db-cluster .
 	//
 	// This member is required.
 	ResourceId *string
 
 	// The scalable dimension for the resource.
-	//     - autoscaling:autoScalingGroup:DesiredCapacity - The desired capacity of an Auto Scaling group.
-	//     - ecs:service:DesiredCount - The desired task count of an ECS service.
-	//     - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet request.
-	//     - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a DynamoDB table.
-	//     - dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a DynamoDB table.
-	//     - dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB global secondary index.
-	//     - dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a DynamoDB global secondary index.
-	//     - rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.
+	//   - autoscaling:autoScalingGroup:DesiredCapacity - The desired capacity of an
+	//   Auto Scaling group.
+	//   - ecs:service:DesiredCount - The desired task count of an ECS service.
+	//   - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet
+	//   request.
+	//   - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
+	//   DynamoDB table.
+	//   - dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
+	//   DynamoDB table.
+	//   - dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a
+	//   DynamoDB global secondary index.
+	//   - dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
+	//   DynamoDB global secondary index.
+	//   - rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
+	//   cluster. Available for Aurora MySQL-compatible edition and Aurora
+	//   PostgreSQL-compatible edition.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -421,9 +462,13 @@ type ScalingPlanResource struct {
 	ScalingPlanVersion *int64
 
 	// The scaling status of the resource.
-	//     - Active - The scaling configuration is active.
-	//     - Inactive - The scaling configuration is not active because the scaling plan is being created or the scaling configuration could not be applied. Check the status message for more information.
-	//     - PartiallyActive - The scaling configuration is partially active because the scaling plan is being created or deleted or the scaling configuration could not be fully applied. Check the status message for more information.
+	//   - Active - The scaling configuration is active.
+	//   - Inactive - The scaling configuration is not active because the scaling plan
+	//   is being created or the scaling configuration could not be applied. Check the
+	//   status message for more information.
+	//   - PartiallyActive - The scaling configuration is partially active because the
+	//   scaling plan is being created or deleted or the scaling configuration could not
+	//   be fully applied. Check the status message for more information.
 	//
 	// This member is required.
 	ScalingStatusCode ScalingStatusCode
@@ -475,22 +520,22 @@ type TagFilter struct {
 }
 
 // Describes a target tracking configuration to use with AWS Auto Scaling. Used
-// with ScalingInstruction  and ScalingPolicy .
+// with ScalingInstruction and ScalingPolicy .
 type TargetTrackingConfiguration struct {
 
-	// The target value for the metric. Although this property accepts numbers of
-	// type Double, it won't accept values that are either too small or too large.
-	// Values must be in the range of -2^360 to 2^360.
+	// The target value for the metric. Although this property accepts numbers of type
+	// Double, it won't accept values that are either too small or too large. Values
+	// must be in the range of -2^360 to 2^360.
 	//
 	// This member is required.
 	TargetValue *float64
 
-	// A customized metric. You can specify either a predefined metric or a
-	// customized metric.
+	// A customized metric. You can specify either a predefined metric or a customized
+	// metric.
 	CustomizedScalingMetricSpecification *CustomizedScalingMetricSpecification
 
 	// Indicates whether scale in by the target tracking scaling policy is disabled.
-	// If the value is true, scale in is disabled and the target tracking scaling
+	// If the value is true , scale in is disabled and the target tracking scaling
 	// policy doesn't remove capacity from the scalable resource. Otherwise, scale in
 	// is enabled and the target tracking scaling policy can remove capacity from the
 	// scalable resource. The default value is false .
@@ -501,8 +546,8 @@ type TargetTrackingConfiguration struct {
 	// Scaling group.
 	EstimatedInstanceWarmup *int32
 
-	// A predefined metric. You can specify either a predefined metric or a
-	// customized metric.
+	// A predefined metric. You can specify either a predefined metric or a customized
+	// metric.
 	PredefinedScalingMetricSpecification *PredefinedScalingMetricSpecification
 
 	// The amount of time, in seconds, after a scale-in activity completes before

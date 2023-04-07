@@ -35,8 +35,8 @@ type AssociateRoleToGroupInput struct {
 	// This member is required.
 	GroupId *string
 
-	// The ARN of the role you wish to associate with this group. The existence of
-	// the role is not validated.
+	// The ARN of the role you wish to associate with this group. The existence of the
+	// role is not validated.
 	//
 	// This member is required.
 	RoleArn *string

@@ -42,8 +42,8 @@ type DeleteAssociationInput struct {
 	// parameter InstanceID with Systems Manager documents (SSM documents) that use
 	// schema version 2.0 or later will fail. In addition, if you use the parameter
 	// InstanceId , you can't use the parameters AssociationName , DocumentVersion ,
-	// MaxErrors , MaxConcurrency , OutputLocation , or ScheduleExpression. To use
-	// these parameters, you must use the Targets  parameter.
+	// MaxErrors , MaxConcurrency , OutputLocation , or ScheduleExpression . To use
+	// these parameters, you must use the Targets parameter.
 	InstanceId *string
 
 	// The name of the SSM document.

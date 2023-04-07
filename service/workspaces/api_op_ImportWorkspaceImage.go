@@ -53,7 +53,7 @@ type ImportWorkspaceImageInput struct {
 	// protocol you want to use for your BYOL Workspace image, either PCoIP, WorkSpaces
 	// Streaming Protocol (WSP), or bring your own protocol (BYOP). To use WSP, specify
 	// a value that ends in _WSP . To use PCoIP, specify a value that does not end in
-	// _WSP . To use BYOP, specify a value that ends in _BYOP. For non-GPU-enabled
+	// _WSP . To use BYOP, specify a value that ends in _BYOP . For non-GPU-enabled
 	// bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR ,
 	// BYOL_REGULAR_WSP , or BYOL_REGULAR_BYOP , depending on the protocol. The
 	// BYOL_REGULAR_BYOP and BYOL_GRAPHICS_G4DN_BYOP values are only supported by

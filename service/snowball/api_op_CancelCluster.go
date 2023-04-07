@@ -11,8 +11,8 @@ import (
 )
 
 // Cancels a cluster job. You can only cancel a cluster job while it's in the
-// AwaitingQuorumstatus. You'll have at least an hour after creating a cluster
-// job to cancel it.
+// AwaitingQuorum status. You'll have at least an hour after creating a cluster job
+// to cancel it.
 func (c *Client) CancelCluster(ctx context.Context, params *CancelClusterInput, optFns ...func(*Options)) (*CancelClusterOutput, error) {
 	if params == nil {
 		params = &CancelClusterInput{}

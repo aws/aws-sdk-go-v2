@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stores a resource policy for the ARN of a Project  or ReportGroup  object.
+// Stores a resource policy for the ARN of a Project or ReportGroup object.
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -35,7 +35,7 @@ type PutResourcePolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// The ARN of the Project  or ReportGroup resource you want to associate with a
+	// The ARN of the Project or ReportGroup resource you want to associate with a
 	// resource policy.
 	//
 	// This member is required.
@@ -46,7 +46,7 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	// The ARN of the Project  or ReportGroup resource that is associated with a
+	// The ARN of the Project or ReportGroup resource that is associated with a
 	// resource policy.
 	ResourceArn *string
 

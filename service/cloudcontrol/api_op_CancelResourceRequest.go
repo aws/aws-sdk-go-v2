@@ -14,7 +14,7 @@ import (
 // Cancels the specified resource operation request. For more information, see
 // Canceling resource operation requests (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel)
 // in the Amazon Web Services Cloud Control API User Guide. Only resource
-// operations requests with a status of PENDING  or IN_PROGRESS  can be canceled.
+// operations requests with a status of PENDING or IN_PROGRESS can be canceled.
 func (c *Client) CancelResourceRequest(ctx context.Context, params *CancelResourceRequestInput, optFns ...func(*Options)) (*CancelResourceRequestOutput, error) {
 	if params == nil {
 		params = &CancelResourceRequestInput{}
@@ -32,8 +32,8 @@ func (c *Client) CancelResourceRequest(ctx context.Context, params *CancelResour
 
 type CancelResourceRequestInput struct {
 
-	// The RequestToken  of the ProgressEvent object returned by the resource
-	// operation request.
+	// The RequestToken of the ProgressEvent object returned by the resource operation
+	// request.
 	//
 	// This member is required.
 	RequestToken *string

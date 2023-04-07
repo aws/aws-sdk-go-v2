@@ -47,9 +47,9 @@ type ListConfigurationsOutput struct {
 	// An array of MSK configurations.
 	Configurations []types.Configuration
 
-	// The paginated results marker. When the result of a ListConfigurations
-	// operation is truncated, the call returns NextToken in the response. To get
-	// another batch of configurations, provide this token in your next request.
+	// The paginated results marker. When the result of a ListConfigurations operation
+	// is truncated, the call returns NextToken in the response. To get another batch
+	// of configurations, provide this token in your next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -133,8 +133,8 @@ type ListConfigurationsPaginatorOptions struct {
 	// results, the response includes a NextToken parameter.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

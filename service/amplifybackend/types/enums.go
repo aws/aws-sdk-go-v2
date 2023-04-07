@@ -34,8 +34,8 @@ const (
 	AuthenticatedElementDelete          AuthenticatedElement = "DELETE"
 )
 
-// Values returns all known values for AuthenticatedElement. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AuthenticatedElement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticatedElement) Values() []AuthenticatedElement {
 	return []AuthenticatedElement{
@@ -129,8 +129,8 @@ const (
 	ModeOpenidConnect          Mode = "OPENID_CONNECT"
 )
 
-// Values returns all known values for Mode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Mode. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Mode) Values() []Mode {
 	return []Mode{
@@ -277,9 +277,9 @@ const (
 	ServiceNameS3 ServiceName = "S3"
 )
 
-// Values returns all known values for ServiceName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServiceName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ServiceName) Values() []ServiceName {
 	return []ServiceName{
 		"S3",

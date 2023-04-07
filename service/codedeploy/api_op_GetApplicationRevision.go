@@ -27,7 +27,7 @@ func (c *Client) GetApplicationRevision(ctx context.Context, params *GetApplicat
 	return out, nil
 }
 
-// Represents the input of a GetApplicationRevision  operation.
+// Represents the input of a GetApplicationRevision operation.
 type GetApplicationRevisionInput struct {
 
 	// The name of the application that corresponds to the revision.
@@ -43,7 +43,7 @@ type GetApplicationRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetApplicationRevision  operation.
+// Represents the output of a GetApplicationRevision operation.
 type GetApplicationRevisionOutput struct {
 
 	// The name of the application that corresponds to the revision.

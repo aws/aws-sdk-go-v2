@@ -13,7 +13,7 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Stops the application from processing input
+// Analytics API V2 Documentation . Stops the application from processing input
 // data. You can stop an application only if it is in the running state. You can
 // use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 // operation to find the application state. After the application is stopped,

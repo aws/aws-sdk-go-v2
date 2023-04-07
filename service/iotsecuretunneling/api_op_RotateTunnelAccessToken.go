@@ -54,8 +54,8 @@ type RotateTunnelAccessTokenInput struct {
 
 type RotateTunnelAccessTokenOutput struct {
 
-	// The client access token that the destination local proxy uses to connect to
-	// IoT Secure Tunneling.
+	// The client access token that the destination local proxy uses to connect to IoT
+	// Secure Tunneling.
 	DestinationAccessToken *string
 
 	// The client access token that the source local proxy uses to connect to IoT

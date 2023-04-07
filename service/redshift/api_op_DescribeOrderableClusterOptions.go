@@ -44,17 +44,17 @@ type DescribeOrderableClusterOptionsInput struct {
 	ClusterVersion *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeOrderableClusterOptions
-	// request exceed the value specified in MaxRecords, Amazon Web Services returns
-	// a value in the Marker field of the response. You can retrieve the next set of
-	// response records by providing the returned marker value in the Marker
-	// parameter and retrying the request.
+	// response records. When the results of a DescribeOrderableClusterOptions request
+	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
+	// records by providing the returned marker value in the Marker parameter and
+	// retrying the request.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next set
-	// of records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -65,7 +65,7 @@ type DescribeOrderableClusterOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the output from the DescribeOrderableClusterOptions  action.
+// Contains the output from the DescribeOrderableClusterOptions action.
 type DescribeOrderableClusterOptionsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -156,15 +156,15 @@ var _ DescribeOrderableClusterOptionsAPIClient = (*Client)(nil)
 // DescribeOrderableClusterOptionsPaginatorOptions is the paginator options for
 // DescribeOrderableClusterOptions
 type DescribeOrderableClusterOptionsPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next set
-	// of records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -36,7 +36,7 @@ type StartDeviceAuthorizationInput struct {
 	ClientId *string
 
 	// A secret string that is generated for the client. This value should come from
-	// the persisted result of the RegisterClient  API operation.
+	// the persisted result of the RegisterClient API operation.
 	//
 	// This member is required.
 	ClientSecret *string
@@ -65,8 +65,7 @@ type StartDeviceAuthorizationOutput struct {
 	// polling for a session.
 	Interval int32
 
-	// A one-time user verification code. This is needed to authorize an in-use
-	// device.
+	// A one-time user verification code. This is needed to authorize an in-use device.
 	UserCode *string
 
 	// The URI of the verification page that takes the userCode to authorize the

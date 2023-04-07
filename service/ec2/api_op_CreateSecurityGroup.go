@@ -27,7 +27,7 @@ import (
 // unrestricted network access to each other. You can add or remove rules from your
 // security groups using AuthorizeSecurityGroupIngress ,
 // AuthorizeSecurityGroupEgress , RevokeSecurityGroupIngress , and
-// RevokeSecurityGroupEgress. For more information about VPC security group
+// RevokeSecurityGroupEgress . For more information about VPC security group
 // limits, see Amazon VPC Limits (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)
 // . We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
 // a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
@@ -57,7 +57,7 @@ type CreateSecurityGroupInput struct {
 	Description *string
 
 	// The name of the security group. Constraints: Up to 255 characters in length.
-	// Cannot start with sg-. Constraints for EC2-Classic: ASCII characters
+	// Cannot start with sg- . Constraints for EC2-Classic: ASCII characters
 	// Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
 	//
 	// This member is required.

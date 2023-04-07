@@ -13,11 +13,17 @@
 // hardware migrations. Glacier is a great storage choice when low storage cost is
 // paramount and your data is rarely retrieved. If your application requires fast
 // or frequent access to your data, consider using Amazon S3. For more information,
-// see Amazon Simple Storage Service (Amazon S3) (http://aws.amazon.com/s3/). You
+// see Amazon Simple Storage Service (Amazon S3) (http://aws.amazon.com/s3/) . You
 // can store any kind of data in any format. There is no maximum limit on the total
 // amount of data you can store in Glacier. If you are a first-time user of
 // Glacier, we recommend that you begin by reading the following sections in the
 // Amazon S3 Glacier Developer Guide:
-//   - What is Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/introduction.html) - This section of the Developer Guide describes the underlying data model, the operations it supports, and the AWS SDKs that you can use to interact with the service.
-//   - Getting Started with Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html) - The Getting Started section walks you through the process of creating a vault, uploading archives, creating jobs to download archives, retrieving the job output, and deleting archives.
+//   - What is Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/introduction.html)
+//   - This section of the Developer Guide describes the underlying data model, the
+//     operations it supports, and the AWS SDKs that you can use to interact with the
+//     service.
+//   - Getting Started with Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html)
+//   - The Getting Started section walks you through the process of creating a vault,
+//     uploading archives, creating jobs to download archives, retrieving the job
+//     output, and deleting archives.
 package glacier

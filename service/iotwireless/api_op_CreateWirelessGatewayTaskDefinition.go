@@ -31,8 +31,8 @@ func (c *Client) CreateWirelessGatewayTaskDefinition(ctx context.Context, params
 type CreateWirelessGatewayTaskDefinitionInput struct {
 
 	// Whether to automatically create tasks using this task definition for all
-	// gateways with the specified current version. If false, the task must me
-	// created by calling CreateWirelessGatewayTask .
+	// gateways with the specified current version. If false , the task must me created
+	// by calling CreateWirelessGatewayTask .
 	//
 	// This member is required.
 	AutoCreateTasks bool

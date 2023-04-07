@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For the specified directory, lists all the certificates registered for a
-// secure LDAP or client certificate authentication.
+// For the specified directory, lists all the certificates registered for a secure
+// LDAP or client certificate authentication.
 func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesInput, optFns ...func(*Options)) (*ListCertificatesOutput, error) {
 	if params == nil {
 		params = &ListCertificatesInput{}
@@ -41,8 +41,8 @@ type ListCertificatesInput struct {
 
 	// A token for requesting another page of certificates if the NextToken response
 	// element indicates that more certificates are available. Use the value of the
-	// returned NextToken  element in your request until the token comes back as null
-	// . Pass null  if this is the first call.
+	// returned NextToken element in your request until the token comes back as null .
+	// Pass null if this is the first call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,8 +50,8 @@ type ListCertificatesInput struct {
 
 type ListCertificatesOutput struct {
 
-	// A list of certificates with basic details including certificate ID,
-	// certificate common name, certificate state.
+	// A list of certificates with basic details including certificate ID, certificate
+	// common name, certificate state.
 	CertificatesInfo []types.CertificateInfo
 
 	// Indicates whether another page of certificates is available when the number of
@@ -140,8 +140,8 @@ type ListCertificatesPaginatorOptions struct {
 	// The number of items that should show up on one page
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

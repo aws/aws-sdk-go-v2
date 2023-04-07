@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the event subscriptions for the assessment template that is
-// specified by the ARN of the assessment template. For more information, see
+// Lists all the event subscriptions for the assessment template that is specified
+// by the ARN of the assessment template. For more information, see
 // SubscribeToEvent and UnsubscribeFromEvent .
 func (c *Client) ListEventSubscriptions(ctx context.Context, params *ListEventSubscriptionsInput, optFns ...func(*Options)) (*ListEventSubscriptionsOutput, error) {
 	if params == nil {
@@ -143,8 +143,8 @@ type ListEventSubscriptionsPaginatorOptions struct {
 	// the response. The default value is 10. The maximum value is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -157,8 +157,7 @@ type ListEventSubscriptionsPaginator struct {
 	firstPage bool
 }
 
-// NewListEventSubscriptionsPaginator returns a new
-// ListEventSubscriptionsPaginator
+// NewListEventSubscriptionsPaginator returns a new ListEventSubscriptionsPaginator
 func NewListEventSubscriptionsPaginator(client ListEventSubscriptionsAPIClient, params *ListEventSubscriptionsInput, optFns ...func(*ListEventSubscriptionsPaginatorOptions)) *ListEventSubscriptionsPaginator {
 	if params == nil {
 		params = &ListEventSubscriptionsInput{}

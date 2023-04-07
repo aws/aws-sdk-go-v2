@@ -7,9 +7,8 @@ import (
 	"time"
 )
 
-// A structure that contains the configuration for canary artifacts, including
-// the encryption-at-rest settings for artifacts that the canary uploads to Amazon
-// S3.
+// A structure that contains the configuration for canary artifacts, including the
+// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
 type ArtifactConfigInput struct {
 
 	// A structure that contains the configuration of the encryption-at-rest settings
@@ -22,9 +21,8 @@ type ArtifactConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains the configuration for canary artifacts, including
-// the encryption-at-rest settings for artifacts that the canary uploads to Amazon
-// S3.
+// A structure that contains the configuration for canary artifacts, including the
+// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
 type ArtifactConfigOutput struct {
 
 	// A structure that contains the configuration of encryption settings for canary
@@ -57,17 +55,16 @@ type BaseScreenshot struct {
 // This structure contains all information about one canary in your account.
 type Canary struct {
 
-	// A structure that contains the configuration for canary artifacts, including
-	// the encryption-at-rest settings for artifacts that the canary uploads to Amazon
-	// S3.
+	// A structure that contains the configuration for canary artifacts, including the
+	// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
 	ArtifactConfig *ArtifactConfigOutput
 
 	// The location in Amazon S3 where Synthetics stores artifacts from the runs of
 	// this canary. Artifacts include the log file, screenshots, and HAR files.
 	ArtifactS3Location *string
 
-	// This structure contains information about the canary's Lambda handler and
-	// where its code is stored by CloudWatch Synthetics.
+	// This structure contains information about the canary's Lambda handler and where
+	// its code is stored by CloudWatch Synthetics.
 	Code *CanaryCodeOutput
 
 	// The ARN of the Lambda function that is used as your canary's engine. For more
@@ -92,13 +89,13 @@ type Canary struct {
 	// A structure that contains information about a canary run.
 	RunConfig *CanaryRunConfigOutput
 
-	// Specifies the runtime version to use for the canary. For more information
-	// about runtime versions, see Canary Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
+	// Specifies the runtime version to use for the canary. For more information about
+	// runtime versions, see Canary Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
 	// .
 	RuntimeVersion *string
 
-	// A structure that contains information about how often the canary is to run,
-	// and when these runs are to stop.
+	// A structure that contains information about how often the canary is to run, and
+	// when these runs are to stop.
 	Schedule *CanaryScheduleOutput
 
 	// A structure that contains information about the canary's status.
@@ -137,18 +134,18 @@ type Canary struct {
 type CanaryCodeInput struct {
 
 	// The entry point to use for the source code when running the canary. For
-	// canaries that use the syn-python-selenium-1.0  runtime or a
-	// syn-nodejs.puppeteer runtime earlier than syn-nodejs.puppeteer-3.4, the
-	// handler must be specified as fileName.handler . For syn-python-selenium-1.1 ,
-	// syn-nodejs.puppeteer-3.4 , and later runtimes, the handler can be specified as
-	// fileName.functionName , or you can specify a folder where canary scripts
-	// reside as folder/fileName.functionName .
+	// canaries that use the syn-python-selenium-1.0 runtime or a syn-nodejs.puppeteer
+	// runtime earlier than syn-nodejs.puppeteer-3.4 , the handler must be specified as
+	// fileName.handler . For syn-python-selenium-1.1 , syn-nodejs.puppeteer-3.4 , and
+	// later runtimes, the handler can be specified as fileName.functionName , or you
+	// can specify a folder where canary scripts reside as
+	// folder/fileName.functionName .
 	//
 	// This member is required.
 	Handler *string
 
 	// If your canary script is located in S3, specify the bucket name here. Do not
-	// include s3://  as the start of the bucket name.
+	// include s3:// as the start of the bucket name.
 	S3Bucket *string
 
 	// The S3 key of your script. For more information, see Working with Amazon S3
@@ -168,8 +165,8 @@ type CanaryCodeInput struct {
 	noSmithyDocumentSerde
 }
 
-// This structure contains information about the canary's Lambda handler and
-// where its code is stored by CloudWatch Synthetics.
+// This structure contains information about the canary's Lambda handler and where
+// its code is stored by CloudWatch Synthetics.
 type CanaryCodeOutput struct {
 
 	// The entry point to use for the source code when running the canary.
@@ -277,9 +274,8 @@ type CanaryRunStatus struct {
 	// If run of the canary failed, this field contains the reason for the error.
 	StateReason *string
 
-	// If this value is CANARY_FAILURE, an exception occurred in the canary code. If
-	// this value is EXECUTION_FAILURE, an exception occurred in CloudWatch
-	// Synthetics.
+	// If this value is CANARY_FAILURE , an exception occurred in the canary code. If
+	// this value is EXECUTION_FAILURE , an exception occurred in CloudWatch Synthetics.
 	StateReasonCode CanaryRunStateReasonCode
 
 	noSmithyDocumentSerde
@@ -301,32 +297,31 @@ type CanaryRunTimeline struct {
 // time when it should stop making runs.
 type CanaryScheduleInput struct {
 
-	// A rate  expression or a cron expression that defines how often the canary is
-	// to run. For a rate expression, The syntax is rate(number unit) . unit can be
-	// minute , minutes , or hour . For example, rate(1 minute) runs the canary once
-	// a minute, rate(10 minutes)  runs it once every 10 minutes, and rate(1 hour)
-	// runs it once every hour. You can specify a frequency between rate(1 minute)
-	// and rate(1 hour) . Specifying rate(0 minute)  or rate(0 hour) is a special
-	// value that causes the canary to run only once when it is started. Use
-	// cron(expression)to specify a cron expression. You can't schedule a canary to
-	// wait for more than a year before running. For information about the syntax for
-	// cron expressions, see Scheduling canary runs using cron (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html)
+	// A rate expression or a cron expression that defines how often the canary is to
+	// run. For a rate expression, The syntax is rate(number unit) . unit can be minute
+	// , minutes , or hour . For example, rate(1 minute) runs the canary once a
+	// minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs
+	// it once every hour. You can specify a frequency between rate(1 minute) and
+	// rate(1 hour) . Specifying rate(0 minute) or rate(0 hour) is a special value
+	// that causes the canary to run only once when it is started. Use cron(expression)
+	// to specify a cron expression. You can't schedule a canary to wait for more than
+	// a year before running. For information about the syntax for cron expressions,
+	// see Scheduling canary runs using cron (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html)
 	// .
 	//
 	// This member is required.
 	Expression *string
 
 	// How long, in seconds, for the canary to continue making regular runs according
-	// to the schedule in the Expression value. If you specify 0, the canary
-	// continues making runs until you stop it. If you omit this field, the default of
-	// 0 is used.
+	// to the schedule in the Expression value. If you specify 0, the canary continues
+	// making runs until you stop it. If you omit this field, the default of 0 is used.
 	DurationInSeconds *int64
 
 	noSmithyDocumentSerde
 }
 
 // How long, in seconds, for the canary to continue making regular runs according
-// to the schedule in the Expression  value.
+// to the schedule in the Expression value.
 type CanaryScheduleOutput struct {
 
 	// How long, in seconds, for the canary to continue making regular runs after it
@@ -334,15 +329,15 @@ type CanaryScheduleOutput struct {
 	// value.
 	DurationInSeconds *int64
 
-	// A rate  expression or a cron expression that defines how often the canary is
-	// to run. For a rate expression, The syntax is rate(number unit) . unit can be
-	// minute , minutes , or hour . For example, rate(1 minute) runs the canary once
-	// a minute, rate(10 minutes)  runs it once every 10 minutes, and rate(1 hour)
-	// runs it once every hour. You can specify a frequency between rate(1 minute)
-	// and rate(1 hour) . Specifying rate(0 minute)  or rate(0 hour) is a special
-	// value that causes the canary to run only once when it is started. Use
-	// cron(expression)to specify a cron expression. For information about the syntax
-	// for cron expressions, see Scheduling canary runs using cron (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html)
+	// A rate expression or a cron expression that defines how often the canary is to
+	// run. For a rate expression, The syntax is rate(number unit) . unit can be minute
+	// , minutes , or hour . For example, rate(1 minute) runs the canary once a
+	// minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs
+	// it once every hour. You can specify a frequency between rate(1 minute) and
+	// rate(1 hour) . Specifying rate(0 minute) or rate(0 hour) is a special value
+	// that causes the canary to run only once when it is started. Use cron(expression)
+	// to specify a cron expression. For information about the syntax for cron
+	// expressions, see Scheduling canary runs using cron (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html)
 	// .
 	Expression *string
 
@@ -447,17 +442,16 @@ type RuntimeVersion struct {
 
 // A structure that contains the configuration of encryption-at-rest settings for
 // canary artifacts that the canary uploads to Amazon S3. For more information, see
-//
 // Encrypting canary artifacts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html)
 type S3EncryptionConfig struct {
 
 	// The encryption method to use for artifacts created by this canary. Specify
-	// SSE_S3to use server-side encryption (SSE) with an Amazon S3-managed key.
+	// SSE_S3 to use server-side encryption (SSE) with an Amazon S3-managed key.
 	// Specify SSE-KMS to use server-side encryption with a customer-managed KMS key.
 	// If you omit this parameter, an Amazon Web Services-managed KMS key is used.
 	EncryptionMode EncryptionMode
 
-	// The ARN of the customer-managed KMS key to use, if you specify SSE-KMS  for
+	// The ARN of the customer-managed KMS key to use, if you specify SSE-KMS for
 	// EncryptionMode
 	KmsKeyArn *string
 
@@ -476,15 +470,15 @@ type VisualReferenceInput struct {
 	// future visual monitoring with this canary. Valid values are nextrun to use the
 	// screenshots from the next run after this update is made, lastrun to use the
 	// screenshots from the most recent run before this update was made, or the value
-	// of Id  in the  CanaryRun (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html)
+	// of Id in the  CanaryRun (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html)
 	// from any past run of this canary.
 	//
 	// This member is required.
 	BaseCanaryRunId *string
 
-	// An array of screenshots that will be used as the baseline for visual
-	// monitoring in future runs of this canary. If there is a screenshot that you
-	// don't want to be used for visual monitoring, remove it from this array.
+	// An array of screenshots that will be used as the baseline for visual monitoring
+	// in future runs of this canary. If there is a screenshot that you don't want to
+	// be used for visual monitoring, remove it from this array.
 	BaseScreenshots []BaseScreenshot
 
 	noSmithyDocumentSerde

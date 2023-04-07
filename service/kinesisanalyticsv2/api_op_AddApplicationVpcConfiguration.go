@@ -15,7 +15,9 @@ import (
 // Applications can use VPCs to store and access resources securely. Note the
 // following about VPC configurations for Kinesis Data Analytics applications:
 //   - VPC configurations are not supported for SQL applications.
-//   - When a VPC is added to a Kinesis Data Analytics application, the application can no longer be accessed from the Internet directly. To enable Internet access to the application, add an Internet gateway to your VPC.
+//   - When a VPC is added to a Kinesis Data Analytics application, the
+//     application can no longer be accessed from the Internet directly. To enable
+//     Internet access to the application, add an Internet gateway to your VPC.
 func (c *Client) AddApplicationVpcConfiguration(ctx context.Context, params *AddApplicationVpcConfigurationInput, optFns ...func(*Options)) (*AddApplicationVpcConfigurationOutput, error) {
 	if params == nil {
 		params = &AddApplicationVpcConfigurationInput{}
@@ -44,18 +46,18 @@ type AddApplicationVpcConfigurationInput struct {
 	VpcConfiguration *types.VpcConfiguration
 
 	// A value you use to implement strong concurrency for application updates. You
-	// must provide the ApplicationVersionID  or the ConditionalToken. You get the
-	// application's current ConditionalToken  using DescribeApplication. For better
-	// concurrency support, use the ConditionalToken  parameter instead of
+	// must provide the ApplicationVersionID or the ConditionalToken . You get the
+	// application's current ConditionalToken using DescribeApplication . For better
+	// concurrency support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId .
 	ConditionalToken *string
 
 	// The version of the application to which you want to add the VPC configuration.
-	// You must provide the CurrentApplicationVersionId  or the ConditionalToken. You
+	// You must provide the CurrentApplicationVersionId or the ConditionalToken . You
 	// can use the DescribeApplication operation to get the current application
 	// version. If the version specified is not the current version, the
-	// ConcurrentModificationExceptionis returned. For better concurrency support,
-	// use the ConditionalToken  parameter instead of CurrentApplicationVersionId .
+	// ConcurrentModificationException is returned. For better concurrency support, use
+	// the ConditionalToken parameter instead of CurrentApplicationVersionId .
 	CurrentApplicationVersionId *int64
 
 	noSmithyDocumentSerde

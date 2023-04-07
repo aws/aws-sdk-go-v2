@@ -39,7 +39,9 @@ type ListAssetRelationshipsInput struct {
 
 	// The type of traversal to use to identify asset relationships. Choose the
 	// following option:
-	//     - PATH_TO_ROOT – Identify the asset's parent assets up to the root asset. The asset that you specify in assetId is the first result in the list of assetRelationshipSummaries , and the root asset is the last result.
+	//   - PATH_TO_ROOT – Identify the asset's parent assets up to the root asset. The
+	//   asset that you specify in assetId is the first result in the list of
+	//   assetRelationshipSummaries , and the root asset is the last result.
 	//
 	// This member is required.
 	TraversalType types.TraversalType
@@ -177,8 +179,8 @@ type ListAssetRelationshipsPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -191,8 +193,7 @@ type ListAssetRelationshipsPaginator struct {
 	firstPage bool
 }
 
-// NewListAssetRelationshipsPaginator returns a new
-// ListAssetRelationshipsPaginator
+// NewListAssetRelationshipsPaginator returns a new ListAssetRelationshipsPaginator
 func NewListAssetRelationshipsPaginator(client ListAssetRelationshipsAPIClient, params *ListAssetRelationshipsInput, optFns ...func(*ListAssetRelationshipsPaginatorOptions)) *ListAssetRelationshipsPaginator {
 	if params == nil {
 		params = &ListAssetRelationshipsInput{}

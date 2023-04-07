@@ -41,11 +41,10 @@ type CreateJobQueueInput struct {
 	// environment runs a specific job. Compute environments must be in the VALID
 	// state before you can associate them with a job queue. You can associate up to
 	// three compute environments with a job queue. All of the compute environments
-	// must be either EC2 ( EC2  or SPOT ) or Fargate ( FARGATE  or FARGATE_SPOT);
-	// EC2 and Fargate compute environments can't be mixed. All compute environments
-	// that are associated with a job queue must share the same architecture. Batch
-	// doesn't support mixing compute environment architecture types in a single job
-	// queue.
+	// must be either EC2 ( EC2 or SPOT ) or Fargate ( FARGATE or FARGATE_SPOT ); EC2
+	// and Fargate compute environments can't be mixed. All compute environments that
+	// are associated with a job queue must share the same architecture. Batch doesn't
+	// support mixing compute environment architecture types in a single job queue.
 	//
 	// This member is required.
 	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
@@ -60,8 +59,8 @@ type CreateJobQueueInput struct {
 	// integer value for the priority parameter) are evaluated first when associated
 	// with the same compute environment. Priority is determined in descending order.
 	// For example, a job queue with a priority value of 10 is given scheduling
-	// preference over a job queue with a priority value of 1. All of the compute
-	// environments must be either EC2 ( EC2  or SPOT ) or Fargate ( FARGATE  or
+	// preference over a job queue with a priority value of 1 . All of the compute
+	// environments must be either EC2 ( EC2 or SPOT ) or Fargate ( FARGATE or
 	// FARGATE_SPOT ); EC2 and Fargate compute environments can't be mixed.
 	//
 	// This member is required.
@@ -76,9 +75,9 @@ type CreateJobQueueInput struct {
 	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy .
 	SchedulingPolicyArn *string
 
-	// The state of the job queue. If the job queue state is ENABLED, it is able to
-	// accept jobs. If the job queue state is DISABLED, new jobs can't be added to
-	// the queue, but jobs already in the queue can finish.
+	// The state of the job queue. If the job queue state is ENABLED , it is able to
+	// accept jobs. If the job queue state is DISABLED , new jobs can't be added to the
+	// queue, but jobs already in the queue can finish.
 	State types.JQState
 
 	// The tags that you apply to the job queue to help you categorize and organize

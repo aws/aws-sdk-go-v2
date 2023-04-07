@@ -95,8 +95,8 @@ const (
 	DeploymentUpdateTypeMajorVersion   DeploymentUpdateType = "MAJOR_VERSION"
 )
 
-// Values returns all known values for DeploymentUpdateType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DeploymentUpdateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentUpdateType) Values() []DeploymentUpdateType {
 	return []DeploymentUpdateType{
@@ -281,8 +281,8 @@ const (
 	RepositorySyncStatusQueued RepositorySyncStatus = "QUEUED"
 )
 
-// Values returns all known values for RepositorySyncStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RepositorySyncStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RepositorySyncStatus) Values() []RepositorySyncStatus {
 	return []RepositorySyncStatus{
@@ -427,9 +427,9 @@ const (
 	SyncTypeServiceSync SyncType = "SERVICE_SYNC"
 )
 
-// Values returns all known values for SyncType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SyncType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (SyncType) Values() []SyncType {
 	return []SyncType{
 		"TEMPLATE_SYNC",

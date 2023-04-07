@@ -34,7 +34,7 @@ type ImportKeyPairInput struct {
 	// This member is required.
 	KeyPairName *string
 
-	// A base64-encoded public key of the ssh-rsa  type.
+	// A base64-encoded public key of the ssh-rsa type.
 	//
 	// This member is required.
 	PublicKeyBase64 *string

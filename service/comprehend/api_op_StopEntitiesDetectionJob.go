@@ -12,13 +12,12 @@ import (
 )
 
 // Stops an entities detection job in progress. If the job state is IN_PROGRESS
-// the job is marked for termination and put into the STOP_REQUESTED state. If
-// the job completes before it can be stopped, it is put into the COMPLETED
-// state; otherwise the job is stopped and put into the STOPPED state. If the job
-// is in the COMPLETED  or FAILED  state when you call the
-// StopDominantLanguageDetectionJoboperation, the operation returns a 400
-// Internal Request Exception. When a job is stopped, any documents already
-// processed are written to the output location.
+// the job is marked for termination and put into the STOP_REQUESTED state. If the
+// job completes before it can be stopped, it is put into the COMPLETED state;
+// otherwise the job is stopped and put into the STOPPED state. If the job is in
+// the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob
+// operation, the operation returns a 400 Internal Request Exception. When a job is
+// stopped, any documents already processed are written to the output location.
 func (c *Client) StopEntitiesDetectionJob(ctx context.Context, params *StopEntitiesDetectionJobInput, optFns ...func(*Options)) (*StopEntitiesDetectionJobOutput, error) {
 	if params == nil {
 		params = &StopEntitiesDetectionJobInput{}
@@ -49,8 +48,8 @@ type StopEntitiesDetectionJobOutput struct {
 	// The identifier of the entities detection job to stop.
 	JobId *string
 
-	// Either STOP_REQUESTED  if the job is currently running, or STOPPED if the job
-	// was previously stopped with the StopEntitiesDetectionJob  operation.
+	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job
+	// was previously stopped with the StopEntitiesDetectionJob operation.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

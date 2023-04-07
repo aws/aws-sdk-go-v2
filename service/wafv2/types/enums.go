@@ -14,9 +14,9 @@ const (
 	ActionValueExcludedAsCount ActionValue = "EXCLUDED_AS_COUNT"
 )
 
-// Values returns all known values for ActionValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ActionValue. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ActionValue) Values() []ActionValue {
 	return []ActionValue{
 		"ALLOW",
@@ -37,10 +37,9 @@ const (
 	BodyParsingFallbackBehaviorEvaluateAsString BodyParsingFallbackBehavior = "EVALUATE_AS_STRING"
 )
 
-// Values returns all known values for BodyParsingFallbackBehavior. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for BodyParsingFallbackBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BodyParsingFallbackBehavior) Values() []BodyParsingFallbackBehavior {
 	return []BodyParsingFallbackBehavior{
 		"MATCH",
@@ -331,9 +330,9 @@ const (
 	CountryCodeXk CountryCode = "XK"
 )
 
-// Values returns all known values for CountryCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CountryCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (CountryCode) Values() []CountryCode {
 	return []CountryCode{
 		"AF",
@@ -871,9 +870,9 @@ const (
 	ParameterExceptionFieldAtpRuleSetResponseInspection   ParameterExceptionField = "ATP_RULE_SET_RESPONSE_INSPECTION"
 )
 
-// Values returns all known values for ParameterExceptionField. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ParameterExceptionField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ParameterExceptionField) Values() []ParameterExceptionField {
 	return []ParameterExceptionField{
 		"WEB_ACL",
@@ -953,9 +952,9 @@ const (
 	PayloadTypeFormEncoded PayloadType = "FORM_ENCODED"
 )
 
-// Values returns all known values for PayloadType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PayloadType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PayloadType) Values() []PayloadType {
 	return []PayloadType{
 		"JSON",
@@ -971,9 +970,9 @@ const (
 	PlatformAndroid Platform = "ANDROID"
 )
 
-// Values returns all known values for Platform. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Platform. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Platform) Values() []Platform {
 	return []Platform{
 		"IOS",
@@ -992,8 +991,8 @@ const (
 	PositionalConstraintContainsWord PositionalConstraint = "CONTAINS_WORD"
 )
 
-// Values returns all known values for PositionalConstraint. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PositionalConstraint. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PositionalConstraint) Values() []PositionalConstraint {
 	return []PositionalConstraint{

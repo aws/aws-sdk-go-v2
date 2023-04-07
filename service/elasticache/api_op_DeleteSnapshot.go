@@ -29,7 +29,7 @@ func (c *Client) DeleteSnapshot(ctx context.Context, params *DeleteSnapshotInput
 	return out, nil
 }
 
-// Represents the input of a DeleteSnapshot  operation.
+// Represents the input of a DeleteSnapshot operation.
 type DeleteSnapshotInput struct {
 
 	// The name of the snapshot to be deleted.

@@ -40,7 +40,7 @@ type UpdateSignalCatalogInput struct {
 	// A list of information about nodes to add to the signal catalog.
 	NodesToAdd []types.Node
 
-	// A list of fullyQualifiedName  of nodes to remove from the signal catalog.
+	// A list of fullyQualifiedName of nodes to remove from the signal catalog.
 	NodesToRemove []string
 
 	// A list of information about nodes to update in the signal catalog.

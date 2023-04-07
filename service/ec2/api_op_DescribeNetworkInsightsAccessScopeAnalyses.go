@@ -49,7 +49,7 @@ type DescribeNetworkInsightsAccessScopeAnalysesInput struct {
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The IDs of the Network Access Scope analyses.
@@ -139,8 +139,8 @@ func (c *Client) addOperationDescribeNetworkInsightsAccessScopeAnalysesMiddlewar
 	return nil
 }
 
-// DescribeNetworkInsightsAccessScopeAnalysesAPIClient is a client that
-// implements the DescribeNetworkInsightsAccessScopeAnalyses operation.
+// DescribeNetworkInsightsAccessScopeAnalysesAPIClient is a client that implements
+// the DescribeNetworkInsightsAccessScopeAnalyses operation.
 type DescribeNetworkInsightsAccessScopeAnalysesAPIClient interface {
 	DescribeNetworkInsightsAccessScopeAnalyses(context.Context, *DescribeNetworkInsightsAccessScopeAnalysesInput, ...func(*Options)) (*DescribeNetworkInsightsAccessScopeAnalysesOutput, error)
 }
@@ -151,11 +151,11 @@ var _ DescribeNetworkInsightsAccessScopeAnalysesAPIClient = (*Client)(nil)
 // options for DescribeNetworkInsightsAccessScopeAnalyses
 type DescribeNetworkInsightsAccessScopeAnalysesPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

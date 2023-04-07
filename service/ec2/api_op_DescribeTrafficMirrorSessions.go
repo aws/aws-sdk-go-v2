@@ -38,19 +38,20 @@ type DescribeTrafficMirrorSessionsInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	//     - description : The Traffic Mirror session description.
-	//     - network-interface-id : The ID of the Traffic Mirror session network interface.
-	//     - owner-id : The ID of the account that owns the Traffic Mirror session.
-	//     - packet-length : The assigned number of packets to mirror.
-	//     - session-number : The assigned session number.
-	//     - traffic-mirror-filter-id : The ID of the Traffic Mirror filter.
-	//     - traffic-mirror-session-id : The ID of the Traffic Mirror session.
-	//     - traffic-mirror-target-id : The ID of the Traffic Mirror target.
-	//     - virtual-network-id : The virtual network ID of the Traffic Mirror session.
+	//   - description : The Traffic Mirror session description.
+	//   - network-interface-id : The ID of the Traffic Mirror session network
+	//   interface.
+	//   - owner-id : The ID of the account that owns the Traffic Mirror session.
+	//   - packet-length : The assigned number of packets to mirror.
+	//   - session-number : The assigned session number.
+	//   - traffic-mirror-filter-id : The ID of the Traffic Mirror filter.
+	//   - traffic-mirror-session-id : The ID of the Traffic Mirror session.
+	//   - traffic-mirror-target-id : The ID of the Traffic Mirror target.
+	//   - virtual-network-id : The virtual network ID of the Traffic Mirror session.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -150,11 +151,11 @@ var _ DescribeTrafficMirrorSessionsAPIClient = (*Client)(nil)
 // DescribeTrafficMirrorSessions
 type DescribeTrafficMirrorSessionsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

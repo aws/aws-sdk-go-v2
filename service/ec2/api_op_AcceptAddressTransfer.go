@@ -42,10 +42,10 @@ type AcceptAddressTransferInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// tag: - The key/value combination of a tag assigned to the resource. Use the
-	// tag key in the filter name and the tag value as the filter value. For example,
-	// to find all resources that have a tag with the key Owner  and the value TeamA,
-	// specify tag:Owner  for the filter name and TeamA  for the filter value.
+	// tag : - The key/value combination of a tag assigned to the resource. Use the tag
+	// key in the filter name and the tag value as the filter value. For example, to
+	// find all resources that have a tag with the key Owner and the value TeamA ,
+	// specify tag:Owner for the filter name and TeamA for the filter value.
 	TagSpecifications []types.TagSpecification
 
 	noSmithyDocumentSerde

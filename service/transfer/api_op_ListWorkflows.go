@@ -33,9 +33,9 @@ type ListWorkflowsInput struct {
 	// Specifies the maximum number of workflows to return.
 	MaxResults *int32
 
-	// ListWorkflows  returns the NextToken parameter in the output. You can then
-	// pass the NextToken parameter in a subsequent command to continue listing
-	// additional workflows.
+	// ListWorkflows returns the NextToken parameter in the output. You can then pass
+	// the NextToken parameter in a subsequent command to continue listing additional
+	// workflows.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,14 +43,14 @@ type ListWorkflowsInput struct {
 
 type ListWorkflowsOutput struct {
 
-	// Returns the Arn , WorkflowId , and Description  for each workflow.
+	// Returns the Arn , WorkflowId , and Description for each workflow.
 	//
 	// This member is required.
 	Workflows []types.ListedWorkflow
 
-	// ListWorkflows  returns the NextToken parameter in the output. You can then
-	// pass the NextToken parameter in a subsequent command to continue listing
-	// additional workflows.
+	// ListWorkflows returns the NextToken parameter in the output. You can then pass
+	// the NextToken parameter in a subsequent command to continue listing additional
+	// workflows.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -131,8 +131,8 @@ type ListWorkflowsPaginatorOptions struct {
 	// Specifies the maximum number of workflows to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

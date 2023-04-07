@@ -126,8 +126,8 @@ type DevEnvironmentSummary struct {
 	// The user-specified alias for the Dev Environment.
 	Alias *string
 
-	// Information about the integrated development environment (IDE) configured for
-	// a Dev Environment.
+	// Information about the integrated development environment (IDE) configured for a
+	// Dev Environment.
 	Ides []Ide
 
 	// The name of the project in the space.
@@ -287,8 +287,8 @@ type Ide struct {
 // (IDE) for a Dev Environment.
 type IdeConfiguration struct {
 
-	// The name of the IDE. Valid values include Cloud9 , IntelliJ , PyCharm , GoLand
-	// , and VSCode .
+	// The name of the IDE. Valid values include Cloud9 , IntelliJ , PyCharm , GoLand ,
+	// and VSCode .
 	Name *string
 
 	// A link to the IDE runtime image. This parameter is not required for VSCode .
@@ -297,12 +297,11 @@ type IdeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a source repository returned in a list of source
-// repositories.
+// Information about a source repository returned in a list of source repositories.
 type ListSourceRepositoriesItem struct {
 
-	// The time the source repository was created, in coordinated universal time
-	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// The time the source repository was created, in coordinated universal time (UTC)
+	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
 	// .
 	//
 	// This member is required.
@@ -366,8 +365,7 @@ type PersistentStorage struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the configuration of persistent storage for a Dev
-// Environment.
+// Information about the configuration of persistent storage for a Dev Environment.
 type PersistentStorageConfiguration struct {
 
 	// The size of the persistent storage in gigabytes (specifically GiB). Valid

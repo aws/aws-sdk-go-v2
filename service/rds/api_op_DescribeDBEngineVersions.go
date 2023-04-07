@@ -32,27 +32,27 @@ type DescribeDBEngineVersionsInput struct {
 
 	// The name of a specific DB parameter group family to return details for.
 	// Constraints:
-	//     - If supplied, must match an existing DBParameterGroupFamily.
+	//   - If supplied, must match an existing DBParameterGroupFamily.
 	DBParameterGroupFamily *string
 
-	// A value that indicates whether only the default version of the specified
-	// engine or engine and major version combination is returned.
+	// A value that indicates whether only the default version of the specified engine
+	// or engine and major version combination is returned.
 	DefaultOnly bool
 
 	// The database engine to return. Valid Values:
-	//     - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
-	//     - aurora-postgresql
-	//     - mariadb
-	//     - mysql
-	//     - oracle-ee
-	//     - oracle-ee-cdb
-	//     - oracle-se2
-	//     - oracle-se2-cdb
-	//     - postgres
-	//     - sqlserver-ee
-	//     - sqlserver-se
-	//     - sqlserver-ex
-	//     - sqlserver-web
+	//   - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
+	//   - aurora-postgresql
+	//   - mariadb
+	//   - mysql
+	//   - oracle-ee
+	//   - oracle-ee-cdb
+	//   - oracle-se2
+	//   - oracle-se2-cdb
+	//   - postgres
+	//   - sqlserver-ee
+	//   - sqlserver-se
+	//   - sqlserver-ex
+	//   - sqlserver-web
 	Engine *string
 
 	// The database engine version to return. Example: 5.1.49
@@ -60,37 +60,45 @@ type DescribeDBEngineVersionsInput struct {
 
 	// A filter that specifies one or more DB engine versions to describe. Supported
 	// filters:
-	//     - db-parameter-group-family - Accepts parameter groups family names. The results list only includes information about the DB engine versions for these parameter group families.
-	//     - engine - Accepts engine names. The results list only includes information about the DB engine versions for these engines.
-	//     - engine-mode - Accepts DB engine modes. The results list only includes information about the DB engine versions for these engine modes. Valid DB engine modes are the following:
-	//         - global
-	//         - multimaster
-	//         - parallelquery
-	//         - provisioned
-	//         - serverless
-	//     - engine-version - Accepts engine versions. The results list only includes information about the DB engine versions for these engine versions.
-	//     - status - Accepts engine version statuses. The results list only includes information about the DB engine versions for these statuses. Valid statuses are the following:
-	//         - available
-	//         - deprecated
+	//   - db-parameter-group-family - Accepts parameter groups family names. The
+	//   results list only includes information about the DB engine versions for these
+	//   parameter group families.
+	//   - engine - Accepts engine names. The results list only includes information
+	//   about the DB engine versions for these engines.
+	//   - engine-mode - Accepts DB engine modes. The results list only includes
+	//   information about the DB engine versions for these engine modes. Valid DB engine
+	//   modes are the following:
+	//   - global
+	//   - multimaster
+	//   - parallelquery
+	//   - provisioned
+	//   - serverless
+	//   - engine-version - Accepts engine versions. The results list only includes
+	//   information about the DB engine versions for these engine versions.
+	//   - status - Accepts engine version statuses. The results list only includes
+	//   information about the DB engine versions for these statuses. Valid statuses are
+	//   the following:
+	//   - available
+	//   - deprecated
 	Filters []types.Filter
 
-	// A value that indicates whether to include engine versions that aren't
-	// available in the list. The default is to list only available engine versions.
+	// A value that indicates whether to include engine versions that aren't available
+	// in the list. The default is to list only available engine versions.
 	IncludeAll *bool
 
 	// A value that indicates whether to list the supported character sets for each
 	// engine version. If this parameter is enabled and the requested engine supports
-	// the CharacterSetName  parameter for CreateDBInstance, the response includes a
+	// the CharacterSetName parameter for CreateDBInstance , the response includes a
 	// list of supported character sets for each engine version. For RDS Custom, the
 	// default is not to list supported character sets. If you set
 	// ListSupportedCharacterSets to true , RDS Custom returns no results.
 	ListSupportedCharacterSets *bool
 
-	// A value that indicates whether to list the supported time zones for each
-	// engine version. If this parameter is enabled and the requested engine supports
-	// the TimeZone  parameter for CreateDBInstance, the response includes a list of
+	// A value that indicates whether to list the supported time zones for each engine
+	// version. If this parameter is enabled and the requested engine supports the
+	// TimeZone parameter for CreateDBInstance , the response includes a list of
 	// supported time zones for each engine version. For RDS Custom, the default is not
-	// to list supported time zones. If you set ListSupportedTimezones  to true, RDS
+	// to list supported time zones. If you set ListSupportedTimezones to true , RDS
 	// Custom returns no results.
 	ListSupportedTimezones *bool
 
@@ -100,8 +108,8 @@ type DescribeDBEngineVersionsInput struct {
 	Marker *string
 
 	// The maximum number of records to include in the response. If more than the
-	// MaxRecordsvalue is available, a pagination token called a marker is included
-	// in the response so you can retrieve the remaining results. Default: 100
+	// MaxRecords value is available, a pagination token called a marker is included in
+	// the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -112,7 +120,7 @@ type DescribeDBEngineVersionsInput struct {
 // action.
 type DescribeDBEngineVersionsOutput struct {
 
-	// A list of DBEngineVersion  elements.
+	// A list of DBEngineVersion elements.
 	DBEngineVersions []types.DBEngineVersion
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -201,13 +209,13 @@ var _ DescribeDBEngineVersionsAPIClient = (*Client)(nil)
 // DescribeDBEngineVersions
 type DescribeDBEngineVersionsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more than the
-	// MaxRecordsvalue is available, a pagination token called a marker is included
-	// in the response so you can retrieve the remaining results. Default: 100
+	// MaxRecords value is available, a pagination token called a marker is included in
+	// the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

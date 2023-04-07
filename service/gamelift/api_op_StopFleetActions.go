@@ -18,11 +18,13 @@ import (
 // activity but retain your scaling policies for use in the future. For
 // multi-location fleets, you can set up fleet-wide auto-scaling, and then opt out
 // of it for certain locations. This operation can be used in the following ways:
-//   - To stop actions on instances in the fleet's home Region, provide a fleet ID and the type of actions to suspend.
-//   - To stop actions on instances in one of the fleet's remote locations, provide a fleet ID, a location name, and the type of actions to suspend.
+//   - To stop actions on instances in the fleet's home Region, provide a fleet ID
+//     and the type of actions to suspend.
+//   - To stop actions on instances in one of the fleet's remote locations,
+//     provide a fleet ID, a location name, and the type of actions to suspend.
 //
-// If successful, GameLift no longer initiates scaling events except in response to
-// manual changes using UpdateFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html)
+// If successful, GameLift no longer initiates scaling events except in response
+// to manual changes using UpdateFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html)
 // . Learn more Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsInput, optFns ...func(*Options)) (*StopFleetActionsOutput, error) {
 	if params == nil {
@@ -52,8 +54,8 @@ type StopFleetActionsInput struct {
 	// This member is required.
 	FleetId *string
 
-	// The fleet location to stop fleet actions for. Specify a location in the form
-	// of an Amazon Web Services Region code, such as us-west-2 .
+	// The fleet location to stop fleet actions for. Specify a location in the form of
+	// an Amazon Web Services Region code, such as us-west-2 .
 	Location *string
 
 	noSmithyDocumentSerde

@@ -225,8 +225,7 @@ type ParameterMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the status of the query, including progress and bytes
-// scanned.
+// Information about the status of the query, including progress and bytes scanned.
 type QueryStatus struct {
 
 	// The amount of data scanned by the query in bytes that you will be charged for.
@@ -291,8 +290,8 @@ type S3ReportLocation struct {
 // Configuration of the schedule of the query.
 type ScheduleConfiguration struct {
 
-	// An expression that denotes when to trigger the scheduled query run. This can
-	// be a cron expression or a rate expression.
+	// An expression that denotes when to trigger the scheduled query run. This can be
+	// a cron expression or a rate expression.
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -416,7 +415,7 @@ type ScheduledQueryRunSummary struct {
 	FailureReason *string
 
 	// InvocationTime for this run. This is the time at which the query is scheduled
-	// to run. Parameter @scheduled_runtime  can be used in the query to get the value.
+	// to run. Parameter @scheduled_runtime can be used in the query to get the value.
 	InvocationTime *time.Time
 
 	// The status of a scheduled query run.
@@ -586,8 +585,8 @@ type Type struct {
 	// Indicates if the column is a row.
 	RowColumnInfo []ColumnInfo
 
-	// Indicates if the column is of type string, integer, Boolean, double,
-	// timestamp, date, time.
+	// Indicates if the column is of type string, integer, Boolean, double, timestamp,
+	// date, time.
 	ScalarType ScalarType
 
 	// Indicates if the column is a timeseries data type.

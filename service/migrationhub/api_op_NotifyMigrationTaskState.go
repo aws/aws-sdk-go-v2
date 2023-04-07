@@ -14,9 +14,11 @@ import (
 
 // Notifies Migration Hub of the current status, progress, or other detail
 // regarding a migration task. This API has the following traits:
-//   - Migration tools will call the NotifyMigrationTaskState API to share the latest progress and status.
+//   - Migration tools will call the NotifyMigrationTaskState API to share the
+//     latest progress and status.
 //   - MigrationTaskName is used for addressing updates to the correct target.
-//   - ProgressUpdateStream is used for access control and to provide a namespace for each migration tool.
+//   - ProgressUpdateStream is used for access control and to provide a namespace
+//     for each migration tool.
 func (c *Client) NotifyMigrationTaskState(ctx context.Context, params *NotifyMigrationTaskStateInput, optFns ...func(*Options)) (*NotifyMigrationTaskStateOutput, error) {
 	if params == nil {
 		params = &NotifyMigrationTaskStateInput{}
@@ -62,8 +64,8 @@ type NotifyMigrationTaskStateInput struct {
 	// This member is required.
 	UpdateDateTime *time.Time
 
-	// Optional boolean flag to indicate whether any effect should take place. Used
-	// to test if the caller has permission to make the call.
+	// Optional boolean flag to indicate whether any effect should take place. Used to
+	// test if the caller has permission to make the call.
 	DryRun bool
 
 	noSmithyDocumentSerde

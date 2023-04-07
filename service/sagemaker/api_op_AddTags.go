@@ -23,14 +23,14 @@ import (
 // launched before you called this API. To make sure that the tags associated with
 // a hyperparameter tuning job are also added to all training jobs that the
 // hyperparameter tuning job launches, add the tags when you first create the
-// tuning job by specifying them in the Tags  parameter of
-// CreateHyperParameterTuningJobTags that you add to a SageMaker Studio Domain or
+// tuning job by specifying them in the Tags parameter of
+// CreateHyperParameterTuningJob Tags that you add to a SageMaker Studio Domain or
 // User Profile by calling this API are also added to any Apps that the Domain or
 // User Profile launches after you call this API, but not to Apps that the Domain
 // or User Profile launched before you called this API. To make sure that the tags
 // associated with a Domain or User Profile are also added to all Apps that the
 // Domain or User Profile launches, add the tags when you first create the Domain
-// or User Profile by specifying them in the Tags  parameter of CreateDomain  or
+// or User Profile by specifying them in the Tags parameter of CreateDomain or
 // CreateUserProfile .
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {

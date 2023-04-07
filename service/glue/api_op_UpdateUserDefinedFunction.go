@@ -34,7 +34,7 @@ type UpdateUserDefinedFunctionInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// A FunctionInput  object that redefines the function in the Data Catalog.
+	// A FunctionInput object that redefines the function in the Data Catalog.
 	//
 	// This member is required.
 	FunctionInput *types.UserDefinedFunctionInput
@@ -44,8 +44,8 @@ type UpdateUserDefinedFunctionInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// The ID of the Data Catalog where the function to be updated is located. If
-	// none is provided, the Amazon Web Services account ID is used by default.
+	// The ID of the Data Catalog where the function to be updated is located. If none
+	// is provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	noSmithyDocumentSerde

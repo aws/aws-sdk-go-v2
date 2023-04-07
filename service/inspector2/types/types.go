@@ -60,8 +60,8 @@ type AccountAggregationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// An object with details the status of an Amazon Web Services account within
-// your Amazon Inspector environment.
+// An object with details the status of an Amazon Web Services account within your
+// Amazon Inspector environment.
 type AccountState struct {
 
 	// The Amazon Web Services account ID.
@@ -69,8 +69,8 @@ type AccountState struct {
 	// This member is required.
 	AccountId *string
 
-	// An object detailing which resources Amazon Inspector is enabled to scan for
-	// the account.
+	// An object detailing which resources Amazon Inspector is enabled to scan for the
+	// account.
 	//
 	// This member is required.
 	ResourceState *ResourceState
@@ -152,8 +152,8 @@ type AggregationRequestMemberFindingTypeAggregation struct {
 
 func (*AggregationRequestMemberFindingTypeAggregation) isAggregationRequest() {}
 
-// An object that contains details about an aggregation request based on
-// container image layers.
+// An object that contains details about an aggregation request based on container
+// image layers.
 type AggregationRequestMemberImageLayerAggregation struct {
 	Value ImageLayerAggregation
 
@@ -180,8 +180,8 @@ type AggregationRequestMemberLambdaLayerAggregation struct {
 
 func (*AggregationRequestMemberLambdaLayerAggregation) isAggregationRequest() {}
 
-// An object that contains details about an aggregation request based on
-// operating system package type.
+// An object that contains details about an aggregation request based on operating
+// system package type.
 type AggregationRequestMemberPackageAggregation struct {
 	Value PackageAggregation
 
@@ -556,15 +556,14 @@ type AwsLambdaFunctionDetails struct {
 	// architecture value is x86_64 .
 	Architectures []Architecture
 
-	// The date and time that a user last updated the configuration, in ISO 8601
-	// format (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// The date and time that a user last updated the configuration, in ISO 8601 format (https://www.iso.org/iso-8601-date-and-time-format.html)
 	LastModifiedAt *time.Time
 
 	// The AWS Lambda function's  layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
 	// . A Lambda function can have up to five layers.
 	Layers []string
 
-	// The type of deployment package. Set to Image  for container image and set Zip
+	// The type of deployment package. Set to Image for container image and set Zip
 	// for .zip file archive.
 	PackageType PackageType
 
@@ -601,8 +600,7 @@ type CoverageFilterCriteria struct {
 	// The Amazon ECR repository name to filter on.
 	EcrRepositoryName []CoverageStringFilter
 
-	// Returns coverage statistics for AWS Lambda functions filtered by function
-	// names.
+	// Returns coverage statistics for AWS Lambda functions filtered by function names.
 	LambdaFunctionName []CoverageStringFilter
 
 	// Returns coverage statistics for AWS Lambda functions filtered by runtime.
@@ -615,7 +613,7 @@ type CoverageFilterCriteria struct {
 	ResourceId []CoverageStringFilter
 
 	// An array of Amazon Web Services resource types to return coverage statistics
-	// for. The values can be AWS_EC2_INSTANCE  or AWS_ECR_REPOSITORY .
+	// for. The values can be AWS_EC2_INSTANCE or AWS_ECR_REPOSITORY .
 	ResourceType []CoverageStringFilter
 
 	// The scan status code to filter on.
@@ -842,7 +840,7 @@ type Ec2InstanceAggregation struct {
 	InstanceTags []MapFilter
 
 	// The operating system types to aggregate findings for. Valid values must be
-	// uppercase and underscore separated, examples are ORACLE_LINUX_7  and
+	// uppercase and underscore separated, examples are ORACLE_LINUX_7 and
 	// ALPINE_LINUX_3_8 .
 	OperatingSystems []StringFilter
 
@@ -906,7 +904,7 @@ type EcrConfiguration struct {
 	// The ECR automated re-scan duration defines how long an ECR image will be
 	// actively scanned by Amazon Inspector. When the number of days since an image was
 	// last pushed exceeds the automated re-scan duration the monitoring state of that
-	// image becomes inactive  and all associated findings are scheduled for closure.
+	// image becomes inactive and all associated findings are scheduled for closure.
 	//
 	// This member is required.
 	RescanDuration EcrRescanDuration
@@ -952,7 +950,7 @@ type EcrRescanDurationState struct {
 	// The ECR automated re-scan duration defines how long an ECR image will be
 	// actively scanned by Amazon Inspector. When the number of days since an image was
 	// last pushed exceeds the automated re-scan duration the monitoring state of that
-	// image becomes inactive  and all associated findings are scheduled for closure.
+	// image becomes inactive and all associated findings are scheduled for closure.
 	RescanDuration EcrRescanDuration
 
 	// The status of changes to the ECR automated re-scan duration.
@@ -994,8 +992,8 @@ type FailedAccount struct {
 	// This member is required.
 	ErrorMessage *string
 
-	// An object detailing which resources Amazon Inspector is enabled to scan for
-	// the account.
+	// An object detailing which resources Amazon Inspector is enabled to scan for the
+	// account.
 	ResourceStatus *ResourceStatus
 
 	// The status of Amazon Inspector for the account.
@@ -1318,8 +1316,7 @@ type FreeTrialAccountInfo struct {
 // an account.
 type FreeTrialInfo struct {
 
-	// The date and time that the Amazon Inspector free trail ends for a given
-	// account.
+	// The date and time that the Amazon Inspector free trail ends for a given account.
 	//
 	// This member is required.
 	End *time.Time
@@ -1389,8 +1386,8 @@ type ImageLayerAggregation struct {
 // A response that contains the results of a finding aggregation by image layer.
 type ImageLayerAggregationResponse struct {
 
-	// The ID of the Amazon Web Services account that owns the container image
-	// hosting the layer image.
+	// The ID of the Amazon Web Services account that owns the container image hosting
+	// the layer image.
 	//
 	// This member is required.
 	AccountId *string
@@ -1893,8 +1890,7 @@ type ResourceDetails struct {
 	// in the finding.
 	AwsEcrContainerImage *AwsEcrContainerImageDetails
 
-	// A summary of the information about an AWS Lambda function affected by a
-	// finding.
+	// A summary of the information about an AWS Lambda function affected by a finding.
 	AwsLambdaFunction *AwsLambdaFunctionDetails
 
 	noSmithyDocumentSerde

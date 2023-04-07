@@ -17,8 +17,8 @@ import (
 // cache has the DELETING status. You can check the cache deletion status by
 // calling the DescribeFileCaches (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html)
 // operation, which returns a list of caches in your account. If you pass the cache
-// ID for a deleted cache, the DescribeFileCaches  operation returns a
-// FileCacheNotFounderror. The data in a deleted cache is also deleted and can't
+// ID for a deleted cache, the DescribeFileCaches operation returns a
+// FileCacheNotFound error. The data in a deleted cache is also deleted and can't
 // be recovered by any means.
 func (c *Client) DeleteFileCache(ctx context.Context, params *DeleteFileCacheInput, optFns ...func(*Options)) (*DeleteFileCacheOutput, error) {
 	if params == nil {

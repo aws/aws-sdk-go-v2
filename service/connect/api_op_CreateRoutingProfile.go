@@ -45,8 +45,8 @@ type CreateRoutingProfileInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The channels that agents can handle in the Contact Control Panel (CCP) for
-	// this routing profile.
+	// The channels that agents can handle in the Contact Control Panel (CCP) for this
+	// routing profile.
 	//
 	// This member is required.
 	MediaConcurrencies []types.MediaConcurrency

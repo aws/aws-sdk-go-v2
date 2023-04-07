@@ -29,7 +29,7 @@ func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, 
 	return out, nil
 }
 
-// Container for request parameters to the CreatePackage  operation.
+// Container for request parameters to the CreatePackage operation.
 type CreatePackageInput struct {
 
 	// Unique name for the package.
@@ -53,7 +53,7 @@ type CreatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by the CreatePackage  operation.
+// Container for the response returned by the CreatePackage operation.
 type CreatePackageOutput struct {
 
 	// Basic information about an OpenSearch Service package.

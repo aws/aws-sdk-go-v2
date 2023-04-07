@@ -76,19 +76,19 @@ type UpdatePricingRuleOutput struct {
 	// The new name of the pricing rule. The name must be unique to each pricing rule.
 	Name *string
 
-	// Operation refers to the specific Amazon Web Services covered by this line
-	// item. This describes the specific usage of the line item. If the Scope
-	// attribute is set to SKU , this attribute indicates which operation the
-	// PricingRule is modifying. For example, a value of RunInstances:0202 indicates
-	// the operation of running an Amazon EC2 instance.
+	// Operation refers to the specific Amazon Web Services covered by this line item.
+	// This describes the specific usage of the line item. If the Scope attribute is
+	// set to SKU , this attribute indicates which operation the PricingRule is
+	// modifying. For example, a value of RunInstances:0202 indicates the operation of
+	// running an Amazon EC2 instance.
 	Operation *string
 
 	// The scope of pricing rule that indicates if it's globally applicable, or it's
 	// service-specific.
 	Scope types.PricingRuleScope
 
-	// If the Scope  attribute is set to SERVICE, the attribute indicates which
-	// service the PricingRule  is applicable for.
+	// If the Scope attribute is set to SERVICE , the attribute indicates which service
+	// the PricingRule is applicable for.
 	Service *string
 
 	// The set of tiering configurations for the pricing rule.
@@ -98,10 +98,10 @@ type UpdatePricingRuleOutput struct {
 	Type types.PricingRuleType
 
 	// Usage type is the unit that each service uses to measure the usage of a
-	// specific type of resource. If the Scope  attribute is set to SKU, this
-	// attribute indicates which usage type the PricingRule is modifying. For
-	// example, USW2-BoxUsage:m2.2xlarge  describes an M2 High Memory Double Extra
-	// Large instance in the US West (Oregon) Region.
+	// specific type of resource. If the Scope attribute is set to SKU , this attribute
+	// indicates which usage type the PricingRule is modifying. For example,
+	// USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large
+	// instance in the US West (Oregon) Region.
 	UsageType *string
 
 	// Metadata pertaining to the operation's result.

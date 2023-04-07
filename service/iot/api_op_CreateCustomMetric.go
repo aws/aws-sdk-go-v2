@@ -40,16 +40,16 @@ type CreateCustomMetricInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The name of the custom metric. This will be used in the metric report
-	// submitted from the device/thing. The name can't begin with aws:. You can't
-	// change the name after you define it.
+	// The name of the custom metric. This will be used in the metric report submitted
+	// from the device/thing. The name can't begin with aws: . You can't change the
+	// name after you define it.
 	//
 	// This member is required.
 	MetricName *string
 
-	// The type of the custom metric. The type number only takes a single metric
-	// value as an input, but when you submit the metrics value in the DeviceMetrics
-	// report, you must pass it as an array with a single value.
+	// The type of the custom metric. The type number only takes a single metric value
+	// as an input, but when you submit the metrics value in the DeviceMetrics report,
+	// you must pass it as an array with a single value.
 	//
 	// This member is required.
 	MetricType types.CustomMetricType

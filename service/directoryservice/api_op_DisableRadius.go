@@ -27,7 +27,7 @@ func (c *Client) DisableRadius(ctx context.Context, params *DisableRadiusInput, 
 	return out, nil
 }
 
-// Contains the inputs for the DisableRadius  operation.
+// Contains the inputs for the DisableRadius operation.
 type DisableRadiusInput struct {
 
 	// The identifier of the directory for which to disable MFA.
@@ -38,7 +38,7 @@ type DisableRadiusInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the DisableRadius  operation.
+// Contains the results of the DisableRadius operation.
 type DisableRadiusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

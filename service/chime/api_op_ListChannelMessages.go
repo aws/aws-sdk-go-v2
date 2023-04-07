@@ -42,7 +42,7 @@ type ListChannelMessagesInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The AppInstanceUserArn  of the user that makes the API call.
+	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
 
 	// The maximum number of messages that you want returned.
@@ -190,8 +190,8 @@ type ListChannelMessagesPaginatorOptions struct {
 	// The maximum number of messages that you want returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

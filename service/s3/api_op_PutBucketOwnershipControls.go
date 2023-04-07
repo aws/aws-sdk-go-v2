@@ -14,9 +14,8 @@ import (
 )
 
 // Creates or modifies OwnershipControls for an Amazon S3 bucket. To use this
-// operation, you must have the s3:PutBucketOwnershipControls permission. For
-// more information about Amazon S3 permissions, see Specifying permissions in a
-// policy (https://docs.aws.amazon.com/AmazonS3/latest/user-guide/using-with-s3-actions.html)
+// operation, you must have the s3:PutBucketOwnershipControls permission. For more
+// information about Amazon S3 permissions, see Specifying permissions in a policy (https://docs.aws.amazon.com/AmazonS3/latest/user-guide/using-with-s3-actions.html)
 // . For information about Amazon S3 Object Ownership, see Using object ownership (https://docs.aws.amazon.com/AmazonS3/latest/user-guide/about-object-ownership.html)
 // . The following operations are related to PutBucketOwnershipControls :
 //   - GetBucketOwnershipControls
@@ -38,7 +37,7 @@ func (c *Client) PutBucketOwnershipControls(ctx context.Context, params *PutBuck
 
 type PutBucketOwnershipControlsInput struct {
 
-	// The name of the Amazon S3 bucket whose OwnershipControls  you want to set.
+	// The name of the Amazon S3 bucket whose OwnershipControls you want to set.
 	//
 	// This member is required.
 	Bucket *string
@@ -49,9 +48,9 @@ type PutBucketOwnershipControlsInput struct {
 	// This member is required.
 	OwnershipControls *types.OwnershipControls
 
-	// The MD5 hash of the OwnershipControls request body. For requests made using
-	// the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services
-	// SDKs, this field is calculated automatically.
+	// The MD5 hash of the OwnershipControls request body. For requests made using the
+	// Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs,
+	// this field is calculated automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

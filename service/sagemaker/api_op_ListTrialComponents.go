@@ -44,7 +44,7 @@ type ListTrialComponentsInput struct {
 	CreatedBefore *time.Time
 
 	// A filter that returns only components that are part of the specified
-	// experiment. If you specify ExperimentName , you can't filter by SourceArn  or
+	// experiment. If you specify ExperimentName , you can't filter by SourceArn or
 	// TrialName .
 	ExperimentName *string
 
@@ -68,7 +68,7 @@ type ListTrialComponentsInput struct {
 	SourceArn *string
 
 	// A filter that returns only components that are part of the specified trial. If
-	// you specify TrialName , you can't filter by ExperimentName  or SourceArn .
+	// you specify TrialName , you can't filter by ExperimentName or SourceArn .
 	TrialName *string
 
 	noSmithyDocumentSerde
@@ -163,8 +163,8 @@ type ListTrialComponentsPaginatorOptions struct {
 	// is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

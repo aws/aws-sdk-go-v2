@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of built-in intents provided by Amazon Lex that you can use in
-// your bot. To use a built-in intent as a the base for your own intent, include
-// the built-in intent signature in the parentIntentSignature parameter when you
-// call the CreateIntent  operation. For more information, see CreateIntent (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html)
+// Gets a list of built-in intents provided by Amazon Lex that you can use in your
+// bot. To use a built-in intent as a the base for your own intent, include the
+// built-in intent signature in the parentIntentSignature parameter when you call
+// the CreateIntent operation. For more information, see CreateIntent (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html)
 // .
 func (c *Client) ListBuiltInIntents(ctx context.Context, params *ListBuiltInIntentsInput, optFns ...func(*Options)) (*ListBuiltInIntentsOutput, error) {
 	if params == nil {
@@ -72,8 +72,8 @@ type ListBuiltInIntentsOutput struct {
 	LocaleId *string
 
 	// A token that indicates whether there are more results to return in a response
-	// to the ListBuiltInIntents  operation. If the nextToken field is present, you
-	// send the contents as the nextToken  parameter of a ListBotAliases operation
+	// to the ListBuiltInIntents operation. If the nextToken field is present, you
+	// send the contents as the nextToken parameter of a ListBotAliases operation
 	// request to get the next page of results.
 	NextToken *string
 
@@ -162,8 +162,8 @@ type ListBuiltInIntentsPaginatorOptions struct {
 	// results are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

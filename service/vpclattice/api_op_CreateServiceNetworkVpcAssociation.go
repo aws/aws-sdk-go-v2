@@ -15,8 +15,7 @@ import (
 // Associates a VPC with a service network. When you associate a VPC with the
 // service network, it enables all the resources within that VPC to be clients and
 // communicate with other services in the service network. For more information,
-// see Manage VPC associations
-// (https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations)
+// see Manage VPC associations (https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations)
 // in the Amazon VPC Lattice User Guide. You can't use this operation if there is a
 // disassociation in progress. If the association fails, retry by deleting the
 // association and recreating it. As a result of this operation, the association
@@ -59,12 +58,11 @@ type CreateServiceNetworkVpcAssociationInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
-	// The IDs of the security groups. Security groups aren't added by default. You can
-	// add a security group to apply network level controls to control which resources
-	// in a VPC are allowed to access the service network and its services. For more
-	// information, see Control traffic to resources using security groups
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in
-	// the Amazon VPC User Guide.
+	// The IDs of the security groups. Security groups aren't added by default. You
+	// can add a security group to apply network level controls to control which
+	// resources in a VPC are allowed to access the service network and its services.
+	// For more information, see Control traffic to resources using security groups (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
+	// in the Amazon VPC User Guide.
 	SecurityGroupIds []string
 
 	// The tags for the association.

@@ -11,8 +11,8 @@ import (
 )
 
 // Enables the integration of an Amazon Web Services service (the service that is
-// specified by ServicePrincipal) with Organizations. When you enable
-// integration, you allow the specified service to create a service-linked role (https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)
+// specified by ServicePrincipal ) with Organizations. When you enable integration,
+// you allow the specified service to create a service-linked role (https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)
 // in all the accounts in your organization. This allows the service to perform
 // operations on your behalf in your organization and its accounts. We recommend
 // that you enable integration between Organizations and the specified Amazon Web

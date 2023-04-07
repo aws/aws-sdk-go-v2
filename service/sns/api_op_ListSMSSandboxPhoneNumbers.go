@@ -42,7 +42,7 @@ type ListSMSSandboxPhoneNumbersInput struct {
 	// The maximum number of phone numbers to return.
 	MaxResults *int32
 
-	// Token that the previous ListSMSSandboxPhoneNumbersInput  request returns.
+	// Token that the previous ListSMSSandboxPhoneNumbersInput request returns.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -55,9 +55,8 @@ type ListSMSSandboxPhoneNumbersOutput struct {
 	// This member is required.
 	PhoneNumbers []types.SMSSandboxPhoneNumber
 
-	// A NextToken  string is returned when you call the
-	// ListSMSSandboxPhoneNumbersInputoperation if additional pages of records are
-	// available.
+	// A NextToken string is returned when you call the ListSMSSandboxPhoneNumbersInput
+	// operation if additional pages of records are available.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -140,8 +139,8 @@ type ListSMSSandboxPhoneNumbersPaginatorOptions struct {
 	// The maximum number of phone numbers to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

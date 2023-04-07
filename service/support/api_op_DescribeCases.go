@@ -13,17 +13,24 @@ import (
 )
 
 // Returns a list of cases that you specify by passing one or more case IDs. You
-// can use the afterTime  and beforeTime parameters to filter the cases by date.
-// You can set values for the includeResolvedCases  and includeCommunications
+// can use the afterTime and beforeTime parameters to filter the cases by date.
+// You can set values for the includeResolvedCases and includeCommunications
 // parameters to specify how much information to return. The response returns the
 // following in JSON format:
-//   - One or more CaseDetails (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html) data types.
-//   - One or more nextToken values, which specify where to paginate the returned records represented by the CaseDetails objects.
+//   - One or more CaseDetails (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html)
+//     data types.
+//   - One or more nextToken values, which specify where to paginate the returned
+//     records represented by the CaseDetails objects.
 //
 // Case data is available for 12 months after creation. If a case was created more
 // than 12 months ago, a request might return an error.
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support API.
-//   - If you call the Amazon Web Services Support API from an account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the SubscriptionRequiredException error message appears. For information about changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/) .
+//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
+//     use the Amazon Web Services Support API.
+//   - If you call the Amazon Web Services Support API from an account that
+//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     SubscriptionRequiredException error message appears. For information about
+//     changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/)
+//     .
 func (c *Client) DescribeCases(ctx context.Context, params *DescribeCasesInput, optFns ...func(*Options)) (*DescribeCasesOutput, error) {
 	if params == nil {
 		params = &DescribeCasesInput{}
@@ -49,8 +56,8 @@ type DescribeCasesInput struct {
 	// communications are available for 12 months after creation.
 	BeforeTime *string
 
-	// A list of ID numbers of the support cases you want returned. The maximum
-	// number of cases is 100.
+	// A list of ID numbers of the support cases you want returned. The maximum number
+	// of cases is 100.
 	CaseIdList []string
 
 	// The ID displayed for a case in the Amazon Web Services Support Center user
@@ -81,7 +88,7 @@ type DescribeCasesInput struct {
 }
 
 // Returns an array of CaseDetails (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html)
-// objects and a nextToken  that defines a point for pagination in the result set.
+// objects and a nextToken that defines a point for pagination in the result set.
 type DescribeCasesOutput struct {
 
 	// The details for the cases that match the request.
@@ -168,8 +175,8 @@ type DescribeCasesPaginatorOptions struct {
 	// The maximum number of results to return before paginating.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -21,20 +21,22 @@ import (
 // access to other people. The Permissions request element specifies the kind of
 // access the grantee has to the logs. If the target bucket for log delivery uses
 // the bucket owner enforced setting for S3 Object Ownership, you can't use the
-// Granteerequest element to grant access to others. Permissions can only be
-// granted using policies. For more information, see Permissions for server
-// access log delivery (https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general)
+// Grantee request element to grant access to others. Permissions can only be
+// granted using policies. For more information, see Permissions for server access
+// log delivery (https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general)
 // in the Amazon S3 User Guide. Grantee Values You can specify the person (grantee)
 // to whom you're assigning access rights (using request elements) in the following
 // ways:
-//   - By the person's ID: <>ID<><>GranteesEmail<> DisplayName is optional and ignored in the request.
-//   - By Email address: <>Grantees@email.com<> The grantee is resolved to the CanonicalUser and, in a response to a GET Object acl request, appears as the CanonicalUser.
+//   - By the person's ID: <>ID<><>GranteesEmail<> DisplayName is optional and
+//     ignored in the request.
+//   - By Email address: <>Grantees@email.com<> The grantee is resolved to the
+//     CanonicalUser and, in a response to a GET Object acl request, appears as the
+//     CanonicalUser.
 //   - By URI: <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
 //
-// To
-// enable logging, you use LoggingEnabled and its children request elements. To
-// disable logging, you use an empty BucketLoggingStatus request element: For
-// more information about server access logging, see Server Access Logging (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html)
+// To enable logging, you use LoggingEnabled and its children request elements. To
+// disable logging, you use an empty BucketLoggingStatus request element: For more
+// information about server access logging, see Server Access Logging (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html)
 // in the Amazon S3 User Guide. For more information about creating a bucket, see
 // CreateBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 // . For more information about returning the logging status of a bucket, see
@@ -78,7 +80,7 @@ type PutBucketLoggingInput struct {
 	// HTTP status code 400 Bad Request . For more information, see Checking object
 	// integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide. If you provide an individual checksum, Amazon S3
-	// ignores any provided ChecksumAlgorithm  parameter.
+	// ignores any provided ChecksumAlgorithm parameter.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	// The MD5 hash of the PutBucketLogging request body. For requests made using the
@@ -208,9 +210,9 @@ func addPutBucketLoggingInputChecksumMiddlewares(stack *middleware.Stack, option
 	})
 }
 
-// getPutBucketLoggingBucketMember returns a pointer to string denoting a
-// provided bucket member valueand a boolean indicating if the input has a modeled
-// bucket name,
+// getPutBucketLoggingBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
 func getPutBucketLoggingBucketMember(input interface{}) (*string, bool) {
 	in := input.(*PutBucketLoggingInput)
 	if in.Bucket == nil {

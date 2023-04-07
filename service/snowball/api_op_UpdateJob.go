@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// While a job's JobState  value is New, you can update some of the information
+// While a job's JobState value is New , you can update some of the information
 // associated with a job. Once the job changes to a different job state, usually
 // within 60 minutes of the job being created, this action is no longer available.
 func (c *Client) UpdateJob(ctx context.Context, params *UpdateJobInput, optFns ...func(*Options)) (*UpdateJobOutput, error) {
@@ -37,17 +37,17 @@ type UpdateJobInput struct {
 	// This member is required.
 	JobId *string
 
-	// The ID of the updated Address  object.
+	// The ID of the updated Address object.
 	AddressId *string
 
-	// The updated description of this job's JobMetadata  object.
+	// The updated description of this job's JobMetadata object.
 	Description *string
 
 	// The updated ID for the forwarding address for a job. This field is not
 	// supported in most regions.
 	ForwardingAddressId *string
 
-	// The new or updated Notification  object.
+	// The new or updated Notification object.
 	Notification *types.Notification
 
 	// Specifies the service or services on the Snow Family device that your
@@ -56,7 +56,7 @@ type UpdateJobInput struct {
 	// Services Storage Gateway service Tape Gateway type.
 	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
 
-	// The updated JobResource  object, or the updated JobResource  object.
+	// The updated JobResource object, or the updated JobResource object.
 	Resources *types.JobResource
 
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
@@ -64,11 +64,11 @@ type UpdateJobInput struct {
 	// Identity and Access Management (IAM) API action.
 	RoleARN *string
 
-	// The updated shipping option value of this job's ShippingDetails  object.
+	// The updated shipping option value of this job's ShippingDetails object.
 	ShippingOption types.ShippingOption
 
-	// The updated SnowballCapacityPreference  of this job's JobMetadata object. The
-	// 50 TB Snowballs are only available in the US regions. For more information, see
+	// The updated SnowballCapacityPreference of this job's JobMetadata object. The 50
+	// TB Snowballs are only available in the US regions. For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"

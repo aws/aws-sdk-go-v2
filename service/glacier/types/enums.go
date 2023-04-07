@@ -136,9 +136,9 @@ const (
 	QuoteFieldsAsNeeded QuoteFields = "ASNEEDED"
 )
 
-// Values returns all known values for QuoteFields. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for QuoteFields. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (QuoteFields) Values() []QuoteFields {
 	return []QuoteFields{
 		"ALWAYS",
@@ -195,8 +195,8 @@ const (
 	TypeGroup                 Type = "Group"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a theme. A theme is set of configuration options for color and layout.
-// Themes apply to analyses and dashboards. For more information, see Using
-// Themes in Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html)
+// Themes apply to analyses and dashboards. For more information, see Using Themes
+// in Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html)
 // in the Amazon QuickSight User Guide.
 func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optFns ...func(*Options)) (*CreateThemeOutput, error) {
 	if params == nil {
@@ -32,15 +32,14 @@ func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optF
 
 type CreateThemeInput struct {
 
-	// The ID of the Amazon Web Services account where you want to store the new
-	// theme.
+	// The ID of the Amazon Web Services account where you want to store the new theme.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// The ID of the theme that a custom theme will inherit from. All themes inherit
 	// from one of the starting themes defined by Amazon QuickSight. For a list of the
-	// starting themes, use ListThemes  or choose Themes from within an analysis.
+	// starting themes, use ListThemes or choose Themes from within an analysis.
 	//
 	// This member is required.
 	BaseThemeId *string
@@ -69,8 +68,8 @@ type CreateThemeInput struct {
 	Tags []types.Tag
 
 	// A description of the first version of the theme that you're creating. Every
-	// time UpdateTheme is called, a new version is created. Each version of the
-	// theme has a description of the version in the VersionDescription  field.
+	// time UpdateTheme is called, a new version is created. Each version of the theme
+	// has a description of the version in the VersionDescription field.
 	VersionDescription *string
 
 	noSmithyDocumentSerde

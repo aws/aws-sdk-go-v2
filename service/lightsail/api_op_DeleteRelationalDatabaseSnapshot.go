@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a database snapshot in Amazon Lightsail. The delete relational
-// database snapshotoperation supports tag-based access control via resource tags
-// applied to the resource identified by relationalDatabaseName. For more
-// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// Deletes a database snapshot in Amazon Lightsail. The delete relational database
+// snapshot operation supports tag-based access control via resource tags applied
+// to the resource identified by relationalDatabaseName. For more information, see
+// the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
 // .
 func (c *Client) DeleteRelationalDatabaseSnapshot(ctx context.Context, params *DeleteRelationalDatabaseSnapshotInput, optFns ...func(*Options)) (*DeleteRelationalDatabaseSnapshotOutput, error) {
 	if params == nil {

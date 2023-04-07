@@ -85,9 +85,9 @@ const (
 	DatasetTypeTest  DatasetType = "TEST"
 )
 
-// Values returns all known values for DatasetType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DatasetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DatasetType) Values() []DatasetType {
 	return []DatasetType{
 		"TRAIN",
@@ -300,9 +300,9 @@ const (
 	FlywheelIterationStatusStopped       FlywheelIterationStatus = "STOPPED"
 )
 
-// Values returns all known values for FlywheelIterationStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FlywheelIterationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FlywheelIterationStatus) Values() []FlywheelIterationStatus {
 	return []FlywheelIterationStatus{
 		"TRAINING",
@@ -346,9 +346,9 @@ const (
 	InputFormatOneDocPerLine InputFormat = "ONE_DOC_PER_LINE"
 )
 
-// Values returns all known values for InputFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InputFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (InputFormat) Values() []InputFormat {
 	return []InputFormat{
 		"ONE_DOC_PER_FILE",
@@ -385,8 +385,8 @@ const (
 	InvalidRequestReasonInvalidDocument InvalidRequestReason = "INVALID_DOCUMENT"
 )
 
-// Values returns all known values for InvalidRequestReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InvalidRequestReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InvalidRequestReason) Values() []InvalidRequestReason {
 	return []InvalidRequestReason{
@@ -472,9 +472,9 @@ const (
 	ModelStatusTrainedWithWarning ModelStatus = "TRAINED_WITH_WARNING"
 )
 
-// Values returns all known values for ModelStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModelStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ModelStatus) Values() []ModelStatus {
 	return []ModelStatus{
 		"SUBMITTED",
@@ -810,10 +810,9 @@ const (
 	TargetedSentimentEntityTypeOther          TargetedSentimentEntityType = "OTHER"
 )
 
-// Values returns all known values for TargetedSentimentEntityType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for TargetedSentimentEntityType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetedSentimentEntityType) Values() []TargetedSentimentEntityType {
 	return []TargetedSentimentEntityType{
 		"PERSON",

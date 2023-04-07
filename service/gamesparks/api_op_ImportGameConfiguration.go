@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Imports a game configuration. This operation replaces the current
-// configuration of the game with the provided input. This is not a reversible
-// operation. If you want to preserve the previous configuration, use
-// CreateSnapshot to make a new snapshot before importing.
+// Imports a game configuration. This operation replaces the current configuration
+// of the game with the provided input. This is not a reversible operation. If you
+// want to preserve the previous configuration, use CreateSnapshot to make a new
+// snapshot before importing.
 func (c *Client) ImportGameConfiguration(ctx context.Context, params *ImportGameConfigurationInput, optFns ...func(*Options)) (*ImportGameConfigurationOutput, error) {
 	if params == nil {
 		params = &ImportGameConfigurationInput{}

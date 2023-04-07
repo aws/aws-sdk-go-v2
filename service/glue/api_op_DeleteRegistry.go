@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete the entire registry including schema and all of its versions. To get
-// the status of the delete operation, you can call the GetRegistry API after the
+// Delete the entire registry including schema and all of its versions. To get the
+// status of the delete operation, you can call the GetRegistry API after the
 // asynchronous call. Deleting a registry will deactivate all online operations for
 // the registry such as the UpdateRegistry , CreateSchema , UpdateSchema , and
 // RegisterSchemaVersion APIs.

@@ -39,9 +39,9 @@ type CreateConfigurationSetInput struct {
 	// This member is required.
 	ConfigurationSetName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. If you don't specify a client token, a randomly generated token
-	// is used for the request to ensure idempotency.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don't specify a client token, a randomly generated token is
+	// used for the request to ensure idempotency.
 	ClientToken *string
 
 	// An array of key and value pair tags that's associated with the new

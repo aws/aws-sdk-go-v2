@@ -47,7 +47,7 @@ type GetParameterHistoryInput struct {
 	NextToken *string
 
 	// Return decrypted values for secure string parameters. This flag is ignored for
-	// String and StringList  parameter types.
+	// String and StringList parameter types.
 	WithDecryption *bool
 
 	noSmithyDocumentSerde
@@ -146,8 +146,8 @@ type GetParameterHistoryPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -35,7 +35,7 @@ type DeleteBlueGreenDeploymentInput struct {
 
 	// The blue/green deployment identifier of the deployment to be deleted. This
 	// parameter isn't case-sensitive. Constraints:
-	//     - Must match an existing blue/green deployment identifier.
+	//   - Must match an existing blue/green deployment identifier.
 	//
 	// This member is required.
 	BlueGreenDeploymentIdentifier *string

@@ -48,7 +48,7 @@ type DescribeCostCategoryDefinitionInput struct {
 type DescribeCostCategoryDefinitionOutput struct {
 
 	// The structure of Cost Categories. This includes detailed metadata and the set
-	// of rules for the CostCategory  object.
+	// of rules for the CostCategory object.
 	CostCategory *types.CostCategory
 
 	// Metadata pertaining to the operation's result.

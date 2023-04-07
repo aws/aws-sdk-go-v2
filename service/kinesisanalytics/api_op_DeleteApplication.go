@@ -14,11 +14,10 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Deletes the specified application. Amazon
+// Analytics API V2 Documentation . Deletes the specified application. Amazon
 // Kinesis Analytics halts application execution and deletes the application,
 // including any application artifacts (such as in-application streams, reference
 // table, and application code). This operation requires permissions to perform the
-//
 // kinesisanalytics:DeleteApplication action.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
@@ -42,7 +41,7 @@ type DeleteApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// You can use the DescribeApplication  operation to get this value.
+	// You can use the DescribeApplication operation to get this value.
 	//
 	// This member is required.
 	CreateTimestamp *time.Time

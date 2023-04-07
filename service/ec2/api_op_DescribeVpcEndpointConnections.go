@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the VPC endpoint connections to your VPC endpoint services,
-// including any endpoints that are pending your acceptance.
+// Describes the VPC endpoint connections to your VPC endpoint services, including
+// any endpoints that are pending your acceptance.
 func (c *Client) DescribeVpcEndpointConnections(ctx context.Context, params *DescribeVpcEndpointConnectionsInput, optFns ...func(*Options)) (*DescribeVpcEndpointConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeVpcEndpointConnectionsInput{}
@@ -38,16 +38,18 @@ type DescribeVpcEndpointConnectionsInput struct {
 	DryRun *bool
 
 	// The filters.
-	//     - ip-address-type - The IP address type ( ipv4 | ipv6 ).
-	//     - service-id - The ID of the service.
-	//     - vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns the endpoint.
-	//     - vpc-endpoint-state - The state of the endpoint ( pendingAcceptance | pending | available | deleting | deleted | rejected | failed ).
-	//     - vpc-endpoint-id - The ID of the endpoint.
+	//   - ip-address-type - The IP address type ( ipv4 | ipv6 ).
+	//   - service-id - The ID of the service.
+	//   - vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns
+	//   the endpoint.
+	//   - vpc-endpoint-state - The state of the endpoint ( pendingAcceptance | pending
+	//   | available | deleting | deleted | rejected | failed ).
+	//   - vpc-endpoint-id - The ID of the endpoint.
 	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
-	// with the returned NextToken  value. This value can be between 5 and 1,000; if
+	// with the returned NextToken value. This value can be between 5 and 1,000; if
 	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
 	MaxResults *int32
 
@@ -145,12 +147,12 @@ var _ DescribeVpcEndpointConnectionsAPIClient = (*Client)(nil)
 type DescribeVpcEndpointConnectionsPaginatorOptions struct {
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
-	// with the returned NextToken  value. This value can be between 5 and 1,000; if
+	// with the returned NextToken value. This value can be between 5 and 1,000; if
 	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

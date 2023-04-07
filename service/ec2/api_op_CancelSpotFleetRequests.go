@@ -14,10 +14,10 @@ import (
 // Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet
 // request, the Spot Fleet launches no new instances. You must also specify whether
 // a canceled Spot Fleet request should terminate its instances. If you choose to
-// terminate the instances, the Spot Fleet request enters the
-// cancelled_terminating state. Otherwise, the Spot Fleet request enters the
-// cancelled_runningstate and the instances continue to run until they are
-// interrupted or you terminate them manually.
+// terminate the instances, the Spot Fleet request enters the cancelled_terminating
+// state. Otherwise, the Spot Fleet request enters the cancelled_running state and
+// the instances continue to run until they are interrupted or you terminate them
+// manually.
 func (c *Client) CancelSpotFleetRequests(ctx context.Context, params *CancelSpotFleetRequestsInput, optFns ...func(*Options)) (*CancelSpotFleetRequestsOutput, error) {
 	if params == nil {
 		params = &CancelSpotFleetRequestsInput{}

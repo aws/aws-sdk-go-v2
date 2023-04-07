@@ -12,8 +12,8 @@ import (
 )
 
 // Modifies the parameters of a DB cluster parameter group. To modify more than
-// one parameter, submit a list of the following: ParameterName , ParameterValue,
-// and ApplyMethod. A maximum of 20 parameters can be modified in a single
+// one parameter, submit a list of the following: ParameterName , ParameterValue ,
+// and ApplyMethod . A maximum of 20 parameters can be modified in a single
 // request. Changes to dynamic parameters are applied immediately. Changes to
 // static parameters require a reboot without failover to the DB cluster associated
 // with the parameter group before the change can take effect. After you create a
@@ -60,11 +60,10 @@ type ModifyDBClusterParameterGroupInput struct {
 type ModifyDBClusterParameterGroupOutput struct {
 
 	// The name of the DB cluster parameter group. Constraints:
-	//     - Must be 1 to 255 letters or numbers.
-	//     - First character must be a letter
-	//     - Cannot end with a hyphen or contain two consecutive hyphens
-	// This value
-	// is stored as a lowercase string.
+	//   - Must be 1 to 255 letters or numbers.
+	//   - First character must be a letter
+	//   - Cannot end with a hyphen or contain two consecutive hyphens
+	// This value is stored as a lowercase string.
 	DBClusterParameterGroupName *string
 
 	// Metadata pertaining to the operation's result.

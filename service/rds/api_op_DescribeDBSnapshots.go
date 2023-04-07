@@ -39,13 +39,14 @@ type DescribeDBSnapshotsInput struct {
 
 	// The ID of the DB instance to retrieve the list of DB snapshots for. This
 	// parameter isn't case-sensitive. Constraints:
-	//     - If supplied, must match the identifier of an existing DBInstance.
+	//   - If supplied, must match the identifier of an existing DBInstance.
 	DBInstanceIdentifier *string
 
 	// A specific DB snapshot identifier to describe. This value is stored as a
 	// lowercase string. Constraints:
-	//     - If supplied, must match the identifier of an existing DBSnapshot.
-	//     - If this identifier is for an automated snapshot, the SnapshotType parameter must also be specified.
+	//   - If supplied, must match the identifier of an existing DBSnapshot.
+	//   - If this identifier is for an automated snapshot, the SnapshotType parameter
+	//   must also be specified.
 	DBSnapshotIdentifier *string
 
 	// A specific DB resource ID to describe.
@@ -53,11 +54,12 @@ type DescribeDBSnapshotsInput struct {
 
 	// A filter that specifies one or more DB snapshots to describe. Supported
 	// filters:
-	//     - db-instance-id - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs).
-	//     - db-snapshot-id - Accepts DB snapshot identifiers.
-	//     - dbi-resource-id - Accepts identifiers of source DB instances.
-	//     - snapshot-type - Accepts types of DB snapshots.
-	//     - engine - Accepts names of database engines.
+	//   - db-instance-id - Accepts DB instance identifiers and DB instance Amazon
+	//   Resource Names (ARNs).
+	//   - db-snapshot-id - Accepts DB snapshot identifiers.
+	//   - dbi-resource-id - Accepts identifiers of source DB instances.
+	//   - snapshot-type - Accepts types of DB snapshots.
+	//   - engine - Accepts names of database engines.
 	Filters []types.Filter
 
 	// A value that indicates whether to include manual DB cluster snapshots that are
@@ -80,29 +82,34 @@ type DescribeDBSnapshotsInput struct {
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The type of snapshots to be returned. You can specify one of the following
 	// values:
-	//     - automated - Return all DB snapshots that have been automatically taken by Amazon RDS for my Amazon Web Services account.
-	//     - manual - Return all DB snapshots that have been taken by my Amazon Web Services account.
-	//     - shared - Return all manual DB snapshots that have been shared to my Amazon Web Services account.
-	//     - public - Return all DB snapshots that have been marked as public.
-	//     - awsbackup - Return the DB snapshots managed by the Amazon Web Services Backup service. For information about Amazon Web Services Backup, see the Amazon Web Services Backup Developer Guide.  (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html) The awsbackup type does not apply to Aurora.
-	//
+	//   - automated - Return all DB snapshots that have been automatically taken by
+	//   Amazon RDS for my Amazon Web Services account.
+	//   - manual - Return all DB snapshots that have been taken by my Amazon Web
+	//   Services account.
+	//   - shared - Return all manual DB snapshots that have been shared to my Amazon
+	//   Web Services account.
+	//   - public - Return all DB snapshots that have been marked as public.
+	//   - awsbackup - Return the DB snapshots managed by the Amazon Web Services
+	//   Backup service. For information about Amazon Web Services Backup, see the
+	//   Amazon Web Services Backup Developer Guide.  (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html)
+	//   The awsbackup type does not apply to Aurora.
 	// If you don't specify a SnapshotType value, then both automated and manual
 	// snapshots are returned. Shared and public DB snapshots are not included in the
 	// returned results by default. You can include shared snapshots with these results
 	// by enabling the IncludeShared parameter. You can include public snapshots with
-	// these results by enabling the IncludePublic  parameter. The IncludeShared  and
-	// IncludePublic parameters don't apply for SnapshotType  values of manual  or
-	// automated . The IncludePublic  parameter doesn't apply when SnapshotType is
-	// set to shared . The IncludeShared  parameter doesn't apply when SnapshotType
-	// is set to public .
+	// these results by enabling the IncludePublic parameter. The IncludeShared and
+	// IncludePublic parameters don't apply for SnapshotType values of manual or
+	// automated . The IncludePublic parameter doesn't apply when SnapshotType is set
+	// to shared . The IncludeShared parameter doesn't apply when SnapshotType is set
+	// to public .
 	SnapshotType *string
 
 	noSmithyDocumentSerde
@@ -112,7 +119,7 @@ type DescribeDBSnapshotsInput struct {
 // action.
 type DescribeDBSnapshotsOutput struct {
 
-	// A list of DBSnapshot  instances.
+	// A list of DBSnapshot instances.
 	DBSnapshots []types.DBSnapshot
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -200,14 +207,14 @@ var _ DescribeDBSnapshotsAPIClient = (*Client)(nil)
 // DescribeDBSnapshotsPaginatorOptions is the paginator options for
 // DescribeDBSnapshots
 type DescribeDBSnapshotsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

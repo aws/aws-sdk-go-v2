@@ -13,12 +13,12 @@ import (
 
 // Specifies the configuration data for a registered CloudFormation extension, in
 // the given account and region. To view the current configuration data for an
-// extension, refer to the ConfigurationSchema  element of DescribeType. For more
+// extension, refer to the ConfigurationSchema element of DescribeType . For more
 // information, see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
 // in the CloudFormation User Guide. It's strongly recommended that you use dynamic
 // references to restrict sensitive configuration definitions, such as third-party
 // credentials. For more details on dynamic references, see Using dynamic
-// references to specify template values (https://docs.aws.amazon.com/)in the
+// references to specify template values (https://docs.aws.amazon.com/) in the
 // CloudFormation User Guide.
 func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfigurationInput, optFns ...func(*Options)) (*SetTypeConfigurationOutput, error) {
 	if params == nil {
@@ -39,9 +39,8 @@ type SetTypeConfigurationInput struct {
 
 	// The configuration data for the extension, in this account and region. The
 	// configuration data must be formatted as JSON, and validate against the schema
-	// returned in the ConfigurationSchema  response element of API_DescribeType. For
-	// more information, see Defining account-level configuration data for an
-	// extension (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration)
+	// returned in the ConfigurationSchema response element of API_DescribeType . For
+	// more information, see Defining account-level configuration data for an extension (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration)
 	// in the CloudFormation CLI User Guide.
 	//
 	// This member is required.
@@ -75,7 +74,7 @@ type SetTypeConfigurationInput struct {
 type SetTypeConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the configuration data, in this account and
-	// region. Conditional: You must specify ConfigurationArn , or Type  and TypeName .
+	// region. Conditional: You must specify ConfigurationArn , or Type and TypeName .
 	ConfigurationArn *string
 
 	// Metadata pertaining to the operation's result.

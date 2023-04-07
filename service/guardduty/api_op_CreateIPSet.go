@@ -34,8 +34,8 @@ func (c *Client) CreateIPSet(ctx context.Context, params *CreateIPSetInput, optF
 
 type CreateIPSetInput struct {
 
-	// A Boolean value that indicates whether GuardDuty is to start using the
-	// uploaded IPSet.
+	// A Boolean value that indicates whether GuardDuty is to start using the uploaded
+	// IPSet.
 	//
 	// This member is required.
 	Activate bool

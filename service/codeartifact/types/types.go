@@ -59,12 +59,12 @@ type DomainDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Information about how a package originally entered the CodeArtifact domain.
-// For packages published directly to CodeArtifact, the entry point is the
-// repository it was published to. For packages ingested from an external
-// repository, the entry point is the external connection that it was ingested
-// from. An external connection is a CodeArtifact repository that is connected to
-// an external repository such as the npm registry or NuGet gallery.
+// Information about how a package originally entered the CodeArtifact domain. For
+// packages published directly to CodeArtifact, the entry point is the repository
+// it was published to. For packages ingested from an external repository, the
+// entry point is the external connection that it was ingested from. An external
+// connection is a CodeArtifact repository that is connected to an external
+// repository such as the npm registry or NuGet gallery.
 type DomainEntryPoint struct {
 
 	// The name of the external connection that a package was ingested from.
@@ -76,9 +76,9 @@ type DomainEntryPoint struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a domain, including its name, Amazon Resource Name (ARN),
-// and status. The ListDomains (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListDomains.html)
-// operation returns a list of DomainSummary  objects.
+// Information about a domain, including its name, Amazon Resource Name (ARN), and
+// status. The ListDomains (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListDomains.html)
+// operation returns a list of DomainSummary objects.
 type DomainSummary struct {
 
 	// The ARN of the domain.
@@ -120,17 +120,21 @@ type PackageDependency struct {
 
 	// The type of a package dependency. The possible values depend on the package
 	// type.
-	//     - npm: regular , dev , peer , optional
-	//     - maven: optional , parent , compile , runtime , test , system , provided . Note that parent is not a regular Maven dependency type; instead this is extracted from the element if one is defined in the package version's POM file.
-	//     - nuget: The dependencyType field is never set for NuGet packages.
-	//     - pypi: Requires-Dist
+	//   - npm: regular , dev , peer , optional
+	//   - maven: optional , parent , compile , runtime , test , system , provided .
+	//   Note that parent is not a regular Maven dependency type; instead this is
+	//   extracted from the element if one is defined in the package version's POM
+	//   file.
+	//   - nuget: The dependencyType field is never set for NuGet packages.
+	//   - pypi: Requires-Dist
 	DependencyType *string
 
 	// The namespace of the package that this package depends on. The package
 	// component that specifies its namespace depends on its type. For example:
-	//     - The namespace of a Maven package is its groupId .
-	//     - The namespace of an npm package is its scope .
-	//     - Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.
+	//   - The namespace of a Maven package is its groupId .
+	//   - The namespace of an npm package is its scope .
+	//   - Python and NuGet packages do not contain a corresponding component,
+	//   packages of those formats do not have a namespace.
 	Namespace *string
 
 	// The name of the package that this package depends on.
@@ -155,10 +159,11 @@ type PackageDescription struct {
 
 	// The namespace of the package. The package component that specifies its
 	// namespace depends on its type. For example:
-	//     - The namespace of a Maven package is its groupId .
-	//     - The namespace of an npm package is its scope .
-	//     - Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.
-	//     - The namespace of a generic package is its namespace .
+	//   - The namespace of a Maven package is its groupId .
+	//   - The namespace of an npm package is its scope .
+	//   - Python and NuGet packages do not contain a corresponding component,
+	//   packages of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// The package origin configuration for the package.
@@ -170,8 +175,8 @@ type PackageDescription struct {
 // Details about the package origin configuration of a package.
 type PackageOriginConfiguration struct {
 
-	// A PackageOriginRestrictions object that contains information about the
-	// upstream and publish package origin configuration for the package.
+	// A PackageOriginRestrictions object that contains information about the upstream
+	// and publish package origin configuration for the package.
 	Restrictions *PackageOriginRestrictions
 
 	noSmithyDocumentSerde
@@ -182,15 +187,14 @@ type PackageOriginConfiguration struct {
 // repository.
 type PackageOriginRestrictions struct {
 
-	// The package origin configuration that determines if new versions of the
-	// package can be published directly to the repository.
+	// The package origin configuration that determines if new versions of the package
+	// can be published directly to the repository.
 	//
 	// This member is required.
 	Publish AllowPublish
 
-	// The package origin configuration that determines if new versions of the
-	// package can be added to the repository from an external connection or upstream
-	// source.
+	// The package origin configuration that determines if new versions of the package
+	// can be added to the repository from an external connection or upstream source.
 	//
 	// This member is required.
 	Upstream AllowUpstream
@@ -206,10 +210,11 @@ type PackageSummary struct {
 
 	// The namespace of the package. The package component that specifies its
 	// namespace depends on its type. For example:
-	//     - The namespace of a Maven package is its groupId .
-	//     - The namespace of an npm package is its scope .
-	//     - Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.
-	//     - The namespace of a generic package is its namespace .
+	//   - The namespace of a Maven package is its groupId .
+	//   - The namespace of an npm package is its scope .
+	//   - Python and NuGet packages do not contain a corresponding component,
+	//   packages of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// A PackageOriginConfiguration (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html)
@@ -228,9 +233,8 @@ type PackageSummary struct {
 type PackageVersionDescription struct {
 
 	// The name of the package that is displayed. The displayName varies depending on
-	// the package version's format. For example, if an npm package is named ui, is
-	// in the namespace vue , and has the format npm , then the displayName  is
-	// @vue/ui .
+	// the package version's format. For example, if an npm package is named ui , is in
+	// the namespace vue , and has the format npm , then the displayName is @vue/ui .
 	DisplayName *string
 
 	// The format of the package version.
@@ -244,10 +248,11 @@ type PackageVersionDescription struct {
 
 	// The namespace of the package version. The package version component that
 	// specifies its namespace depends on its type. For example:
-	//     - The namespace of a Maven package version is its groupId .
-	//     - The namespace of an npm package version is its scope .
-	//     - Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.
-	//     - The namespace of a generic package is its namespace .
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// A PackageVersionOrigin (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionOrigin.html)
@@ -286,12 +291,12 @@ type PackageVersionDescription struct {
 type PackageVersionError struct {
 
 	// The error code associated with the error. Valid error codes are:
-	//     - ALREADY_EXISTS
-	//     - MISMATCHED_REVISION
-	//     - MISMATCHED_STATUS
-	//     - NOT_ALLOWED
-	//     - NOT_FOUND
-	//     - SKIPPED
+	//   - ALREADY_EXISTS
+	//   - MISMATCHED_REVISION
+	//   - MISMATCHED_STATUS
+	//   - NOT_ALLOWED
+	//   - NOT_FOUND
+	//   - SKIPPED
 	ErrorCode PackageVersionErrorCode
 
 	// The error message associated with the error.
@@ -309,9 +314,9 @@ type PackageVersionOrigin struct {
 	DomainEntryPoint *DomainEntryPoint
 
 	// Describes how the package version was originally added to the domain. An
-	// INTERNALorigin type means the package version was published directly to a
-	// repository in the domain. An EXTERNAL origin type means the package version
-	// was ingested from an external connection.
+	// INTERNAL origin type means the package version was published directly to a
+	// repository in the domain. An EXTERNAL origin type means the package version was
+	// ingested from an external connection.
 	OriginType PackageVersionOriginType
 
 	noSmithyDocumentSerde
@@ -319,7 +324,7 @@ type PackageVersionOrigin struct {
 
 // Details about a package version, including its status, version, and revision.
 // The ListPackageVersions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)
-// operation returns a list of PackageVersionSummary  objects.
+// operation returns a list of PackageVersionSummary objects.
 type PackageVersionSummary struct {
 
 	// A string that contains the status of the package version. It can be one of the
@@ -348,12 +353,12 @@ type PackageVersionSummary struct {
 // contains a set of package versions, each of which maps to a set of assets.
 // Repositories are polyglot—a single repository can contain packages of any
 // supported type. Each repository exposes endpoints for fetching and publishing
-// packages using tools like the npm  CLI, the Maven CLI ( mvn ), and pip. You
-// can create up to 100 repositories per Amazon Web Services account.
+// packages using tools like the npm CLI, the Maven CLI ( mvn ), and pip . You can
+// create up to 100 repositories per Amazon Web Services account.
 type RepositoryDescription struct {
 
-	// The 12-digit account number of the Amazon Web Services account that manages
-	// the repository.
+	// The 12-digit account number of the Amazon Web Services account that manages the
+	// repository.
 	AdministratorAccount *string
 
 	// The Amazon Resource Name (ARN) of the repository.
@@ -396,10 +401,11 @@ type RepositoryExternalConnectionInfo struct {
 
 	// The package format associated with a repository's external connection. The
 	// valid package formats are:
-	//     - npm : A Node Package Manager (npm) package.
-	//     - pypi : A Python Package Index (PyPI) package.
-	//     - maven : A Maven package that contains compiled code in a distributable format, such as a JAR file.
-	//     - nuget : A NuGet package.
+	//   - npm : A Node Package Manager (npm) package.
+	//   - pypi : A Python Package Index (PyPI) package.
+	//   - maven : A Maven package that contains compiled code in a distributable
+	//   format, such as a JAR file.
+	//   - nuget : A NuGet package.
 	PackageFormat PackageFormat
 
 	// The status of the external connection of a repository. There is one valid
@@ -411,7 +417,7 @@ type RepositoryExternalConnectionInfo struct {
 
 // Details about a repository, including its Amazon Resource Name (ARN),
 // description, and domain information. The ListRepositories (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListRepositories.html)
-// operation returns a list of RepositorySummary  objects.
+// operation returns a list of RepositorySummary objects.
 type RepositorySummary struct {
 
 	// The Amazon Web Services account ID that manages the repository.
@@ -439,8 +445,8 @@ type RepositorySummary struct {
 	noSmithyDocumentSerde
 }
 
-// An CodeArtifact resource policy that contains a resource ARN, document
-// details, and a revision.
+// An CodeArtifact resource policy that contains a resource ARN, document details,
+// and a revision.
 type ResourcePolicy struct {
 
 	// The resource policy formatted in JSON.

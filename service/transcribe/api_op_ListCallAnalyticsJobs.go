@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a list of Call Analytics jobs that match the specified criteria. If
-// no criteria are specified, all Call Analytics jobs are returned. To get detailed
+// Provides a list of Call Analytics jobs that match the specified criteria. If no
+// criteria are specified, all Call Analytics jobs are returned. To get detailed
 // information about a specific Call Analytics job, use the operation.
 func (c *Client) ListCallAnalyticsJobs(ctx context.Context, params *ListCallAnalyticsJobsInput, optFns ...func(*Options)) (*ListCallAnalyticsJobsOutput, error) {
 	if params == nil {
@@ -36,21 +36,21 @@ type ListCallAnalyticsJobsInput struct {
 	// search is not case sensitive.
 	JobNameContains *string
 
-	// The maximum number of Call Analytics jobs to return in each page of results.
-	// If there are fewer results than the value that you specify, only the actual
-	// results are returned. If you don't specify a value, a default of 5 is used.
+	// The maximum number of Call Analytics jobs to return in each page of results. If
+	// there are fewer results than the value that you specify, only the actual results
+	// are returned. If you don't specify a value, a default of 5 is used.
 	MaxResults *int32
 
 	// If your ListCallAnalyticsJobs request returns more results than can be
-	// displayed, NextToken is displayed in the response with an associated string.
-	// To get the next page of results, copy this string and repeat your request,
+	// displayed, NextToken is displayed in the response with an associated string. To
+	// get the next page of results, copy this string and repeat your request,
 	// including NextToken with the value of the copied string. Repeat as needed to
 	// view all your results.
 	NextToken *string
 
-	// Returns only Call Analytics jobs with the specified status. Jobs are ordered
-	// by creation date, with the newest job first. If you don't include Status, all
-	// Call Analytics jobs are returned.
+	// Returns only Call Analytics jobs with the specified status. Jobs are ordered by
+	// creation date, with the newest job first. If you don't include Status , all Call
+	// Analytics jobs are returned.
 	Status types.CallAnalyticsJobStatus
 
 	noSmithyDocumentSerde
@@ -61,9 +61,9 @@ type ListCallAnalyticsJobsOutput struct {
 	// Provides a summary of information about each result.
 	CallAnalyticsJobSummaries []types.CallAnalyticsJobSummary
 
-	// If NextToken is present in your response, it indicates that not all results
-	// are displayed. To view the next set of results, copy the string associated with
-	// the NextToken parameter in your results output, then run your request again
+	// If NextToken is present in your response, it indicates that not all results are
+	// displayed. To view the next set of results, copy the string associated with the
+	// NextToken parameter in your results output, then run your request again
 	// including NextToken with the value of the copied string. Repeat as needed to
 	// view all your results.
 	NextToken *string
@@ -149,13 +149,13 @@ var _ ListCallAnalyticsJobsAPIClient = (*Client)(nil)
 // ListCallAnalyticsJobsPaginatorOptions is the paginator options for
 // ListCallAnalyticsJobs
 type ListCallAnalyticsJobsPaginatorOptions struct {
-	// The maximum number of Call Analytics jobs to return in each page of results.
-	// If there are fewer results than the value that you specify, only the actual
-	// results are returned. If you don't specify a value, a default of 5 is used.
+	// The maximum number of Call Analytics jobs to return in each page of results. If
+	// there are fewer results than the value that you specify, only the actual results
+	// are returned. If you don't specify a value, a default of 5 is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

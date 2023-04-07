@@ -15,8 +15,8 @@ const (
 	// Definition is being updated. Update/Deletion is disallowed until definition is
 	// ACTIVE and workspace status is ACTIVE.
 	AlertManagerDefinitionStatusCodeUpdating AlertManagerDefinitionStatusCode = "UPDATING"
-	// Definition is being deleting. Update/Deletion is disallowed until definition
-	// is ACTIVE and workspace status is ACTIVE.
+	// Definition is being deleting. Update/Deletion is disallowed until definition is
+	// ACTIVE and workspace status is ACTIVE.
 	AlertManagerDefinitionStatusCodeDeleting AlertManagerDefinitionStatusCode = "DELETING"
 	// Definition creation failed.
 	AlertManagerDefinitionStatusCodeCreationFailed AlertManagerDefinitionStatusCode = "CREATION_FAILED"
@@ -24,8 +24,8 @@ const (
 	AlertManagerDefinitionStatusCodeUpdateFailed AlertManagerDefinitionStatusCode = "UPDATE_FAILED"
 )
 
-// Values returns all known values for AlertManagerDefinitionStatusCode. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for AlertManagerDefinitionStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AlertManagerDefinitionStatusCode) Values() []AlertManagerDefinitionStatusCode {

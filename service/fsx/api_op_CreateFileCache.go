@@ -17,13 +17,14 @@ import (
 // idempotent creation. If a cache with the specified client request token exists
 // and the parameters match, CreateFileCache returns the description of the
 // existing cache. If a cache with the specified client request token exists and
-// the parameters don't match, this call returns IncompatibleParameterError. If a
+// the parameters don't match, this call returns IncompatibleParameterError . If a
 // file cache with the specified client request token doesn't exist,
 // CreateFileCache does the following:
-//   - Creates a new, empty Amazon File Cache resourcewith an assigned ID, and an initial lifecycle state of CREATING .
+//   - Creates a new, empty Amazon File Cache resourcewith an assigned ID, and an
+//     initial lifecycle state of CREATING .
 //   - Returns the description of the cache in JSON format.
 //
-// The CreateFileCache  call returns while the cache's lifecycle state is still
+// The CreateFileCache call returns while the cache's lifecycle state is still
 // CREATING . You can check the cache creation status by calling the
 // DescribeFileCaches (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html)
 // operation, which returns the cache state along with other information.
@@ -61,7 +62,7 @@ type CreateFileCacheInput struct {
 	StorageCapacity *int32
 
 	// A list of subnet IDs that the cache will be accessible from. You can specify
-	// only one subnet ID in a call to the CreateFileCache  operation.
+	// only one subnet ID in a call to the CreateFileCache operation.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -86,9 +87,11 @@ type CreateFileCacheInput struct {
 	// S3 data repository or a Network File System (NFS) data repository that supports
 	// the NFSv3 protocol. The DRA configurations must meet the following requirements:
 	//
-	//     - All configurations on the list must be of the same data repository type, either all S3 or all NFS. A cache can't link to different data repository types at the same time.
-	//     - An NFS DRA must link to an NFS file system that supports the NFSv3 protocol.
-	//
+	//   - All configurations on the list must be of the same data repository type,
+	//   either all S3 or all NFS. A cache can't link to different data repository types
+	//   at the same time.
+	//   - An NFS DRA must link to an NFS file system that supports the NFSv3
+	//   protocol.
 	// DRA automatic import and automatic export is not supported.
 	DataRepositoryAssociations []types.FileCacheDataRepositoryAssociation
 
@@ -101,12 +104,12 @@ type CreateFileCacheInput struct {
 	// The configuration for the Amazon File Cache resource being created.
 	LustreConfiguration *types.CreateFileCacheLustreConfiguration
 
-	// A list of IDs specifying the security groups to apply to all network
-	// interfaces created for Amazon File Cache access. This list isn't returned in
-	// later requests to describe the cache.
+	// A list of IDs specifying the security groups to apply to all network interfaces
+	// created for Amazon File Cache access. This list isn't returned in later requests
+	// to describe the cache.
 	SecurityGroupIds []string
 
-	// A list of Tag  values, with a maximum of 50 elements.
+	// A list of Tag values, with a maximum of 50 elements.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

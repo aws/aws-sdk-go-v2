@@ -30,7 +30,7 @@ func (c *Client) GetDatabases(ctx context.Context, params *GetDatabasesInput, op
 
 type GetDatabasesInput struct {
 
-	// The ID of the Data Catalog from which to retrieve Databases. If none is
+	// The ID of the Data Catalog from which to retrieve Databases . If none is
 	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
@@ -41,9 +41,10 @@ type GetDatabasesInput struct {
 	NextToken *string
 
 	// Allows you to specify that you want to list the databases shared with your
-	// account. The allowable values are FOREIGN  or ALL .
-	//     - If set to FOREIGN , will list the databases shared with your account.
-	//     - If set to ALL , will list the databases shared with your account, as well as the databases in yor local account.
+	// account. The allowable values are FOREIGN or ALL .
+	//   - If set to FOREIGN , will list the databases shared with your account.
+	//   - If set to ALL , will list the databases shared with your account, as well as
+	//   the databases in yor local account.
 	ResourceShareType types.ResourceShareType
 
 	noSmithyDocumentSerde
@@ -51,7 +52,7 @@ type GetDatabasesInput struct {
 
 type GetDatabasesOutput struct {
 
-	// A list of Database  objects from the specified catalog.
+	// A list of Database objects from the specified catalog.
 	//
 	// This member is required.
 	DatabaseList []types.Database
@@ -138,8 +139,8 @@ type GetDatabasesPaginatorOptions struct {
 	// The maximum number of databases to return in one response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

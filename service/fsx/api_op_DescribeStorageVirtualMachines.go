@@ -38,9 +38,9 @@ type DescribeStorageVirtualMachinesInput struct {
 	// an integer greater than zero.
 	MaxResults *int32
 
-	// (Optional) Opaque pagination token returned from a previous operation
-	// (String). If present, this token indicates from what point you can continue
-	// processing the request, where the previous NextToken  value left off.
+	// (Optional) Opaque pagination token returned from a previous operation (String).
+	// If present, this token indicates from what point you can continue processing the
+	// request, where the previous NextToken value left off.
 	NextToken *string
 
 	// Enter the ID of one or more SVMs that you want to view.
@@ -51,9 +51,9 @@ type DescribeStorageVirtualMachinesInput struct {
 
 type DescribeStorageVirtualMachinesOutput struct {
 
-	// (Optional) Opaque pagination token returned from a previous operation
-	// (String). If present, this token indicates from what point you can continue
-	// processing the request, where the previous NextToken  value left off.
+	// (Optional) Opaque pagination token returned from a previous operation (String).
+	// If present, this token indicates from what point you can continue processing the
+	// request, where the previous NextToken value left off.
 	NextToken *string
 
 	// Returned after a successful DescribeStorageVirtualMachines operation,
@@ -141,8 +141,8 @@ type DescribeStorageVirtualMachinesPaginatorOptions struct {
 	// an integer greater than zero.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

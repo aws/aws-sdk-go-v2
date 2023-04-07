@@ -34,7 +34,7 @@ func (c *Client) DescribeInstancesHealth(ctx context.Context, params *DescribeIn
 type DescribeInstancesHealthInput struct {
 
 	// Specifies the response elements you wish to receive. To retrieve all
-	// attributes, set to All. If no attribute names are specified, returns a list of
+	// attributes, set to All . If no attribute names are specified, returns a list of
 	// instances.
 	AttributeNames []types.InstancesHealthAttribute
 

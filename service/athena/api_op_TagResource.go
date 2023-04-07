@@ -46,8 +46,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceARN *string
 
-	// A collection of one or more tags, separated by commas, to be added to an
-	// Athena workgroup or data catalog resource.
+	// A collection of one or more tags, separated by commas, to be added to an Athena
+	// workgroup or data catalog resource.
 	//
 	// This member is required.
 	Tags []types.Tag

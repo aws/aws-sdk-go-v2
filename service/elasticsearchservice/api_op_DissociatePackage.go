@@ -27,7 +27,7 @@ func (c *Client) DissociatePackage(ctx context.Context, params *DissociatePackag
 	return out, nil
 }
 
-// Container for request parameters to DissociatePackage  operation.
+// Container for request parameters to DissociatePackage operation.
 type DissociatePackageInput struct {
 
 	// Name of the domain that you want to associate the package with.
@@ -44,7 +44,7 @@ type DissociatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response returned by DissociatePackage  operation.
+// Container for response returned by DissociatePackage operation.
 type DissociatePackageOutput struct {
 
 	//     DomainPackageDetails

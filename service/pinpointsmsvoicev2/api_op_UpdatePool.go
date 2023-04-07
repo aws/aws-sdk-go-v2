@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Updates the configuration of an existing pool. You can update the opt-out
-// list, enable or disable two-way messaging, change the TwoWayChannelArn, enable
-// or disable self-managed opt-outs, enable or disable deletion protection, and
-// enable or disable shared routes.
+// Updates the configuration of an existing pool. You can update the opt-out list,
+// enable or disable two-way messaging, change the TwoWayChannelArn , enable or
+// disable self-managed opt-outs, enable or disable deletion protection, and enable
+// or disable shared routes.
 func (c *Client) UpdatePool(ctx context.Context, params *UpdatePoolInput, optFns ...func(*Options)) (*UpdatePoolOutput, error) {
 	if params == nil {
 		params = &UpdatePoolInput{}
@@ -33,8 +33,8 @@ func (c *Client) UpdatePool(ctx context.Context, params *UpdatePoolInput, optFns
 
 type UpdatePoolInput struct {
 
-	// The unique identifier of the pool to update. Valid values are either the
-	// PoolId or PoolArn.
+	// The unique identifier of the pool to update. Valid values are either the PoolId
+	// or PoolArn.
 	//
 	// This member is required.
 	PoolId *string
@@ -60,8 +60,8 @@ type UpdatePoolInput struct {
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
 
-	// By default this is set to false. When set to true you can receive incoming
-	// text messages from your end recipients.
+	// By default this is set to false. When set to true you can receive incoming text
+	// messages from your end recipients.
 	TwoWayEnabled *bool
 
 	noSmithyDocumentSerde
@@ -104,8 +104,8 @@ type UpdatePoolOutput struct {
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
 
-	// By default this is set to false. When set to true you can receive incoming
-	// text messages from your end recipients.
+	// By default this is set to false. When set to true you can receive incoming text
+	// messages from your end recipients.
 	TwoWayEnabled bool
 
 	// Metadata pertaining to the operation's result.

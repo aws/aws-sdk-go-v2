@@ -93,8 +93,8 @@ type CreateInferenceSchedulerInput struct {
 	// .
 	DataDelayOffsetInMinutes *int64
 
-	// Provides the identifier of the KMS key used to encrypt inference scheduler
-	// data by Amazon Lookout for Equipment.
+	// Provides the identifier of the KMS key used to encrypt inference scheduler data
+	// by Amazon Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
 	// Any tags associated with the inference scheduler.
@@ -111,7 +111,7 @@ type CreateInferenceSchedulerOutput struct {
 	// The name of inference scheduler being created.
 	InferenceSchedulerName *string
 
-	// Indicates the status of the CreateInferenceScheduler  operation.
+	// Indicates the status of the CreateInferenceScheduler operation.
 	Status types.InferenceSchedulerStatus
 
 	// Metadata pertaining to the operation's result.

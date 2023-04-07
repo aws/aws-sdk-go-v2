@@ -62,7 +62,7 @@ type DescribeBotAliasOutput struct {
 	// The name of the bot alias.
 	BotAliasName *string
 
-	// The current status of the alias. When the alias is Available, the alias is
+	// The current status of the alias. When the alias is Available , the alias is
 	// ready for use with your bot.
 	BotAliasStatus types.BotAliasStatus
 

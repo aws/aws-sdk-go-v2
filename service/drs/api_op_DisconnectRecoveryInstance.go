@@ -10,18 +10,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disconnect a Recovery Instance from Elastic Disaster Recovery. Data
-// replication is stopped immediately. All AWS resources created by Elastic
-// Disaster Recovery for enabling the replication of the Recovery Instance will be
-// terminated / deleted within 90 minutes. If the agent on the Recovery Instance
-// has not been prevented from communicating with the Elastic Disaster Recovery
-// service, then it will receive a command to uninstall itself (within
-// approximately 10 minutes). The following properties of the Recovery Instance
-// will be changed immediately: dataReplicationInfo.dataReplicationState will be
-// set to DISCONNECTED; The totalStorageBytes property for each of
-// dataReplicationInfo.replicatedDisks will be set to zero;
-// dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be
-// nullified.
+// Disconnect a Recovery Instance from Elastic Disaster Recovery. Data replication
+// is stopped immediately. All AWS resources created by Elastic Disaster Recovery
+// for enabling the replication of the Recovery Instance will be terminated /
+// deleted within 90 minutes. If the agent on the Recovery Instance has not been
+// prevented from communicating with the Elastic Disaster Recovery service, then it
+// will receive a command to uninstall itself (within approximately 10 minutes).
+// The following properties of the Recovery Instance will be changed immediately:
+// dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The
+// totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will
+// be set to zero; dataReplicationInfo.lagDuration and
+// dataReplicationInfo.lagDuration will be nullified.
 func (c *Client) DisconnectRecoveryInstance(ctx context.Context, params *DisconnectRecoveryInstanceInput, optFns ...func(*Options)) (*DisconnectRecoveryInstanceOutput, error) {
 	if params == nil {
 		params = &DisconnectRecoveryInstanceInput{}

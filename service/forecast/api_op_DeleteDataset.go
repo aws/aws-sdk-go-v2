@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes an Amazon Forecast dataset that was created using the CreateDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html)
-// operation. You can only delete datasets that have a status of ACTIVE  or
+// operation. You can only delete datasets that have a status of ACTIVE or
 // CREATE_FAILED . To get the status use the DescribeDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html)
 // operation. Forecast does not automatically update any dataset groups that
 // contain the deleted dataset. In order to update the dataset group, use the

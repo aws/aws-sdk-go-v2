@@ -55,8 +55,8 @@ type DescribeAddonConfigurationOutput struct {
 	// .
 	AddonVersion *string
 
-	// A JSON schema that's used to validate the configuration values that you
-	// provide when an addon is created or updated.
+	// A JSON schema that's used to validate the configuration values that you provide
+	// when an addon is created or updated.
 	ConfigurationSchema *string
 
 	// Metadata pertaining to the operation's result.

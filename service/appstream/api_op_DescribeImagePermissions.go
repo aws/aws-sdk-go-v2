@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes the permissions for shared AWS account IDs on
-// a private image that you own.
+// Retrieves a list that describes the permissions for shared AWS account IDs on a
+// private image that you own.
 func (c *Client) DescribeImagePermissions(ctx context.Context, params *DescribeImagePermissionsInput, optFns ...func(*Options)) (*DescribeImagePermissionsOutput, error) {
 	if params == nil {
 		params = &DescribeImagePermissionsInput{}
@@ -31,8 +31,8 @@ func (c *Client) DescribeImagePermissions(ctx context.Context, params *DescribeI
 
 type DescribeImagePermissionsInput struct {
 
-	// The name of the private image for which to describe permissions. The image
-	// must be one that you own.
+	// The name of the private image for which to describe permissions. The image must
+	// be one that you own.
 	//
 	// This member is required.
 	Name *string
@@ -146,8 +146,8 @@ type DescribeImagePermissionsPaginatorOptions struct {
 	// The maximum size of each page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

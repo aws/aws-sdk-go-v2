@@ -34,8 +34,8 @@ type UpgradePublishedSchemaInput struct {
 	// This member is required.
 	DevelopmentSchemaArn *string
 
-	// Identifies the minor version of the published schema that will be created.
-	// This parameter is NOT optional.
+	// Identifies the minor version of the published schema that will be created. This
+	// parameter is NOT optional.
 	//
 	// This member is required.
 	MinorVersion *string

@@ -48,8 +48,8 @@ type ListObjectsInput struct {
 	// Pagination token
 	NextToken *string
 
-	// Optional, specifies the starting Object name to list from. Ignored if
-	// NextToken is not NULL
+	// Optional, specifies the starting Object name to list from. Ignored if NextToken
+	// is not NULL
 	StartingObjectName *string
 
 	// Optional, specifies the starting Object prefix to list from. Ignored if
@@ -150,8 +150,8 @@ type ListObjectsPaginatorOptions struct {
 	// Maximum objects count
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

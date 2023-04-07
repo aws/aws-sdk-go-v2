@@ -35,8 +35,8 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// A list of the keys for the tags that you want to remove from the specified
-	// view or index.
+	// A list of the keys for the tags that you want to remove from the specified view
+	// or index.
 	//
 	// This member is required.
 	TagKeys []string

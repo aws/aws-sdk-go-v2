@@ -21,7 +21,7 @@ import (
 // Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 // . It can take up to 5 minutes for this operation to take effect. If you attempt
 // to associate a KMS key with a log group but the KMS key does not exist or the
-// KMS key is disabled, you receive an InvalidParameterException  error.
+// KMS key is disabled, you receive an InvalidParameterException error.
 func (c *Client) AssociateKmsKey(ctx context.Context, params *AssociateKmsKeyInput, optFns ...func(*Options)) (*AssociateKmsKeyOutput, error) {
 	if params == nil {
 		params = &AssociateKmsKeyInput{}

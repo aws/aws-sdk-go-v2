@@ -214,8 +214,7 @@ type NetworkResourceDefinition struct {
 // Information about a network site.
 type NetworkSite struct {
 
-	// The Amazon Resource Name (ARN) of the network to which the network site
-	// belongs.
+	// The Amazon Resource Name (ARN) of the network to which the network site belongs.
 	//
 	// This member is required.
 	NetworkArn *string
@@ -321,7 +320,7 @@ type ReturnInformation struct {
 	ShippingAddress *Address
 
 	// The URL of the shipping label. The shipping label is available for download
-	// only if the status of the network resource is PENDING_RETURN. For more
+	// only if the status of the network resource is PENDING_RETURN . For more
 	// information, see Return a radio unit (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit)
 	// .
 	ShippingLabel *string

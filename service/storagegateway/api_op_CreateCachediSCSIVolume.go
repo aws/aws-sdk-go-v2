@@ -11,19 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a cached volume on a specified cached volume gateway. This operation
-// is only supported in the cached volume gateway type. Cache storage must be
-// allocated to the gateway before you can create a cached volume. Use the
-// AddCacheoperation to add cache storage to a gateway. In the request, you must
-// specify the gateway, size of the volume in bytes, the iSCSI target name, an IP
-// address on which to expose the target, and a unique client token. In response,
-// the gateway creates the volume and returns information about it. This
-// information includes the volume Amazon Resource Name (ARN), its size, and the
-// iSCSI target ARN that initiators can use to connect to the volume target.
-// Optionally, you can provide the ARN for an existing volume as the
-// SourceVolumeARNfor this cached volume, which creates an exact copy of the
-// existing volume’s latest recovery point. The VolumeSizeInBytes value must be
-// equal to or larger than the size of the copied volume, in bytes.
+// Creates a cached volume on a specified cached volume gateway. This operation is
+// only supported in the cached volume gateway type. Cache storage must be
+// allocated to the gateway before you can create a cached volume. Use the AddCache
+// operation to add cache storage to a gateway. In the request, you must specify
+// the gateway, size of the volume in bytes, the iSCSI target name, an IP address
+// on which to expose the target, and a unique client token. In response, the
+// gateway creates the volume and returns information about it. This information
+// includes the volume Amazon Resource Name (ARN), its size, and the iSCSI target
+// ARN that initiators can use to connect to the volume target. Optionally, you can
+// provide the ARN for an existing volume as the SourceVolumeARN for this cached
+// volume, which creates an exact copy of the existing volume’s latest recovery
+// point. The VolumeSizeInBytes value must be equal to or larger than the size of
+// the copied volume, in bytes.
 func (c *Client) CreateCachediSCSIVolume(ctx context.Context, params *CreateCachediSCSIVolumeInput, optFns ...func(*Options)) (*CreateCachediSCSIVolumeOutput, error) {
 	if params == nil {
 		params = &CreateCachediSCSIVolumeInput{}
@@ -42,7 +42,7 @@ func (c *Client) CreateCachediSCSIVolume(ctx context.Context, params *CreateCach
 type CreateCachediSCSIVolumeInput struct {
 
 	// A unique identifier that you use to retry a request. If you retry a request,
-	// use the same ClientToken  you specified in the initial request.
+	// use the same ClientToken you specified in the initial request.
 	//
 	// This member is required.
 	ClientToken *string
@@ -76,14 +76,13 @@ type CreateCachediSCSIVolumeInput struct {
 	// This member is required.
 	VolumeSizeInBytes int64
 
-	// Set to true  to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true  | false
+	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
 	// for Amazon S3 server-side encryption. Storage Gateway does not support
-	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
-	// Optional.
+	// asymmetric CMKs. This value can only be set when KMSEncrypted is true . Optional.
 	KMSKey *string
 
 	// The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new
@@ -95,7 +94,7 @@ type CreateCachediSCSIVolumeInput struct {
 
 	// The ARN for an existing volume. Specifying this ARN makes the new volume into
 	// an exact copy of the specified existing volume's latest recovery point. The
-	// VolumeSizeInBytesvalue for this new volume must be equal to or larger than the
+	// VolumeSizeInBytes value for this new volume must be equal to or larger than the
 	// size of the existing volume, in bytes.
 	SourceVolumeARN *string
 

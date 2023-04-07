@@ -40,7 +40,7 @@ type GetUserInput struct {
 
 	// The name of the user to get information about. This parameter is optional. If
 	// it is not included, it defaults to the user making the request. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
 	// of characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string
@@ -48,7 +48,7 @@ type GetUserInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetUser  request.
+// Contains the response to a successful GetUser request.
 type GetUserOutput struct {
 
 	// A structure containing details about the IAM user. Due to a service issue,

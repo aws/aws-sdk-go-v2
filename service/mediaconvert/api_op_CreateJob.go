@@ -106,10 +106,10 @@ type CreateJobInput struct {
 	// workflows.
 	Tags map[string]string
 
-	// Optional. User-defined metadata that you want to associate with an
-	// MediaConvert job. You specify metadata in key/value pairs. Use only for existing
-	// integrations or workflows that rely on job metadata tags. Otherwise, we
-	// recommend that you use standard AWS tags.
+	// Optional. User-defined metadata that you want to associate with an MediaConvert
+	// job. You specify metadata in key/value pairs. Use only for existing integrations
+	// or workflows that rely on job metadata tags. Otherwise, we recommend that you
+	// use standard AWS tags.
 	UserMetadata map[string]string
 
 	noSmithyDocumentSerde

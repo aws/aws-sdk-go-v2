@@ -48,8 +48,8 @@ type ListVpcEndpointAccessInput struct {
 // endpoints.
 type ListVpcEndpointAccessOutput struct {
 
-	// List of AuthorizedPrincipal describing the details of the permissions to
-	// manage VPC endpoints against the specified domain.
+	// List of AuthorizedPrincipal describing the details of the permissions to manage
+	// VPC endpoints against the specified domain.
 	//
 	// This member is required.
 	AuthorizedPrincipalList []types.AuthorizedPrincipal

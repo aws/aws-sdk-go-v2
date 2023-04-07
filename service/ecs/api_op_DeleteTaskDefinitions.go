@@ -15,9 +15,9 @@ import (
 // revision before you delete it. For more information, see
 // DeregisterTaskDefinition (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterTaskDefinition.html)
 // . When you delete a task definition revision, it is immediately transitions from
-// the INACTIVE  to DELETE_IN_PROGRESS. Existing tasks and services that
-// reference a DELETE_IN_PROGRESS task definition revision continue to run
-// without disruption. Existing services that reference a DELETE_IN_PROGRESS task
+// the INACTIVE to DELETE_IN_PROGRESS . Existing tasks and services that reference
+// a DELETE_IN_PROGRESS task definition revision continue to run without
+// disruption. Existing services that reference a DELETE_IN_PROGRESS task
 // definition revision can still scale up or down by modifying the service's
 // desired count. You can't use a DELETE_IN_PROGRESS task definition revision to
 // run new tasks or create new services. You also can't update an existing service
@@ -41,9 +41,9 @@ func (c *Client) DeleteTaskDefinitions(ctx context.Context, params *DeleteTaskDe
 
 type DeleteTaskDefinitionsInput struct {
 
-	// The family  and revision  ( family:revision) or full Amazon Resource Name
-	// (ARN) of the task definition to delete. You must specify a revision. You can
-	// specify up to 10 task definitions as a comma separated list.
+	// The family and revision ( family:revision ) or full Amazon Resource Name (ARN)
+	// of the task definition to delete. You must specify a revision . You can specify
+	// up to 10 task definitions as a comma separated list.
 	//
 	// This member is required.
 	TaskDefinitions []string

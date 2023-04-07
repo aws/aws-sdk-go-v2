@@ -87,12 +87,11 @@ type RevokeSecurityGroupEgressInput struct {
 
 type RevokeSecurityGroupEgressOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, returns an error.
+	// Returns true if the request succeeds; otherwise, returns an error.
 	Return *bool
 
 	// The outbound rules that were unknown to the service. In some cases,
-	// unknownIpPermissionSetmight be in a different format from the request
-	// parameter.
+	// unknownIpPermissionSet might be in a different format from the request parameter.
 	UnknownIpPermissions []types.IpPermission
 
 	// Metadata pertaining to the operation's result.

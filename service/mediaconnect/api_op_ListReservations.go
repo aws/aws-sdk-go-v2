@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays a list of all reservations that have been purchased by this account
-// in the current AWS Region. This list includes all reservations in all states
-// (such as active and expired).
+// Displays a list of all reservations that have been purchased by this account in
+// the current AWS Region. This list includes all reservations in all states (such
+// as active and expired).
 func (c *Client) ListReservations(ctx context.Context, params *ListReservationsInput, optFns ...func(*Options)) (*ListReservationsOutput, error) {
 	if params == nil {
 		params = &ListReservationsInput{}
@@ -149,8 +149,8 @@ type ListReservationsPaginatorOptions struct {
 	// with a maximum of 10 results per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

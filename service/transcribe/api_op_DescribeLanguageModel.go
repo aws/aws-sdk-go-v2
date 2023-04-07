@@ -51,7 +51,7 @@ type DescribeLanguageModelOutput struct {
 	// model has been updated. If Amazon Transcribe has updated the base model, you can
 	// create a new custom language model using the updated base model. If you tried to
 	// create a new custom language model and the request wasn't successful, you can
-	// use this DescribeLanguageModel  to help identify the reason for this failure.
+	// use this DescribeLanguageModel to help identify the reason for this failure.
 	LanguageModel *types.LanguageModel
 
 	// Metadata pertaining to the operation's result.

@@ -38,7 +38,7 @@ type UpdateApplicationInput struct {
 	AutoConfigEnabled *bool
 
 	// Indicates whether Application Insights can listen to CloudWatch events for the
-	// application resources, such as instance terminated , failed deployment, and
+	// application resources, such as instance terminated , failed deployment , and
 	// others.
 	CWEMonitorEnabled *bool
 

@@ -35,7 +35,7 @@ func (c *Client) DeleteBucketOwnershipControls(ctx context.Context, params *Dele
 
 type DeleteBucketOwnershipControlsInput struct {
 
-	// The Amazon S3 bucket whose OwnershipControls  you want to delete.
+	// The Amazon S3 bucket whose OwnershipControls you want to delete.
 	//
 	// This member is required.
 	Bucket *string

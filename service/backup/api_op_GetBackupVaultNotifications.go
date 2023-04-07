@@ -46,8 +46,8 @@ type GetBackupVaultNotificationsOutput struct {
 	// example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
 	BackupVaultArn *string
 
-	// An array of events that indicate the status of jobs to back up resources to
-	// the backup vault.
+	// An array of events that indicate the status of jobs to back up resources to the
+	// backup vault.
 	BackupVaultEvents []types.BackupVaultEvent
 
 	// The name of a logical container where backups are stored. Backup vaults are

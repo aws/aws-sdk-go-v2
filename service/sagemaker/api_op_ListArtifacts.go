@@ -40,8 +40,8 @@ type ListArtifactsInput struct {
 	// A filter that returns only artifacts created on or before the specified time.
 	CreatedBefore *time.Time
 
-	// The maximum number of artifacts to return in the response. The default value
-	// is 10.
+	// The maximum number of artifacts to return in the response. The default value is
+	// 10.
 	MaxResults *int32
 
 	// If the previous call to ListArtifacts didn't return the full set of artifacts,
@@ -143,12 +143,12 @@ var _ ListArtifactsAPIClient = (*Client)(nil)
 
 // ListArtifactsPaginatorOptions is the paginator options for ListArtifacts
 type ListArtifactsPaginatorOptions struct {
-	// The maximum number of artifacts to return in the response. The default value
-	// is 10.
+	// The maximum number of artifacts to return in the response. The default value is
+	// 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -34,15 +34,15 @@ type ListFirewallRuleGroupsInput struct {
 
 	// The maximum number of objects that you want Resolver to return for this
 	// request. If more objects are available, in the response, Resolver provides a
-	// NextTokenvalue that you can use in a subsequent call to get the next batch of
-	// objects. If you don't specify a value for MaxResults, Resolver returns up to
+	// NextToken value that you can use in a subsequent call to get the next batch of
+	// objects. If you don't specify a value for MaxResults , Resolver returns up to
 	// 100 objects.
 	MaxResults *int32
 
 	// For the first call to this list request, omit this value. When you request a
 	// list of objects, Resolver returns at most the number of objects specified in
 	// MaxResults . If more objects are available for retrieval, Resolver returns a
-	// NextTokenvalue in the response. To retrieve the next batch of objects, use the
+	// NextToken value in the response. To retrieve the next batch of objects, use the
 	// token that was returned for the prior request in your next request.
 	NextToken *string
 
@@ -139,13 +139,13 @@ var _ ListFirewallRuleGroupsAPIClient = (*Client)(nil)
 type ListFirewallRuleGroupsPaginatorOptions struct {
 	// The maximum number of objects that you want Resolver to return for this
 	// request. If more objects are available, in the response, Resolver provides a
-	// NextTokenvalue that you can use in a subsequent call to get the next batch of
-	// objects. If you don't specify a value for MaxResults, Resolver returns up to
+	// NextToken value that you can use in a subsequent call to get the next batch of
+	// objects. If you don't specify a value for MaxResults , Resolver returns up to
 	// 100 objects.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -158,8 +158,7 @@ type ListFirewallRuleGroupsPaginator struct {
 	firstPage bool
 }
 
-// NewListFirewallRuleGroupsPaginator returns a new
-// ListFirewallRuleGroupsPaginator
+// NewListFirewallRuleGroupsPaginator returns a new ListFirewallRuleGroupsPaginator
 func NewListFirewallRuleGroupsPaginator(client ListFirewallRuleGroupsAPIClient, params *ListFirewallRuleGroupsInput, optFns ...func(*ListFirewallRuleGroupsPaginatorOptions)) *ListFirewallRuleGroupsPaginator {
 	if params == nil {
 		params = &ListFirewallRuleGroupsInput{}

@@ -47,7 +47,7 @@ type ModifyScheduledActionInput struct {
 	// about this parameter, see ScheduledAction .
 	IamRole *string
 
-	// A modified schedule in either at( )  or cron( ) format. For more information
+	// A modified schedule in either at( ) or cron( ) format. For more information
 	// about this parameter, see ScheduledAction .
 	Schedule *string
 
@@ -58,8 +58,8 @@ type ModifyScheduledActionInput struct {
 	// parameter, see ScheduledAction .
 	StartTime *time.Time
 
-	// A modified JSON format of the scheduled action. For more information about
-	// this parameter, see ScheduledAction .
+	// A modified JSON format of the scheduled action. For more information about this
+	// parameter, see ScheduledAction .
 	TargetAction *types.ScheduledActionType
 
 	noSmithyDocumentSerde
@@ -70,8 +70,8 @@ type ModifyScheduledActionInput struct {
 // operations can be scheduled, see ScheduledActionType .
 type ModifyScheduledActionOutput struct {
 
-	// The end time in UTC when the schedule is no longer active. After this time,
-	// the scheduled action does not trigger.
+	// The end time in UTC when the schedule is no longer active. After this time, the
+	// scheduled action does not trigger.
 	EndTime *time.Time
 
 	// The IAM role to assume to run the scheduled action. This IAM role must have
@@ -89,8 +89,8 @@ type ModifyScheduledActionOutput struct {
 	// The schedule for a one-time (at format) or recurring (cron format) scheduled
 	// action. Schedule invocations must be separated by at least one hour. Format of
 	// at expressions is " at(yyyy-mm-ddThh:mm:ss) ". For example, "
-	// at(2016-03-04T17:27:00) ". Format of cron expressions is "cron(Minutes Hours
-	// Day-of-month Month Day-of-week Year) ". For example, " cron(0 10 ? * MON *)".
+	// at(2016-03-04T17:27:00) ". Format of cron expressions is " cron(Minutes Hours
+	// Day-of-month Month Day-of-week Year) ". For example, " cron(0 10 ? * MON *) ".
 	// For more information, see Cron Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
 	// in the Amazon CloudWatch Events User Guide.
 	Schedule *string

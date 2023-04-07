@@ -14,7 +14,7 @@ import (
 
 // Gets information on the settings of query suggestions for an index. This is
 // used to check the current settings applied to query suggestions.
-// DescribeQuerySuggestionsConfigis currently not supported in the Amazon Web
+// DescribeQuerySuggestionsConfig is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
 func (c *Client) DescribeQuerySuggestionsConfig(ctx context.Context, params *DescribeQuerySuggestionsConfigInput, optFns ...func(*Options)) (*DescribeQuerySuggestionsConfigOutput, error) {
 	if params == nil {
@@ -65,9 +65,9 @@ type DescribeQuerySuggestionsConfigOutput struct {
 	// be eligible to suggest to your users.
 	MinimumQueryCount *int32
 
-	// Whether query suggestions are currently in ENABLED  mode or LEARN_ONLY mode.
-	// By default, Amazon Kendra enables query suggestions. LEARN_ONLY turns off
-	// query suggestions for your users. You can change the mode using the
+	// Whether query suggestions are currently in ENABLED mode or LEARN_ONLY mode. By
+	// default, Amazon Kendra enables query suggestions. LEARN_ONLY turns off query
+	// suggestions for your users. You can change the mode using the
 	// UpdateQuerySuggestionsConfig (https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html)
 	// API.
 	Mode types.Mode
@@ -75,9 +75,9 @@ type DescribeQuerySuggestionsConfigOutput struct {
 	// How recent your queries are in your query log time window (in days).
 	QueryLogLookBackWindowInDays *int32
 
-	// Whether the status of query suggestions settings is currently ACTIVE  or
-	// UPDATING. Active means the current settings apply and Updating means your
-	// changed settings are in the process of applying.
+	// Whether the status of query suggestions settings is currently ACTIVE or UPDATING
+	// . Active means the current settings apply and Updating means your changed
+	// settings are in the process of applying.
 	Status types.QuerySuggestionsStatus
 
 	// The current total count of query suggestions for an index. This count can

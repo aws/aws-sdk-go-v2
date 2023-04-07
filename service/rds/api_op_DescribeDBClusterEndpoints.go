@@ -39,15 +39,15 @@ type DescribeDBClusterEndpointsInput struct {
 	// parameter is stored as a lowercase string.
 	DBClusterIdentifier *string
 
-	// A set of name-value pairs that define which endpoints to include in the
-	// output. The filters are specified as name-value pairs, in the format
+	// A set of name-value pairs that define which endpoints to include in the output.
+	// The filters are specified as name-value pairs, in the format
 	// Name=endpoint_type,Values=endpoint_type1,endpoint_type2,... . Name can be one
 	// of: db-cluster-endpoint-type , db-cluster-endpoint-custom-type ,
-	// db-cluster-endpoint-id , db-cluster-endpoint-status . Values  for the
+	// db-cluster-endpoint-id , db-cluster-endpoint-status . Values for the
 	// db-cluster-endpoint-type filter can be one or more of: reader , writer , custom
-	// . Values  for the db-cluster-endpoint-custom-type filter can be one or more
-	// of: reader , any . Values  for the db-cluster-endpoint-status filter can be
-	// one or more of: available , creating , deleting , inactive , modifying .
+	// . Values for the db-cluster-endpoint-custom-type filter can be one or more of:
+	// reader , any . Values for the db-cluster-endpoint-status filter can be one or
+	// more of: available , creating , deleting , inactive , modifying .
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusterEndpoints
@@ -55,10 +55,10 @@ type DescribeDBClusterEndpointsInput struct {
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so you can retrieve the remaining results. Default:
-	// 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -155,14 +155,14 @@ var _ DescribeDBClusterEndpointsAPIClient = (*Client)(nil)
 // DescribeDBClusterEndpointsPaginatorOptions is the paginator options for
 // DescribeDBClusterEndpoints
 type DescribeDBClusterEndpointsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so you can retrieve the remaining results. Default:
-	// 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

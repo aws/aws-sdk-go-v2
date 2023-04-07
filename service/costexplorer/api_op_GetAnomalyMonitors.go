@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the cost anomaly monitor definitions for your account. You can
-// filter using a list of cost anomaly monitor Amazon Resource Names (ARNs).
+// Retrieves the cost anomaly monitor definitions for your account. You can filter
+// using a list of cost anomaly monitor Amazon Resource Names (ARNs).
 func (c *Client) GetAnomalyMonitors(ctx context.Context, params *GetAnomalyMonitorsInput, optFns ...func(*Options)) (*GetAnomalyMonitorsOutput, error) {
 	if params == nil {
 		params = &GetAnomalyMonitorsInput{}
@@ -36,9 +36,9 @@ type GetAnomalyMonitorsInput struct {
 	// A list of cost anomaly monitor ARNs.
 	MonitorArnList []string
 
-	// The token to retrieve the next set of results. Amazon Web Services provides
-	// the token when the response from a previous call has more results than the
-	// maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	noSmithyDocumentSerde
@@ -52,9 +52,9 @@ type GetAnomalyMonitorsOutput struct {
 	// This member is required.
 	AnomalyMonitors []types.AnomalyMonitor
 
-	// The token to retrieve the next set of results. Amazon Web Services provides
-	// the token when the response from a previous call has more results than the
-	// maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

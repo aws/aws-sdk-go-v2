@@ -92,9 +92,9 @@ const (
 	CategoryAwsTypes   Category = "AWS_TYPES"
 )
 
-// Values returns all known values for Category. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Category. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Category) Values() []Category {
 	return []Category{
 		"REGISTERED",
@@ -137,8 +137,8 @@ const (
 	ChangeSetHooksStatusUnavailable ChangeSetHooksStatus = "UNAVAILABLE"
 )
 
-// Values returns all known values for ChangeSetHooksStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ChangeSetHooksStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeSetHooksStatus) Values() []ChangeSetHooksStatus {
 	return []ChangeSetHooksStatus{
@@ -645,9 +645,9 @@ const (
 	ReplacementConditional Replacement = "Conditional"
 )
 
-// Values returns all known values for Replacement. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Replacement. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Replacement) Values() []Replacement {
 	return []Replacement{
 		"True",
@@ -710,8 +710,8 @@ const (
 	ResourceSignalStatusFailure ResourceSignalStatus = "FAILURE"
 )
 
-// Values returns all known values for ResourceSignalStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ResourceSignalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceSignalStatus) Values() []ResourceSignalStatus {
 	return []ResourceSignalStatus{
@@ -832,10 +832,9 @@ const (
 	StackInstanceDetailedStatusInoperable StackInstanceDetailedStatus = "INOPERABLE"
 )
 
-// Values returns all known values for StackInstanceDetailedStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for StackInstanceDetailedStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StackInstanceDetailedStatus) Values() []StackInstanceDetailedStatus {
 	return []StackInstanceDetailedStatus{
 		"PENDING",
@@ -855,9 +854,9 @@ const (
 	StackInstanceFilterNameLastOperationId StackInstanceFilterName = "LAST_OPERATION_ID"
 )
 
-// Values returns all known values for StackInstanceFilterName. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StackInstanceFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StackInstanceFilterName) Values() []StackInstanceFilterName {
 	return []StackInstanceFilterName{
 		"DETAILED_STATUS",
@@ -962,9 +961,9 @@ const (
 	StackSetOperationActionDetectDrift StackSetOperationAction = "DETECT_DRIFT"
 )
 
-// Values returns all known values for StackSetOperationAction. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StackSetOperationAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StackSetOperationAction) Values() []StackSetOperationAction {
 	return []StackSetOperationAction{
 		"CREATE",
@@ -1011,9 +1010,9 @@ const (
 	StackSetOperationStatusQueued    StackSetOperationStatus = "QUEUED"
 )
 
-// Values returns all known values for StackSetOperationStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StackSetOperationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StackSetOperationStatus) Values() []StackSetOperationStatus {
 	return []StackSetOperationStatus{
 		"RUNNING",
@@ -1072,9 +1071,9 @@ const (
 	StackStatusImportRollbackComplete                  StackStatus = "IMPORT_ROLLBACK_COMPLETE"
 )
 
-// Values returns all known values for StackStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StackStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StackStatus) Values() []StackStatus {
 	return []StackStatus{
 		"CREATE_IN_PROGRESS",
@@ -1171,9 +1170,9 @@ const (
 	VersionBumpMinor VersionBump = "MINOR"
 )
 
-// Values returns all known values for VersionBump. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VersionBump. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (VersionBump) Values() []VersionBump {
 	return []VersionBump{
 		"MAJOR",

@@ -60,7 +60,7 @@ type ListStageDeploymentsOutput struct {
 	NextToken *string
 
 	// A list of stage deployment summaries. You can use the deployment IDs in the
-	// UpdateStageDeployment and GetStageDeployment  actions.
+	// UpdateStageDeployment and GetStageDeployment actions.
 	StageDeployments []types.StageDeploymentSummary
 
 	// Metadata pertaining to the operation's result.
@@ -147,8 +147,8 @@ type ListStageDeploymentsPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

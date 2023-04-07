@@ -12,9 +12,9 @@ import (
 )
 
 // Gets the availability options configured for a domain. By default, shows the
-// configuration with any pending changes. Set the Deployed  option to true to
-// show the active configuration and exclude pending changes. For more information,
-// see Configuring Availability Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
+// configuration with any pending changes. Set the Deployed option to true to show
+// the active configuration and exclude pending changes. For more information, see
+// Configuring Availability Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DescribeAvailabilityOptions(ctx context.Context, params *DescribeAvailabilityOptionsInput, optFns ...func(*Options)) (*DescribeAvailabilityOptionsOutput, error) {
 	if params == nil {
@@ -41,7 +41,7 @@ type DescribeAvailabilityOptionsInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Whether to display the deployed configuration ( true) or include any pending
+	// Whether to display the deployed configuration ( true ) or include any pending
 	// changes ( false ). Defaults to false .
 	Deployed *bool
 

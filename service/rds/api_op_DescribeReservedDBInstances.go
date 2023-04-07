@@ -54,8 +54,8 @@ type DescribeReservedDBInstancesInput struct {
 	Marker *string
 
 	// The maximum number of records to include in the response. If more than the
-	// MaxRecordsvalue is available, a pagination token called a marker is included
-	// in the response so you can retrieve the remaining results. Default: 100
+	// MaxRecords value is available, a pagination token called a marker is included in
+	// the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -68,8 +68,8 @@ type DescribeReservedDBInstancesInput struct {
 	// "Partial Upfront" | "All Upfront" | "No Upfront"
 	OfferingType *string
 
-	// The product description filter value. Specify this parameter to show only
-	// those reservations matching the specified product description.
+	// The product description filter value. Specify this parameter to show only those
+	// reservations matching the specified product description.
 	ProductDescription *string
 
 	// The reserved DB instance identifier filter value. Specify this parameter to
@@ -176,13 +176,13 @@ var _ DescribeReservedDBInstancesAPIClient = (*Client)(nil)
 // DescribeReservedDBInstances
 type DescribeReservedDBInstancesPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more than the
-	// MaxRecordsvalue is available, a pagination token called a marker is included
-	// in the response so you can retrieve the remaining results. Default: 100
+	// MaxRecords value is available, a pagination token called a marker is included in
+	// the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

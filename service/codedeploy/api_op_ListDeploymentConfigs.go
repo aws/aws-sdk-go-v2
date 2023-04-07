@@ -28,7 +28,7 @@ func (c *Client) ListDeploymentConfigs(ctx context.Context, params *ListDeployme
 	return out, nil
 }
 
-// Represents the input of a ListDeploymentConfigs  operation.
+// Represents the input of a ListDeploymentConfigs operation.
 type ListDeploymentConfigsInput struct {
 
 	// An identifier returned from the previous ListDeploymentConfigs call. It can be
@@ -38,7 +38,7 @@ type ListDeploymentConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListDeploymentConfigs  operation.
+// Represents the output of a ListDeploymentConfigs operation.
 type ListDeploymentConfigsOutput struct {
 
 	// A list of deployment configurations, including built-in configurations such as
@@ -127,8 +127,8 @@ var _ ListDeploymentConfigsAPIClient = (*Client)(nil)
 // ListDeploymentConfigsPaginatorOptions is the paginator options for
 // ListDeploymentConfigs
 type ListDeploymentConfigsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom medical vocabulary. To use this operation, specify the name
-// of the custom vocabulary you want to delete using VocabularyName. Custom
+// Deletes a custom medical vocabulary. To use this operation, specify the name of
+// the custom vocabulary you want to delete using VocabularyName . Custom
 // vocabulary names are case sensitive.
 func (c *Client) DeleteMedicalVocabulary(ctx context.Context, params *DeleteMedicalVocabularyInput, optFns ...func(*Options)) (*DeleteMedicalVocabularyOutput, error) {
 	if params == nil {

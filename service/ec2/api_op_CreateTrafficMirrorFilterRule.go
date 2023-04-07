@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Traffic Mirror filter rule. A Traffic Mirror rule defines the
-// Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID
-// when you create the rule.
+// Creates a Traffic Mirror filter rule. A Traffic Mirror rule defines the Traffic
+// Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you
+// create the rule.
 func (c *Client) CreateTrafficMirrorFilterRule(ctx context.Context, params *CreateTrafficMirrorFilterRuleInput, optFns ...func(*Options)) (*CreateTrafficMirrorFilterRuleOutput, error) {
 	if params == nil {
 		params = &CreateTrafficMirrorFilterRuleInput{}
@@ -64,8 +64,8 @@ type CreateTrafficMirrorFilterRuleInput struct {
 	// This member is required.
 	TrafficMirrorFilterId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 
@@ -94,8 +94,8 @@ type CreateTrafficMirrorFilterRuleInput struct {
 
 type CreateTrafficMirrorFilterRuleOutput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 

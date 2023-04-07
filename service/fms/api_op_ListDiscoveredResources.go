@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of resources in the organization's accounts that are
-// available to be associated with a resource set.
+// Returns an array of resources in the organization's accounts that are available
+// to be associated with a resource set.
 func (c *Client) ListDiscoveredResources(ctx context.Context, params *ListDiscoveredResourcesInput, optFns ...func(*Options)) (*ListDiscoveredResourcesOutput, error) {
 	if params == nil {
 		params = &ListDiscoveredResourcesInput{}
@@ -41,8 +41,8 @@ type ListDiscoveredResourcesInput struct {
 	// This member is required.
 	ResourceType *string
 
-	// The maximum number of objects that you want Firewall Manager to return for
-	// this request. If more objects are available, in the response, Firewall Manager
+	// The maximum number of objects that you want Firewall Manager to return for this
+	// request. If more objects are available, in the response, Firewall Manager
 	// provides a NextToken value that you can use in a subsequent call to get the
 	// next batch of objects.
 	MaxResults *int32

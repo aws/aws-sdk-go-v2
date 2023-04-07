@@ -58,9 +58,9 @@ type GetExtensionOutput struct {
 	// The extension name.
 	Name *string
 
-	// The parameters accepted by the extension. You specify parameter values when
-	// you associate the extension to an AppConfig resource by using the
-	// CreateExtensionAssociationAPI action. For Lambda extension actions, these
+	// The parameters accepted by the extension. You specify parameter values when you
+	// associate the extension to an AppConfig resource by using the
+	// CreateExtensionAssociation API action. For Lambda extension actions, these
 	// parameters are included in the Lambda request object.
 	Parameters map[string]types.Parameter
 

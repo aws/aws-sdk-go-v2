@@ -13,14 +13,13 @@ import (
 
 // Returns a set of temporary security credentials that you can use to access
 // Amazon Web Services resources. These temporary credentials consist of an access
-// key ID, a secret access key, and a security token. Typically, you use
-// AssumeRole within your account or for cross-account access. For a comparison of
-// AssumeRole with other API operations that produce temporary credentials, see
-// Requesting Temporary Security Credentials (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html)
+// key ID, a secret access key, and a security token. Typically, you use AssumeRole
+// within your account or for cross-account access. For a comparison of AssumeRole
+// with other API operations that produce temporary credentials, see Requesting
+// Temporary Security Credentials (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html)
 // and Comparing the Amazon Web Services STS API operations (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison)
 // in the IAM User Guide. Permissions The temporary security credentials created by
-//
-// AssumeRolecan be used to make API calls to any Amazon Web Services service
+// AssumeRole can be used to make API calls to any Amazon Web Services service
 // with the following exception: You cannot call the Amazon Web Services STS
 // GetFederationToken or GetSessionToken API operations. (Optional) You can pass
 // inline or managed session policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
@@ -48,14 +47,14 @@ import (
 // user to call AssumeRole for the ARN of the role in the other account. To allow
 // a user to assume a role in the same account, you can do either of the following:
 //
-//   - Attach a policy to the user that allows the user to call AssumeRole (as long as the role's trust policy trusts the account).
+//   - Attach a policy to the user that allows the user to call AssumeRole (as long
+//     as the role's trust policy trusts the account).
 //   - Add the user as a principal directly in the role's trust policy.
 //
-// You can
-// do either because the role’s trust policy acts as an IAM resource-based policy.
-// When a resource-based policy grants access to a principal in the same account,
-// no additional identity-based policy is required. For more information about
-// trust policies and resource-based policies, see IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
+// You can do either because the role’s trust policy acts as an IAM resource-based
+// policy. When a resource-based policy grants access to a principal in the same
+// account, no additional identity-based policy is required. For more information
+// about trust policies and resource-based policies, see IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
 // in the IAM User Guide. Tags (Optional) You can pass tag key-value pairs to your
 // session. These tags are called session tags. For more information about session
 // tags, see Passing Session Tags in STS (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html)
@@ -67,17 +66,17 @@ import (
 // tags persist during role chaining. For more information, see Chaining Roles
 // with Session Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining)
 // in the IAM User Guide. Using MFA with AssumeRole (Optional) You can include
-// multi-factor authentication (MFA) information when you call AssumeRole. This
-// is useful for cross-account scenarios to ensure that the user that assumes the
-// role has been authenticated with an Amazon Web Services MFA device. In that
-// scenario, the trust policy of the role being assumed includes a condition that
-// tests for MFA authentication. If the caller does not include valid MFA
-// information, the request to assume the role is denied. The condition in a trust
-// policy that tests for MFA authentication might look like the following example.
-// "Condition": {"Bool": {"aws:MultiFactorAuthPresent": true}}For more
-// information, see Configuring MFA-Protected API Access (https://docs.aws.amazon.com/IAM/latest/UserGuide/MFAProtectedAPI.html)
-// in the IAM User Guide guide. To use MFA with AssumeRole, you pass values for
-// the SerialNumber  and TokenCode  parameters. The SerialNumber value identifies
+// multi-factor authentication (MFA) information when you call AssumeRole . This is
+// useful for cross-account scenarios to ensure that the user that assumes the role
+// has been authenticated with an Amazon Web Services MFA device. In that scenario,
+// the trust policy of the role being assumed includes a condition that tests for
+// MFA authentication. If the caller does not include valid MFA information, the
+// request to assume the role is denied. The condition in a trust policy that tests
+// for MFA authentication might look like the following example. "Condition":
+// {"Bool": {"aws:MultiFactorAuthPresent": true}} For more information, see
+// Configuring MFA-Protected API Access (https://docs.aws.amazon.com/IAM/latest/UserGuide/MFAProtectedAPI.html)
+// in the IAM User Guide guide. To use MFA with AssumeRole , you pass values for
+// the SerialNumber and TokenCode parameters. The SerialNumber value identifies
 // the user's hardware or virtual MFA device. The TokenCode is the time-based
 // one-time password (TOTP) that the MFA device produces.
 func (c *Client) AssumeRole(ctx context.Context, params *AssumeRoleInput, optFns ...func(*Options)) (*AssumeRoleOutput, error) {
@@ -125,15 +124,15 @@ type AssumeRoleInput struct {
 	// session duration of 12 hours, but your administrator set the maximum session
 	// duration to 6 hours, your operation fails. Role chaining limits your Amazon Web
 	// Services CLI or Amazon Web Services API role session to a maximum of one hour.
-	// When you use the AssumeRole API operation to assume a role, you can specify
-	// the duration of your role session with the DurationSeconds parameter. You can
+	// When you use the AssumeRole API operation to assume a role, you can specify the
+	// duration of your role session with the DurationSeconds parameter. You can
 	// specify a parameter value of up to 43200 seconds (12 hours), depending on the
 	// maximum session duration setting for your role. However, if you assume a role
 	// using role chaining and provide a DurationSeconds parameter value greater than
 	// one hour, the operation fails. To learn how to view the maximum value for your
 	// role, see View the Maximum Session Duration Setting for a Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session)
-	// in the IAM User Guide. By default, the value is set to 3600  seconds. The
-	// DurationSecondsparameter is separate from the duration of a console session
+	// in the IAM User Guide. By default, the value is set to 3600 seconds. The
+	// DurationSeconds parameter is separate from the duration of a console session
 	// that you might request using the returned credentials. The request to the
 	// federation endpoint for a console sign-in token takes a SessionDuration
 	// parameter that specifies the maximum length of the console session. For more
@@ -175,8 +174,8 @@ type AssumeRoleInput struct {
 	// Services conversion compresses the passed inline session policy, managed policy
 	// ARNs, and session tags into a packed binary format that has a separate limit.
 	// Your request can fail for this limit even if your plaintext meets the other
-	// requirements. The PackedPolicySize response element indicates by percentage
-	// how close the policies and tags for your request are to the upper size limit.
+	// requirements. The PackedPolicySize response element indicates by percentage how
+	// close the policies and tags for your request are to the upper size limit.
 	Policy *string
 
 	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want to
@@ -189,15 +188,15 @@ type AssumeRoleInput struct {
 	// compresses the passed inline session policy, managed policy ARNs, and session
 	// tags into a packed binary format that has a separate limit. Your request can
 	// fail for this limit even if your plaintext meets the other requirements. The
-	// PackedPolicySizeresponse element indicates by percentage how close the
-	// policies and tags for your request are to the upper size limit. Passing policies
-	// to this operation returns new temporary credentials. The resulting session's
-	// permissions are the intersection of the role's identity-based policy and the
-	// session policies. You can use the role's temporary credentials in subsequent
-	// Amazon Web Services API calls to access resources in the account that owns the
-	// role. You cannot use session policies to grant more permissions than those
-	// allowed by the identity-based policy of the role that is being assumed. For more
-	// information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// PackedPolicySize response element indicates by percentage how close the policies
+	// and tags for your request are to the upper size limit. Passing policies to this
+	// operation returns new temporary credentials. The resulting session's permissions
+	// are the intersection of the role's identity-based policy and the session
+	// policies. You can use the role's temporary credentials in subsequent Amazon Web
+	// Services API calls to access resources in the account that owns the role. You
+	// cannot use session policies to grant more permissions than those allowed by the
+	// identity-based policy of the role that is being assumed. For more information,
+	// see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
 	PolicyArns []types.PolicyDescriptorType
 
@@ -206,7 +205,7 @@ type AssumeRoleInput struct {
 	// the role being assumed includes a condition that requires MFA authentication.
 	// The value is either the serial number for a hardware device (such as
 	// GAHT12345678 ) or an Amazon Resource Name (ARN) for a virtual device (such as
-	// arn:aws:iam::123456789012:mfa/user). The regex used to validate this parameter
+	// arn:aws:iam::123456789012:mfa/user ). The regex used to validate this parameter
 	// is a string of characters consisting of upper- and lower-case alphanumeric
 	// characters with no spaces. You can also include underscores or any of the
 	// following characters: =,.@-
@@ -214,16 +213,16 @@ type AssumeRoleInput struct {
 
 	// The source identity specified by the principal that is calling the AssumeRole
 	// operation. You can require users to specify a source identity when they assume a
-	// role. You do this by using the sts:SourceIdentity condition key in a role
-	// trust policy. You can use source identity information in CloudTrail logs to
-	// determine who took actions with a role. You can use the aws:SourceIdentity
-	// condition key to further control access to Amazon Web Services resources based
-	// on the value of source identity. For more information about using source
-	// identity, see Monitor and control actions taken with assumed roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html)
+	// role. You do this by using the sts:SourceIdentity condition key in a role trust
+	// policy. You can use source identity information in CloudTrail logs to determine
+	// who took actions with a role. You can use the aws:SourceIdentity condition key
+	// to further control access to Amazon Web Services resources based on the value of
+	// source identity. For more information about using source identity, see Monitor
+	// and control actions taken with assumed roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html)
 	// in the IAM User Guide. The regex used to validate this parameter is a string of
 	// characters consisting of upper- and lower-case alphanumeric characters with no
 	// spaces. You can also include underscores or any of the following characters:
-	// =,.@-. You cannot use a value that begins with the text aws:. This prefix is
+	// =,.@-. You cannot use a value that begins with the text aws: . This prefix is
 	// reserved for Amazon Web Services internal use.
 	SourceIdentity *string
 
@@ -243,16 +242,15 @@ type AssumeRoleInput struct {
 	// same key as a tag that is already attached to the role. When you do, session
 	// tags override a role tag with the same key. Tag key–value pairs are not case
 	// sensitive, but case is preserved. This means that you cannot have separate
-	// Department and department  tag keys. Assume that the role has the Department =
-	// Marketing tag and you pass the department = engineering  session tag.
-	// Department and department are not saved as separate tags, and the session tag
-	// passed in the request takes precedence over the role tag. Additionally, if you
-	// used temporary credentials to perform this operation, the new session inherits
-	// any transitive session tags from the calling session. If you pass a session tag
-	// with the same key as an inherited tag, the operation fails. To view the
-	// inherited tags for a session, see the CloudTrail logs. For more information, see
-	//
-	// Viewing Session Tags in CloudTrail (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_ctlogs)
+	// Department and department tag keys. Assume that the role has the Department =
+	// Marketing tag and you pass the department = engineering session tag. Department
+	// and department are not saved as separate tags, and the session tag passed in
+	// the request takes precedence over the role tag. Additionally, if you used
+	// temporary credentials to perform this operation, the new session inherits any
+	// transitive session tags from the calling session. If you pass a session tag with
+	// the same key as an inherited tag, the operation fails. To view the inherited
+	// tags for a session, see the CloudTrail logs. For more information, see Viewing
+	// Session Tags in CloudTrail (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_ctlogs)
 	// in the IAM User Guide.
 	Tags []types.Tag
 
@@ -266,8 +264,8 @@ type AssumeRoleInput struct {
 
 	// A list of keys for session tags that you want to set as transitive. If you set
 	// a tag key as transitive, the corresponding key and value passes to subsequent
-	// sessions in a role chain. For more information, see Chaining Roles with
-	// Session Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining)
+	// sessions in a role chain. For more information, see Chaining Roles with Session
+	// Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining)
 	// in the IAM User Guide. This parameter is optional. When you set session tags as
 	// transitive, the session policy and session tags packed binary limit is not
 	// affected. If you choose not to specify a transitive tag key, then no tags are
@@ -303,12 +301,12 @@ type AssumeRoleOutput struct {
 
 	// The source identity specified by the principal that is calling the AssumeRole
 	// operation. You can require users to specify a source identity when they assume a
-	// role. You do this by using the sts:SourceIdentity condition key in a role
-	// trust policy. You can use source identity information in CloudTrail logs to
-	// determine who took actions with a role. You can use the aws:SourceIdentity
-	// condition key to further control access to Amazon Web Services resources based
-	// on the value of source identity. For more information about using source
-	// identity, see Monitor and control actions taken with assumed roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html)
+	// role. You do this by using the sts:SourceIdentity condition key in a role trust
+	// policy. You can use source identity information in CloudTrail logs to determine
+	// who took actions with a role. You can use the aws:SourceIdentity condition key
+	// to further control access to Amazon Web Services resources based on the value of
+	// source identity. For more information about using source identity, see Monitor
+	// and control actions taken with assumed roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html)
 	// in the IAM User Guide. The regex used to validate this parameter is a string of
 	// characters consisting of upper- and lower-case alphanumeric characters with no
 	// spaces. You can also include underscores or any of the following characters:

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the fraudster registration jobs in the domain with the given
-// JobStatus . If JobStatus is not provided, this lists all fraudster
-// registration jobs in the given domain.
+// Lists all the fraudster registration jobs in the domain with the given JobStatus
+// . If JobStatus is not provided, this lists all fraudster registration jobs in
+// the given domain.
 func (c *Client) ListFraudsterRegistrationJobs(ctx context.Context, params *ListFraudsterRegistrationJobsInput, optFns ...func(*Options)) (*ListFraudsterRegistrationJobsOutput, error) {
 	if params == nil {
 		params = &ListFraudsterRegistrationJobsInput{}
@@ -45,8 +45,8 @@ type ListFraudsterRegistrationJobsInput struct {
 	// size is also 100.
 	MaxResults *int32
 
-	// If NextToken  is returned, there are more results available. The value of
-	// NextTokenis a unique pagination token for each page. Make the call again using
+	// If NextToken is returned, there are more results available. The value of
+	// NextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours.
 	NextToken *string
@@ -59,8 +59,8 @@ type ListFraudsterRegistrationJobsOutput struct {
 	// A list containing details about each specified fraudster registration job.
 	JobSummaries []types.FraudsterRegistrationJobSummary
 
-	// If NextToken  is returned, there are more results available. The value of
-	// NextTokenis a unique pagination token for each page. Make the call again using
+	// If NextToken is returned, there are more results available. The value of
+	// NextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours.
 	NextToken *string
@@ -150,8 +150,8 @@ type ListFraudsterRegistrationJobsPaginatorOptions struct {
 	// size is also 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

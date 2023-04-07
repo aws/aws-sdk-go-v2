@@ -59,8 +59,8 @@ type CreateInfrastructureConfigurationInput struct {
 	// instance types based on availability.
 	InstanceTypes []string
 
-	// The key pair of the infrastructure configuration. You can use this to log on
-	// to and debug the instance used to create your image.
+	// The key pair of the infrastructure configuration. You can use this to log on to
+	// and debug the instance used to create your image.
 	KeyPair *string
 
 	// The logging configuration of the infrastructure configuration.

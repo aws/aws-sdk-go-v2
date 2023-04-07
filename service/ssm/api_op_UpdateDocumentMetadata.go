@@ -35,8 +35,7 @@ type UpdateDocumentMetadataInput struct {
 	// This member is required.
 	DocumentReviews *types.DocumentReviews
 
-	// The name of the change template for which a version's metadata is to be
-	// updated.
+	// The name of the change template for which a version's metadata is to be updated.
 	//
 	// This member is required.
 	Name *string

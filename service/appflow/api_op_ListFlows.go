@@ -30,8 +30,7 @@ func (c *Client) ListFlows(ctx context.Context, params *ListFlowsInput, optFns .
 
 type ListFlowsInput struct {
 
-	// Specifies the maximum number of items that should be returned in the result
-	// set.
+	// Specifies the maximum number of items that should be returned in the result set.
 	MaxResults *int32
 
 	// The pagination token for next page of data.
@@ -123,12 +122,11 @@ var _ ListFlowsAPIClient = (*Client)(nil)
 
 // ListFlowsPaginatorOptions is the paginator options for ListFlows
 type ListFlowsPaginatorOptions struct {
-	// Specifies the maximum number of items that should be returned in the result
-	// set.
+	// Specifies the maximum number of items that should be returned in the result set.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

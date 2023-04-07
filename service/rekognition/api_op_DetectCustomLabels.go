@@ -11,17 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Detects custom labels in a supplied image by using an Amazon Rekognition
-// Custom Labels model. You specify which version of a model version to use by
-// using the ProjectVersionArn input parameter. You pass the input image as
-// base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket.
-// If you use the AWS CLI to call Amazon Rekognition operations, passing image
-// bytes is not supported. The image must be either a PNG or JPEG formatted file.
-// For each object that the model version detects on an image, the API returns a (
+// Detects custom labels in a supplied image by using an Amazon Rekognition Custom
+// Labels model. You specify which version of a model version to use by using the
+// ProjectVersionArn input parameter. You pass the input image as base64-encoded
+// image bytes or as a reference to an image in an Amazon S3 bucket. If you use the
+// AWS CLI to call Amazon Rekognition operations, passing image bytes is not
+// supported. The image must be either a PNG or JPEG formatted file. For each
+// object that the model version detects on an image, the API returns a (
 // CustomLabel ) object in an array ( CustomLabels ). Each CustomLabel object
-// provides the label name ( Name), the level of confidence that the image
-// contains the object ( Confidence), and object location information, if it
-// exists, for the label on the image ( Geometry). To filter labels that are
+// provides the label name ( Name ), the level of confidence that the image
+// contains the object ( Confidence ), and object location information, if it
+// exists, for the label on the image ( Geometry ). To filter labels that are
 // returned, specify a value for MinConfidence . DetectCustomLabelsLabels only
 // returns labels with a confidence that's higher than the specified value. The
 // value of MinConfidence maps to the assumed threshold values created during
@@ -29,15 +29,15 @@ import (
 // Custom Labels Developer Guide. Amazon Rekognition Custom Labels metrics
 // expresses an assumed threshold as a floating point value between 0-1. The range
 // of MinConfidence normalizes the threshold value to a percentage value (0-100).
-// Confidence responses from DetectCustomLabels are also returned as a
-// percentage. You can use MinConfidence to change the precision and recall or
-// your model. For more information, see Analyzing an image in the Amazon
-// Rekognition Custom Labels Developer Guide. If you don't specify a value for
-// MinConfidence , DetectCustomLabels returns labels based on the assumed
-// threshold of each label. This is a stateless API operation. That is, the
-// operation does not persist any data. This operation requires permissions to
-// perform the rekognition:DetectCustomLabels action. For more information, see
-// Analyzing an image in the Amazon Rekognition Custom Labels Developer Guide.
+// Confidence responses from DetectCustomLabels are also returned as a percentage.
+// You can use MinConfidence to change the precision and recall or your model. For
+// more information, see Analyzing an image in the Amazon Rekognition Custom Labels
+// Developer Guide. If you don't specify a value for MinConfidence ,
+// DetectCustomLabels returns labels based on the assumed threshold of each label.
+// This is a stateless API operation. That is, the operation does not persist any
+// data. This operation requires permissions to perform the
+// rekognition:DetectCustomLabels action. For more information, see Analyzing an
+// image in the Amazon Rekognition Custom Labels Developer Guide.
 func (c *Client) DetectCustomLabels(ctx context.Context, params *DetectCustomLabelsInput, optFns ...func(*Options)) (*DetectCustomLabelsOutput, error) {
 	if params == nil {
 		params = &DetectCustomLabelsInput{}
@@ -87,11 +87,11 @@ type DetectCustomLabelsInput struct {
 	MaxResults *int32
 
 	// Specifies the minimum confidence level for the labels to return.
-	// DetectCustomLabelsdoesn't return any labels with a confidence value that's
-	// lower than this specified value. If you specify a value of 0,
-	// DetectCustomLabelsreturns all labels, regardless of the assumed threshold
-	// applied to each label. If you don't specify a value for MinConfidence ,
-	// DetectCustomLabels returns labels based on the assumed threshold of each label.
+	// DetectCustomLabels doesn't return any labels with a confidence value that's
+	// lower than this specified value. If you specify a value of 0, DetectCustomLabels
+	// returns all labels, regardless of the assumed threshold applied to each label.
+	// If you don't specify a value for MinConfidence , DetectCustomLabels returns
+	// labels based on the assumed threshold of each label.
 	MinConfidence *float32
 
 	noSmithyDocumentSerde

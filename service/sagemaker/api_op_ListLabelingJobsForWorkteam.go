@@ -45,15 +45,15 @@ type ListLabelingJobsForWorkteamInput struct {
 	// (timestamp).
 	CreationTimeBefore *time.Time
 
-	// A filter the limits jobs to only the ones whose job reference code contains
-	// the specified string.
+	// A filter the limits jobs to only the ones whose job reference code contains the
+	// specified string.
 	JobReferenceCodeContains *string
 
 	// The maximum number of labeling jobs to return in each page of the response.
 	MaxResults *int32
 
 	// If the result of the previous ListLabelingJobsForWorkteam request was
-	// truncated, the response includes a NextToken. To retrieve the next set of
+	// truncated, the response includes a NextToken . To retrieve the next set of
 	// labeling jobs, use the token in the next request.
 	NextToken *string
 
@@ -68,7 +68,7 @@ type ListLabelingJobsForWorkteamInput struct {
 
 type ListLabelingJobsForWorkteamOutput struct {
 
-	// An array of LabelingJobSummary  objects, each describing a labeling job.
+	// An array of LabelingJobSummary objects, each describing a labeling job.
 	//
 	// This member is required.
 	LabelingJobSummaryList []types.LabelingJobForWorkteamSummary
@@ -160,8 +160,8 @@ type ListLabelingJobsForWorkteamPaginatorOptions struct {
 	// The maximum number of labeling jobs to return in each page of the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

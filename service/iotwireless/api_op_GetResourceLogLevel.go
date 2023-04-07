@@ -36,7 +36,7 @@ type GetResourceLogLevelInput struct {
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of the resource, which can be WirelessDevice  or WirelessGateway .
+	// The type of the resource, which can be WirelessDevice or WirelessGateway .
 	//
 	// This member is required.
 	ResourceType *string
@@ -46,9 +46,9 @@ type GetResourceLogLevelInput struct {
 
 type GetResourceLogLevelOutput struct {
 
-	// The log level for a log message. The log levels can be disabled, or set to
-	// ERROR to display less verbose logs containing only error information, or to
-	// INFO for more detailed logs.
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
 	LogLevel types.LogLevel
 
 	// Metadata pertaining to the operation's result.

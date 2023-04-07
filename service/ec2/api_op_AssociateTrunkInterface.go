@@ -16,7 +16,7 @@ import (
 // using this feature, contact your account manager. Associates a branch network
 // interface with a trunk network interface. Before you create the association, run
 // the create-network-interface (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html)
-// command and set --interface-type  to trunk. You must also create a network
+// command and set --interface-type to trunk . You must also create a network
 // interface for each branch network interface that you want to associate with the
 // trunk network interface.
 func (c *Client) AssociateTrunkInterface(ctx context.Context, params *AssociateTrunkInterfaceInput, optFns ...func(*Options)) (*AssociateTrunkInterfaceOutput, error) {
@@ -46,8 +46,8 @@ type AssociateTrunkInterfaceInput struct {
 	// This member is required.
 	TrunkInterfaceId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 
@@ -68,8 +68,8 @@ type AssociateTrunkInterfaceInput struct {
 
 type AssociateTrunkInterfaceOutput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 

@@ -11,7 +11,7 @@ import (
 )
 
 // Returns the settings for sending SMS messages from your Amazon Web Services
-// account. These settings are set with the SetSMSAttributes  action.
+// account. These settings are set with the SetSMSAttributes action.
 func (c *Client) GetSMSAttributes(ctx context.Context, params *GetSMSAttributesInput, optFns ...func(*Options)) (*GetSMSAttributesOutput, error) {
 	if params == nil {
 		params = &GetSMSAttributesInput{}
@@ -27,10 +27,10 @@ func (c *Client) GetSMSAttributes(ctx context.Context, params *GetSMSAttributesI
 	return out, nil
 }
 
-// The input for the GetSMSAttributes  request.
+// The input for the GetSMSAttributes request.
 type GetSMSAttributesInput struct {
 
-	// A list of the individual attribute names, such as MonthlySpendLimit, for which
+	// A list of the individual attribute names, such as MonthlySpendLimit , for which
 	// you want values. For all attribute names, see SetSMSAttributes (https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html)
 	// . If you don't use this parameter, Amazon SNS returns all SMS attributes.
 	Attributes []string
@@ -38,7 +38,7 @@ type GetSMSAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response from the GetSMSAttributes  request.
+// The response from the GetSMSAttributes request.
 type GetSMSAttributesOutput struct {
 
 	// The SMS attribute names and their values.

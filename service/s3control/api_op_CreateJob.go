@@ -81,15 +81,15 @@ type CreateJobInput struct {
 	// Confirmation is only required for jobs created through the Amazon S3 console.
 	ConfirmationRequired *bool
 
-	// A description for this job. You can use any string within the permitted
-	// length. Descriptions don't need to be unique and can be used for multiple jobs.
+	// A description for this job. You can use any string within the permitted length.
+	// Descriptions don't need to be unique and can be used for multiple jobs.
 	Description *string
 
 	// Configuration parameters for the manifest.
 	Manifest *types.JobManifest
 
-	// The attribute container for the ManifestGenerator details. Jobs must be
-	// created with either a manifest file or a ManifestGenerator, but not both.
+	// The attribute container for the ManifestGenerator details. Jobs must be created
+	// with either a manifest file or a ManifestGenerator, but not both.
 	ManifestGenerator types.JobManifestGenerator
 
 	// A set of tags to associate with the S3 Batch Operations job. This is an
@@ -102,7 +102,7 @@ type CreateJobInput struct {
 type CreateJobOutput struct {
 
 	// The ID for this job. Amazon S3 generates this ID automatically and returns it
-	// after a successful Create Job  request.
+	// after a successful Create Job request.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

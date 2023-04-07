@@ -18,7 +18,7 @@ import (
 // URI path, you can then access the archive. After you upload an archive, you
 // should save the archive ID returned to retrieve the archive at a later point.
 // You can also get the vault inventory to obtain a list of archive IDs in a vault.
-// For more information, see InitiateJob. In the request, you must include the
+// For more information, see InitiateJob . In the request, you must include the
 // computed SHA256 tree hash of the entire archive you have uploaded. For
 // information about computing a SHA256 tree hash, see Computing Checksums (https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html)
 // . On the server side, Glacier also constructs the SHA256 tree hash of the
@@ -69,7 +69,7 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 type CompleteMultipartUploadInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
 	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.

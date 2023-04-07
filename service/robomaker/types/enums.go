@@ -30,9 +30,9 @@ const (
 	ComputeTypeGpuAndCpu ComputeType = "GPU_AND_CPU"
 )
 
-// Values returns all known values for ComputeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ComputeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ComputeType) Values() []ComputeType {
 	return []ComputeType{
 		"CPU",
@@ -284,9 +284,9 @@ const (
 	RobotStatusNoResponse           RobotStatus = "NoResponse"
 )
 
-// Values returns all known values for RobotStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RobotStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RobotStatus) Values() []RobotStatus {
 	return []RobotStatus{
 		"Available",
@@ -306,10 +306,9 @@ const (
 	SimulationJobBatchErrorCodeInternalServiceError SimulationJobBatchErrorCode = "InternalServiceError"
 )
 
-// Values returns all known values for SimulationJobBatchErrorCode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for SimulationJobBatchErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationJobBatchErrorCode) Values() []SimulationJobBatchErrorCode {
 	return []SimulationJobBatchErrorCode{
 		"InternalServiceError",
@@ -467,10 +466,9 @@ const (
 	SimulationSoftwareSuiteTypeSimulationRuntime SimulationSoftwareSuiteType = "SimulationRuntime"
 )
 
-// Values returns all known values for SimulationSoftwareSuiteType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for SimulationSoftwareSuiteType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationSoftwareSuiteType) Values() []SimulationSoftwareSuiteType {
 	return []SimulationSoftwareSuiteType{
 		"Gazebo",
@@ -509,9 +507,9 @@ const (
 	WorldExportJobErrorCodeAccessDenied         WorldExportJobErrorCode = "AccessDenied"
 )
 
-// Values returns all known values for WorldExportJobErrorCode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WorldExportJobErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (WorldExportJobErrorCode) Values() []WorldExportJobErrorCode {
 	return []WorldExportJobErrorCode{
 		"InternalServiceError",
@@ -535,8 +533,8 @@ const (
 	WorldExportJobStatusCanceled  WorldExportJobStatus = "Canceled"
 )
 
-// Values returns all known values for WorldExportJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for WorldExportJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (WorldExportJobStatus) Values() []WorldExportJobStatus {
 	return []WorldExportJobStatus{
@@ -561,10 +559,9 @@ const (
 	WorldGenerationJobErrorCodeAllWorldGenerationFailed WorldGenerationJobErrorCode = "AllWorldGenerationFailed"
 )
 
-// Values returns all known values for WorldGenerationJobErrorCode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for WorldGenerationJobErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorldGenerationJobErrorCode) Values() []WorldGenerationJobErrorCode {
 	return []WorldGenerationJobErrorCode{
 		"InternalServiceError",

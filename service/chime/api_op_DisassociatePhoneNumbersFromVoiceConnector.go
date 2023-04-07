@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates the specified phone numbers from the specified Amazon Chime
-// Voice Connector.
+// Disassociates the specified phone numbers from the specified Amazon Chime Voice
+// Connector.
 func (c *Client) DisassociatePhoneNumbersFromVoiceConnector(ctx context.Context, params *DisassociatePhoneNumbersFromVoiceConnectorInput, optFns ...func(*Options)) (*DisassociatePhoneNumbersFromVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &DisassociatePhoneNumbersFromVoiceConnectorInput{}
@@ -45,9 +45,8 @@ type DisassociatePhoneNumbersFromVoiceConnectorInput struct {
 
 type DisassociatePhoneNumbersFromVoiceConnectorOutput struct {
 
-	// If the action fails for one or more of the phone numbers in the request, a
-	// list of the phone numbers is returned, along with error codes and error
-	// messages.
+	// If the action fails for one or more of the phone numbers in the request, a list
+	// of the phone numbers is returned, along with error codes and error messages.
 	PhoneNumberErrors []types.PhoneNumberError
 
 	// Metadata pertaining to the operation's result.

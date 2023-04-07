@@ -27,8 +27,8 @@ func (c *Client) ListElasticsearchVersions(ctx context.Context, params *ListElas
 	return out, nil
 }
 
-// Container for the parameters to the ListElasticsearchVersions  operation. Use
-// MaxResultsto control the maximum number of results to retrieve in a single
+// Container for the parameters to the ListElasticsearchVersions operation. Use
+// MaxResults to control the maximum number of results to retrieve in a single
 // call. Use NextToken in response to retrieve more results. If the received
 // response does not contain a NextToken, then there are no more results to
 // retrieve.
@@ -139,8 +139,8 @@ type ListElasticsearchVersionsPaginatorOptions struct {
 	// greater than 10 else it wont be honored.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

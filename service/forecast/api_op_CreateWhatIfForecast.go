@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A what-if forecast is a forecast that is created from a modified version of
-// the baseline forecast. Each what-if forecast incorporates either a replacement
+// A what-if forecast is a forecast that is created from a modified version of the
+// baseline forecast. Each what-if forecast incorporates either a replacement
 // dataset or a set of transformations to the original dataset.
 func (c *Client) CreateWhatIfForecast(ctx context.Context, params *CreateWhatIfForecastInput, optFns ...func(*Options)) (*CreateWhatIfForecastOutput, error) {
 	if params == nil {

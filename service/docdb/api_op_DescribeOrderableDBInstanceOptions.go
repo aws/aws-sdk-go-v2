@@ -56,10 +56,10 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The virtual private cloud (VPC) filter value. Specify this parameter to show
@@ -157,17 +157,17 @@ type DescribeOrderableDBInstanceOptionsAPIClient interface {
 
 var _ DescribeOrderableDBInstanceOptionsAPIClient = (*Client)(nil)
 
-// DescribeOrderableDBInstanceOptionsPaginatorOptions is the paginator options
-// for DescribeOrderableDBInstanceOptions
+// DescribeOrderableDBInstanceOptionsPaginatorOptions is the paginator options for
+// DescribeOrderableDBInstanceOptions
 type DescribeOrderableDBInstanceOptionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

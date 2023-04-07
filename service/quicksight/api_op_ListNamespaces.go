@@ -60,11 +60,11 @@ type ListNamespacesOutput struct {
 	Namespaces []types.NamespaceInfoV2
 
 	// A unique pagination token that can be used in a subsequent request. Receiving
-	// NextTokenin your response inticates that there is more data that can be
+	// NextToken in your response inticates that there is more data that can be
 	// returned. To receive the data, make another ListNamespaces API call with the
 	// returned token to retrieve the next page of data. Each token is valid for 24
 	// hours. If you try to make a ListNamespaces API call with an expired token, you
-	// will receive a HTTP 400 InvalidNextTokenException  error.
+	// will receive a HTTP 400 InvalidNextTokenException error.
 	NextToken *string
 
 	// The Amazon Web Services request ID for this operation.
@@ -155,8 +155,8 @@ type ListNamespacesPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

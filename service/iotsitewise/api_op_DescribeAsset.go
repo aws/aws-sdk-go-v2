@@ -60,7 +60,7 @@ type DescribeAssetOutput struct {
 	// This member is required.
 	AssetCreationDate *time.Time
 
-	// A list of asset hierarchies that each contain a hierarchyId. A hierarchy
+	// A list of asset hierarchies that each contain a hierarchyId . A hierarchy
 	// specifies allowed parent/child asset relationships.
 	//
 	// This member is required.
@@ -88,7 +88,7 @@ type DescribeAssetOutput struct {
 
 	// The list of asset properties for the asset. This object doesn't include
 	// properties that you define in composite models. You can find composite model
-	// properties in the assetCompositeModels  object.
+	// properties in the assetCompositeModels object.
 	//
 	// This member is required.
 	AssetProperties []types.AssetProperty
@@ -441,9 +441,9 @@ func NewAssetNotExistsWaiter(client DescribeAssetAPIClient, optFns ...func(*Asse
 	}
 }
 
-// Wait calls the waiter function for AssetNotExists waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for AssetNotExists waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *AssetNotExistsWaiter) Wait(ctx context.Context, params *DescribeAssetInput, maxWaitDur time.Duration, optFns ...func(*AssetNotExistsWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

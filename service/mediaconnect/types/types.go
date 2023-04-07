@@ -50,8 +50,8 @@ type AddMediaStreamRequest struct {
 	// this value to either 48000 or 96000.
 	ClockRate int32
 
-	// A description that can help you quickly identify what your media stream is
-	// used for.
+	// A description that can help you quickly identify what your media stream is used
+	// for.
 	Description *string
 
 	// The resolution of the video.
@@ -68,24 +68,24 @@ type AddOutputRequest struct {
 	// This member is required.
 	Protocol Protocol
 
-	// The range of IP addresses that should be allowed to initiate output requests
-	// to this flow. These IP addresses should be in the form of a Classless
-	// Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+	// The range of IP addresses that should be allowed to initiate output requests to
+	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
+	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	CidrAllowList []string
 
-	// A description of the output. This description appears only on the AWS
-	// Elemental MediaConnect console and will not be seen by the end user.
+	// A description of the output. This description appears only on the AWS Elemental
+	// MediaConnect console and will not be seen by the end user.
 	Description *string
 
 	// The IP address from which video will be sent to output destinations.
 	Destination *string
 
-	// The type of key used for the encryption. If no keyType is provided, the
-	// service will use the default setting (static-key).
+	// The type of key used for the encryption. If no keyType is provided, the service
+	// will use the default setting (static-key).
 	Encryption *Encryption
 
-	// The maximum latency in milliseconds. This parameter applies only to
-	// RIST-based, Zixi-based, and Fujitsu-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
+	// Zixi-based, and Fujitsu-based streams.
 	MaxLatency int32
 
 	// The media streams that are associated with the output, and the parameters for
@@ -159,20 +159,19 @@ type DestinationConfiguration struct {
 // stream.
 type DestinationConfigurationRequest struct {
 
-	// The IP address where you want MediaConnect to send contents of the media
-	// stream.
+	// The IP address where you want MediaConnect to send contents of the media stream.
 	//
 	// This member is required.
 	DestinationIp *string
 
-	// The port that you want MediaConnect to use when it distributes the media
-	// stream to the output.
+	// The port that you want MediaConnect to use when it distributes the media stream
+	// to the output.
 	//
 	// This member is required.
 	DestinationPort int32
 
-	// The VPC interface that you want to use for the media stream associated with
-	// the output.
+	// The VPC interface that you want to use for the media stream associated with the
+	// output.
 	//
 	// This member is required.
 	Interface *InterfaceRequest
@@ -184,8 +183,8 @@ type DestinationConfigurationRequest struct {
 // content. These fields only apply to outputs on flows that have a CDI source.
 type EncodingParameters struct {
 
-	// A value that is used to calculate compression for an output. The bitrate of
-	// the output is calculated as follows: Output bitrate = (1 / compressionFactor) *
+	// A value that is used to calculate compression for an output. The bitrate of the
+	// output is calculated as follows: Output bitrate = (1 / compressionFactor) *
 	// (source bitrate) This property only applies to outputs that use the ST 2110 JPEG
 	// XS protocol, with a flow source that uses the CDI protocol. Valid values are
 	// floating point numbers in the range of 3.0 to 10.0, inclusive.
@@ -207,8 +206,8 @@ type EncodingParameters struct {
 // content. These fields only apply to outputs on flows that have a CDI source.
 type EncodingParametersRequest struct {
 
-	// A value that is used to calculate compression for an output. The bitrate of
-	// the output is calculated as follows: Output bitrate = (1 / compressionFactor) *
+	// A value that is used to calculate compression for an output. The bitrate of the
+	// output is calculated as follows: Output bitrate = (1 / compressionFactor) *
 	// (source bitrate) This property only applies to outputs that use the ST 2110 JPEG
 	// XS protocol, with a flow source that uses the CDI protocol. Valid values are
 	// floating point numbers in the range of 3.0 to 10.0, inclusive.
@@ -249,8 +248,8 @@ type Encryption struct {
 	// encryption and is not valid for static key encryption.
 	DeviceId *string
 
-	// The type of key that is used for the encryption. If no keyType is provided,
-	// the service will use the default setting (static-key).
+	// The type of key that is used for the encryption. If no keyType is provided, the
+	// service will use the default setting (static-key).
 	KeyType KeyType
 
 	// The AWS Region that the API Gateway proxy endpoint was created in. This
@@ -407,9 +406,9 @@ type Fmtp struct {
 	// The format that is used for the representation of color.
 	Colorimetry Colorimetry
 
-	// The frame rate for the video stream, in frames/second. For example:
-	// 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For
-	// example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate.
+	// The frame rate for the video stream, in frames/second. For example: 60000/1001.
+	// If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if
+	// you specify 60, MediaConnect uses 60/1 as the exactFramerate.
 	ExactFramerate *string
 
 	// The pixel aspect ratio (PAR) of the video.
@@ -436,9 +435,9 @@ type FmtpRequest struct {
 	// The format that is used for the representation of color.
 	Colorimetry Colorimetry
 
-	// The frame rate for the video stream, in frames/second. For example:
-	// 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For
-	// example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate.
+	// The frame rate for the video stream, in frames/second. For example: 60000/1001.
+	// If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if
+	// you specify 60, MediaConnect uses 60/1 as the exactFramerate.
 	ExactFramerate *string
 
 	// The pixel aspect ratio (PAR) of the video.
@@ -492,8 +491,7 @@ type GrantEntitlementRequest struct {
 // The transport parameters that are associated with an incoming media stream.
 type InputConfiguration struct {
 
-	// The IP address that the flow listens on for incoming content for a media
-	// stream.
+	// The IP address that the flow listens on for incoming content for a media stream.
 	//
 	// This member is required.
 	InputIp *string
@@ -595,10 +593,9 @@ type ListedFlow struct {
 	// This member is required.
 	Name *string
 
-	// The type of source. This value is either owned (originated somewhere other
-	// than an AWS Elemental MediaConnect flow owned by another AWS account) or
-	// entitled (originated at an AWS Elemental MediaConnect flow owned by another AWS
-	// account).
+	// The type of source. This value is either owned (originated somewhere other than
+	// an AWS Elemental MediaConnect flow owned by another AWS account) or entitled
+	// (originated at an AWS Elemental MediaConnect flow owned by another AWS account).
 	//
 	// This member is required.
 	SourceType SourceType
@@ -643,9 +640,9 @@ type Maintenance struct {
 // streams.
 type MediaStream struct {
 
-	// The format type number (sometimes referred to as RTP payload type) of the
-	// media stream. MediaConnect assigns this value to the media stream. For ST 2110
-	// JPEG XS outputs, you need to provide this value to the receiver.
+	// The format type number (sometimes referred to as RTP payload type) of the media
+	// stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS
+	// outputs, you need to provide this value to the receiver.
 	//
 	// This member is required.
 	Fmt int32
@@ -671,8 +668,8 @@ type MediaStream struct {
 	// The sample rate for the stream. This value is measured in Hz.
 	ClockRate int32
 
-	// A description that can help you quickly identify what your media stream is
-	// used for.
+	// A description that can help you quickly identify what your media stream is used
+	// for.
 	Description *string
 
 	// The resolution of the video.
@@ -733,8 +730,8 @@ type MediaStreamOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The media stream that you want to associate with the output, and the
-// parameters for that association.
+// The media stream that you want to associate with the output, and the parameters
+// for that association.
 type MediaStreamOutputConfigurationRequest struct {
 
 	// The format that will be used to encode the data. For ancillary data streams,
@@ -846,8 +843,8 @@ type Offering struct {
 	// This member is required.
 	OfferingDescription *string
 
-	// The cost of a single unit. This value, in combination with priceUnits, makes
-	// up the rate.
+	// The cost of a single unit. This value, in combination with priceUnits, makes up
+	// the rate.
 	//
 	// This member is required.
 	PricePerUnit *string
@@ -858,8 +855,8 @@ type Offering struct {
 	// This member is required.
 	PriceUnits PriceUnits
 
-	// A definition of the amount of outbound bandwidth that you would be reserving
-	// if you purchase the offering.
+	// A definition of the amount of outbound bandwidth that you would be reserving if
+	// you purchase the offering.
 	//
 	// This member is required.
 	ResourceSpecification *ResourceSpecification
@@ -889,8 +886,8 @@ type Output struct {
 	// The address where you want to send the output.
 	Destination *string
 
-	// The type of key used for the encryption. If no keyType is provided, the
-	// service will use the default setting (static-key).
+	// The type of key used for the encryption. If no keyType is provided, the service
+	// will use the default setting (static-key).
 	Encryption *Encryption
 
 	// The ARN of the entitlement on the originator''s flow. This value is relevant
@@ -965,8 +962,8 @@ type Reservation struct {
 	// This member is required.
 	OfferingDescription *string
 
-	// The cost of a single unit. This value, in combination with priceUnits, makes
-	// up the rate. MediaConnect defines this value in the offering.
+	// The cost of a single unit. This value, in combination with priceUnits, makes up
+	// the rate. MediaConnect defines this value in the offering.
 	//
 	// This member is required.
 	PricePerUnit *string
@@ -994,8 +991,8 @@ type Reservation struct {
 	// This member is required.
 	ReservationState ReservationState
 
-	// A definition of the amount of outbound bandwidth that you would be reserving
-	// if you purchase the offering. MediaConnect defines the values that make up the
+	// A definition of the amount of outbound bandwidth that you would be reserving if
+	// you purchase the offering. MediaConnect defines the values that make up the
 	// resourceSpecification in the offering.
 	//
 	// This member is required.
@@ -1045,8 +1042,8 @@ type SetSourceRequest struct {
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate int32
 
-	// The maximum latency in milliseconds. This parameter applies only to
-	// RIST-based, Zixi-based, and Fujitsu-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
+	// Zixi-based, and Fujitsu-based streams.
 	MaxLatency int32
 
 	// The size of the buffer (in milliseconds) to use to sync incoming source data.
@@ -1176,16 +1173,16 @@ type Transport struct {
 	// This member is required.
 	Protocol Protocol
 
-	// The range of IP addresses that should be allowed to initiate output requests
-	// to this flow. These IP addresses should be in the form of a Classless
-	// Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+	// The range of IP addresses that should be allowed to initiate output requests to
+	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
+	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	CidrAllowList []string
 
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate int32
 
-	// The maximum latency in milliseconds. This parameter applies only to
-	// RIST-based, Zixi-based, and Fujitsu-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
+	// Zixi-based, and Fujitsu-based streams.
 	MaxLatency int32
 
 	// The size of the buffer (in milliseconds) to use to sync incoming source data.
@@ -1242,8 +1239,8 @@ type UpdateEncryption struct {
 	// encryption and is not valid for static key encryption.
 	DeviceId *string
 
-	// The type of key that is used for the encryption. If no keyType is provided,
-	// the service will use the default setting (static-key).
+	// The type of key that is used for the encryption. If no keyType is provided, the
+	// service will use the default setting (static-key).
 	KeyType KeyType
 
 	// The AWS Region that the API Gateway proxy endpoint was created in. This

@@ -37,13 +37,16 @@ type CreateAlgorithmInput struct {
 
 	// Specifies details about training jobs run by this algorithm, including the
 	// following:
-	//     - The Amazon ECR path of the container and the version digest of the algorithm.
-	//     - The hyperparameters that the algorithm supports.
-	//     - The instance types that the algorithm supports for training.
-	//     - Whether the algorithm supports distributed training.
-	//     - The metrics that the algorithm emits to Amazon CloudWatch.
-	//     - Which metrics that the algorithm emits can be used as the objective metric for hyperparameter tuning jobs.
-	//     - The input channels that the algorithm supports for training data. For example, an algorithm might support train , validation , and test channels.
+	//   - The Amazon ECR path of the container and the version digest of the
+	//   algorithm.
+	//   - The hyperparameters that the algorithm supports.
+	//   - The instance types that the algorithm supports for training.
+	//   - Whether the algorithm supports distributed training.
+	//   - The metrics that the algorithm emits to Amazon CloudWatch.
+	//   - Which metrics that the algorithm emits can be used as the objective metric
+	//   for hyperparameter tuning jobs.
+	//   - The input channels that the algorithm supports for training data. For
+	//   example, an algorithm might support train , validation , and test channels.
 	//
 	// This member is required.
 	TrainingSpecification *types.TrainingSpecification
@@ -57,9 +60,12 @@ type CreateAlgorithmInput struct {
 
 	// Specifies details about inference jobs that the algorithm runs, including the
 	// following:
-	//     - The Amazon ECR paths of containers that contain the inference code and model artifacts.
-	//     - The instance types that the algorithm supports for transform jobs and real-time endpoints used for inference.
-	//     - The input and output content formats that the algorithm supports for inference.
+	//   - The Amazon ECR paths of containers that contain the inference code and
+	//   model artifacts.
+	//   - The instance types that the algorithm supports for transform jobs and
+	//   real-time endpoints used for inference.
+	//   - The input and output content formats that the algorithm supports for
+	//   inference.
 	InferenceSpecification *types.InferenceSpecification
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web

@@ -50,8 +50,7 @@ type DescribeFeatureMetadataOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The Amazon Resource Number (ARN) of the feature group that contains the
-	// feature.
+	// The Amazon Resource Number (ARN) of the feature group that contains the feature.
 	//
 	// This member is required.
 	FeatureGroupArn *string

@@ -17,8 +17,8 @@ import (
 // delete stored utterances for a specific user. When you use the DeleteUtterances
 // operation, utterances stored for improving your bot's ability to respond to user
 // input are deleted immediately. Utterances stored for use with the
-// GetUtterancesViewoperation are deleted after 15 days. This operation requires
-// permissions for the lex:DeleteUtterances  action.
+// GetUtterancesView operation are deleted after 15 days. This operation requires
+// permissions for the lex:DeleteUtterances action.
 func (c *Client) DeleteUtterances(ctx context.Context, params *DeleteUtterancesInput, optFns ...func(*Options)) (*DeleteUtterancesOutput, error) {
 	if params == nil {
 		params = &DeleteUtterancesInput{}

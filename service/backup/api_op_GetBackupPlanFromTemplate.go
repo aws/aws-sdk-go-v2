@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the template specified by its templateId  as a backup plan.
+// Returns the template specified by its templateId as a backup plan.
 func (c *Client) GetBackupPlanFromTemplate(ctx context.Context, params *GetBackupPlanFromTemplateInput, optFns ...func(*Options)) (*GetBackupPlanFromTemplateOutput, error) {
 	if params == nil {
 		params = &GetBackupPlanFromTemplateInput{}

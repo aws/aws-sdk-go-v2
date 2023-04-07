@@ -12,8 +12,8 @@ import (
 )
 
 // Returns the full details of a channel ban. The x-amz-chime-bearer request
-// header is mandatory. Use the ARN of the AppInstanceUser  or AppInstanceBot
-// that makes the API call as the value in the header.
+// header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that
+// makes the API call as the value in the header.
 func (c *Client) DescribeChannelBan(ctx context.Context, params *DescribeChannelBanInput, optFns ...func(*Options)) (*DescribeChannelBanOutput, error) {
 	if params == nil {
 		params = &DescribeChannelBanInput{}
@@ -36,12 +36,12 @@ type DescribeChannelBanInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
 
-	// The AppInstanceUserArn  of the member being banned.
+	// The AppInstanceUserArn of the member being banned.
 	//
 	// This member is required.
 	MemberArn *string

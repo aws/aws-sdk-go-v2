@@ -26,8 +26,8 @@ type AgentAlreadyRunningAssessment struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an Amazon Inspector agent. This data type is used
-// as a request parameter in the ListAssessmentRunAgents  action.
+// Contains information about an Amazon Inspector agent. This data type is used as
+// a request parameter in the ListAssessmentRunAgents action.
 type AgentFilter struct {
 
 	// The detailed health state of the agent. Values can be set to IDLE, RUNNING,
@@ -45,7 +45,7 @@ type AgentFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Used as a response element in the PreviewAgents  action.
+// Used as a response element in the PreviewAgents action.
 type AgentPreview struct {
 
 	// The ID of the EC2 instance where the agent is installed.
@@ -70,8 +70,8 @@ type AgentPreview struct {
 	// installed.
 	Ipv4Address *string
 
-	// The kernel version of the operating system running on the EC2 instance on
-	// which the Amazon Inspector Agent is installed.
+	// The kernel version of the operating system running on the EC2 instance on which
+	// the Amazon Inspector Agent is installed.
 	KernelVersion *string
 
 	// The operating system running on the EC2 instance on which the Amazon Inspector
@@ -96,7 +96,7 @@ type AssessmentRun struct {
 	// This member is required.
 	AssessmentTemplateArn *string
 
-	// The time when StartAssessmentRun  was called.
+	// The time when StartAssessmentRun was called.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -157,14 +157,14 @@ type AssessmentRun struct {
 	// evaluation completion time or failure.
 	CompletedAt *time.Time
 
-	// The time when StartAssessmentRun  was called.
+	// The time when StartAssessmentRun was called.
 	StartedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Contains information about an Amazon Inspector agent. This data type is used
-// as a response element in the ListAssessmentRunAgents  action.
+// Contains information about an Amazon Inspector agent. This data type is used as
+// a response element in the ListAssessmentRunAgents action.
 type AssessmentRunAgent struct {
 
 	// The current health state of the agent.
@@ -201,48 +201,47 @@ type AssessmentRunAgent struct {
 	noSmithyDocumentSerde
 }
 
-// Used as the request parameter in the ListAssessmentRuns  action.
+// Used as the request parameter in the ListAssessmentRuns action.
 type AssessmentRunFilter struct {
 
 	// For a record to match a filter, the value that is specified for this data type
 	// property must inclusively match any value between the specified minimum and
-	// maximum values of the completedAt property of the AssessmentRun  data type.
+	// maximum values of the completedAt property of the AssessmentRun data type.
 	CompletionTimeRange *TimestampRange
 
 	// For a record to match a filter, the value that is specified for this data type
 	// property must inclusively match any value between the specified minimum and
-	// maximum values of the durationInSeconds property of the AssessmentRun data
-	// type.
+	// maximum values of the durationInSeconds property of the AssessmentRun data type.
 	DurationRange *DurationRange
 
 	// For a record to match a filter, an explicit value or a string containing a
 	// wildcard that is specified for this data type property must match the value of
-	// the assessmentRunName property of the AssessmentRun  data type.
+	// the assessmentRunName property of the AssessmentRun data type.
 	NamePattern *string
 
 	// For a record to match a filter, the value that is specified for this data type
 	// property must be contained in the list of values of the rulesPackages property
-	// of the AssessmentRun  data type.
+	// of the AssessmentRun data type.
 	RulesPackageArns []string
 
 	// For a record to match a filter, the value that is specified for this data type
 	// property must inclusively match any value between the specified minimum and
-	// maximum values of the startTime property of the AssessmentRun  data type.
+	// maximum values of the startTime property of the AssessmentRun data type.
 	StartTimeRange *TimestampRange
 
 	// For a record to match a filter, the value that is specified for this data type
-	// property must match the stateChangedAt property of the AssessmentRun  data type.
+	// property must match the stateChangedAt property of the AssessmentRun data type.
 	StateChangeTimeRange *TimestampRange
 
 	// For a record to match a filter, one of the values specified for this data type
 	// property must be the exact match of the value of the assessmentRunState property
-	// of the AssessmentRun  data type.
+	// of the AssessmentRun data type.
 	States []AssessmentRunState
 
 	noSmithyDocumentSerde
 }
 
-// Used as one of the elements of the AssessmentRun  data type.
+// Used as one of the elements of the AssessmentRun data type.
 type AssessmentRunNotification struct {
 
 	// The date of the notification.
@@ -272,7 +271,7 @@ type AssessmentRunNotification struct {
 	noSmithyDocumentSerde
 }
 
-// Used as one of the elements of the AssessmentRun  data type.
+// Used as one of the elements of the AssessmentRun data type.
 type AssessmentRunStateChange struct {
 
 	// The assessment run state.
@@ -289,7 +288,7 @@ type AssessmentRunStateChange struct {
 }
 
 // Contains information about an Amazon Inspector application. This data type is
-// used as the response element in the DescribeAssessmentTargets  action.
+// used as the response element in the DescribeAssessmentTargets action.
 type AssessmentTarget struct {
 
 	// The ARN that specifies the Amazon Inspector assessment target.
@@ -307,7 +306,7 @@ type AssessmentTarget struct {
 	// This member is required.
 	Name *string
 
-	// The time at which UpdateAssessmentTarget  is called.
+	// The time at which UpdateAssessmentTarget is called.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
@@ -319,19 +318,19 @@ type AssessmentTarget struct {
 	noSmithyDocumentSerde
 }
 
-// Used as the request parameter in the ListAssessmentTargets  action.
+// Used as the request parameter in the ListAssessmentTargets action.
 type AssessmentTargetFilter struct {
 
 	// For a record to match a filter, an explicit value or a string that contains a
 	// wildcard that is specified for this data type property must match the value of
-	// the assessmentTargetName property of the AssessmentTarget  data type.
+	// the assessmentTargetName property of the AssessmentTarget data type.
 	AssessmentTargetNamePattern *string
 
 	noSmithyDocumentSerde
 }
 
 // Contains information about an Amazon Inspector assessment template. This data
-// type is used as the response element in the DescribeAssessmentTemplates  action.
+// type is used as the response element in the DescribeAssessmentTemplates action.
 type AssessmentTemplate struct {
 
 	// The ARN of the assessment template.
@@ -385,23 +384,22 @@ type AssessmentTemplate struct {
 	noSmithyDocumentSerde
 }
 
-// Used as the request parameter in the ListAssessmentTemplates  action.
+// Used as the request parameter in the ListAssessmentTemplates action.
 type AssessmentTemplateFilter struct {
 
-	// For a record to match a filter, the value specified for this data type
-	// property must inclusively match any value between the specified minimum and
-	// maximum values of the durationInSeconds property of the AssessmentTemplate
-	// data type.
+	// For a record to match a filter, the value specified for this data type property
+	// must inclusively match any value between the specified minimum and maximum
+	// values of the durationInSeconds property of the AssessmentTemplate data type.
 	DurationRange *DurationRange
 
 	// For a record to match a filter, an explicit value or a string that contains a
 	// wildcard that is specified for this data type property must match the value of
-	// the assessmentTemplateName property of the AssessmentTemplate  data type.
+	// the assessmentTemplateName property of the AssessmentTemplate data type.
 	NamePattern *string
 
 	// For a record to match a filter, the values that are specified for this data
 	// type property must be contained in the list of values of the rulesPackageArns
-	// property of the AssessmentTemplate  data type.
+	// property of the AssessmentTemplate data type.
 	RulesPackageArns []string
 
 	noSmithyDocumentSerde
@@ -443,7 +441,7 @@ type AssetAttributes struct {
 }
 
 // This data type is used as a request parameter in the AddAttributesToFindings
-// and CreateAssessmentTemplate  actions.
+// and CreateAssessmentTemplate actions.
 type Attribute struct {
 
 	// The attribute key.
@@ -457,7 +455,7 @@ type Attribute struct {
 	noSmithyDocumentSerde
 }
 
-// This data type is used in the AssessmentTemplateFilter  data type.
+// This data type is used in the AssessmentTemplateFilter data type.
 type DurationRange struct {
 
 	// The maximum value of the duration range. Must be less than or equal to 604800
@@ -470,7 +468,7 @@ type DurationRange struct {
 	noSmithyDocumentSerde
 }
 
-// This data type is used in the Subscription  data type.
+// This data type is used in the Subscription data type.
 type EventSubscription struct {
 
 	// The event for which Amazon Simple Notification Service (SNS) notifications are
@@ -479,7 +477,7 @@ type EventSubscription struct {
 	// This member is required.
 	Event InspectorEvent
 
-	// The time at which SubscribeToEvent  is called.
+	// The time at which SubscribeToEvent is called.
 	//
 	// This member is required.
 	SubscribedAt *time.Time
@@ -569,7 +567,7 @@ type FailedItemDetails struct {
 }
 
 // Contains information about an Amazon Inspector finding. This data type is used
-// as the response element in the DescribeFindings  action.
+// as the response element in the DescribeFindings action.
 type Finding struct {
 
 	// The ARN that specifies the finding.
@@ -587,7 +585,7 @@ type Finding struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The time when AddAttributesToFindings  is called.
+	// The time when AddAttributesToFindings is called.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
@@ -627,11 +625,10 @@ type Finding struct {
 	// The data element is set to "Inspector".
 	Service *string
 
-	// This data type is used in the Finding  data type.
+	// This data type is used in the Finding data type.
 	ServiceAttributes *InspectorServiceAttributes
 
-	// The finding severity. Values can be set to High, Medium, Low, and
-	// Informational.
+	// The finding severity. Values can be set to High, Medium, Low, and Informational.
 	Severity Severity
 
 	// The name of the finding.
@@ -640,22 +637,22 @@ type Finding struct {
 	noSmithyDocumentSerde
 }
 
-// This data type is used as a request parameter in the ListFindings  action.
+// This data type is used as a request parameter in the ListFindings action.
 type FindingFilter struct {
 
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the agentId property
-	// of the Finding  data type.
+	// of the Finding data type.
 	AgentIds []string
 
 	// For a record to match a filter, the list of values that are specified for this
 	// data type property must be contained in the list of values of the attributes
-	// property of the Finding  data type.
+	// property of the Finding data type.
 	Attributes []Attribute
 
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the autoScalingGroup
-	// property of the Finding  data type.
+	// property of the Finding data type.
 	AutoScalingGroups []string
 
 	// The time range during which the finding is generated.
@@ -663,28 +660,28 @@ type FindingFilter struct {
 
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the ruleName property
-	// of the Finding  data type.
+	// of the Finding data type.
 	RuleNames []string
 
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the rulesPackageArn
-	// property of the Finding  data type.
+	// property of the Finding data type.
 	RulesPackageArns []string
 
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the severity property
-	// of the Finding  data type.
+	// of the Finding data type.
 	Severities []Severity
 
 	// For a record to match a filter, the value that is specified for this data type
 	// property must be contained in the list of values of the userAttributes property
-	// of the Finding  data type.
+	// of the Finding data type.
 	UserAttributes []Attribute
 
 	noSmithyDocumentSerde
 }
 
-// This data type is used in the Finding  data type.
+// This data type is used in the Finding data type.
 type InspectorServiceAttributes struct {
 
 	// The schema version of this data type.
@@ -772,7 +769,7 @@ type ResourceGroup struct {
 	CreatedAt *time.Time
 
 	// The tags (key and value pairs) of the resource group. This data type property
-	// is used in the CreateResourceGroup  action.
+	// is used in the CreateResourceGroup action.
 	//
 	// This member is required.
 	Tags []ResourceGroupTag
@@ -780,7 +777,7 @@ type ResourceGroup struct {
 	noSmithyDocumentSerde
 }
 
-// This data type is used as one of the elements of the ResourceGroup  data type.
+// This data type is used as one of the elements of the ResourceGroup data type.
 type ResourceGroupTag struct {
 
 	// A tag key.
@@ -794,8 +791,8 @@ type ResourceGroupTag struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an Amazon Inspector rules package. This data type
-// is used as the response element in the DescribeRulesPackages  action.
+// Contains information about an Amazon Inspector rules package. This data type is
+// used as the response element in the DescribeRulesPackages action.
 type RulesPackage struct {
 
 	// The ARN of the rules package.
@@ -837,8 +834,8 @@ type Scope struct {
 }
 
 // Contains information about a security group associated with a network
-// interface. This data type is used as one of the elements of the
-// NetworkInterface data type.
+// interface. This data type is used as one of the elements of the NetworkInterface
+// data type.
 type SecurityGroup struct {
 
 	// The ID of the security group.
@@ -911,7 +908,7 @@ type TelemetryMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// This data type is used in the AssessmentRunFilter  data type.
+// This data type is used in the AssessmentRunFilter data type.
 type TimestampRange struct {
 
 	// The minimum value of the timestamp range.

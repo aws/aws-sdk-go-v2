@@ -17,7 +17,7 @@ import (
 // number of items in the list exceeds the maximum that you specify, or the default
 // maximum, the response is paginated. To get the next page of items, send a
 // subsequent request that specifies the NextMarker value from the current
-// response as the Marker  value in the subsequent request.
+// response as the Marker value in the subsequent request.
 func (c *Client) ListDistributionsByOriginRequestPolicyId(ctx context.Context, params *ListDistributionsByOriginRequestPolicyIdInput, optFns ...func(*Options)) (*ListDistributionsByOriginRequestPolicyIdOutput, error) {
 	if params == nil {
 		params = &ListDistributionsByOriginRequestPolicyIdInput{}
@@ -44,7 +44,7 @@ type ListDistributionsByOriginRequestPolicyIdInput struct {
 	// Use this field when paginating results to indicate where to begin in your list
 	// of distribution IDs. The response includes distribution IDs in the list that
 	// occur after the marker. To get the next page of the list, set this field's value
-	// to the value of NextMarker  from the current page's response.
+	// to the value of NextMarker from the current page's response.
 	Marker *string
 
 	// The maximum number of distribution IDs that you want in the response.

@@ -59,8 +59,7 @@ type UpdateServiceTemplateVersionInput struct {
 	// be attached to service instances based on this service template version. A
 	// change to supportedComponentSources doesn't impact existing component
 	// attachments to instances based on this template version. A change only affects
-	// later associations. For more information about components, see Proton
-	// components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+	// later associations. For more information about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
 	// in the Proton User Guide.
 	SupportedComponentSources []types.ServiceTemplateSupportedComponentSourceType
 

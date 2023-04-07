@@ -15,9 +15,9 @@ import (
 // Returns a list of all historical purchases, renewals, and system renewal
 // transactions for an AWS account. The list is paginated and ordered by a
 // descending timestamp (most recent transactions are first). The API returns a
-// NotEligibleerror if the user is not permitted to invoke the operation. If you
-// must be able to invoke this operation, contact
-// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com) .
+// NotEligible error if the user is not permitted to invoke the operation. If you
+// must be able to invoke this operation, contact aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
+// .
 func (c *Client) ListOfferingTransactions(ctx context.Context, params *ListOfferingTransactionsInput, optFns ...func(*Options)) (*ListOfferingTransactionsOutput, error) {
 	if params == nil {
 		params = &ListOfferingTransactionsInput{}
@@ -36,8 +36,8 @@ func (c *Client) ListOfferingTransactions(ctx context.Context, params *ListOffer
 // Represents the request to list the offering transaction history.
 type ListOfferingTransactionsInput struct {
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,8 +46,8 @@ type ListOfferingTransactionsInput struct {
 // Returns the transaction log of the specified offerings.
 type ListOfferingTransactionsOutput struct {
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
 	NextToken *string
 
 	// The audit log of subscriptions you have purchased and modified through AWS
@@ -131,8 +131,8 @@ var _ ListOfferingTransactionsAPIClient = (*Client)(nil)
 // ListOfferingTransactionsPaginatorOptions is the paginator options for
 // ListOfferingTransactions
 type ListOfferingTransactionsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

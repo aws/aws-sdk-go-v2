@@ -13,18 +13,18 @@ import (
 )
 
 // Creates a state machine. A state machine consists of a collection of states
-// that can do work ( Task  states), determine to which states to transition next (
+// that can do work ( Task states), determine to which states to transition next (
 // Choice states), stop an execution with an error ( Fail states), and so on.
 // State machines are specified using a JSON-based, structured language. For more
 // information, see Amazon States Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)
 // in the Step Functions User Guide. This operation is eventually consistent. The
 // results are best effort and may not reflect very recent updates and changes.
-// CreateStateMachineis an idempotent API. Subsequent requests won’t create a
-// duplicate resource if it was already created. CreateStateMachine's idempotency
+// CreateStateMachine is an idempotent API. Subsequent requests won’t create a
+// duplicate resource if it was already created. CreateStateMachine 's idempotency
 // check is based on the state machine name , definition , type ,
-// LoggingConfiguration and TracingConfiguration. If a following request has a
-// different roleArn  or tags, Step Functions will ignore these differences and
-// treat it as an idempotent request of the previous. In this case, roleArn  and
+// LoggingConfiguration and TracingConfiguration . If a following request has a
+// different roleArn or tags , Step Functions will ignore these differences and
+// treat it as an idempotent request of the previous. In this case, roleArn and
 // tags will not be updated, even if they are different.
 func (c *Client) CreateStateMachine(ctx context.Context, params *CreateStateMachineInput, optFns ...func(*Options)) (*CreateStateMachineOutput, error) {
 	if params == nil {
@@ -51,13 +51,13 @@ type CreateStateMachineInput struct {
 	Definition *string
 
 	// The name of the state machine. A name must not contain:
-	//     - white space
-	//     - brackets < > { } [ ]
-	//     - wildcard characters ? *
-	//     - special characters " # % \ ^ | ~ ` $ & , ; : /
-	//     - control characters ( U+0000-001F , U+007F-009F )
-	// To enable logging with
-	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+	//   - white space
+	//   - brackets < > { } [ ]
+	//   - wildcard characters ? *
+	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//   - control characters ( U+0000-001F , U+007F-009F )
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
+	// a-z, - and _.
 	//
 	// This member is required.
 	Name *string
@@ -68,7 +68,7 @@ type CreateStateMachineInput struct {
 	RoleArn *string
 
 	// Defines what execution history events are logged and where they are logged. By
-	// default, the level  is set to OFF . For more information see Log Levels (https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html)
+	// default, the level is set to OFF . For more information see Log Levels (https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html)
 	// in the Step Functions User Guide.
 	LoggingConfiguration *types.LoggingConfiguration
 

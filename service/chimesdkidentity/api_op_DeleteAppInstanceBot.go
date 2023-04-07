@@ -28,7 +28,7 @@ func (c *Client) DeleteAppInstanceBot(ctx context.Context, params *DeleteAppInst
 
 type DeleteAppInstanceBotInput struct {
 
-	// The ARN of the AppInstanceBot  being deleted.
+	// The ARN of the AppInstanceBot being deleted.
 	//
 	// This member is required.
 	AppInstanceBotArn *string

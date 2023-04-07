@@ -14,7 +14,8 @@ import (
 // Describes a recipe. A recipe contains three items:
 //   - An algorithm that trains a model.
 //   - Hyperparameters that govern the training.
-//   - Feature transformation information for modifying the input data before training.
+//   - Feature transformation information for modifying the input data before
+//     training.
 //
 // Amazon Personalize provides a set of predefined recipes. You specify a recipe
 // when you create a solution with the CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)

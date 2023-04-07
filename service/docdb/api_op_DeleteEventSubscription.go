@@ -30,8 +30,8 @@ func (c *Client) DeleteEventSubscription(ctx context.Context, params *DeleteEven
 // Represents the input to DeleteEventSubscription .
 type DeleteEventSubscriptionInput struct {
 
-	// The name of the Amazon DocumentDB event notification subscription that you
-	// want to delete.
+	// The name of the Amazon DocumentDB event notification subscription that you want
+	// to delete.
 	//
 	// This member is required.
 	SubscriptionName *string

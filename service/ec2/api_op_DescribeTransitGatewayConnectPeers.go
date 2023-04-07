@@ -37,13 +37,14 @@ type DescribeTransitGatewayConnectPeersInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	//     - state - The state of the Connect peer ( pending | available | deleting | deleted ).
-	//     - transit-gateway-attachment-id - The ID of the attachment.
-	//     - transit-gateway-connect-peer-id - The ID of the Connect peer.
+	//   - state - The state of the Connect peer ( pending | available | deleting |
+	//   deleted ).
+	//   - transit-gateway-attachment-id - The ID of the attachment.
+	//   - transit-gateway-connect-peer-id - The ID of the Connect peer.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -138,15 +139,15 @@ type DescribeTransitGatewayConnectPeersAPIClient interface {
 
 var _ DescribeTransitGatewayConnectPeersAPIClient = (*Client)(nil)
 
-// DescribeTransitGatewayConnectPeersPaginatorOptions is the paginator options
-// for DescribeTransitGatewayConnectPeers
+// DescribeTransitGatewayConnectPeersPaginatorOptions is the paginator options for
+// DescribeTransitGatewayConnectPeers
 type DescribeTransitGatewayConnectPeersPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

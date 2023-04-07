@@ -52,8 +52,7 @@ type CreateStoreImageTaskInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The tags to apply to the AMI object that will be stored in the Amazon S3
-	// bucket.
+	// The tags to apply to the AMI object that will be stored in the Amazon S3 bucket.
 	S3ObjectTags []types.S3ObjectTag
 
 	noSmithyDocumentSerde

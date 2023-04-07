@@ -49,8 +49,8 @@ const (
 	AggregatedSourceTypeOrganization AggregatedSourceType = "ORGANIZATION"
 )
 
-// Values returns all known values for AggregatedSourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AggregatedSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AggregatedSourceType) Values() []AggregatedSourceType {
 	return []AggregatedSourceType{
@@ -151,9 +151,9 @@ const (
 	ConfigurationItemStatusResourceDeletedNotRecorded ConfigurationItemStatus = "ResourceDeletedNotRecorded"
 )
 
-// Values returns all known values for ConfigurationItemStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConfigurationItemStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationItemStatus) Values() []ConfigurationItemStatus {
 	return []ConfigurationItemStatus{
 		"OK",
@@ -196,8 +196,8 @@ const (
 	ConformancePackStateDeleteFailed     ConformancePackState = "DELETE_FAILED"
 )
 
-// Values returns all known values for ConformancePackState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ConformancePackState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ConformancePackState) Values() []ConformancePackState {
 	return []ConformancePackState{
@@ -254,9 +254,9 @@ const (
 	EventSourceAwsConfig EventSource = "aws.config"
 )
 
-// Values returns all known values for EventSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventSource) Values() []EventSource {
 	return []EventSource{
 		"aws.config",
@@ -302,9 +302,9 @@ const (
 	MemberAccountRuleStatusUpdateFailed     MemberAccountRuleStatus = "UPDATE_FAILED"
 )
 
-// Values returns all known values for MemberAccountRuleStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MemberAccountRuleStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MemberAccountRuleStatus) Values() []MemberAccountRuleStatus {
 	return []MemberAccountRuleStatus{
 		"CREATE_SUCCESSFUL",
@@ -329,9 +329,9 @@ const (
 	MessageTypeOversizedConfigurationItemChangeNotification MessageType = "OversizedConfigurationItemChangeNotification"
 )
 
-// Values returns all known values for MessageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MessageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"ConfigurationItemChangeNotification",
@@ -370,9 +370,9 @@ const (
 	OrganizationConfigRuleTriggerTypeNoSNOversizedConfigurationItemChangeNotifcation OrganizationConfigRuleTriggerTypeNoSN = "OversizedConfigurationItemChangeNotification"
 )
 
-// Values returns all known values for OrganizationConfigRuleTriggerTypeNoSN.
-// Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for OrganizationConfigRuleTriggerTypeNoSN. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OrganizationConfigRuleTriggerTypeNoSN) Values() []OrganizationConfigRuleTriggerTypeNoSN {
 	return []OrganizationConfigRuleTriggerTypeNoSN{

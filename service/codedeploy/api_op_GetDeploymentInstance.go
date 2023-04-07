@@ -29,7 +29,7 @@ func (c *Client) GetDeploymentInstance(ctx context.Context, params *GetDeploymen
 	return out, nil
 }
 
-// Represents the input of a GetDeploymentInstance  operation.
+// Represents the input of a GetDeploymentInstance operation.
 type GetDeploymentInstanceInput struct {
 
 	// The unique ID of a deployment.
@@ -45,7 +45,7 @@ type GetDeploymentInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetDeploymentInstance  operation.
+// Represents the output of a GetDeploymentInstance operation.
 type GetDeploymentInstanceOutput struct {
 
 	// Information about the instance.

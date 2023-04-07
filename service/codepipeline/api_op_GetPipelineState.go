@@ -13,8 +13,8 @@ import (
 )
 
 // Returns information about the state of a pipeline, including the stages and
-// actions. Values returned in the revisionId  and revisionUrl fields indicate
-// the source revision information, such as the commit ID, for the current state.
+// actions. Values returned in the revisionId and revisionUrl fields indicate the
+// source revision information, such as the commit ID, for the current state.
 func (c *Client) GetPipelineState(ctx context.Context, params *GetPipelineStateInput, optFns ...func(*Options)) (*GetPipelineStateOutput, error) {
 	if params == nil {
 		params = &GetPipelineStateInput{}
@@ -30,7 +30,7 @@ func (c *Client) GetPipelineState(ctx context.Context, params *GetPipelineStateI
 	return out, nil
 }
 
-// Represents the input of a GetPipelineState  action.
+// Represents the input of a GetPipelineState action.
 type GetPipelineStateInput struct {
 
 	// The name of the pipeline about which you want to get information.
@@ -41,7 +41,7 @@ type GetPipelineStateInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetPipelineState  action.
+// Represents the output of a GetPipelineState action.
 type GetPipelineStateOutput struct {
 
 	// The date and time the pipeline was created, in timestamp format.
@@ -50,8 +50,8 @@ type GetPipelineStateOutput struct {
 	// The name of the pipeline for which you want to get the state.
 	PipelineName *string
 
-	// The version number of the pipeline. A newly created pipeline is always
-	// assigned a version number of 1 .
+	// The version number of the pipeline. A newly created pipeline is always assigned
+	// a version number of 1 .
 	PipelineVersion *int32
 
 	// A list of the pipeline stage output information, including stage name, state,

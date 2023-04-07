@@ -43,8 +43,8 @@ type DescribeWorldExportJobOutput struct {
 	// The Amazon Resource Name (ARN) of the world export job.
 	Arn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world export job was
@@ -71,17 +71,16 @@ type DescribeWorldExportJobOutput struct {
 
 	// The status of the world export job. Pending The world export job request is
 	// pending. Running The world export job is running. Completed The world export job
-	// completed. Failed The world export job failed. See failureCode  and
-	// failureReasonfor more information. Canceled The world export job was
-	// cancelled. Canceling The world export job is being cancelled.
+	// completed. Failed The world export job failed. See failureCode and failureReason
+	// for more information. Canceled The world export job was cancelled. Canceling The
+	// world export job is being cancelled.
 	Status types.WorldExportJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// export job.
 	Tags map[string]string
 
-	// A list of Amazon Resource Names (arns) that correspond to worlds to be
-	// exported.
+	// A list of Amazon Resource Names (arns) that correspond to worlds to be exported.
 	Worlds []string
 
 	// Metadata pertaining to the operation's result.

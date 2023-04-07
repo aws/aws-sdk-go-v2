@@ -38,8 +38,8 @@ type DeleteWorkteamInput struct {
 
 type DeleteWorkteamOutput struct {
 
-	// Returns true  if the work team was successfully deleted; otherwise, returns
-	// false .
+	// Returns true if the work team was successfully deleted; otherwise, returns false
+	// .
 	//
 	// This member is required.
 	Success bool

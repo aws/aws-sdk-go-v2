@@ -20,7 +20,7 @@ import (
 // ID only. To request status for specific instances, provide the game server group
 // ID and one or more instance IDs. Use the pagination parameters to retrieve
 // results in sequential segments. If successful, a collection of
-// GameServerInstanceobjects is returned. This operation is not designed to be
+// GameServerInstance objects is returned. This operation is not designed to be
 // called with every game server claim request; this practice can cause you to
 // exceed your API limit, which results in errors. Instead, as a best practice,
 // cache the results and refresh your cache no more than once every 10 seconds.
@@ -42,14 +42,13 @@ func (c *Client) DescribeGameServerInstances(ctx context.Context, params *Descri
 
 type DescribeGameServerInstancesInput struct {
 
-	// A unique identifier for the game server group. Use either the name or ARN
-	// value.
+	// A unique identifier for the game server group. Use either the name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
 	// The Amazon EC2 instance IDs that you want to retrieve status on. Amazon EC2
-	// instance IDs use a 17-character format, for example: i-1234567890abcdef0. To
+	// instance IDs use a 17-character format, for example: i-1234567890abcdef0 . To
 	// retrieve all instances in the game server group, leave this parameter empty.
 	InstanceIds []string
 
@@ -159,8 +158,8 @@ type DescribeGameServerInstancesPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

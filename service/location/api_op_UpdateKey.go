@@ -46,10 +46,9 @@ type UpdateKeyInput struct {
 	// format: YYYY-MM-DDThh:mm:ss.sssZ .
 	ExpireTime *time.Time
 
-	// The boolean flag to be included for updating ExpireTime  or Restrictions
+	// The boolean flag to be included for updating ExpireTime or Restrictions
 	// details. Must be set to true to update an API key resource that has been used
-	// in the past 7 days. False  if force update is not preferred Default value:
-	// False
+	// in the past 7 days. False if force update is not preferred Default value: False
 	ForceUpdate *bool
 
 	// Whether the API key should expire. Set to true to set the API key to have no
@@ -66,7 +65,7 @@ type UpdateKeyOutput struct {
 
 	// The Amazon Resource Name (ARN) for the API key resource. Used when you need to
 	// specify a resource across all Amazon Web Services.
-	//     - Format example: arn:aws:geo:region:account-id:key/ExampleKey
+	//   - Format example: arn:aws:geo:region:account-id:key/ExampleKey
 	//
 	// This member is required.
 	KeyArn *string

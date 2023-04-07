@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action removes the website configuration for a bucket. Amazon S3 returns
-// a 200 OK response upon successfully deleting a website configuration on the
+// This action removes the website configuration for a bucket. Amazon S3 returns a
+// 200 OK response upon successfully deleting a website configuration on the
 // specified bucket. You will get a 200 OK response if the website configuration
 // you are trying to delete does not exist on the bucket. Amazon S3 returns a 404
 // response if the bucket specified in the request does not exist. This DELETE
@@ -20,7 +20,7 @@ import (
 // bucket owner can delete the website configuration attached to a bucket. However,
 // bucket owners can grant other users permission to delete the website
 // configuration by writing a bucket policy granting them the
-// S3:DeleteBucketWebsitepermission. For more information about hosting websites,
+// S3:DeleteBucketWebsite permission. For more information about hosting websites,
 // see Hosting Websites on Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
 // . The following operations are related to DeleteBucketWebsite :
 //   - GetBucketWebsite (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketWebsite.html)

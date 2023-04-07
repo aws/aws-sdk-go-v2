@@ -51,31 +51,31 @@ type UpdateComputeEnvironmentInput struct {
 	// role. To update the parameters for the compute environment that require an
 	// infrastructure update to change, the AWSServiceRoleForBatch service-linked role
 	// must be used. For more information, see Updating compute environments (https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html)
-	// in the Batch User Guide. If your specified role has a path other than /, then
+	// in the Batch User Guide. If your specified role has a path other than / , then
 	// you must either specify the full role ARN (recommended) or prefix the role name
 	// with the path. Depending on how you created your Batch service role, its ARN
 	// might contain the service-role path prefix. When you only specify the name of
-	// the service role, Batch assumes that your ARN doesn't use the service-role
-	// path prefix. Because of this, we recommend that you specify the full ARN of your
+	// the service role, Batch assumes that your ARN doesn't use the service-role path
+	// prefix. Because of this, we recommend that you specify the full ARN of your
 	// service role when you create compute environments.
 	ServiceRole *string
 
-	// The state of the compute environment. Compute environments in the ENABLED
-	// state can accept jobs from a queue and scale in or out automatically based on
-	// the workload demand of its associated queues. If the state is ENABLED, then
-	// the Batch scheduler can attempt to place jobs from an associated job queue on
-	// the compute resources within the environment. If the compute environment is
-	// managed, then it can scale its instances out or in automatically, based on the
-	// job queue demand. If the state is DISABLED, then the Batch scheduler doesn't
-	// attempt to place jobs within the environment. Jobs in a STARTING  or RUNNING
-	// state continue to progress normally. Managed compute environments in the
-	// DISABLED state don't scale out. Compute environments in a DISABLED state may
-	// continue to incur billing charges. To prevent additional charges, turn off and
-	// then delete the compute environment. For more information, see State (https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state)
+	// The state of the compute environment. Compute environments in the ENABLED state
+	// can accept jobs from a queue and scale in or out automatically based on the
+	// workload demand of its associated queues. If the state is ENABLED , then the
+	// Batch scheduler can attempt to place jobs from an associated job queue on the
+	// compute resources within the environment. If the compute environment is managed,
+	// then it can scale its instances out or in automatically, based on the job queue
+	// demand. If the state is DISABLED , then the Batch scheduler doesn't attempt to
+	// place jobs within the environment. Jobs in a STARTING or RUNNING state continue
+	// to progress normally. Managed compute environments in the DISABLED state don't
+	// scale out. Compute environments in a DISABLED state may continue to incur
+	// billing charges. To prevent additional charges, turn off and then delete the
+	// compute environment. For more information, see State (https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state)
 	// in the Batch User Guide. When an instance is idle, the instance scales down to
 	// the minvCpus value. However, the instance size doesn't change. For example,
-	// consider a c5.8xlarge  instance with a minvCpus  value of 4  and a desiredvCpus
-	// value of 36 . This instance doesn't scale down to a c5.large  instance.
+	// consider a c5.8xlarge instance with a minvCpus value of 4 and a desiredvCpus
+	// value of 36 . This instance doesn't scale down to a c5.large instance.
 	State types.CEState
 
 	// The maximum number of vCPUs expected to be used for an unmanaged compute
@@ -85,9 +85,9 @@ type UpdateComputeEnvironmentInput struct {
 	// queue, no vCPU capacity is reserved.
 	UnmanagedvCpus *int32
 
-	// Specifies the updated infrastructure update policy for the compute
-	// environment. For more information about infrastructure updates, see Updating
-	// compute environments (https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html)
+	// Specifies the updated infrastructure update policy for the compute environment.
+	// For more information about infrastructure updates, see Updating compute
+	// environments (https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html)
 	// in the Batch User Guide.
 	UpdatePolicy *types.UpdatePolicy
 

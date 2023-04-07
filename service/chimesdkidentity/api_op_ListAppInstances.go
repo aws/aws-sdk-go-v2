@@ -33,8 +33,8 @@ type ListAppInstancesInput struct {
 	// The maximum number of AppInstance s that you want to return.
 	MaxResults *int32
 
-	// The token passed by previous API requests until you reach the maximum number
-	// of AppInstances .
+	// The token passed by previous API requests until you reach the maximum number of
+	// AppInstances .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -128,8 +128,8 @@ type ListAppInstancesPaginatorOptions struct {
 	// The maximum number of AppInstance s that you want to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

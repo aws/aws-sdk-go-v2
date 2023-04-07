@@ -12,14 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the SSH public keys associated with the specified
-// IAM user. If none exists, the operation returns an empty list. The SSH public
-// keys returned by this operation are used only for authenticating the IAM user to
-// an CodeCommit repository. For more information about using SSH keys to
-// authenticate to an CodeCommit repository, see Set up CodeCommit for SSH
-// connections (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
+// Returns information about the SSH public keys associated with the specified IAM
+// user. If none exists, the operation returns an empty list. The SSH public keys
+// returned by this operation are used only for authenticating the IAM user to an
+// CodeCommit repository. For more information about using SSH keys to authenticate
+// to an CodeCommit repository, see Set up CodeCommit for SSH connections (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
 // in the CodeCommit User Guide. Although each user is limited to a small number of
-// keys, you can still paginate the results using the MaxItems  and Marker
+// keys, you can still paginate the results using the MaxItems and Marker
 // parameters.
 func (c *Client) ListSSHPublicKeys(ctx context.Context, params *ListSSHPublicKeysInput, optFns ...func(*Options)) (*ListSSHPublicKeysOutput, error) {
 	if params == nil {
@@ -40,31 +39,31 @@ type ListSSHPublicKeysInput struct {
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
-	// Markerelement in the response that you received to indicate where the next
-	// call should start.
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
 	Marker *string
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
-	// The name of the IAM user to list SSH public keys for. If none is specified,
-	// the UserName field is determined implicitly based on the Amazon Web Services
-	// access key used to sign the request. This parameter allows (through its regex
-	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting
-	// of upper and lowercase alphanumeric characters with no spaces. You can also
-	// include any of the following characters: _+=,.@-
+	// The name of the IAM user to list SSH public keys for. If none is specified, the
+	// UserName field is determined implicitly based on the Amazon Web Services access
+	// key used to sign the request. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
+	// ) a string of characters consisting of upper and lowercase alphanumeric
+	// characters with no spaces. You can also include any of the following characters:
+	// _+=,.@-
 	UserName *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListSSHPublicKeys  request.
+// Contains the response to a successful ListSSHPublicKeys request.
 type ListSSHPublicKeysOutput struct {
 
 	// A flag that indicates whether there are more items to return. If your results
@@ -75,8 +74,8 @@ type ListSSHPublicKeysOutput struct {
 	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated  is true, this element is present and contains the value to
-	// use for the Marker  parameter in a subsequent pagination request.
+	// When IsTruncated is true , this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
 	// A list of the SSH public keys assigned to IAM user.
@@ -156,20 +155,19 @@ type ListSSHPublicKeysAPIClient interface {
 
 var _ ListSSHPublicKeysAPIClient = (*Client)(nil)
 
-// ListSSHPublicKeysPaginatorOptions is the paginator options for
-// ListSSHPublicKeys
+// ListSSHPublicKeysPaginatorOptions is the paginator options for ListSSHPublicKeys
 type ListSSHPublicKeysPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated  response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
 	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

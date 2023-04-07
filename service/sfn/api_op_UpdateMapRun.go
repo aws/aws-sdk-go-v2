@@ -34,8 +34,8 @@ type UpdateMapRunInput struct {
 	// This member is required.
 	MapRunArn *string
 
-	// The maximum number of child workflow executions that can be specified to run
-	// in parallel for the Map Run at the same time.
+	// The maximum number of child workflow executions that can be specified to run in
+	// parallel for the Map Run at the same time.
 	MaxConcurrency *int32
 
 	// The maximum number of failed items before the Map Run fails.

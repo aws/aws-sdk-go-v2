@@ -13,9 +13,9 @@ import (
 )
 
 // Returns an array of journal export job descriptions for a specified ledger.
-// This action returns a maximum of MaxResults items, and is paginated so that
-// you can retrieve all the items by calling ListJournalS3ExportsForLedger
-// multiple times. This action does not return any expired export jobs. For more
+// This action returns a maximum of MaxResults items, and is paginated so that you
+// can retrieve all the items by calling ListJournalS3ExportsForLedger multiple
+// times. This action does not return any expired export jobs. For more
 // information, see Export job expiration (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
 // in the Amazon QLDB Developer Guide.
 func (c *Client) ListJournalS3ExportsForLedger(ctx context.Context, params *ListJournalS3ExportsForLedgerInput, optFns ...func(*Options)) (*ListJournalS3ExportsForLedgerOutput, error) {
@@ -41,14 +41,13 @@ type ListJournalS3ExportsForLedgerInput struct {
 	Name *string
 
 	// The maximum number of results to return in a single
-	// ListJournalS3ExportsForLedgerrequest. (The actual number of results returned
+	// ListJournalS3ExportsForLedger request. (The actual number of results returned
 	// might be fewer.)
 	MaxResults *int32
 
 	// A pagination token, indicating that you want to retrieve the next page of
-	// results. If you received a value for NextToken  in the response from a previous
-	// ListJournalS3ExportsForLedgercall, then you should use that value as input
-	// here.
+	// results. If you received a value for NextToken in the response from a previous
+	// ListJournalS3ExportsForLedger call, then you should use that value as input here.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -60,8 +59,11 @@ type ListJournalS3ExportsForLedgerOutput struct {
 	// specified ledger.
 	JournalS3Exports []types.JournalS3ExportDescription
 
-	//     - If NextToken is empty, then the last page of results has been processed and there are no more results to be retrieved.
-	//     - If NextToken is not empty, then there are more results available. To retrieve the next page of results, use the value of NextToken in a subsequent ListJournalS3ExportsForLedger call.
+	//   - If NextToken is empty, then the last page of results has been processed and
+	//   there are no more results to be retrieved.
+	//   - If NextToken is not empty, then there are more results available. To
+	//   retrieve the next page of results, use the value of NextToken in a subsequent
+	//   ListJournalS3ExportsForLedger call.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,12 +147,12 @@ var _ ListJournalS3ExportsForLedgerAPIClient = (*Client)(nil)
 // ListJournalS3ExportsForLedger
 type ListJournalS3ExportsForLedgerPaginatorOptions struct {
 	// The maximum number of results to return in a single
-	// ListJournalS3ExportsForLedgerrequest. (The actual number of results returned
+	// ListJournalS3ExportsForLedger request. (The actual number of results returned
 	// might be fewer.)
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

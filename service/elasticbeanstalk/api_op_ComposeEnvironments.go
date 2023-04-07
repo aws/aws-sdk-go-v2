@@ -57,7 +57,7 @@ type ComposeEnvironmentsInput struct {
 // Result message containing a list of environment descriptions.
 type ComposeEnvironmentsOutput struct {
 
-	// Returns an EnvironmentDescription  list.
+	// Returns an EnvironmentDescription list.
 	Environments []types.EnvironmentDescription
 
 	// In a paginated request, the token that you can pass in a subsequent request to

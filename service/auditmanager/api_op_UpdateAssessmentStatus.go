@@ -44,8 +44,7 @@ type UpdateAssessmentStatusInput struct {
 
 type UpdateAssessmentStatusOutput struct {
 
-	// The name of the updated assessment that the UpdateAssessmentStatus API
-	// returned.
+	// The name of the updated assessment that the UpdateAssessmentStatus API returned.
 	Assessment *types.Assessment
 
 	// Metadata pertaining to the operation's result.

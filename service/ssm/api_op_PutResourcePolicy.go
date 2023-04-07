@@ -14,8 +14,8 @@ import (
 // you to define the IAM entity (for example, an Amazon Web Services account) that
 // can manage your Systems Manager resources. Currently, OpsItemGroup is the only
 // resource that supports Systems Manager resource policies. The resource policy
-// for OpsItemGroup enables Amazon Web Services accounts to view and interact
-// with OpsCenter operational work items (OpsItems).
+// for OpsItemGroup enables Amazon Web Services accounts to view and interact with
+// OpsCenter operational work items (OpsItems).
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -38,8 +38,7 @@ type PutResourcePolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// Amazon Resource Name (ARN) of the resource to which you want to attach a
-	// policy.
+	// Amazon Resource Name (ARN) of the resource to which you want to attach a policy.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -60,7 +59,7 @@ type PutResourcePolicyOutput struct {
 	// ID of the current policy version.
 	PolicyHash *string
 
-	// The policy ID. To update a policy, you must specify PolicyId  and PolicyHash .
+	// The policy ID. To update a policy, you must specify PolicyId and PolicyHash .
 	PolicyId *string
 
 	// Metadata pertaining to the operation's result.

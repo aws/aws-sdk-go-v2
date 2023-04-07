@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables a virtual private gateway (VGW) from propagating routes to a
-// specified route table of a VPC.
+// Disables a virtual private gateway (VGW) from propagating routes to a specified
+// route table of a VPC.
 func (c *Client) DisableVgwRoutePropagation(ctx context.Context, params *DisableVgwRoutePropagationInput, optFns ...func(*Options)) (*DisableVgwRoutePropagationOutput, error) {
 	if params == nil {
 		params = &DisableVgwRoutePropagationInput{}

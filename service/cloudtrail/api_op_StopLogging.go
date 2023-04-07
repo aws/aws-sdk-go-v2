@@ -15,7 +15,7 @@ import (
 // action. You can update a trail without stopping it first. This action is the
 // only way to stop recording. For a trail enabled in all regions, this operation
 // must be called from the region in which the trail was created, or an
-// InvalidHomeRegionExceptionwill occur. This operation cannot be called on the
+// InvalidHomeRegionException will occur. This operation cannot be called on the
 // shadow trails (replicated trails in other regions) of a trail enabled in all
 // regions.
 func (c *Client) StopLogging(ctx context.Context, params *StopLoggingInput, optFns ...func(*Options)) (*StopLoggingOutput, error) {
@@ -37,9 +37,9 @@ func (c *Client) StopLogging(ctx context.Context, params *StopLoggingInput, optF
 // for the specified account.
 type StopLoggingInput struct {
 
-	// Specifies the name or the CloudTrail ARN of the trail for which CloudTrail
-	// will stop logging Amazon Web Services API calls. The following is the format of
-	// a trail ARN. arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	// Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will
+	// stop logging Amazon Web Services API calls. The following is the format of a
+	// trail ARN. arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// This member is required.
 	Name *string

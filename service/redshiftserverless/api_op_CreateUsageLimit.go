@@ -49,8 +49,8 @@ type CreateUsageLimitInput struct {
 	// This member is required.
 	UsageType types.UsageLimitUsageType
 
-	// The action that Amazon Redshift Serverless takes when the limit is reached.
-	// The default is log.
+	// The action that Amazon Redshift Serverless takes when the limit is reached. The
+	// default is log.
 	BreachAction types.UsageLimitBreachAction
 
 	// The time period that the amount applies to. A weekly period begins on Sunday.

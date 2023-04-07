@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Transitions sessions from the READY  state into the STOPPED  state. The
-// STOP_IN_PROGRESS state is the intermediate state between the READY  and STOPPED
+// Transitions sessions from the READY state into the STOPPED state. The
+// STOP_IN_PROGRESS state is the intermediate state between the READY and STOPPED
 // states.
 func (c *Client) StopStreamingSession(ctx context.Context, params *StopStreamingSessionInput, optFns ...func(*Options)) (*StopStreamingSessionOutput, error) {
 	if params == nil {
@@ -42,8 +42,8 @@ type StopStreamingSessionInput struct {
 	// This member is required.
 	StudioId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
 	ClientToken *string

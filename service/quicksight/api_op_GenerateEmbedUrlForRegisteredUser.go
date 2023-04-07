@@ -16,9 +16,14 @@ import (
 // registered in an Amazon QuickSight account. Before you use this action, make
 // sure that you have configured the relevant Amazon QuickSight resource and
 // permissions. The following rules apply to the generated URL:
-//   - It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.
-//   - The URL validity period should not be confused with the actual session lifetime that can be customized using the SessionLifetimeInMinutes (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes) parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.
-//   - You are charged only when the URL is used or there is interaction with Amazon QuickSight.
+//   - It contains a temporary bearer token. It is valid for 5 minutes after it is
+//     generated. Once redeemed within this period, it cannot be re-used again.
+//   - The URL validity period should not be confused with the actual session
+//     lifetime that can be customized using the SessionLifetimeInMinutes (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes)
+//     parameter. The resulting user session is valid for 15 minutes (minimum) to 10
+//     hours (maximum). The default session duration is 10 hours.
+//   - You are charged only when the URL is used or there is interaction with
+//     Amazon QuickSight.
 //
 // For more information, see Embedded Analytics (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html)
 // in the Amazon QuickSight User Guide. For more information about the high-level
@@ -66,12 +71,11 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 	// console. Instead, it allows only the domains that you include in this parameter.
 	// You can list up to three domains or subdomains in each API call. To include all
 	// subdomains under a specific domain to the allow list, use * . For example,
-	// https://*.sapp.amazon.com includes all subdomains under https://sapp.amazon.com
-	// .
+	// https://*.sapp.amazon.com includes all subdomains under https://sapp.amazon.com .
 	AllowedDomains []string
 
-	// How many minutes the session is valid. The session lifetime must be in
-	// [15-600] minutes range.
+	// How many minutes the session is valid. The session lifetime must be in [15-600]
+	// minutes range.
 	SessionLifetimeInMinutes *int64
 
 	noSmithyDocumentSerde

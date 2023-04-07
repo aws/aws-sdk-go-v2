@@ -28,8 +28,8 @@ func (c *Client) DeleteSshPublicKey(ctx context.Context, params *DeleteSshPublic
 
 type DeleteSshPublicKeyInput struct {
 
-	// A system-assigned unique identifier for a file transfer protocol-enabled
-	// server instance that has the user assigned to it.
+	// A system-assigned unique identifier for a file transfer protocol-enabled server
+	// instance that has the user assigned to it.
 	//
 	// This member is required.
 	ServerId *string

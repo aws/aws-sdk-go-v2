@@ -51,8 +51,8 @@ type DescribeFaqOutput struct {
 	// The description of the FAQ that you provided when it was created.
 	Description *string
 
-	// If the Status  field is FAILED , the ErrorMessage field contains the reason
-	// why the FAQ failed.
+	// If the Status field is FAILED , the ErrorMessage field contains the reason why
+	// the FAQ failed.
 	ErrorMessage *string
 
 	// The file format used by the input files for the FAQ.

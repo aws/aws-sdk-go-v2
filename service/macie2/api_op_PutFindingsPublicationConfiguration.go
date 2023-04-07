@@ -34,8 +34,8 @@ type PutFindingsPublicationConfigurationInput struct {
 	// the request.
 	ClientToken *string
 
-	// The configuration settings that determine which findings to publish to
-	// Security Hub.
+	// The configuration settings that determine which findings to publish to Security
+	// Hub.
 	SecurityHubConfiguration *types.SecurityHubConfiguration
 
 	noSmithyDocumentSerde

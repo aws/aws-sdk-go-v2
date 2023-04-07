@@ -35,11 +35,11 @@ type GetDomainSuggestionsInput struct {
 	// Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide. The domain name can contain only the
 	// following characters:
-	//     - Letters a through z. Domain names are not case sensitive.
-	//     - Numbers 0 through 9.
-	//     - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
-	//     - Period (.) to separate the labels in the name, such as the . in example.com .
-	//
+	//   - Letters a through z. Domain names are not case sensitive.
+	//   - Numbers 0 through 9.
+	//   - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
+	//   - Period (.) to separate the labels in the name, such as the . in example.com
+	//   .
 	// Internationalized domain names are not supported for some top-level domains. To
 	// determine whether the TLD that you want to use supports internationalized domain
 	// names, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
@@ -48,10 +48,10 @@ type GetDomainSuggestionsInput struct {
 	// This member is required.
 	DomainName *string
 
-	// If OnlyAvailable  is true, Route 53 returns only domain names that are
-	// available. If OnlyAvailable  is false, Route 53 returns domain names without
+	// If OnlyAvailable is true , Route 53 returns only domain names that are
+	// available. If OnlyAvailable is false , Route 53 returns domain names without
 	// checking whether they're available to be registered. To determine whether the
-	// domain is available, you can call checkDomainAvailability  for each suggestion.
+	// domain is available, you can call checkDomainAvailability for each suggestion.
 	//
 	// This member is required.
 	OnlyAvailable *bool
@@ -67,8 +67,8 @@ type GetDomainSuggestionsInput struct {
 
 type GetDomainSuggestionsOutput struct {
 
-	// A list of possible domain names. If you specified true  for OnlyAvailable in
-	// the request, the list contains only domains that are available for registration.
+	// A list of possible domain names. If you specified true for OnlyAvailable in the
+	// request, the list contains only domains that are available for registration.
 	SuggestionsList []types.DomainSuggestion
 
 	// Metadata pertaining to the operation's result.

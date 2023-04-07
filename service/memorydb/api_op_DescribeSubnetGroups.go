@@ -31,9 +31,9 @@ func (c *Client) DescribeSubnetGroups(ctx context.Context, params *DescribeSubne
 
 type DescribeSubnetGroupsInput struct {
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional argument to pass in case the total number of records exceeds the
@@ -58,8 +58,8 @@ type DescribeSubnetGroupsOutput struct {
 	// arguments unchanged.
 	NextToken *string
 
-	// A list of subnet groups. Each element in the list contains detailed
-	// information about one group.
+	// A list of subnet groups. Each element in the list contains detailed information
+	// about one group.
 	SubnetGroups []types.SubnetGroup
 
 	// Metadata pertaining to the operation's result.
@@ -139,13 +139,13 @@ var _ DescribeSubnetGroupsAPIClient = (*Client)(nil)
 // DescribeSubnetGroupsPaginatorOptions is the paginator options for
 // DescribeSubnetGroups
 type DescribeSubnetGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -24,8 +24,8 @@ type ApplicationState struct {
 	noSmithyDocumentSerde
 }
 
-// An ARN of the AWS cloud resource target receiving the migration (e.g., AMI,
-// EC2 instance, RDS instance, etc.).
+// An ARN of the AWS cloud resource target receiving the migration (e.g., AMI, EC2
+// instance, RDS instance, etc.).
 type CreatedArtifact struct {
 
 	// An ARN that uniquely identifies the result of a migration task.
@@ -80,7 +80,7 @@ type MigrationTask struct {
 }
 
 // MigrationTaskSummary includes MigrationTaskName , ProgressPercent ,
-// ProgressUpdateStream , Status , and UpdateDateTime  for each task.
+// ProgressUpdateStream , Status , and UpdateDateTime for each task.
 type MigrationTaskSummary struct {
 
 	// Unique identifier that references the migration task. Do not store personal
@@ -118,8 +118,8 @@ type ProgressUpdateStreamSummary struct {
 
 // Attribute associated with a resource. Note the corresponding format required
 // per type listed below: IPV4 x.x.x.x where x is an integer in the range [0,255]
-// IPV6 y : y : y : y : y : y : y : y where y is a hexadecimal between 0 and
-// FFFF. [0, FFFF] MAC_ADDRESS ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$  FQDN
+// IPV6 y : y : y : y : y : y : y : y where y is a hexadecimal between 0 and FFFF.
+// [0, FFFF] MAC_ADDRESS ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$ FQDN
 // ^[^<>{}\\/?,=\p{Cntrl}]{1,256}$
 type ResourceAttribute struct {
 

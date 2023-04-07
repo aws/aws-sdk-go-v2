@@ -33,11 +33,11 @@ func (c *Client) DescribeMetricFilters(ctx context.Context, params *DescribeMetr
 type DescribeMetricFiltersInput struct {
 
 	// The prefix to match. CloudWatch Logs uses the value that you set here only if
-	// you also include the logGroupName  parameter in your request.
+	// you also include the logGroupName parameter in your request.
 	FilterNamePrefix *string
 
-	// The maximum number of items returned. If you don't specify a value, the
-	// default is up to 50 items.
+	// The maximum number of items returned. If you don't specify a value, the default
+	// is up to 50 items.
 	Limit *int32
 
 	// The name of the log group.
@@ -65,8 +65,7 @@ type DescribeMetricFiltersOutput struct {
 	// The metric filters.
 	MetricFilters []types.MetricFilter
 
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
+	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -146,12 +145,12 @@ var _ DescribeMetricFiltersAPIClient = (*Client)(nil)
 // DescribeMetricFiltersPaginatorOptions is the paginator options for
 // DescribeMetricFilters
 type DescribeMetricFiltersPaginatorOptions struct {
-	// The maximum number of items returned. If you don't specify a value, the
-	// default is up to 50 items.
+	// The maximum number of items returned. If you don't specify a value, the default
+	// is up to 50 items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

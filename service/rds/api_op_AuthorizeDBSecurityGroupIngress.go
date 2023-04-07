@@ -56,19 +56,19 @@ type AuthorizeDBSecurityGroupIngressInput struct {
 
 	// Id of the EC2 security group to authorize. For VPC DB security groups,
 	// EC2SecurityGroupId must be provided. Otherwise, EC2SecurityGroupOwnerId and
-	// either EC2SecurityGroupName  or EC2SecurityGroupId  must be provided.
+	// either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
 	EC2SecurityGroupId *string
 
 	// Name of the EC2 security group to authorize. For VPC DB security groups,
 	// EC2SecurityGroupId must be provided. Otherwise, EC2SecurityGroupOwnerId and
-	// either EC2SecurityGroupName  or EC2SecurityGroupId  must be provided.
+	// either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
 	EC2SecurityGroupName *string
 
 	// Amazon Web Services account number of the owner of the EC2 security group
-	// specified in the EC2SecurityGroupName parameter. The Amazon Web Services
-	// access key ID isn't an acceptable value. For VPC DB security groups,
-	// EC2SecurityGroupId must be provided. Otherwise, EC2SecurityGroupOwnerId and
-	// either EC2SecurityGroupName  or EC2SecurityGroupId  must be provided.
+	// specified in the EC2SecurityGroupName parameter. The Amazon Web Services access
+	// key ID isn't an acceptable value. For VPC DB security groups, EC2SecurityGroupId
+	// must be provided. Otherwise, EC2SecurityGroupOwnerId and either
+	// EC2SecurityGroupName or EC2SecurityGroupId must be provided.
 	EC2SecurityGroupOwnerId *string
 
 	noSmithyDocumentSerde
@@ -77,7 +77,7 @@ type AuthorizeDBSecurityGroupIngressInput struct {
 type AuthorizeDBSecurityGroupIngressOutput struct {
 
 	// Contains the details for an Amazon RDS DB security group. This data type is
-	// used as a response element in the DescribeDBSecurityGroups  action.
+	// used as a response element in the DescribeDBSecurityGroups action.
 	DBSecurityGroup *types.DBSecurityGroup
 
 	// Metadata pertaining to the operation's result.

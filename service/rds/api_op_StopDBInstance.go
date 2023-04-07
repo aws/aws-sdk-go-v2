@@ -14,10 +14,10 @@ import (
 // Stops an Amazon RDS DB instance. When you stop a DB instance, Amazon RDS
 // retains the DB instance's metadata, including its endpoint, DB parameter group,
 // and option group membership. Amazon RDS also retains the transaction logs so you
-// can do a point-in-time restore if necessary. For more information, see
-// Stopping an Amazon RDS DB Instance Temporarily (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html)
+// can do a point-in-time restore if necessary. For more information, see Stopping
+// an Amazon RDS DB Instance Temporarily (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html)
 // in the Amazon RDS User Guide. This command doesn't apply to RDS Custom, Aurora
-// MySQL, and Aurora PostgreSQL. For Aurora clusters, use StopDBCluster  instead.
+// MySQL, and Aurora PostgreSQL. For Aurora clusters, use StopDBCluster instead.
 func (c *Client) StopDBInstance(ctx context.Context, params *StopDBInstanceInput, optFns ...func(*Options)) (*StopDBInstanceOutput, error) {
 	if params == nil {
 		params = &StopDBInstanceInput{}

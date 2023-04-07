@@ -55,7 +55,7 @@ type ListPricingPlansOutput struct {
 	// The pagination token that's used on subsequent calls to get pricing plans.
 	NextToken *string
 
-	// A list of PricingPlanListElement  retrieved.
+	// A list of PricingPlanListElement retrieved.
 	PricingPlans []types.PricingPlanListElement
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +137,8 @@ type ListPricingPlansPaginatorOptions struct {
 	// The maximum number of pricing plans to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

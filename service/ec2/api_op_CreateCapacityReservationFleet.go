@@ -54,8 +54,8 @@ type CreateCapacityReservationFleetInput struct {
 	// in the Amazon EC2 User Guide. Valid values: prioritized
 	AllocationStrategy *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// .
 	ClientToken *string
 
@@ -66,20 +66,20 @@ type CreateCapacityReservationFleetInput struct {
 	DryRun *bool
 
 	// The date and time at which the Capacity Reservation Fleet expires. When the
-	// Capacity Reservation Fleet expires, its state changes to expired and all of
-	// the Capacity Reservations in the Fleet expire. The Capacity Reservation Fleet
+	// Capacity Reservation Fleet expires, its state changes to expired and all of the
+	// Capacity Reservations in the Fleet expire. The Capacity Reservation Fleet
 	// expires within an hour after the specified time. For example, if you specify
-	// 5/31/2019 , 13:30:55, the Capacity Reservation Fleet is guaranteed to expire
-	// between 13:30:55  and 14:30:55  on 5/31/2019 .
+	// 5/31/2019 , 13:30:55 , the Capacity Reservation Fleet is guaranteed to expire
+	// between 13:30:55 and 14:30:55 on 5/31/2019 .
 	EndDate *time.Time
 
 	// Indicates the type of instance launches that the Capacity Reservation Fleet
 	// accepts. All Capacity Reservations in the Fleet inherit this instance matching
-	// criteria. Currently, Capacity Reservation Fleets support open instance
-	// matching criteria only. This means that instances that have matching attributes
-	// (instance type, platform, and Availability Zone) run in the Capacity
-	// Reservations automatically. Instances do not need to explicitly target a
-	// Capacity Reservation Fleet to use its reserved capacity.
+	// criteria. Currently, Capacity Reservation Fleets support open instance matching
+	// criteria only. This means that instances that have matching attributes (instance
+	// type, platform, and Availability Zone) run in the Capacity Reservations
+	// automatically. Instances do not need to explicitly target a Capacity Reservation
+	// Fleet to use its reserved capacity.
 	InstanceMatchCriteria types.FleetInstanceMatchCriteria
 
 	// The tags to assign to the Capacity Reservation Fleet. The tags are
@@ -89,8 +89,10 @@ type CreateCapacityReservationFleetInput struct {
 	// Indicates the tenancy of the Capacity Reservation Fleet. All Capacity
 	// Reservations in the Fleet inherit this tenancy. The Capacity Reservation Fleet
 	// can have one of the following tenancy settings:
-	//     - default - The Capacity Reservation Fleet is created on hardware that is shared with other Amazon Web Services accounts.
-	//     - dedicated - The Capacity Reservations are created on single-tenant hardware that is dedicated to a single Amazon Web Services account.
+	//   - default - The Capacity Reservation Fleet is created on hardware that is
+	//   shared with other Amazon Web Services accounts.
+	//   - dedicated - The Capacity Reservations are created on single-tenant hardware
+	//   that is dedicated to a single Amazon Web Services account.
 	Tenancy types.FleetCapacityReservationTenancy
 
 	noSmithyDocumentSerde

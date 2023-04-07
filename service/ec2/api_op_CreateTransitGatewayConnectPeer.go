@@ -42,8 +42,8 @@ type CreateTransitGatewayConnectPeerInput struct {
 	// This member is required.
 	InsideCidrBlocks []string
 
-	// The peer IP address (GRE outer IP address) on the appliance side of the
-	// Connect peer.
+	// The peer IP address (GRE outer IP address) on the appliance side of the Connect
+	// peer.
 	//
 	// This member is required.
 	PeerAddress *string

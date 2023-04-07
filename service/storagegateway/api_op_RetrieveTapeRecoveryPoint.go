@@ -53,8 +53,8 @@ type RetrieveTapeRecoveryPointInput struct {
 // RetrieveTapeRecoveryPointOutput
 type RetrieveTapeRecoveryPointOutput struct {
 
-	// The Amazon Resource Name (ARN) of the virtual tape for which the recovery
-	// point was retrieved.
+	// The Amazon Resource Name (ARN) of the virtual tape for which the recovery point
+	// was retrieved.
 	TapeARN *string
 
 	// Metadata pertaining to the operation's result.

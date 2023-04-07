@@ -13,7 +13,7 @@ import (
 
 // Updates an association. You can update the association name and version, the
 // document version, schedule, parameters, and Amazon Simple Storage Service
-// (Amazon S3) output. When you call UpdateAssociation, the system removes all
+// (Amazon S3) output. When you call UpdateAssociation , the system removes all
 // optional parameters from the request and overwrites the association with null
 // values for those parameters. This is by design. You must specify all optional
 // parameters in the call, even if you are not changing the parameters. This
@@ -80,29 +80,29 @@ type UpdateAssociationInput struct {
 	// request succeeds, either specify $LATEST , or omit this parameter.
 	AssociationVersion *string
 
-	// Choose the parameter that will define how your automation will branch out.
-	// This target is required for associations that use an Automation runbook and
-	// target resources by using rate controls. Automation is a capability of Amazon
-	// Web Services Systems Manager.
+	// Choose the parameter that will define how your automation will branch out. This
+	// target is required for associations that use an Automation runbook and target
+	// resources by using rate controls. Automation is a capability of Amazon Web
+	// Services Systems Manager.
 	AutomationTargetParameterName *string
 
-	// The names or Amazon Resource Names (ARNs) of the Change Calendar type
-	// documents you want to gate your associations under. The associations only run
-	// when that change calendar is open. For more information, see Amazon Web
-	// Services Systems Manager Change Calendar (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar)
+	// The names or Amazon Resource Names (ARNs) of the Change Calendar type documents
+	// you want to gate your associations under. The associations only run when that
+	// change calendar is open. For more information, see Amazon Web Services Systems
+	// Manager Change Calendar (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar)
 	// .
 	CalendarNames []string
 
 	// The severity level to assign to the association.
 	ComplianceSeverity types.AssociationComplianceSeverity
 
-	// The document version you want update for the association. State Manager
-	// doesn't support running associations that use a new version of a document if
-	// that document is shared from another account. State Manager always runs the
-	// defaultversion of a document if shared from another account, even though the
-	// Systems Manager console shows that a new version was processed. If you want to
-	// run an association using a new version of a document shared form another
-	// account, you must set the document version to default .
+	// The document version you want update for the association. State Manager doesn't
+	// support running associations that use a new version of a document if that
+	// document is shared from another account. State Manager always runs the default
+	// version of a document if shared from another account, even though the Systems
+	// Manager console shows that a new version was processed. If you want to run an
+	// association using a new version of a document shared form another account, you
+	// must set the document version to default .
 	DocumentVersion *string
 
 	// The maximum number of targets allowed to run the association at the same time.
@@ -136,9 +136,9 @@ type UpdateAssociationInput struct {
 	// document) that are shared with you from other Amazon Web Services accounts, you
 	// must specify the complete SSM document ARN, in the following format:
 	// arn:aws:ssm:region:account-id:document/document-name For example:
-	// arn:aws:ssm:us-east-2:12345678912:document/My-Shared-DocumentFor Amazon Web
+	// arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For Amazon Web
 	// Services-predefined documents and SSM documents you created in your account, you
-	// only need to specify the document name. For example, AWS-ApplyPatchBaseline  or
+	// only need to specify the document name. For example, AWS-ApplyPatchBaseline or
 	// My-Document .
 	Name *string
 
@@ -154,24 +154,24 @@ type UpdateAssociationInput struct {
 	ScheduleExpression *string
 
 	// Number of days to wait after the scheduled day to run an association. For
-	// example, if you specified a cron schedule of cron(0 0 ? * THU#2 *), you could
+	// example, if you specified a cron schedule of cron(0 0 ? * THU#2 *) , you could
 	// specify an offset of 3 to run the association each Sunday after the second
 	// Thursday of the month. For more information about cron schedules for
 	// associations, see Reference: Cron and rate expressions for Systems Manager (https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html)
 	// in the Amazon Web Services Systems Manager User Guide. To use offsets, you must
-	// specify the ApplyOnlyAtCronInterval parameter. This option tells the system
-	// not to run an association immediately after you create it.
+	// specify the ApplyOnlyAtCronInterval parameter. This option tells the system not
+	// to run an association immediately after you create it.
 	ScheduleOffset *int32
 
-	// The mode for generating association compliance. You can specify AUTO  or MANUAL
-	// . In AUTO mode, the system uses the status of the association execution to
+	// The mode for generating association compliance. You can specify AUTO or MANUAL .
+	// In AUTO mode, the system uses the status of the association execution to
 	// determine the compliance status. If the association execution runs successfully,
-	// then the association is COMPLIANT. If the association execution doesn't run
+	// then the association is COMPLIANT . If the association execution doesn't run
 	// successfully, the association is NON-COMPLIANT . In MANUAL mode, you must
-	// specify the AssociationId  as a parameter for the PutComplianceItems API
+	// specify the AssociationId as a parameter for the PutComplianceItems API
 	// operation. In this case, compliance data isn't managed by State Manager, a
 	// capability of Amazon Web Services Systems Manager. It is managed by your direct
-	// call to the PutComplianceItems  API operation. By default, all associations use
+	// call to the PutComplianceItems API operation. By default, all associations use
 	// AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 

@@ -50,8 +50,8 @@ type ListGameServersInput struct {
 	NextToken *string
 
 	// Indicates how to sort the returned data based on game server registration
-	// timestamp. Use ASCENDING  to retrieve oldest game servers first, or use
-	// DESCENDINGto retrieve newest game servers first. If this parameter is left
+	// timestamp. Use ASCENDING to retrieve oldest game servers first, or use
+	// DESCENDING to retrieve newest game servers first. If this parameter is left
 	// empty, game servers are returned in no particular order.
 	SortOrder types.SortOrder
 
@@ -151,8 +151,8 @@ type ListGameServersPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

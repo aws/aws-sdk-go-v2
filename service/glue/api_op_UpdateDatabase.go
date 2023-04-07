@@ -35,8 +35,8 @@ type UpdateDatabaseInput struct {
 	// This member is required.
 	DatabaseInput *types.DatabaseInput
 
-	// The name of the database to update in the catalog. For Hive compatibility,
-	// this is folded to lowercase.
+	// The name of the database to update in the catalog. For Hive compatibility, this
+	// is folded to lowercase.
 	//
 	// This member is required.
 	Name *string

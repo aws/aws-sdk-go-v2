@@ -63,8 +63,8 @@ type CreateFlywheelInput struct {
 	// Number (ARN) of the model version.
 	ActiveModelArn *string
 
-	// A unique identifier for the request. If you don't set the client request
-	// token, Amazon Comprehend generates one.
+	// A unique identifier for the request. If you don't set the client request token,
+	// Amazon Comprehend generates one.
 	ClientRequestToken *string
 
 	// Data security configurations.

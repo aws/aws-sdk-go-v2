@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all of the Amazon Web Services that you can choose to
-// include in your assessment. When you create an assessment (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_CreateAssessment.html)
+// Returns a list of all of the Amazon Web Services that you can choose to include
+// in your assessment. When you create an assessment (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_CreateAssessment.html)
 // , specify which of these services you want to include to narrow the assessment's
-//
 // scope (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Scope.html)
 // .
 func (c *Client) GetServicesInScope(ctx context.Context, params *GetServicesInScopeInput, optFns ...func(*Options)) (*GetServicesInScopeOutput, error) {

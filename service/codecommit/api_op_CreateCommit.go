@@ -39,8 +39,8 @@ type CreateCommitInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The name of the author who created the commit. This information is used as
-	// both the author and committer for the commit.
+	// The name of the author who created the commit. This information is used as both
+	// the author and committer for the commit.
 	AuthorName *string
 
 	// The commit message you want to include in the commit. Commit messages are
@@ -85,8 +85,8 @@ type CreateCommitOutput struct {
 	// The files updated as part of the commited file changes.
 	FilesUpdated []types.FileMetadata
 
-	// The full SHA-1 pointer of the tree information for the commit that contains
-	// the commited file changes.
+	// The full SHA-1 pointer of the tree information for the commit that contains the
+	// commited file changes.
 	TreeId *string
 
 	// Metadata pertaining to the operation's result.

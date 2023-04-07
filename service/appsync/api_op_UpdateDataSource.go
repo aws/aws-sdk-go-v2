@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a DataSource  object.
+// Updates a DataSource object.
 func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceInput, optFns ...func(*Options)) (*UpdateDataSourceOutput, error) {
 	if params == nil {
 		params = &UpdateDataSourceInput{}
@@ -79,7 +79,7 @@ type UpdateDataSourceInput struct {
 
 type UpdateDataSourceOutput struct {
 
-	// The updated DataSource  object.
+	// The updated DataSource object.
 	DataSource *types.DataSource
 
 	// Metadata pertaining to the operation's result.

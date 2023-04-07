@@ -141,8 +141,8 @@ type ListUsersPaginatorOptions struct {
 	// The maximum number of results to return in a single call. Defaults to 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

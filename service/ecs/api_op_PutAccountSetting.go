@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies an account setting. Account settings are set on a per-Region basis.
-// If you change the account setting for the root user, the default settings for
-// all of the users and roles that no individual account setting was specified are
+// Modifies an account setting. Account settings are set on a per-Region basis. If
+// you change the account setting for the root user, the default settings for all
+// of the users and roles that no individual account setting was specified are
 // reset for. For more information, see Account Settings (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html)
 // in the Amazon Elastic Container Service Developer Guide. When
 // serviceLongArnFormat , taskLongArnFormat , or containerInstanceLongArnFormat
@@ -23,7 +23,7 @@ import (
 // resource separately. The ARN and resource ID format of a resource is defined by
 // the opt-in status of the user or role that created the resource. You must turn
 // on this setting to use Amazon ECS features such as resource tagging. When
-// awsvpcTrunkingis specified, the elastic network interface (ENI) limit for any
+// awsvpcTrunking is specified, the elastic network interface (ENI) limit for any
 // new container instances that support the feature is changed. If awsvpcTrunking
 // is enabled, any new container instances that support the feature are launched
 // have the increased ENI limits available to them. For more information, see
@@ -53,11 +53,11 @@ func (c *Client) PutAccountSetting(ctx context.Context, params *PutAccountSettin
 type PutAccountSettingInput struct {
 
 	// The Amazon ECS resource name for which to modify the account setting. If
-	// serviceLongArnFormatis specified, the ARN for your Amazon ECS services is
+	// serviceLongArnFormat is specified, the ARN for your Amazon ECS services is
 	// affected. If taskLongArnFormat is specified, the ARN and resource ID for your
 	// Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified,
 	// the ARN and resource ID for your Amazon ECS container instances is affected. If
-	// awsvpcTrunkingis specified, the elastic network interface (ENI) limit for your
+	// awsvpcTrunking is specified, the elastic network interface (ENI) limit for your
 	// Amazon ECS container instances is affected. If containerInsights is specified,
 	// the default setting for CloudWatch Container Insights for your clusters is
 	// affected.

@@ -43,15 +43,15 @@ type ListAnomaliesForInsightInput struct {
 	Filters *types.ListAnomaliesForInsightFilters
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 
-	// A time range used to specify when the requested anomalies started. All
-	// returned anomalies started during this time range.
+	// A time range used to specify when the requested anomalies started. All returned
+	// anomalies started during this time range.
 	StartTimeRange *types.StartTimeRange
 
 	noSmithyDocumentSerde
@@ -152,11 +152,11 @@ var _ ListAnomaliesForInsightAPIClient = (*Client)(nil)
 // ListAnomaliesForInsight
 type ListAnomaliesForInsightPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken  value.
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

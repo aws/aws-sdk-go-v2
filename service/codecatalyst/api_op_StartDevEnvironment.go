@@ -43,8 +43,8 @@ type StartDevEnvironmentInput struct {
 	// This member is required.
 	SpaceName *string
 
-	// Information about the integrated development environment (IDE) configured for
-	// a Dev Environment.
+	// Information about the integrated development environment (IDE) configured for a
+	// Dev Environment.
 	Ides []types.IdeConfiguration
 
 	// The amount of time the Dev Environment will run without any activity detected

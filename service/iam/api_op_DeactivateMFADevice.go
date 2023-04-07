@@ -34,8 +34,7 @@ type DeactivateMFADeviceInput struct {
 
 	// The serial number that uniquely identifies the MFA device. For virtual MFA
 	// devices, the serial number is the device ARN. This parameter allows (through its
-	//
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: =,.@:/-
 	//
@@ -43,7 +42,7 @@ type DeactivateMFADeviceInput struct {
 	SerialNumber *string
 
 	// The name of the user whose MFA device you want to deactivate. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
 	// of characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//

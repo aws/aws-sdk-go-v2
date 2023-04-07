@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Gets the details of a resource-based policy that is attached to a custom
-// model, including the JSON body of the policy.
+// Gets the details of a resource-based policy that is attached to a custom model,
+// including the JSON body of the policy.
 func (c *Client) DescribeResourcePolicy(ctx context.Context, params *DescribeResourcePolicyInput, optFns ...func(*Options)) (*DescribeResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DescribeResourcePolicyInput{}
@@ -47,9 +47,8 @@ type DescribeResourcePolicyOutput struct {
 	// The time at which the policy was last modified.
 	LastModifiedTime *time.Time
 
-	// The revision ID of the policy. Each time you modify a policy, Amazon
-	// Comprehend assigns a new revision ID, and it deletes the prior version of the
-	// policy.
+	// The revision ID of the policy. Each time you modify a policy, Amazon Comprehend
+	// assigns a new revision ID, and it deletes the prior version of the policy.
 	PolicyRevisionId *string
 
 	// The JSON body of the resource-based policy.

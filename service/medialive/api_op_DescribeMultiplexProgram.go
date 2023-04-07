@@ -55,10 +55,10 @@ type DescribeMultiplexProgramOutput struct {
 	// The packet identifier map for this multiplex program.
 	PacketIdentifiersMap *types.MultiplexProgramPacketIdentifiersMap
 
-	// Contains information about the current sources for the specified program in
-	// the specified multiplex. Keep in mind that each multiplex pipeline connects to
-	// both pipelines in a given source channel (the channel identified by the
-	// program). But only one of those channel pipelines is ever active at one time.
+	// Contains information about the current sources for the specified program in the
+	// specified multiplex. Keep in mind that each multiplex pipeline connects to both
+	// pipelines in a given source channel (the channel identified by the program). But
+	// only one of those channel pipelines is ever active at one time.
 	PipelineDetails []types.MultiplexProgramPipelineDetail
 
 	// The name of the multiplex program.

@@ -36,7 +36,7 @@ type DescribeRegionsInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The DescribeRegionsResult.NextToken  value from a previous call to
+	// The DescribeRegionsResult.NextToken value from a previous call to
 	// DescribeRegions . Pass null if this is the first call.
 	NextToken *string
 
@@ -135,8 +135,8 @@ var _ DescribeRegionsAPIClient = (*Client)(nil)
 
 // DescribeRegionsPaginatorOptions is the paginator options for DescribeRegions
 type DescribeRegionsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

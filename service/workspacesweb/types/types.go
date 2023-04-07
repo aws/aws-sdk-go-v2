@@ -20,8 +20,8 @@ type BrowserSettings struct {
 	// A list of web portal ARNs that this browser settings is associated with.
 	AssociatedPortalArns []string
 
-	// A JSON string containing Chrome Enterprise policies that will be applied to
-	// all streaming sessions.
+	// A JSON string containing Chrome Enterprise policies that will be applied to all
+	// streaming sessions.
 	BrowserPolicy *string
 
 	noSmithyDocumentSerde
@@ -89,36 +89,38 @@ type IdentityProvider struct {
 	// This member is required.
 	IdentityProviderArn *string
 
-	// The identity provider details. The following list describes the provider
-	// detail keys for each identity provider type.
-	//     - For Google and Login with Amazon:
-	//         - client_id
-	//         - client_secret
-	//         - authorize_scopes
-	//     - For Facebook:
-	//         - client_id
-	//         - client_secret
-	//         - authorize_scopes
-	//         - api_version
-	//     - For Sign in with Apple:
-	//         - client_id
-	//         - team_id
-	//         - key_id
-	//         - private_key
-	//         - authorize_scopes
-	//     - For OIDC providers:
-	//         - client_id
-	//         - client_secret
-	//         - attributes_request_method
-	//         - oidc_issuer
-	//         - authorize_scopes
-	//         - authorize_url if not available from discovery URL specified by oidc_issuer key
-	//         - token_url if not available from discovery URL specified by oidc_issuer key
-	//         - attributes_url if not available from discovery URL specified by oidc_issuer key
-	//         - jwks_uri if not available from discovery URL specified by oidc_issuer key
-	//     - For SAML providers:
-	//         - MetadataFile OR MetadataURL
-	//         - IDPSignout optional
+	// The identity provider details. The following list describes the provider detail
+	// keys for each identity provider type.
+	//   - For Google and Login with Amazon:
+	//   - client_id
+	//   - client_secret
+	//   - authorize_scopes
+	//   - For Facebook:
+	//   - client_id
+	//   - client_secret
+	//   - authorize_scopes
+	//   - api_version
+	//   - For Sign in with Apple:
+	//   - client_id
+	//   - team_id
+	//   - key_id
+	//   - private_key
+	//   - authorize_scopes
+	//   - For OIDC providers:
+	//   - client_id
+	//   - client_secret
+	//   - attributes_request_method
+	//   - oidc_issuer
+	//   - authorize_scopes
+	//   - authorize_url if not available from discovery URL specified by oidc_issuer
+	//   key
+	//   - token_url if not available from discovery URL specified by oidc_issuer key
+	//   - attributes_url if not available from discovery URL specified by oidc_issuer
+	//   key
+	//   - jwks_uri if not available from discovery URL specified by oidc_issuer key
+	//   - For SAML providers:
+	//   - MetadataFile OR MetadataURL
+	//   - IDPSignout optional
 	IdentityProviderDetails map[string]string
 
 	// The identity provider name.
@@ -193,7 +195,7 @@ type Portal struct {
 	// through your identity provider. You need to call CreateIdentityProvider to
 	// integrate your identity provider with your web portal. User and group access to
 	// your web portal is controlled through your identity provider.
-	// IAM_Identity_Centerweb portals are authenticated through AWS IAM Identity
+	// IAM_Identity_Center web portals are authenticated through AWS IAM Identity
 	// Center (successor to AWS Single Sign-On). They provide additional features, such
 	// as IdP-initiated authentication. Identity sources (including external identity
 	// provider integration), plus user and group access to your web portal, can be
@@ -252,7 +254,7 @@ type PortalSummary struct {
 	// through your identity provider. You need to call CreateIdentityProvider to
 	// integrate your identity provider with your web portal. User and group access to
 	// your web portal is controlled through your identity provider.
-	// IAM_Identity_Centerweb portals are authenticated through AWS IAM Identity
+	// IAM_Identity_Center web portals are authenticated through AWS IAM Identity
 	// Center (successor to AWS Single Sign-On). They provide additional features, such
 	// as IdP-initiated authentication. Identity sources (including external identity
 	// provider integration), plus user and group access to your web portal, can be
@@ -394,8 +396,8 @@ type UserSettings struct {
 	// disconnect.
 	DisconnectTimeoutInMinutes *int32
 
-	// Specifies whether the user can download files from the streaming session to
-	// the local device.
+	// Specifies whether the user can download files from the streaming session to the
+	// local device.
 	DownloadAllowed EnabledType
 
 	// The amount of time that users can be idle (inactive) before they are
@@ -428,8 +430,8 @@ type UserSettingsSummary struct {
 	// disconnect.
 	DisconnectTimeoutInMinutes *int32
 
-	// Specifies whether the user can download files from the streaming session to
-	// the local device.
+	// Specifies whether the user can download files from the streaming session to the
+	// local device.
 	DownloadAllowed EnabledType
 
 	// The amount of time that users can be idle (inactive) before they are
@@ -454,8 +456,7 @@ type UserSettingsSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a field passed inside a request that resulted in an
-// exception.
+// Information about a field passed inside a request that resulted in an exception.
 type ValidationExceptionField struct {
 
 	// The message describing why the field failed validation.

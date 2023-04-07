@@ -12,13 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of tags for the specified AWS CloudHSM cluster. This is a
-// paginated operation, which means that each response might contain only a subset
-// of all the tags. When the response contains only a subset of tags, it includes a
-//
-// NextToken value. Use this value in a subsequent ListTags request to get more
-// tags. When you receive a response with no NextToken (or an empty or null
-// value), that means there are no more tags to get.
+// Gets a list of tags for the specified AWS CloudHSM cluster. This is a paginated
+// operation, which means that each response might contain only a subset of all the
+// tags. When the response contains only a subset of tags, it includes a NextToken
+// value. Use this value in a subsequent ListTags request to get more tags. When
+// you receive a response with no NextToken (or an empty or null value), that
+// means there are no more tags to get.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -36,14 +35,14 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 
 type ListTagsInput struct {
 
-	// The cluster identifier (ID) for the cluster whose tags you are getting. To
-	// find the cluster ID, use DescribeClusters .
+	// The cluster identifier (ID) for the cluster whose tags you are getting. To find
+	// the cluster ID, use DescribeClusters .
 	//
 	// This member is required.
 	ResourceId *string
 
 	// The maximum number of tags to return in the response. When there are more tags
-	// than the number you specify, the response contains a NextToken  value.
+	// than the number you specify, the response contains a NextToken value.
 	MaxResults *int32
 
 	// The NextToken value that you received in the previous response. Use this value
@@ -61,7 +60,7 @@ type ListTagsOutput struct {
 	TagList []types.Tag
 
 	// An opaque string that indicates that the response contains only a subset of
-	// tags. Use this value in a subsequent ListTags  request to get more tags.
+	// tags. Use this value in a subsequent ListTags request to get more tags.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,11 +142,11 @@ var _ ListTagsAPIClient = (*Client)(nil)
 // ListTagsPaginatorOptions is the paginator options for ListTags
 type ListTagsPaginatorOptions struct {
 	// The maximum number of tags to return in the response. When there are more tags
-	// than the number you specify, the response contains a NextToken  value.
+	// than the number you specify, the response contains a NextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

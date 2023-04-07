@@ -32,8 +32,8 @@ func (c *Client) DisassociateRouteTable(ctx context.Context, params *Disassociat
 
 type DisassociateRouteTableInput struct {
 
-	// The association ID representing the current association between the route
-	// table and subnet or gateway.
+	// The association ID representing the current association between the route table
+	// and subnet or gateway.
 	//
 	// This member is required.
 	AssociationId *string

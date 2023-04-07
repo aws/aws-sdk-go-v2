@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists Amazon GuardDuty usage statistics over the last 30 days for the
-// specified detector ID. For newly enabled detectors or data sources, the cost
-// returned will include only the usage so far under 30 days. This may differ from
-// the cost metrics in the console, which project usage over 30 days to provide a
-// monthly cost estimate. For more information, see Understanding How Usage Costs
-// are Calculated (https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations)
+// Lists Amazon GuardDuty usage statistics over the last 30 days for the specified
+// detector ID. For newly enabled detectors or data sources, the cost returned will
+// include only the usage so far under 30 days. This may differ from the cost
+// metrics in the console, which project usage over 30 days to provide a monthly
+// cost estimate. For more information, see Understanding How Usage Costs are
+// Calculated (https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations)
 // .
 func (c *Client) GetUsageStatistics(ctx context.Context, params *GetUsageStatisticsInput, optFns ...func(*Options)) (*GetUsageStatisticsOutput, error) {
 	if params == nil {
@@ -70,8 +70,8 @@ type GetUsageStatisticsInput struct {
 
 type GetUsageStatisticsOutput struct {
 
-	// The pagination parameter to be used on the next list operation to retrieve
-	// more items.
+	// The pagination parameter to be used on the next list operation to retrieve more
+	// items.
 	NextToken *string
 
 	// The usage statistics object. If a UsageStatisticType was provided, the objects
@@ -161,8 +161,8 @@ type GetUsageStatisticsPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

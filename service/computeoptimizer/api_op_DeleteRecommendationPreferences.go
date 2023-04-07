@@ -37,7 +37,7 @@ type DeleteRecommendationPreferencesInput struct {
 	RecommendationPreferenceNames []types.RecommendationPreferenceName
 
 	// The target resource type of the recommendation preference to delete. The
-	// Ec2Instanceoption encompasses standalone instances and instances that are part
+	// Ec2Instance option encompasses standalone instances and instances that are part
 	// of Auto Scaling groups. The AutoScalingGroup option encompasses only instances
 	// that are part of an Auto Scaling group. The valid values for this parameter are
 	// Ec2Instance and AutoScalingGroup .

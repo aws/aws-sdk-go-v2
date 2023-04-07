@@ -54,8 +54,8 @@ type CreateQuerySuggestionsBlockListInput struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role with permission to access your S3
 	// bucket that contains the block list text file. For more information, see IAM
-	// access roles for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// access roles for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html)
+	// .
 	//
 	// This member is required.
 	RoleArn *string

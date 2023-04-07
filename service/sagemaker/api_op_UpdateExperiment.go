@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds, updates, or removes the description of an experiment. Updates the
-// display name of an experiment.
+// Adds, updates, or removes the description of an experiment. Updates the display
+// name of an experiment.
 func (c *Client) UpdateExperiment(ctx context.Context, params *UpdateExperimentInput, optFns ...func(*Options)) (*UpdateExperimentOutput, error) {
 	if params == nil {
 		params = &UpdateExperimentInput{}
@@ -37,8 +37,8 @@ type UpdateExperimentInput struct {
 	// The description of the experiment.
 	Description *string
 
-	// The name of the experiment as displayed. The name doesn't need to be unique.
-	// If DisplayName  isn't specified, ExperimentName  is displayed.
+	// The name of the experiment as displayed. The name doesn't need to be unique. If
+	// DisplayName isn't specified, ExperimentName is displayed.
 	DisplayName *string
 
 	noSmithyDocumentSerde

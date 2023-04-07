@@ -145,7 +145,7 @@ func (e *InternalServiceErrorException) ErrorCode() string {
 }
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// You have metered usage for a CustomerIdentifier  that does not exist.
+// You have metered usage for a CustomerIdentifier that does not exist.
 type InvalidCustomerIdentifierException struct {
 	Message *string
 
@@ -201,8 +201,8 @@ func (e *InvalidEndpointRegionException) ErrorCode() string {
 }
 func (e *InvalidEndpointRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The product code passed does not match the product code used for publishing
-// the product.
+// The product code passed does not match the product code used for publishing the
+// product.
 type InvalidProductCodeException struct {
 	Message *string
 
@@ -441,8 +441,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The timestamp  value passed in the UsageRecord  is out of allowed range. For
-// BatchMeterUsage, if any of the records are outside of the allowed range, the
+// The timestamp value passed in the UsageRecord is out of allowed range. For
+// BatchMeterUsage , if any of the records are outside of the allowed range, the
 // entire batch is not processed. You must remove invalid records and try again.
 type TimestampOutOfBoundsException struct {
 	Message *string

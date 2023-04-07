@@ -34,7 +34,7 @@ type BatchDeletePartitionInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// A list of PartitionInput  structures that define the partitions to be deleted.
+	// A list of PartitionInput structures that define the partitions to be deleted.
 	//
 	// This member is required.
 	PartitionsToDelete []types.PartitionValueList

@@ -17,14 +17,14 @@ import (
 // configuration across multiple services. Create multiple revisions of a
 // configuration by calling this action multiple times using the same
 // AutoScalingConfigurationName . The call returns incremental
-// AutoScalingConfigurationRevisionvalues. When you create a service and
-// configure an auto scaling configuration resource, the service uses the latest
-// active revision of the auto scaling configuration by default. You can optionally
-// configure the service to use a specific revision. Configure a higher MinSize
-// to increase the spread of your App Runner service over more Availability Zones
-// in the Amazon Web Services Region. The tradeoff is a higher minimal cost.
-// Configure a lower MaxSize to control your cost. The tradeoff is lower
-// responsiveness during peak demand.
+// AutoScalingConfigurationRevision values. When you create a service and configure
+// an auto scaling configuration resource, the service uses the latest active
+// revision of the auto scaling configuration by default. You can optionally
+// configure the service to use a specific revision. Configure a higher MinSize to
+// increase the spread of your App Runner service over more Availability Zones in
+// the Amazon Web Services Region. The tradeoff is a higher minimal cost. Configure
+// a lower MaxSize to control your cost. The tradeoff is lower responsiveness
+// during peak demand.
 func (c *Client) CreateAutoScalingConfiguration(ctx context.Context, params *CreateAutoScalingConfigurationInput, optFns ...func(*Options)) (*CreateAutoScalingConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateAutoScalingConfigurationInput{}
@@ -55,9 +55,9 @@ type CreateAutoScalingConfigurationInput struct {
 	// This member is required.
 	AutoScalingConfigurationName *string
 
-	// The maximum number of concurrent requests that you want an instance to
-	// process. If the number of concurrent requests exceeds this limit, App Runner
-	// scales up your service. Default: 100
+	// The maximum number of concurrent requests that you want an instance to process.
+	// If the number of concurrent requests exceeds this limit, App Runner scales up
+	// your service. Default: 100
 	MaxConcurrency *int32
 
 	// The maximum number of instances that your service scales up to. At most MaxSize

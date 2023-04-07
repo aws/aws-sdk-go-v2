@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Creates a new custom vocabulary. When creating a new custom vocabulary, you
-// can either upload a text file that contains your new entries, phrases, and terms
+// Creates a new custom vocabulary. When creating a new custom vocabulary, you can
+// either upload a text file that contains your new entries, phrases, and terms
 // into an Amazon S3 bucket and include the URI in your request. Or you can include
 // a list of terms directly in your request using the Phrases flag. Each language
 // has a character set that contains all allowed characters for that specific
@@ -43,7 +43,7 @@ type CreateVocabularyInput struct {
 	// vocabulary. Each custom vocabulary must contain terms in only one language. A
 	// custom vocabulary can only be used to transcribe files in the same language as
 	// the custom vocabulary. For example, if you create a custom vocabulary using US
-	// English ( en-US), you can only apply this custom vocabulary to files that
+	// English ( en-US ), you can only apply this custom vocabulary to files that
 	// contain English audio. For a list of supported languages and their associated
 	// language codes, refer to the Supported languages (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
 	// table.
@@ -51,10 +51,10 @@ type CreateVocabularyInput struct {
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// A unique name, chosen by you, for your new custom vocabulary. This name is
-	// case sensitive, cannot contain spaces, and must be unique within an Amazon Web
+	// A unique name, chosen by you, for your new custom vocabulary. This name is case
+	// sensitive, cannot contain spaces, and must be unique within an Amazon Web
 	// Services account. If you try to create a new custom vocabulary with the same
-	// name as an existing custom vocabulary, you get a ConflictException  error.
+	// name as an existing custom vocabulary, you get a ConflictException error.
 	//
 	// This member is required.
 	VocabularyName *string
@@ -63,7 +63,7 @@ type CreateVocabularyInput struct {
 	// the Amazon S3 bucket that contains your input files (in this case, your custom
 	// vocabulary). If the role that you specify doesn’t have the appropriate
 	// permissions to access the specified Amazon S3 location, your request fails. IAM
-	// role ARNs have the format arn:partition:iam::account:role/role-name-with-path.
+	// role ARNs have the format arn:partition:iam::account:role/role-name-with-path .
 	// For example: arn:aws:iam::111122223333:role/Admin . For more information, see
 	// IAM ARNs (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns)
 	// .
@@ -73,12 +73,11 @@ type CreateVocabularyInput struct {
 	// all desired terms, as comma-separated values, within your request. The other
 	// option for creating your custom vocabulary is to save your entries in a text
 	// file and upload them to an Amazon S3 bucket, then specify the location of your
-	// file using the VocabularyFileUri  parameter. Note that if you include Phrases
-	// in your request, you cannot use VocabularyFileUri; you must choose one or the
+	// file using the VocabularyFileUri parameter. Note that if you include Phrases in
+	// your request, you cannot use VocabularyFileUri ; you must choose one or the
 	// other. Each language has a character set that contains all allowed characters
 	// for that specific language. If you use unsupported characters, your custom
-	// vocabulary filter request fails. Refer to Character Sets for Custom
-	// Vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html)
+	// vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html)
 	// to get the character set for your language.
 	Phrases []string
 
@@ -101,8 +100,8 @@ type CreateVocabularyInput struct {
 
 type CreateVocabularyOutput struct {
 
-	// If VocabularyState  is FAILED , FailureReason contains information about why
-	// the custom vocabulary request failed. See also: Common Errors (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html)
+	// If VocabularyState is FAILED , FailureReason contains information about why the
+	// custom vocabulary request failed. See also: Common Errors (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html)
 	// .
 	FailureReason *string
 
@@ -117,8 +116,8 @@ type CreateVocabularyOutput struct {
 	// The name you chose for your custom vocabulary.
 	VocabularyName *string
 
-	// The processing state of your custom vocabulary. If the state is READY, you can
-	// use the custom vocabulary in a StartTranscriptionJob  request.
+	// The processing state of your custom vocabulary. If the state is READY , you can
+	// use the custom vocabulary in a StartTranscriptionJob request.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.

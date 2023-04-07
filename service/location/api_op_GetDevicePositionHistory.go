@@ -43,13 +43,14 @@ type GetDevicePositionHistoryInput struct {
 	TrackerName *string
 
 	// Specify the end time for the position history in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ. By default, the value will be the time that
+	// format: YYYY-MM-DDThh:mm:ss.sssZ . By default, the value will be the time that
 	// the request is made. Requirement:
-	//     - The time specified for EndTimeExclusive must be after the time for StartTimeInclusive .
+	//   - The time specified for EndTimeExclusive must be after the time for
+	//   StartTimeInclusive .
 	EndTimeExclusive *time.Time
 
-	// An optional limit for the number of device positions returned in a single
-	// call. Default value: 100
+	// An optional limit for the number of device positions returned in a single call.
+	// Default value: 100
 	MaxResults *int32
 
 	// The pagination token specifying which page of results to return in the
@@ -58,9 +59,9 @@ type GetDevicePositionHistoryInput struct {
 	NextToken *string
 
 	// Specify the start time for the position history in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ. By default, the value will be 24 hours prior
+	// format: YYYY-MM-DDThh:mm:ss.sssZ . By default, the value will be 24 hours prior
 	// to the time that the request is made. Requirement:
-	//     - The time specified for StartTimeInclusive must be before EndTimeExclusive .
+	//   - The time specified for StartTimeInclusive must be before EndTimeExclusive .
 	StartTimeInclusive *time.Time
 
 	noSmithyDocumentSerde
@@ -73,8 +74,8 @@ type GetDevicePositionHistoryOutput struct {
 	// This member is required.
 	DevicePositions []types.DevicePosition
 
-	// A pagination token indicating there are additional pages available. You can
-	// use the token in a following request to fetch the next set of results.
+	// A pagination token indicating there are additional pages available. You can use
+	// the token in a following request to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -187,12 +188,12 @@ var _ GetDevicePositionHistoryAPIClient = (*Client)(nil)
 // GetDevicePositionHistoryPaginatorOptions is the paginator options for
 // GetDevicePositionHistory
 type GetDevicePositionHistoryPaginatorOptions struct {
-	// An optional limit for the number of device positions returned in a single
-	// call. Default value: 100
+	// An optional limit for the number of device positions returned in a single call.
+	// Default value: 100
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

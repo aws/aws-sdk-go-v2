@@ -10,26 +10,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Records a WorkflowExecutionSignaled event in the workflow execution history
-// and creates a decision task for the workflow execution identified by the given
+// Records a WorkflowExecutionSignaled event in the workflow execution history and
+// creates a decision task for the workflow execution identified by the given
 // domain, workflowId and runId. The event is recorded with the specified user
 // defined signalName and input (if provided). If a runId isn't specified, then the
-//
-// WorkflowExecutionSignaledevent is recorded in the history of the current open
+// WorkflowExecutionSignaled event is recorded in the history of the current open
 // workflow with the matching workflowId in the domain. If the specified workflow
-// execution isn't open, this method fails with UnknownResource. Access Control
+// execution isn't open, this method fails with UnknownResource . Access Control
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
-//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //   - Use an Action element to allow or deny permission to call this action.
 //   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If
-// the caller doesn't have sufficient permissions to invoke the action, or the
+// If the caller doesn't have sufficient permissions to invoke the action, or the
 // parameter values fall outside the specified constraints, the action fails. The
-// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
-// . For details and example IAM policies, see Using IAM to Manage Access to
-// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED .
+// For details and example IAM policies, see Using IAM to Manage Access to Amazon
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 func (c *Client) SignalWorkflowExecution(ctx context.Context, params *SignalWorkflowExecutionInput, optFns ...func(*Options)) (*SignalWorkflowExecutionOutput, error) {
 	if params == nil {

@@ -62,8 +62,8 @@ type GetMultiRegionAccessPointInput struct {
 
 type GetMultiRegionAccessPointOutput struct {
 
-	// A container element containing the details of the requested Multi-Region
-	// Access Point.
+	// A container element containing the details of the requested Multi-Region Access
+	// Point.
 	AccessPoint *types.MultiRegionAccessPointReport
 
 	// Metadata pertaining to the operation's result.

@@ -13,14 +13,13 @@ import (
 
 // Creates a job that exports data from your dataset to an Amazon S3 bucket. To
 // allow Amazon Personalize to export the training data, you must specify an
-// service-linked IAM role that gives Amazon Personalize PutObject permissions
-// for your Amazon S3 bucket. For information, see Exporting a dataset (https://docs.aws.amazon.com/personalize/latest/dg/export-data.html)
+// service-linked IAM role that gives Amazon Personalize PutObject permissions for
+// your Amazon S3 bucket. For information, see Exporting a dataset (https://docs.aws.amazon.com/personalize/latest/dg/export-data.html)
 // in the Amazon Personalize developer guide. Status A dataset export job can be in
 // one of the following states:
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
-// To get
-// the status of the export job, call DescribeDatasetExportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html)
+// To get the status of the export job, call DescribeDatasetExportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html)
 // , and specify the Amazon Resource Name (ARN) of the dataset export job. The
 // dataset export is complete when the status shows as ACTIVE. If the status shows
 // as CREATE FAILED, the response includes a failureReason key, which describes
@@ -64,9 +63,9 @@ type CreateDatasetExportJobInput struct {
 	RoleArn *string
 
 	// The data to export, based on how you imported the data. You can choose to
-	// export only BULK  data that you imported using a dataset import job, only PUT
+	// export only BULK data that you imported using a dataset import job, only PUT
 	// data that you imported incrementally (using the console, PutEvents, PutUsers and
-	// PutItems operations), or ALL  for both types. The default value is PUT .
+	// PutItems operations), or ALL for both types. The default value is PUT .
 	IngestionMode types.IngestionMode
 
 	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)

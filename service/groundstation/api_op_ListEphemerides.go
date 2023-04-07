@@ -32,7 +32,7 @@ func (c *Client) ListEphemerides(ctx context.Context, params *ListEphemeridesInp
 type ListEphemeridesInput struct {
 
 	// The end time to list in UTC. The operation will return an ephemeris if its
-	// expiration time is within the time range defined by the startTime  and endTime .
+	// expiration time is within the time range defined by the startTime and endTime .
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -43,7 +43,7 @@ type ListEphemeridesInput struct {
 	SatelliteId *string
 
 	// The start time to list in UTC. The operation will return an ephemeris if its
-	// expiration time is within the time range defined by the startTime  and endTime .
+	// expiration time is within the time range defined by the startTime and endTime .
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -150,8 +150,8 @@ type ListEphemeridesPaginatorOptions struct {
 	// Maximum number of ephemerides to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -42,17 +42,15 @@ type DescribeTaskInput struct {
 // DescribeTaskResponse
 type DescribeTaskOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was
-	// used to monitor and log events in the task. For more information on these
-	// groups, see Working with Log Groups and Log Streams in the Amazon CloudWatch
-	// User Guide.
+	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used
+	// to monitor and log events in the task. For more information on these groups, see
+	// Working with Log Groups and Log Streams in the Amazon CloudWatch User Guide.
 	CloudWatchLogGroupArn *string
 
 	// The time that the task was created.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the task execution that is transferring
-	// files.
+	// The Amazon Resource Name (ARN) of the task execution that is transferring files.
 	CurrentTaskExecutionArn *string
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services storage resource's
@@ -64,8 +62,8 @@ type DescribeTaskOutput struct {
 	// .
 	DestinationNetworkInterfaceArns []string
 
-	// Errors that DataSync encountered during execution of the task. You can use
-	// this error code to help troubleshoot issues.
+	// Errors that DataSync encountered during execution of the task. You can use this
+	// error code to help troubleshoot issues.
 	ErrorCode *string
 
 	// Detailed description of an error that was encountered during the task
@@ -92,8 +90,8 @@ type DescribeTaskOutput struct {
 	// .
 	Options *types.Options
 
-	// The schedule used to periodically transfer files from a source to a
-	// destination location.
+	// The schedule used to periodically transfer files from a source to a destination
+	// location.
 	Schedule *types.TaskSchedule
 
 	// The Amazon Resource Name (ARN) of the source file system's location.

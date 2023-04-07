@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves GroupId  in an identity store.
+// Retrieves GroupId in an identity store.
 func (c *Client) GetGroupId(ctx context.Context, params *GetGroupIdInput, optFns ...func(*Options)) (*GetGroupIdOutput, error) {
 	if params == nil {
 		params = &GetGroupIdInput{}

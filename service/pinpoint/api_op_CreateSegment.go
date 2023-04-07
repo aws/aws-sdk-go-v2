@@ -49,8 +49,8 @@ type CreateSegmentInput struct {
 
 type CreateSegmentOutput struct {
 
-	// Provides information about the configuration, dimension, and other settings
-	// for a segment.
+	// Provides information about the configuration, dimension, and other settings for
+	// a segment.
 	//
 	// This member is required.
 	SegmentResponse *types.SegmentResponse

@@ -39,7 +39,7 @@ type DescribeEventTopicsInput struct {
 
 	// A list of Amazon SNS topic names for which to obtain the information. If this
 	// member is null, all associations for the specified Directory ID are returned. An
-	// empty list results in an InvalidParameterException  being thrown.
+	// empty list results in an InvalidParameterException being thrown.
 	TopicNames []string
 
 	noSmithyDocumentSerde

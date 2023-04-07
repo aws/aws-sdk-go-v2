@@ -18,7 +18,7 @@ import (
 // explicit policy is set, it overrides the default policy. For more information
 // about the default file system policy, see Default EFS File System Policy (https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy)
 // . EFS file system policies have a 20,000 character limit. This operation
-// requires permissions for the elasticfilesystem:PutFileSystemPolicy  action.
+// requires permissions for the elasticfilesystem:PutFileSystemPolicy action.
 func (c *Client) PutFileSystemPolicy(ctx context.Context, params *PutFileSystemPolicyInput, optFns ...func(*Options)) (*PutFileSystemPolicyOutput, error) {
 	if params == nil {
 		params = &PutFileSystemPolicyInput{}
@@ -52,10 +52,10 @@ type PutFileSystemPolicyInput struct {
 	Policy *string
 
 	// (Optional) A boolean that specifies whether or not to bypass the
-	// FileSystemPolicylockout safety check. The lockout safety check determines
+	// FileSystemPolicy lockout safety check. The lockout safety check determines
 	// whether the policy in the request will lock out, or prevent, the IAM principal
 	// that is making the request from making future PutFileSystemPolicy requests on
-	// this file system. Set BypassPolicyLockoutSafetyCheck  to True only when you
+	// this file system. Set BypassPolicyLockoutSafetyCheck to True only when you
 	// intend to prevent the IAM principal that is making the request from making
 	// subsequent PutFileSystemPolicy requests on this file system. The default value
 	// is False .
@@ -66,10 +66,10 @@ type PutFileSystemPolicyInput struct {
 
 type PutFileSystemPolicyOutput struct {
 
-	// Specifies the EFS file system to which the FileSystemPolicy  applies.
+	// Specifies the EFS file system to which the FileSystemPolicy applies.
 	FileSystemId *string
 
-	// The JSON formatted FileSystemPolicy  for the EFS file system.
+	// The JSON formatted FileSystemPolicy for the EFS file system.
 	Policy *string
 
 	// Metadata pertaining to the operation's result.

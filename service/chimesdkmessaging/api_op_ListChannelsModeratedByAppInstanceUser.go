@@ -13,7 +13,7 @@ import (
 )
 
 // A list of the channels moderated by an AppInstanceUser . The x-amz-chime-bearer
-// request header is mandatory. Use the ARN of the AppInstanceUser  or
+// request header is mandatory. Use the ARN of the AppInstanceUser or
 // AppInstanceBot that makes the API call as the value in the header.
 func (c *Client) ListChannelsModeratedByAppInstanceUser(ctx context.Context, params *ListChannelsModeratedByAppInstanceUserInput, optFns ...func(*Options)) (*ListChannelsModeratedByAppInstanceUserOutput, error) {
 	if params == nil {
@@ -32,7 +32,7 @@ func (c *Client) ListChannelsModeratedByAppInstanceUser(ctx context.Context, par
 
 type ListChannelsModeratedByAppInstanceUserInput struct {
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
@@ -128,22 +128,22 @@ func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(s
 	return nil
 }
 
-// ListChannelsModeratedByAppInstanceUserAPIClient is a client that implements
-// the ListChannelsModeratedByAppInstanceUser operation.
+// ListChannelsModeratedByAppInstanceUserAPIClient is a client that implements the
+// ListChannelsModeratedByAppInstanceUser operation.
 type ListChannelsModeratedByAppInstanceUserAPIClient interface {
 	ListChannelsModeratedByAppInstanceUser(context.Context, *ListChannelsModeratedByAppInstanceUserInput, ...func(*Options)) (*ListChannelsModeratedByAppInstanceUserOutput, error)
 }
 
 var _ ListChannelsModeratedByAppInstanceUserAPIClient = (*Client)(nil)
 
-// ListChannelsModeratedByAppInstanceUserPaginatorOptions is the paginator
-// options for ListChannelsModeratedByAppInstanceUser
+// ListChannelsModeratedByAppInstanceUserPaginatorOptions is the paginator options
+// for ListChannelsModeratedByAppInstanceUser
 type ListChannelsModeratedByAppInstanceUserPaginatorOptions struct {
 	// The maximum number of channels in the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

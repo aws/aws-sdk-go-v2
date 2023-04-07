@@ -29,9 +29,9 @@ func (c *Client) GetGeneratedPolicy(ctx context.Context, params *GetGeneratedPol
 
 type GetGeneratedPolicyInput struct {
 
-	// The JobId  that is returned by the StartPolicyGeneration  operation. The JobId
+	// The JobId that is returned by the StartPolicyGeneration operation. The JobId
 	// can be used with GetGeneratedPolicy to retrieve the generated policies or used
-	// with CancelPolicyGeneration  to cancel the policy generation request.
+	// with CancelPolicyGeneration to cancel the policy generation request.
 	//
 	// This member is required.
 	JobId *string
@@ -45,7 +45,7 @@ type GetGeneratedPolicyInput struct {
 
 	// The level of detail that you want to generate. You can specify whether to
 	// generate service-level policies. IAM Access Analyzer uses
-	// iam:servicelastaccessedto identify services that have been used recently to
+	// iam:servicelastaccessed to identify services that have been used recently to
 	// create this service-level template.
 	IncludeServiceLevelTemplate *bool
 

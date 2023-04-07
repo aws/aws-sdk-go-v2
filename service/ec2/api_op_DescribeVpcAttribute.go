@@ -52,12 +52,12 @@ type DescribeVpcAttributeInput struct {
 type DescribeVpcAttributeOutput struct {
 
 	// Indicates whether the instances launched in the VPC get DNS hostnames. If this
-	// attribute is true, instances in the VPC get DNS hostnames; otherwise, they do
+	// attribute is true , instances in the VPC get DNS hostnames; otherwise, they do
 	// not.
 	EnableDnsHostnames *types.AttributeBooleanValue
 
 	// Indicates whether DNS resolution is enabled for the VPC. If this attribute is
-	// true, the Amazon DNS server resolves DNS hostnames for your instances to their
+	// true , the Amazon DNS server resolves DNS hostnames for your instances to their
 	// corresponding IP addresses; otherwise, it does not.
 	EnableDnsSupport *types.AttributeBooleanValue
 

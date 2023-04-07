@@ -140,14 +140,13 @@ type ListLayerVersionsAPIClient interface {
 
 var _ ListLayerVersionsAPIClient = (*Client)(nil)
 
-// ListLayerVersionsPaginatorOptions is the paginator options for
-// ListLayerVersions
+// ListLayerVersionsPaginatorOptions is the paginator options for ListLayerVersions
 type ListLayerVersionsPaginatorOptions struct {
 	// The maximum number of versions to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

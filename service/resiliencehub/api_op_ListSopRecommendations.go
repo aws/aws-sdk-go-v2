@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the standard operating procedure (SOP) recommendations for the
-// Resilience Hub applications.
+// Lists the standard operating procedure (SOP) recommendations for the Resilience
+// Hub applications.
 func (c *Client) ListSopRecommendations(ctx context.Context, params *ListSopRecommendationsInput, optFns ...func(*Options)) (*ListSopRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListSopRecommendationsInput{}
@@ -32,16 +32,16 @@ func (c *Client) ListSopRecommendations(ctx context.Context, params *ListSopReco
 type ListSopRecommendationsInput struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id. For
+	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
 
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// Null, or the token from a previous call to get the next set of results.
@@ -141,13 +141,13 @@ var _ ListSopRecommendationsAPIClient = (*Client)(nil)
 // ListSopRecommendationsPaginatorOptions is the paginator options for
 // ListSopRecommendations
 type ListSopRecommendationsPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -160,8 +160,7 @@ type ListSopRecommendationsPaginator struct {
 	firstPage bool
 }
 
-// NewListSopRecommendationsPaginator returns a new
-// ListSopRecommendationsPaginator
+// NewListSopRecommendationsPaginator returns a new ListSopRecommendationsPaginator
 func NewListSopRecommendationsPaginator(client ListSopRecommendationsAPIClient, params *ListSopRecommendationsInput, optFns ...func(*ListSopRecommendationsPaginatorOptions)) *ListSopRecommendationsPaginator {
 	if params == nil {
 		params = &ListSopRecommendationsInput{}

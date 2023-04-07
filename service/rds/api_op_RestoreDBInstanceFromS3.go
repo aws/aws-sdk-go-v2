@@ -46,9 +46,9 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// The DB instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//     - Must contain from 1 to 63 letters, numbers, or hyphens.
-	//     - First character must be a letter.
-	//     - Can't end with a hyphen or contain two consecutive hyphens.
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - First character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	// Example: mydbinstance
 	//
 	// This member is required.
@@ -82,11 +82,10 @@ type RestoreDBInstanceFromS3Input struct {
 	// This member is required.
 	SourceEngineVersion *string
 
-	// The amount of storage (in gibibytes) to allocate initially for the DB
-	// instance. Follow the allocation rules specified in CreateDBInstance. Be sure
-	// to allocate enough storage for your new DB instance so that the restore
-	// operation can succeed. You can also allocate additional storage for future
-	// growth.
+	// The amount of storage (in gibibytes) to allocate initially for the DB instance.
+	// Follow the allocation rules specified in CreateDBInstance . Be sure to allocate
+	// enough storage for your new DB instance so that the restore operation can
+	// succeed. You can also allocate additional storage for future growth.
 	AllocatedStorage *int32
 
 	// A value that indicates whether minor engine upgrades are applied automatically
@@ -94,8 +93,8 @@ type RestoreDBInstanceFromS3Input struct {
 	// upgrades are not applied automatically.
 	AutoMinorVersionUpgrade *bool
 
-	// The Availability Zone that the DB instance is created in. For information
-	// about Amazon Web Services Regions and Availability Zones, see Regions and
+	// The Availability Zone that the DB instance is created in. For information about
+	// Amazon Web Services Regions and Availability Zones, see Regions and
 	// Availability Zones (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
 	// in the Amazon RDS User Guide. Default: A random, system-chosen Availability Zone
 	// in the endpoint's Amazon Web Services Region. Example: us-east-1d Constraint:
@@ -126,21 +125,20 @@ type RestoreDBInstanceFromS3Input struct {
 	// default DB security group for the database engine.
 	DBSecurityGroups []string
 
-	// A DB subnet group to associate with this DB instance. Constraints: If
-	// supplied, must match the name of an existing DBSubnetGroup. Example:
-	// mydbsubnetgroup
+	// A DB subnet group to associate with this DB instance. Constraints: If supplied,
+	// must match the name of an existing DBSubnetGroup. Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
-	// A value that indicates whether the DB instance has deletion protection
-	// enabled. The database can't be deleted when deletion protection is enabled. By
-	// default, deletion protection isn't enabled. For more information, see Deleting
-	// a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
+	// A value that indicates whether the DB instance has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection isn't enabled. For more information, see Deleting a DB
+	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
 	// .
 	DeletionProtection *bool
 
-	// The list of logs that the restored DB instance is to export to CloudWatch
-	// Logs. The values in the list depend on the DB engine being used. For more
-	// information, see Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+	// The list of logs that the restored DB instance is to export to CloudWatch Logs.
+	// The values in the list depend on the DB engine being used. For more information,
+	// see Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon RDS User Guide.
 	EnableCloudwatchLogsExports []string
 
@@ -161,20 +159,20 @@ type RestoreDBInstanceFromS3Input struct {
 	// CreateDBInstance , or call DescribeDBEngineVersions .
 	EngineVersion *string
 
-	// The amount of Provisioned IOPS (input/output operations per second) to
-	// allocate initially for the DB instance. For information about valid IOPS values,
-	// see Amazon RDS Provisioned IOPS storage (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
+	// The amount of Provisioned IOPS (input/output operations per second) to allocate
+	// initially for the DB instance. For information about valid IOPS values, see
+	// Amazon RDS Provisioned IOPS storage (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
 	// in the Amazon RDS User Guide.
 	Iops *int32
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB instance. The
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
 	// alias name for the KMS key. To use a KMS key in a different Amazon Web Services
-	// account, specify the key ARN or alias ARN. If the StorageEncrypted parameter
-	// is enabled, and you do not specify a value for the KmsKeyId parameter, then
-	// Amazon RDS will use your default KMS key. There is a default KMS key for your
-	// Amazon Web Services account. Your Amazon Web Services account has a different
-	// default KMS key for each Amazon Web Services Region.
+	// account, specify the key ARN or alias ARN. If the StorageEncrypted parameter is
+	// enabled, and you do not specify a value for the KmsKeyId parameter, then Amazon
+	// RDS will use your default KMS key. There is a default KMS key for your Amazon
+	// Web Services account. Your Amazon Web Services account has a different default
+	// KMS key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// The license model for this DB instance. Use general-public-license .
@@ -184,12 +182,13 @@ type RestoreDBInstanceFromS3Input struct {
 	// Web Services Secrets Manager. For more information, see Password management
 	// with Amazon Web Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
 	// in the Amazon RDS User Guide. Constraints:
-	//     - Can't manage the master user password with Amazon Web Services Secrets Manager if MasterUserPassword is specified.
+	//   - Can't manage the master user password with Amazon Web Services Secrets
+	//   Manager if MasterUserPassword is specified.
 	ManageMasterUserPassword *bool
 
 	// The password for the master user. The password can include any printable ASCII
 	// character except "/", """, or "@". Constraints: Can't be specified if
-	// ManageMasterUserPasswordis turned on. MariaDB Constraints: Must contain from 8
+	// ManageMasterUserPassword is turned on. MariaDB Constraints: Must contain from 8
 	// to 41 characters. Microsoft SQL Server Constraints: Must contain from 8 to 128
 	// characters. MySQL Constraints: Must contain from 8 to 41 characters. Oracle
 	// Constraints: Must contain from 8 to 30 characters. PostgreSQL Constraints: Must
@@ -203,18 +202,18 @@ type RestoreDBInstanceFromS3Input struct {
 	// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
 	// To use a KMS key in a different Amazon Web Services account, specify the key ARN
 	// or alias ARN. If you don't specify MasterUserSecretKmsKeyId , then the
-	// aws/secretsmanagerKMS key is used to encrypt the secret. If the secret is in a
-	// different Amazon Web Services account, then you can't use the
-	// aws/secretsmanagerKMS key to encrypt the secret, and you must use a customer
-	// managed KMS key. There is a default KMS key for your Amazon Web Services
-	// account. Your Amazon Web Services account has a different default KMS key for
-	// each Amazon Web Services Region.
+	// aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a
+	// different Amazon Web Services account, then you can't use the aws/secretsmanager
+	// KMS key to encrypt the secret, and you must use a customer managed KMS key.
+	// There is a default KMS key for your Amazon Web Services account. Your Amazon Web
+	// Services account has a different default KMS key for each Amazon Web Services
+	// Region.
 	MasterUserSecretKmsKeyId *string
 
 	// The name for the master user. Constraints:
-	//     - Must be 1 to 16 letters or numbers.
-	//     - First character must be a letter.
-	//     - Can't be a reserved word for the chosen database engine.
+	//   - Must be 1 to 16 letters or numbers.
+	//   - First character must be a letter.
+	//   - Can't be a reserved word for the chosen database engine.
 	MasterUsername *string
 
 	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
@@ -226,28 +225,28 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
 	// collected for the DB instance. To disable collecting Enhanced Monitoring
-	// metrics, specify 0. If MonitoringRoleArn  is specified, then you must also set
-	// MonitoringIntervalto a value other than 0. Valid Values: 0, 1, 5, 10, 15, 30,
+	// metrics, specify 0. If MonitoringRoleArn is specified, then you must also set
+	// MonitoringInterval to a value other than 0. Valid Values: 0, 1, 5, 10, 15, 30,
 	// 60 Default: 0
 	MonitoringInterval *int32
 
 	// The ARN for the IAM role that permits RDS to send enhanced monitoring metrics
-	// to Amazon CloudWatch Logs. For example, arn:aws:iam:123456789012:role/emaccess
-	// . For information on creating a monitoring role, see Setting Up and Enabling
+	// to Amazon CloudWatch Logs. For example, arn:aws:iam:123456789012:role/emaccess .
+	// For information on creating a monitoring role, see Setting Up and Enabling
 	// Enhanced Monitoring (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling)
 	// in the Amazon RDS User Guide. If MonitoringInterval is set to a value other
-	// than 0, then you must supply a MonitoringRoleArn  value.
+	// than 0, then you must supply a MonitoringRoleArn value.
 	MonitoringRoleArn *string
 
-	// A value that indicates whether the DB instance is a Multi-AZ deployment. If
-	// the DB instance is a Multi-AZ deployment, you can't set the AvailabilityZone
+	// A value that indicates whether the DB instance is a Multi-AZ deployment. If the
+	// DB instance is a Multi-AZ deployment, you can't set the AvailabilityZone
 	// parameter.
 	MultiAZ *bool
 
 	// The network type of the DB instance. Valid values:
-	//     - IPV4
-	//     - DUAL
-	//  The network type is determined by the DBSubnetGroup specified for the DB
+	//   - IPV4
+	//   - DUAL
+	// The network type is determined by the DBSubnetGroup specified for the DB
 	// instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and
 	// the IPv6 protocols ( DUAL ). For more information, see  Working with a DB
 	// instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
@@ -261,7 +260,7 @@ type RestoreDBInstanceFromS3Input struct {
 	// The Amazon Web Services KMS key identifier for encryption of Performance
 	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
 	// ID, alias ARN, or alias name for the KMS key. If you do not specify a value for
-	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default KMS key. There
+	// PerformanceInsightsKMSKeyId , then Amazon RDS uses your default KMS key. There
 	// is a default KMS key for your Amazon Web Services account. Your Amazon Web
 	// Services account has a different default KMS key for each Amazon Web Services
 	// Region.
@@ -269,48 +268,48 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// The number of days to retain Performance Insights data. The default is 7 days.
 	// The following values are valid:
-	//     - 7
-	//     - month * 31, where month is a number of months from 1-23
-	//     - 731
+	//   - 7
+	//   - month * 31, where month is a number of months from 1-23
+	//   - 731
 	// For example, the following values are valid:
-	//     - 93 (3 months * 31)
-	//     - 341 (11 months * 31)
-	//     - 589 (19 months * 31)
-	//     - 731
-	// If you specify a retention period such as 94, which isn't a valid
-	// value, RDS issues an error.
+	//   - 93 (3 months * 31)
+	//   - 341 (11 months * 31)
+	//   - 589 (19 months * 31)
+	//   - 731
+	// If you specify a retention period such as 94, which isn't a valid value, RDS
+	// issues an error.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number on which the database accepts connections. Type: Integer Valid
-	// Values: 1150 - 65535  Default: 3306
+	// Values: 1150 - 65535 Default: 3306
 	Port *int32
 
-	// The time range each day during which automated backups are created if
-	// automated backups are enabled. For more information, see Backup window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
+	// The time range each day during which automated backups are created if automated
+	// backups are enabled. For more information, see Backup window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
 	// in the Amazon RDS User Guide. Constraints:
-	//     - Must be in the format hh24:mi-hh24:mi .
-	//     - Must be in Universal Coordinated Time (UTC).
-	//     - Must not conflict with the preferred maintenance window.
-	//     - Must be at least 30 minutes.
+	//   - Must be in the format hh24:mi-hh24:mi .
+	//   - Must be in Universal Coordinated Time (UTC).
+	//   - Must not conflict with the preferred maintenance window.
+	//   - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The time range each week during which system maintenance can occur, in
 	// Universal Coordinated Time (UTC). For more information, see Amazon RDS
 	// Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance)
 	// in the Amazon RDS User Guide. Constraints:
-	//     - Must be in the format ddd:hh24:mi-ddd:hh24:mi .
-	//     - Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
-	//     - Must be in Universal Coordinated Time (UTC).
-	//     - Must not conflict with the preferred backup window.
-	//     - Must be at least 30 minutes.
+	//   - Must be in the format ddd:hh24:mi-ddd:hh24:mi .
+	//   - Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+	//   - Must be in Universal Coordinated Time (UTC).
+	//   - Must not conflict with the preferred backup window.
+	//   - Must be at least 30 minutes.
 	PreferredMaintenanceWindow *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
 	ProcessorFeatures []types.ProcessorFeature
 
-	// A value that indicates whether the DB instance is publicly accessible. When
-	// the DB instance is publicly accessible, its Domain Name System (DNS) endpoint
+	// A value that indicates whether the DB instance is publicly accessible. When the
+	// DB instance is publicly accessible, its Domain Name System (DNS) endpoint
 	// resolves to the private IP address from within the DB instance's virtual private
 	// cloud (VPC). It resolves to the public IP address from outside of the DB
 	// instance's VPC. Access to the DB instance is ultimately controlled by the
@@ -330,10 +329,10 @@ type RestoreDBInstanceFromS3Input struct {
 	// doesn't apply to RDS Custom or Amazon Aurora.
 	StorageThroughput *int32
 
-	// Specifies the storage type to be associated with the DB instance. Valid
-	// values: gp2 | gp3 | io1 | standard  If you specify io1  or gp3, you must also
-	// include a value for the Iops  parameter. Default: io1  if the Iops parameter
-	// is specified; otherwise gp2
+	// Specifies the storage type to be associated with the DB instance. Valid values:
+	// gp2 | gp3 | io1 | standard If you specify io1 or gp3 , you must also include a
+	// value for the Iops parameter. Default: io1 if the Iops parameter is specified;
+	// otherwise gp2
 	StorageType *string
 
 	// A list of tags to associate with this DB instance. For more information, see

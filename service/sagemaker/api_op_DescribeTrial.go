@@ -46,7 +46,7 @@ type DescribeTrialOutput struct {
 	// When the trial was created.
 	CreationTime *time.Time
 
-	// The name of the trial as displayed. If DisplayName  isn't specified, TrialName
+	// The name of the trial as displayed. If DisplayName isn't specified, TrialName
 	// is displayed.
 	DisplayName *string
 

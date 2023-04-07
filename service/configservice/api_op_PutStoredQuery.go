@@ -18,7 +18,7 @@ import (
 // Subsequent requests won’t create a duplicate resource if one was already
 // created. If a following request has different tags values, Config will ignore
 // these differences and treat it as an idempotent request of the previous. In this
-// case, tags  will not be updated, even if they are different.
+// case, tags will not be updated, even if they are different.
 func (c *Client) PutStoredQuery(ctx context.Context, params *PutStoredQueryInput, optFns ...func(*Options)) (*PutStoredQueryOutput, error) {
 	if params == nil {
 		params = &PutStoredQueryInput{}
@@ -36,15 +36,15 @@ func (c *Client) PutStoredQuery(ctx context.Context, params *PutStoredQueryInput
 
 type PutStoredQueryInput struct {
 
-	// A list of StoredQuery  objects. The mandatory fields are QueryName  and
-	// Expression. When you are creating a query, you must provide a query name and
-	// an expression. When you are updating a query, you must provide a query name but
+	// A list of StoredQuery objects. The mandatory fields are QueryName and Expression
+	// . When you are creating a query, you must provide a query name and an
+	// expression. When you are updating a query, you must provide a query name but
 	// updating the description is optional.
 	//
 	// This member is required.
 	StoredQuery *types.StoredQuery
 
-	// A list of Tags  object.
+	// A list of Tags object.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -31,8 +31,8 @@ func (c *Client) ListAccountsForProvisionedPermissionSet(ctx context.Context, pa
 type ListAccountsForProvisionedPermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -148,8 +148,8 @@ type ListAccountsForProvisionedPermissionSetPaginatorOptions struct {
 	// The maximum number of results to display for the PermissionSet .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

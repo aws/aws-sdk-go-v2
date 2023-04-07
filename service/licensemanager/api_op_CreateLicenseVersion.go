@@ -29,8 +29,8 @@ func (c *Client) CreateLicenseVersion(ctx context.Context, params *CreateLicense
 
 type CreateLicenseVersionInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	//
 	// This member is required.
 	ClientToken *string

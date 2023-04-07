@@ -15,9 +15,9 @@ import (
 // Connects a Kubernetes cluster to the Amazon EKS control plane. Any Kubernetes
 // cluster can be connected to the Amazon EKS control plane to view current
 // information about the cluster and its nodes. Cluster connection requires two
-// steps. First, send a RegisterClusterRequest to add it to the Amazon EKS
-// control plane. Second, a Manifest (https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml)
-// containing the activationID  and activationCode must be applied to the
+// steps. First, send a RegisterClusterRequest to add it to the Amazon EKS control
+// plane. Second, a Manifest (https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml)
+// containing the activationID and activationCode must be applied to the
 // Kubernetes cluster through it's native provider to provide visibility. After the
 // Manifest is updated and applied, then the connected cluster is visible to the
 // Amazon EKS control plane. If the Manifest is not applied within three days, then
@@ -51,8 +51,8 @@ type RegisterClusterInput struct {
 	// This member is required.
 	Name *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
 	// The metadata that you apply to the cluster to assist with categorization and

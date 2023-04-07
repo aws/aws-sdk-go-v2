@@ -29,8 +29,8 @@ func (c *Client) DisableAwsNetworkPerformanceMetricSubscription(ctx context.Cont
 
 type DisableAwsNetworkPerformanceMetricSubscriptionInput struct {
 
-	// The target Region or Availability Zone that the metric subscription is
-	// disabled for. For example, eu-north-1 .
+	// The target Region or Availability Zone that the metric subscription is disabled
+	// for. For example, eu-north-1 .
 	Destination *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -42,8 +42,8 @@ type DisableAwsNetworkPerformanceMetricSubscriptionInput struct {
 	// The metric used for the disabled subscription.
 	Metric types.MetricType
 
-	// The source Region or Availability Zone that the metric subscription is
-	// disabled for. For example, us-east-1 .
+	// The source Region or Availability Zone that the metric subscription is disabled
+	// for. For example, us-east-1 .
 	Source *string
 
 	// The statistic used for the disabled subscription.

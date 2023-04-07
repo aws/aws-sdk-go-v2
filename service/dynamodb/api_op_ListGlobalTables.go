@@ -45,8 +45,8 @@ type ListGlobalTablesInput struct {
 	// The maximum number of table names to return, if the parameter is not specified
 	// DynamoDB defaults to 100. If the number of global tables DynamoDB finds reaches
 	// this limit, it stops the operation and returns the table names collected up to
-	// that point, with a table name in the LastEvaluatedGlobalTableName to apply in
-	// a subsequent operation to the ExclusiveStartGlobalTableName  parameter.
+	// that point, with a table name in the LastEvaluatedGlobalTableName to apply in a
+	// subsequent operation to the ExclusiveStartGlobalTableName parameter.
 	Limit *int32
 
 	// Lists the global tables in a specific Region.

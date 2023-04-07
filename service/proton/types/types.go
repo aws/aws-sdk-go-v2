@@ -188,15 +188,15 @@ type CountsSummary struct {
 	// semantics of the components field are different from the semantics of results
 	// for other infrastructure-provisioning resources. That's because at this time
 	// components don't have associated templates, therefore they don't have the
-	// concept of staleness. The components  object will only contain total  and
-	// failed members.
+	// concept of staleness. The components object will only contain total and failed
+	// members.
 	Components *ResourceCountsSummary
 
 	// The total number of environment templates in the Amazon Web Services account.
 	EnvironmentTemplates *ResourceCountsSummary
 
 	// The staleness counts for Proton environments in the Amazon Web Services
-	// account. The environments  object will only contain total  members.
+	// account. The environments object will only contain total members.
 	Environments *ResourceCountsSummary
 
 	// The staleness counts for Proton pipelines in the Amazon Web Services account.
@@ -207,7 +207,7 @@ type CountsSummary struct {
 	ServiceInstances *ResourceCountsSummary
 
 	// The total number of service templates in the Amazon Web Services account. The
-	// serviceTemplates object will only contain total  members.
+	// serviceTemplates object will only contain total members.
 	ServiceTemplates *ResourceCountsSummary
 
 	// The staleness counts for Proton services in the Amazon Web Services account.
@@ -216,8 +216,8 @@ type CountsSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Detailed data of an Proton environment resource. An Proton environment is a
-// set of resources shared across Proton services.
+// Detailed data of an Proton environment resource. An Proton environment is a set
+// of resources shared across Proton services.
 type Environment struct {
 
 	// The Amazon Resource Name (ARN) of the environment.
@@ -288,12 +288,12 @@ type Environment struct {
 	// infrastructure resources in an environment account.
 	EnvironmentAccountConnectionId *string
 
-	// The ID of the environment account that the environment infrastructure
-	// resources are provisioned in.
+	// The ID of the environment account that the environment infrastructure resources
+	// are provisioned in.
 	EnvironmentAccountId *string
 
-	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton
-	// to make calls to other services on your behalf.
+	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
+	// make calls to other services on your behalf.
 	ProtonServiceRoleArn *string
 
 	// When included, indicates that the environment template is for customer
@@ -302,8 +302,8 @@ type Environment struct {
 
 	// The linked repository that you use to host your rendered infrastructure
 	// templates for self-managed provisioning. A linked repository is a repository
-	// that has been registered with Proton. For more information, see
-	// CreateRepository .
+	// that has been registered with Proton. For more information, see CreateRepository
+	// .
 	ProvisioningRepository *RepositoryBranch
 
 	// The environment spec.
@@ -508,16 +508,16 @@ type EnvironmentSummary struct {
 	// The description of the environment.
 	Description *string
 
-	// The ID of the environment account connection that the environment is
-	// associated with.
+	// The ID of the environment account connection that the environment is associated
+	// with.
 	EnvironmentAccountConnectionId *string
 
-	// The ID of the environment account that the environment infrastructure
-	// resources are provisioned in.
+	// The ID of the environment account that the environment infrastructure resources
+	// are provisioned in.
 	EnvironmentAccountId *string
 
-	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton
-	// to make calls to other services on your behalf.
+	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
+	// make calls to other services on your behalf.
 	ProtonServiceRoleArn *string
 
 	// When included, indicates that the environment template is for customer
@@ -572,12 +572,12 @@ type EnvironmentTemplate struct {
 // A search filter for environment templates.
 type EnvironmentTemplateFilter struct {
 
-	// Include majorVersion  to filter search for a major version.
+	// Include majorVersion to filter search for a major version.
 	//
 	// This member is required.
 	MajorVersion *string
 
-	// Include templateName  to filter search for a template name.
+	// Include templateName to filter search for a template name.
 	//
 	// This member is required.
 	TemplateName *string
@@ -738,10 +738,10 @@ type ListServiceInstancesFilter struct {
 	// The name of a filtering criterion.
 	Key ListServiceInstancesFilterBy
 
-	// A value to filter by. With the date/time keys ( *At{Before,After}), the value
-	// is a valid RFC 3339 (https://datatracker.ietf.org/doc/html/rfc3339.html)
-	// string with no UTC offset and with an optional fractional precision (for
-	// example, 1985-04-12T23:20:50.52Z ).
+	// A value to filter by. With the date/time keys ( *At{Before,After} ), the value
+	// is a valid RFC 3339 (https://datatracker.ietf.org/doc/html/rfc3339.html) string
+	// with no UTC offset and with an optional fractional precision (for example,
+	// 1985-04-12T23:20:50.52Z ).
 	Value *string
 
 	noSmithyDocumentSerde
@@ -777,8 +777,8 @@ type ProvisionedResource struct {
 	noSmithyDocumentSerde
 }
 
-// Detailed data of a linked repository—a repository that has been registered
-// with Proton.
+// Detailed data of a linked repository—a repository that has been registered with
+// Proton.
 type Repository struct {
 
 	// The Amazon Resource Name (ARN) of the linked repository.
@@ -1413,9 +1413,8 @@ type ServiceTemplate struct {
 	// data.
 	EncryptionKey *string
 
-	// If pipelineProvisioning  is true, a service pipeline is included in the
-	// service template. Otherwise, a service pipeline isn't included in the service
-	// template.
+	// If pipelineProvisioning is true , a service pipeline is included in the service
+	// template. Otherwise, a service pipeline isn't included in the service template.
 	PipelineProvisioning Provisioning
 
 	// The recommended version of the service template.
@@ -1453,9 +1452,8 @@ type ServiceTemplateSummary struct {
 	// The service template name as displayed in the developer interface.
 	DisplayName *string
 
-	// If pipelineProvisioning  is true, a service pipeline is included in the
-	// service template, otherwise a service pipeline isn't included in the service
-	// template.
+	// If pipelineProvisioning is true , a service pipeline is included in the service
+	// template, otherwise a service pipeline isn't included in the service template.
 	PipelineProvisioning Provisioning
 
 	// The recommended version of the service template.

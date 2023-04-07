@@ -3,12 +3,12 @@
 // Package directoryservice provides the API client, operations, and parameter
 // types for AWS Directory Service.
 //
-// Directory Service Directory Service is a web service that makes it easy for
-// you to setup and run directories in the Amazon Web Services cloud, or connect
-// your Amazon Web Services resources with an existing self-managed Microsoft
-// Active Directory. This guide provides detailed information about Directory
-// Service operations, data types, parameters, and errors. For information about
-// Directory Services features, see Directory Service (https://aws.amazon.com/directoryservice/)
+// Directory Service Directory Service is a web service that makes it easy for you
+// to setup and run directories in the Amazon Web Services cloud, or connect your
+// Amazon Web Services resources with an existing self-managed Microsoft Active
+// Directory. This guide provides detailed information about Directory Service
+// operations, data types, parameters, and errors. For information about Directory
+// Services features, see Directory Service (https://aws.amazon.com/directoryservice/)
 // and the Directory Service Administration Guide (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html)
 // . Amazon Web Services provides SDKs that consist of libraries and sample code
 // for various programming languages and platforms (Java, Ruby, .Net, iOS, Android,

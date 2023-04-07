@@ -44,8 +44,8 @@ type GetResourcesInput struct {
 	// previous call.
 	Marker *string
 
-	// The user ID for the resource collection. This is a required field for
-	// accessing the API operation using IAM credentials.
+	// The user ID for the resource collection. This is a required field for accessing
+	// the API operation using IAM credentials.
 	UserId *string
 
 	noSmithyDocumentSerde

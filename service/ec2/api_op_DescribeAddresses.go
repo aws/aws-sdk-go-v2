@@ -45,17 +45,26 @@ type DescribeAddressesInput struct {
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.
-	//     - allocation-id - [EC2-VPC] The allocation ID for the address.
-	//     - association-id - [EC2-VPC] The association ID for the address.
-	//     - domain - Indicates whether the address is for use in EC2-Classic ( standard ) or in a VPC ( vpc ).
-	//     - instance-id - The ID of the instance the address is associated with, if any.
-	//     - network-border-group - A unique set of Availability Zones, Local Zones, or Wavelength Zones from where Amazon Web Services advertises IP addresses.
-	//     - network-interface-id - [EC2-VPC] The ID of the network interface that the address is associated with, if any.
-	//     - network-interface-owner-id - The Amazon Web Services account ID of the owner.
-	//     - private-ip-address - [EC2-VPC] The private IP address associated with the Elastic IP address.
-	//     - public-ip - The Elastic IP address, or the carrier IP address.
-	//     - tag : - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
-	//     - tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - allocation-id - [EC2-VPC] The allocation ID for the address.
+	//   - association-id - [EC2-VPC] The association ID for the address.
+	//   - domain - Indicates whether the address is for use in EC2-Classic ( standard
+	//   ) or in a VPC ( vpc ).
+	//   - instance-id - The ID of the instance the address is associated with, if any.
+	//   - network-border-group - A unique set of Availability Zones, Local Zones, or
+	//   Wavelength Zones from where Amazon Web Services advertises IP addresses.
+	//   - network-interface-id - [EC2-VPC] The ID of the network interface that the
+	//   address is associated with, if any.
+	//   - network-interface-owner-id - The Amazon Web Services account ID of the
+	//   owner.
+	//   - private-ip-address - [EC2-VPC] The private IP address associated with the
+	//   Elastic IP address.
+	//   - public-ip - The Elastic IP address, or the carrier IP address.
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
 	Filters []types.Filter
 
 	// One or more Elastic IP addresses. Default: Describes all your Elastic IP

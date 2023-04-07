@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// You might need to reboot your DB instance, usually for maintenance reasons.
-// For example, if you make certain modifications, or if you change the DB
-// parameter group associated with the DB instance, you must reboot the instance
-// for the changes to take effect. Rebooting a DB instance restarts the database
-// engine service. Rebooting a DB instance results in a momentary outage, during
-// which the DB instance status is set to rebooting.
+// You might need to reboot your DB instance, usually for maintenance reasons. For
+// example, if you make certain modifications, or if you change the DB parameter
+// group associated with the DB instance, you must reboot the instance for the
+// changes to take effect. Rebooting a DB instance restarts the database engine
+// service. Rebooting a DB instance results in a momentary outage, during which the
+// DB instance status is set to rebooting.
 func (c *Client) RebootDBInstance(ctx context.Context, params *RebootDBInstanceInput, optFns ...func(*Options)) (*RebootDBInstanceOutput, error) {
 	if params == nil {
 		params = &RebootDBInstanceInput{}
@@ -36,13 +36,13 @@ type RebootDBInstanceInput struct {
 
 	// The DB instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//     - Must match the identifier of an existing DBInstance.
+	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// When true, the reboot is conducted through a MultiAZ failover. Constraint: You
-	// can't specify true  if the instance is not configured for MultiAZ.
+	// When true , the reboot is conducted through a MultiAZ failover. Constraint: You
+	// can't specify true if the instance is not configured for MultiAZ.
 	ForceFailover *bool
 
 	noSmithyDocumentSerde
@@ -51,7 +51,7 @@ type RebootDBInstanceInput struct {
 type RebootDBInstanceOutput struct {
 
 	// Contains the details of an Amazon Neptune DB instance. This data type is used
-	// as a response element in the DescribeDBInstances  action.
+	// as a response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

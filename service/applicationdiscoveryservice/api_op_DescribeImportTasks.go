@@ -32,7 +32,7 @@ func (c *Client) DescribeImportTasks(ctx context.Context, params *DescribeImport
 type DescribeImportTasksInput struct {
 
 	// An array of name-value pairs that you provide to filter the results for the
-	// DescribeImportTaskrequest to a specific subset of results. Currently, wildcard
+	// DescribeImportTask request to a specific subset of results. Currently, wildcard
 	// values aren't supported for filters.
 	Filters []types.ImportTaskFilter
 
@@ -134,8 +134,8 @@ type DescribeImportTasksPaginatorOptions struct {
 	// The maximum number of results that you want this request to return, up to 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

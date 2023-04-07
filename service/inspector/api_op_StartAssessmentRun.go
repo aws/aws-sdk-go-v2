@@ -30,8 +30,7 @@ func (c *Client) StartAssessmentRun(ctx context.Context, params *StartAssessment
 
 type StartAssessmentRunInput struct {
 
-	// The ARN of the assessment template of the assessment run that you want to
-	// start.
+	// The ARN of the assessment template of the assessment run that you want to start.
 	//
 	// This member is required.
 	AssessmentTemplateArn *string

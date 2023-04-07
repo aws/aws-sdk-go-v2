@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Forces a failover for a DB cluster. For an Aurora DB cluster, failover for a
-// DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB
+// Forces a failover for a DB cluster. For an Aurora DB cluster, failover for a DB
+// cluster promotes one of the Aurora Replicas (read-only instances) in the DB
 // cluster to be the primary DB instance (the cluster writer). For a Multi-AZ DB
 // cluster, failover for a DB cluster promotes one of the readable standby DB
 // instances (read-only instances) in the DB cluster to be the primary DB instance
@@ -46,14 +46,14 @@ type FailoverDBClusterInput struct {
 
 	// A DB cluster identifier to force a failover for. This parameter isn't
 	// case-sensitive. Constraints:
-	//     - Must match the identifier of an existing DBCluster.
+	//   - Must match the identifier of an existing DBCluster.
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
 	// The name of the DB instance to promote to the primary DB instance. Specify the
 	// DB instance identifier for an Aurora Replica or a Multi-AZ readable standby in
-	// the DB cluster, for example mydbcluster-replica1. This setting isn't supported
+	// the DB cluster, for example mydbcluster-replica1 . This setting isn't supported
 	// for RDS for MySQL Multi-AZ DB clusters.
 	TargetDBInstanceIdentifier *string
 
@@ -62,16 +62,16 @@ type FailoverDBClusterInput struct {
 
 type FailoverDBClusterOutput struct {
 
-	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.
-	// For an Amazon Aurora DB cluster, this data type is used as a response element in
-	// the operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
+	// an Amazon Aurora DB cluster, this data type is used as a response element in the
+	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
 	// FailoverDBCluster , ModifyDBCluster , PromoteReadReplicaDBCluster ,
 	// RestoreDBClusterFromS3 , RestoreDBClusterFromSnapshot ,
-	// RestoreDBClusterToPointInTime , StartDBCluster , and StopDBCluster. For a
+	// RestoreDBClusterToPointInTime , StartDBCluster , and StopDBCluster . For a
 	// Multi-AZ DB cluster, this data type is used as a response element in the
 	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
 	// FailoverDBCluster , ModifyDBCluster , RebootDBCluster ,
-	// RestoreDBClusterFromSnapshot , and RestoreDBClusterToPointInTime. For more
+	// RestoreDBClusterFromSnapshot , and RestoreDBClusterToPointInTime . For more
 	// information on Amazon Aurora DB clusters, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 	// see Multi-AZ deployments with two readable standby DB instances (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)

@@ -33,7 +33,7 @@ type DescribeDBEngineVersionsInput struct {
 
 	// The name of a specific parameter group family to return details for.
 	// Constraints:
-	//     - If provided, must match an existing DBParameterGroupFamily .
+	//   - If provided, must match an existing DBParameterGroupFamily .
 	DBParameterGroupFamily *string
 
 	// Indicates that only the default version of the specified engine or engine and
@@ -50,12 +50,12 @@ type DescribeDBEngineVersionsInput struct {
 	Filters []types.Filter
 
 	// If this parameter is specified and the requested engine supports the
-	// CharacterSetName parameter for CreateDBInstance, the response includes a list
+	// CharacterSetName parameter for CreateDBInstance , the response includes a list
 	// of supported character sets for each engine version.
 	ListSupportedCharacterSets *bool
 
 	// If this parameter is specified and the requested engine supports the TimeZone
-	// parameter for CreateDBInstance, the response includes a list of supported time
+	// parameter for CreateDBInstance , the response includes a list of supported time
 	// zones for each engine version.
 	ListSupportedTimezones *bool
 
@@ -64,10 +64,10 @@ type DescribeDBEngineVersionsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -164,14 +164,14 @@ var _ DescribeDBEngineVersionsAPIClient = (*Client)(nil)
 // DescribeDBEngineVersionsPaginatorOptions is the paginator options for
 // DescribeDBEngineVersions
 type DescribeDBEngineVersionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

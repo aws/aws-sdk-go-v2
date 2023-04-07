@@ -13,8 +13,8 @@ import (
 
 // Deletes an object and its associated attributes. Only objects with no children
 // and no parents can be deleted. The maximum number of attributes that can be
-// deleted during an object deletion is 30. For more information, see Amazon
-// Cloud Directory Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+// deleted during an object deletion is 30. For more information, see Amazon Cloud
+// Directory Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
 // .
 func (c *Client) DeleteObject(ctx context.Context, params *DeleteObjectInput, optFns ...func(*Options)) (*DeleteObjectOutput, error) {
 	if params == nil {

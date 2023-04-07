@@ -149,8 +149,8 @@ type DialRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Encryption config for Connect Instance. Note that sensitive data will always
-// be encrypted. If disabled, service will perform encryption with its own key. If
+// Encryption config for Connect Instance. Note that sensitive data will always be
+// encrypted. If disabled, service will perform encryption with its own key. If
 // enabled, a KMS key id needs to be provided and KMS charges will apply. KMS is
 // only type supported
 type EncryptionConfig struct {
@@ -175,8 +175,8 @@ type FailedCampaignStateResponse struct {
 	// Identifier representing a Campaign
 	CampaignId *string
 
-	// A predefined code indicating the error that caused the failure in getting
-	// state of campaigns
+	// A predefined code indicating the error that caused the failure in getting state
+	// of campaigns
 	FailureCode GetCampaignStateBatchFailureCode
 
 	noSmithyDocumentSerde
@@ -206,8 +206,8 @@ type InstanceConfig struct {
 	// This member is required.
 	ConnectInstanceId *string
 
-	// Encryption config for Connect Instance. Note that sensitive data will always
-	// be encrypted. If disabled, service will perform encryption with its own key. If
+	// Encryption config for Connect Instance. Note that sensitive data will always be
+	// encrypted. If disabled, service will perform encryption with its own key. If
 	// enabled, a KMS key id needs to be provided and KMS charges will apply. KMS is
 	// only type supported
 	//

@@ -50,8 +50,8 @@ type ListGroupsOutput struct {
 	// The overview of groups for an organization.
 	Groups []types.Group
 
-	// The token to use to retrieve the next page of results. The value is "null"
-	// when there are no more results to return.
+	// The token to use to retrieve the next page of results. The value is "null" when
+	// there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -135,8 +135,8 @@ type ListGroupsPaginatorOptions struct {
 	// The maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

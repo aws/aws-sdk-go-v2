@@ -33,7 +33,7 @@ type GenerateCredentialReportInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GenerateCredentialReport  request.
+// Contains the response to a successful GenerateCredentialReport request.
 type GenerateCredentialReportOutput struct {
 
 	// Information about the credential report.

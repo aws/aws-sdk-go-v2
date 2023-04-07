@@ -36,10 +36,10 @@ type GetDataRetrievalPolicyInput struct {
 
 	// The AccountId value is the AWS account ID. This value must match the AWS
 	// account ID associated with the credentials used to sign the request. You can
-	// either specify an AWS account ID or optionally a single ' -' (hyphen), in
-	// which case Amazon Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you specify your account ID, do not
-	// include any hyphens ('-') in the ID.
+	// either specify an AWS account ID or optionally a single ' - ' (hyphen), in which
+	// case Amazon Glacier uses the AWS account ID associated with the credentials used
+	// to sign the request. If you specify your account ID, do not include any hyphens
+	// ('-') in the ID.
 	//
 	// This member is required.
 	AccountId *string
@@ -47,7 +47,7 @@ type GetDataRetrievalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to the GetDataRetrievalPolicy  request.
+// Contains the Amazon S3 Glacier response to the GetDataRetrievalPolicy request.
 type GetDataRetrievalPolicyOutput struct {
 
 	// Contains the returned data retrieval policy in JSON format.

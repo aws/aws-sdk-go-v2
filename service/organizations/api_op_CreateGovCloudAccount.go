@@ -12,9 +12,14 @@ import (
 )
 
 // This action is available if all of the following are true:
-//   - You're authorized to create accounts in the Amazon Web Services GovCloud (US) Region. For more information on the Amazon Web Services GovCloud (US) Region, see the Amazon Web Services GovCloud User Guide. (https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html)
-//   - You already have an account in the Amazon Web Services GovCloud (US) Region that is paired with a management account of an organization in the commercial Region.
-//   - You call this action from the management account of your organization in the commercial Region.
+//   - You're authorized to create accounts in the Amazon Web Services GovCloud
+//     (US) Region. For more information on the Amazon Web Services GovCloud (US)
+//     Region, see the Amazon Web Services GovCloud User Guide. (https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html)
+//   - You already have an account in the Amazon Web Services GovCloud (US) Region
+//     that is paired with a management account of an organization in the commercial
+//     Region.
+//   - You call this action from the management account of your organization in
+//     the commercial Region.
 //   - You have the organizations:CreateGovCloudAccount permission.
 //
 // Organizations automatically creates the required service-linked role named
@@ -24,10 +29,12 @@ import (
 // CloudTrail for Amazon Web Services GovCloud (US) accounts, but you should also
 // do the following:
 //   - Verify that CloudTrail is enabled to store logs.
-//   - Create an Amazon S3 bucket for CloudTrail log storage. For more information, see Verifying CloudTrail Is Enabled (https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html) in the Amazon Web Services GovCloud User Guide.
+//   - Create an Amazon S3 bucket for CloudTrail log storage. For more
+//     information, see Verifying CloudTrail Is Enabled (https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html)
+//     in the Amazon Web Services GovCloud User Guide.
 //
 // If the request includes tags, then the requester must have the
-// organizations:TagResourcepermission. The tags are attached to the commercial
+// organizations:TagResource permission. The tags are attached to the commercial
 // account associated with the GovCloud account, rather than the GovCloud account
 // itself. To add tags to the GovCloud account, call the TagResource operation in
 // the GovCloud Region after the new GovCloud account exists. You call this action
@@ -44,8 +51,12 @@ import (
 // in progress. You might need to wait a few minutes before you can successfully
 // access the account. To check the status of the request, do one of the following:
 //
-//   - Use the OperationId response element from this operation to provide as a parameter to the DescribeCreateAccountStatus operation.
-//   - Check the CloudTrail log for the CreateAccountResult event. For information on using CloudTrail with Organizations, see Monitoring the Activity in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html) in the Organizations User Guide.
+//   - Use the OperationId response element from this operation to provide as a
+//     parameter to the DescribeCreateAccountStatus operation.
+//   - Check the CloudTrail log for the CreateAccountResult event. For information
+//     on using CloudTrail with Organizations, see Monitoring the Activity in Your
+//     Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
+//     in the Organizations User Guide.
 //
 // When you call the CreateGovCloudAccount action, you create two accounts: a
 // standalone account in the Amazon Web Services GovCloud (US) Region and an
@@ -65,10 +76,27 @@ import (
 // creating accounts, see Creating an Amazon Web Services account in Your
 // Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
 // in the Organizations User Guide.
-//   - When you create an account in an organization using the Organizations console, API, or CLI commands, the information required for the account to operate as a standalone account is not automatically collected. This includes a payment method and signing the end user license agreement (EULA). If you must remove an account from your organization later, you can do so only after you provide the missing information. Follow the steps at To leave an organization as a member account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info) in the Organizations User Guide.
-//   - If you get an exception that indicates that you exceeded your account limits for the organization, contact Amazon Web Services Support (https://console.aws.amazon.com/support/home#/) .
-//   - If you get an exception that indicates that the operation failed because your organization is still initializing, wait one hour and then try again. If the error persists, contact Amazon Web Services Support (https://console.aws.amazon.com/support/home#/) .
-//   - Using CreateGovCloudAccount to create multiple temporary accounts isn't recommended. You can only close an account from the Amazon Web Services Billing and Cost Management console, and you must be signed in as the root user. For information on the requirements and process for closing an account, see Closing an Amazon Web Services account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html) in the Organizations User Guide.
+//   - When you create an account in an organization using the Organizations
+//     console, API, or CLI commands, the information required for the account to
+//     operate as a standalone account is not automatically collected. This includes a
+//     payment method and signing the end user license agreement (EULA). If you must
+//     remove an account from your organization later, you can do so only after you
+//     provide the missing information. Follow the steps at To leave an organization
+//     as a member account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+//     in the Organizations User Guide.
+//   - If you get an exception that indicates that you exceeded your account
+//     limits for the organization, contact Amazon Web Services Support (https://console.aws.amazon.com/support/home#/)
+//     .
+//   - If you get an exception that indicates that the operation failed because
+//     your organization is still initializing, wait one hour and then try again. If
+//     the error persists, contact Amazon Web Services Support (https://console.aws.amazon.com/support/home#/)
+//     .
+//   - Using CreateGovCloudAccount to create multiple temporary accounts isn't
+//     recommended. You can only close an account from the Amazon Web Services Billing
+//     and Cost Management console, and you must be signed in as the root user. For
+//     information on the requirements and process for closing an account, see
+//     Closing an Amazon Web Services account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
+//     in the Organizations User Guide.
 //
 // When you create a member account with this operation, you can choose whether to
 // create the account with the IAM User and Role Access to Billing Information
@@ -102,35 +130,37 @@ type CreateGovCloudAccountInput struct {
 	// This member is required.
 	AccountName *string
 
-	// Specifies the email address of the owner to assign to the new member account
-	// in the commercial Region. This email address must not already be associated with
+	// Specifies the email address of the owner to assign to the new member account in
+	// the commercial Region. This email address must not already be associated with
 	// another Amazon Web Services account. You must use a valid email address to
 	// complete account creation. The rules for a valid email address:
-	//     - The address must be a minimum of 6 and a maximum of 64 characters long.
-	//     - All characters must be 7-bit ASCII characters.
-	//     - There must be one and only one @ symbol, which separates the local name from the domain name.
-	//     - The local name can't contain any of the following characters: whitespace, " ' ( ) < > [ ] : ; , \ | % &
-	//     - The local name can't begin with a dot (.)
-	//     - The domain name can consist of only the characters [a-z],[A-Z],[0-9], hyphen (-), or dot (.)
-	//     - The domain name can't begin or end with a hyphen (-) or dot (.)
-	//     - The domain name must contain at least one dot
-	// You can't access the root
-	// user of the account or remove an account that was created with an invalid email
-	// address. Like all request parameters for CreateGovCloudAccount, the request
-	// for the email address for the Amazon Web Services GovCloud (US) account
-	// originates from the commercial Region, not from the Amazon Web Services GovCloud
-	// (US) Region.
+	//   - The address must be a minimum of 6 and a maximum of 64 characters long.
+	//   - All characters must be 7-bit ASCII characters.
+	//   - There must be one and only one @ symbol, which separates the local name
+	//   from the domain name.
+	//   - The local name can't contain any of the following characters: whitespace, "
+	//   ' ( ) < > [ ] : ; , \ | % &
+	//   - The local name can't begin with a dot (.)
+	//   - The domain name can consist of only the characters [a-z],[A-Z],[0-9],
+	//   hyphen (-), or dot (.)
+	//   - The domain name can't begin or end with a hyphen (-) or dot (.)
+	//   - The domain name must contain at least one dot
+	// You can't access the root user of the account or remove an account that was
+	// created with an invalid email address. Like all request parameters for
+	// CreateGovCloudAccount , the request for the email address for the Amazon Web
+	// Services GovCloud (US) account originates from the commercial Region, not from
+	// the Amazon Web Services GovCloud (US) Region.
 	//
 	// This member is required.
 	Email *string
 
-	// If set to ALLOW, the new linked account in the commercial Region enables IAM
+	// If set to ALLOW , the new linked account in the commercial Region enables IAM
 	// users to access account billing information if they have the required
-	// permissions. If set to DENY, only the root user of the new account can access
-	// account billing information. For more information, see Activating Access to
-	// the Billing and Cost Management Console (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
+	// permissions. If set to DENY , only the root user of the new account can access
+	// account billing information. For more information, see Activating Access to the
+	// Billing and Cost Management Console (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
 	// in the Amazon Web Services Billing and Cost Management User Guide. If you don't
-	// specify this parameter, the value defaults to ALLOW, and IAM users and roles
+	// specify this parameter, the value defaults to ALLOW , and IAM users and roles
 	// with the required permissions can access billing information for the new
 	// account.
 	IamUserAccessToBilling types.IAMUserAccessToBilling
@@ -141,25 +171,24 @@ type CreateGovCloudAccountInput struct {
 	// management account, allowing users in the management account to assume the role,
 	// as permitted by the management account administrator. The role has administrator
 	// permissions in the new member account. If you don't specify this parameter, the
-	// role name defaults to OrganizationAccountAccessRole. For more information
-	// about how to use this role to access the member account, see Accessing and
+	// role name defaults to OrganizationAccountAccessRole . For more information about
+	// how to use this role to access the member account, see Accessing and
 	// Administering the Member Accounts in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
 	// in the Organizations User Guide and steps 2 and 3 in Tutorial: Delegate Access
 	// Across Amazon Web Services accounts Using IAM Roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
-	// in the IAM User Guide. The regex pattern (http://wikipedia.org/wiki/regex)
-	// that is used to validate this parameter. The pattern can include uppercase
-	// letters, lowercase letters, digits with no spaces, and any of the following
-	// characters: =,.@-
+	// in the IAM User Guide. The regex pattern (http://wikipedia.org/wiki/regex) that
+	// is used to validate this parameter. The pattern can include uppercase letters,
+	// lowercase letters, digits with no spaces, and any of the following characters:
+	// =,.@-
 	RoleName *string
 
-	// A list of tags that you want to attach to the newly created account. These
-	// tags are attached to the commercial account associated with the GovCloud
-	// account, and not to the GovCloud account itself. To add tags to the actual
-	// GovCloud account, call the TagResource operation in the GovCloud region after
-	// the new GovCloud account exists. For each tag in the list, you must specify both
-	// a tag key and a value. You can set the value to an empty string, but you can't
-	// set it to null . For more information about tagging, see Tagging Organizations
-	// resources (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
+	// A list of tags that you want to attach to the newly created account. These tags
+	// are attached to the commercial account associated with the GovCloud account, and
+	// not to the GovCloud account itself. To add tags to the actual GovCloud account,
+	// call the TagResource operation in the GovCloud region after the new GovCloud
+	// account exists. For each tag in the list, you must specify both a tag key and a
+	// value. You can set the value to an empty string, but you can't set it to null .
+	// For more information about tagging, see Tagging Organizations resources (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
 	// in the Organizations User Guide. If any one of the tags is not valid or if you
 	// exceed the maximum allowed number of tags for an account, then the entire
 	// request fails and the account is not created.
@@ -170,7 +199,7 @@ type CreateGovCloudAccountInput struct {
 
 type CreateGovCloudAccountOutput struct {
 
-	// Contains the status about a CreateAccount  or CreateGovCloudAccount request to
+	// Contains the status about a CreateAccount or CreateGovCloudAccount request to
 	// create an Amazon Web Services account or an Amazon Web Services GovCloud (US)
 	// account in an organization.
 	CreateAccountStatus *types.CreateAccountStatus

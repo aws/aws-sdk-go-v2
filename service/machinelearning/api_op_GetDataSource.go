@@ -33,20 +33,20 @@ func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, 
 
 type GetDataSourceInput struct {
 
-	// The ID assigned to the DataSource  at creation.
+	// The ID assigned to the DataSource at creation.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Specifies whether the GetDataSource  operation should return DataSourceSchema.
-	// If true, DataSourceSchema  is returned. If false, DataSourceSchema is not
+	// Specifies whether the GetDataSource operation should return DataSourceSchema .
+	// If true, DataSourceSchema is returned. If false, DataSourceSchema is not
 	// returned.
 	Verbose bool
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetDataSource  operation and describes a DataSource .
+// Represents the output of a GetDataSource operation and describes a DataSource .
 type GetDataSourceOutput struct {
 
 	// The parameter is true if statistics need to be generated from the observation
@@ -55,11 +55,11 @@ type GetDataSourceOutput struct {
 
 	// The approximate CPU time in milliseconds that Amazon Machine Learning spent
 	// processing the DataSource , normalized and scaled on computation resources.
-	// ComputeTime is only available if the DataSource  is in the COMPLETED state and
-	// the ComputeStatistics  is set to true.
+	// ComputeTime is only available if the DataSource is in the COMPLETED state and
+	// the ComputeStatistics is set to true.
 	ComputeTime *int64
 
-	// The time that the DataSource  was created. The time is expressed in epoch time.
+	// The time that the DataSource was created. The time is expressed in epoch time.
 	CreatedAt *time.Time
 
 	// The AWS user account from which the DataSource was created. The account type
@@ -72,30 +72,30 @@ type GetDataSourceOutput struct {
 	DataLocationS3 *string
 
 	// A JSON string that represents the splitting and rearrangement requirement used
-	// when this DataSource  was created.
+	// when this DataSource was created.
 	DataRearrangement *string
 
 	// The total size of observations in the data files.
 	DataSizeInBytes *int64
 
 	// The ID assigned to the DataSource at creation. This value should be identical
-	// to the value of the DataSourceId  in the request.
+	// to the value of the DataSourceId in the request.
 	DataSourceId *string
 
-	// The schema used by all of the data files of this DataSource. Note: This
+	// The schema used by all of the data files of this DataSource . Note: This
 	// parameter is provided as part of the verbose format.
 	DataSourceSchema *string
 
-	// The epoch time when Amazon Machine Learning marked the DataSource  as COMPLETED
-	// or FAILED . FinishedAt  is only available when the DataSource  is in the
-	// COMPLETED or FAILED  state.
+	// The epoch time when Amazon Machine Learning marked the DataSource as COMPLETED
+	// or FAILED . FinishedAt is only available when the DataSource is in the COMPLETED
+	// or FAILED state.
 	FinishedAt *time.Time
 
-	// The time of the most recent edit to the DataSource. The time is expressed in
+	// The time of the most recent edit to the DataSource . The time is expressed in
 	// epoch time.
 	LastUpdatedAt *time.Time
 
-	// A link to the file containing logs of CreateDataSourceFrom*  operations.
+	// A link to the file containing logs of CreateDataSourceFrom* operations.
 	LogUri *string
 
 	// The user-supplied description of the most recent details about creating the
@@ -111,25 +111,25 @@ type GetDataSourceOutput struct {
 	// The datasource details that are specific to Amazon RDS.
 	RDSMetadata *types.RDSMetadata
 
-	// Describes the DataSource  details specific to Amazon Redshift.
+	// Describes the DataSource details specific to Amazon Redshift.
 	RedshiftMetadata *types.RedshiftMetadata
 
 	// The Amazon Resource Name (ARN) of an AWS IAM Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts)
 	// , such as the following: arn:aws:iam::account:role/rolename.
 	RoleARN *string
 
-	// The epoch time when Amazon Machine Learning marked the DataSource  as
-	// INPROGRESS . StartedAt  isn't available if the DataSource  is in the PENDING
-	// state.
+	// The epoch time when Amazon Machine Learning marked the DataSource as INPROGRESS
+	// . StartedAt isn't available if the DataSource is in the PENDING state.
 	StartedAt *time.Time
 
-	// The current status of the DataSource. This element can have one of the
+	// The current status of the DataSource . This element can have one of the
 	// following values:
-	//     - PENDING - Amazon ML submitted a request to create a DataSource .
-	//     - INPROGRESS - The creation process is underway.
-	//     - FAILED - The request to create a DataSource did not run to completion. It is not usable.
-	//     - COMPLETED - The creation process completed successfully.
-	//     - DELETED - The DataSource is marked as deleted. It is not usable.
+	//   - PENDING - Amazon ML submitted a request to create a DataSource .
+	//   - INPROGRESS - The creation process is underway.
+	//   - FAILED - The request to create a DataSource did not run to completion. It is
+	//   not usable.
+	//   - COMPLETED - The creation process completed successfully.
+	//   - DELETED - The DataSource is marked as deleted. It is not usable.
 	Status types.EntityStatus
 
 	// Metadata pertaining to the operation's result.

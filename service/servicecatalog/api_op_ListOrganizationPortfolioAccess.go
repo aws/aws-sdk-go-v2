@@ -34,9 +34,10 @@ func (c *Client) ListOrganizationPortfolioAccess(ctx context.Context, params *Li
 type ListOrganizationPortfolioAccessInput struct {
 
 	// The organization node type that will be returned in the output.
-	//     - ORGANIZATION - Organization that has access to the portfolio.
-	//     - ORGANIZATIONAL_UNIT - Organizational unit that has access to the portfolio within your organization.
-	//     - ACCOUNT - Account that has access to the portfolio within your organization.
+	//   - ORGANIZATION - Organization that has access to the portfolio.
+	//   - ORGANIZATIONAL_UNIT - Organizational unit that has access to the portfolio
+	//   within your organization.
+	//   - ACCOUNT - Account that has access to the portfolio within your organization.
 	//
 	// This member is required.
 	OrganizationNodeType types.OrganizationNodeType
@@ -47,9 +48,9 @@ type ListOrganizationPortfolioAccessInput struct {
 	PortfolioId *string
 
 	// The language code.
-	//     - en - English (default)
-	//     - jp - Japanese
-	//     - zh - Chinese
+	//   - en - English (default)
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
@@ -154,8 +155,8 @@ type ListOrganizationPortfolioAccessPaginatorOptions struct {
 	// The maximum number of items to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

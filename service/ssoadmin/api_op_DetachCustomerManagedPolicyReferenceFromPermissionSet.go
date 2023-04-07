@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Detaches the specified customer managed policy from the specified PermissionSet
-// .
+// Detaches the specified customer managed policy from the specified PermissionSet .
 func (c *Client) DetachCustomerManagedPolicyReferenceFromPermissionSet(ctx context.Context, params *DetachCustomerManagedPolicyReferenceFromPermissionSetInput, optFns ...func(*Options)) (*DetachCustomerManagedPolicyReferenceFromPermissionSetOutput, error) {
 	if params == nil {
 		params = &DetachCustomerManagedPolicyReferenceFromPermissionSetInput{}

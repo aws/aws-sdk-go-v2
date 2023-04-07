@@ -47,8 +47,8 @@ type UpdateFlowInput struct {
 	// This member is required.
 	SourceFlowConfig *types.SourceFlowConfig
 
-	// A list of tasks that Amazon AppFlow performs while transferring the data in
-	// the flow run.
+	// A list of tasks that Amazon AppFlow performs while transferring the data in the
+	// flow run.
 	//
 	// This member is required.
 	Tasks []types.Task

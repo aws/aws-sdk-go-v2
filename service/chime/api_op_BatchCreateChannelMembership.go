@@ -40,12 +40,12 @@ type BatchCreateChannelMembershipInput struct {
 	// This member is required.
 	MemberArns []string
 
-	// The AppInstanceUserArn  of the user that makes the API call.
+	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
 
-	// The membership type of a user, DEFAULT  or HIDDEN. Default members are always
-	// returned as part of ListChannelMemberships. Hidden members are only returned
-	// if the type filter in ListChannelMemberships  equals HIDDEN. Otherwise hidden
+	// The membership type of a user, DEFAULT or HIDDEN . Default members are always
+	// returned as part of ListChannelMemberships . Hidden members are only returned if
+	// the type filter in ListChannelMemberships equals HIDDEN . Otherwise hidden
 	// members are not returned. This is only supported by moderators.
 	Type types.ChannelMembershipType
 

@@ -13,10 +13,9 @@ import (
 )
 
 // Describes the status of importing resources to an application version. If you
-// get a 404 error with ResourceImportStatusNotFoundAppMetadataException, you
-// must call importResourcesToDraftAppVersion after creating the application and
-// before calling describeDraftAppVersionResourcesImportStatus to obtain the
-// status.
+// get a 404 error with ResourceImportStatusNotFoundAppMetadataException , you must
+// call importResourcesToDraftAppVersion after creating the application and before
+// calling describeDraftAppVersionResourcesImportStatus to obtain the status.
 func (c *Client) DescribeDraftAppVersionResourcesImportStatus(ctx context.Context, params *DescribeDraftAppVersionResourcesImportStatusInput, optFns ...func(*Options)) (*DescribeDraftAppVersionResourcesImportStatusOutput, error) {
 	if params == nil {
 		params = &DescribeDraftAppVersionResourcesImportStatusInput{}

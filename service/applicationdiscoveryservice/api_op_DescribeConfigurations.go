@@ -17,11 +17,11 @@ import (
 //   - process
 //   - connection
 //
-// Output fields are specific to the asset type specified. For
-// example, the output for a server configuration item includes a list of
-// attributes about the server, such as host name, operating system, number of
-// network cards, etc. For a complete list of outputs for each asset type, see
-// Using the DescribeConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations)
+// Output fields are specific to the asset type specified. For example, the output
+// for a server configuration item includes a list of attributes about the server,
+// such as host name, operating system, number of network cards, etc. For a
+// complete list of outputs for each asset type, see Using the
+// DescribeConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations)
 // in the Amazon Web Services Application Discovery Service User Guide.
 func (c *Client) DescribeConfigurations(ctx context.Context, params *DescribeConfigurationsInput, optFns ...func(*Options)) (*DescribeConfigurationsOutput, error) {
 	if params == nil {

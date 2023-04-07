@@ -3,7 +3,7 @@
 // Package omics provides the API client, operations, and parameter types for
 // Amazon Omics.
 //
-// This is the Amazon Omics API Reference. For an introduction to the service,
-// see What is Amazon Omics? (https://docs.aws.amazon.com/omics/latest/dev/) in
-// the Amazon Omics Developer Guide.
+// This is the Amazon Omics API Reference. For an introduction to the service, see
+// What is Amazon Omics? (https://docs.aws.amazon.com/omics/latest/dev/) in the
+// Amazon Omics Developer Guide.
 package omics

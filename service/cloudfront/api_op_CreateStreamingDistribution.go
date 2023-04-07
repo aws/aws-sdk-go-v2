@@ -13,7 +13,7 @@ import (
 
 // This API is deprecated. Amazon CloudFront is deprecating real-time messaging
 // protocol (RTMP) distributions on December 31, 2020. For more information, read
-// the announcement (http://forums.aws.amazon.com/ann.jspa?annID=7356)on the
+// the announcement (http://forums.aws.amazon.com/ann.jspa?annID=7356) on the
 // Amazon CloudFront discussion forum.
 func (c *Client) CreateStreamingDistribution(ctx context.Context, params *CreateStreamingDistributionInput, optFns ...func(*Options)) (*CreateStreamingDistributionOutput, error) {
 	if params == nil {
@@ -47,8 +47,7 @@ type CreateStreamingDistributionOutput struct {
 	// The current version of the streaming distribution created.
 	ETag *string
 
-	// The fully qualified URI of the new streaming distribution resource just
-	// created.
+	// The fully qualified URI of the new streaming distribution resource just created.
 	Location *string
 
 	// The streaming distribution's information.

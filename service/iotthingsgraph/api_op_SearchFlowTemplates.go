@@ -48,11 +48,11 @@ type SearchFlowTemplatesInput struct {
 
 type SearchFlowTemplatesOutput struct {
 
-	// The string to specify as nextToken  when you request the next page of results.
+	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
 
-	// An array of objects that contain summary information about each workflow in
-	// the result set.
+	// An array of objects that contain summary information about each workflow in the
+	// result set.
 	Summaries []types.FlowTemplateSummary
 
 	// Metadata pertaining to the operation's result.
@@ -138,8 +138,8 @@ type SearchFlowTemplatesPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

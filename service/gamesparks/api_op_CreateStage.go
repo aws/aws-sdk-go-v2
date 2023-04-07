@@ -45,8 +45,8 @@ type CreateStageInput struct {
 	// This member is required.
 	StageName *string
 
-	// A client-defined token. With an active client token in the request, this
-	// action is idempotent.
+	// A client-defined token. With an active client token in the request, this action
+	// is idempotent.
 	ClientToken *string
 
 	// The description of the stage.

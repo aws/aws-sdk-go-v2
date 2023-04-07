@@ -23,8 +23,7 @@ import (
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //   - DELETE PENDING > DELETE IN_PROGRESS
 //
-// To get the status of the event
-// tracker, call DescribeEventTracker (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html)
+// To get the status of the event tracker, call DescribeEventTracker (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html)
 // . The event tracker must be in the ACTIVE state before using the tracking ID.
 // Related APIs
 //   - ListEventTrackers (https://docs.aws.amazon.com/personalize/latest/dg/API_ListEventTrackers.html)

@@ -408,8 +408,8 @@ func (e *TemplatesNotAvailableInRegionException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
-// Due to throttling, the request was denied. Slow down the rate of request
-// calls, or request an increase for this quota.
+// Due to throttling, the request was denied. Slow down the rate of request calls,
+// or request an increase for this quota.
 type TooManyRequestsException struct {
 	Message *string
 

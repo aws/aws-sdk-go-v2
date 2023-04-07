@@ -14,12 +14,12 @@ import (
 
 // Lists the properties of all containers in AWS Elemental MediaStore. You can
 // query to receive all the containers in one response. Or you can include the
-// MaxResultsparameter to receive a limited number of containers in each
-// response. In this case, the response includes a token. To get the next set of
-// containers, send the command again, this time with the NextToken parameter
-// (with the returned token as its value). The next set of responses appears, with
-// a token if there are still more containers to receive. See also
-// DescribeContainer , which gets the properties of one container.
+// MaxResults parameter to receive a limited number of containers in each response.
+// In this case, the response includes a token. To get the next set of containers,
+// send the command again, this time with the NextToken parameter (with the
+// returned token as its value). The next set of responses appears, with a token if
+// there are still more containers to receive. See also DescribeContainer , which
+// gets the properties of one container.
 func (c *Client) ListContainers(ctx context.Context, params *ListContainersInput, optFns ...func(*Options)) (*ListContainersOutput, error) {
 	if params == nil {
 		params = &ListContainersInput{}
@@ -57,9 +57,9 @@ type ListContainersOutput struct {
 	// This member is required.
 	Containers []types.Container
 
-	// NextToken  is the token to use in the next call to ListContainers. This token
-	// is returned only if you included the MaxResults tag in the original command,
-	// and only if there are still containers to return.
+	// NextToken is the token to use in the next call to ListContainers . This token is
+	// returned only if you included the MaxResults tag in the original command, and
+	// only if there are still containers to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +142,8 @@ type ListContainersPaginatorOptions struct {
 	// characters.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

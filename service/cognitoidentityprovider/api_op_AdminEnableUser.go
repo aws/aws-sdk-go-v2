@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the specified user as an administrator. Works on any user. Calling
-// this action requires developer credentials.
+// Enables the specified user as an administrator. Works on any user. Calling this
+// action requires developer credentials.
 func (c *Client) AdminEnableUser(ctx context.Context, params *AdminEnableUserInput, optFns ...func(*Options)) (*AdminEnableUserOutput, error) {
 	if params == nil {
 		params = &AdminEnableUserInput{}

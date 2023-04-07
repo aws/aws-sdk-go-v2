@@ -30,8 +30,8 @@ func (c *Client) StartExperiment(ctx context.Context, params *StartExperimentInp
 
 type StartExperimentInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	//
 	// This member is required.
 	ClientToken *string

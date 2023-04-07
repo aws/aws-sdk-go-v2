@@ -14,18 +14,18 @@ import (
 // Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services
 // resources through bring your own IP addresses (BYOIP) and creates a
 // corresponding address pool. After the address range is provisioned, it is ready
-// to be advertised using AdvertiseByoipCidr. Amazon Web Services verifies that
+// to be advertised using AdvertiseByoipCidr . Amazon Web Services verifies that
 // you own the address range and are authorized to advertise it. You must ensure
 // that the address range is registered to you and that you created an RPKI ROA to
 // authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more
 // information, see Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html)
 // in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is
 // an asynchronous operation, so the call returns immediately, but the address
-// range is not ready to use until its status changes from pending-provision  to
+// range is not ready to use until its status changes from pending-provision to
 // provisioned . To monitor the status of an address range, use DescribeByoipCidrs
 // . To allocate an Elastic IP address from your IPv4 address pool, use
-// AllocateAddresswith either the specific address from the address pool or the
-// ID of the address pool.
+// AllocateAddress with either the specific address from the address pool or the ID
+// of the address pool.
 func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipCidrInput, optFns ...func(*Options)) (*ProvisionByoipCidrOutput, error) {
 	if params == nil {
 		params = &ProvisionByoipCidrInput{}
@@ -43,16 +43,16 @@ func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipC
 
 type ProvisionByoipCidrInput struct {
 
-	// The public IPv4 or IPv6 address range, in CIDR notation. The most specific
-	// IPv4 prefix that you can specify is /24. The most specific IPv6 prefix you can
+	// The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4
+	// prefix that you can specify is /24. The most specific IPv6 prefix you can
 	// specify is /56. The address range cannot overlap with another address range that
 	// you've brought to this or another Region.
 	//
 	// This member is required.
 	Cidr *string
 
-	// A signed document that proves that you are authorized to bring the specified
-	// IP address range to Amazon using BYOIP.
+	// A signed document that proves that you are authorized to bring the specified IP
+	// address range to Amazon using BYOIP.
 	CidrAuthorizationContext *types.CidrAuthorizationContext
 
 	// A description for the address range and the address pool.

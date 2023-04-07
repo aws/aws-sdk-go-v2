@@ -35,14 +35,16 @@ type ListSchemaVersionsInput struct {
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
-	//     - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.
-	//     - SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.
+	//   - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either
+	//   SchemaArn or SchemaName and RegistryName has to be provided.
+	//   - SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName
+	//   and RegistryName has to be provided.
 	//
 	// This member is required.
 	SchemaId *types.SchemaId
 
-	// Maximum number of results required per page. If the value is not supplied,
-	// this will be defaulted to 25 per page.
+	// Maximum number of results required per page. If the value is not supplied, this
+	// will be defaulted to 25 per page.
 	MaxResults *int32
 
 	// A continuation token, if this is a continuation call.
@@ -57,8 +59,7 @@ type ListSchemaVersionsOutput struct {
 	// the current segment of the list is not the last.
 	NextToken *string
 
-	// An array of SchemaVersionList objects containing details of each schema
-	// version.
+	// An array of SchemaVersionList objects containing details of each schema version.
 	Schemas []types.SchemaVersionListItem
 
 	// Metadata pertaining to the operation's result.
@@ -141,12 +142,12 @@ var _ ListSchemaVersionsAPIClient = (*Client)(nil)
 // ListSchemaVersionsPaginatorOptions is the paginator options for
 // ListSchemaVersions
 type ListSchemaVersionsPaginatorOptions struct {
-	// Maximum number of results required per page. If the value is not supplied,
-	// this will be defaulted to 25 per page.
+	// Maximum number of results required per page. If the value is not supplied, this
+	// will be defaulted to 25 per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

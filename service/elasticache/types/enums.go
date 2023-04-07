@@ -49,10 +49,9 @@ const (
 	AuthTokenUpdateStrategyTypeDelete AuthTokenUpdateStrategyType = "DELETE"
 )
 
-// Values returns all known values for AuthTokenUpdateStrategyType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for AuthTokenUpdateStrategyType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthTokenUpdateStrategyType) Values() []AuthTokenUpdateStrategyType {
 	return []AuthTokenUpdateStrategyType{
 		"SET",
@@ -71,9 +70,9 @@ const (
 	AutomaticFailoverStatusDisabling AutomaticFailoverStatus = "disabling"
 )
 
-// Values returns all known values for AutomaticFailoverStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AutomaticFailoverStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AutomaticFailoverStatus) Values() []AutomaticFailoverStatus {
 	return []AutomaticFailoverStatus{
 		"enabled",
@@ -164,9 +163,9 @@ const (
 	InputAuthenticationTypeIam        InputAuthenticationType = "iam"
 )
 
-// Values returns all known values for InputAuthenticationType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InputAuthenticationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InputAuthenticationType) Values() []InputAuthenticationType {
 	return []InputAuthenticationType{
 		"password",
@@ -183,9 +182,9 @@ const (
 	IpDiscoveryIpv6 IpDiscovery = "ipv6"
 )
 
-// Values returns all known values for IpDiscovery. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IpDiscovery. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (IpDiscovery) Values() []IpDiscovery {
 	return []IpDiscovery{
 		"ipv4",
@@ -281,9 +280,9 @@ const (
 	NetworkTypeDualStack NetworkType = "dual_stack"
 )
 
-// Values returns all known values for NetworkType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NetworkType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (NetworkType) Values() []NetworkType {
 	return []NetworkType{
 		"ipv4",
@@ -344,9 +343,9 @@ const (
 	OutpostModeCrossOutpost  OutpostMode = "cross-outpost"
 )
 
-// Values returns all known values for OutpostMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OutpostMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OutpostMode) Values() []OutpostMode {
 	return []OutpostMode{
 		"single-outpost",

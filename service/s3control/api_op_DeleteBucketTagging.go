@@ -21,12 +21,11 @@ import (
 // in Amazon S3 User Guide. To use this action, you must have permission to perform
 // the PutBucketTagging action. By default, the bucket owner has this permission
 // and can grant this permission to others. All Amazon S3 on Outposts REST API
-// requests for this action require an additional parameter of x-amz-outpost-id
-// to be passed with the request. In addition, you must use an S3 on Outposts
-// endpoint hostname prefix instead of s3-control. For an example of the request
-// syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname
-// prefix and the x-amz-outpost-id  derived by using the access point ARN, see the
-// Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples)
+// requests for this action require an additional parameter of x-amz-outpost-id to
+// be passed with the request. In addition, you must use an S3 on Outposts endpoint
+// hostname prefix instead of s3-control . For an example of the request syntax for
+// Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and
+// the x-amz-outpost-id derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples)
 // section. The following actions are related to DeleteBucketTagging :
 //   - GetBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html)
 //   - PutBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html)
@@ -47,8 +46,7 @@ func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTa
 
 type DeleteBucketTaggingInput struct {
 
-	// The Amazon Web Services account ID of the Outposts bucket tag set to be
-	// removed.
+	// The Amazon Web Services account ID of the Outposts bucket tag set to be removed.
 	//
 	// This member is required.
 	AccountId *string
@@ -57,10 +55,10 @@ type DeleteBucketTaggingInput struct {
 	// with Amazon S3 on Outposts with the REST API, you must specify the name and the
 	// x-amz-outpost-id as well. For using this parameter with S3 on Outposts with the
 	// Amazon Web Services SDK and CLI, you must specify the ARN of the bucket accessed
-	// in the format arn:aws:s3-outposts:::outpost//bucket/. For example, to access
-	// the bucket reports  through Outpost my-outpost  owned by account 123456789012
-	// in Region us-west-2 , use the URL encoding of
-	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
+	// in the format arn:aws:s3-outposts:::outpost//bucket/ . For example, to access
+	// the bucket reports through Outpost my-outpost owned by account 123456789012 in
+	// Region us-west-2 , use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports .
 	// The value must be URL encoded.
 	//
 	// This member is required.

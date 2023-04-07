@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a specified pipeline with edits or changes to its structure. Use a
-// JSON file with the pipeline structure and UpdatePipeline to provide the full
+// Updates a specified pipeline with edits or changes to its structure. Use a JSON
+// file with the pipeline structure and UpdatePipeline to provide the full
 // structure of the pipeline. Updating the pipeline increases the version number of
 // the pipeline by 1.
 func (c *Client) UpdatePipeline(ctx context.Context, params *UpdatePipelineInput, optFns ...func(*Options)) (*UpdatePipelineOutput, error) {
@@ -30,7 +30,7 @@ func (c *Client) UpdatePipeline(ctx context.Context, params *UpdatePipelineInput
 	return out, nil
 }
 
-// Represents the input of an UpdatePipeline  action.
+// Represents the input of an UpdatePipeline action.
 type UpdatePipelineInput struct {
 
 	// The name of the pipeline to be updated.
@@ -41,7 +41,7 @@ type UpdatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of an UpdatePipeline  action.
+// Represents the output of an UpdatePipeline action.
 type UpdatePipelineOutput struct {
 
 	// The structure of the updated pipeline.

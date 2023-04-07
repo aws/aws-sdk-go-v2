@@ -36,8 +36,8 @@ type ListJobTemplatesInput struct {
 	// templates from that category.
 	Category *string
 
-	// Optional. When you request a list of job templates, you can choose to list
-	// them alphabetically by NAME or chronologically by CREATION_DATE. If you don't
+	// Optional. When you request a list of job templates, you can choose to list them
+	// alphabetically by NAME or chronologically by CREATION_DATE. If you don't
 	// specify, the service will list them by name.
 	ListBy types.JobTemplateListBy
 
@@ -49,8 +49,8 @@ type ListJobTemplatesInput struct {
 	// the next batch of job templates.
 	NextToken *string
 
-	// Optional. When you request lists of resources, you can specify whether they
-	// are sorted in ASCENDING or DESCENDING order. Default varies by resource.
+	// Optional. When you request lists of resources, you can specify whether they are
+	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order types.Order
 
 	noSmithyDocumentSerde
@@ -144,8 +144,8 @@ type ListJobTemplatesPaginatorOptions struct {
 	// time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

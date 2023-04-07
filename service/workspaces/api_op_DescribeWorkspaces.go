@@ -37,7 +37,7 @@ type DescribeWorkspacesInput struct {
 	BundleId *string
 
 	// The identifier of the directory. In addition, you can optionally specify a
-	// specific directory user (see UserName). You cannot combine this parameter with
+	// specific directory user (see UserName ). You cannot combine this parameter with
 	// any other filter.
 	DirectoryId *string
 
@@ -48,8 +48,8 @@ type DescribeWorkspacesInput struct {
 	// this token to receive the next set of results.
 	NextToken *string
 
-	// The name of the directory user. You must specify this parameter with
-	// DirectoryId .
+	// The name of the directory user. You must specify this parameter with DirectoryId
+	// .
 	UserName *string
 
 	// The identifiers of the WorkSpaces. You cannot combine this parameter with any
@@ -151,8 +151,8 @@ type DescribeWorkspacesPaginatorOptions struct {
 	// The maximum number of items to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

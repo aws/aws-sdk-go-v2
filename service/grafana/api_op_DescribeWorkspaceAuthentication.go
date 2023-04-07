@@ -40,8 +40,8 @@ type DescribeWorkspaceAuthenticationInput struct {
 
 type DescribeWorkspaceAuthenticationOutput struct {
 
-	// A structure containing information about the authentication methods used in
-	// the workspace.
+	// A structure containing information about the authentication methods used in the
+	// workspace.
 	//
 	// This member is required.
 	Authentication *types.AuthenticationDescription

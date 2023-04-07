@@ -43,8 +43,7 @@ type CreateTokenInput struct {
 	// This member is required.
 	LicenseArn *string
 
-	// Token expiration, in days, counted from token creation. The default is 365
-	// days.
+	// Token expiration, in days, counted from token creation. The default is 365 days.
 	ExpirationInDays *int32
 
 	// Amazon Resource Name (ARN) of the IAM roles to embed in the token. License

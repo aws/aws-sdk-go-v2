@@ -46,8 +46,8 @@ type CreateVpcInput struct {
 	// block.
 	AmazonProvidedIpv6CidrBlock *bool
 
-	// The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16
-	// . We modify the specified CIDR block to its canonical form; for example, if you
+	// The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16 .
+	// We modify the specified CIDR block to its canonical form; for example, if you
 	// specify 100.68.0.18/18 , we modify it to 100.68.0.0/18 .
 	CidrBlock *string
 
@@ -57,17 +57,17 @@ type CreateVpcInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The tenancy options for instances launched into the VPC. For default,
-	// instances are launched with shared tenancy by default. You can launch instances
-	// with any tenancy into a shared tenancy VPC. For dedicated, instances are
-	// launched as dedicated tenancy instances by default. You can only launch
-	// instances with a tenancy of dedicated  or host into a dedicated tenancy VPC.
-	// Important: The host  value cannot be used with this parameter. Use the default
-	// or dedicated  values only. Default: default
+	// The tenancy options for instances launched into the VPC. For default , instances
+	// are launched with shared tenancy by default. You can launch instances with any
+	// tenancy into a shared tenancy VPC. For dedicated , instances are launched as
+	// dedicated tenancy instances by default. You can only launch instances with a
+	// tenancy of dedicated or host into a dedicated tenancy VPC. Important: The host
+	// value cannot be used with this parameter. Use the default or dedicated values
+	// only. Default: default
 	InstanceTenancy types.Tenancy
 
-	// The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR.
-	// For more information, see What is IPAM? (https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html)
+	// The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For
+	// more information, see What is IPAM? (https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html)
 	// in the Amazon VPC IPAM User Guide.
 	Ipv4IpamPoolId *string
 
@@ -84,7 +84,7 @@ type CreateVpcInput struct {
 
 	// The name of the location from which we advertise the IPV6 CIDR block. Use this
 	// parameter to limit the address to this location. You must set
-	// AmazonProvidedIpv6CidrBlock to true  to use this parameter.
+	// AmazonProvidedIpv6CidrBlock to true to use this parameter.
 	Ipv6CidrBlockNetworkBorderGroup *string
 
 	// The ID of an IPv6 IPAM pool which will be used to allocate this VPC an IPv6

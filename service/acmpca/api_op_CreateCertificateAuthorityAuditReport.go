@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an audit report that lists every time that your CA private key is
-// used. The report is saved in the Amazon S3 bucket that you specify on input. The
-//
+// Creates an audit report that lists every time that your CA private key is used.
+// The report is saved in the Amazon S3 bucket that you specify on input. The
 // IssueCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html)
 // and RevokeCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html)
 // actions use the private key. Both Amazon Web Services Private CA and the IAM
@@ -49,7 +48,6 @@ type CreateCertificateAuthorityAuditReportInput struct {
 
 	// The Amazon Resource Name (ARN) of the CA to be audited. This is of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
 	// .
 	//
 	// This member is required.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the merge options available for merging two
-// specified branches. For details about why a merge option is not available, use
+// Returns information about the merge options available for merging two specified
+// branches. For details about why a merge option is not available, use
 // GetMergeConflicts or DescribeMergeConflicts.
 func (c *Client) GetMergeOptions(ctx context.Context, params *GetMergeOptionsInput, optFns ...func(*Options)) (*GetMergeOptionsOutput, error) {
 	if params == nil {

@@ -10,18 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF
-// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
 // and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 // . With the latest version, AWS WAF has a single set of endpoints for regional
 // and global use. Permanently deletes a RegexMatchSet . You can't delete a
-// RegexMatchSet if it's still used in any Rules  or if it still includes any
+// RegexMatchSet if it's still used in any Rules or if it still includes any
 // RegexMatchTuples objects (any filters). If you just want to remove a
 // RegexMatchSet from a Rule , use UpdateRule . To permanently delete a
 // RegexMatchSet , perform the following steps:
-//   - Update the RegexMatchSet to remove filters, if any. For more information, see UpdateRegexMatchSet .
-//   - Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRegexMatchSet request.
+//   - Update the RegexMatchSet to remove filters, if any. For more information,
+//     see UpdateRegexMatchSet .
+//   - Use GetChangeToken to get the change token that you provide in the
+//     ChangeToken parameter of a DeleteRegexMatchSet request.
 //   - Submit a DeleteRegexMatchSet request.
 func (c *Client) DeleteRegexMatchSet(ctx context.Context, params *DeleteRegexMatchSetInput, optFns ...func(*Options)) (*DeleteRegexMatchSetOutput, error) {
 	if params == nil {
@@ -45,8 +46,8 @@ type DeleteRegexMatchSetInput struct {
 	// This member is required.
 	ChangeToken *string
 
-	// The RegexMatchSetId  of the RegexMatchSet  that you want to delete.
-	// RegexMatchSetId is returned by CreateRegexMatchSet  and by ListRegexMatchSets .
+	// The RegexMatchSetId of the RegexMatchSet that you want to delete.
+	// RegexMatchSetId is returned by CreateRegexMatchSet and by ListRegexMatchSets .
 	//
 	// This member is required.
 	RegexMatchSetId *string
@@ -56,7 +57,7 @@ type DeleteRegexMatchSetInput struct {
 
 type DeleteRegexMatchSetOutput struct {
 
-	// The ChangeToken  that you used to submit the DeleteRegexMatchSet request. You
+	// The ChangeToken that you used to submit the DeleteRegexMatchSet request. You
 	// can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus .
 	ChangeToken *string

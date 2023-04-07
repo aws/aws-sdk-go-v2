@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a migration workflow. You must pause a running workflow in Migration
-// Hub Orchestrator console to delete it.
+// Delete a migration workflow. You must pause a running workflow in Migration Hub
+// Orchestrator console to delete it.
 func (c *Client) DeleteWorkflow(ctx context.Context, params *DeleteWorkflowInput, optFns ...func(*Options)) (*DeleteWorkflowOutput, error) {
 	if params == nil {
 		params = &DeleteWorkflowInput{}

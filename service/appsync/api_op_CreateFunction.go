@@ -35,21 +35,21 @@ type CreateFunctionInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The Function DataSource  name.
+	// The Function DataSource name.
 	//
 	// This member is required.
 	DataSourceName *string
 
-	// The Function  name. The function name does not have to be unique.
+	// The Function name. The function name does not have to be unique.
 	//
 	// This member is required.
 	Name *string
 
 	// The function code that contains the request and response functions. When code
-	// is used, the runtime  is required. The runtime  value must be APPSYNC_JS .
+	// is used, the runtime is required. The runtime value must be APPSYNC_JS .
 	Code *string
 
-	// The Function  description.
+	// The Function description.
 	Description *string
 
 	// The version of the request mapping template. Currently, the supported value is
@@ -64,11 +64,11 @@ type CreateFunctionInput struct {
 	// version of the request mapping template.
 	RequestMappingTemplate *string
 
-	// The Function  response mapping template.
+	// The Function response mapping template.
 	ResponseMappingTemplate *string
 
-	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver
-	// or Amazon Web Services AppSync function. Specifies the name and version of the
+	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or
+	// Amazon Web Services AppSync function. Specifies the name and version of the
 	// runtime to use. Note that if a runtime is specified, code must also be
 	// specified.
 	Runtime *types.AppSyncRuntime
@@ -82,7 +82,7 @@ type CreateFunctionInput struct {
 
 type CreateFunctionOutput struct {
 
-	// The Function  object.
+	// The Function object.
 	FunctionConfiguration *types.FunctionConfiguration
 
 	// Metadata pertaining to the operation's result.

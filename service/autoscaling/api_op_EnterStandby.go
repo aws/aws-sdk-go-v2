@@ -43,7 +43,7 @@ type EnterStandbyInput struct {
 	AutoScalingGroupName *string
 
 	// Indicates whether to decrement the desired capacity of the Auto Scaling group
-	// by the number of instances moved to Standby  mode.
+	// by the number of instances moved to Standby mode.
 	//
 	// This member is required.
 	ShouldDecrementDesiredCapacity *bool
@@ -56,7 +56,7 @@ type EnterStandbyInput struct {
 
 type EnterStandbyOutput struct {
 
-	// The activities related to moving instances into Standby  mode.
+	// The activities related to moving instances into Standby mode.
 	Activities []types.Activity
 
 	// Metadata pertaining to the operation's result.

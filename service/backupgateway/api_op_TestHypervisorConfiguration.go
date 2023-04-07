@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Tests your hypervisor configuration to validate that backup gateway can
-// connect with the hypervisor and its resources.
+// Tests your hypervisor configuration to validate that backup gateway can connect
+// with the hypervisor and its resources.
 func (c *Client) TestHypervisorConfiguration(ctx context.Context, params *TestHypervisorConfigurationInput, optFns ...func(*Options)) (*TestHypervisorConfigurationOutput, error) {
 	if params == nil {
 		params = &TestHypervisorConfigurationInput{}

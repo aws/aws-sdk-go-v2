@@ -41,8 +41,8 @@ type DeleteObjectsOnCancelInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// A list of VirtualObject structures, which indicates the Amazon S3 objects to
-	// be deleted if the transaction cancels.
+	// A list of VirtualObject structures, which indicates the Amazon S3 objects to be
+	// deleted if the transaction cancels.
 	//
 	// This member is required.
 	Objects []types.VirtualObject
@@ -57,8 +57,8 @@ type DeleteObjectsOnCancelInput struct {
 	// This member is required.
 	TransactionId *string
 
-	// The Glue data catalog that contains the governed table. Defaults to the
-	// current account ID.
+	// The Glue data catalog that contains the governed table. Defaults to the current
+	// account ID.
 	CatalogId *string
 
 	noSmithyDocumentSerde

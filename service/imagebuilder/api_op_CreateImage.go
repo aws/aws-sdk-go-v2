@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new image. This request will create a new image along with all of
-// the configured output resources defined in the distribution configuration. You
-// must specify exactly one recipe for your image, using either a
-// ContainerRecipeArn or an ImageRecipeArn.
+// Creates a new image. This request will create a new image along with all of the
+// configured output resources defined in the distribution configuration. You must
+// specify exactly one recipe for your image, using either a ContainerRecipeArn or
+// an ImageRecipeArn.
 func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optFns ...func(*Options)) (*CreateImageOutput, error) {
 	if params == nil {
 		params = &CreateImageInput{}
@@ -38,8 +38,8 @@ type CreateImageInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the infrastructure configuration that
-	// defines the environment in which your image will be built and tested.
+	// The Amazon Resource Name (ARN) of the infrastructure configuration that defines
+	// the environment in which your image will be built and tested.
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string

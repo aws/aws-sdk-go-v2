@@ -34,8 +34,7 @@ type DeleteTimelineEventInput struct {
 	// This member is required.
 	EventId *string
 
-	// The Amazon Resource Name (ARN) of the incident that includes the timeline
-	// event.
+	// The Amazon Resource Name (ARN) of the incident that includes the timeline event.
 	//
 	// This member is required.
 	IncidentRecordArn *string

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a list of custom language models that match the specified criteria.
-// If no criteria are specified, all custom language models are returned. To get
+// Provides a list of custom language models that match the specified criteria. If
+// no criteria are specified, all custom language models are returned. To get
 // detailed information about a specific custom language model, use the operation.
 func (c *Client) ListLanguageModels(ctx context.Context, params *ListLanguageModelsInput, optFns ...func(*Options)) (*ListLanguageModelsOutput, error) {
 	if params == nil {
@@ -32,21 +32,20 @@ func (c *Client) ListLanguageModels(ctx context.Context, params *ListLanguageMod
 
 type ListLanguageModelsInput struct {
 
-	// The maximum number of custom language models to return in each page of
-	// results. If there are fewer results than the value that you specify, only the
-	// actual results are returned. If you don't specify a value, a default of 5 is
-	// used.
+	// The maximum number of custom language models to return in each page of results.
+	// If there are fewer results than the value that you specify, only the actual
+	// results are returned. If you don't specify a value, a default of 5 is used.
 	MaxResults *int32
 
 	// Returns only the custom language models that contain the specified string. The
 	// search is not case sensitive.
 	NameContains *string
 
-	// If your ListLanguageModels  request returns more results than can be displayed,
-	// NextTokenis displayed in the response with an associated string. To get the
+	// If your ListLanguageModels request returns more results than can be displayed,
+	// NextToken is displayed in the response with an associated string. To get the
 	// next page of results, copy this string and repeat your request, including
-	// NextTokenwith the value of the copied string. Repeat as needed to view all
-	// your results.
+	// NextToken with the value of the copied string. Repeat as needed to view all your
+	// results.
 	NextToken *string
 
 	// Returns only custom language models with the specified status. Language models
@@ -63,9 +62,9 @@ type ListLanguageModelsOutput struct {
 	// specified in your request.
 	Models []types.LanguageModel
 
-	// If NextToken is present in your response, it indicates that not all results
-	// are displayed. To view the next set of results, copy the string associated with
-	// the NextToken parameter in your results output, then run your request again
+	// If NextToken is present in your response, it indicates that not all results are
+	// displayed. To view the next set of results, copy the string associated with the
+	// NextToken parameter in your results output, then run your request again
 	// including NextToken with the value of the copied string. Repeat as needed to
 	// view all your results.
 	NextToken *string
@@ -147,14 +146,13 @@ var _ ListLanguageModelsAPIClient = (*Client)(nil)
 // ListLanguageModelsPaginatorOptions is the paginator options for
 // ListLanguageModels
 type ListLanguageModelsPaginatorOptions struct {
-	// The maximum number of custom language models to return in each page of
-	// results. If there are fewer results than the value that you specify, only the
-	// actual results are returned. If you don't specify a value, a default of 5 is
-	// used.
+	// The maximum number of custom language models to return in each page of results.
+	// If there are fewer results than the value that you specify, only the actual
+	// results are returned. If you don't specify a value, a default of 5 is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

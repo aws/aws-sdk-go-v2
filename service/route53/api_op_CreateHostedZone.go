@@ -22,11 +22,20 @@ import (
 // about charges for hosted zones, see Amazon Route 53 Pricing (http://aws.amazon.com/route53/pricing/)
 // . Note the following:
 //   - You can't create a hosted zone for a top-level domain (TLD) such as .com.
-//   - For public hosted zones, Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see NS and SOA Records that Route 53 Creates for a Hosted Zone (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html) in the Amazon Route 53 Developer Guide. If you want to use the same name servers for multiple public hosted zones, you can optionally associate a reusable delegation set with the hosted zone. See the DelegationSetId element.
-//   - If your domain is registered with a registrar other than Route 53, you must update the name servers with your registrar to make Route 53 the DNS service for the domain. For more information, see Migrating DNS Service for an Existing Domain to Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html) in the Amazon Route 53 Developer Guide.
+//   - For public hosted zones, Route 53 automatically creates a default SOA
+//     record and four NS records for the zone. For more information about SOA and NS
+//     records, see NS and SOA Records that Route 53 Creates for a Hosted Zone (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html)
+//     in the Amazon Route 53 Developer Guide. If you want to use the same name servers
+//     for multiple public hosted zones, you can optionally associate a reusable
+//     delegation set with the hosted zone. See the DelegationSetId element.
+//   - If your domain is registered with a registrar other than Route 53, you must
+//     update the name servers with your registrar to make Route 53 the DNS service for
+//     the domain. For more information, see Migrating DNS Service for an Existing
+//     Domain to Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html)
+//     in the Amazon Route 53 Developer Guide.
 //
 // When you submit a CreateHostedZone request, the initial status of the hosted
-// zone is PENDING. For public hosted zones, this means that the NS and SOA
+// zone is PENDING . For public hosted zones, this means that the NS and SOA
 // records are not yet available on all Route 53 DNS servers. When the NS and SOA
 // records are available, the status of the zone changes to INSYNC . The
 // CreateHostedZone request requires the caller to have an ec2:DescribeVpcs
@@ -38,8 +47,7 @@ import (
 //   - aws-cn - China Regions
 //   - aws-us-gov - Amazon Web Services GovCloud (US) Region
 //
-// For more
-// information, see Access Management (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+// For more information, see Access Management (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 // in the Amazon Web Services General Reference.
 func (c *Client) CreateHostedZone(ctx context.Context, params *CreateHostedZoneInput, optFns ...func(*Options)) (*CreateHostedZoneOutput, error) {
 	if params == nil {
@@ -61,9 +69,9 @@ func (c *Client) CreateHostedZone(ctx context.Context, params *CreateHostedZoneI
 type CreateHostedZoneInput struct {
 
 	// A unique string that identifies the request and that allows failed
-	// CreateHostedZonerequests to be retried without the risk of executing the
+	// CreateHostedZone requests to be retried without the risk of executing the
 	// operation twice. You must use a unique CallerReference string every time you
-	// submit a CreateHostedZone  request. CallerReference can be any unique string,
+	// submit a CreateHostedZone request. CallerReference can be any unique string,
 	// for example, a date/time stamp.
 	//
 	// This member is required.
@@ -76,7 +84,7 @@ type CreateHostedZoneInput struct {
 	// identical. If you're creating a public hosted zone, this is the name you have
 	// registered with your DNS registrar. If your domain name is registered with a
 	// registrar other than Route 53, change the name servers for your domain to the
-	// set of NameServers  that CreateHostedZone  returns in DelegationSet .
+	// set of NameServers that CreateHostedZone returns in DelegationSet .
 	//
 	// This member is required.
 	Name *string
@@ -89,19 +97,17 @@ type CreateHostedZoneInput struct {
 	DelegationSetId *string
 
 	// (Optional) A complex type that contains the following optional values:
-	//     - For public and private hosted zones, an optional comment
-	//     - For private hosted zones, an optional PrivateZone element
-	// If you don't
-	// specify a comment or the PrivateZone  element, omit HostedZoneConfig and the
-	// other elements.
+	//   - For public and private hosted zones, an optional comment
+	//   - For private hosted zones, an optional PrivateZone element
+	// If you don't specify a comment or the PrivateZone element, omit HostedZoneConfig
+	// and the other elements.
 	HostedZoneConfig *types.HostedZoneConfig
 
 	// (Private hosted zones only) A complex type that contains information about the
 	// Amazon VPC that you're associating with this hosted zone. You can specify only
 	// one Amazon VPC when you create a private hosted zone. If you are associating a
-	// VPC with a hosted zone with this request, the paramaters VPCId  and VPCRegion
+	// VPC with a hosted zone with this request, the paramaters VPCId and VPCRegion
 	// are also required. To associate additional Amazon VPCs with the hosted zone, use
-	//
 	// AssociateVPCWithHostedZone (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html)
 	// after you create a hosted zone.
 	VPC *types.VPC
@@ -112,7 +118,7 @@ type CreateHostedZoneInput struct {
 // A complex type containing the response information for the hosted zone.
 type CreateHostedZoneOutput struct {
 
-	// A complex type that contains information about the CreateHostedZone  request.
+	// A complex type that contains information about the CreateHostedZone request.
 	//
 	// This member is required.
 	ChangeInfo *types.ChangeInfo

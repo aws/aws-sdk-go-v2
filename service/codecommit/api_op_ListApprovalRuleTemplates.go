@@ -47,8 +47,8 @@ type ListApprovalRuleTemplatesOutput struct {
 	// AWS account.
 	ApprovalRuleTemplateNames []string
 
-	// An enumeration token that allows the operation to batch the next results of
-	// the operation.
+	// An enumeration token that allows the operation to batch the next results of the
+	// operation.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -131,8 +131,8 @@ type ListApprovalRuleTemplatesPaginatorOptions struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

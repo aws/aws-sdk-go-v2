@@ -25,19 +25,25 @@ import (
 // . When this operation sets the tags for a bucket, it will overwrite any current
 // tags the bucket already has. You cannot use this operation to add tags to an
 // existing list of tags. To use this operation, you must have permissions to
-// perform the s3:PutBucketTagging action. The bucket owner has this permission
-// by default and can grant this permission to others. For more information about
+// perform the s3:PutBucketTagging action. The bucket owner has this permission by
+// default and can grant this permission to others. For more information about
 // permissions, see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
-// . PutBucketTagging  has the following special errors:
+// . PutBucketTagging has the following special errors:
 //   - Error code: InvalidTagError
-//   - Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see User-Defined Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html) and Amazon Web Services-Generated Cost Allocation Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html) .
+//   - Description: The tag provided was not a valid tag. This error can occur if
+//     the tag did not pass input validation. For information about tag restrictions,
+//     see User-Defined Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
+//     and Amazon Web Services-Generated Cost Allocation Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html)
+//     .
 //   - Error code: MalformedXMLError
 //   - Description: The XML provided does not match the schema.
 //   - Error code: OperationAbortedError
-//   - Description: A conflicting conditional action is currently in progress against this resource. Please try again.
+//   - Description: A conflicting conditional action is currently in progress
+//     against this resource. Please try again.
 //   - Error code: InternalError
-//   - Description: The service was unable to apply the provided tag to the bucket.
+//   - Description: The service was unable to apply the provided tag to the
+//     bucket.
 //
 // The following operations are related to PutBucketTagging :
 //   - GetBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html)
@@ -64,7 +70,7 @@ type PutBucketTaggingInput struct {
 	// This member is required.
 	Bucket *string
 
-	// Container for the TagSet  and Tag  elements.
+	// Container for the TagSet and Tag elements.
 	//
 	// This member is required.
 	Tagging *types.Tagging
@@ -76,7 +82,7 @@ type PutBucketTaggingInput struct {
 	// HTTP status code 400 Bad Request . For more information, see Checking object
 	// integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide. If you provide an individual checksum, Amazon S3
-	// ignores any provided ChecksumAlgorithm  parameter.
+	// ignores any provided ChecksumAlgorithm parameter.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	// The base64-encoded 128-bit MD5 digest of the data. You must use this header as
@@ -208,9 +214,9 @@ func addPutBucketTaggingInputChecksumMiddlewares(stack *middleware.Stack, option
 	})
 }
 
-// getPutBucketTaggingBucketMember returns a pointer to string denoting a
-// provided bucket member valueand a boolean indicating if the input has a modeled
-// bucket name,
+// getPutBucketTaggingBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
 func getPutBucketTaggingBucketMember(input interface{}) (*string, bool) {
 	in := input.(*PutBucketTaggingInput)
 	if in.Bucket == nil {

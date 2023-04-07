@@ -51,7 +51,7 @@ type ListCustomLineItemVersionsInput struct {
 
 type ListCustomLineItemVersionsOutput struct {
 
-	// A list of CustomLineItemVersionListElements  that are received.
+	// A list of CustomLineItemVersionListElements that are received.
 	CustomLineItemVersions []types.CustomLineItemVersionListElement
 
 	// The pagination token that's used on subsequent calls to retrieve custom line
@@ -141,8 +141,8 @@ type ListCustomLineItemVersionsPaginatorOptions struct {
 	// The maximum number of custom line item versions to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

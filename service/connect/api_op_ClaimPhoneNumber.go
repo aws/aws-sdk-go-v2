@@ -19,8 +19,7 @@ import (
 // and Claim phone numbers to traffic distribution groups (https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html)
 // in the Amazon Connect Administrator Guide. You can call the
 // SearchAvailablePhoneNumbers (https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html)
-// API for available phone numbers that you can claim. Call the
-// DescribePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
+// API for available phone numbers that you can claim. Call the DescribePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
 // API to verify the status of a previous ClaimPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html)
 // operation.
 func (c *Client) ClaimPhoneNumber(ctx context.Context, params *ClaimPhoneNumberInput, optFns ...func(*Options)) (*ClaimPhoneNumberOutput, error) {

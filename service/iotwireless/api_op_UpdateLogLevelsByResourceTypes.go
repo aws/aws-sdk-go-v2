@@ -31,9 +31,9 @@ func (c *Client) UpdateLogLevelsByResourceTypes(ctx context.Context, params *Upd
 
 type UpdateLogLevelsByResourceTypesInput struct {
 
-	// The log level for a log message. The log levels can be disabled, or set to
-	// ERROR to display less verbose logs containing only error information, or to
-	// INFO for more detailed logs.
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
 	DefaultLogLevel types.LogLevel
 
 	// The list of wireless device log options.

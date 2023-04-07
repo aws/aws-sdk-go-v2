@@ -61,11 +61,11 @@ type PutMethodResponseInput struct {
 	// match the pattern of method.response.header.{name} , where name is a valid and
 	// unique header name. The response parameter names defined here are available in
 	// the integration response to be mapped from an integration response header
-	// expressed in integration.response.header.{name}, a static value enclosed
-	// within a pair of single quotes (e.g., 'application/json'), or a JSON
-	// expression from the back-end response payload in the form of
+	// expressed in integration.response.header.{name} , a static value enclosed within
+	// a pair of single quotes (e.g., 'application/json' ), or a JSON expression from
+	// the back-end response payload in the form of
 	// integration.response.body.{JSON-expression} , where JSON-expression is a valid
-	// JSON expression without the $  prefix.)
+	// JSON expression without the $ prefix.)
 	ResponseParameters map[string]bool
 
 	noSmithyDocumentSerde
@@ -89,11 +89,11 @@ type PutMethodResponseOutput struct {
 	// API Gateway passes certain integration response data to the method response
 	// headers specified here according to the mapping you prescribe in the API's
 	// IntegrationResponse. The integration response data that can be mapped include an
-	// integration response header expressed in integration.response.header.{name}, a
+	// integration response header expressed in integration.response.header.{name} , a
 	// static value enclosed within a pair of single quotes (e.g., 'application/json'
 	// ), or a JSON expression from the back-end response payload in the form of
 	// integration.response.body.{JSON-expression} , where JSON-expression is a valid
-	// JSON expression without the $  prefix.)
+	// JSON expression without the $ prefix.)
 	ResponseParameters map[string]bool
 
 	// The method response's status code.

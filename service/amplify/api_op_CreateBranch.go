@@ -99,8 +99,8 @@ type CreateBranchInput struct {
 // The result structure for create branch request.
 type CreateBranchOutput struct {
 
-	// Describes the branch for an Amplify app, which maps to a third-party
-	// repository branch.
+	// Describes the branch for an Amplify app, which maps to a third-party repository
+	// branch.
 	//
 	// This member is required.
 	Branch *types.Branch

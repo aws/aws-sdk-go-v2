@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Aggregates on indexed data with search queries pertaining to particular
-// fields. Requires permission to access the GetBucketsAggregation (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Aggregates on indexed data with search queries pertaining to particular fields.
+// Requires permission to access the GetBucketsAggregation (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) GetBucketsAggregation(ctx context.Context, params *GetBucketsAggregationInput, optFns ...func(*Options)) (*GetBucketsAggregationOutput, error) {
 	if params == nil {
@@ -59,7 +59,7 @@ type GetBucketsAggregationInput struct {
 type GetBucketsAggregationOutput struct {
 
 	// The main part of the response with a list of buckets. Each bucket contains a
-	// keyValue and a count . keyValue: The aggregation field value counted for the
+	// keyValue and a count . keyValue : The aggregation field value counted for the
 	// particular bucket. count : The number of documents that have that value.
 	Buckets []types.Bucket
 

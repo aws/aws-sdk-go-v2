@@ -55,7 +55,7 @@ type ListSnapshotsOutput struct {
 	NextToken *string
 
 	// A list of snapshot summaries. You can use the returned snapshot IDs in the
-	// UpdateSnapshot and GetSnapshot  operations.
+	// UpdateSnapshot and GetSnapshot operations.
 	Snapshots []types.SnapshotSummary
 
 	// Metadata pertaining to the operation's result.
@@ -140,8 +140,8 @@ type ListSnapshotsPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

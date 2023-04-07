@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a system instance. Only system instances that have never been
-// deployed, or that have been undeployed can be deleted. Users can create a new
-// system instance that has the same ID as a deleted system instance.
+// Deletes a system instance. Only system instances that have never been deployed,
+// or that have been undeployed can be deleted. Users can create a new system
+// instance that has the same ID as a deleted system instance.
 //
 // Deprecated: since: 2022-08-30
 func (c *Client) DeleteSystemInstance(ctx context.Context, params *DeleteSystemInstanceInput, optFns ...func(*Options)) (*DeleteSystemInstanceOutput, error) {

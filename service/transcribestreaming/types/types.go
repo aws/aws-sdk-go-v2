@@ -36,9 +36,9 @@ type AudioEvent struct {
 	noSmithyDocumentSerde
 }
 
-// An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2
-// or WebSocket data frames. For more information, see Transcribing streaming
-// audio (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html) .
+// An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or
+// WebSocket data frames. For more information, see Transcribing streaming audio (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html)
+// .
 //
 // The following types satisfy this interface:
 //
@@ -89,11 +89,11 @@ type CallAnalyticsEntity struct {
 	// The word or words that represent the identified entity.
 	Content *string
 
-	// The time, in milliseconds, from the beginning of the audio stream to the end
-	// of the identified entity.
+	// The time, in milliseconds, from the beginning of the audio stream to the end of
+	// the identified entity.
 	EndOffsetMillis *int64
 
-	// The type of PII identified. For example, NAME  or CREDIT_DEBIT_NUMBER .
+	// The type of PII identified. For example, NAME or CREDIT_DEBIT_NUMBER .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -117,21 +117,21 @@ type CallAnalyticsItem struct {
 	// The word or punctuation that was transcribed.
 	Content *string
 
-	// The time, in milliseconds, from the beginning of the audio stream to the end
-	// of the identified item.
+	// The time, in milliseconds, from the beginning of the audio stream to the end of
+	// the identified item.
 	EndOffsetMillis *int64
 
 	// If partial result stabilization is enabled, Stable indicates whether the
-	// specified item is stable ( true) or if it may change when the segment is
+	// specified item is stable ( true ) or if it may change when the segment is
 	// complete ( false ).
 	Stable *bool
 
-	// The type of item identified. Options are: PRONUNCIATION  (spoken words) and
+	// The type of item identified. Options are: PRONUNCIATION (spoken words) and
 	// PUNCTUATION .
 	Type ItemType
 
 	// Indicates whether the specified item matches a word in the vocabulary filter
-	// included in your Call Analytics request. If true, there is a vocabulary filter
+	// included in your Call Analytics request. If true , there is a vocabulary filter
 	// match.
 	VocabularyFilterMatch bool
 
@@ -139,7 +139,7 @@ type CallAnalyticsItem struct {
 }
 
 // Contains detailed information about your Call Analytics streaming session.
-// These details are provided in the UtteranceEvent  and CategoryEvent  objects.
+// These details are provided in the UtteranceEvent and CategoryEvent objects.
 //
 // The following types satisfy this interface:
 //
@@ -149,8 +149,8 @@ type CallAnalyticsTranscriptResultStream interface {
 	isCallAnalyticsTranscriptResultStream()
 }
 
-// Provides information on matched categories that were used to generate
-// real-time supervisor alerts.
+// Provides information on matched categories that were used to generate real-time
+// supervisor alerts.
 type CallAnalyticsTranscriptResultStreamMemberCategoryEvent struct {
 	Value CategoryEvent
 
@@ -181,8 +181,8 @@ type CategoryEvent struct {
 	// Lists the categories that were matched in your audio segment.
 	MatchedCategories []string
 
-	// Contains information about the matched categories, including category names
-	// and timestamps.
+	// Contains information about the matched categories, including category names and
+	// timestamps.
 	MatchedDetails map[string]PointsOfInterest
 
 	noSmithyDocumentSerde
@@ -190,8 +190,8 @@ type CategoryEvent struct {
 
 // Makes it possible to specify which speaker is on which audio channel. For
 // example, if your agent is the first participant to speak, you would set
-// ChannelId to 0  (to indicate the first channel) and ParticipantRole  to AGENT
-// (to indicate that it's the agent speaking).
+// ChannelId to 0 (to indicate the first channel) and ParticipantRole to AGENT (to
+// indicate that it's the agent speaking).
 type ChannelDefinition struct {
 
 	// Specify the audio channel you want to define.
@@ -218,9 +218,9 @@ type CharacterOffsets struct {
 	// category match in a segment transcript.
 	Begin *int32
 
-	// Provides the character count of the last character where a match is
-	// identified. For example, the last character associated with an issue or a
-	// category match in a segment transcript.
+	// Provides the character count of the last character where a match is identified.
+	// For example, the last character associated with an issue or a category match in
+	// a segment transcript.
 	End *int32
 
 	noSmithyDocumentSerde
@@ -264,7 +264,7 @@ type Entity struct {
 	// The start time, in milliseconds, of the utterance that was identified as PII.
 	StartTime float64
 
-	// The type of PII identified. For example, NAME  or CREDIT_DEBIT_NUMBER .
+	// The type of PII identified. For example, NAME or CREDIT_DEBIT_NUMBER .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -297,19 +297,19 @@ type Item struct {
 	// The end time, in milliseconds, of the transcribed item.
 	EndTime float64
 
-	// If speaker partitioning is enabled, Speaker labels the speaker of the
-	// specified item.
+	// If speaker partitioning is enabled, Speaker labels the speaker of the specified
+	// item.
 	Speaker *string
 
 	// If partial result stabilization is enabled, Stable indicates whether the
-	// specified item is stable ( true) or if it may change when the segment is
+	// specified item is stable ( true ) or if it may change when the segment is
 	// complete ( false ).
 	Stable *bool
 
 	// The start time, in milliseconds, of the transcribed item.
 	StartTime float64
 
-	// The type of item identified. Options are: PRONUNCIATION  (spoken words) and
+	// The type of item identified. Options are: PRONUNCIATION (spoken words) and
 	// PUNCTUATION .
 	Type ItemType
 
@@ -323,7 +323,7 @@ type Item struct {
 // The language code that represents the language identified in your audio,
 // including the associated confidence score. If you enabled channel identification
 // in your request and each channel contained a different language, you will have
-// more than one LanguageWithScore  result.
+// more than one LanguageWithScore result.
 type LanguageWithScore struct {
 
 	// The language code of the identified language.
@@ -397,22 +397,22 @@ type MedicalItem struct {
 	// The end time, in milliseconds, of the transcribed item.
 	EndTime float64
 
-	// If speaker partitioning is enabled, Speaker labels the speaker of the
-	// specified item.
+	// If speaker partitioning is enabled, Speaker labels the speaker of the specified
+	// item.
 	Speaker *string
 
 	// The start time, in milliseconds, of the transcribed item.
 	StartTime float64
 
-	// The type of item identified. Options are: PRONUNCIATION  (spoken words) and
+	// The type of item identified. Options are: PRONUNCIATION (spoken words) and
 	// PUNCTUATION .
 	Type ItemType
 
 	noSmithyDocumentSerde
 }
 
-// The Result  associated with a . Contains a set of transcription results from
-// one or more audio segments, along with additional information per your request
+// The Result associated with a . Contains a set of transcription results from one
+// or more audio segments, along with additional information per your request
 // parameters. This can include information relating to alternative transcriptions,
 // channel identification, partial result stabilization, language identification,
 // and other transcription-related data.
@@ -428,8 +428,8 @@ type MedicalResult struct {
 	// The end time, in milliseconds, of the Result .
 	EndTime float64
 
-	// Indicates if the segment is complete. If IsPartial  is true, the segment is
-	// not complete. If IsPartial  is false , the segment is complete.
+	// Indicates if the segment is complete. If IsPartial is true , the segment is not
+	// complete. If IsPartial is false , the segment is complete.
 	IsPartial bool
 
 	// Provides a unique identifier for the Result .
@@ -441,8 +441,8 @@ type MedicalResult struct {
 	noSmithyDocumentSerde
 }
 
-// The MedicalTranscript  associated with a . MedicalTranscript  contains Results
-// , which contains a set of transcription results from one or more audio segments,
+// The MedicalTranscript associated with a . MedicalTranscript contains Results ,
+// which contains a set of transcription results from one or more audio segments,
 // along with additional information per your request parameters.
 type MedicalTranscript struct {
 
@@ -456,12 +456,12 @@ type MedicalTranscript struct {
 	noSmithyDocumentSerde
 }
 
-// The MedicalTranscriptEvent  associated with a MedicalTranscriptResultStream.
+// The MedicalTranscriptEvent associated with a MedicalTranscriptResultStream .
 // Contains a set of transcription results from one or more audio segments, along
 // with additional information per your request parameters.
 type MedicalTranscriptEvent struct {
 
-	// Contains Results, which contains a set of transcription results from one or
+	// Contains Results , which contains a set of transcription results from one or
 	// more audio segments, along with additional information per your request
 	// parameters. This can include information relating to alternative transcriptions,
 	// channel identification, partial result stabilization, language identification,
@@ -480,7 +480,7 @@ type MedicalTranscriptResultStream interface {
 	isMedicalTranscriptResultStream()
 }
 
-// The MedicalTranscriptEvent  associated with a MedicalTranscriptResultStream.
+// The MedicalTranscriptEvent associated with a MedicalTranscriptResultStream .
 // Contains a set of transcription results from one or more audio segments, along
 // with additional information per your request parameters. This can include
 // information relating to alternative transcriptions, channel identification,
@@ -507,7 +507,6 @@ type PointsOfInterest struct {
 // Allows you to specify additional settings for your streaming Call Analytics
 // post-call request, including output locations for your redacted and unredacted
 // transcript, which IAM role to use, and, optionally, which encryption key to use.
-//
 // ContentRedactionOutput , DataAccessRoleArn , and OutputLocation are required
 // fields.
 type PostCallAnalyticsSettings struct {
@@ -526,9 +525,9 @@ type PostCallAnalyticsSettings struct {
 	// The Amazon S3 location where you want your Call Analytics post-call
 	// transcription output stored. You can use any of the following formats to specify
 	// the output location:
-	//     - s3://DOC-EXAMPLE-BUCKET
-	//     - s3://DOC-EXAMPLE-BUCKET/my-output-folder/
-	//     - s3://DOC-EXAMPLE-BUCKET/my-output-folder/my-call-analytics-job.json
+	//   - s3://DOC-EXAMPLE-BUCKET
+	//   - s3://DOC-EXAMPLE-BUCKET/my-output-folder/
+	//   - s3://DOC-EXAMPLE-BUCKET/my-output-folder/my-call-analytics-job.json
 	//
 	// This member is required.
 	OutputLocation *string
@@ -540,20 +539,23 @@ type PostCallAnalyticsSettings struct {
 	// redaction ( ContentRedactionType ).
 	ContentRedactionOutput ContentRedactionOutput
 
-	// The KMS key you want to use to encrypt your Call Analytics post-call output.
-	// If using a key located in the current Amazon Web Services account, you can
-	// specify your KMS key in one of four ways:
-	//     - Use the KMS key ID itself. For example, 1234abcd-12ab-34cd-56ef-1234567890ab .
-	//     - Use an alias for the KMS key ID. For example, alias/ExampleAlias .
-	//     - Use the Amazon Resource Name (ARN) for the KMS key ID. For example, arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
-	//     - Use the ARN for the KMS key alias. For example, arn:aws:kms:region:account-ID:alias/ExampleAlias .
-	//
+	// The KMS key you want to use to encrypt your Call Analytics post-call output. If
+	// using a key located in the current Amazon Web Services account, you can specify
+	// your KMS key in one of four ways:
+	//   - Use the KMS key ID itself. For example, 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   .
+	//   - Use an alias for the KMS key ID. For example, alias/ExampleAlias .
+	//   - Use the Amazon Resource Name (ARN) for the KMS key ID. For example,
+	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//   - Use the ARN for the KMS key alias. For example,
+	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
 	// If using a key located in a different Amazon Web Services account than the
 	// current Amazon Web Services account, you can specify your KMS key in one of two
 	// ways:
-	//     - Use the ARN for the KMS key ID. For example, arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
-	//     - Use the ARN for the KMS key alias. For example, arn:aws:kms:region:account-ID:alias/ExampleAlias .
-	//
+	//   - Use the ARN for the KMS key ID. For example,
+	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//   - Use the ARN for the KMS key alias. For example,
+	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
 	// Note that the user making the request must have permission to use the specified
 	// KMS key.
 	OutputEncryptionKMSKeyId *string
@@ -561,8 +563,8 @@ type PostCallAnalyticsSettings struct {
 	noSmithyDocumentSerde
 }
 
-// The Result  associated with a . Contains a set of transcription results from
-// one or more audio segments, along with additional information per your request
+// The Result associated with a . Contains a set of transcription results from one
+// or more audio segments, along with additional information per your request
 // parameters. This can include information relating to alternative transcriptions,
 // channel identification, partial result stabilization, language identification,
 // and other transcription-related data.
@@ -578,8 +580,8 @@ type Result struct {
 	// The end time, in milliseconds, of the Result .
 	EndTime float64
 
-	// Indicates if the segment is complete. If IsPartial  is true, the segment is
-	// not complete. If IsPartial  is false , the segment is complete.
+	// Indicates if the segment is complete. If IsPartial is true , the segment is not
+	// complete. If IsPartial is false , the segment is complete.
 	IsPartial bool
 
 	// The language code that represents the language spoken in your audio stream.
@@ -607,16 +609,16 @@ type TimestampRange struct {
 	// of the category match.
 	BeginOffsetMillis *int64
 
-	// The time, in milliseconds, from the beginning of the audio stream to the end
-	// of the category match.
+	// The time, in milliseconds, from the beginning of the audio stream to the end of
+	// the category match.
 	EndOffsetMillis *int64
 
 	noSmithyDocumentSerde
 }
 
-// The Transcript  associated with a . Transcript  contains Results, which
-// contains a set of transcription results from one or more audio segments, along
-// with additional information per your request parameters.
+// The Transcript associated with a . Transcript contains Results , which contains
+// a set of transcription results from one or more audio segments, along with
+// additional information per your request parameters.
 type Transcript struct {
 
 	// Contains a set of transcription results from one or more audio segments, along
@@ -629,12 +631,12 @@ type Transcript struct {
 	noSmithyDocumentSerde
 }
 
-// The TranscriptEvent  associated with a TranscriptResultStream. Contains a set
-// of transcription results from one or more audio segments, along with additional
+// The TranscriptEvent associated with a TranscriptResultStream . Contains a set of
+// transcription results from one or more audio segments, along with additional
 // information per your request parameters.
 type TranscriptEvent struct {
 
-	// Contains Results, which contains a set of transcription results from one or
+	// Contains Results , which contains a set of transcription results from one or
 	// more audio segments, along with additional information per your request
 	// parameters. This can include information relating to alternative transcriptions,
 	// channel identification, partial result stabilization, language identification,
@@ -682,7 +684,7 @@ type UtteranceEvent struct {
 	// your transcription output.
 	Entities []CallAnalyticsEntity
 
-	// Indicates whether the segment in the UtteranceEvent  is complete ( FALSE) or
+	// Indicates whether the segment in the UtteranceEvent is complete ( FALSE ) or
 	// partial ( TRUE ).
 	IsPartial bool
 
@@ -693,7 +695,7 @@ type UtteranceEvent struct {
 	// specified UtteranceEvent .
 	Items []CallAnalyticsItem
 
-	// Provides the role of the speaker for each audio channel, either CUSTOMER  or
+	// Provides the role of the speaker for each audio channel, either CUSTOMER or
 	// AGENT .
 	ParticipantRole ParticipantRole
 

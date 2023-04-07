@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the profile. A profile is configuration resource to list the roles
-// that RolesAnywhere service is trusted to assume. In addition, by applying a
-// profile you can scope-down permissions with IAM managed policies. Required
-// permissions: rolesanywhere:UpdateProfile .
+// Updates the profile. A profile is configuration resource to list the roles that
+// RolesAnywhere service is trusted to assume. In addition, by applying a profile
+// you can scope-down permissions with IAM managed policies. Required permissions:
+// rolesanywhere:UpdateProfile .
 func (c *Client) UpdateProfile(ctx context.Context, params *UpdateProfileInput, optFns ...func(*Options)) (*UpdateProfileOutput, error) {
 	if params == nil {
 		params = &UpdateProfileInput{}

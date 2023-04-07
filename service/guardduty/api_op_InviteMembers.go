@@ -57,8 +57,8 @@ type InviteMembersInput struct {
 
 type InviteMembersOutput struct {
 
-	// A list of objects that contain the unprocessed account and a result string
-	// that explains why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string that
+	// explains why it was unprocessed.
 	//
 	// This member is required.
 	UnprocessedAccounts []types.UnprocessedAccount

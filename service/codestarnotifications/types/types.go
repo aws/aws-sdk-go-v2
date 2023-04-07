@@ -44,8 +44,8 @@ type ListEventTypesFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a filter to apply to the list of returned notification
-// rules. You can filter by event type, owner, resource, or target.
+// Information about a filter to apply to the list of returned notification rules.
+// You can filter by event type, owner, resource, or target.
 type ListNotificationRulesFilter struct {
 
 	// The name of the attribute you want to use to filter the returned notification
@@ -67,7 +67,7 @@ type ListNotificationRulesFilter struct {
 // Information about a filter to apply to the list of returned targets. You can
 // filter by target type, address, or status. For example, to filter results to
 // notification rules that have active Chatbot topics as targets, you could specify
-// a ListTargetsFilter Name as TargetType  and a Value of SNS , and a Name of
+// a ListTargetsFilter Name as TargetType and a Value of SNS , and a Name of
 // TARGET_STATUS and a Value of ACTIVE .
 type ListTargetsFilter struct {
 
@@ -106,8 +106,8 @@ type Target struct {
 	TargetAddress *string
 
 	// The target type. Can be an Chatbot topic or Chatbot client.
-	//     - Chatbot topics are specified as SNS .
-	//     - Chatbot clients are specified as AWSChatbotSlack .
+	//   - Chatbot topics are specified as SNS .
+	//   - Chatbot clients are specified as AWSChatbotSlack .
 	TargetType *string
 
 	noSmithyDocumentSerde
@@ -123,8 +123,8 @@ type TargetSummary struct {
 	TargetStatus TargetStatus
 
 	// The type of the target (for example, SNS ).
-	//     - Chatbot topics are specified as SNS .
-	//     - Chatbot clients are specified as AWSChatbotSlack .
+	//   - Chatbot topics are specified as SNS .
+	//   - Chatbot clients are specified as AWSChatbotSlack .
 	TargetType *string
 
 	noSmithyDocumentSerde

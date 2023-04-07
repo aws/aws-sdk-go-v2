@@ -10,9 +10,9 @@ const (
 	AdminStatusDisableInProgress AdminStatus = "DISABLE_IN_PROGRESS"
 )
 
-// Values returns all known values for AdminStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AdminStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AdminStatus) Values() []AdminStatus {
 	return []AdminStatus{
 		"ENABLED",
@@ -123,9 +123,9 @@ const (
 	ControlFindingGeneratorSecurityControl ControlFindingGenerator = "SECURITY_CONTROL"
 )
 
-// Values returns all known values for ControlFindingGenerator. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ControlFindingGenerator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ControlFindingGenerator) Values() []ControlFindingGenerator {
 	return []ControlFindingGenerator{
 		"STANDARD_CONTROL",
@@ -228,9 +228,9 @@ const (
 	MalwareTypeWorm                MalwareType = "WORM"
 )
 
-// Values returns all known values for MalwareType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MalwareType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MalwareType) Values() []MalwareType {
 	return []MalwareType{
 		"ADWARE",
@@ -315,9 +315,9 @@ const (
 	RecordStateArchived RecordState = "ARCHIVED"
 )
 
-// Values returns all known values for RecordState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RecordState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RecordState) Values() []RecordState {
 	return []RecordState{
 		"ACTIVE",
@@ -544,8 +544,8 @@ const (
 	UnprocessedErrorCodeLimitExceeded UnprocessedErrorCode = "LIMIT_EXCEEDED"
 )
 
-// Values returns all known values for UnprocessedErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for UnprocessedErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (UnprocessedErrorCode) Values() []UnprocessedErrorCode {
 	return []UnprocessedErrorCode{

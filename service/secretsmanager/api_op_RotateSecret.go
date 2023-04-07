@@ -19,12 +19,12 @@ import (
 // rotation. If you don't include the configuration parameters, the operation
 // starts a rotation with the values already stored in the secret. When rotation is
 // successful, the AWSPENDING staging label might be attached to the same version
-// as the AWSCURRENT  version, or it might not be attached to any version. If the
+// as the AWSCURRENT version, or it might not be attached to any version. If the
 // AWSPENDING staging label is present but not attached to the same version as
 // AWSCURRENT , then any later invocation of RotateSecret assumes that a previous
 // rotation request is still in progress and returns an error. When rotation is
-// unsuccessful, the AWSPENDING staging label might be attached to an empty
-// secret version. For more information, see Troubleshoot rotation (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot_rotation.html)
+// unsuccessful, the AWSPENDING staging label might be attached to an empty secret
+// version. For more information, see Troubleshoot rotation (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot_rotation.html)
 // in the Secrets Manager User Guide. Secrets Manager generates a CloudTrail log
 // entry when you call this action. Do not include sensitive information in request
 // parameters because it might be logged. For more information, see Logging
@@ -32,8 +32,8 @@ import (
 // . Required permissions: secretsmanager:RotateSecret . For more information, see
 // IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
-// . You also need lambda:InvokeFunction permissions on the rotation function.
-// For more information, see Permissions for rotation (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html)
+// . You also need lambda:InvokeFunction permissions on the rotation function. For
+// more information, see Permissions for rotation (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html)
 // .
 func (c *Client) RotateSecret(ctx context.Context, params *RotateSecretInput, optFns ...func(*Options)) (*RotateSecretOutput, error) {
 	if params == nil {
@@ -68,19 +68,19 @@ type RotateSecretInput struct {
 	// you can leave this parameter empty. The CLI or SDK generates a random UUID for
 	// you and includes that in the request for this parameter. If you don't use the
 	// SDK and instead generate a raw HTTP request to the Secrets Manager service
-	// endpoint, then you must generate a ClientRequestToken yourself for new
-	// versions and include that value in the request. You only need to specify this
-	// value if you implement your own retry logic and you want to ensure that Secrets
-	// Manager doesn't attempt to create a secret version twice. We recommend that you
-	// generate a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// value to ensure uniqueness within the specified secret.
+	// endpoint, then you must generate a ClientRequestToken yourself for new versions
+	// and include that value in the request. You only need to specify this value if
+	// you implement your own retry logic and you want to ensure that Secrets Manager
+	// doesn't attempt to create a secret version twice. We recommend that you generate
+	// a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier) value to
+	// ensure uniqueness within the specified secret.
 	ClientRequestToken *string
 
 	// Specifies whether to rotate the secret immediately or wait until the next
 	// scheduled rotation window. The rotation schedule is defined in
-	// RotateSecretRequest$RotationRules. For secrets that use a Lambda rotation
+	// RotateSecretRequest$RotationRules . For secrets that use a Lambda rotation
 	// function to rotate, if you don't immediately rotate the secret, Secrets Manager
-	// tests the rotation configuration by running the testSecret  step (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html)
+	// tests the rotation configuration by running the testSecret step (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html)
 	// of the Lambda rotation function. The test creates an AWSPENDING version of the
 	// secret and then removes it. If you don't specify this value, then by default,
 	// Secrets Manager rotates the secret immediately.

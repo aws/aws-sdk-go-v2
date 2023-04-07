@@ -15,8 +15,7 @@ import (
 // Returns the DNS aliases that are associated with the specified Amazon FSx for
 // Windows File Server file system. A history of all DNS aliases that have been
 // associated with and disassociated from the file system is available in the list
-// of AdministrativeAction  provided in the DescribeFileSystems operation
-// response.
+// of AdministrativeAction provided in the DescribeFileSystems operation response.
 func (c *Client) DescribeFileSystemAliases(ctx context.Context, params *DescribeFileSystemAliasesInput, optFns ...func(*Options)) (*DescribeFileSystemAliasesOutput, error) {
 	if params == nil {
 		params = &DescribeFileSystemAliasesInput{}
@@ -32,7 +31,7 @@ func (c *Client) DescribeFileSystemAliases(ctx context.Context, params *Describe
 	return out, nil
 }
 
-// The request object for DescribeFileSystemAliases  operation.
+// The request object for DescribeFileSystemAliases operation.
 type DescribeFileSystemAliasesInput struct {
 
 	// The ID of the file system to return the associated DNS aliases for (String).
@@ -47,8 +46,8 @@ type DescribeFileSystemAliasesInput struct {
 
 	// Maximum number of DNS aliases to return in the response (integer). This
 	// parameter value must be greater than 0. The number of items that Amazon FSx
-	// returns is the minimum of the MaxResults parameter specified in the request
-	// and the service's internal maximum number of items per page.
+	// returns is the minimum of the MaxResults parameter specified in the request and
+	// the service's internal maximum number of items per page.
 	MaxResults *int32
 
 	// Opaque pagination token returned from a previous DescribeFileSystemAliases
@@ -59,7 +58,7 @@ type DescribeFileSystemAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response object for DescribeFileSystemAliases  operation.
+// The response object for DescribeFileSystemAliases operation.
 type DescribeFileSystemAliasesOutput struct {
 
 	// An array of one or more DNS aliases currently associated with the specified
@@ -156,12 +155,12 @@ var _ DescribeFileSystemAliasesAPIClient = (*Client)(nil)
 type DescribeFileSystemAliasesPaginatorOptions struct {
 	// Maximum number of DNS aliases to return in the response (integer). This
 	// parameter value must be greater than 0. The number of items that Amazon FSx
-	// returns is the minimum of the MaxResults parameter specified in the request
-	// and the service's internal maximum number of items per page.
+	// returns is the minimum of the MaxResults parameter specified in the request and
+	// the service's internal maximum number of items per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

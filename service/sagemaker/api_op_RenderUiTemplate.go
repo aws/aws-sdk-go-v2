@@ -35,17 +35,17 @@ type RenderUiTemplateInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// A RenderableTask  object containing a representative task to render.
+	// A RenderableTask object containing a representative task to render.
 	//
 	// This member is required.
 	Task *types.RenderableTask
 
-	// The HumanTaskUiArn  of the worker UI that you want to render. Do not provide a
+	// The HumanTaskUiArn of the worker UI that you want to render. Do not provide a
 	// HumanTaskUiArn if you use the UiTemplate parameter. See a list of available
 	// Human Ui Amazon Resource Names (ARNs) in UiConfig .
 	HumanTaskUiArn *string
 
-	// A Template  object containing the worker UI template to render.
+	// A Template object containing the worker UI template to render.
 	UiTemplate *types.UiTemplate
 
 	noSmithyDocumentSerde

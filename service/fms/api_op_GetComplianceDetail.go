@@ -14,10 +14,18 @@ import (
 // Returns detailed compliance information about the specified member account.
 // Details include resources that are in and out of compliance with the specified
 // policy.
-//   - Resources are considered noncompliant for WAF and Shield Advanced policies if the specified policy has not been applied to them.
-//   - Resources are considered noncompliant for security group policies if they are in scope of the policy, they violate one or more of the policy rules, and remediation is disabled or not possible.
-//   - Resources are considered noncompliant for Network Firewall policies if a firewall is missing in the VPC, if the firewall endpoint isn't set up in an expected Availability Zone and subnet, if a subnet created by the Firewall Manager doesn't have the expected route table, and for modifications to a firewall policy that violate the Firewall Manager policy's rules.
-//   - Resources are considered noncompliant for DNS Firewall policies if a DNS Firewall rule group is missing from the rule group associations for the VPC.
+//   - Resources are considered noncompliant for WAF and Shield Advanced policies
+//     if the specified policy has not been applied to them.
+//   - Resources are considered noncompliant for security group policies if they
+//     are in scope of the policy, they violate one or more of the policy rules, and
+//     remediation is disabled or not possible.
+//   - Resources are considered noncompliant for Network Firewall policies if a
+//     firewall is missing in the VPC, if the firewall endpoint isn't set up in an
+//     expected Availability Zone and subnet, if a subnet created by the Firewall
+//     Manager doesn't have the expected route table, and for modifications to a
+//     firewall policy that violate the Firewall Manager policy's rules.
+//   - Resources are considered noncompliant for DNS Firewall policies if a DNS
+//     Firewall rule group is missing from the rule group associations for the VPC.
 func (c *Client) GetComplianceDetail(ctx context.Context, params *GetComplianceDetailInput, optFns ...func(*Options)) (*GetComplianceDetailOutput, error) {
 	if params == nil {
 		params = &GetComplianceDetailInput{}
@@ -41,8 +49,8 @@ type GetComplianceDetailInput struct {
 	// This member is required.
 	MemberAccount *string
 
-	// The ID of the policy that you want to get the details for. PolicyId is
-	// returned by PutPolicy  and by ListPolicies .
+	// The ID of the policy that you want to get the details for. PolicyId is returned
+	// by PutPolicy and by ListPolicies .
 	//
 	// This member is required.
 	PolicyId *string

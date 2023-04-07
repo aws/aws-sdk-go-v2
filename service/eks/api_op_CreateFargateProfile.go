@@ -73,12 +73,12 @@ type CreateFargateProfileInput struct {
 	// This member is required.
 	PodExecutionRoleArn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
-	// The selectors to match for pods to use this Fargate profile. Each selector
-	// must have an associated namespace. Optionally, you can also specify labels for a
+	// The selectors to match for pods to use this Fargate profile. Each selector must
+	// have an associated namespace. Optionally, you can also specify labels for a
 	// namespace. You may specify up to five selectors in a Fargate profile.
 	Selectors []types.FargateProfileSelector
 

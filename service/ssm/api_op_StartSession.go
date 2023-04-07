@@ -15,8 +15,8 @@ import (
 // connection for sending input and receiving outputs. Amazon Web Services CLI
 // usage: start-session is an interactive command that requires the Session
 // Manager plugin to be installed on the client machine making the call. For
-// information, see Install the Session Manager plugin for the Amazon Web
-// Services CLI (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
+// information, see Install the Session Manager plugin for the Amazon Web Services
+// CLI (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
 // in the Amazon Web Services Systems Manager User Guide. Amazon Web Services Tools
 // for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web
 // Services Tools for PowerShell on Windows local machines.

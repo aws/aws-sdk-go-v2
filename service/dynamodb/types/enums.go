@@ -101,10 +101,9 @@ const (
 	BatchStatementErrorCodeEnumDuplicateItem                   BatchStatementErrorCodeEnum = "DuplicateItem"
 )
 
-// Values returns all known values for BatchStatementErrorCodeEnum. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for BatchStatementErrorCodeEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchStatementErrorCodeEnum) Values() []BatchStatementErrorCodeEnum {
 	return []BatchStatementErrorCodeEnum{
 		"ConditionalCheckFailed",
@@ -129,9 +128,9 @@ const (
 	BillingModePayPerRequest BillingMode = "PAY_PER_REQUEST"
 )
 
-// Values returns all known values for BillingMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BillingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BillingMode) Values() []BillingMode {
 	return []BillingMode{
 		"PROVISIONED",
@@ -205,9 +204,9 @@ const (
 	ContinuousBackupsStatusDisabled ContinuousBackupsStatus = "DISABLED"
 )
 
-// Values returns all known values for ContinuousBackupsStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContinuousBackupsStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ContinuousBackupsStatus) Values() []ContinuousBackupsStatus {
 	return []ContinuousBackupsStatus{
 		"ENABLED",
@@ -375,9 +374,9 @@ const (
 	IndexStatusActive   IndexStatus = "ACTIVE"
 )
 
-// Values returns all known values for IndexStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IndexStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (IndexStatus) Values() []IndexStatus {
 	return []IndexStatus{
 		"CREATING",
@@ -396,8 +395,8 @@ const (
 	InputCompressionTypeNone InputCompressionType = "NONE"
 )
 
-// Values returns all known values for InputCompressionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InputCompressionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InputCompressionType) Values() []InputCompressionType {
 	return []InputCompressionType{
@@ -416,9 +415,9 @@ const (
 	InputFormatCsv          InputFormat = "CSV"
 )
 
-// Values returns all known values for InputFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InputFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (InputFormat) Values() []InputFormat {
 	return []InputFormat{
 		"DYNAMODB_JSON",
@@ -539,10 +538,9 @@ const (
 	ReturnItemCollectionMetricsNone ReturnItemCollectionMetrics = "NONE"
 )
 
-// Values returns all known values for ReturnItemCollectionMetrics. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ReturnItemCollectionMetrics. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReturnItemCollectionMetrics) Values() []ReturnItemCollectionMetrics {
 	return []ReturnItemCollectionMetrics{
 		"SIZE",
@@ -561,9 +559,9 @@ const (
 	ReturnValueUpdatedNew ReturnValue = "UPDATED_NEW"
 )
 
-// Values returns all known values for ReturnValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReturnValue. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ReturnValue) Values() []ReturnValue {
 	return []ReturnValue{
 		"NONE",
@@ -748,9 +746,9 @@ const (
 	TableStatusArchived                          TableStatus = "ARCHIVED"
 )
 
-// Values returns all known values for TableStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TableStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TableStatus) Values() []TableStatus {
 	return []TableStatus{
 		"CREATING",

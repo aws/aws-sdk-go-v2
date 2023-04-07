@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of build project names, with each build project name representing
-// a single build project.
+// Gets a list of build project names, with each build project name representing a
+// single build project.
 func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, optFns ...func(*Options)) (*ListProjectsOutput, error) {
 	if params == nil {
 		params = &ListProjectsInput{}
@@ -40,17 +40,18 @@ type ListProjectsInput struct {
 	NextToken *string
 
 	// The criterion to be used to list build project names. Valid values include:
-	//     - CREATED_TIME : List based on when each build project was created.
-	//     - LAST_MODIFIED_TIME : List based on when information about each build project was last changed.
-	//     - NAME : List based on each build project's name.
-	// Use sortOrder to specify in what order to list the build project names based
-	// on the preceding criteria.
+	//   - CREATED_TIME : List based on when each build project was created.
+	//   - LAST_MODIFIED_TIME : List based on when information about each build project
+	//   was last changed.
+	//   - NAME : List based on each build project's name.
+	// Use sortOrder to specify in what order to list the build project names based on
+	// the preceding criteria.
 	SortBy types.ProjectSortByType
 
 	// The order in which to list build projects. Valid values include:
-	//     - ASCENDING : List in ascending order.
-	//     - DESCENDING : List in descending order.
-	// Use sortBy  to specify the criterion to be used to list build project names.
+	//   - ASCENDING : List in ascending order.
+	//   - DESCENDING : List in descending order.
+	// Use sortBy to specify the criterion to be used to list build project names.
 	SortOrder types.SortOrderType
 
 	noSmithyDocumentSerde
@@ -143,8 +144,8 @@ var _ ListProjectsAPIClient = (*Client)(nil)
 
 // ListProjectsPaginatorOptions is the paginator options for ListProjects
 type ListProjectsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

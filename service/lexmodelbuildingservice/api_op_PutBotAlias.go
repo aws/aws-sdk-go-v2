@@ -14,8 +14,8 @@ import (
 
 // Creates an alias for the specified version of the bot or replaces an alias for
 // the specified bot. To change the version of the bot that the alias points to,
-// replace the alias. For more information about aliases, see versioning-aliases.
-// This operation requires permissions for the lex:PutBotAlias  action.
+// replace the alias. For more information about aliases, see versioning-aliases .
+// This operation requires permissions for the lex:PutBotAlias action.
 func (c *Client) PutBotAlias(ctx context.Context, params *PutBotAliasInput, optFns ...func(*Options)) (*PutBotAliasOutput, error) {
 	if params == nil {
 		params = &PutBotAliasInput{}
@@ -49,11 +49,11 @@ type PutBotAliasInput struct {
 	Name *string
 
 	// Identifies a specific revision of the $LATEST version. When you create a new
-	// bot alias, leave the checksum  field blank. If you specify a checksum you get a
+	// bot alias, leave the checksum field blank. If you specify a checksum you get a
 	// BadRequestException exception. When you want to update a bot alias, set the
 	// checksum field to the checksum of the most recent revision of the $LATEST
 	// version. If you don't specify the checksum field, or if the checksum does not
-	// match the $LATEST  version, you get a PreconditionFailedException  exception.
+	// match the $LATEST version, you get a PreconditionFailedException exception.
 	Checksum *string
 
 	// Settings for conversation logs for the alias.
@@ -64,7 +64,7 @@ type PutBotAliasInput struct {
 
 	// A list of tags to add to the bot alias. You can only add tags when you create
 	// an alias, you can't use the PutBotAlias operation to update the tags on a bot
-	// alias. To update tags, use the TagResource  operation.
+	// alias. To update tags, use the TagResource operation.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -81,8 +81,7 @@ type PutBotAliasOutput struct {
 	// The checksum for the current version of the alias.
 	Checksum *string
 
-	// The settings that determine how Amazon Lex uses conversation logs for the
-	// alias.
+	// The settings that determine how Amazon Lex uses conversation logs for the alias.
 	ConversationLogs *types.ConversationLogsResponse
 
 	// The date that the bot alias was created.

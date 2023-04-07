@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Unsubscribes from receiving notifications when a dataset is modified by
-// another device.This API can only be called with temporary credentials provided
-// by Cognito Identity. You cannot call this API with developer credentials.
+// Unsubscribes from receiving notifications when a dataset is modified by another
+// device.This API can only be called with temporary credentials provided by
+// Cognito Identity. You cannot call this API with developer credentials.
 // UnsubscribeFromDataset The following examples have been edited for readability.
 // POST / HTTP/1.1 CONTENT-TYPE: application/json X-AMZ-REQUESTSUPERTRACE: true
 // X-AMZN-REQUESTID: 676896d6-14ca-45b1-8029-6d36b10a077e X-AMZ-TARGET:

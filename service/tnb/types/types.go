@@ -143,8 +143,8 @@ type GetSolNetworkOperationTaskDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata associated with a network package. A network package is a .zip file
-// in CSAR (Cloud Service Archive) format defines the function packages you want to
+// Metadata associated with a network package. A network package is a .zip file in
+// CSAR (Cloud Service Archive) format defines the function packages you want to
 // deploy and the Amazon Web Services infrastructure you want to deploy them on.
 type GetSolNetworkPackageMetadata struct {
 
@@ -165,8 +165,8 @@ type GetSolNetworkPackageMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Details of resource associated with a network function. A network instance is
-// a single network created in Amazon Web Services TNB that can be deployed and on
+// Details of resource associated with a network function. A network instance is a
+// single network created in Amazon Web Services TNB that can be deployed and on
 // which life-cycle operations (like terminate, update, and delete) can be
 // performed.
 type GetSolVnfcResourceInfo struct {
@@ -281,8 +281,8 @@ type ListSolFunctionInstanceMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a function package. A function package is a .zip file in
-// CSAR (Cloud Service Archive) format that contains a network function (an ETSI
+// Information about a function package. A function package is a .zip file in CSAR
+// (Cloud Service Archive) format that contains a network function (an ETSI
 // standard telecommunication application) and function package descriptor that
 // uses the TOSCA standard to describe how the network functions should run on your
 // network.
@@ -331,8 +331,8 @@ type ListSolFunctionPackageInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Details for the function package metadata. A function package is a .zip file
-// in CSAR (Cloud Service Archive) format that contains a network function (an ETSI
+// Details for the function package metadata. A function package is a .zip file in
+// CSAR (Cloud Service Archive) format that contains a network function (an ETSI
 // standard telecommunication application) and function package descriptor that
 // uses the TOSCA standard to describe how the network functions should run on your
 // network.
@@ -399,9 +399,9 @@ type ListSolNetworkInstanceInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata details for a network instance. A network instance is a single
-// network created in Amazon Web Services TNB that can be deployed and on which
-// life-cycle operations (like terminate, update, and delete) can be performed.
+// Metadata details for a network instance. A network instance is a single network
+// created in Amazon Web Services TNB that can be deployed and on which life-cycle
+// operations (like terminate, update, and delete) can be performed.
 type ListSolNetworkInstanceMetadata struct {
 
 	// The date that the resource was created.
@@ -529,9 +529,9 @@ type ListSolNetworkPackageInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata related to a network package. A network package is a .zip file in
-// CSAR (Cloud Service Archive) format defines the function packages you want to
-// deploy and the Amazon Web Services infrastructure you want to deploy them on.
+// Metadata related to a network package. A network package is a .zip file in CSAR
+// (Cloud Service Archive) format defines the function packages you want to deploy
+// and the Amazon Web Services infrastructure you want to deploy them on.
 type ListSolNetworkPackageMetadata struct {
 
 	// The date that the resource was created.
@@ -642,8 +642,8 @@ type ValidateSolFunctionPackageContentMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Validates network package content metadata. A network package is a .zip file
-// in CSAR (Cloud Service Archive) format defines the function packages you want to
+// Validates network package content metadata. A network package is a .zip file in
+// CSAR (Cloud Service Archive) format defines the function packages you want to
 // deploy and the Amazon Web Services infrastructure you want to deploy them on.
 type ValidateSolNetworkPackageContentMetadata struct {
 

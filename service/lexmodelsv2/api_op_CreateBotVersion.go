@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Creates a new version of the bot based on the DRAFT  version. If the DRAFT
+// Creates a new version of the bot based on the DRAFT version. If the DRAFT
 // version of this resource hasn't changed since you created the last version,
 // Amazon Lex doesn't create a new version, it returns the last created version.
 // When you create the first version of a bot, Amazon Lex sets the version to 1.
@@ -40,7 +40,7 @@ type CreateBotVersionInput struct {
 	BotId *string
 
 	// Specifies the locales that Amazon Lex adds to this version. You can choose the
-	// Draftversion or any other previously published version for each locale. When
+	// Draft version or any other previously published version for each locale. When
 	// you specify a source version, the locale data is copied from the source version
 	// to the new version.
 	//
@@ -60,7 +60,7 @@ type CreateBotVersionOutput struct {
 	BotId *string
 
 	// When you send a request to create or update a bot, Amazon Lex sets the status
-	// response element to Creating. After Amazon Lex builds the bot, it sets status
+	// response element to Creating . After Amazon Lex builds the bot, it sets status
 	// to Available . If Amazon Lex can't build the bot, it sets status to Failed .
 	BotStatus types.BotStatus
 

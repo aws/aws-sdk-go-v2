@@ -39,9 +39,9 @@ type UpdateGatewayInformationInput struct {
 	// This member is required.
 	GatewayARN *string
 
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you
-	// want to use to monitor and log events in the gateway. For more information, see
-	// What is Amazon CloudWatch Logs? (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
+	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want
+	// to use to monitor and log events in the gateway. For more information, see What
+	// is Amazon CloudWatch Logs? (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
 	CloudWatchLogGroupARN *string
 
 	// Specifies the size of the gateway's metadata cache.
@@ -56,8 +56,8 @@ type UpdateGatewayInformationInput struct {
 	noSmithyDocumentSerde
 }
 
-// A JSON object containing the Amazon Resource Name (ARN) of the gateway that
-// was updated.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
+// updated.
 type UpdateGatewayInformationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

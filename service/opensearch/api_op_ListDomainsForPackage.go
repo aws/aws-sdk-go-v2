@@ -30,7 +30,7 @@ func (c *Client) ListDomainsForPackage(ctx context.Context, params *ListDomainsF
 	return out, nil
 }
 
-// Container for the request parameters to the ListDomainsForPackage  operation.
+// Container for the request parameters to the ListDomainsForPackage operation.
 type ListDomainsForPackageInput struct {
 
 	// The unique identifier of the package for which to list associated domains.
@@ -39,25 +39,25 @@ type ListDomainsForPackageInput struct {
 	PackageID *string
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken  to get the next page of results.
+	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial ListDomainsForPackage  operation returns a nextToken, you can
-	// include the returned nextToken  in subsequent ListDomainsForPackage
-	// operations, which returns results in the next page.
+	// If your initial ListDomainsForPackage operation returns a nextToken , you can
+	// include the returned nextToken in subsequent ListDomainsForPackage operations,
+	// which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Container for the response parameters to the ListDomainsForPackage  operation.
+// Container for the response parameters to the ListDomainsForPackage operation.
 type ListDomainsForPackageOutput struct {
 
 	// Information about all domains associated with a package.
 	DomainPackageDetailsList []types.DomainPackageDetails
 
-	// When nextToken  is returned, there are more results available. The value of
-	// nextTokenis a unique pagination token for each page. Make the call again using
+	// When nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -142,11 +142,11 @@ var _ ListDomainsForPackageAPIClient = (*Client)(nil)
 // ListDomainsForPackage
 type ListDomainsForPackagePaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken  to get the next page of results.
+	// You can use nextToken to get the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -17,13 +17,13 @@ import (
 // configuration across multiple services. Create multiple revisions of a
 // configuration by calling this action multiple times using the same
 // ObservabilityConfigurationName . The call returns incremental
-// ObservabilityConfigurationRevisionvalues. When you create a service and
+// ObservabilityConfigurationRevision values. When you create a service and
 // configure an observability configuration resource, the service uses the latest
 // active revision of the observability configuration by default. You can
 // optionally configure the service to use a specific revision. The observability
 // configuration resource is designed to configure multiple features (currently one
 // feature, tracing). This action takes optional parameters that describe the
-// configuration of these features (currently one parameter, TraceConfiguration).
+// configuration of these features (currently one parameter, TraceConfiguration ).
 // If you don't specify a feature parameter, App Runner doesn't enable the feature.
 func (c *Client) CreateObservabilityConfiguration(ctx context.Context, params *CreateObservabilityConfigurationInput, optFns ...func(*Options)) (*CreateObservabilityConfigurationOutput, error) {
 	if params == nil {

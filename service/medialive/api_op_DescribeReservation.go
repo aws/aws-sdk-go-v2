@@ -57,12 +57,10 @@ type DescribeReservationOutput struct {
 	// Units for duration, e.g. 'MONTHS'
 	DurationUnits types.OfferingDurationUnits
 
-	// Reservation UTC end date and time in ISO-8601 format, e.g.
-	// '2019-03-01T00:00:00'
+	// Reservation UTC end date and time in ISO-8601 format, e.g. '2019-03-01T00:00:00'
 	End *string
 
-	// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT
-	// offering
+	// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
 	FixedPrice float64
 
 	// User specified reservation name

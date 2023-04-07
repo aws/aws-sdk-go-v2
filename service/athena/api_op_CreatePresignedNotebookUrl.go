@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an authentication token and the URL at which the notebook can be
-// accessed. During programmatic access, CreatePresignedNotebookUrl must be
-// called every 10 minutes to refresh the authentication token. For information
-// about granting programmatic access, see Grant programmatic access (https://docs.aws.amazon.com/athena/latest/ug/setting-up.html#setting-up-grant-programmatic-access)
+// Gets an authentication token and the URL at which the notebook can be accessed.
+// During programmatic access, CreatePresignedNotebookUrl must be called every 10
+// minutes to refresh the authentication token. For information about granting
+// programmatic access, see Grant programmatic access (https://docs.aws.amazon.com/athena/latest/ug/setting-up.html#setting-up-grant-programmatic-access)
 // .
 func (c *Client) CreatePresignedNotebookUrl(ctx context.Context, params *CreatePresignedNotebookUrlInput, optFns ...func(*Options)) (*CreatePresignedNotebookUrlOutput, error) {
 	if params == nil {
@@ -52,8 +52,8 @@ type CreatePresignedNotebookUrlOutput struct {
 	// This member is required.
 	AuthTokenExpirationTime *int64
 
-	// The URL of the notebook. The URL includes the authentication token and
-	// notebook file name and points directly to the opened notebook.
+	// The URL of the notebook. The URL includes the authentication token and notebook
+	// file name and points directly to the opened notebook.
 	//
 	// This member is required.
 	NotebookUrl *string

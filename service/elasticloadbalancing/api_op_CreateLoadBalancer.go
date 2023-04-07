@@ -14,12 +14,12 @@ import (
 // Creates a Classic Load Balancer. You can add listeners, security groups,
 // subnets, and tags when you create your load balancer, or you can add them later
 // using CreateLoadBalancerListeners , ApplySecurityGroupsToLoadBalancer ,
-// AttachLoadBalancerToSubnets , and AddTags. To describe your current load
-// balancers, see DescribeLoadBalancers. When you are finished with a load
-// balancer, you can delete it using DeleteLoadBalancer. You can create up to 20
+// AttachLoadBalancerToSubnets , and AddTags . To describe your current load
+// balancers, see DescribeLoadBalancers . When you are finished with a load
+// balancer, you can delete it using DeleteLoadBalancer . You can create up to 20
 // load balancers per region per account. You can request an increase for the
-// number of load balancers for your account. For more information, see Limits
-// for Your Classic Load Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
+// number of load balancers for your account. For more information, see Limits for
+// Your Classic Load Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
 // in the Classic Load Balancers Guide.
 func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalancerInput, optFns ...func(*Options)) (*CreateLoadBalancerOutput, error) {
 	if params == nil {
@@ -46,18 +46,16 @@ type CreateLoadBalancerInput struct {
 	// This member is required.
 	Listeners []types.Listener
 
-	// The name of the load balancer. This name must be unique within your set of
-	// load balancers for the region, must have a maximum of 32 characters, must
-	// contain only alphanumeric characters or hyphens, and cannot begin or end with a
-	// hyphen.
+	// The name of the load balancer. This name must be unique within your set of load
+	// balancers for the region, must have a maximum of 32 characters, must contain
+	// only alphanumeric characters or hyphens, and cannot begin or end with a hyphen.
 	//
 	// This member is required.
 	LoadBalancerName *string
 
 	// One or more Availability Zones from the same region as the load balancer. You
 	// must specify at least one Availability Zone. You can add more Availability Zones
-	// after you create the load balancer using EnableAvailabilityZonesForLoadBalancer
-	// .
+	// after you create the load balancer using EnableAvailabilityZonesForLoadBalancer .
 	AvailabilityZones []string
 
 	// The type of a load balancer. Valid only for load balancers in a VPC. By

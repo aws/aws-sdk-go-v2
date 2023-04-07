@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified thing. Returns successfully with no error if the
-// deletion is successful or you specify a thing that doesn't exist. Requires
-// permission to access the DeleteThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Deletes the specified thing. Returns successfully with no error if the deletion
+// is successful or you specify a thing that doesn't exist. Requires permission to
+// access the DeleteThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteThing(ctx context.Context, params *DeleteThingInput, optFns ...func(*Options)) (*DeleteThingOutput, error) {
 	if params == nil {
@@ -37,9 +37,9 @@ type DeleteThingInput struct {
 	// This member is required.
 	ThingName *string
 
-	// The expected version of the thing record in the registry. If the version of
-	// the record in the registry does not match the expected version specified in the
-	// request, the DeleteThing  request is rejected with a VersionConflictException .
+	// The expected version of the thing record in the registry. If the version of the
+	// record in the registry does not match the expected version specified in the
+	// request, the DeleteThing request is rejected with a VersionConflictException .
 	ExpectedVersion *int64
 
 	noSmithyDocumentSerde

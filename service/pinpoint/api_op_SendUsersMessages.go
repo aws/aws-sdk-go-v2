@@ -35,8 +35,8 @@ type SendUsersMessagesInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// Specifies the configuration and other settings for a message to send to all
-	// the endpoints that are associated with a list of users.
+	// Specifies the configuration and other settings for a message to send to all the
+	// endpoints that are associated with a list of users.
 	//
 	// This member is required.
 	SendUsersMessageRequest *types.SendUsersMessageRequest

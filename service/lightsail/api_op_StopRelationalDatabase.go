@@ -12,7 +12,7 @@ import (
 )
 
 // Stops a specific database that is currently running in Amazon Lightsail. The
-// stop relational databaseoperation supports tag-based access control via
+// stop relational database operation supports tag-based access control via
 // resource tags applied to the resource identified by relationalDatabaseName. For
 // more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
 // .

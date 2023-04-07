@@ -49,8 +49,8 @@ type DescribeEventsInput struct {
 	// those associated with this environment.
 	EnvironmentName *string
 
-	// Specifies the maximum number of events that can be returned, beginning with
-	// the most recent event.
+	// Specifies the maximum number of events that can be returned, beginning with the
+	// most recent event.
 	MaxRecords *int32
 
 	// Pagination token. If specified, the events return the next batch of results.
@@ -91,7 +91,7 @@ type DescribeEventsOutput struct {
 	Events []types.EventDescription
 
 	// If returned, this indicates that there are more results to obtain. Use this
-	// token in the next DescribeEvents  call to get the next batch of events.
+	// token in the next DescribeEvents call to get the next batch of events.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -170,12 +170,12 @@ var _ DescribeEventsAPIClient = (*Client)(nil)
 
 // DescribeEventsPaginatorOptions is the paginator options for DescribeEvents
 type DescribeEventsPaginatorOptions struct {
-	// Specifies the maximum number of events that can be returned, beginning with
-	// the most recent event.
+	// Specifies the maximum number of events that can be returned, beginning with the
+	// most recent event.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

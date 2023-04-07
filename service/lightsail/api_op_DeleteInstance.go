@@ -13,7 +13,6 @@ import (
 
 // Deletes an Amazon Lightsail instance. The delete instance operation supports
 // tag-based access control via resource tags applied to the resource identified by
-//
 // instance name . For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
 // .
 func (c *Client) DeleteInstance(ctx context.Context, params *DeleteInstanceInput, optFns ...func(*Options)) (*DeleteInstanceOutput, error) {

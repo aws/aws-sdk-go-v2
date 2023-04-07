@@ -37,7 +37,7 @@ func (c *Client) ListQueryLoggingConfigs(ctx context.Context, params *ListQueryL
 type ListQueryLoggingConfigsInput struct {
 
 	// (Optional) If you want to list the query logging configuration that is
-	// associated with a hosted zone, specify the ID in HostedZoneId. If you don't
+	// associated with a hosted zone, specify the ID in HostedZoneId . If you don't
 	// specify a hosted zone ID, ListQueryLoggingConfigs returns all of the
 	// configurations that are associated with the current Amazon Web Services account.
 	HostedZoneId *string
@@ -54,7 +54,7 @@ type ListQueryLoggingConfigsInput struct {
 	// query logging configurations, use NextToken to get the second and subsequent
 	// pages of results. For the first ListQueryLoggingConfigs request, omit this
 	// value. For the second and subsequent requests, get the value of NextToken from
-	// the previous response and specify that value for NextToken  in the request.
+	// the previous response and specify that value for NextToken in the request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -75,7 +75,7 @@ type ListQueryLoggingConfigsOutput struct {
 	// configurations, you can get more configurations by submitting another
 	// ListQueryLoggingConfigs (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html)
 	// request. Get the value of NextToken that Amazon Route 53 returned in the
-	// previous response and include it in NextToken  in the next request.
+	// previous response and include it in NextToken in the next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -166,8 +166,8 @@ type ListQueryLoggingConfigsPaginatorOptions struct {
 	// for MaxResults , Route 53 returns up to 100 configurations.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -38,7 +38,7 @@ func (c *Client) DeleteCacheCluster(ctx context.Context, params *DeleteCacheClus
 	return out, nil
 }
 
-// Represents the input of a DeleteCacheCluster  operation.
+// Represents the input of a DeleteCacheCluster operation.
 type DeleteCacheClusterInput struct {
 
 	// The cluster identifier for the cluster to be deleted. This parameter is not

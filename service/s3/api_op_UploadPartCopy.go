@@ -25,34 +25,53 @@ import (
 // returns a unique identifier, the upload ID, that you must include in your upload
 // part request. For more information about using the UploadPartCopy operation,
 // see the following:
-//   - For conceptual information about multipart uploads, see Uploading Objects Using Multipart Upload (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html) in the Amazon S3 User Guide.
-//   - For information about permissions required to use the multipart upload API, see Multipart Upload and Permissions (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html) in the Amazon S3 User Guide.
-//   - For information about copying objects using a single atomic action vs. a multipart upload, see Operations on Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html) in the Amazon S3 User Guide.
-//   - For information about using server-side encryption with customer-provided encryption keys with the UploadPartCopy operation, see CopyObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html) and UploadPart (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) .
+//   - For conceptual information about multipart uploads, see Uploading Objects
+//     Using Multipart Upload (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html)
+//     in the Amazon S3 User Guide.
+//   - For information about permissions required to use the multipart upload API,
+//     see Multipart Upload and Permissions (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
+//     in the Amazon S3 User Guide.
+//   - For information about copying objects using a single atomic action vs. a
+//     multipart upload, see Operations on Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html)
+//     in the Amazon S3 User Guide.
+//   - For information about using server-side encryption with customer-provided
+//     encryption keys with the UploadPartCopy operation, see CopyObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
+//     and UploadPart (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
+//     .
 //
 // Note the following additional considerations about the request headers
 // x-amz-copy-source-if-match , x-amz-copy-source-if-none-match ,
 // x-amz-copy-source-if-unmodified-since , and x-amz-copy-source-if-modified-since
 // :
-//   - Consideration 1 - If both of the x-amz-copy-source-if-match and x-amz-copy-source-if-unmodified-since headers are present in the request as follows: x-amz-copy-source-if-match condition evaluates to true , and; x-amz-copy-source-if-unmodified-since condition evaluates to false ; Amazon S3 returns 200 OK and copies the data.
-//   - Consideration 2 - If both of the x-amz-copy-source-if-none-match and x-amz-copy-source-if-modified-since headers are present in the request as follows: x-amz-copy-source-if-none-match condition evaluates to false , and; x-amz-copy-source-if-modified-since condition evaluates to true ; Amazon S3 returns 412 Precondition Failed response code.
+//   - Consideration 1 - If both of the x-amz-copy-source-if-match and
+//     x-amz-copy-source-if-unmodified-since headers are present in the request as
+//     follows: x-amz-copy-source-if-match condition evaluates to true , and;
+//     x-amz-copy-source-if-unmodified-since condition evaluates to false ; Amazon S3
+//     returns 200 OK and copies the data.
+//   - Consideration 2 - If both of the x-amz-copy-source-if-none-match and
+//     x-amz-copy-source-if-modified-since headers are present in the request as
+//     follows: x-amz-copy-source-if-none-match condition evaluates to false , and;
+//     x-amz-copy-source-if-modified-since condition evaluates to true ; Amazon S3
+//     returns 412 Precondition Failed response code.
 //
 // Versioning If your bucket has versioning enabled, you could have multiple
 // versions of the same object. By default, x-amz-copy-source identifies the
 // current version of the object to copy. If the current version is a delete marker
-// and you don't specify a versionId in the x-amz-copy-source, Amazon S3 returns
-// a 404 error, because the object does not exist. If you specify versionId in the
-// x-amz-copy-sourceand the versionId is a delete marker, Amazon S3 returns an
+// and you don't specify a versionId in the x-amz-copy-source , Amazon S3 returns a
+// 404 error, because the object does not exist. If you specify versionId in the
+// x-amz-copy-source and the versionId is a delete marker, Amazon S3 returns an
 // HTTP 400 error, because you are not allowed to specify a delete marker as a
-// version for the x-amz-copy-source. You can optionally specify a specific
+// version for the x-amz-copy-source . You can optionally specify a specific
 // version of the source object to copy by adding the versionId subresource as
 // shown in the following example: x-amz-copy-source:
 // /bucket/object?versionId=version id Special Errors
 //   - Code: NoSuchUpload
-//   - Cause: The specified multipart upload does not exist. The upload ID might be invalid, or the multipart upload might have been aborted or completed.
+//   - Cause: The specified multipart upload does not exist. The upload ID might
+//     be invalid, or the multipart upload might have been aborted or completed.
 //   - HTTP Status Code: 404 Not Found
 //   - Code: InvalidRequest
-//   - Cause: The specified copy source is not supported as a byte-range copy source.
+//   - Cause: The specified copy source is not supported as a byte-range copy
+//     source.
 //   - HTTP Status Code: 400 Bad Request
 //
 // Related Resources
@@ -88,7 +107,7 @@ type UploadPartCopyInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -101,9 +120,26 @@ type UploadPartCopyInput struct {
 	// one of two formats, depending on whether you want to access the source object
 	// through an access point (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html)
 	// :
-	//     - For objects not accessed through an access point, specify the name of the source bucket and key of the source object, separated by a slash (/). For example, to copy the object reports/january.pdf from the bucket awsexamplebucket , use awsexamplebucket/reports/january.pdf . The value must be URL-encoded.
-	//     - For objects accessed through access points, specify the Amazon Resource Name (ARN) of the object as accessed through the access point, in the format arn:aws:s3:::accesspoint//object/ . For example, to copy the object reports/january.pdf through access point my-access-point owned by account 123456789012 in Region us-west-2 , use the URL encoding of arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf . The value must be URL encoded. Amazon S3 supports copy operations using access points only when the source and destination buckets are in the same Amazon Web Services Region. Alternatively, for objects accessed through Amazon S3 on Outposts, specify the ARN of the object as accessed in the format arn:aws:s3-outposts:::outpost//object/ . For example, to copy the object reports/january.pdf through outpost my-outpost owned by account 123456789012 in Region us-west-2 , use the URL encoding of arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf . The value must be URL-encoded.
-	//
+	//   - For objects not accessed through an access point, specify the name of the
+	//   source bucket and key of the source object, separated by a slash (/). For
+	//   example, to copy the object reports/january.pdf from the bucket
+	//   awsexamplebucket , use awsexamplebucket/reports/january.pdf . The value must
+	//   be URL-encoded.
+	//   - For objects accessed through access points, specify the Amazon Resource
+	//   Name (ARN) of the object as accessed through the access point, in the format
+	//   arn:aws:s3:::accesspoint//object/ . For example, to copy the object
+	//   reports/january.pdf through access point my-access-point owned by account
+	//   123456789012 in Region us-west-2 , use the URL encoding of
+	//   arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf
+	//   . The value must be URL encoded. Amazon S3 supports copy operations using access
+	//   points only when the source and destination buckets are in the same Amazon Web
+	//   Services Region. Alternatively, for objects accessed through Amazon S3 on
+	//   Outposts, specify the ARN of the object as accessed in the format
+	//   arn:aws:s3-outposts:::outpost//object/ . For example, to copy the object
+	//   reports/january.pdf through outpost my-outpost owned by account 123456789012
+	//   in Region us-west-2 , use the URL encoding of
+	//   arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf
+	//   . The value must be URL-encoded.
 	// To copy a specific version of an object, append ?versionId= to the value (for
 	// example,
 	// awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893
@@ -135,18 +171,17 @@ type UploadPartCopyInput struct {
 	// Copies the object if it has been modified since the specified time.
 	CopySourceIfModifiedSince *time.Time
 
-	// Copies the object if its entity tag (ETag) is different than the specified
-	// ETag.
+	// Copies the object if its entity tag (ETag) is different than the specified ETag.
 	CopySourceIfNoneMatch *string
 
 	// Copies the object if it hasn't been modified since the specified time.
 	CopySourceIfUnmodifiedSince *time.Time
 
-	// The range of bytes to copy from the source object. The range value must use
-	// the form bytes=first-last, where the first and last are the zero-based byte
-	// offsets to copy. For example, bytes=0-9 indicates that you want to copy the
-	// first 10 bytes of the source. You can copy a range only if the source object is
-	// greater than 5 MB.
+	// The range of bytes to copy from the source object. The range value must use the
+	// form bytes=first-last, where the first and last are the zero-based byte offsets
+	// to copy. For example, bytes=0-9 indicates that you want to copy the first 10
+	// bytes of the source. You can copy a range only if the source object is greater
+	// than 5 MB.
 	CopySourceRange *string
 
 	// Specifies the algorithm to use when decrypting the source object (for example,
@@ -165,7 +200,7 @@ type UploadPartCopyInput struct {
 
 	// The account ID of the expected destination bucket owner. If the destination
 	// bucket is owned by a different account, the request fails with the HTTP status
-	// code 403 Forbidden  (access denied).
+	// code 403 Forbidden (access denied).
 	ExpectedBucketOwner *string
 
 	// The account ID of the expected source bucket owner. If the source bucket is
@@ -188,7 +223,7 @@ type UploadPartCopyInput struct {
 	// encrypting data. This value is used to store the object and then it is
 	// discarded; Amazon S3 does not store the encryption key. The key must be
 	// appropriate for use with the algorithm specified in the
-	// x-amz-server-side-encryption-customer-algorithmheader. This must be the same
+	// x-amz-server-side-encryption-customer-algorithm header. This must be the same
 	// encryption key specified in the initiate multipart upload request.
 	SSECustomerKey *string
 
@@ -232,8 +267,8 @@ type UploadPartCopyOutput struct {
 	// object.
 	SSEKMSKeyId *string
 
-	// The server-side encryption algorithm used when storing this object in Amazon
-	// S3 (for example, AES256, aws:kms).
+	// The server-side encryption algorithm used when storing this object in Amazon S3
+	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Metadata pertaining to the operation's result.

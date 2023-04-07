@@ -14,8 +14,8 @@ import (
 // Removes the entire tag set from the specified object. For more information
 // about managing object tags, see Object Tagging (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html)
 // . To use this operation, you must have permission to perform the
-// s3:DeleteObjectTaggingaction. To delete tags of a specific object version, add
-// the versionId  query parameter in the request. You will need permission for the
+// s3:DeleteObjectTagging action. To delete tags of a specific object version, add
+// the versionId query parameter in the request. You will need permission for the
 // s3:DeleteObjectVersionTagging action. The following operations are related to
 // DeleteBucketMetricsConfiguration :
 //   - PutObjectTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html)
@@ -47,7 +47,7 @@ type DeleteObjectTaggingInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)

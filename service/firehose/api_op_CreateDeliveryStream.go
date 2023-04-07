@@ -14,34 +14,32 @@ import (
 // Creates a Kinesis Data Firehose delivery stream. By default, you can create up
 // to 50 delivery streams per Amazon Web Services Region. This is an asynchronous
 // operation that immediately returns. The initial status of the delivery stream is
-//
 // CREATING . After the delivery stream is created, its status is ACTIVE and it
 // now accepts data. If the delivery stream creation fails, the status transitions
-// to CREATING_FAILED. Attempts to send data to a delivery stream that is not in
+// to CREATING_FAILED . Attempts to send data to a delivery stream that is not in
 // the ACTIVE state cause an exception. To check the state of a delivery stream,
 // use DescribeDeliveryStream . If the status of a delivery stream is
 // CREATING_FAILED , this status doesn't change, and you can't invoke
 // CreateDeliveryStream again on it. However, you can invoke the
-// DeleteDeliveryStreamoperation to delete it. A Kinesis Data Firehose delivery
+// DeleteDeliveryStream operation to delete it. A Kinesis Data Firehose delivery
 // stream can be configured to receive records directly from providers using
-// PutRecord or PutRecordBatch, or it can be configured to use an existing
-// Kinesis stream as its source. To specify a Kinesis data stream as input, set the
-//
-// DeliveryStreamType parameter to KinesisStreamAsSource, and provide the Kinesis
+// PutRecord or PutRecordBatch , or it can be configured to use an existing Kinesis
+// stream as its source. To specify a Kinesis data stream as input, set the
+// DeliveryStreamType parameter to KinesisStreamAsSource , and provide the Kinesis
 // stream Amazon Resource Name (ARN) and role ARN in the
-// KinesisStreamSourceConfigurationparameter. To create a delivery stream with
+// KinesisStreamSourceConfiguration parameter. To create a delivery stream with
 // server-side encryption (SSE) enabled, include
-// DeliveryStreamEncryptionConfigurationInputin your request. This is optional.
+// DeliveryStreamEncryptionConfigurationInput in your request. This is optional.
 // You can also invoke StartDeliveryStreamEncryption to turn on SSE for an
 // existing delivery stream that doesn't have SSE enabled. A delivery stream is
 // configured with a single destination: Amazon S3, Amazon ES, Amazon Redshift, or
 // Splunk. You must specify only one of the following destination configuration
 // parameters: ExtendedS3DestinationConfiguration , S3DestinationConfiguration ,
 // ElasticsearchDestinationConfiguration , RedshiftDestinationConfiguration , or
-// SplunkDestinationConfiguration . When you specify S3DestinationConfiguration,
+// SplunkDestinationConfiguration . When you specify S3DestinationConfiguration ,
 // you can also provide the following optional values: BufferingHints,
 // EncryptionConfiguration , and CompressionFormat . By default, if no
-// BufferingHintsvalue is provided, Kinesis Data Firehose buffers data up to 5 MB
+// BufferingHints value is provided, Kinesis Data Firehose buffers data up to 5 MB
 // or for 5 minutes, whichever condition is satisfied first. BufferingHints is a
 // hint, so there are some cases where the service cannot adhere to these
 // conditions strictly. For example, record boundaries might be such that the size
@@ -49,9 +47,17 @@ import (
 // encryption is performed. We strongly recommend that you enable encryption to
 // ensure secure data storage in Amazon S3. A few notes about Amazon Redshift as a
 // destination:
-//   - An Amazon Redshift destination requires an S3 bucket as intermediate location. Kinesis Data Firehose first delivers data to Amazon S3 and then uses COPY syntax to load data into an Amazon Redshift table. This is specified in the RedshiftDestinationConfiguration.S3Configuration parameter.
-//   - The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.
-//   - We strongly recommend that you use the user name and password you provide exclusively with Kinesis Data Firehose, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.
+//   - An Amazon Redshift destination requires an S3 bucket as intermediate
+//     location. Kinesis Data Firehose first delivers data to Amazon S3 and then uses
+//     COPY syntax to load data into an Amazon Redshift table. This is specified in
+//     the RedshiftDestinationConfiguration.S3Configuration parameter.
+//   - The compression formats SNAPPY or ZIP cannot be specified in
+//     RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift
+//     COPY operation that reads from the S3 bucket doesn't support these compression
+//     formats.
+//   - We strongly recommend that you use the user name and password you provide
+//     exclusively with Kinesis Data Firehose, and that the permissions for the account
+//     are restricted for Amazon Redshift INSERT permissions.
 //
 // Kinesis Data Firehose assumes the IAM role that is configured as part of the
 // destination. The role should allow the Kinesis Data Firehose principal to assume
@@ -97,8 +103,9 @@ type CreateDeliveryStreamInput struct {
 	DeliveryStreamEncryptionConfigurationInput *types.DeliveryStreamEncryptionConfigurationInput
 
 	// The delivery stream type. This parameter can be one of the following values:
-	//     - DirectPut : Provider applications access the delivery stream directly.
-	//     - KinesisStreamAsSource : The delivery stream uses a Kinesis data stream as a source.
+	//   - DirectPut : Provider applications access the delivery stream directly.
+	//   - KinesisStreamAsSource : The delivery stream uses a Kinesis data stream as a
+	//   source.
 	DeliveryStreamType types.DeliveryStreamType
 
 	// The destination in Amazon ES. You can specify only one destination.
@@ -112,15 +119,14 @@ type CreateDeliveryStreamInput struct {
 	HttpEndpointDestinationConfiguration *types.HttpEndpointDestinationConfiguration
 
 	// When a Kinesis data stream is used as the source for the delivery stream, a
-	// KinesisStreamSourceConfigurationcontaining the Kinesis data stream Amazon
+	// KinesisStreamSourceConfiguration containing the Kinesis data stream Amazon
 	// Resource Name (ARN) and the role ARN for the source stream.
 	KinesisStreamSourceConfiguration *types.KinesisStreamSourceConfiguration
 
 	// The destination in Amazon Redshift. You can specify only one destination.
 	RedshiftDestinationConfiguration *types.RedshiftDestinationConfiguration
 
-	// [Deprecated] The destination in Amazon S3. You can specify only one
-	// destination.
+	// [Deprecated] The destination in Amazon S3. You can specify only one destination.
 	//
 	// Deprecated: This member has been deprecated.
 	S3DestinationConfiguration *types.S3DestinationConfiguration

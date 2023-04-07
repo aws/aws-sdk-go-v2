@@ -34,9 +34,9 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request could not be processed because of conflict in the current state of
-// the resource. For example, if you're using a Create  API (such as
-// CreateAssistant) that accepts name, a conflicting resource (usually with the
-// same name) is being created or mutated.
+// the resource. For example, if you're using a Create API (such as CreateAssistant
+// ) that accepts name, a conflicting resource (usually with the same name) is
+// being created or mutated.
 type ConflictException struct {
 	Message *string
 

@@ -16,13 +16,25 @@ import (
 // consists of a key name and an associated value. By assigning tags to your
 // resources, you can do the following:
 //
-//   - Administrative grouping and discovery - Attach tags to resources to aid in organization and search. For example, you could search for all resources with the key name Project and the value MyImportantProject. Or search for all resources with the key name Cost Center and the value 41200.
+//   - Administrative grouping and discovery - Attach tags to resources to aid in
+//     organization and search. For example, you could search for all resources with
+//     the key name Project and the value MyImportantProject. Or search for all
+//     resources with the key name Cost Center and the value 41200.
 //
-//   - Access control - Include tags in IAM user-based and resource-based policies. You can use tags to restrict access to only an IAM instance profile that has a specified tag attached. For examples of policies that show how to use tags to control access, see Control access using IAM tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html) in the IAM User Guide.
+//   - Access control - Include tags in IAM user-based and resource-based
+//     policies. You can use tags to restrict access to only an IAM instance profile
+//     that has a specified tag attached. For examples of policies that show how to use
+//     tags to control access, see Control access using IAM tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)
+//     in the IAM User Guide.
 //
-//   - If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request fails and the resource is not created. For more information about tagging, see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User Guide.
+//   - If any one of the tags is invalid or if you exceed the allowed maximum
+//     number of tags, then the entire request fails and the resource is not created.
+//     For more information about tagging, see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
+//     in the IAM User Guide.
 //
-//   - Amazon Web Services always interprets the tag Value as a single string. If you need to store an array, you can store comma-separated values in the string. However, you must interpret the value in your code.
+//   - Amazon Web Services always interprets the tag Value as a single string. If
+//     you need to store an array, you can store comma-separated values in the string.
+//     However, you must interpret the value in your code.
 func (c *Client) TagInstanceProfile(ctx context.Context, params *TagInstanceProfileInput, optFns ...func(*Options)) (*TagInstanceProfileOutput, error) {
 	if params == nil {
 		params = &TagInstanceProfileInput{}
@@ -41,7 +53,7 @@ func (c *Client) TagInstanceProfile(ctx context.Context, params *TagInstanceProf
 type TagInstanceProfileInput struct {
 
 	// The name of the IAM instance profile to which you want to add tags. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex) )
 	// a string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//

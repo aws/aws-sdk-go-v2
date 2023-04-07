@@ -34,8 +34,8 @@ func (c *Client) GetVocabulary(ctx context.Context, params *GetVocabularyInput, 
 
 type GetVocabularyInput struct {
 
-	// The name of the custom vocabulary you want information about. Custom
-	// vocabulary names are case sensitive.
+	// The name of the custom vocabulary you want information about. Custom vocabulary
+	// names are case sensitive.
 	//
 	// This member is required.
 	VocabularyName *string
@@ -49,24 +49,24 @@ type GetVocabularyOutput struct {
 	// download the custom vocabulary.
 	DownloadUri *string
 
-	// If VocabularyState  is FAILED , FailureReason contains information about why
-	// the custom vocabulary request failed. See also: Common Errors (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html)
+	// If VocabularyState is FAILED , FailureReason contains information about why the
+	// custom vocabulary request failed. See also: Common Errors (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html)
 	// .
 	FailureReason *string
 
 	// The language code you selected for your custom vocabulary.
 	LanguageCode types.LanguageCode
 
-	// The date and time the specified custom vocabulary was last modified.
-	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
+	// The date and time the specified custom vocabulary was last modified. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
 	// The name of the custom vocabulary you requested information about.
 	VocabularyName *string
 
-	// The processing state of your custom vocabulary. If the state is READY, you can
-	// use the custom vocabulary in a StartTranscriptionJob  request.
+	// The processing state of your custom vocabulary. If the state is READY , you can
+	// use the custom vocabulary in a StartTranscriptionJob request.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.

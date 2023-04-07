@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the rule. You cannot delete a rule if it is used by an ACTIVE  or
-// INACTIVEdetector version. When you delete a rule, Amazon Fraud Detector
+// Deletes the rule. You cannot delete a rule if it is used by an ACTIVE or
+// INACTIVE detector version. When you delete a rule, Amazon Fraud Detector
 // permanently deletes that rule and the data is no longer stored in Amazon Fraud
 // Detector.
 func (c *Client) DeleteRule(ctx context.Context, params *DeleteRuleInput, optFns ...func(*Options)) (*DeleteRuleOutput, error) {

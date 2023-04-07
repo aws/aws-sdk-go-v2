@@ -29,7 +29,7 @@ func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput
 	return out, nil
 }
 
-// Represents the input of a CreatePipeline  action.
+// Represents the input of a CreatePipeline action.
 type CreatePipelineInput struct {
 
 	// Represents the structure of actions and stages to be performed in the pipeline.
@@ -43,7 +43,7 @@ type CreatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreatePipeline  action.
+// Represents the output of a CreatePipeline action.
 type CreatePipelineOutput struct {
 
 	// Represents the structure of actions and stages to be performed in the pipeline.

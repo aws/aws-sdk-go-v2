@@ -36,8 +36,7 @@ func (c *Client) StartEntitiesDetectionJob(ctx context.Context, params *StartEnt
 type StartEntitiesDetectionJobInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
-	// read access to your input data. For more information, see Role-based
-	// permissions (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions)
+	// read access to your input data. For more information, see Role-based permissions (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions)
 	// .
 	//
 	// This member is required.
@@ -61,12 +60,12 @@ type StartEntitiesDetectionJobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// A unique identifier for the request. If you don't set the client request
-	// token, Amazon Comprehend generates one.
+	// A unique identifier for the request. If you don't set the client request token,
+	// Amazon Comprehend generates one.
 	ClientRequestToken *string
 
 	// The Amazon Resource Name (ARN) that identifies the specific entity recognizer
-	// to be used by the StartEntitiesDetectionJob. This ARN is optional and is only
+	// to be used by the StartEntitiesDetectionJob . This ARN is optional and is only
 	// used for a custom entity recognition job.
 	EntityRecognizerArn *string
 
@@ -87,8 +86,9 @@ type StartEntitiesDetectionJobInput struct {
 	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
 	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
 	// the following formats:
-	//     - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//     - Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - Amazon Resource Name (ARN) of a KMS Key:
+	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
 	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
@@ -118,12 +118,13 @@ type StartEntitiesDetectionJobOutput struct {
 	JobId *string
 
 	// The status of the job.
-	//     - SUBMITTED - The job has been received and is queued for processing.
-	//     - IN_PROGRESS - Amazon Comprehend is processing the job.
-	//     - COMPLETED - The job was successfully completed and the output is available.
-	//     - FAILED - The job did not complete. To get details, use the operation.
-	//     - STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.
-	//     - STOPPED - The job was successfully stopped without completing.
+	//   - SUBMITTED - The job has been received and is queued for processing.
+	//   - IN_PROGRESS - Amazon Comprehend is processing the job.
+	//   - COMPLETED - The job was successfully completed and the output is available.
+	//   - FAILED - The job did not complete. To get details, use the operation.
+	//   - STOP_REQUESTED - Amazon Comprehend has received a stop request for the job
+	//   and is processing the request.
+	//   - STOPPED - The job was successfully stopped without completing.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

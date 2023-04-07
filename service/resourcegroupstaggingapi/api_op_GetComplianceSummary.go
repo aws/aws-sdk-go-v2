@@ -12,16 +12,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a table that shows counts of resources that are noncompliant with
-// their tag policies. For more information on tag policies, see Tag Policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+// Returns a table that shows counts of resources that are noncompliant with their
+// tag policies. For more information on tag policies, see Tag Policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 // in the Organizations User Guide. You can call this operation only from the
 // organization's management account and from the us-east-1 Region. This operation
 // supports pagination, where the response can be sent in multiple pages. You
 // should check the PaginationToken response parameter to determine if there are
 // additional results available to return. Repeat the query, passing the
-// PaginationTokenresponse parameter value as an input to the next request until
-// you recieve a null  value. A null value for PaginationToken indicates that
-// there are no more results waiting to be returned.
+// PaginationToken response parameter value as an input to the next request until
+// you recieve a null value. A null value for PaginationToken indicates that there
+// are no more results waiting to be returned.
 func (c *Client) GetComplianceSummary(ctx context.Context, params *GetComplianceSummaryInput, optFns ...func(*Options)) (*GetComplianceSummaryOutput, error) {
 	if params == nil {
 		params = &GetComplianceSummaryInput{}
@@ -62,16 +62,20 @@ type GetComplianceSummaryInput struct {
 
 	// Specifies that you want the response to include information for only resources
 	// of the specified types. The format of each resource type is
-	// service[:resourceType] . For example, specifying a resource type of ec2
-	// returns all Amazon EC2 resources (which includes EC2 instances). Specifying a
-	// resource type of ec2:instance returns only EC2 instances. The string for each
-	// service name and resource type is the same as that embedded in a resource's
-	// Amazon Resource Name (ARN). Consult the Amazon Web Services General Reference (https://docs.aws.amazon.com/general/latest/gr/)
+	// service[:resourceType] . For example, specifying a resource type of ec2 returns
+	// all Amazon EC2 resources (which includes EC2 instances). Specifying a resource
+	// type of ec2:instance returns only EC2 instances. The string for each service
+	// name and resource type is the same as that embedded in a resource's Amazon
+	// Resource Name (ARN). Consult the Amazon Web Services General Reference (https://docs.aws.amazon.com/general/latest/gr/)
 	// for the following:
-	//     - For a list of service name strings, see Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces) .
-	//     - For resource type strings, see Example ARNs (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax) .
-	//     - For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) .
-	//
+	//   - For a list of service name strings, see Amazon Web Services Service
+	//   Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
+	//   .
+	//   - For resource type strings, see Example ARNs (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax)
+	//   .
+	//   - For more information about ARNs, see Amazon Resource Names (ARNs) and
+	//   Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	//   .
 	// You can specify multiple resource types by using a comma separated array. The
 	// array can include up to 100 items. Note that the length constraint requirement
 	// applies to each resource type filter.
@@ -95,7 +99,7 @@ type GetComplianceSummaryOutput struct {
 
 	// A string that indicates that there is more data available than this response
 	// contains. To receive the next part of the response, specify this response value
-	// as the PaginationToken  value in the request for the next page.
+	// as the PaginationToken value in the request for the next page.
 	PaginationToken *string
 
 	// A table that shows counts of noncompliant resources.
@@ -185,8 +189,8 @@ type GetComplianceSummaryPaginatorOptions struct {
 	// 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

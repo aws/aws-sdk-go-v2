@@ -15,7 +15,7 @@ import (
 // you can update application code, input configuration, and output configuration.
 // Kinesis Data Analytics updates the ApplicationVersionId each time you update
 // your application. You cannot update the RuntimeEnvironment of an existing
-// application. If you need to update an application's RuntimeEnvironment, you
+// application. If you need to update an application's RuntimeEnvironment , you
 // must delete the application and create it again.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
@@ -48,16 +48,16 @@ type UpdateApplicationInput struct {
 	CloudWatchLoggingOptionUpdates []types.CloudWatchLoggingOptionUpdate
 
 	// A value you use to implement strong concurrency for application updates. You
-	// must provide the CurrentApplicationVersionId  or the ConditionalToken. You get
-	// the application's current ConditionalToken  using DescribeApplication. For
-	// better concurrency support, use the ConditionalToken  parameter instead of
+	// must provide the CurrentApplicationVersionId or the ConditionalToken . You get
+	// the application's current ConditionalToken using DescribeApplication . For
+	// better concurrency support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId .
 	ConditionalToken *string
 
 	// The current application version ID. You must provide the
-	// CurrentApplicationVersionId or the ConditionalToken.You can retrieve the
-	// application version ID using DescribeApplication. For better concurrency
-	// support, use the ConditionalToken  parameter instead of
+	// CurrentApplicationVersionId or the ConditionalToken .You can retrieve the
+	// application version ID using DescribeApplication . For better concurrency
+	// support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId .
 	CurrentApplicationVersionId *int64
 

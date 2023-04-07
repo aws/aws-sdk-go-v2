@@ -37,7 +37,7 @@ type ListMemberAccountsInput struct {
 
 	// (Discontinued) Use this parameter when paginating results. Set the value of
 	// this parameter to null on your first call to the ListMemberAccounts action.
-	// Subsequent calls to the action fill nextToken  in the request with the value of
+	// Subsequent calls to the action fill nextToken in the request with the value of
 	// nextToken from the previous response to continue listing data.
 	NextToken *string
 
@@ -138,8 +138,8 @@ type ListMemberAccountsPaginatorOptions struct {
 	// you want in the response. The default value is 250.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

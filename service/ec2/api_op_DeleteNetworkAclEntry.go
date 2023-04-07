@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified ingress or egress entry (rule) from the specified
-// network ACL.
+// Deletes the specified ingress or egress entry (rule) from the specified network
+// ACL.
 func (c *Client) DeleteNetworkAclEntry(ctx context.Context, params *DeleteNetworkAclEntryInput, optFns ...func(*Options)) (*DeleteNetworkAclEntryOutput, error) {
 	if params == nil {
 		params = &DeleteNetworkAclEntryInput{}

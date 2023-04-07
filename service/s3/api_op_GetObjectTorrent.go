@@ -39,8 +39,7 @@ func (c *Client) GetObjectTorrent(ctx context.Context, params *GetObjectTorrentI
 
 type GetObjectTorrentInput struct {
 
-	// The name of the bucket containing the object for which to get the torrent
-	// files.
+	// The name of the bucket containing the object for which to get the torrent files.
 	//
 	// This member is required.
 	Bucket *string
@@ -161,9 +160,9 @@ func newServiceMetadataMiddleware_opGetObjectTorrent(region string) *awsmiddlewa
 	}
 }
 
-// getGetObjectTorrentBucketMember returns a pointer to string denoting a
-// provided bucket member valueand a boolean indicating if the input has a modeled
-// bucket name,
+// getGetObjectTorrentBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
 func getGetObjectTorrentBucketMember(input interface{}) (*string, bool) {
 	in := input.(*GetObjectTorrentInput)
 	if in.Bucket == nil {

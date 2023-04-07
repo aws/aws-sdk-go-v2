@@ -11,8 +11,8 @@ import (
 // for use in attributes-based access control (ABAC). You can create permissions
 // policies that determine who can access your AWS resources based upon the
 // configured attribute values. When you enable ABAC and specify
-// AccessControlAttributes, IAM Identity Center passes the attribute values of
-// the authenticated user into IAM for use in policy evaluation.
+// AccessControlAttributes , IAM Identity Center passes the attribute values of the
+// authenticated user into IAM for use in policy evaluation.
 type AccessControlAttribute struct {
 
 	// The name of the attribute associated with your identities in your identity
@@ -75,8 +75,7 @@ type AccountAssignmentOperationStatus struct {
 	// The date that the permission set was created.
 	CreatedDate *time.Time
 
-	// The message that contains an error or exception in case of an operation
-	// failure.
+	// The message that contains an error or exception in case of an operation failure.
 	FailureReason *string
 
 	// The ARN of the permission set. For more information about ARNs, see Amazon
@@ -109,7 +108,7 @@ type AccountAssignmentOperationStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the AccountAssignment  creation request.
+// Provides information about the AccountAssignment creation request.
 type AccountAssignmentOperationStatusMetadata struct {
 
 	// The date that the permission set was created.
@@ -150,8 +149,8 @@ type CustomerManagedPolicyReference struct {
 	Name *string
 
 	// The path to the IAM policy that you have configured in each account where you
-	// want to deploy your permission set. The default is /. For more information,
-	// see Friendly names and paths (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names)
+	// want to deploy your permission set. The default is / . For more information, see
+	// Friendly names and paths (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names)
 	// in the IAM User Guide.
 	Path *string
 
@@ -162,8 +161,8 @@ type CustomerManagedPolicyReference struct {
 // configuration.
 type InstanceAccessControlAttributeConfiguration struct {
 
-	// Lists the attributes that are configured for ABAC in the specified IAM
-	// Identity Center instance.
+	// Lists the attributes that are configured for ABAC in the specified IAM Identity
+	// Center instance.
 	//
 	// This member is required.
 	AccessControlAttributes []AccessControlAttribute
@@ -179,8 +178,8 @@ type InstanceMetadata struct {
 	IdentityStoreId *string
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	InstanceArn *string
 
 	noSmithyDocumentSerde
@@ -197,7 +196,7 @@ type OperationStatusFilter struct {
 
 // Specifies the configuration of the AWS managed or customer managed policy that
 // you want to set as a permissions boundary. Specify either
-// CustomerManagedPolicyReferenceto use the name and path of a customer managed
+// CustomerManagedPolicyReference to use the name and path of a customer managed
 // policy, or ManagedPolicyArn to use the ARN of an AWS managed policy. A
 // permissions boundary represents the maximum permissions that any policy can
 // grant your role. For more information, see Permissions boundaries for IAM
@@ -258,8 +257,7 @@ type PermissionSetProvisioningStatus struct {
 	// The date that the permission set was created.
 	CreatedDate *time.Time
 
-	// The message that contains an error or exception in case of an operation
-	// failure.
+	// The message that contains an error or exception in case of an operation failure.
 	FailureReason *string
 
 	// The ARN of the permission set that is being provisioned. For more information
@@ -293,9 +291,9 @@ type PermissionSetProvisioningStatusMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A set of key-value pairs that are used to manage the resource. Tags can only
-// be applied to permission sets and cannot be applied to corresponding roles that
-// IAM Identity Center creates in AWS accounts.
+// A set of key-value pairs that are used to manage the resource. Tags can only be
+// applied to permission sets and cannot be applied to corresponding roles that IAM
+// Identity Center creates in AWS accounts.
 type Tag struct {
 
 	// The key for the tag.

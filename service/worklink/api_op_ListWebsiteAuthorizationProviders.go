@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of website authorization providers associated with a
-// specified fleet.
+// Retrieves a list of website authorization providers associated with a specified
+// fleet.
 //
 // Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
 // future version of the SDK.
@@ -141,8 +141,8 @@ type ListWebsiteAuthorizationProvidersPaginatorOptions struct {
 	// The maximum number of results to be included in the next page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

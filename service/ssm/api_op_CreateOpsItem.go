@@ -18,8 +18,8 @@ import (
 // in the Amazon Web Services Systems Manager User Guide. Operations engineers and
 // IT professionals use Amazon Web Services Systems Manager OpsCenter to view,
 // investigate, and remediate operational issues impacting the performance and
-// health of their Amazon Web Services resources. For more information, see
-// Amazon Web Services Systems Manager OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
+// health of their Amazon Web Services resources. For more information, see Amazon
+// Web Services Systems Manager OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
 // in the Amazon Web Services Systems Manager User Guide.
 func (c *Client) CreateOpsItem(ctx context.Context, params *CreateOpsItemInput, optFns ...func(*Options)) (*CreateOpsItemOutput, error) {
 	if params == nil {
@@ -62,8 +62,8 @@ type CreateOpsItemInput struct {
 	// in the Amazon Web Services Systems Manager User Guide.
 	AccountId *string
 
-	// The time a runbook workflow ended. Currently reported only for the OpsItem
-	// type /aws/changerequest .
+	// The time a runbook workflow ended. Currently reported only for the OpsItem type
+	// /aws/changerequest .
 	ActualEndTime *time.Time
 
 	// The time a runbook workflow started. Currently reported only for the OpsItem
@@ -82,7 +82,7 @@ type CreateOpsItemInput struct {
 	// keys, troubleshooting tips, or other relevant data. You enter operational data
 	// as key-value pairs. The key has a maximum length of 128 characters. The value
 	// has a maximum size of 20 KB. Operational data keys can't begin with the
-	// following: amazon , aws , amzn , ssm , /amazon , /aws , /amzn , /ssm. You can
+	// following: amazon , aws , amzn , ssm , /amazon , /aws , /amzn , /ssm . You can
 	// choose to make the data searchable by other users in the account or you can
 	// restrict search access. Searchable data means that all users with access to the
 	// OpsItem Overview page (as provided by the DescribeOpsItems API operation) can
@@ -98,13 +98,16 @@ type CreateOpsItemInput struct {
 
 	// The type of OpsItem to create. Systems Manager supports the following types of
 	// OpsItems:
-	//     - /aws/issue This type of OpsItem is used for default OpsItems created by OpsCenter.
-	//     - /aws/changerequest This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change requests.
-	//     - /aws/insights This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate OpsItems.
+	//   - /aws/issue This type of OpsItem is used for default OpsItems created by
+	//   OpsCenter.
+	//   - /aws/changerequest This type of OpsItem is used by Change Manager for
+	//   reviewing and approving or rejecting change requests.
+	//   - /aws/insights This type of OpsItem is used by OpsCenter for aggregating and
+	//   reporting on duplicate OpsItems.
 	OpsItemType *string
 
-	// The time specified in a change request for a runbook workflow to end.
-	// Currently supported only for the OpsItem type /aws/changerequest .
+	// The time specified in a change request for a runbook workflow to end. Currently
+	// supported only for the OpsItem type /aws/changerequest .
 	PlannedEndTime *time.Time
 
 	// The time specified in a change request for a runbook workflow to start.
@@ -126,10 +129,10 @@ type CreateOpsItemInput struct {
 	// OpsItems by using an inline IAM policy that specifies tags. For more
 	// information, see Getting started with OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions)
 	// in the Amazon Web Services Systems Manager User Guide. Tags use a key-value
-	// pair. For example: Key=Department,Value=Finance To add tags to a new OpsItem,
-	// a user must have IAM permissions for both the ssm:CreateOpsItems operation and
+	// pair. For example: Key=Department,Value=Finance To add tags to a new OpsItem, a
+	// user must have IAM permissions for both the ssm:CreateOpsItems operation and
 	// the ssm:AddTagsToResource operation. To add tags to an existing OpsItem, use
-	// the AddTagsToResource  operation.
+	// the AddTagsToResource operation.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

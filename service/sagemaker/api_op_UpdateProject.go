@@ -14,7 +14,7 @@ import (
 // Updates a machine learning (ML) project that is created from a template that
 // sets up an ML pipeline from training to deploying an approved model. You must
 // not update a project that is in use. If you update the
-// ServiceCatalogProvisioningUpdateDetailsof a project that is active or being
+// ServiceCatalogProvisioningUpdateDetails of a project that is active or being
 // created, or updated, you may lose resources already created by the project.
 func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, optFns ...func(*Options)) (*UpdateProjectOutput, error) {
 	if params == nil {
@@ -41,9 +41,9 @@ type UpdateProjectInput struct {
 	// The description for the project.
 	ProjectDescription *string
 
-	// The product ID and provisioning artifact ID to provision a service catalog.
-	// The provisioning artifact ID will default to the latest provisioning artifact ID
-	// of the product, if you don't provide the provisioning artifact ID. For more
+	// The product ID and provisioning artifact ID to provision a service catalog. The
+	// provisioning artifact ID will default to the latest provisioning artifact ID of
+	// the product, if you don't provide the provisioning artifact ID. For more
 	// information, see What is Amazon Web Services Service Catalog (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html)
 	// .
 	ServiceCatalogProvisioningUpdateDetails *types.ServiceCatalogProvisioningUpdateDetails

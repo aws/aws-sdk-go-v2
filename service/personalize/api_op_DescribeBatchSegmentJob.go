@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the properties of a batch segment job including name, Amazon Resource
-// Name (ARN), status, input and output configurations, and the ARN of the solution
+// Gets the properties of a batch segment job including name, Amazon Resource Name
+// (ARN), status, input and output configurations, and the ARN of the solution
 // version used to generate segments.
 func (c *Client) DescribeBatchSegmentJob(ctx context.Context, params *DescribeBatchSegmentJobInput, optFns ...func(*Options)) (*DescribeBatchSegmentJobOutput, error) {
 	if params == nil {

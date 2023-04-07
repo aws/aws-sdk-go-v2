@@ -49,8 +49,8 @@ type ListAccessPointsForObjectLambdaInput struct {
 	// The maximum number of access points that you want to include in the list. The
 	// response may contain fewer access points but will never contain more. If there
 	// are more than this number of access points, then the response will include a
-	// continuation token in the NextToken field that you can use to retrieve the
-	// next page of access points.
+	// continuation token in the NextToken field that you can use to retrieve the next
+	// page of access points.
 	MaxResults int32
 
 	// If the list has more access points than can be returned in one call to this
@@ -204,12 +204,12 @@ type ListAccessPointsForObjectLambdaPaginatorOptions struct {
 	// The maximum number of access points that you want to include in the list. The
 	// response may contain fewer access points but will never contain more. If there
 	// are more than this number of access points, then the response will include a
-	// continuation token in the NextToken field that you can use to retrieve the
-	// next page of access points.
+	// continuation token in the NextToken field that you can use to retrieve the next
+	// page of access points.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

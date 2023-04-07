@@ -61,7 +61,7 @@ type PutGatewayResponseInput struct {
 type PutGatewayResponseOutput struct {
 
 	// A Boolean flag to indicate whether this GatewayResponse is the default gateway
-	// response ( true ) or not ( false). A default gateway response is one generated
+	// response ( true ) or not ( false ). A default gateway response is one generated
 	// by API Gateway without any customization by an API developer.
 	DefaultResponse bool
 

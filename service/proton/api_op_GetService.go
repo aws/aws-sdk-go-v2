@@ -179,9 +179,9 @@ func NewServiceCreatedWaiter(client GetServiceAPIClient, optFns ...func(*Service
 	}
 }
 
-// Wait calls the waiter function for ServiceCreated waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ServiceCreated waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ServiceCreatedWaiter) Wait(ctx context.Context, params *GetServiceInput, maxWaitDur time.Duration, optFns ...func(*ServiceCreatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -390,9 +390,9 @@ func NewServiceUpdatedWaiter(client GetServiceAPIClient, optFns ...func(*Service
 	}
 }
 
-// Wait calls the waiter function for ServiceUpdated waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ServiceUpdated waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ServiceUpdatedWaiter) Wait(ctx context.Context, params *GetServiceInput, maxWaitDur time.Duration, optFns ...func(*ServiceUpdatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -618,9 +618,9 @@ func NewServiceDeletedWaiter(client GetServiceAPIClient, optFns ...func(*Service
 	}
 }
 
-// Wait calls the waiter function for ServiceDeleted waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for ServiceDeleted waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ServiceDeletedWaiter) Wait(ctx context.Context, params *GetServiceInput, maxWaitDur time.Duration, optFns ...func(*ServiceDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

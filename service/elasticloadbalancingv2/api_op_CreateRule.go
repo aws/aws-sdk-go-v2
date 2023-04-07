@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a rule for the specified listener. The listener must be associated
-// with an Application Load Balancer. Each rule consists of a priority, one or more
+// Creates a rule for the specified listener. The listener must be associated with
+// an Application Load Balancer. Each rule consists of a priority, one or more
 // actions, and one or more conditions. Rules are evaluated in priority order, from
 // the lowest value to the highest value. When the conditions for a rule are met,
 // its actions are performed. If the conditions for no rules are met, the actions

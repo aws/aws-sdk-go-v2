@@ -75,8 +75,8 @@ const (
 	ContentRedactionTypePii ContentRedactionType = "PII"
 )
 
-// Values returns all known values for ContentRedactionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ContentRedactionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ContentRedactionType) Values() []ContentRedactionType {
 	return []ContentRedactionType{
@@ -92,9 +92,9 @@ const (
 	ItemTypePunctuation   ItemType = "punctuation"
 )
 
-// Values returns all known values for ItemType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ItemType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (ItemType) Values() []ItemType {
 	return []ItemType{
 		"pronunciation",
@@ -171,8 +171,8 @@ const (
 	MedicalContentIdentificationTypePhi MedicalContentIdentificationType = "PHI"
 )
 
-// Values returns all known values for MedicalContentIdentificationType. Note
-// that this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for MedicalContentIdentificationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (MedicalContentIdentificationType) Values() []MedicalContentIdentificationType {
@@ -190,9 +190,9 @@ const (
 	PartialResultsStabilityLow    PartialResultsStability = "low"
 )
 
-// Values returns all known values for PartialResultsStability. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PartialResultsStability. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PartialResultsStability) Values() []PartialResultsStability {
 	return []PartialResultsStability{
 		"high",
@@ -275,8 +275,8 @@ const (
 	TypeDictation    Type = "DICTATION"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

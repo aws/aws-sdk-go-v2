@@ -43,9 +43,9 @@ type DescribeRuleGroupMetadataInput struct {
 	// specify both.
 	RuleGroupName *string
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group
-	// is stateless, it contains stateless rules. If it is stateful, it contains
-	// stateful rules. This setting is required for requests that do not include the
+	// Indicates whether the rule group is stateless or stateful. If the rule group is
+	// stateless, it contains stateless rules. If it is stateful, it contains stateful
+	// rules. This setting is required for requests that do not include the
 	// RuleGroupARN .
 	Type types.RuleGroupType
 
@@ -73,7 +73,7 @@ type DescribeRuleGroupMetadataOutput struct {
 	// this capacity. When you reference a rule group from a firewall policy, Network
 	// Firewall reserves this capacity for the rule group. You can retrieve the
 	// capacity that would be required for a rule group before you create the rule
-	// group by calling CreateRuleGroup  with DryRun  set to TRUE .
+	// group by calling CreateRuleGroup with DryRun set to TRUE .
 	Capacity *int32
 
 	// Returns the metadata objects for the specified rule group.
@@ -86,9 +86,9 @@ type DescribeRuleGroupMetadataOutput struct {
 	// can only use these for stateful rule groups.
 	StatefulRuleOptions *types.StatefulRuleOptions
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group
-	// is stateless, it contains stateless rules. If it is stateful, it contains
-	// stateful rules. This setting is required for requests that do not include the
+	// Indicates whether the rule group is stateless or stateful. If the rule group is
+	// stateless, it contains stateless rules. If it is stateful, it contains stateful
+	// rules. This setting is required for requests that do not include the
 	// RuleGroupARN .
 	Type types.RuleGroupType
 

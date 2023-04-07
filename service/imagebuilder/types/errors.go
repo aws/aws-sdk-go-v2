@@ -171,8 +171,8 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified parameter is invalid. Review the available parameters for the
-// API request.
+// The specified parameter is invalid. Review the available parameters for the API
+// request.
 type InvalidParameterException struct {
 	Message *string
 
@@ -382,8 +382,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the service encounters an unrecoverable
-// exception.
+// This exception is thrown when the service encounters an unrecoverable exception.
 type ServiceException struct {
 	Message *string
 

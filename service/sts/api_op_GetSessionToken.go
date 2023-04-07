@@ -16,13 +16,13 @@ import (
 // a security token. Typically, you use GetSessionToken if you want to use MFA to
 // protect programmatic calls to specific Amazon Web Services API operations like
 // Amazon EC2 StopInstances . MFA-enabled IAM users would need to call
-// GetSessionTokenand submit an MFA code that is associated with their MFA
-// device. Using the temporary security credentials that are returned from the
-// call, IAM users can then make programmatic calls to API operations that require
-// MFA authentication. If you do not supply a correct MFA code, then the API
-// returns an access denied error. For a comparison of GetSessionToken with the
-// other API operations that produce temporary credentials, see Requesting
-// Temporary Security Credentials (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html)
+// GetSessionToken and submit an MFA code that is associated with their MFA device.
+// Using the temporary security credentials that are returned from the call, IAM
+// users can then make programmatic calls to API operations that require MFA
+// authentication. If you do not supply a correct MFA code, then the API returns an
+// access denied error. For a comparison of GetSessionToken with the other API
+// operations that produce temporary credentials, see Requesting Temporary
+// Security Credentials (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html)
 // and Comparing the Amazon Web Services STS API operations (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison)
 // in the IAM User Guide. No permissions are required for users to perform this
 // operation. The purpose of the sts:GetSessionToken operation is to authenticate
@@ -38,22 +38,21 @@ import (
 // (1 hour), with a default of 1 hour. Permissions The temporary security
 // credentials created by GetSessionToken can be used to make API calls to any
 // Amazon Web Services service with the following exceptions:
-//   - You cannot call any IAM API operations unless MFA authentication information is included in the request.
+//   - You cannot call any IAM API operations unless MFA authentication
+//     information is included in the request.
 //   - You cannot call any STS API except AssumeRole or GetCallerIdentity .
 //
-// We
-// recommend that you do not call GetSessionToken with Amazon Web Services
+// We recommend that you do not call GetSessionToken with Amazon Web Services
 // account root user credentials. Instead, follow our best practices (https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users)
 // by creating one or more IAM users, giving them the necessary permissions, and
 // using IAM users for everyday interaction with Amazon Web Services. The
 // credentials that are returned by GetSessionToken are based on permissions
 // associated with the user whose credentials were used to call the operation. If
-// GetSessionTokenis called using Amazon Web Services account root user
+// GetSessionToken is called using Amazon Web Services account root user
 // credentials, the temporary credentials have root user permissions. Similarly, if
-//
-// GetSessionTokenis called using the credentials of an IAM user, the temporary
+// GetSessionToken is called using the credentials of an IAM user, the temporary
 // credentials have the same permissions as the IAM user. For more information
-// about using GetSessionToken  to create temporary credentials, go to Temporary
+// about using GetSessionToken to create temporary credentials, go to Temporary
 // Credentials for Users in Untrusted Environments (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getsessiontoken)
 // in the IAM User Guide.
 func (c *Client) GetSessionToken(ctx context.Context, params *GetSessionTokenInput, optFns ...func(*Options)) (*GetSessionTokenOutput, error) {
@@ -82,16 +81,15 @@ type GetSessionTokenInput struct {
 	DurationSeconds *int32
 
 	// The identification number of the MFA device that is associated with the IAM
-	// user who is making the GetSessionToken call. Specify this value if the IAM
-	// user has a policy that requires MFA authentication. The value is either the
-	// serial number for a hardware device (such as GAHT12345678) or an Amazon
-	// Resource Name (ARN) for a virtual device (such as
-	// arn:aws:iam::123456789012:mfa/user). You can find the device for an IAM user
-	// by going to the Amazon Web Services Management Console and viewing the user's
-	// security credentials. The regex used to validate this parameter is a string of
-	// characters consisting of upper- and lower-case alphanumeric characters with no
-	// spaces. You can also include underscores or any of the following characters:
-	// =,.@:/-
+	// user who is making the GetSessionToken call. Specify this value if the IAM user
+	// has a policy that requires MFA authentication. The value is either the serial
+	// number for a hardware device (such as GAHT12345678 ) or an Amazon Resource Name
+	// (ARN) for a virtual device (such as arn:aws:iam::123456789012:mfa/user ). You
+	// can find the device for an IAM user by going to the Amazon Web Services
+	// Management Console and viewing the user's security credentials. The regex used
+	// to validate this parameter is a string of characters consisting of upper- and
+	// lower-case alphanumeric characters with no spaces. You can also include
+	// underscores or any of the following characters: =,.@:/-
 	SerialNumber *string
 
 	// The value provided by the MFA device, if MFA is required. If any policy

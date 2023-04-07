@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the traffic sources for the specified Auto Scaling group.
-// You can optionally provide a traffic source type. If you provide a traffic
-// source type, then the results only include that traffic source type. If you do
-// not provide a traffic source type, then the results include all the traffic
-// sources for the specified Auto Scaling group.
+// Gets information about the traffic sources for the specified Auto Scaling
+// group. You can optionally provide a traffic source type. If you provide a
+// traffic source type, then the results only include that traffic source type. If
+// you do not provide a traffic source type, then the results include all the
+// traffic sources for the specified Auto Scaling group.
 func (c *Client) DescribeTrafficSources(ctx context.Context, params *DescribeTrafficSourcesInput, optFns ...func(*Options)) (*DescribeTrafficSourcesOutput, error) {
 	if params == nil {
 		params = &DescribeTrafficSourcesInput{}
@@ -39,23 +39,19 @@ type DescribeTrafficSourcesInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The maximum number of items to return with this call. The maximum value is 50.
+	// The maximum number of items to return with this call. The maximum value is 50 .
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
 
-	// The traffic source type that you want to describe. The following lists the valid
-	// values:
-	//
-	// * elb if the traffic source is a Classic Load Balancer.
-	//
-	// * elbv2 if the
-	// traffic source is a Application Load Balancer, Gateway Load Balancer, or Network
-	// Load Balancer.
-	//
-	// * vpc-lattice if the traffic source is VPC Lattice.
+	// The traffic source type that you want to describe. The following lists the
+	// valid values:
+	//   - elb if the traffic source is a Classic Load Balancer.
+	//   - elbv2 if the traffic source is a Application Load Balancer, Gateway Load
+	//   Balancer, or Network Load Balancer.
+	//   - vpc-lattice if the traffic source is VPC Lattice.
 	TrafficSourceType *string
 
 	noSmithyDocumentSerde
@@ -63,10 +59,10 @@ type DescribeTrafficSourcesInput struct {
 
 type DescribeTrafficSourcesOutput struct {
 
-	// This string indicates that the response contains more items than can be returned
-	// in a single response. To receive additional items, specify this string for the
-	// NextToken value when requesting the next set of items. This value is null when
-	// there are no more items to return.
+	// This string indicates that the response contains more items than can be
+	// returned in a single response. To receive additional items, specify this string
+	// for the NextToken value when requesting the next set of items. This value is
+	// null when there are no more items to return.
 	NextToken *string
 
 	// Information about the traffic sources.
@@ -152,7 +148,7 @@ var _ DescribeTrafficSourcesAPIClient = (*Client)(nil)
 // DescribeTrafficSourcesPaginatorOptions is the paginator options for
 // DescribeTrafficSources
 type DescribeTrafficSourcesPaginatorOptions struct {
-	// The maximum number of items to return with this call. The maximum value is 50.
+	// The maximum number of items to return with this call. The maximum value is 50 .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

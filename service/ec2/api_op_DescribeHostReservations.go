@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes reservations that are associated with Dedicated Hosts in your
-// account.
+// Describes reservations that are associated with Dedicated Hosts in your account.
 func (c *Client) DescribeHostReservations(ctx context.Context, params *DescribeHostReservationsInput, optFns ...func(*Options)) (*DescribeHostReservationsOutput, error) {
 	if params == nil {
 		params = &DescribeHostReservationsInput{}
@@ -32,11 +31,17 @@ func (c *Client) DescribeHostReservations(ctx context.Context, params *DescribeH
 type DescribeHostReservationsInput struct {
 
 	// The filters.
-	//     - instance-family - The instance family (for example, m4 ).
-	//     - payment-option - The payment option ( NoUpfront | PartialUpfront | AllUpfront ).
-	//     - state - The state of the reservation ( payment-pending | payment-failed | active | retired ).
-	//     - tag: - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
-	//     - tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - instance-family - The instance family (for example, m4 ).
+	//   - payment-option - The payment option ( NoUpfront | PartialUpfront |
+	//   AllUpfront ).
+	//   - state - The state of the reservation ( payment-pending | payment-failed |
+	//   active | retired ).
+	//   - tag: - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
 	Filter []types.Filter
 
 	// The host reservation IDs.
@@ -146,8 +151,8 @@ type DescribeHostReservationsPaginatorOptions struct {
 	// larger value than 500, you receive an error.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

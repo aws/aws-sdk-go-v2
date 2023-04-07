@@ -43,12 +43,12 @@ type CreateSipRuleInput struct {
 	// This member is required.
 	TriggerType types.SipRuleTriggerType
 
-	// If TriggerType  is RequestUriHostname, the value can be the outbound host name
-	// of a Voice Connector. If TriggerType  is ToPhoneNumber, the value can be a
+	// If TriggerType is RequestUriHostname , the value can be the outbound host name
+	// of a Voice Connector. If TriggerType is ToPhoneNumber , the value can be a
 	// customer-owned phone number in the E164 format. The SipMediaApplication
 	// specified in the SipRule is triggered if the request URI in an incoming SIP
 	// request matches the RequestUriHostname , or if the To header in the incoming
-	// SIP request matches the ToPhoneNumber  value.
+	// SIP request matches the ToPhoneNumber value.
 	//
 	// This member is required.
 	TriggerValue *string

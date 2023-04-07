@@ -37,7 +37,7 @@ type DescribeFlowExecutionRecordsInput struct {
 	FlowName *string
 
 	// Specifies the maximum number of items that should be returned in the result
-	// set. The default for maxResults  is 20 (for all paginated API operations).
+	// set. The default for maxResults is 20 (for all paginated API operations).
 	MaxResults *int32
 
 	// The pagination token for the next page of data.
@@ -135,11 +135,11 @@ var _ DescribeFlowExecutionRecordsAPIClient = (*Client)(nil)
 // DescribeFlowExecutionRecords
 type DescribeFlowExecutionRecordsPaginatorOptions struct {
 	// Specifies the maximum number of items that should be returned in the result
-	// set. The default for maxResults  is 20 (for all paginated API operations).
+	// set. The default for maxResults is 20 (for all paginated API operations).
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stores events in Amazon Fraud Detector without generating fraud predictions
-// for those events. For example, you can use SendEvent to upload a historical
+// Stores events in Amazon Fraud Detector without generating fraud predictions for
+// those events. For example, you can use SendEvent to upload a historical
 // dataset, which you can then later use to train a model.
 func (c *Client) SendEvent(ctx context.Context, params *SendEventInput, optFns ...func(*Options)) (*SendEventOutput, error) {
 	if params == nil {

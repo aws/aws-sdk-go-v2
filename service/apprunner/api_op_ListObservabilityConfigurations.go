@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of active App Runner observability configurations in your
-// Amazon Web Services account. You can query the revisions for a specific
-// configuration name or the revisions for all active configurations in your
-// account. You can optionally query only the latest revision of each requested
-// name. To retrieve a full description of a particular configuration revision,
-// call and provide one of the ARNs returned by ListObservabilityConfigurations .
+// Returns a list of active App Runner observability configurations in your Amazon
+// Web Services account. You can query the revisions for a specific configuration
+// name or the revisions for all active configurations in your account. You can
+// optionally query only the latest revision of each requested name. To retrieve a
+// full description of a particular configuration revision, call and provide one of
+// the ARNs returned by ListObservabilityConfigurations .
 func (c *Client) ListObservabilityConfigurations(ctx context.Context, params *ListObservabilityConfigurationsInput, optFns ...func(*Options)) (*ListObservabilityConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListObservabilityConfigurationsInput{}
@@ -36,12 +36,12 @@ func (c *Client) ListObservabilityConfigurations(ctx context.Context, params *Li
 type ListObservabilityConfigurationsInput struct {
 
 	// Set to true to list only the latest revision for each requested configuration
-	// name. Set to false to list all revisions for each requested configuration
-	// name. Default: true
+	// name. Set to false to list all revisions for each requested configuration name.
+	// Default: true
 	LatestOnly bool
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	MaxResults *int32
 
@@ -62,7 +62,7 @@ type ListObservabilityConfigurationsInput struct {
 type ListObservabilityConfigurationsOutput struct {
 
 	// A list of summary information records for observability configurations. In a
-	// paginated request, the request returns up to MaxResults  records for each call.
+	// paginated request, the request returns up to MaxResults records for each call.
 	//
 	// This member is required.
 	ObservabilityConfigurationSummaryList []types.ObservabilityConfigurationSummary
@@ -149,12 +149,12 @@ var _ ListObservabilityConfigurationsAPIClient = (*Client)(nil)
 // ListObservabilityConfigurations
 type ListObservabilityConfigurationsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

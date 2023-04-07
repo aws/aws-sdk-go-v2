@@ -16,7 +16,7 @@ import (
 // stream before deleting it, you can specify the stream version. Kinesis Video
 // Streams assigns a version to each stream. When you update a stream, Kinesis
 // Video Streams assigns a new version number. To get the latest stream version,
-// use the DescribeStream  API. This operation requires permission for the
+// use the DescribeStream API. This operation requires permission for the
 // KinesisVideo:DeleteStream action.
 func (c *Client) DeleteStream(ctx context.Context, params *DeleteStreamInput, optFns ...func(*Options)) (*DeleteStreamOutput, error) {
 	if params == nil {
@@ -42,7 +42,7 @@ type DeleteStreamInput struct {
 
 	// Optional: The version of the stream that you want to delete. Specify the
 	// version as a safeguard to ensure that your are deleting the correct stream. To
-	// get the stream version, use the DescribeStream  API. If not specified, only the
+	// get the stream version, use the DescribeStream API. If not specified, only the
 	// CreationTime is checked before deleting the stream.
 	CurrentVersion *string
 

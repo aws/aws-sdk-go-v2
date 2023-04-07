@@ -39,8 +39,8 @@ type UpdatePlacementInput struct {
 	// This member is required.
 	ProjectName *string
 
-	// The user-defined object of attributes used to update the placement. The
-	// maximum number of key/value pairs is 50.
+	// The user-defined object of attributes used to update the placement. The maximum
+	// number of key/value pairs is 50.
 	Attributes map[string]string
 
 	noSmithyDocumentSerde

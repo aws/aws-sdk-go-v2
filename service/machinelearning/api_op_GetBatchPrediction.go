@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a BatchPrediction that includes detailed metadata, status, and data
-// file information for a Batch Prediction  request.
+// file information for a Batch Prediction request.
 func (c *Client) GetBatchPrediction(ctx context.Context, params *GetBatchPredictionInput, optFns ...func(*Options)) (*GetBatchPredictionOutput, error) {
 	if params == nil {
 		params = &GetBatchPredictionInput{}
@@ -31,7 +31,7 @@ func (c *Client) GetBatchPrediction(ctx context.Context, params *GetBatchPredict
 
 type GetBatchPredictionInput struct {
 
-	// An ID assigned to the BatchPrediction  at creation.
+	// An ID assigned to the BatchPrediction at creation.
 	//
 	// This member is required.
 	BatchPredictionId *string
@@ -39,53 +39,52 @@ type GetBatchPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetBatchPrediction  operation and describes a
+// Represents the output of a GetBatchPrediction operation and describes a
 // BatchPrediction .
 type GetBatchPredictionOutput struct {
 
-	// The ID of the DataSource  that was used to create the BatchPrediction .
+	// The ID of the DataSource that was used to create the BatchPrediction .
 	BatchPredictionDataSourceId *string
 
 	// An ID assigned to the BatchPrediction at creation. This value should be
-	// identical to the value of the BatchPredictionID  in the request.
+	// identical to the value of the BatchPredictionID in the request.
 	BatchPredictionId *string
 
 	// The approximate CPU time in milliseconds that Amazon Machine Learning spent
-	// processing the BatchPrediction, normalized and scaled on computation
-	// resources. ComputeTime  is only available if the BatchPrediction  is in the
-	// COMPLETED state.
+	// processing the BatchPrediction , normalized and scaled on computation resources.
+	// ComputeTime is only available if the BatchPrediction is in the COMPLETED state.
 	ComputeTime *int64
 
 	// The time when the BatchPrediction was created. The time is expressed in epoch
 	// time.
 	CreatedAt *time.Time
 
-	// The AWS user account that invoked the BatchPrediction. The account type can be
+	// The AWS user account that invoked the BatchPrediction . The account type can be
 	// either an AWS root account or an AWS Identity and Access Management (IAM) user
 	// account.
 	CreatedByIamUser *string
 
-	// The epoch time when Amazon Machine Learning marked the BatchPrediction  as
-	// COMPLETED or FAILED . FinishedAt  is only available when the BatchPrediction
-	// is in the COMPLETED  or FAILED  state.
+	// The epoch time when Amazon Machine Learning marked the BatchPrediction as
+	// COMPLETED or FAILED . FinishedAt is only available when the BatchPrediction is
+	// in the COMPLETED or FAILED state.
 	FinishedAt *time.Time
 
 	// The location of the data file or directory in Amazon Simple Storage Service
 	// (Amazon S3).
 	InputDataLocationS3 *string
 
-	// The number of invalid records that Amazon Machine Learning saw while
-	// processing the BatchPrediction .
+	// The number of invalid records that Amazon Machine Learning saw while processing
+	// the BatchPrediction .
 	InvalidRecordCount *int64
 
-	// The time of the most recent edit to BatchPrediction. The time is expressed in
+	// The time of the most recent edit to BatchPrediction . The time is expressed in
 	// epoch time.
 	LastUpdatedAt *time.Time
 
-	// A link to the file that contains logs of the CreateBatchPrediction  operation.
+	// A link to the file that contains logs of the CreateBatchPrediction operation.
 	LogUri *string
 
-	// The ID of the MLModel  that generated predictions for the BatchPrediction
+	// The ID of the MLModel that generated predictions for the BatchPrediction
 	// request.
 	MLModelId *string
 
@@ -100,17 +99,19 @@ type GetBatchPredictionOutput struct {
 	// results.
 	OutputUri *string
 
-	// The epoch time when Amazon Machine Learning marked the BatchPrediction  as
-	// INPROGRESS . StartedAt  isn't available if the BatchPrediction  is in the
-	// PENDING state.
+	// The epoch time when Amazon Machine Learning marked the BatchPrediction as
+	// INPROGRESS . StartedAt isn't available if the BatchPrediction is in the PENDING
+	// state.
 	StartedAt *time.Time
 
 	// The status of the BatchPrediction , which can be one of the following values:
-	//     - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to generate batch predictions.
-	//     - INPROGRESS - The batch predictions are in progress.
-	//     - FAILED - The request to perform a batch prediction did not run to completion. It is not usable.
-	//     - COMPLETED - The batch prediction process completed successfully.
-	//     - DELETED - The BatchPrediction is marked as deleted. It is not usable.
+	//   - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
+	//   generate batch predictions.
+	//   - INPROGRESS - The batch predictions are in progress.
+	//   - FAILED - The request to perform a batch prediction did not run to
+	//   completion. It is not usable.
+	//   - COMPLETED - The batch prediction process completed successfully.
+	//   - DELETED - The BatchPrediction is marked as deleted. It is not usable.
 	Status types.EntityStatus
 
 	// The number of total records that Amazon Machine Learning saw while processing

@@ -72,8 +72,8 @@ type CreateFuotaTaskInput struct {
 	// the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.
 	RedundancyPercent *int32
 
-	// The tag to attach to the specified resource. Tags are metadata that you can
-	// use to manage a resource.
+	// The tag to attach to the specified resource. Tags are metadata that you can use
+	// to manage a resource.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a new task using the specified task definition. You can allow Amazon
-// ECS to place tasks for you, or you can customize how Amazon ECS places tasks
-// using placement constraints and placement strategies. For more information, see
+// Starts a new task using the specified task definition. You can allow Amazon ECS
+// to place tasks for you, or you can customize how Amazon ECS places tasks using
+// placement constraints and placement strategies. For more information, see
 // Scheduling Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
 // in the Amazon Elastic Container Service Developer Guide. Alternatively, you can
 // use StartTask to use your own scheduler or place tasks manually on specific
@@ -30,8 +30,16 @@ import (
 // resources might not be immediately visible to all subsequent commands you run.
 // Keep this in mind when you carry out an API command that immediately follows a
 // previous API command. To manage eventual consistency, you can do the following:
-//   - Confirm the state of the resource before you run a command to modify it. Run the DescribeTasks command using an exponential backoff algorithm to ensure that you allow enough time for the previous command to propagate through the system. To do this, run the DescribeTasks command repeatedly, starting with a couple of seconds of wait time and increasing gradually up to five minutes of wait time.
-//   - Add wait time between subsequent commands, even if the DescribeTasks command returns an accurate response. Apply an exponential backoff algorithm starting with a couple of seconds of wait time, and increase gradually up to about five minutes of wait time.
+//   - Confirm the state of the resource before you run a command to modify it.
+//     Run the DescribeTasks command using an exponential backoff algorithm to ensure
+//     that you allow enough time for the previous command to propagate through the
+//     system. To do this, run the DescribeTasks command repeatedly, starting with a
+//     couple of seconds of wait time and increasing gradually up to five minutes of
+//     wait time.
+//   - Add wait time between subsequent commands, even if the DescribeTasks
+//     command returns an accurate response. Apply an exponential backoff algorithm
+//     starting with a couple of seconds of wait time, and increase gradually up to
+//     about five minutes of wait time.
 func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...func(*Options)) (*RunTaskOutput, error) {
 	if params == nil {
 		params = &RunTaskInput{}
@@ -49,21 +57,21 @@ func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...fu
 
 type RunTaskInput struct {
 
-	// The family  and revision  ( family:revision) or full ARN of the task
-	// definition to run. If a revision  isn't specified, the latest ACTIVE revision
-	// is used. When you create a policy for run-task, you can set the resource to be
-	// the latest task definition revision, or a specific revision. The full ARN value
-	// must match the value that you specified as the Resource of the principal's
-	// permissions policy. When you specify the policy resource as the latest task
-	// definition version (by setting the Resource  in the policy to
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName), then set
+	// The family and revision ( family:revision ) or full ARN of the task definition
+	// to run. If a revision isn't specified, the latest ACTIVE revision is used. When
+	// you create a policy for run-task, you can set the resource to be the latest task
+	// definition revision, or a specific revision. The full ARN value must match the
+	// value that you specified as the Resource of the principal's permissions policy.
+	// When you specify the policy resource as the latest task definition version (by
+	// setting the Resource in the policy to
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName ), then set
 	// this value to arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName
 	// . When you specify the policy resource as a specific task definition version (by
-	// setting the Resource  in the policy to
+	// setting the Resource in the policy to
 	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1 or
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*), then set
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:* ), then set
 	// this value to
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1. For more
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1 . For more
 	// information, see Policy Resources for Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources)
 	// in the Amazon Elastic Container Service developer Guide.
 	//
@@ -72,9 +80,9 @@ type RunTaskInput struct {
 
 	// The capacity provider strategy to use for the task. If a
 	// capacityProviderStrategy is specified, the launchType parameter must be
-	// omitted. If no capacityProviderStrategy  or launchType  is specified, the
-	// defaultCapacityProviderStrategyfor the cluster is used. When you use cluster
-	// auto scaling, you must specify capacityProviderStrategy  and not launchType. A
+	// omitted. If no capacityProviderStrategy or launchType is specified, the
+	// defaultCapacityProviderStrategy for the cluster is used. When you use cluster
+	// auto scaling, you must specify capacityProviderStrategy and not launchType . A
 	// capacity provider strategy may contain a maximum of 6 capacity providers.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
@@ -92,13 +100,13 @@ type RunTaskInput struct {
 	EnableECSManagedTags bool
 
 	// Determines whether to use the execute command functionality for the containers
-	// in this task. If true, this enables execute command functionality on all
-	// containers in the task. If true, then the task definition must have a task
+	// in this task. If true , this enables execute command functionality on all
+	// containers in the task. If true , then the task definition must have a task
 	// role, or you must provide one as an override.
 	EnableExecuteCommand bool
 
-	// The name of the task group to associate with the task. The default value is
-	// the family name of the task definition (for example, family:my-family-name ).
+	// The name of the task group to associate with the task. The default value is the
+	// family name of the task definition (for example, family:my-family-name ).
 	Group *string
 
 	// The infrastructure to run your standalone task on. For more information, see
@@ -111,7 +119,7 @@ type RunTaskInput struct {
 	// on Amazon EC2 instances registered to your cluster. The EXTERNAL launch type
 	// runs your tasks on your on-premises server or virtual machine (VM) capacity
 	// registered to your cluster. A task can use either a launch type or a capacity
-	// provider strategy. If a launchType  is specified, the capacityProviderStrategy
+	// provider strategy. If a launchType is specified, the capacityProviderStrategy
 	// parameter must be omitted. When you use cluster auto scaling, you must specify
 	// capacityProviderStrategy and not launchType .
 	LaunchType types.LaunchType
@@ -126,12 +134,11 @@ type RunTaskInput struct {
 	// A list of container overrides in JSON format that specify the name of a
 	// container in the specified task definition and the overrides it should receive.
 	// You can override the default command for a container (that's specified in the
-	// task definition or Docker image) with a command override. You can also
-	// override existing environment variables (that are specified in the task
-	// definition or Docker image) on a container or add new environment variables to
-	// it with an environment override. A total of 8192 characters are allowed for
-	// overrides. This limit includes the JSON formatting characters of the override
-	// structure.
+	// task definition or Docker image) with a command override. You can also override
+	// existing environment variables (that are specified in the task definition or
+	// Docker image) on a container or add new environment variables to it with an
+	// environment override. A total of 8192 characters are allowed for overrides. This
+	// limit includes the JSON formatting characters of the override structure.
 	Overrides *types.TaskOverride
 
 	// An array of placement constraint objects to use for the task. You can specify
@@ -144,8 +151,8 @@ type RunTaskInput struct {
 	PlacementStrategy []types.PlacementStrategy
 
 	// The platform version the task uses. A platform version is only specified for
-	// tasks hosted on Fargate. If one isn't specified, the LATEST platform version
-	// is used. For more information, see Fargate platform versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
+	// tasks hosted on Fargate. If one isn't specified, the LATEST platform version is
+	// used. For more information, see Fargate platform versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
@@ -153,7 +160,7 @@ type RunTaskInput struct {
 	// If no value is specified, the tags aren't propagated. Tags can only be
 	// propagated to the task during task creation. To add tags to a task after task
 	// creation, use the TagResource API action. An error will be received if you
-	// specify the SERVICE  option when running a task.
+	// specify the SERVICE option when running a task.
 	PropagateTags types.PropagateTags
 
 	// The reference ID to use for the task. The reference ID can have a maximum
@@ -173,13 +180,20 @@ type RunTaskInput struct {
 	// The metadata that you apply to the task to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
-	//     - Maximum number of tags per resource - 50
-	//     - For each resource, each tag key must be unique, and each tag key can have only one value.
-	//     - Maximum key length - 128 Unicode characters in UTF-8
-	//     - Maximum value length - 256 Unicode characters in UTF-8
-	//     - If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
-	//     - Tag keys and values are case-sensitive.
-	//     - Do not use aws: , AWS: , or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.
+	//   - Maximum number of tags per resource - 50
+	//   - For each resource, each tag key must be unique, and each tag key can have
+	//   only one value.
+	//   - Maximum key length - 128 Unicode characters in UTF-8
+	//   - Maximum value length - 256 Unicode characters in UTF-8
+	//   - If your tagging schema is used across multiple services and resources,
+	//   remember that other services may have restrictions on allowed characters.
+	//   Generally allowed characters are: letters, numbers, and spaces representable in
+	//   UTF-8, and the following characters: + - = . _ : / @.
+	//   - Tag keys and values are case-sensitive.
+	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
+	//   prefix for either keys or values as it is reserved for Amazon Web Services use.
+	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
+	//   prefix do not count against your tags per resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -190,8 +204,8 @@ type RunTaskOutput struct {
 	// Any failures associated with the call.
 	Failures []types.Failure
 
-	// A full description of the tasks that were run. The tasks that were
-	// successfully placed on your cluster are described here.
+	// A full description of the tasks that were run. The tasks that were successfully
+	// placed on your cluster are described here.
 	Tasks []types.Task
 
 	// Metadata pertaining to the operation's result.

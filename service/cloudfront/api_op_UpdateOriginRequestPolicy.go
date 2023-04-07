@@ -16,8 +16,10 @@ import (
 // provided in the request. You cannot update some fields independent of others. To
 // update an origin request policy configuration:
 //   - Use GetOriginRequestPolicyConfig to get the current configuration.
-//   - Locally modify the fields in the origin request policy configuration that you want to update.
-//   - Call UpdateOriginRequestPolicy by providing the entire origin request policy configuration, including the fields that you modified and those that you didn't.
+//   - Locally modify the fields in the origin request policy configuration that
+//     you want to update.
+//   - Call UpdateOriginRequestPolicy by providing the entire origin request policy
+//     configuration, including the fields that you modified and those that you didn't.
 func (c *Client) UpdateOriginRequestPolicy(ctx context.Context, params *UpdateOriginRequestPolicyInput, optFns ...func(*Options)) (*UpdateOriginRequestPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateOriginRequestPolicyInput{}
@@ -36,8 +38,8 @@ func (c *Client) UpdateOriginRequestPolicy(ctx context.Context, params *UpdateOr
 type UpdateOriginRequestPolicyInput struct {
 
 	// The unique identifier for the origin request policy that you are updating. The
-	// identifier is returned in a cache behavior's OriginRequestPolicyId field in
-	// the response to GetDistributionConfig .
+	// identifier is returned in a cache behavior's OriginRequestPolicyId field in the
+	// response to GetDistributionConfig .
 	//
 	// This member is required.
 	Id *string
@@ -48,7 +50,7 @@ type UpdateOriginRequestPolicyInput struct {
 	OriginRequestPolicyConfig *types.OriginRequestPolicyConfig
 
 	// The version of the origin request policy that you are updating. The version is
-	// returned in the origin request policy's ETag  field in the response to
+	// returned in the origin request policy's ETag field in the response to
 	// GetOriginRequestPolicyConfig .
 	IfMatch *string
 

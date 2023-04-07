@@ -9,9 +9,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The xmlName trait on the output structure is ignored in AWS Query. The
-// wrapping element is always operation name + "Response", and inside of that
-// wrapper is another wrapper named operation name + "Result".
+// The xmlName trait on the output structure is ignored in AWS Query. The wrapping
+// element is always operation name + "Response", and inside of that wrapper is
+// another wrapper named operation name + "Result".
 func (c *Client) IgnoresWrappingXmlName(ctx context.Context, params *IgnoresWrappingXmlNameInput, optFns ...func(*Options)) (*IgnoresWrappingXmlNameOutput, error) {
 	if params == nil {
 		params = &IgnoresWrappingXmlNameInput{}

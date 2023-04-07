@@ -15,7 +15,7 @@ import (
 // Gets a metrics configuration (specified by the metrics configuration ID) from
 // the bucket. Note that this doesn't include the daily storage metrics. To use
 // this operation, you must have permissions to perform the
-// s3:GetMetricsConfigurationaction. The bucket owner has this permission by
+// s3:GetMetricsConfiguration action. The bucket owner has this permission by
 // default. The bucket owner can grant this permission to others. For more
 // information about permissions, see Permissions Related to Bucket Subresource
 // Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)

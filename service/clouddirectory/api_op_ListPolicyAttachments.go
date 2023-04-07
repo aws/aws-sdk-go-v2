@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all of the ObjectIdentifiers  to which a given policy is attached.
+// Returns all of the ObjectIdentifiers to which a given policy is attached.
 func (c *Client) ListPolicyAttachments(ctx context.Context, params *ListPolicyAttachmentsInput, optFns ...func(*Options)) (*ListPolicyAttachmentsOutput, error) {
 	if params == nil {
 		params = &ListPolicyAttachmentsInput{}
@@ -60,7 +60,7 @@ type ListPolicyAttachmentsOutput struct {
 	// The pagination token.
 	NextToken *string
 
-	// A list of ObjectIdentifiers  to which the policy is attached.
+	// A list of ObjectIdentifiers to which the policy is attached.
 	ObjectIdentifiers []string
 
 	// Metadata pertaining to the operation's result.
@@ -147,8 +147,8 @@ type ListPolicyAttachmentsPaginatorOptions struct {
 	// approximate number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

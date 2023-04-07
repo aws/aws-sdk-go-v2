@@ -18,7 +18,7 @@ import (
 // see Grants in KMS (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html)
 // in the Key Management Service Developer Guide . For examples of working with
 // grants in several programming languages, see Programming grants (https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html)
-// . The GranteePrincipal  field in the ListGrants response usually contains the
+// . The GranteePrincipal field in the ListGrants response usually contains the
 // user or role designated as the grantee principal in the grant. However, when the
 // grantee principal in the grant is an Amazon Web Services service, the
 // GranteePrincipal field contains the service principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services)
@@ -51,10 +51,10 @@ type ListGrantsInput struct {
 	// Returns only grants for the specified KMS key. This parameter is required.
 	// Specify the key ID or key ARN of the KMS key. To specify a KMS key in a
 	// different Amazon Web Services account, you must use the key ARN. For example:
-	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey .
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey .
 	//
 	// This member is required.
 	KeyId *string
@@ -88,13 +88,13 @@ type ListGrantsOutput struct {
 	Grants []types.GrantListEntry
 
 	// When Truncated is true, this element is present and contains the value to use
-	// for the Marker  parameter in a subsequent request.
+	// for the Marker parameter in a subsequent request.
 	NextMarker *string
 
-	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To get more items, pass
-	// the value of the NextMarker  element in thisresponse to the Marker parameter
-	// in a subsequent request.
+	// A flag that indicates whether there are more items in the list. When this value
+	// is true, the list in this response is truncated. To get more items, pass the
+	// value of the NextMarker element in thisresponse to the Marker parameter in a
+	// subsequent request.
 	Truncated bool
 
 	// Metadata pertaining to the operation's result.
@@ -182,8 +182,8 @@ type ListGrantsPaginatorOptions struct {
 	// to 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

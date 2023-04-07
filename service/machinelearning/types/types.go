@@ -12,11 +12,11 @@ import (
 // Prediction .
 type BatchPrediction struct {
 
-	// The ID of the DataSource  that points to the group of observations to predict.
+	// The ID of the DataSource that points to the group of observations to predict.
 	BatchPredictionDataSourceId *string
 
 	// The ID assigned to the BatchPrediction at creation. This value should be
-	// identical to the value of the BatchPredictionID  in the request.
+	// identical to the value of the BatchPredictionID in the request.
 	BatchPredictionId *string
 
 	// Long integer type that is a 64-bit signed number.
@@ -26,7 +26,7 @@ type BatchPrediction struct {
 	// time.
 	CreatedAt *time.Time
 
-	// The AWS user account that invoked the BatchPrediction. The account type can be
+	// The AWS user account that invoked the BatchPrediction . The account type can be
 	// either an AWS root account or an AWS Identity and Access Management (IAM) user
 	// account.
 	CreatedByIamUser *string
@@ -41,11 +41,11 @@ type BatchPrediction struct {
 	// Long integer type that is a 64-bit signed number.
 	InvalidRecordCount *int64
 
-	// The time of the most recent edit to the BatchPrediction. The time is expressed
+	// The time of the most recent edit to the BatchPrediction . The time is expressed
 	// in epoch time.
 	LastUpdatedAt *time.Time
 
-	// The ID of the MLModel  that generated predictions for the BatchPrediction
+	// The ID of the MLModel that generated predictions for the BatchPrediction
 	// request.
 	MLModelId *string
 
@@ -57,20 +57,22 @@ type BatchPrediction struct {
 	Name *string
 
 	// The location of an Amazon S3 bucket or directory to receive the operation
-	// results. The following substrings are not allowed in the s3 key  portion of the
+	// results. The following substrings are not allowed in the s3 key portion of the
 	// outputURI field: ':', '//', '/./', '/../'.
 	OutputUri *string
 
 	// A timestamp represented in epoch time.
 	StartedAt *time.Time
 
-	// The status of the BatchPrediction. This element can have one of the following
+	// The status of the BatchPrediction . This element can have one of the following
 	// values:
-	//     - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to generate predictions for a batch of observations.
-	//     - INPROGRESS - The process is underway.
-	//     - FAILED - The request to perform a batch prediction did not run to completion. It is not usable.
-	//     - COMPLETED - The batch prediction process completed successfully.
-	//     - DELETED - The BatchPrediction is marked as deleted. It is not usable.
+	//   - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
+	//   generate predictions for a batch of observations.
+	//   - INPROGRESS - The process is underway.
+	//   - FAILED - The request to perform a batch prediction did not run to
+	//   completion. It is not usable.
+	//   - COMPLETED - The batch prediction process completed successfully.
+	//   - DELETED - The BatchPrediction is marked as deleted. It is not usable.
 	Status EntityStatus
 
 	// Long integer type that is a 64-bit signed number.
@@ -91,7 +93,7 @@ type DataSource struct {
 	// Long integer type that is a 64-bit signed number.
 	ComputeTime *int64
 
-	// The time that the DataSource  was created. The time is expressed in epoch time.
+	// The time that the DataSource was created. The time is expressed in epoch time.
 	CreatedAt *time.Time
 
 	// The AWS user account from which the DataSource was created. The account type
@@ -104,20 +106,20 @@ type DataSource struct {
 	DataLocationS3 *string
 
 	// A JSON string that represents the splitting and rearrangement requirement used
-	// when this DataSource  was created.
+	// when this DataSource was created.
 	DataRearrangement *string
 
-	// The total number of observations contained in the data files that the
-	// DataSource references.
+	// The total number of observations contained in the data files that the DataSource
+	// references.
 	DataSizeInBytes *int64
 
-	// The ID that is assigned to the DataSource  during creation.
+	// The ID that is assigned to the DataSource during creation.
 	DataSourceId *string
 
 	// A timestamp represented in epoch time.
 	FinishedAt *time.Time
 
-	// The time of the most recent edit to the BatchPrediction. The time is expressed
+	// The time of the most recent edit to the BatchPrediction . The time is expressed
 	// in epoch time.
 	LastUpdatedAt *time.Time
 
@@ -133,7 +135,7 @@ type DataSource struct {
 	// The datasource details that are specific to Amazon RDS.
 	RDSMetadata *RDSMetadata
 
-	// Describes the DataSource  details specific to Amazon Redshift.
+	// Describes the DataSource details specific to Amazon Redshift.
 	RedshiftMetadata *RedshiftMetadata
 
 	// The Amazon Resource Name (ARN) of an AWS IAM Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts)
@@ -143,13 +145,15 @@ type DataSource struct {
 	// A timestamp represented in epoch time.
 	StartedAt *time.Time
 
-	// The current status of the DataSource. This element can have one of the
+	// The current status of the DataSource . This element can have one of the
 	// following values:
-	//     - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to create a DataSource .
-	//     - INPROGRESS - The creation process is underway.
-	//     - FAILED - The request to create a DataSource did not run to completion. It is not usable.
-	//     - COMPLETED - The creation process completed successfully.
-	//     - DELETED - The DataSource is marked as deleted. It is not usable.
+	//   - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to create
+	//   a DataSource .
+	//   - INPROGRESS - The creation process is underway.
+	//   - FAILED - The request to create a DataSource did not run to completion. It is
+	//   not usable.
+	//   - COMPLETED - The creation process completed successfully.
+	//   - DELETED - The DataSource is marked as deleted. It is not usable.
 	Status EntityStatus
 
 	noSmithyDocumentSerde
@@ -163,7 +167,7 @@ type Evaluation struct {
 	// Long integer type that is a 64-bit signed number.
 	ComputeTime *int64
 
-	// The time that the Evaluation  was created. The time is expressed in epoch time.
+	// The time that the Evaluation was created. The time is expressed in epoch time.
 	CreatedAt *time.Time
 
 	// The AWS user account that invoked the evaluation. The account type can be
@@ -171,10 +175,10 @@ type Evaluation struct {
 	// account.
 	CreatedByIamUser *string
 
-	// The ID of the DataSource  that is used to evaluate the MLModel .
+	// The ID of the DataSource that is used to evaluate the MLModel .
 	EvaluationDataSourceId *string
 
-	// The ID that is assigned to the Evaluation  at creation.
+	// The ID that is assigned to the Evaluation at creation.
 	EvaluationId *string
 
 	// A timestamp represented in epoch time.
@@ -184,11 +188,11 @@ type Evaluation struct {
 	// that is used in the evaluation.
 	InputDataLocationS3 *string
 
-	// The time of the most recent edit to the Evaluation. The time is expressed in
+	// The time of the most recent edit to the Evaluation . The time is expressed in
 	// epoch time.
 	LastUpdatedAt *time.Time
 
-	// The ID of the MLModel  that is the focus of the evaluation.
+	// The ID of the MLModel that is the focus of the evaluation.
 	MLModelId *string
 
 	// A description of the most recent details about evaluating the MLModel .
@@ -198,12 +202,15 @@ type Evaluation struct {
 	Name *string
 
 	// Measurements of how well the MLModel performed, using observations referenced
-	// by the DataSource. One of the following metrics is returned, based on the type
+	// by the DataSource . One of the following metrics is returned, based on the type
 	// of the MLModel :
-	//     - BinaryAUC: A binary MLModel uses the Area Under the Curve (AUC) technique to measure performance.
-	//     - RegressionRMSE: A regression MLModel uses the Root Mean Square Error (RMSE) technique to measure performance. RMSE measures the difference between predicted and actual values for a single variable.
-	//     - MulticlassAvgFScore: A multiclass MLModel uses the F1 score technique to measure performance.
-	//
+	//   - BinaryAUC: A binary MLModel uses the Area Under the Curve (AUC) technique to
+	//   measure performance.
+	//   - RegressionRMSE: A regression MLModel uses the Root Mean Square Error (RMSE)
+	//   technique to measure performance. RMSE measures the difference between predicted
+	//   and actual values for a single variable.
+	//   - MulticlassAvgFScore: A multiclass MLModel uses the F1 score technique to
+	//   measure performance.
 	// For more information about performance metrics, please see the Amazon Machine
 	// Learning Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg)
 	// .
@@ -214,11 +221,13 @@ type Evaluation struct {
 
 	// The status of the evaluation. This element can have one of the following
 	// values:
-	//     - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to evaluate an MLModel .
-	//     - INPROGRESS - The evaluation is underway.
-	//     - FAILED - The request to evaluate an MLModel did not run to completion. It is not usable.
-	//     - COMPLETED - The evaluation process completed successfully.
-	//     - DELETED - The Evaluation is marked as deleted. It is not usable.
+	//   - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
+	//   evaluate an MLModel .
+	//   - INPROGRESS - The evaluation is underway.
+	//   - FAILED - The request to evaluate an MLModel did not run to completion. It is
+	//   not usable.
+	//   - COMPLETED - The evaluation process completed successfully.
+	//   - DELETED - The Evaluation is marked as deleted. It is not usable.
 	Status EntityStatus
 
 	noSmithyDocumentSerde
@@ -229,13 +238,14 @@ type Evaluation struct {
 type MLModel struct {
 
 	// The algorithm used to train the MLModel . The following algorithm is supported:
-	//     - SGD -- Stochastic gradient descent. The goal of SGD is to minimize the gradient of the loss function.
+	//   - SGD -- Stochastic gradient descent. The goal of SGD is to minimize the
+	//   gradient of the loss function.
 	Algorithm Algorithm
 
 	// Long integer type that is a 64-bit signed number.
 	ComputeTime *int64
 
-	// The time that the MLModel  was created. The time is expressed in epoch time.
+	// The time that the MLModel was created. The time is expressed in epoch time.
 	CreatedAt *time.Time
 
 	// The AWS user account from which the MLModel was created. The account type can
@@ -253,17 +263,20 @@ type MLModel struct {
 	// (Amazon S3).
 	InputDataLocationS3 *string
 
-	// The time of the most recent edit to the MLModel. The time is expressed in
-	// epoch time.
+	// The time of the most recent edit to the MLModel . The time is expressed in epoch
+	// time.
 	LastUpdatedAt *time.Time
 
-	// The ID assigned to the MLModel  at creation.
+	// The ID assigned to the MLModel at creation.
 	MLModelId *string
 
-	// Identifies the MLModel  category. The following are the available types:
-	//     - REGRESSION - Produces a numeric result. For example, "What price should a house be listed at?"
-	//     - BINARY - Produces one of two possible results. For example, "Is this a child-friendly web site?".
-	//     - MULTICLASS - Produces one of several possible results. For example, "Is this a HIGH-, LOW-, or MEDIUM-risk trade?".
+	// Identifies the MLModel category. The following are the available types:
+	//   - REGRESSION - Produces a numeric result. For example, "What price should a
+	//   house be listed at?"
+	//   - BINARY - Produces one of two possible results. For example, "Is this a
+	//   child-friendly web site?".
+	//   - MULTICLASS - Produces one of several possible results. For example, "Is this
+	//   a HIGH-, LOW-, or MEDIUM-risk trade?".
 	MLModelType MLModelType
 
 	// A description of the most recent details about accessing the MLModel .
@@ -274,7 +287,7 @@ type MLModel struct {
 
 	ScoreThreshold *float32
 
-	// The time of the most recent edit to the ScoreThreshold. The time is expressed
+	// The time of the most recent edit to the ScoreThreshold . The time is expressed
 	// in epoch time.
 	ScoreThresholdLastUpdatedAt *time.Time
 
@@ -284,27 +297,48 @@ type MLModel struct {
 	// A timestamp represented in epoch time.
 	StartedAt *time.Time
 
-	// The current status of an MLModel. This element can have one of the following
+	// The current status of an MLModel . This element can have one of the following
 	// values:
-	//     - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to create an MLModel .
-	//     - INPROGRESS - The creation process is underway.
-	//     - FAILED - The request to create an MLModel didn't run to completion. The model isn't usable.
-	//     - COMPLETED - The creation process completed successfully.
-	//     - DELETED - The MLModel is marked as deleted. It isn't usable.
+	//   - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to create
+	//   an MLModel .
+	//   - INPROGRESS - The creation process is underway.
+	//   - FAILED - The request to create an MLModel didn't run to completion. The
+	//   model isn't usable.
+	//   - COMPLETED - The creation process completed successfully.
+	//   - DELETED - The MLModel is marked as deleted. It isn't usable.
 	Status EntityStatus
 
-	// The ID of the training DataSource . The CreateMLModel  operation uses the
+	// The ID of the training DataSource . The CreateMLModel operation uses the
 	// TrainingDataSourceId .
 	TrainingDataSourceId *string
 
-	// A list of the training parameters in the MLModel. The list is implemented as a
+	// A list of the training parameters in the MLModel . The list is implemented as a
 	// map of key-value pairs. The following is the current set of training parameters:
 	//
-	//     - sgd.maxMLModelSizeInBytes - The maximum allowed size of the model. Depending on the input data, the size of the model might affect its performance. The value is an integer that ranges from 100000 to 2147483648 . The default value is 33554432 .
-	//     - sgd.maxPasses - The number of times that the training process traverses the observations to build the MLModel . The value is an integer that ranges from 1 to 10000 . The default value is 10 .
-	//     - sgd.shuffleType - Whether Amazon ML shuffles the training data. Shuffling the data improves a model's ability to find the optimal solution for a variety of data types. The valid values are auto and none . The default value is none .
-	//     - sgd.l1RegularizationAmount - The coefficient regularization L1 norm, which controls overfitting the data by penalizing large coefficients. This parameter tends to drive coefficients to zero, resulting in sparse feature set. If you use this parameter, start by specifying a small value, such as 1.0E-08 . The value is a double that ranges from 0 to MAX_DOUBLE . The default is to not use L1 normalization. This parameter can't be used when L2 is specified. Use this parameter sparingly.
-	//     - sgd.l2RegularizationAmount - The coefficient regularization L2 norm, which controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to small, nonzero values. If you use this parameter, start by specifying a small value, such as 1.0E-08 . The value is a double that ranges from 0 to MAX_DOUBLE . The default is to not use L2 normalization. This parameter can't be used when L1 is specified. Use this parameter sparingly.
+	//   - sgd.maxMLModelSizeInBytes - The maximum allowed size of the model. Depending
+	//   on the input data, the size of the model might affect its performance. The value
+	//   is an integer that ranges from 100000 to 2147483648 . The default value is
+	//   33554432 .
+	//   - sgd.maxPasses - The number of times that the training process traverses the
+	//   observations to build the MLModel . The value is an integer that ranges from 1
+	//   to 10000 . The default value is 10 .
+	//   - sgd.shuffleType - Whether Amazon ML shuffles the training data. Shuffling
+	//   the data improves a model's ability to find the optimal solution for a variety
+	//   of data types. The valid values are auto and none . The default value is none
+	//   .
+	//   - sgd.l1RegularizationAmount - The coefficient regularization L1 norm, which
+	//   controls overfitting the data by penalizing large coefficients. This parameter
+	//   tends to drive coefficients to zero, resulting in sparse feature set. If you use
+	//   this parameter, start by specifying a small value, such as 1.0E-08 . The value
+	//   is a double that ranges from 0 to MAX_DOUBLE . The default is to not use L1
+	//   normalization. This parameter can't be used when L2 is specified. Use this
+	//   parameter sparingly.
+	//   - sgd.l2RegularizationAmount - The coefficient regularization L2 norm, which
+	//   controls overfitting the data by penalizing large coefficients. This tends to
+	//   drive coefficients to small, nonzero values. If you use this parameter, start by
+	//   specifying a small value, such as 1.0E-08 . The value is a double that ranges
+	//   from 0 to MAX_DOUBLE . The default is to not use L2 normalization. This
+	//   parameter can't be used when L1 is specified. Use this parameter sparingly.
 	TrainingParameters map[string]string
 
 	noSmithyDocumentSerde
@@ -312,9 +346,13 @@ type MLModel struct {
 
 // Measurements of how well the MLModel performed on known observations. One of
 // the following metrics is returned, based on the type of the MLModel :
-//   - BinaryAUC: The binary MLModel uses the Area Under the Curve (AUC) technique to measure performance.
-//   - RegressionRMSE: The regression MLModel uses the Root Mean Square Error (RMSE) technique to measure performance. RMSE measures the difference between predicted and actual values for a single variable.
-//   - MulticlassAvgFScore: The multiclass MLModel uses the F1 score technique to measure performance.
+//   - BinaryAUC: The binary MLModel uses the Area Under the Curve (AUC) technique
+//     to measure performance.
+//   - RegressionRMSE: The regression MLModel uses the Root Mean Square Error
+//     (RMSE) technique to measure performance. RMSE measures the difference between
+//     predicted and actual values for a single variable.
+//   - MulticlassAvgFScore: The multiclass MLModel uses the F1 score technique to
+//     measure performance.
 //
 // For more information about performance metrics, please see the Amazon Machine
 // Learning Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg)
@@ -325,17 +363,20 @@ type PerformanceMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// The output from a Predict  operation:
-//   - Details - Contains the following attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY | MULTICLASS DetailsAttributes.ALGORITHM - SGD
+// The output from a Predict operation:
+//   - Details - Contains the following attributes:
+//     DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY | MULTICLASS
+//     DetailsAttributes.ALGORITHM - SGD
 //   - PredictedLabel - Present for either a BINARY or MULTICLASS MLModel request.
-//   - PredictedScores - Contains the raw classification score corresponding to each label.
+//   - PredictedScores - Contains the raw classification score corresponding to
+//     each label.
 //   - PredictedValue - Present for a REGRESSION MLModel request.
 type Prediction struct {
 
 	// Provides any additional details regarding the prediction.
 	Details map[string]string
 
-	// The prediction label for either a BINARY  or MULTICLASS MLModel .
+	// The prediction label for either a BINARY or MULTICLASS MLModel .
 	PredictedLabel *string
 
 	// Provides the raw classification score corresponding to each label.
@@ -393,28 +434,28 @@ type RDSDataSpec struct {
 	// This member is required.
 	DatabaseCredentials *RDSDatabaseCredentials
 
-	// Describes the DatabaseName  and InstanceIdentifier  of an Amazon RDS database.
+	// Describes the DatabaseName and InstanceIdentifier of an Amazon RDS database.
 	//
 	// This member is required.
 	DatabaseInformation *RDSDatabase
 
-	// The role (DataPipelineDefaultResourceRole) assumed by an Amazon Elastic
-	// Compute Cloud (Amazon EC2) instance to carry out the copy operation from Amazon
-	// RDS to an Amazon S3 task. For more information, see Role templates (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+	// The role (DataPipelineDefaultResourceRole) assumed by an Amazon Elastic Compute
+	// Cloud (Amazon EC2) instance to carry out the copy operation from Amazon RDS to
+	// an Amazon S3 task. For more information, see Role templates (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
 	// for data pipelines.
 	//
 	// This member is required.
 	ResourceRole *string
 
 	// The Amazon S3 location for staging Amazon RDS data. The data retrieved from
-	// Amazon RDS using SelectSqlQuery  is stored in this location.
+	// Amazon RDS using SelectSqlQuery is stored in this location.
 	//
 	// This member is required.
 	S3StagingLocation *string
 
-	// The security group IDs to be used to access a VPC-based RDS DB instance.
-	// Ensure that there are appropriate ingress rules set up to allow access to the
-	// RDS DB instance. This attribute is used by Data Pipeline to carry out the copy
+	// The security group IDs to be used to access a VPC-based RDS DB instance. Ensure
+	// that there are appropriate ingress rules set up to allow access to the RDS DB
+	// instance. This attribute is used by Data Pipeline to carry out the copy
 	// operation from Amazon RDS to an Amazon S3 task.
 	//
 	// This member is required.
@@ -442,21 +483,63 @@ type RDSDataSpec struct {
 
 	// A JSON string that represents the splitting and rearrangement processing to be
 	// applied to a DataSource . If the DataRearrangement parameter is not provided,
-	// all of the input data is used to create the Datasource. There are multiple
+	// all of the input data is used to create the Datasource . There are multiple
 	// parameters that control what data is used to create a datasource:
-	//     - percentBegin Use percentBegin to indicate the beginning of the range of the data used to create the Datasource. If you do not include percentBegin and percentEnd , Amazon ML includes all of the data when creating the datasource.
-	//     - percentEnd Use percentEnd to indicate the end of the range of the data used to create the Datasource. If you do not include percentBegin and percentEnd , Amazon ML includes all of the data when creating the datasource.
-	//     - complement The complement parameter instructs Amazon ML to use the data that is not included in the range of percentBegin to percentEnd to create a datasource. The complement parameter is useful if you need to create complementary datasources for training and evaluation. To create a complementary datasource, use the same values for percentBegin and percentEnd , along with the complement parameter. For example, the following two datasources do not share any data, and can be used to train and evaluate a model. The first datasource has 25 percent of the data, and the second one has 75 percent of the data. Datasource for evaluation: {"splitting":{"percentBegin":0, "percentEnd":25}} Datasource for training: {"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}
-	//     - strategy To change how Amazon ML splits the data for a datasource, use the strategy parameter. The default value for the strategy parameter is sequential , meaning that Amazon ML takes all of the data records between the percentBegin and percentEnd parameters for the datasource, in the order that the records appear in the input data. The following two DataRearrangement lines are examples of sequentially ordered training and evaluation datasources: Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential"}} Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential", "complement":"true"}} To randomly split the input data into the proportions indicated by the percentBegin and percentEnd parameters, set the strategy parameter to random and provide a string that is used as the seed value for the random data splitting (for example, you can use the S3 path to your data as the random seed string). If you choose the random split strategy, Amazon ML assigns each row of data a pseudo-random number between 0 and 100, and then selects the rows that have an assigned number between percentBegin and percentEnd . Pseudo-random numbers are assigned using both the input seed string value and the byte offset as a seed, so changing the data results in a different split. Any existing ordering is preserved. The random splitting strategy ensures that variables in the training and evaluation data are distributed similarly. It is useful in the cases where the input data may have an implicit sort order, which would otherwise result in training and evaluation datasources containing non-similar data records. The following two DataRearrangement lines are examples of non-sequentially ordered training and evaluation datasources: Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}} Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}
+	//   - percentBegin Use percentBegin to indicate the beginning of the range of the
+	//   data used to create the Datasource. If you do not include percentBegin and
+	//   percentEnd , Amazon ML includes all of the data when creating the datasource.
+	//   - percentEnd Use percentEnd to indicate the end of the range of the data used
+	//   to create the Datasource. If you do not include percentBegin and percentEnd ,
+	//   Amazon ML includes all of the data when creating the datasource.
+	//   - complement The complement parameter instructs Amazon ML to use the data that
+	//   is not included in the range of percentBegin to percentEnd to create a
+	//   datasource. The complement parameter is useful if you need to create
+	//   complementary datasources for training and evaluation. To create a complementary
+	//   datasource, use the same values for percentBegin and percentEnd , along with
+	//   the complement parameter. For example, the following two datasources do not
+	//   share any data, and can be used to train and evaluate a model. The first
+	//   datasource has 25 percent of the data, and the second one has 75 percent of the
+	//   data. Datasource for evaluation: {"splitting":{"percentBegin":0,
+	//   "percentEnd":25}} Datasource for training: {"splitting":{"percentBegin":0,
+	//   "percentEnd":25, "complement":"true"}}
+	//   - strategy To change how Amazon ML splits the data for a datasource, use the
+	//   strategy parameter. The default value for the strategy parameter is sequential
+	//   , meaning that Amazon ML takes all of the data records between the
+	//   percentBegin and percentEnd parameters for the datasource, in the order that
+	//   the records appear in the input data. The following two DataRearrangement
+	//   lines are examples of sequentially ordered training and evaluation datasources:
+	//   Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
+	//   "strategy":"sequential"}} Datasource for training:
+	//   {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential",
+	//   "complement":"true"}} To randomly split the input data into the proportions
+	//   indicated by the percentBegin and percentEnd parameters, set the strategy
+	//   parameter to random and provide a string that is used as the seed value for
+	//   the random data splitting (for example, you can use the S3 path to your data as
+	//   the random seed string). If you choose the random split strategy, Amazon ML
+	//   assigns each row of data a pseudo-random number between 0 and 100, and then
+	//   selects the rows that have an assigned number between percentBegin and
+	//   percentEnd . Pseudo-random numbers are assigned using both the input seed
+	//   string value and the byte offset as a seed, so changing the data results in a
+	//   different split. Any existing ordering is preserved. The random splitting
+	//   strategy ensures that variables in the training and evaluation data are
+	//   distributed similarly. It is useful in the cases where the input data may have
+	//   an implicit sort order, which would otherwise result in training and evaluation
+	//   datasources containing non-similar data records. The following two
+	//   DataRearrangement lines are examples of non-sequentially ordered training and
+	//   evaluation datasources: Datasource for evaluation:
+	//   {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random",
+	//   "randomSeed"="s3://my_s3_path/bucket/file.csv"}} Datasource for training:
+	//   {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random",
+	//   "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}
 	DataRearrangement *string
 
 	// A JSON string that represents the schema for an Amazon RDS DataSource . The
-	// DataSchemadefines the structure of the observation data in the data file(s)
-	// referenced in the DataSource . A DataSchema  is not required if you specify a
-	// DataSchemaUri Define your DataSchema  as a series of key-value pairs.
-	// attributes and excludedVariableNames have an array of key-value pairs for
-	// their value. Use the following format to define your DataSchema. { "version":
-	// "1.0", "recordAnnotationFieldName": "F1", "recordWeightFieldName": "F2",
+	// DataSchema defines the structure of the observation data in the data file(s)
+	// referenced in the DataSource . A DataSchema is not required if you specify a
+	// DataSchemaUri Define your DataSchema as a series of key-value pairs. attributes
+	// and excludedVariableNames have an array of key-value pairs for their value. Use
+	// the following format to define your DataSchema . { "version": "1.0",
+	// "recordAnnotationFieldName": "F1", "recordWeightFieldName": "F2",
 	// "targetFieldName": "F3", "dataFormat": "CSV", "dataFileContainsHeader": true,
 	// "attributes": [ { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2",
 	// "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, {
@@ -488,9 +571,9 @@ type RDSMetadata struct {
 	// RDSSelectSqlQuery query.
 	DatabaseUserName *string
 
-	// The role (DataPipelineDefaultResourceRole) assumed by an Amazon EC2 instance
-	// to carry out the copy task from Amazon RDS to Amazon S3. For more information,
-	// see Role templates (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+	// The role (DataPipelineDefaultResourceRole) assumed by an Amazon EC2 instance to
+	// carry out the copy task from Amazon RDS to Amazon S3. For more information, see
+	// Role templates (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
 	// for data pipelines.
 	ResourceRole *string
 
@@ -514,20 +597,20 @@ type RealtimeEndpointInfo struct {
 	// received. The time is expressed in epoch time.
 	CreatedAt *time.Time
 
-	// The current status of the real-time endpoint for the MLModel. This element can
+	// The current status of the real-time endpoint for the MLModel . This element can
 	// have one of the following values:
-	//     - NONE - Endpoint does not exist or was previously deleted.
-	//     - READY - Endpoint is ready to be used for real-time predictions.
-	//     - UPDATING - Updating/creating the endpoint.
+	//   - NONE - Endpoint does not exist or was previously deleted.
+	//   - READY - Endpoint is ready to be used for real-time predictions.
+	//   - UPDATING - Updating/creating the endpoint.
 	EndpointStatus RealtimeEndpointStatus
 
 	// The URI that specifies where to send real-time prediction requests for the
-	// MLModel. Note: The application must wait until the real-time endpoint is ready
+	// MLModel . Note: The application must wait until the real-time endpoint is ready
 	// before using this URI.
 	EndpointUrl *string
 
-	// The maximum processing rate for the real-time endpoint for MLModel, measured
-	// in incoming requests per second.
+	// The maximum processing rate for the real-time endpoint for MLModel , measured in
+	// incoming requests per second.
 	PeakRequestsPerSecond int32
 
 	noSmithyDocumentSerde
@@ -556,7 +639,7 @@ type RedshiftDatabaseCredentials struct {
 
 	// A password to be used by Amazon ML to connect to a database on an Amazon
 	// Redshift cluster. The password should have sufficient permissions to execute a
-	// RedshiftSelectSqlQueryquery. The password should be valid for an Amazon
+	// RedshiftSelectSqlQuery query. The password should be valid for an Amazon
 	// Redshift USER (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html)
 	// .
 	//
@@ -565,8 +648,8 @@ type RedshiftDatabaseCredentials struct {
 
 	// A username to be used by Amazon Machine Learning (Amazon ML)to connect to a
 	// database on an Amazon Redshift cluster. The username should have sufficient
-	// permissions to execute the RedshiftSelectSqlQuery query. The username should
-	// be valid for an Amazon Redshift USER (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html)
+	// permissions to execute the RedshiftSelectSqlQuery query. The username should be
+	// valid for an Amazon Redshift USER (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html)
 	// .
 	//
 	// This member is required.
@@ -584,7 +667,7 @@ type RedshiftDataSpec struct {
 	// This member is required.
 	DatabaseCredentials *RedshiftDatabaseCredentials
 
-	// Describes the DatabaseName  and ClusterIdentifier  for an Amazon Redshift
+	// Describes the DatabaseName and ClusterIdentifier for an Amazon Redshift
 	// DataSource .
 	//
 	// This member is required.
@@ -596,36 +679,78 @@ type RedshiftDataSpec struct {
 	// This member is required.
 	S3StagingLocation *string
 
-	// Describes the SQL Query to execute on an Amazon Redshift database for an
-	// Amazon Redshift DataSource .
+	// Describes the SQL Query to execute on an Amazon Redshift database for an Amazon
+	// Redshift DataSource .
 	//
 	// This member is required.
 	SelectSqlQuery *string
 
 	// A JSON string that represents the splitting and rearrangement processing to be
 	// applied to a DataSource . If the DataRearrangement parameter is not provided,
-	// all of the input data is used to create the Datasource. There are multiple
+	// all of the input data is used to create the Datasource . There are multiple
 	// parameters that control what data is used to create a datasource:
-	//     - percentBegin Use percentBegin to indicate the beginning of the range of the data used to create the Datasource. If you do not include percentBegin and percentEnd , Amazon ML includes all of the data when creating the datasource.
-	//     - percentEnd Use percentEnd to indicate the end of the range of the data used to create the Datasource. If you do not include percentBegin and percentEnd , Amazon ML includes all of the data when creating the datasource.
-	//     - complement The complement parameter instructs Amazon ML to use the data that is not included in the range of percentBegin to percentEnd to create a datasource. The complement parameter is useful if you need to create complementary datasources for training and evaluation. To create a complementary datasource, use the same values for percentBegin and percentEnd , along with the complement parameter. For example, the following two datasources do not share any data, and can be used to train and evaluate a model. The first datasource has 25 percent of the data, and the second one has 75 percent of the data. Datasource for evaluation: {"splitting":{"percentBegin":0, "percentEnd":25}} Datasource for training: {"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}
-	//     - strategy To change how Amazon ML splits the data for a datasource, use the strategy parameter. The default value for the strategy parameter is sequential , meaning that Amazon ML takes all of the data records between the percentBegin and percentEnd parameters for the datasource, in the order that the records appear in the input data. The following two DataRearrangement lines are examples of sequentially ordered training and evaluation datasources: Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential"}} Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential", "complement":"true"}} To randomly split the input data into the proportions indicated by the percentBegin and percentEnd parameters, set the strategy parameter to random and provide a string that is used as the seed value for the random data splitting (for example, you can use the S3 path to your data as the random seed string). If you choose the random split strategy, Amazon ML assigns each row of data a pseudo-random number between 0 and 100, and then selects the rows that have an assigned number between percentBegin and percentEnd . Pseudo-random numbers are assigned using both the input seed string value and the byte offset as a seed, so changing the data results in a different split. Any existing ordering is preserved. The random splitting strategy ensures that variables in the training and evaluation data are distributed similarly. It is useful in the cases where the input data may have an implicit sort order, which would otherwise result in training and evaluation datasources containing non-similar data records. The following two DataRearrangement lines are examples of non-sequentially ordered training and evaluation datasources: Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}} Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}
+	//   - percentBegin Use percentBegin to indicate the beginning of the range of the
+	//   data used to create the Datasource. If you do not include percentBegin and
+	//   percentEnd , Amazon ML includes all of the data when creating the datasource.
+	//   - percentEnd Use percentEnd to indicate the end of the range of the data used
+	//   to create the Datasource. If you do not include percentBegin and percentEnd ,
+	//   Amazon ML includes all of the data when creating the datasource.
+	//   - complement The complement parameter instructs Amazon ML to use the data that
+	//   is not included in the range of percentBegin to percentEnd to create a
+	//   datasource. The complement parameter is useful if you need to create
+	//   complementary datasources for training and evaluation. To create a complementary
+	//   datasource, use the same values for percentBegin and percentEnd , along with
+	//   the complement parameter. For example, the following two datasources do not
+	//   share any data, and can be used to train and evaluate a model. The first
+	//   datasource has 25 percent of the data, and the second one has 75 percent of the
+	//   data. Datasource for evaluation: {"splitting":{"percentBegin":0,
+	//   "percentEnd":25}} Datasource for training: {"splitting":{"percentBegin":0,
+	//   "percentEnd":25, "complement":"true"}}
+	//   - strategy To change how Amazon ML splits the data for a datasource, use the
+	//   strategy parameter. The default value for the strategy parameter is sequential
+	//   , meaning that Amazon ML takes all of the data records between the
+	//   percentBegin and percentEnd parameters for the datasource, in the order that
+	//   the records appear in the input data. The following two DataRearrangement
+	//   lines are examples of sequentially ordered training and evaluation datasources:
+	//   Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
+	//   "strategy":"sequential"}} Datasource for training:
+	//   {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential",
+	//   "complement":"true"}} To randomly split the input data into the proportions
+	//   indicated by the percentBegin and percentEnd parameters, set the strategy
+	//   parameter to random and provide a string that is used as the seed value for
+	//   the random data splitting (for example, you can use the S3 path to your data as
+	//   the random seed string). If you choose the random split strategy, Amazon ML
+	//   assigns each row of data a pseudo-random number between 0 and 100, and then
+	//   selects the rows that have an assigned number between percentBegin and
+	//   percentEnd . Pseudo-random numbers are assigned using both the input seed
+	//   string value and the byte offset as a seed, so changing the data results in a
+	//   different split. Any existing ordering is preserved. The random splitting
+	//   strategy ensures that variables in the training and evaluation data are
+	//   distributed similarly. It is useful in the cases where the input data may have
+	//   an implicit sort order, which would otherwise result in training and evaluation
+	//   datasources containing non-similar data records. The following two
+	//   DataRearrangement lines are examples of non-sequentially ordered training and
+	//   evaluation datasources: Datasource for evaluation:
+	//   {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random",
+	//   "randomSeed"="s3://my_s3_path/bucket/file.csv"}} Datasource for training:
+	//   {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random",
+	//   "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}
 	DataRearrangement *string
 
-	// A JSON string that represents the schema for an Amazon Redshift DataSource.
-	// The DataSchema defines the structure of the observation data in the data
-	// file(s) referenced in the DataSource . A DataSchema is not required if you
-	// specify a DataSchemaUri . Define your DataSchema as a series of key-value
-	// pairs. attributes  and excludedVariableNames have an array of key-value pairs
-	// for their value. Use the following format to define your DataSchema. {
-	// "version": "1.0", "recordAnnotationFieldName": "F1", "recordWeightFieldName":
-	// "F2", "targetFieldName": "F3", "dataFormat": "CSV", "dataFileContainsHeader":
-	// true, "attributes": [ { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName":
-	// "F2", "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL"
-	// }, { "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5",
-	// "fieldType": "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, {
-	// "fieldName": "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8",
-	// "fieldType": "WEIGHTED_STRING_SEQUENCE" } ], "excludedVariableNames": [ "F6" ] }
+	// A JSON string that represents the schema for an Amazon Redshift DataSource . The
+	// DataSchema defines the structure of the observation data in the data file(s)
+	// referenced in the DataSource . A DataSchema is not required if you specify a
+	// DataSchemaUri . Define your DataSchema as a series of key-value pairs.
+	// attributes and excludedVariableNames have an array of key-value pairs for their
+	// value. Use the following format to define your DataSchema . { "version": "1.0",
+	// "recordAnnotationFieldName": "F1", "recordWeightFieldName": "F2",
+	// "targetFieldName": "F3", "dataFormat": "CSV", "dataFileContainsHeader": true,
+	// "attributes": [ { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2",
+	// "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, {
+	// "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType":
+	// "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName":
+	// "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType":
+	// "WEIGHTED_STRING_SEQUENCE" } ], "excludedVariableNames": [ "F6" ] }
 	DataSchema *string
 
 	// Describes the schema location for an Amazon Redshift DataSource .
@@ -634,13 +759,13 @@ type RedshiftDataSpec struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the DataSource  details specific to Amazon Redshift.
+// Describes the DataSource details specific to Amazon Redshift.
 type RedshiftMetadata struct {
 
 	// A username to be used by Amazon Machine Learning (Amazon ML)to connect to a
 	// database on an Amazon Redshift cluster. The username should have sufficient
-	// permissions to execute the RedshiftSelectSqlQuery query. The username should
-	// be valid for an Amazon Redshift USER (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html)
+	// permissions to execute the RedshiftSelectSqlQuery query. The username should be
+	// valid for an Amazon Redshift USER (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html)
 	// .
 	DatabaseUserName *string
 
@@ -648,8 +773,8 @@ type RedshiftMetadata struct {
 	// database.
 	RedshiftDatabase *RedshiftDatabase
 
-	// The SQL query that is specified during CreateDataSourceFromRedshift. Returns
-	// only if Verbose  is true in GetDataSourceInput.
+	// The SQL query that is specified during CreateDataSourceFromRedshift . Returns
+	// only if Verbose is true in GetDataSourceInput.
 	SelectSqlQuery *string
 
 	noSmithyDocumentSerde
@@ -658,8 +783,8 @@ type RedshiftMetadata struct {
 // Describes the data specification of a DataSource .
 type S3DataSpec struct {
 
-	// The location of the data file(s) used by a DataSource. The URI specifies a
-	// data file or an Amazon Simple Storage Service (Amazon S3) directory or bucket
+	// The location of the data file(s) used by a DataSource . The URI specifies a data
+	// file or an Amazon Simple Storage Service (Amazon S3) directory or bucket
 	// containing data files.
 	//
 	// This member is required.
@@ -667,21 +792,63 @@ type S3DataSpec struct {
 
 	// A JSON string that represents the splitting and rearrangement processing to be
 	// applied to a DataSource . If the DataRearrangement parameter is not provided,
-	// all of the input data is used to create the Datasource. There are multiple
+	// all of the input data is used to create the Datasource . There are multiple
 	// parameters that control what data is used to create a datasource:
-	//     - percentBegin Use percentBegin to indicate the beginning of the range of the data used to create the Datasource. If you do not include percentBegin and percentEnd , Amazon ML includes all of the data when creating the datasource.
-	//     - percentEnd Use percentEnd to indicate the end of the range of the data used to create the Datasource. If you do not include percentBegin and percentEnd , Amazon ML includes all of the data when creating the datasource.
-	//     - complement The complement parameter instructs Amazon ML to use the data that is not included in the range of percentBegin to percentEnd to create a datasource. The complement parameter is useful if you need to create complementary datasources for training and evaluation. To create a complementary datasource, use the same values for percentBegin and percentEnd , along with the complement parameter. For example, the following two datasources do not share any data, and can be used to train and evaluate a model. The first datasource has 25 percent of the data, and the second one has 75 percent of the data. Datasource for evaluation: {"splitting":{"percentBegin":0, "percentEnd":25}} Datasource for training: {"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}
-	//     - strategy To change how Amazon ML splits the data for a datasource, use the strategy parameter. The default value for the strategy parameter is sequential , meaning that Amazon ML takes all of the data records between the percentBegin and percentEnd parameters for the datasource, in the order that the records appear in the input data. The following two DataRearrangement lines are examples of sequentially ordered training and evaluation datasources: Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential"}} Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential", "complement":"true"}} To randomly split the input data into the proportions indicated by the percentBegin and percentEnd parameters, set the strategy parameter to random and provide a string that is used as the seed value for the random data splitting (for example, you can use the S3 path to your data as the random seed string). If you choose the random split strategy, Amazon ML assigns each row of data a pseudo-random number between 0 and 100, and then selects the rows that have an assigned number between percentBegin and percentEnd . Pseudo-random numbers are assigned using both the input seed string value and the byte offset as a seed, so changing the data results in a different split. Any existing ordering is preserved. The random splitting strategy ensures that variables in the training and evaluation data are distributed similarly. It is useful in the cases where the input data may have an implicit sort order, which would otherwise result in training and evaluation datasources containing non-similar data records. The following two DataRearrangement lines are examples of non-sequentially ordered training and evaluation datasources: Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}} Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}
+	//   - percentBegin Use percentBegin to indicate the beginning of the range of the
+	//   data used to create the Datasource. If you do not include percentBegin and
+	//   percentEnd , Amazon ML includes all of the data when creating the datasource.
+	//   - percentEnd Use percentEnd to indicate the end of the range of the data used
+	//   to create the Datasource. If you do not include percentBegin and percentEnd ,
+	//   Amazon ML includes all of the data when creating the datasource.
+	//   - complement The complement parameter instructs Amazon ML to use the data that
+	//   is not included in the range of percentBegin to percentEnd to create a
+	//   datasource. The complement parameter is useful if you need to create
+	//   complementary datasources for training and evaluation. To create a complementary
+	//   datasource, use the same values for percentBegin and percentEnd , along with
+	//   the complement parameter. For example, the following two datasources do not
+	//   share any data, and can be used to train and evaluate a model. The first
+	//   datasource has 25 percent of the data, and the second one has 75 percent of the
+	//   data. Datasource for evaluation: {"splitting":{"percentBegin":0,
+	//   "percentEnd":25}} Datasource for training: {"splitting":{"percentBegin":0,
+	//   "percentEnd":25, "complement":"true"}}
+	//   - strategy To change how Amazon ML splits the data for a datasource, use the
+	//   strategy parameter. The default value for the strategy parameter is sequential
+	//   , meaning that Amazon ML takes all of the data records between the
+	//   percentBegin and percentEnd parameters for the datasource, in the order that
+	//   the records appear in the input data. The following two DataRearrangement
+	//   lines are examples of sequentially ordered training and evaluation datasources:
+	//   Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
+	//   "strategy":"sequential"}} Datasource for training:
+	//   {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential",
+	//   "complement":"true"}} To randomly split the input data into the proportions
+	//   indicated by the percentBegin and percentEnd parameters, set the strategy
+	//   parameter to random and provide a string that is used as the seed value for
+	//   the random data splitting (for example, you can use the S3 path to your data as
+	//   the random seed string). If you choose the random split strategy, Amazon ML
+	//   assigns each row of data a pseudo-random number between 0 and 100, and then
+	//   selects the rows that have an assigned number between percentBegin and
+	//   percentEnd . Pseudo-random numbers are assigned using both the input seed
+	//   string value and the byte offset as a seed, so changing the data results in a
+	//   different split. Any existing ordering is preserved. The random splitting
+	//   strategy ensures that variables in the training and evaluation data are
+	//   distributed similarly. It is useful in the cases where the input data may have
+	//   an implicit sort order, which would otherwise result in training and evaluation
+	//   datasources containing non-similar data records. The following two
+	//   DataRearrangement lines are examples of non-sequentially ordered training and
+	//   evaluation datasources: Datasource for evaluation:
+	//   {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random",
+	//   "randomSeed"="s3://my_s3_path/bucket/file.csv"}} Datasource for training:
+	//   {"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random",
+	//   "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}
 	DataRearrangement *string
 
 	// A JSON string that represents the schema for an Amazon S3 DataSource . The
-	// DataSchemadefines the structure of the observation data in the data file(s)
-	// referenced in the DataSource . You must provide either the DataSchema  or the
-	// DataSchemaLocationS3 . Define your DataSchema  as a series of key-value pairs.
-	// attributes and excludedVariableNames have an array of key-value pairs for
-	// their value. Use the following format to define your DataSchema. { "version":
-	// "1.0", "recordAnnotationFieldName": "F1", "recordWeightFieldName": "F2",
+	// DataSchema defines the structure of the observation data in the data file(s)
+	// referenced in the DataSource . You must provide either the DataSchema or the
+	// DataSchemaLocationS3 . Define your DataSchema as a series of key-value pairs.
+	// attributes and excludedVariableNames have an array of key-value pairs for their
+	// value. Use the following format to define your DataSchema . { "version": "1.0",
+	// "recordAnnotationFieldName": "F1", "recordWeightFieldName": "F2",
 	// "targetFieldName": "F3", "dataFormat": "CSV", "dataFileContainsHeader": true,
 	// "attributes": [ { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2",
 	// "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, {

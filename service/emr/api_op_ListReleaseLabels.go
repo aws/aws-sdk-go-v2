@@ -44,7 +44,7 @@ type ListReleaseLabelsInput struct {
 	// results are determined by other filtering parameters or by the latest version.
 	// The ListReleaseLabels request fails if the identity (Amazon Web Services
 	// account ID) and all filtering parameters are different from the original
-	// request, or if the NextToken  is expired or tampered with.
+	// request, or if the NextToken is expired or tampered with.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -133,15 +133,14 @@ type ListReleaseLabelsAPIClient interface {
 
 var _ ListReleaseLabelsAPIClient = (*Client)(nil)
 
-// ListReleaseLabelsPaginatorOptions is the paginator options for
-// ListReleaseLabels
+// ListReleaseLabelsPaginatorOptions is the paginator options for ListReleaseLabels
 type ListReleaseLabelsPaginatorOptions struct {
 	// Defines the maximum number of release labels to return in a single response.
 	// The default is 100 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

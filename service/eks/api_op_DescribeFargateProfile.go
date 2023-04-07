@@ -366,9 +366,9 @@ func NewFargateProfileDeletedWaiter(client DescribeFargateProfileAPIClient, optF
 	}
 }
 
-// Wait calls the waiter function for FargateProfileDeleted waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for FargateProfileDeleted waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *FargateProfileDeletedWaiter) Wait(ctx context.Context, params *DescribeFargateProfileInput, maxWaitDur time.Duration, optFns ...func(*FargateProfileDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -30,7 +30,7 @@ func (c *Client) DescribeDomainChangeProgress(ctx context.Context, params *Descr
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomainChangeProgress  operation.
+// Container for the parameters to the DescribeDomainChangeProgress operation.
 type DescribeDomainChangeProgressInput struct {
 
 	// The name of the domain to get progress information for.

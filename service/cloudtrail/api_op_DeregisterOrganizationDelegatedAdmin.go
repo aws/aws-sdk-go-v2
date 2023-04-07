@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes CloudTrail delegated administrator permissions from a member account
-// in an organization.
+// Removes CloudTrail delegated administrator permissions from a member account in
+// an organization.
 func (c *Client) DeregisterOrganizationDelegatedAdmin(ctx context.Context, params *DeregisterOrganizationDelegatedAdminInput, optFns ...func(*Options)) (*DeregisterOrganizationDelegatedAdminOutput, error) {
 	if params == nil {
 		params = &DeregisterOrganizationDelegatedAdminInput{}

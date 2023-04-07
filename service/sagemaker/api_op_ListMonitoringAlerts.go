@@ -39,7 +39,7 @@ type ListMonitoringAlertsInput struct {
 	MaxResults *int32
 
 	// If the result of the previous ListMonitoringAlerts request was truncated, the
-	// response includes a NextToken. To retrieve the next set of alerts in the
+	// response includes a NextToken . To retrieve the next set of alerts in the
 	// history, use the token in the next request.
 	NextToken *string
 
@@ -138,8 +138,8 @@ type ListMonitoringAlertsPaginatorOptions struct {
 	// The maximum number of results to display. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

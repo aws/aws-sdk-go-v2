@@ -50,8 +50,8 @@ type GetMigrationOutput struct {
 	// in the Amazon Lex V2 developer guide.
 	Alerts []types.MigrationAlert
 
-	// The unique identifier of the migration. This is the same as the identifier
-	// used when calling the GetMigration  operation.
+	// The unique identifier of the migration. This is the same as the identifier used
+	// when calling the GetMigration operation.
 	MigrationId *string
 
 	// Indicates the status of the migration. When the status is COMPLETE the
@@ -60,8 +60,12 @@ type GetMigrationOutput struct {
 	MigrationStatus types.MigrationStatus
 
 	// The strategy used to conduct the migration.
-	//     - CREATE_NEW - Creates a new Amazon Lex V2 bot and migrates the Amazon Lex V1 bot to the new bot.
-	//     - UPDATE_EXISTING - Overwrites the existing Amazon Lex V2 bot metadata and the locale being migrated. It doesn't change any other locales in the Amazon Lex V2 bot. If the locale doesn't exist, a new locale is created in the Amazon Lex V2 bot.
+	//   - CREATE_NEW - Creates a new Amazon Lex V2 bot and migrates the Amazon Lex V1
+	//   bot to the new bot.
+	//   - UPDATE_EXISTING - Overwrites the existing Amazon Lex V2 bot metadata and the
+	//   locale being migrated. It doesn't change any other locales in the Amazon Lex V2
+	//   bot. If the locale doesn't exist, a new locale is created in the Amazon Lex V2
+	//   bot.
 	MigrationStrategy types.MigrationStrategy
 
 	// The date and time that the migration started.

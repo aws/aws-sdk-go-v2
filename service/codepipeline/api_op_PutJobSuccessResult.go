@@ -28,7 +28,7 @@ func (c *Client) PutJobSuccessResult(ctx context.Context, params *PutJobSuccessR
 	return out, nil
 }
 
-// Represents the input of a PutJobSuccessResult  action.
+// Represents the input of a PutJobSuccessResult action.
 type PutJobSuccessResultInput struct {
 
 	// The unique system-generated ID of the job that succeeded. This is the same ID
@@ -53,8 +53,8 @@ type PutJobSuccessResultInput struct {
 	ExecutionDetails *types.ExecutionDetails
 
 	// Key-value pairs produced as output by a job worker that can be made available
-	// to a downstream action configuration. outputVariables can be included only
-	// when there is no continuation token on the request.
+	// to a downstream action configuration. outputVariables can be included only when
+	// there is no continuation token on the request.
 	OutputVariables map[string]string
 
 	noSmithyDocumentSerde

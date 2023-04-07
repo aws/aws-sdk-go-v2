@@ -43,20 +43,20 @@ type DescribeWorldGenerationJobOutput struct {
 	// The Amazon Resource Name (ARN) of the world generation job.
 	Arn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world generation job was
 	// created.
 	CreatedAt *time.Time
 
-	// The failure code of the world generation job if it failed:
-	// InternalServiceError Internal service error. LimitExceeded The requested
-	// resource exceeds the maximum number allowed, or the number of concurrent stream
-	// requests exceeds the maximum number allowed. ResourceNotFound The specified
-	// resource could not be found. RequestThrottled The request was throttled.
-	// InvalidInput An input parameter in the request is not valid.
+	// The failure code of the world generation job if it failed: InternalServiceError
+	// Internal service error. LimitExceeded The requested resource exceeds the maximum
+	// number allowed, or the number of concurrent stream requests exceeds the maximum
+	// number allowed. ResourceNotFound The specified resource could not be found.
+	// RequestThrottled The request was throttled. InvalidInput An input parameter in
+	// the request is not valid.
 	FailureCode types.WorldGenerationJobErrorCode
 
 	// The reason why the world generation job failed.
@@ -68,7 +68,7 @@ type DescribeWorldGenerationJobOutput struct {
 	// The status of the world generation job: Pending The world generation job
 	// request is pending. Running The world generation job is running. Completed The
 	// world generation job completed. Failed The world generation job failed. See
-	// failureCodefor more information. PartialFailed Some worlds did not generate.
+	// failureCode for more information. PartialFailed Some worlds did not generate.
 	// Canceled The world generation job was cancelled. Canceling The world generation
 	// job is being cancelled.
 	Status types.WorldGenerationJobStatus

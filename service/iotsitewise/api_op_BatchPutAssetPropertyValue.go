@@ -18,7 +18,10 @@ import (
 // in the IoT SiteWise User Guide. To identify an asset property, you must specify
 // one of the following:
 //   - The assetId and propertyId of an asset property.
-//   - A propertyAlias , which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature ). To define an asset property's alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html) .
+//   - A propertyAlias , which is a data stream alias (for example,
+//     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
+//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
+//     .
 //
 // With respect to Unix epoch time, IoT SiteWise accepts only TQVs that have a
 // timestamp of no more than 7 days in the past and no more than 10 minutes in the
@@ -26,10 +29,9 @@ import (
 // days, +10 minutes] and returns a TimestampOutOfRangeException error. For each
 // asset property, IoT SiteWise overwrites TQVs with duplicate timestamps unless
 // the newer TQV has a different quality. For example, if you store a TQV {T1,
-// GOOD, V1} , then storing {T1, GOOD, V2} replaces the existing TQV. IoT
-// SiteWise authorizes access to each BatchPutAssetPropertyValue entry
-// individually. For more information, see BatchPutAssetPropertyValue
-// authorization (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action)
+// GOOD, V1} , then storing {T1, GOOD, V2} replaces the existing TQV. IoT SiteWise
+// authorizes access to each BatchPutAssetPropertyValue entry individually. For
+// more information, see BatchPutAssetPropertyValue authorization (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action)
 // in the IoT SiteWise User Guide.
 func (c *Client) BatchPutAssetPropertyValue(ctx context.Context, params *BatchPutAssetPropertyValueInput, optFns ...func(*Options)) (*BatchPutAssetPropertyValueOutput, error) {
 	if params == nil {
@@ -59,8 +61,8 @@ type BatchPutAssetPropertyValueInput struct {
 
 type BatchPutAssetPropertyValueOutput struct {
 
-	// A list of the errors (if any) associated with the batch put request. Each
-	// error entry contains the entryId  of the entry that failed.
+	// A list of the errors (if any) associated with the batch put request. Each error
+	// entry contains the entryId of the entry that failed.
 	//
 	// This member is required.
 	ErrorEntries []types.BatchPutAssetPropertyErrorEntry

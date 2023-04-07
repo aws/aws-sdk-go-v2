@@ -36,7 +36,7 @@ type StartEngagementInput struct {
 	ContactId *string
 
 	// The secure content of the message that was sent to the contact. Use this field
-	// for engagements to VOICE  or EMAIL .
+	// for engagements to VOICE or EMAIL .
 	//
 	// This member is required.
 	Content *string
@@ -47,7 +47,7 @@ type StartEngagementInput struct {
 	Sender *string
 
 	// The secure subject of the message that was sent to the contact. Use this field
-	// for engagements to VOICE  or EMAIL .
+	// for engagements to VOICE or EMAIL .
 	//
 	// This member is required.
 	Subject *string

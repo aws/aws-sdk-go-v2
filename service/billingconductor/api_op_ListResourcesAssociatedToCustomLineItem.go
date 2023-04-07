@@ -39,8 +39,8 @@ type ListResourcesAssociatedToCustomLineItemInput struct {
 	// The billing period for which the resource associations will be listed.
 	BillingPeriod *string
 
-	// (Optional) A ListResourcesAssociatedToCustomLineItemFilter that can specify
-	// the types of resources that should be retrieved.
+	// (Optional) A ListResourcesAssociatedToCustomLineItemFilter that can specify the
+	// types of resources that should be retrieved.
 	Filters *types.ListResourcesAssociatedToCustomLineItemFilter
 
 	// (Optional) The maximum number of resource associations to be retrieved.
@@ -148,8 +148,8 @@ type ListResourcesAssociatedToCustomLineItemPaginatorOptions struct {
 	// (Optional) The maximum number of resource associations to be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -31,17 +31,17 @@ func (c *Client) GetLogRecord(ctx context.Context, params *GetLogRecordInput, op
 
 type GetLogRecordInput struct {
 
-	// The pointer corresponding to the log event record you want to retrieve. You
-	// get this from the response of a GetQueryResults operation. In that response,
-	// the value of the @ptr  field for a log event is the value to use as
-	// logRecordPointer to retrieve that complete log event record.
+	// The pointer corresponding to the log event record you want to retrieve. You get
+	// this from the response of a GetQueryResults operation. In that response, the
+	// value of the @ptr field for a log event is the value to use as logRecordPointer
+	// to retrieve that complete log event record.
 	//
 	// This member is required.
 	LogRecordPointer *string
 
 	// Specify true to display the log event fields with all sensitive data unmasked
-	// and visible. The default is false. To use this operation with this parameter,
-	// you must be signed into an account with the logs:Unmask  permission.
+	// and visible. The default is false . To use this operation with this parameter,
+	// you must be signed into an account with the logs:Unmask permission.
 	Unmask bool
 
 	noSmithyDocumentSerde

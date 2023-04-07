@@ -13,10 +13,10 @@ import (
 // Deletes a subscription. If the subscription requires authentication for
 // deletion, only the owner of the subscription or the topic's owner can
 // unsubscribe, and an Amazon Web Services signature is required. If the
-// Unsubscribecall does not require authentication and the requester is not the
+// Unsubscribe call does not require authentication and the requester is not the
 // subscription owner, a final cancellation message is delivered to the endpoint,
 // so that the endpoint owner can easily resubscribe to the topic if the
-// Unsubscriberequest was unintended. Amazon SQS queue subscriptions require
+// Unsubscribe request was unintended. Amazon SQS queue subscriptions require
 // authentication for deletion. Only the owner of the subscription, or the owner of
 // the topic can unsubscribe using the required Amazon Web Services signature. This
 // action is throttled at 100 transactions per second (TPS).

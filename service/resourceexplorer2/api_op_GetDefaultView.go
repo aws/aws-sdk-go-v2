@@ -12,7 +12,7 @@ import (
 
 // Retrieves the Amazon Resource Name (ARN) of the view that is the default for
 // the Amazon Web Services Region in which you call this operation. You can then
-// call GetView  to retrieve the details of that view.
+// call GetView to retrieve the details of that view.
 func (c *Client) GetDefaultView(ctx context.Context, params *GetDefaultViewInput, optFns ...func(*Options)) (*GetDefaultViewOutput, error) {
 	if params == nil {
 		params = &GetDefaultViewInput{}

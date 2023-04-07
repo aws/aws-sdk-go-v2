@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a DBProxyEndpoint. Only applies to proxies that are associated with
+// Creates a DBProxyEndpoint . Only applies to proxies that are associated with
 // Aurora DB clusters. You can use DB proxy endpoints to specify read/write or
 // read-only access to the DB cluster. You can also use DB proxy endpoints to
 // access a DB proxy through a different VPC than the proxy's default VPC.
@@ -42,8 +42,8 @@ type CreateDBProxyEndpointInput struct {
 	// This member is required.
 	DBProxyName *string
 
-	// The VPC subnet IDs for the DB proxy endpoint that you create. You can specify
-	// a different set of subnet IDs than for the original DB proxy.
+	// The VPC subnet IDs for the DB proxy endpoint that you create. You can specify a
+	// different set of subnet IDs than for the original DB proxy.
 	//
 	// This member is required.
 	VpcSubnetIds []string
@@ -52,9 +52,9 @@ type CreateDBProxyEndpointInput struct {
 	// in the Amazon RDS User Guide.
 	Tags []types.Tag
 
-	// A value that indicates whether the DB proxy endpoint can be used for
-	// read/write or read-only operations. The default is READ_WRITE. The only role
-	// that proxies for RDS for Microsoft SQL Server support is READ_WRITE .
+	// A value that indicates whether the DB proxy endpoint can be used for read/write
+	// or read-only operations. The default is READ_WRITE . The only role that proxies
+	// for RDS for Microsoft SQL Server support is READ_WRITE .
 	TargetRole types.DBProxyEndpointTargetRole
 
 	// The VPC security group IDs for the DB proxy endpoint that you create. You can

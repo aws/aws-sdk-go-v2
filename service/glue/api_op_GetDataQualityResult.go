@@ -48,7 +48,7 @@ type GetDataQualityResultOutput struct {
 
 	// In the context of a job in Glue Studio, each node in the canvas is typically
 	// assigned some sort of name and data quality nodes will have names. In the case
-	// of multiple nodes, the evaluationContext  can differentiate the nodes.
+	// of multiple nodes, the evaluationContext can differentiate the nodes.
 	EvaluationContext *string
 
 	// The job name associated with the data quality result, if any.
@@ -60,7 +60,7 @@ type GetDataQualityResultOutput struct {
 	// A unique result ID for the data quality result.
 	ResultId *string
 
-	// A list of DataQualityRuleResult  objects representing the results for each rule.
+	// A list of DataQualityRuleResult objects representing the results for each rule.
 	RuleResults []types.DataQualityRuleResult
 
 	// The unique run ID associated with the ruleset evaluation.

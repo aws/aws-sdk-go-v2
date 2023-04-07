@@ -41,8 +41,8 @@ type GetAccountOutput struct {
 	// The ARN of an Amazon CloudWatch role for the current Account.
 	CloudwatchRoleArn *string
 
-	// A list of features supported for the account. When usage plans are enabled,
-	// the features list will include an entry of "UsagePlans" .
+	// A list of features supported for the account. When usage plans are enabled, the
+	// features list will include an entry of "UsagePlans" .
 	Features []string
 
 	// Specifies the API request limits configured for the current Account.

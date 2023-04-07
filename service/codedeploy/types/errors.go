@@ -33,8 +33,8 @@ func (e *AlarmsLimitExceededException) ErrorCode() string {
 }
 func (e *AlarmsLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An application with the specified name with the IAM user or Amazon Web
-// Services account already exists.
+// An application with the specified name with the IAM user or Amazon Web Services
+// account already exists.
 type ApplicationAlreadyExistsException struct {
 	Message *string
 
@@ -60,8 +60,7 @@ func (e *ApplicationAlreadyExistsException) ErrorCode() string {
 }
 func (e *ApplicationAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The application does not exist with the IAM user or Amazon Web Services
-// account.
+// The application does not exist with the IAM user or Amazon Web Services account.
 type ApplicationDoesNotExistException struct {
 	Message *string
 
@@ -1294,7 +1293,7 @@ func (e *InvalidBucketNameFilterException) ErrorCode() string {
 }
 func (e *InvalidBucketNameFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The computePlatform is invalid. The computePlatform should be Lambda , Server,
+// The computePlatform is invalid. The computePlatform should be Lambda , Server ,
 // or ECS .
 type InvalidComputePlatformException struct {
 	Message *string
@@ -1815,7 +1814,7 @@ func (e *InvalidIamUserArnException) ErrorCode() string {
 func (e *InvalidIamUserArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The IgnoreApplicationStopFailures value is invalid. For Lambda deployments,
-// false is expected. For EC2/On-premises deployments, true  or false  is expected.
+// false is expected. For EC2/On-premises deployments, true or false is expected.
 type InvalidIgnoreApplicationStopFailuresValueException struct {
 	Message *string
 
@@ -1976,7 +1975,7 @@ func (e *InvalidKeyPrefixFilterException) ErrorCode() string {
 func (e *InvalidKeyPrefixFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A lifecycle event hook is invalid. Review the hooks section in your AppSpec
-// file to ensure the lifecycle events and hooks  functions are valid.
+// file to ensure the lifecycle events and hooks functions are valid.
 type InvalidLifecycleEventHookExecutionIdException struct {
 	Message *string
 
@@ -2005,7 +2004,7 @@ func (e *InvalidLifecycleEventHookExecutionIdException) ErrorFault() smithy.Erro
 }
 
 // The result of a Lambda validation function that verifies a lifecycle event is
-// invalid. It should return Succeeded  or Failed .
+// invalid. It should return Succeeded or Failed .
 type InvalidLifecycleEventHookExecutionStatusException struct {
 	Message *string
 
@@ -2222,9 +2221,9 @@ func (e *InvalidRevisionException) ErrorCode() string {
 }
 func (e *InvalidRevisionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service role ARN was specified in an invalid format. Or, if an Auto
-// Scaling group was specified, the specified service role does not grant the
-// appropriate permissions to Amazon EC2 Auto Scaling.
+// The service role ARN was specified in an invalid format. Or, if an Auto Scaling
+// group was specified, the specified service role does not grant the appropriate
+// permissions to Amazon EC2 Auto Scaling.
 type InvalidRoleException struct {
 	Message *string
 
@@ -2250,8 +2249,8 @@ func (e *InvalidRoleException) ErrorCode() string {
 }
 func (e *InvalidRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The column name to sort by is either not present or was specified in an
-// invalid format.
+// The column name to sort by is either not present or was specified in an invalid
+// format.
 type InvalidSortByException struct {
 	Message *string
 
@@ -2434,7 +2433,8 @@ func (e *InvalidTargetGroupPairException) ErrorCode() string {
 func (e *InvalidTargetGroupPairException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The target instance configuration is invalid. Possible causes include:
-//   - Configuration data for target instances was entered for an in-place deployment.
+//   - Configuration data for target instances was entered for an in-place
+//     deployment.
 //   - The limit of 10 tags for a tag type was exceeded.
 //   - The combined length of the tag names exceeded the limit.
 //   - A specified tag is not currently applied to any instances.
@@ -2545,7 +2545,7 @@ func (e *InvalidTriggerConfigException) ErrorCode() string {
 func (e *InvalidTriggerConfigException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The UpdateOutdatedInstancesOnly value is invalid. For Lambda deployments, false
-// is expected. For EC2/On-premises deployments, true  or false  is expected.
+// is expected. For EC2/On-premises deployments, true or false is expected.
 type InvalidUpdateOutdatedInstancesOnlyValueException struct {
 	Message *string
 

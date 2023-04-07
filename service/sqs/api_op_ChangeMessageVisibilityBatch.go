@@ -11,16 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the visibility timeout of multiple messages. This is a batch version
-// of ChangeMessageVisibility . The result of the action on each message is
-// reported individually in the response. You can send up to 10
-// ChangeMessageVisibility requests with each ChangeMessageVisibilityBatch
-// action. Because the batch request can result in a combination of successful and
-// unsuccessful actions, you should check for batch errors even when the call
-// returns an HTTP status code of 200. Some actions take lists of parameters.
-// These lists are specified using the param.n  notation. Values of n are
-// integers starting from 1. For example, a parameter list with two elements looks
-// like this: &AttributeName.1=first
+// Changes the visibility timeout of multiple messages. This is a batch version of
+// ChangeMessageVisibility . The result of the action on each message is reported
+// individually in the response. You can send up to 10 ChangeMessageVisibility
+// requests with each ChangeMessageVisibilityBatch action. Because the batch
+// request can result in a combination of successful and unsuccessful actions, you
+// should check for batch errors even when the call returns an HTTP status code of
+// 200 . Some actions take lists of parameters. These lists are specified using the
+// param.n notation. Values of n are integers starting from 1. For example, a
+// parameter list with two elements looks like this: &AttributeName.1=first
 //
 //	&AttributeName.2=second
 func (c *Client) ChangeMessageVisibilityBatch(ctx context.Context, params *ChangeMessageVisibilityBatchInput, optFns ...func(*Options)) (*ChangeMessageVisibilityBatchOutput, error) {
@@ -40,8 +39,8 @@ func (c *Client) ChangeMessageVisibilityBatch(ctx context.Context, params *Chang
 
 type ChangeMessageVisibilityBatchInput struct {
 
-	// A list of receipt handles of the messages for which the visibility timeout
-	// must be changed.
+	// A list of receipt handles of the messages for which the visibility timeout must
+	// be changed.
 	//
 	// This member is required.
 	Entries []types.ChangeMessageVisibilityBatchRequestEntry
@@ -60,12 +59,12 @@ type ChangeMessageVisibilityBatchInput struct {
 // BatchResultErrorEntry tag if the message fails.
 type ChangeMessageVisibilityBatchOutput struct {
 
-	// A list of BatchResultErrorEntry  items.
+	// A list of BatchResultErrorEntry items.
 	//
 	// This member is required.
 	Failed []types.BatchResultErrorEntry
 
-	// A list of ChangeMessageVisibilityBatchResultEntry  items.
+	// A list of ChangeMessageVisibilityBatchResultEntry items.
 	//
 	// This member is required.
 	Successful []types.ChangeMessageVisibilityBatchResultEntry

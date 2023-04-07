@@ -159,9 +159,9 @@ const (
 	HealthStateUnhealthy HealthState = "UNHEALTHY"
 )
 
-// Values returns all known values for HealthState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HealthState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (HealthState) Values() []HealthState {
 	return []HealthState{
 		"INITIAL",
@@ -214,9 +214,9 @@ const (
 	ProtocolUdp Protocol = "UDP"
 )
 
-// Values returns all known values for Protocol. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Protocol. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"TCP",

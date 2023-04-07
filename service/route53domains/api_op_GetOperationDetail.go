@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// This operation returns the current status of an operation that is not
-// completed.
+// This operation returns the current status of an operation that is not completed.
 func (c *Client) GetOperationDetail(ctx context.Context, params *GetOperationDetailInput, optFns ...func(*Options)) (*GetOperationDetailOutput, error) {
 	if params == nil {
 		params = &GetOperationDetailInput{}
@@ -33,8 +32,8 @@ func (c *Client) GetOperationDetail(ctx context.Context, params *GetOperationDet
 // request includes the following element.
 type GetOperationDetailInput struct {
 
-	// The identifier for the operation for which you want to get the status. Route
-	// 53 returned the identifier in the response to the original request.
+	// The identifier for the operation for which you want to get the status. Route 53
+	// returned the identifier in the response to the original request.
 	//
 	// This member is required.
 	OperationId *string
@@ -62,11 +61,17 @@ type GetOperationDetailOutput struct {
 
 	// Lists any outstanding operations that require customer action. Valid values
 	// are:
-	//     - PENDING_ACCEPTANCE : The operation is waiting for acceptance from the account that is receiving the domain.
-	//     - PENDING_CUSTOMER_ACTION : The operation is waiting for customer action, for example, returning an email.
-	//     - PENDING_AUTHORIZATION : The operation is waiting for the form of authorization. For more information, see ResendOperationAuthorization (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html) .
-	//     - PENDING_PAYMENT_VERIFICATION : The operation is waiting for the payment method to validate.
-	//     - PENDING_SUPPORT_CASE : The operation includes a support case and is waiting for its resolution.
+	//   - PENDING_ACCEPTANCE : The operation is waiting for acceptance from the
+	//   account that is receiving the domain.
+	//   - PENDING_CUSTOMER_ACTION : The operation is waiting for customer action, for
+	//   example, returning an email.
+	//   - PENDING_AUTHORIZATION : The operation is waiting for the form of
+	//   authorization. For more information, see ResendOperationAuthorization (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html)
+	//   .
+	//   - PENDING_PAYMENT_VERIFICATION : The operation is waiting for the payment
+	//   method to validate.
+	//   - PENDING_SUPPORT_CASE : The operation includes a support case and is waiting
+	//   for its resolution.
 	StatusFlag types.StatusFlag
 
 	// The date when the request was submitted.

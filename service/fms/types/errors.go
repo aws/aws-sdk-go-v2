@@ -91,7 +91,7 @@ func (e *InvalidOperationException) ErrorCode() string {
 }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The value of the Type  parameter is invalid.
+// The value of the Type parameter is invalid.
 type InvalidTypeException struct {
 	Message *string
 
@@ -118,7 +118,7 @@ func (e *InvalidTypeException) ErrorCode() string {
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation exceeds a resource limit, for example, the maximum number of
-// policyobjects that you can create for an Amazon Web Services account. For more
+// policy objects that you can create for an Amazon Web Services account. For more
 // information, see Firewall Manager Limits (https://docs.aws.amazon.com/waf/latest/developerguide/fms-limits.html)
 // in the WAF Developer Guide.
 type LimitExceededException struct {

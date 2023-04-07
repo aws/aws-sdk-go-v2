@@ -34,8 +34,7 @@ type CategoryDetails struct {
 	noSmithyDocumentSerde
 }
 
-// For characters that were detected as issues, where they occur in the
-// transcript.
+// For characters that were detected as issues, where they occur in the transcript.
 type CharacterOffsets struct {
 
 	// The beginning of the issue.
@@ -51,8 +50,8 @@ type CharacterOffsets struct {
 	noSmithyDocumentSerde
 }
 
-// Potential issues that are detected based on an artificial intelligence
-// analysis of each turn in the conversation.
+// Potential issues that are detected based on an artificial intelligence analysis
+// of each turn in the conversation.
 type IssueDetected struct {
 
 	// The offset for when the issue was detected in the segment.

@@ -41,7 +41,7 @@ func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstance
 type DescribeInstancesInput struct {
 
 	// An array of instance IDs to be described. If you use this parameter,
-	// DescribeInstancesreturns a description of the specified instances. Otherwise,
+	// DescribeInstances returns a description of the specified instances. Otherwise,
 	// it returns a description of every instance.
 	InstanceIds []string
 
@@ -56,10 +56,10 @@ type DescribeInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeInstances  request.
+// Contains the response to a DescribeInstances request.
 type DescribeInstancesOutput struct {
 
-	// An array of Instance  objects that describe the instances.
+	// An array of Instance objects that describe the instances.
 	Instances []types.Instance
 
 	// Metadata pertaining to the operation's result.
@@ -191,9 +191,9 @@ func NewInstanceOnlineWaiter(client DescribeInstancesAPIClient, optFns ...func(*
 	}
 }
 
-// Wait calls the waiter function for InstanceOnline waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for InstanceOnline waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *InstanceOnlineWaiter) Wait(ctx context.Context, params *DescribeInstancesInput, maxWaitDur time.Duration, optFns ...func(*InstanceOnlineWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -558,9 +558,9 @@ func NewInstanceRegisteredWaiter(client DescribeInstancesAPIClient, optFns ...fu
 	}
 }
 
-// Wait calls the waiter function for InstanceRegistered waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for InstanceRegistered waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *InstanceRegisteredWaiter) Wait(ctx context.Context, params *DescribeInstancesInput, maxWaitDur time.Duration, optFns ...func(*InstanceRegisteredWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -1268,9 +1268,9 @@ func NewInstanceTerminatedWaiter(client DescribeInstancesAPIClient, optFns ...fu
 	}
 }
 
-// Wait calls the waiter function for InstanceTerminated waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for InstanceTerminated waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *InstanceTerminatedWaiter) Wait(ctx context.Context, params *DescribeInstancesInput, maxWaitDur time.Duration, optFns ...func(*InstanceTerminatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

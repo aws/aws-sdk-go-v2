@@ -10,8 +10,7 @@ import (
 // Entity that comprises information on categorical values in data.
 type CategoricalValues struct {
 
-	// Indicates whether there is a potential data issue related to categorical
-	// values.
+	// Indicates whether there is a potential data issue related to categorical values.
 	//
 	// This member is required.
 	Status StatisticalIssueStatus
@@ -61,23 +60,23 @@ type DataIngestionJobSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration is the TargetSamplingRate, which is the sampling rate of the
+// The configuration is the TargetSamplingRate , which is the sampling rate of the
 // data after post processing by Amazon Lookout for Equipment. For example, if you
 // provide data that has been collected at a 1 second level and you want the system
 // to resample the data at a 1 minute rate before training, the TargetSamplingRate
-// is 1 minute. When providing a value for the TargetSamplingRate, you must
-// attach the prefix "PT" to the rate you want. The value for a 1 second rate is
-// therefore PT1S, the value for a 15 minute rate is PT15M, and the value for a 1
-// hour rate is PT1H
+// is 1 minute. When providing a value for the TargetSamplingRate , you must attach
+// the prefix "PT" to the rate you want. The value for a 1 second rate is therefore
+// PT1S, the value for a 15 minute rate is PT15M, and the value for a 1 hour rate
+// is PT1H
 type DataPreProcessingConfiguration struct {
 
 	// The sampling rate of the data after post processing by Amazon Lookout for
 	// Equipment. For example, if you provide data that has been collected at a 1
 	// second level and you want the system to resample the data at a 1 minute rate
-	// before training, the TargetSamplingRate is 1 minute. When providing a value
-	// for the TargetSamplingRate, you must attach the prefix "PT" to the rate you
-	// want. The value for a 1 second rate is therefore PT1S, the value for a 15 minute
-	// rate is PT15M, and the value for a 1 hour rate is PT1H
+	// before training, the TargetSamplingRate is 1 minute. When providing a value for
+	// the TargetSamplingRate , you must attach the prefix "PT" to the rate you want.
+	// The value for a 1 second rate is therefore PT1S, the value for a 15 minute rate
+	// is PT15M, and the value for a 1 hour rate is PT1H
 	TargetSamplingRate TargetSamplingRate
 
 	noSmithyDocumentSerde
@@ -113,8 +112,7 @@ type DataQualitySummary struct {
 	// This member is required.
 	MissingSensorData *MissingSensorData
 
-	// Parameter that gives information about unsupported timestamps in the input
-	// data.
+	// Parameter that gives information about unsupported timestamps in the input data.
 	//
 	// This member is required.
 	UnsupportedTimestamps *UnsupportedTimestamps
@@ -167,8 +165,8 @@ type DuplicateTimestamps struct {
 // end time, diagnostics information, event duration and so on.
 type InferenceEventSummary struct {
 
-	// An array which specifies the names and values of all sensors contributing to
-	// an inference event.
+	// An array which specifies the names and values of all sensors contributing to an
+	// inference event.
 	Diagnostics *string
 
 	// Indicates the size of an inference event in seconds.
@@ -224,8 +222,7 @@ type InferenceExecutionSummary struct {
 	// The name of the inference scheduler being used for the inference execution.
 	InferenceSchedulerName *string
 
-	// The Amazon Resource Name (ARN) of the ML model used for the inference
-	// execution.
+	// The Amazon Resource Name (ARN) of the ML model used for the inference execution.
 	ModelArn *string
 
 	// The name of the ML model being used for the inference execution.
@@ -668,12 +665,12 @@ type SensorStatisticsSummary struct {
 	// the sensor that the statistics belong to.
 	DataEndTime *time.Time
 
-	// Parameter that indicates whether data exists for the sensor that the
-	// statistics belong to.
+	// Parameter that indicates whether data exists for the sensor that the statistics
+	// belong to.
 	DataExists bool
 
-	// Indicates the time reference to indicate the beginning of valid data
-	// associated with the sensor that the statistics belong to.
+	// Indicates the time reference to indicate the beginning of valid data associated
+	// with the sensor that the statistics belong to.
 	DataStartTime *time.Time
 
 	// Parameter that describes the total number of duplicate timestamp records

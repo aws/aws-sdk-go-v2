@@ -46,8 +46,8 @@ type DescribeFHIRExportJobInput struct {
 
 type DescribeFHIRExportJobOutput struct {
 
-	// Displays the properties of the export job, including the ID, Arn, Name, and
-	// the status of the job.
+	// Displays the properties of the export job, including the ID, Arn, Name, and the
+	// status of the job.
 	//
 	// This member is required.
 	ExportJobProperties *types.ExportJobProperties

@@ -61,8 +61,8 @@ const (
 	ExperimentReportNameBayesianInference ExperimentReportName = "BayesianInference"
 )
 
-// Values returns all known values for ExperimentReportName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ExperimentReportName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentReportName) Values() []ExperimentReportName {
 	return []ExperimentReportName{
@@ -80,10 +80,9 @@ const (
 	ExperimentResultRequestTypePValue             ExperimentResultRequestType = "PValue"
 )
 
-// Values returns all known values for ExperimentResultRequestType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for ExperimentResultRequestType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentResultRequestType) Values() []ExperimentResultRequestType {
 	return []ExperimentResultRequestType{
 		"BaseStat",

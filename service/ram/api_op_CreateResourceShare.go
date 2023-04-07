@@ -65,14 +65,16 @@ type CreateResourceShareInput struct {
 
 	// Specifies a list of one or more principals to associate with the resource
 	// share. You can include the following values:
-	//     - An Amazon Web Services account ID, for example: 123456789012
-	//     - An Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of an organization in Organizations, for example: organizations::123456789012:organization/o-exampleorgid
-	//     - An ARN of an organizational unit (OU) in Organizations, for example: organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
-	//     - An ARN of an IAM role, for example: iam::123456789012:role/rolename
-	//     - An ARN of an IAM user, for example: iam::123456789012user/username
-	// Not
-	// all resource types can be shared with IAM roles and users. For more information,
-	// see Sharing with IAM roles and users (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
+	//   - An Amazon Web Services account ID, for example: 123456789012
+	//   - An Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	//   of an organization in Organizations, for example:
+	//   organizations::123456789012:organization/o-exampleorgid
+	//   - An ARN of an organizational unit (OU) in Organizations, for example:
+	//   organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
+	//   - An ARN of an IAM role, for example: iam::123456789012:role/rolename
+	//   - An ARN of an IAM user, for example: iam::123456789012user/username
+	// Not all resource types can be shared with IAM roles and users. For more
+	// information, see Sharing with IAM roles and users (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
 	// in the Resource Access Manager User Guide.
 	Principals []string
 
@@ -91,8 +93,8 @@ type CreateResourceShareOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
 	// the same operation in an idempotent manner then you must include this value in
-	// the clientToken request parameter of that later call. All other parameters
-	// must also have the same values that you used in the first call.
+	// the clientToken request parameter of that later call. All other parameters must
+	// also have the same values that you used in the first call.
 	ClientToken *string
 
 	// An object with information about the new resource share.

@@ -35,18 +35,18 @@ type ListIndexesInput struct {
 	// The maximum number of results that you want included on each page of the
 	// response. If you do not include this parameter, it defaults to a value
 	// appropriate to the operation. If additional items exist beyond those included in
-	// the current response, the NextToken response element is present and has a
-	// value (is not null). Include that value as the NextToken request parameter in
-	// the next call to the operation to get the next part of the results. An API
-	// operation can return fewer results than the maximum even when there are more
-	// results available. You should check NextToken after every operation to ensure
-	// that you receive all of the results.
+	// the current response, the NextToken response element is present and has a value
+	// (is not null). Include that value as the NextToken request parameter in the
+	// next call to the operation to get the next part of the results. An API operation
+	// can return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more
-	// output is available. Set this parameter to the value of the previous call's
-	// NextToken response to indicate where the output should continue from.
+	// response in a previous request. A NextToken response indicates that more output
+	// is available. Set this parameter to the value of the previous call's NextToken
+	// response to indicate where the output should continue from.
 	NextToken *string
 
 	// If specified, limits the response to only information about the index in the
@@ -54,7 +54,7 @@ type ListIndexesInput struct {
 	Regions []string
 
 	// If specified, limits the output to only indexes of the specified Type, either
-	// LOCAL or AGGREGATOR. Use this option to discover the aggregator index for your
+	// LOCAL or AGGREGATOR . Use this option to discover the aggregator index for your
 	// account.
 	Type types.IndexType
 
@@ -69,7 +69,7 @@ type ListIndexesOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken  response element comes back as null .
+	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,16 +150,16 @@ type ListIndexesPaginatorOptions struct {
 	// The maximum number of results that you want included on each page of the
 	// response. If you do not include this parameter, it defaults to a value
 	// appropriate to the operation. If additional items exist beyond those included in
-	// the current response, the NextToken response element is present and has a
-	// value (is not null). Include that value as the NextToken request parameter in
-	// the next call to the operation to get the next part of the results. An API
-	// operation can return fewer results than the maximum even when there are more
-	// results available. You should check NextToken after every operation to ensure
-	// that you receive all of the results.
+	// the current response, the NextToken response element is present and has a value
+	// (is not null). Include that value as the NextToken request parameter in the
+	// next call to the operation to get the next part of the results. An API operation
+	// can return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

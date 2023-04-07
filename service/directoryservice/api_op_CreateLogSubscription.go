@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a subscription to forward real-time Directory Service domain
-// controller security logs to the specified Amazon CloudWatch log group in your
-// Amazon Web Services account.
+// Creates a subscription to forward real-time Directory Service domain controller
+// security logs to the specified Amazon CloudWatch log group in your Amazon Web
+// Services account.
 func (c *Client) CreateLogSubscription(ctx context.Context, params *CreateLogSubscriptionInput, optFns ...func(*Options)) (*CreateLogSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateLogSubscriptionInput{}
@@ -36,8 +36,8 @@ type CreateLogSubscriptionInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The name of the CloudWatch log group where the real-time domain controller
-	// logs are forwarded.
+	// The name of the CloudWatch log group where the real-time domain controller logs
+	// are forwarded.
 	//
 	// This member is required.
 	LogGroupName *string

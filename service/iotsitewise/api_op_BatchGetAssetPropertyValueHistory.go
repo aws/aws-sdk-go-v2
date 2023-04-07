@@ -40,8 +40,9 @@ type BatchGetAssetPropertyValueHistoryInput struct {
 
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
-	//     - The size of the result set is less than 1 MB.
-	//     - The number of data points in the result set is less than the value of maxResults . The maximum value of maxResults is 4000.
+	//   - The size of the result set is less than 1 MB.
+	//   - The number of data points in the result set is less than the value of
+	//   maxResults . The maximum value of maxResults is 4000.
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -53,14 +54,14 @@ type BatchGetAssetPropertyValueHistoryInput struct {
 type BatchGetAssetPropertyValueHistoryOutput struct {
 
 	// A list of the errors (if any) associated with the batch request. Each error
-	// entry contains the entryId  of the entry that failed.
+	// entry contains the entryId of the entry that failed.
 	//
 	// This member is required.
 	ErrorEntries []types.BatchGetAssetPropertyValueHistoryErrorEntry
 
 	// A list of entries that were not processed by this batch request. because these
 	// entries had been completely processed by previous paginated requests. Each
-	// skipped entry contains the entryId  of the entry that skipped.
+	// skipped entry contains the entryId of the entry that skipped.
 	//
 	// This member is required.
 	SkippedEntries []types.BatchGetAssetPropertyValueHistorySkippedEntry
@@ -188,12 +189,13 @@ var _ BatchGetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
 type BatchGetAssetPropertyValueHistoryPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
-	//     - The size of the result set is less than 1 MB.
-	//     - The number of data points in the result set is less than the value of maxResults . The maximum value of maxResults is 4000.
+	//   - The size of the result set is less than 1 MB.
+	//   - The number of data points in the result set is less than the value of
+	//   maxResults . The maximum value of maxResults is 4000.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

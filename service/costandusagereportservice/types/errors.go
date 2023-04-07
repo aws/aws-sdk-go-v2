@@ -61,8 +61,8 @@ func (e *InternalErrorException) ErrorCode() string {
 }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// This account already has five reports defined. To define a new report, you
-// must delete an existing report.
+// This account already has five reports defined. To define a new report, you must
+// delete an existing report.
 type ReportLimitReachedException struct {
 	Message *string
 

@@ -17,7 +17,7 @@ type Account struct {
 	Arn *string
 
 	// The email address associated with the Amazon Web Services account. The regex
-	// pattern (http://wikipedia.org/wiki/regex)for this parameter is a string of
+	// pattern (http://wikipedia.org/wiki/regex) for this parameter is a string of
 	// characters that represents a standard internet email address.
 	Email *string
 
@@ -47,8 +47,11 @@ type Child struct {
 
 	// The unique identifier (ID) of this child entity. The regex pattern (http://wikipedia.org/wiki/regex)
 	// for a child ID string requires one of the following:
-	//     - Account - A string that consists of exactly 12 digits.
-	//     - Organizational unit (OU) - A string that begins with "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters or digits.
+	//   - Account - A string that consists of exactly 12 digits.
+	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
+	//   4 to 32 lowercase letters or digits (the ID of the root that contains the OU).
+	//   This string is followed by a second "-" dash and from 8 to 32 additional
+	//   lowercase letters or digits.
 	Id *string
 
 	// The type of this child entity.
@@ -57,7 +60,7 @@ type Child struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the status about a CreateAccount  or CreateGovCloudAccount request to
+// Contains the status about a CreateAccount or CreateGovCloudAccount request to
 // create an Amazon Web Services account or an Amazon Web Services GovCloud (US)
 // account in an organization.
 type CreateAccountStatus struct {
@@ -74,20 +77,41 @@ type CreateAccountStatus struct {
 	CompletedTimestamp *time.Time
 
 	// If the request failed, a description of the reason for the failure.
-	//     - ACCOUNT_LIMIT_EXCEEDED: The account couldn't be created because you reached the limit on the number of accounts in your organization.
-	//     - CONCURRENT_ACCOUNT_MODIFICATION: You already submitted a request with the same information.
-	//     - EMAIL_ALREADY_EXISTS: The account could not be created because another Amazon Web Services account with that email address already exists.
-	//     - FAILED_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization failed to receive business license validation.
-	//     - GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the Amazon Web Services GovCloud (US) Region could not be created because this Region already includes an account with that email address.
-	//     - IDENTITY_INVALID_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization can't complete business license validation because it doesn't have valid identity data.
-	//     - INVALID_ADDRESS: The account could not be created because the address you provided is not valid.
-	//     - INVALID_EMAIL: The account could not be created because the email address you provided is not valid.
-	//     - INVALID_PAYMENT_INSTRUMENT: The Amazon Web Services account that owns your organization does not have a supported payment method associated with the account. Amazon Web Services does not support cards issued by financial institutions in Russia or Belarus. For more information, see Managing your Amazon Web Services payments (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html) .
-	//     - INTERNAL_FAILURE: The account could not be created because of an internal failure. Try again later. If the problem persists, contact Amazon Web Services Customer Support.
-	//     - MISSING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization has not received Business Validation.
-	//     - MISSING_PAYMENT_INSTRUMENT: You must configure the management account with a valid payment method, such as a credit card.
-	//     - PENDING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization is still in the process of completing business license validation.
-	//     - UNKNOWN_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization has an unknown issue with business license validation.
+	//   - ACCOUNT_LIMIT_EXCEEDED: The account couldn't be created because you reached
+	//   the limit on the number of accounts in your organization.
+	//   - CONCURRENT_ACCOUNT_MODIFICATION: You already submitted a request with the
+	//   same information.
+	//   - EMAIL_ALREADY_EXISTS: The account could not be created because another
+	//   Amazon Web Services account with that email address already exists.
+	//   - FAILED_BUSINESS_VALIDATION: The Amazon Web Services account that owns your
+	//   organization failed to receive business license validation.
+	//   - GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the Amazon Web Services
+	//   GovCloud (US) Region could not be created because this Region already includes
+	//   an account with that email address.
+	//   - IDENTITY_INVALID_BUSINESS_VALIDATION: The Amazon Web Services account that
+	//   owns your organization can't complete business license validation because it
+	//   doesn't have valid identity data.
+	//   - INVALID_ADDRESS: The account could not be created because the address you
+	//   provided is not valid.
+	//   - INVALID_EMAIL: The account could not be created because the email address
+	//   you provided is not valid.
+	//   - INVALID_PAYMENT_INSTRUMENT: The Amazon Web Services account that owns your
+	//   organization does not have a supported payment method associated with the
+	//   account. Amazon Web Services does not support cards issued by financial
+	//   institutions in Russia or Belarus. For more information, see Managing your
+	//   Amazon Web Services payments (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html)
+	//   .
+	//   - INTERNAL_FAILURE: The account could not be created because of an internal
+	//   failure. Try again later. If the problem persists, contact Amazon Web Services
+	//   Customer Support.
+	//   - MISSING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your
+	//   organization has not received Business Validation.
+	//   - MISSING_PAYMENT_INSTRUMENT: You must configure the management account with
+	//   a valid payment method, such as a credit card.
+	//   - PENDING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your
+	//   organization is still in the process of completing business license validation.
+	//   - UNKNOWN_BUSINESS_VALIDATION: The Amazon Web Services account that owns your
+	//   organization has an unknown issue with business license validation.
 	FailureReason CreateAccountFailureReason
 
 	// If the account was created successfully, the unique identifier (ID) of the new
@@ -104,8 +128,7 @@ type CreateAccountStatus struct {
 	// The date and time that the request was made for the account creation.
 	RequestedTimestamp *time.Time
 
-	// The status of the asynchronous request to create an Amazon Web Services
-	// account.
+	// The status of the asynchronous request to create an Amazon Web Services account.
 	State CreateAccountState
 
 	noSmithyDocumentSerde
@@ -187,8 +210,8 @@ type EnabledServicePrincipal struct {
 	// Organizations.
 	DateEnabled *time.Time
 
-	// The name of the service principal. This is typically in the form of a URL,
-	// such as: servicename.amazonaws.com .
+	// The name of the service principal. This is typically in the form of a URL, such
+	// as: servicename.amazonaws.com .
 	ServicePrincipal *string
 
 	noSmithyDocumentSerde
@@ -198,16 +221,25 @@ type EnabledServicePrincipal struct {
 // relationship between two accounts (an originator and a recipient). For example,
 // when a management account (the originator) invites another account (the
 // recipient) to join its organization, the two accounts exchange information as a
-// series of handshake requests and responses. Note: Handshakes that are CANCELED
-// , ACCEPTED , DECLINED , or EXPIRED show up in lists for only 30 days after
+// series of handshake requests and responses. Note: Handshakes that are CANCELED ,
+// ACCEPTED , DECLINED , or EXPIRED show up in lists for only 30 days after
 // entering that state After that they are deleted.
 type Handshake struct {
 
-	// The type of handshake, indicating what action occurs when the recipient
-	// accepts the handshake. The following handshake types are supported:
-	//     - INVITE: This type of handshake represents a request to join an organization. It is always sent from the management account to only non-member accounts.
-	//     - ENABLE_ALL_FEATURES: This type of handshake represents a request to enable all features in an organization. It is always sent from the management account to only invited member accounts. Created accounts do not receive this because those accounts were created by the organization's management account and approval is inferred.
-	//     - APPROVE_ALL_FEATURES: This type of handshake is sent from the Organizations service when all member accounts have approved the ENABLE_ALL_FEATURES invitation. It is sent only to the management account and signals the master that it can finalize the process to enable all features.
+	// The type of handshake, indicating what action occurs when the recipient accepts
+	// the handshake. The following handshake types are supported:
+	//   - INVITE: This type of handshake represents a request to join an
+	//   organization. It is always sent from the management account to only non-member
+	//   accounts.
+	//   - ENABLE_ALL_FEATURES: This type of handshake represents a request to enable
+	//   all features in an organization. It is always sent from the management account
+	//   to only invited member accounts. Created accounts do not receive this because
+	//   those accounts were created by the organization's management account and
+	//   approval is inferred.
+	//   - APPROVE_ALL_FEATURES: This type of handshake is sent from the Organizations
+	//   service when all member accounts have approved the ENABLE_ALL_FEATURES
+	//   invitation. It is sent only to the management account and signals the master
+	//   that it can finalize the process to enable all features.
 	Action ActionType
 
 	// The Amazon Resource Name (ARN) of a handshake. For more information about ARNs
@@ -215,9 +247,9 @@ type Handshake struct {
 	// in the Amazon Web Services Service Authorization Reference.
 	Arn *string
 
-	// The date and time that the handshake expires. If the recipient of the
-	// handshake request fails to respond before the specified date and time, the
-	// handshake becomes inactive and is no longer valid.
+	// The date and time that the handshake expires. If the recipient of the handshake
+	// request fails to respond before the specified date and time, the handshake
+	// becomes inactive and is no longer valid.
 	ExpirationTimestamp *time.Time
 
 	// The unique identifier (ID) of a handshake. The originating account creates the
@@ -238,22 +270,30 @@ type Handshake struct {
 	// The current state of the handshake. Use the state to trace the flow of the
 	// handshake through the process from its creation to its acceptance. The meaning
 	// of each of the valid values is as follows:
-	//     - REQUESTED: This handshake was sent to multiple recipients (applicable to only some handshake types) and not all recipients have responded yet. The request stays in this state until all recipients respond.
-	//     - OPEN: This handshake was sent to multiple recipients (applicable to only some policy types) and all recipients have responded, allowing the originator to complete the handshake action.
-	//     - CANCELED: This handshake is no longer active because it was canceled by the originating account.
-	//     - ACCEPTED: This handshake is complete because it has been accepted by the recipient.
-	//     - DECLINED: This handshake is no longer active because it was declined by the recipient account.
-	//     - EXPIRED: This handshake is no longer active because the originator did not receive a response of any kind from the recipient before the expiration time (15 days).
+	//   - REQUESTED: This handshake was sent to multiple recipients (applicable to
+	//   only some handshake types) and not all recipients have responded yet. The
+	//   request stays in this state until all recipients respond.
+	//   - OPEN: This handshake was sent to multiple recipients (applicable to only
+	//   some policy types) and all recipients have responded, allowing the originator to
+	//   complete the handshake action.
+	//   - CANCELED: This handshake is no longer active because it was canceled by the
+	//   originating account.
+	//   - ACCEPTED: This handshake is complete because it has been accepted by the
+	//   recipient.
+	//   - DECLINED: This handshake is no longer active because it was declined by the
+	//   recipient account.
+	//   - EXPIRED: This handshake is no longer active because the originator did not
+	//   receive a response of any kind from the recipient before the expiration time (15
+	//   days).
 	State HandshakeState
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the criteria that are used to select the handshakes for the
-// operation.
+// Specifies the criteria that are used to select the handshakes for the operation.
 type HandshakeFilter struct {
 
-	// Specifies the type of handshake action. If you specify ActionType, you cannot
+	// Specifies the type of handshake action. If you specify ActionType , you cannot
 	// also specify ParentHandshakeId .
 	ActionType ActionType
 
@@ -287,17 +327,21 @@ type HandshakeParty struct {
 // Contains additional data that is needed to process a handshake.
 type HandshakeResource struct {
 
-	// When needed, contains an additional array of HandshakeResource  objects.
+	// When needed, contains an additional array of HandshakeResource objects.
 	Resources []HandshakeResource
 
 	// The type of information being passed, specifying how the value is to be
 	// interpreted by the other party:
-	//     - ACCOUNT - Specifies an Amazon Web Services account ID number.
-	//     - ORGANIZATION - Specifies an organization ID number.
-	//     - EMAIL - Specifies the email address that is associated with the account that receives the handshake.
-	//     - OWNER_EMAIL - Specifies the email address associated with the management account. Included as information about an organization.
-	//     - OWNER_NAME - Specifies the name associated with the management account. Included as information about an organization.
-	//     - NOTES - Additional text provided by the handshake initiator and intended for the recipient to read.
+	//   - ACCOUNT - Specifies an Amazon Web Services account ID number.
+	//   - ORGANIZATION - Specifies an organization ID number.
+	//   - EMAIL - Specifies the email address that is associated with the account that
+	//   receives the handshake.
+	//   - OWNER_EMAIL - Specifies the email address associated with the management
+	//   account. Included as information about an organization.
+	//   - OWNER_NAME - Specifies the name associated with the management account.
+	//   Included as information about an organization.
+	//   - NOTES - Additional text provided by the handshake initiator and intended for
+	//   the recipient to read.
 	Type HandshakeResourceType
 
 	// The information that is passed to the other party in the handshake. The format
@@ -320,12 +364,12 @@ type Organization struct {
 
 	// Do not use. This field is deprecated and doesn't provide complete information
 	// about the policies in your organization. To determine the policies that are
-	// enabled and available for use in your organization, use the ListRoots
-	// operation instead.
+	// enabled and available for use in your organization, use the ListRoots operation
+	// instead.
 	AvailablePolicyTypes []PolicyTypeSummary
 
-	// Specifies the functionality that currently is available to the organization.
-	// If set to "ALL", then all features are enabled and policies can be applied to
+	// Specifies the functionality that currently is available to the organization. If
+	// set to "ALL", then all features are enabled and policies can be applied to
 	// accounts in the organization. If set to "CONSOLIDATED_BILLING", then only
 	// consolidated billing functionality is available. For more information, see
 	// Enabling All Features in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
@@ -348,7 +392,7 @@ type Organization struct {
 	MasterAccountEmail *string
 
 	// The unique identifier (ID) of the management account of an organization. The
-	// regex pattern (http://wikipedia.org/wiki/regex)for an account ID string
+	// regex pattern (http://wikipedia.org/wiki/regex) for an account ID string
 	// requires exactly 12 digits.
 	MasterAccountId *string
 
@@ -387,8 +431,12 @@ type Parent struct {
 
 	// The unique identifier (ID) of the parent entity. The regex pattern (http://wikipedia.org/wiki/regex)
 	// for a parent ID string requires one of the following:
-	//     - Root - A string that begins with "r-" followed by from 4 to 32 lowercase letters or digits.
-	//     - Organizational unit (OU) - A string that begins with "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters or digits.
+	//   - Root - A string that begins with "r-" followed by from 4 to 32 lowercase
+	//   letters or digits.
+	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
+	//   4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This
+	//   string is followed by a second "-" dash and from 8 to 32 additional lowercase
+	//   letters or digits.
 	Id *string
 
 	// The type of the parent entity.
@@ -397,9 +445,9 @@ type Parent struct {
 	noSmithyDocumentSerde
 }
 
-// Contains rules to be applied to the affected accounts. Policies can be
-// attached directly to accounts, or to roots and OUs to affect all accounts in
-// those hierarchies.
+// Contains rules to be applied to the affected accounts. Policies can be attached
+// directly to accounts, or to roots and OUs to affect all accounts in those
+// hierarchies.
 type Policy struct {
 
 	// The text content of the policy.
@@ -447,8 +495,8 @@ type PolicySummary struct {
 // Contains information about a root, OU, or account that a policy is attached to.
 type PolicyTargetSummary struct {
 
-	// The Amazon Resource Name (ARN) of the policy target. For more information
-	// about ARNs in Organizations, see ARN Formats Supported by Organizations (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
+	// The Amazon Resource Name (ARN) of the policy target. For more information about
+	// ARNs in Organizations, see ARN Formats Supported by Organizations (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
 	// in the Amazon Web Services Service Authorization Reference.
 	Arn *string
 
@@ -459,9 +507,13 @@ type PolicyTargetSummary struct {
 
 	// The unique identifier (ID) of the policy target. The regex pattern (http://wikipedia.org/wiki/regex)
 	// for a target ID string requires one of the following:
-	//     - Root - A string that begins with "r-" followed by from 4 to 32 lowercase letters or digits.
-	//     - Account - A string that consists of exactly 12 digits.
-	//     - Organizational unit (OU) - A string that begins with "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters or digits.
+	//   - Root - A string that begins with "r-" followed by from 4 to 32 lowercase
+	//   letters or digits.
+	//   - Account - A string that consists of exactly 12 digits.
+	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
+	//   4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This
+	//   string is followed by a second "-" dash and from 8 to 32 additional lowercase
+	//   letters or digits.
 	TargetId *string
 
 	// The type of the policy target.
@@ -473,8 +525,8 @@ type PolicyTargetSummary struct {
 // Contains information about a policy type and its status in the associated root.
 type PolicyTypeSummary struct {
 
-	// The status of the policy type as it relates to the associated root. To attach
-	// a policy of the specified type to a root or to an OU or account in that root, it
+	// The status of the policy type as it relates to the associated root. To attach a
+	// policy of the specified type to a root or to an OU or account in that root, it
 	// must be available in the organization and enabled for that root.
 	Status PolicyTypeStatus
 
@@ -529,11 +581,11 @@ type Root struct {
 	// the ASCII character range.
 	Name *string
 
-	// The types of policies that are currently enabled for the root and therefore
-	// can be attached to the root or to its OUs or accounts. Even if a policy type is
+	// The types of policies that are currently enabled for the root and therefore can
+	// be attached to the root or to its OUs or accounts. Even if a policy type is
 	// shown as available in the organization, you can separately enable and disable
-	// them at the root level by using EnablePolicyType  and DisablePolicyType . Use
-	// DescribeOrganizationto see the availability of the policy types in that
+	// them at the root level by using EnablePolicyType and DisablePolicyType . Use
+	// DescribeOrganization to see the availability of the policy types in that
 	// organization.
 	PolicyTypes []PolicyTypeSummary
 

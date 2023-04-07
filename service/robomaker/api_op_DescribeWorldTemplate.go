@@ -42,8 +42,8 @@ type DescribeWorldTemplateOutput struct {
 	// The Amazon Resource Name (ARN) of the world template.
 	Arn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world template was created.

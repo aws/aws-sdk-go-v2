@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Returned if the access point that you are trying to create already exists,
-// with the creation token you provided in the request.
+// Returned if the access point that you are trying to create already exists, with
+// the creation token you provided in the request.
 type AccessPointAlreadyExists struct {
 	Message *string
 
@@ -568,8 +568,8 @@ func (e *NetworkInterfaceLimitExceeded) ErrorCode() string {
 }
 func (e *NetworkInterfaceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if IpAddress was not specified in the request and there are no free
-// IP addresses in the subnet.
+// Returned if IpAddress was not specified in the request and there are no free IP
+// addresses in the subnet.
 type NoFreeAddressesInSubnet struct {
 	Message *string
 
@@ -597,8 +597,8 @@ func (e *NoFreeAddressesInSubnet) ErrorCode() string {
 }
 func (e *NoFreeAddressesInSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the default file system policy is in effect for the EFS file
-// system specified.
+// Returned if the default file system policy is in effect for the EFS file system
+// specified.
 type PolicyNotFound struct {
 	Message *string
 
@@ -626,8 +626,7 @@ func (e *PolicyNotFound) ErrorCode() string {
 }
 func (e *PolicyNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the specified file system does not have a replication
-// configuration.
+// Returned if the specified file system does not have a replication configuration.
 type ReplicationNotFound struct {
 	Message *string
 
@@ -655,8 +654,8 @@ func (e *ReplicationNotFound) ErrorCode() string {
 }
 func (e *ReplicationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the size of SecurityGroups specified in the request is greater
-// than five.
+// Returned if the size of SecurityGroups specified in the request is greater than
+// five.
 type SecurityGroupLimitExceeded struct {
 	Message *string
 
@@ -713,7 +712,7 @@ func (e *SecurityGroupNotFound) ErrorCode() string {
 }
 func (e *SecurityGroupNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if there is no subnet with ID SubnetId  provided in the request.
+// Returned if there is no subnet with ID SubnetId provided in the request.
 type SubnetNotFound struct {
 	Message *string
 

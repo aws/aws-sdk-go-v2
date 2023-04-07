@@ -39,7 +39,7 @@ func (c *Client) Suggest(ctx context.Context, params *SuggestInput, optFns ...fu
 	return out, nil
 }
 
-// Container for the parameters to the Suggest  request.
+// Container for the parameters to the Suggest request.
 type SuggestInput struct {
 
 	// Specifies the string for which you want to get suggestions.
@@ -58,10 +58,10 @@ type SuggestInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a Suggest  request.
+// Contains the response to a Suggest request.
 type SuggestOutput struct {
 
-	// The status of a SuggestRequest . Contains the resource ID ( rid) and how long
+	// The status of a SuggestRequest . Contains the resource ID ( rid ) and how long
 	// it took to process the request ( timems ).
 	Status *types.SuggestStatus
 

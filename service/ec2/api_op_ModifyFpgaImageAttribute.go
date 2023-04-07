@@ -55,9 +55,8 @@ type ModifyFpgaImageAttributeInput struct {
 	// The operation type.
 	OperationType types.OperationType
 
-	// The product codes. After you add a product code to an AFI, it can't be
-	// removed. This parameter is valid only when modifying the productCodes
-	// attribute.
+	// The product codes. After you add a product code to an AFI, it can't be removed.
+	// This parameter is valid only when modifying the productCodes attribute.
 	ProductCodes []string
 
 	// The user groups. This parameter is valid only when modifying the loadPermission
@@ -65,7 +64,7 @@ type ModifyFpgaImageAttributeInput struct {
 	UserGroups []string
 
 	// The Amazon Web Services account IDs. This parameter is valid only when
-	// modifying the loadPermission  attribute.
+	// modifying the loadPermission attribute.
 	UserIds []string
 
 	noSmithyDocumentSerde

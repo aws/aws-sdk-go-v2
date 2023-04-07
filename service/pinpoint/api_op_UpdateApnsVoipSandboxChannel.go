@@ -30,8 +30,8 @@ func (c *Client) UpdateApnsVoipSandboxChannel(ctx context.Context, params *Updat
 
 type UpdateApnsVoipSandboxChannelInput struct {
 
-	// Specifies the status and settings of the APNs (Apple Push Notification
-	// service) VoIP sandbox channel for an application.
+	// Specifies the status and settings of the APNs (Apple Push Notification service)
+	// VoIP sandbox channel for an application.
 	//
 	// This member is required.
 	APNSVoipSandboxChannelRequest *types.APNSVoipSandboxChannelRequest

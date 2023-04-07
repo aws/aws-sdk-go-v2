@@ -27,8 +27,8 @@ func (c *Client) GetDocumentationParts(ctx context.Context, params *GetDocumenta
 	return out, nil
 }
 
-// Gets the documentation parts of an API. The result may be filtered by the
-// type, name, or path of API entities (targets).
+// Gets the documentation parts of an API. The result may be filtered by the type,
+// name, or path of API entities (targets).
 type GetDocumentationPartsInput struct {
 
 	// The string identifier of the associated RestApi.

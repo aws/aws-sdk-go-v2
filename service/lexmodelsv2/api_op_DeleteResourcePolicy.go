@@ -45,8 +45,8 @@ type DeleteResourcePolicyInput struct {
 
 type DeleteResourcePolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
-	// policy was deleted from.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
+	// was deleted from.
 	ResourceArn *string
 
 	// The current revision of the resource policy. Use the revision ID to make sure

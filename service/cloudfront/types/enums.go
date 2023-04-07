@@ -242,9 +242,9 @@ const (
 	HttpVersionHttp2and3 HttpVersion = "http2and3"
 )
 
-// Values returns all known values for HttpVersion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HttpVersion. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (HttpVersion) Values() []HttpVersion {
 	return []HttpVersion{
 		"http1.1",
@@ -416,8 +416,8 @@ const (
 	OriginProtocolPolicyHttpsOnly   OriginProtocolPolicy = "https-only"
 )
 
-// Values returns all known values for OriginProtocolPolicy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for OriginProtocolPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (OriginProtocolPolicy) Values() []OriginProtocolPolicy {
 	return []OriginProtocolPolicy{
@@ -506,9 +506,9 @@ const (
 	OriginRequestPolicyTypeCustom  OriginRequestPolicyType = "custom"
 )
 
-// Values returns all known values for OriginRequestPolicyType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OriginRequestPolicyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OriginRequestPolicyType) Values() []OriginRequestPolicyType {
 	return []OriginRequestPolicyType{
 		"managed",
@@ -644,9 +644,9 @@ const (
 	SslProtocolTLSv12 SslProtocol = "TLSv1.2"
 )
 
-// Values returns all known values for SslProtocol. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SslProtocol. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SslProtocol) Values() []SslProtocol {
 	return []SslProtocol{
 		"SSLv3",
@@ -685,8 +685,8 @@ const (
 	ViewerProtocolPolicyRedirectToHttps ViewerProtocolPolicy = "redirect-to-https"
 )
 
-// Values returns all known values for ViewerProtocolPolicy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ViewerProtocolPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ViewerProtocolPolicy) Values() []ViewerProtocolPolicy {
 	return []ViewerProtocolPolicy{

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
-// For the specified referenceTypes, returns a list of references associated with
-// the contact.
+// This API is in preview release for Amazon Connect and is subject to change. For
+// the specified referenceTypes , returns a list of references associated with the
+// contact.
 func (c *Client) ListContactReferences(ctx context.Context, params *ListContactReferencesInput, optFns ...func(*Options)) (*ListContactReferencesOutput, error) {
 	if params == nil {
 		params = &ListContactReferencesInput{}
@@ -59,8 +59,8 @@ type ListContactReferencesInput struct {
 
 type ListContactReferencesOutput struct {
 
-	// If there are additional results, this is the token for the next set of
-	// results. This is always returned as null in the response.
+	// If there are additional results, this is the token for the next set of results.
+	// This is always returned as null in the response.
 	NextToken *string
 
 	// Information about the flows.
@@ -146,8 +146,8 @@ var _ ListContactReferencesAPIClient = (*Client)(nil)
 // ListContactReferencesPaginatorOptions is the paginator options for
 // ListContactReferences
 type ListContactReferencesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -30,8 +30,8 @@ func (c *Client) DescribeApplications(ctx context.Context, params *DescribeAppli
 // Request to describe one or more applications.
 type DescribeApplicationsInput struct {
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// only include those with the specified names.
+	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to only
+	// include those with the specified names.
 	ApplicationNames []string
 
 	noSmithyDocumentSerde

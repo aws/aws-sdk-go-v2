@@ -221,8 +221,7 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// AWS RoboMaker is temporarily unable to process the request. Try your call
-// again.
+// AWS RoboMaker is temporarily unable to process the request. Try your call again.
 type ThrottlingException struct {
 	Message *string
 

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the connection ARN and details such as status, owner, and provider
-// type.
+// Returns the connection ARN and details such as status, owner, and provider type.
 func (c *Client) GetConnection(ctx context.Context, params *GetConnectionInput, optFns ...func(*Options)) (*GetConnectionOutput, error) {
 	if params == nil {
 		params = &GetConnectionInput{}

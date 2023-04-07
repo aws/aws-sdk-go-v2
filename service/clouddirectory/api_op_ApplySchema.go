@@ -29,8 +29,8 @@ func (c *Client) ApplySchema(ctx context.Context, params *ApplySchemaInput, optF
 
 type ApplySchemaInput struct {
 
-	// The Amazon Resource Name (ARN) that is associated with the Directory into
-	// which the schema is copied. For more information, see arns .
+	// The Amazon Resource Name (ARN) that is associated with the Directory into which
+	// the schema is copied. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -47,7 +47,7 @@ type ApplySchemaInput struct {
 type ApplySchemaOutput struct {
 
 	// The applied schema ARN that is associated with the copied schema in the
-	// Directory. You can use this ARN to describe the schema information applied on
+	// Directory . You can use this ARN to describe the schema information applied on
 	// this directory. For more information, see arns .
 	AppliedSchemaArn *string
 

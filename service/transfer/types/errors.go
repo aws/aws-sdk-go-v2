@@ -88,7 +88,7 @@ func (e *InternalServiceError) ErrorCode() string {
 }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The NextToken  parameter that was passed is invalid.
+// The NextToken parameter that was passed is invalid.
 type InvalidNextTokenException struct {
 	Message *string
 

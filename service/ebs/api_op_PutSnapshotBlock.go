@@ -12,9 +12,9 @@ import (
 	"io"
 )
 
-// Writes a block of data to a snapshot. If the specified block contains data,
-// the existing data is overwritten. The target snapshot must be in the pending
-// state. Data written to a snapshot must be aligned with 512-KiB sectors.
+// Writes a block of data to a snapshot. If the specified block contains data, the
+// existing data is overwritten. The target snapshot must be in the pending state.
+// Data written to a snapshot must be aligned with 512-KiB sectors.
 func (c *Client) PutSnapshotBlock(ctx context.Context, params *PutSnapshotBlockInput, optFns ...func(*Options)) (*PutSnapshotBlockOutput, error) {
 	if params == nil {
 		params = &PutSnapshotBlockInput{}
@@ -68,7 +68,7 @@ type PutSnapshotBlockInput struct {
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	// The size of the data to write to the block, in bytes. Currently, the only
-	// supported size is 524288  bytes. Valid values: 524288
+	// supported size is 524288 bytes. Valid values: 524288
 	//
 	// This member is required.
 	DataLength *int32

@@ -49,12 +49,12 @@ import (
 // (and by how much), so you need one policy for each type of action. For example,
 // a policy may make the following statement: "If the percentage of idle instances
 // is greater than 20% for more than 15 minutes, then reduce the fleet capacity by
-// 10%." A policy's rule statement has the following structure: If [MetricName]
-// is [ComparisonOperator] [Threshold]  for [EvaluationPeriods]  minutes, then
-// [ScalingAdjustmentType] to/by [ScalingAdjustment]. To implement the example,
-// the rule statement would look like this: If [PercentIdleInstances]  is
-// [GreaterThanThreshold] [20]  for [15]  minutes, then [PercentChangeInCapacity]
-// to/by [10]. To create or update a scaling policy, specify a unique combination
+// 10%." A policy's rule statement has the following structure: If [MetricName] is
+// [ComparisonOperator] [Threshold] for [EvaluationPeriods] minutes, then
+// [ScalingAdjustmentType] to/by [ScalingAdjustment] . To implement the example,
+// the rule statement would look like this: If [PercentIdleInstances] is
+// [GreaterThanThreshold] [20] for [15] minutes, then [PercentChangeInCapacity]
+// to/by [10] . To create or update a scaling policy, specify a unique combination
 // of name and fleet ID, and set the policy type to "RuleBased". Specify the
 // parameter values for a policy rule statement. On a successful request, the
 // policy name is returned. Scaling policies are automatically in force as soon as
@@ -89,17 +89,28 @@ type PutScalingPolicyInput struct {
 	// adjustment. For detailed descriptions of fleet metrics, see Monitor Amazon
 	// GameLift with Amazon CloudWatch (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html)
 	// .
-	//     - ActivatingGameSessions -- Game sessions in the process of being created.
-	//     - ActiveGameSessions -- Game sessions that are currently running.
-	//     - ActiveInstances -- Fleet instances that are currently running at least one game session.
-	//     - AvailableGameSessions -- Additional game sessions that fleet could host simultaneously, given current capacity.
-	//     - AvailablePlayerSessions -- Empty player slots in currently active game sessions. This includes game sessions that are not currently accepting players. Reserved player slots are not included.
-	//     - CurrentPlayerSessions -- Player slots in active game sessions that are being used by a player or are reserved for a player.
-	//     - IdleInstances -- Active instances that are currently hosting zero game sessions.
-	//     - PercentAvailableGameSessions -- Unused percentage of the total number of game sessions that a fleet could host simultaneously, given current capacity. Use this metric for a target-based scaling policy.
-	//     - PercentIdleInstances -- Percentage of the total number of active instances that are hosting zero game sessions.
-	//     - QueueDepth -- Pending game session placement requests, in any queue, where the current fleet is the top-priority destination.
-	//     - WaitTime -- Current wait time for pending game session placement requests, in any queue, where the current fleet is the top-priority destination.
+	//   - ActivatingGameSessions -- Game sessions in the process of being created.
+	//   - ActiveGameSessions -- Game sessions that are currently running.
+	//   - ActiveInstances -- Fleet instances that are currently running at least one
+	//   game session.
+	//   - AvailableGameSessions -- Additional game sessions that fleet could host
+	//   simultaneously, given current capacity.
+	//   - AvailablePlayerSessions -- Empty player slots in currently active game
+	//   sessions. This includes game sessions that are not currently accepting players.
+	//   Reserved player slots are not included.
+	//   - CurrentPlayerSessions -- Player slots in active game sessions that are
+	//   being used by a player or are reserved for a player.
+	//   - IdleInstances -- Active instances that are currently hosting zero game
+	//   sessions.
+	//   - PercentAvailableGameSessions -- Unused percentage of the total number of
+	//   game sessions that a fleet could host simultaneously, given current capacity.
+	//   Use this metric for a target-based scaling policy.
+	//   - PercentIdleInstances -- Percentage of the total number of active instances
+	//   that are hosting zero game sessions.
+	//   - QueueDepth -- Pending game session placement requests, in any queue, where
+	//   the current fleet is the top-priority destination.
+	//   - WaitTime -- Current wait time for pending game session placement requests,
+	//   in any queue, where the current fleet is the top-priority destination.
 	//
 	// This member is required.
 	MetricName types.MetricName
@@ -130,9 +141,14 @@ type PutScalingPolicyInput struct {
 	ScalingAdjustment int32
 
 	// The type of adjustment to make to a fleet's instance count:
-	//     - ChangeInCapacity -- add (or subtract) the scaling adjustment value from the current instance count. Positive values scale up while negative values scale down.
-	//     - ExactCapacity -- set the instance count to the scaling adjustment value.
-	//     - PercentChangeInCapacity -- increase or reduce the current instance count by the scaling adjustment, read as a percentage. Positive values scale up while negative values scale down; for example, a value of "-10" scales the fleet down by 10%.
+	//   - ChangeInCapacity -- add (or subtract) the scaling adjustment value from the
+	//   current instance count. Positive values scale up while negative values scale
+	//   down.
+	//   - ExactCapacity -- set the instance count to the scaling adjustment value.
+	//   - PercentChangeInCapacity -- increase or reduce the current instance count by
+	//   the scaling adjustment, read as a percentage. Positive values scale up while
+	//   negative values scale down; for example, a value of "-10" scales the fleet down
+	//   by 10%.
 	ScalingAdjustmentType types.ScalingAdjustmentType
 
 	// An object that contains settings for a target-based scaling policy.

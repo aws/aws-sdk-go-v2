@@ -11,19 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates an alarm and associates it with the specified metric,
-// metric math expression, anomaly detection model, or Metrics Insights query. For
-// more information about using a Metrics Insights query for an alarm, see Create
+// Creates or updates an alarm and associates it with the specified metric, metric
+// math expression, anomaly detection model, or Metrics Insights query. For more
+// information about using a Metrics Insights query for an alarm, see Create
 // alarms on Metrics Insights queries (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html)
 // . Alarms based on anomaly detection models cannot have Auto Scaling actions.
 // When this operation creates an alarm, the alarm state is immediately set to
-// INSUFFICIENT_DATA. The alarm is then evaluated and its state is set
+// INSUFFICIENT_DATA . The alarm is then evaluated and its state is set
 // appropriately. Any actions associated with the new state are then executed. When
 // you update an existing alarm, its state is left unchanged, but the update
 // completely overwrites the previous configuration of the alarm. If you are an IAM
 // user, you must have Amazon EC2 permissions for some alarm operations:
 //   - The iam:CreateServiceLinkedRole permission for all alarms with EC2 actions
-//   - The iam:CreateServiceLinkedRole permissions to create an alarm with Systems Manager OpsItem or response plan actions.
+//   - The iam:CreateServiceLinkedRole permissions to create an alarm with Systems
+//     Manager OpsItem or response plan actions.
 //
 // The first time you create an alarm in the Amazon Web Services Management
 // Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the
@@ -34,8 +35,18 @@ import (
 // . Cross-account alarms You can set an alarm on metrics in the current account,
 // or in another account. To create a cross-account alarm that watches a metric in
 // a different account, you must have completed the following pre-requisites:
-//   - The account where the metrics are located (the sharing account) must already have a sharing role named CloudWatch-CrossAccountSharingRole. If it does not already have this role, you must create it using the instructions in Set up a sharing account in Cross-account cross-Region CloudWatch console (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region) . The policy for that role must grant access to the ID of the account where you are creating the alarm.
-//   - The account where you are creating the alarm (the monitoring account) must already have a service-linked role named AWSServiceRoleForCloudWatchCrossAccount to allow CloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in Set up a monitoring account in Cross-account cross-Region CloudWatch console (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region) .
+//   - The account where the metrics are located (the sharing account) must
+//     already have a sharing role named CloudWatch-CrossAccountSharingRole. If it does
+//     not already have this role, you must create it using the instructions in Set up
+//     a sharing account in Cross-account cross-Region CloudWatch console (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region)
+//     . The policy for that role must grant access to the ID of the account where you
+//     are creating the alarm.
+//   - The account where you are creating the alarm (the monitoring account) must
+//     already have a service-linked role named AWSServiceRoleForCloudWatchCrossAccount
+//     to allow CloudWatch to assume the sharing role in the sharing account. If it
+//     does not, you must create it following the directions in Set up a monitoring
+//     account in Cross-account cross-Region CloudWatch console (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region)
+//     .
 func (c *Client) PutMetricAlarm(ctx context.Context, params *PutMetricAlarmInput, optFns ...func(*Options)) (*PutMetricAlarmOutput, error) {
 	if params == nil {
 		params = &PutMetricAlarmInput{}
@@ -62,7 +73,7 @@ type PutMetricAlarmInput struct {
 	// The arithmetic operation to use when comparing the specified statistic and
 	// threshold. The specified statistic value is used as the first operand. The
 	// values LessThanLowerOrGreaterThanUpperThreshold , LessThanLowerThreshold , and
-	// GreaterThanUpperThresholdare used only for alarms based on anomaly detection
+	// GreaterThanUpperThreshold are used only for alarms based on anomaly detection
 	// models.
 	//
 	// This member is required.
@@ -73,7 +84,7 @@ type PutMetricAlarmInput struct {
 	// points be breaching to trigger the alarm, this value specifies that number. If
 	// you are setting an "M out of N" alarm, this value is the N. An alarm's total
 	// current evaluation period can be no longer than one day, so this number
-	// multiplied by Period  cannot be more than 86,400 seconds.
+	// multiplied by Period cannot be more than 86,400 seconds.
 	//
 	// This member is required.
 	EvaluationPeriods *int32
@@ -85,24 +96,26 @@ type PutMetricAlarmInput struct {
 	// The actions to execute when this alarm transitions to the ALARM state from any
 	// other state. Each action is specified as an Amazon Resource Name (ARN). Valid
 	// values: EC2 actions:
-	//     - arn:aws:automate:region:ec2:stop
-	//     - arn:aws:automate:region:ec2:terminate
-	//     - arn:aws:automate:region:ec2:reboot
-	//     - arn:aws:automate:region:ec2:recover
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0
-	//
+	//   - arn:aws:automate:region:ec2:stop
+	//   - arn:aws:automate:region:ec2:terminate
+	//   - arn:aws:automate:region:ec2:reboot
+	//   - arn:aws:automate:region:ec2:recover
+	//   - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0
+	//   -
+	//   arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0
+	//   - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+	//   - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0
 	// Autoscaling action:
-	//     - arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//   -
+	//   arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
 	// SSN notification action:
-	//     - arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//   -
+	//   arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
 	// SSM integration actions:
-	//     - arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
-	//     - arn:aws:ssm-incidents::account-id:responseplan/response-plan-name
+	//   - arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
+	//   - arn:aws:ssm-incidents::account-id:responseplan/response-plan-name
 	AlarmActions []string
 
 	// The description for the alarm.
@@ -117,7 +130,7 @@ type PutMetricAlarmInput struct {
 	// The dimensions for the metric specified in MetricName .
 	Dimensions []types.Dimension
 
-	// Used only for alarms based on percentiles. If you specify ignore, the alarm
+	// Used only for alarms based on percentiles. If you specify ignore , the alarm
 	// state does not change during periods with too few data points to be
 	// statistically significant. If you specify evaluate or omit this parameter, the
 	// alarm is always evaluated and possibly changes state no matter how many data
@@ -126,54 +139,55 @@ type PutMetricAlarmInput struct {
 	// . Valid Values: evaluate | ignore
 	EvaluateLowSampleCountPercentile *string
 
-	// The percentile statistic for the metric specified in MetricName. Specify a
-	// value between p0.0 and p100. When you call PutMetricAlarm  and specify a
-	// MetricName , you must specify either Statistic  or ExtendedStatistic, but not
+	// The percentile statistic for the metric specified in MetricName . Specify a
+	// value between p0.0 and p100. When you call PutMetricAlarm and specify a
+	// MetricName , you must specify either Statistic or ExtendedStatistic, but not
 	// both.
 	ExtendedStatistic *string
 
 	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
 	// state from any other state. Each action is specified as an Amazon Resource Name
 	// (ARN). Valid values: EC2 actions:
-	//     - arn:aws:automate:region:ec2:stop
-	//     - arn:aws:automate:region:ec2:terminate
-	//     - arn:aws:automate:region:ec2:reboot
-	//     - arn:aws:automate:region:ec2:recover
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0
-	//
+	//   - arn:aws:automate:region:ec2:stop
+	//   - arn:aws:automate:region:ec2:terminate
+	//   - arn:aws:automate:region:ec2:reboot
+	//   - arn:aws:automate:region:ec2:recover
+	//   - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0
+	//   -
+	//   arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0
+	//   - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+	//   - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0
 	// Autoscaling action:
-	//     - arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//   -
+	//   arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
 	// SSN notification action:
-	//     - arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//   -
+	//   arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
 	// SSM integration actions:
-	//     - arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
-	//     - arn:aws:ssm-incidents::account-id:responseplan/response-plan-name
+	//   - arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
+	//   - arn:aws:ssm-incidents::account-id:responseplan/response-plan-name
 	InsufficientDataActions []string
 
 	// The name for the metric associated with the alarm. For each PutMetricAlarm
-	// operation, you must specify either MetricName  or a Metrics array. If you are
+	// operation, you must specify either MetricName or a Metrics array. If you are
 	// creating an alarm based on a math expression, you cannot specify this parameter,
-	// or any of the Dimensions , Period , Namespace , Statistic , or
-	// ExtendedStatistic parameters. Instead, you specify all this information in the
-	// Metrics array.
+	// or any of the Dimensions , Period , Namespace , Statistic , or ExtendedStatistic
+	// parameters. Instead, you specify all this information in the Metrics array.
 	MetricName *string
 
-	// An array of MetricDataQuery structures that enable you to create an alarm
-	// based on the result of a metric math expression. For each PutMetricAlarm
-	// operation, you must specify either MetricName  or a Metrics array. Each item
-	// in the Metrics array either retrieves a metric or performs a math expression.
-	// One item in the Metrics array is the expression that the alarm watches. You
-	// designate this expression by setting ReturnData to true for this object in the
-	// array. For more information, see MetricDataQuery (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html)
-	// . If you use the Metrics  parameter, you cannot include the MetricName ,
+	// An array of MetricDataQuery structures that enable you to create an alarm based
+	// on the result of a metric math expression. For each PutMetricAlarm operation,
+	// you must specify either MetricName or a Metrics array. Each item in the Metrics
+	// array either retrieves a metric or performs a math expression. One item in the
+	// Metrics array is the expression that the alarm watches. You designate this
+	// expression by setting ReturnData to true for this object in the array. For more
+	// information, see MetricDataQuery (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html)
+	// . If you use the Metrics parameter, you cannot include the MetricName ,
 	// Dimensions , Period , Namespace , Statistic , or ExtendedStatistic parameters
 	// of PutMetricAlarm in the same operation. Instead, you retrieve the metrics you
-	// are using in your math expression as part of the Metrics  array.
+	// are using in your math expression as part of the Metrics array.
 	Metrics []types.MetricDataQuery
 
 	// The namespace for the metric associated specified in MetricName .
@@ -182,32 +196,34 @@ type PutMetricAlarmInput struct {
 	// The actions to execute when this alarm transitions to an OK state from any
 	// other state. Each action is specified as an Amazon Resource Name (ARN). Valid
 	// values: EC2 actions:
-	//     - arn:aws:automate:region:ec2:stop
-	//     - arn:aws:automate:region:ec2:terminate
-	//     - arn:aws:automate:region:ec2:reboot
-	//     - arn:aws:automate:region:ec2:recover
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
-	//     - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0
-	//
+	//   - arn:aws:automate:region:ec2:stop
+	//   - arn:aws:automate:region:ec2:terminate
+	//   - arn:aws:automate:region:ec2:reboot
+	//   - arn:aws:automate:region:ec2:recover
+	//   - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0
+	//   -
+	//   arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0
+	//   - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+	//   - arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0
 	// Autoscaling action:
-	//     - arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//   -
+	//   arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
 	// SSN notification action:
-	//     - arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//   -
+	//   arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
 	// SSM integration actions:
-	//     - arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
-	//     - arn:aws:ssm-incidents::account-id:responseplan/response-plan-name
+	//   - arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
+	//   - arn:aws:ssm-incidents::account-id:responseplan/response-plan-name
 	OKActions []string
 
 	// The length, in seconds, used each time the metric specified in MetricName is
 	// evaluated. Valid values are 10, 30, and any multiple of 60. Period is required
 	// for alarms based on static thresholds. If you are creating an alarm based on a
 	// metric math expression, you specify the period for each metric within the
-	// objects in the Metrics array. Be sure to specify 10 or 30 only for metrics
-	// that are stored by a PutMetricData  call with a StorageResolution of 1. If you
+	// objects in the Metrics array. Be sure to specify 10 or 30 only for metrics that
+	// are stored by a PutMetricData call with a StorageResolution of 1. If you
 	// specify a period of 10 or 30 for a metric that does not have sub-minute
 	// resolution, the alarm still attempts to gather data at the period rate that you
 	// specify. In this case, it does not receive data for the attempts that do not
@@ -216,12 +232,12 @@ type PutMetricAlarmInput struct {
 	// high-resolution alarm, which has a higher charge than other alarms. For more
 	// information about pricing, see Amazon CloudWatch Pricing (https://aws.amazon.com/cloudwatch/pricing/)
 	// . An alarm's total current evaluation period can be no longer than one day, so
-	// Period multiplied by EvaluationPeriods  cannot be more than 86,400 seconds.
+	// Period multiplied by EvaluationPeriods cannot be more than 86,400 seconds.
 	Period *int32
 
-	// The statistic for the metric specified in MetricName, other than percentile.
+	// The statistic for the metric specified in MetricName , other than percentile.
 	// For percentile statistics, use ExtendedStatistic . When you call PutMetricAlarm
-	// and specify a MetricName , you must specify either Statistic  or
+	// and specify a MetricName , you must specify either Statistic or
 	// ExtendedStatistic, but not both.
 	Statistic types.Statistic
 
@@ -248,13 +264,13 @@ type PutMetricAlarmInput struct {
 	ThresholdMetricId *string
 
 	// Sets how this alarm is to handle missing data points. If TreatMissingData is
-	// omitted, the default behavior of missing  is used. For more information, see
+	// omitted, the default behavior of missing is used. For more information, see
 	// Configuring How CloudWatch Alarms Treats Missing Data (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data)
 	// . Valid Values: breaching | notBreaching | ignore | missing Alarms that
-	// evaluate metrics in the AWS/DynamoDB  namespace always ignore missing data
-	// even if you choose a different option for TreatMissingData . When an
-	// AWS/DynamoDBmetric has missing data, alarms that evaluate that metric remain
-	// in their current state.
+	// evaluate metrics in the AWS/DynamoDB namespace always ignore missing data even
+	// if you choose a different option for TreatMissingData . When an AWS/DynamoDB
+	// metric has missing data, alarms that evaluate that metric remain in their
+	// current state.
 	TreatMissingData *string
 
 	// The unit of measure for the statistic. For example, the units for the Amazon
@@ -262,14 +278,14 @@ type PutMetricAlarmInput struct {
 	// an instance receives on all network interfaces. You can also specify a unit when
 	// you create a custom metric. Units help provide conceptual meaning to your data.
 	// Metric data points that specify a unit of measure, such as Percent, are
-	// aggregated separately. If you don't specify Unit, CloudWatch retrieves all
-	// unit types that have been published for the metric and attempts to evaluate the
+	// aggregated separately. If you don't specify Unit , CloudWatch retrieves all unit
+	// types that have been published for the metric and attempts to evaluate the
 	// alarm. Usually, metrics are published with only one unit, so the alarm works as
 	// intended. However, if the metric is published with multiple types of units and
 	// you don't specify a unit, the alarm's behavior is not defined and it behaves
 	// unpredictably. We recommend omitting Unit so that you don't inadvertently
 	// specify an incorrect unit that is not published for this metric. Doing so causes
-	// the alarm to be stuck in the INSUFFICIENT DATA  state.
+	// the alarm to be stuck in the INSUFFICIENT DATA state.
 	Unit types.StandardUnit
 
 	noSmithyDocumentSerde

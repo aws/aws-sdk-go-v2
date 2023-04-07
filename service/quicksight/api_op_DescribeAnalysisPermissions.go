@@ -54,8 +54,8 @@ type DescribeAnalysisPermissionsOutput struct {
 	// The ID of the analysis whose permissions you're describing.
 	AnalysisId *string
 
-	// A structure that describes the principals and the resource-level permissions
-	// on an analysis.
+	// A structure that describes the principals and the resource-level permissions on
+	// an analysis.
 	Permissions []types.ResourcePermission
 
 	// The Amazon Web Services request ID for this operation.

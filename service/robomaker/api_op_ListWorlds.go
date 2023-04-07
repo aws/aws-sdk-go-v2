@@ -33,12 +33,12 @@ type ListWorldsInput struct {
 	// Optional filters to limit results. You can use status .
 	Filters []types.Filter
 
-	// When this parameter is used, ListWorlds  only returns maxResults results in a
+	// When this parameter is used, ListWorlds only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListWorlds request with the
 	// returned nextToken value. This value can be between 1 and 100. If this
-	// parameter is not used, then ListWorlds  returns up to 100 results and a
-	// nextToken value if applicable.
+	// parameter is not used, then ListWorlds returns up to 100 results and a nextToken
+	// value if applicable.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -138,16 +138,16 @@ var _ ListWorldsAPIClient = (*Client)(nil)
 
 // ListWorldsPaginatorOptions is the paginator options for ListWorlds
 type ListWorldsPaginatorOptions struct {
-	// When this parameter is used, ListWorlds  only returns maxResults results in a
+	// When this parameter is used, ListWorlds only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListWorlds request with the
 	// returned nextToken value. This value can be between 1 and 100. If this
-	// parameter is not used, then ListWorlds  returns up to 100 results and a
-	// nextToken value if applicable.
+	// parameter is not used, then ListWorlds returns up to 100 results and a nextToken
+	// value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

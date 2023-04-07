@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Ungroups a custom component. When you ungroup custom components, all
-// applicable monitors that are set up for the component are removed and the
-// instances revert to their standalone status.
+// Ungroups a custom component. When you ungroup custom components, all applicable
+// monitors that are set up for the component are removed and the instances revert
+// to their standalone status.
 func (c *Client) DeleteComponent(ctx context.Context, params *DeleteComponentInput, optFns ...func(*Options)) (*DeleteComponentOutput, error) {
 	if params == nil {
 		params = &DeleteComponentInput{}

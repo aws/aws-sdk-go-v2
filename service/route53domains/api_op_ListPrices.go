@@ -38,9 +38,9 @@ type ListPricesInput struct {
 
 	// For an initial request for a list of prices, omit this element. If the number
 	// of prices that are not yet complete is greater than the value that you specified
-	// for MaxItems , you can use Marker to return additional prices. Get the value
-	// of NextPageMarker from the previous response, and submit another request that
-	// includes the value of NextPageMarker  in the Marker element. Used only for all
+	// for MaxItems , you can use Marker to return additional prices. Get the value of
+	// NextPageMarker from the previous response, and submit another request that
+	// includes the value of NextPageMarker in the Marker element. Used only for all
 	// TLDs. If you specify a TLD, don't specify a Marker .
 	Marker *string
 
@@ -48,9 +48,9 @@ type ListPricesInput struct {
 	// don't specify a MaxItems .
 	MaxItems *int32
 
-	// The TLD for which you want to receive the pricing information. For example.
-	// .net . If a Tld value is not provided, a list of prices for all TLDs supported
-	// by Route 53 is returned.
+	// The TLD for which you want to receive the pricing information. For example. .net
+	// . If a Tld value is not provided, a list of prices for all TLDs supported by
+	// Route 53 is returned.
 	Tld *string
 
 	noSmithyDocumentSerde
@@ -58,14 +58,13 @@ type ListPricesInput struct {
 
 type ListPricesOutput struct {
 
-	// If there are more prices than you specified for MaxItems in the request,
-	// submit another request and include the value of NextPageMarker  in the value of
-	// Marker . Used only for all TLDs. If you specify a TLD, don't specify a
-	// NextPageMarker .
+	// If there are more prices than you specified for MaxItems in the request, submit
+	// another request and include the value of NextPageMarker in the value of Marker .
+	// Used only for all TLDs. If you specify a TLD, don't specify a NextPageMarker .
 	NextPageMarker *string
 
-	// A complex type that includes all the pricing information. If you specify a
-	// TLD, this array contains only the pricing for that TLD.
+	// A complex type that includes all the pricing information. If you specify a TLD,
+	// this array contains only the pricing for that TLD.
 	Prices []types.DomainPrice
 
 	// Metadata pertaining to the operation's result.
@@ -147,8 +146,8 @@ type ListPricesPaginatorOptions struct {
 	// don't specify a MaxItems .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

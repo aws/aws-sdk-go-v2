@@ -179,8 +179,8 @@ const (
 	ICD10CMAttributeTypeTimeExpression  ICD10CMAttributeType = "TIME_EXPRESSION"
 )
 
-// Values returns all known values for ICD10CMAttributeType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ICD10CMAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ICD10CMAttributeType) Values() []ICD10CMAttributeType {
 	return []ICD10CMAttributeType{
@@ -236,9 +236,9 @@ const (
 	ICD10CMRelationshipTypeSystemOrganSite ICD10CMRelationshipType = "SYSTEM_ORGAN_SITE"
 )
 
-// Values returns all known values for ICD10CMRelationshipType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ICD10CMRelationshipType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ICD10CMRelationshipType) Values() []ICD10CMRelationshipType {
 	return []ICD10CMRelationshipType{
 		"OVERLAP",
@@ -407,8 +407,8 @@ const (
 	RxNormEntityCategoryMedication RxNormEntityCategory = "MEDICATION"
 )
 
-// Values returns all known values for RxNormEntityCategory. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RxNormEntityCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RxNormEntityCategory) Values() []RxNormEntityCategory {
 	return []RxNormEntityCategory{

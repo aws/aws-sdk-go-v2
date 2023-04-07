@@ -48,7 +48,7 @@ type DescribeExportOutput struct {
 	CreationDateTime *time.Time
 
 	// A pre-signed S3 URL that points to the bot or bot locale archive. The URL is
-	// only available for 5 minutes after calling the DescribeExport  operation.
+	// only available for 5 minutes after calling the DescribeExport operation.
 	DownloadUrl *string
 
 	// The unique identifier of the described export.
@@ -203,9 +203,9 @@ func NewBotExportCompletedWaiter(client DescribeExportAPIClient, optFns ...func(
 	}
 }
 
-// Wait calls the waiter function for BotExportCompleted waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for BotExportCompleted waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *BotExportCompletedWaiter) Wait(ctx context.Context, params *DescribeExportInput, maxWaitDur time.Duration, optFns ...func(*BotExportCompletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -35,7 +35,7 @@ import (
 // encoded. If it were not, it would not contain the content-length, and you would
 // need to read the entire body. The copy request charge is based on the storage
 // class and Region that you specify for the destination object. For pricing
-// information, see Amazon S3 pricing (http://aws.amazon.com/s3/pricing/). Amazon
+// information, see Amazon S3 pricing (http://aws.amazon.com/s3/pricing/) . Amazon
 // S3 transfer acceleration does not support cross-Region copies. If you request a
 // cross-Region copy using a transfer acceleration endpoint, you get a 400 Bad
 // Request error. For more information, see Transfer Acceleration (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html)
@@ -46,9 +46,9 @@ import (
 // . To specify whether you want the object metadata copied from the source object
 // or replaced with metadata provided in the request, you can optionally add the
 // x-amz-metadata-directive header. When you grant permissions, you can use the
-// s3:x-amz-metadata-directivecondition key to enforce certain metadata behavior
-// when objects are uploaded. For more information, see Specifying Conditions in
-// a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html)
+// s3:x-amz-metadata-directive condition key to enforce certain metadata behavior
+// when objects are uploaded. For more information, see Specifying Conditions in a
+// Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html)
 // in the Amazon S3 User Guide. For a complete list of Amazon S3-specific condition
 // keys, see Actions, Resources, and Condition Keys for Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html)
 // . x-amz-copy-source-if Headers To only copy an object under certain conditions,
@@ -58,24 +58,22 @@ import (
 //   - x-amz-copy-source-if-none-match
 //   - x-amz-copy-source-if-unmodified-since
 //   - x-amz-copy-source-if-modified-since
-//     If both the x-amz-copy-source-if-match  and
 //
-// x-amz-copy-source-if-unmodified-sinceheaders are present in the request and
-// evaluate as follows, Amazon S3 returns 200 OK  and copies the data:
+// If both the x-amz-copy-source-if-match and x-amz-copy-source-if-unmodified-since
+// headers are present in the request and evaluate as follows, Amazon S3 returns
+// 200 OK and copies the data:
 //   - x-amz-copy-source-if-match condition evaluates to true
 //   - x-amz-copy-source-if-unmodified-since condition evaluates to false
 //
-// If
-// both the x-amz-copy-source-if-none-match  and
-// x-amz-copy-source-if-modified-sinceheaders are present in the request and
+// If both the x-amz-copy-source-if-none-match and
+// x-amz-copy-source-if-modified-since headers are present in the request and
 // evaluate as follows, Amazon S3 returns the 412 Precondition Failed response
 // code:
 //   - x-amz-copy-source-if-none-match condition evaluates to false
 //   - x-amz-copy-source-if-modified-since condition evaluates to true
 //
-// All
-// headers with the x-amz-  prefix, including x-amz-copy-source, must be signed.
-// Server-side encryption When you perform a CopyObject operation, you can
+// All headers with the x-amz- prefix, including x-amz-copy-source , must be
+// signed. Server-side encryption When you perform a CopyObject operation, you can
 // optionally use the appropriate encryption-related headers to encrypt the object
 // using server-side encryption with Amazon Web Services managed encryption keys
 // (SSE-S3 or SSE-KMS) or a customer-provided encryption key. With server-side
@@ -97,8 +95,8 @@ import (
 // permissions. Buckets that use this setting only accept PUT requests that don't
 // specify an ACL or PUT requests that specify bucket owner full control ACLs, such
 // as the bucket-owner-full-control canned ACL or an equivalent form of this ACL
-// expressed in the XML format. For more information, see Controlling ownership
-// of objects and disabling ACLs (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+// expressed in the XML format. For more information, see Controlling ownership of
+// objects and disabling ACLs (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
 // in the Amazon S3 User Guide. If your bucket uses the bucket owner enforced
 // setting for Object Ownership, all objects written to the bucket by any account
 // will be owned by the bucket owner. Checksums When copying an object, if it has a
@@ -153,7 +151,7 @@ type CopyObjectInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -166,9 +164,26 @@ type CopyObjectInput struct {
 	// one of two formats, depending on whether you want to access the source object
 	// through an access point (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html)
 	// :
-	//     - For objects not accessed through an access point, specify the name of the source bucket and the key of the source object, separated by a slash (/). For example, to copy the object reports/january.pdf from the bucket awsexamplebucket , use awsexamplebucket/reports/january.pdf . The value must be URL-encoded.
-	//     - For objects accessed through access points, specify the Amazon Resource Name (ARN) of the object as accessed through the access point, in the format arn:aws:s3:::accesspoint//object/ . For example, to copy the object reports/january.pdf through access point my-access-point owned by account 123456789012 in Region us-west-2 , use the URL encoding of arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf . The value must be URL encoded. Amazon S3 supports copy operations using access points only when the source and destination buckets are in the same Amazon Web Services Region. Alternatively, for objects accessed through Amazon S3 on Outposts, specify the ARN of the object as accessed in the format arn:aws:s3-outposts:::outpost//object/ . For example, to copy the object reports/january.pdf through outpost my-outpost owned by account 123456789012 in Region us-west-2 , use the URL encoding of arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf . The value must be URL-encoded.
-	//
+	//   - For objects not accessed through an access point, specify the name of the
+	//   source bucket and the key of the source object, separated by a slash (/). For
+	//   example, to copy the object reports/january.pdf from the bucket
+	//   awsexamplebucket , use awsexamplebucket/reports/january.pdf . The value must
+	//   be URL-encoded.
+	//   - For objects accessed through access points, specify the Amazon Resource
+	//   Name (ARN) of the object as accessed through the access point, in the format
+	//   arn:aws:s3:::accesspoint//object/ . For example, to copy the object
+	//   reports/january.pdf through access point my-access-point owned by account
+	//   123456789012 in Region us-west-2 , use the URL encoding of
+	//   arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf
+	//   . The value must be URL encoded. Amazon S3 supports copy operations using access
+	//   points only when the source and destination buckets are in the same Amazon Web
+	//   Services Region. Alternatively, for objects accessed through Amazon S3 on
+	//   Outposts, specify the ARN of the object as accessed in the format
+	//   arn:aws:s3-outposts:::outpost//object/ . For example, to copy the object
+	//   reports/january.pdf through outpost my-outpost owned by account 123456789012
+	//   in Region us-west-2 , use the URL encoding of
+	//   arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf
+	//   . The value must be URL-encoded.
 	// To copy a specific version of an object, append ?versionId= to the value (for
 	// example,
 	// awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893
@@ -188,10 +203,10 @@ type CopyObjectInput struct {
 	ACL types.ObjectCannedACL
 
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
-	// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to
-	// truecauses Amazon S3 to use an S3 Bucket Key for object encryption with
-	// SSE-KMS. Specifying this header with a COPY action doesn’t affect bucket-level
-	// settings for S3 Bucket Key.
+	// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to true
+	// causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.
+	// Specifying this header with a COPY action doesn’t affect bucket-level settings
+	// for S3 Bucket Key.
 	BucketKeyEnabled bool
 
 	// Specifies caching behavior along the request/reply chain.
@@ -222,8 +237,7 @@ type CopyObjectInput struct {
 	// Copies the object if it has been modified since the specified time.
 	CopySourceIfModifiedSince *time.Time
 
-	// Copies the object if its entity tag (ETag) is different than the specified
-	// ETag.
+	// Copies the object if its entity tag (ETag) is different than the specified ETag.
 	CopySourceIfNoneMatch *string
 
 	// Copies the object if it hasn't been modified since the specified time.
@@ -245,7 +259,7 @@ type CopyObjectInput struct {
 
 	// The account ID of the expected destination bucket owner. If the destination
 	// bucket is owned by a different account, the request fails with the HTTP status
-	// code 403 Forbidden  (access denied).
+	// code 403 Forbidden (access denied).
 	ExpectedBucketOwner *string
 
 	// The account ID of the expected source bucket owner. If the source bucket is
@@ -256,8 +270,8 @@ type CopyObjectInput struct {
 	// The date and time at which the object is no longer cacheable.
 	Expires *time.Time
 
-	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
-	// This action is not supported by Amazon S3 on Outposts.
+	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object. This
+	// action is not supported by Amazon S3 on Outposts.
 	GrantFullControl *string
 
 	// Allows grantee to read the object data and its metadata. This action is not
@@ -324,8 +338,8 @@ type CopyObjectInput struct {
 	// in the Amazon S3 User Guide.
 	SSEKMSKeyId *string
 
-	// The server-side encryption algorithm used when storing this object in Amazon
-	// S3 (for example, AES256, aws:kms).
+	// The server-side encryption algorithm used when storing this object in Amazon S3
+	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// By default, Amazon S3 uses the STANDARD Storage Class to store newly created
@@ -337,16 +351,16 @@ type CopyObjectInput struct {
 	StorageClass types.StorageClass
 
 	// The tag-set for the object destination object this value must be used in
-	// conjunction with the TaggingDirective. The tag-set must be encoded as URL
-	// Query parameters.
+	// conjunction with the TaggingDirective . The tag-set must be encoded as URL Query
+	// parameters.
 	Tagging *string
 
 	// Specifies whether the object tag-set are copied from the source object or
 	// replaced with tag-set provided in the request.
 	TaggingDirective types.TaggingDirective
 
-	// If the bucket is configured as a website, redirects requests for this object
-	// to another object in the same bucket or to an external URL. Amazon S3 stores the
+	// If the bucket is configured as a website, redirects requests for this object to
+	// another object in the same bucket or to an external URL. Amazon S3 stores the
 	// value of this header in the object metadata.
 	WebsiteRedirectLocation *string
 
@@ -382,8 +396,8 @@ type CopyObjectOutput struct {
 	// integrity verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string
 
-	// If present, specifies the Amazon Web Services KMS Encryption Context to use
-	// for object encryption. The value of this header is a base64-encoded UTF-8 string
+	// If present, specifies the Amazon Web Services KMS Encryption Context to use for
+	// object encryption. The value of this header is a base64-encoded UTF-8 string
 	// holding JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
 
@@ -392,8 +406,8 @@ type CopyObjectOutput struct {
 	// object.
 	SSEKMSKeyId *string
 
-	// The server-side encryption algorithm used when storing this object in Amazon
-	// S3 (for example, AES256, aws:kms).
+	// The server-side encryption algorithm used when storing this object in Amazon S3
+	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Version ID of the newly created copy.

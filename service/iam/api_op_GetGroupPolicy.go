@@ -12,9 +12,9 @@ import (
 
 // Retrieves the specified inline policy document that is embedded in the
 // specified IAM group. Policies returned by this operation are URL-encoded
-// compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986). You can use a
+// compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986) . You can use a
 // URL decoding method to convert the policy back to plain JSON text. For example,
-// if you use Java, you can use the decode  method of the java.net.URLDecoder
+// if you use Java, you can use the decode method of the java.net.URLDecoder
 // utility class in the Java SDK. Other languages and SDKs provide similar
 // functionality. An IAM group can also have managed policies attached to it. To
 // retrieve a managed policy document that is attached to a group, use GetPolicy
@@ -40,7 +40,7 @@ func (c *Client) GetGroupPolicy(ctx context.Context, params *GetGroupPolicyInput
 type GetGroupPolicyInput struct {
 
 	// The name of the group the policy is associated with. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//
@@ -48,7 +48,7 @@ type GetGroupPolicyInput struct {
 	GroupName *string
 
 	// The name of the policy document to get. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
 	//
@@ -58,7 +58,7 @@ type GetGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetGroupPolicy  request.
+// Contains the response to a successful GetGroupPolicy request.
 type GetGroupPolicyOutput struct {
 
 	// The group the policy is associated with.

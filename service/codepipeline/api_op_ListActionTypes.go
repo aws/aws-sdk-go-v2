@@ -29,14 +29,14 @@ func (c *Client) ListActionTypes(ctx context.Context, params *ListActionTypesInp
 	return out, nil
 }
 
-// Represents the input of a ListActionTypes  action.
+// Represents the input of a ListActionTypes action.
 type ListActionTypesInput struct {
 
 	// Filters the list of action types to those created by a specified entity.
 	ActionOwnerFilter types.ActionOwner
 
-	// An identifier that was returned from the previous list action types call,
-	// which can be used to return the next set of action types in the list.
+	// An identifier that was returned from the previous list action types call, which
+	// can be used to return the next set of action types in the list.
 	NextToken *string
 
 	// The Region to filter on for the list of action types.
@@ -45,7 +45,7 @@ type ListActionTypesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListActionTypes  action.
+// Represents the output of a ListActionTypes action.
 type ListActionTypesOutput struct {
 
 	// Provides details of the action types.
@@ -134,8 +134,8 @@ var _ ListActionTypesAPIClient = (*Client)(nil)
 
 // ListActionTypesPaginatorOptions is the paginator options for ListActionTypes
 type ListActionTypesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

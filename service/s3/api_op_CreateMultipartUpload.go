@@ -24,8 +24,8 @@ import (
 // the upload must complete within the number of days specified in the bucket
 // lifecycle configuration. Otherwise, the incomplete multipart upload becomes
 // eligible for an abort action and Amazon S3 aborts the multipart upload. For more
-// information, see Aborting Incomplete Multipart Uploads Using a Bucket
-// Lifecycle Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
+// information, see Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle
+// Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
 // . For information about the permissions required to use the multipart upload
 // API, see Multipart Upload and Permissions (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
 // . For request signing, multipart upload is just a series of regular requests.
@@ -46,7 +46,7 @@ import (
 // headers you provide in UploadPart (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
 // and UploadPartCopy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)
 // requests must match the headers you used in the request to initiate the upload
-// by using CreateMultipartUpload. To perform a multipart upload with encryption
+// by using CreateMultipartUpload . To perform a multipart upload with encryption
 // using an Amazon Web Services KMS key, the requester must have permission to the
 // kms:Decrypt and kms:GenerateDataKey* actions on the key. These permissions are
 // required because Amazon S3 must decrypt and read data from the encrypted file
@@ -56,13 +56,19 @@ import (
 // or role is in the same Amazon Web Services account as the KMS key, then you must
 // have these permissions on the key policy. If your IAM user or role belongs to a
 // different account than the key, then you must have the permissions on both the
-// key policy and your IAM user or role. For more information, see Protecting
-// Data Using Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)
+// key policy and your IAM user or role. For more information, see Protecting Data
+// Using Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)
 // . Access Permissions When copying an object, you can optionally specify the
 // accounts or groups that should be granted specific permissions on the new
 // object. There are two ways to grant the permissions using the request headers:
-//   - Specify a canned ACL with the x-amz-acl request header. For more information, see Canned ACL (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL) .
-//   - Specify access permissions explicitly with the x-amz-grant-read , x-amz-grant-read-acp , x-amz-grant-write-acp , and x-amz-grant-full-control headers. These parameters map to the set of permissions that Amazon S3 supports in an ACL. For more information, see Access Control List (ACL) Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) .
+//   - Specify a canned ACL with the x-amz-acl request header. For more
+//     information, see Canned ACL (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL)
+//     .
+//   - Specify access permissions explicitly with the x-amz-grant-read ,
+//     x-amz-grant-read-acp , x-amz-grant-write-acp , and x-amz-grant-full-control
+//     headers. These parameters map to the set of permissions that Amazon S3 supports
+//     in an ACL. For more information, see Access Control List (ACL) Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html)
+//     .
 //
 // You can use either a canned ACL or specify access permissions explicitly. You
 // cannot do both. Server-Side- Encryption-Specific Request Headers You can
@@ -71,14 +77,29 @@ import (
 // data as it writes it to disks in its data centers and decrypts it when you
 // access it. The option you use depends on whether you want to use Amazon Web
 // Services managed encryption keys or provide your own encryption key.
-//   - Use encryption keys managed by Amazon S3 or customer managed key stored in Amazon Web Services Key Management Service (Amazon Web Services KMS) – If you want Amazon Web Services to manage the keys used to encrypt data, specify the following headers in the request.
+//   - Use encryption keys managed by Amazon S3 or customer managed key stored in
+//     Amazon Web Services Key Management Service (Amazon Web Services KMS) – If you
+//     want Amazon Web Services to manage the keys used to encrypt data, specify the
+//     following headers in the request.
 //   - x-amz-server-side-encryption
 //   - x-amz-server-side-encryption-aws-kms-key-id
-//   - x-amz-server-side-encryption-context If you specify x-amz-server-side-encryption:aws:kms , but don't provide x-amz-server-side-encryption-aws-kms-key-id , Amazon S3 uses the Amazon Web Services managed key in Amazon Web Services KMS to protect the data. All GET and PUT requests for an object protected by Amazon Web Services KMS fail if you don't make them with SSL or by using SigV4. For more information about server-side encryption with KMS key (SSE-KMS), see Protecting Data Using Server-Side Encryption with KMS keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) .
-//   - Use customer-provided encryption keys – If you want to manage your own encryption keys, provide all the following headers in the request.
+//   - x-amz-server-side-encryption-context If you specify
+//     x-amz-server-side-encryption:aws:kms , but don't provide
+//     x-amz-server-side-encryption-aws-kms-key-id , Amazon S3 uses the Amazon Web
+//     Services managed key in Amazon Web Services KMS to protect the data. All GET and
+//     PUT requests for an object protected by Amazon Web Services KMS fail if you
+//     don't make them with SSL or by using SigV4. For more information about
+//     server-side encryption with KMS key (SSE-KMS), see Protecting Data Using
+//     Server-Side Encryption with KMS keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
+//     .
+//   - Use customer-provided encryption keys – If you want to manage your own
+//     encryption keys, provide all the following headers in the request.
 //   - x-amz-server-side-encryption-customer-algorithm
 //   - x-amz-server-side-encryption-customer-key
-//   - x-amz-server-side-encryption-customer-key-MD5 For more information about server-side encryption with KMS keys (SSE-KMS), see Protecting Data Using Server-Side Encryption with KMS keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) .
+//   - x-amz-server-side-encryption-customer-key-MD5 For more information about
+//     server-side encryption with KMS keys (SSE-KMS), see Protecting Data Using
+//     Server-Side Encryption with KMS keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
+//     .
 //
 // Access-Control-List (ACL)-Specific Request Headers You also can use the
 // following access control–related headers with this operation. By default, all
@@ -86,19 +107,32 @@ import (
 // object, you can grant permissions to individual Amazon Web Services accounts or
 // to predefined groups defined by Amazon S3. These permissions are then added to
 // the access control list (ACL) on the object. For more information, see Using
-// ACLs (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html).
+// ACLs (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html) .
 // With this operation, you can grant access permissions using one of the following
 // two methods:
-//   - Specify a canned ACL ( x-amz-acl ) — Amazon S3 supports a set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined set of grantees and permissions. For more information, see Canned ACL (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL) .
-//   - Specify access permissions explicitly — To explicitly grant access permissions to specific Amazon Web Services accounts or groups, use the following headers. Each header maps to specific permissions that Amazon S3 supports in an ACL. For more information, see Access Control List (ACL) Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) . In the header, you specify a list of grantees who get the specific permission. To grant permissions explicitly, use:
+//   - Specify a canned ACL ( x-amz-acl ) — Amazon S3 supports a set of predefined
+//     ACLs, known as canned ACLs. Each canned ACL has a predefined set of grantees and
+//     permissions. For more information, see Canned ACL (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL)
+//     .
+//   - Specify access permissions explicitly — To explicitly grant access
+//     permissions to specific Amazon Web Services accounts or groups, use the
+//     following headers. Each header maps to specific permissions that Amazon S3
+//     supports in an ACL. For more information, see Access Control List (ACL)
+//     Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) .
+//     In the header, you specify a list of grantees who get the specific permission.
+//     To grant permissions explicitly, use:
 //   - x-amz-grant-read
 //   - x-amz-grant-write
 //   - x-amz-grant-read-acp
 //   - x-amz-grant-write-acp
-//   - x-amz-grant-full-control You specify each grantee as a type=value pair, where the type is one of the following:
-//   - id – if the value specified is the canonical user ID of an Amazon Web Services account
+//   - x-amz-grant-full-control You specify each grantee as a type=value pair,
+//     where the type is one of the following:
+//   - id – if the value specified is the canonical user ID of an Amazon Web
+//     Services account
 //   - uri – if you are granting permissions to a predefined group
-//   - emailAddress – if the value specified is the email address of an Amazon Web Services account Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions:
+//   - emailAddress – if the value specified is the email address of an Amazon Web
+//     Services account Using email addresses to specify a grantee is only supported in
+//     the following Amazon Web Services Regions:
 //   - US East (N. Virginia)
 //   - US West (N. California)
 //   - US West (Oregon)
@@ -106,7 +140,12 @@ import (
 //   - Asia Pacific (Sydney)
 //   - Asia Pacific (Tokyo)
 //   - Europe (Ireland)
-//   - South America (São Paulo) For a list of all the Amazon S3 supported Regions and endpoints, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the Amazon Web Services General Reference. For example, the following x-amz-grant-read header grants the Amazon Web Services accounts identified by account IDs permissions to read object data and its metadata: x-amz-grant-read: id="11112222333", id="444455556666"
+//   - South America (São Paulo) For a list of all the Amazon S3 supported Regions
+//     and endpoints, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+//     in the Amazon Web Services General Reference. For example, the following
+//     x-amz-grant-read header grants the Amazon Web Services accounts identified by
+//     account IDs permissions to read object data and its metadata:
+//     x-amz-grant-read: id="11112222333", id="444455556666"
 //
 // The following operations are related to CreateMultipartUpload :
 //   - UploadPart (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
@@ -141,7 +180,7 @@ type CreateMultipartUploadInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -160,10 +199,10 @@ type CreateMultipartUploadInput struct {
 	ACL types.ObjectCannedACL
 
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
-	// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to
-	// truecauses Amazon S3 to use an S3 Bucket Key for object encryption with
-	// SSE-KMS. Specifying this header with an object action doesn’t affect
-	// bucket-level settings for S3 Bucket Key.
+	// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to true
+	// causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.
+	// Specifying this header with an object action doesn’t affect bucket-level
+	// settings for S3 Bucket Key.
 	BucketKeyEnabled bool
 
 	// Specifies caching behavior along the request/reply chain.
@@ -196,8 +235,8 @@ type CreateMultipartUploadInput struct {
 	// The date and time at which the object is no longer cacheable.
 	Expires *time.Time
 
-	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
-	// This action is not supported by Amazon S3 on Outposts.
+	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object. This
+	// action is not supported by Amazon S3 on Outposts.
 	GrantFullControl *string
 
 	// Allows grantee to read the object data and its metadata. This action is not
@@ -261,8 +300,8 @@ type CreateMultipartUploadInput struct {
 	// in the Amazon S3 User Guide.
 	SSEKMSKeyId *string
 
-	// The server-side encryption algorithm used when storing this object in Amazon
-	// S3 (for example, AES256, aws:kms).
+	// The server-side encryption algorithm used when storing this object in Amazon S3
+	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// By default, Amazon S3 uses the STANDARD Storage Class to store newly created
@@ -273,12 +312,11 @@ type CreateMultipartUploadInput struct {
 	// in the Amazon S3 User Guide.
 	StorageClass types.StorageClass
 
-	// The tag-set for the object. The tag-set must be encoded as URL Query
-	// parameters.
+	// The tag-set for the object. The tag-set must be encoded as URL Query parameters.
 	Tagging *string
 
-	// If the bucket is configured as a website, redirects requests for this object
-	// to another object in the same bucket or to an external URL. Amazon S3 stores the
+	// If the bucket is configured as a website, redirects requests for this object to
+	// another object in the same bucket or to an external URL. Amazon S3 stores the
 	// value of this header in the object metadata.
 	WebsiteRedirectLocation *string
 
@@ -313,7 +351,7 @@ type CreateMultipartUploadOutput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
@@ -344,8 +382,8 @@ type CreateMultipartUploadOutput struct {
 	// integrity verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string
 
-	// If present, specifies the Amazon Web Services KMS Encryption Context to use
-	// for object encryption. The value of this header is a base64-encoded UTF-8 string
+	// If present, specifies the Amazon Web Services KMS Encryption Context to use for
+	// object encryption. The value of this header is a base64-encoded UTF-8 string
 	// holding JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
 
@@ -354,8 +392,8 @@ type CreateMultipartUploadOutput struct {
 	// object.
 	SSEKMSKeyId *string
 
-	// The server-side encryption algorithm used when storing this object in Amazon
-	// S3 (for example, AES256, aws:kms).
+	// The server-side encryption algorithm used when storing this object in Amazon S3
+	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// ID for the initiated multipart upload.

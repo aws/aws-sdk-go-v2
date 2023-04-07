@@ -13,75 +13,119 @@ import (
 // , ListResolverQueryLogConfigAssociations (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html)
 // ), and ListResolverDnssecConfigs (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverDnssecConfigs.html)
 // ), an optional specification to return a subset of objects. To filter objects,
-// such as Resolver endpoints or Resolver rules, you specify Name  and Values.
-// For example, to list only inbound Resolver endpoints, specify Direction  for
-// Name and specify INBOUND  for Values .
+// such as Resolver endpoints or Resolver rules, you specify Name and Values . For
+// example, to list only inbound Resolver endpoints, specify Direction for Name
+// and specify INBOUND for Values .
 type Filter struct {
 
 	// The name of the parameter that you want to use to filter objects. The valid
-	// values for Name  depend on the action that you're including the filter in,
+	// values for Name depend on the action that you're including the filter in,
 	// ListResolverEndpoints (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html)
 	// , ListResolverRules (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html)
 	// , ListResolverRuleAssociations (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html)
 	// , ListResolverQueryLogConfigs (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html)
 	// , or ListResolverQueryLogConfigAssociations (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html)
-	// . In early versions of Resolver, values for Name were listed as uppercase,
-	// with underscore (_) delimiters. For example, CreatorRequestId was originally
-	// listed as CREATOR_REQUEST_ID . Uppercase values for Name are still supported.
-	// ListResolverEndpoints Valid values for Name  include the following:
-	//     - CreatorRequestId : The value that you specified when you created the Resolver endpoint.
-	//     - Direction : Whether you want to return inbound or outbound Resolver endpoints. If you specify DIRECTION for Name , specify INBOUND or OUTBOUND for Values .
-	//     - HostVPCId : The ID of the VPC that inbound DNS queries pass through on the way from your network to your VPCs in a region, or the VPC that outbound queries pass through on the way from your VPCs to your network. In a CreateResolverEndpoint (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html) request, SubnetId indirectly identifies the VPC. In a GetResolverEndpoint (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html) request, the VPC ID for a Resolver endpoint is returned in the HostVPCId element.
-	//     - IpAddressCount : The number of IP addresses that you have associated with the Resolver endpoint.
-	//     - Name : The name of the Resolver endpoint.
-	//     - SecurityGroupIds : The IDs of the VPC security groups that you specified when you created the Resolver endpoint.
-	//     - Status : The status of the Resolver endpoint. If you specify Status for Name , specify one of the following status codes for Values : CREATING , OPERATIONAL , UPDATING , AUTO_RECOVERING , ACTION_NEEDED , or DELETING . For more information, see Status in ResolverEndpoint (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverEndpoint.html) .
-	//
-	// ListResolverRules Valid values for Name  include the following:
-	//     - CreatorRequestId : The value that you specified when you created the Resolver rule.
-	//     - DomainName : The domain name for which Resolver is forwarding DNS queries to your network. In the value that you specify for Values , include a trailing dot (.) after the domain name. For example, if the domain name is example.com, specify the following value. Note the "." after com : example.com.
-	//     - Name : The name of the Resolver rule.
-	//     - ResolverEndpointId : The ID of the Resolver endpoint that the Resolver rule is associated with. You can filter on the Resolver endpoint only for rules that have a value of FORWARD for RuleType .
-	//     - Status : The status of the Resolver rule. If you specify Status for Name , specify one of the following status codes for Values : COMPLETE , DELETING , UPDATING , or FAILED .
-	//     - Type : The type of the Resolver rule. If you specify TYPE for Name , specify FORWARD or SYSTEM for Values .
-	//
-	// ListResolverRuleAssociations Valid values for Name  include the following:
-	//     - Name : The name of the Resolver rule association.
-	//     - ResolverRuleId : The ID of the Resolver rule that is associated with one or more VPCs.
-	//     - Status : The status of the Resolver rule association. If you specify Status for Name , specify one of the following status codes for Values : CREATING , COMPLETE , DELETING , or FAILED .
-	//     - VPCId : The ID of the VPC that the Resolver rule is associated with.
-	//
-	// ListResolverQueryLogConfigs Valid values for Name  include the following:
-	//     - Arn : The ARN for the query logging configuration.
-	//     - AssociationCount : The number of VPCs that are associated with the query logging configuration.
-	//     - CreationTime : The date and time that the query logging configuration was created, in Unix time format and Coordinated Universal Time (UTC).
-	//     - CreatorRequestId : A unique string that identifies the request that created the query logging configuration.
-	//     - Destination : The Amazon Web Services service that you want to forward query logs to. Valid values include the following:
-	//         - S3
-	//         - CloudWatchLogs
-	//         - KinesisFirehose
-	//     - DestinationArn : The ARN of the location that Resolver is sending query logs to. This value can be the ARN for an S3 bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose delivery stream.
-	//     - Id : The ID of the query logging configuration
-	//     - Name : The name of the query logging configuration
-	//     - OwnerId : The Amazon Web Services account ID for the account that created the query logging configuration.
-	//     - ShareStatus : An indication of whether the query logging configuration is shared with other Amazon Web Services accounts, or was shared with the current account by another Amazon Web Services account. Valid values include: NOT_SHARED , SHARED_WITH_ME , or SHARED_BY_ME .
-	//     - Status : The status of the query logging configuration. If you specify Status for Name , specify the applicable status code for Values : CREATING , CREATED , DELETING , or FAILED . For more information, see Status (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfig.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfig-Status) .
-	//
+	// . In early versions of Resolver, values for Name were listed as uppercase, with
+	// underscore (_) delimiters. For example, CreatorRequestId was originally listed
+	// as CREATOR_REQUEST_ID . Uppercase values for Name are still supported.
+	// ListResolverEndpoints Valid values for Name include the following:
+	//   - CreatorRequestId : The value that you specified when you created the
+	//   Resolver endpoint.
+	//   - Direction : Whether you want to return inbound or outbound Resolver
+	//   endpoints. If you specify DIRECTION for Name , specify INBOUND or OUTBOUND for
+	//   Values .
+	//   - HostVPCId : The ID of the VPC that inbound DNS queries pass through on the
+	//   way from your network to your VPCs in a region, or the VPC that outbound queries
+	//   pass through on the way from your VPCs to your network. In a
+	//   CreateResolverEndpoint (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html)
+	//   request, SubnetId indirectly identifies the VPC. In a GetResolverEndpoint (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html)
+	//   request, the VPC ID for a Resolver endpoint is returned in the HostVPCId
+	//   element.
+	//   - IpAddressCount : The number of IP addresses that you have associated with
+	//   the Resolver endpoint.
+	//   - Name : The name of the Resolver endpoint.
+	//   - SecurityGroupIds : The IDs of the VPC security groups that you specified
+	//   when you created the Resolver endpoint.
+	//   - Status : The status of the Resolver endpoint. If you specify Status for Name
+	//   , specify one of the following status codes for Values : CREATING ,
+	//   OPERATIONAL , UPDATING , AUTO_RECOVERING , ACTION_NEEDED , or DELETING . For
+	//   more information, see Status in ResolverEndpoint (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverEndpoint.html)
+	//   .
+	// ListResolverRules Valid values for Name include the following:
+	//   - CreatorRequestId : The value that you specified when you created the
+	//   Resolver rule.
+	//   - DomainName : The domain name for which Resolver is forwarding DNS queries to
+	//   your network. In the value that you specify for Values , include a trailing
+	//   dot (.) after the domain name. For example, if the domain name is example.com,
+	//   specify the following value. Note the "." after com : example.com.
+	//   - Name : The name of the Resolver rule.
+	//   - ResolverEndpointId : The ID of the Resolver endpoint that the Resolver rule
+	//   is associated with. You can filter on the Resolver endpoint only for rules that
+	//   have a value of FORWARD for RuleType .
+	//   - Status : The status of the Resolver rule. If you specify Status for Name ,
+	//   specify one of the following status codes for Values : COMPLETE , DELETING ,
+	//   UPDATING , or FAILED .
+	//   - Type : The type of the Resolver rule. If you specify TYPE for Name , specify
+	//   FORWARD or SYSTEM for Values .
+	// ListResolverRuleAssociations Valid values for Name include the following:
+	//   - Name : The name of the Resolver rule association.
+	//   - ResolverRuleId : The ID of the Resolver rule that is associated with one or
+	//   more VPCs.
+	//   - Status : The status of the Resolver rule association. If you specify Status
+	//   for Name , specify one of the following status codes for Values : CREATING ,
+	//   COMPLETE , DELETING , or FAILED .
+	//   - VPCId : The ID of the VPC that the Resolver rule is associated with.
+	// ListResolverQueryLogConfigs Valid values for Name include the following:
+	//   - Arn : The ARN for the query logging configuration.
+	//   - AssociationCount : The number of VPCs that are associated with the query
+	//   logging configuration.
+	//   - CreationTime : The date and time that the query logging configuration was
+	//   created, in Unix time format and Coordinated Universal Time (UTC).
+	//   - CreatorRequestId : A unique string that identifies the request that created
+	//   the query logging configuration.
+	//   - Destination : The Amazon Web Services service that you want to forward query
+	//   logs to. Valid values include the following:
+	//   - S3
+	//   - CloudWatchLogs
+	//   - KinesisFirehose
+	//   - DestinationArn : The ARN of the location that Resolver is sending query logs
+	//   to. This value can be the ARN for an S3 bucket, a CloudWatch Logs log group, or
+	//   a Kinesis Data Firehose delivery stream.
+	//   - Id : The ID of the query logging configuration
+	//   - Name : The name of the query logging configuration
+	//   - OwnerId : The Amazon Web Services account ID for the account that created
+	//   the query logging configuration.
+	//   - ShareStatus : An indication of whether the query logging configuration is
+	//   shared with other Amazon Web Services accounts, or was shared with the current
+	//   account by another Amazon Web Services account. Valid values include:
+	//   NOT_SHARED , SHARED_WITH_ME , or SHARED_BY_ME .
+	//   - Status : The status of the query logging configuration. If you specify
+	//   Status for Name , specify the applicable status code for Values : CREATING ,
+	//   CREATED , DELETING , or FAILED . For more information, see Status (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfig.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfig-Status)
+	//   .
 	// ListResolverQueryLogConfigAssociations Valid values for Name include the
 	// following:
-	//     - CreationTime : The date and time that the VPC was associated with the query logging configuration, in Unix time format and Coordinated Universal Time (UTC).
-	//     - Error : If the value of Status is FAILED , specify the cause: DESTINATION_NOT_FOUND or ACCESS_DENIED .
-	//     - Id : The ID of the query logging association.
-	//     - ResolverQueryLogConfigId : The ID of the query logging configuration that a VPC is associated with.
-	//     - ResourceId : The ID of the Amazon VPC that is associated with the query logging configuration.
-	//     - Status : The status of the query logging association. If you specify Status for Name , specify the applicable status code for Values : CREATING , CREATED , DELETING , or FAILED . For more information, see Status (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status) .
+	//   - CreationTime : The date and time that the VPC was associated with the query
+	//   logging configuration, in Unix time format and Coordinated Universal Time (UTC).
+	//
+	//   - Error : If the value of Status is FAILED , specify the cause:
+	//   DESTINATION_NOT_FOUND or ACCESS_DENIED .
+	//   - Id : The ID of the query logging association.
+	//   - ResolverQueryLogConfigId : The ID of the query logging configuration that a
+	//   VPC is associated with.
+	//   - ResourceId : The ID of the Amazon VPC that is associated with the query
+	//   logging configuration.
+	//   - Status : The status of the query logging association. If you specify Status
+	//   for Name , specify the applicable status code for Values : CREATING , CREATED
+	//   , DELETING , or FAILED . For more information, see Status (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status)
+	//   .
 	Name *string
 
 	// When you're using a List operation and you want the operation to return a
 	// subset of objects, such as Resolver endpoints or Resolver rules, the value of
 	// the parameter that you want to use to filter objects. For example, to list only
-	// inbound Resolver endpoints, specify Direction  for Name  and specify INBOUND
-	// for Values .
+	// inbound Resolver endpoints, specify Direction for Name and specify INBOUND for
+	// Values .
 	Values []string
 
 	noSmithyDocumentSerde
@@ -93,11 +137,14 @@ type FirewallConfig struct {
 
 	// Determines how DNS Firewall operates during failures, for example when all
 	// traffic that is sent to DNS Firewall fails to receive a reply.
-	//     - By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability. DNS Firewall returns a failure error when it is unable to properly evaluate a query.
-	//     - If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it is unable to properly evaluate them.
-	//
-	// This behavior is only enforced for VPCs that have at least one DNS Firewall rule
-	// group association.
+	//   - By default, fail open is disabled, which means the failure mode is closed.
+	//   This approach favors security over availability. DNS Firewall returns a failure
+	//   error when it is unable to properly evaluate a query.
+	//   - If you enable this option, the failure mode is open. This approach favors
+	//   availability over security. DNS Firewall allows queries to proceed if it is
+	//   unable to properly evaluate them.
+	// This behavior is only enforced for VPCs that have at least one DNS Firewall
+	// rule group association.
 	FirewallFailOpen FirewallFailOpenStatus
 
 	// The ID of the firewall configuration.
@@ -114,7 +161,7 @@ type FirewallConfig struct {
 }
 
 // High-level information about a list of firewall domains for use in a
-// FirewallRule . This is returned by GetFirewallDomainList. To retrieve the
+// FirewallRule . This is returned by GetFirewallDomainList . To retrieve the
 // domains that are defined for this domain list, call ListFirewallDomains .
 type FirewallDomainList struct {
 
@@ -158,8 +205,8 @@ type FirewallDomainList struct {
 }
 
 // Minimal high-level information for a firewall domain list. The action
-// ListFirewallDomainListsreturns an array of these objects. To retrieve full
-// information for a firewall domain list, call GetFirewallDomainList  and
+// ListFirewallDomainLists returns an array of these objects. To retrieve full
+// information for a firewall domain list, call GetFirewallDomainList and
 // ListFirewallDomains .
 type FirewallDomainListMetadata struct {
 
@@ -190,30 +237,34 @@ type FirewallRule struct {
 
 	// The action that DNS Firewall should take on a DNS query when it matches one of
 	// the domains in the rule's domain list:
-	//     - ALLOW - Permit the request to go through.
-	//     - ALERT - Permit the request to go through but send an alert to the logs.
-	//     - BLOCK - Disallow the request. If this is specified, additional handling details are provided in the rule's BlockResponse setting.
+	//   - ALLOW - Permit the request to go through.
+	//   - ALERT - Permit the request to go through but send an alert to the logs.
+	//   - BLOCK - Disallow the request. If this is specified, additional handling
+	//   details are provided in the rule's BlockResponse setting.
 	Action Action
 
 	// The DNS record's type. This determines the format of the record value that you
-	// provided in BlockOverrideDomain . Used for the rule action BLOCK  with a
+	// provided in BlockOverrideDomain . Used for the rule action BLOCK with a
 	// BlockResponse setting of OVERRIDE .
 	BlockOverrideDnsType BlockOverrideDnsType
 
 	// The custom DNS record to send back in response to the query. Used for the rule
-	// action BLOCK  with a BlockResponse  setting of OVERRIDE .
+	// action BLOCK with a BlockResponse setting of OVERRIDE .
 	BlockOverrideDomain *string
 
-	// The recommended amount of time, in seconds, for the DNS resolver or web
-	// browser to cache the provided override record. Used for the rule action BLOCK
-	// with a BlockResponse  setting of OVERRIDE .
+	// The recommended amount of time, in seconds, for the DNS resolver or web browser
+	// to cache the provided override record. Used for the rule action BLOCK with a
+	// BlockResponse setting of OVERRIDE .
 	BlockOverrideTtl *int32
 
 	// The way that you want DNS Firewall to block the request. Used for the rule
 	// action setting BLOCK .
-	//     - NODATA - Respond indicating that the query was successful, but no response is available for it.
-	//     - NXDOMAIN - Respond indicating that the domain name that's in the query doesn't exist.
-	//     - OVERRIDE - Provide a custom override in the response. This option requires custom handling details in the rule's BlockOverride* settings.
+	//   - NODATA - Respond indicating that the query was successful, but no response
+	//   is available for it.
+	//   - NXDOMAIN - Respond indicating that the domain name that's in the query
+	//   doesn't exist.
+	//   - OVERRIDE - Provide a custom override in the response. This option requires
+	//   custom handling details in the rule's BlockOverride* settings.
 	BlockResponse BlockResponse
 
 	// The date and time that the rule was created, in Unix time format and
@@ -273,9 +324,9 @@ type FirewallRuleGroup struct {
 	// The name of the rule group.
 	Name *string
 
-	// The Amazon Web Services account ID for the account that created the rule
-	// group. When a rule group is shared with your account, this is the account that
-	// has shared the rule group with you.
+	// The Amazon Web Services account ID for the account that created the rule group.
+	// When a rule group is shared with your account, this is the account that has
+	// shared the rule group with you.
 	OwnerId *string
 
 	// The number of rules in the rule group.
@@ -351,8 +402,8 @@ type FirewallRuleGroupAssociation struct {
 }
 
 // Minimal high-level information for a firewall rule group. The action
-// ListFirewallRuleGroupsreturns an array of these objects. To retrieve full
-// information for a firewall rule group, call GetFirewallRuleGroup  and
+// ListFirewallRuleGroups returns an array of these objects. To retrieve full
+// information for a firewall rule group, call GetFirewallRuleGroup and
 // ListFirewallRules .
 type FirewallRuleGroupMetadata struct {
 
@@ -370,9 +421,9 @@ type FirewallRuleGroupMetadata struct {
 	// The name of the rule group.
 	Name *string
 
-	// The Amazon Web Services account ID for the account that created the rule
-	// group. When a rule group is shared with your account, this is the account that
-	// has shared the rule group with you.
+	// The Amazon Web Services account ID for the account that created the rule group.
+	// When a rule group is shared with your account, this is the account that has
+	// shared the rule group with you.
 	OwnerId *string
 
 	// Whether the rule group is shared with other Amazon Web Services accounts, or
@@ -467,10 +518,12 @@ type ResolverConfig struct {
 	// The status of whether or not the Resolver will create autodefined rules for
 	// reverse DNS lookups. This is enabled by default. The status can be one of
 	// following:
-	//     - ENABLING: Autodefined rules for reverse DNS lookups are being enabled but are not complete.
-	//     - ENABLED: Autodefined rules for reverse DNS lookups are enabled.
-	//     - DISABLING: Autodefined rules for reverse DNS lookups are being disabled but are not complete.
-	//     - DISABLED: Autodefined rules for reverse DNS lookups are disabled.
+	//   - ENABLING: Autodefined rules for reverse DNS lookups are being enabled but
+	//   are not complete.
+	//   - ENABLED: Autodefined rules for reverse DNS lookups are enabled.
+	//   - DISABLING: Autodefined rules for reverse DNS lookups are being disabled but
+	//   are not complete.
+	//   - DISABLED: Autodefined rules for reverse DNS lookups are disabled.
 	AutodefinedReverse ResolverAutodefinedReverseStatus
 
 	// ID for the Resolver configuration.
@@ -479,8 +532,8 @@ type ResolverConfig struct {
 	// The owner account ID of the Amazon Virtual Private Cloud VPC.
 	OwnerId *string
 
-	// The ID of the Amazon Virtual Private Cloud VPC that you're configuring
-	// Resolver for.
+	// The ID of the Amazon Virtual Private Cloud VPC that you're configuring Resolver
+	// for.
 	ResourceId *string
 
 	noSmithyDocumentSerde
@@ -493,8 +546,8 @@ type ResolverDnssecConfig struct {
 	// The ID for a configuration for DNSSEC validation.
 	Id *string
 
-	// The owner account ID of the virtual private cloud (VPC) for a configuration
-	// for DNSSEC validation.
+	// The owner account ID of the virtual private cloud (VPC) for a configuration for
+	// DNSSEC validation.
 	OwnerId *string
 
 	// The ID of the virtual private cloud (VPC) that you're configuring the DNSSEC
@@ -503,10 +556,10 @@ type ResolverDnssecConfig struct {
 
 	// The validation status for a DNSSEC configuration. The status can be one of the
 	// following:
-	//     - ENABLING: DNSSEC validation is being enabled but is not complete.
-	//     - ENABLED: DNSSEC validation is enabled.
-	//     - DISABLING: DNSSEC validation is being disabled but is not complete.
-	//     - DISABLED DNSSEC validation is disabled.
+	//   - ENABLING: DNSSEC validation is being enabled but is not complete.
+	//   - ENABLED: DNSSEC validation is enabled.
+	//   - DISABLING: DNSSEC validation is being disabled but is not complete.
+	//   - DISABLED DNSSEC validation is disabled.
 	ValidationStatus ResolverDNSSECValidationStatus
 
 	noSmithyDocumentSerde
@@ -528,15 +581,14 @@ type ResolverEndpoint struct {
 	// Coordinated Universal Time (UTC).
 	CreationTime *string
 
-	// A unique string that identifies the request that created the Resolver
-	// endpoint. The CreatorRequestId allows failed requests to be retried without
-	// the risk of running the operation twice.
+	// A unique string that identifies the request that created the Resolver endpoint.
+	// The CreatorRequestId allows failed requests to be retried without the risk of
+	// running the operation twice.
 	CreatorRequestId *string
 
-	// Indicates whether the Resolver endpoint allows inbound or outbound DNS
-	// queries:
-	//     - INBOUND : allows DNS queries to your VPC from your network
-	//     - OUTBOUND : allows DNS queries from your VPC to your network
+	// Indicates whether the Resolver endpoint allows inbound or outbound DNS queries:
+	//   - INBOUND : allows DNS queries to your VPC from your network
+	//   - OUTBOUND : allows DNS queries from your VPC to your network
 	Direction ResolverEndpointDirection
 
 	// The ID of the VPC that you want to create the Resolver endpoint in.
@@ -567,16 +619,33 @@ type ResolverEndpoint struct {
 	// the port that you're using for DNS queries on your network.
 	SecurityGroupIds []string
 
-	// A code that specifies the current status of the Resolver endpoint. Valid
-	// values include the following:
-	//     - CREATING : Resolver is creating and configuring one or more Amazon VPC network interfaces for this endpoint.
-	//     - OPERATIONAL : The Amazon VPC network interfaces for this endpoint are correctly configured and able to pass inbound or outbound DNS queries between your network and Resolver.
-	//     - UPDATING : Resolver is associating or disassociating one or more network interfaces with this endpoint.
-	//     - AUTO_RECOVERING : Resolver is trying to recover one or more of the network interfaces that are associated with this endpoint. During the recovery process, the endpoint functions with limited capacity because of the limit on the number of DNS queries per IP address (per network interface). For the current limit, see Limits on Route 53 Resolver (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-resolver) .
-	//     - ACTION_NEEDED : This endpoint is unhealthy, and Resolver can't automatically recover it. To resolve the problem, we recommend that you check each IP address that you associated with the endpoint. For each IP address that isn't available, add another IP address and then delete the IP address that isn't available. (An endpoint must always include at least two IP addresses.) A status of ACTION_NEEDED can have a variety of causes. Here are two common causes:
-	//         - One or more of the network interfaces that are associated with the endpoint were deleted using Amazon VPC.
-	//         - The network interface couldn't be created for some reason that's outside the control of Resolver.
-	//     - DELETING : Resolver is deleting this endpoint and the associated network interfaces.
+	// A code that specifies the current status of the Resolver endpoint. Valid values
+	// include the following:
+	//   - CREATING : Resolver is creating and configuring one or more Amazon VPC
+	//   network interfaces for this endpoint.
+	//   - OPERATIONAL : The Amazon VPC network interfaces for this endpoint are
+	//   correctly configured and able to pass inbound or outbound DNS queries between
+	//   your network and Resolver.
+	//   - UPDATING : Resolver is associating or disassociating one or more network
+	//   interfaces with this endpoint.
+	//   - AUTO_RECOVERING : Resolver is trying to recover one or more of the network
+	//   interfaces that are associated with this endpoint. During the recovery process,
+	//   the endpoint functions with limited capacity because of the limit on the number
+	//   of DNS queries per IP address (per network interface). For the current limit,
+	//   see Limits on Route 53 Resolver (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-resolver)
+	//   .
+	//   - ACTION_NEEDED : This endpoint is unhealthy, and Resolver can't automatically
+	//   recover it. To resolve the problem, we recommend that you check each IP address
+	//   that you associated with the endpoint. For each IP address that isn't available,
+	//   add another IP address and then delete the IP address that isn't available. (An
+	//   endpoint must always include at least two IP addresses.) A status of
+	//   ACTION_NEEDED can have a variety of causes. Here are two common causes:
+	//   - One or more of the network interfaces that are associated with the endpoint
+	//   were deleted using Amazon VPC.
+	//   - The network interface couldn't be created for some reason that's outside
+	//   the control of Resolver.
+	//   - DELETING : Resolver is deleting this endpoint and the associated network
+	//   interfaces.
 	Status ResolverEndpointStatus
 
 	// A detailed description of the status of the Resolver endpoint.
@@ -608,9 +677,8 @@ type ResolverQueryLogConfig struct {
 	// without the risk of running the operation twice.
 	CreatorRequestId *string
 
-	// The ARN of the resource that you want Resolver to send query logs: an Amazon
-	// S3 bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose delivery
-	// stream.
+	// The ARN of the resource that you want Resolver to send query logs: an Amazon S3
+	// bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose delivery stream.
 	DestinationArn *string
 
 	// The ID for the query logging configuration.
@@ -631,12 +699,14 @@ type ResolverQueryLogConfig struct {
 
 	// The status of the specified query logging configuration. Valid values include
 	// the following:
-	//     - CREATING : Resolver is creating the query logging configuration.
-	//     - CREATED : The query logging configuration was successfully created. Resolver is logging queries that originate in the specified VPC.
-	//     - DELETING : Resolver is deleting this query logging configuration.
-	//     - FAILED : Resolver can't deliver logs to the location that is specified in the query logging configuration. Here are two common causes:
-	//         - The specified destination (for example, an Amazon S3 bucket) was deleted.
-	//         - Permissions don't allow sending logs to the destination.
+	//   - CREATING : Resolver is creating the query logging configuration.
+	//   - CREATED : The query logging configuration was successfully created. Resolver
+	//   is logging queries that originate in the specified VPC.
+	//   - DELETING : Resolver is deleting this query logging configuration.
+	//   - FAILED : Resolver can't deliver logs to the location that is specified in
+	//   the query logging configuration. Here are two common causes:
+	//   - The specified destination (for example, an Amazon S3 bucket) was deleted.
+	//   - Permissions don't allow sending logs to the destination.
 	Status ResolverQueryLogConfigStatus
 
 	noSmithyDocumentSerde
@@ -654,15 +724,15 @@ type ResolverQueryLogConfigAssociation struct {
 	// configuration, in Unix time format and Coordinated Universal Time (UTC).
 	CreationTime *string
 
-	// If the value of Status  is FAILED , the value of Error  indicates the cause:
-	//     - DESTINATION_NOT_FOUND : The specified destination (for example, an Amazon S3 bucket) was deleted.
-	//     - ACCESS_DENIED : Permissions don't allow sending logs to the destination.
-	//
-	// If the value of Status  is a value other than FAILED , Error  is null.
+	// If the value of Status is FAILED , the value of Error indicates the cause:
+	//   - DESTINATION_NOT_FOUND : The specified destination (for example, an Amazon S3
+	//   bucket) was deleted.
+	//   - ACCESS_DENIED : Permissions don't allow sending logs to the destination.
+	// If the value of Status is a value other than FAILED , Error is null.
 	Error ResolverQueryLogConfigAssociationError
 
-	// Contains additional information about the error. If the value or Error is
-	// null, the value of ErrorMessage  also is null.
+	// Contains additional information about the error. If the value or Error is null,
+	// the value of ErrorMessage also is null.
 	ErrorMessage *string
 
 	// The ID of the query logging association.
@@ -675,12 +745,16 @@ type ResolverQueryLogConfigAssociation struct {
 	// configuration.
 	ResourceId *string
 
-	// The status of the specified query logging association. Valid values include
-	// the following:
-	//     - CREATING : Resolver is creating an association between an Amazon VPC and a query logging configuration.
-	//     - CREATED : The association between an Amazon VPC and a query logging configuration was successfully created. Resolver is logging queries that originate in the specified VPC.
-	//     - DELETING : Resolver is deleting this query logging association.
-	//     - FAILED : Resolver either couldn't create or couldn't delete the query logging association.
+	// The status of the specified query logging association. Valid values include the
+	// following:
+	//   - CREATING : Resolver is creating an association between an Amazon VPC and a
+	//   query logging configuration.
+	//   - CREATED : The association between an Amazon VPC and a query logging
+	//   configuration was successfully created. Resolver is logging queries that
+	//   originate in the specified VPC.
+	//   - DELETING : Resolver is deleting this query logging association.
+	//   - FAILED : Resolver either couldn't create or couldn't delete the query
+	//   logging association.
 	Status ResolverQueryLogConfigAssociationStatus
 
 	noSmithyDocumentSerde
@@ -704,14 +778,14 @@ type ResolverRule struct {
 	CreationTime *string
 
 	// A unique string that you specified when you created the Resolver rule.
-	// CreatorRequestIdidentifies the request and allows failed requests to be
-	// retried without the risk of running the operation twice.
+	// CreatorRequestId identifies the request and allows failed requests to be retried
+	// without the risk of running the operation twice.
 	CreatorRequestId *string
 
 	// DNS queries for this domain name are forwarded to the IP addresses that are
-	// specified in TargetIps. If a query matches multiple Resolver rules
-	// (example.com and www.example.com), the query is routed using the Resolver rule
-	// that contains the most specific domain name (www.example.com).
+	// specified in TargetIps . If a query matches multiple Resolver rules (example.com
+	// and www.example.com), the query is routed using the Resolver rule that contains
+	// the most specific domain name (www.example.com).
 	DomainName *string
 
 	// The ID that Resolver assigned to the Resolver rule when you created it.
@@ -733,14 +807,13 @@ type ResolverRule struct {
 	ResolverEndpointId *string
 
 	// When you want to forward DNS queries for specified domain name to resolvers on
-	// your network, specify FORWARD. When you have a forwarding rule to forward DNS
+	// your network, specify FORWARD . When you have a forwarding rule to forward DNS
 	// queries for a domain to your network and you want Resolver to process queries
-	// for a subdomain of that domain, specify SYSTEM. For example, to forward DNS
+	// for a subdomain of that domain, specify SYSTEM . For example, to forward DNS
 	// queries for example.com to resolvers on your network, you create a rule and
-	// specify FORWARD  for RuleType. To then have Resolver process queries for
-	// apex.example.com, you create a rule and specify SYSTEM  for RuleType.
-	// Currently, only Resolver can create rules that have a value of RECURSIVE  for
-	// RuleType .
+	// specify FORWARD for RuleType . To then have Resolver process queries for
+	// apex.example.com, you create a rule and specify SYSTEM for RuleType . Currently,
+	// only Resolver can create rules that have a value of RECURSIVE for RuleType .
 	RuleType RuleTypeOption
 
 	// Whether the rule is shared and, if so, whether the current account is sharing
@@ -786,8 +859,8 @@ type ResolverRuleAssociation struct {
 	// rule and a VPC.
 	Status ResolverRuleAssociationStatus
 
-	// A detailed description of the status of the association between a Resolver
-	// rule and a VPC.
+	// A detailed description of the status of the association between a Resolver rule
+	// and a VPC.
 	StatusMessage *string
 
 	// The ID of the VPC that you associated the Resolver rule with.
@@ -826,8 +899,8 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	// The value for the tag. For example, if Key  is account-id , then Value might
-	// be the ID of the customer account that you're creating the resource for.
+	// The value for the tag. For example, if Key is account-id , then Value might be
+	// the ID of the customer account that you're creating the resource for.
 	//
 	// This member is required.
 	Value *string
@@ -845,7 +918,7 @@ type TargetAddress struct {
 	// One IPv6 address that you want to forward DNS queries to.
 	Ipv6 *string
 
-	// The port at Ip  that you want to forward DNS queries to.
+	// The port at Ip that you want to forward DNS queries to.
 	Port *int32
 
 	noSmithyDocumentSerde

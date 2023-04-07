@@ -13,14 +13,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action enables you to delete multiple objects from a bucket using a
-// single HTTP request. If you know the object keys that you want to delete, then
-// this action provides a suitable alternative to sending individual delete
-// requests, reducing per-request overhead. The request contains a list of up to
-// 1000 keys that you want to delete. In the XML, you provide the object key names,
-// and optionally, version IDs if you want to delete a specific version of the
-// object from a versioning-enabled bucket. For each key, Amazon S3 performs a
-// delete action and returns the result of that delete, success, or failure, in the
+// This action enables you to delete multiple objects from a bucket using a single
+// HTTP request. If you know the object keys that you want to delete, then this
+// action provides a suitable alternative to sending individual delete requests,
+// reducing per-request overhead. The request contains a list of up to 1000 keys
+// that you want to delete. In the XML, you provide the object key names, and
+// optionally, version IDs if you want to delete a specific version of the object
+// from a versioning-enabled bucket. For each key, Amazon S3 performs a delete
+// action and returns the result of that delete, success, or failure, in the
 // response. Note that if the object specified in the request is not found, Amazon
 // S3 returns the result as deleted. The action supports two modes for the
 // response: verbose and quiet. By default, the action uses verbose mode in which
@@ -70,7 +70,7 @@ type DeleteObjectsInput struct {
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
 	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
 	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)

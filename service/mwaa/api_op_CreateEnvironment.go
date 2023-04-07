@@ -34,8 +34,8 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 // .
 type CreateEnvironmentInput struct {
 
-	// The relative path to the DAGs folder on your Amazon S3 bucket. For example,
-	// dags . To learn more, see Adding or updating DAGs (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html)
+	// The relative path to the DAGs folder on your Amazon S3 bucket. For example, dags
+	// . To learn more, see Adding or updating DAGs (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html)
 	// .
 	//
 	// This member is required.
@@ -57,9 +57,9 @@ type CreateEnvironmentInput struct {
 	// This member is required.
 	Name *string
 
-	// The VPC networking components used to secure and enable network traffic
-	// between the Amazon Web Services resources for your environment. To learn more,
-	// see About networking on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html)
+	// The VPC networking components used to secure and enable network traffic between
+	// the Amazon Web Services resources for your environment. To learn more, see
+	// About networking on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html)
 	// .
 	//
 	// This member is required.
@@ -87,13 +87,13 @@ type CreateEnvironmentInput struct {
 	// .
 	AirflowVersion *string
 
-	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large.
+	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large .
 	// To learn more, see Amazon MWAA environment class (https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html)
 	// .
 	EnvironmentClass *string
 
-	// The Amazon Web Services Key Management Service (KMS) key to encrypt the data
-	// in your environment. You can use an Amazon Web Services owned CMK, or a Customer
+	// The Amazon Web Services Key Management Service (KMS) key to encrypt the data in
+	// your environment. You can use an Amazon Web Services owned CMK, or a Customer
 	// managed CMK (advanced). To learn more, see Create an Amazon MWAA environment (https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html)
 	// .
 	KmsKey *string
@@ -103,27 +103,26 @@ type CreateEnvironmentInput struct {
 
 	// The maximum number of workers that you want to run in your environment. MWAA
 	// scales the number of Apache Airflow workers up to the number you specify in the
-	// MaxWorkers field. For example, 20. When there are no more tasks running, and
-	// no more in the queue, MWAA disposes of the extra workers leaving the one worker
-	// that is included with your environment, or the number you specify in MinWorkers
-	// .
+	// MaxWorkers field. For example, 20 . When there are no more tasks running, and no
+	// more in the queue, MWAA disposes of the extra workers leaving the one worker
+	// that is included with your environment, or the number you specify in MinWorkers .
 	MaxWorkers *int32
 
 	// The minimum number of workers that you want to run in your environment. MWAA
 	// scales the number of Apache Airflow workers up to the number you specify in the
-	// MaxWorkersfield. When there are no more tasks running, and no more in the
+	// MaxWorkers field. When there are no more tasks running, and no more in the
 	// queue, MWAA disposes of the extra workers leaving the worker count you specify
-	// in the MinWorkers  field. For example, 2 .
+	// in the MinWorkers field. For example, 2 .
 	MinWorkers *int32
 
-	// The version of the plugins.zip file on your Amazon S3 bucket. A version must
-	// be specified each time a plugins.zip file is updated. To learn more, see How
-	// S3 Versioning works (https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html)
+	// The version of the plugins.zip file on your Amazon S3 bucket. A version must be
+	// specified each time a plugins.zip file is updated. To learn more, see How S3
+	// Versioning works (https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html)
 	// .
 	PluginsS3ObjectVersion *string
 
 	// The relative path to the plugins.zip file on your Amazon S3 bucket. For
-	// example, plugins.zip. If specified, then the plugins.zip version is required.
+	// example, plugins.zip . If specified, then the plugins.zip version is required.
 	// To learn more, see Installing custom plugins (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html)
 	// .
 	PluginsS3Path *string
@@ -135,21 +134,20 @@ type CreateEnvironmentInput struct {
 	RequirementsS3ObjectVersion *string
 
 	// The relative path to the requirements.txt file on your Amazon S3 bucket. For
-	// example, requirements.txt. If specified, then a file version is required. To
+	// example, requirements.txt . If specified, then a file version is required. To
 	// learn more, see Installing Python dependencies (https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html)
 	// .
 	RequirementsS3Path *string
 
 	// The number of Apache Airflow schedulers to run in your environment. Valid
 	// values:
-	//     - v2 - Accepts between 2 to 5. Defaults to 2.
-	//     - v1 - Accepts 1.
+	//   - v2 - Accepts between 2 to 5. Defaults to 2.
+	//   - v1 - Accepts 1.
 	Schedulers *int32
 
-	// The key-value tag pairs you want to associate to your environment. For
-	// example, "Environment": "Staging" . To learn more, see Tagging Amazon Web
-	// Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// .
+	// The key-value tag pairs you want to associate to your environment. For example,
+	// "Environment": "Staging" . To learn more, see Tagging Amazon Web Services
+	// resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) .
 	Tags map[string]string
 
 	// The Apache Airflow Web server access mode. To learn more, see Apache Airflow
@@ -159,7 +157,7 @@ type CreateEnvironmentInput struct {
 
 	// The day and time of the week in Coordinated Universal Time (UTC) 24-hour
 	// standard time to start weekly maintenance updates of your environment in the
-	// following format: DAY:HH:MM . For example: TUE:03:30. You can specify a start
+	// following format: DAY:HH:MM . For example: TUE:03:30 . You can specify a start
 	// time in 30 minute increments only.
 	WeeklyMaintenanceWindowStart *string
 

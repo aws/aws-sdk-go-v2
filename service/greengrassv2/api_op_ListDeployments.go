@@ -31,9 +31,8 @@ func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInp
 type ListDeploymentsInput struct {
 
 	// The filter for the list of deployments. Choose one of the following options:
-	//     - ALL – The list includes all deployments.
-	//     - LATEST_ONLY – The list includes only the latest revision of each deployment.
-	//
+	//   - ALL – The list includes all deployments.
+	//   - LATEST_ONLY – The list includes only the latest revision of each deployment.
 	// Default: LATEST_ONLY
 	HistoryFilter types.DeploymentHistoryFilter
 
@@ -142,8 +141,8 @@ type ListDeploymentsPaginatorOptions struct {
 	// The maximum number of results to be returned per paginated request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used to ingest training metrics into SageMaker. These metrics can be
-// visualized in SageMaker Studio and retrieved with the GetMetrics  API.
+// Used to ingest training metrics into SageMaker. These metrics can be visualized
+// in SageMaker Studio and retrieved with the GetMetrics API.
 func (c *Client) BatchPutMetrics(ctx context.Context, params *BatchPutMetricsInput, optFns ...func(*Options)) (*BatchPutMetricsOutput, error) {
 	if params == nil {
 		params = &BatchPutMetricsInput{}

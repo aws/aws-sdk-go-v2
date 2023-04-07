@@ -29,10 +29,10 @@ func (c *Client) ModifyOptionGroup(ctx context.Context, params *ModifyOptionGrou
 
 type ModifyOptionGroupInput struct {
 
-	// The name of the option group to be modified. Permanent options, such as the
-	// TDE option for Oracle Advanced Security TDE, can't be removed from an option
-	// group, and that option group can't be removed from a DB instance once it is
-	// associated with a DB instance
+	// The name of the option group to be modified. Permanent options, such as the TDE
+	// option for Oracle Advanced Security TDE, can't be removed from an option group,
+	// and that option group can't be removed from a DB instance once it is associated
+	// with a DB instance
 	//
 	// This member is required.
 	OptionGroupName *string

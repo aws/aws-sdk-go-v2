@@ -40,7 +40,7 @@ type CreateSignalingChannelInput struct {
 	// is the only supported channel type.
 	ChannelType types.ChannelType
 
-	// A structure containing the configuration for the SINGLE_MASTER  channel type.
+	// A structure containing the configuration for the SINGLE_MASTER channel type.
 	SingleMasterConfiguration *types.SingleMasterConfiguration
 
 	// A set of tags (key-value pairs) that you want to associate with this channel.

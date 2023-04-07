@@ -14,7 +14,6 @@ import (
 // Updates the specified attribute for a load balancer. You can only update one
 // attribute at a time. The update load balancer attribute operation supports
 // tag-based access control via resource tags applied to the resource identified by
-//
 // load balancer name . For more information, see the Amazon Lightsail Developer
 // Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
 // .
@@ -40,14 +39,25 @@ type UpdateLoadBalancerAttributeInput struct {
 	// This member is required.
 	AttributeName types.LoadBalancerAttributeName
 
-	// The value that you want to specify for the attribute name. The following
-	// values are supported depending on what you specify for the attributeName
-	// request parameter:
-	//     - If you specify HealthCheckPath for the attributeName request parameter, then the attributeValue request parameter must be the path to ping on the target (for example, /weather/us/wa/seattle ).
-	//     - If you specify SessionStickinessEnabled for the attributeName request parameter, then the attributeValue request parameter must be true to activate session stickiness or false to deactivate session stickiness.
-	//     - If you specify SessionStickiness_LB_CookieDurationSeconds for the attributeName request parameter, then the attributeValue request parameter must be an interger that represents the cookie duration in seconds.
-	//     - If you specify HttpsRedirectionEnabled for the attributeName request parameter, then the attributeValue request parameter must be true to activate HTTP to HTTPS redirection or false to deactivate HTTP to HTTPS redirection.
-	//     - If you specify TlsPolicyName for the attributeName request parameter, then the attributeValue request parameter must be the name of the TLS policy. Use the GetLoadBalancerTlsPolicies (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html) action to get a list of TLS policy names that you can specify.
+	// The value that you want to specify for the attribute name. The following values
+	// are supported depending on what you specify for the attributeName request
+	// parameter:
+	//   - If you specify HealthCheckPath for the attributeName request parameter, then
+	//   the attributeValue request parameter must be the path to ping on the target
+	//   (for example, /weather/us/wa/seattle ).
+	//   - If you specify SessionStickinessEnabled for the attributeName request
+	//   parameter, then the attributeValue request parameter must be true to activate
+	//   session stickiness or false to deactivate session stickiness.
+	//   - If you specify SessionStickiness_LB_CookieDurationSeconds for the
+	//   attributeName request parameter, then the attributeValue request parameter
+	//   must be an interger that represents the cookie duration in seconds.
+	//   - If you specify HttpsRedirectionEnabled for the attributeName request
+	//   parameter, then the attributeValue request parameter must be true to activate
+	//   HTTP to HTTPS redirection or false to deactivate HTTP to HTTPS redirection.
+	//   - If you specify TlsPolicyName for the attributeName request parameter, then
+	//   the attributeValue request parameter must be the name of the TLS policy. Use
+	//   the GetLoadBalancerTlsPolicies (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html)
+	//   action to get a list of TLS policy names that you can specify.
 	//
 	// This member is required.
 	AttributeValue *string

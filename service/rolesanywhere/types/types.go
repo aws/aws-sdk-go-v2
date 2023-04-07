@@ -22,8 +22,7 @@ type CredentialSummary struct {
 	// end-entity certificate.
 	Issuer *string
 
-	// The ISO-8601 time stamp of when the certificate was last used in a
-	// CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation.
 	SeenAt *time.Time
 
@@ -81,8 +80,7 @@ type InstanceProperty struct {
 	// A list of instanceProperty objects.
 	Properties map[string]string
 
-	// The ISO-8601 time stamp of when the certificate was last used in a
-	// CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation.
 	SeenAt *time.Time
 
@@ -224,8 +222,7 @@ type SubjectSummary struct {
 	// The enabled status of the Subject.
 	Enabled *bool
 
-	// The ISO-8601 time stamp of when the certificate was last used in a
-	// CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation.
 	LastSeenAt *time.Time
 

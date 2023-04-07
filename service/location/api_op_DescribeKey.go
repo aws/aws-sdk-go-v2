@@ -63,7 +63,7 @@ type DescribeKeyOutput struct {
 
 	// The Amazon Resource Name (ARN) for the API key resource. Used when you need to
 	// specify a resource across all Amazon Web Services.
-	//     - Format example: arn:aws:geo:region:account-id:key/ExampleKey
+	//   - Format example: arn:aws:geo:region:account-id:key/ExampleKey
 	//
 	// This member is required.
 	KeyArn *string
@@ -73,8 +73,8 @@ type DescribeKeyOutput struct {
 	// This member is required.
 	KeyName *string
 
-	// API Restrictions on the allowed actions, resources, and referers for an API
-	// key resource.
+	// API Restrictions on the allowed actions, resources, and referers for an API key
+	// resource.
 	//
 	// This member is required.
 	Restrictions *types.ApiKeyRestrictions

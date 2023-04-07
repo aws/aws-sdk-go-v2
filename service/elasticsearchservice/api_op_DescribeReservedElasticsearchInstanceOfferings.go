@@ -35,8 +35,8 @@ type DescribeReservedElasticsearchInstanceOfferingsInput struct {
 	// defaults to 100.
 	MaxResults int32
 
-	// NextToken should be sent in case if earlier API call produced result
-	// containing NextToken. It is used for pagination.
+	// NextToken should be sent in case if earlier API call produced result containing
+	// NextToken. It is used for pagination.
 	NextToken *string
 
 	// The offering identifier filter value. Use this parameter to show only the
@@ -129,15 +129,15 @@ type DescribeReservedElasticsearchInstanceOfferingsAPIClient interface {
 
 var _ DescribeReservedElasticsearchInstanceOfferingsAPIClient = (*Client)(nil)
 
-// DescribeReservedElasticsearchInstanceOfferingsPaginatorOptions is the
-// paginator options for DescribeReservedElasticsearchInstanceOfferings
+// DescribeReservedElasticsearchInstanceOfferingsPaginatorOptions is the paginator
+// options for DescribeReservedElasticsearchInstanceOfferings
 type DescribeReservedElasticsearchInstanceOfferingsPaginatorOptions struct {
 	// Set this value to limit the number of results returned. If not specified,
 	// defaults to 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -181,8 +181,7 @@ func (p *DescribeReservedElasticsearchInstanceOfferingsPaginator) HasMorePages()
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next DescribeReservedElasticsearchInstanceOfferings
-// page.
+// NextPage retrieves the next DescribeReservedElasticsearchInstanceOfferings page.
 func (p *DescribeReservedElasticsearchInstanceOfferingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReservedElasticsearchInstanceOfferingsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")

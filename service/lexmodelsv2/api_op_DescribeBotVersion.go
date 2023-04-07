@@ -59,8 +59,8 @@ type DescribeBotVersionOutput struct {
 	// The name of the bot that contains the version.
 	BotName *string
 
-	// The current status of the bot. When the status is Available, the bot version
-	// is ready for use.
+	// The current status of the bot. When the status is Available , the bot version is
+	// ready for use.
 	BotStatus types.BotStatus
 
 	// The type of the bot in the version that was described.
@@ -78,7 +78,7 @@ type DescribeBotVersionOutput struct {
 	// The description specified for the bot.
 	Description *string
 
-	// If the botStatus  is Failed, this contains a list of reasons that the version
+	// If the botStatus is Failed , this contains a list of reasons that the version
 	// couldn't be built.
 	FailureReasons []string
 
@@ -89,8 +89,8 @@ type DescribeBotVersionOutput struct {
 	// A list of the networks to which the bot version you described belongs.
 	ParentBotNetworks []types.ParentBotNetwork
 
-	// The Amazon Resource Name (ARN) of an IAM role that has permission to access
-	// the bot version.
+	// The Amazon Resource Name (ARN) of an IAM role that has permission to access the
+	// bot version.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.

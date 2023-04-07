@@ -13,7 +13,7 @@ import (
 )
 
 // Lists all the moderators for a channel. The x-amz-chime-bearer request header
-// is mandatory. Use the ARN of the AppInstanceUser  or AppInstanceBot that makes
+// is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes
 // the API call as the value in the header.
 func (c *Client) ListChannelModerators(ctx context.Context, params *ListChannelModeratorsInput, optFns ...func(*Options)) (*ListChannelModeratorsOutput, error) {
 	if params == nil {
@@ -37,7 +37,7 @@ type ListChannelModeratorsInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
@@ -147,8 +147,8 @@ type ListChannelModeratorsPaginatorOptions struct {
 	// The maximum number of moderators that you want returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

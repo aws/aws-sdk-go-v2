@@ -45,10 +45,10 @@ type ModifyClientVpnEndpointInput struct {
 	// Information about the client connection logging options. If you enable client
 	// connection logging, data about client connections is sent to a Cloudwatch Logs
 	// log stream. The following information is logged:
-	//     - Client connection requests
-	//     - Client connection results (successful and unsuccessful)
-	//     - Reasons for unsuccessful client connection requests
-	//     - Client connection termination time
+	//   - Client connection requests
+	//   - Client connection results (successful and unsuccessful)
+	//   - Reasons for unsuccessful client connection requests
+	//   - Client connection termination time
 	ConnectionLogOptions *types.ConnectionLogOptions
 
 	// A brief description of the Client VPN endpoint.
@@ -87,7 +87,7 @@ type ModifyClientVpnEndpointInput struct {
 	VpcId *string
 
 	// The port number to assign to the Client VPN endpoint for TCP and UDP traffic.
-	// Valid Values: 443  | 1194  Default Value: 443
+	// Valid Values: 443 | 1194 Default Value: 443
 	VpnPort *int32
 
 	noSmithyDocumentSerde
@@ -95,7 +95,7 @@ type ModifyClientVpnEndpointInput struct {
 
 type ModifyClientVpnEndpointOutput struct {
 
-	// Returns true  if the request succeeds; otherwise, it returns an error.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

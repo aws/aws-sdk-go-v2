@@ -46,20 +46,20 @@ type ListAppAssessmentsInput struct {
 	// The current status of compliance for the resiliency policy.
 	ComplianceStatus types.ComplianceStatus
 
-	// Specifies the entity that invoked a specific assessment, either a User  or the
+	// Specifies the entity that invoked a specific assessment, either a User or the
 	// System .
 	Invoker types.AssessmentInvoker
 
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// Null, or the token from a previous call to get the next set of results.
 	NextToken *string
 
-	// The default is to sort by ascending startTime. To sort by descending
-	// startTime, set reverseOrder to true .
+	// The default is to sort by ascending startTime. To sort by descending startTime,
+	// set reverseOrder to true .
 	ReverseOrder *bool
 
 	noSmithyDocumentSerde
@@ -67,9 +67,9 @@ type ListAppAssessmentsInput struct {
 
 type ListAppAssessmentsOutput struct {
 
-	// The summaries for the specified assessments, returned as an object. This
-	// object includes application versions, associated Amazon Resource Numbers (ARNs),
-	// cost, messages, resiliency scores, and more.
+	// The summaries for the specified assessments, returned as an object. This object
+	// includes application versions, associated Amazon Resource Numbers (ARNs), cost,
+	// messages, resiliency scores, and more.
 	//
 	// This member is required.
 	AssessmentSummaries []types.AppAssessmentSummary
@@ -154,13 +154,13 @@ var _ ListAppAssessmentsAPIClient = (*Client)(nil)
 // ListAppAssessmentsPaginatorOptions is the paginator options for
 // ListAppAssessments
 type ListAppAssessmentsPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

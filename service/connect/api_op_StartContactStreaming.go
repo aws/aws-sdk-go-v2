@@ -13,8 +13,7 @@ import (
 )
 
 // Initiates real-time message streaming for a new chat contact. For more
-// information about message streaming, see Enable real-time chat message
-// streaming (https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html)
+// information about message streaming, see Enable real-time chat message streaming (https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) StartContactStreaming(ctx context.Context, params *StartContactStreamingInput, optFns ...func(*Options)) (*StartContactStreamingOutput, error) {
 	if params == nil {
@@ -47,8 +46,8 @@ type StartContactStreamingInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The identifier of the contact. This is the identifier of the contact
-	// associated with the first interaction with the contact center.
+	// The identifier of the contact. This is the identifier of the contact associated
+	// with the first interaction with the contact center.
 	//
 	// This member is required.
 	ContactId *string

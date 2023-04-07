@@ -32,13 +32,13 @@ type DescribeTemplateAliasInput struct {
 	// The name of the template alias that you want to describe. If you name a
 	// specific alias, you describe the version that the alias points to. You can
 	// specify the latest version of the template by providing the keyword $LATEST in
-	// the AliasName  parameter. The keyword $PUBLISHED  doesn't apply to templates.
+	// the AliasName parameter. The keyword $PUBLISHED doesn't apply to templates.
 	//
 	// This member is required.
 	AliasName *string
 
-	// The ID of the Amazon Web Services account that contains the template alias
-	// that you're describing.
+	// The ID of the Amazon Web Services account that contains the template alias that
+	// you're describing.
 	//
 	// This member is required.
 	AwsAccountId *string

@@ -40,8 +40,8 @@ type ListMemberAccountsInput struct {
 	// If you specify a value for MaxResults and you have more account IDs than the
 	// number that you specify for MaxResults , Firewall Manager returns a NextToken
 	// value in the response that allows you to list another group of IDs. For the
-	// second and subsequent ListMemberAccountsRequest  requests, specify the value of
-	// NextTokenfrom the previous response to get information about another batch of
+	// second and subsequent ListMemberAccountsRequest requests, specify the value of
+	// NextToken from the previous response to get information about another batch of
 	// member account IDs.
 	NextToken *string
 
@@ -55,8 +55,8 @@ type ListMemberAccountsOutput struct {
 
 	// If you have more member account IDs than the number that you specified for
 	// MaxResults in the request, the response includes a NextToken value. To list
-	// more IDs, submit another ListMemberAccounts  request, and specify the NextToken
-	// value from the response in the NextToken  value in the next request.
+	// more IDs, submit another ListMemberAccounts request, and specify the NextToken
+	// value from the response in the NextToken value in the next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +142,8 @@ type ListMemberAccountsPaginatorOptions struct {
 	// get another batch of member account IDs.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

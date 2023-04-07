@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Recycle Bin retention rule. For more information, see  Create
-// Recycle Bin retention rules (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-create-rule)
+// Creates a Recycle Bin retention rule. For more information, see  Create Recycle
+// Bin retention rules (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-create-rule)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns ...func(*Options)) (*CreateRuleOutput, error) {
 	if params == nil {
@@ -81,10 +81,15 @@ type CreateRuleOutput struct {
 	LockConfiguration *types.LockConfiguration
 
 	// The lock state for the retention rule.
-	//     - locked - The retention rule is locked and can't be modified or deleted.
-	//     - pending_unlock - The retention rule has been unlocked but it is still within the unlock delay period. The retention rule can be modified or deleted only after the unlock delay period has expired.
-	//     - unlocked - The retention rule is unlocked and it can be modified or deleted by any user with the required permissions.
-	//     - null - The retention rule has never been locked. Once a retention rule has been locked, it can transition between the locked and unlocked states only; it can never transition back to null .
+	//   - locked - The retention rule is locked and can't be modified or deleted.
+	//   - pending_unlock - The retention rule has been unlocked but it is still within
+	//   the unlock delay period. The retention rule can be modified or deleted only
+	//   after the unlock delay period has expired.
+	//   - unlocked - The retention rule is unlocked and it can be modified or deleted
+	//   by any user with the required permissions.
+	//   - null - The retention rule has never been locked. Once a retention rule has
+	//   been locked, it can transition between the locked and unlocked states only; it
+	//   can never transition back to null .
 	LockState types.LockState
 
 	// Information about the resource tags used to identify resources that are

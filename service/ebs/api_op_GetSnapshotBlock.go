@@ -40,7 +40,7 @@ type GetSnapshotBlockInput struct {
 	BlockIndex *int32
 
 	// The block token of the block from which to get data. You can obtain the
-	// BlockToken by running the ListChangedBlocks  or ListSnapshotBlocks  operations.
+	// BlockToken by running the ListChangedBlocks or ListSnapshotBlocks operations.
 	//
 	// This member is required.
 	BlockToken *string

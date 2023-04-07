@@ -42,12 +42,12 @@ type ListSegmentReferencesInput struct {
 	// This member is required.
 	Type types.SegmentReferenceResourceType
 
-	// The maximum number of results to include in the response. If you omit this,
-	// the default of 50 is used.
+	// The maximum number of results to include in the response. If you omit this, the
+	// default of 50 is used.
 	MaxResults *int32
 
 	// The token to use when requesting the next set of results. You received this
-	// token from a previous ListSegmentReferences  operation.
+	// token from a previous ListSegmentReferences operation.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -143,12 +143,12 @@ var _ ListSegmentReferencesAPIClient = (*Client)(nil)
 // ListSegmentReferencesPaginatorOptions is the paginator options for
 // ListSegmentReferences
 type ListSegmentReferencesPaginatorOptions struct {
-	// The maximum number of results to include in the response. If you omit this,
-	// the default of 50 is used.
+	// The maximum number of results to include in the response. If you omit this, the
+	// default of 50 is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

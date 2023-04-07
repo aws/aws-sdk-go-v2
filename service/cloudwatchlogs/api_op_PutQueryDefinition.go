@@ -58,8 +58,8 @@ type PutQueryDefinitionInput struct {
 	// then the updated definition will contain no log groups.
 	LogGroupNames []string
 
-	// If you are updating a query definition, use this parameter to specify the ID
-	// of the query definition that you want to update. You can use
+	// If you are updating a query definition, use this parameter to specify the ID of
+	// the query definition that you want to update. You can use
 	// DescribeQueryDefinitions (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html)
 	// to retrieve the IDs of your saved query definitions. If you are creating a query
 	// definition, do not specify this parameter. CloudWatch generates a unique ID for

@@ -13,11 +13,11 @@ import (
 
 // Permanently bans a member from a channel. Moderators can't add banned members
 // to a channel. To undo a ban, you first have to DeleteChannelBan , and then
-// CreateChannelMembership. Bans are cleaned up when you delete users or
-// channels. If you ban a user who is already part of a channel, that user is
-// automatically kicked from the channel. The x-amz-chime-bearer request header
-// is mandatory. Use the ARN of the AppInstanceUser  or AppInstanceBot that makes
-// the API call as the value in the header.
+// CreateChannelMembership . Bans are cleaned up when you delete users or channels.
+// If you ban a user who is already part of a channel, that user is automatically
+// kicked from the channel. The x-amz-chime-bearer request header is mandatory.
+// Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as
+// the value in the header.
 func (c *Client) CreateChannelBan(ctx context.Context, params *CreateChannelBanInput, optFns ...func(*Options)) (*CreateChannelBanOutput, error) {
 	if params == nil {
 		params = &CreateChannelBanInput{}
@@ -40,12 +40,12 @@ type CreateChannelBanInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
 
-	// The AppInstanceUserArn  of the member being banned.
+	// The AppInstanceUserArn of the member being banned.
 	//
 	// This member is required.
 	MemberArn *string
@@ -58,7 +58,7 @@ type CreateChannelBanOutput struct {
 	// The ARN of the response to the ban request.
 	ChannelArn *string
 
-	// The ChannelArn  and BannedIdentity  of the member in the ban response.
+	// The ChannelArn and BannedIdentity of the member in the ban response.
 	Member *types.Identity
 
 	// Metadata pertaining to the operation's result.

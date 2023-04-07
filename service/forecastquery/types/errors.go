@@ -111,8 +111,8 @@ func (e *ResourceInUseException) ErrorCode() string {
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// We can't find that resource. Check the information that you've provided and
-// try again.
+// We can't find that resource. Check the information that you've provided and try
+// again.
 type ResourceNotFoundException struct {
 	Message *string
 

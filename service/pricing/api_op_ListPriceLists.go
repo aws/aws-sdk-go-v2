@@ -13,16 +13,16 @@ import (
 	"time"
 )
 
-// This feature is in preview release and is subject to change. Your use of
-// Amazon Web Services Price List API is subject to the Beta Service Participation
-// terms of the Amazon Web Services Service Terms (https://aws.amazon.com/service-terms/)
+// This feature is in preview release and is subject to change. Your use of Amazon
+// Web Services Price List API is subject to the Beta Service Participation terms
+// of the Amazon Web Services Service Terms (https://aws.amazon.com/service-terms/)
 // (Section 1.10). This returns a list of Price List references that the requester
-// if authorized to view, given a ServiceCode , CurrencyCode , and an
-// EffectiveDate . Use without a RegionCode filter to list Price List references
-// from all available Amazon Web Services Regions. Use with a RegionCode filter
-// to get the Price List reference that's specific to a specific Amazon Web
-// Services Region. You can use the PriceListArn from the response to get your
-// preferred Price List files through the GetPriceListFileUrl (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetPriceListFileUrl.html)
+// if authorized to view, given a ServiceCode , CurrencyCode , and an EffectiveDate
+// . Use without a RegionCode filter to list Price List references from all
+// available Amazon Web Services Regions. Use with a RegionCode filter to get the
+// Price List reference that's specific to a specific Amazon Web Services Region.
+// You can use the PriceListArn from the response to get your preferred Price List
+// files through the GetPriceListFileUrl (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetPriceListFileUrl.html)
 // API.
 func (c *Client) ListPriceLists(ctx context.Context, params *ListPriceListsInput, optFns ...func(*Options)) (*ListPriceListsOutput, error) {
 	if params == nil {
@@ -54,10 +54,10 @@ type ListPriceListsInput struct {
 
 	// The service code or the Savings Plan service code for the attributes that you
 	// want to retrieve. For example, to get the list of applicable Amazon EC2 price
-	// lists, use AmazonEC2. For a full list of service codes containing On-Demand
-	// and Reserved Instance (RI) pricing, use the DescribeServices (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_DescribeServices.html#awscostmanagement-pricing_DescribeServices-request-FormatVersion)
-	// API. To retrieve the Compute Savings Plan price lists, use ComputeSavingsPlans
-	// . To retrieve Machine Learning Savings Plans price lists, use
+	// lists, use AmazonEC2 . For a full list of service codes containing On-Demand and
+	// Reserved Instance (RI) pricing, use the DescribeServices (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_DescribeServices.html#awscostmanagement-pricing_DescribeServices-request-FormatVersion)
+	// API. To retrieve the Compute Savings Plan price lists, use ComputeSavingsPlans .
+	// To retrieve Machine Learning Savings Plans price lists, use
 	// MachineLearningSavingsPlans .
 	//
 	// This member is required.
@@ -71,10 +71,9 @@ type ListPriceListsInput struct {
 	NextToken *string
 
 	// This is used to filter the Price List by Amazon Web Services Region. For
-	// example, to get the price list only for the US East (N. Virginia)  Region, use
-	// us-east-1. If nothing is specified, you retrieve price lists for all
-	// applicable Regions. The available RegionCode  list can be retrieved from
-	// GetAttributeValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html)
+	// example, to get the price list only for the US East (N. Virginia) Region, use
+	// us-east-1 . If nothing is specified, you retrieve price lists for all applicable
+	// Regions. The available RegionCode list can be retrieved from GetAttributeValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html)
 	// API.
 	RegionCode *string
 
@@ -171,8 +170,8 @@ type ListPriceListsPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

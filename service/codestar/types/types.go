@@ -86,9 +86,9 @@ type GitHubCodeDestination struct {
 	// This member is required.
 	Name *string
 
-	// The GitHub username for the owner of the GitHub repository to be created in
-	// AWS CodeStar. If this repository should be owned by a GitHub organization,
-	// provide its name.
+	// The GitHub username for the owner of the GitHub repository to be created in AWS
+	// CodeStar. If this repository should be owned by a GitHub organization, provide
+	// its name.
 	//
 	// This member is required.
 	Owner *string
@@ -116,8 +116,7 @@ type GitHubCodeDestination struct {
 	noSmithyDocumentSerde
 }
 
-// An indication of whether a project creation or deletion is failed or
-// successful.
+// An indication of whether a project creation or deletion is failed or successful.
 type ProjectStatus struct {
 
 	// The phase of completion for a project creation or deletion.
@@ -125,8 +124,7 @@ type ProjectStatus struct {
 	// This member is required.
 	State *string
 
-	// In the case of a project creation or deletion failure, a reason for the
-	// failure.
+	// In the case of a project creation or deletion failure, a reason for the failure.
 	Reason *string
 
 	noSmithyDocumentSerde
@@ -163,8 +161,8 @@ type S3Location struct {
 	// request are stored.
 	BucketKey *string
 
-	// The Amazon S3 bucket name where the source code files provided with the
-	// project request are stored.
+	// The Amazon S3 bucket name where the source code files provided with the project
+	// request are stored.
 	BucketName *string
 
 	noSmithyDocumentSerde
@@ -207,8 +205,8 @@ type Toolchain struct {
 	// stack provisioning.
 	RoleArn *string
 
-	// The list of parameter overrides to be passed into the toolchain template
-	// during stack provisioning, if any.
+	// The list of parameter overrides to be passed into the toolchain template during
+	// stack provisioning, if any.
 	StackParameters map[string]string
 
 	noSmithyDocumentSerde
@@ -245,9 +243,9 @@ type UserProfileSummary struct {
 	// The email address associated with the user.
 	EmailAddress *string
 
-	// The SSH public key associated with the user in AWS CodeStar. If a project
-	// owner allows the user remote access to project resources, this public key will
-	// be used along with the user's private key for SSH access.
+	// The SSH public key associated with the user in AWS CodeStar. If a project owner
+	// allows the user remote access to project resources, this public key will be used
+	// along with the user's private key for SSH access.
 	SshPublicKey *string
 
 	// The Amazon Resource Name (ARN) of the user in IAM.

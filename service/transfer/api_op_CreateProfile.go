@@ -29,7 +29,7 @@ func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, 
 
 type CreateProfileInput struct {
 
-	// The As2Id  is the AS2-name, as defined in the RFC 4130 (https://datatracker.ietf.org/doc/html/rfc4130)
+	// The As2Id is the AS2-name, as defined in the RFC 4130 (https://datatracker.ietf.org/doc/html/rfc4130)
 	// . For inbound transfers, this is the AS2-From header for the AS2 messages sent
 	// from the partner. For outbound connectors, this is the AS2-To header for the
 	// AS2 messages sent to the partner using the StartFileTransfer API operation.
@@ -39,8 +39,10 @@ type CreateProfileInput struct {
 	As2Id *string
 
 	// Determines the type of profile to create:
-	//     - Specify LOCAL to create a local profile. A local profile represents the AS2-enabled Transfer Family server organization or party.
-	//     - Specify PARTNER to create a partner profile. A partner profile represents a remote organization, external to Transfer Family.
+	//   - Specify LOCAL to create a local profile. A local profile represents the
+	//   AS2-enabled Transfer Family server organization or party.
+	//   - Specify PARTNER to create a partner profile. A partner profile represents a
+	//   remote organization, external to Transfer Family.
 	//
 	// This member is required.
 	ProfileType types.ProfileType
@@ -57,8 +59,7 @@ type CreateProfileInput struct {
 
 type CreateProfileOutput struct {
 
-	// The unique identifier for the AS2 profile, returned after the API call
-	// succeeds.
+	// The unique identifier for the AS2 profile, returned after the API call succeeds.
 	//
 	// This member is required.
 	ProfileId *string

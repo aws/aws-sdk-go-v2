@@ -30,7 +30,7 @@ func (c *Client) ImportTable(ctx context.Context, params *ImportTableInput, optF
 
 type ImportTableInput struct {
 
-	// The format of the source data. Valid values for ImportFormat  are CSV ,
+	// The format of the source data. Valid values for ImportFormat are CSV ,
 	// DYNAMODB_JSON or ION .
 	//
 	// This member is required.
@@ -46,15 +46,14 @@ type ImportTableInput struct {
 	// This member is required.
 	TableCreationParameters *types.TableCreationParameters
 
-	// Providing a ClientToken  makes the call to ImportTableInput idempotent,
-	// meaning that multiple identical calls have the same effect as one single call. A
-	// client token is valid for 8 hours after the first request that uses it is
-	// completed. After 8 hours, any request with the same client token is treated as a
-	// new request. Do not resubmit the same request with the same client token for
-	// more than 8 hours, or the result might not be idempotent. If you submit a
-	// request with the same client token but a change in other parameters within the
-	// 8-hour idempotency window, DynamoDB returns an IdempotentParameterMismatch
-	// exception.
+	// Providing a ClientToken makes the call to ImportTableInput idempotent, meaning
+	// that multiple identical calls have the same effect as one single call. A client
+	// token is valid for 8 hours after the first request that uses it is completed.
+	// After 8 hours, any request with the same client token is treated as a new
+	// request. Do not resubmit the same request with the same client token for more
+	// than 8 hours, or the result might not be idempotent. If you submit a request
+	// with the same client token but a change in other parameters within the 8-hour
+	// idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
 	ClientToken *string
 
 	// Type of compression to be used on the input coming from the imported table.

@@ -49,7 +49,7 @@ type DescribeExperimentOutput struct {
 	// The description of the experiment.
 	Description *string
 
-	// The name of the experiment as displayed. If DisplayName  isn't specified,
+	// The name of the experiment as displayed. If DisplayName isn't specified,
 	// ExperimentName is displayed.
 	DisplayName *string
 

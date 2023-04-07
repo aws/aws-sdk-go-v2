@@ -41,9 +41,9 @@ type ListImportJobsInput struct {
 	// same parameters to retrieve the next page of import jobs.
 	NextToken *string
 
-	// Maximum number of import jobs to return at once. Use this parameter to
-	// paginate results. If additional import jobs exist beyond the specified limit,
-	// the NextToken  element is sent in the response. Use the NextToken value in
+	// Maximum number of import jobs to return at once. Use this parameter to paginate
+	// results. If additional import jobs exist beyond the specified limit, the
+	// NextToken element is sent in the response. Use the NextToken value in
 	// subsequent requests to retrieve additional addresses.
 	PageSize *int32
 
@@ -138,14 +138,14 @@ var _ ListImportJobsAPIClient = (*Client)(nil)
 
 // ListImportJobsPaginatorOptions is the paginator options for ListImportJobs
 type ListImportJobsPaginatorOptions struct {
-	// Maximum number of import jobs to return at once. Use this parameter to
-	// paginate results. If additional import jobs exist beyond the specified limit,
-	// the NextToken  element is sent in the response. Use the NextToken value in
+	// Maximum number of import jobs to return at once. Use this parameter to paginate
+	// results. If additional import jobs exist beyond the specified limit, the
+	// NextToken element is sent in the response. Use the NextToken value in
 	// subsequent requests to retrieve additional addresses.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

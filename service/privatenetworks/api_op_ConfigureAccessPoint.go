@@ -38,8 +38,8 @@ type ConfigureAccessPointInput struct {
 	// This member is required.
 	AccessPointArn *string
 
-	// A Base64 encoded string of the CPI certificate associated with the CPI user
-	// who is certifying the coordinates of the network resource.
+	// A Base64 encoded string of the CPI certificate associated with the CPI user who
+	// is certifying the coordinates of the network resource.
 	CpiSecretKey *string
 
 	// The CPI user ID of the CPI user who is certifying the coordinates of the

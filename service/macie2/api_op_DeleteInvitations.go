@@ -41,9 +41,9 @@ type DeleteInvitationsInput struct {
 
 type DeleteInvitationsOutput struct {
 
-	// An array of objects, one for each account whose invitation hasn't been
-	// deleted. Each object identifies the account and explains why the request hasn't
-	// been processed for that account.
+	// An array of objects, one for each account whose invitation hasn't been deleted.
+	// Each object identifies the account and explains why the request hasn't been
+	// processed for that account.
 	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.

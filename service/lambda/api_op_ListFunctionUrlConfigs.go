@@ -31,12 +31,11 @@ func (c *Client) ListFunctionUrlConfigs(ctx context.Context, params *ListFunctio
 type ListFunctionUrlConfigsInput struct {
 
 	// The name of the Lambda function. Name formats
-	//     - Function name – my-function .
-	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
-	//     - Partial ARN – 123456789012:function:my-function .
-	// The length constraint
-	// applies only to the full ARN. If you specify only the function name, it is
-	// limited to 64 characters in length.
+	//   - Function name – my-function .
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -46,7 +45,7 @@ type ListFunctionUrlConfigsInput struct {
 	Marker *string
 
 	// The maximum number of function URLs to return in the response. Note that
-	// ListFunctionUrlConfigsreturns a maximum of 50 items in each response, even if
+	// ListFunctionUrlConfigs returns a maximum of 50 items in each response, even if
 	// you set the number higher.
 	MaxItems *int32
 
@@ -144,12 +143,12 @@ var _ ListFunctionUrlConfigsAPIClient = (*Client)(nil)
 // ListFunctionUrlConfigs
 type ListFunctionUrlConfigsPaginatorOptions struct {
 	// The maximum number of function URLs to return in the response. Note that
-	// ListFunctionUrlConfigsreturns a maximum of 50 items in each response, even if
+	// ListFunctionUrlConfigs returns a maximum of 50 items in each response, even if
 	// you set the number higher.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -162,8 +161,7 @@ type ListFunctionUrlConfigsPaginator struct {
 	firstPage bool
 }
 
-// NewListFunctionUrlConfigsPaginator returns a new
-// ListFunctionUrlConfigsPaginator
+// NewListFunctionUrlConfigsPaginator returns a new ListFunctionUrlConfigsPaginator
 func NewListFunctionUrlConfigsPaginator(client ListFunctionUrlConfigsAPIClient, params *ListFunctionUrlConfigsInput, optFns ...func(*ListFunctionUrlConfigsPaginatorOptions)) *ListFunctionUrlConfigsPaginator {
 	if params == nil {
 		params = &ListFunctionUrlConfigsInput{}

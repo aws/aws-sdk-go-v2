@@ -12,7 +12,7 @@ import (
 )
 
 // Describe an Amazon Lookout for Vision dataset. This operation requires
-// permissions to perform the lookoutvision:DescribeDataset  operation.
+// permissions to perform the lookoutvision:DescribeDataset operation.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}

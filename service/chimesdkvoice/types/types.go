@@ -16,7 +16,7 @@ type Address struct {
 	// The country of an address.
 	Country *string
 
-	// An address suffix location, such as the S. Unit A  in Central Park S. Unit A .
+	// An address suffix location, such as the S. Unit A in Central Park S. Unit A .
 	PostDirectional *string
 
 	// The postal code of an address.
@@ -25,7 +25,7 @@ type Address struct {
 	// The zip + 4 or postal code + 4 of an address.
 	PostalCodePlus4 *string
 
-	// An address prefix location, such as the N  in N. Third St.
+	// An address prefix location, such as the N in N. Third St.
 	PreDirectional *string
 
 	// The state of an address.
@@ -37,7 +37,7 @@ type Address struct {
 	// The numeric portion of an address.
 	StreetNumber *string
 
-	// The address suffix, such as the N  in 8th Avenue N .
+	// The address suffix, such as the N in 8th Avenue N .
 	StreetSuffix *string
 
 	noSmithyDocumentSerde
@@ -89,8 +89,8 @@ type CandidateAddress struct {
 // Connector.
 type Credential struct {
 
-	// The RFC2617 compliant password associated with the SIP credentials, in
-	// US-ASCII format.
+	// The RFC2617 compliant password associated with the SIP credentials, in US-ASCII
+	// format.
 	Password *string
 
 	// The RFC2617 compliant user name associated with the SIP credentials, in
@@ -100,9 +100,9 @@ type Credential struct {
 	noSmithyDocumentSerde
 }
 
-// The Dialed Number Identification Service (DNIS) emergency calling
-// configuration details associated with an Amazon Chime SDK Voice Connector's
-// emergency calling configuration.
+// The Dialed Number Identification Service (DNIS) emergency calling configuration
+// details associated with an Amazon Chime SDK Voice Connector's emergency calling
+// configuration.
 type DNISEmergencyCallingConfiguration struct {
 
 	// The country from which emergency calls are allowed, in ISO 3166-1 alpha-2
@@ -122,12 +122,12 @@ type DNISEmergencyCallingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The emergency calling configuration details associated with an Amazon Chime
-// SDK Voice Connector.
+// The emergency calling configuration details associated with an Amazon Chime SDK
+// Voice Connector.
 type EmergencyCallingConfiguration struct {
 
-	// The Dialed Number Identification Service (DNIS) emergency calling
-	// configuration details.
+	// The Dialed Number Identification Service (DNIS) emergency calling configuration
+	// details.
 	DNIS []DNISEmergencyCallingConfiguration
 
 	noSmithyDocumentSerde
@@ -292,8 +292,8 @@ type PhoneNumber struct {
 	noSmithyDocumentSerde
 }
 
-// The phone number associations, such as an Amazon Chime SDK account ID, user
-// ID, Voice Connector ID, or Voice Connector group ID.
+// The phone number associations, such as an Amazon Chime SDK account ID, user ID,
+// Voice Connector ID, or Voice Connector group ID.
 type PhoneNumberAssociation struct {
 
 	// The timestamp of the phone number association, in ISO 8601 format.
@@ -513,7 +513,7 @@ type SipMediaApplicationAlexaSkillConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A Call  instance for a SIP media application.
+// A Call instance for a SIP media application.
 type SipMediaApplicationCall struct {
 
 	// The call's transaction ID.
@@ -525,9 +525,8 @@ type SipMediaApplicationCall struct {
 // The endpoint assigned to a SIP media application.
 type SipMediaApplicationEndpoint struct {
 
-	// Valid Amazon Resource Name (ARN) of the Lambda function, version, or alias.
-	// The function must be created in the same AWS Region as the SIP media
-	// application.
+	// Valid Amazon Resource Name (ARN) of the Lambda function, version, or alias. The
+	// function must be created in the same AWS Region as the SIP media application.
 	LambdaArn *string
 
 	noSmithyDocumentSerde
@@ -726,7 +725,7 @@ type Termination struct {
 }
 
 // The termination health details, including the source IP address and timestamp
-// of the last successful SIP OPTIONS  message from your SIP infrastructure.
+// of the last successful SIP OPTIONS message from your SIP infrastructure.
 type TerminationHealth struct {
 
 	// The source IP address.
@@ -739,7 +738,7 @@ type TerminationHealth struct {
 }
 
 // The phone number ID, product type, or calling name fields to update, used with
-// the BatchUpdatePhoneNumber  and UpdatePhoneNumber  actions.
+// the BatchUpdatePhoneNumber and UpdatePhoneNumber actions.
 type UpdatePhoneNumberRequestItem struct {
 
 	// The phone number ID to update.
@@ -851,7 +850,7 @@ type VoiceProfile struct {
 	CreatedTimestamp *time.Time
 
 	// The time at which a voice profile expires unless you re-enroll the caller via
-	// the UpdateVoiceProfile  API.
+	// the UpdateVoiceProfile API.
 	ExpirationTimestamp *time.Time
 
 	// The time at which the voice profile was last updated.
@@ -881,8 +880,7 @@ type VoiceProfileDomain struct {
 	// The name of the voice profile domain.
 	Name *string
 
-	// A structure that contains the configuration settings for server-side
-	// encryption.
+	// A structure that contains the configuration settings for server-side encryption.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
 	// The time at which the voice profile was last updated.
@@ -947,8 +945,8 @@ type VoiceProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A representation of an asynchronous request to perform voice tone analysis on
-// a Voice Connector call.
+// A representation of an asynchronous request to perform voice tone analysis on a
+// Voice Connector call.
 type VoiceToneAnalysisTask struct {
 
 	// The call details of a voice tone analysis task.

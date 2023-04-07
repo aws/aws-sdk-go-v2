@@ -51,8 +51,7 @@ type ExportImageInput struct {
 	// Token to enable idempotency for export image requests.
 	ClientToken *string
 
-	// A description of the image being exported. The maximum length is 255
-	// characters.
+	// A description of the image being exported. The maximum length is 255 characters.
 	Description *string
 
 	// Checks whether you have the required permissions for the action, without

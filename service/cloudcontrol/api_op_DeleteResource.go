@@ -16,7 +16,7 @@ import (
 // in the Amazon Web Services Cloud Control API User Guide. After you have
 // initiated a resource deletion request, you can monitor the progress of your
 // request by calling GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
-// using the RequestToken  of the ProgressEvent  returned by DeleteResource .
+// using the RequestToken of the ProgressEvent returned by DeleteResource .
 func (c *Client) DeleteResource(ctx context.Context, params *DeleteResourceInput, optFns ...func(*Options)) (*DeleteResourceOutput, error) {
 	if params == nil {
 		params = &DeleteResourceInput{}
@@ -34,9 +34,9 @@ func (c *Client) DeleteResource(ctx context.Context, params *DeleteResourceInput
 
 type DeleteResourceInput struct {
 
-	// The identifier for the resource. You can specify the primary identifier, or
-	// any secondary identifier defined for the resource type in its resource schema.
-	// You can only specify one identifier. Primary identifiers can be specified as a
+	// The identifier for the resource. You can specify the primary identifier, or any
+	// secondary identifier defined for the resource type in its resource schema. You
+	// can only specify one identifier. Primary identifiers can be specified as a
 	// string or JSON; secondary identifiers must be specified as JSON. For compound
 	// primary identifiers (that is, one that consists of multiple resource properties
 	// strung together), to specify the primary identifier as a string, list the
@@ -64,10 +64,10 @@ type DeleteResourceInput struct {
 	// in the Amazon Web Services Cloud Control API User Guide.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
-	// role for Cloud Control API to use when performing this resource operation. The
-	// role specified must have the permissions required for this operation. The
-	// necessary permissions for each event handler are defined in the handlers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// for Cloud Control API to use when performing this resource operation. The role
+	// specified must have the permissions required for this operation. The necessary
+	// permissions for each event handler are defined in the handlers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
 	// section of the resource type definition schema (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
 	// . If you do not specify a role, Cloud Control API uses a temporary session
 	// created using your Amazon Web Services user credentials. For more information,
@@ -75,9 +75,9 @@ type DeleteResourceInput struct {
 	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 
-	// For private resource types, the type version to use in this resource
-	// operation. If you do not specify a resource version, CloudFormation uses the
-	// default version.
+	// For private resource types, the type version to use in this resource operation.
+	// If you do not specify a resource version, CloudFormation uses the default
+	// version.
 	TypeVersionId *string
 
 	noSmithyDocumentSerde
@@ -88,7 +88,7 @@ type DeleteResourceOutput struct {
 	// Represents the current status of the resource deletion request. After you have
 	// initiated a resource deletion request, you can monitor the progress of your
 	// request by calling GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
-	// using the RequestToken  of the ProgressEvent  returned by DeleteResource .
+	// using the RequestToken of the ProgressEvent returned by DeleteResource .
 	ProgressEvent *types.ProgressEvent
 
 	// Metadata pertaining to the operation's result.

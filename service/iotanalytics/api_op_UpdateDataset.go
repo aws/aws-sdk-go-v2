@@ -29,7 +29,7 @@ func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, 
 
 type UpdateDatasetInput struct {
 
-	// A list of DatasetAction  objects.
+	// A list of DatasetAction objects.
 	//
 	// This member is required.
 	Actions []types.DatasetAction
@@ -39,8 +39,8 @@ type UpdateDatasetInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// When dataset contents are created, they are delivered to destinations
-	// specified here.
+	// When dataset contents are created, they are delivered to destinations specified
+	// here.
 	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
 	// A list of data rules that send notifications to CloudWatch, when data arrives
@@ -52,14 +52,14 @@ type UpdateDatasetInput struct {
 	RetentionPeriod *types.RetentionPeriod
 
 	// A list of DatasetTrigger objects. The list can be empty or can contain up to
-	// five DatasetTrigger  objects.
+	// five DatasetTrigger objects.
 	Triggers []types.DatasetTrigger
 
 	// Optional. How many versions of dataset contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
 	// are different) are kept for the time period specified by the retentionPeriod
-	// parameter. For more information, see Keeping Multiple Versions of IoT
-	// Analytics datasets (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// parameter. For more information, see Keeping Multiple Versions of IoT Analytics
+	// datasets (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
 	// in the IoT Analytics User Guide.
 	VersioningConfiguration *types.VersioningConfiguration
 

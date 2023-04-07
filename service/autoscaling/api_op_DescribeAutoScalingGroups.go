@@ -24,7 +24,7 @@ import (
 // you do not specify group names or filters, the output includes information for
 // all Auto Scaling groups. This operation also returns information about instances
 // in Auto Scaling groups. To retrieve information about the instances in a warm
-// pool, you must call the DescribeWarmPool  API.
+// pool, you must call the DescribeWarmPool API.
 func (c *Client) DescribeAutoScalingGroups(ctx context.Context, params *DescribeAutoScalingGroupsInput, optFns ...func(*Options)) (*DescribeAutoScalingGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeAutoScalingGroupsInput{}
@@ -42,9 +42,9 @@ func (c *Client) DescribeAutoScalingGroups(ctx context.Context, params *Describe
 
 type DescribeAutoScalingGroupsInput struct {
 
-	// The names of the Auto Scaling groups. By default, you can only specify up to
-	// 50 names. You can optionally increase this limit using the MaxRecords
-	// property. If you omit this property, all Auto Scaling groups are described.
+	// The names of the Auto Scaling groups. By default, you can only specify up to 50
+	// names. You can optionally increase this limit using the MaxRecords property. If
+	// you omit this property, all Auto Scaling groups are described.
 	AutoScalingGroupNames []string
 
 	// One or more filters to limit the results based on specific tags.
@@ -155,8 +155,8 @@ type DescribeAutoScalingGroupsPaginatorOptions struct {
 	// and the maximum value is 100 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -472,9 +472,9 @@ func NewGroupInServiceWaiter(client DescribeAutoScalingGroupsAPIClient, optFns .
 	}
 }
 
-// Wait calls the waiter function for GroupInService waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for GroupInService waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *GroupInServiceWaiter) Wait(ctx context.Context, params *DescribeAutoScalingGroupsInput, maxWaitDur time.Duration, optFns ...func(*GroupInServiceWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -657,9 +657,9 @@ func NewGroupNotExistsWaiter(client DescribeAutoScalingGroupsAPIClient, optFns .
 	}
 }
 
-// Wait calls the waiter function for GroupNotExists waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for GroupNotExists waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *GroupNotExistsWaiter) Wait(ctx context.Context, params *DescribeAutoScalingGroupsInput, maxWaitDur time.Duration, optFns ...func(*GroupNotExistsWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

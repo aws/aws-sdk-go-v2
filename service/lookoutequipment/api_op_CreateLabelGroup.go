@@ -36,8 +36,8 @@ type CreateLabelGroupInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// Names a group of labels. Data in this field will be retained for service
-	// usage. Follow best practices for the security of your data.
+	// Names a group of labels. Data in this field will be retained for service usage.
+	// Follow best practices for the security of your data.
 	//
 	// This member is required.
 	LabelGroupName *string
@@ -47,9 +47,9 @@ type CreateLabelGroupInput struct {
 	// retained for service usage. Follow best practices for the security of your data.
 	FaultCodes []string
 
-	// Tags that provide metadata about the label group you are creating. Data in
-	// this field will be retained for service usage. Follow best practices for the
-	// security of your data.
+	// Tags that provide metadata about the label group you are creating. Data in this
+	// field will be retained for service usage. Follow best practices for the security
+	// of your data.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

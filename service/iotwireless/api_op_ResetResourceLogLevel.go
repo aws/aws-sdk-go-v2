@@ -35,7 +35,7 @@ type ResetResourceLogLevelInput struct {
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of the resource, which can be WirelessDevice  or WirelessGateway .
+	// The type of the resource, which can be WirelessDevice or WirelessGateway .
 	//
 	// This member is required.
 	ResourceType *string

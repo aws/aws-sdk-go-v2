@@ -109,9 +109,9 @@ const (
 	AlgorithmNameResamplingSum AlgorithmNameResampling = "SUM"
 )
 
-// Values returns all known values for AlgorithmNameResampling. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AlgorithmNameResampling. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AlgorithmNameResampling) Values() []AlgorithmNameResampling {
 	return []AlgorithmNameResampling{
 		"NEAR",
@@ -375,8 +375,8 @@ const (
 	PredefinedResolutionAverage PredefinedResolution = "AVERAGE"
 )
 
-// Values returns all known values for PredefinedResolution. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PredefinedResolution. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PredefinedResolution) Values() []PredefinedResolution {
 	return []PredefinedResolution{
@@ -457,8 +457,8 @@ const (
 	UnitMeters Unit = "METERS"
 )
 
-// Values returns all known values for Unit. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Unit. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Unit) Values() []Unit {
 	return []Unit{
@@ -582,9 +582,9 @@ const (
 	VectorEnrichmentJobTypeMapMatching      VectorEnrichmentJobType = "MAP_MATCHING"
 )
 
-// Values returns all known values for VectorEnrichmentJobType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VectorEnrichmentJobType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (VectorEnrichmentJobType) Values() []VectorEnrichmentJobType {
 	return []VectorEnrichmentJobType{
 		"REVERSE_GEOCODING",

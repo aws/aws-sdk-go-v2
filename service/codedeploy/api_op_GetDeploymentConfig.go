@@ -27,7 +27,7 @@ func (c *Client) GetDeploymentConfig(ctx context.Context, params *GetDeploymentC
 	return out, nil
 }
 
-// Represents the input of a GetDeploymentConfig  operation.
+// Represents the input of a GetDeploymentConfig operation.
 type GetDeploymentConfigInput struct {
 
 	// The name of a deployment configuration associated with the IAM user or Amazon
@@ -39,7 +39,7 @@ type GetDeploymentConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetDeploymentConfig  operation.
+// Represents the output of a GetDeploymentConfig operation.
 type GetDeploymentConfigOutput struct {
 
 	// Information about the deployment configuration.

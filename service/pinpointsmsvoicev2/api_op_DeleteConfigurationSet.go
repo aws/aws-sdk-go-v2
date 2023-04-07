@@ -33,9 +33,9 @@ func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfi
 
 type DeleteConfigurationSetInput struct {
 
-	// The name of the configuration set or the configuration set ARN that you want
-	// to delete. The ConfigurationSetName and ConfigurationSetArn can be found using
-	// the DescribeConfigurationSets  action.
+	// The name of the configuration set or the configuration set ARN that you want to
+	// delete. The ConfigurationSetName and ConfigurationSetArn can be found using the
+	// DescribeConfigurationSets action.
 	//
 	// This member is required.
 	ConfigurationSetName *string

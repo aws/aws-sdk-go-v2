@@ -14,7 +14,7 @@ import (
 
 // Creates a scheduled action. A scheduled action contains a schedule and an
 // Amazon Redshift API action. For example, you can create a schedule of when to
-// run the ResizeCluster  API operation.
+// run the ResizeCluster API operation.
 func (c *Client) CreateScheduledAction(ctx context.Context, params *CreateScheduledActionInput, optFns ...func(*Options)) (*CreateScheduledActionOutput, error) {
 	if params == nil {
 		params = &CreateScheduledActionInput{}
@@ -38,7 +38,7 @@ type CreateScheduledActionInput struct {
 	// This member is required.
 	IamRole *string
 
-	// The schedule in at( )  or cron( ) format. For more information about this
+	// The schedule in at( ) or cron( ) format. For more information about this
 	// parameter, see ScheduledAction .
 	//
 	// This member is required.
@@ -57,7 +57,7 @@ type CreateScheduledActionInput struct {
 	TargetAction *types.ScheduledActionType
 
 	// If true, the schedule is enabled. If false, the scheduled action does not
-	// trigger. For more information about state  of the scheduled action, see
+	// trigger. For more information about state of the scheduled action, see
 	// ScheduledAction .
 	Enable *bool
 
@@ -82,8 +82,8 @@ type CreateScheduledActionInput struct {
 // operations can be scheduled, see ScheduledActionType .
 type CreateScheduledActionOutput struct {
 
-	// The end time in UTC when the schedule is no longer active. After this time,
-	// the scheduled action does not trigger.
+	// The end time in UTC when the schedule is no longer active. After this time, the
+	// scheduled action does not trigger.
 	EndTime *time.Time
 
 	// The IAM role to assume to run the scheduled action. This IAM role must have
@@ -101,8 +101,8 @@ type CreateScheduledActionOutput struct {
 	// The schedule for a one-time (at format) or recurring (cron format) scheduled
 	// action. Schedule invocations must be separated by at least one hour. Format of
 	// at expressions is " at(yyyy-mm-ddThh:mm:ss) ". For example, "
-	// at(2016-03-04T17:27:00) ". Format of cron expressions is "cron(Minutes Hours
-	// Day-of-month Month Day-of-week Year) ". For example, " cron(0 10 ? * MON *)".
+	// at(2016-03-04T17:27:00) ". Format of cron expressions is " cron(Minutes Hours
+	// Day-of-month Month Day-of-week Year) ". For example, " cron(0 10 ? * MON *) ".
 	// For more information, see Cron Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
 	// in the Amazon CloudWatch Events User Guide.
 	Schedule *string

@@ -42,12 +42,12 @@ type CreateDBSecurityGroupInput struct {
 	// This member is required.
 	DBSecurityGroupDescription *string
 
-	// The name for the DB security group. This value is stored as a lowercase
-	// string. Constraints:
-	//     - Must be 1 to 255 letters, numbers, or hyphens.
-	//     - First character must be a letter
-	//     - Can't end with a hyphen or contain two consecutive hyphens
-	//     - Must not be "Default"
+	// The name for the DB security group. This value is stored as a lowercase string.
+	// Constraints:
+	//   - Must be 1 to 255 letters, numbers, or hyphens.
+	//   - First character must be a letter
+	//   - Can't end with a hyphen or contain two consecutive hyphens
+	//   - Must not be "Default"
 	// Example: mysecuritygroup
 	//
 	// This member is required.
@@ -62,7 +62,7 @@ type CreateDBSecurityGroupInput struct {
 type CreateDBSecurityGroupOutput struct {
 
 	// Contains the details for an Amazon RDS DB security group. This data type is
-	// used as a response element in the DescribeDBSecurityGroups  action.
+	// used as a response element in the DescribeDBSecurityGroups action.
 	DBSecurityGroup *types.DBSecurityGroup
 
 	// Metadata pertaining to the operation's result.

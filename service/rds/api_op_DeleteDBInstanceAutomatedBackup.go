@@ -28,12 +28,11 @@ func (c *Client) DeleteDBInstanceAutomatedBackup(ctx context.Context, params *De
 	return out, nil
 }
 
-// Parameter input for the DeleteDBInstanceAutomatedBackup  operation.
+// Parameter input for the DeleteDBInstanceAutomatedBackup operation.
 type DeleteDBInstanceAutomatedBackupInput struct {
 
-	// The Amazon Resource Name (ARN) of the automated backups to delete, for
-	// example,
-	// arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE.
+	// The Amazon Resource Name (ARN) of the automated backups to delete, for example,
+	// arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE .
 	// This setting doesn't apply to RDS Custom.
 	DBInstanceAutomatedBackupsArn *string
 

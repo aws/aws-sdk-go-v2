@@ -30,16 +30,15 @@ func (c *Client) DescribeSubnetGroups(ctx context.Context, params *DescribeSubne
 
 type DescribeSubnetGroupsInput struct {
 
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved. The value for MaxResults must
-	// be between 20 and 100.
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved. The value for MaxResults must be
+	// between 20 and 100.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults
-	// .
+	// includes only results beyond the token, up to the value specified by MaxResults .
 	NextToken *string
 
 	// The name of the subnet group.
@@ -53,8 +52,8 @@ type DescribeSubnetGroupsOutput struct {
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string
 
-	// An array of subnet groups. Each element in the array represents a single
-	// subnet group.
+	// An array of subnet groups. Each element in the array represents a single subnet
+	// group.
 	SubnetGroups []types.SubnetGroup
 
 	// Metadata pertaining to the operation's result.

@@ -53,7 +53,7 @@ type InitiateLayerUploadOutput struct {
 	PartSize *int64
 
 	// The upload ID for the layer upload. This parameter is passed to further
-	// UploadLayerPart and CompleteLayerUpload  operations.
+	// UploadLayerPart and CompleteLayerUpload operations.
 	UploadId *string
 
 	// Metadata pertaining to the operation's result.

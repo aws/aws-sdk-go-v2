@@ -12,7 +12,7 @@ import (
 
 // Provides a pre-signed URL for download of a completed attachment. This is an
 // asynchronous API for use with active contacts. ConnectionToken is used for
-// invoking this API instead of ParticipantToken. The Amazon Connect Participant
+// invoking this API instead of ParticipantToken . The Amazon Connect Participant
 // Service APIs do not use Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
 // .
 func (c *Client) GetAttachment(ctx context.Context, params *GetAttachmentInput, optFns ...func(*Options)) (*GetAttachmentOutput, error) {
@@ -47,8 +47,8 @@ type GetAttachmentInput struct {
 
 type GetAttachmentOutput struct {
 
-	// This is the pre-signed URL that can be used for uploading the file to Amazon
-	// S3 when used in response to StartAttachmentUpload (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html)
+	// This is the pre-signed URL that can be used for uploading the file to Amazon S3
+	// when used in response to StartAttachmentUpload (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html)
 	// .
 	Url *string
 

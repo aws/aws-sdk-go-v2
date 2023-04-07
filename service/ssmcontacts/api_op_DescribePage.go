@@ -45,7 +45,7 @@ type DescribePageOutput struct {
 	ContactArn *string
 
 	// The secure content of the message that was sent to the contact. Use this field
-	// for engagements to VOICE  and EMAIL .
+	// for engagements to VOICE and EMAIL .
 	//
 	// This member is required.
 	Content *string
@@ -66,7 +66,7 @@ type DescribePageOutput struct {
 	Sender *string
 
 	// The secure subject of the message that was sent to the contact. Use this field
-	// for engagements to VOICE  and EMAIL .
+	// for engagements to VOICE and EMAIL .
 	//
 	// This member is required.
 	Subject *string

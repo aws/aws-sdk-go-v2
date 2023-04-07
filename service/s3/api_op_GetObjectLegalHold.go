@@ -13,7 +13,7 @@ import (
 )
 
 // Gets an object's current legal hold status. For more information, see Locking
-// Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
+// Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html) .
 // This action is not supported by Amazon S3 on Outposts. The following action is
 // related to GetObjectLegalHold :
 //   - GetObjectAttributes (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)

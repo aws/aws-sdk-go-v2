@@ -35,10 +35,10 @@ type TranslateTextInput struct {
 	// language supported by Amazon Translate. For a list of language codes, see
 	// Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
 	// . To have Amazon Translate determine the source language of your text, you can
-	// specify auto  in the SourceLanguageCode  field. If you specify auto, Amazon
+	// specify auto in the SourceLanguageCode field. If you specify auto , Amazon
 	// Translate will call Amazon Comprehend (https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html)
 	// to determine the source language. If you specify auto , you must send the
-	// TranslateTextrequest in a region that supports Amazon Comprehend. Otherwise,
+	// TranslateText request in a region that supports Amazon Comprehend. Otherwise,
 	// the request returns an error indicating that autodetect is not supported.
 	//
 	// This member is required.

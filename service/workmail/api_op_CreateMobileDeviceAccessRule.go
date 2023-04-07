@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new mobile device access rule for the specified WorkMail
-// organization.
+// Creates a new mobile device access rule for the specified WorkMail organization.
 func (c *Client) CreateMobileDeviceAccessRule(ctx context.Context, params *CreateMobileDeviceAccessRuleInput, optFns ...func(*Options)) (*CreateMobileDeviceAccessRuleOutput, error) {
 	if params == nil {
 		params = &CreateMobileDeviceAccessRuleInput{}
@@ -31,7 +30,7 @@ func (c *Client) CreateMobileDeviceAccessRule(ctx context.Context, params *Creat
 
 type CreateMobileDeviceAccessRuleInput struct {
 
-	// The effect of the rule when it matches. Allowed values are ALLOW  or DENY .
+	// The effect of the rule when it matches. Allowed values are ALLOW or DENY .
 	//
 	// This member is required.
 	Effect types.MobileDeviceAccessRuleEffect

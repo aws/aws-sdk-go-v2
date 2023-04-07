@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists details for a network operation, including when the operation started
-// and the status of the operation. A network operation is any operation that is
-// done to your network, such as network instance instantiation or termination.
+// Lists details for a network operation, including when the operation started and
+// the status of the operation. A network operation is any operation that is done
+// to your network, such as network instance instantiation or termination.
 func (c *Client) ListSolNetworkOperations(ctx context.Context, params *ListSolNetworkOperationsInput, optFns ...func(*Options)) (*ListSolNetworkOperationsOutput, error) {
 	if params == nil {
 		params = &ListSolNetworkOperationsInput{}
@@ -131,8 +131,8 @@ type ListSolNetworkOperationsPaginatorOptions struct {
 	// The maximum number of results to include in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

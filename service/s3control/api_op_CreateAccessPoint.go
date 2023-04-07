@@ -18,12 +18,12 @@ import (
 // Creates an access point and associates it with the specified bucket. For more
 // information, see Managing Data Access with Amazon S3 Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html)
 // in the Amazon S3 User Guide. S3 on Outposts only supports VPC-style access
-// points. For more information, see Accessing Amazon S3 on Outposts using
-// virtual private cloud (VPC) only access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+// points. For more information, see Accessing Amazon S3 on Outposts using virtual
+// private cloud (VPC) only access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
 // in the Amazon S3 User Guide. All Amazon S3 on Outposts REST API requests for
 // this action require an additional parameter of x-amz-outpost-id to be passed
 // with the request. In addition, you must use an S3 on Outposts endpoint hostname
-// prefix instead of s3-control. For an example of the request syntax for Amazon
+// prefix instead of s3-control . For an example of the request syntax for Amazon
 // S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the
 // x-amz-outpost-id derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples)
 // section. The following actions are related to CreateAccessPoint :
@@ -58,9 +58,9 @@ type CreateAccessPointInput struct {
 	// specify the name and the x-amz-outpost-id as well. For using this parameter with
 	// S3 on Outposts with the Amazon Web Services SDK and CLI, you must specify the
 	// ARN of the bucket accessed in the format arn:aws:s3-outposts:::outpost//bucket/
-	// . For example, to access the bucket reports  through Outpost my-outpost owned
-	// by account 123456789012  in Region us-west-2 , use the URL encoding of
-	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
+	// . For example, to access the bucket reports through Outpost my-outpost owned by
+	// account 123456789012 in Region us-west-2 , use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports .
 	// The value must be URL encoded.
 	//
 	// This member is required.
@@ -75,7 +75,7 @@ type CreateAccessPointInput struct {
 	// with this access point.
 	BucketAccountId *string
 
-	// The PublicAccessBlock  configuration that you want to apply to the access point.
+	// The PublicAccessBlock configuration that you want to apply to the access point.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 
 	// If you include this field, Amazon S3 restricts access to this access point to

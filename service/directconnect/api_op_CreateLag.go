@@ -104,9 +104,8 @@ type CreateLagOutput struct {
 	// The Direct Connect endpoint that hosts the LAG.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This
-	// device might be different than the device that terminates the physical
-	// connection.
+	// The Direct Connect endpoint that terminates the logical connection. This device
+	// might be different than the device that terminates the physical connection.
 	AwsLogicalDeviceId *string
 
 	// The connections bundled by the LAG.
@@ -116,8 +115,8 @@ type CreateLagOutput struct {
 	// possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string
 
-	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt
-	// , should_encrypt , and must_encrypt .
+	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt ,
+	// should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
@@ -134,13 +133,14 @@ type CreateLagOutput struct {
 	LagName *string
 
 	// The state of the LAG. The following are the possible values:
-	//     - requested : The initial state of a LAG. The LAG stays in the requested state until the Letter of Authorization (LOA) is available.
-	//     - pending : The LAG has been approved and is being initialized.
-	//     - available : The network link is established and the LAG is ready for use.
-	//     - down : The network link is down.
-	//     - deleting : The LAG is being deleted.
-	//     - deleted : The LAG is deleted.
-	//     - unknown : The state of the LAG is not available.
+	//   - requested : The initial state of a LAG. The LAG stays in the requested state
+	//   until the Letter of Authorization (LOA) is available.
+	//   - pending : The LAG has been approved and is being initialized.
+	//   - available : The network link is established and the LAG is ready for use.
+	//   - down : The network link is down.
+	//   - deleting : The LAG is being deleted.
+	//   - deleted : The LAG is deleted.
+	//   - unknown : The state of the LAG is not available.
 	LagState types.LagState
 
 	// The location of the LAG.

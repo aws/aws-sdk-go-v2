@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of ResourceSetSummary  objects.
+// Returns an array of ResourceSetSummary objects.
 func (c *Client) ListResourceSets(ctx context.Context, params *ListResourceSetsInput, optFns ...func(*Options)) (*ListResourceSetsOutput, error) {
 	if params == nil {
 		params = &ListResourceSetsInput{}
@@ -29,8 +29,8 @@ func (c *Client) ListResourceSets(ctx context.Context, params *ListResourceSetsI
 
 type ListResourceSetsInput struct {
 
-	// The maximum number of objects that you want Firewall Manager to return for
-	// this request. If more objects are available, in the response, Firewall Manager
+	// The maximum number of objects that you want Firewall Manager to return for this
+	// request. If more objects are available, in the response, Firewall Manager
 	// provides a NextToken value that you can use in a subsequent call to get the
 	// next batch of objects.
 	MaxResults *int32
@@ -54,7 +54,7 @@ type ListResourceSetsOutput struct {
 	// request in your next request.
 	NextToken *string
 
-	// An array of ResourceSetSummary  objects.
+	// An array of ResourceSetSummary objects.
 	ResourceSets []types.ResourceSetSummary
 
 	// Metadata pertaining to the operation's result.

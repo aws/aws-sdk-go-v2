@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the resources in your AWS account in this AWS Region that are
-// managed for zonal shifts in Amazon Route 53 Application Recovery Controller, and
+// Lists all the resources in your AWS account in this AWS Region that are managed
+// for zonal shifts in Amazon Route 53 Application Recovery Controller, and
 // information about them. The information includes their Amazon Resource Names
 // (ARNs), the Availability Zones the resources are deployed in, and the resource
 // name.
@@ -38,10 +38,9 @@ type ListManagedResourcesInput struct {
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it
-	// indicates that more output is available. Set this parameter to the value
-	// provided by the previous call's NextToken response to request the next page of
-	// results.
+	// received a NextToken response in the previous request. If you did, it indicates
+	// that more output is available. Set this parameter to the value provided by the
+	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -55,10 +54,9 @@ type ListManagedResourcesOutput struct {
 	Items []types.ManagedResourceSummary
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it
-	// indicates that more output is available. Set this parameter to the value
-	// provided by the previous call's NextToken response to request the next page of
-	// results.
+	// received a NextToken response in the previous request. If you did, it indicates
+	// that more output is available. Set this parameter to the value provided by the
+	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,8 +139,8 @@ type ListManagedResourcesPaginatorOptions struct {
 	// The number of objects that you want to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

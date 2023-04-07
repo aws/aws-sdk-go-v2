@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists endpoints associated with the specified Outpost. Related actions
-// include:
+// Lists endpoints associated with the specified Outpost. Related actions include:
 //   - CreateEndpoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html)
 //   - DeleteEndpoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
 func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, optFns ...func(*Options)) (*ListEndpointsOutput, error) {
@@ -49,8 +48,8 @@ type ListEndpointsOutput struct {
 	Endpoints []types.Endpoint
 
 	// If the number of endpoints associated with the specified Outpost exceeds
-	// MaxResults, you can include this value in subsequent calls to this operation
-	// to retrieve more results.
+	// MaxResults , you can include this value in subsequent calls to this operation to
+	// retrieve more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -131,8 +130,8 @@ type ListEndpointsPaginatorOptions struct {
 	// The maximum number of endpoints that will be returned in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

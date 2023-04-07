@@ -36,8 +36,8 @@ func (c *Client) PutBackupVaultLockConfiguration(ctx context.Context, params *Pu
 
 type PutBackupVaultLockConfigurationInput struct {
 
-	// The Backup Vault Lock configuration that specifies the name of the backup
-	// vault it protects.
+	// The Backup Vault Lock configuration that specifies the name of the backup vault
+	// it protects.
 	//
 	// This member is required.
 	BackupVaultName *string
@@ -49,38 +49,38 @@ type PutBackupVaultLockConfigurationInput struct {
 	// Therefore, you must set ChangeableForDays to 3 or greater. Before the lock
 	// date, you can delete Vault Lock from the vault using
 	// DeleteBackupVaultLockConfiguration or change the Vault Lock configuration using
-	// PutBackupVaultLockConfiguration. On and after the lock date, the Vault Lock
+	// PutBackupVaultLockConfiguration . On and after the lock date, the Vault Lock
 	// becomes immutable and cannot be changed or deleted. If this parameter is not
 	// specified, you can delete Vault Lock from the vault using
 	// DeleteBackupVaultLockConfiguration or change the Vault Lock configuration using
 	// PutBackupVaultLockConfiguration at any time.
 	ChangeableForDays *int64
 
-	// The Backup Vault Lock configuration that specifies the maximum retention
-	// period that the vault retains its recovery points. This setting can be useful
-	// if, for example, your organization's policies require you to destroy certain
-	// data after retaining it for four years (1460 days). If this parameter is not
-	// included, Vault Lock does not enforce a maximum retention period on the recovery
-	// points in the vault. If this parameter is included without a value, Vault Lock
-	// will not enforce a maximum retention period. If this parameter is specified, any
-	// backup or copy job to the vault must have a lifecycle policy with a retention
-	// period equal to or shorter than the maximum retention period. If the job's
-	// retention period is longer than that maximum retention period, then the vault
-	// fails the backup or copy job, and you should either modify your lifecycle
-	// settings or use a different vault. The longest maximum retention period you can
-	// specify is 36500 days (approximately 100 years). Recovery points already saved
-	// in the vault prior to Vault Lock are not affected.
+	// The Backup Vault Lock configuration that specifies the maximum retention period
+	// that the vault retains its recovery points. This setting can be useful if, for
+	// example, your organization's policies require you to destroy certain data after
+	// retaining it for four years (1460 days). If this parameter is not included,
+	// Vault Lock does not enforce a maximum retention period on the recovery points in
+	// the vault. If this parameter is included without a value, Vault Lock will not
+	// enforce a maximum retention period. If this parameter is specified, any backup
+	// or copy job to the vault must have a lifecycle policy with a retention period
+	// equal to or shorter than the maximum retention period. If the job's retention
+	// period is longer than that maximum retention period, then the vault fails the
+	// backup or copy job, and you should either modify your lifecycle settings or use
+	// a different vault. The longest maximum retention period you can specify is 36500
+	// days (approximately 100 years). Recovery points already saved in the vault prior
+	// to Vault Lock are not affected.
 	MaxRetentionDays *int64
 
-	// The Backup Vault Lock configuration that specifies the minimum retention
-	// period that the vault retains its recovery points. This setting can be useful
-	// if, for example, your organization's policies require you to retain certain data
-	// for at least seven years (2555 days). If this parameter is not specified, Vault
-	// Lock will not enforce a minimum retention period. If this parameter is
-	// specified, any backup or copy job to the vault must have a lifecycle policy with
-	// a retention period equal to or longer than the minimum retention period. If the
-	// job's retention period is shorter than that minimum retention period, then the
-	// vault fails that backup or copy job, and you should either modify your lifecycle
+	// The Backup Vault Lock configuration that specifies the minimum retention period
+	// that the vault retains its recovery points. This setting can be useful if, for
+	// example, your organization's policies require you to retain certain data for at
+	// least seven years (2555 days). If this parameter is not specified, Vault Lock
+	// will not enforce a minimum retention period. If this parameter is specified, any
+	// backup or copy job to the vault must have a lifecycle policy with a retention
+	// period equal to or longer than the minimum retention period. If the job's
+	// retention period is shorter than that minimum retention period, then the vault
+	// fails that backup or copy job, and you should either modify your lifecycle
 	// settings or use a different vault. The shortest minimum retention period you can
 	// specify is 1 day. Recovery points already saved in the vault prior to Vault Lock
 	// are not affected.

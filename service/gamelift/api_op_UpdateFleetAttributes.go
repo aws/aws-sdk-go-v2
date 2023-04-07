@@ -32,8 +32,8 @@ func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetA
 
 type UpdateFleetAttributesInput struct {
 
-	// A unique identifier for the fleet to update attribute metadata for. You can
-	// use either the fleet ID or ARN value.
+	// A unique identifier for the fleet to update attribute metadata for. You can use
+	// either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
@@ -50,20 +50,22 @@ type UpdateFleetAttributesInput struct {
 	// can only be in one metric group at a time.
 	MetricGroups []string
 
-	// A descriptive label that is associated with a fleet. Fleet names do not need
-	// to be unique.
+	// A descriptive label that is associated with a fleet. Fleet names do not need to
+	// be unique.
 	Name *string
 
 	// The game session protection policy to apply to all new instances created in
 	// this fleet. Instances that already exist are not affected. You can set
 	// protection for individual instances using UpdateGameSession (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)
 	// .
-	//     - NoProtection -- The game session can be terminated during a scale-down event.
-	//     - FullProtection -- If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.
+	//   - NoProtection -- The game session can be terminated during a scale-down
+	//   event.
+	//   - FullProtection -- If the game session is in an ACTIVE status, it cannot be
+	//   terminated during a scale-down event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
-	// Policy settings that limit the number of game sessions an individual player
-	// can create over a span of time.
+	// Policy settings that limit the number of game sessions an individual player can
+	// create over a span of time.
 	ResourceCreationLimitPolicy *types.ResourceCreationLimitPolicy
 
 	noSmithyDocumentSerde

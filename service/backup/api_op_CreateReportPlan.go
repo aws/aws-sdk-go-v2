@@ -48,26 +48,26 @@ type CreateReportPlanInput struct {
 	// This member is required.
 	ReportPlanName *string
 
-	// Identifies the report template for the report. Reports are built using a
-	// report template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
+	// Identifies the report template for the report. Reports are built using a report
+	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
 	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
-	// RESTORE_JOB_REPORT If the report template is RESOURCE_COMPLIANCE_REPORT  or
-	// CONTROL_COMPLIANCE_REPORT, this API resource also describes the report
-	// coverage by Amazon Web Services Regions and frameworks.
+	// RESTORE_JOB_REPORT If the report template is RESOURCE_COMPLIANCE_REPORT or
+	// CONTROL_COMPLIANCE_REPORT , this API resource also describes the report coverage
+	// by Amazon Web Services Regions and frameworks.
 	//
 	// This member is required.
 	ReportSetting *types.ReportSetting
 
 	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to CreateReportPlanInput. Retrying a successful request with
+	// identical calls to CreateReportPlanInput . Retrying a successful request with
 	// the same idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
 	// An optional description of the report plan with a maximum of 1,024 characters.
 	ReportPlanDescription *string
 
-	// Metadata that you can assign to help organize the report plans that you
-	// create. Each tag is a key-value pair.
+	// Metadata that you can assign to help organize the report plans that you create.
+	// Each tag is a key-value pair.
 	ReportPlanTags map[string]string
 
 	noSmithyDocumentSerde

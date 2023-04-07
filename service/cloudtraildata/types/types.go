@@ -46,8 +46,8 @@ type AuditEventResultEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Includes the error code and error message for events that could not be
-// ingested by CloudTrail.
+// Includes the error code and error message for events that could not be ingested
+// by CloudTrail.
 type ResultErrorEntry struct {
 
 	// The error code for events that could not be ingested by CloudTrail. Possible
