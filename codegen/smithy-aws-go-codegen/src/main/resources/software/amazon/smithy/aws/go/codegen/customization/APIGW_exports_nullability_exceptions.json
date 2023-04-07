@@ -1070,6 +1070,8 @@
         "com.amazonaws.mediaconvert#Vp9Settings$MaxBitrate",
         "com.amazonaws.mediaconvert#Vp9Settings$ParDenominator",
         "com.amazonaws.mediaconvert#Vp9Settings$ParNumerator",
+        "com.amazonaws.mediaconvert#WarningGroup$Code",
+        "com.amazonaws.mediaconvert#WarningGroup$Count",
         "com.amazonaws.mediaconvert#WavSettings$BitDepth",
         "com.amazonaws.mediaconvert#WavSettings$Channels",
         "com.amazonaws.mediaconvert#WavSettings$SampleRate",

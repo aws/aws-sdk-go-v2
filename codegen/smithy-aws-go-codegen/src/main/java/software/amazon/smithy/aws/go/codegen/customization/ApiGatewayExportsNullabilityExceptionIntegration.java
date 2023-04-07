@@ -18,6 +18,7 @@ package software.amazon.smithy.aws.go.codegen.customization;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -147,7 +148,12 @@ public class ApiGatewayExportsNullabilityExceptionIntegration implements GoInteg
             Set<NumberShape> numberShapes,
             Set<MemberShape> memberShapes) {
         for (ShapeId shapeId : nullabilityExceptions) {
-            Shape shape = model.expectShape(shapeId);
+            Optional<Shape> shapeOptional = model.getShape(shapeId);
+            if (!shapeOptional.isPresent()) {
+                LOGGER.severe("ShapeId `" + shapeId.toString() + "` is not present in the model");
+                continue;
+            }
+            Shape shape = shapeOptional.get();
             if (shape.hasTrait(DefaultTrait.class)) {
                 continue;
             }
@@ -176,7 +182,12 @@ public class ApiGatewayExportsNullabilityExceptionIntegration implements GoInteg
             Set<NumberShape> numberShapes,
             Set<MemberShape> memberShapes) {
         for (ShapeId shapeId : nullabilityExceptions) {
-            Shape shape = model.expectShape(shapeId);
+            Optional<Shape> shapeOptional = model.getShape(shapeId);
+            if (!shapeOptional.isPresent()) {
+                LOGGER.severe("ShapeId `" + shapeId.toString() + "` is not present in the model");
+                continue;
+            }
+            Shape shape = shapeOptional.get();
             if (shape.hasTrait(DefaultTrait.class)) {
                 continue;
             }
