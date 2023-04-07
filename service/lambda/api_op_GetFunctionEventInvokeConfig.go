@@ -64,10 +64,10 @@ type GetFunctionEventInvokeConfigOutput struct {
 	// * Function - The Amazon Resource Name (ARN) of a Lambda
 	// function.
 	//
-	// * Queue - The ARN of an SQS queue.
+	// * Queue - The ARN of a standard SQS queue.
 	//
-	// * Topic - The ARN of an SNS
-	// topic.
+	// * Topic - The ARN of a
+	// standard SNS topic.
 	//
 	// * Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig

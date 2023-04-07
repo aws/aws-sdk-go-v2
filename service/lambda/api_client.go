@@ -166,6 +166,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 		fn(&options)
 	}
 
+	setSafeEventStreamClientLogMode(&options, opID)
+
 	finalizeRetryMaxAttemptOptions(&options, *c)
 
 	finalizeClientEndpointResolverOptions(&options)

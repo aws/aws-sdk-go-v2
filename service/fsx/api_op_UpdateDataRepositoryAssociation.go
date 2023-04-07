@@ -14,7 +14,7 @@ import (
 
 // Updates the configuration of an existing data repository association on an
 // Amazon FSx for Lustre file system. Data repository associations are supported
-// only for file systems with the Persistent_2 deployment type.
+// for all file systems except for Scratch_1 deployment type.
 func (c *Client) UpdateDataRepositoryAssociation(ctx context.Context, params *UpdateDataRepositoryAssociationInput, optFns ...func(*Options)) (*UpdateDataRepositoryAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateDataRepositoryAssociationInput{}
@@ -37,7 +37,7 @@ type UpdateDataRepositoryAssociationInput struct {
 	// This member is required.
 	AssociationId *string
 
-	// (Optional) An idempotency token for resource creation, in a string of up to 64
+	// (Optional) An idempotency token for resource creation, in a string of up to 63
 	// ASCII characters. This token is automatically filled on your behalf when you use
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string

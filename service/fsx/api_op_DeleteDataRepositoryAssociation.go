@@ -16,8 +16,8 @@ import (
 // Deleting the data repository association unlinks the file system from the Amazon
 // S3 bucket. When deleting a data repository association, you have the option of
 // deleting the data in the file system that corresponds to the data repository
-// association. Data repository associations are supported only for file systems
-// with the Persistent_2 deployment type.
+// association. Data repository associations are supported for all file systems
+// except for Scratch_1 deployment type.
 func (c *Client) DeleteDataRepositoryAssociation(ctx context.Context, params *DeleteDataRepositoryAssociationInput, optFns ...func(*Options)) (*DeleteDataRepositoryAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteDataRepositoryAssociationInput{}
@@ -40,7 +40,7 @@ type DeleteDataRepositoryAssociationInput struct {
 	// This member is required.
 	AssociationId *string
 
-	// (Optional) An idempotency token for resource creation, in a string of up to 64
+	// (Optional) An idempotency token for resource creation, in a string of up to 63
 	// ASCII characters. This token is automatically filled on your behalf when you use
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string

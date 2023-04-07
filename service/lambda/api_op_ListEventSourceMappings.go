@@ -46,6 +46,9 @@ type ListEventSourceMappingsInput struct {
 	//
 	// * Amazon MQ – The
 	// ARN of the broker.
+	//
+	// * Amazon DocumentDB – The ARN of the DocumentDB change
+	// stream.
 	EventSourceArn *string
 
 	// The name of the Lambda function. Name formats

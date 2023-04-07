@@ -162,6 +162,24 @@ func (InvocationType) Values() []InvocationType {
 	}
 }
 
+type InvokeMode string
+
+// Enum values for InvokeMode
+const (
+	InvokeModeBuffered       InvokeMode = "BUFFERED"
+	InvokeModeResponseStream InvokeMode = "RESPONSE_STREAM"
+)
+
+// Values returns all known values for InvokeMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (InvokeMode) Values() []InvokeMode {
+	return []InvokeMode{
+		"BUFFERED",
+		"RESPONSE_STREAM",
+	}
+}
+
 type LastUpdateStatus string
 
 // Enum values for LastUpdateStatus
@@ -292,6 +310,25 @@ func (ProvisionedConcurrencyStatusEnum) Values() []ProvisionedConcurrencyStatusE
 		"IN_PROGRESS",
 		"READY",
 		"FAILED",
+	}
+}
+
+type ResponseStreamingInvocationType string
+
+// Enum values for ResponseStreamingInvocationType
+const (
+	ResponseStreamingInvocationTypeRequestResponse ResponseStreamingInvocationType = "RequestResponse"
+	ResponseStreamingInvocationTypeDryRun          ResponseStreamingInvocationType = "DryRun"
+)
+
+// Values returns all known values for ResponseStreamingInvocationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ResponseStreamingInvocationType) Values() []ResponseStreamingInvocationType {
+	return []ResponseStreamingInvocationType{
+		"RequestResponse",
+		"DryRun",
 	}
 }
 

@@ -918,6 +918,11 @@ func awsRestjson1_serializeOpDocumentCreateFunctionUrlConfigInput(v *CreateFunct
 		}
 	}
 
+	if len(v.InvokeMode) > 0 {
+		ok := object.Key("InvokeMode")
+		ok.String(string(v.InvokeMode))
+	}
+
 	return nil
 }
 
@@ -2645,6 +2650,95 @@ func awsRestjson1_serializeOpHttpBindingsInvokeAsyncInput(v *InvokeAsyncInput, e
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpInvokeWithResponseStream struct {
+}
+
+func (*awsRestjson1_serializeOpInvokeWithResponseStream) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpInvokeWithResponseStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*InvokeWithResponseStreamInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2021-11-15/functions/{FunctionName}/response-streaming-invocations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsInvokeWithResponseStreamInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
+
+	if input.Payload != nil {
+		payload := bytes.NewReader(input.Payload)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsInvokeWithResponseStreamInput(v *InvokeWithResponseStreamInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientContext != nil && len(*v.ClientContext) > 0 {
+		locationName := "X-Amz-Client-Context"
+		encoder.SetHeader(locationName).String(*v.ClientContext)
+	}
+
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
+	}
+	if v.FunctionName != nil {
+		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
+			return err
+		}
+	}
+
+	if len(v.InvocationType) > 0 {
+		locationName := "X-Amz-Invocation-Type"
+		encoder.SetHeader(locationName).String(string(v.InvocationType))
+	}
+
+	if len(v.LogType) > 0 {
+		locationName := "X-Amz-Log-Type"
+		encoder.SetHeader(locationName).String(string(v.LogType))
+	}
+
+	if v.Qualifier != nil {
+		encoder.SetQuery("Qualifier").String(*v.Qualifier)
 	}
 
 	return nil
@@ -5216,6 +5310,11 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionUrlConfigInput(v *UpdateFunct
 		if err := awsRestjson1_serializeDocumentCors(v.Cors, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.InvokeMode) > 0 {
+		ok := object.Key("InvokeMode")
+		ok.String(string(v.InvokeMode))
 	}
 
 	return nil

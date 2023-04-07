@@ -694,8 +694,8 @@ type GlobalCluster struct {
 	GlobalClusterMembers []GlobalClusterMember
 
 	// The Amazon Web Services Region-unique, immutable identifier for the global
-	// database cluster. This identifier is found in AWS CloudTrail log entries
-	// whenever the AWS KMS customer master key (CMK) for the cluster is accessed.
+	// database cluster. This identifier is found in CloudTrail log entries whenever
+	// the KMS customer master key (CMK) for the cluster is accessed.
 	GlobalClusterResourceId *string
 
 	// Specifies the current state of this global cluster.

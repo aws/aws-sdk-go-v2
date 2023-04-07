@@ -1,0 +1,8 @@
+{
+    "id": "920936d3-4a10-47f6-ac48-b8da0e0feed7",
+    "type": "feature",
+    "description": "This release adds a new parameter 'DBClusterParameterGroupName' to 'RestoreDBClusterFromSnapshot' API to associate the name of the DB cluster parameter group while performing restore.",
+    "modules": [
+        "service/docdb"
+    ]
+}

@@ -690,6 +690,26 @@ func (m *validateOpInvoke) HandleInitialize(ctx context.Context, in middleware.I
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeWithResponseStream struct {
+}
+
+func (*validateOpInvokeWithResponseStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeWithResponseStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeWithResponseStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeWithResponseStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAliases struct {
 }
 
@@ -1344,6 +1364,10 @@ func addOpInvokeAsyncValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpInvokeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvoke{}, middleware.After)
+}
+
+func addOpInvokeWithResponseStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeWithResponseStream{}, middleware.After)
 }
 
 func addOpListAliasesValidationMiddleware(stack *middleware.Stack) error {
@@ -2077,6 +2101,21 @@ func validateOpInvokeInput(v *InvokeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeInput"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeWithResponseStreamInput(v *InvokeWithResponseStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeWithResponseStreamInput"}
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}

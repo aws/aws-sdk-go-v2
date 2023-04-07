@@ -2918,6 +2918,17 @@ type DataSetReference struct {
 	noSmithyDocumentSerde
 }
 
+// The refresh properties of a dataset.
+type DataSetRefreshProperties struct {
+
+	// The refresh configuration for a dataset.
+	//
+	// This member is required.
+	RefreshConfiguration *RefreshConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Dataset schema.
 type DataSetSchema struct {
 
@@ -5975,6 +5986,17 @@ type IAMPolicyAssignmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The incremental refresh configuration for a dataset.
+type IncrementalRefresh struct {
+
+	// The lookback window setup for an incremental refresh configuration.
+	//
+	// This member is required.
+	LookbackWindow *LookbackWindow
+
+	noSmithyDocumentSerde
+}
+
 // Information about the SPICE ingestion for a dataset.
 type Ingestion struct {
 
@@ -6810,6 +6832,28 @@ type LongFormatText struct {
 
 	// Rich text. Examples of rich text include bold, underline, and italics.
 	RichText *string
+
+	noSmithyDocumentSerde
+}
+
+// The lookback window setup of an incremental refresh configuration.
+type LookbackWindow struct {
+
+	// The name of the lookback window column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The lookback window column size.
+	//
+	// This member is required.
+	Size int64
+
+	// The size unit that is used for the lookback window column. Valid values for this
+	// structure are HOUR, DAY, and WEEK.
+	//
+	// This member is required.
+	SizeUnit LookbackWindowSizeUnit
 
 	noSmithyDocumentSerde
 }
@@ -8749,6 +8793,99 @@ type ReferenceLineValueLabelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The refresh configuration of a dataset.
+type RefreshConfiguration struct {
+
+	// The incremental refresh for the dataset.
+	//
+	// This member is required.
+	IncrementalRefresh *IncrementalRefresh
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the interval between each scheduled refresh of a dataset.
+type RefreshFrequency struct {
+
+	// The interval between scheduled refreshes. Valid values are as follows:
+	//
+	// *
+	// MINUTE15: The dataset refreshes every 15 minutes. This value is only supported
+	// for incremental refreshes. This interval can only be used for one schedule per
+	// dataset.
+	//
+	// * MINUTE30:The dataset refreshes every 30 minutes. This value is only
+	// supported for incremental refreshes. This interval can only be used for one
+	// schedule per dataset.
+	//
+	// * HOURLY: The dataset refreshes every hour. This interval
+	// can only be used for one schedule per dataset.
+	//
+	// * DAILY: The dataset refreshes
+	// every day.
+	//
+	// * WEEKLY: The dataset refreshes every week.
+	//
+	// * MONTHLY: The dataset
+	// refreshes every month.
+	//
+	// This member is required.
+	Interval RefreshInterval
+
+	// The day of the week that you want to schedule the refresh on. This value is
+	// required for weekly and monthly refresh intervals.
+	RefreshOnDay *ScheduleRefreshOnEntity
+
+	// The time of day that you want the datset to refresh. This value is expressed in
+	// HH:MM format. This field is not required for schedules that refresh hourly.
+	TimeOfTheDay *string
+
+	// The timezone that you want the refresh schedule to use. The timezone ID must
+	// match a corresponding ID found on java.util.time.getAvailableIDs().
+	Timezone *string
+
+	noSmithyDocumentSerde
+}
+
+// The refresh schedule of a dataset.
+type RefreshSchedule struct {
+
+	// The type of refresh that a datset undergoes. Valid values are as follows:
+	//
+	// *
+	// FULL_REFRESH: A complete refresh of a dataset.
+	//
+	// * INCREMENTAL_REFRESH: A partial
+	// refresh of some rows of a dataset, based on the time window specified.
+	//
+	// For more
+	// information on full and incremental refreshes, see Refreshing SPICE data
+	// (https://docs.aws.amazon.com/quicksight/latest/user/refreshing-imported-data.html)
+	// in the Amazon QuickSight User Guide.
+	//
+	// This member is required.
+	RefreshType IngestionType
+
+	// The frequency for the refresh schedule.
+	//
+	// This member is required.
+	ScheduleFrequency *RefreshFrequency
+
+	// An identifier for the refresh schedule.
+	//
+	// This member is required.
+	ScheduleId *string
+
+	// The Amazon Resource Name (ARN) for the refresh schedule.
+	Arn *string
+
+	// Time after which the refresh schedule can be started, expressed in
+	// YYYY-MM-DDTHH:MM:SS format.
+	StartAfterDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The feature configurations of an embedded Amazon QuickSight console.
 type RegisteredUserConsoleFeatureConfigurations struct {
 
@@ -9142,6 +9279,12 @@ type RowLevelPermissionTagConfiguration struct {
 	// disabled, the status is DISABLED.
 	Status Status
 
+	// A list of tag configuration rules to apply to a dataset. All tag configurations
+	// have the OR condition. Tags within each tile will be joined (AND). At least one
+	// rule in this structure must have all tag values assigned to it to apply
+	// Row-level security (RLS) to the dataset.
+	TagRuleConfigurations [][]string
+
 	noSmithyDocumentSerde
 }
 
@@ -9426,6 +9569,18 @@ type ScatterPlotVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	noSmithyDocumentSerde
+}
+
+// The refresh on entity for weekly or monthly schedules.
+type ScheduleRefreshOnEntity struct {
+
+	// The day of the month that you want to schedule refresh on.
+	DayOfMonth *string
+
+	// The day of the week that you want to schedule a refresh on.
+	DayOfWeek DayOfWeek
 
 	noSmithyDocumentSerde
 }

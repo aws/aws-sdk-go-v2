@@ -5183,6 +5183,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		objectKey.String(*v.DBClusterIdentifier)
 	}
 
+	if v.DBClusterParameterGroupName != nil {
+		objectKey := object.Key("DBClusterParameterGroupName")
+		objectKey.String(*v.DBClusterParameterGroupName)
+	}
+
 	if v.DBSubnetGroupName != nil {
 		objectKey := object.Key("DBSubnetGroupName")
 		objectKey.String(*v.DBSubnetGroupName)

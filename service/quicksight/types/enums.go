@@ -875,6 +875,34 @@ func (DateAggregationFunction) Values() []DateAggregationFunction {
 	}
 }
 
+type DayOfWeek string
+
+// Enum values for DayOfWeek
+const (
+	DayOfWeekSunday    DayOfWeek = "SUNDAY"
+	DayOfWeekMonday    DayOfWeek = "MONDAY"
+	DayOfWeekTuesday   DayOfWeek = "TUESDAY"
+	DayOfWeekWednesday DayOfWeek = "WEDNESDAY"
+	DayOfWeekThursday  DayOfWeek = "THURSDAY"
+	DayOfWeekFriday    DayOfWeek = "FRIDAY"
+	DayOfWeekSaturday  DayOfWeek = "SATURDAY"
+)
+
+// Values returns all known values for DayOfWeek. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DayOfWeek) Values() []DayOfWeek {
+	return []DayOfWeek{
+		"SUNDAY",
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+	}
+}
+
 type Edition string
 
 // Enum values for Edition
@@ -1453,6 +1481,7 @@ const (
 	IngestionErrorTypePermissionNotFound              IngestionErrorType = "PERMISSION_NOT_FOUND"
 	IngestionErrorTypeElasticsearchCursorNotEnabled   IngestionErrorType = "ELASTICSEARCH_CURSOR_NOT_ENABLED"
 	IngestionErrorTypeCursorNotEnabled                IngestionErrorType = "CURSOR_NOT_ENABLED"
+	IngestionErrorTypeDuplicateColumnNamesFound       IngestionErrorType = "DUPLICATE_COLUMN_NAMES_FOUND"
 )
 
 // Values returns all known values for IngestionErrorType. Note that this can be
@@ -1504,6 +1533,7 @@ func (IngestionErrorType) Values() []IngestionErrorType {
 		"PERMISSION_NOT_FOUND",
 		"ELASTICSEARCH_CURSOR_NOT_ENABLED",
 		"CURSOR_NOT_ENABLED",
+		"DUPLICATE_COLUMN_NAMES_FOUND",
 	}
 }
 
@@ -1766,6 +1796,26 @@ func (LineInterpolation) Values() []LineInterpolation {
 		"LINEAR",
 		"SMOOTH",
 		"STEPPED",
+	}
+}
+
+type LookbackWindowSizeUnit string
+
+// Enum values for LookbackWindowSizeUnit
+const (
+	LookbackWindowSizeUnitHour LookbackWindowSizeUnit = "HOUR"
+	LookbackWindowSizeUnitDay  LookbackWindowSizeUnit = "DAY"
+	LookbackWindowSizeUnitWeek LookbackWindowSizeUnit = "WEEK"
+)
+
+// Values returns all known values for LookbackWindowSizeUnit. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LookbackWindowSizeUnit) Values() []LookbackWindowSizeUnit {
+	return []LookbackWindowSizeUnit{
+		"HOUR",
+		"DAY",
+		"WEEK",
 	}
 }
 
@@ -2270,6 +2320,32 @@ func (ReferenceLineValueLabelRelativePosition) Values() []ReferenceLineValueLabe
 	return []ReferenceLineValueLabelRelativePosition{
 		"BEFORE_CUSTOM_LABEL",
 		"AFTER_CUSTOM_LABEL",
+	}
+}
+
+type RefreshInterval string
+
+// Enum values for RefreshInterval
+const (
+	RefreshIntervalMinute15 RefreshInterval = "MINUTE15"
+	RefreshIntervalMinute30 RefreshInterval = "MINUTE30"
+	RefreshIntervalHourly   RefreshInterval = "HOURLY"
+	RefreshIntervalDaily    RefreshInterval = "DAILY"
+	RefreshIntervalWeekly   RefreshInterval = "WEEKLY"
+	RefreshIntervalMonthly  RefreshInterval = "MONTHLY"
+)
+
+// Values returns all known values for RefreshInterval. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RefreshInterval) Values() []RefreshInterval {
+	return []RefreshInterval{
+		"MINUTE15",
+		"MINUTE30",
+		"HOURLY",
+		"DAILY",
+		"WEEKLY",
+		"MONTHLY",
 	}
 }
 

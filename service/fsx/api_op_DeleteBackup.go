@@ -39,7 +39,7 @@ type DeleteBackupInput struct {
 	// This member is required.
 	BackupId *string
 
-	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// A string of up to 63 ASCII characters that Amazon FSx uses to ensure idempotent
 	// deletion. This parameter is automatically filled on your behalf when using the
 	// CLI or SDK.
 	ClientRequestToken *string

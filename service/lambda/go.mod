@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.17.7
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.10
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.31
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.25
 	github.com/aws/smithy-go v1.13.5
@@ -11,6 +12,8 @@ require (
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
+
+replace github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream => ../../aws/protocol/eventstream/
 
 replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../internal/configsources/
 

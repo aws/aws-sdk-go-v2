@@ -122,8 +122,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// * copy-on-write - The new DB cluster is restored as a clone
 	// of the source DB cluster.
 	//
-	// If you don't specify a RestoreType value, then the
-	// new DB cluster is restored as a full copy of the source DB cluster.
+	// Constraints: You can't specify copy-on-write if the
+	// engine version of the source DB cluster is earlier than 1.11. If you don't
+	// specify a RestoreType value, then the new DB cluster is restored as a full copy
+	// of the source DB cluster.
 	RestoreType *string
 
 	// The tags to be assigned to the restored cluster.

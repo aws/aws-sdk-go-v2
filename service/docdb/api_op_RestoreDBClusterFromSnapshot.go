@@ -71,6 +71,14 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// restored DB cluster can be created in.
 	AvailabilityZones []string
 
+	// The name of the DB cluster parameter group to associate with this DB cluster.
+	// Type: String. Required: No. If this argument is omitted, the default DB cluster
+	// parameter group is used. If supplied, must match the name of an existing default
+	// DB cluster parameter group. The string must consist of from 1 to 255 letters,
+	// numbers or hyphens. Its first character must be a letter, and it cannot end with
+	// a hyphen or contain two consecutive hyphens.
+	DBClusterParameterGroupName *string
+
 	// The name of the subnet group to use for the new cluster. Constraints: If
 	// provided, must match the name of an existing DBSubnetGroup. Example:
 	// mySubnetgroup

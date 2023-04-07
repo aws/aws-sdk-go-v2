@@ -127,7 +127,7 @@ type CreateFileSystemInput struct {
 	// This member is required.
 	SubnetIds []string
 
-	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// A string of up to 63 ASCII characters that Amazon FSx uses to ensure idempotent
 	// creation. This string is automatically filled on your behalf when you use the
 	// Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
@@ -170,18 +170,17 @@ type CreateFileSystemInput struct {
 	KmsKeyId *string
 
 	// The Lustre configuration for the file system being created. The following
-	// parameters are not supported for file systems with the Persistent_2 deployment
-	// type. Instead, use CreateDataRepositoryAssociation to create a data repository
-	// association to link your Lustre file system to a data repository.
+	// parameters are not supported for file systems with a data repository association
+	// created with .
 	//
-	// *
-	// AutoImportPolicy
+	// * AutoImportPolicy
 	//
 	// * ExportPath
 	//
 	// * ImportedChunkSize
 	//
-	// * ImportPath
+	// *
+	// ImportPath
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration
 
 	// The ONTAP configuration properties of the FSx for ONTAP file system that you are

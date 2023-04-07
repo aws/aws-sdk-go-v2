@@ -290,6 +290,26 @@ func (m *validateOpCreateNamespace) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRefreshSchedule struct {
+}
+
+func (*validateOpCreateRefreshSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRefreshSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRefreshScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRefreshScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTemplateAlias struct {
 }
 
@@ -470,6 +490,26 @@ func (m *validateOpDeleteDataSet) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDataSetRefreshProperties struct {
+}
+
+func (*validateOpDeleteDataSetRefreshProperties) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataSetRefreshProperties) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataSetRefreshPropertiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataSetRefreshPropertiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataSource struct {
 }
 
@@ -605,6 +645,26 @@ func (m *validateOpDeleteNamespace) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRefreshSchedule struct {
+}
+
+func (*validateOpDeleteRefreshSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRefreshSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRefreshScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRefreshScheduleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -950,6 +1010,26 @@ func (m *validateOpDescribeDataSetPermissions) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDataSetRefreshProperties struct {
+}
+
+func (*validateOpDescribeDataSetRefreshProperties) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDataSetRefreshProperties) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDataSetRefreshPropertiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDataSetRefreshPropertiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDataSource struct {
 }
 
@@ -1165,6 +1245,26 @@ func (m *validateOpDescribeNamespace) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRefreshSchedule struct {
+}
+
+func (*validateOpDescribeRefreshSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRefreshSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRefreshScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRefreshScheduleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1670,6 +1770,26 @@ func (m *validateOpListNamespaces) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRefreshSchedules struct {
+}
+
+func (*validateOpListRefreshSchedules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRefreshSchedules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRefreshSchedulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRefreshSchedulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -1845,6 +1965,26 @@ func (m *validateOpListUsers) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListUsersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutDataSetRefreshProperties struct {
+}
+
+func (*validateOpPutDataSetRefreshProperties) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDataSetRefreshProperties) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDataSetRefreshPropertiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDataSetRefreshPropertiesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2390,6 +2530,26 @@ func (m *validateOpUpdatePublicSharingSettings) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRefreshSchedule struct {
+}
+
+func (*validateOpUpdateRefreshSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRefreshSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRefreshScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRefreshScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTemplateAlias struct {
 }
 
@@ -2586,6 +2746,10 @@ func addOpCreateNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateNamespace{}, middleware.After)
 }
 
+func addOpCreateRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRefreshSchedule{}, middleware.After)
+}
+
 func addOpCreateTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTemplateAlias{}, middleware.After)
 }
@@ -2622,6 +2786,10 @@ func addOpDeleteDataSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSet{}, middleware.After)
 }
 
+func addOpDeleteDataSetRefreshPropertiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataSetRefreshProperties{}, middleware.After)
+}
+
 func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSource{}, middleware.After)
 }
@@ -2648,6 +2816,10 @@ func addOpDeleteIAMPolicyAssignmentValidationMiddleware(stack *middleware.Stack)
 
 func addOpDeleteNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNamespace{}, middleware.After)
+}
+
+func addOpDeleteRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRefreshSchedule{}, middleware.After)
 }
 
 func addOpDeleteTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -2718,6 +2890,10 @@ func addOpDescribeDataSetPermissionsValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDescribeDataSetPermissions{}, middleware.After)
 }
 
+func addOpDescribeDataSetRefreshPropertiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDataSetRefreshProperties{}, middleware.After)
+}
+
 func addOpDescribeDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDataSource{}, middleware.After)
 }
@@ -2760,6 +2936,10 @@ func addOpDescribeIpRestrictionValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNamespace{}, middleware.After)
+}
+
+func addOpDescribeRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRefreshSchedule{}, middleware.After)
 }
 
 func addOpDescribeTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -2862,6 +3042,10 @@ func addOpListNamespacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNamespaces{}, middleware.After)
 }
 
+func addOpListRefreshSchedulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRefreshSchedules{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -2896,6 +3080,10 @@ func addOpListUserGroupsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUsers{}, middleware.After)
+}
+
+func addOpPutDataSetRefreshPropertiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDataSetRefreshProperties{}, middleware.After)
 }
 
 func addOpRegisterUserValidationMiddleware(stack *middleware.Stack) error {
@@ -3004,6 +3192,10 @@ func addOpUpdateIpRestrictionValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdatePublicSharingSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePublicSharingSettings{}, middleware.After)
+}
+
+func addOpUpdateRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRefreshSchedule{}, middleware.After)
 }
 
 func addOpUpdateTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -5346,6 +5538,25 @@ func validateDataSetReferenceList(v []types.DataSetReference) error {
 	for i := range v {
 		if err := validateDataSetReference(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetRefreshProperties(v *types.DataSetRefreshProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetRefreshProperties"}
+	if v.RefreshConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RefreshConfiguration"))
+	} else if v.RefreshConfiguration != nil {
+		if err := validateRefreshConfiguration(v.RefreshConfiguration); err != nil {
+			invalidParams.AddNested("RefreshConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8207,6 +8418,25 @@ func validateHistogramVisual(v *types.HistogramVisual) error {
 	}
 }
 
+func validateIncrementalRefresh(v *types.IncrementalRefresh) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IncrementalRefresh"}
+	if v.LookbackWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LookbackWindow"))
+	} else if v.LookbackWindow != nil {
+		if err := validateLookbackWindow(v.LookbackWindow); err != nil {
+			invalidParams.AddNested("LookbackWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInputColumn(v *types.InputColumn) error {
 	if v == nil {
 		return nil
@@ -8924,6 +9154,24 @@ func validateLogicalTableSource(v *types.LogicalTableSource) error {
 		if err := validateJoinInstruction(v.JoinInstruction); err != nil {
 			invalidParams.AddNested("JoinInstruction", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLookbackWindow(v *types.LookbackWindow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LookbackWindow"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if len(v.SizeUnit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SizeUnit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10774,6 +11022,65 @@ func validateReferenceLineValueLabelConfiguration(v *types.ReferenceLineValueLab
 		if err := validateNumericFormatConfiguration(v.FormatConfiguration); err != nil {
 			invalidParams.AddNested("FormatConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRefreshConfiguration(v *types.RefreshConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RefreshConfiguration"}
+	if v.IncrementalRefresh == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncrementalRefresh"))
+	} else if v.IncrementalRefresh != nil {
+		if err := validateIncrementalRefresh(v.IncrementalRefresh); err != nil {
+			invalidParams.AddNested("IncrementalRefresh", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRefreshFrequency(v *types.RefreshFrequency) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RefreshFrequency"}
+	if len(v.Interval) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRefreshSchedule(v *types.RefreshSchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RefreshSchedule"}
+	if v.ScheduleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleId"))
+	}
+	if v.ScheduleFrequency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleFrequency"))
+	} else if v.ScheduleFrequency != nil {
+		if err := validateRefreshFrequency(v.ScheduleFrequency); err != nil {
+			invalidParams.AddNested("ScheduleFrequency", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.RefreshType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RefreshType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14308,6 +14615,31 @@ func validateOpCreateNamespaceInput(v *CreateNamespaceInput) error {
 	}
 }
 
+func validateOpCreateRefreshScheduleInput(v *CreateRefreshScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRefreshScheduleInput"}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Schedule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schedule"))
+	} else if v.Schedule != nil {
+		if err := validateRefreshSchedule(v.Schedule); err != nil {
+			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTemplateAliasInput(v *CreateTemplateAliasInput) error {
 	if v == nil {
 		return nil
@@ -14515,6 +14847,24 @@ func validateOpDeleteDataSetInput(v *DeleteDataSetInput) error {
 	}
 }
 
+func validateOpDeleteDataSetRefreshPropertiesInput(v *DeleteDataSetRefreshPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataSetRefreshPropertiesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -14651,6 +15001,27 @@ func validateOpDeleteNamespaceInput(v *DeleteNamespaceInput) error {
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRefreshScheduleInput(v *DeleteRefreshScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRefreshScheduleInput"}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.ScheduleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14968,6 +15339,24 @@ func validateOpDescribeDataSetPermissionsInput(v *DescribeDataSetPermissionsInpu
 	}
 }
 
+func validateOpDescribeDataSetRefreshPropertiesInput(v *DescribeDataSetRefreshPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDataSetRefreshPropertiesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDataSourceInput(v *DescribeDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -15170,6 +15559,27 @@ func validateOpDescribeNamespaceInput(v *DescribeNamespaceInput) error {
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRefreshScheduleInput(v *DescribeRefreshScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRefreshScheduleInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.ScheduleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15647,6 +16057,24 @@ func validateOpListNamespacesInput(v *ListNamespacesInput) error {
 	}
 }
 
+func validateOpListRefreshSchedulesInput(v *ListRefreshSchedulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRefreshSchedulesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -15795,6 +16223,31 @@ func validateOpListUsersInput(v *ListUsersInput) error {
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutDataSetRefreshPropertiesInput(v *PutDataSetRefreshPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDataSetRefreshPropertiesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.DataSetRefreshProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetRefreshProperties"))
+	} else if v.DataSetRefreshProperties != nil {
+		if err := validateDataSetRefreshProperties(v.DataSetRefreshProperties); err != nil {
+			invalidParams.AddNested("DataSetRefreshProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -16466,6 +16919,31 @@ func validateOpUpdatePublicSharingSettingsInput(v *UpdatePublicSharingSettingsIn
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePublicSharingSettingsInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRefreshScheduleInput(v *UpdateRefreshScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRefreshScheduleInput"}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Schedule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schedule"))
+	} else if v.Schedule != nil {
+		if err := validateRefreshSchedule(v.Schedule); err != nil {
+			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

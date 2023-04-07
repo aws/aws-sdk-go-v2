@@ -200,9 +200,9 @@ type Alias struct {
 // AutoExportPolicy defines the types of updated objects on the file system that
 // will be automatically exported to the data repository. As you create, modify, or
 // delete files, Amazon FSx for Lustre automatically exports the defined changes
-// asynchronously once your application finishes modifying the file. This
-// AutoExportPolicy is supported only for Amazon FSx for Lustre file systems with
-// the Persistent_2 deployment type.
+// asynchronously once your application finishes modifying the file. The
+// AutoExportPolicy is only supported on Amazon FSx for Lustre file systems with a
+// data repository association.
 type AutoExportPolicy struct {
 
 	// The AutoExportPolicy can have the following event values:
@@ -228,9 +228,9 @@ type AutoExportPolicy struct {
 // Describes the data repository association's automatic import policy. The
 // AutoImportPolicy defines how Amazon FSx keeps your file metadata and directory
 // listings up to date by importing changes to your Amazon FSx for Lustre file
-// system as you modify objects in a linked S3 bucket. The AutoImportPolicy is
-// supported only for Amazon FSx for Lustre file systems with the Persistent_2
-// deployment type.
+// system as you modify objects in a linked S3 bucket. The AutoImportPolicy is only
+// supported on Amazon FSx for Lustre file systems with a data repository
+// association.
 type AutoImportPolicy struct {
 
 	// The AutoImportPolicy can have the following event values:
@@ -381,7 +381,7 @@ type CompletionReport struct {
 	// provide must be located within the file system’s ExportPath. An example Path
 	// value is "s3://myBucket/myExportPath/optionalPrefix". The report provides the
 	// following information for each file in the report: FilePath, FileStatus, and
-	// ErrorCode. To learn more about a file system's ExportPath, see .
+	// ErrorCode.
 	Path *string
 
 	// Required if Enabled is set to true. Specifies the scope of the CompletionReport;
@@ -424,52 +424,49 @@ type CreateFileCacheLustreConfiguration struct {
 }
 
 // The Lustre configuration for the file system being created. The following
-// parameters are not supported for file systems with the Persistent_2 deployment
-// type. Instead, use CreateDataRepositoryAssociation to create a data repository
-// association to link your Lustre file system to a data repository.
+// parameters are not supported for file systems with a data repository association
+// created with .
 //
-// *
-// AutoImportPolicy
+// * AutoImportPolicy
 //
 // * ExportPath
 //
 // * ImportedChunkSize
 //
-// * ImportPath
+// *
+// ImportPath
 type CreateFileSystemLustreConfiguration struct {
 
-	// (Optional) Available with Scratch and Persistent_1 deployment types. When you
-	// create your file system, your existing S3 objects appear as file and directory
-	// listings. Use this property to choose how Amazon FSx keeps your file and
-	// directory listings up to date as you add or modify objects in your linked S3
-	// bucket. AutoImportPolicy can have the following values:
+	// (Optional) When you create your file system, your existing S3 objects appear as
+	// file and directory listings. Use this parameter to choose how Amazon FSx keeps
+	// your file and directory listings up to date as you add or modify objects in your
+	// linked S3 bucket. AutoImportPolicy can have the following values:
 	//
-	// * NONE - (Default)
-	// AutoImport is off. Amazon FSx only updates file and directory listings from the
-	// linked S3 bucket when the file system is created. FSx does not update file and
-	// directory listings for any new or changed objects after choosing this option.
-	//
-	// *
-	// NEW - AutoImport is on. Amazon FSx automatically imports directory listings of
-	// any new objects added to the linked S3 bucket that do not currently exist in the
-	// FSx file system.
-	//
-	// * NEW_CHANGED - AutoImport is on. Amazon FSx automatically
-	// imports file and directory listings of any new objects added to the S3 bucket
-	// and any existing objects that are changed in the S3 bucket after you choose this
+	// * NONE -
+	// (Default) AutoImport is off. Amazon FSx only updates file and directory listings
+	// from the linked S3 bucket when the file system is created. FSx does not update
+	// file and directory listings for any new or changed objects after choosing this
 	// option.
 	//
-	// * NEW_CHANGED_DELETED - AutoImport is on. Amazon FSx automatically
-	// imports file and directory listings of any new objects added to the S3 bucket,
-	// any existing objects that are changed in the S3 bucket, and any objects that
-	// were deleted in the S3 bucket.
+	// * NEW - AutoImport is on. Amazon FSx automatically imports directory
+	// listings of any new objects added to the linked S3 bucket that do not currently
+	// exist in the FSx file system.
 	//
-	// For more information, see  Automatically import
-	// updates from your S3 bucket
+	// * NEW_CHANGED - AutoImport is on. Amazon FSx
+	// automatically imports file and directory listings of any new objects added to
+	// the S3 bucket and any existing objects that are changed in the S3 bucket after
+	// you choose this option.
+	//
+	// * NEW_CHANGED_DELETED - AutoImport is on. Amazon FSx
+	// automatically imports file and directory listings of any new objects added to
+	// the S3 bucket, any existing objects that are changed in the S3 bucket, and any
+	// objects that were deleted in the S3 bucket.
+	//
+	// For more information, see
+	// Automatically import updates from your S3 bucket
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/older-deployment-types.html#legacy-auto-import-from-s3).
-	// This parameter is not supported for file systems with the Persistent_2
-	// deployment type. Instead, use CreateDataRepositoryAssociation to create a data
-	// repository association to link your Lustre file system to a data repository.
+	// This parameter is not supported for file systems with a data repository
+	// association.
 	AutoImportPolicy AutoImportPolicyType
 
 	// The number of days to retain automatic backups. Setting this property to 0
@@ -528,11 +525,9 @@ type CreateFileSystemLustreConfiguration struct {
 	// FileSystemTypeVersion to 2.10, the CreateFileSystem operation fails. Encryption
 	// of data in transit is automatically turned on when you access SCRATCH_2,
 	// PERSISTENT_1 and PERSISTENT_2 file systems from Amazon EC2 instances that
-	// support automatic encryption
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-
-	// protection.html) in the Amazon Web Services Regions where they are available.
-	// For more information about encryption in transit for FSx for Lustre file
-	// systems, see Encrypting data in transit
+	// support automatic encryption in the Amazon Web Services Regions where they are
+	// available. For more information about encryption in transit for FSx for Lustre
+	// file systems, see Encrypting data in transit
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html)
 	// in the Amazon FSx for Lustre User Guide. (Default = SCRATCH_1)
 	DeploymentType LustreDeploymentType
@@ -544,12 +539,11 @@ type CreateFileSystemLustreConfiguration struct {
 	// This parameter is required when StorageType is set to HDD.
 	DriveCacheType DriveCacheType
 
-	// (Optional) Available with Scratch and Persistent_1 deployment types. Specifies
-	// the path in the Amazon S3 bucket where the root of your Amazon FSx file system
-	// is exported. The path must use the same Amazon S3 bucket as specified in
-	// ImportPath. You can provide an optional prefix to which new and changed data is
-	// to be exported from your Amazon FSx for Lustre file system. If an ExportPath
-	// value is not provided, Amazon FSx sets a default export path,
+	// (Optional) Specifies the path in the Amazon S3 bucket where the root of your
+	// Amazon FSx file system is exported. The path must use the same Amazon S3 bucket
+	// as specified in ImportPath. You can provide an optional prefix to which new and
+	// changed data is to be exported from your Amazon FSx for Lustre file system. If
+	// an ExportPath value is not provided, Amazon FSx sets a default export path,
 	// s3://import-bucket/FSxLustre[creation-timestamp]. The timestamp is in UTC
 	// format, for example s3://import-bucket/FSxLustre20181105T222312Z. The Amazon S3
 	// export bucket must be the same as the import bucket specified by ImportPath. If
@@ -558,9 +552,8 @@ type CreateFileSystemLustreConfiguration struct {
 	// input data in S3 is overwritten on export. If you provide a custom prefix in the
 	// export path, such as s3://import-bucket/[custom-optional-prefix], Amazon FSx
 	// exports the contents of your file system to that export prefix in the Amazon S3
-	// bucket. This parameter is not supported for file systems with the Persistent_2
-	// deployment type. Instead, use CreateDataRepositoryAssociation to create a data
-	// repository association to link your Lustre file system to a data repository.
+	// bucket. This parameter is not supported for file systems with a data repository
+	// association.
 	ExportPath *string
 
 	// (Optional) The path to the Amazon S3 bucket (including the optional prefix) that
@@ -569,9 +562,7 @@ type CreateFileSystemLustreConfiguration struct {
 	// Amazon S3 bucket you select. An example is s3://import-bucket/optional-prefix.
 	// If you specify a prefix after the Amazon S3 bucket name, only object keys with
 	// that prefix are loaded into the file system. This parameter is not supported for
-	// file systems with the Persistent_2 deployment type. Instead, use
-	// CreateDataRepositoryAssociation to create a data repository association to link
-	// your Lustre file system to a data repository.
+	// file systems with a data repository association.
 	ImportPath *string
 
 	// (Optional) For files imported from a data repository, this value determines the
@@ -580,9 +571,7 @@ type CreateFileSystemLustreConfiguration struct {
 	// across is limited by the total number of disks that make up the file system. The
 	// default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500
 	// GiB). Amazon S3 objects have a maximum size of 5 TB. This parameter is not
-	// supported for file systems with the Persistent_2 deployment type. Instead, use
-	// CreateDataRepositoryAssociation to create a data repository association to link
-	// your Lustre file system to a data repository.
+	// supported for file systems with a data repository association.
 	ImportedFileChunkSize *int32
 
 	// The Lustre logging configuration used when creating an Amazon FSx for Lustre
@@ -666,7 +655,7 @@ type CreateFileSystemOntapConfiguration struct {
 	// in the Amazon FSx console, Amazon FSx chooses the last 64 IP addresses from the
 	// VPC’s primary CIDR range to use as the endpoint IP address range for the file
 	// system. You can have overlapping endpoint IP addresses for file systems deployed
-	// in the same VPC/route tables.
+	// in the same VPC/route tables, as long as they don't overlap with any subnet.
 	EndpointIpAddressRange *string
 
 	// The ONTAP administrative password for the fsxadmin user with which you
@@ -905,6 +894,8 @@ type CreateFileSystemWindowsConfiguration struct {
 type CreateOntapVolumeConfiguration struct {
 
 	// Specifies the size of the volume, in megabytes (MB), that you are creating.
+	// Provide any whole number in the range of 20–104857600 to specify the size of the
+	// volume.
 	//
 	// This member is required.
 	SizeInMegabytes *int32
@@ -923,8 +914,9 @@ type CreateOntapVolumeConfiguration struct {
 	// regardless of this value.
 	CopyTagsToBackups *bool
 
-	// Specifies the location in the SVM's namespace where the volume is mounted. The
-	// JunctionPath must have a leading forward slash, such as /vol3.
+	// Specifies the location in the SVM's namespace where the volume is mounted. This
+	// parameter is required. The JunctionPath must have a leading forward slash, such
+	// as /vol3.
 	JunctionPath *string
 
 	// Specifies the type of volume you are creating. Valid values are the
@@ -986,7 +978,8 @@ type CreateOntapVolumeConfiguration struct {
 	SnapshotPolicy *string
 
 	// Set to true to enable deduplication, compression, and compaction storage
-	// efficiency features on the volume.
+	// efficiency features on the volume, or set to false to disable them. This
+	// parameter is required.
 	StorageEfficiencyEnabled *bool
 
 	// Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx
@@ -1169,8 +1162,8 @@ type CreateSvmActiveDirectoryConfiguration struct {
 // DescribeDataRepositoryAssociations
 //
 // Data repository associations are supported
-// only for an Amazon FSx for Lustre file system with the Persistent_2 deployment
-// type and for an Amazon File Cache resource.
+// on Amazon File Cache resources and all Amazon FSx for Lustre file systems
+// excluding Scratch_1 deployment types.
 type DataRepositoryAssociation struct {
 
 	// The system-generated, unique ID of the data repository association.
@@ -1314,8 +1307,9 @@ type DataRepositoryAssociation struct {
 }
 
 // The data repository configuration object for Lustre file systems returned in the
-// response of the CreateFileSystem operation. This data type is not supported for
-// file systems with the Persistent_2 deployment type. Instead, use .
+// response of the CreateFileSystem operation. This data type is not supported on
+// file systems with a data repository association. For file systems with a data
+// repository association, see .
 type DataRepositoryConfiguration struct {
 
 	// Describes the file system's linked S3 data repository's AutoImportPolicy. The
@@ -1461,6 +1455,9 @@ type DataRepositoryTask struct {
 	//
 	// * AUTO_RELEASE_DATA tasks
 	// automatically release files from an Amazon File Cache resource.
+	//
+	// *
+	// RELEASE_DATA_FROM_FILESYSTEM tasks are not supported.
 	//
 	// This member is required.
 	Type DataRepositoryTaskType
@@ -2138,8 +2135,8 @@ type FileSystem struct {
 	OpenZFSConfiguration *OpenZFSFileSystemConfiguration
 
 	// The Amazon Web Services account that created the file system. If the file system
-	// was created by an Identity and Access Management (IAM) user, the Amazon Web
-	// Services account to which the IAM user belongs is the owner.
+	// was created by a user in IAM Identity Center, the Amazon Web Services account to
+	// which the IAM user belongs is the owner.
 	OwnerId *string
 
 	// The Amazon Resource Name (ARN) of the file system resource.
@@ -2278,8 +2275,9 @@ type LustreFileSystemConfiguration struct {
 	DataCompressionType DataCompressionType
 
 	// The data repository configuration object for Lustre file systems returned in the
-	// response of the CreateFileSystem operation. This data type is not supported for
-	// file systems with the Persistent_2 deployment type. Instead, use .
+	// response of the CreateFileSystem operation. This data type is not supported on
+	// file systems with a data repository association. For file systems with a data
+	// repository association, see .
 	DataRepositoryConfiguration *DataRepositoryConfiguration
 
 	// The deployment type of the FSx for Lustre file system. Scratch deployment type
@@ -2522,11 +2520,13 @@ type OntapFileSystemConfiguration struct {
 	// provisioned IOPS and the provision mode.
 	DiskIopsConfiguration *DiskIopsConfiguration
 
-	// (Multi-AZ only) The IP address range in which the endpoints to access your file
-	// system are created. The Endpoint IP address range you select for your file
-	// system must exist outside the VPC's CIDR range and must be at least /30 or
-	// larger. If you do not specify this optional parameter, Amazon FSx will
-	// automatically select a CIDR block for you.
+	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
+	// your file system will be created. By default in the Amazon FSx API, Amazon FSx
+	// selects an unused IP address range for you from the 198.19.* range. By default
+	// in the Amazon FSx console, Amazon FSx chooses the last 64 IP addresses from the
+	// VPC’s primary CIDR range to use as the endpoint IP address range for the file
+	// system. You can have overlapping endpoint IP addresses for file systems deployed
+	// in the same VPC/route tables.
 	EndpointIpAddressRange *string
 
 	// The Management and Intercluster endpoints that are used to access data or to
@@ -3381,10 +3381,8 @@ type UpdateFileSystemLustreConfiguration struct {
 	// added to the S3 bucket, any existing objects that are changed in the S3 bucket,
 	// and any objects that were deleted in the S3 bucket.
 	//
-	// The AutoImportPolicy
-	// parameter is not supported for Lustre file systems with the Persistent_2
-	// deployment type. Instead, use to update a data repository association on your
-	// Persistent_2 file system.
+	// This parameter is not
+	// supported for file systems with a data repository association.
 	AutoImportPolicy AutoImportPolicyType
 
 	// The number of days to retain automatic backups. Setting this property to 0
