@@ -83,6 +83,20 @@ type GetFunctionUrlConfigOutput struct {
 	// settings for your function URL.
 	Cors *types.Cors
 
+	// Use one of the following options:
+	//
+	// * BUFFERED – This is the default option.
+	// Lambda invokes your function using the Invoke API operation. Invocation results
+	// are available when the payload is complete. The maximum payload size is 6 MB.
+	//
+	// *
+	// RESPONSE_STREAM – Your function streams payload results as they become
+	// available. Lambda invokes your function using the InvokeWithResponseStream API
+	// operation. The maximum response payload size is 20 MB, however, you can request
+	// a quota increase
+	// (https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html).
+	InvokeMode types.InvokeMode
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

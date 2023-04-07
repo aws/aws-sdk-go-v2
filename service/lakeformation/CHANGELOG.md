@@ -1,3 +1,11 @@
+# v1.21.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.0 (2023-04-03)
+
+* **Feature**: Add support for database-level federation
+
 # v1.20.4 (2023-03-30)
 
 * No change notes available for this release.

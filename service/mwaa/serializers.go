@@ -233,6 +233,16 @@ func awsRestjson1_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironment
 		ok.String(*v.SourceBucketArn)
 	}
 
+	if v.StartupScriptS3ObjectVersion != nil {
+		ok := object.Key("StartupScriptS3ObjectVersion")
+		ok.String(*v.StartupScriptS3ObjectVersion)
+	}
+
+	if v.StartupScriptS3Path != nil {
+		ok := object.Key("StartupScriptS3Path")
+		ok.String(*v.StartupScriptS3Path)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -924,6 +934,16 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 	if v.SourceBucketArn != nil {
 		ok := object.Key("SourceBucketArn")
 		ok.String(*v.SourceBucketArn)
+	}
+
+	if v.StartupScriptS3ObjectVersion != nil {
+		ok := object.Key("StartupScriptS3ObjectVersion")
+		ok.String(*v.StartupScriptS3ObjectVersion)
+	}
+
+	if v.StartupScriptS3Path != nil {
+		ok := object.Key("StartupScriptS3Path")
+		ok.String(*v.StartupScriptS3Path)
 	}
 
 	if len(v.WebserverAccessMode) > 0 {

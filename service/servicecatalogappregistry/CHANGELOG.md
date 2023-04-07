@@ -1,3 +1,7 @@
+# v1.17.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2023-03-27)
 
 * **Feature**: In this release, we started supporting ARN in applicationSpecifier and attributeGroupSpecifier. GetAttributeGroup, ListAttributeGroups and ListAttributeGroupsForApplication APIs will now have CreatedBy field in the response.

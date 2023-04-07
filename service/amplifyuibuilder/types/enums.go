@@ -76,6 +76,26 @@ func (FormDataSourceType) Values() []FormDataSourceType {
 	}
 }
 
+type LabelDecorator string
+
+// Enum values for LabelDecorator
+const (
+	LabelDecoratorRequired LabelDecorator = "required"
+	LabelDecoratorOptional LabelDecorator = "optional"
+	LabelDecoratorNone     LabelDecorator = "none"
+)
+
+// Values returns all known values for LabelDecorator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LabelDecorator) Values() []LabelDecorator {
+	return []LabelDecorator{
+		"required",
+		"optional",
+		"none",
+	}
+}
+
 type SortDirection string
 
 // Values returns all known values for SortDirection. Note that this can be
@@ -85,6 +105,26 @@ func (SortDirection) Values() []SortDirection {
 	return []SortDirection{
 		"ASC",
 		"DESC",
+	}
+}
+
+type StorageAccessLevel string
+
+// Enum values for StorageAccessLevel
+const (
+	StorageAccessLevelPublic    StorageAccessLevel = "public"
+	StorageAccessLevelProtected StorageAccessLevel = "protected"
+	StorageAccessLevelPrivate   StorageAccessLevel = "private"
+)
+
+// Values returns all known values for StorageAccessLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StorageAccessLevel) Values() []StorageAccessLevel {
+	return []StorageAccessLevel{
+		"public",
+		"protected",
+		"private",
 	}
 }
 

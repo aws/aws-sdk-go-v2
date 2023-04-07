@@ -361,6 +361,24 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "us-gov-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "appstream2-fips.us-gov-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "appstream2-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

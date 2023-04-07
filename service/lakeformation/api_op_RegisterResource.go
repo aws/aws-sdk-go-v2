@@ -55,6 +55,9 @@ type RegisterResourceInput struct {
 	// .
 	UseServiceLinkedRole *bool
 
+	// Whether or not the resource is a federated resource.
+	WithFederation *bool
+
 	noSmithyDocumentSerde
 }
 

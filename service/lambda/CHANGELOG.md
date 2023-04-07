@@ -1,3 +1,8 @@
+# v1.31.0 (2023-04-07)
+
+* **Feature**: This release adds a new Lambda InvokeWithResponseStream API to support streaming Lambda function responses. The release also adds a new InvokeMode parameter to Function Url APIs to control whether the response will be streamed or buffered.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.2 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.50.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2023-03-27)
 
 * **Feature**: This release introduces support for RelatedContactId in the StartChatContact API. Interactive message and interactive message response have been added to the list of supported message content types for this API as well.

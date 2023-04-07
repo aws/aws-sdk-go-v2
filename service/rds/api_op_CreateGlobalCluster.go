@@ -52,7 +52,8 @@ type CreateGlobalClusterInput struct {
 	// The engine version of the Aurora global database.
 	EngineVersion *string
 
-	// The cluster identifier of the new global database cluster.
+	// The cluster identifier of the new global database cluster. This parameter is
+	// stored as a lowercase string.
 	GlobalClusterIdentifier *string
 
 	// The Amazon Resource Name (ARN) to use as the primary cluster of the global

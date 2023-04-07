@@ -136,6 +136,9 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "af-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -164,6 +167,9 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region: "eu-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "eu-central-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-north-1",
@@ -225,6 +231,9 @@ var defaultPartitions = endpoints.Partitions{
 				},
 				Deprecated: aws.TrueTernary,
 			},
+			endpoints.EndpointKey{
+				Region: "me-south-1",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},

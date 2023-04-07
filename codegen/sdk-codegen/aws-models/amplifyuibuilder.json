@@ -7,7 +7,7 @@
                 "type": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of navigation action. Valid values are <code>url</code> and <code>anchor</code>. This value is required for a navigation action.</p>"
+                        "smithy.api#documentation": "<p>The type of navigation action. Valid values are <code>url</code> and <code>anchor</code>.\n      This value is required for a navigation action.</p>"
                     }
                 },
                 "url": {
@@ -19,7 +19,7 @@
                 "anchor": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTML anchor link to the location to open. Specify this value for a navigation action.</p>"
+                        "smithy.api#documentation": "<p>The HTML anchor link to the location to open. Specify this value for a navigation\n      action.</p>"
                     }
                 },
                 "target": {
@@ -31,13 +31,13 @@
                 "global": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the user should be signed out globally. Specify this value for an auth sign out action.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the user should be signed out globally. Specify this value for an auth\n      sign out action.</p>"
                     }
                 },
                 "model": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the data model. Use when the action performs an operation on an Amplify DataStore\n      model.</p>"
+                        "smithy.api#documentation": "<p>The name of the data model. Use when the action performs an operation on an Amplify DataStore model.</p>"
                     }
                 },
                 "id": {
@@ -49,7 +49,7 @@
                 "fields": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>A dictionary of key-value pairs mapping Amplify Studio properties to fields in a data model. Use when the action\n      performs an operation on an Amplify DataStore model.</p>"
+                        "smithy.api#documentation": "<p>A dictionary of key-value pairs mapping Amplify Studio properties to fields\n      in a data model. Use when the action performs an operation on an Amplify\n      DataStore model.</p>"
                     }
                 },
                 "state": {
@@ -60,7 +60,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the event action configuration for an element of a <code>Component</code>\n      or <code>ComponentChild</code>. Use for the workflow feature in Amplify Studio\n      that allows you to bind events and actions to components. <code>ActionParameters</code>\n      defines the action that is performed when an event occurs on the component.</p>"
+                "smithy.api#documentation": "<p>Represents the event action configuration for an element of a <code>Component</code> or\n        <code>ComponentChild</code>. Use for the workflow feature in Amplify Studio\n      that allows you to bind events and actions to components. <code>ActionParameters</code>\n      defines the action that is performed when an event occurs on the component.</p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#AmplifyUIBuilder": {
@@ -845,6 +845,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -855,6 +866,17 @@
                                 "Region": "us-iso-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -871,6 +893,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -881,6 +914,17 @@
                                 "Region": "us-isob-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -945,6 +989,12 @@
                                 "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1063,7 +1113,7 @@
                 "events": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the events that can be raised on the component. Use for the workflow feature in Amplify Studio that allows you to\n      bind events and actions to components.</p>"
+                        "smithy.api#documentation": "<p>Describes the events that can be raised on the component. Use for the workflow feature in\n        Amplify Studio that allows you to bind events and actions to\n      components.</p>"
                     }
                 },
                 "schemaVersion": {
@@ -1206,7 +1256,7 @@
                 "events": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the events that can be raised on the child component. Use for the workflow feature in Amplify Studio that allows you to\n      bind events and actions to components.</p>"
+                        "smithy.api#documentation": "<p>Describes the events that can be raised on the child component. Use for the workflow\n      feature in Amplify Studio that allows you to bind events and actions to\n      components.</p>"
                     }
                 },
                 "sourceId": {
@@ -1341,7 +1391,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration of an event. You can bind an event and a corresponding\n      action to a <code>Component</code> or a <code>ComponentChild</code>. A button click\n      is an example of an event. </p>"
+                "smithy.api#documentation": "<p>Describes the configuration of an event. You can bind an event and a corresponding action\n      to a <code>Component</code> or a <code>ComponentChild</code>. A button click is an example of\n      an event. </p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#ComponentEvents": {
@@ -1937,6 +1987,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the form data.</p>"
                     }
+                },
+                "labelDecorator": {
+                    "target": "com.amazonaws.amplifyuibuilder#LabelDecorator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an icon or decoration to display on the form.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2355,6 +2411,12 @@
                         "smithy.api#documentation": "<p>The location of the application that will receive the access code.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "clientId": {
+                    "target": "com.amazonaws.amplifyuibuilder#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the client to request the token from.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2753,7 +2815,13 @@
                 "isArray": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to render the field as an array. This property is ignored if the <code>dataSourceType</code> for the form is a Data Store.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to render the field as an array. This property is ignored if the\n        <code>dataSourceType</code> for the form is a Data Store.</p>"
+                    }
+                },
+                "fileUploaderConfig": {
+                    "target": "com.amazonaws.amplifyuibuilder#FileUploaderFieldConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the file uploader field.</p>"
                     }
                 }
             },
@@ -2827,6 +2895,52 @@
             },
             "value": {
                 "target": "com.amazonaws.amplifyuibuilder#FieldConfig"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FileUploaderFieldConfig": {
+            "type": "structure",
+            "members": {
+                "accessLevel": {
+                    "target": "com.amazonaws.amplifyuibuilder#StorageAccessLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access level to assign to the uploaded files in the Amazon S3 bucket where\n      they are stored. The valid values for this property are <code>private</code>,\n        <code>protected</code>, or <code>public</code>. For detailed information about the\n      permissions associated with each access level, see <a href=\"https://docs.amplify.aws/lib/storage/configureaccess/q/platform/js/\">File access\n        levels</a> in the <i>Amplify documentation</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "acceptedFileTypes": {
+                    "target": "com.amazonaws.amplifyuibuilder#StrValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file types that are allowed to be uploaded by the file uploader. Provide this\n      information in an array of strings specifying the valid file extensions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "showThumbnails": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to display or hide the image preview after selecting a file for upload.\n      The default value is <code>true</code> to display the image preview.</p>"
+                    }
+                },
+                "isResumable": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows the file upload operation to be paused and resumed. The default value is\n        <code>false</code>.</p>\n         <p>When <code>isResumable</code> is set to <code>true</code>, the file uploader uses a\n      multipart upload to break the files into chunks before upload. The progress of the upload\n      isn't continuous, because the file uploader uploads a chunk at a time.</p>"
+                    }
+                },
+                "maxFileCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of files that can be selected to upload. The default value is\n      an unlimited number of files.</p>"
+                    }
+                },
+                "maxSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum file size in bytes that the file uploader will accept. The default value is an\n      unlimited file size.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for the file uploader field.</p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#FixedPosition": {
@@ -2924,6 +3038,12 @@
                     "target": "com.amazonaws.amplifyuibuilder#FormCTA",
                     "traits": {
                         "smithy.api#documentation": "<p>Stores the call to action configuration for the form.</p>"
+                    }
+                },
+                "labelDecorator": {
+                    "target": "com.amazonaws.amplifyuibuilder#LabelDecorator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an icon or decoration to display on the form.</p>"
                     }
                 }
             },
@@ -3098,6 +3218,49 @@
                 "smithy.api#documentation": "<p>Describes the data type configuration for the data source associated with a form.</p>"
             }
         },
+        "com.amazonaws.amplifyuibuilder#FormInputBindingProperties": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#FormInputBindingPropertiesValue"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormInputBindingPropertiesValue": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property type.</p>"
+                    }
+                },
+                "bindingProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormInputBindingPropertiesValueProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the properties to customize with data at runtime.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the data binding configuration for a form's input fields at runtime.You can use\n        <code>FormInputBindingPropertiesValue</code> to add exposed properties to a form to allow\n      different values to be entered when a form is reused in different places in an app.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormInputBindingPropertiesValueProperties": {
+            "type": "structure",
+            "members": {
+                "model": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amplify DataStore model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the data binding configuration for a specific property using data stored in\n        Amazon Web Services. For Amazon Web Services connected properties, you can bind a property to\n      data stored in an Amplify DataStore model.</p>"
+            }
+        },
         "com.amazonaws.amplifyuibuilder#FormInputValueProperty": {
             "type": "structure",
             "members": {
@@ -3106,10 +3269,49 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value to assign to the input field.</p>"
                     }
+                },
+                "bindingProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormInputValuePropertyBindingProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information to bind fields to data at runtime.</p>"
+                    }
+                },
+                "concat": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormInputValuePropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of form properties to concatenate to create the value to assign to this field\n      property.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration for an input field on a form. Use\n      <code>FormInputValueProperty</code> to specify the values to render or bind by\n      default.</p>"
+                "smithy.api#documentation": "<p>Describes the configuration for an input field on a form. Use\n        <code>FormInputValueProperty</code> to specify the values to render or bind by\n      default.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormInputValuePropertyBindingProperties": {
+            "type": "structure",
+            "members": {
+                "property": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The form property to bind to the data field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "field": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data field to bind the property to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a form property to a binding property. This enables exposed properties on the\n      top level form to propagate data to the form's property values.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormInputValuePropertyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#FormInputValueProperty"
             }
         },
         "com.amazonaws.amplifyuibuilder#FormList": {
@@ -3586,6 +3788,25 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.amplifyuibuilder#LabelDecorator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "required",
+                        "name": "REQUIRED"
+                    },
+                    {
+                        "value": "optional",
+                        "name": "OPTIONAL"
+                    },
+                    {
+                        "value": "none",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.amplifyuibuilder#ListComponents": {
             "type": "operation",
             "input": {
@@ -3906,13 +4127,19 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the state configuration when an action modifies a property of another\n      element within the same component.</p>"
+                "smithy.api#documentation": "<p>Represents the state configuration when an action modifies a property of another element\n      within the same component.</p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#NumValues": {
             "type": "list",
             "member": {
                 "target": "smithy.api#Integer"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#OperandType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^boolean|string|number$"
             }
         },
         "com.amazonaws.amplifyuibuilder#Predicate": {
@@ -3947,6 +4174,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value to use when performing the evaluation.</p>"
                     }
+                },
+                "operandType": {
+                    "target": "com.amazonaws.amplifyuibuilder#OperandType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of value to use when performing the evaluation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3976,7 +4209,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stores the metadata information about a feature on a form or view.</p>",
+                "smithy.api#documentation": "<p>Stores the metadata information about a feature on a form.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/metadata/features/{featureName}",
                     "method": "PUT"
@@ -3995,7 +4228,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Stores the metadata information about a feature on a form or view.</p>"
+                "smithy.api#documentation": "<p>Stores the metadata information about a feature on a form.</p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#PutMetadataFlagRequest": {
@@ -4086,6 +4319,12 @@
                         "smithy.api#documentation": "<p>The token to use to refresh a previously issued access token that might have\n      expired.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "clientId": {
+                    "target": "com.amazonaws.amplifyuibuilder#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the client to request the token from.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4168,7 +4407,13 @@
                 "orientation": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the orientation for a <code>Divider</code> sectional element. Valid values are\n      <code>horizontal</code> or <code>vertical</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the orientation for a <code>Divider</code> sectional element. Valid values are\n        <code>horizontal</code> or <code>vertical</code>.</p>"
+                    }
+                },
+                "excluded": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Excludes a sectional element that was generated by default for a specified data\n      model.</p>"
                     }
                 }
             },
@@ -4243,6 +4488,25 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.amplifyuibuilder#SortProperty"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#StorageAccessLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "public",
+                        "name": "PUBLIC"
+                    },
+                    {
+                        "value": "protected",
+                        "name": "PROTECTED"
+                    },
+                    {
+                        "value": "private",
+                        "name": "PRIVATE"
+                    }
+                ]
             }
         },
         "com.amazonaws.amplifyuibuilder#StrValues": {
@@ -4784,6 +5048,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>FormCTA</code> object that stores the call to action configuration for the\n      form.</p>"
                     }
+                },
+                "labelDecorator": {
+                    "target": "com.amazonaws.amplifyuibuilder#LabelDecorator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an icon or decoration to display on the form.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5016,6 +5286,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value and display value pairs.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "bindingProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormInputBindingProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information to bind fields to data at runtime.</p>"
                     }
                 }
             },

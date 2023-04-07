@@ -130,6 +130,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteRecordInput(v *DeleteRecordInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.DeletionMode) > 0 {
+		encoder.SetQuery("DeletionMode").String(string(v.DeletionMode))
+	}
+
 	if v.EventTime != nil {
 		encoder.SetQuery("EventTime").String(*v.EventTime)
 	}

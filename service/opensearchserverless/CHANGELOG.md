@@ -1,3 +1,7 @@
+# v1.2.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2023-03-29)
 
 * **Feature**: This release includes two new exception types "ServiceQuotaExceededException" and "OcuLimitExceededException".

@@ -1,3 +1,7 @@
+# v1.11.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2023-03-23)
 
 * **Feature**: AppInstanceBots can be used to add a bot powered by Amazon Lex to chat channels.  ExpirationSettings provides automatic resource deletion for AppInstanceUsers.

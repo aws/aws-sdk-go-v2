@@ -1,3 +1,7 @@
+# v1.18.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-03-23)
 
 * **Feature**: Repository CreationTime is added to the CreateRepository and ListRepositories API responses.

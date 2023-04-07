@@ -2878,6 +2878,11 @@ func awsRestjson1_serializeOpDocumentRegisterResourceInput(v *RegisterResourceIn
 		ok.Boolean(*v.UseServiceLinkedRole)
 	}
 
+	if v.WithFederation != nil {
+		ok := object.Key("WithFederation")
+		ok.Boolean(*v.WithFederation)
+	}
+
 	return nil
 }
 
@@ -3597,6 +3602,11 @@ func awsRestjson1_serializeOpDocumentUpdateResourceInput(v *UpdateResourceInput,
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	if v.WithFederation != nil {
+		ok := object.Key("WithFederation")
+		ok.Boolean(*v.WithFederation)
 	}
 
 	return nil

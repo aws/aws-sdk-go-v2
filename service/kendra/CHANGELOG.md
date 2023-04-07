@@ -1,3 +1,7 @@
+# v1.39.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2023-03-30)
 
 * **Feature**: AWS Kendra now supports featured results for a query.

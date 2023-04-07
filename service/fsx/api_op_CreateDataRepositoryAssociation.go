@@ -15,8 +15,8 @@ import (
 // Creates an Amazon FSx for Lustre data repository association (DRA). A data
 // repository association is a link between a directory on the file system and an
 // Amazon S3 bucket or prefix. You can have a maximum of 8 data repository
-// associations on a file system. Data repository associations are supported only
-// for file systems with the Persistent_2 deployment type. Each data repository
+// associations on a file system. Data repository associations are supported for
+// all file systems except for Scratch_1 deployment type. Each data repository
 // association must have a unique Amazon FSx file system directory and a unique S3
 // bucket or prefix associated with it. You can configure a data repository
 // association for automatic import only, for automatic export only, or for both.
@@ -60,7 +60,7 @@ type CreateDataRepositoryAssociationInput struct {
 	// created. Default is false .
 	BatchImportMetaDataOnCreate *bool
 
-	// (Optional) An idempotency token for resource creation, in a string of up to 64
+	// (Optional) An idempotency token for resource creation, in a string of up to 63
 	// ASCII characters. This token is automatically filled on your behalf when you use
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string

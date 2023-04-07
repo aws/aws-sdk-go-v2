@@ -629,6 +629,30 @@ func (ExistCondition) Values() []ExistCondition {
 	}
 }
 
+type FederationSourceErrorCode string
+
+// Enum values for FederationSourceErrorCode
+const (
+	FederationSourceErrorCodeInvalidResponseException       FederationSourceErrorCode = "InvalidResponseException"
+	FederationSourceErrorCodeOperationTimeoutException      FederationSourceErrorCode = "OperationTimeoutException"
+	FederationSourceErrorCodeOperationNotSupportedException FederationSourceErrorCode = "OperationNotSupportedException"
+	FederationSourceErrorCodeInternalServiceException       FederationSourceErrorCode = "InternalServiceException"
+	FederationSourceErrorCodeThrottlingException            FederationSourceErrorCode = "ThrottlingException"
+)
+
+// Values returns all known values for FederationSourceErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FederationSourceErrorCode) Values() []FederationSourceErrorCode {
+	return []FederationSourceErrorCode{
+		"InvalidResponseException",
+		"OperationTimeoutException",
+		"OperationNotSupportedException",
+		"InternalServiceException",
+		"ThrottlingException",
+	}
+}
+
 type FieldName string
 
 // Enum values for FieldName
@@ -1350,8 +1374,9 @@ type ResourceShareType string
 
 // Enum values for ResourceShareType
 const (
-	ResourceShareTypeForeign ResourceShareType = "FOREIGN"
-	ResourceShareTypeAll     ResourceShareType = "ALL"
+	ResourceShareTypeForeign   ResourceShareType = "FOREIGN"
+	ResourceShareTypeAll       ResourceShareType = "ALL"
+	ResourceShareTypeFederated ResourceShareType = "FEDERATED"
 )
 
 // Values returns all known values for ResourceShareType. Note that this can be
@@ -1361,6 +1386,7 @@ func (ResourceShareType) Values() []ResourceShareType {
 	return []ResourceShareType{
 		"FOREIGN",
 		"ALL",
+		"FEDERATED",
 	}
 }
 

@@ -106,6 +106,7 @@ type IPAddressType string
 const (
 	IPAddressTypeDualstack IPAddressType = "DUALSTACK"
 	IPAddressTypeIpv4      IPAddressType = "IPV4"
+	IPAddressTypeIpv6      IPAddressType = "IPV6"
 )
 
 // Values returns all known values for IPAddressType. Note that this can be
@@ -115,6 +116,7 @@ func (IPAddressType) Values() []IPAddressType {
 	return []IPAddressType{
 		"DUALSTACK",
 		"IPV4",
+		"IPV6",
 	}
 }
 

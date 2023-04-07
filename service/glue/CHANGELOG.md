@@ -1,3 +1,15 @@
+# v1.45.2 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.1 (2023-04-06)
+
+* No change notes available for this release.
+
+# v1.45.0 (2023-04-03)
+
+* **Feature**: Add support for database-level federation
+
 # v1.44.0 (2023-03-30)
 
 * **Feature**: This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations.

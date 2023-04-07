@@ -54,7 +54,7 @@ type GetColumnStatisticsForTableInput struct {
 
 type GetColumnStatisticsForTableOutput struct {
 
-	// List of ColumnStatistics that failed to be retrieved.
+	// List of ColumnStatistics.
 	ColumnStatisticsList []types.ColumnStatistics
 
 	// List of ColumnStatistics that failed to be retrieved.

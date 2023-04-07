@@ -382,6 +382,24 @@ func (AssociationEdgeType) Values() []AssociationEdgeType {
 	}
 }
 
+type AsyncNotificationTopicTypes string
+
+// Enum values for AsyncNotificationTopicTypes
+const (
+	AsyncNotificationTopicTypesSuccessNotificationTopic AsyncNotificationTopicTypes = "SUCCESS_NOTIFICATION_TOPIC"
+	AsyncNotificationTopicTypesErrorNotificationTopic   AsyncNotificationTopicTypes = "ERROR_NOTIFICATION_TOPIC"
+)
+
+// Values returns all known values for AsyncNotificationTopicTypes. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AsyncNotificationTopicTypes) Values() []AsyncNotificationTopicTypes {
+	return []AsyncNotificationTopicTypes{
+		"SUCCESS_NOTIFICATION_TOPIC",
+		"ERROR_NOTIFICATION_TOPIC",
+	}
+}
+
 type AthenaResultCompressionType string
 
 // Enum values for AthenaResultCompressionType

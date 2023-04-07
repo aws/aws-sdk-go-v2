@@ -16,12 +16,12 @@ import (
 // collection of Amazon Web Services resources structured to prevent and recover
 // Amazon Web Services application disruptions. To describe a Resilience Hub
 // application, you provide an application name, resources from one or more–up to
-// five–CloudFormation stacks, and an appropriate resiliency policy. After you
-// create an Resilience Hub application, you publish it so that you can run a
-// resiliency assessment on it. You can then use recommendations from the
-// assessment to improve resiliency by running another assessment, comparing
-// results, and then iterating the process until you achieve your goals for
-// recovery time objective (RTO) and recovery point objective (RPO).
+// 20–CloudFormation stacks, and an appropriate resiliency policy. After you create
+// an Resilience Hub application, you publish it so that you can run a resiliency
+// assessment on it. You can then use recommendations from the assessment to
+// improve resiliency by running another assessment, comparing results, and then
+// iterating the process until you achieve your goals for recovery time objective
+// (RTO) and recovery point objective (RPO).
 func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns ...func(*Options)) (*CreateAppOutput, error) {
 	if params == nil {
 		params = &CreateAppInput{}

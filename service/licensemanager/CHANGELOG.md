@@ -1,3 +1,11 @@
+# v1.18.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.18.0 (2023-04-03)
+
+* **Feature**: This release adds grant override options to the CreateGrantVersion API. These options can be used to specify grant replacement behavior during grant activation.
+
 # v1.17.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

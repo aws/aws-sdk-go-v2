@@ -39,6 +39,9 @@ type UpdateResourceInput struct {
 	// This member is required.
 	RoleArn *string
 
+	// Whether or not the resource is a federated resource.
+	WithFederation *bool
+
 	noSmithyDocumentSerde
 }
 

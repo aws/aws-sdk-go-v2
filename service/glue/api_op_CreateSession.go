@@ -58,7 +58,8 @@ type CreateSessionInput struct {
 	// supports. The GlueVersion must be greater than 2.0.
 	GlueVersion *string
 
-	// The number of seconds when idle before request times out.
+	// The number of minutes when idle before session times out. Default for Spark ETL
+	// jobs is value of Timeout. Consult the documentation for other job types.
 	IdleTimeout *int32
 
 	// The number of Glue data processing units (DPUs) that can be allocated when the
@@ -78,7 +79,9 @@ type CreateSessionInput struct {
 	// The map of key value pairs (tags) belonging to the session.
 	Tags map[string]string
 
-	// The number of seconds before request times out.
+	// The number of minutes before session times out. Default for Spark ETL jobs is 48
+	// hours (2880 minutes), the maximum session lifetime for this job type. Consult
+	// the documentation for other job types.
 	Timeout *int32
 
 	// The type of predefined worker that is allocated to use for the session.

@@ -3,4 +3,4 @@
 package resourceexplorer2
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.2.8"
+const goModuleVersion = "1.2.9"

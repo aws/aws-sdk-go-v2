@@ -1911,6 +1911,24 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				sv.SourceBucketArn = ptr.String(jtv)
 			}
 
+		case "StartupScriptS3ObjectVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StartupScriptS3ObjectVersion = ptr.String(jtv)
+			}
+
+		case "StartupScriptS3Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StartupScriptS3Path = ptr.String(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

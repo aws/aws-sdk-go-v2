@@ -2,6 +2,24 @@
 
 package types
 
+type ActivationOverrideBehavior string
+
+// Enum values for ActivationOverrideBehavior
+const (
+	ActivationOverrideBehaviorDistributedGrantsOnly      ActivationOverrideBehavior = "DISTRIBUTED_GRANTS_ONLY"
+	ActivationOverrideBehaviorAllGrantsPermittedByIssuer ActivationOverrideBehavior = "ALL_GRANTS_PERMITTED_BY_ISSUER"
+)
+
+// Values returns all known values for ActivationOverrideBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActivationOverrideBehavior) Values() []ActivationOverrideBehavior {
+	return []ActivationOverrideBehavior{
+		"DISTRIBUTED_GRANTS_ONLY",
+		"ALL_GRANTS_PERMITTED_BY_ISSUER",
+	}
+}
+
 type AllowedOperation string
 
 // Enum values for AllowedOperation

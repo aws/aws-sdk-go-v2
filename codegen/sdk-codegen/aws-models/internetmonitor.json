@@ -30,24 +30,24 @@
                 "ExperienceScore": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Experience scores, or health scores are calculated for different geographic and network provider combinations (that is, different granularities) and\n\t\t\talso summed into global scores. If you view performance or availability scores without filtering for any specific geography or service provider, Amazon CloudWatch Internet Monitor\n\t\t\tprovides global health scores.</p>\n         <p>The Amazon CloudWatch Internet Monitor chapter in the CloudWatch User Guide includes detailed information about how Internet Monitor calculates health scores, including performance and\n\t\t\tavailability scores, and when it creates and resolves health events. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Amazon Web Services calculates performance and\n\t\t\t\tavailability scores</a> in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.</p>"
+                        "smithy.api#documentation": "<p>Experience scores, or health scores are calculated for different geographic and network provider combinations (that is, different granularities) and\n\t\t\talso summed into global scores. If you view performance or availability scores without filtering for any specific geography or service provider, Amazon CloudWatch Internet Monitor\n\t\t\tprovides global health scores.</p>\n         <p>The Amazon CloudWatch Internet Monitor chapter in the <i>CloudWatch User Guide</i> includes detailed information about how Internet Monitor calculates health scores, including performance and\n\t\t\tavailability scores, and when it creates and resolves health events. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\">How Amazon Web Services calculates performance and\n\t\t\t\tavailability scores</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 },
                 "PercentOfTotalTrafficImpacted": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of impact caused by a health event for total traffic globally.</p>\n         <p>For information about how Internet Monitor calculates impact, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html\"> Inside Internet Monitor</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User\n\t\t\tGuide.</p>"
+                        "smithy.api#documentation": "<p>The percentage of impact caused by a health event for total traffic globally.</p>\n         <p>For information about how Internet Monitor calculates impact, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html\">Inside Internet Monitor</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User\n\t\t\tGuide.</p>"
                     }
                 },
                 "PercentOfClientLocationImpacted": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of impact caused by a health event for client location traffic globally.</p>\n         <p>For information about how Internet Monitor calculates impact, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html\"> Inside Internet Monitor</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User\n\t\t\tGuide.</p>"
+                        "smithy.api#documentation": "<p>The percentage of impact caused by a health event for client location traffic globally.</p>\n         <p>For information about how Internet Monitor calculates impact, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html\">Inside Internet Monitor</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User\n\t\t\tGuide.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Measurements about the availability for your application on the internet, calculated by Amazon CloudWatch Internet Monitor. Amazon Web Services has substantial historical data about internet\n\t\t\tperformance and availability between Amazon Web Services services and different network providers and geographies. By applying statistical analysis to the data, Internet Monitor\n\t\t\tcan detect when the performance and availability for your application has dropped, compared to an estimated baseline that's already calculated. To make it\n\t\t\teasier to see those drops, we report that information to you in the form of health scores: a performance score and an availability score.</p>\n         <p>Availability in Internet Monitor represents the estimated percentage of traffic that is not seeing an availability drop. For example, an availability score of 99%\n\t\t\tfor an end user and service location pair is equivalent to 1% of the traffic experiencing an availability drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Internet Monitor calculates performance and availability\n\t\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.</p>"
+                "smithy.api#documentation": "<p>Measurements about the availability for your application on the internet, calculated by Amazon CloudWatch Internet Monitor. Amazon Web Services has substantial historical data about internet\n\t\t\tperformance and availability between Amazon Web Services services and different network providers and geographies. By applying statistical analysis to the data, Internet Monitor\n\t\t\tcan detect when the performance and availability for your application has dropped, compared to an estimated baseline that's already calculated. To make it\n\t\t\teasier to see those drops, we report that information to you in the form of health scores: a performance score and an availability score.</p>\n         <p>Availability in Internet Monitor represents the estimated percentage of traffic that is not seeing an availability drop. For example, an availability score of 99%\n\t\t\tfor an end user and service location pair is equivalent to 1% of the traffic experiencing an availability drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\">How Internet Monitor calculates performance and availability\n\t\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the <i>Amazon CloudWatch User Guide</i>.</p>"
             }
         },
         "com.amazonaws.internetmonitor#BadRequestException": {
@@ -109,7 +109,7 @@
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
-                "smithy.api#documentation": "<p>Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: Virtual Private Clouds (VPCs),\n\t\t\tAmazon CloudFront distributions, and WorkSpaces directories. </p>\n         <p>After you create a monitor, you can view the internet performance for your application, scoped to a location, as well as any health events that are\n\t\t\timpairing traffic. Internet Monitor can also diagnose whether the impairment is on the Amazon Web Services network or is an issue with an internet service provider (ISP).</p>",
+                "smithy.api#documentation": "<p>Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: Amazon Virtual Private Clouds (VPCs),\n\t\t\tAmazon CloudFront distributions, and WorkSpaces directories. Internet Monitor then publishes internet measurements from Amazon Web Services that are specific to \n\t\t\tthe <i>city-networks</i>, that is, the locations and ASNs (typically internet service providers or ISPs),\n\t\t\twhere clients access your application. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-InternetMonitor.html\">Using Amazon CloudWatch Internet Monitor</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n         <p>When you create a monitor, you set a maximum limit for the number of city-networks where client traffic is monitored. The city-network maximum \n\t\t\tthat you choose is the limit, but you only pay for the number of city-networks that are actually monitored. You can change the maximum at any time \n\t\t\tby updating your monitor. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html\">Choosing a city-network maximum value</a> in the <i>Amazon CloudWatch User Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/v20210603/Monitors",
                     "method": "POST"
@@ -150,8 +150,14 @@
                     "target": "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of city-network combinations (that is, combinations of a city location and network, such as an ISP) to be monitored \n\t\t\tfor your resources.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and \n\t\t\tthe network or ASN, such as an internet service provider (ISP), that clients access the resources through. This limit helps control billing costs.</p>\n         <p>To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html\">Choosing a city-network maximum value\n\t\t</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "InternetMeasurementsLogDelivery": {
+                    "target": "com.amazonaws.internetmonitor#InternetMeasurementsLogDelivery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.</p>"
                     }
                 }
             }
@@ -464,8 +470,14 @@
                     "target": "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of city-network combinations (that is, combinations of a city location and network, such as an ISP) to be monitored \n\t\t\tfor your resources.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and \n\t\t\tthe network or ASN, such as an internet service provider (ISP), that clients access the resources through. This limit helps control billing costs.</p>\n         <p>To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html\">Choosing a city-network maximum value\n\t\t</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "InternetMeasurementsLogDelivery": {
+                    "target": "com.amazonaws.internetmonitor#InternetMeasurementsLogDelivery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.</p>"
                     }
                 }
             }
@@ -754,18 +766,32 @@
                 "Availability": {
                     "target": "com.amazonaws.internetmonitor#AvailabilityMeasurement",
                     "traits": {
-                        "smithy.api#documentation": "<p>Availability in Internet Monitor represents the estimated percentage of traffic that is not seeing an availability drop. For example, an availability score of 99%\n\t\t\tfor an end user and service location pair is equivalent to 1% of the traffic experiencing an availability drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Internet Monitor calculates performance and availability\n\t\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.</p>"
+                        "smithy.api#documentation": "<p>Availability in Internet Monitor represents the estimated percentage of traffic that is not seeing an availability drop. For example, an availability score of 99%\n\t\t\tfor an end user and service location pair is equivalent to 1% of the traffic experiencing an availability drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\">How Internet Monitor calculates performance and availability\n\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 },
                 "Performance": {
                     "target": "com.amazonaws.internetmonitor#PerformanceMeasurement",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performance in Internet Monitor represents the estimated percentage of traffic that is not seeing a performance drop. For example, a performance score of 99% for\n\t\t\tan end user and service location pair is equivalent to 1% of the traffic experiencing a performance drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Internet Monitor calculates performance and availability\n\t\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.</p>"
+                        "smithy.api#documentation": "<p>Performance in Internet Monitor represents the estimated percentage of traffic that is not seeing a performance drop. For example, a performance score of 99% for\n\t\t\tan end user and service location pair is equivalent to 1% of the traffic experiencing a performance drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\">How Internet Monitor calculates performance and availability\n\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Internet health includes measurements calculated by Amazon CloudWatch Internet Monitor about the performance and availability for your application on the internet. Amazon Web Services has\n\t\t\tsubstantial historical data about internet performance and availability between Amazon Web Services services and different network providers and geographies. By\n\t\t\tapplying statistical analysis to the data, Internet Monitor can detect when the performance and availability for your application has dropped, compared to an\n\t\t\testimated baseline that's already calculated. To make it easier to see those drops, we report that information to you in the form of health scores: a\n\t\t\tperformance score and an availability score.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#InternetMeasurementsLogDelivery": {
+            "type": "structure",
+            "members": {
+                "S3Config": {
+                    "target": "com.amazonaws.internetmonitor#S3Config",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information for publishing Internet Monitor internet measurements to Amazon S3. The configuration includes the bucket name and (optionally) prefix \n\t\t\tfor the S3 bucket to store the measurements, and the delivery status. The delivery status is <code>ENABLED</code> or <code>DISABLED</code>, depending on\n\t\t\twhether you choose to deliver internet measurements to S3 logs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for other locations that you choose to publish Amazon CloudWatch Internet Monitor internet measurements to, such as Amazon S3. \n\t\t\tThe measurements are also published to Amazon CloudWatch Logs.</p>"
             }
         },
         "com.amazonaws.internetmonitor#InternetMonitor20210603": {
@@ -827,7 +853,7 @@
                         "X-Amz-Requested-Operation"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon CloudWatch Internet Monitor provides visibility into how internet issues impact the performance and availability between your applications hosted on Amazon Web Services and your end\n\t\t\tusers, reducing the time it takes for you to diagnose these issues, from days to minutes. You can explore internet measurements for different time frames\n\t\t\tand at different geographic granularities, and quickly visualize the impact of issues, and then take action to improve your end users' experience, for\n\t\t\texample, by switching to other Amazon Web Services services or rerouting traffic to your workload through differentAmazon Web Services Regions.</p>\n         <p> If the issue is caused by the Amazon Web Services network, you'll automatically receive an Amazon Web Services Health Dashboard notification with the steps that Amazon Web Services is taking\n\t\t\tto mitigate the problem. To support integrating health information for geographies and networks specific to your application, Internet Monitor delivers measurements\n\t\t\tto CloudWatch Logs and CloudWatch Metrics. Internet Monitor also sends health events to Amazon EventBridge, so you can set up notifications. Internet Monitor monitors internet connectivity\n\t\t\tfor your application through Amazon Virtual Private Clouds (VPCs), Amazon CloudFront distributions, and Amazon WorkSpaces directories.</p>\n         <p>To use Internet Monitor, you create a <i>monitor</i> and add resources to it, Virtual Private Clouds (VPCs), Amazon CloudFront distributions, or WorkSpaces\n\t\t\tdirectories that show where your application's internet traffic is. Internet Monitor then provides internet measurements from Amazon Web Services that are specific to the locations\n\t\t\tand networks that communicate with your application. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-InternetMonitor.html\"> Using Amazon CloudWatch Internet Monitor</a> in the Amazon CloudWatch User Guide.</p>",
+                "smithy.api#documentation": "<p>Amazon CloudWatch Internet Monitor provides visibility into how internet issues impact the performance and availability \n\t\t\tbetween your applications hosted on Amazon Web Services and your end users. It reduces the time it takes for you to diagnose \n\t\t\tinternet issues from days to minutes. Internet Monitor uses the connectivity data that Amazon Web Services captures from its global \n\t\t\tnetworking footprint to calculate a baseline of performance and availability for internet traffic. This \n\t\t\tis the same data that Amazon Web Services uses to monitor internet uptime and availability. With those measurements \n\t\t\tas a baseline, Internet Monitor raises awareness for you when there are significant problems for your \n\t\t\tend users in the different geographic locations where your application runs.</p>\n         <p>Internet Monitor publishes internet measurements to CloudWatch Logs and CloudWatch Metrics, \n\t\t\tto easily support using CloudWatch tools with health information for geographies and networks specific to your application.\n\t\t\tInternet Monitor sends health events to Amazon EventBridge so that you can set up notifications. If an issue is caused by the Amazon Web Services network, \n\t\t\tyou also automatically receive an Amazon Web Services Health Dashboard notification with the steps that Amazon Web Services is taking to mitigate the problem.</p>\n         <p>To use Internet Monitor, you create a <i>monitor</i> and associate your application's resources \n\t\t\twith it, VPCs, CloudFront distributions, or WorkSpaces directories, to enable Internet Monitor to know \n\t\t\twhere your application's internet traffic is. Internet Monitor then provides internet measurements from Amazon Web Services that are specific to \n\t\t\tthe locations and networks that communicate with your application.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-InternetMonitor.html\">Using Amazon CloudWatch Internet Monitor</a> in the <i>Amazon CloudWatch User Guide</i>.</p>",
                 "smithy.api#title": "Amazon CloudWatch Internet Monitor",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1215,6 +1241,12 @@
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -1490,6 +1522,21 @@
                 }
             }
         },
+        "com.amazonaws.internetmonitor#LogDeliveryStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLED",
+                        "value": "ENABLED"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "DISABLED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor": {
             "type": "integer",
             "traits": {
@@ -1731,30 +1778,30 @@
                 "ExperienceScore": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Experience scores, or health scores, are calculated for different geographic and network provider combinations (that is, different granularities) and\n\t\t\talso totaled into global scores. If you view performance or availability scores without filtering for any specific geography or service provider, Amazon CloudWatch Internet Monitor\n\t\t\tprovides global health scores.</p>\n         <p>The Amazon CloudWatch Internet Monitor chapter in the CloudWatch User Guide includes detailed information about how Internet Monitor calculates health scores, including performance and\n\t\t\tavailability scores, and when it creates and resolves health events. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Amazon Web Services calculates performance and\n\t\t\t\tavailability scores</a> in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.</p>"
+                        "smithy.api#documentation": "<p>Experience scores, or health scores, are calculated for different geographic and network provider combinations (that is, different granularities) and\n\t\t\talso totaled into global scores. If you view performance or availability scores without filtering for any specific geography or service provider, Amazon CloudWatch Internet Monitor\n\t\t\tprovides global health scores.</p>\n         <p>The Amazon CloudWatch Internet Monitor chapter in the CloudWatch User Guide includes detailed information about how Internet Monitor calculates health scores, including performance and\n\t\t\tavailability scores, and when it creates and resolves health events. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\">How Amazon Web Services calculates performance and\n\t\t\t\tavailability scores</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 },
                 "PercentOfTotalTrafficImpacted": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>How much performance impact was caused by a health event for total traffic globally. For performance, this is the percentage of how much latency\n\t\t\tincreased during the event compared to typical performance for your application traffic globally. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop\"> When Amazon Web Services creates and resolves health\n\t\t\t\tevents</a> in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.</p>"
+                        "smithy.api#documentation": "<p>How much performance impact was caused by a health event for total traffic globally. For performance, this is the percentage of how much latency\n\t\t\tincreased during the event compared to typical performance for your application traffic globally. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop\">When Amazon Web Services creates and resolves health\n\t\t\tevents</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 },
                 "PercentOfClientLocationImpacted": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>How much performance impact was caused by a health event at a client location. For performance, this is the percentage of how much latency increased\n\t\t\tduring the event compared to typical performance for traffic, from this client location to an Amazon Web Services location, using a specific client network. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop\"> When Amazon Web Services creates and resolves health\n\t\t\t\tevents</a> in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.</p>"
+                        "smithy.api#documentation": "<p>How much performance impact was caused by a health event at a client location. For performance, this is the percentage of how much latency increased\n\t\t\tduring the event compared to typical performance for traffic, from this client location to an Amazon Web Services location, using a specific client network. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop\">When Amazon Web Services creates and resolves health\n\t\t\tevents</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 },
                 "RoundTripTime": {
                     "target": "com.amazonaws.internetmonitor#RoundTripTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the percentage of how much round-trip time increased during the event compared to typical round-trip time for your application for traffic. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop\"> When Amazon Web Services creates and resolves health\n\t\t\t\tevents</a> in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.</p>"
+                        "smithy.api#documentation": "<p>This is the percentage of how much round-trip time increased during the event compared to typical round-trip time for your application for traffic. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop\">When Amazon Web Services creates and resolves health\n\t\t\tevents</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Measurements about the performance for your application on the internet calculated by Amazon CloudWatch Internet Monitor. Amazon Web Services has substantial historical data about internet\n\t\t\tperformance and availability between Amazon Web Services services and different network providers and geographies. By applying statistical analysis to the data, Internet Monitor\n\t\t\tcan detect when the performance and availability for your application has dropped, compared to an estimated baseline that's already calculated. To make it\n\t\t\teasier to see those drops, we report that information to you in the form of health scores: a performance score and an availability score.</p>\n         <p>Performance in Internet Monitor represents the estimated percentage of traffic that is not seeing a performance drop. For example, a performance score of 99% for\n\t\t\tan end user and service location pair is equivalent to 1% of the traffic experiencing a performance drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Internet Monitor calculates performance and availability\n\t\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.</p>"
+                "smithy.api#documentation": "<p>Measurements about the performance for your application on the internet calculated by Amazon CloudWatch Internet Monitor. Amazon Web Services has substantial historical data about internet\n\t\t\tperformance and availability between Amazon Web Services services and different network providers and geographies. By applying statistical analysis to the data, Internet Monitor\n\t\t\tcan detect when the performance and availability for your application has dropped, compared to an estimated baseline that's already calculated. To make it\n\t\t\teasier to see those drops, we report that information to you in the form of health scores: a performance score and an availability score.</p>\n         <p>Performance in Internet Monitor represents the estimated percentage of traffic that is not seeing a performance drop. For example, a performance score of 99% for\n\t\t\tan end user and service location pair is equivalent to 1% of the traffic experiencing a performance drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\">How Internet Monitor calculates performance and availability\n\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
             }
         },
         "com.amazonaws.internetmonitor#ResourceName": {
@@ -1804,6 +1851,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Round-trip time (RTT) is how long it takes for a request from the user to return a response to the user. Amazon CloudWatch Internet Monitor calculates RTT at different\n\t\t\tpercentiles: p50, p90, and p95.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#S3Config": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket name.</p>",
+                        "smithy.api#length": {
+                            "min": 3
+                        }
+                    }
+                },
+                "BucketPrefix": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket prefix.</p>"
+                    }
+                },
+                "LogDeliveryStatus": {
+                    "target": "com.amazonaws.internetmonitor#LogDeliveryStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of publishing Internet Monitor internet measurements to an Amazon S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for publishing Amazon CloudWatch Internet Monitor internet measurements to Amazon S3. The configuration includes the bucket name and (optionally) prefix \n\t\t\tfor the S3 bucket to store the measurements, and the delivery status. The delivery status is <code>ENABLED</code> or <code>DISABLED</code>, depending on\n\t\t\twhether you choose to deliver internet measurements to S3 logs.</p>"
             }
         },
         "com.amazonaws.internetmonitor#SetOfARNs": {
@@ -2081,7 +2157,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a monitor. You can update a monitor to add or remove resources, or to change the status of the monitor. You can't change the name of a\n\t\t\tmonitor.</p>",
+                "smithy.api#documentation": "<p>Updates a monitor. You can update a monitor to change the maximum number of city-networks (locations and ASNs or \n\t\t\tinternet service providers), to add or remove resources, \n\t\t\tor to change the status of the monitor. Note that you can't change the name of a monitor.</p>\n         <p>The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html\">Choosing a city-network maximum value</a> in the <i>Amazon CloudWatch User Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/v20210603/Monitors/{MonitorName}",
                     "method": "PATCH"
@@ -2129,7 +2205,13 @@
                     "target": "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of city-network combinations (that is, combinations of a city location and network, such as an ISP) to be monitored \n\t\t\tfor your resources.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from \n\t\t\tand the network or ASN, \n\t\t\tsuch as an internet service provider, that clients access the resources through.</p>"
+                    }
+                },
+                "InternetMeasurementsLogDelivery": {
+                    "target": "com.amazonaws.internetmonitor#InternetMeasurementsLogDelivery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.</p>"
                     }
                 }
             }

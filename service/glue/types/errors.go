@@ -247,6 +247,8 @@ type EntityNotFoundException struct {
 
 	ErrorCodeOverride *string
 
+	FromFederationSource *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -266,6 +268,91 @@ func (e *EntityNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A federated resource already exists.
+type FederatedResourceAlreadyExistsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	AssociatedGlueResource *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *FederatedResourceAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FederatedResourceAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FederatedResourceAlreadyExistsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "FederatedResourceAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *FederatedResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// A federation source failed.
+type FederationSourceException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	FederationSourceErrorCode FederationSourceErrorCode
+
+	noSmithyDocumentSerde
+}
+
+func (e *FederationSourceException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FederationSourceException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FederationSourceException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "FederationSourceException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *FederationSourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+type FederationSourceRetryableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *FederationSourceRetryableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FederationSourceRetryableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FederationSourceRetryableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "FederationSourceRetryableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *FederationSourceRetryableException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // An encryption operation failed.
 type GlueEncryptionException struct {
@@ -431,6 +518,8 @@ type InvalidInputException struct {
 
 	ErrorCodeOverride *string
 
+	FromFederationSource *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -555,6 +644,7 @@ func (e *OperationTimeoutException) ErrorCode() string {
 }
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The operation timed out.
 type PermissionTypeMismatchException struct {
 	Message *string
 

@@ -1130,6 +1130,66 @@ func (m *validateOpListStackInstancesForProvisionedProduct) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpNotifyProvisionProductEngineWorkflowResult struct {
+}
+
+func (*validateOpNotifyProvisionProductEngineWorkflowResult) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpNotifyProvisionProductEngineWorkflowResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*NotifyProvisionProductEngineWorkflowResultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpNotifyProvisionProductEngineWorkflowResultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpNotifyTerminateProvisionedProductEngineWorkflowResult struct {
+}
+
+func (*validateOpNotifyTerminateProvisionedProductEngineWorkflowResult) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpNotifyTerminateProvisionedProductEngineWorkflowResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*NotifyTerminateProvisionedProductEngineWorkflowResultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpNotifyTerminateProvisionedProductEngineWorkflowResultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpNotifyUpdateProvisionedProductEngineWorkflowResult struct {
+}
+
+func (*validateOpNotifyUpdateProvisionedProductEngineWorkflowResult) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpNotifyUpdateProvisionedProductEngineWorkflowResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*NotifyUpdateProvisionedProductEngineWorkflowResultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpNotifyUpdateProvisionedProductEngineWorkflowResultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpProvisionProduct struct {
 }
 
@@ -1592,6 +1652,18 @@ func addOpListServiceActionsForProvisioningArtifactValidationMiddleware(stack *m
 
 func addOpListStackInstancesForProvisionedProductValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListStackInstancesForProvisionedProduct{}, middleware.After)
+}
+
+func addOpNotifyProvisionProductEngineWorkflowResultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpNotifyProvisionProductEngineWorkflowResult{}, middleware.After)
+}
+
+func addOpNotifyTerminateProvisionedProductEngineWorkflowResultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpNotifyTerminateProvisionedProductEngineWorkflowResult{}, middleware.After)
+}
+
+func addOpNotifyUpdateProvisionedProductEngineWorkflowResultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpNotifyUpdateProvisionedProductEngineWorkflowResult{}, middleware.After)
 }
 
 func addOpProvisionProductValidationMiddleware(stack *middleware.Stack) error {
@@ -2790,6 +2862,78 @@ func validateOpListStackInstancesForProvisionedProductInput(v *ListStackInstance
 	invalidParams := smithy.InvalidParamsError{Context: "ListStackInstancesForProvisionedProductInput"}
 	if v.ProvisionedProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedProductId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpNotifyProvisionProductEngineWorkflowResultInput(v *NotifyProvisionProductEngineWorkflowResultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotifyProvisionProductEngineWorkflowResultInput"}
+	if v.WorkflowToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowToken"))
+	}
+	if v.RecordId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpNotifyTerminateProvisionedProductEngineWorkflowResultInput(v *NotifyTerminateProvisionedProductEngineWorkflowResultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotifyTerminateProvisionedProductEngineWorkflowResultInput"}
+	if v.WorkflowToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowToken"))
+	}
+	if v.RecordId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpNotifyUpdateProvisionedProductEngineWorkflowResultInput(v *NotifyUpdateProvisionedProductEngineWorkflowResultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotifyUpdateProvisionedProductEngineWorkflowResultInput"}
+	if v.WorkflowToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowToken"))
+	}
+	if v.RecordId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

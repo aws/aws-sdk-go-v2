@@ -38,8 +38,8 @@ type DetachTrafficSourcesInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The unique identifiers of one or more traffic sources you are detaching. You can
-	// specify up to 10 traffic sources.
+	// The unique identifiers of one or more traffic sources. You can specify up to 10
+	// traffic sources.
 	//
 	// This member is required.
 	TrafficSources []types.TrafficSourceIdentifier

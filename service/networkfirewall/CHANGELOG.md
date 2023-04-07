@@ -1,3 +1,11 @@
+# v1.26.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.0 (2023-04-05)
+
+* **Feature**: AWS Network Firewall now supports IPv6-only subnets.
+
 # v1.25.0 (2023-03-30)
 
 * **Feature**: AWS Network Firewall added TLS inspection configurations to allow TLS traffic inspection.

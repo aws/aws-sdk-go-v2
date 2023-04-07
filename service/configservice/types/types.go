@@ -2093,7 +2093,7 @@ type RemediationConfiguration struct {
 	// This member is required.
 	ConfigRuleName *string
 
-	// Target ID is the name of the public document.
+	// Target ID is the name of the SSM document.
 	//
 	// This member is required.
 	TargetId *string

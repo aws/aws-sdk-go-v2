@@ -7,6 +7,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	smithy "github.com/aws/smithy-go"
@@ -1746,6 +1748,15 @@ func awsRestjson1_deserializeOpDocumentCreateFunctionUrlConfigOutput(v **CreateF
 					return fmt.Errorf("expected FunctionUrl to be of type string, got %T instead", value)
 				}
 				sv.FunctionUrl = ptr.String(jtv)
+			}
+
+		case "InvokeMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InvokeMode to be of type string, got %T instead", value)
+				}
+				sv.InvokeMode = types.InvokeMode(jtv)
 			}
 
 		default:
@@ -5261,6 +5272,15 @@ func awsRestjson1_deserializeOpDocumentGetFunctionUrlConfigOutput(v **GetFunctio
 				sv.FunctionUrl = ptr.String(jtv)
 			}
 
+		case "InvokeMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InvokeMode to be of type string, got %T instead", value)
+				}
+				sv.InvokeMode = types.InvokeMode(jtv)
+			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6792,6 +6812,189 @@ func awsRestjson1_deserializeOpHttpBindingsInvokeAsyncOutput(v *InvokeAsyncOutpu
 	}
 
 	v.Status = int32(response.StatusCode)
+
+	return nil
+}
+
+type awsRestjson1_deserializeOpInvokeWithResponseStream struct {
+}
+
+func (*awsRestjson1_deserializeOpInvokeWithResponseStream) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpInvokeWithResponseStream) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorInvokeWithResponseStream(response, &metadata)
+	}
+	output := &InvokeWithResponseStreamOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsInvokeWithResponseStreamOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorInvokeWithResponseStream(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("EC2AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorEC2AccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("EC2ThrottledException", errorCode):
+		return awsRestjson1_deserializeErrorEC2ThrottledException(response, errorBody)
+
+	case strings.EqualFold("EC2UnexpectedException", errorCode):
+		return awsRestjson1_deserializeErrorEC2UnexpectedException(response, errorBody)
+
+	case strings.EqualFold("EFSIOException", errorCode):
+		return awsRestjson1_deserializeErrorEFSIOException(response, errorBody)
+
+	case strings.EqualFold("EFSMountConnectivityException", errorCode):
+		return awsRestjson1_deserializeErrorEFSMountConnectivityException(response, errorBody)
+
+	case strings.EqualFold("EFSMountFailureException", errorCode):
+		return awsRestjson1_deserializeErrorEFSMountFailureException(response, errorBody)
+
+	case strings.EqualFold("EFSMountTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorEFSMountTimeoutException(response, errorBody)
+
+	case strings.EqualFold("ENILimitReachedException", errorCode):
+		return awsRestjson1_deserializeErrorENILimitReachedException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestContentException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidRequestContentException(response, errorBody)
+
+	case strings.EqualFold("InvalidRuntimeException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidRuntimeException(response, errorBody)
+
+	case strings.EqualFold("InvalidSecurityGroupIDException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidSecurityGroupIDException(response, errorBody)
+
+	case strings.EqualFold("InvalidSubnetIDException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidSubnetIDException(response, errorBody)
+
+	case strings.EqualFold("InvalidZipFileException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidZipFileException(response, errorBody)
+
+	case strings.EqualFold("KMSAccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorKMSAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KMSDisabledException", errorCode):
+		return awsRestjson1_deserializeErrorKMSDisabledException(response, errorBody)
+
+	case strings.EqualFold("KMSInvalidStateException", errorCode):
+		return awsRestjson1_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KMSNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorKMSNotFoundException(response, errorBody)
+
+	case strings.EqualFold("RequestTooLargeException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTooLargeException(response, errorBody)
+
+	case strings.EqualFold("ResourceConflictException", errorCode):
+		return awsRestjson1_deserializeErrorResourceConflictException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotReadyException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotReadyException(response, errorBody)
+
+	case strings.EqualFold("ServiceException", errorCode):
+		return awsRestjson1_deserializeErrorServiceException(response, errorBody)
+
+	case strings.EqualFold("SubnetIPAddressLimitReachedException", errorCode):
+		return awsRestjson1_deserializeErrorSubnetIPAddressLimitReachedException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedMediaTypeException", errorCode):
+		return awsRestjson1_deserializeErrorUnsupportedMediaTypeException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpHttpBindingsInvokeWithResponseStreamOutput(v *InvokeWithResponseStreamOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("X-Amz-Executed-Version"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ExecutedVersion = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Type"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ResponseStreamContentType = ptr.String(headerValues[0])
+	}
+
+	v.StatusCode = int32(response.StatusCode)
 
 	return nil
 }
@@ -12830,6 +13033,15 @@ func awsRestjson1_deserializeOpDocumentUpdateFunctionUrlConfigOutput(v **UpdateF
 				sv.FunctionUrl = ptr.String(jtv)
 			}
 
+		case "InvokeMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InvokeMode to be of type string, got %T instead", value)
+				}
+				sv.InvokeMode = types.InvokeMode(jtv)
+			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12837,6 +13049,192 @@ func awsRestjson1_deserializeOpDocumentUpdateFunctionUrlConfigOutput(v **UpdateF
 					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
 				sv.LastModifiedTime = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeEventStreamInvokeWithResponseStreamResponseEvent(v *types.InvokeWithResponseStreamResponseEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	eventType := msg.Headers.Get(eventstreamapi.EventTypeHeader)
+	if eventType == nil {
+		return fmt.Errorf("%s event header not present", eventstreamapi.EventTypeHeader)
+	}
+
+	switch {
+	case strings.EqualFold("InvokeComplete", eventType.String()):
+		vv := &types.InvokeWithResponseStreamResponseEventMemberInvokeComplete{}
+		if err := awsRestjson1_deserializeEventMessageInvokeWithResponseStreamCompleteEvent(&vv.Value, msg); err != nil {
+			return err
+		}
+		*v = vv
+		return nil
+
+	case strings.EqualFold("PayloadChunk", eventType.String()):
+		vv := &types.InvokeWithResponseStreamResponseEventMemberPayloadChunk{}
+		if err := awsRestjson1_deserializeEventMessageInvokeResponseStreamUpdate(&vv.Value, msg); err != nil {
+			return err
+		}
+		*v = vv
+		return nil
+
+	default:
+		buffer := bytes.NewBuffer(nil)
+		eventstream.NewEncoder().Encode(buffer, *msg)
+		*v = &types.UnknownUnionMember{
+			Tag:   eventType.String(),
+			Value: buffer.Bytes(),
+		}
+		return nil
+
+	}
+}
+
+func awsRestjson1_deserializeEventStreamExceptionInvokeWithResponseStreamResponseEvent(msg *eventstream.Message) error {
+	exceptionType := msg.Headers.Get(eventstreamapi.ExceptionTypeHeader)
+	if exceptionType == nil {
+		return fmt.Errorf("%s event header not present", eventstreamapi.ExceptionTypeHeader)
+	}
+
+	switch {
+	default:
+		br := bytes.NewReader(msg.Payload)
+		var buff [1024]byte
+		ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+		body := io.TeeReader(br, ringBuffer)
+		decoder := json.NewDecoder(body)
+		decoder.UseNumber()
+		code, message, err := restjson.GetErrorInfo(decoder)
+		if err != nil {
+			return err
+		}
+		errorCode := "UnknownError"
+		errorMessage := errorCode
+		if ev := exceptionType.String(); len(ev) > 0 {
+			errorCode = ev
+		} else if ev := code; len(ev) > 0 {
+			errorCode = ev
+		}
+		if ev := message; len(ev) > 0 {
+			errorMessage = ev
+		}
+		return &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+
+	}
+}
+
+func awsRestjson1_deserializeEventMessageInvokeResponseStreamUpdate(v *types.InvokeResponseStreamUpdate, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	if msg.Payload != nil {
+		bsv := make([]byte, len(msg.Payload))
+		copy(bsv, msg.Payload)
+
+		v.Payload = bsv
+	}
+	return nil
+}
+
+func awsRestjson1_deserializeEventMessageInvokeWithResponseStreamCompleteEvent(v *types.InvokeWithResponseStreamCompleteEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	br := bytes.NewReader(msg.Payload)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(br, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	if err := awsRestjson1_deserializeDocumentInvokeWithResponseStreamCompleteEvent(&v, shape); err != nil {
+		if err != nil {
+			var snapshot bytes.Buffer
+			io.Copy(&snapshot, ringBuffer)
+			err = &smithy.DeserializationError{
+				Err:      fmt.Errorf("failed to decode response body, %w", err),
+				Snapshot: snapshot.Bytes(),
+			}
+			return err
+		}
+
+	}
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInvokeWithResponseStreamCompleteEvent(v **types.InvokeWithResponseStreamCompleteEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvokeWithResponseStreamCompleteEvent
+	if *v == nil {
+		sv = &types.InvokeWithResponseStreamCompleteEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "ErrorDetails":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorDetails = ptr.String(jtv)
+			}
+
+		case "LogResult":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LogResult = ptr.String(jtv)
 			}
 
 		default:
@@ -17176,6 +17574,15 @@ func awsRestjson1_deserializeDocumentFunctionUrlConfig(v **types.FunctionUrlConf
 					return fmt.Errorf("expected FunctionUrl to be of type string, got %T instead", value)
 				}
 				sv.FunctionUrl = ptr.String(jtv)
+			}
+
+		case "InvokeMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InvokeMode to be of type string, got %T instead", value)
+				}
+				sv.InvokeMode = types.InvokeMode(jtv)
 			}
 
 		case "LastModifiedTime":

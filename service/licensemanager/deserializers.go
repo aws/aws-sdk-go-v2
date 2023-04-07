@@ -8002,6 +8002,11 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				sv.LicenseArn = ptr.String(jtv)
 			}
 
+		case "Options":
+			if err := awsAwsjson11_deserializeDocumentOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
 		case "ParentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9734,6 +9739,46 @@ func awsAwsjson11_deserializeDocumentNoEntitlementsAllowedException(v **types.No
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOptions(v **types.Options, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Options
+	if *v == nil {
+		sv = &types.Options{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActivationOverrideBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActivationOverrideBehavior to be of type string, got %T instead", value)
+				}
+				sv.ActivationOverrideBehavior = types.ActivationOverrideBehavior(jtv)
 			}
 
 		default:

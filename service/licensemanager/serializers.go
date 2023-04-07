@@ -3122,6 +3122,18 @@ func awsAwsjson11_serializeDocumentMetadataList(v []types.Metadata, value smithy
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOptions(v *types.Options, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ActivationOverrideBehavior) > 0 {
+		ok := object.Key("ActivationOverrideBehavior")
+		ok.String(string(v.ActivationOverrideBehavior))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOrganizationConfiguration(v *types.OrganizationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3499,6 +3511,13 @@ func awsAwsjson11_serializeOpDocumentCreateGrantVersionInput(v *CreateGrantVersi
 	if v.GrantName != nil {
 		ok := object.Key("GrantName")
 		ok.String(*v.GrantName)
+	}
+
+	if v.Options != nil {
+		ok := object.Key("Options")
+		if err := awsAwsjson11_serializeDocumentOptions(v.Options, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SourceVersion != nil {

@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/configsources": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2": "v2.0.0-00010101000000-000000000000",
         "github.com/aws/smithy-go": "v1.4.0",
@@ -44,6 +45,7 @@
         "api_op_GetRuntimeManagementConfig.go",
         "api_op_Invoke.go",
         "api_op_InvokeAsync.go",
+        "api_op_InvokeWithResponseStream.go",
         "api_op_ListAliases.go",
         "api_op_ListCodeSigningConfigs.go",
         "api_op_ListEventSourceMappings.go",
@@ -77,6 +79,7 @@
         "deserializers.go",
         "doc.go",
         "endpoints.go",
+        "eventstream.go",
         "generated.json",
         "internal/endpoints/endpoints.go",
         "internal/endpoints/endpoints_test.go",
@@ -85,6 +88,7 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.15",

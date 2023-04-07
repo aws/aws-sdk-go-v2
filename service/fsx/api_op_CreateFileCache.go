@@ -66,7 +66,7 @@ type CreateFileCacheInput struct {
 	// This member is required.
 	SubnetIds []string
 
-	// An idempotency token for resource creation, in a string of up to 64 ASCII
+	// An idempotency token for resource creation, in a string of up to 63 ASCII
 	// characters. This token is automatically filled on your behalf when you use the
 	// Command Line Interface (CLI) or an Amazon Web Services SDK. By using the
 	// idempotent operation, you can retry a CreateFileCache operation without the

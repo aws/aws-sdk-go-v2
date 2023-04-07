@@ -9668,6 +9668,15 @@ func awsRestjson1_deserializeDocumentResourceInfo(v **types.ResourceInfo, value 
 				sv.RoleArn = ptr.String(jtv)
 			}
 
+		case "WithFederation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.WithFederation = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
