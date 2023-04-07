@@ -18,7 +18,7 @@
 package sign
 
 import (
-	"crypto/rsa"
+	"crypto"
 	"fmt"
 	"net/url"
 	"strings"
@@ -31,16 +31,16 @@ import (
 //
 // The signer is safe to use concurrently.
 type URLSigner struct {
-	keyID   string
-	privKey *rsa.PrivateKey
+	keyID  string
+	signer crypto.Signer
 }
 
 // NewURLSigner constructs and returns a new URLSigner to be used to for signing
 // Amazon CloudFront URL resources with.
-func NewURLSigner(keyID string, privKey *rsa.PrivateKey) *URLSigner {
+func NewURLSigner(keyID string, signer crypto.Signer) *URLSigner {
 	return &URLSigner{
-		keyID:   keyID,
-		privKey: privKey,
+		keyID:  keyID,
+		signer: signer,
 	}
 }
 
@@ -70,7 +70,7 @@ func (s URLSigner) Sign(url string, expires time.Time) (string, error) {
 		return "", err
 	}
 
-	return signURL(scheme, cleanedURL, s.keyID, NewCannedPolicy(resource, expires), false, s.privKey)
+	return signURL(scheme, cleanedURL, s.keyID, NewCannedPolicy(resource, expires), false, s.signer)
 }
 
 // SignWithPolicy will sign a URL with the Policy provided.  The URL will be
@@ -114,16 +114,16 @@ func (s URLSigner) SignWithPolicy(url string, p *Policy) (string, error) {
 		return "", err
 	}
 
-	return signURL(scheme, cleanedURL, s.keyID, p, true, s.privKey)
+	return signURL(scheme, cleanedURL, s.keyID, p, true, s.signer)
 }
 
-func signURL(scheme, url, keyID string, p *Policy, customPolicy bool, privKey *rsa.PrivateKey) (string, error) {
+func signURL(scheme, url, keyID string, p *Policy, customPolicy bool, signer crypto.Signer) (string, error) {
 	// Validation URL elements
 	if err := validateURL(url); err != nil {
 		return "", err
 	}
 
-	b64Signature, b64Policy, err := p.Sign(privKey)
+	b64Signature, b64Policy, err := p.Sign(signer)
 	if err != nil {
 		return "", err
 	}

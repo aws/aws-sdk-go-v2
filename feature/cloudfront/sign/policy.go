@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"crypto"
 	"crypto/rand"
-	"crypto/rsa"
 	"crypto/sha1"
 	"encoding/base64"
 	"encoding/json"
@@ -92,7 +91,7 @@ var randReader = rand.Reader
 // The signature and policy should be added to the signed URL following the
 // guidelines in:
 // http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-signed-urls.html
-func (p *Policy) Sign(privKey *rsa.PrivateKey) (b64Signature, b64Policy []byte, err error) {
+func (p *Policy) Sign(signer crypto.Signer) (b64Signature, b64Policy []byte, err error) {
 	if err = p.Validate(); err != nil {
 		return nil, nil, err
 	}
@@ -105,7 +104,7 @@ func (p *Policy) Sign(privKey *rsa.PrivateKey) (b64Signature, b64Policy []byte, 
 	awsEscapeEncoded(b64Policy)
 
 	// Build and escape the signature
-	b64Signature, err = signEncodedPolicy(randReader, jsonPolicy, privKey)
+	b64Signature, err = signEncodedPolicy(randReader, jsonPolicy, signer)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -199,13 +198,13 @@ func encodePolicy(p *Policy) (b64Policy, jsonPolicy []byte, err error) {
 }
 
 // signEncodedPolicy will sign and base 64 encode the JSON encoded policy.
-func signEncodedPolicy(randReader io.Reader, jsonPolicy []byte, privKey *rsa.PrivateKey) ([]byte, error) {
+func signEncodedPolicy(randReader io.Reader, jsonPolicy []byte, signer crypto.Signer) ([]byte, error) {
 	hash := sha1.New()
 	if _, err := bytes.NewReader(jsonPolicy).WriteTo(hash); err != nil {
 		return nil, fmt.Errorf("failed to calculate signing hash, %s", err.Error())
 	}
 
-	sig, err := rsa.SignPKCS1v15(randReader, privKey, crypto.SHA1, hash.Sum(nil))
+	sig, err := signer.Sign(randReader, hash.Sum(nil), crypto.SHA1)
 	if err != nil {
 		return nil, fmt.Errorf("failed to sign policy, %s", err.Error())
 	}
