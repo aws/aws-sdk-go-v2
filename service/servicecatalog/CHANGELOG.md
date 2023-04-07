@@ -1,3 +1,8 @@
+# v1.18.1 (2023-04-07)
+
+* **Documentation**: Updates description for property
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-04-05)
 
 * **Feature**: removed incorrect product type value

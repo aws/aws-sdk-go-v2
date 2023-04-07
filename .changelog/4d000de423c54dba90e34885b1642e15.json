@@ -1,8 +1,0 @@
-{
-    "id": "4d000de4-23c5-4dba-90e3-4885b1642e15",
-    "type": "documentation",
-    "description": "Amazon FSx for Lustre now supports creating data repository associations on Persistent_1 and Scratch_2 file systems.",
-    "modules": [
-        "service/fsx"
-    ]
-}

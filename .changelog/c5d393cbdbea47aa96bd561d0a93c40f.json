@@ -1,8 +1,0 @@
-{
-    "id": "c5d393cb-dbea-47aa-96bd-561d0a93c40f",
-    "type": "documentation",
-    "description": "Update documentation of API descriptions as needed in support of temporary credentials with IAM identity.",
-    "modules": [
-        "service/redshiftdata"
-    ]
-}

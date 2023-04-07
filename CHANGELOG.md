@@ -1,3 +1,26 @@
+# Release (2023-04-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.15.0](service/dlm/CHANGELOG.md#v1150-2023-04-07)
+  * **Announcement**: This release includes breaking changes for the timestamp trait on the data lifecycle management client.
+  * **Feature**: Updated timestamp format for GetLifecyclePolicy API
+  * **Bug Fix**: Correct timestamp type for data lifecycle manager.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.21.0](service/docdb/CHANGELOG.md#v1210-2023-04-07)
+  * **Feature**: This release adds a new parameter 'DBClusterParameterGroupName' to 'RestoreDBClusterFromSnapshot' API to associate the name of the DB cluster parameter group while performing restore.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.28.8](service/fsx/CHANGELOG.md#v1288-2023-04-07)
+  * **Documentation**: Amazon FSx for Lustre now supports creating data repository associations on Persistent_1 and Scratch_2 file systems.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.31.0](service/lambda/CHANGELOG.md#v1310-2023-04-07)
+  * **Feature**: This release adds a new Lambda InvokeWithResponseStream API to support streaming Lambda function responses. The release also adds a new InvokeMode parameter to Function Url APIs to control whether the response will be streamed or buffered.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.34.0](service/quicksight/CHANGELOG.md#v1340-2023-04-07)
+  * **Feature**: This release has two changes: adding the OR condition to tag-based RLS rules in CreateDataSet and UpdateDataSet; adding RefreshSchedule and Incremental RefreshProperties operations for users to programmatically configure SPICE dataset ingestions.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.19.3](service/redshiftdata/CHANGELOG.md#v1193-2023-04-07)
+  * **Documentation**: Update documentation of API descriptions as needed in support of temporary credentials with IAM identity.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.18.1](service/servicecatalog/CHANGELOG.md#v1181-2023-04-07)
+  * **Documentation**: Updates description for property
+
 # Release (2023-04-06)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "77f07d1c-5b4a-4c0d-9fcc-4ae395e4552e",
-    "type": "feature",
-    "description": "This release adds a new Lambda InvokeWithResponseStream API to support streaming Lambda function responses. The release also adds a new InvokeMode parameter to Function Url APIs to control whether the response will be streamed or buffered.",
-    "modules": [
-        "service/lambda"
-    ]
-}

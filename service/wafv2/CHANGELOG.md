@@ -1,3 +1,7 @@
+# v1.28.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2023-04-04)
 
 * **Feature**: This release rolls back association config feature for webACLs that protect CloudFront protections.

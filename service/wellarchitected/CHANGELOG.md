@@ -1,3 +1,7 @@
+# v1.19.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-03-30)
 
 * **Feature**: AWS Well-Architected SDK now supports getting consolidated report metrics and generating a consolidated report PDF.

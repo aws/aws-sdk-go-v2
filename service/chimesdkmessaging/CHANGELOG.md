@@ -1,3 +1,7 @@
+# v1.14.1 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2023-03-23)
 
 * **Feature**: ExpirationSettings provides automatic resource deletion for Channels.

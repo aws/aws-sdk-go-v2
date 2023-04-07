@@ -1,8 +1,0 @@
-{
-    "id": "9c9fa525-b9d6-4835-a452-b516547adda4",
-    "type": "feature",
-    "description": "This release has two changes: adding the OR condition to tag-based RLS rules in CreateDataSet and UpdateDataSet; adding RefreshSchedule and Incremental RefreshProperties operations for users to programmatically configure SPICE dataset ingestions.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

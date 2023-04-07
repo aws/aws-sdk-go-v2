@@ -1,3 +1,7 @@
+# v1.1.11 (2023-04-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.10 (2023-04-05)
 
 * No change notes available for this release.

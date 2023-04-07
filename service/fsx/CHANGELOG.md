@@ -1,3 +1,8 @@
+# v1.28.8 (2023-04-07)
+
+* **Documentation**: Amazon FSx for Lustre now supports creating data repository associations on Persistent_1 and Scratch_2 file systems.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.7 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
