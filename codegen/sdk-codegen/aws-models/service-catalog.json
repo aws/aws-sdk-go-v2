@@ -9344,7 +9344,7 @@
                 "Type": {
                     "target": "com.amazonaws.servicecatalog#ProvisioningArtifactType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of provisioning artifact.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLOUD_FORMATION_TEMPLATE</code> - CloudFormation template</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE_AMI</code> - Amazon Web Services Marketplace AMI</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE_CAR</code> - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of provisioning artifact.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLOUD_FORMATION_TEMPLATE</code> - CloudFormation template</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE_AMI</code> - Amazon Web Services Marketplace AMI</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE_CAR</code> - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERRAFORM_OPEN_SOURCE</code> - Terraform open source configuration file</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DisableTemplateValidation": {

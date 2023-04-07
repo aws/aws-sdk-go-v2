@@ -139,6 +139,9 @@
                     "target": "com.amazonaws.lambda#InvokeAsync"
                 },
                 {
+                    "target": "com.amazonaws.lambda#InvokeWithResponseStream"
+                },
+                {
                     "target": "com.amazonaws.lambda#ListAliases"
                 },
                 {
@@ -603,9 +606,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -616,9 +619,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -629,9 +632,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -642,9 +645,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -655,9 +658,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -668,9 +671,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -681,9 +684,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -694,9 +697,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -707,9 +710,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -720,9 +723,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -733,9 +736,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -746,9 +749,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -759,9 +762,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -772,9 +775,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -785,9 +788,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -798,9 +801,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -811,9 +814,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -824,9 +827,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -837,9 +840,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -850,9 +853,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -863,9 +866,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -876,9 +879,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -889,9 +892,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -902,9 +905,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -915,9 +918,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -928,9 +931,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -941,9 +944,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -954,9 +957,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -967,9 +970,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -980,9 +983,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -993,9 +996,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1006,9 +1009,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1019,9 +1022,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1032,9 +1035,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1045,9 +1048,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1058,9 +1061,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1071,9 +1074,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1084,9 +1087,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1097,9 +1100,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1110,9 +1113,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1123,9 +1126,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1136,9 +1139,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1149,9 +1152,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1162,9 +1165,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1175,9 +1178,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1188,9 +1191,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1201,9 +1204,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1214,9 +1217,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1227,9 +1230,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1240,9 +1243,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1253,9 +1256,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1266,9 +1269,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1279,9 +1282,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1292,9 +1295,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1305,9 +1308,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1318,9 +1321,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1331,9 +1334,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1344,9 +1347,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1357,9 +1360,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1370,9 +1373,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1383,9 +1386,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1396,9 +1399,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1409,9 +1412,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1422,9 +1436,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1435,9 +1460,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1448,9 +1484,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1461,9 +1508,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1475,8 +1522,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1486,9 +1533,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1498,10 +1545,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2457,7 +2510,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n         </ul>\n         <p>The following error handling options are available only for stream sources (DynamoDB and Kinesis):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> – If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> – Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> – Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html\">\n            Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>\n         <p>The following error handling options are available only for stream sources (DynamoDB and Kinesis):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> – If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> – Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> – Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration\">\n          Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-03-31/event-source-mappings",
@@ -2471,7 +2524,7 @@
                 "EventSourceArn": {
                     "target": "com.amazonaws.lambda#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – The ARN of the data stream or a stream consumer.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – The ARN of the stream.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – The ARN of the queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – The ARN of the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ</b> – The ARN of the broker.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – The ARN of the data stream or a stream consumer.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – The ARN of the stream.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – The ARN of the queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – The ARN of the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ</b> – The ARN of the broker.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DocumentDB</b> – The ARN of the DocumentDB change stream.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "FunctionName": {
@@ -2490,7 +2543,7 @@
                 "BatchSize": {
                     "target": "com.amazonaws.lambda#BatchSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation\n  (6 MB).</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Self-managed Apache Kafka</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ (ActiveMQ and RabbitMQ)</b> – Default 100. Max 10,000.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation\n  (6 MB).</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Self-managed Apache Kafka</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ (ActiveMQ and RabbitMQ)</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DocumentDB</b> – Default 100. Max 10,000.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "FilterCriteria": {
@@ -2502,19 +2555,19 @@
                 "MaximumBatchingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#MaximumBatchingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  You can configure <code>MaximumBatchingWindowInSeconds</code> to any value from 0 seconds to 300 seconds in increments of seconds.</p>\n         <p>For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and Amazon MQ event sources, the default\n  batching window is 500 ms. Note that because you can only change <code>MaximumBatchingWindowInSeconds</code> in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it.\n  To restore the default batching window, you must create a new event source mapping.</p>\n         <p>Related setting: For streams and Amazon SQS event sources, when you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>"
+                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  You can configure <code>MaximumBatchingWindowInSeconds</code> to any value from 0 seconds to 300 seconds in increments of seconds.</p>\n         <p>For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default\n  batching window is 500 ms. Note that because you can only change <code>MaximumBatchingWindowInSeconds</code> in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it.\n  To restore the default batching window, you must create a new event source mapping.</p>\n         <p>Related setting: For streams and Amazon SQS event sources, when you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>"
                     }
                 },
                 "ParallelizationFactor": {
                     "target": "com.amazonaws.lambda#ParallelizationFactor",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The number of batches to process from each shard concurrently.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) The number of batches to process from each shard concurrently.</p>"
                     }
                 },
                 "StartingPosition": {
                     "target": "com.amazonaws.lambda#EventSourcePosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon\n      DynamoDB, and Amazon MSK Streams sources. <code>AT_TIMESTAMP</code> is supported only for\n      Amazon Kinesis streams.</p>"
+                        "smithy.api#documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon\n      DynamoDB, and Amazon MSK Streams sources. <code>AT_TIMESTAMP</code> is supported only for\n      Amazon Kinesis streams and Amazon DocumentDB.</p>"
                     }
                 },
                 "StartingPositionTimestamp": {
@@ -2526,31 +2579,31 @@
                 "DestinationConfig": {
                     "target": "com.amazonaws.lambda#DestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or standard Amazon SNS topic destination for discarded records.</p>"
                     }
                 },
                 "MaximumRecordAgeInSeconds": {
                     "target": "com.amazonaws.lambda#MaximumRecordAgeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records older than the specified age. The default value is infinite (-1).</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is infinite (-1).</p>"
                     }
                 },
                 "BisectBatchOnFunctionError": {
                     "target": "com.amazonaws.lambda#BisectBatchOnFunctionError",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) If the function returns an error, split the batch in two and retry.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry.</p>"
                     }
                 },
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.lambda#MaximumRetryAttemptsEventSourceMapping",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>"
                     }
                 },
                 "TumblingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#TumblingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The duration in seconds of a processing window. The range is between 1 second and 900 seconds.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.</p>"
                     }
                 },
                 "Topics": {
@@ -2580,7 +2633,7 @@
                 "FunctionResponseTypes": {
                     "target": "com.amazonaws.lambda#FunctionResponseTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response type enums applied to the event source mapping.</p>"
                     }
                 },
                 "AmazonManagedKafkaEventSourceConfig": {
@@ -2872,6 +2925,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS\">cross-origin resource sharing (CORS)</a> settings\n  for your function URL.</p>"
                     }
+                },
+                "InvokeMode": {
+                    "target": "com.amazonaws.lambda#InvokeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results \n        are available when the payload is complete. The maximum payload size is 6 MB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using \n        the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 20 MB, however, you can <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html\">request a quota increase</a>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -2913,6 +2972,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When the function URL was created, in <a href=\"https://www.w3.org/TR/NOTE-datetime\">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "InvokeMode": {
+                    "target": "com.amazonaws.lambda#InvokeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results \n        are available when the payload is complete. The maximum payload size is 6 MB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using \n        the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 20 MB, however, you can <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html\">request a quota increase</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3847,7 +3912,7 @@
                 "StartingPosition": {
                     "target": "com.amazonaws.lambda#EventSourcePosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis\n      streams.</p>"
+                        "smithy.api#documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis\n      streams and Amazon DocumentDB.</p>"
                     }
                 },
                 "StartingPositionTimestamp": {
@@ -3865,13 +3930,13 @@
                 "MaximumBatchingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#MaximumBatchingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  You can configure <code>MaximumBatchingWindowInSeconds</code> to any value from 0 seconds to 300 seconds in increments of seconds.</p>\n         <p>For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and Amazon MQ event sources, the default\n  batching window is 500 ms. Note that because you can only change <code>MaximumBatchingWindowInSeconds</code> in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it.\n  To restore the default batching window, you must create a new event source mapping.</p>\n         <p>Related setting: For streams and Amazon SQS event sources, when you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>"
+                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  You can configure <code>MaximumBatchingWindowInSeconds</code> to any value from 0 seconds to 300 seconds in increments of seconds.</p>\n         <p>For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default\n  batching window is 500 ms. Note that because you can only change <code>MaximumBatchingWindowInSeconds</code> in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it.\n  To restore the default batching window, you must create a new event source mapping.</p>\n         <p>Related setting: For streams and Amazon SQS event sources, when you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>"
                     }
                 },
                 "ParallelizationFactor": {
                     "target": "com.amazonaws.lambda#ParallelizationFactor",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The number of batches to process concurrently from each shard. The default value is 1.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) The number of batches to process concurrently from each shard. The default value is 1.</p>"
                     }
                 },
                 "EventSourceArn": {
@@ -3919,7 +3984,7 @@
                 "DestinationConfig": {
                     "target": "com.amazonaws.lambda#DestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
                     }
                 },
                 "Topics": {
@@ -3949,31 +4014,31 @@
                 "MaximumRecordAgeInSeconds": {
                     "target": "com.amazonaws.lambda#MaximumRecordAgeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records older than the specified age. The default value is -1,\nwhich sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.  </p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1,\nwhich sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.  </p>"
                     }
                 },
                 "BisectBatchOnFunctionError": {
                     "target": "com.amazonaws.lambda#BisectBatchOnFunctionError",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) If the function returns an error, split the batch in two and retry. The default value is false.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry. The default value is false.</p>"
                     }
                 },
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.lambda#MaximumRetryAttemptsEventSourceMapping",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records after the specified number of retries. The default value is -1,\nwhich sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) Discard records after the specified number of retries. The default value is -1,\nwhich sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.</p>"
                     }
                 },
                 "TumblingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#TumblingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The duration in seconds of a processing window. The range is 1–900 seconds.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.</p>"
                     }
                 },
                 "FunctionResponseTypes": {
                     "target": "com.amazonaws.lambda#FunctionResponseTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response type enums applied to the event source mapping.</p>"
                     }
                 },
                 "AmazonManagedKafkaEventSourceConfig": {
@@ -4470,7 +4535,7 @@
                 "DestinationConfig": {
                     "target": "com.amazonaws.lambda#DestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A destination for events after they have been sent to a function for processing.</p>\n         <p class=\"title\">\n            <b>Destinations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Queue</b> - The ARN of an SQS queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Topic</b> - The ARN of an SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A destination for events after they have been sent to a function for processing.</p>\n         <p class=\"title\">\n            <b>Destinations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Queue</b> - The ARN of a standard SQS queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Topic</b> - The ARN of a standard SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -4588,6 +4653,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "InvokeMode": {
+                    "target": "com.amazonaws.lambda#InvokeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUFFERED</code> – This is the default option. Lambda invokes your function\n          using the <code>Invoke</code> API operation. Invocation results are available when the\n          payload is complete. The maximum payload size is 6 MB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available.\n            Lambda invokes your function using the <code>InvokeWithResponseStream</code>\n          API operation. The maximum response payload size is 20 MB, however, you can <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html\">request a quota increase</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -5456,6 +5527,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When the function URL configuration was last updated, in <a href=\"https://www.w3.org/TR/NOTE-datetime\">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "InvokeMode": {
+                    "target": "com.amazonaws.lambda#InvokeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results \n        are available when the payload is complete. The maximum payload size is 6 MB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using \n        the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 20 MB, however, you can <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html\">request a quota increase</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6494,6 +6571,270 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lambda#InvokeMode": {
+            "type": "enum",
+            "members": {
+                "BUFFERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUFFERED"
+                    }
+                },
+                "RESPONSE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESPONSE_STREAM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#InvokeResponseStreamUpdate": {
+            "type": "structure",
+            "members": {
+                "Payload": {
+                    "target": "com.amazonaws.lambda#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Data returned by your Lambda function.</p>",
+                        "smithy.api#eventPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A chunk of the streamed response payload.</p>"
+            }
+        },
+        "com.amazonaws.lambda#InvokeWithResponseStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#InvokeWithResponseStreamRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#InvokeWithResponseStreamResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#EC2AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#EC2ThrottledException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#EC2UnexpectedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#EFSIOException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#EFSMountConnectivityException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#EFSMountFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#EFSMountTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ENILimitReachedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#InvalidRequestContentException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#InvalidRuntimeException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#InvalidSecurityGroupIDException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#InvalidSubnetIDException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#InvalidZipFileException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#RequestTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#SubnetIPAddressLimitReachedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#UnsupportedMediaTypeException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Configure your Lambda functions to stream response payloads back to clients. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html\">Configuring a Lambda function to stream responses</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-11-15/functions/{FunctionName}/response-streaming-invocations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lambda#InvokeWithResponseStreamCompleteEvent": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error code.</p>"
+                    }
+                },
+                "ErrorDetails": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of any returned error.</p>"
+                    }
+                },
+                "LogResult": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last 4 KB of the execution log, which is base64-encoded.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A response confirming that the event stream is complete.</p>"
+            }
+        },
+        "com.amazonaws.lambda#InvokeWithResponseStreamRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionName": {
+                    "target": "com.amazonaws.lambda#NamespacedFunctionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Lambda function.</p>\n         <p class=\"title\">\n            <b>Name formats</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function name</b> – <code>my-function</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Function ARN</b> – <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Partial ARN</b> – <code>123456789012:function:my-function</code>.</p>\n            </li>\n         </ul>\n         <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64\n      characters in length.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvocationType": {
+                    "target": "com.amazonaws.lambda#ResponseStreamingInvocationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RequestResponse</code> (default) – Invoke the function synchronously. Keep the\n          connection open until the function returns a response or times out. The API operation\n          response includes the function response and additional data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DryRun</code> – Validate parameter values and verify that the IAM user or role has permission to invoke\n          the function.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpHeader": "X-Amz-Invocation-Type"
+                    }
+                },
+                "LogType": {
+                    "target": "com.amazonaws.lambda#LogType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>Tail</code> to include the execution log in the response. Applies to synchronously invoked functions only.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Log-Type"
+                    }
+                },
+                "ClientContext": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context\n      object.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Context"
+                    }
+                },
+                "Qualifier": {
+                    "target": "com.amazonaws.lambda#Qualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias name.</p>",
+                        "smithy.api#httpQuery": "Qualifier"
+                    }
+                },
+                "Payload": {
+                    "target": "com.amazonaws.lambda#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON that you want to provide to your Lambda function as input.</p>\n         <p>You can enter the JSON directly. For example, <code>--payload '{ \"key\": \"value\" }'</code>. You can also\n      specify a file path. For example, <code>--payload file://payload.json</code>.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lambda#InvokeWithResponseStreamResponse": {
+            "type": "structure",
+            "members": {
+                "StatusCode": {
+                    "target": "com.amazonaws.lambda#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>For a successful request, the HTTP status code is in the 200 range. For the\n        <code>RequestResponse</code> invocation type, this status code is 200. For the <code>DryRun</code>\n      invocation type, this status code is 204.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "ExecutedVersion": {
+                    "target": "com.amazonaws.lambda#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the function that executed. When you invoke a function with an alias, this\n      indicates which version the alias resolved to.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Executed-Version"
+                    }
+                },
+                "EventStream": {
+                    "target": "com.amazonaws.lambda#InvokeWithResponseStreamResponseEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stream of response payloads.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ResponseStreamContentType": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data the stream is returning.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lambda#InvokeWithResponseStreamResponseEvent": {
+            "type": "union",
+            "members": {
+                "PayloadChunk": {
+                    "target": "com.amazonaws.lambda#InvokeResponseStreamUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A chunk of the streamed response payload.</p>"
+                    }
+                },
+                "InvokeComplete": {
+                    "target": "com.amazonaws.lambda#InvokeWithResponseStreamCompleteEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that's returned when the stream has ended and all the payload chunks have been\n      returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that includes a chunk of the response payload. When the stream has ended, Lambda includes a <code>InvokeComplete</code> object.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
         "com.amazonaws.lambda#KMSAccessDeniedException": {
             "type": "structure",
             "members": {
@@ -7197,7 +7538,7 @@
                 "EventSourceArn": {
                     "target": "com.amazonaws.lambda#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – The ARN of the data stream or a stream consumer.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – The ARN of the stream.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – The ARN of the queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – The ARN of the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ</b> – The ARN of the broker.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – The ARN of the data stream or a stream consumer.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – The ARN of the stream.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – The ARN of the queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – The ARN of the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ</b> – The ARN of the broker.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DocumentDB</b> – The ARN of the DocumentDB change stream.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "EventSourceArn"
                     }
                 },
@@ -8888,7 +9229,7 @@
                 "DestinationConfig": {
                     "target": "com.amazonaws.lambda#DestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A destination for events after they have been sent to a function for processing.</p>\n         <p class=\"title\">\n            <b>Destinations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Queue</b> - The ARN of an SQS queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Topic</b> - The ARN of an SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A destination for events after they have been sent to a function for processing.</p>\n         <p class=\"title\">\n            <b>Destinations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Queue</b> - The ARN of a standard SQS queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Topic</b> - The ARN of a standard SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -9385,6 +9726,23 @@
                 "smithy.api#documentation": "<p>The function is inactive and its VPC connection is no longer available. Wait for the VPC connection to\n      reestablish and try again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 502
+            }
+        },
+        "com.amazonaws.lambda#ResponseStreamingInvocationType": {
+            "type": "enum",
+            "members": {
+                "RequestResponse": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RequestResponse"
+                    }
+                },
+                "DryRun": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DryRun"
+                    }
+                }
             }
         },
         "com.amazonaws.lambda#RoleArn": {
@@ -10698,7 +11056,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an event source mapping. You can change the function that Lambda invokes, or pause\n      invocation and resume later from the same location.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n         </ul>\n         <p>The following error handling options are available only for stream sources (DynamoDB and Kinesis):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> – If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> – Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> – Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Updates an event source mapping. You can change the function that Lambda invokes, or pause\n      invocation and resume later from the same location.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html\">\n            Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>\n         <p>The following error handling options are available only for stream sources (DynamoDB and Kinesis):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> – If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> – Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> – Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration\">\n          Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-03-31/event-source-mappings/{UUID}",
@@ -10732,7 +11090,7 @@
                 "BatchSize": {
                     "target": "com.amazonaws.lambda#BatchSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation\n  (6 MB).</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Self-managed Apache Kafka</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ (ActiveMQ and RabbitMQ)</b> – Default 100. Max 10,000.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation\n  (6 MB).</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Self-managed Apache Kafka</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ (ActiveMQ and RabbitMQ)</b> – Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DocumentDB</b> – Default 100. Max 10,000.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "FilterCriteria": {
@@ -10744,37 +11102,37 @@
                 "MaximumBatchingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#MaximumBatchingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  You can configure <code>MaximumBatchingWindowInSeconds</code> to any value from 0 seconds to 300 seconds in increments of seconds.</p>\n         <p>For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and Amazon MQ event sources, the default\n  batching window is 500 ms. Note that because you can only change <code>MaximumBatchingWindowInSeconds</code> in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it.\n  To restore the default batching window, you must create a new event source mapping.</p>\n         <p>Related setting: For streams and Amazon SQS event sources, when you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>"
+                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  You can configure <code>MaximumBatchingWindowInSeconds</code> to any value from 0 seconds to 300 seconds in increments of seconds.</p>\n         <p>For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default\n  batching window is 500 ms. Note that because you can only change <code>MaximumBatchingWindowInSeconds</code> in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it.\n  To restore the default batching window, you must create a new event source mapping.</p>\n         <p>Related setting: For streams and Amazon SQS event sources, when you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>"
                     }
                 },
                 "DestinationConfig": {
                     "target": "com.amazonaws.lambda#DestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or standard Amazon SNS topic destination for discarded records.</p>"
                     }
                 },
                 "MaximumRecordAgeInSeconds": {
                     "target": "com.amazonaws.lambda#MaximumRecordAgeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records older than the specified age. The default value is infinite (-1).</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is infinite (-1).</p>"
                     }
                 },
                 "BisectBatchOnFunctionError": {
                     "target": "com.amazonaws.lambda#BisectBatchOnFunctionError",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) If the function returns an error, split the batch in two and retry.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry.</p>"
                     }
                 },
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.lambda#MaximumRetryAttemptsEventSourceMapping",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>"
                     }
                 },
                 "ParallelizationFactor": {
                     "target": "com.amazonaws.lambda#ParallelizationFactor",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The number of batches to process from each shard concurrently.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) The number of batches to process from each shard concurrently.</p>"
                     }
                 },
                 "SourceAccessConfigurations": {
@@ -10786,13 +11144,13 @@
                 "TumblingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#TumblingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The duration in seconds of a processing window. The range is between 1 second and 900 seconds.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.</p>"
                     }
                 },
                 "FunctionResponseTypes": {
                     "target": "com.amazonaws.lambda#FunctionResponseTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response type enums applied to the event source mapping.</p>"
                     }
                 },
                 "ScalingConfig": {
@@ -11164,7 +11522,7 @@
                 "DestinationConfig": {
                     "target": "com.amazonaws.lambda#DestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A destination for events after they have been sent to a function for processing.</p>\n         <p class=\"title\">\n            <b>Destinations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Queue</b> - The ARN of an SQS queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Topic</b> - The ARN of an SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A destination for events after they have been sent to a function for processing.</p>\n         <p class=\"title\">\n            <b>Destinations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Queue</b> - The ARN of a standard SQS queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Topic</b> - The ARN of a standard SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -11235,6 +11593,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS\">cross-origin resource sharing (CORS)</a> settings\n  for your function URL.</p>"
                     }
+                },
+                "InvokeMode": {
+                    "target": "com.amazonaws.lambda#InvokeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results \n        are available when the payload is complete. The maximum payload size is 6 MB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using \n        the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 20 MB, however, you can <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html\">request a quota increase</a>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -11283,6 +11647,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When the function URL configuration was last updated, in <a href=\"https://www.w3.org/TR/NOTE-datetime\">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "InvokeMode": {
+                    "target": "com.amazonaws.lambda#InvokeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results \n        are available when the payload is complete. The maximum payload size is 6 MB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using \n        the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 20 MB, however, you can <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html\">request a quota increase</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

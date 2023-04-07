@@ -5811,6 +5811,114 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#CreateRefreshSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateRefreshScheduleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateRefreshScheduleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a refresh schedule for a dataset. You can create up to 5 different schedules for a single dataset.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateRefreshScheduleRequest": {
+            "type": "structure",
+            "members": {
+                "DataSetId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Schedule": {
+                    "target": "com.amazonaws.quicksight#RefreshSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The refresh schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateRefreshScheduleResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "ScheduleId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the refresh schedule.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the refresh schedule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#CreateTemplate": {
             "type": "operation",
             "input": {
@@ -8258,6 +8366,21 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#DataSetRefreshProperties": {
+            "type": "structure",
+            "members": {
+                "RefreshConfiguration": {
+                    "target": "com.amazonaws.quicksight#RefreshConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The refresh configuration for a dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The refresh properties of a dataset.</p>"
+            }
+        },
         "com.amazonaws.quicksight#DataSetSchema": {
             "type": "structure",
             "members": {
@@ -9393,6 +9516,63 @@
                 "smithy.api#documentation": "<p>The configuration that defines the default value of a <code>DateTime</code> parameter when a value has not been set.</p>"
             }
         },
+        "com.amazonaws.quicksight#DayOfMonth": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 17
+                },
+                "smithy.api#pattern": "^(?:LAST_DAY_OF_MONTH|1[0-9]|2[0-8]|[12]|[3-9])$"
+            }
+        },
+        "com.amazonaws.quicksight#DayOfWeek": {
+            "type": "enum",
+            "members": {
+                "SUNDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUNDAY"
+                    }
+                },
+                "MONDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONDAY"
+                    }
+                },
+                "TUESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TUESDAY"
+                    }
+                },
+                "WEDNESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEDNESDAY"
+                    }
+                },
+                "THURSDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THURSDAY"
+                    }
+                },
+                "FRIDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRIDAY"
+                    }
+                },
+                "SATURDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SATURDAY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#DecimalDefaultValueList": {
             "type": "list",
             "member": {
@@ -10056,6 +10236,92 @@
                     "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteDataSetRefreshProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteDataSetRefreshPropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteDataSetRefreshPropertiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the dataset refresh properties of the dataset.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-properties",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteDataSetRefreshPropertiesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSetId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteDataSetRefreshPropertiesResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteDataSetRequest": {
@@ -10782,6 +11048,109 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteRefreshSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteRefreshScheduleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteRefreshScheduleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a refresh schedule from a dataset.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules/{ScheduleId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteRefreshScheduleRequest": {
+            "type": "structure",
+            "members": {
+                "DataSetId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the refresh schedule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteRefreshScheduleResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "ScheduleId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the refresh schedule.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the refresh schedule.</p>"
                     }
                 }
             },
@@ -12484,6 +12853,98 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeDataSetRefreshProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeDataSetRefreshPropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeDataSetRefreshPropertiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the refresh properties of a dataset.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-properties",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDataSetRefreshPropertiesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSetId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDataSetRefreshPropertiesResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "DataSetRefreshProperties": {
+                    "target": "com.amazonaws.quicksight#DataSetRefreshProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset refresh properties.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeDataSetRequest": {
             "type": "structure",
             "members": {
@@ -13582,6 +14043,109 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeRefreshSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeRefreshScheduleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeRefreshScheduleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of a refresh schedule.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules/{ScheduleId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeRefreshScheduleRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSetId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the refresh schedule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeRefreshScheduleResponse": {
+            "type": "structure",
+            "members": {
+                "RefreshSchedule": {
+                    "target": "com.amazonaws.quicksight#RefreshSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The refresh schedule.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the refresh schedule.</p>"
                     }
                 }
             },
@@ -19544,6 +20108,21 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.quicksight#IncrementalRefresh": {
+            "type": "structure",
+            "members": {
+                "LookbackWindow": {
+                    "target": "com.amazonaws.quicksight#LookbackWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lookback window setup for an incremental refresh configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The incremental refresh configuration for a dataset.</p>"
+            }
+        },
         "com.amazonaws.quicksight#Ingestion": {
             "type": "structure",
             "members": {
@@ -19882,6 +20461,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CURSOR_NOT_ENABLED"
+                    }
+                },
+                "DUPLICATE_COLUMN_NAMES_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE_COLUMN_NAMES_FOUND"
                     }
                 }
             }
@@ -23000,6 +23585,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#ListRefreshSchedules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListRefreshSchedulesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListRefreshSchedulesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the refresh schedules of a dataset. Each dataset can have up to 5 schedules. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListRefreshSchedulesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSetId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListRefreshSchedulesResponse": {
+            "type": "structure",
+            "members": {
+                "RefreshSchedules": {
+                    "target": "com.amazonaws.quicksight#RefreshSchedules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of refresh schedules for the dataset.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -24169,6 +24843,59 @@
                 "smithy.api#range": {
                     "min": -1800,
                     "max": 1800
+                }
+            }
+        },
+        "com.amazonaws.quicksight#LookbackWindow": {
+            "type": "structure",
+            "members": {
+                "ColumnName": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lookback window column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Size": {
+                    "target": "com.amazonaws.quicksight#PositiveLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The lookback window column size.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SizeUnit": {
+                    "target": "com.amazonaws.quicksight#LookbackWindowSizeUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size unit that is used for the lookback window column. Valid values for this structure are <code>HOUR</code>, <code>DAY</code>, and <code>WEEK</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lookback window setup of an incremental refresh configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#LookbackWindowSizeUnit": {
+            "type": "enum",
+            "members": {
+                "HOUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOUR"
+                    }
+                },
+                "DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAY"
+                    }
+                },
+                "WEEK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEK"
+                    }
                 }
             }
         },
@@ -27179,6 +27906,15 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#PositiveLong": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.quicksight#PostgreSqlParameters": {
             "type": "structure",
             "members": {
@@ -27402,6 +28138,102 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#PutDataSetRefreshProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#PutDataSetRefreshPropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#PutDataSetRefreshPropertiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the dataset refresh properties for the dataset.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-properties",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#PutDataSetRefreshPropertiesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSetId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSetRefreshProperties": {
+                    "target": "com.amazonaws.quicksight#DataSetRefreshProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset refresh properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#PutDataSetRefreshPropertiesResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#Query": {
             "type": "string",
             "traits": {
@@ -27499,6 +28331,9 @@
                     "target": "com.amazonaws.quicksight#CreateNamespace"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#CreateRefreshSchedule"
+                },
+                {
                     "target": "com.amazonaws.quicksight#CreateTemplate"
                 },
                 {
@@ -27526,6 +28361,9 @@
                     "target": "com.amazonaws.quicksight#DeleteDataSet"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DeleteDataSetRefreshProperties"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DeleteDataSource"
                 },
                 {
@@ -27545,6 +28383,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteNamespace"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteRefreshSchedule"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteTemplate"
@@ -27598,6 +28439,9 @@
                     "target": "com.amazonaws.quicksight#DescribeDataSetPermissions"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeDataSetRefreshProperties"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeDataSource"
                 },
                 {
@@ -27629,6 +28473,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeNamespace"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeRefreshSchedule"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeTemplate"
@@ -27706,6 +28553,9 @@
                     "target": "com.amazonaws.quicksight#ListNamespaces"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#ListRefreshSchedules"
+                },
+                {
                     "target": "com.amazonaws.quicksight#ListTagsForResource"
                 },
                 {
@@ -27731,6 +28581,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListUsers"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PutDataSetRefreshProperties"
                 },
                 {
                     "target": "com.amazonaws.quicksight#RegisterUser"
@@ -27812,6 +28665,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdatePublicSharingSettings"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateRefreshSchedule"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateTemplate"
@@ -28210,8 +29066,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28223,8 +29079,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28236,8 +29092,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28249,8 +29105,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28262,8 +29118,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28275,8 +29131,8 @@
                             },
                             "params": {
                                 "Region": "api",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28288,8 +29144,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28301,8 +29157,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28314,8 +29170,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28327,8 +29183,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28340,8 +29196,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28353,8 +29209,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28366,8 +29222,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28379,8 +29235,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28392,8 +29248,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -28405,8 +29261,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28418,8 +29274,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -28431,8 +29287,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -28444,8 +29300,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28457,8 +29313,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -28470,8 +29326,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28483,8 +29339,8 @@
                             },
                             "params": {
                                 "Region": "api",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28496,8 +29352,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28509,8 +29365,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -28522,8 +29378,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28535,8 +29391,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -28548,8 +29404,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -28561,8 +29428,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -28574,8 +29452,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -28587,8 +29476,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -28600,8 +29500,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -28613,8 +29513,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -28626,8 +29526,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -28638,8 +29538,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -28650,9 +29550,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -29330,6 +30236,145 @@
                     "traits": {
                         "smithy.api#enumValue": "AFTER_CUSTOM_LABEL"
                     }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#RefreshConfiguration": {
+            "type": "structure",
+            "members": {
+                "IncrementalRefresh": {
+                    "target": "com.amazonaws.quicksight#IncrementalRefresh",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The incremental refresh for the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The refresh configuration of a dataset.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RefreshFrequency": {
+            "type": "structure",
+            "members": {
+                "Interval": {
+                    "target": "com.amazonaws.quicksight#RefreshInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval between scheduled refreshes. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MINUTE15</code>: The dataset refreshes every 15 minutes. This value is only supported for incremental refreshes. This interval can only be used for one schedule per dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MINUTE30</code>:The dataset refreshes every 30 minutes. This value is only supported for incremental refreshes. This interval can only be used for one schedule per dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOURLY</code>: The dataset refreshes every hour. This interval can only be used for one schedule per dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAILY</code>: The dataset refreshes every day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WEEKLY</code>: The dataset refreshes every week.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MONTHLY</code>: The dataset refreshes every month.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RefreshOnDay": {
+                    "target": "com.amazonaws.quicksight#ScheduleRefreshOnEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day of the week that you want to schedule the refresh on. This value is required for weekly and monthly refresh intervals.</p>"
+                    }
+                },
+                "Timezone": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timezone that you want the refresh schedule to use. The timezone ID must match a corresponding ID found on <code>java.util.time.getAvailableIDs()</code>.</p>"
+                    }
+                },
+                "TimeOfTheDay": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of day that you want the datset to refresh. This value is expressed in HH:MM format. This field is not required for schedules that refresh hourly.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the interval between each scheduled refresh of a dataset.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RefreshInterval": {
+            "type": "enum",
+            "members": {
+                "MINUTE15": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINUTE15"
+                    }
+                },
+                "MINUTE30": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINUTE30"
+                    }
+                },
+                "HOURLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURLY"
+                    }
+                },
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAILY"
+                    }
+                },
+                "WEEKLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEKLY"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHLY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#RefreshSchedule": {
+            "type": "structure",
+            "members": {
+                "ScheduleId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the refresh schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleFrequency": {
+                    "target": "com.amazonaws.quicksight#RefreshFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency for the refresh schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartAfterDateTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time after which the refresh schedule can be started, expressed in <code>YYYY-MM-DDTHH:MM:SS</code> format.</p>"
+                    }
+                },
+                "RefreshType": {
+                    "target": "com.amazonaws.quicksight#IngestionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of refresh that a datset undergoes. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FULL_REFRESH</code>: A complete refresh of a dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INCREMENTAL_REFRESH</code>: A partial refresh of some rows of a dataset, based on the time window specified.</p>\n            </li>\n         </ul>\n         <p>For more information on full and incremental refreshes, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/refreshing-imported-data.html\">Refreshing SPICE data</a> in the <i>Amazon QuickSight User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the refresh schedule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The refresh schedule of a dataset.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RefreshSchedules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#RefreshSchedule",
+                "traits": {
+                    "smithy.api#documentation": "<p>A list of <code>RefreshSchedule</code> objects.</p>"
                 }
             }
         },
@@ -30375,6 +31420,12 @@
                         "smithy.api#documentation": "<p>A set of rules associated with row-level security, such as the tag names and columns that they are assigned to.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "TagRuleConfigurations": {
+                    "target": "com.amazonaws.quicksight#RowLevelPermissionTagRuleConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag configuration rules to apply to a dataset. All tag configurations have the OR condition. Tags within each tile will be joined (AND). At least one rule in this structure must have all tag values assigned to it to apply Row-level security (RLS) to the dataset.</p>"
+                    }
                 }
             },
             "traits": {
@@ -30422,6 +31473,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A set of rules associated with a tag.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RowLevelPermissionTagRuleConfiguration": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SessionTagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#RowLevelPermissionTagRuleConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#RowLevelPermissionTagRuleConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.quicksight#RowLevelPermissionTagRuleList": {
@@ -30849,6 +31924,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A scatter plot.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/scatter-plot.html\">Using scatter plots</a> in the <i>Amazon QuickSight User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ScheduleRefreshOnEntity": {
+            "type": "structure",
+            "members": {
+                "DayOfWeek": {
+                    "target": "com.amazonaws.quicksight#DayOfWeek",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day of the week that you want to schedule a refresh on.</p>"
+                    }
+                },
+                "DayOfMonth": {
+                    "target": "com.amazonaws.quicksight#DayOfMonth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day of the month that you want to schedule refresh on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The refresh on entity for weekly or monthly schedules.</p>"
             }
         },
         "com.amazonaws.quicksight#ScrollBarOptions": {
@@ -38427,6 +39522,111 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateRefreshSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateRefreshScheduleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateRefreshScheduleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a refresh schedule for a dataset.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateRefreshScheduleRequest": {
+            "type": "structure",
+            "members": {
+                "DataSetId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Schedule": {
+                    "target": "com.amazonaws.quicksight#RefreshSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The refresh schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateRefreshScheduleResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "ScheduleId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the refresh schedule.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the refresh schedule.</p>"
                     }
                 }
             },

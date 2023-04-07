@@ -34,7 +34,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition\n      language (DDL). \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n      <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n      <i>Amazon Redshift Management Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition\n      language (DDL). \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n      <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n      <i>Amazon Redshift Management Guide</i>. </p>"
             }
         },
         "com.amazonaws.redshiftdata#BatchExecuteStatementException": {
@@ -85,7 +85,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster as a database user and authenticating using temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -547,7 +547,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the detailed information about a table from metadata in the cluster. The\n      information includes its columns. \n      A token is returned to page through the column list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Describes the detailed information about a table from metadata in the cluster. The\n      information includes its columns. \n      A token is returned to page through the column list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -575,7 +575,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster as a database user and authenticating using temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -667,7 +667,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition\n      language (DDL). This statement must be a single SQL statement. \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition\n      language (DDL). This statement must be a single SQL statement. \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>"
             }
         },
         "com.amazonaws.redshiftdata#ExecuteStatementException": {
@@ -719,7 +719,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster as a database user and authenticating using temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -980,7 +980,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the databases in a cluster. \n      A token is returned to page through the database list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>List the databases in a cluster. \n      A token is returned to page through the database list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1015,7 +1015,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster as a database user and authenticating using temporary credentials. </p>"
                     }
                 },
                 "NextToken": {
@@ -1076,7 +1076,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the schemas in a database. \n      A token is returned to page through the schema list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Lists the schemas in a database. \n      A token is returned to page through the schema list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1104,7 +1104,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster as a database user and authenticating using temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -1275,7 +1275,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then \n       all tables in the database are returned.\n      A token is returned to page through the table list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then \n       all tables in the database are returned.\n      A token is returned to page through the table list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1303,7 +1303,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster as a database user and authenticating using temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -1810,8 +1810,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1823,8 +1823,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1836,8 +1836,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1849,8 +1849,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1862,8 +1862,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1875,8 +1875,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1888,8 +1888,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1901,8 +1901,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1914,8 +1914,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1927,8 +1927,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1940,8 +1940,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1953,8 +1953,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1966,8 +1977,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1979,8 +2001,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1992,8 +2025,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2005,8 +2049,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2018,8 +2062,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2031,8 +2075,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2043,8 +2087,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2055,9 +2099,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
