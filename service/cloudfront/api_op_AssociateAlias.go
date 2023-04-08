@@ -19,8 +19,7 @@ import (
 // alias and the ID of the target distribution for the alias. For more information,
 // including how to set up the target distribution, prerequisites that you must
 // complete, and other restrictions, see Moving an alternate domain name to a
-// different distribution
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move)
+// different distribution (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move)
 // in the Amazon CloudFront Developer Guide.
 func (c *Client) AssociateAlias(ctx context.Context, params *AssociateAliasInput, optFns ...func(*Options)) (*AssociateAliasOutput, error) {
 	if params == nil {

@@ -36,8 +36,8 @@ type CreateCidrCollectionInput struct {
 	// This member is required.
 	CallerReference *string
 
-	// A unique identifier for the account that can be used to reference the collection
-	// from other API calls.
+	// A unique identifier for the account that can be used to reference the
+	// collection from other API calls.
 	//
 	// This member is required.
 	Name *string

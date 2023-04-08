@@ -41,7 +41,7 @@ type ListClustersInput struct {
 	// The nextToken value returned from a ListClusters request indicating that more
 	// results are available to fulfill the request and further calls are needed. If
 	// maxResults was provided, it's possible the number of results to be fewer than
-	// maxResults. This token should be treated as an opaque identifier that is only
+	// maxResults . This token should be treated as an opaque identifier that is only
 	// used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
@@ -56,7 +56,7 @@ type ListClustersOutput struct {
 	ClusterArns []string
 
 	// The nextToken value to include in a future ListClusters request. When the
-	// results of a ListClusters request exceed maxResults, this value can be used to
+	// results of a ListClusters request exceed maxResults , this value can be used to
 	// retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string

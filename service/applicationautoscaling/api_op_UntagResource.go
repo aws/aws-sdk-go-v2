@@ -32,7 +32,7 @@ type UntagResourceInput struct {
 	// Identifies the Application Auto Scaling scalable target from which to remove
 	// tags. For example:
 	// arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123
-	// To get the ARN for a scalable target, use DescribeScalableTargets.
+	// To get the ARN for a scalable target, use DescribeScalableTargets .
 	//
 	// This member is required.
 	ResourceARN *string

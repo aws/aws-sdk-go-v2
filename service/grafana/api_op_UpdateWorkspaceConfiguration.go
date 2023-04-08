@@ -30,8 +30,8 @@ type UpdateWorkspaceConfigurationInput struct {
 
 	// The new configuration string for the workspace. For more information about the
 	// format and configuration options available, see Working in your Grafana
-	// workspace
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html).
+	// workspace (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html)
+	// .
 	//
 	// This value conforms to the media type: application/json
 	//

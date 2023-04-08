@@ -19,31 +19,24 @@ import (
 // provides an Amazon SNS topic and specific events for which you want Amazon S3
 // Glacier to send notifications to the topic. Amazon SNS topics must grant
 // permission to the vault to be allowed to publish notifications to the topic. You
-// can configure a vault to publish a notification for the following vault
-// events:
+// can configure a vault to publish a notification for the following vault events:
+//   - ArchiveRetrievalCompleted This event occurs when a job that was initiated
+//     for an archive retrieval is completed ( InitiateJob ). The status of the
+//     completed job can be "Succeeded" or "Failed". The notification sent to the SNS
+//     topic is the same output as returned from DescribeJob .
+//   - InventoryRetrievalCompleted This event occurs when a job that was initiated
+//     for an inventory retrieval is completed ( InitiateJob ). The status of the
+//     completed job can be "Succeeded" or "Failed". The notification sent to the SNS
+//     topic is the same output as returned from DescribeJob .
 //
-// * ArchiveRetrievalCompleted This event occurs when a job that was
-// initiated for an archive retrieval is completed (InitiateJob). The status of the
-// completed job can be "Succeeded" or "Failed". The notification sent to the SNS
-// topic is the same output as returned from DescribeJob.
-//
-// *
-// InventoryRetrievalCompleted This event occurs when a job that was initiated for
-// an inventory retrieval is completed (InitiateJob). The status of the completed
-// job can be "Succeeded" or "Failed". The notification sent to the SNS topic is
-// the same output as returned from DescribeJob.
-//
-// An AWS account has full
-// permission to perform all operations (actions). However, AWS Identity and Access
-// Management (IAM) users don't have any permissions by default. You must grant
-// them explicit permission to perform specific actions. For more information, see
-// Access Control Using AWS Identity and Access Management (IAM)
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
-// For conceptual information and underlying REST API, see Configuring Vault
-// Notifications in Amazon S3 Glacier
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
-// and Set Vault Notification Configuration
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html)
+// An AWS account has full permission to perform all operations (actions).
+// However, AWS Identity and Access Management (IAM) users don't have any
+// permissions by default. You must grant them explicit permission to perform
+// specific actions. For more information, see Access Control Using AWS Identity
+// and Access Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
+// . For conceptual information and underlying REST API, see Configuring Vault
+// Notifications in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
+// and Set Vault Notification Configuration  (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html)
 // in the Amazon Glacier Developer Guide.
 func (c *Client) SetVaultNotifications(ctx context.Context, params *SetVaultNotificationsInput, optFns ...func(*Options)) (*SetVaultNotificationsOutput, error) {
 	if params == nil {
@@ -65,8 +58,8 @@ func (c *Client) SetVaultNotifications(ctx context.Context, params *SetVaultNoti
 type SetVaultNotificationsInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
-	// which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//

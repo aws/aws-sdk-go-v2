@@ -16,9 +16,7 @@ import (
 // It doesn't work with any resource groups that are automatically populated by
 // tag-based or CloudFormation stack-based queries. Minimum permissions To run this
 // command, you must have the following permissions:
-//
-// *
-// resource-groups:UngroupResources
+//   - resource-groups:UngroupResources
 func (c *Client) UngroupResources(ctx context.Context, params *UngroupResourcesInput, optFns ...func(*Options)) (*UngroupResourcesOutput, error) {
 	if params == nil {
 		params = &UngroupResourcesInput{}

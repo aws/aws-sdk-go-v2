@@ -73,8 +73,8 @@ const (
 	CapacityProviderFieldTags CapacityProviderField = "TAGS"
 )
 
-// Values returns all known values for CapacityProviderField. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CapacityProviderField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityProviderField) Values() []CapacityProviderField {
 	return []CapacityProviderField{
@@ -112,9 +112,10 @@ const (
 	CapacityProviderUpdateStatusUpdateFailed     CapacityProviderUpdateStatus = "UPDATE_FAILED"
 )
 
-// Values returns all known values for CapacityProviderUpdateStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CapacityProviderUpdateStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (CapacityProviderUpdateStatus) Values() []CapacityProviderUpdateStatus {
 	return []CapacityProviderUpdateStatus{
 		"DELETE_IN_PROGRESS",
@@ -137,9 +138,9 @@ const (
 	ClusterFieldTags           ClusterField = "TAGS"
 )
 
-// Values returns all known values for ClusterField. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ClusterField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterField) Values() []ClusterField {
 	return []ClusterField{
 		"ATTACHMENTS",
@@ -194,9 +195,9 @@ const (
 	ConnectivityDisconnected Connectivity = "DISCONNECTED"
 )
 
-// Values returns all known values for Connectivity. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Connectivity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Connectivity) Values() []Connectivity {
 	return []Connectivity{
 		"CONNECTED",
@@ -295,9 +296,9 @@ const (
 	DeploymentControllerTypeExternal   DeploymentControllerType = "EXTERNAL"
 )
 
-// Values returns all known values for DeploymentControllerType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeploymentControllerType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentControllerType) Values() []DeploymentControllerType {
 	return []DeploymentControllerType{
 		"ECS",
@@ -427,8 +428,8 @@ const (
 	ExecuteCommandLoggingOverride ExecuteCommandLogging = "OVERRIDE"
 )
 
-// Values returns all known values for ExecuteCommandLogging. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ExecuteCommandLogging. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ExecuteCommandLogging) Values() []ExecuteCommandLogging {
 	return []ExecuteCommandLogging{
@@ -465,9 +466,9 @@ const (
 	HealthStatusUnknown   HealthStatus = "UNKNOWN"
 )
 
-// Values returns all known values for HealthStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HealthStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (HealthStatus) Values() []HealthStatus {
 	return []HealthStatus{
 		"HEALTHY",
@@ -486,9 +487,9 @@ const (
 	InstanceHealthCheckStateInitializing     InstanceHealthCheckState = "INITIALIZING"
 )
 
-// Values returns all known values for InstanceHealthCheckState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InstanceHealthCheckState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceHealthCheckState) Values() []InstanceHealthCheckState {
 	return []InstanceHealthCheckState{
 		"OK",
@@ -568,9 +569,9 @@ const (
 	LogDriverAwsfirelens LogDriver = "awsfirelens"
 )
 
-// Values returns all known values for LogDriver. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LogDriver. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LogDriver) Values() []LogDriver {
 	return []LogDriver{
 		"json-file",
@@ -626,9 +627,10 @@ const (
 	ManagedTerminationProtectionDisabled ManagedTerminationProtection = "DISABLED"
 )
 
-// Values returns all known values for ManagedTerminationProtection. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ManagedTerminationProtection. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ManagedTerminationProtection) Values() []ManagedTerminationProtection {
 	return []ManagedTerminationProtection{
 		"ENABLED",
@@ -733,8 +735,8 @@ const (
 	PlacementStrategyTypeBinpack PlacementStrategyType = "binpack"
 )
 
-// Values returns all known values for PlacementStrategyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PlacementStrategyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementStrategyType) Values() []PlacementStrategyType {
 	return []PlacementStrategyType{
@@ -804,9 +806,9 @@ const (
 	ResourceTypeInferenceAccelerator ResourceType = "InferenceAccelerator"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"GPU",
@@ -821,9 +823,9 @@ const (
 	ScaleUnitPercent ScaleUnit = "PERCENT"
 )
 
-// Values returns all known values for ScaleUnit. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScaleUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ScaleUnit) Values() []ScaleUnit {
 	return []ScaleUnit{
 		"PERCENT",
@@ -856,8 +858,8 @@ const (
 	ScopeShared Scope = "shared"
 )
 
-// Values returns all known values for Scope. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Scope. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Scope) Values() []Scope {
 	return []Scope{
@@ -873,9 +875,9 @@ const (
 	ServiceFieldTags ServiceField = "TAGS"
 )
 
-// Values returns all known values for ServiceField. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServiceField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceField) Values() []ServiceField {
 	return []ServiceField{
 		"TAGS",
@@ -914,9 +916,9 @@ const (
 	SortOrderDesc SortOrder = "DESC"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASC",
@@ -1038,9 +1040,9 @@ const (
 	TaskFieldTags TaskField = "TAGS"
 )
 
-// Values returns all known values for TaskField. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaskField. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TaskField) Values() []TaskField {
 	return []TaskField{
 		"TAGS",
@@ -1054,9 +1056,9 @@ const (
 	TaskSetFieldTags TaskSetField = "TAGS"
 )
 
-// Values returns all known values for TaskSetField. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaskSetField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TaskSetField) Values() []TaskSetField {
 	return []TaskSetField{
 		"TAGS",
@@ -1075,9 +1077,9 @@ const (
 	TaskStopCodeTerminationNotice         TaskStopCode = "TerminationNotice"
 )
 
-// Values returns all known values for TaskStopCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaskStopCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TaskStopCode) Values() []TaskStopCode {
 	return []TaskStopCode{
 		"TaskFailedToStart",

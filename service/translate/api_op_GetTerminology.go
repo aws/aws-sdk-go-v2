@@ -53,8 +53,8 @@ type GetTerminologyOutput struct {
 	// presigned URL to that has a 30-minute expiration.
 	AuxiliaryDataLocation *types.TerminologyDataLocation
 
-	// The Amazon S3 location of the most recent custom terminology input file that was
-	// successfully imported into Amazon Translate. The location is returned as a
+	// The Amazon S3 location of the most recent custom terminology input file that
+	// was successfully imported into Amazon Translate. The location is returned as a
 	// presigned URL that has a 30-minute expiration. Amazon Translate doesn't scan all
 	// input files for the risk of CSV injection attacks. CSV injection occurs when a
 	// .csv or .tsv file is altered so that a record contains malicious code. The

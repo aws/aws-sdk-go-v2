@@ -70,9 +70,9 @@ type DescribeFeatureMetadataOutput struct {
 	// This member is required.
 	FeatureType types.FeatureType
 
-	// A timestamp indicating when the metadata for the feature group was modified. For
-	// example, if you add a parameter describing the feature, the timestamp changes to
-	// reflect the last time you
+	// A timestamp indicating when the metadata for the feature group was modified.
+	// For example, if you add a parameter describing the feature, the timestamp
+	// changes to reflect the last time you
 	//
 	// This member is required.
 	LastModifiedTime *time.Time

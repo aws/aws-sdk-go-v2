@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an empty receipt rule set. For information about setting up receipt rule
-// sets, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html).
-// You can execute this operation no more than once per second.
+// Creates an empty receipt rule set. For information about setting up receipt
+// rule sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) CreateReceiptRuleSet(ctx context.Context, params *CreateReceiptRuleSetInput, optFns ...func(*Options)) (*CreateReceiptRuleSetOutput, error) {
 	if params == nil {
 		params = &CreateReceiptRuleSetInput{}
@@ -31,20 +30,15 @@ func (c *Client) CreateReceiptRuleSet(ctx context.Context, params *CreateReceipt
 
 // Represents a request to create an empty receipt rule set. You use receipt rule
 // sets to receive email with Amazon SES. For more information, see the Amazon SES
-// Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// .
 type CreateReceiptRuleSetInput struct {
 
 	// The name of the rule set to create. The name must:
-	//
-	// * This value can only
-	// contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes
-	// (-).
-	//
-	// * Start and end with a letter or number.
-	//
-	// * Contain less than 64
-	// characters.
+	//   - This value can only contain ASCII letters (a-z, A-Z), numbers (0-9),
+	//   underscores (_), or dashes (-).
+	//   - Start and end with a letter or number.
+	//   - Contain less than 64 characters.
 	//
 	// This member is required.
 	RuleSetName *string

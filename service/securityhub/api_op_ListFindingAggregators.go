@@ -31,8 +31,8 @@ func (c *Client) ListFindingAggregators(ctx context.Context, params *ListFinding
 
 type ListFindingAggregatorsInput struct {
 
-	// The maximum number of results to return. This operation currently only returns a
-	// single result.
+	// The maximum number of results to return. This operation currently only returns
+	// a single result.
 	MaxResults int32
 
 	// The token returned with the previous set of results. Identifies the next set of
@@ -49,7 +49,7 @@ type ListFindingAggregatorsOutput struct {
 	FindingAggregators []types.FindingAggregator
 
 	// If there are more results, this is the token to provide in the next call to
-	// ListFindingAggregators. This operation currently only returns a single result.
+	// ListFindingAggregators . This operation currently only returns a single result.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -129,8 +129,8 @@ var _ ListFindingAggregatorsAPIClient = (*Client)(nil)
 // ListFindingAggregatorsPaginatorOptions is the paginator options for
 // ListFindingAggregators
 type ListFindingAggregatorsPaginatorOptions struct {
-	// The maximum number of results to return. This operation currently only returns a
-	// single result.
+	// The maximum number of results to return. This operation currently only returns
+	// a single result.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -23,8 +23,8 @@ import (
 // includes a nextToken string. To get the next page of results, run the request
 // again and specify the string for the nextToken parameter. Each call to the API
 // is limited to span a duration of seven days. It is likely that the number of
-// records returned is smaller than the specified limit. In such cases, you can
-// make another call, using the nextToken.
+// records returned is smaller than the specified limit . In such cases, you can
+// make another call, using the nextToken .
 func (c *Client) GetResourceConfigHistory(ctx context.Context, params *GetResourceConfigHistoryInput, optFns ...func(*Options)) (*GetResourceConfigHistoryOutput, error) {
 	if params == nil {
 		params = &GetResourceConfigHistoryInput{}
@@ -43,7 +43,7 @@ func (c *Client) GetResourceConfigHistory(ctx context.Context, params *GetResour
 // The input for the GetResourceConfigHistory action.
 type GetResourceConfigHistoryInput struct {
 
-	// The ID of the resource (for example., sg-xxxxxx).
+	// The ID of the resource (for example., sg-xxxxxx ).
 	//
 	// This member is required.
 	ResourceId *string

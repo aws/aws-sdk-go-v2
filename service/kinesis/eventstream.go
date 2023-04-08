@@ -18,8 +18,8 @@ import (
 	"sync"
 )
 
-// SubscribeToShardEventStreamReader provides the interface for reading events from
-// a stream.
+// SubscribeToShardEventStreamReader provides the interface for reading events
+// from a stream.
 //
 // The writer's Close method must allow multiple concurrent calls.
 type SubscribeToShardEventStreamReader interface {

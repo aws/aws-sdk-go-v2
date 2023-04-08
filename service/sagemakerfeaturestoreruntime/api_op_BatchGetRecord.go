@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a batch of Records from a FeatureGroup.
+// Retrieves a batch of Records from a FeatureGroup .
 func (c *Client) BatchGetRecord(ctx context.Context, params *BatchGetRecordInput, optFns ...func(*Options)) (*BatchGetRecordOutput, error) {
 	if params == nil {
 		params = &BatchGetRecordInput{}

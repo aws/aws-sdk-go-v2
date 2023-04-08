@@ -14,7 +14,7 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Adds an external destination to your Amazon
+// Analytics API V2 Documentation . Adds an external destination to your Amazon
 // Kinesis Analytics application. If you want Amazon Kinesis Analytics to deliver
 // data from an in-application stream within your application to an external
 // destination (such as an Amazon Kinesis stream, an Amazon Kinesis Firehose
@@ -24,16 +24,13 @@ import (
 // and an external destination. You can use one of the output configurations to
 // deliver data from your in-application error stream to an external destination so
 // that you can analyze the errors. For more information, see Understanding
-// Application Output (Destination)
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
-// Any configuration update, including adding a streaming source using this
+// Application Output (Destination) (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html)
+// . Any configuration update, including adding a streaming source using this
 // operation, results in a new version of the application. You can use the
-// DescribeApplication
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+// DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 // operation to find the current application version. For the limits on the number
-// of application inputs and outputs you can configure, see Limits
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html). This
-// operation requires permissions to perform the
+// of application inputs and outputs you can configure, see Limits (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html)
+// . This operation requires permissions to perform the
 // kinesisanalytics:AddApplicationOutput action.
 func (c *Client) AddApplicationOutput(ctx context.Context, params *AddApplicationOutputInput, optFns ...func(*Options)) (*AddApplicationOutputOutput, error) {
 	if params == nil {
@@ -58,8 +55,7 @@ type AddApplicationOutputInput struct {
 	ApplicationName *string
 
 	// Version of the application to which you want to add the output configuration.
-	// You can use the DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the current application version. If the version specified is
 	// not the current version, the ConcurrentModificationException is returned.
 	//

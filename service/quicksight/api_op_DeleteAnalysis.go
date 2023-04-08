@@ -50,13 +50,13 @@ type DeleteAnalysisInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// This option defaults to the value NoForceDeleteWithoutRecovery. To immediately
+	// This option defaults to the value NoForceDeleteWithoutRecovery . To immediately
 	// delete the analysis, add the ForceDeleteWithoutRecovery option. You can't
 	// restore an analysis after it's deleted.
 	ForceDeleteWithoutRecovery bool
 
-	// A value that specifies the number of days that Amazon QuickSight waits before it
-	// deletes the analysis. You can't use this parameter with the
+	// A value that specifies the number of days that Amazon QuickSight waits before
+	// it deletes the analysis. You can't use this parameter with the
 	// ForceDeleteWithoutRecovery option in the same API call. The default value is 30.
 	RecoveryWindowInDays *int64
 

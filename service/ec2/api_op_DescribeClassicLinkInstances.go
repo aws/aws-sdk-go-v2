@@ -38,30 +38,22 @@ type DescribeClassicLinkInstancesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * group-id - The ID of a VPC security group that's
-	// associated with the instance.
-	//
-	// * instance-id - The ID of the instance.
-	//
-	// * tag: -
-	// The key/value combination of a tag assigned to the resource. Use the tag key in
-	// the filter name and the tag value as the filter value. For example, to find all
-	// resources that have a tag with the key Owner and the value TeamA, specify
-	// tag:Owner for the filter name and TeamA for the filter value.
-	//
-	// * tag-key - The
-	// key of a tag assigned to the resource. Use this filter to find all resources
-	// assigned a tag with a specific key, regardless of the tag value.
-	//
-	// * vpc-id - The
-	// ID of the VPC to which the instance is linked. vpc-id - The ID of the VPC that
-	// the instance is linked to.
+	//   - group-id - The ID of a VPC security group that's associated with the
+	//   instance.
+	//   - instance-id - The ID of the instance.
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - vpc-id - The ID of the VPC to which the instance is linked. vpc-id - The ID
+	//   of the VPC that the instance is linked to.
 	Filters []types.Filter
 
 	// One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
@@ -69,9 +61,8 @@ type DescribeClassicLinkInstancesInput struct {
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-	// Constraint: If the value is greater than 1000, we return only 1000 items.
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// . Constraint: If the value is greater than 1000, we return only 1000 items.
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -169,9 +160,8 @@ var _ DescribeClassicLinkInstancesAPIClient = (*Client)(nil)
 type DescribeClassicLinkInstancesPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-	// Constraint: If the value is greater than 1000, we return only 1000 items.
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// . Constraint: If the value is greater than 1000, we return only 1000 items.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

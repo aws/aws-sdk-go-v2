@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
+// Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup .
 func (c *Client) RegisterDBProxyTargets(ctx context.Context, params *RegisterDBProxyTargetsInput, optFns ...func(*Options)) (*RegisterDBProxyTargetsOutput, error) {
 	if params == nil {
 		params = &RegisterDBProxyTargetsInput{}
@@ -29,7 +29,7 @@ func (c *Client) RegisterDBProxyTargets(ctx context.Context, params *RegisterDBP
 
 type RegisterDBProxyTargetsInput struct {
 
-	// The identifier of the DBProxy that is associated with the DBProxyTargetGroup.
+	// The identifier of the DBProxy that is associated with the DBProxyTargetGroup .
 	//
 	// This member is required.
 	DBProxyName *string
@@ -40,7 +40,7 @@ type RegisterDBProxyTargetsInput struct {
 	// One or more DB instance identifiers.
 	DBInstanceIdentifiers []string
 
-	// The identifier of the DBProxyTargetGroup.
+	// The identifier of the DBProxyTargetGroup .
 	TargetGroupName *string
 
 	noSmithyDocumentSerde

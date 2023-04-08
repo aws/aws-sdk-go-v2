@@ -43,16 +43,14 @@ type GetSamplingTargetsOutput struct {
 
 	// The last time a user changed the sampling rule configuration. If the sampling
 	// rule configuration changed since the service last retrieved it, the service
-	// should call GetSamplingRules
-	// (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html) to get
-	// the latest version.
+	// should call GetSamplingRules (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html)
+	// to get the latest version.
 	LastRuleModification *time.Time
 
 	// Updated rules that the service should use to sample requests.
 	SamplingTargetDocuments []types.SamplingTargetDocument
 
-	// Information about SamplingStatisticsDocument
-	// (https://docs.aws.amazon.com/xray/latest/api/API_SamplingStatisticsDocument.html)
+	// Information about SamplingStatisticsDocument (https://docs.aws.amazon.com/xray/latest/api/API_SamplingStatisticsDocument.html)
 	// that X-Ray could not process.
 	UnprocessedStatistics []types.UnprocessedStatistics
 

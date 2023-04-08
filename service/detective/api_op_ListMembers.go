@@ -39,14 +39,14 @@ type ListMembersInput struct {
 	// This member is required.
 	GraphArn *string
 
-	// The maximum number of member accounts to include in the response. The total must
-	// be less than the overall limit on the number of results to return, which is
+	// The maximum number of member accounts to include in the response. The total
+	// must be less than the overall limit on the number of results to return, which is
 	// currently 200.
 	MaxResults *int32
 
-	// For requests to retrieve the next page of member account results, the pagination
-	// token that was returned with the previous page of results. The initial request
-	// does not include a pagination token.
+	// For requests to retrieve the next page of member account results, the
+	// pagination token that was returned with the previous page of results. The
+	// initial request does not include a pagination token.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -145,8 +145,8 @@ var _ ListMembersAPIClient = (*Client)(nil)
 
 // ListMembersPaginatorOptions is the paginator options for ListMembers
 type ListMembersPaginatorOptions struct {
-	// The maximum number of member accounts to include in the response. The total must
-	// be less than the overall limit on the number of results to return, which is
+	// The maximum number of member accounts to include in the response. The total
+	// must be less than the overall limit on the number of results to return, which is
 	// currently 200.
 	Limit int32
 

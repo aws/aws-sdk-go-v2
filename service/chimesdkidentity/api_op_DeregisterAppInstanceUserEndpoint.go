@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters an AppInstanceUserEndpoint.
+// Deregisters an AppInstanceUserEndpoint .
 func (c *Client) DeregisterAppInstanceUserEndpoint(ctx context.Context, params *DeregisterAppInstanceUserEndpointInput, optFns ...func(*Options)) (*DeregisterAppInstanceUserEndpointOutput, error) {
 	if params == nil {
 		params = &DeregisterAppInstanceUserEndpointInput{}
@@ -28,12 +28,12 @@ func (c *Client) DeregisterAppInstanceUserEndpoint(ctx context.Context, params *
 
 type DeregisterAppInstanceUserEndpointInput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	//
 	// This member is required.
 	AppInstanceUserArn *string
 
-	// The unique identifier of the AppInstanceUserEndpoint.
+	// The unique identifier of the AppInstanceUserEndpoint .
 	//
 	// This member is required.
 	EndpointId *string

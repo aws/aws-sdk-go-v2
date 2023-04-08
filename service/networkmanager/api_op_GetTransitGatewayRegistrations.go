@@ -42,8 +42,8 @@ type GetTransitGatewayRegistrationsInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum is
-	// 10.
+	// The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum
+	// is 10.
 	TransitGatewayArns []string
 
 	noSmithyDocumentSerde

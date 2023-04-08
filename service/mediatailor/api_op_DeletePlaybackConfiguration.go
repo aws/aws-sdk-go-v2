@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes a playback configuration. For information about MediaTailor
-// configurations, see Working with configurations in AWS Elemental MediaTailor
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html).
+// configurations, see Working with configurations in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html)
+// .
 func (c *Client) DeletePlaybackConfiguration(ctx context.Context, params *DeletePlaybackConfigurationInput, optFns ...func(*Options)) (*DeletePlaybackConfigurationOutput, error) {
 	if params == nil {
 		params = &DeletePlaybackConfigurationInput{}

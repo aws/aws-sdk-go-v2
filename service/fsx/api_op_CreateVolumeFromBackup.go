@@ -57,8 +57,8 @@ type CreateVolumeFromBackupInput struct {
 
 type CreateVolumeFromBackupOutput struct {
 
-	// Returned after a successful CreateVolumeFromBackup API operation, describing the
-	// volume just created.
+	// Returned after a successful CreateVolumeFromBackup API operation, describing
+	// the volume just created.
 	Volume *types.Volume
 
 	// Metadata pertaining to the operation's result.

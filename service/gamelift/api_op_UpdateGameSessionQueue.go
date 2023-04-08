@@ -14,8 +14,7 @@ import (
 // Updates the configuration of a game session queue, which determines how the
 // queue processes new game session requests. To update settings, specify the queue
 // name to be updated and provide the new settings. When updating destinations,
-// provide a complete list of destinations. Learn more  Using Multi-Region Queues
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
+// provide a complete list of destinations. Learn more Using Multi-Region Queues (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
 func (c *Client) UpdateGameSessionQueue(ctx context.Context, params *UpdateGameSessionQueueInput, optFns ...func(*Options)) (*UpdateGameSessionQueueOutput, error) {
 	if params == nil {
 		params = &UpdateGameSessionQueueInput{}
@@ -33,8 +32,8 @@ func (c *Client) UpdateGameSessionQueue(ctx context.Context, params *UpdateGameS
 
 type UpdateGameSessionQueueInput struct {
 
-	// A descriptive label that is associated with game session queue. Queue names must
-	// be unique within each Region. You can use either the queue ID or ARN value.
+	// A descriptive label that is associated with game session queue. Queue names
+	// must be unique within each Region. You can use either the queue ID or ARN value.
 	//
 	// This member is required.
 	Name *string
@@ -51,14 +50,14 @@ type UpdateGameSessionQueueInput struct {
 
 	// A list of locations where a queue is allowed to place new game sessions.
 	// Locations are specified in the form of Amazon Web Services Region codes, such as
-	// us-west-2. If this parameter is not set, game sessions can be placed in any
+	// us-west-2 . If this parameter is not set, game sessions can be placed in any
 	// queue location. To remove an existing filter configuration, pass in an empty
 	// set.
 	FilterConfiguration *types.FilterConfiguration
 
-	// An SNS topic ARN that is set up to receive game session placement notifications.
-	// See  Setting up notifications for game session placement
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html).
+	// An SNS topic ARN that is set up to receive game session placement
+	// notifications. See Setting up notifications for game session placement (https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html)
+	// .
 	NotificationTarget *string
 
 	// A set of policies that act as a sliding cap on player latency. FleetIQ works to

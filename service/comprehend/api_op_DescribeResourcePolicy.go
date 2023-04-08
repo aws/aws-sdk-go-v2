@@ -30,8 +30,8 @@ func (c *Client) DescribeResourcePolicy(ctx context.Context, params *DescribeRes
 
 type DescribeResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the custom model version that has the resource
-	// policy.
+	// The Amazon Resource Name (ARN) of the custom model version that has the
+	// resource policy.
 	//
 	// This member is required.
 	ResourceArn *string

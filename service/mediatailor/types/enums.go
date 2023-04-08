@@ -28,9 +28,9 @@ const (
 	ChannelStateStopped ChannelState = "STOPPED"
 )
 
-// Values returns all known values for ChannelState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelState) Values() []ChannelState {
 	return []ChannelState{
 		"RUNNING",
@@ -132,9 +132,9 @@ const (
 	PlaybackModeLinear PlaybackMode = "LINEAR"
 )
 
-// Values returns all known values for PlaybackMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PlaybackMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PlaybackMode) Values() []PlaybackMode {
 	return []PlaybackMode{
 		"LOOP",

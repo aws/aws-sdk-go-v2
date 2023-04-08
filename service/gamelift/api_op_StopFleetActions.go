@@ -17,21 +17,15 @@ import (
 // has several potential purposes. It allows you to temporarily stop auto-scaling
 // activity but retain your scaling policies for use in the future. For
 // multi-location fleets, you can set up fleet-wide auto-scaling, and then opt out
-// of it for certain locations. This operation can be used in the following
-// ways:
+// of it for certain locations. This operation can be used in the following ways:
+//   - To stop actions on instances in the fleet's home Region, provide a fleet ID
+//     and the type of actions to suspend.
+//   - To stop actions on instances in one of the fleet's remote locations,
+//     provide a fleet ID, a location name, and the type of actions to suspend.
 //
-// * To stop actions on instances in the fleet's home Region, provide a
-// fleet ID and the type of actions to suspend.
-//
-// * To stop actions on instances in
-// one of the fleet's remote locations, provide a fleet ID, a location name, and
-// the type of actions to suspend.
-//
-// If successful, GameLift no longer initiates
-// scaling events except in response to manual changes using UpdateFleetCapacity
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html).
-// Learn more Setting up GameLift Fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// If successful, GameLift no longer initiates scaling events except in response
+// to manual changes using UpdateFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html)
+// . Learn more Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsInput, optFns ...func(*Options)) (*StopFleetActionsOutput, error) {
 	if params == nil {
 		params = &StopFleetActionsInput{}
@@ -61,7 +55,7 @@ type StopFleetActionsInput struct {
 	FleetId *string
 
 	// The fleet location to stop fleet actions for. Specify a location in the form of
-	// an Amazon Web Services Region code, such as us-west-2.
+	// an Amazon Web Services Region code, such as us-west-2 .
 	Location *string
 
 	noSmithyDocumentSerde
@@ -69,11 +63,10 @@ type StopFleetActionsInput struct {
 
 type StopFleetActionsOutput struct {
 
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
-	// assigned to a GameLift fleet resource and uniquely identifies it. ARNs are
-	// unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
+	// ) that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
+	// are unique across all Regions. Format is
+	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 
 	// A unique identifier for the fleet to stop actions on.

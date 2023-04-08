@@ -57,8 +57,8 @@ type ListCasesForContactOutput struct {
 	// This member is required.
 	Cases []types.CaseSummary
 
-	// The token for the next set of results. This is null if there are no more results
-	// to return.
+	// The token for the next set of results. This is null if there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -130,8 +130,8 @@ func (c *Client) addOperationListCasesForContactMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListCasesForContactAPIClient is a client that implements the ListCasesForContact
-// operation.
+// ListCasesForContactAPIClient is a client that implements the
+// ListCasesForContact operation.
 type ListCasesForContactAPIClient interface {
 	ListCasesForContact(context.Context, *ListCasesForContactInput, ...func(*Options)) (*ListCasesForContactOutput, error)
 }

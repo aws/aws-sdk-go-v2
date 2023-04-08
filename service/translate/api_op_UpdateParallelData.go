@@ -60,14 +60,14 @@ type UpdateParallelDataOutput struct {
 	LatestUpdateAttemptAt *time.Time
 
 	// The status of the parallel data update attempt. When the updated parallel data
-	// resource is ready for you to use, the status is ACTIVE.
+	// resource is ready for you to use, the status is ACTIVE .
 	LatestUpdateAttemptStatus types.ParallelDataStatus
 
 	// The name of the parallel data resource being updated.
 	Name *string
 
-	// The status of the parallel data resource that you are attempting to update. Your
-	// update request is accepted only if this status is either ACTIVE or FAILED.
+	// The status of the parallel data resource that you are attempting to update.
+	// Your update request is accepted only if this status is either ACTIVE or FAILED .
 	Status types.ParallelDataStatus
 
 	// Metadata pertaining to the operation's result.

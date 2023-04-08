@@ -36,8 +36,8 @@ type ModifyReportDefinitionInput struct {
 	// This member is required.
 	ReportDefinition *types.ReportDefinition
 
-	// The name of the report that you want to create. The name must be unique, is case
-	// sensitive, and can't include spaces.
+	// The name of the report that you want to create. The name must be unique, is
+	// case sensitive, and can't include spaces.
 	//
 	// This member is required.
 	ReportName *string

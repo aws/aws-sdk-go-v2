@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists devices allocated to the stage, containing detailed device information and
-// deployment status.
+// Lists devices allocated to the stage, containing detailed device information
+// and deployment status.
 func (c *Client) ListStageDevices(ctx context.Context, params *ListStageDevicesInput, optFns ...func(*Options)) (*ListStageDevicesOutput, error) {
 	if params == nil {
 		params = &ListStageDevicesInput{}

@@ -58,7 +58,7 @@ type CreateUsagePlanKeyOutput struct {
 	// The name of a usage plan key.
 	Name *string
 
-	// The type of a usage plan key. Currently, the valid key type is API_KEY.
+	// The type of a usage plan key. Currently, the valid key type is API_KEY .
 	Type *string
 
 	// The value of a usage plan key.

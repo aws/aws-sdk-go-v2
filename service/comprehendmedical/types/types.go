@@ -7,10 +7,10 @@ import (
 	"time"
 )
 
-// An extracted segment of the text that is an attribute of an entity, or otherwise
-// related to an entity, such as the dosage of a medication taken. It contains
-// information about the attribute such as id, begin and end offset within the
-// input text, and the segment of the input text.
+// An extracted segment of the text that is an attribute of an entity, or
+// otherwise related to an entity, such as the dosage of a medication taken. It
+// contains information about the attribute such as id, begin and end offset within
+// the input text, and the segment of the input text.
 type Attribute struct {
 
 	// The 0-based character offset in the input text that shows where the attribute
@@ -24,8 +24,8 @@ type Attribute struct {
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
-	// The numeric identifier for this attribute. This is a monotonically increasing id
-	// unique within this response rather than a global unique identifier.
+	// The numeric identifier for this attribute. This is a monotonically increasing
+	// id unique within this response rather than a global unique identifier.
 	Id *int32
 
 	// The level of confidence that Comprehend Medical; has that this attribute is
@@ -33,12 +33,12 @@ type Attribute struct {
 	RelationshipScore *float32
 
 	// The type of relationship between the entity and attribute. Type for the
-	// relationship is OVERLAP, indicating that the entity occurred at the same time as
-	// the Date_Expression.
+	// relationship is OVERLAP , indicating that the entity occurred at the same time
+	// as the Date_Expression .
 	RelationshipType RelationshipType
 
-	// The level of confidence that Comprehend Medical; has that the segment of text is
-	// correctly recognized as an attribute.
+	// The level of confidence that Comprehend Medical; has that the segment of text
+	// is correctly recognized as an attribute.
 	Score *float32
 
 	// The segment of input text extracted as this attribute.
@@ -112,7 +112,7 @@ type ComprehendMedicalAsyncJobProperties struct {
 	// The name that you assigned to the detection job.
 	JobName *string
 
-	// The current status of the detection job. If the status is FAILED, the Message
+	// The current status of the detection job. If the status is FAILED , the Message
 	// field shows the reason for the failure.
 	JobStatus JobStatus
 
@@ -128,8 +128,8 @@ type ComprehendMedicalAsyncJobProperties struct {
 	// A description of the status of a job.
 	Message *string
 
-	// The version of the model used to analyze the documents. The version number looks
-	// like X.X.X. You can use this information to track the model used for a
+	// The version of the model used to analyze the documents. The version number
+	// looks like X.X.X. You can use this information to track the model used for a
 	// particular batch of documents.
 	ModelVersion *string
 
@@ -156,8 +156,8 @@ type Entity struct {
 	// The category of the entity.
 	Category EntityType
 
-	// The 0-based character offset in the input text that shows where the entity ends.
-	// The offset returns the UTF-8 code point in the string.
+	// The 0-based character offset in the input text that shows where the entity
+	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
 	// The numeric identifier for the entity. This is a monotonically increasing id
@@ -182,23 +182,23 @@ type Entity struct {
 
 // The detected attributes that relate to an entity. This includes an extracted
 // segment of the text that is an attribute of an entity, or otherwise related to
-// an entity. InferICD10CM detects the following attributes: Direction, System,
-// Organ or Site, and Acuity.
+// an entity. InferICD10CM detects the following attributes: Direction , System,
+// Organ or Site , and Acuity .
 type ICD10CMAttribute struct {
 
 	// The 0-based character offset in the input text that shows where the attribute
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
 
-	// The category of attribute. Can be either of DX_NAME or TIME_EXPRESSION.
+	// The category of attribute. Can be either of DX_NAME or TIME_EXPRESSION .
 	Category ICD10CMEntityType
 
 	// The 0-based character offset in the input text that shows where the attribute
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
-	// The numeric identifier for this attribute. This is a monotonically increasing id
-	// unique within this response rather than a global unique identifier.
+	// The numeric identifier for this attribute. This is a monotonically increasing
+	// id unique within this response rather than a global unique identifier.
 	Id *int32
 
 	// The level of confidence that Amazon Comprehend Medical has that this attribute
@@ -206,7 +206,7 @@ type ICD10CMAttribute struct {
 	RelationshipScore *float32
 
 	// The type of relationship between the entity and attribute. Type for the
-	// relationship can be either of OVERLAP or SYSTEM_ORGAN_SITE.
+	// relationship can be either of OVERLAP or SYSTEM_ORGAN_SITE .
 	RelationshipType ICD10CMRelationshipType
 
 	// The level of confidence that Amazon Comprehend Medical has that the segment of
@@ -217,10 +217,10 @@ type ICD10CMAttribute struct {
 	Text *string
 
 	// The contextual information for the attribute. The traits recognized by
-	// InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
+	// InferICD10CM are DIAGNOSIS , SIGN , SYMPTOM , and NEGATION .
 	Traits []ICD10CMTrait
 
-	// The type of attribute. InferICD10CM detects entities of the type DX_NAME.
+	// The type of attribute. InferICD10CM detects entities of the type DX_NAME .
 	Type ICD10CMAttributeType
 
 	noSmithyDocumentSerde
@@ -264,8 +264,8 @@ type ICD10CMEntity struct {
 	// MEDICAL_CONDITION category.
 	Category ICD10CMEntityCategory
 
-	// The 0-based character offset in the input text that shows where the entity ends.
-	// The offset returns the UTF-8 code point in the string.
+	// The 0-based character offset in the input text that shows where the entity
+	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
 	// The ICD-10-CM concepts that the entity could refer to, along with a score
@@ -284,25 +284,25 @@ type ICD10CMEntity struct {
 	Text *string
 
 	// Provides Contextual information for the entity. The traits recognized by
-	// InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
+	// InferICD10CM are DIAGNOSIS , SIGN , SYMPTOM , and NEGATION.
 	Traits []ICD10CMTrait
 
 	// Describes the specific type of entity with category of entities. InferICD10CM
-	// detects entities of the type DX_NAME and TIME_EXPRESSION.
+	// detects entities of the type DX_NAME and TIME_EXPRESSION .
 	Type ICD10CMEntityType
 
 	noSmithyDocumentSerde
 }
 
-// Contextual information for the entity. The traits recognized by InferICD10CM are
-// DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
+// Contextual information for the entity. The traits recognized by InferICD10CM
+// are DIAGNOSIS , SIGN , SYMPTOM , and NEGATION .
 type ICD10CMTrait struct {
 
 	// Provides a name or contextual description about the trait.
 	Name ICD10CMTraitName
 
-	// The level of confidence that Comprehend Medical; has that the segment of text is
-	// correctly recognized as a trait.
+	// The level of confidence that Comprehend Medical; has that the segment of text
+	// is correctly recognized as a trait.
 	Score *float32
 
 	noSmithyDocumentSerde
@@ -312,10 +312,10 @@ type ICD10CMTrait struct {
 // the S3 bucket and the path to the files to be analyzed.
 type InputDataConfig struct {
 
-	// The URI of the S3 bucket that contains the input data. The bucket must be in the
-	// same region as the API endpoint that you are calling. Each file in the document
-	// collection must be less than 40 KB. You can store a maximum of 30 GB in the
-	// bucket.
+	// The URI of the S3 bucket that contains the input data. The bucket must be in
+	// the same region as the API endpoint that you are calling. Each file in the
+	// document collection must be less than 40 KB. You can store a maximum of 30 GB in
+	// the bucket.
 	//
 	// This member is required.
 	S3Bucket *string
@@ -346,7 +346,7 @@ type OutputDataConfig struct {
 }
 
 // The extracted attributes that relate to this entity. The attributes recognized
-// by InferRxNorm are DOSAGE, DURATION, FORM, FREQUENCY, RATE, ROUTE_OR_MODE.
+// by InferRxNorm are DOSAGE , DURATION , FORM , FREQUENCY , RATE , ROUTE_OR_MODE .
 type RxNormAttribute struct {
 
 	// The 0-based character offset in the input text that shows where the attribute
@@ -357,12 +357,12 @@ type RxNormAttribute struct {
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
-	// The numeric identifier for this attribute. This is a monotonically increasing id
-	// unique within this response rather than a global unique identifier.
+	// The numeric identifier for this attribute. This is a monotonically increasing
+	// id unique within this response rather than a global unique identifier.
 	Id *int32
 
-	// The level of confidence that Amazon Comprehend Medical has that the attribute is
-	// accurately linked to an entity.
+	// The level of confidence that Amazon Comprehend Medical has that the attribute
+	// is accurately linked to an entity.
 	RelationshipScore *float32
 
 	// The level of confidence that Comprehend Medical has that the segment of text is
@@ -378,14 +378,14 @@ type RxNormAttribute struct {
 	Traits []RxNormTrait
 
 	// The type of attribute. The types of attributes recognized by InferRxNorm are
-	// BRAND_NAME and GENERIC_NAME.
+	// BRAND_NAME and GENERIC_NAME .
 	Type RxNormAttributeType
 
 	noSmithyDocumentSerde
 }
 
-// The RxNorm concept that the entity could refer to, along with a score indicating
-// the likelihood of the match.
+// The RxNorm concept that the entity could refer to, along with a score
+// indicating the likelihood of the match.
 type RxNormConcept struct {
 
 	// RxNorm concept ID, also known as the RxCUI.
@@ -408,20 +408,20 @@ type RxNormConcept struct {
 // Attributes and traits of the entity are also returned.
 type RxNormEntity struct {
 
-	// The extracted attributes that relate to the entity. The attributes recognized by
-	// InferRxNorm are DOSAGE, DURATION, FORM, FREQUENCY, RATE, ROUTE_OR_MODE, and
-	// STRENGTH.
+	// The extracted attributes that relate to the entity. The attributes recognized
+	// by InferRxNorm are DOSAGE , DURATION , FORM , FREQUENCY , RATE , ROUTE_OR_MODE ,
+	// and STRENGTH .
 	Attributes []RxNormAttribute
 
 	// The 0-based character offset in the input text that shows where the entity
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
 
-	// The category of the entity. The recognized categories are GENERIC or BRAND_NAME.
+	// The category of the entity. The recognized categories are GENERIC or BRAND_NAME .
 	Category RxNormEntityCategory
 
-	// The 0-based character offset in the input text that shows where the entity ends.
-	// The offset returns the UTF-8 code point in the string.
+	// The 0-based character offset in the input text that shows where the entity
+	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
 	// The numeric identifier for the entity. This is a monotonically increasing id
@@ -443,14 +443,14 @@ type RxNormEntity struct {
 	Traits []RxNormTrait
 
 	// Describes the specific type of entity. For InferRxNorm, the recognized entity
-	// type is MEDICATION.
+	// type is MEDICATION .
 	Type RxNormEntityType
 
 	noSmithyDocumentSerde
 }
 
 // The contextual information for the entity. InferRxNorm recognizes the trait
-// NEGATION, which is any indication that the patient is not taking a medication.
+// NEGATION , which is any indication that the patient is not taking a medication.
 type RxNormTrait struct {
 
 	// Provides a name or contextual description about the trait.
@@ -480,8 +480,8 @@ type SNOMEDCTAttribute struct {
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
-	// The numeric identifier for this attribute. This is a monotonically increasing id
-	// unique within this response rather than a global unique identifier.
+	// The numeric identifier for this attribute. This is a monotonically increasing
+	// id unique within this response rather than a global unique identifier.
 	Id *int32
 
 	// The level of confidence that Comprehend Medical has that this attribute is
@@ -558,8 +558,8 @@ type SNOMEDCTDetails struct {
 // and traits of the entity are also returned.
 type SNOMEDCTEntity struct {
 
-	// An extracted segment of the text that is an attribute of an entity, or otherwise
-	// related to an entity, such as the dosage of a medication taken.
+	// An extracted segment of the text that is an attribute of an entity, or
+	// otherwise related to an entity, such as the dosage of a medication taken.
 	Attributes []SNOMEDCTAttribute
 
 	// The 0-based character offset in the input text that shows where the entity
@@ -570,8 +570,8 @@ type SNOMEDCTEntity struct {
 	// ANATOMY, or TEST_TREATMENT_PROCEDURE.
 	Category SNOMEDCTEntityCategory
 
-	// The 0-based character offset in the input text that shows where the entity ends.
-	// The offset returns the UTF-8 code point in the string.
+	// The 0-based character offset in the input text that shows where the entity
+	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
 	// The numeric identifier for the entity. This is a monotonically increasing id
@@ -626,8 +626,8 @@ type Trait struct {
 	noSmithyDocumentSerde
 }
 
-// An attribute that was extracted, but Comprehend Medical; was unable to relate to
-// an entity.
+// An attribute that was extracted, but Comprehend Medical; was unable to relate
+// to an entity.
 type UnmappedAttribute struct {
 
 	// The specific attribute that has been extracted but not mapped to an entity.

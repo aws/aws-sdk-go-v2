@@ -36,12 +36,12 @@ type ListNotebookInstanceLifecycleConfigsInput struct {
 	// specified time (timestamp).
 	CreationTimeAfter *time.Time
 
-	// A filter that returns only lifecycle configurations that were created before the
-	// specified time (timestamp).
+	// A filter that returns only lifecycle configurations that were created before
+	// the specified time (timestamp).
 	CreationTimeBefore *time.Time
 
-	// A filter that returns only lifecycle configurations that were modified after the
-	// specified time (timestamp).
+	// A filter that returns only lifecycle configurations that were modified after
+	// the specified time (timestamp).
 	LastModifiedTimeAfter *time.Time
 
 	// A filter that returns only lifecycle configurations that were modified before
@@ -51,16 +51,16 @@ type ListNotebookInstanceLifecycleConfigsInput struct {
 	// The maximum number of lifecycle configurations to return in the response.
 	MaxResults *int32
 
-	// A string in the lifecycle configuration name. This filter returns only lifecycle
-	// configurations whose name contains the specified string.
+	// A string in the lifecycle configuration name. This filter returns only
+	// lifecycle configurations whose name contains the specified string.
 	NameContains *string
 
 	// If the result of a ListNotebookInstanceLifecycleConfigs request was truncated,
-	// the response includes a NextToken. To get the next set of lifecycle
+	// the response includes a NextToken . To get the next set of lifecycle
 	// configurations, use the token in the next request.
 	NextToken *string
 
-	// Sorts the list of results. The default is CreationTime.
+	// Sorts the list of results. The default is CreationTime .
 	SortBy types.NotebookInstanceLifecycleConfigSortKey
 
 	// The sort order for results.

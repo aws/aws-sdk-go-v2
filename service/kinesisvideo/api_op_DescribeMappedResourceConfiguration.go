@@ -53,7 +53,7 @@ type DescribeMappedResourceConfigurationOutput struct {
 	// properties.
 	MappedResourceConfigurationList []types.MappedResourceConfigurationListItem
 
-	// The token that was used in the NextTokenrequest to fetch the next set of
+	// The token that was used in the NextToken request to fetch the next set of
 	// results.
 	NextToken *string
 
@@ -131,8 +131,8 @@ type DescribeMappedResourceConfigurationAPIClient interface {
 
 var _ DescribeMappedResourceConfigurationAPIClient = (*Client)(nil)
 
-// DescribeMappedResourceConfigurationPaginatorOptions is the paginator options for
-// DescribeMappedResourceConfiguration
+// DescribeMappedResourceConfigurationPaginatorOptions is the paginator options
+// for DescribeMappedResourceConfiguration
 type DescribeMappedResourceConfigurationPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32

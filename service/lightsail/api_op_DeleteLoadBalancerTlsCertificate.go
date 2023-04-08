@@ -13,9 +13,9 @@ import (
 
 // Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The
 // DeleteLoadBalancerTlsCertificate operation supports tag-based access control via
-// resource tags applied to the resource identified by load balancer name. For more
-// information, see the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// resource tags applied to the resource identified by load balancer name . For
+// more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) DeleteLoadBalancerTlsCertificate(ctx context.Context, params *DeleteLoadBalancerTlsCertificateInput, optFns ...func(*Options)) (*DeleteLoadBalancerTlsCertificateOutput, error) {
 	if params == nil {
 		params = &DeleteLoadBalancerTlsCertificateInput{}
@@ -43,7 +43,7 @@ type DeleteLoadBalancerTlsCertificateInput struct {
 	// This member is required.
 	LoadBalancerName *string
 
-	// When true, forces the deletion of an SSL/TLS certificate. There can be two
+	// When true , forces the deletion of an SSL/TLS certificate. There can be two
 	// certificates associated with a Lightsail load balancer: the primary and the
 	// backup. The force parameter is required when the primary SSL/TLS certificate is
 	// in use by an instance attached to the load balancer.

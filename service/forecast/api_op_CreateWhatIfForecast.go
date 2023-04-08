@@ -42,8 +42,7 @@ type CreateWhatIfForecastInput struct {
 	// This member is required.
 	WhatIfForecastName *string
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
 	// to apply to the what if forecast.
 	Tags []types.Tag
 

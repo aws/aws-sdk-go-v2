@@ -16,37 +16,29 @@ import (
 // .net, and .org domains) or with our registrar associate, Gandi (for all other
 // TLDs). For more information about transferring domains, see the following
 // topics:
+//   - For transfer requirements, a detailed procedure, and information about
+//     viewing the status of a domain that you're transferring to Route 53, see
+//     Transferring Registration for a Domain to Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html)
+//     in the Amazon Route 53 Developer Guide.
+//   - For information about how to transfer a domain from one Amazon Web Services
+//     account to another, see TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
+//     .
+//   - For information about how to transfer a domain to another domain registrar,
+//     see Transferring a Domain from Amazon Route 53 to Another Registrar (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html)
+//     in the Amazon Route 53 Developer Guide.
 //
-// * For transfer requirements, a detailed procedure, and information
-// about viewing the status of a domain that you're transferring to Route 53, see
-// Transferring Registration for a Domain to Amazon Route 53
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html)
-// in the Amazon Route 53 Developer Guide.
-//
-// * For information about how to transfer
-// a domain from one Amazon Web Services account to another, see
-// TransferDomainToAnotherAwsAccount
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
-//
-// *
-// For information about how to transfer a domain to another domain registrar, see
-// Transferring a Domain from Amazon Route 53 to Another Registrar
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html)
-// in the Amazon Route 53 Developer Guide.
-//
-// If the registrar for your domain is
-// also the DNS service provider for the domain, we highly recommend that you
-// transfer your DNS service to Route 53 or to another DNS service provider before
-// you transfer your registration. Some registrars provide free DNS service when
-// you purchase a domain registration. When you transfer the registration, the
-// previous registrar will not renew your domain registration and could end your
-// DNS service at any time. If the registrar for your domain is also the DNS
-// service provider for the domain and you don't transfer DNS service to another
-// provider, your website, email, and the web applications associated with the
-// domain might become unavailable. If the transfer is successful, this method
-// returns an operation ID that you can use to track the progress and completion of
-// the action. If the transfer doesn't complete successfully, the domain registrant
-// will be notified by email.
+// If the registrar for your domain is also the DNS service provider for the
+// domain, we highly recommend that you transfer your DNS service to Route 53 or to
+// another DNS service provider before you transfer your registration. Some
+// registrars provide free DNS service when you purchase a domain registration.
+// When you transfer the registration, the previous registrar will not renew your
+// domain registration and could end your DNS service at any time. If the registrar
+// for your domain is also the DNS service provider for the domain and you don't
+// transfer DNS service to another provider, your website, email, and the web
+// applications associated with the domain might become unavailable. If the
+// transfer is successful, this method returns an operation ID that you can use to
+// track the progress and completion of the action. If the transfer doesn't
+// complete successfully, the domain registrant will be notified by email.
 func (c *Client) TransferDomain(ctx context.Context, params *TransferDomainInput, optFns ...func(*Options)) (*TransferDomainOutput, error) {
 	if params == nil {
 		params = &TransferDomainInput{}
@@ -72,21 +64,14 @@ type TransferDomainInput struct {
 
 	// The name of the domain that you want to transfer to Route 53. The top-level
 	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of
-	// supported TLDs, see Domains that You Can Register with Amazon Route 53
-	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// supported TLDs, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide. The domain name can contain only the
 	// following characters:
-	//
-	// * Letters a through z. Domain names are not case
-	// sensitive.
-	//
-	// * Numbers 0 through 9.
-	//
-	// * Hyphen (-). You can't specify a hyphen at
-	// the beginning or end of a label.
-	//
-	// * Period (.) to separate the labels in the
-	// name, such as the . in example.com.
+	//   - Letters a through z. Domain names are not case sensitive.
+	//   - Numbers 0 through 9.
+	//   - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
+	//   - Period (.) to separate the labels in the name, such as the . in example.com
+	//   .
 	//
 	// This member is required.
 	DomainName *string
@@ -124,27 +109,27 @@ type TransferDomainInput struct {
 	Nameservers []types.Nameserver
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
+	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
 	// return the information that you entered for the admin contact. You must specify
 	// the same privacy setting for the administrative, registrant, and technical
 	// contacts. Default: true
 	PrivacyProtectAdminContact *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
+	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
 	// return the information that you entered for the registrant contact (domain
 	// owner). You must specify the same privacy setting for the administrative,
 	// registrant, and technical contacts. Default: true
 	PrivacyProtectRegistrantContact *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
+	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
 	// return the information that you entered for the technical contact. You must
 	// specify the same privacy setting for the administrative, registrant, and
 	// technical contacts. Default: true
@@ -157,8 +142,8 @@ type TransferDomainInput struct {
 type TransferDomainOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+	// .
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified AWS CloudHSM cluster. Before you can delete a cluster, you
-// must delete all HSMs in the cluster. To see if the cluster contains any HSMs,
-// use DescribeClusters. To delete an HSM, use DeleteHsm.
+// Deletes the specified AWS CloudHSM cluster. Before you can delete a cluster,
+// you must delete all HSMs in the cluster. To see if the cluster contains any
+// HSMs, use DescribeClusters . To delete an HSM, use DeleteHsm .
 func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, optFns ...func(*Options)) (*DeleteClusterOutput, error) {
 	if params == nil {
 		params = &DeleteClusterInput{}
@@ -32,7 +32,7 @@ func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, 
 type DeleteClusterInput struct {
 
 	// The identifier (ID) of the cluster that you are deleting. To find the cluster
-	// ID, use DescribeClusters.
+	// ID, use DescribeClusters .
 	//
 	// This member is required.
 	ClusterId *string

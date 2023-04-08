@@ -12,8 +12,8 @@ import (
 )
 
 // Updates the detector version’s status. You can perform the following promotions
-// or demotions using UpdateDetectorVersionStatus: DRAFT to ACTIVE, ACTIVE to
-// INACTIVE, and INACTIVE to ACTIVE.
+// or demotions using UpdateDetectorVersionStatus : DRAFT to ACTIVE , ACTIVE to
+// INACTIVE , and INACTIVE to ACTIVE .
 func (c *Client) UpdateDetectorVersionStatus(ctx context.Context, params *UpdateDetectorVersionStatusInput, optFns ...func(*Options)) (*UpdateDetectorVersionStatusOutput, error) {
 	if params == nil {
 		params = &UpdateDetectorVersionStatusInput{}

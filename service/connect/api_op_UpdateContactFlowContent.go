@@ -11,8 +11,8 @@ import (
 )
 
 // Updates the specified flow. You can also create and update flows using the
-// Amazon Connect Flow language
-// (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
+// Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html)
+// .
 func (c *Client) UpdateContactFlowContent(ctx context.Context, params *UpdateContactFlowContentInput, optFns ...func(*Options)) (*UpdateContactFlowContentOutput, error) {
 	if params == nil {
 		params = &UpdateContactFlowContentInput{}
@@ -36,8 +36,8 @@ type UpdateContactFlowContentInput struct {
 	ContactFlowId *string
 
 	// The JSON string that represents flow's content. For an example, see Example
-	// contact flow in Amazon Connect Flow language
-	// (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html).
+	// contact flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
+	// .
 	//
 	// This member is required.
 	Content *string

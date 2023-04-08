@@ -44,8 +44,8 @@ type ReleasePhoneNumberInput struct {
 
 type ReleasePhoneNumberOutput struct {
 
-	// The time when the phone number was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	CreatedTimestamp *time.Time
 
 	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.

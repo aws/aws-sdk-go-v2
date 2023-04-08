@@ -30,7 +30,7 @@ func (c *Client) GetComponent(ctx context.Context, params *GetComponentInput, op
 type GetComponentInput struct {
 
 	// The Amazon Resource Name (ARN) of the component that you want to get. Regex
-	// requires the suffix /\d+$.
+	// requires the suffix /\d+$ .
 	//
 	// This member is required.
 	ComponentBuildVersionArn *string

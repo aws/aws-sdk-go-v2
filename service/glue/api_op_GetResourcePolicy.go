@@ -31,9 +31,9 @@ type GetResourcePolicyInput struct {
 
 	// The ARN of the Glue resource for which to retrieve the resource policy. If not
 	// supplied, the Data Catalog resource policy is returned. Use GetResourcePolicies
-	// to view all existing resource policies. For more information see Specifying Glue
-	// Resource ARNs
-	// (https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html).
+	// to view all existing resource policies. For more information see Specifying
+	// Glue Resource ARNs (https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html)
+	// .
 	ResourceArn *string
 
 	noSmithyDocumentSerde

@@ -47,13 +47,13 @@ type DetectModerationLabelsInput struct {
 	// This member is required.
 	Image *types.Image
 
-	// Sets up the configuration for human evaluation, including the FlowDefinition the
-	// image will be sent to.
+	// Sets up the configuration for human evaluation, including the FlowDefinition
+	// the image will be sent to.
 	HumanLoopConfig *types.HumanLoopConfig
 
 	// Specifies the minimum confidence level for the labels to return. Amazon
 	// Rekognition doesn't return any labels with a confidence level lower than this
-	// specified value. If you don't specify MinConfidence, the operation returns
+	// specified value. If you don't specify MinConfidence , the operation returns
 	// labels with confidence values greater than or equal to 50 percent.
 	MinConfidence *float32
 
@@ -65,8 +65,8 @@ type DetectModerationLabelsOutput struct {
 	// Shows the results of the human in the loop evaluation.
 	HumanLoopActivationOutput *types.HumanLoopActivationOutput
 
-	// Array of detected Moderation labels and the time, in milliseconds from the start
-	// of the video, they were detected.
+	// Array of detected Moderation labels and the time, in milliseconds from the
+	// start of the video, they were detected.
 	ModerationLabels []types.ModerationLabel
 
 	// Version number of the moderation detection model that was used to detect unsafe

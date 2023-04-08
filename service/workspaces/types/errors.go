@@ -302,8 +302,8 @@ func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return s
 
 // The configuration of this network is not supported for this operation, or your
 // network configuration conflicts with the Amazon WorkSpaces management network IP
-// range. For more information, see  Configure a VPC for Amazon WorkSpaces
-// (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html).
+// range. For more information, see Configure a VPC for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html)
+// .
 type UnsupportedNetworkConfigurationException struct {
 	Message *string
 
@@ -333,8 +333,8 @@ func (e *UnsupportedNetworkConfigurationException) ErrorFault() smithy.ErrorFaul
 
 // The configuration of this WorkSpace is not supported for this operation. For
 // more information, see Required Configuration and Service Components for
-// WorkSpaces
-// (https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html).
+// WorkSpaces  (https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html)
+// .
 type UnsupportedWorkspaceConfigurationException struct {
 	Message *string
 
@@ -365,8 +365,8 @@ func (e *UnsupportedWorkspaceConfigurationException) ErrorFault() smithy.ErrorFa
 // The workspaces_DefaultRole role could not be found. If this is the first time
 // you are registering a directory, you will need to create the
 // workspaces_DefaultRole role before you can register a directory. For more
-// information, see Creating the workspaces_DefaultRole Role
-// (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role).
+// information, see Creating the workspaces_DefaultRole Role (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role)
+// .
 type WorkspacesDefaultRoleNotFoundException struct {
 	Message *string
 

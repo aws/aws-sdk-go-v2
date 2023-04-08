@@ -12,7 +12,7 @@ import (
 )
 
 // Disables a certificate revocation list (CRL). Required permissions:
-// rolesanywhere:DisableCrl.
+// rolesanywhere:DisableCrl .
 func (c *Client) DisableCrl(ctx context.Context, params *DisableCrlInput, optFns ...func(*Options)) (*DisableCrlOutput, error) {
 	if params == nil {
 		params = &DisableCrlInput{}

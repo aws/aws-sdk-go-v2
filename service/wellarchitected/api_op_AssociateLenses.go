@@ -35,13 +35,13 @@ func (c *Client) AssociateLenses(ctx context.Context, params *AssociateLensesInp
 type AssociateLensesInput struct {
 
 	// List of lens aliases to associate or disassociate with a workload. Up to 10
-	// lenses can be specified. Identify a lens using its LensSummary$LensAlias.
+	// lenses can be specified. Identify a lens using its LensSummary$LensAlias .
 	//
 	// This member is required.
 	LensAliases []string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	WorkloadId *string

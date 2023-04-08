@@ -32,8 +32,8 @@ func (c *Client) GetParameters(ctx context.Context, params *GetParametersInput, 
 type GetParametersInput struct {
 
 	// Names of the parameters for which you want to query information. To query by
-	// parameter label, use "Name": "name:label". To query by parameter version, use
-	// "Name": "name:version".
+	// parameter label, use "Name": "name:label" . To query by parameter version, use
+	// "Name": "name:version" .
 	//
 	// This member is required.
 	Names []string

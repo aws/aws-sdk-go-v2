@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new tunnel, and returns two client access tokens for clients to use to
-// connect to the IoT Secure Tunneling proxy server. Requires permission to access
-// the OpenTunnel
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Creates a new tunnel, and returns two client access tokens for clients to use
+// to connect to the IoT Secure Tunneling proxy server. Requires permission to
+// access the OpenTunnel (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) OpenTunnel(ctx context.Context, params *OpenTunnelInput, optFns ...func(*Options)) (*OpenTunnelOutput, error) {
 	if params == nil {

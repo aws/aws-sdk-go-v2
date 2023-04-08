@@ -30,13 +30,11 @@ func (c *Client) ListRecordHistory(ctx context.Context, params *ListRecordHistor
 type ListRecordHistoryInput struct {
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// The access level to use to obtain results. The default is User.
+	// The access level to use to obtain results. The default is User .
 	AccessLevelFilter *types.AccessLevelFilter
 
 	// The maximum number of items to return with this call.

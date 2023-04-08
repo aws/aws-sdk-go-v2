@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a suggester. For more information, see Getting Search Suggestions
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
+// Deletes a suggester. For more information, see Getting Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DeleteSuggester(ctx context.Context, params *DeleteSuggesterInput, optFns ...func(*Options)) (*DeleteSuggesterOutput, error) {
 	if params == nil {

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all active backup plans for an authenticated account. The list
-// contains information such as Amazon Resource Names (ARNs), plan IDs, creation
-// and deletion dates, version IDs, plan names, and creator request IDs.
+// Returns a list of all active backup plans for an authenticated account. The
+// list contains information such as Amazon Resource Names (ARNs), plan IDs,
+// creation and deletion dates, version IDs, plan names, and creator request IDs.
 func (c *Client) ListBackupPlans(ctx context.Context, params *ListBackupPlansInput, optFns ...func(*Options)) (*ListBackupPlansOutput, error) {
 	if params == nil {
 		params = &ListBackupPlansInput{}
@@ -33,7 +33,7 @@ func (c *Client) ListBackupPlans(ctx context.Context, params *ListBackupPlansInp
 type ListBackupPlansInput struct {
 
 	// A Boolean value with a default value of FALSE that returns deleted backup plans
-	// when set to TRUE.
+	// when set to TRUE .
 	IncludeDeleted *bool
 
 	// The maximum number of items to be returned.

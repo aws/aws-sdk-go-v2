@@ -37,8 +37,8 @@ type ListConnectionsInput struct {
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults int32
 
-	// The token that was returned from the previous ListConnections call, which can be
-	// used to return the next set of connections in the list.
+	// The token that was returned from the previous ListConnections call, which can
+	// be used to return the next set of connections in the list.
 	NextToken *string
 
 	// Filters the list of connections to those associated with a specified provider,

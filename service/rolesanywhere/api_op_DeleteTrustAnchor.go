@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a trust anchor. Required permissions: rolesanywhere:DeleteTrustAnchor.
+// Deletes a trust anchor. Required permissions: rolesanywhere:DeleteTrustAnchor .
 func (c *Client) DeleteTrustAnchor(ctx context.Context, params *DeleteTrustAnchorInput, optFns ...func(*Options)) (*DeleteTrustAnchorOutput, error) {
 	if params == nil {
 		params = &DeleteTrustAnchorInput{}

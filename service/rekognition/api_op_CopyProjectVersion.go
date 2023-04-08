@@ -16,8 +16,8 @@ import (
 // different AWS accounts but must be in the same AWS Region. You can't copy a
 // model to another AWS service. To copy a model version to a different AWS
 // account, you need to create a resource-based policy known as a project policy.
-// You attach the project policy to the source project by calling PutProjectPolicy.
-// The project policy gives permission to copy the model version from a trusting
+// You attach the project policy to the source project by calling PutProjectPolicy
+// . The project policy gives permission to copy the model version from a trusting
 // AWS account to a trusted account. For more information creating and attaching a
 // project policy, see Attaching a project policy (SDK) in the Amazon Rekognition
 // Custom Labels Developer Guide. If you are copying a model version to a project
@@ -26,7 +26,7 @@ import (
 // already exist. Copying a model version takes a while to complete. To get the
 // current status, call DescribeProjectVersions and check the value of Status in
 // the ProjectVersionDescription object. The copy operation has finished when the
-// value of Status is COPYING_COMPLETED.
+// value of Status is COPYING_COMPLETED .
 func (c *Client) CopyProjectVersion(ctx context.Context, params *CopyProjectVersionInput, optFns ...func(*Options)) (*CopyProjectVersionOutput, error) {
 	if params == nil {
 		params = &CopyProjectVersionInput{}
@@ -50,8 +50,8 @@ type CopyProjectVersionInput struct {
 	// This member is required.
 	DestinationProjectArn *string
 
-	// The S3 bucket and folder location where the training output for the source model
-	// version is placed.
+	// The S3 bucket and folder location where the training output for the source
+	// model version is placed.
 	//
 	// This member is required.
 	OutputConfig *types.OutputConfig
@@ -75,22 +75,15 @@ type CopyProjectVersionInput struct {
 	// The identifier for your AWS Key Management Service key (AWS KMS key). You can
 	// supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key,
 	// an alias for your KMS key, or an alias ARN. The key is used to encrypt training
-	// results and manifest files written to the output Amazon S3 bucket
-	// (OutputConfig). If you choose to use your own KMS key, you need the following
-	// permissions on the KMS key.
-	//
-	// * kms:CreateGrant
-	//
-	// * kms:DescribeKey
-	//
-	// *
-	// kms:GenerateDataKey
-	//
-	// * kms:Decrypt
-	//
-	// If you don't specify a value for KmsKeyId,
-	// images copied into the service are encrypted using a key that AWS owns and
-	// manages.
+	// results and manifest files written to the output Amazon S3 bucket ( OutputConfig
+	// ). If you choose to use your own KMS key, you need the following permissions on
+	// the KMS key.
+	//   - kms:CreateGrant
+	//   - kms:DescribeKey
+	//   - kms:GenerateDataKey
+	//   - kms:Decrypt
+	// If you don't specify a value for KmsKeyId , images copied into the service are
+	// encrypted using a key that AWS owns and manages.
 	KmsKeyId *string
 
 	// The key-value tags to assign to the model version.

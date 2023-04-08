@@ -31,13 +31,11 @@ func (c *Client) ListProvisionedProductPlans(ctx context.Context, params *ListPr
 type ListProvisionedProductPlansInput struct {
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// The access level to use to obtain results. The default is User.
+	// The access level to use to obtain results. The default is User .
 	AccessLevelFilter *types.AccessLevelFilter
 
 	// The maximum number of items to return with this call.

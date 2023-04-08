@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a list of job definitions. You can specify a status (such as ACTIVE)
+// Describes a list of job definitions. You can specify a status (such as ACTIVE )
 // to only return job definitions that match that status.
 func (c *Client) DescribeJobDefinitions(ctx context.Context, params *DescribeJobDefinitionsInput, optFns ...func(*Options)) (*DescribeJobDefinitionsOutput, error) {
 	if params == nil {
@@ -29,25 +29,26 @@ func (c *Client) DescribeJobDefinitions(ctx context.Context, params *DescribeJob
 	return out, nil
 }
 
-// Contains the parameters for DescribeJobDefinitions.
+// Contains the parameters for DescribeJobDefinitions .
 type DescribeJobDefinitionsInput struct {
 
 	// The name of the job definition to describe.
 	JobDefinitionName *string
 
-	// A list of up to 100 job definitions. Each entry in the list can either be an ARN
-	// in the format
+	// A list of up to 100 job definitions. Each entry in the list can either be an
+	// ARN in the format
 	// arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}
-	// or a short version using the form ${JobDefinitionName}:${Revision}.
+	// or a short version using the form ${JobDefinitionName}:${Revision} .
 	JobDefinitions []string
 
 	// The maximum number of results returned by DescribeJobDefinitions in paginated
 	// output. When this parameter is used, DescribeJobDefinitions only returns
 	// maxResults results in a single page and a nextToken response element. The
 	// remaining results of the initial request can be seen by sending another
-	// DescribeJobDefinitions request with the returned nextToken value. This value can
-	// be between 1 and 100. If this parameter isn't used, then DescribeJobDefinitions
-	// returns up to 100 results and a nextToken value if applicable.
+	// DescribeJobDefinitions request with the returned nextToken value. This value
+	// can be between 1 and 100. If this parameter isn't used, then
+	// DescribeJobDefinitions returns up to 100 results and a nextToken value if
+	// applicable.
 	MaxResults *int32
 
 	// The nextToken value returned from a previous paginated DescribeJobDefinitions
@@ -70,7 +71,7 @@ type DescribeJobDefinitionsOutput struct {
 	JobDefinitions []types.JobDefinition
 
 	// The nextToken value to include in a future DescribeJobDefinitions request. When
-	// the results of a DescribeJobDefinitions request exceed maxResults, this value
+	// the results of a DescribeJobDefinitions request exceed maxResults , this value
 	// can be used to retrieve the next page of results. This value is null when there
 	// are no more results to return.
 	NextToken *string
@@ -156,9 +157,10 @@ type DescribeJobDefinitionsPaginatorOptions struct {
 	// output. When this parameter is used, DescribeJobDefinitions only returns
 	// maxResults results in a single page and a nextToken response element. The
 	// remaining results of the initial request can be seen by sending another
-	// DescribeJobDefinitions request with the returned nextToken value. This value can
-	// be between 1 and 100. If this parameter isn't used, then DescribeJobDefinitions
-	// returns up to 100 results and a nextToken value if applicable.
+	// DescribeJobDefinitions request with the returned nextToken value. This value
+	// can be between 1 and 100. If this parameter isn't used, then
+	// DescribeJobDefinitions returns up to 100 results and a nextToken value if
+	// applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

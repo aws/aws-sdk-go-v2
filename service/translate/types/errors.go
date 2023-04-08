@@ -60,11 +60,10 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The confidence that Amazon Comprehend accurately detected the source language is
-// low. If a low confidence level is acceptable for your application, you can use
-// the language in the exception to call Amazon Translate again. For more
-// information, see the DetectDominantLanguage
-// (https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectDominantLanguage.html)
+// The confidence that Amazon Comprehend accurately detected the source language
+// is low. If a low confidence level is acceptable for your application, you can
+// use the language in the exception to call Amazon Translate again. For more
+// information, see the DetectDominantLanguage (https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectDominantLanguage.html)
 // operation in the Amazon Comprehend Developer Guide.
 type DetectedLanguageLowConfidenceException struct {
 	Message *string
@@ -174,8 +173,8 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request that you made is not valid. Check your request to determine why it's
-// not valid and then retry the request.
+// The request that you made is not valid. Check your request to determine why
+// it's not valid and then retry the request.
 type InvalidRequestException struct {
 	Message *string
 
@@ -397,8 +396,8 @@ func (e *UnsupportedDisplayLanguageCodeException) ErrorFault() smithy.ErrorFault
 
 // Amazon Translate does not support translation from the language of the source
 // text into the requested target language. For more information, see Error
-// messages
-// (https://docs.aws.amazon.com/translate/latest/dg/how-to-error-msg.html).
+// messages (https://docs.aws.amazon.com/translate/latest/dg/how-to-error-msg.html)
+// .
 type UnsupportedLanguagePairException struct {
 	Message *string
 

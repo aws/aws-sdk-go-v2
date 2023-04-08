@@ -46,7 +46,7 @@ type DescribeLoggingConfigurationOutput struct {
 	// The Amazon Resource Name (ARN) of the firewall.
 	FirewallArn *string
 
-	// Defines how Network Firewall performs logging for a Firewall.
+	// Defines how Network Firewall performs logging for a Firewall .
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

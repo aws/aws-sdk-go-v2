@@ -48,8 +48,8 @@ type BatchDeleteCustomVocabularyItemInput struct {
 
 	// The identifier of the language and locale where this custom vocabulary is used.
 	// The string must match one of the supported locales. For more information, see
-	// Supported Languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// Supported Languages  (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string

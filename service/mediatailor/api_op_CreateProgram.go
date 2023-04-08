@@ -13,8 +13,7 @@ import (
 )
 
 // Creates a program within a channel. For information about programs, see Working
-// with programs
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
+// with programs (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
 // in the MediaTailor User Guide.
 func (c *Client) CreateProgram(ctx context.Context, params *CreateProgramInput, optFns ...func(*Options)) (*CreateProgramOutput, error) {
 	if params == nil {

@@ -34,9 +34,9 @@ const (
 	ActionStatusEligible      ActionStatus = "ELIGIBLE"
 )
 
-// Values returns all known values for ActionStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ActionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ActionStatus) Values() []ActionStatus {
 	return []ActionStatus{
 		"PENDING_UPDATE",
@@ -125,9 +125,9 @@ const (
 	AutoTuneTypeScheduledAction AutoTuneType = "SCHEDULED_ACTION"
 )
 
-// Values returns all known values for AutoTuneType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AutoTuneType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AutoTuneType) Values() []AutoTuneType {
 	return []AutoTuneType{
 		"SCHEDULED_ACTION",
@@ -570,9 +570,10 @@ const (
 	OutboundConnectionStatusCodeDeleted           OutboundConnectionStatusCode = "DELETED"
 )
 
-// Values returns all known values for OutboundConnectionStatusCode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OutboundConnectionStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (OutboundConnectionStatusCode) Values() []OutboundConnectionStatusCode {
 	return []OutboundConnectionStatusCode{
 		"VALIDATING",

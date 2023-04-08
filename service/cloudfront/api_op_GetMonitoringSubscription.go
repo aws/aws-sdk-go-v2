@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about whether additional CloudWatch metrics are enabled for the
-// specified CloudFront distribution.
+// Gets information about whether additional CloudWatch metrics are enabled for
+// the specified CloudFront distribution.
 func (c *Client) GetMonitoringSubscription(ctx context.Context, params *GetMonitoringSubscriptionInput, optFns ...func(*Options)) (*GetMonitoringSubscriptionOutput, error) {
 	if params == nil {
 		params = &GetMonitoringSubscriptionInput{}

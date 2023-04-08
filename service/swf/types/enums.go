@@ -194,9 +194,9 @@ const (
 	DecisionTypeScheduleLambdaFunction                 DecisionType = "ScheduleLambdaFunction"
 )
 
-// Values returns all known values for DecisionType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DecisionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DecisionType) Values() []DecisionType {
 	return []DecisionType{
 		"ScheduleActivityTask",
@@ -275,9 +275,9 @@ const (
 	EventTypeStartLambdaFunctionFailed                       EventType = "StartLambdaFunctionFailed"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"WorkflowExecutionStarted",
@@ -511,8 +511,8 @@ const (
 	ScheduleLambdaFunctionFailedCauseLambdaServiceNotAvailableInRegion  ScheduleLambdaFunctionFailedCause = "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
 )
 
-// Values returns all known values for ScheduleLambdaFunctionFailedCause. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for ScheduleLambdaFunctionFailedCause. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ScheduleLambdaFunctionFailedCause) Values() []ScheduleLambdaFunctionFailedCause {
@@ -562,9 +562,9 @@ const (
 	StartChildWorkflowExecutionFailedCauseOperationNotPermitted                        StartChildWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
-// Values returns all known values for StartChildWorkflowExecutionFailedCause. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for StartChildWorkflowExecutionFailedCause.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (StartChildWorkflowExecutionFailedCause) Values() []StartChildWorkflowExecutionFailedCause {
 	return []StartChildWorkflowExecutionFailedCause{
@@ -609,8 +609,8 @@ const (
 	StartTimerFailedCauseOperationNotPermitted     StartTimerFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
-// Values returns all known values for StartTimerFailedCause. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StartTimerFailedCause. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StartTimerFailedCause) Values() []StartTimerFailedCause {
 	return []StartTimerFailedCause{
@@ -666,9 +666,10 @@ const (
 	WorkflowExecutionTimeoutTypeStartToClose WorkflowExecutionTimeoutType = "START_TO_CLOSE"
 )
 
-// Values returns all known values for WorkflowExecutionTimeoutType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WorkflowExecutionTimeoutType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (WorkflowExecutionTimeoutType) Values() []WorkflowExecutionTimeoutType {
 	return []WorkflowExecutionTimeoutType{
 		"START_TO_CLOSE",

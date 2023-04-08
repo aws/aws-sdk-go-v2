@@ -29,14 +29,13 @@ func (c *Client) UpdateFirewallEncryptionConfiguration(ctx context.Context, para
 
 type UpdateFirewallEncryptionConfigurationInput struct {
 
-	// A complex type that contains optional Amazon Web Services Key Management Service
-	// (KMS) encryption settings for your Network Firewall resources. Your data is
-	// encrypted by default with an Amazon Web Services owned key that Amazon Web
+	// A complex type that contains optional Amazon Web Services Key Management
+	// Service (KMS) encryption settings for your Network Firewall resources. Your data
+	// is encrypted by default with an Amazon Web Services owned key that Amazon Web
 	// Services owns and manages for you. You can use either the Amazon Web Services
 	// owned key, or provide your own customer managed key. To learn more about KMS
 	// encryption of your Network Firewall resources, see Encryption at rest with
-	// Amazon Web Services Key Managment Service
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
+	// Amazon Web Services Key Managment Service (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
 	// in the Network Firewall Developer Guide.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
@@ -56,7 +55,7 @@ type UpdateFirewallEncryptionConfigurationInput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
@@ -66,14 +65,13 @@ type UpdateFirewallEncryptionConfigurationInput struct {
 
 type UpdateFirewallEncryptionConfigurationOutput struct {
 
-	// A complex type that contains optional Amazon Web Services Key Management Service
-	// (KMS) encryption settings for your Network Firewall resources. Your data is
-	// encrypted by default with an Amazon Web Services owned key that Amazon Web
+	// A complex type that contains optional Amazon Web Services Key Management
+	// Service (KMS) encryption settings for your Network Firewall resources. Your data
+	// is encrypted by default with an Amazon Web Services owned key that Amazon Web
 	// Services owns and manages for you. You can use either the Amazon Web Services
 	// owned key, or provide your own customer managed key. To learn more about KMS
 	// encryption of your Network Firewall resources, see Encryption at rest with
-	// Amazon Web Services Key Managment Service
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
+	// Amazon Web Services Key Managment Service (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
 	// in the Network Firewall Developer Guide.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
@@ -93,7 +91,7 @@ type UpdateFirewallEncryptionConfigurationOutput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

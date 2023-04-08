@@ -13,8 +13,7 @@ import (
 
 // Disassociates secondary Elastic IP addresses (EIPs) from a public NAT gateway.
 // You cannot disassociate your primary EIP. For more information, see Edit
-// secondary IP address associations
-// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary)
+// secondary IP address associations (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary)
 // in the Amazon Virtual Private Cloud User Guide. While disassociating is in
 // progress, you cannot associate/disassociate additional EIPs while the
 // connections are being drained. You are, however, allowed to delete the NAT
@@ -52,12 +51,12 @@ type DisassociateNatGatewayAddressInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The maximum amount of time to wait (in seconds) before forcibly releasing the IP
-	// addresses if connections are still in progress. Default value is 350 seconds.
+	// The maximum amount of time to wait (in seconds) before forcibly releasing the
+	// IP addresses if connections are still in progress. Default value is 350 seconds.
 	MaxDrainDurationSeconds *int32
 
 	noSmithyDocumentSerde

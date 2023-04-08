@@ -135,8 +135,8 @@ func (c *Client) addOperationListVirtualClustersMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListVirtualClustersAPIClient is a client that implements the ListVirtualClusters
-// operation.
+// ListVirtualClustersAPIClient is a client that implements the
+// ListVirtualClusters operation.
 type ListVirtualClustersAPIClient interface {
 	ListVirtualClusters(context.Context, *ListVirtualClustersInput, ...func(*Options)) (*ListVirtualClustersOutput, error)
 }

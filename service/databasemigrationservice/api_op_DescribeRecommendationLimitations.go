@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of limitations for recommendations of target Amazon Web
-// Services engines.
+// Returns a paginated list of limitations for recommendations of target Amazon
+// Web Services engines.
 func (c *Client) DescribeRecommendationLimitations(ctx context.Context, params *DescribeRecommendationLimitationsInput, optFns ...func(*Options)) (*DescribeRecommendationLimitationsOutput, error) {
 	if params == nil {
 		params = &DescribeRecommendationLimitationsInput{}
@@ -39,13 +39,13 @@ type DescribeRecommendationLimitationsInput struct {
 	// in the response so that you can retrieve the remaining results.
 	MaxRecords *int32
 
-	// Specifies the unique pagination token that makes it possible to display the next
-	// page of results. If this parameter is specified, the response includes only
-	// records beyond the marker, up to the value specified by MaxRecords. If NextToken
-	// is returned by a previous response, there are more results available. The value
-	// of NextToken is a unique pagination token for each page. Make the call again
-	// using the returned token to retrieve the next page. Keep all other arguments
-	// unchanged.
+	// Specifies the unique pagination token that makes it possible to display the
+	// next page of results. If this parameter is specified, the response includes only
+	// records beyond the marker, up to the value specified by MaxRecords . If
+	// NextToken is returned by a previous response, there are more results available.
+	// The value of NextToken is a unique pagination token for each page. Make the
+	// call again using the returned token to retrieve the next page. Keep all other
+	// arguments unchanged.
 	NextToken *string
 
 	noSmithyDocumentSerde

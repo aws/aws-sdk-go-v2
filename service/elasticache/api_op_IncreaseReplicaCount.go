@@ -32,7 +32,7 @@ func (c *Client) IncreaseReplicaCount(ctx context.Context, params *IncreaseRepli
 
 type IncreaseReplicaCountInput struct {
 
-	// If True, the number of replica nodes is increased immediately.
+	// If True , the number of replica nodes is increased immediately.
 	// ApplyImmediately=False is not currently supported.
 	//
 	// This member is required.
@@ -52,7 +52,7 @@ type IncreaseReplicaCountInput struct {
 
 	// A list of ConfigureShard objects that can be used to configure each shard in a
 	// Redis (cluster mode enabled) replication group. The ConfigureShard has three
-	// members: NewReplicaCount, NodeGroupId, and PreferredAvailabilityZones.
+	// members: NewReplicaCount , NodeGroupId , and PreferredAvailabilityZones .
 	ReplicaConfiguration []types.ConfigureShard
 
 	noSmithyDocumentSerde

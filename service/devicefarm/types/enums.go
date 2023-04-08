@@ -56,9 +56,9 @@ const (
 	ArtifactTypeTestspecOutput         ArtifactType = "TESTSPEC_OUTPUT"
 )
 
-// Values returns all known values for ArtifactType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ArtifactType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactType) Values() []ArtifactType {
 	return []ArtifactType{
 		"UNKNOWN",
@@ -117,9 +117,9 @@ const (
 	CurrencyCodeUsd CurrencyCode = "USD"
 )
 
-// Values returns all known values for CurrencyCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CurrencyCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (CurrencyCode) Values() []CurrencyCode {
 	return []CurrencyCode{
 		"USD",
@@ -206,8 +206,8 @@ const (
 	DeviceFilterAttributeFleetType           DeviceFilterAttribute = "FLEET_TYPE"
 )
 
-// Values returns all known values for DeviceFilterAttribute. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DeviceFilterAttribute. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceFilterAttribute) Values() []DeviceFilterAttribute {
 	return []DeviceFilterAttribute{
@@ -445,9 +445,9 @@ const (
 	OfferingTypeRecurring OfferingType = "RECURRING"
 )
 
-// Values returns all known values for OfferingType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OfferingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OfferingType) Values() []OfferingType {
 	return []OfferingType{
 		"RECURRING",
@@ -461,9 +461,9 @@ const (
 	RecurringChargeFrequencyMonthly RecurringChargeFrequency = "MONTHLY"
 )
 
-// Values returns all known values for RecurringChargeFrequency. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RecurringChargeFrequency. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecurringChargeFrequency) Values() []RecurringChargeFrequency {
 	return []RecurringChargeFrequency{
 		"MONTHLY",
@@ -484,9 +484,9 @@ const (
 	RuleOperatorContains            RuleOperator = "CONTAINS"
 )
 
-// Values returns all known values for RuleOperator. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RuleOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RuleOperator) Values() []RuleOperator {
 	return []RuleOperator{
 		"EQUALS",
@@ -596,8 +596,8 @@ const (
 	TestGridSessionStatusErrored TestGridSessionStatus = "ERRORED"
 )
 
-// Values returns all known values for TestGridSessionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TestGridSessionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TestGridSessionStatus) Values() []TestGridSessionStatus {
 	return []TestGridSessionStatus{
@@ -691,9 +691,9 @@ const (
 	UploadStatusFailed      UploadStatus = "FAILED"
 )
 
-// Values returns all known values for UploadStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UploadStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UploadStatus) Values() []UploadStatus {
 	return []UploadStatus{
 		"INITIALIZED",

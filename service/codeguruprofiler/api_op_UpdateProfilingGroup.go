@@ -46,8 +46,7 @@ type UpdateProfilingGroupInput struct {
 // The structure representing the updateProfilingGroupResponse.
 type UpdateProfilingGroupOutput struct {
 
-	// A ProfilingGroupDescription
-	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// A ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
 	// that contains information about the returned updated profiling group.
 	//
 	// This member is required.

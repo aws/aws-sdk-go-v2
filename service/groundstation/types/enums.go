@@ -50,9 +50,9 @@ const (
 	AuditResultsUnhealthy AuditResults = "UNHEALTHY"
 )
 
-// Values returns all known values for AuditResults. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AuditResults. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AuditResults) Values() []AuditResults {
 	return []AuditResults{
 		"HEALTHY",
@@ -195,9 +195,9 @@ const (
 	EirpUnitsDbw EirpUnits = "dBW"
 )
 
-// Values returns all known values for EirpUnits. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EirpUnits. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EirpUnits) Values() []EirpUnits {
 	return []EirpUnits{
 		"dBW",
@@ -330,9 +330,9 @@ const (
 	PolarizationRightHand Polarization = "RIGHT_HAND"
 )
 
-// Values returns all known values for Polarization. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Polarization. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Polarization) Values() []Polarization {
 	return []Polarization{
 		"LEFT_HAND",

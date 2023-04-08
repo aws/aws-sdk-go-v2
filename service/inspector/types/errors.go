@@ -36,8 +36,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You started an assessment run, but one of the instances is already participating
-// in another assessment run.
+// You started an assessment run, but one of the instances is already
+// participating in another assessment run.
 type AgentsAlreadyRunningAssessmentException struct {
 	Message *string
 
@@ -128,8 +128,8 @@ func (e *InternalException) ErrorCode() string {
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Amazon Inspector cannot assume the cross-account role that it needs to list your
-// EC2 instances during the assessment run.
+// Amazon Inspector cannot assume the cross-account role that it needs to list
+// your EC2 instances during the assessment run.
 type InvalidCrossAccountRoleException struct {
 	Message *string
 

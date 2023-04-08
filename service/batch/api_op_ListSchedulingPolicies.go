@@ -28,15 +28,15 @@ func (c *Client) ListSchedulingPolicies(ctx context.Context, params *ListSchedul
 	return out, nil
 }
 
-// Contains the parameters for ListSchedulingPolicies.
+// Contains the parameters for ListSchedulingPolicies .
 type ListSchedulingPoliciesInput struct {
 
 	// The maximum number of results that's returned by ListSchedulingPolicies in
 	// paginated output. When this parameter is used, ListSchedulingPolicies only
 	// returns maxResults results in a single page and a nextToken response element.
 	// You can see the remaining results of the initial request by sending another
-	// ListSchedulingPolicies request with the returned nextToken value. This value can
-	// be between 1 and 100. If this parameter isn't used, ListSchedulingPolicies
+	// ListSchedulingPolicies request with the returned nextToken value. This value
+	// can be between 1 and 100. If this parameter isn't used, ListSchedulingPolicies
 	// returns up to 100 results and a nextToken value if applicable.
 	MaxResults *int32
 
@@ -55,7 +55,7 @@ type ListSchedulingPoliciesInput struct {
 type ListSchedulingPoliciesOutput struct {
 
 	// The nextToken value to include in a future ListSchedulingPolicies request. When
-	// the results of a ListSchedulingPolicies request exceed maxResults, this value
+	// the results of a ListSchedulingPolicies request exceed maxResults , this value
 	// can be used to retrieve the next page of results. This value is null when there
 	// are no more results to return.
 	NextToken *string
@@ -144,8 +144,8 @@ type ListSchedulingPoliciesPaginatorOptions struct {
 	// paginated output. When this parameter is used, ListSchedulingPolicies only
 	// returns maxResults results in a single page and a nextToken response element.
 	// You can see the remaining results of the initial request by sending another
-	// ListSchedulingPolicies request with the returned nextToken value. This value can
-	// be between 1 and 100. If this parameter isn't used, ListSchedulingPolicies
+	// ListSchedulingPolicies request with the returned nextToken value. This value
+	// can be between 1 and 100. If this parameter isn't used, ListSchedulingPolicies
 	// returns up to 100 results and a nextToken value if applicable.
 	Limit int32
 

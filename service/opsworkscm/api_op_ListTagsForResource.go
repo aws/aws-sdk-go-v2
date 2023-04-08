@@ -34,7 +34,8 @@ type ListTagsForResourceInput struct {
 	// The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef Automate or AWS
 	// OpsWorks for Puppet Enterprise server for which you want to show applied tags.
 	// For example,
-	// arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE.
+	// arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE
+	// .
 	//
 	// This member is required.
 	ResourceArn *string
@@ -50,7 +51,7 @@ type ListTagsForResourceInput struct {
 	// request to get remaining items. To get remaining results, call
 	// ListTagsForResource again, and assign the token from the previous results as the
 	// value of the nextToken parameter. If there are no more results, the response
-	// object's nextToken parameter value is null. Setting a nextToken value that was
+	// object's nextToken parameter value is null . Setting a nextToken value that was
 	// not returned in your previous results causes an InvalidNextTokenException to
 	// occur.
 	NextToken *string
@@ -136,8 +137,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }

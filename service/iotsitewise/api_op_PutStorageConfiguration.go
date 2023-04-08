@@ -30,34 +30,26 @@ func (c *Client) PutStorageConfiguration(ctx context.Context, params *PutStorage
 
 type PutStorageConfigurationInput struct {
 
-	// The storage tier that you specified for your data. The storageType parameter can
-	// be one of the following values:
-	//
-	// * SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves
-	// your data into the hot tier. The hot tier is a service-managed database.
-	//
-	// *
-	// MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the
-	// hot tier. The cold tier is a customer-managed Amazon S3 bucket.
+	// The storage tier that you specified for your data. The storageType parameter
+	// can be one of the following values:
+	//   - SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier.
+	//   The hot tier is a service-managed database.
+	//   - MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and
+	//   the hot tier. The cold tier is a customer-managed Amazon S3 bucket.
 	//
 	// This member is required.
 	StorageType types.StorageType
 
 	// Contains the storage configuration for time series (data streams) that aren't
-	// associated with asset properties. The disassociatedDataStorage can be one of the
-	// following values:
-	//
-	// * ENABLED – IoT SiteWise accepts time series that aren't
-	// associated with asset properties. After the disassociatedDataStorage is enabled,
-	// you can't disable it.
-	//
-	// * DISABLED – IoT SiteWise doesn't accept time series
-	// (data streams) that aren't associated with asset properties.
-	//
-	// For more
-	// information, see Data streams
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html) in
-	// the IoT SiteWise User Guide.
+	// associated with asset properties. The disassociatedDataStorage can be one of
+	// the following values:
+	//   - ENABLED – IoT SiteWise accepts time series that aren't associated with asset
+	//   properties. After the disassociatedDataStorage is enabled, you can't disable
+	//   it.
+	//   - DISABLED – IoT SiteWise doesn't accept time series (data streams) that
+	//   aren't associated with asset properties.
+	// For more information, see Data streams (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html)
+	// in the IoT SiteWise User Guide.
 	DisassociatedDataStorage types.DisassociatedDataStorageState
 
 	// Identifies a storage destination. If you specified MULTI_LAYER_STORAGE for the
@@ -78,34 +70,26 @@ type PutStorageConfigurationOutput struct {
 	// This member is required.
 	ConfigurationStatus *types.ConfigurationStatus
 
-	// The storage tier that you specified for your data. The storageType parameter can
-	// be one of the following values:
-	//
-	// * SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves
-	// your data into the hot tier. The hot tier is a service-managed database.
-	//
-	// *
-	// MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the
-	// hot tier. The cold tier is a customer-managed Amazon S3 bucket.
+	// The storage tier that you specified for your data. The storageType parameter
+	// can be one of the following values:
+	//   - SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier.
+	//   The hot tier is a service-managed database.
+	//   - MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and
+	//   the hot tier. The cold tier is a customer-managed Amazon S3 bucket.
 	//
 	// This member is required.
 	StorageType types.StorageType
 
 	// Contains the storage configuration for time series (data streams) that aren't
-	// associated with asset properties. The disassociatedDataStorage can be one of the
-	// following values:
-	//
-	// * ENABLED – IoT SiteWise accepts time series that aren't
-	// associated with asset properties. After the disassociatedDataStorage is enabled,
-	// you can't disable it.
-	//
-	// * DISABLED – IoT SiteWise doesn't accept time series
-	// (data streams) that aren't associated with asset properties.
-	//
-	// For more
-	// information, see Data streams
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html) in
-	// the IoT SiteWise User Guide.
+	// associated with asset properties. The disassociatedDataStorage can be one of
+	// the following values:
+	//   - ENABLED – IoT SiteWise accepts time series that aren't associated with asset
+	//   properties. After the disassociatedDataStorage is enabled, you can't disable
+	//   it.
+	//   - DISABLED – IoT SiteWise doesn't accept time series (data streams) that
+	//   aren't associated with asset properties.
+	// For more information, see Data streams (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html)
+	// in the IoT SiteWise User Guide.
 	DisassociatedDataStorage types.DisassociatedDataStorageState
 
 	// Contains information about the storage destination.

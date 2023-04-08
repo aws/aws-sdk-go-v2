@@ -34,7 +34,7 @@ type UpdateDomainNameInput struct {
 	// This member is required.
 	DomainName *string
 
-	// A description of the DomainName.
+	// A description of the DomainName .
 	Description *string
 
 	noSmithyDocumentSerde
@@ -42,7 +42,7 @@ type UpdateDomainNameInput struct {
 
 type UpdateDomainNameOutput struct {
 
-	// The configuration for the DomainName.
+	// The configuration for the DomainName .
 	DomainNameConfig *types.DomainNameConfig
 
 	// Metadata pertaining to the operation's result.

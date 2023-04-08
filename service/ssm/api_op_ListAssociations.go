@@ -36,8 +36,8 @@ type ListAssociationsInput struct {
 	// One or more filters. Use a filter to return a more specific list of results.
 	// Filtering associations using the InstanceID attribute only returns legacy
 	// associations created using the InstanceID attribute. Associations targeting the
-	// managed node that are part of the Target Attributes ResourceGroup or Tags aren't
-	// returned.
+	// managed node that are part of the Target Attributes ResourceGroup or Tags
+	// aren't returned.
 	AssociationFilterList []types.AssociationFilter
 
 	// The maximum number of items to return for this call. The call also returns a

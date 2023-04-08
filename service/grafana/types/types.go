@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// A structure that defines which attributes in the IdP assertion are to be used to
-// define information about the users authenticated by the IdP to use the
+// A structure that defines which attributes in the IdP assertion are to be used
+// to define information about the users authenticated by the IdP to use the
 // workspace.
 type AssertionAttributes struct {
 
@@ -38,13 +38,13 @@ type AssertionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// A structure containing information about the user authentication methods used by
-// the workspace.
+// A structure containing information about the user authentication methods used
+// by the workspace.
 type AuthenticationDescription struct {
 
-	// Specifies whether this workspace uses IAM Identity Center, SAML, or both methods
-	// to authenticate users to use the Grafana console in the Amazon Managed Grafana
-	// workspace.
+	// Specifies whether this workspace uses IAM Identity Center, SAML, or both
+	// methods to authenticate users to use the Grafana console in the Amazon Managed
+	// Grafana workspace.
 	//
 	// This member is required.
 	Providers []AuthenticationProviderTypes
@@ -61,9 +61,9 @@ type AuthenticationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that describes whether the workspace uses SAML, IAM Identity Center,
-// or both methods for user authentication, and whether that authentication is
-// fully configured.
+// A structure that describes whether the workspace uses SAML, IAM Identity
+// Center, or both methods for user authentication, and whether that authentication
+// is fully configured.
 type AuthenticationSummary struct {
 
 	// Specifies whether the workspace uses SAML, IAM Identity Center, or both methods
@@ -135,9 +135,8 @@ type NetworkAccessConfiguration struct {
 	// the list is not included in the configuration then no IP addresses will be
 	// allowed to access the workspace. You create a prefix list using the Amazon VPC
 	// console. Prefix list IDs have the format pl-1a2b3c4d . For more information
-	// about prefix lists, see Group CIDR blocks using managed prefix lists
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html)in
-	// the Amazon Virtual Private Cloud User Guide.
+	// about prefix lists, see Group CIDR blocks using managed prefix lists (https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html)
+	// in the Amazon Virtual Private Cloud User Guide.
 	//
 	// This member is required.
 	PrefixListIds []string
@@ -147,10 +146,9 @@ type NetworkAccessConfiguration struct {
 	// If a NetworkAccessConfiguration is specified then only VPC endpoints specified
 	// here will be allowed to access the workspace. VPC endpoint IDs have the format
 	// vpce-1a2b3c4d . For more information about creating an interface VPC endpoint,
-	// see Interface VPC endpoints
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints) in the
-	// Amazon Managed Grafana User Guide. The only VPC endpoints that can be specified
-	// here are interface VPC endpoints for Grafana workspaces (using the
+	// see Interface VPC endpoints (https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints)
+	// in the Amazon Managed Grafana User Guide. The only VPC endpoints that can be
+	// specified here are interface VPC endpoints for Grafana workspaces (using the
 	// com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints
 	// will be ignored.
 	//
@@ -160,11 +158,11 @@ type NetworkAccessConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A structure containing the identity of one user or group and the Admin, Editor,
-// or Viewer role that they have.
+// A structure containing the identity of one user or group and the Admin , Editor
+// , or Viewer role that they have.
 type PermissionEntry struct {
 
-	// Specifies whether the user or group has the Admin, Editor, or Viewer role.
+	// Specifies whether the user or group has the Admin , Editor , or Viewer role.
 	//
 	// This member is required.
 	Role Role
@@ -239,8 +237,7 @@ type SamlConfiguration struct {
 }
 
 // A structure containing information about one error encountered while performing
-// an UpdatePermissions
-// (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html)
+// an UpdatePermissions (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html)
 // operation.
 type UpdateError struct {
 
@@ -263,8 +260,7 @@ type UpdateError struct {
 }
 
 // Contains the instructions for one Grafana role permission update in a
-// UpdatePermissions
-// (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html)
+// UpdatePermissions (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html)
 // operation.
 type UpdateInstruction struct {
 
@@ -273,7 +269,7 @@ type UpdateInstruction struct {
 	// This member is required.
 	Action UpdateAction
 
-	// The role to add or revoke for the user or the group specified in users.
+	// The role to add or revoke for the user or the group specified in users .
 	//
 	// This member is required.
 	Role Role
@@ -320,9 +316,9 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration settings for an Amazon VPC that contains data sources for your
-// Grafana workspace to connect to. Provided securityGroupIds and subnetIds must be
-// part of the same VPC.
+// The configuration settings for an Amazon VPC that contains data sources for
+// your Grafana workspace to connect to. Provided securityGroupIds and subnetIds
+// must be part of the same VPC.
 type VpcConfiguration struct {
 
 	// The list of Amazon EC2 security group IDs attached to the Amazon VPC for your
@@ -344,8 +340,8 @@ type VpcConfiguration struct {
 // your account.
 type WorkspaceDescription struct {
 
-	// A structure that describes whether the workspace uses SAML, IAM Identity Center,
-	// or both methods for user authentication.
+	// A structure that describes whether the workspace uses SAML, IAM Identity
+	// Center, or both methods for user authentication.
 	//
 	// This member is required.
 	Authentication *AuthenticationSummary
@@ -355,11 +351,11 @@ type WorkspaceDescription struct {
 	// This member is required.
 	Created *time.Time
 
-	// Specifies the Amazon Web Services data sources that have been configured to have
-	// IAM roles and permissions created to allow Amazon Managed Grafana to read data
-	// from these sources. This list is only used when the workspace was created
+	// Specifies the Amazon Web Services data sources that have been configured to
+	// have IAM roles and permissions created to allow Amazon Managed Grafana to read
+	// data from these sources. This list is only used when the workspace was created
 	// through the Amazon Web Services console, and the permissionType is
-	// SERVICE_MANAGED.
+	// SERVICE_MANAGED .
 	//
 	// This member is required.
 	DataSources []DataSourceType
@@ -389,10 +385,10 @@ type WorkspaceDescription struct {
 	// This member is required.
 	Status WorkspaceStatus
 
-	// Specifies whether the workspace can access Amazon Web Services resources in this
-	// Amazon Web Services account only, or whether it can also access Amazon Web
+	// Specifies whether the workspace can access Amazon Web Services resources in
+	// this Amazon Web Services account only, or whether it can also access Amazon Web
 	// Services resources in other accounts in the same organization. If this is
-	// ORGANIZATION, the workspaceOrganizationalUnits parameter specifies which
+	// ORGANIZATION , the workspaceOrganizationalUnits parameter specifies which
 	// organizational units the workspace can access.
 	AccountAccessType AccountAccessType
 
@@ -407,12 +403,12 @@ type WorkspaceDescription struct {
 	// this value specifies when that free trial ends.
 	FreeTrialExpiration *time.Time
 
-	// If this workspace has a full Grafana Enterprise license, this specifies when the
-	// license ends and will need to be renewed.
+	// If this workspace has a full Grafana Enterprise license, this specifies when
+	// the license ends and will need to be renewed.
 	LicenseExpiration *time.Time
 
-	// Specifies whether this workspace has a full Grafana Enterprise license or a free
-	// trial license.
+	// Specifies whether this workspace has a full Grafana Enterprise license or a
+	// free trial license.
 	LicenseType LicenseType
 
 	// The name of the workspace.
@@ -434,22 +430,20 @@ type WorkspaceDescription struct {
 	// organization.
 	OrganizationalUnits []string
 
-	// If this is SERVICE_MANAGED, and the workplace was created through the Amazon
+	// If this is SERVICE_MANAGED , and the workplace was created through the Amazon
 	// Managed Grafana console, then Amazon Managed Grafana automatically creates the
 	// IAM roles and provisions the permissions that the workspace needs to use Amazon
-	// Web Services data sources and notification channels. If this is
-	// CUSTOMER_MANAGED, you must manage those roles and permissions yourself. If you
-	// are working with a workspace in a member account of an organization and that
-	// account is not a delegated administrator account, and you want the workspace to
-	// access data sources in other Amazon Web Services accounts in the organization,
-	// this parameter must be set to CUSTOMER_MANAGED. For more information about
+	// Web Services data sources and notification channels. If this is CUSTOMER_MANAGED
+	// , you must manage those roles and permissions yourself. If you are working with
+	// a workspace in a member account of an organization and that account is not a
+	// delegated administrator account, and you want the workspace to access data
+	// sources in other Amazon Web Services accounts in the organization, this
+	// parameter must be set to CUSTOMER_MANAGED . For more information about
 	// converting between customer and service managed, see Managing permissions for
-	// data sources and notification channels
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html).
-	// For more information about the roles and permissions that must be managed for
-	// customer managed workspaces, see Amazon Managed Grafana permissions and policies
-	// for Amazon Web Services data sources and notification channels
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
+	// data sources and notification channels (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html)
+	// . For more information about the roles and permissions that must be managed for
+	// customer managed workspaces, see Amazon Managed Grafana permissions and
+	// policies for Amazon Web Services data sources and notification channels (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
 	PermissionType PermissionType
 
 	// The name of the CloudFormation stack set that is used to generate IAM roles to

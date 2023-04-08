@@ -67,8 +67,8 @@ type GetModelManifestOutput struct {
 	// The ARN of the signal catalog associated with the vehicle model.
 	SignalCatalogArn *string
 
-	// The state of the vehicle model. If the status is ACTIVE, the vehicle model can't
-	// be edited. You can edit the vehicle model if the status is marked DRAFT.
+	// The state of the vehicle model. If the status is ACTIVE , the vehicle model
+	// can't be edited. You can edit the vehicle model if the status is marked DRAFT .
 	Status types.ManifestStatus
 
 	// Metadata pertaining to the operation's result.

@@ -63,8 +63,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was denied because the specified resource was not found. Verify that
-// the spelling is correct and that you have access to the resource.
+// The request was denied because the specified resource was not found. Verify
+// that the spelling is correct and that you have access to the resource.
 type ResourceNotFoundException struct {
 	Message *string
 

@@ -11,9 +11,8 @@ import (
 )
 
 // Sets the health status of the specified instance. For more information, see
-// Health checks for Auto Scaling instances
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html) in the
-// Amazon EC2 Auto Scaling User Guide.
+// Health checks for Auto Scaling instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html)
+// in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) SetInstanceHealth(ctx context.Context, params *SetInstanceHealthInput, optFns ...func(*Options)) (*SetInstanceHealthOutput, error) {
 	if params == nil {
 		params = &SetInstanceHealthInput{}
@@ -31,8 +30,8 @@ func (c *Client) SetInstanceHealth(ctx context.Context, params *SetInstanceHealt
 
 type SetInstanceHealthInput struct {
 
-	// The health status of the instance. Set to Healthy to have the instance remain in
-	// service. Set to Unhealthy to have the instance be out of service. Amazon EC2
+	// The health status of the instance. Set to Healthy to have the instance remain
+	// in service. Set to Unhealthy to have the instance be out of service. Amazon EC2
 	// Auto Scaling terminates and replaces the unhealthy instance.
 	//
 	// This member is required.
@@ -45,10 +44,9 @@ type SetInstanceHealthInput struct {
 
 	// If the Auto Scaling group of the specified instance has a HealthCheckGracePeriod
 	// specified for the group, by default, this call respects the grace period. Set
-	// this to False, to have the call not respect the grace period associated with the
-	// group. For more information about the health check grace period, see
-	// CreateAutoScalingGroup
-	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html)
+	// this to False , to have the call not respect the grace period associated with
+	// the group. For more information about the health check grace period, see
+	// CreateAutoScalingGroup (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html)
 	// in the Amazon EC2 Auto Scaling API Reference.
 	ShouldRespectGracePeriod *bool
 

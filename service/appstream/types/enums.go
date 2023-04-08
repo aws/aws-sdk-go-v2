@@ -255,9 +255,9 @@ const (
 	FleetTypeElastic  FleetType = "ELASTIC"
 )
 
-// Values returns all known values for FleetType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for FleetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FleetType) Values() []FleetType {
 	return []FleetType{
 		"ALWAYS_ON",
@@ -310,8 +310,8 @@ const (
 	ImageBuilderStateChangeReasonCodeImageUnavailable ImageBuilderStateChangeReasonCode = "IMAGE_UNAVAILABLE"
 )
 
-// Values returns all known values for ImageBuilderStateChangeReasonCode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for ImageBuilderStateChangeReasonCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ImageBuilderStateChangeReasonCode) Values() []ImageBuilderStateChangeReasonCode {
@@ -415,9 +415,9 @@ const (
 	PlatformTypeAmazonLinux2      PlatformType = "AMAZON_LINUX2"
 )
 
-// Values returns all known values for PlatformType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PlatformType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PlatformType) Values() []PlatformType {
 	return []PlatformType{
 		"WINDOWS",
@@ -472,9 +472,9 @@ const (
 	SessionStateExpired SessionState = "EXPIRED"
 )
 
-// Values returns all known values for SessionState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SessionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SessionState) Values() []SessionState {
 	return []SessionState{
 		"ACTIVE",

@@ -47,7 +47,7 @@ type CreateWorkspaceImageInput struct {
 
 	// The tags that you want to add to the new WorkSpace image. To add tags when
 	// you're creating the image, you must create an IAM policy that grants your IAM
-	// user permission to use workspaces:CreateTags.
+	// user permission to use workspaces:CreateTags .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -75,8 +75,8 @@ type CreateWorkspaceImageOutput struct {
 
 	// Specifies whether the image is running on dedicated hardware. When Bring Your
 	// Own License (BYOL) is enabled, this value is set to DEDICATED. For more
-	// information, see  Bring Your Own Windows Desktop Images.
-	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm).
+	// information, see Bring Your Own Windows Desktop Images. (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm)
+	// .
 	RequiredTenancy types.WorkspaceImageRequiredTenancy
 
 	// The availability status of the image.

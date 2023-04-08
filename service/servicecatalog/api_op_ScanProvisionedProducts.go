@@ -12,7 +12,7 @@ import (
 )
 
 // Lists the provisioned products that are available (not terminated). To use
-// additional filtering, see SearchProvisionedProducts.
+// additional filtering, see SearchProvisionedProducts .
 func (c *Client) ScanProvisionedProducts(ctx context.Context, params *ScanProvisionedProductsInput, optFns ...func(*Options)) (*ScanProvisionedProductsOutput, error) {
 	if params == nil {
 		params = &ScanProvisionedProductsInput{}
@@ -31,13 +31,11 @@ func (c *Client) ScanProvisionedProducts(ctx context.Context, params *ScanProvis
 type ScanProvisionedProductsInput struct {
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// The access level to use to obtain results. The default is User.
+	// The access level to use to obtain results. The default is User .
 	AccessLevelFilter *types.AccessLevelFilter
 
 	// The maximum number of items to return with this call.

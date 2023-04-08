@@ -16,7 +16,7 @@ import (
 // identify which files to move to the EFS Infrequent Access (IA) storage class.
 // For a file system without a LifecycleConfiguration object, the call returns an
 // empty array in the response. When EFS Intelligent-Tiering is enabled,
-// TransitionToPrimaryStorageClass has a value of AFTER_1_ACCESS. This operation
+// TransitionToPrimaryStorageClass has a value of AFTER_1_ACCESS . This operation
 // requires permissions for the elasticfilesystem:DescribeLifecycleConfiguration
 // operation.
 func (c *Client) DescribeLifecycleConfiguration(ctx context.Context, params *DescribeLifecycleConfigurationInput, optFns ...func(*Options)) (*DescribeLifecycleConfigurationOutput, error) {

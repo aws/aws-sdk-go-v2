@@ -11,13 +11,12 @@ import (
 )
 
 // Deregisters a specified Amazon ECS cluster from a stack. For more information,
-// see  Resource Management
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html#workinglayers-ecscluster-delete).
-// Required Permissions: To use this action, an IAM user must have a Manage
+// see Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html#workinglayers-ecscluster-delete)
+// . Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see
-// https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DeregisterEcsCluster(ctx context.Context, params *DeregisterEcsClusterInput, optFns ...func(*Options)) (*DeregisterEcsClusterOutput, error) {
 	if params == nil {
 		params = &DeregisterEcsClusterInput{}

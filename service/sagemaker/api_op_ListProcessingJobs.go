@@ -51,14 +51,14 @@ type ListProcessingJobsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListProcessingJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of processing jobs, use
+	// response includes a NextToken . To retrieve the next set of processing jobs, use
 	// the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is CreationTime.
+	// The field to sort results by. The default is CreationTime .
 	SortBy types.SortBy
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	// A filter that retrieves only processing jobs with a specific status.

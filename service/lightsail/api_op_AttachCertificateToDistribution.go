@@ -44,14 +44,13 @@ type AttachCertificateToDistributionInput struct {
 	// in other API actions. It can be different than the domain name of the
 	// certificate. For example, your certificate name might be
 	// WordPress-Blog-Certificate and the domain name of the certificate might be
-	// example.com.
+	// example.com .
 	//
 	// This member is required.
 	CertificateName *string
 
 	// The name of the distribution that the certificate will be attached to. Use the
-	// GetDistributions action to get a list of distribution names that you can
-	// specify.
+	// GetDistributions action to get a list of distribution names that you can specify.
 	//
 	// This member is required.
 	DistributionName *string

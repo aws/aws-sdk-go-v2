@@ -47,7 +47,7 @@ type ListSlotsInput struct {
 
 	// The identifier of the language and locale of the slots to list. The string must
 	// match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
 	//
 	// This member is required.
 	LocaleId *string
@@ -67,8 +67,8 @@ type ListSlotsInput struct {
 	// that token in the nextToken parameter to return the next page of results.
 	NextToken *string
 
-	// Determines the sort order for the response from the ListSlots operation. You can
-	// choose to sort by the slot name or last updated date in either ascending or
+	// Determines the sort order for the response from the ListSlots operation. You
+	// can choose to sort by the slot name or last updated date in either ascending or
 	// descending order.
 	SortBy *types.SlotSortBy
 
@@ -89,16 +89,16 @@ type ListSlotsOutput struct {
 	// The language and locale of the slots in the list.
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListSlots operation. If the nextToken field is present, you send the
+	// A token that indicates whether there are more results to return in a response
+	// to the ListSlots operation. If the nextToken field is present, you send the
 	// contents as the nextToken parameter of a ListSlots operation request to get the
 	// next page of results.
 	NextToken *string
 
-	// Summary information for the slots that meet the filter criteria specified in the
-	// request. The length of the list is specified in the maxResults parameter of the
-	// request. If there are more slots available, the nextToken field contains a token
-	// to get the next page of results.
+	// Summary information for the slots that meet the filter criteria specified in
+	// the request. The length of the list is specified in the maxResults parameter of
+	// the request. If there are more slots available, the nextToken field contains a
+	// token to get the next page of results.
 	SlotSummaries []types.SlotSummary
 
 	// Metadata pertaining to the operation's result.

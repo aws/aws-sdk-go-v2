@@ -14,38 +14,29 @@ import (
 // Creates a new Amazon GameLift build resource for your game server binary files.
 // Combine game server binaries into a zip file for use with Amazon GameLift. When
 // setting up a new game build for GameLift, we recommend using the CLI command
-// upload-build
-// (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html) .
-// This helper command combines two tasks: (1) it uploads your build files from a
+// upload-build (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html)
+// . This helper command combines two tasks: (1) it uploads your build files from a
 // file directory to a GameLift Amazon S3 location, and (2) it creates a new build
 // resource. You can use the operation in the following scenarios:
+//   - To create a new game build with build files that are in an Amazon S3
+//     location under an Amazon Web Services account that you control. To use this
+//     option, you give Amazon GameLift access to the Amazon S3 bucket. With
+//     permissions in place, specify a build name, operating system, and the Amazon S3
+//     storage location of your game build.
+//   - To directly upload your build files to a GameLift Amazon S3 location. To
+//     use this option, specify a build name and operating system. This operation
+//     creates a new build resource and also returns an Amazon S3 location with
+//     temporary access credentials. Use the credentials to manually upload your build
+//     files to the specified Amazon S3 location. For more information, see
+//     Uploading Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html)
+//     in the Amazon S3 Developer Guide. After you upload build files to the GameLift
+//     Amazon S3 location, you can't update them.
 //
-// * To create a
-// new game build with build files that are in an Amazon S3 location under an
-// Amazon Web Services account that you control. To use this option, you give
-// Amazon GameLift access to the Amazon S3 bucket. With permissions in place,
-// specify a build name, operating system, and the Amazon S3 storage location of
-// your game build.
-//
-// * To directly upload your build files to a GameLift Amazon S3
-// location. To use this option, specify a build name and operating system. This
-// operation creates a new build resource and also returns an Amazon S3 location
-// with temporary access credentials. Use the credentials to manually upload your
-// build files to the specified Amazon S3 location. For more information, see
-// Uploading Objects
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html) in the
-// Amazon S3 Developer Guide. After you upload build files to the GameLift Amazon
-// S3 location, you can't update them.
-//
-// If successful, this operation creates a new
-// build resource with a unique build ID and places it in INITIALIZED status. A
-// build must be in READY status before you can create fleets with it. Learn more
-// Uploading Your Game
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
-// Create a Build with Files in Amazon S3
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)All
-// APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// If successful, this operation creates a new build resource with a unique build
+// ID and places it in INITIALIZED status. A build must be in READY status before
+// you can create fleets with it. Learn more Uploading Your Game (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
+// Create a Build with Files in Amazon S3 (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
+// All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateBuild(ctx context.Context, params *CreateBuildInput, optFns ...func(*Options)) (*CreateBuildOutput, error) {
 	if params == nil {
 		params = &CreateBuildInput{}
@@ -76,8 +67,8 @@ type CreateBuildInput struct {
 	OperatingSystem types.OperatingSystem
 
 	// A server SDK version you used when integrating your game server build with
-	// GameLift. For more information see Integrate games with custom game servers
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-custom-intro.html).
+	// GameLift. For more information see Integrate games with custom game servers (https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-custom-intro.html)
+	// .
 	ServerSdkVersion *string
 
 	// Information indicating where your game build files are stored. Use this
@@ -90,18 +81,14 @@ type CreateBuildInput struct {
 	// of 0.
 	StorageLocation *types.S3Location
 
-	// A list of labels to assign to the new build resource. Tags are developer defined
-	// key-value pairs. Tagging Amazon Web Services resources are useful for resource
-	// management, access management and cost allocation. For more information, see
-	// Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference. Once the resource is created, you can use
-	// TagResource
-	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_TagResource.html),
-	// UntagResource
-	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UntagResource.html),
-	// and ListTagsForResource
-	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListTagsForResource.html)
+	// A list of labels to assign to the new build resource. Tags are developer
+	// defined key-value pairs. Tagging Amazon Web Services resources are useful for
+	// resource management, access management and cost allocation. For more
+	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference. Once the resource is created, you
+	// can use TagResource (https://docs.aws.amazon.com/gamelift/latest/apireference/API_TagResource.html)
+	// , UntagResource (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UntagResource.html)
+	// , and ListTagsForResource (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListTagsForResource.html)
 	// to add, remove, and view tags. The maximum tag limit may be lower than stated.
 	// See the Amazon Web Services General Reference for actual tagging limits.
 	Tags []types.Tag
@@ -124,8 +111,8 @@ type CreateBuildOutput struct {
 	// This element is returned only when the operation is called without a storage
 	// location. It contains credentials to use when you are uploading a build file to
 	// an Amazon S3 bucket that is owned by Amazon GameLift. Credentials have a limited
-	// life span. To refresh these credentials, call RequestUploadCredentials
-	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_RequestUploadCredentials.html).
+	// life span. To refresh these credentials, call RequestUploadCredentials (https://docs.aws.amazon.com/gamelift/latest/apireference/API_RequestUploadCredentials.html)
+	// .
 	UploadCredentials *types.AwsCredentials
 
 	// Metadata pertaining to the operation's result.

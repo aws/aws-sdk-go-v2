@@ -198,10 +198,10 @@ func (e *OperationNotFound) ErrorCode() string {
 }
 func (e *OperationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation can't be completed because you've reached the quota for the number
-// of requests. For more information, see Cloud Map API request throttling quota
-// (https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html) in the Cloud
-// Map Developer Guide.
+// The operation can't be completed because you've reached the quota for the
+// number of requests. For more information, see Cloud Map API request throttling
+// quota (https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html) in the
+// Cloud Map Developer Guide.
 type RequestLimitExceeded struct {
 	Message *string
 
@@ -227,8 +227,8 @@ func (e *RequestLimitExceeded) ErrorCode() string {
 }
 func (e *RequestLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified resource can't be deleted because it contains other resources. For
-// example, you can't delete a service that contains any instances.
+// The specified resource can't be deleted because it contains other resources.
+// For example, you can't delete a service that contains any instances.
 type ResourceInUse struct {
 	Message *string
 

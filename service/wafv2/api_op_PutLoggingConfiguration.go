@@ -11,46 +11,35 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the specified LoggingConfiguration, to start logging from a web ACL,
+// Enables the specified LoggingConfiguration , to start logging from a web ACL,
 // according to the configuration provided. This operation completely replaces any
 // mutable specifications that you already have for a logging configuration with
 // the ones that you provide to this call. To modify an existing logging
 // configuration, do the following:
+//   - Retrieve it by calling GetLoggingConfiguration
+//   - Update its settings as needed
+//   - Provide the complete logging configuration specification to this call
 //
-// * Retrieve it by calling
-// GetLoggingConfiguration
+// You can define one logging destination per web ACL. You can access information
+// about the traffic that WAF inspects using the following steps:
+//   - Create your logging destination. You can use an Amazon CloudWatch Logs log
+//     group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis
+//     Data Firehose. The name that you give the destination must start with
+//     aws-waf-logs- . Depending on the type of destination, you might need to
+//     configure additional settings or permissions. For configuration requirements and
+//     pricing information for each destination type, see Logging web ACL traffic (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
+//     in the WAF Developer Guide.
+//   - Associate your logging destination to your web ACL using a
+//     PutLoggingConfiguration request.
 //
-// * Update its settings as needed
-//
-// * Provide the complete
-// logging configuration specification to this call
-//
-// You can define one logging
-// destination per web ACL. You can access information about the traffic that WAF
-// inspects using the following steps:
-//
-// * Create your logging destination. You can
-// use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service
-// (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. The name that you give
-// the destination must start with aws-waf-logs-. Depending on the type of
-// destination, you might need to configure additional settings or permissions. For
-// configuration requirements and pricing information for each destination type,
-// see Logging web ACL traffic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the WAF
-// Developer Guide.
-//
-// * Associate your logging destination to your web ACL using a
-// PutLoggingConfiguration request.
-//
-// When you successfully enable logging using a
-// PutLoggingConfiguration request, WAF creates an additional role or policy that
-// is required to write logs to the logging destination. For an Amazon CloudWatch
-// Logs log group, WAF creates a resource policy on the log group. For an Amazon S3
-// bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF
-// creates a service-linked role. For additional information about web ACL logging,
-// see Logging web ACL traffic information
-// (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the WAF
-// Developer Guide.
+// When you successfully enable logging using a PutLoggingConfiguration request,
+// WAF creates an additional role or policy that is required to write logs to the
+// logging destination. For an Amazon CloudWatch Logs log group, WAF creates a
+// resource policy on the log group. For an Amazon S3 bucket, WAF creates a bucket
+// policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.
+// For additional information about web ACL logging, see Logging web ACL traffic
+// information (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
+// in the WAF Developer Guide.
 func (c *Client) PutLoggingConfiguration(ctx context.Context, params *PutLoggingConfigurationInput, optFns ...func(*Options)) (*PutLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutLoggingConfigurationInput{}

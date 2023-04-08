@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The CreateQualificationType operation creates a new Qualification type, which is
-// represented by a QualificationType data structure.
+// The CreateQualificationType operation creates a new Qualification type, which
+// is represented by a QualificationType data structure.
 func (c *Client) CreateQualificationType(ctx context.Context, params *CreateQualificationTypeInput, optFns ...func(*Options)) (*CreateQualificationTypeOutput, error) {
 	if params == nil {
 		params = &CreateQualificationTypeInput{}

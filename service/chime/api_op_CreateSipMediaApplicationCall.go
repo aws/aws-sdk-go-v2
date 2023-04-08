@@ -12,7 +12,7 @@ import (
 )
 
 // Creates an outbound call to a phone number from the phone number specified in
-// the request, and it invokes the endpoint of the specified sipMediaApplicationId.
+// the request, and it invokes the endpoint of the specified sipMediaApplicationId .
 func (c *Client) CreateSipMediaApplicationCall(ctx context.Context, params *CreateSipMediaApplicationCallInput, optFns ...func(*Options)) (*CreateSipMediaApplicationCallOutput, error) {
 	if params == nil {
 		params = &CreateSipMediaApplicationCallInput{}

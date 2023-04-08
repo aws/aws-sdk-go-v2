@@ -10,9 +10,9 @@ const (
 	AmazonOpenSearchServerlessS3BackupModeAllDocuments        AmazonOpenSearchServerlessS3BackupMode = "AllDocuments"
 )
 
-// Values returns all known values for AmazonOpenSearchServerlessS3BackupMode. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for AmazonOpenSearchServerlessS3BackupMode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AmazonOpenSearchServerlessS3BackupMode) Values() []AmazonOpenSearchServerlessS3BackupMode {
 	return []AmazonOpenSearchServerlessS3BackupMode{
@@ -289,9 +289,9 @@ const (
 	HttpEndpointS3BackupModeAllData        HttpEndpointS3BackupMode = "AllData"
 )
 
-// Values returns all known values for HttpEndpointS3BackupMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HttpEndpointS3BackupMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HttpEndpointS3BackupMode) Values() []HttpEndpointS3BackupMode {
 	return []HttpEndpointS3BackupMode{
 		"FailedDataOnly",
@@ -489,9 +489,9 @@ const (
 	S3BackupModeEnabled  S3BackupMode = "Enabled"
 )
 
-// Values returns all known values for S3BackupMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for S3BackupMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (S3BackupMode) Values() []S3BackupMode {
 	return []S3BackupMode{
 		"Disabled",

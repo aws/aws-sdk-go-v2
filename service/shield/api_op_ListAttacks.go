@@ -33,8 +33,7 @@ type ListAttacksInput struct {
 
 	// The end of the time period for the attacks. This is a timestamp type. The
 	// request syntax listing for this call indicates a number type, but you can
-	// provide the time in any valid timestamp format
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
+	// provide the time in any valid timestamp format (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
 	// setting.
 	EndTime *types.TimeRange
 
@@ -64,8 +63,7 @@ type ListAttacksInput struct {
 
 	// The start of the time period for the attacks. This is a timestamp type. The
 	// request syntax listing for this call indicates a number type, but you can
-	// provide the time in any valid timestamp format
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
+	// provide the time in any valid timestamp format (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
 	// setting.
 	StartTime *types.TimeRange
 

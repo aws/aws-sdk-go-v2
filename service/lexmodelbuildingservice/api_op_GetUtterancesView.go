@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use the GetUtterancesView operation to get information about the utterances that
-// your users have made to your bot. You can use this list to tune the utterances
-// that your bot responds to. For example, say that you have created a bot to order
-// flowers. After your users have used your bot for a while, use the
+// Use the GetUtterancesView operation to get information about the utterances
+// that your users have made to your bot. You can use this list to tune the
+// utterances that your bot responds to. For example, say that you have created a
+// bot to order flowers. After your users have used your bot for a while, use the
 // GetUtterancesView operation to see the requests that they have made and whether
 // they have been successful. You might find that the utterance "I want flowers" is
-// not being recognized. You could add this utterance to the OrderFlowers intent so
-// that your bot recognizes that utterance. After you publish a new version of a
+// not being recognized. You could add this utterance to the OrderFlowers intent
+// so that your bot recognizes that utterance. After you publish a new version of a
 // bot, you can get information about the old version and the new so that you can
 // compare the performance across the two versions. Utterance statistics are
 // generated once a day. Data is available for the last 15 days. You can request
@@ -51,14 +51,14 @@ type GetUtterancesViewInput struct {
 	// This member is required.
 	BotName *string
 
-	// An array of bot versions for which utterance information should be returned. The
-	// limit is 5 versions per request.
+	// An array of bot versions for which utterance information should be returned.
+	// The limit is 5 versions per request.
 	//
 	// This member is required.
 	BotVersions []string
 
-	// To return utterances that were recognized and handled, use Detected. To return
-	// utterances that were not recognized, use Missed.
+	// To return utterances that were recognized and handled, use Detected . To return
+	// utterances that were not recognized, use Missed .
 	//
 	// This member is required.
 	StatusType types.StatusType

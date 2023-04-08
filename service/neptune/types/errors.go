@@ -251,8 +251,8 @@ func (e *DBClusterQuotaExceededFault) ErrorCode() string {
 }
 func (e *DBClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified IAM role Amazon Resource Name (ARN) is already associated with the
-// specified DB cluster.
+// The specified IAM role Amazon Resource Name (ARN) is already associated with
+// the specified DB cluster.
 type DBClusterRoleAlreadyExistsFault struct {
 	Message *string
 
@@ -1329,8 +1329,8 @@ func (e *InvalidRestoreFault) ErrorCode() string {
 }
 func (e *InvalidRestoreFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested subnet is invalid, or multiple subnets were requested that are not
-// all in a common VPC.
+// The requested subnet is invalid, or multiple subnets were requested that are
+// not all in a common VPC.
 type InvalidSubnet struct {
 	Message *string
 

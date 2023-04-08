@@ -15,17 +15,15 @@ type AccountDetails struct {
 	AdditionalContactEmailAddresses []string
 
 	// The language you would prefer for the case. The contact language can be one of
-	// ENGLISH or JAPANESE.
+	// ENGLISH or JAPANESE .
 	ContactLanguage ContactLanguage
 
 	// The type of email your account is sending. The mail type can be one of the
 	// following:
-	//
-	// * MARKETING – Most of your sending traffic is to keep your customers
-	// informed of your latest offering.
-	//
-	// * TRANSACTIONAL – Most of your sending
-	// traffic is to communicate during a transaction with a customer.
+	//   - MARKETING – Most of your sending traffic is to keep your customers informed
+	//   of your latest offering.
+	//   - TRANSACTIONAL – Most of your sending traffic is to communicate during a
+	//   transaction with a customer.
 	MailType MailType
 
 	// Information about the review of the latest details you submitted.
@@ -34,8 +32,8 @@ type AccountDetails struct {
 	// A description of the types of email that you plan to send.
 	UseCaseDescription *string
 
-	// The URL of your website. This information helps us better understand the type of
-	// content that you plan to send.
+	// The URL of your website. This information helps us better understand the type
+	// of content that you plan to send.
 	WebsiteURL *string
 
 	noSmithyDocumentSerde
@@ -55,52 +53,37 @@ type BatchGetMetricDataQuery struct {
 	Id *string
 
 	// The queried metric. This can be one of the following:
-	//
-	// * SEND – Emails sent
-	// eligible for tracking in the VDM dashboard. This excludes emails sent to the
-	// mailbox simulator and emails addressed to more than one recipient.
-	//
-	// * COMPLAINT
-	// – Complaints received for your account. This excludes complaints from the
-	// mailbox simulator, those originating from your account-level suppression list
-	// (if enabled), and those for emails addressed to more than one recipient
-	//
-	// *
-	// PERMANENT_BOUNCE – Permanent bounces - i.e. feedback received for emails sent to
-	// non-existent mailboxes. Excludes bounces from the mailbox simulator, those
-	// originating from your account-level suppression list (if enabled), and those for
-	// emails addressed to more than one recipient.
-	//
-	// * TRANSIENT_BOUNCE – Transient
-	// bounces - i.e. feedback received for delivery failures excluding issues with
-	// non-existent mailboxes. Excludes bounces from the mailbox simulator, and those
-	// for emails addressed to more than one recipient.
-	//
-	// * OPEN – Unique open events
-	// for emails including open trackers. Excludes opens for emails addressed to more
-	// than one recipient.
-	//
-	// * CLICK – Unique click events for emails including wrapped
-	// links. Excludes clicks for emails addressed to more than one recipient.
-	//
-	// *
-	// DELIVERY – Successful deliveries for email sending attempts. Excludes deliveries
-	// to the mailbox simulator and for emails addressed to more than one recipient.
-	//
-	// *
-	// DELIVERY_OPEN – Successful deliveries for email sending attempts. Excludes
-	// deliveries to the mailbox simulator, for emails addressed to more than one
-	// recipient, and emails without open trackers.
-	//
-	// * DELIVERY_CLICK – Successful
-	// deliveries for email sending attempts. Excludes deliveries to the mailbox
-	// simulator, for emails addressed to more than one recipient, and emails without
-	// click trackers.
-	//
-	// * DELIVERY_COMPLAINT – Successful deliveries for email sending
-	// attempts. Excludes deliveries to the mailbox simulator, for emails addressed to
-	// more than one recipient, and emails addressed to recipients hosted by ISPs with
-	// which Amazon SES does not have a feedback loop agreement.
+	//   - SEND – Emails sent eligible for tracking in the VDM dashboard. This excludes
+	//   emails sent to the mailbox simulator and emails addressed to more than one
+	//   recipient.
+	//   - COMPLAINT – Complaints received for your account. This excludes complaints
+	//   from the mailbox simulator, those originating from your account-level
+	//   suppression list (if enabled), and those for emails addressed to more than one
+	//   recipient
+	//   - PERMANENT_BOUNCE – Permanent bounces - i.e. feedback received for emails
+	//   sent to non-existent mailboxes. Excludes bounces from the mailbox simulator,
+	//   those originating from your account-level suppression list (if enabled), and
+	//   those for emails addressed to more than one recipient.
+	//   - TRANSIENT_BOUNCE – Transient bounces - i.e. feedback received for delivery
+	//   failures excluding issues with non-existent mailboxes. Excludes bounces from the
+	//   mailbox simulator, and those for emails addressed to more than one recipient.
+	//   - OPEN – Unique open events for emails including open trackers. Excludes opens
+	//   for emails addressed to more than one recipient.
+	//   - CLICK – Unique click events for emails including wrapped links. Excludes
+	//   clicks for emails addressed to more than one recipient.
+	//   - DELIVERY – Successful deliveries for email sending attempts. Excludes
+	//   deliveries to the mailbox simulator and for emails addressed to more than one
+	//   recipient.
+	//   - DELIVERY_OPEN – Successful deliveries for email sending attempts. Excludes
+	//   deliveries to the mailbox simulator, for emails addressed to more than one
+	//   recipient, and emails without open trackers.
+	//   - DELIVERY_CLICK – Successful deliveries for email sending attempts. Excludes
+	//   deliveries to the mailbox simulator, for emails addressed to more than one
+	//   recipient, and emails without click trackers.
+	//   - DELIVERY_COMPLAINT – Successful deliveries for email sending attempts.
+	//   Excludes deliveries to the mailbox simulator, for emails addressed to more than
+	//   one recipient, and emails addressed to recipients hosted by ISPs with which
+	//   Amazon SES does not have a feedback loop agreement.
 	//
 	// This member is required.
 	Metric Metric
@@ -169,18 +152,17 @@ type BulkEmailEntry struct {
 
 	// Represents the destination of the message, consisting of To:, CC:, and BCC:
 	// fields. Amazon SES does not support the SMTPUTF8 extension, as described in
-	// RFC6531 (https://tools.ietf.org/html/rfc6531). For this reason, the local part
+	// RFC6531 (https://tools.ietf.org/html/rfc6531) . For this reason, the local part
 	// of a destination email address (the part of the email address that precedes the
-	// @ sign) may only contain 7-bit ASCII characters
-	// (https://en.wikipedia.org/wiki/Email_address#Local-part). If the domain part of
-	// an address (the part after the @ sign) contains non-ASCII characters, they must
-	// be encoded using Punycode, as described in RFC3492
-	// (https://tools.ietf.org/html/rfc3492.html).
+	// @ sign) may only contain 7-bit ASCII characters (https://en.wikipedia.org/wiki/Email_address#Local-part)
+	// . If the domain part of an address (the part after the @ sign) contains
+	// non-ASCII characters, they must be encoded using Punycode, as described in
+	// RFC3492 (https://tools.ietf.org/html/rfc3492.html) .
 	//
 	// This member is required.
 	Destination *Destination
 
-	// The ReplacementEmailContent associated with a BulkEmailEntry.
+	// The ReplacementEmailContent associated with a BulkEmailEntry .
 	ReplacementEmailContent *ReplacementEmailContent
 
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
@@ -192,7 +174,7 @@ type BulkEmailEntry struct {
 	noSmithyDocumentSerde
 }
 
-// The result of the SendBulkEmail operation of each specified BulkEmailEntry.
+// The result of the SendBulkEmail operation of each specified BulkEmailEntry .
 type BulkEmailEntryResult struct {
 
 	// A description of an error that prevented a message being sent using the
@@ -205,57 +187,35 @@ type BulkEmailEntryResult struct {
 
 	// The status of a message sent using the SendBulkTemplatedEmail operation.
 	// Possible values for this parameter include:
-	//
-	// * SUCCESS: Amazon SES accepted the
-	// message, and will attempt to deliver it to the recipients.
-	//
-	// * MESSAGE_REJECTED:
-	// The message was rejected because it contained a virus.
-	//
-	// *
-	// MAIL_FROM_DOMAIN_NOT_VERIFIED: The sender's email address or domain was not
-	// verified.
-	//
-	// * CONFIGURATION_SET_DOES_NOT_EXIST: The configuration set you
-	// specified does not exist.
-	//
-	// * TEMPLATE_DOES_NOT_EXIST: The template you specified
-	// does not exist.
-	//
-	// * ACCOUNT_SUSPENDED: Your account has been shut down because of
-	// issues related to your email sending practices.
-	//
-	// * ACCOUNT_THROTTLED: The number
-	// of emails you can send has been reduced because your account has exceeded its
-	// allocated sending limit.
-	//
-	// * ACCOUNT_DAILY_QUOTA_EXCEEDED: You have reached or
-	// exceeded the maximum number of emails you can send from your account in a
-	// 24-hour period.
-	//
-	// * INVALID_SENDING_POOL_NAME: The configuration set you
-	// specified refers to an IP pool that does not exist.
-	//
-	// * ACCOUNT_SENDING_PAUSED:
-	// Email sending for the Amazon SES account was disabled using the
-	// UpdateAccountSendingEnabled
-	// (https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateAccountSendingEnabled.html)
-	// operation.
-	//
-	// * CONFIGURATION_SET_SENDING_PAUSED: Email sending for this
-	// configuration set was disabled using the UpdateConfigurationSetSendingEnabled
-	// (https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateConfigurationSetSendingEnabled.html)
-	// operation.
-	//
-	// * INVALID_PARAMETER_VALUE: One or more of the parameters you
-	// specified when calling this operation was invalid. See the error message for
-	// additional information.
-	//
-	// * TRANSIENT_FAILURE: Amazon SES was unable to process
-	// your request because of a temporary issue.
-	//
-	// * FAILED: Amazon SES was unable to
-	// process your request. See the error message for additional information.
+	//   - SUCCESS: Amazon SES accepted the message, and will attempt to deliver it to
+	//   the recipients.
+	//   - MESSAGE_REJECTED: The message was rejected because it contained a virus.
+	//   - MAIL_FROM_DOMAIN_NOT_VERIFIED: The sender's email address or domain was not
+	//   verified.
+	//   - CONFIGURATION_SET_DOES_NOT_EXIST: The configuration set you specified does
+	//   not exist.
+	//   - TEMPLATE_DOES_NOT_EXIST: The template you specified does not exist.
+	//   - ACCOUNT_SUSPENDED: Your account has been shut down because of issues
+	//   related to your email sending practices.
+	//   - ACCOUNT_THROTTLED: The number of emails you can send has been reduced
+	//   because your account has exceeded its allocated sending limit.
+	//   - ACCOUNT_DAILY_QUOTA_EXCEEDED: You have reached or exceeded the maximum
+	//   number of emails you can send from your account in a 24-hour period.
+	//   - INVALID_SENDING_POOL_NAME: The configuration set you specified refers to an
+	//   IP pool that does not exist.
+	//   - ACCOUNT_SENDING_PAUSED: Email sending for the Amazon SES account was
+	//   disabled using the UpdateAccountSendingEnabled (https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateAccountSendingEnabled.html)
+	//   operation.
+	//   - CONFIGURATION_SET_SENDING_PAUSED: Email sending for this configuration set
+	//   was disabled using the UpdateConfigurationSetSendingEnabled (https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateConfigurationSetSendingEnabled.html)
+	//   operation.
+	//   - INVALID_PARAMETER_VALUE: One or more of the parameters you specified when
+	//   calling this operation was invalid. See the error message for additional
+	//   information.
+	//   - TRANSIENT_FAILURE: Amazon SES was unable to process your request because of
+	//   a temporary issue.
+	//   - FAILED: Amazon SES was unable to process your request. See the error
+	//   message for additional information.
 	Status BulkEmailStatus
 
 	noSmithyDocumentSerde
@@ -266,8 +226,8 @@ type BulkEmailEntryResult struct {
 // metrics.
 type CloudWatchDestination struct {
 
-	// An array of objects that define the dimensions to use when you send email events
-	// to Amazon CloudWatch.
+	// An array of objects that define the dimensions to use when you send email
+	// events to Amazon CloudWatch.
 	//
 	// This member is required.
 	DimensionConfigurations []CloudWatchDimensionConfiguration
@@ -279,27 +239,21 @@ type CloudWatchDestination struct {
 // events to Amazon CloudWatch.
 type CloudWatchDimensionConfiguration struct {
 
-	// The default value of the dimension that is published to Amazon CloudWatch if you
-	// don't provide the value of the dimension when you send an email. This value has
-	// to meet the following criteria:
-	//
-	// * Can only contain ASCII letters (a–z, A–Z),
-	// numbers (0–9), underscores (_), or dashes (-), at signs (@), and periods (.).
-	//
-	// *
-	// It can contain no more than 256 characters.
+	// The default value of the dimension that is published to Amazon CloudWatch if
+	// you don't provide the value of the dimension when you send an email. This value
+	// has to meet the following criteria:
+	//   - Can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_),
+	//   or dashes (-), at signs (@), and periods (.).
+	//   - It can contain no more than 256 characters.
 	//
 	// This member is required.
 	DefaultDimensionValue *string
 
 	// The name of an Amazon CloudWatch dimension associated with an email sending
 	// metric. The name has to meet the following criteria:
-	//
-	// * It can only contain
-	// ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).
-	//
-	// * It
-	// can contain no more than 256 characters.
+	//   - It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores
+	//   (_), or dashes (-).
+	//   - It can contain no more than 256 characters.
 	//
 	// This member is required.
 	DimensionName *string
@@ -307,8 +261,8 @@ type CloudWatchDimensionConfiguration struct {
 	// The location where the Amazon SES API v2 finds the value of a dimension to
 	// publish to Amazon CloudWatch. To use the message tags that you specify using an
 	// X-SES-MESSAGE-TAGS header or a parameter to the SendEmail or SendRawEmail API,
-	// choose messageTag. To use your own email headers, choose emailHeader. To use
-	// link tags, choose linkTags.
+	// choose messageTag . To use your own email headers, choose emailHeader . To use
+	// link tags, choose linkTags .
 	//
 	// This member is required.
 	DimensionValueSource DimensionValueSource
@@ -356,12 +310,9 @@ type ContactListDestination struct {
 
 	// >The type of action to perform on the addresses. The following are the possible
 	// values:
-	//
-	// * PUT: add the addresses to the contact list. If the record already
-	// exists, it will override it with the new value.
-	//
-	// * DELETE: remove the addresses
-	// from the contact list.
+	//   - PUT: add the addresses to the contact list. If the record already exists,
+	//   it will override it with the new value.
+	//   - DELETE: remove the addresses from the contact list.
 	//
 	// This member is required.
 	ContactListImportAction ContactListImportAction
@@ -386,7 +337,7 @@ type Content struct {
 	// The character set for the content. Because of the constraints of the SMTP
 	// protocol, Amazon SES uses 7-bit ASCII by default. If the text includes
 	// characters outside of the ASCII range, you have to specify a character set. For
-	// example, you could specify UTF-8, ISO-8859-1, or Shift_JIS.
+	// example, you could specify UTF-8 , ISO-8859-1 , or Shift_JIS .
 	Charset *string
 
 	noSmithyDocumentSerde
@@ -439,11 +390,8 @@ type DashboardAttributes struct {
 
 	// Specifies the status of your VDM engagement metrics collection. Can be one of
 	// the following:
-	//
-	// * ENABLED – Amazon SES enables engagement metrics for your
-	// account.
-	//
-	// * DISABLED – Amazon SES disables engagement metrics for your account.
+	//   - ENABLED – Amazon SES enables engagement metrics for your account.
+	//   - DISABLED – Amazon SES disables engagement metrics for your account.
 	EngagementMetrics FeatureStatus
 
 	noSmithyDocumentSerde
@@ -455,12 +403,8 @@ type DashboardOptions struct {
 
 	// Specifies the status of your VDM engagement metrics collection. Can be one of
 	// the following:
-	//
-	// * ENABLED – Amazon SES enables engagement metrics for the
-	// configuration set.
-	//
-	// * DISABLED – Amazon SES disables engagement metrics for the
-	// configuration set.
+	//   - ENABLED – Amazon SES enables engagement metrics for the configuration set.
+	//   - DISABLED – Amazon SES disables engagement metrics for the configuration set.
 	EngagementMetrics FeatureStatus
 
 	noSmithyDocumentSerde
@@ -468,8 +412,7 @@ type DashboardOptions struct {
 
 // Contains information about a dedicated IP address that is associated with your
 // Amazon SES account. To learn more about requesting dedicated IP addresses, see
-// Requesting and Relinquishing Dedicated IP Addresses
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/dedicated-ip-case.html)
+// Requesting and Relinquishing Dedicated IP Addresses (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/dedicated-ip-case.html)
 // in the Amazon SES Developer Guide.
 type DedicatedIp struct {
 
@@ -486,12 +429,10 @@ type DedicatedIp struct {
 
 	// The warm-up status of a dedicated IP address. The status can have one of the
 	// following values:
-	//
-	// * IN_PROGRESS – The IP address isn't ready to use because the
-	// dedicated IP warm-up process is ongoing.
-	//
-	// * DONE – The dedicated IP warm-up
-	// process is complete, and the IP address is ready to use.
+	//   - IN_PROGRESS – The IP address isn't ready to use because the dedicated IP
+	//   warm-up process is ongoing.
+	//   - DONE – The dedicated IP warm-up process is complete, and the IP address is
+	//   ready to use.
 	//
 	// This member is required.
 	WarmupStatus WarmupStatus
@@ -511,13 +452,10 @@ type DedicatedIpPool struct {
 	PoolName *string
 
 	// The type of the dedicated IP pool.
-	//
-	// * STANDARD – A dedicated IP pool where the
-	// customer can control which IPs are part of the pool.
-	//
-	// * MANAGED – A dedicated IP
-	// pool where the reputation and number of IPs is automatically managed by Amazon
-	// SES.
+	//   - STANDARD – A dedicated IP pool where the customer can control which IPs are
+	//   part of the pool.
+	//   - MANAGED – A dedicated IP pool where the reputation and number of IPs is
+	//   automatically managed by Amazon SES.
 	//
 	// This member is required.
 	ScalingMode ScalingMode
@@ -531,10 +469,10 @@ type DeliverabilityTestReport struct {
 	// The date and time when the predictive inbox placement test was created.
 	CreateDate *time.Time
 
-	// The status of the predictive inbox placement test. If the status is IN_PROGRESS,
-	// then the predictive inbox placement test is currently running. Predictive inbox
-	// placement tests are usually complete within 24 hours of creating the test. If
-	// the status is COMPLETE, then the test is finished, and you can use the
+	// The status of the predictive inbox placement test. If the status is IN_PROGRESS
+	// , then the predictive inbox placement test is currently running. Predictive
+	// inbox placement tests are usually complete within 24 hours of creating the test.
+	// If the status is COMPLETE , then the test is finished, and you can use the
 	// GetDeliverabilityTestReport to view the results of the test.
 	DeliverabilityTestStatus DeliverabilityTestStatus
 
@@ -547,8 +485,8 @@ type DeliverabilityTestReport struct {
 	// A name that helps you identify a predictive inbox placement test report.
 	ReportName *string
 
-	// The subject line for an email that you submitted in a predictive inbox placement
-	// test.
+	// The subject line for an email that you submitted in a predictive inbox
+	// placement test.
 	Subject *string
 
 	noSmithyDocumentSerde
@@ -561,8 +499,8 @@ type DeliveryOptions struct {
 	SendingPoolName *string
 
 	// Specifies whether messages that use the configuration set are required to use
-	// Transport Layer Security (TLS). If the value is Require, messages are only
-	// delivered if a TLS connection can be established. If the value is Optional,
+	// Transport Layer Security (TLS). If the value is Require , messages are only
+	// delivered if a TLS connection can be established. If the value is Optional ,
 	// messages can be delivered in plain text if a TLS connection can't be
 	// established.
 	TlsPolicy TlsPolicy
@@ -571,14 +509,13 @@ type DeliveryOptions struct {
 }
 
 // An object that describes the recipients for an email. Amazon SES does not
-// support the SMTPUTF8 extension, as described in RFC6531
-// (https://tools.ietf.org/html/rfc6531). For this reason, the local part of a
-// destination email address (the part of the email address that precedes the @
-// sign) may only contain 7-bit ASCII characters
-// (https://en.wikipedia.org/wiki/Email_address#Local-part). If the domain part of
-// an address (the part after the @ sign) contains non-ASCII characters, they must
-// be encoded using Punycode, as described in RFC3492
-// (https://tools.ietf.org/html/rfc3492.html).
+// support the SMTPUTF8 extension, as described in RFC6531 (https://tools.ietf.org/html/rfc6531)
+// . For this reason, the local part of a destination email address (the part of
+// the email address that precedes the @ sign) may only contain 7-bit ASCII
+// characters (https://en.wikipedia.org/wiki/Email_address#Local-part) . If the
+// domain part of an address (the part after the @ sign) contains non-ASCII
+// characters, they must be encoded using Punycode, as described in RFC3492 (https://tools.ietf.org/html/rfc3492.html)
+// .
 type Destination struct {
 
 	// An array that contains the email addresses of the "BCC" (blind carbon copy)
@@ -597,14 +534,13 @@ type Destination struct {
 
 // An object that contains information about the DKIM authentication status for an
 // email identity. Amazon SES determines the authentication status by searching for
-// specific records in the DNS configuration for the domain. If you used Easy DKIM
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html) to set up
-// DKIM authentication, Amazon SES tries to find three unique CNAME records in the
-// DNS configuration for your domain. If you provided a public key to perform DKIM
-// authentication, Amazon SES tries to find a TXT record that uses the selector
-// that you specified. The value of the TXT record must be a public key that's
-// paired with the private key that you specified in the process of creating the
-// identity
+// specific records in the DNS configuration for the domain. If you used Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
+// to set up DKIM authentication, Amazon SES tries to find three unique CNAME
+// records in the DNS configuration for your domain. If you provided a public key
+// to perform DKIM authentication, Amazon SES tries to find a TXT record that uses
+// the selector that you specified. The value of the TXT record must be a public
+// key that's paired with the private key that you specified in the process of
+// creating the identity
 type DkimAttributes struct {
 
 	// [Easy DKIM] The key length of the DKIM key pair in use.
@@ -613,67 +549,53 @@ type DkimAttributes struct {
 	// [Easy DKIM] The last time a key pair was generated for this identity.
 	LastKeyGenerationTimestamp *time.Time
 
-	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This can
-	// be changed at most once per day.
+	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This
+	// can be changed at most once per day.
 	NextSigningKeyLength DkimSigningKeyLength
 
 	// A string that indicates how DKIM was configured for the identity. These are the
 	// possible values:
-	//
-	// * AWS_SES – Indicates that DKIM was configured for the
-	// identity by using Easy DKIM
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
-	//
-	// *
-	// EXTERNAL – Indicates that DKIM was configured for the identity by using Bring
-	// Your Own DKIM (BYODKIM).
+	//   - AWS_SES – Indicates that DKIM was configured for the identity by using Easy
+	//   DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html) .
+	//   - EXTERNAL – Indicates that DKIM was configured for the identity by using
+	//   Bring Your Own DKIM (BYODKIM).
 	SigningAttributesOrigin DkimSigningAttributesOrigin
 
-	// If the value is true, then the messages that you send from the identity are
-	// signed using DKIM. If the value is false, then the messages that you send from
+	// If the value is true , then the messages that you send from the identity are
+	// signed using DKIM. If the value is false , then the messages that you send from
 	// the identity aren't DKIM-signed.
 	SigningEnabled bool
 
-	// Describes whether or not Amazon SES has successfully located the DKIM records in
-	// the DNS records for the domain. The status can be one of the following:
-	//
-	// *
-	// PENDING – The verification process was initiated, but Amazon SES hasn't yet
-	// detected the DKIM records in the DNS configuration for the domain.
-	//
-	// * SUCCESS –
-	// The verification process completed successfully.
-	//
-	// * FAILED – The verification
-	// process failed. This typically occurs when Amazon SES fails to find the DKIM
-	// records in the DNS configuration of the domain.
-	//
-	// * TEMPORARY_FAILURE – A
-	// temporary issue is preventing Amazon SES from determining the DKIM
-	// authentication status of the domain.
-	//
-	// * NOT_STARTED – The DKIM verification
-	// process hasn't been initiated for the domain.
+	// Describes whether or not Amazon SES has successfully located the DKIM records
+	// in the DNS records for the domain. The status can be one of the following:
+	//   - PENDING – The verification process was initiated, but Amazon SES hasn't yet
+	//   detected the DKIM records in the DNS configuration for the domain.
+	//   - SUCCESS – The verification process completed successfully.
+	//   - FAILED – The verification process failed. This typically occurs when Amazon
+	//   SES fails to find the DKIM records in the DNS configuration of the domain.
+	//   - TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from
+	//   determining the DKIM authentication status of the domain.
+	//   - NOT_STARTED – The DKIM verification process hasn't been initiated for the
+	//   domain.
 	Status DkimStatus
 
-	// If you used Easy DKIM
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html) to
-	// configure DKIM authentication for the domain, then this object contains a set of
-	// unique strings that you use to create a set of CNAME records that you add to the
-	// DNS configuration for your domain. When Amazon SES detects these records in the
-	// DNS configuration for your domain, the DKIM authentication process is complete.
-	// If you configured DKIM authentication for the domain by providing your own
-	// public-private key pair, then this object contains the selector for the public
-	// key. Regardless of the DKIM authentication method you use, Amazon SES searches
-	// for the appropriate records in the DNS configuration of the domain for up to 72
-	// hours.
+	// If you used Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
+	// to configure DKIM authentication for the domain, then this object contains a set
+	// of unique strings that you use to create a set of CNAME records that you add to
+	// the DNS configuration for your domain. When Amazon SES detects these records in
+	// the DNS configuration for your domain, the DKIM authentication process is
+	// complete. If you configured DKIM authentication for the domain by providing your
+	// own public-private key pair, then this object contains the selector for the
+	// public key. Regardless of the DKIM authentication method you use, Amazon SES
+	// searches for the appropriate records in the DNS configuration of the domain for
+	// up to 72 hours.
 	Tokens []string
 
 	noSmithyDocumentSerde
 }
 
-// An object that contains configuration for Bring Your Own DKIM (BYODKIM), or, for
-// Easy DKIM
+// An object that contains configuration for Bring Your Own DKIM (BYODKIM), or,
+// for Easy DKIM
 type DkimSigningAttributes struct {
 
 	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature.
@@ -685,8 +607,8 @@ type DkimSigningAttributes struct {
 	// configuration for a domain.
 	DomainSigningSelector *string
 
-	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This can
-	// be changed at most once per day.
+	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This
+	// can be changed at most once per day.
 	NextSigningKeyLength DkimSigningKeyLength
 
 	noSmithyDocumentSerde
@@ -694,8 +616,8 @@ type DkimSigningAttributes struct {
 
 // An object that contains the deliverability data for a specific campaign. This
 // data is available for a campaign only if the campaign sent email by using a
-// domain that the Deliverability dashboard is enabled for
-// (PutDeliverabilityDashboardOption operation).
+// domain that the Deliverability dashboard is enabled for (
+// PutDeliverabilityDashboardOption operation).
 type DomainDeliverabilityCampaign struct {
 
 	// The unique identifier for the campaign. The Deliverability dashboard
@@ -810,30 +732,19 @@ type DomainIspPlacement struct {
 type EmailContent struct {
 
 	// The raw email message. The message has to meet the following criteria:
-	//
-	// * The
-	// message has to contain a header and a body, separated by one blank line.
-	//
-	// * All
-	// of the required header fields must be present in the message.
-	//
-	// * Each part of a
-	// multipart MIME message must be formatted properly.
-	//
-	// * If you include
-	// attachments, they must be in a file format that the Amazon SES API v2
-	// supports.
-	//
-	// * The entire message must be Base64 encoded.
-	//
-	// * If any of the MIME
-	// parts in your message contain content that is outside of the 7-bit ASCII
-	// character range, you should encode that content to ensure that recipients' email
-	// clients render the message properly.
-	//
-	// * The length of any single line of text in
-	// the message can't exceed 1,000 characters. This restriction is defined in RFC
-	// 5321 (https://tools.ietf.org/html/rfc5321).
+	//   - The message has to contain a header and a body, separated by one blank
+	//   line.
+	//   - All of the required header fields must be present in the message.
+	//   - Each part of a multipart MIME message must be formatted properly.
+	//   - If you include attachments, they must be in a file format that the Amazon
+	//   SES API v2 supports.
+	//   - The entire message must be Base64 encoded.
+	//   - If any of the MIME parts in your message contain content that is outside of
+	//   the 7-bit ASCII character range, you should encode that content to ensure that
+	//   recipients' email clients render the message properly.
+	//   - The length of any single line of text in the message can't exceed 1,000
+	//   characters. This restriction is defined in RFC 5321 (https://tools.ietf.org/html/rfc5321)
+	//   .
 	Raw *RawMessage
 
 	// The simple email message. The message consists of a subject and a message body.
@@ -882,53 +793,36 @@ type EmailTemplateMetadata struct {
 // S3 for long-term storage.
 type EventDestination struct {
 
-	// The types of events that Amazon SES sends to the specified event
-	// destinations.
-	//
-	// * SEND - The send request was successful and SES will attempt to
-	// deliver the message to the recipient’s mail server. (If account-level or global
-	// suppression is being used, SES will still count it as a send, but delivery is
-	// suppressed.)
-	//
-	// * REJECT - SES accepted the email, but determined that it
-	// contained a virus and didn’t attempt to deliver it to the recipient’s mail
-	// server.
-	//
-	// * BOUNCE - (Hard bounce) The recipient's mail server permanently
-	// rejected the email. (Soft bounces are only included when SES fails to deliver
-	// the email after retrying for a period of time.)
-	//
-	// * COMPLAINT - The email was
-	// successfully delivered to the recipient’s mail server, but the recipient marked
-	// it as spam.
-	//
-	// * DELIVERY - SES successfully delivered the email to the
-	// recipient's mail server.
-	//
-	// * OPEN - The recipient received the message and opened
-	// it in their email client.
-	//
-	// * CLICK - The recipient clicked one or more links in
-	// the email.
-	//
-	// * RENDERING_FAILURE - The email wasn't sent because of a template
-	// rendering issue. This event type can occur when template data is missing, or
-	// when there is a mismatch between template parameters and data. (This event type
-	// only occurs when you send email using the SendTemplatedEmail
-	// (https://docs.aws.amazon.com/ses/latest/APIReference/API_SendTemplatedEmail.html)
-	// or SendBulkTemplatedEmail
-	// (https://docs.aws.amazon.com/ses/latest/APIReference/API_SendBulkTemplatedEmail.html)
-	// API operations.)
-	//
-	// * DELIVERY_DELAY - The email couldn't be delivered to the
-	// recipient’s mail server because a temporary issue occurred. Delivery delays can
-	// occur, for example, when the recipient's inbox is full, or when the receiving
-	// email server experiences a transient issue.
-	//
-	// * SUBSCRIPTION - The email was
-	// successfully delivered, but the recipient updated their subscription preferences
-	// by clicking on an unsubscribe link as part of your subscription management
-	// (https://docs.aws.amazon.com/ses/latest/dg/sending-email-subscription-management.html).
+	// The types of events that Amazon SES sends to the specified event destinations.
+	//   - SEND - The send request was successful and SES will attempt to deliver the
+	//   message to the recipient’s mail server. (If account-level or global suppression
+	//   is being used, SES will still count it as a send, but delivery is suppressed.)
+	//   - REJECT - SES accepted the email, but determined that it contained a virus
+	//   and didn’t attempt to deliver it to the recipient’s mail server.
+	//   - BOUNCE - (Hard bounce) The recipient's mail server permanently rejected the
+	//   email. (Soft bounces are only included when SES fails to deliver the email after
+	//   retrying for a period of time.)
+	//   - COMPLAINT - The email was successfully delivered to the recipient’s mail
+	//   server, but the recipient marked it as spam.
+	//   - DELIVERY - SES successfully delivered the email to the recipient's mail
+	//   server.
+	//   - OPEN - The recipient received the message and opened it in their email
+	//   client.
+	//   - CLICK - The recipient clicked one or more links in the email.
+	//   - RENDERING_FAILURE - The email wasn't sent because of a template rendering
+	//   issue. This event type can occur when template data is missing, or when there is
+	//   a mismatch between template parameters and data. (This event type only occurs
+	//   when you send email using the SendTemplatedEmail (https://docs.aws.amazon.com/ses/latest/APIReference/API_SendTemplatedEmail.html)
+	//   or SendBulkTemplatedEmail (https://docs.aws.amazon.com/ses/latest/APIReference/API_SendBulkTemplatedEmail.html)
+	//   API operations.)
+	//   - DELIVERY_DELAY - The email couldn't be delivered to the recipient’s mail
+	//   server because a temporary issue occurred. Delivery delays can occur, for
+	//   example, when the recipient's inbox is full, or when the receiving email server
+	//   experiences a transient issue.
+	//   - SUBSCRIPTION - The email was successfully delivered, but the recipient
+	//   updated their subscription preferences by clicking on an unsubscribe link as
+	//   part of your subscription management (https://docs.aws.amazon.com/ses/latest/dg/sending-email-subscription-management.html)
+	//   .
 	//
 	// This member is required.
 	MatchingEventTypes []EventType
@@ -943,9 +837,9 @@ type EventDestination struct {
 	// metrics.
 	CloudWatchDestination *CloudWatchDestination
 
-	// If true, the event destination is enabled. When the event destination is
+	// If true , the event destination is enabled. When the event destination is
 	// enabled, the specified event types are sent to the destinations in this
-	// EventDestinationDefinition. If false, the event destination is disabled. When
+	// EventDestinationDefinition . If false , the event destination is disabled. When
 	// the event destination is disabled, events aren't sent to the specified
 	// destinations.
 	Enabled bool
@@ -958,8 +852,7 @@ type EventDestination struct {
 	// An object that defines an Amazon Pinpoint project destination for email events.
 	// You can send email event data to a Amazon Pinpoint project to view metrics using
 	// the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For
-	// more information, see Transactional Messaging Charts
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html)
+	// more information, see Transactional Messaging Charts (https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html)
 	// in the Amazon Pinpoint User Guide.
 	PinpointDestination *PinpointDestination
 
@@ -981,9 +874,9 @@ type EventDestinationDefinition struct {
 	// metrics.
 	CloudWatchDestination *CloudWatchDestination
 
-	// If true, the event destination is enabled. When the event destination is
+	// If true , the event destination is enabled. When the event destination is
 	// enabled, the specified event types are sent to the destinations in this
-	// EventDestinationDefinition. If false, the event destination is disabled. When
+	// EventDestinationDefinition . If false , the event destination is disabled. When
 	// the event destination is disabled, events aren't sent to the specified
 	// destinations.
 	Enabled bool
@@ -994,14 +887,13 @@ type EventDestinationDefinition struct {
 	KinesisFirehoseDestination *KinesisFirehoseDestination
 
 	// An array that specifies which events the Amazon SES API v2 should send to the
-	// destinations in this EventDestinationDefinition.
+	// destinations in this EventDestinationDefinition .
 	MatchingEventTypes []EventType
 
 	// An object that defines an Amazon Pinpoint project destination for email events.
 	// You can send email event data to a Amazon Pinpoint project to view metrics using
 	// the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For
-	// more information, see Transactional Messaging Charts
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html)
+	// more information, see Transactional Messaging Charts (https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html)
 	// in the Amazon Pinpoint User Guide.
 	PinpointDestination *PinpointDestination
 
@@ -1031,12 +923,8 @@ type GuardianAttributes struct {
 
 	// Specifies the status of your VDM optimized shared delivery. Can be one of the
 	// following:
-	//
-	// * ENABLED – Amazon SES enables optimized shared delivery for your
-	// account.
-	//
-	// * DISABLED – Amazon SES disables optimized shared delivery for your
-	// account.
+	//   - ENABLED – Amazon SES enables optimized shared delivery for your account.
+	//   - DISABLED – Amazon SES disables optimized shared delivery for your account.
 	OptimizedSharedDelivery FeatureStatus
 
 	noSmithyDocumentSerde
@@ -1048,12 +936,10 @@ type GuardianOptions struct {
 
 	// Specifies the status of your VDM optimized shared delivery. Can be one of the
 	// following:
-	//
-	// * ENABLED – Amazon SES enables optimized shared delivery for the
-	// configuration set.
-	//
-	// * DISABLED – Amazon SES disables optimized shared delivery
-	// for the configuration set.
+	//   - ENABLED – Amazon SES enables optimized shared delivery for the configuration
+	//   set.
+	//   - DISABLED – Amazon SES disables optimized shared delivery for the
+	//   configuration set.
 	OptimizedSharedDelivery FeatureStatus
 
 	noSmithyDocumentSerde
@@ -1069,29 +955,22 @@ type IdentityInfo struct {
 	// email identity types.
 	IdentityType IdentityType
 
-	// Indicates whether or not you can send email from the identity. An identity is an
-	// email address or domain that you send email from. Before you can send email from
-	// an identity, you have to demostrate that you own the identity, and that you
+	// Indicates whether or not you can send email from the identity. An identity is
+	// an email address or domain that you send email from. Before you can send email
+	// from an identity, you have to demostrate that you own the identity, and that you
 	// authorize Amazon SES to send email from that identity.
 	SendingEnabled bool
 
 	// The verification status of the identity. The status can be one of the
 	// following:
-	//
-	// * PENDING – The verification process was initiated, but Amazon SES
-	// hasn't yet been able to verify the identity.
-	//
-	// * SUCCESS – The verification
-	// process completed successfully.
-	//
-	// * FAILED – The verification process failed.
-	//
-	// *
-	// TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining
-	// the verification status of the identity.
-	//
-	// * NOT_STARTED – The verification
-	// process hasn't been initiated for the identity.
+	//   - PENDING – The verification process was initiated, but Amazon SES hasn't yet
+	//   been able to verify the identity.
+	//   - SUCCESS – The verification process completed successfully.
+	//   - FAILED – The verification process failed.
+	//   - TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from
+	//   determining the verification status of the identity.
+	//   - NOT_STARTED – The verification process hasn't been initiated for the
+	//   identity.
 	VerificationStatus VerificationStatus
 
 	noSmithyDocumentSerde
@@ -1113,8 +992,8 @@ type ImportDataSource struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains details about the resource destination the import job is
-// going to target.
+// An object that contains details about the resource destination the import job
+// is going to target.
 type ImportDestination struct {
 
 	// An object that contains the action of the import job towards a contact list.
@@ -1136,8 +1015,8 @@ type ImportJobSummary struct {
 	// reasons.
 	FailedRecordsCount *int32
 
-	// An object that contains details about the resource destination the import job is
-	// going to target.
+	// An object that contains details about the resource destination the import job
+	// is going to target.
 	ImportDestination *ImportDestination
 
 	// A string that represents the import job ID.
@@ -1204,7 +1083,7 @@ type KinesisFirehoseDestination struct {
 // A filter that can be applied to a list of contacts.
 type ListContactsFilter struct {
 
-	// The status by which you are filtering: OPT_IN or OPT_OUT.
+	// The status by which you are filtering: OPT_IN or OPT_OUT .
 	FilteredStatus SubscriptionStatus
 
 	// Used for filtering by a specific topic preference.
@@ -1232,12 +1111,12 @@ type ListManagementOptions struct {
 type MailFromAttributes struct {
 
 	// The action to take if the required MX record can't be found when you send an
-	// email. When you set this value to USE_DEFAULT_VALUE, the mail is sent using
-	// amazonses.com as the MAIL FROM domain. When you set this value to
-	// REJECT_MESSAGE, the Amazon SES API v2 returns a MailFromDomainNotVerified error,
-	// and doesn't attempt to deliver the email. These behaviors are taken when the
-	// custom MAIL FROM domain configuration is in the Pending, Failed, and
-	// TemporaryFailure states.
+	// email. When you set this value to USE_DEFAULT_VALUE , the mail is sent using
+	// amazonses.com as the MAIL FROM domain. When you set this value to REJECT_MESSAGE
+	// , the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't
+	// attempt to deliver the email. These behaviors are taken when the custom MAIL
+	// FROM domain configuration is in the Pending , Failed , and TemporaryFailure
+	// states.
 	//
 	// This member is required.
 	BehaviorOnMxFailure BehaviorOnMxFailure
@@ -1247,20 +1126,14 @@ type MailFromAttributes struct {
 	// This member is required.
 	MailFromDomain *string
 
-	// The status of the MAIL FROM domain. This status can have the following
-	// values:
-	//
-	// * PENDING – Amazon SES hasn't started searching for the MX record
-	// yet.
-	//
-	// * SUCCESS – Amazon SES detected the required MX record for the MAIL FROM
-	// domain.
-	//
-	// * FAILED – Amazon SES can't find the required MX record, or the record
-	// no longer exists.
-	//
-	// * TEMPORARY_FAILURE – A temporary issue occurred, which
-	// prevented Amazon SES from determining the status of the MAIL FROM domain.
+	// The status of the MAIL FROM domain. This status can have the following values:
+	//   - PENDING – Amazon SES hasn't started searching for the MX record yet.
+	//   - SUCCESS – Amazon SES detected the required MX record for the MAIL FROM
+	//   domain.
+	//   - FAILED – Amazon SES can't find the required MX record, or the record no
+	//   longer exists.
+	//   - TEMPORARY_FAILURE – A temporary issue occurred, which prevented Amazon SES
+	//   from determining the status of the MAIL FROM domain.
 	//
 	// This member is required.
 	MailFromDomainStatus MailFromDomainStatus
@@ -1268,8 +1141,8 @@ type MailFromAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the email message that you're sending. The Message object consists of
-// a subject line and a message body.
+// Represents the email message that you're sending. The Message object consists
+// of a subject line and a message body.
 type Message struct {
 
 	// The body of the message. You can specify an HTML version of the message, a
@@ -1280,8 +1153,8 @@ type Message struct {
 
 	// The subject line of the email. The subject line can only contain 7-bit ASCII
 	// characters. However, you can specify non-ASCII characters in the subject line by
-	// using encoded-word syntax, as described in RFC 2047
-	// (https://tools.ietf.org/html/rfc2047).
+	// using encoded-word syntax, as described in RFC 2047 (https://tools.ietf.org/html/rfc2047)
+	// .
 	//
 	// This member is required.
 	Subject *Content
@@ -1295,22 +1168,18 @@ type MessageTag struct {
 
 	// The name of the message tag. The message tag name has to meet the following
 	// criteria:
-	//
-	// * It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
-	// underscores (_), or dashes (-).
-	//
-	// * It can contain no more than 256 characters.
+	//   - It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores
+	//   (_), or dashes (-).
+	//   - It can contain no more than 256 characters.
 	//
 	// This member is required.
 	Name *string
 
 	// The value of the message tag. The message tag value has to meet the following
 	// criteria:
-	//
-	// * It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
-	// underscores (_), or dashes (-).
-	//
-	// * It can contain no more than 256 characters.
+	//   - It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores
+	//   (_), or dashes (-).
+	//   - It can contain no more than 256 characters.
 	//
 	// This member is required.
 	Value *string
@@ -1323,12 +1192,9 @@ type MessageTag struct {
 type MetricDataError struct {
 
 	// The query error code. Can be one of:
-	//
-	// * INTERNAL_FAILURE – Amazon SES has failed
-	// to process one of the queries.
-	//
-	// * ACCESS_DENIED – You have insufficient access
-	// to retrieve metrics based on the given query.
+	//   - INTERNAL_FAILURE – Amazon SES has failed to process one of the queries.
+	//   - ACCESS_DENIED – You have insufficient access to retrieve metrics based on
+	//   the given query.
 	Code QueryErrorCode
 
 	// The query identifier.
@@ -1377,8 +1243,7 @@ type OverallVolume struct {
 // An object that defines an Amazon Pinpoint project destination for email events.
 // You can send email event data to a Amazon Pinpoint project to view metrics using
 // the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For
-// more information, see Transactional Messaging Charts
-// (https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html)
+// more information, see Transactional Messaging Charts (https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html)
 // in the Amazon Pinpoint User Guide.
 type PinpointDestination struct {
 
@@ -1400,8 +1265,8 @@ type PlacementStatistics struct {
 	// predictive inbox placement test.
 	InboxPercentage *float64
 
-	// The percentage of emails that didn't arrive in recipients' inboxes at all during
-	// the predictive inbox placement test.
+	// The percentage of emails that didn't arrive in recipients' inboxes at all
+	// during the predictive inbox placement test.
 	MissingPercentage *float64
 
 	// The percentage of emails that arrived in recipients' spam or junk mail folders
@@ -1419,29 +1284,18 @@ type PlacementStatistics struct {
 type RawMessage struct {
 
 	// The raw email message. The message has to meet the following criteria:
-	//
-	// * The
-	// message has to contain a header and a body, separated by one blank line.
-	//
-	// * All
-	// of the required header fields must be present in the message.
-	//
-	// * Each part of a
-	// multipart MIME message must be formatted properly.
-	//
-	// * Attachments must be in a
-	// file format that the Amazon SES supports.
-	//
-	// * The entire message must be Base64
-	// encoded.
-	//
-	// * If any of the MIME parts in your message contain content that is
-	// outside of the 7-bit ASCII character range, you should encode that content to
-	// ensure that recipients' email clients render the message properly.
-	//
-	// * The length
-	// of any single line of text in the message can't exceed 1,000 characters. This
-	// restriction is defined in RFC 5321 (https://tools.ietf.org/html/rfc5321).
+	//   - The message has to contain a header and a body, separated by one blank
+	//   line.
+	//   - All of the required header fields must be present in the message.
+	//   - Each part of a multipart MIME message must be formatted properly.
+	//   - Attachments must be in a file format that the Amazon SES supports.
+	//   - The entire message must be Base64 encoded.
+	//   - If any of the MIME parts in your message contain content that is outside of
+	//   the 7-bit ASCII character range, you should encode that content to ensure that
+	//   recipients' email clients render the message properly.
+	//   - The length of any single line of text in the message can't exceed 1,000
+	//   characters. This restriction is defined in RFC 5321 (https://tools.ietf.org/html/rfc5321)
+	//   .
 	//
 	// This member is required.
 	Data []byte
@@ -1459,37 +1313,37 @@ type Recommendation struct {
 	// different recommendations about your DKIM setup.
 	Description *string
 
-	// The recommendation impact, with values like HIGH or LOW.
+	// The recommendation impact, with values like HIGH or LOW .
 	Impact RecommendationImpact
 
 	// The last time the recommendation was updated.
 	LastUpdatedTimestamp *time.Time
 
 	// The resource affected by the recommendation, with values like
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com.
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com .
 	ResourceArn *string
 
-	// The recommendation status, with values like OPEN or FIXED.
+	// The recommendation status, with values like OPEN or FIXED .
 	Status RecommendationStatus
 
-	// The recommendation type, with values like DKIM, SPF, DMARC or BIMI.
+	// The recommendation type, with values like DKIM , SPF , DMARC or BIMI .
 	Type RecommendationType
 
 	noSmithyDocumentSerde
 }
 
-// The ReplaceEmailContent object to be used for a specific BulkEmailEntry. The
+// The ReplaceEmailContent object to be used for a specific BulkEmailEntry . The
 // ReplacementTemplate can be specified within this object.
 type ReplacementEmailContent struct {
 
-	// The ReplacementTemplate associated with ReplacementEmailContent.
+	// The ReplacementTemplate associated with ReplacementEmailContent .
 	ReplacementTemplate *ReplacementTemplate
 
 	noSmithyDocumentSerde
 }
 
 // An object which contains ReplacementTemplateData to be used for a specific
-// BulkEmailEntry.
+// BulkEmailEntry .
 type ReplacementTemplate struct {
 
 	// A list of replacement values to apply to the template. This parameter is a JSON
@@ -1509,8 +1363,8 @@ type ReputationOptions struct {
 	// are calculated starting from the date of the fresh start.
 	LastFreshStart *time.Time
 
-	// If true, tracking of reputation metrics is enabled for the configuration set. If
-	// false, tracking of reputation metrics is disabled for the configuration set.
+	// If true , tracking of reputation metrics is enabled for the configuration set.
+	// If false , tracking of reputation metrics is disabled for the configuration set.
 	ReputationMetricsEnabled bool
 
 	noSmithyDocumentSerde
@@ -1524,28 +1378,24 @@ type ReviewDetails struct {
 
 	// The status of the latest review of your account. The status can be one of the
 	// following:
-	//
-	// * PENDING – We have received your appeal and are in the process of
-	// reviewing it.
-	//
-	// * GRANTED – Your appeal has been reviewed and your production
-	// access has been granted.
-	//
-	// * DENIED – Your appeal has been reviewed and your
-	// production access has been denied.
-	//
-	// * FAILED – An internal error occurred and we
-	// didn't receive your appeal. You can submit your appeal again.
+	//   - PENDING – We have received your appeal and are in the process of reviewing
+	//   it.
+	//   - GRANTED – Your appeal has been reviewed and your production access has been
+	//   granted.
+	//   - DENIED – Your appeal has been reviewed and your production access has been
+	//   denied.
+	//   - FAILED – An internal error occurred and we didn't receive your appeal. You
+	//   can submit your appeal again.
 	Status ReviewStatus
 
 	noSmithyDocumentSerde
 }
 
-// Used to enable or disable email sending for messages that use this configuration
-// set in the current Amazon Web Services Region.
+// Used to enable or disable email sending for messages that use this
+// configuration set in the current Amazon Web Services Region.
 type SendingOptions struct {
 
-	// If true, email sending is enabled for the configuration set. If false, email
+	// If true , email sending is enabled for the configuration set. If false , email
 	// sending is disabled for the configuration set.
 	SendingEnabled bool
 
@@ -1566,8 +1416,8 @@ type SendQuota struct {
 	// maximum TPS (transactions per second) rate.
 	MaxSendRate float64
 
-	// The number of emails sent from your Amazon SES account in the current Amazon Web
-	// Services Region over the past 24 hours.
+	// The number of emails sent from your Amazon SES account in the current Amazon
+	// Web Services Region over the past 24 hours.
 	SentLast24Hours float64
 
 	noSmithyDocumentSerde
@@ -1579,7 +1429,7 @@ type SnsDestination struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events
 	// to. For more information about Amazon SNS topics, see the Amazon SNS Developer
-	// Guide (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
+	// Guide (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) .
 	//
 	// This member is required.
 	TopicArn *string
@@ -1607,8 +1457,8 @@ type SuppressedDestination struct {
 	// This member is required.
 	Reason SuppressionListReason
 
-	// An optional value that can contain additional information about the reasons that
-	// the address was added to the suppression list for your account.
+	// An optional value that can contain additional information about the reasons
+	// that the address was added to the suppression list for your account.
 	Attributes *SuppressedDestinationAttributes
 
 	noSmithyDocumentSerde
@@ -1658,14 +1508,10 @@ type SuppressionAttributes struct {
 	// A list that contains the reasons that email addresses will be automatically
 	// added to the suppression list for your account. This list can contain any or all
 	// of the following:
-	//
-	// * COMPLAINT – Amazon SES adds an email address to the
-	// suppression list for your account when a message sent to that address results in
-	// a complaint.
-	//
-	// * BOUNCE – Amazon SES adds an email address to the suppression
-	// list for your account when a message sent to that address results in a hard
-	// bounce.
+	//   - COMPLAINT – Amazon SES adds an email address to the suppression list for
+	//   your account when a message sent to that address results in a complaint.
+	//   - BOUNCE – Amazon SES adds an email address to the suppression list for your
+	//   account when a message sent to that address results in a hard bounce.
 	SuppressedReasons []SuppressionListReason
 
 	noSmithyDocumentSerde
@@ -1676,12 +1522,9 @@ type SuppressionListDestination struct {
 
 	// The type of action to perform on the address. The following are possible
 	// values:
-	//
-	// * PUT: add the addresses to the suppression list. If the record already
-	// exists, it will override it with the new value.
-	//
-	// * DELETE: remove the addresses
-	// from the suppression list.
+	//   - PUT: add the addresses to the suppression list. If the record already
+	//   exists, it will override it with the new value.
+	//   - DELETE: remove the addresses from the suppression list.
 	//
 	// This member is required.
 	SuppressionListImportAction SuppressionListImportAction
@@ -1693,16 +1536,13 @@ type SuppressionListDestination struct {
 // your account.
 type SuppressionOptions struct {
 
-	// A list that contains the reasons that email addresses are automatically added to
-	// the suppression list for your account. This list can contain any or all of the
-	// following:
-	//
-	// * COMPLAINT – Amazon SES adds an email address to the suppression
-	// list for your account when a message sent to that address results in a
-	// complaint.
-	//
-	// * BOUNCE – Amazon SES adds an email address to the suppression list
-	// for your account when a message sent to that address results in a hard bounce.
+	// A list that contains the reasons that email addresses are automatically added
+	// to the suppression list for your account. This list can contain any or all of
+	// the following:
+	//   - COMPLAINT – Amazon SES adds an email address to the suppression list for
+	//   your account when a message sent to that address results in a complaint.
+	//   - BOUNCE – Amazon SES adds an email address to the suppression list for your
+	//   account when a message sent to that address results in a hard bounce.
 	SuppressedReasons []SuppressionListReason
 
 	noSmithyDocumentSerde
@@ -1719,27 +1559,22 @@ type SuppressionOptions struct {
 // as 256 characters. The characters can be Unicode letters, digits, white space,
 // or one of the following symbols: _ . : / = + -. The following additional
 // restrictions apply to tags:
-//
-// * Tag keys and values are case sensitive.
-//
-// * For
-// each associated resource, each tag key must be unique and it can have only one
-// value.
-//
-// * The aws: prefix is reserved for use by Amazon Web Services; you can’t
-// use it in any tag keys or values that you define. In addition, you can't edit or
-// remove tag keys or values that use this prefix. Tags that use this prefix don’t
-// count against the limit of 50 tags per resource.
-//
-// * You can associate tags with
-// public or shared resources, but the tags are available only for your Amazon Web
-// Services account, not any other accounts that share the resource. In addition,
-// the tags are available only for resources that are located in the specified
-// Amazon Web Services Region for your Amazon Web Services account.
+//   - Tag keys and values are case sensitive.
+//   - For each associated resource, each tag key must be unique and it can have
+//     only one value.
+//   - The aws: prefix is reserved for use by Amazon Web Services; you can’t use it
+//     in any tag keys or values that you define. In addition, you can't edit or remove
+//     tag keys or values that use this prefix. Tags that use this prefix don’t count
+//     against the limit of 50 tags per resource.
+//   - You can associate tags with public or shared resources, but the tags are
+//     available only for your Amazon Web Services account, not any other accounts that
+//     share the resource. In addition, the tags are available only for resources that
+//     are located in the specified Amazon Web Services Region for your Amazon Web
+//     Services account.
 type Tag struct {
 
-	// One part of a key-value pair that defines a tag. The maximum length of a tag key
-	// is 128 characters. The minimum length is 1 character.
+	// One part of a key-value pair that defines a tag. The maximum length of a tag
+	// key is 128 characters. The minimum length is 1 character.
 	//
 	// This member is required.
 	Key *string
@@ -1820,7 +1655,7 @@ type TopicFilter struct {
 // The contact's preference for being opted-in to or opted-out of a topic.
 type TopicPreference struct {
 
-	// The contact's subscription status to a topic which is either OPT_IN or OPT_OUT.
+	// The contact's subscription status to a topic which is either OPT_IN or OPT_OUT .
 	//
 	// This member is required.
 	SubscriptionStatus SubscriptionStatus
@@ -1854,12 +1689,8 @@ type TrackingOptions struct {
 type VdmAttributes struct {
 
 	// Specifies the status of your VDM configuration. Can be one of the following:
-	//
-	// *
-	// ENABLED – Amazon SES enables VDM for your account.
-	//
-	// * DISABLED – Amazon SES
-	// disables VDM for your account.
+	//   - ENABLED – Amazon SES enables VDM for your account.
+	//   - DISABLED – Amazon SES disables VDM for your account.
 	//
 	// This member is required.
 	VdmEnabled FeatureStatus
@@ -1875,8 +1706,8 @@ type VdmAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// An object that defines the VDM settings that apply to emails that you send using
-// the configuration set.
+// An object that defines the VDM settings that apply to emails that you send
+// using the configuration set.
 type VdmOptions struct {
 
 	// Specifies additional settings for your VDM configuration as applicable to the
@@ -1890,8 +1721,8 @@ type VdmOptions struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information about the amount of email that was delivered
-// to recipients.
+// An object that contains information about the amount of email that was
+// delivered to recipients.
 type VolumeStatistics struct {
 
 	// The total number of emails that arrived in recipients' inboxes.

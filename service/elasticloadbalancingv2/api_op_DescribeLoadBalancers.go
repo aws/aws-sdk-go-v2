@@ -58,8 +58,8 @@ type DescribeLoadBalancersOutput struct {
 	// Information about the load balancers.
 	LoadBalancers []types.LoadBalancer
 
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
+	// If there are additional results, this is the marker for the next set of
+	// results. Otherwise, this is null.
 	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
@@ -221,9 +221,10 @@ type LoadBalancerAvailableWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, LoadBalancerAvailableWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, LoadBalancerAvailableWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -432,8 +433,8 @@ type LoadBalancerExistsWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, LoadBalancerExistsWaiter will use default max delay of 120 seconds.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, LoadBalancerExistsWaiter will use default max delay of 120 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -592,9 +593,10 @@ type LoadBalancersDeletedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, LoadBalancersDeletedWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, LoadBalancersDeletedWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

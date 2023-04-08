@@ -11,25 +11,16 @@ import (
 )
 
 // Stops a resource. The resource undergoes the following states: CREATE_STOPPING
-// and CREATE_STOPPED. You cannot resume a resource once it has been stopped. This
+// and CREATE_STOPPED . You cannot resume a resource once it has been stopped. This
 // operation can be applied to the following resources (and their corresponding
 // child resources):
-//
-// * Dataset Import Job
-//
-// * Predictor Job
-//
-// * Forecast Job
-//
-// *
-// Forecast Export Job
-//
-// * Predictor Backtest Export Job
-//
-// * Explainability Job
-//
-// *
-// Explainability Export Job
+//   - Dataset Import Job
+//   - Predictor Job
+//   - Forecast Job
+//   - Forecast Export Job
+//   - Predictor Backtest Export Job
+//   - Explainability Job
+//   - Explainability Export Job
 func (c *Client) StopResource(ctx context.Context, params *StopResourceInput, optFns ...func(*Options)) (*StopResourceOutput, error) {
 	if params == nil {
 		params = &StopResourceInput{}
@@ -48,9 +39,9 @@ func (c *Client) StopResource(ctx context.Context, params *StopResourceInput, op
 type StopResourceInput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the resource to stop. The
-	// supported ARNs are DatasetImportJobArn, PredictorArn,
-	// PredictorBacktestExportJobArn, ForecastArn, ForecastExportJobArn,
-	// ExplainabilityArn, and ExplainabilityExportArn.
+	// supported ARNs are DatasetImportJobArn , PredictorArn ,
+	// PredictorBacktestExportJobArn , ForecastArn , ForecastExportJobArn ,
+	// ExplainabilityArn , and ExplainabilityExportArn .
 	//
 	// This member is required.
 	ResourceArn *string

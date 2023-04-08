@@ -16,8 +16,8 @@ import (
 // transactions for an AWS account. The list is paginated and ordered by a
 // descending timestamp (most recent transactions are first). The API returns a
 // NotEligible error if the user is not permitted to invoke the operation. If you
-// must be able to invoke this operation, contact aws-devicefarm-support@amazon.com
-// (mailto:aws-devicefarm-support@amazon.com).
+// must be able to invoke this operation, contact aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
+// .
 func (c *Client) ListOfferingTransactions(ctx context.Context, params *ListOfferingTransactionsInput, optFns ...func(*Options)) (*ListOfferingTransactionsOutput, error) {
 	if params == nil {
 		params = &ListOfferingTransactionsInput{}

@@ -32,18 +32,11 @@ type ListImageScanFindingsInput struct {
 
 	// An array of name value pairs that you can use to filter your results. You can
 	// use the following filters to streamline results:
-	//
-	// * imageBuildVersionArn
-	//
-	// *
-	// imagePipelineArn
-	//
-	// * vulnerabilityId
-	//
-	// * severity
-	//
-	// If you don't request a filter,
-	// then all findings in your account are listed.
+	//   - imageBuildVersionArn
+	//   - imagePipelineArn
+	//   - vulnerabilityId
+	//   - severity
+	// If you don't request a filter, then all findings in your account are listed.
 	Filters []types.ImageScanFindingsFilter
 
 	// The maximum items to return in a request.

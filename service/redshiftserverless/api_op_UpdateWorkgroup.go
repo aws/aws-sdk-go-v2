@@ -41,17 +41,17 @@ type UpdateWorkgroupInput struct {
 	BaseCapacity *int32
 
 	// An array of parameters to set for advanced control over a database. The options
-	// are auto_mv, datestyle, enable_case_sensitivity_identifier,
-	// enable_user_activity_logging, query_group, search_path, and query monitoring
+	// are auto_mv , datestyle , enable_case_sensitivity_identifier ,
+	// enable_user_activity_logging , query_group , search_path , and query monitoring
 	// metrics that let you define performance boundaries. For more information about
-	// query monitoring rules and available metrics, see  Query monitoring metrics for
-	// Amazon Redshift Serverless
-	// (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless).
+	// query monitoring rules and available metrics, see Query monitoring metrics for
+	// Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
+	// .
 	ConfigParameters []types.ConfigParameter
 
-	// The value that specifies whether to turn on enhanced virtual private cloud (VPC)
-	// routing, which forces Amazon Redshift Serverless to route traffic through your
-	// VPC.
+	// The value that specifies whether to turn on enhanced virtual private cloud
+	// (VPC) routing, which forces Amazon Redshift Serverless to route traffic through
+	// your VPC.
 	EnhancedVpcRouting *bool
 
 	// The custom port to use when connecting to a workgroup. Valid port ranges are

@@ -46,10 +46,10 @@ type GetBotChannelAssociationsInput struct {
 	// The maximum number of associations to return in the response. The default is 50.
 	MaxResults *int32
 
-	// Substring to match in channel association names. An association will be returned
-	// if any part of its name matches the substring. For example, "xyz" matches both
-	// "xyzabc" and "abcxyz." To return all bot channel associations, use a hyphen
-	// ("-") as the nameContains parameter.
+	// Substring to match in channel association names. An association will be
+	// returned if any part of its name matches the substring. For example, "xyz"
+	// matches both "xyzabc" and "abcxyz." To return all bot channel associations, use
+	// a hyphen ("-") as the nameContains parameter.
 	NameContains *string
 
 	// A pagination token for fetching the next page of associations. If the response

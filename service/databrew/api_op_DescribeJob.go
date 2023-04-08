@@ -67,12 +67,8 @@ type DescribeJobOutput struct {
 	EncryptionKeyArn *string
 
 	// The encryption mode for the job, which can be one of the following:
-	//
-	// * SSE-KMS -
-	// Server-side encryption with keys managed by KMS.
-	//
-	// * SSE-S3 - Server-side
-	// encryption with keys managed by Amazon S3.
+	//   - SSE-KMS - Server-side encryption with keys managed by KMS.
+	//   - SSE-S3 - Server-side encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 
 	// Sample configuration for profile jobs only. Determines the number of rows on
@@ -120,16 +116,13 @@ type DescribeJobOutput struct {
 	Tags map[string]string
 
 	// The job's timeout in minutes. A job that attempts to run longer than this
-	// timeout period ends with a status of TIMEOUT.
+	// timeout period ends with a status of TIMEOUT .
 	Timeout int32
 
 	// The job type, which must be one of the following:
-	//
-	// * PROFILE - The job analyzes
-	// the dataset to determine its size, data types, data distribution, and more.
-	//
-	// *
-	// RECIPE - The job applies one or more transformations to a dataset.
+	//   - PROFILE - The job analyzes the dataset to determine its size, data types,
+	//   data distribution, and more.
+	//   - RECIPE - The job applies one or more transformations to a dataset.
 	Type types.JobType
 
 	// List of validation configurations that are applied to the profile job.

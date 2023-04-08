@@ -13,9 +13,8 @@ import (
 )
 
 // Lists all OpenSearch Serverless collections. For more information, see Creating
-// and managing Amazon OpenSearch Serverless collections
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html).
-// Make sure to include an empty request body {} if you don't include any
+// and managing Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html)
+// . Make sure to include an empty request body {} if you don't include any
 // collection filters in the request.
 func (c *Client) ListCollections(ctx context.Context, params *ListCollectionsInput, optFns ...func(*Options)) (*ListCollectionsOutput, error) {
 	if params == nil {
@@ -37,11 +36,11 @@ type ListCollectionsInput struct {
 	// List of filter names and values that you can use for requests.
 	CollectionFilters *types.CollectionFilters
 
-	// The maximum number of results to return. Default is 20. You can use nextToken to
-	// get the next page of results.
+	// The maximum number of results to return. Default is 20. You can use nextToken
+	// to get the next page of results.
 	MaxResults *int32
 
-	// If your initial ListCollections operation returns a nextToken, you can include
+	// If your initial ListCollections operation returns a nextToken , you can include
 	// the returned nextToken in subsequent ListCollections operations, which returns
 	// results in the next page.
 	NextToken *string

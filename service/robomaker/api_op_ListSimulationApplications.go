@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of simulation applications. You can optionally provide filters to
-// retrieve specific simulation applications.
+// Returns a list of simulation applications. You can optionally provide filters
+// to retrieve specific simulation applications.
 func (c *Client) ListSimulationApplications(ctx context.Context, params *ListSimulationApplicationsInput, optFns ...func(*Options)) (*ListSimulationApplicationsOutput, error) {
 	if params == nil {
 		params = &ListSimulationApplicationsInput{}
@@ -39,8 +39,8 @@ type ListSimulationApplicationsInput struct {
 	// When this parameter is used, ListSimulationApplications only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another
-	// ListSimulationApplications request with the returned nextToken value. This value
-	// can be between 1 and 100. If this parameter is not used, then
+	// ListSimulationApplications request with the returned nextToken value. This
+	// value can be between 1 and 100. If this parameter is not used, then
 	// ListSimulationApplications returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults *int32
@@ -151,8 +151,8 @@ type ListSimulationApplicationsPaginatorOptions struct {
 	// When this parameter is used, ListSimulationApplications only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another
-	// ListSimulationApplications request with the returned nextToken value. This value
-	// can be between 1 and 100. If this parameter is not used, then
+	// ListSimulationApplications request with the returned nextToken value. This
+	// value can be between 1 and 100. If this parameter is not used, then
 	// ListSimulationApplications returns up to 100 results and a nextToken value if
 	// applicable.
 	Limit int32

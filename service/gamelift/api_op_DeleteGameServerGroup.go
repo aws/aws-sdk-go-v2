@@ -16,26 +16,20 @@ import (
 // group record. You have several options for how these resources are impacted when
 // deleting the game server group. Depending on the type of delete operation
 // selected, this operation might affect these resources:
+//   - The game server group
+//   - The corresponding Auto Scaling group
+//   - All game servers that are currently running in the group
 //
-// * The game server
-// group
-//
-// * The corresponding Auto Scaling group
-//
-// * All game servers that are
-// currently running in the group
-//
-// To delete a game server group, identify the game
-// server group to delete and specify the type of delete operation to initiate.
-// Game server groups can only be deleted if they are in ACTIVE or ERROR status. If
-// the delete request is successful, a series of operations are kicked off. The
-// game server group status is changed to DELETE_SCHEDULED, which prevents new game
-// servers from being registered and stops automatic scaling activity. Once all
-// game servers in the game server group are deregistered, GameLift FleetIQ can
-// begin deleting resources. If any of the delete operations fail, the game server
-// group is placed in ERROR status. GameLift FleetIQ emits delete events to Amazon
-// CloudWatch. Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// To delete a game server group, identify the game server group to delete and
+// specify the type of delete operation to initiate. Game server groups can only be
+// deleted if they are in ACTIVE or ERROR status. If the delete request is
+// successful, a series of operations are kicked off. The game server group status
+// is changed to DELETE_SCHEDULED , which prevents new game servers from being
+// registered and stops automatic scaling activity. Once all game servers in the
+// game server group are deregistered, GameLift FleetIQ can begin deleting
+// resources. If any of the delete operations fail, the game server group is placed
+// in ERROR status. GameLift FleetIQ emits delete events to Amazon CloudWatch.
+// Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) DeleteGameServerGroup(ctx context.Context, params *DeleteGameServerGroupInput, optFns ...func(*Options)) (*DeleteGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGameServerGroupInput{}
@@ -59,18 +53,13 @@ type DeleteGameServerGroupInput struct {
 	GameServerGroupName *string
 
 	// The type of delete to perform. Options include the following:
-	//
-	// * SAFE_DELETE –
-	// (default) Terminates the game server group and Amazon EC2 Auto Scaling group
-	// only when it has no game servers that are in UTILIZED status.
-	//
-	// * FORCE_DELETE –
-	// Terminates the game server group, including all active game servers regardless
-	// of their utilization status, and the Amazon EC2 Auto Scaling group.
-	//
-	// * RETAIN –
-	// Does a safe delete of the game server group but retains the Amazon EC2 Auto
-	// Scaling group as is.
+	//   - SAFE_DELETE – (default) Terminates the game server group and Amazon EC2 Auto
+	//   Scaling group only when it has no game servers that are in UTILIZED status.
+	//   - FORCE_DELETE – Terminates the game server group, including all active game
+	//   servers regardless of their utilization status, and the Amazon EC2 Auto Scaling
+	//   group.
+	//   - RETAIN – Does a safe delete of the game server group but retains the Amazon
+	//   EC2 Auto Scaling group as is.
 	DeleteOption types.GameServerGroupDeleteOption
 
 	noSmithyDocumentSerde
@@ -79,7 +68,7 @@ type DeleteGameServerGroupInput struct {
 type DeleteGameServerGroupOutput struct {
 
 	// An object that describes the deleted game server group resource, with status
-	// updated to DELETE_SCHEDULED.
+	// updated to DELETE_SCHEDULED .
 	GameServerGroup *types.GameServerGroup
 
 	// Metadata pertaining to the operation's result.

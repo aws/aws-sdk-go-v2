@@ -12,8 +12,7 @@ import (
 )
 
 // Modifies a task set. This is used when a service uses the EXTERNAL deployment
-// controller type. For more information, see Amazon ECS Deployment Types
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// controller type. For more information, see Amazon ECS Deployment Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) UpdateTaskSet(ctx context.Context, params *UpdateTaskSetInput, optFns ...func(*Options)) (*UpdateTaskSetOutput, error) {
 	if params == nil {

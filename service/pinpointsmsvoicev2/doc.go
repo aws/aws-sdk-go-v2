@@ -11,12 +11,11 @@
 // Voice, version 2 API provides programmatic access to options that are unique to
 // the SMS and voice channels and supplements the resources provided by the Amazon
 // Pinpoint API. If you're new to Amazon Pinpoint, it's also helpful to review the
-// Amazon Pinpoint Developer Guide
-// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html). The
-// Amazon Pinpoint Developer Guide provides tutorials, code samples, and procedures
-// that demonstrate how to use Amazon Pinpoint features programmatically and how to
-// integrate Amazon Pinpoint functionality into mobile apps and other types of
-// applications. The guide also provides key information, such as Amazon Pinpoint
-// integration with other Amazon Web Services services, and the quotas that apply
-// to use of the service.
+// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html)
+// . The Amazon Pinpoint Developer Guide provides tutorials, code samples, and
+// procedures that demonstrate how to use Amazon Pinpoint features programmatically
+// and how to integrate Amazon Pinpoint functionality into mobile apps and other
+// types of applications. The guide also provides key information, such as Amazon
+// Pinpoint integration with other Amazon Web Services services, and the quotas
+// that apply to use of the service.
 package pinpointsmsvoicev2

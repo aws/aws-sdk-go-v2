@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of all versions for a component. Greater versions are
-// listed first.
+// Retrieves a paginated list of all versions for a component. Greater versions
+// are listed first.
 func (c *Client) ListComponentVersions(ctx context.Context, params *ListComponentVersionsInput, optFns ...func(*Options)) (*ListComponentVersionsOutput, error) {
 	if params == nil {
 		params = &ListComponentVersionsInput{}
@@ -31,9 +31,8 @@ func (c *Client) ListComponentVersions(ctx context.Context, params *ListComponen
 
 type ListComponentVersionsInput struct {
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the component.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the component.
 	//
 	// This member is required.
 	Arn *string

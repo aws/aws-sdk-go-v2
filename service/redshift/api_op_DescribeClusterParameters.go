@@ -17,10 +17,9 @@ import (
 // such as parameter name, description, data type, value, whether the parameter
 // value is modifiable, and so on. You can specify source filter to retrieve
 // parameters of only specific type. For example, to retrieve parameters that were
-// modified by a user action such as from ModifyClusterParameterGroup, you can
+// modified by a user action such as from ModifyClusterParameterGroup , you can
 // specify source equal to user. For more information about parameters and
-// parameter groups, go to Amazon Redshift Parameter Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// parameter groups, go to Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) DescribeClusterParameters(ctx context.Context, params *DescribeClusterParametersInput, optFns ...func(*Options)) (*DescribeClusterParametersOutput, error) {
 	if params == nil {
@@ -45,11 +44,11 @@ type DescribeClusterParametersInput struct {
 	ParameterGroupName *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterParameters request exceed
-	// the value specified in MaxRecords, Amazon Web Services returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeClusterParameters request
+	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
+	// records by providing the returned marker value in the Marker parameter and
+	// retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
@@ -60,9 +59,9 @@ type DescribeClusterParametersInput struct {
 	MaxRecords *int32
 
 	// The parameter types to return. Specify user to show parameters that are
-	// different form the default. Similarly, specify engine-default to show parameters
-	// that are the same as the default parameter group. Default: All parameter types
-	// returned. Valid Values: user | engine-default
+	// different form the default. Similarly, specify engine-default to show
+	// parameters that are the same as the default parameter group. Default: All
+	// parameter types returned. Valid Values: user | engine-default
 	Source *string
 
 	noSmithyDocumentSerde
@@ -78,8 +77,8 @@ type DescribeClusterParametersOutput struct {
 	// records have been retrieved for the request.
 	Marker *string
 
-	// A list of Parameter instances. Each instance lists the parameters of one cluster
-	// parameter group.
+	// A list of Parameter instances. Each instance lists the parameters of one
+	// cluster parameter group.
 	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.

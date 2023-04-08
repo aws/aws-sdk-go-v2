@@ -18,18 +18,15 @@ import (
 // specify. A CRL is typically updated approximately 30 minutes after a certificate
 // is revoked. If for any reason the CRL update fails, Amazon Web Services Private
 // CA attempts makes further attempts every 15 minutes. With Amazon CloudWatch, you
-// can create alarms for the metrics CRLGenerated and MisconfiguredCRLBucket. For
-// more information, see Supported CloudWatch Metrics
-// (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCloudWatch.html).
-// Both Amazon Web Services Private CA and the IAM principal must have permission
+// can create alarms for the metrics CRLGenerated and MisconfiguredCRLBucket . For
+// more information, see Supported CloudWatch Metrics (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCloudWatch.html)
+// . Both Amazon Web Services Private CA and the IAM principal must have permission
 // to write to the S3 bucket that you specify. If the IAM principal making the call
 // does not have permission to write to the bucket, then an exception is thrown.
-// For more information, see Access policies for CRLs in Amazon S3
-// (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies).
-// Amazon Web Services Private CA also writes revocation information to the audit
-// report. For more information, see CreateCertificateAuthorityAuditReport
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html).
-// You cannot revoke a root CA self-signed certificate.
+// For more information, see Access policies for CRLs in Amazon S3 (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies)
+// . Amazon Web Services Private CA also writes revocation information to the audit
+// report. For more information, see CreateCertificateAuthorityAuditReport (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
+// . You cannot revoke a root CA self-signed certificate.
 func (c *Client) RevokeCertificate(ctx context.Context, params *RevokeCertificateInput, optFns ...func(*Options)) (*RevokeCertificateOutput, error) {
 	if params == nil {
 		params = &RevokeCertificateInput{}
@@ -55,15 +52,13 @@ type RevokeCertificateInput struct {
 	CertificateAuthorityArn *string
 
 	// Serial number of the certificate to be revoked. This must be in hexadecimal
-	// format. You can retrieve the serial number by calling GetCertificate
-	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificate.html)
+	// format. You can retrieve the serial number by calling GetCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificate.html)
 	// with the Amazon Resource Name (ARN) of the certificate you want and the ARN of
 	// your private CA. The GetCertificate action retrieves the certificate in the PEM
 	// format. You can use the following OpenSSL command to list the certificate in
 	// text format and copy the hexadecimal serial number. openssl x509 -in file_path
 	// -text -noout You can also copy the serial number from the console or use the
-	// DescribeCertificate
-	// (https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html)
+	// DescribeCertificate (https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html)
 	// action in the Certificate Manager API Reference.
 	//
 	// This member is required.

@@ -12,8 +12,8 @@ import (
 )
 
 // Returns the available automatic snapshots for an instance or disk. For more
-// information, see the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots)
+// .
 func (c *Client) GetAutoSnapshots(ctx context.Context, params *GetAutoSnapshotsInput, optFns ...func(*Options)) (*GetAutoSnapshotsOutput, error) {
 	if params == nil {
 		params = &GetAutoSnapshotsInput{}
@@ -42,14 +42,14 @@ type GetAutoSnapshotsInput struct {
 
 type GetAutoSnapshotsOutput struct {
 
-	// An array of objects that describe the automatic snapshots that are available for
-	// the specified source instance or disk.
+	// An array of objects that describe the automatic snapshots that are available
+	// for the specified source instance or disk.
 	AutoSnapshots []types.AutoSnapshotDetails
 
 	// The name of the source instance or disk for the automatic snapshots.
 	ResourceName *string
 
-	// The resource type (e.g., Instance or Disk).
+	// The resource type (e.g., Instance or Disk ).
 	ResourceType types.ResourceType
 
 	// Metadata pertaining to the operation's result.

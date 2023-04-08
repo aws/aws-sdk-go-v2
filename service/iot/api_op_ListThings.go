@@ -12,14 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists your things. Use the attributeName and attributeValue parameters to filter
-// your things. For example, calling ListThings with attributeName=Color and
-// attributeValue=Red retrieves all things in the registry that contain an
-// attribute Color with the value Red. For more information, see List Things
-// (https://docs.aws.amazon.com/iot/latest/developerguide/thing-registry.html#list-things)
+// Lists your things. Use the attributeName and attributeValue parameters to
+// filter your things. For example, calling ListThings with attributeName=Color
+// and attributeValue=Red retrieves all things in the registry that contain an
+// attribute Color with the value Red. For more information, see List Things (https://docs.aws.amazon.com/iot/latest/developerguide/thing-registry.html#list-things)
 // from the Amazon Web Services IoT Core Developer Guide. Requires permission to
-// access the ListThings
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// access the ListThings (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action. You will not be charged for calling this API if an Access denied error
 // is returned. You will also not be charged if no attributes or pagination token
 // was provided in request and no pagination token and no results were returned.
@@ -57,8 +55,8 @@ type ListThingsInput struct {
 	// The name of the thing type used to search for things.
 	ThingTypeName *string
 
-	// When true, the action returns the thing resources with attribute values that
-	// start with the attributeValue provided. When false, or not present, the action
+	// When true , the action returns the thing resources with attribute values that
+	// start with the attributeValue provided. When false , or not present, the action
 	// returns only the thing resources with attribute values that match the entire
 	// attributeValue provided.
 	UsePrefixAttributeValue bool

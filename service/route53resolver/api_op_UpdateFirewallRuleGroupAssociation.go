@@ -30,7 +30,7 @@ func (c *Client) UpdateFirewallRuleGroupAssociation(ctx context.Context, params 
 
 type UpdateFirewallRuleGroupAssociationInput struct {
 
-	// The identifier of the FirewallRuleGroupAssociation.
+	// The identifier of the FirewallRuleGroupAssociation .
 	//
 	// This member is required.
 	FirewallRuleGroupAssociationId *string

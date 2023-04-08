@@ -48,8 +48,8 @@ type TestRoleInput struct {
 	// This member is required.
 	OutputBucket *string
 
-	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder
-	// to test.
+	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic
+	// Transcoder to test.
 	//
 	// This member is required.
 	Role *string
@@ -66,12 +66,12 @@ type TestRoleInput struct {
 // The TestRoleResponse structure.
 type TestRoleOutput struct {
 
-	// If the Success element contains false, this value is an array of one or more
+	// If the Success element contains false , this value is an array of one or more
 	// error messages that were generated during the test process.
 	Messages []string
 
-	// If the operation is successful, this value is true; otherwise, the value is
-	// false.
+	// If the operation is successful, this value is true ; otherwise, the value is
+	// false .
 	Success *string
 
 	// Metadata pertaining to the operation's result.

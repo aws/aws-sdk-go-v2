@@ -96,8 +96,7 @@ type DescribeModelPackageOutput struct {
 
 	// Represents the drift check baselines that can be used when the model monitor is
 	// set using the model package. For more information, see the topic on Drift
-	// Detection against Previous Baselines in SageMaker Pipelines
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection)
+	// Detection against Previous Baselines in SageMaker Pipelines (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection)
 	// in the Amazon SageMaker Developer Guide.
 	DriftCheckBaselines *types.DriftCheckBaselines
 

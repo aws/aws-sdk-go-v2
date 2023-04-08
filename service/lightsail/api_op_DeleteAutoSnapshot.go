@@ -12,8 +12,8 @@ import (
 )
 
 // Deletes an automatic snapshot of an instance or disk. For more information, see
-// the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+// the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots)
+// .
 func (c *Client) DeleteAutoSnapshot(ctx context.Context, params *DeleteAutoSnapshotInput, optFns ...func(*Options)) (*DeleteAutoSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteAutoSnapshotInput{}
@@ -32,8 +32,7 @@ func (c *Client) DeleteAutoSnapshot(ctx context.Context, params *DeleteAutoSnaps
 type DeleteAutoSnapshotInput struct {
 
 	// The date of the automatic snapshot to delete in YYYY-MM-DD format. Use the get
-	// auto snapshots operation to get the available automatic snapshots for a
-	// resource.
+	// auto snapshots operation to get the available automatic snapshots for a resource.
 	//
 	// This member is required.
 	Date *string

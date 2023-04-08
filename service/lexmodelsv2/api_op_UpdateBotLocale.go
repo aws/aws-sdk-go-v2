@@ -42,8 +42,8 @@ type UpdateBotLocaleInput struct {
 	BotVersion *string
 
 	// The identifier of the language and locale to update. The string must match one
-	// of the supported locales. For more information, see Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// of the supported locales. For more information, see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -83,8 +83,8 @@ type UpdateBotLocaleOutput struct {
 	// The updated description of the locale.
 	Description *string
 
-	// If the botLocaleStatus is Failed, the failureReasons field lists the errors that
-	// occurred while building the bot.
+	// If the botLocaleStatus is Failed , the failureReasons field lists the errors
+	// that occurred while building the bot.
 	FailureReasons []string
 
 	// A timestamp of the date and time that the locale was last updated.

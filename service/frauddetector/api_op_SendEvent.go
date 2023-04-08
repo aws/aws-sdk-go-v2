@@ -12,8 +12,8 @@ import (
 )
 
 // Stores events in Amazon Fraud Detector without generating fraud predictions for
-// those events. For example, you can use SendEvent to upload a historical dataset,
-// which you can then later use to train a model.
+// those events. For example, you can use SendEvent to upload a historical
+// dataset, which you can then later use to train a model.
 func (c *Client) SendEvent(ctx context.Context, params *SendEventInput, optFns ...func(*Options)) (*SendEventOutput, error) {
 	if params == nil {
 		params = &SendEventInput{}
@@ -59,10 +59,10 @@ type SendEventInput struct {
 	// This member is required.
 	EventVariables map[string]string
 
-	// The label to associate with the event. Required if specifying labelTimestamp.
+	// The label to associate with the event. Required if specifying labelTimestamp .
 	AssignedLabel *string
 
-	// The timestamp associated with the label. Required if specifying assignedLabel.
+	// The timestamp associated with the label. Required if specifying assignedLabel .
 	LabelTimestamp *string
 
 	noSmithyDocumentSerde

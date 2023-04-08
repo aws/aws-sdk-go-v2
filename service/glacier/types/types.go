@@ -16,7 +16,7 @@ type CSVInput struct {
 	// A value used to separate individual fields from each other within a record.
 	FieldDelimiter *string
 
-	// Describes the first line of input. Valid values are None, Ignore, and Use.
+	// Describes the first line of input. Valid values are None , Ignore , and Use .
 	FileHeaderInfo FileHeaderInfo
 
 	// A value used as an escape character where the field delimiter is part of the
@@ -72,7 +72,7 @@ type DataRetrievalPolicy struct {
 type DataRetrievalRule struct {
 
 	// The maximum number of bytes that can be retrieved in an hour. This field is
-	// required only if the value of the Strategy field is BytesPerHour. Your PUT
+	// required only if the value of the Strategy field is BytesPerHour . Your PUT
 	// operation will be rejected if the Strategy field is not set to BytesPerHour and
 	// you set this field.
 	BytesPerHour *int64
@@ -87,14 +87,14 @@ type DataRetrievalRule struct {
 // Contains the Amazon S3 Glacier response to your request.
 type DescribeVaultOutput struct {
 
-	// The Universal Coordinated Time (UTC) date when the vault was created. This value
-	// should be a string in the ISO 8601 date format, for example
-	// 2012-03-20T17:03:43.221Z.
+	// The Universal Coordinated Time (UTC) date when the vault was created. This
+	// value should be a string in the ISO 8601 date format, for example
+	// 2012-03-20T17:03:43.221Z .
 	CreationDate *string
 
 	// The Universal Coordinated Time (UTC) date when Amazon S3 Glacier completed the
 	// last vault inventory. This value should be a string in the ISO 8601 date format,
-	// for example 2012-03-20T17:03:43.221Z.
+	// for example 2012-03-20T17:03:43.221Z .
 	LastInventoryDate *string
 
 	// The number of archives in the vault as of the last inventory date. This field
@@ -120,17 +120,17 @@ type DescribeVaultOutput struct {
 // Amazon S3.
 type Encryption struct {
 
-	// The server-side encryption algorithm used when storing job results in Amazon S3,
-	// for example AES256 or aws:kms.
+	// The server-side encryption algorithm used when storing job results in Amazon
+	// S3, for example AES256 or aws:kms .
 	EncryptionType EncryptionType
 
-	// Optional. If the encryption type is aws:kms, you can use this value to specify
+	// Optional. If the encryption type is aws:kms , you can use this value to specify
 	// the encryption context for the job results.
 	KMSContext *string
 
-	// The AWS KMS key ID to use for object encryption. All GET and PUT requests for an
-	// object protected by AWS KMS fail if not made by using Secure Sockets Layer (SSL)
-	// or Signature Version 4.
+	// The AWS KMS key ID to use for object encryption. All GET and PUT requests for
+	// an object protected by AWS KMS fail if not made by using Secure Sockets Layer
+	// (SSL) or Signature Version 4.
 	KMSKeyId *string
 
 	noSmithyDocumentSerde
@@ -139,8 +139,8 @@ type Encryption struct {
 // Contains the description of an Amazon S3 Glacier job.
 type GlacierJobDescription struct {
 
-	// The job type. This value is either ArchiveRetrieval, InventoryRetrieval, or
-	// Select.
+	// The job type. This value is either ArchiveRetrieval , InventoryRetrieval , or
+	// Select .
 	Action ActionCode
 
 	// The archive ID requested for a select job or archive retrieval. Otherwise, this
@@ -165,15 +165,15 @@ type GlacierJobDescription struct {
 	CompletionDate *string
 
 	// The UTC date when the job was created. This value is a string representation of
-	// ISO 8601 date format, for example "2012-03-20T17:03:43.221Z".
+	// ISO 8601 date format, for example "2012-03-20T17:03:43.221Z" .
 	CreationDate *string
 
 	// Parameters used for range inventory retrieval.
 	InventoryRetrievalParameters *InventoryRetrievalJobDescription
 
-	// For an inventory retrieval job, this value is the size in bytes of the inventory
-	// requested for download. For an archive retrieval or select job, this value is
-	// null.
+	// For an inventory retrieval job, this value is the size in bytes of the
+	// inventory requested for download. For an archive retrieval or select job, this
+	// value is null.
 	InventorySizeInBytes *int64
 
 	// The job description provided when initiating the job.
@@ -201,17 +201,13 @@ type GlacierJobDescription struct {
 	// tree-hash aligned range, then this field returns a value. If the whole archive
 	// is retrieved, this value is the same as the ArchiveSHA256TreeHash value. This
 	// field is null for the following:
+	//   - Archive retrieval jobs that specify a range that is not tree-hash aligned
 	//
-	// * Archive retrieval jobs that specify a range
-	// that is not tree-hash aligned
+	//   - Archival jobs that specify a range that is equal to the whole archive, when
+	//   the job status is InProgress
 	//
-	// * Archival jobs that specify a range that is
-	// equal to the whole archive, when the job status is InProgress
-	//
-	// * Inventory
-	// jobs
-	//
-	// * Select jobs
+	//   - Inventory jobs
+	//   - Select jobs
 	SHA256TreeHash *string
 
 	// An Amazon SNS topic that receives notification.
@@ -220,15 +216,15 @@ type GlacierJobDescription struct {
 	// Contains the parameters used for a select.
 	SelectParameters *SelectParameters
 
-	// The status code can be InProgress, Succeeded, or Failed, and indicates the
+	// The status code can be InProgress , Succeeded , or Failed , and indicates the
 	// status of the job.
 	StatusCode StatusCode
 
 	// A friendly message that describes the job status.
 	StatusMessage *string
 
-	// The tier to use for a select or an archive retrieval. Valid values are
-	// Expedited, Standard, or Bulk. Standard is the default.
+	// The tier to use for a select or an archive retrieval. Valid values are Expedited
+	// , Standard , or Bulk . Standard is the default.
 	Tier *string
 
 	// The Amazon Resource Name (ARN) of the vault from which an archive retrieval was
@@ -287,12 +283,12 @@ type InventoryRetrievalJobDescription struct {
 
 	// The end of the date range in UTC for vault inventory retrieval that includes
 	// archives created before this date. This value should be a string in the ISO 8601
-	// date format, for example 2013-03-20T17:03:43Z.
+	// date format, for example 2013-03-20T17:03:43Z .
 	EndDate *string
 
 	// The output format for the vault inventory list, which is set by the InitiateJob
 	// request when initiating a job to retrieve a vault inventory. Valid values are
-	// CSV and JSON.
+	// CSV and JSON .
 	Format *string
 
 	// The maximum number of inventory items returned per vault inventory retrieval
@@ -303,14 +299,14 @@ type InventoryRetrievalJobDescription struct {
 	// An opaque string that represents where to continue pagination of the vault
 	// inventory retrieval results. You use the marker in a new InitiateJob request to
 	// obtain additional inventory items. If there are no more inventory items, this
-	// value is null. For more information, see  Range Inventory Retrieval
-	// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering).
+	// value is null . For more information, see  Range Inventory Retrieval (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering)
+	// .
 	Marker *string
 
 	// The start of the date range in Universal Coordinated Time (UTC) for vault
 	// inventory retrieval that includes archives created on or after this date. This
 	// value should be a string in the ISO 8601 date format, for example
-	// 2013-03-20T17:03:43Z.
+	// 2013-03-20T17:03:43Z .
 	StartDate *string
 
 	noSmithyDocumentSerde
@@ -321,7 +317,7 @@ type InventoryRetrievalJobInput struct {
 
 	// The end of the date range in UTC for vault inventory retrieval that includes
 	// archives created before this date. This value should be a string in the ISO 8601
-	// date format, for example 2013-03-20T17:03:43Z.
+	// date format, for example 2013-03-20T17:03:43Z .
 	EndDate *string
 
 	// Specifies the maximum number of inventory items returned per vault inventory
@@ -331,12 +327,12 @@ type InventoryRetrievalJobInput struct {
 	// An opaque string that represents where to continue pagination of the vault
 	// inventory retrieval results. You use the marker in a new InitiateJob request to
 	// obtain additional inventory items. If there are no more inventory items, this
-	// value is null.
+	// value is null .
 	Marker *string
 
 	// The start of the date range in UTC for vault inventory retrieval that includes
 	// archives created on or after this date. This value should be a string in the ISO
-	// 8601 date format, for example 2013-03-20T17:03:43Z.
+	// 8601 date format, for example 2013-03-20T17:03:43Z .
 	StartDate *string
 
 	noSmithyDocumentSerde
@@ -346,19 +342,19 @@ type InventoryRetrievalJobInput struct {
 type JobParameters struct {
 
 	// The ID of the archive that you want to retrieve. This field is required only if
-	// Type is set to select or archive-retrievalcode>. An error occurs if you specify
+	// Type is set to select or archive-retrieval code>. An error occurs if you specify
 	// this request parameter for an inventory retrieval job request.
 	ArchiveId *string
 
-	// The optional description for the job. The description must be less than or equal
-	// to 1,024 bytes. The allowable characters are 7-bit ASCII without control
+	// The optional description for the job. The description must be less than or
+	// equal to 1,024 bytes. The allowable characters are 7-bit ASCII without control
 	// codes-specifically, ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.
 	Description *string
 
-	// When initiating a job to retrieve a vault inventory, you can optionally add this
-	// parameter to your request to specify the output format. If you are initiating an
-	// inventory job and do not specify a Format field, JSON is the default format.
-	// Valid values are "CSV" and "JSON".
+	// When initiating a job to retrieve a vault inventory, you can optionally add
+	// this parameter to your request to specify the output format. If you are
+	// initiating an inventory job and do not specify a Format field, JSON is the
+	// default format. Valid values are "CSV" and "JSON".
 	Format *string
 
 	// Input parameters used for range inventory retrieval.
@@ -386,7 +382,7 @@ type JobParameters struct {
 	SelectParameters *SelectParameters
 
 	// The tier to use for a select or an archive retrieval job. Valid values are
-	// Expedited, Standard, or Bulk. Standard is the default.
+	// Expedited , Standard , or Bulk . Standard is the default.
 	Tier *string
 
 	// The job type. You can initiate a job to perform a select query on an archive,
@@ -422,7 +418,7 @@ type PartListElement struct {
 	RangeInBytes *string
 
 	// The SHA256 tree hash value that Amazon S3 Glacier calculated for the part. This
-	// field is never null.
+	// field is never null .
 	SHA256TreeHash *string
 
 	noSmithyDocumentSerde
@@ -483,7 +479,7 @@ type SelectParameters struct {
 	// The expression that is used to select the object.
 	Expression *string
 
-	// The type of the provided expression, for example SQL.
+	// The type of the provided expression, for example SQL .
 	ExpressionType ExpressionType
 
 	// Describes the serialization format of the object.

@@ -56,8 +56,8 @@ type GetDataQualityRulesetOutput struct {
 	// to link the two together.
 	RecommendationRunId *string
 
-	// A Data Quality Definition Language (DQDL) ruleset. For more information, see the
-	// Glue developer guide.
+	// A Data Quality Definition Language (DQDL) ruleset. For more information, see
+	// the Glue developer guide.
 	Ruleset *string
 
 	// The name and database name of the target table.

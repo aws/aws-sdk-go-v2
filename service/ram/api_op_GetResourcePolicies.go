@@ -30,16 +30,15 @@ func (c *Client) GetResourcePolicies(ctx context.Context, params *GetResourcePol
 
 type GetResourcePoliciesInput struct {
 
-	// Specifies the Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the resources whose policies you want to retrieve.
+	// Specifies the Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resources whose policies you want to retrieve.
 	//
 	// This member is required.
 	ResourceArns []string
 
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
 	// Include the specified value as the NextToken request parameter in the next call
 	// to the operation to get the next part of the results. Note that the service
@@ -65,7 +64,7 @@ type GetResourcePoliciesOutput struct {
 	// If present, this value indicates that more output is available than is included
 	// in the current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null. This
+	// repeat this until the NextToken response element comes back as null . This
 	// indicates that this is the last page of results.
 	NextToken *string
 
@@ -141,8 +140,8 @@ func (c *Client) addOperationGetResourcePoliciesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetResourcePoliciesAPIClient is a client that implements the GetResourcePolicies
-// operation.
+// GetResourcePoliciesAPIClient is a client that implements the
+// GetResourcePolicies operation.
 type GetResourcePoliciesAPIClient interface {
 	GetResourcePolicies(context.Context, *GetResourcePoliciesInput, ...func(*Options)) (*GetResourcePoliciesOutput, error)
 }
@@ -152,9 +151,9 @@ var _ GetResourcePoliciesAPIClient = (*Client)(nil)
 // GetResourcePoliciesPaginatorOptions is the paginator options for
 // GetResourcePolicies
 type GetResourcePoliciesPaginatorOptions struct {
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
 	// Include the specified value as the NextToken request parameter in the next call
 	// to the operation to get the next part of the results. Note that the service

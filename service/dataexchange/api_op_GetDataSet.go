@@ -62,8 +62,8 @@ type GetDataSetOutput struct {
 	// ENTITLED to the account (for subscribers).
 	Origin types.Origin
 
-	// If the origin of this data set is ENTITLED, includes the details for the product
-	// on AWS Marketplace.
+	// If the origin of this data set is ENTITLED, includes the details for the
+	// product on AWS Marketplace.
 	OriginDetails *types.OriginDetails
 
 	// The data set ID of the owned data set corresponding to the entitled data set

@@ -35,13 +35,13 @@ type SearchRoomsInput struct {
 	Filters []types.Filter
 
 	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
+	// includes only results beyond the token, up to the value specified by MaxResults .
 	NextToken *string
 
 	// The sort order to use in listing the specified set of rooms. The supported sort
@@ -141,8 +141,8 @@ var _ SearchRoomsAPIClient = (*Client)(nil)
 // SearchRoomsPaginatorOptions is the paginator options for SearchRooms
 type SearchRoomsPaginatorOptions struct {
 	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -34,38 +34,24 @@ type DescribeFlowLogsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * deliver-log-status - The status of the logs delivery
-	// (SUCCESS | FAILED).
-	//
-	// * log-destination-type - The type of destination for the
-	// flow log data (cloud-watch-logs | s3 | kinesis-data-firehose).
-	//
-	// * flow-log-id -
-	// The ID of the flow log.
-	//
-	// * log-group-name - The name of the log group.
-	//
-	// *
-	// resource-id - The ID of the VPC, subnet, or network interface.
-	//
-	// * traffic-type -
-	// The type of traffic (ACCEPT | REJECT | ALL).
-	//
-	// * tag: - The key/value combination
-	// of a tag assigned to the resource. Use the tag key in the filter name and the
-	// tag value as the filter value. For example, to find all resources that have a
-	// tag with the key Owner and the value TeamA, specify tag:Owner for the filter
-	// name and TeamA for the filter value.
-	//
-	// * tag-key - The key of a tag assigned to
-	// the resource. Use this filter to find all resources assigned a tag with a
-	// specific key, regardless of the tag value.
+	//   - deliver-log-status - The status of the logs delivery ( SUCCESS | FAILED ).
+	//   - log-destination-type - The type of destination for the flow log data (
+	//   cloud-watch-logs | s3 | kinesis-data-firehose ).
+	//   - flow-log-id - The ID of the flow log.
+	//   - log-group-name - The name of the log group.
+	//   - resource-id - The ID of the VPC, subnet, or network interface.
+	//   - traffic-type - The type of traffic ( ACCEPT | REJECT | ALL ).
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
 	Filter []types.Filter
 
 	// One or more flow log IDs. Constraint: Maximum of 1000 flow log IDs.
@@ -73,8 +59,8 @@ type DescribeFlowLogsInput struct {
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
 	// The token to request the next page of items. Pagination continues from the end
@@ -171,8 +157,8 @@ var _ DescribeFlowLogsAPIClient = (*Client)(nil)
 type DescribeFlowLogsPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

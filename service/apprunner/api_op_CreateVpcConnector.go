@@ -44,10 +44,10 @@ type CreateVpcConnectorInput struct {
 	// This member is required.
 	VpcConnectorName *string
 
-	// A list of IDs of security groups that App Runner should use for access to Amazon
-	// Web Services resources under the specified subnets. If not specified, App Runner
-	// uses the default security group of the Amazon VPC. The default security group
-	// allows all outbound traffic.
+	// A list of IDs of security groups that App Runner should use for access to
+	// Amazon Web Services resources under the specified subnets. If not specified, App
+	// Runner uses the default security group of the Amazon VPC. The default security
+	// group allows all outbound traffic.
 	SecurityGroups []string
 
 	// A list of metadata items that you can associate with your VPC connector

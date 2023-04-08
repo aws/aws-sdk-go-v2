@@ -51,7 +51,7 @@ type ListTableStorageOptimizersInput struct {
 	NextToken *string
 
 	// The specific type of storage optimizers to list. The supported value is
-	// compaction.
+	// compaction .
 	StorageOptimizerType types.OptimizerType
 
 	noSmithyDocumentSerde
@@ -59,8 +59,8 @@ type ListTableStorageOptimizersInput struct {
 
 type ListTableStorageOptimizersOutput struct {
 
-	// A continuation token for paginating the returned list of tokens, returned if the
-	// current segment of the list is not the last.
+	// A continuation token for paginating the returned list of tokens, returned if
+	// the current segment of the list is not the last.
 	NextToken *string
 
 	// A list of the storage optimizers associated with a table.

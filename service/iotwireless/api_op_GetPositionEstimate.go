@@ -62,7 +62,7 @@ type GetPositionEstimateOutput struct {
 
 	// The position information of the resource, displayed as a JSON payload. The
 	// payload uses the GeoJSON format, which a format that's used to encode geographic
-	// data structures. For more information, see GeoJSON (https://geojson.org/).
+	// data structures. For more information, see GeoJSON (https://geojson.org/) .
 	GeoJsonPayload []byte
 
 	// Metadata pertaining to the operation's result.

@@ -40,7 +40,7 @@ type GetInvalidationInput struct {
 	// This member is required.
 	DistributionId *string
 
-	// The identifier for the invalidation request, for example, IDFDVBD632BHDS5.
+	// The identifier for the invalidation request, for example, IDFDVBD632BHDS5 .
 	//
 	// This member is required.
 	Id *string
@@ -52,8 +52,8 @@ type GetInvalidationInput struct {
 type GetInvalidationOutput struct {
 
 	// The invalidation's information. For more information, see Invalidation Complex
-	// Type
-	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html).
+	// Type (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html)
+	// .
 	Invalidation *types.Invalidation
 
 	// Metadata pertaining to the operation's result.
@@ -147,9 +147,10 @@ type InvalidationCompletedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, InvalidationCompletedWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, InvalidationCompletedWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

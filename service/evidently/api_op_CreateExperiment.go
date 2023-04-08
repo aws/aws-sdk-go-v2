@@ -20,8 +20,8 @@ import (
 // experiment consider only certain audience types in the experiment, such as using
 // only user sessions from a certain location or who use a certain internet
 // browser. Don't use this operation to update an existing experiment. Instead, use
-// UpdateExperiment
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html).
+// UpdateExperiment (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html)
+// .
 func (c *Client) CreateExperiment(ctx context.Context, params *CreateExperimentInput, optFns ...func(*Options)) (*CreateExperimentOutput, error) {
 	if params == nil {
 		params = &CreateExperimentInput{}
@@ -55,8 +55,8 @@ type CreateExperimentInput struct {
 	// This member is required.
 	Project *string
 
-	// An array of structures that describe the configuration of each feature variation
-	// used in the experiment.
+	// An array of structures that describe the configuration of each feature
+	// variation used in the experiment.
 	//
 	// This member is required.
 	Treatments []types.TreatmentConfig
@@ -70,11 +70,11 @@ type CreateExperimentInput struct {
 	// allocated to each variation.
 	OnlineAbConfig *types.OnlineAbConfig
 
-	// When Evidently assigns a particular user session to an experiment, it must use a
-	// randomization ID to determine which variation the user session is served. This
-	// randomization ID is a combination of the entity ID and randomizationSalt. If you
-	// omit randomizationSalt, Evidently uses the experiment name as the
-	// randomizationSalt.
+	// When Evidently assigns a particular user session to an experiment, it must use
+	// a randomization ID to determine which variation the user session is served. This
+	// randomization ID is a combination of the entity ID and randomizationSalt . If
+	// you omit randomizationSalt , Evidently uses the experiment name as the
+	// randomizationSalt .
 	RandomizationSalt *string
 
 	// The portion of the available audience that you want to allocate to this
@@ -95,8 +95,8 @@ type CreateExperimentInput struct {
 	// with certain tag values. Tags don't have any semantic meaning to Amazon Web
 	// Services and are interpreted strictly as strings of characters. You can
 	// associate as many as 50 tags with an experiment. For more information, see
-	// Tagging Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags map[string]string
 
 	noSmithyDocumentSerde

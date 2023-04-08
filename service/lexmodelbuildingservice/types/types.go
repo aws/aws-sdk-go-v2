@@ -60,23 +60,18 @@ type BotChannelAssociation struct {
 	// A text description of the association you are creating.
 	Description *string
 
-	// If status is FAILED, Amazon Lex provides the reason that it failed to create the
-	// association.
+	// If status is FAILED , Amazon Lex provides the reason that it failed to create
+	// the association.
 	FailureReason *string
 
 	// The name of the association between the bot and the channel.
 	Name *string
 
 	// The status of the bot channel.
-	//
-	// * CREATED - The channel has been created and is
-	// ready for use.
-	//
-	// * IN_PROGRESS - Channel creation is in progress.
-	//
-	// * FAILED -
-	// There was an error creating the channel. For information about the reason for
-	// the failure, see the failureReason field.
+	//   - CREATED - The channel has been created and is ready for use.
+	//   - IN_PROGRESS - Channel creation is in progress.
+	//   - FAILED - There was an error creating the channel. For information about the
+	//   reason for the failure, see the failureReason field.
 	Status ChannelStatus
 
 	// Specifies the type of association by indicating the type of channel being
@@ -105,7 +100,7 @@ type BotMetadata struct {
 	// The status of the bot.
 	Status Status
 
-	// The version of the bot. For a new bot, the version is always $LATEST.
+	// The version of the bot. For a new bot, the version is always $LATEST .
 	Version *string
 
 	noSmithyDocumentSerde
@@ -115,8 +110,7 @@ type BotMetadata struct {
 type BuiltinIntentMetadata struct {
 
 	// A unique identifier for the built-in intent. To find the signature for an
-	// intent, see Standard Built-in Intents
-	// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
+	// intent, see Standard Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
 	// in the Alexa Skills Kit.
 	Signature *string
 
@@ -138,9 +132,8 @@ type BuiltinIntentSlot struct {
 // Provides information about a built in slot type.
 type BuiltinSlotTypeMetadata struct {
 
-	// A unique identifier for the built-in slot type. To find the signature for a slot
-	// type, see Slot Type Reference
-	// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
+	// A unique identifier for the built-in slot type. To find the signature for a
+	// slot type, see Slot Type Reference (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
 	// in the Alexa Skills Kit.
 	Signature *string
 
@@ -155,7 +148,7 @@ type BuiltinSlotTypeMetadata struct {
 type CodeHook struct {
 
 	// The version of the request-response that you want Amazon Lex to use to invoke
-	// your Lambda function. For more information, see using-lambda.
+	// your Lambda function. For more information, see using-lambda .
 	//
 	// This member is required.
 	MessageVersion *string
@@ -175,8 +168,8 @@ type ConversationLogsRequest struct {
 	// CloudWatch Logs for text logs and your S3 bucket for audio logs. If audio
 	// encryption is enabled, this role also provides access permission for the AWS KMS
 	// key used for encrypting audio logs. For more information, see Creating an IAM
-	// Role and Policy for Conversation Logs
-	// (https://docs.aws.amazon.com/lex/latest/dg/conversation-logs-role-and-policy.html).
+	// Role and Policy for Conversation Logs (https://docs.aws.amazon.com/lex/latest/dg/conversation-logs-role-and-policy.html)
+	// .
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -207,12 +200,9 @@ type ConversationLogsResponse struct {
 // value the slot type can take. For example, a pizza ordering bot could have a
 // slot type that specifies the type of crust that the pizza should have. The slot
 // type could include the values
-//
-// * thick
-//
-// * thin
-//
-// * stuffed
+//   - thick
+//   - thin
+//   - stuffed
 type EnumerationValue struct {
 
 	// The value of the slot type.
@@ -236,8 +226,8 @@ type FollowUpPrompt struct {
 	// This member is required.
 	Prompt *Prompt
 
-	// If the user answers "no" to the question defined in the prompt field, Amazon Lex
-	// responds with this statement to acknowledge that the intent was canceled.
+	// If the user answers "no" to the question defined in the prompt field, Amazon
+	// Lex responds with this statement to acknowledge that the intent was canceled.
 	//
 	// This member is required.
 	RejectionStatement *Statement
@@ -253,15 +243,13 @@ type FollowUpPrompt struct {
 // presentation. If you need to update the logic, you only update the Lambda
 // function; you don't need to upgrade your client application. Consider the
 // following examples:
-//
-// * In a pizza ordering application, after the user provides
-// all of the information for placing an order, you use a Lambda function to place
-// an order with a pizzeria.
-//
-// * In a gaming application, when a user says "pick up
-// a rock," this information must go back to the client application so that it can
-// perform the operation and update the graphics. In this case, you want Amazon Lex
-// to return the intent data to the client.
+//   - In a pizza ordering application, after the user provides all of the
+//     information for placing an order, you use a Lambda function to place an order
+//     with a pizzeria.
+//   - In a gaming application, when a user says "pick up a rock," this
+//     information must go back to the client application so that it can perform the
+//     operation and update the graphics. In this case, you want Amazon Lex to return
+//     the intent data to the client.
 type FulfillmentActivity struct {
 
 	// How the intent should be fulfilled, either by running a Lambda function or by
@@ -276,8 +264,8 @@ type FulfillmentActivity struct {
 	noSmithyDocumentSerde
 }
 
-// The name of a context that must be active for an intent to be selected by Amazon
-// Lex.
+// The name of a context that must be active for an intent to be selected by
+// Amazon Lex.
 type InputContext struct {
 
 	// The name of the context.
@@ -329,8 +317,8 @@ type IntentMetadata struct {
 // Provides configuration information for the AMAZON.KendraSearchIntent intent.
 // When you use this intent, Amazon Lex searches the specified Amazon Kendra index
 // and returns documents from the index that match the user's utterance. For more
-// information, see  AMAZON.KendraSearchIntent
-// (http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html).
+// information, see AMAZON.KendraSearchIntent (http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html)
+// .
 type KendraConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the
@@ -351,9 +339,8 @@ type KendraConfiguration struct {
 
 	// A query filter that Amazon Lex sends to Amazon Kendra to filter the response
 	// from the query. The filter is in the format defined by Amazon Kendra. For more
-	// information, see Filtering queries
-	// (http://docs.aws.amazon.com/kendra/latest/dg/filtering.html). You can override
-	// this filter string with a new filter string at runtime.
+	// information, see Filtering queries (http://docs.aws.amazon.com/kendra/latest/dg/filtering.html)
+	// . You can override this filter string with a new filter string at runtime.
 	QueryFilterString *string
 
 	noSmithyDocumentSerde
@@ -448,13 +435,10 @@ type MigrationAlert struct {
 	ReferenceURLs []string
 
 	// The type of alert. There are two kinds of alerts:
-	//
-	// * ERROR - There was an issue
-	// with the migration that can't be resolved. The migration stops.
-	//
-	// * WARN - There
-	// was an issue with the migration that requires manual changes to the new Amazon
-	// Lex V2 bot. The migration continues.
+	//   - ERROR - There was an issue with the migration that can't be resolved. The
+	//   migration stops.
+	//   - WARN - There was an issue with the migration that requires manual changes to
+	//   the new Amazon Lex V2 bot. The migration continues.
 	Type MigrationAlertType
 
 	noSmithyDocumentSerde
@@ -466,8 +450,8 @@ type MigrationSummary struct {
 	// The unique identifier that Amazon Lex assigned to the migration.
 	MigrationId *string
 
-	// The status of the operation. When the status is COMPLETE the bot is available in
-	// Amazon Lex V2. There may be alerts and warnings that need to be resolved to
+	// The status of the operation. When the status is COMPLETE the bot is available
+	// in Amazon Lex V2. There may be alerts and warnings that need to be resolved to
 	// complete the migration.
 	MigrationStatus MigrationStatus
 
@@ -524,7 +508,7 @@ type OutputContext struct {
 // Obtains information from the user. To define a prompt, provide one or more
 // messages and specify the number of attempts to get information from the user. If
 // you provide more than one message, Amazon Lex chooses one of the messages to use
-// to prompt the user. For more information, see how-it-works.
+// to prompt the user. For more information, see how-it-works .
 type Prompt struct {
 
 	// The number of times to prompt the user for information.
@@ -541,7 +525,7 @@ type Prompt struct {
 
 	// A response card. Amazon Lex uses this prompt at runtime, in the PostText API
 	// response. It substitutes session attributes and slot values for placeholders in
-	// the response card. For more information, see ex-resp-card.
+	// the response card. For more information, see ex-resp-card .
 	ResponseCard *string
 
 	noSmithyDocumentSerde
@@ -586,8 +570,8 @@ type Slot struct {
 	// Determines whether a slot is obfuscated in conversation logs and stored
 	// utterances. When you obfuscate a slot, the value is replaced by the slot name in
 	// curly braces ({}). For example, if the slot name is "full_name", obfuscated
-	// values are replaced with "{full_name}". For more information, see  Slot
-	// Obfuscation  (https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html).
+	// values are replaced with "{full_name}". For more information, see Slot
+	// Obfuscation  (https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html) .
 	ObfuscationSetting ObfuscationSetting
 
 	// Directs Amazon Lex the order in which to elicit this slot value from the user.
@@ -596,8 +580,8 @@ type Slot struct {
 	// same priority, the order in which Amazon Lex elicits values is arbitrary.
 	Priority *int32
 
-	// A set of possible responses for the slot type used by text-based clients. A user
-	// chooses an option from the response card, instead of using text to reply.
+	// A set of possible responses for the slot type used by text-based clients. A
+	// user chooses an option from the response card, instead of using text to reply.
 	ResponseCard *string
 
 	// If you know a specific pattern with which users might respond to an Amazon Lex
@@ -623,15 +607,10 @@ type Slot struct {
 type SlotDefaultValue struct {
 
 	// The default value for the slot. You can specify one of the following:
-	//
-	// *
-	// #context-name.slot-name - The slot value "slot-name" in the context
-	// "context-name."
-	//
-	// * {attribute} - The slot value of the session attribute
-	// "attribute."
-	//
-	// * 'value' - The discrete value "value."
+	//   - #context-name.slot-name - The slot value "slot-name" in the context
+	//   "context-name."
+	//   - {attribute} - The slot value of the session attribute "attribute."
+	//   - 'value' - The discrete value "value."
 	//
 	// This member is required.
 	DefaultValue *string
@@ -693,21 +672,13 @@ type SlotTypeRegexConfiguration struct {
 	// A regular expression used to validate the value of a slot. Use a standard
 	// regular expression. Amazon Lex supports the following characters in the regular
 	// expression:
-	//
-	// * A-Z, a-z
-	//
-	// * 0-9
-	//
-	// * Unicode characters ("\ u")
-	//
-	// Represent Unicode
-	// characters with four digits, for example "\u0041" or "\u005A". The following
-	// regular expression operators are not supported:
-	//
-	// * Infinite repeaters: *, +, or
-	// {x,} with no upper bound.
-	//
-	// * Wild card (.)
+	//   - A-Z, a-z
+	//   - 0-9
+	//   - Unicode characters ("\ u")
+	// Represent Unicode characters with four digits, for example "\u0041" or
+	// "\u005A". The following regular expression operators are not supported:
+	//   - Infinite repeaters: *, +, or {x,} with no upper bound.
+	//   - Wild card (.)
 	//
 	// This member is required.
 	Pattern *string
@@ -715,8 +686,8 @@ type SlotTypeRegexConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of messages that convey information to the user. At runtime, Amazon
-// Lex selects the message to convey.
+// A collection of messages that convey information to the user. At runtime,
+// Amazon Lex selects the message to convey.
 type Statement struct {
 
 	// A collection of message objects.
@@ -724,10 +695,9 @@ type Statement struct {
 	// This member is required.
 	Messages []Message
 
-	// At runtime, if the client is using the PostText
-	// (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html) API, Amazon
-	// Lex includes the response card in the response. It substitutes all of the
-	// session attributes and slot values for placeholders in the response card.
+	// At runtime, if the client is using the PostText (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
+	// API, Amazon Lex includes the response card in the response. It substitutes all
+	// of the session attributes and slot values for placeholders in the response card.
 	ResponseCard *string
 
 	noSmithyDocumentSerde

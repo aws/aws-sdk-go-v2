@@ -17,7 +17,7 @@ import (
 // TableRestoreRequestId parameter, then DescribeTableRestoreStatus returns the
 // status of all table restore requests ordered by the date and time of the request
 // in ascending order. Otherwise DescribeTableRestoreStatus returns the status of
-// the table specified by TableRestoreRequestId.
+// the table specified by TableRestoreRequestId .
 func (c *Client) DescribeTableRestoreStatus(ctx context.Context, params *DescribeTableRestoreStatusInput, optFns ...func(*Options)) (*DescribeTableRestoreStatusOutput, error) {
 	if params == nil {
 		params = &DescribeTableRestoreStatusInput{}

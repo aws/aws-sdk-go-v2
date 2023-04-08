@@ -36,7 +36,7 @@ type RunFleetAdvisorLsaAnalysisOutput struct {
 	// The ID of the LSA analysis run.
 	LsaAnalysisId *string
 
-	// The status of the LSA analysis, for example COMPLETED.
+	// The status of the LSA analysis, for example COMPLETED .
 	Status *string
 
 	// Metadata pertaining to the operation's result.

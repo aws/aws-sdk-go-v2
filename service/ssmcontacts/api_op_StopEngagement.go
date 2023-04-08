@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops an engagement before it finishes the final stage of the escalation plan or
-// engagement plan. Further contacts aren't engaged.
+// Stops an engagement before it finishes the final stage of the escalation plan
+// or engagement plan. Further contacts aren't engaged.
 func (c *Client) StopEngagement(ctx context.Context, params *StopEngagementInput, optFns ...func(*Options)) (*StopEngagementOutput, error) {
 	if params == nil {
 		params = &StopEngagementInput{}

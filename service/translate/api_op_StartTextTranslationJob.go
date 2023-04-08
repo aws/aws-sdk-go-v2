@@ -17,11 +17,10 @@ import (
 // translation, you can input documents with different source languages (specify
 // auto as the source language). You can specify one or more target languages.
 // Batch translation translates each input document into each of the target
-// languages. For more information, see Asynchronous batch processing
-// (https://docs.aws.amazon.com/translate/latest/dg/async.html). Batch translation
-// jobs can be described with the DescribeTextTranslationJob operation, listed with
-// the ListTextTranslationJobs operation, and stopped with the
-// StopTextTranslationJob operation.
+// languages. For more information, see Asynchronous batch processing (https://docs.aws.amazon.com/translate/latest/dg/async.html)
+// . Batch translation jobs can be described with the DescribeTextTranslationJob
+// operation, listed with the ListTextTranslationJobs operation, and stopped with
+// the StopTextTranslationJob operation.
 func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextTranslationJobInput, optFns ...func(*Options)) (*StartTextTranslationJobOutput, error) {
 	if params == nil {
 		params = &StartTextTranslationJobInput{}
@@ -47,8 +46,8 @@ type StartTextTranslationJobInput struct {
 
 	// The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM)
 	// role that grants Amazon Translate read access to your input data. For more
-	// information, see Identity and access management
-	// (https://docs.aws.amazon.com/translate/latest/dg/identity-and-access-management.html).
+	// information, see Identity and access management  (https://docs.aws.amazon.com/translate/latest/dg/identity-and-access-management.html)
+	// .
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -66,18 +65,18 @@ type StartTextTranslationJobInput struct {
 
 	// The language code of the input language. Specify the language if all input
 	// documents share the same language. If you don't know the language of the source
-	// files, or your input documents contains different source languages, select auto.
-	// Amazon Translate auto detects the source language for each input document. For a
-	// list of supported language codes, see Supported languages
-	// (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html).
+	// files, or your input documents contains different source languages, select auto
+	// . Amazon Translate auto detects the source language for each input document. For
+	// a list of supported language codes, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
+	// .
 	//
 	// This member is required.
 	SourceLanguageCode *string
 
-	// The target languages of the translation job. Enter up to 10 language codes. Each
-	// input file is translated into each target language. Each language code is 2 or 5
-	// characters long. For a list of language codes, see Supported languages
-	// (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html).
+	// The target languages of the translation job. Enter up to 10 language codes.
+	// Each input file is translated into each target language. Each language code is 2
+	// or 5 characters long. For a list of language codes, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
+	// .
 	//
 	// This member is required.
 	TargetLanguageCodes []string
@@ -92,11 +91,11 @@ type StartTextTranslationJobInput struct {
 	// parallel data to a translation job, you create an Active Custom Translation job.
 	// This parameter accepts only one parallel data resource. Active Custom
 	// Translation jobs are priced at a higher rate than other jobs that don't use
-	// parallel data. For more information, see Amazon Translate pricing
-	// (http://aws.amazon.com/translate/pricing/). For a list of available parallel
-	// data resources, use the ListParallelData operation. For more information, see
-	// Customizing your translations with parallel data
-	// (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-parallel-data.html).
+	// parallel data. For more information, see Amazon Translate pricing (http://aws.amazon.com/translate/pricing/)
+	// . For a list of available parallel data resources, use the ListParallelData
+	// operation. For more information, see Customizing your translations with
+	// parallel data (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-parallel-data.html)
+	// .
 	ParallelDataNames []string
 
 	// Settings to configure your translation output, including the option to set the
@@ -110,8 +109,8 @@ type StartTextTranslationJobInput struct {
 	// multiple target languages for the job, translate uses the designated terminology
 	// for each requested target language that has an entry for the source term in the
 	// terminology file. For a list of available custom terminology resources, use the
-	// ListTerminologies operation. For more information, see Custom terminology
-	// (https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html).
+	// ListTerminologies operation. For more information, see Custom terminology (https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html)
+	// .
 	TerminologyNames []string
 
 	noSmithyDocumentSerde
@@ -124,27 +123,16 @@ type StartTextTranslationJobOutput struct {
 	JobId *string
 
 	// The status of the job. Possible values include:
-	//
-	// * SUBMITTED - The job has been
-	// received and is queued for processing.
-	//
-	// * IN_PROGRESS - Amazon Translate is
-	// processing the job.
-	//
-	// * COMPLETED - The job was successfully completed and the
-	// output is available.
-	//
-	// * COMPLETED_WITH_ERROR - The job was completed with
-	// errors. The errors can be analyzed in the job's output.
-	//
-	// * FAILED - The job did
-	// not complete. To get details, use the DescribeTextTranslationJob operation.
-	//
-	// *
-	// STOP_REQUESTED - The user who started the job has requested that it be
-	// stopped.
-	//
-	// * STOPPED - The job has been stopped.
+	//   - SUBMITTED - The job has been received and is queued for processing.
+	//   - IN_PROGRESS - Amazon Translate is processing the job.
+	//   - COMPLETED - The job was successfully completed and the output is available.
+	//   - COMPLETED_WITH_ERROR - The job was completed with errors. The errors can be
+	//   analyzed in the job's output.
+	//   - FAILED - The job did not complete. To get details, use the
+	//   DescribeTextTranslationJob operation.
+	//   - STOP_REQUESTED - The user who started the job has requested that it be
+	//   stopped.
+	//   - STOPPED - The job has been stopped.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

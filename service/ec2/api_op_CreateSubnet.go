@@ -27,9 +27,8 @@ import (
 // middle. When you stop an instance in a subnet, it retains its private IPv4
 // address. It's therefore possible to have a subnet with no running instances
 // (they're all stopped), but no remaining IP addresses available. For more
-// information, see Subnets
-// (https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) in the
-// Amazon Virtual Private Cloud User Guide.
+// information, see Subnets (https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html)
+// in the Amazon Virtual Private Cloud User Guide.
 func (c *Client) CreateSubnet(ctx context.Context, params *CreateSubnetInput, optFns ...func(*Options)) (*CreateSubnetOutput, error) {
 	if params == nil {
 		params = &CreateSubnetInput{}
@@ -52,13 +51,12 @@ type CreateSubnetInput struct {
 	// This member is required.
 	VpcId *string
 
-	// The Availability Zone or Local Zone for the subnet. Default: Amazon Web Services
-	// selects one for you. If you create more than one subnet in your VPC, we do not
-	// necessarily select a different zone for each subnet. To create a subnet in a
-	// Local Zone, set this value to the Local Zone ID, for example us-west-2-lax-1a.
-	// For information about the Regions that support Local Zones, see Available
-	// Regions
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)
+	// The Availability Zone or Local Zone for the subnet. Default: Amazon Web
+	// Services selects one for you. If you create more than one subnet in your VPC, we
+	// do not necessarily select a different zone for each subnet. To create a subnet
+	// in a Local Zone, set this value to the Local Zone ID, for example
+	// us-west-2-lax-1a . For information about the Regions that support Local Zones,
+	// see Available Regions (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)
 	// in the Amazon Elastic Compute Cloud User Guide. To create a subnet in an
 	// Outpost, set this value to the Availability Zone for the Outpost and specify the
 	// Outpost ARN.
@@ -68,15 +66,15 @@ type CreateSubnetInput struct {
 	AvailabilityZoneId *string
 
 	// The IPv4 network range for the subnet, in CIDR notation. For example,
-	// 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for
-	// example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18. This
+	// 10.0.0.0/24 . We modify the specified CIDR block to its canonical form; for
+	// example, if you specify 100.68.0.18/18 , we modify it to 100.68.0.0/18 . This
 	// parameter is not supported for an IPv6 only subnet.
 	CidrBlock *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The IPv6 network range for the subnet, in CIDR notation. The subnet size must

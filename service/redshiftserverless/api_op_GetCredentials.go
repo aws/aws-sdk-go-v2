@@ -11,14 +11,14 @@ import (
 	"time"
 )
 
-// Returns a database user name and temporary password with temporary authorization
-// to log in to Amazon Redshift Serverless. By default, the temporary credentials
-// expire in 900 seconds. You can optionally specify a duration between 900 seconds
-// (15 minutes) and 3600 seconds (60 minutes). The Identity and Access Management
-// (IAM) user or role that runs GetCredentials must have an IAM policy attached
-// that allows access to all necessary actions and resources. If the DbName
-// parameter is specified, the IAM policy must allow access to the resource dbname
-// for the specified database name.
+// Returns a database user name and temporary password with temporary
+// authorization to log in to Amazon Redshift Serverless. By default, the temporary
+// credentials expire in 900 seconds. You can optionally specify a duration between
+// 900 seconds (15 minutes) and 3600 seconds (60 minutes). The Identity and Access
+// Management (IAM) user or role that runs GetCredentials must have an IAM policy
+// attached that allows access to all necessary actions and resources. If the
+// DbName parameter is specified, the IAM policy must allow access to the resource
+// dbname for the specified database name.
 func (c *Client) GetCredentials(ctx context.Context, params *GetCredentialsInput, optFns ...func(*Options)) (*GetCredentialsOutput, error) {
 	if params == nil {
 		params = &GetCredentialsInput{}
@@ -43,26 +43,18 @@ type GetCredentialsInput struct {
 
 	// The name of the database to get temporary authorization to log on to.
 	// Constraints:
-	//
-	// * Must be 1 to 64 alphanumeric characters or hyphens.
-	//
-	// * Must
-	// contain only uppercase or lowercase letters, numbers, underscore, plus sign,
-	// period (dot), at symbol (@), or hyphen.
-	//
-	// * The first character must be a
-	// letter.
-	//
-	// * Must not contain a colon ( : ) or slash ( / ).
-	//
-	// * Cannot be a
-	// reserved word. A list of reserved words can be found in Reserved Words
-	// (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
-	// Amazon Redshift Database Developer Guide
+	//   - Must be 1 to 64 alphanumeric characters or hyphens.
+	//   - Must contain only uppercase or lowercase letters, numbers, underscore, plus
+	//   sign, period (dot), at symbol (@), or hyphen.
+	//   - The first character must be a letter.
+	//   - Must not contain a colon ( : ) or slash ( / ).
+	//   - Cannot be a reserved word. A list of reserved words can be found in
+	//   Reserved Words  (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+	//   in the Amazon Redshift Database Developer Guide
 	DbName *string
 
-	// The number of seconds until the returned temporary password expires. The minimum
-	// is 900 seconds, and the maximum is 3600 seconds.
+	// The number of seconds until the returned temporary password expires. The
+	// minimum is 900 seconds, and the maximum is 3600 seconds.
 	DurationSeconds *int32
 
 	noSmithyDocumentSerde
@@ -71,13 +63,13 @@ type GetCredentialsInput struct {
 type GetCredentialsOutput struct {
 
 	// A temporary password that authorizes the user name returned by DbUser to log on
-	// to the database DbName.
+	// to the database DbName .
 	DbPassword *string
 
 	// A database user name that is authorized to log on to the database DbName using
-	// the password DbPassword. If the specified DbUser exists in the database, the new
-	// user name has the same database privileges as the the user named in DbUser. By
-	// default, the user is added to PUBLIC.
+	// the password DbPassword . If the specified DbUser exists in the database, the
+	// new user name has the same database privileges as the the user named in DbUser .
+	// By default, the user is added to PUBLIC.
 	DbUser *string
 
 	// The date and time the password in DbPassword expires.

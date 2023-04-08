@@ -16,12 +16,12 @@ import (
 // following conventions: ≈__ The component is in Java SimpleDateFormat
 // (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes
 // an Identity and Access Management (IAM) role that Amazon Forecast can assume to
-// access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles.
-// For more information, see howitworks-forecast. To get a list of all your what-if
-// forecast export jobs, use the ListWhatIfForecastExports operation. The Status of
-// the forecast export job must be ACTIVE before you can access the forecast in
-// your Amazon S3 bucket. To get the status, use the DescribeWhatIfForecastExport
-// operation.
+// access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles .
+// For more information, see howitworks-forecast . To get a list of all your
+// what-if forecast export jobs, use the ListWhatIfForecastExports operation. The
+// Status of the forecast export job must be ACTIVE before you can access the
+// forecast in your Amazon S3 bucket. To get the status, use the
+// DescribeWhatIfForecastExport operation.
 func (c *Client) CreateWhatIfForecastExport(ctx context.Context, params *CreateWhatIfForecastExportInput, optFns ...func(*Options)) (*CreateWhatIfForecastExportOutput, error) {
 	if params == nil {
 		params = &CreateWhatIfForecastExportInput{}
@@ -61,8 +61,7 @@ type CreateWhatIfForecastExportInput struct {
 	// The format of the exported data, CSV or PARQUET.
 	Format *string
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
 	// to apply to the what if forecast.
 	Tags []types.Tag
 

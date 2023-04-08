@@ -48,8 +48,8 @@ type UpdateNetworkAnalyzerConfigurationInput struct {
 	// Provide the WirelessDeviceId of the resources to remove in the input array.
 	WirelessDevicesToRemove []string
 
-	// Wireless gateway resources to add to the network analyzer configuration. Provide
-	// the WirelessGatewayId of the resource to add in the input array.
+	// Wireless gateway resources to add to the network analyzer configuration.
+	// Provide the WirelessGatewayId of the resource to add in the input array.
 	WirelessGatewaysToAdd []string
 
 	// Wireless gateway resources to remove from the network analyzer configuration.

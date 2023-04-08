@@ -12,14 +12,9 @@
 // access to your users on demand. You can call the AppStream 2.0 API operations by
 // using an interface VPC endpoint (interface endpoint). For more information, see
 // Access AppStream 2.0 API Operations and CLI Commands Through an Interface VPC
-// Endpoint
-// (https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html)
+// Endpoint (https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html)
 // in the Amazon AppStream 2.0 Administration Guide. To learn more about AppStream
 // 2.0, see the following resources:
-//
-// * Amazon AppStream 2.0 product page
-// (http://aws.amazon.com/appstream2)
-//
-// * Amazon AppStream 2.0 documentation
-// (http://aws.amazon.com/documentation/appstream2)
+//   - Amazon AppStream 2.0 product page (http://aws.amazon.com/appstream2)
+//   - Amazon AppStream 2.0 documentation (http://aws.amazon.com/documentation/appstream2)
 package appstream

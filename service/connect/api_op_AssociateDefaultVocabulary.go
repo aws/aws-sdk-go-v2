@@ -31,22 +31,20 @@ func (c *Client) AssociateDefaultVocabulary(ctx context.Context, params *Associa
 
 type AssociateDefaultVocabularyInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
 	// The language code of the vocabulary entries. For a list of languages and their
-	// corresponding language codes, see What is Amazon Transcribe?
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html)
+	// corresponding language codes, see What is Amazon Transcribe? (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html)
 	//
 	// This member is required.
 	LanguageCode types.VocabularyLanguageCode
 
-	// The identifier of the custom vocabulary. If this is empty, the default is set to
-	// none.
+	// The identifier of the custom vocabulary. If this is empty, the default is set
+	// to none.
 	VocabularyId *string
 
 	noSmithyDocumentSerde

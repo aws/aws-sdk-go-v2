@@ -33,7 +33,7 @@ func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, 
 type UpdateClusterInput struct {
 
 	// The cluster ID of the cluster that you want to update, for example
-	// CID123e4567-e89b-12d3-a456-426655440000.
+	// CID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	ClusterId *string
@@ -61,9 +61,8 @@ type UpdateClusterInput struct {
 	Resources *types.JobResource
 
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
-	// cluster. To create a role ARN, use the CreateRole
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
-	// action in Identity and Access Management (IAM).
+	// cluster. To create a role ARN, use the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+	// API action in Identity and Access Management (IAM).
 	RoleARN *string
 
 	// The updated shipping option value of this cluster's ShippingDetails object.

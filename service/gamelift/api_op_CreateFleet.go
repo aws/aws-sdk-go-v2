@@ -34,14 +34,10 @@ import (
 // practice, we recommend opening ports for remote access only when you need them
 // and closing them when you're finished. If successful, this operation creates a
 // new Fleet resource and places it in NEW status, which prompts GameLift to
-// initiate the fleet creation workflow
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creation-workflow.html).
-// Learn more Setting up fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)Debug
-// fleet creation issues
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation)Multi-location
-// fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// initiate the fleet creation workflow (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creation-workflow.html)
+// . Learn more Setting up fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Debug fleet creation issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation)
+// Multi-location fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
 		params = &CreateFleetInput{}
@@ -75,7 +71,7 @@ type CreateFleetInput struct {
 
 	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. GameLift uses
 	// the certificates to encrypt traffic between game clients and the game servers
-	// running on GameLift. By default, the CertificateConfiguration is DISABLED. You
+	// running on GameLift. By default, the CertificateConfiguration is DISABLED . You
 	// can't change this property after you create the fleet. Certificate Manager (ACM)
 	// certificates expire after 13 months. Certificate expiration can cause fleets to
 	// fail, preventing players from connecting to instances in the fleet. We recommend
@@ -83,9 +79,8 @@ type CreateFleetInput struct {
 	// transition. ACM isn't available in all Amazon Web Services regions. A fleet
 	// creation request with certificate generation enabled in an unsupported Region,
 	// fails with a 4xx error. For more information about the supported Regions, see
-	// Supported Regions
-	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-regions.html) in the
-	// Certificate Manager User Guide.
+	// Supported Regions (https://docs.aws.amazon.com/acm/latest/userguide/acm-regions.html)
+	// in the Certificate Manager User Guide.
 	CertificateConfiguration *types.CertificateConfiguration
 
 	// The type of compute resource used to host your game servers. You can use your
@@ -105,16 +100,14 @@ type CreateFleetInput struct {
 	// The GameLift-supported Amazon EC2 instance type to use for all fleet instances.
 	// Instance type determines the computing resources that will be used to host your
 	// game servers, including CPU, memory, storage, and networking capacity. See
-	// Amazon Elastic Compute Cloud Instance Types
-	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions of Amazon
-	// EC2 instance types.
+	// Amazon Elastic Compute Cloud Instance Types (http://aws.amazon.com/ec2/instance-types/)
+	// for detailed descriptions of Amazon EC2 instance types.
 	EC2InstanceType types.EC2InstanceType
 
-	// Indicates whether to use On-Demand or Spot instances for this fleet. By default,
-	// this property is set to ON_DEMAND. Learn more about when to use  On-Demand
-	// versus Spot Instances
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot).
-	// This property cannot be changed after the fleet is created.
+	// Indicates whether to use On-Demand or Spot instances for this fleet. By
+	// default, this property is set to ON_DEMAND . Learn more about when to use
+	// On-Demand versus Spot Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot)
+	// . This property cannot be changed after the fleet is created.
 	FleetType types.FleetType
 
 	// A unique identifier for an IAM role that manages access to your Amazon Web
@@ -123,44 +116,39 @@ type CreateFleetInput struct {
 	// processes, and daemons (background processes). Create a role or look up a role's
 	// ARN by using the IAM dashboard (https://console.aws.amazon.com/iam/) in the
 	// Amazon Web Services Management Console. Learn more about using on-box
-	// credentials for your game servers at  Access external resources from a game
-	// server
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
-	// This property cannot be changed after the fleet is created.
+	// credentials for your game servers at Access external resources from a game
+	// server (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html)
+	// . This property cannot be changed after the fleet is created.
 	InstanceRoleArn *string
 
 	// A set of remote locations to deploy additional instances to and manage as part
 	// of the fleet. This parameter can only be used when creating fleets in Amazon Web
 	// Services Regions that support multiple locations. You can add any
 	// GameLift-supported Amazon Web Services Region as a remote location, in the form
-	// of an Amazon Web Services Region code such as us-west-2. To create a fleet with
+	// of an Amazon Web Services Region code such as us-west-2 . To create a fleet with
 	// instances in the home Region only, omit this parameter.
 	Locations []types.LocationConfiguration
 
 	// This parameter is no longer used. To specify where GameLift should store log
 	// files once a server process shuts down, use the GameLift server API
-	// ProcessReady() and specify one or more directory paths in logParameters. For
-	// more information, see Initialize the server process
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-initialize)
+	// ProcessReady() and specify one or more directory paths in logParameters . For
+	// more information, see Initialize the server process (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-initialize)
 	// in the GameLift Developer Guide.
 	LogPaths []string
 
-	// The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
-	// A metric group is used to aggregate the metrics for multiple fleets. You can
+	// The name of an Amazon Web Services CloudWatch metric group to add this fleet
+	// to. A metric group is used to aggregate the metrics for multiple fleets. You can
 	// specify an existing metric group name or set a new name to create a new metric
 	// group. A fleet can be included in only one metric group at a time.
 	MetricGroups []string
 
 	// The status of termination protection for active game sessions on the fleet. By
-	// default, this property is set to NoProtection. You can also set game session
-	// protection for an individual game session by calling UpdateGameSession.
-	//
-	// *
-	// NoProtection - Game sessions can be terminated during active gameplay as a
-	// result of a scale-down event.
-	//
-	// * FullProtection - Game sessions in ACTIVE status
-	// cannot be terminated during a scale-down event.
+	// default, this property is set to NoProtection . You can also set game session
+	// protection for an individual game session by calling UpdateGameSession .
+	//   - NoProtection - Game sessions can be terminated during active gameplay as a
+	//   result of a scale-down event.
+	//   - FullProtection - Game sessions in ACTIVE status cannot be terminated during
+	//   a scale-down event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
 	// Used when peering your GameLift fleet with a VPC, the unique identifier for the
@@ -172,20 +160,20 @@ type CreateFleetInput struct {
 	// fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID,
 	// use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the Amazon Web
 	// Services Management Console. Learn more about VPC peering in VPC Peering with
-	// GameLift Fleets
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
+	// GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html)
+	// .
 	PeerVpcId *string
 
 	// A policy that limits the number of game sessions that an individual player can
 	// create on instances in this fleet within a specified span of time.
 	ResourceCreationLimitPolicy *types.ResourceCreationLimitPolicy
 
-	// Instructions for how to launch and maintain server processes on instances in the
-	// fleet. The runtime configuration defines one or more server process
+	// Instructions for how to launch and maintain server processes on instances in
+	// the fleet. The runtime configuration defines one or more server process
 	// configurations, each identifying a build executable or Realtime script file and
 	// the number of processes of that type to run concurrently. The
 	// RuntimeConfiguration parameter is required unless the fleet is being configured
-	// using the older parameters ServerLaunchPath and ServerLaunchParameters, which
+	// using the older parameters ServerLaunchPath and ServerLaunchParameters , which
 	// are still supported for backward compatibility.
 	RuntimeConfiguration *types.RuntimeConfiguration
 
@@ -205,12 +193,11 @@ type CreateFleetInput struct {
 	// continue to be valid.
 	ServerLaunchPath *string
 
-	// A list of labels to assign to the new fleet resource. Tags are developer-defined
-	// key-value pairs. Tagging Amazon Web Services resources are useful for resource
-	// management, access management and cost allocation. For more information, see
-	// Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference.
+	// A list of labels to assign to the new fleet resource. Tags are
+	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
+	// useful for resource management, access management and cost allocation. For more
+	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -223,7 +210,7 @@ type CreateFleetOutput struct {
 	FleetAttributes *types.FleetAttributes
 
 	// The fleet's locations and life-cycle status of each location. For new fleets,
-	// the status of all locations is set to NEW. During fleet creation, GameLift
+	// the status of all locations is set to NEW . During fleet creation, GameLift
 	// updates each location status as instances are deployed there and prepared for
 	// game hosting. This list includes an entry for the fleet's home Region. For
 	// fleets with no remote locations, only one entry, representing the home Region,

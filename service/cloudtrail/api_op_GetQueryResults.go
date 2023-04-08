@@ -13,7 +13,7 @@ import (
 )
 
 // Gets event data results of a query. You must specify the QueryID value returned
-// by the StartQuery operation, and an ARN for EventDataStore.
+// by the StartQuery operation, and an ARN for EventDataStore .
 func (c *Client) GetQueryResults(ctx context.Context, params *GetQueryResultsInput, optFns ...func(*Options)) (*GetQueryResultsOutput, error) {
 	if params == nil {
 		params = &GetQueryResultsInput{}
@@ -65,8 +65,8 @@ type GetQueryResultsOutput struct {
 	// Shows the count of query results.
 	QueryStatistics *types.QueryStatistics
 
-	// The status of the query. Values include QUEUED, RUNNING, FINISHED, FAILED,
-	// TIMED_OUT, or CANCELLED.
+	// The status of the query. Values include QUEUED , RUNNING , FINISHED , FAILED ,
+	// TIMED_OUT , or CANCELLED .
 	QueryStatus types.QueryStatus
 
 	// Metadata pertaining to the operation's result.

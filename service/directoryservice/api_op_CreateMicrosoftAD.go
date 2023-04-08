@@ -12,14 +12,13 @@ import (
 )
 
 // Creates a Microsoft AD directory in the Amazon Web Services Cloud. For more
-// information, see Managed Microsoft AD
-// (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
+// information, see Managed Microsoft AD (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
 // in the Directory Service Admin Guide. Before you call CreateMicrosoftAD, ensure
 // that all of the required permissions have been explicitly granted through a
 // policy. For details about what permissions are required to run the
 // CreateMicrosoftAD operation, see Directory Service API Permissions: Actions,
-// Resources, and Conditions Reference
-// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
+// Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html)
+// .
 func (c *Client) CreateMicrosoftAD(ctx context.Context, params *CreateMicrosoftADInput, optFns ...func(*Options)) (*CreateMicrosoftADOutput, error) {
 	if params == nil {
 		params = &CreateMicrosoftADInput{}
@@ -39,13 +38,13 @@ func (c *Client) CreateMicrosoftAD(ctx context.Context, params *CreateMicrosoftA
 type CreateMicrosoftADInput struct {
 
 	// The fully qualified domain name for the Managed Microsoft AD directory, such as
-	// corp.example.com. This name will resolve inside your VPC only. It does not need
+	// corp.example.com . This name will resolve inside your VPC only. It does not need
 	// to be publicly resolvable.
 	//
 	// This member is required.
 	Name *string
 
-	// The password for the default administrative user named Admin. If you need to
+	// The password for the default administrative user named Admin . If you need to
 	// change the password for the administrator account, you can use the
 	// ResetUserPassword API call.
 	//
@@ -61,13 +60,13 @@ type CreateMicrosoftADInput struct {
 	// Services console Directory Details page after the directory is created.
 	Description *string
 
-	// Managed Microsoft AD is available in two editions: Standard and Enterprise.
+	// Managed Microsoft AD is available in two editions: Standard and Enterprise .
 	// Enterprise is the default.
 	Edition types.DirectoryEdition
 
-	// The NetBIOS name for your domain, such as CORP. If you don't specify a NetBIOS
+	// The NetBIOS name for your domain, such as CORP . If you don't specify a NetBIOS
 	// name, it will default to the first part of your directory DNS. For example, CORP
-	// for the directory DNS corp.example.com.
+	// for the directory DNS corp.example.com .
 	ShortName *string
 
 	// The tags to be assigned to the Managed Microsoft AD directory.

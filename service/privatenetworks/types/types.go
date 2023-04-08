@@ -319,10 +319,10 @@ type ReturnInformation struct {
 	// The shipping address.
 	ShippingAddress *Address
 
-	// The URL of the shipping label. The shipping label is available for download only
-	// if the status of the network resource is PENDING_RETURN. For more information,
-	// see Return a radio unit
-	// (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit).
+	// The URL of the shipping label. The shipping label is available for download
+	// only if the status of the network resource is PENDING_RETURN . For more
+	// information, see Return a radio unit (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit)
+	// .
 	ShippingLabel *string
 
 	noSmithyDocumentSerde

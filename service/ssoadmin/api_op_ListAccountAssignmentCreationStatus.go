@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the status of the AWS account assignment creation requests for a specified
-// IAM Identity Center instance.
+// Lists the status of the AWS account assignment creation requests for a
+// specified IAM Identity Center instance.
 func (c *Client) ListAccountAssignmentCreationStatus(ctx context.Context, params *ListAccountAssignmentCreationStatusInput, optFns ...func(*Options)) (*ListAccountAssignmentCreationStatusOutput, error) {
 	if params == nil {
 		params = &ListAccountAssignmentCreationStatusInput{}
@@ -137,8 +137,8 @@ type ListAccountAssignmentCreationStatusAPIClient interface {
 
 var _ ListAccountAssignmentCreationStatusAPIClient = (*Client)(nil)
 
-// ListAccountAssignmentCreationStatusPaginatorOptions is the paginator options for
-// ListAccountAssignmentCreationStatus
+// ListAccountAssignmentCreationStatusPaginatorOptions is the paginator options
+// for ListAccountAssignmentCreationStatus
 type ListAccountAssignmentCreationStatusPaginatorOptions struct {
 	// The maximum number of results to display for the assignment.
 	Limit int32

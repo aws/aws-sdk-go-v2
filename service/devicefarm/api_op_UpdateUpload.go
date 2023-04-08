@@ -34,7 +34,7 @@ type UpdateUploadInput struct {
 	// This member is required.
 	Arn *string
 
-	// The upload's content type (for example, application/x-yaml).
+	// The upload's content type (for example, application/x-yaml ).
 	ContentType *string
 
 	// Set to true if the YAML file has changed and must be updated. Otherwise, set to

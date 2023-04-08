@@ -17,8 +17,7 @@ import (
 // response includes the parameter group name, description, and parameter group
 // family name. You can optionally specify a name to retrieve the description of a
 // specific parameter group. For more information about parameters and parameter
-// groups, go to Amazon Redshift Parameter Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// groups, go to Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide. If you specify both tag keys
 // and tag values in the same request, Amazon Redshift returns all parameter groups
 // that match any combination of the specified keys and values. For example, if you
@@ -45,8 +44,8 @@ type DescribeClusterParameterGroupsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterParameterGroups request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
+	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request.
 	Marker *string
@@ -65,7 +64,7 @@ type DescribeClusterParameterGroupsInput struct {
 	// A tag key or keys for which you want to return all matching cluster parameter
 	// groups that are associated with the specified key or keys. For example, suppose
 	// that you have parameter groups that are tagged with keys called owner and
-	// environment. If you specify both of these tag keys in the request, Amazon
+	// environment . If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the parameter groups that have either or both
 	// of these tag keys associated with them.
 	TagKeys []string
@@ -73,7 +72,7 @@ type DescribeClusterParameterGroupsInput struct {
 	// A tag value or values for which you want to return all matching cluster
 	// parameter groups that are associated with the specified tag value or values. For
 	// example, suppose that you have parameter groups that are tagged with values
-	// called admin and test. If you specify both of these tag values in the request,
+	// called admin and test . If you specify both of these tag values in the request,
 	// Amazon Redshift returns a response with the parameter groups that have either or
 	// both of these tag values associated with them.
 	TagValues []string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the full details of an AppInstanceUserEndpoint.
+// Returns the full details of an AppInstanceUserEndpoint .
 func (c *Client) DescribeAppInstanceUserEndpoint(ctx context.Context, params *DescribeAppInstanceUserEndpointInput, optFns ...func(*Options)) (*DescribeAppInstanceUserEndpointOutput, error) {
 	if params == nil {
 		params = &DescribeAppInstanceUserEndpointInput{}
@@ -29,12 +29,12 @@ func (c *Client) DescribeAppInstanceUserEndpoint(ctx context.Context, params *De
 
 type DescribeAppInstanceUserEndpointInput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	//
 	// This member is required.
 	AppInstanceUserArn *string
 
-	// The unique identifier of the AppInstanceUserEndpoint.
+	// The unique identifier of the AppInstanceUserEndpoint .
 	//
 	// This member is required.
 	EndpointId *string
@@ -44,7 +44,7 @@ type DescribeAppInstanceUserEndpointInput struct {
 
 type DescribeAppInstanceUserEndpointOutput struct {
 
-	// The full details of an AppInstanceUserEndpoint: the AppInstanceUserArn, ID,
+	// The full details of an AppInstanceUserEndpoint : the AppInstanceUserArn , ID,
 	// name, type, resource ARN, attributes, allow messages, state, and created and
 	// last updated timestamps. All timestamps use epoch milliseconds.
 	AppInstanceUserEndpoint *types.AppInstanceUserEndpoint

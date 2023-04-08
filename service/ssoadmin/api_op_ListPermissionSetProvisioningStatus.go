@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the status of the permission set provisioning requests for a specified IAM
-// Identity Center instance.
+// Lists the status of the permission set provisioning requests for a specified
+// IAM Identity Center instance.
 func (c *Client) ListPermissionSetProvisioningStatus(ctx context.Context, params *ListPermissionSetProvisioningStatusInput, optFns ...func(*Options)) (*ListPermissionSetProvisioningStatusOutput, error) {
 	if params == nil {
 		params = &ListPermissionSetProvisioningStatusInput{}
@@ -137,8 +137,8 @@ type ListPermissionSetProvisioningStatusAPIClient interface {
 
 var _ ListPermissionSetProvisioningStatusAPIClient = (*Client)(nil)
 
-// ListPermissionSetProvisioningStatusPaginatorOptions is the paginator options for
-// ListPermissionSetProvisioningStatus
+// ListPermissionSetProvisioningStatusPaginatorOptions is the paginator options
+// for ListPermissionSetProvisioningStatus
 type ListPermissionSetProvisioningStatusPaginatorOptions struct {
 	// The maximum number of results to display for the assignment.
 	Limit int32

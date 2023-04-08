@@ -129,16 +129,16 @@ func (c *Client) addOperationListServiceInstanceProvisionedResourcesMiddlewares(
 	return nil
 }
 
-// ListServiceInstanceProvisionedResourcesAPIClient is a client that implements the
-// ListServiceInstanceProvisionedResources operation.
+// ListServiceInstanceProvisionedResourcesAPIClient is a client that implements
+// the ListServiceInstanceProvisionedResources operation.
 type ListServiceInstanceProvisionedResourcesAPIClient interface {
 	ListServiceInstanceProvisionedResources(context.Context, *ListServiceInstanceProvisionedResourcesInput, ...func(*Options)) (*ListServiceInstanceProvisionedResourcesOutput, error)
 }
 
 var _ ListServiceInstanceProvisionedResourcesAPIClient = (*Client)(nil)
 
-// ListServiceInstanceProvisionedResourcesPaginatorOptions is the paginator options
-// for ListServiceInstanceProvisionedResources
+// ListServiceInstanceProvisionedResourcesPaginatorOptions is the paginator
+// options for ListServiceInstanceProvisionedResources
 type ListServiceInstanceProvisionedResourcesPaginatorOptions struct {
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.

@@ -28,9 +28,9 @@ const (
 	AccessEffectDeny  AccessEffect = "DENY"
 )
 
-// Values returns all known values for AccessEffect. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AccessEffect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AccessEffect) Values() []AccessEffect {
 	return []AccessEffect{
 		"ALLOW",
@@ -46,9 +46,9 @@ const (
 	AvailabilityProviderTypeLambda AvailabilityProviderType = "LAMBDA"
 )
 
-// Values returns all known values for AvailabilityProviderType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AvailabilityProviderType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AvailabilityProviderType) Values() []AvailabilityProviderType {
 	return []AvailabilityProviderType{
 		"EWS",
@@ -128,8 +128,8 @@ const (
 	ImpersonationRoleTypeReadOnly   ImpersonationRoleType = "READ_ONLY"
 )
 
-// Values returns all known values for ImpersonationRoleType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ImpersonationRoleType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ImpersonationRoleType) Values() []ImpersonationRoleType {
 	return []ImpersonationRoleType{
@@ -148,8 +148,8 @@ const (
 	MailboxExportJobStateCancelled MailboxExportJobState = "CANCELLED"
 )
 
-// Values returns all known values for MailboxExportJobState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for MailboxExportJobState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (MailboxExportJobState) Values() []MailboxExportJobState {
 	return []MailboxExportJobState{
@@ -186,9 +186,10 @@ const (
 	MobileDeviceAccessRuleEffectDeny  MobileDeviceAccessRuleEffect = "DENY"
 )
 
-// Values returns all known values for MobileDeviceAccessRuleEffect. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MobileDeviceAccessRuleEffect. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (MobileDeviceAccessRuleEffect) Values() []MobileDeviceAccessRuleEffect {
 	return []MobileDeviceAccessRuleEffect{
 		"ALLOW",
@@ -224,9 +225,9 @@ const (
 	ResourceTypeEquipment ResourceType = "EQUIPMENT"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"ROOM",

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Shares a specified directory (DirectoryId) in your Amazon Web Services account
+// Shares a specified directory ( DirectoryId ) in your Amazon Web Services account
 // (directory owner) with another Amazon Web Services account (directory consumer).
 // With this operation you can use your directory from any Amazon Web Services
 // account and from any Amazon VPC within an Amazon Web Services Region. When you
@@ -21,9 +21,9 @@ import (
 // The shared directory is visible in all VPCs in the directory consumer account.
 // The ShareMethod parameter determines whether the specified directory can be
 // shared between Amazon Web Services accounts inside the same Amazon Web Services
-// organization (ORGANIZATIONS). It also determines whether you can share the
+// organization ( ORGANIZATIONS ). It also determines whether you can share the
 // directory with any other Amazon Web Services account either inside or outside of
-// the organization (HANDSHAKE). The ShareNotes parameter is only used when
+// the organization ( HANDSHAKE ). The ShareNotes parameter is only used when
 // HANDSHAKE is called, which sends a directory sharing request to the directory
 // consumer.
 func (c *Client) ShareDirectory(ctx context.Context, params *ShareDirectoryInput, optFns ...func(*Options)) (*ShareDirectoryOutput, error) {
@@ -50,9 +50,9 @@ type ShareDirectoryInput struct {
 	DirectoryId *string
 
 	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your Amazon Web Services organization (ORGANIZATIONS) or
-	// with any Amazon Web Services account by sending a directory sharing request
-	// (HANDSHAKE).
+	// should be shared within your Amazon Web Services organization ( ORGANIZATIONS )
+	// or with any Amazon Web Services account by sending a directory sharing request (
+	// HANDSHAKE ).
 	//
 	// This member is required.
 	ShareMethod types.ShareMethod
@@ -74,7 +74,7 @@ type ShareDirectoryInput struct {
 type ShareDirectoryOutput struct {
 
 	// Identifier of the directory that is stored in the directory consumer account
-	// that is shared from the specified directory (DirectoryId).
+	// that is shared from the specified directory ( DirectoryId ).
 	SharedDirectoryId *string
 
 	// Metadata pertaining to the operation's result.

@@ -43,8 +43,8 @@ type CancelElasticsearchServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a CancelElasticsearchServiceSoftwareUpdate operation. Contains the
-// status of the update.
+// The result of a CancelElasticsearchServiceSoftwareUpdate operation. Contains
+// the status of the update.
 type CancelElasticsearchServiceSoftwareUpdateOutput struct {
 
 	// The current status of the Elasticsearch service software update.

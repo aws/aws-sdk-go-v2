@@ -38,8 +38,8 @@ type StopRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the response from the server that describes the remote access session
-// when AWS Device Farm stops the session.
+// Represents the response from the server that describes the remote access
+// session when AWS Device Farm stops the session.
 type StopRemoteAccessSessionOutput struct {
 
 	// A container that represents the metadata from the service about the remote

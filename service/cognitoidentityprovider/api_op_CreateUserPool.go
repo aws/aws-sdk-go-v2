@@ -15,18 +15,16 @@ import (
 // pool. This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
 // can send SMS messages to US phone numbers. If you use SMS text messages in
-// Amazon Cognito, you must register a phone number with Amazon Pinpoint
-// (https://console.aws.amazon.com/pinpoint/home/). Amazon Cognito uses the
-// registered number automatically. Otherwise, Amazon Cognito users who must
-// receive SMS messages might not be able to sign up, activate their accounts, or
-// sign in. If you have never used SMS text messages with Amazon Cognito or any
-// other Amazon Web Service, Amazon Simple Notification Service might place your
-// account in the SMS sandbox. In sandbox mode
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you can send
-// messages only to verified phone numbers. After you test your app while in the
-// sandbox environment, you can move out of the sandbox and into production. For
-// more information, see  SMS message settings for Amazon Cognito user pools
-// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// Amazon Cognito, you must register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
+// . Amazon Cognito uses the registered number automatically. Otherwise, Amazon
+// Cognito users who must receive SMS messages might not be able to sign up,
+// activate their accounts, or sign in. If you have never used SMS text messages
+// with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification
+// Service might place your account in the SMS sandbox. In sandbox mode (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+// , you can send messages only to verified phone numbers. After you test your app
+// while in the sandbox environment, you can move out of the sandbox and into
+// production. For more information, see SMS message settings for Amazon Cognito
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) CreateUserPool(ctx context.Context, params *CreateUserPoolInput, optFns ...func(*Options)) (*CreateUserPoolOutput, error) {
 	if params == nil {
@@ -51,9 +49,9 @@ type CreateUserPoolInput struct {
 	// This member is required.
 	PoolName *string
 
-	// The available verified method a user can use to recover their password when they
-	// call ForgotPassword. You can use this setting to define a preferred method when
-	// a user has more than one method available. With this setting, SMS doesn't
+	// The available verified method a user can use to recover their password when
+	// they call ForgotPassword . You can use this setting to define a preferred method
+	// when a user has more than one method available. With this setting, SMS doesn't
 	// qualify for a valid password recovery mechanism if the user also has SMS
 	// multi-factor authentication (MFA) activated. In the absence of this setting,
 	// Amazon Cognito uses the legacy behavior to determine the recovery method where
@@ -89,22 +87,21 @@ type CreateUserPoolInput struct {
 	// messages from your user pool.
 	EmailConfiguration *types.EmailConfigurationType
 
-	// This parameter is no longer used. See VerificationMessageTemplateType
-	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html).
+	// This parameter is no longer used. See VerificationMessageTemplateType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html)
+	// .
 	EmailVerificationMessage *string
 
-	// This parameter is no longer used. See VerificationMessageTemplateType
-	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html).
+	// This parameter is no longer used. See VerificationMessageTemplateType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html)
+	// .
 	EmailVerificationSubject *string
 
 	// The Lambda trigger configuration information for the new user pool. In a push
 	// model, event sources (such as Amazon S3 and custom applications) need permission
 	// to invoke a function. So you must make an extra call to add permission for these
 	// event sources to invoke your Lambda function. For more information on using the
-	// Lambda API to add permission, see AddPermission
-	// (https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html). For
-	// adding permission using the CLI, see add-permission
-	// (https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html).
+	// Lambda API to add permission, see AddPermission  (https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html)
+	// . For adding permission using the CLI, see add-permission  (https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html)
+	// .
 	LambdaConfig *types.LambdaConfigType
 
 	// Specifies MFA configuration details.
@@ -127,16 +124,16 @@ type CreateUserPoolInput struct {
 	// and Access Management (IAM) role in your Amazon Web Services account.
 	SmsConfiguration *types.SmsConfigurationType
 
-	// This parameter is no longer used. See VerificationMessageTemplateType
-	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html).
+	// This parameter is no longer used. See VerificationMessageTemplateType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html)
+	// .
 	SmsVerificationMessage *string
 
-	// The settings for updates to user attributes. These settings include the property
-	// AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon
-	// Cognito how to handle changes to the value of your users' email address and
-	// phone number attributes. For more information, see  Verifying updates to email
-	// addresses and phone numbers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates).
+	// The settings for updates to user attributes. These settings include the
+	// property AttributesRequireVerificationBeforeUpdate , a user-pool setting that
+	// tells Amazon Cognito how to handle changes to the value of your users' email
+	// address and phone number attributes. For more information, see Verifying
+	// updates to email addresses and phone numbers (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates)
+	// .
 	UserAttributeUpdateSettings *types.UserAttributeUpdateSettingsType
 
 	// Enables advanced security risk detection. Set the key AdvancedSecurityMode to
@@ -153,10 +150,10 @@ type CreateUserPoolInput struct {
 	UsernameAttributes []types.UsernameAttributeType
 
 	// Case sensitivity on the username input for the selected sign-in option. For
-	// example, when case sensitivity is set to False, users can sign in using either
+	// example, when case sensitivity is set to False , users can sign in using either
 	// "username" or "Username". This configuration is immutable once it has been set.
-	// For more information, see UsernameConfigurationType
-	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html).
+	// For more information, see UsernameConfigurationType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html)
+	// .
 	UsernameConfiguration *types.UsernameConfigurationType
 
 	// The template for the verification message that the user sees when the app

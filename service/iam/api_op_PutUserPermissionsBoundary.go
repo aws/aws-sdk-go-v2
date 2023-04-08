@@ -17,8 +17,7 @@ import (
 // advanced feature that can affect the permissions for the user. Policies that are
 // used as permissions boundaries do not provide permissions. You must also attach
 // a permissions policy to the user. To learn how the effective permissions for a
-// user are evaluated, see IAM JSON policy evaluation logic
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html)
+// user are evaluated, see IAM JSON policy evaluation logic (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html)
 // in the IAM User Guide.
 func (c *Client) PutUserPermissionsBoundary(ctx context.Context, params *PutUserPermissionsBoundaryInput, optFns ...func(*Options)) (*PutUserPermissionsBoundaryOutput, error) {
 	if params == nil {
@@ -42,10 +41,9 @@ type PutUserPermissionsBoundaryInput struct {
 	// identity-based policies can grant to an entity, but does not grant permissions.
 	// Permissions boundaries do not define the maximum permissions that a
 	// resource-based policy can grant to an entity. To learn more, see Permissions
-	// boundaries for IAM entities
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
-	// in the IAM User Guide. For more information about policy types, see Policy types
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types)
+	// boundaries for IAM entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide. For more information about policy types, see Policy
+	// types  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types)
 	// in the IAM User Guide.
 	//
 	// This member is required.

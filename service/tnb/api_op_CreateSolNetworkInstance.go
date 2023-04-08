@@ -14,12 +14,11 @@ import (
 // Amazon Web Services TNB that can be deployed and on which life-cycle operations
 // (like terminate, update, and delete) can be performed. Creating a network
 // instance is the third step after creating a network package. For more
-// information about network instances, Network instances
-// (https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html) in the Amazon
-// Web Services Telco Network Builder User Guide. Once you create a network
-// instance, you can instantiate it. To instantiate a network, see
-// InstantiateSolNetworkInstance
-// (https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html).
+// information about network instances, Network instances (https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html)
+// in the Amazon Web Services Telco Network Builder User Guide. Once you create a
+// network instance, you can instantiate it. To instantiate a network, see
+// InstantiateSolNetworkInstance (https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html)
+// .
 func (c *Client) CreateSolNetworkInstance(ctx context.Context, params *CreateSolNetworkInstanceInput, optFns ...func(*Options)) (*CreateSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &CreateSolNetworkInstanceInput{}

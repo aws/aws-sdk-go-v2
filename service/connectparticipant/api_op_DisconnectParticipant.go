@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disconnects a participant. ConnectionToken is used for invoking this API instead
-// of ParticipantToken. The Amazon Connect Participant Service APIs do not use
-// Signature Version 4 authentication
-// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+// Disconnects a participant. ConnectionToken is used for invoking this API
+// instead of ParticipantToken . The Amazon Connect Participant Service APIs do not
+// use Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+// .
 func (c *Client) DisconnectParticipant(ctx context.Context, params *DisconnectParticipantInput, optFns ...func(*Options)) (*DisconnectParticipantOutput, error) {
 	if params == nil {
 		params = &DisconnectParticipantInput{}
@@ -40,8 +40,8 @@ type DisconnectParticipantInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	noSmithyDocumentSerde

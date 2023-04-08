@@ -12,50 +12,32 @@ import (
 )
 
 // Creates a campaign that deploys a solution version. When a client calls the
-// GetRecommendations
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
-// and GetPersonalizedRanking
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html)
+// GetRecommendations (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
+// and GetPersonalizedRanking (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html)
 // APIs, a campaign is specified in the request. Minimum Provisioned TPS and
 // Auto-Scaling A transaction is a single GetRecommendations or
 // GetPersonalizedRanking call. Transactions per second (TPS) is the throughput and
-// unit of billing for Amazon Personalize. The minimum provisioned TPS
-// (minProvisionedTPS) specifies the baseline throughput provisioned by Amazon
+// unit of billing for Amazon Personalize. The minimum provisioned TPS (
+// minProvisionedTPS ) specifies the baseline throughput provisioned by Amazon
 // Personalize, and thus, the minimum billing charge. If your TPS increases beyond
-// minProvisionedTPS, Amazon Personalize auto-scales the provisioned capacity up
-// and down, but never below minProvisionedTPS. There's a short time delay while
+// minProvisionedTPS , Amazon Personalize auto-scales the provisioned capacity up
+// and down, but never below minProvisionedTPS . There's a short time delay while
 // the capacity is increased that might cause loss of transactions. The actual TPS
 // used is calculated as the average requests/second within a 5-minute window. You
 // pay for maximum of either the minimum provisioned TPS or the actual TPS. We
-// recommend starting with a low minProvisionedTPS, track your usage using Amazon
-// CloudWatch metrics, and then increase the minProvisionedTPS as necessary. Status
-// A campaign can be in one of the following states:
+// recommend starting with a low minProvisionedTPS , track your usage using Amazon
+// CloudWatch metrics, and then increase the minProvisionedTPS as necessary.
+// Status A campaign can be in one of the following states:
+//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+//   - DELETE PENDING > DELETE IN_PROGRESS
 //
-// * CREATE PENDING > CREATE
-// IN_PROGRESS > ACTIVE -or- CREATE FAILED
-//
-// * DELETE PENDING > DELETE
-// IN_PROGRESS
-//
-// To get the campaign status, call DescribeCampaign
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html).
-// Wait until the status of the campaign is ACTIVE before asking the campaign for
-// recommendations. Related APIs
-//
-// * ListCampaigns
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html)
-//
-// *
-// DescribeCampaign
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
-//
-// *
-// UpdateCampaign
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html)
-//
-// *
-// DeleteCampaign
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html)
+// To get the campaign status, call DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
+// . Wait until the status of the campaign is ACTIVE before asking the campaign
+// for recommendations. Related APIs
+//   - ListCampaigns (https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html)
+//   - DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
+//   - UpdateCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html)
+//   - DeleteCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html)
 func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput, optFns ...func(*Options)) (*CreateCampaignOutput, error) {
 	if params == nil {
 		params = &CreateCampaignInput{}
@@ -91,9 +73,8 @@ type CreateCampaignInput struct {
 	// second that Amazon Personalize will support.
 	MinProvisionedTPS *int32
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
-	// apply to the campaign.
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// to apply to the campaign.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

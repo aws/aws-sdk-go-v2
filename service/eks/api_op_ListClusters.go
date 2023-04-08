@@ -30,9 +30,9 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 
 type ListClustersInput struct {
 
-	// Indicates whether external clusters are included in the returned list. Use 'all'
-	// to return connected clusters, or blank to return only Amazon EKS clusters. 'all'
-	// must be in lowercase otherwise an error occurs.
+	// Indicates whether external clusters are included in the returned list. Use ' all
+	// ' to return connected clusters, or blank to return only Amazon EKS clusters. '
+	// all ' must be in lowercase otherwise an error occurs.
 	Include []string
 
 	// The maximum number of cluster results returned by ListClusters in paginated
@@ -61,7 +61,7 @@ type ListClustersOutput struct {
 	Clusters []string
 
 	// The nextToken value to include in a future ListClusters request. When the
-	// results of a ListClusters request exceed maxResults, you can use this value to
+	// results of a ListClusters request exceed maxResults , you can use this value to
 	// retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string

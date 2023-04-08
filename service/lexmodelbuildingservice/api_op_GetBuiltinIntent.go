@@ -31,8 +31,7 @@ func (c *Client) GetBuiltinIntent(ctx context.Context, params *GetBuiltinIntentI
 type GetBuiltinIntentInput struct {
 
 	// The unique identifier for a built-in intent. To find the signature for an
-	// intent, see Standard Built-in Intents
-	// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
+	// intent, see Standard Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
 	// in the Alexa Skills Kit.
 	//
 	// This member is required.

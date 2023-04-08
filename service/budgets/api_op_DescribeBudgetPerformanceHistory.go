@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the history for DAILY, MONTHLY, and QUARTERLY budgets. Budget history
-// isn't available for ANNUAL budgets.
+// Describes the history for DAILY , MONTHLY , and QUARTERLY budgets. Budget
+// history isn't available for ANNUAL budgets.
 func (c *Client) DescribeBudgetPerformanceHistory(ctx context.Context, params *DescribeBudgetPerformanceHistoryInput, optFns ...func(*Options)) (*DescribeBudgetPerformanceHistoryOutput, error) {
 	if params == nil {
 		params = &DescribeBudgetPerformanceHistoryInput{}

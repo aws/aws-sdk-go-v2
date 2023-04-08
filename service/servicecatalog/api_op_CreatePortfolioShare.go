@@ -29,7 +29,7 @@ import (
 // name association for the portfolio. Although this user may not know which
 // principal names are associated through Service Catalog, they may be able to
 // guess the user. If this potential escalation path is a concern, then Service
-// Catalog recommends using PrincipalType as IAM. With this configuration, the
+// Catalog recommends using PrincipalType as IAM . With this configuration, the
 // PrincipalARN must already exist in the recipient account before it can be
 // associated.
 func (c *Client) CreatePortfolioShare(ctx context.Context, params *CreatePortfolioShareInput, optFns ...func(*Options)) (*CreatePortfolioShareOutput, error) {
@@ -55,29 +55,27 @@ type CreatePortfolioShareInput struct {
 	PortfolioId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// The Amazon Web Services account ID. For example, 123456789012.
+	// The Amazon Web Services account ID. For example, 123456789012 .
 	AccountId *string
 
 	// The organization node to whom you are going to share. When you pass
-	// OrganizationNode, it creates PortfolioShare for all of the Amazon Web Services
-	// accounts that are associated to the OrganizationNode. The output returns a
-	// PortfolioShareToken, which enables the administrator to monitor the status of
+	// OrganizationNode , it creates PortfolioShare for all of the Amazon Web Services
+	// accounts that are associated to the OrganizationNode . The output returns a
+	// PortfolioShareToken , which enables the administrator to monitor the status of
 	// the PortfolioShare creation process.
 	OrganizationNode *types.OrganizationNode
 
-	// Enables or disables Principal sharing when creating the portfolio share. If this
-	// flag is not provided, principal sharing is disabled. When you enable Principal
-	// Name Sharing for a portfolio share, the share recipient account end users with a
-	// principal that matches any of the associated IAM patterns can provision products
-	// from the portfolio. Once shared, the share recipient can view associations of
-	// PrincipalType: IAM_PATTERN on their portfolio. You can create the principals in
-	// the recipient account before or after creating the share.
+	// Enables or disables Principal sharing when creating the portfolio share. If
+	// this flag is not provided, principal sharing is disabled. When you enable
+	// Principal Name Sharing for a portfolio share, the share recipient account end
+	// users with a principal that matches any of the associated IAM patterns can
+	// provision products from the portfolio. Once shared, the share recipient can view
+	// associations of PrincipalType : IAM_PATTERN on their portfolio. You can create
+	// the principals in the recipient account before or after creating the share.
 	SharePrincipals bool
 
 	// Enables or disables TagOptions  sharing when creating the portfolio share. If

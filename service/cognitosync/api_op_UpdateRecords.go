@@ -38,8 +38,8 @@ func (c *Client) UpdateRecords(ctx context.Context, params *UpdateRecordsInput, 
 	return out, nil
 }
 
-// A request to post updates to records or add and delete records for a dataset and
-// user.
+// A request to post updates to records or add and delete records for a dataset
+// and user.
 type UpdateRecordsInput struct {
 
 	// A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_'
@@ -48,20 +48,22 @@ type UpdateRecordsInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
+	// generation is unique within a region.
 	//
 	// This member is required.
 	IdentityId *string
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
+	// generation is unique within a region.
 	//
 	// This member is required.
 	IdentityPoolId *string
 
-	// The SyncSessionToken returned by a previous call to ListRecords for this dataset
-	// and identity.
+	// The SyncSessionToken returned by a previous call to ListRecords for this
+	// dataset and identity.
 	//
 	// This member is required.
 	SyncSessionToken *string

@@ -27,8 +27,8 @@ func (c *Client) RollbackTransaction(ctx context.Context, params *RollbackTransa
 	return out, nil
 }
 
-// The request parameters represent the input of a request to perform a rollback of
-// a transaction.
+// The request parameters represent the input of a request to perform a rollback
+// of a transaction.
 type RollbackTransactionInput struct {
 
 	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -49,8 +49,8 @@ type RollbackTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response elements represent the output of a request to perform a rollback of
-// a transaction.
+// The response elements represent the output of a request to perform a rollback
+// of a transaction.
 type RollbackTransactionOutput struct {
 
 	// The status of the rollback operation.

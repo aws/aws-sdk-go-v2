@@ -13,25 +13,12 @@ import (
 // Attaches a policy to a root, an organizational unit (OU), or an individual
 // account. How the policy affects accounts depends on the type of policy. Refer to
 // the Organizations User Guide for information about each policy type:
+//   - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+//   - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+//   - SERVICE_CONTROL_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+//   - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 //
-// *
-// AISERVICES_OPT_OUT_POLICY
-// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-//
-// *
-// BACKUP_POLICY
-// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
-//
-// *
-// SERVICE_CONTROL_POLICY
-// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
-//
-// *
-// TAG_POLICY
-// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
-//
-// This
-// operation can be called only from the organization's management account.
+// This operation can be called only from the organization's management account.
 func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, optFns ...func(*Options)) (*AttachPolicyOutput, error) {
 	if params == nil {
 		params = &AttachPolicyInput{}
@@ -59,21 +46,16 @@ type AttachPolicyInput struct {
 	PolicyId *string
 
 	// The unique identifier (ID) of the root, OU, or account that you want to attach
-	// the policy to. You can get the ID by calling the ListRoots,
-	// ListOrganizationalUnitsForParent, or ListAccounts operations. The regex pattern
-	// (http://wikipedia.org/wiki/regex) for a target ID string requires one of the
-	// following:
-	//
-	// * Root - A string that begins with "r-" followed by from 4 to 32
-	// lowercase letters or digits.
-	//
-	// * Account - A string that consists of exactly 12
-	// digits.
-	//
-	// * Organizational unit (OU) - A string that begins with "ou-" followed
-	// by from 4 to 32 lowercase letters or digits (the ID of the root that the OU is
-	// in). This string is followed by a second "-" dash and from 8 to 32 additional
-	// lowercase letters or digits.
+	// the policy to. You can get the ID by calling the ListRoots ,
+	// ListOrganizationalUnitsForParent , or ListAccounts operations. The regex pattern (http://wikipedia.org/wiki/regex)
+	// for a target ID string requires one of the following:
+	//   - Root - A string that begins with "r-" followed by from 4 to 32 lowercase
+	//   letters or digits.
+	//   - Account - A string that consists of exactly 12 digits.
+	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
+	//   4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This
+	//   string is followed by a second "-" dash and from 8 to 32 additional lowercase
+	//   letters or digits.
 	//
 	// This member is required.
 	TargetId *string

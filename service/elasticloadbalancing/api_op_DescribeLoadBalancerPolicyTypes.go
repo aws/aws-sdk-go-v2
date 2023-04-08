@@ -15,10 +15,10 @@ import (
 // types. The description of each type indicates how it can be used. For example,
 // some policies can be used only with layer 7 listeners, some policies can be used
 // only with layer 4 listeners, and some policies can be used only with your EC2
-// instances. You can use CreateLoadBalancerPolicy to create a policy configuration
-// for any of these policy types. Then, depending on the policy type, use either
-// SetLoadBalancerPoliciesOfListener or SetLoadBalancerPoliciesForBackendServer to
-// set the policy.
+// instances. You can use CreateLoadBalancerPolicy to create a policy
+// configuration for any of these policy types. Then, depending on the policy type,
+// use either SetLoadBalancerPoliciesOfListener or
+// SetLoadBalancerPoliciesForBackendServer to set the policy.
 func (c *Client) DescribeLoadBalancerPolicyTypes(ctx context.Context, params *DescribeLoadBalancerPolicyTypesInput, optFns ...func(*Options)) (*DescribeLoadBalancerPolicyTypesOutput, error) {
 	if params == nil {
 		params = &DescribeLoadBalancerPolicyTypesInput{}

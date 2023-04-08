@@ -44,7 +44,7 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	CurrentApplicationVersionId *int64
 
 	// The ID of the reference data source. When you add a reference data source to
-	// your application using the AddApplicationReferenceDataSource, Kinesis Data
+	// your application using the AddApplicationReferenceDataSource , Kinesis Data
 	// Analytics assigns an ID. You can use the DescribeApplication operation to get
 	// the reference ID.
 	//

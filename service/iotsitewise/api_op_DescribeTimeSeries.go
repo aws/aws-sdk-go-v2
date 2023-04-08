@@ -15,18 +15,12 @@ import (
 
 // Retrieves information about a time series (data stream). To identify a time
 // series, do one of the following:
-//
-// * If the time series isn't associated with an
-// asset property, specify the alias of the time series.
-//
-// * If the time series is
-// associated with an asset property, specify one of the following:
-//
-// * The alias of
-// the time series.
-//
-// * The assetId and propertyId that identifies the asset
-// property.
+//   - If the time series isn't associated with an asset property, specify the
+//     alias of the time series.
+//   - If the time series is associated with an asset property, specify one of the
+//     following:
+//   - The alias of the time series.
+//   - The assetId and propertyId that identifies the asset property.
 func (c *Client) DescribeTimeSeries(ctx context.Context, params *DescribeTimeSeriesInput, optFns ...func(*Options)) (*DescribeTimeSeriesOutput, error) {
 	if params == nil {
 		params = &DescribeTimeSeriesInput{}
@@ -58,15 +52,14 @@ type DescribeTimeSeriesInput struct {
 
 type DescribeTimeSeriesOutput struct {
 
-	// The data type of the time series. If you specify STRUCT, you must also specify
+	// The data type of the time series. If you specify STRUCT , you must also specify
 	// dataTypeSpec to identify the type of the structure for this time series.
 	//
 	// This member is required.
 	DataType types.PropertyDataType
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the time series, which has the following format.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the time series, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:time-series/${TimeSeriesId}
 	//
 	// This member is required.
@@ -96,8 +89,8 @@ type DescribeTimeSeriesOutput struct {
 	// The data type of the structure for this time series. This parameter is required
 	// for time series that have the STRUCT data type. The options for this parameter
 	// depend on the type of the composite model in which you created the asset
-	// property that is associated with your time series. Use AWS/ALARM_STATE for alarm
-	// state in alarm composite models.
+	// property that is associated with your time series. Use AWS/ALARM_STATE for
+	// alarm state in alarm composite models.
 	DataTypeSpec *string
 
 	// The ID of the asset property.

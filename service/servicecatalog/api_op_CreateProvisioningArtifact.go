@@ -35,9 +35,9 @@ func (c *Client) CreateProvisioningArtifact(ctx context.Context, params *CreateP
 
 type CreateProvisioningArtifactInput struct {
 
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests differ only by the idempotency token, the same response is returned for
+	// each repeated request.
 	//
 	// This member is required.
 	IdempotencyToken *string
@@ -53,10 +53,8 @@ type CreateProvisioningArtifactInput struct {
 	ProductId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde
@@ -65,8 +63,8 @@ type CreateProvisioningArtifactInput struct {
 type CreateProvisioningArtifactOutput struct {
 
 	// Specify the template source with one of the following options, but not both.
-	// Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ]. Use the URL of the
-	// CloudFormation template in Amazon S3 or GitHub in JSON format.
+	// Keys accepted: [ LoadTemplateFromURL , ImportFromPhysicalId ]. Use the URL of
+	// the CloudFormation template in Amazon S3 or GitHub in JSON format.
 	// LoadTemplateFromURL Use the URL of the CloudFormation template in Amazon S3 or
 	// GitHub in JSON format. ImportFromPhysicalId Use the physical id of the resource
 	// that contains the template; currently supports CloudFormation stack ARN.

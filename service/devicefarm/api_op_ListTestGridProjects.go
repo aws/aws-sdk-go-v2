@@ -45,7 +45,7 @@ type ListTestGridProjectsOutput struct {
 	// paginated request.
 	NextToken *string
 
-	// The list of TestGridProjects, based on a ListTestGridProjectsRequest.
+	// The list of TestGridProjects, based on a ListTestGridProjectsRequest .
 	TestGridProjects []types.TestGridProject
 
 	// Metadata pertaining to the operation's result.

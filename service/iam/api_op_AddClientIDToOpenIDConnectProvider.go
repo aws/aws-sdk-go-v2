@@ -31,8 +31,8 @@ func (c *Client) AddClientIDToOpenIDConnectProvider(ctx context.Context, params 
 
 type AddClientIDToOpenIDConnectProviderInput struct {
 
-	// The client ID (also known as audience) to add to the IAM OpenID Connect provider
-	// resource.
+	// The client ID (also known as audience) to add to the IAM OpenID Connect
+	// provider resource.
 	//
 	// This member is required.
 	ClientID *string

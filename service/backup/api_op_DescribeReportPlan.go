@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all report plans for an Amazon Web Services account and Amazon
-// Web Services Region.
+// Returns a list of all report plans for an Amazon Web Services account and
+// Amazon Web Services Region.
 func (c *Client) DescribeReportPlan(ctx context.Context, params *DescribeReportPlanInput, optFns ...func(*Options)) (*DescribeReportPlanOutput, error) {
 	if params == nil {
 		params = &DescribeReportPlanInput{}

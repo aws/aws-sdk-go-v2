@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specified signaling channel. DeleteSignalingChannel is an asynchronous
-// operation. If you don't specify the channel's current version, the most recent
-// version is deleted.
+// Deletes a specified signaling channel. DeleteSignalingChannel is an
+// asynchronous operation. If you don't specify the channel's current version, the
+// most recent version is deleted.
 func (c *Client) DeleteSignalingChannel(ctx context.Context, params *DeleteSignalingChannelInput, optFns ...func(*Options)) (*DeleteSignalingChannelOutput, error) {
 	if params == nil {
 		params = &DeleteSignalingChannelInput{}

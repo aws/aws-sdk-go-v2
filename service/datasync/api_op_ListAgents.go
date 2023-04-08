@@ -19,12 +19,11 @@ import (
 // specify in your next request to fetch the next page of agents. ListAgents is
 // eventually consistent. This means the result of running the operation might not
 // reflect that you just created or deleted an agent. For example, if you create an
-// agent with CreateAgent
-// (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateAgent.html) and
-// then immediately run ListAgents, that agent might not show up in the list right
-// away. In situations like this, you can always confirm whether an agent has been
-// created (or deleted) by using DescribeAgent
-// (https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeAgent.html).
+// agent with CreateAgent (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateAgent.html)
+// and then immediately run ListAgents , that agent might not show up in the list
+// right away. In situations like this, you can always confirm whether an agent has
+// been created (or deleted) by using DescribeAgent (https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeAgent.html)
+// .
 func (c *Client) ListAgents(ctx context.Context, params *ListAgentsInput, optFns ...func(*Options)) (*ListAgentsOutput, error) {
 	if params == nil {
 		params = &ListAgentsInput{}
@@ -47,8 +46,8 @@ type ListAgentsInput struct {
 	// default, a response shows a maximum of 100 agents.
 	MaxResults *int32
 
-	// Specifies an opaque string that indicates the position to begin the next list of
-	// results in the response.
+	// Specifies an opaque string that indicates the position to begin the next list
+	// of results in the response.
 	NextToken *string
 
 	noSmithyDocumentSerde

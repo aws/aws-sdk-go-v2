@@ -11,15 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Runs deployment or stack commands. For more information, see Deploying Apps
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html)
-// and Run Stack Commands
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html).
-// Required Permissions: To use this action, an IAM user must have a Deploy or
+// Runs deployment or stack commands. For more information, see Deploying Apps (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html)
+// and Run Stack Commands (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html)
+// . Required Permissions: To use this action, an IAM user must have a Deploy or
 // Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information on user permissions, see Managing User
-// Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentInput{}
@@ -59,10 +57,9 @@ type CreateDeploymentInput struct {
 	// override some corresponding default stack configuration JSON values. The string
 	// should be in the following format: "{\"key1\": \"value1\", \"key2\":
 	// \"value2\",...}" For more information about custom JSON, see Use Custom JSON to
-	// Modify the Stack Configuration Attributes
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html)
-	// and Overriding Attributes With Custom JSON
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
+	// Modify the Stack Configuration Attributes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html)
+	// and Overriding Attributes With Custom JSON (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html)
+	// .
 	CustomJson *string
 
 	// The instance IDs for the deployment targets.

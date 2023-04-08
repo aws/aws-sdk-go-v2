@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts access logging on the specified container. When you enable access logging
-// on a container, MediaStore delivers access logs for objects stored in that
-// container to Amazon CloudWatch Logs.
+// Starts access logging on the specified container. When you enable access
+// logging on a container, MediaStore delivers access logs for objects stored in
+// that container to Amazon CloudWatch Logs.
 func (c *Client) StartAccessLogging(ctx context.Context, params *StartAccessLoggingInput, optFns ...func(*Options)) (*StartAccessLoggingOutput, error) {
 	if params == nil {
 		params = &StartAccessLoggingInput{}

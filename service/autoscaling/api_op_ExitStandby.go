@@ -13,8 +13,7 @@ import (
 
 // Moves the specified instances out of the standby state. After you put the
 // instances back in service, the desired capacity is incremented. For more
-// information, see Temporarily removing instances from your Auto Scaling group
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html)
+// information, see Temporarily removing instances from your Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) ExitStandby(ctx context.Context, params *ExitStandbyInput, optFns ...func(*Options)) (*ExitStandbyOutput, error) {
 	if params == nil {

@@ -57,8 +57,8 @@ type ListChannelsOutput struct {
 	// This member is required.
 	Channels []types.ChannelSummary
 
-	// If there are more channels than maxResults, use nextToken in the request to get
-	// the next set.
+	// If there are more channels than maxResults , use nextToken in the request to
+	// get the next set.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

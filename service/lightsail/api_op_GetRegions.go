@@ -32,12 +32,12 @@ type GetRegionsInput struct {
 
 	// A Boolean value indicating whether to also include Availability Zones in your
 	// get regions request. Availability Zones are indicated with a letter: e.g.,
-	// us-east-2a.
+	// us-east-2a .
 	IncludeAvailabilityZones *bool
 
 	// A Boolean value indicating whether to also include Availability Zones for
 	// databases in your get regions request. Availability Zones are indicated with a
-	// letter (e.g., us-east-2a).
+	// letter (e.g., us-east-2a ).
 	IncludeRelationalDatabaseAvailabilityZones *bool
 
 	noSmithyDocumentSerde

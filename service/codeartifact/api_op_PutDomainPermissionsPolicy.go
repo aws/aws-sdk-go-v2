@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets a resource policy on a domain that specifies permissions to access it. When
-// you call PutDomainPermissionsPolicy, the resource policy on the domain is
+// Sets a resource policy on a domain that specifies permissions to access it.
+// When you call PutDomainPermissionsPolicy , the resource policy on the domain is
 // ignored when evaluting permissions. This ensures that the owner of a domain
 // cannot lock themselves out of the domain, which would prevent them from being
 // able to update the resource policy.
@@ -48,9 +48,9 @@ type PutDomainPermissionsPolicyInput struct {
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The current revision of the resource policy to be set. This revision is used for
-	// optimistic locking, which prevents others from overwriting your changes to the
-	// domain's resource policy.
+	// The current revision of the resource policy to be set. This revision is used
+	// for optimistic locking, which prevents others from overwriting your changes to
+	// the domain's resource policy.
 	PolicyRevision *string
 
 	noSmithyDocumentSerde

@@ -35,7 +35,7 @@ type DeleteSlackChannelConfigurationInput struct {
 	ChannelId *string
 
 	// The team ID in Slack. This ID uniquely identifies a Slack workspace, such as
-	// T012ABCDEFG.
+	// T012ABCDEFG .
 	//
 	// This member is required.
 	TeamId *string

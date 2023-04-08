@@ -41,20 +41,16 @@ type DescribeDomainInput struct {
 type DescribeDomainOutput struct {
 
 	// Specifies the VPC used for non-EFS traffic. The default value is
-	// PublicInternetOnly.
-	//
-	// * PublicInternetOnly - Non-EFS traffic is through a VPC
-	// managed by Amazon SageMaker, which allows direct internet access
-	//
-	// * VpcOnly -
-	// All Studio traffic is through the specified VPC and subnets
+	// PublicInternetOnly .
+	//   - PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon
+	//   SageMaker, which allows direct internet access
+	//   - VpcOnly - All Studio traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
 	// The entity that creates and manages the required security groups for inter-app
 	// communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType
 	// is VPCOnly and
-	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is
-	// provided.
+	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
 	AppSecurityGroupManagement types.AppSecurityGroupManagement
 
 	// The domain's authentication mode.
@@ -88,7 +84,7 @@ type DescribeDomainOutput struct {
 	// The ID of the Amazon Elastic File System (EFS) managed by this Domain.
 	HomeEfsFileSystemId *string
 
-	// Use KmsKeyId.
+	// Use KmsKeyId .
 	//
 	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string

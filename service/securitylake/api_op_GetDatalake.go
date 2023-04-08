@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the Amazon Security Lake configuration object for the specified Amazon
-// Web Services account ID. You can use the GetDatalake API to know whether
+// Retrieves the Amazon Security Lake configuration object for the specified
+// Amazon Web Services account ID. You can use the GetDatalake API to know whether
 // Security Lake is enabled for the current Region. This API does not take input
 // parameters.
 func (c *Client) GetDatalake(ctx context.Context, params *GetDatalakeInput, optFns ...func(*Options)) (*GetDatalakeOutput, error) {

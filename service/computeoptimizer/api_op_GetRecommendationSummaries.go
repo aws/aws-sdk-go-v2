@@ -13,22 +13,13 @@ import (
 )
 
 // Returns the optimization findings for an account. It returns the number of:
-//
-// *
-// Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned,
-// or Optimized.
-//
-// * Auto Scaling groups in an account that are NotOptimized, or
-// Optimized.
-//
-// * Amazon EBS volumes in an account that are NotOptimized, or
-// Optimized.
-//
-// * Lambda functions in an account that are NotOptimized, or
-// Optimized.
-//
-// * Amazon ECS services in an account that are Underprovisioned,
-// Overprovisioned, or Optimized.
+//   - Amazon EC2 instances in an account that are Underprovisioned ,
+//     Overprovisioned , or Optimized .
+//   - Auto Scaling groups in an account that are NotOptimized , or Optimized .
+//   - Amazon EBS volumes in an account that are NotOptimized , or Optimized .
+//   - Lambda functions in an account that are NotOptimized , or Optimized .
+//   - Amazon ECS services in an account that are Underprovisioned ,
+//     Overprovisioned , or Optimized .
 func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetRecommendationSummariesInput, optFns ...func(*Options)) (*GetRecommendationSummariesOutput, error) {
 	if params == nil {
 		params = &GetRecommendationSummariesInput{}

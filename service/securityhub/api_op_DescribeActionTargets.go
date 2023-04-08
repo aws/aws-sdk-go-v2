@@ -37,7 +37,7 @@ type DescribeActionTargetsInput struct {
 	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the
-	// DescribeActionTargets operation, set the value of this parameter to NULL. For
+	// DescribeActionTargets operation, set the value of this parameter to NULL . For
 	// subsequent calls to the operation, to continue listing data, set the value of
 	// this parameter to the value returned from the previous response.
 	NextToken *string
@@ -47,8 +47,8 @@ type DescribeActionTargetsInput struct {
 
 type DescribeActionTargetsOutput struct {
 
-	// A list of ActionTarget objects. Each object includes the ActionTargetArn,
-	// Description, and Name of a custom action target available in Security Hub.
+	// A list of ActionTarget objects. Each object includes the ActionTargetArn ,
+	// Description , and Name of a custom action target available in Security Hub.
 	//
 	// This member is required.
 	ActionTargets []types.ActionTarget

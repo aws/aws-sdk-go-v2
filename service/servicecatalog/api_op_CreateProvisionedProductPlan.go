@@ -17,8 +17,8 @@ import (
 // when the plan is executed. You can create one plan for each provisioned product.
 // To create a plan for an existing provisioned product, the product status must be
 // AVAILABLE or TAINTED. To view the resource changes in the change set, use
-// DescribeProvisionedProductPlan. To create or modify the provisioned product, use
-// ExecuteProvisionedProductPlan.
+// DescribeProvisionedProductPlan . To create or modify the provisioned product,
+// use ExecuteProvisionedProductPlan .
 func (c *Client) CreateProvisionedProductPlan(ctx context.Context, params *CreateProvisionedProductPlanInput, optFns ...func(*Options)) (*CreateProvisionedProductPlanOutput, error) {
 	if params == nil {
 		params = &CreateProvisionedProductPlanInput{}
@@ -36,9 +36,9 @@ func (c *Client) CreateProvisionedProductPlan(ctx context.Context, params *Creat
 
 type CreateProvisionedProductPlanInput struct {
 
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests differ only by the idempotency token, the same response is returned for
+	// each repeated request.
 	//
 	// This member is required.
 	IdempotencyToken *string
@@ -71,10 +71,8 @@ type CreateProvisionedProductPlanInput struct {
 	ProvisioningArtifactId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
@@ -83,11 +81,11 @@ type CreateProvisionedProductPlanInput struct {
 
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths.
+	// paths for a product, use ListLaunchPaths .
 	PathId *string
 
-	// Parameters specified by the administrator that are required for provisioning the
-	// product.
+	// Parameters specified by the administrator that are required for provisioning
+	// the product.
 	ProvisioningParameters []types.UpdateProvisioningParameter
 
 	// One or more tags. If the plan is for an existing provisioned product, the

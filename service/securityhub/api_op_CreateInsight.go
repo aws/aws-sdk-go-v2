@@ -13,7 +13,7 @@ import (
 
 // Creates a custom insight in Security Hub. An insight is a consolidation of
 // findings that relate to a security issue that requires attention or remediation.
-// To group the related findings in the insight, use the GroupByAttribute.
+// To group the related findings in the insight, use the GroupByAttribute .
 func (c *Client) CreateInsight(ctx context.Context, params *CreateInsightInput, optFns ...func(*Options)) (*CreateInsightOutput, error) {
 	if params == nil {
 		params = &CreateInsightInput{}
@@ -37,10 +37,10 @@ type CreateInsightInput struct {
 	// This member is required.
 	Filters *types.AwsSecurityFindingFilters
 
-	// The attribute used to group the findings for the insight. The grouping attribute
-	// identifies the type of item that the insight applies to. For example, if an
-	// insight is grouped by resource identifier, then the insight produces a list of
-	// resource identifiers.
+	// The attribute used to group the findings for the insight. The grouping
+	// attribute identifies the type of item that the insight applies to. For example,
+	// if an insight is grouped by resource identifier, then the insight produces a
+	// list of resource identifiers.
 	//
 	// This member is required.
 	GroupByAttribute *string

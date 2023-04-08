@@ -12,7 +12,7 @@ import (
 )
 
 // Copies package versions from one repository to another repository in the same
-// domain. You must specify versions or versionRevisions. You cannot specify both.
+// domain. You must specify versions or versionRevisions . You cannot specify both.
 func (c *Client) CopyPackageVersions(ctx context.Context, params *CopyPackageVersionsInput, optFns ...func(*Options)) (*CopyPackageVersionsOutput, error) {
 	if params == nil {
 		params = &CopyPackageVersionsInput{}
@@ -65,38 +65,31 @@ type CopyPackageVersionsInput struct {
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// Set to true to copy packages from repositories that are upstream from the source
-	// repository to the destination repository. The default setting is false. For more
-	// information, see Working with upstream repositories
-	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
+	// Set to true to copy packages from repositories that are upstream from the
+	// source repository to the destination repository. The default setting is false.
+	// For more information, see Working with upstream repositories (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html)
+	// .
 	IncludeFromUpstream *bool
 
 	// The namespace of the package versions to be copied. The package version
 	// component that specifies its namespace depends on its type. For example:
-	//
-	// * The
-	// namespace of a Maven package version is its groupId. The namespace is required
-	// when copying Maven package versions.
-	//
-	// * The namespace of an npm package version
-	// is its scope.
-	//
-	// * Python and NuGet package versions do not contain a
-	// corresponding component, package versions of those formats do not have a
-	// namespace.
-	//
-	// * The namespace of a generic package is its namespace.
+	//   - The namespace of a Maven package version is its groupId . The namespace is
+	//   required when copying Maven package versions.
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// A list of key-value pairs. The keys are package versions and the values are
 	// package version revisions. A CopyPackageVersion operation succeeds if the
 	// specified versions in the source repository match the specified package version
-	// revision. You must specify versions or versionRevisions. You cannot specify
+	// revision. You must specify versions or versionRevisions . You cannot specify
 	// both.
 	VersionRevisions map[string]string
 
 	// The versions of the package to be copied. You must specify versions or
-	// versionRevisions. You cannot specify both.
+	// versionRevisions . You cannot specify both.
 	Versions []string
 
 	noSmithyDocumentSerde
@@ -106,20 +99,12 @@ type CopyPackageVersionsOutput struct {
 
 	// A map of package versions that failed to copy and their error codes. The
 	// possible error codes are in the PackageVersionError data type. They are:
-	//
-	// *
-	// ALREADY_EXISTS
-	//
-	// * MISMATCHED_REVISION
-	//
-	// * MISMATCHED_STATUS
-	//
-	// * NOT_ALLOWED
-	//
-	// *
-	// NOT_FOUND
-	//
-	// * SKIPPED
+	//   - ALREADY_EXISTS
+	//   - MISMATCHED_REVISION
+	//   - MISMATCHED_STATUS
+	//   - NOT_ALLOWED
+	//   - NOT_FOUND
+	//   - SKIPPED
 	FailedVersions map[string]types.PackageVersionError
 
 	// A list of the package versions that were successfully copied to your repository.

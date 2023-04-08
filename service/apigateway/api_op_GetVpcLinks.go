@@ -31,8 +31,8 @@ func (c *Client) GetVpcLinks(ctx context.Context, params *GetVpcLinksInput, optF
 // Gets the VpcLinks collection under the caller's account in a selected region.
 type GetVpcLinksInput struct {
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit *int32
 
 	// The current pagination position in the paged result set.
@@ -128,8 +128,8 @@ var _ GetVpcLinksAPIClient = (*Client)(nil)
 
 // GetVpcLinksPaginatorOptions is the paginator options for GetVpcLinks
 type GetVpcLinksPaginatorOptions struct {
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

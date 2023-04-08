@@ -32,7 +32,7 @@ func (c *Client) ListObjectChildren(ctx context.Context, params *ListObjectChild
 type ListObjectChildrenInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// object resides. For more information, see arns.
+	// object resides. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string

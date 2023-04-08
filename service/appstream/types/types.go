@@ -265,8 +265,8 @@ type DomainJoinInfo struct {
 	noSmithyDocumentSerde
 }
 
-// The application associated to an entitlement. Access is controlled based on user
-// attributes.
+// The application associated to an entitlement. Access is controlled based on
+// user attributes.
 type EntitledApplication struct {
 
 	// The identifier of the application.
@@ -325,21 +325,13 @@ type EntitlementAttribute struct {
 	// A supported AWS IAM SAML PrincipalTag attribute that is matched to the
 	// associated value when a user identity federates into an Amazon AppStream 2.0
 	// SAML application. The following are valid values:
-	//
-	// * roles
-	//
-	// * department
-	//
-	// *
-	// organization
-	//
-	// * groups
-	//
-	// * title
-	//
-	// * costCenter
-	//
-	// * userType
+	//   - roles
+	//   - department
+	//   - organization
+	//   - groups
+	//   - title
+	//   - costCenter
+	//   - userType
 	//
 	// This member is required.
 	Name *string
@@ -368,86 +360,39 @@ type Fleet struct {
 
 	// The instance type to use when launching fleet instances. The following instance
 	// types are available:
-	//
-	// * stream.standard.small
-	//
-	// * stream.standard.medium
-	//
-	// *
-	// stream.standard.large
-	//
-	// * stream.compute.large
-	//
-	// * stream.compute.xlarge
-	//
-	// *
-	// stream.compute.2xlarge
-	//
-	// * stream.compute.4xlarge
-	//
-	// * stream.compute.8xlarge
-	//
-	// *
-	// stream.memory.large
-	//
-	// * stream.memory.xlarge
-	//
-	// * stream.memory.2xlarge
-	//
-	// *
-	// stream.memory.4xlarge
-	//
-	// * stream.memory.8xlarge
-	//
-	// * stream.memory.z1d.large
-	//
-	// *
-	// stream.memory.z1d.xlarge
-	//
-	// * stream.memory.z1d.2xlarge
-	//
-	// *
-	// stream.memory.z1d.3xlarge
-	//
-	// * stream.memory.z1d.6xlarge
-	//
-	// *
-	// stream.memory.z1d.12xlarge
-	//
-	// * stream.graphics-design.large
-	//
-	// *
-	// stream.graphics-design.xlarge
-	//
-	// * stream.graphics-design.2xlarge
-	//
-	// *
-	// stream.graphics-design.4xlarge
-	//
-	// * stream.graphics-desktop.2xlarge
-	//
-	// *
-	// stream.graphics.g4dn.xlarge
-	//
-	// * stream.graphics.g4dn.2xlarge
-	//
-	// *
-	// stream.graphics.g4dn.4xlarge
-	//
-	// * stream.graphics.g4dn.8xlarge
-	//
-	// *
-	// stream.graphics.g4dn.12xlarge
-	//
-	// * stream.graphics.g4dn.16xlarge
-	//
-	// *
-	// stream.graphics-pro.4xlarge
-	//
-	// * stream.graphics-pro.8xlarge
-	//
-	// *
-	// stream.graphics-pro.16xlarge
+	//   - stream.standard.small
+	//   - stream.standard.medium
+	//   - stream.standard.large
+	//   - stream.compute.large
+	//   - stream.compute.xlarge
+	//   - stream.compute.2xlarge
+	//   - stream.compute.4xlarge
+	//   - stream.compute.8xlarge
+	//   - stream.memory.large
+	//   - stream.memory.xlarge
+	//   - stream.memory.2xlarge
+	//   - stream.memory.4xlarge
+	//   - stream.memory.8xlarge
+	//   - stream.memory.z1d.large
+	//   - stream.memory.z1d.xlarge
+	//   - stream.memory.z1d.2xlarge
+	//   - stream.memory.z1d.3xlarge
+	//   - stream.memory.z1d.6xlarge
+	//   - stream.memory.z1d.12xlarge
+	//   - stream.graphics-design.large
+	//   - stream.graphics-design.xlarge
+	//   - stream.graphics-design.2xlarge
+	//   - stream.graphics-design.4xlarge
+	//   - stream.graphics-desktop.2xlarge
+	//   - stream.graphics.g4dn.xlarge
+	//   - stream.graphics.g4dn.2xlarge
+	//   - stream.graphics.g4dn.4xlarge
+	//   - stream.graphics.g4dn.8xlarge
+	//   - stream.graphics.g4dn.12xlarge
+	//   - stream.graphics.g4dn.16xlarge
+	//   - stream.graphics-pro.4xlarge
+	//   - stream.graphics-pro.8xlarge
+	//   - stream.graphics-pro.16xlarge
 	//
 	// This member is required.
 	InstanceType *string
@@ -502,8 +447,7 @@ type Fleet struct {
 	// session with temporary credentials. AppStream 2.0 retrieves the temporary
 	// credentials and creates the appstream_machine_role credential profile on the
 	// instance. For more information, see Using an IAM Role to Grant Permissions to
-	// Applications and Scripts Running on AppStream 2.0 Streaming Instances
-	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
+	// Applications and Scripts Running on AppStream 2.0 Streaming Instances (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	IamRoleArn *string
 
@@ -547,14 +491,14 @@ type Fleet struct {
 	// The platform of the fleet.
 	Platform PlatformType
 
-	// The S3 location of the session scripts configuration zip file. This only applies
-	// to Elastic fleets.
+	// The S3 location of the session scripts configuration zip file. This only
+	// applies to Elastic fleets.
 	SessionScriptS3Location *S3Location
 
-	// The AppStream 2.0 view that is displayed to your users when they stream from the
-	// fleet. When APP is specified, only the windows of applications opened by users
-	// display. When DESKTOP is specified, the standard desktop that is provided by the
-	// operating system displays. The default value is APP.
+	// The AppStream 2.0 view that is displayed to your users when they stream from
+	// the fleet. When APP is specified, only the windows of applications opened by
+	// users display. When DESKTOP is specified, the standard desktop that is provided
+	// by the operating system displays. The default value is APP .
 	StreamView StreamView
 
 	// The USB device filter strings associated with the fleet.
@@ -630,7 +574,7 @@ type Image struct {
 	PublicBaseImageReleasedDate *time.Time
 
 	// The image starts in the PENDING state. If image creation succeeds, the state is
-	// AVAILABLE. If image creation fails, the state is FAILED.
+	// AVAILABLE . If image creation fails, the state is FAILED .
 	State ImageState
 
 	// The reason why the last state change occurred.
@@ -655,8 +599,8 @@ type ImageBuilder struct {
 	// endpoints.
 	AccessEndpoints []AccessEndpoint
 
-	// The version of the AppStream 2.0 agent that is currently being used by the image
-	// builder.
+	// The version of the AppStream 2.0 agent that is currently being used by the
+	// image builder.
 	AppstreamAgentVersion *string
 
 	// The ARN for the image builder.
@@ -684,8 +628,7 @@ type ImageBuilder struct {
 	// session with temporary credentials. AppStream 2.0 retrieves the temporary
 	// credentials and creates the appstream_machine_role credential profile on the
 	// instance. For more information, see Using an IAM Role to Grant Permissions to
-	// Applications and Scripts Running on AppStream 2.0 Streaming Instances
-	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
+	// Applications and Scripts Running on AppStream 2.0 Streaming Instances (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	IamRoleArn *string
 
@@ -697,86 +640,39 @@ type ImageBuilder struct {
 
 	// The instance type for the image builder. The following instance types are
 	// available:
-	//
-	// * stream.standard.small
-	//
-	// * stream.standard.medium
-	//
-	// *
-	// stream.standard.large
-	//
-	// * stream.compute.large
-	//
-	// * stream.compute.xlarge
-	//
-	// *
-	// stream.compute.2xlarge
-	//
-	// * stream.compute.4xlarge
-	//
-	// * stream.compute.8xlarge
-	//
-	// *
-	// stream.memory.large
-	//
-	// * stream.memory.xlarge
-	//
-	// * stream.memory.2xlarge
-	//
-	// *
-	// stream.memory.4xlarge
-	//
-	// * stream.memory.8xlarge
-	//
-	// * stream.memory.z1d.large
-	//
-	// *
-	// stream.memory.z1d.xlarge
-	//
-	// * stream.memory.z1d.2xlarge
-	//
-	// *
-	// stream.memory.z1d.3xlarge
-	//
-	// * stream.memory.z1d.6xlarge
-	//
-	// *
-	// stream.memory.z1d.12xlarge
-	//
-	// * stream.graphics-design.large
-	//
-	// *
-	// stream.graphics-design.xlarge
-	//
-	// * stream.graphics-design.2xlarge
-	//
-	// *
-	// stream.graphics-design.4xlarge
-	//
-	// * stream.graphics-desktop.2xlarge
-	//
-	// *
-	// stream.graphics.g4dn.xlarge
-	//
-	// * stream.graphics.g4dn.2xlarge
-	//
-	// *
-	// stream.graphics.g4dn.4xlarge
-	//
-	// * stream.graphics.g4dn.8xlarge
-	//
-	// *
-	// stream.graphics.g4dn.12xlarge
-	//
-	// * stream.graphics.g4dn.16xlarge
-	//
-	// *
-	// stream.graphics-pro.4xlarge
-	//
-	// * stream.graphics-pro.8xlarge
-	//
-	// *
-	// stream.graphics-pro.16xlarge
+	//   - stream.standard.small
+	//   - stream.standard.medium
+	//   - stream.standard.large
+	//   - stream.compute.large
+	//   - stream.compute.xlarge
+	//   - stream.compute.2xlarge
+	//   - stream.compute.4xlarge
+	//   - stream.compute.8xlarge
+	//   - stream.memory.large
+	//   - stream.memory.xlarge
+	//   - stream.memory.2xlarge
+	//   - stream.memory.4xlarge
+	//   - stream.memory.8xlarge
+	//   - stream.memory.z1d.large
+	//   - stream.memory.z1d.xlarge
+	//   - stream.memory.z1d.2xlarge
+	//   - stream.memory.z1d.3xlarge
+	//   - stream.memory.z1d.6xlarge
+	//   - stream.memory.z1d.12xlarge
+	//   - stream.graphics-design.large
+	//   - stream.graphics-design.xlarge
+	//   - stream.graphics-design.2xlarge
+	//   - stream.graphics-design.4xlarge
+	//   - stream.graphics-desktop.2xlarge
+	//   - stream.graphics.g4dn.xlarge
+	//   - stream.graphics.g4dn.2xlarge
+	//   - stream.graphics.g4dn.4xlarge
+	//   - stream.graphics.g4dn.8xlarge
+	//   - stream.graphics.g4dn.12xlarge
+	//   - stream.graphics.g4dn.16xlarge
+	//   - stream.graphics-pro.4xlarge
+	//   - stream.graphics-pro.8xlarge
+	//   - stream.graphics-pro.16xlarge
 	InstanceType *string
 
 	// Describes the network details of the fleet or image builder instance.
@@ -964,8 +860,8 @@ type Session struct {
 	// This member is required.
 	UserId *string
 
-	// The authentication method. The user is authenticated using a streaming URL (API)
-	// or SAML 2.0 federation (SAML).
+	// The authentication method. The user is authenticated using a streaming URL ( API
+	// ) or SAML 2.0 federation ( SAML ).
 	AuthenticationType AuthenticationType
 
 	// Specifies whether a user is connected to the streaming session.
@@ -974,7 +870,7 @@ type Session struct {
 	// The time when the streaming session is set to expire. This time is based on the
 	// MaxUserDurationinSeconds value, which determines the maximum length of time that
 	// a streaming session can run. A streaming session might end earlier than the time
-	// specified in SessionMaxExpirationTime, when the DisconnectTimeOutInSeconds
+	// specified in SessionMaxExpirationTime , when the DisconnectTimeOutInSeconds
 	// elapses or the user chooses to end his or her session. If the
 	// DisconnectTimeOutInSeconds elapses, or the user chooses to end his or her
 	// session, the streaming instance is terminated and the streaming session ends.
@@ -1014,8 +910,8 @@ type Stack struct {
 	// This member is required.
 	Name *string
 
-	// The list of virtual private cloud (VPC) interface endpoint objects. Users of the
-	// stack can connect to AppStream 2.0 only through the specified endpoints.
+	// The list of virtual private cloud (VPC) interface endpoint objects. Users of
+	// the stack can connect to AppStream 2.0 only through the specified endpoints.
 	AccessEndpoints []AccessEndpoint
 
 	// The persistent application settings for users of the stack.
@@ -1033,13 +929,13 @@ type Stack struct {
 	// The stack name to display.
 	DisplayName *string
 
-	// The domains where AppStream 2.0 streaming sessions can be embedded in an iframe.
-	// You must approve the domains that you want to host embedded AppStream 2.0
-	// streaming sessions.
+	// The domains where AppStream 2.0 streaming sessions can be embedded in an
+	// iframe. You must approve the domains that you want to host embedded AppStream
+	// 2.0 streaming sessions.
 	EmbedHostDomains []string
 
-	// The URL that users are redirected to after they click the Send Feedback link. If
-	// no URL is specified, no Send Feedback link is displayed.
+	// The URL that users are redirected to after they click the Send Feedback link.
+	// If no URL is specified, no Send Feedback link is displayed.
 	FeedbackURL *string
 
 	// The URL that users are redirected to after their streaming session ends.
@@ -1150,19 +1046,11 @@ type User struct {
 
 	// The status of the user in the user pool. The status can be one of the
 	// following:
-	//
-	// * UNCONFIRMED – The user is created but not confirmed.
-	//
-	// * CONFIRMED
-	// – The user is confirmed.
-	//
-	// * ARCHIVED – The user is no longer active.
-	//
-	// *
-	// COMPROMISED – The user is disabled because of a potential security threat.
-	//
-	// *
-	// UNKNOWN – The user status is not known.
+	//   - UNCONFIRMED – The user is created but not confirmed.
+	//   - CONFIRMED – The user is confirmed.
+	//   - ARCHIVED – The user is no longer active.
+	//   - COMPROMISED – The user is disabled because of a potential security threat.
+	//   - UNKNOWN – The user status is not known.
 	Status *string
 
 	// The email address of the user. Users' email addresses are case-sensitive.
@@ -1207,8 +1095,8 @@ type UserStackAssociation struct {
 	// This member is required.
 	UserName *string
 
-	// Specifies whether a welcome email is sent to a user after the user is created in
-	// the user pool.
+	// Specifies whether a welcome email is sent to a user after the user is created
+	// in the user pool.
 	SendEmailNotification bool
 
 	noSmithyDocumentSerde
@@ -1222,8 +1110,8 @@ type UserStackAssociationError struct {
 	// with or disassociated from a stack.
 	ErrorCode UserStackAssociationErrorCode
 
-	// The error message for the error that is returned when a user can’t be associated
-	// with or disassociated from a stack.
+	// The error message for the error that is returned when a user can’t be
+	// associated with or disassociated from a stack.
 	ErrorMessage *string
 
 	// Information about the user and associated stack.
@@ -1238,8 +1126,8 @@ type VpcConfig struct {
 	// The identifiers of the security groups for the fleet or image builder.
 	SecurityGroupIds []string
 
-	// The identifiers of the subnets to which a network interface is attached from the
-	// fleet instance or image builder instance. Fleet instances use one or more
+	// The identifiers of the subnets to which a network interface is attached from
+	// the fleet instance or image builder instance. Fleet instances use one or more
 	// subnets. Image builder instances use one subnet.
 	SubnetIds []string
 

@@ -18,17 +18,13 @@ import (
 // Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
 // Amazon Transcribe Medical and the transcription results are streamed to your
 // application. The following parameters are required:
+//   - language-code
+//   - media-encoding
+//   - sample-rate
 //
-// * language-code
-//
-// *
-// media-encoding
-//
-// * sample-rate
-//
-// For more information on streaming with Amazon
-// Transcribe Medical, see Transcribing streaming audio
-// (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
+// For more information on streaming with Amazon Transcribe Medical, see
+// Transcribing streaming audio (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html)
+// .
 func (c *Client) StartMedicalStreamTranscription(ctx context.Context, params *StartMedicalStreamTranscriptionInput, optFns ...func(*Options)) (*StartMedicalStreamTranscriptionOutput, error) {
 	if params == nil {
 		params = &StartMedicalStreamTranscriptionInput{}
@@ -47,24 +43,18 @@ func (c *Client) StartMedicalStreamTranscription(ctx context.Context, params *St
 type StartMedicalStreamTranscriptionInput struct {
 
 	// Specify the language code that represents the language spoken in your audio.
-	// Amazon Transcribe Medical only supports US English (en-US).
+	// Amazon Transcribe Medical only supports US English ( en-US ).
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
 
 	// Specify the encoding used for the input audio. Supported formats are:
-	//
-	// * FLAC
-	//
-	// *
-	// OPUS-encoded audio in an Ogg container
-	//
-	// * PCM (only signed 16-bit little-endian
-	// audio formats, which does not include WAV)
-	//
-	// For more information, see Media
-	// formats
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio).
+	//   - FLAC
+	//   - OPUS-encoded audio in an Ogg container
+	//   - PCM (only signed 16-bit little-endian audio formats, which does not include
+	//   WAV)
+	// For more information, see Media formats (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
+	// .
 	//
 	// This member is required.
 	MediaEncoding types.MediaEncoding
@@ -91,8 +81,8 @@ type StartMedicalStreamTranscriptionInput struct {
 	// Labels all personal health information (PHI) identified in your transcript.
 	// Content identification is performed at the segment level; PHI is flagged upon
 	// complete transcription of an audio segment. For more information, see
-	// Identifying personal health information (PHI) in a transcription
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html).
+	// Identifying personal health information (PHI) in a transcription (https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html)
+	// .
 	ContentIdentificationType types.MedicalContentIdentificationType
 
 	// Enables channel identification in multi-channel audio. Channel identification
@@ -100,8 +90,8 @@ type StartMedicalStreamTranscriptionInput struct {
 	// each channel into one transcript. If you have multi-channel audio and do not
 	// enable channel identification, your audio is transcribed in a continuous manner
 	// and your transcript is not separated by channel. For more information, see
-	// Transcribing multi-channel audio
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
+	// Transcribing multi-channel audio (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html)
+	// .
 	EnableChannelIdentification bool
 
 	// Specify the number of channels in your audio stream. Up to two channels are
@@ -113,10 +103,10 @@ type StartMedicalStreamTranscriptionInput struct {
 	// it in the response. You can use a session ID to retry a streaming session.
 	SessionId *string
 
-	// Enables speaker partitioning (diarization) in your transcription output. Speaker
-	// partitioning labels the speech from individual speakers in your media file. For
-	// more information, see Partitioning speakers (diarization)
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
+	// Enables speaker partitioning (diarization) in your transcription output.
+	// Speaker partitioning labels the speech from individual speakers in your media
+	// file. For more information, see Partitioning speakers (diarization) (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html)
+	// .
 	ShowSpeakerLabel bool
 
 	// Specify the name of the custom vocabulary that you want to use when processing
@@ -135,7 +125,7 @@ type StartMedicalStreamTranscriptionOutput struct {
 	EnableChannelIdentification bool
 
 	// Provides the language code that you specified in your request. This must be
-	// en-US.
+	// en-US .
 	LanguageCode types.LanguageCode
 
 	// Provides the media encoding you specified in your request.

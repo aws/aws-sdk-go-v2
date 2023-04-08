@@ -14,9 +14,9 @@ import (
 
 // Returns a list of Explainability exports created using the
 // CreateExplainabilityExport operation. This operation returns a summary for each
-// Explainability export. You can filter the list using an array of Filter objects.
-// To retrieve the complete set of properties for a particular Explainability
-// export, use the ARN with the DescribeExplainability operation.
+// Explainability export. You can filter the list using an array of Filter
+// objects. To retrieve the complete set of properties for a particular
+// Explainability export, use the ARN with the DescribeExplainability operation.
 func (c *Client) ListExplainabilityExports(ctx context.Context, params *ListExplainabilityExportsInput, optFns ...func(*Options)) (*ListExplainabilityExportsOutput, error) {
 	if params == nil {
 		params = &ListExplainabilityExportsInput{}
@@ -34,19 +34,14 @@ func (c *Client) ListExplainabilityExports(ctx context.Context, params *ListExpl
 
 type ListExplainabilityExportsInput struct {
 
-	// An array of filters. For each filter, provide a condition and a match statement.
-	// The condition is either IS or IS_NOT, which specifies whether to include or
-	// exclude resources that match the statement from the list. The match statement
-	// consists of a key and a value. Filter properties
-	//
-	// * Condition - The condition to
-	// apply. Valid values are IS and IS_NOT.
-	//
-	// * Key - The name of the parameter to
-	// filter on. Valid values are ResourceArn and Status.
-	//
-	// * Value - The value to
-	// match.
+	// An array of filters. For each filter, provide a condition and a match
+	// statement. The condition is either IS or IS_NOT , which specifies whether to
+	// include or exclude resources that match the statement from the list. The match
+	// statement consists of a key and a value. Filter properties
+	//   - Condition - The condition to apply. Valid values are IS and IS_NOT .
+	//   - Key - The name of the parameter to filter on. Valid values are ResourceArn
+	//   and Status .
+	//   - Value - The value to match.
 	Filters []types.Filter
 
 	// The number of items to return in the response.

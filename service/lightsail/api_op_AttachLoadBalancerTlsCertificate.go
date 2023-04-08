@@ -11,16 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS
-// is just an updated, more secure version of Secure Socket Layer (SSL). Once you
-// create and validate your certificate, you can attach it to your load balancer.
-// You can also use this API to rotate the certificates on your account. Use the
-// AttachLoadBalancerTlsCertificate action with the non-attached certificate, and
-// it will replace the existing one and become the attached certificate. The
-// AttachLoadBalancerTlsCertificate operation supports tag-based access control via
-// resource tags applied to the resource identified by load balancer name. For more
-// information, see the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// Attaches a Transport Layer Security (TLS) certificate to your load balancer.
+// TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once
+// you create and validate your certificate, you can attach it to your load
+// balancer. You can also use this API to rotate the certificates on your account.
+// Use the AttachLoadBalancerTlsCertificate action with the non-attached
+// certificate, and it will replace the existing one and become the attached
+// certificate. The AttachLoadBalancerTlsCertificate operation supports tag-based
+// access control via resource tags applied to the resource identified by load
+// balancer name . For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) AttachLoadBalancerTlsCertificate(ctx context.Context, params *AttachLoadBalancerTlsCertificateInput, optFns ...func(*Options)) (*AttachLoadBalancerTlsCertificateOutput, error) {
 	if params == nil {
 		params = &AttachLoadBalancerTlsCertificateInput{}

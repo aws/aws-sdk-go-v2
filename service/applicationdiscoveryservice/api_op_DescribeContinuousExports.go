@@ -39,7 +39,7 @@ type DescribeContinuousExportsInput struct {
 	// descriptions returned.
 	MaxResults *int32
 
-	// The token from the previous call to DescribeExportTasks.
+	// The token from the previous call to DescribeExportTasks .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,7 +50,7 @@ type DescribeContinuousExportsOutput struct {
 	// A list of continuous export descriptions.
 	Descriptions []types.ContinuousExportDescription
 
-	// The token from the previous call to DescribeExportTasks.
+	// The token from the previous call to DescribeExportTasks .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

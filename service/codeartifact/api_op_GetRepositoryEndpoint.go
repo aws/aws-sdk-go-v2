@@ -11,16 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the endpoint of a repository for a specific package format. A repository
-// has one endpoint for each package format:
-//
-// * maven
-//
-// * npm
-//
-// * nuget
-//
-// * pypi
+// Returns the endpoint of a repository for a specific package format. A
+// repository has one endpoint for each package format:
+//   - maven
+//   - npm
+//   - nuget
+//   - pypi
 func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositoryEndpointInput, optFns ...func(*Options)) (*GetRepositoryEndpointOutput, error) {
 	if params == nil {
 		params = &GetRepositoryEndpointInput{}

@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a rule for the specified Amazon Connect instance. Use the Rules Function
-// language
-// (https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html)
+// Updates a rule for the specified Amazon Connect instance. Use the Rules
+// Function language (https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html)
 // to code conditions for the rule.
 func (c *Client) UpdateRule(ctx context.Context, params *UpdateRuleInput, optFns ...func(*Options)) (*UpdateRuleOutput, error) {
 	if params == nil {
@@ -42,8 +41,7 @@ type UpdateRuleInput struct {
 	// This member is required.
 	Function *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

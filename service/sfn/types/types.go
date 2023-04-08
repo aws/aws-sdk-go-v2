@@ -33,21 +33,13 @@ type ActivityListItem struct {
 	CreationDate *time.Time
 
 	// The name of the activity. A name must not contain:
-	//
-	// * white space
-	//
-	// * brackets <
-	// > { } [ ]
-	//
-	// * wildcard characters ? *
-	//
-	// * special characters " # % \ ^ | ~ ` $ & ,
-	// ; : /
-	//
-	// * control characters (U+0000-001F, U+007F-009F)
-	//
-	// To enable logging with
-	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+	//   - white space
+	//   - brackets < > { } [ ]
+	//   - wildcard characters ? *
+	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//   - control characters ( U+0000-001F , U+007F-009F )
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
+	// a-z, - and _.
 	//
 	// This member is required.
 	Name *string
@@ -95,8 +87,8 @@ type ActivityScheduleFailedEventDetails struct {
 // Contains details about the start of an activity during an execution.
 type ActivityStartedEventDetails struct {
 
-	// The name of the worker that the task is assigned to. These names are provided by
-	// the workers when calling GetActivityTask.
+	// The name of the worker that the task is assigned to. These names are provided
+	// by the workers when calling GetActivityTask .
 	WorkerName *string
 
 	noSmithyDocumentSerde
@@ -192,21 +184,13 @@ type ExecutionListItem struct {
 	ExecutionArn *string
 
 	// The name of the execution. A name must not contain:
-	//
-	// * white space
-	//
-	// * brackets <
-	// > { } [ ]
-	//
-	// * wildcard characters ? *
-	//
-	// * special characters " # % \ ^ | ~ ` $ & ,
-	// ; : /
-	//
-	// * control characters (U+0000-001F, U+007F-009F)
-	//
-	// To enable logging with
-	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+	//   - white space
+	//   - brackets < > { } [ ]
+	//   - wildcard characters ? *
+	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//   - control characters ( U+0000-001F , U+007F-009F )
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
+	// a-z, - and _.
 	//
 	// This member is required.
 	Name *string
@@ -226,15 +210,15 @@ type ExecutionListItem struct {
 	// This member is required.
 	Status ExecutionStatus
 
-	// The total number of items processed in a child workflow execution. This field is
-	// returned only if mapRunArn was specified in the ListExecutions API action. If
-	// stateMachineArn was specified in ListExecutions, the itemCount field isn't
+	// The total number of items processed in a child workflow execution. This field
+	// is returned only if mapRunArn was specified in the ListExecutions API action.
+	// If stateMachineArn was specified in ListExecutions , the itemCount field isn't
 	// returned.
 	ItemCount *int32
 
 	// The Amazon Resource Name (ARN) of a Map Run. This field is returned only if
-	// mapRunArn was specified in the ListExecutions API action. If stateMachineArn was
-	// specified in ListExecutions, the mapRunArn isn't returned.
+	// mapRunArn was specified in the ListExecutions API action. If stateMachineArn
+	// was specified in ListExecutions , the mapRunArn isn't returned.
 	MapRunArn *string
 
 	// If the execution already ended, the date the execution stopped.
@@ -374,7 +358,7 @@ type HistoryEvent struct {
 	// Contains error and cause details about a Map Run that failed.
 	MapRunFailedEventDetails *MapRunFailedEventDetails
 
-	// Contains details, such as mapRunArn, and the start date and time of a Map Run.
+	// Contains details, such as mapRunArn , and the start date and time of a Map Run.
 	// mapRunArn is the Amazon Resource Name (ARN) of the Map Run that was started.
 	MapRunStartedEventDetails *MapRunStartedEventDetails
 
@@ -519,8 +503,7 @@ type LambdaFunctionTimedOutEventDetails struct {
 type LogDestination struct {
 
 	// An object describing a CloudWatch log group. For more information, see
-	// AWS::Logs::LogGroup
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
+	// AWS::Logs::LogGroup (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
 	// in the CloudFormation User Guide.
 	CloudWatchLogsLogGroup *CloudWatchLogsLogGroup
 
@@ -531,10 +514,10 @@ type LogDestination struct {
 type LoggingConfiguration struct {
 
 	// An array of objects that describes where your execution history events will be
-	// logged. Limited to size 1. Required, if your log level is not set to OFF.
+	// logged. Limited to size 1. Required, if your log level is not set to OFF .
 	Destinations []LogDestination
 
-	// Determines whether execution data is included in your log. When set to false,
+	// Determines whether execution data is included in your log. When set to false ,
 	// data is excluded.
 	IncludeExecutionData bool
 
@@ -560,9 +543,9 @@ type MapIterationEventDetails struct {
 // Run.
 type MapRunExecutionCounts struct {
 
-	// The total number of child workflow executions that were started by a Map Run and
-	// were running, but were either stopped by the user or by Step Functions because
-	// the Map Run failed.
+	// The total number of child workflow executions that were started by a Map Run
+	// and were running, but were either stopped by the user or by Step Functions
+	// because the Map Run failed.
 	//
 	// This member is required.
 	Aborted int64
@@ -580,27 +563,26 @@ type MapRunExecutionCounts struct {
 	Pending int64
 
 	// Returns the count of child workflow executions whose results were written by
-	// ResultWriter. For more information, see ResultWriter
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html)
+	// ResultWriter . For more information, see ResultWriter (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html)
 	// in the Step Functions Developer Guide.
 	//
 	// This member is required.
 	ResultsWritten int64
 
-	// The total number of child workflow executions that were started by a Map Run and
-	// are currently in-progress.
+	// The total number of child workflow executions that were started by a Map Run
+	// and are currently in-progress.
 	//
 	// This member is required.
 	Running int64
 
-	// The total number of child workflow executions that were started by a Map Run and
-	// have completed successfully.
+	// The total number of child workflow executions that were started by a Map Run
+	// and have completed successfully.
 	//
 	// This member is required.
 	Succeeded int64
 
-	// The total number of child workflow executions that were started by a Map Run and
-	// have timed out.
+	// The total number of child workflow executions that were started by a Map Run
+	// and have timed out.
 	//
 	// This member is required.
 	TimedOut int64
@@ -648,9 +630,8 @@ type MapRunItemCounts struct {
 	// This member is required.
 	Pending int64
 
-	// Returns the count of items whose results were written by ResultWriter. For more
-	// information, see ResultWriter
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html)
+	// Returns the count of items whose results were written by ResultWriter . For more
+	// information, see ResultWriter (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html)
 	// in the Step Functions Developer Guide.
 	//
 	// This member is required.
@@ -668,14 +649,14 @@ type MapRunItemCounts struct {
 	// This member is required.
 	Succeeded int64
 
-	// The total number of items processed in child workflow executions that have timed
-	// out.
+	// The total number of items processed in child workflow executions that have
+	// timed out.
 	//
 	// This member is required.
 	TimedOut int64
 
-	// The total number of items processed in all the child workflow executions started
-	// by a Map Run.
+	// The total number of items processed in all the child workflow executions
+	// started by a Map Run.
 	//
 	// This member is required.
 	Total int64
@@ -753,27 +734,19 @@ type StateEnteredEventDetails struct {
 type StateExitedEventDetails struct {
 
 	// The name of the state. A name must not contain:
-	//
-	// * white space
-	//
-	// * brackets < > {
-	// } [ ]
-	//
-	// * wildcard characters ? *
-	//
-	// * special characters " # % \ ^ | ~ ` $ & , ; :
-	// /
-	//
-	// * control characters (U+0000-001F, U+007F-009F)
-	//
-	// To enable logging with
-	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+	//   - white space
+	//   - brackets < > { } [ ]
+	//   - wildcard characters ? *
+	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//   - control characters ( U+0000-001F , U+007F-009F )
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
+	// a-z, - and _.
 	//
 	// This member is required.
 	Name *string
 
-	// The JSON output data of the state. Length constraints apply to the payload size,
-	// and are expressed as bytes in UTF-8 encoding.
+	// The JSON output data of the state. Length constraints apply to the payload
+	// size, and are expressed as bytes in UTF-8 encoding.
 	Output *string
 
 	// Contains details about the output of an execution history event.
@@ -791,22 +764,13 @@ type StateMachineListItem struct {
 	CreationDate *time.Time
 
 	// The name of the state machine. A name must not contain:
-	//
-	// * white space
-	//
-	// *
-	// brackets < > { } [ ]
-	//
-	// * wildcard characters ? *
-	//
-	// * special characters " # % \ ^
-	// | ~ ` $ & , ; : /
-	//
-	// * control characters (U+0000-001F, U+007F-009F)
-	//
-	// To enable
-	// logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and
-	// _.
+	//   - white space
+	//   - brackets < > { } [ ]
+	//   - wildcard characters ? *
+	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//   - control characters ( U+0000-001F , U+007F-009F )
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
+	// a-z, - and _.
 	//
 	// This member is required.
 	Name *string
@@ -826,13 +790,11 @@ type StateMachineListItem struct {
 
 // Tags are key-value pairs that can be associated with Step Functions state
 // machines and activities. An array of key-value pairs. For more information, see
-// Using Cost Allocation Tags
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the Amazon Web Services Billing and Cost Management User Guide, and
-// Controlling Access Using IAM Tags
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html). Tags
-// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
-// = + - @.
+// Controlling Access Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html)
+// . Tags may only contain Unicode letters, digits, white space, or these symbols:
+// _ . : / = + - @ .
 type Tag struct {
 
 	// The key of a tag.
@@ -1046,7 +1008,7 @@ type TaskTimedOutEventDetails struct {
 // false
 type TracingConfiguration struct {
 
-	// When set to true, X-Ray tracing is enabled.
+	// When set to true , X-Ray tracing is enabled.
 	Enabled bool
 
 	noSmithyDocumentSerde

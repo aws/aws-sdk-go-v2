@@ -55,8 +55,8 @@ type ListPricingPlansAssociatedWithPricingRuleOutput struct {
 	// The pagination token to be used on subsequent calls.
 	NextToken *string
 
-	// The list containing pricing plans that are associated with the requested pricing
-	// rule.
+	// The list containing pricing plans that are associated with the requested
+	// pricing rule.
 	PricingPlanArns []string
 
 	// The pricing rule Amazon Resource Name (ARN) for which associations will be

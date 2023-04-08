@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a Lambda function definition, including its creation
-// time and latest version.
+// Retrieves information about a Lambda function definition, including its
+// creation time and latest version.
 func (c *Client) GetFunctionDefinition(ctx context.Context, params *GetFunctionDefinitionInput, optFns ...func(*Options)) (*GetFunctionDefinitionOutput, error) {
 	if params == nil {
 		params = &GetFunctionDefinitionInput{}

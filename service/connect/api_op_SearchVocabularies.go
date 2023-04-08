@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for vocabularies within a specific Amazon Connect instance using State,
-// NameStartsWith, and LanguageCode.
+// Searches for vocabularies within a specific Amazon Connect instance using State
+// , NameStartsWith , and LanguageCode .
 func (c *Client) SearchVocabularies(ctx context.Context, params *SearchVocabulariesInput, optFns ...func(*Options)) (*SearchVocabulariesOutput, error) {
 	if params == nil {
 		params = &SearchVocabulariesInput{}
@@ -31,16 +31,14 @@ func (c *Client) SearchVocabularies(ctx context.Context, params *SearchVocabular
 
 type SearchVocabulariesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
 	// The language code of the vocabulary entries. For a list of languages and their
-	// corresponding language codes, see What is Amazon Transcribe?
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html)
+	// corresponding language codes, see What is Amazon Transcribe? (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html)
 	LanguageCode types.VocabularyLanguageCode
 
 	// The maximum number of results to return per page.

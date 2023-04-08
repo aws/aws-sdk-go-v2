@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a branch from a repository, unless that branch is the default branch for
-// the repository.
+// Deletes a branch from a repository, unless that branch is the default branch
+// for the repository.
 func (c *Client) DeleteBranch(ctx context.Context, params *DeleteBranchInput, optFns ...func(*Options)) (*DeleteBranchOutput, error) {
 	if params == nil {
 		params = &DeleteBranchInput{}
@@ -47,8 +47,8 @@ type DeleteBranchInput struct {
 // Represents the output of a delete branch operation.
 type DeleteBranchOutput struct {
 
-	// Information about the branch deleted by the operation, including the branch name
-	// and the commit ID that was the tip of the branch.
+	// Information about the branch deleted by the operation, including the branch
+	// name and the commit ID that was the tip of the branch.
 	DeletedBranch *types.BranchInfo
 
 	// Metadata pertaining to the operation's result.

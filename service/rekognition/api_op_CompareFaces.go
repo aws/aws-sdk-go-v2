@@ -40,10 +40,10 @@ import (
 // box of the face and confidence value. The QualityFilter input parameter allows
 // you to filter out detected faces that don’t meet a required quality bar. The
 // quality bar is based on a variety of common use cases. Use QualityFilter to set
-// the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter
-// detected faces, specify NONE. The default value is NONE. If the image doesn't
-// contain Exif metadata, CompareFaces returns orientation information for the
-// source and target images. Use these values to display the images with the
+// the quality bar by specifying LOW , MEDIUM , or HIGH . If you do not want to
+// filter detected faces, specify NONE . The default value is NONE . If the image
+// doesn't contain Exif metadata, CompareFaces returns orientation information for
+// the source and target images. Use these values to display the images with the
 // correct image orientation. If no faces are detected in the source or target
 // images, CompareFaces returns an InvalidParameterException error. This is a
 // stateless API operation. That is, data returned by this operation doesn't
@@ -76,29 +76,29 @@ type CompareFacesInput struct {
 	// This member is required.
 	SourceImage *types.Image
 
-	// The target image as base64-encoded bytes or an S3 object. If you use the AWS CLI
-	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
-	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
-	// need to base64-encode image bytes passed using the Bytes field. For more
+	// The target image as base64-encoded bytes or an S3 object. If you use the AWS
+	// CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is
+	// not supported. If you are using an AWS SDK to call Amazon Rekognition, you might
+	// not need to base64-encode image bytes passed using the Bytes field. For more
 	// information, see Images in the Amazon Rekognition developer guide.
 	//
 	// This member is required.
 	TargetImage *types.Image
 
-	// A filter that specifies a quality bar for how much filtering is done to identify
-	// faces. Filtered faces aren't compared. If you specify AUTO, Amazon Rekognition
-	// chooses the quality bar. If you specify LOW, MEDIUM, or HIGH, filtering removes
-	// all faces that don’t meet the chosen quality bar. The quality bar is based on a
-	// variety of common use cases. Low-quality detections can occur for a number of
-	// reasons. Some examples are an object that's misidentified as a face, a face
-	// that's too blurry, or a face with a pose that's too extreme to use. If you
-	// specify NONE, no filtering is performed. The default value is NONE. To use
-	// quality filtering, the collection you are using must be associated with version
-	// 3 of the face model or higher.
+	// A filter that specifies a quality bar for how much filtering is done to
+	// identify faces. Filtered faces aren't compared. If you specify AUTO , Amazon
+	// Rekognition chooses the quality bar. If you specify LOW , MEDIUM , or HIGH ,
+	// filtering removes all faces that don’t meet the chosen quality bar. The quality
+	// bar is based on a variety of common use cases. Low-quality detections can occur
+	// for a number of reasons. Some examples are an object that's misidentified as a
+	// face, a face that's too blurry, or a face with a pose that's too extreme to use.
+	// If you specify NONE , no filtering is performed. The default value is NONE . To
+	// use quality filtering, the collection you are using must be associated with
+	// version 3 of the face model or higher.
 	QualityFilter types.QualityFilter
 
-	// The minimum level of confidence in the face matches that a match must meet to be
-	// included in the FaceMatches array.
+	// The minimum level of confidence in the face matches that a match must meet to
+	// be included in the FaceMatches array.
 	SimilarityThreshold *float32
 
 	noSmithyDocumentSerde
@@ -115,8 +115,8 @@ type CompareFacesOutput struct {
 	// The face in the source image that was used for comparison.
 	SourceImageFace *types.ComparedSourceImageFace
 
-	// The value of SourceImageOrientationCorrection is always null. If the input image
-	// is in .jpeg format, it might contain exchangeable image file format (Exif)
+	// The value of SourceImageOrientationCorrection is always null. If the input
+	// image is in .jpeg format, it might contain exchangeable image file format (Exif)
 	// metadata that includes the image's orientation. Amazon Rekognition uses this
 	// orientation information to perform image correction. The bounding box
 	// coordinates are translated to represent object locations after the orientation
@@ -128,8 +128,8 @@ type CompareFacesOutput struct {
 	// rotated.
 	SourceImageOrientationCorrection types.OrientationCorrection
 
-	// The value of TargetImageOrientationCorrection is always null. If the input image
-	// is in .jpeg format, it might contain exchangeable image file format (Exif)
+	// The value of TargetImageOrientationCorrection is always null. If the input
+	// image is in .jpeg format, it might contain exchangeable image file format (Exif)
 	// metadata that includes the image's orientation. Amazon Rekognition uses this
 	// orientation information to perform image correction. The bounding box
 	// coordinates are translated to represent object locations after the orientation

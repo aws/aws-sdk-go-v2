@@ -38,10 +38,8 @@ type ListPortfolioAccessInput struct {
 	PortfolioId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The ID of an organization node the portfolio is shared with. All children of
@@ -136,8 +134,8 @@ func (c *Client) addOperationListPortfolioAccessMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListPortfolioAccessAPIClient is a client that implements the ListPortfolioAccess
-// operation.
+// ListPortfolioAccessAPIClient is a client that implements the
+// ListPortfolioAccess operation.
 type ListPortfolioAccessAPIClient interface {
 	ListPortfolioAccess(context.Context, *ListPortfolioAccessInput, ...func(*Options)) (*ListPortfolioAccessOutput, error)
 }

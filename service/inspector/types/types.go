@@ -7,13 +7,13 @@ import (
 	"time"
 )
 
-// Used in the exception error that is thrown if you start an assessment run for an
-// assessment target that includes an EC2 instance that is already participating in
-// another started assessment run.
+// Used in the exception error that is thrown if you start an assessment run for
+// an assessment target that includes an EC2 instance that is already participating
+// in another started assessment run.
 type AgentAlreadyRunningAssessment struct {
 
-	// ID of the agent that is running on an EC2 instance that is already participating
-	// in another started assessment run.
+	// ID of the agent that is running on an EC2 instance that is already
+	// participating in another started assessment run.
 	//
 	// This member is required.
 	AgentId *string
@@ -101,8 +101,8 @@ type AssessmentRun struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// A Boolean value (true or false) that specifies whether the process of collecting
-	// data from the agents is completed.
+	// A Boolean value (true or false) that specifies whether the process of
+	// collecting data from the agents is completed.
 	//
 	// This member is required.
 	DataCollected *bool
@@ -311,8 +311,8 @@ type AssessmentTarget struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The ARN that specifies the resource group that is associated with the assessment
-	// target.
+	// The ARN that specifies the resource group that is associated with the
+	// assessment target.
 	ResourceGroupArn *string
 
 	noSmithyDocumentSerde
@@ -338,8 +338,8 @@ type AssessmentTemplate struct {
 	// This member is required.
 	Arn *string
 
-	// The number of existing assessment runs associated with this assessment template.
-	// This value can be zero or a positive integer.
+	// The number of existing assessment runs associated with this assessment
+	// template. This value can be zero or a positive integer.
 	//
 	// This member is required.
 	AssessmentRunCount *int32
@@ -376,8 +376,8 @@ type AssessmentTemplate struct {
 	// This member is required.
 	UserAttributesForFindings []Attribute
 
-	// The Amazon Resource Name (ARN) of the most recent assessment run associated with
-	// this assessment template. This value exists only when the value of
+	// The Amazon Resource Name (ARN) of the most recent assessment run associated
+	// with this assessment template. This value exists only when the value of
 	// assessmentRunCount is greaterpa than zero.
 	LastAssessmentRunArn *string
 
@@ -397,8 +397,8 @@ type AssessmentTemplateFilter struct {
 	// the assessmentTemplateName property of the AssessmentTemplate data type.
 	NamePattern *string
 
-	// For a record to match a filter, the values that are specified for this data type
-	// property must be contained in the list of values of the rulesPackageArns
+	// For a record to match a filter, the values that are specified for this data
+	// type property must be contained in the list of values of the rulesPackageArns
 	// property of the AssessmentTemplate data type.
 	RulesPackageArns []string
 
@@ -440,8 +440,8 @@ type AssetAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// This data type is used as a request parameter in the AddAttributesToFindings and
-// CreateAssessmentTemplate actions.
+// This data type is used as a request parameter in the AddAttributesToFindings
+// and CreateAssessmentTemplate actions.
 type Attribute struct {
 
 	// The attribute key.
@@ -752,9 +752,9 @@ type PrivateIp struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a resource group. The resource group defines a set of
-// tags that, when queried, identify the AWS resources that make up the assessment
-// target. This data type is used as the response element in the
+// Contains information about a resource group. The resource group defines a set
+// of tags that, when queried, identify the AWS resources that make up the
+// assessment target. This data type is used as the response element in the
 // DescribeResourceGroups action.
 type ResourceGroup struct {
 
@@ -768,8 +768,8 @@ type ResourceGroup struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The tags (key and value pairs) of the resource group. This data type property is
-	// used in the CreateResourceGroup action.
+	// The tags (key and value pairs) of the resource group. This data type property
+	// is used in the CreateResourceGroup action.
 	//
 	// This member is required.
 	Tags []ResourceGroupTag
@@ -833,8 +833,9 @@ type Scope struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a security group associated with a network interface.
-// This data type is used as one of the elements of the NetworkInterface data type.
+// Contains information about a security group associated with a network
+// interface. This data type is used as one of the elements of the NetworkInterface
+// data type.
 type SecurityGroup struct {
 
 	// The ID of the security group.

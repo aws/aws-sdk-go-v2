@@ -30,8 +30,7 @@ func (c *Client) GetAnalyzedResource(ctx context.Context, params *GetAnalyzedRes
 // Retrieves an analyzed resource.
 type GetAnalyzedResourceInput struct {
 
-	// The ARN of the analyzer
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
+	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
 	// to retrieve information from.
 	//
 	// This member is required.

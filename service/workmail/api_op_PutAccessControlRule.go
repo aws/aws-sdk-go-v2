@@ -52,8 +52,8 @@ type PutAccessControlRuleInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// Access protocol actions to include in the rule. Valid values include ActiveSync,
-	// AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+	// Access protocol actions to include in the rule. Valid values include ActiveSync
+	// , AutoDiscover , EWS , IMAP , SMTP , WindowsOutlook , and WebMail .
 	Actions []string
 
 	// Impersonation role IDs to include in the rule.
@@ -63,7 +63,7 @@ type PutAccessControlRuleInput struct {
 	IpRanges []string
 
 	// Access protocol actions to exclude from the rule. Valid values include
-	// ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+	// ActiveSync , AutoDiscover , EWS , IMAP , SMTP , WindowsOutlook , and WebMail .
 	NotActions []string
 
 	// Impersonation role IDs to exclude from the rule.

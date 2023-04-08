@@ -13,35 +13,24 @@ import (
 
 // Creates an Amazon Forecast predictor. Amazon Forecast creates predictors with
 // AutoPredictor, which involves applying the optimal combination of algorithms to
-// each time series in your datasets. You can use CreateAutoPredictor to create new
-// predictors or upgrade/retrain existing predictors. Creating new predictors The
-// following parameters are required when creating a new predictor:
+// each time series in your datasets. You can use CreateAutoPredictor to create
+// new predictors or upgrade/retrain existing predictors. Creating new predictors
+// The following parameters are required when creating a new predictor:
+//   - PredictorName - A unique name for the predictor.
+//   - DatasetGroupArn - The ARN of the dataset group used to train the predictor.
+//   - ForecastFrequency - The granularity of your forecasts (hourly, daily,
+//     weekly, etc).
+//   - ForecastHorizon - The number of time-steps that the model predicts. The
+//     forecast horizon is also called the prediction length.
 //
-// *
-// PredictorName - A unique name for the predictor.
+// When creating a new predictor, do not specify a value for ReferencePredictorArn
+// . Upgrading and retraining predictors The following parameters are required when
+// retraining or upgrading a predictor:
+//   - PredictorName - A unique name for the predictor.
+//   - ReferencePredictorArn - The ARN of the predictor to retrain or upgrade.
 //
-// * DatasetGroupArn - The ARN of
-// the dataset group used to train the predictor.
-//
-// * ForecastFrequency - The
-// granularity of your forecasts (hourly, daily, weekly, etc).
-//
-// * ForecastHorizon -
-// The number of time-steps that the model predicts. The forecast horizon is also
-// called the prediction length.
-//
-// When creating a new predictor, do not specify a
-// value for ReferencePredictorArn. Upgrading and retraining predictors The
-// following parameters are required when retraining or upgrading a predictor:
-//
-// *
-// PredictorName - A unique name for the predictor.
-//
-// * ReferencePredictorArn - The
-// ARN of the predictor to retrain or upgrade.
-//
-// When upgrading or retraining a
-// predictor, only specify values for the ReferencePredictorArn and PredictorName.
+// When upgrading or retraining a predictor, only specify values for the
+// ReferencePredictorArn and PredictorName .
 func (c *Client) CreateAutoPredictor(ctx context.Context, params *CreateAutoPredictorInput, optFns ...func(*Options)) (*CreateAutoPredictorOutput, error) {
 	if params == nil {
 		params = &CreateAutoPredictorInput{}
@@ -88,25 +77,17 @@ type CreateAutoPredictorInput struct {
 	// That means, for example, you cannot specify a frequency of 60 minutes, because
 	// that is equivalent to 1 hour. The valid values for each frequency are the
 	// following:
-	//
-	// * Minute - 1-59
-	//
-	// * Hour - 1-23
-	//
-	// * Day - 1-6
-	//
-	// * Week - 1-4
-	//
-	// * Month -
-	// 1-11
-	//
-	// * Year - 1
-	//
-	// Thus, if you want every other week forecasts, specify "2W".
-	// Or, if you want quarterly forecasts, you specify "3M". The frequency must be
-	// greater than or equal to the TARGET_TIME_SERIES dataset frequency. When a
-	// RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the
-	// RELATED_TIME_SERIES dataset frequency.
+	//   - Minute - 1-59
+	//   - Hour - 1-23
+	//   - Day - 1-6
+	//   - Week - 1-4
+	//   - Month - 1-11
+	//   - Year - 1
+	// Thus, if you want every other week forecasts, specify "2W". Or, if you want
+	// quarterly forecasts, you specify "3M". The frequency must be greater than or
+	// equal to the TARGET_TIME_SERIES dataset frequency. When a RELATED_TIME_SERIES
+	// dataset is provided, the frequency must be equal to the RELATED_TIME_SERIES
+	// dataset frequency.
 	ForecastFrequency *string
 
 	// The number of time-steps that the model predicts. The forecast horizon is also
@@ -121,62 +102,52 @@ type CreateAutoPredictorInput struct {
 
 	// The forecast types used to train a predictor. You can specify up to five
 	// forecast types. Forecast types can be quantiles from 0.01 to 0.99, by increments
-	// of 0.01 or higher. You can also specify the mean forecast with mean.
+	// of 0.01 or higher. You can also specify the mean forecast with mean .
 	ForecastTypes []string
 
 	// The configuration details for predictor monitoring. Provide a name for the
 	// monitor resource to enable predictor monitoring. Predictor monitoring allows you
 	// to see how your predictor's performance changes over time. For more information,
-	// see Predictor Monitoring
-	// (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html).
+	// see Predictor Monitoring (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html)
+	// .
 	MonitorConfig *types.MonitorConfig
 
 	// The accuracy metric used to optimize the predictor.
 	OptimizationMetric types.OptimizationMetric
 
-	// The ARN of the predictor to retrain or upgrade. This parameter is only used when
-	// retraining or upgrading a predictor. When creating a new predictor, do not
+	// The ARN of the predictor to retrain or upgrade. This parameter is only used
+	// when retraining or upgrading a predictor. When creating a new predictor, do not
 	// specify a value for this parameter. When upgrading or retraining a predictor,
-	// only specify values for the ReferencePredictorArn and PredictorName. The value
+	// only specify values for the ReferencePredictorArn and PredictorName . The value
 	// for PredictorName must be a unique predictor name.
 	ReferencePredictorArn *string
 
 	// Optional metadata to help you categorize and organize your predictors. Each tag
 	// consists of a key and an optional value, both of which you define. Tag keys and
 	// values are case sensitive. The following restrictions apply to tags:
-	//
-	// * For each
-	// resource, each tag key must be unique and each tag key must have one value.
-	//
-	// *
-	// Maximum number of tags per resource: 50.
-	//
-	// * Maximum key length: 128 Unicode
-	// characters in UTF-8.
-	//
-	// * Maximum value length: 256 Unicode characters in
-	// UTF-8.
-	//
-	// * Accepted characters: all letters and numbers, spaces representable in
-	// UTF-8, and + - = . _ : / @. If your tagging schema is used across other services
-	// and resources, the character restrictions of those services also apply.
-	//
-	// * Key
-	// prefixes cannot include any upper or lowercase combination of aws: or AWS:.
-	// Values can have this prefix. If a tag value has aws as its prefix but the key
-	// does not, Forecast considers it to be a user tag and will count against the
-	// limit of 50 tags. Tags with only the key prefix of aws do not count against your
-	// tags per resource limit. You cannot edit or delete tag keys with this prefix.
+	//   - For each resource, each tag key must be unique and each tag key must have
+	//   one value.
+	//   - Maximum number of tags per resource: 50.
+	//   - Maximum key length: 128 Unicode characters in UTF-8.
+	//   - Maximum value length: 256 Unicode characters in UTF-8.
+	//   - Accepted characters: all letters and numbers, spaces representable in
+	//   UTF-8, and + - = . _ : / @. If your tagging schema is used across other services
+	//   and resources, the character restrictions of those services also apply.
+	//   - Key prefixes cannot include any upper or lowercase combination of aws: or
+	//   AWS: . Values can have this prefix. If a tag value has aws as its prefix but
+	//   the key does not, Forecast considers it to be a user tag and will count against
+	//   the limit of 50 tags. Tags with only the key prefix of aws do not count
+	//   against your tags per resource limit. You cannot edit or delete tag keys with
+	//   this prefix.
 	Tags []types.Tag
 
 	// The time boundary Forecast uses to align and aggregate any data that doesn't
 	// align with your forecast frequency. Provide the unit of time and the time
 	// boundary as a key value pair. For more information on specifying a time
-	// boundary, see Specifying a Time Boundary
-	// (https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary).
-	// If you don't provide a time boundary, Forecast uses a set of Default Time
-	// Boundaries
-	// (https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#default-time-boundaries).
+	// boundary, see Specifying a Time Boundary (https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary)
+	// . If you don't provide a time boundary, Forecast uses a set of Default Time
+	// Boundaries (https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#default-time-boundaries)
+	// .
 	TimeAlignmentBoundary *types.TimeAlignmentBoundary
 
 	noSmithyDocumentSerde

@@ -37,32 +37,32 @@ type ValidateE911AddressInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The address city, such as Portland.
+	// The address city, such as Portland .
 	//
 	// This member is required.
 	City *string
 
-	// The address country, such as US.
+	// The address country, such as US .
 	//
 	// This member is required.
 	Country *string
 
-	// The address postal code, such as 04352.
+	// The address postal code, such as 04352 .
 	//
 	// This member is required.
 	PostalCode *string
 
-	// The address state, such as ME.
+	// The address state, such as ME .
 	//
 	// This member is required.
 	State *string
 
-	// The address street information, such as 8th Avenue.
+	// The address street information, such as 8th Avenue .
 	//
 	// This member is required.
 	StreetInfo *string
 
-	// The address street number, such as 200 or 2121.
+	// The address street number, such as 200 or 2121 .
 	//
 	// This member is required.
 	StreetNumber *string

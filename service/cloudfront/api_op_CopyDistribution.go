@@ -43,18 +43,18 @@ type CopyDistributionInput struct {
 	CallerReference *string
 
 	// The identifier of the primary distribution whose configuration you are copying.
-	// To get a distribution ID, use ListDistributions.
+	// To get a distribution ID, use ListDistributions .
 	//
 	// This member is required.
 	PrimaryDistributionId *string
 
 	// The version identifier of the primary distribution whose configuration you are
 	// copying. This is the ETag value returned in the response to GetDistribution and
-	// GetDistributionConfig.
+	// GetDistributionConfig .
 	IfMatch *string
 
 	// The type of distribution that your primary distribution will be copied to. The
-	// only valid value is True, indicating that you are copying to a staging
+	// only valid value is True , indicating that you are copying to a staging
 	// distribution.
 	Staging *bool
 
@@ -63,8 +63,8 @@ type CopyDistributionInput struct {
 
 type CopyDistributionOutput struct {
 
-	// A distribution tells CloudFront where you want content to be delivered from, and
-	// the details about how to track and manage content delivery.
+	// A distribution tells CloudFront where you want content to be delivered from,
+	// and the details about how to track and manage content delivery.
 	Distribution *types.Distribution
 
 	// The version identifier for the current version of the staging distribution.

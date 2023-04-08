@@ -56,8 +56,8 @@ type StartEventsDetectionJobInput struct {
 	// This member is required.
 	TargetEventTypes []string
 
-	// An unique identifier for the request. If you don't set the client request token,
-	// Amazon Comprehend generates one.
+	// An unique identifier for the request. If you don't set the client request
+	// token, Amazon Comprehend generates one.
 	ClientRequestToken *string
 
 	// The identifier of the events detection job.
@@ -77,13 +77,13 @@ type StartEventsDetectionJobOutput struct {
 	// The Amazon Resource Name (ARN) of the events detection job. It is a unique,
 	// fully qualified identifier for the job. It includes the Amazon Web Services
 	// account, Amazon Web Services Region, and the job ID. The format of the ARN is as
-	// follows: arn::comprehend:::events-detection-job/ The following is an example job
-	// ARN:
+	// follows: arn::comprehend:::events-detection-job/ The following is an example
+	// job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
-	// An unique identifier for the request. If you don't set the client request token,
-	// Amazon Comprehend generates one.
+	// An unique identifier for the request. If you don't set the client request
+	// token, Amazon Comprehend generates one.
 	JobId *string
 
 	// The status of the events detection job.

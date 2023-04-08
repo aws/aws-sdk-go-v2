@@ -28,7 +28,7 @@ func (c *Client) DeleteDevEnvironment(ctx context.Context, params *DeleteDevEnvi
 type DeleteDevEnvironmentInput struct {
 
 	// The system-generated unique ID of the Dev Environment you want to delete. To
-	// retrieve a list of Dev Environment IDs, use ListDevEnvironments.
+	// retrieve a list of Dev Environment IDs, use ListDevEnvironments .
 	//
 	// This member is required.
 	Id *string

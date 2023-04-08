@@ -36,12 +36,12 @@ type PutPermissionsBoundaryToPermissionSetInput struct {
 	// This member is required.
 	InstanceArn *string
 
-	// The ARN of the PermissionSet.
+	// The ARN of the PermissionSet .
 	//
 	// This member is required.
 	PermissionSetArn *string
 
-	// The permissions boundary that you want to attach to a PermissionSet.
+	// The permissions boundary that you want to attach to a PermissionSet .
 	//
 	// This member is required.
 	PermissionsBoundary *types.PermissionsBoundary

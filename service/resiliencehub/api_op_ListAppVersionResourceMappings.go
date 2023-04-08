@@ -32,11 +32,10 @@ func (c *Client) ListAppVersionResourceMappings(ctx context.Context, params *Lis
 
 type ListAppVersionResourceMappingsInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -47,8 +46,8 @@ type ListAppVersionResourceMappingsInput struct {
 	AppVersion *string
 
 	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// Null, or the token from a previous call to get the next set of results.
@@ -62,8 +61,8 @@ type ListAppVersionResourceMappingsOutput struct {
 	// Mappings used to map logical resources from the template to physical resources.
 	// You can use the mapping type CFN_STACK if the application template uses a
 	// logical stack name. Or you can map individual resources by using the mapping
-	// type RESOURCE. We recommend using the mapping type CFN_STACK if the application
-	// is backed by a CloudFormation stack.
+	// type RESOURCE . We recommend using the mapping type CFN_STACK if the
+	// application is backed by a CloudFormation stack.
 	//
 	// This member is required.
 	ResourceMappings []types.ResourceMapping
@@ -152,8 +151,8 @@ var _ ListAppVersionResourceMappingsAPIClient = (*Client)(nil)
 // ListAppVersionResourceMappings
 type ListAppVersionResourceMappingsPaginatorOptions struct {
 	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

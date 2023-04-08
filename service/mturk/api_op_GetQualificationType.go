@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The GetQualificationTypeoperation retrieves information about a Qualification
+// The GetQualificationType operation retrieves information about a Qualification
 // type using its ID.
 func (c *Client) GetQualificationType(ctx context.Context, params *GetQualificationTypeInput, optFns ...func(*Options)) (*GetQualificationTypeOutput, error) {
 	if params == nil {

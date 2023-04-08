@@ -53,7 +53,7 @@ type GetRecordsInput struct {
 type GetRecordsOutput struct {
 
 	// The next position in the shard from which to start sequentially reading stream
-	// records. If set to null, the shard has been closed and the requested iterator
+	// records. If set to null , the shard has been closed and the requested iterator
 	// will not return any more data.
 	NextShardIterator *string
 

@@ -45,8 +45,8 @@ type NotifyProvisionProductEngineWorkflowResultInput struct {
 	// This member is required.
 	Status types.EngineWorkflowStatus
 
-	// The encrypted contents of the provisioning engine execution payload that Service
-	// Catalog sends after the Terraform product provisioning workflow starts.
+	// The encrypted contents of the provisioning engine execution payload that
+	// Service Catalog sends after the Terraform product provisioning workflow starts.
 	//
 	// This member is required.
 	WorkflowToken *string

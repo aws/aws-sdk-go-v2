@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe a specific log pattern from a LogPatternSet.
+// Describe a specific log pattern from a LogPatternSet .
 func (c *Client) DescribeLogPattern(ctx context.Context, params *DescribeLogPatternInput, optFns ...func(*Options)) (*DescribeLogPatternOutput, error) {
 	if params == nil {
 		params = &DescribeLogPatternInput{}

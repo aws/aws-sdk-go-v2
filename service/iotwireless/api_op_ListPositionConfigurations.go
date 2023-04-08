@@ -14,8 +14,7 @@ import (
 
 // List position configurations for a given resource, such as positioning solvers.
 // This action is no longer supported. Calls to retrieve position information
-// should use the GetResourcePosition
-// (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html)
+// should use the GetResourcePosition (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html)
 // API operation instead.
 //
 // Deprecated: This operation is no longer supported.

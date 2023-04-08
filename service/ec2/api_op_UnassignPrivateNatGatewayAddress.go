@@ -13,8 +13,7 @@ import (
 
 // Unassigns secondary private IPv4 addresses from a private NAT gateway. You
 // cannot unassign your primary private IP. For more information, see Edit
-// secondary IP address associations
-// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary)
+// secondary IP address associations (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary)
 // in the Amazon Virtual Private Cloud User Guide. While unassigning is in
 // progress, you cannot assign/unassign additional IP addresses while the
 // connections are being drained. You are, however, allowed to delete the NAT
@@ -52,12 +51,12 @@ type UnassignPrivateNatGatewayAddressInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The maximum amount of time to wait (in seconds) before forcibly releasing the IP
-	// addresses if connections are still in progress. Default value is 350 seconds.
+	// The maximum amount of time to wait (in seconds) before forcibly releasing the
+	// IP addresses if connections are still in progress. Default value is 350 seconds.
 	MaxDrainDurationSeconds *int32
 
 	noSmithyDocumentSerde

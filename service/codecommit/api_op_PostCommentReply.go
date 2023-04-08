@@ -37,7 +37,7 @@ type PostCommentReplyInput struct {
 	Content *string
 
 	// The system-generated ID of the comment to which you want to reply. To get this
-	// ID, use GetCommentsForComparedCommit or GetCommentsForPullRequest.
+	// ID, use GetCommentsForComparedCommit or GetCommentsForPullRequest .
 	//
 	// This member is required.
 	InReplyTo *string

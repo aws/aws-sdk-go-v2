@@ -27,8 +27,8 @@ type ReportDefinition struct {
 	// This member is required.
 	Format ReportFormat
 
-	// The name of the report that you want to create. The name must be unique, is case
-	// sensitive, and can't include spaces.
+	// The name of the report that you want to create. The name must be unique, is
+	// case sensitive, and can't include spaces.
 	//
 	// This member is required.
 	ReportName *string
@@ -61,9 +61,9 @@ type ReportDefinition struct {
 	// the billing view service public APIs.
 	BillingViewArn *string
 
-	// Whether you want Amazon Web Services to update your reports after they have been
-	// finalized if Amazon Web Services detects charges related to previous months.
-	// These charges can include refunds, credits, or support fees.
+	// Whether you want Amazon Web Services to update your reports after they have
+	// been finalized if Amazon Web Services detects charges related to previous
+	// months. These charges can include refunds, credits, or support fees.
 	RefreshClosedReports *bool
 
 	// Whether you want Amazon Web Services to overwrite the previous version of each

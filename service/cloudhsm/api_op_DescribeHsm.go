@@ -12,16 +12,13 @@ import (
 )
 
 // This is documentation for AWS CloudHSM Classic. For more information, see AWS
-// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/), the AWS
-// CloudHSM Classic User Guide
-// (https://docs.aws.amazon.com/cloudhsm/classic/userguide/), and the AWS CloudHSM
-// Classic API Reference
-// (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/). For information
-// about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide
-// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/), and the AWS CloudHSM
-// API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
-// Retrieves information about an HSM. You can identify the HSM by its ARN or its
+// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/) , the AWS
+// CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/)
+// , and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/)
+// . For information about the current version of AWS CloudHSM, see AWS CloudHSM (http://aws.amazon.com/cloudhsm/)
+// , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
+// , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
+// . Retrieves information about an HSM. You can identify the HSM by its ARN or its
 // serial number.
 func (c *Client) DescribeHsm(ctx context.Context, params *DescribeHsmInput, optFns ...func(*Options)) (*DescribeHsmOutput, error) {
 	if params == nil {
@@ -45,8 +42,8 @@ type DescribeHsmInput struct {
 	// specified.
 	HsmArn *string
 
-	// The serial number of the HSM. Either the HsmArn or the HsmSerialNumber parameter
-	// must be specified.
+	// The serial number of the HSM. Either the HsmArn or the HsmSerialNumber
+	// parameter must be specified.
 	HsmSerialNumber *string
 
 	noSmithyDocumentSerde
@@ -110,12 +107,8 @@ type DescribeHsmOutput struct {
 	SubscriptionStartDate *string
 
 	// Specifies the type of subscription for the HSM.
-	//
-	// * PRODUCTION - The HSM is being
-	// used in a production environment.
-	//
-	// * TRIAL - The HSM is being used in a product
-	// trial.
+	//   - PRODUCTION - The HSM is being used in a production environment.
+	//   - TRIAL - The HSM is being used in a product trial.
 	SubscriptionType types.SubscriptionType
 
 	// The name of the HSM vendor.

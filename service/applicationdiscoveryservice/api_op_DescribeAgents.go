@@ -31,9 +31,9 @@ func (c *Client) DescribeAgents(ctx context.Context, params *DescribeAgentsInput
 
 type DescribeAgentsInput struct {
 
-	// The agent or the Connector IDs for which you want information. If you specify no
-	// IDs, the system returns information about all agents/Connectors associated with
-	// your Amazon Web Services user account.
+	// The agent or the Connector IDs for which you want information. If you specify
+	// no IDs, the system returns information about all agents/Connectors associated
+	// with your Amazon Web Services user account.
 	AgentIds []string
 
 	// You can filter the request using various logical operators and a key-value
@@ -62,9 +62,9 @@ type DescribeAgentsOutput struct {
 	// and the version number of each agent/Connector.
 	AgentsInfo []types.AgentInfo
 
-	// Token to retrieve the next set of results. For example, if you specified 100 IDs
-	// for DescribeAgentsRequest$agentIds but set DescribeAgentsRequest$maxResults to
-	// 10, you received a set of 10 results along with this token. Use this token in
+	// Token to retrieve the next set of results. For example, if you specified 100
+	// IDs for DescribeAgentsRequest$agentIds but set DescribeAgentsRequest$maxResults
+	// to 10, you received a set of 10 results along with this token. Use this token in
 	// the next query to retrieve the next set of 10.
 	NextToken *string
 

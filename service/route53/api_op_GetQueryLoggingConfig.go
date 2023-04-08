@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a specified configuration for DNS query logging. For more
-// information about DNS query logs, see CreateQueryLoggingConfig
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html)
-// and Logging DNS Queries
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html).
+// Gets information about a specified configuration for DNS query logging. For
+// more information about DNS query logs, see CreateQueryLoggingConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html)
+// and Logging DNS Queries (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html)
+// .
 func (c *Client) GetQueryLoggingConfig(ctx context.Context, params *GetQueryLoggingConfigInput, optFns ...func(*Options)) (*GetQueryLoggingConfigOutput, error) {
 	if params == nil {
 		params = &GetQueryLoggingConfigInput{}
@@ -45,8 +44,7 @@ type GetQueryLoggingConfigInput struct {
 type GetQueryLoggingConfigOutput struct {
 
 	// A complex type that contains information about the query logging configuration
-	// that you specified in a GetQueryLoggingConfig
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetQueryLoggingConfig.html)
+	// that you specified in a GetQueryLoggingConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetQueryLoggingConfig.html)
 	// request.
 	//
 	// This member is required.

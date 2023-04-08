@@ -13,24 +13,22 @@ import (
 )
 
 // After you generate a group or policy report using the
-// GenerateServiceLastAccessedDetails operation, you can use the JobId parameter in
-// GetServiceLastAccessedDetailsWithEntities. This operation retrieves the status
-// of your report job and a list of entities that could have used group or policy
-// permissions to access the specified service.
+// GenerateServiceLastAccessedDetails operation, you can use the JobId parameter
+// in GetServiceLastAccessedDetailsWithEntities . This operation retrieves the
+// status of your report job and a list of entities that could have used group or
+// policy permissions to access the specified service.
+//   - Group – For a group report, this operation returns a list of users in the
+//     group that could have used the group’s policies in an attempt to access the
+//     service.
+//   - Policy – For a policy report, this operation returns a list of entities
+//     (users or roles) that could have used the policy in an attempt to access the
+//     service.
 //
-// * Group – For a group report, this
-// operation returns a list of users in the group that could have used the group’s
-// policies in an attempt to access the service.
-//
-// * Policy – For a policy report,
-// this operation returns a list of entities (users or roles) that could have used
-// the policy in an attempt to access the service.
-//
-// You can also use this operation
-// for user or role reports to retrieve details about those entities. If the
-// operation fails, the GetServiceLastAccessedDetailsWithEntities operation returns
-// the reason that it failed. By default, the list of associated entities is sorted
-// by date, with the most recent access listed first.
+// You can also use this operation for user or role reports to retrieve details
+// about those entities. If the operation fails, the
+// GetServiceLastAccessedDetailsWithEntities operation returns the reason that it
+// failed. By default, the list of associated entities is sorted by date, with the
+// most recent access listed first.
 func (c *Client) GetServiceLastAccessedDetailsWithEntities(ctx context.Context, params *GetServiceLastAccessedDetailsWithEntitiesInput, optFns ...func(*Options)) (*GetServiceLastAccessedDetailsWithEntitiesOutput, error) {
 	if params == nil {
 		params = &GetServiceLastAccessedDetailsWithEntitiesInput{}
@@ -57,13 +55,11 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 	// The service namespace for an Amazon Web Services service. Provide the service
 	// namespace to learn when the IAM entity last attempted to access the specified
 	// service. To learn the service namespace for a service, see Actions, resources,
-	// and condition keys for Amazon Web Services services
-	// (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
+	// and condition keys for Amazon Web Services services (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 	// in the IAM User Guide. Choose the name of the service to view details for that
 	// service. In the first paragraph, find the service prefix. For example, (service
-	// prefix: a4b). For more information about service namespaces, see Amazon Web
-	// Services service namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
+	// prefix: a4b) . For more information about service namespaces, see Amazon Web
+	// Services service namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
@@ -77,10 +73,10 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
@@ -89,23 +85,22 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 
 type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 
-	// An EntityDetailsList object that contains details about when an IAM entity (user
-	// or role) used group or policy permissions in an attempt to access the specified
-	// Amazon Web Services service.
+	// An EntityDetailsList object that contains details about when an IAM entity
+	// (user or role) used group or policy permissions in an attempt to access the
+	// specified Amazon Web Services service.
 	//
 	// This member is required.
 	EntityDetailsList []types.EntityDetails
 
-	// The date and time, in ISO 8601 date-time format
-	// (http://www.iso.org/iso/iso8601), when the generated report job was completed or
-	// failed. This field is null if the job is still in progress, as indicated by a
-	// job status value of IN_PROGRESS.
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601)
+	// , when the generated report job was completed or failed. This field is null if
+	// the job is still in progress, as indicated by a job status value of IN_PROGRESS .
 	//
 	// This member is required.
 	JobCompletionDate *time.Time
 
-	// The date and time, in ISO 8601 date-time format
-	// (http://www.iso.org/iso/iso8601), when the report job was created.
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601)
+	// , when the report job was created.
 	//
 	// This member is required.
 	JobCreationDate *time.Time
@@ -122,11 +117,11 @@ type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
 	// the MaxItems number of results even when there are more results available. We
-	// recommend that you check IsTruncated after every call to ensure that you receive
-	// all your results.
+	// recommend that you check IsTruncated after every call to ensure that you
+	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated is true, this element is present and contains the value to use
+	// When IsTruncated is true , this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 

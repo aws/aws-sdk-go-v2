@@ -114,9 +114,9 @@ const (
 	ServiceNetworkServiceAssociationStatusDeleteFailed ServiceNetworkServiceAssociationStatus = "DELETE_FAILED"
 )
 
-// Values returns all known values for ServiceNetworkServiceAssociationStatus. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for ServiceNetworkServiceAssociationStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ServiceNetworkServiceAssociationStatus) Values() []ServiceNetworkServiceAssociationStatus {
 	return []ServiceNetworkServiceAssociationStatus{
@@ -309,9 +309,9 @@ const (
 	TargetStatusUnused TargetStatus = "UNUSED"
 )
 
-// Values returns all known values for TargetStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TargetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TargetStatus) Values() []TargetStatus {
 	return []TargetStatus{
 		"DRAINING",

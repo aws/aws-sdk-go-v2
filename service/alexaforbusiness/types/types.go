@@ -41,7 +41,7 @@ type AddressBookData struct {
 // supported format is MP3. To convert your MP3 audio files to an Alexa-friendly,
 // required codec version (MPEG version 2) and bit rate (48 kbps), you might use
 // converter software. One option for this is a command-line tool, FFmpeg. For more
-// information, see FFmpeg (https://www.ffmpeg.org/). The following command
+// information, see FFmpeg (https://www.ffmpeg.org/) . The following command
 // converts the provided to an MP3 file that is played in the announcement: ffmpeg
 // -i -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000
 type Audio struct {
@@ -52,9 +52,9 @@ type Audio struct {
 	Locale Locale
 
 	// The location of the audio file. Currently, S3 URLs are supported. Only S3
-	// locations comprised of safe characters are valid. For more information, see Safe
-	// Characters
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters).
+	// locations comprised of safe characters are valid. For more information, see
+	// Safe Characters (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters)
+	// .
 	//
 	// This member is required.
 	Location *string
@@ -211,8 +211,8 @@ type Contact struct {
 	// The last name of the contact, used to call the contact on the device.
 	LastName *string
 
-	// The phone number of the contact. The phone number type defaults to WORK. You can
-	// either specify PhoneNumber or PhoneNumbers. We recommend that you use
+	// The phone number of the contact. The phone number type defaults to WORK. You
+	// can either specify PhoneNumber or PhoneNumbers. We recommend that you use
 	// PhoneNumbers, which lets you specify the phone number type and multiple numbers.
 	PhoneNumber *string
 
@@ -240,8 +240,8 @@ type ContactData struct {
 	// The last name of the contact, used to call the contact on the device.
 	LastName *string
 
-	// The phone number of the contact. The phone number type defaults to WORK. You can
-	// specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers,
+	// The phone number of the contact. The phone number type defaults to WORK. You
+	// can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers,
 	// which lets you specify the phone number type and multiple numbers.
 	PhoneNumber *string
 
@@ -298,8 +298,8 @@ type CreateEndOfMeetingReminder struct {
 // the room for the configured duration if the room is available.
 type CreateInstantBooking struct {
 
-	// Duration between 15 and 240 minutes at increments of 15 that determines how long
-	// to book an available room when a meeting is started with Alexa.
+	// Duration between 15 and 240 minutes at increments of 15 that determines how
+	// long to book an available room when a meeting is started with Alexa.
 	//
 	// This member is required.
 	DurationInMinutes *int32
@@ -625,8 +625,8 @@ type GatewaySummary struct {
 // for the configured duration if the room is available.
 type InstantBooking struct {
 
-	// Duration between 15 and 240 minutes at increments of 15 that determines how long
-	// to book an available room when a meeting is started with Alexa.
+	// Duration between 15 and 240 minutes at increments of 15 that determines how
+	// long to book an available room when a meeting is started with Alexa.
 	DurationInMinutes *int32
 
 	// Whether instant booking is enabled or not.
@@ -677,15 +677,10 @@ type MeetingRoomConfiguration struct {
 
 // The values that indicate whether a pin is always required (YES), never required
 // (NO), or OPTIONAL.
-//
-// * If YES, Alexa will always ask for a meeting pin.
-//
-// * If NO,
-// Alexa will never ask for a meeting pin.
-//
-// * If OPTIONAL, Alexa will ask if you
-// have a meeting pin and if the customer responds with yes, it will ask for the
-// meeting pin.
+//   - If YES, Alexa will always ask for a meeting pin.
+//   - If NO, Alexa will never ask for a meeting pin.
+//   - If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer
+//     responds with yes, it will ask for the meeting pin.
 type MeetingSetting struct {
 
 	// The values that indicate whether the pin is always required.
@@ -1091,8 +1086,8 @@ type SkillsStoreSkill struct {
 // The summary of skills.
 type SkillSummary struct {
 
-	// Whether the skill is enabled under the user's account, or if it requires linking
-	// to be used.
+	// Whether the skill is enabled under the user's account, or if it requires
+	// linking to be used.
 	EnablementType EnablementType
 
 	// The ARN of the skill summary.
@@ -1110,8 +1105,8 @@ type SkillSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A smart home appliance that can connect to a central system. Any domestic device
-// can be a smart appliance.
+// A smart home appliance that can connect to a central system. Any domestic
+// device can be a smart appliance.
 type SmartHomeAppliance struct {
 
 	// The description of the smart home appliance.
@@ -1142,8 +1137,8 @@ type Sort struct {
 	noSmithyDocumentSerde
 }
 
-// The SSML message. For more information, see SSML Reference
-// (https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html).
+// The SSML message. For more information, see SSML Reference (https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html)
+// .
 type Ssml struct {
 
 	// The locale of the SSML message. Currently, en-US is supported.
@@ -1216,8 +1211,8 @@ type UpdateEndOfMeetingReminder struct {
 // it is free when a user joins a meeting with Alexa.
 type UpdateInstantBooking struct {
 
-	// Duration between 15 and 240 minutes at increments of 15 that determines how long
-	// to book an available room when a meeting is started with Alexa.
+	// Duration between 15 and 240 minutes at increments of 15 that determines how
+	// long to book an available room when a meeting is started with Alexa.
 	DurationInMinutes *int32
 
 	// Whether instant booking is enabled or not.

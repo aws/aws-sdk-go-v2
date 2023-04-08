@@ -8,8 +8,8 @@ import (
 )
 
 // The event was already logged. PutLogEvents actions are now always accepted and
-// never return DataAlreadyAcceptedException regardless of whether a given batch of
-// log events has already been accepted.
+// never return DataAlreadyAcceptedException regardless of whether a given batch
+// of log events has already been accepted.
 type DataAlreadyAcceptedException struct {
 	Message *string
 
@@ -147,11 +147,10 @@ func (e *LimitExceededException) ErrorCode() string {
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The query string is not valid. Details about this error are displayed in a
-// QueryCompileError object. For more information, see QueryCompileError
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_QueryCompileError.html).
-// For more information about valid query syntax, see CloudWatch Logs Insights
-// Query Syntax
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
+// QueryCompileError object. For more information, see QueryCompileError (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_QueryCompileError.html)
+// . For more information about valid query syntax, see CloudWatch Logs Insights
+// Query Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)
+// .
 type MalformedQueryException struct {
 	Message *string
 

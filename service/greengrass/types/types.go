@@ -93,9 +93,9 @@ type ConnectivityInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a connector. Connectors run on the Greengrass core and contain
-// built-in integration with local infrastructure, device protocols, AWS, and other
-// cloud services.
+// Information about a connector. Connectors run on the Greengrass core and
+// contain built-in integration with local infrastructure, device protocols, AWS,
+// and other cloud services.
 type Connector struct {
 
 	// The ARN of the connector.
@@ -135,8 +135,8 @@ type Core struct {
 	// This member is required.
 	CertificateArn *string
 
-	// A descriptive or arbitrary ID for the core. This value must be unique within the
-	// core definition version. Max length is 128 characters with pattern
+	// A descriptive or arbitrary ID for the core. This value must be unique within
+	// the core definition version. Max length is 128 characters with pattern
 	// ''[a-zA-Z0-9:_-]+''.
 	//
 	// This member is required.
@@ -263,9 +263,9 @@ type ErrorDetail struct {
 // Information about a Lambda function.
 type Function struct {
 
-	// A descriptive or arbitrary ID for the function. This value must be unique within
-	// the function definition version. Max length is 128 characters with pattern
-	// ''[a-zA-Z0-9:_-]+''.
+	// A descriptive or arbitrary ID for the function. This value must be unique
+	// within the function definition version. Max length is 128 characters with
+	// pattern ''[a-zA-Z0-9:_-]+''.
 	//
 	// This member is required.
 	Id *string
@@ -282,8 +282,8 @@ type Function struct {
 // The configuration of the Lambda function.
 type FunctionConfiguration struct {
 
-	// The expected encoding type of the input payload for the function. The default is
-	// ''json''.
+	// The expected encoding type of the input payload for the function. The default
+	// is ''json''.
 	EncodingType EncodingType
 
 	// The environment configuration of the function.
@@ -521,8 +521,8 @@ type LocalVolumeResourceData struct {
 	// The absolute local path of the resource inside the Lambda environment.
 	DestinationPath *string
 
-	// Allows you to configure additional group privileges for the Lambda process. This
-	// field is optional.
+	// Allows you to configure additional group privileges for the Lambda process.
+	// This field is optional.
 	GroupOwnerSetting *GroupOwnerSetting
 
 	// The local absolute path of the volume resource on the host. The source path for
@@ -601,8 +601,8 @@ type Resource struct {
 // A policy used by the function to access a resource.
 type ResourceAccessPolicy struct {
 
-	// The ID of the resource. (This ID is assigned to the resource when you create the
-	// resource definiton.)
+	// The ID of the resource. (This ID is assigned to the resource when you create
+	// the resource definiton.)
 	//
 	// This member is required.
 	ResourceId *string
@@ -684,8 +684,8 @@ type S3MachineLearningModelResourceData struct {
 	// The owner setting for downloaded machine learning resources.
 	OwnerSetting *ResourceDownloadOwnerSetting
 
-	// The URI of the source model in an S3 bucket. The model package must be in tar.gz
-	// or .zip format.
+	// The URI of the source model in an S3 bucket. The model package must be in
+	// tar.gz or .zip format.
 	S3Uri *string
 
 	noSmithyDocumentSerde

@@ -14,8 +14,8 @@ import (
 
 // Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is
 // specified, the list will contain only the descriptions of the specified
-// DBSubnetGroup. For an overview of CIDR ranges, go to the Wikipedia Tutorial
-// (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
+// DBSubnetGroup. For an overview of CIDR ranges, go to the Wikipedia Tutorial (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+// .
 func (c *Client) DescribeDBSubnetGroups(ctx context.Context, params *DescribeDBSubnetGroupsInput, optFns ...func(*Options)) (*DescribeDBSubnetGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeDBSubnetGroupsInput{}
@@ -41,7 +41,7 @@ type DescribeDBSubnetGroupsInput struct {
 
 	// An optional pagination token provided by a previous DescribeDBSubnetGroups
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -60,7 +60,7 @@ type DescribeDBSubnetGroupsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

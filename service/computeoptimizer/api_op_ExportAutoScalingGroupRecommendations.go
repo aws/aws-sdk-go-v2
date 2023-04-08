@@ -15,8 +15,7 @@ import (
 // are exported in a comma-separated values (.csv) file, and its metadata in a
 // JavaScript Object Notation (JSON) (.json) file, to an existing Amazon Simple
 // Storage Service (Amazon S3) bucket that you specify. For more information, see
-// Exporting Recommendations
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html)
+// Exporting Recommendations (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html)
 // in the Compute Optimizer User Guide. You can have only one Auto Scaling group
 // export job in progress per Amazon Web Services Region.
 func (c *Client) ExportAutoScalingGroupRecommendations(ctx context.Context, params *ExportAutoScalingGroupRecommendationsInput, optFns ...func(*Options)) (*ExportAutoScalingGroupRecommendationsOutput, error) {
@@ -43,9 +42,8 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// the S3 bucket, ensure that it has the required permissions policy to allow
 	// Compute Optimizer to write the export file to it. If you plan to specify an
 	// object prefix when you create the export job, you must include the object prefix
-	// in the policy that you add to the S3 bucket. For more information, see Amazon S3
-	// Bucket Policy for Compute Optimizer
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
+	// in the policy that you add to the S3 bucket. For more information, see Amazon
+	// S3 Bucket Policy for Compute Optimizer (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
 	// in the Compute Optimizer User Guide.
 	//
 	// This member is required.
@@ -62,17 +60,16 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	AccountIds []string
 
 	// The recommendations data to include in the export file. For more information
-	// about the fields that can be exported, see Exported files
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files)
+	// about the fields that can be exported, see Exported files (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files)
 	// in the Compute Optimizer User Guide.
 	FieldsToExport []types.ExportableAutoScalingGroupField
 
 	// The format of the export file. The only export file format currently supported
-	// is Csv.
+	// is Csv .
 	FileFormat types.FileFormat
 
-	// An array of objects to specify a filter that exports a more specific set of Auto
-	// Scaling group recommendations.
+	// An array of objects to specify a filter that exports a more specific set of
+	// Auto Scaling group recommendations.
 	Filters []types.Filter
 
 	// Indicates whether to include recommendations for resources in all member
@@ -80,8 +77,7 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// organization. The member accounts must also be opted in to Compute Optimizer,
 	// and trusted access for Compute Optimizer must be enabled in the organization
 	// account. For more information, see Compute Optimizer and Amazon Web Services
-	// Organizations trusted access
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access)
+	// Organizations trusted access (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access)
 	// in the Compute Optimizer User Guide. Recommendations for member accounts of the
 	// organization are not included in the export file if this parameter is omitted.
 	// This parameter cannot be specified together with the account IDs parameter. The

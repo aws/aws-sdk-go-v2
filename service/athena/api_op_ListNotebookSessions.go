@@ -12,8 +12,8 @@ import (
 )
 
 // Lists, in descending order, the sessions that have been created in a notebook
-// that are in an active state like CREATING, CREATED, IDLE or BUSY. Newer sessions
-// are listed first; older sessions are listed later.
+// that are in an active state like CREATING , CREATED , IDLE or BUSY . Newer
+// sessions are listed first; older sessions are listed later.
 func (c *Client) ListNotebookSessions(ctx context.Context, params *ListNotebookSessionsInput, optFns ...func(*Options)) (*ListNotebookSessionsOutput, error) {
 	if params == nil {
 		params = &ListNotebookSessionsInput{}

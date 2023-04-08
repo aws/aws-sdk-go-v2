@@ -36,8 +36,8 @@ type ListCustomRoutingEndpointGroupsInput struct {
 	// This member is required.
 	ListenerArn *string
 
-	// The number of endpoint group objects that you want to return with this call. The
-	// default value is 10.
+	// The number of endpoint group objects that you want to return with this call.
+	// The default value is 10.
 	MaxResults *int32
 
 	// The token for the next set of results. You receive this token from a previous
@@ -137,8 +137,8 @@ var _ ListCustomRoutingEndpointGroupsAPIClient = (*Client)(nil)
 // ListCustomRoutingEndpointGroupsPaginatorOptions is the paginator options for
 // ListCustomRoutingEndpointGroups
 type ListCustomRoutingEndpointGroupsPaginatorOptions struct {
-	// The number of endpoint group objects that you want to return with this call. The
-	// default value is 10.
+	// The number of endpoint group objects that you want to return with this call.
+	// The default value is 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

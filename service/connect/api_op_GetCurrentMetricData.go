@@ -13,9 +13,8 @@ import (
 	"time"
 )
 
-// Gets the real-time metric data from the specified Amazon Connect instance. For a
-// description of each metric, see Real-time Metrics Definitions
-// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
+// Gets the real-time metric data from the specified Amazon Connect instance. For
+// a description of each metric, see Real-time Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMetricDataInput, optFns ...func(*Options)) (*GetCurrentMetricDataOutput, error) {
 	if params == nil {
@@ -36,85 +35,60 @@ type GetCurrentMetricDataInput struct {
 
 	// The metrics to retrieve. Specify the name and unit for each metric. The
 	// following metrics are available. For a description of all the metrics, see
-	// Real-time Metrics Definitions
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
+	// Real-time Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
 	// in the Amazon Connect Administrator Guide. AGENTS_AFTER_CONTACT_WORK Unit: COUNT
-	// Name in real-time metrics report: ACW
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time)
-	// AGENTS_AVAILABLE Unit: COUNT Name in real-time metrics report: Available
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time)
-	// AGENTS_ERROR Unit: COUNT Name in real-time metrics report: Error
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time)
+	// Name in real-time metrics report: ACW (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time)
+	// AGENTS_AVAILABLE Unit: COUNT Name in real-time metrics report: Available (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time)
+	// AGENTS_ERROR Unit: COUNT Name in real-time metrics report: Error (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time)
 	// AGENTS_NON_PRODUCTIVE Unit: COUNT Name in real-time metrics report: NPT
-	// (Non-Productive Time)
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time)
-	// AGENTS_ON_CALL Unit: COUNT Name in real-time metrics report: On contact
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time)
-	// AGENTS_ON_CONTACT Unit: COUNT Name in real-time metrics report: On contact
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time)
-	// AGENTS_ONLINE Unit: COUNT Name in real-time metrics report: Online
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time)
-	// AGENTS_STAFFED Unit: COUNT Name in real-time metrics report: Staffed
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time)
-	// CONTACTS_IN_QUEUE Unit: COUNT Name in real-time metrics report: In queue
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time)
-	// CONTACTS_SCHEDULED Unit: COUNT Name in real-time metrics report: Scheduled
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time)
+	// (Non-Productive Time) (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time)
+	// AGENTS_ON_CALL Unit: COUNT Name in real-time metrics report: On contact (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time)
+	// AGENTS_ON_CONTACT Unit: COUNT Name in real-time metrics report: On contact (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time)
+	// AGENTS_ONLINE Unit: COUNT Name in real-time metrics report: Online (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time)
+	// AGENTS_STAFFED Unit: COUNT Name in real-time metrics report: Staffed (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time)
+	// CONTACTS_IN_QUEUE Unit: COUNT Name in real-time metrics report: In queue (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time)
+	// CONTACTS_SCHEDULED Unit: COUNT Name in real-time metrics report: Scheduled (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time)
 	// OLDEST_CONTACT_AGE Unit: SECONDS When you use groupings, Unit says SECONDS and
 	// the Value is returned in SECONDS. When you do not use groupings, Unit says
 	// SECONDS but the Value is returned in MILLISECONDS. For example, if you get a
 	// response like this: { "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit":
 	// "SECONDS" }, "Value": 24113.0 } The actual OLDEST_CONTACT_AGE is 24 seconds.
-	// Name in real-time metrics report: Oldest
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time)
-	// SLOTS_ACTIVE Unit: COUNT Name in real-time metrics report: Active
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time)
-	// SLOTS_AVAILABLE Unit: COUNT Name in real-time metrics report: Availability
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time)
+	// Name in real-time metrics report: Oldest (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time)
+	// SLOTS_ACTIVE Unit: COUNT Name in real-time metrics report: Active (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time)
+	// SLOTS_AVAILABLE Unit: COUNT Name in real-time metrics report: Availability (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time)
 	//
 	// This member is required.
 	CurrentMetrics []types.CurrentMetric
 
 	// The filters to apply to returned metrics. You can filter up to the following
 	// limits:
-	//
-	// * Queues: 100
-	//
-	// * Routing profiles: 100
-	//
-	// * Channels: 3 (VOICE, CHAT, and
-	// TASK channels are supported.)
-	//
-	// Metric data is retrieved only for the resources
-	// associated with the queues or routing profiles, and by any channels included in
-	// the filter. (You cannot filter by both queue AND routing profile.) You can
-	// include both resource IDs and resource ARNs in the same request. Currently
-	// tagging is only supported on the resources that are passed in the filter.
+	//   - Queues: 100
+	//   - Routing profiles: 100
+	//   - Channels: 3 (VOICE, CHAT, and TASK channels are supported.)
+	// Metric data is retrieved only for the resources associated with the queues or
+	// routing profiles, and by any channels included in the filter. (You cannot filter
+	// by both queue AND routing profile.) You can include both resource IDs and
+	// resource ARNs in the same request. Currently tagging is only supported on the
+	// resources that are passed in the filter.
 	//
 	// This member is required.
 	Filters *types.Filters
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The grouping applied to the metrics returned. For example, when grouped by
-	// QUEUE, the metrics returned apply to each queue rather than aggregated for all
+	// The grouping applied to the metrics returned. For example, when grouped by QUEUE
+	// , the metrics returned apply to each queue rather than aggregated for all
 	// queues.
-	//
-	// * If you group by CHANNEL, you should include a Channels filter. VOICE,
-	// CHAT, and TASK channels are supported.
-	//
-	// * If you group by ROUTING_PROFILE, you
-	// must include either a queue or routing profile filter. In addition, a routing
-	// profile filter is required for metrics CONTACTS_SCHEDULED, CONTACTS_IN_QUEUE,
-	// and  OLDEST_CONTACT_AGE.
-	//
-	// * If no Grouping is included in the request, a summary
-	// of metrics is returned.
+	//   - If you group by CHANNEL , you should include a Channels filter. VOICE, CHAT,
+	//   and TASK channels are supported.
+	//   - If you group by ROUTING_PROFILE , you must include either a queue or routing
+	//   profile filter. In addition, a routing profile filter is required for metrics
+	//   CONTACTS_SCHEDULED , CONTACTS_IN_QUEUE , and OLDEST_CONTACT_AGE .
+	//   - If no Grouping is included in the request, a summary of metrics is returned.
 	Groupings []types.Grouping
 
 	// The maximum number of results to return per page.
@@ -128,11 +102,9 @@ type GetCurrentMetricDataInput struct {
 	NextToken *string
 
 	// The way to sort the resulting response based on metrics. You can enter one sort
-	// criteria. By default resources are sorted based on AGENTS_ONLINE, DESCENDING.
-	// The metric collection is sorted based on the input metrics. Note the
-	// following:
-	//
-	// * Sorting on SLOTS_ACTIVE and SLOTS_AVAILABLE is not supported.
+	// criteria. By default resources are sorted based on AGENTS_ONLINE , DESCENDING .
+	// The metric collection is sorted based on the input metrics. Note the following:
+	//   - Sorting on SLOTS_ACTIVE and SLOTS_AVAILABLE is not supported.
 	SortCriteria []types.CurrentMetricSortCriteria
 
 	noSmithyDocumentSerde

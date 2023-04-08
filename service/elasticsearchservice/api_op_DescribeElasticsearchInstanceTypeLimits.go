@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion.
-// When modifying existing Domain, specify the DomainName to know what Limits are
-// supported for modifying.
+// Describe Elasticsearch Limits for a given InstanceType and
+// ElasticsearchVersion. When modifying existing Domain, specify the DomainName to
+// know what Limits are supported for modifying.
 func (c *Client) DescribeElasticsearchInstanceTypeLimits(ctx context.Context, params *DescribeElasticsearchInstanceTypeLimitsInput, optFns ...func(*Options)) (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeElasticsearchInstanceTypeLimitsInput{}
@@ -58,15 +58,9 @@ type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 
 	// Map of Role of the Instance and Limits that are applicable. Role performed by
 	// given Instance in Elasticsearch can be one of the following:
-	//
-	// * data: If the
-	// given InstanceType is used as data node
-	//
-	// * master: If the given InstanceType is
-	// used as master node
-	//
-	// * ultra_warm: If the given InstanceType is used as warm
-	// node
+	//   - data: If the given InstanceType is used as data node
+	//   - master: If the given InstanceType is used as master node
+	//   - ultra_warm: If the given InstanceType is used as warm node
 	LimitsByRole map[string]types.Limits
 
 	// Metadata pertaining to the operation's result.

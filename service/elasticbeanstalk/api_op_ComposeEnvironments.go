@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create or update a group of environments that each run a separate component of a
-// single application. Takes a list of version labels that specify application
+// Create or update a group of environments that each run a separate component of
+// a single application. Takes a list of version labels that specify application
 // source bundles for each of the environments to create or update. The name of
 // each environment and other required information must be included in the source
-// bundles in an environment manifest named env.yaml. See Compose Environments
-// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html)
+// bundles in an environment manifest named env.yaml . See Compose Environments (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html)
 // for details.
 func (c *Client) ComposeEnvironments(ctx context.Context, params *ComposeEnvironmentsInput, optFns ...func(*Options)) (*ComposeEnvironmentsOutput, error) {
 	if params == nil {
@@ -41,15 +40,15 @@ type ComposeEnvironmentsInput struct {
 
 	// The name of the group to which the target environments belong. Specify a group
 	// name only if the environment name defined in each target environment's manifest
-	// ends with a + (plus) character. See Environment Manifest (env.yaml)
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html)
+	// ends with a + (plus) character. See Environment Manifest (env.yaml) (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html)
 	// for details.
 	GroupName *string
 
-	// A list of version labels, specifying one or more application source bundles that
-	// belong to the target application. Each source bundle must include an environment
-	// manifest that specifies the name of the environment and the name of the solution
-	// stack to use, and optionally can specify environment links to create.
+	// A list of version labels, specifying one or more application source bundles
+	// that belong to the target application. Each source bundle must include an
+	// environment manifest that specifies the name of the environment and the name of
+	// the solution stack to use, and optionally can specify environment links to
+	// create.
 	VersionLabels []string
 
 	noSmithyDocumentSerde

@@ -64,9 +64,9 @@ type GetIntegrationOutput struct {
 	// This member is required.
 	Uri *string
 
-	// Boolean that shows if the Flow that's associated with the Integration is created
-	// in Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in
-	// flowDefinition.
+	// Boolean that shows if the Flow that's associated with the Integration is
+	// created in Amazon Appflow, or with ObjectTypeName equals _unstructured via
+	// API/CLI in flowDefinition.
 	IsUnstructured *bool
 
 	// The name of the profile object type.
@@ -74,9 +74,9 @@ type GetIntegrationOutput struct {
 
 	// A map in which each key is an event type from an external application such as
 	// Segment or Shopify, and each value is an ObjectTypeName (template) used to
-	// ingest the event. It supports the following event types: SegmentIdentify,
-	// ShopifyCreateCustomers, ShopifyUpdateCustomers, ShopifyCreateDraftOrders,
-	// ShopifyUpdateDraftOrders, ShopifyCreateOrders, and ShopifyUpdatedOrders.
+	// ingest the event. It supports the following event types: SegmentIdentify ,
+	// ShopifyCreateCustomers , ShopifyUpdateCustomers , ShopifyCreateDraftOrders ,
+	// ShopifyUpdateDraftOrders , ShopifyCreateOrders , and ShopifyUpdatedOrders .
 	ObjectTypeNames map[string]string
 
 	// The tags used to organize, track, or control access for this resource.

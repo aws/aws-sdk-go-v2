@@ -56,8 +56,8 @@ type UpdateNetworkProfileInput struct {
 	// The name of the network profile about which you are returning information.
 	Name *string
 
-	// The type of network profile to return information about. Valid values are listed
-	// here.
+	// The type of network profile to return information about. Valid values are
+	// listed here.
 	Type types.NetworkProfileType
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.

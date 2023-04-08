@@ -35,8 +35,9 @@ func (c *Client) ListLocations(ctx context.Context, params *ListLocationsInput, 
 type ListLocationsInput struct {
 
 	// You can use API filters to narrow down the list of resources returned by
-	// ListLocations. For example, to retrieve all tasks on a specific source location,
-	// you can use ListLocations with filter name LocationType S3 and Operator Equals.
+	// ListLocations . For example, to retrieve all tasks on a specific source
+	// location, you can use ListLocations with filter name LocationType S3 and
+	// Operator Equals .
 	Filters []types.LocationFilter
 
 	// The maximum number of locations to return.

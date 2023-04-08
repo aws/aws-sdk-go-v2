@@ -138,9 +138,9 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The maximum number of resources of that type already exist. Ensure the resources
-// requested are within the boundaries of the service edition and your account
-// limits.
+// The maximum number of resources of that type already exist. Ensure the
+// resources requested are within the boundaries of the service edition and your
+// account limits.
 type ResourceLimitExceededException struct {
 	Message *string
 

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a child asset with the given parent asset through a hierarchy defined
-// in the parent asset's model. For more information, see Associating assets
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/add-associated-assets.html)
+// Associates a child asset with the given parent asset through a hierarchy
+// defined in the parent asset's model. For more information, see Associating
+// assets (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/add-associated-assets.html)
 // in the IoT SiteWise User Guide.
 func (c *Client) AssociateAssets(ctx context.Context, params *AssociateAssetsInput, optFns ...func(*Options)) (*AssociateAssetsOutput, error) {
 	if params == nil {
@@ -44,8 +44,7 @@ type AssociateAssetsInput struct {
 
 	// The ID of a hierarchy in the parent asset's model. Hierarchies allow different
 	// groupings of assets to be formed that all come from the same asset model. For
-	// more information, see Asset hierarchies
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
+	// more information, see Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.

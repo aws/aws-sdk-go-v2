@@ -33,8 +33,8 @@ type ListRulesInput struct {
 	// The resource type retained by the retention rule. Only retention rules that
 	// retain the specified resource type are listed. Currently, only Amazon EBS
 	// snapshots and EBS-backed AMIs are supported. To list retention rules that retain
-	// snapshots, specify EBS_SNAPSHOT. To list retention rules that retain EBS-backed
-	// AMIs, specify EC2_IMAGE.
+	// snapshots, specify EBS_SNAPSHOT . To list retention rules that retain EBS-backed
+	// AMIs, specify EC2_IMAGE .
 	//
 	// This member is required.
 	ResourceType types.ResourceType
@@ -50,8 +50,8 @@ type ListRulesInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// Information about the resource tags used to identify resources that are retained
-	// by the retention rule.
+	// Information about the resource tags used to identify resources that are
+	// retained by the retention rule.
 	ResourceTags []types.ResourceTag
 
 	noSmithyDocumentSerde

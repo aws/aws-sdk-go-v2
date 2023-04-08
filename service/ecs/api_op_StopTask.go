@@ -16,11 +16,10 @@ import (
 // containers running in the task. This results in a SIGTERM value and a default
 // 30-second timeout, after which the SIGKILL value is sent and the containers are
 // forcibly stopped. If the container handles the SIGTERM value gracefully and
-// exits within 30 seconds from receiving it, no SIGKILL value is sent. The default
-// 30-second timeout can be configured on the Amazon ECS container agent with the
-// ECS_CONTAINER_STOP_TIMEOUT variable. For more information, see Amazon ECS
-// Container Agent Configuration
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
+// exits within 30 seconds from receiving it, no SIGKILL value is sent. The
+// default 30-second timeout can be configured on the Amazon ECS container agent
+// with the ECS_CONTAINER_STOP_TIMEOUT variable. For more information, see Amazon
+// ECS Container Agent Configuration (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) StopTask(ctx context.Context, params *StopTaskInput, optFns ...func(*Options)) (*StopTaskOutput, error) {
 	if params == nil {

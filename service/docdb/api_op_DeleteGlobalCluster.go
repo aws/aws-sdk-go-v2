@@ -29,7 +29,7 @@ func (c *Client) DeleteGlobalCluster(ctx context.Context, params *DeleteGlobalCl
 	return out, nil
 }
 
-// Represents the input to DeleteGlobalCluster.
+// Represents the input to DeleteGlobalCluster .
 type DeleteGlobalClusterInput struct {
 
 	// The cluster identifier of the global cluster being deleted.

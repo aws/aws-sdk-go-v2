@@ -16,7 +16,7 @@ import (
 // learning task runs are asynchronous tasks that Glue runs on your behalf as part
 // of various machine learning workflows. You can check the stats of any task run
 // by calling GetMLTaskRun with the TaskRunID and its parent transform's
-// TransformID.
+// TransformID .
 func (c *Client) GetMLTaskRun(ctx context.Context, params *GetMLTaskRunInput, optFns ...func(*Options)) (*GetMLTaskRunOutput, error) {
 	if params == nil {
 		params = &GetMLTaskRunInput{}

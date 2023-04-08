@@ -41,13 +41,12 @@ type DescribeSimulationInput struct {
 type DescribeSimulationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the simulation. For more information about
-	// ARNs, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	Arn *string
 
-	// The time when the simulation was created, expressed as the number of seconds and
-	// milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).
+	// The time when the simulation was created, expressed as the number of seconds
+	// and milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).
 	CreationTime *time.Time
 
 	// The description of the simulation.
@@ -73,10 +72,9 @@ type DescribeSimulationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that the simulation assumes to perform actions. For more information about ARNs,
-	// see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference. For more information about IAM roles,
-	// see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference. For more information about IAM
+	// roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 	// in the Identity and Access Management User Guide.
 	RoleArn *string
 
@@ -85,9 +83,9 @@ type DescribeSimulationOutput struct {
 	SchemaError *string
 
 	// The location of the simulation schema in Amazon Simple Storage Service (Amazon
-	// S3). For more information about Amazon S3, see the  Amazon Simple Storage
-	// Service User Guide
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html).
+	// S3). For more information about Amazon S3, see the Amazon Simple Storage
+	// Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+	// .
 	SchemaS3Location *types.S3Location
 
 	// The current lifecycle state of the simulation.

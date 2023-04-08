@@ -39,17 +39,17 @@ func (c *Client) DescribeDirectories(ctx context.Context, params *DescribeDirect
 // Contains the inputs for the DescribeDirectories operation.
 type DescribeDirectoriesInput struct {
 
-	// A list of identifiers of the directories for which to obtain the information. If
-	// this member is null, all directories that belong to the current account are
+	// A list of identifiers of the directories for which to obtain the information.
+	// If this member is null, all directories that belong to the current account are
 	// returned. An empty list results in an InvalidParameterException being thrown.
 	DirectoryIds []string
 
-	// The maximum number of items to return. If this value is zero, the maximum number
-	// of items is specified by the limitations of the operation.
+	// The maximum number of items to return. If this value is zero, the maximum
+	// number of items is specified by the limitations of the operation.
 	Limit *int32
 
 	// The DescribeDirectoriesResult.NextToken value from a previous call to
-	// DescribeDirectories. Pass null if this is the first call.
+	// DescribeDirectories . Pass null if this is the first call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -136,8 +136,8 @@ func (c *Client) addOperationDescribeDirectoriesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeDirectoriesAPIClient is a client that implements the DescribeDirectories
-// operation.
+// DescribeDirectoriesAPIClient is a client that implements the
+// DescribeDirectories operation.
 type DescribeDirectoriesAPIClient interface {
 	DescribeDirectories(context.Context, *DescribeDirectoriesInput, ...func(*Options)) (*DescribeDirectoriesOutput, error)
 }
@@ -147,8 +147,8 @@ var _ DescribeDirectoriesAPIClient = (*Client)(nil)
 // DescribeDirectoriesPaginatorOptions is the paginator options for
 // DescribeDirectories
 type DescribeDirectoriesPaginatorOptions struct {
-	// The maximum number of items to return. If this value is zero, the maximum number
-	// of items is specified by the limitations of the operation.
+	// The maximum number of items to return. If this value is zero, the maximum
+	// number of items is specified by the limitations of the operation.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -57,9 +57,9 @@ type PutResourcePolicyInput struct {
 	// incremented revision id. The revision id is unique to each policy in the
 	// account. If the policy revision id does not match the latest revision id, the
 	// operation will fail with an InvalidPolicyRevisionIdException exception. You can
-	// also provide a PolicyRevisionId of 0. In this case, the operation will fail with
-	// an InvalidPolicyRevisionIdException exception if a resource policy with the same
-	// name already exists.
+	// also provide a PolicyRevisionId of 0. In this case, the operation will fail
+	// with an InvalidPolicyRevisionIdException exception if a resource policy with
+	// the same name already exists.
 	PolicyRevisionId *string
 
 	noSmithyDocumentSerde
@@ -67,7 +67,7 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	// The resource policy document, as provided in the PutResourcePolicyRequest.
+	// The resource policy document, as provided in the PutResourcePolicyRequest .
 	ResourcePolicy *types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.

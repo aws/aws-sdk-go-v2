@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon EFS file system that DataSync can access for a
-// transfer. For more information, see Creating a location for Amazon EFS
-// (https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html).
+// Creates an endpoint for an Amazon EFS file system that DataSync can access for
+// a transfer. For more information, see Creating a location for Amazon EFS (https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html)
+// .
 func (c *Client) CreateLocationEfs(ctx context.Context, params *CreateLocationEfsInput, optFns ...func(*Options)) (*CreateLocationEfsOutput, error) {
 	if params == nil {
 		params = &CreateLocationEfsInput{}
@@ -32,8 +32,8 @@ func (c *Client) CreateLocationEfs(ctx context.Context, params *CreateLocationEf
 // CreateLocationEfsRequest
 type CreateLocationEfsInput struct {
 
-	// Specifies the subnet and security groups DataSync uses to access your Amazon EFS
-	// file system.
+	// Specifies the subnet and security groups DataSync uses to access your Amazon
+	// EFS file system.
 	//
 	// This member is required.
 	Ec2Config *types.Ec2Config
@@ -54,14 +54,14 @@ type CreateLocationEfsInput struct {
 	// Specifies whether you want DataSync to use Transport Layer Security (TLS) 1.2
 	// encryption when it copies data to or from the Amazon EFS file system. If you
 	// specify an access point using AccessPointArn or an IAM role using
-	// FileSystemAccessRoleArn, you must set this parameter to TLS1_2.
+	// FileSystemAccessRoleArn , you must set this parameter to TLS1_2 .
 	InTransitEncryption types.EfsInTransitEncryption
 
 	// Specifies a mount path for your Amazon EFS file system. This is where DataSync
 	// reads or writes data (depending on if this is a source or destination location).
 	// By default, DataSync uses the root directory, but you can also include
 	// subdirectories. You must specify a value with forward slashes (for example,
-	// /path/to/folder).
+	// /path/to/folder ).
 	Subdirectory *string
 
 	// Specifies the key-value pair that represents a tag that you want to add to the

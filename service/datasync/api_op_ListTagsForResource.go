@@ -40,8 +40,8 @@ type ListTagsForResourceInput struct {
 	// Specifies how many results that you want in the response.
 	MaxResults *int32
 
-	// Specifies an opaque string that indicates the position to begin the next list of
-	// results in the response.
+	// Specifies an opaque string that indicates the position to begin the next list
+	// of results in the response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -126,8 +126,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }

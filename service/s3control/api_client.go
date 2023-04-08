@@ -124,7 +124,7 @@ type Options struct {
 	Retryer aws.Retryer
 
 	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is set
-	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
+	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig . You
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
@@ -474,14 +474,14 @@ func nopGetOutpostIDFromInput(input interface{}) (*string, bool) {
 	return nil, false
 }
 
-// nopGetARNAccessor provides a nop get accessor function to be used when a certain
-// operation does not support ARNs
+// nopGetARNAccessor provides a nop get accessor function to be used when a
+// certain operation does not support ARNs
 func nopGetARNAccessor(input interface{}) (*string, bool) {
 	return nil, false
 }
 
-// nopSetARNAccessor provides a nop set accessor function to be used when a certain
-// operation does not support ARNs
+// nopSetARNAccessor provides a nop set accessor function to be used when a
+// certain operation does not support ARNs
 func nopSetARNAccessor(input interface{}, v string) error {
 	return nil
 }
@@ -496,8 +496,8 @@ func addResponseErrorMiddleware(stack *middleware.Stack) error {
 	return s3shared.AddResponseErrorMiddleware(stack)
 }
 
-// ResponseError provides the HTTP centric error type wrapping the underlying error
-// with the HTTP response value and the deserialized RequestID.
+// ResponseError provides the HTTP centric error type wrapping the underlying
+// error with the HTTP response value and the deserialized RequestID.
 type ResponseError interface {
 	error
 
@@ -507,8 +507,8 @@ type ResponseError interface {
 
 var _ ResponseError = (*s3shared.ResponseError)(nil)
 
-// GetHostIDMetadata retrieves the host id from middleware metadata returns host id
-// as string along with a boolean indicating presence of hostId on middleware
+// GetHostIDMetadata retrieves the host id from middleware metadata returns host
+// id as string along with a boolean indicating presence of hostId on middleware
 // metadata.
 func GetHostIDMetadata(metadata middleware.Metadata) (string, bool) {
 	return s3shared.GetHostIDMetadata(metadata)

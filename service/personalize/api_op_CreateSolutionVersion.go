@@ -12,54 +12,27 @@ import (
 )
 
 // Trains or retrains an active solution in a Custom dataset group. A solution is
-// created using the CreateSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
-// operation and must be in the ACTIVE state before calling CreateSolutionVersion.
+// created using the CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
+// operation and must be in the ACTIVE state before calling CreateSolutionVersion .
 // A new version of the solution is created every time you call this operation.
 // Status A solution version can be in one of the following states:
+//   - CREATE PENDING
+//   - CREATE IN_PROGRESS
+//   - ACTIVE
+//   - CREATE FAILED
+//   - CREATE STOPPING
+//   - CREATE STOPPED
 //
-// * CREATE
-// PENDING
-//
-// * CREATE IN_PROGRESS
-//
-// * ACTIVE
-//
-// * CREATE FAILED
-//
-// * CREATE STOPPING
-//
-// *
-// CREATE STOPPED
-//
-// To get the status of the version, call DescribeSolutionVersion
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html).
-// Wait until the status shows as ACTIVE before calling CreateCampaign. If the
+// To get the status of the version, call DescribeSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
+// . Wait until the status shows as ACTIVE before calling CreateCampaign . If the
 // status shows as CREATE FAILED, the response includes a failureReason key, which
 // describes why the job failed. Related APIs
-//
-// * ListSolutionVersions
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html)
-//
-// *
-// DescribeSolutionVersion
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
-//
-// *
-// ListSolutions
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html)
-//
-// *
-// CreateSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
-//
-// *
-// DescribeSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
-//
-// *
-// DeleteSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html)
+//   - ListSolutionVersions (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html)
+//   - DescribeSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
+//   - ListSolutions (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html)
+//   - CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
+//   - DescribeSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
+//   - DeleteSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html)
 func (c *Client) CreateSolutionVersion(ctx context.Context, params *CreateSolutionVersionInput, optFns ...func(*Options)) (*CreateSolutionVersionOutput, error) {
 	if params == nil {
 		params = &CreateSolutionVersionInput{}
@@ -86,9 +59,8 @@ type CreateSolutionVersionInput struct {
 	// The name of the solution version.
 	Name *string
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
-	// apply to the solution version.
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// to apply to the solution version.
 	Tags []types.Tag
 
 	// The scope of training to be performed when creating the solution version. The
@@ -96,12 +68,10 @@ type CreateSolutionVersionInput struct {
 	// solution's training data, while the UPDATE option processes only the data that
 	// has changed in comparison to the input solution. Choose UPDATE when you want to
 	// incrementally update your solution version instead of creating an entirely new
-	// one. The UPDATE option can only be used when you already have an active solution
-	// version created from the input solution using the FULL option and the input
-	// solution was trained with the User-Personalization
-	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
-	// recipe or the HRNN-Coldstart
-	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
+	// one. The UPDATE option can only be used when you already have an active
+	// solution version created from the input solution using the FULL option and the
+	// input solution was trained with the User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
+	// recipe or the HRNN-Coldstart (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
 	// recipe.
 	TrainingMode types.TrainingMode
 

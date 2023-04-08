@@ -43,8 +43,8 @@ type DescribeRemediationExceptionsInput struct {
 	// This member is required.
 	ConfigRuleName *string
 
-	// The maximum number of RemediationExceptionResourceKey returned on each page. The
-	// default is 25. If you specify 0, Config uses the default.
+	// The maximum number of RemediationExceptionResourceKey returned on each page.
+	// The default is 25. If you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned in a previous request that you use to request the
@@ -148,8 +148,8 @@ var _ DescribeRemediationExceptionsAPIClient = (*Client)(nil)
 // DescribeRemediationExceptionsPaginatorOptions is the paginator options for
 // DescribeRemediationExceptions
 type DescribeRemediationExceptionsPaginatorOptions struct {
-	// The maximum number of RemediationExceptionResourceKey returned on each page. The
-	// default is 25. If you specify 0, Config uses the default.
+	// The maximum number of RemediationExceptionResourceKey returned on each page.
+	// The default is 25. If you specify 0, Config uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

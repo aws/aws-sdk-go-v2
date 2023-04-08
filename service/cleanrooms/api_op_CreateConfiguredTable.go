@@ -35,8 +35,8 @@ type CreateConfiguredTableInput struct {
 	// This member is required.
 	AllowedColumns []string
 
-	// The analysis method for the configured tables. The only valid value is currently
-	// `DIRECT_QUERY`.
+	// The analysis method for the configured tables. The only valid value is
+	// currently `DIRECT_QUERY`.
 	//
 	// This member is required.
 	AnalysisMethod types.AnalysisMethod
@@ -54,10 +54,10 @@ type CreateConfiguredTableInput struct {
 	// A description for the configured table.
 	Description *string
 
-	// An optional label that you can assign to a resource when you create it. Each tag
-	// consists of a key and an optional value, both of which you define. When you use
-	// tagging, you can also use tag-based access control in IAM policies to control
-	// access to this resource.
+	// An optional label that you can assign to a resource when you create it. Each
+	// tag consists of a key and an optional value, both of which you define. When you
+	// use tagging, you can also use tag-based access control in IAM policies to
+	// control access to this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

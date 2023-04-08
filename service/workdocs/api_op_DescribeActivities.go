@@ -31,8 +31,8 @@ func (c *Client) DescribeActivities(ctx context.Context, params *DescribeActivit
 
 type DescribeActivitiesInput struct {
 
-	// Specifies which activity types to include in the response. If this field is left
-	// empty, all activity types are returned.
+	// Specifies which activity types to include in the response. If this field is
+	// left empty, all activity types are returned.
 	ActivityTypes *string
 
 	// Amazon WorkDocs authentication token. Not required when using Amazon Web

@@ -350,8 +350,8 @@ const (
 	OrganizationConfigRuleTriggerTypeScheduledNotification                       OrganizationConfigRuleTriggerType = "ScheduledNotification"
 )
 
-// Values returns all known values for OrganizationConfigRuleTriggerType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for OrganizationConfigRuleTriggerType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OrganizationConfigRuleTriggerType) Values() []OrganizationConfigRuleTriggerType {
@@ -487,8 +487,8 @@ const (
 	OwnerCustomPolicy Owner = "CUSTOM_POLICY"
 )
 
-// Values returns all known values for Owner. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Owner. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Owner) Values() []Owner {
 	return []Owner{
@@ -568,8 +568,8 @@ const (
 	RemediationTargetTypeSsmDocument RemediationTargetType = "SSM_DOCUMENT"
 )
 
-// Values returns all known values for RemediationTargetType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RemediationTargetType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RemediationTargetType) Values() []RemediationTargetType {
 	return []RemediationTargetType{
@@ -603,8 +603,8 @@ const (
 	ResourceCountGroupKeyAwsRegion    ResourceCountGroupKey = "AWS_REGION"
 )
 
-// Values returns all known values for ResourceCountGroupKey. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ResourceCountGroupKey. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceCountGroupKey) Values() []ResourceCountGroupKey {
 	return []ResourceCountGroupKey{
@@ -623,9 +623,9 @@ const (
 	ResourceEvaluationStatusSucceeded  ResourceEvaluationStatus = "SUCCEEDED"
 )
 
-// Values returns all known values for ResourceEvaluationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceEvaluationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceEvaluationStatus) Values() []ResourceEvaluationStatus {
 	return []ResourceEvaluationStatus{
 		"IN_PROGRESS",
@@ -914,9 +914,9 @@ const (
 	ResourceTypeConnectPhoneNumber                       ResourceType = "AWS::Connect::PhoneNumber"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"AWS::EC2::CustomerGateway",
@@ -1236,9 +1236,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",

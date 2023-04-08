@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns backup job details for the specified BackupJobId.
+// Returns backup job details for the specified BackupJobId .
 func (c *Client) DescribeBackupJob(ctx context.Context, params *DescribeBackupJobInput, optFns ...func(*Options)) (*DescribeBackupJobOutput, error) {
 	if params == nil {
 		params = &DescribeBackupJobInput{}
@@ -54,12 +54,12 @@ type DescribeBackupJobOutput struct {
 
 	// Represents the actual backup type selected for a backup job. For example, if a
 	// successful Windows Volume Shadow Copy Service (VSS) backup was taken, BackupType
-	// returns "WindowsVSS". If BackupType is empty, then the backup type was a regular
-	// backup.
+	// returns "WindowsVSS" . If BackupType is empty, then the backup type was a
+	// regular backup.
 	BackupType *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
-	// example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	// example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
 	BackupVaultArn *string
 
 	// The name of a logical container where backups are stored. Backup vaults are
@@ -75,20 +75,20 @@ type DescribeBackupJobOutput struct {
 	// This returns the statistics of the included child (nested) backup jobs.
 	ChildJobsInState map[string]int64
 
-	// The date and time that a job to create a backup job is completed, in Unix format
-	// and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to
-	// milliseconds. For example, the value 1516925490.087 represents Friday, January
-	// 26, 2018 12:11:30.087 AM.
+	// The date and time that a job to create a backup job is completed, in Unix
+	// format and Coordinated Universal Time (UTC). The value of CompletionDate is
+	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
 	CompletionDate *time.Time
 
 	// Contains identifying information about the creation of a backup job, including
-	// the BackupPlanArn, BackupPlanId, BackupPlanVersion, and BackupRuleId of the
+	// the BackupPlanArn , BackupPlanId , BackupPlanVersion , and BackupRuleId of the
 	// backup plan that is used to create it.
 	CreatedBy *types.RecoveryPointCreator
 
 	// The date and time that a backup job is created, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
 
@@ -99,7 +99,7 @@ type DescribeBackupJobOutput struct {
 	ExpectedCompletionDate *time.Time
 
 	// Specifies the IAM role ARN used to create the target recovery point; for
-	// example, arn:aws:iam::123456789012:role/S3Access.
+	// example, arn:aws:iam::123456789012:role/S3Access .
 	IamRoleArn *string
 
 	// This returns the boolean value that a backup job is a parent (composite) job.
@@ -116,7 +116,8 @@ type DescribeBackupJobOutput struct {
 	PercentDone *string
 
 	// An ARN that uniquely identifies a recovery point; for example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
 	RecoveryPointArn *string
 
 	// An ARN that uniquely identifies a saved resource. The format of the ARN depends
@@ -127,9 +128,9 @@ type DescribeBackupJobOutput struct {
 	// backup.
 	ResourceName *string
 
-	// The type of Amazon Web Services resource to be backed up; for example, an Amazon
-	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
-	// (Amazon RDS) database.
+	// The type of Amazon Web Services resource to be backed up; for example, an
+	// Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database
+	// Service (Amazon RDS) database.
 	ResourceType *string
 
 	// Specifies the time in Unix format and Coordinated Universal Time (UTC) when a

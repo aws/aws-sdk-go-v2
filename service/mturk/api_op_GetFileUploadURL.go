@@ -18,10 +18,9 @@ import (
 // HIT is disposed, any uploaded files are deleted, and cannot be retrieved.
 // Pending Deprecation on December 12, 2017. The Answer Specification
 //
-// structure
-// will no longer support the FileUploadAnswer element to be used for the
-// QuestionForm data structure. Instead, we recommend that Requesters who want to
-// create HITs asking Workers to upload files to use Amazon S3.
+// structure will no longer support the FileUploadAnswer element to be used for
+// the QuestionForm data structure. Instead, we recommend that Requesters who want
+// to create HITs asking Workers to upload files to use Amazon S3.
 func (c *Client) GetFileUploadURL(ctx context.Context, params *GetFileUploadURLInput, optFns ...func(*Options)) (*GetFileUploadURLOutput, error) {
 	if params == nil {
 		params = &GetFileUploadURLInput{}

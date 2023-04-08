@@ -19,51 +19,36 @@ import (
 // Virtual Private Clouds (Amazon VPCs). You can't convert a public hosted zone to
 // a private hosted zone or vice versa. Instead, you must create a new hosted zone
 // with the same name and create new resource record sets. For more information
-// about charges for hosted zones, see Amazon Route 53 Pricing
-// (http://aws.amazon.com/route53/pricing/). Note the following:
+// about charges for hosted zones, see Amazon Route 53 Pricing (http://aws.amazon.com/route53/pricing/)
+// . Note the following:
+//   - You can't create a hosted zone for a top-level domain (TLD) such as .com.
+//   - For public hosted zones, Route 53 automatically creates a default SOA
+//     record and four NS records for the zone. For more information about SOA and NS
+//     records, see NS and SOA Records that Route 53 Creates for a Hosted Zone (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html)
+//     in the Amazon Route 53 Developer Guide. If you want to use the same name servers
+//     for multiple public hosted zones, you can optionally associate a reusable
+//     delegation set with the hosted zone. See the DelegationSetId element.
+//   - If your domain is registered with a registrar other than Route 53, you must
+//     update the name servers with your registrar to make Route 53 the DNS service for
+//     the domain. For more information, see Migrating DNS Service for an Existing
+//     Domain to Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html)
+//     in the Amazon Route 53 Developer Guide.
 //
-// * You can't
-// create a hosted zone for a top-level domain (TLD) such as .com.
+// When you submit a CreateHostedZone request, the initial status of the hosted
+// zone is PENDING . For public hosted zones, this means that the NS and SOA
+// records are not yet available on all Route 53 DNS servers. When the NS and SOA
+// records are available, the status of the zone changes to INSYNC . The
+// CreateHostedZone request requires the caller to have an ec2:DescribeVpcs
+// permission. When creating private hosted zones, the Amazon VPC must belong to
+// the same partition where the hosted zone is created. A partition is a group of
+// Amazon Web Services Regions. Each Amazon Web Services account is scoped to one
+// partition. The following are the supported partitions:
+//   - aws - Amazon Web Services Regions
+//   - aws-cn - China Regions
+//   - aws-us-gov - Amazon Web Services GovCloud (US) Region
 //
-// * For public
-// hosted zones, Route 53 automatically creates a default SOA record and four NS
-// records for the zone. For more information about SOA and NS records, see NS and
-// SOA Records that Route 53 Creates for a Hosted Zone
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html)
-// in the Amazon Route 53 Developer Guide. If you want to use the same name servers
-// for multiple public hosted zones, you can optionally associate a reusable
-// delegation set with the hosted zone. See the DelegationSetId element.
-//
-// * If your
-// domain is registered with a registrar other than Route 53, you must update the
-// name servers with your registrar to make Route 53 the DNS service for the
-// domain. For more information, see Migrating DNS Service for an Existing Domain
-// to Amazon Route 53
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html) in
-// the Amazon Route 53 Developer Guide.
-//
-// When you submit a CreateHostedZone
-// request, the initial status of the hosted zone is PENDING. For public hosted
-// zones, this means that the NS and SOA records are not yet available on all Route
-// 53 DNS servers. When the NS and SOA records are available, the status of the
-// zone changes to INSYNC. The CreateHostedZone request requires the caller to have
-// an ec2:DescribeVpcs permission. When creating private hosted zones, the Amazon
-// VPC must belong to the same partition where the hosted zone is created. A
-// partition is a group of Amazon Web Services Regions. Each Amazon Web Services
-// account is scoped to one partition. The following are the supported
-// partitions:
-//
-// * aws - Amazon Web Services Regions
-//
-// * aws-cn - China Regions
-//
-// *
-// aws-us-gov - Amazon Web Services GovCloud (US) Region
-//
-// For more information, see
-// Access Management
-// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-// the Amazon Web Services General Reference.
+// For more information, see Access Management (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+// in the Amazon Web Services General Reference.
 func (c *Client) CreateHostedZone(ctx context.Context, params *CreateHostedZoneInput, optFns ...func(*Options)) (*CreateHostedZoneOutput, error) {
 	if params == nil {
 		params = &CreateHostedZoneInput{}
@@ -79,15 +64,15 @@ func (c *Client) CreateHostedZone(ctx context.Context, params *CreateHostedZoneI
 	return out, nil
 }
 
-// A complex type that contains information about the request to create a public or
-// private hosted zone.
+// A complex type that contains information about the request to create a public
+// or private hosted zone.
 type CreateHostedZoneInput struct {
 
 	// A unique string that identifies the request and that allows failed
 	// CreateHostedZone requests to be retried without the risk of executing the
 	// operation twice. You must use a unique CallerReference string every time you
-	// submit a CreateHostedZone request. CallerReference can be any unique string, for
-	// example, a date/time stamp.
+	// submit a CreateHostedZone request. CallerReference can be any unique string,
+	// for example, a date/time stamp.
 	//
 	// This member is required.
 	CallerReference *string
@@ -99,37 +84,31 @@ type CreateHostedZoneInput struct {
 	// identical. If you're creating a public hosted zone, this is the name you have
 	// registered with your DNS registrar. If your domain name is registered with a
 	// registrar other than Route 53, change the name servers for your domain to the
-	// set of NameServers that CreateHostedZone returns in DelegationSet.
+	// set of NameServers that CreateHostedZone returns in DelegationSet .
 	//
 	// This member is required.
 	Name *string
 
-	// If you want to associate a reusable delegation set with this hosted zone, the ID
-	// that Amazon Route 53 assigned to the reusable delegation set when you created
+	// If you want to associate a reusable delegation set with this hosted zone, the
+	// ID that Amazon Route 53 assigned to the reusable delegation set when you created
 	// it. For more information about reusable delegation sets, see
-	// CreateReusableDelegationSet
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html).
+	// CreateReusableDelegationSet (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html)
+	// .
 	DelegationSetId *string
 
 	// (Optional) A complex type that contains the following optional values:
-	//
-	// * For
-	// public and private hosted zones, an optional comment
-	//
-	// * For private hosted
-	// zones, an optional PrivateZone element
-	//
-	// If you don't specify a comment or the
-	// PrivateZone element, omit HostedZoneConfig and the other elements.
+	//   - For public and private hosted zones, an optional comment
+	//   - For private hosted zones, an optional PrivateZone element
+	// If you don't specify a comment or the PrivateZone element, omit HostedZoneConfig
+	// and the other elements.
 	HostedZoneConfig *types.HostedZoneConfig
 
 	// (Private hosted zones only) A complex type that contains information about the
 	// Amazon VPC that you're associating with this hosted zone. You can specify only
 	// one Amazon VPC when you create a private hosted zone. If you are associating a
-	// VPC with a hosted zone with this request, the paramaters VPCId and VPCRegion are
-	// also required. To associate additional Amazon VPCs with the hosted zone, use
-	// AssociateVPCWithHostedZone
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html)
+	// VPC with a hosted zone with this request, the paramaters VPCId and VPCRegion
+	// are also required. To associate additional Amazon VPCs with the hosted zone, use
+	// AssociateVPCWithHostedZone (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html)
 	// after you create a hosted zone.
 	VPC *types.VPC
 
@@ -159,8 +138,8 @@ type CreateHostedZoneOutput struct {
 	// This member is required.
 	Location *string
 
-	// A complex type that contains information about an Amazon VPC that you associated
-	// with this hosted zone.
+	// A complex type that contains information about an Amazon VPC that you
+	// associated with this hosted zone.
 	VPC *types.VPC
 
 	// Metadata pertaining to the operation's result.

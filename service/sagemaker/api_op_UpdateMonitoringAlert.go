@@ -28,7 +28,7 @@ func (c *Client) UpdateMonitoringAlert(ctx context.Context, params *UpdateMonito
 
 type UpdateMonitoringAlertInput struct {
 
-	// Within EvaluationPeriod, how many execution failures will raise an alert.
+	// Within EvaluationPeriod , how many execution failures will raise an alert.
 	//
 	// This member is required.
 	DatapointsToAlert *int32

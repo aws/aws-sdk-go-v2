@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Unarchives GuardDuty findings specified by the findingIds.
+// Unarchives GuardDuty findings specified by the findingIds .
 func (c *Client) UnarchiveFindings(ctx context.Context, params *UnarchiveFindingsInput, optFns ...func(*Options)) (*UnarchiveFindingsOutput, error) {
 	if params == nil {
 		params = &UnarchiveFindingsInput{}

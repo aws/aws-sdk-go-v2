@@ -47,18 +47,12 @@ type TerminateEnvironmentInput struct {
 
 	// Indicates whether the associated AWS resources should shut down when the
 	// environment is terminated:
-	//
-	// * true: The specified environment as well as the
-	// associated AWS resources, such as Auto Scaling group and LoadBalancer, are
-	// terminated.
-	//
-	// * false: AWS Elastic Beanstalk resource management is removed from
-	// the environment, but the AWS resources continue to operate.
-	//
-	// For more
-	// information, see the  AWS Elastic Beanstalk User Guide.
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/) Default: true Valid
-	// Values: true | false
+	//   - true : The specified environment as well as the associated AWS resources,
+	//   such as Auto Scaling group and LoadBalancer, are terminated.
+	//   - false : AWS Elastic Beanstalk resource management is removed from the
+	//   environment, but the AWS resources continue to operate.
+	// For more information, see the  AWS Elastic Beanstalk User Guide.  (https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/)
+	// Default: true Valid Values: true | false
 	TerminateResources *bool
 
 	noSmithyDocumentSerde
@@ -106,33 +100,24 @@ type TerminateEnvironmentOutput struct {
 
 	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
 	// the failure levels for a running environment:
-	//
-	// * Red: Indicates the environment
-	// is not responsive. Occurs when three or more consecutive failures occur for an
-	// environment.
-	//
-	// * Yellow: Indicates that something is wrong. Occurs when two
-	// consecutive failures occur for an environment.
-	//
-	// * Green: Indicates the
-	// environment is healthy and fully functional.
-	//
-	// * Grey: Default health for a new
-	// environment. The environment is not fully launched and health checks have not
-	// started or health checks are suspended during an UpdateEnvironment or
-	// RestartEnvironment request.
-	//
+	//   - Red : Indicates the environment is not responsive. Occurs when three or more
+	//   consecutive failures occur for an environment.
+	//   - Yellow : Indicates that something is wrong. Occurs when two consecutive
+	//   failures occur for an environment.
+	//   - Green : Indicates the environment is healthy and fully functional.
+	//   - Grey : Default health for a new environment. The environment is not fully
+	//   launched and health checks have not started or health checks are suspended
+	//   during an UpdateEnvironment or RestartEnvironment request.
 	// Default: Grey
 	Health types.EnvironmentHealth
 
 	// Returns the health status of the application running in your environment. For
-	// more information, see Health Colors and Statuses
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
+	// more information, see Health Colors and Statuses (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
+	// .
 	HealthStatus types.EnvironmentHealthStatus
 
 	// The Amazon Resource Name (ARN) of the environment's operations role. For more
-	// information, see Operations roles
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
+	// information, see Operations roles (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
 	// in the AWS Elastic Beanstalk Developer Guide.
 	OperationsRole *string
 
@@ -146,21 +131,13 @@ type TerminateEnvironmentOutput struct {
 	SolutionStackName *string
 
 	// The current operational status of the environment:
-	//
-	// * Launching: Environment is
-	// in the process of initial deployment.
-	//
-	// * Updating: Environment is in the process
-	// of updating its configuration settings or application version.
-	//
-	// * Ready:
-	// Environment is available to have an action performed on it, such as update or
-	// terminate.
-	//
-	// * Terminating: Environment is in the shut-down process.
-	//
-	// *
-	// Terminated: Environment is not running.
+	//   - Launching : Environment is in the process of initial deployment.
+	//   - Updating : Environment is in the process of updating its configuration
+	//   settings or application version.
+	//   - Ready : Environment is available to have an action performed on it, such as
+	//   update or terminate.
+	//   - Terminating : Environment is in the shut-down process.
+	//   - Terminated : Environment is not running.
 	Status types.EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this

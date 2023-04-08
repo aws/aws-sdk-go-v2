@@ -217,8 +217,8 @@ type ConnectorSummary struct {
 	// Details of encryption in transit to the Apache Kafka cluster.
 	KafkaClusterEncryptionInTransit *KafkaClusterEncryptionInTransitDescription
 
-	// The version of Kafka Connect. It has to be compatible with both the Apache Kafka
-	// cluster's version and the plugins.
+	// The version of Kafka Connect. It has to be compatible with both the Apache
+	// Kafka cluster's version and the plugins.
 	KafkaConnectVersion *string
 
 	// The settings for delivering connector logs to Amazon CloudWatch Logs.
@@ -707,8 +707,8 @@ type VpcDescription struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration of the workers, which are the processes that run the connector
-// logic.
+// The configuration of the workers, which are the processes that run the
+// connector logic.
 type WorkerConfiguration struct {
 
 	// The revision of the worker configuration.

@@ -65,9 +65,9 @@ type DescribeWorldGenerationJobOutput struct {
 	// Summary information about finished worlds.
 	FinishedWorldsSummary *types.FinishedWorldsSummary
 
-	// The status of the world generation job: Pending The world generation job request
-	// is pending. Running The world generation job is running. Completed The world
-	// generation job completed. Failed The world generation job failed. See
+	// The status of the world generation job: Pending The world generation job
+	// request is pending. Running The world generation job is running. Completed The
+	// world generation job completed. Failed The world generation job failed. See
 	// failureCode for more information. PartialFailed Some worlds did not generate.
 	// Canceled The world generation job was cancelled. Canceling The world generation
 	// job is being cancelled.

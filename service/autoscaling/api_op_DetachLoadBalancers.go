@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API operation is superseded by DetachTrafficSources, which can detach
+// This API operation is superseded by DetachTrafficSources , which can detach
 // multiple traffic sources types. We recommend using DetachTrafficSources to
 // simplify how you manage traffic sources. However, we continue to support
-// DetachLoadBalancers. You can use both the original DetachLoadBalancers API
+// DetachLoadBalancers . You can use both the original DetachLoadBalancers API
 // operation and DetachTrafficSources on the same Auto Scaling group. Detaches one
 // or more Classic Load Balancers from the specified Auto Scaling group. This
 // operation detaches only Classic Load Balancers. If you have Application Load

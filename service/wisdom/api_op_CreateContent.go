@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates Wisdom content. Before to calling this API, use StartContentUpload
-// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
+// Creates Wisdom content. Before to calling this API, use StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
 // to upload an asset.
 func (c *Client) CreateContent(ctx context.Context, params *CreateContentInput, optFns ...func(*Options)) (*CreateContentOutput, error) {
 	if params == nil {
@@ -40,15 +39,14 @@ type CreateContentInput struct {
 
 	// The name of the content. Each piece of content in a knowledge base must have a
 	// unique name. You can retrieve a piece of content using only its knowledge base
-	// and its name with the SearchContent
-	// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_SearchContent.html)
+	// and its name with the SearchContent (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_SearchContent.html)
 	// API.
 	//
 	// This member is required.
 	Name *string
 
-	// A pointer to the uploaded asset. This value is returned by StartContentUpload
-	// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html).
+	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
+	// .
 	//
 	// This member is required.
 	UploadId *string
@@ -56,8 +54,8 @@ type CreateContentInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	// A key/value map to store attributes without affecting tagging or

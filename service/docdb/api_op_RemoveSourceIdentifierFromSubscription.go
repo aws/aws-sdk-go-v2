@@ -28,7 +28,7 @@ func (c *Client) RemoveSourceIdentifierFromSubscription(ctx context.Context, par
 	return out, nil
 }
 
-// Represents the input to RemoveSourceIdentifierFromSubscription.
+// Represents the input to RemoveSourceIdentifierFromSubscription .
 type RemoveSourceIdentifierFromSubscriptionInput struct {
 
 	// The source identifier to be removed from the subscription, such as the instance

@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the full details of a channel moderated by the specified AppInstanceUser
-// or AppInstanceBot. The x-amz-chime-bearer request header is mandatory. Use the
+// or AppInstanceBot . The x-amz-chime-bearer request header is mandatory. Use the
 // ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the
 // value in the header.
 func (c *Client) DescribeChannelModeratedByAppInstanceUser(ctx context.Context, params *DescribeChannelModeratedByAppInstanceUserInput, optFns ...func(*Options)) (*DescribeChannelModeratedByAppInstanceUserOutput, error) {

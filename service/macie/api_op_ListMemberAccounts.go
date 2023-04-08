@@ -35,8 +35,8 @@ type ListMemberAccountsInput struct {
 	// you want in the response. The default value is 250.
 	MaxResults *int32
 
-	// (Discontinued) Use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the ListMemberAccounts action.
+	// (Discontinued) Use this parameter when paginating results. Set the value of
+	// this parameter to null on your first call to the ListMemberAccounts action.
 	// Subsequent calls to the action fill nextToken in the request with the value of
 	// nextToken from the previous response to continue listing data.
 	NextToken *string
@@ -51,10 +51,10 @@ type ListMemberAccountsOutput struct {
 	// this list.
 	MemberAccounts []types.MemberAccount
 
-	// (Discontinued) When a response is generated, if there is more data to be listed,
-	// this parameter is present in the response and contains the value to use for the
-	// nextToken parameter in a subsequent pagination request. If there is no more data
-	// to be listed, this parameter is set to null.
+	// (Discontinued) When a response is generated, if there is more data to be
+	// listed, this parameter is present in the response and contains the value to use
+	// for the nextToken parameter in a subsequent pagination request. If there is no
+	// more data to be listed, this parameter is set to null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

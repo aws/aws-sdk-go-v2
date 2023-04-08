@@ -139,8 +139,8 @@ func (e *CloudHsmServiceException) ErrorCode() string {
 }
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because of a tagging failure. Verify the tag conditions
-// in all applicable policies, and then retry the request.
+// The request was rejected because of a tagging failure. Verify the tag
+// conditions in all applicable policies, and then retry the request.
 type CloudHsmTagException struct {
 	Message *string
 

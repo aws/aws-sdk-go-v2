@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a sample mapping template that can be used to transform a payload into
-// the structure of a model.
+// Generates a sample mapping template that can be used to transform a payload
+// into the structure of a model.
 func (c *Client) GetModelTemplate(ctx context.Context, params *GetModelTemplateInput, optFns ...func(*Options)) (*GetModelTemplateOutput, error) {
 	if params == nil {
 		params = &GetModelTemplateInput{}

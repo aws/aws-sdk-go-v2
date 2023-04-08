@@ -14,8 +14,7 @@ import (
 // Lists the principals associated with the specified policy. Note: This action is
 // deprecated and works as expected for backward compatibility, but we won't add
 // enhancements. Use ListTargetsForPolicy instead. Requires permission to access
-// the ListPolicyPrincipals
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// the ListPolicyPrincipals (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 //
 // Deprecated: This operation has been deprecated.

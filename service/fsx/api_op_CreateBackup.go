@@ -18,53 +18,37 @@ import (
 // can restore a file system or volume from a backup if an issue arises with the
 // original file system or volume. For Amazon FSx for Lustre file systems, you can
 // create a backup only for file systems that have the following configuration:
+//   - A Persistent deployment type
+//   - Are not linked to a data repository
 //
-// *
-// A Persistent deployment type
+// For more information about backups, see the following:
+//   - For Amazon FSx for Lustre, see Working with FSx for Lustre backups (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html)
+//     .
+//   - For Amazon FSx for Windows, see Working with FSx for Windows backups (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html)
+//     .
+//   - For Amazon FSx for NetApp ONTAP, see Working with FSx for NetApp ONTAP
+//     backups (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/using-backups.html)
+//     .
+//   - For Amazon FSx for OpenZFS, see Working with FSx for OpenZFS backups (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/using-backups.html)
+//     .
 //
-// * Are not linked to a data repository
+// If a backup with the specified client request token exists and the parameters
+// match, this operation returns the description of the existing backup. If a
+// backup with the specified client request token exists and the parameters don't
+// match, this operation returns IncompatibleParameterError . If a backup with the
+// specified client request token doesn't exist, CreateBackup does the following:
+//   - Creates a new Amazon FSx backup with an assigned ID, and an initial
+//     lifecycle state of CREATING .
+//   - Returns the description of the backup.
 //
-// For more
-// information about backups, see the following:
-//
-// * For Amazon FSx for Lustre, see
-// Working with FSx for Lustre backups
-// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html).
-//
-// *
-// For Amazon FSx for Windows, see Working with FSx for Windows backups
-// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html).
-//
-// * For
-// Amazon FSx for NetApp ONTAP, see Working with FSx for NetApp ONTAP backups
-// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/using-backups.html).
-//
-// * For
-// Amazon FSx for OpenZFS, see Working with FSx for OpenZFS backups
-// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/using-backups.html).
-//
-// If a
-// backup with the specified client request token exists and the parameters match,
-// this operation returns the description of the existing backup. If a backup with
-// the specified client request token exists and the parameters don't match, this
-// operation returns IncompatibleParameterError. If a backup with the specified
-// client request token doesn't exist, CreateBackup does the following:
-//
-// * Creates
-// a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of
-// CREATING.
-//
-// * Returns the description of the backup.
-//
-// By using the idempotent
-// operation, you can retry a CreateBackup operation without the risk of creating
-// an extra backup. This approach can be useful when an initial call fails in a way
-// that makes it unclear whether a backup was created. If you use the same client
-// request token and the initial call created a backup, the operation returns a
-// successful result because all the parameters are the same. The CreateBackup
-// operation returns while the backup's lifecycle state is still CREATING. You can
-// check the backup creation status by calling the DescribeBackups
-// (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeBackups.html)
+// By using the idempotent operation, you can retry a CreateBackup operation
+// without the risk of creating an extra backup. This approach can be useful when
+// an initial call fails in a way that makes it unclear whether a backup was
+// created. If you use the same client request token and the initial call created a
+// backup, the operation returns a successful result because all the parameters are
+// the same. The CreateBackup operation returns while the backup's lifecycle state
+// is still CREATING . You can check the backup creation status by calling the
+// DescribeBackups (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeBackups.html)
 // operation, which returns the backup state along with other information.
 func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, optFns ...func(*Options)) (*CreateBackupOutput, error) {
 	if params == nil {
@@ -94,7 +78,7 @@ type CreateBackupInput struct {
 
 	// (Optional) The tags to apply to the backup at backup creation. The key value of
 	// the Name tag appears in the console as the backup name. If you have set
-	// CopyTagsToBackups to true, and you specify one or more tags using the
+	// CopyTagsToBackups to true , and you specify one or more tags using the
 	// CreateBackup operation, no existing file system tags are copied from the file
 	// system to the backup.
 	Tags []types.Tag

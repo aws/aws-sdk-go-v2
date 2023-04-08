@@ -22,8 +22,8 @@ import (
 // the new behavior graph. CreateGraph triggers a process to create the
 // corresponding data tables for the new behavior graph. An account can only be the
 // administrator account for one behavior graph within a Region. If the same
-// account calls CreateGraph with the same administrator account, it always returns
-// the same behavior graph ARN. It does not create a new behavior graph.
+// account calls CreateGraph with the same administrator account, it always
+// returns the same behavior graph ARN. It does not create a new behavior graph.
 func (c *Client) CreateGraph(ctx context.Context, params *CreateGraphInput, optFns ...func(*Options)) (*CreateGraphOutput, error) {
 	if params == nil {
 		params = &CreateGraphInput{}

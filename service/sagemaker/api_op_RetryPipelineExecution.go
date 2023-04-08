@@ -41,8 +41,8 @@ type RetryPipelineExecutionInput struct {
 	// This member is required.
 	PipelineExecutionArn *string
 
-	// This configuration, if specified, overrides the parallelism configuration of the
-	// parent pipeline.
+	// This configuration, if specified, overrides the parallelism configuration of
+	// the parent pipeline.
 	ParallelismConfiguration *types.ParallelismConfiguration
 
 	noSmithyDocumentSerde

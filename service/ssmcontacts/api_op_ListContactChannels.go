@@ -123,8 +123,8 @@ func (c *Client) addOperationListContactChannelsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListContactChannelsAPIClient is a client that implements the ListContactChannels
-// operation.
+// ListContactChannelsAPIClient is a client that implements the
+// ListContactChannels operation.
 type ListContactChannelsAPIClient interface {
 	ListContactChannels(context.Context, *ListContactChannelsInput, ...func(*Options)) (*ListContactChannelsOutput, error)
 }

@@ -29,8 +29,8 @@ func (c *Client) DeleteReportDefinition(ctx context.Context, params *DeleteRepor
 // Deletes the specified report.
 type DeleteReportDefinitionInput struct {
 
-	// The name of the report that you want to delete. The name must be unique, is case
-	// sensitive, and can't include spaces.
+	// The name of the report that you want to delete. The name must be unique, is
+	// case sensitive, and can't include spaces.
 	ReportName *string
 
 	noSmithyDocumentSerde

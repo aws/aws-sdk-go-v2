@@ -138,9 +138,9 @@ const (
 	CriterionKeyScanStatus         CriterionKey = "SCAN_STATUS"
 )
 
-// Values returns all known values for CriterionKey. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CriterionKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (CriterionKey) Values() []CriterionKey {
 	return []CriterionKey{
 		"EC2_INSTANCE_ARN",
@@ -250,8 +250,8 @@ const (
 	DetectorFeatureResultEksRuntimeMonitoring DetectorFeatureResult = "EKS_RUNTIME_MONITORING"
 )
 
-// Values returns all known values for DetectorFeatureResult. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DetectorFeatureResult. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DetectorFeatureResult) Values() []DetectorFeatureResult {
 	return []DetectorFeatureResult{
@@ -363,9 +363,9 @@ const (
 	FilterActionArchive FilterAction = "ARCHIVE"
 )
 
-// Values returns all known values for FilterAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FilterAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FilterAction) Values() []FilterAction {
 	return []FilterAction{
 		"NOOP",
@@ -542,8 +542,8 @@ const (
 	OrgFeatureAdditionalConfigurationEksAddonManagement OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
 )
 
-// Values returns all known values for OrgFeatureAdditionalConfiguration. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for OrgFeatureAdditionalConfiguration. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OrgFeatureAdditionalConfiguration) Values() []OrgFeatureAdditionalConfiguration {
@@ -599,9 +599,9 @@ const (
 	ResourceTypeEks ResourceType = "EKS"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"EKS",
@@ -731,9 +731,9 @@ const (
 	UsageFeatureEksRuntimeMonitoring UsageFeature = "EKS_RUNTIME_MONITORING"
 )
 
-// Values returns all known values for UsageFeature. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UsageFeature. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UsageFeature) Values() []UsageFeature {
 	return []UsageFeature{
 		"FLOW_LOGS",

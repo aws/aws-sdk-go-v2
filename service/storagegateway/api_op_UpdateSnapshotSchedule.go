@@ -35,17 +35,10 @@ func (c *Client) UpdateSnapshotSchedule(ctx context.Context, params *UpdateSnaps
 }
 
 // A JSON object containing one or more of the following fields:
-//
-// *
-// UpdateSnapshotScheduleInput$Description
-//
-// *
-// UpdateSnapshotScheduleInput$RecurrenceInHours
-//
-// *
-// UpdateSnapshotScheduleInput$StartAt
-//
-// * UpdateSnapshotScheduleInput$VolumeARN
+//   - UpdateSnapshotScheduleInput$Description
+//   - UpdateSnapshotScheduleInput$RecurrenceInHours
+//   - UpdateSnapshotScheduleInput$StartAt
+//   - UpdateSnapshotScheduleInput$VolumeARN
 type UpdateSnapshotScheduleInput struct {
 
 	// Frequency of snapshots. Specify the number of hours between snapshots.

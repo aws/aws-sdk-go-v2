@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an access policy that grants the specified identity (IAM Identity Center
-// user, IAM Identity Center group, or IAM user) access to the specified IoT
+// Creates an access policy that grants the specified identity (IAM Identity
+// Center user, IAM Identity Center group, or IAM user) access to the specified IoT
 // SiteWise Monitor portal or project resource.
 func (c *Client) CreateAccessPolicy(ctx context.Context, params *CreateAccessPolicyInput, optFns ...func(*Options)) (*CreateAccessPolicyOutput, error) {
 	if params == nil {
@@ -44,8 +44,8 @@ type CreateAccessPolicyInput struct {
 	// This member is required.
 	AccessPolicyPermission types.Permission
 
-	// The IoT SiteWise Monitor resource for this access policy. Choose either a portal
-	// or a project.
+	// The IoT SiteWise Monitor resource for this access policy. Choose either a
+	// portal or a project.
 	//
 	// This member is required.
 	AccessPolicyResource *types.Resource
@@ -56,8 +56,7 @@ type CreateAccessPolicyInput struct {
 	ClientToken *string
 
 	// A list of key-value pairs that contain metadata for the access policy. For more
-	// information, see Tagging your IoT SiteWise resources
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
+	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 
@@ -66,9 +65,8 @@ type CreateAccessPolicyInput struct {
 
 type CreateAccessPolicyOutput struct {
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the access policy, which has the following format.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the access policy, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:access-policy/${AccessPolicyId}
 	//
 	// This member is required.

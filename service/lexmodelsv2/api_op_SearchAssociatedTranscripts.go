@@ -53,8 +53,7 @@ type SearchAssociatedTranscriptsInput struct {
 
 	// The identifier of the language and locale of the transcripts to search. The
 	// string must match one of the supported locales. For more information, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
 	//
 	// This member is required.
 	LocaleId *string
@@ -96,12 +95,11 @@ type SearchAssociatedTranscriptsOutput struct {
 
 	// The identifier of the language and locale of the transcripts to search. The
 	// string must match one of the supported locales. For more information, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
 	LocaleId *string
 
-	// A index that indicates whether there are more results to return in a response to
-	// the SearchAssociatedTranscripts operation. If the nextIndex field is present,
+	// A index that indicates whether there are more results to return in a response
+	// to the SearchAssociatedTranscripts operation. If the nextIndex field is present,
 	// you send the contents as the nextIndex parameter of a
 	// SearchAssociatedTranscriptsRequest operation to get the next page of results.
 	NextIndex *int32

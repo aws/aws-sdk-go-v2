@@ -14,8 +14,8 @@ import (
 // Creates a context. A context is a lineage tracking entity that represents a
 // logical grouping of other tracking or experiment entities. Some examples are an
 // endpoint and a model package. For more information, see Amazon SageMaker ML
-// Lineage Tracking
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html).
+// Lineage Tracking (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html)
+// .
 func (c *Client) CreateContext(ctx context.Context, params *CreateContextInput, optFns ...func(*Options)) (*CreateContextOutput, error) {
 	if params == nil {
 		params = &CreateContextInput{}

@@ -11,12 +11,12 @@ import (
 )
 
 // Updates an Amazon EBS volume's name or mount point. For more information, see
-// Resource Management
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html). Required
-// Permissions: To use this action, an IAM user must have a Manage permissions
-// level for the stack, or an attached policy that explicitly grants permissions.
-// For more information on user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html)
+// . Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) UpdateVolume(ctx context.Context, params *UpdateVolumeInput, optFns ...func(*Options)) (*UpdateVolumeOutput, error) {
 	if params == nil {
 		params = &UpdateVolumeInput{}

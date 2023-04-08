@@ -55,8 +55,9 @@ type GetJourneyExecutionMetricsInput struct {
 
 type GetJourneyExecutionMetricsOutput struct {
 
-	// Provides the results of a query that retrieved the data for a standard execution
-	// metric that applies to a journey, and provides information about that query.
+	// Provides the results of a query that retrieved the data for a standard
+	// execution metric that applies to a journey, and provides information about that
+	// query.
 	//
 	// This member is required.
 	JourneyExecutionMetricsResponse *types.JourneyExecutionMetricsResponse

@@ -19,8 +19,7 @@ import (
 // HTTPS port to use, and the health check configuration. You can deploy containers
 // to your container service using container images from a public registry such as
 // Amazon ECR Public, or from your local machine. For more information, see
-// Creating container images for your Amazon Lightsail container services
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images)
+// Creating container images for your Amazon Lightsail container services (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images)
 // in the Amazon Lightsail Developer Guide.
 func (c *Client) CreateContainerServiceDeployment(ctx context.Context, params *CreateContainerServiceDeploymentInput, optFns ...func(*Options)) (*CreateContainerServiceDeploymentOutput, error) {
 	if params == nil {
@@ -44,8 +43,8 @@ type CreateContainerServiceDeploymentInput struct {
 	// This member is required.
 	ServiceName *string
 
-	// An object that describes the settings of the containers that will be launched on
-	// the container service.
+	// An object that describes the settings of the containers that will be launched
+	// on the container service.
 	Containers map[string]types.Container
 
 	// An object that describes the settings of the public endpoint for the container

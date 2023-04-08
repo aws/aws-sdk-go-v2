@@ -30,9 +30,9 @@ const (
 	AlarmTypeMetricAlarm    AlarmType = "MetricAlarm"
 )
 
-// Values returns all known values for AlarmType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AlarmType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AlarmType) Values() []AlarmType {
 	return []AlarmType{
 		"CompositeAlarm",
@@ -150,9 +150,9 @@ const (
 	MetricStreamOutputFormatOpenTelemetry07 MetricStreamOutputFormat = "opentelemetry0.7"
 )
 
-// Values returns all known values for MetricStreamOutputFormat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MetricStreamOutputFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricStreamOutputFormat) Values() []MetricStreamOutputFormat {
 	return []MetricStreamOutputFormat{
 		"json",
@@ -227,9 +227,9 @@ const (
 	StandardUnitNone            StandardUnit = "None"
 )
 
-// Values returns all known values for StandardUnit. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StandardUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StandardUnit) Values() []StandardUnit {
 	return []StandardUnit{
 		"Seconds",
@@ -293,9 +293,9 @@ const (
 	StatisticMaximum     Statistic = "Maximum"
 )
 
-// Values returns all known values for Statistic. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Statistic. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Statistic) Values() []Statistic {
 	return []Statistic{
 		"SampleCount",

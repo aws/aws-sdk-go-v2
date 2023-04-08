@@ -18,8 +18,8 @@ type ParticipantToken struct {
 	// Set of capabilities that the user is allowed to perform in the stage.
 	Capabilities []ParticipantTokenCapability
 
-	// Duration (in minutes), after which the participant token expires. Default: 60 (1
-	// hour).
+	// Duration (in minutes), after which the participant token expires. Default: 60
+	// (1 hour).
 	Duration int32
 
 	// ISO 8601 timestamp (returned as a string) for when this token expires.
@@ -56,8 +56,8 @@ type ParticipantTokenConfiguration struct {
 	// Default: 60 (1 hour).
 	Duration int32
 
-	// Name that can be specified to help identify the corresponding participant token.
-	// This can be any UTF-8 encoded text. This field is exposed to all stage
+	// Name that can be specified to help identify the corresponding participant
+	// token. This can be any UTF-8 encoded text. This field is exposed to all stage
 	// participants and should not be used for personally identifying, confidential, or
 	// sensitive information.
 	UserId *string
@@ -80,11 +80,10 @@ type Stage struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value). See Tagging AWS Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for details,
-	// including restrictions that apply to tags and "Tag naming limits and
-	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
-	// there.
+	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for details, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no constraints on tags beyond what is
+	// documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -105,11 +104,10 @@ type StageSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value). See Tagging AWS Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for details,
-	// including restrictions that apply to tags and "Tag naming limits and
-	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
-	// there.
+	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for details, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no constraints on tags beyond what is
+	// documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -113,8 +113,8 @@ func (c *Client) addOperationListVoiceConnectorsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListVoiceConnectorsAPIClient is a client that implements the ListVoiceConnectors
-// operation.
+// ListVoiceConnectorsAPIClient is a client that implements the
+// ListVoiceConnectors operation.
 type ListVoiceConnectorsAPIClient interface {
 	ListVoiceConnectors(context.Context, *ListVoiceConnectorsInput, ...func(*Options)) (*ListVoiceConnectorsOutput, error)
 }

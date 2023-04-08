@@ -31,9 +31,7 @@ func (c *Client) DescribeDBParameters(ctx context.Context, params *DescribeDBPar
 type DescribeDBParametersInput struct {
 
 	// The name of a specific DB parameter group to return details for. Constraints:
-	//
-	// *
-	// If supplied, must match the name of an existing DBParameterGroup.
+	//   - If supplied, must match the name of an existing DBParameterGroup.
 	//
 	// This member is required.
 	DBParameterGroupName *string
@@ -43,7 +41,7 @@ type DescribeDBParametersInput struct {
 
 	// An optional pagination token provided by a previous DescribeDBParameters
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -65,7 +63,7 @@ type DescribeDBParametersOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// A list of Parameter values.

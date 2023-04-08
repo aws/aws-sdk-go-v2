@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon Security Lake exceptions that you can use to find the source of
-// problems and fix them.
+// Lists the Amazon Security Lake exceptions that you can use to find the source
+// of problems and fix them.
 func (c *Client) ListDatalakeExceptions(ctx context.Context, params *ListDatalakeExceptionsInput, optFns ...func(*Options)) (*ListDatalakeExceptionsOutput, error) {
 	if params == nil {
 		params = &ListDatalakeExceptionsInput{}

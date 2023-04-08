@@ -32,8 +32,8 @@ func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, op
 type ListServicesInput struct {
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster to use when
-	// filtering the ListServices results. If you do not specify a cluster, the default
-	// cluster is assumed.
+	// filtering the ListServices results. If you do not specify a cluster, the
+	// default cluster is assumed.
 	Cluster *string
 
 	// The launch type to use when filtering the ListServices results.
@@ -51,7 +51,7 @@ type ListServicesInput struct {
 	// The nextToken value returned from a ListServices request indicating that more
 	// results are available to fulfill the request and further calls will be needed.
 	// If maxResults was provided, it is possible the number of results to be fewer
-	// than maxResults. This token should be treated as an opaque identifier that is
+	// than maxResults . This token should be treated as an opaque identifier that is
 	// only used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
@@ -65,7 +65,7 @@ type ListServicesInput struct {
 type ListServicesOutput struct {
 
 	// The nextToken value to include in a future ListServices request. When the
-	// results of a ListServices request exceed maxResults, this value can be used to
+	// results of a ListServices request exceed maxResults , this value can be used to
 	// retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string

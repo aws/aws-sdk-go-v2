@@ -13,8 +13,8 @@ import (
 )
 
 // Creates an OpenSearch Serverless-managed interface VPC endpoint. For more
-// information, see Access Amazon OpenSearch Serverless using an interface endpoint
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html).
+// information, see Access Amazon OpenSearch Serverless using an interface endpoint (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html)
+// .
 func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpointInput, optFns ...func(*Options)) (*CreateVpcEndpointOutput, error) {
 	if params == nil {
 		params = &CreateVpcEndpointInput{}

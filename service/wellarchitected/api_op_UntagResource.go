@@ -31,8 +31,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// A list of tag keys. Existing tags of the resource whose keys are members of this
-	// list are removed from the resource.
+	// A list of tag keys. Existing tags of the resource whose keys are members of
+	// this list are removed from the resource.
 	//
 	// This member is required.
 	TagKeys []string

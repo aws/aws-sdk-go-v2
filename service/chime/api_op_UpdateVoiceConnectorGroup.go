@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates details of the specified Amazon Chime Voice Connector group, such as the
-// name and Amazon Chime Voice Connector priority ranking.
+// Updates details of the specified Amazon Chime Voice Connector group, such as
+// the name and Amazon Chime Voice Connector priority ranking.
 func (c *Client) UpdateVoiceConnectorGroup(ctx context.Context, params *UpdateVoiceConnectorGroupInput, optFns ...func(*Options)) (*UpdateVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &UpdateVoiceConnectorGroupInput{}

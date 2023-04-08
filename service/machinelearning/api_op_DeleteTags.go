@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified tags associated with an ML object. After this operation is
-// complete, you can't recover deleted tags. If you specify a tag that doesn't
+// Deletes the specified tags associated with an ML object. After this operation
+// is complete, you can't recover deleted tags. If you specify a tag that doesn't
 // exist, Amazon ML ignores it.
 func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns ...func(*Options)) (*DeleteTagsOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 
 type DeleteTagsInput struct {
 
-	// The ID of the tagged ML object. For example, exampleModelId.
+	// The ID of the tagged ML object. For example, exampleModelId .
 	//
 	// This member is required.
 	ResourceId *string

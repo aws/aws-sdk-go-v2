@@ -20,8 +20,7 @@ import (
 // availability drop. For example, an availability score of 99% for an end user and
 // service location pair is equivalent to 1% of the traffic experiencing an
 // availability drop for that pair. For more information, see How Internet Monitor
-// calculates performance and availability scores
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+// calculates performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 // in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User
 // Guide.
 type AvailabilityMeasurement struct {
@@ -34,24 +33,21 @@ type AvailabilityMeasurement struct {
 	// Monitor chapter in the CloudWatch User Guide includes detailed information about
 	// how Internet Monitor calculates health scores, including performance and
 	// availability scores, and when it creates and resolves health events. For more
-	// information, see How Amazon Web Services calculates performance and availability
-	// scores
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+	// information, see How Amazon Web Services calculates performance and
+	// availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	ExperienceScore *float64
 
 	// The percentage of impact caused by a health event for client location traffic
 	// globally. For information about how Internet Monitor calculates impact, see
-	// Inside Internet Monitor
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html)
+	// Inside Internet Monitor (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html)
 	// in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User
 	// Guide.
 	PercentOfClientLocationImpacted *float64
 
 	// The percentage of impact caused by a health event for total traffic globally.
 	// For information about how Internet Monitor calculates impact, see Inside
-	// Internet Monitor
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html)
+	// Internet Monitor (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html)
 	// in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User
 	// Guide.
 	PercentOfTotalTrafficImpacted *float64
@@ -146,8 +142,8 @@ type ImpactedLocation struct {
 	// The name of the city where the health event is located.
 	City *string
 
-	// The country code where the health event is located. The ISO 3166-2 codes for the
-	// country is provided, when available.
+	// The country code where the health event is located. The ISO 3166-2 codes for
+	// the country is provided, when available.
 	CountryCode *string
 
 	// The calculated health at a specific location.
@@ -159,11 +155,11 @@ type ImpactedLocation struct {
 	// The longitude where the health event is located.
 	Longitude *float64
 
-	// The metro area where the health event is located. Metro indicates a metropolitan
-	// region in the United States, such as the region around New York City. In non-US
-	// countries, this is a second-level subdivision. For example, in the United
-	// Kingdom, it could be a county, a London borough, a unitary authority, council
-	// area, and so on.
+	// The metro area where the health event is located. Metro indicates a
+	// metropolitan region in the United States, such as the region around New York
+	// City. In non-US countries, this is a second-level subdivision. For example, in
+	// the United Kingdom, it could be a county, a London borough, a unitary authority,
+	// council area, and so on.
 	Metro *string
 
 	// The service location where the health event is located.
@@ -175,8 +171,8 @@ type ImpactedLocation struct {
 	// (Northern Ireland).
 	Subdivision *string
 
-	// The subdivision code where the health event is located. The ISO 3166-2 codes for
-	// country subdivisions is provided, when available.
+	// The subdivision code where the health event is located. The ISO 3166-2 codes
+	// for country subdivisions is provided, when available.
 	SubdivisionCode *string
 
 	noSmithyDocumentSerde
@@ -197,8 +193,7 @@ type InternetHealth struct {
 	// that is not seeing an availability drop. For example, an availability score of
 	// 99% for an end user and service location pair is equivalent to 1% of the traffic
 	// experiencing an availability drop for that pair. For more information, see How
-	// Internet Monitor calculates performance and availability scores
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+	// Internet Monitor calculates performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	Availability *AvailabilityMeasurement
 
@@ -206,8 +201,7 @@ type InternetHealth struct {
 	// that is not seeing a performance drop. For example, a performance score of 99%
 	// for an end user and service location pair is equivalent to 1% of the traffic
 	// experiencing a performance drop for that pair. For more information, see How
-	// Internet Monitor calculates performance and availability scores
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+	// Internet Monitor calculates performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	Performance *PerformanceMeasurement
 
@@ -222,15 +216,15 @@ type InternetMeasurementsLogDelivery struct {
 	// The configuration information for publishing Internet Monitor internet
 	// measurements to Amazon S3. The configuration includes the bucket name and
 	// (optionally) prefix for the S3 bucket to store the measurements, and the
-	// delivery status. The delivery status is ENABLED or DISABLED, depending on
+	// delivery status. The delivery status is ENABLED or DISABLED , depending on
 	// whether you choose to deliver internet measurements to S3 logs.
 	S3Config *S3Config
 
 	noSmithyDocumentSerde
 }
 
-// The description of and information about a monitor in Amazon CloudWatch Internet
-// Monitor.
+// The description of and information about a monitor in Amazon CloudWatch
+// Internet Monitor.
 type Monitor struct {
 
 	// The Amazon Resource Name (ARN) of the monitor.
@@ -307,22 +301,20 @@ type NetworkImpairment struct {
 // drop. For example, a performance score of 99% for an end user and service
 // location pair is equivalent to 1% of the traffic experiencing a performance drop
 // for that pair. For more information, see How Internet Monitor calculates
-// performance and availability scores
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+// performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 // in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 type PerformanceMeasurement struct {
 
-	// Experience scores, or health scores, are calculated for different geographic and
-	// network provider combinations (that is, different granularities) and also
+	// Experience scores, or health scores, are calculated for different geographic
+	// and network provider combinations (that is, different granularities) and also
 	// totaled into global scores. If you view performance or availability scores
 	// without filtering for any specific geography or service provider, Amazon
 	// CloudWatch Internet Monitor provides global health scores. The Amazon CloudWatch
 	// Internet Monitor chapter in the CloudWatch User Guide includes detailed
 	// information about how Internet Monitor calculates health scores, including
 	// performance and availability scores, and when it creates and resolves health
-	// events. For more information, see How Amazon Web Services calculates performance
-	// and availability scores
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+	// events. For more information, see How Amazon Web Services calculates
+	// performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	ExperienceScore *float64
 
@@ -330,8 +322,7 @@ type PerformanceMeasurement struct {
 	// For performance, this is the percentage of how much latency increased during the
 	// event compared to typical performance for traffic, from this client location to
 	// an Amazon Web Services location, using a specific client network. For more
-	// information, see When Amazon Web Services creates and resolves health events
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop)
+	// information, see When Amazon Web Services creates and resolves health events (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	PercentOfClientLocationImpacted *float64
 
@@ -339,24 +330,22 @@ type PerformanceMeasurement struct {
 	// globally. For performance, this is the percentage of how much latency increased
 	// during the event compared to typical performance for your application traffic
 	// globally. For more information, see When Amazon Web Services creates and
-	// resolves health events
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop)
+	// resolves health events (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	PercentOfTotalTrafficImpacted *float64
 
 	// This is the percentage of how much round-trip time increased during the event
 	// compared to typical round-trip time for your application for traffic. For more
-	// information, see When Amazon Web Services creates and resolves health events
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop)
+	// information, see When Amazon Web Services creates and resolves health events (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	RoundTripTime *RoundTripTime
 
 	noSmithyDocumentSerde
 }
 
-// Round-trip time (RTT) is how long it takes for a request from the user to return
-// a response to the user. Amazon CloudWatch Internet Monitor calculates RTT at
-// different percentiles: p50, p90, and p95.
+// Round-trip time (RTT) is how long it takes for a request from the user to
+// return a response to the user. Amazon CloudWatch Internet Monitor calculates RTT
+// at different percentiles: p50, p90, and p95.
 type RoundTripTime struct {
 
 	// RTT at the 50th percentile (p50).
@@ -374,7 +363,7 @@ type RoundTripTime struct {
 // The configuration for publishing Amazon CloudWatch Internet Monitor internet
 // measurements to Amazon S3. The configuration includes the bucket name and
 // (optionally) prefix for the S3 bucket to store the measurements, and the
-// delivery status. The delivery status is ENABLED or DISABLED, depending on
+// delivery status. The delivery status is ENABLED or DISABLED , depending on
 // whether you choose to deliver internet measurements to S3 logs.
 type S3Config struct {
 

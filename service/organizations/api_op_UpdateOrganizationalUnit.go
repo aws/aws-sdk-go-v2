@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Renames the specified organizational unit (OU). The ID and ARN don't change. The
-// child OUs and accounts remain in place, and any attached policies of the OU
+// Renames the specified organizational unit (OU). The ID and ARN don't change.
+// The child OUs and accounts remain in place, and any attached policies of the OU
 // remain attached. This operation can be called only from the organization's
 // management account.
 func (c *Client) UpdateOrganizationalUnit(ctx context.Context, params *UpdateOrganizationalUnitInput, optFns ...func(*Options)) (*UpdateOrganizationalUnitOutput, error) {
@@ -32,19 +32,19 @@ func (c *Client) UpdateOrganizationalUnit(ctx context.Context, params *UpdateOrg
 
 type UpdateOrganizationalUnitInput struct {
 
-	// The unique identifier (ID) of the OU that you want to rename. You can get the ID
-	// from the ListOrganizationalUnitsForParent operation. The regex pattern
-	// (http://wikipedia.org/wiki/regex) for an organizational unit ID string requires
-	// "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root
-	// that contains the OU). This string is followed by a second "-" dash and from 8
-	// to 32 additional lowercase letters or digits.
+	// The unique identifier (ID) of the OU that you want to rename. You can get the
+	// ID from the ListOrganizationalUnitsForParent operation. The regex pattern (http://wikipedia.org/wiki/regex)
+	// for an organizational unit ID string requires "ou-" followed by from 4 to 32
+	// lowercase letters or digits (the ID of the root that contains the OU). This
+	// string is followed by a second "-" dash and from 8 to 32 additional lowercase
+	// letters or digits.
 	//
 	// This member is required.
 	OrganizationalUnitId *string
 
-	// The new name that you want to assign to the OU. The regex pattern
-	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
-	// string of any of the characters in the ASCII character range.
+	// The new name that you want to assign to the OU. The regex pattern (http://wikipedia.org/wiki/regex)
+	// that is used to validate this parameter is a string of any of the characters in
+	// the ASCII character range.
 	Name *string
 
 	noSmithyDocumentSerde

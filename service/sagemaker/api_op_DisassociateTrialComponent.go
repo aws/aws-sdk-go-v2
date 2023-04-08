@@ -16,7 +16,7 @@ import (
 // trial component with a trial, call the AssociateTrialComponent API. To get a
 // list of the trials a component is associated with, use the Search API. Specify
 // ExperimentTrialComponent for the Resource parameter. The list appears in the
-// response under Results.TrialComponent.Parents.
+// response under Results.TrialComponent.Parents .
 func (c *Client) DisassociateTrialComponent(ctx context.Context, params *DisassociateTrialComponentInput, optFns ...func(*Options)) (*DisassociateTrialComponentOutput, error) {
 	if params == nil {
 		params = &DisassociateTrialComponentInput{}

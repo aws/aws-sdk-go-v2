@@ -55,7 +55,7 @@ type AdminGetUserOutput struct {
 	// This member is required.
 	Username *string
 
-	// Indicates that the status is enabled.
+	// Indicates that the status is enabled .
 	Enabled bool
 
 	// This response parameter is no longer supported. It provides information only
@@ -78,29 +78,19 @@ type AdminGetUserOutput struct {
 	UserLastModifiedDate *time.Time
 
 	// The MFA options that are activated for the user. The possible values in this
-	// list are SMS_MFA and SOFTWARE_TOKEN_MFA.
+	// list are SMS_MFA and SOFTWARE_TOKEN_MFA .
 	UserMFASettingList []string
 
 	// The user status. Can be one of the following:
-	//
-	// * UNCONFIRMED - User has been
-	// created but not confirmed.
-	//
-	// * CONFIRMED - User has been confirmed.
-	//
-	// * ARCHIVED -
-	// User is no longer active.
-	//
-	// * UNKNOWN - User status isn't known.
-	//
-	// *
-	// RESET_REQUIRED - User is confirmed, but the user must request a code and reset
-	// their password before they can sign in.
-	//
-	// * FORCE_CHANGE_PASSWORD - The user is
-	// confirmed and the user can sign in using a temporary password, but on first
-	// sign-in, the user must change their password to a new value before doing
-	// anything else.
+	//   - UNCONFIRMED - User has been created but not confirmed.
+	//   - CONFIRMED - User has been confirmed.
+	//   - ARCHIVED - User is no longer active.
+	//   - UNKNOWN - User status isn't known.
+	//   - RESET_REQUIRED - User is confirmed, but the user must request a code and
+	//   reset their password before they can sign in.
+	//   - FORCE_CHANGE_PASSWORD - The user is confirmed and the user can sign in
+	//   using a temporary password, but on first sign-in, the user must change their
+	//   password to a new value before doing anything else.
 	UserStatus types.UserStatusType
 
 	// Metadata pertaining to the operation's result.

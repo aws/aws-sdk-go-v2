@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of all registered custom connectors in your Amazon Web Services
-// account. This API lists only custom connectors registered in this account, not
-// the Amazon Web Services authored connectors.
+// Returns the list of all registered custom connectors in your Amazon Web
+// Services account. This API lists only custom connectors registered in this
+// account, not the Amazon Web Services authored connectors.
 func (c *Client) ListConnectors(ctx context.Context, params *ListConnectorsInput, optFns ...func(*Options)) (*ListConnectorsOutput, error) {
 	if params == nil {
 		params = &ListConnectorsInput{}
@@ -32,8 +32,8 @@ func (c *Client) ListConnectors(ctx context.Context, params *ListConnectorsInput
 
 type ListConnectorsInput struct {
 
-	// Specifies the maximum number of items that should be returned in the result set.
-	// The default for maxResults is 20 (for all paginated API operations).
+	// Specifies the maximum number of items that should be returned in the result
+	// set. The default for maxResults is 20 (for all paginated API operations).
 	MaxResults *int32
 
 	// The pagination token for the next page of data.
@@ -127,8 +127,8 @@ var _ ListConnectorsAPIClient = (*Client)(nil)
 
 // ListConnectorsPaginatorOptions is the paginator options for ListConnectors
 type ListConnectorsPaginatorOptions struct {
-	// Specifies the maximum number of items that should be returned in the result set.
-	// The default for maxResults is 20 (for all paginated API operations).
+	// Specifies the maximum number of items that should be returned in the result
+	// set. The default for maxResults is 20 (for all paginated API operations).
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

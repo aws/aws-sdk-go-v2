@@ -50,8 +50,8 @@ type GetEnrollmentStatusesForOrganizationInput struct {
 
 type GetEnrollmentStatusesForOrganizationOutput struct {
 
-	// An array of objects that describe the enrollment statuses of organization member
-	// accounts.
+	// An array of objects that describe the enrollment statuses of organization
+	// member accounts.
 	AccountEnrollmentStatuses []types.AccountEnrollmentStatus
 
 	// The token to use to advance to the next page of account enrollment statuses.

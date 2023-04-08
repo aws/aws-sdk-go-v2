@@ -19,8 +19,8 @@ import (
 // tests. When you use the Deliverability dashboard, you pay a monthly subscription
 // charge, in addition to any other fees that you accrue by using Amazon SES and
 // other Amazon Web Services services. For more information about the features and
-// cost of a Deliverability dashboard subscription, see Amazon SES Pricing
-// (http://aws.amazon.com/ses/pricing/).
+// cost of a Deliverability dashboard subscription, see Amazon SES Pricing (http://aws.amazon.com/ses/pricing/)
+// .
 func (c *Client) GetDeliverabilityDashboardOptions(ctx context.Context, params *GetDeliverabilityDashboardOptionsInput, optFns ...func(*Options)) (*GetDeliverabilityDashboardOptionsOutput, error) {
 	if params == nil {
 		params = &GetDeliverabilityDashboardOptionsInput{}
@@ -43,8 +43,8 @@ func (c *Client) GetDeliverabilityDashboardOptions(ctx context.Context, params *
 // use the Deliverability dashboard, you pay a monthly subscription charge, in
 // addition to any other fees that you accrue by using Amazon SES and other Amazon
 // Web Services services. For more information about the features and cost of a
-// Deliverability dashboard subscription, see Amazon Pinpoint Pricing
-// (http://aws.amazon.com/pinpoint/pricing/).
+// Deliverability dashboard subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/)
+// .
 type GetDeliverabilityDashboardOptionsInput struct {
 	noSmithyDocumentSerde
 }
@@ -52,25 +52,25 @@ type GetDeliverabilityDashboardOptionsInput struct {
 // An object that shows the status of the Deliverability dashboard.
 type GetDeliverabilityDashboardOptionsOutput struct {
 
-	// Specifies whether the Deliverability dashboard is enabled. If this value is
-	// true, the dashboard is enabled.
+	// Specifies whether the Deliverability dashboard is enabled. If this value is true
+	// , the dashboard is enabled.
 	//
 	// This member is required.
 	DashboardEnabled bool
 
 	// The current status of your Deliverability dashboard subscription. If this value
-	// is PENDING_EXPIRATION, your subscription is scheduled to expire at the end of
+	// is PENDING_EXPIRATION , your subscription is scheduled to expire at the end of
 	// the current calendar month.
 	AccountStatus types.DeliverabilityDashboardAccountStatus
 
-	// An array of objects, one for each verified domain that you use to send email and
-	// currently has an active Deliverability dashboard subscription that isn’t
+	// An array of objects, one for each verified domain that you use to send email
+	// and currently has an active Deliverability dashboard subscription that isn’t
 	// scheduled to expire at the end of the current calendar month.
 	ActiveSubscribedDomains []types.DomainDeliverabilityTrackingOption
 
-	// An array of objects, one for each verified domain that you use to send email and
-	// currently has an active Deliverability dashboard subscription that's scheduled
-	// to expire at the end of the current calendar month.
+	// An array of objects, one for each verified domain that you use to send email
+	// and currently has an active Deliverability dashboard subscription that's
+	// scheduled to expire at the end of the current calendar month.
 	PendingExpirationSubscribedDomains []types.DomainDeliverabilityTrackingOption
 
 	// The date when your current subscription to the Deliverability dashboard is

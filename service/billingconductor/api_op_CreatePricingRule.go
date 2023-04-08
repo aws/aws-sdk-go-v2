@@ -63,12 +63,12 @@ type CreatePricingRuleInput struct {
 
 	// Operation is the specific Amazon Web Services action covered by this line item.
 	// This describes the specific usage of the line item. If the Scope attribute is
-	// set to SKU, this attribute indicates which operation the PricingRule is
+	// set to SKU , this attribute indicates which operation the PricingRule is
 	// modifying. For example, a value of RunInstances:0202 indicates the operation of
 	// running an Amazon EC2 instance.
 	Operation *string
 
-	// If the Scope attribute is set to SERVICE or SKU, the attribute indicates which
+	// If the Scope attribute is set to SERVICE or SKU , the attribute indicates which
 	// service the PricingRule is applicable for.
 	Service *string
 
@@ -78,11 +78,11 @@ type CreatePricingRuleInput struct {
 	// The set of tiering configurations for the pricing rule.
 	Tiering *types.CreateTieringInput
 
-	// Usage type is the unit that each service uses to measure the usage of a specific
-	// type of resource. If the Scope attribute is set to SKU, this attribute indicates
-	// which usage type the PricingRule is modifying. For example,
-	// USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large instance
-	// in the US West (Oregon) Region.
+	// Usage type is the unit that each service uses to measure the usage of a
+	// specific type of resource. If the Scope attribute is set to SKU , this attribute
+	// indicates which usage type the PricingRule is modifying. For example,
+	// USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large
+	// instance in the US West (Oregon) Region.
 	UsageType *string
 
 	noSmithyDocumentSerde

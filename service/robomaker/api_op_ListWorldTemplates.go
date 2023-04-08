@@ -32,17 +32,17 @@ type ListWorldTemplatesInput struct {
 
 	// When this parameter is used, ListWorldTemplates only returns maxResults results
 	// in a single page along with a nextToken response element. The remaining results
-	// of the initial request can be seen by sending another ListWorldTemplates request
-	// with the returned nextToken value. This value can be between 1 and 100. If this
-	// parameter is not used, then ListWorldTemplates returns up to 100 results and a
-	// nextToken value if applicable.
+	// of the initial request can be seen by sending another ListWorldTemplates
+	// request with the returned nextToken value. This value can be between 1 and 100.
+	// If this parameter is not used, then ListWorldTemplates returns up to 100
+	// results and a nextToken value if applicable.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
 	// the response object's nextToken parameter value is set to a token. To retrieve
 	// the next set of results, call ListWorldTemplates again and assign that token to
-	// the request object's nextToken parameter. If there are no remaining results, the
-	// previous response object's NextToken parameter is set to null.
+	// the request object's nextToken parameter. If there are no remaining results,
+	// the previous response object's NextToken parameter is set to null.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,8 +53,8 @@ type ListWorldTemplatesOutput struct {
 	// If the previous paginated request did not return all of the remaining results,
 	// the response object's nextToken parameter value is set to a token. To retrieve
 	// the next set of results, call ListWorldTemplates again and assign that token to
-	// the request object's nextToken parameter. If there are no remaining results, the
-	// previous response object's NextToken parameter is set to null.
+	// the request object's nextToken parameter. If there are no remaining results,
+	// the previous response object's NextToken parameter is set to null.
 	NextToken *string
 
 	// Summary information for templates.
@@ -139,10 +139,10 @@ var _ ListWorldTemplatesAPIClient = (*Client)(nil)
 type ListWorldTemplatesPaginatorOptions struct {
 	// When this parameter is used, ListWorldTemplates only returns maxResults results
 	// in a single page along with a nextToken response element. The remaining results
-	// of the initial request can be seen by sending another ListWorldTemplates request
-	// with the returned nextToken value. This value can be between 1 and 100. If this
-	// parameter is not used, then ListWorldTemplates returns up to 100 results and a
-	// nextToken value if applicable.
+	// of the initial request can be seen by sending another ListWorldTemplates
+	// request with the returned nextToken value. This value can be between 1 and 100.
+	// If this parameter is not used, then ListWorldTemplates returns up to 100
+	// results and a nextToken value if applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

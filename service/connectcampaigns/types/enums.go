@@ -99,9 +99,9 @@ const (
 	InstanceIdFilterOperatorEq InstanceIdFilterOperator = "Eq"
 )
 
-// Values returns all known values for InstanceIdFilterOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InstanceIdFilterOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceIdFilterOperator) Values() []InstanceIdFilterOperator {
 	return []InstanceIdFilterOperator{
 		"Eq",

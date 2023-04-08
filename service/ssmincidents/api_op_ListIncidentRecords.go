@@ -33,27 +33,16 @@ type ListIncidentRecordsInput struct {
 
 	// Filters the list of incident records you want to search through. You can filter
 	// on the following keys:
-	//
-	// * creationTime
-	//
-	// * impact
-	//
-	// * status
-	//
-	// * createdBy
-	//
-	// Note
-	// the following when when you use Filters:
-	//
-	// * If you don't specify a Filter, the
-	// response includes all incident records.
-	//
-	// * If you specify more than one filter
-	// in a single request, the response returns incident records that match all
-	// filters.
-	//
-	// * If you specify a filter with more than one value, the response
-	// returns incident records that match any of the values provided.
+	//   - creationTime
+	//   - impact
+	//   - status
+	//   - createdBy
+	// Note the following when when you use Filters:
+	//   - If you don't specify a Filter, the response includes all incident records.
+	//   - If you specify more than one filter in a single request, the response
+	//   returns incident records that match all filters.
+	//   - If you specify a filter with more than one value, the response returns
+	//   incident records that match any of the values provided.
 	Filters []types.Filter
 
 	// The maximum number of results per page.
@@ -144,8 +133,8 @@ func (c *Client) addOperationListIncidentRecordsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListIncidentRecordsAPIClient is a client that implements the ListIncidentRecords
-// operation.
+// ListIncidentRecordsAPIClient is a client that implements the
+// ListIncidentRecords operation.
 type ListIncidentRecordsAPIClient interface {
 	ListIncidentRecords(context.Context, *ListIncidentRecordsInput, ...func(*Options)) (*ListIncidentRecordsOutput, error)
 }

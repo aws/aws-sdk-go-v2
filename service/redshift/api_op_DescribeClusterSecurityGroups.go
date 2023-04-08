@@ -15,8 +15,7 @@ import (
 // Returns information about Amazon Redshift security groups. If the name of a
 // security group is specified, the response will contain only information about
 // only that security group. For information about managing security groups, go to
-// Amazon Redshift Cluster Security Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// Amazon Redshift Cluster Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide. If you specify both tag keys
 // and tag values in the same request, Amazon Redshift returns all security groups
 // that match any combination of the specified keys and values. For example, if you
@@ -48,8 +47,8 @@ type DescribeClusterSecurityGroupsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterSecurityGroups request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
+	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request. Constraints: You must specify either the
 	// ClusterSecurityGroupName parameter or the Marker parameter, but not both.
@@ -65,17 +64,17 @@ type DescribeClusterSecurityGroupsInput struct {
 	// A tag key or keys for which you want to return all matching cluster security
 	// groups that are associated with the specified key or keys. For example, suppose
 	// that you have security groups that are tagged with keys called owner and
-	// environment. If you specify both of these tag keys in the request, Amazon
+	// environment . If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the security groups that have either or both of
 	// these tag keys associated with them.
 	TagKeys []string
 
-	// A tag value or values for which you want to return all matching cluster security
-	// groups that are associated with the specified tag value or values. For example,
-	// suppose that you have security groups that are tagged with values called admin
-	// and test. If you specify both of these tag values in the request, Amazon
-	// Redshift returns a response with the security groups that have either or both of
-	// these tag values associated with them.
+	// A tag value or values for which you want to return all matching cluster
+	// security groups that are associated with the specified tag value or values. For
+	// example, suppose that you have security groups that are tagged with values
+	// called admin and test . If you specify both of these tag values in the request,
+	// Amazon Redshift returns a response with the security groups that have either or
+	// both of these tag values associated with them.
 	TagValues []string
 
 	noSmithyDocumentSerde

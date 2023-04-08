@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the identity attribute order for a specific TypedLinkFacet. For more
-// information, see Typed Links
-// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+// Returns the identity attribute order for a specific TypedLinkFacet . For more
+// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
+// .
 func (c *Client) GetTypedLinkFacetInformation(ctx context.Context, params *GetTypedLinkFacetInformationInput, optFns ...func(*Options)) (*GetTypedLinkFacetInformationOutput, error) {
 	if params == nil {
 		params = &GetTypedLinkFacetInformationInput{}
@@ -36,7 +36,7 @@ type GetTypedLinkFacetInformationInput struct {
 	Name *string
 
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns.
+	// information, see arns .
 	//
 	// This member is required.
 	SchemaArn *string
@@ -53,8 +53,8 @@ type GetTypedLinkFacetInformationOutput struct {
 	// that do not have a range specified are presumed to match the entire range.
 	// Filters are interpreted in the order of the attributes on the typed link facet,
 	// not the order in which they are supplied to any API calls. For more information
-	// about identity attributes, see Typed Links
-	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+	// about identity attributes, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
+	// .
 	IdentityAttributeOrder []string
 
 	// Metadata pertaining to the operation's result.

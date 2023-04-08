@@ -12,9 +12,8 @@ import (
 )
 
 // Creates a receipt rule. For information about setting up receipt rules, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html).
-// You can execute this operation no more than once per second.
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) CreateReceiptRule(ctx context.Context, params *CreateReceiptRuleInput, optFns ...func(*Options)) (*CreateReceiptRuleOutput, error) {
 	if params == nil {
 		params = &CreateReceiptRuleInput{}
@@ -31,8 +30,8 @@ func (c *Client) CreateReceiptRule(ctx context.Context, params *CreateReceiptRul
 }
 
 // Represents a request to create a receipt rule. You use receipt rules to receive
-// email with Amazon SES. For more information, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// email with Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// .
 type CreateReceiptRuleInput struct {
 
 	// A data structure that contains the specified rule's name, actions, recipients,

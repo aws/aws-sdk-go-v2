@@ -20,8 +20,8 @@ import (
 
 // Returns information about a training job. Some of the attributes below only
 // appear if the training job successfully starts. If the training job fails,
-// TrainingJobStatus is Failed and, depending on the FailureReason, attributes like
-// TrainingStartTime, TrainingTimeInSeconds, TrainingEndTime, and
+// TrainingJobStatus is Failed and, depending on the FailureReason , attributes
+// like TrainingStartTime , TrainingTimeInSeconds , TrainingEndTime , and
 // BillableTimeInSeconds may not be present in the response.
 func (c *Client) DescribeTrainingJob(ctx context.Context, params *DescribeTrainingJobInput, optFns ...func(*Options)) (*DescribeTrainingJobOutput, error) {
 	if params == nil {
@@ -73,62 +73,36 @@ type DescribeTrainingJobOutput struct {
 	ResourceConfig *types.ResourceConfig
 
 	// Provides detailed information about the state of the training job. For detailed
-	// information on the secondary status of the training job, see StatusMessage under
-	// SecondaryStatusTransition. SageMaker provides primary statuses and secondary
-	// statuses that apply to each of them: InProgress
-	//
-	// * Starting - Starting the
-	// training job.
-	//
-	// * Downloading - An optional stage for algorithms that support
-	// File training input mode. It indicates that data is being downloaded to the ML
-	// storage volumes.
-	//
-	// * Training - Training is in progress.
-	//
-	// * Interrupted - The job
-	// stopped because the managed spot training instances were interrupted.
-	//
-	// *
-	// Uploading - Training is complete and the model artifacts are being uploaded to
-	// the S3 location.
-	//
+	// information on the secondary status of the training job, see StatusMessage
+	// under SecondaryStatusTransition . SageMaker provides primary statuses and
+	// secondary statuses that apply to each of them: InProgress
+	//   - Starting - Starting the training job.
+	//   - Downloading - An optional stage for algorithms that support File training
+	//   input mode. It indicates that data is being downloaded to the ML storage
+	//   volumes.
+	//   - Training - Training is in progress.
+	//   - Interrupted - The job stopped because the managed spot training instances
+	//   were interrupted.
+	//   - Uploading - Training is complete and the model artifacts are being uploaded
+	//   to the S3 location.
 	// Completed
-	//
-	// * Completed - The training job has
-	// completed.
-	//
+	//   - Completed - The training job has completed.
 	// Failed
-	//
-	// * Failed - The training job has failed. The reason for the
-	// failure is returned in the FailureReason field of
-	// DescribeTrainingJobResponse.
-	//
+	//   - Failed - The training job has failed. The reason for the failure is returned
+	//   in the FailureReason field of DescribeTrainingJobResponse .
 	// Stopped
-	//
-	// * MaxRuntimeExceeded - The job stopped
-	// because it exceeded the maximum allowed runtime.
-	//
-	// * MaxWaitTimeExceeded - The
-	// job stopped because it exceeded the maximum allowed wait time.
-	//
-	// * Stopped - The
-	// training job has stopped.
-	//
+	//   - MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed
+	//   runtime.
+	//   - MaxWaitTimeExceeded - The job stopped because it exceeded the maximum
+	//   allowed wait time.
+	//   - Stopped - The training job has stopped.
 	// Stopping
-	//
-	// * Stopping - Stopping the training
-	// job.
-	//
-	// Valid values for SecondaryStatus are subject to change. We no longer
-	// support the following secondary statuses:
-	//
-	// * LaunchingMLInstances
-	//
-	// *
-	// PreparingTraining
-	//
-	// * DownloadingTrainingImage
+	//   - Stopping - Stopping the training job.
+	// Valid values for SecondaryStatus are subject to change. We no longer support
+	// the following secondary statuses:
+	//   - LaunchingMLInstances
+	//   - PreparingTraining
+	//   - DownloadingTrainingImage
 	//
 	// This member is required.
 	SecondaryStatus types.SecondaryStatus
@@ -155,23 +129,13 @@ type DescribeTrainingJobOutput struct {
 
 	// The status of the training job. SageMaker provides the following training job
 	// statuses:
-	//
-	// * InProgress - The training is in progress.
-	//
-	// * Completed - The
-	// training job has completed.
-	//
-	// * Failed - The training job has failed. To see the
-	// reason for the failure, see the FailureReason field in the response to a
-	// DescribeTrainingJobResponse call.
-	//
-	// * Stopping - The training job is stopping.
-	//
-	// *
-	// Stopped - The training job has stopped.
-	//
-	// For more detailed information, see
-	// SecondaryStatus.
+	//   - InProgress - The training is in progress.
+	//   - Completed - The training job has completed.
+	//   - Failed - The training job has failed. To see the reason for the failure, see
+	//   the FailureReason field in the response to a DescribeTrainingJobResponse call.
+	//   - Stopping - The training job is stopping.
+	//   - Stopped - The training job has stopped.
+	// For more detailed information, see SecondaryStatus .
 	//
 	// This member is required.
 	TrainingJobStatus types.TrainingJobStatus
@@ -180,13 +144,13 @@ type DescribeTrainingJobOutput struct {
 	AutoMLJobArn *string
 
 	// The billable time in seconds. Billable time refers to the absolute wall-clock
-	// time. Multiply BillableTimeInSeconds by the number of instances (InstanceCount)
-	// in your training cluster to get the total compute time SageMaker bills you if
-	// you run distributed training. The formula is as follows: BillableTimeInSeconds *
-	// InstanceCount . You can calculate the savings from using managed spot training
-	// using the formula (1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100. For
-	// example, if BillableTimeInSeconds is 100 and TrainingTimeInSeconds is 500, the
-	// savings is 80%.
+	// time. Multiply BillableTimeInSeconds by the number of instances ( InstanceCount
+	// ) in your training cluster to get the total compute time SageMaker bills you if
+	// you run distributed training. The formula is as follows: BillableTimeInSeconds
+	// * InstanceCount . You can calculate the savings from using managed spot training
+	// using the formula (1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100 .
+	// For example, if BillableTimeInSeconds is 100 and TrainingTimeInSeconds is 500,
+	// the savings is 80%.
 	BillableTimeInSeconds *int32
 
 	// Contains information about the output location for managed spot training
@@ -196,34 +160,34 @@ type DescribeTrainingJobOutput struct {
 	// Configuration information for the Amazon SageMaker Debugger hook parameters,
 	// metric and tensor collections, and storage paths. To learn more about how to
 	// configure the DebugHookConfig parameter, see Use the SageMaker and Debugger
-	// Configuration API Operations to Create, Update, and Debug Your Training Job
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
+	// Configuration API Operations to Create, Update, and Debug Your Training Job (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html)
+	// .
 	DebugHookConfig *types.DebugHookConfig
 
 	// Configuration information for Amazon SageMaker Debugger rules for debugging
 	// output tensors.
 	DebugRuleConfigurations []types.DebugRuleConfiguration
 
-	// Evaluation status of Amazon SageMaker Debugger rules for debugging on a training
-	// job.
+	// Evaluation status of Amazon SageMaker Debugger rules for debugging on a
+	// training job.
 	DebugRuleEvaluationStatuses []types.DebugRuleEvaluationStatus
 
 	// To encrypt all communications between ML compute instances in distributed
-	// training, choose True. Encryption provides greater security for distributed
+	// training, choose True . Encryption provides greater security for distributed
 	// training, but training might take longer. How long it takes depends on the
 	// amount of communication between compute instances, especially if you use a deep
 	// learning algorithms in distributed training.
 	EnableInterContainerTrafficEncryption bool
 
-	// A Boolean indicating whether managed spot training is enabled (True) or not
-	// (False).
+	// A Boolean indicating whether managed spot training is enabled ( True ) or not (
+	// False ).
 	EnableManagedSpotTraining bool
 
-	// If you want to allow inbound or outbound network calls, except for calls between
-	// peers within a training cluster for distributed training, choose True. If you
-	// enable network isolation for training jobs that are configured to use a VPC,
-	// SageMaker downloads and uploads customer data and model artifacts through the
-	// specified VPC, but the training container does not have network access.
+	// If you want to allow inbound or outbound network calls, except for calls
+	// between peers within a training cluster for distributed training, choose True .
+	// If you enable network isolation for training jobs that are configured to use a
+	// VPC, SageMaker downloads and uploads customer data and model artifacts through
+	// the specified VPC, but the training container does not have network access.
 	EnableNetworkIsolation bool
 
 	// The environment variables to set in the Docker container.
@@ -231,20 +195,16 @@ type DescribeTrainingJobOutput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//
-	// * CreateProcessingJob
-	//
-	// *
-	// CreateTrainingJob
-	//
-	// * CreateTransformJob
+	//   - CreateProcessingJob
+	//   - CreateTrainingJob
+	//   - CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// If the training job failed, the reason it failed.
 	FailureReason *string
 
-	// A collection of MetricData objects that specify the names, values, and dates and
-	// times that the training algorithm emitted to Amazon CloudWatch.
+	// A collection of MetricData objects that specify the names, values, and dates
+	// and times that the training algorithm emitted to Amazon CloudWatch.
 	FinalMetricDataList []types.MetricData
 
 	// Algorithm-specific parameters.
@@ -273,27 +233,27 @@ type DescribeTrainingJobOutput struct {
 	// system and framework metrics.
 	ProfilerRuleConfigurations []types.ProfilerRuleConfiguration
 
-	// Evaluation status of Amazon SageMaker Debugger rules for profiling on a training
-	// job.
+	// Evaluation status of Amazon SageMaker Debugger rules for profiling on a
+	// training job.
 	ProfilerRuleEvaluationStatuses []types.ProfilerRuleEvaluationStatus
 
 	// Profiling status of a training job.
 	ProfilingStatus types.ProfilingStatus
 
 	// The number of times to retry the job when the job fails due to an
-	// InternalServerError.
+	// InternalServerError .
 	RetryStrategy *types.RetryStrategy
 
-	// The Amazon Web Services Identity and Access Management (IAM) role configured for
-	// the training job.
+	// The Amazon Web Services Identity and Access Management (IAM) role configured
+	// for the training job.
 	RoleArn *string
 
 	// A history of all of the secondary statuses that the training job has
 	// transitioned through.
 	SecondaryStatusTransitions []types.SecondaryStatusTransition
 
-	// Configuration of storage locations for the Amazon SageMaker Debugger TensorBoard
-	// output data.
+	// Configuration of storage locations for the Amazon SageMaker Debugger
+	// TensorBoard output data.
 	TensorBoardOutputConfig *types.TensorBoardOutputConfig
 
 	// Indicates the time when the training job ends on training instances. You are
@@ -304,10 +264,10 @@ type DescribeTrainingJobOutput struct {
 	TrainingEndTime *time.Time
 
 	// Indicates the time when the training job starts on training instances. You are
-	// billed for the time interval between this time and the value of TrainingEndTime.
-	// The start time in CloudWatch Logs might be later than this time. The difference
-	// is due to the time it takes to download the training data and to the size of the
-	// training container.
+	// billed for the time interval between this time and the value of TrainingEndTime
+	// . The start time in CloudWatch Logs might be later than this time. The
+	// difference is due to the time it takes to download the training data and to the
+	// size of the training container.
 	TrainingStartTime *time.Time
 
 	// The training time in seconds.
@@ -319,7 +279,7 @@ type DescribeTrainingJobOutput struct {
 
 	// A VpcConfig object that specifies the VPC that this training job has access to.
 	// For more information, see Protect Training Jobs by Using an Amazon Virtual
-	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html) .
 	VpcConfig *types.VpcConfig
 
 	// The status of the warm pool associated with the training job.
@@ -394,8 +354,8 @@ func (c *Client) addOperationDescribeTrainingJobMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeTrainingJobAPIClient is a client that implements the DescribeTrainingJob
-// operation.
+// DescribeTrainingJobAPIClient is a client that implements the
+// DescribeTrainingJob operation.
 type DescribeTrainingJobAPIClient interface {
 	DescribeTrainingJob(context.Context, *DescribeTrainingJobInput, ...func(*Options)) (*DescribeTrainingJobOutput, error)
 }
@@ -417,10 +377,10 @@ type TrainingJobCompletedOrStoppedWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, TrainingJobCompletedOrStoppedWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, TrainingJobCompletedOrStoppedWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -470,8 +430,8 @@ func (w *TrainingJobCompletedOrStoppedWaiter) Wait(ctx context.Context, params *
 	return err
 }
 
-// WaitForOutput calls the waiter function for TrainingJobCompletedOrStopped waiter
-// and returns the output of the successful operation. The maxWaitDur is the
+// WaitForOutput calls the waiter function for TrainingJobCompletedOrStopped
+// waiter and returns the output of the successful operation. The maxWaitDur is the
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *TrainingJobCompletedOrStoppedWaiter) WaitForOutput(ctx context.Context, params *DescribeTrainingJobInput, maxWaitDur time.Duration, optFns ...func(*TrainingJobCompletedOrStoppedWaiterOptions)) (*DescribeTrainingJobOutput, error) {

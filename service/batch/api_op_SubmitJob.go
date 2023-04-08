@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Submits an Batch job from a job definition. Parameters that are specified during
-// SubmitJob override parameters defined in the job definition. vCPU and memory
-// requirements that are specified in the resourceRequirements objects in the job
-// definition are the exception. They can't be overridden this way using the memory
-// and vcpus parameters. Rather, you must specify updates to job definition
-// parameters in a resourceRequirements object that's included in the
+// Submits an Batch job from a job definition. Parameters that are specified
+// during SubmitJob override parameters defined in the job definition. vCPU and
+// memory requirements that are specified in the resourceRequirements objects in
+// the job definition are the exception. They can't be overridden this way using
+// the memory and vcpus parameters. Rather, you must specify updates to job
+// definition parameters in a resourceRequirements object that's included in the
 // containerOverrides parameter. Job queues with a scheduling policy are limited to
 // 500 active fair share identifiers at a time. Jobs that run on Fargate resources
 // can't be guaranteed to run for more than 14 days. This is because, after 14
@@ -36,13 +36,13 @@ func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns .
 	return out, nil
 }
 
-// Contains the parameters for SubmitJob.
+// Contains the parameters for SubmitJob .
 type SubmitJobInput struct {
 
-	// The job definition used by this job. This value can be one of definition-name,
-	// definition-name:revision, or the Amazon Resource Name (ARN) for the job
-	// definition, with or without the revision
-	// (arn:aws:batch:region:account:job-definition/definition-name:revision , or
+	// The job definition used by this job. This value can be one of definition-name ,
+	// definition-name:revision , or the Amazon Resource Name (ARN) for the job
+	// definition, with or without the revision (
+	// arn:aws:batch:region:account:job-definition/definition-name:revision , or
 	// arn:aws:batch:region:account:job-definition/definition-name ). If the revision
 	// is not specified, then the latest active revision is used.
 	//
@@ -56,17 +56,16 @@ type SubmitJobInput struct {
 	// This member is required.
 	JobName *string
 
-	// The job queue where the job is submitted. You can specify either the name or the
-	// Amazon Resource Name (ARN) of the queue.
+	// The job queue where the job is submitted. You can specify either the name or
+	// the Amazon Resource Name (ARN) of the queue.
 	//
 	// This member is required.
 	JobQueue *string
 
 	// The array properties for the submitted job, such as the size of the array. The
 	// array size can be between 2 and 10,000. If you specify array properties for a
-	// job, it becomes an array job. For more information, see Array Jobs
-	// (https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html) in the
-	// Batch User Guide.
+	// job, it becomes an array job. For more information, see Array Jobs (https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html)
+	// in the Batch User Guide.
 	ArrayProperties *types.ArrayProperties
 
 	// An object with various properties that override the defaults for the job
@@ -114,8 +113,8 @@ type SubmitJobInput struct {
 	// job definition.
 	RetryStrategy *types.RetryStrategy
 
-	// The scheduling priority for the job. This only affects jobs in job queues with a
-	// fair share policy. Jobs with a higher scheduling priority are scheduled before
+	// The scheduling priority for the job. This only affects jobs in job queues with
+	// a fair share policy. Jobs with a higher scheduling priority are scheduled before
 	// jobs with a lower scheduling priority. This overrides any scheduling priority in
 	// the job definition. The minimum supported value is 0 and the maximum supported
 	// value is 9999.
@@ -128,9 +127,8 @@ type SubmitJobInput struct {
 
 	// The tags that you apply to the job request to help you categorize and organize
 	// your resources. Each tag consists of a key and an optional value. For more
-	// information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in Amazon Web
-	// Services General Reference.
+	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in Amazon Web Services General Reference.
 	Tags map[string]string
 
 	// The timeout configuration for this SubmitJob operation. You can specify a
@@ -139,8 +137,7 @@ type SubmitJobInput struct {
 	// value for the timeout is 60 seconds. This configuration overrides any timeout
 	// configuration specified in the job definition. For array jobs, child jobs have
 	// the same timeout configuration as the parent job. For more information, see Job
-	// Timeouts
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html)
+	// Timeouts (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Timeout *types.JobTimeout
 

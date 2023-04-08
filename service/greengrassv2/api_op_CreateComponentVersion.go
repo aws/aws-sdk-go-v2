@@ -18,46 +18,28 @@ import (
 // this operation to upload your component to IoT Greengrass. Then, you can deploy
 // the component to other core devices. You can use this operation to do the
 // following:
-//
-// * Create components from recipes Create a component from a recipe,
-// which is a file that defines the component's metadata, parameters, dependencies,
-// lifecycle, artifacts, and platform capability. For more information, see IoT
-// Greengrass component recipe reference
-// (https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html)
-// in the IoT Greengrass V2 Developer Guide. To create a component from a recipe,
-// specify inlineRecipe when you call this operation.
-//
-// * Create components from
-// Lambda functions Create a component from an Lambda function that runs on IoT
-// Greengrass. This creates a recipe and artifacts from the Lambda function's
-// deployment package. You can use this operation to migrate Lambda functions from
-// IoT Greengrass V1 to IoT Greengrass V2. This function only accepts Lambda
-// functions that use the following runtimes:
-//
-// * Python 2.7 – python2.7
-//
-// * Python
-// 3.7 – python3.7
-//
-// * Python 3.8 – python3.8
-//
-// * Python 3.9 – python3.9
-//
-// * Java 8 –
-// java8
-//
-// * Java 11 – java11
-//
-// * Node.js 10 – nodejs10.x
-//
-// * Node.js 12 –
-// nodejs12.x
-//
-// * Node.js 14 – nodejs14.x
-//
-// To create a component from a Lambda
-// function, specify lambdaFunction when you call this operation. IoT Greengrass
-// currently supports Lambda functions on only Linux core devices.
+//   - Create components from recipes Create a component from a recipe, which is a
+//     file that defines the component's metadata, parameters, dependencies, lifecycle,
+//     artifacts, and platform capability. For more information, see IoT Greengrass
+//     component recipe reference (https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html)
+//     in the IoT Greengrass V2 Developer Guide. To create a component from a recipe,
+//     specify inlineRecipe when you call this operation.
+//   - Create components from Lambda functions Create a component from an Lambda
+//     function that runs on IoT Greengrass. This creates a recipe and artifacts from
+//     the Lambda function's deployment package. You can use this operation to migrate
+//     Lambda functions from IoT Greengrass V1 to IoT Greengrass V2. This function only
+//     accepts Lambda functions that use the following runtimes:
+//   - Python 2.7 – python2.7
+//   - Python 3.7 – python3.7
+//   - Python 3.8 – python3.8
+//   - Python 3.9 – python3.9
+//   - Java 8 – java8
+//   - Java 11 – java11
+//   - Node.js 10 – nodejs10.x
+//   - Node.js 12 – nodejs12.x
+//   - Node.js 14 – nodejs14.x To create a component from a Lambda function,
+//     specify lambdaFunction when you call this operation. IoT Greengrass currently
+//     supports Lambda functions on only Linux core devices.
 func (c *Client) CreateComponentVersion(ctx context.Context, params *CreateComponentVersionInput, optFns ...func(*Options)) (*CreateComponentVersionOutput, error) {
 	if params == nil {
 		params = &CreateComponentVersionInput{}
@@ -86,17 +68,16 @@ type CreateComponentVersionInput struct {
 
 	// The recipe to use to create the component. The recipe defines the component's
 	// metadata, parameters, dependencies, lifecycle, artifacts, and platform
-	// compatibility. You must specify either inlineRecipe or lambdaFunction.
+	// compatibility. You must specify either inlineRecipe or lambdaFunction .
 	InlineRecipe []byte
 
 	// The parameters to create a component from a Lambda function. You must specify
-	// either inlineRecipe or lambdaFunction.
+	// either inlineRecipe or lambdaFunction .
 	LambdaFunction *types.LambdaFunctionRecipeSource
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tag your resources
-	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
-	// the IoT Greengrass V2 Developer Guide.
+	// information, see Tag your resources (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html)
+	// in the IoT Greengrass V2 Developer Guide.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -125,9 +106,8 @@ type CreateComponentVersionOutput struct {
 	// This member is required.
 	Status *types.CloudComponentStatus
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the component version.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the component version.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.

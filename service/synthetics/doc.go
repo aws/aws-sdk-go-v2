@@ -12,10 +12,9 @@
 // UI, logs, and metrics. The canaries seamlessly integrate with CloudWatch
 // ServiceLens to help you trace the causes of impacted nodes in your applications.
 // For more information, see Using ServiceLens to Monitor the Health of Your
-// Applications
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ServiceLens.html)
+// Applications (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ServiceLens.html)
 // in the Amazon CloudWatch User Guide. Before you create and manage canaries, be
 // aware of the security considerations. For more information, see Security
-// Considerations for Synthetics Canaries
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html).
+// Considerations for Synthetics Canaries (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html)
+// .
 package synthetics

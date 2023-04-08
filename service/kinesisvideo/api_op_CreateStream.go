@@ -13,9 +13,8 @@ import (
 // Creates a new Kinesis video stream. When you create a new stream, Kinesis Video
 // Streams assigns it a version number. When you change the stream's metadata,
 // Kinesis Video Streams updates the version. CreateStream is an asynchronous
-// operation. For information about how the service works, see How it Works
-// (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html).
-// You must have permissions for the KinesisVideo:CreateStream action.
+// operation. For information about how the service works, see How it Works (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html)
+// . You must have permissions for the KinesisVideo:CreateStream action.
 func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, optFns ...func(*Options)) (*CreateStreamOutput, error) {
 	if params == nil {
 		params = &CreateStreamInput{}
@@ -54,18 +53,18 @@ type CreateStreamInput struct {
 
 	// The ID of the Key Management Service (KMS) key that you want Kinesis Video
 	// Streams to use to encrypt stream data. If no key ID is specified, the default,
-	// Kinesis Video-managed key (aws/kinesisvideo) is used. For more information, see
-	// DescribeKey
-	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters).
+	// Kinesis Video-managed key ( aws/kinesisvideo ) is used. For more information,
+	// see DescribeKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
+	// .
 	KmsKeyId *string
 
 	// The media type of the stream. Consumers of the stream can use this information
 	// when processing the stream. For more information about media types, see Media
-	// Types (http://www.iana.org/assignments/media-types/media-types.xhtml). If you
-	// choose to specify the MediaType, see Naming Requirements
-	// (https://tools.ietf.org/html/rfc6838#section-4.2) for guidelines. Example valid
-	// values include "video/h264" and "video/h264,audio/aac". This parameter is
-	// optional; the default value is null (or empty in JSON).
+	// Types (http://www.iana.org/assignments/media-types/media-types.xhtml) . If you
+	// choose to specify the MediaType , see Naming Requirements (https://tools.ietf.org/html/rfc6838#section-4.2)
+	// for guidelines. Example valid values include "video/h264" and
+	// "video/h264,audio/aac". This parameter is optional; the default value is null
+	// (or empty in JSON).
 	MediaType *string
 
 	// A list of tags to associate with the specified stream. Each tag is a key-value

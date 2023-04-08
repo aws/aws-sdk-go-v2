@@ -64,7 +64,7 @@ type DescribeTagsOutput struct {
 	// This member is required.
 	Tags []types.Tag
 
-	// If the request included a Marker, the response returns that value in this field.
+	// If the request included a Marker , the response returns that value in this field.
 	Marker *string
 
 	// If a value is present, there are more tags to return. In a subsequent request,

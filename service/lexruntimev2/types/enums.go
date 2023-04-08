@@ -75,9 +75,9 @@ const (
 	InputModeDtmf   InputMode = "DTMF"
 )
 
-// Values returns all known values for InputMode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for InputMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (InputMode) Values() []InputMode {
 	return []InputMode{
 		"Text",
@@ -185,8 +185,8 @@ const (
 	ShapeComposite Shape = "Composite"
 )
 
-// Values returns all known values for Shape. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Shape. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Shape) Values() []Shape {
 	return []Shape{
@@ -205,9 +205,9 @@ const (
 	StyleTypeSpellByWord   StyleType = "SpellByWord"
 )
 
-// Values returns all known values for StyleType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for StyleType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StyleType) Values() []StyleType {
 	return []StyleType{
 		"Default",

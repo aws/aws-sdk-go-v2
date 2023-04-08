@@ -74,8 +74,8 @@ const (
 	OwnerCustom     Owner = "CUSTOM"
 )
 
-// Values returns all known values for Owner. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Owner. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Owner) Values() []Owner {
 	return []Owner{
@@ -92,9 +92,9 @@ const (
 	PluginHealthPluginUnhealthy PluginHealth = "UNHEALTHY"
 )
 
-// Values returns all known values for PluginHealth. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PluginHealth. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PluginHealth) Values() []PluginHealth {
 	return []PluginHealth{
 		"HEALTHY",

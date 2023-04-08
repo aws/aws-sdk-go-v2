@@ -13,8 +13,7 @@ import (
 
 // This action is no longer supported. You can use it to configure only SMS MFA.
 // You can't use it to configure time-based one-time password (TOTP) software token
-// MFA. To configure either type of MFA, use AdminSetUserMFAPreference
-// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserMFAPreference.html)
+// MFA. To configure either type of MFA, use AdminSetUserMFAPreference (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserMFAPreference.html)
 // instead.
 func (c *Client) AdminSetUserSettings(ctx context.Context, params *AdminSetUserSettingsInput, optFns ...func(*Options)) (*AdminSetUserSettingsOutput, error) {
 	if params == nil {

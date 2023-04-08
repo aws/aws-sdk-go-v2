@@ -42,8 +42,8 @@ type DeleteDBClusterSnapshotInput struct {
 
 type DeleteDBClusterSnapshotOutput struct {
 
-	// Contains the details for an Amazon Neptune DB cluster snapshot This data type is
-	// used as a response element in the DescribeDBClusterSnapshots action.
+	// Contains the details for an Amazon Neptune DB cluster snapshot This data type
+	// is used as a response element in the DescribeDBClusterSnapshots action.
 	DBClusterSnapshot *types.DBClusterSnapshot
 
 	// Metadata pertaining to the operation's result.

@@ -15,13 +15,11 @@ import (
 // When you export your virtual machine (VM) from its virtualization environment,
 // that process creates a set of one or more disk container files that act as
 // snapshots of your VM’s environment, settings, and data. The Amazon EC2 API
-// ImportImage
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html)
+// ImportImage (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html)
 // action uses those files to import your VM and create an AMI. To import using the
-// CLI command, see import-image
-// (https://docs.aws.amazon.com/cli/latest/reference/ec2/import-image.html) You can
-// reference the task ID from the VM import to pull in the AMI that the import
-// created as the base image for your Image Builder recipe.
+// CLI command, see import-image (https://docs.aws.amazon.com/cli/latest/reference/ec2/import-image.html)
+// You can reference the task ID from the VM import to pull in the AMI that the
+// import created as the base image for your Image Builder recipe.
 func (c *Client) ImportVmImage(ctx context.Context, params *ImportVmImageInput, optFns ...func(*Options)) (*ImportVmImageOutput, error) {
 	if params == nil {
 		params = &ImportVmImageInput{}
@@ -40,8 +38,7 @@ func (c *Client) ImportVmImage(ctx context.Context, params *ImportVmImageInput, 
 type ImportVmImageInput struct {
 
 	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see Ensuring idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// in the Amazon EC2 API Reference.
 	//
 	// This member is required.

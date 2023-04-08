@@ -13,9 +13,8 @@ import (
 
 // Lists the tags that are attached to the specified IAM customer managed policy.
 // The returned list of tags is sorted by tag key. For more information about
-// tagging, see Tagging IAM resources
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-// Guide.
+// tagging, see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
+// in the IAM User Guide.
 func (c *Client) ListPolicyTags(ctx context.Context, params *ListPolicyTagsInput, optFns ...func(*Options)) (*ListPolicyTagsOutput, error) {
 	if params == nil {
 		params = &ListPolicyTagsInput{}
@@ -34,8 +33,8 @@ func (c *Client) ListPolicyTags(ctx context.Context, params *ListPolicyTagsInput
 type ListPolicyTagsInput struct {
 
 	// The ARN of the IAM customer managed policy whose tags you want to see. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
-	// string of characters consisting of upper and lowercase alphanumeric characters
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex) )
+	// a string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
@@ -49,10 +48,10 @@ type ListPolicyTagsInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
@@ -61,9 +60,9 @@ type ListPolicyTagsInput struct {
 
 type ListPolicyTagsOutput struct {
 
-	// The list of tags that are currently attached to the IAM customer managed policy.
-	// Each tag consists of a key name and an associated value. If no tags are attached
-	// to the specified resource, the response contains an empty list.
+	// The list of tags that are currently attached to the IAM customer managed
+	// policy. Each tag consists of a key name and an associated value. If no tags are
+	// attached to the specified resource, the response contains an empty list.
 	//
 	// This member is required.
 	Tags []types.Tag
@@ -72,11 +71,11 @@ type ListPolicyTagsOutput struct {
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
 	// the MaxItems number of results even when there are more results available. We
-	// recommend that you check IsTruncated after every call to ensure that you receive
-	// all your results.
+	// recommend that you check IsTruncated after every call to ensure that you
+	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated is true, this element is present and contains the value to use
+	// When IsTruncated is true , this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 

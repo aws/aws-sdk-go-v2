@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disconnects a specified participant and revokes the participant permanently from
-// a specified stage.
+// Disconnects a specified participant and revokes the participant permanently
+// from a specified stage.
 func (c *Client) DisconnectParticipant(ctx context.Context, params *DisconnectParticipantInput, optFns ...func(*Options)) (*DisconnectParticipantOutput, error) {
 	if params == nil {
 		params = &DisconnectParticipantInput{}
@@ -30,7 +30,7 @@ func (c *Client) DisconnectParticipant(ctx context.Context, params *DisconnectPa
 type DisconnectParticipantInput struct {
 
 	// Identifier of the participant to be disconnected. This is returned by
-	// CreateParticipantToken.
+	// CreateParticipantToken .
 	//
 	// This member is required.
 	ParticipantId *string

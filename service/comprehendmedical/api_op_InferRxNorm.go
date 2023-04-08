@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// InferRxNorm detects medications as entities listed in a patient record and links
-// to the normalized concept identifiers in the RxNorm database from the National
-// Library of Medicine. Amazon Comprehend Medical only detects medical entities in
-// English language texts.
+// InferRxNorm detects medications as entities listed in a patient record and
+// links to the normalized concept identifiers in the RxNorm database from the
+// National Library of Medicine. Amazon Comprehend Medical only detects medical
+// entities in English language texts.
 func (c *Client) InferRxNorm(ctx context.Context, params *InferRxNormInput, optFns ...func(*Options)) (*InferRxNormOutput, error) {
 	if params == nil {
 		params = &InferRxNormInput{}

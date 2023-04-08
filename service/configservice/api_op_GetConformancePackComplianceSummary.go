@@ -132,8 +132,8 @@ type GetConformancePackComplianceSummaryAPIClient interface {
 
 var _ GetConformancePackComplianceSummaryAPIClient = (*Client)(nil)
 
-// GetConformancePackComplianceSummaryPaginatorOptions is the paginator options for
-// GetConformancePackComplianceSummary
+// GetConformancePackComplianceSummaryPaginatorOptions is the paginator options
+// for GetConformancePackComplianceSummary
 type GetConformancePackComplianceSummaryPaginatorOptions struct {
 	// The maximum number of conformance packs returned on each page.
 	Limit int32

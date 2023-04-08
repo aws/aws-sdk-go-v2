@@ -193,7 +193,7 @@ func (e *InvalidStateException) ErrorCode() string {
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or both of the values that make up the key-value pair is not valid. For
-// example, you cannot specify a tag value that begins with aws:.
+// example, you cannot specify a tag value that begins with aws: .
 type InvalidTagException struct {
 	Message *string
 
@@ -272,8 +272,8 @@ func (e *RequestInProgressException) ErrorCode() string {
 }
 func (e *RequestInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The certificate is in use by another Amazon Web Services service in the caller's
-// account. Remove the association and try again.
+// The certificate is in use by another Amazon Web Services service in the
+// caller's account. Remove the association and try again.
 type ResourceInUseException struct {
 	Message *string
 

@@ -12,7 +12,7 @@ import (
 
 // Deletes the server and the underlying AWS CloudFormation stacks (including the
 // server's EC2 instance). When you run this command, the server state is updated
-// to DELETING. After the server is deleted, it is no longer returned by
+// to DELETING . After the server is deleted, it is no longer returned by
 // DescribeServer requests. If the AWS CloudFormation stack cannot be deleted, the
 // server cannot be deleted. This operation is asynchronous. An
 // InvalidStateException is thrown when a server deletion is already in progress. A

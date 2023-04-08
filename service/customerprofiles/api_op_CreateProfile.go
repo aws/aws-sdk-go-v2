@@ -41,8 +41,8 @@ type CreateProfileInput struct {
 	// Any additional information relevant to the customer’s profile.
 	AdditionalInformation *string
 
-	// A generic address associated with the customer that is not mailing, shipping, or
-	// billing.
+	// A generic address associated with the customer that is not mailing, shipping,
+	// or billing.
 	Address *types.Address
 
 	// A key value pair of attributes of a customer profile.

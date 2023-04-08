@@ -54,12 +54,12 @@ type DescribeExportOutput struct {
 	// The unique identifier of the described export.
 	ExportId *string
 
-	// The status of the export. When the status is Complete the export archive file is
-	// available for download.
+	// The status of the export. When the status is Complete the export archive file
+	// is available for download.
 	ExportStatus types.ExportStatus
 
-	// If the exportStatus is failed, contains one or more reasons why the export could
-	// not be completed.
+	// If the exportStatus is failed, contains one or more reasons why the export
+	// could not be completed.
 	FailureReasons []string
 
 	// The file format used in the files that describe the resource.
@@ -161,8 +161,8 @@ type BotExportCompletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, BotExportCompletedWaiter will use default max delay of 120 seconds.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, BotExportCompletedWaiter will use default max delay of 120 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 

@@ -32,8 +32,8 @@ func (c *Client) SearchSystemInstances(ctx context.Context, params *SearchSystem
 
 type SearchSystemInstancesInput struct {
 
-	// Optional filter to apply to the search. Valid filters are SYSTEM_TEMPLATE_ID,
-	// STATUS, and GREENGRASS_GROUP_NAME. Multiple filters function as OR criteria in
+	// Optional filter to apply to the search. Valid filters are SYSTEM_TEMPLATE_ID ,
+	// STATUS , and GREENGRASS_GROUP_NAME . Multiple filters function as OR criteria in
 	// the query. Multiple values passed inside the filter function as AND criteria.
 	Filters []types.SystemInstanceFilter
 

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a handshake. Canceling a handshake sets the handshake state to CANCELED.
-// This operation can be called only from the account that originated the
+// Cancels a handshake. Canceling a handshake sets the handshake state to CANCELED
+// . This operation can be called only from the account that originated the
 // handshake. The recipient of the handshake can't cancel it, but can use
 // DeclineHandshake instead. After a handshake is canceled, the recipient can no
 // longer respond to that handshake. After you cancel a handshake, it continues to
@@ -35,10 +35,10 @@ func (c *Client) CancelHandshake(ctx context.Context, params *CancelHandshakeInp
 
 type CancelHandshakeInput struct {
 
-	// The unique identifier (ID) of the handshake that you want to cancel. You can get
-	// the ID from the ListHandshakesForOrganization operation. The regex pattern
-	// (http://wikipedia.org/wiki/regex) for handshake ID string requires "h-" followed
-	// by from 8 to 32 lowercase letters or digits.
+	// The unique identifier (ID) of the handshake that you want to cancel. You can
+	// get the ID from the ListHandshakesForOrganization operation. The regex pattern (http://wikipedia.org/wiki/regex)
+	// for handshake ID string requires "h-" followed by from 8 to 32 lowercase letters
+	// or digits.
 	//
 	// This member is required.
 	HandshakeId *string

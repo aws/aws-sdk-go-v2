@@ -40,10 +40,10 @@ type ListSpacesInput struct {
 	// your next request to receive the next set of results.
 	NextToken *string
 
-	// The parameter by which to sort the results. The default is CreationTime.
+	// The parameter by which to sort the results. The default is CreationTime .
 	SortBy types.SpaceSortKey
 
-	// The sort order for the results. The default is Ascending.
+	// The sort order for the results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	// A parameter by which to filter the results.

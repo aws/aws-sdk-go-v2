@@ -50,15 +50,9 @@ type ListOutpostsWithS3Output struct {
 	NextToken *string
 
 	// Returns the list of Outposts that have the following characteristics:
-	//
-	// *
-	// outposts that have S3 provisioned
-	//
-	// * outposts that are Active (not pending any
-	// provisioning nor decommissioned)
-	//
-	// * outposts to which the the calling Amazon Web
-	// Services account has access
+	//   - outposts that have S3 provisioned
+	//   - outposts that are Active (not pending any provisioning nor decommissioned)
+	//   - outposts to which the the calling Amazon Web Services account has access
 	Outposts []types.Outpost
 
 	// Metadata pertaining to the operation's result.

@@ -17,8 +17,7 @@ import (
 // remove resources, or to change the status of the monitor. Note that you can't
 // change the name of a monitor. The city-network maximum that you choose is the
 // limit, but you only pay for the number of city-networks that are actually
-// monitored. For more information, see Choosing a city-network maximum value
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
+// monitored. For more information, see Choosing a city-network maximum value (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
 // in the Amazon CloudWatch User Guide.
 func (c *Client) UpdateMonitor(ctx context.Context, params *UpdateMonitorInput, optFns ...func(*Options)) (*UpdateMonitorOutput, error) {
 	if params == nil {
@@ -42,9 +41,9 @@ type UpdateMonitorInput struct {
 	// This member is required.
 	MonitorName *string
 
-	// A unique, case-sensitive string of up to 64 ASCII characters that you specify to
-	// make an idempotent API request. You should not reuse the same client token for
-	// other API requests.
+	// A unique, case-sensitive string of up to 64 ASCII characters that you specify
+	// to make an idempotent API request. You should not reuse the same client token
+	// for other API requests.
 	ClientToken *string
 
 	// Publish internet measurements for Internet Monitor to another location, such as
@@ -71,8 +70,8 @@ type UpdateMonitorInput struct {
 	ResourcesToRemove []string
 
 	// The status for a monitor. The accepted values for Status with the UpdateMonitor
-	// API call are the following: ACTIVE and INACTIVE. The following values are not
-	// accepted: PENDING, and ERROR.
+	// API call are the following: ACTIVE and INACTIVE . The following values are not
+	// accepted: PENDING , and ERROR .
 	Status types.MonitorConfigState
 
 	noSmithyDocumentSerde

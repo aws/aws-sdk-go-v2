@@ -30,8 +30,8 @@ const (
 	AuthTokenUpdateStatusRotating AuthTokenUpdateStatus = "ROTATING"
 )
 
-// Values returns all known values for AuthTokenUpdateStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AuthTokenUpdateStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AuthTokenUpdateStatus) Values() []AuthTokenUpdateStatus {
 	return []AuthTokenUpdateStatus{
@@ -225,9 +225,9 @@ const (
 	LogFormatJson LogFormat = "json"
 )
 
-// Values returns all known values for LogFormat. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LogFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LogFormat) Values() []LogFormat {
 	return []LogFormat{
 		"text",
@@ -299,8 +299,8 @@ const (
 	NodeUpdateInitiatedByCustomer NodeUpdateInitiatedBy = "customer"
 )
 
-// Values returns all known values for NodeUpdateInitiatedBy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for NodeUpdateInitiatedBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (NodeUpdateInitiatedBy) Values() []NodeUpdateInitiatedBy {
 	return []NodeUpdateInitiatedBy{
@@ -382,8 +382,8 @@ const (
 	ServiceUpdateSeverityLow       ServiceUpdateSeverity = "low"
 )
 
-// Values returns all known values for ServiceUpdateSeverity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ServiceUpdateSeverity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceUpdateSeverity) Values() []ServiceUpdateSeverity {
 	return []ServiceUpdateSeverity{
@@ -486,8 +486,8 @@ const (
 	TransitEncryptionModeRequired  TransitEncryptionMode = "required"
 )
 
-// Values returns all known values for TransitEncryptionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TransitEncryptionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TransitEncryptionMode) Values() []TransitEncryptionMode {
 	return []TransitEncryptionMode{

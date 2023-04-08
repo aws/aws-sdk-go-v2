@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List input devices that are currently being transferred. List input devices that
-// you are transferring from your AWS account or input devices that another AWS
-// account is transferring to you.
+// List input devices that are currently being transferred. List input devices
+// that you are transferring from your AWS account or input devices that another
+// AWS account is transferring to you.
 func (c *Client) ListInputDeviceTransfers(ctx context.Context, params *ListInputDeviceTransfersInput, optFns ...func(*Options)) (*ListInputDeviceTransfersOutput, error) {
 	if params == nil {
 		params = &ListInputDeviceTransfersInput{}

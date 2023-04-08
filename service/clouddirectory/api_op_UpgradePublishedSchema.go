@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Upgrades a published schema under a new minor version revision using the current
-// contents of DevelopmentSchemaArn.
+// Upgrades a published schema under a new minor version revision using the
+// current contents of DevelopmentSchemaArn .
 func (c *Client) UpgradePublishedSchema(ctx context.Context, params *UpgradePublishedSchemaInput, optFns ...func(*Options)) (*UpgradePublishedSchemaOutput, error) {
 	if params == nil {
 		params = &UpgradePublishedSchemaInput{}

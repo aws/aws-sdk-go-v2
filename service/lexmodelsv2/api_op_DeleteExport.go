@@ -43,10 +43,8 @@ type DeleteExportOutput struct {
 	ExportId *string
 
 	// The current status of the deletion. When the deletion is complete, the export
-	// will no longer be returned by the ListExports
-	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html)
-	// operation and calls to the  DescribeExport
-	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html)
+	// will no longer be returned by the ListExports (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html)
+	// operation and calls to the DescribeExport (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html)
 	// operation with the export identifier will fail.
 	ExportStatus types.ExportStatus
 

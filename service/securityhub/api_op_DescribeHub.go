@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns details about the Hub resource in your account, including the HubArn and
-// the time when you enabled Security Hub.
+// Returns details about the Hub resource in your account, including the HubArn
+// and the time when you enabled Security Hub.
 func (c *Client) DescribeHub(ctx context.Context, params *DescribeHubInput, optFns ...func(*Options)) (*DescribeHubOutput, error) {
 	if params == nil {
 		params = &DescribeHubInput{}
@@ -39,15 +39,15 @@ type DescribeHubInput struct {
 type DescribeHubOutput struct {
 
 	// Whether to automatically enable new controls when they are added to standards
-	// that are enabled. If set to true, then new controls for enabled standards are
-	// enabled automatically. If set to false, then new controls are not enabled.
+	// that are enabled. If set to true , then new controls for enabled standards are
+	// enabled automatically. If set to false , then new controls are not enabled.
 	AutoEnableControls bool
 
 	// Specifies whether the calling account has consolidated control findings turned
-	// on. If the value for this field is set to SECURITY_CONTROL, Security Hub
+	// on. If the value for this field is set to SECURITY_CONTROL , Security Hub
 	// generates a single finding for a control check even when the check applies to
 	// multiple enabled standards. If the value for this field is set to
-	// STANDARD_CONTROL, Security Hub generates separate findings for a control check
+	// STANDARD_CONTROL , Security Hub generates separate findings for a control check
 	// when the check applies to multiple enabled standards. The value for this field
 	// in a member account matches the value in the administrator account. For accounts
 	// that aren't part of an organization, the default value of this field is

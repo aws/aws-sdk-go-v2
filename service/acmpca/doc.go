@@ -10,18 +10,17 @@
 // request parameters and the JSON response. Alternatively, you can use one of the
 // Amazon Web Services SDKs to access an API that is tailored to the programming
 // language or platform that you prefer. For more information, see Amazon Web
-// Services SDKs (https://aws.amazon.com/tools/#SDKs). Each Amazon Web Services
+// Services SDKs (https://aws.amazon.com/tools/#SDKs) . Each Amazon Web Services
 // Private CA API operation has a quota that determines the number of times the
 // operation can be called per second. Amazon Web Services Private CA throttles API
 // requests at different rates depending on the operation. Throttling means that
 // Amazon Web Services Private CA rejects an otherwise valid request because the
 // request exceeds the operation's quota for the number of requests per second.
 // When a request is throttled, Amazon Web Services Private CA returns a
-// ThrottlingException
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/CommonErrors.html)
+// ThrottlingException (https://docs.aws.amazon.com/acm-pca/latest/APIReference/CommonErrors.html)
 // error. Amazon Web Services Private CA does not guarantee a minimum request rate
 // for APIs. To see an up-to-date list of your Amazon Web Services Private CA
 // quotas, or to request a quota increase, log into your Amazon Web Services
-// account and visit the Service Quotas
-// (https://console.aws.amazon.com/servicequotas/) console.
+// account and visit the Service Quotas (https://console.aws.amazon.com/servicequotas/)
+// console.
 package acmpca

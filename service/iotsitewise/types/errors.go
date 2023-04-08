@@ -93,9 +93,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // You've reached the limit for a resource. For example, this can occur if you're
 // trying to associate more than the allowed number of child assets or attempting
 // to create more than the allowed number of properties for an asset model. For
-// more information, see Quotas
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
-// IoT SiteWise User Guide.
+// more information, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
+// in the IoT SiteWise User Guide.
 type LimitExceededException struct {
 	Message *string
 
@@ -204,9 +203,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 
 // Your request exceeded a rate limit. For example, you might have exceeded the
 // number of IoT SiteWise assets that can be created per second, the allowed number
-// of messages per second, and so on. For more information, see Quotas
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
-// IoT SiteWise User Guide.
+// of messages per second, and so on. For more information, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
+// in the IoT SiteWise User Guide.
 type ThrottlingException struct {
 	Message *string
 
@@ -232,9 +230,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit for the number of tags allowed for a resource. For more
-// information, see Tag naming limits and requirements
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions)
+// You've reached the limit for the number of tags allowed for a resource. For
+// more information, see Tag naming limits and requirements (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions)
 // in the Amazon Web Services General Reference.
 type TooManyTagsException struct {
 	Message *string

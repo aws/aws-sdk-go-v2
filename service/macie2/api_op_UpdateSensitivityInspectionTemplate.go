@@ -34,8 +34,8 @@ type UpdateSensitivityInspectionTemplateInput struct {
 	// This member is required.
 	Id *string
 
-	// A custom description of the template. The description can contain as many as 200
-	// characters.
+	// A custom description of the template. The description can contain as many as
+	// 200 characters.
 	Description *string
 
 	// The managed data identifiers to explicitly exclude (not use) when analyzing

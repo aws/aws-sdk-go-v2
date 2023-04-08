@@ -32,12 +32,12 @@ func (c *Client) DescribeEdgeConfiguration(ctx context.Context, params *Describe
 
 type DescribeEdgeConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) of the stream. Specify either the StreamNameor
-	// the StreamARN.
+	// The Amazon Resource Name (ARN) of the stream. Specify either the StreamName or
+	// the StreamARN .
 	StreamARN *string
 
 	// The name of the stream whose edge configuration you want to update. Specify
-	// either the StreamName or the StreamARN.
+	// either the StreamName or the StreamARN .
 	StreamName *string
 
 	noSmithyDocumentSerde

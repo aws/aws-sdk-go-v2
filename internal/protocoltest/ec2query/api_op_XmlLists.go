@@ -13,25 +13,14 @@ import (
 
 // This test case serializes XML lists for the following cases for both input and
 // output:
-//
-// * Normal XML lists.
-//
-// * Normal XML sets.
-//
-// * XML lists of lists.
-//
-// * XML
-// lists with @xmlName on its members
-//
-// * Flattened XML lists.
-//
-// * Flattened XML
-// lists with @xmlName.
-//
-// * Flattened XML lists with @xmlNamespace.
-//
-// * Lists of
-// structures.
+//   - Normal XML lists.
+//   - Normal XML sets.
+//   - XML lists of lists.
+//   - XML lists with @xmlName on its members
+//   - Flattened XML lists.
+//   - Flattened XML lists with @xmlName.
+//   - Flattened XML lists with @xmlNamespace.
+//   - Lists of structures.
 func (c *Client) XmlLists(ctx context.Context, params *XmlListsInput, optFns ...func(*Options)) (*XmlListsOutput, error) {
 	if params == nil {
 		params = &XmlListsInput{}

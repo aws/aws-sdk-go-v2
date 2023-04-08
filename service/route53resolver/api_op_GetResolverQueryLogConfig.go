@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a specified Resolver query logging configuration, such as
-// the number of VPCs that the configuration is logging queries for and the
+// Gets information about a specified Resolver query logging configuration, such
+// as the number of VPCs that the configuration is logging queries for and the
 // location that logs are sent to.
 func (c *Client) GetResolverQueryLogConfig(ctx context.Context, params *GetResolverQueryLogConfigInput, optFns ...func(*Options)) (*GetResolverQueryLogConfigOutput, error) {
 	if params == nil {
@@ -42,8 +42,8 @@ type GetResolverQueryLogConfigInput struct {
 
 type GetResolverQueryLogConfigOutput struct {
 
-	// Information about the Resolver query logging configuration that you specified in
-	// a GetQueryLogConfig request.
+	// Information about the Resolver query logging configuration that you specified
+	// in a GetQueryLogConfig request.
 	ResolverQueryLogConfig *types.ResolverQueryLogConfig
 
 	// Metadata pertaining to the operation's result.

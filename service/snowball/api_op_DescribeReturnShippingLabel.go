@@ -32,7 +32,7 @@ func (c *Client) DescribeReturnShippingLabel(ctx context.Context, params *Descri
 type DescribeReturnShippingLabelInput struct {
 
 	// The automatically generated ID for a job, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
+	// JID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	JobId *string

@@ -11,8 +11,7 @@ import (
 )
 
 // Cancels a Device Defender ML Detect mitigation action. Requires permission to
-// access the CancelDetectMitigationActionsTask
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// access the CancelDetectMitigationActionsTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CancelDetectMitigationActionsTask(ctx context.Context, params *CancelDetectMitigationActionsTaskInput, optFns ...func(*Options)) (*CancelDetectMitigationActionsTaskOutput, error) {
 	if params == nil {

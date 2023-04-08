@@ -10,9 +10,9 @@ const (
 	ApiAccessDisabled ApiAccess = "DISABLED"
 )
 
-// Values returns all known values for ApiAccess. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ApiAccess. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ApiAccess) Values() []ApiAccess {
 	return []ApiAccess{
 		"ENABLED",
@@ -33,8 +33,8 @@ const (
 	ApplicationPermissionGetTemporaryCredentials ApplicationPermission = "GetTemporaryCredentials"
 )
 
-// Values returns all known values for ApplicationPermission. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ApplicationPermission. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationPermission) Values() []ApplicationPermission {
 	return []ApplicationPermission{
@@ -256,9 +256,9 @@ const (
 	LocationTypeSagemaker LocationType = "SAGEMAKER"
 )
 
-// Values returns all known values for LocationType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LocationType) Values() []LocationType {
 	return []LocationType{
 		"INGESTION",

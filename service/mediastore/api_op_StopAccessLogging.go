@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops access logging on the specified container. When you stop access logging on
-// a container, MediaStore stops sending access logs to Amazon CloudWatch Logs.
+// Stops access logging on the specified container. When you stop access logging
+// on a container, MediaStore stops sending access logs to Amazon CloudWatch Logs.
 // These access logs are not saved and are not retrievable.
 func (c *Client) StopAccessLogging(ctx context.Context, params *StopAccessLoggingInput, optFns ...func(*Options)) (*StopAccessLoggingOutput, error) {
 	if params == nil {

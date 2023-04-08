@@ -38,7 +38,7 @@ type UpdateRuleGroupInput struct {
 	// resource at the time of the request. To make changes to the rule group, you
 	// provide the token in your request. Network Firewall uses the token to ensure
 	// that the rule group hasn't changed since you last retrieved it. If it has
-	// changed, the operation fails with an InvalidTokenException. If this happens,
+	// changed, the operation fails with an InvalidTokenException . If this happens,
 	// retrieve the rule group again to get a current copy of it with a current token.
 	// Reapply your changes as needed, then try the operation again using the new
 	// token.
@@ -50,13 +50,13 @@ type UpdateRuleGroupInput struct {
 	Description *string
 
 	// Indicates whether you want Network Firewall to just check the validity of the
-	// request, rather than run the request. If set to TRUE, Network Firewall checks
+	// request, rather than run the request. If set to TRUE , Network Firewall checks
 	// whether the request can run successfully, but doesn't actually make the
 	// requested changes. The call returns the value that the request would return if
-	// you ran it with dry run set to FALSE, but doesn't make additions or changes to
+	// you ran it with dry run set to FALSE , but doesn't make additions or changes to
 	// your resources. This option allows you to make sure that you have the required
 	// permissions to run the request and that your request parameters are valid. If
-	// set to FALSE, Network Firewall makes the requested changes to your resources.
+	// set to FALSE , Network Firewall makes the requested changes to your resources.
 	DryRun bool
 
 	// A complex type that contains settings for encryption of your rule group
@@ -93,7 +93,7 @@ type UpdateRuleGroupInput struct {
 	// Indicates whether the rule group is stateless or stateful. If the rule group is
 	// stateless, it contains stateless rules. If it is stateful, it contains stateful
 	// rules. This setting is required for requests that do not include the
-	// RuleGroupARN.
+	// RuleGroupARN .
 	Type types.RuleGroupType
 
 	noSmithyDocumentSerde
@@ -101,9 +101,9 @@ type UpdateRuleGroupInput struct {
 
 type UpdateRuleGroupOutput struct {
 
-	// The high-level properties of a rule group. This, along with the RuleGroup,
+	// The high-level properties of a rule group. This, along with the RuleGroup ,
 	// define the rule group. You can retrieve all objects for a rule group by calling
-	// DescribeRuleGroup.
+	// DescribeRuleGroup .
 	//
 	// This member is required.
 	RuleGroupResponse *types.RuleGroupResponse
@@ -113,7 +113,7 @@ type UpdateRuleGroupOutput struct {
 	// resource at the time of the request. To make changes to the rule group, you
 	// provide the token in your request. Network Firewall uses the token to ensure
 	// that the rule group hasn't changed since you last retrieved it. If it has
-	// changed, the operation fails with an InvalidTokenException. If this happens,
+	// changed, the operation fails with an InvalidTokenException . If this happens,
 	// retrieve the rule group again to get a current copy of it with a current token.
 	// Reapply your changes as needed, then try the operation again using the new
 	// token.

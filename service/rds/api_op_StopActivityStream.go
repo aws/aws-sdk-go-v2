@@ -13,12 +13,10 @@ import (
 
 // Stops a database activity stream that was started using the Amazon Web Services
 // console, the start-activity-stream CLI command, or the StartActivityStream
-// action. For more information, see  Monitoring Amazon Aurora with Database
-// Activity Streams
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)
-// in the Amazon Aurora User Guide or  Monitoring Amazon RDS with Database Activity
-// Streams
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html)
+// action. For more information, see Monitoring Amazon Aurora with Database
+// Activity Streams (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)
+// in the Amazon Aurora User Guide or Monitoring Amazon RDS with Database Activity
+// Streams (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html)
 // in the Amazon RDS User Guide.
 func (c *Client) StopActivityStream(ctx context.Context, params *StopActivityStreamInput, optFns ...func(*Options)) (*StopActivityStreamOutput, error) {
 	if params == nil {
@@ -38,7 +36,7 @@ func (c *Client) StopActivityStream(ctx context.Context, params *StopActivityStr
 type StopActivityStreamInput struct {
 
 	// The Amazon Resource Name (ARN) of the DB cluster for the database activity
-	// stream. For example, arn:aws:rds:us-east-1:12345667890:cluster:das-cluster.
+	// stream. For example, arn:aws:rds:us-east-1:12345667890:cluster:das-cluster .
 	//
 	// This member is required.
 	ResourceArn *string

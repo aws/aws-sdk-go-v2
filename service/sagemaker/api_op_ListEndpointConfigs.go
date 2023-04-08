@@ -47,14 +47,14 @@ type ListEndpointConfigsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListEndpointConfig request was truncated, the
-	// response includes a NextToken. To retrieve the next set of endpoint
+	// response includes a NextToken . To retrieve the next set of endpoint
 	// configurations, use the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is CreationTime.
+	// The field to sort results by. The default is CreationTime .
 	SortBy types.EndpointConfigSortKey
 
-	// The sort order for results. The default is Descending.
+	// The sort order for results. The default is Descending .
 	SortOrder types.OrderKey
 
 	noSmithyDocumentSerde
@@ -67,8 +67,8 @@ type ListEndpointConfigsOutput struct {
 	// This member is required.
 	EndpointConfigs []types.EndpointConfigSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of endpoint configurations, use it in the subsequent request
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of endpoint configurations, use it in the subsequent request
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +137,8 @@ func (c *Client) addOperationListEndpointConfigsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEndpointConfigsAPIClient is a client that implements the ListEndpointConfigs
-// operation.
+// ListEndpointConfigsAPIClient is a client that implements the
+// ListEndpointConfigs operation.
 type ListEndpointConfigsAPIClient interface {
 	ListEndpointConfigs(context.Context, *ListEndpointConfigsInput, ...func(*Options)) (*ListEndpointConfigsOutput, error)
 }

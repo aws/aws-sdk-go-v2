@@ -56,8 +56,8 @@ type ListEdgeDeploymentPlansInput struct {
 	// tokening.
 	NextToken *string
 
-	// The column by which to sort the edge deployment plans. Can be one of NAME,
-	// DEVICEFLEETNAME, CREATIONTIME, LASTMODIFIEDTIME.
+	// The column by which to sort the edge deployment plans. Can be one of NAME ,
+	// DEVICEFLEETNAME , CREATIONTIME , LASTMODIFIEDTIME .
 	SortBy types.ListEdgeDeploymentPlansSortBy
 
 	// The direction of the sorting (ascending or descending).

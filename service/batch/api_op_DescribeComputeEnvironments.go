@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more of your compute environments. If you're using an unmanaged
-// compute environment, you can use the DescribeComputeEnvironment operation to
-// determine the ecsClusterArn that you launch your Amazon ECS container instances
-// into.
+// Describes one or more of your compute environments. If you're using an
+// unmanaged compute environment, you can use the DescribeComputeEnvironment
+// operation to determine the ecsClusterArn that you launch your Amazon ECS
+// container instances into.
 func (c *Client) DescribeComputeEnvironments(ctx context.Context, params *DescribeComputeEnvironmentsInput, optFns ...func(*Options)) (*DescribeComputeEnvironmentsOutput, error) {
 	if params == nil {
 		params = &DescribeComputeEnvironmentsInput{}
@@ -31,19 +31,19 @@ func (c *Client) DescribeComputeEnvironments(ctx context.Context, params *Descri
 	return out, nil
 }
 
-// Contains the parameters for DescribeComputeEnvironments.
+// Contains the parameters for DescribeComputeEnvironments .
 type DescribeComputeEnvironmentsInput struct {
 
-	// A list of up to 100 compute environment names or full Amazon Resource Name (ARN)
-	// entries.
+	// A list of up to 100 compute environment names or full Amazon Resource Name
+	// (ARN) entries.
 	ComputeEnvironments []string
 
-	// The maximum number of cluster results returned by DescribeComputeEnvironments in
-	// paginated output. When this parameter is used, DescribeComputeEnvironments only
-	// returns maxResults results in a single page along with a nextToken response
-	// element. The remaining results of the initial request can be seen by sending
-	// another DescribeComputeEnvironments request with the returned nextToken value.
-	// This value can be between 1 and 100. If this parameter isn't used, then
+	// The maximum number of cluster results returned by DescribeComputeEnvironments
+	// in paginated output. When this parameter is used, DescribeComputeEnvironments
+	// only returns maxResults results in a single page along with a nextToken
+	// response element. The remaining results of the initial request can be seen by
+	// sending another DescribeComputeEnvironments request with the returned nextToken
+	// value. This value can be between 1 and 100. If this parameter isn't used, then
 	// DescribeComputeEnvironments returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults *int32
@@ -66,7 +66,7 @@ type DescribeComputeEnvironmentsOutput struct {
 	ComputeEnvironments []types.ComputeEnvironmentDetail
 
 	// The nextToken value to include in a future DescribeComputeEnvironments request.
-	// When the results of a DescribeComputeEnvironments request exceed maxResults,
+	// When the results of a DescribeComputeEnvironments request exceed maxResults ,
 	// this value can be used to retrieve the next page of results. This value is null
 	// when there are no more results to return.
 	NextToken *string
@@ -148,12 +148,12 @@ var _ DescribeComputeEnvironmentsAPIClient = (*Client)(nil)
 // DescribeComputeEnvironmentsPaginatorOptions is the paginator options for
 // DescribeComputeEnvironments
 type DescribeComputeEnvironmentsPaginatorOptions struct {
-	// The maximum number of cluster results returned by DescribeComputeEnvironments in
-	// paginated output. When this parameter is used, DescribeComputeEnvironments only
-	// returns maxResults results in a single page along with a nextToken response
-	// element. The remaining results of the initial request can be seen by sending
-	// another DescribeComputeEnvironments request with the returned nextToken value.
-	// This value can be between 1 and 100. If this parameter isn't used, then
+	// The maximum number of cluster results returned by DescribeComputeEnvironments
+	// in paginated output. When this parameter is used, DescribeComputeEnvironments
+	// only returns maxResults results in a single page along with a nextToken
+	// response element. The remaining results of the initial request can be seen by
+	// sending another DescribeComputeEnvironments request with the returned nextToken
+	// value. This value can be between 1 and 100. If this parameter isn't used, then
 	// DescribeComputeEnvironments returns up to 100 results and a nextToken value if
 	// applicable.
 	Limit int32

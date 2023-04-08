@@ -46,11 +46,11 @@ type CreateAvailabilityConfigurationInput struct {
 	ClientToken *string
 
 	// Exchange Web Services (EWS) availability provider definition. The request must
-	// contain exactly one provider definition, either EwsProvider or LambdaProvider.
+	// contain exactly one provider definition, either EwsProvider or LambdaProvider .
 	EwsProvider *types.EwsAvailabilityProvider
 
 	// Lambda availability provider definition. The request must contain exactly one
-	// provider definition, either EwsProvider or LambdaProvider.
+	// provider definition, either EwsProvider or LambdaProvider .
 	LambdaProvider *types.LambdaAvailabilityProvider
 
 	noSmithyDocumentSerde

@@ -28,27 +28,22 @@ import (
 // gradually terminated and relaunched as Spot Instances. When replacing instances,
 // Amazon EC2 Auto Scaling launches new instances before terminating the old ones,
 // so that updating your group does not compromise the performance or availability
-// of your application. Note the following about changing DesiredCapacity, MaxSize,
-// or MinSize:
+// of your application. Note the following about changing DesiredCapacity , MaxSize
+// , or MinSize :
+//   - If a scale-in activity occurs as a result of a new DesiredCapacity value
+//     that is lower than the current size of the group, the Auto Scaling group uses
+//     its termination policy to determine which instances to terminate.
+//   - If you specify a new value for MinSize without specifying a value for
+//     DesiredCapacity , and the new MinSize is larger than the current size of the
+//     group, this sets the group's DesiredCapacity to the new MinSize value.
+//   - If you specify a new value for MaxSize without specifying a value for
+//     DesiredCapacity , and the new MaxSize is smaller than the current size of the
+//     group, this sets the group's DesiredCapacity to the new MaxSize value.
 //
-// * If a scale-in activity occurs as a result of a new
-// DesiredCapacity value that is lower than the current size of the group, the Auto
-// Scaling group uses its termination policy to determine which instances to
-// terminate.
-//
-// * If you specify a new value for MinSize without specifying a value
-// for DesiredCapacity, and the new MinSize is larger than the current size of the
-// group, this sets the group's DesiredCapacity to the new MinSize value.
-//
-// * If you
-// specify a new value for MaxSize without specifying a value for DesiredCapacity,
-// and the new MaxSize is smaller than the current size of the group, this sets the
-// group's DesiredCapacity to the new MaxSize value.
-//
-// To see which properties have
-// been set, call the DescribeAutoScalingGroups API. To view the scaling policies
-// for an Auto Scaling group, call the DescribePolicies API. If the group has
-// scaling policies, you can update them by calling the PutScalingPolicy API.
+// To see which properties have been set, call the DescribeAutoScalingGroups API.
+// To view the scaling policies for an Auto Scaling group, call the
+// DescribePolicies API. If the group has scaling policies, you can update them by
+// calling the PutScalingPolicy API.
 func (c *Client) UpdateAutoScalingGroup(ctx context.Context, params *UpdateAutoScalingGroupInput, optFns ...func(*Options)) (*UpdateAutoScalingGroupOutput, error) {
 	if params == nil {
 		params = &UpdateAutoScalingGroupInput{}
@@ -74,9 +69,8 @@ type UpdateAutoScalingGroupInput struct {
 	// One or more Availability Zones for the group.
 	AvailabilityZones []string
 
-	// Enables or disables Capacity Rebalancing. For more information, see Use Capacity
-	// Rebalancing to handle Amazon EC2 Spot Interruptions
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html)
+	// Enables or disables Capacity Rebalancing. For more information, see Use
+	// Capacity Rebalancing to handle Amazon EC2 Spot Interruptions (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	CapacityRebalance *bool
 
@@ -86,9 +80,8 @@ type UpdateAutoScalingGroupInput struct {
 	// Only needed if you use simple scaling policies. The amount of time, in seconds,
 	// between one scaling activity ending and another one starting due to simple
 	// scaling policies. For more information, see Scaling cooldowns for Amazon EC2
-	// Auto Scaling
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in the
-	// Amazon EC2 Auto Scaling User Guide.
+	// Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	DefaultCooldown *int32
 
 	// The amount of time, in seconds, until a new instance is considered to have
@@ -99,8 +92,7 @@ type UpdateAutoScalingGroupInput struct {
 	// period before aggregating the metrics for new instances with existing instances
 	// in the Amazon CloudWatch metrics that are used for scaling, resulting in more
 	// reliable usage data. For more information, see Set the default instance warmup
-	// for an Auto Scaling group
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html)
+	// for an Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html)
 	// in the Amazon EC2 Auto Scaling User Guide. To manage various warm-up settings at
 	// the group level, we recommend that you set the default instance warmup, even if
 	// it is set to 0 seconds. To remove a value that you previously set, include the
@@ -115,13 +107,12 @@ type UpdateAutoScalingGroupInput struct {
 	// equal to the maximum size of the group.
 	DesiredCapacity *int32
 
-	// The unit of measurement for the value specified for desired capacity. Amazon EC2
-	// Auto Scaling supports DesiredCapacityType for attribute-based instance type
+	// The unit of measurement for the value specified for desired capacity. Amazon
+	// EC2 Auto Scaling supports DesiredCapacityType for attribute-based instance type
 	// selection only. For more information, see Creating an Auto Scaling group using
-	// attribute-based instance type selection
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html)
+	// attribute-based instance type selection (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html)
 	// in the Amazon EC2 Auto Scaling User Guide. By default, Amazon EC2 Auto Scaling
-	// specifies units, which translates into number of instances. Valid values: units
+	// specifies units , which translates into number of instances. Valid values: units
 	// | vcpu | memory-mib
 	DesiredCapacityType *string
 
@@ -129,41 +120,39 @@ type UpdateAutoScalingGroupInput struct {
 	// checking the health status of an EC2 instance that has come into service and
 	// marking it unhealthy due to a failed health check. This is useful if your
 	// instances do not immediately pass their health checks after they enter the
-	// InService state. For more information, see Set the health check grace period for
-	// an Auto Scaling group
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html)
+	// InService state. For more information, see Set the health check grace period
+	// for an Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	HealthCheckGracePeriod *int32
 
 	// A comma-separated value string of one or more health check types. The valid
-	// values are EC2, ELB, and VPC_LATTICE. EC2 is the default health check and cannot
-	// be disabled. For more information, see Health checks for Auto Scaling instances
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html) in the
-	// Amazon EC2 Auto Scaling User Guide. Only specify EC2 if you must clear a value
-	// that was previously set.
+	// values are EC2 , ELB , and VPC_LATTICE . EC2 is the default health check and
+	// cannot be disabled. For more information, see Health checks for Auto Scaling
+	// instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html)
+	// in the Amazon EC2 Auto Scaling User Guide. Only specify EC2 if you must clear a
+	// value that was previously set.
 	HealthCheckType *string
 
 	// The name of the launch configuration. If you specify LaunchConfigurationName in
-	// your update request, you can't specify LaunchTemplate or MixedInstancesPolicy.
+	// your update request, you can't specify LaunchTemplate or MixedInstancesPolicy .
 	LaunchConfigurationName *string
 
 	// The launch template and version to use to specify the updates. If you specify
 	// LaunchTemplate in your update request, you can't specify LaunchConfigurationName
-	// or MixedInstancesPolicy.
+	// or MixedInstancesPolicy .
 	LaunchTemplate *types.LaunchTemplateSpecification
 
 	// The maximum amount of time, in seconds, that an instance can be in service. The
 	// default is null. If specified, the value must be either 0 or a number equal to
 	// or greater than 86,400 seconds (1 day). To clear a previously set value, specify
 	// a new value of 0. For more information, see Replacing Auto Scaling instances
-	// based on maximum instance lifetime
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html)
+	// based on maximum instance lifetime (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MaxInstanceLifetime *int32
 
 	// The maximum size of the Auto Scaling group. With a mixed instances policy that
-	// uses instance weighting, Amazon EC2 Auto Scaling may need to go above MaxSize to
-	// meet your capacity requirements. In this event, Amazon EC2 Auto Scaling will
+	// uses instance weighting, Amazon EC2 Auto Scaling may need to go above MaxSize
+	// to meet your capacity requirements. In this event, Amazon EC2 Auto Scaling will
 	// never go above MaxSize by more than your largest instance weight (weights that
 	// define how many units each instance contributes to the desired capacity of the
 	// group).
@@ -173,37 +162,32 @@ type UpdateAutoScalingGroupInput struct {
 	MinSize *int32
 
 	// The mixed instances policy. For more information, see Auto Scaling groups with
-	// multiple instance types and purchase options
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html)
+	// multiple instance types and purchase options (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MixedInstancesPolicy *types.MixedInstancesPolicy
 
 	// Indicates whether newly launched instances are protected from termination by
 	// Amazon EC2 Auto Scaling when scaling in. For more information about preventing
-	// instances from terminating on scale in, see Using instance scale-in protection
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html)
+	// instances from terminating on scale in, see Using instance scale-in protection (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	NewInstancesProtectedFromScaleIn *bool
 
-	// The name of an existing placement group into which to launch your instances. For
-	// more information, see Placement groups
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in
-	// the Amazon EC2 User Guide for Linux Instances. A cluster placement group is a
+	// The name of an existing placement group into which to launch your instances.
+	// For more information, see Placement groups (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
+	// in the Amazon EC2 User Guide for Linux Instances. A cluster placement group is a
 	// logical grouping of instances within a single Availability Zone. You cannot
 	// specify multiple Availability Zones and a cluster placement group.
 	PlacementGroup *string
 
 	// The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling
 	// group uses to call other Amazon Web Services on your behalf. For more
-	// information, see Service-linked roles
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html)
+	// information, see Service-linked roles (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	ServiceLinkedRoleARN *string
 
 	// A policy or a list of policies that are used to select the instances to
 	// terminate. The policies are executed in the order that you list them. For more
-	// information, see Work with Amazon EC2 Auto Scaling termination policies
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html)
+	// information, see Work with Amazon EC2 Auto Scaling termination policies (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Valid values: Default |
 	// AllocationStrategy | ClosestToNextInstanceHour | NewestInstance | OldestInstance
 	// | OldestLaunchConfiguration | OldestLaunchTemplate |
@@ -211,7 +195,7 @@ type UpdateAutoScalingGroupInput struct {
 	TerminationPolicies []string
 
 	// A comma-separated list of subnet IDs for a virtual private cloud (VPC). If you
-	// specify VPCZoneIdentifier with AvailabilityZones, the subnets that you specify
+	// specify VPCZoneIdentifier with AvailabilityZones , the subnets that you specify
 	// must reside in those Availability Zones.
 	VPCZoneIdentifier *string
 

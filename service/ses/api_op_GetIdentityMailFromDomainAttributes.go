@@ -31,8 +31,8 @@ func (c *Client) GetIdentityMailFromDomainAttributes(ctx context.Context, params
 
 // Represents a request to return the Amazon SES custom MAIL FROM attributes for a
 // list of identities. For information about using a custom MAIL FROM domain, see
-// the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html).
+// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html)
+// .
 type GetIdentityMailFromDomainAttributesInput struct {
 
 	// A list of one or more identities.

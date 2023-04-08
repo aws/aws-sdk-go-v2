@@ -47,7 +47,7 @@ type ExportTask struct {
 	ExecutionInfo *ExportTaskExecutionInfo
 
 	// The start time, expressed as the number of milliseconds after Jan 1, 1970
-	// 00:00:00 UTC. Events with a timestamp before this time are not exported.
+	// 00:00:00 UTC . Events with a timestamp before this time are not exported.
 	From *int64
 
 	// The name of the log group from which logs data was exported.
@@ -62,8 +62,8 @@ type ExportTask struct {
 	// The name of the export task.
 	TaskName *string
 
-	// The end time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00
-	// UTC. Events with a timestamp later than this time are not exported.
+	// The end time, expressed as the number of milliseconds after Jan 1, 1970
+	// 00:00:00 UTC . Events with a timestamp later than this time are not exported.
 	To *int64
 
 	noSmithyDocumentSerde
@@ -73,11 +73,11 @@ type ExportTask struct {
 type ExportTaskExecutionInfo struct {
 
 	// The completion time of the export task, expressed as the number of milliseconds
-	// after Jan 1, 1970 00:00:00 UTC.
+	// after Jan 1, 1970 00:00:00 UTC .
 	CompletionTime *int64
 
 	// The creation time of the export task, expressed as the number of milliseconds
-	// after Jan 1, 1970 00:00:00 UTC.
+	// after Jan 1, 1970 00:00:00 UTC .
 	CreationTime *int64
 
 	noSmithyDocumentSerde
@@ -102,7 +102,7 @@ type FilteredLogEvent struct {
 	EventId *string
 
 	// The time the event was ingested, expressed as the number of milliseconds after
-	// Jan 1, 1970 00:00:00 UTC.
+	// Jan 1, 1970 00:00:00 UTC .
 	IngestionTime *int64
 
 	// The name of the log stream to which this event belongs.
@@ -112,7 +112,7 @@ type FilteredLogEvent struct {
 	Message *string
 
 	// The time the event occurred, expressed as the number of milliseconds after Jan
-	// 1, 1970 00:00:00 UTC.
+	// 1, 1970 00:00:00 UTC .
 	Timestamp *int64
 
 	noSmithyDocumentSerde
@@ -128,7 +128,7 @@ type InputLogEvent struct {
 	Message *string
 
 	// The time the event occurred, expressed as the number of milliseconds after Jan
-	// 1, 1970 00:00:00 UTC.
+	// 1, 1970 00:00:00 UTC .
 	//
 	// This member is required.
 	Timestamp *int64
@@ -147,8 +147,8 @@ type LogGroup struct {
 	CreationTime *int64
 
 	// Displays whether this log group has a protection policy, or whether it had one
-	// in the past. For more information, see PutDataProtectionPolicy
-	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html).
+	// in the past. For more information, see PutDataProtectionPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html)
+	// .
 	DataProtectionStatus DataProtectionStatus
 
 	// The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
@@ -160,11 +160,11 @@ type LogGroup struct {
 	// The number of metric filters.
 	MetricFilterCount *int32
 
-	// The number of days to retain the log events in the specified log group. Possible
-	// values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827,
-	// 2192, 2557, 2922, 3288, and 3653. To set a log group so that its log events do
-	// not expire, use DeleteRetentionPolicy
-	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html).
+	// The number of days to retain the log events in the specified log group.
+	// Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545,
+	// 731, 1827, 2192, 2557, 2922, 3288, and 3653. To set a log group so that its log
+	// events do not expire, use DeleteRetentionPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html)
+	// .
 	RetentionInDays *int32
 
 	// The number of bytes stored.
@@ -173,8 +173,8 @@ type LogGroup struct {
 	noSmithyDocumentSerde
 }
 
-// The fields contained in log events found by a GetLogGroupFields operation, along
-// with the percentage of queried log events in which each field appears.
+// The fields contained in log events found by a GetLogGroupFields operation,
+// along with the percentage of queried log events in which each field appears.
 type LogGroupField struct {
 
 	// The name of a log field.
@@ -186,26 +186,26 @@ type LogGroupField struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a log stream, which is a sequence of log events from a single emitter
-// of logs.
+// Represents a log stream, which is a sequence of log events from a single
+// emitter of logs.
 type LogStream struct {
 
 	// The Amazon Resource Name (ARN) of the log stream.
 	Arn *string
 
 	// The creation time of the stream, expressed as the number of milliseconds after
-	// Jan 1, 1970 00:00:00 UTC.
+	// Jan 1, 1970 00:00:00 UTC .
 	CreationTime *int64
 
 	// The time of the first event, expressed as the number of milliseconds after Jan
-	// 1, 1970 00:00:00 UTC.
+	// 1, 1970 00:00:00 UTC .
 	FirstEventTimestamp *int64
 
-	// The time of the most recent log event in the log stream in CloudWatch Logs. This
-	// number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00
-	// UTC. The lastEventTime value updates on an eventual consistency basis. It
-	// typically updates in less than an hour from ingestion, but in rare situations
-	// might take longer.
+	// The time of the most recent log event in the log stream in CloudWatch Logs.
+	// This number is expressed as the number of milliseconds after Jan 1, 1970
+	// 00:00:00 UTC . The lastEventTime value updates on an eventual consistency
+	// basis. It typically updates in less than an hour from ingestion, but in rare
+	// situations might take longer.
 	LastEventTimestamp *int64
 
 	// The ingestion time, expressed as the number of milliseconds after Jan 1, 1970
@@ -217,14 +217,14 @@ type LogStream struct {
 	// The name of the log stream.
 	LogStreamName *string
 
-	// The number of bytes stored. Important: As of June 17, 2019, this parameter is no
-	// longer supported for log streams, and is always reported as zero. This change
+	// The number of bytes stored. Important: As of June 17, 2019, this parameter is
+	// no longer supported for log streams, and is always reported as zero. This change
 	// applies only to log streams. The storedBytes parameter for log groups is not
 	// affected.
 	//
-	// Deprecated: Starting on June 17, 2019, this parameter will be deprecated for log
-	// streams, and will be reported as zero. This change applies only to log streams.
-	// The storedBytes parameter for log groups is not affected.
+	// Deprecated: Starting on June 17, 2019, this parameter will be deprecated for
+	// log streams, and will be reported as zero. This change applies only to log
+	// streams. The storedBytes parameter for log groups is not affected.
 	StoredBytes *int64
 
 	// The sequence token. The sequence token is now ignored in PutLogEvents actions.
@@ -242,7 +242,7 @@ type LogStream struct {
 type MetricFilter struct {
 
 	// The creation time of the metric filter, expressed as the number of milliseconds
-	// after Jan 1, 1970 00:00:00 UTC.
+	// after Jan 1, 1970 00:00:00 UTC .
 	CreationTime *int64
 
 	// The name of the metric filter.
@@ -287,9 +287,9 @@ type MetricTransformation struct {
 	// This member is required.
 	MetricName *string
 
-	// A custom namespace to contain your metric in CloudWatch. Use namespaces to group
-	// together metrics that are similar. For more information, see Namespaces
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace).
+	// A custom namespace to contain your metric in CloudWatch. Use namespaces to
+	// group together metrics that are similar. For more information, see Namespaces (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace)
+	// .
 	//
 	// This member is required.
 	MetricNamespace *string
@@ -304,8 +304,8 @@ type MetricTransformation struct {
 	// This value can be null.
 	DefaultValue *float64
 
-	// The fields to use as dimensions for the metric. One metric filter can include as
-	// many as three dimensions. Metrics extracted from log events are charged as
+	// The fields to use as dimensions for the metric. One metric filter can include
+	// as many as three dimensions. Metrics extracted from log events are charged as
 	// custom metrics. To prevent unexpected high charges, do not specify
 	// high-cardinality fields such as IPAddress or requestID as dimensions. Each
 	// different value found for a dimension is treated as a separate metric and
@@ -313,12 +313,12 @@ type MetricTransformation struct {
 	// filter if it generates 1000 different name/value pairs for your specified
 	// dimensions within a certain amount of time. This helps to prevent accidental
 	// high charges. You can also set up a billing alarm to alert you if your charges
-	// are higher than expected. For more information, see  Creating a Billing Alarm to
-	// Monitor Your Estimated Amazon Web Services Charges
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).
+	// are higher than expected. For more information, see Creating a Billing Alarm to
+	// Monitor Your Estimated Amazon Web Services Charges (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html)
+	// .
 	Dimensions map[string]string
 
-	// The unit to assign to the metric. If you omit this, the unit is set as None.
+	// The unit to assign to the metric. If you omit this, the unit is set as None .
 	Unit StandardUnit
 
 	noSmithyDocumentSerde
@@ -328,14 +328,14 @@ type MetricTransformation struct {
 type OutputLogEvent struct {
 
 	// The time the event was ingested, expressed as the number of milliseconds after
-	// Jan 1, 1970 00:00:00 UTC.
+	// Jan 1, 1970 00:00:00 UTC .
 	IngestionTime *int64
 
 	// The data contained in the log event.
 	Message *string
 
 	// The time the event occurred, expressed as the number of milliseconds after Jan
-	// 1, 1970 00:00:00 UTC.
+	// 1, 1970 00:00:00 UTC .
 	Timestamp *int64
 
 	noSmithyDocumentSerde
@@ -383,15 +383,15 @@ type QueryDefinition struct {
 	QueryDefinitionId *string
 
 	// The query string to use for this definition. For more information, see
-	// CloudWatch Logs Insights Query Syntax
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
+	// CloudWatch Logs Insights Query Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)
+	// .
 	QueryString *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about one CloudWatch Logs Insights query that matches the request in
-// a DescribeQueries operation.
+// Information about one CloudWatch Logs Insights query that matches the request
+// in a DescribeQueries operation.
 type QueryInfo struct {
 
 	// The date and time that this query was created.
@@ -406,16 +406,16 @@ type QueryInfo struct {
 	// The query string used in this query.
 	QueryString *string
 
-	// The status of this query. Possible values are Cancelled, Complete, Failed,
-	// Running, Scheduled, and Unknown.
+	// The status of this query. Possible values are Cancelled , Complete , Failed ,
+	// Running , Scheduled , and Unknown .
 	Status QueryStatus
 
 	noSmithyDocumentSerde
 }
 
-// Contains the number of log events scanned by the query, the number of log events
-// that matched the query criteria, and the total number of bytes in the log events
-// that were scanned.
+// Contains the number of log events scanned by the query, the number of log
+// events that matched the query criteria, and the total number of bytes in the log
+// events that were scanned.
 type QueryStatistics struct {
 
 	// The total number of bytes in the log events scanned during the query.
@@ -450,7 +450,7 @@ type RejectedLogEventsInfo struct {
 type ResourcePolicy struct {
 
 	// Timestamp showing when this policy was last updated, expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC.
+	// milliseconds after Jan 1, 1970 00:00:00 UTC .
 	LastUpdatedTime *int64
 
 	// The details of the policy.
@@ -464,8 +464,8 @@ type ResourcePolicy struct {
 
 // Contains one field from one log event returned by a CloudWatch Logs Insights
 // query, along with the value of that field. For more information about the fields
-// that are generated by CloudWatch logs, see Supported Logs and Discovered Fields
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html).
+// that are generated by CloudWatch logs, see Supported Logs and Discovered Fields (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html)
+// .
 type ResultField struct {
 
 	// The log event field.
@@ -493,7 +493,7 @@ type SearchedLogStream struct {
 type SubscriptionFilter struct {
 
 	// The creation time of the subscription filter, expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC.
+	// milliseconds after Jan 1, 1970 00:00:00 UTC .
 	CreationTime *int64
 
 	// The Amazon Resource Name (ARN) of the destination.

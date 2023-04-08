@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the shard limits and usage for the account. If you update your account
-// limits, the old limits might be returned for a few minutes. This operation has a
-// limit of one transaction per second per account.
+// Describes the shard limits and usage for the account. If you update your
+// account limits, the old limits might be returned for a few minutes. This
+// operation has a limit of one transaction per second per account.
 func (c *Client) DescribeLimits(ctx context.Context, params *DescribeLimitsInput, optFns ...func(*Options)) (*DescribeLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeLimitsInput{}

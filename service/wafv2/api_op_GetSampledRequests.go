@@ -40,14 +40,14 @@ type GetSampledRequestsInput struct {
 
 	// The number of requests that you want WAF to return from among the first 5,000
 	// requests that your Amazon Web Services resource received during the time range.
-	// If your resource received fewer requests than the value of MaxItems,
+	// If your resource received fewer requests than the value of MaxItems ,
 	// GetSampledRequests returns information about all of them.
 	//
 	// This member is required.
 	MaxItems int64
 
-	// The metric name assigned to the Rule or RuleGroup dimension for which you want a
-	// sample of requests.
+	// The metric name assigned to the Rule or RuleGroup dimension for which you want
+	// a sample of requests.
 	//
 	// This member is required.
 	RuleMetricName *string
@@ -57,12 +57,9 @@ type GetSampledRequestsInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//
-	// * CLI - Specify the Region
-	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	//
-	// * API
-	// and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -70,7 +67,7 @@ type GetSampledRequestsInput struct {
 	// The start date and time and the end date and time of the range for which you
 	// want GetSampledRequests to return a sample of requests. You must specify the
 	// times in Coordinated Universal Time (UTC) format. UTC format includes the
-	// special designator, Z. For example, "2016-09-27T14:50Z". You can specify any
+	// special designator, Z . For example, "2016-09-27T14:50Z" . You can specify any
 	// time range in the previous three hours. If you specify a start time that's
 	// earlier than three hours ago, WAF sets it to three hours ago.
 	//
@@ -89,7 +86,7 @@ type GetSampledRequestsInput struct {
 type GetSampledRequestsOutput struct {
 
 	// The total number of requests from which GetSampledRequests got a sample of
-	// MaxItems requests. If PopulationSize is less than MaxItems, the sample includes
+	// MaxItems requests. If PopulationSize is less than MaxItems , the sample includes
 	// every request that your Amazon Web Services resource received during the
 	// specified time range.
 	PopulationSize int64

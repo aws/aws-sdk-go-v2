@@ -22,7 +22,7 @@ import (
 // can choose to remove all remaining Amazon EBS snapshots by canceling your Amazon
 // EC2 subscription. If you prefer not to cancel your Amazon EC2 subscription, you
 // can delete your snapshots using the Amazon EC2 console. For more information,
-// see the Storage Gateway detail page (http://aws.amazon.com/storagegateway).
+// see the Storage Gateway detail page (http://aws.amazon.com/storagegateway) .
 func (c *Client) DeleteGateway(ctx context.Context, params *DeleteGatewayInput, optFns ...func(*Options)) (*DeleteGatewayOutput, error) {
 	if params == nil {
 		params = &DeleteGatewayInput{}
@@ -41,8 +41,8 @@ func (c *Client) DeleteGateway(ctx context.Context, params *DeleteGatewayInput, 
 // A JSON object containing the ID of the gateway to delete.
 type DeleteGatewayInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -53,8 +53,8 @@ type DeleteGatewayInput struct {
 // A JSON object containing the ID of the deleted gateway.
 type DeleteGatewayOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

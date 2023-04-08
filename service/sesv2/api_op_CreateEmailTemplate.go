@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an email template. Email templates enable you to send personalized email
-// to one or more destinations in a single API operation. For more information, see
-// the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
-// You can execute this operation no more than once per second.
+// Creates an email template. Email templates enable you to send personalized
+// email to one or more destinations in a single API operation. For more
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) CreateEmailTemplate(ctx context.Context, params *CreateEmailTemplateInput, optFns ...func(*Options)) (*CreateEmailTemplateOutput, error) {
 	if params == nil {
 		params = &CreateEmailTemplateInput{}
@@ -32,12 +31,12 @@ func (c *Client) CreateEmailTemplate(ctx context.Context, params *CreateEmailTem
 }
 
 // Represents a request to create an email template. For more information, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// .
 type CreateEmailTemplateInput struct {
 
-	// The content of the email template, composed of a subject line, an HTML part, and
-	// a text-only part.
+	// The content of the email template, composed of a subject line, an HTML part,
+	// and a text-only part.
 	//
 	// This member is required.
 	TemplateContent *types.EmailTemplateContent
@@ -50,8 +49,8 @@ type CreateEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-// If the action is successful, the service sends back an HTTP 200 response with an
-// empty HTTP body.
+// If the action is successful, the service sends back an HTTP 200 response with
+// an empty HTTP body.
 type CreateEmailTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

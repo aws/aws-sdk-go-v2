@@ -15,7 +15,7 @@ import (
 // date are overwritten. This action returns as soon as the restore operation is
 // initiated. You can monitor the progress of the restore operation by calling the
 // DescribeDirectories operation with the directory identifier. When the
-// DirectoryDescription.Stage value changes to Active, the restore operation is
+// DirectoryDescription.Stage value changes to Active , the restore operation is
 // complete.
 func (c *Client) RestoreFromSnapshot(ctx context.Context, params *RestoreFromSnapshotInput, optFns ...func(*Options)) (*RestoreFromSnapshotOutput, error) {
 	if params == nil {

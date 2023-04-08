@@ -88,8 +88,8 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// There are not enough system resources to create the cluster you requested (or to
-// resize an already-existing cluster).
+// There are not enough system resources to create the cluster you requested (or
+// to resize an already-existing cluster).
 type InsufficientClusterCapacityFault struct {
 	Message *string
 
@@ -481,9 +481,9 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorCode() string {
 }
 func (e *ServiceLinkedRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum number of x509 certificates that can be created for
-// encrypted clusters in a 30 day period. Contact AWS customer support to discuss
-// options for continuing to create encrypted clusters.
+// You have reached the maximum number of x509 certificates that can be created
+// for encrypted clusters in a 30 day period. Contact AWS customer support to
+// discuss options for continuing to create encrypted clusters.
 type ServiceQuotaExceededException struct {
 	Message *string
 

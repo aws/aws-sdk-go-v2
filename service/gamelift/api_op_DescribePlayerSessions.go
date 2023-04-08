@@ -12,24 +12,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves properties for one or more player sessions. This action can be used in
-// the following ways:
+// Retrieves properties for one or more player sessions. This action can be used
+// in the following ways:
+//   - To retrieve a specific player session, provide the player session ID only.
+//   - To retrieve all player sessions in a game session, provide the game session
+//     ID only.
+//   - To retrieve all player sessions for a specific player, provide a player ID
+//     only.
 //
-// * To retrieve a specific player session, provide the player
-// session ID only.
-//
-// * To retrieve all player sessions in a game session, provide
-// the game session ID only.
-//
-// * To retrieve all player sessions for a specific
-// player, provide a player ID only.
-//
-// To request player sessions, specify either a
-// player session ID, game session ID, or player ID. You can filter this request by
-// player session status. Use the pagination parameters to retrieve results as a
-// set of sequential pages. If successful, a PlayerSession object is returned for
-// each session that matches the request. Related actions All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// To request player sessions, specify either a player session ID, game session
+// ID, or player ID. You can filter this request by player session status. Use the
+// pagination parameters to retrieve results as a set of sequential pages. If
+// successful, a PlayerSession object is returned for each session that matches
+// the request. Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribePlayerSessions(ctx context.Context, params *DescribePlayerSessionsInput, optFns ...func(*Options)) (*DescribePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &DescribePlayerSessionsInput{}
@@ -55,10 +50,10 @@ type DescribePlayerSessionsInput struct {
 	// this parameter is ignored.
 	Limit *int32
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value. If a player session ID is
-	// specified, this parameter is ignored.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value. If a player session ID
+	// is specified, this parameter is ignored.
 	NextToken *string
 
 	// A unique identifier for a player to retrieve player sessions for.
@@ -71,19 +66,13 @@ type DescribePlayerSessionsInput struct {
 	// PlayerId is provided in a DescribePlayerSessions request, then the
 	// PlayerSessionStatusFilter has no effect on the response. Possible player session
 	// statuses include the following:
-	//
-	// * RESERVED -- The player session request has
-	// been received, but the player has not yet connected to the server process and/or
-	// been validated.
-	//
-	// * ACTIVE -- The player has been validated by the server process
-	// and is currently connected.
-	//
-	// * COMPLETED -- The player connection has been
-	// dropped.
-	//
-	// * TIMEDOUT -- A player session request was received, but the player
-	// did not connect and/or was not validated within the timeout limit (60 seconds).
+	//   - RESERVED -- The player session request has been received, but the player
+	//   has not yet connected to the server process and/or been validated.
+	//   - ACTIVE -- The player has been validated by the server process and is
+	//   currently connected.
+	//   - COMPLETED -- The player connection has been dropped.
+	//   - TIMEDOUT -- A player session request was received, but the player did not
+	//   connect and/or was not validated within the timeout limit (60 seconds).
 	PlayerSessionStatusFilter *string
 
 	noSmithyDocumentSerde

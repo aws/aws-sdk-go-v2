@@ -31,8 +31,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the resource for which to list
-	// the tags. Currently, the supported resources are ConfigRule,
-	// ConfigurationAggregator and AggregatorAuthorization.
+	// the tags. Currently, the supported resources are ConfigRule ,
+	// ConfigurationAggregator and AggregatorAuthorization .
 	//
 	// This member is required.
 	ResourceArn *string
@@ -127,8 +127,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }

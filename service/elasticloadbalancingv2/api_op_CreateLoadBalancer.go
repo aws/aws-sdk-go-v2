@@ -13,22 +13,13 @@ import (
 
 // Creates an Application Load Balancer, Network Load Balancer, or Gateway Load
 // Balancer. For more information, see the following:
+//   - Application Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html)
+//   - Network Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html)
+//   - Gateway Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/gateway-load-balancers.html)
 //
-// * Application Load Balancers
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html)
-//
-// *
-// Network Load Balancers
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html)
-//
-// *
-// Gateway Load Balancers
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/gateway-load-balancers.html)
-//
-// This
-// operation is idempotent, which means that it completes at most one time. If you
-// attempt to create multiple load balancers with the same settings, each call
-// succeeds.
+// This operation is idempotent, which means that it completes at most one time.
+// If you attempt to create multiple load balancers with the same settings, each
+// call succeeds.
 func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalancerInput, optFns ...func(*Options)) (*CreateLoadBalancerOutput, error) {
 	if params == nil {
 		params = &CreateLoadBalancerInput{}
@@ -108,7 +99,7 @@ type CreateLoadBalancerInput struct {
 	// The tags to assign to the load balancer.
 	Tags []types.Tag
 
-	// The type of load balancer. The default is application.
+	// The type of load balancer. The default is application .
 	Type types.LoadBalancerTypeEnum
 
 	noSmithyDocumentSerde

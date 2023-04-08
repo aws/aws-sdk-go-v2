@@ -34,7 +34,7 @@ type CreatePortalInput struct {
 	AdditionalEncryptionContext map[string]string
 
 	// The type of authentication integration points used when signing into the web
-	// portal. Defaults to Standard. Standard web portals are authenticated directly
+	// portal. Defaults to Standard . Standard web portals are authenticated directly
 	// through your identity provider. You need to call CreateIdentityProvider to
 	// integrate your identity provider with your web portal. User and group access to
 	// your web portal is controlled through your identity provider.
@@ -73,8 +73,8 @@ type CreatePortalOutput struct {
 	// This member is required.
 	PortalArn *string
 
-	// The endpoint URL of the web portal that users access in order to start streaming
-	// sessions.
+	// The endpoint URL of the web portal that users access in order to start
+	// streaming sessions.
 	//
 	// This member is required.
 	PortalEndpoint *string

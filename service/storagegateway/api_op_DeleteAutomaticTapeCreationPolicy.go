@@ -30,8 +30,8 @@ func (c *Client) DeleteAutomaticTapeCreationPolicy(ctx context.Context, params *
 
 type DeleteAutomaticTapeCreationPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -41,8 +41,8 @@ type DeleteAutomaticTapeCreationPolicyInput struct {
 
 type DeleteAutomaticTapeCreationPolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

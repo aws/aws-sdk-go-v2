@@ -41,7 +41,7 @@ type UpdateCloudFrontOriginAccessIdentityInput struct {
 	Id *string
 
 	// The value of the ETag header that you received when retrieving the identity's
-	// configuration. For example: E2QWRUHAPOMQZL.
+	// configuration. For example: E2QWRUHAPOMQZL .
 	IfMatch *string
 
 	noSmithyDocumentSerde
@@ -53,7 +53,7 @@ type UpdateCloudFrontOriginAccessIdentityOutput struct {
 	// The origin access identity's information.
 	CloudFrontOriginAccessIdentity *types.CloudFrontOriginAccessIdentity
 
-	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
+	// The current version of the configuration. For example: E2QWRUHAPOMQZL .
 	ETag *string
 
 	// Metadata pertaining to the operation's result.

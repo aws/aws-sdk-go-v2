@@ -17,8 +17,7 @@ import (
 // are listed in alphabetical order immediately after the corresponding country.
 // Route 53 does not perform authorization for this API because it retrieves
 // information that is already available to the public. For a list of supported
-// geolocation codes, see the GeoLocation
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html)
+// geolocation codes, see the GeoLocation (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html)
 // data type.
 func (c *Client) ListGeoLocations(ctx context.Context, params *ListGeoLocationsInput, optFns ...func(*Options)) (*ListGeoLocationsOutput, error) {
 	if params == nil {
@@ -41,7 +40,7 @@ type ListGeoLocationsInput struct {
 
 	// (Optional) The maximum number of geolocations to be included in the response
 	// body for this request. If more than maxitems geolocations remain to be listed,
-	// then the value of the IsTruncated element in the response is true.
+	// then the value of the IsTruncated element in the response is true .
 	MaxItems *int32
 
 	// The code for the continent with which you want to start listing locations that
@@ -55,17 +54,17 @@ type ListGeoLocationsInput struct {
 
 	// The code for the country with which you want to start listing locations that
 	// Amazon Route 53 supports for geolocation. If Route 53 has already returned a
-	// page or more of results, if IsTruncated is true, and if NextCountryCode from the
-	// previous response has a value, enter that value in startcountrycode to return
-	// the next page of results.
+	// page or more of results, if IsTruncated is true , and if NextCountryCode from
+	// the previous response has a value, enter that value in startcountrycode to
+	// return the next page of results.
 	StartCountryCode *string
 
-	// The code for the state of the United States with which you want to start listing
-	// locations that Amazon Route 53 supports for geolocation. If Route 53 has already
-	// returned a page or more of results, if IsTruncated is true, and if
+	// The code for the state of the United States with which you want to start
+	// listing locations that Amazon Route 53 supports for geolocation. If Route 53 has
+	// already returned a page or more of results, if IsTruncated is true , and if
 	// NextSubdivisionCode from the previous response has a value, enter that value in
 	// startsubdivisioncode to return the next page of results. To list subdivisions
-	// (U.S. states), you must include both startcountrycode and startsubdivisioncode.
+	// (U.S. states), you must include both startcountrycode and startsubdivisioncode .
 	StartSubdivisionCode *string
 
 	noSmithyDocumentSerde
@@ -80,11 +79,11 @@ type ListGeoLocationsOutput struct {
 	// This member is required.
 	GeoLocationDetailsList []types.GeoLocationDetails
 
-	// A value that indicates whether more locations remain to be listed after the last
-	// location in this response. If so, the value of IsTruncated is true. To get more
-	// values, submit another request and include the values of NextContinentCode,
-	// NextCountryCode, and NextSubdivisionCode in the startcontinentcode,
-	// startcountrycode, and startsubdivisioncode, as applicable.
+	// A value that indicates whether more locations remain to be listed after the
+	// last location in this response. If so, the value of IsTruncated is true . To get
+	// more values, submit another request and include the values of NextContinentCode
+	// , NextCountryCode , and NextSubdivisionCode in the startcontinentcode ,
+	// startcountrycode , and startsubdivisioncode , as applicable.
 	//
 	// This member is required.
 	IsTruncated bool
@@ -94,17 +93,17 @@ type ListGeoLocationsOutput struct {
 	// This member is required.
 	MaxItems *int32
 
-	// If IsTruncated is true, you can make a follow-up request to display more
+	// If IsTruncated is true , you can make a follow-up request to display more
 	// locations. Enter the value of NextContinentCode in the startcontinentcode
 	// parameter in another ListGeoLocations request.
 	NextContinentCode *string
 
-	// If IsTruncated is true, you can make a follow-up request to display more
+	// If IsTruncated is true , you can make a follow-up request to display more
 	// locations. Enter the value of NextCountryCode in the startcountrycode parameter
 	// in another ListGeoLocations request.
 	NextCountryCode *string
 
-	// If IsTruncated is true, you can make a follow-up request to display more
+	// If IsTruncated is true , you can make a follow-up request to display more
 	// locations. Enter the value of NextSubdivisionCode in the startsubdivisioncode
 	// parameter in another ListGeoLocations request.
 	NextSubdivisionCode *string

@@ -42,10 +42,10 @@ type ListSuppressedDestinationsInput struct {
 	// the position in the list of suppressed email addresses.
 	NextToken *string
 
-	// The number of results to show in a single call to ListSuppressedDestinations. If
-	// the number of results is larger than the number you specified in this parameter,
-	// then the response includes a NextToken element, which you can use to obtain
-	// additional results.
+	// The number of results to show in a single call to ListSuppressedDestinations .
+	// If the number of results is larger than the number you specified in this
+	// parameter, then the response includes a NextToken element, which you can use to
+	// obtain additional results.
 	PageSize *int32
 
 	// The factors that caused the email address to be added to .
@@ -63,7 +63,7 @@ type ListSuppressedDestinationsOutput struct {
 
 	// A token that indicates that there are additional email addresses on the
 	// suppression list for your account. To view additional suppressed addresses,
-	// issue another request to ListSuppressedDestinations, and pass this token in the
+	// issue another request to ListSuppressedDestinations , and pass this token in the
 	// NextToken parameter.
 	NextToken *string
 
@@ -148,10 +148,10 @@ var _ ListSuppressedDestinationsAPIClient = (*Client)(nil)
 // ListSuppressedDestinationsPaginatorOptions is the paginator options for
 // ListSuppressedDestinations
 type ListSuppressedDestinationsPaginatorOptions struct {
-	// The number of results to show in a single call to ListSuppressedDestinations. If
-	// the number of results is larger than the number you specified in this parameter,
-	// then the response includes a NextToken element, which you can use to obtain
-	// additional results.
+	// The number of results to show in a single call to ListSuppressedDestinations .
+	// If the number of results is larger than the number you specified in this
+	// parameter, then the response includes a NextToken element, which you can use to
+	// obtain additional results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

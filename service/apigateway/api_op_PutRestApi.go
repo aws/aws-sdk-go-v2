@@ -30,8 +30,8 @@ func (c *Client) PutRestApi(ctx context.Context, params *PutRestApiInput, optFns
 	return out, nil
 }
 
-// A PUT request to update an existing API, with external API definitions specified
-// as the request body.
+// A PUT request to update an existing API, with external API definitions
+// specified as the request body.
 type PutRestApiInput struct {
 
 	// The PUT request body containing external API definitions. Currently, only
@@ -46,8 +46,8 @@ type PutRestApiInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// A query parameter to indicate whether to rollback the API update (true) or not
-	// (false) when a warning is encountered. The default value is false.
+	// A query parameter to indicate whether to rollback the API update ( true ) or not
+	// ( false ) when a warning is encountered. The default value is false .
 	FailOnWarnings bool
 
 	// The mode query parameter to specify the update mode. Valid values are "merge"
@@ -58,7 +58,7 @@ type PutRestApiInput struct {
 	// DocumentationParts from an imported API, set ignore=documentation as a
 	// parameters value, as in the AWS CLI command of aws apigateway import-rest-api
 	// --parameters ignore=documentation --body
-	// 'file:///path/to/imported-api-body.json'.
+	// 'file:///path/to/imported-api-body.json' .
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -67,14 +67,14 @@ type PutRestApiInput struct {
 // Represents a REST API.
 type PutRestApiOutput struct {
 
-	// The source of the API key for metering requests according to a usage plan. Valid
-	// values are: >HEADER to read the API key from the X-API-Key header of a request.
-	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
-	// authorizer.
+	// The source of the API key for metering requests according to a usage plan.
+	// Valid values are: > HEADER to read the API key from the X-API-Key header of a
+	// request. AUTHORIZER to read the API key from the UsageIdentifierKey from a
+	// custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
-	// The list of binary media types supported by the RestApi. By default, the RestApi
-	// supports only UTF-8-encoded text payloads.
+	// The list of binary media types supported by the RestApi. By default, the
+	// RestApi supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []string
 
 	// The timestamp when the API was created.
@@ -98,10 +98,10 @@ type PutRestApiOutput struct {
 	// Gateway.
 	Id *string
 
-	// A nullable integer that is used to enable compression (with non-negative between
-	// 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null
-	// value) on an API. When compression is enabled, compression or decompression is
-	// not applied on the payload if the payload size is smaller than this value.
+	// A nullable integer that is used to enable compression (with non-negative
+	// between 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a
+	// null value) on an API. When compression is enabled, compression or decompression
+	// is not applied on the payload if the payload size is smaller than this value.
 	// Setting it to zero allows compression for any payload size.
 	MinimumCompressionSize *int32
 

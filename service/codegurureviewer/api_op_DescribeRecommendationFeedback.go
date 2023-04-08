@@ -29,15 +29,14 @@ func (c *Client) DescribeRecommendationFeedback(ctx context.Context, params *Des
 
 type DescribeRecommendationFeedbackInput struct {
 
-	// The Amazon Resource Name (ARN) of the CodeReview
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
 	// object.
 	//
 	// This member is required.
 	CodeReviewArn *string
 
-	// The recommendation ID that can be used to track the provided recommendations and
-	// then to collect the feedback.
+	// The recommendation ID that can be used to track the provided recommendations
+	// and then to collect the feedback.
 	//
 	// This member is required.
 	RecommendationId *string
@@ -45,8 +44,7 @@ type DescribeRecommendationFeedbackInput struct {
 	// Optional parameter to describe the feedback for a given user. If this is not
 	// supplied, it defaults to the user making the request. The UserId is an IAM
 	// principal that can be specified as an Amazon Web Services account ID or an
-	// Amazon Resource Name (ARN). For more information, see  Specifying a Principal
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
+	// Amazon Resource Name (ARN). For more information, see Specifying a Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
 	// in the Amazon Web Services Identity and Access Management User Guide.
 	UserId *string
 

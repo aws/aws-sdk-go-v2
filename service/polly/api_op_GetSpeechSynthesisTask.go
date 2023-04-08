@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a specific SpeechSynthesisTask object based on its TaskID. This object
-// contains information about the given speech synthesis task, including the status
-// of the task, and a link to the S3 bucket containing the output of the task.
+// Retrieves a specific SpeechSynthesisTask object based on its TaskID. This
+// object contains information about the given speech synthesis task, including the
+// status of the task, and a link to the S3 bucket containing the output of the
+// task.
 func (c *Client) GetSpeechSynthesisTask(ctx context.Context, params *GetSpeechSynthesisTaskInput, optFns ...func(*Options)) (*GetSpeechSynthesisTaskOutput, error) {
 	if params == nil {
 		params = &GetSpeechSynthesisTaskInput{}

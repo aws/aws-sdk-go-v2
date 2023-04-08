@@ -35,13 +35,10 @@ type ListSchemaVersionsInput struct {
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
-	//
-	// * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
-	// Either SchemaArn or SchemaName and RegistryName has to be provided.
-	//
-	// *
-	// SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName and
-	// RegistryName has to be provided.
+	//   - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either
+	//   SchemaArn or SchemaName and RegistryName has to be provided.
+	//   - SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName
+	//   and RegistryName has to be provided.
 	//
 	// This member is required.
 	SchemaId *types.SchemaId
@@ -58,8 +55,8 @@ type ListSchemaVersionsInput struct {
 
 type ListSchemaVersionsOutput struct {
 
-	// A continuation token for paginating the returned list of tokens, returned if the
-	// current segment of the list is not the last.
+	// A continuation token for paginating the returned list of tokens, returned if
+	// the current segment of the list is not the last.
 	NextToken *string
 
 	// An array of SchemaVersionList objects containing details of each schema version.

@@ -55,7 +55,7 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 
 	// The account scope that you want your recommendations for. Amazon Web Services
 	// calculates recommendations including the management account and member accounts
-	// if the value is set to PAYER. If the value is LINKED, recommendations are
+	// if the value is set to PAYER . If the value is LINKED , recommendations are
 	// calculated for individual member accounts only.
 	AccountScope types.AccountScope
 
@@ -64,7 +64,7 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 	// LINKED_ACCOUNT and Value as the comma-separated Acount ID(s) that you want to
 	// see Savings Plans purchase recommendations for. For
 	// GetSavingsPlansPurchaseRecommendation, the Filter doesn't include CostCategories
-	// or Tags. It only includes Dimensions. With Dimensions, Key must be
+	// or Tags . It only includes Dimensions . With Dimensions , Key must be
 	// LINKED_ACCOUNT and Value can be a single Account ID or multiple comma-separated
 	// Account IDs that you want to see Savings Plans Purchase Recommendations for. AND
 	// and OR operators are not supported.

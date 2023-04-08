@@ -75,8 +75,8 @@ type S3Destination struct {
 	// Name of the S3 bucket.
 	BucketName *string
 
-	// An Amazon S3 prefix that you can use to limit responses to those that begin with
-	// the specified prefix.
+	// An Amazon S3 prefix that you can use to limit responses to those that begin
+	// with the specified prefix.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -131,7 +131,7 @@ type SignatureValidityPeriod struct {
 // code image.
 type SignedObject struct {
 
-	// The S3SignedObject.
+	// The S3SignedObject .
 	S3 *S3SignedObject
 
 	noSmithyDocumentSerde
@@ -306,9 +306,9 @@ type SigningPlatformOverrides struct {
 
 	// A signed image is a JSON object. When overriding the default signing platform
 	// configuration, a customer can select either of two signing formats, JSONEmbedded
-	// or JSONDetached. (A third format value, JSON, is reserved for future use.) With
-	// JSONEmbedded, the signing image has the payload embedded in it. With
-	// JSONDetached, the payload is not be embedded in the signing image.
+	// or JSONDetached . (A third format value, JSON , is reserved for future use.)
+	// With JSONEmbedded , the signing image has the payload embedded in it. With
+	// JSONDetached , the payload is not be embedded in the signing image.
 	SigningImageFormat ImageFormat
 
 	noSmithyDocumentSerde
@@ -369,8 +369,8 @@ type SigningProfileRevocationRecord struct {
 	noSmithyDocumentSerde
 }
 
-// An S3Source object that contains information about the S3 bucket where you saved
-// your unsigned code.
+// An S3Source object that contains information about the S3 bucket where you
+// saved your unsigned code.
 type Source struct {
 
 	// The S3Source object.

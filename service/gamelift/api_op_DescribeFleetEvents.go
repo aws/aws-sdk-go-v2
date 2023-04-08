@@ -19,8 +19,7 @@ import (
 // changes to status and capacity in remote locations. You can specify a time range
 // to limit the result set. Use the pagination parameters to retrieve results as a
 // set of sequential pages. If successful, a collection of event log entries
-// matching the request are returned. Learn more Setting up GameLift fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// matching the request are returned. Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DescribeFleetEvents(ctx context.Context, params *DescribeFleetEventsInput, optFns ...func(*Options)) (*DescribeFleetEventsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetEventsInput{}
@@ -54,9 +53,9 @@ type DescribeFleetEventsInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	// The earliest date to retrieve event logs for. If no start time is specified,
@@ -147,8 +146,8 @@ func (c *Client) addOperationDescribeFleetEventsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeFleetEventsAPIClient is a client that implements the DescribeFleetEvents
-// operation.
+// DescribeFleetEventsAPIClient is a client that implements the
+// DescribeFleetEvents operation.
 type DescribeFleetEventsAPIClient interface {
 	DescribeFleetEvents(context.Context, *DescribeFleetEventsInput, ...func(*Options)) (*DescribeFleetEventsOutput, error)
 }

@@ -11,7 +11,7 @@ import (
 )
 
 // The ListTagsForResource operation returns the tags that are associated with the
-// Amazon Managed Service for Grafana resource specified by the resourceArn.
+// Amazon Managed Service for Grafana resource specified by the resourceArn .
 // Currently, the only resource that can be tagged is a workspace.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {

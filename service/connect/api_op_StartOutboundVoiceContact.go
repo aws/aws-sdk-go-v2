@@ -13,19 +13,18 @@ import (
 )
 
 // Places an outbound call to a contact, and then initiates the flow. It performs
-// the actions in the flow that's specified (in ContactFlowId). Agents do not
+// the actions in the flow that's specified (in ContactFlowId ). Agents do not
 // initiate the outbound API, which means that they do not dial the contact. If the
 // flow places an outbound call to a contact, and then puts the contact in queue,
 // the call is then routed to the agent, like any other inbound case. There is a
 // 60-second dialing timeout for this operation. If the call is not connected after
 // 60 seconds, it fails. UK numbers with a 447 prefix are not allowed by default.
 // Before you can dial these UK mobile numbers, you must submit a service quota
-// increase request. For more information, see Amazon Connect Service Quotas
-// (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
+// increase request. For more information, see Amazon Connect Service Quotas (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
 // in the Amazon Connect Administrator Guide. Campaign calls are not allowed by
-// default. Before you can make a call with TrafficType = CAMPAIGN, you must submit
-// a service quota increase request to the quota Amazon Connect campaigns
-// (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas).
+// default. Before you can make a call with TrafficType = CAMPAIGN , you must
+// submit a service quota increase request to the quota Amazon Connect campaigns (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas)
+// .
 func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOutboundVoiceContactInput, optFns ...func(*Options)) (*StartOutboundVoiceContactOutput, error) {
 	if params == nil {
 		params = &StartOutboundVoiceContactInput{}
@@ -58,8 +57,7 @@ type StartOutboundVoiceContactInput struct {
 	// This member is required.
 	DestinationPhoneNumber *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -81,9 +79,8 @@ type StartOutboundVoiceContactInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
-	// The token is valid for 7 days after creation. If a contact is already started,
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// . The token is valid for 7 days after creation. If a contact is already started,
 	// the contact ID is returned.
 	ClientToken *string
 
@@ -98,8 +95,8 @@ type StartOutboundVoiceContactInput struct {
 	SourcePhoneNumber *string
 
 	// Denotes the class of traffic. Calls with different traffic types are handled
-	// differently by Amazon Connect. The default value is GENERAL. Use CAMPAIGN if
-	// EnableAnswerMachineDetection is set to true. For all other cases, use GENERAL.
+	// differently by Amazon Connect. The default value is GENERAL . Use CAMPAIGN if
+	// EnableAnswerMachineDetection is set to true . For all other cases, use GENERAL .
 	TrafficType types.TrafficType
 
 	noSmithyDocumentSerde

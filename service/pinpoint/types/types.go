@@ -41,12 +41,12 @@ type Activity struct {
 	// The custom description of the activity.
 	Description *string
 
-	// The settings for an email activity. This type of activity sends an email message
-	// to participants.
+	// The settings for an email activity. This type of activity sends an email
+	// message to participants.
 	EMAIL *EmailMessageActivity
 
-	// The settings for a holdout activity. This type of activity stops a journey for a
-	// specified percentage of participants.
+	// The settings for a holdout activity. This type of activity stops a journey for
+	// a specified percentage of participants.
 	Holdout *HoldoutActivity
 
 	// The settings for a multivariate split activity. This type of activity sends
@@ -124,8 +124,8 @@ type ActivityResponse struct {
 	// to.
 	TotalEndpointCount int32
 
-	// The unique identifier for the campaign treatment that the activity applies to. A
-	// treatment is a variation of a campaign that's used for A/B testing of a
+	// The unique identifier for the campaign treatment that the activity applies to.
+	// A treatment is a variation of a campaign that's used for A/B testing of a
 	// campaign.
 	TreatmentId *string
 
@@ -233,29 +233,24 @@ type ADMMessage struct {
 
 	// The action to occur if the recipient taps the push notification. Valid values
 	// are:
-	//
-	// * OPEN_APP - Your app opens or it becomes the foreground app if it was
-	// sent to the background. This is the default action.
-	//
-	// * DEEP_LINK - Your app
-	// opens and displays a designated user interface in the app. This action uses the
-	// deep-linking features of the Android platform.
-	//
-	// * URL - The default mobile
-	// browser on the recipient's device opens and loads the web page at a URL that you
-	// specify.
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent
+	//   to the background. This is the default action.
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This action uses the deep-linking features of the Android platform.
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
 	Action Action
 
 	// The body of the notification message.
 	Body *string
 
-	// An arbitrary string that indicates that multiple messages are logically the same
-	// and that Amazon Device Messaging (ADM) can drop previously enqueued messages in
-	// favor of this message.
+	// An arbitrary string that indicates that multiple messages are logically the
+	// same and that Amazon Device Messaging (ADM) can drop previously enqueued
+	// messages in favor of this message.
 	ConsolidationKey *string
 
-	// The JSON data payload to use for the push notification, if the notification is a
-	// silent push notification. This payload is added to the data.pinpoint.jsonBody
+	// The JSON data payload to use for the push notification, if the notification is
+	// a silent push notification. This payload is added to the data.pinpoint.jsonBody
 	// object of the notification.
 	Data map[string]string
 
@@ -292,9 +287,10 @@ type ADMMessage struct {
 	// view of the push notification.
 	SmallImageIconUrl *string
 
-	// The sound to play when the recipient receives the push notification. You can use
-	// the default stream or specify the file name of a sound resource that's bundled
-	// in your app. On an Android platform, the sound file must reside in /res/raw/.
+	// The sound to play when the recipient receives the push notification. You can
+	// use the default stream or specify the file name of a sound resource that's
+	// bundled in your app. On an Android platform, the sound file must reside in
+	// /res/raw/.
 	Sound *string
 
 	// The default message variables to use in the notification message. You can
@@ -319,17 +315,12 @@ type AndroidPushNotificationTemplate struct {
 
 	// The action to occur if a recipient taps a push notification that's based on the
 	// message template. Valid values are:
-	//
-	// * OPEN_APP - Your app opens or it becomes
-	// the foreground app if it was sent to the background. This is the default
-	// action.
-	//
-	// * DEEP_LINK - Your app opens and displays a designated user interface
-	// in the app. This action uses the deep-linking features of the Android
-	// platform.
-	//
-	// * URL - The default mobile browser on the recipient's device opens
-	// and loads the web page at a URL that you specify.
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent
+	//   to the background. This is the default action.
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This action uses the deep-linking features of the Android platform.
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
 	Action Action
 
 	// The message body to use in a push notification that's based on the message
@@ -390,8 +381,8 @@ type APNSChannelRequest struct {
 	// Specifies whether to enable the APNs channel for the application.
 	Enabled bool
 
-	// The private key for the APNs client certificate that you want Amazon Pinpoint to
-	// use to communicate with APNs.
+	// The private key for the APNs client certificate that you want Amazon Pinpoint
+	// to use to communicate with APNs.
 	PrivateKey *string
 
 	// The identifier that's assigned to your Apple developer account team. This
@@ -424,8 +415,8 @@ type APNSChannelResponse struct {
 	// The date and time when the APNs channel was enabled.
 	CreationDate *string
 
-	// The default authentication method that Amazon Pinpoint uses to authenticate with
-	// APNs for this channel, key or certificate.
+	// The default authentication method that Amazon Pinpoint uses to authenticate
+	// with APNs for this channel, key or certificate.
 	DefaultAuthenticationMethod *string
 
 	// Specifies whether the APNs channel is enabled for the application.
@@ -463,51 +454,35 @@ type APNSChannelResponse struct {
 type APNSMessage struct {
 
 	// The type of push notification to send. Valid values are:
-	//
-	// * alert - For a
-	// standard notification that's displayed on recipients' devices and prompts a
-	// recipient to interact with the notification.
-	//
-	// * background - For a silent
-	// notification that delivers content in the background and isn't displayed on
-	// recipients' devices.
-	//
-	// * complication - For a notification that contains update
-	// information for an app’s complication timeline.
-	//
-	// * fileprovider - For a
-	// notification that signals changes to a File Provider extension.
-	//
-	// * mdm - For a
-	// notification that tells managed devices to contact the MDM server.
-	//
-	// * voip - For
-	// a notification that provides information about an incoming VoIP call.
-	//
-	// Amazon
-	// Pinpoint specifies this value in the apns-push-type request header when it sends
-	// the notification message to APNs. If you don't specify a value for this
+	//   - alert - For a standard notification that's displayed on recipients' devices
+	//   and prompts a recipient to interact with the notification.
+	//   - background - For a silent notification that delivers content in the
+	//   background and isn't displayed on recipients' devices.
+	//   - complication - For a notification that contains update information for an
+	//   app’s complication timeline.
+	//   - fileprovider - For a notification that signals changes to a File Provider
+	//   extension.
+	//   - mdm - For a notification that tells managed devices to contact the MDM
+	//   server.
+	//   - voip - For a notification that provides information about an incoming VoIP
+	//   call.
+	// Amazon Pinpoint specifies this value in the apns-push-type request header when
+	// it sends the notification message to APNs. If you don't specify a value for this
 	// property, Amazon Pinpoint sets the value to alert or background automatically,
 	// based on the value that you specify for the SilentPush or RawContent property of
 	// the message. For more information about the apns-push-type request header, see
-	// Sending Notification Requests to APNs
-	// (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns)
+	// Sending Notification Requests to APNs (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns)
 	// on the Apple Developer website.
 	APNSPushType *string
 
 	// The action to occur if the recipient taps the push notification. Valid values
 	// are:
-	//
-	// * OPEN_APP - Your app opens or it becomes the foreground app if it was
-	// sent to the background. This is the default action.
-	//
-	// * DEEP_LINK - Your app
-	// opens and displays a designated user interface in the app. This setting uses the
-	// deep-linking features of the iOS platform.
-	//
-	// * URL - The default mobile browser
-	// on the recipient's device opens and loads the web page at a URL that you
-	// specify.
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent
+	//   to the background. This is the default action.
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This setting uses the deep-linking features of the iOS platform.
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
 	Action Action
 
 	// The key that indicates whether and how to modify the badge of your app's icon
@@ -519,8 +494,8 @@ type APNSMessage struct {
 	// The body of the notification message.
 	Body *string
 
-	// The key that indicates the notification type for the push notification. This key
-	// is a value that's defined by the identifier property of one of your app's
+	// The key that indicates the notification type for the push notification. This
+	// key is a value that's defined by the identifier property of one of your app's
 	// registered categories.
 	Category *string
 
@@ -531,8 +506,8 @@ type APNSMessage struct {
 	// notification message to APNs.
 	CollapseId *string
 
-	// The JSON payload to use for a silent push notification. This payload is added to
-	// the data.pinpoint.jsonBody object of the notification.
+	// The JSON payload to use for a silent push notification. This payload is added
+	// to the data.pinpoint.jsonBody object of the notification.
 	Data map[string]string
 
 	// The URL of an image or video to display in the push notification.
@@ -542,13 +517,11 @@ type APNSMessage struct {
 	// authenticating with APNs, CERTIFICATE or TOKEN.
 	PreferredAuthenticationMethod *string
 
-	// para>5 - Low priority, the notification might be delayed, delivered as part of a
-	// group, or throttled./listitem>
-	// * 10 - High priority, the notification is sent
+	// para>5 - Low priority, the notification might be delayed, delivered as part of
+	// a group, or throttled./listitem> 10 - High priority, the notification is sent
 	// immediately. This is the default value. A high priority notification should
 	// trigger an alert, play a sound, or badge your app's icon on the recipient's
-	// device.
-	// /para> Amazon Pinpoint specifies this value in the apns-priority request
+	// device. /para> Amazon Pinpoint specifies this value in the apns-priority request
 	// header when it sends the notification message to APNs. The equivalent values for
 	// Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), are
 	// normal, for 5, and high, for 10. If you specify an FCM value for this property,
@@ -563,10 +536,8 @@ type APNSMessage struct {
 	// notification, set the value of content-available to 0. If you're sending a
 	// silent (background) notification, set the value of content-available to 1.
 	// Additionally, silent notification payloads can't include the alert, badge, or
-	// sound keys. For more information, see Generating a Remote Notification
-	// (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)
-	// and Pushing Background Updates to Your App
-	// (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app)
+	// sound keys. For more information, see Generating a Remote Notification (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)
+	// and Pushing Background Updates to Your App (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app)
 	// on the Apple Developer website.
 	RawContent *string
 
@@ -582,30 +553,28 @@ type APNSMessage struct {
 	// (background) notifications, set the value of content-available to 1.
 	// Additionally, the message payload for a silent notification can't include the
 	// alert, badge, or sound keys. For more information, see Generating a Remote
-	// Notification
-	// (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)
-	// and Pushing Background Updates to Your App
-	// (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app)
+	// Notification (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)
+	// and Pushing Background Updates to Your App (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app)
 	// on the Apple Developer website. Apple has indicated that they will throttle
 	// "excessive" background notifications based on current traffic volumes. To
 	// prevent your notifications being throttled, Apple recommends that you send no
 	// more than 3 silent push notifications to each recipient per hour.
 	SilentPush bool
 
-	// The key for the sound to play when the recipient receives the push notification.
-	// The value for this key is the name of a sound file in your app's main bundle or
-	// the Library/Sounds folder in your app's data container. If the sound file can't
-	// be found or you specify default for the value, the system plays the default
-	// alert sound.
+	// The key for the sound to play when the recipient receives the push
+	// notification. The value for this key is the name of a sound file in your app's
+	// main bundle or the Library/Sounds folder in your app's data container. If the
+	// sound file can't be found or you specify default for the value, the system plays
+	// the default alert sound.
 	Sound *string
 
 	// The default message variables to use in the notification message. You can
 	// override these default variables with individual address variables.
 	Substitutions map[string][]string
 
-	// The key that represents your app-specific identifier for grouping notifications.
-	// If you provide a Notification Content app extension, you can use this value to
-	// group your notifications together.
+	// The key that represents your app-specific identifier for grouping
+	// notifications. If you provide a Notification Content app extension, you can use
+	// this value to group your notifications together.
 	ThreadId *string
 
 	// The amount of time, in seconds, that APNs should store and attempt to deliver
@@ -633,17 +602,12 @@ type APNSPushNotificationTemplate struct {
 
 	// The action to occur if a recipient taps a push notification that's based on the
 	// message template. Valid values are:
-	//
-	// * OPEN_APP - Your app opens or it becomes
-	// the foreground app if it was sent to the background. This is the default
-	// action.
-	//
-	// * DEEP_LINK - Your app opens and displays a designated user interface
-	// in the app. This setting uses the deep-linking features of the iOS platform.
-	//
-	// *
-	// URL - The default mobile browser on the recipient's device opens and loads the
-	// web page at a URL that you specify.
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent
+	//   to the background. This is the default action.
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This setting uses the deep-linking features of the iOS platform.
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
 	Action Action
 
 	// The message body to use in push notifications that are based on the message
@@ -654,9 +618,9 @@ type APNSPushNotificationTemplate struct {
 	// the message template.
 	MediaUrl *string
 
-	// The raw, JSON-formatted string to use as the payload for push notifications that
-	// are based on the message template. If specified, this value overrides all other
-	// content for the message template.
+	// The raw, JSON-formatted string to use as the payload for push notifications
+	// that are based on the message template. If specified, this value overrides all
+	// other content for the message template.
 	RawContent *string
 
 	// The key for the sound to play when the recipient receives a push notification
@@ -670,8 +634,8 @@ type APNSPushNotificationTemplate struct {
 	// This title appears above the notification message on a recipient's device.
 	Title *string
 
-	// The URL to open in the recipient's default mobile browser, if a recipient taps a
-	// push notification that's based on the message template and the value of the
+	// The URL to open in the recipient's default mobile browser, if a recipient taps
+	// a push notification that's based on the message template and the value of the
 	// Action property is URL.
 	Url *string
 
@@ -698,8 +662,8 @@ type APNSSandboxChannelRequest struct {
 	// Specifies whether to enable the APNs sandbox channel for the application.
 	Enabled bool
 
-	// The private key for the APNs client certificate that you want Amazon Pinpoint to
-	// use to communicate with the APNs sandbox environment.
+	// The private key for the APNs client certificate that you want Amazon Pinpoint
+	// to use to communicate with the APNs sandbox environment.
 	PrivateKey *string
 
 	// The identifier that's assigned to your Apple developer account team. This
@@ -733,8 +697,8 @@ type APNSSandboxChannelResponse struct {
 	// The date and time when the APNs sandbox channel was enabled.
 	CreationDate *string
 
-	// The default authentication method that Amazon Pinpoint uses to authenticate with
-	// the APNs sandbox environment for this channel, key or certificate.
+	// The default authentication method that Amazon Pinpoint uses to authenticate
+	// with the APNs sandbox environment for this channel, key or certificate.
 	DefaultAuthenticationMethod *string
 
 	// Specifies whether the APNs sandbox channel is enabled for the application.
@@ -786,8 +750,8 @@ type APNSVoipChannelRequest struct {
 	// Specifies whether to enable the APNs VoIP channel for the application.
 	Enabled bool
 
-	// The private key for the APNs client certificate that you want Amazon Pinpoint to
-	// use to communicate with APNs.
+	// The private key for the APNs client certificate that you want Amazon Pinpoint
+	// to use to communicate with APNs.
 	PrivateKey *string
 
 	// The identifier that's assigned to your Apple developer account team. This
@@ -820,8 +784,8 @@ type APNSVoipChannelResponse struct {
 	// The date and time when the APNs VoIP channel was enabled.
 	CreationDate *string
 
-	// The default authentication method that Amazon Pinpoint uses to authenticate with
-	// APNs for this channel, key or certificate.
+	// The default authentication method that Amazon Pinpoint uses to authenticate
+	// with APNs for this channel, key or certificate.
 	DefaultAuthenticationMethod *string
 
 	// Specifies whether the APNs VoIP channel is enabled for the application.
@@ -875,8 +839,8 @@ type APNSVoipSandboxChannelRequest struct {
 	// Specifies whether the APNs VoIP sandbox channel is enabled for the application.
 	Enabled bool
 
-	// The private key for the APNs client certificate that you want Amazon Pinpoint to
-	// use to communicate with the APNs sandbox environment.
+	// The private key for the APNs client certificate that you want Amazon Pinpoint
+	// to use to communicate with the APNs sandbox environment.
 	PrivateKey *string
 
 	// The identifier that's assigned to your Apple developer account team. This
@@ -910,8 +874,8 @@ type APNSVoipSandboxChannelResponse struct {
 	// The date and time when the APNs VoIP sandbox channel was enabled.
 	CreationDate *string
 
-	// The default authentication method that Amazon Pinpoint uses to authenticate with
-	// the APNs sandbox environment for this channel, key or certificate.
+	// The default authentication method that Amazon Pinpoint uses to authenticate
+	// with the APNs sandbox environment for this channel, key or certificate.
 	DefaultAuthenticationMethod *string
 
 	// Specifies whether the APNs VoIP sandbox channel is enabled for the application.
@@ -962,15 +926,15 @@ type ApplicationDateRangeKpiResponse struct {
 	// The name of the metric, also referred to as a key performance indicator (KPI),
 	// that the data was retrieved for. This value describes the associated metric and
 	// consists of two or more terms, which are comprised of lowercase alphanumeric
-	// characters, separated by a hyphen. For a list of possible values, see the Amazon
-	// Pinpoint Developer Guide
-	// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
+	// characters, separated by a hyphen. For a list of possible values, see the
+	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html)
+	// .
 	//
 	// This member is required.
 	KpiName *string
 
-	// An array of objects that contains the results of the query. Each object contains
-	// the value for the metric and metadata about that value.
+	// An array of objects that contains the results of the query. Each object
+	// contains the value for the metric and metadata about that value.
 	//
 	// This member is required.
 	KpiResult *BaseKpiResult
@@ -1020,8 +984,8 @@ type ApplicationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about an application, including the default settings for an
-// application.
+// Provides information about an application, including the default settings for
+// an application.
 type ApplicationSettingsResource struct {
 
 	// The unique identifier for the application. This identifier is displayed as the
@@ -1030,13 +994,13 @@ type ApplicationSettingsResource struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The settings for the AWS Lambda function to invoke by default as a code hook for
-	// campaigns in the application. You can use this hook to customize segments that
-	// are used by campaigns in the application.
+	// The settings for the AWS Lambda function to invoke by default as a code hook
+	// for campaigns in the application. You can use this hook to customize segments
+	// that are used by campaigns in the application.
 	CampaignHook *CampaignHook
 
-	// The date and time, in ISO 8601 format, when the application's settings were last
-	// modified.
+	// The date and time, in ISO 8601 format, when the application's settings were
+	// last modified.
 	LastModifiedDate *string
 
 	// The default sending limits for campaigns in the application.
@@ -1045,22 +1009,16 @@ type ApplicationSettingsResource struct {
 	// The default quiet time for campaigns in the application. Quiet time is a
 	// specific time range when messages aren't sent to endpoints, if all the following
 	// conditions are met:
-	//
-	// * The EndpointDemographic.Timezone property of the endpoint
-	// is set to a valid value.
-	//
-	// * The current time in the endpoint's time zone is
-	// later than or equal to the time specified by the QuietTime.Start property for
-	// the application (or a campaign or journey that has custom quiet time
-	// settings).
-	//
-	// * The current time in the endpoint's time zone is earlier than or
-	// equal to the time specified by the QuietTime.End property for the application
-	// (or a campaign or journey that has custom quiet time settings).
-	//
-	// If any of the
-	// preceding conditions isn't met, the endpoint will receive messages from a
-	// campaign or journey, even if quiet time is enabled.
+	//   - The EndpointDemographic.Timezone property of the endpoint is set to a valid
+	//   value.
+	//   - The current time in the endpoint's time zone is later than or equal to the
+	//   time specified by the QuietTime.Start property for the application (or a
+	//   campaign or journey that has custom quiet time settings).
+	//   - The current time in the endpoint's time zone is earlier than or equal to
+	//   the time specified by the QuietTime.End property for the application (or a
+	//   campaign or journey that has custom quiet time settings).
+	// If any of the preceding conditions isn't met, the endpoint will receive
+	// messages from a campaign or journey, even if quiet time is enabled.
 	QuietTime *QuietTime
 
 	noSmithyDocumentSerde
@@ -1091,30 +1049,20 @@ type AttributeDimension struct {
 	Values []string
 
 	// The type of segment dimension to use. Valid values are:
-	//
-	// * INCLUSIVE - endpoints
-	// that have attributes matching the values are included in the segment.
-	//
-	// *
-	// EXCLUSIVE - endpoints that have attributes matching the values are excluded in
-	// the segment.
-	//
-	// * CONTAINS - endpoints that have attributes' substrings match the
-	// values are included in the segment.
-	//
-	// * BEFORE - endpoints with attributes read
-	// as ISO_INSTANT datetimes before the value are included in the segment.
-	//
-	// * AFTER
-	// - endpoints with attributes read as ISO_INSTANT datetimes after the value are
-	// included in the segment.
-	//
-	// * ON - endpoints with attributes read as ISO_INSTANT
-	// dates on the value are included in the segment. Time is ignored in this
-	// comparison.
-	//
-	// * BETWEEN - endpoints with attributes read as ISO_INSTANT datetimes
-	// between the values are included in the segment.
+	//   - INCLUSIVE - endpoints that have attributes matching the values are included
+	//   in the segment.
+	//   - EXCLUSIVE - endpoints that have attributes matching the values are excluded
+	//   in the segment.
+	//   - CONTAINS - endpoints that have attributes' substrings match the values are
+	//   included in the segment.
+	//   - BEFORE - endpoints with attributes read as ISO_INSTANT datetimes before the
+	//   value are included in the segment.
+	//   - AFTER - endpoints with attributes read as ISO_INSTANT datetimes after the
+	//   value are included in the segment.
+	//   - ON - endpoints with attributes read as ISO_INSTANT dates on the value are
+	//   included in the segment. Time is ignored in this comparison.
+	//   - BETWEEN - endpoints with attributes read as ISO_INSTANT datetimes between
+	//   the values are included in the segment.
 	AttributeType AttributeType
 
 	noSmithyDocumentSerde
@@ -1131,15 +1079,10 @@ type AttributesResource struct {
 
 	// The type of attribute or attributes that were removed from the endpoints. Valid
 	// values are:
-	//
-	// * endpoint-custom-attributes - Custom attributes that describe
-	// endpoints.
-	//
-	// * endpoint-metric-attributes - Custom metrics that your app reports
-	// to Amazon Pinpoint for endpoints.
-	//
-	// * endpoint-user-attributes - Custom
-	// attributes that describe users.
+	//   - endpoint-custom-attributes - Custom attributes that describe endpoints.
+	//   - endpoint-metric-attributes - Custom metrics that your app reports to Amazon
+	//   Pinpoint for endpoints.
+	//   - endpoint-user-attributes - Custom attributes that describe users.
 	//
 	// This member is required.
 	AttributeType *string
@@ -1151,8 +1094,8 @@ type AttributesResource struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for an
-// application.
+// Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for
+// an application.
 type BaiduChannelRequest struct {
 
 	// The API key that you received from the Baidu Cloud Push service to communicate
@@ -1201,8 +1144,8 @@ type BaiduChannelResponse struct {
 	// (Not used) This property is retained only for backward compatibility.
 	HasCredential bool
 
-	// (Deprecated) An identifier for the Baidu channel. This property is retained only
-	// for backward compatibility.
+	// (Deprecated) An identifier for the Baidu channel. This property is retained
+	// only for backward compatibility.
 	Id *string
 
 	// Specifies whether the Baidu channel is archived.
@@ -1226,24 +1169,19 @@ type BaiduMessage struct {
 
 	// The action to occur if the recipient taps the push notification. Valid values
 	// are:
-	//
-	// * OPEN_APP - Your app opens or it becomes the foreground app if it was
-	// sent to the background. This is the default action.
-	//
-	// * DEEP_LINK - Your app
-	// opens and displays a designated user interface in the app. This action uses the
-	// deep-linking features of the Android platform.
-	//
-	// * URL - The default mobile
-	// browser on the recipient's device opens and loads the web page at a URL that you
-	// specify.
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent
+	//   to the background. This is the default action.
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This action uses the deep-linking features of the Android platform.
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
 	Action Action
 
 	// The body of the notification message.
 	Body *string
 
-	// The JSON data payload to use for the push notification, if the notification is a
-	// silent push notification. This payload is added to the data.pinpoint.jsonBody
+	// The JSON data payload to use for the push notification, if the notification is
+	// a silent push notification. This payload is added to the data.pinpoint.jsonBody
 	// object of the notification.
 	Data map[string]string
 
@@ -1271,9 +1209,10 @@ type BaiduMessage struct {
 	// view of the push notification.
 	SmallImageIconUrl *string
 
-	// The sound to play when the recipient receives the push notification. You can use
-	// the default stream or specify the file name of a sound resource that's bundled
-	// in your app. On an Android platform, the sound file must reside in /res/raw/.
+	// The sound to play when the recipient receives the push notification. You can
+	// use the default stream or specify the file name of a sound resource that's
+	// bundled in your app. On an Android platform, the sound file must reside in
+	// /res/raw/.
 	Sound *string
 
 	// The default message variables to use in the notification message. You can
@@ -1299,8 +1238,8 @@ type BaiduMessage struct {
 // that applies to an application, campaign, or journey.
 type BaseKpiResult struct {
 
-	// An array of objects that provides the results of a query that retrieved the data
-	// for a standard metric that applies to an application, campaign, or journey.
+	// An array of objects that provides the results of a query that retrieved the
+	// data for a standard metric that applies to an application, campaign, or journey.
 	//
 	// This member is required.
 	Rows []ResultRow
@@ -1342,15 +1281,15 @@ type CampaignDateRangeKpiResponse struct {
 	// The name of the metric, also referred to as a key performance indicator (KPI),
 	// that the data was retrieved for. This value describes the associated metric and
 	// consists of two or more terms, which are comprised of lowercase alphanumeric
-	// characters, separated by a hyphen. For a list of possible values, see the Amazon
-	// Pinpoint Developer Guide
-	// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
+	// characters, separated by a hyphen. For a list of possible values, see the
+	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html)
+	// .
 	//
 	// This member is required.
 	KpiName *string
 
-	// An array of objects that contains the results of the query. Each object contains
-	// the value for the metric and metadata about that value.
+	// An array of objects that contains the results of the query. Each object
+	// contains the value for the metric and metadata about that value.
 	//
 	// This member is required.
 	KpiResult *BaseKpiResult
@@ -1381,8 +1320,8 @@ type CampaignEmailMessage struct {
 	// FromAddress specified for the email channel for the application.
 	FromAddress *string
 
-	// The body of the email, in HTML format, for recipients whose email clients render
-	// HTML content.
+	// The body of the email, in HTML format, for recipients whose email clients
+	// render HTML content.
 	HtmlBody *string
 
 	// The subject line, or title, of the email.
@@ -1399,9 +1338,9 @@ type CampaignEventFilter struct {
 	// This member is required.
 	Dimensions *EventDimensions
 
-	// The type of event that causes the campaign to be sent. Valid values are: SYSTEM,
-	// sends the campaign when a system event occurs; and, ENDPOINT, sends the campaign
-	// when an endpoint event (Events resource) occurs.
+	// The type of event that causes the campaign to be sent. Valid values are:
+	// SYSTEM, sends the campaign when a system event occurs; and, ENDPOINT, sends the
+	// campaign when an endpoint event (Events resource) occurs.
 	//
 	// This member is required.
 	FilterType FilterType
@@ -1409,8 +1348,8 @@ type CampaignEventFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies settings for invoking an AWS Lambda function that customizes a segment
-// for a campaign.
+// Specifies settings for invoking an AWS Lambda function that customizes a
+// segment for a campaign.
 type CampaignHook struct {
 
 	// The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon
@@ -1419,14 +1358,12 @@ type CampaignHook struct {
 
 	// The mode that Amazon Pinpoint uses to invoke the AWS Lambda function. Possible
 	// values are:
-	//
-	// * FILTER - Invoke the function to customize the segment that's used
-	// by a campaign.
-	//
-	// * DELIVERY - (Deprecated) Previously, invoked the function to
-	// send a campaign through a custom channel. This functionality is not supported
-	// anymore. To send a campaign through a custom channel, use the
-	// CustomDeliveryConfiguration and CampaignCustomMessage objects of the campaign.
+	//   - FILTER - Invoke the function to customize the segment that's used by a
+	//   campaign.
+	//   - DELIVERY - (Deprecated) Previously, invoked the function to send a campaign
+	//   through a custom channel. This functionality is not supported anymore. To send a
+	//   campaign through a custom channel, use the CustomDeliveryConfiguration and
+	//   CampaignCustomMessage objects of the campaign.
 	Mode Mode
 
 	// The web URL that Amazon Pinpoint calls to invoke the AWS Lambda function over
@@ -1454,9 +1391,9 @@ type CampaignInAppMessage struct {
 	noSmithyDocumentSerde
 }
 
-// For a campaign, specifies limits on the messages that the campaign can send. For
-// an application, specifies the default limits for messages that campaigns in the
-// application can send.
+// For a campaign, specifies limits on the messages that the campaign can send.
+// For an application, specifies the default limits for messages that campaigns in
+// the application can send.
 type CampaignLimits struct {
 
 	// The maximum number of messages that a campaign can send to a single endpoint
@@ -1465,9 +1402,9 @@ type CampaignLimits struct {
 	// single endpoint during a 24-hour period. The maximum value is 100.
 	Daily int32
 
-	// The maximum amount of time, in seconds, that a campaign can attempt to deliver a
-	// message after the scheduled start time for the campaign. The minimum value is 60
-	// seconds.
+	// The maximum amount of time, in seconds, that a campaign can attempt to deliver
+	// a message after the scheduled start time for the campaign. The minimum value is
+	// 60 seconds.
 	MaximumDuration int32
 
 	// The maximum number of messages that a campaign can send each second. For an
@@ -1527,8 +1464,8 @@ type CampaignResponse struct {
 	// This member is required.
 	SegmentVersion int32
 
-	// An array of responses, one for each treatment that you defined for the campaign,
-	// in addition to the default treatment.
+	// An array of responses, one for each treatment that you defined for the
+	// campaign, in addition to the default treatment.
 	AdditionalTreatments []TreatmentResource
 
 	// The delivery configuration settings for sending the campaign through a custom
@@ -1546,8 +1483,9 @@ type CampaignResponse struct {
 	// messages from the campaign.
 	HoldoutPercent int32
 
-	// The settings for the AWS Lambda function to use as a code hook for the campaign.
-	// You can use this hook to customize the segment that's used by the campaign.
+	// The settings for the AWS Lambda function to use as a code hook for the
+	// campaign. You can use this hook to customize the segment that's used by the
+	// campaign.
 	Hook *CampaignHook
 
 	// Specifies whether the campaign is paused. A paused campaign doesn't run unless
@@ -1698,8 +1636,8 @@ type ChannelResponse struct {
 // an application, including channels that aren't enabled for the application.
 type ChannelsResponse struct {
 
-	// A map that contains a multipart response for each channel. For each item in this
-	// object, the ChannelType is the key and the Channel is the value.
+	// A map that contains a multipart response for each channel. For each item in
+	// this object, the ChannelType is the key and the Channel is the value.
 	//
 	// This member is required.
 	Channels map[string]ChannelResponse
@@ -1764,17 +1702,16 @@ type Condition struct {
 // participants down different paths based on push notification events (such as
 // Open or Received events), your mobile app has to specify the User ID and
 // Endpoint ID values. For more information, see Integrating Amazon Pinpoint with
-// your application
-// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html) in
-// the Amazon Pinpoint Developer Guide.
+// your application (https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html)
+// in the Amazon Pinpoint Developer Guide.
 type ConditionalSplitActivity struct {
 
 	// The conditions that define the paths for the activity, and the relationship
 	// between the conditions.
 	Condition *Condition
 
-	// The amount of time to wait before determining whether the conditions are met, or
-	// the date and time when Amazon Pinpoint determines whether the conditions are
+	// The amount of time to wait before determining whether the conditions are met,
+	// or the date and time when Amazon Pinpoint determines whether the conditions are
 	// met.
 	EvaluationWaitTime *WaitTime
 
@@ -1840,19 +1777,15 @@ type CreateRecommenderConfigurationShape struct {
 	// name for that attribute. The display name appears in the Attribute finder of the
 	// template editor on the Amazon Pinpoint console. The following restrictions apply
 	// to these names:
-	//
-	// * An attribute name must start with a letter or number and it
-	// can contain up to 50 characters. The characters can be letters, numbers,
-	// underscores (_), or hyphens (-). Attribute names are case sensitive and must be
-	// unique.
-	//
-	// * An attribute display name must start with a letter or number and it
-	// can contain up to 25 characters. The characters can be letters, numbers, spaces,
-	// underscores (_), or hyphens (-).
-	//
-	// This object is required if the configuration
-	// invokes an AWS Lambda function (RecommendationTransformerUri) to process
-	// recommendation data. Otherwise, don't include this object in your request.
+	//   - An attribute name must start with a letter or number and it can contain up
+	//   to 50 characters. The characters can be letters, numbers, underscores (_), or
+	//   hyphens (-). Attribute names are case sensitive and must be unique.
+	//   - An attribute display name must start with a letter or number and it can
+	//   contain up to 25 characters. The characters can be letters, numbers, spaces,
+	//   underscores (_), or hyphens (-).
+	// This object is required if the configuration invokes an AWS Lambda function
+	// (RecommendationTransformerUri) to process recommendation data. Otherwise, don't
+	// include this object in your request.
 	Attributes map[string]string
 
 	// A custom description of the configuration for the recommender model. The
@@ -1869,17 +1802,14 @@ type CreateRecommenderConfigurationShape struct {
 	// recommender model. This value enables the model to use attribute and event data
 	// that’s specific to a particular endpoint or user in an Amazon Pinpoint
 	// application. Valid values are:
-	//
-	// * PINPOINT_ENDPOINT_ID - Associate each user in
-	// the model with a particular endpoint in Amazon Pinpoint. The data is correlated
-	// based on endpoint IDs in Amazon Pinpoint. This is the default value.
-	//
-	// *
-	// PINPOINT_USER_ID - Associate each user in the model with a particular user and
-	// endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon
-	// Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint
-	// has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages
-	// won’t be sent to the user's endpoint.
+	//   - PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular
+	//   endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in
+	//   Amazon Pinpoint. This is the default value.
+	//   - PINPOINT_USER_ID - Associate each user in the model with a particular user
+	//   and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in
+	//   Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon
+	//   Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise,
+	//   messages won’t be sent to the user's endpoint.
 	RecommendationProviderIdType *string
 
 	// The name or Amazon Resource Name (ARN) of the AWS Lambda function to invoke for
@@ -1926,21 +1856,18 @@ type CreateTemplateMessageBody struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the delivery configuration settings for sending a campaign or campaign
-// treatment through a custom channel. This object is required if you use the
-// CampaignCustomMessage object to define the message to send for the campaign or
-// campaign treatment.
+// Specifies the delivery configuration settings for sending a campaign or
+// campaign treatment through a custom channel. This object is required if you use
+// the CampaignCustomMessage object to define the message to send for the campaign
+// or campaign treatment.
 type CustomDeliveryConfiguration struct {
 
 	// The destination to send the campaign or treatment to. This value can be one of
 	// the following:
-	//
-	// * The name or Amazon Resource Name (ARN) of an AWS Lambda
-	// function to invoke to handle delivery of the campaign or treatment.
-	//
-	// * The URL
-	// for a web application or service that supports HTTPS and can receive the
-	// message. The URL has to be a full URL, including the HTTPS protocol.
+	//   - The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke
+	//   to handle delivery of the campaign or treatment.
+	//   - The URL for a web application or service that supports HTTPS and can
+	//   receive the message. The URL has to be a full URL, including the HTTPS protocol.
 	//
 	// This member is required.
 	DeliveryUri *string
@@ -1959,18 +1886,15 @@ type CustomMessageActivity struct {
 
 	// The destination to send the campaign or treatment to. This value can be one of
 	// the following:
-	//
-	// * The name or Amazon Resource Name (ARN) of an AWS Lambda
-	// function to invoke to handle delivery of the campaign or treatment.
-	//
-	// * The URL
-	// for a web application or service that supports HTTPS and can receive the
-	// message. The URL has to be a full URL, including the HTTPS protocol.
+	//   - The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke
+	//   to handle delivery of the campaign or treatment.
+	//   - The URL for a web application or service that supports HTTPS and can
+	//   receive the message. The URL has to be a full URL, including the HTTPS protocol.
 	DeliveryUri *string
 
-	// The types of endpoints to send the custom message to. Each valid value maps to a
-	// type of channel that you can associate with an endpoint by using the ChannelType
-	// property of an endpoint.
+	// The types of endpoints to send the custom message to. Each valid value maps to
+	// a type of channel that you can associate with an endpoint by using the
+	// ChannelType property of an endpoint.
 	EndpointTypes []EndpointTypesElement
 
 	// Specifies the message data included in a custom channel message that's sent to
@@ -2045,17 +1969,13 @@ type DefaultPushNotificationMessage struct {
 
 	// The default action to occur if a recipient taps the push notification. Valid
 	// values are:
-	//
-	// * OPEN_APP - Your app opens or it becomes the foreground app if it
-	// was sent to the background. This is the default action.
-	//
-	// * DEEP_LINK - Your app
-	// opens and displays a designated user interface in the app. This setting uses the
-	// deep-linking features of the iOS and Android platforms.
-	//
-	// * URL - The default
-	// mobile browser on the recipient's device opens and loads the web page at a URL
-	// that you specify.
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent
+	//   to the background. This is the default action.
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This setting uses the deep-linking features of the iOS and Android
+	//   platforms.
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
 	Action Action
 
 	// The default body of the notification message.
@@ -2093,17 +2013,13 @@ type DefaultPushNotificationTemplate struct {
 
 	// The action to occur if a recipient taps a push notification that's based on the
 	// message template. Valid values are:
-	//
-	// * OPEN_APP - Your app opens or it becomes
-	// the foreground app if it was sent to the background. This is the default
-	// action.
-	//
-	// * DEEP_LINK - Your app opens and displays a designated user interface
-	// in the app. This setting uses the deep-linking features of the iOS and Android
-	// platforms.
-	//
-	// * URL - The default mobile browser on the recipient's device opens
-	// and loads the web page at a URL that you specify.
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent
+	//   to the background. This is the default action.
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This setting uses the deep-linking features of the iOS and Android
+	//   platforms.
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
 	Action Action
 
 	// The message body to use in push notifications that are based on the message
@@ -2160,10 +2076,10 @@ type DirectMessageConfiguration struct {
 	// message (DefaultMessage).
 	EmailMessage *EmailMessage
 
-	// The default push notification message for the GCM channel, which is used to send
-	// notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud
-	// Messaging (GCM), service. This message overrides the default push notification
-	// message (DefaultPushNotificationMessage).
+	// The default push notification message for the GCM channel, which is used to
+	// send notifications through the Firebase Cloud Messaging (FCM), formerly Google
+	// Cloud Messaging (GCM), service. This message overrides the default push
+	// notification message (DefaultPushNotificationMessage).
 	GCMMessage *GCMMessage
 
 	// The default message for the SMS channel. This message overrides the default
@@ -2193,8 +2109,7 @@ type EmailChannelRequest struct {
 	// This member is required.
 	Identity *string
 
-	// The Amazon SES configuration set
-	// (https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html)
+	// The Amazon SES configuration set (https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html)
 	// that you want to apply to messages that you send through the channel.
 	ConfigurationSet *string
 
@@ -2221,8 +2136,7 @@ type EmailChannelResponse struct {
 	// The unique identifier for the application that the email channel applies to.
 	ApplicationId *string
 
-	// The Amazon SES configuration set
-	// (https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html)
+	// The Amazon SES configuration set (https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html)
 	// that's applied to messages that are sent through the channel.
 	ConfigurationSet *string
 
@@ -2239,8 +2153,8 @@ type EmailChannelResponse struct {
 	// (Not used) This property is retained only for backward compatibility.
 	HasCredential bool
 
-	// (Deprecated) An identifier for the email channel. This property is retained only
-	// for backward compatibility.
+	// (Deprecated) An identifier for the email channel. This property is retained
+	// only for backward compatibility.
 	Id *string
 
 	// The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple
@@ -2301,12 +2215,12 @@ type EmailMessage struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the settings for an email activity in a journey. This type of activity
-// sends an email message to participants.
+// Specifies the settings for an email activity in a journey. This type of
+// activity sends an email message to participants.
 type EmailMessageActivity struct {
 
-	// Specifies the sender address for an email message that's sent to participants in
-	// the journey.
+	// Specifies the sender address for an email message that's sent to participants
+	// in the journey.
 	MessageConfig *JourneyEmailMessage
 
 	// The unique identifier for the next activity to perform, after the message is
@@ -2342,16 +2256,16 @@ type EmailTemplateRequest struct {
 	// variables and values.
 	DefaultSubstitutions *string
 
-	// The message body, in HTML format, to use in email messages that are based on the
-	// message template. We recommend using HTML format for email clients that render
-	// HTML content. You can include links, formatted text, and more in an HTML
+	// The message body, in HTML format, to use in email messages that are based on
+	// the message template. We recommend using HTML format for email clients that
+	// render HTML content. You can include links, formatted text, and more in an HTML
 	// message.
 	HtmlPart *string
 
-	// The unique identifier for the recommender model to use for the message template.
-	// Amazon Pinpoint uses this value to determine how to retrieve and process data
-	// from a recommender model when it sends messages that use the template, if the
-	// template contains message variables for recommendation data.
+	// The unique identifier for the recommender model to use for the message
+	// template. Amazon Pinpoint uses this value to determine how to retrieve and
+	// process data from a recommender model when it sends messages that use the
+	// template, if the template contains message variables for recommendation data.
 	RecommenderId *string
 
 	// The subject line, or title, to use in email messages that are based on the
@@ -2441,8 +2355,8 @@ type EmailTemplateResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies an endpoint to create or update and the settings and attributes to set
-// or change for the endpoint.
+// Specifies an endpoint to create or update and the settings and attributes to
+// set or change for the endpoint.
 type EndpointBatchItem struct {
 
 	// The destination address for messages or push notifications that you send to the
@@ -2524,15 +2438,15 @@ type EndpointBatchRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies demographic information about an endpoint, such as the applicable time
-// zone and platform.
+// Specifies demographic information about an endpoint, such as the applicable
+// time zone and platform.
 type EndpointDemographic struct {
 
 	// The version of the app that's associated with the endpoint.
 	AppVersion *string
 
-	// The locale of the endpoint, in the following format: the ISO 639-1 alpha-2 code,
-	// followed by an underscore (_), followed by an ISO 3166-1 alpha-2 value.
+	// The locale of the endpoint, in the following format: the ISO 639-1 alpha-2
+	// code, followed by an underscore (_), followed by an ISO 3166-1 alpha-2 value.
 	Locale *string
 
 	// The manufacturer of the endpoint device, such as apple or samsung.
@@ -2561,8 +2475,8 @@ type EndpointDemographic struct {
 // endpoint.
 type EndpointItemResponse struct {
 
-	// The custom message that's returned in the response as a result of processing the
-	// endpoint data.
+	// The custom message that's returned in the response as a result of processing
+	// the endpoint data.
 	Message *string
 
 	// The status code that's returned in the response as a result of processing the
@@ -2603,33 +2517,20 @@ type EndpointLocation struct {
 type EndpointMessageResult struct {
 
 	// The delivery status of the message. Possible values are:
-	//
-	// * DUPLICATE - The
-	// endpoint address is a duplicate of another endpoint address. Amazon Pinpoint
-	// won't attempt to send the message again.
-	//
-	// * OPT_OUT - The user who's associated
-	// with the endpoint has opted out of receiving messages from you. Amazon Pinpoint
-	// won't attempt to send the message again.
-	//
-	// * PERMANENT_FAILURE - An error
-	// occurred when delivering the message to the endpoint. Amazon Pinpoint won't
-	// attempt to send the message again.
-	//
-	// * SUCCESSFUL - The message was successfully
-	// delivered to the endpoint.
-	//
-	// * TEMPORARY_FAILURE - A temporary error occurred.
-	// Amazon Pinpoint won't attempt to send the message again.
-	//
-	// * THROTTLED - Amazon
-	// Pinpoint throttled the operation to send the message to the endpoint.
-	//
-	// * TIMEOUT
-	// - The message couldn't be sent within the timeout period.
-	//
-	// * UNKNOWN_FAILURE -
-	// An unknown error occurred.
+	//   - DUPLICATE - The endpoint address is a duplicate of another endpoint
+	//   address. Amazon Pinpoint won't attempt to send the message again.
+	//   - OPT_OUT - The user who's associated with the endpoint has opted out of
+	//   receiving messages from you. Amazon Pinpoint won't attempt to send the message
+	//   again.
+	//   - PERMANENT_FAILURE - An error occurred when delivering the message to the
+	//   endpoint. Amazon Pinpoint won't attempt to send the message again.
+	//   - SUCCESSFUL - The message was successfully delivered to the endpoint.
+	//   - TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't
+	//   attempt to send the message again.
+	//   - THROTTLED - Amazon Pinpoint throttled the operation to send the message to
+	//   the endpoint.
+	//   - TIMEOUT - The message couldn't be sent within the timeout period.
+	//   - UNKNOWN_FAILURE - An unknown error occurred.
 	//
 	// This member is required.
 	DeliveryStatus DeliveryStatus
@@ -2822,8 +2723,8 @@ type EndpointSendConfiguration struct {
 	// map take precedence over all other variables.
 	Substitutions map[string][]string
 
-	// The title or subject line of the message. If specified, this value overrides the
-	// default message title or subject line.
+	// The title or subject line of the message. If specified, this value overrides
+	// the default message title or subject line.
 	TitleOverride *string
 
 	noSmithyDocumentSerde
@@ -2902,8 +2803,8 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the conditions to evaluate for an event that applies to an activity in
-// a journey.
+// Specifies the conditions to evaluate for an event that applies to an activity
+// in a journey.
 type EventCondition struct {
 
 	// The dimensions for the event filter to use for the activity.
@@ -2929,13 +2830,12 @@ type EventDimensions struct {
 	// activity to be performed. This can be a standard event that Amazon Pinpoint
 	// generates, such as _email.delivered. For campaigns, this can also be a custom
 	// event that's specific to your application. For information about standard
-	// events, see Streaming Amazon Pinpoint Events
-	// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/event-streams.html)
+	// events, see Streaming Amazon Pinpoint Events (https://docs.aws.amazon.com/pinpoint/latest/developerguide/event-streams.html)
 	// in the Amazon Pinpoint Developer Guide.
 	EventType *SetDimension
 
-	// One or more custom metrics that your application reports to Amazon Pinpoint. You
-	// can use these metrics as selection criteria when you create an event filter.
+	// One or more custom metrics that your application reports to Amazon Pinpoint.
+	// You can use these metrics as selection criteria when you create an event filter.
 	Metrics map[string]MetricDimension
 
 	noSmithyDocumentSerde
@@ -2951,8 +2851,8 @@ type EventFilter struct {
 	// This member is required.
 	Dimensions *EventDimensions
 
-	// The type of event that causes the campaign to be sent or the journey activity to
-	// be performed. Valid values are: SYSTEM, sends the campaign or performs the
+	// The type of event that causes the campaign to be sent or the journey activity
+	// to be performed. Valid values are: SYSTEM, sends the campaign or performs the
 	// activity when a system event occurs; and, ENDPOINT, sends the campaign or
 	// performs the activity when an endpoint event (Events resource) occurs.
 	//
@@ -3031,8 +2931,8 @@ type EventStartCondition struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies settings for publishing event data to an Amazon Kinesis data stream or
-// an Amazon Kinesis Data Firehose delivery stream.
+// Specifies settings for publishing event data to an Amazon Kinesis data stream
+// or an Amazon Kinesis Data Firehose delivery stream.
 type EventStream struct {
 
 	// The unique identifier for the application to publish event data for.
@@ -3056,8 +2956,8 @@ type EventStream struct {
 	// This member is required.
 	RoleArn *string
 
-	// (Deprecated) Your AWS account ID, which you assigned to an external ID key in an
-	// IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM
+	// (Deprecated) Your AWS account ID, which you assigned to an external ID key in
+	// an IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM
 	// role when publishing event data, but we removed this requirement. We don't
 	// recommend use of external IDs for IAM roles that are assumed by Amazon Pinpoint.
 	ExternalId *string
@@ -3090,9 +2990,9 @@ type ExportJobRequest struct {
 	// This member is required.
 	S3UrlPrefix *string
 
-	// The identifier for the segment to export endpoint definitions from. If you don't
-	// specify this value, Amazon Pinpoint exports definitions for all the endpoints
-	// that are associated with the application.
+	// The identifier for the segment to export endpoint definitions from. If you
+	// don't specify this value, Amazon Pinpoint exports definitions for all the
+	// endpoints that are associated with the application.
 	SegmentId *string
 
 	// The version of the segment to export endpoint definitions from, if specified.
@@ -3101,9 +3001,9 @@ type ExportJobRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the resource settings for a job that exports endpoint
-// definitions to a file. The file can be added directly to an Amazon Simple
-// Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API or
+// Provides information about the resource settings for a job that exports
+// endpoint definitions to a file. The file can be added directly to an Amazon
+// Simple Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API or
 // downloaded directly to a computer by using the Amazon Pinpoint console.
 type ExportJobResource struct {
 
@@ -3122,9 +3022,9 @@ type ExportJobResource struct {
 	// This member is required.
 	S3UrlPrefix *string
 
-	// The identifier for the segment that the endpoint definitions were exported from.
-	// If this value isn't present, Amazon Pinpoint exported definitions for all the
-	// endpoints that are associated with the application.
+	// The identifier for the segment that the endpoint definitions were exported
+	// from. If this value isn't present, Amazon Pinpoint exported definitions for all
+	// the endpoints that are associated with the application.
 	SegmentId *string
 
 	// The version of the segment that the endpoint definitions were exported from.
@@ -3159,8 +3059,8 @@ type ExportJobResponse struct {
 	// This member is required.
 	Id *string
 
-	// The status of the export job. The job status is FAILED if Amazon Pinpoint wasn't
-	// able to process one or more pieces in the job.
+	// The status of the export job. The job status is FAILED if Amazon Pinpoint
+	// wasn't able to process one or more pieces in the job.
 	//
 	// This member is required.
 	JobStatus JobStatus
@@ -3224,8 +3124,8 @@ type ExportJobsResponse struct {
 // Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.
 type GCMChannelRequest struct {
 
-	// The Web API Key, also referred to as an API_KEY or server key, that you received
-	// from Google to communicate with Google services.
+	// The Web API Key, also referred to as an API_KEY or server key, that you
+	// received from Google to communicate with Google services.
 	//
 	// This member is required.
 	ApiKey *string
@@ -3242,8 +3142,8 @@ type GCMChannelRequest struct {
 // (GCM), service.
 type GCMChannelResponse struct {
 
-	// The Web API Key, also referred to as an API_KEY or server key, that you received
-	// from Google to communicate with Google services.
+	// The Web API Key, also referred to as an API_KEY or server key, that you
+	// received from Google to communicate with Google services.
 	//
 	// This member is required.
 	Credential *string
@@ -3293,32 +3193,27 @@ type GCMMessage struct {
 
 	// The action to occur if the recipient taps the push notification. Valid values
 	// are:
-	//
-	// * OPEN_APP - Your app opens or it becomes the foreground app if it was
-	// sent to the background. This is the default action.
-	//
-	// * DEEP_LINK - Your app
-	// opens and displays a designated user interface in the app. This action uses the
-	// deep-linking features of the Android platform.
-	//
-	// * URL - The default mobile
-	// browser on the recipient's device opens and loads the web page at a URL that you
-	// specify.
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent
+	//   to the background. This is the default action.
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This action uses the deep-linking features of the Android platform.
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
 	Action Action
 
 	// The body of the notification message.
 	Body *string
 
-	// An arbitrary string that identifies a group of messages that can be collapsed to
-	// ensure that only the last message is sent when delivery can resume. This helps
-	// avoid sending too many instances of the same messages when the recipient's
+	// An arbitrary string that identifies a group of messages that can be collapsed
+	// to ensure that only the last message is sent when delivery can resume. This
+	// helps avoid sending too many instances of the same messages when the recipient's
 	// device comes online again or becomes active. Amazon Pinpoint specifies this
 	// value in the Firebase Cloud Messaging (FCM) collapse_key parameter when it sends
 	// the notification message to FCM.
 	CollapseKey *string
 
-	// The JSON data payload to use for the push notification, if the notification is a
-	// silent push notification. This payload is added to the data.pinpoint.jsonBody
+	// The JSON data payload to use for the push notification, if the notification is
+	// a silent push notification. This payload is added to the data.pinpoint.jsonBody
 	// object of the notification.
 	Data map[string]string
 
@@ -3334,11 +3229,9 @@ type GCMMessage struct {
 
 	// para>normal - The notification might be delayed. Delivery is optimized for
 	// battery usage on the recipient's device. Use this value unless immediate
-	// delivery is required./listitem>
-	// * high - The notification is sent immediately
-	// and might wake a sleeping device.
-	// /para> Amazon Pinpoint specifies this value in
-	// the FCM priority parameter when it sends the notification message to FCM. The
+	// delivery is required./listitem> high - The notification is sent immediately and
+	// might wake a sleeping device. /para> Amazon Pinpoint specifies this value in the
+	// FCM priority parameter when it sends the notification message to FCM. The
 	// equivalent values for Apple Push Notification service (APNs) are 5, for normal,
 	// and 10, for high. If you specify an APNs value for this property, Amazon
 	// Pinpoint accepts and converts the value to the corresponding FCM value.
@@ -3362,17 +3255,18 @@ type GCMMessage struct {
 	// view of the push notification.
 	SmallImageIconUrl *string
 
-	// The sound to play when the recipient receives the push notification. You can use
-	// the default stream or specify the file name of a sound resource that's bundled
-	// in your app. On an Android platform, the sound file must reside in /res/raw/.
+	// The sound to play when the recipient receives the push notification. You can
+	// use the default stream or specify the file name of a sound resource that's
+	// bundled in your app. On an Android platform, the sound file must reside in
+	// /res/raw/.
 	Sound *string
 
 	// The default message variables to use in the notification message. You can
 	// override the default variables with individual address variables.
 	Substitutions map[string][]string
 
-	// The amount of time, in seconds, that FCM should store and attempt to deliver the
-	// push notification, if the service is unable to deliver the notification the
+	// The amount of time, in seconds, that FCM should store and attempt to deliver
+	// the push notification, if the service is unable to deliver the notification the
 	// first time. If you don't specify this value, FCM defaults to the maximum value,
 	// which is 2,419,200 seconds (28 days). Amazon Pinpoint specifies this value in
 	// the FCM time_to_live parameter when it sends the notification message to FCM.
@@ -3474,8 +3368,8 @@ type ImportJobRequest struct {
 	// endpoint definitions are imported.
 	DefineSegment bool
 
-	// (Deprecated) Your AWS account ID, which you assigned to an external ID key in an
-	// IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM
+	// (Deprecated) Your AWS account ID, which you assigned to an external ID key in
+	// an IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM
 	// role when importing endpoint definitions, but we removed this requirement. We
 	// don't recommend use of external IDs for IAM roles that are assumed by Amazon
 	// Pinpoint.
@@ -3496,10 +3390,10 @@ type ImportJobRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the resource settings for a job that imports endpoint
-// definitions from one or more files. The files can be stored in an Amazon Simple
-// Storage Service (Amazon S3) bucket or uploaded directly from a computer by using
-// the Amazon Pinpoint console.
+// Provides information about the resource settings for a job that imports
+// endpoint definitions from one or more files. The files can be stored in an
+// Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from a
+// computer by using the Amazon Pinpoint console.
 type ImportJobResource struct {
 
 	// The format of the files that contain the endpoint definitions to import. Valid
@@ -3533,8 +3427,8 @@ type ImportJobResource struct {
 	// when the endpoint definitions are imported.
 	DefineSegment bool
 
-	// (Deprecated) Your AWS account ID, which you assigned to an external ID key in an
-	// IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM
+	// (Deprecated) Your AWS account ID, which you assigned to an external ID key in
+	// an IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM
 	// role when importing endpoint definitions, but we removed this requirement. We
 	// don't recommend use of external IDs for IAM roles that are assumed by Amazon
 	// Pinpoint.
@@ -3581,8 +3475,8 @@ type ImportJobResponse struct {
 	// This member is required.
 	Id *string
 
-	// The status of the import job. The job status is FAILED if Amazon Pinpoint wasn't
-	// able to process one or more pieces in the job.
+	// The status of the import job. The job status is FAILED if Amazon Pinpoint
+	// wasn't able to process one or more pieces in the job.
 	//
 	// This member is required.
 	JobStatus JobStatus
@@ -3644,8 +3538,8 @@ type ImportJobsResponse struct {
 // Schedule of the campaign.
 type InAppCampaignSchedule struct {
 
-	// The scheduled time after which the in-app message should not be shown. Timestamp
-	// is in ISO 8601 format.
+	// The scheduled time after which the in-app message should not be shown.
+	// Timestamp is in ISO 8601 format.
 	EndDate *string
 
 	// The event filter the SDK has to use to show the in-app message in the
@@ -3718,8 +3612,8 @@ type InAppMessageCampaign struct {
 	// Campaign id of the corresponding campaign.
 	CampaignId *string
 
-	// Daily cap which controls the number of times any in-app messages can be shown to
-	// the endpoint during a day.
+	// Daily cap which controls the number of times any in-app messages can be shown
+	// to the endpoint during a day.
 	DailyCap int32
 
 	// In-app message content with all fields required for rendering an in-app message.
@@ -3731,8 +3625,8 @@ type InAppMessageCampaign struct {
 	// Schedule of the campaign.
 	Schedule *InAppCampaignSchedule
 
-	// Session cap which controls the number of times an in-app message can be shown to
-	// the endpoint during an application session.
+	// Session cap which controls the number of times an in-app message can be shown
+	// to the endpoint during an application session.
 	SessionCap int32
 
 	// Total cap which controls the number of times an in-app message can be shown to
@@ -3935,15 +3829,15 @@ type JourneyDateRangeKpiResponse struct {
 	// The name of the metric, also referred to as a key performance indicator (KPI),
 	// that the data was retrieved for. This value describes the associated metric and
 	// consists of two or more terms, which are comprised of lowercase alphanumeric
-	// characters, separated by a hyphen. For a list of possible values, see the Amazon
-	// Pinpoint Developer Guide
-	// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
+	// characters, separated by a hyphen. For a list of possible values, see the
+	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html)
+	// .
 	//
 	// This member is required.
 	KpiName *string
 
-	// An array of objects that contains the results of the query. Each object contains
-	// the value for the metric and metadata about that value.
+	// An array of objects that contains the results of the query. Each object
+	// contains the value for the metric and metadata about that value.
 	//
 	// This member is required.
 	KpiResult *BaseKpiResult
@@ -3962,8 +3856,8 @@ type JourneyDateRangeKpiResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the "From" address for an email message that's sent to participants in
-// a journey.
+// Specifies the "From" address for an email message that's sent to participants
+// in a journey.
 type JourneyEmailMessage struct {
 
 	// The verified email address to send the email message from. The default address
@@ -3973,35 +3867,26 @@ type JourneyEmailMessage struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the results of a query that retrieved the data for a standard execution
-// metric that applies to a journey activity, and provides information about that
-// query.
+// Provides the results of a query that retrieved the data for a standard
+// execution metric that applies to a journey activity, and provides information
+// about that query.
 type JourneyExecutionActivityMetricsResponse struct {
 
 	// The type of activity that the metric applies to. Possible values are:
-	//
-	// *
-	// CONDITIONAL_SPLIT - For a yes/no split activity, which is an activity that sends
-	// participants down one of two paths in a journey.
-	//
-	// * HOLDOUT - For a holdout
-	// activity, which is an activity that stops a journey for a specified percentage
-	// of participants.
-	//
-	// * MESSAGE - For an email activity, which is an activity that
-	// sends an email message to participants.
-	//
-	// * MULTI_CONDITIONAL_SPLIT - For a
-	// multivariate split activity, which is an activity that sends participants down
-	// one of as many as five paths in a journey.
-	//
-	// * RANDOM_SPLIT - For a random split
-	// activity, which is an activity that sends specified percentages of participants
-	// down one of as many as five paths in a journey.
-	//
-	// * WAIT - For a wait activity,
-	// which is an activity that waits for a certain amount of time or until a specific
-	// date and time before moving participants to the next activity in a journey.
+	//   - CONDITIONAL_SPLIT - For a yes/no split activity, which is an activity that
+	//   sends participants down one of two paths in a journey.
+	//   - HOLDOUT - For a holdout activity, which is an activity that stops a journey
+	//   for a specified percentage of participants.
+	//   - MESSAGE - For an email activity, which is an activity that sends an email
+	//   message to participants.
+	//   - MULTI_CONDITIONAL_SPLIT - For a multivariate split activity, which is an
+	//   activity that sends participants down one of as many as five paths in a journey.
+	//   - RANDOM_SPLIT - For a random split activity, which is an activity that sends
+	//   specified percentages of participants down one of as many as five paths in a
+	//   journey.
+	//   - WAIT - For a wait activity, which is an activity that waits for a certain
+	//   amount of time or until a specific date and time before moving participants to
+	//   the next activity in a journey.
 	//
 	// This member is required.
 	ActivityType *string
@@ -4027,10 +3912,10 @@ type JourneyExecutionActivityMetricsResponse struct {
 	// This member is required.
 	LastEvaluatedTime *string
 
-	// A JSON object that contains the results of the query. The results vary depending
-	// on the type of activity (ActivityType). For information about the structure and
-	// contents of the results, see the Amazon Pinpoint Developer Guide
-	// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
+	// A JSON object that contains the results of the query. The results vary
+	// depending on the type of activity (ActivityType). For information about the
+	// structure and contents of the results, see the Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html)
+	// .
 	//
 	// This member is required.
 	Metrics map[string]string
@@ -4038,8 +3923,9 @@ type JourneyExecutionActivityMetricsResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the results of a query that retrieved the data for a standard execution
-// metric that applies to a journey, and provides information about that query.
+// Provides the results of a query that retrieved the data for a standard
+// execution metric that applies to a journey, and provides information about that
+// query.
 type JourneyExecutionMetricsResponse struct {
 
 	// The unique identifier for the application that the metric applies to.
@@ -4059,8 +3945,8 @@ type JourneyExecutionMetricsResponse struct {
 	LastEvaluatedTime *string
 
 	// A JSON object that contains the results of the query. For information about the
-	// structure and contents of the results, see the Amazon Pinpoint Developer Guide
-	// (https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html).
+	// structure and contents of the results, see the Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html)
+	// .
 	//
 	// This member is required.
 	Metrics map[string]string
@@ -4068,12 +3954,12 @@ type JourneyExecutionMetricsResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies limits on the messages that a journey can send and the number of times
-// participants can enter a journey.
+// Specifies limits on the messages that a journey can send and the number of
+// times participants can enter a journey.
 type JourneyLimits struct {
 
-	// The maximum number of messages that the journey can send to a single participant
-	// during a 24-hour period. The maximum value is 100.
+	// The maximum number of messages that the journey can send to a single
+	// participant during a 24-hour period. The maximum value is 100.
 	DailyCap int32
 
 	// The maximum number of times that a participant can enter the journey. The
@@ -4081,8 +3967,8 @@ type JourneyLimits struct {
 	// number of times, set this value to 0.
 	EndpointReentryCap int32
 
-	// Minimum time that must pass before an endpoint can re-enter a given journey. The
-	// duration should use an ISO 8601 format, such as PT1H.
+	// Minimum time that must pass before an endpoint can re-enter a given journey.
+	// The duration should use an ISO 8601 format, such as PT1H.
 	EndpointReentryInterval *string
 
 	// The maximum number of messages that the journey can send each second.
@@ -4131,8 +4017,8 @@ type JourneyResponse struct {
 	// for an activity and the value is the settings for the activity.
 	Activities map[string]Activity
 
-	// The time when journey will stop sending messages. QuietTime should be configured
-	// first and SendingSchedule should be set to true.
+	// The time when journey will stop sending messages. QuietTime should be
+	// configured first and SendingSchedule should be set to true.
 	ClosedDays *ClosedDays
 
 	// The date, in ISO 8601 format, when the journey was created.
@@ -4159,21 +4045,14 @@ type JourneyResponse struct {
 	// The quiet time settings for the journey. Quiet time is a specific time range
 	// when a journey doesn't send messages to participants, if all the following
 	// conditions are met:
-	//
-	// * The EndpointDemographic.Timezone property of the endpoint
-	// for the participant is set to a valid value.
-	//
-	// * The current time in the
-	// participant's time zone is later than or equal to the time specified by the
-	// QuietTime.Start property for the journey.
-	//
-	// * The current time in the
-	// participant's time zone is earlier than or equal to the time specified by the
-	// QuietTime.End property for the journey.
-	//
-	// If any of the preceding conditions
-	// isn't met, the participant will receive messages from the journey, even if quiet
-	// time is enabled.
+	//   - The EndpointDemographic.Timezone property of the endpoint for the
+	//   participant is set to a valid value.
+	//   - The current time in the participant's time zone is later than or equal to
+	//   the time specified by the QuietTime.Start property for the journey.
+	//   - The current time in the participant's time zone is earlier than or equal to
+	//   the time specified by the QuietTime.End property for the journey.
+	// If any of the preceding conditions isn't met, the participant will receive
+	// messages from the journey, even if quiet time is enabled.
 	QuietTime *QuietTime
 
 	// The frequency with which Amazon Pinpoint evaluates segment and event data for
@@ -4197,31 +4076,23 @@ type JourneyResponse struct {
 	StartCondition *StartCondition
 
 	// The current status of the journey. Possible values are:
-	//
-	// * DRAFT - The journey
-	// is being developed and hasn't been published yet.
-	//
-	// * ACTIVE - The journey has
-	// been developed and published. Depending on the journey's schedule, the journey
-	// may currently be running or scheduled to start running at a later time. If a
-	// journey's status is ACTIVE, you can't add, change, or remove activities from
-	// it.
-	//
-	// * COMPLETED - The journey has been published and has finished running. All
-	// participants have entered the journey and no participants are waiting to
-	// complete the journey or any activities in the journey.
-	//
-	// * CANCELLED - The
-	// journey has been stopped. If a journey's status is CANCELLED, you can't add,
-	// change, or remove activities or segment settings from the journey.
-	//
-	// * CLOSED -
-	// The journey has been published and has started running. It may have also passed
-	// its scheduled end time, or passed its scheduled start time and a refresh
-	// frequency hasn't been specified for it. If a journey's status is CLOSED, you
-	// can't add participants to it, and no existing participants can enter the journey
-	// for the first time. However, any existing participants who are currently waiting
-	// to start an activity may continue the journey.
+	//   - DRAFT - The journey is being developed and hasn't been published yet.
+	//   - ACTIVE - The journey has been developed and published. Depending on the
+	//   journey's schedule, the journey may currently be running or scheduled to start
+	//   running at a later time. If a journey's status is ACTIVE, you can't add, change,
+	//   or remove activities from it.
+	//   - COMPLETED - The journey has been published and has finished running. All
+	//   participants have entered the journey and no participants are waiting to
+	//   complete the journey or any activities in the journey.
+	//   - CANCELLED - The journey has been stopped. If a journey's status is
+	//   CANCELLED, you can't add, change, or remove activities or segment settings from
+	//   the journey.
+	//   - CLOSED - The journey has been published and has started running. It may
+	//   have also passed its scheduled end time, or passed its scheduled start time and
+	//   a refresh frequency hasn't been specified for it. If a journey's status is
+	//   CLOSED, you can't add participants to it, and no existing participants can enter
+	//   the journey for the first time. However, any existing participants who are
+	//   currently waiting to start an activity may continue the journey.
 	State State
 
 	// This object is not used or supported.
@@ -4275,8 +4146,7 @@ type JourneySMSMessage struct {
 
 	// The sender ID to display as the sender of the message on a recipient's device.
 	// Support for sender IDs varies by country or region. For more information, see
-	// Supported Countries and Regions
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html)
+	// Supported Countries and Regions (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html)
 	// in the Amazon Pinpoint User Guide.
 	SenderId *string
 
@@ -4287,8 +4157,8 @@ type JourneySMSMessage struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the status, configuration, and other settings for all
-// the journeys that are associated with an application.
+// Provides information about the status, configuration, and other settings for
+// all the journeys that are associated with an application.
 type JourneysResponse struct {
 
 	// An array of responses, one for each journey that's associated with the
@@ -4349,16 +4219,12 @@ type Message struct {
 
 	// The action to occur if a recipient taps the push notification. Valid values
 	// are:
-	//
-	// * OPEN_APP - Your app opens or it becomes the foreground app if it was
-	// sent to the background. This is the default action.
-	//
-	// * DEEP_LINK - Your app
-	// opens and displays a designated user interface in the app. This setting uses the
-	// deep-linking features of iOS and Android.
-	//
-	// * URL - The default mobile browser on
-	// the recipient's device opens and loads the web page at a URL that you specify.
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent
+	//   to the background. This is the default action.
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This setting uses the deep-linking features of iOS and Android.
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
 	Action Action
 
 	// The body of the notification message. The maximum number of characters is 200.
@@ -4404,8 +4270,8 @@ type Message struct {
 	// The title to display above the notification message on a recipient's device.
 	Title *string
 
-	// The URL to open in a recipient's default mobile browser, if a recipient taps the
-	// push notification and the value of the Action property is URL.
+	// The URL to open in a recipient's default mobile browser, if a recipient taps
+	// the push notification and the value of the Action property is URL.
 	Url *string
 
 	noSmithyDocumentSerde
@@ -4477,11 +4343,9 @@ type MessageRequest struct {
 	MessageConfiguration *DirectMessageConfiguration
 
 	// A map of key-value pairs, where each key is an address and each value is an
-	// AddressConfiguration
-	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-addressconfiguration)
+	// AddressConfiguration (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-addressconfiguration)
 	// object. An address can be a push notification token, a phone number, or an email
-	// address. You can use an AddressConfiguration
-	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-addressconfiguration)
+	// address. You can use an AddressConfiguration (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-addressconfiguration)
 	// object to tailor the message for an address by specifying settings such as
 	// content overrides and message variables.
 	Addresses map[string]AddressConfiguration
@@ -4492,10 +4356,8 @@ type MessageRequest struct {
 	Context map[string]string
 
 	// A map of key-value pairs, where each key is an endpoint ID and each value is an
-	// EndpointSendConfiguration
-	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
-	// object. You can use an EndpointSendConfiguration
-	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
+	// EndpointSendConfiguration (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
+	// object. You can use an EndpointSendConfiguration (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
 	// object to tailor the message for an endpoint by specifying settings such as
 	// content overrides and message variables.
 	Endpoints map[string]EndpointSendConfiguration
@@ -4539,33 +4401,20 @@ type MessageResponse struct {
 type MessageResult struct {
 
 	// The delivery status of the message. Possible values are:
-	//
-	// * DUPLICATE - The
-	// endpoint address is a duplicate of another endpoint address. Amazon Pinpoint
-	// won't attempt to send the message again.
-	//
-	// * OPT_OUT - The user who's associated
-	// with the endpoint address has opted out of receiving messages from you. Amazon
-	// Pinpoint won't attempt to send the message again.
-	//
-	// * PERMANENT_FAILURE - An
-	// error occurred when delivering the message to the endpoint address. Amazon
-	// Pinpoint won't attempt to send the message again.
-	//
-	// * SUCCESSFUL - The message
-	// was successfully delivered to the endpoint address.
-	//
-	// * TEMPORARY_FAILURE - A
-	// temporary error occurred. Amazon Pinpoint won't attempt to send the message
-	// again.
-	//
-	// * THROTTLED - Amazon Pinpoint throttled the operation to send the
-	// message to the endpoint address.
-	//
-	// * TIMEOUT - The message couldn't be sent
-	// within the timeout period.
-	//
-	// * UNKNOWN_FAILURE - An unknown error occurred.
+	//   - DUPLICATE - The endpoint address is a duplicate of another endpoint
+	//   address. Amazon Pinpoint won't attempt to send the message again.
+	//   - OPT_OUT - The user who's associated with the endpoint address has opted out
+	//   of receiving messages from you. Amazon Pinpoint won't attempt to send the
+	//   message again.
+	//   - PERMANENT_FAILURE - An error occurred when delivering the message to the
+	//   endpoint address. Amazon Pinpoint won't attempt to send the message again.
+	//   - SUCCESSFUL - The message was successfully delivered to the endpoint address.
+	//   - TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't
+	//   attempt to send the message again.
+	//   - THROTTLED - Amazon Pinpoint throttled the operation to send the message to
+	//   the endpoint address.
+	//   - TIMEOUT - The message couldn't be sent within the timeout period.
+	//   - UNKNOWN_FAILURE - An unknown error occurred.
 	//
 	// This member is required.
 	DeliveryStatus DeliveryStatus
@@ -4621,15 +4470,14 @@ type MultiConditionalBranch struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the settings for a multivariate split activity in a journey. This type
-// of activity sends participants down one of as many as five paths (including a
-// default Else path) in a journey, based on conditions that you specify. To create
-// multivariate split activities that send participants down different paths based
-// on push notification events (such as Open or Received events), your mobile app
-// has to specify the User ID and Endpoint ID values. For more information, see
-// Integrating Amazon Pinpoint with your application
-// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html) in
-// the Amazon Pinpoint Developer Guide.
+// Specifies the settings for a multivariate split activity in a journey. This
+// type of activity sends participants down one of as many as five paths (including
+// a default Else path) in a journey, based on conditions that you specify. To
+// create multivariate split activities that send participants down different paths
+// based on push notification events (such as Open or Received events), your mobile
+// app has to specify the User ID and Endpoint ID values. For more information, see
+// Integrating Amazon Pinpoint with your application (https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html)
+// in the Amazon Pinpoint Developer Guide.
 type MultiConditionalSplitActivity struct {
 
 	// The paths for the activity, including the conditions for entering each path and
@@ -4677,8 +4525,8 @@ type NumberValidateResponse struct {
 	// number was originally registered.
 	CleansedPhoneNumberE164 *string
 
-	// The cleansed phone number, in the format for the location where the phone number
-	// was originally registered.
+	// The cleansed phone number, in the format for the location where the phone
+	// number was originally registered.
 	CleansedPhoneNumberNational *string
 
 	// The name of the country or region where the phone number was originally
@@ -4689,8 +4537,8 @@ type NumberValidateResponse struct {
 	// where the phone number was originally registered.
 	CountryCodeIso2 *string
 
-	// The numeric code for the country or region where the phone number was originally
-	// registered.
+	// The numeric code for the country or region where the phone number was
+	// originally registered.
 	CountryCodeNumeric *string
 
 	// The name of the county where the phone number was originally registered.
@@ -4769,8 +4617,8 @@ type OverrideButtonConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the properties and attributes of an endpoint that's associated with an
-// event.
+// Specifies the properties and attributes of an endpoint that's associated with
+// an event.
 type PublicEndpoint struct {
 
 	// The unique identifier for the recipient, such as a device token, email address,
@@ -4837,8 +4685,8 @@ type PushMessageActivity struct {
 	// sent.
 	NextActivity *string
 
-	// The name of the push notification template to use for the message. If specified,
-	// this value must match the name of an existing message template.
+	// The name of the push notification template to use for the message. If
+	// specified, this value must match the name of an existing message template.
 	TemplateName *string
 
 	// The unique identifier for the version of the push notification template to use
@@ -4890,10 +4738,10 @@ type PushNotificationTemplateRequest struct {
 	// for push notification channels (DefaultPushNotificationTemplate).
 	GCM *AndroidPushNotificationTemplate
 
-	// The unique identifier for the recommender model to use for the message template.
-	// Amazon Pinpoint uses this value to determine how to retrieve and process data
-	// from a recommender model when it sends messages that use the template, if the
-	// template contains message variables for recommendation data.
+	// The unique identifier for the recommender model to use for the message
+	// template. Amazon Pinpoint uses this value to determine how to retrieve and
+	// process data from a recommender model when it sends messages that use the
+	// template, if the template contains message variables for recommendation data.
 	RecommenderId *string
 
 	// A string-to-string map of key-value pairs that defines the tags to associate
@@ -4995,8 +4843,8 @@ type QuietTime struct {
 	// or 14:30 to represent 2:30 PM.
 	End *string
 
-	// The specific time when quiet time begins. This value has to use 24-hour notation
-	// and be in HH:MM format, where HH is the hour (with a leading zero, if
+	// The specific time when quiet time begins. This value has to use 24-hour
+	// notation and be in HH:MM format, where HH is the hour (with a leading zero, if
 	// applicable) and MM is the minutes. For example, use 02:30 to represent 2:30 AM,
 	// or 14:30 to represent 2:30 PM.
 	Start *string
@@ -5036,8 +4884,8 @@ type RandomSplitEntry struct {
 // Specifies the contents of an email message, represented as a raw MIME message.
 type RawEmail struct {
 
-	// The email message, represented as a raw MIME message. The entire message must be
-	// base64 encoded.
+	// The email message, represented as a raw MIME message. The entire message must
+	// be base64 encoded.
 	Data []byte
 
 	noSmithyDocumentSerde
@@ -5063,8 +4911,8 @@ type RecencyDimension struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about Amazon Pinpoint configuration settings for retrieving
-// and processing data from a recommender model.
+// Provides information about Amazon Pinpoint configuration settings for
+// retrieving and processing data from a recommender model.
 type RecommenderConfigurationResponse struct {
 
 	// The date, in extended ISO 8601 format, when the configuration was created for
@@ -5118,17 +4966,14 @@ type RecommenderConfigurationResponse struct {
 	// recommender model. This value enables the model to use attribute and event data
 	// that’s specific to a particular endpoint or user in an Amazon Pinpoint
 	// application. Possible values are:
-	//
-	// * PINPOINT_ENDPOINT_ID - Each user in the
-	// model is associated with a particular endpoint in Amazon Pinpoint. The data is
-	// correlated based on endpoint IDs in Amazon Pinpoint. This is the default
-	// value.
-	//
-	// * PINPOINT_USER_ID - Each user in the model is associated with a
-	// particular user and endpoint in Amazon Pinpoint. The data is correlated based on
-	// user IDs in Amazon Pinpoint. If this value is specified, an endpoint definition
-	// in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint ID.
-	// Otherwise, messages won’t be sent to the user's endpoint.
+	//   - PINPOINT_ENDPOINT_ID - Each user in the model is associated with a
+	//   particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint
+	//   IDs in Amazon Pinpoint. This is the default value.
+	//   - PINPOINT_USER_ID - Each user in the model is associated with a particular
+	//   user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs
+	//   in Amazon Pinpoint. If this value is specified, an endpoint definition in Amazon
+	//   Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise,
+	//   messages won’t be sent to the user's endpoint.
 	RecommendationProviderIdType *string
 
 	// The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon
@@ -5228,20 +5073,14 @@ type Schedule struct {
 	// The default quiet time for the campaign. Quiet time is a specific time range
 	// when a campaign doesn't send messages to endpoints, if all the following
 	// conditions are met:
-	//
-	// * The EndpointDemographic.Timezone property of the endpoint
-	// is set to a valid value.
-	//
-	// * The current time in the endpoint's time zone is
-	// later than or equal to the time specified by the QuietTime.Start property for
-	// the campaign.
-	//
-	// * The current time in the endpoint's time zone is earlier than or
-	// equal to the time specified by the QuietTime.End property for the campaign.
-	//
-	// If
-	// any of the preceding conditions isn't met, the endpoint will receive messages
-	// from the campaign, even if quiet time is enabled.
+	//   - The EndpointDemographic.Timezone property of the endpoint is set to a valid
+	//   value.
+	//   - The current time in the endpoint's time zone is later than or equal to the
+	//   time specified by the QuietTime.Start property for the campaign.
+	//   - The current time in the endpoint's time zone is earlier than or equal to
+	//   the time specified by the QuietTime.End property for the campaign.
+	// If any of the preceding conditions isn't met, the endpoint will receive
+	// messages from the campaign, even if quiet time is enabled.
 	QuietTime *QuietTime
 
 	// The starting UTC offset for the campaign schedule, if the value of the
@@ -5255,8 +5094,8 @@ type Schedule struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies dimension settings for including or excluding endpoints from a segment
-// based on how recently an endpoint was active.
+// Specifies dimension settings for including or excluding endpoints from a
+// segment based on how recently an endpoint was active.
 type SegmentBehaviors struct {
 
 	// The dimension settings that are based on how recently an endpoint was active.
@@ -5348,9 +5187,9 @@ type SegmentGroup struct {
 	// is based on all, any, or none of the base segments.
 	SourceType SourceType
 
-	// Specifies how to handle multiple dimensions for the segment. For example, if you
-	// specify three dimensions for the segment, whether the resulting segment includes
-	// endpoints that match all, any, or none of the dimensions.
+	// Specifies how to handle multiple dimensions for the segment. For example, if
+	// you specify three dimensions for the segment, whether the resulting segment
+	// includes endpoints that match all, any, or none of the dimensions.
 	Type Type
 
 	noSmithyDocumentSerde
@@ -5364,8 +5203,8 @@ type SegmentGroupList struct {
 	// segment groups for the segment.
 	Groups []SegmentGroup
 
-	// Specifies how to handle multiple segment groups for the segment. For example, if
-	// the segment includes three segment groups, whether the resulting segment
+	// Specifies how to handle multiple segment groups for the segment. For example,
+	// if the segment includes three segment groups, whether the resulting segment
 	// includes endpoints that match all, any, or none of the segment groups.
 	Include Include
 
@@ -5376,8 +5215,8 @@ type SegmentGroupList struct {
 // is a job that creates a user segment by importing endpoint definitions.
 type SegmentImportResource struct {
 
-	// (Deprecated) Your AWS account ID, which you assigned to an external ID key in an
-	// IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM
+	// (Deprecated) Your AWS account ID, which you assigned to an external ID key in
+	// an IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM
 	// role when importing endpoint definitions, but we removed this requirement. We
 	// don't recommend use of external IDs for IAM roles that are assumed by Amazon
 	// Pinpoint.
@@ -5405,8 +5244,8 @@ type SegmentImportResource struct {
 	// This member is required.
 	S3Url *string
 
-	// The number of endpoint definitions that were imported successfully to create the
-	// segment.
+	// The number of endpoint definitions that were imported successfully to create
+	// the segment.
 	//
 	// This member is required.
 	Size int32
@@ -5469,15 +5308,12 @@ type SegmentResponse struct {
 	Id *string
 
 	// The segment type. Valid values are:
-	//
-	// * DIMENSIONAL - A dynamic segment, which is
-	// a segment that uses selection criteria that you specify and is based on endpoint
-	// data that's reported by your app. Dynamic segments can change over time.
-	//
-	// *
-	// IMPORT - A static segment, which is a segment that uses selection criteria that
-	// you specify and is based on endpoint definitions that you import from a file.
-	// Imported segments are static; they don't change over time.
+	//   - DIMENSIONAL - A dynamic segment, which is a segment that uses selection
+	//   criteria that you specify and is based on endpoint data that's reported by your
+	//   app. Dynamic segments can change over time.
+	//   - IMPORT - A static segment, which is a segment that uses selection criteria
+	//   that you specify and is based on endpoint definitions that you import from a
+	//   file. Imported segments are static; they don't change over time.
 	//
 	// This member is required.
 	SegmentType SegmentType
@@ -5589,10 +5425,8 @@ type SendUsersMessageRequest struct {
 	// This member is required.
 	MessageConfiguration *DirectMessageConfiguration
 
-	// A map that associates user IDs with EndpointSendConfiguration
-	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
-	// objects. You can use an EndpointSendConfiguration
-	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
+	// A map that associates user IDs with EndpointSendConfiguration (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
+	// objects. You can use an EndpointSendConfiguration (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
 	// object to tailor the message for a user by specifying settings such as content
 	// overrides and message variables.
 	//
@@ -5626,9 +5460,9 @@ type SendUsersMessageResponse struct {
 	// The unique identifier that was assigned to the message request.
 	RequestId *string
 
-	// An object that indicates which endpoints the message was sent to, for each user.
-	// The object lists user IDs and, for each user ID, provides the endpoint IDs that
-	// the message was sent to. For each endpoint ID, it provides an
+	// An object that indicates which endpoints the message was sent to, for each
+	// user. The object lists user IDs and, for each user ID, provides the endpoint IDs
+	// that the message was sent to. For each endpoint ID, it provides an
 	// EndpointMessageResult object.
 	Result map[string]map[string]EndpointMessageResult
 
@@ -5884,10 +5718,10 @@ type SMSTemplateRequest struct {
 	// variables and values.
 	DefaultSubstitutions *string
 
-	// The unique identifier for the recommender model to use for the message template.
-	// Amazon Pinpoint uses this value to determine how to retrieve and process data
-	// from a recommender model when it sends messages that use the template, if the
-	// template contains message variables for recommendation data.
+	// The unique identifier for the recommender model to use for the message
+	// template. Amazon Pinpoint uses this value to determine how to retrieve and
+	// process data from a recommender model when it sends messages that use the
+	// template, if the template contains message variables for recommendation data.
 	RecommenderId *string
 
 	// A string-to-string map of key-value pairs that defines the tags to associate
@@ -6062,8 +5896,8 @@ type TemplateCreateMessageBody struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a message template that's associated with your Amazon
-// Pinpoint account.
+// Provides information about a message template that's associated with your
+// Amazon Pinpoint account.
 type TemplateResponse struct {
 
 	// The date, in ISO 8601 format, when the message template was created.
@@ -6127,9 +5961,9 @@ type TemplateResponse struct {
 // your Amazon Pinpoint account.
 type TemplatesResponse struct {
 
-	// An array of responses, one for each message template that's associated with your
-	// Amazon Pinpoint account and meets any filter criteria that you specified in the
-	// request.
+	// An array of responses, one for each message template that's associated with
+	// your Amazon Pinpoint account and meets any filter criteria that you specified in
+	// the request.
 	//
 	// This member is required.
 	Item []TemplateResponse
@@ -6192,8 +6026,8 @@ type TemplateVersionsResponse struct {
 	// This member is required.
 	Item []TemplateVersionResponse
 
-	// The message that's returned from the API for the request to retrieve information
-	// about all the versions of the message template.
+	// The message that's returned from the API for the request to retrieve
+	// information about all the versions of the message template.
 	Message *string
 
 	// The string to use in a subsequent request to get the next page of results in a
@@ -6207,8 +6041,8 @@ type TemplateVersionsResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the settings for a campaign treatment. A treatment is a variation of a
-// campaign that's used for A/B testing of a campaign.
+// Specifies the settings for a campaign treatment. A treatment is a variation of
+// a campaign that's used for A/B testing of a campaign.
 type TreatmentResource struct {
 
 	// The unique identifier for the treatment.
@@ -6288,19 +6122,15 @@ type UpdateRecommenderConfigurationShape struct {
 	// name for that attribute. The display name appears in the Attribute finder of the
 	// template editor on the Amazon Pinpoint console. The following restrictions apply
 	// to these names:
-	//
-	// * An attribute name must start with a letter or number and it
-	// can contain up to 50 characters. The characters can be letters, numbers,
-	// underscores (_), or hyphens (-). Attribute names are case sensitive and must be
-	// unique.
-	//
-	// * An attribute display name must start with a letter or number and it
-	// can contain up to 25 characters. The characters can be letters, numbers, spaces,
-	// underscores (_), or hyphens (-).
-	//
-	// This object is required if the configuration
-	// invokes an AWS Lambda function (RecommendationTransformerUri) to process
-	// recommendation data. Otherwise, don't include this object in your request.
+	//   - An attribute name must start with a letter or number and it can contain up
+	//   to 50 characters. The characters can be letters, numbers, underscores (_), or
+	//   hyphens (-). Attribute names are case sensitive and must be unique.
+	//   - An attribute display name must start with a letter or number and it can
+	//   contain up to 25 characters. The characters can be letters, numbers, spaces,
+	//   underscores (_), or hyphens (-).
+	// This object is required if the configuration invokes an AWS Lambda function
+	// (RecommendationTransformerUri) to process recommendation data. Otherwise, don't
+	// include this object in your request.
 	Attributes map[string]string
 
 	// A custom description of the configuration for the recommender model. The
@@ -6317,17 +6147,14 @@ type UpdateRecommenderConfigurationShape struct {
 	// recommender model. This value enables the model to use attribute and event data
 	// that’s specific to a particular endpoint or user in an Amazon Pinpoint
 	// application. Valid values are:
-	//
-	// * PINPOINT_ENDPOINT_ID - Associate each user in
-	// the model with a particular endpoint in Amazon Pinpoint. The data is correlated
-	// based on endpoint IDs in Amazon Pinpoint. This is the default value.
-	//
-	// *
-	// PINPOINT_USER_ID - Associate each user in the model with a particular user and
-	// endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon
-	// Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint
-	// has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages
-	// won’t be sent to the user's endpoint.
+	//   - PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular
+	//   endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in
+	//   Amazon Pinpoint. This is the default value.
+	//   - PINPOINT_USER_ID - Associate each user in the model with a particular user
+	//   and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in
+	//   Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon
+	//   Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise,
+	//   messages won’t be sent to the user's endpoint.
 	RecommendationProviderIdType *string
 
 	// The name or Amazon Resource Name (ARN) of the AWS Lambda function to invoke for
@@ -6419,8 +6246,8 @@ type VoiceChannelResponse struct {
 	// (Not used) This property is retained only for backward compatibility.
 	HasCredential bool
 
-	// (Deprecated) An identifier for the voice channel. This property is retained only
-	// for backward compatibility.
+	// (Deprecated) An identifier for the voice channel. This property is retained
+	// only for backward compatibility.
 	Id *string
 
 	// Specifies whether the voice channel is archived.
@@ -6447,8 +6274,8 @@ type VoiceMessage struct {
 
 	// The code for the language to use when synthesizing the text of the message
 	// script. For a list of supported languages and the code for each one, see the
-	// Amazon Polly Developer Guide
-	// (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
+	// Amazon Polly Developer Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html)
+	// .
 	LanguageCode *string
 
 	// The long code to send the voice message from. This value should be one of the
@@ -6462,8 +6289,8 @@ type VoiceMessage struct {
 	Substitutions map[string][]string
 
 	// The name of the voice to use when delivering the message. For a list of
-	// supported voices, see the Amazon Polly Developer Guide
-	// (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
+	// supported voices, see the Amazon Polly Developer Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html)
+	// .
 	VoiceId *string
 
 	noSmithyDocumentSerde
@@ -6487,8 +6314,8 @@ type VoiceTemplateRequest struct {
 
 	// The code for the language to use when synthesizing the text of the script in
 	// messages that are based on the message template. For a list of supported
-	// languages and the code for each one, see the Amazon Polly Developer Guide
-	// (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
+	// languages and the code for each one, see the Amazon Polly Developer Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html)
+	// .
 	LanguageCode *string
 
 	// A string-to-string map of key-value pairs that defines the tags to associate
@@ -6500,8 +6327,8 @@ type VoiceTemplateRequest struct {
 	TemplateDescription *string
 
 	// The name of the voice to use when delivering messages that are based on the
-	// message template. For a list of supported voices, see the Amazon Polly Developer
-	// Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
+	// message template. For a list of supported voices, see the Amazon Polly
+	// Developer Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html) .
 	VoiceId *string
 
 	noSmithyDocumentSerde
@@ -6547,8 +6374,8 @@ type VoiceTemplateResponse struct {
 
 	// The code for the language that's used when synthesizing the text of the script
 	// in messages that are based on the message template. For a list of supported
-	// languages and the code for each one, see the Amazon Polly Developer Guide
-	// (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
+	// languages and the code for each one, see the Amazon Polly Developer Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html)
+	// .
 	LanguageCode *string
 
 	// A string-to-string map of key-value pairs that identifies the tags that are
@@ -6564,9 +6391,9 @@ type VoiceTemplateResponse struct {
 	// parameter in your request.
 	Version *string
 
-	// The name of the voice that's used when delivering messages that are based on the
-	// message template. For a list of supported voices, see the Amazon Polly Developer
-	// Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
+	// The name of the voice that's used when delivering messages that are based on
+	// the message template. For a list of supported voices, see the Amazon Polly
+	// Developer Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html) .
 	VoiceId *string
 
 	noSmithyDocumentSerde
@@ -6593,9 +6420,9 @@ type WaitActivity struct {
 // participants to the next activity in a journey.
 type WaitTime struct {
 
-	// The amount of time to wait, as a duration in ISO 8601 format, before determining
-	// whether the activity's conditions have been met or moving participants to the
-	// next activity in the journey.
+	// The amount of time to wait, as a duration in ISO 8601 format, before
+	// determining whether the activity's conditions have been met or moving
+	// participants to the next activity in the journey.
 	WaitFor *string
 
 	// The date and time, in ISO 8601 format, when Amazon Pinpoint determines whether
@@ -6609,11 +6436,11 @@ type WaitTime struct {
 // Specifies the default settings for an application.
 type WriteApplicationSettingsRequest struct {
 
-	// The settings for the AWS Lambda function to invoke by default as a code hook for
-	// campaigns in the application. You can use this hook to customize segments that
-	// are used by campaigns in the application. To override these settings and define
-	// custom settings for a specific campaign, use the CampaignHook object of the
-	// Campaign resource.
+	// The settings for the AWS Lambda function to invoke by default as a code hook
+	// for campaigns in the application. You can use this hook to customize segments
+	// that are used by campaigns in the application. To override these settings and
+	// define custom settings for a specific campaign, use the CampaignHook object of
+	// the Campaign resource.
 	CampaignHook *CampaignHook
 
 	// Specifies whether to enable application-related alarms in Amazon CloudWatch.
@@ -6629,25 +6456,19 @@ type WriteApplicationSettingsRequest struct {
 	// The default quiet time for campaigns in the application. Quiet time is a
 	// specific time range when messages aren't sent to endpoints, if all the following
 	// conditions are met:
-	//
-	// * The EndpointDemographic.Timezone property of the endpoint
-	// is set to a valid value.
-	//
-	// * The current time in the endpoint's time zone is
-	// later than or equal to the time specified by the QuietTime.Start property for
-	// the application (or a campaign or journey that has custom quiet time
-	// settings).
-	//
-	// * The current time in the endpoint's time zone is earlier than or
-	// equal to the time specified by the QuietTime.End property for the application
-	// (or a campaign or journey that has custom quiet time settings).
-	//
-	// If any of the
-	// preceding conditions isn't met, the endpoint will receive messages from a
-	// campaign or journey, even if quiet time is enabled. To override the default
-	// quiet time settings for a specific campaign or journey, use the Campaign
-	// resource or the Journey resource to define a custom quiet time for the campaign
-	// or journey.
+	//   - The EndpointDemographic.Timezone property of the endpoint is set to a valid
+	//   value.
+	//   - The current time in the endpoint's time zone is later than or equal to the
+	//   time specified by the QuietTime.Start property for the application (or a
+	//   campaign or journey that has custom quiet time settings).
+	//   - The current time in the endpoint's time zone is earlier than or equal to
+	//   the time specified by the QuietTime.End property for the application (or a
+	//   campaign or journey that has custom quiet time settings).
+	// If any of the preceding conditions isn't met, the endpoint will receive
+	// messages from a campaign or journey, even if quiet time is enabled. To override
+	// the default quiet time settings for a specific campaign or journey, use the
+	// Campaign resource or the Journey resource to define a custom quiet time for the
+	// campaign or journey.
 	QuietTime *QuietTime
 
 	noSmithyDocumentSerde
@@ -6723,8 +6544,8 @@ type WriteCampaignRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the Amazon Resource Name (ARN) of an event stream to publish events to
-// and the AWS Identity and Access Management (IAM) role to use when publishing
+// Specifies the Amazon Resource Name (ARN) of an event stream to publish events
+// to and the AWS Identity and Access Management (IAM) role to use when publishing
 // those events.
 type WriteEventStream struct {
 
@@ -6750,9 +6571,9 @@ type WriteEventStream struct {
 // Specifies the configuration and other settings for a journey.
 type WriteJourneyRequest struct {
 
-	// The name of the journey. A journey name can contain a maximum of 150 characters.
-	// The characters can be alphanumeric characters or symbols, such as underscores
-	// (_) or hyphens (-). A journey name can't contain any spaces.
+	// The name of the journey. A journey name can contain a maximum of 150
+	// characters. The characters can be alphanumeric characters or symbols, such as
+	// underscores (_) or hyphens (-). A journey name can't contain any spaces.
 	//
 	// This member is required.
 	Name *string
@@ -6764,8 +6585,8 @@ type WriteJourneyRequest struct {
 	// alphanumeric characters.
 	Activities map[string]Activity
 
-	// The time when journey will stop sending messages. QuietTime should be configured
-	// first and SendingSchedule should be set to true.
+	// The time when journey will stop sending messages. QuietTime should be
+	// configured first and SendingSchedule should be set to true.
 	ClosedDays *ClosedDays
 
 	// The date, in ISO 8601 format, when the journey was created.
@@ -6792,21 +6613,14 @@ type WriteJourneyRequest struct {
 	// The quiet time settings for the journey. Quiet time is a specific time range
 	// when a journey doesn't send messages to participants, if all the following
 	// conditions are met:
-	//
-	// * The EndpointDemographic.Timezone property of the endpoint
-	// for the participant is set to a valid value.
-	//
-	// * The current time in the
-	// participant's time zone is later than or equal to the time specified by the
-	// QuietTime.Start property for the journey.
-	//
-	// * The current time in the
-	// participant's time zone is earlier than or equal to the time specified by the
-	// QuietTime.End property for the journey.
-	//
-	// If any of the preceding conditions
-	// isn't met, the participant will receive messages from the journey, even if quiet
-	// time is enabled.
+	//   - The EndpointDemographic.Timezone property of the endpoint for the
+	//   participant is set to a valid value.
+	//   - The current time in the participant's time zone is later than or equal to
+	//   the time specified by the QuietTime.Start property for the journey.
+	//   - The current time in the participant's time zone is earlier than or equal to
+	//   the time specified by the QuietTime.End property for the journey.
+	// If any of the preceding conditions isn't met, the participant will receive
+	// messages from the journey, even if quiet time is enabled.
 	QuietTime *QuietTime
 
 	// The frequency with which Amazon Pinpoint evaluates segment and event data for
@@ -6832,18 +6646,14 @@ type WriteJourneyRequest struct {
 	StartCondition *StartCondition
 
 	// The status of the journey. Valid values are:
-	//
-	// * DRAFT - Saves the journey and
-	// doesn't publish it.
-	//
-	// * ACTIVE - Saves and publishes the journey. Depending on
-	// the journey's schedule, the journey starts running immediately or at the
-	// scheduled start time. If a journey's status is ACTIVE, you can't add, change, or
-	// remove activities from it.
-	//
-	// PAUSED, CANCELLED, COMPLETED, and CLOSED states are
-	// not supported in requests to create or update a journey. To cancel, pause, or
-	// resume a journey, use the Journey State resource.
+	//   - DRAFT - Saves the journey and doesn't publish it.
+	//   - ACTIVE - Saves and publishes the journey. Depending on the journey's
+	//   schedule, the journey starts running immediately or at the scheduled start time.
+	//   If a journey's status is ACTIVE, you can't add, change, or remove activities
+	//   from it.
+	// PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in requests
+	// to create or update a journey. To cancel, pause, or resume a journey, use the
+	// Journey State resource.
 	State State
 
 	// Specifies whether endpoints in quiet hours should enter a wait till the end of
@@ -6877,8 +6687,8 @@ type WriteSegmentRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the settings for a campaign treatment. A treatment is a variation of a
-// campaign that's used for A/B testing of a campaign.
+// Specifies the settings for a campaign treatment. A treatment is a variation of
+// a campaign that's used for A/B testing of a campaign.
 type WriteTreatmentResource struct {
 
 	// The allocated percentage of users (segment members) to send the treatment to.

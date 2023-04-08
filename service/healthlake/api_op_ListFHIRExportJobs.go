@@ -45,8 +45,8 @@ type ListFHIRExportJobsInput struct {
 	// status.
 	JobStatus types.JobStatus
 
-	// This parameter limits the number of results returned for a ListFHIRExportJobs to
-	// a maximum quantity specified by the user.
+	// This parameter limits the number of results returned for a ListFHIRExportJobs
+	// to a maximum quantity specified by the user.
 	MaxResults *int32
 
 	// A pagination token used to identify the next page of results to return for a
@@ -156,8 +156,8 @@ var _ ListFHIRExportJobsAPIClient = (*Client)(nil)
 // ListFHIRExportJobsPaginatorOptions is the paginator options for
 // ListFHIRExportJobs
 type ListFHIRExportJobsPaginatorOptions struct {
-	// This parameter limits the number of results returned for a ListFHIRExportJobs to
-	// a maximum quantity specified by the user.
+	// This parameter limits the number of results returned for a ListFHIRExportJobs
+	// to a maximum quantity specified by the user.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

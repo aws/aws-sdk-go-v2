@@ -27,14 +27,14 @@ func (c *Client) DeleteEmailIdentity(ctx context.Context, params *DeleteEmailIde
 	return out, nil
 }
 
-// A request to delete an existing email identity. When you delete an identity, you
-// lose the ability to use Amazon Pinpoint to send email from that identity. You
-// can restore your ability to send email by completing the verification process
-// for the identity again.
+// A request to delete an existing email identity. When you delete an identity,
+// you lose the ability to use Amazon Pinpoint to send email from that identity.
+// You can restore your ability to send email by completing the verification
+// process for the identity again.
 type DeleteEmailIdentityInput struct {
 
-	// The identity (that is, the email address or domain) that you want to delete from
-	// your Amazon Pinpoint account.
+	// The identity (that is, the email address or domain) that you want to delete
+	// from your Amazon Pinpoint account.
 	//
 	// This member is required.
 	EmailIdentity *string
@@ -42,8 +42,8 @@ type DeleteEmailIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type DeleteEmailIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

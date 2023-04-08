@@ -128,8 +128,8 @@ func (c *Client) addOperationGetLinkAssociationsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetLinkAssociationsAPIClient is a client that implements the GetLinkAssociations
-// operation.
+// GetLinkAssociationsAPIClient is a client that implements the
+// GetLinkAssociations operation.
 type GetLinkAssociationsAPIClient interface {
 	GetLinkAssociations(context.Context, *GetLinkAssociationsInput, ...func(*Options)) (*GetLinkAssociationsOutput, error)
 }

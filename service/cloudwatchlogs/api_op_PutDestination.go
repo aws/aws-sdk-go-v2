@@ -15,17 +15,14 @@ import (
 // destinations for cross-account subscriptions. A destination encapsulates a
 // physical resource (such as an Amazon Kinesis stream). With a destination, you
 // can subscribe to a real-time stream of log events for a different account,
-// ingested using PutLogEvents
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html).
-// Through an access policy, a destination controls what is written to it. By
+// ingested using PutLogEvents (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html)
+// . Through an access policy, a destination controls what is written to it. By
 // default, PutDestination does not set any access policy with the destination,
-// which means a cross-account user cannot call PutSubscriptionFilter
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html)
+// which means a cross-account user cannot call PutSubscriptionFilter (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html)
 // against this destination. To enable this, the destination owner must call
-// PutDestinationPolicy
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html)
-// after PutDestination. To perform a PutDestination operation, you must also have
-// the iam:PassRole permission.
+// PutDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html)
+// after PutDestination . To perform a PutDestination operation, you must also
+// have the iam:PassRole permission.
 func (c *Client) PutDestination(ctx context.Context, params *PutDestinationInput, optFns ...func(*Options)) (*PutDestinationOutput, error) {
 	if params == nil {
 		params = &PutDestinationInput{}
@@ -60,8 +57,7 @@ type PutDestinationInput struct {
 	TargetArn *string
 
 	// An optional list of key-value pairs to associate with the resource. For more
-	// information about tagging, see Tagging Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// information about tagging, see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 	Tags map[string]string
 
 	noSmithyDocumentSerde

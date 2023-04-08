@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the details of the schedules that a user configured. A download URL of the
-// report associated with each schedule is returned every time this action is
+// Lists the details of the schedules that a user configured. A download URL of
+// the report associated with each schedule is returned every time this action is
 // called. A new download URL is returned each time, and is valid for 24 hours.
 func (c *Client) ListBusinessReportSchedules(ctx context.Context, params *ListBusinessReportSchedulesInput, optFns ...func(*Options)) (*ListBusinessReportSchedulesOutput, error) {
 	if params == nil {

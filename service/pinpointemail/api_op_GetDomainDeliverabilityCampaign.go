@@ -13,7 +13,7 @@ import (
 
 // Retrieve all the deliverability data for a specific campaign. This data is
 // available for a campaign only if the campaign sent email by using a domain that
-// the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption
+// the Deliverability dashboard is enabled for ( PutDeliverabilityDashboardOption
 // operation).
 func (c *Client) GetDomainDeliverabilityCampaign(ctx context.Context, params *GetDomainDeliverabilityCampaignInput, optFns ...func(*Options)) (*GetDomainDeliverabilityCampaignOutput, error) {
 	if params == nil {
@@ -32,7 +32,7 @@ func (c *Client) GetDomainDeliverabilityCampaign(ctx context.Context, params *Ge
 
 // Retrieve all the deliverability data for a specific campaign. This data is
 // available for a campaign only if the campaign sent email by using a domain that
-// the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption
+// the Deliverability dashboard is enabled for ( PutDeliverabilityDashboardOption
 // operation).
 type GetDomainDeliverabilityCampaignInput struct {
 
@@ -49,8 +49,8 @@ type GetDomainDeliverabilityCampaignInput struct {
 
 // An object that contains all the deliverability data for a specific campaign.
 // This data is available for a campaign only if the campaign sent email by using a
-// domain that the Deliverability dashboard is enabled for
-// (PutDeliverabilityDashboardOption operation).
+// domain that the Deliverability dashboard is enabled for (
+// PutDeliverabilityDashboardOption operation).
 type GetDomainDeliverabilityCampaignOutput struct {
 
 	// An object that contains the deliverability data for the campaign.

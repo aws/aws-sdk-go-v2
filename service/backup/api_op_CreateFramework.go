@@ -40,9 +40,9 @@ type CreateFrameworkInput struct {
 	// This member is required.
 	FrameworkControls []types.FrameworkControl
 
-	// The unique name of the framework. The name must be between 1 and 256 characters,
-	// starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and
-	// underscores (_).
+	// The unique name of the framework. The name must be between 1 and 256
+	// characters, starting with a letter, and consisting of letters (a-z, A-Z),
+	// numbers (0-9), and underscores (_).
 	//
 	// This member is required.
 	FrameworkName *string
@@ -55,7 +55,7 @@ type CreateFrameworkInput struct {
 	FrameworkTags map[string]string
 
 	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to CreateFrameworkInput. Retrying a successful request with the
+	// identical calls to CreateFrameworkInput . Retrying a successful request with the
 	// same idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
@@ -64,13 +64,13 @@ type CreateFrameworkInput struct {
 
 type CreateFrameworkOutput struct {
 
-	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
-	// the ARN depends on the resource type.
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
+	// of the ARN depends on the resource type.
 	FrameworkArn *string
 
-	// The unique name of the framework. The name must be between 1 and 256 characters,
-	// starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and
-	// underscores (_).
+	// The unique name of the framework. The name must be between 1 and 256
+	// characters, starting with a letter, and consisting of letters (a-z, A-Z),
+	// numbers (0-9), and underscores (_).
 	FrameworkName *string
 
 	// Metadata pertaining to the operation's result.

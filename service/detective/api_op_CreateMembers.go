@@ -12,29 +12,26 @@ import (
 )
 
 // CreateMembers is used to send invitations to accounts. For the organization
-// behavior graph, the Detective administrator account uses CreateMembers to enable
-// organization accounts as member accounts. For invited accounts, CreateMembers
-// sends a request to invite the specified Amazon Web Services accounts to be
-// member accounts in the behavior graph. This operation can only be called by the
-// administrator account for a behavior graph. CreateMembers verifies the accounts
-// and then invites the verified accounts. The administrator can optionally specify
-// to not send invitation emails to the member accounts. This would be used when
-// the administrator manages their member accounts centrally. For organization
-// accounts in the organization behavior graph, CreateMembers attempts to enable
-// the accounts. The organization accounts do not receive invitations. The request
-// provides the behavior graph ARN and the list of accounts to invite or to enable.
-// The response separates the requested accounts into two lists:
-//
-// * The accounts
-// that CreateMembers was able to process. For invited accounts, includes member
-// accounts that are being verified, that have passed verification and are to be
-// invited, and that have failed verification. For organization accounts in the
-// organization behavior graph, includes accounts that can be enabled and that
-// cannot be enabled.
-//
-// * The accounts that CreateMembers was unable to process.
-// This list includes accounts that were already invited to be member accounts in
-// the behavior graph.
+// behavior graph, the Detective administrator account uses CreateMembers to
+// enable organization accounts as member accounts. For invited accounts,
+// CreateMembers sends a request to invite the specified Amazon Web Services
+// accounts to be member accounts in the behavior graph. This operation can only be
+// called by the administrator account for a behavior graph. CreateMembers
+// verifies the accounts and then invites the verified accounts. The administrator
+// can optionally specify to not send invitation emails to the member accounts.
+// This would be used when the administrator manages their member accounts
+// centrally. For organization accounts in the organization behavior graph,
+// CreateMembers attempts to enable the accounts. The organization accounts do not
+// receive invitations. The request provides the behavior graph ARN and the list of
+// accounts to invite or to enable. The response separates the requested accounts
+// into two lists:
+//   - The accounts that CreateMembers was able to process. For invited accounts,
+//     includes member accounts that are being verified, that have passed verification
+//     and are to be invited, and that have failed verification. For organization
+//     accounts in the organization behavior graph, includes accounts that can be
+//     enabled and that cannot be enabled.
+//   - The accounts that CreateMembers was unable to process. This list includes
+//     accounts that were already invited to be member accounts in the behavior graph.
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
 	if params == nil {
 		params = &CreateMembersInput{}
@@ -66,8 +63,8 @@ type CreateMembersInput struct {
 	// This member is required.
 	GraphArn *string
 
-	// if set to true, then the invited accounts do not receive email notifications. By
-	// default, this is set to false, and the invited accounts receive email
+	// if set to true , then the invited accounts do not receive email notifications.
+	// By default, this is set to false , and the invited accounts receive email
 	// notifications. Organization accounts in the organization behavior graph do not
 	// receive email notifications.
 	DisableEmailNotification bool
@@ -87,8 +84,8 @@ type CreateMembersOutput struct {
 	// are being enabled.
 	Members []types.MemberDetail
 
-	// The list of accounts for which Detective was unable to process the invitation or
-	// enablement request. For each account, the list provides the reason why the
+	// The list of accounts for which Detective was unable to process the invitation
+	// or enablement request. For each account, the list provides the reason why the
 	// request could not be processed. The list includes accounts that are already
 	// member accounts in the behavior graph.
 	UnprocessedAccounts []types.UnprocessedAccount

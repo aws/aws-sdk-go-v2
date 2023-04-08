@@ -64,8 +64,8 @@ const (
 	AwsIamAccessKeyStatusInactive AwsIamAccessKeyStatus = "Inactive"
 )
 
-// Values returns all known values for AwsIamAccessKeyStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AwsIamAccessKeyStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AwsIamAccessKeyStatus) Values() []AwsIamAccessKeyStatus {
 	return []AwsIamAccessKeyStatus{
@@ -196,9 +196,9 @@ const (
 	MalwareStateRemoved       MalwareState = "REMOVED"
 )
 
-// Values returns all known values for MalwareState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MalwareState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MalwareState) Values() []MalwareState {
 	return []MalwareState{
 		"OBSERVED",
@@ -296,9 +296,9 @@ const (
 	PartitionAwsUsGov Partition = "aws-us-gov"
 )
 
-// Values returns all known values for Partition. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Partition. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Partition) Values() []Partition {
 	return []Partition{
 		"aws",
@@ -333,9 +333,9 @@ const (
 	RegionAvailabilityStatusUnavailable RegionAvailabilityStatus = "UNAVAILABLE"
 )
 
-// Values returns all known values for RegionAvailabilityStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RegionAvailabilityStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegionAvailabilityStatus) Values() []RegionAvailabilityStatus {
 	return []RegionAvailabilityStatus{
 		"AVAILABLE",
@@ -397,9 +397,9 @@ const (
 	SortOrderDescending SortOrder = "desc"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"asc",
@@ -483,9 +483,10 @@ const (
 	ThreatIntelIndicatorCategoryKeylogger         ThreatIntelIndicatorCategory = "KEYLOGGER"
 )
 
-// Values returns all known values for ThreatIntelIndicatorCategory. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ThreatIntelIndicatorCategory. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ThreatIntelIndicatorCategory) Values() []ThreatIntelIndicatorCategory {
 	return []ThreatIntelIndicatorCategory{
 		"BACKDOOR",
@@ -514,9 +515,9 @@ const (
 	ThreatIntelIndicatorTypeUrl          ThreatIntelIndicatorType = "URL"
 )
 
-// Values returns all known values for ThreatIntelIndicatorType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ThreatIntelIndicatorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ThreatIntelIndicatorType) Values() []ThreatIntelIndicatorType {
 	return []ThreatIntelIndicatorType{
 		"DOMAIN",

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the IPSet specified by the ipSetId. IPSets are called trusted IP lists
+// Deletes the IPSet specified by the ipSetId . IPSets are called trusted IP lists
 // in the console user interface.
 func (c *Client) DeleteIPSet(ctx context.Context, params *DeleteIPSetInput, optFns ...func(*Options)) (*DeleteIPSetOutput, error) {
 	if params == nil {

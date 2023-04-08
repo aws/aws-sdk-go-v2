@@ -62,8 +62,7 @@ type ColumnStatisticsConfiguration struct {
 type ConditionExpression struct {
 
 	// A specific condition to apply to a recipe action. For more information, see
-	// Recipe structure
-	// (https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure)
+	// Recipe structure (https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure)
 	// in the Glue DataBrew Developer Guide.
 	//
 	// This member is required.
@@ -80,8 +79,8 @@ type ConditionExpression struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a set of options that define how DataBrew will read a comma-separated
-// value (CSV) file when creating a dataset from that file.
+// Represents a set of options that define how DataBrew will read a
+// comma-separated value (CSV) file when creating a dataset from that file.
 type CsvOptions struct {
 
 	// A single character that specifies the delimiter being used in the CSV file.
@@ -116,8 +115,8 @@ type DatabaseInputDefinition struct {
 	// The table within the target database.
 	DatabaseTableName *string
 
-	// Custom SQL to run against the provided Glue connection. This SQL will be used as
-	// the input for DataBrew projects and jobs.
+	// Custom SQL to run against the provided Glue connection. This SQL will be used
+	// as the input for DataBrew projects and jobs.
 	QueryString *string
 
 	// Represents an Amazon S3 location (bucket name, bucket owner, and object key)
@@ -159,15 +158,15 @@ type DatabaseTableOutputOptions struct {
 	// This member is required.
 	TableName *string
 
-	// Represents an Amazon S3 location (bucket name and object key) where DataBrew can
-	// store intermediate results.
+	// Represents an Amazon S3 location (bucket name and object key) where DataBrew
+	// can store intermediate results.
 	TempDirectory *S3Location
 
 	noSmithyDocumentSerde
 }
 
-// Represents how metadata stored in the Glue Data Catalog is defined in a DataBrew
-// dataset.
+// Represents how metadata stored in the Glue Data Catalog is defined in a
+// DataBrew dataset.
 type DataCatalogInputDefinition struct {
 
 	// The name of a database in the Data Catalog.
@@ -291,8 +290,8 @@ type DatasetParameter struct {
 	// This member is required.
 	Type ParameterType
 
-	// Optional boolean value that defines whether the captured value of this parameter
-	// should be used to create a new column in a dataset.
+	// Optional boolean value that defines whether the captured value of this
+	// parameter should be used to create a new column in a dataset.
 	CreateColumn bool
 
 	// Additional parameter options such as a format and a timezone. Required for
@@ -335,53 +334,27 @@ type DatetimeOptions struct {
 type EntityDetectorConfiguration struct {
 
 	// Entity types to detect. Can be any of the following:
-	//
-	// * USA_SSN
-	//
-	// * EMAIL
-	//
-	// *
-	// USA_ITIN
-	//
-	// * USA_PASSPORT_NUMBER
-	//
-	// * PHONE_NUMBER
-	//
-	// * USA_DRIVING_LICENSE
-	//
-	// *
-	// BANK_ACCOUNT
-	//
-	// * CREDIT_CARD
-	//
-	// * IP_ADDRESS
-	//
-	// * MAC_ADDRESS
-	//
-	// * USA_DEA_NUMBER
-	//
-	// *
-	// USA_HCPCS_CODE
-	//
-	// * USA_NATIONAL_PROVIDER_IDENTIFIER
-	//
-	// * USA_NATIONAL_DRUG_CODE
-	//
-	// *
-	// USA_HEALTH_INSURANCE_CLAIM_NUMBER
-	//
-	// * USA_MEDICARE_BENEFICIARY_IDENTIFIER
-	//
-	// *
-	// USA_CPT_CODE
-	//
-	// * PERSON_NAME
-	//
-	// * DATE
-	//
-	// The Entity type group USA_ALL is also
-	// supported, and includes all of the above entity types except PERSON_NAME and
-	// DATE.
+	//   - USA_SSN
+	//   - EMAIL
+	//   - USA_ITIN
+	//   - USA_PASSPORT_NUMBER
+	//   - PHONE_NUMBER
+	//   - USA_DRIVING_LICENSE
+	//   - BANK_ACCOUNT
+	//   - CREDIT_CARD
+	//   - IP_ADDRESS
+	//   - MAC_ADDRESS
+	//   - USA_DEA_NUMBER
+	//   - USA_HCPCS_CODE
+	//   - USA_NATIONAL_PROVIDER_IDENTIFIER
+	//   - USA_NATIONAL_DRUG_CODE
+	//   - USA_HEALTH_INSURANCE_CLAIM_NUMBER
+	//   - USA_MEDICARE_BENEFICIARY_IDENTIFIER
+	//   - USA_CPT_CODE
+	//   - PERSON_NAME
+	//   - DATE
+	// The Entity type group USA_ALL is also supported, and includes all of the above
+	// entity types except PERSON_NAME and DATE.
 	//
 	// This member is required.
 	EntityTypes []string
@@ -421,22 +394,21 @@ type FilesLimit struct {
 	// This member is required.
 	MaxFiles int32
 
-	// A criteria to use for Amazon S3 files sorting before their selection. By default
-	// uses DESCENDING order, i.e. most recent files are selected first. Another
-	// possible value is ASCENDING.
+	// A criteria to use for Amazon S3 files sorting before their selection. By
+	// default uses DESCENDING order, i.e. most recent files are selected first.
+	// Another possible value is ASCENDING.
 	Order Order
 
-	// A criteria to use for Amazon S3 files sorting before their selection. By default
-	// uses LAST_MODIFIED_DATE as a sorting criteria. Currently it's the only allowed
-	// value.
+	// A criteria to use for Amazon S3 files sorting before their selection. By
+	// default uses LAST_MODIFIED_DATE as a sorting criteria. Currently it's the only
+	// allowed value.
 	OrderedBy OrderedBy
 
 	noSmithyDocumentSerde
 }
 
 // Represents a structure for defining parameter conditions. Supported conditions
-// are described here: Supported conditions for dynamic datasets
-// (https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets)
+// are described here: Supported conditions for dynamic datasets (https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets)
 // in the Glue DataBrew Developer Guide.
 type FilterExpression struct {
 
@@ -521,17 +493,12 @@ type Job struct {
 	DatasetName *string
 
 	// The Amazon Resource Name (ARN) of an encryption key that is used to protect the
-	// job output. For more information, see Encrypting data written by DataBrew jobs
-	// (https://docs.aws.amazon.com/databrew/latest/dg/encryption-security-configuration.html)
+	// job output. For more information, see Encrypting data written by DataBrew jobs (https://docs.aws.amazon.com/databrew/latest/dg/encryption-security-configuration.html)
 	EncryptionKeyArn *string
 
 	// The encryption mode for the job, which can be one of the following:
-	//
-	// * SSE-KMS -
-	// Server-side encryption with keys managed by KMS.
-	//
-	// * SSE-S3 - Server-side
-	// encryption with keys managed by Amazon S3.
+	//   - SSE-KMS - Server-side encryption with keys managed by KMS.
+	//   - SSE-S3 - Server-side encryption with keys managed by Amazon S3.
 	EncryptionMode EncryptionMode
 
 	// A sample configuration for profile jobs only, which determines the number of
@@ -574,16 +541,13 @@ type Job struct {
 	Tags map[string]string
 
 	// The job's timeout in minutes. A job that attempts to run longer than this
-	// timeout period ends with a status of TIMEOUT.
+	// timeout period ends with a status of TIMEOUT .
 	Timeout int32
 
 	// The job type of the job, which must be one of the following:
-	//
-	// * PROFILE - A job
-	// to analyze a dataset, to determine its size, data types, data distribution, and
-	// more.
-	//
-	// * RECIPE - A job to apply one or more transformations to a dataset.
+	//   - PROFILE - A job to analyze a dataset, to determine its size, data types,
+	//   data distribution, and more.
+	//   - RECIPE - A job to apply one or more transformations to a dataset.
 	Type JobType
 
 	// List of validation configurations that are applied to the profile job.
@@ -666,12 +630,9 @@ type JobSample struct {
 
 	// A value that determines whether the profile job is run on the entire dataset or
 	// a specified number of rows. This value must be one of the following:
-	//
-	// *
-	// FULL_DATASET - The profile job is run on the entire dataset.
-	//
-	// * CUSTOM_ROWS -
-	// The profile job is run on the number of rows specified in the Size parameter.
+	//   - FULL_DATASET - The profile job is run on the entire dataset.
+	//   - CUSTOM_ROWS - The profile job is run on the number of rows specified in the
+	//   Size parameter.
 	Mode SampleMode
 
 	// The Size parameter is only required when the mode is CUSTOM_ROWS. The profile
@@ -882,17 +843,12 @@ type Recipe struct {
 	PublishedDate *time.Time
 
 	// The identifier for the version for the recipe. Must be one of the following:
-	//
-	// *
-	// Numeric version (X.Y) - X and Y stand for major and minor version numbers. The
-	// maximum length of each is 6 digits, and neither can be negative values. Both X
-	// and Y are required, and "0.0" isn't a valid version.
-	//
-	// * LATEST_WORKING - the
-	// most recent valid version being developed in a DataBrew project.
-	//
-	// *
-	// LATEST_PUBLISHED - the most recent published version.
+	//   - Numeric version ( X.Y ) - X and Y stand for major and minor version numbers.
+	//   The maximum length of each is 6 digits, and neither can be negative values. Both
+	//   X and Y are required, and "0.0" isn't a valid version.
+	//   - LATEST_WORKING - the most recent valid version being developed in a DataBrew
+	//   project.
+	//   - LATEST_PUBLISHED - the most recent published version.
 	RecipeVersion *string
 
 	// The Amazon Resource Name (ARN) for the recipe.
@@ -908,8 +864,8 @@ type Recipe struct {
 }
 
 // Represents a transformation and associated parameters that are used to apply a
-// change to a DataBrew dataset. For more information, see Recipe actions reference
-// (https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html).
+// change to a DataBrew dataset. For more information, see Recipe actions reference (https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html)
+// .
 type RecipeAction struct {
 
 	// The name of a valid DataBrew transformation to be performed on the data.
@@ -976,15 +932,14 @@ type Rule struct {
 	// The expression which includes column references, condition names followed by
 	// variable references, possibly grouped and combined with other conditions. For
 	// example, (:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1
-	// ends_with :suffix1 or :col1 ends_with :suffix2). Column and value references are
-	// substitution variables that should start with the ':' symbol. Depending on the
-	// context, substitution variables' values can be either an actual value or a
+	// ends_with :suffix1 or :col1 ends_with :suffix2) . Column and value references
+	// are substitution variables that should start with the ':' symbol. Depending on
+	// the context, substitution variables' values can be either an actual value or a
 	// column name. These values are defined in the SubstitutionMap. If a
 	// CheckExpression starts with a column reference, then ColumnSelectors in the rule
 	// should be null. If ColumnSelectors has been defined, then there should be no
 	// column reference in the left side of a condition, for example, is_between :val1
-	// and :val2. For more information, see Available checks
-	// (https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html)
+	// and :val2 . For more information, see Available checks (https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html)
 	//
 	// This member is required.
 	CheckExpression *string
@@ -1084,8 +1039,8 @@ type S3Location struct {
 // output generated by recipe jobs.
 type S3TableOutputOptions struct {
 
-	// Represents an Amazon S3 location (bucket name and object key) where DataBrew can
-	// write output from a job.
+	// Represents an Amazon S3 location (bucket name and object key) where DataBrew
+	// can write output from a job.
 	//
 	// This member is required.
 	Location *S3Location
@@ -1093,8 +1048,8 @@ type S3TableOutputOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the sample size and sampling type for DataBrew to use for interactive
-// data analysis.
+// Represents the sample size and sampling type for DataBrew to use for
+// interactive data analysis.
 type Sample struct {
 
 	// The way in which DataBrew obtains rows from a dataset.

@@ -17,7 +17,7 @@ import (
 // retrieve metadata about pipelines that you or your IAM users have created. If
 // you are using an IAM user account, you can retrieve metadata about only those
 // pipelines for which you have read permissions. To retrieve the full pipeline
-// definition instead of metadata about the pipeline, call GetPipelineDefinition.
+// definition instead of metadata about the pipeline, call GetPipelineDefinition .
 // POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1 X-Amz-Target:
 // DataPipeline.DescribePipelines Content-Length: 70 Host:
 // datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
@@ -53,7 +53,7 @@ func (c *Client) DescribePipelines(ctx context.Context, params *DescribePipeline
 type DescribePipelinesInput struct {
 
 	// The IDs of the pipelines to describe. You can pass as many as 25 identifiers in
-	// a single call. To obtain pipeline IDs, call ListPipelines.
+	// a single call. To obtain pipeline IDs, call ListPipelines .
 	//
 	// This member is required.
 	PipelineIds []string

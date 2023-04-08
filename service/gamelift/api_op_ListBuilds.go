@@ -12,14 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves build resources for all builds associated with the Amazon Web Services
-// account in use. You can limit results to builds that are in a specific status by
-// using the Status parameter. Use the pagination parameters to retrieve results in
-// a set of sequential pages. Build resources are not listed in any particular
-// order. Learn more  Upload a Custom Server Build
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)All
-// APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// Retrieves build resources for all builds associated with the Amazon Web
+// Services account in use. You can limit results to builds that are in a specific
+// status by using the Status parameter. Use the pagination parameters to retrieve
+// results in a set of sequential pages. Build resources are not listed in any
+// particular order. Learn more Upload a Custom Server Build (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
+// All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ListBuilds(ctx context.Context, params *ListBuildsInput, optFns ...func(*Options)) (*ListBuildsOutput, error) {
 	if params == nil {
 		params = &ListBuildsInput{}
@@ -41,24 +39,20 @@ type ListBuildsInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	// Build status to filter results by. To retrieve all builds, leave this parameter
 	// empty. Possible build statuses include the following:
-	//
-	// * INITIALIZED -- A new
-	// build has been defined, but no files have been uploaded. You cannot create
-	// fleets for builds that are in this status. When a build is successfully created,
-	// the build status is set to this value.
-	//
-	// * READY -- The game build has been
-	// successfully uploaded. You can now create new fleets for this build.
-	//
-	// * FAILED
-	// -- The game build upload failed. You cannot create new fleets for this build.
+	//   - INITIALIZED -- A new build has been defined, but no files have been
+	//   uploaded. You cannot create fleets for builds that are in this status. When a
+	//   build is successfully created, the build status is set to this value.
+	//   - READY -- The game build has been successfully uploaded. You can now create
+	//   new fleets for this build.
+	//   - FAILED -- The game build upload failed. You cannot create new fleets for
+	//   this build.
 	Status types.BuildStatus
 
 	noSmithyDocumentSerde

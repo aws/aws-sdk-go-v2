@@ -39,9 +39,9 @@ type CreateBasePathMappingInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// The base path name that callers of the API must provide as part of the URL after
-	// the domain name. This value must be unique for all of the mappings across a
-	// single API. Specify '(none)' if you do not want callers to specify a base path
+	// The base path name that callers of the API must provide as part of the URL
+	// after the domain name. This value must be unique for all of the mappings across
+	// a single API. Specify '(none)' if you do not want callers to specify a base path
 	// name after the domain name.
 	BasePath *string
 
@@ -53,12 +53,12 @@ type CreateBasePathMappingInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the base path that callers of the API must provide as part of the URL
-// after the domain name.
+// Represents the base path that callers of the API must provide as part of the
+// URL after the domain name.
 type CreateBasePathMappingOutput struct {
 
-	// The base path name that callers of the API must provide as part of the URL after
-	// the domain name.
+	// The base path name that callers of the API must provide as part of the URL
+	// after the domain name.
 	BasePath *string
 
 	// The string identifier of the associated RestApi.

@@ -42,8 +42,8 @@ type GetConfigurationSetEventDestinationsInput struct {
 // An object that contains information about an event destination.
 type GetConfigurationSetEventDestinationsOutput struct {
 
-	// An array of EventDestination objects. Each EventDestination object includes ARNs
-	// and other information that define an event destination.
+	// An array of EventDestination objects. Each EventDestination object includes
+	// ARNs and other information that define an event destination.
 	EventDestinations []types.EventDestination
 
 	// Metadata pertaining to the operation's result.

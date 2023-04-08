@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about cluster snapshots. By default, DescribeSnapshots lists
-// all of your snapshots; it can optionally describe a single snapshot, or just the
-// snapshots associated with a particular cluster.
+// Returns information about cluster snapshots. By default, DescribeSnapshots
+// lists all of your snapshots; it can optionally describe a single snapshot, or
+// just the snapshots associated with a particular cluster.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
 	if params == nil {
 		params = &DescribeSnapshotsInput{}

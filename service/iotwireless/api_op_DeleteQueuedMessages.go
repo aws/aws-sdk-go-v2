@@ -34,7 +34,7 @@ type DeleteQueuedMessagesInput struct {
 	// This member is required.
 	Id *string
 
-	// If message ID is "*", it cleares the entire downlink queue for a given device,
+	// If message ID is "*" , it cleares the entire downlink queue for a given device,
 	// specified by the wireless device ID. Otherwise, the downlink message with the
 	// specified message ID will be deleted.
 	//

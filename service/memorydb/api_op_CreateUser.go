@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a MemoryDB user. For more information, see Authenticating users with
-// Access Contol Lists (ACLs)
-// (https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html).
+// Access Contol Lists (ACLs) (https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html)
+// .
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}

@@ -13,15 +13,14 @@ import (
 )
 
 // Retrieves the service last accessed data report for Organizations that was
-// previously generated using the GenerateOrganizationsAccessReport operation. This
-// operation retrieves the status of your report job and the report contents.
+// previously generated using the GenerateOrganizationsAccessReport operation.
+// This operation retrieves the status of your report job and the report contents.
 // Depending on the parameters that you passed when you generated the report, the
 // data returned could include different information. For details, see
-// GenerateOrganizationsAccessReport. To call this operation, you must be signed in
-// to the management account in your organization. SCPs must be enabled for your
+// GenerateOrganizationsAccessReport . To call this operation, you must be signed
+// in to the management account in your organization. SCPs must be enabled for your
 // organization root. You must have permissions to perform this operation. For more
-// information, see Refining permissions using service last accessed data
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
+// information, see Refining permissions using service last accessed data (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
 // in the IAM User Guide. For each service that principals in an account (root
 // user, IAM users, or IAM roles) could access using SCPs, the operation returns
 // details about the most recent access attempt. If there was no attempt, the
@@ -59,10 +58,10 @@ type GetOrganizationsAccessReportInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
@@ -76,8 +75,8 @@ type GetOrganizationsAccessReportInput struct {
 
 type GetOrganizationsAccessReportOutput struct {
 
-	// The date and time, in ISO 8601 date-time format
-	// (http://www.iso.org/iso/iso8601), when the report job was created.
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601)
+	// , when the report job was created.
 	//
 	// This member is required.
 	JobCreationDate *time.Time
@@ -92,8 +91,8 @@ type GetOrganizationsAccessReportOutput struct {
 	AccessDetails []types.AccessDetail
 
 	// Contains information about the reason that the operation failed. This data type
-	// is used as a response element in the GetOrganizationsAccessReport,
-	// GetServiceLastAccessedDetails, and GetServiceLastAccessedDetailsWithEntities
+	// is used as a response element in the GetOrganizationsAccessReport ,
+	// GetServiceLastAccessedDetails , and GetServiceLastAccessedDetailsWithEntities
 	// operations.
 	ErrorDetails *types.ErrorDetails
 
@@ -101,17 +100,16 @@ type GetOrganizationsAccessReportOutput struct {
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
 	// the MaxItems number of results even when there are more results available. We
-	// recommend that you check IsTruncated after every call to ensure that you receive
-	// all your results.
+	// recommend that you check IsTruncated after every call to ensure that you
+	// receive all your results.
 	IsTruncated bool
 
-	// The date and time, in ISO 8601 date-time format
-	// (http://www.iso.org/iso/iso8601), when the generated report job was completed or
-	// failed. This field is null if the job is still in progress, as indicated by a
-	// job status value of IN_PROGRESS.
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601)
+	// , when the generated report job was completed or failed. This field is null if
+	// the job is still in progress, as indicated by a job status value of IN_PROGRESS .
 	JobCompletionDate *time.Time
 
-	// When IsTruncated is true, this element is present and contains the value to use
+	// When IsTruncated is true , this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 

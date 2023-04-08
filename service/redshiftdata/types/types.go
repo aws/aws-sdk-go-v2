@@ -129,9 +129,8 @@ type SqlParameter struct {
 	Name *string
 
 	// The value of the parameter. Amazon Redshift implicitly converts to the proper
-	// data type. For more information, see Data types
-	// (https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html) in
-	// the Amazon Redshift Database Developer Guide.
+	// data type. For more information, see Data types (https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html)
+	// in the Amazon Redshift Database Developer Guide.
 	//
 	// This member is required.
 	Value *string
@@ -160,8 +159,8 @@ type StatementData struct {
 	// The SQL statement.
 	QueryString *string
 
-	// One or more SQL statements. Each query string in the array corresponds to one of
-	// the queries in a batch query request.
+	// One or more SQL statements. Each query string in the array corresponds to one
+	// of the queries in a batch query request.
 	QueryStrings []string
 
 	// The name or Amazon Resource Name (ARN) of the secret that enables access to the
@@ -241,8 +240,8 @@ type TableMember struct {
 	// The schema containing the table.
 	Schema *string
 
-	// The type of the table. Possible values include TABLE, VIEW, SYSTEM TABLE, GLOBAL
-	// TEMPORARY, LOCAL TEMPORARY, ALIAS, and SYNONYM.
+	// The type of the table. Possible values include TABLE, VIEW, SYSTEM TABLE,
+	// GLOBAL TEMPORARY, LOCAL TEMPORARY, ALIAS, and SYNONYM.
 	Type *string
 
 	noSmithyDocumentSerde

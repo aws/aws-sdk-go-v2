@@ -120,18 +120,14 @@ type ComputeAttributes struct {
 	HostId *string
 
 	// The state.
-	//
-	// * ACTIVE - The asset is available and can provide capacity for new
-	// compute resources.
-	//
-	// * ISOLATED - The asset is undergoing maintenance and can't
-	// provide capacity for new compute resources. Existing compute resources on the
-	// asset are not affected.
-	//
-	// * RETIRING - The underlying hardware for the asset is
-	// degraded. Capacity for new compute resources is reduced. Amazon Web Services
-	// sends notifications for resources that must be stopped before the asset can be
-	// replaced.
+	//   - ACTIVE - The asset is available and can provide capacity for new compute
+	//   resources.
+	//   - ISOLATED - The asset is undergoing maintenance and can't provide capacity
+	//   for new compute resources. Existing compute resources on the asset are not
+	//   affected.
+	//   - RETIRING - The underlying hardware for the asset is degraded. Capacity for
+	//   new compute resources is reduced. Amazon Web Services sends notifications for
+	//   resources that must be stopped before the asset can be replaced.
 	State ComputeAssetState
 
 	noSmithyDocumentSerde
@@ -267,23 +263,14 @@ type Order struct {
 	PaymentTerm PaymentTerm
 
 	// The status of the order.
-	//
-	// * PREPARING - Order is received and being prepared.
-	//
-	// *
-	// IN_PROGRESS - Order is either being built, shipped, or installed. To get more
-	// details, see the line item status.
-	//
-	// * COMPLETED - Order is complete.
-	//
-	// *
-	// CANCELLED - Order is cancelled.
-	//
-	// * ERROR - Customer should contact support.
-	//
-	// The
-	// following status are deprecated: RECEIVED, PENDING, PROCESSING, INSTALLING, and
-	// FULFILLED.
+	//   - PREPARING - Order is received and being prepared.
+	//   - IN_PROGRESS - Order is either being built, shipped, or installed. To get
+	//   more details, see the line item status.
+	//   - COMPLETED - Order is complete.
+	//   - CANCELLED - Order is cancelled.
+	//   - ERROR - Customer should contact support.
+	// The following status are deprecated: RECEIVED , PENDING , PROCESSING ,
+	// INSTALLING , and FULFILLED .
 	Status OrderStatus
 
 	noSmithyDocumentSerde
@@ -311,23 +298,14 @@ type OrderSummary struct {
 	OutpostId *string
 
 	// The status of the order.
-	//
-	// * PREPARING - Order is received and is being
-	// prepared.
-	//
-	// * IN_PROGRESS - Order is either being built, shipped, or installed.
-	// For more information, see the LineItem status.
-	//
-	// * COMPLETED - Order is
-	// complete.
-	//
-	// * CANCELLED - Order is cancelled.
-	//
-	// * ERROR - Customer should contact
-	// support.
-	//
-	// The following statuses are deprecated: RECEIVED, PENDING, PROCESSING,
-	// INSTALLING, and FULFILLED.
+	//   - PREPARING - Order is received and is being prepared.
+	//   - IN_PROGRESS - Order is either being built, shipped, or installed. For more
+	//   information, see the LineItem status.
+	//   - COMPLETED - Order is complete.
+	//   - CANCELLED - Order is cancelled.
+	//   - ERROR - Customer should contact support.
+	// The following statuses are deprecated: RECEIVED , PENDING , PROCESSING ,
+	// INSTALLING , and FULFILLED .
 	Status OrderStatus
 
 	noSmithyDocumentSerde
@@ -377,8 +355,7 @@ type Outpost struct {
 
 // Information about the physical and logistical details for racks at sites. For
 // more information about hardware requirements for racks, see Network readiness
-// checklist
-// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist)
+// checklist (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist)
 // in the Amazon Web Services Outposts User Guide.
 type RackPhysicalProperties struct {
 
@@ -392,8 +369,7 @@ type RackPhysicalProperties struct {
 	// The type of optical standard used to attach the Outpost to the network. This
 	// field is dependent on uplink speed, fiber type, and distance to the upstream
 	// device. For more information about networking requirements for racks, see
-	// Network
-	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking)
+	// Network (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking)
 	// in the Amazon Web Services Outposts User Guide.
 	OpticalStandard OpticalStandard
 
@@ -448,8 +424,8 @@ type Site struct {
 	// City where the hardware is installed and powered on.
 	OperatingAddressCity *string
 
-	// The ISO-3166 two-letter country code where the hardware is installed and powered
-	// on.
+	// The ISO-3166 two-letter country code where the hardware is installed and
+	// powered on.
 	OperatingAddressCountryCode *string
 
 	// State or region where the hardware is installed and powered on.

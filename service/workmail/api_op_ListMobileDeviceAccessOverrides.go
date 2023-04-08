@@ -48,15 +48,10 @@ type ListMobileDeviceAccessOverridesInput struct {
 
 	// The WorkMail user under which you list the mobile device access overrides.
 	// Accepts the following types of user identities:
-	//
-	// * User ID:
-	// 12345678-1234-1234-1234-123456789012 or
-	// S-1-1-12-1234567890-123456789-123456789-1234
-	//
-	// * Email address:
-	// user@domain.tld
-	//
-	// * User name: user
+	//   - User ID: 12345678-1234-1234-1234-123456789012 or
+	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//   - Email address: user@domain.tld
+	//   - User name: user
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -68,8 +63,8 @@ type ListMobileDeviceAccessOverridesOutput struct {
 	// there are no more results to return.
 	NextToken *string
 
-	// The list of mobile device access overrides that exist for the specified WorkMail
-	// organization and user.
+	// The list of mobile device access overrides that exist for the specified
+	// WorkMail organization and user.
 	Overrides []types.MobileDeviceAccessOverride
 
 	// Metadata pertaining to the operation's result.

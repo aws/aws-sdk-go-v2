@@ -11,14 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Auto-termination is supported in Amazon EMR versions 5.30.0 and 6.1.0 and later.
-// For more information, see Using an auto-termination policy
-// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html).
-// Creates or updates an auto-termination policy for an Amazon EMR cluster. An
+// Auto-termination is supported in Amazon EMR versions 5.30.0 and 6.1.0 and
+// later. For more information, see Using an auto-termination policy (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html)
+// . Creates or updates an auto-termination policy for an Amazon EMR cluster. An
 // auto-termination policy defines the amount of idle time in seconds after which a
 // cluster automatically terminates. For alternative cluster termination options,
-// see Control cluster termination
-// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html).
+// see Control cluster termination (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html)
+// .
 func (c *Client) PutAutoTerminationPolicy(ctx context.Context, params *PutAutoTerminationPolicyInput, optFns ...func(*Options)) (*PutAutoTerminationPolicyOutput, error) {
 	if params == nil {
 		params = &PutAutoTerminationPolicyInput{}

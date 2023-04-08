@@ -55,8 +55,8 @@ type GetStageOutput struct {
 	CacheClusterEnabled bool
 
 	// The stage's cache capacity in GB. For more information about choosing a cache
-	// size, see Enabling API caching to enhance responsiveness
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html).
+	// size, see Enabling API caching to enhance responsiveness (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html)
+	// .
 	CacheClusterSize types.CacheClusterSize
 
 	// The status of the cache cluster for the stage, if enabled.
@@ -83,8 +83,8 @@ type GetStageOutput struct {
 	// The timestamp when the stage last updated.
 	LastUpdatedDate *time.Time
 
-	// A map that defines the method settings for a Stage resource. Keys (designated as
-	// /{method_setting_key below) are method paths defined as
+	// A map that defines the method settings for a Stage resource. Keys (designated
+	// as /{method_setting_key below) are method paths defined as
 	// {resource_path}/{http_method} for an individual method override, or /\*/\* for
 	// overriding all methods in the stage.
 	MethodSettings map[string]types.MethodSetting
@@ -103,7 +103,7 @@ type GetStageOutput struct {
 
 	// A map that defines the stage variables for a Stage resource. Variable names can
 	// have alphanumeric and underscore characters, and the values must match
-	// [A-Za-z0-9-._~:/?#&=,]+.
+	// [A-Za-z0-9-._~:/?#&=,]+ .
 	Variables map[string]string
 
 	// The ARN of the WebAcl associated with the Stage.

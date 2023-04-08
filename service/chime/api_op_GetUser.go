@@ -13,8 +13,8 @@ import (
 
 // Retrieves details for the specified user ID, such as primary email address,
 // license type,and personal meeting PIN. To retrieve user details with an email
-// address instead of a user ID, use the ListUsers action, and then filter by email
-// address.
+// address instead of a user ID, use the ListUsers action, and then filter by
+// email address.
 func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...func(*Options)) (*GetUserOutput, error) {
 	if params == nil {
 		params = &GetUserInput{}

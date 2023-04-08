@@ -33,9 +33,9 @@ func (e *InternalServiceError) ErrorCode() string {
 }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request was not valid. Verify that your request was properly formatted, that
-// the signature was generated with the correct credentials, and that you haven't
-// exceeded any of the service limits for your account.
+// The request was not valid. Verify that your request was properly formatted,
+// that the signature was generated with the correct credentials, and that you
+// haven't exceeded any of the service limits for your account.
 type InvalidRequestException struct {
 	Message *string
 

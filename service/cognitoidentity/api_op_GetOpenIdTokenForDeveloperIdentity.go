@@ -20,8 +20,8 @@ import (
 // developer provider) to an existing identity. When you want to create a new
 // identity, the IdentityId should be null. When you want to associate a new login
 // with an existing authenticated/unauthenticated identity, you can do so by
-// providing the existing IdentityId. This API will create the identity in the
-// specified IdentityPoolId. You must use AWS Developer credentials to call this
+// providing the existing IdentityId . This API will create the identity in the
+// specified IdentityPoolId . You must use AWS Developer credentials to call this
 // API.
 func (c *Client) GetOpenIdTokenForDeveloperIdentity(ctx context.Context, params *GetOpenIdTokenForDeveloperIdentityInput, optFns ...func(*Options)) (*GetOpenIdTokenForDeveloperIdentityOutput, error) {
 	if params == nil {
@@ -49,7 +49,7 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	// Each name-value pair represents a user from a public provider or developer
 	// provider. If the user is from a developer provider, the name-value pair will
-	// follow the syntax "developer_provider_name": "developer_user_identifier". The
+	// follow the syntax "developer_provider_name": "developer_user_identifier" . The
 	// developer provider is the "domain" by which Cognito will refer to your users;
 	// you provided this domain while creating/updating the identity pool. The
 	// developer user identifier is an identifier from your backend that uniquely

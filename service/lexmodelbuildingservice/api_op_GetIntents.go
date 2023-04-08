@@ -13,16 +13,12 @@ import (
 )
 
 // Returns intent information as follows:
+//   - If you specify the nameContains field, returns the $LATEST version of all
+//     intents that contain the specified string.
+//   - If you don't specify the nameContains field, returns information about the
+//     $LATEST version of all intents.
 //
-// * If you specify the nameContains field,
-// returns the $LATEST version of all intents that contain the specified string.
-//
-// *
-// If you don't specify the nameContains field, returns information about the
-// $LATEST version of all intents.
-//
-// The operation requires permission for the
-// lex:GetIntents action.
+// The operation requires permission for the lex:GetIntents action.
 func (c *Client) GetIntents(ctx context.Context, params *GetIntentsInput, optFns ...func(*Options)) (*GetIntentsOutput, error) {
 	if params == nil {
 		params = &GetIntentsInput{}
@@ -59,7 +55,7 @@ type GetIntentsInput struct {
 
 type GetIntentsOutput struct {
 
-	// An array of Intent objects. For more information, see PutBot.
+	// An array of Intent objects. For more information, see PutBot .
 	Intents []types.IntentMetadata
 
 	// If the response is truncated, the response includes a pagination token that you

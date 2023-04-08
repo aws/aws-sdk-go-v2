@@ -13,7 +13,7 @@ import (
 
 // Disassociates GuardDuty member accounts (to the current administrator account)
 // specified by the account IDs. With autoEnableOrganizationMembers configuration
-// for your organization set to ALL, you'll receive an error if you attempt to
+// for your organization set to ALL , you'll receive an error if you attempt to
 // disassociate a member account before removing them from your Amazon Web Services
 // organization.
 func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMembersInput, optFns ...func(*Options)) (*DisassociateMembersOutput, error) {
@@ -39,8 +39,8 @@ type DisassociateMembersInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// The unique ID of the detector of the GuardDuty account whose members you want to
-	// disassociate from the administrator account.
+	// The unique ID of the detector of the GuardDuty account whose members you want
+	// to disassociate from the administrator account.
 	//
 	// This member is required.
 	DetectorId *string

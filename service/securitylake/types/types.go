@@ -7,10 +7,10 @@ import (
 	"time"
 )
 
-// Amazon Security Lake collects logs and events from supported Amazon Web Services
-// and custom sources. For the list of supported Amazon Web Services, see the
-// Amazon Security Lake User Guide
-// (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html).
+// Amazon Security Lake collects logs and events from supported Amazon Web
+// Services and custom sources. For the list of supported Amazon Web Services, see
+// the Amazon Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
+// .
 type AccountSources struct {
 
 	// The ID of the Security Lake account for which logs are collected.
@@ -34,8 +34,8 @@ type AccountSources struct {
 	noSmithyDocumentSerde
 }
 
-// Automatically enable new organization accounts as member accounts from an Amazon
-// Security Lake administrator account.
+// Automatically enable new organization accounts as member accounts from an
+// Amazon Security Lake administrator account.
 type AutoEnableNewRegionConfiguration struct {
 
 	// The Amazon Web Services Regions where Security Lake is automatically enabled.
@@ -73,8 +73,8 @@ type Failures struct {
 	noSmithyDocumentSerde
 }
 
-// Response element for actions that make changes, namely create, update, or delete
-// actions.
+// Response element for actions that make changes, namely create, update, or
+// delete actions.
 type FailuresResponse struct {
 
 	// List of all failures.
@@ -103,9 +103,9 @@ type LakeConfigurationRequest struct {
 	// rollup Region.
 	ReplicationDestinationRegions []Region
 
-	// Replication settings for the Amazon S3 buckets. This parameter uses the Identity
-	// and Access Management (IAM) role you created that is managed by Security Lake,
-	// to ensure the replication setting is correct.
+	// Replication settings for the Amazon S3 buckets. This parameter uses the
+	// Identity and Access Management (IAM) role you created that is managed by
+	// Security Lake, to ensure the replication setting is correct.
 	ReplicationRoleArn *string
 
 	// Retention settings for the destination Amazon S3 buckets.
@@ -135,9 +135,9 @@ type LakeConfigurationResponse struct {
 	// rollup Region.
 	ReplicationDestinationRegions []Region
 
-	// Replication settings for the Amazon S3 buckets. This parameter uses the IAM role
-	// you created that is managed by Security Lake, to ensure the replication setting
-	// is correct.
+	// Replication settings for the Amazon S3 buckets. This parameter uses the IAM
+	// role you created that is managed by Security Lake, to ensure the replication
+	// setting is correct.
 	ReplicationRoleArn *string
 
 	// Retention settings for the destination Amazon S3 buckets.
@@ -167,11 +167,11 @@ type LakeConfigurationResponse struct {
 // failed.
 type LastUpdateFailure struct {
 
-	// The reason code for the failure of the last UpdateDatalake or DeleteDatalake API
-	// request.
+	// The reason code for the failure of the last UpdateDatalake or DeleteDatalake
+	// API request.
 	Code *string
 
-	// The reason for the failure of the last UpdateDatalakeor DeleteDatalake API
+	// The reason for the failure of the last UpdateDatalake or DeleteDatalake API
 	// request.
 	Reason *string
 
@@ -195,8 +195,8 @@ type LogsStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Protocol used in Amazon Security Lake that dictates how notifications are posted
-// at the endpoint.
+// Protocol used in Amazon Security Lake that dictates how notifications are
+// posted at the endpoint.
 type ProtocolAndNotificationEndpoint struct {
 
 	// The account that is subscribed to receive exception notifications.
@@ -226,8 +226,8 @@ type RetentionSetting struct {
 
 // The supported source types from which logs and events are collected in Amazon
 // Security Lake. For the list of supported Amazon Web Services, see the Amazon
-// Security Lake User Guide
-// (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html).
+// Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
+// .
 //
 // The following types satisfy this interface:
 //
@@ -284,7 +284,7 @@ type SubscriberResource struct {
 	// Service (Amazon SQS) queue or through messaging to an HTTPS endpoint provided by
 	// the subscriber. Subscribers can consume data by directly querying Lake Formation
 	// tables in your Amazon S3 bucket through services like Amazon Athena. This
-	// subscription type is defined as LAKEFORMATION.
+	// subscription type is defined as LAKEFORMATION .
 	AccessTypes []AccessType
 
 	// The date and time when the subscription was created.
@@ -315,7 +315,8 @@ type SubscriberResource struct {
 	SnsArn *string
 
 	// The subscriber descriptions for a subscriber account. The description for a
-	// subscriber includes subscriberName, accountID, externalID, and subscriptionId.
+	// subscriber includes subscriberName , accountID , externalID , and subscriptionId
+	// .
 	SubscriberDescription *string
 
 	// The name of your Amazon Security Lake subscriber account.
@@ -336,12 +337,12 @@ type SubscriberResource struct {
 	noSmithyDocumentSerde
 }
 
-// The status of the last UpdateDatalake or DeleteDatalake API request. This is set
-// to Completed after the configuration is updated, or removed if deletion of the
-// data lake is successful.
+// The status of the last UpdateDatalake or DeleteDatalake API request. This is
+// set to Completed after the configuration is updated, or removed if deletion of
+// the data lake is successful.
 type UpdateStatus struct {
 
-	// The details of the last UpdateDatalakeor DeleteDatalake API request which
+	// The details of the last UpdateDatalake or DeleteDatalake API request which
 	// failed.
 	LastUpdateFailure *LastUpdateFailure
 

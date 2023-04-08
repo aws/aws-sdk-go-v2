@@ -32,9 +32,7 @@ type DownloadDBLogFilePortionInput struct {
 
 	// The customer-assigned name of the DB instance that contains the log files you
 	// want to list. Constraints:
-	//
-	// * Must match the identifier of an existing
-	// DBInstance.
+	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
@@ -54,30 +52,24 @@ type DownloadDBLogFilePortionInput struct {
 	// NumberOfLines parameter is specified, then the block of lines returned can be
 	// from the beginning or the end of the log file, depending on the value of the
 	// Marker parameter.
-	//
-	// * If neither Marker or NumberOfLines are specified, the
-	// entire log file is returned up to a maximum of 10000 lines, starting with the
-	// most recent log entries first.
-	//
-	// * If NumberOfLines is specified and Marker isn't
-	// specified, then the most recent lines from the end of the log file are
-	// returned.
-	//
-	// * If Marker is specified as "0", then the specified number of lines
-	// from the beginning of the log file are returned.
-	//
-	// * You can download the log
-	// file in blocks of lines by specifying the size of the block using the
-	// NumberOfLines parameter, and by specifying a value of "0" for the Marker
-	// parameter in your first request. Include the Marker value returned in the
-	// response as the Marker value for the next request, continuing until the
-	// AdditionalDataPending response element returns false.
+	//   - If neither Marker or NumberOfLines are specified, the entire log file is
+	//   returned up to a maximum of 10000 lines, starting with the most recent log
+	//   entries first.
+	//   - If NumberOfLines is specified and Marker isn't specified, then the most
+	//   recent lines from the end of the log file are returned.
+	//   - If Marker is specified as "0", then the specified number of lines from the
+	//   beginning of the log file are returned.
+	//   - You can download the log file in blocks of lines by specifying the size of
+	//   the block using the NumberOfLines parameter, and by specifying a value of "0"
+	//   for the Marker parameter in your first request. Include the Marker value
+	//   returned in the response as the Marker value for the next request, continuing
+	//   until the AdditionalDataPending response element returns false.
 	NumberOfLines int32
 
 	noSmithyDocumentSerde
 }
 
-// This data type is used as a response element to DownloadDBLogFilePortion.
+// This data type is used as a response element to DownloadDBLogFilePortion .
 type DownloadDBLogFilePortionOutput struct {
 
 	// Boolean value that if true, indicates there is more data to be downloaded.
@@ -174,24 +166,18 @@ type DownloadDBLogFilePortionPaginatorOptions struct {
 	// NumberOfLines parameter is specified, then the block of lines returned can be
 	// from the beginning or the end of the log file, depending on the value of the
 	// Marker parameter.
-	//
-	// * If neither Marker or NumberOfLines are specified, the
-	// entire log file is returned up to a maximum of 10000 lines, starting with the
-	// most recent log entries first.
-	//
-	// * If NumberOfLines is specified and Marker isn't
-	// specified, then the most recent lines from the end of the log file are
-	// returned.
-	//
-	// * If Marker is specified as "0", then the specified number of lines
-	// from the beginning of the log file are returned.
-	//
-	// * You can download the log
-	// file in blocks of lines by specifying the size of the block using the
-	// NumberOfLines parameter, and by specifying a value of "0" for the Marker
-	// parameter in your first request. Include the Marker value returned in the
-	// response as the Marker value for the next request, continuing until the
-	// AdditionalDataPending response element returns false.
+	//   - If neither Marker or NumberOfLines are specified, the entire log file is
+	//   returned up to a maximum of 10000 lines, starting with the most recent log
+	//   entries first.
+	//   - If NumberOfLines is specified and Marker isn't specified, then the most
+	//   recent lines from the end of the log file are returned.
+	//   - If Marker is specified as "0", then the specified number of lines from the
+	//   beginning of the log file are returned.
+	//   - You can download the log file in blocks of lines by specifying the size of
+	//   the block using the NumberOfLines parameter, and by specifying a value of "0"
+	//   for the Marker parameter in your first request. Include the Marker value
+	//   returned in the response as the Marker value for the next request, continuing
+	//   until the AdditionalDataPending response element returns false.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -64,8 +64,8 @@ type EvaluationResult struct {
 	// This member is required.
 	Feature *string
 
-	// If this user was assigned to a launch or experiment, this field lists the launch
-	// or experiment name.
+	// If this user was assigned to a launch or experiment, this field lists the
+	// launch or experiment name.
 	//
 	// This value conforms to the media type: application/json
 	Details *string
@@ -73,10 +73,10 @@ type EvaluationResult struct {
 	// The name or ARN of the project that contains the feature being evaluated.
 	Project *string
 
-	// Specifies the reason that the user session was assigned this variation. Possible
-	// values include DEFAULT, meaning the user was served the default variation;
-	// LAUNCH_RULE_MATCH, if the user session was enrolled in a launch; or
-	// EXPERIMENT_RULE_MATCH, if the user session was enrolled in an experiment.
+	// Specifies the reason that the user session was assigned this variation.
+	// Possible values include DEFAULT , meaning the user was served the default
+	// variation; LAUNCH_RULE_MATCH , if the user session was enrolled in a launch; or
+	// EXPERIMENT_RULE_MATCH , if the user session was enrolled in an experiment.
 	Reason *string
 
 	// The value assigned to this variation to differentiate it from the other
@@ -162,7 +162,7 @@ type Experiment struct {
 	Status ExperimentStatus
 
 	// The type of this experiment. Currently, this value must be
-	// aws.experiment.onlineab.
+	// aws.experiment.onlineab .
 	//
 	// This member is required.
 	Type ExperimentType
@@ -190,7 +190,7 @@ type Experiment struct {
 	// This value is used when Evidently assigns a particular user session to the
 	// experiment. It helps create a randomization ID to determine which variation the
 	// user session is served. This randomization ID is a combination of the entity ID
-	// and randomizationSalt.
+	// and randomizationSalt .
 	RandomizationSalt *string
 
 	// In thousandths of a percent, the amount of the available audience that is
@@ -207,15 +207,15 @@ type Experiment struct {
 	// The audience segment being used for the experiment, if a segment is being used.
 	Segment *string
 
-	// If the experiment was stopped, this is the string that was entered by the person
-	// who stopped the experiment, to explain why it was stopped.
+	// If the experiment was stopped, this is the string that was entered by the
+	// person who stopped the experiment, to explain why it was stopped.
 	StatusReason *string
 
 	// The list of tag keys and values associated with this experiment.
 	Tags map[string]string
 
-	// An array of structures that describe the configuration of each feature variation
-	// used in the experiment.
+	// An array of structures that describe the configuration of each feature
+	// variation used in the experiment.
 	Treatments []Treatment
 
 	noSmithyDocumentSerde
@@ -253,8 +253,8 @@ type ExperimentReport struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains experiment results for one metric that is monitored in
-// the experiment.
+// A structure that contains experiment results for one metric that is monitored
+// in the experiment.
 type ExperimentResultsData struct {
 
 	// The name of the metric.
@@ -295,9 +295,9 @@ type Feature struct {
 	// This member is required.
 	CreatedTime *time.Time
 
-	// If this value is ALL_RULES, the traffic allocation specified by any ongoing
-	// launches or experiments is being used. If this is DEFAULT_VARIATION, the default
-	// variation is being served to all users.
+	// If this value is ALL_RULES , the traffic allocation specified by any ongoing
+	// launches or experiments is being used. If this is DEFAULT_VARIATION , the
+	// default variation is being served to all users.
 	//
 	// This member is required.
 	EvaluationStrategy FeatureEvaluationStrategy
@@ -318,14 +318,13 @@ type Feature struct {
 	Status FeatureStatus
 
 	// Defines the type of value used to define the different feature variations. For
-	// more information, see Variation types
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-variationtypes.html)
+	// more information, see Variation types (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-variationtypes.html)
 	//
 	// This member is required.
 	ValueType VariationValueType
 
-	// An array of structures that contain the configuration of the feature's different
-	// variations.
+	// An array of structures that contain the configuration of the feature's
+	// different variations.
 	//
 	// This member is required.
 	Variations []Variation
@@ -333,7 +332,7 @@ type Feature struct {
 	// The name of the variation that is used as the default variation. The default
 	// variation is served to users who are not allocated to any ongoing launches or
 	// experiments of this feature. This variation must also be listed in the
-	// variations structure. If you omit defaultVariation, the first variation listed
+	// variations structure. If you omit defaultVariation , the first variation listed
 	// in the variations structure is used as the default variation.
 	DefaultVariation *string
 
@@ -344,8 +343,7 @@ type Feature struct {
 	// specific variation of a feature. Each key specifies a user using their user ID,
 	// account ID, or some other identifier. The value specifies the name of the
 	// variation that the user is to be served. For the override to be successful, the
-	// value of the key must match the entityId used in the EvaluateFeature
-	// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
+	// value of the key must match the entityId used in the EvaluateFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
 	// operation.
 	EntityOverrides map[string]string
 
@@ -374,9 +372,9 @@ type FeatureSummary struct {
 	// This member is required.
 	CreatedTime *time.Time
 
-	// If this value is ALL_RULES, the traffic allocation specified by any ongoing
-	// launches or experiments is being used. If this is DEFAULT_VARIATION, the default
-	// variation is being served to all users.
+	// If this value is ALL_RULES , the traffic allocation specified by any ongoing
+	// launches or experiments is being used. If this is DEFAULT_VARIATION , the
+	// default variation is being served to all users.
 	//
 	// This member is required.
 	EvaluationStrategy FeatureEvaluationStrategy
@@ -453,8 +451,8 @@ type Launch struct {
 	// launch.
 	Execution *LaunchExecution
 
-	// An array of structures that define the feature variations that are being used in
-	// the launch.
+	// An array of structures that define the feature variations that are being used
+	// in the launch.
 	Groups []LaunchGroup
 
 	// An array of structures that define the metrics that are being used to monitor
@@ -467,15 +465,15 @@ type Launch struct {
 	// This value is used when Evidently assigns a particular user session to the
 	// launch, to help create a randomization ID to determine which variation the user
 	// session is served. This randomization ID is a combination of the entity ID and
-	// randomizationSalt.
+	// randomizationSalt .
 	RandomizationSalt *string
 
 	// An array of structures that define the traffic allocation percentages among the
 	// feature variations during each step of the launch.
 	ScheduledSplitsDefinition *ScheduledSplitsLaunchDefinition
 
-	// If the launch was stopped, this is the string that was entered by the person who
-	// stopped the launch, to explain why it was stopped.
+	// If the launch was stopped, this is the string that was entered by the person
+	// who stopped the launch, to explain why it was stopped.
 	StatusReason *string
 
 	// The list of tag keys and values associated with this launch.
@@ -551,8 +549,8 @@ type MetricDefinition struct {
 
 	// The EventBridge event pattern that defines how the metric is recorded. For more
 	// information about EventBridge event patterns, see Amazon EventBridge event
-	// patterns
-	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html).
+	// patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html)
+	// .
 	//
 	// This value conforms to the media type: application/json
 	EventPattern *string
@@ -574,7 +572,7 @@ type MetricDefinition struct {
 type MetricDefinitionConfig struct {
 
 	// The entity, such as a user or session, that does an action that causes a metric
-	// value to be recorded. An example is userDetails.userID.
+	// value to be recorded. An example is userDetails.userID .
 	//
 	// This member is required.
 	EntityIdKey *string
@@ -591,8 +589,8 @@ type MetricDefinitionConfig struct {
 
 	// The EventBridge event pattern that defines how the metric is recorded. For more
 	// information about EventBridge event patterns, see Amazon EventBridge event
-	// patterns
-	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html).
+	// patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html)
+	// .
 	//
 	// This value conforms to the media type: application/json
 	EventPattern *string
@@ -735,8 +733,8 @@ type Project struct {
 	// The number of ongoing launches currently in the project.
 	ActiveLaunchCount *int64
 
-	// This structure defines the configuration of how your application integrates with
-	// AppConfig to run client-side evaluation.
+	// This structure defines the configuration of how your application integrates
+	// with AppConfig to run client-side evaluation.
 	AppConfigResource *ProjectAppConfigResource
 
 	// A structure that contains information about where Evidently is to store
@@ -754,8 +752,8 @@ type Project struct {
 	// The number of features currently in the project.
 	FeatureCount *int64
 
-	// The number of launches currently in the project. This includes all launches that
-	// have been created and not deleted, whether they are ongoing or not.
+	// The number of launches currently in the project. This includes all launches
+	// that have been created and not deleted, whether they are ongoing or not.
 	LaunchCount *int64
 
 	// The list of tag keys and values associated with this project.
@@ -778,9 +776,9 @@ type ProjectAppConfigResource struct {
 	// This member is required.
 	ConfigurationProfileId *string
 
-	// The ID of the AppConfig environment to use for client-side evaluation. This must
-	// be an environment that is within the application that you specify for
-	// applicationId.
+	// The ID of the AppConfig environment to use for client-side evaluation. This
+	// must be an environment that is within the application that you specify for
+	// applicationId .
 	//
 	// This member is required.
 	EnvironmentId *string
@@ -790,8 +788,7 @@ type ProjectAppConfigResource struct {
 
 // Use this parameter to configure client-side evaluation for your project.
 // Client-side evaluation allows your application to assign variations to user
-// sessions locally instead of by calling the EvaluateFeature
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
+// sessions locally instead of by calling the EvaluateFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
 // operation to assign the variations. This mitigates the latency and availability
 // risks that come with an API call. ProjectAppConfigResource is a structure that
 // defines the configuration of how your application integrates with AppConfig to
@@ -801,9 +798,9 @@ type ProjectAppConfigResourceConfig struct {
 	// The ID of the AppConfig application to use for client-side evaluation.
 	ApplicationId *string
 
-	// The ID of the AppConfig environment to use for client-side evaluation. This must
-	// be an environment that is within the application that you specify for
-	// applicationId.
+	// The ID of the AppConfig environment to use for client-side evaluation. This
+	// must be an environment that is within the application that you specify for
+	// applicationId .
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
@@ -918,8 +915,8 @@ type RefResource struct {
 	// This member is required.
 	Name *string
 
-	// Specifies whether the resource that this structure contains information about is
-	// an experiment or a launch.
+	// Specifies whether the resource that this structure contains information about
+	// is an experiment or a launch.
 	//
 	// This member is required.
 	Type *string
@@ -1087,10 +1084,10 @@ type Segment struct {
 	// This member is required.
 	Name *string
 
-	// The pattern that defines the attributes to use to evalute whether a user session
-	// will be in the segment. For more information about the pattern syntax, see
-	// Segment rule pattern syntax
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html).
+	// The pattern that defines the attributes to use to evalute whether a user
+	// session will be in the segment. For more information about the pattern syntax,
+	// see Segment rule pattern syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html)
+	// .
 	//
 	// This value conforms to the media type: application/json
 	//
@@ -1118,8 +1115,8 @@ type Segment struct {
 // the traffic split for that segment to be used in a launch.
 type SegmentOverride struct {
 
-	// A number indicating the order to use to evaluate segment overrides, if there are
-	// more than one. Segment overrides with lower numbers are evaluated first.
+	// A number indicating the order to use to evaluate segment overrides, if there
+	// are more than one. Segment overrides with lower numbers are evaluated first.
 	//
 	// This member is required.
 	EvaluationOrder *int64
@@ -1153,8 +1150,8 @@ type Treatment struct {
 	// The description of the treatment.
 	Description *string
 
-	// The feature variation used for this treatment. This is a key-value pair. The key
-	// is the feature name, and the value is the variation name.
+	// The feature variation used for this treatment. This is a key-value pair. The
+	// key is the feature name, and the value is the variation name.
 	FeatureVariations map[string]string
 
 	noSmithyDocumentSerde
@@ -1202,7 +1199,7 @@ type ValidationExceptionField struct {
 }
 
 // The value assigned to a feature variation. This structure must contain exactly
-// one field. It can be boolValue, doubleValue, longValue, or stringValue.
+// one field. It can be boolValue , doubleValue , longValue , or stringValue .
 //
 // The following types satisfy this interface:
 //
@@ -1214,8 +1211,8 @@ type VariableValue interface {
 	isVariableValue()
 }
 
-// If this feature uses the Boolean variation type, this field contains the Boolean
-// value of this variation.
+// If this feature uses the Boolean variation type, this field contains the
+// Boolean value of this variation.
 type VariableValueMemberBoolValue struct {
 	Value bool
 
@@ -1234,8 +1231,8 @@ type VariableValueMemberDoubleValue struct {
 
 func (*VariableValueMemberDoubleValue) isVariableValue() {}
 
-// If this feature uses the long variation type, this field contains the long value
-// of this variation.
+// If this feature uses the long variation type, this field contains the long
+// value of this variation.
 type VariableValueMemberLongValue struct {
 	Value int64
 

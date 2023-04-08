@@ -226,8 +226,8 @@ func (e *InvalidConfigurationException) ErrorFault() smithy.ErrorFault { return 
 
 // You SES configuration has customizations that WorkMail cannot save. The error
 // message lists the invalid setting. For examples of invalid settings, refer to
-// CreateReceiptRule
-// (https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html).
+// CreateReceiptRule (https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html)
+// .
 type InvalidCustomSesConfigurationException struct {
 	Message *string
 
@@ -440,8 +440,8 @@ func (e *NameAvailabilityException) ErrorCode() string {
 }
 func (e *NameAvailabilityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An operation received a valid organization identifier that either doesn't belong
-// or exist in the system.
+// An operation received a valid organization identifier that either doesn't
+// belong or exist in the system.
 type OrganizationNotFoundException struct {
 	Message *string
 

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Validates the specified pipeline definition to ensure that it is well formed and
-// can be run without error. Example 1 This example sets an valid pipeline
+// Validates the specified pipeline definition to ensure that it is well formed
+// and can be run without error. Example 1 This example sets an valid pipeline
 // configuration and returns success. POST / HTTP/1.1 Content-Type:
 // application/x-amz-json-1.1 X-Amz-Target: DataPipeline.ValidatePipelineDefinition
 // Content-Length: 936 Host: datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon,

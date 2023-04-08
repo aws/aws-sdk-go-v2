@@ -43,15 +43,15 @@ type BatchGetFrameMetricDataInput struct {
 	// represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
 	EndTime *time.Time
 
-	// The details of the metrics that are used to request a time series of values. The
-	// metric includes the name of the frame, the aggregation type to calculate the
+	// The details of the metrics that are used to request a time series of values.
+	// The metric includes the name of the frame, the aggregation type to calculate the
 	// metric value for the frame, and the thread states to use to get the count for
 	// the metric value of the frame.
 	FrameMetrics []types.FrameMetric
 
-	// The duration of the frame metrics used to return the time series values. Specify
-	// using the ISO 8601 format. The maximum period duration is one day (PT24H or
-	// P1D).
+	// The duration of the frame metrics used to return the time series values.
+	// Specify using the ISO 8601 format. The maximum period duration is one day ( PT24H
+	// or P1D ).
 	Period *string
 
 	// The start time of the time period for the frame metrics used to return the time
@@ -64,13 +64,9 @@ type BatchGetFrameMetricDataInput struct {
 	// If the requested target resolution is not available due to data not being
 	// retained we provide a best effort result by falling back to the most granular
 	// available resolution after the target resolution. There are 3 valid values.
-	//
-	// *
-	// P1D — 1 day
-	//
-	// * PT1H — 1 hour
-	//
-	// * PT5M — 5 minutes
+	//   - P1D — 1 day
+	//   - PT1H — 1 hour
+	//   - PT5M — 5 minutes
 	TargetResolution types.AggregationPeriod
 
 	noSmithyDocumentSerde
@@ -87,8 +83,8 @@ type BatchGetFrameMetricDataOutput struct {
 	EndTime *time.Time
 
 	// List of instances, or time steps, in the time series. For example, if the period
-	// is one day (PT24H)), and the resolution is five minutes (PT5M), then there are
-	// 288 endTimes in the list that are each five minutes appart.
+	// is one day ( PT24H) ), and the resolution is five minutes ( PT5M ), then there
+	// are 288 endTimes in the list that are each five minutes appart.
 	//
 	// This member is required.
 	EndTimes []types.TimestampStructure
@@ -104,12 +100,9 @@ type BatchGetFrameMetricDataOutput struct {
 	// Resolution or granularity of the profile data used to generate the time series.
 	// This is the value used to jump through time steps in a time series. There are 3
 	// valid values.
-	//
-	// * P1D — 1 day
-	//
-	// * PT1H — 1 hour
-	//
-	// * PT5M — 5 minutes
+	//   - P1D — 1 day
+	//   - PT1H — 1 hour
+	//   - PT5M — 5 minutes
 	//
 	// This member is required.
 	Resolution types.AggregationPeriod

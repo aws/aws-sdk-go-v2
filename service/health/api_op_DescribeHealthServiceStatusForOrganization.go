@@ -36,8 +36,8 @@ type DescribeHealthServiceStatusForOrganizationInput struct {
 type DescribeHealthServiceStatusForOrganizationOutput struct {
 
 	// Information about the status of enabling or disabling the Health organizational
-	// view feature in your organization. Valid values are ENABLED | DISABLED |
-	// PENDING.
+	// view feature in your organization. Valid values are ENABLED | DISABLED | PENDING
+	// .
 	HealthServiceAccessStatusForOrganization *string
 
 	// Metadata pertaining to the operation's result.

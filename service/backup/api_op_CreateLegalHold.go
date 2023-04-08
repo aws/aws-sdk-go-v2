@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// This action creates a legal hold on a recovery point (backup). A legal hold is a
-// restraint on altering or deleting a backup until an authorized user cancels the
-// legal hold. Any actions to delete or disassociate a recovery point will fail
+// This action creates a legal hold on a recovery point (backup). A legal hold is
+// a restraint on altering or deleting a backup until an authorized user cancels
+// the legal hold. Any actions to delete or disassociate a recovery point will fail
 // with an error if one or more active legal holds are on the recovery point.
 func (c *Client) CreateLegalHold(ctx context.Context, params *CreateLegalHoldInput, optFns ...func(*Options)) (*CreateLegalHoldOutput, error) {
 	if params == nil {
@@ -79,7 +79,7 @@ type CreateLegalHoldOutput struct {
 	RecoveryPointSelection *types.RecoveryPointSelection
 
 	// This displays the status of the legal hold returned after creating the legal
-	// hold. Statuses can be ACTIVE, PENDING, CANCELED, CANCELING, or FAILED.
+	// hold. Statuses can be ACTIVE , PENDING , CANCELED , CANCELING , or FAILED .
 	Status types.LegalHoldStatus
 
 	// This is the string title of the legal hold returned after creating the legal

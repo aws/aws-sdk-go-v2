@@ -30,15 +30,15 @@ func (c *Client) ListWorlds(ctx context.Context, params *ListWorldsInput, optFns
 
 type ListWorldsInput struct {
 
-	// Optional filters to limit results. You can use status.
+	// Optional filters to limit results. You can use status .
 	Filters []types.Filter
 
 	// When this parameter is used, ListWorlds only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListWorlds request with the
-	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// is not used, then ListWorlds returns up to 100 results and a nextToken value if
-	// applicable.
+	// returned nextToken value. This value can be between 1 and 100. If this
+	// parameter is not used, then ListWorlds returns up to 100 results and a nextToken
+	// value if applicable.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -141,9 +141,9 @@ type ListWorldsPaginatorOptions struct {
 	// When this parameter is used, ListWorlds only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListWorlds request with the
-	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// is not used, then ListWorlds returns up to 100 results and a nextToken value if
-	// applicable.
+	// returned nextToken value. This value can be between 1 and 100. If this
+	// parameter is not used, then ListWorlds returns up to 100 results and a nextToken
+	// value if applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

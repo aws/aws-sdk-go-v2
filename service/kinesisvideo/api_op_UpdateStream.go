@@ -45,12 +45,11 @@ type UpdateStreamInput struct {
 
 	// The stream's media type. Use MediaType to specify the type of content that the
 	// stream contains to the consumers of the stream. For more information about media
-	// types, see Media Types
-	// (http://www.iana.org/assignments/media-types/media-types.xhtml). If you choose
-	// to specify the MediaType, see Naming Requirements
-	// (https://tools.ietf.org/html/rfc6838#section-4.2). To play video on the console,
-	// you must specify the correct video type. For example, if the video in the stream
-	// is H.264, specify video/h264 as the MediaType.
+	// types, see Media Types (http://www.iana.org/assignments/media-types/media-types.xhtml)
+	// . If you choose to specify the MediaType , see Naming Requirements (https://tools.ietf.org/html/rfc6838#section-4.2)
+	// . To play video on the console, you must specify the correct video type. For
+	// example, if the video in the stream is H.264, specify video/h264 as the
+	// MediaType .
 	MediaType *string
 
 	// The ARN of the stream whose metadata you want to update.

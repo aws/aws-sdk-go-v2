@@ -31,7 +31,7 @@ func (c *Client) ListObjectPolicies(ctx context.Context, params *ListObjectPolic
 type ListObjectPoliciesInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// objects reside. For more information, see arns.
+	// objects reside. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -57,7 +57,7 @@ type ListObjectPoliciesInput struct {
 
 type ListObjectPoliciesOutput struct {
 
-	// A list of policy ObjectIdentifiers, that are attached to the object.
+	// A list of policy ObjectIdentifiers , that are attached to the object.
 	AttachedPolicyIds []string
 
 	// The pagination token.

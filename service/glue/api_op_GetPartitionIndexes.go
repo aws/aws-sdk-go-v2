@@ -128,8 +128,8 @@ func (c *Client) addOperationGetPartitionIndexesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetPartitionIndexesAPIClient is a client that implements the GetPartitionIndexes
-// operation.
+// GetPartitionIndexesAPIClient is a client that implements the
+// GetPartitionIndexes operation.
 type GetPartitionIndexesAPIClient interface {
 	GetPartitionIndexes(context.Context, *GetPartitionIndexesInput, ...func(*Options)) (*GetPartitionIndexesOutput, error)
 }

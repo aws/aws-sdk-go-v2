@@ -15,31 +15,21 @@ import (
 	"strings"
 )
 
-// Returns a list of the access points that are owned by the current account that's
-// associated with the specified bucket. You can retrieve up to 1000 access points
-// per call. If the specified bucket has more than 1,000 access points (or the
-// number specified in maxResults, whichever is less), the response will include a
-// continuation token that you can use to list the additional access points. All
-// Amazon S3 on Outposts REST API requests for this action require an additional
-// parameter of x-amz-outpost-id to be passed with the request. In addition, you
-// must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-// an example of the request syntax for Amazon S3 on Outposts that uses the S3 on
-// Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the
-// access point ARN, see the Examples
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples)
-// section. The following actions are related to ListAccessPoints:
-//
-// *
-// CreateAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
-//
-// *
-// DeleteAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html)
-//
-// *
-// GetAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html)
+// Returns a list of the access points that are owned by the current account
+// that's associated with the specified bucket. You can retrieve up to 1000 access
+// points per call. If the specified bucket has more than 1,000 access points (or
+// the number specified in maxResults , whichever is less), the response will
+// include a continuation token that you can use to list the additional access
+// points. All Amazon S3 on Outposts REST API requests for this action require an
+// additional parameter of x-amz-outpost-id to be passed with the request. In
+// addition, you must use an S3 on Outposts endpoint hostname prefix instead of
+// s3-control . For an example of the request syntax for Amazon S3 on Outposts that
+// uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id
+// derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples)
+// section. The following actions are related to ListAccessPoints :
+//   - CreateAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
+//   - DeleteAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html)
+//   - GetAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html)
 func (c *Client) ListAccessPoints(ctx context.Context, params *ListAccessPointsInput, optFns ...func(*Options)) (*ListAccessPointsOutput, error) {
 	if params == nil {
 		params = &ListAccessPointsInput{}
@@ -67,22 +57,22 @@ type ListAccessPointsInput struct {
 	// using this parameter with Amazon S3 on Outposts with the REST API, you must
 	// specify the name and the x-amz-outpost-id as well. For using this parameter with
 	// S3 on Outposts with the Amazon Web Services SDK and CLI, you must specify the
-	// ARN of the bucket accessed in the format arn:aws:s3-outposts:::outpost//bucket/.
-	// For example, to access the bucket reports through Outpost my-outpost owned by
-	// account 123456789012 in Region us-west-2, use the URL encoding of
-	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
+	// ARN of the bucket accessed in the format arn:aws:s3-outposts:::outpost//bucket/
+	// . For example, to access the bucket reports through Outpost my-outpost owned by
+	// account 123456789012 in Region us-west-2 , use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports .
 	// The value must be URL encoded.
 	Bucket *string
 
-	// The maximum number of access points that you want to include in the list. If the
-	// specified bucket has more than this number of access points, then the response
-	// will include a continuation token in the NextToken field that you can use to
-	// retrieve the next page of access points.
+	// The maximum number of access points that you want to include in the list. If
+	// the specified bucket has more than this number of access points, then the
+	// response will include a continuation token in the NextToken field that you can
+	// use to retrieve the next page of access points.
 	MaxResults int32
 
 	// A continuation token. If a previous call to ListAccessPoints returned a
-	// continuation token in the NextToken field, then providing that value here causes
-	// Amazon S3 to retrieve the next page of results.
+	// continuation token in the NextToken field, then providing that value here
+	// causes Amazon S3 to retrieve the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -228,10 +218,10 @@ var _ ListAccessPointsAPIClient = (*Client)(nil)
 
 // ListAccessPointsPaginatorOptions is the paginator options for ListAccessPoints
 type ListAccessPointsPaginatorOptions struct {
-	// The maximum number of access points that you want to include in the list. If the
-	// specified bucket has more than this number of access points, then the response
-	// will include a continuation token in the NextToken field that you can use to
-	// retrieve the next page of access points.
+	// The maximum number of access points that you want to include in the list. If
+	// the specified bucket has more than this number of access points, then the
+	// response will include a continuation token in the NextToken field that you can
+	// use to retrieve the next page of access points.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

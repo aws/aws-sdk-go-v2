@@ -37,7 +37,7 @@ type DescribeProductsInput struct {
 	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the
-	// DescribeProducts operation, set the value of this parameter to NULL. For
+	// DescribeProducts operation, set the value of this parameter to NULL . For
 	// subsequent calls to the operation, to continue listing data, set the value of
 	// this parameter to the value returned from the previous response.
 	NextToken *string

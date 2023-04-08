@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of import tasks for your account, including status information,
-// times, IDs, the Amazon S3 Object URL for the import file, and more.
+// Returns an array of import tasks for your account, including status
+// information, times, IDs, the Amazon S3 Object URL for the import file, and more.
 func (c *Client) DescribeImportTasks(ctx context.Context, params *DescribeImportTasksInput, optFns ...func(*Options)) (*DescribeImportTasksOutput, error) {
 	if params == nil {
 		params = &DescribeImportTasksInput{}
@@ -120,8 +120,8 @@ func (c *Client) addOperationDescribeImportTasksMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeImportTasksAPIClient is a client that implements the DescribeImportTasks
-// operation.
+// DescribeImportTasksAPIClient is a client that implements the
+// DescribeImportTasks operation.
 type DescribeImportTasksAPIClient interface {
 	DescribeImportTasks(context.Context, *DescribeImportTasksInput, ...func(*Options)) (*DescribeImportTasksOutput, error)
 }

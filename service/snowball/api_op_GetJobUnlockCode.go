@@ -40,7 +40,7 @@ func (c *Client) GetJobUnlockCode(ctx context.Context, params *GetJobUnlockCodeI
 type GetJobUnlockCodeInput struct {
 
 	// The ID for the job that you want to get the UnlockCode value for, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
+	// JID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	JobId *string
@@ -50,8 +50,8 @@ type GetJobUnlockCodeInput struct {
 
 type GetJobUnlockCodeOutput struct {
 
-	// The UnlockCode value for the specified job. The UnlockCode value can be accessed
-	// for up to 360 days after the job has been created.
+	// The UnlockCode value for the specified job. The UnlockCode value can be
+	// accessed for up to 360 days after the job has been created.
 	UnlockCode *string
 
 	// Metadata pertaining to the operation's result.

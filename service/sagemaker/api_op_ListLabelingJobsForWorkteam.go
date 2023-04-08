@@ -52,15 +52,15 @@ type ListLabelingJobsForWorkteamInput struct {
 	// The maximum number of labeling jobs to return in each page of the response.
 	MaxResults *int32
 
-	// If the result of the previous ListLabelingJobsForWorkteam request was truncated,
-	// the response includes a NextToken. To retrieve the next set of labeling jobs,
-	// use the token in the next request.
+	// If the result of the previous ListLabelingJobsForWorkteam request was
+	// truncated, the response includes a NextToken . To retrieve the next set of
+	// labeling jobs, use the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is CreationTime.
+	// The field to sort results by. The default is CreationTime .
 	SortBy types.ListLabelingJobsForWorkteamSortByOptions
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -73,8 +73,8 @@ type ListLabelingJobsForWorkteamOutput struct {
 	// This member is required.
 	LabelingJobSummaryList []types.LabelingJobForWorkteamSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of labeling jobs, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of labeling jobs, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

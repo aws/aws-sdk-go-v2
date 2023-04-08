@@ -18,7 +18,7 @@ import (
 // ARN
 // arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel
 // refers to a Distributed Map state with a label mapStateLabel in the state
-// machine named stateMachineName. StartExecution is idempotent for STANDARD
+// machine named stateMachineName . StartExecution is idempotent for STANDARD
 // workflows. For a STANDARD workflow, if StartExecution is called with the same
 // name and input as a running execution, the call will succeed and return the same
 // response as the original request. If the execution is closed or if the input is
@@ -53,27 +53,17 @@ type StartExecutionInput struct {
 	// encoding.
 	Input *string
 
-	// The name of the execution. This name must be unique for your Amazon Web Services
-	// account, region, and state machine for 90 days. For more information, see
-	// Limits Related to State Machine Executions
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
+	// The name of the execution. This name must be unique for your Amazon Web
+	// Services account, region, and state machine for 90 days. For more information,
+	// see Limits Related to State Machine Executions (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
 	// in the Step Functions Developer Guide. A name must not contain:
-	//
-	// * white
-	// space
-	//
-	// * brackets < > { } [ ]
-	//
-	// * wildcard characters ? *
-	//
-	// * special characters "
-	// # % \ ^ | ~ ` $ & , ; : /
-	//
-	// * control characters (U+0000-001F, U+007F-009F)
-	//
-	// To
-	// enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z,
-	// - and _.
+	//   - white space
+	//   - brackets < > { } [ ]
+	//   - wildcard characters ? *
+	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//   - control characters ( U+0000-001F , U+007F-009F )
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
+	// a-z, - and _.
 	Name *string
 
 	// Passes the X-Ray trace header. The trace header can also be passed in the

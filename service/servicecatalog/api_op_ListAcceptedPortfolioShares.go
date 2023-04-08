@@ -13,7 +13,7 @@ import (
 )
 
 // Lists all imported portfolios for which account-to-account shares were accepted
-// by this account. By specifying the PortfolioShareType, you can list portfolios
+// by this account. By specifying the PortfolioShareType , you can list portfolios
 // for which organizational shares were accepted by this account.
 func (c *Client) ListAcceptedPortfolioShares(ctx context.Context, params *ListAcceptedPortfolioSharesInput, optFns ...func(*Options)) (*ListAcceptedPortfolioSharesOutput, error) {
 	if params == nil {
@@ -33,10 +33,8 @@ func (c *Client) ListAcceptedPortfolioShares(ctx context.Context, params *ListAc
 type ListAcceptedPortfolioSharesInput struct {
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
@@ -48,16 +46,12 @@ type ListAcceptedPortfolioSharesInput struct {
 
 	// The type of shared portfolios to list. The default is to list imported
 	// portfolios.
-	//
-	// * AWS_ORGANIZATIONS - List portfolios accepted and shared via
-	// organizational sharing by the management account or delegated administrator of
-	// your organization.
-	//
-	// * AWS_SERVICECATALOG - Deprecated type.
-	//
-	// * IMPORTED - List
-	// imported portfolios that have been accepted and shared through
-	// account-to-account sharing.
+	//   - AWS_ORGANIZATIONS - List portfolios accepted and shared via organizational
+	//   sharing by the management account or delegated administrator of your
+	//   organization.
+	//   - AWS_SERVICECATALOG - Deprecated type.
+	//   - IMPORTED - List imported portfolios that have been accepted and shared
+	//   through account-to-account sharing.
 	PortfolioShareType types.PortfolioShareType
 
 	noSmithyDocumentSerde

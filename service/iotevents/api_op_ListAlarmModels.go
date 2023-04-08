@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the alarm models that you created. The operation returns only the metadata
-// associated with each alarm model.
+// Lists the alarm models that you created. The operation returns only the
+// metadata associated with each alarm model.
 func (c *Client) ListAlarmModels(ctx context.Context, params *ListAlarmModelsInput, optFns ...func(*Options)) (*ListAlarmModelsOutput, error) {
 	if params == nil {
 		params = &ListAlarmModelsInput{}

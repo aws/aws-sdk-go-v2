@@ -15,8 +15,8 @@ import (
 // includes the original email headers in the Amazon Simple Notification Service
 // (Amazon SNS) notifications of a specified type. You can execute this operation
 // no more than once per second. For more information about using notifications
-// with Amazon SES, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
+// with Amazon SES, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html)
+// .
 func (c *Client) SetIdentityHeadersInNotificationsEnabled(ctx context.Context, params *SetIdentityHeadersInNotificationsEnabledInput, optFns ...func(*Options)) (*SetIdentityHeadersInNotificationsEnabledOutput, error) {
 	if params == nil {
 		params = &SetIdentityHeadersInNotificationsEnabledInput{}
@@ -34,22 +34,22 @@ func (c *Client) SetIdentityHeadersInNotificationsEnabled(ctx context.Context, p
 
 // Represents a request to set whether Amazon SES includes the original email
 // headers in the Amazon SNS notifications of a specified type. For information
-// about notifications, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html).
+// about notifications, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html)
+// .
 type SetIdentityHeadersInNotificationsEnabledInput struct {
 
 	// Sets whether Amazon SES includes the original email headers in Amazon SNS
-	// notifications of the specified notification type. A value of true specifies that
-	// Amazon SES will include headers in notifications, and a value of false specifies
-	// that Amazon SES will not include headers in notifications. This value can only
-	// be set when NotificationType is already set to use a particular Amazon SNS
-	// topic.
+	// notifications of the specified notification type. A value of true specifies
+	// that Amazon SES will include headers in notifications, and a value of false
+	// specifies that Amazon SES will not include headers in notifications. This value
+	// can only be set when NotificationType is already set to use a particular Amazon
+	// SNS topic.
 	//
 	// This member is required.
 	Enabled bool
 
 	// The identity for which to enable or disable headers in notifications. Examples:
-	// user@example.com, example.com.
+	// user@example.com , example.com .
 	//
 	// This member is required.
 	Identity *string

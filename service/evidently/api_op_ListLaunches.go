@@ -51,8 +51,8 @@ type ListLaunchesInput struct {
 
 type ListLaunchesOutput struct {
 
-	// An array of structures that contain the configuration details of the launches in
-	// the specified project.
+	// An array of structures that contain the configuration details of the launches
+	// in the specified project.
 	Launches []types.Launch
 
 	// The token to use in a subsequent ListLaunches operation to return the next set

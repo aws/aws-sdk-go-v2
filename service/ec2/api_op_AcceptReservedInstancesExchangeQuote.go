@@ -39,8 +39,8 @@ type AcceptReservedInstancesExchangeQuoteInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The configuration of the target Convertible Reserved Instance to exchange for
@@ -50,7 +50,7 @@ type AcceptReservedInstancesExchangeQuoteInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of the exchange and whether it was successful.
+// The result of the exchange and whether it was successful .
 type AcceptReservedInstancesExchangeQuoteOutput struct {
 
 	// The ID of the successful exchange.

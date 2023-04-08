@@ -121,8 +121,8 @@ func (c *Client) addOperationDescribeJobLogItemsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeJobLogItemsAPIClient is a client that implements the DescribeJobLogItems
-// operation.
+// DescribeJobLogItemsAPIClient is a client that implements the
+// DescribeJobLogItems operation.
 type DescribeJobLogItemsAPIClient interface {
 	DescribeJobLogItems(context.Context, *DescribeJobLogItemsInput, ...func(*Options)) (*DescribeJobLogItemsOutput, error)
 }

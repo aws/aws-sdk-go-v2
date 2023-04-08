@@ -64,8 +64,8 @@ type GetCaseOutput struct {
 	// This member is required.
 	TemplateId *string
 
-	// The token for the next set of results. This is null if there are no more results
-	// to return.
+	// The token for the next set of results. This is null if there are no more
+	// results to return.
 	NextToken *string
 
 	// A map of of key-value pairs that represent tags on a resource. Tags are used to

@@ -14,8 +14,7 @@ import (
 
 // Removes the association of tags from an Amazon DynamoDB resource. You can call
 // UntagResource up to five times per second, per account. For an overview on
-// tagging DynamoDB resources, see Tagging for DynamoDB
-// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
+// tagging DynamoDB resources, see Tagging for DynamoDB (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
 // in the Amazon DynamoDB Developer Guide.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
@@ -40,8 +39,8 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// A list of tag keys. Existing tags of the resource whose keys are members of this
-	// list will be removed from the DynamoDB resource.
+	// A list of tag keys. Existing tags of the resource whose keys are members of
+	// this list will be removed from the DynamoDB resource.
 	//
 	// This member is required.
 	TagKeys []string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts transcription for the specified meetingId.
+// Starts transcription for the specified meetingId .
 func (c *Client) StartMeetingTranscription(ctx context.Context, params *StartMeetingTranscriptionInput, optFns ...func(*Options)) (*StartMeetingTranscriptionOutput, error) {
 	if params == nil {
 		params = &StartMeetingTranscriptionInput{}
@@ -35,7 +35,7 @@ type StartMeetingTranscriptionInput struct {
 	MeetingId *string
 
 	// The configuration for the current transcription operation. Must contain
-	// EngineTranscribeSettings or EngineTranscribeMedicalSettings.
+	// EngineTranscribeSettings or EngineTranscribeMedicalSettings .
 	//
 	// This member is required.
 	TranscriptionConfiguration *types.TranscriptionConfiguration

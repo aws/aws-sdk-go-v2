@@ -14,23 +14,20 @@ import (
 // This operation is used with the GameLift FleetIQ solution and game server
 // groups. Temporarily stops activity on a game server group without terminating
 // instances or the game server group. You can restart activity by calling
-// ResumeGameServerGroup. You can suspend the following activity:
+// ResumeGameServerGroup . You can suspend the following activity:
+//   - Instance type replacement - This activity evaluates the current game
+//     hosting viability of all Spot instance types that are defined for the game
+//     server group. It updates the Auto Scaling group to remove nonviable Spot
+//     Instance types, which have a higher chance of game server interruptions. It then
+//     balances capacity across the remaining viable Spot Instance types. When this
+//     activity is suspended, the Auto Scaling group continues with its current
+//     balance, regardless of viability. Instance protection, utilization metrics, and
+//     capacity scaling activities continue to be active.
 //
-// * Instance type
-// replacement - This activity evaluates the current game hosting viability of all
-// Spot instance types that are defined for the game server group. It updates the
-// Auto Scaling group to remove nonviable Spot Instance types, which have a higher
-// chance of game server interruptions. It then balances capacity across the
-// remaining viable Spot Instance types. When this activity is suspended, the Auto
-// Scaling group continues with its current balance, regardless of viability.
-// Instance protection, utilization metrics, and capacity scaling activities
-// continue to be active.
-//
-// To suspend activity, specify a game server group ARN and
-// the type of activity to be suspended. If successful, a GameServerGroup object is
-// returned showing that the activity is listed in SuspendedActions. Learn more
-// GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// To suspend activity, specify a game server group ARN and the type of activity
+// to be suspended. If successful, a GameServerGroup object is returned showing
+// that the activity is listed in SuspendedActions . Learn more GameLift FleetIQ
+// Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) SuspendGameServerGroup(ctx context.Context, params *SuspendGameServerGroupInput, optFns ...func(*Options)) (*SuspendGameServerGroupOutput, error) {
 	if params == nil {
 		params = &SuspendGameServerGroupInput{}

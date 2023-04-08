@@ -13,8 +13,8 @@ import (
 )
 
 // Gets a list of the project policies attached to a project. To attach a project
-// policy to a project, call PutProjectPolicy. To remove a project policy from a
-// project, call DeleteProjectPolicy.
+// policy to a project, call PutProjectPolicy . To remove a project policy from a
+// project, call DeleteProjectPolicy .
 func (c *Client) ListProjectPolicies(ctx context.Context, params *ListProjectPoliciesInput, optFns ...func(*Options)) (*ListProjectPoliciesOutput, error) {
 	if params == nil {
 		params = &ListProjectPoliciesInput{}
@@ -52,8 +52,8 @@ type ListProjectPoliciesInput struct {
 
 type ListProjectPoliciesOutput struct {
 
-	// If the response is truncated, Amazon Rekognition returns this token that you can
-	// use in the subsequent request to retrieve the next set of project policies.
+	// If the response is truncated, Amazon Rekognition returns this token that you
+	// can use in the subsequent request to retrieve the next set of project policies.
 	NextToken *string
 
 	// A list of project policies attached to the project.
@@ -128,8 +128,8 @@ func (c *Client) addOperationListProjectPoliciesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListProjectPoliciesAPIClient is a client that implements the ListProjectPolicies
-// operation.
+// ListProjectPoliciesAPIClient is a client that implements the
+// ListProjectPolicies operation.
 type ListProjectPoliciesAPIClient interface {
 	ListProjectPolicies(context.Context, *ListProjectPoliciesInput, ...func(*Options)) (*ListProjectPoliciesOutput, error)
 }

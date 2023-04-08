@@ -13,8 +13,7 @@ import (
 )
 
 // Lists the provisioning templates in your Amazon Web Services account. Requires
-// permission to access the ListProvisioningTemplates
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the ListProvisioningTemplates (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListProvisioningTemplates(ctx context.Context, params *ListProvisioningTemplatesInput, optFns ...func(*Options)) (*ListProvisioningTemplatesOutput, error) {
 	if params == nil {

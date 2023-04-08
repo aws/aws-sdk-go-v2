@@ -18,8 +18,7 @@ import (
 // registrant, and technical contacts. This operation affects only the contact
 // information for the specified contact type (administrative, registrant, or
 // technical). If the request succeeds, Amazon Route 53 returns an operation ID
-// that you can use with GetOperationDetail
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// that you can use with GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
 // to track the progress and completion of the action. If the request doesn't
 // complete successfully, the domain registrant will be notified by email. By
 // disabling the privacy service via API, you consent to the publication of the
@@ -29,8 +28,8 @@ import (
 // privacy protection using either UpdateDomainContactPrivacy or the Route 53
 // console. Enabling privacy protection removes the contact information provided
 // for this domain from the WHOIS database. For more information on our privacy
-// practices, see https://aws.amazon.com/privacy/
-// (https://aws.amazon.com/privacy/).
+// practices, see https://aws.amazon.com/privacy/ (https://aws.amazon.com/privacy/)
+// .
 func (c *Client) UpdateDomainContactPrivacy(ctx context.Context, params *UpdateDomainContactPrivacyInput, optFns ...func(*Options)) (*UpdateDomainContactPrivacyOutput, error) {
 	if params == nil {
 		params = &UpdateDomainContactPrivacyInput{}
@@ -55,27 +54,27 @@ type UpdateDomainContactPrivacyInput struct {
 	DomainName *string
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
+	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
 	// return the information that you entered for the admin contact. You must specify
 	// the same privacy setting for the administrative, registrant, and technical
 	// contacts.
 	AdminPrivacy *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
+	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
 	// return the information that you entered for the registrant contact (domain
 	// owner). You must specify the same privacy setting for the administrative,
 	// registrant, and technical contacts.
 	RegistrantPrivacy *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
+	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
 	// return the information that you entered for the technical contact. You must
 	// specify the same privacy setting for the administrative, registrant, and
 	// technical contacts.
@@ -87,8 +86,8 @@ type UpdateDomainContactPrivacyInput struct {
 // The UpdateDomainContactPrivacy response includes the following element.
 type UpdateDomainContactPrivacyOutput struct {
 
-	// Identifier for tracking the progress of the request. To use this ID to query the
-	// operation status, use GetOperationDetail.
+	// Identifier for tracking the progress of the request. To use this ID to query
+	// the operation status, use GetOperationDetail.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

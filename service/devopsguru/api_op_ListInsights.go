@@ -13,8 +13,8 @@ import (
 )
 
 // Returns a list of insights in your Amazon Web Services account. You can specify
-// which insights are returned by their start time and status (ONGOING, CLOSED, or
-// ANY).
+// which insights are returned by their start time and status ( ONGOING , CLOSED ,
+// or ANY ).
 func (c *Client) ListInsights(ctx context.Context, params *ListInsightsInput, optFns ...func(*Options)) (*ListInsightsOutput, error) {
 	if params == nil {
 		params = &ListInsightsInput{}

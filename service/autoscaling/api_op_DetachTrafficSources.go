@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Detaches one or more traffic sources from the specified Auto Scaling group. When
-// you detach a taffic, it enters the Removing state while deregistering the
+// Detaches one or more traffic sources from the specified Auto Scaling group.
+// When you detach a taffic, it enters the Removing state while deregistering the
 // instances in the group. When all instances are deregistered, then you can no
 // longer describe the traffic source using the DescribeTrafficSources API call.
 // The instances continue to run.

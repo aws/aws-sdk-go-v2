@@ -30,15 +30,15 @@ func (c *Client) ListCoverageStatistics(ctx context.Context, params *ListCoverag
 
 type ListCoverageStatisticsInput struct {
 
-	// An object that contains details on the filters to apply to the coverage data for
-	// your environment.
+	// An object that contains details on the filters to apply to the coverage data
+	// for your environment.
 	FilterCriteria *types.CoverageFilterCriteria
 
 	// The value to group the results by.
 	GroupBy types.GroupKey
 
-	// A token to use for paginating results that are returned in the response. Set the
-	// value of this parameter to null for the first request to a list action. For
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request to a list action. For
 	// subsequent calls, use the NextToken value returned from the previous request to
 	// continue listing results after the first page.
 	NextToken *string
@@ -56,8 +56,8 @@ type ListCoverageStatisticsOutput struct {
 	// An array with the number for each group.
 	CountsByGroup []types.Counts
 
-	// A token to use for paginating results that are returned in the response. Set the
-	// value of this parameter to null for the first request to a list action. For
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request to a list action. For
 	// subsequent calls, use the NextToken value returned from the previous request to
 	// continue listing results after the first page.
 	NextToken *string

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array containing metadata of the resources associated with the target
-// backup plan.
+// Returns an array containing metadata of the resources associated with the
+// target backup plan.
 func (c *Client) ListBackupSelections(ctx context.Context, params *ListBackupSelectionsInput, optFns ...func(*Options)) (*ListBackupSelectionsOutput, error) {
 	if params == nil {
 		params = &ListBackupSelectionsInput{}

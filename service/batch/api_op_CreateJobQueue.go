@@ -33,17 +33,17 @@ func (c *Client) CreateJobQueue(ctx context.Context, params *CreateJobQueueInput
 	return out, nil
 }
 
-// Contains the parameters for CreateJobQueue.
+// Contains the parameters for CreateJobQueue .
 type CreateJobQueueInput struct {
 
 	// The set of compute environments mapped to a job queue and their order relative
 	// to each other. The job scheduler uses this parameter to determine which compute
-	// environment runs a specific job. Compute environments must be in the VALID state
-	// before you can associate them with a job queue. You can associate up to three
-	// compute environments with a job queue. All of the compute environments must be
-	// either EC2 (EC2 or SPOT) or Fargate (FARGATE or FARGATE_SPOT); EC2 and Fargate
-	// compute environments can't be mixed. All compute environments that are
-	// associated with a job queue must share the same architecture. Batch doesn't
+	// environment runs a specific job. Compute environments must be in the VALID
+	// state before you can associate them with a job queue. You can associate up to
+	// three compute environments with a job queue. All of the compute environments
+	// must be either EC2 ( EC2 or SPOT ) or Fargate ( FARGATE or FARGATE_SPOT ); EC2
+	// and Fargate compute environments can't be mixed. All compute environments that
+	// are associated with a job queue must share the same architecture. Batch doesn't
 	// support mixing compute environment architecture types in a single job queue.
 	//
 	// This member is required.
@@ -59,9 +59,9 @@ type CreateJobQueueInput struct {
 	// integer value for the priority parameter) are evaluated first when associated
 	// with the same compute environment. Priority is determined in descending order.
 	// For example, a job queue with a priority value of 10 is given scheduling
-	// preference over a job queue with a priority value of 1. All of the compute
-	// environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or
-	// FARGATE_SPOT); EC2 and Fargate compute environments can't be mixed.
+	// preference over a job queue with a priority value of 1 . All of the compute
+	// environments must be either EC2 ( EC2 or SPOT ) or Fargate ( FARGATE or
+	// FARGATE_SPOT ); EC2 and Fargate compute environments can't be mixed.
 	//
 	// This member is required.
 	Priority *int32
@@ -72,19 +72,18 @@ type CreateJobQueueInput struct {
 	// scheduling policy. After a job queue is created, you can replace but can't
 	// remove the fair share scheduling policy. The format is
 	// aws:Partition:batch:Region:Account:scheduling-policy/Name . An example is
-	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy.
+	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy .
 	SchedulingPolicyArn *string
 
-	// The state of the job queue. If the job queue state is ENABLED, it is able to
-	// accept jobs. If the job queue state is DISABLED, new jobs can't be added to the
+	// The state of the job queue. If the job queue state is ENABLED , it is able to
+	// accept jobs. If the job queue state is DISABLED , new jobs can't be added to the
 	// queue, but jobs already in the queue can finish.
 	State types.JQState
 
 	// The tags that you apply to the job queue to help you categorize and organize
 	// your resources. Each tag consists of a key and an optional value. For more
-	// information, see Tagging your Batch resources
-	// (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in Batch
-	// User Guide.
+	// information, see Tagging your Batch resources (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html)
+	// in Batch User Guide.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

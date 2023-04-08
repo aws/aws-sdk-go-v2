@@ -40,7 +40,7 @@ type CreateFieldLevelEncryptionConfigInput struct {
 type CreateFieldLevelEncryptionConfigOutput struct {
 
 	// The current version of the field level encryption configuration. For example:
-	// E2QWRUHAPOMQZL.
+	// E2QWRUHAPOMQZL .
 	ETag *string
 
 	// Returned when you create a new field-level encryption configuration.

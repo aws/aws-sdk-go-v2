@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new event to record for endpoints, or creates or updates endpoint data
-// that existing events are associated with.
+// Creates a new event to record for endpoints, or creates or updates endpoint
+// data that existing events are associated with.
 func (c *Client) PutEvents(ctx context.Context, params *PutEventsInput, optFns ...func(*Options)) (*PutEventsOutput, error) {
 	if params == nil {
 		params = &PutEventsInput{}

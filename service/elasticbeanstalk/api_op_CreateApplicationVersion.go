@@ -14,8 +14,8 @@ import (
 // Creates an application version for the specified application. You can create an
 // application version from a source bundle in Amazon S3, a commit in AWS
 // CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit
-// in an AWS CodeCommit repository with SourceBuildInformation. Specify a build in
-// an AWS CodeBuild with SourceBuildInformation and BuildConfiguration. Specify a
+// in an AWS CodeCommit repository with SourceBuildInformation . Specify a build in
+// an AWS CodeBuild with SourceBuildInformation and BuildConfiguration . Specify a
 // source bundle in S3 with SourceBundle Omit both SourceBuildInformation and
 // SourceBundle to use the default sample application. After you create an
 // application version with a specified Amazon S3 bucket and key location, you
@@ -40,13 +40,13 @@ func (c *Client) CreateApplicationVersion(ctx context.Context, params *CreateApp
 type CreateApplicationVersionInput struct {
 
 	// The name of the application. If no application is found with this name, and
-	// AutoCreateApplication is false, returns an InvalidParameterValue error.
+	// AutoCreateApplication is false , returns an InvalidParameterValue error.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// A label identifying this version. Constraint: Must be unique per application. If
-	// an application version already exists with this label for the specified
+	// A label identifying this version. Constraint: Must be unique per application.
+	// If an application version already exists with this label for the specified
 	// application, AWS Elastic Beanstalk returns an InvalidParameterValue error.
 	//
 	// This member is required.
@@ -62,14 +62,14 @@ type CreateApplicationVersionInput struct {
 	// A description of this application version.
 	Description *string
 
-	// Pre-processes and validates the environment manifest (env.yaml) and
-	// configuration files (*.config files in the .ebextensions folder) in the source
+	// Pre-processes and validates the environment manifest ( env.yaml ) and
+	// configuration files ( *.config files in the .ebextensions folder) in the source
 	// bundle. Validating configuration files can identify issues prior to deploying
 	// the application version to an environment. You must turn processing on for
 	// application versions that you create using AWS CodeBuild or AWS CodeCommit. For
 	// application versions built from a source bundle in Amazon S3, processing is
-	// optional. The Process option validates Elastic Beanstalk configuration files. It
-	// doesn't validate your application's configuration files, like proxy server or
+	// optional. The Process option validates Elastic Beanstalk configuration files.
+	// It doesn't validate your application's configuration files, like proxy server or
 	// Docker configuration.
 	Process *bool
 
@@ -77,16 +77,16 @@ type CreateApplicationVersionInput struct {
 	// for the application version.
 	SourceBuildInformation *types.SourceBuildInformation
 
-	// The Amazon S3 bucket and key that identify the location of the source bundle for
-	// this version. The Amazon S3 bucket must be in the same region as the
+	// The Amazon S3 bucket and key that identify the location of the source bundle
+	// for this version. The Amazon S3 bucket must be in the same region as the
 	// environment. Specify a source bundle in S3 or a commit in an AWS CodeCommit
-	// repository (with SourceBuildInformation), but not both. If neither SourceBundle
+	// repository (with SourceBuildInformation ), but not both. If neither SourceBundle
 	// nor SourceBuildInformation are provided, Elastic Beanstalk uses a sample
 	// application.
 	SourceBundle *types.S3Location
 
-	// Specifies the tags applied to the application version. Elastic Beanstalk applies
-	// these tags only to the application version. Environments that use the
+	// Specifies the tags applied to the application version. Elastic Beanstalk
+	// applies these tags only to the application version. Environments that use the
 	// application version don't inherit the tags.
 	Tags []types.Tag
 

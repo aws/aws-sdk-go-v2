@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use the SearchDataSources operation to search for data sources that belong to an
-// account.
+// Use the SearchDataSources operation to search for data sources that belong to
+// an account.
 func (c *Client) SearchDataSources(ctx context.Context, params *SearchDataSourcesInput, optFns ...func(*Options)) (*SearchDataSourcesOutput, error) {
 	if params == nil {
 		params = &SearchDataSourcesInput{}

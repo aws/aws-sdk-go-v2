@@ -37,8 +37,8 @@ type UpdateClusterInput struct {
 	// This member is required.
 	ClusterArn *string
 
-	// The password for the Elastic DocumentDB cluster administrator. This password can
-	// contain any printable ASCII character except forward slash (/), double quote
+	// The password for the Elastic DocumentDB cluster administrator. This password
+	// can contain any printable ASCII character except forward slash (/), double quote
 	// ("), or the "at" symbol (@). Constraints: Must contain from 8 to 100 characters.
 	AdminUserPassword *string
 

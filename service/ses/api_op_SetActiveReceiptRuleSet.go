@@ -13,9 +13,8 @@ import (
 // Sets the specified receipt rule set as the active receipt rule set. To disable
 // your email-receiving through Amazon SES completely, you can call this API with
 // RuleSetName set to null. For information about managing receipt rule sets, see
-// the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html).
-// You can execute this operation no more than once per second.
+// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) SetActiveReceiptRuleSet(ctx context.Context, params *SetActiveReceiptRuleSetInput, optFns ...func(*Options)) (*SetActiveReceiptRuleSetOutput, error) {
 	if params == nil {
 		params = &SetActiveReceiptRuleSetInput{}
@@ -33,8 +32,8 @@ func (c *Client) SetActiveReceiptRuleSet(ctx context.Context, params *SetActiveR
 
 // Represents a request to set a receipt rule set as the active receipt rule set.
 // You use receipt rule sets to receive email with Amazon SES. For more
-// information, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// .
 type SetActiveReceiptRuleSetInput struct {
 
 	// The name of the receipt rule set to make active. Setting this value to null

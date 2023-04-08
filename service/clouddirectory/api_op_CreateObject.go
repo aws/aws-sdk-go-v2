@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an object in a Directory. Additionally attaches the object to a parent,
+// Creates an object in a Directory . Additionally attaches the object to a parent,
 // if a parent reference and LinkName is specified. An object is simply a
 // collection of Facet attributes. You can also use this API call to create a
 // policy object, if the facet from which you create the object is a policy facet.
@@ -33,7 +33,7 @@ func (c *Client) CreateObject(ctx context.Context, params *CreateObjectInput, op
 type CreateObjectInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory in which
-	// the object will be created. For more information, see arns.
+	// the object will be created. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string

@@ -62,8 +62,8 @@ type GetWorkUnitsOutput struct {
 	// This member is required.
 	WorkUnitRanges []types.WorkUnitRange
 
-	// A continuation token for paginating the returned list of tokens, returned if the
-	// current segment of the list is not the last.
+	// A continuation token for paginating the returned list of tokens, returned if
+	// the current segment of the list is not the last.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

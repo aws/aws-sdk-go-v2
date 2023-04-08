@@ -33,9 +33,9 @@ type ListCustomPluginsInput struct {
 	// The maximum number of custom plugins to list in one response.
 	MaxResults int32
 
-	// If the response of a ListCustomPlugins operation is truncated, it will include a
-	// NextToken. Send this NextToken in a subsequent request to continue listing from
-	// where the previous operation left off.
+	// If the response of a ListCustomPlugins operation is truncated, it will include
+	// a NextToken. Send this NextToken in a subsequent request to continue listing
+	// from where the previous operation left off.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,9 +46,9 @@ type ListCustomPluginsOutput struct {
 	// An array of custom plugin descriptions.
 	CustomPlugins []types.CustomPluginSummary
 
-	// If the response of a ListCustomPlugins operation is truncated, it will include a
-	// NextToken. Send this NextToken in a subsequent request to continue listing from
-	// where the previous operation left off.
+	// If the response of a ListCustomPlugins operation is truncated, it will include
+	// a NextToken. Send this NextToken in a subsequent request to continue listing
+	// from where the previous operation left off.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

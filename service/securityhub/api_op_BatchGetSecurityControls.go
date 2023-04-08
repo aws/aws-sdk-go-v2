@@ -30,8 +30,8 @@ func (c *Client) BatchGetSecurityControls(ctx context.Context, params *BatchGetS
 
 type BatchGetSecurityControlsInput struct {
 
-	// A list of security controls (identified with SecurityControlId,
-	// SecurityControlArn, or a mix of both parameters). The security control ID or
+	// A list of security controls (identified with SecurityControlId ,
+	// SecurityControlArn , or a mix of both parameters). The security control ID or
 	// Amazon Resource Name (ARN) is the same across standards.
 	//
 	// This member is required.
@@ -44,13 +44,13 @@ type BatchGetSecurityControlsOutput struct {
 
 	// An array that returns the identifier, Amazon Resource Name (ARN), and other
 	// details about a security control. The same information is returned whether the
-	// request includes SecurityControlId or SecurityControlArn.
+	// request includes SecurityControlId or SecurityControlArn .
 	//
 	// This member is required.
 	SecurityControls []types.SecurityControl
 
-	// A security control (identified with SecurityControlId, SecurityControlArn, or a
-	// mix of both parameters) for which details cannot be returned.
+	// A security control (identified with SecurityControlId , SecurityControlArn , or
+	// a mix of both parameters) for which details cannot be returned.
 	UnprocessedIds []types.UnprocessedSecurityControl
 
 	// Metadata pertaining to the operation's result.

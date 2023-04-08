@@ -46,10 +46,10 @@ type GetCertificateAuthorityCertificateOutput struct {
 	// Base64-encoded certificate authority (CA) certificate.
 	Certificate *string
 
-	// Base64-encoded certificate chain that includes any intermediate certificates and
-	// chains up to root certificate that you used to sign your private CA certificate.
-	// The chain does not include your private CA certificate. If this is a root CA,
-	// the value will be null.
+	// Base64-encoded certificate chain that includes any intermediate certificates
+	// and chains up to root certificate that you used to sign your private CA
+	// certificate. The chain does not include your private CA certificate. If this is
+	// a root CA, the value will be null.
 	CertificateChain *string
 
 	// Metadata pertaining to the operation's result.

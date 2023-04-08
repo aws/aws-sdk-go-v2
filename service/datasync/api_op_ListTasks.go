@@ -32,9 +32,9 @@ func (c *Client) ListTasks(ctx context.Context, params *ListTasksInput, optFns .
 type ListTasksInput struct {
 
 	// You can use API filters to narrow down the list of resources returned by
-	// ListTasks. For example, to retrieve all tasks on a specific source location, you
-	// can use ListTasks with filter name LocationId and Operator Equals with the ARN
-	// for the location.
+	// ListTasks . For example, to retrieve all tasks on a specific source location,
+	// you can use ListTasks with filter name LocationId and Operator Equals with the
+	// ARN for the location.
 	Filters []types.TaskFilter
 
 	// The maximum number of tasks to return.

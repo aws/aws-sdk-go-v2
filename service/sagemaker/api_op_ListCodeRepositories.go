@@ -55,14 +55,14 @@ type ListCodeRepositoriesInput struct {
 	NameContains *string
 
 	// If the result of a ListCodeRepositoriesOutput request was truncated, the
-	// response includes a NextToken. To get the next set of Git repositories, use the
+	// response includes a NextToken . To get the next set of Git repositories, use the
 	// token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is Name.
+	// The field to sort results by. The default is Name .
 	SortBy types.CodeRepositorySortBy
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.CodeRepositorySortOrder
 
 	noSmithyDocumentSerde
@@ -72,25 +72,19 @@ type ListCodeRepositoriesOutput struct {
 
 	// Gets a list of summaries of the Git repositories. Each summary specifies the
 	// following values for the repository:
-	//
-	// * Name
-	//
-	// * Amazon Resource Name (ARN)
-	//
-	// *
-	// Creation time
-	//
-	// * Last modified time
-	//
-	// * Configuration information, including the
-	// URL location of the repository and the ARN of the Amazon Web Services Secrets
-	// Manager secret that contains the credentials used to access the repository.
+	//   - Name
+	//   - Amazon Resource Name (ARN)
+	//   - Creation time
+	//   - Last modified time
+	//   - Configuration information, including the URL location of the repository and
+	//   the ARN of the Amazon Web Services Secrets Manager secret that contains the
+	//   credentials used to access the repository.
 	//
 	// This member is required.
 	CodeRepositorySummaryList []types.CodeRepositorySummary
 
 	// If the result of a ListCodeRepositoriesOutput request was truncated, the
-	// response includes a NextToken. To get the next set of Git repositories, use the
+	// response includes a NextToken . To get the next set of Git repositories, use the
 	// token in the next request.
 	NextToken *string
 

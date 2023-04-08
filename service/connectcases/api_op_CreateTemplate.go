@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a template in the Cases domain. This template is used to define the case
-// object model (that is, to define what data can be captured on cases) in a Cases
-// domain. A template must have a unique name within a domain, and it must
+// Creates a template in the Cases domain. This template is used to define the
+// case object model (that is, to define what data can be captured on cases) in a
+// Cases domain. A template must have a unique name within a domain, and it must
 // reference existing field IDs and layout IDs. Additionally, multiple fields with
 // same IDs are not allowed within the same Template. A template can be either
 // Active or Inactive, as indicated by its status. Inactive templates cannot be
@@ -51,8 +51,8 @@ type CreateTemplateInput struct {
 	// Configuration of layouts associated to the template.
 	LayoutConfiguration *types.LayoutConfiguration
 
-	// A list of fields that must contain a value for a case to be successfully created
-	// with this template.
+	// A list of fields that must contain a value for a case to be successfully
+	// created with this template.
 	RequiredFields []types.RequiredField
 
 	// The status of the template.

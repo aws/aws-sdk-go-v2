@@ -35,9 +35,9 @@ const (
 	ChangeActionUpsert ChangeAction = "UPSERT"
 )
 
-// Values returns all known values for ChangeAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChangeAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeAction) Values() []ChangeAction {
 	return []ChangeAction{
 		"CREATE",
@@ -54,9 +54,9 @@ const (
 	ChangeStatusInsync  ChangeStatus = "INSYNC"
 )
 
-// Values returns all known values for ChangeStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChangeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeStatus) Values() []ChangeStatus {
 	return []ChangeStatus{
 		"PENDING",
@@ -273,9 +273,10 @@ const (
 	InsufficientDataHealthStatusLastKnownStatus InsufficientDataHealthStatus = "LastKnownStatus"
 )
 
-// Values returns all known values for InsufficientDataHealthStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InsufficientDataHealthStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (InsufficientDataHealthStatus) Values() []InsufficientDataHealthStatus {
 	return []InsufficientDataHealthStatus{
 		"Healthy",
@@ -294,8 +295,8 @@ const (
 	ResettableElementNameChildHealthChecks        ResettableElementName = "ChildHealthChecks"
 )
 
-// Values returns all known values for ResettableElementName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ResettableElementName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ResettableElementName) Values() []ResettableElementName {
 	return []ResettableElementName{
@@ -464,9 +465,9 @@ const (
 	StatisticMinimum     Statistic = "Minimum"
 )
 
-// Values returns all known values for Statistic. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Statistic. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Statistic) Values() []Statistic {
 	return []Statistic{
 		"Average",
@@ -534,9 +535,9 @@ const (
 	VPCRegionApSoutheast4 VPCRegion = "ap-southeast-4"
 )
 
-// Values returns all known values for VPCRegion. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for VPCRegion. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (VPCRegion) Values() []VPCRegion {
 	return []VPCRegion{
 		"us-east-1",

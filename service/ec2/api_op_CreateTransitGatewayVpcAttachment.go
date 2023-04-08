@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches the specified VPC to the specified transit gateway. If you attach a VPC
-// with a CIDR range that overlaps the CIDR range of a VPC that is already
+// Attaches the specified VPC to the specified transit gateway. If you attach a
+// VPC with a CIDR range that overlaps the CIDR range of a VPC that is already
 // attached, the new VPC CIDR range is not propagated to the default propagation
 // route table. To send VPC traffic to an attached transit gateway, add a route to
-// the VPC route table using CreateRoute.
+// the VPC route table using CreateRoute .
 func (c *Client) CreateTransitGatewayVpcAttachment(ctx context.Context, params *CreateTransitGatewayVpcAttachmentInput, optFns ...func(*Options)) (*CreateTransitGatewayVpcAttachmentOutput, error) {
 	if params == nil {
 		params = &CreateTransitGatewayVpcAttachmentInput{}
@@ -33,10 +33,10 @@ func (c *Client) CreateTransitGatewayVpcAttachment(ctx context.Context, params *
 
 type CreateTransitGatewayVpcAttachmentInput struct {
 
-	// The IDs of one or more subnets. You can specify only one subnet per Availability
-	// Zone. You must specify at least one subnet, but we recommend that you specify
-	// two subnets for better availability. The transit gateway uses one IP address
-	// from each specified subnet.
+	// The IDs of one or more subnets. You can specify only one subnet per
+	// Availability Zone. You must specify at least one subnet, but we recommend that
+	// you specify two subnets for better availability. The transit gateway uses one IP
+	// address from each specified subnet.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -53,8 +53,8 @@ type CreateTransitGatewayVpcAttachmentInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The VPC attachment options.

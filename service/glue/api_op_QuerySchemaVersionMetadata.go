@@ -58,8 +58,8 @@ type QuerySchemaVersionMetadataOutput struct {
 	// A map of a metadata key and associated values.
 	MetadataInfoMap map[string]types.MetadataInfo
 
-	// A continuation token for paginating the returned list of tokens, returned if the
-	// current segment of the list is not the last.
+	// A continuation token for paginating the returned list of tokens, returned if
+	// the current segment of the list is not the last.
 	NextToken *string
 
 	// The unique version ID of the schema version.

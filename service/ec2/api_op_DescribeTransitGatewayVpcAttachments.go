@@ -33,24 +33,17 @@ type DescribeTransitGatewayVpcAttachmentsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	//
-	// * state - The state of the
-	// attachment. Valid values are available | deleted | deleting | failed | failing |
-	// initiatingRequest | modifying | pendingAcceptance | pending | rollingBack |
-	// rejected | rejecting.
-	//
-	// * transit-gateway-attachment-id - The ID of the
-	// attachment.
-	//
-	// * transit-gateway-id - The ID of the transit gateway.
-	//
-	// * vpc-id -
-	// The ID of the VPC.
+	//   - state - The state of the attachment. Valid values are available | deleted |
+	//   deleting | failed | failing | initiatingRequest | modifying |
+	//   pendingAcceptance | pending | rollingBack | rejected | rejecting .
+	//   - transit-gateway-attachment-id - The ID of the attachment.
+	//   - transit-gateway-id - The ID of the transit gateway.
+	//   - vpc-id - The ID of the VPC.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

@@ -36,9 +36,9 @@ type CreateGroupInput struct {
 	// A string containing the description of the group.
 	Description *string
 
-	// A string containing the name of the group. This value is commonly displayed when
-	// the group is referenced. "Administrator" and "AWSAdministrators" are reserved
-	// names and can't be used for users or groups.
+	// A string containing the name of the group. This value is commonly displayed
+	// when the group is referenced. "Administrator" and "AWSAdministrators" are
+	// reserved names and can't be used for users or groups.
 	DisplayName *string
 
 	noSmithyDocumentSerde

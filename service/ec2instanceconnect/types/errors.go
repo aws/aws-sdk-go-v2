@@ -169,8 +169,7 @@ func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 
 // Your account is not authorized to use the EC2 Serial Console. To authorize your
 // account, run the EnableSerialConsoleAccess API. For more information, see
-// EnableSerialConsoleAccess
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableSerialConsoleAccess.html)
+// EnableSerialConsoleAccess (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableSerialConsoleAccess.html)
 // in the Amazon EC2 API Reference.
 type SerialConsoleAccessDisabledException struct {
 	Message *string

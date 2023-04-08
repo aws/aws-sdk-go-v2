@@ -46,8 +46,8 @@ type DeleteIntentInput struct {
 
 	// The identifier of the language and locale where the bot will be deleted. The
 	// string must match one of the supported locales. For more information, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string

@@ -46,8 +46,8 @@ type UpdateAnalysisPermissionsInput struct {
 	// to.
 	GrantPermissions []types.ResourcePermission
 
-	// A structure that describes the permissions to remove and the principal to remove
-	// them from.
+	// A structure that describes the permissions to remove and the principal to
+	// remove them from.
 	RevokePermissions []types.ResourcePermission
 
 	noSmithyDocumentSerde

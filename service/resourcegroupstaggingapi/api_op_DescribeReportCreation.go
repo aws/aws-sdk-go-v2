@@ -45,18 +45,12 @@ type DescribeReportCreationOutput struct {
 
 	// Reports the status of the operation. The operation status can be one of the
 	// following:
-	//
-	// * RUNNING - Report creation is in progress.
-	//
-	// * SUCCEEDED - Report
-	// creation is complete. You can open the report from the Amazon S3 bucket that you
-	// specified when you ran StartReportCreation.
-	//
-	// * FAILED - Report creation timed
-	// out or the Amazon S3 bucket is not accessible.
-	//
-	// * NO REPORT - No report was
-	// generated in the last 90 days.
+	//   - RUNNING - Report creation is in progress.
+	//   - SUCCEEDED - Report creation is complete. You can open the report from the
+	//   Amazon S3 bucket that you specified when you ran StartReportCreation .
+	//   - FAILED - Report creation timed out or the Amazon S3 bucket is not
+	//   accessible.
+	//   - NO REPORT - No report was generated in the last 90 days.
 	Status *string
 
 	// Metadata pertaining to the operation's result.

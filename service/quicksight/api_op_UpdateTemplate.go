@@ -30,8 +30,8 @@ func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput
 
 type UpdateTemplateInput struct {
 
-	// The ID of the Amazon Web Services account that contains the template that you're
-	// updating.
+	// The ID of the Amazon Web Services account that contains the template that
+	// you're updating.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -49,19 +49,19 @@ type UpdateTemplateInput struct {
 	Name *string
 
 	// The entity that you are using as a source when you update the template. In
-	// SourceEntity, you specify the type of object you're using as source:
+	// SourceEntity , you specify the type of object you're using as source:
 	// SourceTemplate for a template or SourceAnalysis for an analysis. Both of these
-	// require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of
-	// the source template. For SourceAnalysis, specify the ARN of the source analysis.
-	// The SourceTemplate ARN can contain any Amazon Web Services account and any
-	// Amazon QuickSight-supported Amazon Web Services Region;. Use the
+	// require an Amazon Resource Name (ARN). For SourceTemplate , specify the ARN of
+	// the source template. For SourceAnalysis , specify the ARN of the source
+	// analysis. The SourceTemplate ARN can contain any Amazon Web Services account
+	// and any Amazon QuickSight-supported Amazon Web Services Region;. Use the
 	// DataSetReferences entity within SourceTemplate or SourceAnalysis to list the
 	// replacement datasets for the placeholders listed in the original. The schema in
 	// each dataset must match its placeholder.
 	SourceEntity *types.TemplateSourceEntity
 
 	// A description of the current template version that is being updated. Every time
-	// you call UpdateTemplate, you create a new version of the template. Each version
+	// you call UpdateTemplate , you create a new version of the template. Each version
 	// of the template maintains a description of the version in the VersionDescription
 	// field.
 	VersionDescription *string

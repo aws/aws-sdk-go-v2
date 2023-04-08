@@ -47,7 +47,7 @@ type DissociatePackageInput struct {
 // Container for response returned by DissociatePackage operation.
 type DissociatePackageOutput struct {
 
-	// DomainPackageDetails
+	//     DomainPackageDetails
 	DomainPackageDetails *types.DomainPackageDetails
 
 	// Metadata pertaining to the operation's result.

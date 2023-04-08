@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the schedule state of the specified crawler to SCHEDULED, unless the
-// crawler is already running or the schedule state is already SCHEDULED.
+// Changes the schedule state of the specified crawler to SCHEDULED , unless the
+// crawler is already running or the schedule state is already SCHEDULED .
 func (c *Client) StartCrawlerSchedule(ctx context.Context, params *StartCrawlerScheduleInput, optFns ...func(*Options)) (*StartCrawlerScheduleOutput, error) {
 	if params == nil {
 		params = &StartCrawlerScheduleInput{}

@@ -15,10 +15,9 @@ import (
 // Update a service instance. There are a few modes for updating a service
 // instance. The deploymentType field defines the mode. You can't update a service
 // instance while its deployment status, or the deployment status of a component
-// attached to it, is IN_PROGRESS. For more information about components, see
-// Proton components
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-// Proton User Guide.
+// attached to it, is IN_PROGRESS . For more information about components, see
+// Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+// in the Proton User Guide.
 func (c *Client) UpdateServiceInstance(ctx context.Context, params *UpdateServiceInstanceInput, optFns ...func(*Options)) (*UpdateServiceInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateServiceInstanceInput{}

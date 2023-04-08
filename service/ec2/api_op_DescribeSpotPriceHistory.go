@@ -14,8 +14,7 @@ import (
 )
 
 // Describes the Spot price history. For more information, see Spot Instance
-// pricing history
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html)
+// pricing history (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html)
 // in the Amazon EC2 User Guide for Linux Instances. When you specify a start and
 // end time, the operation returns the prices of the instance types within that
 // time range. It also returns the last price change before the start time, which
@@ -43,8 +42,8 @@ type DescribeSpotPriceHistoryInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The date and time, up to the current date, from which to stop retrieving the
@@ -52,25 +51,18 @@ type DescribeSpotPriceHistoryInput struct {
 	EndTime *time.Time
 
 	// One or more filters.
-	//
-	// * availability-zone - The Availability Zone for which
-	// prices should be returned.
-	//
-	// * instance-type - The type of instance (for example,
-	// m3.medium).
-	//
-	// * product-description - The product description for the Spot price
-	// (Linux/UNIX | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX
-	// (Amazon VPC) | Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) |
-	// Windows (Amazon VPC)).
-	//
-	// * spot-price - The Spot price. The value must match
-	// exactly (or use wildcards; greater than or less than comparison is not
-	// supported).
-	//
-	// * timestamp - The time stamp of the Spot price history, in UTC
-	// format (for example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?).
-	// Greater than or less than comparison is not supported.
+	//   - availability-zone - The Availability Zone for which prices should be
+	//   returned.
+	//   - instance-type - The type of instance (for example, m3.medium ).
+	//   - product-description - The product description for the Spot price ( Linux/UNIX
+	//   | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) |
+	//   Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows
+	//   (Amazon VPC) ).
+	//   - spot-price - The Spot price. The value must match exactly (or use wildcards;
+	//   greater than or less than comparison is not supported).
+	//   - timestamp - The time stamp of the Spot price history, in UTC format (for
+	//   example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?). Greater than or
+	//   less than comparison is not supported.
 	Filters []types.Filter
 
 	// Filters the results by the specified instance types.
@@ -78,8 +70,8 @@ type DescribeSpotPriceHistoryInput struct {
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -185,8 +177,8 @@ var _ DescribeSpotPriceHistoryAPIClient = (*Client)(nil)
 type DescribeSpotPriceHistoryPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -31,8 +31,8 @@ func (c *Client) DescribeWorkspaceBundles(ctx context.Context, params *DescribeW
 
 type DescribeWorkspaceBundlesInput struct {
 
-	// The identifiers of the bundles. You cannot combine this parameter with any other
-	// filter.
+	// The identifiers of the bundles. You cannot combine this parameter with any
+	// other filter.
 	BundleIds []string
 
 	// The token for the next set of results. (You received this token from a previous
@@ -40,8 +40,8 @@ type DescribeWorkspaceBundlesInput struct {
 	NextToken *string
 
 	// The owner of the bundles. You cannot combine this parameter with any other
-	// filter. To describe the bundles provided by Amazon Web Services, specify AMAZON.
-	// To describe the bundles that belong to your account, don't specify a value.
+	// filter. To describe the bundles provided by Amazon Web Services, specify AMAZON
+	// . To describe the bundles that belong to your account, don't specify a value.
 	Owner *string
 
 	noSmithyDocumentSerde

@@ -61,8 +61,8 @@ type DescribeFileSystemAliasesInput struct {
 // The response object for DescribeFileSystemAliases operation.
 type DescribeFileSystemAliasesOutput struct {
 
-	// An array of one or more DNS aliases currently associated with the specified file
-	// system.
+	// An array of one or more DNS aliases currently associated with the specified
+	// file system.
 	Aliases []types.Alias
 
 	// Present if there are more DNS aliases than returned in the response (String).

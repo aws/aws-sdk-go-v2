@@ -191,9 +191,9 @@ const (
 	DatadogConnectorOperatorNoOp                DatadogConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for DatadogConnectorOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DatadogConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatadogConnectorOperator) Values() []DatadogConnectorOperator {
 	return []DatadogConnectorOperator{
 		"PROJECTION",
@@ -222,9 +222,9 @@ const (
 	DataPullModeComplete    DataPullMode = "Complete"
 )
 
-// Values returns all known values for DataPullMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataPullMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DataPullMode) Values() []DataPullMode {
 	return []DataPullMode{
 		"Incremental",
@@ -427,9 +427,9 @@ const (
 	MarketoConnectorOperatorNoOp                MarketoConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for MarketoConnectorOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MarketoConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MarketoConnectorOperator) Values() []MarketoConnectorOperator {
 	return []MarketoConnectorOperator{
 		"PROJECTION",
@@ -618,9 +618,9 @@ const (
 	OperatorsNoOp                 Operators = "NO_OP"
 )
 
-// Values returns all known values for Operators. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operators. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Operators) Values() []Operators {
 	return []Operators{
 		"PROJECTION",
@@ -718,9 +718,9 @@ const (
 	PrefixFormatMinute PrefixFormat = "MINUTE"
 )
 
-// Values returns all known values for PrefixFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PrefixFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PrefixFormat) Values() []PrefixFormat {
 	return []PrefixFormat{
 		"YEAR",
@@ -1013,8 +1013,8 @@ const (
 	ScheduleFrequencyTypeOnce     ScheduleFrequencyType = "ONCE"
 )
 
-// Values returns all known values for ScheduleFrequencyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ScheduleFrequencyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduleFrequencyType) Values() []ScheduleFrequencyType {
 	return []ScheduleFrequencyType{
@@ -1371,9 +1371,9 @@ const (
 	ZendeskConnectorOperatorNoOp                ZendeskConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for ZendeskConnectorOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ZendeskConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ZendeskConnectorOperator) Values() []ZendeskConnectorOperator {
 	return []ZendeskConnectorOperator{
 		"PROJECTION",

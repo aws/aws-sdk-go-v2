@@ -14,17 +14,14 @@ import (
 
 // Creates a new package version containing one or more assets (or files). The
 // unfinished flag can be used to keep the package version in the Unfinished state
-// until all of its assets have been uploaded (see Package version status
-// (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status)
+// until all of its assets have been uploaded (see Package version status (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status)
 // in the CodeArtifact user guide). To set the package version’s status to
-// Published, omit the unfinished flag when uploading the final asset, or set the
-// status using UpdatePackageVersionStatus
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html).
-// Once a package version’s status is set to Published, it cannot change back to
-// Unfinished. Only generic packages can be published using this API. For more
-// information, see Using generic packages
-// (https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html) in the
-// CodeArtifact User Guide.
+// Published , omit the unfinished flag when uploading the final asset, or set the
+// status using UpdatePackageVersionStatus (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html)
+// . Once a package version’s status is set to Published , it cannot change back to
+// Unfinished . Only generic packages can be published using this API. For more
+// information, see Using generic packages (https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html)
+// in the CodeArtifact User Guide.
 func (c *Client) PublishPackageVersion(ctx context.Context, params *PublishPackageVersionInput, optFns ...func(*Options)) (*PublishPackageVersionOutput, error) {
 	if params == nil {
 		params = &PublishPackageVersionInput{}
@@ -48,15 +45,14 @@ type PublishPackageVersionInput struct {
 	AssetContent io.Reader
 
 	// The name of the asset to publish. Asset names can include Unicode letters and
-	// numbers, and the following special characters: ~ ! @ ^ & ( ) - ` _ + [ ] { } ; ,
-	// . `
+	// numbers, and the following special characters: ~ ! @ ^ & ( ) - ` _ + [ ] { } ;
+	// , . `
 	//
 	// This member is required.
 	AssetName *string
 
-	// The SHA256 hash of the assetContent to publish. This value must be calculated by
-	// the caller and provided with the request (see Publishing a generic package
-	// (https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages)
+	// The SHA256 hash of the assetContent to publish. This value must be calculated
+	// by the caller and provided with the request (see Publishing a generic package (https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages)
 	// in the CodeArtifact User Guide). This value is used as an integrity check to
 	// verify that the assetContent has not changed after it was originally sent.
 	//
@@ -69,8 +65,8 @@ type PublishPackageVersionInput struct {
 	// This member is required.
 	Domain *string
 
-	// A format that specifies the type of the package version with the requested asset
-	// file.
+	// A format that specifies the type of the package version with the requested
+	// asset file.
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -80,7 +76,7 @@ type PublishPackageVersionInput struct {
 	// This member is required.
 	Package *string
 
-	// The package version to publish (for example, 3.5.2).
+	// The package version to publish (for example, 3.5.2 ).
 	//
 	// This member is required.
 	PackageVersion *string
@@ -90,8 +86,8 @@ type PublishPackageVersionInput struct {
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the AWS account that owns the domain. It does
+	// not include dashes or spaces.
 	DomainOwner *string
 
 	// The namespace of the package version to publish.
@@ -99,8 +95,7 @@ type PublishPackageVersionInput struct {
 
 	// Specifies whether the package version should remain in the unfinished state. If
 	// omitted, the package version status will be set to Published (see Package
-	// version status
-	// (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status)
+	// version status (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status)
 	// in the CodeArtifact User Guide). Valid values: unfinished
 	Unfinished *bool
 
@@ -109,8 +104,7 @@ type PublishPackageVersionInput struct {
 
 type PublishPackageVersionOutput struct {
 
-	// An AssetSummary
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
+	// An AssetSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
 	// for the published asset.
 	Asset *types.AssetSummary
 
@@ -124,8 +118,7 @@ type PublishPackageVersionOutput struct {
 	Package *string
 
 	// A string that contains the status of the package version. For more information,
-	// see Package version status
-	// (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status)
+	// see Package version status (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status)
 	// in the CodeArtifact User Guide.
 	Status types.PackageVersionStatus
 

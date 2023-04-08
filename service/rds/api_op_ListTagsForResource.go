@@ -12,8 +12,7 @@ import (
 )
 
 // Lists all tags on an Amazon RDS resource. For an overview on tagging an Amazon
-// RDS resource, see Tagging Amazon RDS Resources
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html)
+// RDS resource, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html)
 // in the Amazon RDS User Guide.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
@@ -32,10 +31,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon RDS resource with tags to be listed. This value is an Amazon Resource
-	// Name (ARN). For information about creating an ARN, see  Constructing an ARN for
-	// Amazon RDS
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
+	// The Amazon RDS resource with tags to be listed. This value is an Amazon
+	// Resource Name (ARN). For information about creating an ARN, see Constructing an
+	// ARN for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// in the Amazon RDS User Guide.
 	//
 	// This member is required.

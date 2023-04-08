@@ -17,34 +17,27 @@ import (
 // event description, and (depending on the event) possible metadata. This
 // operation doesn't return affected entities, such as the resources related to the
 // event. To return affected entities, use the
-// DescribeAffectedEntitiesForOrganization
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
+// DescribeAffectedEntitiesForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
 // operation. Before you can call this operation, you must first enable Health to
 // work with Organizations. To do this, call the
-// EnableHealthServiceAccessForOrganization
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
+// EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
 // operation from your organization's management account. When you call the
 // DescribeEventDetailsForOrganization operation, specify the
 // organizationEventDetailFilters object in the request. Depending on the Health
 // event type, note the following differences:
+//   - To return event details for a public event, you must specify a null value
+//     for the awsAccountId parameter. If you specify an account ID for a public
+//     event, Health returns an error message because public events aren't specific to
+//     an account.
+//   - To return event details for an event that is specific to an account in your
+//     organization, you must specify the awsAccountId parameter in the request. If
+//     you don't specify an account ID, Health returns an error message because the
+//     event is specific to an account in your organization.
 //
-// * To return event details for a
-// public event, you must specify a null value for the awsAccountId parameter. If
-// you specify an account ID for a public event, Health returns an error message
-// because public events aren't specific to an account.
-//
-// * To return event details
-// for an event that is specific to an account in your organization, you must
-// specify the awsAccountId parameter in the request. If you don't specify an
-// account ID, Health returns an error message because the event is specific to an
-// account in your organization.
-//
-// For more information, see Event
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html). This
-// operation doesn't support resource-level permissions. You can't use this
+// For more information, see Event (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html)
+// . This operation doesn't support resource-level permissions. You can't use this
 // operation to allow or deny access to specific Health events. For more
-// information, see Resource- and action-based conditions
-// (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions)
+// information, see Resource- and action-based conditions (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions)
 // in the Health User Guide.
 func (c *Client) DescribeEventDetailsForOrganization(ctx context.Context, params *DescribeEventDetailsForOrganizationInput, optFns ...func(*Options)) (*DescribeEventDetailsForOrganizationOutput, error) {
 	if params == nil {
@@ -63,7 +56,7 @@ func (c *Client) DescribeEventDetailsForOrganization(ctx context.Context, params
 
 type DescribeEventDetailsForOrganizationInput struct {
 
-	// A set of JSON elements that includes the awsAccountId and the eventArn.
+	// A set of JSON elements that includes the awsAccountId and the eventArn .
 	//
 	// This member is required.
 	OrganizationEventDetailFilters []types.EventAccountFilter

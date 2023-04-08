@@ -12,9 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of aliases
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a
-// Lambda function.
+// Returns a list of aliases (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
+// for a Lambda function.
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {
 		params = &ListAliasesInput{}
@@ -33,18 +32,11 @@ func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optF
 type ListAliasesInput struct {
 
 	// The name of the Lambda function. Name formats
-	//
-	// * Function name - MyFunction.
-	//
-	// *
-	// Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
-	//
-	// *
-	// Partial ARN - 123456789012:function:MyFunction.
-	//
-	// The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//   - Function name - MyFunction .
+	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//   - Partial ARN - 123456789012:function:MyFunction .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string

@@ -34,9 +34,9 @@ type ConfirmForgotPasswordInput struct {
 	// This member is required.
 	ClientId *string
 
-	// The confirmation code from your user's request to reset their password. For more
-	// information, see ForgotPassword
-	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html).
+	// The confirmation code from your user's request to reset their password. For
+	// more information, see ForgotPassword (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html)
+	// .
 	//
 	// This member is required.
 	ConfirmationCode *string
@@ -65,22 +65,17 @@ type ConfirmForgotPasswordInput struct {
 	// clientMetadata attribute, which provides the data that you assigned to the
 	// ClientMetadata parameter in your ConfirmForgotPassword request. In your function
 	// code in Lambda, you can process the clientMetadata value to enhance your
-	// workflow for your specific needs. For more information, see  Customizing user
-	// pool Workflows with Lambda Triggers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
+	// workflow for your specific needs. For more information, see Customizing user
+	// pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	//
-	// * Store the
-	// ClientMetadata value. This data is available only to Lambda triggers that are
-	// assigned to a user pool to support custom workflows. If your user pool
-	// configuration doesn't include triggers, the ClientMetadata parameter serves no
-	// purpose.
-	//
-	// * Validate the ClientMetadata value.
-	//
-	// * Encrypt the ClientMetadata
-	// value. Don't use Amazon Cognito to provide sensitive information.
+	//   - Store the ClientMetadata value. This data is available only to Lambda
+	//   triggers that are assigned to a user pool to support custom workflows. If your
+	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
+	//   serves no purpose.
+	//   - Validate the ClientMetadata value.
+	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
+	//   sensitive information.
 	ClientMetadata map[string]string
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key

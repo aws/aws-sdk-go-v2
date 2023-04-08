@@ -40,8 +40,8 @@ type UpdateDocumentationPartInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// For more information about supported patch operations, see Patch Operations
-	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
+	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
+	// .
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -63,10 +63,10 @@ type UpdateDocumentationPartOutput struct {
 
 	// A content map of API-specific key-value pairs describing the targeted API
 	// entity. The map must be encoded as a JSON string, e.g., "{ \"description\":
-	// \"The API does ...\" }". Only OpenAPI-compliant documentation-related fields
+	// \"The API does ...\" }" . Only OpenAPI-compliant documentation-related fields
 	// from the properties map are exported and, hence, published as part of the API
 	// entity definitions, while the original documentation parts are exported in a
-	// OpenAPI extension of x-amazon-apigateway-documentation.
+	// OpenAPI extension of x-amazon-apigateway-documentation .
 	Properties *string
 
 	// Metadata pertaining to the operation's result.

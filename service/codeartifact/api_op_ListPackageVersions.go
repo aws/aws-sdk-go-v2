@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of PackageVersionSummary
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
+// Returns a list of PackageVersionSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
 // objects for package versions in a repository that match the request parameters.
 // Package versions of all statuses will be returned by default when calling
 // list-package-versions with no --status parameter.
@@ -63,19 +62,13 @@ type ListPackageVersionsInput struct {
 	MaxResults *int32
 
 	// The namespace of the package that contains the requested package versions. The
-	// package component that specifies its namespace depends on its type. For
-	// example:
+	// package component that specifies its namespace depends on its type. For example:
 	//
-	// * The namespace of a Maven package is its groupId.
-	//
-	// * The namespace of
-	// an npm package is its scope.
-	//
-	// * Python and NuGet packages do not contain a
-	// corresponding component, packages of those formats do not have a namespace.
-	//
-	// *
-	// The namespace of a generic package is its namespace.
+	//   - The namespace of a Maven package is its groupId .
+	//   - The namespace of an npm package is its scope .
+	//   - Python and NuGet packages do not contain a corresponding component,
+	//   packages of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -98,29 +91,22 @@ type ListPackageVersionsInput struct {
 type ListPackageVersionsOutput struct {
 
 	// The default package version to display. This depends on the package format:
-	//
-	// *
-	// For Maven and PyPI packages, it's the most recently published package
-	// version.
-	//
-	// * For npm packages, it's the version referenced by the latest tag. If
-	// the latest tag is not set, it's the most recently published package version.
+	//   - For Maven and PyPI packages, it's the most recently published package
+	//   version.
+	//   - For npm packages, it's the version referenced by the latest tag. If the
+	//   latest tag is not set, it's the most recently published package version.
 	DefaultDisplayVersion *string
 
 	// A format of the package.
 	Format types.PackageFormat
 
 	// The namespace of the package that contains the requested package versions. The
-	// package component that specifies its namespace depends on its type. For
-	// example:
+	// package component that specifies its namespace depends on its type. For example:
 	//
-	// * The namespace of a Maven package is its groupId.
-	//
-	// * The namespace of
-	// an npm package is its scope.
-	//
-	// * Python and NuGet packages do not contain a
-	// corresponding component, packages of those formats do not have a namespace.
+	//   - The namespace of a Maven package is its groupId .
+	//   - The namespace of an npm package is its scope .
+	//   - Python and NuGet packages do not contain a corresponding component,
+	//   packages of those formats do not have a namespace.
 	Namespace *string
 
 	// If there are additional results, this is the token for the next set of results.
@@ -129,8 +115,7 @@ type ListPackageVersionsOutput struct {
 	// The name of the package.
 	Package *string
 
-	// The returned list of PackageVersionSummary
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
+	// The returned list of PackageVersionSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
 	// objects.
 	Versions []types.PackageVersionSummary
 
@@ -203,8 +188,8 @@ func (c *Client) addOperationListPackageVersionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListPackageVersionsAPIClient is a client that implements the ListPackageVersions
-// operation.
+// ListPackageVersionsAPIClient is a client that implements the
+// ListPackageVersions operation.
 type ListPackageVersionsAPIClient interface {
 	ListPackageVersions(context.Context, *ListPackageVersionsInput, ...func(*Options)) (*ListPackageVersionsOutput, error)
 }

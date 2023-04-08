@@ -13,8 +13,8 @@ import (
 // Verifies an endpoint owner's intent to receive messages by validating the token
 // sent to the endpoint by an earlier Subscribe action. If the token is valid, the
 // action creates a new subscription and returns its Amazon Resource Name (ARN).
-// This call requires an AWS signature only when the AuthenticateOnUnsubscribe flag
-// is set to "true".
+// This call requires an AWS signature only when the AuthenticateOnUnsubscribe
+// flag is set to "true".
 func (c *Client) ConfirmSubscription(ctx context.Context, params *ConfirmSubscriptionInput, optFns ...func(*Options)) (*ConfirmSubscriptionOutput, error) {
 	if params == nil {
 		params = &ConfirmSubscriptionInput{}
@@ -43,10 +43,10 @@ type ConfirmSubscriptionInput struct {
 	// This member is required.
 	TopicArn *string
 
-	// Disallows unauthenticated unsubscribes of the subscription. If the value of this
-	// parameter is true and the request has an Amazon Web Services signature, then
-	// only the topic owner and the subscription owner can unsubscribe the endpoint.
-	// The unsubscribe action requires Amazon Web Services authentication.
+	// Disallows unauthenticated unsubscribes of the subscription. If the value of
+	// this parameter is true and the request has an Amazon Web Services signature,
+	// then only the topic owner and the subscription owner can unsubscribe the
+	// endpoint. The unsubscribe action requires Amazon Web Services authentication.
 	AuthenticateOnUnsubscribe *string
 
 	noSmithyDocumentSerde

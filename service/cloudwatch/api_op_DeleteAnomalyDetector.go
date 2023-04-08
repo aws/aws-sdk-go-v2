@@ -13,8 +13,7 @@ import (
 
 // Deletes the specified anomaly detection model from your account. For more
 // information about how to delete an anomaly detection model, see Deleting an
-// anomaly detection model
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Anomaly_Detection_Alarm.html#Delete_Anomaly_Detection_Model)
+// anomaly detection model (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Anomaly_Detection_Alarm.html#Delete_Anomaly_Detection_Model)
 // in the CloudWatch User Guide.
 func (c *Client) DeleteAnomalyDetector(ctx context.Context, params *DeleteAnomalyDetectorInput, optFns ...func(*Options)) (*DeleteAnomalyDetectorOutput, error) {
 	if params == nil {
@@ -39,22 +38,14 @@ type DeleteAnomalyDetectorInput struct {
 	Dimensions []types.Dimension
 
 	// The metric math anomaly detector to be deleted. When using
-	// MetricMathAnomalyDetector, you cannot include following parameters in the same
+	// MetricMathAnomalyDetector , you cannot include following parameters in the same
 	// operation:
-	//
-	// * Dimensions,
-	//
-	// * MetricName
-	//
-	// * Namespace
-	//
-	// * Stat
-	//
-	// * the
-	// SingleMetricAnomalyDetector parameters of DeleteAnomalyDetectorInput
-	//
-	// Instead,
-	// specify the metric math anomaly detector attributes as part of the
+	//   - Dimensions ,
+	//   - MetricName
+	//   - Namespace
+	//   - Stat
+	//   - the SingleMetricAnomalyDetector parameters of DeleteAnomalyDetectorInput
+	// Instead, specify the metric math anomaly detector attributes as part of the
 	// MetricMathAnomalyDetector property.
 	MetricMathAnomalyDetector *types.MetricMathAnomalyDetector
 
@@ -69,22 +60,14 @@ type DeleteAnomalyDetectorInput struct {
 	Namespace *string
 
 	// A single metric anomaly detector to be deleted. When using
-	// SingleMetricAnomalyDetector, you cannot include the following parameters in the
+	// SingleMetricAnomalyDetector , you cannot include the following parameters in the
 	// same operation:
-	//
-	// * Dimensions,
-	//
-	// * MetricName
-	//
-	// * Namespace
-	//
-	// * Stat
-	//
-	// * the
-	// MetricMathAnomalyDetector parameters of DeleteAnomalyDetectorInput
-	//
-	// Instead,
-	// specify the single metric anomaly detector attributes as part of the
+	//   - Dimensions ,
+	//   - MetricName
+	//   - Namespace
+	//   - Stat
+	//   - the MetricMathAnomalyDetector parameters of DeleteAnomalyDetectorInput
+	// Instead, specify the single metric anomaly detector attributes as part of the
 	// SingleMetricAnomalyDetector property.
 	SingleMetricAnomalyDetector *types.SingleMetricAnomalyDetector
 

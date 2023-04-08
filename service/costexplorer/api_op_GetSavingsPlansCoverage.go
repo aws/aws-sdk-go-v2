@@ -17,18 +17,12 @@ import (
 // account can see the coverage of the associated member accounts. This supports
 // dimensions, Cost Categories, and nested expressions. For any time period, you
 // can filter data for Savings Plans usage with the following dimensions:
+//   - LINKED_ACCOUNT
+//   - REGION
+//   - SERVICE
+//   - INSTANCE_FAMILY
 //
-// *
-// LINKED_ACCOUNT
-//
-// * REGION
-//
-// * SERVICE
-//
-// * INSTANCE_FAMILY
-//
-// To determine valid
-// values for a dimension, use the GetDimensionValues operation.
+// To determine valid values for a dimension, use the GetDimensionValues operation.
 func (c *Client) GetSavingsPlansCoverage(ctx context.Context, params *GetSavingsPlansCoverageInput, optFns ...func(*Options)) (*GetSavingsPlansCoverageOutput, error) {
 	if params == nil {
 		params = &GetSavingsPlansCoverageInput{}
@@ -55,19 +49,11 @@ type GetSavingsPlansCoverageInput struct {
 
 	// Filters Savings Plans coverage data by dimensions. You can filter data for
 	// Savings Plans usage with the following dimensions:
-	//
-	// * LINKED_ACCOUNT
-	//
-	// *
-	// REGION
-	//
-	// * SERVICE
-	//
-	// * INSTANCE_FAMILY
-	//
-	// GetSavingsPlansCoverage uses the same
-	// Expression
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	//   - LINKED_ACCOUNT
+	//   - REGION
+	//   - SERVICE
+	//   - INSTANCE_FAMILY
+	// GetSavingsPlansCoverage uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	// If there are multiple values for a dimension, they are OR'd together. Cost
 	// category is also supported.
@@ -78,15 +64,16 @@ type GetSavingsPlansCoverageInput struct {
 	// operation supports only DAILY and MONTHLY granularities.
 	Granularity types.Granularity
 
-	// You can group the data using the attributes INSTANCE_FAMILY, REGION, or SERVICE.
+	// You can group the data using the attributes INSTANCE_FAMILY , REGION , or
+	// SERVICE .
 	GroupBy []types.GroupDefinition
 
-	// The number of items to be returned in a response. The default is 20, with a
-	// minimum value of 1.
+	// The number of items to be returned in a response. The default is 20 , with a
+	// minimum value of 1 .
 	MaxResults *int32
 
 	// The measurement that you want your Savings Plans coverage reported in. The only
-	// valid value is SpendCoveredBySavingsPlans.
+	// valid value is SpendCoveredBySavingsPlans .
 	Metrics []string
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
@@ -95,25 +82,15 @@ type GetSavingsPlansCoverageInput struct {
 	NextToken *string
 
 	// The value that you want to sort the data by. The following values are supported
-	// for Key:
-	//
-	// * SpendCoveredBySavingsPlan
-	//
-	// * OnDemandCost
-	//
-	// * CoveragePercentage
-	//
-	// *
-	// TotalCost
-	//
-	// * InstanceFamily
-	//
-	// * Region
-	//
-	// * Service
-	//
-	// The supported values for
-	// SortOrder are ASCENDING and DESCENDING.
+	// for Key :
+	//   - SpendCoveredBySavingsPlan
+	//   - OnDemandCost
+	//   - CoveragePercentage
+	//   - TotalCost
+	//   - InstanceFamily
+	//   - Region
+	//   - Service
+	// The supported values for SortOrder are ASCENDING and DESCENDING .
 	SortBy *types.SortDefinition
 
 	noSmithyDocumentSerde
@@ -211,8 +188,8 @@ var _ GetSavingsPlansCoverageAPIClient = (*Client)(nil)
 // GetSavingsPlansCoveragePaginatorOptions is the paginator options for
 // GetSavingsPlansCoverage
 type GetSavingsPlansCoveragePaginatorOptions struct {
-	// The number of items to be returned in a response. The default is 20, with a
-	// minimum value of 1.
+	// The number of items to be returned in a response. The default is 20 , with a
+	// minimum value of 1 .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

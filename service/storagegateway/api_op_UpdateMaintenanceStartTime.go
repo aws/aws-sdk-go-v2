@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a gateway's weekly maintenance start time information, including day and
-// time of the week. The maintenance time is the time in your gateway's time zone.
+// Updates a gateway's weekly maintenance start time information, including day
+// and time of the week. The maintenance time is the time in your gateway's time
+// zone.
 func (c *Client) UpdateMaintenanceStartTime(ctx context.Context, params *UpdateMaintenanceStartTimeInput, optFns ...func(*Options)) (*UpdateMaintenanceStartTimeOutput, error) {
 	if params == nil {
 		params = &UpdateMaintenanceStartTimeInput{}
@@ -28,22 +29,14 @@ func (c *Client) UpdateMaintenanceStartTime(ctx context.Context, params *UpdateM
 }
 
 // A JSON object containing the following fields:
-//
-// *
-// UpdateMaintenanceStartTimeInput$DayOfMonth
-//
-// *
-// UpdateMaintenanceStartTimeInput$DayOfWeek
-//
-// *
-// UpdateMaintenanceStartTimeInput$HourOfDay
-//
-// *
-// UpdateMaintenanceStartTimeInput$MinuteOfHour
+//   - UpdateMaintenanceStartTimeInput$DayOfMonth
+//   - UpdateMaintenanceStartTimeInput$DayOfWeek
+//   - UpdateMaintenanceStartTimeInput$HourOfDay
+//   - UpdateMaintenanceStartTimeInput$MinuteOfHour
 type UpdateMaintenanceStartTimeInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -77,8 +70,8 @@ type UpdateMaintenanceStartTimeInput struct {
 // maintenance start time is updated.
 type UpdateMaintenanceStartTimeOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

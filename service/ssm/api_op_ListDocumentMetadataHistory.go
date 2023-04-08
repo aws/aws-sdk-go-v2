@@ -31,7 +31,7 @@ func (c *Client) ListDocumentMetadataHistory(ctx context.Context, params *ListDo
 type ListDocumentMetadataHistoryInput struct {
 
 	// The type of data for which details are being requested. Currently, the only
-	// supported value is DocumentReviews.
+	// supported value is DocumentReviews .
 	//
 	// This member is required.
 	Metadata types.DocumentMetadataEnum

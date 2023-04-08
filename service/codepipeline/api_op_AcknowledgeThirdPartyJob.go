@@ -31,8 +31,8 @@ func (c *Client) AcknowledgeThirdPartyJob(ctx context.Context, params *Acknowled
 // Represents the input of an AcknowledgeThirdPartyJob action.
 type AcknowledgeThirdPartyJobInput struct {
 
-	// The clientToken portion of the clientId and clientToken pair used to verify that
-	// the calling entity is allowed access to the job and its details.
+	// The clientToken portion of the clientId and clientToken pair used to verify
+	// that the calling entity is allowed access to the job and its details.
 	//
 	// This member is required.
 	ClientToken *string

@@ -39,9 +39,9 @@ type ListSubscribedWorkteamsInput struct {
 	// contains the specified string.
 	NameContains *string
 
-	// If the result of the previous ListSubscribedWorkteams request was truncated, the
-	// response includes a NextToken. To retrieve the next set of labeling jobs, use
-	// the token in the next request.
+	// If the result of the previous ListSubscribedWorkteams request was truncated,
+	// the response includes a NextToken . To retrieve the next set of labeling jobs,
+	// use the token in the next request.
 	NextToken *string
 
 	noSmithyDocumentSerde

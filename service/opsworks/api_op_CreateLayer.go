@@ -11,18 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a layer. For more information, see How to Create a Layer
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html).
-// You should use CreateLayer for noncustom layer types such as PHP App Server only
-// if the stack does not have an existing layer of that type. A stack can have at
-// most one instance of each noncustom layer; if you attempt to create a second
+// Creates a layer. For more information, see How to Create a Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html)
+// . You should use CreateLayer for noncustom layer types such as PHP App Server
+// only if the stack does not have an existing layer of that type. A stack can have
+// at most one instance of each noncustom layer; if you attempt to create a second
 // instance, CreateLayer fails. A stack can have an arbitrary number of custom
 // layers, so you can call CreateLayer as many times as you like for that layer
 // type. Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
-// Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) CreateLayer(ctx context.Context, params *CreateLayerInput, optFns ...func(*Options)) (*CreateLayerOutput, error) {
 	if params == nil {
 		params = &CreateLayerInput{}
@@ -50,8 +49,8 @@ type CreateLayerInput struct {
 	// name is also used as the name for the directory where your app files are
 	// installed. It can have a maximum of 200 characters, which are limited to the
 	// alphanumeric characters, '-', '_', and '.'. The built-in layers' short names are
-	// defined by AWS OpsWorks Stacks. For more information, see the Layer Reference
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html).
+	// defined by AWS OpsWorks Stacks. For more information, see the Layer Reference (https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html)
+	// .
 	//
 	// This member is required.
 	Shortname *string
@@ -68,36 +67,34 @@ type CreateLayerInput struct {
 	// This member is required.
 	Type types.LayerType
 
-	// One or more user-defined key-value pairs to be added to the stack attributes. To
-	// create a cluster layer, set the EcsClusterArn attribute to the cluster's ARN.
+	// One or more user-defined key-value pairs to be added to the stack attributes.
+	// To create a cluster layer, set the EcsClusterArn attribute to the cluster's ARN.
 	Attributes map[string]string
 
-	// Whether to automatically assign an Elastic IP address
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-	// to the layer's instances. For more information, see How to Edit a Layer
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
+	// Whether to automatically assign an Elastic IP address (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
+	// to the layer's instances. For more information, see How to Edit a Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html)
+	// .
 	AutoAssignElasticIps *bool
 
 	// For stacks that are running in a VPC, whether to automatically assign a public
 	// IP address to the layer's instances. For more information, see How to Edit a
-	// Layer
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
+	// Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html)
+	// .
 	AutoAssignPublicIps *bool
 
 	// Specifies CloudWatch Logs configuration options for the layer. For more
-	// information, see CloudWatchLogsLogStream.
+	// information, see CloudWatchLogsLogStream .
 	CloudWatchLogsConfiguration *types.CloudWatchLogsConfiguration
 
 	// The ARN of an IAM profile to be used for the layer's EC2 instances. For more
-	// information about IAM ARNs, see Using Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
+	// .
 	CustomInstanceProfileArn *string
 
 	// A JSON-formatted string containing custom stack configuration and deployment
 	// attributes to be installed on the layer's instances. For more information, see
-	// Using Custom JSON
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
-	// This feature is supported as of version 1.7.42 of the AWS CLI.
+	// Using Custom JSON (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html)
+	// . This feature is supported as of version 1.7.42 of the AWS CLI.
 	CustomJson *string
 
 	// A LayerCustomRecipes object that specifies the layer custom recipes.
@@ -109,13 +106,13 @@ type CreateLayerInput struct {
 	// Whether to disable auto healing for the layer.
 	EnableAutoHealing *bool
 
-	// Whether to install operating system and package updates when the instance boots.
-	// The default value is true. To control when updates are installed, set this value
-	// to false. You must then update your instances manually by using CreateDeployment
-	// to run the update_dependencies stack command or by manually running yum (Amazon
-	// Linux) or apt-get (Ubuntu) on the instances. To ensure that your instances have
-	// the latest security updates, we strongly recommend using the default value of
-	// true.
+	// Whether to install operating system and package updates when the instance
+	// boots. The default value is true . To control when updates are installed, set
+	// this value to false . You must then update your instances manually by using
+	// CreateDeployment to run the update_dependencies stack command or by manually
+	// running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. To ensure that
+	// your instances have the latest security updates, we strongly recommend using the
+	// default value of true .
 	InstallUpdatesOnBoot *bool
 
 	// A LifeCycleEventConfiguration object that you can use to configure the Shutdown

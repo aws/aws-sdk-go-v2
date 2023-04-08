@@ -47,7 +47,7 @@ type BatchGetMetricDataOutput struct {
 	// request.
 	Errors []types.MetricDataError
 
-	// A list of successfully retrieved MetricDataResult.
+	// A list of successfully retrieved MetricDataResult .
 	Results []types.MetricDataResult
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes modifications to the configuration of Bring Your
-// Own License (BYOL) for the specified account.
+// Retrieves a list that describes modifications to the configuration of Bring
+// Your Own License (BYOL) for the specified account.
 func (c *Client) DescribeAccountModifications(ctx context.Context, params *DescribeAccountModificationsInput, optFns ...func(*Options)) (*DescribeAccountModificationsOutput, error) {
 	if params == nil {
 		params = &DescribeAccountModificationsInput{}

@@ -113,8 +113,8 @@ func (c *Client) addOperationListReadinessChecksMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListReadinessChecksAPIClient is a client that implements the ListReadinessChecks
-// operation.
+// ListReadinessChecksAPIClient is a client that implements the
+// ListReadinessChecks operation.
 type ListReadinessChecksAPIClient interface {
 	ListReadinessChecks(context.Context, *ListReadinessChecksInput, ...func(*Options)) (*ListReadinessChecksOutput, error)
 }

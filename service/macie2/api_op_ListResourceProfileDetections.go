@@ -48,10 +48,10 @@ type ListResourceProfileDetectionsInput struct {
 
 type ListResourceProfileDetectionsOutput struct {
 
-	// An array of objects, one for each type of sensitive data that Amazon Macie found
-	// in the bucket. Each object reports the number of occurrences of the specified
-	// type and provides information about the custom data identifier or managed data
-	// identifier that detected the data.
+	// An array of objects, one for each type of sensitive data that Amazon Macie
+	// found in the bucket. Each object reports the number of occurrences of the
+	// specified type and provides information about the custom data identifier or
+	// managed data identifier that detected the data.
 	Detections []types.Detection
 
 	// The string to use in a subsequent request to get the next page of results in a

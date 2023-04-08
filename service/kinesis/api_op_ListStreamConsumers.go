@@ -34,9 +34,9 @@ func (c *Client) ListStreamConsumers(ctx context.Context, params *ListStreamCons
 type ListStreamConsumersInput struct {
 
 	// The ARN of the Kinesis data stream for which you want to list the registered
-	// consumers. For more information, see Amazon Resource Names (ARNs) and Amazon Web
-	// Services Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
+	// consumers. For more information, see Amazon Resource Names (ARNs) and Amazon
+	// Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams)
+	// .
 	//
 	// This member is required.
 	StreamARN *string
@@ -46,23 +46,23 @@ type ListStreamConsumersInput struct {
 	// greater than 100, at most 100 results are returned.
 	MaxResults *int32
 
-	// When the number of consumers that are registered with the data stream is greater
-	// than the default value for the MaxResults parameter, or if you explicitly
-	// specify a value for MaxResults that is less than the number of consumers that
-	// are registered with the data stream, the response includes a pagination token
-	// named NextToken. You can specify this NextToken value in a subsequent call to
-	// ListStreamConsumers to list the next set of registered consumers. Don't specify
-	// StreamName or StreamCreationTimestamp if you specify NextToken because the
-	// latter unambiguously identifies the stream. You can optionally specify a value
-	// for the MaxResults parameter when you specify NextToken. If you specify a
-	// MaxResults value that is less than the number of consumers that the operation
-	// returns if you don't specify MaxResults, the response will contain a new
-	// NextToken value. You can use the new NextToken value in a subsequent call to the
-	// ListStreamConsumers operation to list the next set of consumers. Tokens expire
-	// after 300 seconds. When you obtain a value for NextToken in the response to a
-	// call to ListStreamConsumers, you have 300 seconds to use that value. If you
-	// specify an expired token in a call to ListStreamConsumers, you get
-	// ExpiredNextTokenException.
+	// When the number of consumers that are registered with the data stream is
+	// greater than the default value for the MaxResults parameter, or if you
+	// explicitly specify a value for MaxResults that is less than the number of
+	// consumers that are registered with the data stream, the response includes a
+	// pagination token named NextToken . You can specify this NextToken value in a
+	// subsequent call to ListStreamConsumers to list the next set of registered
+	// consumers. Don't specify StreamName or StreamCreationTimestamp if you specify
+	// NextToken because the latter unambiguously identifies the stream. You can
+	// optionally specify a value for the MaxResults parameter when you specify
+	// NextToken . If you specify a MaxResults value that is less than the number of
+	// consumers that the operation returns if you don't specify MaxResults , the
+	// response will contain a new NextToken value. You can use the new NextToken
+	// value in a subsequent call to the ListStreamConsumers operation to list the
+	// next set of consumers. Tokens expire after 300 seconds. When you obtain a value
+	// for NextToken in the response to a call to ListStreamConsumers , you have 300
+	// seconds to use that value. If you specify an expired token in a call to
+	// ListStreamConsumers , you get ExpiredNextTokenException .
 	NextToken *string
 
 	// Specify this input parameter to distinguish data streams that have the same
@@ -80,17 +80,17 @@ type ListStreamConsumersOutput struct {
 	// An array of JSON objects. Each object represents one registered consumer.
 	Consumers []types.Consumer
 
-	// When the number of consumers that are registered with the data stream is greater
-	// than the default value for the MaxResults parameter, or if you explicitly
-	// specify a value for MaxResults that is less than the number of registered
-	// consumers, the response includes a pagination token named NextToken. You can
-	// specify this NextToken value in a subsequent call to ListStreamConsumers to list
-	// the next set of registered consumers. For more information about the use of this
-	// pagination token when calling the ListStreamConsumers operation, see
-	// ListStreamConsumersInput$NextToken. Tokens expire after 300 seconds. When you
-	// obtain a value for NextToken in the response to a call to ListStreamConsumers,
+	// When the number of consumers that are registered with the data stream is
+	// greater than the default value for the MaxResults parameter, or if you
+	// explicitly specify a value for MaxResults that is less than the number of
+	// registered consumers, the response includes a pagination token named NextToken .
+	// You can specify this NextToken value in a subsequent call to ListStreamConsumers
+	// to list the next set of registered consumers. For more information about the use
+	// of this pagination token when calling the ListStreamConsumers operation, see
+	// ListStreamConsumersInput$NextToken . Tokens expire after 300 seconds. When you
+	// obtain a value for NextToken in the response to a call to ListStreamConsumers ,
 	// you have 300 seconds to use that value. If you specify an expired token in a
-	// call to ListStreamConsumers, you get ExpiredNextTokenException.
+	// call to ListStreamConsumers , you get ExpiredNextTokenException .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -162,8 +162,8 @@ func (c *Client) addOperationListStreamConsumersMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListStreamConsumersAPIClient is a client that implements the ListStreamConsumers
-// operation.
+// ListStreamConsumersAPIClient is a client that implements the
+// ListStreamConsumers operation.
 type ListStreamConsumersAPIClient interface {
 	ListStreamConsumers(context.Context, *ListStreamConsumersInput, ...func(*Options)) (*ListStreamConsumersOutput, error)
 }

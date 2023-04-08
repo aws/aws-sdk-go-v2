@@ -16,15 +16,12 @@ import (
 )
 
 // Puts an Amazon S3 Storage Lens configuration. For more information about S3
-// Storage Lens, see Working with Amazon S3 Storage Lens
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html) in the
-// Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3
-// Storage Lens metrics glossary
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
+// Storage Lens, see Working with Amazon S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html)
+// in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see
+// S3 Storage Lens metrics glossary (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
 // in the Amazon S3 User Guide. To use this action, you must have permission to
 // perform the s3:PutStorageLensConfiguration action. For more information, see
-// Setting permissions to use Amazon S3 Storage Lens
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html)
+// Setting permissions to use Amazon S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html)
 // in the Amazon S3 User Guide.
 func (c *Client) PutStorageLensConfiguration(ctx context.Context, params *PutStorageLensConfigurationInput, optFns ...func(*Options)) (*PutStorageLensConfigurationOutput, error) {
 	if params == nil {
@@ -58,8 +55,8 @@ type PutStorageLensConfigurationInput struct {
 	// This member is required.
 	StorageLensConfiguration *types.StorageLensConfiguration
 
-	// The tag set of the S3 Storage Lens configuration. You can set up to a maximum of
-	// 50 tags.
+	// The tag set of the S3 Storage Lens configuration. You can set up to a maximum
+	// of 50 tags.
 	Tags []types.StorageLensTag
 
 	noSmithyDocumentSerde

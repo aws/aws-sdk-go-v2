@@ -33,7 +33,7 @@ func (c *Client) SearchFlowTemplates(ctx context.Context, params *SearchFlowTemp
 type SearchFlowTemplatesInput struct {
 
 	// An array of objects that limit the result set. The only valid filter is
-	// DEVICE_MODEL_ID.
+	// DEVICE_MODEL_ID .
 	Filters []types.FlowTemplateFilter
 
 	// The maximum number of results to return in the response.
@@ -124,8 +124,8 @@ func (c *Client) addOperationSearchFlowTemplatesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// SearchFlowTemplatesAPIClient is a client that implements the SearchFlowTemplates
-// operation.
+// SearchFlowTemplatesAPIClient is a client that implements the
+// SearchFlowTemplates operation.
 type SearchFlowTemplatesAPIClient interface {
 	SearchFlowTemplates(context.Context, *SearchFlowTemplatesInput, ...func(*Options)) (*SearchFlowTemplatesOutput, error)
 }

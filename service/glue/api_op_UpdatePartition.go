@@ -51,8 +51,8 @@ type UpdatePartitionInput struct {
 	// This member is required.
 	TableName *string
 
-	// The ID of the Data Catalog where the partition to be updated resides. If none is
-	// provided, the Amazon Web Services account ID is used by default.
+	// The ID of the Data Catalog where the partition to be updated resides. If none
+	// is provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	noSmithyDocumentSerde

@@ -38,7 +38,7 @@ type GetPullRequestOverrideStateInput struct {
 	PullRequestId *string
 
 	// The system-generated ID of the revision for the pull request. To retrieve the
-	// most recent revision ID, use GetPullRequest.
+	// most recent revision ID, use GetPullRequest .
 	//
 	// This member is required.
 	RevisionId *string

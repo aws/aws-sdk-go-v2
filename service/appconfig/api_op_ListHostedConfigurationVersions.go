@@ -48,10 +48,10 @@ type ListHostedConfigurationVersionsInput struct {
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
 
-	// An optional filter that can be used to specify the version label of an AppConfig
-	// hosted configuration version. This parameter supports filtering by prefix using
-	// a wildcard, for example "v2*". If you don't specify an asterisk at the end of
-	// the value, only an exact match is returned.
+	// An optional filter that can be used to specify the version label of an
+	// AppConfig hosted configuration version. This parameter supports filtering by
+	// prefix using a wildcard, for example "v2*". If you don't specify an asterisk at
+	// the end of the value, only an exact match is returned.
 	VersionLabel *string
 
 	noSmithyDocumentSerde

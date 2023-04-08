@@ -34,10 +34,10 @@ type DescribeGlobalReplicationGroupsInput struct {
 	// The name of the Global datastore
 	GlobalReplicationGroupId *string
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -56,9 +56,9 @@ type DescribeGlobalReplicationGroupsOutput struct {
 	// Indicates the slot configuration and global identifier for each slice group.
 	GlobalReplicationGroups []types.GlobalReplicationGroup
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords. >
 	Marker *string
 

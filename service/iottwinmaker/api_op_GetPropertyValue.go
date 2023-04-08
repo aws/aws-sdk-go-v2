@@ -13,8 +13,8 @@ import (
 )
 
 // Gets the property values for a component, component type, entity, or workspace.
-// You must specify a value for either componentName, componentTypeId, entityId, or
-// workspaceId.
+// You must specify a value for either componentName , componentTypeId , entityId ,
+// or workspaceId .
 func (c *Client) GetPropertyValue(ctx context.Context, params *GetPropertyValueInput, optFns ...func(*Options)) (*GetPropertyValueOutput, error) {
 	if params == nil {
 		params = &GetPropertyValueInput{}

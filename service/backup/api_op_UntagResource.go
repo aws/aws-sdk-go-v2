@@ -29,8 +29,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// An ARN that uniquely identifies a resource. The format of the ARN depends on the
-	// type of the tagged resource.
+	// An ARN that uniquely identifies a resource. The format of the ARN depends on
+	// the type of the tagged resource.
 	//
 	// This member is required.
 	ResourceArn *string

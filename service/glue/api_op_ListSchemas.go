@@ -49,8 +49,8 @@ type ListSchemasInput struct {
 
 type ListSchemasOutput struct {
 
-	// A continuation token for paginating the returned list of tokens, returned if the
-	// current segment of the list is not the last.
+	// A continuation token for paginating the returned list of tokens, returned if
+	// the current segment of the list is not the last.
 	NextToken *string
 
 	// An array of SchemaListItem objects containing details of each schema.

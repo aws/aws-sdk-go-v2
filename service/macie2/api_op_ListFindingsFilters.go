@@ -115,8 +115,8 @@ func (c *Client) addOperationListFindingsFiltersMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListFindingsFiltersAPIClient is a client that implements the ListFindingsFilters
-// operation.
+// ListFindingsFiltersAPIClient is a client that implements the
+// ListFindingsFilters operation.
 type ListFindingsFiltersAPIClient interface {
 	ListFindingsFilters(context.Context, *ListFindingsFiltersInput, ...func(*Options)) (*ListFindingsFiltersOutput, error)
 }

@@ -35,7 +35,7 @@ type ListVpcEndpointsForDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// If your initial ListEndpointsForDomain operation returns a nextToken, you can
+	// If your initial ListEndpointsForDomain operation returns a nextToken , you can
 	// include the returned nextToken in subsequent ListEndpointsForDomain operations,
 	// which returns results in the next page.
 	NextToken *string

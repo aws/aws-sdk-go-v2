@@ -10,11 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a dataset group created using the CreateDatasetGroup
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html)
-// operation. You can only delete dataset groups that have a status of ACTIVE,
-// CREATE_FAILED, or UPDATE_FAILED. To get the status, use the DescribeDatasetGroup
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html)
+// Deletes a dataset group created using the CreateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html)
+// operation. You can only delete dataset groups that have a status of ACTIVE ,
+// CREATE_FAILED , or UPDATE_FAILED . To get the status, use the
+// DescribeDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html)
 // operation. This operation deletes only the dataset group, not the datasets in
 // the group.
 func (c *Client) DeleteDatasetGroup(ctx context.Context, params *DeleteDatasetGroupInput, optFns ...func(*Options)) (*DeleteDatasetGroupOutput, error) {

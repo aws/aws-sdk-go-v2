@@ -31,9 +31,9 @@ const (
 	BGPPeerStateDeleted   BGPPeerState = "deleted"
 )
 
-// Values returns all known values for BGPPeerState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BGPPeerState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (BGPPeerState) Values() []BGPPeerState {
 	return []BGPPeerState{
 		"verifying",
@@ -53,9 +53,9 @@ const (
 	BGPStatusUnknown BGPStatus = "unknown"
 )
 
-// Values returns all known values for BGPStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for BGPStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BGPStatus) Values() []BGPStatus {
 	return []BGPStatus{
 		"up",
@@ -351,8 +351,8 @@ const (
 	VirtualInterfaceStateUnknown    VirtualInterfaceState = "unknown"
 )
 
-// Values returns all known values for VirtualInterfaceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for VirtualInterfaceState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualInterfaceState) Values() []VirtualInterfaceState {
 	return []VirtualInterfaceState{

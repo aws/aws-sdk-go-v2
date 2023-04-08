@@ -20,12 +20,11 @@ import (
 // EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group
 // and Amazon Redshift cluster must be in the same Amazon Web Services Region. If
 // you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview
-// of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing
-// (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). You must also
-// associate the security group with a cluster so that clients running on these IP
-// addresses or the EC2 instance are authorized to connect to the cluster. For
-// information about managing security groups, go to Working with Security Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+// . You must also associate the security group with a cluster so that clients
+// running on these IP addresses or the EC2 instance are authorized to connect to
+// the cluster. For information about managing security groups, go to Working with
+// Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) AuthorizeClusterSecurityGroupIngress(ctx context.Context, params *AuthorizeClusterSecurityGroupIngressInput, optFns ...func(*Options)) (*AuthorizeClusterSecurityGroupIngressOutput, error) {
 	if params == nil {

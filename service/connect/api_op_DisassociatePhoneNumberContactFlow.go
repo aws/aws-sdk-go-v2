@@ -18,7 +18,7 @@ import (
 // number is claimed to a traffic distribution group and you are calling this API
 // using an instance in the alternate Amazon Web Services Region associated with
 // the traffic distribution group, you must provide a full phone number ARN. If a
-// UUID is provided in this scenario, you will receive a ResourceNotFoundException.
+// UUID is provided in this scenario, you will receive a ResourceNotFoundException .
 func (c *Client) DisassociatePhoneNumberContactFlow(ctx context.Context, params *DisassociatePhoneNumberContactFlowInput, optFns ...func(*Options)) (*DisassociatePhoneNumberContactFlowOutput, error) {
 	if params == nil {
 		params = &DisassociatePhoneNumberContactFlowInput{}
@@ -36,8 +36,7 @@ func (c *Client) DisassociatePhoneNumberContactFlow(ctx context.Context, params 
 
 type DisassociatePhoneNumberContactFlowInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

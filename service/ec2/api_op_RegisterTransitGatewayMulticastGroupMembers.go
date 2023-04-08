@@ -11,14 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers members (network interfaces) with the transit gateway multicast group.
-// A member is a network interface associated with a supported EC2 instance that
-// receives multicast traffic. For information about supported instances, see
-// Multicast Consideration
-// (https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits)
+// Registers members (network interfaces) with the transit gateway multicast
+// group. A member is a network interface associated with a supported EC2 instance
+// that receives multicast traffic. For information about supported instances, see
+// Multicast Consideration (https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits)
 // in Amazon VPC Transit Gateways. After you add the members, use
-// SearchTransitGatewayMulticastGroups
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html)
+// SearchTransitGatewayMulticastGroups (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html)
 // to verify that the members were added to the transit gateway multicast group.
 func (c *Client) RegisterTransitGatewayMulticastGroupMembers(ctx context.Context, params *RegisterTransitGatewayMulticastGroupMembersInput, optFns ...func(*Options)) (*RegisterTransitGatewayMulticastGroupMembersOutput, error) {
 	if params == nil {
@@ -50,8 +48,8 @@ type RegisterTransitGatewayMulticastGroupMembersInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The IP address assigned to the transit gateway multicast group.

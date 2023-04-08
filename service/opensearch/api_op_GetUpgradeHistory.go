@@ -41,9 +41,9 @@ type GetUpgradeHistoryInput struct {
 	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial GetUpgradeHistory operation returns a nextToken, you can include
-	// the returned nextToken in subsequent GetUpgradeHistory operations, which returns
-	// results in the next page.
+	// If your initial GetUpgradeHistory operation returns a nextToken , you can
+	// include the returned nextToken in subsequent GetUpgradeHistory operations,
+	// which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde

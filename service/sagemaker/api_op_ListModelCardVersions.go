@@ -49,7 +49,7 @@ type ListModelCardVersionsInput struct {
 	ModelCardStatus types.ModelCardStatus
 
 	// If the response to a previous ListModelCardVersions request was truncated, the
-	// response includes a NextToken. To retrieve the next set of model card versions,
+	// response includes a NextToken . To retrieve the next set of model card versions,
 	// use the token in the next request.
 	NextToken *string
 
@@ -69,8 +69,8 @@ type ListModelCardVersionsOutput struct {
 	// This member is required.
 	ModelCardVersionSummaryList []types.ModelCardVersionSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of model card versions, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of model card versions, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

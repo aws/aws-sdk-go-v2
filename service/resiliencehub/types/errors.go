@@ -151,8 +151,8 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception occurs when you have exceeded the limit on the number of requests
-// per second.
+// This exception occurs when you have exceeded the limit on the number of
+// requests per second.
 type ThrottlingException struct {
 	Message *string
 

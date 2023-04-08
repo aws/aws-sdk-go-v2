@@ -32,15 +32,15 @@ func (c *Client) ListEmailTemplates(ctx context.Context, params *ListEmailTempla
 
 // Represents a request to list the email templates present in your Amazon SES
 // account in the current Amazon Web Services Region. For more information, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// .
 type ListEmailTemplatesInput struct {
 
 	// A token returned from a previous call to ListEmailTemplates to indicate the
 	// position in the list of email templates.
 	NextToken *string
 
-	// The number of results to show in a single call to ListEmailTemplates. If the
+	// The number of results to show in a single call to ListEmailTemplates . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 1, and can be no
@@ -58,8 +58,8 @@ type ListEmailTemplatesOutput struct {
 	// next 10 email templates.
 	NextToken *string
 
-	// An array the contains the name and creation time stamp for each template in your
-	// Amazon SES account.
+	// An array the contains the name and creation time stamp for each template in
+	// your Amazon SES account.
 	TemplatesMetadata []types.EmailTemplateMetadata
 
 	// Metadata pertaining to the operation's result.
@@ -139,7 +139,7 @@ var _ ListEmailTemplatesAPIClient = (*Client)(nil)
 // ListEmailTemplatesPaginatorOptions is the paginator options for
 // ListEmailTemplates
 type ListEmailTemplatesPaginatorOptions struct {
-	// The number of results to show in a single call to ListEmailTemplates. If the
+	// The number of results to show in a single call to ListEmailTemplates . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 1, and can be no

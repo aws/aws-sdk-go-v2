@@ -53,8 +53,8 @@ type DescribeInstanceTypeLimitsInput struct {
 // operation.
 type DescribeInstanceTypeLimitsOutput struct {
 
-	// Map that contains all applicable instance type limits.data refers to data
-	// nodes.master refers to dedicated master nodes.
+	// Map that contains all applicable instance type limits. data refers to data
+	// nodes. master refers to dedicated master nodes.
 	LimitsByRole map[string]types.Limits
 
 	// Metadata pertaining to the operation's result.

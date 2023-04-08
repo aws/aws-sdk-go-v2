@@ -11,13 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the receipt rule sets that exist under your AWS account in the current AWS
-// Region. If there are additional receipt rule sets to be retrieved, you will
+// Lists the receipt rule sets that exist under your AWS account in the current
+// AWS Region. If there are additional receipt rule sets to be retrieved, you will
 // receive a NextToken that you can provide to the next call to ListReceiptRuleSets
 // to retrieve the additional entries. For information about managing receipt rule
-// sets, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html).
-// You can execute this operation no more than once per second.
+// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) ListReceiptRuleSets(ctx context.Context, params *ListReceiptRuleSetsInput, optFns ...func(*Options)) (*ListReceiptRuleSetsOutput, error) {
 	if params == nil {
 		params = &ListReceiptRuleSetsInput{}
@@ -35,8 +34,8 @@ func (c *Client) ListReceiptRuleSets(ctx context.Context, params *ListReceiptRul
 
 // Represents a request to list the receipt rule sets that exist under your AWS
 // account. You use receipt rule sets to receive email with Amazon SES. For more
-// information, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// .
 type ListReceiptRuleSetsInput struct {
 
 	// A token returned from a previous call to ListReceiptRuleSets to indicate the
@@ -54,8 +53,8 @@ type ListReceiptRuleSetsOutput struct {
 	// up to 100 receipt rule sets at a time.
 	NextToken *string
 
-	// The metadata for the currently active receipt rule set. The metadata consists of
-	// the rule set name and the timestamp of when the rule set was created.
+	// The metadata for the currently active receipt rule set. The metadata consists
+	// of the rule set name and the timestamp of when the rule set was created.
 	RuleSets []types.ReceiptRuleSetMetadata
 
 	// Metadata pertaining to the operation's result.

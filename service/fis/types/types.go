@@ -7,9 +7,8 @@ import (
 	"time"
 )
 
-// Describes an action. For more information, see FIS actions
-// (https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html) in
-// the Fault Injection Simulator User Guide.
+// Describes an action. For more information, see FIS actions (https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html)
+// in the Fault Injection Simulator User Guide.
 type Action struct {
 
 	// The description for the action.
@@ -132,9 +131,8 @@ type CreateExperimentTemplateStopConditionInput struct {
 
 // Specifies a target for an experiment. You must specify at least one Amazon
 // Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs
-// and tags. For more information, see Targets
-// (https://docs.aws.amazon.com/fis/latest/userguide/targets.html) in the Fault
-// Injection Simulator User Guide.
+// and tags. For more information, see Targets (https://docs.aws.amazon.com/fis/latest/userguide/targets.html)
+// in the Fault Injection Simulator User Guide.
 type CreateExperimentTemplateTargetInput struct {
 
 	// The resource type. The resource type must be supported for the specified action.
@@ -145,17 +143,13 @@ type CreateExperimentTemplateTargetInput struct {
 	// Scopes the identified resources to a specific count of the resources at random,
 	// or a percentage of the resources. All identified resources are included in the
 	// target.
-	//
-	// * ALL - Run the action on all identified targets. This is the
-	// default.
-	//
-	// * COUNT(n) - Run the action on the specified number of targets, chosen
-	// from the identified targets at random. For example, COUNT(1) selects one of the
-	// targets.
-	//
-	// * PERCENT(n) - Run the action on the specified percentage of targets,
-	// chosen from the identified targets at random. For example, PERCENT(25) selects
-	// 25% of the targets.
+	//   - ALL - Run the action on all identified targets. This is the default.
+	//   - COUNT(n) - Run the action on the specified number of targets, chosen from
+	//   the identified targets at random. For example, COUNT(1) selects one of the
+	//   targets.
+	//   - PERCENT(n) - Run the action on the specified percentage of targets, chosen
+	//   from the identified targets at random. For example, PERCENT(25) selects 25% of
+	//   the targets.
 	//
 	// This member is required.
 	SelectionMode *string
@@ -567,9 +561,8 @@ type ExperimentTemplateTargetFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a filter used for the target resource input in an experiment template.
-// For more information, see Resource filters
-// (https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters)
+// Specifies a filter used for the target resource input in an experiment
+// template. For more information, see Resource filters (https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters)
 // in the Fault Injection Simulator User Guide.
 type ExperimentTemplateTargetInputFilter struct {
 
@@ -663,8 +656,8 @@ type UpdateExperimentTemplateLogConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a stop condition for an experiment. You can define a stop condition as
-// a CloudWatch alarm.
+// Specifies a stop condition for an experiment. You can define a stop condition
+// as a CloudWatch alarm.
 type UpdateExperimentTemplateStopConditionInput struct {
 
 	// The source for the stop condition. Specify aws:cloudwatch:alarm if the stop

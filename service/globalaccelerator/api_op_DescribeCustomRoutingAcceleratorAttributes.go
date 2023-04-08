@@ -29,8 +29,8 @@ func (c *Client) DescribeCustomRoutingAcceleratorAttributes(ctx context.Context,
 
 type DescribeCustomRoutingAcceleratorAttributesInput struct {
 
-	// The Amazon Resource Name (ARN) of the custom routing accelerator to describe the
-	// attributes for.
+	// The Amazon Resource Name (ARN) of the custom routing accelerator to describe
+	// the attributes for.
 	//
 	// This member is required.
 	AcceleratorArn *string

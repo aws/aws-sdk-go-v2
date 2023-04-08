@@ -16,12 +16,11 @@
 // Web Services General Reference. You can also manage your WorkSpaces resources
 // using the WorkSpaces console, Command Line Interface (CLI), and SDKs. For more
 // information about administering WorkSpaces, see the Amazon WorkSpaces
-// Administration Guide
-// (https://docs.aws.amazon.com/workspaces/latest/adminguide/). For more
-// information about using the Amazon WorkSpaces client application or web browser
-// to access provisioned WorkSpaces, see the Amazon WorkSpaces User Guide
-// (https://docs.aws.amazon.com/workspaces/latest/userguide/). For more information
-// about using the CLI to manage your WorkSpaces resources, see the WorkSpaces
-// section of the CLI Reference
-// (https://docs.aws.amazon.com/cli/latest/reference/workspaces/index.html).
+// Administration Guide (https://docs.aws.amazon.com/workspaces/latest/adminguide/)
+// . For more information about using the Amazon WorkSpaces client application or
+// web browser to access provisioned WorkSpaces, see the Amazon WorkSpaces User
+// Guide (https://docs.aws.amazon.com/workspaces/latest/userguide/) . For more
+// information about using the CLI to manage your WorkSpaces resources, see the
+// WorkSpaces section of the CLI Reference (https://docs.aws.amazon.com/cli/latest/reference/workspaces/index.html)
+// .
 package workspaces

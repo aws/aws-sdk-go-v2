@@ -33,8 +33,8 @@ type DescribeDataSharesForProducerInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeDataSharesForProducer request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
+	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request.
 	Marker *string
@@ -49,8 +49,8 @@ type DescribeDataSharesForProducerInput struct {
 	// datashares.
 	ProducerArn *string
 
-	// An identifier giving the status of a datashare in the producer. If this field is
-	// specified, Amazon Redshift returns the list of datashares that have the
+	// An identifier giving the status of a datashare in the producer. If this field
+	// is specified, Amazon Redshift returns the list of datashares that have the
 	// specified status.
 	Status types.DataShareStatusForProducer
 
@@ -64,8 +64,8 @@ type DescribeDataSharesForProducerOutput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeDataSharesForProducer request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
+	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request.
 	Marker *string

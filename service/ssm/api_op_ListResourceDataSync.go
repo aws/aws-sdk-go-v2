@@ -15,7 +15,7 @@ import (
 // Lists your resource data sync configurations. Includes information about the
 // last time a sync attempted to start, the last sync status, and the last time a
 // sync successfully completed. The number of sync configurations might be too
-// large to return using a single call to ListResourceDataSync. You can limit the
+// large to return using a single call to ListResourceDataSync . You can limit the
 // number of sync configurations returned by using the MaxResults parameter. To
 // determine whether there are more sync configurations to list, check the value of
 // NextToken in the output. If there are more sync configurations to list, you can
@@ -47,8 +47,8 @@ type ListResourceDataSyncInput struct {
 
 	// View a list of resource data syncs according to the sync type. Specify
 	// SyncToDestination to view resource data syncs that synchronize data to an Amazon
-	// S3 bucket. Specify SyncFromSource to view resource data syncs from Organizations
-	// or from multiple Amazon Web Services Regions.
+	// S3 bucket. Specify SyncFromSource to view resource data syncs from
+	// Organizations or from multiple Amazon Web Services Regions.
 	SyncType *string
 
 	noSmithyDocumentSerde

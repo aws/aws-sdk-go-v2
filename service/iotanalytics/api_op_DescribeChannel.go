@@ -34,8 +34,8 @@ type DescribeChannelInput struct {
 	// This member is required.
 	ChannelName *string
 
-	// If true, additional statistical information about the channel is included in the
-	// response. This feature can't be used with a channel whose S3 storage is
+	// If true, additional statistical information about the channel is included in
+	// the response. This feature can't be used with a channel whose S3 storage is
 	// customer-managed.
 	IncludeStatistics bool
 
@@ -47,8 +47,8 @@ type DescribeChannelOutput struct {
 	// An object that contains information about the channel.
 	Channel *types.Channel
 
-	// Statistics about the channel. Included if the includeStatistics parameter is set
-	// to true in the request.
+	// Statistics about the channel. Included if the includeStatistics parameter is
+	// set to true in the request.
 	Statistics *types.ChannelStatistics
 
 	// Metadata pertaining to the operation's result.

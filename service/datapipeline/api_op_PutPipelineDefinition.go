@@ -16,21 +16,14 @@ import (
 // validates the configuration as it adds it to the pipeline. Changes to the
 // pipeline are saved unless one of the following three validation errors exists in
 // the pipeline.
+//   - An object is missing a name or identifier field.
+//   - A string or reference field is empty.
+//   - The number of objects in the pipeline exceeds the maximum allowed objects.
+//   - The pipeline is in a FINISHED state.
 //
-// * An object is missing a name or identifier field.
-//
-// * A string or
-// reference field is empty.
-//
-// * The number of objects in the pipeline exceeds the
-// maximum allowed objects.
-//
-// * The pipeline is in a FINISHED state.
-//
-// Pipeline
-// object definitions are passed to the PutPipelineDefinition action and returned
-// by the GetPipelineDefinition action. Example 1 This example sets an valid
-// pipeline configuration and returns success. POST / HTTP/1.1 Content-Type:
+// Pipeline object definitions are passed to the PutPipelineDefinition action and
+// returned by the GetPipelineDefinition action. Example 1 This example sets an
+// valid pipeline configuration and returns success. POST / HTTP/1.1 Content-Type:
 // application/x-amz-json-1.1 X-Amz-Target: DataPipeline.PutPipelineDefinition
 // Content-Length: 914 Host: datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon,
 // 12 Nov 2012 17:49:52 GMT Authorization: AuthParams {"pipelineId":
@@ -115,11 +108,11 @@ type PutPipelineDefinitionOutput struct {
 	Errored bool
 
 	// The validation errors that are associated with the objects defined in
-	// pipelineObjects.
+	// pipelineObjects .
 	ValidationErrors []types.ValidationError
 
 	// The validation warnings that are associated with the objects defined in
-	// pipelineObjects.
+	// pipelineObjects .
 	ValidationWarnings []types.ValidationWarning
 
 	// Metadata pertaining to the operation's result.

@@ -35,7 +35,7 @@ type CreateTestGridUrlInput struct {
 	// This member is required.
 	ExpiresInSeconds *int32
 
-	// ARN (from CreateTestGridProject or ListTestGridProjects) to associate with the
+	// ARN (from CreateTestGridProject or ListTestGridProjects ) to associate with the
 	// short-term URL.
 	//
 	// This member is required.
@@ -50,7 +50,7 @@ type CreateTestGridUrlOutput struct {
 	Expires *time.Time
 
 	// A signed URL, expiring in CreateTestGridUrlRequest$expiresInSeconds seconds, to
-	// be passed to a RemoteWebDriver.
+	// be passed to a RemoteWebDriver .
 	Url *string
 
 	// Metadata pertaining to the operation's result.

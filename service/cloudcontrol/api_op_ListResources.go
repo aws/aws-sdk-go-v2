@@ -13,8 +13,7 @@ import (
 )
 
 // Returns information about the specified resources. For more information, see
-// Discovering resources
-// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-list.html)
+// Discovering resources (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-list.html)
 // in the Amazon Web Services Cloud Control API User Guide. You can use this action
 // to return information about existing resources in your account and Amazon Web
 // Services Region, whether those resources were provisioned using Cloud Control
@@ -48,7 +47,7 @@ type ListResourcesInput struct {
 	// the response object's NextToken parameter value is set to a token. To retrieve
 	// the next set of results, call this action again and assign that token to the
 	// request object's NextToken parameter. If there are no remaining results, the
-	// previous response object's NextToken parameter is set to null.
+	// previous response object's NextToken parameter is set to null .
 	NextToken *string
 
 	// The resource model to use to select the resources to return.
@@ -57,14 +56,11 @@ type ListResourcesInput struct {
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// for Cloud Control API to use when performing this resource operation. The role
 	// specified must have the permissions required for this operation. The necessary
-	// permissions for each event handler are defined in the handlers
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
-	// section of the resource type definition schema
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html).
-	// If you do not specify a role, Cloud Control API uses a temporary session created
-	// using your Amazon Web Services user credentials. For more information, see
-	// Specifying credentials
-	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
+	// permissions for each event handler are defined in the handlers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
+	// section of the resource type definition schema (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
+	// . If you do not specify a role, Cloud Control API uses a temporary session
+	// created using your Amazon Web Services user credentials. For more information,
+	// see Specifying credentials (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 

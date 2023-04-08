@@ -28,8 +28,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	return out, nil
 }
 
-// The request information to remove a tag from a rescore execution plan. A rescore
-// execution plan is an Amazon Kendra Intelligent Ranking resource used for
+// The request information to remove a tag from a rescore execution plan. A
+// rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for
 // provisioning the Rescore API.
 type UntagResourceInput struct {
 
@@ -47,8 +47,8 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// If the action is successful, the service sends back an HTTP 200 response with an
-// empty HTTP body.
+// If the action is successful, the service sends back an HTTP 200 response with
+// an empty HTTP body.
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

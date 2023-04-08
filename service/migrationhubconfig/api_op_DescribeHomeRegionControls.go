@@ -41,12 +41,12 @@ type DescribeHomeRegionControlsInput struct {
 
 	// If a NextToken was returned by a previous call, more results are available. To
 	// retrieve the next page of results, make the call again using the returned token
-	// in NextToken.
+	// in NextToken .
 	NextToken *string
 
 	// The target parameter specifies the identifier to which the home region is
-	// applied, which is always of type ACCOUNT. It applies the home region to the
-	// current ACCOUNT.
+	// applied, which is always of type ACCOUNT . It applies the home region to the
+	// current ACCOUNT .
 	Target *types.Target
 
 	noSmithyDocumentSerde
@@ -59,7 +59,7 @@ type DescribeHomeRegionControlsOutput struct {
 
 	// If a NextToken was returned by a previous call, more results are available. To
 	// retrieve the next page of results, make the call again using the returned token
-	// in NextToken.
+	// in NextToken .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

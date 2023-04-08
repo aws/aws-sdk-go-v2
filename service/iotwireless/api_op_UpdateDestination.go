@@ -40,7 +40,7 @@ type UpdateDestinationInput struct {
 	// The new rule name or topic rule to send messages to.
 	Expression *string
 
-	// The type of value in Expression.
+	// The type of value in Expression .
 	ExpressionType types.ExpressionType
 
 	// The ARN of the IAM Role that authorizes the destination.

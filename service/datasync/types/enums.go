@@ -28,8 +28,8 @@ const (
 	AtimeBestEffort Atime = "BEST_EFFORT"
 )
 
-// Values returns all known values for Atime. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Atime. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Atime) Values() []Atime {
 	return []Atime{
@@ -65,9 +65,9 @@ const (
 	EndpointTypeFips        EndpointType = "FIPS"
 )
 
-// Values returns all known values for EndpointType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointType) Values() []EndpointType {
 	return []EndpointType{
 		"PUBLIC",
@@ -224,8 +224,8 @@ const (
 	MtimePreserve Mtime = "PRESERVE"
 )
 
-// Values returns all known values for Mtime. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Mtime. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Mtime) Values() []Mtime {
 	return []Mtime{
@@ -547,9 +547,9 @@ const (
 	TaskQueueingDisabled TaskQueueing = "DISABLED"
 )
 
-// Values returns all known values for TaskQueueing. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaskQueueing. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TaskQueueing) Values() []TaskQueueing {
 	return []TaskQueueing{
 		"ENABLED",
@@ -589,9 +589,9 @@ const (
 	TransferModeAll     TransferMode = "ALL"
 )
 
-// Values returns all known values for TransferMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TransferMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TransferMode) Values() []TransferMode {
 	return []TransferMode{
 		"CHANGED",

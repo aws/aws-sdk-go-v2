@@ -35,7 +35,7 @@ type StartFileTransferInput struct {
 	ConnectorId *string
 
 	// An array of strings. Each string represents the absolute path for one outbound
-	// file transfer. For example,  DOC-EXAMPLE-BUCKET/myfile.txt .
+	// file transfer. For example, DOC-EXAMPLE-BUCKET/myfile.txt .
 	//
 	// This member is required.
 	SendFilePaths []string

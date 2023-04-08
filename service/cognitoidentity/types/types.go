@@ -14,7 +14,7 @@ type CognitoIdentityProvider struct {
 	ClientId *string
 
 	// The provider name for an Amazon Cognito user pool. For example,
-	// cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.
+	// cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789 .
 	ProviderName *string
 
 	// TRUE if server-side token validation is enabled for the identity provider’s
@@ -86,7 +86,7 @@ type MappingRule struct {
 	Claim *string
 
 	// The match condition that specifies how closely the claim value in the IdP token
-	// must match Value.
+	// must match Value .
 	//
 	// This member is required.
 	MatchType MappingRuleMatchType
@@ -114,10 +114,10 @@ type RoleMapping struct {
 	// This member is required.
 	Type RoleMappingType
 
-	// If you specify Token or Rules as the Type, AmbiguousRoleResolution is required.
-	// Specifies the action to be taken if either no rules match the claim value for
-	// the Rules type, or there is no cognito:preferred_role claim and there are
-	// multiple cognito:roles matches for the Token type.
+	// If you specify Token or Rules as the Type , AmbiguousRoleResolution is
+	// required. Specifies the action to be taken if either no rules match the claim
+	// value for the Rules type, or there is no cognito:preferred_role claim and there
+	// are multiple cognito:roles matches for the Token type.
 	AmbiguousRoleResolution AmbiguousRoleResolutionType
 
 	// The rules to be used for mapping users to roles. If you specify Rules as the

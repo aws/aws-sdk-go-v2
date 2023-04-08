@@ -45,15 +45,15 @@ type UpdateMethodInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// For more information about supported patch operations, see Patch Operations
-	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
+	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
+	// .
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
 }
 
-// Represents a client-facing interface by which the client calls the API to access
-// back-end resources. A Method resource is integrated with an Integration
+// Represents a client-facing interface by which the client calls the API to
+// access back-end resources. A Method resource is integrated with an Integration
 // resource. Both consist of a request and one or more responses. The method
 // request takes the client input that is passed to the back end through the
 // integration request. A method response returns the output from the back end to
@@ -84,7 +84,7 @@ type UpdateMethodOutput struct {
 	AuthorizationType *string
 
 	// The identifier of an Authorizer to use on this method. The authorizationType
-	// must be CUSTOM.
+	// must be CUSTOM .
 	AuthorizerId *string
 
 	// The method's HTTP verb.
@@ -103,19 +103,19 @@ type UpdateMethodOutput struct {
 	// example.
 	OperationName *string
 
-	// A key-value map specifying data schemas, represented by Model resources, (as the
-	// mapped value) of the request payloads of given content types (as the mapping
+	// A key-value map specifying data schemas, represented by Model resources, (as
+	// the mapped value) of the request payloads of given content types (as the mapping
 	// key).
 	RequestModels map[string]string
 
-	// A key-value map defining required or optional method request parameters that can
-	// be accepted by API Gateway. A key is a method request parameter name matching
-	// the pattern of method.request.{location}.{name}, where location is querystring,
-	// path, or header and name is a valid and unique parameter name. The value
-	// associated with the key is a Boolean flag indicating whether the parameter is
-	// required (true) or optional (false). The method request parameter names defined
-	// here are available in Integration to be mapped to integration request parameters
-	// or templates.
+	// A key-value map defining required or optional method request parameters that
+	// can be accepted by API Gateway. A key is a method request parameter name
+	// matching the pattern of method.request.{location}.{name} , where location is
+	// querystring , path , or header and name is a valid and unique parameter name.
+	// The value associated with the key is a Boolean flag indicating whether the
+	// parameter is required ( true ) or optional ( false ). The method request
+	// parameter names defined here are available in Integration to be mapped to
+	// integration request parameters or templates.
 	RequestParameters map[string]bool
 
 	// The identifier of a RequestValidator for request validation.

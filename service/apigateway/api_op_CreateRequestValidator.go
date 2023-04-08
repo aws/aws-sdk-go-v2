@@ -38,11 +38,11 @@ type CreateRequestValidatorInput struct {
 	Name *string
 
 	// A Boolean flag to indicate whether to validate request body according to the
-	// configured model schema for the method (true) or not (false).
+	// configured model schema for the method ( true ) or not ( false ).
 	ValidateRequestBody bool
 
-	// A Boolean flag to indicate whether to validate request parameters, true, or not
-	// false.
+	// A Boolean flag to indicate whether to validate request parameters, true , or not
+	// false .
 	ValidateRequestParameters bool
 
 	noSmithyDocumentSerde
@@ -61,8 +61,8 @@ type CreateRequestValidatorOutput struct {
 	// configured Model schema.
 	ValidateRequestBody bool
 
-	// A Boolean flag to indicate whether to validate request parameters (true) or not
-	// (false).
+	// A Boolean flag to indicate whether to validate request parameters ( true ) or
+	// not ( false ).
 	ValidateRequestParameters bool
 
 	// Metadata pertaining to the operation's result.

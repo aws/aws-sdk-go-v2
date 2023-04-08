@@ -13,9 +13,8 @@ import (
 // Deletes Backup Vault Lock from a backup vault specified by a backup vault name.
 // If the Vault Lock configuration is immutable, then you cannot delete Vault Lock
 // using API operations, and you will receive an InvalidRequestException if you
-// attempt to do so. For more information, see Vault Lock
-// (https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html) in the
-// Backup Developer Guide.
+// attempt to do so. For more information, see Vault Lock (https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html)
+// in the Backup Developer Guide.
 func (c *Client) DeleteBackupVaultLockConfiguration(ctx context.Context, params *DeleteBackupVaultLockConfigurationInput, optFns ...func(*Options)) (*DeleteBackupVaultLockConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteBackupVaultLockConfigurationInput{}

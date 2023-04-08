@@ -17,24 +17,12 @@ import (
 
 // Lists current S3 Batch Operations jobs and jobs that have ended within the last
 // 30 days for the Amazon Web Services account making the request. For more
-// information, see S3 Batch Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html) in the
-// Amazon S3 User Guide. Related actions include:
-//
-// * CreateJob
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
-//
-// *
-// DescribeJob
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
-//
-// *
-// UpdateJobPriority
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
-//
-// *
-// UpdateJobStatus
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
+// information, see S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html)
+// in the Amazon S3 User Guide. Related actions include:
+//   - CreateJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
+//   - DescribeJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
+//   - UpdateJobPriority (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
+//   - UpdateJobStatus (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {
 	if params == nil {
 		params = &ListJobsInput{}
@@ -81,8 +69,8 @@ type ListJobsOutput struct {
 	Jobs []types.JobListDescriptor
 
 	// If the List Jobs request produced more than the maximum number of results, you
-	// can pass this value into a subsequent List Jobs request in order to retrieve the
-	// next page of results.
+	// can pass this value into a subsequent List Jobs request in order to retrieve
+	// the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

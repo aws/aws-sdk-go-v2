@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified client ID (also known as audience) from the list of client
-// IDs registered for the specified IAM OpenID Connect (OIDC) provider resource
-// object. This operation is idempotent; it does not fail or return an error if you
-// try to remove a client ID that does not exist.
+// Removes the specified client ID (also known as audience) from the list of
+// client IDs registered for the specified IAM OpenID Connect (OIDC) provider
+// resource object. This operation is idempotent; it does not fail or return an
+// error if you try to remove a client ID that does not exist.
 func (c *Client) RemoveClientIDFromOpenIDConnectProvider(ctx context.Context, params *RemoveClientIDFromOpenIDConnectProviderInput, optFns ...func(*Options)) (*RemoveClientIDFromOpenIDConnectProviderOutput, error) {
 	if params == nil {
 		params = &RemoveClientIDFromOpenIDConnectProviderInput{}
@@ -32,8 +32,8 @@ func (c *Client) RemoveClientIDFromOpenIDConnectProvider(ctx context.Context, pa
 type RemoveClientIDFromOpenIDConnectProviderInput struct {
 
 	// The client ID (also known as audience) to remove from the IAM OIDC provider
-	// resource. For more information about client IDs, see
-	// CreateOpenIDConnectProvider.
+	// resource. For more information about client IDs, see CreateOpenIDConnectProvider
+	// .
 	//
 	// This member is required.
 	ClientID *string
@@ -41,9 +41,8 @@ type RemoveClientIDFromOpenIDConnectProviderInput struct {
 	// The Amazon Resource Name (ARN) of the IAM OIDC provider resource to remove the
 	// client ID from. You can get a list of OIDC provider ARNs by using the
 	// ListOpenIDConnectProviders operation. For more information about ARNs, see
-	// Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	OpenIDConnectProviderArn *string

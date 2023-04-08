@@ -50,17 +50,12 @@ type ListModelPackagesInput struct {
 	// group.
 	ModelPackageGroupName *string
 
-	// A filter that returns only the model packages of the specified type. This can be
-	// one of the following values.
-	//
-	// * UNVERSIONED - List only unversioined models.
-	// This is the default value if no ModelPackageType is specified.
-	//
-	// * VERSIONED -
-	// List only versioned models.
-	//
-	// * BOTH - List both versioned and unversioned
-	// models.
+	// A filter that returns only the model packages of the specified type. This can
+	// be one of the following values.
+	//   - UNVERSIONED - List only unversioined models. This is the default value if no
+	//   ModelPackageType is specified.
+	//   - VERSIONED - List only versioned models.
+	//   - BOTH - List both versioned and unversioned models.
 	ModelPackageType types.ModelPackageType
 
 	// A string in the model package name. This filter returns only model packages
@@ -68,14 +63,14 @@ type ListModelPackagesInput struct {
 	NameContains *string
 
 	// If the response to a previous ListModelPackages request was truncated, the
-	// response includes a NextToken. To retrieve the next set of model packages, use
+	// response includes a NextToken . To retrieve the next set of model packages, use
 	// the token in the next request.
 	NextToken *string
 
-	// The parameter by which to sort the results. The default is CreationTime.
+	// The parameter by which to sort the results. The default is CreationTime .
 	SortBy types.ModelPackageSortBy
 
-	// The sort order for the results. The default is Ascending.
+	// The sort order for the results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -88,8 +83,8 @@ type ListModelPackagesOutput struct {
 	// This member is required.
 	ModelPackageSummaryList []types.ModelPackageSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of model packages, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of model packages, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

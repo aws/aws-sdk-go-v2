@@ -10,9 +10,9 @@ const (
 	ArchitectureArm64 Architecture = "arm64"
 )
 
-// Values returns all known values for Architecture. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Architecture. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Architecture) Values() []Architecture {
 	return []Architecture{
 		"x86_64",
@@ -45,9 +45,9 @@ const (
 	EndPointTypeKafkaBootstrapServers EndPointType = "KAFKA_BOOTSTRAP_SERVERS"
 )
 
-// Values returns all known values for EndPointType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EndPointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EndPointType) Values() []EndPointType {
 	return []EndPointType{
 		"KAFKA_BOOTSTRAP_SERVERS",
@@ -82,9 +82,9 @@ const (
 	FullDocumentDefault      FullDocument = "Default"
 )
 
-// Values returns all known values for FullDocument. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FullDocument. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FullDocument) Values() []FullDocument {
 	return []FullDocument{
 		"UpdateLookup",
@@ -478,8 +478,8 @@ const (
 	StateFailed   State = "Failed"
 )
 
-// Values returns all known values for State. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{

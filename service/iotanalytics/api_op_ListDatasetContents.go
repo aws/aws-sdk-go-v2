@@ -133,8 +133,8 @@ func (c *Client) addOperationListDatasetContentsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListDatasetContentsAPIClient is a client that implements the ListDatasetContents
-// operation.
+// ListDatasetContentsAPIClient is a client that implements the
+// ListDatasetContents operation.
 type ListDatasetContentsAPIClient interface {
 	ListDatasetContents(context.Context, *ListDatasetContentsInput, ...func(*Options)) (*ListDatasetContentsOutput, error)
 }

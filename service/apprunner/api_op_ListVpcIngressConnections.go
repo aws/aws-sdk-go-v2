@@ -36,14 +36,14 @@ type ListVpcIngressConnectionsInput struct {
 	Filter *types.ListVpcIngressConnectionsFilter
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
 	// identical to the ones that are specified in the initial request. If you don't
-	// specify NextToken, the request retrieves the first result page.
+	// specify NextToken , the request retrieves the first result page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -57,8 +57,8 @@ type ListVpcIngressConnectionsOutput struct {
 	// This member is required.
 	VpcIngressConnectionSummaryList []types.VpcIngressConnectionSummary
 
-	// The token that you can pass in a subsequent request to get the next result page.
-	// It's returned in a paginated request.
+	// The token that you can pass in a subsequent request to get the next result
+	// page. It's returned in a paginated request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -139,7 +139,7 @@ var _ ListVpcIngressConnectionsAPIClient = (*Client)(nil)
 // ListVpcIngressConnections
 type ListVpcIngressConnectionsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	Limit int32
 

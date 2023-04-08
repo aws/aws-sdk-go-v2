@@ -34,10 +34,9 @@ func (c *Client) AssociateDefaultView(ctx context.Context, params *AssociateDefa
 
 type AssociateDefaultViewInput struct {
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the view to set as the default for the Amazon Web Services Region and Amazon Web
-	// Services account in which you call this operation. The specified view must
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the view to set as the default for the Amazon Web Services Region and Amazon
+	// Web Services account in which you call this operation. The specified view must
 	// already exist in the called Region.
 	//
 	// This member is required.
@@ -48,9 +47,8 @@ type AssociateDefaultViewInput struct {
 
 type AssociateDefaultViewOutput struct {
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the view that the operation set as the default for queries made in the Amazon
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the view that the operation set as the default for queries made in the Amazon
 	// Web Services Region and Amazon Web Services account in which you called this
 	// operation.
 	ViewArn *string

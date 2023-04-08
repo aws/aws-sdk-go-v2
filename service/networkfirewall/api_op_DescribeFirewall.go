@@ -43,11 +43,11 @@ type DescribeFirewallInput struct {
 
 type DescribeFirewallOutput struct {
 
-	// The configuration settings for the firewall. These settings include the firewall
-	// policy and the subnets in your VPC to use for the firewall endpoints.
+	// The configuration settings for the firewall. These settings include the
+	// firewall policy and the subnets in your VPC to use for the firewall endpoints.
 	Firewall *types.Firewall
 
-	// Detailed information about the current status of a Firewall. You can retrieve
+	// Detailed information about the current status of a Firewall . You can retrieve
 	// this for a firewall by calling DescribeFirewall and providing the firewall name
 	// and ARN.
 	FirewallStatus *types.FirewallStatus
@@ -61,7 +61,7 @@ type DescribeFirewallOutput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

@@ -34,9 +34,9 @@ type DeleteClusterInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// The user-supplied name of a final cluster snapshot. This is the unique name that
-	// identifies the snapshot. MemoryDB creates the snapshot, and then deletes the
-	// cluster immediately afterward.
+	// The user-supplied name of a final cluster snapshot. This is the unique name
+	// that identifies the snapshot. MemoryDB creates the snapshot, and then deletes
+	// the cluster immediately afterward.
 	FinalSnapshotName *string
 
 	noSmithyDocumentSerde

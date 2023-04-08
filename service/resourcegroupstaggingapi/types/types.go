@@ -29,31 +29,25 @@ type ComplianceDetails struct {
 // Services service that hosts the resource that the ARN key represents. The
 // following are common error codes that you might receive from other Amazon Web
 // Services services:
+//   - InternalServiceException – This can mean that the Resource Groups Tagging
+//     API didn't receive a response from another Amazon Web Services service. It can
+//     also mean that the resource type in the request is not supported by the Resource
+//     Groups Tagging API. In these cases, it's safe to retry the request and then call
+//     GetResources (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html)
+//     to verify the changes.
+//   - AccessDeniedException – This can mean that you need permission to call the
+//     tagging operations in the Amazon Web Services service that contains the
+//     resource. For example, to use the Resource Groups Tagging API to tag a Amazon
+//     CloudWatch alarm resource, you need permission to call both TagResources (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html)
+//     and TagResource (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html)
+//     in the CloudWatch API.
 //
-// * InternalServiceException – This can mean that the Resource
-// Groups Tagging API didn't receive a response from another Amazon Web Services
-// service. It can also mean that the resource type in the request is not supported
-// by the Resource Groups Tagging API. In these cases, it's safe to retry the
-// request and then call GetResources
-// (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html)
-// to verify the changes.
-//
-// * AccessDeniedException – This can mean that you need
-// permission to call the tagging operations in the Amazon Web Services service
-// that contains the resource. For example, to use the Resource Groups Tagging API
-// to tag a Amazon CloudWatch alarm resource, you need permission to call both
-// TagResources
-// (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html)
-// and TagResource
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html)
-// in the CloudWatch API.
-//
-// For more information on errors that are generated from
-// other Amazon Web Services services, see the documentation for that service.
+// For more information on errors that are generated from other Amazon Web
+// Services services, see the documentation for that service.
 type FailureInfo struct {
 
-	// The code of the common error. Valid values include InternalServiceException,
-	// InvalidParameterException, and any valid error code returned by the Amazon Web
+	// The code of the common error. Valid values include InternalServiceException ,
+	// InvalidParameterException , and any valid error code returned by the Amazon Web
 	// Services service that hosts the resource that you want to tag.
 	ErrorCode ErrorCode
 
@@ -99,8 +93,7 @@ type Summary struct {
 	ResourceType *string
 
 	// The account identifier or the root identifier of the organization. If you don't
-	// know the root ID, you can call the Organizations ListRoots
-	// (https://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html)
+	// know the root ID, you can call the Organizations ListRoots (https://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html)
 	// API.
 	TargetId *string
 

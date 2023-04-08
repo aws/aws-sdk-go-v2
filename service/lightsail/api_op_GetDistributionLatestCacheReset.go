@@ -30,10 +30,10 @@ func (c *Client) GetDistributionLatestCacheReset(ctx context.Context, params *Ge
 
 type GetDistributionLatestCacheResetInput struct {
 
-	// The name of the distribution for which to return the timestamp of the last cache
-	// reset. Use the GetDistributions action to get a list of distribution names that
-	// you can specify. When omitted, the response includes the latest cache reset
-	// timestamp of all your distributions.
+	// The name of the distribution for which to return the timestamp of the last
+	// cache reset. Use the GetDistributions action to get a list of distribution
+	// names that you can specify. When omitted, the response includes the latest cache
+	// reset timestamp of all your distributions.
 	DistributionName *string
 
 	noSmithyDocumentSerde
@@ -41,7 +41,7 @@ type GetDistributionLatestCacheResetInput struct {
 
 type GetDistributionLatestCacheResetOutput struct {
 
-	// The timestamp of the last cache reset (e.g., 1479734909.17) in Unix time format.
+	// The timestamp of the last cache reset (e.g., 1479734909.17 ) in Unix time format.
 	CreateTime *time.Time
 
 	// The status of the last cache reset.

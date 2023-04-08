@@ -42,8 +42,8 @@ type ListCampaignsInput struct {
 	NextToken *string
 
 	// Optional parameter to filter the results by the status of each created campaign
-	// in your account. The status can be one of: CREATING, WAITING_FOR_APPROVAL,
-	// RUNNING, or SUSPENDED.
+	// in your account. The status can be one of: CREATING , WAITING_FOR_APPROVAL ,
+	// RUNNING , or SUSPENDED .
 	Status *string
 
 	noSmithyDocumentSerde

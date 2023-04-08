@@ -31,14 +31,11 @@ func (c *Client) DescribeFleetAdvisorSchemaObjectSummary(ctx context.Context, pa
 
 type DescribeFleetAdvisorSchemaObjectSummaryInput struct {
 
-	// If you specify any of the following filters, the output includes information for
-	// only those schema objects that meet the filter criteria:
-	//
-	// * schema-id – The ID
-	// of the schema, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d.
-	//
-	// Example:
-	// describe-fleet-advisor-schema-object-summary --filter
+	// If you specify any of the following filters, the output includes information
+	// for only those schema objects that meet the filter criteria:
+	//   - schema-id – The ID of the schema, for example
+	//   d4610ac5-e323-4ad9-bc50-eaf7249dfe9d .
+	// Example: describe-fleet-advisor-schema-object-summary --filter
 	// Name="schema-id",Values="50"
 	Filters []types.Filter
 
@@ -134,16 +131,16 @@ func (c *Client) addOperationDescribeFleetAdvisorSchemaObjectSummaryMiddlewares(
 	return nil
 }
 
-// DescribeFleetAdvisorSchemaObjectSummaryAPIClient is a client that implements the
-// DescribeFleetAdvisorSchemaObjectSummary operation.
+// DescribeFleetAdvisorSchemaObjectSummaryAPIClient is a client that implements
+// the DescribeFleetAdvisorSchemaObjectSummary operation.
 type DescribeFleetAdvisorSchemaObjectSummaryAPIClient interface {
 	DescribeFleetAdvisorSchemaObjectSummary(context.Context, *DescribeFleetAdvisorSchemaObjectSummaryInput, ...func(*Options)) (*DescribeFleetAdvisorSchemaObjectSummaryOutput, error)
 }
 
 var _ DescribeFleetAdvisorSchemaObjectSummaryAPIClient = (*Client)(nil)
 
-// DescribeFleetAdvisorSchemaObjectSummaryPaginatorOptions is the paginator options
-// for DescribeFleetAdvisorSchemaObjectSummary
+// DescribeFleetAdvisorSchemaObjectSummaryPaginatorOptions is the paginator
+// options for DescribeFleetAdvisorSchemaObjectSummary
 type DescribeFleetAdvisorSchemaObjectSummaryPaginatorOptions struct {
 	// Sets the maximum number of records returned in the response.
 	Limit int32

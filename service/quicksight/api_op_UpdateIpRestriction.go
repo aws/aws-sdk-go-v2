@@ -11,8 +11,8 @@ import (
 )
 
 // Updates the content and status of IP rules. To use this operation, you need to
-// provide the entire map of rules. You can use the DescribeIpRestriction operation
-// to get the current rule map.
+// provide the entire map of rules. You can use the DescribeIpRestriction
+// operation to get the current rule map.
 func (c *Client) UpdateIpRestriction(ctx context.Context, params *UpdateIpRestrictionInput, optFns ...func(*Options)) (*UpdateIpRestrictionOutput, error) {
 	if params == nil {
 		params = &UpdateIpRestrictionInput{}

@@ -53,9 +53,9 @@ type CreatePoolInput struct {
 	MessageType types.MessageType
 
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
-	// SenderId or SenderIdArn. You can use DescribePhoneNumbers to find the values for
-	// PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get the
-	// values for SenderId and SenderIdArn.
+	// SenderId or SenderIdArn. You can use DescribePhoneNumbers to find the values
+	// for PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get
+	// the values for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string
@@ -65,8 +65,8 @@ type CreatePoolInput struct {
 	// used for the request to ensure idempotency.
 	ClientToken *string
 
-	// By default this is set to false. When set to true the pool can't be deleted. You
-	// can change this value using the UpdatePool action.
+	// By default this is set to false. When set to true the pool can't be deleted.
+	// You can change this value using the UpdatePool action.
 	DeletionProtectionEnabled *bool
 
 	// An array of tags (key and value pairs) associated with the pool.
@@ -77,8 +77,8 @@ type CreatePoolInput struct {
 
 type CreatePoolOutput struct {
 
-	// The time when the pool was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	CreatedTimestamp *time.Time
 
 	// When set to true deletion protection is enabled. By default this is set to
@@ -109,14 +109,10 @@ type CreatePoolOutput struct {
 	SharedRoutesEnabled bool
 
 	// The current status of the pool.
-	//
-	// * CREATING: The pool is currently being created
-	// and isn't yet available for use.
-	//
-	// * ACTIVE: The pool is active and available for
-	// use.
-	//
-	// * DELETING: The pool is being deleted.
+	//   - CREATING: The pool is currently being created and isn't yet available for
+	//   use.
+	//   - ACTIVE: The pool is active and available for use.
+	//   - DELETING: The pool is being deleted.
 	Status types.PoolStatus
 
 	// An array of tags (key and value pairs) associated with the pool.

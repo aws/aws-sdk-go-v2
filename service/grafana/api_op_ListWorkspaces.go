@@ -14,8 +14,8 @@ import (
 
 // Returns a list of Amazon Managed Grafana workspaces in the account, with some
 // information about each workspace. For more complete information about one
-// workspace, use DescribeWorkspace
-// (https://docs.aws.amazon.com/AAMG/latest/APIReference/API_DescribeWorkspace.html).
+// workspace, use DescribeWorkspace (https://docs.aws.amazon.com/AAMG/latest/APIReference/API_DescribeWorkspace.html)
+// .
 func (c *Client) ListWorkspaces(ctx context.Context, params *ListWorkspacesInput, optFns ...func(*Options)) (*ListWorkspacesOutput, error) {
 	if params == nil {
 		params = &ListWorkspacesInput{}
@@ -36,8 +36,8 @@ type ListWorkspacesInput struct {
 	// The maximum number of workspaces to include in the results.
 	MaxResults *int32
 
-	// The token for the next set of workspaces to return. (You receive this token from
-	// a previous ListWorkspaces operation.)
+	// The token for the next set of workspaces to return. (You receive this token
+	// from a previous ListWorkspaces operation.)
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,8 +45,8 @@ type ListWorkspacesInput struct {
 
 type ListWorkspacesOutput struct {
 
-	// An array of structures that contain some information about the workspaces in the
-	// account.
+	// An array of structures that contain some information about the workspaces in
+	// the account.
 	//
 	// This member is required.
 	Workspaces []types.WorkspaceSummary

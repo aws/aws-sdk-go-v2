@@ -44,8 +44,8 @@ type DescribeUserPoolClientInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the response from the server from a request to describe the user pool
-// client.
+// Represents the response from the server from a request to describe the user
+// pool client.
 type DescribeUserPoolClientOutput struct {
 
 	// The user pool client from a server response to describe the user pool client.

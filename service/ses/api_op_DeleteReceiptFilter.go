@@ -11,9 +11,8 @@ import (
 )
 
 // Deletes the specified IP address filter. For information about managing IP
-// address filters, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html).
-// You can execute this operation no more than once per second.
+// address filters, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) DeleteReceiptFilter(ctx context.Context, params *DeleteReceiptFilterInput, optFns ...func(*Options)) (*DeleteReceiptFilterOutput, error) {
 	if params == nil {
 		params = &DeleteReceiptFilterInput{}
@@ -30,9 +29,9 @@ func (c *Client) DeleteReceiptFilter(ctx context.Context, params *DeleteReceiptF
 }
 
 // Represents a request to delete an IP address filter. You use IP address filters
-// when you receive email with Amazon SES. For more information, see the Amazon SES
-// Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// when you receive email with Amazon SES. For more information, see the Amazon
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// .
 type DeleteReceiptFilterInput struct {
 
 	// The name of the IP address filter to delete.

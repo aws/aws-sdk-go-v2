@@ -31,16 +31,16 @@ func (c *Client) GetApiKeys(ctx context.Context, params *GetApiKeysInput, optFns
 // A request to get information about the current ApiKeys resource.
 type GetApiKeysInput struct {
 
-	// The identifier of a customer in AWS Marketplace or an external system, such as a
-	// developer portal.
+	// The identifier of a customer in AWS Marketplace or an external system, such as
+	// a developer portal.
 	CustomerId *string
 
-	// A boolean flag to specify whether (true) or not (false) the result contains key
-	// values.
+	// A boolean flag to specify whether ( true ) or not ( false ) the result contains
+	// key values.
 	IncludeValues *bool
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit *int32
 
 	// The name of queried API keys.
@@ -143,8 +143,8 @@ var _ GetApiKeysAPIClient = (*Client)(nil)
 
 // GetApiKeysPaginatorOptions is the paginator options for GetApiKeys
 type GetApiKeysPaginatorOptions struct {
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

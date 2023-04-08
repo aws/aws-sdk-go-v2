@@ -27,8 +27,8 @@ type ClassificationType struct {
 }
 
 // (Discontinued) The classification type that Amazon Macie Classic applies to the
-// associated S3 resources. At least one of the classification types (oneTime or
-// continuous) must be specified.
+// associated S3 resources. At least one of the classification types ( oneTime or
+// continuous ) must be specified.
 type ClassificationTypeUpdate struct {
 
 	// (Discontinued) A continuous classification of the objects that are added to a
@@ -88,8 +88,8 @@ type S3Resource struct {
 
 // (Discontinued) The S3 resources that you want to associate with Amazon Macie
 // Classic for monitoring and data classification. This data type is used as a
-// request parameter in the AssociateS3Resources action and a response parameter in
-// the ListS3Resources action.
+// request parameter in the AssociateS3Resources action and a response parameter
+// in the ListS3Resources action.
 type S3ResourceClassification struct {
 
 	// (Discontinued) The name of the S3 bucket that you want to associate with Amazon
@@ -98,8 +98,8 @@ type S3ResourceClassification struct {
 	// This member is required.
 	BucketName *string
 
-	// (Discontinued) The classification type that you want to specify for the resource
-	// associated with Amazon Macie Classic.
+	// (Discontinued) The classification type that you want to specify for the
+	// resource associated with Amazon Macie Classic.
 	//
 	// This member is required.
 	ClassificationType *ClassificationType

@@ -35,8 +35,8 @@ type CreateTypeInput struct {
 	ApiId *string
 
 	// The type definition, in GraphQL Schema Definition Language (SDL) format. For
-	// more information, see the GraphQL SDL documentation
-	// (http://graphql.org/learn/schema/).
+	// more information, see the GraphQL SDL documentation (http://graphql.org/learn/schema/)
+	// .
 	//
 	// This member is required.
 	Definition *string

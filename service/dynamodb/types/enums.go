@@ -31,9 +31,9 @@ const (
 	BackupStatusAvailable BackupStatus = "AVAILABLE"
 )
 
-// Values returns all known values for BackupStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BackupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (BackupStatus) Values() []BackupStatus {
 	return []BackupStatus{
 		"CREATING",
@@ -288,9 +288,9 @@ const (
 	ExportFormatIon          ExportFormat = "ION"
 )
 
-// Values returns all known values for ExportFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExportFormat) Values() []ExportFormat {
 	return []ExportFormat{
 		"DYNAMODB_JSON",
@@ -307,9 +307,9 @@ const (
 	ExportStatusFailed     ExportStatus = "FAILED"
 )
 
-// Values returns all known values for ExportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExportStatus) Values() []ExportStatus {
 	return []ExportStatus{
 		"IN_PROGRESS",
@@ -351,9 +351,9 @@ const (
 	ImportStatusFailed     ImportStatus = "FAILED"
 )
 
-// Values returns all known values for ImportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ImportStatus) Values() []ImportStatus {
 	return []ImportStatus{
 		"IN_PROGRESS",
@@ -662,9 +662,9 @@ const (
 	SSEStatusUpdating  SSEStatus = "UPDATING"
 )
 
-// Values returns all known values for SSEStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SSEStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SSEStatus) Values() []SSEStatus {
 	return []SSEStatus{
 		"ENABLING",

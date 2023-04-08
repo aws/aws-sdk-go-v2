@@ -15,14 +15,12 @@
 // as infrastructure as code (IaC) services and tools such as CloudFormation and
 // Terraform. This API reference describes the supported DDL operations in detail.
 // For the list of all supported CQL APIs, see Supported Cassandra APIs,
-// operations, and data types in Amazon Keyspaces
-// (https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html) in
-// the Amazon Keyspaces Developer Guide. To learn how Amazon Keyspaces API actions
-// are recorded with CloudTrail, see Amazon Keyspaces information in CloudTrail
-// (https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail)
+// operations, and data types in Amazon Keyspaces (https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html)
+// in the Amazon Keyspaces Developer Guide. To learn how Amazon Keyspaces API
+// actions are recorded with CloudTrail, see Amazon Keyspaces information in
+// CloudTrail (https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail)
 // in the Amazon Keyspaces Developer Guide. For more information about Amazon Web
 // Services APIs, for example how to implement retry logic or how to sign Amazon
-// Web Services API requests, see Amazon Web Services APIs
-// (https://docs.aws.amazon.com/general/latest/gr/aws-apis.html) in the General
-// Reference.
+// Web Services API requests, see Amazon Web Services APIs (https://docs.aws.amazon.com/general/latest/gr/aws-apis.html)
+// in the General Reference.
 package keyspaces

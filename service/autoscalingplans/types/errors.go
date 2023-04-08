@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Concurrent updates caused an exception, for example, if you request an update to
-// a scaling plan that already has a pending update.
+// Concurrent updates caused an exception, for example, if you request an update
+// to a scaling plan that already has a pending update.
 type ConcurrentUpdateException struct {
 	Message *string
 

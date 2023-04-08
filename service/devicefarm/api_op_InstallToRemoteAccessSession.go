@@ -47,8 +47,8 @@ type InstallToRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the response from the server after AWS Device Farm makes a request to
-// install to a remote access session.
+// Represents the response from the server after AWS Device Farm makes a request
+// to install to a remote access session.
 type InstallToRemoteAccessSessionOutput struct {
 
 	// An app to upload or that has been uploaded.

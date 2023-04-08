@@ -32,12 +32,8 @@ type DescribePatchGroupsInput struct {
 
 	// Each element in the array is a structure containing a key-value pair. Supported
 	// keys for DescribePatchGroups include the following:
-	//
-	// * NAME_PREFIX Sample
-	// values: AWS- | My-.
-	//
-	// * OPERATING_SYSTEM Sample values: AMAZON_LINUX | SUSE |
-	// WINDOWS
+	//   - NAME_PREFIX Sample values: AWS- | My- .
+	//   - OPERATING_SYSTEM Sample values: AMAZON_LINUX | SUSE | WINDOWS
 	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patch groups to return (per page).
@@ -53,12 +49,9 @@ type DescribePatchGroupsInput struct {
 type DescribePatchGroupsOutput struct {
 
 	// Each entry in the array contains:
-	//
-	// * PatchGroup: string (between 1 and 256
-	// characters. Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)
-	//
-	// * PatchBaselineIdentity: A
-	// PatchBaselineIdentity element.
+	//   - PatchGroup : string (between 1 and 256 characters. Regex:
+	//   ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)
+	//   - PatchBaselineIdentity : A PatchBaselineIdentity element.
 	Mappings []types.PatchGroupPatchBaselineMapping
 
 	// The token to use when requesting the next set of items. If there are no
@@ -131,8 +124,8 @@ func (c *Client) addOperationDescribePatchGroupsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribePatchGroupsAPIClient is a client that implements the DescribePatchGroups
-// operation.
+// DescribePatchGroupsAPIClient is a client that implements the
+// DescribePatchGroups operation.
 type DescribePatchGroupsAPIClient interface {
 	DescribePatchGroups(context.Context, *DescribePatchGroupsInput, ...func(*Options)) (*DescribePatchGroupsOutput, error)
 }

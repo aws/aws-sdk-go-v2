@@ -68,9 +68,9 @@ const (
 	AddOnTypeStopInstanceOnIdle AddOnType = "StopInstanceOnIdle"
 )
 
-// Values returns all known values for AddOnType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AddOnType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AddOnType) Values() []AddOnType {
 	return []AddOnType{
 		"AutoSnapshot",
@@ -166,9 +166,9 @@ const (
 	BehaviorEnumCacheSetting     BehaviorEnum = "cache"
 )
 
-// Values returns all known values for BehaviorEnum. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BehaviorEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (BehaviorEnum) Values() []BehaviorEnum {
 	return []BehaviorEnum{
 		"dont-cache",
@@ -243,8 +243,8 @@ const (
 	CertificateDomainValidationStatusSuccess           CertificateDomainValidationStatus = "SUCCESS"
 )
 
-// Values returns all known values for CertificateDomainValidationStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for CertificateDomainValidationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (CertificateDomainValidationStatus) Values() []CertificateDomainValidationStatus {
@@ -349,8 +349,8 @@ const (
 	ContactMethodVerificationProtocolEmail ContactMethodVerificationProtocol = "Email"
 )
 
-// Values returns all known values for ContactMethodVerificationProtocol. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for ContactMethodVerificationProtocol. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ContactMethodVerificationProtocol) Values() []ContactMethodVerificationProtocol {
@@ -454,9 +454,9 @@ const (
 	ContainerServiceProtocolUdp   ContainerServiceProtocol = "UDP"
 )
 
-// Values returns all known values for ContainerServiceProtocol. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContainerServiceProtocol. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerServiceProtocol) Values() []ContainerServiceProtocol {
 	return []ContainerServiceProtocol{
 		"HTTP",
@@ -479,8 +479,8 @@ const (
 	ContainerServiceStateDeploying ContainerServiceState = "DEPLOYING"
 )
 
-// Values returns all known values for ContainerServiceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ContainerServiceState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerServiceState) Values() []ContainerServiceState {
 	return []ContainerServiceState{
@@ -576,9 +576,9 @@ const (
 	DiskStateUnknown   DiskState = "unknown"
 )
 
-// Values returns all known values for DiskState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for DiskState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DiskState) Values() []DiskState {
 	return []DiskState{
 		"pending",
@@ -726,9 +726,9 @@ const (
 	HttpEndpointEnabled  HttpEndpoint = "enabled"
 )
 
-// Values returns all known values for HttpEndpoint. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HttpEndpoint. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (HttpEndpoint) Values() []HttpEndpoint {
 	return []HttpEndpoint{
 		"disabled",
@@ -860,8 +860,8 @@ const (
 	InstanceMetadataStateApplied InstanceMetadataState = "applied"
 )
 
-// Values returns all known values for InstanceMetadataState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InstanceMetadataState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceMetadataState) Values() []InstanceMetadataState {
 	return []InstanceMetadataState{
@@ -929,8 +929,8 @@ const (
 	InstanceSnapshotStateAvailable InstanceSnapshotState = "available"
 )
 
-// Values returns all known values for InstanceSnapshotState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InstanceSnapshotState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceSnapshotState) Values() []InstanceSnapshotState {
 	return []InstanceSnapshotState{
@@ -1092,9 +1092,9 @@ const (
 	LoadBalancerTlsCertificateDomainStatusSuccess           LoadBalancerTlsCertificateDomainStatus = "SUCCESS"
 )
 
-// Values returns all known values for LoadBalancerTlsCertificateDomainStatus. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for LoadBalancerTlsCertificateDomainStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (LoadBalancerTlsCertificateDomainStatus) Values() []LoadBalancerTlsCertificateDomainStatus {
 	return []LoadBalancerTlsCertificateDomainStatus{
@@ -1628,9 +1628,9 @@ const (
 	OriginProtocolPolicyEnumHTTPSOnly OriginProtocolPolicyEnum = "https-only"
 )
 
-// Values returns all known values for OriginProtocolPolicyEnum. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OriginProtocolPolicyEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginProtocolPolicyEnum) Values() []OriginProtocolPolicyEnum {
 	return []OriginProtocolPolicyEnum{
 		"http-only",
@@ -1686,9 +1686,9 @@ const (
 	PortStateClosed PortState = "closed"
 )
 
-// Values returns all known values for PortState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for PortState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PortState) Values() []PortState {
 	return []PortState{
 		"open",
@@ -1814,9 +1814,9 @@ const (
 	RelationalDatabaseEngineMysql RelationalDatabaseEngine = "mysql"
 )
 
-// Values returns all known values for RelationalDatabaseEngine. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RelationalDatabaseEngine. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RelationalDatabaseEngine) Values() []RelationalDatabaseEngine {
 	return []RelationalDatabaseEngine{
 		"mysql",
@@ -1835,9 +1835,10 @@ const (
 	RelationalDatabaseMetricNameNetworkTransmitThroughput RelationalDatabaseMetricName = "NetworkTransmitThroughput"
 )
 
-// Values returns all known values for RelationalDatabaseMetricName. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RelationalDatabaseMetricName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (RelationalDatabaseMetricName) Values() []RelationalDatabaseMetricName {
 	return []RelationalDatabaseMetricName{
 		"CPUUtilization",
@@ -1858,8 +1859,8 @@ const (
 	RelationalDatabasePasswordVersionPending  RelationalDatabasePasswordVersion = "PENDING"
 )
 
-// Values returns all known values for RelationalDatabasePasswordVersion. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for RelationalDatabasePasswordVersion. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (RelationalDatabasePasswordVersion) Values() []RelationalDatabasePasswordVersion {
@@ -1936,9 +1937,9 @@ const (
 	ResourceTypeBucket                     ResourceType = "Bucket"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"ContainerService",

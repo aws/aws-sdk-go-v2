@@ -13,8 +13,7 @@ import (
 
 // Updates a topic rule destination. You use this to change the status, endpoint
 // URL, or confirmation URL of the destination. Requires permission to access the
-// UpdateTopicRuleDestination
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// UpdateTopicRuleDestination (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateTopicRuleDestination(ctx context.Context, params *UpdateTopicRuleDestinationInput, optFns ...func(*Options)) (*UpdateTopicRuleDestinationOutput, error) {
 	if params == nil {
@@ -40,16 +39,16 @@ type UpdateTopicRuleDestinationInput struct {
 
 	// The status of the topic rule destination. Valid values are: IN_PROGRESS A topic
 	// rule destination was created but has not been confirmed. You can set status to
-	// IN_PROGRESS by calling UpdateTopicRuleDestination. Calling
+	// IN_PROGRESS by calling UpdateTopicRuleDestination . Calling
 	// UpdateTopicRuleDestination causes a new confirmation challenge to be sent to
 	// your confirmation endpoint. ENABLED Confirmation was completed, and traffic to
 	// this destination is allowed. You can set status to DISABLED by calling
-	// UpdateTopicRuleDestination. DISABLED Confirmation was completed, and traffic to
+	// UpdateTopicRuleDestination . DISABLED Confirmation was completed, and traffic to
 	// this destination is not allowed. You can set status to ENABLED by calling
-	// UpdateTopicRuleDestination. ERROR Confirmation could not be completed, for
+	// UpdateTopicRuleDestination . ERROR Confirmation could not be completed, for
 	// example if the confirmation timed out. You can call GetTopicRuleDestination for
 	// details about the error. You can set status to IN_PROGRESS by calling
-	// UpdateTopicRuleDestination. Calling UpdateTopicRuleDestination causes a new
+	// UpdateTopicRuleDestination . Calling UpdateTopicRuleDestination causes a new
 	// confirmation challenge to be sent to your confirmation endpoint.
 	//
 	// This member is required.

@@ -36,9 +36,9 @@ type DescribeUsersInput struct {
 	// Filter to determine the list of User IDs to return.
 	Filters []types.Filter
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords. >
 	Marker *string
 
@@ -55,9 +55,9 @@ type DescribeUsersInput struct {
 
 type DescribeUsersOutput struct {
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords. >
 	Marker *string
 

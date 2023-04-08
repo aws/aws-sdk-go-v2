@@ -13,9 +13,9 @@ import (
 	"time"
 )
 
-// Lists the values reported for an IoT Device Defender metric (device-side metric,
-// cloud-side metric, or custom metric) by the given thing during the specified
-// time period.
+// Lists the values reported for an IoT Device Defender metric (device-side
+// metric, cloud-side metric, or custom metric) by the given thing during the
+// specified time period.
 func (c *Client) ListMetricValues(ctx context.Context, params *ListMetricValuesInput, optFns ...func(*Options)) (*ListMetricValuesOutput, error) {
 	if params == nil {
 		params = &ListMetricValuesInput{}

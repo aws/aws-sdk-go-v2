@@ -34,9 +34,9 @@ type ListCidrCollectionsInput struct {
 	// The maximum number of CIDR collections to return in the response.
 	MaxResults *int32
 
-	// An opaque pagination token to indicate where the service is to begin enumerating
-	// results. If no value is provided, the listing of results starts from the
-	// beginning.
+	// An opaque pagination token to indicate where the service is to begin
+	// enumerating results. If no value is provided, the listing of results starts from
+	// the beginning.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,9 +47,9 @@ type ListCidrCollectionsOutput struct {
 	// A complex type with information about the CIDR collection.
 	CidrCollections []types.CollectionSummary
 
-	// An opaque pagination token to indicate where the service is to begin enumerating
-	// results. If no value is provided, the listing of results starts from the
-	// beginning.
+	// An opaque pagination token to indicate where the service is to begin
+	// enumerating results. If no value is provided, the listing of results starts from
+	// the beginning.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -118,8 +118,8 @@ func (c *Client) addOperationListCidrCollectionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListCidrCollectionsAPIClient is a client that implements the ListCidrCollections
-// operation.
+// ListCidrCollectionsAPIClient is a client that implements the
+// ListCidrCollections operation.
 type ListCidrCollectionsAPIClient interface {
 	ListCidrCollections(context.Context, *ListCidrCollectionsInput, ...func(*Options)) (*ListCidrCollectionsOutput, error)
 }

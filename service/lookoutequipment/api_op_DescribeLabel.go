@@ -54,9 +54,9 @@ type DescribeLabelOutput struct {
 	// Indicates that a label pertains to a particular piece of equipment.
 	Equipment *string
 
-	// Indicates the type of anomaly associated with the label. Data in this field will
-	// be retained for service usage. Follow best practices for the security of your
-	// data.
+	// Indicates the type of anomaly associated with the label. Data in this field
+	// will be retained for service usage. Follow best practices for the security of
+	// your data.
 	FaultCode *string
 
 	// The ARN of the requested label group.

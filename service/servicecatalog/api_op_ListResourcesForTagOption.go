@@ -43,10 +43,8 @@ type ListResourcesForTagOptionInput struct {
 	PageToken *string
 
 	// The resource type.
-	//
-	// * Portfolio
-	//
-	// * Product
+	//   - Portfolio
+	//   - Product
 	ResourceType *string
 
 	noSmithyDocumentSerde

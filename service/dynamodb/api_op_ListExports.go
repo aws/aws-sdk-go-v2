@@ -34,7 +34,7 @@ type ListExportsInput struct {
 	MaxResults *int32
 
 	// An optional string that, if supplied, must be copied from the output of a
-	// previous call to ListExports. When provided in this manner, the API fetches the
+	// previous call to ListExports . When provided in this manner, the API fetches the
 	// next page of results.
 	NextToken *string
 

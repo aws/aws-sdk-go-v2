@@ -49,8 +49,8 @@ type DescribeFolderContentsInput struct {
 	// The maximum number of items to return with this call.
 	Limit *int32
 
-	// The marker for the next set of results. This marker was received from a previous
-	// call.
+	// The marker for the next set of results. This marker was received from a
+	// previous call.
 	Marker *string
 
 	// The order for the contents of the folder.

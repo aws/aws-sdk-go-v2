@@ -35,7 +35,7 @@ type DescribeNotificationConfigurationsInput struct {
 	AutoScalingGroupNames []string
 
 	// The maximum number of items to return with this call. The default value is 50
-	// and the maximum value is 100.
+	// and the maximum value is 100 .
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -136,7 +136,7 @@ var _ DescribeNotificationConfigurationsAPIClient = (*Client)(nil)
 // DescribeNotificationConfigurations
 type DescribeNotificationConfigurationsPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
-	// and the maximum value is 100.
+	// and the maximum value is 100 .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

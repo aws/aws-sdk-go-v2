@@ -47,8 +47,8 @@ type Accuracy struct {
 	// between the estimated location and the actual device location.
 	HorizontalAccuracy *float32
 
-	// The vertical accuracy of the estimated position, which is the difference between
-	// the estimated altitude and actual device latitude in meters.
+	// The vertical accuracy of the estimated position, which is the difference
+	// between the estimated altitude and actual device latitude in meters.
 	VerticalAccuracy *float32
 
 	noSmithyDocumentSerde
@@ -207,8 +207,8 @@ type ConnectionStatusEventConfiguration struct {
 	// related event topics.
 	LoRaWAN *LoRaWANConnectionStatusEventNotificationConfigurations
 
-	// Denotes whether the wireless gateway ID connection status event topic is enabled
-	// or disabled.
+	// Denotes whether the wireless gateway ID connection status event topic is
+	// enabled or disabled.
 	WirelessGatewayIdEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -262,7 +262,7 @@ type Destinations struct {
 	// The rule name or topic rule to send messages to.
 	Expression *string
 
-	// The type of value in Expression.
+	// The type of value in Expression .
 	ExpressionType ExpressionType
 
 	// The name of the resource.
@@ -459,8 +459,9 @@ type Gnss struct {
 	// time, specified in meters above the WGS84 reference ellipsoid.
 	AssistAltitude *float32
 
-	// Optional assistance position information, specified using latitude and longitude
-	// values in degrees. The coordinates are inside the WGS84 reference frame.
+	// Optional assistance position information, specified using latitude and
+	// longitude values in degrees. The coordinates are inside the WGS84 reference
+	// frame.
 	AssistPosition []float32
 
 	// Optional parameter that gives an estimate of the time when the GNSS scan
@@ -581,8 +582,8 @@ type ImportedSidewalkDevice struct {
 // Information about a wireless device that has been added to an import task.
 type ImportedWirelessDevice struct {
 
-	// The Sidewalk-related information about a device that has been added to an import
-	// task.
+	// The Sidewalk-related information about a device that has been added to an
+	// import task.
 	Sidewalk *ImportedSidewalkDevice
 
 	noSmithyDocumentSerde
@@ -635,8 +636,8 @@ type LoRaWANConnectionStatusEventNotificationConfigurations struct {
 // Object for LoRaWAN connection status resource type event configuration.
 type LoRaWANConnectionStatusResourceTypeEventConfiguration struct {
 
-	// Denotes whether the wireless gateway connection status event topic is enabled or
-	// disabled.
+	// Denotes whether the wireless gateway connection status event topic is enabled
+	// or disabled.
 	WirelessGatewayEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -1178,8 +1179,8 @@ type LteObj struct {
 // relevant topics.
 type MessageDeliveryStatusEventConfiguration struct {
 
-	// SidewalkEventNotificationConfigurations object, which is the event configuration
-	// object for Sidewalk-related event topics.
+	// SidewalkEventNotificationConfigurations object, which is the event
+	// configuration object for Sidewalk-related event topics.
 	Sidewalk *SidewalkEventNotificationConfigurations
 
 	// Denotes whether the wireless device ID message delivery status event topic is
@@ -1189,8 +1190,8 @@ type MessageDeliveryStatusEventConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Message delivery status resource type event configuration object for enabling or
-// disabling relevant topic.
+// Message delivery status resource type event configuration object for enabling
+// or disabling relevant topic.
 type MessageDeliveryStatusResourceTypeEventConfiguration struct {
 
 	// Sidewalk resource type event configuration object for enabling or disabling
@@ -1303,8 +1304,8 @@ type ParticipatingGateways struct {
 // The wrapper for a position configuration.
 type PositionConfigurationItem struct {
 
-	// The position data destination that describes the AWS IoT rule that processes the
-	// device's position data for use by AWS IoT Core for LoRaWAN.
+	// The position data destination that describes the AWS IoT rule that processes
+	// the device's position data for use by AWS IoT Core for LoRaWAN.
 	Destination *string
 
 	// Resource identifier for the position configuration.
@@ -1545,8 +1546,8 @@ type SidewalkDeviceMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// SidewalkEventNotificationConfigurations object, which is the event configuration
-// object for Sidewalk-related event topics.
+// SidewalkEventNotificationConfigurations object, which is the event
+// configuration object for Sidewalk-related event topics.
 type SidewalkEventNotificationConfigurations struct {
 
 	// Denotes whether the Amazon ID event topic is enabled or disabled.
@@ -1624,7 +1625,7 @@ type SidewalkSendDataToDevice struct {
 	// The duration of time in seconds to retry sending the ACK.
 	AckModeRetryDurationSecs *int32
 
-	// Sidewalk device message type. Default value is CUSTOM_COMMAND_ID_NOTIFY.
+	// Sidewalk device message type. Default value is CUSTOM_COMMAND_ID_NOTIFY .
 	MessageType MessageType
 
 	// The sequence number.
@@ -1785,9 +1786,9 @@ type TraceContent struct {
 	// more detailed logs.
 	LogLevel LogLevel
 
-	// FrameInfo of your wireless device resources for the trace content. Use FrameInfo
-	// to debug the communication between your LoRaWAN end devices and the network
-	// server.
+	// FrameInfo of your wireless device resources for the trace content. Use
+	// FrameInfo to debug the communication between your LoRaWAN end devices and the
+	// network server.
 	WirelessDeviceFrameInfo WirelessDeviceFrameInfo
 
 	noSmithyDocumentSerde
@@ -1953,9 +1954,9 @@ type WiFiAccessPoint struct {
 
 // The log options for a wireless device event and can be used to set log levels
 // for a specific wireless device event. For a LoRaWAN device, possible events for
-// a log messsage are: Join, Rejoin, Downlink_Data, and Uplink_Data. For a Sidewalk
-// device, possible events for a log message are Registration, Downlink_Data, and
-// Uplink_Data.
+// a log messsage are: Join , Rejoin , Downlink_Data , and Uplink_Data . For a
+// Sidewalk device, possible events for a log message are Registration ,
+// Downlink_Data , and Uplink_Data .
 type WirelessDeviceEventLogOption struct {
 
 	// The event for a log message, if the log message is tied to a wireless device.
@@ -1998,8 +1999,8 @@ type WirelessDeviceImportTask struct {
 	// control log to be added to an import task.
 	InitializedImportedDeviceCount *int64
 
-	// The summary information of count of wireless devices in an import task that have
-	// been onboarded to the import task.
+	// The summary information of count of wireless devices in an import task that
+	// have been onboarded to the import task.
 	OnboardedImportedDeviceCount *int64
 
 	// The summary information of count of wireless devices in an import task that are
@@ -2081,7 +2082,7 @@ type WirelessDeviceStatistics struct {
 
 // The log options for a wireless gateway event and can be used to set log levels
 // for a specific wireless gateway event. For a LoRaWAN gateway, possible events
-// for a log message are CUPS_Request and Certificate.
+// for a log message are CUPS_Request and Certificate .
 type WirelessGatewayEventLogOption struct {
 
 	// The event for a log message, if the log message is tied to a wireless gateway.

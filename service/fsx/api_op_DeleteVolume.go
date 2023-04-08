@@ -55,7 +55,7 @@ type DeleteVolumeInput struct {
 type DeleteVolumeOutput struct {
 
 	// The lifecycle state of the volume being deleted. If the DeleteVolume operation
-	// is successful, this value is DELETING.
+	// is successful, this value is DELETING .
 	Lifecycle types.VolumeLifecycle
 
 	// Returned after a DeleteVolume request, showing the status of the delete request.

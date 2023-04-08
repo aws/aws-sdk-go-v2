@@ -68,8 +68,8 @@ type UpdatePhoneNumberInput struct {
 
 type UpdatePhoneNumberOutput struct {
 
-	// The time when the phone number was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	CreatedTimestamp *time.Time
 
 	// When set to true the phone number can't be deleted.

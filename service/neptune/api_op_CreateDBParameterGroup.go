@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new DB parameter group. A DB parameter group is initially created with
-// the default parameters for the database engine used by the DB instance. To
+// Creates a new DB parameter group. A DB parameter group is initially created
+// with the default parameters for the database engine used by the DB instance. To
 // provide custom values for any of the parameters, you must modify the group after
 // creating it using ModifyDBParameterGroup. Once you've created a DB parameter
 // group, you need to associate it with your DB instance using ModifyDBInstance.
@@ -54,17 +54,10 @@ type CreateDBParameterGroupInput struct {
 	DBParameterGroupFamily *string
 
 	// The name of the DB parameter group. Constraints:
-	//
-	// * Must be 1 to 255 letters,
-	// numbers, or hyphens.
-	//
-	// * First character must be a letter
-	//
-	// * Cannot end with a
-	// hyphen or contain two consecutive hyphens
-	//
-	// This value is stored as a lowercase
-	// string.
+	//   - Must be 1 to 255 letters, numbers, or hyphens.
+	//   - First character must be a letter
+	//   - Cannot end with a hyphen or contain two consecutive hyphens
+	// This value is stored as a lowercase string.
 	//
 	// This member is required.
 	DBParameterGroupName *string

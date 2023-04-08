@@ -13,7 +13,7 @@ import (
 // Deletes the specified HSM. To specify an HSM, you can use its identifier (ID),
 // the IP address of the HSM's elastic network interface (ENI), or the ID of the
 // HSM's ENI. You need to specify only one of these values. To find these values,
-// use DescribeClusters.
+// use DescribeClusters .
 func (c *Client) DeleteHsm(ctx context.Context, params *DeleteHsmInput, optFns ...func(*Options)) (*DeleteHsmOutput, error) {
 	if params == nil {
 		params = &DeleteHsmInput{}

@@ -41,7 +41,7 @@ type UpdatePackageInput struct {
 	PackageSource *types.PackageSource
 
 	// An info message for the new version which will be shown as part of
-	// GetPackageVersionHistoryResponse.
+	// GetPackageVersionHistoryResponse .
 	CommitMessage *string
 
 	// New description of the package.
@@ -53,7 +53,7 @@ type UpdatePackageInput struct {
 // Container for response returned by UpdatePackage operation.
 type UpdatePackageOutput struct {
 
-	// Information about the package PackageDetails.
+	// Information about the package PackageDetails .
 	PackageDetails *types.PackageDetails
 
 	// Metadata pertaining to the operation's result.

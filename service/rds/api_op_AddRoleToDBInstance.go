@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an Amazon Web Services Identity and Access Management (IAM) role with
-// a DB instance. To add a role to a DB instance, the status of the DB instance
-// must be available. This command doesn't apply to RDS Custom.
+// Associates an Amazon Web Services Identity and Access Management (IAM) role
+// with a DB instance. To add a role to a DB instance, the status of the DB
+// instance must be available . This command doesn't apply to RDS Custom.
 func (c *Client) AddRoleToDBInstance(ctx context.Context, params *AddRoleToDBInstanceInput, optFns ...func(*Options)) (*AddRoleToDBInstanceOutput, error) {
 	if params == nil {
 		params = &AddRoleToDBInstanceInput{}
@@ -37,13 +37,13 @@ type AddRoleToDBInstanceInput struct {
 
 	// The name of the feature for the DB instance that the IAM role is to be
 	// associated with. For information about supported feature names, see
-	// DBEngineVersion.
+	// DBEngineVersion .
 	//
 	// This member is required.
 	FeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to associate with the DB
-	// instance, for example arn:aws:iam::123456789012:role/AccessRole.
+	// instance, for example arn:aws:iam::123456789012:role/AccessRole .
 	//
 	// This member is required.
 	RoleArn *string

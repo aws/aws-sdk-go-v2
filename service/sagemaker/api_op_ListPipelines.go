@@ -41,14 +41,14 @@ type ListPipelinesInput struct {
 	MaxResults *int32
 
 	// If the result of the previous ListPipelines request was truncated, the response
-	// includes a NextToken. To retrieve the next set of pipelines, use the token in
+	// includes a NextToken . To retrieve the next set of pipelines, use the token in
 	// the next request.
 	NextToken *string
 
 	// The prefix of the pipeline name.
 	PipelineNamePrefix *string
 
-	// The field by which to sort results. The default is CreatedTime.
+	// The field by which to sort results. The default is CreatedTime .
 	SortBy types.SortPipelinesBy
 
 	// The sort order for results.
@@ -60,7 +60,7 @@ type ListPipelinesInput struct {
 type ListPipelinesOutput struct {
 
 	// If the result of the previous ListPipelines request was truncated, the response
-	// includes a NextToken. To retrieve the next set of pipelines, use the token in
+	// includes a NextToken . To retrieve the next set of pipelines, use the token in
 	// the next request.
 	NextToken *string
 

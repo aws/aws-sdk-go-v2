@@ -12,8 +12,7 @@ import (
 )
 
 // Gets information about a Device Defender ML Detect mitigation action. Requires
-// permission to access the DescribeDetectMitigationActionsTask
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the DescribeDetectMitigationActionsTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeDetectMitigationActionsTask(ctx context.Context, params *DescribeDetectMitigationActionsTaskInput, optFns ...func(*Options)) (*DescribeDetectMitigationActionsTaskOutput, error) {
 	if params == nil {

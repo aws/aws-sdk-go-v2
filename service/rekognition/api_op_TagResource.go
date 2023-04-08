@@ -12,8 +12,9 @@ import (
 
 // Adds one or more key-value tags to an Amazon Rekognition collection, stream
 // processor, or Custom Labels model. For more information, see Tagging AWS
-// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). This
-// operation requires permissions to perform the rekognition:TagResource action.
+// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) .
+// This operation requires permissions to perform the rekognition:TagResource
+// action.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

@@ -11,9 +11,9 @@ import (
 )
 
 // Stops a document classifier training job while in progress. If the training job
-// state is TRAINING, the job is marked for termination and put into the
+// state is TRAINING , the job is marked for termination and put into the
 // STOP_REQUESTED state. If the training job completes before it can be stopped, it
-// is put into the TRAINED; otherwise the training job is stopped and put into the
+// is put into the TRAINED ; otherwise the training job is stopped and put into the
 // STOPPED state and the service sends back an HTTP 200 response with an empty HTTP
 // body.
 func (c *Client) StopTrainingDocumentClassifier(ctx context.Context, params *StopTrainingDocumentClassifierInput, optFns ...func(*Options)) (*StopTrainingDocumentClassifierOutput, error) {
@@ -33,8 +33,8 @@ func (c *Client) StopTrainingDocumentClassifier(ctx context.Context, params *Sto
 
 type StopTrainingDocumentClassifierInput struct {
 
-	// The Amazon Resource Name (ARN) that identifies the document classifier currently
-	// being trained.
+	// The Amazon Resource Name (ARN) that identifies the document classifier
+	// currently being trained.
 	//
 	// This member is required.
 	DocumentClassifierArn *string

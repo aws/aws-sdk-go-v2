@@ -26,7 +26,7 @@ func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns .
 	return out, nil
 }
 
-// The structure representing the getPolicyRequest.
+// The structure representing the getPolicyRequest .
 type GetPolicyInput struct {
 
 	// The name of the profiling group.
@@ -37,10 +37,10 @@ type GetPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// The structure representing the getPolicyResponse.
+// The structure representing the getPolicyResponse .
 type GetPolicyOutput struct {
 
-	// The JSON-formatted resource-based policy attached to the ProfilingGroup.
+	// The JSON-formatted resource-based policy attached to the ProfilingGroup .
 	//
 	// This member is required.
 	Policy *string

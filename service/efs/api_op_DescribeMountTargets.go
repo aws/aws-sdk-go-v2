@@ -15,8 +15,8 @@ import (
 // target, for a file system. When requesting all of the current mount targets, the
 // order of mount targets returned in the response is unspecified. This operation
 // requires permissions for the elasticfilesystem:DescribeMountTargets action, on
-// either the file system ID that you specify in FileSystemId, or on the file
-// system of the mount target that you specify in MountTargetId.
+// either the file system ID that you specify in FileSystemId , or on the file
+// system of the mount target that you specify in MountTargetId .
 func (c *Client) DescribeMountTargets(ctx context.Context, params *DescribeMountTargetsInput, optFns ...func(*Options)) (*DescribeMountTargetsOutput, error) {
 	if params == nil {
 		params = &DescribeMountTargetsInput{}
@@ -34,9 +34,9 @@ func (c *Client) DescribeMountTargets(ctx context.Context, params *DescribeMount
 
 type DescribeMountTargetsInput struct {
 
-	// (Optional) The ID of the access point whose mount targets that you want to list.
-	// It must be included in your request if a FileSystemId or MountTargetId is not
-	// included in your request. Accepts either an access point ID or ARN as input.
+	// (Optional) The ID of the access point whose mount targets that you want to
+	// list. It must be included in your request if a FileSystemId or MountTargetId is
+	// not included in your request. Accepts either an access point ID or ARN as input.
 	AccessPointId *string
 
 	// (Optional) ID of the file system whose mount targets you want to list (String).
@@ -49,14 +49,15 @@ type DescribeMountTargetsInput struct {
 	// previous returning call left off.
 	Marker *string
 
-	// (Optional) Maximum number of mount targets to return in the response. Currently,
-	// this number is automatically set to 10, and other values are ignored. The
-	// response is paginated at 100 per page if you have more than 100 mount targets.
+	// (Optional) Maximum number of mount targets to return in the response.
+	// Currently, this number is automatically set to 10, and other values are ignored.
+	// The response is paginated at 100 per page if you have more than 100 mount
+	// targets.
 	MaxItems *int32
 
 	// (Optional) ID of the mount target that you want to have described (String). It
-	// must be included in your request if FileSystemId is not included. Accepts either
-	// a mount target ID or ARN as input.
+	// must be included in your request if FileSystemId is not included. Accepts
+	// either a mount target ID or ARN as input.
 	MountTargetId *string
 
 	noSmithyDocumentSerde
@@ -64,7 +65,7 @@ type DescribeMountTargetsInput struct {
 
 type DescribeMountTargetsOutput struct {
 
-	// If the request included the Marker, the response returns that value in this
+	// If the request included the Marker , the response returns that value in this
 	// field.
 	Marker *string
 

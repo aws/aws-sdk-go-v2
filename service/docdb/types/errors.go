@@ -895,8 +895,8 @@ func (e *InvalidDBInstanceStateFault) ErrorCode() string {
 }
 func (e *InvalidDBInstanceStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The parameter group is in use, or it is in a state that is not valid. If you are
-// trying to delete the parameter group, you can't delete it when the parameter
+// The parameter group is in use, or it is in a state that is not valid. If you
+// are trying to delete the parameter group, you can't delete it when the parameter
 // group is in this state.
 type InvalidDBParameterGroupStateFault struct {
 	Message *string

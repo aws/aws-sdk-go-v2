@@ -35,7 +35,7 @@ type ListVersionsInput struct {
 	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial ListVersions operation returns a nextToken, you can include the
+	// If your initial ListVersions operation returns a nextToken , you can include the
 	// returned nextToken in subsequent ListVersions operations, which returns results
 	// in the next page.
 	NextToken *string

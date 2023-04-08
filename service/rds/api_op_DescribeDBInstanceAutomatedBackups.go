@@ -35,8 +35,9 @@ func (c *Client) DescribeDBInstanceAutomatedBackups(ctx context.Context, params 
 // Parameter input for DescribeDBInstanceAutomatedBackups.
 type DescribeDBInstanceAutomatedBackupsInput struct {
 
-	// The Amazon Resource Name (ARN) of the replicated automated backups, for example,
-	// arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE.
+	// The Amazon Resource Name (ARN) of the replicated automated backups, for
+	// example,
+	// arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE .
 	// This setting doesn't apply to RDS Custom.
 	DBInstanceAutomatedBackupsArn *string
 
@@ -52,34 +53,25 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 
 	// A filter that specifies which resources to return based on status. Supported
 	// filters are the following:
-	//
-	// * status
-	//
-	// * active - automated backups for current
-	// instances
-	//
-	// * retained - automated backups for deleted instances and after backup
-	// replication is stopped
-	//
-	// * creating - automated backups that are waiting for the
-	// first automated snapshot to be available
-	//
-	// * db-instance-id - Accepts DB instance
-	// identifiers and Amazon Resource Names (ARNs). The results list includes only
-	// information about the DB instance automated backups identified by these ARNs.
-	//
-	// *
-	// dbi-resource-id - Accepts DB resource identifiers and Amazon Resource Names
-	// (ARNs). The results list includes only information about the DB instance
-	// resources identified by these ARNs.
-	//
-	// Returns all resources by default. The
-	// status for each resource is specified in the response.
+	//   - status
+	//   - active - automated backups for current instances
+	//   - retained - automated backups for deleted instances and after backup
+	//   replication is stopped
+	//   - creating - automated backups that are waiting for the first automated
+	//   snapshot to be available
+	//   - db-instance-id - Accepts DB instance identifiers and Amazon Resource Names
+	//   (ARNs). The results list includes only information about the DB instance
+	//   automated backups identified by these ARNs.
+	//   - dbi-resource-id - Accepts DB resource identifiers and Amazon Resource Names
+	//   (ARNs). The results list includes only information about the DB instance
+	//   resources identified by these ARNs.
+	// Returns all resources by default. The status for each resource is specified in
+	// the response.
 	Filters []types.Filter
 
 	// The pagination token provided in the previous request. If this parameter is
-	// specified the response includes only records beyond the marker, up to
-	// MaxRecords.
+	// specified the response includes only records beyond the marker, up to MaxRecords
+	// .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -99,7 +91,7 @@ type DescribeDBInstanceAutomatedBackupsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

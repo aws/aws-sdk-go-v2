@@ -180,9 +180,9 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your request exceeded a request rate quota. For example, you might have exceeded
-// the amount of times that you can retrieve device or deployment status per
-// second.
+// Your request exceeded a request rate quota. For example, you might have
+// exceeded the amount of times that you can retrieve device or deployment status
+// per second.
 type ThrottlingException struct {
 	Message *string
 

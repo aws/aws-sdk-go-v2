@@ -10,17 +10,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Resends the email that requests domain ownership validation. The domain owner or
-// an authorized representative must approve the ACM certificate before it can be
-// issued. The certificate can be approved by clicking a link in the mail to
+// Resends the email that requests domain ownership validation. The domain owner
+// or an authorized representative must approve the ACM certificate before it can
+// be issued. The certificate can be approved by clicking a link in the mail to
 // navigate to the Amazon certificate approval website and then clicking I Approve.
 // However, the validation email can be blocked by spam filters. Therefore, if you
 // do not receive the original mail, you can request that the mail be resent within
 // 72 hours of requesting the ACM certificate. If more than 72 hours have elapsed
 // since your original request or since your last attempt to resend validation
 // mail, you must request a new certificate. For more information about setting up
-// your contact email addresses, see Configure Email for your Domain
-// (https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html).
+// your contact email addresses, see Configure Email for your Domain (https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html)
+// .
 func (c *Client) ResendValidationEmail(ctx context.Context, params *ResendValidationEmailInput, optFns ...func(*Options)) (*ResendValidationEmailOutput, error) {
 	if params == nil {
 		params = &ResendValidationEmailInput{}
@@ -55,24 +55,16 @@ type ResendValidationEmailInput struct {
 	Domain *string
 
 	// The base validation domain that will act as the suffix of the email addresses
-	// that are used to send the emails. This must be the same as the Domain value or a
-	// superdomain of the Domain value. For example, if you requested a certificate for
-	// site.subdomain.example.com and specify a ValidationDomain of
-	// subdomain.example.com, ACM sends email to the domain registrant, technical
-	// contact, and administrative contact in WHOIS and the following five
-	// addresses:
-	//
-	// * admin@subdomain.example.com
-	//
-	// *
-	// administrator@subdomain.example.com
-	//
-	// * hostmaster@subdomain.example.com
-	//
-	// *
-	// postmaster@subdomain.example.com
-	//
-	// * webmaster@subdomain.example.com
+	// that are used to send the emails. This must be the same as the Domain value or
+	// a superdomain of the Domain value. For example, if you requested a certificate
+	// for site.subdomain.example.com and specify a ValidationDomain of
+	// subdomain.example.com , ACM sends email to the domain registrant, technical
+	// contact, and administrative contact in WHOIS and the following five addresses:
+	//   - admin@subdomain.example.com
+	//   - administrator@subdomain.example.com
+	//   - hostmaster@subdomain.example.com
+	//   - postmaster@subdomain.example.com
+	//   - webmaster@subdomain.example.com
 	//
 	// This member is required.
 	ValidationDomain *string

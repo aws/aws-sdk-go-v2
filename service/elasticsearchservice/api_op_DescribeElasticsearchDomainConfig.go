@@ -29,8 +29,9 @@ func (c *Client) DescribeElasticsearchDomainConfig(ctx context.Context, params *
 	return out, nil
 }
 
-// Container for the parameters to the DescribeElasticsearchDomainConfig operation.
-// Specifies the domain name for which you want configuration information.
+// Container for the parameters to the DescribeElasticsearchDomainConfig
+// operation. Specifies the domain name for which you want configuration
+// information.
 type DescribeElasticsearchDomainConfigInput struct {
 
 	// The Elasticsearch domain that you want to get information about.

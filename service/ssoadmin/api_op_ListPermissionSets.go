@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the PermissionSets in an IAM Identity Center instance.
+// Lists the PermissionSet s in an IAM Identity Center instance.
 func (c *Client) ListPermissionSets(ctx context.Context, params *ListPermissionSetsInput, optFns ...func(*Options)) (*ListPermissionSetsOutput, error) {
 	if params == nil {
 		params = &ListPermissionSetsInput{}

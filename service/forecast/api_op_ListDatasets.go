@@ -12,12 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of datasets created using the CreateDataset
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html)
+// Returns a list of datasets created using the CreateDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html)
 // operation. For each dataset, a summary of its properties, including its Amazon
 // Resource Name (ARN), is returned. To retrieve the complete set of properties,
-// use the ARN with the DescribeDataset
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html)
+// use the ARN with the DescribeDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html)
 // operation.
 func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
 	if params == nil {
@@ -40,7 +38,7 @@ type ListDatasetsInput struct {
 	MaxResults *int32
 
 	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
+	// NextToken . To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
 

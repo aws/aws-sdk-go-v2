@@ -58,8 +58,8 @@ type UpdateBotAliasInput struct {
 	// The new description to assign to the bot alias.
 	Description *string
 
-	// Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment
-	// of user utterances.
+	// Determines whether Amazon Lex will use Amazon Comprehend to detect the
+	// sentiment of user utterances.
 	SentimentAnalysisSettings *types.SentimentAnalysisSettings
 
 	noSmithyDocumentSerde
@@ -86,8 +86,8 @@ type UpdateBotAliasOutput struct {
 	// The updated version of the bot that the alias points to.
 	BotVersion *string
 
-	// The updated settings for storing conversation logs in Amazon CloudWatch Logs and
-	// Amazon S3 buckets.
+	// The updated settings for storing conversation logs in Amazon CloudWatch Logs
+	// and Amazon S3 buckets.
 	ConversationLogSettings *types.ConversationLogSettings
 
 	// A timestamp of the date and time that the bot was created.
@@ -99,8 +99,8 @@ type UpdateBotAliasOutput struct {
 	// A timestamp of the date and time that the bot was last updated.
 	LastUpdatedDateTime *time.Time
 
-	// Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment
-	// of user utterances.
+	// Determines whether Amazon Lex will use Amazon Comprehend to detect the
+	// sentiment of user utterances.
 	SentimentAnalysisSettings *types.SentimentAnalysisSettings
 
 	// Metadata pertaining to the operation's result.

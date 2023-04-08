@@ -37,8 +37,8 @@ type ExecuteSqlInput struct {
 
 	// The Amazon Resource Name (ARN) of the secret that enables access to the DB
 	// cluster. Enter the database user name and password for the credentials in the
-	// secret. For information about creating the secret, see Create a database secret
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html).
+	// secret. For information about creating the secret, see Create a database secret (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html)
+	// .
 	//
 	// This member is required.
 	AwsSecretStoreArn *string

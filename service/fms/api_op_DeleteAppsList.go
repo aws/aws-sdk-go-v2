@@ -29,7 +29,7 @@ func (c *Client) DeleteAppsList(ctx context.Context, params *DeleteAppsListInput
 type DeleteAppsListInput struct {
 
 	// The ID of the applications list that you want to delete. You can retrieve this
-	// ID from PutAppsList, ListAppsLists, and GetAppsList.
+	// ID from PutAppsList , ListAppsLists , and GetAppsList .
 	//
 	// This member is required.
 	ListId *string

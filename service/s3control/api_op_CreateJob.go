@@ -17,29 +17,14 @@ import (
 
 // You can use S3 Batch Operations to perform large-scale batch actions on Amazon
 // S3 objects. Batch Operations can run a single action on lists of Amazon S3
-// objects that you specify. For more information, see S3 Batch Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html) in the
-// Amazon S3 User Guide. This action creates a S3 Batch Operations job. Related
-// actions include:
-//
-// * DescribeJob
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
-//
-// *
-// ListJobs
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
-//
-// *
-// UpdateJobPriority
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
-//
-// *
-// UpdateJobStatus
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
-//
-// *
-// JobOperation
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html)
+// objects that you specify. For more information, see S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html)
+// in the Amazon S3 User Guide. This action creates a S3 Batch Operations job.
+// Related actions include:
+//   - DescribeJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
+//   - ListJobs (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
+//   - UpdateJobPriority (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
+//   - UpdateJobStatus (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
+//   - JobOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html)
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -69,9 +54,8 @@ type CreateJobInput struct {
 	ClientRequestToken *string
 
 	// The action that you want this job to perform on every object listed in the
-	// manifest. For more information about the available actions, see Operations
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html) in the
-	// Amazon S3 User Guide.
+	// manifest. For more information about the available actions, see Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html)
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	Operation *types.JobOperation
@@ -86,9 +70,9 @@ type CreateJobInput struct {
 	// This member is required.
 	Report *types.JobReport
 
-	// The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) role
-	// that Batch Operations will use to run this job's action on every object in the
-	// manifest.
+	// The Amazon Resource Name (ARN) for the Identity and Access Management (IAM)
+	// role that Batch Operations will use to run this job's action on every object in
+	// the manifest.
 	//
 	// This member is required.
 	RoleArn *string
@@ -108,8 +92,8 @@ type CreateJobInput struct {
 	// with either a manifest file or a ManifestGenerator, but not both.
 	ManifestGenerator types.JobManifestGenerator
 
-	// A set of tags to associate with the S3 Batch Operations job. This is an optional
-	// parameter.
+	// A set of tags to associate with the S3 Batch Operations job. This is an
+	// optional parameter.
 	Tags []types.S3Tag
 
 	noSmithyDocumentSerde

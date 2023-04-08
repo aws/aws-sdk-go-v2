@@ -13,11 +13,10 @@ import (
 )
 
 // Deletes an asset. This action can't be undone. For more information, see
-// Deleting assets and models
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html)
+// Deleting assets and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html)
 // in the IoT SiteWise User Guide. You can't delete an asset that's associated to
-// another asset. For more information, see DisassociateAssets
-// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DisassociateAssets.html).
+// another asset. For more information, see DisassociateAssets (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DisassociateAssets.html)
+// .
 func (c *Client) DeleteAsset(ctx context.Context, params *DeleteAssetInput, optFns ...func(*Options)) (*DeleteAssetOutput, error) {
 	if params == nil {
 		params = &DeleteAssetInput{}
@@ -50,7 +49,7 @@ type DeleteAssetInput struct {
 
 type DeleteAssetOutput struct {
 
-	// The status of the asset, which contains a state (DELETING after successfully
+	// The status of the asset, which contains a state ( DELETING after successfully
 	// calling this operation) and any error message.
 	//
 	// This member is required.

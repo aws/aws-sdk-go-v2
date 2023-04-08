@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified virtual tape. This operation is only supported in the tape
-// gateway type.
+// Deletes the specified virtual tape. This operation is only supported in the
+// tape gateway type.
 func (c *Client) DeleteTape(ctx context.Context, params *DeleteTapeInput, optFns ...func(*Options)) (*DeleteTapeOutput, error) {
 	if params == nil {
 		params = &DeleteTapeInput{}

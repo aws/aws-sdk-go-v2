@@ -14,8 +14,8 @@ import (
 // signal, which delays job termination for 120 seconds. Algorithms might use this
 // 120-second window to save the model artifacts, so the results of the training is
 // not lost. When it receives a StopTrainingJob request, SageMaker changes the
-// status of the job to Stopping. After SageMaker stops the job, it sets the status
-// to Stopped.
+// status of the job to Stopping . After SageMaker stops the job, it sets the
+// status to Stopped .
 func (c *Client) StopTrainingJob(ctx context.Context, params *StopTrainingJobInput, optFns ...func(*Options)) (*StopTrainingJobOutput, error) {
 	if params == nil {
 		params = &StopTrainingJobInput{}

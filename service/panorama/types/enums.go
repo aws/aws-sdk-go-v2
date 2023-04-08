@@ -86,9 +86,9 @@ const (
 	DesiredStateRemoved DesiredState = "REMOVED"
 )
 
-// Values returns all known values for DesiredState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DesiredState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DesiredState) Values() []DesiredState {
 	return []DesiredState{
 		"RUNNING",
@@ -221,9 +221,9 @@ const (
 	DeviceStatusDeleting             DeviceStatus = "DELETING"
 )
 
-// Values returns all known values for DeviceStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeviceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceStatus) Values() []DeviceStatus {
 	return []DeviceStatus{
 		"AWAITING_PROVISIONING",
@@ -339,9 +339,9 @@ const (
 	NodeCategoryMediaSink     NodeCategory = "MEDIA_SINK"
 )
 
-// Values returns all known values for NodeCategory. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NodeCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (NodeCategory) Values() []NodeCategory {
 	return []NodeCategory{
 		"BUSINESS_LOGIC",
@@ -503,9 +503,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -526,9 +526,9 @@ const (
 	StatusFilterDeploymentFailed     StatusFilter = "DEPLOYMENT_FAILED"
 )
 
-// Values returns all known values for StatusFilter. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StatusFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StatusFilter) Values() []StatusFilter {
 	return []StatusFilter{
 		"DEPLOYMENT_SUCCEEDED",
@@ -548,9 +548,9 @@ const (
 	TemplateTypeRtspCameraStream TemplateType = "RTSP_CAMERA_STREAM"
 )
 
-// Values returns all known values for TemplateType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TemplateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TemplateType) Values() []TemplateType {
 	return []TemplateType{
 		"RTSP_CAMERA_STREAM",

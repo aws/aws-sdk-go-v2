@@ -39,32 +39,32 @@ type StartBackupJobInput struct {
 	BackupVaultName *string
 
 	// Specifies the IAM role ARN used to create the target recovery point; for
-	// example, arn:aws:iam::123456789012:role/S3Access.
+	// example, arn:aws:iam::123456789012:role/S3Access .
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
-	// the ARN depends on the resource type.
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
+	// of the ARN depends on the resource type.
 	//
 	// This member is required.
 	ResourceArn *string
 
 	// Specifies the backup option for a selected resource. This option is only
 	// available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid
-	// values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option and
-	// create a Windows VSS backup. Set to "WindowsVSS""disabled" to create a regular
-	// backup. The WindowsVSS option is not enabled by default.
+	// values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option
+	// and create a Windows VSS backup. Set to "WindowsVSS""disabled" to create a
+	// regular backup. The WindowsVSS option is not enabled by default.
 	BackupOptions map[string]string
 
 	// A value in minutes during which a successfully started backup must complete, or
 	// else Backup will cancel the job. This value is optional. This value begins
 	// counting down from when the backup was scheduled. It does not add additional
-	// time for StartWindowMinutes, or if the backup started later than scheduled.
+	// time for StartWindowMinutes , or if the backup started later than scheduled.
 	CompleteWindowMinutes *int64
 
 	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to StartBackupJob. Retrying a successful request with the same
+	// identical calls to StartBackupJob . Retrying a successful request with the same
 	// idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
@@ -76,8 +76,7 @@ type StartBackupJobInput struct {
 	// days” setting. The “transition to cold after days” setting cannot be changed
 	// after a backup has been transitioned to cold. Resource types that are able to be
 	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
-	// section of the  Feature availability by resource
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
+	// section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *types.Lifecycle
 
@@ -100,8 +99,8 @@ type StartBackupJobOutput struct {
 	BackupJobId *string
 
 	// The date and time that a backup job is created, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
 
@@ -111,7 +110,8 @@ type StartBackupJobOutput struct {
 
 	// Note: This field is only returned for Amazon EFS and Advanced DynamoDB
 	// resources. An ARN that uniquely identifies a recovery point; for example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
 	RecoveryPointArn *string
 
 	// Metadata pertaining to the operation's result.

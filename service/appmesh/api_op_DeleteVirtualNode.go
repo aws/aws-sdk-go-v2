@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing virtual node. You must delete any virtual services that list
-// a virtual node as a service provider before you can delete the virtual node
+// Deletes an existing virtual node. You must delete any virtual services that
+// list a virtual node as a service provider before you can delete the virtual node
 // itself.
 func (c *Client) DeleteVirtualNode(ctx context.Context, params *DeleteVirtualNodeInput, optFns ...func(*Options)) (*DeleteVirtualNodeOutput, error) {
 	if params == nil {
@@ -42,10 +42,11 @@ type DeleteVirtualNodeInput struct {
 	// This member is required.
 	VirtualNodeName *string
 
-	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
-	// ID is not your own, then it's the ID of the account that shared the mesh with
-	// your account. For more information about mesh sharing, see Working with shared
-	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the
+	// account ID is not your own, then it's the ID of the account that shared the mesh
+	// with your account. For more information about mesh sharing, see Working with
+	// shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// .
 	MeshOwner *string
 
 	noSmithyDocumentSerde

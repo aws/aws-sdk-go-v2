@@ -27,7 +27,7 @@ func (c *Client) UpdateSchedulingPolicy(ctx context.Context, params *UpdateSched
 	return out, nil
 }
 
-// Contains the parameters for UpdateSchedulingPolicy.
+// Contains the parameters for UpdateSchedulingPolicy .
 type UpdateSchedulingPolicyInput struct {
 
 	// The Amazon Resource Name (ARN) of the scheduling policy to update.

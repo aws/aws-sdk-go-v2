@@ -11,13 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns the WebACL that is specified by WebACLId.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Returns the WebACL that is specified by WebACLId .
 func (c *Client) GetWebACL(ctx context.Context, params *GetWebACLInput, optFns ...func(*Options)) (*GetWebACLOutput, error) {
 	if params == nil {
 		params = &GetWebACLInput{}
@@ -36,7 +34,7 @@ func (c *Client) GetWebACL(ctx context.Context, params *GetWebACLInput, optFns .
 type GetWebACLInput struct {
 
 	// The WebACLId of the WebACL that you want to get. WebACLId is returned by
-	// CreateWebACL and by ListWebACLs.
+	// CreateWebACL and by ListWebACLs .
 	//
 	// This member is required.
 	WebACLId *string
@@ -48,17 +46,12 @@ type GetWebACLOutput struct {
 
 	// Information about the WebACL that you specified in the GetWebACL request. For
 	// more information, see the following topics:
-	//
-	// * WebACL: Contains DefaultAction,
-	// MetricName, Name, an array of Rule objects, and WebACLId
-	//
-	// * DefaultAction (Data
-	// type is WafAction): Contains Type
-	//
-	// * Rules: Contains an array of ActivatedRule
-	// objects, which contain Action, Priority, and RuleId
-	//
-	// * Action: Contains Type
+	//   - WebACL : Contains DefaultAction , MetricName , Name , an array of Rule
+	//   objects, and WebACLId
+	//   - DefaultAction (Data type is WafAction ): Contains Type
+	//   - Rules : Contains an array of ActivatedRule objects, which contain Action ,
+	//   Priority , and RuleId
+	//   - Action : Contains Type
 	WebACL *types.WebACL
 
 	// Metadata pertaining to the operation's result.

@@ -11,9 +11,9 @@ import (
 )
 
 // Deletes the specified scaling plan. Deleting a scaling plan deletes the
-// underlying ScalingInstruction for all of the scalable resources that are covered
-// by the plan. If the plan has launched resources or has scaling activities in
-// progress, you must delete those resources separately.
+// underlying ScalingInstruction for all of the scalable resources that are
+// covered by the plan. If the plan has launched resources or has scaling
+// activities in progress, you must delete those resources separately.
 func (c *Client) DeleteScalingPlan(ctx context.Context, params *DeleteScalingPlanInput, optFns ...func(*Options)) (*DeleteScalingPlanOutput, error) {
 	if params == nil {
 		params = &DeleteScalingPlanInput{}
@@ -36,7 +36,7 @@ type DeleteScalingPlanInput struct {
 	// This member is required.
 	ScalingPlanName *string
 
-	// The version number of the scaling plan. Currently, the only valid value is 1.
+	// The version number of the scaling plan. Currently, the only valid value is 1 .
 	//
 	// This member is required.
 	ScalingPlanVersion *int64

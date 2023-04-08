@@ -48,17 +48,15 @@ type CreateDatasetInput struct {
 	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
 	// A list of data rules that send notifications to CloudWatch, when data arrives
-	// late. To specify lateDataRules, the dataset must use a DeltaTimer
-	// (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
+	// late. To specify lateDataRules , the dataset must use a DeltaTimer (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
 	// filter.
 	LateDataRules []types.LateDataRule
 
 	// Optional. How long, in days, versions of dataset contents are kept for the
-	// dataset. If not specified or set to null, versions of dataset contents are
+	// dataset. If not specified or set to null , versions of dataset contents are
 	// retained for at most 90 days. The number of versions of dataset contents
 	// retained is determined by the versioningConfiguration parameter. For more
-	// information, see  Keeping Multiple Versions of IoT Analytics datasets
-	// (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// information, see Keeping Multiple Versions of IoT Analytics datasets (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
 	// in the IoT Analytics User Guide.
 	RetentionPeriod *types.RetentionPeriod
 
@@ -74,8 +72,7 @@ type CreateDatasetInput struct {
 	// set to null, only the latest version plus the latest succeeded version (if they
 	// are different) are kept for the time period specified by the retentionPeriod
 	// parameter. For more information, see Keeping Multiple Versions of IoT Analytics
-	// datasets
-	// (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// datasets (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
 	// in the IoT Analytics User Guide.
 	VersioningConfiguration *types.VersioningConfiguration
 

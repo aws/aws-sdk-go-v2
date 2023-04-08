@@ -11,44 +11,32 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Inserts or deletes GeoMatchConstraint objects in an GeoMatchSet. For
-// each GeoMatchConstraint object, you specify the following values:
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Inserts or deletes GeoMatchConstraint objects in an GeoMatchSet
+// . For each GeoMatchConstraint object, you specify the following values:
+//   - Whether to insert or delete the object from the array. If you want to
+//     change an GeoMatchConstraint object, you delete the existing object and add a
+//     new one.
+//   - The Type . The only valid value for Type is Country .
+//   - The Value , which is a two character code for the country to add to the
+//     GeoMatchConstraint object. Valid codes are listed in GeoMatchConstraint$Value
+//     .
 //
-// * Whether to
-// insert or delete the object from the array. If you want to change an
-// GeoMatchConstraint object, you delete the existing object and add a new one.
+// To create and configure an GeoMatchSet , perform the following steps:
+//   - Submit a CreateGeoMatchSet request.
+//   - Use GetChangeToken to get the change token that you provide in the
+//     ChangeToken parameter of an UpdateGeoMatchSet request.
+//   - Submit an UpdateGeoMatchSet request to specify the country that you want AWS
+//     WAF to watch for.
 //
-// *
-// The Type. The only valid value for Type is Country.
-//
-// * The Value, which is a two
-// character code for the country to add to the GeoMatchConstraint object. Valid
-// codes are listed in GeoMatchConstraint$Value.
-//
-// To create and configure an
-// GeoMatchSet, perform the following steps:
-//
-// * Submit a CreateGeoMatchSet
-// request.
-//
-// * Use GetChangeToken to get the change token that you provide in the
-// ChangeToken parameter of an UpdateGeoMatchSet request.
-//
-// * Submit an
-// UpdateGeoMatchSet request to specify the country that you want AWS WAF to watch
-// for.
-//
-// When you update an GeoMatchSet, you specify the country that you want to
-// add and/or the country that you want to delete. If you want to change a country,
-// you delete the existing country and add the new one. For more information about
-// how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF
-// Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
+// When you update an GeoMatchSet , you specify the country that you want to add
+// and/or the country that you want to delete. If you want to change a country, you
+// delete the existing country and add the new one. For more information about how
+// to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF
+// Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/) .
 func (c *Client) UpdateGeoMatchSet(ctx context.Context, params *UpdateGeoMatchSetInput, optFns ...func(*Options)) (*UpdateGeoMatchSetOutput, error) {
 	if params == nil {
 		params = &UpdateGeoMatchSetInput{}
@@ -66,27 +54,23 @@ func (c *Client) UpdateGeoMatchSet(ctx context.Context, params *UpdateGeoMatchSe
 
 type UpdateGeoMatchSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken.
+	// The value returned by the most recent call to GetChangeToken .
 	//
 	// This member is required.
 	ChangeToken *string
 
 	// The GeoMatchSetId of the GeoMatchSet that you want to update. GeoMatchSetId is
-	// returned by CreateGeoMatchSet and by ListGeoMatchSets.
+	// returned by CreateGeoMatchSet and by ListGeoMatchSets .
 	//
 	// This member is required.
 	GeoMatchSetId *string
 
 	// An array of GeoMatchSetUpdate objects that you want to insert into or delete
-	// from an GeoMatchSet. For more information, see the applicable data types:
-	//
-	// *
-	// GeoMatchSetUpdate: Contains Action and GeoMatchConstraint
-	//
-	// * GeoMatchConstraint:
-	// Contains Type and Value You can have only one Type and Value per
-	// GeoMatchConstraint. To add multiple countries, include multiple
-	// GeoMatchSetUpdate objects in your request.
+	// from an GeoMatchSet . For more information, see the applicable data types:
+	//   - GeoMatchSetUpdate : Contains Action and GeoMatchConstraint
+	//   - GeoMatchConstraint : Contains Type and Value You can have only one Type and
+	//   Value per GeoMatchConstraint . To add multiple countries, include multiple
+	//   GeoMatchSetUpdate objects in your request.
 	//
 	// This member is required.
 	Updates []types.GeoMatchSetUpdate
@@ -98,7 +82,7 @@ type UpdateGeoMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateGeoMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
+	// see GetChangeTokenStatus .
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

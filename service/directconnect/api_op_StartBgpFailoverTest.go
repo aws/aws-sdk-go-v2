@@ -15,11 +15,10 @@ import (
 // meets your resiliency requirements by placing the BGP peering session in the
 // DOWN state. You can then send traffic to verify that there are no outages. You
 // can run the test on public, private, transit, and hosted virtual interfaces. You
-// can use ListVirtualInterfaceTestHistory
-// (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ListVirtualInterfaceTestHistory.html)
+// can use ListVirtualInterfaceTestHistory (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ListVirtualInterfaceTestHistory.html)
 // to view the virtual interface test history. If you need to stop the test before
-// the test interval completes, use StopBgpFailoverTest
-// (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html).
+// the test interval completes, use StopBgpFailoverTest (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html)
+// .
 func (c *Client) StartBgpFailoverTest(ctx context.Context, params *StartBgpFailoverTestInput, optFns ...func(*Options)) (*StartBgpFailoverTestOutput, error) {
 	if params == nil {
 		params = &StartBgpFailoverTestInput{}

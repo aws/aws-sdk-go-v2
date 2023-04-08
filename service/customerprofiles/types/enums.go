@@ -28,9 +28,9 @@ const (
 	DataPullModeComplete    DataPullMode = "Complete"
 )
 
-// Values returns all known values for DataPullMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataPullMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DataPullMode) Values() []DataPullMode {
 	return []DataPullMode{
 		"Incremental",
@@ -178,9 +178,9 @@ const (
 	MarketoConnectorOperatorNoOp                MarketoConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for MarketoConnectorOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MarketoConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MarketoConnectorOperator) Values() []MarketoConnectorOperator {
 	return []MarketoConnectorOperator{
 		"PROJECTION",
@@ -253,9 +253,9 @@ const (
 	PartyTypeOther      PartyType = "OTHER"
 )
 
-// Values returns all known values for PartyType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for PartyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PartyType) Values() []PartyType {
 	return []PartyType{
 		"INDIVIDUAL",
@@ -567,9 +567,9 @@ const (
 	WorkflowTypeAppflowIntegration WorkflowType = "APPFLOW_INTEGRATION"
 )
 
-// Values returns all known values for WorkflowType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WorkflowType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowType) Values() []WorkflowType {
 	return []WorkflowType{
 		"APPFLOW_INTEGRATION",
@@ -596,9 +596,9 @@ const (
 	ZendeskConnectorOperatorNoOp                ZendeskConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for ZendeskConnectorOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ZendeskConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ZendeskConnectorOperator) Values() []ZendeskConnectorOperator {
 	return []ZendeskConnectorOperator{
 		"PROJECTION",

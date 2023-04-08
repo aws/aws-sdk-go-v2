@@ -47,8 +47,8 @@ type FailoverGlobalClusterInput struct {
 	// This member is required.
 	GlobalClusterIdentifier *string
 
-	// The Amazon Resource Name (ARN) of the secondary Neptune DB cluster that you want
-	// to promote to primary for the global database.
+	// The Amazon Resource Name (ARN) of the secondary Neptune DB cluster that you
+	// want to promote to primary for the global database.
 	//
 	// This member is required.
 	TargetDbClusterIdentifier *string
@@ -59,8 +59,8 @@ type FailoverGlobalClusterInput struct {
 type FailoverGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database. This data type is
-	// used as a response element for the CreateGlobalCluster, DescribeGlobalClusters,
-	// ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and
+	// used as a response element for the CreateGlobalCluster , DescribeGlobalClusters
+	// , ModifyGlobalCluster , DeleteGlobalCluster , FailoverGlobalCluster , and
 	// RemoveFromGlobalCluster actions.
 	GlobalCluster *types.GlobalCluster
 

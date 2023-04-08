@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of PackageSummary
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html)
+// Returns a list of PackageSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html)
 // objects for packages in a repository that match the request parameters.
 func (c *Client) ListPackages(ctx context.Context, params *ListPackagesInput, optFns ...func(*Options)) (*ListPackagesOutput, error) {
 	if params == nil {
@@ -56,20 +55,13 @@ type ListPackagesInput struct {
 
 	// The namespace prefix used to filter requested packages. Only packages with a
 	// namespace that starts with the provided string value are returned. Note that
-	// although this option is called --namespace and not --namespace-prefix, it has
+	// although this option is called --namespace and not --namespace-prefix , it has
 	// prefix-matching behavior. Each package format uses namespace as follows:
-	//
-	// * The
-	// namespace of a Maven package is its groupId.
-	//
-	// * The namespace of an npm package
-	// is its scope.
-	//
-	// * Python and NuGet packages do not contain a corresponding
-	// component, packages of those formats do not have a namespace.
-	//
-	// * The namespace
-	// of a generic package is its namespace.
+	//   - The namespace of a Maven package is its groupId .
+	//   - The namespace of an npm package is its scope .
+	//   - Python and NuGet packages do not contain a corresponding component,
+	//   packages of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -82,14 +74,14 @@ type ListPackagesInput struct {
 
 	// The value of the Publish package origin control restriction used to filter
 	// requested packages. Only packages with the provided restriction are returned.
-	// For more information, see PackageOriginRestrictions
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html).
+	// For more information, see PackageOriginRestrictions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
+	// .
 	Publish types.AllowPublish
 
 	// The value of the Upstream package origin control restriction used to filter
 	// requested packages. Only packages with the provided restriction are returned.
-	// For more information, see PackageOriginRestrictions
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html).
+	// For more information, see PackageOriginRestrictions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
+	// .
 	Upstream types.AllowUpstream
 
 	noSmithyDocumentSerde
@@ -100,8 +92,7 @@ type ListPackagesOutput struct {
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
 
-	// The list of returned PackageSummary
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html)
+	// The list of returned PackageSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html)
 	// objects.
 	Packages []types.PackageSummary
 

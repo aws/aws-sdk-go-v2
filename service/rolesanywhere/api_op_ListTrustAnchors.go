@@ -13,7 +13,7 @@ import (
 )
 
 // Lists the trust anchors in the authenticated account and Amazon Web Services
-// Region. Required permissions: rolesanywhere:ListTrustAnchors.
+// Region. Required permissions: rolesanywhere:ListTrustAnchors .
 func (c *Client) ListTrustAnchors(ctx context.Context, params *ListTrustAnchorsInput, optFns ...func(*Options)) (*ListTrustAnchorsOutput, error) {
 	if params == nil {
 		params = &ListTrustAnchorsInput{}

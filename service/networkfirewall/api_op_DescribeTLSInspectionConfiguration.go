@@ -44,9 +44,9 @@ type DescribeTLSInspectionConfigurationInput struct {
 type DescribeTLSInspectionConfigurationOutput struct {
 
 	// The high-level properties of a TLS inspection configuration. This, along with
-	// the TLSInspectionConfiguration, define the TLS inspection configuration. You can
-	// retrieve all objects for a TLS inspection configuration by calling
-	// DescribeTLSInspectionConfiguration.
+	// the TLSInspectionConfiguration , define the TLS inspection configuration. You
+	// can retrieve all objects for a TLS inspection configuration by calling
+	// DescribeTLSInspectionConfiguration .
 	//
 	// This member is required.
 	TLSInspectionConfigurationResponse *types.TLSInspectionConfigurationResponse
@@ -57,18 +57,18 @@ type DescribeTLSInspectionConfigurationOutput struct {
 	// changes to the TLS inspection configuration, you provide the token in your
 	// request. Network Firewall uses the token to ensure that the TLS inspection
 	// configuration hasn't changed since you last retrieved it. If it has changed, the
-	// operation fails with an InvalidTokenException. If this happens, retrieve the TLS
-	// inspection configuration again to get a current copy of it with a current token.
-	// Reapply your changes as needed, then try the operation again using the new
-	// token.
+	// operation fails with an InvalidTokenException . If this happens, retrieve the
+	// TLS inspection configuration again to get a current copy of it with a current
+	// token. Reapply your changes as needed, then try the operation again using the
+	// new token.
 	//
 	// This member is required.
 	UpdateToken *string
 
 	// The object that defines a TLS inspection configuration. This, along with
-	// TLSInspectionConfigurationResponse, define the TLS inspection configuration. You
-	// can retrieve all objects for a TLS inspection configuration by calling
-	// DescribeTLSInspectionConfiguration. Network Firewall uses a TLS inspection
+	// TLSInspectionConfigurationResponse , define the TLS inspection configuration.
+	// You can retrieve all objects for a TLS inspection configuration by calling
+	// DescribeTLSInspectionConfiguration . Network Firewall uses a TLS inspection
 	// configuration to decrypt traffic. Network Firewall re-encrypts the traffic
 	// before sending it to its destination. To use a TLS inspection configuration, you
 	// add it to a Network Firewall firewall policy, then you apply the firewall policy
@@ -76,8 +76,7 @@ type DescribeTLSInspectionConfigurationOutput struct {
 	// inbound traffic. You can reference a TLS inspection configuration from more than
 	// one firewall policy, and you can use a firewall policy in more than one
 	// firewall. For more information about using TLS inspection configurations, see
-	// Decrypting SSL/TLS traffic with TLS inspection configurations
-	// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
+	// Decrypting SSL/TLS traffic with TLS inspection configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
 	// in the Network Firewall Developer Guide.
 	TLSInspectionConfiguration *types.TLSInspectionConfiguration
 

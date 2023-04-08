@@ -10,16 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Merges two users having different IdentityIds, existing in the same identity
+// Merges two users having different IdentityId s, existing in the same identity
 // pool, and identified by the same developer provider. You can use this action to
 // request that discrete users be merged and identified as a single user in the
-// Cognito environment. Cognito associates the given source user
-// (SourceUserIdentifier) with the IdentityId of the DestinationUserIdentifier.
+// Cognito environment. Cognito associates the given source user (
+// SourceUserIdentifier ) with the IdentityId of the DestinationUserIdentifier .
 // Only developer-authenticated users can be merged. If the users to be merged are
 // associated with the same public provider, but as two different users, an
 // exception will be thrown. The number of linked logins is limited to 20. So, the
-// number of linked logins for the source user, SourceUserIdentifier, and the
-// destination user, DestinationUserIdentifier, together should not be larger than
+// number of linked logins for the source user, SourceUserIdentifier , and the
+// destination user, DestinationUserIdentifier , together should not be larger than
 // 20. Otherwise, an exception will be thrown. You must use AWS Developer
 // credentials to call this API.
 func (c *Client) MergeDeveloperIdentities(ctx context.Context, params *MergeDeveloperIdentitiesInput, optFns ...func(*Options)) (*MergeDeveloperIdentitiesOutput, error) {
@@ -41,7 +41,7 @@ func (c *Client) MergeDeveloperIdentities(ctx context.Context, params *MergeDeve
 type MergeDeveloperIdentitiesInput struct {
 
 	// User identifier for the destination user. The value should be a
-	// DeveloperUserIdentifier.
+	// DeveloperUserIdentifier .
 	//
 	// This member is required.
 	DestinationUserIdentifier *string
@@ -49,8 +49,8 @@ type MergeDeveloperIdentitiesInput struct {
 	// The "domain" by which Cognito will refer to your users. This is a (pseudo)
 	// domain name that you provide while creating an identity pool. This name acts as
 	// a placeholder that allows your backend and the Cognito service to communicate
-	// about the developer provider. For the DeveloperProviderName, you can use letters
-	// as well as period (.), underscore (_), and dash (-).
+	// about the developer provider. For the DeveloperProviderName , you can use
+	// letters as well as period (.), underscore (_), and dash (-).
 	//
 	// This member is required.
 	DeveloperProviderName *string
@@ -61,7 +61,7 @@ type MergeDeveloperIdentitiesInput struct {
 	IdentityPoolId *string
 
 	// User identifier for the source user. The value should be a
-	// DeveloperUserIdentifier.
+	// DeveloperUserIdentifier .
 	//
 	// This member is required.
 	SourceUserIdentifier *string

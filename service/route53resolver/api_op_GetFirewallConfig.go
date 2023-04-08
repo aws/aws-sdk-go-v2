@@ -40,8 +40,8 @@ type GetFirewallConfigInput struct {
 
 type GetFirewallConfigOutput struct {
 
-	// Configuration of the firewall behavior provided by DNS Firewall for a single VPC
-	// from AmazonVPC.
+	// Configuration of the firewall behavior provided by DNS Firewall for a single
+	// VPC from AmazonVPC.
 	FirewallConfig *types.FirewallConfig
 
 	// Metadata pertaining to the operation's result.

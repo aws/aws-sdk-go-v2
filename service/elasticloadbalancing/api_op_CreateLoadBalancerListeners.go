@@ -14,8 +14,7 @@ import (
 // Creates one or more listeners for the specified load balancer. If a listener
 // with the specified port does not already exist, it is created; otherwise, the
 // properties of the new listener must match the properties of the existing
-// listener. For more information, see Listeners for Your Classic Load Balancer
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
+// listener. For more information, see Listeners for Your Classic Load Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
 // in the Classic Load Balancers Guide.
 func (c *Client) CreateLoadBalancerListeners(ctx context.Context, params *CreateLoadBalancerListenersInput, optFns ...func(*Options)) (*CreateLoadBalancerListenersOutput, error) {
 	if params == nil {

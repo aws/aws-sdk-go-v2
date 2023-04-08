@@ -51,9 +51,9 @@ type StartChannelOutput struct {
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass types.ChannelClass
 
-	// A list of destinations of the channel. For UDP outputs, there is one destination
-	// per output. For other types (HLS, for example), there is one destination per
-	// packager.
+	// A list of destinations of the channel. For UDP outputs, there is one
+	// destination per output. For other types (HLS, for example), there is one
+	// destination per packager.
 	Destinations []types.OutputDestination
 
 	// The endpoints where outgoing connections initiate from

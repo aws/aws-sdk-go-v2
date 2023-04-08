@@ -12,7 +12,7 @@ import (
 )
 
 // Gets a certificate revocation list (CRL). Required permissions:
-// rolesanywhere:GetCrl.
+// rolesanywhere:GetCrl .
 func (c *Client) GetCrl(ctx context.Context, params *GetCrlInput, optFns ...func(*Options)) (*GetCrlOutput, error) {
 	if params == nil {
 		params = &GetCrlInput{}

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a website authorization provider from a specified fleet. After the
-// disassociation, users can't load any associated websites that require this
+// Disassociates a website authorization provider from a specified fleet. After
+// the disassociation, users can't load any associated websites that require this
 // authorization provider.
 //
 // Deprecated: Amazon WorkLink is no longer supported. This will be removed in a

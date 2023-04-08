@@ -30,8 +30,8 @@ func (c *Client) PostCommentForPullRequest(ctx context.Context, params *PostComm
 
 type PostCommentForPullRequestInput struct {
 
-	// The full commit ID of the commit in the source branch that is the current tip of
-	// the branch for the pull request when you post the comment.
+	// The full commit ID of the commit in the source branch that is the current tip
+	// of the branch for the pull request when you post the comment.
 	//
 	// This member is required.
 	AfterCommitId *string
@@ -48,7 +48,7 @@ type PostCommentForPullRequestInput struct {
 	Content *string
 
 	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests.
+	// ListPullRequests .
 	//
 	// This member is required.
 	PullRequestId *string

@@ -48,8 +48,8 @@ type DescribeRulesInput struct {
 
 type DescribeRulesOutput struct {
 
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
+	// If there are additional results, this is the marker for the next set of
+	// results. Otherwise, this is null.
 	NextMarker *string
 
 	// Information about the rules.

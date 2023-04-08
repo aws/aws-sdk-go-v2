@@ -34,9 +34,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 
 	// The name of a specific DB cluster parameter group to return details for.
 	// Constraints:
-	//
-	// * If supplied, must match the name of an existing
-	// DBClusterParameterGroup.
+	//   - If supplied, must match the name of an existing DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 
 	// This parameter is not currently supported.
@@ -45,7 +43,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 	// An optional pagination token provided by a previous
 	// DescribeDBClusterParameterGroups request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -65,7 +63,7 @@ type DescribeDBClusterParameterGroupsOutput struct {
 	// An optional pagination token provided by a previous
 	// DescribeDBClusterParameterGroups request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

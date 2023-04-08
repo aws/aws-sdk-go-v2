@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables an Amazon Macie administrator to suspend or re-enable Macie for a member
-// account.
+// Enables an Amazon Macie administrator to suspend or re-enable Macie for a
+// member account.
 func (c *Client) UpdateMemberSession(ctx context.Context, params *UpdateMemberSessionInput, optFns ...func(*Options)) (*UpdateMemberSessionOutput, error) {
 	if params == nil {
 		params = &UpdateMemberSessionInput{}

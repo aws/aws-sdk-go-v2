@@ -31,8 +31,8 @@ func (c *Client) DescribeUploadBuffer(ctx context.Context, params *DescribeUploa
 
 type DescribeUploadBufferInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -42,14 +42,14 @@ type DescribeUploadBufferInput struct {
 
 type DescribeUploadBufferOutput struct {
 
-	// An array of the gateway's local disk IDs that are configured as working storage.
-	// Each local disk ID is specified as a string (minimum length of 1 and maximum
-	// length of 300). If no local disks are configured as working storage, then the
-	// DiskIds array is empty.
+	// An array of the gateway's local disk IDs that are configured as working
+	// storage. Each local disk ID is specified as a string (minimum length of 1 and
+	// maximum length of 300). If no local disks are configured as working storage,
+	// then the DiskIds array is empty.
 	DiskIds []string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The total number of bytes allocated in the gateway's as upload buffer.

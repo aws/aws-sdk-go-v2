@@ -14,18 +14,16 @@ import (
 // generate an SMS text message. Starting June 1, 2021, US telecom carriers require
 // you to register an origination phone number before you can send SMS messages to
 // US phone numbers. If you use SMS text messages in Amazon Cognito, you must
-// register a phone number with Amazon Pinpoint
-// (https://console.aws.amazon.com/pinpoint/home/). Amazon Cognito uses the
-// registered number automatically. Otherwise, Amazon Cognito users who must
-// receive SMS messages might not be able to sign up, activate their accounts, or
-// sign in. If you have never used SMS text messages with Amazon Cognito or any
-// other Amazon Web Service, Amazon Simple Notification Service might place your
-// account in the SMS sandbox. In sandbox mode
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you can send
-// messages only to verified phone numbers. After you test your app while in the
-// sandbox environment, you can move out of the sandbox and into production. For
-// more information, see  SMS message settings for Amazon Cognito user pools
-// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
+// . Amazon Cognito uses the registered number automatically. Otherwise, Amazon
+// Cognito users who must receive SMS messages might not be able to sign up,
+// activate their accounts, or sign in. If you have never used SMS text messages
+// with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification
+// Service might place your account in the SMS sandbox. In sandbox mode (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+// , you can send messages only to verified phone numbers. After you test your app
+// while in the sandbox environment, you can move out of the sandbox and into
+// production. For more information, see SMS message settings for Amazon Cognito
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) UpdateUserAttributes(ctx context.Context, params *UpdateUserAttributesInput, optFns ...func(*Options)) (*UpdateUserAttributesOutput, error) {
 	if params == nil {
@@ -72,22 +70,17 @@ type UpdateUserAttributesInput struct {
 	// clientMetadata attribute, which provides the data that you assigned to the
 	// ClientMetadata parameter in your UpdateUserAttributes request. In your function
 	// code in Lambda, you can process the clientMetadata value to enhance your
-	// workflow for your specific needs. For more information, see  Customizing user
-	// pool Workflows with Lambda Triggers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
+	// workflow for your specific needs. For more information, see Customizing user
+	// pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	//
-	// * Store the
-	// ClientMetadata value. This data is available only to Lambda triggers that are
-	// assigned to a user pool to support custom workflows. If your user pool
-	// configuration doesn't include triggers, the ClientMetadata parameter serves no
-	// purpose.
-	//
-	// * Validate the ClientMetadata value.
-	//
-	// * Encrypt the ClientMetadata
-	// value. Don't use Amazon Cognito to provide sensitive information.
+	//   - Store the ClientMetadata value. This data is available only to Lambda
+	//   triggers that are assigned to a user pool to support custom workflows. If your
+	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
+	//   serves no purpose.
+	//   - Validate the ClientMetadata value.
+	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
+	//   sensitive information.
 	ClientMetadata map[string]string
 
 	noSmithyDocumentSerde

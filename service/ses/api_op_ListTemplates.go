@@ -50,8 +50,8 @@ type ListTemplatesOutput struct {
 	// next 50 email templates.
 	NextToken *string
 
-	// An array the contains the name and creation time stamp for each template in your
-	// Amazon SES account.
+	// An array the contains the name and creation time stamp for each template in
+	// your Amazon SES account.
 	TemplatesMetadata []types.TemplateMetadata
 
 	// Metadata pertaining to the operation's result.

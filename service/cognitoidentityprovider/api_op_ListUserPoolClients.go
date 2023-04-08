@@ -126,8 +126,8 @@ func (c *Client) addOperationListUserPoolClientsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListUserPoolClientsAPIClient is a client that implements the ListUserPoolClients
-// operation.
+// ListUserPoolClientsAPIClient is a client that implements the
+// ListUserPoolClients operation.
 type ListUserPoolClientsAPIClient interface {
 	ListUserPoolClients(context.Context, *ListUserPoolClientsInput, ...func(*Options)) (*ListUserPoolClientsOutput, error)
 }

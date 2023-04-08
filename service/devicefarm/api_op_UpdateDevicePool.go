@@ -38,11 +38,11 @@ type UpdateDevicePoolInput struct {
 	Arn *string
 
 	// Sets whether the maxDevices parameter applies to your device pool. If you set
-	// this parameter to true, the maxDevices parameter does not apply, and Device Farm
-	// does not limit the number of devices that it adds to your device pool. In this
-	// case, Device Farm adds all available devices that meet the criteria specified in
-	// the rules parameter. If you use this parameter in your request, you cannot use
-	// the maxDevices parameter in the same request.
+	// this parameter to true , the maxDevices parameter does not apply, and Device
+	// Farm does not limit the number of devices that it adds to your device pool. In
+	// this case, Device Farm adds all available devices that meet the criteria
+	// specified in the rules parameter. If you use this parameter in your request,
+	// you cannot use the maxDevices parameter in the same request.
 	ClearMaxDevices *bool
 
 	// A description of the device pool to update.

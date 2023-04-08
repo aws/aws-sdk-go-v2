@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies an existing Amazon Managed Grafana workspace. If you use this operation
-// and omit any optional parameters, the existing values of those parameters are
-// not changed. To modify the user authentication methods that the workspace uses,
-// such as SAML or IAM Identity Center, use UpdateWorkspaceAuthentication
-// (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspaceAuthentication.html).
-// To modify which users in the workspace have the Admin and Editor Grafana roles,
-// use UpdatePermissions
-// (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html).
+// Modifies an existing Amazon Managed Grafana workspace. If you use this
+// operation and omit any optional parameters, the existing values of those
+// parameters are not changed. To modify the user authentication methods that the
+// workspace uses, such as SAML or IAM Identity Center, use
+// UpdateWorkspaceAuthentication (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspaceAuthentication.html)
+// . To modify which users in the workspace have the Admin and Editor Grafana
+// roles, use UpdatePermissions (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html)
+// .
 func (c *Client) UpdateWorkspace(ctx context.Context, params *UpdateWorkspaceInput, optFns ...func(*Options)) (*UpdateWorkspaceOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspaceInput{}
@@ -41,10 +41,10 @@ type UpdateWorkspaceInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// Specifies whether the workspace can access Amazon Web Services resources in this
-	// Amazon Web Services account only, or whether it can also access Amazon Web
+	// Specifies whether the workspace can access Amazon Web Services resources in
+	// this Amazon Web Services account only, or whether it can also access Amazon Web
 	// Services resources in other accounts in the same organization. If you specify
-	// ORGANIZATION, you must specify which organizational units the workspace can
+	// ORGANIZATION , you must specify which organizational units the workspace can
 	// access in the workspaceOrganizationalUnits parameter.
 	AccountAccessType types.AccountAccessType
 
@@ -58,32 +58,31 @@ type UpdateWorkspaceInput struct {
 
 	// The name of an IAM role that already exists to use to access resources through
 	// Organizations. This can only be used with a workspace that has the
-	// permissionType set to CUSTOMER_MANAGED.
+	// permissionType set to CUSTOMER_MANAGED .
 	OrganizationRoleName *string
 
 	// Use this parameter if you want to change a workspace from SERVICE_MANAGED to
-	// CUSTOMER_MANAGED. This allows you to manage the permissions that the workspace
+	// CUSTOMER_MANAGED . This allows you to manage the permissions that the workspace
 	// uses to access datasources and notification channels. If the workspace is in a
 	// member Amazon Web Services account of an organization, and that account is not a
 	// delegated administrator account, and you want the workspace to access data
 	// sources in other Amazon Web Services accounts in the organization, you must
-	// choose CUSTOMER_MANAGED. If you specify this as CUSTOMER_MANAGED, you must also
-	// specify a workspaceRoleArn that the workspace will use for accessing Amazon Web
-	// Services resources. For more information on the role and permissions needed, see
-	// Amazon Managed Grafana permissions and policies for Amazon Web Services data
-	// sources and notification channels
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
-	// Do not use this to convert a CUSTOMER_MANAGED workspace to SERVICE_MANAGED. Do
-	// not include this parameter if you want to leave the workspace as
-	// SERVICE_MANAGED. You can convert a CUSTOMER_MANAGED workspace to SERVICE_MANAGED
-	// using the Amazon Managed Grafana console. For more information, see Managing
-	// permissions for data sources and notification channels
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html).
+	// choose CUSTOMER_MANAGED . If you specify this as CUSTOMER_MANAGED , you must
+	// also specify a workspaceRoleArn that the workspace will use for accessing
+	// Amazon Web Services resources. For more information on the role and permissions
+	// needed, see Amazon Managed Grafana permissions and policies for Amazon Web
+	// Services data sources and notification channels (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
+	// Do not use this to convert a CUSTOMER_MANAGED workspace to SERVICE_MANAGED . Do
+	// not include this parameter if you want to leave the workspace as SERVICE_MANAGED
+	// . You can convert a CUSTOMER_MANAGED workspace to SERVICE_MANAGED using the
+	// Amazon Managed Grafana console. For more information, see Managing permissions
+	// for data sources and notification channels (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html)
+	// .
 	PermissionType types.PermissionType
 
 	// Whether to remove the network access configuration from the workspace. Setting
 	// this to true and providing a networkAccessControl to set will return an error.
-	// If you remove this configuration by setting this to true, then all IP addresses
+	// If you remove this configuration by setting this to true , then all IP addresses
 	// and VPC endpoints will be allowed. Standard Grafana authentication and
 	// authorization will still be required.
 	RemoveNetworkAccessConfiguration *bool
@@ -92,12 +91,12 @@ type UpdateWorkspaceInput struct {
 	// and providing a vpcConfiguration to set will return an error.
 	RemoveVpcConfiguration *bool
 
-	// The name of the CloudFormation stack set to use to generate IAM roles to be used
-	// for this workspace.
+	// The name of the CloudFormation stack set to use to generate IAM roles to be
+	// used for this workspace.
 	StackSetName *string
 
-	// The configuration settings for an Amazon VPC that contains data sources for your
-	// Grafana workspace to connect to.
+	// The configuration settings for an Amazon VPC that contains data sources for
+	// your Grafana workspace to connect to.
 	VpcConfiguration *types.VpcConfiguration
 
 	// This parameter is for internal use only, and should not be used.
@@ -123,7 +122,7 @@ type UpdateWorkspaceInput struct {
 
 	// Specifies an IAM role that grants permissions to Amazon Web Services resources
 	// that the workspace accesses, such as data sources and notification channels. If
-	// this workspace has permissionTypeCUSTOMER_MANAGED, then this role is required.
+	// this workspace has permissionType CUSTOMER_MANAGED , then this role is required.
 	WorkspaceRoleArn *string
 
 	noSmithyDocumentSerde

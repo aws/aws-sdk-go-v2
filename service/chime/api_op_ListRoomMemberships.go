@@ -127,8 +127,8 @@ func (c *Client) addOperationListRoomMembershipsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListRoomMembershipsAPIClient is a client that implements the ListRoomMemberships
-// operation.
+// ListRoomMembershipsAPIClient is a client that implements the
+// ListRoomMemberships operation.
 type ListRoomMembershipsAPIClient interface {
 	ListRoomMemberships(context.Context, *ListRoomMembershipsInput, ...func(*Options)) (*ListRoomMembershipsOutput, error)
 }

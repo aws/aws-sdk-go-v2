@@ -42,9 +42,9 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsInput struct {
 	// This member is required.
 	WindowExecutionId *string
 
-	// Optional filters used to scope down the returned task invocations. The supported
-	// filter key is STATUS with the corresponding values PENDING, IN_PROGRESS,
-	// SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED.
+	// Optional filters used to scope down the returned task invocations. The
+	// supported filter key is STATUS with the corresponding values PENDING ,
+	// IN_PROGRESS , SUCCESS , FAILED , TIMED_OUT , CANCELLING , and CANCELLED .
 	Filters []types.MaintenanceWindowFilter
 
 	// The maximum number of items to return for this call. The call also returns a

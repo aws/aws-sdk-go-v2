@@ -19,12 +19,12 @@ import (
 // (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You
 // can use an existing ASN assigned to your network. If you don't have an ASN
 // already, you can use a private ASN. For more information, see Customer gateway
-// options for your Site-to-Site VPN connection
-// (https://docs.aws.amazon.com/vpn/latest/s2svpn/cgw-options.html) in the Amazon
-// Web Services Site-to-Site VPN User Guide. To create more than one customer
-// gateway with the same VPN type, IP address, and BGP ASN, specify a unique device
-// name for each customer gateway. An identical request returns information about
-// the existing customer gateway; it doesn't create a new customer gateway.
+// options for your Site-to-Site VPN connection (https://docs.aws.amazon.com/vpn/latest/s2svpn/cgw-options.html)
+// in the Amazon Web Services Site-to-Site VPN User Guide. To create more than one
+// customer gateway with the same VPN type, IP address, and BGP ASN, specify a
+// unique device name for each customer gateway. An identical request returns
+// information about the existing customer gateway; it doesn't create a new
+// customer gateway.
 func (c *Client) CreateCustomerGateway(ctx context.Context, params *CreateCustomerGatewayInput, optFns ...func(*Options)) (*CreateCustomerGatewayOutput, error) {
 	if params == nil {
 		params = &CreateCustomerGatewayInput{}
@@ -43,7 +43,7 @@ func (c *Client) CreateCustomerGateway(ctx context.Context, params *CreateCustom
 // Contains the parameters for CreateCustomerGateway.
 type CreateCustomerGatewayInput struct {
 
-	// The type of VPN connection that this customer gateway supports (ipsec.1).
+	// The type of VPN connection that this customer gateway supports ( ipsec.1 ).
 	//
 	// This member is required.
 	Type types.GatewayType
@@ -60,8 +60,8 @@ type CreateCustomerGatewayInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// IPv4 address for the customer gateway device's outside interface. The address

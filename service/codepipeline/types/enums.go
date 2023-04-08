@@ -59,8 +59,8 @@ const (
 	ActionExecutionStatusFailed     ActionExecutionStatus = "Failed"
 )
 
-// Values returns all known values for ActionExecutionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ActionExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ActionExecutionStatus) Values() []ActionExecutionStatus {
 	return []ActionExecutionStatus{
@@ -181,9 +181,9 @@ const (
 	ExecutorTypeLambda    ExecutorType = "Lambda"
 )
 
-// Values returns all known values for ExecutorType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExecutorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutorType) Values() []ExecutorType {
 	return []ExecutorType{
 		"JobWorker",
@@ -230,9 +230,9 @@ const (
 	JobStatusFailed     JobStatus = "Failed"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"Created",

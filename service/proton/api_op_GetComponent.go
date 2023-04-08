@@ -18,9 +18,8 @@ import (
 )
 
 // Get detailed data for a component. For more information about components, see
-// Proton components
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-// Proton User Guide.
+// Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+// in the Proton User Guide.
 func (c *Client) GetComponent(ctx context.Context, params *GetComponentInput, optFns ...func(*Options)) (*GetComponentOutput, error) {
 	if params == nil {
 		params = &GetComponentInput{}
@@ -140,8 +139,8 @@ type ComponentDeployedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ComponentDeployedWaiter will use default max delay of 4999 seconds.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ComponentDeployedWaiter will use default max delay of 4999 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -190,10 +189,10 @@ func (w *ComponentDeployedWaiter) Wait(ctx context.Context, params *GetComponent
 	return err
 }
 
-// WaitForOutput calls the waiter function for ComponentDeployed waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for ComponentDeployed waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *ComponentDeployedWaiter) WaitForOutput(ctx context.Context, params *GetComponentInput, maxWaitDur time.Duration, optFns ...func(*ComponentDeployedWaiterOptions)) (*GetComponentOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -317,9 +316,9 @@ type ComponentDeletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ComponentDeletedWaiter will use default max delay of 4999 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ComponentDeletedWaiter will use default max delay of 4999 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

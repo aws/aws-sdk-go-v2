@@ -13,9 +13,8 @@ import (
 
 // Creates a user account for the specified Amazon Connect instance. For
 // information about how to create user accounts using the Amazon Connect console,
-// see Add Users
-// (https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html) in
-// the Amazon Connect Administrator Guide.
+// see Add Users (https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}
@@ -33,8 +32,7 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 
 type CreateUserInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

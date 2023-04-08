@@ -18,15 +18,13 @@ import (
 // directories. Internet Monitor then publishes internet measurements from Amazon
 // Web Services that are specific to the city-networks, that is, the locations and
 // ASNs (typically internet service providers or ISPs), where clients access your
-// application. For more information, see Using Amazon CloudWatch Internet Monitor
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-InternetMonitor.html)
+// application. For more information, see Using Amazon CloudWatch Internet Monitor (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-InternetMonitor.html)
 // in the Amazon CloudWatch User Guide. When you create a monitor, you set a
 // maximum limit for the number of city-networks where client traffic is monitored.
 // The city-network maximum that you choose is the limit, but you only pay for the
 // number of city-networks that are actually monitored. You can change the maximum
 // at any time by updating your monitor. For more information, see Choosing a
-// city-network maximum value
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
+// city-network maximum value (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
 // in the Amazon CloudWatch User Guide.
 func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, optFns ...func(*Options)) (*CreateMonitorOutput, error) {
 	if params == nil {
@@ -49,8 +47,7 @@ type CreateMonitorInput struct {
 	// city-network is the location (city) where clients access your application
 	// resources from and the network or ASN, such as an internet service provider
 	// (ISP), that clients access the resources through. This limit helps control
-	// billing costs. To learn more, see Choosing a city-network maximum value
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
+	// billing costs. To learn more, see Choosing a city-network maximum value  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	//
 	// This member is required.
@@ -61,9 +58,9 @@ type CreateMonitorInput struct {
 	// This member is required.
 	MonitorName *string
 
-	// A unique, case-sensitive string of up to 64 ASCII characters that you specify to
-	// make an idempotent API request. Don't reuse the same client token for other API
-	// requests.
+	// A unique, case-sensitive string of up to 64 ASCII characters that you specify
+	// to make an idempotent API request. Don't reuse the same client token for other
+	// API requests.
 	ClientToken *string
 
 	// Publish internet measurements for Internet Monitor to another location, such as

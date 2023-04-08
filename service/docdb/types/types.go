@@ -68,8 +68,8 @@ type DBCluster struct {
 	// your behalf.
 	AssociatedRoles []DBClusterRole
 
-	// Provides the list of Amazon EC2 Availability Zones that instances in the cluster
-	// can be created in.
+	// Provides the list of Amazon EC2 Availability Zones that instances in the
+	// cluster can be created in.
 	AvailabilityZones []string
 
 	// Specifies the number of days for which automatic snapshots are retained.
@@ -104,9 +104,10 @@ type DBCluster struct {
 	// cluster is accessed.
 	DbClusterResourceId *string
 
-	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
-	// the cluster cannot be deleted unless it is modified and DeletionProtection is
-	// disabled. DeletionProtection protects clusters from being accidentally deleted.
+	// Specifies whether this cluster can be deleted. If DeletionProtection is
+	// enabled, the cluster cannot be deleted unless it is modified and
+	// DeletionProtection is disabled. DeletionProtection protects clusters from being
+	// accidentally deleted.
 	DeletionProtection bool
 
 	// The earliest time to which a database can be restored with point-in-time
@@ -129,11 +130,11 @@ type DBCluster struct {
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
 
-	// If StorageEncrypted is true, the KMS key identifier for the encrypted cluster.
+	// If StorageEncrypted is true , the KMS key identifier for the encrypted cluster.
 	KmsKeyId *string
 
-	// Specifies the latest time to which a database can be restored with point-in-time
-	// restore.
+	// Specifies the latest time to which a database can be restored with
+	// point-in-time restore.
 	LatestRestorableTime *time.Time
 
 	// Contains the master user name for the cluster.
@@ -149,7 +150,7 @@ type DBCluster struct {
 	Port *int32
 
 	// Specifies the daily time range during which automated backups are created if
-	// automated backups are enabled, as determined by the BackupRetentionPeriod.
+	// automated backups are enabled, as determined by the BackupRetentionPeriod .
 	PreferredBackupWindow *string
 
 	// Specifies the weekly time range during which system maintenance can occur, in
@@ -230,8 +231,8 @@ type DBClusterParameterGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an Identity and Access Management (IAM) role that is associated with a
-// cluster.
+// Describes an Identity and Access Management (IAM) role that is associated with
+// a cluster.
 type DBClusterRole struct {
 
 	// The Amazon Resource Name (ARN) of the IAMrole that is associated with the DB
@@ -240,17 +241,12 @@ type DBClusterRole struct {
 
 	// Describes the state of association between the IAMrole and the cluster. The
 	// Status property returns one of the following values:
-	//
-	// * ACTIVE - The IAMrole ARN
-	// is associated with the cluster and can be used to access other Amazon Web
-	// Services services on your behalf.
-	//
-	// * PENDING - The IAMrole ARN is being
-	// associated with the cluster.
-	//
-	// * INVALID - The IAMrole ARN is associated with the
-	// cluster, but the cluster cannot assume the IAMrole to access other Amazon Web
-	// Services services on your behalf.
+	//   - ACTIVE - The IAMrole ARN is associated with the cluster and can be used to
+	//   access other Amazon Web Services services on your behalf.
+	//   - PENDING - The IAMrole ARN is being associated with the cluster.
+	//   - INVALID - The IAMrole ARN is associated with the cluster, but the cluster
+	//   cannot assume the IAMrole to access other Amazon Web Services services on your
+	//   behalf.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -259,8 +255,8 @@ type DBClusterRole struct {
 // Detailed information about a cluster snapshot.
 type DBClusterSnapshot struct {
 
-	// Provides the list of Amazon EC2 Availability Zones that instances in the cluster
-	// snapshot can be restored in.
+	// Provides the list of Amazon EC2 Availability Zones that instances in the
+	// cluster snapshot can be restored in.
 	AvailabilityZones []string
 
 	// Specifies the time when the cluster was created, in Universal Coordinated Time
@@ -283,7 +279,7 @@ type DBClusterSnapshot struct {
 	// Provides the version of the database engine for this cluster snapshot.
 	EngineVersion *string
 
-	// If StorageEncrypted is true, the KMS key identifier for the encrypted cluster
+	// If StorageEncrypted is true , the KMS key identifier for the encrypted cluster
 	// snapshot.
 	KmsKeyId *string
 
@@ -330,9 +326,9 @@ type DBClusterSnapshotAttribute struct {
 	// or restore the manual cluster snapshot.
 	AttributeName *string
 
-	// The values for the manual cluster snapshot attribute. If the AttributeName field
-	// is set to restore, then this element returns a list of IDs of the Amazon Web
-	// Services accounts that are authorized to copy or restore the manual cluster
+	// The values for the manual cluster snapshot attribute. If the AttributeName
+	// field is set to restore , then this element returns a list of IDs of the Amazon
+	// Web Services accounts that are authorized to copy or restore the manual cluster
 	// snapshot. If a value of all is in the list, then the manual cluster snapshot is
 	// public and available for any Amazon Web Services account to copy or restore.
 	AttributeValues []string
@@ -401,8 +397,8 @@ type DBInstance struct {
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
 
-	// A value that indicates whether to copy tags from the DB instance to snapshots of
-	// the DB instance. By default, tags are not copied.
+	// A value that indicates whether to copy tags from the DB instance to snapshots
+	// of the DB instance. By default, tags are not copied.
 	CopyTagsToSnapshot *bool
 
 	// Contains the name of the cluster that the instance is a member of if the
@@ -447,11 +443,11 @@ type DBInstance struct {
 	// Provides the date and time that the instance was created.
 	InstanceCreateTime *time.Time
 
-	// If StorageEncrypted is true, the KMS key identifier for the encrypted instance.
+	// If StorageEncrypted is true , the KMS key identifier for the encrypted instance.
 	KmsKeyId *string
 
-	// Specifies the latest time to which a database can be restored with point-in-time
-	// restore.
+	// Specifies the latest time to which a database can be restored with
+	// point-in-time restore.
 	LatestRestorableTime *time.Time
 
 	// Specifies that changes to the instance are pending. This element is included
@@ -459,7 +455,7 @@ type DBInstance struct {
 	PendingModifiedValues *PendingModifiedValues
 
 	// Specifies the daily time range during which automated backups are created if
-	// automated backups are enabled, as determined by the BackupRetentionPeriod.
+	// automated backups are enabled, as determined by the BackupRetentionPeriod .
 	PreferredBackupWindow *string
 
 	// Specifies the weekly time range during which system maintenance can occur, in
@@ -472,7 +468,7 @@ type DBInstance struct {
 	PromotionTier *int32
 
 	// Not supported. Amazon DocumentDB does not currently support public endpoints.
-	// The value of PubliclyAccessible is always false.
+	// The value of PubliclyAccessible is always false .
 	PubliclyAccessible bool
 
 	// The status of a read replica. If the instance is not a read replica, this is
@@ -500,10 +496,10 @@ type DBInstanceStatusInfo struct {
 	Normal bool
 
 	// Status of the instance. For a StatusType of read replica, the values can be
-	// replicating, error, stopped, or terminated.
+	// replicating , error, stopped , or terminated .
 	Status *string
 
-	// This value is currently "read replication."
+	// This value is currently " read replication ."
 	StatusType *string
 
 	noSmithyDocumentSerde
@@ -559,7 +555,7 @@ type EngineDefaults struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The parameters of a particular cluster parameter group family.
@@ -635,9 +631,9 @@ type EventSubscription struct {
 	SourceType *string
 
 	// The status of the Amazon DocumentDB event notification subscription.
-	// Constraints: Can be one of the following: creating, modifying, deleting, active,
-	// no-permission, topic-not-exist The no-permission status indicates that Amazon
-	// DocumentDB no longer has permission to post to the SNS topic. The
+	// Constraints: Can be one of the following: creating , modifying , deleting ,
+	// active , no-permission , topic-not-exist The no-permission status indicates
+	// that Amazon DocumentDB no longer has permission to post to the SNS topic. The
 	// topic-not-exist status indicates that the topic was deleted after the
 	// subscription was created.
 	Status *string
@@ -714,9 +710,9 @@ type GlobalClusterMember struct {
 	// The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.
 	DBClusterArn *string
 
-	// Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is,
-	// has read-write capability) for the Amazon DocumentDB global cluster with which
-	// it is associated.
+	// Specifies whether the Amazon DocumentDB cluster is the primary cluster (that
+	// is, has read-write capability) for the Amazon DocumentDB global cluster with
+	// which it is associated.
 	IsWriter bool
 
 	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
@@ -768,7 +764,7 @@ type Parameter struct {
 	// Provides a description of the parameter.
 	Description *string
 
-	// Indicates whether (true) or not (false) the parameter can be modified. Some
+	// Indicates whether ( true ) or not ( false ) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
 	IsModifiable bool
@@ -834,12 +830,12 @@ type PendingMaintenanceAction struct {
 	noSmithyDocumentSerde
 }
 
-// One or more modified settings for an instance. These modified settings have been
-// requested, but haven't been applied yet.
+// One or more modified settings for an instance. These modified settings have
+// been requested, but haven't been applied yet.
 type PendingModifiedValues struct {
 
-	// Contains the new AllocatedStorage size for then instance that will be applied or
-	// is currently being applied.
+	// Contains the new AllocatedStorage size for then instance that will be applied
+	// or is currently being applied.
 	AllocatedStorage *int32
 
 	// Specifies the pending number of days for which automated backups are retained.
@@ -867,8 +863,8 @@ type PendingModifiedValues struct {
 	// or is currently being applied.
 	Iops *int32
 
-	// The license model for the instance. Valid values: license-included,
-	// bring-your-own-license, general-public-license
+	// The license model for the instance. Valid values: license-included ,
+	// bring-your-own-license , general-public-license
 	LicenseModel *string
 
 	// Contains the pending or currently in-progress change of the master credentials
@@ -891,7 +887,7 @@ type PendingModifiedValues struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of ApplyPendingMaintenanceAction.
+// Represents the output of ApplyPendingMaintenanceAction .
 type ResourcePendingMaintenanceActions struct {
 
 	// A list that provides details about the pending maintenance actions for the
@@ -925,14 +921,14 @@ type Subnet struct {
 type Tag struct {
 
 	// The required name of the tag. The string value can be from 1 to 128 Unicode
-	// characters in length and can't be prefixed with "aws:" or "rds:". The string can
-	// contain only the set of Unicode letters, digits, white space, '_', '.', '/',
+	// characters in length and can't be prefixed with " aws: " or " rds: ". The string
+	// can contain only the set of Unicode letters, digits, white space, '_', '.', '/',
 	// '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Key *string
 
 	// The optional value of the tag. The string value can be from 1 to 256 Unicode
-	// characters in length and can't be prefixed with "aws:" or "rds:". The string can
-	// contain only the set of Unicode letters, digits, white space, '_', '.', '/',
+	// characters in length and can't be prefixed with " aws: " or " rds: ". The string
+	// can contain only the set of Unicode letters, digits, white space, '_', '.', '/',
 	// '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Value *string
 
@@ -943,7 +939,7 @@ type Tag struct {
 type UpgradeTarget struct {
 
 	// A value that indicates whether the target version is applied to any source DB
-	// instances that have AutoMinorVersionUpgrade set to true.
+	// instances that have AutoMinorVersionUpgrade set to true .
 	AutoUpgrade bool
 
 	// The version of the database engine that an instance can be upgraded to.

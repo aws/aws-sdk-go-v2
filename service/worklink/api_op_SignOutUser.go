@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Signs the user out from all of their devices. The user can sign in again if they
-// have valid credentials.
+// Signs the user out from all of their devices. The user can sign in again if
+// they have valid credentials.
 //
 // Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
 // future version of the SDK.

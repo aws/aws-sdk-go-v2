@@ -18,17 +18,15 @@ import (
 // response. In this case, send a later request with the NextToken request
 // parameter set to the value of NextToken from the last response. This action is
 // used in an iterative process to retrieve a list of your tags.
-// ListTagsForResource is called first without a NextTokenvalue. Then the action
-// continues to be called with the NextToken parameter set to the value of the last
-// NextToken value until a response has no NextToken. When using this action, keep
-// the following in mind:
-//
-// * The implementation might return fewer than MaxResults
-// file system descriptions while still including a NextToken value.
-//
-// * The order
-// of tags returned in the response of one ListTagsForResource call and the order
-// of tags returned across the responses of a multi-call iteration is unspecified.
+// ListTagsForResource is called first without a NextToken value. Then the action
+// continues to be called with the NextToken parameter set to the value of the
+// last NextToken value until a response has no NextToken . When using this action,
+// keep the following in mind:
+//   - The implementation might return fewer than MaxResults file system
+//     descriptions while still including a NextToken value.
+//   - The order of tags returned in the response of one ListTagsForResource call
+//     and the order of tags returned across the responses of a multi-call iteration is
+//     unspecified.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -52,8 +50,8 @@ type ListTagsForResourceInput struct {
 	// This member is required.
 	ResourceARN *string
 
-	// Maximum number of tags to return in the response (integer). This parameter value
-	// must be greater than 0. The number of items that Amazon FSx returns is the
+	// Maximum number of tags to return in the response (integer). This parameter
+	// value must be greater than 0. The number of items that Amazon FSx returns is the
 	// minimum of the MaxResults parameter specified in the request and the service's
 	// internal maximum number of items per page.
 	MaxResults *int32
@@ -145,8 +143,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }
@@ -156,8 +154,8 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 // ListTagsForResourcePaginatorOptions is the paginator options for
 // ListTagsForResource
 type ListTagsForResourcePaginatorOptions struct {
-	// Maximum number of tags to return in the response (integer). This parameter value
-	// must be greater than 0. The number of items that Amazon FSx returns is the
+	// Maximum number of tags to return in the response (integer). This parameter
+	// value must be greater than 0. The number of items that Amazon FSx returns is the
 	// minimum of the MaxResults parameter specified in the request and the service's
 	// internal maximum number of items per page.
 	Limit int32

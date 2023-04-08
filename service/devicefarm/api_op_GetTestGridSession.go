@@ -11,15 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A session is an instance of a browser created through a RemoteWebDriver with the
-// URL from CreateTestGridUrlResult$url. You can use the following to look up
+// A session is an instance of a browser created through a RemoteWebDriver with
+// the URL from CreateTestGridUrlResult$url . You can use the following to look up
 // sessions:
-//
-// * The session ARN (GetTestGridSessionRequest$sessionArn).
-//
-// * The
-// project ARN and a session ID (GetTestGridSessionRequest$projectArn and
-// GetTestGridSessionRequest$sessionId).
+//   - The session ARN ( GetTestGridSessionRequest$sessionArn ).
+//   - The project ARN and a session ID ( GetTestGridSessionRequest$projectArn and
+//     GetTestGridSessionRequest$sessionId ).
 func (c *Client) GetTestGridSession(ctx context.Context, params *GetTestGridSessionInput, optFns ...func(*Options)) (*GetTestGridSessionOutput, error) {
 	if params == nil {
 		params = &GetTestGridSessionInput{}
@@ -38,10 +35,10 @@ func (c *Client) GetTestGridSession(ctx context.Context, params *GetTestGridSess
 type GetTestGridSessionInput struct {
 
 	// The ARN for the project that this session belongs to. See CreateTestGridProject
-	// and ListTestGridProjects.
+	// and ListTestGridProjects .
 	ProjectArn *string
 
-	// An ARN that uniquely identifies a TestGridSession.
+	// An ARN that uniquely identifies a TestGridSession .
 	SessionArn *string
 
 	// An ID associated with this session.

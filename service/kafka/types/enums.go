@@ -27,9 +27,9 @@ const (
 	ClientBrokerPlaintext    ClientBroker = "PLAINTEXT"
 )
 
-// Values returns all known values for ClientBroker. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ClientBroker. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ClientBroker) Values() []ClientBroker {
 	return []ClientBroker{
 		"TLS",
@@ -52,9 +52,9 @@ const (
 	ClusterStateUpdating        ClusterState = "UPDATING"
 )
 
-// Values returns all known values for ClusterState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ClusterState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterState) Values() []ClusterState {
 	return []ClusterState{
 		"ACTIVE",

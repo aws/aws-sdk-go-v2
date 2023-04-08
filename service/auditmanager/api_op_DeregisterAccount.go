@@ -12,13 +12,11 @@ import (
 )
 
 // Deregisters an account in Audit Manager. Before you deregister, you can use the
-// UpdateSettings
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_UpdateSettings.html)
+// UpdateSettings (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_UpdateSettings.html)
 // API operation to set your preferred data retention policy. By default, Audit
 // Manager retains your data. If you want to delete your data, you can use the
 // DeregistrationPolicy attribute to request the deletion of your data. For more
-// information about data retention, see Data Protection
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html)
+// information about data retention, see Data Protection (https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html)
 // in the Audit Manager User Guide.
 func (c *Client) DeregisterAccount(ctx context.Context, params *DeregisterAccountInput, optFns ...func(*Options)) (*DeregisterAccountOutput, error) {
 	if params == nil {

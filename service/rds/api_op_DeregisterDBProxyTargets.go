@@ -11,7 +11,7 @@ import (
 )
 
 // Remove the association between one or more DBProxyTarget data structures and a
-// DBProxyTargetGroup.
+// DBProxyTargetGroup .
 func (c *Client) DeregisterDBProxyTargets(ctx context.Context, params *DeregisterDBProxyTargetsInput, optFns ...func(*Options)) (*DeregisterDBProxyTargetsOutput, error) {
 	if params == nil {
 		params = &DeregisterDBProxyTargetsInput{}
@@ -29,7 +29,7 @@ func (c *Client) DeregisterDBProxyTargets(ctx context.Context, params *Deregiste
 
 type DeregisterDBProxyTargetsInput struct {
 
-	// The identifier of the DBProxy that is associated with the DBProxyTargetGroup.
+	// The identifier of the DBProxy that is associated with the DBProxyTargetGroup .
 	//
 	// This member is required.
 	DBProxyName *string
@@ -40,7 +40,7 @@ type DeregisterDBProxyTargetsInput struct {
 	// One or more DB instance identifiers.
 	DBInstanceIdentifiers []string
 
-	// The identifier of the DBProxyTargetGroup.
+	// The identifier of the DBProxyTargetGroup .
 	TargetGroupName *string
 
 	noSmithyDocumentSerde

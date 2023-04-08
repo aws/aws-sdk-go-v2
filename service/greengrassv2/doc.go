@@ -14,7 +14,6 @@
 // major version of the IoT Greengrass Core software, new APIs, and a new console.
 // Use this API reference to learn how to use the IoT Greengrass V2 API operations
 // to manage components, manage deployments, and core devices. For more
-// information, see What is IoT Greengrass?
-// (https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html)
+// information, see What is IoT Greengrass? (https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html)
 // in the IoT Greengrass V2 Developer Guide.
 package greengrassv2

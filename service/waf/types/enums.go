@@ -10,9 +10,9 @@ const (
 	ChangeActionDelete ChangeAction = "DELETE"
 )
 
-// Values returns all known values for ChangeAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChangeAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeAction) Values() []ChangeAction {
 	return []ChangeAction{
 		"INSERT",
@@ -728,9 +728,9 @@ const (
 	ParameterExceptionReasonInvalidTagKey      ParameterExceptionReason = "INVALID_TAG_KEY"
 )
 
-// Values returns all known values for ParameterExceptionReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ParameterExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParameterExceptionReason) Values() []ParameterExceptionReason {
 	return []ParameterExceptionReason{
 		"INVALID_OPTION",
@@ -862,8 +862,8 @@ const (
 	WafOverrideActionTypeCount WafOverrideActionType = "COUNT"
 )
 
-// Values returns all known values for WafOverrideActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for WafOverrideActionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (WafOverrideActionType) Values() []WafOverrideActionType {
 	return []WafOverrideActionType{

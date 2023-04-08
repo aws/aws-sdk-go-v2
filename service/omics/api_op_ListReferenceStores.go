@@ -149,8 +149,8 @@ func addEndpointPrefix_opListReferenceStoresMiddleware(stack *middleware.Stack) 
 	return stack.Serialize.Insert(&endpointPrefix_opListReferenceStoresMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-// ListReferenceStoresAPIClient is a client that implements the ListReferenceStores
-// operation.
+// ListReferenceStoresAPIClient is a client that implements the
+// ListReferenceStores operation.
 type ListReferenceStoresAPIClient interface {
 	ListReferenceStores(context.Context, *ListReferenceStoresInput, ...func(*Options)) (*ListReferenceStoresOutput, error)
 }

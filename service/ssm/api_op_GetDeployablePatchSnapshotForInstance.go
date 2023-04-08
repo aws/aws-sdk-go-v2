@@ -43,7 +43,7 @@ type GetDeployablePatchSnapshotForInstanceInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The snapshot ID provided by the user when running AWS-RunPatchBaseline.
+	// The snapshot ID provided by the user when running AWS-RunPatchBaseline .
 	//
 	// This member is required.
 	SnapshotId *string
@@ -59,8 +59,8 @@ type GetDeployablePatchSnapshotForInstanceOutput struct {
 	// The managed node ID.
 	InstanceId *string
 
-	// Returns the specific operating system (for example Windows Server 2012 or Amazon
-	// Linux 2015.09) on the managed node for the specified patch snapshot.
+	// Returns the specific operating system (for example Windows Server 2012 or
+	// Amazon Linux 2015.09) on the managed node for the specified patch snapshot.
 	Product *string
 
 	// A pre-signed Amazon Simple Storage Service (Amazon S3) URL that can be used to

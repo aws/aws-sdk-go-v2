@@ -102,8 +102,8 @@ type GetTrailStatusOutput struct {
 
 	// Displays any Amazon SNS error that CloudTrail encountered when attempting to
 	// send a notification. For more information about Amazon SNS errors, see the
-	// Amazon SNS Developer Guide
-	// (https://docs.aws.amazon.com/sns/latest/dg/welcome.html).
+	// Amazon SNS Developer Guide (https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
+	// .
 	LatestNotificationError *string
 
 	// Specifies the date and time of the most recent Amazon SNS notification that

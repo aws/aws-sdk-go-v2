@@ -37,7 +37,7 @@ type ListTagsForDeliveryStreamInput struct {
 
 	// The key to use as the starting point for the list of tags. If you set this
 	// parameter, ListTagsForDeliveryStream gets all tags that occur after
-	// ExclusiveStartTagKey.
+	// ExclusiveStartTagKey .
 	ExclusiveStartTagKey *string
 
 	// The number of tags to return. If this number is less than the total number of
@@ -58,8 +58,8 @@ type ListTagsForDeliveryStreamOutput struct {
 	// This member is required.
 	HasMoreTags *bool
 
-	// A list of tags associated with DeliveryStreamName, starting with the first tag
-	// after ExclusiveStartTagKey and up to the specified Limit.
+	// A list of tags associated with DeliveryStreamName , starting with the first tag
+	// after ExclusiveStartTagKey and up to the specified Limit .
 	//
 	// This member is required.
 	Tags []types.Tag

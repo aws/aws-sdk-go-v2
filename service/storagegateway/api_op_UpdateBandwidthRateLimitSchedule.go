@@ -39,8 +39,8 @@ type UpdateBandwidthRateLimitScheduleInput struct {
 	// This member is required.
 	BandwidthRateLimitIntervals []types.BandwidthRateLimitInterval
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -50,8 +50,8 @@ type UpdateBandwidthRateLimitScheduleInput struct {
 
 type UpdateBandwidthRateLimitScheduleOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

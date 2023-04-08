@@ -35,9 +35,9 @@ type DeleteFileInput struct {
 	// This member is required.
 	BranchName *string
 
-	// The fully qualified path to the file that to be deleted, including the full name
-	// and extension of that file. For example, /examples/file.md is a fully qualified
-	// path to a file named file.md in a folder named examples.
+	// The fully qualified path to the file that to be deleted, including the full
+	// name and extension of that file. For example, /examples/file.md is a fully
+	// qualified path to a file named file.md in a folder named examples.
 	//
 	// This member is required.
 	FilePath *string

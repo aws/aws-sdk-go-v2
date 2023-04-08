@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Creates an API destination, which is an HTTP invocation endpoint configured as a
-// target for events.
+// Creates an API destination, which is an HTTP invocation endpoint configured as
+// a target for events.
 func (c *Client) CreateApiDestination(ctx context.Context, params *CreateApiDestinationInput, optFns ...func(*Options)) (*CreateApiDestinationOutput, error) {
 	if params == nil {
 		params = &CreateApiDestinationInput{}

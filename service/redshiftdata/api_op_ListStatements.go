@@ -56,30 +56,19 @@ type ListStatementsInput struct {
 	// ExecuteStatement to identify the query. You can list multiple statements by
 	// providing a prefix that matches the beginning of the statement name. For
 	// example, to list myStatement1, myStatement2, myStatement3, and so on, then
-	// provide the a value of myStatement. Data API does a case-sensitive match of SQL
+	// provide the a value of myStatement . Data API does a case-sensitive match of SQL
 	// statement names to the prefix value you provide.
 	StatementName *string
 
-	// The status of the SQL statement to list. Status values are defined as
-	// follows:
-	//
-	// * ABORTED - The query run was stopped by the user.
-	//
-	// * ALL - A status
-	// value that includes all query statuses. This value can be used to filter
-	// results.
-	//
-	// * FAILED - The query run failed.
-	//
-	// * FINISHED - The query has finished
-	// running.
-	//
-	// * PICKED - The query has been chosen to be run.
-	//
-	// * STARTED - The query
-	// run has started.
-	//
-	// * SUBMITTED - The query was submitted, but not yet processed.
+	// The status of the SQL statement to list. Status values are defined as follows:
+	//   - ABORTED - The query run was stopped by the user.
+	//   - ALL - A status value that includes all query statuses. This value can be
+	//   used to filter results.
+	//   - FAILED - The query run failed.
+	//   - FINISHED - The query has finished running.
+	//   - PICKED - The query has been chosen to be run.
+	//   - STARTED - The query run has started.
+	//   - SUBMITTED - The query was submitted, but not yet processed.
 	Status types.StatusString
 
 	noSmithyDocumentSerde

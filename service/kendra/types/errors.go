@@ -93,8 +93,8 @@ func (e *FeaturedResultsConflictException) ErrorCode() string {
 func (e *FeaturedResultsConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An issue occurred with the internal server used for your Amazon Kendra service.
-// Please wait a few minutes and try again, or contact Support
-// (http://aws.amazon.com/contact-us/) for help.
+// Please wait a few minutes and try again, or contact Support (http://aws.amazon.com/contact-us/)
+// for help.
 type InternalServerException struct {
 	Message *string
 
@@ -174,8 +174,8 @@ func (e *ResourceAlreadyExistException) ErrorCode() string {
 }
 func (e *ResourceAlreadyExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource you want to use is currently in use. Please check you have provided
-// the correct resource and try again.
+// The resource you want to use is currently in use. Please check you have
+// provided the correct resource and try again.
 type ResourceInUseException struct {
 	Message *string
 
@@ -228,8 +228,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource you want to use isn't available. Please check you have provided the
-// correct resource and try again.
+// The resource you want to use isn't available. Please check you have provided
+// the correct resource and try again.
 type ResourceUnavailableException struct {
 	Message *string
 

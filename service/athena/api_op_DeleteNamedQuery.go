@@ -13,9 +13,8 @@ import (
 
 // Deletes the named query if you have access to the workgroup in which the query
 // was saved. For code samples using the Amazon Web Services SDK for Java, see
-// Examples and Code Samples
-// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
-// Athena User Guide.
+// Examples and Code Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html)
+// in the Amazon Athena User Guide.
 func (c *Client) DeleteNamedQuery(ctx context.Context, params *DeleteNamedQueryInput, optFns ...func(*Options)) (*DeleteNamedQueryOutput, error) {
 	if params == nil {
 		params = &DeleteNamedQueryInput{}

@@ -32,9 +32,9 @@ func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInp
 // Represents the input of a ListDeployments operation.
 type ListDeploymentsInput struct {
 
-	// The name of an CodeDeploy application associated with the IAM user or Amazon Web
-	// Services account. If applicationName is specified, then deploymentGroupName must
-	// be specified. If it is not specified, then deploymentGroupName must not be
+	// The name of an CodeDeploy application associated with the IAM user or Amazon
+	// Web Services account. If applicationName is specified, then deploymentGroupName
+	// must be specified. If it is not specified, then deploymentGroupName must not be
 	// specified.
 	ApplicationName *string
 
@@ -51,23 +51,12 @@ type ListDeploymentsInput struct {
 	ExternalId *string
 
 	// A subset of deployments to list by status:
-	//
-	// * Created: Include created
-	// deployments in the resulting list.
-	//
-	// * Queued: Include queued deployments in the
-	// resulting list.
-	//
-	// * In Progress: Include in-progress deployments in the resulting
-	// list.
-	//
-	// * Succeeded: Include successful deployments in the resulting list.
-	//
-	// *
-	// Failed: Include failed deployments in the resulting list.
-	//
-	// * Stopped: Include
-	// stopped deployments in the resulting list.
+	//   - Created : Include created deployments in the resulting list.
+	//   - Queued : Include queued deployments in the resulting list.
+	//   - In Progress : Include in-progress deployments in the resulting list.
+	//   - Succeeded : Include successful deployments in the resulting list.
+	//   - Failed : Include failed deployments in the resulting list.
+	//   - Stopped : Include stopped deployments in the resulting list.
 	IncludeOnlyStatuses []types.DeploymentStatus
 
 	// An identifier returned from the previous list deployments call. It can be used
@@ -83,8 +72,8 @@ type ListDeploymentsOutput struct {
 	// A list of deployment IDs.
 	Deployments []string
 
-	// If a large amount of information is returned, an identifier is also returned. It
-	// can be used in a subsequent list deployments call to return the next set of
+	// If a large amount of information is returned, an identifier is also returned.
+	// It can be used in a subsequent list deployments call to return the next set of
 	// deployments in the list.
 	NextToken *string
 

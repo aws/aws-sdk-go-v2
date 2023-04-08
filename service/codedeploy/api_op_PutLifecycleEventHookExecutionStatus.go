@@ -14,14 +14,13 @@ import (
 // Sets the result of a Lambda validation function. The function validates
 // lifecycle hooks during a deployment that uses the Lambda or Amazon ECS compute
 // platform. For Lambda deployments, the available lifecycle hooks are
-// BeforeAllowTraffic and AfterAllowTraffic. For Amazon ECS deployments, the
-// available lifecycle hooks are BeforeInstall, AfterInstall,
-// AfterAllowTestTraffic, BeforeAllowTraffic, and AfterAllowTraffic. Lambda
-// validation functions return Succeeded or Failed. For more information, see
-// AppSpec 'hooks' Section for an Lambda Deployment
-// (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda)
-// and AppSpec 'hooks' Section for an Amazon ECS Deployment
-// (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs).
+// BeforeAllowTraffic and AfterAllowTraffic . For Amazon ECS deployments, the
+// available lifecycle hooks are BeforeInstall , AfterInstall ,
+// AfterAllowTestTraffic , BeforeAllowTraffic , and AfterAllowTraffic . Lambda
+// validation functions return Succeeded or Failed . For more information, see
+// AppSpec 'hooks' Section for an Lambda Deployment  (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda)
+// and AppSpec 'hooks' Section for an Amazon ECS Deployment (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs)
+// .
 func (c *Client) PutLifecycleEventHookExecutionStatus(ctx context.Context, params *PutLifecycleEventHookExecutionStatusInput, optFns ...func(*Options)) (*PutLifecycleEventHookExecutionStatusOutput, error) {
 	if params == nil {
 		params = &PutLifecycleEventHookExecutionStatusInput{}
@@ -47,8 +46,8 @@ type PutLifecycleEventHookExecutionStatusInput struct {
 	// is specified in the hooks section of the AppSpec file.
 	LifecycleEventHookExecutionId *string
 
-	// The result of a Lambda function that validates a deployment lifecycle event. The
-	// values listed in Valid Values are valid for lifecycle statuses in general;
+	// The result of a Lambda function that validates a deployment lifecycle event.
+	// The values listed in Valid Values are valid for lifecycle statuses in general;
 	// however, only Succeeded and Failed can be passed successfully in your API call.
 	Status types.LifecycleEventStatus
 

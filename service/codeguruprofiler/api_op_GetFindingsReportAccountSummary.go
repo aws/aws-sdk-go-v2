@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of FindingsReportSummary
-// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html)
+// Returns a list of FindingsReportSummary (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html)
 // objects that contain analysis results for all profiling groups in your AWS
 // account.
 func (c *Client) GetFindingsReportAccountSummary(ctx context.Context, params *GetFindingsReportAccountSummaryInput, optFns ...func(*Options)) (*GetFindingsReportAccountSummaryOutput, error) {
@@ -35,17 +34,17 @@ func (c *Client) GetFindingsReportAccountSummary(ctx context.Context, params *Ge
 type GetFindingsReportAccountSummaryInput struct {
 
 	// A Boolean value indicating whether to only return reports from daily profiles.
-	// If set to True, only analysis data from daily profiles is returned. If set to
-	// False, analysis data is returned from smaller time windows (for example, one
+	// If set to True , only analysis data from daily profiles is returned. If set to
+	// False , analysis data is returned from smaller time windows (for example, one
 	// hour).
 	DailyReportsOnly *bool
 
 	// The maximum number of results returned by  GetFindingsReportAccountSummary in
 	// paginated output. When this parameter is used, GetFindingsReportAccountSummary
-	// only returns maxResults results in a single page along with a nextToken response
-	// element. The remaining results of the initial request can be seen by sending
-	// another GetFindingsReportAccountSummary request with the returned nextToken
-	// value.
+	// only returns maxResults results in a single page along with a nextToken
+	// response element. The remaining results of the initial request can be seen by
+	// sending another GetFindingsReportAccountSummary request with the returned
+	// nextToken value.
 	MaxResults *int32
 
 	// The nextToken value returned from a previous paginated
@@ -62,8 +61,7 @@ type GetFindingsReportAccountSummaryInput struct {
 // The structure representing the GetFindingsReportAccountSummaryResponse.
 type GetFindingsReportAccountSummaryOutput struct {
 
-	// The return list of FindingsReportSummary
-	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html)
+	// The return list of FindingsReportSummary (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html)
 	// objects taht contain summaries of analysis results for all profiling groups in
 	// your AWS account.
 	//
@@ -72,7 +70,7 @@ type GetFindingsReportAccountSummaryOutput struct {
 
 	// The nextToken value to include in a future GetFindingsReportAccountSummary
 	// request. When the results of a GetFindingsReportAccountSummary request exceed
-	// maxResults, this value can be used to retrieve the next page of results. This
+	// maxResults , this value can be used to retrieve the next page of results. This
 	// value is null when there are no more results to return.
 	NextToken *string
 
@@ -155,10 +153,10 @@ var _ GetFindingsReportAccountSummaryAPIClient = (*Client)(nil)
 type GetFindingsReportAccountSummaryPaginatorOptions struct {
 	// The maximum number of results returned by  GetFindingsReportAccountSummary in
 	// paginated output. When this parameter is used, GetFindingsReportAccountSummary
-	// only returns maxResults results in a single page along with a nextToken response
-	// element. The remaining results of the initial request can be seen by sending
-	// another GetFindingsReportAccountSummary request with the returned nextToken
-	// value.
+	// only returns maxResults results in a single page along with a nextToken
+	// response element. The remaining results of the initial request can be seen by
+	// sending another GetFindingsReportAccountSummary request with the returned
+	// nextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

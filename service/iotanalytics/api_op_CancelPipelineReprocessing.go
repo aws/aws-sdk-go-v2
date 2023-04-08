@@ -33,7 +33,7 @@ type CancelPipelineReprocessingInput struct {
 	// This member is required.
 	PipelineName *string
 
-	// The ID of the reprocessing task (returned by StartPipelineReprocessing).
+	// The ID of the reprocessing task (returned by StartPipelineReprocessing ).
 	//
 	// This member is required.
 	ReprocessingId *string

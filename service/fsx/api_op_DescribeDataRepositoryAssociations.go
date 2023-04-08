@@ -16,12 +16,12 @@ import (
 // data repository associations, if one or more AssociationIds values are provided
 // in the request, or if filters are used in the request. Data repository
 // associations are supported on Amazon File Cache resources and all Amazon FSx for
-// Lustre file systems excluding Scratch_1 deployment types. You can use filters to
-// narrow the response to include just data repository associations for specific
+// Lustre file systems excluding Scratch_1 deployment types. You can use filters
+// to narrow the response to include just data repository associations for specific
 // file systems (use the file-system-id filter with the ID of the file system) or
 // caches (use the file-cache-id filter with the ID of the cache), or data
 // repository associations for a specific repository type (use the
-// data-repository-type filter with a value of S3 or NFS). If you don't use
+// data-repository-type filter with a value of S3 or NFS ). If you don't use
 // filters, the response returns all data repository associations owned by your
 // Amazon Web Services account in the Amazon Web Services Region of the endpoint
 // that you're calling. When retrieving all data repository associations, you can
@@ -54,8 +54,8 @@ type DescribeDataRepositoryAssociationsInput struct {
 	// A list of Filter elements.
 	Filters []types.Filter
 
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	MaxResults *int32
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).
@@ -153,8 +153,8 @@ var _ DescribeDataRepositoryAssociationsAPIClient = (*Client)(nil)
 // DescribeDataRepositoryAssociationsPaginatorOptions is the paginator options for
 // DescribeDataRepositoryAssociations
 type DescribeDataRepositoryAssociationsPaginatorOptions struct {
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

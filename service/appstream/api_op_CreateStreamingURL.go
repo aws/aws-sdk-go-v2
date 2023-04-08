@@ -46,14 +46,13 @@ type CreateStreamingURLInput struct {
 	// This member is required.
 	UserId *string
 
-	// The name of the application to launch after the session starts. This is the name
-	// that you specified as Name in the Image Assistant. If your fleet is enabled for
-	// the Desktop stream view, you can also choose to launch directly to the operating
-	// system desktop. To do so, specify Desktop.
+	// The name of the application to launch after the session starts. This is the
+	// name that you specified as Name in the Image Assistant. If your fleet is enabled
+	// for the Desktop stream view, you can also choose to launch directly to the
+	// operating system desktop. To do so, specify Desktop.
 	ApplicationId *string
 
-	// The session context. For more information, see Session Context
-	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters)
+	// The session context. For more information, see Session Context (https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	SessionContext *string
 

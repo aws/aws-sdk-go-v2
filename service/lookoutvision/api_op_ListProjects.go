@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon Lookout for Vision projects in your AWS account that are in the
-// AWS Region in which you call ListProjects. The ListProjects operation is
+// Lists the Amazon Lookout for Vision projects in your AWS account that are in
+// the AWS Region in which you call ListProjects . The ListProjects operation is
 // eventually consistent. Recent calls to CreateProject and DeleteProject might
-// take a while to appear in the response from ListProjects. This operation
+// take a while to appear in the response from ListProjects . This operation
 // requires permissions to perform the lookoutvision:ListProjects operation.
 func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, optFns ...func(*Options)) (*ListProjectsOutput, error) {
 	if params == nil {

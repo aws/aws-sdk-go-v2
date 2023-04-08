@@ -20,11 +20,9 @@ import (
 
 // Returns information about Amazon Aurora DB clusters and Multi-AZ DB clusters.
 // This API supports pagination. For more information on Amazon Aurora DB clusters,
-// see  What is Amazon Aurora?
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see  Multi-AZ DB cluster deployments
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 // in the Amazon RDS User Guide. This operation can also return information for
 // Amazon Neptune DB instances and Amazon DocumentDB instances.
 func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClustersInput, optFns ...func(*Options)) (*DescribeDBClustersOutput, error) {
@@ -44,36 +42,26 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 
 type DescribeDBClustersInput struct {
 
-	// The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of the
-	// DB cluster. If this parameter is specified, information from only the specific
-	// DB cluster is returned. This parameter isn't case-sensitive. Constraints:
-	//
-	// * If
-	// supplied, must match an existing DBClusterIdentifier.
+	// The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of
+	// the DB cluster. If this parameter is specified, information from only the
+	// specific DB cluster is returned. This parameter isn't case-sensitive.
+	// Constraints:
+	//   - If supplied, must match an existing DBClusterIdentifier.
 	DBClusterIdentifier *string
 
-	// A filter that specifies one or more DB clusters to describe. Supported
-	// filters:
-	//
-	// * clone-group-id - Accepts clone group identifiers. The results list
-	// only includes information about the DB clusters associated with these clone
-	// groups.
-	//
-	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	// Resource Names (ARNs). The results list only includes information about the DB
-	// clusters identified by these ARNs.
-	//
-	// * db-cluster-resource-id - Accepts DB
-	// cluster resource identifiers. The results list will only include information
-	// about the DB clusters identified by these DB cluster resource identifiers.
-	//
-	// *
-	// domain - Accepts Active Directory directory IDs. The results list only includes
-	// information about the DB clusters associated with these domains.
-	//
-	// * engine -
-	// Accepts engine names. The results list only includes information about the DB
-	// clusters for these engines.
+	// A filter that specifies one or more DB clusters to describe. Supported filters:
+	//   - clone-group-id - Accepts clone group identifiers. The results list only
+	//   includes information about the DB clusters associated with these clone groups.
+	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	//   Resource Names (ARNs). The results list only includes information about the DB
+	//   clusters identified by these ARNs.
+	//   - db-cluster-resource-id - Accepts DB cluster resource identifiers. The
+	//   results list will only include information about the DB clusters identified by
+	//   these DB cluster resource identifiers.
+	//   - domain - Accepts Active Directory directory IDs. The results list only
+	//   includes information about the DB clusters associated with these domains.
+	//   - engine - Accepts engine names. The results list only includes information
+	//   about the DB clusters for these engines.
 	Filters []types.Filter
 
 	// Optional Boolean parameter that specifies whether the output includes
@@ -82,7 +70,7 @@ type DescribeDBClustersInput struct {
 
 	// An optional pagination token provided by a previous DescribeDBClusters request.
 	// If this parameter is specified, the response includes only records beyond the
-	// marker, up to the value specified by MaxRecords.
+	// marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -279,8 +267,8 @@ type DBClusterAvailableWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DBClusterAvailableWaiter will use default max delay of 120 seconds.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DBClusterAvailableWaiter will use default max delay of 120 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -574,9 +562,9 @@ type DBClusterDeletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DBClusterDeletedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DBClusterDeletedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

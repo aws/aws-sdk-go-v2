@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a list of medical transcription jobs that match the specified criteria.
-// If no criteria are specified, all medical transcription jobs are returned. To
-// get detailed information about a specific medical transcription job, use the
-// operation.
+// Provides a list of medical transcription jobs that match the specified
+// criteria. If no criteria are specified, all medical transcription jobs are
+// returned. To get detailed information about a specific medical transcription
+// job, use the operation.
 func (c *Client) ListMedicalTranscriptionJobs(ctx context.Context, params *ListMedicalTranscriptionJobsInput, optFns ...func(*Options)) (*ListMedicalTranscriptionJobsOutput, error) {
 	if params == nil {
 		params = &ListMedicalTranscriptionJobsInput{}
@@ -51,8 +51,8 @@ type ListMedicalTranscriptionJobsInput struct {
 	NextToken *string
 
 	// Returns only medical transcription jobs with the specified status. Jobs are
-	// ordered by creation date, with the newest job first. If you don't include
-	// Status, all medical transcription jobs are returned.
+	// ordered by creation date, with the newest job first. If you don't include Status
+	// , all medical transcription jobs are returned.
 	Status types.TranscriptionJobStatus
 
 	noSmithyDocumentSerde

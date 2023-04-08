@@ -35,8 +35,8 @@ type ListPlacementsInput struct {
 	// This member is required.
 	ProjectName *string
 
-	// The maximum number of results to return per request. If not set, a default value
-	// of 100 is used.
+	// The maximum number of results to return per request. If not set, a default
+	// value of 100 is used.
 	MaxResults *int32
 
 	// The token to retrieve the next set of results.
@@ -135,8 +135,8 @@ var _ ListPlacementsAPIClient = (*Client)(nil)
 
 // ListPlacementsPaginatorOptions is the paginator options for ListPlacements
 type ListPlacementsPaginatorOptions struct {
-	// The maximum number of results to return per request. If not set, a default value
-	// of 100 is used.
+	// The maximum number of results to return per request. If not set, a default
+	// value of 100 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

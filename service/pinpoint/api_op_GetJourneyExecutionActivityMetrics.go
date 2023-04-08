@@ -60,9 +60,9 @@ type GetJourneyExecutionActivityMetricsInput struct {
 
 type GetJourneyExecutionActivityMetricsOutput struct {
 
-	// Provides the results of a query that retrieved the data for a standard execution
-	// metric that applies to a journey activity, and provides information about that
-	// query.
+	// Provides the results of a query that retrieved the data for a standard
+	// execution metric that applies to a journey activity, and provides information
+	// about that query.
 	//
 	// This member is required.
 	JourneyExecutionActivityMetricsResponse *types.JourneyExecutionActivityMetricsResponse

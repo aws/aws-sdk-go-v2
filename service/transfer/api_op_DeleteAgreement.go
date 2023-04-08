@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete the agreement that's specified in the provided AgreementId.
+// Delete the agreement that's specified in the provided AgreementId .
 func (c *Client) DeleteAgreement(ctx context.Context, params *DeleteAgreementInput, optFns ...func(*Options)) (*DeleteAgreementOutput, error) {
 	if params == nil {
 		params = &DeleteAgreementInput{}

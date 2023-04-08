@@ -40,7 +40,7 @@ type ListConfigurationSetsInput struct {
 	// position in the list of configuration sets.
 	NextToken *string
 
-	// The number of results to show in a single call to ListConfigurationSets. If the
+	// The number of results to show in a single call to ListConfigurationSets . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
@@ -59,7 +59,7 @@ type ListConfigurationSetsOutput struct {
 
 	// A token that indicates that there are additional configuration sets to list. To
 	// view additional configuration sets, issue another request to
-	// ListConfigurationSets, and pass this token in the NextToken parameter.
+	// ListConfigurationSets , and pass this token in the NextToken parameter.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -139,7 +139,7 @@ var _ ListConfigurationSetsAPIClient = (*Client)(nil)
 // ListConfigurationSetsPaginatorOptions is the paginator options for
 // ListConfigurationSets
 type ListConfigurationSetsPaginatorOptions struct {
-	// The number of results to show in a single call to ListConfigurationSets. If the
+	// The number of results to show in a single call to ListConfigurationSets . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.

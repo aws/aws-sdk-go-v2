@@ -28,8 +28,8 @@ import (
 // choose US East (N. Virginia) as the Amazon Web Services Region. After you submit
 // your request, Amazon Cognito requires up to 1 hour to distribute your new
 // certificate to your custom domain. For more information about adding a custom
-// domain to your user pool, see Using Your Own Domain for the Hosted UI
-// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html).
+// domain to your user pool, see Using Your Own Domain for the Hosted UI (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html)
+// .
 func (c *Client) UpdateUserPoolDomain(ctx context.Context, params *UpdateUserPoolDomainInput, optFns ...func(*Options)) (*UpdateUserPoolDomainOutput, error) {
 	if params == nil {
 		params = &UpdateUserPoolDomainInput{}
@@ -56,7 +56,7 @@ type UpdateUserPoolDomainInput struct {
 	CustomDomainConfig *types.CustomDomainConfigType
 
 	// The domain name for the custom domain that hosts the sign-up and sign-in pages
-	// for your application. One example might be auth.example.com. This string can
+	// for your application. One example might be auth.example.com . This string can
 	// include only lowercase letters, numbers, and hyphens. Don't use a hyphen for the
 	// first or last character. Use periods to separate subdomain names.
 	//

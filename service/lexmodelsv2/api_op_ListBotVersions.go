@@ -61,16 +61,16 @@ type ListBotVersionsOutput struct {
 	// The identifier of the bot to list versions for.
 	BotId *string
 
-	// Summary information for the bot versions that meet the filter criteria specified
-	// in the request. The length of the list is specified in the maxResults parameter
-	// of the request. If there are more versions available, the nextToken field
-	// contains a token to get the next page of results.
+	// Summary information for the bot versions that meet the filter criteria
+	// specified in the request. The length of the list is specified in the maxResults
+	// parameter of the request. If there are more versions available, the nextToken
+	// field contains a token to get the next page of results.
 	BotVersionSummaries []types.BotVersionSummary
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListBotVersions operation. If the nextToken field is present, you send the
-	// contents as the nextToken parameter of a ListBotAliases operation request to get
-	// the next page of results.
+	// A token that indicates whether there are more results to return in a response
+	// to the ListBotVersions operation. If the nextToken field is present, you send
+	// the contents as the nextToken parameter of a ListBotAliases operation request
+	// to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

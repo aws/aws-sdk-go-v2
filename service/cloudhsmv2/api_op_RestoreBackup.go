@@ -12,7 +12,7 @@ import (
 )
 
 // Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION state.
-// For mor information on deleting a backup, see DeleteBackup.
+// For mor information on deleting a backup, see DeleteBackup .
 func (c *Client) RestoreBackup(ctx context.Context, params *RestoreBackupInput, optFns ...func(*Options)) (*RestoreBackupOutput, error) {
 	if params == nil {
 		params = &RestoreBackupInput{}

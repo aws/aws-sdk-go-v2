@@ -16,7 +16,7 @@ import (
 // there are tags associated with the object, they cannot be updated or added.
 // Depending on the specific updates requested, this operation can update with no
 // interruption, with some interruption, or replace the provisioned product
-// entirely. You can check the status of this request using DescribeRecord.
+// entirely. You can check the status of this request using DescribeRecord .
 func (c *Client) UpdateProvisionedProduct(ctx context.Context, params *UpdateProvisionedProductInput, optFns ...func(*Options)) (*UpdateProvisionedProductOutput, error) {
 	if params == nil {
 		params = &UpdateProvisionedProductInput{}
@@ -40,10 +40,8 @@ type UpdateProvisionedProductInput struct {
 	UpdateToken *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The path identifier. This value is optional if the product has a default path,
@@ -65,7 +63,7 @@ type UpdateProvisionedProductInput struct {
 	ProvisionedProductId *string
 
 	// The name of the provisioned product. You cannot specify both
-	// ProvisionedProductName and ProvisionedProductId.
+	// ProvisionedProductName and ProvisionedProductId .
 	ProvisionedProductName *string
 
 	// The identifier of the provisioning artifact.

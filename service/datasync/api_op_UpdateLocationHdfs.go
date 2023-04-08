@@ -50,9 +50,9 @@ type UpdateLocationHdfsInput struct {
 	// for you. Otherwise, provide the base64-encoded text.
 	KerberosKeytab []byte
 
-	// The krb5.conf file that contains the Kerberos configuration information. You can
-	// load the krb5.conf file by providing the file's address. If you're using the
-	// CLI, it performs the base64 encoding for you. Otherwise, provide the
+	// The krb5.conf file that contains the Kerberos configuration information. You
+	// can load the krb5.conf file by providing the file's address. If you're using
+	// the CLI, it performs the base64 encoding for you. Otherwise, provide the
 	// base64-encoded text.
 	KerberosKrb5Conf []byte
 

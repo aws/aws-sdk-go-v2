@@ -31,8 +31,8 @@ func (c *Client) GetMaintenanceWindowExecutionTask(ctx context.Context, params *
 
 type GetMaintenanceWindowExecutionTaskInput struct {
 
-	// The ID of the specific task execution in the maintenance window task that should
-	// be retrieved.
+	// The ID of the specific task execution in the maintenance window task that
+	// should be retrieved.
 	//
 	// This member is required.
 	TaskId *string
@@ -57,8 +57,8 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// The defined maximum number of task executions that could be run in parallel.
 	MaxConcurrency *string
 
-	// The defined maximum number of task execution errors allowed before scheduling of
-	// the task execution would have been stopped.
+	// The defined maximum number of task execution errors allowed before scheduling
+	// of the task execution would have been stopped.
 	MaxErrors *string
 
 	// The priority of the task.
@@ -85,15 +85,12 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 
 	// The parameters passed to the task when it was run. TaskParameters has been
 	// deprecated. To specify parameters to pass to a task when it runs, instead use
-	// the Parameters option in the TaskInvocationParameters structure. For information
-	// about how Systems Manager handles these options for the supported maintenance
-	// window task types, see MaintenanceWindowTaskInvocationParameters. The map has
-	// the following format:
-	//
-	// * Key: string, between 1 and 255 characters
-	//
-	// * Value: an
-	// array of strings, each between 1 and 255 characters
+	// the Parameters option in the TaskInvocationParameters structure. For
+	// information about how Systems Manager handles these options for the supported
+	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters .
+	// The map has the following format:
+	//   - Key : string, between 1 and 255 characters
+	//   - Value : an array of strings, each between 1 and 255 characters
 	TaskParameters []map[string]types.MaintenanceWindowTaskParameterValueExpression
 
 	// The CloudWatch alarms that were invoked by the maintenance window task.

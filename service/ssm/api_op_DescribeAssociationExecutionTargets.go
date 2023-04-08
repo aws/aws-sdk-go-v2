@@ -141,8 +141,8 @@ type DescribeAssociationExecutionTargetsAPIClient interface {
 
 var _ DescribeAssociationExecutionTargetsAPIClient = (*Client)(nil)
 
-// DescribeAssociationExecutionTargetsPaginatorOptions is the paginator options for
-// DescribeAssociationExecutionTargets
+// DescribeAssociationExecutionTargetsPaginatorOptions is the paginator options
+// for DescribeAssociationExecutionTargets
 type DescribeAssociationExecutionTargetsPaginatorOptions struct {
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.

@@ -41,8 +41,8 @@ type ListAppliedSchemaArnsInput struct {
 	// The pagination token.
 	NextToken *string
 
-	// The response for ListAppliedSchemaArns when this parameter is used will list all
-	// minor version ARNs for a major version.
+	// The response for ListAppliedSchemaArns when this parameter is used will list
+	// all minor version ARNs for a major version.
 	SchemaArn *string
 
 	noSmithyDocumentSerde

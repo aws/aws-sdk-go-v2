@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Updates the specified schedule. When you call UpdateSchedule, EventBridge
+// Updates the specified schedule. When you call UpdateSchedule , EventBridge
 // Scheduler uses all values, including empty values, specified in the request and
 // overrides the existing schedule. This is by design. This means that if you do
 // not set an optional field in your request, that field will be set to its
@@ -37,8 +37,8 @@ func (c *Client) UpdateSchedule(ctx context.Context, params *UpdateScheduleInput
 
 type UpdateScheduleInput struct {
 
-	// Allows you to configure a time window during which EventBridge Scheduler invokes
-	// the schedule.
+	// Allows you to configure a time window during which EventBridge Scheduler
+	// invokes the schedule.
 	//
 	// This member is required.
 	FlexibleTimeWindow *types.FlexibleTimeWindow
@@ -50,28 +50,21 @@ type UpdateScheduleInput struct {
 
 	// The expression that defines when the schedule runs. The following formats are
 	// supported.
-	//
-	// * at expression - at(yyyy-mm-ddThh:mm:ss)
-	//
-	// * rate expression -
-	// rate(unit value)
-	//
-	// * cron expression - cron(fields)
-	//
-	// You can use at expressions
-	// to create one-time schedules that invoke a target once, at the time and in the
-	// time zone, that you specify. You can use rate and cron expressions to create
-	// recurring schedules. Rate-based schedules are useful when you want to invoke a
-	// target at regular intervals, such as every 15 minutes or every five days.
-	// Cron-based schedules are useful when you want to invoke a target periodically at
-	// a specific time, such as at 8:00 am (UTC+0) every 1st day of the month. A cron
-	// expression consists of six fields separated by white spaces: (minutes hours
-	// day_of_month month day_of_week year). A rate expression consists of a value as a
-	// positive integer, and a unit with the following options: minute | minutes | hour
-	// | hours | day | days For more information and examples, see Schedule types on
-	// EventBridge Scheduler
-	// (https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html) in
-	// the EventBridge Scheduler User Guide.
+	//   - at expression - at(yyyy-mm-ddThh:mm:ss)
+	//   - rate expression - rate(unit value)
+	//   - cron expression - cron(fields)
+	// You can use at expressions to create one-time schedules that invoke a target
+	// once, at the time and in the time zone, that you specify. You can use rate and
+	// cron expressions to create recurring schedules. Rate-based schedules are useful
+	// when you want to invoke a target at regular intervals, such as every 15 minutes
+	// or every five days. Cron-based schedules are useful when you want to invoke a
+	// target periodically at a specific time, such as at 8:00 am (UTC+0) every 1st day
+	// of the month. A cron expression consists of six fields separated by white
+	// spaces: (minutes hours day_of_month month day_of_week year) . A rate expression
+	// consists of a value as a positive integer, and a unit with the following
+	// options: minute | minutes | hour | hours | day | days For more information and
+	// examples, see Schedule types on EventBridge Scheduler (https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html)
+	// in the EventBridge Scheduler User Guide.
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -111,8 +104,8 @@ type UpdateScheduleInput struct {
 
 	// The date, in UTC, after which the schedule can begin invoking its target.
 	// Depending on the schedule's recurrence expression, invocations might occur on,
-	// or after, the StartDate you specify. EventBridge Scheduler ignores StartDate for
-	// one-time schedules.
+	// or after, the StartDate you specify. EventBridge Scheduler ignores StartDate
+	// for one-time schedules.
 	StartDate *time.Time
 
 	// Specifies whether the schedule is enabled or disabled.

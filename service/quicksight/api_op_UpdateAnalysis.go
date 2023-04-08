@@ -29,26 +29,26 @@ func (c *Client) UpdateAnalysis(ctx context.Context, params *UpdateAnalysisInput
 
 type UpdateAnalysisInput struct {
 
-	// The ID for the analysis that you're updating. This ID displays in the URL of the
-	// analysis.
+	// The ID for the analysis that you're updating. This ID displays in the URL of
+	// the analysis.
 	//
 	// This member is required.
 	AnalysisId *string
 
-	// The ID of the Amazon Web Services account that contains the analysis that you're
-	// updating.
+	// The ID of the Amazon Web Services account that contains the analysis that
+	// you're updating.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// A descriptive name for the analysis that you're updating. This name displays for
-	// the analysis in the Amazon QuickSight console.
+	// A descriptive name for the analysis that you're updating. This name displays
+	// for the analysis in the Amazon QuickSight console.
 	//
 	// This member is required.
 	Name *string
 
-	// The definition of an analysis. A definition is the data model of all features in
-	// a Dashboard, Template, or Analysis.
+	// The definition of an analysis. A definition is the data model of all features
+	// in a Dashboard, Template, or Analysis.
 	Definition *types.AnalysisDefinition
 
 	// The parameter names and override values that you want to use. An analysis can

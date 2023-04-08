@@ -15,10 +15,9 @@ import (
 // default event bus, and the associated policy. For custom event buses and partner
 // event buses, it displays the name, ARN, policy, state, and creation time. To
 // enable your account to receive events from other accounts on its default event
-// bus, use PutPermission
-// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html).
-// For more information about partner event buses, see CreateEventBus
-// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html).
+// bus, use PutPermission (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html)
+// . For more information about partner event buses, see CreateEventBus (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html)
+// .
 func (c *Client) DescribeEventBus(ctx context.Context, params *DescribeEventBusInput, optFns ...func(*Options)) (*DescribeEventBusOutput, error) {
 	if params == nil {
 		params = &DescribeEventBusInput{}
@@ -49,7 +48,7 @@ type DescribeEventBusOutput struct {
 	// current account.
 	Arn *string
 
-	// The name of the event bus. Currently, this is always default.
+	// The name of the event bus. Currently, this is always default .
 	Name *string
 
 	// The policy that enables the external account to send events to your account.

@@ -49,7 +49,7 @@ type CreateImpersonationRoleInput struct {
 	Rules []types.ImpersonationRule
 
 	// The impersonation role's type. The available impersonation role types are
-	// READ_ONLY or FULL_ACCESS.
+	// READ_ONLY or FULL_ACCESS .
 	//
 	// This member is required.
 	Type types.ImpersonationRoleType

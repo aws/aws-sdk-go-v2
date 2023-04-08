@@ -44,7 +44,7 @@ type RegisterCertificateInput struct {
 	ClientCertAuthSettings *types.ClientCertAuthSettings
 
 	// The function that the registered certificate performs. Valid values include
-	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
+	// ClientLDAPS or ClientCertAuth . The default value is ClientLDAPS .
 	Type types.CertificateType
 
 	noSmithyDocumentSerde

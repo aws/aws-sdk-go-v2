@@ -51,7 +51,7 @@ type UpdateClusterInput struct {
 	ParameterGroupName *string
 
 	// A range of time when maintenance of DAX cluster software will be performed. For
-	// example: sun:01:00-sun:09:00. Cluster maintenance normally takes less than 30
+	// example: sun:01:00-sun:09:00 . Cluster maintenance normally takes less than 30
 	// minutes, and is performed automatically within the maintenance window.
 	PreferredMaintenanceWindow *string
 

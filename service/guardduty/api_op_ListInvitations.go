@@ -31,8 +31,8 @@ func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInp
 
 type ListInvitationsInput struct {
 
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 50. The maximum value is 50.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
 	MaxResults int32
 
 	// You can use this parameter when paginating results. Set the value of this
@@ -129,8 +129,8 @@ var _ ListInvitationsAPIClient = (*Client)(nil)
 
 // ListInvitationsPaginatorOptions is the paginator options for ListInvitations
 type ListInvitationsPaginatorOptions struct {
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 50. The maximum value is 50.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

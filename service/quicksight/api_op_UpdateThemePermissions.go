@@ -11,55 +11,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the resource permissions for a theme. Permissions apply to the action to
-// grant or revoke permissions on, for example "quicksight:DescribeTheme". Theme
-// permissions apply in groupings. Valid groupings include the following for the
-// three levels of permissions, which are user, owner, or no permissions:
-//
-// *
-// User
-//
-// * "quicksight:DescribeTheme"
-//
-// * "quicksight:DescribeThemeAlias"
-//
-// *
-// "quicksight:ListThemeAliases"
-//
-// * "quicksight:ListThemeVersions"
-//
-// * Owner
-//
-// *
-// "quicksight:DescribeTheme"
-//
-// * "quicksight:DescribeThemeAlias"
-//
-// *
-// "quicksight:ListThemeAliases"
-//
-// * "quicksight:ListThemeVersions"
-//
-// *
-// "quicksight:DeleteTheme"
-//
-// * "quicksight:UpdateTheme"
-//
-// *
-// "quicksight:CreateThemeAlias"
-//
-// * "quicksight:DeleteThemeAlias"
-//
-// *
-// "quicksight:UpdateThemeAlias"
-//
-// * "quicksight:UpdateThemePermissions"
-//
-// *
-// "quicksight:DescribeThemePermissions"
-//
-// * To specify no permissions, omit the
-// permissions list.
+// Updates the resource permissions for a theme. Permissions apply to the action
+// to grant or revoke permissions on, for example "quicksight:DescribeTheme" .
+// Theme permissions apply in groupings. Valid groupings include the following for
+// the three levels of permissions, which are user, owner, or no permissions:
+//   - User
+//   - "quicksight:DescribeTheme"
+//   - "quicksight:DescribeThemeAlias"
+//   - "quicksight:ListThemeAliases"
+//   - "quicksight:ListThemeVersions"
+//   - Owner
+//   - "quicksight:DescribeTheme"
+//   - "quicksight:DescribeThemeAlias"
+//   - "quicksight:ListThemeAliases"
+//   - "quicksight:ListThemeVersions"
+//   - "quicksight:DeleteTheme"
+//   - "quicksight:UpdateTheme"
+//   - "quicksight:CreateThemeAlias"
+//   - "quicksight:DeleteThemeAlias"
+//   - "quicksight:UpdateThemeAlias"
+//   - "quicksight:UpdateThemePermissions"
+//   - "quicksight:DescribeThemePermissions"
+//   - To specify no permissions, omit the permissions list.
 func (c *Client) UpdateThemePermissions(ctx context.Context, params *UpdateThemePermissionsInput, optFns ...func(*Options)) (*UpdateThemePermissionsOutput, error) {
 	if params == nil {
 		params = &UpdateThemePermissionsInput{}

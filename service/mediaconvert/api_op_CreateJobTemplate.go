@@ -65,8 +65,8 @@ type CreateJobTemplateInput struct {
 	// first. If you don't specify a priority, the service uses the default value 0.
 	Priority int32
 
-	// Optional. The queue that jobs created from this template are assigned to. If you
-	// don't specify this, jobs will go to the default queue.
+	// Optional. The queue that jobs created from this template are assigned to. If
+	// you don't specify this, jobs will go to the default queue.
 	Queue *string
 
 	// Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch

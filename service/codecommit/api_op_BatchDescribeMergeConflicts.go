@@ -74,8 +74,8 @@ type BatchDescribeMergeConflictsInput struct {
 	// The maximum number of merge hunks to include in the output.
 	MaxMergeHunks *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -83,8 +83,8 @@ type BatchDescribeMergeConflictsInput struct {
 
 type BatchDescribeMergeConflictsOutput struct {
 
-	// A list of conflicts for each file, including the conflict metadata and the hunks
-	// of the differences between the files.
+	// A list of conflicts for each file, including the conflict metadata and the
+	// hunks of the differences between the files.
 	//
 	// This member is required.
 	Conflicts []types.Conflict

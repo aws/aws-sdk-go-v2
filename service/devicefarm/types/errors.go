@@ -273,8 +273,8 @@ func (e *TagOperationException) ErrorCode() string {
 }
 func (e *TagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request doesn't comply with the AWS Identity and Access Management (IAM) tag
-// policy. Correct your request and then retry it.
+// The request doesn't comply with the AWS Identity and Access Management (IAM)
+// tag policy. Correct your request and then retry it.
 type TagPolicyException struct {
 	Message *string
 
@@ -302,8 +302,8 @@ func (e *TagPolicyException) ErrorCode() string {
 }
 func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The list of tags on the repository is over the limit. The maximum number of tags
-// that can be applied to a repository is 50.
+// The list of tags on the repository is over the limit. The maximum number of
+// tags that can be applied to a repository is 50.
 type TooManyTagsException struct {
 	Message *string
 

@@ -14,7 +14,7 @@ import (
 
 // Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is
 // specified, the list will contain only the descriptions of the specified
-// DBSubnetGroup.
+// DBSubnetGroup .
 func (c *Client) DescribeDBSubnetGroups(ctx context.Context, params *DescribeDBSubnetGroupsInput, optFns ...func(*Options)) (*DescribeDBSubnetGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeDBSubnetGroupsInput{}
@@ -30,7 +30,7 @@ func (c *Client) DescribeDBSubnetGroups(ctx context.Context, params *DescribeDBS
 	return out, nil
 }
 
-// Represents the input to DescribeDBSubnetGroups.
+// Represents the input to DescribeDBSubnetGroups .
 type DescribeDBSubnetGroupsInput struct {
 
 	// The name of the subnet group to return details for.
@@ -41,7 +41,7 @@ type DescribeDBSubnetGroupsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -53,7 +53,7 @@ type DescribeDBSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeDBSubnetGroups.
+// Represents the output of DescribeDBSubnetGroups .
 type DescribeDBSubnetGroupsOutput struct {
 
 	// Detailed information about one or more subnet groups.
@@ -61,7 +61,7 @@ type DescribeDBSubnetGroupsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

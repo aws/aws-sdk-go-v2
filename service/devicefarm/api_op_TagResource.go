@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the specified tags to a resource with the specified resourceArn. If
+// Associates the specified tags to a resource with the specified resourceArn . If
 // existing tags on a resource are not specified in the request parameters, they
 // are not changed. When a resource is deleted, the tags associated with that
 // resource are also deleted.
@@ -33,9 +33,9 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource or resources to which to add
-	// tags. You can associate tags with the following Device Farm resources: PROJECT,
-	// RUN, NETWORK_PROFILE, INSTANCE_PROFILE, DEVICE_INSTANCE, SESSION, DEVICE_POOL,
-	// DEVICE, and VPCE_CONFIGURATION.
+	// tags. You can associate tags with the following Device Farm resources: PROJECT ,
+	// RUN , NETWORK_PROFILE , INSTANCE_PROFILE , DEVICE_INSTANCE , SESSION ,
+	// DEVICE_POOL , DEVICE , and VPCE_CONFIGURATION .
 	//
 	// This member is required.
 	ResourceARN *string

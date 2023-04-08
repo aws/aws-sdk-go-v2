@@ -54,7 +54,7 @@ type CreatePackageInput struct {
 // Container for response returned by CreatePackage operation.
 type CreatePackageOutput struct {
 
-	// Information about the package PackageDetails.
+	// Information about the package PackageDetails .
 	PackageDetails *types.PackageDetails
 
 	// Metadata pertaining to the operation's result.

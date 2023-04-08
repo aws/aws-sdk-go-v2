@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a usage limit for a specified Amazon Redshift Serverless usage type. The
-// usage limit is identified by the returned usage limit identifier.
+// Creates a usage limit for a specified Amazon Redshift Serverless usage type.
+// The usage limit is identified by the returned usage limit identifier.
 func (c *Client) CreateUsageLimit(ctx context.Context, params *CreateUsageLimitInput, optFns ...func(*Options)) (*CreateUsageLimitOutput, error) {
 	if params == nil {
 		params = &CreateUsageLimitInput{}

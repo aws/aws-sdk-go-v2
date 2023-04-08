@@ -84,9 +84,9 @@ const (
 	ArtifactTypeDependencyJar ArtifactType = "DEPENDENCY_JAR"
 )
 
-// Values returns all known values for ArtifactType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ArtifactType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactType) Values() []ArtifactType {
 	return []ArtifactType{
 		"UDF",
@@ -139,8 +139,8 @@ const (
 	InputStartingPositionLastStoppedPoint InputStartingPosition = "LAST_STOPPED_POINT"
 )
 
-// Values returns all known values for InputStartingPosition. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InputStartingPosition. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InputStartingPosition) Values() []InputStartingPosition {
 	return []InputStartingPosition{
@@ -182,9 +182,9 @@ const (
 	MetricsLevelParallelism MetricsLevel = "PARALLELISM"
 )
 
-// Values returns all known values for MetricsLevel. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MetricsLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MetricsLevel) Values() []MetricsLevel {
 	return []MetricsLevel{
 		"APPLICATION",

@@ -12,23 +12,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a file system. After deletion, the file system no longer exists, and its
-// data is gone. Any existing automatic backups and snapshots are also deleted. To
-// delete an Amazon FSx for NetApp ONTAP file system, first delete all the volumes
-// and storage virtual machines (SVMs) on the file system. Then provide a
+// Deletes a file system. After deletion, the file system no longer exists, and
+// its data is gone. Any existing automatic backups and snapshots are also deleted.
+// To delete an Amazon FSx for NetApp ONTAP file system, first delete all the
+// volumes and storage virtual machines (SVMs) on the file system. Then provide a
 // FileSystemId value to the DeleFileSystem operation. By default, when you delete
 // an Amazon FSx for Windows File Server file system, a final backup is created
 // upon deletion. This final backup isn't subject to the file system's retention
 // policy, and must be manually deleted. The DeleteFileSystem operation returns
 // while the file system has the DELETING status. You can check the file system
-// deletion status by calling the DescribeFileSystems
-// (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html)
+// deletion status by calling the DescribeFileSystems (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html)
 // operation, which returns a list of file systems in your account. If you pass the
 // file system ID for a deleted file system, the DescribeFileSystems operation
-// returns a FileSystemNotFound error. If a data repository task is in a PENDING or
-// EXECUTING state, deleting an Amazon FSx for Lustre file system will fail with an
-// HTTP status code 400 (Bad Request). The data in a deleted file system is also
-// deleted and can't be recovered by any means.
+// returns a FileSystemNotFound error. If a data repository task is in a PENDING
+// or EXECUTING state, deleting an Amazon FSx for Lustre file system will fail
+// with an HTTP status code 400 (Bad Request). The data in a deleted file system is
+// also deleted and can't be recovered by any means.
 func (c *Client) DeleteFileSystem(ctx context.Context, params *DeleteFileSystemInput, optFns ...func(*Options)) (*DeleteFileSystemOutput, error) {
 	if params == nil {
 		params = &DeleteFileSystemInput{}
@@ -57,8 +56,8 @@ type DeleteFileSystemInput struct {
 	// Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// The configuration object for the Amazon FSx for Lustre file system being deleted
-	// in the DeleteFileSystem operation.
+	// The configuration object for the Amazon FSx for Lustre file system being
+	// deleted in the DeleteFileSystem operation.
 	LustreConfiguration *types.DeleteFileSystemLustreConfiguration
 
 	// The configuration object for the OpenZFS file system used in the
@@ -79,7 +78,7 @@ type DeleteFileSystemOutput struct {
 	FileSystemId *string
 
 	// The file system lifecycle for the deletion request. If the DeleteFileSystem
-	// operation is successful, this status is DELETING.
+	// operation is successful, this status is DELETING .
 	Lifecycle types.FileSystemLifecycle
 
 	// The response object for the Amazon FSx for Lustre file system being deleted in

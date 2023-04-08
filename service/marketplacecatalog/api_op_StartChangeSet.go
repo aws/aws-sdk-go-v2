@@ -12,19 +12,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to request changes for your entities. Within a single ChangeSet, you
+// Allows you to request changes for your entities. Within a single ChangeSet , you
 // can't start the same change type against the same entity multiple times.
 // Additionally, when a ChangeSet is running, all the entities targeted by the
 // different changes are locked until the change set has completed (either
 // succeeded, cancelled, or failed). If you try to start a change set containing a
 // change against an entity that is already locked, you will receive a
 // ResourceInUseException error. For example, you can't start the ChangeSet
-// described in the example
-// (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples)
+// described in the example (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples)
 // later in this topic because it contains two changes to run the same change type
-// (AddRevisions) against the same entity (entity-id@1). For more information about
-// working with change sets, see  Working with change sets
-// (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets).
+// ( AddRevisions ) against the same entity ( entity-id@1 ). For more information
+// about working with change sets, see Working with change sets (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)
+// .
 func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput, optFns ...func(*Options)) (*StartChangeSetOutput, error) {
 	if params == nil {
 		params = &StartChangeSetInput{}

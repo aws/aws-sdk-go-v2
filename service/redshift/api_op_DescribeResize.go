@@ -11,11 +11,11 @@ import (
 )
 
 // Returns information about the last resize operation for the specified cluster.
-// If no resize operation has ever been initiated for the specified cluster, a HTTP
-// 404 error is returned. If a resize operation was initiated and completed, the
-// status of the resize remains as SUCCEEDED until the next resize. A resize
-// operation can be requested using ModifyCluster and specifying a different number
-// or type of nodes for the cluster.
+// If no resize operation has ever been initiated for the specified cluster, a
+// HTTP 404 error is returned. If a resize operation was initiated and completed,
+// the status of the resize remains as SUCCEEDED until the next resize. A resize
+// operation can be requested using ModifyCluster and specifying a different
+// number or type of nodes for the cluster.
 func (c *Client) DescribeResize(ctx context.Context, params *DescribeResizeInput, optFns ...func(*Options)) (*DescribeResizeOutput, error) {
 	if params == nil {
 		params = &DescribeResizeInput{}
@@ -73,8 +73,8 @@ type DescribeResizeOutput struct {
 	// table names.
 	ImportTablesInProgress []string
 
-	// The names of tables that have not been yet imported. Valid Values: List of table
-	// names
+	// The names of tables that have not been yet imported. Valid Values: List of
+	// table names
 	ImportTablesNotStarted []string
 
 	// An optional string to provide additional details about the resize action.
@@ -87,7 +87,7 @@ type DescribeResizeOutput struct {
 	// estimated total amount of data before resize).
 	ProgressInMegaBytes *int64
 
-	// An enum with possible values of ClassicResize and ElasticResize. These values
+	// An enum with possible values of ClassicResize and ElasticResize . These values
 	// describe the type of resize operation being performed.
 	ResizeType *string
 
@@ -100,7 +100,7 @@ type DescribeResizeOutput struct {
 	TargetClusterType *string
 
 	// The type of encryption for the cluster after the resize is complete. Possible
-	// values are KMS and None.
+	// values are KMS and None .
 	TargetEncryptionType *string
 
 	// The node type that the cluster will have after the resize operation is complete.

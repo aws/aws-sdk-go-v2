@@ -36,7 +36,7 @@ func (c *Client) EvaluateCode(ctx context.Context, params *EvaluateCodeInput, op
 type EvaluateCodeInput struct {
 
 	// The code definition to be evaluated. Note that code and runtime are both
-	// required for this action. The runtime value must be APPSYNC_JS.
+	// required for this action. The runtime value must be APPSYNC_JS .
 	//
 	// This member is required.
 	Code *string
@@ -54,7 +54,7 @@ type EvaluateCodeInput struct {
 	Runtime *types.AppSyncRuntime
 
 	// The function within the code to be evaluated. If provided, the valid values are
-	// request and response.
+	// request and response .
 	Function *string
 
 	noSmithyDocumentSerde

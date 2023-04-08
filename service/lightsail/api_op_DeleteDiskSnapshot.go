@@ -11,16 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified disk snapshot. When you make periodic snapshots of a disk,
-// the snapshots are incremental, and only the blocks on the device that have
+// Deletes the specified disk snapshot. When you make periodic snapshots of a
+// disk, the snapshots are incremental, and only the blocks on the device that have
 // changed since your last snapshot are saved in the new snapshot. When you delete
 // a snapshot, only the data not needed for any other snapshot is removed. So
 // regardless of which prior snapshots have been deleted, all active snapshots will
 // have access to all the information needed to restore the disk. The delete disk
 // snapshot operation supports tag-based access control via resource tags applied
-// to the resource identified by disk snapshot name. For more information, see the
-// Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// to the resource identified by disk snapshot name . For more information, see the
+// Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) DeleteDiskSnapshot(ctx context.Context, params *DeleteDiskSnapshotInput, optFns ...func(*Options)) (*DeleteDiskSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteDiskSnapshotInput{}
@@ -38,7 +38,7 @@ func (c *Client) DeleteDiskSnapshot(ctx context.Context, params *DeleteDiskSnaps
 
 type DeleteDiskSnapshotInput struct {
 
-	// The name of the disk snapshot you want to delete (e.g., my-disk-snapshot).
+	// The name of the disk snapshot you want to delete (e.g., my-disk-snapshot ).
 	//
 	// This member is required.
 	DiskSnapshotName *string

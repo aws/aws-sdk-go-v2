@@ -13,10 +13,8 @@ import (
 
 // Retrieves properties for a Realtime script. To request a script record, specify
 // the script ID. If successful, an object containing the script properties is
-// returned. Learn more Amazon GameLift Realtime Servers
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
-// Related actions All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// returned. Learn more Amazon GameLift Realtime Servers (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
+// Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeScript(ctx context.Context, params *DescribeScriptInput, optFns ...func(*Options)) (*DescribeScriptOutput, error) {
 	if params == nil {
 		params = &DescribeScriptInput{}

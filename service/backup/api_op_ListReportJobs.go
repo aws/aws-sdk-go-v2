@@ -36,8 +36,8 @@ type ListReportJobsInput struct {
 	// 1516925490 represents Friday, January 26, 2018 12:11:30 AM.
 	ByCreationAfter *time.Time
 
-	// Returns only report jobs that were created before the date and time specified in
-	// Unix format and Coordinated Universal Time (UTC). For example, the value
+	// Returns only report jobs that were created before the date and time specified
+	// in Unix format and Coordinated Universal Time (UTC). For example, the value
 	// 1516925490 represents Friday, January 26, 2018 12:11:30 AM.
 	ByCreationBefore *time.Time
 

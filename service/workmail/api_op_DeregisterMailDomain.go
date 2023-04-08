@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a domain from WorkMail, stops email routing to WorkMail, and removes the
-// authorization allowing WorkMail use. SES keeps the domain because other
+// Removes a domain from WorkMail, stops email routing to WorkMail, and removes
+// the authorization allowing WorkMail use. SES keeps the domain because other
 // applications may use it. You must first remove any email address used by
 // WorkMail entities before you remove the domain.
 func (c *Client) DeregisterMailDomain(ctx context.Context, params *DeregisterMailDomainInput, optFns ...func(*Options)) (*DeregisterMailDomainOutput, error) {

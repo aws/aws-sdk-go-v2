@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Resets one or more alarms. The alarms return to the NORMAL state after you reset
-// them.
+// Resets one or more alarms. The alarms return to the NORMAL state after you
+// reset them.
 func (c *Client) BatchResetAlarm(ctx context.Context, params *BatchResetAlarmInput, optFns ...func(*Options)) (*BatchResetAlarmOutput, error) {
 	if params == nil {
 		params = &BatchResetAlarmInput{}

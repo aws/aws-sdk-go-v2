@@ -31,8 +31,8 @@ func (c *Client) ListLensReviews(ctx context.Context, params *ListLensReviewsInp
 // Input to list lens reviews.
 type ListLensReviewsInput struct {
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -61,8 +61,8 @@ type ListLensReviewsOutput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

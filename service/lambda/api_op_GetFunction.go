@@ -38,19 +38,12 @@ func (c *Client) GetFunction(ctx context.Context, params *GetFunctionInput, optF
 type GetFunctionInput struct {
 
 	// The name of the Lambda function, version, or alias. Name formats
-	//
-	// * Function
-	// name – my-function (name-only), my-function:v1 (with alias).
-	//
-	// * Function ARN –
-	// arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	// * Partial ARN –
-	// 123456789012:function:my-function.
-	//
-	// You can append a version number or alias to
-	// any of the formats. The length constraint applies only to the full ARN. If you
-	// specify only the function name, it is limited to 64 characters in length.
+	//   - Function name – my-function (name-only), my-function:v1 (with alias).
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// You can append a version number or alias to any of the formats. The length
+	// constraint applies only to the full ARN. If you specify only the function name,
+	// it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -67,14 +60,14 @@ type GetFunctionOutput struct {
 	// The deployment package of the function or version.
 	Code *types.FunctionCodeLocation
 
-	// The function's reserved concurrency
-	// (https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html).
+	// The function's reserved concurrency (https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)
+	// .
 	Concurrency *types.Concurrency
 
 	// The configuration of the function or version.
 	Configuration *types.FunctionConfiguration
 
-	// The function's tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html).
+	// The function's tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) .
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
@@ -166,9 +159,9 @@ type FunctionActiveV2WaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, FunctionActiveV2Waiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, FunctionActiveV2Waiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -360,9 +353,9 @@ type FunctionExistsWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, FunctionExistsWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, FunctionExistsWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -514,9 +507,9 @@ type FunctionUpdatedV2WaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, FunctionUpdatedV2Waiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, FunctionUpdatedV2Waiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -564,10 +557,10 @@ func (w *FunctionUpdatedV2Waiter) Wait(ctx context.Context, params *GetFunctionI
 	return err
 }
 
-// WaitForOutput calls the waiter function for FunctionUpdatedV2 waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for FunctionUpdatedV2 waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *FunctionUpdatedV2Waiter) WaitForOutput(ctx context.Context, params *GetFunctionInput, maxWaitDur time.Duration, optFns ...func(*FunctionUpdatedV2WaiterOptions)) (*GetFunctionOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

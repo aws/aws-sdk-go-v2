@@ -35,8 +35,8 @@ type GetLinkAttributesInput struct {
 	AttributeNames []string
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// typed link resides. For more information, see arns or Typed Links
-	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+	// typed link resides. For more information, see arns or Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
+	// .
 	//
 	// This member is required.
 	DirectoryArn *string

@@ -29,26 +29,24 @@ func (c *Client) DisassociateServiceActionFromProvisioningArtifact(ctx context.C
 
 type DisassociateServiceActionFromProvisioningArtifactInput struct {
 
-	// The product identifier. For example, prod-abcdzk7xy33qa.
+	// The product identifier. For example, prod-abcdzk7xy33qa .
 	//
 	// This member is required.
 	ProductId *string
 
-	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne .
 	//
 	// This member is required.
 	ProvisioningArtifactId *string
 
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
+	// The self-service action identifier. For example, act-fs7abcd89wxyz .
 	//
 	// This member is required.
 	ServiceActionId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

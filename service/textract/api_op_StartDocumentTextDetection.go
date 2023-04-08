@@ -16,15 +16,15 @@ import (
 // StartDocumentTextDetection can analyze text in documents that are in JPEG, PNG,
 // TIFF, and PDF format. The documents are stored in an Amazon S3 bucket. Use
 // DocumentLocation to specify the bucket name and file name of the document.
-// StartTextDetection returns a job identifier (JobId) that you use to get the
+// StartTextDetection returns a job identifier ( JobId ) that you use to get the
 // results of the operation. When text detection is finished, Amazon Textract
 // publishes a completion status to the Amazon Simple Notification Service (Amazon
-// SNS) topic that you specify in NotificationChannel. To get the results of the
+// SNS) topic that you specify in NotificationChannel . To get the results of the
 // text detection operation, first check that the status value published to the
-// Amazon SNS topic is SUCCEEDED. If so, call GetDocumentTextDetection, and pass
-// the job identifier (JobId) from the initial call to StartDocumentTextDetection.
-// For more information, see Document Text Detection
-// (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html).
+// Amazon SNS topic is SUCCEEDED . If so, call GetDocumentTextDetection , and pass
+// the job identifier ( JobId ) from the initial call to StartDocumentTextDetection
+// . For more information, see Document Text Detection (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html)
+// .
 func (c *Client) StartDocumentTextDetection(ctx context.Context, params *StartDocumentTextDetectionInput, optFns ...func(*Options)) (*StartDocumentTextDetectionOutput, error) {
 	if params == nil {
 		params = &StartDocumentTextDetectionInput{}
@@ -49,10 +49,10 @@ type StartDocumentTextDetectionInput struct {
 
 	// The idempotent token that's used to identify the start request. If you use the
 	// same token with multiple StartDocumentTextDetection requests, the same JobId is
-	// returned. Use ClientRequestToken to prevent the same job from being accidentally
-	// started more than once. For more information, see Calling Amazon Textract
-	// Asynchronous Operations
-	// (https://docs.aws.amazon.com/textract/latest/dg/api-async.html).
+	// returned. Use ClientRequestToken to prevent the same job from being
+	// accidentally started more than once. For more information, see Calling Amazon
+	// Textract Asynchronous Operations (https://docs.aws.amazon.com/textract/latest/dg/api-async.html)
+	// .
 	ClientRequestToken *string
 
 	// An identifier that you specify that's included in the completion notification
@@ -67,8 +67,8 @@ type StartDocumentTextDetectionInput struct {
 	// parameter is not enabled, the result will be encrypted server side,using SSE-S3.
 	KMSKeyId *string
 
-	// The Amazon SNS topic ARN that you want Amazon Textract to publish the completion
-	// status of the operation to.
+	// The Amazon SNS topic ARN that you want Amazon Textract to publish the
+	// completion status of the operation to.
 	NotificationChannel *types.NotificationChannel
 
 	// Sets if the output will go to a customer defined bucket. By default Amazon
@@ -81,9 +81,9 @@ type StartDocumentTextDetectionInput struct {
 
 type StartDocumentTextDetectionOutput struct {
 
-	// The identifier of the text detection job for the document. Use JobId to identify
-	// the job in a subsequent call to GetDocumentTextDetection. A JobId value is only
-	// valid for 7 days.
+	// The identifier of the text detection job for the document. Use JobId to
+	// identify the job in a subsequent call to GetDocumentTextDetection . A JobId
+	// value is only valid for 7 days.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

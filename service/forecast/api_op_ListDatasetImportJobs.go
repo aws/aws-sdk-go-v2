@@ -12,14 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of dataset import jobs created using the CreateDatasetImportJob
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
+// Returns a list of dataset import jobs created using the CreateDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
 // operation. For each import job, this operation returns a summary of its
 // properties, including its Amazon Resource Name (ARN). You can retrieve the
-// complete set of properties by using the ARN with the DescribeDatasetImportJob
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html)
-// operation. You can filter the list by providing an array of Filter
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_Filter.html) objects.
+// complete set of properties by using the ARN with the DescribeDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html)
+// operation. You can filter the list by providing an array of Filter (https://docs.aws.amazon.com/forecast/latest/dg/API_Filter.html)
+// objects.
 func (c *Client) ListDatasetImportJobs(ctx context.Context, params *ListDatasetImportJobsInput, optFns ...func(*Options)) (*ListDatasetImportJobsOutput, error) {
 	if params == nil {
 		params = &ListDatasetImportJobsInput{}
@@ -38,31 +36,26 @@ func (c *Client) ListDatasetImportJobs(ctx context.Context, params *ListDatasetI
 type ListDatasetImportJobsInput struct {
 
 	// An array of filters. For each filter, you provide a condition and a match
-	// statement. The condition is either IS or IS_NOT, which specifies whether to
+	// statement. The condition is either IS or IS_NOT , which specifies whether to
 	// include or exclude the datasets that match the statement from the list,
 	// respectively. The match statement consists of a key and a value. Filter
 	// properties
-	//
-	// * Condition - The condition to apply. Valid values are IS and
-	// IS_NOT. To include the datasets that match the statement, specify IS. To exclude
-	// matching datasets, specify IS_NOT.
-	//
-	// * Key - The name of the parameter to filter
-	// on. Valid values are DatasetArn and Status.
-	//
-	// * Value - The value to match.
-	//
-	// For
-	// example, to list all dataset import jobs whose status is ACTIVE, you specify the
-	// following filter: "Filters": [ { "Condition": "IS", "Key": "Status", "Value":
-	// "ACTIVE" } ]
+	//   - Condition - The condition to apply. Valid values are IS and IS_NOT . To
+	//   include the datasets that match the statement, specify IS . To exclude
+	//   matching datasets, specify IS_NOT .
+	//   - Key - The name of the parameter to filter on. Valid values are DatasetArn
+	//   and Status .
+	//   - Value - The value to match.
+	// For example, to list all dataset import jobs whose status is ACTIVE, you
+	// specify the following filter: "Filters": [ { "Condition": "IS", "Key":
+	// "Status", "Value": "ACTIVE" } ]
 	Filters []types.Filter
 
 	// The number of items to return in the response.
 	MaxResults *int32
 
 	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
+	// NextToken . To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
 

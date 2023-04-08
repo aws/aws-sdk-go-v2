@@ -11,8 +11,7 @@ import (
 )
 
 // Clears the default authorizer. Requires permission to access the
-// ClearDefaultAuthorizer
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// ClearDefaultAuthorizer (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ClearDefaultAuthorizer(ctx context.Context, params *ClearDefaultAuthorizerInput, optFns ...func(*Options)) (*ClearDefaultAuthorizerOutput, error) {
 	if params == nil {

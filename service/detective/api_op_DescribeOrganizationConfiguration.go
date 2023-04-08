@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the configuration for the organization behavior graph.
-// Currently indicates whether to automatically enable new organization accounts as
-// member accounts. Can only be called by the Detective administrator account for
-// the organization.
+// Returns information about the configuration for the organization behavior
+// graph. Currently indicates whether to automatically enable new organization
+// accounts as member accounts. Can only be called by the Detective administrator
+// account for the organization.
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}

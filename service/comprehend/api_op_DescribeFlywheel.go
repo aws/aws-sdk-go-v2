@@ -12,9 +12,8 @@ import (
 )
 
 // Provides configuration information about the flywheel. For more information
-// about flywheels, see  Flywheel overview
-// (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html) in the
-// Amazon Comprehend Developer Guide.
+// about flywheels, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
+// in the Amazon Comprehend Developer Guide.
 func (c *Client) DescribeFlywheel(ctx context.Context, params *DescribeFlywheelInput, optFns ...func(*Options)) (*DescribeFlywheelOutput, error) {
 	if params == nil {
 		params = &DescribeFlywheelInput{}

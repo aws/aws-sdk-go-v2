@@ -13,14 +13,11 @@ import (
 )
 
 // Deletes an Application Component from the Resilience Hub application.
-//
-// * This
-// API updates the Resilience Hub application draft version. To use this
-// Application Component for running assessments, you must publish the Resilience
-// Hub application using the PublishAppVersion API.
-//
-// * You will not be able to
-// delete an Application Component if it has resources associated with it.
+//   - This API updates the Resilience Hub application draft version. To use this
+//     Application Component for running assessments, you must publish the Resilience
+//     Hub application using the PublishAppVersion API.
+//   - You will not be able to delete an Application Component if it has resources
+//     associated with it.
 func (c *Client) DeleteAppVersionAppComponent(ctx context.Context, params *DeleteAppVersionAppComponentInput, optFns ...func(*Options)) (*DeleteAppVersionAppComponentOutput, error) {
 	if params == nil {
 		params = &DeleteAppVersionAppComponentInput{}
@@ -38,11 +35,10 @@ func (c *Client) DeleteAppVersionAppComponent(ctx context.Context, params *Delet
 
 type DeleteAppVersionAppComponentInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -52,9 +48,9 @@ type DeleteAppVersionAppComponentInput struct {
 	// This member is required.
 	Id *string
 
-	// Used for an idempotency token. A client token is a unique, case-sensitive string
-	// of up to 64 ASCII characters. You should not reuse the same client token for
-	// other API requests.
+	// Used for an idempotency token. A client token is a unique, case-sensitive
+	// string of up to 64 ASCII characters. You should not reuse the same client token
+	// for other API requests.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -62,11 +58,10 @@ type DeleteAppVersionAppComponentInput struct {
 
 type DeleteAppVersionAppComponentOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string

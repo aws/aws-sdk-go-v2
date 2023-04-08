@@ -69,14 +69,14 @@ type CreateServiceInput struct {
 	// The configuration for the Lambda endpoint type.
 	LambdaEndpoint *types.LambdaEndpointInput
 
-	// The tags to assign to the service. A tag is a label that you assign to an Amazon
-	// Web Services resource. Each tag consists of a key-value pair..
+	// The tags to assign to the service. A tag is a label that you assign to an
+	// Amazon Web Services resource. Each tag consists of a key-value pair..
 	Tags map[string]string
 
-	// The configuration for the URL endpoint type. When creating a route to a service,
-	// Refactor Spaces automatically resolves the address in the UrlEndpointInput
-	// object URL when the Domain Name System (DNS) time-to-live (TTL) expires, or
-	// every 60 seconds for TTLs less than 60 seconds.
+	// The configuration for the URL endpoint type. When creating a route to a
+	// service, Refactor Spaces automatically resolves the address in the
+	// UrlEndpointInput object URL when the Domain Name System (DNS) time-to-live (TTL)
+	// expires, or every 60 seconds for TTLs less than 60 seconds.
 	UrlEndpoint *types.UrlEndpointInput
 
 	// The ID of the VPC.
@@ -126,8 +126,8 @@ type CreateServiceOutput struct {
 	// The current state of the service.
 	State types.ServiceState
 
-	// The tags assigned to the created service. A tag is a label that you assign to an
-	// Amazon Web Services resource. Each tag consists of a key-value pair..
+	// The tags assigned to the created service. A tag is a label that you assign to
+	// an Amazon Web Services resource. Each tag consists of a key-value pair..
 	Tags map[string]string
 
 	// The configuration for the URL endpoint type.

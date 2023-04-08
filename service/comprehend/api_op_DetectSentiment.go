@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Inspects text and returns an inference of the prevailing sentiment (POSITIVE,
-// NEUTRAL, MIXED, or NEGATIVE).
+// Inspects text and returns an inference of the prevailing sentiment ( POSITIVE ,
+// NEUTRAL , MIXED , or NEGATIVE ).
 func (c *Client) DetectSentiment(ctx context.Context, params *DetectSentimentInput, optFns ...func(*Options)) (*DetectSentimentOutput, error) {
 	if params == nil {
 		params = &DetectSentimentInput{}

@@ -12,8 +12,7 @@ import (
 )
 
 // Updates a scheduled audit, including which checks are performed and how often
-// the audit takes place. Requires permission to access the UpdateScheduledAudit
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// the audit takes place. Requires permission to access the UpdateScheduledAudit (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateScheduledAudit(ctx context.Context, params *UpdateScheduledAuditInput, optFns ...func(*Options)) (*UpdateScheduledAuditOutput, error) {
 	if params == nil {
@@ -38,18 +37,18 @@ type UpdateScheduledAuditInput struct {
 	ScheduledAuditName *string
 
 	// The day of the month on which the scheduled audit takes place. This can be 1
-	// through 31 or LAST. This field is required if the frequency parameter is set to
-	// MONTHLY. If days 29-31 are specified, and the month does not have that many
+	// through 31 or LAST . This field is required if the frequency parameter is set
+	// to MONTHLY . If days 29-31 are specified, and the month does not have that many
 	// days, the audit takes place on the "LAST" day of the month.
 	DayOfMonth *string
 
-	// The day of the week on which the scheduled audit takes place. This can be one of
-	// SUN, MON, TUE, WED, THU, FRI, or SAT. This field is required if the "frequency"
-	// parameter is set to WEEKLY or BIWEEKLY.
+	// The day of the week on which the scheduled audit takes place. This can be one
+	// of SUN , MON , TUE , WED , THU , FRI , or SAT . This field is required if the
+	// "frequency" parameter is set to WEEKLY or BIWEEKLY .
 	DayOfWeek types.DayOfWeek
 
-	// How often the scheduled audit takes place, either DAILY, WEEKLY, BIWEEKLY, or
-	// MONTHLY. The start time of each audit is determined by the system.
+	// How often the scheduled audit takes place, either DAILY , WEEKLY , BIWEEKLY , or
+	// MONTHLY . The start time of each audit is determined by the system.
 	Frequency types.AuditFrequency
 
 	// Which checks are performed during the scheduled audit. Checks must be enabled

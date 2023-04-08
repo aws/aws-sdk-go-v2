@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the SimSpace Weaver simulations in the Amazon Web Services account used to
-// make the API call.
+// Lists the SimSpace Weaver simulations in the Amazon Web Services account used
+// to make the API call.
 func (c *Client) ListSimulations(ctx context.Context, params *ListSimulationsInput, optFns ...func(*Options)) (*ListSimulationsOutput, error) {
 	if params == nil {
 		params = &ListSimulationsInput{}
@@ -34,10 +34,10 @@ type ListSimulationsInput struct {
 	// The maximum number of simulations to list.
 	MaxResults *int32
 
-	// If SimSpace Weaver returns nextToken, there are more results available. The
+	// If SimSpace Weaver returns nextToken , there are more results available. The
 	// value of nextToken is a unique pagination token for each page. To retrieve the
 	// next page, call the operation again using the returned token. Keep all other
-	// arguments unchanged. If no results remain, nextToken is set to null. Each
+	// arguments unchanged. If no results remain, nextToken is set to null . Each
 	// pagination token expires after 24 hours. If you provide a token that isn't
 	// valid, you receive an HTTP 400 ValidationException error.
 	NextToken *string
@@ -47,10 +47,10 @@ type ListSimulationsInput struct {
 
 type ListSimulationsOutput struct {
 
-	// If SimSpace Weaver returns nextToken, there are more results available. The
+	// If SimSpace Weaver returns nextToken , there are more results available. The
 	// value of nextToken is a unique pagination token for each page. To retrieve the
 	// next page, call the operation again using the returned token. Keep all other
-	// arguments unchanged. If no results remain, nextToken is set to null. Each
+	// arguments unchanged. If no results remain, nextToken is set to null . Each
 	// pagination token expires after 24 hours. If you provide a token that isn't
 	// valid, you receive an HTTP 400 ValidationException error.
 	NextToken *string

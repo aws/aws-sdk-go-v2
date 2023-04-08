@@ -35,9 +35,9 @@ type ListEnvironmentProvisionedResourcesInput struct {
 	// This member is required.
 	EnvironmentName *string
 
-	// A token that indicates the location of the next environment provisioned resource
-	// in the array of environment provisioned resources, after the list of environment
-	// provisioned resources that was previously requested.
+	// A token that indicates the location of the next environment provisioned
+	// resource in the array of environment provisioned resources, after the list of
+	// environment provisioned resources that was previously requested.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,9 +50,9 @@ type ListEnvironmentProvisionedResourcesOutput struct {
 	// This member is required.
 	ProvisionedResources []types.ProvisionedResource
 
-	// A token that indicates the location of the next environment provisioned resource
-	// in the array of provisioned resources, after the current requested list of
-	// environment provisioned resources.
+	// A token that indicates the location of the next environment provisioned
+	// resource in the array of provisioned resources, after the current requested list
+	// of environment provisioned resources.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -132,8 +132,8 @@ type ListEnvironmentProvisionedResourcesAPIClient interface {
 
 var _ ListEnvironmentProvisionedResourcesAPIClient = (*Client)(nil)
 
-// ListEnvironmentProvisionedResourcesPaginatorOptions is the paginator options for
-// ListEnvironmentProvisionedResources
+// ListEnvironmentProvisionedResourcesPaginatorOptions is the paginator options
+// for ListEnvironmentProvisionedResources
 type ListEnvironmentProvisionedResourcesPaginatorOptions struct {
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.

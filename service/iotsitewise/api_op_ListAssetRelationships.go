@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of asset relationships for an asset. You can use this
-// operation to identify an asset's root asset and all associated assets between
-// that asset and its root.
+// Retrieves a paginated list of asset relationships for an asset. You can use
+// this operation to identify an asset's root asset and all associated assets
+// between that asset and its root.
 func (c *Client) ListAssetRelationships(ctx context.Context, params *ListAssetRelationshipsInput, optFns ...func(*Options)) (*ListAssetRelationshipsOutput, error) {
 	if params == nil {
 		params = &ListAssetRelationshipsInput{}
@@ -39,10 +39,9 @@ type ListAssetRelationshipsInput struct {
 
 	// The type of traversal to use to identify asset relationships. Choose the
 	// following option:
-	//
-	// * PATH_TO_ROOT – Identify the asset's parent assets up to the
-	// root asset. The asset that you specify in assetId is the first result in the
-	// list of assetRelationshipSummaries, and the root asset is the last result.
+	//   - PATH_TO_ROOT – Identify the asset's parent assets up to the root asset. The
+	//   asset that you specify in assetId is the first result in the list of
+	//   assetRelationshipSummaries , and the root asset is the last result.
 	//
 	// This member is required.
 	TraversalType types.TraversalType

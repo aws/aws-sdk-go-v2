@@ -39,8 +39,8 @@ type DisassociateS3ResourcesInput struct {
 	// This member is required.
 	AssociatedS3Resources []types.S3Resource
 
-	// (Discontinued) The ID of the Amazon Macie Classic member account whose resources
-	// you want to remove from being monitored by Macie Classic.
+	// (Discontinued) The ID of the Amazon Macie Classic member account whose
+	// resources you want to remove from being monitored by Macie Classic.
 	MemberAccountId *string
 
 	noSmithyDocumentSerde

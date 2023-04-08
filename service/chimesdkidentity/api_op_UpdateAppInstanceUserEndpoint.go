@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the details of an AppInstanceUserEndpoint. You can update the name and
+// Updates the details of an AppInstanceUserEndpoint . You can update the name and
 // AllowMessage values.
 func (c *Client) UpdateAppInstanceUserEndpoint(ctx context.Context, params *UpdateAppInstanceUserEndpointInput, optFns ...func(*Options)) (*UpdateAppInstanceUserEndpointOutput, error) {
 	if params == nil {
@@ -30,22 +30,22 @@ func (c *Client) UpdateAppInstanceUserEndpoint(ctx context.Context, params *Upda
 
 type UpdateAppInstanceUserEndpointInput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	//
 	// This member is required.
 	AppInstanceUserArn *string
 
-	// The unique identifier of the AppInstanceUserEndpoint.
+	// The unique identifier of the AppInstanceUserEndpoint .
 	//
 	// This member is required.
 	EndpointId *string
 
-	// Boolean that controls whether the AppInstanceUserEndpoint is opted in to receive
-	// messages. ALL indicates the endpoint will receive all messages. NONE indicates
-	// the endpoint will receive no messages.
+	// Boolean that controls whether the AppInstanceUserEndpoint is opted in to
+	// receive messages. ALL indicates the endpoint will receive all messages. NONE
+	// indicates the endpoint will receive no messages.
 	AllowMessages types.AllowMessages
 
-	// The name of the AppInstanceUserEndpoint.
+	// The name of the AppInstanceUserEndpoint .
 	Name *string
 
 	noSmithyDocumentSerde
@@ -53,10 +53,10 @@ type UpdateAppInstanceUserEndpointInput struct {
 
 type UpdateAppInstanceUserEndpointOutput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	AppInstanceUserArn *string
 
-	// The unique identifier of the AppInstanceUserEndpoint.
+	// The unique identifier of the AppInstanceUserEndpoint .
 	EndpointId *string
 
 	// Metadata pertaining to the operation's result.

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes one or more values for a Dev Environment. Updating certain values of the
-// Dev Environment will cause a restart.
+// Changes one or more values for a Dev Environment. Updating certain values of
+// the Dev Environment will cause a restart.
 func (c *Client) UpdateDevEnvironment(ctx context.Context, params *UpdateDevEnvironmentInput, optFns ...func(*Options)) (*UpdateDevEnvironmentOutput, error) {
 	if params == nil {
 		params = &UpdateDevEnvironmentInput{}

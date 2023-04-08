@@ -31,7 +31,7 @@ func (c *Client) RemoveListenerCertificates(ctx context.Context, params *RemoveL
 type RemoveListenerCertificatesInput struct {
 
 	// The certificate to remove. You can specify one certificate per call. Set
-	// CertificateArn to the certificate ARN but do not set IsDefault.
+	// CertificateArn to the certificate ARN but do not set IsDefault .
 	//
 	// This member is required.
 	Certificates []types.Certificate

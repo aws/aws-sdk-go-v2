@@ -35,8 +35,8 @@ type GetAuthorizersInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit *int32
 
 	// The current pagination position in the paged result set.

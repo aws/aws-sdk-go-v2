@@ -17,14 +17,13 @@ import (
 // a view. If you don't explicitly specify a view, then Amazon Web Services
 // Resource Explorer uses the default view for the Amazon Web Services Region in
 // which you call this operation. The results are the logical intersection of the
-// results that match both the QueryString parameter supplied to this operation and
-// the SearchFilter parameter attached to the view. For the complete syntax
+// results that match both the QueryString parameter supplied to this operation
+// and the SearchFilter parameter attached to the view. For the complete syntax
 // supported by the QueryString parameter, see Search query syntax reference for
-// Resource Explorer
-// (https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html).
-// If your search results are empty, or are missing results that you think should
-// be there, see Troubleshooting Resource Explorer search
-// (https://docs.aws.amazon.com/resource-explorer/latest/userguide/troubleshooting_search.html).
+// Resource Explorer (https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html)
+// . If your search results are empty, or are missing results that you think should
+// be there, see Troubleshooting Resource Explorer search (https://docs.aws.amazon.com/resource-explorer/latest/userguide/troubleshooting_search.html)
+// .
 func (c *Client) Search(ctx context.Context, params *SearchInput, optFns ...func(*Options)) (*SearchOutput, error) {
 	if params == nil {
 		params = &SearchInput{}
@@ -44,9 +43,8 @@ type SearchInput struct {
 
 	// A string that includes keywords and filters that specify the resources that you
 	// want to include in the results. For the complete syntax supported by the
-	// QueryString parameter, see Search query syntax reference for Resource Explorer
-	// (https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html).
-	// The search is completely case insensitive. You can specify an empty string to
+	// QueryString parameter, see Search query syntax reference for Resource Explorer (https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html)
+	// . The search is completely case insensitive. You can specify an empty string to
 	// return all results up to the limit of 1,000 total results. The operation can
 	// return only the first 1,000 results. If the resource you want is not included,
 	// then use a different value for QueryString to refine the results.
@@ -58,9 +56,9 @@ type SearchInput struct {
 	// response. If you do not include this parameter, it defaults to a value
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
-	// (is not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. An API operation can
-	// return fewer results than the maximum even when there are more results
+	// (is not null). Include that value as the NextToken request parameter in the
+	// next call to the operation to get the next part of the results. An API operation
+	// can return fewer results than the maximum even when there are more results
 	// available. You should check NextToken after every operation to ensure that you
 	// receive all of the results.
 	MaxResults *int32
@@ -71,13 +69,12 @@ type SearchInput struct {
 	// response to indicate where the output should continue from.
 	NextToken *string
 
-	// Specifies the Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the view to use for the query. If you don't specify a value for this parameter,
-	// then the operation automatically uses the default view for the Amazon Web
-	// Services Region in which you called this operation. If the Region either doesn't
-	// have a default view or if you don't have permission to use the default view,
-	// then the operation fails with a 401 Unauthorized exception.
+	// Specifies the Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the view to use for the query. If you don't specify a value for this
+	// parameter, then the operation automatically uses the default view for the Amazon
+	// Web Services Region in which you called this operation. If the Region either
+	// doesn't have a default view or if you don't have permission to use the default
+	// view, then the operation fails with a 401 Unauthorized exception.
 	ViewArn *string
 
 	noSmithyDocumentSerde
@@ -91,15 +88,14 @@ type SearchOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null.
+	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
 	// The list of structures that describe the resources that match the query.
 	Resources []types.Resource
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the view that this operation used to perform the search.
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the view that this operation used to perform the search.
 	ViewArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -184,9 +180,9 @@ type SearchPaginatorOptions struct {
 	// response. If you do not include this parameter, it defaults to a value
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
-	// (is not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. An API operation can
-	// return fewer results than the maximum even when there are more results
+	// (is not null). Include that value as the NextToken request parameter in the
+	// next call to the operation to get the next part of the results. An API operation
+	// can return fewer results than the maximum even when there are more results
 	// available. You should check NextToken after every operation to ensure that you
 	// receive all of the results.
 	Limit int32

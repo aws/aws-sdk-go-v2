@@ -121,8 +121,8 @@ func (c *Client) addOperationListEulaAcceptancesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEulaAcceptancesAPIClient is a client that implements the ListEulaAcceptances
-// operation.
+// ListEulaAcceptancesAPIClient is a client that implements the
+// ListEulaAcceptances operation.
 type ListEulaAcceptancesAPIClient interface {
 	ListEulaAcceptances(context.Context, *ListEulaAcceptancesInput, ...func(*Options)) (*ListEulaAcceptancesOutput, error)
 }

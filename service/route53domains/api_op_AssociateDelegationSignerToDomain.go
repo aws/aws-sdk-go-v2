@@ -16,8 +16,7 @@ import (
 // your DNS records. This action may render your domain name unavailable on the
 // internet if the steps are completed in the wrong order, or with incorrect
 // timing. For more information about DNSSEC signing, see Configuring DNSSEC
-// signing
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec.html)
+// signing (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec.html)
 // in the Route 53 developer guide.
 func (c *Client) AssociateDelegationSignerToDomain(ctx context.Context, params *AssociateDelegationSignerToDomainInput, optFns ...func(*Options)) (*AssociateDelegationSignerToDomainOutput, error) {
 	if params == nil {
@@ -53,8 +52,8 @@ type AssociateDelegationSignerToDomainInput struct {
 type AssociateDelegationSignerToDomainOutput struct {
 
 	// The identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+	// .
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,8 +12,8 @@ import (
 // Verifies the specified user attributes in the user pool. If your user pool
 // requires verification before Amazon Cognito updates the attribute value,
 // VerifyUserAttribute updates the affected attribute to its pending value. For
-// more information, see  UserAttributeUpdateSettingsType
-// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserAttributeUpdateSettingsType.html).
+// more information, see UserAttributeUpdateSettingsType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserAttributeUpdateSettingsType.html)
+// .
 func (c *Client) VerifyUserAttribute(ctx context.Context, params *VerifyUserAttributeInput, optFns ...func(*Options)) (*VerifyUserAttributeOutput, error) {
 	if params == nil {
 		params = &VerifyUserAttributeInput{}
@@ -51,8 +51,8 @@ type VerifyUserAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
-// A container representing the response from the server from the request to verify
-// user attributes.
+// A container representing the response from the server from the request to
+// verify user attributes.
 type VerifyUserAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

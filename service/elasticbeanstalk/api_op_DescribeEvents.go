@@ -14,7 +14,7 @@ import (
 )
 
 // Returns list of event descriptions matching criteria up to the last 6 weeks.
-// This action returns the most recent 1,000 events from the specified NextToken.
+// This action returns the most recent 1,000 events from the specified NextToken .
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -37,16 +37,16 @@ type DescribeEventsInput struct {
 	// include only those associated with this application.
 	ApplicationName *string
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
-	// that occur up to, but not including, the EndTime.
+	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+	// those that occur up to, but not including, the EndTime .
 	EndTime *time.Time
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
-	// associated with this environment.
+	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+	// those associated with this environment.
 	EnvironmentId *string
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
-	// associated with this environment.
+	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+	// those associated with this environment.
 	EnvironmentName *string
 
 	// Specifies the maximum number of events that can be returned, beginning with the
@@ -69,16 +69,16 @@ type DescribeEventsInput struct {
 	// with the specified severity or higher.
 	Severity types.EventSeverity
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
-	// that occur on or after this time.
+	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+	// those that occur on or after this time.
 	StartTime *time.Time
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
-	// that are associated with this environment configuration.
+	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+	// those that are associated with this environment configuration.
 	TemplateName *string
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
-	// associated with this application version.
+	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+	// those associated with this application version.
 	VersionLabel *string
 
 	noSmithyDocumentSerde
@@ -87,7 +87,7 @@ type DescribeEventsInput struct {
 // Result message wrapping a list of event descriptions.
 type DescribeEventsOutput struct {
 
-	// A list of EventDescription.
+	// A list of EventDescription .
 	Events []types.EventDescription
 
 	// If returned, this indicates that there are more results to obtain. Use this

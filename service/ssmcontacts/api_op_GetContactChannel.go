@@ -61,7 +61,7 @@ type GetContactChannelOutput struct {
 	// This member is required.
 	Name *string
 
-	// The type of contact channel. The type is SMS, VOICE, or EMAIL.
+	// The type of contact channel. The type is SMS , VOICE , or EMAIL .
 	//
 	// This member is required.
 	Type types.ChannelType

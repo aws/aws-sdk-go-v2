@@ -37,14 +37,14 @@ type GetFindingsInput struct {
 	// findings. You can filter by up to 10 finding attributes. For each attribute, you
 	// can provide up to 20 filter values. Note that in the available filter fields,
 	// WorkflowState is deprecated. To search for a finding based on its workflow
-	// status, use WorkflowStatus.
+	// status, use WorkflowStatus .
 	Filters *types.AwsSecurityFindingFilters
 
 	// The maximum number of findings to return.
 	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the GetFindings
-	// operation, set the value of this parameter to NULL. For subsequent calls to the
+	// operation, set the value of this parameter to NULL . For subsequent calls to the
 	// operation, to continue listing data, set the value of this parameter to the
 	// value returned from the previous response.
 	NextToken *string

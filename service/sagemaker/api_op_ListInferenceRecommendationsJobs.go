@@ -37,8 +37,8 @@ type ListInferenceRecommendationsJobsInput struct {
 	// A filter that returns only jobs created before the specified time (timestamp).
 	CreationTimeBefore *time.Time
 
-	// A filter that returns only jobs that were last modified after the specified time
-	// (timestamp).
+	// A filter that returns only jobs that were last modified after the specified
+	// time (timestamp).
 	LastModifiedTimeAfter *time.Time
 
 	// A filter that returns only jobs that were last modified before the specified
@@ -53,7 +53,7 @@ type ListInferenceRecommendationsJobsInput struct {
 	NameContains *string
 
 	// If the response to a previous ListInferenceRecommendationsJobsRequest request
-	// was truncated, the response includes a NextToken. To retrieve the next set of
+	// was truncated, the response includes a NextToken . To retrieve the next set of
 	// recommendations, use the token in the next request.
 	NextToken *string
 

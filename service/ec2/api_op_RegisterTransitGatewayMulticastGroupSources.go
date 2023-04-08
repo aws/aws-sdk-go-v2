@@ -14,11 +14,9 @@ import (
 // Registers sources (network interfaces) with the specified transit gateway
 // multicast group. A multicast source is a network interface attached to a
 // supported instance that sends multicast traffic. For information about supported
-// instances, see Multicast Considerations
-// (https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits)
+// instances, see Multicast Considerations (https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits)
 // in Amazon VPC Transit Gateways. After you add the source, use
-// SearchTransitGatewayMulticastGroups
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html)
+// SearchTransitGatewayMulticastGroups (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html)
 // to verify that the source was added to the multicast group.
 func (c *Client) RegisterTransitGatewayMulticastGroupSources(ctx context.Context, params *RegisterTransitGatewayMulticastGroupSourcesInput, optFns ...func(*Options)) (*RegisterTransitGatewayMulticastGroupSourcesOutput, error) {
 	if params == nil {
@@ -50,8 +48,8 @@ type RegisterTransitGatewayMulticastGroupSourcesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The IP address assigned to the transit gateway multicast group.

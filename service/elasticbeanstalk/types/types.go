@@ -40,17 +40,17 @@ type ApplicationDescription struct {
 // Application request metrics for an AWS Elastic Beanstalk environment.
 type ApplicationMetrics struct {
 
-	// The amount of time that the metrics cover (usually 10 seconds). For example, you
-	// might have 5 requests (request_count) within the most recent time slice of 10
-	// seconds (duration).
+	// The amount of time that the metrics cover (usually 10 seconds). For example,
+	// you might have 5 requests ( request_count ) within the most recent time slice of
+	// 10 seconds ( duration ).
 	Duration *int32
 
 	// Represents the average latency for the slowest X percent of requests over the
 	// last 10 seconds. Latencies are in seconds with one millisecond resolution.
 	Latency *Latency
 
-	// Average number of requests handled by the web server per second over the last 10
-	// seconds.
+	// Average number of requests handled by the web server per second over the last
+	// 10 seconds.
 	RequestCount int32
 
 	// Represents the percentage of requests over the last 10 seconds that resulted in
@@ -68,8 +68,8 @@ type ApplicationResourceLifecycleConfig struct {
 
 	// The ARN of an IAM service role that Elastic Beanstalk has permission to assume.
 	// The ServiceRole property is required the first time that you provide a
-	// VersionLifecycleConfig for the application in one of the supporting calls
-	// (CreateApplication or UpdateApplicationResourceLifecycle). After you provide it
+	// VersionLifecycleConfig for the application in one of the supporting calls (
+	// CreateApplication or UpdateApplicationResourceLifecycle ). After you provide it
 	// once, in either one of the calls, Elastic Beanstalk persists the Service Role
 	// with the application, and you don't need to specify it again in subsequent
 	// UpdateApplicationResourceLifecycle calls. You can, however, specify it in
@@ -114,24 +114,16 @@ type ApplicationVersionDescription struct {
 	// application version during its creation. Many of the values are only applicable
 	// if you specified True for the Process parameter of the CreateApplicationVersion
 	// action. The following list describes the possible values.
-	//
-	// * Unprocessed –
-	// Application version wasn't pre-processed or validated. Elastic Beanstalk will
-	// validate configuration files during deployment of the application version to an
-	// environment.
-	//
-	// * Processing – Elastic Beanstalk is currently processing the
-	// application version.
-	//
-	// * Building – Application version is currently undergoing
-	// an AWS CodeBuild build.
-	//
-	// * Processed – Elastic Beanstalk was successfully
-	// pre-processed and validated.
-	//
-	// * Failed – Either the AWS CodeBuild build failed
-	// or configuration files didn't pass validation. This application version isn't
-	// usable.
+	//   - Unprocessed – Application version wasn't pre-processed or validated. Elastic
+	//   Beanstalk will validate configuration files during deployment of the application
+	//   version to an environment.
+	//   - Processing – Elastic Beanstalk is currently processing the application
+	//   version.
+	//   - Building – Application version is currently undergoing an AWS CodeBuild
+	//   build.
+	//   - Processed – Elastic Beanstalk was successfully pre-processed and validated.
+	//   - Failed – Either the AWS CodeBuild build failed or configuration files didn't
+	//   pass validation. This application version isn't usable.
 	Status ApplicationVersionStatus
 
 	// A unique identifier for the application version.
@@ -140,20 +132,20 @@ type ApplicationVersionDescription struct {
 	noSmithyDocumentSerde
 }
 
-// The application version lifecycle settings for an application. Defines the rules
-// that Elastic Beanstalk applies to an application's versions in order to avoid
-// hitting the per-region limit for application versions. When Elastic Beanstalk
-// deletes an application version from its database, you can no longer deploy that
-// version to an environment. The source bundle remains in S3 unless you configure
-// the rule to delete it.
+// The application version lifecycle settings for an application. Defines the
+// rules that Elastic Beanstalk applies to an application's versions in order to
+// avoid hitting the per-region limit for application versions. When Elastic
+// Beanstalk deletes an application version from its database, you can no longer
+// deploy that version to an environment. The source bundle remains in S3 unless
+// you configure the rule to delete it.
 type ApplicationVersionLifecycleConfig struct {
 
 	// Specify a max age rule to restrict the length of time that application versions
 	// are retained for an application.
 	MaxAgeRule *MaxAgeRule
 
-	// Specify a max count rule to restrict the number of application versions that are
-	// retained for an application.
+	// Specify a max count rule to restrict the number of application versions that
+	// are retained for an application.
 	MaxCountRule *MaxCountRule
 
 	noSmithyDocumentSerde
@@ -191,15 +183,9 @@ type BuildConfiguration struct {
 	ArtifactName *string
 
 	// Information about the compute resources the build project will use.
-	//
-	// *
-	// BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds
-	//
-	// *
-	// BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds
-	//
-	// *
-	// BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds
+	//   - BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds
+	//   - BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds
+	//   - BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds
 	ComputeType ComputeType
 
 	// How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until
@@ -224,17 +210,14 @@ type ConfigurationOptionDescription struct {
 
 	// An indication of which action is required if the value for this configuration
 	// option changes:
-	//
-	// * NoInterruption : There is no interruption to the environment
-	// or application availability.
-	//
-	// * RestartEnvironment : The environment is entirely
-	// restarted, all AWS resources are deleted and recreated, and the environment is
-	// unavailable during the process.
-	//
-	// * RestartApplicationServer : The environment is
-	// available the entire time. However, a short application outage occurs when the
-	// application servers on the running Amazon EC2 instances are restarted.
+	//   - NoInterruption : There is no interruption to the environment or application
+	//   availability.
+	//   - RestartEnvironment : The environment is entirely restarted, all AWS
+	//   resources are deleted and recreated, and the environment is unavailable during
+	//   the process.
+	//   - RestartApplicationServer : The environment is available the entire time.
+	//   However, a short application outage occurs when the application servers on the
+	//   running Amazon EC2 instances are restarted.
 	ChangeSeverity *string
 
 	// The default value for this configuration option.
@@ -248,8 +231,8 @@ type ConfigurationOptionDescription struct {
 	// value.
 	MaxValue *int32
 
-	// If specified, the configuration option must be a numeric value greater than this
-	// value.
+	// If specified, the configuration option must be a numeric value greater than
+	// this value.
 	MinValue *int32
 
 	// The name of the configuration option.
@@ -263,17 +246,12 @@ type ConfigurationOptionDescription struct {
 	Regex *OptionRestrictionRegex
 
 	// An indication of whether the user defined this configuration option:
-	//
-	// * true :
-	// This configuration option was defined by the user. It is a valid choice for
-	// specifying if this as an Option to Remove when updating configuration
-	// settings.
-	//
-	// * false : This configuration was not defined by the
-	// user.
-	//
-	// Constraint: You can remove only UserDefined options from a configuration.
-	// Valid Values: true | false
+	//   - true : This configuration option was defined by the user. It is a valid
+	//   choice for specifying if this as an Option to Remove when updating
+	//   configuration settings.
+	//   - false : This configuration was not defined by the user.
+	// Constraint: You can remove only UserDefined options from a configuration. Valid
+	// Values: true | false
 	UserDefined *bool
 
 	// If specified, values for the configuration option are selected from this list.
@@ -281,20 +259,14 @@ type ConfigurationOptionDescription struct {
 
 	// An indication of which type of values this option has and whether it is
 	// allowable to select one or more than one of the possible values:
-	//
-	// * Scalar :
-	// Values for this option are a single selection from the possible values, or an
-	// unformatted string, or numeric value governed by the MIN/MAX/Regex
-	// constraints.
-	//
-	// * List : Values for this option are multiple selections from the
-	// possible values.
-	//
-	// * Boolean : Values for this option are either true or false
-	// .
-	//
-	// * Json : Values for this option are a JSON representation of a
-	// ConfigDocument.
+	//   - Scalar : Values for this option are a single selection from the possible
+	//   values, or an unformatted string, or numeric value governed by the
+	//   MIN/MAX/Regex constraints.
+	//   - List : Values for this option are multiple selections from the possible
+	//   values.
+	//   - Boolean : Values for this option are either true or false .
+	//   - Json : Values for this option are a JSON representation of a ConfigDocument
+	//   .
 	ValueType ConfigurationOptionValueType
 
 	noSmithyDocumentSerde
@@ -302,9 +274,8 @@ type ConfigurationOptionDescription struct {
 
 // A specification identifying an individual configuration option along with its
 // current value. For a list of possible namespaces and option values, see Option
-// Values
-// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in
-// the AWS Elastic Beanstalk Developer Guide.
+// Values (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html)
+// in the AWS Elastic Beanstalk Developer Guide.
 type ConfigurationOptionSetting struct {
 
 	// A unique namespace that identifies the option's associated AWS resource.
@@ -338,25 +309,18 @@ type ConfigurationSettingsDescription struct {
 	// If this configuration set is associated with an environment, the
 	// DeploymentStatus parameter indicates the deployment status of this configuration
 	// set:
-	//
-	// * null: This configuration is not associated with a running
-	// environment.
-	//
-	// * pending: This is a draft configuration that is not deployed to
-	// the associated environment but is in the process of deploying.
-	//
-	// * deployed: This
-	// is the configuration that is currently deployed to the associated running
-	// environment.
-	//
-	// * failed: This is a draft configuration that failed to
-	// successfully deploy.
+	//   - null : This configuration is not associated with a running environment.
+	//   - pending : This is a draft configuration that is not deployed to the
+	//   associated environment but is in the process of deploying.
+	//   - deployed : This is the configuration that is currently deployed to the
+	//   associated running environment.
+	//   - failed : This is a draft configuration that failed to successfully deploy.
 	DeploymentStatus ConfigurationDeploymentStatus
 
 	// Describes this configuration set.
 	Description *string
 
-	// If not null, the name of the environment for this configuration set.
+	// If not null , the name of the environment for this configuration set.
 	EnvironmentName *string
 
 	// A list of the configuration options and their values in this configuration set.
@@ -368,7 +332,7 @@ type ConfigurationSettingsDescription struct {
 	// The name of the solution stack this configuration set uses.
 	SolutionStackName *string
 
-	// If not null, the name of the configuration template for this configuration set.
+	// If not null , the name of the configuration template for this configuration set.
 	TemplateName *string
 
 	noSmithyDocumentSerde
@@ -427,22 +391,18 @@ type CustomAmi struct {
 // Information about an application version deployment.
 type Deployment struct {
 
-	// The ID of the deployment. This number increases by one each time that you deploy
-	// source code or change instance configuration settings.
+	// The ID of the deployment. This number increases by one each time that you
+	// deploy source code or change instance configuration settings.
 	DeploymentId *int64
 
-	// For in-progress deployments, the time that the deployment started. For completed
-	// deployments, the time that the deployment ended.
+	// For in-progress deployments, the time that the deployment started. For
+	// completed deployments, the time that the deployment ended.
 	DeploymentTime *time.Time
 
 	// The status of the deployment:
-	//
-	// * In Progress : The deployment is in progress.
-	//
-	// *
-	// Deployed : The deployment succeeded.
-	//
-	// * Failed : The deployment failed.
+	//   - In Progress : The deployment is in progress.
+	//   - Deployed : The deployment succeeded.
+	//   - Failed : The deployment failed.
 	Status *string
 
 	// The version label of the application version in the deployment.
@@ -493,33 +453,24 @@ type EnvironmentDescription struct {
 
 	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
 	// the failure levels for a running environment:
-	//
-	// * Red: Indicates the environment
-	// is not responsive. Occurs when three or more consecutive failures occur for an
-	// environment.
-	//
-	// * Yellow: Indicates that something is wrong. Occurs when two
-	// consecutive failures occur for an environment.
-	//
-	// * Green: Indicates the
-	// environment is healthy and fully functional.
-	//
-	// * Grey: Default health for a new
-	// environment. The environment is not fully launched and health checks have not
-	// started or health checks are suspended during an UpdateEnvironment or
-	// RestartEnvironment request.
-	//
+	//   - Red : Indicates the environment is not responsive. Occurs when three or more
+	//   consecutive failures occur for an environment.
+	//   - Yellow : Indicates that something is wrong. Occurs when two consecutive
+	//   failures occur for an environment.
+	//   - Green : Indicates the environment is healthy and fully functional.
+	//   - Grey : Default health for a new environment. The environment is not fully
+	//   launched and health checks have not started or health checks are suspended
+	//   during an UpdateEnvironment or RestartEnvironment request.
 	// Default: Grey
 	Health EnvironmentHealth
 
 	// Returns the health status of the application running in your environment. For
-	// more information, see Health Colors and Statuses
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
+	// more information, see Health Colors and Statuses (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
+	// .
 	HealthStatus EnvironmentHealthStatus
 
 	// The Amazon Resource Name (ARN) of the environment's operations role. For more
-	// information, see Operations roles
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
+	// information, see Operations roles (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
 	// in the AWS Elastic Beanstalk Developer Guide.
 	OperationsRole *string
 
@@ -533,21 +484,13 @@ type EnvironmentDescription struct {
 	SolutionStackName *string
 
 	// The current operational status of the environment:
-	//
-	// * Launching: Environment is
-	// in the process of initial deployment.
-	//
-	// * Updating: Environment is in the process
-	// of updating its configuration settings or application version.
-	//
-	// * Ready:
-	// Environment is available to have an action performed on it, such as update or
-	// terminate.
-	//
-	// * Terminating: Environment is in the shut-down process.
-	//
-	// *
-	// Terminated: Environment is not running.
+	//   - Launching : Environment is in the process of initial deployment.
+	//   - Updating : Environment is in the process of updating its configuration
+	//   settings or application version.
+	//   - Ready : Environment is available to have an action performed on it, such as
+	//   update or terminate.
+	//   - Terminating : Environment is in the shut-down process.
+	//   - Terminated : Environment is not running.
 	Status EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this
@@ -586,8 +529,7 @@ type EnvironmentInfoDescription struct {
 
 // A link to another environment, defined in the environment's manifest. Links
 // provide connection information in system properties that can be used to connect
-// to another environment in the same group. See Environment Manifest (env.yaml)
-// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html)
+// to another environment in the same group. See Environment Manifest (env.yaml) (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html)
 // for details.
 type EnvironmentLink struct {
 
@@ -644,19 +586,13 @@ type EnvironmentResourcesDescription struct {
 type EnvironmentTier struct {
 
 	// The name of this environment tier. Valid values:
-	//
-	// * For Web server tier –
-	// WebServer
-	//
-	// * For Worker tier – Worker
+	//   - For Web server tier – WebServer
+	//   - For Worker tier – Worker
 	Name *string
 
 	// The type of this environment tier. Valid values:
-	//
-	// * For Web server tier –
-	// Standard
-	//
-	// * For Worker tier – SQS/HTTP
+	//   - For Web server tier – Standard
+	//   - For Worker tier – SQS/HTTP
 	Type *string
 
 	// The version of this environment tier. When you don't set a value to it, Elastic
@@ -711,8 +647,8 @@ type Instance struct {
 }
 
 // Represents summary information about the health of an instance. For more
-// information, see Health Colors and Statuses
-// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
+// information, see Health Colors and Statuses (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
+// .
 type InstanceHealthSummary struct {
 
 	// Red. The health agent is reporting a high number of request failures or other
@@ -853,8 +789,8 @@ type ManagedAction struct {
 	// The type of managed action.
 	ActionType ActionType
 
-	// The status of the managed action. If the action is Scheduled, you can apply it
-	// immediately with ApplyEnvironmentManagedAction.
+	// The status of the managed action. If the action is Scheduled , you can apply it
+	// immediately with ApplyEnvironmentManagedAction .
 	Status ActionStatus
 
 	// The start time of the maintenance window in which the managed action will
@@ -894,8 +830,8 @@ type ManagedActionHistoryItem struct {
 	noSmithyDocumentSerde
 }
 
-// A lifecycle rule that deletes application versions after the specified number of
-// days.
+// A lifecycle rule that deletes application versions after the specified number
+// of days.
 type MaxAgeRule struct {
 
 	// Specify true to apply the rule, or false to disable it.
@@ -932,8 +868,8 @@ type MaxCountRule struct {
 	noSmithyDocumentSerde
 }
 
-// A regular expression representing a restriction on a string configuration option
-// value.
+// A regular expression representing a restriction on a string configuration
+// option value.
 type OptionRestrictionRegex struct {
 
 	// A unique name representing this regular expression.
@@ -967,10 +903,11 @@ type PlatformBranchSummary struct {
 	// The name of the platform branch.
 	BranchName *string
 
-	// An ordinal number that designates the order in which platform branches have been
-	// added to a platform. This can be helpful, for example, if your code calls the
-	// ListPlatformBranches action and then displays a list of platform branches. A
-	// larger BranchOrder value designates a newer platform branch within the platform.
+	// An ordinal number that designates the order in which platform branches have
+	// been added to a platform. This can be helpful, for example, if your code calls
+	// the ListPlatformBranches action and then displays a list of platform branches.
+	// A larger BranchOrder value designates a newer platform branch within the
+	// platform.
 	BranchOrder int32
 
 	// The support life cycle state of the platform branch. Possible values: beta |
@@ -1064,7 +1001,7 @@ type PlatformDescription struct {
 // filter is evaluated as follows: Type Operator Values[1]
 type PlatformFilter struct {
 
-	// The operator to apply to the Type with each of the Values. Valid values: = | !=
+	// The operator to apply to the Type with each of the Values . Valid values: = | !=
 	// | < | <= | > | >= | contains | begins_with | ends_with
 	Operator *string
 
@@ -1074,20 +1011,13 @@ type PlatformFilter struct {
 	// ProgrammingLanguageName | OperatingSystemName
 	Type *string
 
-	// The list of values applied to the filtering platform version attribute. Only one
-	// value is supported for all current operators. The following list shows valid
+	// The list of values applied to the filtering platform version attribute. Only
+	// one value is supported for all current operators. The following list shows valid
 	// filter values for some filter attributes.
-	//
-	// * PlatformStatus: Creating | Failed |
-	// Ready | Deleting | Deleted
-	//
-	// * PlatformLifecycleState: recommended
-	//
-	// *
-	// SupportedTier: WebServer/Standard | Worker/SQS/HTTP
-	//
-	// * SupportedAddon: Log/S3 |
-	// Monitoring/Healthd | WorkerDaemon/SQSD
+	//   - PlatformStatus : Creating | Failed | Ready | Deleting | Deleted
+	//   - PlatformLifecycleState : recommended
+	//   - SupportedTier : WebServer/Standard | Worker/SQS/HTTP
+	//   - SupportedAddon : Log/S3 | Monitoring/Healthd | WorkerDaemon/SQSD
 	Values []string
 
 	noSmithyDocumentSerde
@@ -1175,8 +1105,8 @@ type Queue struct {
 	noSmithyDocumentSerde
 }
 
-// The AWS Elastic Beanstalk quota information for a single resource type in an AWS
-// account. It reflects the resource's limits for this account.
+// The AWS Elastic Beanstalk quota information for a single resource type in an
+// AWS account. It reflects the resource's limits for this account.
 type ResourceQuota struct {
 
 	// The maximum number of instances of this Elastic Beanstalk resource type that an
@@ -1222,7 +1152,7 @@ type S3Location struct {
 
 // Describes criteria to restrict a list of results. For operators that apply a
 // single value to the attribute, the filter is evaluated as follows: Attribute
-// Operator Values[1] Some operators, e.g. in, can apply multiple values. In this
+// Operator Values[1] Some operators, e.g. in , can apply multiple values. In this
 // case, the filter is evaluated as a logical union (OR) of applications of the
 // operator to the attribute with each one of the values: (Attribute Operator
 // Values[1]) OR (Attribute Operator Values[2]) OR ... The valid values for
@@ -1235,12 +1165,12 @@ type SearchFilter struct {
 	// by API action.
 	Attribute *string
 
-	// The operator to apply to the Attribute with each of the Values. Valid values
-	// vary by Attribute.
+	// The operator to apply to the Attribute with each of the Values . Valid values
+	// vary by Attribute .
 	Operator *string
 
 	// The list of values applied to the Attribute and Operator attributes. Number of
-	// values and valid values vary by Attribute.
+	// values and valid values vary by Attribute .
 	Values []string
 
 	noSmithyDocumentSerde
@@ -1261,16 +1191,16 @@ type SingleInstanceHealth struct {
 	Causes []string
 
 	// Represents the color indicator that gives you information about the health of
-	// the EC2 instance. For more information, see Health Colors and Statuses
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
+	// the EC2 instance. For more information, see Health Colors and Statuses (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
+	// .
 	Color *string
 
 	// Information about the most recent deployment to an instance.
 	Deployment *Deployment
 
 	// Returns the health status of the specified instance. For more information, see
-	// Health Colors and Statuses
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
+	// Health Colors and Statuses (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
+	// .
 	HealthStatus *string
 
 	// The ID of the Amazon EC2 instance.
@@ -1305,32 +1235,25 @@ type SourceBuildInformation struct {
 
 	// The location of the source code, as a formatted string, depending on the value
 	// of SourceRepository
-	//
-	// * For CodeCommit, the format is the repository name and
-	// commit ID, separated by a forward slash. For example,
-	// my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a.
-	//
-	// * For S3, the format is
-	// the S3 bucket name and object key, separated by a forward slash. For example,
-	// my-s3-bucket/Folders/my-source-file.
+	//   - For CodeCommit , the format is the repository name and commit ID, separated
+	//   by a forward slash. For example,
+	//   my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a .
+	//   - For S3 , the format is the S3 bucket name and object key, separated by a
+	//   forward slash. For example, my-s3-bucket/Folders/my-source-file .
 	//
 	// This member is required.
 	SourceLocation *string
 
 	// Location where the repository is stored.
-	//
-	// * CodeCommit
-	//
-	// * S3
+	//   - CodeCommit
+	//   - S3
 	//
 	// This member is required.
 	SourceRepository SourceRepository
 
 	// The type of repository.
-	//
-	// * Git
-	//
-	// * Zip
+	//   - Git
+	//   - Zip
 	//
 	// This member is required.
 	SourceType SourceType
@@ -1352,23 +1275,23 @@ type SourceConfiguration struct {
 
 // Represents the percentage of requests over the last 10 seconds that resulted in
 // each type of status code response. For more information, see Status Code
-// Definitions (http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
+// Definitions (http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) .
 type StatusCodes struct {
 
-	// The percentage of requests over the last 10 seconds that resulted in a 2xx (200,
-	// 201, etc.) status code.
+	// The percentage of requests over the last 10 seconds that resulted in a 2xx
+	// (200, 201, etc.) status code.
 	Status2xx *int32
 
-	// The percentage of requests over the last 10 seconds that resulted in a 3xx (300,
-	// 301, etc.) status code.
+	// The percentage of requests over the last 10 seconds that resulted in a 3xx
+	// (300, 301, etc.) status code.
 	Status3xx *int32
 
-	// The percentage of requests over the last 10 seconds that resulted in a 4xx (400,
-	// 401, etc.) status code.
+	// The percentage of requests over the last 10 seconds that resulted in a 4xx
+	// (400, 401, etc.) status code.
 	Status4xx *int32
 
-	// The percentage of requests over the last 10 seconds that resulted in a 5xx (500,
-	// 501, etc.) status code.
+	// The percentage of requests over the last 10 seconds that resulted in a 5xx
+	// (500, 501, etc.) status code.
 	Status5xx *int32
 
 	noSmithyDocumentSerde
@@ -1381,8 +1304,8 @@ type SystemStatus struct {
 	CPUUtilization *CPUUtilization
 
 	// Load average in the last 1-minute, 5-minute, and 15-minute periods. For more
-	// information, see Operating System Metrics
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os).
+	// information, see Operating System Metrics (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os)
+	// .
 	LoadAverage []float64
 
 	noSmithyDocumentSerde
@@ -1422,12 +1345,10 @@ type ValidationMessage struct {
 	OptionName *string
 
 	// An indication of the severity of this message:
-	//
-	// * error: This message indicates
-	// that this is not a valid setting for an option.
-	//
-	// * warning: This message is
-	// providing information you should take into account.
+	//   - error : This message indicates that this is not a valid setting for an
+	//   option.
+	//   - warning : This message is providing information you should take into
+	//   account.
 	Severity ValidationSeverity
 
 	noSmithyDocumentSerde

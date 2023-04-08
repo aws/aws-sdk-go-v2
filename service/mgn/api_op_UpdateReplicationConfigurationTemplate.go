@@ -64,8 +64,8 @@ type UpdateReplicationConfigurationTemplateInput struct {
 	// request.
 	ReplicationServerInstanceType *string
 
-	// Update replication configuration template Replication Server Security groups IDs
-	// request.
+	// Update replication configuration template Replication Server Security groups
+	// IDs request.
 	ReplicationServersSecurityGroupsIDs []string
 
 	// Update replication configuration template Staging Area subnet ID request.

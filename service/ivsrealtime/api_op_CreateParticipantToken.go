@@ -44,7 +44,7 @@ type CreateParticipantTokenInput struct {
 	Attributes map[string]string
 
 	// Set of capabilities that the user is allowed to perform in the stage. Default:
-	// PUBLISH, SUBSCRIBE.
+	// PUBLISH, SUBSCRIBE .
 	Capabilities []types.ParticipantTokenCapability
 
 	// Duration (in minutes), after which the token expires. Default: 60 (1 hour).

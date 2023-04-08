@@ -13,8 +13,8 @@ import (
 )
 
 // Deletes an OpenSearch Serverless collection. For more information, see Creating
-// and managing Amazon OpenSearch Serverless collections
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html).
+// and managing Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html)
+// .
 func (c *Client) DeleteCollection(ctx context.Context, params *DeleteCollectionInput, optFns ...func(*Options)) (*DeleteCollectionOutput, error) {
 	if params == nil {
 		params = &DeleteCollectionInput{}
@@ -32,10 +32,9 @@ func (c *Client) DeleteCollection(ctx context.Context, params *DeleteCollectionI
 
 type DeleteCollectionInput struct {
 
-	// The unique identifier of the collection. For example, 1iu5usc406kd. The ID is
+	// The unique identifier of the collection. For example, 1iu5usc406kd . The ID is
 	// part of the collection endpoint. You can also retrieve it using the
-	// ListCollections
-	// (https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html)
+	// ListCollections (https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html)
 	// API.
 	//
 	// This member is required.

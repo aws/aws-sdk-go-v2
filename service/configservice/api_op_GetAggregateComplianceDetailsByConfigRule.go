@@ -16,7 +16,7 @@ import (
 // resource in a rule. The results indicate which Amazon Web Services resources
 // were evaluated by the rule, when each resource was last evaluated, and whether
 // each resource complies with the rule. The results can return an empty result
-// page. But if you have a nextToken, the results are displayed on the next page.
+// page. But if you have a nextToken , the results are displayed on the next page.
 func (c *Client) GetAggregateComplianceDetailsByConfigRule(ctx context.Context, params *GetAggregateComplianceDetailsByConfigRuleInput, optFns ...func(*Options)) (*GetAggregateComplianceDetailsByConfigRuleOutput, error) {
 	if params == nil {
 		params = &GetAggregateComplianceDetailsByConfigRuleInput{}
@@ -56,8 +56,8 @@ type GetAggregateComplianceDetailsByConfigRuleInput struct {
 
 	// The resource compliance status. For the
 	// GetAggregateComplianceDetailsByConfigRuleRequest data type, Config supports only
-	// the COMPLIANT and NON_COMPLIANT. Config does not support the NOT_APPLICABLE and
-	// INSUFFICIENT_DATA values.
+	// the COMPLIANT and NON_COMPLIANT . Config does not support the NOT_APPLICABLE
+	// and INSUFFICIENT_DATA values.
 	ComplianceType types.ComplianceType
 
 	// The maximum number of evaluation results returned on each page. The default is

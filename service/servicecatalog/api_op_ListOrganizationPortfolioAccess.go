@@ -34,30 +34,22 @@ func (c *Client) ListOrganizationPortfolioAccess(ctx context.Context, params *Li
 type ListOrganizationPortfolioAccessInput struct {
 
 	// The organization node type that will be returned in the output.
-	//
-	// * ORGANIZATION
-	// - Organization that has access to the portfolio.
-	//
-	// * ORGANIZATIONAL_UNIT -
-	// Organizational unit that has access to the portfolio within your
-	// organization.
-	//
-	// * ACCOUNT - Account that has access to the portfolio within your
-	// organization.
+	//   - ORGANIZATION - Organization that has access to the portfolio.
+	//   - ORGANIZATIONAL_UNIT - Organizational unit that has access to the portfolio
+	//   within your organization.
+	//   - ACCOUNT - Account that has access to the portfolio within your organization.
 	//
 	// This member is required.
 	OrganizationNodeType types.OrganizationNodeType
 
-	// The portfolio identifier. For example, port-2abcdext3y5fk.
+	// The portfolio identifier. For example, port-2abcdext3y5fk .
 	//
 	// This member is required.
 	PortfolioId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.

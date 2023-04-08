@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Replaces an IAM instance profile for the specified running instance. You can use
-// this action to change the IAM instance profile that's associated with an
+// Replaces an IAM instance profile for the specified running instance. You can
+// use this action to change the IAM instance profile that's associated with an
 // instance without having to disassociate the existing IAM instance profile first.
 // Use DescribeIamInstanceProfileAssociations to get the association ID.
 func (c *Client) ReplaceIamInstanceProfileAssociation(ctx context.Context, params *ReplaceIamInstanceProfileAssociationInput, optFns ...func(*Options)) (*ReplaceIamInstanceProfileAssociationOutput, error) {

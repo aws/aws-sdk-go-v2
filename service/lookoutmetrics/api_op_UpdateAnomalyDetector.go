@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a detector. After activation, you can only change a detector's ingestion
-// delay and description.
+// Updates a detector. After activation, you can only change a detector's
+// ingestion delay and description.
 func (c *Client) UpdateAnomalyDetector(ctx context.Context, params *UpdateAnomalyDetectorInput, optFns ...func(*Options)) (*UpdateAnomalyDetectorOutput, error) {
 	if params == nil {
 		params = &UpdateAnomalyDetectorInput{}

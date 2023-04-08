@@ -19,8 +19,8 @@ type Container struct {
 	// The state of access logging on the container. This value is false by default,
 	// indicating that AWS Elemental MediaStore does not send access logs to Amazon
 	// CloudWatch Logs. When you enable access logging on the container, MediaStore
-	// changes this value to true, indicating that the service delivers access logs for
-	// objects stored in that container to CloudWatch Logs.
+	// changes this value to true , indicating that the service delivers access logs
+	// for objects stored in that container to CloudWatch Logs.
 	AccessLoggingEnabled *bool
 
 	// Unix timestamp.
@@ -36,9 +36,9 @@ type Container struct {
 	Name *string
 
 	// The status of container creation or deletion. The status is one of the
-	// following: CREATING, ACTIVE, or DELETING. While the service is creating the
-	// container, the status is CREATING. When the endpoint is available, the status
-	// changes to ACTIVE.
+	// following: CREATING , ACTIVE , or DELETING . While the service is creating the
+	// container, the status is CREATING . When the endpoint is available, the status
+	// changes to ACTIVE .
 	Status ContainerStatus
 
 	noSmithyDocumentSerde
@@ -57,10 +57,10 @@ type CorsRule struct {
 	// This member is required.
 	AllowedHeaders []string
 
-	// One or more response headers that you want users to be able to access from their
-	// applications (for example, from a JavaScript XMLHttpRequest object). Each CORS
-	// rule must have at least one AllowedOrigins element. The string value can include
-	// only one wildcard character (*), for example, http://*.example.com.
+	// One or more response headers that you want users to be able to access from
+	// their applications (for example, from a JavaScript XMLHttpRequest object). Each
+	// CORS rule must have at least one AllowedOrigins element. The string value can
+	// include only one wildcard character (*), for example, http://*.example.com.
 	// Additionally, you can specify only one wildcard character to allow cross-origin
 	// access for all origins.
 	//
@@ -89,8 +89,8 @@ type CorsRule struct {
 // you must indicate whether you want MediaStore to send container-level metrics.
 // You can also include rules to define groups of objects that you want MediaStore
 // to send object-level metrics for. To view examples of how to construct a metric
-// policy for your use case, see Example Metric Policies
-// (https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html).
+// policy for your use case, see Example Metric Policies (https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html)
+// .
 type MetricPolicy struct {
 
 	// A setting to enable or disable metrics at the container level.
@@ -101,19 +101,18 @@ type MetricPolicy struct {
 	// A parameter that holds an array of rules that enable metrics at the object
 	// level. This parameter is optional, but if you choose to include it, you must
 	// also include at least one rule. By default, you can include up to five rules.
-	// You can also request a quota increase
-	// (https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas)
+	// You can also request a quota increase (https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas)
 	// to allow up to 300 rules per policy.
 	MetricPolicyRules []MetricPolicyRule
 
 	noSmithyDocumentSerde
 }
 
-// A setting that enables metrics at the object level. Each rule contains an object
-// group and an object group name. If the policy includes the MetricPolicyRules
-// parameter, you must include at least one rule. Each metric policy can include up
-// to five rules by default. You can also request a quota increase
-// (https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas)
+// A setting that enables metrics at the object level. Each rule contains an
+// object group and an object group name. If the policy includes the
+// MetricPolicyRules parameter, you must include at least one rule. Each metric
+// policy can include up to five rules by default. You can also request a quota
+// increase (https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas)
 // to allow up to 300 rules per policy.
 type MetricPolicyRule struct {
 
@@ -137,11 +136,12 @@ type MetricPolicyRule struct {
 // specific value within that category (such as "test," "development," or
 // "production"). You can add up to 50 tags to each container. For more information
 // about tagging, including naming and usage conventions, see Tagging Resources in
-// MediaStore (https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html).
+// MediaStore (https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html) .
 type Tag struct {
 
-	// Part of the key:value pair that defines a tag. You can use a tag key to describe
-	// a category of information, such as "customer." Tag keys are case-sensitive.
+	// Part of the key:value pair that defines a tag. You can use a tag key to
+	// describe a category of information, such as "customer." Tag keys are
+	// case-sensitive.
 	//
 	// This member is required.
 	Key *string

@@ -50,8 +50,8 @@ type UpdateIntegrationResponseInput struct {
 	// This member is required.
 	StatusCode *string
 
-	// For more information about supported patch operations, see Patch Operations
-	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
+	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
+	// .
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -63,7 +63,7 @@ type UpdateIntegrationResponseInput struct {
 type UpdateIntegrationResponseOutput struct {
 
 	// Specifies how to handle response payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:
+	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT , with the following behaviors:
 	// If this property is not defined, the response payload will be passed through
 	// from the integration response to the method response without modification.
 	ContentHandling types.ContentHandlingStrategy
@@ -73,10 +73,10 @@ type UpdateIntegrationResponseOutput struct {
 	// and the mapped value is an integration response header value, a static value
 	// enclosed within a pair of single quotes, or a JSON expression from the
 	// integration response body. The mapping key must match the pattern of
-	// method.response.header.{name}, where name is a valid and unique header name. The
-	// mapped non-static value must match the pattern of
+	// method.response.header.{name} , where name is a valid and unique header name.
+	// The mapped non-static value must match the pattern of
 	// integration.response.header.{name} or
-	// integration.response.body.{JSON-expression}, where name is a valid and unique
+	// integration.response.body.{JSON-expression} , where name is a valid and unique
 	// response header name and JSON-expression is a valid JSON expression without the
 	// $ prefix.
 	ResponseParameters map[string]string
@@ -90,9 +90,9 @@ type UpdateIntegrationResponseOutput struct {
 	// response based on the response from the back end. For example, if the success
 	// response returns nothing and the error response returns some string, you could
 	// use the .+ regex to match error response. However, make sure that the error
-	// response does not contain any newline (\n) character in such cases. If the back
-	// end is an AWS Lambda function, the AWS Lambda function error header is matched.
-	// For all other HTTP and AWS back ends, the HTTP status code is matched.
+	// response does not contain any newline ( \n ) character in such cases. If the
+	// back end is an AWS Lambda function, the AWS Lambda function error header is
+	// matched. For all other HTTP and AWS back ends, the HTTP status code is matched.
 	SelectionPattern *string
 
 	// Specifies the status code that is used to map the integration response to an

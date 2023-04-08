@@ -40,8 +40,8 @@ type UpdateRequestValidatorInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// For more information about supported patch operations, see Patch Operations
-	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
+	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
+	// .
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -60,8 +60,8 @@ type UpdateRequestValidatorOutput struct {
 	// configured Model schema.
 	ValidateRequestBody bool
 
-	// A Boolean flag to indicate whether to validate request parameters (true) or not
-	// (false).
+	// A Boolean flag to indicate whether to validate request parameters ( true ) or
+	// not ( false ).
 	ValidateRequestParameters bool
 
 	// Metadata pertaining to the operation's result.

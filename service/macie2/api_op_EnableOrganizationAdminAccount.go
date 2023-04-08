@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Designates an account as the delegated Amazon Macie administrator account for an
-// organization in Organizations.
+// Designates an account as the delegated Amazon Macie administrator account for
+// an organization in Organizations.
 func (c *Client) EnableOrganizationAdminAccount(ctx context.Context, params *EnableOrganizationAdminAccountInput, optFns ...func(*Options)) (*EnableOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &EnableOrganizationAdminAccountInput{}
@@ -30,14 +30,14 @@ func (c *Client) EnableOrganizationAdminAccount(ctx context.Context, params *Ena
 
 type EnableOrganizationAdminAccountInput struct {
 
-	// The Amazon Web Services account ID for the account to designate as the delegated
-	// Amazon Macie administrator account for the organization.
+	// The Amazon Web Services account ID for the account to designate as the
+	// delegated Amazon Macie administrator account for the organization.
 	//
 	// This member is required.
 	AdminAccountId *string
 
-	// A unique, case-sensitive token that you provide to ensure the idempotency of the
-	// request.
+	// A unique, case-sensitive token that you provide to ensure the idempotency of
+	// the request.
 	ClientToken *string
 
 	noSmithyDocumentSerde

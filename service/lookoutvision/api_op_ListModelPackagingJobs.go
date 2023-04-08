@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the model packaging jobs created for an Amazon Lookout for Vision project.
-// This operation requires permissions to perform the
+// Lists the model packaging jobs created for an Amazon Lookout for Vision
+// project. This operation requires permissions to perform the
 // lookoutvision:ListModelPackagingJobs operation. For more information, see Using
 // your Amazon Lookout for Vision model on an edge device in the Amazon Lookout for
 // Vision Developer Guide.

@@ -270,8 +270,8 @@ func (e *NotAuthorizedException) ErrorCode() string {
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Thrown if an update can't be applied because the resource was changed by another
-// call and this would result in a conflict.
+// Thrown if an update can't be applied because the resource was changed by
+// another call and this would result in a conflict.
 type ResourceConflictException struct {
 	Message *string
 

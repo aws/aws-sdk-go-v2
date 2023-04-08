@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the resource policy that is set on a repository. After a resource policy
-// is deleted, the permissions allowed and denied by the deleted policy are
+// Deletes the resource policy that is set on a repository. After a resource
+// policy is deleted, the permissions allowed and denied by the deleted policy are
 // removed. The effect of deleting a resource policy might not be immediate. Use
 // DeleteRepositoryPermissionsPolicy with caution. After a policy is deleted,
 // Amazon Web Services users, roles, and accounts lose permissions to perform the
@@ -34,8 +34,8 @@ func (c *Client) DeleteRepositoryPermissionsPolicy(ctx context.Context, params *
 
 type DeleteRepositoryPermissionsPolicyInput struct {
 
-	// The name of the domain that contains the repository associated with the resource
-	// policy to be deleted.
+	// The name of the domain that contains the repository associated with the
+	// resource policy to be deleted.
 	//
 	// This member is required.
 	Domain *string
@@ -50,9 +50,9 @@ type DeleteRepositoryPermissionsPolicyInput struct {
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The revision of the repository's resource policy to be deleted. This revision is
-	// used for optimistic locking, which prevents others from accidentally overwriting
-	// your changes to the repository's resource policy.
+	// The revision of the repository's resource policy to be deleted. This revision
+	// is used for optimistic locking, which prevents others from accidentally
+	// overwriting your changes to the repository's resource policy.
 	PolicyRevision *string
 
 	noSmithyDocumentSerde

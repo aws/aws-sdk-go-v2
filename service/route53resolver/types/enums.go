@@ -106,9 +106,9 @@ const (
 	FirewallDomainListStatusUpdating             FirewallDomainListStatus = "UPDATING"
 )
 
-// Values returns all known values for FirewallDomainListStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FirewallDomainListStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FirewallDomainListStatus) Values() []FirewallDomainListStatus {
 	return []FirewallDomainListStatus{
 		"COMPLETE",
@@ -245,9 +245,9 @@ const (
 	MutationProtectionStatusDisabled MutationProtectionStatus = "DISABLED"
 )
 
-// Values returns all known values for MutationProtectionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MutationProtectionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MutationProtectionStatus) Values() []MutationProtectionStatus {
 	return []MutationProtectionStatus{
 		"ENABLED",
@@ -383,9 +383,9 @@ const (
 	ResolverQueryLogConfigAssociationErrorInternalServiceError ResolverQueryLogConfigAssociationError = "INTERNAL_SERVICE_ERROR"
 )
 
-// Values returns all known values for ResolverQueryLogConfigAssociationError. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for ResolverQueryLogConfigAssociationError.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ResolverQueryLogConfigAssociationError) Values() []ResolverQueryLogConfigAssociationError {
 	return []ResolverQueryLogConfigAssociationError{
@@ -431,9 +431,10 @@ const (
 	ResolverQueryLogConfigStatusFailed   ResolverQueryLogConfigStatus = "FAILED"
 )
 
-// Values returns all known values for ResolverQueryLogConfigStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResolverQueryLogConfigStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ResolverQueryLogConfigStatus) Values() []ResolverQueryLogConfigStatus {
 	return []ResolverQueryLogConfigStatus{
 		"CREATING",
@@ -538,9 +539,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",

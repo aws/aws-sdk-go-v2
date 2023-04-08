@@ -13,8 +13,7 @@ import (
 
 // Gets the scaling parameters configured for a domain. A domain's scaling
 // parameters specify the desired search instance type and replication count. For
-// more information, see Configuring Scaling Options
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html)
+// more information, see Configuring Scaling Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DescribeScalingParameters(ctx context.Context, params *DescribeScalingParametersInput, optFns ...func(*Options)) (*DescribeScalingParametersOutput, error) {
 	if params == nil {

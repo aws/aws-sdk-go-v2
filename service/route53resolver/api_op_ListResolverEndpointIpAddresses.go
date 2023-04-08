@@ -37,7 +37,7 @@ type ListResolverEndpointIpAddressesInput struct {
 
 	// The maximum number of IP addresses that you want to return in the response to a
 	// ListResolverEndpointIpAddresses request. If you don't specify a value for
-	// MaxResults, Resolver returns up to 100 IP addresses.
+	// MaxResults , Resolver returns up to 100 IP addresses.
 	MaxResults *int32
 
 	// For the first ListResolverEndpointIpAddresses request, omit this value. If the
@@ -62,8 +62,8 @@ type ListResolverEndpointIpAddressesOutput struct {
 
 	// If the specified endpoint has more than MaxResults IP addresses, you can submit
 	// another ListResolverEndpointIpAddresses request to get the next group of IP
-	// addresses. In the next request, specify the value of NextToken from the previous
-	// response.
+	// addresses. In the next request, specify the value of NextToken from the
+	// previous response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -148,7 +148,7 @@ var _ ListResolverEndpointIpAddressesAPIClient = (*Client)(nil)
 type ListResolverEndpointIpAddressesPaginatorOptions struct {
 	// The maximum number of IP addresses that you want to return in the response to a
 	// ListResolverEndpointIpAddresses request. If you don't specify a value for
-	// MaxResults, Resolver returns up to 100 IP addresses.
+	// MaxResults , Resolver returns up to 100 IP addresses.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

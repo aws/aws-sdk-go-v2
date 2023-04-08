@@ -40,8 +40,7 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 
 	// The number of rule evaluation results that you want returned. This parameter is
 	// required if the rule limit for your account is more than the default of 150
-	// rules. For information about requesting a rule limit increase, see Config Limits
-	// (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
+	// rules. For information about requesting a rule limit increase, see Config Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
 	// in the Amazon Web Services General Reference Guide.
 	Limit int32
 
@@ -140,8 +139,7 @@ var _ DescribeConfigRuleEvaluationStatusAPIClient = (*Client)(nil)
 type DescribeConfigRuleEvaluationStatusPaginatorOptions struct {
 	// The number of rule evaluation results that you want returned. This parameter is
 	// required if the rule limit for your account is more than the default of 150
-	// rules. For information about requesting a rule limit increase, see Config Limits
-	// (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
+	// rules. For information about requesting a rule limit increase, see Config Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
 	// in the Amazon Web Services General Reference Guide.
 	Limit int32
 

@@ -11,9 +11,9 @@ import (
 )
 
 // Use this operation to run a canary that has already been created. The frequency
-// of the canary runs is determined by the value of the canary's Schedule. To see a
-// canary's schedule, use GetCanary
-// (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanary.html).
+// of the canary runs is determined by the value of the canary's Schedule . To see
+// a canary's schedule, use GetCanary (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanary.html)
+// .
 func (c *Client) StartCanary(ctx context.Context, params *StartCanaryInput, optFns ...func(*Options)) (*StartCanaryOutput, error) {
 	if params == nil {
 		params = &StartCanaryInput{}
@@ -32,8 +32,8 @@ func (c *Client) StartCanary(ctx context.Context, params *StartCanaryInput, optF
 type StartCanaryInput struct {
 
 	// The name of the canary that you want to run. To find canary names, use
-	// DescribeCanaries
-	// (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
+	// DescribeCanaries (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html)
+	// .
 	//
 	// This member is required.
 	Name *string

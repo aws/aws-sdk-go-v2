@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about an archive rule. To learn about filter keys that you
-// can use to create an archive rule, see IAM Access Analyzer filter keys
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html)
+// Retrieves information about an archive rule. To learn about filter keys that
+// you can use to create an archive rule, see IAM Access Analyzer filter keys (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html)
 // in the IAM User Guide.
 func (c *Client) GetArchiveRule(ctx context.Context, params *GetArchiveRuleInput, optFns ...func(*Options)) (*GetArchiveRuleOutput, error) {
 	if params == nil {

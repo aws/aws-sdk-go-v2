@@ -51,10 +51,11 @@ type ReportTaskRunnerHeartbeatInput struct {
 	// The public DNS name of the task runner.
 	Hostname *string
 
-	// The type of task the task runner is configured to accept and process. The worker
-	// group is set as a field on objects in the pipeline when they are created. You
-	// can only specify a single value for workerGroup. There are no wildcard values
-	// permitted in workerGroup; the string must be an exact, case-sensitive, match.
+	// The type of task the task runner is configured to accept and process. The
+	// worker group is set as a field on objects in the pipeline when they are created.
+	// You can only specify a single value for workerGroup . There are no wildcard
+	// values permitted in workerGroup ; the string must be an exact, case-sensitive,
+	// match.
 	WorkerGroup *string
 
 	noSmithyDocumentSerde

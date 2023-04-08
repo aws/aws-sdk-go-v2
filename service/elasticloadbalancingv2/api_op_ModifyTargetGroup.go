@@ -64,8 +64,8 @@ type ModifyTargetGroupInput struct {
 	// response means a failed health check.
 	HealthCheckTimeoutSeconds *int32
 
-	// The number of consecutive health checks successes required before considering an
-	// unhealthy target healthy.
+	// The number of consecutive health checks successes required before considering
+	// an unhealthy target healthy.
 	HealthyThresholdCount *int32
 
 	// [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a

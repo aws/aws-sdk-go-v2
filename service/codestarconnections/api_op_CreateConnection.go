@@ -32,8 +32,8 @@ func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionI
 
 type CreateConnectionInput struct {
 
-	// The name of the connection to be created. The name must be unique in the calling
-	// AWS account.
+	// The name of the connection to be created. The name must be unique in the
+	// calling AWS account.
 	//
 	// This member is required.
 	ConnectionName *string

@@ -34,21 +34,17 @@ func (c *Client) ListPredictorBacktestExportJobs(ctx context.Context, params *Li
 
 type ListPredictorBacktestExportJobsInput struct {
 
-	// An array of filters. For each filter, provide a condition and a match statement.
-	// The condition is either IS or IS_NOT, which specifies whether to include or
-	// exclude the predictor backtest export jobs that match the statement from the
-	// list. The match statement consists of a key and a value. Filter properties
-	//
-	// *
-	// Condition - The condition to apply. Valid values are IS and IS_NOT. To include
-	// the predictor backtest export jobs that match the statement, specify IS. To
-	// exclude matching predictor backtest export jobs, specify IS_NOT.
-	//
-	// * Key - The
-	// name of the parameter to filter on. Valid values are PredictorArn and Status.
-	//
-	// *
-	// Value - The value to match.
+	// An array of filters. For each filter, provide a condition and a match
+	// statement. The condition is either IS or IS_NOT , which specifies whether to
+	// include or exclude the predictor backtest export jobs that match the statement
+	// from the list. The match statement consists of a key and a value. Filter
+	// properties
+	//   - Condition - The condition to apply. Valid values are IS and IS_NOT . To
+	//   include the predictor backtest export jobs that match the statement, specify
+	//   IS . To exclude matching predictor backtest export jobs, specify IS_NOT .
+	//   - Key - The name of the parameter to filter on. Valid values are PredictorArn
+	//   and Status .
+	//   - Value - The value to match.
 	Filters []types.Filter
 
 	// The number of items to return in the response.

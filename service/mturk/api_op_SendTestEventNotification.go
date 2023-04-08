@@ -34,9 +34,9 @@ func (c *Client) SendTestEventNotification(ctx context.Context, params *SendTest
 
 type SendTestEventNotificationInput struct {
 
-	// The notification specification to test. This value is identical to the value you
-	// would provide to the UpdateNotificationSettings operation when you establish the
-	// notification specification for a HIT type.
+	// The notification specification to test. This value is identical to the value
+	// you would provide to the UpdateNotificationSettings operation when you establish
+	// the notification specification for a HIT type.
 	//
 	// This member is required.
 	Notification *types.NotificationSpecification

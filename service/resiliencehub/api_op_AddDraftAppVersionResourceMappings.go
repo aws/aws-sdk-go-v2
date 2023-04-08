@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the resource mapping for the draft application version. You can also update
-// an existing resource mapping to a new physical resource.
+// Adds the resource mapping for the draft application version. You can also
+// update an existing resource mapping to a new physical resource.
 func (c *Client) AddDraftAppVersionResourceMappings(ctx context.Context, params *AddDraftAppVersionResourceMappingsInput, optFns ...func(*Options)) (*AddDraftAppVersionResourceMappingsOutput, error) {
 	if params == nil {
 		params = &AddDraftAppVersionResourceMappingsInput{}
@@ -30,11 +30,10 @@ func (c *Client) AddDraftAppVersionResourceMappings(ctx context.Context, params 
 
 type AddDraftAppVersionResourceMappingsInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -42,8 +41,8 @@ type AddDraftAppVersionResourceMappingsInput struct {
 	// Mappings used to map logical resources from the template to physical resources.
 	// You can use the mapping type CFN_STACK if the application template uses a
 	// logical stack name. Or you can map individual resources by using the mapping
-	// type RESOURCE. We recommend using the mapping type CFN_STACK if the application
-	// is backed by a CloudFormation stack.
+	// type RESOURCE . We recommend using the mapping type CFN_STACK if the
+	// application is backed by a CloudFormation stack.
 	//
 	// This member is required.
 	ResourceMappings []types.ResourceMapping
@@ -53,11 +52,10 @@ type AddDraftAppVersionResourceMappingsInput struct {
 
 type AddDraftAppVersionResourceMappingsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -70,8 +68,8 @@ type AddDraftAppVersionResourceMappingsOutput struct {
 	// Mappings used to map logical resources from the template to physical resources.
 	// You can use the mapping type CFN_STACK if the application template uses a
 	// logical stack name. Or you can map individual resources by using the mapping
-	// type RESOURCE. We recommend using the mapping type CFN_STACK if the application
-	// is backed by a CloudFormation stack.
+	// type RESOURCE . We recommend using the mapping type CFN_STACK if the
+	// application is backed by a CloudFormation stack.
 	//
 	// This member is required.
 	ResourceMappings []types.ResourceMapping

@@ -29,8 +29,8 @@ func (c *Client) UpdateMediaInsightsPipelineConfiguration(ctx context.Context, p
 
 type UpdateMediaInsightsPipelineConfigurationInput struct {
 
-	// The elements in the request, such as a processor for Amazon Transcribe or a sink
-	// for a Kinesis Data Stream..
+	// The elements in the request, such as a processor for Amazon Transcribe or a
+	// sink for a Kinesis Data Stream..
 	//
 	// This member is required.
 	Elements []types.MediaInsightsPipelineConfigurationElement

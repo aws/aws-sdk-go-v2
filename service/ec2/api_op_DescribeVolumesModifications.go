@@ -17,10 +17,8 @@ import (
 // will be null. If a volume has been modified more than once, the output includes
 // only the most recent modification request. You can also use CloudWatch Events to
 // check the status of a modification to an EBS volume. For information about
-// CloudWatch Events, see the Amazon CloudWatch Events User Guide
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/). For more
-// information, see Monitor the progress of volume modifications
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html)
+// CloudWatch Events, see the Amazon CloudWatch Events User Guide (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/)
+// . For more information, see Monitor the progress of volume modifications (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DescribeVolumesModifications(ctx context.Context, params *DescribeVolumesModificationsInput, optFns ...func(*Options)) (*DescribeVolumesModificationsOutput, error) {
 	if params == nil {
@@ -41,48 +39,32 @@ type DescribeVolumesModificationsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The filters.
-	//
-	// * modification-state - The current modification state (modifying |
-	// optimizing | completed | failed).
-	//
-	// * original-iops - The original IOPS rate of
-	// the volume.
-	//
-	// * original-size - The original size of the volume, in GiB.
-	//
-	// *
-	// original-volume-type - The original volume type of the volume (standard | io1 |
-	// io2 | gp2 | sc1 | st1).
-	//
-	// * originalMultiAttachEnabled - Indicates whether
-	// Multi-Attach support was enabled (true | false).
-	//
-	// * start-time - The
-	// modification start time.
-	//
-	// * target-iops - The target IOPS rate of the volume.
-	//
-	// *
-	// target-size - The target size of the volume, in GiB.
-	//
-	// * target-volume-type - The
-	// target volume type of the volume (standard | io1 | io2 | gp2 | sc1 | st1).
-	//
-	// *
-	// targetMultiAttachEnabled - Indicates whether Multi-Attach support is to be
-	// enabled (true | false).
-	//
-	// * volume-id - The ID of the volume.
+	//   - modification-state - The current modification state (modifying | optimizing
+	//   | completed | failed).
+	//   - original-iops - The original IOPS rate of the volume.
+	//   - original-size - The original size of the volume, in GiB.
+	//   - original-volume-type - The original volume type of the volume (standard |
+	//   io1 | io2 | gp2 | sc1 | st1).
+	//   - originalMultiAttachEnabled - Indicates whether Multi-Attach support was
+	//   enabled (true | false).
+	//   - start-time - The modification start time.
+	//   - target-iops - The target IOPS rate of the volume.
+	//   - target-size - The target size of the volume, in GiB.
+	//   - target-volume-type - The target volume type of the volume (standard | io1 |
+	//   io2 | gp2 | sc1 | st1).
+	//   - targetMultiAttachEnabled - Indicates whether Multi-Attach support is to be
+	//   enabled (true | false).
+	//   - volume-id - The ID of the volume.
 	Filters []types.Filter
 
 	// The maximum number of results (up to a limit of 500) to be returned in a
-	// paginated request. For more information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// paginated request. For more information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
 	// The token returned by a previous paginated request. Pagination continues from
@@ -182,8 +164,8 @@ var _ DescribeVolumesModificationsAPIClient = (*Client)(nil)
 // DescribeVolumesModifications
 type DescribeVolumesModificationsPaginatorOptions struct {
 	// The maximum number of results (up to a limit of 500) to be returned in a
-	// paginated request. For more information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// paginated request. For more information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -64,8 +64,8 @@ func (e *InternalException) ErrorCode() string {
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// (Discontinued) The request was rejected because an invalid or out-of-range value
-// was supplied for an input parameter.
+// (Discontinued) The request was rejected because an invalid or out-of-range
+// value was supplied for an input parameter.
 type InvalidInputException struct {
 	Message *string
 
@@ -94,9 +94,9 @@ func (e *InvalidInputException) ErrorCode() string {
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// (Discontinued) The request was rejected because it attempted to create resources
-// beyond the current Amazon Web Services account quotas. The error code describes
-// the quota exceeded.
+// (Discontinued) The request was rejected because it attempted to create
+// resources beyond the current Amazon Web Services account quotas. The error code
+// describes the quota exceeded.
 type LimitExceededException struct {
 	Message *string
 

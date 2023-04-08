@@ -12,9 +12,8 @@ import (
 
 // Moves a domain from Amazon Web Services to another registrar. Supported
 // actions:
-//
-// * Changes the IPS tags of a .uk domain, and pushes it to transit.
-// Transit means that the domain is ready to be transferred to another registrar.
+//   - Changes the IPS tags of a .uk domain, and pushes it to transit. Transit
+//     means that the domain is ready to be transferred to another registrar.
 func (c *Client) PushDomain(ctx context.Context, params *PushDomainInput, optFns ...func(*Options)) (*PushDomainOutput, error) {
 	if params == nil {
 		params = &PushDomainInput{}

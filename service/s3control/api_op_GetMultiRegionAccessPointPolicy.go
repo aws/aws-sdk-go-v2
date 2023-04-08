@@ -18,17 +18,11 @@ import (
 // Returns the access control policy of the specified Multi-Region Access Point.
 // This action will always be routed to the US West (Oregon) Region. For more
 // information about the restrictions around managing Multi-Region Access Points,
-// see Managing Multi-Region Access Points
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
+// see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
 // in the Amazon S3 User Guide. The following actions are related to
-// GetMultiRegionAccessPointPolicy:
-//
-// * GetMultiRegionAccessPointPolicyStatus
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html)
-//
-// *
-// PutMultiRegionAccessPointPolicy
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html)
+// GetMultiRegionAccessPointPolicy :
+//   - GetMultiRegionAccessPointPolicyStatus (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html)
+//   - PutMultiRegionAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html)
 func (c *Client) GetMultiRegionAccessPointPolicy(ctx context.Context, params *GetMultiRegionAccessPointPolicyInput, optFns ...func(*Options)) (*GetMultiRegionAccessPointPolicyOutput, error) {
 	if params == nil {
 		params = &GetMultiRegionAccessPointPolicyInput{}
@@ -55,8 +49,7 @@ type GetMultiRegionAccessPointPolicyInput struct {
 	// Specifies the Multi-Region Access Point. The name of the Multi-Region Access
 	// Point is different from the alias. For more information about the distinction
 	// between the name and the alias of an Multi-Region Access Point, see Managing
-	// Multi-Region Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming)
+	// Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming)
 	// in the Amazon S3 User Guide.
 	//
 	// This member is required.

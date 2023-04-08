@@ -37,10 +37,8 @@ type BatchDisassociateServiceActionFromProvisioningArtifactInput struct {
 	ServiceActionAssociations []types.ServiceActionAssociation
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

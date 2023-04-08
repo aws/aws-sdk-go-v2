@@ -40,8 +40,8 @@ type UpdatePublicKeyInput struct {
 	// This member is required.
 	PublicKeyConfig *types.PublicKeyConfig
 
-	// The value of the ETag header that you received when retrieving the public key to
-	// update. For example: E2QWRUHAPOMQZL.
+	// The value of the ETag header that you received when retrieving the public key
+	// to update. For example: E2QWRUHAPOMQZL .
 	IfMatch *string
 
 	noSmithyDocumentSerde

@@ -13,7 +13,7 @@ import (
 
 // Creates an events configuration that allows a bot to receive outgoing events
 // sent by Amazon Chime. Choose either an HTTPS endpoint or a Lambda function ARN.
-// For more information, see Bot.
+// For more information, see Bot .
 func (c *Client) PutEventsConfiguration(ctx context.Context, params *PutEventsConfigurationInput, optFns ...func(*Options)) (*PutEventsConfigurationOutput, error) {
 	if params == nil {
 		params = &PutEventsConfigurationInput{}
@@ -52,8 +52,8 @@ type PutEventsConfigurationInput struct {
 
 type PutEventsConfigurationOutput struct {
 
-	// The configuration that allows a bot to receive outgoing events. Can be either an
-	// HTTPS endpoint or a Lambda function ARN.
+	// The configuration that allows a bot to receive outgoing events. Can be either
+	// an HTTPS endpoint or a Lambda function ARN.
 	EventsConfiguration *types.EventsConfiguration
 
 	// Metadata pertaining to the operation's result.

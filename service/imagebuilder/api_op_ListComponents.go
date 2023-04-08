@@ -41,19 +41,12 @@ type ListComponentsInput struct {
 	ByName bool
 
 	// Use the following filters to streamline results:
-	//
-	// * description
-	//
-	// * name
-	//
-	// *
-	// platform
-	//
-	// * supportedOsVersion
-	//
-	// * type
-	//
-	// * version
+	//   - description
+	//   - name
+	//   - platform
+	//   - supportedOsVersion
+	//   - type
+	//   - version
 	Filters []types.Filter
 
 	// The maximum items to return in a request.

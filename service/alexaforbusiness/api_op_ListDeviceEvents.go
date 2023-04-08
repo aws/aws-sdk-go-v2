@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the device event history, including device connection status, for up to 30
-// days.
+// Lists the device event history, including device connection status, for up to
+// 30 days.
 func (c *Client) ListDeviceEvents(ctx context.Context, params *ListDeviceEventsInput, optFns ...func(*Options)) (*ListDeviceEventsOutput, error) {
 	if params == nil {
 		params = &ListDeviceEventsInput{}

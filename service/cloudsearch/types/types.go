@@ -12,8 +12,7 @@ import (
 type AccessPoliciesStatus struct {
 
 	// Access rules for a domain's document or search service endpoints. For more
-	// information, see Configuring Access for a Search Domain
-	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html)
+	// information, see Configuring Access for a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html)
 	// in the Amazon CloudSearch Developer Guide. The maximum size of a policy document
 	// is 100 KB.
 	//
@@ -32,10 +31,9 @@ type AccessPoliciesStatus struct {
 // tokenization dictionary for Japanese.
 type AnalysisOptions struct {
 
-	// The level of algorithmic stemming to perform: none, minimal, light, or full. The
-	// available levels vary depending on the language. For more information, see
-	// Language Specific Text Processing Settings
-	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings)
+	// The level of algorithmic stemming to perform: none , minimal , light , or full .
+	// The available levels vary depending on the language. For more information, see
+	// Language Specific Text Processing Settings (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings)
 	// in the Amazon CloudSearch Developer Guide
 	AlgorithmicStemming AlgorithmicStemming
 
@@ -47,14 +45,14 @@ type AnalysisOptions struct {
 
 	// A JSON object that contains a collection of string:value pairs that each map a
 	// term to its stem. For example, {"term1": "stem1", "term2": "stem2", "term3":
-	// "stem3"}. The stemming dictionary is applied in addition to any algorithmic
+	// "stem3"} . The stemming dictionary is applied in addition to any algorithmic
 	// stemming. This enables you to override the results of the algorithmic stemming
 	// to correct specific cases of overstemming or understemming. The maximum size of
 	// a stemming dictionary is 500 KB.
 	StemmingDictionary *string
 
 	// A JSON array of terms to ignore during indexing and searching. For example,
-	// ["a", "an", "the", "of"]. The stopwords dictionary must explicitly list each
+	// ["a", "an", "the", "of"] . The stopwords dictionary must explicitly list each
 	// word you want to ignore. Wildcards and regular expressions are not supported.
 	Stopwords *string
 
@@ -65,8 +63,7 @@ type AnalysisOptions struct {
 	// string specifies a term and the array of values specifies each of the aliases
 	// for that term. An alias is considered a synonym of the specified term, but the
 	// term is not considered a synonym of the alias. For more information about
-	// specifying synonyms, see Synonyms
-	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html#synonyms)
+	// specifying synonyms, see Synonyms (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html#synonyms)
 	// in the Amazon CloudSearch Developer Guide.
 	Synonyms *string
 
@@ -75,8 +72,8 @@ type AnalysisOptions struct {
 
 // Configuration information for an analysis scheme. Each analysis scheme has a
 // unique name and specifies the language of the text to be processed. The
-// following options can be configured for an analysis scheme: Synonyms, Stopwords,
-// StemmingDictionary, JapaneseTokenizationDictionary and AlgorithmicStemming.
+// following options can be configured for an analysis scheme: Synonyms , Stopwords
+// , StemmingDictionary , JapaneseTokenizationDictionary and AlgorithmicStemming .
 type AnalysisScheme struct {
 
 	// An IETF RFC 4646 (http://tools.ietf.org/html/rfc4646) language code or mul for
@@ -98,13 +95,13 @@ type AnalysisScheme struct {
 	noSmithyDocumentSerde
 }
 
-// The status and configuration of an AnalysisScheme.
+// The status and configuration of an AnalysisScheme .
 type AnalysisSchemeStatus struct {
 
 	// Configuration information for an analysis scheme. Each analysis scheme has a
 	// unique name and specifies the language of the text to be processed. The
-	// following options can be configured for an analysis scheme: Synonyms, Stopwords,
-	// StemmingDictionary, JapaneseTokenizationDictionary and AlgorithmicStemming.
+	// following options can be configured for an analysis scheme: Synonyms , Stopwords
+	// , StemmingDictionary , JapaneseTokenizationDictionary and AlgorithmicStemming .
 	//
 	// This member is required.
 	Options *AnalysisScheme
@@ -134,7 +131,7 @@ type AvailabilityOptionsStatus struct {
 }
 
 // Options for a field that contains an array of dates. Present if IndexFieldType
-// specifies the field is of type date-array. All options are enabled by default.
+// specifies the field is of type date-array . All options are enabled by default.
 type DateArrayOptions struct {
 
 	// A value to use for the field if the field isn't specified for a document.
@@ -157,7 +154,7 @@ type DateArrayOptions struct {
 
 // Options for a date field. Dates and times are specified in UTC (Coordinated
 // Universal Time) according to IETF RFC3339: yyyy-mm-ddT00:00:00Z. Present if
-// IndexFieldType specifies the field is of type date. All options are enabled by
+// IndexFieldType specifies the field is of type date . All options are enabled by
 // default.
 type DateOptions struct {
 
@@ -186,7 +183,7 @@ type DateOptions struct {
 	// wildcard can also be the only character in a dynamic field name. Multiple
 	// wildcards, and wildcards embedded within a string are not supported. The name
 	// score is reserved and cannot be used as a field name. To reference a document's
-	// ID, you can use the name _id.
+	// ID, you can use the name _id .
 	SourceField *string
 
 	noSmithyDocumentSerde
@@ -200,8 +197,8 @@ type DocumentSuggesterOptions struct {
 	// This member is required.
 	SourceField *string
 
-	// The level of fuzziness allowed when suggesting matches for a string: none, low,
-	// or high. With none, the specified string is treated as an exact prefix. With
+	// The level of fuzziness allowed when suggesting matches for a string: none , low
+	// , or high . With none, the specified string is treated as an exact prefix. With
 	// low, suggestions must differ from the specified string by no more than one
 	// character. With high, suggestions can differ by up to two characters. The
 	// default is none.
@@ -210,10 +207,10 @@ type DocumentSuggesterOptions struct {
 	// An expression that computes a score for each suggestion to control how they are
 	// sorted. The scores are rounded to the nearest integer, with a floor of 0 and a
 	// ceiling of 2^31-1. A document's relevance score is not computed for suggestions,
-	// so sort expressions cannot reference the _score value. To sort suggestions using
-	// a numeric field or existing expression, simply specify the name of the field or
-	// expression. If no expression is configured for the suggester, the suggestions
-	// are sorted with the closest matches listed first.
+	// so sort expressions cannot reference the _score value. To sort suggestions
+	// using a numeric field or existing expression, simply specify the name of the
+	// field or expression. If no expression is configured for the suggester, the
+	// suggestions are sorted with the closest matches listed first.
 	SortExpression *string
 
 	noSmithyDocumentSerde
@@ -270,8 +267,7 @@ type DomainStatus struct {
 	RequiresIndexDocuments *bool
 
 	// The Amazon Resource Name (ARN) of the search domain. See Identifiers for IAM
-	// Entities
-	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html)
+	// Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html)
 	// in Using AWS Identity and Access Management for more information.
 	ARN *string
 
@@ -282,9 +278,9 @@ type DomainStatus struct {
 	Created *bool
 
 	// True if the search domain has been deleted. The system must clean up resources
-	// dedicated to the search domain when DeleteDomain is called. Newly deleted search
-	// domains are returned from DescribeDomains with a true value for IsDeleted for
-	// several minutes until resource cleanup is complete.
+	// dedicated to the search domain when DeleteDomain is called. Newly deleted
+	// search domains are returned from DescribeDomains with a true value for
+	// IsDeleted for several minutes until resource cleanup is complete.
 	Deleted *bool
 
 	// The service endpoint for updating documents in a search domain.
@@ -312,7 +308,7 @@ type DomainStatus struct {
 
 // Options for a field that contains an array of double-precision 64-bit floating
 // point values. Present if IndexFieldType specifies the field is of type
-// double-array. All options are enabled by default.
+// double-array . All options are enabled by default.
 type DoubleArrayOptions struct {
 
 	// A value to use for the field if the field isn't specified for a document.
@@ -334,8 +330,8 @@ type DoubleArrayOptions struct {
 }
 
 // Options for a double-precision 64-bit floating point field. Present if
-// IndexFieldType specifies the field is of type double. All options are enabled by
-// default.
+// IndexFieldType specifies the field is of type double . All options are enabled
+// by default.
 type DoubleOptions struct {
 
 	// A value to use for the field if the field isn't specified for a document. This
@@ -361,9 +357,9 @@ type DoubleOptions struct {
 	noSmithyDocumentSerde
 }
 
-// A named expression that can be evaluated at search time. Can be used to sort the
-// search results, define other expressions, or return computed information in the
-// search results.
+// A named expression that can be evaluated at search time. Can be used to sort
+// the search results, define other expressions, or return computed information in
+// the search results.
 type Expression struct {
 
 	// Names must begin with a letter and can contain the following characters: a-z
@@ -374,8 +370,7 @@ type Expression struct {
 
 	// The expression to evaluate for sorting while processing a search request. The
 	// Expression syntax is based on JavaScript expressions. For more information, see
-	// Configuring Expressions
-	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
+	// Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
 	// in the Amazon CloudSearch Developer Guide.
 	//
 	// This member is required.
@@ -401,7 +396,7 @@ type ExpressionStatus struct {
 }
 
 // Configuration information for a field in the index, including its name, type,
-// and options. The supported options depend on the IndexFieldType.
+// and options. The supported options depend on the IndexFieldType .
 type IndexField struct {
 
 	// A string that represents the name of an index field. CloudSearch supports
@@ -414,69 +409,69 @@ type IndexField struct {
 	// wildcard can also be the only character in a dynamic field name. Multiple
 	// wildcards, and wildcards embedded within a string are not supported. The name
 	// score is reserved and cannot be used as a field name. To reference a document's
-	// ID, you can use the name _id.
+	// ID, you can use the name _id .
 	//
 	// This member is required.
 	IndexFieldName *string
 
 	// The type of field. The valid options for a field depend on the field type. For
-	// more information about the supported field types, see Configuring Index Fields
-	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
+	// more information about the supported field types, see Configuring Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
 	// in the Amazon CloudSearch Developer Guide.
 	//
 	// This member is required.
 	IndexFieldType IndexFieldType
 
 	// Options for a field that contains an array of dates. Present if IndexFieldType
-	// specifies the field is of type date-array. All options are enabled by default.
+	// specifies the field is of type date-array . All options are enabled by default.
 	DateArrayOptions *DateArrayOptions
 
 	// Options for a date field. Dates and times are specified in UTC (Coordinated
 	// Universal Time) according to IETF RFC3339: yyyy-mm-ddT00:00:00Z. Present if
-	// IndexFieldType specifies the field is of type date. All options are enabled by
+	// IndexFieldType specifies the field is of type date . All options are enabled by
 	// default.
 	DateOptions *DateOptions
 
 	// Options for a field that contains an array of double-precision 64-bit floating
 	// point values. Present if IndexFieldType specifies the field is of type
-	// double-array. All options are enabled by default.
+	// double-array . All options are enabled by default.
 	DoubleArrayOptions *DoubleArrayOptions
 
 	// Options for a double-precision 64-bit floating point field. Present if
-	// IndexFieldType specifies the field is of type double. All options are enabled by
-	// default.
+	// IndexFieldType specifies the field is of type double . All options are enabled
+	// by default.
 	DoubleOptions *DoubleOptions
 
-	// Options for a field that contains an array of 64-bit signed integers. Present if
-	// IndexFieldType specifies the field is of type int-array. All options are enabled
-	// by default.
+	// Options for a field that contains an array of 64-bit signed integers. Present
+	// if IndexFieldType specifies the field is of type int-array . All options are
+	// enabled by default.
 	IntArrayOptions *IntArrayOptions
 
 	// Options for a 64-bit signed integer field. Present if IndexFieldType specifies
-	// the field is of type int. All options are enabled by default.
+	// the field is of type int . All options are enabled by default.
 	IntOptions *IntOptions
 
 	// Options for a latlon field. A latlon field contains a location stored as a
-	// latitude and longitude value pair. Present if IndexFieldType specifies the field
-	// is of type latlon. All options are enabled by default.
+	// latitude and longitude value pair. Present if IndexFieldType specifies the
+	// field is of type latlon . All options are enabled by default.
 	LatLonOptions *LatLonOptions
 
 	// Options for a field that contains an array of literal strings. Present if
-	// IndexFieldType specifies the field is of type literal-array. All options are
+	// IndexFieldType specifies the field is of type literal-array . All options are
 	// enabled by default.
 	LiteralArrayOptions *LiteralArrayOptions
 
 	// Options for literal field. Present if IndexFieldType specifies the field is of
-	// type literal. All options are enabled by default.
+	// type literal . All options are enabled by default.
 	LiteralOptions *LiteralOptions
 
 	// Options for a field that contains an array of text strings. Present if
-	// IndexFieldType specifies the field is of type text-array. A text-array field is
-	// always searchable. All options are enabled by default.
+	// IndexFieldType specifies the field is of type text-array . A text-array field
+	// is always searchable. All options are enabled by default.
 	TextArrayOptions *TextArrayOptions
 
-	// Options for text field. Present if IndexFieldType specifies the field is of type
-	// text. A text field is always searchable. All options are enabled by default.
+	// Options for text field. Present if IndexFieldType specifies the field is of
+	// type text . A text field is always searchable. All options are enabled by
+	// default.
 	TextOptions *TextOptions
 
 	noSmithyDocumentSerde
@@ -486,7 +481,7 @@ type IndexField struct {
 type IndexFieldStatus struct {
 
 	// Configuration information for a field in the index, including its name, type,
-	// and options. The supported options depend on the IndexFieldType.
+	// and options. The supported options depend on the IndexFieldType .
 	//
 	// This member is required.
 	Options *IndexField
@@ -499,9 +494,9 @@ type IndexFieldStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Options for a field that contains an array of 64-bit signed integers. Present if
-// IndexFieldType specifies the field is of type int-array. All options are enabled
-// by default.
+// Options for a field that contains an array of 64-bit signed integers. Present
+// if IndexFieldType specifies the field is of type int-array . All options are
+// enabled by default.
 type IntArrayOptions struct {
 
 	// A value to use for the field if the field isn't specified for a document.
@@ -523,7 +518,7 @@ type IntArrayOptions struct {
 }
 
 // Options for a 64-bit signed integer field. Present if IndexFieldType specifies
-// the field is of type int. All options are enabled by default.
+// the field is of type int . All options are enabled by default.
 type IntOptions struct {
 
 	// A value to use for the field if the field isn't specified for a document. This
@@ -550,8 +545,8 @@ type IntOptions struct {
 }
 
 // Options for a latlon field. A latlon field contains a location stored as a
-// latitude and longitude value pair. Present if IndexFieldType specifies the field
-// is of type latlon. All options are enabled by default.
+// latitude and longitude value pair. Present if IndexFieldType specifies the
+// field is of type latlon . All options are enabled by default.
 type LatLonOptions struct {
 
 	// A value to use for the field if the field isn't specified for a document.
@@ -579,7 +574,7 @@ type LatLonOptions struct {
 	// wildcard can also be the only character in a dynamic field name. Multiple
 	// wildcards, and wildcards embedded within a string are not supported. The name
 	// score is reserved and cannot be used as a field name. To reference a document's
-	// ID, you can use the name _id.
+	// ID, you can use the name _id .
 	SourceField *string
 
 	noSmithyDocumentSerde
@@ -597,7 +592,7 @@ type Limits struct {
 }
 
 // Options for a field that contains an array of literal strings. Present if
-// IndexFieldType specifies the field is of type literal-array. All options are
+// IndexFieldType specifies the field is of type literal-array . All options are
 // enabled by default.
 type LiteralArrayOptions struct {
 
@@ -620,7 +615,7 @@ type LiteralArrayOptions struct {
 }
 
 // Options for literal field. Present if IndexFieldType specifies the field is of
-// type literal. All options are enabled by default.
+// type literal . All options are enabled by default.
 type LiteralOptions struct {
 
 	// A value to use for the field if the field isn't specified for a document.
@@ -648,7 +643,7 @@ type LiteralOptions struct {
 	// wildcard can also be the only character in a dynamic field name. Multiple
 	// wildcards, and wildcards embedded within a string are not supported. The name
 	// score is reserved and cannot be used as a field name. To reference a document's
-	// ID, you can use the name _id.
+	// ID, you can use the name _id .
 	SourceField *string
 
 	noSmithyDocumentSerde
@@ -663,21 +658,13 @@ type OptionStatus struct {
 	CreationDate *time.Time
 
 	// The state of processing a change to an option. Possible values:
-	//
-	// *
-	// RequiresIndexDocuments: the option's latest value will not be deployed until
-	// IndexDocuments has been called and indexing is complete.
-	//
-	// * Processing: the
-	// option's latest value is in the process of being activated.
-	//
-	// * Active: the
-	// option's latest value is completely deployed.
-	//
-	// * FailedToValidate: the option
-	// value is not compatible with the domain's data and cannot be used to index the
-	// data. You must either modify the option value or update or remove the
-	// incompatible documents.
+	//   - RequiresIndexDocuments : the option's latest value will not be deployed
+	//   until IndexDocuments has been called and indexing is complete.
+	//   - Processing : the option's latest value is in the process of being activated.
+	//   - Active : the option's latest value is completely deployed.
+	//   - FailedToValidate : the option value is not compatible with the domain's data
+	//   and cannot be used to index the data. You must either modify the option value or
+	//   update or remove the incompatible documents.
 	//
 	// This member is required.
 	State OptionState
@@ -701,7 +688,7 @@ type OptionStatus struct {
 type ScalingParameters struct {
 
 	// The instance type that you want to preconfigure for your domain. For example,
-	// search.m1.small.
+	// search.m1.small .
 	DesiredInstanceType PartitionInstanceType
 
 	// The number of partitions you want to preconfigure for your domain. Only valid
@@ -737,7 +724,7 @@ type ServiceEndpoint struct {
 	// The endpoint to which service requests can be submitted. For example,
 	// search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com
 	// or
-	// doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com.
+	// doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com .
 	Endpoint *string
 
 	noSmithyDocumentSerde
@@ -745,7 +732,7 @@ type ServiceEndpoint struct {
 
 // Configuration information for a search suggester. Each suggester has a unique
 // name and specifies the text field you want to use for suggestions. The following
-// options can be configured for a suggester: FuzzyMatching, SortExpression.
+// options can be configured for a suggester: FuzzyMatching , SortExpression .
 type Suggester struct {
 
 	// Options for a search suggester.
@@ -767,7 +754,7 @@ type SuggesterStatus struct {
 
 	// Configuration information for a search suggester. Each suggester has a unique
 	// name and specifies the text field you want to use for suggestions. The following
-	// options can be configured for a suggester: FuzzyMatching, SortExpression.
+	// options can be configured for a suggester: FuzzyMatching , SortExpression .
 	//
 	// This member is required.
 	Options *Suggester
@@ -781,8 +768,8 @@ type SuggesterStatus struct {
 }
 
 // Options for a field that contains an array of text strings. Present if
-// IndexFieldType specifies the field is of type text-array. A text-array field is
-// always searchable. All options are enabled by default.
+// IndexFieldType specifies the field is of type text-array . A text-array field
+// is always searchable. All options are enabled by default.
 type TextArrayOptions struct {
 
 	// The name of an analysis scheme for a text-array field.
@@ -803,8 +790,9 @@ type TextArrayOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Options for text field. Present if IndexFieldType specifies the field is of type
-// text. A text field is always searchable. All options are enabled by default.
+// Options for text field. Present if IndexFieldType specifies the field is of
+// type text . A text field is always searchable. All options are enabled by
+// default.
 type TextOptions struct {
 
 	// The name of an analysis scheme for a text field.
@@ -832,7 +820,7 @@ type TextOptions struct {
 	// wildcard can also be the only character in a dynamic field name. Multiple
 	// wildcards, and wildcards embedded within a string are not supported. The name
 	// score is reserved and cannot be used as a field name. To reference a document's
-	// ID, you can use the name _id.
+	// ID, you can use the name _id .
 	SourceField *string
 
 	noSmithyDocumentSerde

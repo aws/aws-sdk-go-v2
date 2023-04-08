@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new distribution configuration. Distribution configurations define and
-// configure the outputs of your pipeline.
+// Creates a new distribution configuration. Distribution configurations define
+// and configure the outputs of your pipeline.
 func (c *Client) CreateDistributionConfiguration(ctx context.Context, params *CreateDistributionConfigurationInput, optFns ...func(*Options)) (*CreateDistributionConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateDistributionConfigurationInput{}

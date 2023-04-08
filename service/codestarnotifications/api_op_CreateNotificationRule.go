@@ -42,7 +42,7 @@ type CreateNotificationRuleInput struct {
 	DetailType types.DetailType
 
 	// A list of event types associated with this notification rule. For a list of
-	// allowed events, see EventTypeSummary.
+	// allowed events, see EventTypeSummary .
 	//
 	// This member is required.
 	EventTypeIds []string
@@ -74,12 +74,12 @@ type CreateNotificationRuleInput struct {
 	// Web Services SDK, an idempotency token is created for you.
 	ClientRequestToken *string
 
-	// The status of the notification rule. The default value is ENABLED. If the status
-	// is set to DISABLED, notifications aren't sent for the notification rule.
+	// The status of the notification rule. The default value is ENABLED . If the
+	// status is set to DISABLED , notifications aren't sent for the notification rule.
 	Status types.NotificationRuleStatus
 
-	// A list of tags to apply to this notification rule. Key names cannot start with
-	// "aws".
+	// A list of tags to apply to this notification rule. Key names cannot start with "
+	// aws ".
 	Tags map[string]string
 
 	noSmithyDocumentSerde

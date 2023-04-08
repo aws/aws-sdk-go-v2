@@ -13,7 +13,7 @@ import (
 )
 
 // Returns information on all imports, or a select set of imports by ImportStatus
-// or Destination.
+// or Destination .
 func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optFns ...func(*Options)) (*ListImportsOutput, error) {
 	if params == nil {
 		params = &ListImportsInput{}

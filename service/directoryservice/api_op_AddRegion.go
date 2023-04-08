@@ -34,8 +34,8 @@ type AddRegionInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The name of the Region where you want to add domain controllers for replication.
-	// For example, us-east-1.
+	// The name of the Region where you want to add domain controllers for
+	// replication. For example, us-east-1 .
 	//
 	// This member is required.
 	RegionName *string

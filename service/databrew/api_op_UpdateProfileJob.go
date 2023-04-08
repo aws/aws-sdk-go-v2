@@ -56,12 +56,8 @@ type UpdateProfileJobInput struct {
 	EncryptionKeyArn *string
 
 	// The encryption mode for the job, which can be one of the following:
-	//
-	// * SSE-KMS -
-	// Server-side encryption with keys managed by KMS.
-	//
-	// * SSE-S3 - Server-side
-	// encryption with keys managed by Amazon S3.
+	//   - SSE-KMS - Server-side encryption with keys managed by KMS.
+	//   - SSE-S3 - Server-side encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 
 	// Sample configuration for Profile Jobs only. Determines the number of rows on
@@ -74,15 +70,15 @@ type UpdateProfileJobInput struct {
 	// enabled, CloudWatch writes one log stream for each job run.
 	LogSubscription types.LogSubscription
 
-	// The maximum number of compute nodes that DataBrew can use when the job processes
-	// data.
+	// The maximum number of compute nodes that DataBrew can use when the job
+	// processes data.
 	MaxCapacity int32
 
 	// The maximum number of times to retry the job after a job run fails.
 	MaxRetries int32
 
 	// The job's timeout in minutes. A job that attempts to run longer than this
-	// timeout period ends with a status of TIMEOUT.
+	// timeout period ends with a status of TIMEOUT .
 	Timeout int32
 
 	// List of validation configurations that are applied to the profile job.

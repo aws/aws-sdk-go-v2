@@ -14,8 +14,8 @@ import (
 
 // Returns information about configured OpenSearch Serverless security
 // configurations. For more information, see SAML authentication for Amazon
-// OpenSearch Serverless
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html).
+// OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html)
+// .
 func (c *Client) ListSecurityConfigs(ctx context.Context, params *ListSecurityConfigsInput, optFns ...func(*Options)) (*ListSecurityConfigsOutput, error) {
 	if params == nil {
 		params = &ListSecurityConfigsInput{}
@@ -42,7 +42,7 @@ type ListSecurityConfigsInput struct {
 	// You can use nextToken to get the next page of results. The default is 20.
 	MaxResults *int32
 
-	// If your initial ListSecurityConfigs operation returns a nextToken, you can
+	// If your initial ListSecurityConfigs operation returns a nextToken , you can
 	// include the returned nextToken in subsequent ListSecurityConfigs operations,
 	// which returns results in the next page.
 	NextToken *string
@@ -129,8 +129,8 @@ func (c *Client) addOperationListSecurityConfigsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListSecurityConfigsAPIClient is a client that implements the ListSecurityConfigs
-// operation.
+// ListSecurityConfigsAPIClient is a client that implements the
+// ListSecurityConfigs operation.
 type ListSecurityConfigsAPIClient interface {
 	ListSecurityConfigs(context.Context, *ListSecurityConfigsInput, ...func(*Options)) (*ListSecurityConfigsOutput, error)
 }

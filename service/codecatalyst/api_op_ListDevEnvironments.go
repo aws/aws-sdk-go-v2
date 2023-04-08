@@ -131,8 +131,8 @@ func (c *Client) addOperationListDevEnvironmentsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListDevEnvironmentsAPIClient is a client that implements the ListDevEnvironments
-// operation.
+// ListDevEnvironmentsAPIClient is a client that implements the
+// ListDevEnvironments operation.
 type ListDevEnvironmentsAPIClient interface {
 	ListDevEnvironments(context.Context, *ListDevEnvironmentsInput, ...func(*Options)) (*ListDevEnvironmentsOutput, error)
 }

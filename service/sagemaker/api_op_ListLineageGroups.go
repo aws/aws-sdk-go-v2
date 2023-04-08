@@ -14,8 +14,7 @@ import (
 )
 
 // A list of lineage groups shared with your Amazon Web Services account. For more
-// information, see  Cross-Account Lineage Tracking
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/xaccount-lineage-tracking.html)
+// information, see Cross-Account Lineage Tracking  (https://docs.aws.amazon.com/sagemaker/latest/dg/xaccount-lineage-tracking.html)
 // in the Amazon SageMaker Developer Guide.
 func (c *Client) ListLineageGroups(ctx context.Context, params *ListLineageGroupsInput, optFns ...func(*Options)) (*ListLineageGroupsOutput, error) {
 	if params == nil {
@@ -46,14 +45,14 @@ type ListLineageGroupsInput struct {
 	// to 10.
 	MaxResults *int32
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of algorithms, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of algorithms, use it in the subsequent request.
 	NextToken *string
 
-	// The parameter by which to sort the results. The default is CreationTime.
+	// The parameter by which to sort the results. The default is CreationTime .
 	SortBy types.SortLineageGroupsBy
 
-	// The sort order for the results. The default is Ascending.
+	// The sort order for the results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -64,8 +63,8 @@ type ListLineageGroupsOutput struct {
 	// A list of lineage groups and their properties.
 	LineageGroupSummaries []types.LineageGroupSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of algorithms, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of algorithms, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

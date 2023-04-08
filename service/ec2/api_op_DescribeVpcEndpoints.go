@@ -32,38 +32,25 @@ type DescribeVpcEndpointsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The filters.
-	//
-	// * ip-address-type - The IP address type (ipv4 | ipv6).
-	//
-	// *
-	// service-name - The name of the service.
-	//
-	// * tag: - The key/value combination of a
-	// tag assigned to the resource. Use the tag key in the filter name and the tag
-	// value as the filter value. For example, to find all resources that have a tag
-	// with the key Owner and the value TeamA, specify tag:Owner for the filter name
-	// and TeamA for the filter value.
-	//
-	// * tag-key - The key of a tag assigned to the
-	// resource. Use this filter to find all resources assigned a tag with a specific
-	// key, regardless of the tag value.
-	//
-	// * vpc-id - The ID of the VPC in which the
-	// endpoint resides.
-	//
-	// * vpc-endpoint-id - The ID of the endpoint.
-	//
-	// *
-	// vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending |
-	// available | deleting | deleted | rejected | failed).
-	//
-	// * vpc-endpoint-type - The
-	// type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).
+	//   - ip-address-type - The IP address type ( ipv4 | ipv6 ).
+	//   - service-name - The name of the service.
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
+	//   - vpc-id - The ID of the VPC in which the endpoint resides.
+	//   - vpc-endpoint-id - The ID of the endpoint.
+	//   - vpc-endpoint-state - The state of the endpoint ( pendingAcceptance | pending
+	//   | available | deleting | deleted | rejected | failed ).
+	//   - vpc-endpoint-type - The type of VPC endpoint ( Interface | Gateway |
+	//   GatewayLoadBalancer ).
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. The request returns a

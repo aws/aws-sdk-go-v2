@@ -31,13 +31,10 @@ type GetSchemaInput struct {
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
-	//
-	// * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
-	// Either SchemaArn or SchemaName and RegistryName has to be provided.
-	//
-	// *
-	// SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName and
-	// RegistryName has to be provided.
+	//   - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either
+	//   SchemaArn or SchemaName and RegistryName has to be provided.
+	//   - SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName
+	//   and RegistryName has to be provided.
 	//
 	// This member is required.
 	SchemaId *types.SchemaId
@@ -53,8 +50,8 @@ type GetSchemaOutput struct {
 	// The date and time the schema was created.
 	CreatedTime *string
 
-	// The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are
-	// supported.
+	// The data format of the schema definition. Currently AVRO , JSON and PROTOBUF
+	// are supported.
 	DataFormat types.DataFormat
 
 	// A description of schema if specified when created

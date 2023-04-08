@@ -39,19 +39,14 @@ type DescribeDBSnapshotsInput struct {
 
 	// The ID of the DB instance to retrieve the list of DB snapshots for. This
 	// parameter isn't case-sensitive. Constraints:
-	//
-	// * If supplied, must match the
-	// identifier of an existing DBInstance.
+	//   - If supplied, must match the identifier of an existing DBInstance.
 	DBInstanceIdentifier *string
 
 	// A specific DB snapshot identifier to describe. This value is stored as a
 	// lowercase string. Constraints:
-	//
-	// * If supplied, must match the identifier of an
-	// existing DBSnapshot.
-	//
-	// * If this identifier is for an automated snapshot, the
-	// SnapshotType parameter must also be specified.
+	//   - If supplied, must match the identifier of an existing DBSnapshot.
+	//   - If this identifier is for an automated snapshot, the SnapshotType parameter
+	//   must also be specified.
 	DBSnapshotIdentifier *string
 
 	// A specific DB resource ID to describe.
@@ -59,20 +54,12 @@ type DescribeDBSnapshotsInput struct {
 
 	// A filter that specifies one or more DB snapshots to describe. Supported
 	// filters:
-	//
-	// * db-instance-id - Accepts DB instance identifiers and DB instance
-	// Amazon Resource Names (ARNs).
-	//
-	// * db-snapshot-id - Accepts DB snapshot
-	// identifiers.
-	//
-	// * dbi-resource-id - Accepts identifiers of source DB instances.
-	//
-	// *
-	// snapshot-type - Accepts types of DB snapshots.
-	//
-	// * engine - Accepts names of
-	// database engines.
+	//   - db-instance-id - Accepts DB instance identifiers and DB instance Amazon
+	//   Resource Names (ARNs).
+	//   - db-snapshot-id - Accepts DB snapshot identifiers.
+	//   - dbi-resource-id - Accepts identifiers of source DB instances.
+	//   - snapshot-type - Accepts types of DB snapshots.
+	//   - engine - Accepts names of database engines.
 	Filters []types.Filter
 
 	// A value that indicates whether to include manual DB cluster snapshots that are
@@ -90,9 +77,9 @@ type DescribeDBSnapshotsInput struct {
 	// ModifyDBSnapshotAttribute API action. This setting doesn't apply to RDS Custom.
 	IncludeShared bool
 
-	// An optional pagination token provided by a previous DescribeDBSnapshots request.
-	// If this parameter is specified, the response includes only records beyond the
-	// marker, up to the value specified by MaxRecords.
+	// An optional pagination token provided by a previous DescribeDBSnapshots
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -103,35 +90,26 @@ type DescribeDBSnapshotsInput struct {
 
 	// The type of snapshots to be returned. You can specify one of the following
 	// values:
-	//
-	// * automated - Return all DB snapshots that have been automatically
-	// taken by Amazon RDS for my Amazon Web Services account.
-	//
-	// * manual - Return all
-	// DB snapshots that have been taken by my Amazon Web Services account.
-	//
-	// * shared -
-	// Return all manual DB snapshots that have been shared to my Amazon Web Services
-	// account.
-	//
-	// * public - Return all DB snapshots that have been marked as public.
-	//
-	// *
-	// awsbackup - Return the DB snapshots managed by the Amazon Web Services Backup
-	// service. For information about Amazon Web Services Backup, see the  Amazon Web
-	// Services Backup Developer Guide.
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html) The
-	// awsbackup type does not apply to Aurora.
-	//
-	// If you don't specify a SnapshotType
-	// value, then both automated and manual snapshots are returned. Shared and public
-	// DB snapshots are not included in the returned results by default. You can
-	// include shared snapshots with these results by enabling the IncludeShared
-	// parameter. You can include public snapshots with these results by enabling the
-	// IncludePublic parameter. The IncludeShared and IncludePublic parameters don't
-	// apply for SnapshotType values of manual or automated. The IncludePublic
-	// parameter doesn't apply when SnapshotType is set to shared. The IncludeShared
-	// parameter doesn't apply when SnapshotType is set to public.
+	//   - automated - Return all DB snapshots that have been automatically taken by
+	//   Amazon RDS for my Amazon Web Services account.
+	//   - manual - Return all DB snapshots that have been taken by my Amazon Web
+	//   Services account.
+	//   - shared - Return all manual DB snapshots that have been shared to my Amazon
+	//   Web Services account.
+	//   - public - Return all DB snapshots that have been marked as public.
+	//   - awsbackup - Return the DB snapshots managed by the Amazon Web Services
+	//   Backup service. For information about Amazon Web Services Backup, see the
+	//   Amazon Web Services Backup Developer Guide.  (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html)
+	//   The awsbackup type does not apply to Aurora.
+	// If you don't specify a SnapshotType value, then both automated and manual
+	// snapshots are returned. Shared and public DB snapshots are not included in the
+	// returned results by default. You can include shared snapshots with these results
+	// by enabling the IncludeShared parameter. You can include public snapshots with
+	// these results by enabling the IncludePublic parameter. The IncludeShared and
+	// IncludePublic parameters don't apply for SnapshotType values of manual or
+	// automated . The IncludePublic parameter doesn't apply when SnapshotType is set
+	// to shared . The IncludeShared parameter doesn't apply when SnapshotType is set
+	// to public .
 	SnapshotType *string
 
 	noSmithyDocumentSerde
@@ -146,7 +124,7 @@ type DescribeDBSnapshotsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -218,8 +196,8 @@ func (c *Client) addOperationDescribeDBSnapshotsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeDBSnapshotsAPIClient is a client that implements the DescribeDBSnapshots
-// operation.
+// DescribeDBSnapshotsAPIClient is a client that implements the
+// DescribeDBSnapshots operation.
 type DescribeDBSnapshotsAPIClient interface {
 	DescribeDBSnapshots(context.Context, *DescribeDBSnapshotsInput, ...func(*Options)) (*DescribeDBSnapshotsOutput, error)
 }
@@ -326,9 +304,10 @@ type DBSnapshotAvailableWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DBSnapshotAvailableWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DBSnapshotAvailableWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -368,9 +347,9 @@ func NewDBSnapshotAvailableWaiter(client DescribeDBSnapshotsAPIClient, optFns ..
 	}
 }
 
-// Wait calls the waiter function for DBSnapshotAvailable waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for DBSnapshotAvailable waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *DBSnapshotAvailableWaiter) Wait(ctx context.Context, params *DescribeDBSnapshotsInput, maxWaitDur time.Duration, optFns ...func(*DBSnapshotAvailableWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -621,9 +600,9 @@ type DBSnapshotDeletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DBSnapshotDeletedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DBSnapshotDeletedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -671,10 +650,10 @@ func (w *DBSnapshotDeletedWaiter) Wait(ctx context.Context, params *DescribeDBSn
 	return err
 }
 
-// WaitForOutput calls the waiter function for DBSnapshotDeleted waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for DBSnapshotDeleted waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *DBSnapshotDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeDBSnapshotsInput, maxWaitDur time.Duration, optFns ...func(*DBSnapshotDeletedWaiterOptions)) (*DescribeDBSnapshotsOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

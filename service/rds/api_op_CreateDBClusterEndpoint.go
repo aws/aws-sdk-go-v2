@@ -42,7 +42,7 @@ type CreateDBClusterEndpointInput struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
-	// The type of the endpoint, one of: READER, WRITER, ANY.
+	// The type of the endpoint, one of: READER , WRITER , ANY .
 	//
 	// This member is required.
 	EndpointType *string
@@ -64,21 +64,16 @@ type CreateDBClusterEndpointInput struct {
 // This data type represents the information you need to connect to an Amazon
 // Aurora DB cluster. This data type is used as a response element in the following
 // actions:
+//   - CreateDBClusterEndpoint
+//   - DescribeDBClusterEndpoints
+//   - ModifyDBClusterEndpoint
+//   - DeleteDBClusterEndpoint
 //
-// * CreateDBClusterEndpoint
-//
-// * DescribeDBClusterEndpoints
-//
-// *
-// ModifyDBClusterEndpoint
-//
-// * DeleteDBClusterEndpoint
-//
-// For the data structure that
-// represents Amazon RDS DB instance endpoints, see Endpoint.
+// For the data structure that represents Amazon RDS DB instance endpoints, see
+// Endpoint .
 type CreateDBClusterEndpointOutput struct {
 
-	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.
+	// The type associated with a custom endpoint. One of: READER , WRITER , ANY .
 	CustomEndpointType *string
 
 	// The Amazon Resource Name (ARN) for the endpoint.
@@ -99,7 +94,7 @@ type CreateDBClusterEndpointOutput struct {
 	// The DNS address of the endpoint.
 	Endpoint *string
 
-	// The type of the endpoint. One of: READER, WRITER, CUSTOM.
+	// The type of the endpoint. One of: READER , WRITER , CUSTOM .
 	EndpointType *string
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group.
@@ -110,8 +105,8 @@ type CreateDBClusterEndpointOutput struct {
 	// List of DB instance identifiers that are part of the custom endpoint group.
 	StaticMembers []string
 
-	// The current status of the endpoint. One of: creating, available, deleting,
-	// inactive, modifying. The inactive state applies to an endpoint that can't be
+	// The current status of the endpoint. One of: creating , available , deleting ,
+	// inactive , modifying . The inactive state applies to an endpoint that can't be
 	// used for a certain kind of cluster, such as a writer endpoint for a read-only
 	// secondary cluster in a global database.
 	Status *string

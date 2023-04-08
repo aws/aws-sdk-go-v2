@@ -21,7 +21,7 @@ import (
 // without specifying a new notification specification. To change the Active status
 // of a HIT type's notifications, the HIT type must already have a notification
 // specification, or one must be provided in the same call to
-// UpdateNotificationSettings.
+// UpdateNotificationSettings .
 func (c *Client) UpdateNotificationSettings(ctx context.Context, params *UpdateNotificationSettingsInput, optFns ...func(*Options)) (*UpdateNotificationSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateNotificationSettingsInput{}
@@ -44,8 +44,8 @@ type UpdateNotificationSettingsInput struct {
 	// This member is required.
 	HITTypeId *string
 
-	// Specifies whether notifications are sent for HITs of this HIT type, according to
-	// the notification specification. You must specify either the Notification
+	// Specifies whether notifications are sent for HITs of this HIT type, according
+	// to the notification specification. You must specify either the Notification
 	// parameter or the Active parameter for the call to UpdateNotificationSettings to
 	// succeed.
 	Active *bool

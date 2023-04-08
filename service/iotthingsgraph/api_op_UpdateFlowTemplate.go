@@ -47,8 +47,8 @@ type UpdateFlowTemplateInput struct {
 	Id *string
 
 	// The version of the user's namespace. If no value is specified, the latest
-	// version is used by default. Use the GetFlowTemplateRevisions if you want to find
-	// earlier revisions of the flow to update.
+	// version is used by default. Use the GetFlowTemplateRevisions if you want to
+	// find earlier revisions of the flow to update.
 	CompatibleNamespaceVersion *int64
 
 	noSmithyDocumentSerde

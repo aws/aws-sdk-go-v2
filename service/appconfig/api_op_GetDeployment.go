@@ -88,8 +88,8 @@ type GetDeploymentOutput struct {
 	// The ID of the environment that was deployed.
 	EnvironmentId *string
 
-	// A list containing all events related to a deployment. The most recent events are
-	// displayed first.
+	// A list containing all events related to a deployment. The most recent events
+	// are displayed first.
 	EventLog []types.DeploymentEvent
 
 	// The amount of time that AppConfig monitored for alarms before considering the

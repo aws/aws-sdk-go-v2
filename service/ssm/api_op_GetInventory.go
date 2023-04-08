@@ -13,7 +13,7 @@ import (
 )
 
 // Query inventory information. This includes managed node status, such as Stopped
-// or Terminated.
+// or Terminated .
 func (c *Client) GetInventory(ctx context.Context, params *GetInventoryInput, optFns ...func(*Options)) (*GetInventoryOutput, error) {
 	if params == nil {
 		params = &GetInventoryInput{}
@@ -31,8 +31,8 @@ func (c *Client) GetInventory(ctx context.Context, params *GetInventoryInput, op
 
 type GetInventoryInput struct {
 
-	// Returns counts of inventory types based on one or more expressions. For example,
-	// if you aggregate by using an expression that uses the
+	// Returns counts of inventory types based on one or more expressions. For
+	// example, if you aggregate by using an expression that uses the
 	// AWS:InstanceInformation.PlatformType type, you can see a count of how many
 	// Windows and Linux managed nodes exist in your inventoried fleet.
 	Aggregators []types.InventoryAggregator

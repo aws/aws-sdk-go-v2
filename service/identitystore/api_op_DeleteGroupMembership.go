@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a membership within a group given MembershipId.
+// Delete a membership within a group given MembershipId .
 func (c *Client) DeleteGroupMembership(ctx context.Context, params *DeleteGroupMembershipInput, optFns ...func(*Options)) (*DeleteGroupMembershipOutput, error) {
 	if params == nil {
 		params = &DeleteGroupMembershipInput{}

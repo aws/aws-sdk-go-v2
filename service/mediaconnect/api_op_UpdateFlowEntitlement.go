@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// You can change an entitlement's description, subscribers, and encryption. If you
-// change the subscribers, the service will remove the outputs that are are used by
-// the subscribers that are removed.
+// You can change an entitlement's description, subscribers, and encryption. If
+// you change the subscribers, the service will remove the outputs that are are
+// used by the subscribers that are removed.
 func (c *Client) UpdateFlowEntitlement(ctx context.Context, params *UpdateFlowEntitlementInput, optFns ...func(*Options)) (*UpdateFlowEntitlementOutput, error) {
 	if params == nil {
 		params = &UpdateFlowEntitlementInput{}

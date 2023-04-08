@@ -48,7 +48,7 @@ type DeleteApplicationOutputInput struct {
 	// AddApplicationOutput operation has a unique ID. You need to provide the ID to
 	// uniquely identify the output configuration that you want to delete from the
 	// application configuration. You can use the DescribeApplication operation to get
-	// the specific OutputId.
+	// the specific OutputId .
 	//
 	// This member is required.
 	OutputId *string

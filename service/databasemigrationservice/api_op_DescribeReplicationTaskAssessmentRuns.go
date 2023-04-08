@@ -36,13 +36,13 @@ func (c *Client) DescribeReplicationTaskAssessmentRuns(ctx context.Context, para
 type DescribeReplicationTaskAssessmentRunsInput struct {
 
 	// Filters applied to the premigration assessment runs described in the form of
-	// key-value pairs. Valid filter names: replication-task-assessment-run-arn,
-	// replication-task-arn, replication-instance-arn, status
+	// key-value pairs. Valid filter names: replication-task-assessment-run-arn ,
+	// replication-task-arn , replication-instance-arn , status
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -55,13 +55,13 @@ type DescribeReplicationTaskAssessmentRunsInput struct {
 
 type DescribeReplicationTaskAssessmentRunsOutput struct {
 
-	// A pagination token returned for you to pass to a subsequent request. If you pass
-	// this token as the Marker value in a subsequent request, the response includes
-	// only records beyond the marker, up to the value specified in the request by
-	// MaxRecords.
+	// A pagination token returned for you to pass to a subsequent request. If you
+	// pass this token as the Marker value in a subsequent request, the response
+	// includes only records beyond the marker, up to the value specified in the
+	// request by MaxRecords .
 	Marker *string
 
-	// One or more premigration assessment runs as specified by Filters.
+	// One or more premigration assessment runs as specified by Filters .
 	ReplicationTaskAssessmentRuns []types.ReplicationTaskAssessmentRun
 
 	// Metadata pertaining to the operation's result.

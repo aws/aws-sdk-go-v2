@@ -12,8 +12,8 @@ import (
 )
 
 // Converts a recovery point to a snapshot. For more information about recovery
-// points and snapshots, see Working with snapshots and recovery points
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html).
+// points and snapshots, see Working with snapshots and recovery points (https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html)
+// .
 func (c *Client) ConvertRecoveryPointToSnapshot(ctx context.Context, params *ConvertRecoveryPointToSnapshotInput, optFns ...func(*Options)) (*ConvertRecoveryPointToSnapshotOutput, error) {
 	if params == nil {
 		params = &ConvertRecoveryPointToSnapshotInput{}
@@ -44,8 +44,7 @@ type ConvertRecoveryPointToSnapshotInput struct {
 	// How long to retain the snapshot.
 	RetentionPeriod *int32
 
-	// An array of Tag objects
-	// (https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html)
+	// An array of Tag objects (https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html)
 	// to associate with the created snapshot.
 	Tags []types.Tag
 

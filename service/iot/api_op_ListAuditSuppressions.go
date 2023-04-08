@@ -13,8 +13,7 @@ import (
 )
 
 // Lists your Device Defender audit listings. Requires permission to access the
-// ListAuditSuppressions
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// ListAuditSuppressions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListAuditSuppressions(ctx context.Context, params *ListAuditSuppressionsInput, optFns ...func(*Options)) (*ListAuditSuppressionsOutput, error) {
 	if params == nil {
@@ -33,8 +32,8 @@ func (c *Client) ListAuditSuppressions(ctx context.Context, params *ListAuditSup
 
 type ListAuditSuppressionsInput struct {
 
-	// Determines whether suppressions are listed in ascending order by expiration date
-	// or not. If parameter isn't provided, ascendingOrder=true.
+	// Determines whether suppressions are listed in ascending order by expiration
+	// date or not. If parameter isn't provided, ascendingOrder=true .
 	AscendingOrder bool
 
 	// An audit check name. Checks must be enabled for your account. (Use

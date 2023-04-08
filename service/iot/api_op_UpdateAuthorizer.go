@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an authorizer. Requires permission to access the UpdateAuthorizer
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Updates an authorizer. Requires permission to access the UpdateAuthorizer (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateAuthorizer(ctx context.Context, params *UpdateAuthorizerInput, optFns ...func(*Options)) (*UpdateAuthorizerOutput, error) {
 	if params == nil {
@@ -39,8 +38,8 @@ type UpdateAuthorizerInput struct {
 	// The ARN of the authorizer's Lambda function.
 	AuthorizerFunctionArn *string
 
-	// When true, the result from the authorizer’s Lambda function is cached for the
-	// time specified in refreshAfterInSeconds. The cached result is used while the
+	// When true , the result from the authorizer’s Lambda function is cached for the
+	// time specified in refreshAfterInSeconds . The cached result is used while the
 	// device reuses the same HTTP connection.
 	EnableCachingForHttp *bool
 

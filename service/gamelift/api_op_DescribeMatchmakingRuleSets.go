@@ -17,9 +17,7 @@ import (
 // names. When requesting multiple items, use the pagination parameters to retrieve
 // results as a set of sequential pages. If successful, a rule set is returned for
 // each requested name. Learn more
-//
-// * Build a rule set
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
+//   - Build a rule set (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
 func (c *Client) DescribeMatchmakingRuleSets(ctx context.Context, params *DescribeMatchmakingRuleSetsInput, optFns ...func(*Options)) (*DescribeMatchmakingRuleSetsOutput, error) {
 	if params == nil {
 		params = &DescribeMatchmakingRuleSetsInput{}
@@ -41,14 +39,14 @@ type DescribeMatchmakingRuleSetsInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// A list of one or more matchmaking rule set names to retrieve details for. (Note:
-	// The rule set name is different from the optional "name" field in the rule set
-	// body.) You can use either the rule set name or ARN value.
+	// A list of one or more matchmaking rule set names to retrieve details for.
+	// (Note: The rule set name is different from the optional "name" field in the rule
+	// set body.) You can use either the rule set name or ARN value.
 	Names []string
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	noSmithyDocumentSerde

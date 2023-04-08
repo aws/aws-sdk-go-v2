@@ -31,8 +31,8 @@ func (c *Client) EnableMacie(ctx context.Context, params *EnableMacieInput, optF
 
 type EnableMacieInput struct {
 
-	// A unique, case-sensitive token that you provide to ensure the idempotency of the
-	// request.
+	// A unique, case-sensitive token that you provide to ensure the idempotency of
+	// the request.
 	ClientToken *string
 
 	// Specifies how often to publish updates to policy findings for the account. This

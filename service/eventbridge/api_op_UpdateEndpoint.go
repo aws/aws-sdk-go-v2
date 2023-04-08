@@ -13,8 +13,7 @@ import (
 
 // Update an existing endpoint. For more information about global endpoints, see
 // Making applications Regional-fault tolerant with global endpoints and event
-// replication
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
+// replication (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
 // in the Amazon EventBridge User Guide..
 func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput, optFns ...func(*Options)) (*UpdateEndpointOutput, error) {
 	if params == nil {

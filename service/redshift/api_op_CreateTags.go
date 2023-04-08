@@ -34,17 +34,17 @@ func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns
 type CreateTagsInput struct {
 
 	// The Amazon Resource Name (ARN) to which you want to add the tag or tags. For
-	// example, arn:aws:redshift:us-east-2:123456789:cluster:t1.
+	// example, arn:aws:redshift:us-east-2:123456789:cluster:t1 .
 	//
 	// This member is required.
 	ResourceName *string
 
 	// One or more name/value pairs to add as tags to the specified resource. Each tag
 	// name is passed in with the parameter Key and the corresponding value is passed
-	// in with the parameter Value. The Key and Value parameters are separated by a
+	// in with the parameter Value . The Key and Value parameters are separated by a
 	// comma (,). Separate multiple tags with a space. For example, --tags
 	// "Key"="owner","Value"="admin" "Key"="environment","Value"="test"
-	// "Key"="version","Value"="1.0".
+	// "Key"="version","Value"="1.0" .
 	//
 	// This member is required.
 	Tags []types.Tag

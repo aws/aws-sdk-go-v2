@@ -12,14 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of dataset export jobs that use the given dataset. When a dataset
-// is not specified, all the dataset export jobs associated with the account are
-// listed. The response provides the properties for each dataset export job,
-// including the Amazon Resource Name (ARN). For more information on dataset export
-// jobs, see CreateDatasetExportJob
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html).
-// For more information on datasets, see CreateDataset
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html).
+// Returns a list of dataset export jobs that use the given dataset. When a
+// dataset is not specified, all the dataset export jobs associated with the
+// account are listed. The response provides the properties for each dataset export
+// job, including the Amazon Resource Name (ARN). For more information on dataset
+// export jobs, see CreateDatasetExportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html)
+// . For more information on datasets, see CreateDataset (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html)
+// .
 func (c *Client) ListDatasetExportJobs(ctx context.Context, params *ListDatasetExportJobsInput, optFns ...func(*Options)) (*ListDatasetExportJobsOutput, error) {
 	if params == nil {
 		params = &ListDatasetExportJobsInput{}
@@ -44,8 +43,8 @@ type ListDatasetExportJobsInput struct {
 	// The maximum number of dataset export jobs to return.
 	MaxResults *int32
 
-	// A token returned from the previous call to ListDatasetExportJobs for getting the
-	// next set of dataset export jobs (if they exist).
+	// A token returned from the previous call to ListDatasetExportJobs for getting
+	// the next set of dataset export jobs (if they exist).
 	NextToken *string
 
 	noSmithyDocumentSerde

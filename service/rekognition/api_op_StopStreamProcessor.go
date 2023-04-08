@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a running stream processor that was created by CreateStreamProcessor.
+// Stops a running stream processor that was created by CreateStreamProcessor .
 func (c *Client) StopStreamProcessor(ctx context.Context, params *StopStreamProcessorInput, optFns ...func(*Options)) (*StopStreamProcessorOutput, error) {
 	if params == nil {
 		params = &StopStreamProcessorInput{}
@@ -28,7 +28,7 @@ func (c *Client) StopStreamProcessor(ctx context.Context, params *StopStreamProc
 
 type StopStreamProcessorInput struct {
 
-	// The name of a stream processor created by CreateStreamProcessor.
+	// The name of a stream processor created by CreateStreamProcessor .
 	//
 	// This member is required.
 	Name *string

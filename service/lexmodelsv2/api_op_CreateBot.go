@@ -30,8 +30,8 @@ func (c *Client) CreateBot(ctx context.Context, params *CreateBotInput, optFns .
 
 type CreateBotInput struct {
 
-	// The name of the bot. The bot name must be unique in the account that creates the
-	// bot.
+	// The name of the bot. The bot name must be unique in the account that creates
+	// the bot.
 	//
 	// This member is required.
 	BotName *string

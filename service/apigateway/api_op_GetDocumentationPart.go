@@ -59,10 +59,10 @@ type GetDocumentationPartOutput struct {
 
 	// A content map of API-specific key-value pairs describing the targeted API
 	// entity. The map must be encoded as a JSON string, e.g., "{ \"description\":
-	// \"The API does ...\" }". Only OpenAPI-compliant documentation-related fields
+	// \"The API does ...\" }" . Only OpenAPI-compliant documentation-related fields
 	// from the properties map are exported and, hence, published as part of the API
 	// entity definitions, while the original documentation parts are exported in a
-	// OpenAPI extension of x-amazon-apigateway-documentation.
+	// OpenAPI extension of x-amazon-apigateway-documentation .
 	Properties *string
 
 	// Metadata pertaining to the operation's result.

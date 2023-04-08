@@ -92,8 +92,8 @@ type GetWorkflowStepOutput struct {
 	// The status message of the migration workflow.
 	StatusMessage *string
 
-	// The action type of the step. You must run and update the status of a manual step
-	// for the workflow to continue after the completion of the step.
+	// The action type of the step. You must run and update the status of a manual
+	// step for the workflow to continue after the completion of the step.
 	StepActionType types.StepActionType
 
 	// The ID of the step group.

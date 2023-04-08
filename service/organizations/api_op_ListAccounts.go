@@ -38,15 +38,15 @@ func (c *Client) ListAccounts(ctx context.Context, params *ListAccountsInput, op
 
 type ListAccountsInput struct {
 
-	// The total number of results that you want included on each page of the response.
-	// If you do not include this parameter, it defaults to a value that is specific to
-	// the operation. If additional items exist beyond the maximum you specify, the
-	// NextToken response element is present and has a value (is not null). Include
-	// that value as the NextToken request parameter in the next call to the operation
-	// to get the next part of the results. Note that Organizations might return fewer
-	// results than the maximum even when there are more results available. You should
-	// check NextToken after every operation to ensure that you receive all of the
-	// results.
+	// The total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the maximum you
+	// specify, the NextToken response element is present and has a value (is not
+	// null). Include that value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that Organizations
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
@@ -66,7 +66,7 @@ type ListAccountsOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null.
+	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -144,15 +144,15 @@ var _ ListAccountsAPIClient = (*Client)(nil)
 
 // ListAccountsPaginatorOptions is the paginator options for ListAccounts
 type ListAccountsPaginatorOptions struct {
-	// The total number of results that you want included on each page of the response.
-	// If you do not include this parameter, it defaults to a value that is specific to
-	// the operation. If additional items exist beyond the maximum you specify, the
-	// NextToken response element is present and has a value (is not null). Include
-	// that value as the NextToken request parameter in the next call to the operation
-	// to get the next part of the results. Note that Organizations might return fewer
-	// results than the maximum even when there are more results available. You should
-	// check NextToken after every operation to ensure that you receive all of the
-	// results.
+	// The total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the maximum you
+	// specify, the NextToken response element is present and has a value (is not
+	// null). Include that value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that Organizations
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

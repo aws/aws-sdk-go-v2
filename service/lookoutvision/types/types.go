@@ -8,13 +8,13 @@ import (
 )
 
 // Information about an anomaly type found on an image by an image segmentation
-// model. For more information, see DetectAnomalies.
+// model. For more information, see DetectAnomalies .
 type Anomaly struct {
 
 	// The name of an anomaly type found in an image. Name maps to an anomaly type in
-	// the training dataset, apart from the anomaly type background. The service
+	// the training dataset, apart from the anomaly type background . The service
 	// automatically inserts the background anomaly type into the response from
-	// DetectAnomalies.
+	// DetectAnomalies .
 	Name *string
 
 	// Information about the pixel mask that covers an anomaly type.
@@ -23,14 +23,14 @@ type Anomaly struct {
 	noSmithyDocumentSerde
 }
 
-// The description for a dataset. For more information, see DescribeDataset.
+// The description for a dataset. For more information, see DescribeDataset .
 type DatasetDescription struct {
 
 	// The Unix timestamp for the time and date that the dataset was created.
 	CreationTimestamp *time.Time
 
-	// The type of the dataset. The value train represents a training dataset or single
-	// dataset project. The value test represents a test dataset.
+	// The type of the dataset. The value train represents a training dataset or
+	// single dataset project. The value test represents a test dataset.
 	DatasetType *string
 
 	// Statistics about the images in a dataset.
@@ -80,7 +80,7 @@ type DatasetImageStats struct {
 }
 
 // Summary information for an Amazon Lookout for Vision dataset. For more
-// information, see DescribeDataset and ProjectDescription.
+// information, see DescribeDataset and ProjectDescription .
 type DatasetMetadata struct {
 
 	// The Unix timestamp for the date and time that the dataset was created.
@@ -98,8 +98,8 @@ type DatasetMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the location of a manifest file that Amazon Lookout for Vision
-// uses to to create a dataset.
+// Information about the location of a manifest file that Amazon Lookout for
+// Vision uses to to create a dataset.
 type DatasetSource struct {
 
 	// Location information for the manifest file.
@@ -108,11 +108,11 @@ type DatasetSource struct {
 	noSmithyDocumentSerde
 }
 
-// The prediction results from a call to DetectAnomalies. DetectAnomalyResult
-// includes classification information for the prediction (IsAnomalous and
-// Confidence). If the model you use is an image segementation model,
-// DetectAnomalyResult also includes segmentation information (Anomalies and
-// AnomalyMask). Classification information is calculated separately from
+// The prediction results from a call to DetectAnomalies . DetectAnomalyResult
+// includes classification information for the prediction ( IsAnomalous and
+// Confidence ). If the model you use is an image segementation model,
+// DetectAnomalyResult also includes segmentation information ( Anomalies and
+// AnomalyMask ). Classification information is calculated separately from
 // segmentation information and you shouldn't assume a relationship between them.
 type DetectAnomalyResult struct {
 
@@ -134,12 +134,12 @@ type DetectAnomalyResult struct {
 	// Anomalies list.
 	AnomalyMask []byte
 
-	// The confidence that Lookout for Vision has in the accuracy of the classification
-	// in IsAnomalous.
+	// The confidence that Lookout for Vision has in the accuracy of the
+	// classification in IsAnomalous .
 	Confidence *float32
 
-	// True if Amazon Lookout for Vision classifies the image as containing an anomaly,
-	// otherwise false.
+	// True if Amazon Lookout for Vision classifies the image as containing an
+	// anomaly, otherwise false.
 	IsAnomalous bool
 
 	// The source of the image that was analyzed. direct means that the images was
@@ -150,9 +150,9 @@ type DetectAnomalyResult struct {
 }
 
 // Configuration information for the AWS IoT Greengrass component created in a
-// model packaging job. For more information, see StartModelPackagingJob. You can't
-// specify a component with the same ComponentName and Componentversion as an
-// existing component with the same component name and component version.
+// model packaging job. For more information, see StartModelPackagingJob . You
+// can't specify a component with the same ComponentName and Componentversion as
+// an existing component with the same component name and component version.
 type GreengrassConfiguration struct {
 
 	// A name for the AWS IoT Greengrass component.
@@ -165,17 +165,17 @@ type GreengrassConfiguration struct {
 	// This member is required.
 	S3OutputLocation *S3Location
 
-	// Additional compiler options for the Greengrass component. Currently, only NVIDIA
-	// Graphics Processing Units (GPU) and CPU accelerators are supported. If you
-	// specify TargetDevice, don't specify CompilerOptions. For more information, see
-	// Compiler options in the Amazon Lookout for Vision Developer Guide.
+	// Additional compiler options for the Greengrass component. Currently, only
+	// NVIDIA Graphics Processing Units (GPU) and CPU accelerators are supported. If
+	// you specify TargetDevice , don't specify CompilerOptions . For more information,
+	// see Compiler options in the Amazon Lookout for Vision Developer Guide.
 	CompilerOptions *string
 
 	// A description for the AWS IoT Greengrass component.
 	ComponentDescription *string
 
 	// A Version for the AWS IoT Greengrass component. If you don't provide a value, a
-	// default value of  Model Version.0.0 is used.
+	// default value of Model Version.0.0 is used.
 	ComponentVersion *string
 
 	// A set of tags (key-value pairs) that you want to attach to the AWS IoT
@@ -183,11 +183,11 @@ type GreengrassConfiguration struct {
 	Tags []Tag
 
 	// The target device for the model. Currently the only supported value is
-	// jetson_xavier. If you specify TargetDevice, you can't specify TargetPlatform.
+	// jetson_xavier . If you specify TargetDevice , you can't specify TargetPlatform .
 	TargetDevice TargetDevice
 
-	// The target platform for the model. If you specify TargetPlatform, you can't
-	// specify TargetDevice.
+	// The target platform for the model. If you specify TargetPlatform , you can't
+	// specify TargetDevice .
 	TargetPlatform *TargetPlatform
 
 	noSmithyDocumentSerde
@@ -249,8 +249,8 @@ type ModelDescription struct {
 	// The unix timestamp for the date and time that the evaluation ended.
 	EvaluationEndTimestamp *time.Time
 
-	// The S3 location where Amazon Lookout for Vision saves the manifest file that was
-	// used to test the trained model and generate the performance scores.
+	// The S3 location where Amazon Lookout for Vision saves the manifest file that
+	// was used to test the trained model and generate the performance scores.
 	EvaluationManifest *OutputS3Object
 
 	// The S3 location where Amazon Lookout for Vision saves the performance metrics.
@@ -261,7 +261,7 @@ type ModelDescription struct {
 	KmsKeyId *string
 
 	// The maximum number of inference units Amazon Lookout for Vision uses to
-	// auto-scale the model. For more information, see StartModel.
+	// auto-scale the model. For more information, see StartModel .
 	MaxInferenceUnits *int32
 
 	// The minimum number of inference units used by the model. For more information,
@@ -304,8 +304,8 @@ type ModelMetadata struct {
 	// The version of the model.
 	ModelVersion *string
 
-	// Performance metrics for the model. Not available until training has successfully
-	// completed.
+	// Performance metrics for the model. Not available until training has
+	// successfully completed.
 	Performance *ModelPerformance
 
 	// The status of the model.
@@ -318,7 +318,7 @@ type ModelMetadata struct {
 }
 
 // Configuration information for a Amazon Lookout for Vision model packaging job.
-// For more information, see StartModelPackagingJob.
+// For more information, see StartModelPackagingJob .
 type ModelPackagingConfiguration struct {
 
 	// Configuration information for the AWS IoT Greengrass component in a model
@@ -331,7 +331,7 @@ type ModelPackagingConfiguration struct {
 }
 
 // Information about a model packaging job. For more information, see
-// DescribeModelPackagingJob.
+// DescribeModelPackagingJob .
 type ModelPackagingDescription struct {
 
 	// The Unix timestamp for the time and date that the model packaging job was
@@ -356,7 +356,7 @@ type ModelPackagingDescription struct {
 	ModelPackagingMethod *string
 
 	// Information about the output of the model packaging job. For more information,
-	// see DescribeModelPackagingJob.
+	// see DescribeModelPackagingJob .
 	ModelPackagingOutputDetails *ModelPackagingOutputDetails
 
 	// The version of the model used in the model packaging job.
@@ -376,7 +376,7 @@ type ModelPackagingDescription struct {
 }
 
 // Metadata for a model packaging job. For more information, see
-// ListModelPackagingJobs.
+// ListModelPackagingJobs .
 type ModelPackagingJobMetadata struct {
 
 	// The Unix timestamp for the time and date that the model packaging job was
@@ -464,7 +464,7 @@ type OutputS3Object struct {
 }
 
 // Information about the pixels in an anomaly mask. For more information, see
-// Anomaly. PixelAnomaly is only returned by image segmentation models.
+// Anomaly . PixelAnomaly is only returned by image segmentation models.
 type PixelAnomaly struct {
 
 	// A hex color value for the mask that covers an anomaly type. Each anomaly type
@@ -479,7 +479,7 @@ type PixelAnomaly struct {
 }
 
 // Describe an Amazon Lookout for Vision project. For more information, see
-// DescribeProject.
+// DescribeProject .
 type ProjectDescription struct {
 
 	// The unix timestamp for the date and time that the project was created.
@@ -530,8 +530,8 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
-// A key and value pair that is attached to the specified Amazon Lookout for Vision
-// model.
+// A key and value pair that is attached to the specified Amazon Lookout for
+// Vision model.
 type Tag struct {
 
 	// The key of the tag that is attached to the specified model.
@@ -550,8 +550,8 @@ type Tag struct {
 // The platform on which a model runs on an AWS IoT Greengrass core device.
 type TargetPlatform struct {
 
-	// The target architecture for the model. The currently supported architectures are
-	// X86_64 (64-bit version of the x86 instruction set) and ARM_64 (ARMv8 64-bit
+	// The target architecture for the model. The currently supported architectures
+	// are X86_64 (64-bit version of the x86 instruction set) and ARM_64 (ARMv8 64-bit
 	// CPU).
 	//
 	// This member is required.
@@ -565,17 +565,13 @@ type TargetPlatform struct {
 
 	// The target accelerator for the model. Currently, Amazon Lookout for Vision only
 	// supports NVIDIA (Nvidia graphics processing unit) and CPU accelerators. If you
-	// specify NVIDIA as an accelerator, you must also specify the gpu-code, trt-ver,
+	// specify NVIDIA as an accelerator, you must also specify the gpu-code , trt-ver ,
 	// and cuda-ver compiler options. If you don't specify an accelerator, Lookout for
 	// Vision uses the CPU for compilation and we highly recommend that you use the
 	// GreengrassConfiguration$CompilerOptions field. For example, you can use the
 	// following compiler options for CPU:
-	//
-	// * mcpu: CPU micro-architecture. For
-	// example, {'mcpu': 'skylake-avx512'}
-	//
-	// * mattr: CPU flags. For example, {'mattr':
-	// ['+neon', '+vfpv4']}
+	//   - mcpu : CPU micro-architecture. For example, {'mcpu': 'skylake-avx512'}
+	//   - mattr : CPU flags. For example, {'mattr': ['+neon', '+vfpv4']}
 	Accelerator TargetPlatformAccelerator
 
 	noSmithyDocumentSerde

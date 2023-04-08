@@ -27,15 +27,10 @@ import (
 // contain data modifications made between 14:24:00 and 14:26:00. On-demand backup
 // does not support causal consistency. Along with data, the following are also
 // included on the backups:
-//
-// * Global secondary indexes (GSIs)
-//
-// * Local secondary
-// indexes (LSIs)
-//
-// * Streams
-//
-// * Provisioned read and write capacity
+//   - Global secondary indexes (GSIs)
+//   - Local secondary indexes (LSIs)
+//   - Streams
+//   - Provisioned read and write capacity
 func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, optFns ...func(*Options)) (*CreateBackupOutput, error) {
 	if params == nil {
 		params = &CreateBackupInput{}

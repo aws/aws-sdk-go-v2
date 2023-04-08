@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Puts emergency calling configuration details to the specified Amazon Chime Voice
-// Connector, such as emergency phone numbers and calling countries. Origination
-// and termination settings must be enabled for the Amazon Chime Voice Connector
-// before emergency calling can be configured.
+// Puts emergency calling configuration details to the specified Amazon Chime
+// Voice Connector, such as emergency phone numbers and calling countries.
+// Origination and termination settings must be enabled for the Amazon Chime Voice
+// Connector before emergency calling can be configured.
 func (c *Client) PutVoiceConnectorEmergencyCallingConfiguration(ctx context.Context, params *PutVoiceConnectorEmergencyCallingConfigurationInput, optFns ...func(*Options)) (*PutVoiceConnectorEmergencyCallingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorEmergencyCallingConfigurationInput{}

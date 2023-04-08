@@ -97,9 +97,9 @@ const (
 	AutoScalingPolicyStateChangeReasonCodeCleanupFailure   AutoScalingPolicyStateChangeReasonCode = "CLEANUP_FAILURE"
 )
 
-// Values returns all known values for AutoScalingPolicyStateChangeReasonCode. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for AutoScalingPolicyStateChangeReasonCode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AutoScalingPolicyStateChangeReasonCode) Values() []AutoScalingPolicyStateChangeReasonCode {
 	return []AutoScalingPolicyStateChangeReasonCode{
@@ -117,9 +117,9 @@ const (
 	CancelStepsRequestStatusFailed    CancelStepsRequestStatus = "FAILED"
 )
 
-// Values returns all known values for CancelStepsRequestStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CancelStepsRequestStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CancelStepsRequestStatus) Values() []CancelStepsRequestStatus {
 	return []CancelStepsRequestStatus{
 		"SUBMITTED",
@@ -140,9 +140,9 @@ const (
 	ClusterStateTerminatedWithErrors ClusterState = "TERMINATED_WITH_ERRORS"
 )
 
-// Values returns all known values for ClusterState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ClusterState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterState) Values() []ClusterState {
 	return []ClusterState{
 		"STARTING",
@@ -169,9 +169,10 @@ const (
 	ClusterStateChangeReasonCodeAllStepsCompleted    ClusterStateChangeReasonCode = "ALL_STEPS_COMPLETED"
 )
 
-// Values returns all known values for ClusterStateChangeReasonCode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ClusterStateChangeReasonCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ClusterStateChangeReasonCode) Values() []ClusterStateChangeReasonCode {
 	return []ClusterStateChangeReasonCode{
 		"INTERNAL_ERROR",
@@ -216,8 +217,8 @@ const (
 	ComputeLimitsUnitTypeVcpu               ComputeLimitsUnitType = "VCPU"
 )
 
-// Values returns all known values for ComputeLimitsUnitType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ComputeLimitsUnitType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ComputeLimitsUnitType) Values() []ComputeLimitsUnitType {
 	return []ComputeLimitsUnitType{
@@ -251,9 +252,9 @@ const (
 	IdentityTypeGroup IdentityType = "GROUP"
 )
 
-// Values returns all known values for IdentityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityType) Values() []IdentityType {
 	return []IdentityType{
 		"USER",
@@ -512,8 +513,8 @@ const (
 	JobFlowExecutionStateFailed        JobFlowExecutionState = "FAILED"
 )
 
-// Values returns all known values for JobFlowExecutionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for JobFlowExecutionState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (JobFlowExecutionState) Values() []JobFlowExecutionState {
 	return []JobFlowExecutionState{
@@ -623,9 +624,9 @@ const (
 	OnDemandProvisioningAllocationStrategyLowestPrice OnDemandProvisioningAllocationStrategy = "lowest-price"
 )
 
-// Values returns all known values for OnDemandProvisioningAllocationStrategy. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for OnDemandProvisioningAllocationStrategy.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OnDemandProvisioningAllocationStrategy) Values() []OnDemandProvisioningAllocationStrategy {
 	return []OnDemandProvisioningAllocationStrategy{
@@ -756,9 +757,9 @@ const (
 	StatisticMaximum     Statistic = "MAXIMUM"
 )
 
-// Values returns all known values for Statistic. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Statistic. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Statistic) Values() []Statistic {
 	return []Statistic{
 		"SAMPLE_COUNT",
@@ -828,9 +829,9 @@ const (
 	StepStateInterrupted   StepState = "INTERRUPTED"
 )
 
-// Values returns all known values for StepState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for StepState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StepState) Values() []StepState {
 	return []StepState{
 		"PENDING",

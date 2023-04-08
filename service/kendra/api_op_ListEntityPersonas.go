@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists specific permissions of users and groups with access to your Amazon Kendra
-// experience.
+// Lists specific permissions of users and groups with access to your Amazon
+// Kendra experience.
 func (c *Client) ListEntityPersonas(ctx context.Context, params *ListEntityPersonasInput, optFns ...func(*Options)) (*ListEntityPersonasOutput, error) {
 	if params == nil {
 		params = &ListEntityPersonasInput{}

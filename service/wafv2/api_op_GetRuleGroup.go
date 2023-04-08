@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the specified RuleGroup.
+// Retrieves the specified RuleGroup .
 func (c *Client) GetRuleGroup(ctx context.Context, params *GetRuleGroupInput, optFns ...func(*Options)) (*GetRuleGroupOutput, error) {
 	if params == nil {
 		params = &GetRuleGroupInput{}
@@ -36,8 +36,8 @@ type GetRuleGroupInput struct {
 	// create and list commands. You provide it to operations like update and delete.
 	Id *string
 
-	// The name of the rule group. You cannot change the name of a rule group after you
-	// create it.
+	// The name of the rule group. You cannot change the name of a rule group after
+	// you create it.
 	Name *string
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
@@ -45,12 +45,9 @@ type GetRuleGroupInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//
-	// * CLI - Specify the Region
-	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	//
-	// * API
-	// and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	Scope types.Scope
 
 	noSmithyDocumentSerde
@@ -61,10 +58,10 @@ type GetRuleGroupOutput struct {
 	// A token used for optimistic locking. WAF returns a token to your get and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. WAF uses the token to ensure that no changes
+	// operations like update and delete . WAF uses the token to ensure that no changes
 	// have been made to the entity since you last retrieved it. If a change has been
-	// made, the update fails with a WAFOptimisticLockException. If this happens,
-	// perform another get, and use the new token returned by that operation.
+	// made, the update fails with a WAFOptimisticLockException . If this happens,
+	// perform another get , and use the new token returned by that operation.
 	LockToken *string
 
 	//

@@ -40,9 +40,9 @@ type CreateLicenseInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// Configuration for consumption of the license. Choose a provisional configuration
-	// for workloads running with continuous connectivity. Choose a borrow
-	// configuration for workloads with offline usage.
+	// Configuration for consumption of the license. Choose a provisional
+	// configuration for workloads running with continuous connectivity. Choose a
+	// borrow configuration for workloads with offline usage.
 	//
 	// This member is required.
 	ConsumptionConfiguration *types.ConsumptionConfiguration

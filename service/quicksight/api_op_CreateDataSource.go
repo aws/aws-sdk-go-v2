@@ -46,7 +46,7 @@ type CreateDataSourceInput struct {
 	Name *string
 
 	// The type of the data source. To return a list of all data sources, use
-	// ListDataSources. Use AMAZON_ELASTICSEARCH for Amazon OpenSearch Service.
+	// ListDataSources . Use AMAZON_ELASTICSEARCH for Amazon OpenSearch Service.
 	//
 	// This member is required.
 	Type types.DataSourceType

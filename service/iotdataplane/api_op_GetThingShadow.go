@@ -11,10 +11,8 @@ import (
 )
 
 // Gets the shadow for the specified thing. Requires permission to access the
-// GetThingShadow
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. For more information, see GetThingShadow
-// (http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html)
+// GetThingShadow (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action. For more information, see GetThingShadow (http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html)
 // in the IoT Developer Guide.
 func (c *Client) GetThingShadow(ctx context.Context, params *GetThingShadowInput, optFns ...func(*Options)) (*GetThingShadowOutput, error) {
 	if params == nil {

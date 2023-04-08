@@ -54,9 +54,9 @@ const (
 	ConditionGreaterThan Condition = "GREATER_THAN"
 )
 
-// Values returns all known values for Condition. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Condition. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Condition) Values() []Condition {
 	return []Condition{
 		"EQUALS",
@@ -99,9 +99,9 @@ const (
 	DayOfWeekSunday    DayOfWeek = "SUNDAY"
 )
 
-// Values returns all known values for DayOfWeek. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for DayOfWeek. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DayOfWeek) Values() []DayOfWeek {
 	return []DayOfWeek{
 		"MONDAY",
@@ -184,8 +184,8 @@ const (
 	FilterConditionStringIsNot FilterConditionString = "IS_NOT"
 )
 
-// Values returns all known values for FilterConditionString. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FilterConditionString. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FilterConditionString) Values() []FilterConditionString {
 	return []FilterConditionString{
@@ -230,8 +230,8 @@ const (
 	MonthDecember  Month = "DECEMBER"
 )
 
-// Values returns all known values for Month. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Month. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Month) Values() []Month {
 	return []Month{
@@ -260,9 +260,9 @@ const (
 	OperationDivide   Operation = "DIVIDE"
 )
 
-// Values returns all known values for Operation. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operation. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Operation) Values() []Operation {
 	return []Operation{
 		"ADD",
@@ -326,8 +326,8 @@ const (
 	StateDeleted State = "Deleted"
 )
 
-// Values returns all known values for State. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
@@ -362,8 +362,8 @@ const (
 	TimeSeriesGranularitySpecific TimeSeriesGranularity = "SPECIFIC"
 )
 
-// Values returns all known values for TimeSeriesGranularity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TimeSeriesGranularity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TimeSeriesGranularity) Values() []TimeSeriesGranularity {
 	return []TimeSeriesGranularity{

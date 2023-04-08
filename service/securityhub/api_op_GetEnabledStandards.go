@@ -34,7 +34,7 @@ type GetEnabledStandardsInput struct {
 	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the
-	// GetEnabledStandards operation, set the value of this parameter to NULL. For
+	// GetEnabledStandards operation, set the value of this parameter to NULL . For
 	// subsequent calls to the operation, to continue listing data, set the value of
 	// this parameter to the value returned from the previous response.
 	NextToken *string
@@ -120,8 +120,8 @@ func (c *Client) addOperationGetEnabledStandardsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetEnabledStandardsAPIClient is a client that implements the GetEnabledStandards
-// operation.
+// GetEnabledStandardsAPIClient is a client that implements the
+// GetEnabledStandards operation.
 type GetEnabledStandardsAPIClient interface {
 	GetEnabledStandards(context.Context, *GetEnabledStandardsInput, ...func(*Options)) (*GetEnabledStandardsOutput, error)
 }

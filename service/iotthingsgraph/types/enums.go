@@ -205,8 +205,8 @@ const (
 	NamespaceDeletionStatusErrorCodesValidationFailed NamespaceDeletionStatusErrorCodes = "VALIDATION_FAILED"
 )
 
-// Values returns all known values for NamespaceDeletionStatusErrorCodes. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for NamespaceDeletionStatusErrorCodes. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (NamespaceDeletionStatusErrorCodes) Values() []NamespaceDeletionStatusErrorCodes {
@@ -255,9 +255,9 @@ const (
 	SystemInstanceFilterNameGreengrassGroupName SystemInstanceFilterName = "GREENGRASS_GROUP_NAME"
 )
 
-// Values returns all known values for SystemInstanceFilterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SystemInstanceFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SystemInstanceFilterName) Values() []SystemInstanceFilterName {
 	return []SystemInstanceFilterName{
 		"SYSTEM_TEMPLATE_ID",
@@ -273,9 +273,9 @@ const (
 	SystemTemplateFilterNameFlowTemplateId SystemTemplateFilterName = "FLOW_TEMPLATE_ID"
 )
 
-// Values returns all known values for SystemTemplateFilterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SystemTemplateFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SystemTemplateFilterName) Values() []SystemTemplateFilterName {
 	return []SystemTemplateFilterName{
 		"FLOW_TEMPLATE_ID",
@@ -291,9 +291,9 @@ const (
 	UploadStatusFailed     UploadStatus = "FAILED"
 )
 
-// Values returns all known values for UploadStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UploadStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UploadStatus) Values() []UploadStatus {
 	return []UploadStatus{
 		"IN_PROGRESS",

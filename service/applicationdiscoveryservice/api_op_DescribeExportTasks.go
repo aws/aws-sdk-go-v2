@@ -34,9 +34,7 @@ type DescribeExportTasksInput struct {
 	ExportIds []string
 
 	// One or more filters.
-	//
-	// * AgentId - ID of the agent whose collected data will be
-	// exported
+	//   - AgentId - ID of the agent whose collected data will be exported
 	Filters []types.ExportFilter
 
 	// The maximum number of volume results returned by DescribeExportTasks in
@@ -57,14 +55,14 @@ type DescribeExportTasksInput struct {
 type DescribeExportTasksOutput struct {
 
 	// Contains one or more sets of export request details. When the status of a
-	// request is SUCCEEDED, the response includes a URL for an Amazon S3 bucket where
+	// request is SUCCEEDED , the response includes a URL for an Amazon S3 bucket where
 	// you can view the data in a CSV file.
 	ExportsInfo []types.ExportInfo
 
-	// The nextToken value to include in a future DescribeExportTasks request. When the
-	// results of a DescribeExportTasks request exceed maxResults, this value can be
-	// used to retrieve the next page of results. This value is null when there are no
-	// more results to return.
+	// The nextToken value to include in a future DescribeExportTasks request. When
+	// the results of a DescribeExportTasks request exceed maxResults , this value can
+	// be used to retrieve the next page of results. This value is null when there are
+	// no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

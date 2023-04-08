@@ -30,8 +30,8 @@ func (c *Client) DescribeMaintenanceStartTime(ctx context.Context, params *Descr
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type DescribeMaintenanceStartTimeInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -40,21 +40,11 @@ type DescribeMaintenanceStartTimeInput struct {
 }
 
 // A JSON object containing the following fields:
-//
-// *
-// DescribeMaintenanceStartTimeOutput$DayOfMonth
-//
-// *
-// DescribeMaintenanceStartTimeOutput$DayOfWeek
-//
-// *
-// DescribeMaintenanceStartTimeOutput$HourOfDay
-//
-// *
-// DescribeMaintenanceStartTimeOutput$MinuteOfHour
-//
-// *
-// DescribeMaintenanceStartTimeOutput$Timezone
+//   - DescribeMaintenanceStartTimeOutput$DayOfMonth
+//   - DescribeMaintenanceStartTimeOutput$DayOfWeek
+//   - DescribeMaintenanceStartTimeOutput$HourOfDay
+//   - DescribeMaintenanceStartTimeOutput$MinuteOfHour
+//   - DescribeMaintenanceStartTimeOutput$Timezone
 type DescribeMaintenanceStartTimeOutput struct {
 
 	// The day of the month component of the maintenance start time represented as an
@@ -67,8 +57,8 @@ type DescribeMaintenanceStartTimeOutput struct {
 	// of the gateway.
 	DayOfWeek *int32
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The hour component of the maintenance start time represented as hh, where hh is
@@ -80,8 +70,8 @@ type DescribeMaintenanceStartTimeOutput struct {
 	// gateway.
 	MinuteOfHour *int32
 
-	// A value that indicates the time zone that is set for the gateway. The start time
-	// and day of week specified should be in the time zone of the gateway.
+	// A value that indicates the time zone that is set for the gateway. The start
+	// time and day of week specified should be in the time zone of the gateway.
 	Timezone *string
 
 	// Metadata pertaining to the operation's result.

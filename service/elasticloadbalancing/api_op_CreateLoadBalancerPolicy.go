@@ -44,7 +44,7 @@ type CreateLoadBalancerPolicyInput struct {
 	PolicyName *string
 
 	// The name of the base policy type. To get the list of policy types, use
-	// DescribeLoadBalancerPolicyTypes.
+	// DescribeLoadBalancerPolicyTypes .
 	//
 	// This member is required.
 	PolicyTypeName *string

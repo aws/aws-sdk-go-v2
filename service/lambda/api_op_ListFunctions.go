@@ -19,7 +19,7 @@ import (
 // FunctionConfiguration fields. To get the additional fields (State,
 // StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason,
 // LastUpdateStatusReasonCode, RuntimeVersionConfig) for a function or version, use
-// GetFunction.
+// GetFunction .
 func (c *Client) ListFunctions(ctx context.Context, params *ListFunctionsInput, optFns ...func(*Options)) (*ListFunctionsOutput, error) {
 	if params == nil {
 		params = &ListFunctionsInput{}
@@ -47,7 +47,7 @@ type ListFunctionsInput struct {
 	// For Lambda@Edge functions, the Amazon Web Services Region of the master
 	// function. For example, us-east-1 filters the list of functions to include only
 	// Lambda@Edge functions replicated from a master function in US East (N.
-	// Virginia). If specified, you must set FunctionVersion to ALL.
+	// Virginia). If specified, you must set FunctionVersion to ALL .
 	MasterRegion *string
 
 	// The maximum number of functions to return in the response. Note that

@@ -40,29 +40,25 @@ type ListStackSetOperationsInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account. By default, SELF is specified. Use SELF for
 	// stack sets with self-managed permissions.
-	//
-	// * If you are signed in to the
-	// management account, specify SELF.
-	//
-	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
-	// must be registered as a delegated administrator in the management account. For
-	// more information, see Register a delegated administrator
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the CloudFormation User Guide.
+	//   - If you are signed in to the management account, specify SELF .
+	//   - If you are signed in to a delegated administrator account, specify
+	//   DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a
+	//   delegated administrator in the management account. For more information, see
+	//   Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
+	//   in the CloudFormation User Guide.
 	CallAs types.CallAs
 
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
 	MaxResults *int32
 
 	// If the previous paginated request didn't return all of the remaining results,
 	// the response object's NextToken parameter value is set to a token. To retrieve
-	// the next set of results, call ListStackSetOperations again and assign that token
-	// to the request object's NextToken parameter. If there are no remaining results,
-	// the previous response object's NextToken parameter is set to null.
+	// the next set of results, call ListStackSetOperations again and assign that
+	// token to the request object's NextToken parameter. If there are no remaining
+	// results, the previous response object's NextToken parameter is set to null .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -73,7 +69,7 @@ type ListStackSetOperationsOutput struct {
 	// If the request doesn't return all results, NextToken is set to a token. To
 	// retrieve the next set of results, call ListOperationResults again and assign
 	// that token to the request object's NextToken parameter. If there are no
-	// remaining results, NextToken is set to null.
+	// remaining results, NextToken is set to null .
 	NextToken *string
 
 	// A list of StackSetOperationSummary structures that contain summary information
@@ -162,8 +158,8 @@ var _ ListStackSetOperationsAPIClient = (*Client)(nil)
 type ListStackSetOperationsPaginatorOptions struct {
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

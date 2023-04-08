@@ -37,8 +37,8 @@ func (c *Client) DetectEntitiesV2(ctx context.Context, params *DetectEntitiesV2I
 
 type DetectEntitiesV2Input struct {
 
-	// A UTF-8 string containing the clinical content being examined for entities. Each
-	// string must contain fewer than 20,000 bytes of characters.
+	// A UTF-8 string containing the clinical content being examined for entities.
+	// Each string must contain fewer than 20,000 bytes of characters.
 	//
 	// This member is required.
 	Text *string
@@ -57,8 +57,8 @@ type DetectEntitiesV2Output struct {
 	// This member is required.
 	Entities []types.Entity
 
-	// The version of the model used to analyze the documents. The version number looks
-	// like X.X.X. You can use this information to track the model used for a
+	// The version of the model used to analyze the documents. The version number
+	// looks like X.X.X. You can use this information to track the model used for a
 	// particular batch of documents.
 	//
 	// This member is required.

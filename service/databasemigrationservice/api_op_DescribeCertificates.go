@@ -31,12 +31,12 @@ func (c *Client) DescribeCertificates(ctx context.Context, params *DescribeCerti
 type DescribeCertificatesInput struct {
 
 	// Filters applied to the certificates described in the form of key-value pairs.
-	// Valid values are certificate-arn and certificate-id.
+	// Valid values are certificate-arn and certificate-id .
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist

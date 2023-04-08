@@ -63,8 +63,7 @@ type DescribeEndpointConfigOutput struct {
 	ProductionVariants []types.ProductionVariant
 
 	// Returns the description of an endpoint configuration created using the
-	// CreateEndpointConfig
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html)
+	// CreateEndpointConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html)
 	// API.
 	AsyncInferenceConfig *types.AsyncInferenceConfig
 
@@ -80,7 +79,7 @@ type DescribeEndpointConfigOutput struct {
 
 	// An array of ProductionVariant objects, one for each model that you want to host
 	// at this endpoint in shadow mode with production traffic replicated from the
-	// model specified on ProductionVariants.
+	// model specified on ProductionVariants .
 	ShadowProductionVariants []types.ProductionVariant
 
 	// Metadata pertaining to the operation's result.

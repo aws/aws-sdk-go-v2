@@ -9,8 +9,8 @@ import (
 
 // Kinesis Video Streams has throttled the request because you have exceeded a
 // limit. Try making the call later. For information about limits, see Kinesis
-// Video Streams Limits
-// (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html).
+// Video Streams Limits (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html)
+// .
 type ClientLimitExceededException struct {
 	Message *string
 
@@ -197,9 +197,9 @@ func (e *NotAuthorizedException) ErrorCode() string {
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// GetMedia throws this error when Kinesis Video Streams can't find the stream that
-// you specified. GetHLSStreamingSessionURL and GetDASHStreamingSessionURL throw
-// this error if a session with a PlaybackMode of ON_DEMAND or LIVE_REPLAYis
+// GetMedia throws this error when Kinesis Video Streams can't find the stream
+// that you specified. GetHLSStreamingSessionURL and GetDASHStreamingSessionURL
+// throw this error if a session with a PlaybackMode of ON_DEMAND or LIVE_REPLAY is
 // requested for a stream that has no fragments within the requested time range, or
 // if a session with a PlaybackMode of LIVE is requested for a stream that has no
 // fragments within the last 30 seconds.
@@ -231,7 +231,7 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The type of the media (for example, h.264 or h.265 video or ACC or G.711 audio)
 // could not be determined from the codec IDs of the tracks in the first fragment
 // for a playback session. The codec ID for track 1 should be V_MPEG/ISO/AVC and,
-// optionally, the codec ID for track 2 should be A_AAC.
+// optionally, the codec ID for track 2 should be A_AAC .
 type UnsupportedStreamMediaTypeException struct {
 	Message *string
 

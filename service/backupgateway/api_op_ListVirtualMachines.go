@@ -124,8 +124,8 @@ func (c *Client) addOperationListVirtualMachinesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListVirtualMachinesAPIClient is a client that implements the ListVirtualMachines
-// operation.
+// ListVirtualMachinesAPIClient is a client that implements the
+// ListVirtualMachines operation.
 type ListVirtualMachinesAPIClient interface {
 	ListVirtualMachines(context.Context, *ListVirtualMachinesInput, ...func(*Options)) (*ListVirtualMachinesOutput, error)
 }

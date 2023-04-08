@@ -23,7 +23,7 @@ import (
 // Amazon Web Services and its services that provide details about the context of
 // an API query request. Context keys can be evaluated by testing against a value
 // in an IAM policy. Use GetContextKeysForPrincipalPolicy to understand what key
-// names and values you must supply when you call SimulatePrincipalPolicy.
+// names and values you must supply when you call SimulatePrincipalPolicy .
 func (c *Client) GetContextKeysForPrincipalPolicy(ctx context.Context, params *GetContextKeysForPrincipalPolicyInput, optFns ...func(*Options)) (*GetContextKeysForPrincipalPolicyOutput, error) {
 	if params == nil {
 		params = &GetContextKeysForPrincipalPolicyInput{}
@@ -48,9 +48,8 @@ type GetContextKeysForPrincipalPolicyInput struct {
 	// includes only those context keys that are found in policies attached to that
 	// entity. Note that all parameters are shown in unencoded form here for clarity,
 	// but must be URL encoded to be included as a part of a real HTML request. For
-	// more information about ARNs, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	PolicySourceArn *string
@@ -59,16 +58,12 @@ type GetContextKeysForPrincipalPolicyInput struct {
 	// keys that are referenced. The regex pattern (http://wikipedia.org/wiki/regex)
 	// used to validate this parameter is a string of characters consisting of the
 	// following:
-	//
-	// * Any printable ASCII character ranging from the space character
-	// (\u0020) through the end of the ASCII character range
-	//
-	// * The printable
-	// characters in the Basic Latin and Latin-1 Supplement character set (through
-	// \u00FF)
-	//
-	// * The special characters tab (\u0009), line feed (\u000A), and carriage
-	// return (\u000D)
+	//   - Any printable ASCII character ranging from the space character ( \u0020 )
+	//   through the end of the ASCII character range
+	//   - The printable characters in the Basic Latin and Latin-1 Supplement
+	//   character set (through \u00FF )
+	//   - The special characters tab ( \u0009 ), line feed ( \u000A ), and carriage
+	//   return ( \u000D )
 	PolicyInputList []string
 
 	noSmithyDocumentSerde

@@ -16,10 +16,9 @@ import (
 // be the default policy or an explicit policy set or updated using this API
 // operation. EFS file system policies have a 20,000 character limit. When an
 // explicit policy is set, it overrides the default policy. For more information
-// about the default file system policy, see Default EFS File System Policy
-// (https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy).
-// EFS file system policies have a 20,000 character limit. This operation requires
-// permissions for the elasticfilesystem:PutFileSystemPolicy action.
+// about the default file system policy, see Default EFS File System Policy (https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy)
+// . EFS file system policies have a 20,000 character limit. This operation
+// requires permissions for the elasticfilesystem:PutFileSystemPolicy action.
 func (c *Client) PutFileSystemPolicy(ctx context.Context, params *PutFileSystemPolicyInput, optFns ...func(*Options)) (*PutFileSystemPolicyOutput, error) {
 	if params == nil {
 		params = &PutFileSystemPolicyInput{}
@@ -46,8 +45,8 @@ type PutFileSystemPolicyInput struct {
 	// The FileSystemPolicy that you're creating. Accepts a JSON formatted policy
 	// definition. EFS file system policies have a 20,000 character limit. To find out
 	// more about the elements that make up a file system policy, see EFS
-	// Resource-based Policies
-	// (https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies).
+	// Resource-based Policies (https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies)
+	// .
 	//
 	// This member is required.
 	Policy *string
@@ -59,7 +58,7 @@ type PutFileSystemPolicyInput struct {
 	// this file system. Set BypassPolicyLockoutSafetyCheck to True only when you
 	// intend to prevent the IAM principal that is making the request from making
 	// subsequent PutFileSystemPolicy requests on this file system. The default value
-	// is False.
+	// is False .
 	BypassPolicyLockoutSafetyCheck bool
 
 	noSmithyDocumentSerde

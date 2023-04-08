@@ -41,7 +41,7 @@ type ListCertificatesInput struct {
 
 	// A token for requesting another page of certificates if the NextToken response
 	// element indicates that more certificates are available. Use the value of the
-	// returned NextToken element in your request until the token comes back as null.
+	// returned NextToken element in your request until the token comes back as null .
 	// Pass null if this is the first call.
 	NextToken *string
 

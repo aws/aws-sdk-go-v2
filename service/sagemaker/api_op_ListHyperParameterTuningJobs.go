@@ -51,19 +51,19 @@ type ListHyperParameterTuningJobsInput struct {
 	// The maximum number of tuning jobs to return. The default value is 10.
 	MaxResults *int32
 
-	// A string in the tuning job name. This filter returns only tuning jobs whose name
-	// contains the specified string.
+	// A string in the tuning job name. This filter returns only tuning jobs whose
+	// name contains the specified string.
 	NameContains *string
 
 	// If the result of the previous ListHyperParameterTuningJobs request was
-	// truncated, the response includes a NextToken. To retrieve the next set of tuning
-	// jobs, use the token in the next request.
+	// truncated, the response includes a NextToken . To retrieve the next set of
+	// tuning jobs, use the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is Name.
+	// The field to sort results by. The default is Name .
 	SortBy types.HyperParameterTuningJobSortByOptions
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	// A filter that returns only tuning jobs with the specified status.
@@ -81,7 +81,7 @@ type ListHyperParameterTuningJobsOutput struct {
 	HyperParameterTuningJobSummaries []types.HyperParameterTuningJobSummary
 
 	// If the result of this ListHyperParameterTuningJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of tuning jobs, use the
+	// response includes a NextToken . To retrieve the next set of tuning jobs, use the
 	// token in the next request.
 	NextToken *string
 

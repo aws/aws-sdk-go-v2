@@ -13,8 +13,8 @@ import (
 
 // Allows the destination Amazon OpenSearch Service domain owner to delete an
 // existing inbound cross-cluster search connection. For more information, see
-// Cross-cluster search for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
+// Cross-cluster search for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html)
+// .
 func (c *Client) DeleteInboundConnection(ctx context.Context, params *DeleteInboundConnectionInput, optFns ...func(*Options)) (*DeleteInboundConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteInboundConnectionInput{}

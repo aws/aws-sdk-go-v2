@@ -12,10 +12,10 @@ import (
 )
 
 // Describes a platform version. Provides full details. Compare to
-// ListPlatformVersions, which provides summary information about a list of
+// ListPlatformVersions , which provides summary information about a list of
 // platform versions. For definitions of platform version and other
-// platform-related terms, see AWS Elastic Beanstalk Platforms Glossary
-// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
+// platform-related terms, see AWS Elastic Beanstalk Platforms Glossary (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html)
+// .
 func (c *Client) DescribePlatformVersion(ctx context.Context, params *DescribePlatformVersionInput, optFns ...func(*Options)) (*DescribePlatformVersionOutput, error) {
 	if params == nil {
 		params = &DescribePlatformVersionInput{}

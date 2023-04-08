@@ -13,8 +13,7 @@ import (
 
 // Get the position information for a given resource. This action is no longer
 // supported. Calls to retrieve the position information should use the
-// GetResourcePosition
-// (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html)
+// GetResourcePosition (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html)
 // API operation instead.
 //
 // Deprecated: This operation is no longer supported.

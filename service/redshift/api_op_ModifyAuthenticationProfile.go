@@ -28,8 +28,8 @@ func (c *Client) ModifyAuthenticationProfile(ctx context.Context, params *Modify
 
 type ModifyAuthenticationProfileInput struct {
 
-	// The new content of the authentication profile in JSON format. The maximum length
-	// of the JSON string is determined by a quota for your account.
+	// The new content of the authentication profile in JSON format. The maximum
+	// length of the JSON string is determined by a quota for your account.
 	//
 	// This member is required.
 	AuthenticationProfileContent *string

@@ -81,9 +81,9 @@ type CreateSubscriberOutput struct {
 	ResourceShareName *string
 
 	// The Amazon Resource Name (ARN) created by you to provide to the subscriber. For
-	// more information about ARNs and how to use them in policies, see Amazon Security
-	// Lake User Guide
-	// (https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html).
+	// more information about ARNs and how to use them in policies, see Amazon
+	// Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html)
+	// .
 	RoleArn *string
 
 	// The ARN for the Amazon S3 bucket.

@@ -123,8 +123,8 @@ func (c *Client) addOperationListEnvironmentVpcsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEnvironmentVpcsAPIClient is a client that implements the ListEnvironmentVpcs
-// operation.
+// ListEnvironmentVpcsAPIClient is a client that implements the
+// ListEnvironmentVpcs operation.
 type ListEnvironmentVpcsAPIClient interface {
 	ListEnvironmentVpcs(context.Context, *ListEnvironmentVpcsInput, ...func(*Options)) (*ListEnvironmentVpcsOutput, error)
 }

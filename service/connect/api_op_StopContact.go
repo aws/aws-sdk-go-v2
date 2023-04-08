@@ -10,14 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Ends the specified contact. This call does not work for the following initiation
-// methods:
-//
-// * DISCONNECT
-//
-// * TRANSFER
-//
-// * QUEUE_TRANSFER
+// Ends the specified contact. This call does not work for the following
+// initiation methods:
+//   - DISCONNECT
+//   - TRANSFER
+//   - QUEUE_TRANSFER
 func (c *Client) StopContact(ctx context.Context, params *StopContactInput, optFns ...func(*Options)) (*StopContactOutput, error) {
 	if params == nil {
 		params = &StopContactInput{}
@@ -40,8 +37,7 @@ type StopContactInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

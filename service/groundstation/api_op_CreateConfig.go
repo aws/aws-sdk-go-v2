@@ -30,17 +30,17 @@ func (c *Client) CreateConfig(ctx context.Context, params *CreateConfigInput, op
 
 type CreateConfigInput struct {
 
-	// Parameters of a Config.
+	// Parameters of a Config .
 	//
 	// This member is required.
 	ConfigData types.ConfigTypeData
 
-	// Name of a Config.
+	// Name of a Config .
 	//
 	// This member is required.
 	Name *string
 
-	// Tags assigned to a Config.
+	// Tags assigned to a Config .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -48,13 +48,13 @@ type CreateConfigInput struct {
 
 type CreateConfigOutput struct {
 
-	// ARN of a Config.
+	// ARN of a Config .
 	ConfigArn *string
 
-	// UUID of a Config.
+	// UUID of a Config .
 	ConfigId *string
 
-	// Type of a Config.
+	// Type of a Config .
 	ConfigType types.ConfigCapabilityType
 
 	// Metadata pertaining to the operation's result.

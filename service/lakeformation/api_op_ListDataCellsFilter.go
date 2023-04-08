@@ -119,8 +119,8 @@ func (c *Client) addOperationListDataCellsFilterMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListDataCellsFilterAPIClient is a client that implements the ListDataCellsFilter
-// operation.
+// ListDataCellsFilterAPIClient is a client that implements the
+// ListDataCellsFilter operation.
 type ListDataCellsFilterAPIClient interface {
 	ListDataCellsFilter(context.Context, *ListDataCellsFilterInput, ...func(*Options)) (*ListDataCellsFilterOutput, error)
 }

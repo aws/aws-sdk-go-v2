@@ -48,8 +48,8 @@ type GetMacieSessionOutput struct {
 	// account.
 	ServiceRole *string
 
-	// The current status of the Amazon Macie account. Possible values are: PAUSED, the
-	// account is enabled but all Macie activities are suspended (paused) for the
+	// The current status of the Amazon Macie account. Possible values are: PAUSED,
+	// the account is enabled but all Macie activities are suspended (paused) for the
 	// account; and, ENABLED, the account is enabled and all Macie activities are
 	// enabled for the account.
 	Status types.MacieStatus

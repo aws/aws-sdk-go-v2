@@ -13,8 +13,7 @@ import (
 )
 
 // Retrieves information about listener rules. You can also retrieve information
-// about the default listener rule. For more information, see Listener rules
-// (https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules)
+// about the default listener rule. For more information, see Listener rules (https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules)
 // in the Amazon VPC Lattice User Guide.
 func (c *Client) GetRule(ctx context.Context, params *GetRuleInput, optFns ...func(*Options)) (*GetRuleOutput, error) {
 	if params == nil {
@@ -69,8 +68,8 @@ type GetRuleOutput struct {
 	// Indicates whether this is the default rule.
 	IsDefault *bool
 
-	// The date and time that the listener rule was last updated, specified in ISO-8601
-	// format.
+	// The date and time that the listener rule was last updated, specified in
+	// ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The rule match.

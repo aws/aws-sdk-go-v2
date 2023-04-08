@@ -13,8 +13,7 @@ import (
 )
 
 // Lists all of your scheduled audits. Requires permission to access the
-// ListScheduledAudits
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// ListScheduledAudits (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListScheduledAudits(ctx context.Context, params *ListScheduledAuditsInput, optFns ...func(*Options)) (*ListScheduledAuditsOutput, error) {
 	if params == nil {
@@ -117,8 +116,8 @@ func (c *Client) addOperationListScheduledAuditsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListScheduledAuditsAPIClient is a client that implements the ListScheduledAudits
-// operation.
+// ListScheduledAuditsAPIClient is a client that implements the
+// ListScheduledAudits operation.
 type ListScheduledAuditsAPIClient interface {
 	ListScheduledAudits(context.Context, *ListScheduledAuditsInput, ...func(*Options)) (*ListScheduledAuditsOutput, error)
 }

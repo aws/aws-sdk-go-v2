@@ -35,24 +35,19 @@ func (c *Client) ListWhatIfForecasts(ctx context.Context, params *ListWhatIfFore
 type ListWhatIfForecastsInput struct {
 
 	// An array of filters. For each filter, you provide a condition and a match
-	// statement. The condition is either IS or IS_NOT, which specifies whether to
+	// statement. The condition is either IS or IS_NOT , which specifies whether to
 	// include or exclude the what-if forecast export jobs that match the statement
 	// from the list, respectively. The match statement consists of a key and a value.
 	// Filter properties
-	//
-	// * Condition - The condition to apply. Valid values are IS and
-	// IS_NOT. To include the forecast export jobs that match the statement, specify
-	// IS. To exclude matching forecast export jobs, specify IS_NOT.
-	//
-	// * Key - The name
-	// of the parameter to filter on. Valid values are WhatIfForecastArn and Status.
-	//
-	// *
-	// Value - The value to match.
-	//
-	// For example, to list all jobs that export a
-	// forecast named electricityWhatIfForecast, specify the following filter:
-	// "Filters": [ { "Condition": "IS", "Key": "WhatIfForecastArn", "Value":
+	//   - Condition - The condition to apply. Valid values are IS and IS_NOT . To
+	//   include the forecast export jobs that match the statement, specify IS . To
+	//   exclude matching forecast export jobs, specify IS_NOT .
+	//   - Key - The name of the parameter to filter on. Valid values are
+	//   WhatIfForecastArn and Status .
+	//   - Value - The value to match.
+	// For example, to list all jobs that export a forecast named
+	// electricityWhatIfForecast, specify the following filter: "Filters": [ {
+	// "Condition": "IS", "Key": "WhatIfForecastArn", "Value":
 	// "arn:aws:forecast:us-west-2::forecast/electricityWhatIfForecast" } ]
 	Filters []types.Filter
 
@@ -60,7 +55,7 @@ type ListWhatIfForecastsInput struct {
 	MaxResults *int32
 
 	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
+	// NextToken . To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
 
@@ -70,7 +65,7 @@ type ListWhatIfForecastsInput struct {
 type ListWhatIfForecastsOutput struct {
 
 	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
+	// NextToken . To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
 
@@ -146,8 +141,8 @@ func (c *Client) addOperationListWhatIfForecastsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListWhatIfForecastsAPIClient is a client that implements the ListWhatIfForecasts
-// operation.
+// ListWhatIfForecastsAPIClient is a client that implements the
+// ListWhatIfForecasts operation.
 type ListWhatIfForecastsAPIClient interface {
 	ListWhatIfForecasts(context.Context, *ListWhatIfForecastsInput, ...func(*Options)) (*ListWhatIfForecastsOutput, error)
 }

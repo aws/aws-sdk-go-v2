@@ -111,7 +111,7 @@ func (e *InternalServerErrorException) ErrorCode() string {
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The resourceArn, secretArn, or transactionId value can't be found.
+// The resourceArn , secretArn , or transactionId value can't be found.
 type NotFoundException struct {
 	Message *string
 

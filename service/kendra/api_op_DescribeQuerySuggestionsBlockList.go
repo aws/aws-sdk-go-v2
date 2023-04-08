@@ -83,10 +83,10 @@ type DescribeQuerySuggestionsBlockListOutput struct {
 	// Shows the current S3 path to your block list text file in your S3 bucket. Each
 	// block word or phrase should be on a separate line in a text file. For
 	// information on the current quota limits for block lists, see Quotas for Amazon
-	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
+	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) .
 	SourceS3Path *types.S3Path
 
-	// The current status of the block list. When the value is ACTIVE, the block list
+	// The current status of the block list. When the value is ACTIVE , the block list
 	// is ready for use.
 	Status types.QuerySuggestionsBlockListStatus
 

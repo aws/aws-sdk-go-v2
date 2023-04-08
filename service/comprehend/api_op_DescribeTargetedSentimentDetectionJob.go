@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the properties associated with a targeted sentiment detection job. Use this
-// operation to get the status of the job.
+// Gets the properties associated with a targeted sentiment detection job. Use
+// this operation to get the status of the job.
 func (c *Client) DescribeTargetedSentimentDetectionJob(ctx context.Context, params *DescribeTargetedSentimentDetectionJobInput, optFns ...func(*Options)) (*DescribeTargetedSentimentDetectionJobOutput, error) {
 	if params == nil {
 		params = &DescribeTargetedSentimentDetectionJobInput{}

@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the details of the host key that's specified by the HostKeyId and
-// ServerId.
+// ServerId .
 func (c *Client) DescribeHostKey(ctx context.Context, params *DescribeHostKeyInput, optFns ...func(*Options)) (*DescribeHostKeyOutput, error) {
 	if params == nil {
 		params = &DescribeHostKeyInput{}

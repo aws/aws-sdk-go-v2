@@ -54,7 +54,7 @@ type DiscoverInstancesInput struct {
 
 	// The maximum number of instances that you want Cloud Map to return in the
 	// response to a DiscoverInstances request. If you don't specify a value for
-	// MaxResults, Cloud Map returns up to 100 instances.
+	// MaxResults , Cloud Map returns up to 100 instances.
 	MaxResults *int32
 
 	// Opportunistic filters to scope the results based on custom attributes. If there
@@ -65,7 +65,7 @@ type DiscoverInstancesInput struct {
 	OptionalParameters map[string]string
 
 	// Filters to scope the results based on custom attributes for the instance (for
-	// example, {version=v1, az=1a}). Only instances that match all the specified
+	// example, {version=v1, az=1a} ). Only instances that match all the specified
 	// key-value pairs are returned.
 	QueryParameters map[string]string
 

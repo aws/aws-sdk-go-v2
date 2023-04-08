@@ -34,8 +34,8 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 
 type CreateDatasetInput struct {
 
-	// A unique identifier for the request. If you do not set the client request token,
-	// Amazon Lookout for Equipment generates one.
+	// A unique identifier for the request. If you do not set the client request
+	// token, Amazon Lookout for Equipment generates one.
 	//
 	// This member is required.
 	ClientToken *string

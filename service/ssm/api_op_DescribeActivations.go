@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes details about the activation, such as the date and time the activation
-// was created, its expiration date, the Identity and Access Management (IAM) role
-// assigned to the managed nodes in the activation, and the number of nodes
-// registered by using this activation.
+// Describes details about the activation, such as the date and time the
+// activation was created, its expiration date, the Identity and Access Management
+// (IAM) role assigned to the managed nodes in the activation, and the number of
+// nodes registered by using this activation.
 func (c *Client) DescribeActivations(ctx context.Context, params *DescribeActivationsInput, optFns ...func(*Options)) (*DescribeActivationsOutput, error) {
 	if params == nil {
 		params = &DescribeActivationsInput{}
@@ -121,8 +121,8 @@ func (c *Client) addOperationDescribeActivationsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeActivationsAPIClient is a client that implements the DescribeActivations
-// operation.
+// DescribeActivationsAPIClient is a client that implements the
+// DescribeActivations operation.
 type DescribeActivationsAPIClient interface {
 	DescribeActivations(context.Context, *DescribeActivationsInput, ...func(*Options)) (*DescribeActivationsOutput, error)
 }

@@ -76,8 +76,8 @@ type DescribeMergeConflictsInput struct {
 	// The maximum number of merge hunks to include in the output.
 	MaxMergeHunks *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde

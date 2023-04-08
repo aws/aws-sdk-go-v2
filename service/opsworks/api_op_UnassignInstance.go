@@ -10,14 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Unassigns a registered instance from all layers that are using the instance. The
-// instance remains in the stack as an unassigned instance, and can be assigned to
-// another layer as needed. You cannot use this action with instances that were
+// Unassigns a registered instance from all layers that are using the instance.
+// The instance remains in the stack as an unassigned instance, and can be assigned
+// to another layer as needed. You cannot use this action with instances that were
 // created with AWS OpsWorks Stacks. Required Permissions: To use this action, an
 // IAM user must have a Manage permissions level for the stack or an attached
 // policy that explicitly grants permissions. For more information about user
-// permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) UnassignInstance(ctx context.Context, params *UnassignInstanceInput, optFns ...func(*Options)) (*UnassignInstanceOutput, error) {
 	if params == nil {
 		params = &UnassignInstanceInput{}

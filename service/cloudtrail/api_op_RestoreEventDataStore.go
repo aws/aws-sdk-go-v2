@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Restores a deleted event data store specified by EventDataStore, which accepts
+// Restores a deleted event data store specified by EventDataStore , which accepts
 // an event data store ARN. You can only restore a deleted event data store within
 // the seven-day wait period after deletion. Restoring an event data store can take
 // several minutes, depending on the size of the event data store.
@@ -58,8 +58,8 @@ type RestoreEventDataStoreOutput struct {
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
-	// Indicates whether the event data store is collecting events from all regions, or
-	// only from the region in which the event data store was created.
+	// Indicates whether the event data store is collecting events from all regions,
+	// or only from the region in which the event data store was created.
 	MultiRegionEnabled *bool
 
 	// The name of the event data store.
@@ -75,13 +75,13 @@ type RestoreEventDataStoreOutput struct {
 	// The status of the event data store.
 	Status types.EventDataStoreStatus
 
-	// Indicates that termination protection is enabled and the event data store cannot
-	// be automatically deleted.
+	// Indicates that termination protection is enabled and the event data store
+	// cannot be automatically deleted.
 	TerminationProtectionEnabled *bool
 
 	// The timestamp that shows when an event data store was updated, if applicable.
 	// UpdatedTimestamp is always either the same or newer than the time shown in
-	// CreatedTimestamp.
+	// CreatedTimestamp .
 	UpdatedTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.

@@ -15,8 +15,7 @@ import (
 // Retrieves all aliases for this Amazon Web Services account. You can filter the
 // result set by alias name and/or routing strategy type. Use the pagination
 // parameters to retrieve results in sequential pages. Returned aliases are not
-// listed in any particular order. Related actions All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// listed in any particular order. Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {
 		params = &ListAliasesInput{}
@@ -38,28 +37,24 @@ type ListAliasesInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// A descriptive label that is associated with an alias. Alias names do not need to
-	// be unique.
+	// A descriptive label that is associated with an alias. Alias names do not need
+	// to be unique.
 	Name *string
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	// The routing type to filter results on. Use this parameter to retrieve only
 	// aliases with a certain routing type. To retrieve all aliases, leave this
 	// parameter empty. Possible routing types include the following:
-	//
-	// * SIMPLE -- The
-	// alias resolves to one specific fleet. Use this type when routing to active
-	// fleets.
-	//
-	// * TERMINAL -- The alias does not resolve to a fleet but instead can be
-	// used to display a message to the user. A terminal alias throws a
-	// TerminalRoutingStrategyException with the RoutingStrategy
-	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_RoutingStrategy.html)
-	// message embedded.
+	//   - SIMPLE -- The alias resolves to one specific fleet. Use this type when
+	//   routing to active fleets.
+	//   - TERMINAL -- The alias does not resolve to a fleet but instead can be used
+	//   to display a message to the user. A terminal alias throws a
+	//   TerminalRoutingStrategyException with the RoutingStrategy (https://docs.aws.amazon.com/gamelift/latest/apireference/API_RoutingStrategy.html)
+	//   message embedded.
 	RoutingStrategyType types.RoutingStrategyType
 
 	noSmithyDocumentSerde

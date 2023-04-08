@@ -11,8 +11,8 @@ import (
 )
 
 // The CancelJob operation cancels an unfinished job. You can only cancel a job
-// that has a status of Submitted. To prevent a pipeline from starting to process a
-// job while you're getting the job identifier, use UpdatePipelineStatus to
+// that has a status of Submitted . To prevent a pipeline from starting to process
+// a job while you're getting the job identifier, use UpdatePipelineStatus to
 // temporarily pause the pipeline.
 func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns ...func(*Options)) (*CancelJobOutput, error) {
 	if params == nil {
@@ -33,7 +33,7 @@ func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns .
 type CancelJobInput struct {
 
 	// The identifier of the job that you want to cancel. To get a list of the jobs
-	// (including their jobId) that have a status of Submitted, use the
+	// (including their jobId ) that have a status of Submitted , use the
 	// ListJobsByStatus API action.
 	//
 	// This member is required.
@@ -43,7 +43,7 @@ type CancelJobInput struct {
 }
 
 // The response body contains a JSON object. If the job is successfully canceled,
-// the value of Success is true.
+// the value of Success is true .
 type CancelJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

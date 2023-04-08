@@ -31,7 +31,7 @@ func (c *Client) PutInlinePolicyToPermissionSet(ctx context.Context, params *Put
 
 type PutInlinePolicyToPermissionSetInput struct {
 
-	// The inline policy to attach to a PermissionSet.
+	// The inline policy to attach to a PermissionSet .
 	//
 	// This member is required.
 	InlinePolicy *string

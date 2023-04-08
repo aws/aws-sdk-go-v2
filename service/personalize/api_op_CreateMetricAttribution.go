@@ -14,8 +14,8 @@ import (
 // Creates a metric attribution. A metric attribution creates reports on the data
 // that you import into Amazon Personalize. Depending on how you imported the data,
 // you can view reports in Amazon CloudWatch or Amazon S3. For more information,
-// see Measuring impact of recommendations
-// (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
+// see Measuring impact of recommendations (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html)
+// .
 func (c *Client) CreateMetricAttribution(ctx context.Context, params *CreateMetricAttributionInput, optFns ...func(*Options)) (*CreateMetricAttributionOutput, error) {
 	if params == nil {
 		params = &CreateMetricAttributionInput{}
@@ -41,7 +41,7 @@ type CreateMetricAttributionInput struct {
 
 	// A list of metric attributes for the metric attribution. Each metric attribute
 	// specifies an event type to track and a function. Available functions are SUM()
-	// or SAMPLECOUNT(). For SUM() functions, provide the dataset type (either
+	// or SAMPLECOUNT() . For SUM() functions, provide the dataset type (either
 	// Interactions or Items) and column to sum as a parameter. For example
 	// SUM(Items.PRICE).
 	//

@@ -31,7 +31,7 @@ func (c *Client) GetDomainDeliverabilityCampaign(ctx context.Context, params *Ge
 
 // Retrieve all the deliverability data for a specific campaign. This data is
 // available for a campaign only if the campaign sent email by using a domain that
-// the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption
+// the Deliverability dashboard is enabled for ( PutDeliverabilityDashboardOption
 // operation).
 type GetDomainDeliverabilityCampaignInput struct {
 

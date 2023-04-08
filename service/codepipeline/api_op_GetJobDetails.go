@@ -45,8 +45,8 @@ type GetJobDetailsInput struct {
 // Represents the output of a GetJobDetails action.
 type GetJobDetailsOutput struct {
 
-	// The details of the job. If AWSSessionCredentials is used, a long-running job can
-	// call GetJobDetails again to obtain new credentials.
+	// The details of the job. If AWSSessionCredentials is used, a long-running job
+	// can call GetJobDetails again to obtain new credentials.
 	JobDetails *types.JobDetails
 
 	// Metadata pertaining to the operation's result.

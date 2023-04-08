@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a specified job and whether that job has been received
-// by the job worker. Used for custom actions only.
+// Returns information about a specified job and whether that job has been
+// received by the job worker. Used for custom actions only.
 func (c *Client) AcknowledgeJob(ctx context.Context, params *AcknowledgeJobInput, optFns ...func(*Options)) (*AcknowledgeJobOutput, error) {
 	if params == nil {
 		params = &AcknowledgeJobInput{}

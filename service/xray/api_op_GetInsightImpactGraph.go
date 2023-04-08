@@ -51,8 +51,8 @@ type GetInsightImpactGraphInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// Specify the pagination token returned by a previous request to retrieve the next
-	// page of results.
+	// Specify the pagination token returned by a previous request to retrieve the
+	// next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde

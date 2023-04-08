@@ -30,8 +30,8 @@ func (c *Client) CreateDeploymentGroup(ctx context.Context, params *CreateDeploy
 // Represents the input of a CreateDeploymentGroup operation.
 type CreateDeploymentGroupInput struct {
 
-	// The name of an CodeDeploy application associated with the IAM user or Amazon Web
-	// Services account.
+	// The name of an CodeDeploy application associated with the IAM user or Amazon
+	// Web Services account.
 	//
 	// This member is required.
 	ApplicationName *string
@@ -64,11 +64,11 @@ type CreateDeploymentGroupInput struct {
 	// If specified, the deployment configuration name can be either one of the
 	// predefined configurations provided with CodeDeploy or a custom deployment
 	// configuration that you create by calling the create deployment configuration
-	// operation. CodeDeployDefault.OneAtATime is the default deployment configuration.
-	// It is used if a configuration isn't specified for the deployment or deployment
-	// group. For more information about the predefined deployment configurations in
-	// CodeDeploy, see Working with Deployment Configurations in CodeDeploy
-	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html)
+	// operation. CodeDeployDefault.OneAtATime is the default deployment
+	// configuration. It is used if a configuration isn't specified for the deployment
+	// or deployment group. For more information about the predefined deployment
+	// configurations in CodeDeploy, see Working with Deployment Configurations in
+	// CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html)
 	// in the CodeDeploy User Guide.
 	DeploymentConfigName *string
 
@@ -76,20 +76,20 @@ type CreateDeploymentGroupInput struct {
 	// to run and whether to route deployment traffic behind a load balancer.
 	DeploymentStyle *types.DeploymentStyle
 
-	// The Amazon EC2 tags on which to filter. The deployment group includes Amazon EC2
-	// instances with any of the specified tags. Cannot be used in the same call as
+	// The Amazon EC2 tags on which to filter. The deployment group includes Amazon
+	// EC2 instances with any of the specified tags. Cannot be used in the same call as
 	// ec2TagSet.
 	Ec2TagFilters []types.EC2TagFilter
 
-	// Information about groups of tags applied to Amazon EC2 instances. The deployment
-	// group includes only Amazon EC2 instances identified by all the tag groups.
-	// Cannot be used in the same call as ec2TagFilters.
+	// Information about groups of tags applied to Amazon EC2 instances. The
+	// deployment group includes only Amazon EC2 instances identified by all the tag
+	// groups. Cannot be used in the same call as ec2TagFilters .
 	Ec2TagSet *types.EC2TagSet
 
 	// The target Amazon ECS services in the deployment group. This applies only to
 	// deployment groups that use the Amazon ECS compute platform. A target Amazon ECS
 	// service is specified as an Amazon ECS cluster and service name pair using the
-	// format :.
+	// format : .
 	EcsServices []types.ECSService
 
 	// Information about the load balancer used in a deployment.
@@ -97,31 +97,30 @@ type CreateDeploymentGroupInput struct {
 
 	// The on-premises instance tags on which to filter. The deployment group includes
 	// on-premises instances with any of the specified tags. Cannot be used in the same
-	// call as OnPremisesTagSet.
+	// call as OnPremisesTagSet .
 	OnPremisesInstanceTagFilters []types.TagFilter
 
 	// Information about groups of tags applied to on-premises instances. The
 	// deployment group includes only on-premises instances identified by all of the
-	// tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
+	// tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters .
 	OnPremisesTagSet *types.OnPremisesTagSet
 
-	// Indicates what happens when new Amazon EC2 instances are launched mid-deployment
-	// and do not receive the deployed application revision. If this option is set to
-	// UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated
-	// instances' deployments to apply the deployed application revision to the new
-	// Amazon EC2 instances. If this option is set to IGNORE, CodeDeploy does not
-	// initiate a deployment to update the new Amazon EC2 instances. This may result in
-	// instances having different revisions.
+	// Indicates what happens when new Amazon EC2 instances are launched
+	// mid-deployment and do not receive the deployed application revision. If this
+	// option is set to UPDATE or is unspecified, CodeDeploy initiates one or more
+	// 'auto-update outdated instances' deployments to apply the deployed application
+	// revision to the new Amazon EC2 instances. If this option is set to IGNORE ,
+	// CodeDeploy does not initiate a deployment to update the new Amazon EC2
+	// instances. This may result in instances having different revisions.
 	OutdatedInstancesStrategy types.OutdatedInstancesStrategy
 
-	// The metadata that you apply to CodeDeploy deployment groups to help you organize
-	// and categorize them. Each tag consists of a key and an optional value, both of
-	// which you define.
+	// The metadata that you apply to CodeDeploy deployment groups to help you
+	// organize and categorize them. Each tag consists of a key and an optional value,
+	// both of which you define.
 	Tags []types.Tag
 
 	// Information about triggers to create when the deployment group is created. For
-	// examples, see Create a Trigger for an CodeDeploy Event
-	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
+	// examples, see Create a Trigger for an CodeDeploy Event (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
 	// in the CodeDeploy User Guide.
 	TriggerConfigurations []types.TriggerConfig
 

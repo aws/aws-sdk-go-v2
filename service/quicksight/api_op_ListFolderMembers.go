@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all assets (DASHBOARD, ANALYSIS, and DATASET) in a folder.
+// List all assets ( DASHBOARD , ANALYSIS , and DATASET ) in a folder.
 func (c *Client) ListFolderMembers(ctx context.Context, params *ListFolderMembersInput, optFns ...func(*Options)) (*ListFolderMembersOutput, error) {
 	if params == nil {
 		params = &ListFolderMembersInput{}

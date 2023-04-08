@@ -10,9 +10,9 @@ const (
 	AutomaticTerminationModeActivated   AutomaticTerminationMode = "ACTIVATED"
 )
 
-// Values returns all known values for AutomaticTerminationMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AutomaticTerminationMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutomaticTerminationMode) Values() []AutomaticTerminationMode {
 	return []AutomaticTerminationMode{
 		"DEACTIVATED",
@@ -44,8 +44,8 @@ const (
 	LaunchProfilePlatformWindows LaunchProfilePlatform = "WINDOWS"
 )
 
-// Values returns all known values for LaunchProfilePlatform. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LaunchProfilePlatform. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfilePlatform) Values() []LaunchProfilePlatform {
 	return []LaunchProfilePlatform{
@@ -139,9 +139,10 @@ const (
 	LaunchProfileValidationStateValidationFailedInternalServerError LaunchProfileValidationState = "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
 )
 
-// Values returns all known values for LaunchProfileValidationState. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LaunchProfileValidationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (LaunchProfileValidationState) Values() []LaunchProfileValidationState {
 	return []LaunchProfileValidationState{
 		"VALIDATION_NOT_STARTED",
@@ -167,8 +168,8 @@ const (
 	LaunchProfileValidationStatusCodeValidationFailedInternalServerError                LaunchProfileValidationStatusCode = "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
 )
 
-// Values returns all known values for LaunchProfileValidationStatusCode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for LaunchProfileValidationStatusCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (LaunchProfileValidationStatusCode) Values() []LaunchProfileValidationStatusCode {
@@ -321,9 +322,9 @@ const (
 	StreamingImageStatusCodeAccessDenied                   StreamingImageStatusCode = "ACCESS_DENIED"
 )
 
-// Values returns all known values for StreamingImageStatusCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StreamingImageStatusCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingImageStatusCode) Values() []StreamingImageStatusCode {
 	return []StreamingImageStatusCode{
 		"STREAMING_IMAGE_CREATE_IN_PROGRESS",
@@ -355,8 +356,8 @@ const (
 	StreamingInstanceTypeG516xlarge   StreamingInstanceType = "g5.16xlarge"
 )
 
-// Values returns all known values for StreamingInstanceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StreamingInstanceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingInstanceType) Values() []StreamingInstanceType {
 	return []StreamingInstanceType{
@@ -393,8 +394,8 @@ const (
 	StreamingSessionStateStartFailed      StreamingSessionState = "START_FAILED"
 )
 
-// Values returns all known values for StreamingSessionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StreamingSessionState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingSessionState) Values() []StreamingSessionState {
 	return []StreamingSessionState{

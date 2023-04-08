@@ -16,7 +16,7 @@ type Address struct {
 	// The country of an address.
 	Country *string
 
-	// An address suffix location, such as the S. Unit A in Central Park S. Unit A.
+	// An address suffix location, such as the S. Unit A in Central Park S. Unit A .
 	PostDirectional *string
 
 	// The postal code of an address.
@@ -31,13 +31,13 @@ type Address struct {
 	// The state of an address.
 	State *string
 
-	// The address street, such as 8th Avenue.
+	// The address street, such as 8th Avenue .
 	StreetName *string
 
 	// The numeric portion of an address.
 	StreetNumber *string
 
-	// The address suffix, such as the N in 8th Avenue N.
+	// The address suffix, such as the N in 8th Avenue N .
 	StreetSuffix *string
 
 	noSmithyDocumentSerde
@@ -93,8 +93,8 @@ type Credential struct {
 	// format.
 	Password *string
 
-	// The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII
-	// format.
+	// The RFC2617 compliant user name associated with the SIP credentials, in
+	// US-ASCII format.
 	Username *string
 
 	noSmithyDocumentSerde
@@ -193,12 +193,12 @@ type Origination struct {
 
 	// When origination settings are disabled, inbound calls are not enabled for your
 	// Amazon Chime SDK Voice Connector. This parameter is not required, but you must
-	// specify this parameter or Routes.
+	// specify this parameter or Routes .
 	Disabled *bool
 
 	// The call distribution properties defined for your SIP hosts. Valid range:
 	// Minimum value of 1. Maximum value of 20. This parameter is not required, but you
-	// must specify this parameter or Disabled.
+	// must specify this parameter or Disabled .
 	Routes []OriginationRoute
 
 	noSmithyDocumentSerde
@@ -216,8 +216,8 @@ type OriginationRoute struct {
 	// The designated origination route port. Defaults to 5060.
 	Port *int32
 
-	// The priority associated with the host, with 1 being the highest priority. Higher
-	// priority hosts are attempted first.
+	// The priority associated with the host, with 1 being the highest priority.
+	// Higher priority hosts are attempted first.
 	Priority *int32
 
 	// The protocol to use for the origination route. Encryption-enabled Amazon Chime
@@ -231,8 +231,8 @@ type OriginationRoute struct {
 	noSmithyDocumentSerde
 }
 
-// The phone number and proxy phone number for a participant in an Amazon Chime SDK
-// Voice Connector proxy session.
+// The phone number and proxy phone number for a participant in an Amazon Chime
+// SDK Voice Connector proxy session.
 type Participant struct {
 
 	// The participant's phone number.
@@ -397,8 +397,8 @@ type Proxy struct {
 	// The default number of minutes allowed for proxy sessions.
 	DefaultSessionExpiryMinutes *int32
 
-	// When true, stops proxy sessions from being created on the specified Amazon Chime
-	// SDK Voice Connector.
+	// When true, stops proxy sessions from being created on the specified Amazon
+	// Chime SDK Voice Connector.
 	Disabled *bool
 
 	// The phone number to route calls to after a proxy session expires.
@@ -457,9 +457,9 @@ type ProxySession struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains the configuration settings for server-side encryption.
-// We only support symmetric keys. Do not use asymmetric or HMAC keys, or KMS
-// aliases.
+// A structure that contains the configuration settings for server-side
+// encryption. We only support symmetric keys. Do not use asymmetric or HMAC keys,
+// or KMS aliases.
 type ServerSideEncryptionConfiguration struct {
 
 	// The ARN of the KMS key used to encrypt the enrollment data in a voice profile
@@ -541,8 +541,8 @@ type SipMediaApplicationLoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The details of a SIP rule, including name, triggers, and target applications. An
-// AWS account can have multiple SIP rules.
+// The details of a SIP rule, including name, triggers, and target applications.
+// An AWS account can have multiple SIP rules.
 type SipRule struct {
 
 	// The time at which the SIP rule was created, in ISO 8601 format.
@@ -600,8 +600,8 @@ type SpeakerSearchDetails struct {
 	// The result value in the speaker search details.
 	Results []SpeakerSearchResult
 
-	// The status of a voice print generation operation, VoiceprintGenerationSuccess or
-	// VoiceprintGenerationFailure..
+	// The status of a voice print generation operation, VoiceprintGenerationSuccess
+	// or VoiceprintGenerationFailure ..
 	VoiceprintGenerationStatus *string
 
 	noSmithyDocumentSerde
@@ -635,8 +635,8 @@ type SpeakerSearchTask struct {
 	// The speaker search task ID.
 	SpeakerSearchTaskId *string
 
-	// The status of the speaker search task, IN_QUEUE, IN_PROGRESS, PARTIAL_SUCCESS,
-	// SUCCEEDED, FAILED, or STOPPED.
+	// The status of the speaker search task, IN_QUEUE , IN_PROGRESS , PARTIAL_SUCCESS
+	// , SUCCEEDED , FAILED , or STOPPED .
 	SpeakerSearchTaskStatus *string
 
 	// The time at which the speaker search task began.
@@ -651,9 +651,9 @@ type SpeakerSearchTask struct {
 	noSmithyDocumentSerde
 }
 
-// The streaming configuration associated with an Amazon Chime SDK Voice Connector.
-// Specifies whether media streaming is enabled for sending to Amazon Kinesis, and
-// shows the retention period for the Amazon Kinesis data, in hours.
+// The streaming configuration associated with an Amazon Chime SDK Voice
+// Connector. Specifies whether media streaming is enabled for sending to Amazon
+// Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.
 type StreamingConfiguration struct {
 
 	// The amount of time, in hours, to the Kinesis data.
@@ -711,8 +711,8 @@ type Termination struct {
 	// The IP addresses allowed to make calls, in CIDR format.
 	CidrAllowedList []string
 
-	// The limit on calls per second. Max value based on account service quota. Default
-	// value of 1.
+	// The limit on calls per second. Max value based on account service quota.
+	// Default value of 1.
 	CpsLimit *int32
 
 	// The default outbound calling number.
@@ -724,8 +724,8 @@ type Termination struct {
 	noSmithyDocumentSerde
 }
 
-// The termination health details, including the source IP address and timestamp of
-// the last successful SIP OPTIONS message from your SIP infrastructure.
+// The termination health details, including the source IP address and timestamp
+// of the last successful SIP OPTIONS message from your SIP infrastructure.
 type TerminationHealth struct {
 
 	// The source IP address.
@@ -755,8 +755,8 @@ type UpdatePhoneNumberRequestItem struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Chime SDK Voice Connector configuration, including outbound host name
-// and encryption settings.
+// The Amazon Chime SDK Voice Connector configuration, including outbound host
+// name and encryption settings.
 type VoiceConnector struct {
 
 	// The AWS Region in which the Voice Connector is created. Default: us-east-1.
@@ -925,8 +925,9 @@ type VoiceProfileSummary struct {
 	// The time at which a voice profile summary was created.
 	CreatedTimestamp *time.Time
 
-	// Extends the life of the voice profile. You can use UpdateVoiceProfile to refresh
-	// an existing voice profile's voice print and extend the life of the summary.
+	// Extends the life of the voice profile. You can use UpdateVoiceProfile to
+	// refresh an existing voice profile's voice print and extend the life of the
+	// summary.
 	ExpirationTimestamp *time.Time
 
 	// The time at which a voice profile summary was last updated.
@@ -966,8 +967,8 @@ type VoiceToneAnalysisTask struct {
 	// The ID of the voice tone analysis task.
 	VoiceToneAnalysisTaskId *string
 
-	// The status of a voice tone analysis task, IN_QUEUE, IN_PROGRESS,
-	// PARTIAL_SUCCESS, SUCCEEDED, FAILED, or STOPPED.
+	// The status of a voice tone analysis task, IN_QUEUE , IN_PROGRESS ,
+	// PARTIAL_SUCCESS , SUCCEEDED , FAILED , or STOPPED .
 	VoiceToneAnalysisTaskStatus *string
 
 	noSmithyDocumentSerde

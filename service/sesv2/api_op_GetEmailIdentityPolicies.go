@@ -16,9 +16,8 @@ import (
 // API is for the identity owner only. If you have not verified the identity, this
 // API will return an error. Sending authorization is a feature that enables an
 // identity owner to authorize other senders to use its identities. For information
-// about using sending authorization, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-// You can execute this operation no more than once per second.
+// about using sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) GetEmailIdentityPolicies(ctx context.Context, params *GetEmailIdentityPoliciesInput, optFns ...func(*Options)) (*GetEmailIdentityPoliciesOutput, error) {
 	if params == nil {
 		params = &GetEmailIdentityPoliciesInput{}

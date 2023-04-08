@@ -34,7 +34,7 @@ type DeletePublicKeyInput struct {
 	Id *string
 
 	// The value of the ETag header that you received when retrieving the public key
-	// identity to delete. For example: E2QWRUHAPOMQZL.
+	// identity to delete. For example: E2QWRUHAPOMQZL .
 	IfMatch *string
 
 	noSmithyDocumentSerde

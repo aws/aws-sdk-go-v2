@@ -46,7 +46,7 @@ type DescribeEnvironmentResourcesInput struct {
 // Result message containing a list of environment resource descriptions.
 type DescribeEnvironmentResourcesOutput struct {
 
-	// A list of EnvironmentResourceDescription.
+	// A list of EnvironmentResourceDescription .
 	EnvironmentResources *types.EnvironmentResourceDescription
 
 	// Metadata pertaining to the operation's result.

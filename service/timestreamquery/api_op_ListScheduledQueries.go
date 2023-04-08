@@ -33,9 +33,9 @@ func (c *Client) ListScheduledQueries(ctx context.Context, params *ListScheduled
 type ListScheduledQueriesInput struct {
 
 	// The maximum number of items to return in the output. If the total number of
-	// items available is more than the value specified, a NextToken is provided in the
-	// output. To resume pagination, provide the NextToken value as the argument to the
-	// subsequent call to ListScheduledQueriesRequest.
+	// items available is more than the value specified, a NextToken is provided in
+	// the output. To resume pagination, provide the NextToken value as the argument
+	// to the subsequent call to ListScheduledQueriesRequest .
 	MaxResults *int32
 
 	// A pagination token to resume pagination.
@@ -185,9 +185,9 @@ var _ ListScheduledQueriesAPIClient = (*Client)(nil)
 // ListScheduledQueries
 type ListScheduledQueriesPaginatorOptions struct {
 	// The maximum number of items to return in the output. If the total number of
-	// items available is more than the value specified, a NextToken is provided in the
-	// output. To resume pagination, provide the NextToken value as the argument to the
-	// subsequent call to ListScheduledQueriesRequest.
+	// items available is more than the value specified, a NextToken is provided in
+	// the output. To resume pagination, provide the NextToken value as the argument
+	// to the subsequent call to ListScheduledQueriesRequest .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

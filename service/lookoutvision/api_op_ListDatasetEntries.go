@@ -35,7 +35,7 @@ type ListDatasetEntriesInput struct {
 
 	// The type of the dataset that you want to list. Specify train to list the
 	// training dataset. Specify test to list the test dataset. If you have a single
-	// dataset project, specify train.
+	// dataset project, specify train .
 	//
 	// This member is required.
 	DatasetType *string
@@ -46,7 +46,7 @@ type ListDatasetEntriesInput struct {
 	ProjectName *string
 
 	// Only includes entries after the specified date in the response. For example,
-	// 2020-06-23T00:00:00.
+	// 2020-06-23T00:00:00 .
 	AfterCreationDate *time.Time
 
 	// Specify normal to include only normal images. Specify anomaly to only include
@@ -55,10 +55,10 @@ type ListDatasetEntriesInput struct {
 	AnomalyClass *string
 
 	// Only includes entries before the specified date in the response. For example,
-	// 2020-06-23T00:00:00.
+	// 2020-06-23T00:00:00 .
 	BeforeCreationDate *time.Time
 
-	// Specify true to include labeled entries, otherwise specify false. If you don't
+	// Specify true to include labeled entries, otherwise specify false . If you don't
 	// specify a value, Lookout for Vision returns all entries.
 	Labeled *bool
 

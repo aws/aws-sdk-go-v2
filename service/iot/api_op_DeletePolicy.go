@@ -18,8 +18,7 @@ import (
 // DeletePolicy, its default version is deleted with it. Because of the distributed
 // nature of Amazon Web Services, it can take up to five minutes after a policy is
 // detached before it's ready to be deleted. Requires permission to access the
-// DeletePolicy
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DeletePolicy (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {
 	if params == nil {

@@ -11,8 +11,7 @@ import (
 )
 
 // Adds or updates the tags associated with the resource ARN. See AWS IoT 1-Click
-// Service Limits
-// (https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits)
+// Service Limits (https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits)
 // for the maximum number of tags allowed per resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
@@ -38,8 +37,8 @@ type TagResourceInput struct {
 
 	// A collection of key/value pairs defining the resource tags. For example, {
 	// "tags": {"key1": "value1", "key2": "value2"} }. For more information, see AWS
-	// Tagging Strategies
-	// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
+	// Tagging Strategies (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
+	// .
 	//
 	// This member is required.
 	Tags map[string]string

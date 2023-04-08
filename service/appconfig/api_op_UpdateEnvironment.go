@@ -69,7 +69,7 @@ type UpdateEnvironmentOutput struct {
 	Name *string
 
 	// The state of the environment. An environment can be in one of the following
-	// states: READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK, or ROLLED_BACK
+	// states: READY_FOR_DEPLOYMENT , DEPLOYING , ROLLING_BACK , or ROLLED_BACK
 	State types.EnvironmentState
 
 	// Metadata pertaining to the operation's result.

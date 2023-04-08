@@ -44,8 +44,8 @@ type UpdateFileSystemInput struct {
 
 	// (Optional) Updates the file system's throughput mode. If you're not updating
 	// your throughput mode, you don't need to provide this value in your request. If
-	// you are changing the ThroughputMode to provisioned, you must also set a value
-	// for ProvisionedThroughputInMibps.
+	// you are changing the ThroughputMode to provisioned , you must also set a value
+	// for ProvisionedThroughputInMibps .
 	ThroughputMode types.ThroughputMode
 
 	noSmithyDocumentSerde
@@ -76,7 +76,7 @@ type UpdateFileSystemOutput struct {
 	LifeCycleState types.LifeCycleState
 
 	// The current number of mount targets that the file system has. For more
-	// information, see CreateMountTarget.
+	// information, see CreateMountTarget .
 	//
 	// This member is required.
 	NumberOfMountTargets int32
@@ -117,17 +117,16 @@ type UpdateFileSystemOutput struct {
 
 	// Describes the Amazon Web Services Availability Zone in which the file system is
 	// located, and is valid only for file systems using One Zone storage classes. For
-	// more information, see Using EFS storage classes
-	// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
-	// EFS User Guide.
+	// more information, see Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
+	// in the Amazon EFS User Guide.
 	AvailabilityZoneName *string
 
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool
 
 	// The Amazon Resource Name (ARN) for the EFS file system, in the format
-	// arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id . Example
-	// with sample data:
+	// arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id .
+	// Example with sample data:
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
 
@@ -135,18 +134,17 @@ type UpdateFileSystemOutput struct {
 	KmsKeyId *string
 
 	// You can add tags to a file system, including a Name tag. For more information,
-	// see CreateFileSystem. If the file system has a Name tag, Amazon EFS returns the
-	// value in this field.
+	// see CreateFileSystem . If the file system has a Name tag, Amazon EFS returns
+	// the value in this field.
 	Name *string
 
 	// The amount of provisioned throughput, measured in MiB/s, for the file system.
-	// Valid for file systems using ThroughputMode set to provisioned.
+	// Valid for file systems using ThroughputMode set to provisioned .
 	ProvisionedThroughputInMibps *float64
 
-	// Displays the file system's throughput mode. For more information, see Throughput
-	// modes
-	// (https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes) in
-	// the Amazon EFS User Guide.
+	// Displays the file system's throughput mode. For more information, see
+	// Throughput modes (https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes)
+	// in the Amazon EFS User Guide.
 	ThroughputMode types.ThroughputMode
 
 	// Metadata pertaining to the operation's result.

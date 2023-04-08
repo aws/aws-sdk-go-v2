@@ -27,7 +27,7 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 	return out, nil
 }
 
-// Represents the input to CreateDBInstance.
+// Represents the input to CreateDBInstance .
 type CreateDBInstanceInput struct {
 
 	// The identifier of the cluster that the instance will belong to.
@@ -35,22 +35,16 @@ type CreateDBInstanceInput struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
-	// The compute and memory capacity of the instance; for example, db.r5.large.
+	// The compute and memory capacity of the instance; for example, db.r5.large .
 	//
 	// This member is required.
 	DBInstanceClass *string
 
 	// The instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must contain from 1 to 63 letters, numbers, or hyphens.
-	//
-	// * The
-	// first character must be a letter.
-	//
-	// * Cannot end with a hyphen or contain two
-	// consecutive hyphens.
-	//
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: mydbinstance
 	//
 	// This member is required.
@@ -70,13 +64,13 @@ type CreateDBInstanceInput struct {
 	// Region. Example: us-east-1d
 	AvailabilityZone *string
 
-	// A value that indicates whether to copy tags from the DB instance to snapshots of
-	// the DB instance. By default, tags are not copied.
+	// A value that indicates whether to copy tags from the DB instance to snapshots
+	// of the DB instance. By default, tags are not copied.
 	CopyTagsToSnapshot *bool
 
 	// A value that indicates whether to enable Performance Insights for the DB
-	// Instance. For more information, see Using Amazon Performance Insights
-	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html).
+	// Instance. For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html)
+	// .
 	EnablePerformanceInsights *bool
 
 	// The KMS key identifier for encryption of Performance Insights data. The KMS key
@@ -87,11 +81,11 @@ type CreateDBInstanceInput struct {
 	// KMS key for each Amazon Web Services region.
 	PerformanceInsightsKMSKeyId *string
 
-	// The time range each week during which system maintenance can occur, in Universal
-	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each Amazon
-	// Web Services Region, occurring on a random day of the week. Valid days: Mon,
-	// Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
+	// The time range each week during which system maintenance can occur, in
+	// Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default
+	// is a 30-minute window selected at random from an 8-hour block of time for each
+	// Amazon Web Services Region, occurring on a random day of the week. Valid days:
+	// Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
 	// A value that specifies the order in which an Amazon DocumentDB replica is

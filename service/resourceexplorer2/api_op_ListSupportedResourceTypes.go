@@ -35,9 +35,9 @@ type ListSupportedResourceTypesInput struct {
 	// response. If you do not include this parameter, it defaults to a value
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
-	// (is not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. An API operation can
-	// return fewer results than the maximum even when there are more results
+	// (is not null). Include that value as the NextToken request parameter in the
+	// next call to the operation to get the next part of the results. An API operation
+	// can return fewer results than the maximum even when there are more results
 	// available. You should check NextToken after every operation to ensure that you
 	// receive all of the results.
 	MaxResults *int32
@@ -56,7 +56,7 @@ type ListSupportedResourceTypesOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null.
+	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
 	// The list of resource types supported by Resource Explorer.
@@ -143,9 +143,9 @@ type ListSupportedResourceTypesPaginatorOptions struct {
 	// response. If you do not include this parameter, it defaults to a value
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
-	// (is not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. An API operation can
-	// return fewer results than the maximum even when there are more results
+	// (is not null). Include that value as the NextToken request parameter in the
+	// next call to the operation to get the next part of the results. An API operation
+	// can return fewer results than the maximum even when there are more results
 	// available. You should check NextToken after every operation to ensure that you
 	// receive all of the results.
 	Limit int32

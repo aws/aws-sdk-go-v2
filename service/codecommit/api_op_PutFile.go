@@ -90,8 +90,8 @@ type PutFileOutput struct {
 	// This member is required.
 	CommitId *string
 
-	// The full SHA-1 pointer of the tree information for the commit that contains this
-	// file change.
+	// The full SHA-1 pointer of the tree information for the commit that contains
+	// this file change.
 	//
 	// This member is required.
 	TreeId *string

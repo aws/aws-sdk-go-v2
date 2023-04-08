@@ -140,9 +140,10 @@ func (e *InvalidInputException) ErrorCode() string {
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception raised when there are problems accessing Application Discovery Service
-// (Application Discovery Service); most likely due to a misconfigured policy or
-// the migrationhub-discovery role is missing or not configured correctly.
+// Exception raised when there are problems accessing Application Discovery
+// Service (Application Discovery Service); most likely due to a misconfigured
+// policy or the migrationhub-discovery role is missing or not configured
+// correctly.
 type PolicyErrorException struct {
 	Message *string
 

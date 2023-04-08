@@ -52,8 +52,8 @@ type ListExperimentsInput struct {
 
 type ListExperimentsOutput struct {
 
-	// An array of structures that contain the configuration details of the experiments
-	// in the specified project.
+	// An array of structures that contain the configuration details of the
+	// experiments in the specified project.
 	Experiments []types.Experiment
 
 	// The token to use in a subsequent ListExperiments operation to return the next

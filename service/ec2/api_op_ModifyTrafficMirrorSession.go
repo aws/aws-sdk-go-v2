@@ -39,8 +39,8 @@ type ModifyTrafficMirrorSessionInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The number of bytes in each packet to mirror. These are bytes after the VXLAN
@@ -50,8 +50,8 @@ type ModifyTrafficMirrorSessionInput struct {
 	// want to mirror the entire packet.
 	PacketLength *int32
 
-	// The properties that you want to remove from the Traffic Mirror session. When you
-	// remove a property from a Traffic Mirror session, the property is set to the
+	// The properties that you want to remove from the Traffic Mirror session. When
+	// you remove a property from a Traffic Mirror session, the property is set to the
 	// default.
 	RemoveFields []types.TrafficMirrorSessionField
 

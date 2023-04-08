@@ -14,8 +14,8 @@ import (
 // Restarts a specific database in Amazon Lightsail. The reboot relational database
 // operation supports tag-based access control via resource tags applied to the
 // resource identified by relationalDatabaseName. For more information, see the
-// Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) RebootRelationalDatabase(ctx context.Context, params *RebootRelationalDatabaseInput, optFns ...func(*Options)) (*RebootRelationalDatabaseOutput, error) {
 	if params == nil {
 		params = &RebootRelationalDatabaseInput{}

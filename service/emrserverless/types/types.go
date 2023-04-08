@@ -349,7 +349,7 @@ type JobRun struct {
 	Tags map[string]string
 
 	// The job run total execution duration in seconds. This field is only available
-	// for job runs in a COMPLETED, FAILED, or CANCELLED state.
+	// for job runs in a COMPLETED , FAILED , or CANCELLED state.
 	TotalExecutionDurationSeconds *int32
 
 	// The aggregate vCPU, memory, and storage resources used from the time job start

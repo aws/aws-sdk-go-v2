@@ -22,17 +22,14 @@ import (
 // parameter set to the value of NextToken from the last response. Use this
 // operation in an iterative process to retrieve a list of your snapshots.
 // DescribeSnapshots is called first without a NextToken value. Then the operation
-// continues to be called with the NextToken parameter set to the value of the last
-// NextToken value until a response has no NextToken value. When using this
+// continues to be called with the NextToken parameter set to the value of the
+// last NextToken value until a response has no NextToken value. When using this
 // operation, keep the following in mind:
-//
-// * The operation might return fewer than
-// the MaxResults value of snapshot descriptions while still including a NextToken
-// value.
-//
-// * The order of snapshots returned in the response of one
-// DescribeSnapshots call and the order of backups returned across the responses of
-// a multi-call iteration is unspecified.
+//   - The operation might return fewer than the MaxResults value of snapshot
+//     descriptions while still including a NextToken value.
+//   - The order of snapshots returned in the response of one DescribeSnapshots
+//     call and the order of backups returned across the responses of a multi-call
+//     iteration is unspecified.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
 	if params == nil {
 		params = &DescribeSnapshotsInput{}
@@ -50,11 +47,11 @@ func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshot
 
 type DescribeSnapshotsInput struct {
 
-	// The filters structure. The supported names are file-system-id or volume-id.
+	// The filters structure. The supported names are file-system-id or volume-id .
 	Filters []types.SnapshotFilter
 
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	MaxResults *int32
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).
@@ -155,8 +152,8 @@ var _ DescribeSnapshotsAPIClient = (*Client)(nil)
 
 // DescribeSnapshotsPaginatorOptions is the paginator options for DescribeSnapshots
 type DescribeSnapshotsPaginatorOptions struct {
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

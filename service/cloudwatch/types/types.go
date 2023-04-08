@@ -88,7 +88,7 @@ type AnomalyDetectorConfiguration struct {
 	// automatically account for daylight savings time changes if the metric is
 	// sensitive to such time changes. To specify a time zone, use the name of the time
 	// zone as specified in the standard tz database. For more information, see tz
-	// database (https://en.wikipedia.org/wiki/Tz_database).
+	// database (https://en.wikipedia.org/wiki/Tz_database) .
 	MetricTimezone *string
 
 	noSmithyDocumentSerde
@@ -101,15 +101,15 @@ type CompositeAlarm struct {
 	// state.
 	ActionsEnabled *bool
 
-	// When the value is ALARM, it means that the actions are suppressed because the
-	// suppressor alarm is in ALARM When the value is WaitPeriod, it means that the
+	// When the value is ALARM , it means that the actions are suppressed because the
+	// suppressor alarm is in ALARM When the value is WaitPeriod , it means that the
 	// actions are suppressed because the composite alarm is waiting for the suppressor
 	// alarm to go into into the ALARM state. The maximum waiting time is as specified
-	// in ActionsSuppressorWaitPeriod. After this time, the composite alarm performs
-	// its actions. When the value is ExtensionPeriod, it means that the actions are
+	// in ActionsSuppressorWaitPeriod . After this time, the composite alarm performs
+	// its actions. When the value is ExtensionPeriod , it means that the actions are
 	// suppressed because the composite alarm is waiting after the suppressor alarm
 	// went out of the ALARM state. The maximum waiting time is as specified in
-	// ActionsSuppressorExtensionPeriod. After this time, the composite alarm performs
+	// ActionsSuppressorExtensionPeriod . After this time, the composite alarm performs
 	// its actions.
 	ActionsSuppressedBy ActionsSuppressedBy
 
@@ -122,9 +122,9 @@ type CompositeAlarm struct {
 	ActionsSuppressor *string
 
 	// The maximum time in seconds that the composite alarm waits after suppressor
-	// alarm goes out of the ALARM state. After this time, the composite alarm performs
-	// its actions. ExtensionPeriod is required only when ActionsSuppressor is
-	// specified.
+	// alarm goes out of the ALARM state. After this time, the composite alarm
+	// performs its actions. ExtensionPeriod is required only when ActionsSuppressor
+	// is specified.
 	ActionsSuppressorExtensionPeriod *int32
 
 	// The maximum time in seconds that the composite alarm waits for the suppressor
@@ -166,7 +166,7 @@ type CompositeAlarm struct {
 	// An explanation for the alarm state, in JSON format.
 	StateReasonData *string
 
-	// The timestamp of the last change to the alarm's StateValue.
+	// The timestamp of the last change to the alarm's StateValue .
 	StateTransitionedTimestamp *time.Time
 
 	// Tracks the timestamp of any state update, even if StateValue doesn't change.
@@ -187,8 +187,8 @@ type DashboardEntry struct {
 	// The name of the dashboard.
 	DashboardName *string
 
-	// The time stamp of when the dashboard was last modified, either by an API call or
-	// through the console. This number is expressed as the number of milliseconds
+	// The time stamp of when the dashboard was last modified, either by an API call
+	// or through the console. This number is expressed as the number of milliseconds
 	// since Jan 1, 1970 00:00:00 UTC.
 	LastModified *time.Time
 
@@ -225,8 +225,8 @@ type Datapoint struct {
 	// The minimum metric value for the data point.
 	Minimum *float64
 
-	// The number of metric values that contributed to the aggregate value of this data
-	// point.
+	// The number of metric values that contributed to the aggregate value of this
+	// data point.
 	SampleCount *float64
 
 	// The sum of the metric values for the data point.
@@ -251,7 +251,7 @@ type Dimension struct {
 
 	// The name of the dimension. Dimension names must contain only ASCII characters,
 	// must include at least one non-whitespace character, and cannot start with a
-	// colon (:). ASCII control characters are not supported as part of dimension
+	// colon ( : ). ASCII control characters are not supported as part of dimension
 	// names.
 	//
 	// This member is required.
@@ -281,18 +281,17 @@ type DimensionFilter struct {
 	noSmithyDocumentSerde
 }
 
-// This structure contains the definition for a Contributor Insights rule. For more
-// information about this rule, see Using Constributor Insights to analyze
-// high-cardinality data
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html)
+// This structure contains the definition for a Contributor Insights rule. For
+// more information about this rule, see Using Constributor Insights to analyze
+// high-cardinality data (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html)
 // in the Amazon CloudWatch User Guide.
 type InsightRule struct {
 
 	// The definition of the rule, as a JSON object. The definition contains the
 	// keywords used to define contributors, the value to aggregate on if this rule
 	// returns a sum instead of a count, and the filters. For details on the valid
-	// syntax, see Contributor Insights Rule Syntax
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html).
+	// syntax, see Contributor Insights Rule Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html)
+	// .
 	//
 	// This member is required.
 	Definition *string
@@ -303,8 +302,8 @@ type InsightRule struct {
 	Name *string
 
 	// For rules that you create, this is always {"Name": "CloudWatchLogRule",
-	// "Version": 1}. For managed rules, this is {"Name": "ServiceLogRule", "Version":
-	// 1}
+	// "Version": 1} . For managed rules, this is {"Name": "ServiceLogRule",
+	// "Version": 1}
 	//
 	// This member is required.
 	Schema *string
@@ -320,12 +319,12 @@ type InsightRule struct {
 	noSmithyDocumentSerde
 }
 
-// One of the unique contributors found by a Contributor Insights rule. If the rule
-// contains multiple keys, then a unique contributor is a unique combination of
-// values from all the keys in the rule. If the rule contains a single key, then
+// One of the unique contributors found by a Contributor Insights rule. If the
+// rule contains multiple keys, then a unique contributor is a unique combination
+// of values from all the keys in the rule. If the rule contains a single key, then
 // each unique contributor is each unique value for this key. For more information,
-// see GetInsightRuleReport
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html).
+// see GetInsightRuleReport (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html)
+// .
 type InsightRuleContributor struct {
 
 	// An approximation of the aggregate value that comes from this contributor.
@@ -339,8 +338,8 @@ type InsightRuleContributor struct {
 	// This member is required.
 	Datapoints []InsightRuleContributorDatapoint
 
-	// One of the log entry field keywords that is used to define contributors for this
-	// rule.
+	// One of the log entry field keywords that is used to define contributors for
+	// this rule.
 	//
 	// This member is required.
 	Keys []string
@@ -349,10 +348,9 @@ type InsightRuleContributor struct {
 }
 
 // One data point related to one contributor. For more information, see
-// GetInsightRuleReport
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html)
-// and InsightRuleContributor
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_InsightRuleContributor.html).
+// GetInsightRuleReport (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html)
+// and InsightRuleContributor (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_InsightRuleContributor.html)
+// .
 type InsightRuleContributorDatapoint struct {
 
 	// The approximate value that this contributor added during this timestamp.
@@ -369,8 +367,8 @@ type InsightRuleContributorDatapoint struct {
 }
 
 // One data point from the metric time series returned in a Contributor Insights
-// rule report. For more information, see GetInsightRuleReport
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html).
+// rule report. For more information, see GetInsightRuleReport (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html)
+// .
 type InsightRuleMetricDatapoint struct {
 
 	// The timestamp of the data point.
@@ -409,8 +407,8 @@ type InsightRuleMetricDatapoint struct {
 	// Metrics array in your request.
 	Sum *float64
 
-	// The number of unique contributors who published data during this timestamp. This
-	// statistic is returned only if you included it in the Metrics array in your
+	// The number of unique contributors who published data during this timestamp.
+	// This statistic is returned only if you included it in the Metrics array in your
 	// request.
 	UniqueContributors *float64
 
@@ -421,8 +419,8 @@ type InsightRuleMetricDatapoint struct {
 // your time zone so that the labels that are associated with returned metrics
 // display the correct time for your time zone. The Timezone value affects a label
 // only if you have a time-based dynamic expression in the label. For more
-// information about dynamic expressions in labels, see Using Dynamic Labels
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html).
+// information about dynamic expressions in labels, see Using Dynamic Labels (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html)
+// .
 type LabelOptions struct {
 
 	// The time zone to use for metric data return in this operation. The format is +
@@ -439,14 +437,14 @@ type LabelOptions struct {
 // Insights rule for an Amazon Web Services resource.
 type ManagedRule struct {
 
-	// The ARN of an Amazon Web Services resource that has managed Contributor Insights
-	// rules.
+	// The ARN of an Amazon Web Services resource that has managed Contributor
+	// Insights rules.
 	//
 	// This member is required.
 	ResourceARN *string
 
 	// The template name for the managed Contributor Insights rule, as returned by
-	// ListManagedInsightRules.
+	// ListManagedInsightRules .
 	//
 	// This member is required.
 	TemplateName *string
@@ -459,27 +457,27 @@ type ManagedRule struct {
 	// cloudwatch:TagResource permission in addition to the cloudwatch:PutInsightRule
 	// permission. If you are using this operation to update an existing Contributor
 	// Insights rule, any tags that you specify in this parameter are ignored. To
-	// change the tags of an existing rule, use TagResource.
+	// change the tags of an existing rule, use TagResource .
 	Tags []Tag
 
 	noSmithyDocumentSerde
 }
 
 // Contains information about managed Contributor Insights rules, as returned by
-// ListManagedInsightRules.
+// ListManagedInsightRules .
 type ManagedRuleDescription struct {
 
 	// If a managed rule is enabled, this is the ARN for the related Amazon Web
 	// Services resource.
 	ResourceARN *string
 
-	// Describes the state of a managed rule. If present, it contains information about
-	// the Contributor Insights rule that contains information about the related Amazon
-	// Web Services resource.
+	// Describes the state of a managed rule. If present, it contains information
+	// about the Contributor Insights rule that contains information about the related
+	// Amazon Web Services resource.
 	RuleState *ManagedRuleState
 
 	// The template name for the managed rule. Used to enable managed rules using
-	// PutManagedInsightRules.
+	// PutManagedInsightRules .
 	TemplateName *string
 
 	noSmithyDocumentSerde
@@ -502,9 +500,9 @@ type ManagedRuleState struct {
 	noSmithyDocumentSerde
 }
 
-// A message returned by the GetMetricDataAPI, including a code and a description.
+// A message returned by the GetMetricData API, including a code and a description.
 // If a cross-Region GetMetricData operation fails with a code of Forbidden and a
-// value of Authentication too complex to retrieve cross region data, you can
+// value of Authentication too complex to retrieve cross region data , you can
 // correct the problem by running the GetMetricData operation in the same Region
 // where the metric data is.
 type MessageData struct {
@@ -566,7 +564,7 @@ type MetricAlarm struct {
 	// The dimensions for the metric associated with the alarm.
 	Dimensions []Dimension
 
-	// Used only for alarms based on percentiles. If ignore, the alarm state does not
+	// Used only for alarms based on percentiles. If ignore , the alarm state does not
 	// change during periods with too few data points to be statistically significant.
 	// If evaluate or this parameter is not used, the alarm is always evaluated and
 	// possibly changes state no matter how many data points are available.
@@ -575,11 +573,11 @@ type MetricAlarm struct {
 	// The number of periods over which data is compared to the specified threshold.
 	EvaluationPeriods *int32
 
-	// If the value of this field is PARTIAL_DATA, the alarm is being evaluated based
+	// If the value of this field is PARTIAL_DATA , the alarm is being evaluated based
 	// on only partial data. This happens if the query used for the alarm returns more
-	// than 10,000 metrics. For more information, see Create alarms on Metrics Insights
-	// queries
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html).
+	// than 10,000 metrics. For more information, see Create alarms on Metrics
+	// Insights queries (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html)
+	// .
 	EvaluationState EvaluationState
 
 	// The percentile statistic for the metric associated with the alarm. Specify a
@@ -591,8 +589,8 @@ type MetricAlarm struct {
 	// (ARN).
 	InsufficientDataActions []string
 
-	// The name of the metric associated with the alarm, if this is an alarm based on a
-	// single metric.
+	// The name of the metric associated with the alarm, if this is an alarm based on
+	// a single metric.
 	MetricName *string
 
 	// An array of MetricDataQuery structures, used in an alarm based on a metric math
@@ -628,7 +626,7 @@ type MetricAlarm struct {
 	StateValue StateValue
 
 	// The statistic for the metric associated with the alarm, other than percentile.
-	// For percentile statistics, use ExtendedStatistic.
+	// For percentile statistics, use ExtendedStatistic .
 	Statistic Statistic
 
 	// The value to compare with the specified statistic.
@@ -639,10 +637,9 @@ type MetricAlarm struct {
 	ThresholdMetricId *string
 
 	// Sets how this alarm is to handle missing data points. The valid values are
-	// breaching, notBreaching, ignore, and missing. For more information, see
-	// Configuring how CloudWatch alarms treat missing data
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data).
-	// If this parameter is omitted, the default behavior of missing is used.
+	// breaching , notBreaching , ignore , and missing . For more information, see
+	// Configuring how CloudWatch alarms treat missing data (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data)
+	// . If this parameter is omitted, the default behavior of missing is used.
 	TreatMissingData *string
 
 	// The unit of the metric associated with the alarm.
@@ -651,23 +648,22 @@ type MetricAlarm struct {
 	noSmithyDocumentSerde
 }
 
-// This structure is used in both GetMetricData and PutMetricAlarm. The supported
+// This structure is used in both GetMetricData and PutMetricAlarm . The supported
 // use of this structure is different for those two operations. When used in
-// GetMetricData, it indicates the metric data to return, and whether this call is
+// GetMetricData , it indicates the metric data to return, and whether this call is
 // just retrieving a batch set of data for one metric, or is performing a Metrics
 // Insights query or a math expression. A single GetMetricData call can include up
-// to 500 MetricDataQuery structures. When used in PutMetricAlarm, it enables you
+// to 500 MetricDataQuery structures. When used in PutMetricAlarm , it enables you
 // to create an alarm based on a metric math expression. Each MetricDataQuery in
 // the array specifies either a metric to retrieve, or a math expression to be
 // performed on retrieved metrics. A single PutMetricAlarm call can include up to
 // 20 MetricDataQuery structures in the array. The 20 structures can include as
 // many as 10 structures that contain a MetricStat parameter to retrieve a metric,
 // and as many as 10 structures that contain the Expression parameter to perform a
-// math expression. Of those Expression structures, one must have true as the value
-// for ReturnData. The result of this expression is the value the alarm watches.
-// Any expression used in a PutMetricAlarm operation must return a single time
-// series. For more information, see Metric Math Syntax and Functions
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
+// math expression. Of those Expression structures, one must have true as the
+// value for ReturnData . The result of this expression is the value the alarm
+// watches. Any expression used in a PutMetricAlarm operation must return a single
+// time series. For more information, see Metric Math Syntax and Functions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
 // in the Amazon CloudWatch User Guide. Some of the parameters of this structure
 // also have different uses whether you are using this structure in a GetMetricData
 // operation or a PutMetricAlarm operation. These differences are explained in the
@@ -675,10 +671,11 @@ type MetricAlarm struct {
 type MetricDataQuery struct {
 
 	// A short name used to tie this object to the results in the response. This name
-	// must be unique within a single call to GetMetricData. If you are performing math
-	// expressions on this set of data, this name represents that data and can serve as
-	// a variable in the mathematical expression. The valid characters are letters,
-	// numbers, and underscore. The first character must be a lowercase letter.
+	// must be unique within a single call to GetMetricData . If you are performing
+	// math expressions on this set of data, this name represents that data and can
+	// serve as a variable in the mathematical expression. The valid characters are
+	// letters, numbers, and underscore. The first character must be a lowercase
+	// letter.
 	//
 	// This member is required.
 	Id *string
@@ -692,13 +689,11 @@ type MetricDataQuery struct {
 
 	// This field can contain either a Metrics Insights query, or a metric math
 	// expression to be performed on the returned data. For more information about
-	// Metrics Insights queries, see Metrics Insights query components and syntax
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-metrics-insights-querylanguage)
+	// Metrics Insights queries, see Metrics Insights query components and syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-metrics-insights-querylanguage)
 	// in the Amazon CloudWatch User Guide. A math expression can use the Id of the
 	// other metrics or queries to refer to those metrics, and can also use the Id of
 	// other expressions to use the result of those expressions. For more information
-	// about metric math expressions, see Metric Math Syntax and Functions
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
+	// about metric math expressions, see Metric Math Syntax and Functions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
 	// in the Amazon CloudWatch User Guide. Within each MetricDataQuery object, you
 	// must specify either Expression or MetricStat but not both.
 	Expression *string
@@ -708,8 +703,8 @@ type MetricDataQuery struct {
 	// metric or expression is shown in a CloudWatch dashboard widget, the label is
 	// shown. If Label is omitted, CloudWatch generates a default. You can put dynamic
 	// expressions into a label, so that it is more descriptive. For more information,
-	// see Using Dynamic Labels
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html).
+	// see Using Dynamic Labels (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html)
+	// .
 	Label *string
 
 	// The metric to be returned, along with statistics, period, and units. Use this
@@ -723,16 +718,16 @@ type MetricDataQuery struct {
 	// be a multiple of 60. For high-resolution metrics that are collected at intervals
 	// of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of
 	// 60. High-resolution metrics are those metrics stored by a PutMetricData
-	// operation that includes a StorageResolution of 1 second.
+	// operation that includes a StorageResolution of 1 second .
 	Period *int32
 
-	// When used in GetMetricData, this option indicates whether to return the
+	// When used in GetMetricData , this option indicates whether to return the
 	// timestamps and raw data values of this metric. If you are performing this call
 	// just to do math expressions and do not also need the raw data returned, you can
-	// specify false. If you omit this, the default of true is used. When used in
-	// PutMetricAlarm, specify true for the one expression result to use as the alarm.
-	// For all other metrics and expressions in the same PutMetricAlarm operation,
-	// specify ReturnData as False.
+	// specify false . If you omit this, the default of true is used. When used in
+	// PutMetricAlarm , specify true for the one expression result to use as the
+	// alarm. For all other metrics and expressions in the same PutMetricAlarm
+	// operation, specify ReturnData as False.
 	ReturnData *bool
 
 	noSmithyDocumentSerde
@@ -754,10 +749,10 @@ type MetricDataResult struct {
 
 	// The status of the returned data. Complete indicates that all data points in the
 	// requested time range were returned. PartialData means that an incomplete set of
-	// data points were returned. You can use the NextToken value that was returned and
-	// repeat your request to get more data points. NextToken is not returned if you
-	// are performing a math expression. InternalError indicates that an error
-	// occurred. Retry your request using NextToken, if present.
+	// data points were returned. You can use the NextToken value that was returned
+	// and repeat your request to get more data points. NextToken is not returned if
+	// you are performing a math expression. InternalError indicates that an error
+	// occurred. Retry your request using NextToken , if present.
 	StatusCode StatusCode
 
 	// The timestamps for the data points, formatted in Unix timestamp format. The
@@ -765,16 +760,16 @@ type MetricDataResult struct {
 	// Timestamps[x] is Values[x].
 	Timestamps []time.Time
 
-	// The data points for the metric corresponding to Timestamps. The number of values
-	// always matches the number of timestamps and the timestamp for Values[x] is
-	// Timestamps[x].
+	// The data points for the metric corresponding to Timestamps . The number of
+	// values always matches the number of timestamps and the timestamp for Values[x]
+	// is Timestamps[x].
 	Values []float64
 
 	noSmithyDocumentSerde
 }
 
-// Encapsulates the information sent to either create a metric or add new values to
-// be aggregated into an existing metric.
+// Encapsulates the information sent to either create a metric or add new values
+// to be aggregated into an existing metric.
 type MetricDatum struct {
 
 	// The name of the metric.
@@ -785,8 +780,8 @@ type MetricDatum struct {
 	// Array of numbers that is used along with the Values array. Each number in the
 	// Count array is the number of times the corresponding value in the Values array
 	// occurred during the period. If you omit the Counts array, the default of 1 is
-	// used as the value for each count. If you include a Counts array, it must include
-	// the same amount of values as the Values array.
+	// used as the value for each count. If you include a Counts array, it must
+	// include the same amount of values as the Values array.
 	Counts []float64
 
 	// The dimensions associated with the metric.
@@ -800,8 +795,7 @@ type MetricDatum struct {
 	// resolution down to one second. Setting this to 60 specifies this metric as a
 	// regular-resolution metric, which CloudWatch stores at 1-minute resolution.
 	// Currently, high resolution is available only for custom metrics. For more
-	// information about high-resolution metrics, see High-Resolution Metrics
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics)
+	// information about high-resolution metrics, see High-Resolution Metrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics)
 	// in the Amazon CloudWatch User Guide. This field is optional, if you do not
 	// specify it the default of 60 is used.
 	StorageResolution *int32
@@ -815,19 +809,19 @@ type MetricDatum struct {
 	// the metric.
 	Unit StandardUnit
 
-	// The value for the metric. Although the parameter accepts numbers of type Double,
-	// CloudWatch rejects values that are either too small or too large. Values must be
-	// in the range of -2^360 to 2^360. In addition, special values (for example, NaN,
-	// +Infinity, -Infinity) are not supported.
+	// The value for the metric. Although the parameter accepts numbers of type
+	// Double, CloudWatch rejects values that are either too small or too large. Values
+	// must be in the range of -2^360 to 2^360. In addition, special values (for
+	// example, NaN, +Infinity, -Infinity) are not supported.
 	Value *float64
 
 	// Array of numbers representing the values for the metric during the period. Each
 	// unique value is listed just once in this array, and the corresponding number in
 	// the Counts array specifies the number of times that value occurred during the
 	// period. You can include up to 150 unique values in each PutMetricData action
-	// that specifies a Values array. Although the Values array accepts numbers of type
-	// Double, CloudWatch rejects values that are either too small or too large. Values
-	// must be in the range of -2^360 to 2^360. In addition, special values (for
+	// that specifies a Values array. Although the Values array accepts numbers of
+	// type Double , CloudWatch rejects values that are either too small or too large.
+	// Values must be in the range of -2^360 to 2^360. In addition, special values (for
 	// example, NaN, +Infinity, -Infinity) are not supported.
 	Values []float64
 
@@ -844,8 +838,9 @@ type MetricMathAnomalyDetector struct {
 	// MetricDataQueries gets a metric or performs a math expression. One item in
 	// MetricDataQueries is the expression that provides the time series that the
 	// anomaly detector uses as input. Designate the expression by setting ReturnData
-	// to true for this object in the array. For all other expressions and metrics, set
-	// ReturnData to false. The designated expression must return a single time series.
+	// to true for this object in the array. For all other expressions and metrics,
+	// set ReturnData to false . The designated expression must return a single time
+	// series.
 	MetricDataQueries []MetricDataQuery
 
 	noSmithyDocumentSerde
@@ -868,16 +863,12 @@ type MetricStat struct {
 	// that includes a StorageResolution of 1 second. If the StartTime parameter
 	// specifies a time stamp that is greater than 3 hours ago, you must specify the
 	// period as follows or no data points in that time range is returned:
-	//
-	// * Start
-	// time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1
-	// minute).
-	//
-	// * Start time between 15 and 63 days ago - Use a multiple of 300
-	// seconds (5 minutes).
-	//
-	// * Start time greater than 63 days ago - Use a multiple of
-	// 3600 seconds (1 hour).
+	//   - Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds
+	//   (1 minute).
+	//   - Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5
+	//   minutes).
+	//   - Start time greater than 63 days ago - Use a multiple of 3600 seconds (1
+	//   hour).
 	//
 	// This member is required.
 	Period *int32
@@ -920,10 +911,10 @@ type MetricStreamEntry struct {
 	Name *string
 
 	// The output format of this metric stream. Valid values are json and
-	// opentelemetry0.7.
+	// opentelemetry0.7 .
 	OutputFormat MetricStreamOutputFormat
 
-	// The current state of this stream. Valid values are running and stopped.
+	// The current state of this stream. Valid values are running and stopped .
 	State *string
 
 	noSmithyDocumentSerde
@@ -941,22 +932,22 @@ type MetricStreamFilter struct {
 	noSmithyDocumentSerde
 }
 
-// By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT
+// By default, a metric stream always sends the MAX , MIN , SUM , and SAMPLECOUNT
 // statistics for each metric that is streamed. This structure contains information
 // for one metric that includes additional statistics in the stream. For more
-// information about statistics, see CloudWatch, listed in  CloudWatch statistics
-// definitions
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
+// information about statistics, see CloudWatch, listed in CloudWatch statistics
+// definitions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html)
+// .
 type MetricStreamStatisticsConfiguration struct {
 
-	// The list of additional statistics that are to be streamed for the metrics listed
-	// in the IncludeMetrics array in this structure. This list can include as many as
-	// 20 statistics. If the OutputFormat for the stream is opentelemetry0.7, the only
-	// valid values are p??  percentile statistics such as p90, p99 and so on. If the
-	// OutputFormat for the stream is json, the valid values include the abbreviations
-	// for all of the statistics listed in  CloudWatch statistics definitions
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
-	// For example, this includes tm98, wm90, PR(:300), and so on.
+	// The list of additional statistics that are to be streamed for the metrics
+	// listed in the IncludeMetrics array in this structure. This list can include as
+	// many as 20 statistics. If the OutputFormat for the stream is opentelemetry0.7 ,
+	// the only valid values are p??  percentile statistics such as p90 , p99 and so
+	// on. If the OutputFormat for the stream is json , the valid values include the
+	// abbreviations for all of the statistics listed in CloudWatch statistics
+	// definitions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html)
+	// . For example, this includes tm98, wm90 , PR(:300) , and so on.
 	//
 	// This member is required.
 	AdditionalStatistics []string
@@ -1010,18 +1001,18 @@ type PartialFailure struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies one range of days or times to exclude from use for training an anomaly
-// detection model.
+// Specifies one range of days or times to exclude from use for training an
+// anomaly detection model.
 type Range struct {
 
-	// The end time of the range to exclude. The format is yyyy-MM-dd'T'HH:mm:ss. For
-	// example, 2019-07-01T23:59:59.
+	// The end time of the range to exclude. The format is yyyy-MM-dd'T'HH:mm:ss . For
+	// example, 2019-07-01T23:59:59 .
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// The start time of the range to exclude. The format is yyyy-MM-dd'T'HH:mm:ss. For
-	// example, 2019-07-01T23:59:59.
+	// The start time of the range to exclude. The format is yyyy-MM-dd'T'HH:mm:ss .
+	// For example, 2019-07-01T23:59:59 .
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -1029,8 +1020,8 @@ type Range struct {
 	noSmithyDocumentSerde
 }
 
-// Designates the CloudWatch metric and statistic that provides the time series the
-// anomaly detector uses as input.
+// Designates the CloudWatch metric and statistic that provides the time series
+// the anomaly detector uses as input.
 type SingleMetricAnomalyDetector struct {
 
 	// The metric dimensions to create the anomaly detection model for.

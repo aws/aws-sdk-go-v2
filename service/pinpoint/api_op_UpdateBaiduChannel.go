@@ -36,8 +36,8 @@ type UpdateBaiduChannelInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for an
-	// application.
+	// Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for
+	// an application.
 	//
 	// This member is required.
 	BaiduChannelRequest *types.BaiduChannelRequest

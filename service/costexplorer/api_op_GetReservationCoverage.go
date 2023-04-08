@@ -18,35 +18,20 @@ import (
 // associated member accounts. This supports dimensions, Cost Categories, and
 // nested expressions. For any time period, you can filter data about reservation
 // usage by the following dimensions:
+//   - AZ
+//   - CACHE_ENGINE
+//   - DATABASE_ENGINE
+//   - DEPLOYMENT_OPTION
+//   - INSTANCE_TYPE
+//   - LINKED_ACCOUNT
+//   - OPERATING_SYSTEM
+//   - PLATFORM
+//   - REGION
+//   - SERVICE
+//   - TAG
+//   - TENANCY
 //
-// * AZ
-//
-// * CACHE_ENGINE
-//
-// * DATABASE_ENGINE
-//
-// *
-// DEPLOYMENT_OPTION
-//
-// * INSTANCE_TYPE
-//
-// * LINKED_ACCOUNT
-//
-// * OPERATING_SYSTEM
-//
-// *
-// PLATFORM
-//
-// * REGION
-//
-// * SERVICE
-//
-// * TAG
-//
-// * TENANCY
-//
-// To determine valid values for a
-// dimension, use the GetDimensionValues operation.
+// To determine valid values for a dimension, use the GetDimensionValues operation.
 func (c *Client) GetReservationCoverage(ctx context.Context, params *GetReservationCoverageInput, optFns ...func(*Options)) (*GetReservationCoverageOutput, error) {
 	if params == nil {
 		params = &GetReservationCoverageInput{}
@@ -69,44 +54,28 @@ type GetReservationCoverageInput struct {
 	// The start and end dates of the period that you want to retrieve data about
 	// reservation coverage for. You can retrieve data for a maximum of 13 months: the
 	// last 12 months and the current month. The start date is inclusive, but the end
-	// date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01,
+	// date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01 ,
 	// then the cost and usage data is retrieved from 2017-01-01 up to and including
-	// 2017-04-30 but not including 2017-05-01.
+	// 2017-04-30 but not including 2017-05-01 .
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval
 
 	// Filters utilization data by dimensions. You can filter by the following
 	// dimensions:
-	//
-	// * AZ
-	//
-	// * CACHE_ENGINE
-	//
-	// * DATABASE_ENGINE
-	//
-	// * DEPLOYMENT_OPTION
-	//
-	// *
-	// INSTANCE_TYPE
-	//
-	// * LINKED_ACCOUNT
-	//
-	// * OPERATING_SYSTEM
-	//
-	// * PLATFORM
-	//
-	// * REGION
-	//
-	// *
-	// SERVICE
-	//
-	// * TAG
-	//
-	// * TENANCY
-	//
-	// GetReservationCoverage uses the same Expression
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	//   - AZ
+	//   - CACHE_ENGINE
+	//   - DATABASE_ENGINE
+	//   - DEPLOYMENT_OPTION
+	//   - INSTANCE_TYPE
+	//   - LINKED_ACCOUNT
+	//   - OPERATING_SYSTEM
+	//   - PLATFORM
+	//   - REGION
+	//   - SERVICE
+	//   - TAG
+	//   - TENANCY
+	// GetReservationCoverage uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	// You can nest only one level deep. If there are multiple values for a dimension,
 	// they are OR'd together. If you don't provide a SERVICE filter, Cost Explorer
@@ -114,37 +83,24 @@ type GetReservationCoverageInput struct {
 	Filter *types.Expression
 
 	// The granularity of the Amazon Web Services cost data for the reservation. Valid
-	// values are MONTHLY and DAILY. If GroupBy is set, Granularity can't be set. If
-	// Granularity isn't set, the response object doesn't include Granularity, either
-	// MONTHLY or DAILY. The GetReservationCoverage operation supports only DAILY and
+	// values are MONTHLY and DAILY . If GroupBy is set, Granularity can't be set. If
+	// Granularity isn't set, the response object doesn't include Granularity , either
+	// MONTHLY or DAILY . The GetReservationCoverage operation supports only DAILY and
 	// MONTHLY granularities.
 	Granularity types.Granularity
 
 	// You can group the data by the following attributes:
-	//
-	// * AZ
-	//
-	// * CACHE_ENGINE
-	//
-	// *
-	// DATABASE_ENGINE
-	//
-	// * DEPLOYMENT_OPTION
-	//
-	// * INSTANCE_TYPE
-	//
-	// * INVOICING_ENTITY
-	//
-	// *
-	// LINKED_ACCOUNT
-	//
-	// * OPERATING_SYSTEM
-	//
-	// * PLATFORM
-	//
-	// * REGION
-	//
-	// * TENANCY
+	//   - AZ
+	//   - CACHE_ENGINE
+	//   - DATABASE_ENGINE
+	//   - DEPLOYMENT_OPTION
+	//   - INSTANCE_TYPE
+	//   - INVOICING_ENTITY
+	//   - LINKED_ACCOUNT
+	//   - OPERATING_SYSTEM
+	//   - PLATFORM
+	//   - REGION
+	//   - TENANCY
 	GroupBy []types.GroupDefinition
 
 	// The maximum number of objects that you returned for this request. If more
@@ -154,7 +110,7 @@ type GetReservationCoverageInput struct {
 	MaxResults *int32
 
 	// The measurement that you want your reservation coverage reported in. Valid
-	// values are Hour, Unit, and Cost. You can use multiple values in a request.
+	// values are Hour , Unit , and Cost . You can use multiple values in a request.
 	Metrics []string
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
@@ -162,34 +118,19 @@ type GetReservationCoverageInput struct {
 	// page size.
 	NextPageToken *string
 
-	// The value by which you want to sort the data. The following values are supported
-	// for Key:
-	//
-	// * OnDemandCost
-	//
-	// * CoverageHoursPercentage
-	//
-	// * OnDemandHours
-	//
-	// *
-	// ReservedHours
-	//
-	// * TotalRunningHours
-	//
-	// * CoverageNormalizedUnitsPercentage
-	//
-	// *
-	// OnDemandNormalizedUnits
-	//
-	// * ReservedNormalizedUnits
-	//
-	// *
-	// TotalRunningNormalizedUnits
-	//
-	// * Time
-	//
-	// Supported values for SortOrder are
-	// ASCENDING or DESCENDING.
+	// The value by which you want to sort the data. The following values are
+	// supported for Key :
+	//   - OnDemandCost
+	//   - CoverageHoursPercentage
+	//   - OnDemandHours
+	//   - ReservedHours
+	//   - TotalRunningHours
+	//   - CoverageNormalizedUnitsPercentage
+	//   - OnDemandNormalizedUnits
+	//   - ReservedNormalizedUnits
+	//   - TotalRunningNormalizedUnits
+	//   - Time
+	// Supported values for SortOrder are ASCENDING or DESCENDING .
 	SortBy *types.SortDefinition
 
 	noSmithyDocumentSerde

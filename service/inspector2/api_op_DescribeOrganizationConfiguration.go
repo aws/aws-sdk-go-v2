@@ -37,8 +37,8 @@ type DescribeOrganizationConfigurationOutput struct {
 	// The scan types are automatically enabled for new members of your organization.
 	AutoEnable *types.AutoEnable
 
-	// Represents whether your organization has reached the maximum Amazon Web Services
-	// account limit for Amazon Inspector.
+	// Represents whether your organization has reached the maximum Amazon Web
+	// Services account limit for Amazon Inspector.
 	MaxAccountLimitReached *bool
 
 	// Metadata pertaining to the operation's result.

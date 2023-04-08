@@ -12,8 +12,8 @@ import (
 	"io"
 )
 
-// Creates a new session or modifies an existing session with an Amazon Lex V2 bot.
-// Use this operation to enable your application to set the state of the bot.
+// Creates a new session or modifies an existing session with an Amazon Lex V2
+// bot. Use this operation to enable your application to set the state of the bot.
 func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns ...func(*Options)) (*PutSessionOutput, error) {
 	if params == nil {
 		params = &PutSessionInput{}
@@ -51,28 +51,27 @@ type PutSessionInput struct {
 	// This member is required.
 	SessionId *string
 
-	// Sets the state of the session with the user. You can use this to set the current
-	// intent, attributes, context, and dialog action. Use the dialog action to
+	// Sets the state of the session with the user. You can use this to set the
+	// current intent, attributes, context, and dialog action. Use the dialog action to
 	// determine the next step that Amazon Lex V2 should use in the conversation with
 	// the user.
 	//
 	// This member is required.
 	SessionState *types.SessionState
 
-	// A list of messages to send to the user. Messages are sent in the order that they
-	// are defined in the list.
+	// A list of messages to send to the user. Messages are sent in the order that
+	// they are defined in the list.
 	Messages []types.Message
 
 	// Request-specific information passed between Amazon Lex V2 and the client
 	// application. The namespace x-amz-lex: is reserved for special attributes. Don't
-	// create any request attributes with the prefix x-amz-lex:.
+	// create any request attributes with the prefix x-amz-lex: .
 	RequestAttributes map[string]string
 
 	// The message that Amazon Lex V2 returns in the response can be either text or
 	// speech depending on the value of this parameter.
-	//
-	// * If the value is text/plain;
-	// charset=utf-8, Amazon Lex V2 returns text in the response.
+	//   - If the value is text/plain; charset=utf-8 , Amazon Lex V2 returns text in
+	//   the response.
 	ResponseContentType *string
 
 	noSmithyDocumentSerde

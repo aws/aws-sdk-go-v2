@@ -15,7 +15,7 @@ import (
 // Elastic Transcoder checks the CreatePreset settings to ensure that they meet
 // Elastic Transcoder requirements and to determine whether they comply with H.264
 // standards. If your settings are not valid for Elastic Transcoder, Elastic
-// Transcoder returns an HTTP 400 response (ValidationException) and does not
+// Transcoder returns an HTTP 400 response ( ValidationException ) and does not
 // create the preset. If the settings are valid for Elastic Transcoder but aren't
 // strictly compliant with the H.264 standard, Elastic Transcoder creates the
 // preset and returns a warning message in the response. This helps you determine
@@ -42,8 +42,8 @@ func (c *Client) CreatePreset(ctx context.Context, params *CreatePresetInput, op
 // The CreatePresetRequest structure.
 type CreatePresetInput struct {
 
-	// The container type for the output file. Valid values include flac, flv, fmp4,
-	// gif, mp3, mp4, mpg, mxf, oga, ogg, ts, and webm.
+	// The container type for the output file. Valid values include flac , flv , fmp4 ,
+	// gif , mp3 , mp4 , mpg , mxf , oga , ogg , ts , and webm .
 	//
 	// This member is required.
 	Container *string

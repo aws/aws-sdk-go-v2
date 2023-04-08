@@ -15,8 +15,8 @@ import (
 // for backups, to make copies of a database, and to save data before deleting a
 // database. The create relational database snapshot operation supports tag-based
 // access control via request tags. For more information, see the Amazon Lightsail
-// Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) CreateRelationalDatabaseSnapshot(ctx context.Context, params *CreateRelationalDatabaseSnapshotInput, optFns ...func(*Options)) (*CreateRelationalDatabaseSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateRelationalDatabaseSnapshotInput{}
@@ -40,12 +40,8 @@ type CreateRelationalDatabaseSnapshotInput struct {
 	RelationalDatabaseName *string
 
 	// The name for your new database snapshot. Constraints:
-	//
-	// * Must contain from 2 to
-	// 255 alphanumeric characters, or hyphens.
-	//
-	// * The first and last character must be
-	// a letter or number.
+	//   - Must contain from 2 to 255 alphanumeric characters, or hyphens.
+	//   - The first and last character must be a letter or number.
 	//
 	// This member is required.
 	RelationalDatabaseSnapshotName *string

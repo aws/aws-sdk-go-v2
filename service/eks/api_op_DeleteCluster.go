@@ -19,7 +19,7 @@ import (
 // Cluster (https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html)
 // in the Amazon EKS User Guide. If you have managed node groups or Fargate
 // profiles attached to the cluster, you must delete them first. For more
-// information, see DeleteNodegroup and DeleteFargateProfile.
+// information, see DeleteNodegroup and DeleteFargateProfile .
 func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, optFns ...func(*Options)) (*DeleteClusterOutput, error) {
 	if params == nil {
 		params = &DeleteClusterInput{}

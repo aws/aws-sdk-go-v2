@@ -19,9 +19,8 @@ import (
 // greater than the “transition to cold after days” setting. The “transition to
 // cold after days” setting cannot be changed after a backup has been transitioned
 // to cold. Resource types that are able to be transitioned to cold storage are
-// listed in the "Lifecycle to cold storage" section of the  Feature availability
-// by resource
-// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
+// listed in the "Lifecycle to cold storage" section of the Feature availability
+// by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 // table. Backup ignores this expression for other resource types. This operation
 // does not support continuous backups.
 func (c *Client) UpdateRecoveryPointLifecycle(ctx context.Context, params *UpdateRecoveryPointLifecycleInput, optFns ...func(*Options)) (*UpdateRecoveryPointLifecycleOutput, error) {
@@ -51,7 +50,8 @@ type UpdateRecoveryPointLifecycleInput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for
 	// example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
 	//
 	// This member is required.
 	RecoveryPointArn *string
@@ -71,7 +71,7 @@ type UpdateRecoveryPointLifecycleInput struct {
 type UpdateRecoveryPointLifecycleOutput struct {
 
 	// An ARN that uniquely identifies a backup vault; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
 	BackupVaultArn *string
 
 	// A CalculatedLifecycle object containing DeleteAt and MoveToColdStorageAt
@@ -86,14 +86,14 @@ type UpdateRecoveryPointLifecycleOutput struct {
 	// days” setting. The “transition to cold after days” setting cannot be changed
 	// after a backup has been transitioned to cold. Resource types that are able to be
 	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
-	// section of the  Feature availability by resource
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
+	// section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *types.Lifecycle
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for
 	// example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
 	RecoveryPointArn *string
 
 	// Metadata pertaining to the operation's result.

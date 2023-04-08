@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you run image query on a specific raster data collection to get a list of
-// the satellite imagery matching the selected filters.
+// Allows you run image query on a specific raster data collection to get a list
+// of the satellite imagery matching the selected filters.
 func (c *Client) SearchRasterDataCollection(ctx context.Context, params *SearchRasterDataCollectionInput, optFns ...func(*Options)) (*SearchRasterDataCollectionOutput, error) {
 	if params == nil {
 		params = &SearchRasterDataCollectionInput{}
@@ -36,14 +36,11 @@ type SearchRasterDataCollectionInput struct {
 	// This member is required.
 	Arn *string
 
-	// RasterDataCollectionQuery consisting of AreaOfInterest(AOI)
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html),
-	// PropertyFilters
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html)
-	// and TimeRangeFilterInput
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html)
-	// used in SearchRasterDataCollection
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html).
+	// RasterDataCollectionQuery consisting of AreaOfInterest(AOI) (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html)
+	// , PropertyFilters (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html)
+	// and TimeRangeFilterInput (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html)
+	// used in SearchRasterDataCollection (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html)
+	// .
 	//
 	// This member is required.
 	RasterDataCollectionQuery *types.RasterDataCollectionQueryWithBandFilterInput

@@ -32,7 +32,7 @@ type ListBuiltInSlotTypesInput struct {
 
 	// The identifier of the language and locale of the slot types to list. The string
 	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
 	//
 	// This member is required.
 	LocaleId *string
@@ -43,8 +43,9 @@ type ListBuiltInSlotTypesInput struct {
 	MaxResults *int32
 
 	// If the response from the ListBuiltInSlotTypes operation contains more results
-	// than specified in the maxResults parameter, a token is returned in the response.
-	// Use that token in the nextToken parameter to return the next page of results.
+	// than specified in the maxResults parameter, a token is returned in the
+	// response. Use that token in the nextToken parameter to return the next page of
+	// results.
 	NextToken *string
 
 	// Determines the sort order for the response from the ListBuiltInSlotTypes
@@ -66,10 +67,10 @@ type ListBuiltInSlotTypesOutput struct {
 	// The language and locale of the slot types in the list.
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListBuiltInSlotTypes operation. If the nextToken field is present, you send
-	// the contents as the nextToken parameter of a LIstBuiltInSlotTypes operation
-	// request to get the next page of results.
+	// A token that indicates whether there are more results to return in a response
+	// to the ListBuiltInSlotTypes operation. If the nextToken field is present, you
+	// send the contents as the nextToken parameter of a LIstBuiltInSlotTypes
+	// operation request to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

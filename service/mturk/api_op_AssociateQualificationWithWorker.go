@@ -43,8 +43,8 @@ type AssociateQualificationWithWorkerInput struct {
 	// This member is required.
 	QualificationTypeId *string
 
-	// The ID of the Worker to whom the Qualification is being assigned. Worker IDs are
-	// included with submitted HIT assignments and Qualification requests.
+	// The ID of the Worker to whom the Qualification is being assigned. Worker IDs
+	// are included with submitted HIT assignments and Qualification requests.
 	//
 	// This member is required.
 	WorkerId *string
@@ -52,8 +52,9 @@ type AssociateQualificationWithWorkerInput struct {
 	// The value of the Qualification to assign.
 	IntegerValue *int32
 
-	// Specifies whether to send a notification email message to the Worker saying that
-	// the qualification was assigned to the Worker. Note: this is true by default.
+	// Specifies whether to send a notification email message to the Worker saying
+	// that the qualification was assigned to the Worker. Note: this is true by
+	// default.
 	SendNotification *bool
 
 	noSmithyDocumentSerde

@@ -30,7 +30,7 @@ func (c *Client) UpdatePullRequestTitle(ctx context.Context, params *UpdatePullR
 type UpdatePullRequestTitleInput struct {
 
 	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests.
+	// ListPullRequests .
 	//
 	// This member is required.
 	PullRequestId *string

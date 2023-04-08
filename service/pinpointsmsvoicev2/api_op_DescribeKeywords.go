@@ -37,9 +37,9 @@ func (c *Client) DescribeKeywords(ctx context.Context, params *DescribeKeywordsI
 type DescribeKeywordsInput struct {
 
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
-	// SenderId or SenderIdArn. You can use DescribePhoneNumbers to find the values for
-	// PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get the
-	// values for SenderId and SenderIdArn.
+	// SenderId or SenderIdArn. You can use DescribePhoneNumbers to find the values
+	// for PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get
+	// the values for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string

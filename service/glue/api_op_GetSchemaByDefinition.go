@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a schema by the SchemaDefinition. The schema definition is sent to the
-// Schema Registry, canonicalized, and hashed. If the hash is matched within the
-// scope of the SchemaName or ARN (or the default registry, if none is supplied),
-// that schema’s metadata is returned. Otherwise, a 404 or NotFound error is
-// returned. Schema versions in Deleted statuses will not be included in the
-// results.
+// Retrieves a schema by the SchemaDefinition . The schema definition is sent to
+// the Schema Registry, canonicalized, and hashed. If the hash is matched within
+// the scope of the SchemaName or ARN (or the default registry, if none is
+// supplied), that schema’s metadata is returned. Otherwise, a 404 or NotFound
+// error is returned. Schema versions in Deleted statuses will not be included in
+// the results.
 func (c *Client) GetSchemaByDefinition(ctx context.Context, params *GetSchemaByDefinitionInput, optFns ...func(*Options)) (*GetSchemaByDefinitionOutput, error) {
 	if params == nil {
 		params = &GetSchemaByDefinitionInput{}
@@ -41,12 +41,10 @@ type GetSchemaByDefinitionInput struct {
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
-	//
-	// * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
-	// One of SchemaArn or SchemaName has to be provided.
-	//
-	// * SchemaId$SchemaName: The
-	// name of the schema. One of SchemaArn or SchemaName has to be provided.
+	//   - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. One of
+	//   SchemaArn or SchemaName has to be provided.
+	//   - SchemaId$SchemaName: The name of the schema. One of SchemaArn or SchemaName
+	//   has to be provided.
 	//
 	// This member is required.
 	SchemaId *types.SchemaId
@@ -59,8 +57,8 @@ type GetSchemaByDefinitionOutput struct {
 	// The date and time the schema was created.
 	CreatedTime *string
 
-	// The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are
-	// supported.
+	// The data format of the schema definition. Currently AVRO , JSON and PROTOBUF
+	// are supported.
 	DataFormat types.DataFormat
 
 	// The Amazon Resource Name (ARN) of the schema.

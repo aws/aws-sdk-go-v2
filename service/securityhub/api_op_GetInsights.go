@@ -39,7 +39,7 @@ type GetInsightsInput struct {
 	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the GetInsights
-	// operation, set the value of this parameter to NULL. For subsequent calls to the
+	// operation, set the value of this parameter to NULL . For subsequent calls to the
 	// operation, to continue listing data, set the value of this parameter to the
 	// value returned from the previous response.
 	NextToken *string

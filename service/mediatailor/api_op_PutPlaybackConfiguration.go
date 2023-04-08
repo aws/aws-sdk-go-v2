@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a playback configuration. For information about MediaTailor
-// configurations, see Working with configurations in AWS Elemental MediaTailor
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html).
+// configurations, see Working with configurations in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html)
+// .
 func (c *Client) PutPlaybackConfiguration(ctx context.Context, params *PutPlaybackConfigurationInput, optFns ...func(*Options)) (*PutPlaybackConfigurationOutput, error) {
 	if params == nil {
 		params = &PutPlaybackConfigurationInput{}
@@ -44,13 +44,13 @@ type PutPlaybackConfigurationInput struct {
 	AdDecisionServerUrl *string
 
 	// The configuration for avail suppression, also known as ad suppression. For more
-	// information about ad suppression, see Ad Suppression
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
+	// information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
+	// .
 	AvailSuppression *types.AvailSuppression
 
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
 	// at the start or before the end of an ad break. To learn more about bumpers, see
-	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html).
+	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
 	Bumper *types.Bumper
 
 	// The configuration for using a content delivery network (CDN), like Amazon
@@ -58,8 +58,8 @@ type PutPlaybackConfigurationInput struct {
 	CdnConfiguration *types.CdnConfiguration
 
 	// The player parameters and aliases used as dynamic variables during session
-	// initialization. For more information, see Domain Variables
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html).
+	// initialization. For more information, see Domain Variables (https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html)
+	// .
 	ConfigurationAliases map[string]map[string]string
 
 	// The configuration for DASH content.
@@ -78,8 +78,8 @@ type PutPlaybackConfigurationInput struct {
 	// underlying content is shown. This feature applies to ad replacement in live and
 	// VOD streams, rather than ad insertion, because it relies on an underlying
 	// content stream. For more information about ad break behavior, including ad
-	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
+	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
+	// .
 	PersonalizationThresholdSeconds int32
 
 	// The URL for a high-quality video asset to transcode and use to fill in time
@@ -93,8 +93,8 @@ type PutPlaybackConfigurationInput struct {
 	// The tags to assign to the playback configuration. Tags are key-value pairs that
 	// you can associate with Amazon resources to help with organization, access
 	// control, and cost tracking. For more information, see Tagging AWS Elemental
-	// MediaTailor Resources
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// MediaTailor Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html)
+	// .
 	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom
@@ -120,13 +120,13 @@ type PutPlaybackConfigurationOutput struct {
 	AdDecisionServerUrl *string
 
 	// The configuration for avail suppression, also known as ad suppression. For more
-	// information about ad suppression, see Ad Suppression
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
+	// information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
+	// .
 	AvailSuppression *types.AvailSuppression
 
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
 	// at the start or before the end of an ad break. To learn more about bumpers, see
-	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html).
+	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
 	Bumper *types.Bumper
 
 	// The configuration for using a content delivery network (CDN), like Amazon
@@ -134,8 +134,8 @@ type PutPlaybackConfigurationOutput struct {
 	CdnConfiguration *types.CdnConfiguration
 
 	// The player parameters and aliases used as dynamic variables during session
-	// initialization. For more information, see Domain Variables
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html).
+	// initialization. For more information, see Domain Variables (https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html)
+	// .
 	ConfigurationAliases map[string]map[string]string
 
 	// The configuration for DASH content.
@@ -163,8 +163,8 @@ type PutPlaybackConfigurationOutput struct {
 	// underlying content is shown. This feature applies to ad replacement in live and
 	// VOD streams, rather than ad insertion, because it relies on an underlying
 	// content stream. For more information about ad break behavior, including ad
-	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
+	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
+	// .
 	PersonalizationThresholdSeconds int32
 
 	// The Amazon Resource Name (ARN) associated with the playback configuration.
@@ -188,8 +188,8 @@ type PutPlaybackConfigurationOutput struct {
 	// The tags to assign to the playback configuration. Tags are key-value pairs that
 	// you can associate with Amazon resources to help with organization, access
 	// control, and cost tracking. For more information, see Tagging AWS Elemental
-	// MediaTailor Resources
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// MediaTailor Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html)
+	// .
 	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specify VDM preferences for email that you send using the configuration set. You
-// can execute this operation no more than once per second.
+// Specify VDM preferences for email that you send using the configuration set.
+// You can execute this operation no more than once per second.
 func (c *Client) PutConfigurationSetVdmOptions(ctx context.Context, params *PutConfigurationSetVdmOptionsInput, optFns ...func(*Options)) (*PutConfigurationSetVdmOptionsOutput, error) {
 	if params == nil {
 		params = &PutConfigurationSetVdmOptionsInput{}
@@ -42,8 +42,8 @@ type PutConfigurationSetVdmOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutConfigurationSetVdmOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

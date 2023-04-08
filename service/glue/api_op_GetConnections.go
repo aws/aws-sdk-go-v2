@@ -30,8 +30,8 @@ func (c *Client) GetConnections(ctx context.Context, params *GetConnectionsInput
 
 type GetConnectionsInput struct {
 
-	// The ID of the Data Catalog in which the connections reside. If none is provided,
-	// the Amazon Web Services account ID is used by default.
+	// The ID of the Data Catalog in which the connections reside. If none is
+	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	// A filter that controls which connections are returned.

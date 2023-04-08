@@ -66,9 +66,9 @@ const (
 	RegionStatusFailed RegionStatus = "FAILED"
 )
 
-// Values returns all known values for RegionStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RegionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RegionStatus) Values() []RegionStatus {
 	return []RegionStatus{
 		"ACTIVE",
@@ -119,9 +119,9 @@ const (
 	ResourceTypeResourcePolicy ResourceType = "RESOURCE_POLICY"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"RESPONSE_PLAN",
@@ -156,9 +156,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -208,9 +208,9 @@ const (
 	VariableTypeInvolvedResources VariableType = "INVOLVED_RESOURCES"
 )
 
-// Values returns all known values for VariableType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VariableType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (VariableType) Values() []VariableType {
 	return []VariableType{
 		"INCIDENT_RECORD_ARN",

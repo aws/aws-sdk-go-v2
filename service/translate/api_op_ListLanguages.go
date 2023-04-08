@@ -52,8 +52,8 @@ type ListLanguagesOutput struct {
 	// The list of supported languages.
 	Languages []types.Language
 
-	// If the response does not include all remaining results, use the NextToken in the
-	// next request to fetch the next group of supported languages.
+	// If the response does not include all remaining results, use the NextToken in
+	// the next request to fetch the next group of supported languages.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

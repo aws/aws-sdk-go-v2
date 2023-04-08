@@ -14,9 +14,8 @@ import (
 
 // Returns Lambda function recommendations. Compute Optimizer generates
 // recommendations for functions that meet a specific set of requirements. For more
-// information, see the Supported resources and requirements
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in
-// the Compute Optimizer User Guide.
+// information, see the Supported resources and requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
+// in the Compute Optimizer User Guide.
 func (c *Client) GetLambdaFunctionRecommendations(ctx context.Context, params *GetLambdaFunctionRecommendationsInput, optFns ...func(*Options)) (*GetLambdaFunctionRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetLambdaFunctionRecommendationsInput{}
@@ -47,11 +46,10 @@ type GetLambdaFunctionRecommendationsInput struct {
 	// The Amazon Resource Name (ARN) of the functions for which to return
 	// recommendations. You can specify a qualified or unqualified ARN. If you specify
 	// an unqualified ARN without a function version suffix, Compute Optimizer will
-	// return recommendations for the latest ($LATEST) version of the function. If you
-	// specify a qualified ARN with a version suffix, Compute Optimizer will return
+	// return recommendations for the latest ( $LATEST ) version of the function. If
+	// you specify a qualified ARN with a version suffix, Compute Optimizer will return
 	// recommendations for the specified function version. For more information about
-	// using function versions, see Using versions
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using)
+	// using function versions, see Using versions (https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using)
 	// in the Lambda Developer Guide.
 	FunctionArns []string
 

@@ -55,8 +55,8 @@ type DescribeLocationFsxOpenZfsOutput struct {
 	// The type of protocol that DataSync uses to access your file system.
 	Protocol *types.FsxProtocol
 
-	// The ARNs of the security groups that are configured for the FSx for OpenZFS file
-	// system.
+	// The ARNs of the security groups that are configured for the FSx for OpenZFS
+	// file system.
 	SecurityGroupArns []string
 
 	// Metadata pertaining to the operation's result.

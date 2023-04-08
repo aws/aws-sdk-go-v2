@@ -13,8 +13,8 @@ import (
 )
 
 // Performs a manual search against the specified assistant. To retrieve
-// recommendations for an assistant, use GetRecommendations
-// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html).
+// recommendations for an assistant, use GetRecommendations (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html)
+// .
 func (c *Client) QueryAssistant(ctx context.Context, params *QueryAssistantInput, optFns ...func(*Options)) (*QueryAssistantOutput, error) {
 	if params == nil {
 		params = &QueryAssistantInput{}

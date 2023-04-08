@@ -14,11 +14,10 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Adds an InputProcessingConfiguration
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
+// Analytics API V2 Documentation . Adds an InputProcessingConfiguration (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
 // to an application. An input processor preprocesses records on the input stream
 // before the application's SQL code executes. Currently, the only input processor
-// available is AWS Lambda (https://docs.aws.amazon.com/lambda/).
+// available is AWS Lambda (https://docs.aws.amazon.com/lambda/) .
 func (c *Client) AddApplicationInputProcessingConfiguration(ctx context.Context, params *AddApplicationInputProcessingConfigurationInput, optFns ...func(*Options)) (*AddApplicationInputProcessingConfigurationOutput, error) {
 	if params == nil {
 		params = &AddApplicationInputProcessingConfigurationInput{}
@@ -43,8 +42,7 @@ type AddApplicationInputProcessingConfigurationInput struct {
 	ApplicationName *string
 
 	// Version of the application to which you want to add the input processing
-	// configuration. You can use the DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// configuration. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the current application version. If the version specified is
 	// not the current version, the ConcurrentModificationException is returned.
 	//
@@ -53,15 +51,13 @@ type AddApplicationInputProcessingConfigurationInput struct {
 
 	// The ID of the input configuration to add the input processing configuration to.
 	// You can get a list of the input IDs for an application using the
-	// DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation.
 	//
 	// This member is required.
 	InputId *string
 
-	// The InputProcessingConfiguration
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
+	// The InputProcessingConfiguration (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
 	// to add to the application.
 	//
 	// This member is required.

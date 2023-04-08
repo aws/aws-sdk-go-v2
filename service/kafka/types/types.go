@@ -39,9 +39,9 @@ type BrokerLogs struct {
 // Describes the setup to be used for Apache Kafka broker nodes in the cluster.
 type BrokerNodeGroupInfo struct {
 
-	// The list of subnets to connect to in the client virtual private cloud (VPC). AWS
-	// creates elastic network interfaces inside these subnets. Client applications use
-	// elastic network interfaces to produce and consume data. Client subnets can't
+	// The list of subnets to connect to in the client virtual private cloud (VPC).
+	// AWS creates elastic network interfaces inside these subnets. Client applications
+	// use elastic network interfaces to produce and consume data. Client subnets can't
 	// occupy the Availability Zone with ID use use1-az3.
 	//
 	// This member is required.
@@ -92,8 +92,8 @@ type BrokerNodeInfo struct {
 	// The virtual private cloud (VPC) of the client.
 	ClientVpcIpAddress *string
 
-	// Information about the version of software currently deployed on the Apache Kafka
-	// brokers in the cluster.
+	// Information about the version of software currently deployed on the Apache
+	// Kafka brokers in the cluster.
 	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo
 
 	// Endpoints for accessing the broker.
@@ -205,8 +205,8 @@ type ClusterInfo struct {
 	// The time when the cluster was created.
 	CreationTime *time.Time
 
-	// Information about the version of software currently deployed on the Apache Kafka
-	// brokers in the cluster.
+	// Information about the version of software currently deployed on the Apache
+	// Kafka brokers in the cluster.
 	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo
 
 	// The current version of the MSK cluster.
@@ -218,8 +218,8 @@ type ClusterInfo struct {
 	// Specifies which metrics are gathered for the MSK cluster. This property has the
 	// following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and
 	// PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these
-	// levels of monitoring, see Monitoring
-	// (https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html).
+	// levels of monitoring, see Monitoring (https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html)
+	// .
 	EnhancedMonitoring EnhancedMonitoring
 
 	LoggingInfo *LoggingInfo
@@ -462,8 +462,8 @@ type EncryptionInTransit struct {
 	// The default value is TLS_PLAINTEXT.
 	ClientBroker ClientBroker
 
-	// When set to true, it indicates that data communication among the broker nodes of
-	// the cluster is encrypted. When set to false, the communication happens in
+	// When set to true, it indicates that data communication among the broker nodes
+	// of the cluster is encrypted. When set to false, the communication happens in
 	// plaintext. The default value is true.
 	InCluster bool
 
@@ -713,8 +713,8 @@ type Provisioned struct {
 	// The connection string to use to connect to the Apache ZooKeeper cluster.
 	ZookeeperConnectString *string
 
-	// The connection string to use to connect to the Apache ZooKeeper cluster on a TLS
-	// port.
+	// The connection string to use to connect to the Apache ZooKeeper cluster on a
+	// TLS port.
 	ZookeeperConnectStringTls *string
 
 	noSmithyDocumentSerde
@@ -771,8 +771,8 @@ type ProvisionedThroughput struct {
 	// Provisioned throughput is enabled or not.
 	Enabled bool
 
-	// Throughput value of the EBS volumes for the data drive on each kafka broker node
-	// in MiB per second.
+	// Throughput value of the EBS volumes for the data drive on each kafka broker
+	// node in MiB per second.
 	VolumeThroughput int32
 
 	noSmithyDocumentSerde

@@ -39,15 +39,16 @@ type ListVirtualGatewaysInput struct {
 	// output. When you use this parameter, ListVirtualGateways returns only limit
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another
-	// ListVirtualGateways request with the returned nextToken value. This value can be
-	// between 1 and 100. If you don't use this parameter, ListVirtualGateways returns
-	// up to 100 results and a nextToken value if applicable.
+	// ListVirtualGateways request with the returned nextToken value. This value can
+	// be between 1 and 100. If you don't use this parameter, ListVirtualGateways
+	// returns up to 100 results and a nextToken value if applicable.
 	Limit *int32
 
-	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
-	// ID is not your own, then it's the ID of the account that shared the mesh with
-	// your account. For more information about mesh sharing, see Working with shared
-	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the
+	// account ID is not your own, then it's the ID of the account that shared the mesh
+	// with your account. For more information about mesh sharing, see Working with
+	// shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// .
 	MeshOwner *string
 
 	// The nextToken value returned from a previous paginated ListVirtualGateways
@@ -66,10 +67,10 @@ type ListVirtualGatewaysOutput struct {
 	// This member is required.
 	VirtualGateways []types.VirtualGatewayRef
 
-	// The nextToken value to include in a future ListVirtualGateways request. When the
-	// results of a ListVirtualGateways request exceed limit, you can use this value to
-	// retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// The nextToken value to include in a future ListVirtualGateways request. When
+	// the results of a ListVirtualGateways request exceed limit , you can use this
+	// value to retrieve the next page of results. This value is null when there are
+	// no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,8 +142,8 @@ func (c *Client) addOperationListVirtualGatewaysMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListVirtualGatewaysAPIClient is a client that implements the ListVirtualGateways
-// operation.
+// ListVirtualGatewaysAPIClient is a client that implements the
+// ListVirtualGateways operation.
 type ListVirtualGatewaysAPIClient interface {
 	ListVirtualGateways(context.Context, *ListVirtualGatewaysInput, ...func(*Options)) (*ListVirtualGatewaysOutput, error)
 }
@@ -156,9 +157,9 @@ type ListVirtualGatewaysPaginatorOptions struct {
 	// output. When you use this parameter, ListVirtualGateways returns only limit
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another
-	// ListVirtualGateways request with the returned nextToken value. This value can be
-	// between 1 and 100. If you don't use this parameter, ListVirtualGateways returns
-	// up to 100 results and a nextToken value if applicable.
+	// ListVirtualGateways request with the returned nextToken value. This value can
+	// be between 1 and 100. If you don't use this parameter, ListVirtualGateways
+	// returns up to 100 results and a nextToken value if applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

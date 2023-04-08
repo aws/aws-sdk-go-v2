@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about provisioned DB clusters, and supports pagination. This
-// operation can also return information for Amazon RDS clusters and Amazon DocDB
-// clusters.
+// Returns information about provisioned DB clusters, and supports pagination.
+// This operation can also return information for Amazon RDS clusters and Amazon
+// DocDB clusters.
 func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClustersInput, optFns ...func(*Options)) (*DescribeDBClustersOutput, error) {
 	if params == nil {
 		params = &DescribeDBClustersInput{}
@@ -35,29 +35,22 @@ type DescribeDBClustersInput struct {
 	// The user-supplied DB cluster identifier. If this parameter is specified,
 	// information from only the specific DB cluster is returned. This parameter isn't
 	// case-sensitive. Constraints:
-	//
-	// * If supplied, must match an existing
-	// DBClusterIdentifier.
+	//   - If supplied, must match an existing DBClusterIdentifier.
 	DBClusterIdentifier *string
 
-	// A filter that specifies one or more DB clusters to describe. Supported
-	// filters:
-	//
-	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	// Resource Names (ARNs). The results list will only include information about the
-	// DB clusters identified by these ARNs.
-	//
-	// * engine - Accepts an engine name (such
-	// as neptune), and restricts the results list to DB clusters created by that
-	// engine.
-	//
-	// For example, to invoke this API from the Amazon CLI and filter so that
-	// only Neptune DB clusters are returned, you could use the following command:
+	// A filter that specifies one or more DB clusters to describe. Supported filters:
+	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	//   Resource Names (ARNs). The results list will only include information about the
+	//   DB clusters identified by these ARNs.
+	//   - engine - Accepts an engine name (such as neptune ), and restricts the
+	//   results list to DB clusters created by that engine.
+	// For example, to invoke this API from the Amazon CLI and filter so that only
+	// Neptune DB clusters are returned, you could use the following command:
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusters request.
 	// If this parameter is specified, the response includes only records beyond the
-	// marker, up to the value specified by MaxRecords.
+	// marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist

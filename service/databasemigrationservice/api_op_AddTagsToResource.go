@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds metadata tags to an DMS resource, including replication instance, endpoint,
-// subnet group, and migration task. These tags can also be used with cost
-// allocation reporting to track cost associated with DMS resources, or used in a
-// Condition statement in an IAM policy for DMS. For more information, see Tag
-// (https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html) data type
-// description.
+// Adds metadata tags to an DMS resource, including replication instance,
+// endpoint, subnet group, and migration task. These tags can also be used with
+// cost allocation reporting to track cost associated with DMS resources, or used
+// in a Condition statement in an IAM policy for DMS. For more information, see Tag (https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html)
+// data type description.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddTagsToResourceInput{}

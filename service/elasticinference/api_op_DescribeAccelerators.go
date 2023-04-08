@@ -45,11 +45,11 @@ type DescribeAcceleratorsInput struct {
 	// filter for. instance-id: can provide a list of EC2 instance ids to filter for.
 	Filters []types.Filter
 
-	// The total number of items to return in the command's output. If the total number
-	// of items available is more than the value specified, a NextToken is provided in
-	// the command's output. To resume pagination, provide the NextToken value in the
-	// starting-token argument of a subsequent command. Do not use the NextToken
-	// response element directly outside of the AWS CLI.
+	// The total number of items to return in the command's output. If the total
+	// number of items available is more than the value specified, a NextToken is
+	// provided in the command's output. To resume pagination, provide the NextToken
+	// value in the starting-token argument of a subsequent command. Do not use the
+	// NextToken response element directly outside of the AWS CLI.
 	MaxResults int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
@@ -145,11 +145,11 @@ var _ DescribeAcceleratorsAPIClient = (*Client)(nil)
 // DescribeAcceleratorsPaginatorOptions is the paginator options for
 // DescribeAccelerators
 type DescribeAcceleratorsPaginatorOptions struct {
-	// The total number of items to return in the command's output. If the total number
-	// of items available is more than the value specified, a NextToken is provided in
-	// the command's output. To resume pagination, provide the NextToken value in the
-	// starting-token argument of a subsequent command. Do not use the NextToken
-	// response element directly outside of the AWS CLI.
+	// The total number of items to return in the command's output. If the total
+	// number of items available is more than the value specified, a NextToken is
+	// provided in the command's output. To resume pagination, provide the NextToken
+	// value in the starting-token argument of a subsequent command. Do not use the
+	// NextToken response element directly outside of the AWS CLI.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

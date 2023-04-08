@@ -42,7 +42,7 @@ type ListReviewableHITsInput struct {
 	// Pagination Token
 	NextToken *string
 
-	// Can be either Reviewable or Reviewing. Reviewable is the default value.
+	// Can be either Reviewable or Reviewing . Reviewable is the default value.
 	Status types.ReviewableHITStatus
 
 	noSmithyDocumentSerde

@@ -58,8 +58,8 @@ type PutOptedOutNumberOutput struct {
 	// The phone number that was added to the OptOutList.
 	OptedOutNumber *string
 
-	// The time that the phone number was added to the OptOutList, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time that the phone number was added to the OptOutList, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	OptedOutTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.

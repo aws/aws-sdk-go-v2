@@ -37,9 +37,9 @@ type ModifyCacheParameterGroupInput struct {
 	// This member is required.
 	CacheParameterGroupName *string
 
-	// An array of parameter names and values for the parameter update. You must supply
-	// at least one parameter name and value; subsequent arguments are optional. A
-	// maximum of 20 parameters may be modified per request.
+	// An array of parameter names and values for the parameter update. You must
+	// supply at least one parameter name and value; subsequent arguments are optional.
+	// A maximum of 20 parameters may be modified per request.
 	//
 	// This member is required.
 	ParameterNameValues []types.ParameterNameValue
@@ -48,11 +48,8 @@ type ModifyCacheParameterGroupInput struct {
 }
 
 // Represents the output of one of the following operations:
-//
-// *
-// ModifyCacheParameterGroup
-//
-// * ResetCacheParameterGroup
+//   - ModifyCacheParameterGroup
+//   - ResetCacheParameterGroup
 type ModifyCacheParameterGroupOutput struct {
 
 	// The name of the cache parameter group.

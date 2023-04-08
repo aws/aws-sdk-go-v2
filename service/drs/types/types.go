@@ -183,12 +183,12 @@ type DescribeSourceServersRequestFilters struct {
 	// instance id, a VMware uuid or a mac address.
 	HardwareId *string
 
-	// An array of Source Servers IDs that should be returned. An empty array means all
-	// Source Servers.
+	// An array of Source Servers IDs that should be returned. An empty array means
+	// all Source Servers.
 	SourceServerIDs []string
 
-	// An array of staging account IDs that extended source servers belong to. An empty
-	// array means all source servers will be shown.
+	// An array of staging account IDs that extended source servers belong to. An
+	// empty array means all source servers will be shown.
 	StagingAccountIDs []string
 
 	noSmithyDocumentSerde
@@ -393,8 +393,8 @@ type ParticipatingServer struct {
 	noSmithyDocumentSerde
 }
 
-// A rule in the Point in Time (PIT) policy representing when to take snapshots and
-// how long to retain them for.
+// A rule in the Point in Time (PIT) policy representing when to take snapshots
+// and how long to retain them for.
 type PITPolicyRule struct {
 
 	// How often, in the chosen units, a snapshot should be taken.
@@ -439,8 +439,8 @@ type RecoveryInstance struct {
 	// An object representing failback related information of the Recovery Instance.
 	Failback *RecoveryInstanceFailback
 
-	// Whether this Recovery Instance was created for a drill or for an actual Recovery
-	// event.
+	// Whether this Recovery Instance was created for a drill or for an actual
+	// Recovery event.
 	IsDrill *bool
 
 	// The ID of the Job that created the Recovery Instance.
@@ -710,8 +710,8 @@ type ReplicationConfigurationTemplate struct {
 	// added disks.
 	AutoReplicateNewDisks *bool
 
-	// Configure bandwidth throttling for the outbound data transfer rate of the Source
-	// Server in Mbps.
+	// Configure bandwidth throttling for the outbound data transfer rate of the
+	// Source Server in Mbps.
 	BandwidthThrottling int64
 
 	// Whether to create a Public IP for the Recovery Instance by default.
@@ -847,8 +847,8 @@ type SourceServer struct {
 // Staging information related to source server.
 type StagingArea struct {
 
-	// Shows an error message that occurred when DRS tried to access the staging source
-	// server. In this case StagingArea$status will have value EXTENSION_ERROR
+	// Shows an error message that occurred when DRS tried to access the staging
+	// source server. In this case StagingArea$status will have value EXTENSION_ERROR
 	ErrorMessage *string
 
 	// Account ID of the account to which source server belongs. If this source server
@@ -858,10 +858,10 @@ type StagingArea struct {
 	// Arn of the staging source server if this source server is extended
 	StagingSourceServerArn *string
 
-	// Status of Source server extension. Possible values: (a) NOT_EXTENDED - This is a
-	// source server that is replicating in the current account. (b) EXTENDED - Source
-	// server is extended from a staging source server. In this case, the value of
-	// stagingSourceServerArn is pointing to the Arn of the source server in the
+	// Status of Source server extension. Possible values: (a) NOT_EXTENDED - This is
+	// a source server that is replicating in the current account. (b) EXTENDED -
+	// Source server is extended from a staging source server. In this case, the value
+	// of stagingSourceServerArn is pointing to the Arn of the source server in the
 	// staging account. (c) EXTENSION_ERROR - Some issue occurred when accessing
 	// staging source server. In this case, errorMessage field will contain an error
 	// message that explains what happened.
@@ -893,8 +893,8 @@ type StartRecoveryRequestSourceServer struct {
 	// This member is required.
 	SourceServerID *string
 
-	// The ID of a Recovery Snapshot we want to recover from. Omit this field to launch
-	// from the latest data by taking an on-demand snapshot.
+	// The ID of a Recovery Snapshot we want to recover from. Omit this field to
+	// launch from the latest data by taking an on-demand snapshot.
 	RecoverySnapshotID *string
 
 	noSmithyDocumentSerde

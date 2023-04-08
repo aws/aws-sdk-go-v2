@@ -35,7 +35,7 @@ type CreateGraphqlApiInput struct {
 	// This member is required.
 	AuthenticationType types.AuthenticationType
 
-	// A user-supplied name for the GraphqlApi.
+	// A user-supplied name for the GraphqlApi .
 	//
 	// This member is required.
 	Name *string
@@ -58,7 +58,7 @@ type CreateGraphqlApiInput struct {
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *types.UserPoolConfig
 
-	// A flag indicating whether to use X-Ray tracing for the GraphqlApi.
+	// A flag indicating whether to use X-Ray tracing for the GraphqlApi .
 	XrayEnabled bool
 
 	noSmithyDocumentSerde
@@ -66,7 +66,7 @@ type CreateGraphqlApiInput struct {
 
 type CreateGraphqlApiOutput struct {
 
-	// The GraphqlApi.
+	// The GraphqlApi .
 	GraphqlApi *types.GraphqlApi
 
 	// Metadata pertaining to the operation's result.

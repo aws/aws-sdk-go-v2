@@ -32,8 +32,7 @@ type StartAutomationExecutionInput struct {
 	// The name of the SSM document to run. This can be a public document or a custom
 	// document. To run a shared document belonging to another account, specify the
 	// document ARN. For more information about how to use shared documents, see Using
-	// shared SSM documents
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
+	// shared SSM documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	//
 	// This member is required.
@@ -51,7 +50,7 @@ type StartAutomationExecutionInput struct {
 
 	// The maximum number of targets allowed to run this task in parallel. You can
 	// specify a number, such as 10, or a percentage, such as 10%. The default value is
-	// 10.
+	// 10 .
 	MaxConcurrency *string
 
 	// The number of errors that are allowed before the system stops running the
@@ -81,27 +80,21 @@ type StartAutomationExecutionInput struct {
 	// different ways, such as by purpose, owner, or environment. For example, you
 	// might want to tag an automation to identify an environment or operating system.
 	// In this case, you could specify the following key-value pairs:
-	//
-	// *
-	// Key=environment,Value=test
-	//
-	// * Key=OS,Value=Windows
-	//
-	// To add tags to an existing
-	// automation, use the AddTagsToResource operation.
+	//   - Key=environment,Value=test
+	//   - Key=OS,Value=Windows
+	// To add tags to an existing automation, use the AddTagsToResource operation.
 	Tags []types.Tag
 
 	// A location is a combination of Amazon Web Services Regions and/or Amazon Web
 	// Services accounts where you want to run the automation. Use this operation to
 	// start an automation in multiple Amazon Web Services Regions and multiple Amazon
-	// Web Services accounts. For more information, see Running Automation workflows in
-	// multiple Amazon Web Services Regions and Amazon Web Services accounts
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html)
+	// Web Services accounts. For more information, see Running Automation workflows
+	// in multiple Amazon Web Services Regions and Amazon Web Services accounts (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	TargetLocations []types.TargetLocation
 
-	// A key-value mapping of document parameters to target resources. Both Targets and
-	// TargetMaps can't be specified together.
+	// A key-value mapping of document parameters to target resources. Both Targets
+	// and TargetMaps can't be specified together.
 	TargetMaps []map[string][]string
 
 	// The name of the parameter used as the target resource for the rate-controlled

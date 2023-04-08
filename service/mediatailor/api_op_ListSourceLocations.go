@@ -119,8 +119,8 @@ func (c *Client) addOperationListSourceLocationsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListSourceLocationsAPIClient is a client that implements the ListSourceLocations
-// operation.
+// ListSourceLocationsAPIClient is a client that implements the
+// ListSourceLocations operation.
 type ListSourceLocationsAPIClient interface {
 	ListSourceLocations(context.Context, *ListSourceLocationsInput, ...func(*Options)) (*ListSourceLocationsOutput, error)
 }

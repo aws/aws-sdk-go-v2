@@ -28,7 +28,7 @@ func (c *Client) StopDevEnvironmentSession(ctx context.Context, params *StopDevE
 type StopDevEnvironmentSessionInput struct {
 
 	// The system-generated unique ID of the Dev Environment. To obtain this ID, use
-	// ListDevEnvironments.
+	// ListDevEnvironments .
 	//
 	// This member is required.
 	Id *string
@@ -39,7 +39,7 @@ type StopDevEnvironmentSessionInput struct {
 	ProjectName *string
 
 	// The system-generated unique ID of the Dev Environment session. This ID is
-	// returned by StartDevEnvironmentSession.
+	// returned by StartDevEnvironmentSession .
 	//
 	// This member is required.
 	SessionId *string

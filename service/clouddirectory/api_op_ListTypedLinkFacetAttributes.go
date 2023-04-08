@@ -13,8 +13,8 @@ import (
 )
 
 // Returns a paginated list of all attribute definitions for a particular
-// TypedLinkFacet. For more information, see Typed Links
-// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+// TypedLinkFacet . For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
+// .
 func (c *Client) ListTypedLinkFacetAttributes(ctx context.Context, params *ListTypedLinkFacetAttributesInput, optFns ...func(*Options)) (*ListTypedLinkFacetAttributesOutput, error) {
 	if params == nil {
 		params = &ListTypedLinkFacetAttributesInput{}
@@ -38,7 +38,7 @@ type ListTypedLinkFacetAttributesInput struct {
 	Name *string
 
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns.
+	// information, see arns .
 	//
 	// This member is required.
 	SchemaArn *string

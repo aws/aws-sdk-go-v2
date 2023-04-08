@@ -69,10 +69,10 @@ type CreateDeliverabilityTestReportInput struct {
 // Information about the predictive inbox placement test that you created.
 type CreateDeliverabilityTestReportOutput struct {
 
-	// The status of the predictive inbox placement test. If the status is IN_PROGRESS,
-	// then the predictive inbox placement test is currently running. Predictive inbox
-	// placement tests are usually complete within 24 hours of creating the test. If
-	// the status is COMPLETE, then the test is finished, and you can use the
+	// The status of the predictive inbox placement test. If the status is IN_PROGRESS
+	// , then the predictive inbox placement test is currently running. Predictive
+	// inbox placement tests are usually complete within 24 hours of creating the test.
+	// If the status is COMPLETE , then the test is finished, and you can use the
 	// GetDeliverabilityTestReport to view the results of the test.
 	//
 	// This member is required.

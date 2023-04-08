@@ -43,7 +43,7 @@ type DescribeSnapshotsInput struct {
 	Limit *int32
 
 	// The DescribeSnapshotsResult.NextToken value from a previous call to
-	// DescribeSnapshots. Pass null if this is the first call.
+	// DescribeSnapshots . Pass null if this is the first call.
 	NextToken *string
 
 	// A list of identifiers of the snapshots to obtain the information for. If this
@@ -57,8 +57,8 @@ type DescribeSnapshotsInput struct {
 // Contains the results of the DescribeSnapshots operation.
 type DescribeSnapshotsOutput struct {
 
-	// If not null, more results are available. Pass this value in the NextToken member
-	// of a subsequent call to DescribeSnapshots.
+	// If not null, more results are available. Pass this value in the NextToken
+	// member of a subsequent call to DescribeSnapshots .
 	NextToken *string
 
 	// The list of Snapshot objects that were retrieved. It is possible that this list

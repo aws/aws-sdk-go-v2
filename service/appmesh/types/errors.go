@@ -33,9 +33,9 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request contains a client token that was used for a previous update resource
-// call with different specifications. Try the request again with a new client
-// token.
+// The request contains a client token that was used for a previous update
+// resource call with different specifications. Try the request again with a new
+// client token.
 type ConflictException struct {
 	Message *string
 
@@ -115,9 +115,8 @@ func (e *InternalServerErrorException) ErrorCode() string {
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // You have exceeded a service limit for your account. For more information, see
-// Service Limits
-// (https://docs.aws.amazon.com/app-mesh/latest/userguide/service-quotas.html) in
-// the App Mesh User Guide.
+// Service Limits (https://docs.aws.amazon.com/app-mesh/latest/userguide/service-quotas.html)
+// in the App Mesh User Guide.
 type LimitExceededException struct {
 	Message *string
 
@@ -250,9 +249,9 @@ func (e *TooManyRequestsException) ErrorCode() string {
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request exceeds the maximum allowed number of tags allowed per resource. The
-// current limit is 50 user tags per resource. You must reduce the number of tags
-// in the request. None of the tags in this request were applied.
+// The request exceeds the maximum allowed number of tags allowed per resource.
+// The current limit is 50 user tags per resource. You must reduce the number of
+// tags in the request. None of the tags in this request were applied.
 type TooManyTagsException struct {
 	Message *string
 

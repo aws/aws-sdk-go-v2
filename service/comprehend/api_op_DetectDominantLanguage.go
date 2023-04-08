@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Determines the dominant language of the input text. For a list of languages that
-// Amazon Comprehend can detect, see Amazon Comprehend Supported Languages
-// (https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html).
+// Determines the dominant language of the input text. For a list of languages
+// that Amazon Comprehend can detect, see Amazon Comprehend Supported Languages (https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html)
+// .
 func (c *Client) DetectDominantLanguage(ctx context.Context, params *DetectDominantLanguageInput, optFns ...func(*Options)) (*DetectDominantLanguageOutput, error) {
 	if params == nil {
 		params = &DetectDominantLanguageInput{}
@@ -31,8 +31,8 @@ func (c *Client) DetectDominantLanguage(ctx context.Context, params *DetectDomin
 
 type DetectDominantLanguageInput struct {
 
-	// A UTF-8 text string. The string must contain at least 20 characters. The maximum
-	// string size is 100 KB.
+	// A UTF-8 text string. The string must contain at least 20 characters. The
+	// maximum string size is 100 KB.
 	//
 	// This member is required.
 	Text *string

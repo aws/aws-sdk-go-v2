@@ -142,9 +142,9 @@ type DashEncryption struct {
 // A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 type DashPackage struct {
 
-	// A list of SCTE-35 message types that are treated as ad markers in the output. If
-	// empty, no ad markers are output. Specify multiple items to create ad markers for
-	// all of the included message types.
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, no ad markers are output. Specify multiple items to create ad markers
+	// for all of the included message types.
 	AdTriggers []AdTriggersElement
 
 	// This setting allows the delivery restriction flags on SCTE-35 segmentation
@@ -202,8 +202,8 @@ type DashPackage struct {
 	// Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is
 	// presented in each SegmentTemplate, with $Number$ media URLs. When set to
 	// TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with
-	// $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included
-	// in each SegmentTemplate, with $Number$ media URLs.
+	// $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is
+	// included in each SegmentTemplate, with $Number$ media URLs.
 	SegmentTemplateFormat SegmentTemplateFormat
 
 	// A StreamSelection configuration.
@@ -347,9 +347,9 @@ type HlsManifest struct {
 	// must set a programDateTimeIntervalSeconds value that is greater than 0.
 	AdMarkers AdMarkers
 
-	// A list of SCTE-35 message types that are treated as ad markers in the output. If
-	// empty, no ad markers are output. Specify multiple items to create ad markers for
-	// all of the included message types.
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, no ad markers are output. Specify multiple items to create ad markers
+	// for all of the included message types.
 	AdTriggers []AdTriggersElement
 
 	// This setting allows the delivery restriction flags on SCTE-35 segmentation
@@ -379,8 +379,8 @@ type HlsManifest struct {
 	// Time window (in seconds) contained in each parent manifest.
 	PlaylistWindowSeconds int32
 
-	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into
-	// manifests. Additionally, when an interval is specified ID3Timed Metadata
+	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted
+	// into manifests. Additionally, when an interval is specified ID3Timed Metadata
 	// messages will be generated every 5 seconds using the ingest time of the content.
 	// If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME
 	// tags will be inserted into manifests and no ID3Timed Metadata messages will be
@@ -414,9 +414,9 @@ type HlsManifestCreateOrUpdateParameters struct {
 	// must set a programDateTimeIntervalSeconds value that is greater than 0.
 	AdMarkers AdMarkers
 
-	// A list of SCTE-35 message types that are treated as ad markers in the output. If
-	// empty, no ad markers are output. Specify multiple items to create ad markers for
-	// all of the included message types.
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, no ad markers are output. Specify multiple items to create ad markers
+	// for all of the included message types.
 	AdTriggers []AdTriggersElement
 
 	// This setting allows the delivery restriction flags on SCTE-35 segmentation
@@ -446,8 +446,8 @@ type HlsManifestCreateOrUpdateParameters struct {
 	// Time window (in seconds) contained in each parent manifest.
 	PlaylistWindowSeconds int32
 
-	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into
-	// manifests. Additionally, when an interval is specified ID3Timed Metadata
+	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted
+	// into manifests. Additionally, when an interval is specified ID3Timed Metadata
 	// messages will be generated every 5 seconds using the ingest time of the content.
 	// If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME
 	// tags will be inserted into manifests and no ID3Timed Metadata messages will be
@@ -472,9 +472,9 @@ type HlsPackage struct {
 	// must set a programDateTimeIntervalSeconds value that is greater than 0.
 	AdMarkers AdMarkers
 
-	// A list of SCTE-35 message types that are treated as ad markers in the output. If
-	// empty, no ad markers are output. Specify multiple items to create ad markers for
-	// all of the included message types.
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, no ad markers are output. Specify multiple items to create ad markers
+	// for all of the included message types.
 	AdTriggers []AdTriggersElement
 
 	// This setting allows the delivery restriction flags on SCTE-35 segmentation
@@ -507,8 +507,8 @@ type HlsPackage struct {
 	// Time window (in seconds) contained in each parent manifest.
 	PlaylistWindowSeconds int32
 
-	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into
-	// manifests. Additionally, when an interval is specified ID3Timed Metadata
+	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted
+	// into manifests. Additionally, when an interval is specified ID3Timed Metadata
 	// messages will be generated every 5 seconds using the ingest time of the content.
 	// If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME
 	// tags will be inserted into manifests and no ID3Timed Metadata messages will be

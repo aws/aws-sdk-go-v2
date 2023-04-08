@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a billing group that resembles a consolidated billing family that Amazon
-// Web Services charges, based off of the predefined pricing plan computation.
+// Creates a billing group that resembles a consolidated billing family that
+// Amazon Web Services charges, based off of the predefined pricing plan
+// computation.
 func (c *Client) CreateBillingGroup(ctx context.Context, params *CreateBillingGroupInput, optFns ...func(*Options)) (*CreateBillingGroupOutput, error) {
 	if params == nil {
 		params = &CreateBillingGroupInput{}

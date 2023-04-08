@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables resource sharing within your organization in Organizations. Calling this
-// operation enables RAM to retrieve information about the organization and its
-// structure. This lets you share resources with all of the accounts in an
+// Enables resource sharing within your organization in Organizations. Calling
+// this operation enables RAM to retrieve information about the organization and
+// its structure. This lets you share resources with all of the accounts in an
 // organization by specifying the organization's ID, or all of the accounts in an
 // organizational unit (OU) by specifying the OU's ID. Until you enable sharing
 // within the organization, you can specify only individual Amazon Web Services

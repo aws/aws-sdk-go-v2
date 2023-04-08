@@ -58,7 +58,7 @@ type ValidateConfigurationSettingsInput struct {
 // Provides a list of validation messages.
 type ValidateConfigurationSettingsOutput struct {
 
-	// A list of ValidationMessage.
+	// A list of ValidationMessage .
 	Messages []types.ValidationMessage
 
 	// Metadata pertaining to the operation's result.

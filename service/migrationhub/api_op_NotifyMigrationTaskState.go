@@ -14,16 +14,11 @@ import (
 
 // Notifies Migration Hub of the current status, progress, or other detail
 // regarding a migration task. This API has the following traits:
-//
-// * Migration
-// tools will call the NotifyMigrationTaskState API to share the latest progress
-// and status.
-//
-// * MigrationTaskName is used for addressing updates to the correct
-// target.
-//
-// * ProgressUpdateStream is used for access control and to provide a
-// namespace for each migration tool.
+//   - Migration tools will call the NotifyMigrationTaskState API to share the
+//     latest progress and status.
+//   - MigrationTaskName is used for addressing updates to the correct target.
+//   - ProgressUpdateStream is used for access control and to provide a namespace
+//     for each migration tool.
 func (c *Client) NotifyMigrationTaskState(ctx context.Context, params *NotifyMigrationTaskStateInput, optFns ...func(*Options)) (*NotifyMigrationTaskStateOutput, error) {
 	if params == nil {
 		params = &NotifyMigrationTaskStateInput{}
@@ -41,8 +36,8 @@ func (c *Client) NotifyMigrationTaskState(ctx context.Context, params *NotifyMig
 
 type NotifyMigrationTaskStateInput struct {
 
-	// Unique identifier that references the migration task. Do not store personal data
-	// in this field.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// This member is required.
 	MigrationTaskName *string

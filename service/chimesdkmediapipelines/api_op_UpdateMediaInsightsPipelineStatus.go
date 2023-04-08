@@ -29,8 +29,8 @@ func (c *Client) UpdateMediaInsightsPipelineStatus(ctx context.Context, params *
 
 type UpdateMediaInsightsPipelineStatusInput struct {
 
-	// The unique identifier of the resource to be updated. Valid values include the ID
-	// and ARN of the media insights pipeline.
+	// The unique identifier of the resource to be updated. Valid values include the
+	// ID and ARN of the media insights pipeline.
 	//
 	// This member is required.
 	Identifier *string

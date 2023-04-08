@@ -54,23 +54,23 @@ type ListMonitoringSchedulesInput struct {
 	// definition.
 	MonitoringJobDefinitionName *string
 
-	// A filter that returns only the monitoring schedules for the specified monitoring
-	// type.
+	// A filter that returns only the monitoring schedules for the specified
+	// monitoring type.
 	MonitoringTypeEquals types.MonitoringType
 
 	// Filter for monitoring schedules whose name contains a specified string.
 	NameContains *string
 
-	// The token returned if the response is truncated. To retrieve the next set of job
-	// executions, use it in the next request.
+	// The token returned if the response is truncated. To retrieve the next set of
+	// job executions, use it in the next request.
 	NextToken *string
 
-	// Whether to sort results by Status, CreationTime, ScheduledTime field. The
-	// default is CreationTime.
+	// Whether to sort results by Status , CreationTime , ScheduledTime field. The
+	// default is CreationTime .
 	SortBy types.MonitoringScheduleSortKey
 
 	// Whether to sort the results in Ascending or Descending order. The default is
-	// Descending.
+	// Descending .
 	SortOrder types.SortOrder
 
 	// A filter that returns only monitoring schedules modified before a specified

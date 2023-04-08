@@ -310,10 +310,10 @@ func (e *InvalidS3ObjectException) ErrorCode() string {
 func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An Amazon Rekognition service limit was exceeded. For example, if you start too
-// many Amazon Rekognition Video jobs concurrently, calls to start operations
-// (StartLabelDetection, for example) will raise a LimitExceededException exception
-// (HTTP status code: 400) until the number of concurrently running jobs is below
-// the Amazon Rekognition service limit.
+// many Amazon Rekognition Video jobs concurrently, calls to start operations (
+// StartLabelDetection , for example) will raise a LimitExceededException
+// exception (HTTP status code: 400) until the number of concurrently running jobs
+// is below the Amazon Rekognition service limit.
 type LimitExceededException struct {
 	Message *string
 

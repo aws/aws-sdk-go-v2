@@ -50,8 +50,8 @@ type CreateAssessmentInput struct {
 	// This member is required.
 	Roles []types.Role
 
-	// The wrapper that contains the Amazon Web Services accounts and services that are
-	// in scope for the assessment.
+	// The wrapper that contains the Amazon Web Services accounts and services that
+	// are in scope for the assessment.
 	//
 	// This member is required.
 	Scope *types.Scope

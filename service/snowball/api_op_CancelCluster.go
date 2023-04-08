@@ -31,7 +31,7 @@ func (c *Client) CancelCluster(ctx context.Context, params *CancelClusterInput, 
 type CancelClusterInput struct {
 
 	// The 39-character ID for the cluster that you want to cancel, for example
-	// CID123e4567-e89b-12d3-a456-426655440000.
+	// CID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	ClusterId *string

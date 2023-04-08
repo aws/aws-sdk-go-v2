@@ -15,17 +15,12 @@ import (
 // Adds a resource to the Resilience Hub application and assigns it to the
 // specified Application Components. If you specify a new Application Component,
 // Resilience Hub will automatically create the Application Component.
-//
-// * This
-// action has no effect outside Resilience Hub.
-//
-// * This API updates the Resilience
-// Hub application draft version. To use this resource for running resiliency
-// assessments, you must publish the Resilience Hub application using the
-// PublishAppVersion API.
-//
-// * To update application version with new
-// physicalResourceID, you must call ResolveAppVersionResources API.
+//   - This action has no effect outside Resilience Hub.
+//   - This API updates the Resilience Hub application draft version. To use this
+//     resource for running resiliency assessments, you must publish the Resilience Hub
+//     application using the PublishAppVersion API.
+//   - To update application version with new physicalResourceID , you must call
+//     ResolveAppVersionResources API.
 func (c *Client) CreateAppVersionResource(ctx context.Context, params *CreateAppVersionResourceInput, optFns ...func(*Options)) (*CreateAppVersionResourceOutput, error) {
 	if params == nil {
 		params = &CreateAppVersionResourceInput{}
@@ -43,11 +38,10 @@ func (c *Client) CreateAppVersionResource(ctx context.Context, params *CreateApp
 
 type CreateAppVersionResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -88,9 +82,9 @@ type CreateAppVersionResourceInput struct {
 	// The Amazon Web Services region that owns the physical resource.
 	AwsRegion *string
 
-	// Used for an idempotency token. A client token is a unique, case-sensitive string
-	// of up to 64 ASCII characters. You should not reuse the same client token for
-	// other API requests.
+	// Used for an idempotency token. A client token is a unique, case-sensitive
+	// string of up to 64 ASCII characters. You should not reuse the same client token
+	// for other API requests.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -98,11 +92,10 @@ type CreateAppVersionResourceInput struct {
 
 type CreateAppVersionResourceOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string

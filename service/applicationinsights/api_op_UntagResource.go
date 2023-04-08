@@ -28,8 +28,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the application that you want to remove one or
-	// more tags from.
+	// The Amazon Resource Name (ARN) of the application that you want to remove one
+	// or more tags from.
 	//
 	// This member is required.
 	ResourceARN *string

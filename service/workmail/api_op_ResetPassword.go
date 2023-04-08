@@ -28,8 +28,8 @@ func (c *Client) ResetPassword(ctx context.Context, params *ResetPasswordInput, 
 
 type ResetPasswordInput struct {
 
-	// The identifier of the organization that contains the user for which the password
-	// is reset.
+	// The identifier of the organization that contains the user for which the
+	// password is reset.
 	//
 	// This member is required.
 	OrganizationId *string

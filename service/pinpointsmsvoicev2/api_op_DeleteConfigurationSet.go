@@ -51,8 +51,8 @@ type DeleteConfigurationSetOutput struct {
 	// The name of the deleted configuration set.
 	ConfigurationSetName *string
 
-	// The time that the deleted configuration set was created in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time that the deleted configuration set was created in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	CreatedTimestamp *time.Time
 
 	// The default message type of the configuration set that was deleted.

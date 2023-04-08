@@ -10,14 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Exports a private certificate issued by a private certificate authority (CA) for
-// use anywhere. The exported file contains the certificate, the certificate chain,
-// and the encrypted private 2048-bit RSA key associated with the public key that
-// is embedded in the certificate. For security, you must assign a passphrase for
-// the private key when exporting it. For information about exporting and
+// Exports a private certificate issued by a private certificate authority (CA)
+// for use anywhere. The exported file contains the certificate, the certificate
+// chain, and the encrypted private 2048-bit RSA key associated with the public key
+// that is embedded in the certificate. For security, you must assign a passphrase
+// for the private key when exporting it. For information about exporting and
 // formatting a certificate using the ACM console or CLI, see Export a Private
-// Certificate
-// (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html).
+// Certificate (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html)
+// .
 func (c *Client) ExportCertificate(ctx context.Context, params *ExportCertificateInput, optFns ...func(*Options)) (*ExportCertificateOutput, error) {
 	if params == nil {
 		params = &ExportCertificateInput{}
@@ -64,8 +64,8 @@ type ExportCertificateOutput struct {
 	// that you are exporting.
 	CertificateChain *string
 
-	// The encrypted private key associated with the public key in the certificate. The
-	// key is output in PKCS #8 format and is base64 PEM-encoded.
+	// The encrypted private key associated with the public key in the certificate.
+	// The key is output in PKCS #8 format and is base64 PEM-encoded.
 	PrivateKey *string
 
 	// Metadata pertaining to the operation's result.

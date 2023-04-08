@@ -14,8 +14,7 @@ import (
 
 // Retrieves information about the default encryption configuration for the Amazon
 // Web Services account in the default or specified Region. For more information,
-// see Key management
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html)
+// see Key management (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html)
 // in the IoT SiteWise User Guide.
 func (c *Client) DescribeDefaultEncryptionConfiguration(ctx context.Context, params *DescribeDefaultEncryptionConfigurationInput, optFns ...func(*Options)) (*DescribeDefaultEncryptionConfigurationOutput, error) {
 	if params == nil {
@@ -38,8 +37,8 @@ type DescribeDefaultEncryptionConfigurationInput struct {
 
 type DescribeDefaultEncryptionConfigurationOutput struct {
 
-	// The status of the account configuration. This contains the ConfigurationState.
-	// If there's an error, it also contains the ErrorDetails.
+	// The status of the account configuration. This contains the ConfigurationState .
+	// If there's an error, it also contains the ErrorDetails .
 	//
 	// This member is required.
 	ConfigurationStatus *types.ConfigurationStatus
@@ -50,7 +49,7 @@ type DescribeDefaultEncryptionConfigurationOutput struct {
 	EncryptionType types.EncryptionType
 
 	// The key ARN of the customer managed key used for KMS encryption if you use
-	// KMS_BASED_ENCRYPTION.
+	// KMS_BASED_ENCRYPTION .
 	KmsKeyArn *string
 
 	// Metadata pertaining to the operation's result.

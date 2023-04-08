@@ -12,6 +12,6 @@
 // full control over implementing tasks and coordinating them without worrying
 // about underlying complexities such as tracking their progress and maintaining
 // their state. This documentation serves as reference only. For a broader overview
-// of the Amazon SWF programming model, see the Amazon SWF Developer Guide
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/) .
+// of the Amazon SWF programming model, see the Amazon SWF Developer Guide (https://docs.aws.amazon.com/amazonswf/latest/developerguide/)
+// .
 package swf

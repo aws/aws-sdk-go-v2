@@ -39,8 +39,8 @@ type ListAddonsInput struct {
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another
 	// ListAddonsRequest request with the returned nextToken value. This value can be
-	// between 1 and 100. If you don't use this parameter, ListAddonsRequest returns up
-	// to 100 results and a nextToken value, if applicable.
+	// between 1 and 100. If you don't use this parameter, ListAddonsRequest returns
+	// up to 100 results and a nextToken value, if applicable.
 	MaxResults *int32
 
 	// The nextToken value returned from a previous paginated ListAddonsRequest where
@@ -150,8 +150,8 @@ type ListAddonsPaginatorOptions struct {
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another
 	// ListAddonsRequest request with the returned nextToken value. This value can be
-	// between 1 and 100. If you don't use this parameter, ListAddonsRequest returns up
-	// to 100 results and a nextToken value, if applicable.
+	// between 1 and 100. If you don't use this parameter, ListAddonsRequest returns
+	// up to 100 results and a nextToken value, if applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -13,23 +13,14 @@ import (
 
 // Resets a device and its account to the known default settings. This clears all
 // information and settings set by previous users in the following ways:
-//
-// *
-// Bluetooth - This unpairs all bluetooth devices paired with your echo device.
-//
-// *
-// Volume - This resets the echo device's volume to the default value.
-//
-// *
-// Notifications - This clears all notifications from your echo device.
-//
-// * Lists -
-// This clears all to-do items from your echo device.
-//
-// * Settings - This internally
-// syncs the room's profile (if the device is assigned to a room), contacts,
-// address books, delegation access for account linking, and communications (if
-// enabled on the room profile).
+//   - Bluetooth - This unpairs all bluetooth devices paired with your echo
+//     device.
+//   - Volume - This resets the echo device's volume to the default value.
+//   - Notifications - This clears all notifications from your echo device.
+//   - Lists - This clears all to-do items from your echo device.
+//   - Settings - This internally syncs the room's profile (if the device is
+//     assigned to a room), contacts, address books, delegation access for account
+//     linking, and communications (if enabled on the room profile).
 func (c *Client) StartDeviceSync(ctx context.Context, params *StartDeviceSyncInput, optFns ...func(*Options)) (*StartDeviceSyncOutput, error) {
 	if params == nil {
 		params = &StartDeviceSyncInput{}

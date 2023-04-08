@@ -13,15 +13,12 @@ import (
 )
 
 // Provides information about the phone numbers for the specified Amazon Connect
-// instance. For more information about phone numbers, see Set Up Phone Numbers for
-// Your Contact Center
-// (https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html)
+// instance. For more information about phone numbers, see Set Up Phone Numbers
+// for Your Contact Center (https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html)
 // in the Amazon Connect Administrator Guide. The phone number Arn value that is
-// returned from each of the items in the PhoneNumberSummaryList
-// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList)
+// returned from each of the items in the PhoneNumberSummaryList (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList)
 // cannot be used to tag phone number resources. It will fail with a
-// ResourceNotFoundException. Instead, use the ListPhoneNumbersV2
-// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html)
+// ResourceNotFoundException . Instead, use the ListPhoneNumbersV2 (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html)
 // API. It returns the new phone number ARN that can be used to tag phone number
 // resources.
 func (c *Client) ListPhoneNumbers(ctx context.Context, params *ListPhoneNumbersInput, optFns ...func(*Options)) (*ListPhoneNumbersOutput, error) {
@@ -41,8 +38,7 @@ func (c *Client) ListPhoneNumbers(ctx context.Context, params *ListPhoneNumbersI
 
 type ListPhoneNumbersInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

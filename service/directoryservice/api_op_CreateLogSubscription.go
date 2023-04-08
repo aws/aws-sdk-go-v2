@@ -30,8 +30,8 @@ func (c *Client) CreateLogSubscription(ctx context.Context, params *CreateLogSub
 
 type CreateLogSubscriptionInput struct {
 
-	// Identifier of the directory to which you want to subscribe and receive real-time
-	// logs to your specified CloudWatch log group.
+	// Identifier of the directory to which you want to subscribe and receive
+	// real-time logs to your specified CloudWatch log group.
 	//
 	// This member is required.
 	DirectoryId *string

@@ -10,22 +10,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts the transfer of a domain from another Amazon Web Services account to the
-// currentAmazon Web Services account. You initiate a transfer between Amazon Web
-// Services accounts using TransferDomainToAnotherAwsAccount
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
-// If you use the CLI command at accept-domain-transfer-from-another-aws-account
-// (https://docs.aws.amazon.com/cli/latest/reference/route53domains/accept-domain-transfer-from-another-aws-account.html),
-// use JSON format as input instead of text because otherwise CLI will throw an
+// Accepts the transfer of a domain from another Amazon Web Services account to
+// the currentAmazon Web Services account. You initiate a transfer between Amazon
+// Web Services accounts using TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
+// . If you use the CLI command at accept-domain-transfer-from-another-aws-account (https://docs.aws.amazon.com/cli/latest/reference/route53domains/accept-domain-transfer-from-another-aws-account.html)
+// , use JSON format as input instead of text because otherwise CLI will throw an
 // error from domain transfer input that includes single quotes. Use either
-// ListOperations
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
-// or GetOperationDetail
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-// to determine whether the operation succeeded. GetOperationDetail
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// ListOperations (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
+// or GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// to determine whether the operation succeeded. GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
 // provides additional information, for example, Domain Transfer from Aws Account
-// 111122223333 has been cancelled.
+// 111122223333 has been cancelled .
 func (c *Client) AcceptDomainTransferFromAnotherAwsAccount(ctx context.Context, params *AcceptDomainTransferFromAnotherAwsAccountInput, optFns ...func(*Options)) (*AcceptDomainTransferFromAnotherAwsAccountOutput, error) {
 	if params == nil {
 		params = &AcceptDomainTransferFromAnotherAwsAccountInput{}
@@ -46,15 +41,13 @@ func (c *Client) AcceptDomainTransferFromAnotherAwsAccount(ctx context.Context, 
 type AcceptDomainTransferFromAnotherAwsAccountInput struct {
 
 	// The name of the domain that was specified when another Amazon Web Services
-	// account submitted a TransferDomainToAnotherAwsAccount
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
+	// account submitted a TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
 	// request.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The password that was returned by the TransferDomainToAnotherAwsAccount
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
+	// The password that was returned by the TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
 	// request.
 	//
 	// This member is required.
@@ -68,8 +61,8 @@ type AcceptDomainTransferFromAnotherAwsAccountInput struct {
 type AcceptDomainTransferFromAnotherAwsAccountOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+	// .
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

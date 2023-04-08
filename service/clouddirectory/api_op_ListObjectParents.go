@@ -32,7 +32,7 @@ func (c *Client) ListObjectParents(ctx context.Context, params *ListObjectParent
 type ListObjectParentsInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// object resides. For more information, see arns.
+	// object resides. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -47,8 +47,8 @@ type ListObjectParentsInput struct {
 	// object is reflected in a subsequent read operation of that same object.
 	ConsistencyLevel types.ConsistencyLevel
 
-	// When set to True, returns all ListObjectParentsResponse$ParentLinks. There could
-	// be multiple links between a parent-child pair.
+	// When set to True, returns all ListObjectParentsResponse$ParentLinks . There
+	// could be multiple links between a parent-child pair.
 	IncludeAllLinksToEachParent bool
 
 	// The maximum number of items to be retrieved in a single call. This is an

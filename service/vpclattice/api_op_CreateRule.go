@@ -15,8 +15,7 @@ import (
 // Creates a listener rule. Each listener has a default rule for checking
 // connection requests, but you can define additional rules. Each rule consists of
 // a priority, one or more actions, and one or more conditions. For more
-// information, see Listener rules
-// (https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules)
+// information, see Listener rules (https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules)
 // in the Amazon VPC Lattice User Guide.
 func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns ...func(*Options)) (*CreateRuleOutput, error) {
 	if params == nil {
@@ -57,8 +56,8 @@ type CreateRuleInput struct {
 	// This member is required.
 	Name *string
 
-	// The priority assigned to the rule. Each rule for a specific listener must have a
-	// unique priority. The lower the priority number the higher the priority.
+	// The priority assigned to the rule. Each rule for a specific listener must have
+	// a unique priority. The lower the priority number the higher the priority.
 	//
 	// This member is required.
 	Priority *int32
@@ -83,7 +82,7 @@ type CreateRuleInput struct {
 type CreateRuleOutput struct {
 
 	// The rule action. Each rule must include exactly one of the following types of
-	// actions: forward or fixed-response, and it must be the last action to be
+	// actions: forward or fixed-response , and it must be the last action to be
 	// performed.
 	Action types.RuleAction
 
@@ -93,7 +92,7 @@ type CreateRuleOutput struct {
 	// The ID of the rule.
 	Id *string
 
-	// The rule match. The RuleMatch must be an HttpMatch. This means that the rule
+	// The rule match. The RuleMatch must be an HttpMatch . This means that the rule
 	// should be an exact match on HTTP constraints which are made up of the HTTP
 	// method, path, and header.
 	Match types.RuleMatch

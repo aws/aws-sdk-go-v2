@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the bandwidth rate limits of a gateway. You can delete either the upload
-// and download bandwidth rate limit, or you can delete both. If you delete only
-// one of the limits, the other limit remains unchanged. To specify which gateway
-// to work with, use the Amazon Resource Name (ARN) of the gateway in your request.
-// This operation is supported only for the stored volume, cached volume, and tape
-// gateway types.
+// Deletes the bandwidth rate limits of a gateway. You can delete either the
+// upload and download bandwidth rate limit, or you can delete both. If you delete
+// only one of the limits, the other limit remains unchanged. To specify which
+// gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your
+// request. This operation is supported only for the stored volume, cached volume,
+// and tape gateway types.
 func (c *Client) DeleteBandwidthRateLimit(ctx context.Context, params *DeleteBandwidthRateLimitInput, optFns ...func(*Options)) (*DeleteBandwidthRateLimitOutput, error) {
 	if params == nil {
 		params = &DeleteBandwidthRateLimitInput{}
@@ -32,9 +32,7 @@ func (c *Client) DeleteBandwidthRateLimit(ctx context.Context, params *DeleteBan
 }
 
 // A JSON object containing the following fields:
-//
-// *
-// DeleteBandwidthRateLimitInput$BandwidthType
+//   - DeleteBandwidthRateLimitInput$BandwidthType
 type DeleteBandwidthRateLimitInput struct {
 
 	// One of the BandwidthType values that indicates the gateway bandwidth rate limit
@@ -43,8 +41,8 @@ type DeleteBandwidthRateLimitInput struct {
 	// This member is required.
 	BandwidthType *string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -56,8 +54,8 @@ type DeleteBandwidthRateLimitInput struct {
 // bandwidth rate information was deleted.
 type DeleteBandwidthRateLimitOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

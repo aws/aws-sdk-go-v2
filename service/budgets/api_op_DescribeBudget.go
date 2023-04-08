@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a budget. The Request Syntax section shows the BudgetLimit syntax. For
-// PlannedBudgetLimits, see the Examples
-// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples)
+// Describes a budget. The Request Syntax section shows the BudgetLimit syntax.
+// For PlannedBudgetLimits , see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples)
 // section.
 func (c *Client) DescribeBudget(ctx context.Context, params *DescribeBudgetInput, optFns ...func(*Options)) (*DescribeBudgetOutput, error) {
 	if params == nil {

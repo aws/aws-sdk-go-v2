@@ -44,8 +44,8 @@ type GetBlacklistReportsInput struct {
 // An object that contains information about blacklist events.
 type GetBlacklistReportsOutput struct {
 
-	// An object that contains information about a blacklist that one of your dedicated
-	// IP addresses appears on.
+	// An object that contains information about a blacklist that one of your
+	// dedicated IP addresses appears on.
 	//
 	// This member is required.
 	BlacklistReport map[string][]types.BlacklistEntry

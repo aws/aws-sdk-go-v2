@@ -14,7 +14,7 @@ import (
 
 // Creates an alias for the specified version of the bot or replaces an alias for
 // the specified bot. To change the version of the bot that the alias points to,
-// replace the alias. For more information about aliases, see versioning-aliases.
+// replace the alias. For more information about aliases, see versioning-aliases .
 // This operation requires permissions for the lex:PutBotAlias action.
 func (c *Client) PutBotAlias(ctx context.Context, params *PutBotAliasInput, optFns ...func(*Options)) (*PutBotAliasOutput, error) {
 	if params == nil {
@@ -48,11 +48,11 @@ type PutBotAliasInput struct {
 	// This member is required.
 	Name *string
 
-	// Identifies a specific revision of the $LATEST version. When you create a new bot
-	// alias, leave the checksum field blank. If you specify a checksum you get a
+	// Identifies a specific revision of the $LATEST version. When you create a new
+	// bot alias, leave the checksum field blank. If you specify a checksum you get a
 	// BadRequestException exception. When you want to update a bot alias, set the
 	// checksum field to the checksum of the most recent revision of the $LATEST
-	// version. If you don't specify the  checksum field, or if the checksum does not
+	// version. If you don't specify the checksum field, or if the checksum does not
 	// match the $LATEST version, you get a PreconditionFailedException exception.
 	Checksum *string
 
@@ -62,8 +62,8 @@ type PutBotAliasInput struct {
 	// A description of the alias.
 	Description *string
 
-	// A list of tags to add to the bot alias. You can only add tags when you create an
-	// alias, you can't use the PutBotAlias operation to update the tags on a bot
+	// A list of tags to add to the bot alias. You can only add tags when you create
+	// an alias, you can't use the PutBotAlias operation to update the tags on a bot
 	// alias. To update tags, use the TagResource operation.
 	Tags []types.Tag
 

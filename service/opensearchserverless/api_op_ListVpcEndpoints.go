@@ -14,8 +14,8 @@ import (
 
 // Returns the OpenSearch Serverless-managed interface VPC endpoints associated
 // with the current account. For more information, see Access Amazon OpenSearch
-// Serverless using an interface endpoint
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html).
+// Serverless using an interface endpoint (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html)
+// .
 func (c *Client) ListVpcEndpoints(ctx context.Context, params *ListVpcEndpointsInput, optFns ...func(*Options)) (*ListVpcEndpointsOutput, error) {
 	if params == nil {
 		params = &ListVpcEndpointsInput{}
@@ -37,13 +37,13 @@ type ListVpcEndpointsInput struct {
 	// You can use nextToken to get the next page of results. The default is 20.
 	MaxResults *int32
 
-	// If your initial ListVpcEndpoints operation returns a nextToken, you can include
+	// If your initial ListVpcEndpoints operation returns a nextToken , you can include
 	// the returned nextToken in subsequent ListVpcEndpoints operations, which returns
 	// results in the next page.
 	NextToken *string
 
-	// Filter the results according to the current status of the VPC endpoint. Possible
-	// statuses are CREATING, DELETING, UPDATING, ACTIVE, and FAILED.
+	// Filter the results according to the current status of the VPC endpoint.
+	// Possible statuses are CREATING , DELETING , UPDATING , ACTIVE , and FAILED .
 	VpcEndpointFilters *types.VpcEndpointFilters
 
 	noSmithyDocumentSerde

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the DataSourceName of a DataSource. You can use the GetDataSource
+// Updates the DataSourceName of a DataSource . You can use the GetDataSource
 // operation to view the contents of the updated data element.
 func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceInput, optFns ...func(*Options)) (*UpdateDataSourceOutput, error) {
 	if params == nil {

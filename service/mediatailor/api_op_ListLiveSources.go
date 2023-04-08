@@ -37,8 +37,9 @@ type ListLiveSourcesInput struct {
 	SourceLocationName *string
 
 	// The maximum number of live sources that you want MediaTailor to return in
-	// response to the current request. If there are more than MaxResults live sources,
-	// use the value of NextToken in the response to get the next page of results.
+	// response to the current request. If there are more than MaxResults live
+	// sources, use the value of NextToken in the response to get the next page of
+	// results.
 	MaxResults int32
 
 	// Pagination token returned by the list request when results exceed the maximum
@@ -137,8 +138,9 @@ var _ ListLiveSourcesAPIClient = (*Client)(nil)
 // ListLiveSourcesPaginatorOptions is the paginator options for ListLiveSources
 type ListLiveSourcesPaginatorOptions struct {
 	// The maximum number of live sources that you want MediaTailor to return in
-	// response to the current request. If there are more than MaxResults live sources,
-	// use the value of NextToken in the response to get the next page of results.
+	// response to the current request. If there are more than MaxResults live
+	// sources, use the value of NextToken in the response to get the next page of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

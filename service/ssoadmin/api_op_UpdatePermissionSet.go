@@ -40,7 +40,7 @@ type UpdatePermissionSetInput struct {
 	// This member is required.
 	PermissionSetArn *string
 
-	// The description of the PermissionSet.
+	// The description of the PermissionSet .
 	Description *string
 
 	// Used to redirect users within the application during the federation

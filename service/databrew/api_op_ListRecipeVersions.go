@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the versions of a particular DataBrew recipe, except for LATEST_WORKING.
+// Lists the versions of a particular DataBrew recipe, except for LATEST_WORKING .
 func (c *Client) ListRecipeVersions(ctx context.Context, params *ListRecipeVersionsInput, optFns ...func(*Options)) (*ListRecipeVersionsOutput, error) {
 	if params == nil {
 		params = &ListRecipeVersionsInput{}

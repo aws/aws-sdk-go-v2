@@ -13,8 +13,8 @@ import (
 
 // Inspects the input text and returns a sentiment analysis for each entity
 // identified in the text. For more information about targeted sentiment, see
-// Targeted sentiment
-// (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html).
+// Targeted sentiment (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html)
+// .
 func (c *Client) DetectTargetedSentiment(ctx context.Context, params *DetectTargetedSentimentInput, optFns ...func(*Options)) (*DetectTargetedSentimentOutput, error) {
 	if params == nil {
 		params = &DetectTargetedSentimentInput{}

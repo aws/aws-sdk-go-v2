@@ -47,9 +47,9 @@ type ListChannelMembershipsInput struct {
 	// are returned.
 	NextToken *string
 
-	// The membership type of a user, DEFAULT or HIDDEN. Default members are always
-	// returned as part of ListChannelMemberships. Hidden members are only returned if
-	// the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden
+	// The membership type of a user, DEFAULT or HIDDEN . Default members are always
+	// returned as part of ListChannelMemberships . Hidden members are only returned if
+	// the type filter in ListChannelMemberships equals HIDDEN . Otherwise hidden
 	// members are not returned.
 	Type types.ChannelMembershipType
 

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a resource policy for the specified resource. This revokes the access of
-// the principals specified in the resource policy.
+// Deletes a resource policy for the specified resource. This revokes the access
+// of the principals specified in the resource policy.
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyInput{}

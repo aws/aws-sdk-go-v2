@@ -33,7 +33,7 @@ func (c *Client) ListChannelMembershipsForAppInstanceUser(ctx context.Context, p
 
 type ListChannelMembershipsForAppInstanceUserInput struct {
 
-	// The ARN of the AppInstanceUsers
+	// The ARN of the AppInstanceUser s
 	AppInstanceUserArn *string
 
 	// The AppInstanceUserArn of the user that makes the API call.

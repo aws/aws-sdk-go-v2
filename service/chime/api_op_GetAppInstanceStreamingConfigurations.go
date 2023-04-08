@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the streaming settings for an AppInstance.
+// Gets the streaming settings for an AppInstance .
 func (c *Client) GetAppInstanceStreamingConfigurations(ctx context.Context, params *GetAppInstanceStreamingConfigurationsInput, optFns ...func(*Options)) (*GetAppInstanceStreamingConfigurationsOutput, error) {
 	if params == nil {
 		params = &GetAppInstanceStreamingConfigurationsInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetAppInstanceStreamingConfigurations(ctx context.Context, para
 
 type GetAppInstanceStreamingConfigurationsInput struct {
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	//
 	// This member is required.
 	AppInstanceArn *string

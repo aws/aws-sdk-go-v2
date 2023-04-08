@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists statistics about the data collected for each of the sensors that have been
-// successfully ingested in the particular dataset. Can also be used to retreive
-// Sensor Statistics for a previous ingestion job.
+// Lists statistics about the data collected for each of the sensors that have
+// been successfully ingested in the particular dataset. Can also be used to
+// retreive Sensor Statistics for a previous ingestion job.
 func (c *Client) ListSensorStatistics(ctx context.Context, params *ListSensorStatisticsInput, optFns ...func(*Options)) (*ListSensorStatisticsOutput, error) {
 	if params == nil {
 		params = &ListSensorStatisticsInput{}

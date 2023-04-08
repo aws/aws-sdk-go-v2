@@ -13,7 +13,7 @@ import (
 
 // Retrieves partition metadata from the Data Catalog that contains unfiltered
 // metadata. For IAM authorization, the public IAM action associated with this API
-// is glue:GetPartition.
+// is glue:GetPartition .
 func (c *Client) GetUnfilteredPartitionMetadata(ctx context.Context, params *GetUnfilteredPartitionMetadataInput, optFns ...func(*Options)) (*GetUnfilteredPartitionMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredPartitionMetadataInput{}
@@ -67,8 +67,8 @@ type GetUnfilteredPartitionMetadataOutput struct {
 	// A list of column names that the user has been granted access to.
 	AuthorizedColumns []string
 
-	// A Boolean value that indicates whether the partition location is registered with
-	// Lake Formation.
+	// A Boolean value that indicates whether the partition location is registered
+	// with Lake Formation.
 	IsRegisteredWithLakeFormation bool
 
 	// A Partition object containing the partition metadata.

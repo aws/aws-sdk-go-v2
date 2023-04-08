@@ -11,9 +11,8 @@ import (
 )
 
 // Deletes the specified rule. Before you can delete the rule, you must remove all
-// targets, using RemoveTargets
-// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemoveTargets.html).
-// When you delete a rule, incoming events might continue to match to the deleted
+// targets, using RemoveTargets (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemoveTargets.html)
+// . When you delete a rule, incoming events might continue to match to the deleted
 // rule. Allow a short period of time for changes to take effect. If you call
 // delete rule multiple times for the same rule, all calls will succeed. When you
 // call delete rule for a non-existent custom eventbus, ResourceNotFoundException
@@ -44,15 +43,15 @@ type DeleteRuleInput struct {
 	// This member is required.
 	Name *string
 
-	// The name or ARN of the event bus associated with the rule. If you omit this, the
-	// default event bus is used.
+	// The name or ARN of the event bus associated with the rule. If you omit this,
+	// the default event bus is used.
 	EventBusName *string
 
 	// If this is a managed rule, created by an Amazon Web Services service on your
 	// behalf, you must specify Force as True to delete the rule. This parameter is
 	// ignored for rules that are not managed rules. You can check whether a rule is a
-	// managed rule by using DescribeRule or ListRules and checking the ManagedBy field
-	// of the response.
+	// managed rule by using DescribeRule or ListRules and checking the ManagedBy
+	// field of the response.
 	Force bool
 
 	noSmithyDocumentSerde

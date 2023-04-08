@@ -16,9 +16,8 @@ import (
 // batch transform jobs, models, labeling jobs, work teams, endpoint
 // configurations, and endpoints. Each tag consists of a key and an optional value.
 // Tag keys must be unique per resource. For more information about tags, see For
-// more information, see Amazon Web Services Tagging Strategies
-// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
-// Tags that you add to a hyperparameter tuning job by calling this API are also
+// more information, see Amazon Web Services Tagging Strategies (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
+// . Tags that you add to a hyperparameter tuning job by calling this API are also
 // added to any training jobs that the hyperparameter tuning job launches after you
 // call this API, but not to training jobs that the hyperparameter tuning job
 // launched before you called this API. To make sure that the tags associated with
@@ -32,7 +31,7 @@ import (
 // associated with a Domain or User Profile are also added to all Apps that the
 // Domain or User Profile launches, add the tags when you first create the Domain
 // or User Profile by specifying them in the Tags parameter of CreateDomain or
-// CreateUserProfile.
+// CreateUserProfile .
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}
@@ -57,8 +56,8 @@ type AddTagsInput struct {
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	//
 	// This member is required.
 	Tags []types.Tag

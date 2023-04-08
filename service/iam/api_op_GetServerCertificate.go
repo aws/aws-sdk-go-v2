@@ -12,9 +12,8 @@ import (
 )
 
 // Retrieves information about the specified server certificate stored in IAM. For
-// more information about working with server certificates, see Working with server
-// certificates
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
+// more information about working with server certificates, see Working with
+// server certificates (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
 // in the IAM User Guide. This topic includes a list of Amazon Web Services
 // services that can use the server certificates that you manage with IAM.
 func (c *Client) GetServerCertificate(ctx context.Context, params *GetServerCertificateInput, optFns ...func(*Options)) (*GetServerCertificateOutput, error) {
@@ -35,8 +34,8 @@ func (c *Client) GetServerCertificate(ctx context.Context, params *GetServerCert
 type GetServerCertificateInput struct {
 
 	// The name of the server certificate you want to retrieve information about. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
-	// string of characters consisting of upper and lowercase alphanumeric characters
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex) )
+	// a string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.

@@ -47,9 +47,9 @@ const (
 	DeviceStatusRetired DeviceStatus = "RETIRED"
 )
 
-// Values returns all known values for DeviceStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeviceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceStatus) Values() []DeviceStatus {
 	return []DeviceStatus{
 		"ONLINE",
@@ -121,9 +121,9 @@ const (
 	InstanceTypeMlC5n18xlarge  InstanceType = "ml.c5n.18xlarge"
 )
 
-// Values returns all known values for InstanceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InstanceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceType) Values() []InstanceType {
 	return []InstanceType{
 		"ml.m4.xlarge",
@@ -185,9 +185,9 @@ const (
 	JobEventTypeCancelled                    JobEventType = "CANCELLED"
 )
 
-// Values returns all known values for JobEventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (JobEventType) Values() []JobEventType {
 	return []JobEventType{
 		"WAITING_FOR_PRIORITY",
@@ -271,9 +271,9 @@ const (
 	SearchJobsFilterOperatorContains SearchJobsFilterOperator = "CONTAINS"
 )
 
-// Values returns all known values for SearchJobsFilterOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SearchJobsFilterOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SearchJobsFilterOperator) Values() []SearchJobsFilterOperator {
 	return []SearchJobsFilterOperator{
 		"LT",

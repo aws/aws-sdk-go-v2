@@ -40,14 +40,14 @@ type CreateCustomDataIdentifierInput struct {
 	// This member is required.
 	Name *string
 
-	// The regular expression (regex) that defines the pattern to match. The expression
-	// can contain as many as 512 characters.
+	// The regular expression (regex) that defines the pattern to match. The
+	// expression can contain as many as 512 characters.
 	//
 	// This member is required.
 	Regex *string
 
-	// A unique, case-sensitive token that you provide to ensure the idempotency of the
-	// request.
+	// A unique, case-sensitive token that you provide to ensure the idempotency of
+	// the request.
 	ClientToken *string
 
 	// A custom description of the custom data identifier. The description can contain

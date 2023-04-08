@@ -164,8 +164,8 @@ const (
 	DocumentationPartTypeResponseBody   DocumentationPartType = "RESPONSE_BODY"
 )
 
-// Values returns all known values for DocumentationPartType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DocumentationPartType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DocumentationPartType) Values() []DocumentationPartType {
 	return []DocumentationPartType{
@@ -217,9 +217,9 @@ const (
 	EndpointTypePrivate  EndpointType = "PRIVATE"
 )
 
-// Values returns all known values for EndpointType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointType) Values() []EndpointType {
 	return []EndpointType{
 		"REGIONAL",
@@ -417,9 +417,9 @@ const (
 	UnauthorizedCacheControlHeaderStrategySucceedWithoutResponseHeader UnauthorizedCacheControlHeaderStrategy = "SUCCEED_WITHOUT_RESPONSE_HEADER"
 )
 
-// Values returns all known values for UnauthorizedCacheControlHeaderStrategy. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for UnauthorizedCacheControlHeaderStrategy.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (UnauthorizedCacheControlHeaderStrategy) Values() []UnauthorizedCacheControlHeaderStrategy {
 	return []UnauthorizedCacheControlHeaderStrategy{

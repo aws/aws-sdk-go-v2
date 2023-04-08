@@ -28,8 +28,8 @@ func (c *Client) CancelResize(ctx context.Context, params *CancelResizeInput, op
 
 type CancelResizeInput struct {
 
-	// The unique identifier for the cluster that you want to cancel a resize operation
-	// for.
+	// The unique identifier for the cluster that you want to cancel a resize
+	// operation for.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -67,8 +67,8 @@ type CancelResizeOutput struct {
 	// table names.
 	ImportTablesInProgress []string
 
-	// The names of tables that have not been yet imported. Valid Values: List of table
-	// names
+	// The names of tables that have not been yet imported. Valid Values: List of
+	// table names
 	ImportTablesNotStarted []string
 
 	// An optional string to provide additional details about the resize action.
@@ -81,7 +81,7 @@ type CancelResizeOutput struct {
 	// estimated total amount of data before resize).
 	ProgressInMegaBytes *int64
 
-	// An enum with possible values of ClassicResize and ElasticResize. These values
+	// An enum with possible values of ClassicResize and ElasticResize . These values
 	// describe the type of resize operation being performed.
 	ResizeType *string
 
@@ -94,7 +94,7 @@ type CancelResizeOutput struct {
 	TargetClusterType *string
 
 	// The type of encryption for the cluster after the resize is complete. Possible
-	// values are KMS and None.
+	// values are KMS and None .
 	TargetEncryptionType *string
 
 	// The node type that the cluster will have after the resize operation is complete.

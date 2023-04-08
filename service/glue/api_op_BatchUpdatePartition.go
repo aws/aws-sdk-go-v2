@@ -53,8 +53,8 @@ type BatchUpdatePartitionInput struct {
 
 type BatchUpdatePartitionOutput struct {
 
-	// The errors encountered when trying to update the requested partitions. A list of
-	// BatchUpdatePartitionFailureEntry objects.
+	// The errors encountered when trying to update the requested partitions. A list
+	// of BatchUpdatePartitionFailureEntry objects.
 	Errors []types.BatchUpdatePartitionFailureEntry
 
 	// Metadata pertaining to the operation's result.

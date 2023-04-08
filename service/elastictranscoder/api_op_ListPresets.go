@@ -33,8 +33,8 @@ func (c *Client) ListPresets(ctx context.Context, params *ListPresetsInput, optF
 type ListPresetsInput struct {
 
 	// To list presets in chronological order by the date and time that they were
-	// created, enter true. To list presets in reverse chronological order, enter
-	// false.
+	// created, enter true . To list presets in reverse chronological order, enter
+	// false .
 	Ascending *string
 
 	// When Elastic Transcoder returns more than one page of results, use pageToken in
@@ -49,7 +49,7 @@ type ListPresetsOutput struct {
 
 	// A value that you use to access the second and subsequent pages of results, if
 	// any. When the presets fit on one page or when you've reached the last page of
-	// results, the value of NextPageToken is null.
+	// results, the value of NextPageToken is null .
 	NextPageToken *string
 
 	// An array of Preset objects.

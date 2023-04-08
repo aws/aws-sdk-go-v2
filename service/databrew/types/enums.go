@@ -182,8 +182,8 @@ const (
 	OrderAscending  Order = "ASCENDING"
 )
 
-// Values returns all known values for Order. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Order. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Order) Values() []Order {
 	return []Order{
@@ -199,9 +199,9 @@ const (
 	OrderedByLastModifiedDate OrderedBy = "LAST_MODIFIED_DATE"
 )
 
-// Values returns all known values for OrderedBy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrderedBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OrderedBy) Values() []OrderedBy {
 	return []OrderedBy{
 		"LAST_MODIFIED_DATE",
@@ -222,9 +222,9 @@ const (
 	OutputFormatTableauhyper OutputFormat = "TABLEAUHYPER"
 )
 
-// Values returns all known values for OutputFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"CSV",

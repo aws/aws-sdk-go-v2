@@ -14,7 +14,7 @@ import (
 // Modifies settings for a DB instance. You can change one or more database
 // configuration parameters by specifying these parameters and the new values in
 // the request. To learn what modifications you can make to your DB instance, call
-// DescribeValidDBInstanceModifications before you call ModifyDBInstance.
+// DescribeValidDBInstanceModifications before you call ModifyDBInstance .
 func (c *Client) ModifyDBInstance(ctx context.Context, params *ModifyDBInstanceInput, optFns ...func(*Options)) (*ModifyDBInstanceOutput, error) {
 	if params == nil {
 		params = &ModifyDBInstanceInput{}
@@ -34,8 +34,7 @@ type ModifyDBInstanceInput struct {
 
 	// The DB instance identifier. This value is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must match the identifier of an existing DBInstance.
+	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
@@ -51,9 +50,9 @@ type ModifyDBInstanceInput struct {
 	// Specifies whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the DB instance. If this parameter is set
-	// to false, changes to the DB instance are applied during the next maintenance
+	// to false , changes to the DB instance are applied during the next maintenance
 	// window. Some parameter changes can cause an outage and are applied on the next
-	// call to RebootDBInstance, or the next failure reboot. Default: false
+	// call to RebootDBInstance , or the next failure reboot. Default: false
 	ApplyImmediately bool
 
 	// Indicates that minor version upgrades are applied automatically to the DB
@@ -65,7 +64,7 @@ type ModifyDBInstanceInput struct {
 	AutoMinorVersionUpgrade *bool
 
 	// Not applicable. The retention period for automated backups is managed by the DB
-	// cluster. For more information, see ModifyDBCluster. Default: Uses existing
+	// cluster. For more information, see ModifyDBCluster . Default: Uses existing
 	// setting
 	BackupRetentionPeriod *int32
 
@@ -80,11 +79,11 @@ type ModifyDBInstanceInput struct {
 	// otherwise false. The default is false.
 	CopyTagsToSnapshot *bool
 
-	// The new compute and memory capacity of the DB instance, for example,
-	// db.m4.large. Not all DB instance classes are available in all Amazon Regions. If
-	// you modify the DB instance class, an outage occurs during the change. The change
-	// is applied during the next maintenance window, unless ApplyImmediately is
-	// specified as true for this request. Default: Uses existing setting
+	// The new compute and memory capacity of the DB instance, for example, db.m4.large
+	// . Not all DB instance classes are available in all Amazon Regions. If you modify
+	// the DB instance class, an outage occurs during the change. The change is applied
+	// during the next maintenance window, unless ApplyImmediately is specified as true
+	// for this request. Default: Uses existing setting
 	DBInstanceClass *string
 
 	// The name of the DB parameter group to apply to the DB instance. Changing this
@@ -106,9 +105,7 @@ type ModifyDBInstanceInput struct {
 	// A list of DB security groups to authorize on this DB instance. Changing this
 	// setting doesn't result in an outage and the change is asynchronously applied as
 	// soon as possible. Constraints:
-	//
-	// * If supplied, must match existing
-	// DBSecurityGroups.
+	//   - If supplied, must match existing DBSecurityGroups.
 	DBSecurityGroups []string
 
 	// The new DB subnet group for the DB instance. You can use this parameter to move
@@ -121,8 +118,8 @@ type ModifyDBInstanceInput struct {
 
 	// A value that indicates whether the DB instance has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled. See Deleting a DB Instance
-	// (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html).
+	// deletion protection is disabled. See Deleting a DB Instance (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html)
+	// .
 	DeletionProtection *bool
 
 	// Not supported.
@@ -135,14 +132,14 @@ type ModifyDBInstanceInput struct {
 	// to database accounts, and otherwise false. You can enable IAM database
 	// authentication for the following database engines Not applicable. Mapping Amazon
 	// IAM accounts to database accounts is managed by the DB cluster. For more
-	// information, see ModifyDBCluster. Default: false
+	// information, see ModifyDBCluster . Default: false
 	EnableIAMDatabaseAuthentication *bool
 
 	// (Not supported by Neptune)
 	EnablePerformanceInsights *bool
 
-	// The version number of the database engine to upgrade to. Currently, setting this
-	// parameter has no effect. To upgrade your database engine to the most recent
+	// The version number of the database engine to upgrade to. Currently, setting
+	// this parameter has no effect. To upgrade your database engine to the most recent
 	// release, use the ApplyPendingMaintenanceAction API.
 	EngineVersion *string
 
@@ -167,14 +164,14 @@ type ModifyDBInstanceInput struct {
 
 	// The ARN for the IAM role that permits Neptune to send enhanced monitoring
 	// metrics to Amazon CloudWatch Logs. For example,
-	// arn:aws:iam:123456789012:role/emaccess. If MonitoringInterval is set to a value
-	// other than 0, then you must supply a MonitoringRoleArn value.
+	// arn:aws:iam:123456789012:role/emaccess . If MonitoringInterval is set to a
+	// value other than 0, then you must supply a MonitoringRoleArn value.
 	MonitoringRoleArn *string
 
 	// Specifies if the DB instance is a Multi-AZ deployment. Changing this parameter
 	// doesn't result in an outage and the change is applied during the next
-	// maintenance window unless the ApplyImmediately parameter is set to true for this
-	// request.
+	// maintenance window unless the ApplyImmediately parameter is set to true for
+	// this request.
 	MultiAZ *bool
 
 	// The new DB instance identifier for the DB instance when renaming a DB instance.
@@ -182,15 +179,9 @@ type ModifyDBInstanceInput struct {
 	// immediately if you set Apply Immediately to true, or will occur during the next
 	// maintenance window if Apply Immediately to false. This value is stored as a
 	// lowercase string. Constraints:
-	//
-	// * Must contain from 1 to 63 letters, numbers, or
-	// hyphens.
-	//
-	// * The first character must be a letter.
-	//
-	// * Cannot end with a hyphen or
-	// contain two consecutive hyphens.
-	//
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
 
@@ -202,18 +193,12 @@ type ModifyDBInstanceInput struct {
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled. Not applicable. The daily time range for creating automated
-	// backups is managed by the DB cluster. For more information, see ModifyDBCluster.
-	// Constraints:
-	//
-	// * Must be in the format hh24:mi-hh24:mi
-	//
-	// * Must be in Universal
-	// Time Coordinated (UTC)
-	//
-	// * Must not conflict with the preferred maintenance
-	// window
-	//
-	// * Must be at least 30 minutes
+	// backups is managed by the DB cluster. For more information, see ModifyDBCluster
+	// . Constraints:
+	//   - Must be in the format hh24:mi-hh24:mi
+	//   - Must be in Universal Time Coordinated (UTC)
+	//   - Must not conflict with the preferred maintenance window
+	//   - Must be at least 30 minutes
 	PreferredBackupWindow *string
 
 	// The weekly time range (in UTC) during which system maintenance can occur, which
@@ -251,10 +236,8 @@ type ModifyDBInstanceInput struct {
 	// A list of EC2 VPC security groups to authorize on this DB instance. This change
 	// is asynchronously applied as soon as possible. Not applicable. The associated
 	// list of EC2 VPC security groups is managed by the DB cluster. For more
-	// information, see ModifyDBCluster. Constraints:
-	//
-	// * If supplied, must match
-	// existing VpcSecurityGroupIds.
+	// information, see ModifyDBCluster . Constraints:
+	//   - If supplied, must match existing VpcSecurityGroupIds.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde
@@ -262,8 +245,8 @@ type ModifyDBInstanceInput struct {
 
 type ModifyDBInstanceOutput struct {
 
-	// Contains the details of an Amazon Neptune DB instance. This data type is used as
-	// a response element in the DescribeDBInstances action.
+	// Contains the details of an Amazon Neptune DB instance. This data type is used
+	// as a response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

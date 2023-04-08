@@ -60,8 +60,8 @@ type DescribeFlowDefinitionOutput struct {
 	// This member is required.
 	FlowDefinitionStatus types.FlowDefinitionStatus
 
-	// An object containing information about who works on the task, the workforce task
-	// price, and other task details.
+	// An object containing information about who works on the task, the workforce
+	// task price, and other task details.
 	//
 	// This member is required.
 	HumanLoopConfig *types.HumanLoopConfig

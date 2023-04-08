@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specify the default version of an extension. The default version of an extension
-// will be used in CloudFormation operations.
+// Specify the default version of an extension. The default version of an
+// extension will be used in CloudFormation operations.
 func (c *Client) SetTypeDefaultVersion(ctx context.Context, params *SetTypeDefaultVersionInput, optFns ...func(*Options)) (*SetTypeDefaultVersionOutput, error) {
 	if params == nil {
 		params = &SetTypeDefaultVersionInput{}
@@ -31,16 +31,16 @@ func (c *Client) SetTypeDefaultVersion(ctx context.Context, params *SetTypeDefau
 type SetTypeDefaultVersionInput struct {
 
 	// The Amazon Resource Name (ARN) of the extension for which you want version
-	// summary information. Conditional: You must specify either TypeName and Type, or
-	// Arn.
+	// summary information. Conditional: You must specify either TypeName and Type , or
+	// Arn .
 	Arn *string
 
-	// The kind of extension. Conditional: You must specify either TypeName and Type,
-	// or Arn.
+	// The kind of extension. Conditional: You must specify either TypeName and Type ,
+	// or Arn .
 	Type types.RegistryType
 
 	// The name of the extension. Conditional: You must specify either TypeName and
-	// Type, or Arn.
+	// Type , or Arn .
 	TypeName *string
 
 	// The ID of a specific version of the extension. The version ID is the value at

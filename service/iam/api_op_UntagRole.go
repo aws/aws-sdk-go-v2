@@ -11,9 +11,8 @@ import (
 )
 
 // Removes the specified tags from the role. For more information about tagging,
-// see Tagging IAM resources
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-// Guide.
+// see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
+// in the IAM User Guide.
 func (c *Client) UntagRole(ctx context.Context, params *UntagRoleInput, optFns ...func(*Options)) (*UntagRoleOutput, error) {
 	if params == nil {
 		params = &UntagRoleInput{}
@@ -32,7 +31,7 @@ func (c *Client) UntagRole(ctx context.Context, params *UntagRoleInput, optFns .
 type UntagRoleInput struct {
 
 	// The name of the IAM role from which you want to remove tags. This parameter
-	// accepts (through its regex pattern (http://wikipedia.org/wiki/regex)) a string
+	// accepts (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
 	// of characters that consist of upper and lowercase alphanumeric characters with
 	// no spaces. You can also include any of the following characters: _+=,.@-
 	//

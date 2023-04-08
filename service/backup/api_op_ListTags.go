@@ -14,8 +14,7 @@ import (
 // Returns a list of key-value pairs assigned to a target recovery point, backup
 // plan, or backup vault. ListTags only works for resource types that support full
 // Backup management of their backups. Those resource types are listed in the "Full
-// Backup management" section of the  Feature availability by resource
-// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
+// Backup management" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 // table.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
@@ -34,9 +33,9 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 
 type ListTagsInput struct {
 
-	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
-	// the ARN depends on the type of resource. Valid targets for ListTags are recovery
-	// points, backup plans, and backup vaults.
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
+	// of the ARN depends on the type of resource. Valid targets for ListTags are
+	// recovery points, backup plans, and backup vaults.
 	//
 	// This member is required.
 	ResourceArn *string

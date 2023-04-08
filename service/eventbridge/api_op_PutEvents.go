@@ -40,7 +40,7 @@ type PutEventsInput struct {
 
 	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is
 	// https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is
-	// abcde.veo. When using Java, you must include auth-crt on the class path.
+	// abcde.veo . When using Java, you must include auth-crt on the class path.
 	EndpointId *string
 
 	noSmithyDocumentSerde

@@ -18,8 +18,7 @@ import (
 // set the new version as the policy's default version. The default version is the
 // version that is in effect for the IAM users, groups, and roles to which the
 // policy is attached. For more information about managed policy versions, see
-// Versioning for managed policies
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
+// Versioning for managed policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 // in the IAM User Guide.
 func (c *Client) CreatePolicyVersion(ctx context.Context, params *CreatePolicyVersionInput, optFns ...func(*Options)) (*CreatePolicyVersionOutput, error) {
 	if params == nil {
@@ -39,9 +38,8 @@ func (c *Client) CreatePolicyVersion(ctx context.Context, params *CreatePolicyVe
 type CreatePolicyVersionInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM policy to which you want to add a new
-	// version. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// version. For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	PolicyArn *string
@@ -53,30 +51,24 @@ type CreatePolicyVersionInput struct {
 	// before submitting it to IAM. The maximum length of the policy document that you
 	// can pass in this operation, including whitespace, is listed below. To view the
 	// maximum character counts of a managed policy with no whitespaces, see IAM and
-	// STS character quotas
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length).
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
+	// STS character quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length)
+	// . The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
 	// parameter is a string of characters consisting of the following:
-	//
-	// * Any
-	// printable ASCII character ranging from the space character (\u0020) through the
-	// end of the ASCII character range
-	//
-	// * The printable characters in the Basic Latin
-	// and Latin-1 Supplement character set (through \u00FF)
-	//
-	// * The special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
+	//   - Any printable ASCII character ranging from the space character ( \u0020 )
+	//   through the end of the ASCII character range
+	//   - The printable characters in the Basic Latin and Latin-1 Supplement
+	//   character set (through \u00FF )
+	//   - The special characters tab ( \u0009 ), line feed ( \u000A ), and carriage
+	//   return ( \u000D )
 	//
 	// This member is required.
 	PolicyDocument *string
 
-	// Specifies whether to set this version as the policy's default version. When this
-	// parameter is true, the new policy version becomes the operative version. That
-	// is, it becomes the version that is in effect for the IAM users, groups, and
+	// Specifies whether to set this version as the policy's default version. When
+	// this parameter is true , the new policy version becomes the operative version.
+	// That is, it becomes the version that is in effect for the IAM users, groups, and
 	// roles that the policy is attached to. For more information about managed policy
-	// versions, see Versioning for managed policies
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
+	// versions, see Versioning for managed policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
 	SetAsDefault bool
 

@@ -42,8 +42,8 @@ type DeleteOptOutListInput struct {
 
 type DeleteOptOutListOutput struct {
 
-	// The time when the OptOutList was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the OptOutList was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	CreatedTimestamp *time.Time
 
 	// The Amazon Resource Name (ARN) of the OptOutList that was removed.

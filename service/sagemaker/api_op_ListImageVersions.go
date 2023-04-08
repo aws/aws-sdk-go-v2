@@ -57,10 +57,10 @@ type ListImageVersionsInput struct {
 	// versions, the call returns a token for getting the next set of versions.
 	NextToken *string
 
-	// The property used to sort results. The default value is CREATION_TIME.
+	// The property used to sort results. The default value is CREATION_TIME .
 	SortBy types.ImageVersionSortBy
 
-	// The sort order. The default value is DESCENDING.
+	// The sort order. The default value is DESCENDING .
 	SortOrder types.ImageVersionSortOrder
 
 	noSmithyDocumentSerde

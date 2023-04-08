@@ -12,9 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a rule for the specified Amazon Connect instance. Use the Rules Function
-// language
-// (https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html)
+// Creates a rule for the specified Amazon Connect instance. Use the Rules
+// Function language (https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html)
 // to code conditions for the rule.
 func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns ...func(*Options)) (*CreateRuleOutput, error) {
 	if params == nil {
@@ -43,8 +42,7 @@ type CreateRuleInput struct {
 	// This member is required.
 	Function *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -68,8 +66,8 @@ type CreateRuleInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	noSmithyDocumentSerde

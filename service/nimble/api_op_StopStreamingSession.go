@@ -32,7 +32,7 @@ func (c *Client) StopStreamingSession(ctx context.Context, params *StopStreaming
 
 type StopStreamingSessionInput struct {
 
-	// The streaming session ID for the StopStreamingSessionRequest.
+	// The streaming session ID for the StopStreamingSessionRequest .
 	//
 	// This member is required.
 	SessionId *string
@@ -48,8 +48,8 @@ type StopStreamingSessionInput struct {
 	// idempotency.
 	ClientToken *string
 
-	// Adds additional instructions to a streaming session stop action to either retain
-	// the EBS volumes or delete the EBS volumes.
+	// Adds additional instructions to a streaming session stop action to either
+	// retain the EBS volumes or delete the EBS volumes.
 	VolumeRetentionMode types.VolumeRetentionMode
 
 	noSmithyDocumentSerde

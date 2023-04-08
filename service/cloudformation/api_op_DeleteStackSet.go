@@ -13,7 +13,7 @@ import (
 
 // Deletes a stack set. Before you can delete a stack set, all its member stack
 // instances must be deleted. For more information about how to complete this, see
-// DeleteStackInstances.
+// DeleteStackInstances .
 func (c *Client) DeleteStackSet(ctx context.Context, params *DeleteStackSetInput, optFns ...func(*Options)) (*DeleteStackSetOutput, error) {
 	if params == nil {
 		params = &DeleteStackSetInput{}
@@ -31,8 +31,8 @@ func (c *Client) DeleteStackSet(ctx context.Context, params *DeleteStackSetInput
 
 type DeleteStackSetInput struct {
 
-	// The name or unique ID of the stack set that you're deleting. You can obtain this
-	// value by running ListStackSets.
+	// The name or unique ID of the stack set that you're deleting. You can obtain
+	// this value by running ListStackSets .
 	//
 	// This member is required.
 	StackSetName *string
@@ -41,16 +41,12 @@ type DeleteStackSetInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account. By default, SELF is specified. Use SELF for
 	// stack sets with self-managed permissions.
-	//
-	// * If you are signed in to the
-	// management account, specify SELF.
-	//
-	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
-	// must be registered as a delegated administrator in the management account. For
-	// more information, see Register a delegated administrator
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the CloudFormation User Guide.
+	//   - If you are signed in to the management account, specify SELF .
+	//   - If you are signed in to a delegated administrator account, specify
+	//   DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a
+	//   delegated administrator in the management account. For more information, see
+	//   Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
+	//   in the CloudFormation User Guide.
 	CallAs types.CallAs
 
 	noSmithyDocumentSerde

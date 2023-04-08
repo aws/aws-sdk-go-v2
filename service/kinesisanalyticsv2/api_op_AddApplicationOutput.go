@@ -75,8 +75,8 @@ type AddApplicationOutputOutput struct {
 	ApplicationVersionId *int64
 
 	// Describes the application output configuration. For more information, see
-	// Configuring Application Output
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
+	// Configuring Application Output (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html)
+	// .
 	OutputDescriptions []types.OutputDescription
 
 	// Metadata pertaining to the operation's result.

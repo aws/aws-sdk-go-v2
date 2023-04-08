@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the details associated with creating a report as specified by its
-// ReportJobId.
+// ReportJobId .
 func (c *Client) DescribeReportJob(ctx context.Context, params *DescribeReportJobInput, optFns ...func(*Options)) (*DescribeReportJobOutput, error) {
 	if params == nil {
 		params = &DescribeReportJobInput{}

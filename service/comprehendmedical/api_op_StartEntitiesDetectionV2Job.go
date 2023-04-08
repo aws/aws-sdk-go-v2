@@ -34,20 +34,20 @@ type StartEntitiesDetectionV2JobInput struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Comprehend Medical; read access to your input data. For more
-	// information, see  Role-Based Permissions Required for Asynchronous Operations
-	// (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med).
+	// information, see Role-Based Permissions Required for Asynchronous Operations (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med)
+	// .
 	//
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// The input configuration that specifies the format and location of the input data
-	// for the job.
+	// The input configuration that specifies the format and location of the input
+	// data for the job.
 	//
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The language of the input documents. All documents must be in the same language.
-	// Comprehend Medical; processes files in US English (en).
+	// The language of the input documents. All documents must be in the same
+	// language. Comprehend Medical; processes files in US English (en).
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode

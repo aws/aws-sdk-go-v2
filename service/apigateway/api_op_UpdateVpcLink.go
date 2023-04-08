@@ -36,8 +36,8 @@ type UpdateVpcLinkInput struct {
 	// This member is required.
 	VpcLinkId *string
 
-	// For more information about supported patch operations, see Patch Operations
-	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
+	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
+	// .
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -57,9 +57,9 @@ type UpdateVpcLinkOutput struct {
 	// The name used to label and identify the VPC link.
 	Name *string
 
-	// The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING,
-	// or FAILED. Deploying an API will wait if the status is PENDING and will fail if
-	// the status is DELETING.
+	// The status of the VPC link. The valid values are AVAILABLE , PENDING , DELETING
+	// , or FAILED . Deploying an API will wait if the status is PENDING and will fail
+	// if the status is DELETING .
 	Status types.VpcLinkStatus
 
 	// A description about the VPC link status.

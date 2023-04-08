@@ -11,8 +11,7 @@ import (
 )
 
 // Starts a channel. For information about MediaTailor channels, see Working with
-// channels
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
+// channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
 // in the MediaTailor User Guide.
 func (c *Client) StartChannel(ctx context.Context, params *StartChannelInput, optFns ...func(*Options)) (*StartChannelOutput, error) {
 	if params == nil {

@@ -14,8 +14,7 @@ import (
 // Starts a new task using the specified task definition. You can allow Amazon ECS
 // to place tasks for you, or you can customize how Amazon ECS places tasks using
 // placement constraints and placement strategies. For more information, see
-// Scheduling Tasks
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
+// Scheduling Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
 // in the Amazon Elastic Container Service Developer Guide. Alternatively, you can
 // use StartTask to use your own scheduler or place tasks manually on specific
 // container instances. Starting April 15, 2023, Amazon Web Services will not
@@ -30,20 +29,17 @@ import (
 // means that the result of an API command you run that affects your Amazon ECS
 // resources might not be immediately visible to all subsequent commands you run.
 // Keep this in mind when you carry out an API command that immediately follows a
-// previous API command. To manage eventual consistency, you can do the
-// following:
-//
-// * Confirm the state of the resource before you run a command to
-// modify it. Run the DescribeTasks command using an exponential backoff algorithm
-// to ensure that you allow enough time for the previous command to propagate
-// through the system. To do this, run the DescribeTasks command repeatedly,
-// starting with a couple of seconds of wait time and increasing gradually up to
-// five minutes of wait time.
-//
-// * Add wait time between subsequent commands, even if
-// the DescribeTasks command returns an accurate response. Apply an exponential
-// backoff algorithm starting with a couple of seconds of wait time, and increase
-// gradually up to about five minutes of wait time.
+// previous API command. To manage eventual consistency, you can do the following:
+//   - Confirm the state of the resource before you run a command to modify it.
+//     Run the DescribeTasks command using an exponential backoff algorithm to ensure
+//     that you allow enough time for the previous command to propagate through the
+//     system. To do this, run the DescribeTasks command repeatedly, starting with a
+//     couple of seconds of wait time and increasing gradually up to five minutes of
+//     wait time.
+//   - Add wait time between subsequent commands, even if the DescribeTasks
+//     command returns an accurate response. Apply an exponential backoff algorithm
+//     starting with a couple of seconds of wait time, and increase gradually up to
+//     about five minutes of wait time.
 func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...func(*Options)) (*RunTaskOutput, error) {
 	if params == nil {
 		params = &RunTaskInput{}
@@ -61,33 +57,32 @@ func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...fu
 
 type RunTaskInput struct {
 
-	// The family and revision (family:revision) or full ARN of the task definition to
-	// run. If a revision isn't specified, the latest ACTIVE revision is used. When you
-	// create a policy for run-task, you can set the resource to be the latest task
+	// The family and revision ( family:revision ) or full ARN of the task definition
+	// to run. If a revision isn't specified, the latest ACTIVE revision is used. When
+	// you create a policy for run-task, you can set the resource to be the latest task
 	// definition revision, or a specific revision. The full ARN value must match the
 	// value that you specified as the Resource of the principal's permissions policy.
 	// When you specify the policy resource as the latest task definition version (by
 	// setting the Resource in the policy to
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName), then set
-	// this value to arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName.
-	// When you specify the policy resource as a specific task definition version (by
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName ), then set
+	// this value to arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName
+	// . When you specify the policy resource as a specific task definition version (by
 	// setting the Resource in the policy to
 	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1 or
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*), then set
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:* ), then set
 	// this value to
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1. For more
-	// information, see Policy Resources for Amazon ECS
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources)
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1 . For more
+	// information, see Policy Resources for Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources)
 	// in the Amazon Elastic Container Service developer Guide.
 	//
 	// This member is required.
 	TaskDefinition *string
 
 	// The capacity provider strategy to use for the task. If a
-	// capacityProviderStrategy is specified, the launchType parameter must be omitted.
-	// If no capacityProviderStrategy or launchType is specified, the
+	// capacityProviderStrategy is specified, the launchType parameter must be
+	// omitted. If no capacityProviderStrategy or launchType is specified, the
 	// defaultCapacityProviderStrategy for the cluster is used. When you use cluster
-	// auto scaling, you must specify capacityProviderStrategy and not launchType. A
+	// auto scaling, you must specify capacityProviderStrategy and not launchType . A
 	// capacity provider strategy may contain a maximum of 6 capacity providers.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
@@ -95,48 +90,44 @@ type RunTaskInput struct {
 	// task on. If you do not specify a cluster, the default cluster is assumed.
 	Cluster *string
 
-	// The number of instantiations of the specified task to place on your cluster. You
-	// can specify up to 10 tasks for each call.
+	// The number of instantiations of the specified task to place on your cluster.
+	// You can specify up to 10 tasks for each call.
 	Count *int32
 
 	// Specifies whether to use Amazon ECS managed tags for the task. For more
-	// information, see Tagging Your Amazon ECS Resources
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
 	// Determines whether to use the execute command functionality for the containers
-	// in this task. If true, this enables execute command functionality on all
-	// containers in the task. If true, then the task definition must have a task role,
-	// or you must provide one as an override.
+	// in this task. If true , this enables execute command functionality on all
+	// containers in the task. If true , then the task definition must have a task
+	// role, or you must provide one as an override.
 	EnableExecuteCommand bool
 
 	// The name of the task group to associate with the task. The default value is the
-	// family name of the task definition (for example, family:my-family-name).
+	// family name of the task definition (for example, family:my-family-name ).
 	Group *string
 
 	// The infrastructure to run your standalone task on. For more information, see
-	// Amazon ECS launch types
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
-	// in the Amazon Elastic Container Service Developer Guide. The FARGATE launch type
-	// runs your tasks on Fargate On-Demand infrastructure. Fargate Spot infrastructure
-	// is available for use but a capacity provider strategy must be used. For more
-	// information, see Fargate capacity providers
-	// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html)
-	// in the Amazon ECS User Guide for Fargate. The EC2 launch type runs your tasks on
-	// Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs
-	// your tasks on your on-premises server or virtual machine (VM) capacity
+	// Amazon ECS launch types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
+	// in the Amazon Elastic Container Service Developer Guide. The FARGATE launch
+	// type runs your tasks on Fargate On-Demand infrastructure. Fargate Spot
+	// infrastructure is available for use but a capacity provider strategy must be
+	// used. For more information, see Fargate capacity providers (https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html)
+	// in the Amazon ECS User Guide for Fargate. The EC2 launch type runs your tasks
+	// on Amazon EC2 instances registered to your cluster. The EXTERNAL launch type
+	// runs your tasks on your on-premises server or virtual machine (VM) capacity
 	// registered to your cluster. A task can use either a launch type or a capacity
 	// provider strategy. If a launchType is specified, the capacityProviderStrategy
 	// parameter must be omitted. When you use cluster auto scaling, you must specify
-	// capacityProviderStrategy and not launchType.
+	// capacityProviderStrategy and not launchType .
 	LaunchType types.LaunchType
 
 	// The network configuration for the task. This parameter is required for task
 	// definitions that use the awsvpc network mode to receive their own elastic
 	// network interface, and it isn't supported for other network modes. For more
-	// information, see Task networking
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
+	// information, see Task networking (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	NetworkConfiguration *types.NetworkConfiguration
 
@@ -150,31 +141,30 @@ type RunTaskInput struct {
 	// limit includes the JSON formatting characters of the override structure.
 	Overrides *types.TaskOverride
 
-	// An array of placement constraint objects to use for the task. You can specify up
-	// to 10 constraints for each task (including constraints in the task definition
+	// An array of placement constraint objects to use for the task. You can specify
+	// up to 10 constraints for each task (including constraints in the task definition
 	// and those specified at runtime).
 	PlacementConstraints []types.PlacementConstraint
 
-	// The placement strategy objects to use for the task. You can specify a maximum of
-	// 5 strategy rules for each task.
+	// The placement strategy objects to use for the task. You can specify a maximum
+	// of 5 strategy rules for each task.
 	PlacementStrategy []types.PlacementStrategy
 
 	// The platform version the task uses. A platform version is only specified for
 	// tasks hosted on Fargate. If one isn't specified, the LATEST platform version is
-	// used. For more information, see Fargate platform versions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
+	// used. For more information, see Fargate platform versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
-	// Specifies whether to propagate the tags from the task definition to the task. If
-	// no value is specified, the tags aren't propagated. Tags can only be propagated
-	// to the task during task creation. To add tags to a task after task creation, use
-	// the TagResource API action. An error will be received if you specify the SERVICE
-	// option when running a task.
+	// Specifies whether to propagate the tags from the task definition to the task.
+	// If no value is specified, the tags aren't propagated. Tags can only be
+	// propagated to the task during task creation. To add tags to a task after task
+	// creation, use the TagResource API action. An error will be received if you
+	// specify the SERVICE option when running a task.
 	PropagateTags types.PropagateTags
 
-	// The reference ID to use for the task. The reference ID can have a maximum length
-	// of 1024 characters.
+	// The reference ID to use for the task. The reference ID can have a maximum
+	// length of 1024 characters.
 	ReferenceId *string
 
 	// An optional tag specified when a task is started. For example, if you
@@ -190,31 +180,20 @@ type RunTaskInput struct {
 	// The metadata that you apply to the task to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
-	//
-	// * Maximum number of
-	// tags per resource - 50
-	//
-	// * For each resource, each tag key must be unique, and
-	// each tag key can have only one value.
-	//
-	// * Maximum key length - 128 Unicode
-	// characters in UTF-8
-	//
-	// * Maximum value length - 256 Unicode characters in UTF-8
-	//
-	// *
-	// If your tagging schema is used across multiple services and resources, remember
-	// that other services may have restrictions on allowed characters. Generally
-	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
-	// the following characters: + - = . _ : / @.
-	//
-	// * Tag keys and values are
-	// case-sensitive.
-	//
-	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for Amazon Web
-	// Services use. You cannot edit or delete tag keys or values with this prefix.
-	// Tags with this prefix do not count against your tags per resource limit.
+	//   - Maximum number of tags per resource - 50
+	//   - For each resource, each tag key must be unique, and each tag key can have
+	//   only one value.
+	//   - Maximum key length - 128 Unicode characters in UTF-8
+	//   - Maximum value length - 256 Unicode characters in UTF-8
+	//   - If your tagging schema is used across multiple services and resources,
+	//   remember that other services may have restrictions on allowed characters.
+	//   Generally allowed characters are: letters, numbers, and spaces representable in
+	//   UTF-8, and the following characters: + - = . _ : / @.
+	//   - Tag keys and values are case-sensitive.
+	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
+	//   prefix for either keys or values as it is reserved for Amazon Web Services use.
+	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
+	//   prefix do not count against your tags per resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

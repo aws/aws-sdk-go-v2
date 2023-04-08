@@ -13,8 +13,7 @@ import (
 )
 
 // Returns information about Aurora global database clusters. This API supports
-// pagination. For more information on Amazon Aurora, see  What is Amazon Aurora?
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// pagination. For more information on Amazon Aurora, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
 func (c *Client) DescribeGlobalClusters(ctx context.Context, params *DescribeGlobalClustersInput, optFns ...func(*Options)) (*DescribeGlobalClustersOutput, error) {
 	if params == nil {
@@ -39,14 +38,12 @@ type DescribeGlobalClustersInput struct {
 	// The user-supplied DB cluster identifier. If this parameter is specified,
 	// information from only the specific DB cluster is returned. This parameter isn't
 	// case-sensitive. Constraints:
-	//
-	// * If supplied, must match an existing
-	// DBClusterIdentifier.
+	//   - If supplied, must match an existing DBClusterIdentifier.
 	GlobalClusterIdentifier *string
 
 	// An optional pagination token provided by a previous DescribeGlobalClusters
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -65,7 +62,7 @@ type DescribeGlobalClustersOutput struct {
 
 	// An optional pagination token provided by a previous DescribeGlobalClusters
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

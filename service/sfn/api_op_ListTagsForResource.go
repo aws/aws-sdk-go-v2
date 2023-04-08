@@ -12,7 +12,7 @@ import (
 )
 
 // List tags for a given resource. Tags may only contain Unicode letters, digits,
-// white space, or these symbols: _ . : / = + - @.
+// white space, or these symbols: _ . : / = + - @ .
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

@@ -15,8 +15,8 @@ const (
 	ActiveDirectoryStatusUnknownError ActiveDirectoryStatus = "UNKNOWN_ERROR"
 )
 
-// Values returns all known values for ActiveDirectoryStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ActiveDirectoryStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ActiveDirectoryStatus) Values() []ActiveDirectoryStatus {
 	return []ActiveDirectoryStatus{
@@ -137,9 +137,9 @@ const (
 	ErrorCodeVolumeNotReady                    ErrorCode = "VolumeNotReady"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"ActivationKeyExpired",
@@ -284,9 +284,9 @@ const (
 	ObjectACLAwsExecRead            ObjectACL = "aws-exec-read"
 )
 
-// Values returns all known values for ObjectACL. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ObjectACL. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ObjectACL) Values() []ObjectACL {
 	return []ObjectACL{
 		"private",

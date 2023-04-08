@@ -14,8 +14,7 @@ import (
 // Exports optimization recommendations for Amazon ECS services on Fargate.
 // Recommendations are exported in a CSV file, and its metadata in a JSON file, to
 // an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify.
-// For more information, see Exporting Recommendations
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html)
+// For more information, see Exporting Recommendations (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html)
 // in the Compute Optimizer User Guide. You can only have one Amazon ECS service
 // export job in progress per Amazon Web Services Region.
 func (c *Client) ExportECSServiceRecommendations(ctx context.Context, params *ExportECSServiceRecommendationsInput, optFns ...func(*Options)) (*ExportECSServiceRecommendationsOutput, error) {
@@ -42,9 +41,8 @@ type ExportECSServiceRecommendationsInput struct {
 	// the S3 bucket, ensure that it has the required permission policy to allow
 	// Compute Optimizer to write the export file to it. If you plan to specify an
 	// object prefix when you create the export job, you must include the object prefix
-	// in the policy that you add to the S3 bucket. For more information, see Amazon S3
-	// Bucket Policy for Compute Optimizer
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
+	// in the policy that you add to the S3 bucket. For more information, see Amazon
+	// S3 Bucket Policy for Compute Optimizer (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
 	// in the Compute Optimizer User Guide.
 	//
 	// This member is required.
@@ -61,8 +59,7 @@ type ExportECSServiceRecommendationsInput struct {
 	AccountIds []string
 
 	// The recommendations data to include in the export file. For more information
-	// about the fields that can be exported, see Exported files
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files)
+	// about the fields that can be exported, see Exported files (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files)
 	// in the Compute Optimizer User Guide.
 	FieldsToExport []types.ExportableECSServiceField
 
@@ -79,8 +76,7 @@ type ExportECSServiceRecommendationsInput struct {
 	// resources in all member accounts of the organization. The member accounts must
 	// also be opted in to Compute Optimizer, and trusted access for Compute Optimizer
 	// must be enabled in the organization account. For more information, see Compute
-	// Optimizer and Amazon Web Services Organizations trusted access
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access)
+	// Optimizer and Amazon Web Services Organizations trusted access (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access)
 	// in the Compute Optimizer User Guide. If this parameter is omitted,
 	// recommendations for member accounts of the organization aren't included in the
 	// export file. If this parameter or the account ID parameter is omitted,

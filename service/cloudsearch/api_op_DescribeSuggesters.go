@@ -16,8 +16,7 @@ import (
 // specific suggesters by name. By default, shows all suggesters and includes any
 // pending changes to the configuration. Set the Deployed option to true to show
 // the active configuration and exclude pending changes. For more information, see
-// Getting Search Suggestions
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
+// Getting Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DescribeSuggesters(ctx context.Context, params *DescribeSuggestersInput, optFns ...func(*Options)) (*DescribeSuggestersOutput, error) {
 	if params == nil {
@@ -38,7 +37,7 @@ func (c *Client) DescribeSuggesters(ctx context.Context, params *DescribeSuggest
 // name of the domain you want to describe. To restrict the response to particular
 // suggesters, specify the names of the suggesters you want to describe. To show
 // the active configuration and exclude any pending changes, set the Deployed
-// option to true.
+// option to true .
 type DescribeSuggestersInput struct {
 
 	// The name of the domain you want to describe.
@@ -46,8 +45,8 @@ type DescribeSuggestersInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Whether to display the deployed configuration (true) or include any pending
-	// changes (false). Defaults to false.
+	// Whether to display the deployed configuration ( true ) or include any pending
+	// changes ( false ). Defaults to false .
 	Deployed *bool
 
 	// The suggesters you want to describe.

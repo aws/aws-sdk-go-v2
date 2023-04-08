@@ -48,11 +48,11 @@ type ListPipelineExecutionsInput struct {
 	MaxResults *int32
 
 	// If the result of the previous ListPipelineExecutions request was truncated, the
-	// response includes a NextToken. To retrieve the next set of pipeline executions,
+	// response includes a NextToken . To retrieve the next set of pipeline executions,
 	// use the token in the next request.
 	NextToken *string
 
-	// The field by which to sort results. The default is CreatedTime.
+	// The field by which to sort results. The default is CreatedTime .
 	SortBy types.SortPipelineExecutionsBy
 
 	// The sort order for results.
@@ -64,7 +64,7 @@ type ListPipelineExecutionsInput struct {
 type ListPipelineExecutionsOutput struct {
 
 	// If the result of the previous ListPipelineExecutions request was truncated, the
-	// response includes a NextToken. To retrieve the next set of pipeline executions,
+	// response includes a NextToken . To retrieve the next set of pipeline executions,
 	// use the token in the next request.
 	NextToken *string
 

@@ -41,8 +41,8 @@ type ListCheckSummariesInput struct {
 	// This member is required.
 	LensArn *string
 
-	// The ID used to identify a pillar, for example, security. A pillar is identified
-	// by its PillarReviewSummary$PillarId.
+	// The ID used to identify a pillar, for example, security . A pillar is identified
+	// by its PillarReviewSummary$PillarId .
 	//
 	// This member is required.
 	PillarId *string
@@ -52,8 +52,8 @@ type ListCheckSummariesInput struct {
 	// This member is required.
 	QuestionId *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	WorkloadId *string

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provisions or modifies a product based on the resource changes for the specified
-// plan.
+// Provisions or modifies a product based on the resource changes for the
+// specified plan.
 func (c *Client) ExecuteProvisionedProductPlan(ctx context.Context, params *ExecuteProvisionedProductPlanInput, optFns ...func(*Options)) (*ExecuteProvisionedProductPlanOutput, error) {
 	if params == nil {
 		params = &ExecuteProvisionedProductPlanInput{}
@@ -31,9 +31,9 @@ func (c *Client) ExecuteProvisionedProductPlan(ctx context.Context, params *Exec
 
 type ExecuteProvisionedProductPlanInput struct {
 
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests differ only by the idempotency token, the same response is returned for
+	// each repeated request.
 	//
 	// This member is required.
 	IdempotencyToken *string
@@ -44,10 +44,8 @@ type ExecuteProvisionedProductPlanInput struct {
 	PlanId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

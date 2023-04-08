@@ -16,21 +16,21 @@ import (
 // group is initially created with the default parameters for the database engine
 // used by instances in the DB cluster. To provide custom values for any of the
 // parameters, you must modify the group after creating it using
-// ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter group,
-// you need to associate it with your DB cluster using ModifyDBCluster. When you
-// associate a new DB cluster parameter group with a running DB cluster, you need
-// to reboot the DB instances in the DB cluster without failover for the new DB
-// cluster parameter group and associated settings to take effect. After you create
-// a DB cluster parameter group, you should wait at least 5 minutes before creating
-// your first DB cluster that uses that DB cluster parameter group as the default
-// parameter group. This allows Amazon Neptune to fully complete the create action
-// before the DB cluster parameter group is used as the default for a new DB
+// ModifyDBClusterParameterGroup . Once you've created a DB cluster parameter
+// group, you need to associate it with your DB cluster using ModifyDBCluster .
+// When you associate a new DB cluster parameter group with a running DB cluster,
+// you need to reboot the DB instances in the DB cluster without failover for the
+// new DB cluster parameter group and associated settings to take effect. After you
+// create a DB cluster parameter group, you should wait at least 5 minutes before
+// creating your first DB cluster that uses that DB cluster parameter group as the
+// default parameter group. This allows Amazon Neptune to fully complete the create
+// action before the DB cluster parameter group is used as the default for a new DB
 // cluster. This is especially important for parameters that are critical when
 // creating the default database for a DB cluster, such as the character set for
 // the default database defined by the character_set_database parameter. You can
-// use the Parameter Groups option of the Amazon Neptune console
-// (https://console.aws.amazon.com/rds/) or the DescribeDBClusterParameters command
-// to verify that your DB cluster parameter group has been created or modified.
+// use the Parameter Groups option of the Amazon Neptune console (https://console.aws.amazon.com/rds/)
+// or the DescribeDBClusterParameters command to verify that your DB cluster
+// parameter group has been created or modified.
 func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *CreateDBClusterParameterGroupInput, optFns ...func(*Options)) (*CreateDBClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &CreateDBClusterParameterGroupInput{}
@@ -49,12 +49,8 @@ func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *Crea
 type CreateDBClusterParameterGroupInput struct {
 
 	// The name of the DB cluster parameter group. Constraints:
-	//
-	// * Must match the name
-	// of an existing DBClusterParameterGroup.
-	//
-	// This value is stored as a lowercase
-	// string.
+	//   - Must match the name of an existing DBClusterParameterGroup.
+	// This value is stored as a lowercase string.
 	//
 	// This member is required.
 	DBClusterParameterGroupName *string

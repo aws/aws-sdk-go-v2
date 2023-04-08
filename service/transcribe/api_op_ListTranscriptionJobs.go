@@ -49,7 +49,7 @@ type ListTranscriptionJobsInput struct {
 	NextToken *string
 
 	// Returns only transcription jobs with the specified status. Jobs are ordered by
-	// creation date, with the newest job first. If you don't include Status, all
+	// creation date, with the newest job first. If you don't include Status , all
 	// transcription jobs are returned.
 	Status types.TranscriptionJobStatus
 

@@ -42,13 +42,13 @@ type UpdateServerInput struct {
 	DisableAutomatedBackup *bool
 
 	// DDD:HH:MM (weekly start time) or HH:MM (daily start time). Time windows always
-	// use coordinated universal time (UTC). Valid strings for day of week (DDD) are:
-	// Mon, Tue, Wed, Thr, Fri, Sat, or Sun.
+	// use coordinated universal time (UTC). Valid strings for day of week ( DDD ) are:
+	// Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
 	PreferredBackupWindow *string
 
 	// DDD:HH:MM (weekly start time) or HH:MM (daily start time). Time windows always
-	// use coordinated universal time (UTC). Valid strings for day of week (DDD) are:
-	// Mon, Tue, Wed, Thr, Fri, Sat, or Sun.
+	// use coordinated universal time (UTC). Valid strings for day of week ( DDD ) are:
+	// Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
 	PreferredMaintenanceWindow *string
 
 	noSmithyDocumentSerde

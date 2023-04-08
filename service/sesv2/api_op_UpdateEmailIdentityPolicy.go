@@ -16,9 +16,8 @@ import (
 // you have not verified the identity, this API will return an error. Sending
 // authorization is a feature that enables an identity owner to authorize other
 // senders to use its identities. For information about using sending
-// authorization, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-// You can execute this operation no more than once per second.
+// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) UpdateEmailIdentityPolicy(ctx context.Context, params *UpdateEmailIdentityPolicyInput, optFns ...func(*Options)) (*UpdateEmailIdentityPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateEmailIdentityPolicyInput{}
@@ -37,8 +36,8 @@ func (c *Client) UpdateEmailIdentityPolicy(ctx context.Context, params *UpdateEm
 // Represents a request to update a sending authorization policy for an identity.
 // Sending authorization is an Amazon SES feature that enables you to authorize
 // other senders to use your identities. For information, see the Amazon SES
-// Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html).
+// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html)
+// .
 type UpdateEmailIdentityPolicyInput struct {
 
 	// The email identity.
@@ -48,14 +47,14 @@ type UpdateEmailIdentityPolicyInput struct {
 
 	// The text of the policy in JSON format. The policy cannot exceed 4 KB. For
 	// information about the syntax of sending authorization policies, see the Amazon
-	// SES Developer Guide
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html).
+	// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html)
+	// .
 	//
 	// This member is required.
 	Policy *string
 
-	// The name of the policy. The policy name cannot exceed 64 characters and can only
-	// include alphanumeric characters, dashes, and underscores.
+	// The name of the policy. The policy name cannot exceed 64 characters and can
+	// only include alphanumeric characters, dashes, and underscores.
 	//
 	// This member is required.
 	PolicyName *string
@@ -63,8 +62,8 @@ type UpdateEmailIdentityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type UpdateEmailIdentityPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

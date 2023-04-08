@@ -54,9 +54,9 @@ type RescoreInput struct {
 
 type RescoreOutput struct {
 
-	// The identifier associated with the scores that Amazon Kendra Intelligent Ranking
-	// gives to the results. Amazon Kendra Intelligent Ranking rescores or re-ranks the
-	// results for the search service.
+	// The identifier associated with the scores that Amazon Kendra Intelligent
+	// Ranking gives to the results. Amazon Kendra Intelligent Ranking rescores or
+	// re-ranks the results for the search service.
 	RescoreId *string
 
 	// A list of result items for documents with new relevancy scores. The results are

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the subscription filters for the specified log group. You can list all the
-// subscription filters or filter the results by prefix. The results are
+// Lists the subscription filters for the specified log group. You can list all
+// the subscription filters or filter the results by prefix. The results are
 // ASCII-sorted by filter name.
 func (c *Client) DescribeSubscriptionFilters(ctx context.Context, params *DescribeSubscriptionFiltersInput, optFns ...func(*Options)) (*DescribeSubscriptionFiltersOutput, error) {
 	if params == nil {

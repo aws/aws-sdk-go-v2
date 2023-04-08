@@ -29,17 +29,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the resource to tag.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resource to tag.
 	//
 	// This member is required.
 	ResourceArn *string
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tag your resources
-	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
-	// the IoT Greengrass V2 Developer Guide.
+	// information, see Tag your resources (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html)
+	// in the IoT Greengrass V2 Developer Guide.
 	//
 	// This member is required.
 	Tags map[string]string

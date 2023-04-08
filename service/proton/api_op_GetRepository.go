@@ -29,7 +29,7 @@ func (c *Client) GetRepository(ctx context.Context, params *GetRepositoryInput, 
 
 type GetRepositoryInput struct {
 
-	// The repository name, for example myrepos/myrepo.
+	// The repository name, for example myrepos/myrepo .
 	//
 	// This member is required.
 	Name *string

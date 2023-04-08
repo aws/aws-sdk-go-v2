@@ -9,8 +9,7 @@ import (
 
 // Represents the data for an attribute. Each attribute value is described as a
 // name-value pair. The name is the data type, and the value is the data itself.
-// For more information, see Data Types
-// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
+// For more information, see Data Types (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 // in the Amazon DynamoDB Developer Guide.
 //
 // The following types satisfy this interface:
@@ -149,8 +148,8 @@ type Identity struct {
 // For example, a simple primary key would be represented by one KeySchemaElement
 // (for the partition key). A composite primary key would require one
 // KeySchemaElement for the partition key, and another KeySchemaElement for the
-// sort key. A KeySchemaElement must be a scalar, top-level attribute (not a nested
-// attribute). The data type must be one of String, Number, or Binary. The
+// sort key. A KeySchemaElement must be a scalar, top-level attribute (not a
+// nested attribute). The data type must be one of String, Number, or Binary. The
 // attribute cannot be nested within a List or a Map.
 type KeySchemaElement struct {
 
@@ -160,15 +159,11 @@ type KeySchemaElement struct {
 	AttributeName *string
 
 	// The role that this key attribute will assume:
-	//
-	// * HASH - partition key
-	//
-	// * RANGE -
-	// sort key
-	//
-	// The partition key of an item is also known as its hash attribute. The
-	// term "hash attribute" derives from DynamoDB's usage of an internal hash function
-	// to evenly distribute data items across partitions, based on their partition key
+	//   - HASH - partition key
+	//   - RANGE - sort key
+	// The partition key of an item is also known as its hash attribute. The term
+	// "hash attribute" derives from DynamoDB's usage of an internal hash function to
+	// evenly distribute data items across partitions, based on their partition key
 	// values. The sort key of an item is also known as its range attribute. The term
 	// "range attribute" derives from the way DynamoDB stores items with the same
 	// partition key physically close together, in sorted order by the sort key value.
@@ -194,35 +189,26 @@ type Record struct {
 	EventID *string
 
 	// The type of data modification that was performed on the DynamoDB table:
-	//
-	// *
-	// INSERT - a new item was added to the table.
-	//
-	// * MODIFY - one or more of an
-	// existing item's attributes were modified.
-	//
-	// * REMOVE - the item was deleted from
-	// the table
+	//   - INSERT - a new item was added to the table.
+	//   - MODIFY - one or more of an existing item's attributes were modified.
+	//   - REMOVE - the item was deleted from the table
 	EventName OperationType
 
 	// The AWS service from which the stream record originated. For DynamoDB Streams,
-	// this is aws:dynamodb.
+	// this is aws:dynamodb .
 	EventSource *string
 
 	// The version number of the stream record format. This number is updated whenever
 	// the structure of Record is modified. Client applications must not assume that
 	// eventVersion will remain at a particular value, as this number is subject to
-	// change at any time. In general, eventVersion will only increase as the low-level
-	// DynamoDB Streams API evolves.
+	// change at any time. In general, eventVersion will only increase as the
+	// low-level DynamoDB Streams API evolves.
 	EventVersion *string
 
 	// Items that are deleted by the Time to Live process after expiration have the
 	// following fields:
-	//
-	// * Records[].userIdentity.type "Service"
-	//
-	// *
-	// Records[].userIdentity.principalId "dynamodb.amazonaws.com"
+	//   - Records[].userIdentity.type "Service"
+	//   - Records[].userIdentity.principalId "dynamodb.amazonaws.com"
 	UserIdentity *Identity
 
 	noSmithyDocumentSerde
@@ -232,8 +218,8 @@ type Record struct {
 // within a shard.
 type SequenceNumberRange struct {
 
-	// The last sequence number for the stream records contained within a shard. String
-	// contains numeric characters only.
+	// The last sequence number for the stream records contained within a shard.
+	// String contains numeric characters only.
 	EndingSequenceNumber *string
 
 	// The first sequence number for the stream records contained within a shard.
@@ -264,17 +250,13 @@ type Stream struct {
 	// The Amazon Resource Name (ARN) for the stream.
 	StreamArn *string
 
-	// A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is
-	// not a unique identifier for the stream, because it is possible that a stream
+	// A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel
+	// is not a unique identifier for the stream, because it is possible that a stream
 	// from another table might have the same timestamp. However, the combination of
 	// the following three elements is guaranteed to be unique:
-	//
-	// * the AWS customer
-	// ID.
-	//
-	// * the table name
-	//
-	// * the StreamLabel
+	//   - the AWS customer ID.
+	//   - the table name
+	//   - the StreamLabel
 	StreamLabel *string
 
 	// The DynamoDB table with which the stream is associated.
@@ -307,47 +289,31 @@ type StreamDescription struct {
 	// The Amazon Resource Name (ARN) for the stream.
 	StreamArn *string
 
-	// A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is
-	// not a unique identifier for the stream, because it is possible that a stream
+	// A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel
+	// is not a unique identifier for the stream, because it is possible that a stream
 	// from another table might have the same timestamp. However, the combination of
 	// the following three elements is guaranteed to be unique:
-	//
-	// * the AWS customer
-	// ID.
-	//
-	// * the table name
-	//
-	// * the StreamLabel
+	//   - the AWS customer ID.
+	//   - the table name
+	//   - the StreamLabel
 	StreamLabel *string
 
 	// Indicates the current status of the stream:
-	//
-	// * ENABLING - Streams is currently
-	// being enabled on the DynamoDB table.
-	//
-	// * ENABLED - the stream is enabled.
-	//
-	// *
-	// DISABLING - Streams is currently being disabled on the DynamoDB table.
-	//
-	// *
-	// DISABLED - the stream is disabled.
+	//   - ENABLING - Streams is currently being enabled on the DynamoDB table.
+	//   - ENABLED - the stream is enabled.
+	//   - DISABLING - Streams is currently being disabled on the DynamoDB table.
+	//   - DISABLED - the stream is disabled.
 	StreamStatus StreamStatus
 
 	// Indicates the format of the records within this stream:
-	//
-	// * KEYS_ONLY - only the
-	// key attributes of items that were modified in the DynamoDB table.
-	//
-	// * NEW_IMAGE -
-	// entire items from the table, as they appeared after they were modified.
-	//
-	// *
-	// OLD_IMAGE - entire items from the table, as they appeared before they were
-	// modified.
-	//
-	// * NEW_AND_OLD_IMAGES - both the new and the old images of the items
-	// from the table.
+	//   - KEYS_ONLY - only the key attributes of items that were modified in the
+	//   DynamoDB table.
+	//   - NEW_IMAGE - entire items from the table, as they appeared after they were
+	//   modified.
+	//   - OLD_IMAGE - entire items from the table, as they appeared before they were
+	//   modified.
+	//   - NEW_AND_OLD_IMAGES - both the new and the old images of the items from the
+	//   table.
 	StreamViewType StreamViewType
 
 	// The DynamoDB table with which the stream is associated.
@@ -381,17 +347,10 @@ type StreamRecord struct {
 
 	// The type of data from the modified DynamoDB item that was captured in this
 	// stream record:
-	//
-	// * KEYS_ONLY - only the key attributes of the modified item.
-	//
-	// *
-	// NEW_IMAGE - the entire item, as it appeared after it was modified.
-	//
-	// * OLD_IMAGE
-	// - the entire item, as it appeared before it was modified.
-	//
-	// * NEW_AND_OLD_IMAGES
-	// - both the new and the old item images of the item.
+	//   - KEYS_ONLY - only the key attributes of the modified item.
+	//   - NEW_IMAGE - the entire item, as it appeared after it was modified.
+	//   - OLD_IMAGE - the entire item, as it appeared before it was modified.
+	//   - NEW_AND_OLD_IMAGES - both the new and the old item images of the item.
 	StreamViewType StreamViewType
 
 	noSmithyDocumentSerde

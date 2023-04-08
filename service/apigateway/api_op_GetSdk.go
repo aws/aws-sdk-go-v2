@@ -34,7 +34,7 @@ type GetSdkInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// The language for the generated SDK. Currently java, javascript, android,
+	// The language for the generated SDK. Currently java , javascript , android ,
 	// objectivec (for iOS), swift (for iOS), and ruby are supported.
 	//
 	// This member is required.
@@ -45,11 +45,11 @@ type GetSdkInput struct {
 	// This member is required.
 	StageName *string
 
-	// A string-to-string key-value map of query parameters sdkType-dependent
-	// properties of the SDK. For sdkType of objectivec or swift, a parameter named
-	// classPrefix is required. For sdkType of android, parameters named groupId,
-	// artifactId, artifactVersion, and invokerPackage are required. For sdkType of
-	// java, parameters named serviceName and javaPackageName are required.
+	// A string-to-string key-value map of query parameters sdkType -dependent
+	// properties of the SDK. For sdkType of objectivec or swift , a parameter named
+	// classPrefix is required. For sdkType of android , parameters named groupId ,
+	// artifactId , artifactVersion , and invokerPackage are required. For sdkType of
+	// java , parameters named serviceName and javaPackageName are required.
 	Parameters map[string]string
 
 	noSmithyDocumentSerde

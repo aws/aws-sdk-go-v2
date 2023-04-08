@@ -12,9 +12,8 @@ import (
 )
 
 // Generates a credential report for the Amazon Web Services account. For more
-// information about the credential report, see Getting credential reports
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) in
-// the IAM User Guide.
+// information about the credential report, see Getting credential reports (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html)
+// in the IAM User Guide.
 func (c *Client) GenerateCredentialReport(ctx context.Context, params *GenerateCredentialReportInput, optFns ...func(*Options)) (*GenerateCredentialReportOutput, error) {
 	if params == nil {
 		params = &GenerateCredentialReportInput{}

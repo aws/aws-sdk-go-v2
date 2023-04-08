@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates an automatic scaling policy for a core instance group or task
-// instance group in an Amazon EMR cluster. The automatic scaling policy defines
-// how an instance group dynamically adds and terminates EC2 instances in response
-// to the value of a CloudWatch metric.
+// Creates or updates an automatic scaling policy for a core instance group or
+// task instance group in an Amazon EMR cluster. The automatic scaling policy
+// defines how an instance group dynamically adds and terminates EC2 instances in
+// response to the value of a CloudWatch metric.
 func (c *Client) PutAutoScalingPolicy(ctx context.Context, params *PutAutoScalingPolicyInput, optFns ...func(*Options)) (*PutAutoScalingPolicyOutput, error) {
 	if params == nil {
 		params = &PutAutoScalingPolicyInput{}
@@ -37,8 +37,8 @@ type PutAutoScalingPolicyInput struct {
 	// This member is required.
 	AutoScalingPolicy *types.AutoScalingPolicy
 
-	// Specifies the ID of a cluster. The instance group to which the automatic scaling
-	// policy is applied is within this cluster.
+	// Specifies the ID of a cluster. The instance group to which the automatic
+	// scaling policy is applied is within this cluster.
 	//
 	// This member is required.
 	ClusterId *string
@@ -60,8 +60,8 @@ type PutAutoScalingPolicyOutput struct {
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
 
-	// Specifies the ID of a cluster. The instance group to which the automatic scaling
-	// policy is applied is within this cluster.
+	// Specifies the ID of a cluster. The instance group to which the automatic
+	// scaling policy is applied is within this cluster.
 	ClusterId *string
 
 	// Specifies the ID of the instance group to which the scaling policy is applied.

@@ -50,9 +50,9 @@ type UpdateTrialComponentInput struct {
 	// The input artifacts to remove from the component.
 	InputArtifactsToRemove []string
 
-	// Replaces all of the component's output artifacts with the specified artifacts or
-	// adds new output artifacts. Existing output artifacts are replaced if the trial
-	// component is updated with an identical output artifact key.
+	// Replaces all of the component's output artifacts with the specified artifacts
+	// or adds new output artifacts. Existing output artifacts are replaced if the
+	// trial component is updated with an identical output artifact key.
 	OutputArtifacts map[string]types.TrialComponentArtifact
 
 	// The output artifacts to remove from the component.

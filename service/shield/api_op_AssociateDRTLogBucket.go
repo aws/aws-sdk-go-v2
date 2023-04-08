@@ -16,8 +16,8 @@ import (
 // Amazon S3 buckets with your subscription. To use the services of the SRT and
 // make an AssociateDRTLogBucket request, you must be subscribed to the Business
 // Support plan (http://aws.amazon.com/premiumsupport/business-support/) or the
-// Enterprise Support plan
-// (http://aws.amazon.com/premiumsupport/enterprise-support/).
+// Enterprise Support plan (http://aws.amazon.com/premiumsupport/enterprise-support/)
+// .
 func (c *Client) AssociateDRTLogBucket(ctx context.Context, params *AssociateDRTLogBucketInput, optFns ...func(*Options)) (*AssociateDRTLogBucketOutput, error) {
 	if params == nil {
 		params = &AssociateDRTLogBucketInput{}

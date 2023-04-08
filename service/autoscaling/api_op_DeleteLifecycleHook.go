@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes the specified lifecycle hook. If there are any outstanding lifecycle
-// actions, they are completed first (ABANDON for launching instances, CONTINUE for
-// terminating instances).
+// actions, they are completed first ( ABANDON for launching instances, CONTINUE
+// for terminating instances).
 func (c *Client) DeleteLifecycleHook(ctx context.Context, params *DeleteLifecycleHookInput, optFns ...func(*Options)) (*DeleteLifecycleHookOutput, error) {
 	if params == nil {
 		params = &DeleteLifecycleHookInput{}

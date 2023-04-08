@@ -131,8 +131,8 @@ func (c *Client) addOperationGetParameterHistoryMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetParameterHistoryAPIClient is a client that implements the GetParameterHistory
-// operation.
+// GetParameterHistoryAPIClient is a client that implements the
+// GetParameterHistory operation.
 type GetParameterHistoryAPIClient interface {
 	GetParameterHistory(context.Context, *GetParameterHistoryInput, ...func(*Options)) (*GetParameterHistoryOutput, error)
 }

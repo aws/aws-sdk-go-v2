@@ -17,7 +17,7 @@ import (
 // NEW_PASSWORD_REQUIRED challenge. If the user doesn't sign in before it expires,
 // the user won't be able to sign in, and an administrator must reset their
 // password. Once the user has set a new password, or the password is permanent,
-// the user status is set to Confirmed.
+// the user status is set to Confirmed .
 func (c *Client) AdminSetUserPassword(ctx context.Context, params *AdminSetUserPasswordInput, optFns ...func(*Options)) (*AdminSetUserPasswordOutput, error) {
 	if params == nil {
 		params = &AdminSetUserPasswordInput{}

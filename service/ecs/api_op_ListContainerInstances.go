@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of container instances in a specified cluster. You can filter the
-// results of a ListContainerInstances operation with cluster query language
+// Returns a list of container instances in a specified cluster. You can filter
+// the results of a ListContainerInstances operation with cluster query language
 // statements inside the filter parameter. For more information, see Cluster Query
-// Language
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
+// Language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) ListContainerInstances(ctx context.Context, params *ListContainerInstancesInput, optFns ...func(*Options)) (*ListContainerInstancesOutput, error) {
 	if params == nil {
@@ -41,8 +40,7 @@ type ListContainerInstancesInput struct {
 	Cluster *string
 
 	// You can filter the results of a ListContainerInstances operation with cluster
-	// query language statements. For more information, see Cluster Query Language
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
+	// query language statements. For more information, see Cluster Query Language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Filter *string
 
@@ -59,16 +57,16 @@ type ListContainerInstancesInput struct {
 	// The nextToken value returned from a ListContainerInstances request indicating
 	// that more results are available to fulfill the request and further calls are
 	// needed. If maxResults was provided, it's possible the number of results to be
-	// fewer than maxResults. This token should be treated as an opaque identifier that
-	// is only used to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// fewer than maxResults . This token should be treated as an opaque identifier
+	// that is only used to retrieve the next items in a list and not for other
+	// programmatic purposes.
 	NextToken *string
 
 	// Filters the container instances by status. For example, if you specify the
 	// DRAINING status, the results include only container instances that have been set
-	// to DRAINING using UpdateContainerInstancesState. If you don't specify this
+	// to DRAINING using UpdateContainerInstancesState . If you don't specify this
 	// parameter, the default is to include container instances set to all states other
-	// than INACTIVE.
+	// than INACTIVE .
 	Status types.ContainerInstanceStatus
 
 	noSmithyDocumentSerde
@@ -81,7 +79,7 @@ type ListContainerInstancesOutput struct {
 	ContainerInstanceArns []string
 
 	// The nextToken value to include in a future ListContainerInstances request. When
-	// the results of a ListContainerInstances request exceed maxResults, this value
+	// the results of a ListContainerInstances request exceed maxResults , this value
 	// can be used to retrieve the next page of results. This value is null when there
 	// are no more results to return.
 	NextToken *string

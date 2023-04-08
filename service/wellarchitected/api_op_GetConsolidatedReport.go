@@ -31,8 +31,8 @@ func (c *Client) GetConsolidatedReport(ctx context.Context, params *GetConsolida
 
 type GetConsolidatedReportInput struct {
 
-	// The format of the consolidated report. For PDF, Base64String is returned. For
-	// JSON, Metrics is returned.
+	// The format of the consolidated report. For PDF , Base64String is returned. For
+	// JSON , Metrics is returned.
 	//
 	// This member is required.
 	Format types.ReportFormat
@@ -56,8 +56,8 @@ type GetConsolidatedReportOutput struct {
 	// format is requested.
 	Base64String *string
 
-	// The metrics that make up the consolidated report. Only returned when JSON format
-	// is requested.
+	// The metrics that make up the consolidated report. Only returned when JSON
+	// format is requested.
 	Metrics []types.ConsolidatedReportMetric
 
 	// The token to use to retrieve the next set of results.

@@ -13,9 +13,8 @@ import (
 // Deactivates the specified MFA device and removes it from association with the
 // user name for which it was originally enabled. For more information about
 // creating and working with virtual MFA devices, see Enabling a virtual
-// multi-factor authentication (MFA) device
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html) in the
-// IAM User Guide.
+// multi-factor authentication (MFA) device (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html)
+// in the IAM User Guide.
 func (c *Client) DeactivateMFADevice(ctx context.Context, params *DeactivateMFADeviceInput, optFns ...func(*Options)) (*DeactivateMFADeviceOutput, error) {
 	if params == nil {
 		params = &DeactivateMFADeviceInput{}
@@ -35,7 +34,7 @@ type DeactivateMFADeviceInput struct {
 
 	// The serial number that uniquely identifies the MFA device. For virtual MFA
 	// devices, the serial number is the device ARN. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: =,.@:/-
 	//
@@ -43,8 +42,8 @@ type DeactivateMFADeviceInput struct {
 	SerialNumber *string
 
 	// The name of the user whose MFA device you want to deactivate. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
+	// of characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.

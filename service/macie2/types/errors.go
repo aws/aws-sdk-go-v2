@@ -142,8 +142,8 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Provides information about an error that occurred because too many requests were
-// sent during a certain amount of time.
+// Provides information about an error that occurred because too many requests
+// were sent during a certain amount of time.
 type ThrottlingException struct {
 	Message *string
 

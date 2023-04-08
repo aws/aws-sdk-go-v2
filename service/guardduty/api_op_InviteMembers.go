@@ -44,8 +44,8 @@ type InviteMembersInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// A Boolean value that specifies whether you want to disable email notification to
-	// the accounts that you are inviting to GuardDuty as members.
+	// A Boolean value that specifies whether you want to disable email notification
+	// to the accounts that you are inviting to GuardDuty as members.
 	DisableEmailNotification bool
 
 	// The invitation message that you want to send to the accounts that you're

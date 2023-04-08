@@ -17,13 +17,10 @@ import (
 )
 
 // Lists information about a specific audit report created by calling the
-// CreateCertificateAuthorityAuditReport
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
+// CreateCertificateAuthorityAuditReport (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
 // action. Audit information is created every time the certificate authority (CA)
-// private key is used. The private key is used when you call the IssueCertificate
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html)
-// action or the RevokeCertificate
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html)
+// private key is used. The private key is used when you call the IssueCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html)
+// action or the RevokeCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html)
 // action.
 func (c *Client) DescribeCertificateAuthorityAuditReport(ctx context.Context, params *DescribeCertificateAuthorityAuditReportInput, optFns ...func(*Options)) (*DescribeCertificateAuthorityAuditReportOutput, error) {
 	if params == nil {
@@ -42,8 +39,7 @@ func (c *Client) DescribeCertificateAuthorityAuditReport(ctx context.Context, pa
 
 type DescribeCertificateAuthorityAuditReportInput struct {
 
-	// The report ID returned by calling the CreateCertificateAuthorityAuditReport
-	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
+	// The report ID returned by calling the CreateCertificateAuthorityAuditReport (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
 	// action.
 	//
 	// This member is required.
@@ -142,8 +138,8 @@ func (c *Client) addOperationDescribeCertificateAuthorityAuditReportMiddlewares(
 	return nil
 }
 
-// DescribeCertificateAuthorityAuditReportAPIClient is a client that implements the
-// DescribeCertificateAuthorityAuditReport operation.
+// DescribeCertificateAuthorityAuditReportAPIClient is a client that implements
+// the DescribeCertificateAuthorityAuditReport operation.
 type DescribeCertificateAuthorityAuditReportAPIClient interface {
 	DescribeCertificateAuthorityAuditReport(context.Context, *DescribeCertificateAuthorityAuditReportInput, ...func(*Options)) (*DescribeCertificateAuthorityAuditReportOutput, error)
 }
@@ -163,8 +159,8 @@ type AuditReportCreatedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, AuditReportCreatedWaiter will use default max delay of 120 seconds.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, AuditReportCreatedWaiter will use default max delay of 120 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 

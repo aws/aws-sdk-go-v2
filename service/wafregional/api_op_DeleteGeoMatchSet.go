@@ -10,26 +10,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Permanently deletes a GeoMatchSet. You can't delete a GeoMatchSet if
-// it's still used in any Rules or if it still includes any countries. If you just
-// want to remove a GeoMatchSet from a Rule, use UpdateRule. To permanently delete
-// a GeoMatchSet from AWS WAF, perform the following steps:
-//
-// * Update the
-// GeoMatchSet to remove any countries. For more information, see
-// UpdateGeoMatchSet.
-//
-// * Use GetChangeToken to get the change token that you
-// provide in the ChangeToken parameter of a DeleteGeoMatchSet request.
-//
-// * Submit a
-// DeleteGeoMatchSet request.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Permanently deletes a GeoMatchSet . You can't delete a
+// GeoMatchSet if it's still used in any Rules or if it still includes any
+// countries. If you just want to remove a GeoMatchSet from a Rule , use UpdateRule
+// . To permanently delete a GeoMatchSet from AWS WAF, perform the following
+// steps:
+//   - Update the GeoMatchSet to remove any countries. For more information, see
+//     UpdateGeoMatchSet .
+//   - Use GetChangeToken to get the change token that you provide in the
+//     ChangeToken parameter of a DeleteGeoMatchSet request.
+//   - Submit a DeleteGeoMatchSet request.
 func (c *Client) DeleteGeoMatchSet(ctx context.Context, params *DeleteGeoMatchSetInput, optFns ...func(*Options)) (*DeleteGeoMatchSetOutput, error) {
 	if params == nil {
 		params = &DeleteGeoMatchSetInput{}
@@ -47,13 +41,13 @@ func (c *Client) DeleteGeoMatchSet(ctx context.Context, params *DeleteGeoMatchSe
 
 type DeleteGeoMatchSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken.
+	// The value returned by the most recent call to GetChangeToken .
 	//
 	// This member is required.
 	ChangeToken *string
 
 	// The GeoMatchSetID of the GeoMatchSet that you want to delete. GeoMatchSetId is
-	// returned by CreateGeoMatchSet and by ListGeoMatchSets.
+	// returned by CreateGeoMatchSet and by ListGeoMatchSets .
 	//
 	// This member is required.
 	GeoMatchSetId *string
@@ -65,7 +59,7 @@ type DeleteGeoMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteGeoMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
+	// see GetChangeTokenStatus .
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -23,8 +23,7 @@ import (
 // and optional description. Each simple alias can point to only one fleet, but a
 // fleet can have multiple aliases. If successful, a new alias record is returned,
 // including an alias ID and an ARN. You can reassign an alias to another fleet by
-// calling UpdateAlias. Related actions All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// calling UpdateAlias . Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
 		params = &CreateAliasInput{}
@@ -42,8 +41,8 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 
 type CreateAliasInput struct {
 
-	// A descriptive label that is associated with an alias. Alias names do not need to
-	// be unique.
+	// A descriptive label that is associated with an alias. Alias names do not need
+	// to be unique.
 	//
 	// This member is required.
 	Name *string
@@ -57,12 +56,11 @@ type CreateAliasInput struct {
 	// A human-readable description of the alias.
 	Description *string
 
-	// A list of labels to assign to the new alias resource. Tags are developer-defined
-	// key-value pairs. Tagging Amazon Web Services resources are useful for resource
-	// management, access management and cost allocation. For more information, see
-	// Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference.
+	// A list of labels to assign to the new alias resource. Tags are
+	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
+	// useful for resource management, access management and cost allocation. For more
+	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

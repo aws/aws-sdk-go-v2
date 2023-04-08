@@ -30,9 +30,9 @@ func (c *Client) StartTransaction(ctx context.Context, params *StartTransactionI
 
 type StartTransactionInput struct {
 
-	// Indicates whether this transaction should be read only or read and write. Writes
-	// made using a read-only transaction ID will be rejected. Read-only transactions
-	// do not need to be committed.
+	// Indicates whether this transaction should be read only or read and write.
+	// Writes made using a read-only transaction ID will be rejected. Read-only
+	// transactions do not need to be committed.
 	TransactionType types.TransactionType
 
 	noSmithyDocumentSerde

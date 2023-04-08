@@ -57,11 +57,11 @@ type AllowCustomRoutingTrafficInput struct {
 	// the endpoint group. The default value is FALSE.
 	AllowAllTrafficToEndpoint *bool
 
-	// A list of specific Amazon EC2 instance IP addresses (destination addresses) in a
-	// subnet that you want to allow to receive traffic. The IP addresses must be a
+	// A list of specific Amazon EC2 instance IP addresses (destination addresses) in
+	// a subnet that you want to allow to receive traffic. The IP addresses must be a
 	// subset of the IP addresses that you specified for the endpoint group.
-	// DestinationAddresses is required if AllowAllTrafficToEndpoint is FALSE or is not
-	// specified.
+	// DestinationAddresses is required if AllowAllTrafficToEndpoint is FALSE or is
+	// not specified.
 	DestinationAddresses []string
 
 	// A list of specific Amazon EC2 instance ports (destination ports) that you want

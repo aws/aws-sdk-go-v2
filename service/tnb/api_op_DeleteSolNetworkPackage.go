@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes network package. A network package is a .zip file in CSAR (Cloud Service
-// Archive) format defines the function packages you want to deploy and the Amazon
-// Web Services infrastructure you want to deploy them on. To delete a network
-// package, the package must be in a disable state. To disable a network package,
-// see UpdateSolNetworkPackage
-// (https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolNetworkPackage.html).
+// Deletes network package. A network package is a .zip file in CSAR (Cloud
+// Service Archive) format defines the function packages you want to deploy and the
+// Amazon Web Services infrastructure you want to deploy them on. To delete a
+// network package, the package must be in a disable state. To disable a network
+// package, see UpdateSolNetworkPackage (https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolNetworkPackage.html)
+// .
 func (c *Client) DeleteSolNetworkPackage(ctx context.Context, params *DeleteSolNetworkPackageInput, optFns ...func(*Options)) (*DeleteSolNetworkPackageOutput, error) {
 	if params == nil {
 		params = &DeleteSolNetworkPackageInput{}

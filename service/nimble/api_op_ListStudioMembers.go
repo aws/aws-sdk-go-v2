@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get all users in a given studio membership. ListStudioMembers only returns admin
-// members.
+// Get all users in a given studio membership. ListStudioMembers only returns
+// admin members.
 func (c *Client) ListStudioMembers(ctx context.Context, params *ListStudioMembersInput, optFns ...func(*Options)) (*ListStudioMembersOutput, error) {
 	if params == nil {
 		params = &ListStudioMembersInput{}

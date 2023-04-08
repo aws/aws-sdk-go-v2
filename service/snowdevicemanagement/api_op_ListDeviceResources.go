@@ -125,8 +125,8 @@ func (c *Client) addOperationListDeviceResourcesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListDeviceResourcesAPIClient is a client that implements the ListDeviceResources
-// operation.
+// ListDeviceResourcesAPIClient is a client that implements the
+// ListDeviceResources operation.
 type ListDeviceResourcesAPIClient interface {
 	ListDeviceResources(context.Context, *ListDeviceResourcesInput, ...func(*Options)) (*ListDeviceResourcesOutput, error)
 }

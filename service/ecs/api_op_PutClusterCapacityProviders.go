@@ -23,7 +23,7 @@ import (
 // a task on a cluster, if no capacity provider or launch type is specified, then
 // the cluster's default capacity provider strategy is used. We recommend that you
 // define a default capacity provider strategy for your cluster. However, you must
-// specify an empty array ([]) to bypass defining a default strategy.
+// specify an empty array ( [] ) to bypass defining a default strategy.
 func (c *Client) PutClusterCapacityProviders(ctx context.Context, params *PutClusterCapacityProvidersInput, optFns ...func(*Options)) (*PutClusterCapacityProvidersOutput, error) {
 	if params == nil {
 		params = &PutClusterCapacityProvidersInput{}

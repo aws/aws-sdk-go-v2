@@ -41,11 +41,11 @@ type GetResourcesInput struct {
 	// list of comma-separated strings. Currently, the request supports only retrieval
 	// of the embedded Method resources this way. The query parameter value must be a
 	// single-valued list and contain the "methods" string. For example, GET
-	// /restapis/{restapi_id}/resources?embed=methods.
+	// /restapis/{restapi_id}/resources?embed=methods .
 	Embed []string
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit *int32
 
 	// The current pagination position in the paged result set.
@@ -144,8 +144,8 @@ var _ GetResourcesAPIClient = (*Client)(nil)
 
 // GetResourcesPaginatorOptions is the paginator options for GetResources
 type GetResourcesPaginatorOptions struct {
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

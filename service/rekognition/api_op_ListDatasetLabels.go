@@ -13,9 +13,8 @@ import (
 )
 
 // Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
-// describe images. For more information, see Labeling images
-// (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html).
-// Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
+// describe images. For more information, see Labeling images (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html)
+// . Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
 // describe images. For more information, see Labeling images in the Amazon
 // Rekognition Custom Labels Developer Guide.
 func (c *Client) ListDatasetLabels(ctx context.Context, params *ListDatasetLabelsInput, optFns ...func(*Options)) (*ListDatasetLabelsOutput, error) {

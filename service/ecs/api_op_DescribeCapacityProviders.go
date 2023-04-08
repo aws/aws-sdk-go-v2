@@ -40,12 +40,12 @@ type DescribeCapacityProvidersInput struct {
 
 	// The maximum number of account setting results returned by
 	// DescribeCapacityProviders in paginated output. When this parameter is used,
-	// DescribeCapacityProviders only returns maxResults results in a single page along
-	// with a nextToken response element. The remaining results of the initial request
-	// can be seen by sending another DescribeCapacityProviders request with the
-	// returned nextToken value. This value can be between 1 and 10. If this parameter
-	// is not used, then DescribeCapacityProviders returns up to 10 results and a
-	// nextToken value if applicable.
+	// DescribeCapacityProviders only returns maxResults results in a single page
+	// along with a nextToken response element. The remaining results of the initial
+	// request can be seen by sending another DescribeCapacityProviders request with
+	// the returned nextToken value. This value can be between 1 and 10. If this
+	// parameter is not used, then DescribeCapacityProviders returns up to 10 results
+	// and a nextToken value if applicable.
 	MaxResults *int32
 
 	// The nextToken value returned from a previous paginated DescribeCapacityProviders
@@ -68,7 +68,7 @@ type DescribeCapacityProvidersOutput struct {
 	Failures []types.Failure
 
 	// The nextToken value to include in a future DescribeCapacityProviders request.
-	// When the results of a DescribeCapacityProviders request exceed maxResults, this
+	// When the results of a DescribeCapacityProviders request exceed maxResults , this
 	// value can be used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

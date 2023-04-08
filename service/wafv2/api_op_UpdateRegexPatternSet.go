@@ -11,21 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified RegexPatternSet. This operation completely replaces the
+// Updates the specified RegexPatternSet . This operation completely replaces the
 // mutable specifications that you already have for the regex pattern set with the
 // ones that you provide to this call. To modify a regex pattern set, do the
 // following:
+//   - Retrieve it by calling GetRegexPatternSet
+//   - Update its settings as needed
+//   - Provide the complete regex pattern set specification to this call
 //
-// * Retrieve it by calling GetRegexPatternSet
-//
-// * Update its settings
-// as needed
-//
-// * Provide the complete regex pattern set specification to this
-// call
-//
-// When you make changes to web ACLs or web ACL components, like rules and
-// rule groups, WAF propagates the changes everywhere that the web ACL and its
+// When you make changes to web ACLs or web ACL components, like rules and rule
+// groups, WAF propagates the changes everywhere that the web ACL and its
 // components are stored and used. Your changes are applied within seconds, but
 // there might be a brief period of inconsistency when the changes have arrived in
 // some places and not in others. So, for example, if you change a rule action
@@ -62,10 +57,10 @@ type UpdateRegexPatternSetInput struct {
 	// A token used for optimistic locking. WAF returns a token to your get and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. WAF uses the token to ensure that no changes
+	// operations like update and delete . WAF uses the token to ensure that no changes
 	// have been made to the entity since you last retrieved it. If a change has been
-	// made, the update fails with a WAFOptimisticLockException. If this happens,
-	// perform another get, and use the new token returned by that operation.
+	// made, the update fails with a WAFOptimisticLockException . If this happens,
+	// perform another get , and use the new token returned by that operation.
 	//
 	// This member is required.
 	LockToken *string
@@ -85,12 +80,9 @@ type UpdateRegexPatternSetInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//
-	// * CLI - Specify the Region
-	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	//
-	// * API
-	// and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -104,7 +96,7 @@ type UpdateRegexPatternSetInput struct {
 type UpdateRegexPatternSetOutput struct {
 
 	// A token used for optimistic locking. WAF returns this token to your update
-	// requests. You use NextLockToken in the same manner as you use LockToken.
+	// requests. You use NextLockToken in the same manner as you use LockToken .
 	NextLockToken *string
 
 	// Metadata pertaining to the operation's result.

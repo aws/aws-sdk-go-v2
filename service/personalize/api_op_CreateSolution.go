@@ -13,59 +13,40 @@ import (
 
 // Creates the configuration for training a model. A trained model is known as a
 // solution. After the configuration is created, you train the model (create a
-// solution) by calling the CreateSolutionVersion
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
-// operation. Every time you call CreateSolutionVersion, a new version of the
+// solution) by calling the CreateSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
+// operation. Every time you call CreateSolutionVersion , a new version of the
 // solution is created. After creating a solution version, you check its accuracy
-// by calling GetSolutionMetrics
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html).
-// When you are satisfied with the version, you deploy it using CreateCampaign
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html). The
-// campaign provides recommendations to a client through the GetRecommendations
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
+// by calling GetSolutionMetrics (https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html)
+// . When you are satisfied with the version, you deploy it using CreateCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html)
+// . The campaign provides recommendations to a client through the
+// GetRecommendations (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
 // API. To train a model, Amazon Personalize requires training data and a recipe.
 // The training data comes from the dataset group that you provide in the request.
 // A recipe specifies the training algorithm and a feature transformation. You can
 // specify one of the predefined recipes provided by Amazon Personalize.
-// Alternatively, you can specify performAutoML and Amazon Personalize will analyze
-// your data and select the optimum USER_PERSONALIZATION recipe for you. Amazon
-// Personalize doesn't support configuring the hpoObjective for solution
+// Alternatively, you can specify performAutoML and Amazon Personalize will
+// analyze your data and select the optimum USER_PERSONALIZATION recipe for you.
+// Amazon Personalize doesn't support configuring the hpoObjective for solution
 // hyperparameter optimization at this time. Status A solution can be in one of the
 // following states:
+//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+//   - DELETE PENDING > DELETE IN_PROGRESS
 //
-// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
-// FAILED
-//
-// * DELETE PENDING > DELETE IN_PROGRESS
-//
-// To get the status of the
-// solution, call DescribeSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html).
-// Wait until the status shows as ACTIVE before calling CreateSolutionVersion.
+// To get the status of the solution, call DescribeSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
+// . Wait until the status shows as ACTIVE before calling CreateSolutionVersion .
 // Related APIs
 //
-// * ListSolutions
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html)
+//   - ListSolutions (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html)
 //
-// *
-// CreateSolutionVersion
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
+//   - CreateSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
 //
-// *
-// DescribeSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
+//   - DescribeSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
 //
-// *
-// DeleteSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html)
+//   - DeleteSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html)
 //
-// *
-// ListSolutionVersions
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html)
+//   - ListSolutionVersions (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html)
 //
-// *
-// DescribeSolutionVersion
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
+//   - DescribeSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
 func (c *Client) CreateSolution(ctx context.Context, params *CreateSolutionInput, optFns ...func(*Options)) (*CreateSolutionOutput, error) {
 	if params == nil {
 		params = &CreateSolutionInput{}
@@ -96,22 +77,22 @@ type CreateSolutionInput struct {
 
 	// When your have multiple event types (using an EVENT_TYPE schema field), this
 	// parameter specifies which event type (for example, 'click' or 'like') is used
-	// for training the model. If you do not provide an eventType, Amazon Personalize
+	// for training the model. If you do not provide an eventType , Amazon Personalize
 	// will use all interactions for training with equal weight regardless of type.
 	EventType *string
 
-	// Whether to perform automated machine learning (AutoML). The default is false.
-	// For this case, you must specify recipeArn. When set to true, Amazon Personalize
-	// analyzes your training data and selects the optimal USER_PERSONALIZATION recipe
-	// and hyperparameters. In this case, you must omit recipeArn. Amazon Personalize
-	// determines the optimal recipe by running tests with different values for the
-	// hyperparameters. AutoML lengthens the training process as compared to selecting
-	// a specific recipe.
+	// Whether to perform automated machine learning (AutoML). The default is false .
+	// For this case, you must specify recipeArn . When set to true , Amazon
+	// Personalize analyzes your training data and selects the optimal
+	// USER_PERSONALIZATION recipe and hyperparameters. In this case, you must omit
+	// recipeArn . Amazon Personalize determines the optimal recipe by running tests
+	// with different values for the hyperparameters. AutoML lengthens the training
+	// process as compared to selecting a specific recipe.
 	PerformAutoML bool
 
 	// Whether to perform hyperparameter optimization (HPO) on the specified or
-	// selected recipe. The default is false. When performing AutoML, this parameter is
-	// always true and you should not set it to false.
+	// selected recipe. The default is false . When performing AutoML, this parameter
+	// is always true and you should not set it to false .
 	PerformHPO *bool
 
 	// The ARN of the recipe to use for model training. Only specified when
@@ -124,9 +105,8 @@ type CreateSolutionInput struct {
 	// at this time.
 	SolutionConfig *types.SolutionConfig
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
-	// apply to the solution.
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// to apply to the solution.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -32,82 +32,59 @@ func (c *Client) ListResolverQueryLogConfigAssociations(ctx context.Context, par
 type ListResolverQueryLogConfigAssociationsInput struct {
 
 	// An optional specification to return a subset of query logging associations. If
-	// you submit a second or subsequent ListResolverQueryLogConfigAssociations request
-	// and specify the NextToken parameter, you must use the same values for Filters,
-	// if any, as in the previous request.
+	// you submit a second or subsequent ListResolverQueryLogConfigAssociations
+	// request and specify the NextToken parameter, you must use the same values for
+	// Filters , if any, as in the previous request.
 	Filters []types.Filter
 
 	// The maximum number of query logging associations that you want to return in the
 	// response to a ListResolverQueryLogConfigAssociations request. If you don't
-	// specify a value for MaxResults, Resolver returns up to 100 query logging
+	// specify a value for MaxResults , Resolver returns up to 100 query logging
 	// associations.
 	MaxResults *int32
 
 	// For the first ListResolverQueryLogConfigAssociations request, omit this value.
 	// If there are more than MaxResults query logging associations that match the
-	// values that you specify for Filters, you can submit another
+	// values that you specify for Filters , you can submit another
 	// ListResolverQueryLogConfigAssociations request to get the next group of
 	// associations. In the next request, specify the value of NextToken from the
 	// previous response.
 	NextToken *string
 
-	// The element that you want Resolver to sort query logging associations by. If you
-	// submit a second or subsequent ListResolverQueryLogConfigAssociations request and
-	// specify the NextToken parameter, you must use the same value for SortBy, if any,
-	// as in the previous request. Valid values include the following elements:
-	//
-	// *
-	// CreationTime: The ID of the query logging association.
-	//
-	// * Error: If the value of
-	// Status is FAILED, the value of Error indicates the cause:
-	//
-	// *
-	// DESTINATION_NOT_FOUND: The specified destination (for example, an Amazon S3
-	// bucket) was deleted.
-	//
-	// * ACCESS_DENIED: Permissions don't allow sending logs to
-	// the destination.
-	//
-	// If Status is a value other than FAILED, ERROR is null.
-	//
-	// * Id:
-	// The ID of the query logging association
-	//
-	// * ResolverQueryLogConfigId: The ID of
-	// the query logging configuration
-	//
-	// * ResourceId: The ID of the VPC that is
-	// associated with the query logging configuration
-	//
-	// * Status: The current status of
-	// the configuration. Valid values include the following:
-	//
-	// * CREATING: Resolver is
-	// creating an association between an Amazon VPC and a query logging
-	// configuration.
-	//
-	// * CREATED: The association between an Amazon VPC and a query
-	// logging configuration was successfully created. Resolver is logging queries that
-	// originate in the specified VPC.
-	//
-	// * DELETING: Resolver is deleting this query
-	// logging association.
-	//
-	// * FAILED: Resolver either couldn't create or couldn't
-	// delete the query logging association. Here are two common causes:
-	//
-	// * The
-	// specified destination (for example, an Amazon S3 bucket) was deleted.
-	//
-	// *
-	// Permissions don't allow sending logs to the destination.
+	// The element that you want Resolver to sort query logging associations by. If
+	// you submit a second or subsequent ListResolverQueryLogConfigAssociations
+	// request and specify the NextToken parameter, you must use the same value for
+	// SortBy , if any, as in the previous request. Valid values include the following
+	// elements:
+	//   - CreationTime : The ID of the query logging association.
+	//   - Error : If the value of Status is FAILED , the value of Error indicates the
+	//   cause:
+	//   - DESTINATION_NOT_FOUND : The specified destination (for example, an Amazon S3
+	//   bucket) was deleted.
+	//   - ACCESS_DENIED : Permissions don't allow sending logs to the destination. If
+	//   Status is a value other than FAILED , ERROR is null.
+	//   - Id : The ID of the query logging association
+	//   - ResolverQueryLogConfigId : The ID of the query logging configuration
+	//   - ResourceId : The ID of the VPC that is associated with the query logging
+	//   configuration
+	//   - Status : The current status of the configuration. Valid values include the
+	//   following:
+	//   - CREATING : Resolver is creating an association between an Amazon VPC and a
+	//   query logging configuration.
+	//   - CREATED : The association between an Amazon VPC and a query logging
+	//   configuration was successfully created. Resolver is logging queries that
+	//   originate in the specified VPC.
+	//   - DELETING : Resolver is deleting this query logging association.
+	//   - FAILED : Resolver either couldn't create or couldn't delete the query
+	//   logging association. Here are two common causes:
+	//   - The specified destination (for example, an Amazon S3 bucket) was deleted.
+	//   - Permissions don't allow sending logs to the destination.
 	SortBy *string
 
-	// If you specified a value for SortBy, the order that you want query logging
-	// associations to be listed in, ASCENDING or DESCENDING. If you submit a second or
-	// subsequent ListResolverQueryLogConfigAssociations request and specify the
-	// NextToken parameter, you must use the same value for SortOrder, if any, as in
+	// If you specified a value for SortBy , the order that you want query logging
+	// associations to be listed in, ASCENDING or DESCENDING . If you submit a second
+	// or subsequent ListResolverQueryLogConfigAssociations request and specify the
+	// NextToken parameter, you must use the same value for SortOrder , if any, as in
 	// the previous request.
 	SortOrder types.SortOrder
 
@@ -123,7 +100,7 @@ type ListResolverQueryLogConfigAssociationsOutput struct {
 	NextToken *string
 
 	// A list that contains one ResolverQueryLogConfigAssociations element for each
-	// query logging association that matches the values that you specified for Filter.
+	// query logging association that matches the values that you specified for Filter .
 	ResolverQueryLogConfigAssociations []types.ResolverQueryLogConfigAssociation
 
 	// The total number of query logging associations that were created by the current
@@ -136,7 +113,7 @@ type ListResolverQueryLogConfigAssociationsOutput struct {
 	// account in the specified Region and that match the filters that were specified
 	// in the ListResolverQueryLogConfigAssociations request. For the total number of
 	// associations that were created by the current account in the specified Region,
-	// see TotalCount.
+	// see TotalCount .
 	TotalFilteredCount int32
 
 	// Metadata pertaining to the operation's result.
@@ -218,7 +195,7 @@ var _ ListResolverQueryLogConfigAssociationsAPIClient = (*Client)(nil)
 type ListResolverQueryLogConfigAssociationsPaginatorOptions struct {
 	// The maximum number of query logging associations that you want to return in the
 	// response to a ListResolverQueryLogConfigAssociations request. If you don't
-	// specify a value for MaxResults, Resolver returns up to 100 query logging
+	// specify a value for MaxResults , Resolver returns up to 100 query logging
 	// associations.
 	Limit int32
 

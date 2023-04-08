@@ -13,8 +13,7 @@ import (
 
 // Deletes a specified task set within a service. This is used when a service uses
 // the EXTERNAL deployment controller type. For more information, see Amazon ECS
-// deployment types
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// deployment types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) DeleteTaskSet(ctx context.Context, params *DeleteTaskSetInput, optFns ...func(*Options)) (*DeleteTaskSetOutput, error) {
 	if params == nil {
@@ -50,7 +49,7 @@ type DeleteTaskSetInput struct {
 	// This member is required.
 	TaskSet *string
 
-	// If true, you can delete a task set even if it hasn't been scaled down to zero.
+	// If true , you can delete a task set even if it hasn't been scaled down to zero.
 	Force *bool
 
 	noSmithyDocumentSerde

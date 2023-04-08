@@ -11,38 +11,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Creates a SizeConstraintSet. You then use UpdateSizeConstraintSet to
-// identify the part of a web request that you want AWS WAF to check for length,
-// such as the length of the User-Agent header or the length of the query string.
-// For example, you can create a SizeConstraintSet that matches any requests that
-// have a query string that is longer than 100 bytes. You can then configure AWS
-// WAF to reject those requests. To create and configure a SizeConstraintSet,
-// perform the following steps:
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Creates a SizeConstraintSet . You then use
+// UpdateSizeConstraintSet to identify the part of a web request that you want AWS
+// WAF to check for length, such as the length of the User-Agent header or the
+// length of the query string. For example, you can create a SizeConstraintSet
+// that matches any requests that have a query string that is longer than 100
+// bytes. You can then configure AWS WAF to reject those requests. To create and
+// configure a SizeConstraintSet , perform the following steps:
+//   - Use GetChangeToken to get the change token that you provide in the
+//     ChangeToken parameter of a CreateSizeConstraintSet request.
+//   - Submit a CreateSizeConstraintSet request.
+//   - Use GetChangeToken to get the change token that you provide in the
+//     ChangeToken parameter of an UpdateSizeConstraintSet request.
+//   - Submit an UpdateSizeConstraintSet request to specify the part of the request
+//     that you want AWS WAF to inspect (for example, the header or the URI) and the
+//     value that you want AWS WAF to watch for.
 //
-// * Use GetChangeToken to get the change token that
-// you provide in the ChangeToken parameter of a CreateSizeConstraintSet
-// request.
-//
-// * Submit a CreateSizeConstraintSet request.
-//
-// * Use GetChangeToken to
-// get the change token that you provide in the ChangeToken parameter of an
-// UpdateSizeConstraintSet request.
-//
-// * Submit an UpdateSizeConstraintSet request to
-// specify the part of the request that you want AWS WAF to inspect (for example,
-// the header or the URI) and the value that you want AWS WAF to watch for.
-//
-// For
-// more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/).
+// For more information about how to use the AWS WAF API to allow or block HTTP
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/)
+// .
 func (c *Client) CreateSizeConstraintSet(ctx context.Context, params *CreateSizeConstraintSetInput, optFns ...func(*Options)) (*CreateSizeConstraintSetOutput, error) {
 	if params == nil {
 		params = &CreateSizeConstraintSetInput{}
@@ -60,13 +51,13 @@ func (c *Client) CreateSizeConstraintSet(ctx context.Context, params *CreateSize
 
 type CreateSizeConstraintSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken.
+	// The value returned by the most recent call to GetChangeToken .
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// A friendly name or description of the SizeConstraintSet. You can't change Name
-	// after you create a SizeConstraintSet.
+	// A friendly name or description of the SizeConstraintSet . You can't change Name
+	// after you create a SizeConstraintSet .
 	//
 	// This member is required.
 	Name *string
@@ -76,9 +67,9 @@ type CreateSizeConstraintSetInput struct {
 
 type CreateSizeConstraintSetOutput struct {
 
-	// The ChangeToken that you used to submit the CreateSizeConstraintSet request. You
-	// can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
+	// The ChangeToken that you used to submit the CreateSizeConstraintSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus .
 	ChangeToken *string
 
 	// A SizeConstraintSet that contains no SizeConstraint objects.

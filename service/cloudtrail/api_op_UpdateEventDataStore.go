@@ -18,8 +18,8 @@ import (
 // in days, and valid values are integers between 90 and 2557. By default,
 // TerminationProtection is enabled. For event data stores for CloudTrail events,
 // AdvancedEventSelectors includes or excludes management and data events in your
-// event data store. For more information about AdvancedEventSelectors, see
-// PutEventSelectorsRequest$AdvancedEventSelectors. For event data stores for
+// event data store. For more information about AdvancedEventSelectors , see
+// PutEventSelectorsRequest$AdvancedEventSelectors . For event data stores for
 // Config configuration items, Audit Manager evidence, or non-Amazon Web Services
 // events, AdvancedEventSelectors includes events of that type in your event data
 // store.
@@ -46,12 +46,12 @@ type UpdateEventDataStoreInput struct {
 	// This member is required.
 	EventDataStore *string
 
-	// The advanced event selectors used to select events for the event data store. You
-	// can configure up to five advanced event selectors for each event data store.
+	// The advanced event selectors used to select events for the event data store.
+	// You can configure up to five advanced event selectors for each event data store.
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
 	// Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail.
-	// The value can be an alias name prefixed by alias/, a fully specified ARN to an
+	// The value can be an alias name prefixed by alias/ , a fully specified ARN to an
 	// alias, a fully specified ARN to a key, or a globally unique identifier.
 	// Disabling or deleting the KMS key, or removing CloudTrail permissions on the
 	// key, prevents CloudTrail from logging events to the event data store, and
@@ -60,20 +60,12 @@ type UpdateEventDataStoreInput struct {
 	// key cannot be removed or changed. Before you disable or delete a KMS key that
 	// you are using with an event data store, delete or back up your event data store.
 	// CloudTrail also supports KMS multi-Region keys. For more information about
-	// multi-Region keys, see Using multi-Region keys
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
+	// multi-Region keys, see Using multi-Region keys (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 	// in the Key Management Service Developer Guide. Examples:
-	//
-	// * alias/MyAliasName
-	//
-	// *
-	// arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
-	//
-	// *
-	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
-	//
-	// *
-	// 12345678-1234-1234-1234-123456789012
+	//   - alias/MyAliasName
+	//   - arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
+	//   - arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	//   - 12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
 	// Specifies whether an event data store collects events from all regions, or only
@@ -83,15 +75,15 @@ type UpdateEventDataStoreInput struct {
 	// The event data store name.
 	Name *string
 
-	// Specifies whether an event data store collects events logged for an organization
-	// in Organizations.
+	// Specifies whether an event data store collects events logged for an
+	// organization in Organizations.
 	OrganizationEnabled *bool
 
 	// The retention period, in days.
 	RetentionPeriod *int32
 
-	// Indicates that termination protection is enabled and the event data store cannot
-	// be automatically deleted.
+	// Indicates that termination protection is enabled and the event data store
+	// cannot be automatically deleted.
 	TerminationProtectionEnabled *bool
 
 	noSmithyDocumentSerde
@@ -113,8 +105,8 @@ type UpdateEventDataStoreOutput struct {
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
-	// Indicates whether the event data store includes events from all regions, or only
-	// from the region in which it was created.
+	// Indicates whether the event data store includes events from all regions, or
+	// only from the region in which it was created.
 	MultiRegionEnabled *bool
 
 	// The name of the event data store.
@@ -127,7 +119,7 @@ type UpdateEventDataStoreOutput struct {
 	// The retention period, in days.
 	RetentionPeriod *int32
 
-	// The status of an event data store. Values can be ENABLED and PENDING_DELETION.
+	// The status of an event data store. Values can be ENABLED and PENDING_DELETION .
 	Status types.EventDataStoreStatus
 
 	// Indicates whether termination protection is enabled for the event data store.
@@ -135,7 +127,7 @@ type UpdateEventDataStoreOutput struct {
 
 	// The timestamp that shows when the event data store was last updated.
 	// UpdatedTimestamp is always either the same or newer than the time shown in
-	// CreatedTimestamp.
+	// CreatedTimestamp .
 	UpdatedTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.

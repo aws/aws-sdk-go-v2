@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the certificate that's identified by the CertificateId.
+// Describes the certificate that's identified by the CertificateId .
 func (c *Client) DescribeCertificate(ctx context.Context, params *DescribeCertificateInput, optFns ...func(*Options)) (*DescribeCertificateOutput, error) {
 	if params == nil {
 		params = &DescribeCertificateInput{}

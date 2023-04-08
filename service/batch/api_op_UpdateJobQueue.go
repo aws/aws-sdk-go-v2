@@ -27,7 +27,7 @@ func (c *Client) UpdateJobQueue(ctx context.Context, params *UpdateJobQueueInput
 	return out, nil
 }
 
-// Contains the parameters for UpdateJobQueue.
+// Contains the parameters for UpdateJobQueue .
 type UpdateJobQueueInput struct {
 
 	// The name or the Amazon Resource Name (ARN) of the job queue.
@@ -39,10 +39,10 @@ type UpdateJobQueueInput struct {
 	// relative to each other. This is one of the parameters used by the job scheduler
 	// to determine which compute environment runs a given job. Compute environments
 	// must be in the VALID state before you can associate them with a job queue. All
-	// of the compute environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE
-	// or FARGATE_SPOT). EC2 and Fargate compute environments can't be mixed. All
-	// compute environments that are associated with a job queue must share the same
-	// architecture. Batch doesn't support mixing compute environment architecture
+	// of the compute environments must be either EC2 ( EC2 or SPOT ) or Fargate (
+	// FARGATE or FARGATE_SPOT ). EC2 and Fargate compute environments can't be mixed.
+	// All compute environments that are associated with a job queue must share the
+	// same architecture. Batch doesn't support mixing compute environment architecture
 	// types in a single job queue.
 	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
 
@@ -50,21 +50,21 @@ type UpdateJobQueueInput struct {
 	// integer value for the priority parameter) are evaluated first when associated
 	// with the same compute environment. Priority is determined in descending order.
 	// For example, a job queue with a priority value of 10 is given scheduling
-	// preference over a job queue with a priority value of 1. All of the compute
-	// environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or
-	// FARGATE_SPOT). EC2 and Fargate compute environments can't be mixed.
+	// preference over a job queue with a priority value of 1 . All of the compute
+	// environments must be either EC2 ( EC2 or SPOT ) or Fargate ( FARGATE or
+	// FARGATE_SPOT ). EC2 and Fargate compute environments can't be mixed.
 	Priority *int32
 
-	// Amazon Resource Name (ARN) of the fair share scheduling policy. Once a job queue
-	// is created, the fair share scheduling policy can be replaced but not removed.
-	// The format is aws:Partition:batch:Region:Account:scheduling-policy/Name . For
-	// example,
-	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy.
+	// Amazon Resource Name (ARN) of the fair share scheduling policy. Once a job
+	// queue is created, the fair share scheduling policy can be replaced but not
+	// removed. The format is
+	// aws:Partition:batch:Region:Account:scheduling-policy/Name . For example,
+	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy .
 	SchedulingPolicyArn *string
 
 	// Describes the queue's ability to accept new jobs. If the job queue state is
-	// ENABLED, it can accept jobs. If the job queue state is DISABLED, new jobs can't
-	// be added to the queue, but jobs already in the queue can finish.
+	// ENABLED , it can accept jobs. If the job queue state is DISABLED , new jobs
+	// can't be added to the queue, but jobs already in the queue can finish.
 	State types.JQState
 
 	noSmithyDocumentSerde

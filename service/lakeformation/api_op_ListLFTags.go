@@ -42,9 +42,9 @@ type ListLFTagsInput struct {
 	// A continuation token, if this is not the first call to retrieve this list.
 	NextToken *string
 
-	// If resource share type is ALL, returns both in-account LF-tags and shared
+	// If resource share type is ALL , returns both in-account LF-tags and shared
 	// LF-tags that the requester has permission to view. If resource share type is
-	// FOREIGN, returns all share LF-tags that the requester can view. If no resource
+	// FOREIGN , returns all share LF-tags that the requester can view. If no resource
 	// share type is passed, lists LF-tags in the given catalog ID that the requester
 	// has permission to view.
 	ResourceShareType types.ResourceShareType

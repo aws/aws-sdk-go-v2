@@ -42,8 +42,7 @@ type Instance struct {
 	LastUpdatedTime *string
 
 	// The product code for the instance. For more information, see Usage operation
-	// values
-	// (https://docs.aws.amazon.com/license-manager/latest/userguide/linux-subscriptions-usage-operation.html)
+	// values (https://docs.aws.amazon.com/license-manager/latest/userguide/linux-subscriptions-usage-operation.html)
 	// in the License Manager User Guide .
 	ProductCode []string
 
@@ -57,8 +56,7 @@ type Instance struct {
 	SubscriptionName *string
 
 	// The usage operation of the instance. For more information, see For more
-	// information, see Usage operation values
-	// (https://docs.aws.amazon.com/license-manager/latest/userguide/linux-subscriptions-usage-operation.html)
+	// information, see Usage operation values (https://docs.aws.amazon.com/license-manager/latest/userguide/linux-subscriptions-usage-operation.html)
 	// in the License Manager User Guide.
 	UsageOperation *string
 
@@ -91,8 +89,8 @@ type Subscription struct {
 	// The name of the subscription.
 	Name *string
 
-	// The type of subscription. The type can be subscription-included with Amazon EC2,
-	// Bring Your Own Subscription model (BYOS), or from the Amazon Web Services
+	// The type of subscription. The type can be subscription-included with Amazon
+	// EC2, Bring Your Own Subscription model (BYOS), or from the Amazon Web Services
 	// Marketplace. Certain subscriptions may use licensing from the Amazon Web
 	// Services Marketplace as well as OS licensing from Amazon EC2 or BYOS.
 	Type *string

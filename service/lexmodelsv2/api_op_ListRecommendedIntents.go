@@ -77,11 +77,11 @@ type ListRecommendedIntentsOutput struct {
 
 	// The identifier of the language and locale of the intents to list. The string
 	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListRecommendedIntents operation. If the nextToken field is present, you
+	// A token that indicates whether there are more results to return in a response
+	// to the ListRecommendedIntents operation. If the nextToken field is present, you
 	// send the contents as the nextToken parameter of a ListRecommendedIntents
 	// operation request to get the next page of results.
 	NextToken *string

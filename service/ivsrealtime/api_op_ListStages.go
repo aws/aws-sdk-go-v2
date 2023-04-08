@@ -48,8 +48,8 @@ type ListStagesOutput struct {
 	// This member is required.
 	Stages []types.StageSummary
 
-	// If there are more rooms than maxResults, use nextToken in the request to get the
-	// next set.
+	// If there are more rooms than maxResults , use nextToken in the request to get
+	// the next set.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

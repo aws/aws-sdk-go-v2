@@ -13,7 +13,7 @@ import (
 )
 
 // Lists the subjects in the authenticated account and Amazon Web Services Region.
-// Required permissions: rolesanywhere:ListSubjects.
+// Required permissions: rolesanywhere:ListSubjects .
 func (c *Client) ListSubjects(ctx context.Context, params *ListSubjectsInput, optFns ...func(*Options)) (*ListSubjectsOutput, error) {
 	if params == nil {
 		params = &ListSubjectsInput{}

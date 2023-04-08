@@ -51,8 +51,8 @@ type CreateOutboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a CreateOutboundCrossClusterSearchConnection request. Contains the
-// details of the newly created cross-cluster search connection.
+// The result of a CreateOutboundCrossClusterSearchConnection request. Contains
+// the details of the newly created cross-cluster search connection.
 type CreateOutboundCrossClusterSearchConnectionOutput struct {
 
 	// Specifies the connection alias provided during the create connection request.

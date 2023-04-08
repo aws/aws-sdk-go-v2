@@ -15,7 +15,7 @@ import (
 // Retrieves the firewall rule group associations that you have defined. Each
 // association enables DNS filtering for a VPC with one rule group. A single call
 // might return only a partial list of the associations. For information, see
-// MaxResults.
+// MaxResults .
 func (c *Client) ListFirewallRuleGroupAssociations(ctx context.Context, params *ListFirewallRuleGroupAssociationsInput, optFns ...func(*Options)) (*ListFirewallRuleGroupAssociationsOutput, error) {
 	if params == nil {
 		params = &ListFirewallRuleGroupAssociationsInput{}
@@ -37,15 +37,16 @@ type ListFirewallRuleGroupAssociationsInput struct {
 	// associations for. Leave this blank to retrieve associations for any rule group.
 	FirewallRuleGroupId *string
 
-	// The maximum number of objects that you want Resolver to return for this request.
-	// If more objects are available, in the response, Resolver provides a NextToken
-	// value that you can use in a subsequent call to get the next batch of objects. If
-	// you don't specify a value for MaxResults, Resolver returns up to 100 objects.
+	// The maximum number of objects that you want Resolver to return for this
+	// request. If more objects are available, in the response, Resolver provides a
+	// NextToken value that you can use in a subsequent call to get the next batch of
+	// objects. If you don't specify a value for MaxResults , Resolver returns up to
+	// 100 objects.
 	MaxResults *int32
 
 	// For the first call to this list request, omit this value. When you request a
 	// list of objects, Resolver returns at most the number of objects specified in
-	// MaxResults. If more objects are available for retrieval, Resolver returns a
+	// MaxResults . If more objects are available for retrieval, Resolver returns a
 	// NextToken value in the response. To retrieve the next batch of objects, use the
 	// token that was returned for the prior request in your next request.
 	NextToken *string
@@ -60,8 +61,8 @@ type ListFirewallRuleGroupAssociationsInput struct {
 	// regardless of status.
 	Status types.FirewallRuleGroupAssociationStatus
 
-	// The unique identifier of the VPC that you want to retrieve the associations for.
-	// Leave this blank to retrieve associations for any VPC.
+	// The unique identifier of the VPC that you want to retrieve the associations
+	// for. Leave this blank to retrieve associations for any VPC.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -69,13 +70,13 @@ type ListFirewallRuleGroupAssociationsInput struct {
 
 type ListFirewallRuleGroupAssociationsOutput struct {
 
-	// A list of your firewall rule group associations. This might be a partial list of
-	// the associations that you have defined. For information, see MaxResults.
+	// A list of your firewall rule group associations. This might be a partial list
+	// of the associations that you have defined. For information, see MaxResults .
 	FirewallRuleGroupAssociations []types.FirewallRuleGroupAssociation
 
-	// If objects are still available for retrieval, Resolver returns this token in the
-	// response. To retrieve the next batch of objects, provide this token in your next
-	// request.
+	// If objects are still available for retrieval, Resolver returns this token in
+	// the response. To retrieve the next batch of objects, provide this token in your
+	// next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -155,10 +156,11 @@ var _ ListFirewallRuleGroupAssociationsAPIClient = (*Client)(nil)
 // ListFirewallRuleGroupAssociationsPaginatorOptions is the paginator options for
 // ListFirewallRuleGroupAssociations
 type ListFirewallRuleGroupAssociationsPaginatorOptions struct {
-	// The maximum number of objects that you want Resolver to return for this request.
-	// If more objects are available, in the response, Resolver provides a NextToken
-	// value that you can use in a subsequent call to get the next batch of objects. If
-	// you don't specify a value for MaxResults, Resolver returns up to 100 objects.
+	// The maximum number of objects that you want Resolver to return for this
+	// request. If more objects are available, in the response, Resolver provides a
+	// NextToken value that you can use in a subsequent call to get the next batch of
+	// objects. If you don't specify a value for MaxResults , Resolver returns up to
+	// 100 objects.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

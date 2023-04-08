@@ -41,12 +41,12 @@ type CreateGlobalClusterInput struct {
 	// This member is required.
 	GlobalClusterIdentifier *string
 
-	// The deletion protection setting for the new global database. The global database
-	// can't be deleted when deletion protection is enabled.
+	// The deletion protection setting for the new global database. The global
+	// database can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
 
-	// The name of the database engine to be used in the global database. Valid values:
-	// neptune
+	// The name of the database engine to be used in the global database. Valid
+	// values: neptune
 	Engine *string
 
 	// The Neptune engine version to be used by the global database. Valid values:
@@ -66,8 +66,8 @@ type CreateGlobalClusterInput struct {
 type CreateGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database. This data type is
-	// used as a response element for the CreateGlobalCluster, DescribeGlobalClusters,
-	// ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and
+	// used as a response element for the CreateGlobalCluster , DescribeGlobalClusters
+	// , ModifyGlobalCluster , DeleteGlobalCluster , FailoverGlobalCluster , and
 	// RemoveFromGlobalCluster actions.
 	GlobalCluster *types.GlobalCluster
 

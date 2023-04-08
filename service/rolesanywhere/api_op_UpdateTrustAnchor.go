@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the trust anchor.You establish trust between IAM Roles Anywhere and your
-// certificate authority (CA) by configuring a trust anchor. A Trust Anchor is
+// Updates the trust anchor.You establish trust between IAM Roles Anywhere and
+// your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is
 // defined either as a reference to a AWS Certificate Manager Private Certificate
 // Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate.
 // Your AWS workloads can authenticate with the trust anchor using certificates
 // issued by the trusted Certificate Authority (CA) in exchange for temporary AWS
-// credentials. Required permissions: rolesanywhere:UpdateTrustAnchor.
+// credentials. Required permissions: rolesanywhere:UpdateTrustAnchor .
 func (c *Client) UpdateTrustAnchor(ctx context.Context, params *UpdateTrustAnchorInput, optFns ...func(*Options)) (*UpdateTrustAnchorOutput, error) {
 	if params == nil {
 		params = &UpdateTrustAnchorInput{}

@@ -63,8 +63,8 @@ type DescribeHumanTaskUiOutput struct {
 	// This member is required.
 	UiTemplate *types.UiTemplateInfo
 
-	// The status of the human task user interface (worker task template). Valid values
-	// are listed below.
+	// The status of the human task user interface (worker task template). Valid
+	// values are listed below.
 	HumanTaskUiStatus types.HumanTaskUiStatus
 
 	// Metadata pertaining to the operation's result.

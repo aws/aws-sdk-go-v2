@@ -45,9 +45,9 @@ type ListRecoveryPointsInput struct {
 	// The name of the namespace to list recovery points for.
 	NamespaceName *string
 
-	// If your initial ListRecoveryPoints operation returns a nextToken, you can
-	// include the returned nextToken in following ListRecoveryPoints operations, which
-	// returns results in the next page.
+	// If your initial ListRecoveryPoints operation returns a nextToken , you can
+	// include the returned nextToken in following ListRecoveryPoints operations,
+	// which returns results in the next page.
 	NextToken *string
 
 	// The time when the recovery point's creation was initiated.

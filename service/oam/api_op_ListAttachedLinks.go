@@ -14,10 +14,9 @@ import (
 
 // Returns a list of source account links that are linked to this monitoring
 // account sink. To use this operation, provide the sink ARN. To retrieve a list of
-// sink ARNs, use ListSinks
-// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListSinks.html). To
-// find a list of links for one source account, use ListLinks
-// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListLinks.html).
+// sink ARNs, use ListSinks (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListSinks.html)
+// . To find a list of links for one source account, use ListLinks (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListLinks.html)
+// .
 func (c *Client) ListAttachedLinks(ctx context.Context, params *ListAttachedLinksInput, optFns ...func(*Options)) (*ListAttachedLinksOutput, error) {
 	if params == nil {
 		params = &ListAttachedLinksInput{}

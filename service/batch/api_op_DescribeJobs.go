@@ -27,7 +27,7 @@ func (c *Client) DescribeJobs(ctx context.Context, params *DescribeJobsInput, op
 	return out, nil
 }
 
-// Contains the parameters for DescribeJobs.
+// Contains the parameters for DescribeJobs .
 type DescribeJobsInput struct {
 
 	// A list of up to 100 job IDs.

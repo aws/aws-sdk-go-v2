@@ -27,8 +27,8 @@ import (
 // also enables all the existing settings and resources that it stores or maintains
 // for your Amazon Web Services account in the current Region, including security
 // log and event data. For more information, see the Amazon Security Lake User
-// Guide
-// (https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html).
+// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html)
+// .
 func (c *Client) CreateDatalake(ctx context.Context, params *CreateDatalakeInput, optFns ...func(*Options)) (*CreateDatalakeOutput, error) {
 	if params == nil {
 		params = &CreateDatalakeInput{}

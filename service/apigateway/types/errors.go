@@ -34,8 +34,8 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request configuration has conflicts. For details, see the accompanying error
-// message.
+// The request configuration has conflicts. For details, see the accompanying
+// error message.
 type ConflictException struct {
 	Message *string
 

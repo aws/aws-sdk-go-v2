@@ -14,18 +14,13 @@ import (
 // Claims an available phone number to your Amazon Connect instance or traffic
 // distribution group. You can call this API only in the same Amazon Web Services
 // Region where the Amazon Connect instance or traffic distribution group was
-// created. For more information about how to use this operation, see Claim a phone
-// number in your country
-// (https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html)
-// and Claim phone numbers to traffic distribution groups
-// (https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html)
+// created. For more information about how to use this operation, see Claim a
+// phone number in your country (https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html)
+// and Claim phone numbers to traffic distribution groups (https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html)
 // in the Amazon Connect Administrator Guide. You can call the
-// SearchAvailablePhoneNumbers
-// (https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html)
-// API for available phone numbers that you can claim. Call the DescribePhoneNumber
-// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
-// API to verify the status of a previous ClaimPhoneNumber
-// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html)
+// SearchAvailablePhoneNumbers (https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html)
+// API for available phone numbers that you can claim. Call the DescribePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
+// API to verify the status of a previous ClaimPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html)
 // operation.
 func (c *Client) ClaimPhoneNumber(ctx context.Context, params *ClaimPhoneNumberInput, optFns ...func(*Options)) (*ClaimPhoneNumberOutput, error) {
 	if params == nil {
@@ -45,7 +40,7 @@ func (c *Client) ClaimPhoneNumber(ctx context.Context, params *ClaimPhoneNumberI
 type ClaimPhoneNumberInput struct {
 
 	// The phone number you want to claim. Phone numbers are formatted [+] [country
-	// code] [subscriber number including area code].
+	// code] [subscriber number including area code] .
 	//
 	// This member is required.
 	PhoneNumber *string
@@ -59,9 +54,8 @@ type ClaimPhoneNumberInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
-	// Pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// . Pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$
 	ClientToken *string
 
 	// The description of the phone number.

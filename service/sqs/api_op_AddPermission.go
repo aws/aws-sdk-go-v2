@@ -10,35 +10,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a permission to a queue for a specific principal
-// (https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P). This allows
-// sharing access to the queue. When you create a queue, you have full control
-// access rights for the queue. Only you, the owner of the queue, can grant or deny
-// permissions to the queue. For more information about these permissions, see
-// Allow Developers to Write Messages to a Shared Queue
-// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue)
+// Adds a permission to a queue for a specific principal (https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P)
+// . This allows sharing access to the queue. When you create a queue, you have
+// full control access rights for the queue. Only you, the owner of the queue, can
+// grant or deny permissions to the queue. For more information about these
+// permissions, see Allow Developers to Write Messages to a Shared Queue (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue)
 // in the Amazon SQS Developer Guide.
+//   - AddPermission generates a policy for you. You can use SetQueueAttributes to
+//     upload your policy. For more information, see Using Custom Policies with the
+//     Amazon SQS Access Policy Language (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html)
+//     in the Amazon SQS Developer Guide.
+//   - An Amazon SQS policy can have a maximum of 7 actions.
+//   - To remove the ability to change queue permissions, you must deny permission
+//     to the AddPermission , RemovePermission , and SetQueueAttributes actions in
+//     your IAM policy.
 //
-// * AddPermission generates a policy for you.
-// You can use SetQueueAttributes to upload your policy. For more information, see
-// Using Custom Policies with the Amazon SQS Access Policy Language
-// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html)
-// in the Amazon SQS Developer Guide.
-//
-// * An Amazon SQS policy can have a maximum of
-// 7 actions.
-//
-// * To remove the ability to change queue permissions, you must deny
-// permission to the AddPermission, RemovePermission, and SetQueueAttributes
-// actions in your IAM policy.
-//
-// Some actions take lists of parameters. These lists
-// are specified using the param.n notation. Values of n are integers starting from
-// 1. For example, a parameter list with two elements looks like this:
-// &AttributeName.1=first&AttributeName.2=second Cross-account permissions don't
-// apply to this action. For more information, see Grant cross-account permissions
-// to a role and a user name
-// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+// Some actions take lists of parameters. These lists are specified using the
+// param.n notation. Values of n are integers starting from 1. For example, a
+// parameter list with two elements looks like this: &AttributeName.1=first
+// &AttributeName.2=second Cross-account permissions don't apply to this action.
+// For more information, see Grant cross-account permissions to a role and a user
+// name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon SQS Developer Guide.
 func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, optFns ...func(*Options)) (*AddPermissionOutput, error) {
 	if params == nil {
@@ -57,32 +49,29 @@ func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, 
 
 type AddPermissionInput struct {
 
-	// The Amazon Web Services account numbers of the principals
-	// (https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P) who are to
-	// receive permission. For information about locating the Amazon Web Services
-	// account identification, see Your Amazon Web Services Identifiers
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html#sqs-api-request-authentication)
+	// The Amazon Web Services account numbers of the principals (https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P)
+	// who are to receive permission. For information about locating the Amazon Web
+	// Services account identification, see Your Amazon Web Services Identifiers (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html#sqs-api-request-authentication)
 	// in the Amazon SQS Developer Guide.
 	//
 	// This member is required.
 	AWSAccountIds []string
 
 	// The action the client wants to allow for the specified principal. Valid values:
-	// the name of any action or *. For more information about these actions, see
+	// the name of any action or * . For more information about these actions, see
 	// Overview of Managing Access Permissions to Your Amazon Simple Queue Service
-	// Resource
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html)
-	// in the Amazon SQS Developer Guide. Specifying SendMessage, DeleteMessage, or
+	// Resource (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html)
+	// in the Amazon SQS Developer Guide. Specifying SendMessage , DeleteMessage , or
 	// ChangeMessageVisibility for ActionName.n also grants permissions for the
-	// corresponding batch versions of those actions: SendMessageBatch,
-	// DeleteMessageBatch, and ChangeMessageVisibilityBatch.
+	// corresponding batch versions of those actions: SendMessageBatch ,
+	// DeleteMessageBatch , and ChangeMessageVisibilityBatch .
 	//
 	// This member is required.
 	Actions []string
 
 	// The unique identification of the permission you're setting (for example,
-	// AliceSendMessage). Maximum 80 characters. Allowed characters include
-	// alphanumeric characters, hyphens (-), and underscores (_).
+	// AliceSendMessage ). Maximum 80 characters. Allowed characters include
+	// alphanumeric characters, hyphens ( - ), and underscores ( _ ).
 	//
 	// This member is required.
 	Label *string

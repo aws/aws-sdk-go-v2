@@ -13,7 +13,7 @@ import (
 )
 
 // Returns information about an Amazon Lex bot alias. For more information about
-// aliases, see versioning-aliases. This operation requires permissions for the
+// aliases, see versioning-aliases . This operation requires permissions for the
 // lex:GetBotAlias action.
 func (c *Client) GetBotAlias(ctx context.Context, params *GetBotAliasInput, optFns ...func(*Options)) (*GetBotAliasOutput, error) {
 	if params == nil {

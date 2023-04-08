@@ -39,7 +39,7 @@ type GetDomainStatisticsReportInput struct {
 
 	// The last day (in Unix time) that you want to obtain domain deliverability
 	// metrics for. The EndDate that you specify has to be less than or equal to 30
-	// days after the StartDate.
+	// days after the StartDate .
 	//
 	// This member is required.
 	EndDate *time.Time
@@ -58,15 +58,15 @@ type GetDomainStatisticsReportInput struct {
 type GetDomainStatisticsReportOutput struct {
 
 	// An object that contains deliverability metrics for the domain that you
-	// specified. This object contains data for each day, starting on the StartDate and
-	// ending on the EndDate.
+	// specified. This object contains data for each day, starting on the StartDate
+	// and ending on the EndDate .
 	//
 	// This member is required.
 	DailyVolumes []types.DailyVolume
 
 	// An object that contains deliverability metrics for the domain that you
 	// specified. The data in this object is a summary of all of the data that was
-	// collected from the StartDate to the EndDate.
+	// collected from the StartDate to the EndDate .
 	//
 	// This member is required.
 	OverallVolume *types.OverallVolume

@@ -34,9 +34,9 @@ type CreateRotationOverrideInput struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The Amazon Resource Names (ARNs) of the contacts to replace those in the current
-	// on-call rotation with. If you want to include any current team members in the
-	// override shift, you must include their ARNs in the new contact ID list.
+	// The Amazon Resource Names (ARNs) of the contacts to replace those in the
+	// current on-call rotation with. If you want to include any current team members
+	// in the override shift, you must include their ARNs in the new contact ID list.
 	//
 	// This member is required.
 	NewContactIds []string

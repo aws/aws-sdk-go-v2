@@ -13,7 +13,7 @@ import (
 // Cancels an in-progress schema extension to a Microsoft AD directory. Once a
 // schema extension has started replicating to all domain controllers, the task can
 // no longer be canceled. A schema extension can be canceled during any of the
-// following states; Initializing, CreatingSnapshot, and UpdatingSchema.
+// following states; Initializing , CreatingSnapshot , and UpdatingSchema .
 func (c *Client) CancelSchemaExtension(ctx context.Context, params *CancelSchemaExtensionInput, optFns ...func(*Options)) (*CancelSchemaExtensionOutput, error) {
 	if params == nil {
 		params = &CancelSchemaExtensionInput{}

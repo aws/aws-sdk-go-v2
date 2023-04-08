@@ -42,14 +42,14 @@ type ListIntentsInput struct {
 
 	// The identifier of the language and locale of the intents to list. The string
 	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
 	//
 	// This member is required.
 	LocaleId *string
 
-	// Provides the specification of a filter used to limit the intents in the response
-	// to only those that match the filter specification. You can only specify one
-	// filter and only one string to filter on.
+	// Provides the specification of a filter used to limit the intents in the
+	// response to only those that match the filter specification. You can only specify
+	// one filter and only one string to filter on.
 	Filters []types.IntentFilter
 
 	// The maximum number of intents to return in each page of results. If there are
@@ -59,9 +59,9 @@ type ListIntentsInput struct {
 
 	// If the response from the ListIntents operation contains more results than
 	// specified in the maxResults parameter, a token is returned in the response. Use
-	// the returned token in the nextToken parameter of a ListIntents request to return
-	// the next page of results. For a complete set of results, call the ListIntents
-	// operation until the nextToken returned in the response is null.
+	// the returned token in the nextToken parameter of a ListIntents request to
+	// return the next page of results. For a complete set of results, call the
+	// ListIntents operation until the nextToken returned in the response is null.
 	NextToken *string
 
 	// Determines the sort order for the response from the ListIntents operation. You
@@ -82,15 +82,15 @@ type ListIntentsOutput struct {
 
 	// Summary information for the intents that meet the filter criteria specified in
 	// the request. The length of the list is specified in the maxResults parameter of
-	// the request. If there are more intents available, the nextToken field contains a
-	// token to get the next page of results.
+	// the request. If there are more intents available, the nextToken field contains
+	// a token to get the next page of results.
 	IntentSummaries []types.IntentSummary
 
 	// The language and locale of the intents in the list.
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListIntents operation. If the nextToken field is present, you send the
+	// A token that indicates whether there are more results to return in a response
+	// to the ListIntents operation. If the nextToken field is present, you send the
 	// contents as the nextToken parameter of a ListIntents operation request to get
 	// the next page of results.
 	NextToken *string

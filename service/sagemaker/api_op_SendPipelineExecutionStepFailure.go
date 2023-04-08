@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Notifies the pipeline that the execution of a callback step failed, along with a
-// message describing why. When a callback step is run, the pipeline generates a
+// Notifies the pipeline that the execution of a callback step failed, along with
+// a message describing why. When a callback step is run, the pipeline generates a
 // callback token and includes the token in a message sent to Amazon Simple Queue
 // Service (Amazon SQS).
 func (c *Client) SendPipelineExecutionStepFailure(ctx context.Context, params *SendPipelineExecutionStepFailureInput, optFns ...func(*Options)) (*SendPipelineExecutionStepFailureOutput, error) {

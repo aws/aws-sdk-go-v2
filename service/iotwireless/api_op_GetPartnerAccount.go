@@ -12,7 +12,7 @@ import (
 )
 
 // Gets information about a partner account. If PartnerAccountId and PartnerType
-// are null, returns all partner accounts.
+// are null , returns all partner accounts.
 func (c *Client) GetPartnerAccount(ctx context.Context, params *GetPartnerAccountInput, optFns ...func(*Options)) (*GetPartnerAccountOutput, error) {
 	if params == nil {
 		params = &GetPartnerAccountInput{}

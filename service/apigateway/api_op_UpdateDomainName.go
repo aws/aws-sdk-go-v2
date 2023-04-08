@@ -36,8 +36,8 @@ type UpdateDomainNameInput struct {
 	// This member is required.
 	DomainName *string
 
-	// For more information about supported patch operations, see Patch Operations
-	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
+	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
+	// .
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -73,12 +73,12 @@ type UpdateDomainNameOutput struct {
 	// Endpoints for API Gateway.
 	DistributionHostedZoneId *string
 
-	// The custom domain name as an API host name, for example, my-api.example.com.
+	// The custom domain name as an API host name, for example, my-api.example.com .
 	DomainName *string
 
 	// The status of the DomainName migration. The valid values are AVAILABLE and
-	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
-	// the existing operation is complete. If it is AVAILABLE, the domain can be
+	// UPDATING . If the status is UPDATING , the domain cannot be modified further
+	// until the existing operation is complete. If it is AVAILABLE , the domain can be
 	// updated.
 	DomainNameStatus types.DomainNameStatus
 
@@ -100,12 +100,12 @@ type UpdateDomainNameOutput struct {
 	// imported or private CA certificate ARN as the regionalCertificateArn.
 	OwnershipVerificationCertificateArn *string
 
-	// The reference to an AWS-managed certificate that will be used for validating the
-	// regional domain name. AWS Certificate Manager is the only supported source.
+	// The reference to an AWS-managed certificate that will be used for validating
+	// the regional domain name. AWS Certificate Manager is the only supported source.
 	RegionalCertificateArn *string
 
-	// The name of the certificate that will be used for validating the regional domain
-	// name.
+	// The name of the certificate that will be used for validating the regional
+	// domain name.
 	RegionalCertificateName *string
 
 	// The domain name associated with the regional endpoint for this custom domain
@@ -114,13 +114,13 @@ type UpdateDomainNameOutput struct {
 	// by API Gateway when you create a regional endpoint.
 	RegionalDomainName *string
 
-	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For
-	// more information, see Set up a Regional Custom Domain Name and AWS Regions and
-	// Endpoints for API Gateway.
+	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint.
+	// For more information, see Set up a Regional Custom Domain Name and AWS Regions
+	// and Endpoints for API Gateway.
 	RegionalHostedZoneId *string
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
-	// The valid values are TLS_1_0 and TLS_1_2.
+	// The valid values are TLS_1_0 and TLS_1_2 .
 	SecurityPolicy types.SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.

@@ -14,9 +14,9 @@ import (
 
 // Returns a list of the monitoring evaluation results and predictor events
 // collected by the monitor resource during different windows of time. For
-// information about monitoring see predictor-monitoring. For more information
-// about retrieving monitoring results see Viewing Monitoring Results
-// (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html).
+// information about monitoring see predictor-monitoring . For more information
+// about retrieving monitoring results see Viewing Monitoring Results (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html)
+// .
 func (c *Client) ListMonitorEvaluations(ctx context.Context, params *ListMonitorEvaluationsInput, optFns ...func(*Options)) (*ListMonitorEvaluationsOutput, error) {
 	if params == nil {
 		params = &ListMonitorEvaluationsInput{}
@@ -39,30 +39,24 @@ type ListMonitorEvaluationsInput struct {
 	// This member is required.
 	MonitorArn *string
 
-	// An array of filters. For each filter, provide a condition and a match statement.
-	// The condition is either IS or IS_NOT, which specifies whether to include or
-	// exclude the resources that match the statement from the list. The match
-	// statement consists of a key and a value. Filter properties
-	//
-	// * Condition - The
-	// condition to apply. Valid values are IS and IS_NOT.
-	//
-	// * Key - The name of the
-	// parameter to filter on. The only valid value is EvaluationState.
-	//
-	// * Value - The
-	// value to match. Valid values are only SUCCESS or FAILURE.
-	//
-	// For example, to list
-	// only successful monitor evaluations, you would specify: "Filters": [ {
-	// "Condition": "IS", "Key": "EvaluationState", "Value": "SUCCESS" } ]
+	// An array of filters. For each filter, provide a condition and a match
+	// statement. The condition is either IS or IS_NOT , which specifies whether to
+	// include or exclude the resources that match the statement from the list. The
+	// match statement consists of a key and a value. Filter properties
+	//   - Condition - The condition to apply. Valid values are IS and IS_NOT .
+	//   - Key - The name of the parameter to filter on. The only valid value is
+	//   EvaluationState .
+	//   - Value - The value to match. Valid values are only SUCCESS or FAILURE .
+	// For example, to list only successful monitor evaluations, you would specify:
+	// "Filters": [ { "Condition": "IS", "Key": "EvaluationState", "Value": "SUCCESS" }
+	// ]
 	Filters []types.Filter
 
 	// The maximum number of monitoring results to return.
 	MaxResults *int32
 
 	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
+	// NextToken . To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
 
@@ -78,11 +72,10 @@ type ListMonitorEvaluationsOutput struct {
 
 	// The monitoring results and predictor events collected by the monitor resource
 	// during different windows of time. For information about monitoring see Viewing
-	// Monitoring Results
-	// (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html).
-	// For more information about retrieving monitoring results see Viewing Monitoring
-	// Results
-	// (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html).
+	// Monitoring Results (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html)
+	// . For more information about retrieving monitoring results see Viewing
+	// Monitoring Results (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html)
+	// .
 	PredictorMonitorEvaluations []types.PredictorMonitorEvaluation
 
 	// Metadata pertaining to the operation's result.

@@ -1034,9 +1034,9 @@ const (
 	ResourceTypeAppRunnerService        ResourceType = "APP_RUNNER_SERVICE"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"APPLICATION_LOAD_BALANCER",
@@ -1075,8 +1075,8 @@ const (
 	ScopeRegional   Scope = "REGIONAL"
 )
 
-// Values returns all known values for Scope. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Scope. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Scope) Values() []Scope {
 	return []Scope{

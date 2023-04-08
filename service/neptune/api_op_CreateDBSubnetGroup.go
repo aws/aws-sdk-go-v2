@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new DB subnet group. DB subnet groups must contain at least one subnet
-// in at least two AZs in the Amazon Region.
+// Creates a new DB subnet group. DB subnet groups must contain at least one
+// subnet in at least two AZs in the Amazon Region.
 func (c *Client) CreateDBSubnetGroup(ctx context.Context, params *CreateDBSubnetGroupInput, optFns ...func(*Options)) (*CreateDBSubnetGroupOutput, error) {
 	if params == nil {
 		params = &CreateDBSubnetGroupInput{}

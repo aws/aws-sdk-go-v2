@@ -60,7 +60,7 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// Space-separated list of names for specific individual assessments that you want
 	// to exclude. These names come from the default list of individual assessments
 	// that DMS supports for the associated migration task. This task is specified by
-	// ReplicationTaskArn. You can't set a value for Exclude if you also set a value
+	// ReplicationTaskArn . You can't set a value for Exclude if you also set a value
 	// for IncludeOnly in the API operation. To identify the names of the default
 	// individual assessments that DMS supports for the associated migration task, run
 	// the DescribeApplicableIndividualAssessments operation using its own
@@ -70,7 +70,7 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// Space-separated list of names for specific individual assessments that you want
 	// to include. These names come from the default list of individual assessments
 	// that DMS supports for the associated migration task. This task is specified by
-	// ReplicationTaskArn. You can't set a value for IncludeOnly if you also set a
+	// ReplicationTaskArn . You can't set a value for IncludeOnly if you also set a
 	// value for Exclude in the API operation. To identify the names of the default
 	// individual assessments that DMS supports for the associated migration task, run
 	// the DescribeApplicableIndividualAssessments operation using its own
@@ -80,18 +80,14 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// Encryption mode that you can specify to encrypt the results of this assessment
 	// run. If you don't specify this request parameter, DMS stores the assessment run
 	// results without encryption. You can specify one of the options following:
-	//
-	// *
-	// "SSE_S3" – The server-side encryption provided as a default by Amazon S3.
-	//
-	// *
-	// "SSE_KMS" – Key Management Service (KMS) encryption. This encryption can use
-	// either a custom KMS encryption key that you specify or the default KMS
-	// encryption key that DMS provides.
+	//   - "SSE_S3" – The server-side encryption provided as a default by Amazon S3.
+	//   - "SSE_KMS" – Key Management Service (KMS) encryption. This encryption can use
+	//   either a custom KMS encryption key that you specify or the default KMS
+	//   encryption key that DMS provides.
 	ResultEncryptionMode *string
 
 	// ARN of a custom KMS encryption key that you specify when you set
-	// ResultEncryptionMode to "SSE_KMS".
+	// ResultEncryptionMode to "SSE_KMS ".
 	ResultKmsKeyArn *string
 
 	// Folder within an Amazon S3 bucket where you want DMS to store the results of

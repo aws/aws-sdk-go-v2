@@ -7,9 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Access denied or directory not found. Either you don't have permissions for this
-// directory or the directory does not exist. Try calling ListDirectories and check
-// your permissions.
+// Access denied or directory not found. Either you don't have permissions for
+// this directory or the directory does not exist. Try calling ListDirectories and
+// check your permissions.
 type AccessDeniedException struct {
 	Message *string
 
@@ -90,8 +90,8 @@ func (e *CannotListParentOfRootException) ErrorCode() string {
 }
 func (e *CannotListParentOfRootException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that a Directory could not be created due to a naming conflict. Choose
-// a different name and try again.
+// Indicates that a Directory could not be created due to a naming conflict.
+// Choose a different name and try again.
 type DirectoryAlreadyExistsException struct {
 	Message *string
 
@@ -302,9 +302,9 @@ func (e *FacetValidationException) ErrorCode() string {
 }
 func (e *FacetValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates a failure occurred while performing a check for backward compatibility
-// between the specified schema and the schema that is currently applied to the
-// directory.
+// Indicates a failure occurred while performing a check for backward
+// compatibility between the specified schema and the schema that is currently
+// applied to the directory.
 type IncompatibleSchemaException struct {
 	Message *string
 
@@ -359,9 +359,8 @@ func (e *IndexedAttributeMissingException) ErrorFault() smithy.ErrorFault { retu
 
 // Indicates a problem that must be resolved by Amazon Web Services. This might be
 // a transient error in which case you can retry your request until it succeeds.
-// Otherwise, go to the AWS Service Health Dashboard
-// (http://status.aws.amazon.com/) site to see if there are any operational issues
-// with the service.
+// Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+// site to see if there are any operational issues with the service.
 type InternalServiceException struct {
 	Message *string
 
@@ -573,8 +572,7 @@ func (e *InvalidTaggingRequestException) ErrorCode() string {
 }
 func (e *InvalidTaggingRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that limits are exceeded. See Limits
-// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+// Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
 // for more information.
 type LimitExceededException struct {
 	Message *string

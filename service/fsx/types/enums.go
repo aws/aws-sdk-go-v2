@@ -12,9 +12,9 @@ const (
 	ActiveDirectoryErrorTypeInvalidDomainStage     ActiveDirectoryErrorType = "INVALID_DOMAIN_STAGE"
 )
 
-// Values returns all known values for ActiveDirectoryErrorType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ActiveDirectoryErrorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActiveDirectoryErrorType) Values() []ActiveDirectoryErrorType {
 	return []ActiveDirectoryErrorType{
 		"DOMAIN_NOT_FOUND",
@@ -38,9 +38,9 @@ const (
 	AdministrativeActionTypeVolumeRestore                 AdministrativeActionType = "VOLUME_RESTORE"
 )
 
-// Values returns all known values for AdministrativeActionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AdministrativeActionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdministrativeActionType) Values() []AdministrativeActionType {
 	return []AdministrativeActionType{
 		"FILE_SYSTEM_UPDATE",
@@ -202,9 +202,10 @@ const (
 	DataRepositoryTaskFilterNameFileCacheId           DataRepositoryTaskFilterName = "file-cache-id"
 )
 
-// Values returns all known values for DataRepositoryTaskFilterName. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataRepositoryTaskFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DataRepositoryTaskFilterName) Values() []DataRepositoryTaskFilterName {
 	return []DataRepositoryTaskFilterName{
 		"file-system-id",
@@ -340,9 +341,9 @@ const (
 	EventTypeDeleted EventType = "DELETED"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"NEW",
@@ -514,8 +515,8 @@ const (
 	FlexCacheEndpointTypeCache  FlexCacheEndpointType = "CACHE"
 )
 
-// Values returns all known values for FlexCacheEndpointType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FlexCacheEndpointType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FlexCacheEndpointType) Values() []FlexCacheEndpointType {
 	return []FlexCacheEndpointType{
@@ -687,8 +688,8 @@ const (
 	OpenZFSDeploymentTypeSingleAz2 OpenZFSDeploymentType = "SINGLE_AZ_2"
 )
 
-// Values returns all known values for OpenZFSDeploymentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for OpenZFSDeploymentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (OpenZFSDeploymentType) Values() []OpenZFSDeploymentType {
 	return []OpenZFSDeploymentType{
@@ -722,9 +723,9 @@ const (
 	ReportFormatReportCsv20191124 ReportFormat = "REPORT_CSV_20191124"
 )
 
-// Values returns all known values for ReportFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ReportFormat) Values() []ReportFormat {
 	return []ReportFormat{
 		"REPORT_CSV_20191124",
@@ -755,9 +756,9 @@ const (
 	ResourceTypeVolume     ResourceType = "VOLUME"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"FILE_SYSTEM",
@@ -819,9 +820,9 @@ const (
 	ServiceLimitFileCacheCount                      ServiceLimit = "FILE_CACHE_COUNT"
 )
 
-// Values returns all known values for ServiceLimit. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServiceLimit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceLimit) Values() []ServiceLimit {
 	return []ServiceLimit{
 		"FILE_SYSTEM_COUNT",
@@ -994,9 +995,10 @@ const (
 	StorageVirtualMachineSubtypeSyncSource      StorageVirtualMachineSubtype = "SYNC_SOURCE"
 )
 
-// Values returns all known values for StorageVirtualMachineSubtype. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StorageVirtualMachineSubtype. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (StorageVirtualMachineSubtype) Values() []StorageVirtualMachineSubtype {
 	return []StorageVirtualMachineSubtype{
 		"DEFAULT",
@@ -1123,8 +1125,8 @@ const (
 	WindowsDeploymentTypeSingleAz2 WindowsDeploymentType = "SINGLE_AZ_2"
 )
 
-// Values returns all known values for WindowsDeploymentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for WindowsDeploymentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (WindowsDeploymentType) Values() []WindowsDeploymentType {
 	return []WindowsDeploymentType{

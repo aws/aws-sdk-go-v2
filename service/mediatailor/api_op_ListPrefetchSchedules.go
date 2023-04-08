@@ -58,8 +58,8 @@ type ListPrefetchSchedulesInput struct {
 
 type ListPrefetchSchedulesOutput struct {
 
-	// Lists the prefetch schedules. An empty Items list doesn't mean there aren't more
-	// items to fetch, just that that page was empty.
+	// Lists the prefetch schedules. An empty Items list doesn't mean there aren't
+	// more items to fetch, just that that page was empty.
 	Items []types.PrefetchSchedule
 
 	// Pagination token returned by the list request when results exceed the maximum

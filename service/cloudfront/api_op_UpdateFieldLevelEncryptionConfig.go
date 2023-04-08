@@ -39,8 +39,8 @@ type UpdateFieldLevelEncryptionConfigInput struct {
 	// This member is required.
 	Id *string
 
-	// The value of the ETag header that you received when retrieving the configuration
-	// identity to update. For example: E2QWRUHAPOMQZL.
+	// The value of the ETag header that you received when retrieving the
+	// configuration identity to update. For example: E2QWRUHAPOMQZL .
 	IfMatch *string
 
 	noSmithyDocumentSerde
@@ -49,7 +49,7 @@ type UpdateFieldLevelEncryptionConfigInput struct {
 type UpdateFieldLevelEncryptionConfigOutput struct {
 
 	// The value of the ETag header that you received when updating the configuration.
-	// For example: E2QWRUHAPOMQZL.
+	// For example: E2QWRUHAPOMQZL .
 	ETag *string
 
 	// Return the results of updating the configuration.

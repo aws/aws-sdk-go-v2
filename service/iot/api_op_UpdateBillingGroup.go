@@ -12,8 +12,7 @@ import (
 )
 
 // Updates information about the billing group. Requires permission to access the
-// UpdateBillingGroup
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// UpdateBillingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateBillingGroup(ctx context.Context, params *UpdateBillingGroupInput, optFns ...func(*Options)) (*UpdateBillingGroupOutput, error) {
 	if params == nil {
@@ -44,7 +43,7 @@ type UpdateBillingGroupInput struct {
 
 	// The expected version of the billing group. If the version of the billing group
 	// does not match the expected version specified in the request, the
-	// UpdateBillingGroup request is rejected with a VersionConflictException.
+	// UpdateBillingGroup request is rejected with a VersionConflictException .
 	ExpectedVersion *int64
 
 	noSmithyDocumentSerde

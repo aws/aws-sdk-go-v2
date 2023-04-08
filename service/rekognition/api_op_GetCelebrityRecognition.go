@@ -13,24 +13,24 @@ import (
 )
 
 // Gets the celebrity recognition results for a Amazon Rekognition Video analysis
-// started by StartCelebrityRecognition. Celebrity recognition in a video is an
+// started by StartCelebrityRecognition . Celebrity recognition in a video is an
 // asynchronous operation. Analysis is started by a call to
-// StartCelebrityRecognition which returns a job identifier (JobId). When the
+// StartCelebrityRecognition which returns a job identifier ( JobId ). When the
 // celebrity recognition operation finishes, Amazon Rekognition Video publishes a
 // completion status to the Amazon Simple Notification Service topic registered in
-// the initial call to StartCelebrityRecognition. To get the results of the
+// the initial call to StartCelebrityRecognition . To get the results of the
 // celebrity recognition analysis, first check that the status value published to
-// the Amazon SNS topic is SUCCEEDED. If so, call GetCelebrityDetection and pass
-// the job identifier (JobId) from the initial call to StartCelebrityDetection. For
-// more information, see Working With Stored Videos in the Amazon Rekognition
+// the Amazon SNS topic is SUCCEEDED . If so, call GetCelebrityDetection and pass
+// the job identifier ( JobId ) from the initial call to StartCelebrityDetection .
+// For more information, see Working With Stored Videos in the Amazon Rekognition
 // Developer Guide. GetCelebrityRecognition returns detected celebrities and the
-// time(s) they are detected in an array (Celebrities) of CelebrityRecognition
-// objects. Each CelebrityRecognition contains information about the celebrity in a
-// CelebrityDetail object and the time, Timestamp, the celebrity was detected. This
-// CelebrityDetail object stores information about the detected celebrity's face
-// attributes, a face bounding box, known gender, the celebrity's name, and a
+// time(s) they are detected in an array ( Celebrities ) of CelebrityRecognition
+// objects. Each CelebrityRecognition contains information about the celebrity in
+// a CelebrityDetail object and the time, Timestamp , the celebrity was detected.
+// This CelebrityDetail object stores information about the detected celebrity's
+// face attributes, a face bounding box, known gender, the celebrity's name, and a
 // confidence estimate. GetCelebrityRecognition only returns the default facial
-// attributes (BoundingBox, Confidence, Landmarks, Pose, and Quality). The
+// attributes ( BoundingBox , Confidence , Landmarks , Pose , and Quality ). The
 // BoundingBox field only applies to the detected face instance. The other facial
 // attributes listed in the Face object of the following response syntax are not
 // returned. For more information, see FaceDetail in the Amazon Rekognition
@@ -42,11 +42,11 @@ import (
 // get them later by calling GetCelebrityInfo with the celebrity identifer. No
 // information is returned for faces not recognized as celebrities. Use MaxResults
 // parameter to limit the number of labels returned. If there are more results than
-// specified in MaxResults, the value of NextToken in the operation response
+// specified in MaxResults , the value of NextToken in the operation response
 // contains a pagination token for getting the next set of results. To get the next
 // page of results, call GetCelebrityDetection and populate the NextToken request
 // parameter with the token value returned from the previous call to
-// GetCelebrityRecognition.
+// GetCelebrityRecognition .
 func (c *Client) GetCelebrityRecognition(ctx context.Context, params *GetCelebrityRecognitionInput, optFns ...func(*Options)) (*GetCelebrityRecognitionOutput, error) {
 	if params == nil {
 		params = &GetCelebrityRecognitionInput{}
@@ -65,7 +65,7 @@ func (c *Client) GetCelebrityRecognition(ctx context.Context, params *GetCelebri
 type GetCelebrityRecognitionInput struct {
 
 	// Job identifier for the required celebrity recognition analysis. You can get the
-	// job identifer from a call to StartCelebrityRecognition.
+	// job identifer from a call to StartCelebrityRecognition .
 	//
 	// This member is required.
 	JobId *string
@@ -81,9 +81,9 @@ type GetCelebrityRecognitionInput struct {
 	// celebrities.
 	NextToken *string
 
-	// Sort to use for celebrities returned in Celebrities field. Specify ID to sort by
-	// the celebrity identifier, specify TIMESTAMP to sort by the time the celebrity
-	// was recognized.
+	// Sort to use for celebrities returned in Celebrities field. Specify ID to sort
+	// by the celebrity identifier, specify TIMESTAMP to sort by the time the
+	// celebrity was recognized.
 	SortBy types.CelebrityRecognitionSortBy
 
 	noSmithyDocumentSerde

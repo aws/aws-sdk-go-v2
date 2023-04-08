@@ -13,8 +13,8 @@ import (
 // Deletes a CloudFront function. You cannot delete a function if it's associated
 // with a cache behavior. First, update your distributions to remove the function
 // association from all cache behaviors, then delete the function. To delete a
-// function, you must provide the function's name and version (ETag value). To get
-// these values, you can use ListFunctions and DescribeFunction.
+// function, you must provide the function's name and version ( ETag value). To
+// get these values, you can use ListFunctions and DescribeFunction .
 func (c *Client) DeleteFunction(ctx context.Context, params *DeleteFunctionInput, optFns ...func(*Options)) (*DeleteFunctionOutput, error) {
 	if params == nil {
 		params = &DeleteFunctionInput{}
@@ -32,8 +32,8 @@ func (c *Client) DeleteFunction(ctx context.Context, params *DeleteFunctionInput
 
 type DeleteFunctionInput struct {
 
-	// The current version (ETag value) of the function that you are deleting, which
-	// you can get using DescribeFunction.
+	// The current version ( ETag value) of the function that you are deleting, which
+	// you can get using DescribeFunction .
 	//
 	// This member is required.
 	IfMatch *string

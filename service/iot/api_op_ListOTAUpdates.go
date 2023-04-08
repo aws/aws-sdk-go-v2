@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists OTA updates. Requires permission to access the ListOTAUpdates
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Lists OTA updates. Requires permission to access the ListOTAUpdates (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListOTAUpdates(ctx context.Context, params *ListOTAUpdatesInput, optFns ...func(*Options)) (*ListOTAUpdatesOutput, error) {
 	if params == nil {

@@ -15,8 +15,7 @@ import (
 // bucket bundle specifies the monthly cost, storage space, and data transfer quota
 // for a bucket. You can update a bucket's bundle only one time within a monthly
 // Amazon Web Services billing cycle. To determine if you can update a bucket's
-// bundle, use the GetBuckets
-// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html)
+// bundle, use the GetBuckets (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html)
 // action. The ableToUpdateBundle parameter in the response will indicate whether
 // you can currently update a bucket's bundle. Update a bucket's bundle if it's
 // consistently going over its storage space or data transfer quota, or if a
@@ -48,8 +47,7 @@ type UpdateBucketBundleInput struct {
 	// This member is required.
 	BucketName *string
 
-	// The ID of the new bundle to apply to the bucket. Use the GetBucketBundles
-	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html)
+	// The ID of the new bundle to apply to the bucket. Use the GetBucketBundles (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html)
 	// action to get a list of bundle IDs that you can specify.
 	//
 	// This member is required.

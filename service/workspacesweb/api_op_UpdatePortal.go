@@ -35,7 +35,7 @@ type UpdatePortalInput struct {
 	PortalArn *string
 
 	// The type of authentication integration points used when signing into the web
-	// portal. Defaults to Standard. Standard web portals are authenticated directly
+	// portal. Defaults to Standard . Standard web portals are authenticated directly
 	// through your identity provider. You need to call CreateIdentityProvider to
 	// integrate your identity provider with your web portal. User and group access to
 	// your web portal is controlled through your identity provider.

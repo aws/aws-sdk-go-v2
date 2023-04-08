@@ -12,8 +12,8 @@ import (
 )
 
 // Associates a package with an Amazon OpenSearch Service domain. For more
-// information, see Custom packages for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
+// information, see Custom packages for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
+// .
 func (c *Client) AssociatePackage(ctx context.Context, params *AssociatePackageInput, optFns ...func(*Options)) (*AssociatePackageOutput, error) {
 	if params == nil {
 		params = &AssociatePackageInput{}

@@ -12,14 +12,11 @@ import (
 )
 
 // Creates a new instance profile. For information about instance profiles, see
-// Using roles for applications on Amazon EC2
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html)
-// in the IAM User Guide, and Instance profiles
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#ec2-instance-profile)
+// Using roles for applications on Amazon EC2 (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html)
+// in the IAM User Guide, and Instance profiles (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#ec2-instance-profile)
 // in the Amazon EC2 User Guide. For information about the number of instance
-// profiles you can create, see IAM object quotas
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
-// the IAM User Guide.
+// profiles you can create, see IAM object quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
+// in the IAM User Guide.
 func (c *Client) CreateInstanceProfile(ctx context.Context, params *CreateInstanceProfileInput, optFns ...func(*Options)) (*CreateInstanceProfileOutput, error) {
 	if params == nil {
 		params = &CreateInstanceProfileInput{}
@@ -38,7 +35,7 @@ func (c *Client) CreateInstanceProfile(ctx context.Context, params *CreateInstan
 type CreateInstanceProfileInput struct {
 
 	// The name of the instance profile to create. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
 	//
@@ -46,23 +43,21 @@ type CreateInstanceProfileInput struct {
 	InstanceProfileName *string
 
 	// The path to the instance profile. For more information about paths, see IAM
-	// Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
-	// IAM User Guide. This parameter is optional. If it is not included, it defaults
-	// to a slash (/). This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of either a
-	// forward slash (/) by itself or a string that must begin and end with forward
-	// slashes. In addition, it can contain any ASCII character from the ! (\u0021)
-	// through the DEL character (\u007F), including most punctuation characters,
-	// digits, and upper and lowercased letters.
+	// Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
+	// in the IAM User Guide. This parameter is optional. If it is not included, it
+	// defaults to a slash (/). This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
+	// ) a string of characters consisting of either a forward slash (/) by itself or a
+	// string that must begin and end with forward slashes. In addition, it can contain
+	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F ),
+	// including most punctuation characters, digits, and upper and lowercased letters.
 	Path *string
 
 	// A list of tags that you want to attach to the newly created IAM instance
 	// profile. Each tag consists of a key name and an associated value. For more
-	// information about tagging, see Tagging IAM resources
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
-	// number of tags, then the entire request fails and the resource is not created.
+	// information about tagging, see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
+	// in the IAM User Guide. If any one of the tags is invalid or if you exceed the
+	// allowed maximum number of tags, then the entire request fails and the resource
+	// is not created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

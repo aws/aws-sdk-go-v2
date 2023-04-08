@@ -54,8 +54,8 @@ type ListEnabledControlsOutput struct {
 	// This member is required.
 	EnabledControls []types.EnabledControlSummary
 
-	// Retrieves the next page of results. If the string is empty, the current response
-	// is the end of the results.
+	// Retrieves the next page of results. If the string is empty, the current
+	// response is the end of the results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -127,8 +127,8 @@ func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEnabledControlsAPIClient is a client that implements the ListEnabledControls
-// operation.
+// ListEnabledControlsAPIClient is a client that implements the
+// ListEnabledControls operation.
 type ListEnabledControlsAPIClient interface {
 	ListEnabledControls(context.Context, *ListEnabledControlsInput, ...func(*Options)) (*ListEnabledControlsOutput, error)
 }

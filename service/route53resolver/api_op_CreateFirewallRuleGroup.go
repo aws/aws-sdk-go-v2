@@ -13,7 +13,7 @@ import (
 )
 
 // Creates an empty DNS Firewall rule group for filtering DNS network traffic in a
-// VPC. You can add rules to the new rule group by calling CreateFirewallRule.
+// VPC. You can add rules to the new rule group by calling CreateFirewallRule .
 func (c *Client) CreateFirewallRuleGroup(ctx context.Context, params *CreateFirewallRuleGroupInput, optFns ...func(*Options)) (*CreateFirewallRuleGroupOutput, error) {
 	if params == nil {
 		params = &CreateFirewallRuleGroupInput{}
@@ -31,9 +31,9 @@ func (c *Client) CreateFirewallRuleGroup(ctx context.Context, params *CreateFire
 
 type CreateFirewallRuleGroupInput struct {
 
-	// A unique string defined by you to identify the request. This allows you to retry
-	// failed requests without the risk of running the operation twice. This can be any
-	// unique string, for example, a timestamp.
+	// A unique string defined by you to identify the request. This allows you to
+	// retry failed requests without the risk of running the operation twice. This can
+	// be any unique string, for example, a timestamp.
 	//
 	// This member is required.
 	CreatorRequestId *string

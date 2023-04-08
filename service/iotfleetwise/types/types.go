@@ -19,7 +19,7 @@ type Actuator struct {
 	DataType NodeDataType
 
 	// The fully qualified name of the actuator. For example, the fully qualified name
-	// of an actuator might be Vehicle.Front.Left.Door.Lock.
+	// of an actuator might be Vehicle.Front.Left.Door.Lock .
 	//
 	// This member is required.
 	FullyQualifiedName *string
@@ -56,8 +56,8 @@ type Attribute struct {
 	// This member is required.
 	DataType NodeDataType
 
-	// The fully qualified name of the attribute. For example, the fully qualified name
-	// of an attribute might be Vehicle.Body.Engine.Type.
+	// The fully qualified name of the attribute. For example, the fully qualified
+	// name of an attribute might be Vehicle.Body.Engine.Type .
 	//
 	// This member is required.
 	FullyQualifiedName *string
@@ -91,8 +91,8 @@ type Attribute struct {
 // A group of signals that are defined in a hierarchical structure.
 type Branch struct {
 
-	// The fully qualified name of the branch. For example, the fully qualified name of
-	// a branch might be Vehicle.Body.Engine.
+	// The fully qualified name of the branch. For example, the fully qualified name
+	// of a branch might be Vehicle.Body.Engine .
 	//
 	// This member is required.
 	FullyQualifiedName *string
@@ -130,20 +130,15 @@ type CampaignSummary struct {
 	SignalCatalogArn *string
 
 	// The state of a campaign. The status can be one of the following:
-	//
-	// * CREATING -
-	// Amazon Web Services IoT FleetWise is processing your request to create the
-	// campaign.
-	//
-	// * WAITING_FOR_APPROVAL - After a campaign is created, it enters the
-	// WAITING_FOR_APPROVAL state. To allow Amazon Web Services IoT FleetWise to deploy
-	// the campaign to the target vehicle or fleet, use the API operation to approve
-	// the campaign.
-	//
-	// * RUNNING - The campaign is active.
-	//
-	// * SUSPENDED - The campaign
-	// is suspended. To resume the campaign, use the API operation.
+	//   - CREATING - Amazon Web Services IoT FleetWise is processing your request to
+	//   create the campaign.
+	//   - WAITING_FOR_APPROVAL - After a campaign is created, it enters the
+	//   WAITING_FOR_APPROVAL state. To allow Amazon Web Services IoT FleetWise to
+	//   deploy the campaign to the target vehicle or fleet, use the API operation to
+	//   approve the campaign.
+	//   - RUNNING - The campaign is active.
+	//   - SUSPENDED - The campaign is suspended. To resume the campaign, use the API
+	//   operation.
 	Status CampaignStatus
 
 	// The ARN of a vehicle or fleet to which the campaign is deployed.
@@ -155,8 +150,8 @@ type CampaignSummary struct {
 // Configurations used to create a decoder manifest.
 type CanDbcDefinition struct {
 
-	// A list of DBC files. You can upload only one DBC file for each network interface
-	// and specify up to five (inclusive) files in the list.
+	// A list of DBC files. You can upload only one DBC file for each network
+	// interface and specify up to five (inclusive) files in the list.
 	//
 	// This member is required.
 	CanDbcFiles [][]byte
@@ -189,8 +184,8 @@ type CanInterface struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a single controller area network (CAN) signal and the messages
-// it receives and transmits.
+// Information about a single controller area network (CAN) signal and the
+// messages it receives and transmits.
 type CanSignal struct {
 
 	// A multiplier used to decode the CAN message.
@@ -283,7 +278,7 @@ func (*CollectionSchemeMemberTimeBasedCollectionScheme) isCollectionScheme() {}
 type ConditionBasedCollectionScheme struct {
 
 	// The logical expression used to recognize what data to collect. For example,
-	// $variable.Vehicle.OutsideAirTemperature >= 105.0.
+	// $variable.Vehicle.OutsideAirTemperature >= 105.0 .
 	//
 	// This member is required.
 	Expression *string
@@ -296,8 +291,8 @@ type ConditionBasedCollectionScheme struct {
 	// slower rate.
 	MinimumTriggerIntervalMs *int64
 
-	// Whether to collect data for all triggering events (ALWAYS). Specify
-	// (RISING_EDGE), or specify only when the condition first evaluates to false. For
+	// Whether to collect data for all triggering events ( ALWAYS ). Specify (
+	// RISING_EDGE ), or specify only when the condition first evaluates to false. For
 	// example, triggering on "AirbagDeployed"; Users aren't interested on triggering
 	// when the airbag is already exploded; they only care about the change from not
 	// deployed => deployed.
@@ -324,8 +319,8 @@ type CreateVehicleError struct {
 // Information about the vehicle to create.
 type CreateVehicleRequestItem struct {
 
-	// The Amazon Resource Name (ARN) of a decoder manifest associated with the vehicle
-	// to create.
+	// The Amazon Resource Name (ARN) of a decoder manifest associated with the
+	// vehicle to create.
 	//
 	// This member is required.
 	DecoderManifestArn *string
@@ -340,8 +335,8 @@ type CreateVehicleRequestItem struct {
 	// This member is required.
 	VehicleName *string
 
-	// An option to create a new Amazon Web Services IoT thing when creating a vehicle,
-	// or to validate an existing thing as a vehicle.
+	// An option to create a new Amazon Web Services IoT thing when creating a
+	// vehicle, or to validate an existing thing as a vehicle.
 	AssociationBehavior VehicleAssociationBehavior
 
 	// Static information about a vehicle in a key-value pair. For example: "engine
@@ -399,9 +394,9 @@ type DecoderManifestSummary struct {
 	// The name of the decoder manifest.
 	Name *string
 
-	// The state of the decoder manifest. If the status is ACTIVE, the decoder manifest
-	// can't be edited. If the status is marked DRAFT, you can edit the decoder
-	// manifest.
+	// The state of the decoder manifest. If the status is ACTIVE , the decoder
+	// manifest can't be edited. If the status is marked DRAFT , you can edit the
+	// decoder manifest.
 	Status ManifestStatus
 
 	noSmithyDocumentSerde
@@ -468,7 +463,7 @@ func (*FormattedVssMemberVssJson) isFormattedVss() {}
 type IamRegistrationResponse struct {
 
 	// The status of registering your IAM resource. The status can be one of
-	// REGISTRATION_SUCCESS, REGISTRATION_PENDING, REGISTRATION_FAILURE.
+	// REGISTRATION_SUCCESS , REGISTRATION_PENDING , REGISTRATION_FAILURE .
 	//
 	// This member is required.
 	RegistrationStatus RegistrationStatus
@@ -485,14 +480,13 @@ type IamRegistrationResponse struct {
 }
 
 // The IAM resource that enables Amazon Web Services IoT FleetWise edge agent
-// software to send data to Amazon Timestream. For more information, see IAM roles
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the Identity
-// and Access Management User Guide.
+// software to send data to Amazon Timestream. For more information, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+// in the Identity and Access Management User Guide.
 type IamResources struct {
 
 	// The Amazon Resource Name (ARN) of the IAM resource that allows Amazon Web
 	// Services IoT FleetWise to send data to Amazon Timestream. For example,
-	// arn:aws:iam::123456789012:role/SERVICE-ROLE-ARN.
+	// arn:aws:iam::123456789012:role/SERVICE-ROLE-ARN .
 	//
 	// This member is required.
 	RoleArn *string
@@ -564,8 +558,8 @@ type ModelManifestSummary struct {
 	// The ARN of the signal catalog associated with the vehicle model.
 	SignalCatalogArn *string
 
-	// The state of the vehicle model. If the status is ACTIVE, the vehicle model can't
-	// be edited. If the status is DRAFT, you can edit the vehicle model.
+	// The state of the vehicle model. If the status is ACTIVE , the vehicle model
+	// can't be edited. If the status is DRAFT , you can edit the vehicle model.
 	Status ManifestStatus
 
 	noSmithyDocumentSerde
@@ -590,10 +584,10 @@ type NetworkFileDefinitionMemberCanDbc struct {
 
 func (*NetworkFileDefinitionMemberCanDbc) isNetworkFileDefinition() {}
 
-// Represents a node and its specifications in an in-vehicle communication network.
-// All signal decoders must be associated with a network node. To return this
-// information about all the network interfaces specified in a decoder manifest,
-// use the API operation.
+// Represents a node and its specifications in an in-vehicle communication
+// network. All signal decoders must be associated with a network node. To return
+// this information about all the network interfaces specified in a decoder
+// manifest, use the API operation.
 type NetworkInterface struct {
 
 	// The ID of the network interface.
@@ -603,8 +597,8 @@ type NetworkInterface struct {
 
 	// The network protocol for the vehicle. For example, CAN_SIGNAL specifies a
 	// protocol that defines how data is communicated between electronic control units
-	// (ECUs). OBD_SIGNAL specifies a protocol that defines how self-diagnostic data is
-	// communicated between ECUs.
+	// (ECUs). OBD_SIGNAL specifies a protocol that defines how self-diagnostic data
+	// is communicated between ECUs.
 	//
 	// This member is required.
 	Type NetworkInterfaceType
@@ -613,8 +607,8 @@ type NetworkInterface struct {
 	// (CAN) protocol.
 	CanInterface *CanInterface
 
-	// Information about a network interface specified by the On-board diagnostic (OBD)
-	// II protocol.
+	// Information about a network interface specified by the On-board diagnostic
+	// (OBD) II protocol.
 	ObdInterface *ObdInterface
 
 	noSmithyDocumentSerde
@@ -785,8 +779,8 @@ type Sensor struct {
 	// This member is required.
 	DataType NodeDataType
 
-	// The fully qualified name of the sensor. For example, the fully qualified name of
-	// a sensor might be Vehicle.Body.Engine.Battery.
+	// The fully qualified name of the sensor. For example, the fully qualified name
+	// of a sensor might be Vehicle.Body.Engine.Battery .
 	//
 	// This member is required.
 	FullyQualifiedName *string
@@ -809,8 +803,8 @@ type Sensor struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a collection of standardized signals, which can be attributes,
-// branches, sensors, or actuators.
+// Information about a collection of standardized signals, which can be
+// attributes, branches, sensors, or actuators.
 type SignalCatalogSummary struct {
 
 	// The Amazon Resource Name (ARN) of the signal catalog.
@@ -846,8 +840,8 @@ type SignalDecoder struct {
 
 	// The network protocol for the vehicle. For example, CAN_SIGNAL specifies a
 	// protocol that defines how data is communicated between electronic control units
-	// (ECUs). OBD_SIGNAL specifies a protocol that defines how self-diagnostic data is
-	// communicated between ECUs.
+	// (ECUs). OBD_SIGNAL specifies a protocol that defines how self-diagnostic data
+	// is communicated between ECUs.
 	//
 	// This member is required.
 	Type SignalDecoderType
@@ -903,8 +897,8 @@ type Tag struct {
 type TimeBasedCollectionScheme struct {
 
 	// The time period (in milliseconds) to decide how often to collect data. For
-	// example, if the time period is 60000, the Edge Agent software collects data once
-	// every minute.
+	// example, if the time period is 60000 , the Edge Agent software collects data
+	// once every minute.
 	//
 	// This member is required.
 	PeriodMs *int64
@@ -916,7 +910,7 @@ type TimeBasedCollectionScheme struct {
 type TimestreamRegistrationResponse struct {
 
 	// The status of registering your Amazon Timestream resources. The status can be
-	// one of REGISTRATION_SUCCESS, REGISTRATION_PENDING, REGISTRATION_FAILURE.
+	// one of REGISTRATION_SUCCESS , REGISTRATION_PENDING , REGISTRATION_FAILURE .
 	//
 	// This member is required.
 	RegistrationStatus RegistrationStatus
@@ -984,7 +978,7 @@ type UpdateVehicleRequestItem struct {
 	VehicleName *string
 
 	// The method the specified attributes will update the existing attributes on the
-	// vehicle. UseOverwite to replace the vehicle attributes with the specified
+	// vehicle. Use Overwite to replace the vehicle attributes with the specified
 	// attributes. Or use Merge to combine all attributes. This is required if
 	// attributes are present in the input.
 	AttributeUpdateMode UpdateMode
@@ -1040,21 +1034,13 @@ type VehicleStatus struct {
 	CampaignName *string
 
 	// The state of a vehicle, which can be one of the following:
-	//
-	// * CREATED - Amazon
-	// Web Services IoT FleetWise sucessfully created the vehicle.
-	//
-	// * READY - The
-	// vehicle is ready to receive a campaign deployment.
-	//
-	// * HEALTHY - A campaign
-	// deployment was delivered to the vehicle.
-	//
-	// * SUSPENDED - A campaign associated
-	// with the vehicle was suspended and data collection was paused.
-	//
-	// * DELETING -
-	// Amazon Web Services IoT FleetWise is removing a campaign from the vehicle.
+	//   - CREATED - Amazon Web Services IoT FleetWise sucessfully created the vehicle.
+	//   - READY - The vehicle is ready to receive a campaign deployment.
+	//   - HEALTHY - A campaign deployment was delivered to the vehicle.
+	//   - SUSPENDED - A campaign associated with the vehicle was suspended and data
+	//   collection was paused.
+	//   - DELETING - Amazon Web Services IoT FleetWise is removing a campaign from the
+	//   vehicle.
 	Status VehicleState
 
 	// The unique ID of the vehicle.
@@ -1083,8 +1069,8 @@ type VehicleSummary struct {
 	// This member is required.
 	DecoderManifestArn *string
 
-	// The time the vehicle was last updated in seconds since epoch (January 1, 1970 at
-	// midnight UTC time).
+	// The time the vehicle was last updated in seconds since epoch (January 1, 1970
+	// at midnight UTC time).
 	//
 	// This member is required.
 	LastModificationTime *time.Time

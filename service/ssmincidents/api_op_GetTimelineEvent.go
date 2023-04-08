@@ -30,7 +30,7 @@ func (c *Client) GetTimelineEvent(ctx context.Context, params *GetTimelineEventI
 type GetTimelineEventInput struct {
 
 	// The ID of the event. You can get an event's ID when you create it, or by using
-	// ListTimelineEvents.
+	// ListTimelineEvents .
 	//
 	// This member is required.
 	EventId *string

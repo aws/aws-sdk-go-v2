@@ -47,8 +47,8 @@ type GetMinuteUsageOutput struct {
 	// being requested.
 	EstimatedMinutesRemaining *int32
 
-	// Returns whether or not an account has signed up for the reserved minutes pricing
-	// plan, specific to the month being requested.
+	// Returns whether or not an account has signed up for the reserved minutes
+	// pricing plan, specific to the month being requested.
 	IsReservedMinutesCustomer *bool
 
 	// Total number of reserved minutes allocated, specific to the month being

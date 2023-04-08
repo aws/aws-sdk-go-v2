@@ -27,7 +27,7 @@ type ApiGatewayProxyConfig struct {
 	// The endpoint URL of the API Gateway proxy.
 	ProxyUrl *string
 
-	// The name of the API Gateway stage. The name defaults to prod.
+	// The name of the API Gateway stage. The name defaults to prod .
 	StageName *string
 
 	// The VpcLink ID of the API Gateway proxy.
@@ -47,7 +47,7 @@ type ApiGatewayProxyInput struct {
 	// have been granted access.
 	EndpointType ApiGatewayEndpointType
 
-	// The name of the API Gateway stage. The name defaults to prod.
+	// The name of the API Gateway stage. The name defaults to prod .
 	StageName *string
 
 	noSmithyDocumentSerde
@@ -73,7 +73,7 @@ type ApiGatewayProxySummary struct {
 	// The endpoint URL of the API Gateway proxy.
 	ProxyUrl *string
 
-	// The name of the API Gateway stage. The name defaults to prod.
+	// The name of the API Gateway stage. The name defaults to prod .
 	StageName *string
 
 	// The VpcLink ID of the API Gateway proxy.
@@ -112,8 +112,8 @@ type ApplicationSummary struct {
 	// The name of the application.
 	Name *string
 
-	// The Amazon Web Services account ID of the application owner (which is always the
-	// same as the environment owner account ID).
+	// The Amazon Web Services account ID of the application owner (which is always
+	// the same as the environment owner account ID).
 	OwnerAccountId *string
 
 	// The proxy type of the proxy created within the application.
@@ -134,14 +134,14 @@ type ApplicationSummary struct {
 // The configuration for the default route type.
 type DefaultRouteInput struct {
 
-	// If set to ACTIVE, traffic is forwarded to this route’s service after the route
+	// If set to ACTIVE , traffic is forwarded to this route’s service after the route
 	// is created.
 	ActivationState RouteActivationState
 
 	noSmithyDocumentSerde
 }
 
-// The summary information for environments as a response to ListEnvironments.
+// The summary information for environments as a response to ListEnvironments .
 type EnvironmentSummary struct {
 
 	// The Amazon Resource Name (ARN) of the environment.
@@ -184,7 +184,7 @@ type EnvironmentSummary struct {
 }
 
 // Provides summary information for the EnvironmentVpc resource as a response to
-// ListEnvironmentVpc.
+// ListEnvironmentVpc .
 type EnvironmentVpc struct {
 
 	// The Amazon Web Services account ID of the virtual private cloud (VPC) owner.
@@ -264,7 +264,7 @@ type LambdaEndpointSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The summary information for the routes as a response to ListRoutes.
+// The summary information for the routes as a response to ListRoutes .
 type RouteSummary struct {
 
 	// The unique identifier of the application.
@@ -286,7 +286,7 @@ type RouteSummary struct {
 	Error *ErrorResponse
 
 	// Indicates whether to match all subpaths of the given source path. If this value
-	// is false, requests must match the source path exactly before they are forwarded
+	// is false , requests must match the source path exactly before they are forwarded
 	// to this route's service.
 	IncludeChildPaths *bool
 
@@ -326,7 +326,7 @@ type RouteSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A summary for the service as a response to ListServices.
+// A summary for the service as a response to ListServices .
 type ServiceSummary struct {
 
 	// The unique identifier of the application.
@@ -386,7 +386,7 @@ type ServiceSummary struct {
 // The configuration for the URI path route type.
 type UriPathRouteInput struct {
 
-	// If set to ACTIVE, traffic is forwarded to this route’s service after the route
+	// If set to ACTIVE , traffic is forwarded to this route’s service after the route
 	// is created.
 	//
 	// This member is required.
@@ -399,7 +399,7 @@ type UriPathRouteInput struct {
 	SourcePath *string
 
 	// Indicates whether to match all subpaths of the given source path. If this value
-	// is false, requests must match the source path exactly before they are forwarded
+	// is false , requests must match the source path exactly before they are forwarded
 	// to this route's service.
 	IncludeChildPaths *bool
 
@@ -426,11 +426,10 @@ type UrlEndpointConfig struct {
 // The configuration for the URL endpoint type.
 type UrlEndpointInput struct {
 
-	// The URL to route traffic to. The URL must be an rfc3986-formatted URL
-	// (https://datatracker.ietf.org/doc/html/rfc3986). If the host is a domain name,
-	// the name must be resolvable over the public internet. If the scheme is https,
-	// the top level domain of the host must be listed in the IANA root zone database
-	// (https://www.iana.org/domains/root/db).
+	// The URL to route traffic to. The URL must be an rfc3986-formatted URL (https://datatracker.ietf.org/doc/html/rfc3986)
+	// . If the host is a domain name, the name must be resolvable over the public
+	// internet. If the scheme is https , the top level domain of the host must be
+	// listed in the IANA root zone database (https://www.iana.org/domains/root/db) .
 	//
 	// This member is required.
 	Url *string
@@ -453,11 +452,10 @@ type UrlEndpointSummary struct {
 	// endpoint, and the host must be the same as the URL.
 	HealthUrl *string
 
-	// The URL to route traffic to. The URL must be an rfc3986-formatted URL
-	// (https://datatracker.ietf.org/doc/html/rfc3986). If the host is a domain name,
-	// the name must be resolvable over the public internet. If the scheme is https,
-	// the top level domain of the host must be listed in the IANA root zone database
-	// (https://www.iana.org/domains/root/db).
+	// The URL to route traffic to. The URL must be an rfc3986-formatted URL (https://datatracker.ietf.org/doc/html/rfc3986)
+	// . If the host is a domain name, the name must be resolvable over the public
+	// internet. If the scheme is https , the top level domain of the host must be
+	// listed in the IANA root zone database (https://www.iana.org/domains/root/db) .
 	Url *string
 
 	noSmithyDocumentSerde

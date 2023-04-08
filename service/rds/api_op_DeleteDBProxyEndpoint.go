@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a DBProxyEndpoint. Doing so removes the ability to access the DB proxy
+// Deletes a DBProxyEndpoint . Doing so removes the ability to access the DB proxy
 // using the endpoint that you defined. The endpoint that you delete might have
 // provided capabilities such as read/write or read-only operations, or using a
 // different VPC than the DB proxy's default VPC.

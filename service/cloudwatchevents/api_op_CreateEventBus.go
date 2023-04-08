@@ -40,8 +40,8 @@ type CreateEventBusInput struct {
 	// This member is required.
 	Name *string
 
-	// If you are creating a partner event bus, this specifies the partner event source
-	// that the new event bus will be matched with.
+	// If you are creating a partner event bus, this specifies the partner event
+	// source that the new event bus will be matched with.
 	EventSourceName *string
 
 	// Tags to associate with the event bus.

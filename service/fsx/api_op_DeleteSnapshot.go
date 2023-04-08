@@ -50,7 +50,7 @@ type DeleteSnapshotInput struct {
 type DeleteSnapshotOutput struct {
 
 	// The lifecycle status of the snapshot. If the DeleteSnapshot operation is
-	// successful, this status is DELETING.
+	// successful, this status is DELETING .
 	Lifecycle types.SnapshotLifecycle
 
 	// The ID of the deleted snapshot.

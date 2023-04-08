@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets summary information about all your logging configurations in the AWS region
-// where the API request is processed.
+// Gets summary information about all your logging configurations in the AWS
+// region where the API request is processed.
 func (c *Client) ListLoggingConfigurations(ctx context.Context, params *ListLoggingConfigurationsInput, optFns ...func(*Options)) (*ListLoggingConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListLoggingConfigurationsInput{}
@@ -43,14 +43,14 @@ type ListLoggingConfigurationsInput struct {
 
 type ListLoggingConfigurationsOutput struct {
 
-	// List of the matching logging configurations (summary information only). There is
-	// only one type of destination (cloudWatchLogs, firehose, or s3) in a
-	// destinationConfiguration.
+	// List of the matching logging configurations (summary information only). There
+	// is only one type of destination ( cloudWatchLogs , firehose , or s3 ) in a
+	// destinationConfiguration .
 	//
 	// This member is required.
 	LoggingConfigurations []types.LoggingConfigurationSummary
 
-	// If there are more logging configurations than maxResults, use nextToken in the
+	// If there are more logging configurations than maxResults , use nextToken in the
 	// request to get the next set.
 	NextToken *string
 

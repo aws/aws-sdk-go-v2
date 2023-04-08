@@ -47,7 +47,7 @@ type UpdateFrameworkInput struct {
 	FrameworkDescription *string
 
 	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to UpdateFrameworkInput. Retrying a successful request with the
+	// identical calls to UpdateFrameworkInput . Retrying a successful request with the
 	// same idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
@@ -62,8 +62,8 @@ type UpdateFrameworkOutput struct {
 	// hours behind UTC.
 	CreationTime *time.Time
 
-	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
-	// the ARN depends on the resource type.
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
+	// of the ARN depends on the resource type.
 	FrameworkArn *string
 
 	// The unique name of a framework. This name is between 1 and 256 characters,

@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the resource counts across accounts and regions that are present in your
-// Config aggregator. You can request the resource counts by providing filters and
-// GroupByKey. For example, if the input contains accountID 12345678910 and region
-// us-east-1 in filters, the API returns the count of resources in account ID
-// 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a
+// Returns the resource counts across accounts and regions that are present in
+// your Config aggregator. You can request the resource counts by providing filters
+// and GroupByKey. For example, if the input contains accountID 12345678910 and
+// region us-east-1 in filters, the API returns the count of resources in account
+// ID 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a
 // GroupByKey, the API returns resource counts for all source accounts that are
 // present in your aggregator.
 func (c *Client) GetAggregateDiscoveredResourceCounts(ctx context.Context, params *GetAggregateDiscoveredResourceCountsInput, optFns ...func(*Options)) (*GetAggregateDiscoveredResourceCountsOutput, error) {
@@ -61,8 +61,8 @@ type GetAggregateDiscoveredResourceCountsInput struct {
 
 type GetAggregateDiscoveredResourceCountsOutput struct {
 
-	// The total number of resources that are present in an aggregator with the filters
-	// that you provide.
+	// The total number of resources that are present in an aggregator with the
+	// filters that you provide.
 	//
 	// This member is required.
 	TotalDiscoveredResources int64

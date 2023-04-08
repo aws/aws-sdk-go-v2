@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the cost anomaly subscription objects for your account. You can filter
-// using a list of cost anomaly monitor Amazon Resource Names (ARNs).
+// Retrieves the cost anomaly subscription objects for your account. You can
+// filter using a list of cost anomaly monitor Amazon Resource Names (ARNs).
 func (c *Client) GetAnomalySubscriptions(ctx context.Context, params *GetAnomalySubscriptionsInput, optFns ...func(*Options)) (*GetAnomalySubscriptionsOutput, error) {
 	if params == nil {
 		params = &GetAnomalySubscriptionsInput{}

@@ -87,9 +87,9 @@ const (
 	ChildTypeOrganizationalUnit ChildType = "ORGANIZATIONAL_UNIT"
 )
 
-// Values returns all known values for ChildType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChildType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ChildType) Values() []ChildType {
 	return []ChildType{
 		"ACCOUNT",
@@ -280,10 +280,10 @@ const (
 	HandshakeConstraintViolationExceptionReasonManagementAccountEmailNotVerified                HandshakeConstraintViolationExceptionReason = "MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED"
 )
 
-// Values returns all known values for HandshakeConstraintViolationExceptionReason.
-// Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for
+// HandshakeConstraintViolationExceptionReason. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (HandshakeConstraintViolationExceptionReason) Values() []HandshakeConstraintViolationExceptionReason {
 	return []HandshakeConstraintViolationExceptionReason{
 		"ACCOUNT_NUMBER_LIMIT_EXCEEDED",
@@ -333,8 +333,8 @@ const (
 	HandshakeResourceTypeParentHandshake        HandshakeResourceType = "PARENT_HANDSHAKE"
 )
 
-// Values returns all known values for HandshakeResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for HandshakeResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (HandshakeResourceType) Values() []HandshakeResourceType {
 	return []HandshakeResourceType{

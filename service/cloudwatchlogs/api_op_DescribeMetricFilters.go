@@ -48,8 +48,9 @@ type DescribeMetricFiltersInput struct {
 	// metricNamespace parameter.
 	MetricName *string
 
-	// Filters results to include only those in the specified namespace. If you include
-	// this parameter in your request, you must also include the metricName parameter.
+	// Filters results to include only those in the specified namespace. If you
+	// include this parameter in your request, you must also include the metricName
+	// parameter.
 	MetricNamespace *string
 
 	// The token for the next set of items to return. (You received this token from a

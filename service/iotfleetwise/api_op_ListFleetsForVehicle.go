@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of IDs for all fleets that the vehicle is associated with. This
-// API operation uses pagination. Specify the nextToken parameter in the request to
-// return more results.
+// Retrieves a list of IDs for all fleets that the vehicle is associated with.
+// This API operation uses pagination. Specify the nextToken parameter in the
+// request to return more results.
 func (c *Client) ListFleetsForVehicle(ctx context.Context, params *ListFleetsForVehicleInput, optFns ...func(*Options)) (*ListFleetsForVehicleOutput, error) {
 	if params == nil {
 		params = &ListFleetsForVehicleInput{}

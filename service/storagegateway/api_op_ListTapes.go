@@ -38,13 +38,9 @@ func (c *Client) ListTapes(ctx context.Context, params *ListTapesInput, optFns .
 }
 
 // A JSON object that contains one or more of the following fields:
-//
-// *
-// ListTapesInput$Limit
-//
-// * ListTapesInput$Marker
-//
-// * ListTapesInput$TapeARNs
+//   - ListTapesInput$Limit
+//   - ListTapesInput$Marker
+//   - ListTapesInput$TapeARNs
 type ListTapesInput struct {
 
 	// An optional number limit for the tapes in the list returned by this call.
@@ -62,11 +58,8 @@ type ListTapesInput struct {
 }
 
 // A JSON object containing the following fields:
-//
-// * ListTapesOutput$Marker
-//
-// *
-// ListTapesOutput$VolumeInfos
+//   - ListTapesOutput$Marker
+//   - ListTapesOutput$VolumeInfos
 type ListTapesOutput struct {
 
 	// A string that indicates the position at which to begin returning the next list

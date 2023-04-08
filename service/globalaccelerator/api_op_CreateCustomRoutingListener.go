@@ -45,8 +45,8 @@ type CreateCustomRoutingListenerInput struct {
 
 	// The port range to support for connections from clients to your accelerator.
 	// Separately, you set port ranges for endpoints. For more information, see About
-	// endpoints for custom routing accelerators
-	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html).
+	// endpoints for custom routing accelerators (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html)
+	// .
 	//
 	// This member is required.
 	PortRanges []types.PortRange

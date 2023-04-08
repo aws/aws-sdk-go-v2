@@ -16,15 +16,15 @@ import (
 // StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, TIFF,
 // and PDF format. The documents are stored in an Amazon S3 bucket. Use
 // DocumentLocation to specify the bucket name and file name of the document.
-// StartDocumentAnalysis returns a job identifier (JobId) that you use to get the
+// StartDocumentAnalysis returns a job identifier ( JobId ) that you use to get the
 // results of the operation. When text analysis is finished, Amazon Textract
 // publishes a completion status to the Amazon Simple Notification Service (Amazon
-// SNS) topic that you specify in NotificationChannel. To get the results of the
+// SNS) topic that you specify in NotificationChannel . To get the results of the
 // text analysis operation, first check that the status value published to the
-// Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job
-// identifier (JobId) from the initial call to StartDocumentAnalysis. For more
-// information, see Document Text Analysis
-// (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html).
+// Amazon SNS topic is SUCCEEDED . If so, call GetDocumentAnalysis , and pass the
+// job identifier ( JobId ) from the initial call to StartDocumentAnalysis . For
+// more information, see Document Text Analysis (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html)
+// .
 func (c *Client) StartDocumentAnalysis(ctx context.Context, params *StartDocumentAnalysisInput, optFns ...func(*Options)) (*StartDocumentAnalysisOutput, error) {
 	if params == nil {
 		params = &StartDocumentAnalysisInput{}
@@ -50,19 +50,19 @@ type StartDocumentAnalysisInput struct {
 	// A list of the types of analysis to perform. Add TABLES to the list to return
 	// information about the tables that are detected in the input document. Add FORMS
 	// to return detected form data. To perform both types of analysis, add TABLES and
-	// FORMS to FeatureTypes. All lines and words detected in the document are included
-	// in the response (including text that isn't related to the value of
-	// FeatureTypes).
+	// FORMS to FeatureTypes . All lines and words detected in the document are
+	// included in the response (including text that isn't related to the value of
+	// FeatureTypes ).
 	//
 	// This member is required.
 	FeatureTypes []types.FeatureType
 
 	// The idempotent token that you use to identify the start request. If you use the
 	// same token with multiple StartDocumentAnalysis requests, the same JobId is
-	// returned. Use ClientRequestToken to prevent the same job from being accidentally
-	// started more than once. For more information, see Calling Amazon Textract
-	// Asynchronous Operations
-	// (https://docs.aws.amazon.com/textract/latest/dg/api-async.html).
+	// returned. Use ClientRequestToken to prevent the same job from being
+	// accidentally started more than once. For more information, see Calling Amazon
+	// Textract Asynchronous Operations (https://docs.aws.amazon.com/textract/latest/dg/api-async.html)
+	// .
 	ClientRequestToken *string
 
 	// An identifier that you specify that's included in the completion notification
@@ -77,8 +77,8 @@ type StartDocumentAnalysisInput struct {
 	// parameter is not enabled, the result will be encrypted server side,using SSE-S3.
 	KMSKeyId *string
 
-	// The Amazon SNS topic ARN that you want Amazon Textract to publish the completion
-	// status of the operation to.
+	// The Amazon SNS topic ARN that you want Amazon Textract to publish the
+	// completion status of the operation to.
 	NotificationChannel *types.NotificationChannel
 
 	// Sets if the output will go to a customer defined bucket. By default, Amazon
@@ -95,8 +95,8 @@ type StartDocumentAnalysisInput struct {
 type StartDocumentAnalysisOutput struct {
 
 	// The identifier for the document text detection job. Use JobId to identify the
-	// job in a subsequent call to GetDocumentAnalysis. A JobId value is only valid for
-	// 7 days.
+	// job in a subsequent call to GetDocumentAnalysis . A JobId value is only valid
+	// for 7 days.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

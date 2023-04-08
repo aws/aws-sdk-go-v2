@@ -9,8 +9,8 @@ const (
 	PeriodTriggersElementAds PeriodTriggersElement = "ADS"
 )
 
-// Values returns all known values for PeriodTriggersElement. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PeriodTriggersElement. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PeriodTriggersElement) Values() []PeriodTriggersElement {
 	return []PeriodTriggersElement{
@@ -27,9 +27,9 @@ const (
 	AdMarkersPassthrough    AdMarkers = "PASSTHROUGH"
 )
 
-// Values returns all known values for AdMarkers. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AdMarkers. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AdMarkers) Values() []AdMarkers {
 	return []AdMarkers{
 		"NONE",
@@ -177,8 +177,8 @@ const (
 	SegmentTemplateFormatNumberWithDuration SegmentTemplateFormat = "NUMBER_WITH_DURATION"
 )
 
-// Values returns all known values for SegmentTemplateFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SegmentTemplateFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SegmentTemplateFormat) Values() []SegmentTemplateFormat {
 	return []SegmentTemplateFormat{

@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the Resolver rule policy for a specified rule. A Resolver
-// rule policy includes the rule that you want to share with another account, the
-// account that you want to share the rule with, and the Resolver operations that
-// you want to allow the account to use.
+// Gets information about the Resolver rule policy for a specified rule. A
+// Resolver rule policy includes the rule that you want to share with another
+// account, the account that you want to share the rule with, and the Resolver
+// operations that you want to allow the account to use.
 func (c *Client) GetResolverRulePolicy(ctx context.Context, params *GetResolverRulePolicyInput, optFns ...func(*Options)) (*GetResolverRulePolicyOutput, error) {
 	if params == nil {
 		params = &GetResolverRulePolicyInput{}

@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about an environment. An environment is a deployment group
-// of AppConfig applications, such as applications in a Production environment or
-// in an EU_Region environment. Each configuration deployment targets an
-// environment. You can enable one or more Amazon CloudWatch alarms for an
-// environment. If an alarm is triggered during a deployment, AppConfig roles back
-// the configuration.
+// Retrieves information about an environment. An environment is a deployment
+// group of AppConfig applications, such as applications in a Production
+// environment or in an EU_Region environment. Each configuration deployment
+// targets an environment. You can enable one or more Amazon CloudWatch alarms for
+// an environment. If an alarm is triggered during a deployment, AppConfig roles
+// back the configuration.
 func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput, optFns ...func(*Options)) (*GetEnvironmentOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentInput{}
@@ -65,7 +65,7 @@ type GetEnvironmentOutput struct {
 	Name *string
 
 	// The state of the environment. An environment can be in one of the following
-	// states: READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK, or ROLLED_BACK
+	// states: READY_FOR_DEPLOYMENT , DEPLOYING , ROLLING_BACK , or ROLLED_BACK
 	State types.EnvironmentState
 
 	// Metadata pertaining to the operation's result.

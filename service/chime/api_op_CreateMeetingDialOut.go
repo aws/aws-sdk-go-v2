@@ -38,8 +38,7 @@ type CreateMeetingDialOutInput struct {
 	// This member is required.
 	FromPhoneNumber *string
 
-	// Token used by the Amazon Chime SDK attendee. Call the CreateAttendee
-	// (https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html)
+	// Token used by the Amazon Chime SDK attendee. Call the CreateAttendee (https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html)
 	// action to get a join token.
 	//
 	// This member is required.

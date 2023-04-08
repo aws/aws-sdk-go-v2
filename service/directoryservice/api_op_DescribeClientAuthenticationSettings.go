@@ -38,12 +38,12 @@ type DescribeClientAuthenticationSettingsInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The maximum number of items to return. If this value is zero, the maximum number
-	// of items is specified by the limitations of the operation.
+	// The maximum number of items to return. If this value is zero, the maximum
+	// number of items is specified by the limitations of the operation.
 	Limit *int32
 
 	// The DescribeClientAuthenticationSettingsResult.NextToken value from a previous
-	// call to DescribeClientAuthenticationSettings. Pass null if this is the first
+	// call to DescribeClientAuthenticationSettings . Pass null if this is the first
 	// call.
 	NextToken *string
 
@@ -57,14 +57,15 @@ type DescribeClientAuthenticationSettingsInput struct {
 
 type DescribeClientAuthenticationSettingsOutput struct {
 
-	// Information about the type of client authentication for the specified directory.
-	// The following information is retrieved: The date and time when the status of the
-	// client authentication type was last updated, whether the client authentication
-	// type is enabled or disabled, and the type of client authentication.
+	// Information about the type of client authentication for the specified
+	// directory. The following information is retrieved: The date and time when the
+	// status of the client authentication type was last updated, whether the client
+	// authentication type is enabled or disabled, and the type of client
+	// authentication.
 	ClientAuthenticationSettingsInfo []types.ClientAuthenticationSettingInfo
 
-	// The next token used to retrieve the client authentication settings if the number
-	// of setting types exceeds page limit and there is another page.
+	// The next token used to retrieve the client authentication settings if the
+	// number of setting types exceeds page limit and there is another page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -147,8 +148,8 @@ var _ DescribeClientAuthenticationSettingsAPIClient = (*Client)(nil)
 // DescribeClientAuthenticationSettingsPaginatorOptions is the paginator options
 // for DescribeClientAuthenticationSettings
 type DescribeClientAuthenticationSettingsPaginatorOptions struct {
-	// The maximum number of items to return. If this value is zero, the maximum number
-	// of items is specified by the limitations of the operation.
+	// The maximum number of items to return. If this value is zero, the maximum
+	// number of items is specified by the limitations of the operation.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

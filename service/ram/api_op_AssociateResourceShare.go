@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified list of principals and list of resources to a resource share.
-// Principals that already have access to this resource share immediately receive
-// access to the added resources. Newly added principals immediately receive access
-// to the resources shared in this resource share.
+// Adds the specified list of principals and list of resources to a resource
+// share. Principals that already have access to this resource share immediately
+// receive access to the added resources. Newly added principals immediately
+// receive access to the resources shared in this resource share.
 func (c *Client) AssociateResourceShare(ctx context.Context, params *AssociateResourceShareInput, optFns ...func(*Options)) (*AssociateResourceShareOutput, error) {
 	if params == nil {
 		params = &AssociateResourceShareInput{}
@@ -32,9 +32,8 @@ func (c *Client) AssociateResourceShare(ctx context.Context, params *AssociateRe
 
 type AssociateResourceShareInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the resource share that you want to add principals or resources to.
+	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resource share that you want to add principals or resources to.
 	//
 	// This member is required.
 	ResourceShareArn *string
@@ -43,46 +42,32 @@ type AssociateResourceShareInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value.
-	// (https://wikipedia.org/wiki/Universally_unique_identifier). If you don't provide
-	// this value, then Amazon Web Services generates a random one for you.
+	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
+	// . If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
 	ClientToken *string
 
 	// Specifies a list of principals to whom you want to the resource share. This can
 	// be null if you want to add only resources. What the principals can do with the
 	// resources in the share is determined by the RAM permissions that you associate
-	// with the resource share. See AssociateResourceSharePermission. You can include
+	// with the resource share. See AssociateResourceSharePermission . You can include
 	// the following values:
-	//
-	// * An Amazon Web Services account ID, for example:
-	// 123456789012
-	//
-	// * An Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// an organization in Organizations, for example:
-	// organizations::123456789012:organization/o-exampleorgid
-	//
-	// * An ARN of an
-	// organizational unit (OU) in Organizations, for example:
-	// organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
-	//
-	// *
-	// An ARN of an IAM role, for example: iam::123456789012:role/rolename
-	//
-	// * An ARN of
-	// an IAM user, for example: iam::123456789012user/username
-	//
-	// Not all resource types
-	// can be shared with IAM roles and users. For more information, see Sharing with
-	// IAM roles and users
-	// (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
+	//   - An Amazon Web Services account ID, for example: 123456789012
+	//   - An Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	//   of an organization in Organizations, for example:
+	//   organizations::123456789012:organization/o-exampleorgid
+	//   - An ARN of an organizational unit (OU) in Organizations, for example:
+	//   organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
+	//   - An ARN of an IAM role, for example: iam::123456789012:role/rolename
+	//   - An ARN of an IAM user, for example: iam::123456789012user/username
+	// Not all resource types can be shared with IAM roles and users. For more
+	// information, see Sharing with IAM roles and users (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
 	// in the Resource Access Manager User Guide.
 	Principals []string
 
-	// Specifies a list of Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the resources that you want to share. This can be null if you want to add only
-	// principals.
+	// Specifies a list of Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resources that you want to share. This can be null if you want to add
+	// only principals.
 	ResourceArns []string
 
 	noSmithyDocumentSerde

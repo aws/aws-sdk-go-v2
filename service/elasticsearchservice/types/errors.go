@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// An error occurred because user does not have permissions to access the resource.
-// Returns HTTP status code 403.
+// An error occurred because user does not have permissions to access the
+// resource. Returns HTTP status code 403.
 type AccessDeniedException struct {
 	Message *string
 
@@ -223,8 +223,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for creating a resource that already exists. Gives http status code
-// of 400.
+// An exception for creating a resource that already exists. Gives http status
+// code of 400.
 type ResourceAlreadyExistsException struct {
 	Message *string
 

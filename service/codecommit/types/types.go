@@ -203,16 +203,10 @@ type BlobMetadata struct {
 	BlobId *string
 
 	// The file mode permissions of the blob. File mode permission codes include:
-	//
-	// *
-	// 100644 indicates read/write
-	//
-	// * 100755 indicates read/write/execute
-	//
-	// * 160000
-	// indicates a submodule
-	//
-	// * 120000 indicates a symlink
+	//   - 100644 indicates read/write
+	//   - 100755 indicates read/write/execute
+	//   - 160000 indicates a submodule
+	//   - 120000 indicates a symlink
 	Mode *string
 
 	// The path to the blob and associated file name, if any.
@@ -318,10 +312,10 @@ type CommentsForPullRequest struct {
 	// commit.
 	BeforeBlobId *string
 
-	// The full commit ID of the commit that was the tip of the destination branch when
-	// the pull request was created. This commit is superceded by the after commit in
-	// the source branch when and if you merge the source branch into the destination
-	// branch.
+	// The full commit ID of the commit that was the tip of the destination branch
+	// when the pull request was created. This commit is superceded by the after commit
+	// in the source branch when and if you merge the source branch into the
+	// destination branch.
 	BeforeCommitId *string
 
 	// An array of comment objects. Each comment object contains information about a
@@ -360,8 +354,8 @@ type Commit struct {
 	// the committer. Information includes the date in timestamp format with GMT
 	// offset, the name of the committer, and the email address for the committer, as
 	// configured in Git. For more information about the difference between an author
-	// and a committer in Git, see Viewing the Commit History
-	// (http://git-scm.com/book/ch2-3.html) in Pro Git by Scott Chacon and Ben Straub.
+	// and a committer in Git, see Viewing the Commit History (http://git-scm.com/book/ch2-3.html)
+	// in Pro Git by Scott Chacon and Ben Straub.
 	Committer *UserInfo
 
 	// The commit message associated with the specified commit.
@@ -409,8 +403,8 @@ type ConflictMetadata struct {
 	// The file sizes of the file in the source, destination, and base of the merge.
 	FileSizes *FileSizes
 
-	// A boolean value (true or false) indicating whether the file is binary or textual
-	// in the source, destination, and base of the merge.
+	// A boolean value (true or false) indicating whether the file is binary or
+	// textual in the source, destination, and base of the merge.
 	IsBinaryFile *IsBinaryFile
 
 	// Whether an add, modify, or delete operation caused the conflict between the
@@ -460,12 +454,12 @@ type DeleteFileEntry struct {
 // Returns information about a set of differences for a commit specifier.
 type Difference struct {
 
-	// Information about an afterBlob data type object, including the ID, the file mode
-	// permission code, and the path.
+	// Information about an afterBlob data type object, including the ID, the file
+	// mode permission code, and the path.
 	AfterBlob *BlobMetadata
 
-	// Information about a beforeBlob data type object, including the ID, the file mode
-	// permission code, and the path.
+	// Information about a beforeBlob data type object, including the ID, the file
+	// mode permission code, and the path.
 	BeforeBlob *BlobMetadata
 
 	// Whether the change type of the difference is an addition (A), deletion (D), or
@@ -488,8 +482,8 @@ type Evaluation struct {
 	// Whether the state of the pull request is approved.
 	Approved bool
 
-	// Whether the approval rule requirements for the pull request have been overridden
-	// and no longer need to be met.
+	// Whether the approval rule requirements for the pull request have been
+	// overridden and no longer need to be met.
 	Overridden bool
 
 	noSmithyDocumentSerde
@@ -578,8 +572,8 @@ type Folder struct {
 	noSmithyDocumentSerde
 }
 
-// Information about whether a file is binary or textual in a merge or pull request
-// operation.
+// Information about whether a file is binary or textual in a merge or pull
+// request operation.
 type IsBinaryFile struct {
 
 	// The binary or non-binary status of a file in the base of a merge or pull
@@ -702,8 +696,8 @@ type ObjectTypes struct {
 	noSmithyDocumentSerde
 }
 
-// Returns information about the template that created the approval rule for a pull
-// request.
+// Returns information about the template that created the approval rule for a
+// pull request.
 type OriginApprovalRuleTemplate struct {
 
 	// The ID of the template that created the approval rule.
@@ -744,8 +738,8 @@ type PullRequest struct {
 	// The system-generated ID of the pull request.
 	PullRequestId *string
 
-	// The status of the pull request. Pull request status can only change from OPEN to
-	// CLOSED.
+	// The status of the pull request. Pull request status can only change from OPEN
+	// to CLOSED .
 	PullRequestStatus PullRequestStatusEnum
 
 	// The targets of the pull request, including the source branch and destination
@@ -875,8 +869,8 @@ type PullRequestStatusChangedEventMetadata struct {
 // Returns information about a pull request target.
 type PullRequestTarget struct {
 
-	// The full commit ID that is the tip of the destination branch. This is the commit
-	// where the pull request was or will be merged.
+	// The full commit ID that is the tip of the destination branch. This is the
+	// commit where the pull request was or will be merged.
 	DestinationCommit *string
 
 	// The branch of the repository where the pull request changes are merged. Also
@@ -891,8 +885,8 @@ type PullRequestTarget struct {
 	// been made.
 	MergeMetadata *MergeMetadata
 
-	// The name of the repository that contains the pull request source and destination
-	// branches.
+	// The name of the repository that contains the pull request source and
+	// destination branches.
 	RepositoryName *string
 
 	// The full commit ID of the tip of the source branch used to create the pull
@@ -922,8 +916,8 @@ type PutFileEntry struct {
 	// EXECUTABLE and NORMAL.
 	FileMode FileModeTypeEnum
 
-	// The name and full path of the file that contains the changes you want to make as
-	// part of the commit, if you are not providing the file content directly.
+	// The name and full path of the file that contains the changes you want to make
+	// as part of the commit, if you are not providing the file content directly.
 	SourceFile *SourceFileSpecifier
 
 	noSmithyDocumentSerde
@@ -939,16 +933,17 @@ type ReactionForComment struct {
 	// comment.
 	ReactionUsers []string
 
-	// A numerical count of users who reacted with the specified emoji whose identities
-	// have been subsequently deleted from IAM. While these IAM users or roles no
-	// longer exist, the reactions might still appear in total reaction counts.
+	// A numerical count of users who reacted with the specified emoji whose
+	// identities have been subsequently deleted from IAM. While these IAM users or
+	// roles no longer exist, the reactions might still appear in total reaction
+	// counts.
 	ReactionsFromDeletedUsersCount *int32
 
 	noSmithyDocumentSerde
 }
 
-// Information about the values for reactions to a comment. AWS CodeCommit supports
-// a limited set of reactions.
+// Information about the values for reactions to a comment. AWS CodeCommit
+// supports a limited set of reactions.
 type ReactionValueFormats struct {
 
 	// The Emoji Version 1.0 graphic of the reaction. These graphics are interpreted
@@ -965,8 +960,8 @@ type ReactionValueFormats struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a replacement content entry in the conflict of a merge or pull
-// request operation.
+// Information about a replacement content entry in the conflict of a merge or
+// pull request operation.
 type ReplaceContentEntry struct {
 
 	// The path of the conflicting file.

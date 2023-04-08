@@ -22,15 +22,9 @@ import (
 // recognized by the bot and didn't activate an intent. Utterances can be
 // aggregated for a bot alias or for a bot version, but not both at the same time.
 // Utterances statistics are not generated under the following conditions:
-//
-// * The
-// childDirected field was set to true when the bot was created.
-//
-// * You are using
-// slot obfuscation with one or more slots.
-//
-// * You opted out of participating in
-// improving Amazon Lex.
+//   - The childDirected field was set to true when the bot was created.
+//   - You are using slot obfuscation with one or more slots.
+//   - You opted out of participating in improving Amazon Lex.
 func (c *Client) ListAggregatedUtterances(ctx context.Context, params *ListAggregatedUtterancesInput, optFns ...func(*Options)) (*ListAggregatedUtterancesOutput, error) {
 	if params == nil {
 		params = &ListAggregatedUtterancesInput{}
@@ -60,14 +54,14 @@ type ListAggregatedUtterancesInput struct {
 	BotId *string
 
 	// The identifier of the language and locale where the utterances were collected.
-	// For more information, see Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// For more information, see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
 
-	// The identifier of the bot alias associated with this request. If you specify the
-	// bot alias, you can't specify the bot version.
+	// The identifier of the bot alias associated with this request. If you specify
+	// the bot alias, you can't specify the bot version.
 	BotAliasId *string
 
 	// The identifier of the bot version associated with this request. If you specify
@@ -79,9 +73,9 @@ type ListAggregatedUtterancesInput struct {
 	// one filter and one string to filter on.
 	Filters []types.AggregatedUtterancesFilter
 
-	// The maximum number of utterances to return in each page of results. If there are
-	// fewer results than the maximum page size, only the actual number of results are
-	// returned. If you don't specify the maxResults parameter, 1,000 results are
+	// The maximum number of utterances to return in each page of results. If there
+	// are fewer results than the maximum page size, only the actual number of results
+	// are returned. If you don't specify the maxResults parameter, 1,000 results are
 	// returned.
 	MaxResults *int32
 
@@ -91,8 +85,8 @@ type ListAggregatedUtterancesInput struct {
 	// results.
 	NextToken *string
 
-	// Specifies sorting parameters for the list of utterances. You can sort by the hit
-	// count, the missed count, or the number of distinct sessions the utterance
+	// Specifies sorting parameters for the list of utterances. You can sort by the
+	// hit count, the missed count, or the number of distinct sessions the utterance
 	// appeared in.
 	SortBy *types.AggregatedUtterancesSortBy
 
@@ -111,14 +105,9 @@ type ListAggregatedUtterancesOutput struct {
 
 	// The last date and time that the aggregated data was collected. The time period
 	// depends on the length of the aggregation window.
-	//
-	// * Hours - for 1 hour time
-	// window, every half hour; otherwise every hour.
-	//
-	// * Days - every 6 hours
-	//
-	// * Weeks
-	// - for a one week time window, every 12 hours; otherwise, every day
+	//   - Hours - for 1 hour time window, every half hour; otherwise every hour.
+	//   - Days - every 6 hours
+	//   - Weeks - for a one week time window, every 12 hours; otherwise, every day
 	AggregationLastRefreshedDateTime *time.Time
 
 	// The date and time that the aggregation window ends. Only data collected between
@@ -136,16 +125,16 @@ type ListAggregatedUtterancesOutput struct {
 	// The identifier of the bot that contains the utterances.
 	BotId *string
 
-	// The identifier of the bot version that contains the utterances. If you specified
-	// the bot alias, the bot version isn't returned.
+	// The identifier of the bot version that contains the utterances. If you
+	// specified the bot alias, the bot version isn't returned.
 	BotVersion *string
 
 	// The identifier of the language and locale that the utterances are in.
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListAggregatedUtterances operation. If the nextToken field is present, you
-	// send the contents as the nextToken parameter of a ListAggregatedUtterances
+	// A token that indicates whether there are more results to return in a response
+	// to the ListAggregatedUtterances operation. If the nextToken field is present,
+	// you send the contents as the nextToken parameter of a ListAggregatedUtterances
 	// operation request to get the next page of results.
 	NextToken *string
 
@@ -229,9 +218,9 @@ var _ ListAggregatedUtterancesAPIClient = (*Client)(nil)
 // ListAggregatedUtterancesPaginatorOptions is the paginator options for
 // ListAggregatedUtterances
 type ListAggregatedUtterancesPaginatorOptions struct {
-	// The maximum number of utterances to return in each page of results. If there are
-	// fewer results than the maximum page size, only the actual number of results are
-	// returned. If you don't specify the maxResults parameter, 1,000 results are
+	// The maximum number of utterances to return in each page of results. If there
+	// are fewer results than the maximum page size, only the actual number of results
+	// are returned. If you don't specify the maxResults parameter, 1,000 results are
 	// returned.
 	Limit int32
 

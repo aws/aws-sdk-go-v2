@@ -60,8 +60,8 @@ type GetProductsOutput struct {
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// The list of products that match your filters. The list contains both the product
-	// metadata and the price information.
+	// The list of products that match your filters. The list contains both the
+	// product metadata and the price information.
 	PriceList []string
 
 	// Metadata pertaining to the operation's result.

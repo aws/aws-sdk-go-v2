@@ -15,8 +15,7 @@ import (
 // notes and tags. The mobile SDK is not generally available. Customers who have
 // access to the mobile SDK can use it to establish and manage WAF tokens for use
 // in HTTP(S) requests from a mobile device to WAF. For more information, see WAF
-// client application integration
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
+// client application integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
 // in the WAF Developer Guide.
 func (c *Client) GetMobileSdkRelease(ctx context.Context, params *GetMobileSdkReleaseInput, optFns ...func(*Options)) (*GetMobileSdkReleaseOutput, error) {
 	if params == nil {
@@ -40,7 +39,7 @@ type GetMobileSdkReleaseInput struct {
 	// This member is required.
 	Platform types.Platform
 
-	// The release version. For the latest available version, specify LATEST.
+	// The release version. For the latest available version, specify LATEST .
 	//
 	// This member is required.
 	ReleaseVersion *string

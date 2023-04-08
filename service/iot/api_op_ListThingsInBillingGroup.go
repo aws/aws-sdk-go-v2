@@ -12,8 +12,7 @@ import (
 )
 
 // Lists the things you have added to the given billing group. Requires permission
-// to access the ListThingsInBillingGroup
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// to access the ListThingsInBillingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListThingsInBillingGroup(ctx context.Context, params *ListThingsInBillingGroupInput, optFns ...func(*Options)) (*ListThingsInBillingGroupOutput, error) {
 	if params == nil {

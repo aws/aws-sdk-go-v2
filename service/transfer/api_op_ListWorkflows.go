@@ -43,7 +43,7 @@ type ListWorkflowsInput struct {
 
 type ListWorkflowsOutput struct {
 
-	// Returns the Arn, WorkflowId, and Description for each workflow.
+	// Returns the Arn , WorkflowId , and Description for each workflow.
 	//
 	// This member is required.
 	Workflows []types.ListedWorkflow

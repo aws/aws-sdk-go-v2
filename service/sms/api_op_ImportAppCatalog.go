@@ -30,8 +30,7 @@ type ImportAppCatalogInput struct {
 
 	// The name of the service role. If you omit this parameter, we create a
 	// service-linked role for Migration Hub in your account. Otherwise, the role that
-	// you provide must have the policy and trust policy
-	// (https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed)
+	// you provide must have the policy and trust policy (https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed)
 	// described in the Migration Hub User Guide.
 	RoleName *string
 

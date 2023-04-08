@@ -12,8 +12,7 @@ import (
 )
 
 // Sets the logging options for the V2 logging service. Requires permission to
-// access the SetV2LoggingOptions
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// access the SetV2LoggingOptions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) SetV2LoggingOptions(ctx context.Context, params *SetV2LoggingOptionsInput, optFns ...func(*Options)) (*SetV2LoggingOptionsOutput, error) {
 	if params == nil {

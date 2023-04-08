@@ -50,8 +50,8 @@ type DescribeLDAPSSettingsInput struct {
 
 type DescribeLDAPSSettingsOutput struct {
 
-	// Information about LDAP security for the specified directory, including status of
-	// enablement, state last updated date time, and the reason for the state.
+	// Information about LDAP security for the specified directory, including status
+	// of enablement, state last updated date time, and the reason for the state.
 	LDAPSSettingsInfo []types.LDAPSSettingInfo
 
 	// The next token used to retrieve the LDAPS settings if the number of setting

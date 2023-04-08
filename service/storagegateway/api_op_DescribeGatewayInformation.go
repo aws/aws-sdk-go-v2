@@ -33,8 +33,8 @@ func (c *Client) DescribeGatewayInformation(ctx context.Context, params *Describ
 // A JSON object containing the ID of the gateway.
 type DescribeGatewayInformationInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -51,8 +51,8 @@ type DescribeGatewayInformationOutput struct {
 	// gateway VM
 	CloudWatchLogGroupARN *string
 
-	// Date after which this gateway will not receive software updates for new features
-	// and bug fixes.
+	// Date after which this gateway will not receive software updates for new
+	// features and bug fixes.
 	DeprecationDate *string
 
 	// The ID of the Amazon EC2 instance that was used to launch the gateway.
@@ -64,8 +64,8 @@ type DescribeGatewayInformationOutput struct {
 	// The type of endpoint for your gateway. Valid Values: STANDARD | FIPS
 	EndpointType *string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Specifies the size of the gateway's metadata cache.
@@ -124,8 +124,8 @@ type DescribeGatewayInformationOutput struct {
 	// assigned, you can view all tags using the ListTagsForResource API operation.
 	Tags []types.Tag
 
-	// The configuration settings for the virtual private cloud (VPC) endpoint for your
-	// gateway.
+	// The configuration settings for the virtual private cloud (VPC) endpoint for
+	// your gateway.
 	VPCEndpoint *string
 
 	// Metadata pertaining to the operation's result.

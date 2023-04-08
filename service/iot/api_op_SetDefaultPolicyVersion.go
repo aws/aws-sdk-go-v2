@@ -14,8 +14,7 @@ import (
 // (operative) version. This action affects all certificates to which the policy is
 // attached. To list the principals the policy is attached to, use the
 // ListPrincipalPolicies action. Requires permission to access the
-// SetDefaultPolicyVersion
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// SetDefaultPolicyVersion (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) SetDefaultPolicyVersion(ctx context.Context, params *SetDefaultPolicyVersionInput, optFns ...func(*Options)) (*SetDefaultPolicyVersionOutput, error) {
 	if params == nil {

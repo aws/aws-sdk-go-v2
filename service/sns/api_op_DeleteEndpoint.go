@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the endpoint for a device and mobile app from Amazon SNS. This action is
-// idempotent. For more information, see Using Amazon SNS Mobile Push Notifications
-// (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html). When you delete
-// an endpoint that is also subscribed to a topic, then you must also unsubscribe
-// the endpoint from the topic.
+// Deletes the endpoint for a device and mobile app from Amazon SNS. This action
+// is idempotent. For more information, see Using Amazon SNS Mobile Push
+// Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html) .
+// When you delete an endpoint that is also subscribed to a topic, then you must
+// also unsubscribe the endpoint from the topic.
 func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput, optFns ...func(*Options)) (*DeleteEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteEndpointInput{}

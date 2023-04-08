@@ -58,8 +58,8 @@ type CreateParallelDataInput struct {
 
 	// Tags to be associated with this resource. A tag is a key-value pair that adds
 	// metadata to a resource. Each tag key for the resource must be unique. For more
-	// information, see  Tagging your resources
-	// (https://docs.aws.amazon.com/translate/latest/dg/tagging.html).
+	// information, see Tagging your resources (https://docs.aws.amazon.com/translate/latest/dg/tagging.html)
+	// .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -71,7 +71,7 @@ type CreateParallelDataOutput struct {
 	Name *string
 
 	// The status of the parallel data resource. When the resource is ready for you to
-	// use, the status is ACTIVE.
+	// use, the status is ACTIVE .
 	Status types.ParallelDataStatus
 
 	// Metadata pertaining to the operation's result.

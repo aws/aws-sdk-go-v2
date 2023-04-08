@@ -15,18 +15,10 @@ import (
 )
 
 // Deletes the specified Object Lambda Access Point. The following actions are
-// related to DeleteAccessPointForObjectLambda:
-//
-// * CreateAccessPointForObjectLambda
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
-//
-// *
-// GetAccessPointForObjectLambda
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html)
-//
-// *
-// ListAccessPointsForObjectLambda
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)
+// related to DeleteAccessPointForObjectLambda :
+//   - CreateAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
+//   - GetAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html)
+//   - ListAccessPointsForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)
 func (c *Client) DeleteAccessPointForObjectLambda(ctx context.Context, params *DeleteAccessPointForObjectLambdaInput, optFns ...func(*Options)) (*DeleteAccessPointForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &DeleteAccessPointForObjectLambdaInput{}

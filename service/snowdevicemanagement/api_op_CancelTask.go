@@ -31,8 +31,8 @@ func (c *Client) CancelTask(ctx context.Context, params *CancelTaskInput, optFns
 
 type CancelTaskInput struct {
 
-	// The ID of the task that you are attempting to cancel. You can retrieve a task ID
-	// by using the ListTasks operation.
+	// The ID of the task that you are attempting to cancel. You can retrieve a task
+	// ID by using the ListTasks operation.
 	//
 	// This member is required.
 	TaskId *string

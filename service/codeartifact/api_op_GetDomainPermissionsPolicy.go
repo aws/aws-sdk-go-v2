@@ -13,8 +13,7 @@ import (
 
 // Returns the resource policy attached to the specified domain. The policy is a
 // resource-based policy, not an identity-based policy. For more information, see
-// Identity-based policies and resource-based policies
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html)
+// Identity-based policies and resource-based policies  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html)
 // in the IAM User Guide.
 func (c *Client) GetDomainPermissionsPolicy(ctx context.Context, params *GetDomainPermissionsPolicyInput, optFns ...func(*Options)) (*GetDomainPermissionsPolicyOutput, error) {
 	if params == nil {

@@ -37,10 +37,10 @@ type DescribeRegionsInput struct {
 	DirectoryId *string
 
 	// The DescribeRegionsResult.NextToken value from a previous call to
-	// DescribeRegions. Pass null if this is the first call.
+	// DescribeRegions . Pass null if this is the first call.
 	NextToken *string
 
-	// The name of the Region. For example, us-east-1.
+	// The name of the Region. For example, us-east-1 .
 	RegionName *string
 
 	noSmithyDocumentSerde

@@ -13,8 +13,7 @@ import (
 
 // Configures an analysis scheme that can be applied to a text or text-array field
 // to define language-specific text processing options. For more information, see
-// Configuring Analysis Schemes
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
+// Configuring Analysis Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DefineAnalysisScheme(ctx context.Context, params *DefineAnalysisSchemeInput, optFns ...func(*Options)) (*DefineAnalysisSchemeOutput, error) {
 	if params == nil {
@@ -37,8 +36,8 @@ type DefineAnalysisSchemeInput struct {
 
 	// Configuration information for an analysis scheme. Each analysis scheme has a
 	// unique name and specifies the language of the text to be processed. The
-	// following options can be configured for an analysis scheme: Synonyms, Stopwords,
-	// StemmingDictionary, JapaneseTokenizationDictionary and AlgorithmicStemming.
+	// following options can be configured for an analysis scheme: Synonyms , Stopwords
+	// , StemmingDictionary , JapaneseTokenizationDictionary and AlgorithmicStemming .
 	//
 	// This member is required.
 	AnalysisScheme *types.AnalysisScheme
@@ -58,7 +57,7 @@ type DefineAnalysisSchemeInput struct {
 // newly-configured analysis scheme.
 type DefineAnalysisSchemeOutput struct {
 
-	// The status and configuration of an AnalysisScheme.
+	// The status and configuration of an AnalysisScheme .
 	//
 	// This member is required.
 	AnalysisScheme *types.AnalysisSchemeStatus

@@ -30,18 +30,17 @@ func (c *Client) EnableSnapshotCopy(ctx context.Context, params *EnableSnapshotC
 
 type EnableSnapshotCopyInput struct {
 
-	// The unique identifier of the source cluster to copy snapshots from. Constraints:
-	// Must be the valid name of an existing cluster that does not already have
-	// cross-region snapshot copy enabled.
+	// The unique identifier of the source cluster to copy snapshots from.
+	// Constraints: Must be the valid name of an existing cluster that does not already
+	// have cross-region snapshot copy enabled.
 	//
 	// This member is required.
 	ClusterIdentifier *string
 
 	// The destination Amazon Web Services Region that you want to copy snapshots to.
 	// Constraints: Must be the name of a valid Amazon Web Services Region. For more
-	// information, see Regions and Endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region) in
-	// the Amazon Web Services General Reference.
+	// information, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	DestinationRegion *string
@@ -52,9 +51,9 @@ type EnableSnapshotCopyInput struct {
 	// value must be either -1 or an integer between 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int32
 
-	// The number of days to retain automated snapshots in the destination region after
-	// they are copied from the source region. Default: 7. Constraints: Must be at
-	// least 1 and no more than 35.
+	// The number of days to retain automated snapshots in the destination region
+	// after they are copied from the source region. Default: 7. Constraints: Must be
+	// at least 1 and no more than 35.
 	RetentionPeriod *int32
 
 	// The name of the snapshot copy grant to use when snapshots of an Amazon Web

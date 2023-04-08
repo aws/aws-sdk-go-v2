@@ -62,8 +62,8 @@ type ListVocabularyFiltersOutput struct {
 	// view all your results.
 	NextToken *string
 
-	// Provides information about the custom vocabulary filters that match the criteria
-	// specified in your request.
+	// Provides information about the custom vocabulary filters that match the
+	// criteria specified in your request.
 	VocabularyFilters []types.VocabularyFilterInfo
 
 	// Metadata pertaining to the operation's result.

@@ -11,9 +11,9 @@ const (
 	ArchitectureArmhf Architecture = "ARMHF"
 )
 
-// Values returns all known values for Architecture. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Architecture. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Architecture) Values() []Architecture {
 	return []Architecture{
 		"X86_64",
@@ -156,9 +156,9 @@ const (
 	ExitBehaviorRestart ExitBehavior = "RESTART"
 )
 
-// Values returns all known values for ExitBehavior. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExitBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExitBehavior) Values() []ExitBehavior {
 	return []ExitBehavior{
 		"FAIL",
@@ -330,9 +330,9 @@ const (
 	SimulationJobBatchStatusTimedOut   SimulationJobBatchStatus = "TimedOut"
 )
 
-// Values returns all known values for SimulationJobBatchStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SimulationJobBatchStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationJobBatchStatus) Values() []SimulationJobBatchStatus {
 	return []SimulationJobBatchStatus{
 		"Pending",
@@ -586,9 +586,9 @@ const (
 	WorldGenerationJobStatusCanceled      WorldGenerationJobStatus = "Canceled"
 )
 
-// Values returns all known values for WorldGenerationJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WorldGenerationJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorldGenerationJobStatus) Values() []WorldGenerationJobStatus {
 	return []WorldGenerationJobStatus{
 		"Pending",

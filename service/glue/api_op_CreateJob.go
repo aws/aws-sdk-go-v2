@@ -48,7 +48,7 @@ type CreateJobInput struct {
 	// processing units (DPUs) to allocate to this Job. You can allocate a minimum of 2
 	// DPUs; the default is 10. A DPU is a relative measure of processing power that
 	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the Glue pricing page (https://aws.amazon.com/glue/pricing/).
+	// information, see the Glue pricing page (https://aws.amazon.com/glue/pricing/) .
 	//
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
@@ -60,17 +60,15 @@ type CreateJobInput struct {
 	// The connections used for this job.
 	Connections *types.ConnectionsList
 
-	// The default arguments for this job. You can specify arguments here that your own
-	// job-execution script consumes, as well as arguments that Glue itself consumes.
-	// Job arguments may be logged. Do not pass plaintext secrets as arguments.
-	// Retrieve secrets from a Glue Connection, Secrets Manager or other secret
-	// management mechanism if you intend to keep them within the Job. For information
-	// about how to specify and consume your own Job arguments, see the Calling Glue
-	// APIs in Python
-	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// The default arguments for this job. You can specify arguments here that your
+	// own job-execution script consumes, as well as arguments that Glue itself
+	// consumes. Job arguments may be logged. Do not pass plaintext secrets as
+	// arguments. Retrieve secrets from a Glue Connection, Secrets Manager or other
+	// secret management mechanism if you intend to keep them within the Job. For
+	// information about how to specify and consume your own Job arguments, see the
+	// Calling Glue APIs in Python (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
 	// topic in the developer guide. For information about the key-value pairs that
-	// Glue consumes to set up your job, see the Special Parameters Used by Glue
-	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
+	// Glue consumes to set up your job, see the Special Parameters Used by Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	DefaultArguments map[string]string
 
@@ -82,8 +80,8 @@ type CreateJobInput struct {
 	// fast job startup and dedicated resources. The flexible execution class is
 	// appropriate for time-insensitive jobs whose start and completion times may vary.
 	// Only jobs with Glue version 3.0 and above and command type glueetl will be
-	// allowed to set ExecutionClass to FLEX. The flexible execution class is available
-	// for Spark jobs.
+	// allowed to set ExecutionClass to FLEX . The flexible execution class is
+	// available for Spark jobs.
 	ExecutionClass types.ExecutionClass
 
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
@@ -93,35 +91,30 @@ type CreateJobInput struct {
 	// Glue version determines the versions of Apache Spark and Python that Glue
 	// supports. The Python version indicates the version supported for jobs of type
 	// Spark. For more information about the available Glue versions and corresponding
-	// Spark and Python versions, see Glue version
-	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
-	// guide. Jobs that are created without specifying a Glue version default to Glue
-	// 0.9.
+	// Spark and Python versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
+	// in the developer guide. Jobs that are created without specifying a Glue version
+	// default to Glue 0.9.
 	GlueVersion *string
 
 	// This field is reserved for future use.
 	LogUri *string
 
-	// For Glue version 1.0 or earlier jobs, using the standard worker type, the number
-	// of Glue data processing units (DPUs) that can be allocated when this job runs. A
-	// DPU is a relative measure of processing power that consists of 4 vCPUs of
-	// compute capacity and 16 GB of memory. For more information, see the Glue pricing
-	// page (https://aws.amazon.com/glue/pricing/). Do not set Max Capacity if using
-	// WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity
-	// depends on whether you are running a Python shell job or an Apache Spark ETL
-	// job:
-	//
-	// * When you specify a Python shell job (JobCommand.Name="pythonshell"), you
-	// can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
-	//
-	// * When you
-	// specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark
-	// streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate a minimum
-	// of 2 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU
-	// allocation.
-	//
-	// For Glue version 2.0 jobs, you cannot instead specify a Maximum
-	// capacity. Instead, you should specify a Worker type and the Number of workers.
+	// For Glue version 1.0 or earlier jobs, using the standard worker type, the
+	// number of Glue data processing units (DPUs) that can be allocated when this job
+	// runs. A DPU is a relative measure of processing power that consists of 4 vCPUs
+	// of compute capacity and 16 GB of memory. For more information, see the Glue
+	// pricing page (https://aws.amazon.com/glue/pricing/) . Do not set Max Capacity
+	// if using WorkerType and NumberOfWorkers . The value that can be allocated for
+	// MaxCapacity depends on whether you are running a Python shell job or an Apache
+	// Spark ETL job:
+	//   - When you specify a Python shell job ( JobCommand.Name ="pythonshell"), you
+	//   can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
+	//   - When you specify an Apache Spark ETL job ( JobCommand.Name ="glueetl") or
+	//   Apache Spark streaming ETL job ( JobCommand.Name ="gluestreaming"), you can
+	//   allocate a minimum of 2 DPUs. The default is 10 DPUs. This job type cannot have
+	//   a fractional DPU allocation.
+	// For Glue version 2.0 jobs, you cannot instead specify a Maximum capacity .
+	// Instead, you should specify a Worker type and the Number of workers .
 	MaxCapacity *float64
 
 	// The maximum number of times to retry this job if it fails.
@@ -145,9 +138,8 @@ type CreateJobInput struct {
 	SourceControlDetails *types.SourceControlDetails
 
 	// The tags to use with this job. You may use tags to limit access to the job. For
-	// more information about tags in Glue, see Amazon Web Services Tags in Glue
-	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
-	// guide.
+	// more information about tags in Glue, see Amazon Web Services Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)
+	// in the developer guide.
 	Tags map[string]string
 
 	// The job timeout in minutes. This is the maximum time that a job run can consume
@@ -155,26 +147,20 @@ type CreateJobInput struct {
 	// 2,880 minutes (48 hours).
 	Timeout *int32
 
-	// The type of predefined worker that is allocated when a job runs. Accepts a value
-	// of Standard, G.1X, G.2X, or G.025X.
-	//
-	// * For the Standard worker type, each worker
-	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//
-	// *
-	// For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64
-	// GB disk), and provides 1 executor per worker. We recommend this worker type for
-	// memory-intensive jobs.
-	//
-	// * For the G.2X worker type, each worker maps to 2 DPU (8
-	// vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We
-	// recommend this worker type for memory-intensive jobs.
-	//
-	// * For the G.025X worker
-	// type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB disk), and
-	// provides 1 executor per worker. We recommend this worker type for low volume
-	// streaming jobs. This worker type is only available for Glue version 3.0
-	// streaming jobs.
+	// The type of predefined worker that is allocated when a job runs. Accepts a
+	// value of Standard, G.1X, G.2X, or G.025X.
+	//   - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory
+	//   and a 50GB disk, and 2 executors per worker.
+	//   - For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
+	//   memory, 64 GB disk), and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive jobs.
+	//   - For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of
+	//   memory, 128 GB disk), and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive jobs.
+	//   - For the G.025X worker type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of
+	//   memory, 64 GB disk), and provides 1 executor per worker. We recommend this
+	//   worker type for low volume streaming jobs. This worker type is only available
+	//   for Glue version 3.0 streaming jobs.
 	WorkerType types.WorkerType
 
 	noSmithyDocumentSerde

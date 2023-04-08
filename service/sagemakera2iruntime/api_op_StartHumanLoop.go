@@ -29,8 +29,8 @@ func (c *Client) StartHumanLoop(ctx context.Context, params *StartHumanLoopInput
 
 type StartHumanLoopInput struct {
 
-	// The Amazon Resource Name (ARN) of the flow definition associated with this human
-	// loop.
+	// The Amazon Resource Name (ARN) of the flow definition associated with this
+	// human loop.
 	//
 	// This member is required.
 	FlowDefinitionArn *string

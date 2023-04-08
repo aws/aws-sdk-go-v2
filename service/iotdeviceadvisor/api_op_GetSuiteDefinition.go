@@ -13,8 +13,7 @@ import (
 )
 
 // Gets information about a Device Advisor test suite. Requires permission to
-// access the GetSuiteDefinition
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// access the GetSuiteDefinition (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) GetSuiteDefinition(ctx context.Context, params *GetSuiteDefinitionInput, optFns ...func(*Options)) (*GetSuiteDefinitionOutput, error) {
 	if params == nil {

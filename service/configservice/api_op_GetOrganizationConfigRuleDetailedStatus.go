@@ -130,16 +130,16 @@ func (c *Client) addOperationGetOrganizationConfigRuleDetailedStatusMiddlewares(
 	return nil
 }
 
-// GetOrganizationConfigRuleDetailedStatusAPIClient is a client that implements the
-// GetOrganizationConfigRuleDetailedStatus operation.
+// GetOrganizationConfigRuleDetailedStatusAPIClient is a client that implements
+// the GetOrganizationConfigRuleDetailedStatus operation.
 type GetOrganizationConfigRuleDetailedStatusAPIClient interface {
 	GetOrganizationConfigRuleDetailedStatus(context.Context, *GetOrganizationConfigRuleDetailedStatusInput, ...func(*Options)) (*GetOrganizationConfigRuleDetailedStatusOutput, error)
 }
 
 var _ GetOrganizationConfigRuleDetailedStatusAPIClient = (*Client)(nil)
 
-// GetOrganizationConfigRuleDetailedStatusPaginatorOptions is the paginator options
-// for GetOrganizationConfigRuleDetailedStatus
+// GetOrganizationConfigRuleDetailedStatusPaginatorOptions is the paginator
+// options for GetOrganizationConfigRuleDetailedStatus
 type GetOrganizationConfigRuleDetailedStatusPaginatorOptions struct {
 	// The maximum number of OrganizationConfigRuleDetailedStatus returned on each
 	// page. If you do not specify a number, Config uses the default. The default is

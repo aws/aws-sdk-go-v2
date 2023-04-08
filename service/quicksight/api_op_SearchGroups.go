@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use the SearchGroups operation to search groups in a specified Amazon QuickSight
-// namespace using the supplied filters.
+// Use the SearchGroups operation to search groups in a specified Amazon
+// QuickSight namespace using the supplied filters.
 func (c *Client) SearchGroups(ctx context.Context, params *SearchGroupsInput, optFns ...func(*Options)) (*SearchGroupsOutput, error) {
 	if params == nil {
 		params = &SearchGroupsInput{}
@@ -58,8 +58,8 @@ type SearchGroupsInput struct {
 
 type SearchGroupsOutput struct {
 
-	// A list of groups in a specified namespace that match the filters you set in your
-	// SearchGroups request.
+	// A list of groups in a specified namespace that match the filters you set in
+	// your SearchGroups request.
 	GroupList []types.Group
 
 	// A pagination token that can be used in a subsequent request.

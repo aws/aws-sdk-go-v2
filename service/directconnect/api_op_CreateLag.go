@@ -80,8 +80,7 @@ type CreateLagInput struct {
 
 	// Indicates whether the connection will support MAC Security (MACsec). All
 	// connections in the LAG must be capable of supporting MAC Security (MACsec). For
-	// information about MAC Security (MACsec) prerequisties, see MACsec prerequisties
-	// (https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites)
+	// information about MAC Security (MACsec) prerequisties, see MACsec prerequisties (https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites)
 	// in the Direct Connect User Guide.
 	RequestMACSec *bool
 
@@ -116,8 +115,8 @@ type CreateLagOutput struct {
 	// possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string
 
-	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt,
-	// should_encrypt, and must_encrypt.
+	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt ,
+	// should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
@@ -134,26 +133,14 @@ type CreateLagOutput struct {
 	LagName *string
 
 	// The state of the LAG. The following are the possible values:
-	//
-	// * requested: The
-	// initial state of a LAG. The LAG stays in the requested state until the Letter of
-	// Authorization (LOA) is available.
-	//
-	// * pending: The LAG has been approved and is
-	// being initialized.
-	//
-	// * available: The network link is established and the LAG is
-	// ready for use.
-	//
-	// * down: The network link is down.
-	//
-	// * deleting: The LAG is being
-	// deleted.
-	//
-	// * deleted: The LAG is deleted.
-	//
-	// * unknown: The state of the LAG is not
-	// available.
+	//   - requested : The initial state of a LAG. The LAG stays in the requested state
+	//   until the Letter of Authorization (LOA) is available.
+	//   - pending : The LAG has been approved and is being initialized.
+	//   - available : The network link is established and the LAG is ready for use.
+	//   - down : The network link is down.
+	//   - deleting : The LAG is being deleted.
+	//   - deleted : The LAG is deleted.
+	//   - unknown : The state of the LAG is not available.
 	LagState types.LagState
 
 	// The location of the LAG.
@@ -169,8 +156,8 @@ type CreateLagOutput struct {
 	// for the LAG itself to be operational.
 	MinimumLinks int32
 
-	// The number of physical dedicated connections bundled by the LAG, up to a maximum
-	// of 10.
+	// The number of physical dedicated connections bundled by the LAG, up to a
+	// maximum of 10.
 	NumberOfConnections int32
 
 	// The ID of the Amazon Web Services account that owns the LAG.

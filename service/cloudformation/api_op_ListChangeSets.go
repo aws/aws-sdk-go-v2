@@ -50,7 +50,7 @@ type ListChangeSetsInput struct {
 type ListChangeSetsOutput struct {
 
 	// If the output exceeds 1 MB, a string that identifies the next page of change
-	// sets. If there is no additional page, this value is null.
+	// sets. If there is no additional page, this value is null .
 	NextToken *string
 
 	// A list of ChangeSetSummary structures that provides the ID and status of each

@@ -35,8 +35,8 @@ type UpdateProjectInput struct {
 	// This member is required.
 	ProjectId *string
 
-	// ZIP or YAML file which contains project configuration to be updated. This should
-	// be the contents of the file downloaded from the URL provided in an export
+	// ZIP or YAML file which contains project configuration to be updated. This
+	// should be the contents of the file downloaded from the URL provided in an export
 	// project operation.
 	Contents []byte
 

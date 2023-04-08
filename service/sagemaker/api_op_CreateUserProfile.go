@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a user profile. A user profile represents a single user within a domain,
-// and is the main way to reference a "person" for the purposes of sharing,
+// Creates a user profile. A user profile represents a single user within a
+// domain, and is the main way to reference a "person" for the purposes of sharing,
 // reporting, and other user-oriented features. This entity is created when a user
 // onboards to Amazon SageMaker Studio. If an administrator invites a person by
 // email or imports them from IAM Identity Center, a user profile is automatically
@@ -46,10 +46,10 @@ type CreateUserProfileInput struct {
 	// This member is required.
 	UserProfileName *string
 
-	// A specifier for the type of value specified in SingleSignOnUserValue. Currently,
-	// the only supported value is "UserName". If the Domain's AuthMode is IAM Identity
-	// Center, this field is required. If the Domain's AuthMode is not IAM Identity
-	// Center, this field cannot be specified.
+	// A specifier for the type of value specified in SingleSignOnUserValue.
+	// Currently, the only supported value is "UserName". If the Domain's AuthMode is
+	// IAM Identity Center, this field is required. If the Domain's AuthMode is not IAM
+	// Identity Center, this field cannot be specified.
 	SingleSignOnUserIdentifier *string
 
 	// The username of the associated Amazon Web Services Single Sign-On User for this

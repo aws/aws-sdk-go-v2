@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action can be used only with Windows stacks. Grants RDP access to a Windows
-// instance for a specified time period.
+// This action can be used only with Windows stacks. Grants RDP access to a
+// Windows instance for a specified time period.
 func (c *Client) GrantAccess(ctx context.Context, params *GrantAccessInput, optFns ...func(*Options)) (*GrantAccessOutput, error) {
 	if params == nil {
 		params = &GrantAccessInput{}

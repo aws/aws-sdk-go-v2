@@ -41,11 +41,9 @@ type GetUsagePlanInput struct {
 // Represents a usage plan used to specify who can assess associated API stages.
 // Optionally, target request rate and quota limits can be set. In some cases
 // clients can exceed the targets that you set. Don’t rely on usage plans to
-// control costs. Consider using Amazon Web Services Budgets
-// (https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
-// to monitor costs and WAF
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to
-// manage API requests.
+// control costs. Consider using Amazon Web Services Budgets (https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
+// to monitor costs and WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// to manage API requests.
 type GetUsagePlanOutput struct {
 
 	// The associated API stages of a usage plan.
@@ -60,8 +58,8 @@ type GetUsagePlanOutput struct {
 	// The name of a usage plan.
 	Name *string
 
-	// The AWS Markeplace product identifier to associate with the usage plan as a SaaS
-	// product on AWS Marketplace.
+	// The AWS Markeplace product identifier to associate with the usage plan as a
+	// SaaS product on AWS Marketplace.
 	ProductCode *string
 
 	// The target maximum number of permitted requests per a given unit time interval.

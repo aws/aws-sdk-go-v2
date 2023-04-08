@@ -42,7 +42,7 @@ type ListManagedPoliciesInPermissionSetInput struct {
 	// This member is required.
 	PermissionSetArn *string
 
-	// The maximum number of results to display for the PermissionSet.
+	// The maximum number of results to display for the PermissionSet .
 	MaxResults *int32
 
 	// The pagination token for the list API. Initially the value is null. Use the
@@ -141,7 +141,7 @@ var _ ListManagedPoliciesInPermissionSetAPIClient = (*Client)(nil)
 // ListManagedPoliciesInPermissionSetPaginatorOptions is the paginator options for
 // ListManagedPoliciesInPermissionSet
 type ListManagedPoliciesInPermissionSetPaginatorOptions struct {
-	// The maximum number of results to display for the PermissionSet.
+	// The maximum number of results to display for the PermissionSet .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

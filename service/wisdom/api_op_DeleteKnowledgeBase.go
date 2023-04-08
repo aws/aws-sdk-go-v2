@@ -11,15 +11,12 @@ import (
 )
 
 // Deletes the knowledge base. When you use this API to delete an external
-// knowledge base such as Salesforce or ServiceNow, you must also delete the Amazon
-// AppIntegrations
-// (https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html)
+// knowledge base such as Salesforce or ServiceNow, you must also delete the
+// Amazon AppIntegrations (https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html)
 // DataIntegration. This is because you can't reuse the DataIntegration after it's
 // been associated with an external knowledge base. However, you can delete and
-// recreate it. See DeleteDataIntegration
-// (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html)
-// and CreateDataIntegration
-// (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
+// recreate it. See DeleteDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html)
+// and CreateDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
 // in the Amazon AppIntegrations API Reference.
 func (c *Client) DeleteKnowledgeBase(ctx context.Context, params *DeleteKnowledgeBaseInput, optFns ...func(*Options)) (*DeleteKnowledgeBaseOutput, error) {
 	if params == nil {
@@ -38,8 +35,8 @@ func (c *Client) DeleteKnowledgeBase(ctx context.Context, params *DeleteKnowledg
 
 type DeleteKnowledgeBaseInput struct {
 
-	// The knowledge base to delete content from. Can be either the ID or the ARN. URLs
-	// cannot contain the ARN.
+	// The knowledge base to delete content from. Can be either the ID or the ARN.
+	// URLs cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string

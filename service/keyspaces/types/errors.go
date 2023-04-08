@@ -61,8 +61,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Keyspaces was unable to fully process this request because of an internal
-// server error.
+// Amazon Keyspaces was unable to fully process this request because of an
+// internal server error.
 type InternalServerException struct {
 	Message *string
 
@@ -89,7 +89,7 @@ func (e *InternalServerException) ErrorCode() string {
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The operation tried to access a keyspace or table that doesn't exist. The
-// resource might not be specified correctly, or its status might not be ACTIVE.
+// resource might not be specified correctly, or its status might not be ACTIVE .
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -117,10 +117,9 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation exceeded the service quota for this resource. For more information
-// on service quotas, see Quotas
-// (https://docs.aws.amazon.com/keyspaces/latest/devguide/quotas.html) in the
-// Amazon Keyspaces Developer Guide.
+// The operation exceeded the service quota for this resource. For more
+// information on service quotas, see Quotas (https://docs.aws.amazon.com/keyspaces/latest/devguide/quotas.html)
+// in the Amazon Keyspaces Developer Guide.
 type ServiceQuotaExceededException struct {
 	Message *string
 

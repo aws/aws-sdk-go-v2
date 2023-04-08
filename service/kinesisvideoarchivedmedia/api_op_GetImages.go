@@ -63,8 +63,8 @@ type GetImagesInput struct {
 	StartTimestamp *time.Time
 
 	// The list of a key-value pair structure that contains extra parameters that can
-	// be applied when the image is generated. The FormatConfig key is the JPEGQuality,
-	// which indicates the JPEG quality key to be used to generate the image. The
+	// be applied when the image is generated. The FormatConfig key is the JPEGQuality
+	// , which indicates the JPEG quality key to be used to generate the image. The
 	// FormatConfig value accepts ints from 1 to 100. If the value is 1, the image will
 	// be generated with less quality and the best compression. If the value is 100,
 	// the image will be generated with the best quality and less compression. If no
@@ -79,20 +79,20 @@ type GetImagesInput struct {
 	// image size will be returned.
 	HeightPixels *int32
 
-	// The maximum number of images to be returned by the API. The default limit is 100
-	// images per API response. The additional results will be paginated.
+	// The maximum number of images to be returned by the API. The default limit is
+	// 100 images per API response. The additional results will be paginated.
 	MaxResults *int64
 
-	// A token that specifies where to start paginating the next set of Images. This is
-	// the GetImages:NextToken from a previously truncated response.
+	// A token that specifies where to start paginating the next set of Images. This
+	// is the GetImages:NextToken from a previously truncated response.
 	NextToken *string
 
 	// The Amazon Resource Name (ARN) of the stream from which to retrieve the images.
-	// You must specify either the StreamName or the StreamARN.
+	// You must specify either the StreamName or the StreamARN .
 	StreamARN *string
 
 	// The name of the stream from which to retrieve the images. You must specify
-	// either the StreamName or the StreamARN.
+	// either the StreamName or the StreamARN .
 	StreamName *string
 
 	// The width of the output image that is used in conjunction with the HeightPixels

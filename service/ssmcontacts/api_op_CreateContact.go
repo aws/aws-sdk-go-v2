@@ -45,7 +45,7 @@ type CreateContactInput struct {
 	// This member is required.
 	Plan *types.Plan
 
-	// To create an escalation plan use ESCALATION. To create a contact use PERSONAL.
+	// To create an escalation plan use ESCALATION . To create a contact use PERSONAL .
 	//
 	// This member is required.
 	Type types.ContactType
@@ -57,8 +57,8 @@ type CreateContactInput struct {
 	// details.
 	IdempotencyToken *string
 
-	// Adds a tag to the target. You can only tag resources created in the first Region
-	// of your replication set.
+	// Adds a tag to the target. You can only tag resources created in the first
+	// Region of your replication set.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

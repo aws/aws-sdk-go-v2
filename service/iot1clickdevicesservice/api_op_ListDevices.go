@@ -32,8 +32,8 @@ type ListDevicesInput struct {
 	// The type of the device, such as "button".
 	DeviceType *string
 
-	// The maximum number of results to return per request. If not set, a default value
-	// of 100 is used.
+	// The maximum number of results to return per request. If not set, a default
+	// value of 100 is used.
 	MaxResults int32
 
 	// The token to retrieve the next set of results.

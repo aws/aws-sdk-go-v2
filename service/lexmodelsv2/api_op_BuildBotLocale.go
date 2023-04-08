@@ -33,8 +33,7 @@ func (c *Client) BuildBotLocale(ctx context.Context, params *BuildBotLocaleInput
 type BuildBotLocaleInput struct {
 
 	// The identifier of the bot to build. The identifier is returned in the response
-	// from the CreateBot
-	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
+	// from the CreateBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
 	// operation.
 	//
 	// This member is required.
@@ -48,8 +47,8 @@ type BuildBotLocaleInput struct {
 	// The identifier of the language and locale that the bot will be used in. The
 	// string must match one of the supported locales. All of the intents, slot types,
 	// and slots used in the bot must have the same locale. For more information, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -64,7 +63,7 @@ type BuildBotLocaleOutput struct {
 
 	// The bot's build status. When the status is ReadyExpressTesting you can test the
 	// bot using the utterances defined for the intents and slot types. When the status
-	// is Built, the bot is ready for use and can be tested using any utterance.
+	// is Built , the bot is ready for use and can be tested using any utterance.
 	BotLocaleStatus types.BotLocaleStatus
 
 	// The version of the bot that was built. This is only the draft version of the

@@ -13,8 +13,8 @@ import (
 
 // Creates a predictor monitor resource for an existing auto predictor. Predictor
 // monitoring allows you to see how your predictor's performance changes over time.
-// For more information, see Predictor Monitoring
-// (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html).
+// For more information, see Predictor Monitoring (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html)
+// .
 func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, optFns ...func(*Options)) (*CreateMonitorOutput, error) {
 	if params == nil {
 		params = &CreateMonitorInput{}
@@ -42,8 +42,7 @@ type CreateMonitorInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
 	// to apply to the monitor resource.
 	Tags []types.Tag
 

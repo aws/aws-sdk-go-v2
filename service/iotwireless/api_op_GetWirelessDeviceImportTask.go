@@ -58,8 +58,8 @@ type GetWirelessDeviceImportTaskOutput struct {
 	// The identifier of the import task for which information is retrieved.
 	Id *string
 
-	// The number of devices in the import task that are waiting for the control log to
-	// start processing.
+	// The number of devices in the import task that are waiting for the control log
+	// to start processing.
 	InitializedImportedDeviceCount *int64
 
 	// The number of devices in the import task that have been onboarded to the import

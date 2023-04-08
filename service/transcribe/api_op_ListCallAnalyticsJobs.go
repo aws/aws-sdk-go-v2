@@ -49,7 +49,7 @@ type ListCallAnalyticsJobsInput struct {
 	NextToken *string
 
 	// Returns only Call Analytics jobs with the specified status. Jobs are ordered by
-	// creation date, with the newest job first. If you don't include Status, all Call
+	// creation date, with the newest job first. If you don't include Status , all Call
 	// Analytics jobs are returned.
 	Status types.CallAnalyticsJobStatus
 

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specific version of an intent. To delete all versions of a intent, use
-// the DeleteIntent operation. This operation requires permissions for the
+// Deletes a specific version of an intent. To delete all versions of a intent,
+// use the DeleteIntent operation. This operation requires permissions for the
 // lex:DeleteIntentVersion action.
 func (c *Client) DeleteIntentVersion(ctx context.Context, params *DeleteIntentVersionInput, optFns ...func(*Options)) (*DeleteIntentVersionOutput, error) {
 	if params == nil {

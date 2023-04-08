@@ -41,7 +41,7 @@ type RollbackApplicationInput struct {
 	ApplicationName *string
 
 	// The current application version ID. You can retrieve the application version ID
-	// using DescribeApplication.
+	// using DescribeApplication .
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
@@ -51,8 +51,8 @@ type RollbackApplicationInput struct {
 
 type RollbackApplicationOutput struct {
 
-	// Describes the application, including the application Amazon Resource Name (ARN),
-	// status, latest version, and input and output configurations.
+	// Describes the application, including the application Amazon Resource Name
+	// (ARN), status, latest version, and input and output configurations.
 	//
 	// This member is required.
 	ApplicationDetail *types.ApplicationDetail

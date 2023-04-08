@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Resolver rules that were created using the current Amazon Web Services
-// account.
+// Lists the Resolver rules that were created using the current Amazon Web
+// Services account.
 func (c *Client) ListResolverRules(ctx context.Context, params *ListResolverRulesInput, optFns ...func(*Options)) (*ListResolverRulesOutput, error) {
 	if params == nil {
 		params = &ListResolverRulesInput{}
@@ -34,12 +34,12 @@ type ListResolverRulesInput struct {
 	// An optional specification to return a subset of Resolver rules, such as all
 	// Resolver rules that are associated with the same Resolver endpoint. If you
 	// submit a second or subsequent ListResolverRules request and specify the
-	// NextToken parameter, you must use the same values for Filters, if any, as in the
-	// previous request.
+	// NextToken parameter, you must use the same values for Filters , if any, as in
+	// the previous request.
 	Filters []types.Filter
 
 	// The maximum number of Resolver rules that you want to return in the response to
-	// a ListResolverRules request. If you don't specify a value for MaxResults,
+	// a ListResolverRules request. If you don't specify a value for MaxResults ,
 	// Resolver returns up to 100 Resolver rules.
 	MaxResults *int32
 
@@ -143,7 +143,7 @@ var _ ListResolverRulesAPIClient = (*Client)(nil)
 // ListResolverRulesPaginatorOptions is the paginator options for ListResolverRules
 type ListResolverRulesPaginatorOptions struct {
 	// The maximum number of Resolver rules that you want to return in the response to
-	// a ListResolverRules request. If you don't specify a value for MaxResults,
+	// a ListResolverRules request. If you don't specify a value for MaxResults ,
 	// Resolver returns up to 100 Resolver rules.
 	Limit int32
 

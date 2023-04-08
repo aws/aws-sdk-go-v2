@@ -6,7 +6,6 @@
 // You can use the Amazon Redshift Data API to run queries on Amazon Redshift
 // tables. You can run SQL statements, which are committed if the statement
 // succeeds. For more information about the Amazon Redshift Data API and CLI usage
-// examples, see Using the Amazon Redshift Data API
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the Amazon
-// Redshift Management Guide.
+// examples, see Using the Amazon Redshift Data API (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html)
+// in the Amazon Redshift Management Guide.
 package redshiftdata

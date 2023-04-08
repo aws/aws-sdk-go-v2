@@ -11,22 +11,19 @@ import (
 )
 
 // This operation deletes the specified domain. This action is permanent. For more
-// information, see Deleting a domain name registration
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-delete.html).
-// To transfer the domain registration to another registrar, use the transfer
+// information, see Deleting a domain name registration (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-delete.html)
+// . To transfer the domain registration to another registrar, use the transfer
 // process that’s provided by the registrar to which you want to transfer the
 // registration. Otherwise, the following apply:
 //
-// * You can’t get a refund for the
-// cost of a deleted domain registration.
+//   - You can’t get a refund for the cost of a deleted domain registration.
 //
-// * The registry for the top-level domain
-// might hold the domain name for a brief time before releasing it for other users
-// to register (varies by registry).
+//   - The registry for the top-level domain might hold the domain name for a
+//     brief time before releasing it for other users to register (varies by registry).
 //
-// * When the registration has been deleted,
-// we'll send you a confirmation to the registrant contact. The email will come
-// from noreply@domainnameverification.net or noreply@registrar.amazon.com.
+//   - When the registration has been deleted, we'll send you a confirmation to
+//     the registrant contact. The email will come from
+//     noreply@domainnameverification.net or noreply@registrar.amazon.com .
 func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, optFns ...func(*Options)) (*DeleteDomainOutput, error) {
 	if params == nil {
 		params = &DeleteDomainInput{}
@@ -55,8 +52,8 @@ type DeleteDomainInput struct {
 type DeleteDomainOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+	// .
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

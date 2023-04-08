@@ -36,10 +36,10 @@ type DescribeUpdateActionsInput struct {
 	// The Elasticache engine to which the update applies. Either Redis or Memcached
 	Engine *string
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response
@@ -69,10 +69,10 @@ type DescribeUpdateActionsInput struct {
 
 type DescribeUpdateActionsOutput struct {
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
 	// Returns a list of update actions

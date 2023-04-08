@@ -63,8 +63,8 @@ type DescribeLocationObjectStorageOutput struct {
 	// your object storage system.
 	ServerCertificate []byte
 
-	// The port that your object storage server accepts inbound network traffic on (for
-	// example, port 443).
+	// The port that your object storage server accepts inbound network traffic on
+	// (for example, port 443).
 	ServerPort *int32
 
 	// The protocol that your object storage system uses to communicate.

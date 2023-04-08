@@ -115,8 +115,8 @@ func (c *Client) addOperationListBrowserSettingsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListBrowserSettingsAPIClient is a client that implements the ListBrowserSettings
-// operation.
+// ListBrowserSettingsAPIClient is a client that implements the
+// ListBrowserSettings operation.
 type ListBrowserSettingsAPIClient interface {
 	ListBrowserSettings(context.Context, *ListBrowserSettingsInput, ...func(*Options)) (*ListBrowserSettingsOutput, error)
 }

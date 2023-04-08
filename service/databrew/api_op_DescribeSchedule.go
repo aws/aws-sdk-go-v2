@@ -51,9 +51,8 @@ type DescribeScheduleOutput struct {
 	CreatedBy *string
 
 	// The date or dates and time or times when the jobs are to be run for the
-	// schedule. For more information, see Cron expressions
-	// (https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html) in the Glue
-	// DataBrew Developer Guide.
+	// schedule. For more information, see Cron expressions (https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html)
+	// in the Glue DataBrew Developer Guide.
 	CronExpression *string
 
 	// The name or names of one or more jobs to be run by using the schedule.

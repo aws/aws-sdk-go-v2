@@ -12,8 +12,7 @@ import (
 
 // Cancels an instance refresh or rollback that is in progress. If an instance
 // refresh or rollback is not in progress, an ActiveInstanceRefreshNotFound error
-// occurs. This operation is part of the instance refresh feature
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
+// occurs. This operation is part of the instance refresh feature (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
 // in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
 // Scaling group after you make configuration changes. When you cancel an instance
 // refresh, this does not roll back any changes that it made. Use the

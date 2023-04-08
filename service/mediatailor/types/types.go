@@ -11,14 +11,14 @@ import (
 type AccessConfiguration struct {
 
 	// The type of authentication used to access content from
-	// HttpConfiguration::BaseUrl on your source location. Accepted value: S3_SIGV4.
+	// HttpConfiguration::BaseUrl on your source location. Accepted value: S3_SIGV4 .
 	// S3_SIGV4 - AWS Signature Version 4 authentication for Amazon S3 hosted
 	// virtual-style access. If your source location base URL is an Amazon S3 bucket,
 	// MediaTailor can use AWS Signature Version 4 (SigV4) authentication to access the
 	// bucket where your source content is stored. Your MediaTailor source location
 	// baseURL must follow the S3 virtual hosted-style request URL format. For example,
 	// https://bucket-name.s3.Region.amazonaws.com/key-name. Before you can use
-	// S3_SIGV4, you must meet these requirements: • You must allow MediaTailor to
+	// S3_SIGV4 , you must meet these requirements: • You must allow MediaTailor to
 	// access your S3 bucket by granting mediatailor.amazonaws.com principal access in
 	// IAM. For information about configuring access in IAM, see Access management in
 	// the IAM User Guide. • The mediatailor.amazonaws.com service principal must have
@@ -37,19 +37,19 @@ type AccessConfiguration struct {
 // Ad break configuration parameters.
 type AdBreak struct {
 
-	// The SCTE-35 ad insertion type. Accepted value: SPLICE_INSERT, TIME_SIGNAL.
+	// The SCTE-35 ad insertion type. Accepted value: SPLICE_INSERT , TIME_SIGNAL .
 	MessageType MessageType
 
-	// How long (in milliseconds) after the beginning of the program that an ad starts.
-	// This value must fall within 100ms of a segment boundary, otherwise the ad break
-	// will be skipped.
+	// How long (in milliseconds) after the beginning of the program that an ad
+	// starts. This value must fall within 100ms of a segment boundary, otherwise the
+	// ad break will be skipped.
 	OffsetMillis int64
 
 	// Ad break slate configuration.
 	Slate *SlateSource
 
 	// This defines the SCTE-35 splice_insert() message inserted around the ad. For
-	// information about using splice_insert(), see the SCTE-35 specficiaiton, section
+	// information about using splice_insert() , see the SCTE-35 specficiaiton, section
 	// 9.7.3.1.
 	SpliceInsertMessage *SpliceInsertMessage
 
@@ -63,11 +63,11 @@ type AdBreak struct {
 	noSmithyDocumentSerde
 }
 
-// For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN,
-// EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin manifest
-// to the MediaTailor personalized manifest. No logic is applied to these ad
-// markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled
-// for that ad break, MediaTailor will not set the value to 0.
+// For HLS, when set to true , MediaTailor passes through EXT-X-CUE-IN ,
+// EXT-X-CUE-OUT , and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin
+// manifest to the MediaTailor personalized manifest. No logic is applied to these
+// ad markers. For example, if EXT-X-CUE-OUT has a value of 60 , but no ads are
+// filled for that ad break, MediaTailor will not set the value to 0 .
 type AdMarkerPassthrough struct {
 
 	// Enables ad marker passthrough for your configuration.
@@ -79,7 +79,7 @@ type AdMarkerPassthrough struct {
 // Alert configuration parameters.
 type Alert struct {
 
-	// The code for the alert. For example, NOT_PROCESSED.
+	// The code for the alert. For example, NOT_PROCESSED .
 	//
 	// This member is required.
 	AlertCode *string
@@ -111,31 +111,30 @@ type Alert struct {
 // MediaTailor only places (consumes) prefetched ads if the ad break meets the
 // criteria defined by the dynamic variables. This gives you granular control over
 // which ad break to place the prefetched ads into. As an example, let's say that
-// you set DynamicVariable to scte.event_id and Operator to EQUALS, and your
+// you set DynamicVariable to scte.event_id and Operator to EQUALS , and your
 // playback configuration has an ADS URL of
-// https://my.ads.server.com/path?&podId=[scte.avail_num]&event=[scte.event_id]&duration=[session.avail_duration_secs].
-// And the prefetch request to the ADS contains these values
-// https://my.ads.server.com/path?&podId=3&event=my-awesome-event&duration=30.
+// https://my.ads.server.com/path?&podId=[scte.avail_num]&event=[scte.event_id]&duration=[session.avail_duration_secs]
+// . And the prefetch request to the ADS contains these values
+// https://my.ads.server.com/path?&podId=3&event=my-awesome-event&duration=30 .
 // MediaTailor will only insert the prefetched ads into the ad break if has a SCTE
-// marker with an event id of my-awesome-event, since it must match the event id
+// marker with an event id of my-awesome-event , since it must match the event id
 // that MediaTailor uses to query the ADS. You can specify up to five
-// AvailMatchingCriteria. If you specify multiple AvailMatchingCriteria,
-// MediaTailor combines them to match using a logical AND. You can model logical OR
-// combinations by creating multiple prefetch schedules.
+// AvailMatchingCriteria . If you specify multiple AvailMatchingCriteria ,
+// MediaTailor combines them to match using a logical AND . You can model logical
+// OR combinations by creating multiple prefetch schedules.
 type AvailMatchingCriteria struct {
 
 	// The dynamic variable(s) that MediaTailor should use as avail matching criteria.
 	// MediaTailor only places the prefetched ads into the avail if the avail matches
 	// the criteria defined by the dynamic variable. For information about dynamic
-	// variables, see Using dynamic ad variables
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/variables.html) in the
-	// MediaTailor User Guide. You can include up to 100 dynamic variables.
+	// variables, see Using dynamic ad variables (https://docs.aws.amazon.com/mediatailor/latest/ug/variables.html)
+	// in the MediaTailor User Guide. You can include up to 100 dynamic variables.
 	//
 	// This member is required.
 	DynamicVariable *string
 
-	// For the DynamicVariable specified in AvailMatchingCriteria, the Operator that is
-	// used for the comparison.
+	// For the DynamicVariable specified in AvailMatchingCriteria , the Operator that
+	// is used for the comparison.
 	//
 	// This member is required.
 	Operator Operator
@@ -144,12 +143,12 @@ type AvailMatchingCriteria struct {
 }
 
 // The configuration for avail suppression, also known as ad suppression. For more
-// information about ad suppression, see Ad Suppression
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
+// information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
+// .
 type AvailSuppression struct {
 
 	// Sets the ad suppression mode. By default, ad suppression is off and all ad
-	// breaks are filled with ads or slate. When Mode is set to BEHIND_LIVE_EDGE, ad
+	// breaks are filled with ads or slate. When Mode is set to BEHIND_LIVE_EDGE , ad
 	// suppression is active and MediaTailor won't fill ad breaks on or behind the ad
 	// suppression Value time in the manifest lookback window.
 	Mode Mode
@@ -169,7 +168,7 @@ type AvailSuppression struct {
 
 // The configuration for bumpers. Bumpers are short audio or video clips that play
 // at the start or before the end of an ad break. To learn more about bumpers, see
-// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html).
+// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
 type Bumper struct {
 
 	// The URL for the end bumper asset.
@@ -189,14 +188,14 @@ type CdnConfiguration struct {
 	// AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as
 	// its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN
 	// for the origin ads.mediatailor.<region>.amazonaws.com. Then specify the rule's
-	// name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a
+	// name in this AdSegmentUrlPrefix . When AWS Elemental MediaTailor serves a
 	// manifest, it reports your CDN as the source for ad segments.
 	AdSegmentUrlPrefix *string
 
 	// A content delivery network (CDN) to cache content segments, so that content
 	// requests don’t always have to go to the origin server. First, create a rule in
 	// your CDN for the content segment origin server. Then specify the rule's name in
-	// this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest,
+	// this ContentSegmentUrlPrefix . When AWS Elemental MediaTailor serves a manifest,
 	// it reports your CDN as the source for content segments.
 	ContentSegmentUrlPrefix *string
 
@@ -204,8 +203,7 @@ type CdnConfiguration struct {
 }
 
 // The configuration parameters for a channel. For information about MediaTailor
-// channels, see Working with channels
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
+// channels, see Working with channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
 // in the MediaTailor User Guide.
 type Channel struct {
 
@@ -250,9 +248,10 @@ type Channel struct {
 	// The timestamp of when the channel was created.
 	CreationTime *time.Time
 
-	// The slate used to fill gaps between programs in the schedule. You must configure
-	// filler slate if your channel uses the LINEARPlaybackMode. MediaTailor doesn't
-	// support filler slate for channels using the LOOPPlaybackMode.
+	// The slate used to fill gaps between programs in the schedule. You must
+	// configure filler slate if your channel uses the LINEAR PlaybackMode .
+	// MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode
+	// .
 	FillerSlate *SlateSource
 
 	// The timestamp of when the channel was last modified.
@@ -261,7 +260,7 @@ type Channel struct {
 	// The tags to assign to the channel. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
 	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -291,15 +290,15 @@ type DashConfiguration struct {
 	// update requests, to be used by players that don't support sticky redirects.
 	// Disable this if you have CDN routing rules set up for accessing MediaTailor
 	// manifests, and you are either using client-side reporting or your players
-	// support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The
+	// support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT . The
 	// EMT_DEFAULT setting enables the inclusion of the tag and is the default value.
 	MpdLocation *string
 
 	// The setting that controls whether MediaTailor handles manifests from the origin
 	// server as multi-period manifests or single-period manifests. If your origin
-	// server produces single-period manifests, set this to SINGLE_PERIOD. The default
-	// setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it
-	// to MULTI_PERIOD.
+	// server produces single-period manifests, set this to SINGLE_PERIOD . The default
+	// setting is MULTI_PERIOD . For multi-period manifests, omit this setting or set
+	// it to MULTI_PERIOD .
 	OriginManifestType OriginManifestType
 
 	noSmithyDocumentSerde
@@ -313,15 +312,15 @@ type DashConfigurationForPut struct {
 	// update requests, to be used by players that don't support sticky redirects.
 	// Disable this if you have CDN routing rules set up for accessing MediaTailor
 	// manifests, and you are either using client-side reporting or your players
-	// support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The
+	// support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT . The
 	// EMT_DEFAULT setting enables the inclusion of the tag and is the default value.
 	MpdLocation *string
 
 	// The setting that controls whether MediaTailor handles manifests from the origin
 	// server as multi-period manifests or single-period manifests. If your origin
-	// server produces single-period manifests, set this to SINGLE_PERIOD. The default
-	// setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it
-	// to MULTI_PERIOD.
+	// server produces single-period manifests, set this to SINGLE_PERIOD . The default
+	// setting is MULTI_PERIOD . For multi-period manifests, omit this setting or set
+	// it to MULTI_PERIOD .
 	OriginManifestType OriginManifestType
 
 	noSmithyDocumentSerde
@@ -343,8 +342,8 @@ type DashPlaylistSettings struct {
 	// seconds.
 	MinUpdatePeriodSeconds int32
 
-	// Amount of time (in seconds) that the player should be from the live point at the
-	// end of the manifest. Minimum value: 2 seconds. Maximum value: 60 seconds.
+	// Amount of time (in seconds) that the player should be from the live point at
+	// the end of the manifest. Minimum value: 2 seconds. Maximum value: 60 seconds.
 	SuggestedPresentationDelaySeconds int32
 
 	noSmithyDocumentSerde
@@ -358,8 +357,8 @@ type DashPlaylistSettings struct {
 // segment delivery server, then the source location server is used.
 type DefaultSegmentDeliveryConfiguration struct {
 
-	// The hostname of the server that will be used to serve segments. This string must
-	// include the protocol, such as https://.
+	// The hostname of the server that will be used to serve segments. This string
+	// must include the protocol, such as https://.
 	BaseUrl *string
 
 	noSmithyDocumentSerde
@@ -407,13 +406,13 @@ type HttpPackageConfiguration struct {
 	Path *string
 
 	// The name of the source group. This has to match one of the
-	// Channel::Outputs::SourceGroup.
+	// Channel::Outputs::SourceGroup .
 	//
 	// This member is required.
 	SourceGroup *string
 
 	// The streaming protocol for this package configuration. Supported values are HLS
-	// and DASH.
+	// and DASH .
 	//
 	// This member is required.
 	Type Type
@@ -471,7 +470,7 @@ type LiveSource struct {
 	// The tags assigned to the live source. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
 	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -482,12 +481,11 @@ type LogConfiguration struct {
 
 	// The percentage of session logs that MediaTailor sends to your Cloudwatch Logs
 	// account. For example, if your playback configuration has 1000 sessions and
-	// percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to
+	// percentEnabled is set to 60 , MediaTailor sends logs for 600 of the sessions to
 	// CloudWatch Logs. MediaTailor decides at random which of the playback
 	// configuration sessions to send logs for. If you want to view logs for a specific
-	// session, you can use the debug log mode
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html). Valid
-	// values: 0 - 100
+	// session, you can use the debug log mode (https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html)
+	// . Valid values: 0 - 100
 	//
 	// This member is required.
 	PercentEnabled int32
@@ -508,19 +506,19 @@ type LogConfigurationForChannel struct {
 // enable customization of the personalized manifests created by MediaTailor.
 type ManifestProcessingRules struct {
 
-	// For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN,
-	// EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin manifest
-	// to the MediaTailor personalized manifest. No logic is applied to these ad
-	// markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled
-	// for that ad break, MediaTailor will not set the value to 0.
+	// For HLS, when set to true , MediaTailor passes through EXT-X-CUE-IN ,
+	// EXT-X-CUE-OUT , and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin
+	// manifest to the MediaTailor personalized manifest. No logic is applied to these
+	// ad markers. For example, if EXT-X-CUE-OUT has a value of 60 , but no ads are
+	// filled for that ad break, MediaTailor will not set the value to 0 .
 	AdMarkerPassthrough *AdMarkerPassthrough
 
 	noSmithyDocumentSerde
 }
 
 // A playback configuration. For information about MediaTailor configurations, see
-// Working with configurations in AWS Elemental MediaTailor
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html).
+// Working with configurations in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html)
+// .
 type PlaybackConfiguration struct {
 
 	// The URL for the ad decision server (ADS). This includes the specification of
@@ -531,13 +529,13 @@ type PlaybackConfiguration struct {
 	AdDecisionServerUrl *string
 
 	// The configuration for avail suppression, also known as ad suppression. For more
-	// information about ad suppression, see Ad Suppression
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
+	// information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
+	// .
 	AvailSuppression *AvailSuppression
 
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
 	// at the start or before the end of an ad break. To learn more about bumpers, see
-	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html).
+	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
 	Bumper *Bumper
 
 	// The configuration for using a content delivery network (CDN), like Amazon
@@ -545,8 +543,8 @@ type PlaybackConfiguration struct {
 	CdnConfiguration *CdnConfiguration
 
 	// The player parameters and aliases used as dynamic variables during session
-	// initialization. For more information, see Domain Variables
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html).
+	// initialization. For more information, see Domain Variables (https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html)
+	// .
 	ConfigurationAliases map[string]map[string]string
 
 	// The configuration for a DASH source.
@@ -574,8 +572,8 @@ type PlaybackConfiguration struct {
 	// underlying content is shown. This feature applies to ad replacement in live and
 	// VOD streams, rather than ad insertion, because it relies on an underlying
 	// content stream. For more information about ad break behavior, including ad
-	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
+	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
+	// .
 	PersonalizationThresholdSeconds int32
 
 	// The Amazon Resource Name (ARN) for the playback configuration.
@@ -600,8 +598,8 @@ type PlaybackConfiguration struct {
 	// The tags to assign to the playback configuration. Tags are key-value pairs that
 	// you can associate with Amazon resources to help with organization, access
 	// control, and cost tracking. For more information, see Tagging AWS Elemental
-	// MediaTailor Resources
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// MediaTailor Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html)
+	// .
 	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom
@@ -624,27 +622,27 @@ type PrefetchConsumption struct {
 	// The time when MediaTailor no longer considers the prefetched ads for use in an
 	// ad break. MediaTailor automatically deletes prefetch schedules no less than
 	// seven days after the end time. If you'd like to manually delete the prefetch
-	// schedule, you can call DeletePrefetchSchedule.
+	// schedule, you can call DeletePrefetchSchedule .
 	//
 	// This member is required.
 	EndTime *time.Time
 
 	// If you only want MediaTailor to insert prefetched ads into avails (ad breaks)
-	// that match specific dynamic variables, such as scte.event_id, set the avail
+	// that match specific dynamic variables, such as scte.event_id , set the avail
 	// matching criteria.
 	AvailMatchingCriteria []AvailMatchingCriteria
 
-	// The time when prefetched ads are considered for use in an ad break. If you don't
-	// specify StartTime, the prefetched ads are available after MediaTailor retrives
-	// them from the ad decision server.
+	// The time when prefetched ads are considered for use in an ad break. If you
+	// don't specify StartTime , the prefetched ads are available after MediaTailor
+	// retrives them from the ad decision server.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains settings governing when MediaTailor prefetches ads,
-// and which dynamic variables that MediaTailor includes in the request to the ad
-// decision server.
+// A complex type that contains settings governing when MediaTailor prefetches
+// ads, and which dynamic variables that MediaTailor includes in the request to the
+// ad decision server.
 type PrefetchRetrieval struct {
 
 	// The time when prefetch retrieval ends for the ad break. Prefetching will be
@@ -653,10 +651,9 @@ type PrefetchRetrieval struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The dynamic variables to use for substitution during prefetch requests to the ad
-	// decision server (ADS). You initially configure dynamic variables
-	// (https://docs.aws.amazon.com/mediatailor/latest/ug/variables.html) for the ADS
-	// URL when you set up your playback configuration. When you specify
+	// The dynamic variables to use for substitution during prefetch requests to the
+	// ad decision server (ADS). You initially configure dynamic variables (https://docs.aws.amazon.com/mediatailor/latest/ug/variables.html)
+	// for the ADS URL when you set up your playback configuration. When you specify
 	// DynamicVariables for prefetch retrieval, MediaTailor includes the dynamic
 	// variables in the request to the ADS.
 	DynamicVariables map[string]string
@@ -672,9 +669,8 @@ type PrefetchRetrieval struct {
 
 // A prefetch schedule allows you to tell MediaTailor to fetch and prepare certain
 // ads before an ad break happens. For more information about ad prefetching, see
-// Using ad prefetching
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html) in the
-// MediaTailor User Guide.
+// Using ad prefetching (https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html)
+// in the MediaTailor User Guide.
 type PrefetchSchedule struct {
 
 	// The Amazon Resource Name (ARN) of the prefetch schedule.
@@ -717,13 +713,13 @@ type PrefetchSchedule struct {
 // The output configuration for this channel.
 type RequestOutputItem struct {
 
-	// The name of the manifest for the channel. The name appears in the PlaybackUrl.
+	// The name of the manifest for the channel. The name appears in the PlaybackUrl .
 	//
 	// This member is required.
 	ManifestName *string
 
-	// A string used to match which HttpPackageConfiguration is used for each
-	// VodSource.
+	// A string used to match which HttpPackageConfiguration is used for each VodSource
+	// .
 	//
 	// This member is required.
 	SourceGroup *string
@@ -843,10 +839,10 @@ type ScheduleEntry struct {
 	noSmithyDocumentSerde
 }
 
-// AWS Secrets Manager access token configuration parameters. For information about
-// Secrets Manager access token authentication, see Working with AWS Secrets
-// Manager access token authentication
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html).
+// AWS Secrets Manager access token configuration parameters. For information
+// about Secrets Manager access token authentication, see Working with AWS Secrets
+// Manager access token authentication (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html)
+// .
 type SecretsManagerAccessTokenConfiguration struct {
 
 	// The name of the HTTP header used to supply the access token in requests to the
@@ -857,8 +853,7 @@ type SecretsManagerAccessTokenConfiguration struct {
 	// the access token.
 	SecretArn *string
 
-	// The AWS Secrets Manager SecretString
-	// (https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html#SecretsManager-CreateSecret-request-SecretString.html)
+	// The AWS Secrets Manager SecretString (https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html#SecretsManager-CreateSecret-request-SecretString.html)
 	// key associated with the access token. MediaTailor uses the key to look up
 	// SecretString key and value pair containing the access token.
 	SecretStringKey *string
@@ -875,9 +870,9 @@ type SecretsManagerAccessTokenConfiguration struct {
 // information.
 type SegmentationDescriptor struct {
 
-	// The segment number to assign to the segmentation_descriptor.segment_num message,
-	// as defined in section 10.3.3.1 of the 2022 SCTE-35 specification Values must be
-	// between 0 and 256, inclusive. The default value is 0.
+	// The segment number to assign to the segmentation_descriptor.segment_num
+	// message, as defined in section 10.3.3.1 of the 2022 SCTE-35 specification Values
+	// must be between 0 and 256, inclusive. The default value is 0.
 	SegmentNum *int32
 
 	// The Event Identifier to assign to the
@@ -928,8 +923,8 @@ type SegmentDeliveryConfiguration struct {
 	// The base URL of the host or path of the segment delivery server that you're
 	// using to serve segments. This is typically a content delivery network (CDN). The
 	// URL can be absolute or relative. To use an absolute URL include the protocol,
-	// such as https://example.com/some/path. To use a relative URL specify the
-	// relative path, such as /some/path*.
+	// such as https://example.com/some/path . To use a relative URL specify the
+	// relative path, such as /some/path* .
 	BaseUrl *string
 
 	// A unique identifier used to distinguish between multiple segment delivery
@@ -953,8 +948,7 @@ type SlateSource struct {
 }
 
 // A source location is a container for sources. For more information about source
-// locations, see Working with source locations
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html)
+// locations, see Working with source locations (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html)
 // in the MediaTailor User Guide.
 type SourceLocation struct {
 
@@ -991,7 +985,7 @@ type SourceLocation struct {
 	// The tags assigned to the source location. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
 	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1000,23 +994,23 @@ type SourceLocation struct {
 // Splice insert message configuration.
 type SpliceInsertMessage struct {
 
-	// This is written to splice_insert.avail_num, as defined in section 9.7.3.1 of the
-	// SCTE-35 specification. The default value is 0. Values must be between 0 and 256,
-	// inclusive.
+	// This is written to splice_insert.avail_num , as defined in section 9.7.3.1 of
+	// the SCTE-35 specification. The default value is 0 . Values must be between 0
+	// and 256 , inclusive.
 	AvailNum int32
 
-	// This is written to splice_insert.avails_expected, as defined in section 9.7.3.1
-	// of the SCTE-35 specification. The default value is 0. Values must be between 0
-	// and 256, inclusive.
+	// This is written to splice_insert.avails_expected , as defined in section 9.7.3.1
+	// of the SCTE-35 specification. The default value is 0 . Values must be between 0
+	// and 256 , inclusive.
 	AvailsExpected int32
 
-	// This is written to splice_insert.splice_event_id, as defined in section 9.7.3.1
-	// of the SCTE-35 specification. The default value is 1.
+	// This is written to splice_insert.splice_event_id , as defined in section 9.7.3.1
+	// of the SCTE-35 specification. The default value is 1 .
 	SpliceEventId int32
 
-	// This is written to splice_insert.unique_program_id, as defined in section
-	// 9.7.3.1 of the SCTE-35 specification. The default value is 0. Values must be
-	// between 0 and 256, inclusive.
+	// This is written to splice_insert.unique_program_id , as defined in section
+	// 9.7.3.1 of the SCTE-35 specification. The default value is 0 . Values must be
+	// between 0 and 256 , inclusive.
 	UniqueProgramId int32
 
 	noSmithyDocumentSerde
@@ -1024,11 +1018,12 @@ type SpliceInsertMessage struct {
 
 // The SCTE-35 time_signal message can be sent with one or more
 // segmentation_descriptor messages. A time_signal message can be sent only if a
-// single segmentation_descriptor message is sent. The time_signal message contains
-// only the splice_time field which is constructed using a given presentation
-// timestamp. When sending a time_signal message, the splice_command_type field in
-// the splice_info_section message is set to 6 (0x06). See the time_signal() table
-// of the 2022 SCTE-35 specification for more information.
+// single segmentation_descriptor message is sent. The time_signal message
+// contains only the splice_time field which is constructed using a given
+// presentation timestamp. When sending a time_signal message, the
+// splice_command_type field in the splice_info_section message is set to 6
+// (0x06). See the time_signal() table of the 2022 SCTE-35 specification for more
+// information.
 type TimeSignalMessage struct {
 
 	// The configurations for the SCTE-35 segmentation_descriptor message(s) sent with
@@ -1042,20 +1037,20 @@ type TimeSignalMessage struct {
 type Transition struct {
 
 	// The position where this program will be inserted relative to the
-	// RelativePosition.
+	// RelativePosition .
 	//
 	// This member is required.
 	RelativePosition RelativePosition
 
 	// Defines when the program plays in the schedule. You can set the value to
-	// ABSOLUTE or RELATIVE. ABSOLUTE - The program plays at a specific wall clock
-	// time. This setting can only be used for channels using the LINEARPlaybackMode.
+	// ABSOLUTE or RELATIVE . ABSOLUTE - The program plays at a specific wall clock
+	// time. This setting can only be used for channels using the LINEAR PlaybackMode .
 	// Note the following considerations when using ABSOLUTE transitions: If the
 	// preceding program in the schedule has a duration that extends past the wall
 	// clock time, MediaTailor truncates the preceding program on a common segment
 	// boundary. If there are gaps in playback, MediaTailor plays the FillerSlate you
 	// configured for your linear channel. RELATIVE - The program is inserted into the
-	// schedule either before or after a program that you specify via RelativePosition.
+	// schedule either before or after a program that you specify via RelativePosition .
 	//
 	// This member is required.
 	Type *string
@@ -1064,7 +1059,7 @@ type Transition struct {
 	DurationMillis int64
 
 	// The name of the program that this program will be inserted next to, as defined
-	// by RelativePosition.
+	// by RelativePosition .
 	RelativeProgram *string
 
 	// The date and time that the program is scheduled to start, in epoch milliseconds.
@@ -1129,7 +1124,7 @@ type VodSource struct {
 	// The tags assigned to the VOD source. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
 	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -28,8 +28,8 @@ func (c *Client) GetCloudFrontOriginAccessIdentityConfig(ctx context.Context, pa
 }
 
 // The origin access identity's configuration information. For more information,
-// see CloudFrontOriginAccessIdentityConfig
-// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CloudFrontOriginAccessIdentityConfig.html).
+// see CloudFrontOriginAccessIdentityConfig (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CloudFrontOriginAccessIdentityConfig.html)
+// .
 type GetCloudFrontOriginAccessIdentityConfigInput struct {
 
 	// The identity's ID.
@@ -46,7 +46,7 @@ type GetCloudFrontOriginAccessIdentityConfigOutput struct {
 	// The origin access identity's configuration information.
 	CloudFrontOriginAccessIdentityConfig *types.CloudFrontOriginAccessIdentityConfig
 
-	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
+	// The current version of the configuration. For example: E2QWRUHAPOMQZL .
 	ETag *string
 
 	// Metadata pertaining to the operation's result.

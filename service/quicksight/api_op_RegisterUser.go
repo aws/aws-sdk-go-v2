@@ -11,16 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon QuickSight user whose identity is associated with the Identity
-// and Access Management (IAM) identity or role specified in the request. When you
-// register a new user from the Amazon QuickSight API, Amazon QuickSight generates
-// a registration URL. The user accesses this registration URL to create their
-// account. Amazon QuickSight doesn't send a registration email to users who are
-// registered from the Amazon QuickSight API. If you want new users to receive a
-// registration email, then add those users in the Amazon QuickSight console. For
+// Creates an Amazon QuickSight user whose identity is associated with the
+// Identity and Access Management (IAM) identity or role specified in the request.
+// When you register a new user from the Amazon QuickSight API, Amazon QuickSight
+// generates a registration URL. The user accesses this registration URL to create
+// their account. Amazon QuickSight doesn't send a registration email to users who
+// are registered from the Amazon QuickSight API. If you want new users to receive
+// a registration email, then add those users in the Amazon QuickSight console. For
 // more information on registering a new user in the Amazon QuickSight console, see
-// Inviting users to access Amazon QuickSight
-// (https://docs.aws.amazon.com/quicksight/latest/user/managing-users.html#inviting-users).
+// Inviting users to access Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/managing-users.html#inviting-users)
+// .
 func (c *Client) RegisterUser(ctx context.Context, params *RegisterUserInput, optFns ...func(*Options)) (*RegisterUserOutput, error) {
 	if params == nil {
 		params = &RegisterUserInput{}
@@ -52,37 +52,27 @@ type RegisterUserInput struct {
 
 	// Amazon QuickSight supports several ways of managing the identity of users. This
 	// parameter accepts two values:
-	//
-	// * IAM: A user whose identity maps to an existing
-	// IAM user or role.
-	//
-	// * QUICKSIGHT: A user whose identity is owned and managed
-	// internally by Amazon QuickSight.
+	//   - IAM : A user whose identity maps to an existing IAM user or role.
+	//   - QUICKSIGHT : A user whose identity is owned and managed internally by Amazon
+	//   QuickSight.
 	//
 	// This member is required.
 	IdentityType types.IdentityType
 
-	// The namespace. Currently, you should set this to default.
+	// The namespace. Currently, you should set this to default .
 	//
 	// This member is required.
 	Namespace *string
 
 	// The Amazon QuickSight role for the user. The user role can be one of the
 	// following:
-	//
-	// * READER: A user who has read-only access to dashboards.
-	//
-	// * AUTHOR:
-	// A user who can create data sources, datasets, analyses, and dashboards.
-	//
-	// *
-	// ADMIN: A user who is an author, who can also manage Amazon QuickSight
-	// settings.
-	//
-	// * RESTRICTED_READER: This role isn't currently available for use.
-	//
-	// *
-	// RESTRICTED_AUTHOR: This role isn't currently available for use.
+	//   - READER : A user who has read-only access to dashboards.
+	//   - AUTHOR : A user who can create data sources, datasets, analyses, and
+	//   dashboards.
+	//   - ADMIN : A user who is an author, who can also manage Amazon QuickSight
+	//   settings.
+	//   - RESTRICTED_READER : This role isn't currently available for use.
+	//   - RESTRICTED_AUTHOR : This role isn't currently available for use.
 	//
 	// This member is required.
 	UserRole types.UserRole
@@ -90,26 +80,17 @@ type RegisterUserInput struct {
 	// The URL of the custom OpenID Connect (OIDC) provider that provides identity to
 	// let a user federate into Amazon QuickSight with an associated Identity and
 	// Access Management(IAM) role. This parameter should only be used when
-	// ExternalLoginFederationProviderType parameter is set to CUSTOM_OIDC.
+	// ExternalLoginFederationProviderType parameter is set to CUSTOM_OIDC .
 	CustomFederationProviderUrl *string
 
 	// (Enterprise edition only) The name of the custom permissions profile that you
 	// want to assign to this user. Customized permissions allows you to control a
 	// user's access by restricting access the following operations:
-	//
-	// * Create and
-	// update data sources
-	//
-	// * Create and update datasets
-	//
-	// * Create and update email
-	// reports
-	//
-	// * Subscribe to email reports
-	//
-	// To add custom permissions to an existing
-	// user, use UpdateUser
-	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html)
+	//   - Create and update data sources
+	//   - Create and update datasets
+	//   - Create and update email reports
+	//   - Subscribe to email reports
+	// To add custom permissions to an existing user, use UpdateUser (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html)
 	// instead. A set of custom permissions includes any combination of these
 	// restrictions. Currently, you need to create the profile names for custom
 	// permission sets by using the Amazon QuickSight console. Then, you use the
@@ -125,15 +106,13 @@ type RegisterUserInput struct {
 	// user federate into Amazon QuickSight with an associated Identity and Access
 	// Management(IAM) role. The type of supported external login provider can be one
 	// of the following.
-	//
-	// * COGNITO: Amazon Cognito. The provider URL is
-	// cognito-identity.amazonaws.com. When choosing the COGNITO provider type, don’t
-	// use the "CustomFederationProviderUrl" parameter which is only needed when the
-	// external provider is custom.
-	//
-	// * CUSTOM_OIDC: Custom OpenID Connect (OIDC)
-	// provider. When choosing CUSTOM_OIDC type, use the CustomFederationProviderUrl
-	// parameter to provide the custom OIDC provider URL.
+	//   - COGNITO : Amazon Cognito. The provider URL is
+	//   cognito-identity.amazonaws.com. When choosing the COGNITO provider type, don’t
+	//   use the "CustomFederationProviderUrl" parameter which is only needed when the
+	//   external provider is custom.
+	//   - CUSTOM_OIDC : Custom OpenID Connect (OIDC) provider. When choosing
+	//   CUSTOM_OIDC type, use the CustomFederationProviderUrl parameter to provide the
+	//   custom OIDC provider URL.
 	ExternalLoginFederationProviderType *string
 
 	// The identity ID for a user in the external login provider.
@@ -142,14 +121,13 @@ type RegisterUserInput struct {
 	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.
 	IamArn *string
 
-	// You need to use this parameter only when you register one or more users using an
-	// assumed IAM role. You don't need to provide the session name for other
+	// You need to use this parameter only when you register one or more users using
+	// an assumed IAM role. You don't need to provide the session name for other
 	// scenarios, for example when you are registering an IAM user or an Amazon
 	// QuickSight user. You can register multiple users using the same IAM role if each
 	// user has a different session name. For more information on assuming IAM roles,
-	// see assume-role
-	// (https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html) in the
-	// CLI Reference.
+	// see assume-role (https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html)
+	// in the CLI Reference.
 	SessionName *string
 
 	// The Amazon QuickSight user name that you want to create for the user you are
@@ -170,8 +148,8 @@ type RegisterUserOutput struct {
 	// The user's user name.
 	User *types.User
 
-	// The URL the user visits to complete registration and provide a password. This is
-	// returned only for users with an identity type of QUICKSIGHT.
+	// The URL the user visits to complete registration and provide a password. This
+	// is returned only for users with an identity type of QUICKSIGHT .
 	UserInvitationUrl *string
 
 	// Metadata pertaining to the operation's result.

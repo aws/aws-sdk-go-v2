@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation updates the contact information for a particular domain. You must
-// specify information for at least one contact: registrant, administrator, or
+// This operation updates the contact information for a particular domain. You
+// must specify information for at least one contact: registrant, administrator, or
 // technical. If the update is successful, this method returns an operation ID that
 // you can use to track the progress and completion of the operation. If the
 // request is not completed successfully, the domain registrant will be notified by
@@ -59,8 +59,8 @@ type UpdateDomainContactInput struct {
 type UpdateDomainContactOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+	// .
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

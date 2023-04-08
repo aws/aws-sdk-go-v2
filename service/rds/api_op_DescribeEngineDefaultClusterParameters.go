@@ -12,9 +12,8 @@ import (
 )
 
 // Returns the default engine and system parameter information for the cluster
-// database engine. For more information on Amazon Aurora, see  What is Amazon
-// Aurora?
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// database engine. For more information on Amazon Aurora, see What is Amazon
+// Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.
 func (c *Client) DescribeEngineDefaultClusterParameters(ctx context.Context, params *DescribeEngineDefaultClusterParametersInput, optFns ...func(*Options)) (*DescribeEngineDefaultClusterParametersOutput, error) {
 	if params == nil {
@@ -45,7 +44,7 @@ type DescribeEngineDefaultClusterParametersInput struct {
 	// An optional pagination token provided by a previous
 	// DescribeEngineDefaultClusterParameters request. If this parameter is specified,
 	// the response includes only records beyond the marker, up to the value specified
-	// by MaxRecords.
+	// by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist

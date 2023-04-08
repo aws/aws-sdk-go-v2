@@ -19,12 +19,10 @@ import (
 // addresses. You can add protection to only a single resource with each
 // CreateProtection request. You can add protection to multiple resources at once
 // through the Shield Advanced console at
-// https://console.aws.amazon.com/wafv2/shieldv2#/
-// (https://console.aws.amazon.com/wafv2/shieldv2#/). For more information see
-// Getting Started with Shield Advanced
-// (https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html)
-// and Adding Shield Advanced protection to Amazon Web Services resources
-// (https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html).
+// https://console.aws.amazon.com/wafv2/shieldv2#/ (https://console.aws.amazon.com/wafv2/shieldv2#/)
+// . For more information see Getting Started with Shield Advanced (https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html)
+// and Adding Shield Advanced protection to Amazon Web Services resources (https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html)
+// .
 func (c *Client) CreateProtection(ctx context.Context, params *CreateProtectionInput, optFns ...func(*Options)) (*CreateProtectionOutput, error) {
 	if params == nil {
 		params = &CreateProtectionInput{}
@@ -49,27 +47,18 @@ type CreateProtectionInput struct {
 
 	// The ARN (Amazon Resource Name) of the resource to be protected. The ARN should
 	// be in one of the following formats:
+	//   - For an Application Load Balancer:
+	//   arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
-	// * For an Application Load Balancer:
-	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
-	//
-	// *
-	// For an Elastic Load Balancer (Classic Load Balancer):
-	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
-	//
-	// *
-	// For an Amazon CloudFront distribution:
-	// arn:aws:cloudfront::account-id:distribution/distribution-id
-	//
-	// * For an Global
-	// Accelerator standard accelerator:
-	// arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
-	//
-	// * For Amazon
-	// Route 53: arn:aws:route53:::hostedzone/hosted-zone-id
-	//
-	// * For an Elastic IP
-	// address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id
+	//   - For an Elastic Load Balancer (Classic Load Balancer):
+	//   arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
+	//   - For an Amazon CloudFront distribution:
+	//   arn:aws:cloudfront::account-id:distribution/distribution-id
+	//   - For an Global Accelerator standard accelerator:
+	//   arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
+	//   - For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id
+	//   - For an Elastic IP address:
+	//   arn:aws:ec2:region:account-id:eip-allocation/allocation-id
 	//
 	// This member is required.
 	ResourceArn *string

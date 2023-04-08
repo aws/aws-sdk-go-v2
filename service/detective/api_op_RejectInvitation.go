@@ -33,7 +33,7 @@ func (c *Client) RejectInvitation(ctx context.Context, params *RejectInvitationI
 type RejectInvitationInput struct {
 
 	// The ARN of the behavior graph to reject the invitation to. The member account's
-	// current member status in the behavior graph must be INVITED.
+	// current member status in the behavior graph must be INVITED .
 	//
 	// This member is required.
 	GraphArn *string

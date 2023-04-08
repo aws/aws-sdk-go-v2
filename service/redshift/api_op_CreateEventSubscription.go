@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Redshift event notification subscription. This action requires
-// an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the
-// Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To
+// Creates an Amazon Redshift event notification subscription. This action
+// requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either
+// the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To
 // obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and
 // subscribe to the topic. The ARN is displayed in the SNS console. You can specify
 // the source type, and lists of Amazon Redshift source IDs, event categories, and
@@ -55,17 +55,10 @@ type CreateEventSubscriptionInput struct {
 	SnsTopicArn *string
 
 	// The name of the event subscription to be created. Constraints:
-	//
-	// * Cannot be
-	// null, empty, or blank.
-	//
-	// * Must contain from 1 to 255 alphanumeric characters or
-	// hyphens.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot end with a hyphen or
-	// contain two consecutive hyphens.
+	//   - Cannot be null, empty, or blank.
+	//   - Must contain from 1 to 255 alphanumeric characters or hyphens.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
 	SubscriptionName *string

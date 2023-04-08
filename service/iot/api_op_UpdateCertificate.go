@@ -12,8 +12,7 @@ import (
 )
 
 // Updates the status of the specified certificate. This operation is idempotent.
-// Requires permission to access the UpdateCertificate
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Requires permission to access the UpdateCertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action. Certificates must be in the ACTIVE state to authenticate devices that
 // use a certificate to connect to IoT. Within a few minutes of updating a
 // certificate from the ACTIVE state to any other state, IoT disconnects all

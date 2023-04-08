@@ -224,8 +224,8 @@ func (e *DataRepositoryTaskEnded) ErrorCode() string {
 }
 func (e *DataRepositoryTaskEnded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An existing data repository task is currently executing on the file system. Wait
-// until the existing task has completed, then create the new task.
+// An existing data repository task is currently executing on the file system.
+// Wait until the existing task has completed, then create the new task.
 type DataRepositoryTaskExecuting struct {
 	Message *string
 
@@ -704,8 +704,8 @@ func (e *MissingVolumeConfiguration) ErrorCode() string {
 }
 func (e *MissingVolumeConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource specified for the tagging operation is not a resource type owned by
-// Amazon FSx. Use the API of the relevant service to perform the operation.
+// The resource specified for the tagging operation is not a resource type owned
+// by Amazon FSx. Use the API of the relevant service to perform the operation.
 type NotServiceResourceError struct {
 	Message *string
 
@@ -844,8 +844,8 @@ func (e *SnapshotNotFound) ErrorCode() string {
 }
 func (e *SnapshotNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the lifecycle status of the source backup isn't
-// AVAILABLE.
+// The request was rejected because the lifecycle status of the source backup
+// isn't AVAILABLE .
 type SourceBackupUnavailable struct {
 	Message *string
 

@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing event destination in a configuration set. You can update the
-// IAM role ARN for CloudWatch Logs and Kinesis Data Firehose. You can also enable
-// or disable the event destination. You may want to update an event destination to
-// change its matching event types or updating the destination resource ARN. You
-// can't change an event destination's type between CloudWatch Logs, Kinesis Data
-// Firehose, and Amazon SNS.
+// Updates an existing event destination in a configuration set. You can update
+// the IAM role ARN for CloudWatch Logs and Kinesis Data Firehose. You can also
+// enable or disable the event destination. You may want to update an event
+// destination to change its matching event types or updating the destination
+// resource ARN. You can't change an event destination's type between CloudWatch
+// Logs, Kinesis Data Firehose, and Amazon SNS.
 func (c *Client) UpdateEventDestination(ctx context.Context, params *UpdateEventDestinationInput, optFns ...func(*Options)) (*UpdateEventDestinationOutput, error) {
 	if params == nil {
 		params = &UpdateEventDestinationInput{}
@@ -34,8 +34,8 @@ func (c *Client) UpdateEventDestination(ctx context.Context, params *UpdateEvent
 
 type UpdateEventDestinationInput struct {
 
-	// The configuration set to update with the new event destination. Valid values for
-	// this can be the ConfigurationSetName or ConfigurationSetArn.
+	// The configuration set to update with the new event destination. Valid values
+	// for this can be the ConfigurationSetName or ConfigurationSetArn.
 	//
 	// This member is required.
 	ConfigurationSetName *string

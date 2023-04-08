@@ -45,7 +45,7 @@ type DeletePortalInput struct {
 
 type DeletePortalOutput struct {
 
-	// The status of the portal, which contains a state (DELETING after successfully
+	// The status of the portal, which contains a state ( DELETING after successfully
 	// calling this operation) and any error message.
 	//
 	// This member is required.

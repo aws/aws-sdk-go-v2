@@ -51,8 +51,8 @@ type CreateAppInput struct {
 	// created on the instance. The value of InstanceType passed as part of the
 	// ResourceSpec in the CreateApp call overrides the value passed as part of the
 	// ResourceSpec configured for the user profile or the domain. If InstanceType is
-	// not specified in any of those three ResourceSpec values for a KernelGateway app,
-	// the CreateApp call fails with a request validation error.
+	// not specified in any of those three ResourceSpec values for a KernelGateway
+	// app, the CreateApp call fails with a request validation error.
 	ResourceSpec *types.ResourceSpec
 
 	// The name of the space. If this value is not set, then UserProfileName must be

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a
-// specified iSCSI target. By default, a gateway does not have CHAP enabled;
+// Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for
+// a specified iSCSI target. By default, a gateway does not have CHAP enabled;
 // however, for added security, you might use it. This operation is supported in
 // the volume and tape gateway types. When you update CHAP credentials, all
 // existing connections on the target are closed and initiators must reconnect with
@@ -32,18 +32,10 @@ func (c *Client) UpdateChapCredentials(ctx context.Context, params *UpdateChapCr
 }
 
 // A JSON object containing one or more of the following fields:
-//
-// *
-// UpdateChapCredentialsInput$InitiatorName
-//
-// *
-// UpdateChapCredentialsInput$SecretToAuthenticateInitiator
-//
-// *
-// UpdateChapCredentialsInput$SecretToAuthenticateTarget
-//
-// *
-// UpdateChapCredentialsInput$TargetARN
+//   - UpdateChapCredentialsInput$InitiatorName
+//   - UpdateChapCredentialsInput$SecretToAuthenticateInitiator
+//   - UpdateChapCredentialsInput$SecretToAuthenticateTarget
+//   - UpdateChapCredentialsInput$TargetARN
 type UpdateChapCredentialsInput struct {
 
 	// The iSCSI initiator that connects to the target.
@@ -51,9 +43,9 @@ type UpdateChapCredentialsInput struct {
 	// This member is required.
 	InitiatorName *string
 
-	// The secret key that the initiator (for example, the Windows client) must provide
-	// to participate in mutual CHAP with the target. The secret key must be between 12
-	// and 16 bytes when encoded in UTF-8.
+	// The secret key that the initiator (for example, the Windows client) must
+	// provide to participate in mutual CHAP with the target. The secret key must be
+	// between 12 and 16 bytes when encoded in UTF-8.
 	//
 	// This member is required.
 	SecretToAuthenticateInitiator *string
@@ -77,8 +69,8 @@ type UpdateChapCredentialsInput struct {
 // A JSON object containing the following fields:
 type UpdateChapCredentialsOutput struct {
 
-	// The iSCSI initiator that connects to the target. This is the same initiator name
-	// specified in the request.
+	// The iSCSI initiator that connects to the target. This is the same initiator
+	// name specified in the request.
 	InitiatorName *string
 
 	// The Amazon Resource Name (ARN) of the target. This is the same target specified

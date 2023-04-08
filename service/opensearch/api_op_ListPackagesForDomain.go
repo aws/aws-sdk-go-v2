@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all packages associated with an Amazon OpenSearch Service domain. For more
-// information, see Custom packages for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
+// Lists all packages associated with an Amazon OpenSearch Service domain. For
+// more information, see Custom packages for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
+// .
 func (c *Client) ListPackagesForDomain(ctx context.Context, params *ListPackagesForDomainInput, optFns ...func(*Options)) (*ListPackagesForDomainOutput, error) {
 	if params == nil {
 		params = &ListPackagesForDomainInput{}
@@ -42,7 +42,7 @@ type ListPackagesForDomainInput struct {
 	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial ListPackagesForDomain operation returns a nextToken, you can
+	// If your initial ListPackagesForDomain operation returns a nextToken , you can
 	// include the returned nextToken in subsequent ListPackagesForDomain operations,
 	// which returns results in the next page.
 	NextToken *string

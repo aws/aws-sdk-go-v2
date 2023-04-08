@@ -16,7 +16,7 @@ import (
 // scaling configuration resource that's associated with the service. However, you
 // can't change the name or the encryption configuration of the service. These can
 // be set only when you create the service. To update the tags applied to your
-// service, use the separate actions TagResource and UntagResource. This is an
+// service, use the separate actions TagResource and UntagResource . This is an
 // asynchronous operation. On a successful call, you can use the returned
 // OperationId and the ListOperations call to track the operation's progress.
 func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, optFns ...func(*Options)) (*UpdateServiceOutput, error) {
@@ -46,8 +46,8 @@ type UpdateServiceInput struct {
 	// resource that you want to associate with the App Runner service.
 	AutoScalingConfigurationArn *string
 
-	// The settings for the health check that App Runner performs to monitor the health
-	// of the App Runner service.
+	// The settings for the health check that App Runner performs to monitor the
+	// health of the App Runner service.
 	HealthCheckConfiguration *types.HealthCheckConfiguration
 
 	// The runtime configuration to apply to instances (scaling units) of your service.
@@ -65,7 +65,7 @@ type UpdateServiceInput struct {
 	// you can't switch from code to image or the other way around. This means that you
 	// must provide the same structure member of SourceConfiguration that you
 	// originally included when you created the service. Specifically, you can include
-	// either CodeRepository or ImageRepository. To update the source configuration,
+	// either CodeRepository or ImageRepository . To update the source configuration,
 	// set the values to members of the structure that you include.
 	SourceConfiguration *types.SourceConfiguration
 

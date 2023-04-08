@@ -35,57 +35,28 @@ type DisableMetricsCollectionInput struct {
 
 	// Identifies the metrics to disable. You can specify one or more of the following
 	// metrics:
-	//
-	// * GroupMinSize
-	//
-	// * GroupMaxSize
-	//
-	// * GroupDesiredCapacity
-	//
-	// *
-	// GroupInServiceInstances
-	//
-	// * GroupPendingInstances
-	//
-	// * GroupStandbyInstances
-	//
-	// *
-	// GroupTerminatingInstances
-	//
-	// * GroupTotalInstances
-	//
-	// * GroupInServiceCapacity
-	//
-	// *
-	// GroupPendingCapacity
-	//
-	// * GroupStandbyCapacity
-	//
-	// * GroupTerminatingCapacity
-	//
-	// *
-	// GroupTotalCapacity
-	//
-	// * WarmPoolDesiredCapacity
-	//
-	// * WarmPoolWarmedCapacity
-	//
-	// *
-	// WarmPoolPendingCapacity
-	//
-	// * WarmPoolTerminatingCapacity
-	//
-	// *
-	// WarmPoolTotalCapacity
-	//
-	// * GroupAndWarmPoolDesiredCapacity
-	//
-	// *
-	// GroupAndWarmPoolTotalCapacity
-	//
-	// If you omit this property, all metrics are
-	// disabled. For more information, see Auto Scaling group metrics
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics)
+	//   - GroupMinSize
+	//   - GroupMaxSize
+	//   - GroupDesiredCapacity
+	//   - GroupInServiceInstances
+	//   - GroupPendingInstances
+	//   - GroupStandbyInstances
+	//   - GroupTerminatingInstances
+	//   - GroupTotalInstances
+	//   - GroupInServiceCapacity
+	//   - GroupPendingCapacity
+	//   - GroupStandbyCapacity
+	//   - GroupTerminatingCapacity
+	//   - GroupTotalCapacity
+	//   - WarmPoolDesiredCapacity
+	//   - WarmPoolWarmedCapacity
+	//   - WarmPoolPendingCapacity
+	//   - WarmPoolTerminatingCapacity
+	//   - WarmPoolTotalCapacity
+	//   - GroupAndWarmPoolDesiredCapacity
+	//   - GroupAndWarmPoolTotalCapacity
+	// If you omit this property, all metrics are disabled. For more information, see
+	// Auto Scaling group metrics (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Metrics []string
 

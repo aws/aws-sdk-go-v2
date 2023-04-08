@@ -19,12 +19,10 @@ import (
 )
 
 // Returns information about DB cluster snapshots. This API action supports
-// pagination. For more information on Amazon Aurora DB clusters, see  What is
-// Amazon Aurora?
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// pagination. For more information on Amazon Aurora DB clusters, see What is
+// Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see  Multi-AZ DB cluster deployments
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 // in the Amazon RDS User Guide.
 func (c *Client) DescribeDBClusterSnapshots(ctx context.Context, params *DescribeDBClusterSnapshotsInput, optFns ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error) {
 	if params == nil {
@@ -46,35 +44,24 @@ type DescribeDBClusterSnapshotsInput struct {
 	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for. This
 	// parameter can't be used in conjunction with the DBClusterSnapshotIdentifier
 	// parameter. This parameter isn't case-sensitive. Constraints:
-	//
-	// * If supplied,
-	// must match the identifier of an existing DBCluster.
+	//   - If supplied, must match the identifier of an existing DBCluster.
 	DBClusterIdentifier *string
 
 	// A specific DB cluster snapshot identifier to describe. This parameter can't be
-	// used in conjunction with the DBClusterIdentifier parameter. This value is stored
-	// as a lowercase string. Constraints:
-	//
-	// * If supplied, must match the identifier of
-	// an existing DBClusterSnapshot.
-	//
-	// * If this identifier is for an automated
-	// snapshot, the SnapshotType parameter must also be specified.
+	// used in conjunction with the DBClusterIdentifier parameter. This value is
+	// stored as a lowercase string. Constraints:
+	//   - If supplied, must match the identifier of an existing DBClusterSnapshot.
+	//   - If this identifier is for an automated snapshot, the SnapshotType parameter
+	//   must also be specified.
 	DBClusterSnapshotIdentifier *string
 
 	// A filter that specifies one or more DB cluster snapshots to describe. Supported
 	// filters:
-	//
-	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	// Resource Names (ARNs).
-	//
-	// * db-cluster-snapshot-id - Accepts DB cluster snapshot
-	// identifiers.
-	//
-	// * snapshot-type - Accepts types of DB cluster snapshots.
-	//
-	// * engine
-	// - Accepts names of database engines.
+	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	//   Resource Names (ARNs).
+	//   - db-cluster-snapshot-id - Accepts DB cluster snapshot identifiers.
+	//   - snapshot-type - Accepts types of DB cluster snapshots.
+	//   - engine - Accepts names of database engines.
 	Filters []types.Filter
 
 	// A value that indicates whether to include manual DB cluster snapshots that are
@@ -94,7 +81,7 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// An optional pagination token provided by a previous DescribeDBClusterSnapshots
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -105,29 +92,21 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// The type of DB cluster snapshots to be returned. You can specify one of the
 	// following values:
-	//
-	// * automated - Return all DB cluster snapshots that have been
-	// automatically taken by Amazon RDS for my Amazon Web Services account.
-	//
-	// * manual
-	// - Return all DB cluster snapshots that have been taken by my Amazon Web Services
-	// account.
-	//
-	// * shared - Return all manual DB cluster snapshots that have been
-	// shared to my Amazon Web Services account.
-	//
-	// * public - Return all DB cluster
-	// snapshots that have been marked as public.
-	//
-	// If you don't specify a SnapshotType
-	// value, then both automated and manual DB cluster snapshots are returned. You can
-	// include shared DB cluster snapshots with these results by enabling the
-	// IncludeShared parameter. You can include public DB cluster snapshots with these
-	// results by enabling the IncludePublic parameter. The IncludeShared and
-	// IncludePublic parameters don't apply for SnapshotType values of manual or
-	// automated. The IncludePublic parameter doesn't apply when SnapshotType is set to
-	// shared. The IncludeShared parameter doesn't apply when SnapshotType is set to
-	// public.
+	//   - automated - Return all DB cluster snapshots that have been automatically
+	//   taken by Amazon RDS for my Amazon Web Services account.
+	//   - manual - Return all DB cluster snapshots that have been taken by my Amazon
+	//   Web Services account.
+	//   - shared - Return all manual DB cluster snapshots that have been shared to my
+	//   Amazon Web Services account.
+	//   - public - Return all DB cluster snapshots that have been marked as public.
+	// If you don't specify a SnapshotType value, then both automated and manual DB
+	// cluster snapshots are returned. You can include shared DB cluster snapshots with
+	// these results by enabling the IncludeShared parameter. You can include public
+	// DB cluster snapshots with these results by enabling the IncludePublic
+	// parameter. The IncludeShared and IncludePublic parameters don't apply for
+	// SnapshotType values of manual or automated . The IncludePublic parameter
+	// doesn't apply when SnapshotType is set to shared . The IncludeShared parameter
+	// doesn't apply when SnapshotType is set to public .
 	SnapshotType *string
 
 	noSmithyDocumentSerde
@@ -142,7 +121,7 @@ type DescribeDBClusterSnapshotsOutput struct {
 
 	// An optional pagination token provided by a previous DescribeDBClusterSnapshots
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -324,8 +303,8 @@ type DBClusterSnapshotAvailableWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DBClusterSnapshotAvailableWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DBClusterSnapshotAvailableWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -623,8 +602,8 @@ type DBClusterSnapshotDeletedWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DBClusterSnapshotDeletedWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DBClusterSnapshotDeletedWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

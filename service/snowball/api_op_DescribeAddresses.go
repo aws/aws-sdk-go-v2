@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a specified number of ADDRESS objects. Calling this API in one of the US
-// regions will return addresses from the list of all addresses associated with
+// Returns a specified number of ADDRESS objects. Calling this API in one of the
+// US regions will return addresses from the list of all addresses associated with
 // this account in all US regions.
 func (c *Client) DescribeAddresses(ctx context.Context, params *DescribeAddressesInput, optFns ...func(*Options)) (*DescribeAddressesOutput, error) {
 	if params == nil {
@@ -35,9 +35,9 @@ type DescribeAddressesInput struct {
 	// The number of ADDRESS objects to return.
 	MaxResults *int32
 
-	// HTTP requests are stateless. To identify what object comes "next" in the list of
-	// ADDRESS objects, you have the option of specifying a value for NextToken as the
-	// starting point for your list of returned addresses.
+	// HTTP requests are stateless. To identify what object comes "next" in the list
+	// of ADDRESS objects, you have the option of specifying a value for NextToken as
+	// the starting point for your list of returned addresses.
 	NextToken *string
 
 	noSmithyDocumentSerde

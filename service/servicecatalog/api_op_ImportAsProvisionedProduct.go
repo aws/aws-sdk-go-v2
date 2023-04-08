@@ -12,14 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests the import of a resource as an Service Catalog provisioned product that
-// is associated to an Service Catalog product and provisioning artifact. Once
+// Requests the import of a resource as an Service Catalog provisioned product
+// that is associated to an Service Catalog product and provisioning artifact. Once
 // imported, all supported governance actions are supported on the provisioned
 // product. Resource import only supports CloudFormation stack ARNs. CloudFormation
 // StackSets, and non-root nested stacks are not supported. The CloudFormation
-// stack must have one of the following statuses to be imported: CREATE_COMPLETE,
-// UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, and
-// IMPORT_ROLLBACK_COMPLETE. Import of the resource requires that the
+// stack must have one of the following statuses to be imported: CREATE_COMPLETE ,
+// UPDATE_COMPLETE , UPDATE_ROLLBACK_COMPLETE , IMPORT_COMPLETE , and
+// IMPORT_ROLLBACK_COMPLETE . Import of the resource requires that the
 // CloudFormation stack template matches the associated Service Catalog product
 // provisioning artifact. When you import an existing CloudFormation stack into a
 // portfolio, constraints that are associated with the product aren't applied
@@ -44,15 +44,15 @@ func (c *Client) ImportAsProvisionedProduct(ctx context.Context, params *ImportA
 
 type ImportAsProvisionedProductInput struct {
 
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests differ only by the idempotency token, the same response is returned for
+	// each repeated request.
 	//
 	// This member is required.
 	IdempotencyToken *string
 
-	// The unique identifier of the resource to be imported. It only currently supports
-	// CloudFormation stack IDs.
+	// The unique identifier of the resource to be imported. It only currently
+	// supports CloudFormation stack IDs.
 	//
 	// This member is required.
 	PhysicalId *string
@@ -75,10 +75,8 @@ type ImportAsProvisionedProductInput struct {
 	ProvisioningArtifactId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

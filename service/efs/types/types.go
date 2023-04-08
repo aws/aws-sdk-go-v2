@@ -36,8 +36,8 @@ type AccessPointDescription struct {
 	// using the access point.
 	PosixUser *PosixUser
 
-	// The directory on the Amazon EFS file system that the access point exposes as the
-	// root directory to NFS clients using the access point.
+	// The directory on the Amazon EFS file system that the access point exposes as
+	// the root directory to NFS clients using the access point.
 	RootDirectory *RootDirectory
 
 	// The tags associated with the access point, presented as an array of Tag objects.
@@ -46,25 +46,17 @@ type AccessPointDescription struct {
 	noSmithyDocumentSerde
 }
 
-// The backup policy for the file system used to create automatic daily backups. If
-// status has a value of ENABLED, the file system is being automatically backed up.
-// For more information, see Automatic backups
-// (https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups).
+// The backup policy for the file system used to create automatic daily backups.
+// If status has a value of ENABLED , the file system is being automatically backed
+// up. For more information, see Automatic backups (https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups)
+// .
 type BackupPolicy struct {
 
 	// Describes the status of the file system's backup policy.
-	//
-	// * ENABLED - EFS is
-	// automatically backing up the file system.
-	//
-	// * ENABLING - EFS is turning on
-	// automatic backups for the file system.
-	//
-	// * DISABLED - Automatic back ups are
-	// turned off for the file system.
-	//
-	// * DISABLING - EFS is turning off automatic
-	// backups for the file system.
+	//   - ENABLED - EFS is automatically backing up the file system.
+	//   - ENABLING - EFS is turning on automatic backups for the file system.
+	//   - DISABLED - Automatic back ups are turned off for the file system.
+	//   - DISABLING - EFS is turning off automatic backups for the file system.
 	//
 	// This member is required.
 	Status Status
@@ -73,10 +65,10 @@ type BackupPolicy struct {
 }
 
 // Required if the RootDirectory > Path specified does not exist. Specifies the
-// POSIX IDs and permissions to apply to the access point's RootDirectory > Path.
+// POSIX IDs and permissions to apply to the access point's RootDirectory > Path .
 // If the access point root directory does not exist, EFS creates it with these
 // settings when a client connects to the access point. When specifying
-// CreationInfo, you must include values for all properties. Amazon EFS creates a
+// CreationInfo , you must include values for all properties. Amazon EFS creates a
 // root directory only if you have provided the CreationInfo: OwnUid, OwnGID, and
 // permissions for the directory. If you do not provide this information, Amazon
 // EFS does not create the root directory. If the root directory does not exist,
@@ -85,19 +77,19 @@ type BackupPolicy struct {
 // the file system using the access point will fail.
 type CreationInfo struct {
 
-	// Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from
+	// Specifies the POSIX group ID to apply to the RootDirectory . Accepts values from
 	// 0 to 2^32 (4294967295).
 	//
 	// This member is required.
 	OwnerGid *int64
 
-	// Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0
-	// to 2^32 (4294967295).
+	// Specifies the POSIX user ID to apply to the RootDirectory . Accepts values from
+	// 0 to 2^32 (4294967295).
 	//
 	// This member is required.
 	OwnerUid *int64
 
-	// Specifies the POSIX permissions to apply to the RootDirectory, in the format of
+	// Specifies the POSIX permissions to apply to the RootDirectory , in the format of
 	// an octal number representing the file's mode bits.
 	//
 	// This member is required.
@@ -119,18 +111,19 @@ type Destination struct {
 	// This member is required.
 	Region *string
 
-	// Describes the status of the destination Amazon EFS file system. If the status is
-	// ERROR, the destination file system in the replication configuration is in a
+	// Describes the status of the destination Amazon EFS file system. If the status
+	// is ERROR , the destination file system in the replication configuration is in a
 	// failed state and is unrecoverable. To access the file system data, restore a
 	// backup of the failed file system to a new file system.
 	//
 	// This member is required.
 	Status ReplicationStatus
 
-	// The time when the most recent sync was successfully completed on the destination
-	// file system. Any changes to data on the source file system that occurred before
-	// this time have been successfully replicated to the destination file system. Any
-	// changes that occurred after this time might not be fully replicated.
+	// The time when the most recent sync was successfully completed on the
+	// destination file system. Any changes to data on the source file system that
+	// occurred before this time have been successfully replicated to the destination
+	// file system. Any changes that occurred after this time might not be fully
+	// replicated.
 	LastReplicatedTimestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -146,22 +139,16 @@ type DestinationToCreate struct {
 
 	// Specifies the Key Management Service (KMS) key that you want to use to encrypt
 	// the destination file system. If you do not specify a KMS key, Amazon EFS uses
-	// your default KMS key for Amazon EFS, /aws/elasticfilesystem. This ID can be in
+	// your default KMS key for Amazon EFS, /aws/elasticfilesystem . This ID can be in
 	// one of the following formats:
-	//
-	// * Key ID - The unique identifier of the key, for
-	// example 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * ARN - The Amazon Resource Name
-	// (ARN) for the key, for example
-	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// *
-	// Key alias - A previously created display name for a key, for example
-	// alias/projectKey1.
-	//
-	// * Key alias ARN - The ARN for a key alias, for example
-	// arn:aws:kms:us-west-2:444455556666:alias/projectKey1.
+	//   - Key ID - The unique identifier of the key, for example
+	//   1234abcd-12ab-34cd-56ef-1234567890ab .
+	//   - ARN - The Amazon Resource Name (ARN) for the key, for example
+	//   arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//   - Key alias - A previously created display name for a key, for example
+	//   alias/projectKey1 .
+	//   - Key alias ARN - The ARN for a key alias, for example
+	//   arn:aws:kms:us-west-2:444455556666:alias/projectKey1 .
 	KmsKeyId *string
 
 	// To create a file system that uses Regional storage, specify the Amazon Web
@@ -196,7 +183,7 @@ type FileSystemDescription struct {
 	LifeCycleState LifeCycleState
 
 	// The current number of mount targets that the file system has. For more
-	// information, see CreateMountTarget.
+	// information, see CreateMountTarget .
 	//
 	// This member is required.
 	NumberOfMountTargets int32
@@ -237,17 +224,16 @@ type FileSystemDescription struct {
 
 	// Describes the Amazon Web Services Availability Zone in which the file system is
 	// located, and is valid only for file systems using One Zone storage classes. For
-	// more information, see Using EFS storage classes
-	// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
-	// EFS User Guide.
+	// more information, see Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
+	// in the Amazon EFS User Guide.
 	AvailabilityZoneName *string
 
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool
 
 	// The Amazon Resource Name (ARN) for the EFS file system, in the format
-	// arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id . Example
-	// with sample data:
+	// arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id .
+	// Example with sample data:
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
 
@@ -255,18 +241,17 @@ type FileSystemDescription struct {
 	KmsKeyId *string
 
 	// You can add tags to a file system, including a Name tag. For more information,
-	// see CreateFileSystem. If the file system has a Name tag, Amazon EFS returns the
-	// value in this field.
+	// see CreateFileSystem . If the file system has a Name tag, Amazon EFS returns
+	// the value in this field.
 	Name *string
 
 	// The amount of provisioned throughput, measured in MiB/s, for the file system.
-	// Valid for file systems using ThroughputMode set to provisioned.
+	// Valid for file systems using ThroughputMode set to provisioned .
 	ProvisionedThroughputInMibps *float64
 
-	// Displays the file system's throughput mode. For more information, see Throughput
-	// modes
-	// (https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes) in
-	// the Amazon EFS User Guide.
+	// Displays the file system's throughput mode. For more information, see
+	// Throughput modes (https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes)
+	// in the Amazon EFS User Guide.
 	ThroughputMode ThroughputMode
 
 	noSmithyDocumentSerde
@@ -286,12 +271,13 @@ type FileSystemSize struct {
 	// This member is required.
 	Value int64
 
-	// The time at which the size of data, returned in the Value field, was determined.
-	// The value is the integer number of seconds since 1970-01-01T00:00:00Z.
+	// The time at which the size of data, returned in the Value field, was
+	// determined. The value is the integer number of seconds since
+	// 1970-01-01T00:00:00Z.
 	Timestamp *time.Time
 
-	// The latest known metered size (in bytes) of data stored in the Infrequent Access
-	// storage class.
+	// The latest known metered size (in bytes) of data stored in the Infrequent
+	// Access storage class.
 	ValueInIA *int64
 
 	// The latest known metered size (in bytes) of data stored in the Standard storage
@@ -304,15 +290,14 @@ type FileSystemSize struct {
 // Describes a policy used by EFS lifecycle management and EFS Intelligent-Tiering
 // that specifies when to transition files into and out of the file system's
 // Infrequent Access (IA) storage class. For more information, see EFS
-// Intelligent‐Tiering and EFS Lifecycle Management
-// (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html). When
-// using the put-lifecycle-configuration CLI command or the
+// Intelligent‐Tiering and EFS Lifecycle Management (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html)
+// . When using the put-lifecycle-configuration CLI command or the
 // PutLifecycleConfiguration API action, Amazon EFS requires that each
 // LifecyclePolicy object have only a single transition. This means that in a
 // request body, LifecyclePolicies must be structured as an array of
-// LifecyclePolicy objects, one object for each transition, TransitionToIA,
-// TransitionToPrimaryStorageClass. For more information, see the request examples
-// in PutLifecycleConfiguration.
+// LifecyclePolicy objects, one object for each transition, TransitionToIA ,
+// TransitionToPrimaryStorageClass . For more information, see the request examples
+// in PutLifecycleConfiguration .
 type LifecyclePolicy struct {
 
 	// Describes the period of time that a file is not accessed, after which it
@@ -320,9 +305,9 @@ type LifecyclePolicy struct {
 	// directory don't count as file access events.
 	TransitionToIA TransitionToIARules
 
-	// Describes when to transition a file from IA storage to primary storage. Metadata
-	// operations such as listing the contents of a directory don't count as file
-	// access events.
+	// Describes when to transition a file from IA storage to primary storage.
+	// Metadata operations such as listing the contents of a directory don't count as
+	// file access events.
 	TransitionToPrimaryStorageClass TransitionToPrimaryStorageClassRules
 
 	noSmithyDocumentSerde
@@ -448,7 +433,7 @@ type ResourceIdPreference struct {
 	ResourceIdType ResourceIdType
 
 	// Identifies the Amazon EFS resources to which the ID preference setting applies,
-	// FILE_SYSTEM and MOUNT_TARGET.
+	// FILE_SYSTEM and MOUNT_TARGET .
 	Resources []Resource
 
 	noSmithyDocumentSerde
@@ -462,18 +447,18 @@ type ResourceIdPreference struct {
 type RootDirectory struct {
 
 	// (Optional) Specifies the POSIX IDs and permissions to apply to the access
-	// point's RootDirectory. If the RootDirectory > Path specified does not exist, EFS
-	// creates the root directory using the CreationInfo settings when a client
-	// connects to an access point. When specifying the CreationInfo, you must provide
+	// point's RootDirectory . If the RootDirectory > Path specified does not exist,
+	// EFS creates the root directory using the CreationInfo settings when a client
+	// connects to an access point. When specifying the CreationInfo , you must provide
 	// values for all properties. If you do not provide CreationInfo and the specified
-	// RootDirectory > Path does not exist, attempts to mount the file system using the
-	// access point will fail.
+	// RootDirectory > Path does not exist, attempts to mount the file system using
+	// the access point will fail.
 	CreationInfo *CreationInfo
 
-	// Specifies the path on the EFS file system to expose as the root directory to NFS
-	// clients using the access point to access the EFS file system. A path can have up
-	// to four subdirectories. If the specified path does not exist, you are required
-	// to provide the CreationInfo.
+	// Specifies the path on the EFS file system to expose as the root directory to
+	// NFS clients using the access point to access the EFS file system. A path can
+	// have up to four subdirectories. If the specified path does not exist, you are
+	// required to provide the CreationInfo .
 	Path *string
 
 	noSmithyDocumentSerde
@@ -481,10 +466,10 @@ type RootDirectory struct {
 
 // A tag is a key-value pair. Allowed characters are letters, white space, and
 // numbers that can be represented in UTF-8, and the following characters: + - = .
-// _ : /.
+// _ : / .
 type Tag struct {
 
-	// The tag key (String). The key can't start with aws:.
+	// The tag key (String). The key can't start with aws: .
 	//
 	// This member is required.
 	Key *string

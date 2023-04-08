@@ -12,11 +12,11 @@ import (
 	"time"
 )
 
-// Restores a cluster to an arbitrary point in time. Users can restore to any point
-// in time before LatestRestorableTime for up to BackupRetentionPeriod days. The
-// target cluster is created from the source cluster with the same configuration as
-// the original cluster, except that the new cluster is created with the default
-// security group.
+// Restores a cluster to an arbitrary point in time. Users can restore to any
+// point in time before LatestRestorableTime for up to BackupRetentionPeriod days.
+// The target cluster is created from the source cluster with the same
+// configuration as the original cluster, except that the new cluster is created
+// with the default security group.
 func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *RestoreDBClusterToPointInTimeInput, optFns ...func(*Options)) (*RestoreDBClusterToPointInTimeOutput, error) {
 	if params == nil {
 		params = &RestoreDBClusterToPointInTimeInput{}
@@ -32,37 +32,31 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 	return out, nil
 }
 
-// Represents the input to RestoreDBClusterToPointInTime.
+// Represents the input to RestoreDBClusterToPointInTime .
 type RestoreDBClusterToPointInTimeInput struct {
 
 	// The name of the new cluster to be created. Constraints:
-	//
-	// * Must contain from 1
-	// to 63 letters, numbers, or hyphens.
-	//
-	// * The first character must be a letter.
-	//
-	// *
-	// Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
 	// The identifier of the source cluster from which to restore. Constraints:
-	//
-	// * Must
-	// match the identifier of an existing DBCluster.
+	//   - Must match the identifier of an existing DBCluster .
 	//
 	// This member is required.
 	SourceDBClusterIdentifier *string
 
-	// The subnet group name to use for the new cluster. Constraints: If provided, must
-	// match the name of an existing DBSubnetGroup. Example: mySubnetgroup
+	// The subnet group name to use for the new cluster. Constraints: If provided,
+	// must match the name of an existing DBSubnetGroup . Example: mySubnetgroup
 	DBSubnetGroupName *string
 
-	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
-	// the cluster cannot be deleted unless it is modified and DeletionProtection is
-	// disabled. DeletionProtection protects clusters from being accidentally deleted.
+	// Specifies whether this cluster can be deleted. If DeletionProtection is
+	// enabled, the cluster cannot be deleted unless it is modified and
+	// DeletionProtection is disabled. DeletionProtection protects clusters from being
+	// accidentally deleted.
 	DeletionProtection *bool
 
 	// A list of log types that must be enabled for exporting to Amazon CloudWatch
@@ -79,53 +73,37 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// cluster. The new DB cluster is encrypted with the KMS key identified by the
 	// KmsKeyId parameter. If you do not specify a value for the KmsKeyId parameter,
 	// then the following occurs:
-	//
-	// * If the cluster is encrypted, then the restored
-	// cluster is encrypted using the KMS key that was used to encrypt the source
-	// cluster.
-	//
-	// * If the cluster is not encrypted, then the restored cluster is not
-	// encrypted.
-	//
-	// If DBClusterIdentifier refers to a cluster that is not encrypted,
-	// then the restore request is rejected.
+	//   - If the cluster is encrypted, then the restored cluster is encrypted using
+	//   the KMS key that was used to encrypt the source cluster.
+	//   - If the cluster is not encrypted, then the restored cluster is not
+	//   encrypted.
+	// If DBClusterIdentifier refers to a cluster that is not encrypted, then the
+	// restore request is rejected.
 	KmsKeyId *string
 
 	// The port number on which the new cluster accepts connections. Constraints: Must
-	// be a value from 1150 to 65535. Default: The default port for the engine.
+	// be a value from 1150 to 65535 . Default: The default port for the engine.
 	Port *int32
 
 	// The date and time to restore the cluster to. Valid values: A time in Universal
 	// Coordinated Time (UTC) format. Constraints:
-	//
-	// * Must be before the latest
-	// restorable time for the instance.
-	//
-	// * Must be specified if the
-	// UseLatestRestorableTime parameter is not provided.
-	//
-	// * Cannot be specified if the
-	// UseLatestRestorableTime parameter is true.
-	//
-	// * Cannot be specified if the
-	// RestoreType parameter is copy-on-write.
-	//
+	//   - Must be before the latest restorable time for the instance.
+	//   - Must be specified if the UseLatestRestorableTime parameter is not provided.
+	//   - Cannot be specified if the UseLatestRestorableTime parameter is true .
+	//   - Cannot be specified if the RestoreType parameter is copy-on-write .
 	// Example: 2015-03-07T23:45:00Z
 	RestoreToTime *time.Time
 
 	// The type of restore to be performed. You can specify one of the following
 	// values:
-	//
-	// * full-copy - The new DB cluster is restored as a full copy of the
-	// source DB cluster.
-	//
-	// * copy-on-write - The new DB cluster is restored as a clone
-	// of the source DB cluster.
-	//
-	// Constraints: You can't specify copy-on-write if the
-	// engine version of the source DB cluster is earlier than 1.11. If you don't
-	// specify a RestoreType value, then the new DB cluster is restored as a full copy
-	// of the source DB cluster.
+	//   - full-copy - The new DB cluster is restored as a full copy of the source DB
+	//   cluster.
+	//   - copy-on-write - The new DB cluster is restored as a clone of the source DB
+	//   cluster.
+	// Constraints: You can't specify copy-on-write if the engine version of the
+	// source DB cluster is earlier than 1.11. If you don't specify a RestoreType
+	// value, then the new DB cluster is restored as a full copy of the source DB
+	// cluster.
 	RestoreType *string
 
 	// The tags to be assigned to the restored cluster.

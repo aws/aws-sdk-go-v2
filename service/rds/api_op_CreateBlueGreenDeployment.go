@@ -22,11 +22,9 @@ import (
 // You can thoroughly test changes in the green environment. When ready, you can
 // switch over the environments to promote the green environment to be the new
 // production environment. The switchover typically takes under a minute. For more
-// information, see Using Amazon RDS Blue/Green Deployments for database updates
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
-// database updates
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+// information, see Using Amazon RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
+// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 // in the Amazon Aurora User Guide.
 func (c *Client) CreateBlueGreenDeployment(ctx context.Context, params *CreateBlueGreenDeploymentInput, optFns ...func(*Options)) (*CreateBlueGreenDeploymentOutput, error) {
 	if params == nil {
@@ -46,10 +44,8 @@ func (c *Client) CreateBlueGreenDeployment(ctx context.Context, params *CreateBl
 type CreateBlueGreenDeploymentInput struct {
 
 	// The name of the blue/green deployment. Constraints:
-	//
-	// * Can't be the same as an
-	// existing blue/green deployment name in the same account and Amazon Web Services
-	// Region.
+	//   - Can't be the same as an existing blue/green deployment name in the same
+	//   account and Amazon Web Services Region.
 	//
 	// This member is required.
 	BlueGreenDeploymentName *string
@@ -71,9 +67,9 @@ type CreateBlueGreenDeploymentInput struct {
 	// group that is different from the one associated with the source DB cluster.
 	TargetDBClusterParameterGroupName *string
 
-	// The DB parameter group associated with the DB instance in the green environment.
-	// To test parameter changes, specify a DB parameter group that is different from
-	// the one associated with the source DB instance.
+	// The DB parameter group associated with the DB instance in the green
+	// environment. To test parameter changes, specify a DB parameter group that is
+	// different from the one associated with the source DB instance.
 	TargetDBParameterGroupName *string
 
 	// The engine version of the database in the green environment. Specify the engine
@@ -86,11 +82,9 @@ type CreateBlueGreenDeploymentInput struct {
 type CreateBlueGreenDeploymentOutput struct {
 
 	// Contains the details about a blue/green deployment. For more information, see
-	// Using Amazon RDS Blue/Green Deployments for database updates
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-	// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
-	// database updates
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+	// Using Amazon RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+	// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
+	// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 	// in the Amazon Aurora User Guide.
 	BlueGreenDeployment *types.BlueGreenDeployment
 

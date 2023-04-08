@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a PackageVersionDescription
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html)
+// Returns a PackageVersionDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html)
 // object that contains information about the requested package version.
 func (c *Client) DescribePackageVersion(ctx context.Context, params *DescribePackageVersionInput, optFns ...func(*Options)) (*DescribePackageVersionOutput, error) {
 	if params == nil {
@@ -47,7 +46,7 @@ type DescribePackageVersionInput struct {
 	// This member is required.
 	Package *string
 
-	// A string that contains the package version (for example, 3.5.2).
+	// A string that contains the package version (for example, 3.5.2 ).
 	//
 	// This member is required.
 	PackageVersion *string
@@ -63,18 +62,11 @@ type DescribePackageVersionInput struct {
 
 	// The namespace of the requested package version. The package version component
 	// that specifies its namespace depends on its type. For example:
-	//
-	// * The namespace
-	// of a Maven package version is its groupId.
-	//
-	// * The namespace of an npm package
-	// version is its scope.
-	//
-	// * Python and NuGet package versions do not contain a
-	// corresponding component, package versions of those formats do not have a
-	// namespace.
-	//
-	// * The namespace of a generic package is its namespace.
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -82,8 +74,7 @@ type DescribePackageVersionInput struct {
 
 type DescribePackageVersionOutput struct {
 
-	// A PackageVersionDescription
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html)
+	// A PackageVersionDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html)
 	// object that contains information about the requested package version.
 	//
 	// This member is required.

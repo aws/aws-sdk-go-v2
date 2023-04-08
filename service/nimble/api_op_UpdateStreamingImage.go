@@ -57,8 +57,8 @@ type UpdateStreamingImageInput struct {
 
 type UpdateStreamingImageOutput struct {
 
-	// Represents a streaming image resource. Streaming images are used by studio users
-	// to select which operating system and software they want to use in a Nimble
+	// Represents a streaming image resource. Streaming images are used by studio
+	// users to select which operating system and software they want to use in a Nimble
 	// Studio streaming session. Amazon provides a number of streaming images that
 	// include popular 3rd-party software. You can create your own streaming images
 	// using an Amazon EC2 machine image that you create for this purpose. You can also

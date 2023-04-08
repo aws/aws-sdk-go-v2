@@ -45,11 +45,11 @@ type DescribeModelOutput struct {
 	// Indicates the time and date at which the ML model was created.
 	CreatedAt *time.Time
 
-	// The configuration is the TargetSamplingRate, which is the sampling rate of the
+	// The configuration is the TargetSamplingRate , which is the sampling rate of the
 	// data after post processing by Amazon Lookout for Equipment. For example, if you
 	// provide data that has been collected at a 1 second level and you want the system
 	// to resample the data at a 1 minute rate before training, the TargetSamplingRate
-	// is 1 minute. When providing a value for the TargetSamplingRate, you must attach
+	// is 1 minute. When providing a value for the TargetSamplingRate , you must attach
 	// the prefix "PT" to the rate you want. The value for a 1 second rate is therefore
 	// PT1S, the value for a 15 minute rate is PT15M, and the value for a 1 hour rate
 	// is PT1H
@@ -66,8 +66,8 @@ type DescribeModelOutput struct {
 	// evaluation data for the ML model.
 	EvaluationDataEndTime *time.Time
 
-	// Indicates the time reference in the dataset that was used to begin the subset of
-	// evaluation data for the ML model.
+	// Indicates the time reference in the dataset that was used to begin the subset
+	// of evaluation data for the ML model.
 	EvaluationDataStartTime *time.Time
 
 	// If the training of the ML model failed, this indicates the reason for that
@@ -122,8 +122,8 @@ type DescribeModelOutput struct {
 	// training data for the ML model.
 	TrainingDataEndTime *time.Time
 
-	// Indicates the time reference in the dataset that was used to begin the subset of
-	// training data for the ML model.
+	// Indicates the time reference in the dataset that was used to begin the subset
+	// of training data for the ML model.
 	TrainingDataStartTime *time.Time
 
 	// Indicates the time at which the training of the ML model was completed.

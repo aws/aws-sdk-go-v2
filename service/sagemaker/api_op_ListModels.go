@@ -46,14 +46,14 @@ type ListModelsInput struct {
 	NameContains *string
 
 	// If the response to a previous ListModels request was truncated, the response
-	// includes a NextToken. To retrieve the next set of models, use the token in the
+	// includes a NextToken . To retrieve the next set of models, use the token in the
 	// next request.
 	NextToken *string
 
-	// Sorts the list of results. The default is CreationTime.
+	// Sorts the list of results. The default is CreationTime .
 	SortBy types.ModelSortKey
 
-	// The sort order for results. The default is Descending.
+	// The sort order for results. The default is Descending .
 	SortOrder types.OrderKey
 
 	noSmithyDocumentSerde
@@ -66,8 +66,8 @@ type ListModelsOutput struct {
 	// This member is required.
 	Models []types.ModelSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of models, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of models, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

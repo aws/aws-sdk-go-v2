@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets or changes the default branch name for the specified repository. If you use
-// this operation to change the default branch name to the current default branch
-// name, a success message is returned even though the default branch did not
-// change.
+// Sets or changes the default branch name for the specified repository. If you
+// use this operation to change the default branch name to the current default
+// branch name, a success message is returned even though the default branch did
+// not change.
 func (c *Client) UpdateDefaultBranch(ctx context.Context, params *UpdateDefaultBranchInput, optFns ...func(*Options)) (*UpdateDefaultBranchOutput, error) {
 	if params == nil {
 		params = &UpdateDefaultBranchInput{}

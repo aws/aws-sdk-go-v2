@@ -47,8 +47,8 @@ type ListImpersonationRolesInput struct {
 
 type ListImpersonationRolesOutput struct {
 
-	// The token to retrieve the next page of results. The value is null when there are
-	// no results to return.
+	// The token to retrieve the next page of results. The value is null when there
+	// are no results to return.
 	NextToken *string
 
 	// The list of impersonation roles under the given WorkMail organization.

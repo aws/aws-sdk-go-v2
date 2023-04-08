@@ -48,12 +48,12 @@ type DescribeApplicableIndividualAssessmentsInput struct {
 
 	// Optional pagination token provided by a previous request. If this parameter is
 	// specified, the response includes only records beyond the marker, up to the value
-	// specified by MaxRecords.
+	// specified by MaxRecords .
 	Marker *string
 
-	// Maximum number of records to include in the response. If more records exist than
-	// the specified MaxRecords value, a pagination token called a marker is included
-	// in the response so that the remaining results can be retrieved.
+	// Maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
 	MaxRecords *int32
 
 	// Name of the migration type that each provided individual assessment must
@@ -85,15 +85,14 @@ type DescribeApplicableIndividualAssessmentsOutput struct {
 	// assessment run that you start based on the specified request parameters. For
 	// more information on the available individual assessments, including
 	// compatibility with different migration task configurations, see Working with
-	// premigration assessment runs
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
+	// premigration assessment runs (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
 	// in the Database Migration Service User Guide.
 	IndividualAssessmentNames []string
 
 	// Pagination token returned for you to pass to a subsequent request. If you pass
 	// this token as the Marker value in a subsequent request, the response includes
 	// only records beyond the marker, up to the value specified in the request by
-	// MaxRecords.
+	// MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -162,20 +161,20 @@ func (c *Client) addOperationDescribeApplicableIndividualAssessmentsMiddlewares(
 	return nil
 }
 
-// DescribeApplicableIndividualAssessmentsAPIClient is a client that implements the
-// DescribeApplicableIndividualAssessments operation.
+// DescribeApplicableIndividualAssessmentsAPIClient is a client that implements
+// the DescribeApplicableIndividualAssessments operation.
 type DescribeApplicableIndividualAssessmentsAPIClient interface {
 	DescribeApplicableIndividualAssessments(context.Context, *DescribeApplicableIndividualAssessmentsInput, ...func(*Options)) (*DescribeApplicableIndividualAssessmentsOutput, error)
 }
 
 var _ DescribeApplicableIndividualAssessmentsAPIClient = (*Client)(nil)
 
-// DescribeApplicableIndividualAssessmentsPaginatorOptions is the paginator options
-// for DescribeApplicableIndividualAssessments
+// DescribeApplicableIndividualAssessmentsPaginatorOptions is the paginator
+// options for DescribeApplicableIndividualAssessments
 type DescribeApplicableIndividualAssessmentsPaginatorOptions struct {
-	// Maximum number of records to include in the response. If more records exist than
-	// the specified MaxRecords value, a pagination token called a marker is included
-	// in the response so that the remaining results can be retrieved.
+	// Maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

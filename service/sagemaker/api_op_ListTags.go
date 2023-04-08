@@ -38,8 +38,9 @@ type ListTagsInput struct {
 	// Maximum number of tags to return.
 	MaxResults *int32
 
-	// If the response to the previous ListTags request is truncated, SageMaker returns
-	// this token. To retrieve the next set of tags, use it in the subsequent request.
+	// If the response to the previous ListTags request is truncated, SageMaker
+	// returns this token. To retrieve the next set of tags, use it in the subsequent
+	// request.
 	NextToken *string
 
 	noSmithyDocumentSerde

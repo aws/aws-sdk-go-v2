@@ -14,8 +14,7 @@ import (
 // Provides a detailed description of the definition of an analysis. If you do not
 // need to know details about the content of an Analysis, for instance if you are
 // trying to check the status of a recently created or updated Analysis, use the
-// DescribeAnalysis
-// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeAnalysis.html)
+// DescribeAnalysis (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeAnalysis.html)
 // instead.
 func (c *Client) DescribeAnalysisDefinition(ctx context.Context, params *DescribeAnalysisDefinitionInput, optFns ...func(*Options)) (*DescribeAnalysisDefinitionOutput, error) {
 	if params == nil {
@@ -54,8 +53,8 @@ type DescribeAnalysisDefinitionOutput struct {
 	// The ID of the analysis described.
 	AnalysisId *string
 
-	// The definition of an analysis. A definition is the data model of all features in
-	// a Dashboard, Template, or Analysis.
+	// The definition of an analysis. A definition is the data model of all features
+	// in a Dashboard, Template, or Analysis.
 	Definition *types.AnalysisDefinition
 
 	// Errors associated with the analysis.
@@ -68,22 +67,13 @@ type DescribeAnalysisDefinitionOutput struct {
 	RequestId *string
 
 	// Status associated with the analysis.
-	//
-	// * CREATION_IN_PROGRESS
-	//
-	// *
-	// CREATION_SUCCESSFUL
-	//
-	// * CREATION_FAILED
-	//
-	// * UPDATE_IN_PROGRESS
-	//
-	// *
-	// UPDATE_SUCCESSFUL
-	//
-	// * UPDATE_FAILED
-	//
-	// * DELETED
+	//   - CREATION_IN_PROGRESS
+	//   - CREATION_SUCCESSFUL
+	//   - CREATION_FAILED
+	//   - UPDATE_IN_PROGRESS
+	//   - UPDATE_SUCCESSFUL
+	//   - UPDATE_FAILED
+	//   - DELETED
 	ResourceStatus types.ResourceStatus
 
 	// The HTTP status of the request.

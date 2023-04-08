@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a JSON representation of the schema. See JSON Schema Format
-// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json)
+// Retrieves a JSON representation of the schema. See JSON Schema Format (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json)
 // for more information.
 func (c *Client) GetSchemaAsJson(ctx context.Context, params *GetSchemaAsJsonInput, optFns ...func(*Options)) (*GetSchemaAsJsonOutput, error) {
 	if params == nil {

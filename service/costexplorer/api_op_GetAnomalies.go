@@ -43,8 +43,8 @@ type GetAnomaliesInput struct {
 	// The number of entries a paginated response contains.
 	MaxResults *int32
 
-	// Retrieves all of the cost anomalies detected for a specific cost anomaly monitor
-	// Amazon Resource Name (ARN).
+	// Retrieves all of the cost anomalies detected for a specific cost anomaly
+	// monitor Amazon Resource Name (ARN).
 	MonitorArn *string
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the

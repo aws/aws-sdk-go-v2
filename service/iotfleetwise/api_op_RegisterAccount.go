@@ -12,21 +12,17 @@ import (
 	"time"
 )
 
-// Registers your Amazon Web Services account, IAM, and Amazon Timestream resources
-// so Amazon Web Services IoT FleetWise can transfer your vehicle data to the
-// Amazon Web Services Cloud. For more information, including step-by-step
-// procedures, see Setting up Amazon Web Services IoT FleetWise
-// (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html).
-// An Amazon Web Services account is not the same thing as a "user account". An
-// Amazon Web Services user
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users)
+// Registers your Amazon Web Services account, IAM, and Amazon Timestream
+// resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to
+// the Amazon Web Services Cloud. For more information, including step-by-step
+// procedures, see Setting up Amazon Web Services IoT FleetWise (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html)
+// . An Amazon Web Services account is not the same thing as a "user account". An
+// Amazon Web Services user (https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users)
 // is an identity that you create using Identity and Access Management (IAM) and
-// takes the form of either an IAM user
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) or an IAM role,
-// both with credentials
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). A single
-// Amazon Web Services account can, and typically does, contain many users and
-// roles.
+// takes the form of either an IAM user (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)
+// or an IAM role, both with credentials (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+// . A single Amazon Web Services account can, and typically does, contain many
+// users and roles.
 func (c *Client) RegisterAccount(ctx context.Context, params *RegisterAccountInput, optFns ...func(*Options)) (*RegisterAccountOutput, error) {
 	if params == nil {
 		params = &RegisterAccountInput{}

@@ -13,9 +13,8 @@ import (
 
 // Create an Proton service. An Proton service is an instantiation of a service
 // template and often includes several service instances and pipeline. For more
-// information, see Services
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-services.html) in the
-// Proton User Guide.
+// information, see Services (https://docs.aws.amazon.com/proton/latest/userguide/ag-services.html)
+// in the Proton User Guide.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -41,9 +40,8 @@ type CreateServiceInput struct {
 	// A link to a spec file that provides inputs as defined in the service template
 	// bundle schema file. The spec file is in YAML format. Don’t include pipeline
 	// inputs in the spec if your service template doesn’t include a service pipeline.
-	// For more information, see Create a service
-	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-create-svc.html) in the
-	// Proton User Guide.
+	// For more information, see Create a service (https://docs.aws.amazon.com/proton/latest/userguide/ag-create-svc.html)
+	// in the Proton User Guide.
 	//
 	// This value conforms to the media type: application/yaml
 	//
@@ -69,8 +67,7 @@ type CreateServiceInput struct {
 	Description *string
 
 	// The Amazon Resource Name (ARN) of the repository connection. For more
-	// information, see Setting up an AWS CodeStar connection
-	// (https://docs.aws.amazon.com/proton/latest/userguide/setting-up-for-service.html#setting-up-vcontrol)
+	// information, see Setting up an AWS CodeStar connection (https://docs.aws.amazon.com/proton/latest/userguide/setting-up-for-service.html#setting-up-vcontrol)
 	// in the Proton User Guide. Don't include this parameter if your service template
 	// doesn't include a service pipeline.
 	RepositoryConnectionArn *string

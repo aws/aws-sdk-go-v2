@@ -48,7 +48,7 @@ type ListInferenceRecommendationsJobStepsInput struct {
 	// empty, then all benchmarks are returned.
 	Status types.RecommendationJobStatus
 
-	// A filter to return details about the specified type of subtask. BENCHMARK:
+	// A filter to return details about the specified type of subtask. BENCHMARK :
 	// Evaluate the performance of your model on different instance types.
 	StepType types.RecommendationStepType
 

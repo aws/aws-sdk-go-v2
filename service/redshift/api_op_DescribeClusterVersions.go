@@ -15,9 +15,8 @@ import (
 // Returns descriptions of the available Amazon Redshift cluster versions. You can
 // call this operation even before creating any clusters to learn more about the
 // Amazon Redshift versions. For more information about managing clusters, go to
-// Amazon Redshift Clusters
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html) in
-// the Amazon Redshift Cluster Management Guide.
+// Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// in the Amazon Redshift Cluster Management Guide.
 func (c *Client) DescribeClusterVersions(ctx context.Context, params *DescribeClusterVersionsInput, optFns ...func(*Options)) (*DescribeClusterVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeClusterVersionsInput{}
@@ -37,13 +36,9 @@ type DescribeClusterVersionsInput struct {
 
 	// The name of a specific cluster parameter group family to return details for.
 	// Constraints:
-	//
-	// * Must be 1 to 255 alphanumeric characters
-	//
-	// * First character must
-	// be a letter
-	//
-	// * Cannot end with a hyphen or contain two consecutive hyphens
+	//   - Must be 1 to 255 alphanumeric characters
+	//   - First character must be a letter
+	//   - Cannot end with a hyphen or contain two consecutive hyphens
 	ClusterParameterGroupFamily *string
 
 	// The specific cluster version to return. Example: 1.0
@@ -51,7 +46,7 @@ type DescribeClusterVersionsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterVersions request exceed
-	// the value specified in MaxRecords, Amazon Web Services returns a value in the
+	// the value specified in MaxRecords , Amazon Web Services returns a value in the
 	// Marker field of the response. You can retrieve the next set of response records
 	// by providing the returned marker value in the Marker parameter and retrying the
 	// request.

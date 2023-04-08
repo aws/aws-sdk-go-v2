@@ -12,24 +12,20 @@ import (
 )
 
 // This is documentation for AWS CloudHSM Classic. For more information, see AWS
-// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/), the AWS
-// CloudHSM Classic User Guide
-// (https://docs.aws.amazon.com/cloudhsm/classic/userguide/), and the AWS CloudHSM
-// Classic API Reference
-// (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/). For information
-// about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide
-// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/), and the AWS CloudHSM
-// API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
-// Creates an uninitialized HSM instance. There is an upfront fee charged for each
-// HSM instance that you create with the CreateHsm operation. If you accidentally
-// provision an HSM and want to request a refund, delete the instance using the
-// DeleteHsm operation, go to the AWS Support Center
-// (https://console.aws.amazon.com/support/home), create a new case, and select
-// Account and Billing Support. It can take up to 20 minutes to create and
-// provision an HSM. You can monitor the status of the HSM with the DescribeHsm
-// operation. The HSM is ready to be initialized when the status changes to
-// RUNNING.
+// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/) , the AWS
+// CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/)
+// , and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/)
+// . For information about the current version of AWS CloudHSM, see AWS CloudHSM (http://aws.amazon.com/cloudhsm/)
+// , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
+// , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
+// . Creates an uninitialized HSM instance. There is an upfront fee charged for
+// each HSM instance that you create with the CreateHsm operation. If you
+// accidentally provision an HSM and want to request a refund, delete the instance
+// using the DeleteHsm operation, go to the AWS Support Center (https://console.aws.amazon.com/support/home)
+// , create a new case, and select Account and Billing Support. It can take up to
+// 20 minutes to create and provision an HSM. You can monitor the status of the HSM
+// with the DescribeHsm operation. The HSM is ready to be initialized when the
+// status changes to RUNNING .
 func (c *Client) CreateHsm(ctx context.Context, params *CreateHsmInput, optFns ...func(*Options)) (*CreateHsmOutput, error) {
 	if params == nil {
 		params = &CreateHsmInput{}
@@ -65,12 +61,8 @@ type CreateHsmInput struct {
 	SubnetId *string
 
 	// Specifies the type of subscription for the HSM.
-	//
-	// * PRODUCTION - The HSM is being
-	// used in a production environment.
-	//
-	// * TRIAL - The HSM is being used in a product
-	// trial.
+	//   - PRODUCTION - The HSM is being used in a production environment.
+	//   - TRIAL - The HSM is being used in a product trial.
 	//
 	// This member is required.
 	SubscriptionType types.SubscriptionType
@@ -79,11 +71,11 @@ type CreateHsmInput struct {
 	// with the same token will be ignored.
 	ClientToken *string
 
-	// The IP address to assign to the HSM's ENI. If an IP address is not specified, an
-	// IP address will be randomly chosen from the CIDR range of the subnet.
+	// The IP address to assign to the HSM's ENI. If an IP address is not specified,
+	// an IP address will be randomly chosen from the CIDR range of the subnet.
 	EniIp *string
 
-	// The external ID from IamRoleArn, if present.
+	// The external ID from IamRoleArn , if present.
 	ExternalId *string
 
 	// The IP address for the syslog monitoring server. The AWS CloudHSM service only

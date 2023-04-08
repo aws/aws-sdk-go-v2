@@ -14,8 +14,7 @@ import (
 // Provides a detailed description of the definition of a template. If you do not
 // need to know details about the content of a template, for instance if you are
 // trying to check the status of a recently created or updated template, use the
-// DescribeTemplate
-// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeTemplate.html)
+// DescribeTemplate (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeTemplate.html)
 // instead.
 func (c *Client) DescribeTemplateDefinition(ctx context.Context, params *DescribeTemplateDefinitionInput, optFns ...func(*Options)) (*DescribeTemplateDefinitionOutput, error) {
 	if params == nil {
@@ -73,22 +72,13 @@ type DescribeTemplateDefinitionOutput struct {
 	RequestId *string
 
 	// Status associated with the template.
-	//
-	// * CREATION_IN_PROGRESS
-	//
-	// *
-	// CREATION_SUCCESSFUL
-	//
-	// * CREATION_FAILED
-	//
-	// * UPDATE_IN_PROGRESS
-	//
-	// *
-	// UPDATE_SUCCESSFUL
-	//
-	// * UPDATE_FAILED
-	//
-	// * DELETED
+	//   - CREATION_IN_PROGRESS
+	//   - CREATION_SUCCESSFUL
+	//   - CREATION_FAILED
+	//   - UPDATE_IN_PROGRESS
+	//   - UPDATE_SUCCESSFUL
+	//   - UPDATE_FAILED
+	//   - DELETED
 	ResourceStatus types.ResourceStatus
 
 	// The HTTP status of the request.

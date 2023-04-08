@@ -49,7 +49,7 @@ type GetImportOutput struct {
 	// The identifier for the specific import job.
 	ImportId *string
 
-	// The status of the import job. If the status is FAILED, you can get the reason
+	// The status of the import job. If the status is FAILED , you can get the reason
 	// for the failure from the failureReason field.
 	ImportStatus types.ImportStatus
 

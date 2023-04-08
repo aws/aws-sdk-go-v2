@@ -35,23 +35,17 @@ type GetDimensionKeyDetailsInput struct {
 
 	// The name of the dimension group. Performance Insights searches the specified
 	// group for the dimension group ID. The following group name values are valid:
-	//
-	// *
-	// db.query (Amazon DocumentDB only)
-	//
-	// * db.sql (Amazon RDS and Aurora only)
+	//   - db.query (Amazon DocumentDB only)
+	//   - db.sql (Amazon RDS and Aurora only)
 	//
 	// This member is required.
 	Group *string
 
 	// The ID of the dimension group from which to retrieve dimension details. For
-	// dimension group db.sql, the group ID is db.sql.id. The following group ID values
-	// are valid:
-	//
-	// * db.sql.id for dimension group db.sql (Aurora and RDS only)
-	//
-	// *
-	// db.query.id for dimension group db.query (DocumentDB only)
+	// dimension group db.sql , the group ID is db.sql.id . The following group ID
+	// values are valid:
+	//   - db.sql.id for dimension group db.sql (Aurora and RDS only)
+	//   - db.query.id for dimension group db.query (DocumentDB only)
 	//
 	// This member is required.
 	GroupIdentifier *string
@@ -59,13 +53,13 @@ type GetDimensionKeyDetailsInput struct {
 	// The ID for a data source from which to gather dimension data. This ID must be
 	// immutable and unique within an Amazon Web Services Region. When a DB instance is
 	// the data source, specify its DbiResourceId value. For example, specify
-	// db-ABCDEFGHIJKLMNOPQRSTU1VW2X.
+	// db-ABCDEFGHIJKLMNOPQRSTU1VW2X .
 	//
 	// This member is required.
 	Identifier *string
 
-	// The Amazon Web Services service for which Performance Insights returns data. The
-	// only valid value is RDS.
+	// The Amazon Web Services service for which Performance Insights returns data.
+	// The only valid value is RDS .
 	//
 	// This member is required.
 	ServiceType types.ServiceType
@@ -74,13 +68,10 @@ type GetDimensionKeyDetailsInput struct {
 	// group. If you don't specify this parameter, Performance Insights returns all
 	// dimension data within the specified dimension group. Specify dimension names for
 	// the following dimension groups:
-	//
-	// * db.sql - Specify either the full dimension
-	// name db.sql.statement or the short dimension name statement (Aurora and RDS
-	// only).
-	//
-	// * db.query - Specify either the full dimension name db.query.statement
-	// or the short dimension name statement (DocumentDB only).
+	//   - db.sql - Specify either the full dimension name db.sql.statement or the
+	//   short dimension name statement (Aurora and RDS only).
+	//   - db.query - Specify either the full dimension name db.query.statement or the
+	//   short dimension name statement (DocumentDB only).
 	RequestedDimensions []string
 
 	noSmithyDocumentSerde

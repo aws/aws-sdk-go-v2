@@ -60,11 +60,11 @@ type DataIngestionJobSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration is the TargetSamplingRate, which is the sampling rate of the
+// The configuration is the TargetSamplingRate , which is the sampling rate of the
 // data after post processing by Amazon Lookout for Equipment. For example, if you
 // provide data that has been collected at a 1 second level and you want the system
 // to resample the data at a 1 minute rate before training, the TargetSamplingRate
-// is 1 minute. When providing a value for the TargetSamplingRate, you must attach
+// is 1 minute. When providing a value for the TargetSamplingRate , you must attach
 // the prefix "PT" to the rate you want. The value for a 1 second rate is therefore
 // PT1S, the value for a 15 minute rate is PT15M, and the value for a 1 hour rate
 // is PT1H
@@ -74,7 +74,7 @@ type DataPreProcessingConfiguration struct {
 	// Equipment. For example, if you provide data that has been collected at a 1
 	// second level and you want the system to resample the data at a 1 minute rate
 	// before training, the TargetSamplingRate is 1 minute. When providing a value for
-	// the TargetSamplingRate, you must attach the prefix "PT" to the rate you want.
+	// the TargetSamplingRate , you must attach the prefix "PT" to the rate you want.
 	// The value for a 1 second rate is therefore PT1S, the value for a 15 minute rate
 	// is PT15M, and the value for a 1 hour rate is PT1H
 	TargetSamplingRate TargetSamplingRate
@@ -100,14 +100,14 @@ type DataQualitySummary struct {
 	// This member is required.
 	InsufficientSensorData *InsufficientSensorData
 
-	// Parameter that gives information about data that is invalid over all the sensors
-	// in the input data.
+	// Parameter that gives information about data that is invalid over all the
+	// sensors in the input data.
 	//
 	// This member is required.
 	InvalidSensorData *InvalidSensorData
 
-	// Parameter that gives information about data that is missing over all the sensors
-	// in the input data.
+	// Parameter that gives information about data that is missing over all the
+	// sensors in the input data.
 	//
 	// This member is required.
 	MissingSensorData *MissingSensorData
@@ -161,8 +161,8 @@ type DuplicateTimestamps struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the specific inference event, including start and end
-// time, diagnostics information, event duration and so on.
+// Contains information about the specific inference event, including start and
+// end time, diagnostics information, event duration and so on.
 type InferenceEventSummary struct {
 
 	// An array which specifies the names and values of all sensors contributing to an
@@ -188,8 +188,9 @@ type InferenceEventSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the specific inference execution, including input and
-// output data configuration, inference scheduling information, status, and so on.
+// Contains information about the specific inference execution, including input
+// and output data configuration, inference scheduling information, status, and so
+// on.
 type InferenceExecutionSummary struct {
 
 	//
@@ -344,8 +345,8 @@ type InferenceSchedulerSummary struct {
 	// The name of the inference scheduler.
 	InferenceSchedulerName *string
 
-	// Indicates whether the latest execution for the inference scheduler was Anomalous
-	// (anomalous events found) or Normal (no anomalous events found).
+	// Indicates whether the latest execution for the inference scheduler was
+	// Anomalous (anomalous events found) or Normal (no anomalous events found).
 	LatestInferenceResult LatestInferenceResult
 
 	// The Amazon Resource Name (ARN) of the ML model used by the inference scheduler.
@@ -394,8 +395,8 @@ type IngestionInputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies S3 configuration information for the input data for the data ingestion
-// job.
+// Specifies S3 configuration information for the input data for the data
+// ingestion job.
 type IngestionS3InputConfiguration struct {
 
 	// The name of the S3 bucket used for the input data for the data ingestion.
@@ -403,9 +404,9 @@ type IngestionS3InputConfiguration struct {
 	// This member is required.
 	Bucket *string
 
-	// Pattern for matching the Amazon S3 files which will be used for ingestion. If no
-	// KeyPattern is provided, we will use the default hierarchy file structure, which
-	// is same as KeyPattern {prefix}/{component_name}/*
+	// Pattern for matching the Amazon S3 files which will be used for ingestion. If
+	// no KeyPattern is provided, we will use the default hierarchy file structure,
+	// which is same as KeyPattern {prefix}/{component_name}/*
 	KeyPattern *string
 
 	// The prefix for the S3 location being used for the input data for the data
@@ -482,8 +483,8 @@ type LabelsInputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The location information (prefix and bucket name) for the s3 location being used
-// for label data.
+// The location information (prefix and bucket name) for the s3 location being
+// used for label data.
 type LabelsS3InputConfiguration struct {
 
 	// The name of the S3 bucket holding the label data.
@@ -509,9 +510,9 @@ type LabelSummary struct {
 	// Indicates that a label pertains to a particular piece of equipment.
 	Equipment *string
 
-	// Indicates the type of anomaly associated with the label. Data in this field will
-	// be retained for service usage. Follow best practices for the security of your
-	// data.
+	// Indicates the type of anomaly associated with the label. Data in this field
+	// will be retained for service usage. Follow best practices for the security of
+	// your data.
 	FaultCode *string
 
 	// The ARN of the label group.
@@ -680,16 +681,16 @@ type SensorStatisticsSummary struct {
 	// with the sensor that the statistics belong to.
 	InvalidDateEntries *CountPercent
 
-	// Parameter that describes the total number of, and percentage of, values that are
-	// invalid for the sensor that the statistics belong to.
+	// Parameter that describes the total number of, and percentage of, values that
+	// are invalid for the sensor that the statistics belong to.
 	InvalidValues *CountPercent
 
 	// Parameter that describes potential risk about whether data associated with the
 	// sensor contains one or more large gaps between consecutive timestamps.
 	LargeTimestampGaps *LargeTimestampGaps
 
-	// Parameter that describes the total number of, and percentage of, values that are
-	// missing for the sensor that the statistics belong to.
+	// Parameter that describes the total number of, and percentage of, values that
+	// are missing for the sensor that the statistics belong to.
 	MissingValues *CountPercent
 
 	// Parameter that describes potential risk about whether data associated with the

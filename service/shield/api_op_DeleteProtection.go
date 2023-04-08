@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Shield Advanced Protection.
+// Deletes an Shield Advanced Protection .
 func (c *Client) DeleteProtection(ctx context.Context, params *DeleteProtectionInput, optFns ...func(*Options)) (*DeleteProtectionOutput, error) {
 	if params == nil {
 		params = &DeleteProtectionInput{}

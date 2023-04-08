@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a PackageDescription
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html)
+// Returns a PackageDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html)
 // object that contains information about the requested package.
 func (c *Client) DescribePackage(ctx context.Context, params *DescribePackageInput, optFns ...func(*Options)) (*DescribePackageOutput, error) {
 	if params == nil {
@@ -55,20 +54,14 @@ type DescribePackageInput struct {
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The namespace of the requested package. The package component that specifies its
-	// namespace depends on its type. For example:
-	//
-	// * The namespace of a Maven package
-	// is its groupId. The namespace is required when requesting Maven packages.
-	//
-	// * The
-	// namespace of an npm package is its scope.
-	//
-	// * Python and NuGet packages do not
-	// contain a corresponding component, packages of those formats do not have a
-	// namespace.
-	//
-	// * The namespace of a generic package is its namespace.
+	// The namespace of the requested package. The package component that specifies
+	// its namespace depends on its type. For example:
+	//   - The namespace of a Maven package is its groupId . The namespace is required
+	//   when requesting Maven packages.
+	//   - The namespace of an npm package is its scope .
+	//   - Python and NuGet packages do not contain a corresponding component,
+	//   packages of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -76,8 +69,7 @@ type DescribePackageInput struct {
 
 type DescribePackageOutput struct {
 
-	// A PackageDescription
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html)
+	// A PackageDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html)
 	// object that contains information about the requested package.
 	//
 	// This member is required.

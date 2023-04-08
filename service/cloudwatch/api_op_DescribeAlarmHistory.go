@@ -18,7 +18,7 @@ import (
 // either all metric alarms or all composite alarms are returned. CloudWatch
 // retains the history of an alarm even if you delete the alarm. To use this
 // operation and return information about a composite alarm, you must be signed on
-// with the cloudwatch:DescribeAlarmHistory permission that is scoped to *. You
+// with the cloudwatch:DescribeAlarmHistory permission that is scoped to * . You
 // can't return information about composite alarms if your
 // cloudwatch:DescribeAlarmHistory permission has a narrower scope.
 func (c *Client) DescribeAlarmHistory(ctx context.Context, params *DescribeAlarmHistoryInput, optFns ...func(*Options)) (*DescribeAlarmHistoryOutput, error) {

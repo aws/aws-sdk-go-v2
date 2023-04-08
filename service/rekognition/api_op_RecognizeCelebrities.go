@@ -24,7 +24,7 @@ import (
 // information about which images a celebrity has been recognized in. Your
 // application must store this information and use the Celebrity ID property as a
 // unique identifier for the celebrity. If you don't store the celebrity name or
-// additional information URLs returned by RecognizeCelebrities, you will need the
+// additional information URLs returned by RecognizeCelebrities , you will need the
 // ID to identify the celebrity in a call to the GetCelebrityInfo operation. You
 // pass the input image either as base64-encoded image bytes or as a reference to
 // an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon
@@ -63,10 +63,10 @@ type RecognizeCelebritiesInput struct {
 
 type RecognizeCelebritiesOutput struct {
 
-	// Details about each celebrity found in the image. Amazon Rekognition can detect a
-	// maximum of 64 celebrities in an image. Each celebrity object includes the
-	// following attributes: Face, Confidence, Emotions, Landmarks, Pose, Quality,
-	// Smile, Id, KnownGender, MatchConfidence, Name, Urls.
+	// Details about each celebrity found in the image. Amazon Rekognition can detect
+	// a maximum of 64 celebrities in an image. Each celebrity object includes the
+	// following attributes: Face , Confidence , Emotions , Landmarks , Pose , Quality
+	// , Smile , Id , KnownGender , MatchConfidence , Name , Urls .
 	CelebrityFaces []types.Celebrity
 
 	// Support for estimating image orientation using the the OrientationCorrection

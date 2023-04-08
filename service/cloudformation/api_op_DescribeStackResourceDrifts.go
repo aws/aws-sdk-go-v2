@@ -19,9 +19,8 @@ import (
 // checked for drift. Resources that haven't yet been checked for drift aren't
 // included. Resources that don't currently support drift detection aren't checked,
 // and so not included. For a list of resources that support drift detection, see
-// Resources that Support Drift Detection
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
-// Use DetectStackResourceDrift to detect drift on individual resources, or
+// Resources that Support Drift Detection (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html)
+// . Use DetectStackResourceDrift to detect drift on individual resources, or
 // DetectStackDrift to detect drift on all supported resources for a given stack.
 func (c *Client) DescribeStackResourceDrifts(ctx context.Context, params *DescribeStackResourceDriftsInput, optFns ...func(*Options)) (*DescribeStackResourceDriftsOutput, error) {
 	if params == nil {
@@ -47,8 +46,8 @@ type DescribeStackResourceDriftsInput struct {
 
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
 	MaxResults *int32
 
 	// A string that identifies the next page of stack resource drift results.
@@ -56,18 +55,13 @@ type DescribeStackResourceDriftsInput struct {
 
 	// The resource drift status values to use as filters for the resource drift
 	// results returned.
-	//
-	// * DELETED: The resource differs from its expected template
-	// configuration in that the resource has been deleted.
-	//
-	// * MODIFIED: One or more
-	// resource properties differ from their expected template values.
-	//
-	// * IN_SYNC: The
-	// resource's actual configuration matches its expected template configuration.
-	//
-	// *
-	// NOT_CHECKED: CloudFormation doesn't currently return this value.
+	//   - DELETED : The resource differs from its expected template configuration in
+	//   that the resource has been deleted.
+	//   - MODIFIED : One or more resource properties differ from their expected
+	//   template values.
+	//   - IN_SYNC : The resource's actual configuration matches its expected template
+	//   configuration.
+	//   - NOT_CHECKED : CloudFormation doesn't currently return this value.
 	StackResourceDriftStatusFilters []types.StackResourceDriftStatus
 
 	noSmithyDocumentSerde
@@ -82,8 +76,8 @@ type DescribeStackResourceDriftsOutput struct {
 	// Resources that haven't yet been checked for drift aren't included. Resources
 	// that do not currently support drift detection aren't checked, and so not
 	// included. For a list of resources that support drift detection, see Resources
-	// that Support Drift Detection
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
+	// that Support Drift Detection (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html)
+	// .
 	//
 	// This member is required.
 	StackResourceDrifts []types.StackResourceDrift
@@ -91,7 +85,7 @@ type DescribeStackResourceDriftsOutput struct {
 	// If the request doesn't return all the remaining results, NextToken is set to a
 	// token. To retrieve the next set of results, call DescribeStackResourceDrifts
 	// again and assign that token to the request object's NextToken parameter. If the
-	// request returns all results, NextToken is set to null.
+	// request returns all results, NextToken is set to null .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -176,8 +170,8 @@ var _ DescribeStackResourceDriftsAPIClient = (*Client)(nil)
 type DescribeStackResourceDriftsPaginatorOptions struct {
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

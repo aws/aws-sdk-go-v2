@@ -13,8 +13,7 @@ import (
 
 // Removes the specified recommendations from the specified assistant's queue of
 // newly available recommendations. You can use this API in conjunction with
-// GetRecommendations
-// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html)
+// GetRecommendations (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html)
 // and a waitTimeSeconds input for long-polling behavior and avoiding duplicate
 // recommendations.
 func (c *Client) NotifyRecommendationsReceived(ctx context.Context, params *NotifyRecommendationsReceivedInput, optFns ...func(*Options)) (*NotifyRecommendationsReceivedOutput, error) {

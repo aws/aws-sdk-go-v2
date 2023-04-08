@@ -60,8 +60,8 @@ type DescribeReservedNodeExchangeStatusOutput struct {
 	// request.
 	Marker *string
 
-	// The details of the reserved-node exchange request, including the status, request
-	// time, source reserved-node identifier, and additional details.
+	// The details of the reserved-node exchange request, including the status,
+	// request time, source reserved-node identifier, and additional details.
 	ReservedNodeExchangeStatusDetails []types.ReservedNodeExchangeStatus
 
 	// Metadata pertaining to the operation's result.

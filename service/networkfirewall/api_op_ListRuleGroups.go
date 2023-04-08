@@ -37,8 +37,8 @@ type ListRuleGroupsInput struct {
 
 	// The maximum number of objects that you want Network Firewall to return for this
 	// request. If more objects are available, in the response, Network Firewall
-	// provides a NextToken value that you can use in a subsequent call to get the next
-	// batch of objects.
+	// provides a NextToken value that you can use in a subsequent call to get the
+	// next batch of objects.
 	MaxResults *int32
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -49,8 +49,8 @@ type ListRuleGroupsInput struct {
 	NextToken *string
 
 	// The scope of the request. The default setting of ACCOUNT or a setting of NULL
-	// returns all of the rule groups in your account. A setting of MANAGED returns all
-	// available managed rule groups.
+	// returns all of the rule groups in your account. A setting of MANAGED returns
+	// all available managed rule groups.
 	Scope types.ResourceManagedStatus
 
 	// Indicates whether the rule group is stateless or stateful. If the rule group is
@@ -152,8 +152,8 @@ var _ ListRuleGroupsAPIClient = (*Client)(nil)
 type ListRuleGroupsPaginatorOptions struct {
 	// The maximum number of objects that you want Network Firewall to return for this
 	// request. If more objects are available, in the response, Network Firewall
-	// provides a NextToken value that you can use in a subsequent call to get the next
-	// batch of objects.
+	// provides a NextToken value that you can use in a subsequent call to get the
+	// next batch of objects.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

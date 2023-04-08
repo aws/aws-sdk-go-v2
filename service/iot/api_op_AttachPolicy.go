@@ -11,8 +11,7 @@ import (
 )
 
 // Attaches the specified policy to the specified principal (certificate or other
-// credential). Requires permission to access the AttachPolicy
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// credential). Requires permission to access the AttachPolicy (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, optFns ...func(*Options)) (*AttachPolicyOutput, error) {
 	if params == nil {
@@ -36,9 +35,8 @@ type AttachPolicyInput struct {
 	// This member is required.
 	PolicyName *string
 
-	// The identity
-	// (https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html) to
-	// which the policy is attached. For example, a thing group or a certificate.
+	// The identity (https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html)
+	// to which the policy is attached. For example, a thing group or a certificate.
 	//
 	// This member is required.
 	Target *string

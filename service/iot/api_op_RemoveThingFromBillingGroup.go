@@ -11,8 +11,7 @@ import (
 )
 
 // Removes the given thing from the billing group. Requires permission to access
-// the RemoveThingFromBillingGroup
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// the RemoveThingFromBillingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action. This call is asynchronous. It might take several seconds for the
 // detachment to propagate.
 func (c *Client) RemoveThingFromBillingGroup(ctx context.Context, params *RemoveThingFromBillingGroupInput, optFns ...func(*Options)) (*RemoveThingFromBillingGroupOutput, error) {

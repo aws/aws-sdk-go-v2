@@ -45,8 +45,8 @@ type UpdateFeatureMetadataInput struct {
 	// A list of key-value pairs that you can add to better describe the feature.
 	ParameterAdditions []types.FeatureParameter
 
-	// A list of parameter keys that you can specify to remove parameters that describe
-	// your feature.
+	// A list of parameter keys that you can specify to remove parameters that
+	// describe your feature.
 	ParameterRemovals []string
 
 	noSmithyDocumentSerde

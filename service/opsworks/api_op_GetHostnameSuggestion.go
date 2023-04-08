@@ -14,8 +14,8 @@ import (
 // name theme. Required Permissions: To use this action, an IAM user must have a
 // Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information on user permissions, see Managing User
-// Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) GetHostnameSuggestion(ctx context.Context, params *GetHostnameSuggestionInput, optFns ...func(*Options)) (*GetHostnameSuggestionOutput, error) {
 	if params == nil {
 		params = &GetHostnameSuggestionInput{}

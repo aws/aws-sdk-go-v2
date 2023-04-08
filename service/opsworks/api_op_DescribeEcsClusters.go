@@ -13,14 +13,14 @@ import (
 )
 
 // Describes Amazon ECS clusters that are registered with a stack. If you specify
-// only a stack ID, you can use the MaxResults and NextToken parameters to paginate
-// the response. However, AWS OpsWorks Stacks currently supports only one cluster
-// per layer, so the result set has a maximum of one element. Required Permissions:
-// To use this action, an IAM user must have a Show, Deploy, or Manage permissions
-// level for the stack or an attached policy that explicitly grants permission. For
-// more information about user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-// This call accepts only one resource-identifying parameter.
+// only a stack ID, you can use the MaxResults and NextToken parameters to
+// paginate the response. However, AWS OpsWorks Stacks currently supports only one
+// cluster per layer, so the result set has a maximum of one element. Required
+// Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage
+// permissions level for the stack or an attached policy that explicitly grants
+// permission. For more information about user permissions, see Managing User
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// . This call accepts only one resource-identifying parameter.
 func (c *Client) DescribeEcsClusters(ctx context.Context, params *DescribeEcsClustersInput, optFns ...func(*Options)) (*DescribeEcsClustersOutput, error) {
 	if params == nil {
 		params = &DescribeEcsClustersInput{}
@@ -48,10 +48,10 @@ type DescribeEcsClustersInput struct {
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
-	// the response object'sNextToken parameter value is set to a token. To retrieve
-	// the next set of results, call DescribeEcsClusters again and assign that token to
-	// the request object's NextToken parameter. If there are no remaining results, the
-	// previous response object's NextToken parameter is set to null.
+	// the response object's NextToken parameter value is set to a token. To retrieve
+	// the next set of results, call DescribeEcsClusters again and assign that token
+	// to the request object's NextToken parameter. If there are no remaining results,
+	// the previous response object's NextToken parameter is set to null .
 	NextToken *string
 
 	// A stack ID. DescribeEcsClusters returns a description of the cluster that is
@@ -71,7 +71,7 @@ type DescribeEcsClustersOutput struct {
 	// parameter is set to a token that you can assign to the request object's
 	// NextToken parameter to retrieve the next set of results. If the previous
 	// paginated request returned all of the remaining results, this parameter is set
-	// to null.
+	// to null .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -140,8 +140,8 @@ func (c *Client) addOperationDescribeEcsClustersMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeEcsClustersAPIClient is a client that implements the DescribeEcsClusters
-// operation.
+// DescribeEcsClustersAPIClient is a client that implements the
+// DescribeEcsClusters operation.
 type DescribeEcsClustersAPIClient interface {
 	DescribeEcsClusters(context.Context, *DescribeEcsClustersInput, ...func(*Options)) (*DescribeEcsClustersOutput, error)
 }

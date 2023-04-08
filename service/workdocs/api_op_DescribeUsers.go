@@ -37,8 +37,8 @@ type DescribeUsersInput struct {
 	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
-	// A comma-separated list of values. Specify "STORAGE_METADATA" to include the user
-	// storage quota and utilization information.
+	// A comma-separated list of values. Specify "STORAGE_METADATA" to include the
+	// user storage quota and utilization information.
 	Fields *string
 
 	// The state of the users. Specify "ALL" to include inactive users.
@@ -59,24 +59,17 @@ type DescribeUsersInput struct {
 
 	// A query to filter users by user name. Remember the following about the Userids
 	// and Query parameters:
-	//
-	// * If you don't use either parameter, the API returns a
-	// paginated list of all users on the site.
-	//
-	// * If you use both parameters, the API
-	// ignores the Query parameter.
-	//
-	// * The Userid parameter only returns user names
-	// that match a corresponding user ID.
-	//
-	// * The Query parameter runs a "prefix"
-	// search for users by the GivenName, SurName, or UserName fields included in a
-	// CreateUser
-	// (https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html)
-	// API call. For example, querying on Ma returns Márcia Oliveira, María García, and
-	// Mateo Jackson. If you use multiple characters, the API only returns data that
-	// matches all characters. For example, querying on Ma J only returns Mateo
-	// Jackson.
+	//   - If you don't use either parameter, the API returns a paginated list of all
+	//   users on the site.
+	//   - If you use both parameters, the API ignores the Query parameter.
+	//   - The Userid parameter only returns user names that match a corresponding user
+	//   ID.
+	//   - The Query parameter runs a "prefix" search for users by the GivenName ,
+	//   SurName , or UserName fields included in a CreateUser (https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html)
+	//   API call. For example, querying on Ma returns Márcia Oliveira, María García,
+	//   and Mateo Jackson. If you use multiple characters, the API only returns data
+	//   that matches all characters. For example, querying on Ma J only returns Mateo
+	//   Jackson.
 	Query *string
 
 	// The sorting criteria.

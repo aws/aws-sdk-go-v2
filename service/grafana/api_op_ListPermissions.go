@@ -13,10 +13,10 @@ import (
 )
 
 // Lists the users and groups who have the Grafana Admin and Editor roles in this
-// workspace. If you use this operation without specifying userId or groupId, the
+// workspace. If you use this operation without specifying userId or groupId , the
 // operation returns the roles of all users and groups. If you specify a userId or
-// a groupId, only the roles for that user or group are returned. If you do this,
-// you can specify only one userId or one groupId.
+// a groupId , only the roles for that user or group are returned. If you do this,
+// you can specify only one userId or one groupId .
 func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInput, optFns ...func(*Options)) (*ListPermissionsOutput, error) {
 	if params == nil {
 		params = &ListPermissionsInput{}
@@ -52,9 +52,9 @@ type ListPermissionsInput struct {
 	// (Optional) Limits the results to only the user that matches this ID.
 	UserId *string
 
-	// (Optional) If you specify SSO_USER, then only the permissions of IAM Identity
-	// Center users are returned. If you specify SSO_GROUP, only the permissions of IAM
-	// Identity Center groups are returned.
+	// (Optional) If you specify SSO_USER , then only the permissions of IAM Identity
+	// Center users are returned. If you specify SSO_GROUP , only the permissions of
+	// IAM Identity Center groups are returned.
 	UserType types.UserType
 
 	noSmithyDocumentSerde

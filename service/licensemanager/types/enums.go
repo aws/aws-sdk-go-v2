@@ -56,9 +56,9 @@ const (
 	CheckoutTypePerpetual   CheckoutType = "PERPETUAL"
 )
 
-// Values returns all known values for CheckoutType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CheckoutType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (CheckoutType) Values() []CheckoutType {
 	return []CheckoutType{
 		"PROVISIONAL",
@@ -260,9 +260,9 @@ const (
 	InventoryFilterConditionContains   InventoryFilterCondition = "CONTAINS"
 )
 
-// Values returns all known values for InventoryFilterCondition. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InventoryFilterCondition. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InventoryFilterCondition) Values() []InventoryFilterCondition {
 	return []InventoryFilterCondition{
 		"EQUALS",
@@ -340,8 +340,8 @@ const (
 	LicenseDeletionStatusDeleted       LicenseDeletionStatus = "DELETED"
 )
 
-// Values returns all known values for LicenseDeletionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LicenseDeletionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseDeletionStatus) Values() []LicenseDeletionStatus {
 	return []LicenseDeletionStatus{
@@ -417,9 +417,9 @@ const (
 	RenewTypeMonthly RenewType = "Monthly"
 )
 
-// Values returns all known values for RenewType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RenewType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RenewType) Values() []RenewType {
 	return []RenewType{
 		"None",
@@ -477,9 +477,9 @@ const (
 	ResourceTypeSystemsManagerManagedInstance ResourceType = "SYSTEMS_MANAGER_MANAGED_INSTANCE"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"EC2_INSTANCE",
@@ -497,9 +497,9 @@ const (
 	TokenTypeRefreshToken TokenType = "REFRESH_TOKEN"
 )
 
-// Values returns all known values for TokenType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TokenType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TokenType) Values() []TokenType {
 	return []TokenType{
 		"REFRESH_TOKEN",

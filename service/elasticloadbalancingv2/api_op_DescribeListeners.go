@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified listeners or the listeners for the specified Application
-// Load Balancer, Network Load Balancer, or Gateway Load Balancer. You must specify
-// either a load balancer or one or more listeners.
+// Describes the specified listeners or the listeners for the specified
+// Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. You
+// must specify either a load balancer or one or more listeners.
 func (c *Client) DescribeListeners(ctx context.Context, params *DescribeListenersInput, optFns ...func(*Options)) (*DescribeListenersOutput, error) {
 	if params == nil {
 		params = &DescribeListenersInput{}
@@ -53,8 +53,8 @@ type DescribeListenersOutput struct {
 	// Information about the listeners.
 	Listeners []types.Listener
 
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
+	// If there are additional results, this is the marker for the next set of
+	// results. Otherwise, this is null.
 	NextMarker *string
 
 	// Metadata pertaining to the operation's result.

@@ -120,7 +120,7 @@ func (e *InvalidAddressException) ErrorFault() smithy.ErrorFault { return smithy
 
 // Job or cluster creation failed. One or more inputs were invalid. Confirm that
 // the CreateClusterRequest$SnowballType value supports your
-// CreateJobRequest$JobType, and try again.
+// CreateJobRequest$JobType , and try again.
 type InvalidInputCombinationException struct {
 	Message *string
 
@@ -146,8 +146,8 @@ func (e *InvalidInputCombinationException) ErrorCode() string {
 }
 func (e *InvalidInputCombinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The action can't be performed because the job's current state doesn't allow that
-// action to be performed.
+// The action can't be performed because the job's current state doesn't allow
+// that action to be performed.
 type InvalidJobStateException struct {
 	Message *string
 

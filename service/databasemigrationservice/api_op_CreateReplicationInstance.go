@@ -14,11 +14,10 @@ import (
 // Creates the replication instance using the specified parameters. DMS requires
 // that your account have certain roles with appropriate permissions before you can
 // create a replication instance. For information on the required roles, see
-// Creating the IAM Roles to Use With the CLI and DMS API
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole).
-// For information on the required permissions, see IAM Permissions Needed to Use
-// DMS
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions).
+// Creating the IAM Roles to Use With the CLI and DMS API (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole)
+// . For information on the required permissions, see IAM Permissions Needed to
+// Use DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions)
+// .
 func (c *Client) CreateReplicationInstance(ctx context.Context, params *CreateReplicationInstanceInput, optFns ...func(*Options)) (*CreateReplicationInstanceOutput, error) {
 	if params == nil {
 		params = &CreateReplicationInstanceInput{}
@@ -38,25 +37,19 @@ type CreateReplicationInstanceInput struct {
 
 	// The compute and memory capacity of the replication instance as defined for the
 	// specified replication instance class. For example to specify the instance class
-	// dms.c4.large, set this parameter to "dms.c4.large". For more information on the
+	// dms.c4.large, set this parameter to "dms.c4.large" . For more information on the
 	// settings and capacities for the available replication instance classes, see
-	// Selecting the right DMS replication instance for your migration
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
+	// Selecting the right DMS replication instance for your migration (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth)
+	// .
 	//
 	// This member is required.
 	ReplicationInstanceClass *string
 
 	// The replication instance identifier. This parameter is stored as a lowercase
 	// string. Constraints:
-	//
-	// * Must contain 1-63 alphanumeric characters or hyphens.
-	//
-	// *
-	// First character must be a letter.
-	//
-	// * Can't end with a hyphen or contain two
-	// consecutive hyphens.
-	//
+	//   - Must contain 1-63 alphanumeric characters or hyphens.
+	//   - First character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	// Example: myrepinstance
 	//
 	// This member is required.
@@ -68,12 +61,12 @@ type CreateReplicationInstanceInput struct {
 
 	// A value that indicates whether minor engine upgrades are applied automatically
 	// to the replication instance during the maintenance window. This parameter
-	// defaults to true. Default: true When AutoMinorVersionUpgrade is enabled, DMS
+	// defaults to true . Default: true When AutoMinorVersionUpgrade is enabled, DMS
 	// uses the current default engine version when you create a replication instance.
-	// For example, if you set EngineVersion to a lower version number than the current
-	// default version, DMS uses the default version. If AutoMinorVersionUpgrade isn’t
-	// enabled when you create a replication instance, DMS uses the engine version
-	// specified by the EngineVersion parameter.
+	// For example, if you set EngineVersion to a lower version number than the
+	// current default version, DMS uses the default version. If
+	// AutoMinorVersionUpgrade isn’t enabled when you create a replication instance,
+	// DMS uses the engine version specified by the EngineVersion parameter.
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone where the replication instance will be created. The
@@ -94,14 +87,14 @@ type CreateReplicationInstanceInput struct {
 	EngineVersion *string
 
 	// An KMS key identifier that is used to encrypt the data on the replication
-	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses
-	// your default encryption key. KMS creates the default encryption key for your
-	// Amazon Web Services account. Your Amazon Web Services account has a different
-	// default encryption key for each Amazon Web Services Region.
+	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS
+	// uses your default encryption key. KMS creates the default encryption key for
+	// your Amazon Web Services account. Your Amazon Web Services account has a
+	// different default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// Specifies whether the replication instance is a Multi-AZ deployment. You can't
-	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
+	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true .
 	MultiAZ *bool
 
 	// The type of IP address protocol used by a replication instance, such as IPv4
@@ -118,7 +111,7 @@ type CreateReplicationInstanceInput struct {
 
 	// Specifies the accessibility options for the replication instance. A value of
 	// true represents an instance with a public IP address. A value of false
-	// represents an instance with a private IP address. The default value is true.
+	// represents an instance with a private IP address. The default value is true .
 	PubliclyAccessible *bool
 
 	// A subnet group to associate with the replication instance.
@@ -129,10 +122,10 @@ type CreateReplicationInstanceInput struct {
 	// for this parameter can have up to 31 characters. It can contain only ASCII
 	// letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain
 	// two consecutive hyphens, and can only begin with a letter, such as
-	// Example-App-ARN1. For example, this value might result in the EndpointArn value
-	// arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a
-	// ResourceIdentifier value, DMS generates a default identifier value for the end
-	// of EndpointArn.
+	// Example-App-ARN1 . For example, this value might result in the EndpointArn
+	// value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1 . If you don't
+	// specify a ResourceIdentifier value, DMS generates a default identifier value
+	// for the end of EndpointArn .
 	ResourceIdentifier *string
 
 	// One or more tags to be assigned to the replication instance.

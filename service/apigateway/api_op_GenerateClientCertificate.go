@@ -34,15 +34,15 @@ type GenerateClientCertificateInput struct {
 	Description *string
 
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
-	// tag key can be up to 128 characters and must not start with aws:. The tag value
+	// tag key can be up to 128 characters and must not start with aws: . The tag value
 	// can be up to 256 characters.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Represents a client certificate used to configure client-side SSL authentication
-// while sending requests to the integration endpoint.
+// Represents a client certificate used to configure client-side SSL
+// authentication while sending requests to the integration endpoint.
 type GenerateClientCertificateOutput struct {
 
 	// The identifier of the client certificate.

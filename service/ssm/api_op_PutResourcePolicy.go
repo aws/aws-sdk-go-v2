@@ -59,7 +59,7 @@ type PutResourcePolicyOutput struct {
 	// ID of the current policy version.
 	PolicyHash *string
 
-	// The policy ID. To update a policy, you must specify PolicyId and PolicyHash.
+	// The policy ID. To update a policy, you must specify PolicyId and PolicyHash .
 	PolicyId *string
 
 	// Metadata pertaining to the operation's result.

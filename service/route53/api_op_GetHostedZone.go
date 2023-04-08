@@ -52,8 +52,8 @@ type GetHostedZoneOutput struct {
 	// hosted zone.
 	DelegationSet *types.DelegationSet
 
-	// A complex type that contains information about the VPCs that are associated with
-	// the specified hosted zone.
+	// A complex type that contains information about the VPCs that are associated
+	// with the specified hosted zone.
 	VPCs []types.VPC
 
 	// Metadata pertaining to the operation's result.

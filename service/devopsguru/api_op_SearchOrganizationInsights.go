@@ -13,9 +13,9 @@ import (
 )
 
 // Returns a list of insights in your organization. You can specify which insights
-// are returned by their start time, one or more statuses (ONGOING, CLOSED, and
-// CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or
-// PROACTIVE). Use the Filters parameter to specify status and severity search
+// are returned by their start time, one or more statuses ( ONGOING , CLOSED , and
+// CLOSED ), one or more severities ( LOW , MEDIUM , and HIGH ), and type ( REACTIVE
+// or PROACTIVE ). Use the Filters parameter to specify status and severity search
 // parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your
 // search.
 func (c *Client) SearchOrganizationInsights(ctx context.Context, params *SearchOrganizationInsightsInput, optFns ...func(*Options)) (*SearchOrganizationInsightsOutput, error) {
@@ -45,7 +45,7 @@ type SearchOrganizationInsightsInput struct {
 	// This member is required.
 	StartTimeRange *types.StartTimeRange
 
-	// The type of insights you are searching for (REACTIVE or PROACTIVE).
+	// The type of insights you are searching for ( REACTIVE or PROACTIVE ).
 	//
 	// This member is required.
 	Type types.InsightType

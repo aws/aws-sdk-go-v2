@@ -11,13 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns the RegexPatternSet specified by RegexPatternSetId.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Returns the RegexPatternSet specified by RegexPatternSetId .
 func (c *Client) GetRegexPatternSet(ctx context.Context, params *GetRegexPatternSetInput, optFns ...func(*Options)) (*GetRegexPatternSetOutput, error) {
 	if params == nil {
 		params = &GetRegexPatternSetInput{}
@@ -37,7 +35,7 @@ type GetRegexPatternSetInput struct {
 
 	// The RegexPatternSetId of the RegexPatternSet that you want to get.
 	// RegexPatternSetId is returned by CreateRegexPatternSet and by
-	// ListRegexPatternSets.
+	// ListRegexPatternSets .
 	//
 	// This member is required.
 	RegexPatternSetId *string

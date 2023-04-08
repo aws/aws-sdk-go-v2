@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables multi-factor authentication (MFA) with the Remote Authentication Dial In
-// User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
+// Enables multi-factor authentication (MFA) with the Remote Authentication Dial
+// In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
 func (c *Client) EnableRadius(ctx context.Context, params *EnableRadiusInput, optFns ...func(*Options)) (*EnableRadiusOutput, error) {
 	if params == nil {
 		params = &EnableRadiusInput{}

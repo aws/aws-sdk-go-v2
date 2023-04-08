@@ -34,8 +34,8 @@ type UpdateBrokerStorageInput struct {
 	// This member is required.
 	ClusterArn *string
 
-	// The version of cluster to update from. A successful operation will then generate
-	// a new version.
+	// The version of cluster to update from. A successful operation will then
+	// generate a new version.
 	//
 	// This member is required.
 	CurrentVersion *string

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a resource from application. Both the resource and the application
-// can be specified either by ID or name.
+// Disassociates a resource from application. Both the resource and the
+// application can be specified either by ID or name.
 func (c *Client) DisassociateResource(ctx context.Context, params *DisassociateResourceInput, optFns ...func(*Options)) (*DisassociateResourceOutput, error) {
 	if params == nil {
 		params = &DisassociateResourceInput{}

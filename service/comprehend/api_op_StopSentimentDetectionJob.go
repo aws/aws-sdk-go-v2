@@ -11,13 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a sentiment detection job in progress. If the job state is IN_PROGRESS,
+// Stops a sentiment detection job in progress. If the job state is IN_PROGRESS ,
 // the job is marked for termination and put into the STOP_REQUESTED state. If the
 // job completes before it can be stopped, it is put into the COMPLETED state;
-// otherwise the job is be stopped and put into the STOPPED state. If the job is in
-// the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob
-// operation, the operation returns a 400 Internal Request Exception. When a job is
-// stopped, any documents already processed are written to the output location.
+// otherwise the job is be stopped and put into the STOPPED state. If the job is
+// in the COMPLETED or FAILED state when you call the
+// StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal
+// Request Exception. When a job is stopped, any documents already processed are
+// written to the output location.
 func (c *Client) StopSentimentDetectionJob(ctx context.Context, params *StopSentimentDetectionJobInput, optFns ...func(*Options)) (*StopSentimentDetectionJobOutput, error) {
 	if params == nil {
 		params = &StopSentimentDetectionJobInput{}
@@ -48,8 +49,8 @@ type StopSentimentDetectionJobOutput struct {
 	// The identifier of the sentiment detection job to stop.
 	JobId *string
 
-	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was
-	// previously stopped with the StopSentimentDetectionJob operation.
+	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job
+	// was previously stopped with the StopSentimentDetectionJob operation.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

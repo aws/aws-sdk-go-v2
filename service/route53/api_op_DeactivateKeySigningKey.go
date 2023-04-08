@@ -12,7 +12,7 @@ import (
 )
 
 // Deactivates a key-signing key (KSK) so that it will not be used for signing by
-// DNSSEC. This operation changes the KSK status to INACTIVE.
+// DNSSEC. This operation changes the KSK status to INACTIVE .
 func (c *Client) DeactivateKeySigningKey(ctx context.Context, params *DeactivateKeySigningKeyInput, optFns ...func(*Options)) (*DeactivateKeySigningKeyOutput, error) {
 	if params == nil {
 		params = &DeactivateKeySigningKeyInput{}

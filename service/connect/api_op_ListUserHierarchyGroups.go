@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides summary information about the hierarchy groups for the specified Amazon
-// Connect instance. For more information about agent hierarchies, see Set Up Agent
-// Hierarchies
-// (https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html) in
-// the Amazon Connect Administrator Guide.
+// Provides summary information about the hierarchy groups for the specified
+// Amazon Connect instance. For more information about agent hierarchies, see Set
+// Up Agent Hierarchies (https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) ListUserHierarchyGroups(ctx context.Context, params *ListUserHierarchyGroupsInput, optFns ...func(*Options)) (*ListUserHierarchyGroupsOutput, error) {
 	if params == nil {
 		params = &ListUserHierarchyGroupsInput{}
@@ -34,8 +33,7 @@ func (c *Client) ListUserHierarchyGroups(ctx context.Context, params *ListUserHi
 
 type ListUserHierarchyGroupsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

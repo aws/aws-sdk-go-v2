@@ -13,9 +13,8 @@ import (
 )
 
 // Gets summary information about playback key pairs. For more information, see
-// Setting Up Private Channels
-// (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the
-// Amazon IVS User Guide.
+// Setting Up Private Channels (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html)
+// in the Amazon IVS User Guide.
 func (c *Client) ListPlaybackKeyPairs(ctx context.Context, params *ListPlaybackKeyPairsInput, optFns ...func(*Options)) (*ListPlaybackKeyPairsOutput, error) {
 	if params == nil {
 		params = &ListPlaybackKeyPairsInput{}
@@ -51,8 +50,8 @@ type ListPlaybackKeyPairsOutput struct {
 	// This member is required.
 	KeyPairs []types.PlaybackKeyPairSummary
 
-	// If there are more key pairs than maxResults, use nextToken in the request to get
-	// the next set.
+	// If there are more key pairs than maxResults , use nextToken in the request to
+	// get the next set.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

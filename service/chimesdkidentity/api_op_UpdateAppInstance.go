@@ -28,7 +28,7 @@ func (c *Client) UpdateAppInstance(ctx context.Context, params *UpdateAppInstanc
 
 type UpdateAppInstanceInput struct {
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	//
 	// This member is required.
 	AppInstanceArn *string
@@ -48,7 +48,7 @@ type UpdateAppInstanceInput struct {
 
 type UpdateAppInstanceOutput struct {
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	AppInstanceArn *string
 
 	// Metadata pertaining to the operation's result.

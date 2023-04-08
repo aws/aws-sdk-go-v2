@@ -11,9 +11,8 @@ import (
 )
 
 // For a specified stack that's in the UPDATE_ROLLBACK_FAILED state, continues
-// rolling it back to the UPDATE_ROLLBACK_COMPLETE state. Depending on the cause of
-// the failure, you can manually  fix the error
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed)
+// rolling it back to the UPDATE_ROLLBACK_COMPLETE state. Depending on the cause
+// of the failure, you can manually fix the error (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed)
 // and continue the rollback. By continuing the rollback, you can return your stack
 // to a working state (the UPDATE_ROLLBACK_COMPLETE state), and then try to update
 // the stack again. A stack goes into the UPDATE_ROLLBACK_FAILED state when
@@ -51,8 +50,8 @@ type ContinueUpdateRollbackInput struct {
 	// A unique identifier for this ContinueUpdateRollback request. Specify this token
 	// if you plan to retry requests so that CloudFormationknows that you're not
 	// attempting to continue the rollback to a stack with the same name. You might
-	// retry ContinueUpdateRollback requests to ensure that CloudFormation successfully
-	// received them.
+	// retry ContinueUpdateRollback requests to ensure that CloudFormation
+	// successfully received them.
 	ClientRequestToken *string
 
 	// A list of the logical IDs of the resources that CloudFormation skips during the
@@ -62,8 +61,7 @@ type ContinueUpdateRollbackInput struct {
 	// update was canceled. To check why a resource update failed, use the
 	// DescribeStackResources action, and view the resource status reason. Specify this
 	// property to skip rolling back resources that CloudFormation can't successfully
-	// roll back. We recommend that you  troubleshoot
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed)
+	// roll back. We recommend that you troubleshoot (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed)
 	// resources before skipping them. CloudFormation sets the status of the specified
 	// resources to UPDATE_COMPLETE and continues to roll back the stack. After the
 	// rollback is complete, the state of the skipped resources will be inconsistent
@@ -74,14 +72,15 @@ type ContinueUpdateRollbackInput struct {
 	// successfully roll back your stack. For example, a failed resource update might
 	// cause dependent resources to fail. In this case, it might not be necessary to
 	// skip the dependent resources. To skip resources that are part of nested stacks,
-	// use the following format: NestedStackName.ResourceLogicalID. If you want to
-	// specify the logical ID of a stack resource (Type: AWS::CloudFormation::Stack) in
-	// the ResourcesToSkip list, then its corresponding embedded stack must be in one
-	// of the following states: DELETE_IN_PROGRESS, DELETE_COMPLETE, or DELETE_FAILED.
-	// Don't confuse a child stack's name with its corresponding logical ID defined in
-	// the parent stack. For an example of a continue update rollback operation with
-	// nested stacks, see Using ResourcesToSkip to recover a nested stacks hierarchy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html#nested-stacks).
+	// use the following format: NestedStackName.ResourceLogicalID . If you want to
+	// specify the logical ID of a stack resource ( Type: AWS::CloudFormation::Stack )
+	// in the ResourcesToSkip list, then its corresponding embedded stack must be in
+	// one of the following states: DELETE_IN_PROGRESS , DELETE_COMPLETE , or
+	// DELETE_FAILED . Don't confuse a child stack's name with its corresponding
+	// logical ID defined in the parent stack. For an example of a continue update
+	// rollback operation with nested stacks, see Using ResourcesToSkip to recover a
+	// nested stacks hierarchy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html#nested-stacks)
+	// .
 	ResourcesToSkip []string
 
 	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role

@@ -12,8 +12,8 @@ import (
 )
 
 // Describes the given dataset group. For more information on dataset groups, see
-// CreateDatasetGroup
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html).
+// CreateDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html)
+// .
 func (c *Client) DescribeDatasetGroup(ctx context.Context, params *DescribeDatasetGroupInput, optFns ...func(*Options)) (*DescribeDatasetGroupOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetGroupInput{}

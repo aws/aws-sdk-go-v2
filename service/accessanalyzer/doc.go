@@ -13,8 +13,7 @@
 // cross-account access to your resources before deploying permissions changes.
 // This guide describes the Identity and Access Management Access Analyzer
 // operations that you can call programmatically. For general information about IAM
-// Access Analyzer, see Identity and Access Management Access Analyzer
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html)
+// Access Analyzer, see Identity and Access Management Access Analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html)
 // in the IAM User Guide. To start using IAM Access Analyzer, you first need to
 // create an analyzer.
 package accessanalyzer

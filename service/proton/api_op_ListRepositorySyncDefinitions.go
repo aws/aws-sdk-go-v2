@@ -40,7 +40,7 @@ type ListRepositorySyncDefinitionsInput struct {
 	// This member is required.
 	RepositoryProvider types.RepositoryProvider
 
-	// The sync type. The only supported value is TEMPLATE_SYNC.
+	// The sync type. The only supported value is TEMPLATE_SYNC .
 	//
 	// This member is required.
 	SyncType types.SyncType

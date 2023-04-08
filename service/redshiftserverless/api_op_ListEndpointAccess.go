@@ -34,9 +34,9 @@ type ListEndpointAccessInput struct {
 	// You can use nextToken to display the next page of results.
 	MaxResults *int32
 
-	// If your initial ListEndpointAccess operation returns a nextToken, you can
-	// include the returned nextToken in following ListEndpointAccess operations, which
-	// returns results in the next page.
+	// If your initial ListEndpointAccess operation returns a nextToken , you can
+	// include the returned nextToken in following ListEndpointAccess operations,
+	// which returns results in the next page.
 	NextToken *string
 
 	// The unique identifier of the virtual private cloud with access to Amazon

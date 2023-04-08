@@ -37,15 +37,15 @@ type PutConfigurationSetReputationOptionsInput struct {
 	// This member is required.
 	ConfigurationSetName *string
 
-	// If true, tracking of reputation metrics is enabled for the configuration set. If
-	// false, tracking of reputation metrics is disabled for the configuration set.
+	// If true , tracking of reputation metrics is enabled for the configuration set.
+	// If false , tracking of reputation metrics is disabled for the configuration set.
 	ReputationMetricsEnabled bool
 
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutConfigurationSetReputationOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

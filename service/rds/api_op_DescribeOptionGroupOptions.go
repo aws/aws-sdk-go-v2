@@ -30,32 +30,19 @@ func (c *Client) DescribeOptionGroupOptions(ctx context.Context, params *Describ
 
 type DescribeOptionGroupOptionsInput struct {
 
-	// A required parameter. Options available for the given engine name are described.
-	// Valid Values:
-	//
-	// * mariadb
-	//
-	// * mysql
-	//
-	// * oracle-ee
-	//
-	// * oracle-ee-cdb
-	//
-	// * oracle-se2
-	//
-	// *
-	// oracle-se2-cdb
-	//
-	// * postgres
-	//
-	// * sqlserver-ee
-	//
-	// * sqlserver-se
-	//
-	// * sqlserver-ex
-	//
-	// *
-	// sqlserver-web
+	// A required parameter. Options available for the given engine name are
+	// described. Valid Values:
+	//   - mariadb
+	//   - mysql
+	//   - oracle-ee
+	//   - oracle-ee-cdb
+	//   - oracle-se2
+	//   - oracle-se2-cdb
+	//   - postgres
+	//   - sqlserver-ee
+	//   - sqlserver-se
+	//   - sqlserver-ex
+	//   - sqlserver-web
 	//
 	// This member is required.
 	EngineName *string
@@ -69,7 +56,7 @@ type DescribeOptionGroupOptionsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -85,7 +72,7 @@ type DescribeOptionGroupOptionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// List of available option group options.

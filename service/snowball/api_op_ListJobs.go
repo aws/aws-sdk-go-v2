@@ -37,8 +37,8 @@ type ListJobsInput struct {
 	// The number of JobListEntry objects to return.
 	MaxResults *int32
 
-	// HTTP requests are stateless. To identify what object comes "next" in the list of
-	// JobListEntry objects, you have the option of specifying NextToken as the
+	// HTTP requests are stateless. To identify what object comes "next" in the list
+	// of JobListEntry objects, you have the option of specifying NextToken as the
 	// starting point for your returned list.
 	NextToken *string
 

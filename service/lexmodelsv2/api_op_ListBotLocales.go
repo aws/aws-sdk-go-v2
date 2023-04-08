@@ -40,9 +40,9 @@ type ListBotLocalesInput struct {
 	// This member is required.
 	BotVersion *string
 
-	// Provides the specification for a filter used to limit the response to only those
-	// locales that match the filter specification. You can only specify one filter and
-	// one value to filter on.
+	// Provides the specification for a filter used to limit the response to only
+	// those locales that match the filter specification. You can only specify one
+	// filter and one value to filter on.
 	Filters []types.BotLocaleFilter
 
 	// The maximum number of aliases to return in each page of results. If there are
@@ -69,17 +69,17 @@ type ListBotLocalesOutput struct {
 
 	// Summary information for the locales that meet the filter criteria specified in
 	// the request. The length of the list is specified in the maxResults parameter of
-	// the request. If there are more locales available, the nextToken field contains a
-	// token to get the next page of results.
+	// the request. If there are more locales available, the nextToken field contains
+	// a token to get the next page of results.
 	BotLocaleSummaries []types.BotLocaleSummary
 
 	// The version of the bot.
 	BotVersion *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListBotLocales operation. If the nextToken field is present, you send the
-	// contents as the nextToken parameter of a ListBotLocales operation request to get
-	// the next page of results.
+	// A token that indicates whether there are more results to return in a response
+	// to the ListBotLocales operation. If the nextToken field is present, you send
+	// the contents as the nextToken parameter of a ListBotLocales operation request
+	// to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

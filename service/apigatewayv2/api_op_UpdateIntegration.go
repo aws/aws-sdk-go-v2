@@ -43,10 +43,10 @@ type UpdateIntegrationInput struct {
 	// The ID of the VPC link for a private integration. Supported only for HTTP APIs.
 	ConnectionId *string
 
-	// The type of the network connection to the integration endpoint. Specify INTERNET
-	// for connections through the public routable internet or VPC_LINK for private
-	// connections between API Gateway and resources in a VPC. The default value is
-	// INTERNET.
+	// The type of the network connection to the integration endpoint. Specify
+	// INTERNET for connections through the public routable internet or VPC_LINK for
+	// private connections between API Gateway and resources in a VPC. The default
+	// value is INTERNET.
 	ConnectionType types.ConnectionType
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
@@ -74,8 +74,8 @@ type UpdateIntegrationInput struct {
 	IntegrationMethod *string
 
 	// Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS service
-	// action to invoke. To learn more, see Integration subtype reference
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html).
+	// action to invoke. To learn more, see Integration subtype reference (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html)
+	// .
 	IntegrationSubtype *string
 
 	// The integration type of an integration. One of the following: AWS: for
@@ -101,9 +101,8 @@ type UpdateIntegrationInput struct {
 	// listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
 	// service, API Gateway uses DiscoverInstances to identify resources. You can use
 	// query parameters to target specific resources. To learn more, see
-	// DiscoverInstances
-	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html).
-	// For private integrations, all resources must be owned by the same AWS account.
+	// DiscoverInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html)
+	// . For private integrations, all resources must be owned by the same AWS account.
 	IntegrationUri *string
 
 	// Specifies the pass-through behavior for incoming requests based on the
@@ -134,16 +133,15 @@ type UpdateIntegrationInput struct {
 	// parameters are a key-value map specifying parameters that are passed to
 	// AWS_PROXY integrations. You can provide static values, or map request data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
-	// more, see Working with AWS service integrations for HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html).
-	// For HTTP API integrations, without a specified integrationSubtype request
+	// more, see Working with AWS service integrations for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html)
+	// . For HTTP API integrations, without a specified integrationSubtype request
 	// parameters are a key-value map specifying how to transform HTTP requests before
 	// sending them to the backend. The key should follow the pattern
 	// <action>:<header|querystring|path>.<location> where action can be append,
 	// overwrite or remove. For values, you can provide static values, or map request
 	// data, stage variables, or context variables that are evaluated at runtime. To
-	// learn more, see Transforming API requests and responses
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.).
+	// learn more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.)
+	// .
 	RequestParameters map[string]string
 
 	// Represents a map of Velocity templates that are applied on the request payload
@@ -160,16 +158,16 @@ type UpdateIntegrationInput struct {
 	// <action>:<header>.<location> or overwrite.statuscode. The action can be append,
 	// overwrite or remove. The value can be a static value, or map to response data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
-	// more, see Transforming API requests and responses
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html).
+	// more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html)
+	// .
 	ResponseParameters map[string]map[string]string
 
 	// The template selection expression for the integration.
 	TemplateSelectionExpression *string
 
-	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between
-	// 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for
-	// WebSocket APIs and 30 seconds for HTTP APIs.
+	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and
+	// between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29
+	// seconds for WebSocket APIs and 30 seconds for HTTP APIs.
 	TimeoutInMillis int32
 
 	// The TLS configuration for a private integration. If you specify a TLS
@@ -190,10 +188,10 @@ type UpdateIntegrationOutput struct {
 	// The ID of the VPC link for a private integration. Supported only for HTTP APIs.
 	ConnectionId *string
 
-	// The type of the network connection to the integration endpoint. Specify INTERNET
-	// for connections through the public routable internet or VPC_LINK for private
-	// connections between API Gateway and resources in a VPC. The default value is
-	// INTERNET.
+	// The type of the network connection to the integration endpoint. Specify
+	// INTERNET for connections through the public routable internet or VPC_LINK for
+	// private connections between API Gateway and resources in a VPC. The default
+	// value is INTERNET.
 	ConnectionType types.ConnectionType
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
@@ -224,13 +222,13 @@ type UpdateIntegrationOutput struct {
 	IntegrationMethod *string
 
 	// The integration response selection expression for the integration. Supported
-	// only for WebSocket APIs. See Integration Response Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions).
+	// only for WebSocket APIs. See Integration Response Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions)
+	// .
 	IntegrationResponseSelectionExpression *string
 
 	// Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS service
-	// action to invoke. To learn more, see Integration subtype reference
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html).
+	// action to invoke. To learn more, see Integration subtype reference (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html)
+	// .
 	IntegrationSubtype *string
 
 	// The integration type of an integration. One of the following: AWS: for
@@ -255,9 +253,8 @@ type UpdateIntegrationOutput struct {
 	// listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
 	// service, API Gateway uses DiscoverInstances to identify resources. You can use
 	// query parameters to target specific resources. To learn more, see
-	// DiscoverInstances
-	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html).
-	// For private integrations, all resources must be owned by the same AWS account.
+	// DiscoverInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html)
+	// . For private integrations, all resources must be owned by the same AWS account.
 	IntegrationUri *string
 
 	// Specifies the pass-through behavior for incoming requests based on the
@@ -288,16 +285,15 @@ type UpdateIntegrationOutput struct {
 	// parameters are a key-value map specifying parameters that are passed to
 	// AWS_PROXY integrations. You can provide static values, or map request data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
-	// more, see Working with AWS service integrations for HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html).
-	// For HTTP API itegrations, without a specified integrationSubtype request
+	// more, see Working with AWS service integrations for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html)
+	// . For HTTP API itegrations, without a specified integrationSubtype request
 	// parameters are a key-value map specifying how to transform HTTP requests before
 	// sending them to backend integrations. The key should follow the pattern
 	// <action>:<header|querystring|path>.<location>. The action can be append,
 	// overwrite or remove. For values, you can provide static values, or map request
 	// data, stage variables, or context variables that are evaluated at runtime. To
-	// learn more, see Transforming API requests and responses
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html).
+	// learn more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html)
+	// .
 	RequestParameters map[string]string
 
 	// Represents a map of Velocity templates that are applied on the request payload
@@ -314,17 +310,17 @@ type UpdateIntegrationOutput struct {
 	// <action>:<header>.<location> or overwrite.statuscode. The action can be append,
 	// overwrite or remove. The value can be a static value, or map to response data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
-	// more, see Transforming API requests and responses
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html).
+	// more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html)
+	// .
 	ResponseParameters map[string]map[string]string
 
 	// The template selection expression for the integration. Supported only for
 	// WebSocket APIs.
 	TemplateSelectionExpression *string
 
-	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between
-	// 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for
-	// WebSocket APIs and 30 seconds for HTTP APIs.
+	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and
+	// between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29
+	// seconds for WebSocket APIs and 30 seconds for HTTP APIs.
 	TimeoutInMillis int32
 
 	// The TLS configuration for a private integration. If you specify a TLS

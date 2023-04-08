@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a flow for the specified Amazon Connect instance. You can also create
-// and update flows using the Amazon Connect Flow language
-// (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
+// and update flows using the Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html)
+// .
 func (c *Client) CreateContactFlow(ctx context.Context, params *CreateContactFlowInput, optFns ...func(*Options)) (*CreateContactFlowOutput, error) {
 	if params == nil {
 		params = &CreateContactFlowInput{}
@@ -46,9 +46,8 @@ type CreateContactFlowInput struct {
 	// This member is required.
 	Name *string
 
-	// The type of the flow. For descriptions of the available types, see Choose a flow
-	// type
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types)
+	// The type of the flow. For descriptions of the available types, see Choose a
+	// flow type (https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types)
 	// in the Amazon Connect Administrator Guide.
 	//
 	// This member is required.

@@ -32,7 +32,7 @@ func (c *Client) DeleteComputeEnvironment(ctx context.Context, params *DeleteCom
 	return out, nil
 }
 
-// Contains the parameters for DeleteComputeEnvironment.
+// Contains the parameters for DeleteComputeEnvironment .
 type DeleteComputeEnvironmentInput struct {
 
 	// The name or Amazon Resource Name (ARN) of the compute environment to delete.

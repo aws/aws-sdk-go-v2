@@ -31,20 +31,20 @@ func (c *Client) ListItems(ctx context.Context, params *ListItemsInput, optFns .
 
 type ListItemsInput struct {
 
-	// The maximum number of results to return per API request. For example, you submit
-	// a ListItems request with MaxResults set at 500. Although 2,000 items match your
-	// request, the service returns no more than the first 500 items. (The service also
-	// returns a NextToken value that you can use to fetch the next batch of results.)
-	// The service might return fewer results than the MaxResults value. If MaxResults
-	// is not included in the request, the service defaults to pagination with a
-	// maximum of 1,000 results per page.
+	// The maximum number of results to return per API request. For example, you
+	// submit a ListItems request with MaxResults set at 500. Although 2,000 items
+	// match your request, the service returns no more than the first 500 items. (The
+	// service also returns a NextToken value that you can use to fetch the next batch
+	// of results.) The service might return fewer results than the MaxResults value.
+	// If MaxResults is not included in the request, the service defaults to
+	// pagination with a maximum of 1,000 results per page.
 	MaxResults *int32
 
 	// The token that identifies which batch of results that you want to see. For
 	// example, you submit a ListItems request with MaxResults set at 500. The service
-	// returns the first batch of results (up to 500) and a NextToken value. To see the
-	// next batch of results, you can submit the ListItems request a second time and
-	// specify the NextToken value. Tokens expire after 15 minutes.
+	// returns the first batch of results (up to 500) and a NextToken value. To see
+	// the next batch of results, you can submit the ListItems request a second time
+	// and specify the NextToken value. Tokens expire after 15 minutes.
 	NextToken *string
 
 	// The path in the container from which to retrieve items. Format: //
@@ -139,13 +139,13 @@ var _ ListItemsAPIClient = (*Client)(nil)
 
 // ListItemsPaginatorOptions is the paginator options for ListItems
 type ListItemsPaginatorOptions struct {
-	// The maximum number of results to return per API request. For example, you submit
-	// a ListItems request with MaxResults set at 500. Although 2,000 items match your
-	// request, the service returns no more than the first 500 items. (The service also
-	// returns a NextToken value that you can use to fetch the next batch of results.)
-	// The service might return fewer results than the MaxResults value. If MaxResults
-	// is not included in the request, the service defaults to pagination with a
-	// maximum of 1,000 results per page.
+	// The maximum number of results to return per API request. For example, you
+	// submit a ListItems request with MaxResults set at 500. Although 2,000 items
+	// match your request, the service returns no more than the first 500 items. (The
+	// service also returns a NextToken value that you can use to fetch the next batch
+	// of results.) The service might return fewer results than the MaxResults value.
+	// If MaxResults is not included in the request, the service defaults to
+	// pagination with a maximum of 1,000 results per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

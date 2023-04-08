@@ -33,15 +33,10 @@ type CreateFirewallRuleInput struct {
 
 	// The action that DNS Firewall should take on a DNS query when it matches one of
 	// the domains in the rule's domain list:
-	//
-	// * ALLOW - Permit the request to go
-	// through.
-	//
-	// * ALERT - Permit the request and send metrics and logs to Cloud
-	// Watch.
-	//
-	// * BLOCK - Disallow the request. This option requires additional details
-	// in the rule's BlockResponse.
+	//   - ALLOW - Permit the request to go through.
+	//   - ALERT - Permit the request and send metrics and logs to Cloud Watch.
+	//   - BLOCK - Disallow the request. This option requires additional details in the
+	//   rule's BlockResponse .
 	//
 	// This member is required.
 	Action types.Action
@@ -80,37 +75,31 @@ type CreateFirewallRuleInput struct {
 	Priority *int32
 
 	// The DNS record's type. This determines the format of the record value that you
-	// provided in BlockOverrideDomain. Used for the rule action BLOCK with a
-	// BlockResponse setting of OVERRIDE. This setting is required if the BlockResponse
-	// setting is OVERRIDE.
+	// provided in BlockOverrideDomain . Used for the rule action BLOCK with a
+	// BlockResponse setting of OVERRIDE . This setting is required if the
+	// BlockResponse setting is OVERRIDE .
 	BlockOverrideDnsType types.BlockOverrideDnsType
 
 	// The custom DNS record to send back in response to the query. Used for the rule
-	// action BLOCK with a BlockResponse setting of OVERRIDE. This setting is required
-	// if the BlockResponse setting is OVERRIDE.
+	// action BLOCK with a BlockResponse setting of OVERRIDE . This setting is required
+	// if the BlockResponse setting is OVERRIDE .
 	BlockOverrideDomain *string
 
 	// The recommended amount of time, in seconds, for the DNS resolver or web browser
 	// to cache the provided override record. Used for the rule action BLOCK with a
-	// BlockResponse setting of OVERRIDE. This setting is required if the BlockResponse
-	// setting is OVERRIDE.
+	// BlockResponse setting of OVERRIDE . This setting is required if the
+	// BlockResponse setting is OVERRIDE .
 	BlockOverrideTtl *int32
 
 	// The way that you want DNS Firewall to block the request, used with the rule
-	// action setting BLOCK.
-	//
-	// * NODATA - Respond indicating that the query was
-	// successful, but no response is available for it.
-	//
-	// * NXDOMAIN - Respond
-	// indicating that the domain name that's in the query doesn't exist.
-	//
-	// * OVERRIDE -
-	// Provide a custom override in the response. This option requires custom handling
-	// details in the rule's BlockOverride* settings.
-	//
-	// This setting is required if the
-	// rule action setting is BLOCK.
+	// action setting BLOCK .
+	//   - NODATA - Respond indicating that the query was successful, but no response
+	//   is available for it.
+	//   - NXDOMAIN - Respond indicating that the domain name that's in the query
+	//   doesn't exist.
+	//   - OVERRIDE - Provide a custom override in the response. This option requires
+	//   custom handling details in the rule's BlockOverride* settings.
+	// This setting is required if the rule action setting is BLOCK .
 	BlockResponse types.BlockResponse
 
 	noSmithyDocumentSerde

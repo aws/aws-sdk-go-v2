@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the properties of a SageMaker image. To change the image's tags, use the
-// AddTags and DeleteTags APIs.
+// Updates the properties of a SageMaker image. To change the image's tags, use
+// the AddTags and DeleteTags APIs.
 func (c *Client) UpdateImage(ctx context.Context, params *UpdateImageInput, optFns ...func(*Options)) (*UpdateImageOutput, error) {
 	if params == nil {
 		params = &UpdateImageInput{}

@@ -26,9 +26,8 @@ import (
 // changes are propagated to instances within the security group as quickly as
 // possible. However, a small delay might occur. We are retiring EC2-Classic. We
 // recommend that you migrate from EC2-Classic to a VPC. For more information, see
-// Migrate from EC2-Classic to a VPC
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) RevokeSecurityGroupIngress(ctx context.Context, params *RevokeSecurityGroupIngressInput, optFns ...func(*Options)) (*RevokeSecurityGroupIngressOutput, error) {
 	if params == nil {
 		params = &RevokeSecurityGroupIngressInput{}
@@ -52,8 +51,8 @@ type RevokeSecurityGroupIngressInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// If the protocol is TCP or UDP, this is the start of the port range. If the
@@ -71,13 +70,12 @@ type RevokeSecurityGroupIngressInput struct {
 	// security groups in a nondefault VPC, you must specify the security group ID.
 	GroupName *string
 
-	// The sets of IP permissions. You can't specify a source security group and a CIDR
-	// IP address range in the same set of permissions.
+	// The sets of IP permissions. You can't specify a source security group and a
+	// CIDR IP address range in the same set of permissions.
 	IpPermissions []types.IpPermission
 
-	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers
-	// (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)). Use
-	// -1 to specify all.
+	// The IP protocol name ( tcp , udp , icmp ) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
+	// ). Use -1 to specify all.
 	IpProtocol *string
 
 	// The IDs of the security group rules.
@@ -112,8 +110,7 @@ type RevokeSecurityGroupIngressOutput struct {
 	Return *bool
 
 	// The inbound rules that were unknown to the service. In some cases,
-	// unknownIpPermissionSet might be in a different format from the request
-	// parameter.
+	// unknownIpPermissionSet might be in a different format from the request parameter.
 	UnknownIpPermissions []types.IpPermission
 
 	// Metadata pertaining to the operation's result.

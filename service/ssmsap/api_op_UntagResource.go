@@ -33,8 +33,8 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Adds/updates or removes credentials for applications registered with AWS Systems
-	// Manager for SAP.
+	// Adds/updates or removes credentials for applications registered with AWS
+	// Systems Manager for SAP.
 	//
 	// This member is required.
 	TagKeys []string

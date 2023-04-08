@@ -13,15 +13,12 @@ import (
 
 // Retrieves a fresh set of credentials for use when uploading a new set of game
 // build files to Amazon GameLift's Amazon S3. This is done as part of the build
-// creation process; see GameSession
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateBuild.html).
-// To request new credentials, specify the build ID as returned with an initial
+// creation process; see GameSession (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateBuild.html)
+// . To request new credentials, specify the build ID as returned with an initial
 // CreateBuild request. If successful, a new set of credentials are returned, along
-// with the S3 storage location associated with the build ID. Learn more  Create a
-// Build with Files in S3
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)All
-// APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// with the S3 storage location associated with the build ID. Learn more Create a
+// Build with Files in S3 (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
+// All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) RequestUploadCredentials(ctx context.Context, params *RequestUploadCredentialsInput, optFns ...func(*Options)) (*RequestUploadCredentialsOutput, error) {
 	if params == nil {
 		params = &RequestUploadCredentialsInput{}
@@ -39,8 +36,8 @@ func (c *Client) RequestUploadCredentials(ctx context.Context, params *RequestUp
 
 type RequestUploadCredentialsInput struct {
 
-	// A unique identifier for the build to get credentials for. You can use either the
-	// build ID or ARN value.
+	// A unique identifier for the build to get credentials for. You can use either
+	// the build ID or ARN value.
 	//
 	// This member is required.
 	BuildId *string

@@ -45,8 +45,8 @@ type CreateSlotTypeInput struct {
 	// The identifier of the language and locale that the slot type will be used in.
 	// The string must match one of the supported locales. All of the bots, intents,
 	// and slots used by the slot type must have the same locale. For more information,
-	// see Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -78,17 +78,12 @@ type CreateSlotTypeInput struct {
 
 	// Determines the strategy that Amazon Lex uses to select a value from the list of
 	// possible values. The field can be set to one of the following values:
-	//
-	// *
-	// OriginalValue - Returns the value entered by the user, if the user value is
-	// similar to the slot value.
-	//
-	// * TopResolution - If there is a resolution list for
-	// the slot, return the first value in the resolution list. If there is no
-	// resolution list, return null.
-	//
-	// If you don't specify the valueSelectionSetting
-	// parameter, the default is OriginalValue.
+	//   - OriginalValue - Returns the value entered by the user, if the user value is
+	//   similar to the slot value.
+	//   - TopResolution - If there is a resolution list for the slot, return the first
+	//   value in the resolution list. If there is no resolution list, return null.
+	// If you don't specify the valueSelectionSetting parameter, the default is
+	// OriginalValue .
 	ValueSelectionSetting *types.SlotValueSelectionSetting
 
 	noSmithyDocumentSerde

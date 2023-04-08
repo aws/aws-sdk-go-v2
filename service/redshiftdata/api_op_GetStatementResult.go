@@ -14,9 +14,8 @@ import (
 
 // Fetches the temporarily cached result of an SQL statement. A token is returned
 // to page through the statement results. For more information about the Amazon
-// Redshift Data API and CLI usage examples, see Using the Amazon Redshift Data API
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the Amazon
-// Redshift Management Guide.
+// Redshift Data API and CLI usage examples, see Using the Amazon Redshift Data API (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html)
+// in the Amazon Redshift Management Guide.
 func (c *Client) GetStatementResult(ctx context.Context, params *GetStatementResultInput, optFns ...func(*Options)) (*GetStatementResultOutput, error) {
 	if params == nil {
 		params = &GetStatementResultInput{}
@@ -39,7 +38,7 @@ type GetStatementResultInput struct {
 	// A suffix indicates then number of the SQL statement. For example,
 	// d9b6c0c9-0747-4bf4-b142-e8883122f766:2 has a suffix of :2 that indicates the
 	// second SQL statement of a batch query. This identifier is returned by
-	// BatchExecuteStatment, ExecuteStatment, and ListStatements.
+	// BatchExecuteStatment , ExecuteStatment , and ListStatements .
 	//
 	// This member is required.
 	Id *string

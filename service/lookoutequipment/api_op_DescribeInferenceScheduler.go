@@ -62,12 +62,12 @@ type DescribeInferenceSchedulerOutput struct {
 	// including the output S3 location.
 	DataOutputConfiguration *types.InferenceOutputConfiguration
 
-	// Specifies how often data is uploaded to the source S3 bucket for the input data.
-	// This value is the length of time between data uploads. For instance, if you
-	// select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to
-	// the source bucket once every 5 minutes. This frequency also determines how often
-	// Amazon Lookout for Equipment starts a scheduled inference on your data. In this
-	// example, it starts once every 5 minutes.
+	// Specifies how often data is uploaded to the source S3 bucket for the input
+	// data. This value is the length of time between data uploads. For instance, if
+	// you select 5 minutes, Amazon Lookout for Equipment will upload the real-time
+	// data to the source bucket once every 5 minutes. This frequency also determines
+	// how often Amazon Lookout for Equipment starts a scheduled inference on your
+	// data. In this example, it starts once every 5 minutes.
 	DataUploadFrequency types.DataUploadFrequency
 
 	// The Amazon Resource Name (ARN) of the inference scheduler being described.
@@ -76,8 +76,8 @@ type DescribeInferenceSchedulerOutput struct {
 	// The name of the inference scheduler being described.
 	InferenceSchedulerName *string
 
-	// Indicates whether the latest execution for the inference scheduler was Anomalous
-	// (anomalous events found) or Normal (no anomalous events found).
+	// Indicates whether the latest execution for the inference scheduler was
+	// Anomalous (anomalous events found) or Normal (no anomalous events found).
 	LatestInferenceResult types.LatestInferenceResult
 
 	// The Amazon Resource Name (ARN) of the ML model of the inference scheduler being

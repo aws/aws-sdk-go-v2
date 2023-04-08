@@ -42,8 +42,8 @@ type ListAssessmentRunAgentsInput struct {
 	// attribute, any of the values can match.
 	Filter *types.AgentFilter
 
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 10. The maximum value is 500.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 10. The maximum value is 500.
 	MaxResults *int32
 
 	// You can use this parameter when paginating results. Set the value of this
@@ -62,10 +62,10 @@ type ListAssessmentRunAgentsOutput struct {
 	// This member is required.
 	AssessmentRunAgents []types.AssessmentRunAgent
 
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to be
-	// listed, this parameter is set to null.
+	// When a response is generated, if there is more data to be listed, this
+	// parameter is present in the response and contains the value to use for the
+	// nextToken parameter in a subsequent pagination request. If there is no more data
+	// to be listed, this parameter is set to null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -148,8 +148,8 @@ var _ ListAssessmentRunAgentsAPIClient = (*Client)(nil)
 // ListAssessmentRunAgentsPaginatorOptions is the paginator options for
 // ListAssessmentRunAgents
 type ListAssessmentRunAgentsPaginatorOptions struct {
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 10. The maximum value is 500.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 10. The maximum value is 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

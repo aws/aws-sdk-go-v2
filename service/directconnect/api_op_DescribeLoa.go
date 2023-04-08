@@ -15,9 +15,8 @@ import (
 // (LAG). The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is
 // a document that is used when establishing your cross connect to Amazon Web
 // Services at the colocation facility. For more information, see Requesting Cross
-// Connects at Direct Connect Locations
-// (https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html) in
-// the Direct Connect User Guide.
+// Connects at Direct Connect Locations (https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
+// in the Direct Connect User Guide.
 func (c *Client) DescribeLoa(ctx context.Context, params *DescribeLoaInput, optFns ...func(*Options)) (*DescribeLoaOutput, error) {
 	if params == nil {
 		params = &DescribeLoaInput{}
@@ -44,9 +43,9 @@ type DescribeLoaInput struct {
 	// application/pdf.
 	LoaContentType types.LoaContentType
 
-	// The name of the service provider who establishes connectivity on your behalf. If
-	// you specify this parameter, the LOA-CFA lists the provider name alongside your
-	// company name as the requester of the cross connect.
+	// The name of the service provider who establishes connectivity on your behalf.
+	// If you specify this parameter, the LOA-CFA lists the provider name alongside
+	// your company name as the requester of the cross connect.
 	ProviderName *string
 
 	noSmithyDocumentSerde

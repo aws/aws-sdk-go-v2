@@ -34,8 +34,8 @@ type ListFiltersInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 50. The maximum value is 50.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
 	MaxResults int32
 
 	// You can use this parameter when paginating results. Set the value of this
@@ -136,8 +136,8 @@ var _ ListFiltersAPIClient = (*Client)(nil)
 
 // ListFiltersPaginatorOptions is the paginator options for ListFilters
 type ListFiltersPaginatorOptions struct {
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 50. The maximum value is 50.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

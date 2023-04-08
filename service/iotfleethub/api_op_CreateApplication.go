@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Fleet Hub for AWS IoT Device Management web application. Fleet Hub for
-// AWS IoT Device Management is in public preview and is subject to change.
+// Creates a Fleet Hub for AWS IoT Device Management web application. Fleet Hub
+// for AWS IoT Device Management is in public preview and is subject to change.
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}

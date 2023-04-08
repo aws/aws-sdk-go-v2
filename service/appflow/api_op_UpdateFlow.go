@@ -41,8 +41,8 @@ type UpdateFlowInput struct {
 	// This member is required.
 	FlowName *string
 
-	// Contains information about the configuration of the source connector used in the
-	// flow.
+	// Contains information about the configuration of the source connector used in
+	// the flow.
 	//
 	// This member is required.
 	SourceFlowConfig *types.SourceFlowConfig

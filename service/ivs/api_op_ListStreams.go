@@ -51,7 +51,7 @@ type ListStreamsOutput struct {
 	// This member is required.
 	Streams []types.StreamSummary
 
-	// If there are more streams than maxResults, use nextToken in the request to get
+	// If there are more streams than maxResults , use nextToken in the request to get
 	// the next set.
 	NextToken *string
 

@@ -48,8 +48,8 @@ type ListInferenceExecutionsInput struct {
 	// Specifies the maximum number of inference executions to list.
 	MaxResults *int32
 
-	// An opaque pagination token indicating where to continue the listing of inference
-	// executions.
+	// An opaque pagination token indicating where to continue the listing of
+	// inference executions.
 	NextToken *string
 
 	// The status of the inference execution.
@@ -65,8 +65,8 @@ type ListInferenceExecutionsOutput struct {
 	// inference scheduler, data configuration, and so on.
 	InferenceExecutionSummaries []types.InferenceExecutionSummary
 
-	// An opaque pagination token indicating where to continue the listing of inference
-	// executions.
+	// An opaque pagination token indicating where to continue the listing of
+	// inference executions.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

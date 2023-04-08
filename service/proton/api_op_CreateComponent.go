@@ -13,9 +13,8 @@ import (
 )
 
 // Create an Proton component. A component is an infrastructure extension for a
-// service instance. For more information about components, see Proton components
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-// Proton User Guide.
+// service instance. For more information about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+// in the Proton User Guide.
 func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInput, optFns ...func(*Options)) (*CreateComponentOutput, error) {
 	if params == nil {
 		params = &CreateComponentInput{}
@@ -47,8 +46,8 @@ type CreateComponentInput struct {
 	// This member is required.
 	Name *string
 
-	// A path to the Infrastructure as Code (IaC) file describing infrastructure that a
-	// custom component provisions. Components support a single IaC file, even if you
+	// A path to the Infrastructure as Code (IaC) file describing infrastructure that
+	// a custom component provisions. Components support a single IaC file, even if you
 	// use Terraform as your template language.
 	//
 	// This value conforms to the media type: application/yaml
@@ -64,7 +63,7 @@ type CreateComponentInput struct {
 
 	// The name of the Proton environment that you want to associate this component
 	// with. You must specify this when you don't specify serviceInstanceName and
-	// serviceName.
+	// serviceName .
 	EnvironmentName *string
 
 	// The name of the service instance that you want to attach this component to. If
@@ -84,8 +83,8 @@ type CreateComponentInput struct {
 	ServiceSpec *string
 
 	// An optional list of metadata items that you can associate with the Proton
-	// component. A tag is a key-value pair. For more information, see Proton resources
-	// and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
+	// component. A tag is a key-value pair. For more information, see Proton
+	// resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
 	// in the Proton User Guide.
 	Tags []types.Tag
 

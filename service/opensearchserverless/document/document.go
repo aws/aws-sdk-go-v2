@@ -11,9 +11,9 @@ import (
 // precision numbers, booleans, nulls, a list of these values, and a map of UTF-8
 // strings to these values.
 //
-// You create a document type using the NewLazyDocument function and passing it the
-// Go type to marshal. When receiving a document in an API response, you use the
-// document's UnmarshalSmithyDocument function to decode the response to your
+// You create a document type using the NewLazyDocument function and passing it
+// the Go type to marshal. When receiving a document in an API response, you use
+// the document's UnmarshalSmithyDocument function to decode the response to your
 // desired Go type. Unless documented specifically generated structure types in
 // client packages or client types packages are not supported at this time. Such
 // types embed a noSmithyDocumentSerde and will cause an error to be returned when

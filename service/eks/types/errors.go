@@ -64,9 +64,9 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// These errors are usually caused by a client action. Actions can include using an
-// action or resource on behalf of a user that doesn't have permissions to use the
-// action or resource or specifying an identifier that is not valid.
+// These errors are usually caused by a client action. Actions can include using
+// an action or resource on behalf of a user that doesn't have permissions to use
+// the action or resource or specifying an identifier that is not valid.
 type ClientException struct {
 	Message *string
 
@@ -246,8 +246,8 @@ func (e *ResourceLimitExceededException) ErrorCode() string {
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource could not be found. You can view your available clusters
-// with ListClusters. You can view your available managed node groups with
-// ListNodegroups. Amazon EKS clusters and node groups are Region-specific.
+// with ListClusters . You can view your available managed node groups with
+// ListNodegroups . Amazon EKS clusters and node groups are Region-specific.
 type ResourceNotFoundException struct {
 	Message *string
 

@@ -19,7 +19,7 @@ import (
 // number is claimed to a traffic distribution group and you are calling this API
 // in the alternate Amazon Web Services Region associated with the traffic
 // distribution group, you must provide a full phone number ARN. If a UUID is
-// provided in this scenario, you will receive a ResourceNotFoundException.
+// provided in this scenario, you will receive a ResourceNotFoundException .
 func (c *Client) DescribePhoneNumber(ctx context.Context, params *DescribePhoneNumberInput, optFns ...func(*Options)) (*DescribePhoneNumberOutput, error) {
 	if params == nil {
 		params = &DescribePhoneNumberInput{}

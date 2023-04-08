@@ -14,8 +14,7 @@ import (
 )
 
 // Request an origination phone number for use in your account. For more
-// information on phone number request see  Requesting a number
-// (https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-request-number.html)
+// information on phone number request see Requesting a number  (https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-request-number.html)
 // in the Amazon Pinpoint User Guide.
 func (c *Client) RequestPhoneNumber(ctx context.Context, params *RequestPhoneNumberInput, optFns ...func(*Options)) (*RequestPhoneNumberOutput, error) {
 	if params == nil {
@@ -46,8 +45,8 @@ type RequestPhoneNumberInput struct {
 	// This member is required.
 	MessageType types.MessageType
 
-	// Indicates if the phone number will be used for text messages, voice messages, or
-	// both.
+	// Indicates if the phone number will be used for text messages, voice messages,
+	// or both.
 	//
 	// This member is required.
 	NumberCapabilities []types.NumberCapability
@@ -85,8 +84,8 @@ type RequestPhoneNumberInput struct {
 
 type RequestPhoneNumberOutput struct {
 
-	// The time when the phone number was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	CreatedTimestamp *time.Time
 
 	// By default this is set to false. When set to true the phone number can't be

@@ -14,8 +14,7 @@ import (
 // Updates properties for an alias. To update properties, specify the alias ID to
 // be updated and provide the information to be changed. To reassign an alias to
 // another fleet, provide an updated routing strategy. If successful, the updated
-// alias record is returned. Related actions All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// alias record is returned. Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optFns ...func(*Options)) (*UpdateAliasOutput, error) {
 	if params == nil {
 		params = &UpdateAliasInput{}
@@ -42,8 +41,8 @@ type UpdateAliasInput struct {
 	// A human-readable description of the alias.
 	Description *string
 
-	// A descriptive label that is associated with an alias. Alias names do not need to
-	// be unique.
+	// A descriptive label that is associated with an alias. Alias names do not need
+	// to be unique.
 	Name *string
 
 	// The routing configuration, including routing type and fleet target, for the

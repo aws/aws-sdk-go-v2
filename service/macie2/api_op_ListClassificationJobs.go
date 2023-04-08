@@ -48,8 +48,8 @@ type ListClassificationJobsInput struct {
 
 type ListClassificationJobsOutput struct {
 
-	// An array of objects, one for each job that matches the filter criteria specified
-	// in the request.
+	// An array of objects, one for each job that matches the filter criteria
+	// specified in the request.
 	Items []types.JobSummary
 
 	// The string to use in a subsequent request to get the next page of results in a

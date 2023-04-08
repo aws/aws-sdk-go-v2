@@ -12,7 +12,7 @@ import (
 )
 
 // Ingests your application events into CloudTrail Lake. A required parameter,
-// auditEvents, accepts the JSON records (also called payload) of events that you
+// auditEvents , accepts the JSON records (also called payload) of events that you
 // want CloudTrail to ingest. You can add up to 100 of these events (or up to 1 MB)
 // per PutAuditEvents request.
 func (c *Client) PutAuditEvents(ctx context.Context, params *PutAuditEventsInput, optFns ...func(*Options)) (*PutAuditEventsOutput, error) {

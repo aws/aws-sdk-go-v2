@@ -16,9 +16,8 @@ import (
 // different address ranges each time. It can take a few minutes before traffic to
 // the specified addresses stops routing to Amazon Web Services because of
 // propagation delays. For more information, see Bring your own IP addresses
-// (BYOIP)
-// (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
-// the Global Accelerator Developer Guide.
+// (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+// in the Global Accelerator Developer Guide.
 func (c *Client) WithdrawByoipCidr(ctx context.Context, params *WithdrawByoipCidrInput, optFns ...func(*Options)) (*WithdrawByoipCidrOutput, error) {
 	if params == nil {
 		params = &WithdrawByoipCidrInput{}

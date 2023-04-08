@@ -52,7 +52,7 @@ type ListStreamKeysOutput struct {
 	// This member is required.
 	StreamKeys []types.StreamKeySummary
 
-	// If there are more stream keys than maxResults, use nextToken in the request to
+	// If there are more stream keys than maxResults , use nextToken in the request to
 	// get the next set.
 	NextToken *string
 

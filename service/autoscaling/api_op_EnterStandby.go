@@ -11,15 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Moves the specified instances into the standby state. If you choose to decrement
-// the desired capacity of the Auto Scaling group, the instances can enter standby
-// as long as the desired capacity of the Auto Scaling group after the instances
-// are placed into standby is equal to or greater than the minimum capacity of the
-// group. If you choose not to decrement the desired capacity of the Auto Scaling
-// group, the Auto Scaling group launches new instances to replace the instances on
-// standby. For more information, see Temporarily removing instances from your Auto
-// Scaling group
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html)
+// Moves the specified instances into the standby state. If you choose to
+// decrement the desired capacity of the Auto Scaling group, the instances can
+// enter standby as long as the desired capacity of the Auto Scaling group after
+// the instances are placed into standby is equal to or greater than the minimum
+// capacity of the group. If you choose not to decrement the desired capacity of
+// the Auto Scaling group, the Auto Scaling group launches new instances to replace
+// the instances on standby. For more information, see Temporarily removing
+// instances from your Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) EnterStandby(ctx context.Context, params *EnterStandbyInput, optFns ...func(*Options)) (*EnterStandbyOutput, error) {
 	if params == nil {
@@ -43,8 +42,8 @@ type EnterStandbyInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// Indicates whether to decrement the desired capacity of the Auto Scaling group by
-	// the number of instances moved to Standby mode.
+	// Indicates whether to decrement the desired capacity of the Auto Scaling group
+	// by the number of instances moved to Standby mode.
 	//
 	// This member is required.
 	ShouldDecrementDesiredCapacity *bool

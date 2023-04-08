@@ -29,8 +29,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the schedule group from which you are removing
-	// tags.
+	// The Amazon Resource Name (ARN) of the schedule group from which you are
+	// removing tags.
 	//
 	// This member is required.
 	ResourceArn *string

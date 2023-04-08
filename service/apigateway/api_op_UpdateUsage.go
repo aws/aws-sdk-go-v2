@@ -43,8 +43,8 @@ type UpdateUsageInput struct {
 	// This member is required.
 	UsagePlanId *string
 
-	// For more information about supported patch operations, see Patch Operations
-	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
+	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
+	// .
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -58,9 +58,9 @@ type UpdateUsageOutput struct {
 
 	// The usage data, as daily logs of used and remaining quotas, over the specified
 	// time interval indexed over the API keys in a usage plan. For example, {...,
-	// "values" : { "{api_key}" : [ [0, 100], [10, 90], [100, 10]]}, where {api_key}
+	// "values" : { "{api_key}" : [ [0, 100], [10, 90], [100, 10]]} , where {api_key}
 	// stands for an API key value and the daily log entry is of the format [used
-	// quota, remaining quota].
+	// quota, remaining quota] .
 	Items map[string][][]int64
 
 	// The current pagination position in the paged result set.

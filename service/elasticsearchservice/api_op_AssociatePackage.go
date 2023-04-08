@@ -47,7 +47,7 @@ type AssociatePackageInput struct {
 // Container for response returned by AssociatePackage operation.
 type AssociatePackageOutput struct {
 
-	// DomainPackageDetails
+	//     DomainPackageDetails
 	DomainPackageDetails *types.DomainPackageDetails
 
 	// Metadata pertaining to the operation's result.

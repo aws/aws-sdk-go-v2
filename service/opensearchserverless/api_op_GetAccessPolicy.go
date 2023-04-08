@@ -12,8 +12,8 @@ import (
 )
 
 // Returns an OpenSearch Serverless access policy. For more information, see Data
-// access control for Amazon OpenSearch Serverless
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html).
+// access control for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html)
+// .
 func (c *Client) GetAccessPolicy(ctx context.Context, params *GetAccessPolicyInput, optFns ...func(*Options)) (*GetAccessPolicyOutput, error) {
 	if params == nil {
 		params = &GetAccessPolicyInput{}
@@ -36,7 +36,7 @@ type GetAccessPolicyInput struct {
 	// This member is required.
 	Name *string
 
-	// Tye type of policy. Currently the only supported value is data.
+	// Tye type of policy. Currently the only supported value is data .
 	//
 	// This member is required.
 	Type types.AccessPolicyType

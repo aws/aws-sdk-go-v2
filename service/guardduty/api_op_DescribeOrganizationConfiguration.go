@@ -15,8 +15,8 @@ import (
 // Returns information about the account selected as the delegated administrator
 // for GuardDuty. There might be regional differences because some data sources
 // might not be available in all the Amazon Web Services Regions where GuardDuty is
-// presently supported. For more information, see Regions and endpoints
-// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+// presently supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
+// .
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}
@@ -34,14 +34,14 @@ func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *
 
 type DescribeOrganizationConfigurationInput struct {
 
-	// The ID of the detector to retrieve information about the delegated administrator
-	// from.
+	// The ID of the detector to retrieve information about the delegated
+	// administrator from.
 	//
 	// This member is required.
 	DetectorId *string
 
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response.
 	MaxResults int32
 
 	// You can use this parameter when paginating results. Set the value of this
@@ -68,21 +68,17 @@ type DescribeOrganizationConfigurationOutput struct {
 	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
 	AutoEnable bool
 
-	// Indicates the auto-enablement configuration of GuardDuty for the member accounts
-	// in the organization.
-	//
-	// * NEW: Indicates that when a new account joins the
-	// organization, they will have GuardDuty enabled automatically.
-	//
-	// * ALL: Indicates
-	// that all accounts in the Amazon Web Services Organization have GuardDuty enabled
-	// automatically. This includes NEW accounts that join the organization and
-	// accounts that may have been suspended or removed from the organization in
-	// GuardDuty.
-	//
-	// * NONE: Indicates that GuardDuty will not be automatically enabled
-	// for any accounts in the organization. GuardDuty must be managed for each account
-	// individually by the administrator.
+	// Indicates the auto-enablement configuration of GuardDuty for the member
+	// accounts in the organization.
+	//   - NEW : Indicates that when a new account joins the organization, they will
+	//   have GuardDuty enabled automatically.
+	//   - ALL : Indicates that all accounts in the Amazon Web Services Organization
+	//   have GuardDuty enabled automatically. This includes NEW accounts that join the
+	//   organization and accounts that may have been suspended or removed from the
+	//   organization in GuardDuty.
+	//   - NONE : Indicates that GuardDuty will not be automatically enabled for any
+	//   accounts in the organization. GuardDuty must be managed for each account
+	//   individually by the administrator.
 	AutoEnableOrganizationMembers types.AutoEnableMembers
 
 	// Describes which data sources are enabled automatically for member accounts.
@@ -177,8 +173,8 @@ var _ DescribeOrganizationConfigurationAPIClient = (*Client)(nil)
 // DescribeOrganizationConfigurationPaginatorOptions is the paginator options for
 // DescribeOrganizationConfiguration
 type DescribeOrganizationConfigurationPaginatorOptions struct {
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

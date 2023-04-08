@@ -69,8 +69,8 @@ type BandMathConfigInput struct {
 	// CustomIndices that are computed.
 	CustomIndices *CustomIndicesInput
 
-	// One or many of the supported predefined indices to compute. Allowed values:
-	// NDVI, EVI2, MSAVI, NDWI, NDMI, NDSI, and WDRVI.
+	// One or many of the supported predefined indices to compute. Allowed values: NDVI
+	// , EVI2 , MSAVI , NDWI , NDMI , NDSI , and WDRVI .
 	PredefinedIndices []string
 
 	noSmithyDocumentSerde
@@ -143,8 +143,8 @@ type EojDataSourceConfigInput interface {
 	isEojDataSourceConfigInput()
 }
 
-// The input structure for S3Data; representing the Amazon S3 location of the input
-// data objects.
+// The input structure for S3Data; representing the Amazon S3 location of the
+// input data objects.
 type EojDataSourceConfigInputMemberS3Data struct {
 	Value S3DataInput
 
@@ -269,8 +269,8 @@ type InputConfigInput struct {
 	// The Amazon Resource Name (ARN) of the previous Earth Observation job.
 	PreviousEarthObservationJobArn *string
 
-	// The structure representing the RasterDataCollection Query consisting of the Area
-	// of Interest, RasterDataCollectionArn,TimeRange and Property Filters.
+	// The structure representing the RasterDataCollection Query consisting of the
+	// Area of Interest, RasterDataCollectionArn,TimeRange and Property Filters.
 	RasterDataCollectionQuery *RasterDataCollectionQueryInput
 
 	noSmithyDocumentSerde
@@ -285,9 +285,9 @@ type InputConfigOutput struct {
 	// The Amazon Resource Name (ARN) of the previous Earth Observation job.
 	PreviousEarthObservationJobArn *string
 
-	// The structure representing the RasterDataCollection Query consisting of the Area
-	// of Interest, RasterDataCollectionArn, RasterDataCollectionName, TimeRange, and
-	// Property Filters.
+	// The structure representing the RasterDataCollection Query consisting of the
+	// Area of Interest, RasterDataCollectionArn, RasterDataCollectionName, TimeRange,
+	// and Property Filters.
 	RasterDataCollectionQuery *RasterDataCollectionQueryOutput
 
 	noSmithyDocumentSerde
@@ -553,8 +553,8 @@ type MapMatchingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The structure representing Polygon Geometry based on the GeoJson spec
-// (https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6).
+// The structure representing Polygon Geometry based on the GeoJson spec (https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
+// .
 type MultiPolygonGeometryInput struct {
 
 	// The coordinates of the multipolygon geometry.
@@ -630,7 +630,7 @@ type OutputResolutionResamplingInput struct {
 type OutputResolutionStackInput struct {
 
 	// A string value representing Predefined Output Resolution for a stacking
-	// operation. Allowed values are HIGHEST, LOWEST, and AVERAGE.
+	// operation. Allowed values are HIGHEST , LOWEST , and AVERAGE .
 	Predefined PredefinedResolution
 
 	// The structure representing User Output Resolution for a Stacking operation
@@ -656,12 +656,12 @@ type PlatformInput struct {
 	noSmithyDocumentSerde
 }
 
-// The structure representing Polygon Geometry based on the GeoJson spec
-// (https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6).
+// The structure representing Polygon Geometry based on the GeoJson spec (https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
+// .
 type PolygonGeometryInput struct {
 
-	// Coordinates representing a Polygon based on the GeoJson spec
-	// (https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6).
+	// Coordinates representing a Polygon based on the GeoJson spec (https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
+	// .
 	//
 	// This member is required.
 	Coordinates [][][]float64
@@ -691,11 +691,11 @@ type Properties struct {
 	// angle between truth north and the sun. Measured clockwise in degrees (0-360).
 	ViewSunAzimuth *float32
 
-	// The sun elevation angle. The angle from the tangent of the scene center point to
-	// the sun. Measured from the horizon in degrees (-90-90). Negative values indicate
-	// the sun is below the horizon, e.g. sun elevation of -10° means the data was
-	// captured during nautical twilight
-	// (https://www.timeanddate.com/astronomy/different-types-twilight.html).
+	// The sun elevation angle. The angle from the tangent of the scene center point
+	// to the sun. Measured from the horizon in degrees (-90-90). Negative values
+	// indicate the sun is below the horizon, e.g. sun elevation of -10° means the data
+	// was captured during nautical twilight (https://www.timeanddate.com/astronomy/different-types-twilight.html)
+	// .
 	ViewSunElevation *float32
 
 	noSmithyDocumentSerde
@@ -715,8 +715,8 @@ type Property interface {
 	isProperty()
 }
 
-// The structure representing EoCloudCover property filter containing a lower bound
-// and upper bound.
+// The structure representing EoCloudCover property filter containing a lower
+// bound and upper bound.
 type PropertyMemberEoCloudCover struct {
 	Value EoCloudCoverInput
 
@@ -745,8 +745,8 @@ type PropertyMemberPlatform struct {
 
 func (*PropertyMemberPlatform) isProperty() {}
 
-// The structure representing ViewOffNadir property filter containing a lower bound
-// and upper bound.
+// The structure representing ViewOffNadir property filter containing a lower
+// bound and upper bound.
 type PropertyMemberViewOffNadir struct {
 	Value ViewOffNadirInput
 
@@ -920,8 +920,8 @@ type ResamplingConfigInput struct {
 	// The name of the algorithm used for resampling.
 	AlgorithmName AlgorithmNameResampling
 
-	// Bands used in the operation. If no target bands are specified, it uses all bands
-	// available in the input.
+	// Bands used in the operation. If no target bands are specified, it uses all
+	// bands available in the input.
 	TargetBands []string
 
 	noSmithyDocumentSerde
@@ -930,8 +930,8 @@ type ResamplingConfigInput struct {
 // The input structure for Reverse Geocoding operation type.
 type ReverseGeocodingConfig struct {
 
-	// The field name for the data that describes x-axis coordinate, eg. longitude of a
-	// point.
+	// The field name for the data that describes x-axis coordinate, eg. longitude of
+	// a point.
 	//
 	// This member is required.
 	XAttributeName *string
@@ -1222,8 +1222,8 @@ type ZonalStatisticsConfigInput struct {
 	// This member is required.
 	ZoneS3Path *string
 
-	// Bands used in the operation. If no target bands are specified, it uses all bands
-	// available input.
+	// Bands used in the operation. If no target bands are specified, it uses all
+	// bands available input.
 	TargetBands []string
 
 	// The Amazon Resource Name (ARN) or an ID of a Amazon Web Services Key Management
@@ -1231,16 +1231,10 @@ type ZonalStatisticsConfigInput struct {
 	// output artifacts with Amazon S3 server-side encryption. The SageMaker execution
 	// role must have kms:GenerateDataKey permission. The KmsKeyId can be any of the
 	// following formats:
-	//
-	// * // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * //
-	// Amazon Resource Name (ARN) of a KMS Key
-	// "arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"
-	//
-	// For
-	// more information about key identifiers, see Key identifiers (KeyID)
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
+	//   - // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - // Amazon Resource Name (ARN) of a KMS Key
+	//   "arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"
+	// For more information about key identifiers, see Key identifiers (KeyID) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
 	// in the Amazon Web Services Key Management Service (Amazon Web Services KMS)
 	// documentation.
 	ZoneS3PathKmsKeyId *string

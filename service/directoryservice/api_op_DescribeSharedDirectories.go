@@ -39,7 +39,7 @@ type DescribeSharedDirectoriesInput struct {
 	Limit *int32
 
 	// The DescribeSharedDirectoriesResult.NextToken value from a previous call to
-	// DescribeSharedDirectories. Pass null if this is the first call.
+	// DescribeSharedDirectories . Pass null if this is the first call.
 	NextToken *string
 
 	// A list of identifiers of all shared directories in your account.

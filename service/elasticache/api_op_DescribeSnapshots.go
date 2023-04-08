@@ -38,10 +38,10 @@ type DescribeSnapshotsInput struct {
 	// snapshots associated with that specific cluster are described.
 	CacheClusterId *string
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -62,7 +62,7 @@ type DescribeSnapshotsInput struct {
 	// snapshot are described.
 	SnapshotName *string
 
-	// If set to system, the output shows snapshots that were automatically created by
+	// If set to system , the output shows snapshots that were automatically created by
 	// ElastiCache. If set to user the output shows snapshots that were manually
 	// created. If omitted, the output shows both automatically and manually created
 	// snapshots.
@@ -74,10 +74,10 @@ type DescribeSnapshotsInput struct {
 // Represents the output of a DescribeSnapshots operation.
 type DescribeSnapshotsOutput struct {
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
 	// A list of snapshots. Each item in the list contains detailed information about

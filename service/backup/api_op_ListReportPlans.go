@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of your report plans. For detailed information about a single
-// report plan, use DescribeReportPlan.
+// report plan, use DescribeReportPlan .
 func (c *Client) ListReportPlans(ctx context.Context, params *ListReportPlansInput, optFns ...func(*Options)) (*ListReportPlansOutput, error) {
 	if params == nil {
 		params = &ListReportPlansInput{}

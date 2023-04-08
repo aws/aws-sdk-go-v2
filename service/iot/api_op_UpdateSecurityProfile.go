@@ -13,8 +13,7 @@ import (
 )
 
 // Updates a Device Defender security profile. Requires permission to access the
-// UpdateSecurityProfile
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// UpdateSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateSecurityProfile(ctx context.Context, params *UpdateSecurityProfileInput, optFns ...func(*Options)) (*UpdateSecurityProfileOutput, error) {
 	if params == nil {
@@ -40,7 +39,7 @@ type UpdateSecurityProfileInput struct {
 
 	// Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead. A
 	// list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the profile's behaviors, but it is also retained for any
+	// for any metric used in the profile's behaviors , but it is also retained for any
 	// metric specified here. Can be used with custom metrics; cannot be used with
 	// dimensions.
 	//
@@ -59,9 +58,9 @@ type UpdateSecurityProfileInput struct {
 	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	Behaviors []types.Behavior
 
-	// If true, delete all additionalMetricsToRetain defined for this security profile.
-	// If any additionalMetricsToRetain are defined in the current invocation, an
-	// exception occurs.
+	// If true, delete all additionalMetricsToRetain defined for this security
+	// profile. If any additionalMetricsToRetain are defined in the current
+	// invocation, an exception occurs.
 	DeleteAdditionalMetricsToRetain bool
 
 	// If true, delete all alertTargets defined for this security profile. If any
@@ -87,8 +86,8 @@ type UpdateSecurityProfileOutput struct {
 
 	// Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead. A
 	// list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the security profile's behaviors, but it is also retained
-	// for any metric specified here.
+	// for any metric used in the security profile's behaviors , but it is also
+	// retained for any metric specified here.
 	//
 	// Deprecated: Use additionalMetricsToRetainV2.
 	AdditionalMetricsToRetain []string

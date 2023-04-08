@@ -24,8 +24,8 @@ import (
 // member accounts for all sources. Similarly, when you do not specify Regions,
 // Security Lake is enabled for all the Regions where Security Lake is available as
 // a service. You can use this API only to enable natively supported Amazon Web
-// Services as a source. Use CreateCustomLogSource to enable data collection from a
-// custom source.
+// Services as a source. Use CreateCustomLogSource to enable data collection from
+// a custom source.
 func (c *Client) CreateAwsLogSource(ctx context.Context, params *CreateAwsLogSourceInput, optFns ...func(*Options)) (*CreateAwsLogSourceOutput, error) {
 	if params == nil {
 		params = &CreateAwsLogSourceInput{}

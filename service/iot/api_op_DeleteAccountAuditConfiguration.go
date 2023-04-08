@@ -12,8 +12,7 @@ import (
 
 // Restores the default settings for Device Defender audits for this account. Any
 // configuration data you entered is deleted and all audit checks are reset to
-// disabled. Requires permission to access the DeleteAccountAuditConfiguration
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// disabled. Requires permission to access the DeleteAccountAuditConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteAccountAuditConfiguration(ctx context.Context, params *DeleteAccountAuditConfigurationInput, optFns ...func(*Options)) (*DeleteAccountAuditConfigurationOutput, error) {
 	if params == nil {

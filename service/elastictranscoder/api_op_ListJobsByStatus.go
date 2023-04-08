@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListJobsByStatus operation gets a list of jobs that have a specified status.
-// The response body contains one element for each job that satisfies the search
-// criteria.
+// The ListJobsByStatus operation gets a list of jobs that have a specified
+// status. The response body contains one element for each job that satisfies the
+// search criteria.
 func (c *Client) ListJobsByStatus(ctx context.Context, params *ListJobsByStatusInput, optFns ...func(*Options)) (*ListJobsByStatusOutput, error) {
 	if params == nil {
 		params = &ListJobsByStatusInput{}
@@ -33,15 +33,16 @@ func (c *Client) ListJobsByStatus(ctx context.Context, params *ListJobsByStatusI
 // The ListJobsByStatusRequest structure.
 type ListJobsByStatusInput struct {
 
-	// To get information about all of the jobs associated with the current AWS account
-	// that have a given status, specify the following status: Submitted, Progressing,
-	// Complete, Canceled, or Error.
+	// To get information about all of the jobs associated with the current AWS
+	// account that have a given status, specify the following status: Submitted ,
+	// Progressing , Complete , Canceled , or Error .
 	//
 	// This member is required.
 	Status *string
 
 	// To list jobs in chronological order by the date and time that they were
-	// submitted, enter true. To list jobs in reverse chronological order, enter false.
+	// submitted, enter true . To list jobs in reverse chronological order, enter false
+	// .
 	Ascending *string
 
 	// When Elastic Transcoder returns more than one page of results, use pageToken in
@@ -59,7 +60,7 @@ type ListJobsByStatusOutput struct {
 
 	// A value that you use to access the second and subsequent pages of results, if
 	// any. When the jobs in the specified pipeline fit on one page or when you've
-	// reached the last page of results, the value of NextPageToken is null.
+	// reached the last page of results, the value of NextPageToken is null .
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

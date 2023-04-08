@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers an Amazon RDS instance with a stack. Required Permissions: To use this
-// action, an IAM user must have a Manage permissions level for the stack, or an
-// attached policy that explicitly grants permissions. For more information on user
-// permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Registers an Amazon RDS instance with a stack. Required Permissions: To use
+// this action, an IAM user must have a Manage permissions level for the stack, or
+// an attached policy that explicitly grants permissions. For more information on
+// user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) RegisterRdsDbInstance(ctx context.Context, params *RegisterRdsDbInstanceInput, optFns ...func(*Options)) (*RegisterRdsDbInstanceOutput, error) {
 	if params == nil {
 		params = &RegisterRdsDbInstanceInput{}

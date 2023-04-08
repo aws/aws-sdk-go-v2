@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a pricing plan. The pricing plan must not be associated with any billing
-// groups to delete successfully.
+// Deletes a pricing plan. The pricing plan must not be associated with any
+// billing groups to delete successfully.
 func (c *Client) DeletePricingPlan(ctx context.Context, params *DeletePricingPlanInput, optFns ...func(*Options)) (*DeletePricingPlanOutput, error) {
 	if params == nil {
 		params = &DeletePricingPlanInput{}

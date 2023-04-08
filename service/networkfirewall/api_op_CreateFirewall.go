@@ -18,11 +18,11 @@ import (
 // that are attached to the firewall Amazon Web Services resource. After you create
 // a firewall, you can provide additional settings, like the logging configuration.
 // To update the settings for a firewall, you use the operations that apply to the
-// settings themselves, for example UpdateLoggingConfiguration, AssociateSubnets,
-// and UpdateFirewallDeleteProtection. To manage a firewall's tags, use the
-// standard Amazon Web Services resource tagging operations, ListTagsForResource,
-// TagResource, and UntagResource. To retrieve information about firewalls, use
-// ListFirewalls and DescribeFirewall.
+// settings themselves, for example UpdateLoggingConfiguration , AssociateSubnets ,
+// and UpdateFirewallDeleteProtection . To manage a firewall's tags, use the
+// standard Amazon Web Services resource tagging operations, ListTagsForResource ,
+// TagResource , and UntagResource . To retrieve information about firewalls, use
+// ListFirewalls and DescribeFirewall .
 func (c *Client) CreateFirewall(ctx context.Context, params *CreateFirewallInput, optFns ...func(*Options)) (*CreateFirewallOutput, error) {
 	if params == nil {
 		params = &CreateFirewallInput{}
@@ -68,7 +68,7 @@ type CreateFirewallInput struct {
 	// A flag indicating whether it is possible to delete the firewall. A setting of
 	// TRUE indicates that the firewall is protected against deletion. Use this setting
 	// to protect against accidentally deleting a firewall that is in use. When you
-	// create a firewall, the operation initializes this flag to TRUE.
+	// create a firewall, the operation initializes this flag to TRUE .
 	DeleteProtection bool
 
 	// A description of the firewall.
@@ -80,13 +80,13 @@ type CreateFirewallInput struct {
 	// A setting indicating whether the firewall is protected against a change to the
 	// firewall policy association. Use this setting to protect against accidentally
 	// modifying the firewall policy for a firewall that is in use. When you create a
-	// firewall, the operation initializes this setting to TRUE.
+	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
 	// A setting indicating whether the firewall is protected against changes to the
 	// subnet associations. Use this setting to protect against accidentally modifying
 	// the subnet associations for a firewall that is in use. When you create a
-	// firewall, the operation initializes this setting to TRUE.
+	// firewall, the operation initializes this setting to TRUE .
 	SubnetChangeProtection bool
 
 	// The key:value pairs to associate with the resource.
@@ -97,11 +97,11 @@ type CreateFirewallInput struct {
 
 type CreateFirewallOutput struct {
 
-	// The configuration settings for the firewall. These settings include the firewall
-	// policy and the subnets in your VPC to use for the firewall endpoints.
+	// The configuration settings for the firewall. These settings include the
+	// firewall policy and the subnets in your VPC to use for the firewall endpoints.
 	Firewall *types.Firewall
 
-	// Detailed information about the current status of a Firewall. You can retrieve
+	// Detailed information about the current status of a Firewall . You can retrieve
 	// this for a firewall by calling DescribeFirewall and providing the firewall name
 	// and ARN.
 	FirewallStatus *types.FirewallStatus

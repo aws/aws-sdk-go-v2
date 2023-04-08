@@ -35,14 +35,14 @@ type SearchUsersInput struct {
 	Filters []types.Filter
 
 	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved. Required.
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved. Required.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
-	// Required.
+	// includes only results beyond the token, up to the value specified by MaxResults
+	// . Required.
 	NextToken *string
 
 	// The sort order to use in listing the filtered set of users. Required. Supported
@@ -142,8 +142,8 @@ var _ SearchUsersAPIClient = (*Client)(nil)
 // SearchUsersPaginatorOptions is the paginator options for SearchUsers
 type SearchUsersPaginatorOptions struct {
 	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved. Required.
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved. Required.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

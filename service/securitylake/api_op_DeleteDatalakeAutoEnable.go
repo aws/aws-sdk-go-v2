@@ -34,8 +34,8 @@ func (c *Client) DeleteDatalakeAutoEnable(ctx context.Context, params *DeleteDat
 
 type DeleteDatalakeAutoEnableInput struct {
 
-	// Remove automatic enablement of configuration settings for new member accounts in
-	// Security Lake.
+	// Remove automatic enablement of configuration settings for new member accounts
+	// in Security Lake.
 	//
 	// This member is required.
 	RemoveFromConfigurationForNewAccounts []types.AutoEnableNewRegionConfiguration

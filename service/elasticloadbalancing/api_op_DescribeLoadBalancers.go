@@ -39,8 +39,8 @@ type DescribeLoadBalancersInput struct {
 	// previous call.)
 	Marker *string
 
-	// The maximum number of results to return with this call (a number from 1 to 400).
-	// The default is 400.
+	// The maximum number of results to return with this call (a number from 1 to
+	// 400). The default is 400.
 	PageSize *int32
 
 	noSmithyDocumentSerde

@@ -50,8 +50,8 @@ type ListAppsInput struct {
 	// value cannot be set.
 	SpaceNameEquals *string
 
-	// A parameter to search by user profile name. If SpaceNameEquals is set, then this
-	// value cannot be set.
+	// A parameter to search by user profile name. If SpaceNameEquals is set, then
+	// this value cannot be set.
 	UserProfileNameEquals *string
 
 	noSmithyDocumentSerde

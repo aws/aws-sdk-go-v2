@@ -6,8 +6,8 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// A structure that contains the details of an alternate contact associated with an
-// Amazon Web Services account
+// A structure that contains the details of an alternate contact associated with
+// an Amazon Web Services account
 type AlternateContact struct {
 
 	// The type of alternate contact.
@@ -85,11 +85,11 @@ type ContactInformation struct {
 	noSmithyDocumentSerde
 }
 
-// This is a structure that expresses the Region for a given account, consisting of
-// a name and opt-in status.
+// This is a structure that expresses the Region for a given account, consisting
+// of a name and opt-in status.
 type Region struct {
 
-	// The Region code of a given Region (for example, us-east-1).
+	// The Region code of a given Region (for example, us-east-1 ).
 	RegionName *string
 
 	// One of potential statuses a Region can undergo (Enabled, Enabling, Disabled,

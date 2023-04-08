@@ -14,12 +14,10 @@ import (
 // Services account in this Amazon Web Services Region. IoT Greengrass uses this
 // role to verify the identity of client devices and manage core device
 // connectivity information. The role must include the
-// AWSGreengrassResourceAccessRolePolicy
-// (https://console.aws.amazon.com/iam/home#/policies/arn:awsiam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy)
+// AWSGreengrassResourceAccessRolePolicy (https://console.aws.amazon.com/iam/home#/policies/arn:awsiam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy)
 // managed policy or a custom policy that defines equivalent permissions for the
 // IoT Greengrass features that you use. For more information, see Greengrass
-// service role
-// (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html)
+// service role (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html)
 // in the IoT Greengrass Version 2 Developer Guide.
 func (c *Client) AssociateServiceRoleToAccount(ctx context.Context, params *AssociateServiceRoleToAccountInput, optFns ...func(*Options)) (*AssociateServiceRoleToAccountOutput, error) {
 	if params == nil {

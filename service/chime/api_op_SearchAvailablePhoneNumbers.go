@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for phone numbers that can be ordered. For US numbers, provide at least
-// one of the following search filters: AreaCode, City, State, or TollFreePrefix.
-// If you provide City, you must also provide State. Numbers outside the US only
-// support the PhoneNumberType filter, which you must use.
+// Searches for phone numbers that can be ordered. For US numbers, provide at
+// least one of the following search filters: AreaCode , City , State , or
+// TollFreePrefix . If you provide City , you must also provide State . Numbers
+// outside the US only support the PhoneNumberType filter, which you must use.
 func (c *Client) SearchAvailablePhoneNumbers(ctx context.Context, params *SearchAvailablePhoneNumbersInput, optFns ...func(*Options)) (*SearchAvailablePhoneNumbersOutput, error) {
 	if params == nil {
 		params = &SearchAvailablePhoneNumbersInput{}
@@ -52,7 +52,7 @@ type SearchAvailablePhoneNumbersInput struct {
 	// The phone number type used to filter results. Required for non-US numbers.
 	PhoneNumberType types.PhoneNumberType
 
-	// The state used to filter results. Required only if you provide City. Only
+	// The state used to filter results. Required only if you provide City . Only
 	// applies to the US.
 	State *string
 

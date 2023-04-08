@@ -47,8 +47,8 @@ type AssociateIpamResourceDiscoveryInput struct {
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// Tag specifications.
@@ -59,8 +59,8 @@ type AssociateIpamResourceDiscoveryInput struct {
 
 type AssociateIpamResourceDiscoveryOutput struct {
 
-	// A resource discovery association. An associated resource discovery is a resource
-	// discovery that has been associated with an IPAM.
+	// A resource discovery association. An associated resource discovery is a
+	// resource discovery that has been associated with an IPAM.
 	IpamResourceDiscoveryAssociation *types.IpamResourceDiscoveryAssociation
 
 	// Metadata pertaining to the operation's result.

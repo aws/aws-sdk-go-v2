@@ -49,12 +49,12 @@ type CreateModelVersionInput struct {
 	// This member is required.
 	TrainingDataSource types.TrainingDataSourceEnum
 
-	// Details of the external events data used for model version training. Required if
-	// trainingDataSource is EXTERNAL_EVENTS.
+	// Details of the external events data used for model version training. Required
+	// if trainingDataSource is EXTERNAL_EVENTS .
 	ExternalEventsDetail *types.ExternalEventsDetail
 
-	// Details of the ingested events data used for model version training. Required if
-	// trainingDataSource is INGESTED_EVENTS.
+	// Details of the ingested events data used for model version training. Required
+	// if trainingDataSource is INGESTED_EVENTS .
 	IngestedEventsDetail *types.IngestedEventsDetail
 
 	// A collection of key and value pairs.

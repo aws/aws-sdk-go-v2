@@ -48,8 +48,8 @@ type DescribeAccountOverviewInput struct {
 
 type DescribeAccountOverviewOutput struct {
 
-	// The Mean Time to Recover (MTTR) for all closed insights that were created during
-	// the time range passed in.
+	// The Mean Time to Recover (MTTR) for all closed insights that were created
+	// during the time range passed in.
 	//
 	// This member is required.
 	MeanTimeToRecoverInMilliseconds *int64

@@ -49,19 +49,19 @@ type ListDiscoveredResourcesInput struct {
 	// deleted resources are not included.
 	IncludeDeletedResources bool
 
-	// The maximum number of resource identifiers returned on each page. The default is
-	// 100. You cannot specify a number greater than 100. If you specify 0, Config uses
-	// the default.
+	// The maximum number of resource identifiers returned on each page. The default
+	// is 100. You cannot specify a number greater than 100. If you specify 0, Config
+	// uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
 
-	// The IDs of only those resources that you want Config to list in the response. If
-	// you do not specify this parameter, Config lists all resources of the specified
-	// type that it has discovered. You can list a minimum of 1 resourceID and a
-	// maximum of 20 resourceIds.
+	// The IDs of only those resources that you want Config to list in the response.
+	// If you do not specify this parameter, Config lists all resources of the
+	// specified type that it has discovered. You can list a minimum of 1 resourceID
+	// and a maximum of 20 resourceIds.
 	ResourceIds []string
 
 	// The custom name of only those resources that you want Config to list in the
@@ -78,8 +78,8 @@ type ListDiscoveredResourcesOutput struct {
 	// in a paginated response.
 	NextToken *string
 
-	// The details that identify a resource that is discovered by Config, including the
-	// resource type, ID, and (if available) the custom resource name.
+	// The details that identify a resource that is discovered by Config, including
+	// the resource type, ID, and (if available) the custom resource name.
 	ResourceIdentifiers []types.ResourceIdentifier
 
 	// Metadata pertaining to the operation's result.
@@ -162,9 +162,9 @@ var _ ListDiscoveredResourcesAPIClient = (*Client)(nil)
 // ListDiscoveredResourcesPaginatorOptions is the paginator options for
 // ListDiscoveredResources
 type ListDiscoveredResourcesPaginatorOptions struct {
-	// The maximum number of resource identifiers returned on each page. The default is
-	// 100. You cannot specify a number greater than 100. If you specify 0, Config uses
-	// the default.
+	// The maximum number of resource identifiers returned on each page. The default
+	// is 100. You cannot specify a number greater than 100. If you specify 0, Config
+	// uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

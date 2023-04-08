@@ -123,8 +123,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The specified node type doesn't match the expected node type for a node. You can
-// specify the node type as branch, sensor, actuator, or attribute.
+// The specified node type doesn't match the expected node type for a node. You
+// can specify the node type as branch, sensor, actuator, or attribute.
 type InvalidNodeException struct {
 	Message *string
 

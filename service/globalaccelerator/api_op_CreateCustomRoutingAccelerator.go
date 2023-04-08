@@ -18,8 +18,7 @@ import (
 // that, by default, all destination EC2 instances in a VPC subnet endpoint cannot
 // receive traffic. To enable all destinations to receive traffic, or to specify
 // individual port mappings that can receive traffic, see the
-// AllowCustomRoutingTraffic
-// (https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html)
+// AllowCustomRoutingTraffic (https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html)
 // operation. Global Accelerator is a global service that supports endpoints in
 // multiple Amazon Web Services Regions but you must specify the US West (Oregon)
 // Region to create, update, or otherwise work with accelerators. That is, for
@@ -76,14 +75,12 @@ type CreateCustomRoutingAcceleratorInput struct {
 	// two addresses, separated by a space. Do not include the /32 suffix. Note that
 	// you can't update IP addresses for an existing accelerator. To change them, you
 	// must create a new accelerator with the new addresses. For more information, see
-	// Bring your own IP addresses (BYOIP)
-	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
-	// the Global Accelerator Developer Guide.
+	// Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+	// in the Global Accelerator Developer Guide.
 	IpAddresses []string
 
 	// Create tags for an accelerator. For more information, see Tagging in Global
-	// Accelerator
-	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
+	// Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
 	// in the Global Accelerator Developer Guide.
 	Tags []types.Tag
 

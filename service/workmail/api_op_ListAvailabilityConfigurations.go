@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all the AvailabilityConfiguration's for the given WorkMail organization.
+// List all the AvailabilityConfiguration 's for the given WorkMail organization.
 func (c *Client) ListAvailabilityConfigurations(ctx context.Context, params *ListAvailabilityConfigurationsInput, optFns ...func(*Options)) (*ListAvailabilityConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListAvailabilityConfigurationsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListAvailabilityConfigurations(ctx context.Context, params *Lis
 
 type ListAvailabilityConfigurationsInput struct {
 
-	// The WorkMail organization for which the AvailabilityConfiguration's will be
+	// The WorkMail organization for which the AvailabilityConfiguration 's will be
 	// listed.
 	//
 	// This member is required.
@@ -48,7 +48,7 @@ type ListAvailabilityConfigurationsInput struct {
 
 type ListAvailabilityConfigurationsOutput struct {
 
-	// The list of AvailabilityConfiguration's that exist for the specified WorkMail
+	// The list of AvailabilityConfiguration 's that exist for the specified WorkMail
 	// organization.
 	AvailabilityConfigurations []types.AvailabilityConfiguration
 

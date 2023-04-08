@@ -12,11 +12,8 @@ import (
 
 // Describes the available types of lifecycle hooks. The following hook types are
 // supported:
-//
-// * autoscaling:EC2_INSTANCE_LAUNCHING
-//
-// *
-// autoscaling:EC2_INSTANCE_TERMINATING
+//   - autoscaling:EC2_INSTANCE_LAUNCHING
+//   - autoscaling:EC2_INSTANCE_TERMINATING
 func (c *Client) DescribeLifecycleHookTypes(ctx context.Context, params *DescribeLifecycleHookTypesInput, optFns ...func(*Options)) (*DescribeLifecycleHookTypesOutput, error) {
 	if params == nil {
 		params = &DescribeLifecycleHookTypesInput{}

@@ -32,29 +32,23 @@ type DescribeFastSnapshotRestoresInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The filters. The possible values are:
-	//
-	// * availability-zone: The Availability
-	// Zone of the snapshot.
-	//
-	// * owner-id: The ID of the Amazon Web Services account
-	// that enabled fast snapshot restore on the snapshot.
-	//
-	// * snapshot-id: The ID of
-	// the snapshot.
-	//
-	// * state: The state of fast snapshot restores for the snapshot
-	// (enabling | optimizing | enabled | disabling | disabled).
+	//   - availability-zone : The Availability Zone of the snapshot.
+	//   - owner-id : The ID of the Amazon Web Services account that enabled fast
+	//   snapshot restore on the snapshot.
+	//   - snapshot-id : The ID of the snapshot.
+	//   - state : The state of fast snapshot restores for the snapshot ( enabling |
+	//   optimizing | enabled | disabling | disabled ).
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -152,8 +146,8 @@ var _ DescribeFastSnapshotRestoresAPIClient = (*Client)(nil)
 type DescribeFastSnapshotRestoresPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables a profile. When disabled, CreateSession
-// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+// Disables a profile. When disabled, CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 // requests with this profile fail. Required permissions:
-// rolesanywhere:DisableProfile.
+// rolesanywhere:DisableProfile .
 func (c *Client) DisableProfile(ctx context.Context, params *DisableProfileInput, optFns ...func(*Options)) (*DisableProfileOutput, error) {
 	if params == nil {
 		params = &DisableProfileInput{}

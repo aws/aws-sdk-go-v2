@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the integration status of services that are integrated with DevOps Guru.
-// The one service that can be integrated with DevOps Guru is Amazon Web Services
-// Systems Manager, which can be used to create an OpsItem for each generated
-// insight.
+// Returns the integration status of services that are integrated with DevOps
+// Guru. The one service that can be integrated with DevOps Guru is Amazon Web
+// Services Systems Manager, which can be used to create an OpsItem for each
+// generated insight.
 func (c *Client) DescribeServiceIntegration(ctx context.Context, params *DescribeServiceIntegrationInput, optFns ...func(*Options)) (*DescribeServiceIntegrationOutput, error) {
 	if params == nil {
 		params = &DescribeServiceIntegrationInput{}

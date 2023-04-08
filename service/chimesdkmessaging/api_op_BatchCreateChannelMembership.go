@@ -49,9 +49,9 @@ type BatchCreateChannelMembershipInput struct {
 	// in a SubChannel for a moderator in an elastic channel.
 	SubChannelId *string
 
-	// The membership type of a user, DEFAULT or HIDDEN. Default members are always
-	// returned as part of ListChannelMemberships. Hidden members are only returned if
-	// the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden
+	// The membership type of a user, DEFAULT or HIDDEN . Default members are always
+	// returned as part of ListChannelMemberships . Hidden members are only returned if
+	// the type filter in ListChannelMemberships equals HIDDEN . Otherwise hidden
 	// members are not returned. This is only supported by moderators.
 	Type types.ChannelMembershipType
 
@@ -63,8 +63,8 @@ type BatchCreateChannelMembershipOutput struct {
 	// The list of channel memberships in the response.
 	BatchChannelMemberships *types.BatchChannelMemberships
 
-	// If the action fails for one or more of the memberships in the request, a list of
-	// the memberships is returned, along with error codes and error messages.
+	// If the action fails for one or more of the memberships in the request, a list
+	// of the memberships is returned, along with error codes and error messages.
 	Errors []types.BatchCreateChannelMembershipError
 
 	// Metadata pertaining to the operation's result.

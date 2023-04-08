@@ -32,8 +32,8 @@ func (c *Client) GetContactReachabilityStatus(ctx context.Context, params *GetCo
 
 type GetContactReachabilityStatusInput struct {
 
-	// The name of the domain for which you want to know whether the registrant contact
-	// has confirmed that the email address is valid.
+	// The name of the domain for which you want to know whether the registrant
+	// contact has confirmed that the email address is valid.
 	DomainName *string
 
 	noSmithyDocumentSerde

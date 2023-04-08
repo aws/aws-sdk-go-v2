@@ -15,8 +15,8 @@ import (
 // such as enhanced infrastructure metrics. Considers all applicable preferences
 // that you might have set at the resource, account, and organization level. When
 // you create a recommendation preference, you can set its status to Active or
-// Inactive. Use this action to view the recommendation preferences that are in
-// effect, or Active.
+// Inactive . Use this action to view the recommendation preferences that are in
+// effect, or Active .
 func (c *Client) GetEffectiveRecommendationPreferences(ctx context.Context, params *GetEffectiveRecommendationPreferencesInput, optFns ...func(*Options)) (*GetEffectiveRecommendationPreferencesOutput, error) {
 	if params == nil {
 		params = &GetEffectiveRecommendationPreferencesInput{}
@@ -48,14 +48,13 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 
 	// The status of the enhanced infrastructure metrics recommendation preference.
 	// Considers all applicable preferences that you might have set at the resource,
-	// account, and organization level. A status of Active confirms that the preference
-	// is applied in the latest recommendation refresh, and a status of Inactive
-	// confirms that it's not yet applied to recommendations. To validate whether the
-	// preference is applied to your last generated set of recommendations, review the
-	// effectiveRecommendationPreferences value in the response of the
+	// account, and organization level. A status of Active confirms that the
+	// preference is applied in the latest recommendation refresh, and a status of
+	// Inactive confirms that it's not yet applied to recommendations. To validate
+	// whether the preference is applied to your last generated set of recommendations,
+	// review the effectiveRecommendationPreferences value in the response of the
 	// GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations actions.
-	// For more information, see Enhanced infrastructure metrics
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// For more information, see Enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics types.EnhancedInfrastructureMetrics
 
@@ -67,8 +66,7 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	// the response. To validate whether the preference is applied to your last
 	// generated set of recommendations, review the effectiveRecommendationPreferences
 	// value in the response of the GetEC2InstanceRecommendations actions. For more
-	// information, see Enhanced infrastructure metrics
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html)
+	// information, see Enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html)
 	// in the Compute Optimizer User Guide.
 	ExternalMetricsPreference *types.ExternalMetricsPreference
 

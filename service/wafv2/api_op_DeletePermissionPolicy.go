@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Permanently deletes an IAM policy from the specified rule group. You must be the
-// owner of the rule group to perform this operation.
+// Permanently deletes an IAM policy from the specified rule group. You must be
+// the owner of the rule group to perform this operation.
 func (c *Client) DeletePermissionPolicy(ctx context.Context, params *DeletePermissionPolicyInput, optFns ...func(*Options)) (*DeletePermissionPolicyOutput, error) {
 	if params == nil {
 		params = &DeletePermissionPolicyInput{}

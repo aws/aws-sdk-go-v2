@@ -13,8 +13,7 @@ import (
 )
 
 // Returns a list of profiling groups. The profiling groups are returned as
-// ProfilingGroupDescription
-// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+// ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
 // objects.
 func (c *Client) ListProfilingGroups(ctx context.Context, params *ListProfilingGroupsInput, optFns ...func(*Options)) (*ListProfilingGroupsOutput, error) {
 	if params == nil {
@@ -34,11 +33,10 @@ func (c *Client) ListProfilingGroups(ctx context.Context, params *ListProfilingG
 // The structure representing the listProfilingGroupsRequest.
 type ListProfilingGroupsInput struct {
 
-	// A Boolean value indicating whether to include a description. If true, then a
-	// list of ProfilingGroupDescription
-	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// A Boolean value indicating whether to include a description. If true , then a
+	// list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
 	// objects that contain detailed information about profiling groups is returned. If
-	// false, then a list of profiling group names is returned.
+	// false , then a list of profiling group names is returned.
 	IncludeDescription *bool
 
 	// The maximum number of profiling groups results returned by ListProfilingGroups
@@ -63,24 +61,21 @@ type ListProfilingGroupsInput struct {
 type ListProfilingGroupsOutput struct {
 
 	// A returned list of profiling group names. A list of the names is returned only
-	// if includeDescription is false, otherwise a list of ProfilingGroupDescription
-	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// if includeDescription is false , otherwise a list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
 	// objects is returned.
 	//
 	// This member is required.
 	ProfilingGroupNames []string
 
-	// The nextToken value to include in a future ListProfilingGroups request. When the
-	// results of a ListProfilingGroups request exceed maxResults, this value can be
-	// used to retrieve the next page of results. This value is null when there are no
-	// more results to return.
+	// The nextToken value to include in a future ListProfilingGroups request. When
+	// the results of a ListProfilingGroups request exceed maxResults , this value can
+	// be used to retrieve the next page of results. This value is null when there are
+	// no more results to return.
 	NextToken *string
 
-	// A returned list ProfilingGroupDescription
-	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-	// objects. A list of ProfilingGroupDescription
-	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-	// objects is returned only if includeDescription is true, otherwise a list of
+	// A returned list ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// objects. A list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// objects is returned only if includeDescription is true , otherwise a list of
 	// profiling group names is returned.
 	ProfilingGroups []types.ProfilingGroupDescription
 
@@ -150,8 +145,8 @@ func (c *Client) addOperationListProfilingGroupsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListProfilingGroupsAPIClient is a client that implements the ListProfilingGroups
-// operation.
+// ListProfilingGroupsAPIClient is a client that implements the
+// ListProfilingGroups operation.
 type ListProfilingGroupsAPIClient interface {
 	ListProfilingGroups(context.Context, *ListProfilingGroupsInput, ...func(*Options)) (*ListProfilingGroupsOutput, error)
 }

@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a signing profile. A signing profile is a code signing template that can
-// be used to carry out a pre-defined signing job. For more information, see
-// http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html
-// (http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html)
+// Creates a signing profile. A signing profile is a code signing template that
+// can be used to carry out a pre-defined signing job. For more information, see
+// http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html (http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html)
 func (c *Client) PutSigningProfile(ctx context.Context, params *PutSigningProfileInput, optFns ...func(*Options)) (*PutSigningProfileOutput, error) {
 	if params == nil {
 		params = &PutSigningProfileInput{}
@@ -42,9 +41,9 @@ type PutSigningProfileInput struct {
 	// This member is required.
 	ProfileName *string
 
-	// A subfield of platform. This specifies any different configuration options that
+	// A subfield of platform . This specifies any different configuration options that
 	// you want to apply to the chosen platform (such as a different hash-algorithm or
-	// signing-algorithm).
+	// signing-algorithm ).
 	Overrides *types.SigningPlatformOverrides
 
 	// The default validity period override for any signature generated using this

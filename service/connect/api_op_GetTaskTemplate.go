@@ -31,8 +31,7 @@ func (c *Client) GetTaskTemplate(ctx context.Context, params *GetTaskTemplateInp
 
 type GetTaskTemplateInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -87,17 +86,16 @@ type GetTaskTemplateOutput struct {
 	// Fields that are part of the template.
 	Fields []types.TaskTemplateField
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	InstanceId *string
 
 	// The timestamp when the task template was last modified.
 	LastModifiedTime *time.Time
 
-	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only
-	// be created from ACTIVE templates. If a template is marked as INACTIVE, then a
-	// task that refers to this template cannot be created.
+	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can
+	// only be created from ACTIVE templates. If a template is marked as INACTIVE ,
+	// then a task that refers to this template cannot be created.
 	Status types.TaskTemplateStatus
 
 	// The tags used to organize, track, or control access for this resource. For

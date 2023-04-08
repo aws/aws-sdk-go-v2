@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// An exception that occurs when there are not sufficient permissions to perform an
-// action.
+// An exception that occurs when there are not sufficient permissions to perform
+// an action.
 type AccessDeniedException struct {
 	Message *string
 

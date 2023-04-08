@@ -8,7 +8,7 @@ import (
 )
 
 // There was a conflict when you attempted to modify a SageMaker entity such as an
-// Experiment or Artifact.
+// Experiment or Artifact .
 type ConflictException struct {
 	Message *string
 

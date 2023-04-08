@@ -45,8 +45,8 @@ type UpdateTableInput struct {
 	CatalogId *string
 
 	// By default, UpdateTable always creates an archived version of the table before
-	// updating it. However, if skipArchive is set to true, UpdateTable does not create
-	// the archived version.
+	// updating it. However, if skipArchive is set to true, UpdateTable does not
+	// create the archived version.
 	SkipArchive *bool
 
 	// The transaction ID at which to update the table contents.

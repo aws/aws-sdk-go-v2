@@ -7,15 +7,15 @@ import (
 	"time"
 )
 
-// An object representing a device for a placement template (see
-// PlacementTemplate).
+// An object representing a device for a placement template (see PlacementTemplate
+// ).
 type DeviceTemplate struct {
 
 	// An optional Lambda function to invoke instead of the default Lambda function
 	// provided by the placement template.
 	CallbackOverrides map[string]string
 
-	// The device type, which currently must be "button".
+	// The device type, which currently must be "button" .
 	DeviceType *string
 
 	noSmithyDocumentSerde
@@ -87,8 +87,8 @@ type PlacementTemplate struct {
 	// this template.
 	DefaultAttributes map[string]string
 
-	// An object specifying the DeviceTemplate for all placements using this
-	// (PlacementTemplate) template.
+	// An object specifying the DeviceTemplate for all placements using this (
+	// PlacementTemplate ) template.
 	DeviceTemplates map[string]DeviceTemplate
 
 	noSmithyDocumentSerde

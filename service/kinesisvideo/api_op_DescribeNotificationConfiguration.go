@@ -35,7 +35,7 @@ type DescribeNotificationConfigurationInput struct {
 	StreamARN *string
 
 	// The name of the stream from which to retrieve the notification configuration.
-	// You must specify either the StreamName or the StreamARN.
+	// You must specify either the StreamName or the StreamARN .
 	StreamName *string
 
 	noSmithyDocumentSerde

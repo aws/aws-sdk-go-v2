@@ -13,8 +13,7 @@ import (
 
 // Lists the principals associated with the specified thing. A principal can be
 // X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or
-// federated identities. Requires permission to access the ListThingPrincipals
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// federated identities. Requires permission to access the ListThingPrincipals (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListThingPrincipals(ctx context.Context, params *ListThingPrincipalsInput, optFns ...func(*Options)) (*ListThingPrincipalsOutput, error) {
 	if params == nil {
@@ -128,8 +127,8 @@ func (c *Client) addOperationListThingPrincipalsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListThingPrincipalsAPIClient is a client that implements the ListThingPrincipals
-// operation.
+// ListThingPrincipalsAPIClient is a client that implements the
+// ListThingPrincipals operation.
 type ListThingPrincipalsAPIClient interface {
 	ListThingPrincipals(context.Context, *ListThingPrincipalsInput, ...func(*Options)) (*ListThingPrincipalsOutput, error)
 }

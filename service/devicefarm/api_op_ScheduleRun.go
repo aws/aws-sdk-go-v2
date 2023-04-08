@@ -41,7 +41,7 @@ type ScheduleRunInput struct {
 	Test *types.ScheduleRunTest
 
 	// The ARN of an application package to run tests against, created with
-	// CreateUpload. See ListUploads.
+	// CreateUpload . See ListUploads .
 	AppArn *string
 
 	// Information about the settings for the run to be scheduled.

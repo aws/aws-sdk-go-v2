@@ -18,8 +18,7 @@ import (
 // any potential impacts. You can run this action only for Amazon Web Services
 // services that support this feature. For a current list of services that support
 // it, see the column Supports Delegated Administrator in the table at Amazon Web
-// Services Services that you can use with Organizations
-// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html)
+// Services Services that you can use with Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html)
 // in the Organizations User Guide. This operation can be called only from the
 // organization's management account.
 func (c *Client) DeregisterDelegatedAdministrator(ctx context.Context, params *DeregisterDelegatedAdministratorInput, optFns ...func(*Options)) (*DeregisterDelegatedAdministratorOutput, error) {
@@ -39,8 +38,8 @@ func (c *Client) DeregisterDelegatedAdministrator(ctx context.Context, params *D
 
 type DeregisterDelegatedAdministratorInput struct {
 
-	// The account ID number of the member account in the organization that you want to
-	// deregister as a delegated administrator.
+	// The account ID number of the member account in the organization that you want
+	// to deregister as a delegated administrator.
 	//
 	// This member is required.
 	AccountId *string

@@ -31,10 +31,7 @@ type PromoteReadReplicaDBClusterInput struct {
 
 	// The identifier of the DB cluster read replica to promote. This parameter isn't
 	// case-sensitive. Constraints:
-	//
-	// * Must match the identifier of an existing DB
-	// cluster read replica.
-	//
+	//   - Must match the identifier of an existing DB cluster read replica.
 	// Example: my-cluster-replica1
 	//
 	// This member is required.
@@ -47,19 +44,17 @@ type PromoteReadReplicaDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
 	// an Amazon Aurora DB cluster, this data type is used as a response element in the
-	// operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
-	// FailoverDBCluster, ModifyDBCluster, PromoteReadReplicaDBCluster,
-	// RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot,
-	// RestoreDBClusterToPointInTime, StartDBCluster, and StopDBCluster. For a Multi-AZ
-	// DB cluster, this data type is used as a response element in the operations
-	// CreateDBCluster, DeleteDBCluster, DescribeDBClusters, FailoverDBCluster,
-	// ModifyDBCluster, RebootDBCluster, RestoreDBClusterFromSnapshot, and
-	// RestoreDBClusterToPointInTime. For more information on Amazon Aurora DB
-	// clusters, see  What is Amazon Aurora?
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// FailoverDBCluster , ModifyDBCluster , PromoteReadReplicaDBCluster ,
+	// RestoreDBClusterFromS3 , RestoreDBClusterFromSnapshot ,
+	// RestoreDBClusterToPointInTime , StartDBCluster , and StopDBCluster . For a
+	// Multi-AZ DB cluster, this data type is used as a response element in the
+	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// FailoverDBCluster , ModifyDBCluster , RebootDBCluster ,
+	// RestoreDBClusterFromSnapshot , and RestoreDBClusterToPointInTime . For more
+	// information on Amazon Aurora DB clusters, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-	// see  Multi-AZ deployments with two readable standby DB instances
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+	// see Multi-AZ deployments with two readable standby DB instances (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 	// in the Amazon RDS User Guide.
 	DBCluster *types.DBCluster
 

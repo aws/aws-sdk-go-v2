@@ -29,7 +29,7 @@ func (c *Client) DescribeAppInstanceBot(ctx context.Context, params *DescribeApp
 
 type DescribeAppInstanceBotInput struct {
 
-	// The ARN of the AppInstanceBot.
+	// The ARN of the AppInstanceBot .
 	//
 	// This member is required.
 	AppInstanceBotArn *string
@@ -39,7 +39,7 @@ type DescribeAppInstanceBotInput struct {
 
 type DescribeAppInstanceBotOutput struct {
 
-	// The detials of the AppInstanceBot.
+	// The detials of the AppInstanceBot .
 	AppInstanceBot *types.AppInstanceBot
 
 	// Metadata pertaining to the operation's result.

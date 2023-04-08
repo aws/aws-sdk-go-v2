@@ -11,8 +11,7 @@ import (
 )
 
 // Lists the shadows for the specified thing. Requires permission to access the
-// ListNamedShadowsForThing
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// ListNamedShadowsForThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListNamedShadowsForThing(ctx context.Context, params *ListNamedShadowsForThingInput, optFns ...func(*Options)) (*ListNamedShadowsForThingOutput, error) {
 	if params == nil {

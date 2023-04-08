@@ -20,8 +20,8 @@ type Alarm struct {
 // Information about alarms associated with a deployment or deployment group.
 type AlarmConfiguration struct {
 
-	// A list of alarms configured for the deployment or deployment group. A maximum of
-	// 10 alarms can be added.
+	// A list of alarms configured for the deployment or deployment group. A maximum
+	// of 10 alarms can be added.
 	Alarms []Alarm
 
 	// Indicates whether the alarm configuration is enabled.
@@ -30,12 +30,10 @@ type AlarmConfiguration struct {
 	// Indicates whether a deployment should continue if information about the current
 	// state of alarms cannot be retrieved from Amazon CloudWatch. The default value is
 	// false.
-	//
-	// * true: The deployment proceeds even if alarm status information can't
-	// be retrieved from Amazon CloudWatch.
-	//
-	// * false: The deployment stops if alarm
-	// status information can't be retrieved from Amazon CloudWatch.
+	//   - true : The deployment proceeds even if alarm status information can't be
+	//   retrieved from Amazon CloudWatch.
+	//   - false : The deployment stops if alarm status information can't be retrieved
+	//   from Amazon CloudWatch.
 	IgnorePollAlarmFailure bool
 
 	noSmithyDocumentSerde
@@ -50,8 +48,8 @@ type ApplicationInfo struct {
 	// The application name.
 	ApplicationName *string
 
-	// The destination platform type for deployment of the application (Lambda or
-	// Server).
+	// The destination platform type for deployment of the application ( Lambda or
+	// Server ).
 	ComputePlatform ComputePlatform
 
 	// The time at which the application was created.
@@ -69,8 +67,8 @@ type ApplicationInfo struct {
 
 // A revision for an Lambda or Amazon ECS deployment that is a YAML-formatted or
 // JSON-formatted string. For Lambda and Amazon ECS deployments, the revision is
-// the same as the AppSpec file. This method replaces the deprecated RawString data
-// type.
+// the same as the AppSpec file. This method replaces the deprecated RawString
+// data type.
 type AppSpecContent struct {
 
 	// The YAML-formatted or JSON-formatted revision string. For an Lambda deployment,
@@ -80,7 +78,7 @@ type AppSpecContent struct {
 	// Amazon ECS deployment, the content includes the task name, information about the
 	// load balancer that serves traffic to the container, and more. For both types of
 	// deployments, the content can specify Lambda functions that run at specified
-	// hooks, such as BeforeInstall, during a deployment.
+	// hooks, such as BeforeInstall , during a deployment.
 	Content *string
 
 	// The SHA256 hash value of the revision content.
@@ -123,8 +121,8 @@ type BlueGreenDeploymentConfiguration struct {
 	// to receive traffic in a blue/green deployment.
 	DeploymentReadyOption *DeploymentReadyOption
 
-	// Information about how instances are provisioned for a replacement environment in
-	// a blue/green deployment.
+	// Information about how instances are provisioned for a replacement environment
+	// in a blue/green deployment.
 	GreenFleetProvisioningOption *GreenFleetProvisioningOption
 
 	// Information about whether to terminate instances in the original fleet during a
@@ -141,12 +139,9 @@ type BlueInstanceTerminationOption struct {
 
 	// The action to take on instances in the original environment after a successful
 	// blue/green deployment.
-	//
-	// * TERMINATE: Instances are terminated after a specified
-	// wait time.
-	//
-	// * KEEP_ALIVE: Instances are left running after they are deregistered
-	// from the load balancer and removed from the deployment group.
+	//   - TERMINATE : Instances are terminated after a specified wait time.
+	//   - KEEP_ALIVE : Instances are left running after they are deregistered from the
+	//   load balancer and removed from the deployment group.
 	Action InstanceAction
 
 	// For an Amazon EC2 deployment, the number of minutes to wait after a successful
@@ -182,7 +177,7 @@ type CloudFormationTarget struct {
 	// The status of an CloudFormation blue/green deployment's target application.
 	Status TargetStatus
 
-	// The unique ID of a deployment target that has a type of CloudFormationTarget.
+	// The unique ID of a deployment target that has a type of CloudFormationTarget .
 	TargetId *string
 
 	// The percentage of production traffic that the target version of an
@@ -195,7 +190,7 @@ type CloudFormationTarget struct {
 // Information about a deployment configuration.
 type DeploymentConfigInfo struct {
 
-	// The destination platform type for the deployment (Lambda, Server, or ECS).
+	// The destination platform type for the deployment ( Lambda , Server , or ECS ).
 	ComputePlatform ComputePlatform
 
 	// The time at which the deployment configuration was created.
@@ -236,7 +231,7 @@ type DeploymentGroupInfo struct {
 	// Information about blue/green deployment options for a deployment group.
 	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration
 
-	// The destination platform type for the deployment (Lambda, Server, or ECS).
+	// The destination platform type for the deployment ( Lambda , Server , or ECS ).
 	ComputePlatform ComputePlatform
 
 	// The deployment configuration name.
@@ -264,7 +259,7 @@ type DeploymentGroupInfo struct {
 	// The target Amazon ECS services in the deployment group. This applies only to
 	// deployment groups that use the Amazon ECS compute platform. A target Amazon ECS
 	// service is specified as an Amazon ECS cluster and service name pair using the
-	// format :.
+	// format : .
 	EcsServices []ECSService
 
 	// Information about the most recent attempted deployment to the deployment group.
@@ -285,19 +280,18 @@ type DeploymentGroupInfo struct {
 	// groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
 	OnPremisesTagSet *OnPremisesTagSet
 
-	// Indicates what happens when new Amazon EC2 instances are launched mid-deployment
-	// and do not receive the deployed application revision. If this option is set to
-	// UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated
-	// instances' deployments to apply the deployed application revision to the new
-	// Amazon EC2 instances. If this option is set to IGNORE, CodeDeploy does not
-	// initiate a deployment to update the new Amazon EC2 instances. This may result in
-	// instances having different revisions.
+	// Indicates what happens when new Amazon EC2 instances are launched
+	// mid-deployment and do not receive the deployed application revision. If this
+	// option is set to UPDATE or is unspecified, CodeDeploy initiates one or more
+	// 'auto-update outdated instances' deployments to apply the deployed application
+	// revision to the new Amazon EC2 instances. If this option is set to IGNORE ,
+	// CodeDeploy does not initiate a deployment to update the new Amazon EC2
+	// instances. This may result in instances having different revisions.
 	OutdatedInstancesStrategy OutdatedInstancesStrategy
 
 	// A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to
 	// make calls to Amazon Web Services services on your behalf. For more information,
-	// see Create a Service Role for CodeDeploy
-	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html)
+	// see Create a Service Role for CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html)
 	// in the CodeDeploy User Guide.
 	ServiceRoleArn *string
 
@@ -335,25 +329,18 @@ type DeploymentInfo struct {
 	// A timestamp that indicates when the deployment was complete.
 	CompleteTime *time.Time
 
-	// The destination platform type for the deployment (Lambda, Server, or ECS).
+	// The destination platform type for the deployment ( Lambda , Server , or ECS ).
 	ComputePlatform ComputePlatform
 
 	// A timestamp that indicates when the deployment was created.
 	CreateTime *time.Time
 
 	// The means by which the deployment was created:
-	//
-	// * user: A user created the
-	// deployment.
-	//
-	// * autoscaling: Amazon EC2 Auto Scaling created the deployment.
-	//
-	// *
-	// codeDeployRollback: A rollback process created the deployment.
-	//
-	// *
-	// CodeDeployAutoUpdate: An auto-update process created the deployment when it
-	// detected outdated Amazon EC2 instances.
+	//   - user : A user created the deployment.
+	//   - autoscaling : Amazon EC2 Auto Scaling created the deployment.
+	//   - codeDeployRollback : A rollback process created the deployment.
+	//   - CodeDeployAutoUpdate : An auto-update process created the deployment when it
+	//   detected outdated Amazon EC2 instances.
 	Creator DeploymentCreator
 
 	// The deployment configuration name.
@@ -388,37 +375,33 @@ type DeploymentInfo struct {
 	// Information about how CodeDeploy handles files that already exist in a
 	// deployment target location but weren't part of the previous successful
 	// deployment.
-	//
-	// * DISALLOW: The deployment fails. This is also the default behavior
-	// if no option is specified.
-	//
-	// * OVERWRITE: The version of the file from the
-	// application revision currently being deployed replaces the version already on
-	// the instance.
-	//
-	// * RETAIN: The version of the file already on the instance is kept
-	// and used as part of the new deployment.
+	//   - DISALLOW : The deployment fails. This is also the default behavior if no
+	//   option is specified.
+	//   - OVERWRITE : The version of the file from the application revision currently
+	//   being deployed replaces the version already on the instance.
+	//   - RETAIN : The version of the file already on the instance is kept and used as
+	//   part of the new deployment.
 	FileExistsBehavior FileExistsBehavior
 
-	// If true, then if an ApplicationStop, BeforeBlockTraffic, or AfterBlockTraffic
+	// If true, then if an ApplicationStop , BeforeBlockTraffic , or AfterBlockTraffic
 	// deployment lifecycle event to an instance fails, then the deployment continues
 	// to the next deployment lifecycle event. For example, if ApplicationStop fails,
 	// the deployment continues with DownloadBundle. If BeforeBlockTraffic fails, the
-	// deployment continues with BlockTraffic. If AfterBlockTraffic fails, the
-	// deployment continues with ApplicationStop. If false or not specified, then if a
+	// deployment continues with BlockTraffic . If AfterBlockTraffic fails, the
+	// deployment continues with ApplicationStop . If false or not specified, then if a
 	// lifecycle event fails during a deployment to an instance, that deployment fails.
 	// If deployment to that instance is part of an overall deployment and the number
 	// of healthy hosts is not less than the minimum number of healthy hosts, then a
 	// deployment to the next instance is attempted. During a deployment, the
-	// CodeDeploy agent runs the scripts specified for ApplicationStop,
-	// BeforeBlockTraffic, and AfterBlockTraffic in the AppSpec file from the previous
-	// successful deployment. (All other scripts are run from the AppSpec file in the
-	// current deployment.) If one of these scripts contains an error and does not run
-	// successfully, the deployment can fail. If the cause of the failure is a script
-	// from the last successful deployment that will never run successfully, create a
-	// new deployment and use ignoreApplicationStopFailures to specify that the
-	// ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic failures should be
-	// ignored.
+	// CodeDeploy agent runs the scripts specified for ApplicationStop ,
+	// BeforeBlockTraffic , and AfterBlockTraffic in the AppSpec file from the
+	// previous successful deployment. (All other scripts are run from the AppSpec file
+	// in the current deployment.) If one of these scripts contains an error and does
+	// not run successfully, the deployment can fail. If the cause of the failure is a
+	// script from the last successful deployment that will never run successfully,
+	// create a new deployment and use ignoreApplicationStopFailures to specify that
+	// the ApplicationStop , BeforeBlockTraffic , and AfterBlockTraffic failures
+	// should be ignored.
 	IgnoreApplicationStopFailures bool
 
 	// Indicates whether the wait period set for the termination of instances in the
@@ -478,8 +461,8 @@ type DeploymentOverview struct {
 	// The number of instances in the deployment in a pending state.
 	Pending int64
 
-	// The number of instances in a replacement environment ready to receive traffic in
-	// a blue/green deployment.
+	// The number of instances in a replacement environment ready to receive traffic
+	// in a blue/green deployment.
 	Ready int64
 
 	// The number of instances in the deployment in a skipped state.
@@ -498,21 +481,18 @@ type DeploymentReadyOption struct {
 
 	// Information about when to reroute traffic from an original environment to a
 	// replacement environment in a blue/green deployment.
-	//
-	// * CONTINUE_DEPLOYMENT:
-	// Register new instances with the load balancer immediately after the new
-	// application revision is installed on the instances in the replacement
-	// environment.
-	//
-	// * STOP_DEPLOYMENT: Do not register new instances with a load
-	// balancer unless traffic rerouting is started using ContinueDeployment. If
-	// traffic rerouting is not started before the end of the specified wait period,
-	// the deployment status is changed to Stopped.
+	//   - CONTINUE_DEPLOYMENT: Register new instances with the load balancer
+	//   immediately after the new application revision is installed on the instances in
+	//   the replacement environment.
+	//   - STOP_DEPLOYMENT: Do not register new instances with a load balancer unless
+	//   traffic rerouting is started using ContinueDeployment . If traffic rerouting
+	//   is not started before the end of the specified wait period, the deployment
+	//   status is changed to Stopped.
 	ActionOnTimeout DeploymentReadyAction
 
 	// The number of minutes to wait before the status of a blue/green deployment is
 	// changed to Stopped if rerouting is not started manually. Applies only to the
-	// STOP_DEPLOYMENT option for actionOnTimeout.
+	// STOP_DEPLOYMENT option for actionOnTimeout .
 	WaitTimeInMinutes int32
 
 	noSmithyDocumentSerde
@@ -562,24 +542,15 @@ type DeploymentTarget struct {
 type Diagnostics struct {
 
 	// The associated error code:
-	//
-	// * Success: The specified script ran.
-	//
-	// *
-	// ScriptMissing: The specified script was not found in the specified location.
-	//
-	// *
-	// ScriptNotExecutable: The specified script is not a recognized executable file
-	// type.
-	//
-	// * ScriptTimedOut: The specified script did not finish running in the
-	// specified time period.
-	//
-	// * ScriptFailed: The specified script failed to run as
-	// expected.
-	//
-	// * UnknownError: The specified script did not run for an unknown
-	// reason.
+	//   - Success: The specified script ran.
+	//   - ScriptMissing: The specified script was not found in the specified
+	//   location.
+	//   - ScriptNotExecutable: The specified script is not a recognized executable
+	//   file type.
+	//   - ScriptTimedOut: The specified script did not finish running in the
+	//   specified time period.
+	//   - ScriptFailed: The specified script failed to run as expected.
+	//   - UnknownError: The specified script did not run for an unknown reason.
 	ErrorCode LifecycleErrorCode
 
 	// The last portion of the diagnostic log. If available, CodeDeploy returns up to
@@ -602,13 +573,9 @@ type EC2TagFilter struct {
 	Key *string
 
 	// The tag filter type:
-	//
-	// * KEY_ONLY: Key only.
-	//
-	// * VALUE_ONLY: Value only.
-	//
-	// *
-	// KEY_AND_VALUE: Key and value.
+	//   - KEY_ONLY : Key only.
+	//   - VALUE_ONLY : Value only.
+	//   - KEY_AND_VALUE : Key and value.
 	Type EC2TagFilterType
 
 	// The tag filter value.
@@ -660,7 +627,7 @@ type ECSTarget struct {
 	// The Amazon Resource Name (ARN) of the target.
 	TargetArn *string
 
-	// The unique ID of a deployment target that has a type of ecsTarget.
+	// The unique ID of a deployment target that has a type of ecsTarget .
 	TargetId *string
 
 	// The ECSTaskSet objects associated with the ECS target.
@@ -682,7 +649,7 @@ type ECSTaskSet struct {
 	// created, CodeDeploy shifts traffic to the new task set.
 	DesiredCount int64
 
-	// A unique ID of an ECSTaskSet.
+	// A unique ID of an ECSTaskSet .
 	Identifer *string
 
 	// The number of tasks in the task set that are in the PENDING status during an
@@ -696,24 +663,18 @@ type ECSTaskSet struct {
 	RunningCount int64
 
 	// The status of the task set. There are three valid task set statuses:
-	//
-	// * PRIMARY:
-	// Indicates the task set is serving production traffic.
-	//
-	// * ACTIVE: Indicates the
-	// task set is not serving production traffic.
-	//
-	// * DRAINING: Indicates the tasks in
-	// the task set are being stopped and their corresponding targets are being
-	// deregistered from their target group.
+	//   - PRIMARY : Indicates the task set is serving production traffic.
+	//   - ACTIVE : Indicates the task set is not serving production traffic.
+	//   - DRAINING : Indicates the tasks in the task set are being stopped and their
+	//   corresponding targets are being deregistered from their target group.
 	Status *string
 
 	// The target group associated with the task set. The target group is used by
 	// CodeDeploy to manage traffic to a task set.
 	TargetGroup *TargetGroupInfo
 
-	// A label that identifies whether the ECS task set is an original target (BLUE) or
-	// a replacement target (GREEN).
+	// A label that identifies whether the ECS task set is an original target ( BLUE )
+	// or a replacement target ( GREEN ).
 	TaskSetLabel TargetLabel
 
 	// The percentage of traffic served by this task set.
@@ -740,55 +701,32 @@ type ELBInfo struct {
 // Information about a deployment error.
 type ErrorInformation struct {
 
-	// For more information, see Error Codes for CodeDeploy
-	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html) in
-	// the CodeDeploy User Guide
-	// (https://docs.aws.amazon.com/codedeploy/latest/userguide). The error code:
-	//
-	// *
-	// APPLICATION_MISSING: The application was missing. This error code is most likely
-	// raised if the application is deleted after the deployment is created, but before
-	// it is started.
-	//
-	// * DEPLOYMENT_GROUP_MISSING: The deployment group was missing.
-	// This error code is most likely raised if the deployment group is deleted after
-	// the deployment is created, but before it is started.
-	//
-	// * HEALTH_CONSTRAINTS: The
-	// deployment failed on too many instances to be successfully deployed within the
-	// instance health constraints specified.
-	//
-	// * HEALTH_CONSTRAINTS_INVALID: The
-	// revision cannot be successfully deployed within the instance health constraints
-	// specified.
-	//
-	// * IAM_ROLE_MISSING: The service role cannot be accessed.
-	//
-	// *
-	// IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.
-	//
-	// *
-	// INTERNAL_ERROR: There was an internal error.
-	//
-	// * NO_EC2_SUBSCRIPTION: The calling
-	// account is not subscribed to Amazon EC2.
-	//
-	// * NO_INSTANCES: No instances were
-	// specified, or no instances can be found.
-	//
-	// * OVER_MAX_INSTANCES: The maximum
-	// number of instances was exceeded.
-	//
-	// * THROTTLED: The operation was throttled
-	// because the calling account exceeded the throttling limits of one or more Amazon
-	// Web Services services.
-	//
-	// * TIMEOUT: The deployment has timed out.
-	//
-	// *
-	// REVISION_MISSING: The revision ID was missing. This error code is most likely
-	// raised if the revision is deleted after the deployment is created, but before it
-	// is started.
+	// For more information, see Error Codes for CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html)
+	// in the CodeDeploy User Guide (https://docs.aws.amazon.com/codedeploy/latest/userguide)
+	// . The error code:
+	//   - APPLICATION_MISSING: The application was missing. This error code is most
+	//   likely raised if the application is deleted after the deployment is created, but
+	//   before it is started.
+	//   - DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code
+	//   is most likely raised if the deployment group is deleted after the deployment is
+	//   created, but before it is started.
+	//   - HEALTH_CONSTRAINTS: The deployment failed on too many instances to be
+	//   successfully deployed within the instance health constraints specified.
+	//   - HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed
+	//   within the instance health constraints specified.
+	//   - IAM_ROLE_MISSING: The service role cannot be accessed.
+	//   - IAM_ROLE_PERMISSIONS: The service role does not have the correct
+	//   permissions.
+	//   - INTERNAL_ERROR: There was an internal error.
+	//   - NO_EC2_SUBSCRIPTION: The calling account is not subscribed to Amazon EC2.
+	//   - NO_INSTANCES: No instances were specified, or no instances can be found.
+	//   - OVER_MAX_INSTANCES: The maximum number of instances was exceeded.
+	//   - THROTTLED: The operation was throttled because the calling account exceeded
+	//   the throttling limits of one or more Amazon Web Services services.
+	//   - TIMEOUT: The deployment has timed out.
+	//   - REVISION_MISSING: The revision ID was missing. This error code is most
+	//   likely raised if the revision is deleted after the deployment is created, but
+	//   before it is started.
 	Code ErrorCode
 
 	// An accompanying error message.
@@ -838,13 +776,10 @@ type GitHubLocation struct {
 type GreenFleetProvisioningOption struct {
 
 	// The method used to add instances to a replacement environment.
-	//
-	// *
-	// DISCOVER_EXISTING: Use instances that already exist or will be created
-	// manually.
-	//
-	// * COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling
-	// group to define and create instances in a new Auto Scaling group.
+	//   - DISCOVER_EXISTING : Use instances that already exist or will be created
+	//   manually.
+	//   - COPY_AUTO_SCALING_GROUP : Use settings from a specified Auto Scaling group
+	//   to define and create instances in a new Auto Scaling group.
 	Action GreenFleetProvisioningAction
 
 	noSmithyDocumentSerde
@@ -889,11 +824,8 @@ type InstanceSummary struct {
 
 	// Information about which environment an instance belongs to in a blue/green
 	// deployment.
-	//
-	// * BLUE: The instance is part of the original environment.
-	//
-	// * GREEN:
-	// The instance is part of the replacement environment.
+	//   - BLUE: The instance is part of the original environment.
+	//   - GREEN: The instance is part of the replacement environment.
 	InstanceType InstanceType
 
 	// A timestamp that indicates when the instance information was last updated.
@@ -903,23 +835,12 @@ type InstanceSummary struct {
 	LifecycleEvents []LifecycleEvent
 
 	// The deployment status for this instance:
-	//
-	// * Pending: The deployment is pending
-	// for this instance.
-	//
-	// * In Progress: The deployment is in progress for this
-	// instance.
-	//
-	// * Succeeded: The deployment has succeeded for this instance.
-	//
-	// *
-	// Failed: The deployment has failed for this instance.
-	//
-	// * Skipped: The deployment
-	// has been skipped for this instance.
-	//
-	// * Unknown: The deployment status is unknown
-	// for this instance.
+	//   - Pending : The deployment is pending for this instance.
+	//   - In Progress : The deployment is in progress for this instance.
+	//   - Succeeded : The deployment has succeeded for this instance.
+	//   - Failed : The deployment has failed for this instance.
+	//   - Skipped : The deployment has been skipped for this instance.
+	//   - Unknown : The deployment status is unknown for this instance.
 	//
 	// Deprecated: InstanceStatus is deprecated, use TargetStatus instead.
 	Status InstanceStatus
@@ -934,8 +855,8 @@ type InstanceTarget struct {
 	// The unique ID of a deployment.
 	DeploymentId *string
 
-	// A label that identifies whether the instance is an original target (BLUE) or a
-	// replacement target (GREEN).
+	// A label that identifies whether the instance is an original target ( BLUE ) or a
+	// replacement target ( GREEN ).
 	InstanceLabel TargetLabel
 
 	// The date and time when the target instance was updated by a deployment.
@@ -950,7 +871,7 @@ type InstanceTarget struct {
 	// The Amazon Resource Name (ARN) of the target.
 	TargetArn *string
 
-	// The unique ID of a deployment target that has a type of instanceTarget.
+	// The unique ID of a deployment target that has a type of instanceTarget .
 	TargetId *string
 
 	noSmithyDocumentSerde
@@ -1002,7 +923,7 @@ type LambdaTarget struct {
 	// The Amazon Resource Name (ARN) of the target.
 	TargetArn *string
 
-	// The unique ID of a deployment target that has a type of lambdaTarget.
+	// The unique ID of a deployment target that has a type of lambdaTarget .
 	TargetId *string
 
 	noSmithyDocumentSerde
@@ -1038,31 +959,20 @@ type LifecycleEvent struct {
 	// A timestamp that indicates when the deployment lifecycle event ended.
 	EndTime *time.Time
 
-	// The deployment lifecycle event name, such as ApplicationStop, BeforeInstall,
-	// AfterInstall, ApplicationStart, or ValidateService.
+	// The deployment lifecycle event name, such as ApplicationStop , BeforeInstall ,
+	// AfterInstall , ApplicationStart , or ValidateService .
 	LifecycleEventName *string
 
 	// A timestamp that indicates when the deployment lifecycle event started.
 	StartTime *time.Time
 
 	// The deployment lifecycle event status:
-	//
-	// * Pending: The deployment lifecycle
-	// event is pending.
-	//
-	// * InProgress: The deployment lifecycle event is in
-	// progress.
-	//
-	// * Succeeded: The deployment lifecycle event ran successfully.
-	//
-	// *
-	// Failed: The deployment lifecycle event has failed.
-	//
-	// * Skipped: The deployment
-	// lifecycle event has been skipped.
-	//
-	// * Unknown: The deployment lifecycle event is
-	// unknown.
+	//   - Pending: The deployment lifecycle event is pending.
+	//   - InProgress: The deployment lifecycle event is in progress.
+	//   - Succeeded: The deployment lifecycle event ran successfully.
+	//   - Failed: The deployment lifecycle event has failed.
+	//   - Skipped: The deployment lifecycle event has been skipped.
+	//   - Unknown: The deployment lifecycle event is unknown.
 	Status LifecycleEventStatus
 
 	noSmithyDocumentSerde
@@ -1095,30 +1005,24 @@ type LoadBalancerInfo struct {
 type MinimumHealthyHosts struct {
 
 	// The minimum healthy instance type:
-	//
-	// * HOST_COUNT: The minimum number of healthy
-	// instances as an absolute value.
-	//
-	// * FLEET_PERCENT: The minimum number of healthy
-	// instances as a percentage of the total number of instances in the
-	// deployment.
-	//
-	// In an example of nine instances, if a HOST_COUNT of six is
-	// specified, deploy to up to three instances at a time. The deployment is
-	// successful if six or more instances are deployed to successfully. Otherwise, the
-	// deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five
-	// instances at a time. The deployment is successful if four or more instances are
-	// deployed to successfully. Otherwise, the deployment fails. In a call to the
-	// GetDeploymentConfig, CodeDeployDefault.OneAtATime returns a minimum healthy
-	// instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to
-	// only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only
-	// to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime,
-	// CodeDeploy attempts to ensure that all instances but one are kept in a healthy
-	// state during the deployment. Although this allows one instance at a time to be
-	// taken offline for a new deployment, it also means that if the deployment to the
-	// last instance fails, the overall deployment is still successful. For more
-	// information, see CodeDeploy Instance Health
-	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html)
+	//   - HOST_COUNT : The minimum number of healthy instances as an absolute value.
+	//   - FLEET_PERCENT : The minimum number of healthy instances as a percentage of
+	//   the total number of instances in the deployment.
+	// In an example of nine instances, if a HOST_COUNT of six is specified, deploy to
+	// up to three instances at a time. The deployment is successful if six or more
+	// instances are deployed to successfully. Otherwise, the deployment fails. If a
+	// FLEET_PERCENT of 40 is specified, deploy to up to five instances at a time. The
+	// deployment is successful if four or more instances are deployed to successfully.
+	// Otherwise, the deployment fails. In a call to the GetDeploymentConfig ,
+	// CodeDeployDefault.OneAtATime returns a minimum healthy instance type of
+	// MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance
+	// at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or
+	// FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, CodeDeploy
+	// attempts to ensure that all instances but one are kept in a healthy state during
+	// the deployment. Although this allows one instance at a time to be taken offline
+	// for a new deployment, it also means that if the deployment to the last instance
+	// fails, the overall deployment is still successful. For more information, see
+	// CodeDeploy Instance Health (https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html)
 	// in the CodeDeploy User Guide.
 	Type MinimumHealthyHostsType
 
@@ -1191,19 +1095,14 @@ type RevisionLocation struct {
 	GitHubLocation *GitHubLocation
 
 	// The type of application revision:
-	//
-	// * S3: An application revision stored in
-	// Amazon S3.
-	//
-	// * GitHub: An application revision stored in GitHub (EC2/On-premises
-	// deployments only).
-	//
-	// * String: A YAML-formatted or JSON-formatted string (Lambda
-	// deployments only).
-	//
-	// * AppSpecContent: An AppSpecContent object that contains the
-	// contents of an AppSpec file for an Lambda or Amazon ECS deployment. The content
-	// is formatted as JSON or YAML stored as a RawString.
+	//   - S3: An application revision stored in Amazon S3.
+	//   - GitHub: An application revision stored in GitHub (EC2/On-premises
+	//   deployments only).
+	//   - String: A YAML-formatted or JSON-formatted string (Lambda deployments
+	//   only).
+	//   - AppSpecContent: An AppSpecContent object that contains the contents of an
+	//   AppSpec file for an Lambda or Amazon ECS deployment. The content is formatted as
+	//   JSON or YAML stored as a RawString.
 	RevisionType RevisionLocationType
 
 	// Information about the location of a revision stored in Amazon S3.
@@ -1244,14 +1143,9 @@ type S3Location struct {
 	Bucket *string
 
 	// The file type of the application revision. Must be one of the following:
-	//
-	// * tar:
-	// A tar archive file.
-	//
-	// * tgz: A compressed tar archive file.
-	//
-	// * zip: A zip archive
-	// file.
+	//   - tar : A tar archive file.
+	//   - tgz : A compressed tar archive file.
+	//   - zip : A zip archive file.
 	BundleType BundleType
 
 	// The ETag of the Amazon S3 object that represents the bundled artifacts for the
@@ -1263,9 +1157,9 @@ type S3Location struct {
 	// application revision.
 	Key *string
 
-	// A specific version of the Amazon S3 object that represents the bundled artifacts
-	// for the application revision. If the version is not specified, the system uses
-	// the most recent version by default.
+	// A specific version of the Amazon S3 object that represents the bundled
+	// artifacts for the application revision. If the version is not specified, the
+	// system uses the most recent version by default.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1290,13 +1184,9 @@ type TagFilter struct {
 	Key *string
 
 	// The on-premises instance tag filter type:
-	//
-	// * KEY_ONLY: Key only.
-	//
-	// * VALUE_ONLY:
-	// Value only.
-	//
-	// * KEY_AND_VALUE: Key and value.
+	//   - KEY_ONLY: Key only.
+	//   - VALUE_ONLY: Value only.
+	//   - KEY_AND_VALUE: Key and value.
 	Type TagFilterType
 
 	// The on-premises instance tag filter value.
@@ -1352,12 +1242,12 @@ type TargetInstances struct {
 
 	// Information about the groups of Amazon EC2 instance tags that an instance must
 	// be identified by in order for it to be included in the replacement environment
-	// for a blue/green deployment. Cannot be used in the same call as tagFilters.
+	// for a blue/green deployment. Cannot be used in the same call as tagFilters .
 	Ec2TagSet *EC2TagSet
 
 	// The tag filter key, type, and value used to identify Amazon EC2 instances in a
 	// replacement environment for a blue/green deployment. Cannot be used in the same
-	// call as ec2TagSet.
+	// call as ec2TagSet .
 	TagFilters []EC2TagFilter
 
 	noSmithyDocumentSerde
@@ -1380,10 +1270,10 @@ type TimeBasedCanary struct {
 	noSmithyDocumentSerde
 }
 
-// A configuration that shifts traffic from one version of a Lambda function or ECS
-// task set to another in equal increments, with an equal number of minutes between
-// each increment. The original and target Lambda function versions or ECS task
-// sets are specified in the deployment's AppSpec file.
+// A configuration that shifts traffic from one version of a Lambda function or
+// ECS task set to another in equal increments, with an equal number of minutes
+// between each increment. The original and target Lambda function versions or ECS
+// task sets are specified in the deployment's AppSpec file.
 type TimeBasedLinear struct {
 
 	// The number of minutes between each incremental traffic shift of a
@@ -1427,9 +1317,10 @@ type TrafficRoute struct {
 // Amazon ECS task set to another during an Amazon ECS deployment.
 type TrafficRoutingConfig struct {
 
-	// A configuration that shifts traffic from one version of a Lambda function or ECS
-	// task set to another in two increments. The original and target Lambda function
-	// versions or ECS task sets are specified in the deployment's AppSpec file.
+	// A configuration that shifts traffic from one version of a Lambda function or
+	// ECS task set to another in two increments. The original and target Lambda
+	// function versions or ECS task sets are specified in the deployment's AppSpec
+	// file.
 	TimeBasedCanary *TimeBasedCanary
 
 	// A configuration that shifts traffic from one version of a Lambda function or
@@ -1438,7 +1329,7 @@ type TrafficRoutingConfig struct {
 	// or Amazon ECS task sets are specified in the deployment's AppSpec file.
 	TimeBasedLinear *TimeBasedLinear
 
-	// The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by a
+	// The type of traffic shifting ( TimeBasedCanary or TimeBasedLinear ) used by a
 	// deployment configuration.
 	Type TrafficRoutingType
 

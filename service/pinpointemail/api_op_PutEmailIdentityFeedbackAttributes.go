@@ -36,8 +36,8 @@ func (c *Client) PutEmailIdentityFeedbackAttributes(ctx context.Context, params 
 	return out, nil
 }
 
-// A request to set the attributes that control how bounce and complaint events are
-// processed.
+// A request to set the attributes that control how bounce and complaint events
+// are processed.
 type PutEmailIdentityFeedbackAttributesInput struct {
 
 	// The email identity that you want to configure bounce and complaint feedback
@@ -47,10 +47,10 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	EmailIdentity *string
 
 	// Sets the feedback forwarding configuration for the identity. If the value is
-	// true, Amazon Pinpoint sends you email notifications when bounce or complaint
+	// true , Amazon Pinpoint sends you email notifications when bounce or complaint
 	// events occur. Amazon Pinpoint sends this notification to the address that you
 	// specified in the Return-Path header of the original email. When you set this
-	// value to false, Amazon Pinpoint sends notifications through other mechanisms,
+	// value to false , Amazon Pinpoint sends notifications through other mechanisms,
 	// such as by notifying an Amazon SNS topic or another event destination. You're
 	// required to have a method of tracking bounces and complaints. If you haven't set
 	// up another mechanism for receiving bounce or complaint notifications, Amazon
@@ -61,8 +61,8 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutEmailIdentityFeedbackAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

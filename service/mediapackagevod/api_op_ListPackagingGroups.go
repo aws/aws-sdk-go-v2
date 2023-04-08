@@ -113,8 +113,8 @@ func (c *Client) addOperationListPackagingGroupsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListPackagingGroupsAPIClient is a client that implements the ListPackagingGroups
-// operation.
+// ListPackagingGroupsAPIClient is a client that implements the
+// ListPackagingGroups operation.
 type ListPackagingGroupsAPIClient interface {
 	ListPackagingGroups(context.Context, *ListPackagingGroupsInput, ...func(*Options)) (*ListPackagingGroupsOutput, error)
 }

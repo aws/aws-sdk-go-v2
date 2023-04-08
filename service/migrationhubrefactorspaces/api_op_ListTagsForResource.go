@@ -11,7 +11,7 @@ import (
 )
 
 // Lists the tags of a resource. The caller account must be the same as the
-// resource’s OwnerAccountId. Listing tags in other accounts is not supported.
+// resource’s OwnerAccountId . Listing tags in other accounts is not supported.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

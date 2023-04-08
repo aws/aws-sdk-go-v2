@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a recommendation job. You can create either an instance recommendation or
-// load test job.
+// Starts a recommendation job. You can create either an instance recommendation
+// or load test job.
 func (c *Client) CreateInferenceRecommendationsJob(ctx context.Context, params *CreateInferenceRecommendationsJobInput, optFns ...func(*Options)) (*CreateInferenceRecommendationsJobOutput, error) {
 	if params == nil {
 		params = &CreateInferenceRecommendationsJobInput{}
@@ -36,16 +36,16 @@ type CreateInferenceRecommendationsJobInput struct {
 	// This member is required.
 	InputConfig *types.RecommendationJobInputConfig
 
-	// A name for the recommendation job. The name must be unique within the Amazon Web
-	// Services Region and within your Amazon Web Services account.
+	// A name for the recommendation job. The name must be unique within the Amazon
+	// Web Services Region and within your Amazon Web Services account.
 	//
 	// This member is required.
 	JobName *string
 
 	// Defines the type of recommendation job. Specify Default to initiate an instance
-	// recommendation and Advanced to initiate a load test. If left unspecified, Amazon
-	// SageMaker Inference Recommender will run an instance recommendation (DEFAULT)
-	// job.
+	// recommendation and Advanced to initiate a load test. If left unspecified,
+	// Amazon SageMaker Inference Recommender will run an instance recommendation (
+	// DEFAULT ) job.
 	//
 	// This member is required.
 	JobType types.RecommendationJobType

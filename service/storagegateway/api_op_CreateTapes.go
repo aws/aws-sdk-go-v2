@@ -33,8 +33,8 @@ func (c *Client) CreateTapes(ctx context.Context, params *CreateTapesInput, optF
 // CreateTapesInput
 type CreateTapesInput struct {
 
-	// A unique identifier that you use to retry a request. If you retry a request, use
-	// the same ClientToken you specified in the initial request. Using the same
+	// A unique identifier that you use to retry a request. If you retry a request,
+	// use the same ClientToken you specified in the initial request. Using the same
 	// ClientToken prevents creating the tape multiple times.
 	//
 	// This member is required.
@@ -69,9 +69,9 @@ type CreateTapesInput struct {
 	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
-	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
-	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support
+	// asymmetric CMKs. This value can only be set when KMSEncrypted is true . Optional.
 	KMSKey *string
 
 	// The ID of the pool that you want to add your tape to for archiving. The tape in

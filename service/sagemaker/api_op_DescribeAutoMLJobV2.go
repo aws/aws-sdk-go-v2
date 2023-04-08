@@ -97,8 +97,8 @@ type DescribeAutoMLJobV2Output struct {
 	// job.
 	AutoMLProblemTypeConfig types.AutoMLProblemTypeConfig
 
-	// Information about the candidate produced by an AutoML training job V2, including
-	// its status, steps, and other properties.
+	// Information about the candidate produced by an AutoML training job V2,
+	// including its status, steps, and other properties.
 	BestCandidate *types.AutoMLCandidate
 
 	// Returns the configuration settings of how the data are split into train and

@@ -45,14 +45,14 @@ type ListModelPackageGroupsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListModelPackageGroups request was truncated, the
-	// response includes a NextToken. To retrieve the next set of model groups, use the
-	// token in the next request.
+	// response includes a NextToken . To retrieve the next set of model groups, use
+	// the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is CreationTime.
+	// The field to sort results by. The default is CreationTime .
 	SortBy types.ModelPackageGroupSortBy
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -65,8 +65,8 @@ type ListModelPackageGroupsOutput struct {
 	// This member is required.
 	ModelPackageGroupSummaryList []types.ModelPackageGroupSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of model groups, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of model groups, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

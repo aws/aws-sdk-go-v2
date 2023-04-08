@@ -144,10 +144,9 @@ func (e *ResourceUnavailableException) ErrorCode() string {
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have exceeded the set limits for your Amazon Kendra Intelligent Ranking
-// service. Please see Quotas
-// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) for more information,
-// or contact Support (http://aws.amazon.com/contact-us/) to inquire about an
-// increase of limits.
+// service. Please see Quotas (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
+// for more information, or contact Support (http://aws.amazon.com/contact-us/) to
+// inquire about an increase of limits.
 type ServiceQuotaExceededException struct {
 	Message *string
 

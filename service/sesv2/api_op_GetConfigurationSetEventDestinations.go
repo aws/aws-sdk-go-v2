@@ -32,8 +32,8 @@ func (c *Client) GetConfigurationSetEventDestinations(ctx context.Context, param
 	return out, nil
 }
 
-// A request to obtain information about the event destinations for a configuration
-// set.
+// A request to obtain information about the event destinations for a
+// configuration set.
 type GetConfigurationSetEventDestinationsInput struct {
 
 	// The name of the configuration set that contains the event destination.

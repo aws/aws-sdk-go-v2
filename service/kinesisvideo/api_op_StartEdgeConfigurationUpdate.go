@@ -19,9 +19,9 @@ import (
 // Device. The SyncStatus will be updated as the edge configuration is
 // acknowledged, and synced with the Edge Agent. If this API is invoked for the
 // first time, a new edge configuration will be created for the stream, and the
-// sync status will be set to SYNCING. You will have to wait for the sync status to
-// reach a terminal state such as: IN_SYNC, or SYNC_FAILED, before using this API
-// again. If you invoke this API during the syncing process, a
+// sync status will be set to SYNCING . You will have to wait for the sync status
+// to reach a terminal state such as: IN_SYNC , or SYNC_FAILED , before using this
+// API again. If you invoke this API during the syncing process, a
 // ResourceInUseException will be thrown. The connectivity of the stream’s edge
 // configuration and the Edge Agent will be retried for 15 minutes. After 15
 // minutes, the status will transition into the SYNC_FAILED state.
@@ -48,11 +48,11 @@ type StartEdgeConfigurationUpdateInput struct {
 	EdgeConfig *types.EdgeConfig
 
 	// The Amazon Resource Name (ARN) of the stream. Specify either the StreamName or
-	// the StreamARN.
+	// the StreamARN .
 	StreamARN *string
 
 	// The name of the stream whose edge configuration you want to update. Specify
-	// either the StreamName or the StreamARN.
+	// either the StreamName or the StreamARN .
 	StreamName *string
 
 	noSmithyDocumentSerde
@@ -80,10 +80,9 @@ type StartEdgeConfigurationUpdateOutput struct {
 	// The name of the stream from which the edge configuration was updated.
 	StreamName *string
 
-	// The current sync status of the stream's edge configuration. When you invoke this
-	// API, the sync status will be set to the SYNCING state. Use the
-	// DescribeEdgeConfiguration API to get the latest status of the edge
-	// configuration.
+	// The current sync status of the stream's edge configuration. When you invoke
+	// this API, the sync status will be set to the SYNCING state. Use the
+	// DescribeEdgeConfiguration API to get the latest status of the edge configuration.
 	SyncStatus types.SyncStatus
 
 	// Metadata pertaining to the operation's result.

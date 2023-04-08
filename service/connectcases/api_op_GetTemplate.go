@@ -70,8 +70,8 @@ type GetTemplateOutput struct {
 	// Configuration of layouts associated to the template.
 	LayoutConfiguration *types.LayoutConfiguration
 
-	// A list of fields that must contain a value for a case to be successfully created
-	// with this template.
+	// A list of fields that must contain a value for a case to be successfully
+	// created with this template.
 	RequiredFields []types.RequiredField
 
 	// A map of of key-value pairs that represent tags on a resource. Tags are used to

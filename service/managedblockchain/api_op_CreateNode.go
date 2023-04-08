@@ -40,17 +40,12 @@ type CreateNodeInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The unique identifier of the network for the node. Ethereum public networks have
-	// the following NetworkIds:
-	//
-	// * n-ethereum-mainnet
-	//
-	// * n-ethereum-goerli
-	//
-	// *
-	// n-ethereum-rinkeby
-	//
-	// * n-ethereum-ropsten
+	// The unique identifier of the network for the node. Ethereum public networks
+	// have the following NetworkId s:
+	//   - n-ethereum-mainnet
+	//   - n-ethereum-goerli
+	//   - n-ethereum-rinkeby
+	//   - n-ethereum-ropsten
 	//
 	// This member is required.
 	NetworkId *string
@@ -67,10 +62,8 @@ type CreateNodeInput struct {
 	// Tags to assign to the node. Each tag consists of a key and an optional value.
 	// You can specify multiple key-value pairs in a single request with an overall
 	// maximum of 50 tags allowed per resource. For more information about tags, see
-	// Tagging Resources
-	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
-	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
 	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 	Tags map[string]string
 

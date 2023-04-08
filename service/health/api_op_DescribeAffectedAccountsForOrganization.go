@@ -14,11 +14,9 @@ import (
 
 // Returns a list of accounts in the organization from Organizations that are
 // affected by the provided event. For more information about the different types
-// of Health events, see Event
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html). Before
-// you can call this operation, you must first enable Health to work with
-// Organizations. To do this, call the EnableHealthServiceAccessForOrganization
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
+// of Health events, see Event (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html)
+// . Before you can call this operation, you must first enable Health to work with
+// Organizations. To do this, call the EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
 // operation from your organization's management account. This API operation uses
 // pagination. Specify the nextToken parameter in the next request to return more
 // results.
@@ -68,19 +66,15 @@ type DescribeAffectedAccountsForOrganizationOutput struct {
 
 	// This parameter specifies if the Health event is a public Amazon Web Services
 	// service event or an account-specific event.
-	//
-	// * If the eventScopeCode value is
-	// PUBLIC, then the affectedAccounts value is always empty.
-	//
-	// * If the
-	// eventScopeCode value is ACCOUNT_SPECIFIC, then the affectedAccounts value lists
-	// the affected Amazon Web Services accounts in your organization. For example, if
-	// an event affects a service such as Amazon Elastic Compute Cloud and you have
-	// Amazon Web Services accounts that use that service, those account IDs appear in
-	// the response.
-	//
-	// * If the eventScopeCode value is NONE, then the eventArn that you
-	// specified in the request is invalid or doesn't exist.
+	//   - If the eventScopeCode value is PUBLIC , then the affectedAccounts value is
+	//   always empty.
+	//   - If the eventScopeCode value is ACCOUNT_SPECIFIC , then the affectedAccounts
+	//   value lists the affected Amazon Web Services accounts in your organization. For
+	//   example, if an event affects a service such as Amazon Elastic Compute Cloud and
+	//   you have Amazon Web Services accounts that use that service, those account IDs
+	//   appear in the response.
+	//   - If the eventScopeCode value is NONE , then the eventArn that you specified
+	//   in the request is invalid or doesn't exist.
 	EventScopeCode types.EventScopeCode
 
 	// If the results of a search are large, only a portion of the results are
@@ -159,16 +153,16 @@ func (c *Client) addOperationDescribeAffectedAccountsForOrganizationMiddlewares(
 	return nil
 }
 
-// DescribeAffectedAccountsForOrganizationAPIClient is a client that implements the
-// DescribeAffectedAccountsForOrganization operation.
+// DescribeAffectedAccountsForOrganizationAPIClient is a client that implements
+// the DescribeAffectedAccountsForOrganization operation.
 type DescribeAffectedAccountsForOrganizationAPIClient interface {
 	DescribeAffectedAccountsForOrganization(context.Context, *DescribeAffectedAccountsForOrganizationInput, ...func(*Options)) (*DescribeAffectedAccountsForOrganizationOutput, error)
 }
 
 var _ DescribeAffectedAccountsForOrganizationAPIClient = (*Client)(nil)
 
-// DescribeAffectedAccountsForOrganizationPaginatorOptions is the paginator options
-// for DescribeAffectedAccountsForOrganization
+// DescribeAffectedAccountsForOrganizationPaginatorOptions is the paginator
+// options for DescribeAffectedAccountsForOrganization
 type DescribeAffectedAccountsForOrganizationPaginatorOptions struct {
 	// The maximum number of items to return in one batch, between 10 and 100,
 	// inclusive.

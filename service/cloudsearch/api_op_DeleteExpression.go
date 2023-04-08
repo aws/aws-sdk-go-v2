@@ -12,8 +12,7 @@ import (
 )
 
 // Removes an Expression from the search domain. For more information, see
-// Configuring Expressions
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
+// Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DeleteExpression(ctx context.Context, params *DeleteExpressionInput, optFns ...func(*Options)) (*DeleteExpressionOutput, error) {
 	if params == nil {

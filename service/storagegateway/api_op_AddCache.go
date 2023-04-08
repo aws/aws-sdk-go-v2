@@ -12,10 +12,10 @@ import (
 
 // Configures one or more gateway local disks as cache for a gateway. This
 // operation is only supported in the cached volume, tape, and file gateway type
-// (see How Storage Gateway works (architecture)
-// (https://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html).
-// In the request, you specify the gateway Amazon Resource Name (ARN) to which you
-// want to add cache, and one or more disk IDs that you want to configure as cache.
+// (see How Storage Gateway works (architecture) (https://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html)
+// . In the request, you specify the gateway Amazon Resource Name (ARN) to which
+// you want to add cache, and one or more disk IDs that you want to configure as
+// cache.
 func (c *Client) AddCache(ctx context.Context, params *AddCacheInput, optFns ...func(*Options)) (*AddCacheOutput, error) {
 	if params == nil {
 		params = &AddCacheInput{}
@@ -40,8 +40,8 @@ type AddCacheInput struct {
 	// This member is required.
 	DiskIds []string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -51,8 +51,8 @@ type AddCacheInput struct {
 
 type AddCacheOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.
