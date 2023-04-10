@@ -1,3 +1,7 @@
+# v1.34.1 (2023-04-10)
+
+* No change notes available for this release.
+
 # v1.34.0 (2023-04-07)
 
 * **Feature**: This release has two changes: adding the OR condition to tag-based RLS rules in CreateDataSet and UpdateDataSet; adding RefreshSchedule and Incremental RefreshProperties operations for users to programmatically configure SPICE dataset ingestions.

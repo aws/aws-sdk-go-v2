@@ -1,3 +1,7 @@
+# v1.25.0 (2023-04-10)
+
+* **Feature**: This release adds support for enabling FIPS compliance on Amazon ECS Fargate tasks
+
 # v1.24.4 (2023-04-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

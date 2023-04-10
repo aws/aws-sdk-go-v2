@@ -1,3 +1,7 @@
+# v1.21.1 (2023-04-10)
+
+* No change notes available for this release.
+
 # v1.21.0 (2023-04-07)
 
 * **Feature**: This release adds a new parameter 'DBClusterParameterGroupName' to 'RestoreDBClusterFromSnapshot' API to associate the name of the DB cluster parameter group while performing restore.

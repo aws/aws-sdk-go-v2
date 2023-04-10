@@ -1,8 +1,0 @@
-{
-    "id": "af750069-274f-456e-8bc0-3573382b2a1e",
-    "type": "feature",
-    "description": "This release adds support for Face Liveness APIs in Amazon Rekognition. Updates UpdateStreamProcessor to return ResourceInUseException Exception. Minor updates to API documentation.",
-    "modules": [
-        "service/rekognition"
-    ]
-}

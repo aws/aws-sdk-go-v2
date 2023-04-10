@@ -1,3 +1,7 @@
+# v1.51.0 (2023-04-10)
+
+* **Feature**: This release adds the ability to configure an agent's routing profile to receive contacts from multiple channels at the same time via extending the UpdateRoutingProfileConcurrency, CreateRoutingProfile and DescribeRoutingProfile APIs.
+
 # v1.50.1 (2023-04-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.15.1 (2023-04-10)
+
+* No change notes available for this release.
+
 # v1.15.0 (2023-04-07)
 
 * **Announcement**: This release includes breaking changes for the timestamp trait on the data lifecycle management client.

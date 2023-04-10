@@ -1,3 +1,7 @@
+# v1.24.0 (2023-04-10)
+
+* **Feature**: This release adds support for Face Liveness APIs in Amazon Rekognition. Updates UpdateStreamProcessor to return ResourceInUseException Exception. Minor updates to API documentation.
+
 # v1.23.7 (2023-04-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

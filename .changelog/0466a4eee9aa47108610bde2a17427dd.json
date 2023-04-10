@@ -1,8 +1,0 @@
-{
-    "id": "0466a4ee-e9aa-4710-8610-bde2a17427dd",
-    "type": "feature",
-    "description": "AWS Elemental MediaConvert SDK now supports conversion of 608 paint-on captions to pop-on captions for SCC sources.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

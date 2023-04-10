@@ -1,3 +1,22 @@
+# Release (2023-04-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.51.0](service/connect/CHANGELOG.md#v1510-2023-04-10)
+  * **Feature**: This release adds the ability to configure an agent's routing profile to receive contacts from multiple channels at the same time via extending the UpdateRoutingProfileConcurrency, CreateRoutingProfile and DescribeRoutingProfile APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.25.0](service/ecs/CHANGELOG.md#v1250-2023-04-10)
+  * **Feature**: This release adds support for enabling FIPS compliance on Amazon ECS Fargate tasks
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.16.0](service/marketplacecatalog/CHANGELOG.md#v1160-2023-04-10)
+  * **Feature**: Added three new APIs to support resource sharing: GetResourcePolicy, PutResourcePolicy, and DeleteResourcePolicy. Added new OwnershipType field to ListEntities request to let users filter on entities that are shared with them. Increased max page size of ListEntities response from 20 to 50 results.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.35.0](service/mediaconvert/CHANGELOG.md#v1350-2023-04-10)
+  * **Feature**: AWS Elemental MediaConvert SDK now supports conversion of 608 paint-on captions to pop-on captions for SCC sources.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.3.0](service/omics/CHANGELOG.md#v130-2023-04-10)
+  * **Feature**: Remove unexpected API changes.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.24.0](service/rekognition/CHANGELOG.md#v1240-2023-04-10)
+  * **Feature**: This release adds support for Face Liveness APIs in Amazon Rekognition. Updates UpdateStreamProcessor to return ResourceInUseException Exception. Minor updates to API documentation.
+
 # Release (2023-04-07)
 
 ## General Highlights

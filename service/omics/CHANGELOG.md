@@ -1,3 +1,7 @@
+# v1.3.0 (2023-04-10)
+
+* **Feature**: Remove unexpected API changes.
+
 # v1.2.3 (2023-04-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

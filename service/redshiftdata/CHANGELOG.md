@@ -1,3 +1,7 @@
+# v1.19.4 (2023-04-10)
+
+* No change notes available for this release.
+
 # v1.19.3 (2023-04-07)
 
 * **Documentation**: Update documentation of API descriptions as needed in support of temporary credentials with IAM identity.
